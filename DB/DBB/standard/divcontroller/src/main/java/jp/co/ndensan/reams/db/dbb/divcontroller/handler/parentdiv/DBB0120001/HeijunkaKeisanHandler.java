@@ -76,7 +76,7 @@ public class HeijunkaKeisanHandler {
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度);
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);
 
-        KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = new KaigoFukaTokuchoHeijunka6();
+        KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = KaigoFukaTokuchoHeijunka6.createInstance();
         RString 遷移元区分;
         if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー)) {
             遷移元区分 = 遷移元区分_0;
@@ -150,7 +150,6 @@ public class HeijunkaKeisanHandler {
                     equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
                 div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelected(true);
                 // TODO 74150  読取専用（readOnly = true）の設定メソッドが提供されていない
-//             div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelectable(false);
             } else if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_通知書一括発行メニュー) && 仮算定額変更通知書_平準化.
                     equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
                 div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelected(true);
@@ -180,7 +179,7 @@ public class HeijunkaKeisanHandler {
         OutputChohyoIchiran outputChohyoIchiran;
         for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
             outputChohyoIchiran = new OutputChohyoIchiran();
-            outputChohyoIchiran.set帳票分類ID(REPORTID_DBB100012.getColumnValue());
+            outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
             outputChohyoIchiran.set帳票名(row.getChohyoName());
             outputChohyoIchiran.set改頁ID(row.getKaiPageKomoku());
             outputChohyoIchiran.set出力順ID(row.getShutsuryokujun());
@@ -201,7 +200,7 @@ public class HeijunkaKeisanHandler {
         data.set出力対象指示フラグ(出力対象);
         data.set一括発行フラグ(true);
 
-        KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = new KaigoFukaTokuchoHeijunka6();
+        KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = KaigoFukaTokuchoHeijunka6.createInstance();
         return kaigoFukaTokuchoHeijunka6.getBatchiPara(data);
     }
 

@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KaigoFukaTokuchoHeijunka6 {
 
-    private static final ReportId 帳票分類ＩＤ = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
+    private static final RString 帳票分類ＩＤ_DBB100012 = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString 項目名 = new RString("通知書タイプ");
     private static final RString 標準版B5横タイプ = new RString("001");
     private static final RString 標準版A4縦タイプ = new RString("002");
@@ -44,7 +44,16 @@ public class KaigoFukaTokuchoHeijunka6 {
     /**
      * コンストラクタです。
      */
-    public KaigoFukaTokuchoHeijunka6() {
+    KaigoFukaTokuchoHeijunka6() {
+    }
+
+    /**
+     * 特徴平準化（特徴6月分）のビジネスを生成します。
+     *
+     * @return 特徴平準化（特徴6月分）のビジネス
+     */
+    public static KaigoFukaTokuchoHeijunka6 createInstance() {
+        return InstanceProvider.create(KaigoFukaTokuchoHeijunka6.class);
     }
 
     /**
@@ -62,10 +71,9 @@ public class KaigoFukaTokuchoHeijunka6 {
         batchParameter.set帳票グループ(pageData.get帳票グループ());
 
         for (OutputChohyoIchiran shuturyokuChohuo : pageData.get出力帳票一覧List()) {
-            shuturyokuChohuo.set帳票分類ID(pageData.get帳票分類ＩＤ().getColumnValue());
-            if (帳票分類ＩＤ.equals(pageData.get帳票分類ＩＤ())) {
+            if (帳票分類ＩＤ_DBB100012.equals(shuturyokuChohuo.get帳票分類ID())) {
                 DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity
-                        = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, pageData.get帳票分類ＩＤ(), pageData.get調定年度(), 項目名);
+                        = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, new ReportId(shuturyokuChohuo.get帳票分類ID()), pageData.get調定年度(), 項目名);
                 RString komokuValue = RString.EMPTY;
                 if (dbT7067ChohyoSeigyoHanyoEntity != null) {
                     komokuValue = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
@@ -76,7 +84,7 @@ public class KaigoFukaTokuchoHeijunka6 {
                     shuturyokuChohuo.set帳票ID(通知書帳票ID_００２.getColumnValue());
                 }
             } else {
-                shuturyokuChohuo.set帳票ID(pageData.get帳票分類ＩＤ().getColumnValue());
+                shuturyokuChohuo.set帳票ID(shuturyokuChohuo.get帳票分類ID());
             }
         }
 
