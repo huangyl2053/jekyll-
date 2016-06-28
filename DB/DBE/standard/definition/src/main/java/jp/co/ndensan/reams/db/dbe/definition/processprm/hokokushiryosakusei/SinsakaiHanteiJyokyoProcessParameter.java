@@ -31,7 +31,7 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
     private RDate kijyunYMD;
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
-    private RString hokensyaName;
+    private RString shichosonName;
     private RString hihokenshaKubun;
     private boolean isEmptyGogitaiNo;
     private int gogitaiNo;
@@ -60,7 +60,8 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
      * @param kijyunYMD 基準年月日
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
-     * @param hokensyaName 保険者名称
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名称
      * @param hihokenshaKubun 被保険者区分
      * @param isEmptyGogitaiNo 空合議体番号
      * @param gogitaiNo 合議体番号
@@ -86,7 +87,8 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
             RDate kijyunYMD,
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
-            RString hokensyaName,
+            LasdecCode shichosonCode,
+            RString shichosonName,
             RString hihokenshaKubun,
             boolean isEmptyGogitaiNo,
             int gogitaiNo,
@@ -110,7 +112,8 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
         this.kijyunYMD = kijyunYMD;
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
-        this.hokensyaName = hokensyaName;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
         this.hihokenshaKubun = hihokenshaKubun;
         this.isEmptyGogitaiNo = isEmptyGogitaiNo;
         this.gogitaiNo = gogitaiNo;

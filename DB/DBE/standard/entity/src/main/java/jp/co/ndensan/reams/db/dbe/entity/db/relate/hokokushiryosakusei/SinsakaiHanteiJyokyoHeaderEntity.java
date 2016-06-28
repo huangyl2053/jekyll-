@@ -19,5 +19,5 @@ public class SinsakaiHanteiJyokyoHeaderEntity {
 
     private RString shinsakaiKaisaiYMDMin;
     private RString shinsakaiKaisaiYMDMax;
-    private Integer shinsakaiKaisaiNoCount;
+    private int shinsakaiKaisaiNoCount;
 }

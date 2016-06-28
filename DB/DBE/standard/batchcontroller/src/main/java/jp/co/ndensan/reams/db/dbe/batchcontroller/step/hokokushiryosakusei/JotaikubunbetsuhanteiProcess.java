@@ -81,6 +81,7 @@ public class JotaikubunbetsuhanteiProcess extends BatchProcessBase<SinsakaiHante
     private static final RString パーセント = new RString("%");
     private static final RString なし = new RString(0);
     private static final RString 全合議体 = new RString("全合議体");
+    private static final RString 全市町村 = new RString("全市町村");
     private static final int 割合 = 100;
     private Jotaikubumbetsuhantei jotaikubumbetsuhantei;
     private SinsakaiHanteiJyokyoProcessParameter paramter;
@@ -112,23 +113,25 @@ public class JotaikubunbetsuhanteiProcess extends BatchProcessBase<SinsakaiHante
 
     @Override
     protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
-        isデータあり = true;
-        setHeader(current);
-        List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
-        set一次判定非該当(審査判定状況);
-        set一次判定要支援1(審査判定状況);
-        set一次判定要支援2(審査判定状況);
-        set一次判定要介護1(審査判定状況);
-        set一次判定要介護2(審査判定状況);
-        set一次判定要介護3(審査判定状況);
-        set一次判定要介護4(審査判定状況);
-        set一次判定要介護5(審査判定状況);
-        set計();
-        set変更者();
-        set割合();
-        jotaikubumbetsuhantei.set変更者(jotaikubumbetsuhantei.get計_判定変更者数());
-        jotaikubumbetsuhantei.set軽度(jotaikubumbetsuhantei.get計_軽度変更者数());
-        jotaikubumbetsuhantei.set重度(jotaikubumbetsuhantei.get計_重度変更者数());
+        if (0 != current.getShinsakaiKaisaiNoCount()) {
+            isデータあり = true;
+            setHeader(current);
+            List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
+            set一次判定非該当(審査判定状況);
+            set一次判定要支援1(審査判定状況);
+            set一次判定要支援2(審査判定状況);
+            set一次判定要介護1(審査判定状況);
+            set一次判定要介護2(審査判定状況);
+            set一次判定要介護3(審査判定状況);
+            set一次判定要介護4(審査判定状況);
+            set一次判定要介護5(審査判定状況);
+            set計();
+            set変更者();
+            set割合();
+            jotaikubumbetsuhantei.set変更者(jotaikubumbetsuhantei.get計_判定変更者数());
+            jotaikubumbetsuhantei.set軽度(jotaikubumbetsuhantei.get計_軽度変更者数());
+            jotaikubumbetsuhantei.set重度(jotaikubumbetsuhantei.get計_重度変更者数());
+        }
     }
 
     @Override
@@ -616,12 +619,20 @@ public class JotaikubunbetsuhanteiProcess extends BatchProcessBase<SinsakaiHante
 
     private void setHeader(SinsakaiHanteiJyokyoHeaderEntity current) {
         jotaikubumbetsuhantei.setタイトル(帳票タイトル);
-        jotaikubumbetsuhantei.set合議体名称(paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName());
+        if (paramter.isEmptyGogitaiNo()) {
+            jotaikubumbetsuhantei.set合議体名称(全合議体);
+        } else {
+            jotaikubumbetsuhantei.set合議体名称(paramter.getGogitaiName());
+        }
         jotaikubumbetsuhantei.set開催開始年月日(current.getShinsakaiKaisaiYMDMin());
         jotaikubumbetsuhantei.set開催終了年月日(current.getShinsakaiKaisaiYMDMax());
         jotaikubumbetsuhantei.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
-        jotaikubumbetsuhantei.set市町村番号(paramter.isEmptyHokensyaNo() ? RString.EMPTY : new RString(paramter.getShichosonCode().toString()));
-        jotaikubumbetsuhantei.set市町村名(paramter.getHokensyaName());
+        jotaikubumbetsuhantei.set市町村番号(paramter.getShichosonCode().value());
+        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
+            jotaikubumbetsuhantei.set市町村名(全市町村);
+        } else {
+            jotaikubumbetsuhantei.set市町村名(paramter.getShichosonName());
+        }
         jotaikubumbetsuhantei.set発行日時(RDateTime.now());
         jotaikubumbetsuhantei.set二次判定非該当タイトル(非該当タイトル);
         jotaikubumbetsuhantei.set二次判定要支援1タイトル(要支援1タイトル);

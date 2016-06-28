@@ -84,6 +84,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     private static final RString 実施済 = new RString("2");
     private static final RString なし = new RString(0);
     private static final RString 全合議体 = new RString("全合議体");
+    private static final RString 全市町村 = new RString("全市町村");
     private ShinsahanteinoHenkojokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
     private ShinsahanteinoHenkojokyo henkojokyo;
@@ -114,41 +115,43 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
 
     @Override
     protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
-        isデータあり = true;
-        setヘッダ情報(current);
-        List<SinsakaiHanteiJyokyoEntity> 更新３ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間3ヶ月);
-        set更新申請３ヶ月(更新３ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新６ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間6ヶ月);
-        set更新申請６ヶ月(更新６ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新１２ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間12ヶ月);
-        set更新申請１２ヶ月(更新１２ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新２４ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間24ヶ月);
-        set更新申請２４ヶ月(更新２４ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新その他結果情報 = get判定結果情報(current, 更新申請, 有効期間その他);
-        set更新申請その他(更新その他結果情報);
-        set更新申請();
-        List<SinsakaiHanteiJyokyoEntity> 新規３ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間3ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規６ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間6ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規１２ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間12ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規２４ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間24ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規その他結果情報 = get判定結果情報(current, 新規申請, 有効期間その他);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更３ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間3ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更６ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間6ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更１２ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間12ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更２４ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間24ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更その他結果情報 = get判定結果情報(current, 区分変更申請, 有効期間その他);
-        set新規区分変更エリア(新規３ヶ月結果情報, 新規６ヶ月結果情報, 新規１２ヶ月結果情報, 新規２４ヶ月結果情報, 新規その他結果情報,
-                区分変更３ヶ月結果情報, 区分変更６ヶ月結果情報, 区分変更１２ヶ月結果情報, 区分変更２４ヶ月結果情報, 区分変更その他結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要支援);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要介護);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要支援);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要介護);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要支援);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要介護);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要支援);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要介護);
-        set認定有効期間延長件数(新規区分変更要支援要支援延長件数, 新規区分変更要支援要介護延長件数, 新規区分変更要介護要支援延長件数, 新規区分変更要介護要介護延長件数,
-                更新申請要支援要支援延長件数, 更新申請要支援要介護延長件数, 更新申請要介護要支援延長件数, 更新申請要介護要介護延長件数);
+        if (0 != current.getShinsakaiKaisaiNoCount()) {
+            isデータあり = true;
+            setヘッダ情報(current);
+            List<SinsakaiHanteiJyokyoEntity> 更新３ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間3ヶ月);
+            set更新申請３ヶ月(更新３ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新６ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間6ヶ月);
+            set更新申請６ヶ月(更新６ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新１２ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間12ヶ月);
+            set更新申請１２ヶ月(更新１２ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新２４ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間24ヶ月);
+            set更新申請２４ヶ月(更新２４ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新その他結果情報 = get判定結果情報(current, 更新申請, 有効期間その他);
+            set更新申請その他(更新その他結果情報);
+            set更新申請();
+            List<SinsakaiHanteiJyokyoEntity> 新規３ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間3ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規６ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間6ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規１２ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間12ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規２４ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間24ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規その他結果情報 = get判定結果情報(current, 新規申請, 有効期間その他);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更３ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間3ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更６ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間6ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更１２ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間12ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更２４ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間24ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更その他結果情報 = get判定結果情報(current, 区分変更申請, 有効期間その他);
+            set新規区分変更エリア(新規３ヶ月結果情報, 新規６ヶ月結果情報, 新規１２ヶ月結果情報, 新規２４ヶ月結果情報, 新規その他結果情報,
+                    区分変更３ヶ月結果情報, 区分変更６ヶ月結果情報, 区分変更１２ヶ月結果情報, 区分変更２４ヶ月結果情報, 区分変更その他結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要支援);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要介護);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要支援);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要介護);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要支援);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要介護);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要支援);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要介護);
+            set認定有効期間延長件数(新規区分変更要支援要支援延長件数, 新規区分変更要支援要介護延長件数, 新規区分変更要介護要支援延長件数, 新規区分変更要介護要介護延長件数,
+                    更新申請要支援要支援延長件数, 更新申請要支援要介護延長件数, 更新申請要介護要支援延長件数, 更新申請要介護要介護延長件数);
+        }
     }
 
     @Override
@@ -165,7 +168,6 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
         ShinsahanteinoHenkojokyoMyBatisParameter batisParameter = paramter.toShinsahanteinoHenkojokyoMyBatisParameter();
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
-//        batisParameter.setShichosonCode(current.getShichosonCode());
         batisParameter.setNinteiShinseiKubun(認定申請区分);
         batisParameter.setYukoKikan(認定有効期間);
         return mapper.getShinsahanteinoHenkojokyo(batisParameter);
@@ -183,15 +185,22 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     }
 
     private void setヘッダ情報(SinsakaiHanteiJyokyoHeaderEntity current) {
-        // TODO 最新仕様変更対応一時ソース
         henkojokyo.setタイトル(タイトル);
-        henkojokyo.set合議体番号(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
-        henkojokyo.set合議体名称(paramter.isEmptyGogitaiNo() ? 全合議体 : RString.EMPTY);
+        if (paramter.isEmptyGogitaiNo()) {
+            henkojokyo.set合議体名称(全合議体);
+        } else {
+            henkojokyo.set合議体番号(new RString(paramter.getGogitaiNo()));
+            henkojokyo.set合議体名称(paramter.getGogitaiName());
+        }
         henkojokyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
         henkojokyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
         henkojokyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
-        henkojokyo.set市町村コード(RString.EMPTY);
-        henkojokyo.set市町村名(RString.EMPTY);
+        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
+            henkojokyo.set市町村名(全市町村);
+        } else {
+            henkojokyo.set市町村名(paramter.getShichosonName());
+        }
+        henkojokyo.set市町村コード(paramter.getShichosonCode().value());
         henkojokyo.set発行日時(RDateTime.now());
     }
 

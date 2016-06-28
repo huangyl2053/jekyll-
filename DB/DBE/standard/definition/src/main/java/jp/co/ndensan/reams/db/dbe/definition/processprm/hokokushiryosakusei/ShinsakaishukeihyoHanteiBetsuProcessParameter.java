@@ -31,6 +31,7 @@ public class ShinsakaishukeihyoHanteiBetsuProcessParameter implements IBatchProc
     private RDate kijyunYMD;
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
+    private RString shichosonName;
     private RString hihokenshaKubun;
     private boolean isEmptyGogitaiNo;
     private int gogitaiNo;
@@ -58,6 +59,8 @@ public class ShinsakaishukeihyoHanteiBetsuProcessParameter implements IBatchProc
      * @param kijyunYMD 基準年月日
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名称
      * @param hihokenshaKubun 被保険者区分
      * @param isEmptyGogitaiNo 空合議体番号
      * @param gogitaiNo 合議体番号
@@ -82,6 +85,8 @@ public class ShinsakaishukeihyoHanteiBetsuProcessParameter implements IBatchProc
             RDate kijyunYMD,
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
+            LasdecCode shichosonCode,
+            RString shichosonName,
             RString hihokenshaKubun,
             boolean isEmptyGogitaiNo,
             int gogitaiNo,
@@ -107,6 +112,8 @@ public class ShinsakaishukeihyoHanteiBetsuProcessParameter implements IBatchProc
         this.hihokenshaKubun = hihokenshaKubun;
         this.isEmptyGogitaiNo = isEmptyGogitaiNo;
         this.gogitaiNo = gogitaiNo;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
         this.gogitaiNoList = gogitaiNoList;
         this.isTaishoTsukiKubun = isTaishoTsukiKubun;
         this.isTaishoGeppiKubun = isTaishoGeppiKubun;

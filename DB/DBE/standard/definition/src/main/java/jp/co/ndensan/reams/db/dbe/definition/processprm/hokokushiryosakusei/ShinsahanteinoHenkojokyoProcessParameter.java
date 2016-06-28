@@ -31,9 +31,11 @@ public class ShinsahanteinoHenkojokyoProcessParameter implements IBatchProcessPa
     private RDate kijyunYMD;
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
+    private RString shichosonName;
     private RString hihokenshaKubun;
     private boolean isEmptyGogitaiNo;
     private int gogitaiNo;
+    private RString gogitaiName;
     private List<Integer> gogitaiNoList;
     private boolean isTaishoTsukiKubun;
     private boolean isTaishoGeppiKubun;
@@ -58,9 +60,12 @@ public class ShinsahanteinoHenkojokyoProcessParameter implements IBatchProcessPa
      * @param kijyunYMD 基準年月日
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名称
      * @param hihokenshaKubun 被保険者区分
      * @param isEmptyGogitaiNo 空合議体番号
      * @param gogitaiNo 合議体番号
+     * @param gogitaiName 合議体名称
      * @param gogitaiNoList 合議体番号List
      * @param isTaishoTsukiKubun 対象月編集区分
      * @param isTaishoGeppiKubun 対象月日編集区分
@@ -82,9 +87,12 @@ public class ShinsahanteinoHenkojokyoProcessParameter implements IBatchProcessPa
             RDate kijyunYMD,
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
+            LasdecCode shichosonCode,
+            RString shichosonName,
             RString hihokenshaKubun,
             boolean isEmptyGogitaiNo,
             int gogitaiNo,
+            RString gogitaiName,
             List<Integer> gogitaiNoList,
             boolean isTaishoTsukiKubun,
             boolean isTaishoGeppiKubun,
@@ -104,9 +112,12 @@ public class ShinsahanteinoHenkojokyoProcessParameter implements IBatchProcessPa
         this.kijyunYMD = kijyunYMD;
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
         this.hihokenshaKubun = hihokenshaKubun;
         this.isEmptyGogitaiNo = isEmptyGogitaiNo;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiName = gogitaiName;
         this.gogitaiNoList = gogitaiNoList;
         this.isTaishoTsukiKubun = isTaishoTsukiKubun;
         this.isTaishoGeppiKubun = isTaishoGeppiKubun;

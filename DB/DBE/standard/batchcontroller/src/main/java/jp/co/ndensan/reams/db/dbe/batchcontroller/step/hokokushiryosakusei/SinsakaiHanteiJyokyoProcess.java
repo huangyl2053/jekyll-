@@ -83,6 +83,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
     private static final int 割合 = 100;
     private static final RString パーセント = new RString("%");
     private static final RString 全合議体 = new RString("全て合議体");
+    private static final RString 全市町村 = new RString("全市町村");
     List<ShinsaHanteiJokyoItem> itemList;
     private SinsakaiHanteiJyokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
@@ -111,38 +112,40 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
 
     @Override
     protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
-        List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
-        ShinsaHanteiJokyoItem 一次判定非該当 = get一次判定非該当(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要支援1 = get一次判定要支援1(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要支援2 = get一次判定要支援2(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要介護1 = get一次判定要介護1(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要介護2 = get一次判定要介護2(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要介護3 = get一次判定要介護3(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要介護4 = get一次判定要介護4(審査判定状況, current);
-        ShinsaHanteiJokyoItem 一次判定要介護5 = get一次判定要介護5(審査判定状況, current);
-        ShinsaHanteiJokyoItem 合計 = get計(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
-                一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
-        ShinsaHanteiJokyoItem 変更者Item = get変更者(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
-                一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
-        ShinsaHanteiJokyoItem 割合計 = get割合(current, 合計);
-        itemList.add(get判定件数(一次判定非該当, 合計));
-        itemList.add(一次判定要支援1);
-        itemList.add(一次判定要支援2);
-        itemList.add(一次判定要介護1);
-        itemList.add(一次判定要介護2);
-        itemList.add(一次判定要介護3);
-        itemList.add(一次判定要介護4);
-        itemList.add(一次判定要介護5);
-        itemList.add(合計);
-        itemList.add(変更者Item);
-        itemList.add(割合計);
+        if (0 != current.getShinsakaiKaisaiNoCount()) {
+            List<SinsakaiHanteiJyokyoEntity> 審査判定状況 = get審査判定状況(current);
+            ShinsaHanteiJokyoItem 一次判定非該当 = get一次判定非該当(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要支援1 = get一次判定要支援1(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要支援2 = get一次判定要支援2(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要介護1 = get一次判定要介護1(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要介護2 = get一次判定要介護2(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要介護3 = get一次判定要介護3(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要介護4 = get一次判定要介護4(審査判定状況, current);
+            ShinsaHanteiJokyoItem 一次判定要介護5 = get一次判定要介護5(審査判定状況, current);
+            ShinsaHanteiJokyoItem 合計 = get計(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
+                    一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
+            ShinsaHanteiJokyoItem 変更者Item = get変更者(current, 一次判定非該当, 一次判定要支援1, 一次判定要支援2, 一次判定要介護1,
+                    一次判定要介護2, 一次判定要介護3, 一次判定要介護4, 一次判定要介護5);
+            ShinsaHanteiJokyoItem 割合計 = get割合(current, 合計);
+            itemList.add(get判定件数(一次判定非該当, 合計));
+            itemList.add(一次判定要支援1);
+            itemList.add(一次判定要支援2);
+            itemList.add(一次判定要介護1);
+            itemList.add(一次判定要介護2);
+            itemList.add(一次判定要介護3);
+            itemList.add(一次判定要介護4);
+            itemList.add(一次判定要介護5);
+            itemList.add(合計);
+            itemList.add(変更者Item);
+            itemList.add(割合計);
+        }
     }
 
     @Override
     protected void afterExecute() {
         ShinsaHanteiJokyoReport report = ShinsaHanteiJokyoReport.createFrom(itemList);
-        outputJokenhyo();
         report.writeBy(reportSourceWriter);
+        outputJokenhyo();
     }
 
     private List<SinsakaiHanteiJyokyoEntity> get審査判定状況(SinsakaiHanteiJyokyoHeaderEntity current) {
@@ -263,7 +266,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -315,7 +318,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -367,7 +370,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -419,7 +422,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -471,7 +474,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -523,7 +526,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -576,7 +579,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -628,7 +631,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -729,7 +732,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -810,7 +813,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,
@@ -860,7 +863,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 new RString(current.getShinsakaiKaisaiNoCount()),
                 paramter.getHokensyaNo(),
                 RDate.getNowDate().toDateString(),
-                paramter.getHokensyaName(),
+                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
                 要支援1,
                 要支援2,

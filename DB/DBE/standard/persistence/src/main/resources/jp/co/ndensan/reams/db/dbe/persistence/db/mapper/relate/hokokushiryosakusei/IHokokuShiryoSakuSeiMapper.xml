@@ -488,7 +488,6 @@
                 </if>
             </otherwise>
         </choose>
-        Group BY G."shinsakaiKaisaiNo"
         ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT
@@ -676,6 +675,9 @@
                 <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
             </otherwise>
         </choose>
+        <if test="!isEmptyHokensyaNo">
+            AND dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
+        </if>
         <choose>
             <when test="isTaishoTsukiKubun">
                 <if test="!isTaishoGeppiKubun">
@@ -703,11 +705,10 @@
                 </if>
             </otherwise>
         </choose>
-        Group BY G."shinsakaiKaisaiNo"
         ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT
-        ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
+        MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
@@ -814,6 +815,9 @@
                 <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
             </otherwise>
         </choose>
+        <if test="!isEmptyHokensyaNo">
+            AND dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
+        </if>
         <choose>
             <when test="isTaishoTsukiKubun">
                 <if test="!isTaishoGeppiKubun">
@@ -841,11 +845,10 @@
                 </if>
             </otherwise>
         </choose>
-        Group BY G."shinsakaiKaisaiNo"
         ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT
-        ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
+        MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
@@ -946,12 +949,6 @@
         ON C."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" E
         ON C."shinseishoKanriNo" = E."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5591GogitaiJoho" F
-        ON A."gogitaiNo" = F."gogitaiNo"
-        AND F."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> TO_CHAR(NOW(), 'YYYYMMDD')
-        AND TO_CHAR(NOW(), 'YYYYMMDD') <![CDATA[<=]]> F."gogitaiYukoKikanShuryoYMD"
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" G
-        ON C."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
         WHERE
         <choose>
             <when test="!isEmptyGogitaiNo">
@@ -1216,7 +1213,19 @@
         ON G."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
-        WHERE 1 = 1
+        WHERE
+        <choose>
+            <when test="!isEmptyGogitaiNo">
+                G."gogitaiNo" = #{gogitaiNo}
+            </when>
+            <otherwise>
+                G."gogitaiNo" IN
+                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
+            </otherwise>
+        </choose>
+        <if test="!isEmptyHokensyaNo">
+            AND dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
+        </if>
         <choose>
             <when test="isTaishoTsukiKubun">
                 <if test="!isTaishoGeppiKubun">
@@ -1244,18 +1253,10 @@
                 </if>
             </otherwise>
         </choose>
-        Group BY G."shinsakaiKaisaiNo"
         ) AS shinsakaiKaisaiNoCount
         FROM
-        (SELECT F."shichosonCode"
-        ,F."shichosonMeisho"
-        <if test="isShinseiji">
-            ,C."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,C."ninteiShinseiHoreiKubunCode"
-        </if>
-        ,MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
+        (SELECT
+        MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
         ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
@@ -1325,10 +1326,10 @@
         </choose>
         <choose>
             <when test="!isEmptyGogitaiNo">
-                AND E."gogitaiNo" = #{gogitaiNo}
+                AND A."gogitaiNo" = #{gogitaiNo}
             </when>
             <otherwise>
-                AND E."gogitaiNo" IN
+                AND A."gogitaiNo" IN
                 <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
             </otherwise>
         </choose>

@@ -151,6 +151,7 @@ public class HokokuShiryoSakuSeiParameter {
                 div.getChkCsvShutsuryoku().getSelectedKeys().contains(SELECTKEY_KEY0),
                 div.getTxtShuturyokuSaki().getValue(),
                 div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 div.getCcdHokenshaList().getSelectedItem().get市町村名称(),
                 getHiHokensyaKubun(div).getコード(),
                 div.getDdlGogitaiBango().getSelectedKey().isEmpty() ? -1 : Integer.parseInt(div.getDdlGogitaiBango().getSelectedKey().toString()),
