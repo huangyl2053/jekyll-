@@ -378,7 +378,7 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onOkClose_btnSonotaKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
-        SoNoTaKikanGuideModel その他機関 = ViewStateHolder.get(ViewStateKeys.モード, SoNoTaKikanGuideModel.class);
+        SoNoTaKikanGuideModel その他機関 = ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, SoNoTaKikanGuideModel.class);
         if (!createHandOf(div).isその他機関存在(その他機関)) {
             div.getDgShozokuKikanIchiran().getClickedItem().getSonotaKikanCode().setValue(その他機関.getその他機関コード());
             div.getDgShozokuKikanIchiran().getClickedItem().getSonotaKikanName().setValue(その他機関.getその他機関名称());
