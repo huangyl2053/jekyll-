@@ -555,7 +555,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
-        RString 認定調査特記事項番号 = RString.EMPTY;
+        RString 認定調査特記事項番号;
 
         while (it.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
@@ -813,6 +813,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     public void tokkiJikoHasChanged(int record, RString 特記事項) {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        if (gaikyoTokkiNyurokuMap == null || gaikyoTokkiNyurokuMap.isEmpty()) {
+            return;
+        }
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key = new RString(String.valueOf(当前ページ数).concat(String.valueOf(record)));
 
