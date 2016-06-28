@@ -38,4 +38,5 @@ public class IinTuikaSiryoEntity {
     private int kijunJikan;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;
+    private RString shinsakaiKaishiTime;
 }

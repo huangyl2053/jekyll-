@@ -28,11 +28,17 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -61,6 +67,8 @@ public class SonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<SonotaJoho
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
+    private static final RString ファイルID_F1401A01 = new RString("F1401A01.png");
+    private static final RString ファイルID_F1401A01_BAK = new RString("F1401A01_BAK.png");
 
     @Override
     protected void initialize() {
@@ -77,8 +85,7 @@ public class SonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<SonotaJoho
     protected void usualProcess(SonotaJohoEntity entity) {
         item = new IinSonotashiryoSakuseiEntity();
         set項目(entity);
-        // TODO QA回答まち、ファイル名が無し。
-//            item.setその他資料(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
+        item.setその他資料(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_F1401A01));
         IinSonotashiryoSakuseiA4Report reportA4 = new IinSonotashiryoSakuseiA4Report(item);
         reportA4.writeBy(reportSourceWriterA4);
     }
@@ -109,22 +116,26 @@ public class SonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<SonotaJoho
         item.set今回認定審査日(get日(entity.getShinsakaiKaisaiYMD()));
     }
 
-//    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-//        RString imagePath = RString.EMPTY;
-//        if (イメージID != null) {
-//            imagePath = getFilePath(イメージID, イメージID01);
-//        }
-//        return imagePath;
-//    }
-//
-//    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-//        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-//        ReadOnlySharedFileEntryDescriptor descriptor
-//                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-//                        sharedFileId);
-//        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-//        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
-//    }
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, イメージID01);
+            if (RString.isNullOrEmpty(imagePath)) {
+                imagePath = getFilePath(イメージID, ファイルID_F1401A01_BAK);
+            }
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
     @Override
     protected void keyBreakProcess(SonotaJohoEntity current) {
         hasBrek(getBefore(), current);

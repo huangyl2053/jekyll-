@@ -85,6 +85,7 @@ public class ItiziHanteiEntity {
     private Code dbt5202_ninteiChosaKubunCode;
     private Code dbt5202_serviceKubunCode;
     private Code dbt5202_chosaJisshiBashoCode;
+    private RString dbt5202_chosaJisshiBashoMeisho;
     private int dbt5207_ninteichosaRirekiNo;
     private ShinseishoKanriNo dbt5207_shinseishoKanriNo;
     private int dbt5207_remban;

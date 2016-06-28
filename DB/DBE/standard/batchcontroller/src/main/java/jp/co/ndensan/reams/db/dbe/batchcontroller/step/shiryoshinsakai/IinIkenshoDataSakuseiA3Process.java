@@ -22,8 +22,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -45,6 +51,10 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiW
     private BatchReportWriter<ShujiiikenshoA3ReportSource> batchWriteA3;
     private ReportSourceWriter<ShujiiikenshoA3ReportSource> reportSourceWriterA3;
     private ShujiiikenshoItem item;
+    private static final RString ファイルID_E0001 = new RString("E0001.png");
+    private static final RString ファイルID_E0001_BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002 = new RString("E0002.png");
+    private static final RString ファイルID_E0002_BAK = new RString("E0002_BAK.png");
 
     @Override
     protected void initialize() {
@@ -61,9 +71,8 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiW
     protected void usualProcess(ShinsakaiWariateJohoEntity entity) {
         item = new ShujiiikenshoItem();
         set項目(entity);
-        // TODO QA回答まち、ファイル名が無し、
-//            item.set左の主治医意見書イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
-//            item.set右の主治医意見書イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), 出力スタイル_A4));
+        item.set左の主治医意見書イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001));
+        item.set右の主治医意見書イメージ(共有ファイル2を引き出す(entity.getImageSharedFileId(), ファイルID_E0002));
         ShujiiikenshoA3Report reportA3 = ShujiiikenshoA3Report.createFrom(item);
         reportA3.writeBy(reportSourceWriterA3);
     }
@@ -86,22 +95,37 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiW
         item.set今回認定審査年月日(主治医意見書情報.getShinsakaiKaisaiYMD());
     }
 
-//    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-//        RString imagePath = RString.EMPTY;
-//        if (イメージID != null) {
-//            imagePath = getFilePath(イメージID, イメージID01);
-//        }
-//        return imagePath;
-//    }
-//
-//    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-//        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-//        ReadOnlySharedFileEntryDescriptor descriptor
-//                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-//                        sharedFileId);
-//        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-//        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
-//    }
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, イメージID01);
+            if (RString.isNullOrEmpty(imagePath)) {
+                imagePath = getFilePath(イメージID, ファイルID_E0001_BAK);
+            }
+        }
+        return imagePath;
+    }
+
+    private RString 共有ファイル2を引き出す(RDateTime イメージID, RString イメージID01) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, イメージID01);
+            if (RString.isNullOrEmpty(imagePath)) {
+                imagePath = getFilePath(イメージID, ファイルID_E0002_BAK);
+            }
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
     @Override
     protected void keyBreakProcess(ShinsakaiWariateJohoEntity current) {
         hasBrek(getBefore(), current);
