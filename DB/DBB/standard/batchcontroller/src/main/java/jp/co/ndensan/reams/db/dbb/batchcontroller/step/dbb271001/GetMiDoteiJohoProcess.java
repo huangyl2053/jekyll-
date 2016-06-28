@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchotaishoshadotei.GetMiDoteiJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchotaishosha.TokuchoTaishoshaDoteiIkatsu;
+import jp.co.ndensan.reams.ue.uex.business.core.TokuchoDotei;
+import jp.co.ndensan.reams.ue.uex.entity.relate.MidoteiTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
@@ -29,7 +32,11 @@ public class GetMiDoteiJohoProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        manager.createTkMidoteiJoho(parameter.get開始月(), parameter.get処理日時());
+        TokuchoDotei doteiManager = new TokuchoDotei();
+        List<MidoteiTempEntity> doteiJohoList = doteiManager.get未同定情報();
+        if (null != doteiJohoList && !doteiJohoList.isEmpty()) {
+            manager.createTkMidoteiJoho(parameter.get開始月(), parameter.get処理日時());
+        }
     }
 
 }
