@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki.ShotokuJohoChushutsuRenkeiKoiki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -24,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -43,6 +46,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString DEC05F001 = new RString("DEC05F001");
     private static final RString DEE01F001 = new RString("DEE01F001");
     private static final RString DEC05F001またはDEE01F001 = new RString("DEC05F001またはDEE01F001");
+    private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -109,6 +113,23 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
         ShotokuJohoTyushutuRenkeiKoikiParameter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 「実行する」を押下場合、バリデーションメソッドです。
+     *
+     * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onClick_onSelect(
+            ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
+        DataGrid<dgShichosonIchiran_Row> grid = div.getDgShichosonIchiran();
+        if (grid.getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> createResponse(

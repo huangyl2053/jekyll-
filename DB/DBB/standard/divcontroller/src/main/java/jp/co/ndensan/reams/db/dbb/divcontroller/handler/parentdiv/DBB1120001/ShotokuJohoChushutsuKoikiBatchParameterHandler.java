@@ -127,6 +127,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         }
         ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
         List<dgShichosonIchiran_Row> rowList = new ArrayList<>();
+        boolean flag = true;
         for (ShichosonJohoResult result : shichosonJohoList) {
             dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
             if (result.getEntity().get市町村コード() != null) {
@@ -146,6 +147,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
                 row.getTxtShoriState().setValue(処理状態);
                 if (処理待ち.equals(処理状態)) {
                     row.setSelectable(true);
+                    flag = false;
                 } else {
                     row.setSelectable(false);
                 }
@@ -154,7 +156,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         }
         DataGrid<dgShichosonIchiran_Row> grid = koikiPanelDiv.getDgShichosonIchiran();
         grid.setDataSource(rowList);
-        if (grid.getSelectedItems().isEmpty()) {
+        if (flag) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -108,7 +107,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         } else {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);
         }
-        RString ログインユーザID = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        RString ログインユーザID = ControlDataHolder.getUserId();
         RString 遷移区分 = null;
         RString 年度 = null;
         if (ログインユーザID != null) {

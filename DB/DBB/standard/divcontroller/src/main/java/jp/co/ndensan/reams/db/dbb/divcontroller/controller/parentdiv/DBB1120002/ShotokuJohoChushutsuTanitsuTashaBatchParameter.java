@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120002
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 所得情報抽出・連携（単一他社）のクラスです。
@@ -33,6 +36,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterTanitsuTasha");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString BBKAIGO = new RString("BBKAIGO");
+    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
+    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -42,7 +47,18 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      */
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onLoad(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
+        RString 年度;
         RDate currentTime = RDate.getNowDate();
+        RString メニューID = ResponseHolder.getMenuID();
+        if (所得情報抽出_連携当初.equals(メニューID)) {
+            年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
+                    SubGyomuCode.DBB介護賦課);
+            div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(new RDate(年度.toString()));
+        } else if (所得情報抽出_連携異動.equals(メニューID)) {
+            年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
+                    SubGyomuCode.DBB介護賦課);
+            div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(new RDate(年度.toString()));
+        }
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
         handler.initCheck(currentTime);
         handler.initTorikoShori(currentTime);
@@ -100,7 +116,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     }
 
     /**
-     * s
      * 「実行する」を押下場合、バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
