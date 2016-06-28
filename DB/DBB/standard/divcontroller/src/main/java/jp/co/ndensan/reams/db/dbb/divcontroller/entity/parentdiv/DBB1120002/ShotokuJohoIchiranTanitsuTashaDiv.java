@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShotokuJohoIchiranTanitsuTasha のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-1690-030 sunhui
  */
 public class ShotokuJohoIchiranTanitsuTashaDiv extends Panel {
 
