@@ -84,7 +84,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         RString メニューID = ResponseHolder.getMenuID();
         RString config = DbBusinessConfig.get(ConfigNameDBB.所得引出_所得引出方法, currentTime, SubGyomuCode.DBB介護賦課);
         if (所得情報抽出_連携当初.equals(メニューID)) {
-            if (!REAMS以外.equals(config) || !更正なし.equals(config)) {
+            if (!REAMS以外.equals(config) && !更正なし.equals(config)) {
                 throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
                         .replace(所得引出方法が不正のため.toString()).evaluate());
             }
@@ -117,12 +117,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                 遷移区分 = 遷移区分_0;
                 年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
                         SubGyomuCode.DBB介護賦課);
-                div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(new RDate(年度.toString()));
             } else if (所得情報抽出_連携異動.equals(メニューID)) {
                 遷移区分 = 遷移区分_1;
                 年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                         SubGyomuCode.DBB介護賦課);
-                div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(new RDate(年度.toString()));
             }
             RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID, 遷移区分, new FlexibleYear(年度));
             処理区分Handler(メニューID, 処理区分);
@@ -158,7 +156,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
             }
         } else if (所得情報抽出_連携異動.equals(メニューID) && 処理区分_2.equals(処理区分)) {
             throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage()
-                    .replace(当初所得引出.toString()).replace(所得引出.toString()).evaluate());
+                    .replace(当初所得引出.toString(), 所得引出.toString()).evaluate());
         }
     }
 
