@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -111,7 +110,6 @@ public class TokuchoHeijunkaKakuteiBatch {
     private static final RString CSV出力有無 = new RString("");
     private static final ReportId EUC_ID = new ReportId("DBB012002");
 
-    @BatchWriter
     private EucCsvWriter<TokubetsuChoshuHeijunkaKakuteiCSVEntity> eucCsvWriter;
 
     private final DbT2003KibetsuDac 介護期別Dac = InstanceProvider.create(DbT2003KibetsuDac.class);
@@ -380,7 +378,7 @@ public class TokuchoHeijunkaKakuteiBatch {
         if (賦課情報.get平準化前特徴期別金額02() != null && 賦課情報.get特徴期別金額02() != null) {
             期別差額 = 賦課情報.get平準化前特徴期別金額02().subtract(賦課情報.get特徴期別金額02()).abs();
         }
-        if (期別差額.subtract(差額).doubleValue() < 0) {
+        if (期別差額.subtract(差額).doubleValue() <= 0) {
             entity = create賦課Entity(賦課情報);
             entity.set対象区分(コード_ZREO);
 
@@ -396,7 +394,7 @@ public class TokuchoHeijunkaKakuteiBatch {
         if (賦課情報.get平準化前特徴期別金額03() != null && 賦課情報.get特徴期別金額03() != null) {
             期別差額 = 賦課情報.get平準化前特徴期別金額03().subtract(賦課情報.get特徴期別金額03()).abs();
         }
-        if (期別差額.subtract(差額).doubleValue() < 0) {
+        if (期別差額.subtract(差額).doubleValue() <= 0) {
             entity = create賦課Entity(賦課情報);
             entity.set対象区分(コード_ZREO);
 
