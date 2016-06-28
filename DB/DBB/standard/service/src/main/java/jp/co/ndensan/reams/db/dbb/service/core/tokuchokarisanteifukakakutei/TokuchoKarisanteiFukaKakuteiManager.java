@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifukakakutei;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -36,6 +39,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     private static final RString 処理枝番 = new RString("0001");
     private final MapperProvider mapperProvider;
     private static final int 格式 = 4;
+    private final UrT0705ChoteiKyotsuDac urT0705;
 
     /**
      * コンストラクタです。
@@ -44,6 +48,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     public TokuchoKarisanteiFukaKakuteiManager() {
         this.介護賦課Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.urT0705 = InstanceProvider.create(UrT0705ChoteiKyotsuDac.class);
     }
 
     /**
@@ -52,9 +57,12 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @param DbT7022ShoriDateKanriDac 介護賦課Dac
      * @param MapperProvider mapperProvider
      */
-    TokuchoKarisanteiFukaKakuteiManager(DbT7022ShoriDateKanriDac 介護賦課Dac, MapperProvider mapperProvider) {
+    TokuchoKarisanteiFukaKakuteiManager(DbT7022ShoriDateKanriDac 介護賦課Dac,
+            MapperProvider mapperProvider,
+            UrT0705ChoteiKyotsuDac urT0705) {
         this.介護賦課Dac = 介護賦課Dac;
         this.mapperProvider = mapperProvider;
+        this.urT0705 = urT0705;
     }
 
     /**
@@ -140,12 +148,15 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * 調定共通（介護継承）.賦課処理状況を更新します。
      *
      * @param params TokuchoKarisanteiFukaKakuteiMapperParameter
-     * @return 基準日時
      */
     @Transaction
-    // TODO  内部QA：540 (賦課処理状況を更新)
-    public boolean updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
+    public int updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
         ITokuchokarisanteiMapper itokuchokarisanteiMapper = mapperProvider.create(ITokuchokarisanteiMapper.class);
-        return itokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
+        List<UrT0705ChoteiKyotsuEntity> 賦課処理状況リスト = itokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
+        for (UrT0705ChoteiKyotsuEntity entity : 賦課処理状況リスト) {
+            entity.setFukaShoriJokyo(true);
+            return urT0705.update(entity);
+        }
+        return 0;
     }
 }
