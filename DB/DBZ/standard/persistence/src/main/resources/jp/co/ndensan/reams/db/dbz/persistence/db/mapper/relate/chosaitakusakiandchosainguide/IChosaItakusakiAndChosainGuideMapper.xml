@@ -121,7 +121,7 @@
         DbT5913."chosainShimei" as "DbT4913_chosainShimei",
         DbT5913."chosainKanaShimei" as "DbT4913_chosainKanaShimei",
         DbT5913."jokyoFlag" as "DbT4913_jokyoFlag",
-        DbT5910."shichosonCode" as "DbT5910_shichosonCode"
+        DbT5910."shichosonCode" as "DbT4910_shichosonCode"
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
         LEFT JOIN
