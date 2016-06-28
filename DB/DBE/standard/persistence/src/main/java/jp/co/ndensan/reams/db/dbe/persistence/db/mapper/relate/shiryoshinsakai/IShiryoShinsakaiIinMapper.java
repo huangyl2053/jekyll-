@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinItizi
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.KaisaiYoteiJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.IinTuikaSiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.KaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.NinteiTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.NinteichosahyoTokkijikoEntity;
@@ -25,9 +27,12 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiYote
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.SonotaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkiIranJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ZenzenkayiJyohouEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 
 /**
@@ -36,6 +41,14 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIin
  * @reamsid_L DBE-0150-200 linghuhang
  */
 public interface IShiryoShinsakaiIinMapper {
+
+    /**
+     * 介護認定審査会開催予定情報を取得します。
+     *
+     * @param parameter KaisaiYoteiJohoMyBatisParameter
+     * @return 介護認定審査会開催予定情報
+     */
+    KaisaiYoteiJohoEntity get開催予定情報(KaisaiYoteiJohoMyBatisParameter parameter);
 
     /**
      * 委員情報を取得します。
@@ -116,6 +129,30 @@ public interface IShiryoShinsakaiIinMapper {
      * @return List<ItiziHanteiEntity> 委員用一次判定結果
      */
     List<ItiziHanteiEntity> getItiziHantei(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前回結果情報を取得する。
+     *
+     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<DbT5211NinteichosahyoChosaItemEntity>
+     */
+    List<DbT5211NinteichosahyoChosaItemEntity> get前回結果(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前々回情報を取得する。
+     *
+     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5102NinteiKekkaJohoEntity
+     */
+    ZenzenkayiJyohouEntity get前々回情報(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前回の要介護認定一次判定結果情報を取得する。
+     *
+     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5116IchijiHanteiKekkaJohoEntity
+     */
+    DbT5116IchijiHanteiKekkaJohoEntity get前回の要介護認定一次判定結果情報(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
 
     /**
      * 前回申請管理番号を取得する。
