@@ -11,13 +11,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -67,10 +67,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         if (施設入退所情報 != null && !施設入退所情報.isEmpty()) {
             List<ShisetsuNyutaisho> 更新施設入退所情報
                     = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().get介護保険施設入退所一覧By識別コード(識別コード).records();
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(更新施設入退所情報));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(更新施設入退所情報));
             一覧の設定(施設入退所情報);
         } else {
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(new ArrayList()));
         }
         switch (div.getMode_DisplayMode()) {
             case 照会:
@@ -98,10 +98,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         if (施設入退所情報 != null && !施設入退所情報.isEmpty()) {
             List<ShisetsuNyutaisho> 更新施設入退所情報
                     = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().get介護保険施設入退所一覧By識別コードと台帳種別(識別コード, 台帳種別).records();
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(更新施設入退所情報));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(更新施設入退所情報));
             一覧の設定(施設入退所情報);
         } else {
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(new ArrayList()));
         }
         switch (div.getMode_DisplayMode()) {
             case 照会:
@@ -214,7 +214,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      */
     public void onClick_btnShisetsuNyutaishoKakutei(dgShisetsuNyutaishoRireki_Row row) {
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
-                = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
         dgShisetsuNyutaishoRireki_Row newRow = new dgShisetsuNyutaishoRireki_Row();
@@ -258,7 +258,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 listRow.remove(row);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
+        ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
         Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.NyushoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(listRow);
@@ -271,7 +271,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     public void saveShisetsuNyutaisho() {
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
-                = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
         for (dgShisetsuNyutaishoRireki_Row row : listRow) {
             if (RString.isNullOrEmpty(row.getState())) {
@@ -367,21 +367,21 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     }
 
     private void 資格異動モード() {
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
         switch (div.getMode_Riyou()) {
             case 台帳種別表示機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
+                ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case 全施設対象機能:
                 break;
             case 被保険者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.被保険者, new RString("被保険者"));
+                ViewStateHolder.put(ViewStateKeys.被保険者, new RString("被保険者"));
                 break;
             case 他市町村住所地特例者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
                 break;
             case 適用除外者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.適用除外者, new RString("適用除外者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.適用除外者, new RString("適用除外者"));
                 break;
             default:
                 break;

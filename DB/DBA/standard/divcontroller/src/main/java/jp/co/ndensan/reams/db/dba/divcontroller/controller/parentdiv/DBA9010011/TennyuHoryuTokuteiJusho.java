@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dba.business.core.tennyuhoryutokuteijushoichiran.T
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA9010011.TennyuHoryuTokuteiJushoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA9010011.TennyuHoryuTokuteiHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tennyuhoryutokuteijushotoroku.TennyuHoryuTokuteiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJusho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoHoryuTokuteiJushoIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -37,7 +37,7 @@ public class TennyuHoryuTokuteiJusho {
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onLoad(TennyuHoryuTokuteiJushoDiv requestDiv) {
         TennyuHoryuTokuteiManager manager = TennyuHoryuTokuteiManager.createInstance();
         List<TennyuHoryuTokuteiBusiness> businessList = manager.getTennyuHoryuTokuteiJushoIchiran().records();
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         createHandlerOf(requestDiv).onLoad(businessList);
         List<RendoHoryuTokuteiJusho> 転入保留特定住所情報 = manager.get連動保留特定住所().records();
         Models<RendoHoryuTokuteiJushoIdentifier, RendoHoryuTokuteiJusho> rendoHoryuTokutei
@@ -54,7 +54,7 @@ public class TennyuHoryuTokuteiJusho {
      */
     public ResponseData<TennyuHoryuTokuteiJushoDiv> onClick_btnAdd(TennyuHoryuTokuteiJushoDiv requestDiv) {
         createHandlerOf(requestDiv).onClick_btnAdd();
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -114,7 +114,7 @@ public class TennyuHoryuTokuteiJusho {
         div.getCcdShichousonInputGuide().clear();
         div.getCcdJushoInputGuide().clear();
         div.getCcdBunchiInput().clear();
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys.台帳種別表示, 台帳種別表示無し);
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);
         div.getCcdSisetuInputGuide().clear();
         div.getTennyuHoryuTokuteiJushoNyuryoku().setDisabled(true);
         div.getBtnKakutei().setDisabled(true);
