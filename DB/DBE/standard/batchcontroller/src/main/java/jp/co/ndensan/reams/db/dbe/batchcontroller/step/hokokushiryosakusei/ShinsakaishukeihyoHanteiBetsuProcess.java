@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
+public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchProcessBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getShinsakaishukeihyoHanteiBetsuHeader");
@@ -107,16 +107,7 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<Sins
     }
 
     @Override
-    protected void keyBreakProcess(SinsakaiHanteiJyokyoHeaderEntity headerJoho) {
-        if (hasBrek(getBefore(), headerJoho)) {
-            ShinsakaishukeihyoReport report = new ShinsakaishukeihyoReport(shinsakaishukeihyo);
-            report.writeBy(reportSourceWriter);
-            shinsakaishukeihyo = new Shinsakaishukeihyo();
-        }
-    }
-
-    @Override
-    protected void usualProcess(SinsakaiHanteiJyokyoHeaderEntity current) {
+    protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
         setヘッダ情報(current);
         List<ShinsakaishukeihyoHanteiBetsuEntity> 審査会集計表 = get集計表(current);
         set前回非該当(審査会集計表);
@@ -137,15 +128,10 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<Sins
         outputJokenhyo();
     }
 
-    private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
-        return !(before.getShichosonCode().equals(current.getShichosonCode()));
-    }
-
     private List<ShinsakaishukeihyoHanteiBetsuEntity> get集計表(SinsakaiHanteiJyokyoHeaderEntity current) {
         ShinsakaishukeihyoHanteiBetsuMyBatisParameter batisParameter = paramter.toShinsakaishukeihyoHanteiBetsuMyBatisParameter();
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
-        batisParameter.setShichosonCode(current.getShichosonCode());
         return mapper.getShinsakaishukeihyoHanteiBetsu(batisParameter);
     }
 
@@ -154,8 +140,8 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchKeyBreakBase<Sins
         shinsakaishukeihyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
         shinsakaishukeihyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
         shinsakaishukeihyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
-        shinsakaishukeihyo.set市町村コード(current.getShichosonCode().value());
-        shinsakaishukeihyo.set市町村名(current.getShichosonMeisho());
+        shinsakaishukeihyo.set市町村コード(paramter.isEmptyHokensyaNo() ? RString.EMPTY : new RString(paramter.getShichosonCode().toString()));
+        shinsakaishukeihyo.set市町村名(RString.EMPTY);
         shinsakaishukeihyo.set発行日時(RDateTime.now());
         shinsakaishukeihyo.set二次判定非該当タイトル(非該当タイトル);
         shinsakaishukeihyo.set二次判定要支援1タイトル(要支援1タイトル);
