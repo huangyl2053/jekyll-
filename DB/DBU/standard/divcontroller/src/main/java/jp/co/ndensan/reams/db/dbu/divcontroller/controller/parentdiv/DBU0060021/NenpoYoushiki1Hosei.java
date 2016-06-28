@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
-import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0060021StateName;
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.NenpoYoushiki1HoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060021.NenpoYoushiki1HoseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -49,7 +48,7 @@ public class NenpoYoushiki1Hosei {
      * @return ResponseData<NenpoYoushiki1HoseiDiv>
      */
     public ResponseData<NenpoYoushiki1HoseiDiv> onLoad(NenpoYoushiki1HoseiDiv div) {
-        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報,
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(ViewStateKeys.補正検索画面情報,
                 ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         LasdecCode 市町村コード = new LasdecCode(param.get行市町村コード());
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
@@ -80,7 +79,7 @@ public class NenpoYoushiki1Hosei {
      * @return ResponseData<NenpoYoushiki1HoseiDiv>
      */
     public ResponseData<NenpoYoushiki1HoseiDiv> onClick_btnUpdate(NenpoYoushiki1HoseiDiv div) {
-        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         if (処理種別_修正.equals(param.get補正フラグ())) {
             List<JigyoHokokuTokeiData> 修正データの取得リスト = 修正データのチェック(div);
             if (!ResponseHolder.isReRequest()) {
