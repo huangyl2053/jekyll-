@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 /**
  * ToriKomiTaisho のクラスファイル
  *
- * @reamsid_L DBB-1690-030 sunhui
+ * @author 自動生成
  */
 public class ToriKomiTaishoDiv extends Panel {
 

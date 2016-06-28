@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120002
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -19,18 +20,17 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 所得情報抽出・連携（単一他社）のクラスです。
  *
  * @reamsid_L DBB-1690-030 sunhui
  */
-@SuppressWarnings("checkstyle:illegaltoken")
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
 
     private static final RString 処理待ち = new RString("処理待ち");
@@ -38,20 +38,21 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     private static final RString 共有ファイル名 = new RString("ShotokuJohoChushutsuTanitsuTasha");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterTanitsuTasha");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
+    private static final ReportId BBKAIGO = new ReportId("BBKAIGO");
+    private static final RString RESULT_TRUE = new RString("true");
 
     /**
      * 画面初期化のonLoadメソッドです。
      *
-     * @param files FileData[]
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onLoad(
-            ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
+            ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
         RDate currentTime = RDate.getNowDate();
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
         handler.initCheck(currentTime);
-        handler.initTorikoShori(files, currentTime);
+        handler.initTorikoShori(currentTime);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setDisabled(true);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setDisabled(true);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getToriKomiTaisho().getUplUpload().setDisabled(false);
@@ -73,6 +74,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param files FileData[]
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
+    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_uplUpload(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
         FilesystemName sharedFileName = new FilesystemName(共有ファイル名);
@@ -89,18 +91,19 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param files FileData[]
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
+    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_btnUpload(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
+        onclick_checkRegister(div, files);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 所得情報ファイル);
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(所得情報ファイル));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         entry.getFileDescriptor();
-        ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
-        ValidationMessageControlPairs pairs = handler.getCheckFile(files);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+
+        if (RESULT_TRUE.compareTo(div.getHiddenResult()) != 0) {
+            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage().evaluate());
         }
         return ResponseData.of(div).respond();
     }
@@ -112,14 +115,20 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param files FileData[]
      * @return ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv>
      */
-    public ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_checkRegister(
+    @SuppressWarnings("checkstyle:illegaltoken")
+    private ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> onclick_checkRegister(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div, FileData[] files) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(getValidationHandler(div).checkFilesStates(files));
+        if (files != null && files.length == 1) {
+            RString filename = files[0].getFileName();
+            if (!filename.startsWith(BBKAIGO.toString())) {
+                div.setHiddenResult(RESULT_TRUE);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
     /**
+     * s
      * 「実行する」を押下場合、バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
@@ -127,6 +136,9 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      */
     public ResponseData<ShotokuJohoTyushutuRenkeiTanituParameter> onclick_batchRegister(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
+        if (RESULT_TRUE.compareTo(div.getHiddenResult()) != 0) {
+            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage().evaluate());
+        }
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
         ShotokuJohoTyushutuRenkeiTanituParameter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
@@ -134,6 +146,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
 
     private ResponseData<ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv> createResponse(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
+
         return ResponseData.of(div).respond();
     }
 
@@ -142,8 +155,4 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
         return ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler.of(div);
     }
 
-    private ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler getValidationHandler(
-            ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
-        return new ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler(div);
-    }
 }
