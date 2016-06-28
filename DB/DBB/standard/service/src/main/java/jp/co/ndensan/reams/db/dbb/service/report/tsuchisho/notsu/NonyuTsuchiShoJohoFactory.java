@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.NokitsukiCollection;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
-import jp.co.ndensan.reams.ur.urc.business.core.zenkizenno.ZenkiZennoKanri;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.authority.AuthorityKind;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -52,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -354,7 +352,7 @@ public class NonyuTsuchiShoJohoFactory {
                     納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null,
                     ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, false, RString.EMPTY, false,
                     0, FukusuKibetsuShuyakuKamoku.複数科目を集約しない, FukusuKibetsuShuyakuNendo.年度毎に集約する, 請求明細リスト,
-                    納期情報.get納期().get現年過年区分(), ZenkiZennoKanri.newBuilder().build(), RDate.MAX);
+                    納期情報.get納期().get現年過年区分(), null, null);
             SeikyuManager seikyuManager = new SeikyuManager();
             if (納付書タイプ != null && 編集元情報 != null) {
                 List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);

@@ -106,7 +106,9 @@ public class ChosaJisshishaJohoHandler {
     }
 
     private void setShokai(ChosaJisshishaJohoModel key) {
-        div.getTxtChosaJisshiDate().setValue(new RDate(key.get調査実施日().toString()));
+        if (!RString.isNullOrEmpty(key.get調査実施日())) {
+            div.getTxtChosaJisshiDate().setValue(new RDate(key.get調査実施日().toString()));
+        }
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
         KeyValueDataSource chosaJisshi = new KeyValueDataSource(SHOKAI_KEY, key.get調査実施場所());
         chosaJisshiBasho.add(chosaJisshi);

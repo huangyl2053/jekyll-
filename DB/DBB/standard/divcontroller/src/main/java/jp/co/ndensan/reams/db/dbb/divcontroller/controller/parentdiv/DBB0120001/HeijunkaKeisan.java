@@ -50,7 +50,7 @@ public class HeijunkaKeisan {
     }
 
     /**
-     * 「発行」ボタンの前処理です。
+     * 「実行/予約する」ボタンの前処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -66,12 +66,48 @@ public class HeijunkaKeisan {
     }
 
     /**
-     * 「発行」ボタンの処理です。
+     * 特徴平準化（特徴6月分）メニューからの「実行する」ボタンの処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHakko(HeijunkaKeisanDiv div) {
+    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHeijunkaJikko(HeijunkaKeisanDiv div) {
+        // TODO 「バッチ設計_DBBBT35001_特徴平準化（特徴6月分）.xlsx」が未実装
+        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 特徴平準化（特徴6月分）メニューからの「予約する」ボタンの処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHeijunkaYoyaku(HeijunkaKeisanDiv div) {
+        // TODO 「バッチ設計_DBBBT35001_特徴平準化（特徴6月分）.xlsx」が未実装
+        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 特徴平準化（特徴6月分）通知書一括発行メニューからの「実行する」ボタンの処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnIkkatsuHakkoJikko(HeijunkaKeisanDiv div) {
+
+        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 特徴平準化（特徴6月分）通知書一括発行メニューからの「予約する」ボタンの処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnIkkatsuHakkoYoyaku(HeijunkaKeisanDiv div) {
 
         TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
         return ResponseData.of(parameter).respond();
