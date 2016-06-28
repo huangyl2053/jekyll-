@@ -7,15 +7,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120003;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
- * ShotokuJohoChushutsu のクラスファイル 
- * 
- * @author 自動生成
+ * 画面設計_DBBGM51005_所得情報アップロード
+ *
+ * @reamsid_L DBB-1730-010 yangchenbing
  */
 public class ShotokuJohoChushutsuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -79,7 +84,7 @@ public class ShotokuJohoChushutsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendo(TextBoxDate txtShoriNendo) {
+    public void setTxtShoriNendo(TextBoxDate txtShoriNendo) {
         this.getShotokuJohoChushutsuBatchParameter().setTxtShoriNendo(txtShoriNendo);
     }
 
@@ -89,7 +94,7 @@ public class ShotokuJohoChushutsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getShotokuJohoChushutsuBatchParameter().setLin1(lin1);
     }
 
@@ -99,7 +104,7 @@ public class ShotokuJohoChushutsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShichosonIchiran(ShichosonIchiranDiv ShichosonIchiran) {
+    public void setShichosonIchiran(ShichosonIchiranDiv ShichosonIchiran) {
         this.getShotokuJohoChushutsuBatchParameter().setShichosonIchiran(ShichosonIchiran);
     }
 
@@ -109,7 +114,7 @@ public class ShotokuJohoChushutsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDataGrid1(DataGrid<DataGrid1_Row> DataGrid1) {
+    public void setDataGrid1(DataGrid<DataGrid1_Row> DataGrid1) {
         this.getShotokuJohoChushutsuBatchParameter().getShichosonIchiran().setDataGrid1(DataGrid1);
     }
 
@@ -119,7 +124,7 @@ public class ShotokuJohoChushutsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setCcdUpload(UploadPanel ccdUpload) {
+    public void setCcdUpload(UploadPanel ccdUpload) {
         this.getUploadPanel().setCcdUpload(ccdUpload);
     }
 
@@ -129,7 +134,7 @@ public class ShotokuJohoChushutsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnUpload(Button btnUpload) {
+    public void setBtnUpload(Button btnUpload) {
         this.getUploadPanel().setBtnUpload(btnUpload);
     }
 
