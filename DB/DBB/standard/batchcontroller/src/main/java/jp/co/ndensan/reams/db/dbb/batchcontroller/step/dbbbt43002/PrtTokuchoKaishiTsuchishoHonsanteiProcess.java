@@ -8,14 +8,10 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5Report;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt43002.HonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5Source;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakko;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.IBatchReportWriterWithCheckList;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.checklist.CheckListInfoFactory;
 import jp.co.ndensan.reams.ur.urz.business.report.checklist.CheckListLineItemSet;
@@ -40,7 +36,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
     private Association 地方公共団体;
     private HonsanteifukaProcessParameter processParameter;
     @BatchWriter
-    private IBatchReportWriterWithCheckList<TokubetsuChoshuKaishiTsuchishoB5Source> reportWriter;
+//    private IBatchReportWriterWithCheckList<TokubetsuChoshuKaishiTsuchishoB5Source> reportWriter;
     private ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB5Source> dbb100032ReportSourceWriter;
 
     @Override
@@ -68,15 +64,14 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
         ICheckListInfo info = CheckListInfoFactory.createInstance(SubGyomuCode.DBB介護賦課,
                 地方公共団体.getLasdecCode_(), 地方公共団体.get市町村名());
 
-        reportWriter = BatchWriters
-                .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoB5Source.class)
-                .checkListInfo(info)
-                .checkListLineItemSet(pairs)
-                .reportId(processParameter.get出力帳票一覧().get帳票ID())
-                .build();
-        dbb100032ReportSourceWriter = new ReportSourceWriter<>(reportWriter);
-        new TokubetsuChoshuKaishiTsuchishoB5Report(new EditedHonSanteiTsuchiShoKyotsu(), null, null).writeBy(dbb100032ReportSourceWriter);
-
+//        reportWriter = BatchWriters
+//                .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoB5Source.class)
+//                .checkListInfo(info)
+//                .checkListLineItemSet(pairs)
+//                .reportId(processParameter.get出力帳票一覧().get帳票ID())
+//                .build();
+//        dbb100032ReportSourceWriter = new ReportSourceWriter<>(reportWriter);
+//        new TokubetsuChoshuKaishiTsuchishoB5Report(new EditedHonSanteiTsuchiShoKyotsu(), null, null).writeBy(dbb100032ReportSourceWriter);
     }
 
     private enum 特定項目1 implements ISpecificKey {
