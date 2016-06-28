@@ -868,19 +868,22 @@
     </insert>
     
     <update id="update調定共通_介護継承">
-        UPDATE rgdb."UrT0705ChoteiKyotsu"
+        UPDATE rgdb."UrT0705ChoteiKyotsu" AS A
         SET    "fukaShoriJokyo" = true
-        FROM   rgdb."UrT0705ChoteiKyotsu" AS A
+        FROM(
+        SELECT "UrT0705"."choteiId" 
+        FROM rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
         INNER JOIN
-        rgdb."DbT2003Kibetsu" AS B
-        ON  B."choteiId" = A."choteiId"
+        rgdb."DbT2003Kibetsu" AS "DbT2003"
+        ON  "DbT2003"."choteiId" = "UrT0705"."choteiId"
         INNER JOIN
         "TEMP_TABLE_FukaTemp" AS C
-        ON  C."choteiNendo" = B."choteiNendo"
-        AND C."fukaNendo" = B."fukaNendo"
-        AND C."tsuchishoNo" = B."tsuchishoNo"
-        AND C."rirekiNo" = B."rirekiNo"
-        AND C."taishoKubun" = '1'
+        ON  C."choteiNendo" = "DbT2003"."choteiNendo"
+        AND C."fukaNendo" = "DbT2003"."fukaNendo"
+        AND C."tsuchishoNo" = "DbT2003"."tsuchishoNo"
+        AND C."rirekiNo" = "DbT2003"."rirekiNo"
+        AND C."taishoKubun" = '1') AS B
+        WHERE A."choteiId" = B."choteiId"
     </update>
     
     
