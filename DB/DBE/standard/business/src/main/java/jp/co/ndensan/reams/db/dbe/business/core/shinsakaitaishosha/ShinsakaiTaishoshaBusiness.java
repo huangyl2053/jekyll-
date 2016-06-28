@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会個人別状況照会のBusinessです。
  *
- * @reamsid_L DBE-1380-004 jinjue
+ * @reamsid_L DBE-1380-010 jinjue
  */
 public class ShinsakaiTaishoshaBusiness {
 
