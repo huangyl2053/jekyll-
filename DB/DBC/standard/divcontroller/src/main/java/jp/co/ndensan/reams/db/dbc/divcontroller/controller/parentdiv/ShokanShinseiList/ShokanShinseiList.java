@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandler
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -77,7 +77,7 @@ public class ShokanShinseiList {
      */
     public ResponseData<ShokanShinseiListDiv> onClick_InsertButton(ShokanShinseiListDiv requestDiv) {
         ShokanShinseiValidationHandler validationHandler = createValidationHandler(requestDiv);
-        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class));
+        ValidationMessageControlPairs validationMessages = validationHandler.サービス年月の有効性チェック(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         if (validationMessages.iterator().hasNext() && !ResponseHolder.isWarningIgnoredRequest()) {
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
@@ -85,12 +85,12 @@ public class ShokanShinseiList {
             return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
 
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, RString.EMPTY);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, RString.EMPTY);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 追加モード);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, RString.EMPTY);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.サービス年月, requestDiv.getTxtServiceYM().getValue().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス年月From, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.サービス年月To, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.モード, 追加モード);
+        ViewStateHolder.put(ViewStateKeys.整理番号, RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.様式番号, RString.EMPTY);
 
         return ResponseData.of(requestDiv).respond();
     }
@@ -113,7 +113,7 @@ public class ShokanShinseiList {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            RString mode = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_モード, RString.class);
+            RString mode = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
             SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
             FlexibleYearMonth serviceYMFrom = null;
             if (requestDiv.getTxtServiceYMFrom().getValue() != null) {
@@ -125,12 +125,12 @@ public class ShokanShinseiList {
             }
             if (照会.equals(mode)) {
                 shokandhinseiichiran = ShokanShinseiIchiranManager.
-                        createInstance().getShokanShinseiListSyokai(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class),
+                        createInstance().getShokanShinseiListSyokai(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                                 serviceYMFrom,
                                 serviceYMTo);
             } else {
                 shokandhinseiichiran = ShokanShinseiIchiranManager.
-                        createInstance().getShokanShinseiListShinsei(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class),
+                        createInstance().getShokanShinseiListShinsei(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                                 serviceYMFrom,
                                 serviceYMTo);
             }
@@ -200,17 +200,17 @@ public class ShokanShinseiList {
         if (requestDiv.getTxtServiceYMTo().getValue() != null) {
             serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
         }
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 選択モード);
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_決定日, dgShinseiList.getKetteiYMD());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, dgShinseiList.getShinseiYMD());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_事業者番号, new JigyoshaNo(dgShinseiList.getJigyoshaNo()));
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_明細番号, dgShinseiList.getMeisaiNo());
+        ViewStateHolder.put(ViewStateKeys.サービス年月From, serviceYMFrom);
+        ViewStateHolder.put(ViewStateKeys.サービス年月To, serviceYMTo);
+        ViewStateHolder.put(ViewStateKeys.モード, 選択モード);
+        ViewStateHolder.put(ViewStateKeys.サービス年月, dgShinseiList.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+        ViewStateHolder.put(ViewStateKeys.整理番号, dgShinseiList.getSeiriNo());
+        ViewStateHolder.put(ViewStateKeys.様式番号, dgShinseiList.getYoshikiNo());
+        ViewStateHolder.put(ViewStateKeys.決定日, dgShinseiList.getKetteiYMD());
+        ViewStateHolder.put(ViewStateKeys.申請日, dgShinseiList.getShinseiYMD());
+        ViewStateHolder.put(ViewStateKeys.事業者番号, new JigyoshaNo(dgShinseiList.getJigyoshaNo()));
+        ViewStateHolder.put(ViewStateKeys.明細番号, dgShinseiList.getMeisaiNo());
     }
 
     private void get修正ボタンcheck(ShokanShinseiListDiv requestDiv) {
@@ -226,13 +226,13 @@ public class ShokanShinseiList {
             if (requestDiv.getTxtServiceYMTo().getValue() != null) {
                 serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
             }
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 修正モード);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+            ViewStateHolder.put(ViewStateKeys.サービス年月From, serviceYMFrom);
+            ViewStateHolder.put(ViewStateKeys.サービス年月To, serviceYMTo);
+            ViewStateHolder.put(ViewStateKeys.モード, 修正モード);
+            ViewStateHolder.put(ViewStateKeys.サービス年月, dgShinseiList.getServiceTeikyoYM());
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+            ViewStateHolder.put(ViewStateKeys.整理番号, dgShinseiList.getSeiriNo());
+            ViewStateHolder.put(ViewStateKeys.様式番号, dgShinseiList.getYoshikiNo());
         }
     }
 
@@ -249,13 +249,13 @@ public class ShokanShinseiList {
             if (requestDiv.getTxtServiceYMTo().getValue() != null) {
                 serviceYMTo = new FlexibleYearMonth(requestDiv.getTxtServiceYMTo().getValue().getYearMonth().toDateString());
             }
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月From, serviceYMFrom);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月To, serviceYMTo);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_モード, 削除モード);
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, dgShinseiList.getServiceTeikyoYM());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, dgShinseiList.getSeiriNo());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_様式番号, dgShinseiList.getYoshikiNo());
+            ViewStateHolder.put(ViewStateKeys.サービス年月From, serviceYMFrom);
+            ViewStateHolder.put(ViewStateKeys.サービス年月To, serviceYMTo);
+            ViewStateHolder.put(ViewStateKeys.モード, 削除モード);
+            ViewStateHolder.put(ViewStateKeys.サービス年月, dgShinseiList.getServiceTeikyoYM());
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(dgShinseiList.getHiHokenshaNo()));
+            ViewStateHolder.put(ViewStateKeys.整理番号, dgShinseiList.getSeiriNo());
+            ViewStateHolder.put(ViewStateKeys.様式番号, dgShinseiList.getYoshikiNo());
         }
     }
 
