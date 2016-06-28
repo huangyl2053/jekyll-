@@ -72,7 +72,7 @@ public class KogakuServicehiShokaiMainHandler {
             FlexibleYear 所得年度 = サービス提供年月.getYear();
             // TODO QA902 初期化時に、共有子Div内部で表示する世帯員のアクセスログ出力を行う
             // TODO QA902 YMDHMS.now()?EMPTY?
-            // TODO QA902 「並べて表示する」ボタンの問題
+            // TODO QA899 「並べて表示する」ボタンの問題
             div.getSetaiInfoPanel().getCcdSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, YMDHMS.now());
         }
     }
@@ -234,7 +234,7 @@ public class KogakuServicehiShokaiMainHandler {
         if (世帯員所得Selected == null || 世帯員所得Selected.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象者を選択.getMessage().evaluate());
         }
-        // TODO 給付実績より同月サービス情報を取得部分は未実装  SetaiinShotokuJohoFinder
+        // TODO QA902 給付実績より同月サービス情報を取得部分は未実装  SetaiinShotokuJohoFinder
 //        for (SetaiinShotoku 世帯員所得 : 世帯員所得Selected) {
 //            if (!世帯員所得.is同月サービス有無()) {
 //                世帯員所得.
