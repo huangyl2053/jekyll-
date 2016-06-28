@@ -65,8 +65,6 @@ public class KogakuServicehiShokaiMainHandler {
         ShikibetsuCode 識別コード = 引き継ぎ情報.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎ情報.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = 引き継ぎ情報.getサービス提供年月();
-//        RString 履歴番号 = 引き継ぎ情報.get履歴番号();
-//        HokenshaNo 証記載保険者番号 = 引き継ぎ情報.get証記載保険者番号();
         div.getSetaiInfo().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getSetaiInfo().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
@@ -110,24 +108,40 @@ public class KogakuServicehiShokaiMainHandler {
         KogakuShokaiHanteiKekkaFinder finder = KogakuShokaiHanteiKekkaFinder.createInstance();
         KogakuShokaiHanteiKekkaResult 高額判定結果_左側 = finder.get支給判定結果(parameter);
 
+        HanteiKekkaLDiv 並べて表示エリア_左側 = 並べて表示エリア.getSetaiinL().getHanteiKekkaL();
         if (高額判定結果_左側 == null) {
+            List<dgJudgementResultL_Row> dataSources = new ArrayList<>();
+            並べて表示エリア_左側.getDgJudgementResultL().setDataSource(dataSources);
+            並べて表示エリア_左側.getRadShinsaMethodL().setSelectedIndex(INDEX_ゼロ);
+            並べて表示エリア_左側.getRadShikyuKubunL().setSelectedIndex(INDEX_ゼロ);
+            並べて表示エリア_左側.getRadKogakuAutoShokanL().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
             return;
         }
         並べて表示エリア.getTxtSetaiShuyakuNo().setValue(高額判定結果_左側.get世帯集約番号());
-        HanteiKekkaLDiv 並べて表示エリア_左側 = 並べて表示エリア.getSetaiinL().getHanteiKekkaL();
         並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNoL().setValue(世帯員所得Selected.get(0).get被保険者番号().getColumnValue());
         並べて表示エリア_左側.getHanteiKekkaDetailL().getTxtHihoNameR().setValue(世帯員所得Selected.get(0).get氏名());
         set並べて表示エリア_左側(高額判定結果_左側, 並べて表示エリア_左側);
+        HanteiKekkaRDiv 並べて表示エリア_右側 = 並べて表示エリア.getSetaiinR().getHanteiKekkaR();
         if (INDEX_イチ < 世帯員所得Selected.size()) {
             parameter.set被保険者番号(世帯員所得Selected.get(1).get被保険者番号());
             KogakuShokaiHanteiKekkaResult 高額判定結果_右側 = finder.get支給判定結果(parameter);
             if (高額判定結果_右側 == null) {
+                List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
+                並べて表示エリア_右側.getDgJudgementResultR().setDataSource(dataSources);
+                並べて表示エリア_右側.getRadShinsaMethodR().setSelectedIndex(INDEX_ゼロ);
+                並べて表示エリア_右側.getRadShikyuKubunR().setSelectedIndex(INDEX_ゼロ);
+                並べて表示エリア_右側.getRadKogakuAutoShokanR().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
                 return;
             }
-            HanteiKekkaRDiv 並べて表示エリア_右側 = 並べて表示エリア.getSetaiinR().getHanteiKekkaR();
             並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNoR().setValue(世帯員所得Selected.get(1).get被保険者番号().getColumnValue());
             並べて表示エリア_右側.getHanteiKekkaDetailR().getTxtHihoNameL().setValue(世帯員所得Selected.get(1).get氏名());
             set並べて表示エリア_右側(高額判定結果_右側, 並べて表示エリア_右側);
+        } else {
+            List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
+            並べて表示エリア_右側.getDgJudgementResultR().setDataSource(dataSources);
+            並べて表示エリア_右側.getRadShinsaMethodR().setSelectedIndex(INDEX_ゼロ);
+            並べて表示エリア_右側.getRadShikyuKubunR().setSelectedIndex(INDEX_ゼロ);
+            並べて表示エリア_右側.getRadKogakuAutoShokanR().setSelectedKey(JidoShokanTaishoKubun.あり.getコード());
         }
     }
 
