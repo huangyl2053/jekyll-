@@ -22,6 +22,7 @@ public class PanelBaseHandler {
     private final PanelBaseDiv div;
     private static final int 日付の月_06 = 6;
     private static final int 保険者コード_なな = 7;
+    private static final int 件数 = 1;
 
     /**
      * コンストラクタです。
@@ -39,12 +40,11 @@ public class PanelBaseHandler {
      * @param 市町村情報リスト 市町村情報リスト
      */
     public void set市町村情報(List<KeyValueDataSource> 市町村情報リスト) {
-        div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
-        if (2 < 市町村情報リスト.size()) {
+        if (件数 < 市町村情報リスト.size()) {
             div.getTaishokensaku().getDdlShichoson().setIsBlankLine(true);
-        } else if (市町村情報リスト.size() == 2) {
-            div.getTaishokensaku().getDdlShichoson().setDisplayNone(true);
-            div.getTaishokensaku().getDdlShichoson().setSelectedIndex(1);
+            div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
+        } else {
+            div.getTaishokensaku().getDdlShichoson().setVisible(false);
         }
     }
 
