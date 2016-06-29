@@ -12,12 +12,15 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonMasterBuilde
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0830011.KoikiShichosonJohoKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0830011.dgKoikiShichosonSelect_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinShimeiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NofugakuDataRenkeiHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RozinhokenbangotaikeiCheck;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaiyusenChikuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShotokuHikidashiHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.TokuchoBunpaiShuyaku;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinShimeiHyojihoho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,19 +83,30 @@ public class KoikiShichosonJohoKanriHandler {
         div.getKoikiShichosonJohoMaintenance().getTxtShichonoShikibetsuID().setValue(row.getKoikiNaiNo());
         div.getKoikiShichosonJohoMaintenance().getTxtShokisaiHokenshaNo().setValue(master.get証記載保険者番号() == null
                 ? RString.EMPTY : master.get証記載保険者番号().value());
-        div.getKoikiShichosonJohoMaintenance().getTxtKokuhorenShichosonNo().setValue(master.get国保連広域内市町村番号());
+        div.getKoikiShichosonJohoMaintenance().getTxtKokuhorenShichosonNo().setValue(nullToEmpty(master.get国保連広域内市町村番号()));
         div.getKoikiShichosonJohoMaintenance().getTxtShichosonCode().setValue(master.get市町村コード() == null
                 ? RString.EMPTY : master.get市町村コード().value());
-        div.getKoikiShichosonJohoMaintenance().getTxtTodofukenName().setValue(master.get都道府県名称());
-        div.getKoikiShichosonJohoMaintenance().getTxtGunName().setValue(master.get郡名称());
-        div.getKoikiShichosonJohoMaintenance().getTxtJusho().setDomain(master.get住所());
-        div.getKoikiShichosonJohoMaintenance().getTxtShichosonName().setValue(master.get市町村名称());
-        div.getKoikiShichosonJohoMaintenance().getTxtYubinNo().setValue(master.get郵便番号());
+        div.getKoikiShichosonJohoMaintenance().getTxtTodofukenName().setValue(nullToEmpty(master.get都道府県名称()));
+        div.getKoikiShichosonJohoMaintenance().getTxtGunName().setValue(nullToEmpty(master.get郡名称()));
+        AtenaJusho 住所 = master.get住所();
+        if (住所 != null) {
+            div.getKoikiShichosonJohoMaintenance().getTxtJusho().setDomain(住所);
+        }
+        div.getKoikiShichosonJohoMaintenance().getTxtShichosonName().setValue(nullToEmpty(master.get市町村名称()));
+        YubinNo 郵便番号 = master.get郵便番号();
+        if (郵便番号 != null) {
+            div.getKoikiShichosonJohoMaintenance().getTxtYubinNo().setValue(郵便番号);
+        }
         div.getKoikiShichosonJohoMaintenance().getTxtKanyuYMD().setValue(master.get加入日());
-        div.getKoikiShichosonJohoMaintenance().getTxtTelNo().setDomain(master.get電話番号());
+        TelNo 電話番号 = master.get電話番号();
+        if (電話番号 != null) {
+            div.getKoikiShichosonJohoMaintenance().getTxtTelNo().setDomain(電話番号);
+        }
         div.getKoikiShichosonJohoMaintenance().getTxtRojinHokenShichosonNo().setValue(master.get老人保健市町村番号());
-        div.getKoikiShichosonJohoMaintenance().getTxtDattaiYMD().setValue(master.get離脱日());
-
+        FlexibleDate 離脱日 = master.get離脱日();
+        if (離脱日 != null) {
+            div.getKoikiShichosonJohoMaintenance().getTxtDattaiYMD().setValue(離脱日);
+        }
         div.getKoikiShichosonJohoMaintenance().getDdlGaikokujinShimei().setSelectedKey(master.get外国人氏名表示方法());
         div.getKoikiShichosonJohoMaintenance().getDdlShotokuHikidashiHoho().setSelectedKey(master.get所得引出方法());
         div.getKoikiShichosonJohoMaintenance().getDdlSaiyusenChikuCode().setSelectedKey(master.get最優先地区コード());
@@ -101,6 +115,14 @@ public class KoikiShichosonJohoKanriHandler {
         div.getKoikiShichosonJohoMaintenance().getDdlNofugakuDataRenkei().setSelectedKey(master.get納付額データ連携方法());
         div.setHiddenInputDiv(getInputDiv());
         //TODO 共有子Div「帳票住所デフォルト表記方法」が未実装
+    }
+
+    private RString nullToEmpty(RString value) {
+        RString 戻り値 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(value)) {
+            戻り値 = value;
+        }
+        return 戻り値;
     }
 
     /**
