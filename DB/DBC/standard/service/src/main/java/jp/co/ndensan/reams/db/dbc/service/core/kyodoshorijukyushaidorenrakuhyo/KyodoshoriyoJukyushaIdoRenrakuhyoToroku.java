@@ -46,7 +46,8 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyoToroku}のインスタンスを返します。
      *
-     * @return // * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyoToroku}のインスタンス
+     * @return // *
+     * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyoToroku}のインスタンス
      */
     public static KyodoshoriyoJukyushaIdoRenrakuhyoToroku createInstance() {
         return InstanceProvider.create(KyodoshoriyoJukyushaIdoRenrakuhyoToroku.class);
@@ -74,29 +75,29 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyoToroku {
         }
         if (divEntity.get基本情報Entity() != null) {
 
-            共同処理用受給者異動連絡票Entity.set基本送付情報_異動年月日(divEntity.get基本情報Entity().getIdoYMD());
-            共同処理用受給者異動連絡票Entity.set氏名(divEntity.get基本情報Entity().getHiHokenshaName());
-            共同処理用受給者異動連絡票Entity.set電話番号(divEntity.get基本情報Entity().getTelNo());
-            共同処理用受給者異動連絡票Entity.set郵便番号(divEntity.get基本情報Entity().getYubinNo());
-            共同処理用受給者異動連絡票Entity.set住所(divEntity.get基本情報Entity().getAddress());
-            共同処理用受給者異動連絡票Entity.set住所カナ(divEntity.get基本情報Entity().getDdressKana());
-            共同処理用受給者異動連絡票Entity.set帳票出力順序コード(divEntity.get基本情報Entity().getChohyoOutputJunjyoCode());
+            共同処理用受給者異動連絡票Entity.set基本送付情報_異動年月日(divEntity.get基本情報Entity().get異動年月日());
+            共同処理用受給者異動連絡票Entity.set氏名(divEntity.get基本情報Entity().get被保険者氏名());
+            共同処理用受給者異動連絡票Entity.set電話番号(divEntity.get基本情報Entity().get電話番号());
+            共同処理用受給者異動連絡票Entity.set郵便番号(divEntity.get基本情報Entity().get郵便番号());
+            共同処理用受給者異動連絡票Entity.set住所(divEntity.get基本情報Entity().get住所());
+            共同処理用受給者異動連絡票Entity.set住所カナ(divEntity.get基本情報Entity().get住所カナ());
+            共同処理用受給者異動連絡票Entity.set帳票出力順序コード(divEntity.get基本情報Entity().get帳票出力順序コード());
         }
         if (divEntity.get償還情報Entity() != null) {
-            共同処理用受給者異動連絡票Entity.set償還送付情報_異動年月日(divEntity.get償還情報Entity().getIdoYMD());
-            共同処理用受給者異動連絡票Entity.set開始年月日(divEntity.get償還情報Entity().getHokenKyufuIchijiSashitomeKaishiYMD());
-            共同処理用受給者異動連絡票Entity.set終了年月日(divEntity.get償還情報Entity().getHokenKyufuIchijiSashitomeShuryoYMD());
-            共同処理用受給者異動連絡票Entity.set区分(divEntity.get償還情報Entity().getHokenkyufuIchijiSashitomeKubunCode());
-            共同処理用受給者異動連絡票Entity.set一時差止金額(divEntity.get償還情報Entity().getHokenkyufuIchijiSashitomeKingaku());
+            共同処理用受給者異動連絡票Entity.set償還送付情報_異動年月日(divEntity.get償還情報Entity().get異動年月日());
+            共同処理用受給者異動連絡票Entity.set開始年月日(divEntity.get償還情報Entity().get保険給付支払一時差止開始年月日());
+            共同処理用受給者異動連絡票Entity.set終了年月日(divEntity.get償還情報Entity().get保険給付支払一時差止終了年月日());
+            共同処理用受給者異動連絡票Entity.set区分(divEntity.get償還情報Entity().get保険給付支払一時差止区分コード());
+            共同処理用受給者異動連絡票Entity.set一時差止金額(divEntity.get償還情報Entity().get保険給付支払一時差止金額());
         }
         if (divEntity.get高額情報Entity() != null) {
-            共同処理用受給者異動連絡票Entity.set高額送付情報_異動年月日(divEntity.get高額情報Entity().getIdoYMD());
-            共同処理用受給者異動連絡票Entity.set世帯主被保険者番号(divEntity.get高額情報Entity().getSetaiShuyakuNo());
-            共同処理用受給者異動連絡票Entity.set世帯所得区分(divEntity.get高額情報Entity().getSetaiShotokuKubunCode());
-            共同処理用受給者異動連絡票Entity.set所得区分(divEntity.get高額情報Entity().getShotokuKubunCode());
-            共同処理用受給者異動連絡票Entity.set利用者負担第２段階(divEntity.get高額情報Entity().getRiyoshaFutan2DankaiAriFlag());
-            共同処理用受給者異動連絡票Entity.set老齢福祉年金受給の有無(divEntity.get高額情報Entity().getRoureiFukushiNenkinJukyuAriFlag());
-            共同処理用受給者異動連絡票Entity.set支給申請書出力の有無(divEntity.get高額情報Entity().getShikyuShinseishoOutputAriFlag());
+            共同処理用受給者異動連絡票Entity.set高額送付情報_異動年月日(divEntity.get高額情報Entity().get異動年月日());
+            共同処理用受給者異動連絡票Entity.set世帯主被保険者番号(divEntity.get高額情報Entity().get世帯集約番号());
+            共同処理用受給者異動連絡票Entity.set世帯所得区分(divEntity.get高額情報Entity().get世帯所得区分コード());
+            共同処理用受給者異動連絡票Entity.set所得区分(divEntity.get高額情報Entity().get所得区分コード());
+            共同処理用受給者異動連絡票Entity.set利用者負担第２段階(divEntity.get高額情報Entity().is利用者負担第２段階有フラグ());
+            共同処理用受給者異動連絡票Entity.set老齢福祉年金受給の有無(divEntity.get高額情報Entity().is老齢福祉年金受給有フラグ());
+            共同処理用受給者異動連絡票Entity.set支給申請書出力の有無(divEntity.get高額情報Entity().is支給申請書出力有フラグ());
         }
 
         return 共同処理用受給者異動連絡票Entity;

@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 共同処理用受給者異動高額送付を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 xupeng
  */
 public class KyodoShoriyoJukyushaIdoKogakuSofu extends
         ModelBase<KyodoShoriyoJukyushaIdoKogakuSofuIdentifier, DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity, KyodoShoriyoJukyushaIdoKogakuSofu>
@@ -225,6 +227,33 @@ public class KyodoShoriyoJukyushaIdoKogakuSofu extends
      */
     public FlexibleYearMonth get送付年月() {
         return entity.getSofuYM();
+    }
+
+    /**
+     * 訂正区分コードを返します。
+     *
+     * @return 訂正区分コード
+     */
+    public RString get訂正区分コード() {
+        return entity.getTeiseiKubunCode();
+    }
+
+    /**
+     * 訂正年月日を返します。
+     *
+     * @return 訂正年月日
+     */
+    public FlexibleDate get訂正年月日() {
+        return entity.getTeiseiYMD();
+    }
+
+    /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean is論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
     }
 
     /**
