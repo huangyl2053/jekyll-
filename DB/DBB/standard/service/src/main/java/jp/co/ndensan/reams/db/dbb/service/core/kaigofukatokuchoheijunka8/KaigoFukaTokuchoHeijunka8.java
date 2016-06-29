@@ -84,7 +84,7 @@ public class KaigoFukaTokuchoHeijunka8 {
      */
     public boolean getHeijunka8MJyokyo(FlexibleYear 調定年度) {
         List<DbT7022ShoriDateKanriEntity> 特徴平準化8月分 = dbT7022ShoriDateKanriDac.select特徴平準化8月分処理(調定年度);
-        if (特徴平準化8月分 == null) {
+        if (特徴平準化8月分 == null || 特徴平準化8月分.isEmpty()) {
             return false;
         }
         for (DbT7022ShoriDateKanriEntity entity : 特徴平準化8月分) {
