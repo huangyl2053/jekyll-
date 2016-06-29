@@ -102,7 +102,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     public void initTorikoShori(RDate currentTime) {
         RString path = new RString(SharedFile.getBasePath() + File.separator + 所得情報ファイル);
         File file = new File(path.toString());
-        if (file.getName().contains(所得情報ファイル)) {
+        if (file.exists() && file.getName().contains(所得情報ファイル)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
         } else {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);

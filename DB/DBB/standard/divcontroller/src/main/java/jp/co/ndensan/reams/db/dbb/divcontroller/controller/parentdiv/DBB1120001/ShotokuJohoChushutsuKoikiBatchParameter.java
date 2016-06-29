@@ -42,7 +42,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51006");
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51008");
-    private static final RString 共有ファイル = new RString("BBKAIGOxxxxxxxx.CSV");
     private static final RString DEC05F001 = new RString("DEC05F001");
     private static final RString DEE01F001 = new RString("DEE01F001");
     private static final RString DEC05F001またはDEE01F001 = new RString("DEC05F001またはDEE01F001");
@@ -93,9 +92,12 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      */
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onclick_checkRegister(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        RString path = new RString(SharedFile.getBasePath() + File.separator + 共有ファイル);
+        RString path = new RString(SharedFile.getBasePath() + File.separator);
         File file = new File(path.toString());
-        if (!file.getName().startsWith(DEC05F001.toString()) || !file.getName().startsWith(DEE01F001.toString())) {
+        if (!file.exists()) {
+            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
+                    .replace(DEC05F001またはDEE01F001.toString()).evaluate());
+        } else if (!file.getName().startsWith(DEC05F001.toString()) || !file.getName().startsWith(DEE01F001.toString())) {
             throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
                     .replace(DEC05F001またはDEE01F001.toString()).evaluate());
         }
