@@ -225,12 +225,12 @@ public class KyokaisoGaitoshaPanelValidationHandler {
                     || 境界層該当一覧情報.get(i).getShuryoDate().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
             } else {
-                if (!RString.isNullOrEmpty(適用終了日) && !new RDate(境界層該当一覧情報.get(i).getShuryoDate().toString())
+                if (!RString.isNullOrEmpty(適用終了日) && !new RDate(適用終了日.toString())
                         .isBeforeOrEquals(new RDate(境界層該当一覧情報.get(i).getKaishiDate().toString()))) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複チェック));
                 }
             }
-            適用終了日 = 境界層該当一覧情報.get(i).getKaishiDate();
+            適用終了日 = 境界層該当一覧情報.get(i).getShuryoDate();
             if (境界層該当一覧情報.get(i).getShuryoDate() == null || 境界層該当一覧情報.get(i).getShuryoDate().isEmpty()) {
                 一覧終了日未設定件数 = 一覧終了日未設定件数 + 1;
                 期間が重複チェック(validPairs, 一覧終了日未設定件数);
