@@ -102,9 +102,9 @@ public class ShikakuFuseigoBusiness implements Serializable {
      */
     public AtenaKanaMeisho get氏名カナ() {
         if (個人情報.is外国人()) {
-            return 個人情報.get外国人氏名().getKana();
+            return nullToEmptyForKana(個人情報.get外国人氏名().getKana());
         }
-        return 個人情報.get日本人氏名().getKana();
+        return nullToEmptyForKana(個人情報.get日本人氏名().getKana());
     }
 
     /**
@@ -114,9 +114,9 @@ public class ShikakuFuseigoBusiness implements Serializable {
      */
     public AtenaMeisho get氏名() {
         if (個人情報.is外国人()) {
-            return 個人情報.get外国人氏名().getName();
+            return nullToEmpty(個人情報.get外国人氏名().getName());
         }
-        return 個人情報.get日本人氏名().getName();
+        return nullToEmpty(個人情報.get日本人氏名().getName());
     }
 
     /**
@@ -180,5 +180,19 @@ public class ShikakuFuseigoBusiness implements Serializable {
      */
     public SeigoseiCheck get整合性チェック情報() {
         return 不整合チェック;
+    }
+
+    private AtenaKanaMeisho nullToEmptyForKana(AtenaKanaMeisho 氏名カナ) {
+        if (氏名カナ == null) {
+            return AtenaKanaMeisho.EMPTY;
+        }
+        return 氏名カナ;
+    }
+
+    private AtenaMeisho nullToEmpty(AtenaMeisho 氏名) {
+        if (氏名 == null) {
+            return AtenaMeisho.EMPTY;
+        }
+        return 氏名;
     }
 }

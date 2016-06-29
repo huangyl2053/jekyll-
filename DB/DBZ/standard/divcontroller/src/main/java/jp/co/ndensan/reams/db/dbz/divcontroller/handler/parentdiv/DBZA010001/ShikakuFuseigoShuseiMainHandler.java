@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.dgSh
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -108,6 +109,9 @@ public class ShikakuFuseigoShuseiMainHandler {
             if (daichoType.equals(business.get台帳種別()) && gaiHyoji == business.is対象外フラグ()) {
                 dgShikakuFuseigoIchiran_Row row = new dgShikakuFuseigoIchiran_Row();
                 row.setIgnoree(business.is対象外フラグ() ? new RString("○") : RString.EMPTY);
+                if (business.get被保険者番号() == null || business.get識別コード() == null) {
+                    continue;
+                }
                 row.setHihoNo(business.get被保険者番号().value());
                 row.setShikibetsuCode(business.get識別コード().value());
                 row.setHihoNoAndShikibetsuCode(toAppendBR(business.get被保険者番号().value(), business.get識別コード().value()));
@@ -115,15 +119,7 @@ public class ShikakuFuseigoShuseiMainHandler {
                 row.setShimei(business.get氏名().value());
                 row.setKanaAndShimsei(toAppendBR(business.get氏名カナ().value(), business.get氏名().value()));
                 row.setJuminJotai(business.get住民状態());
-                if (business.is日本人()) {
-                    row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.平YYMMDD);
-                    row.setJuminJotaiAndBirthDay(toAppendBR(business.get住民状態(),
-                            business.get生年月日().wareki().eraType(EraType.KANJI_RYAKU).toDateString()));
-                } else {
-                    row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.YYYYperiodMMperiodDD);
-                    row.setJuminJotaiAndBirthDay(toAppendBR(business.get住民状態(),
-                            business.get生年月日().seireki().toDateString()));
-                }
+                set住民状態And生年月日(business.get住民状態(), business.is日本人(), business.get生年月日(), row);
                 row.getTxtBirthDay().setValue(business.get生年月日());
                 row.setSeibetsu(business.get性別());
                 row.setNenrei(business.get年齢());
@@ -134,6 +130,29 @@ public class ShikakuFuseigoShuseiMainHandler {
         }
         div.getDgShikakuFuseigoIchiran().setDataSource(rowList);
         div.getTxtShoriDateTime().setValue(rdateToRstr(処理日時));
+    }
+
+    private void set住民状態And生年月日(RString 住民状態, boolean is日本人, FlexibleDate 生年月日, dgShikakuFuseigoIchiran_Row row) {
+        if (is日本人) {
+            row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.平YYMMDD);
+            if (生年月日 != null && !生年月日.isEmpty()) {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        生年月日.wareki().eraType(EraType.KANJI_RYAKU).toDateString()));
+            } else {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        RString.EMPTY));
+            }
+
+        } else {
+            row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.YYYYperiodMMperiodDD);
+            if (生年月日 != null && !生年月日.isEmpty()) {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        生年月日.seireki().toDateString()));
+            } else {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        RString.EMPTY));
+            }
+        }
     }
 
     /**
