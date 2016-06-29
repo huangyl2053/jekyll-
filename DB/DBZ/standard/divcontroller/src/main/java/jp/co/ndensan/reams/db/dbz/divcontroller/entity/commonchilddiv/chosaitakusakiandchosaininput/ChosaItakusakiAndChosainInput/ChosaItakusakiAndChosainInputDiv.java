@@ -73,6 +73,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosaItakusakiCode
      */
     @JsonProperty("txtChosaItakusakiCode")
+    @Override
     public TextBoxCode getTxtChosaItakusakiCode() {
         return txtChosaItakusakiCode;
     }
@@ -109,6 +110,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosaItakusakiName
      */
     @JsonProperty("txtChosaItakusakiName")
+    @Override
     public TextBox getTxtChosaItakusakiName() {
         return txtChosaItakusakiName;
     }
@@ -163,6 +165,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosainCode
      */
     @JsonProperty("txtChosainCode")
+    @Override
     public TextBoxCode getTxtChosainCode() {
         return txtChosainCode;
     }
@@ -199,6 +202,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosainName
      */
     @JsonProperty("txtChosainName")
+    @Override
     public TextBox getTxtChosainName() {
         return txtChosainName;
     }
@@ -377,6 +381,11 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     @Override
     public void initialize(RString モード, RString 調査委託先コード, RString 調査委託先名, RString 調査員コード, RString 調査員名) {
         getHandler().initialize(モード, 調査委託先コード, 調査委託先名, 調査員コード, 調査員名);
+    }
+
+    @Override
+    public void clear() {
+        getHandler().onClick_BtnClear();
     }
 
     @JsonIgnore
