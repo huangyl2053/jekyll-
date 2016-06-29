@@ -239,14 +239,12 @@
         AND
         <if test = "isKannaiKangaiKubun1Flg">
             dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun1}
+            AND
         </if>
         <if test = "isKannaiKangaiKubun2Flg">
             dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun2}
+            AND
         </if>
-        <if test = "isKannaiKangaiKubunFlg">
-            dbT1005Kaigo."kannaiKangaiKubun" in (#{kannaiKangaiKubun1},#{kannaiKangaiKubun2})
-        </if>
-        AND
         dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
         <if test="isJigyoshaNoFlag" >
             AND dbT1005Kaigo."jigyoshaNo"  = #{jigyoshaNo}

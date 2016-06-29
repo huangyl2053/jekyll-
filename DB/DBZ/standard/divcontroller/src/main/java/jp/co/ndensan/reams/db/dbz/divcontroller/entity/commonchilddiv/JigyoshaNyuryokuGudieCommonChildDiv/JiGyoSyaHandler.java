@@ -161,10 +161,6 @@ public class JiGyoSyaHandler {
             } else if (管内管外区分_管外.equals(div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey())) {
 
                 管外 = 管内管外区分_管外;
-            } else if (管内管外区分_全て.equals(div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().getSelectedKey())) {
-
-                管内 = 管内管外区分_管内;
-                管外 = 管内管外区分_管外;
             }
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getOtherTokureiInputGuide(
                     JigyoshaInputGuideParameter.createParam_OtherTokureiInputGuide(new KaigoJigyoshaNo(
