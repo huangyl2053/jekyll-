@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -122,12 +122,12 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_Btnsenntaku(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日,
+        ViewStateHolder.put(ViewStateKeys.設定日,
                 new FlexibleDate(ninteiDiv.getDgNinteiChosaSchedule().getActiveRow().getDate().getValue().toDateString()));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_1);
+        ViewStateHolder.put(ViewStateKeys.地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.画面ステート, 画面ステート_1);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, モード);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_遷移元画面番号, 遷移元画面番号);
+        ViewStateHolder.put(ViewStateKeys.遷移元画面番号, 遷移元画面番号);
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.更新モードへ移行).respond();
     }
 
@@ -142,7 +142,7 @@ public class NinteiChosaSchedulePanel {
         if (RString.isNullOrEmpty(地区コード)) {
             地区コード = RString.EMPTY;
         }
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
+        ViewStateHolder.put(ViewStateKeys.地区コード, 地区コード);
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.スケジュール印刷).respond();
     }
 
@@ -153,9 +153,9 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnShowSchedule(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_2);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new FlexibleDate(RDate.getNowDate().toString()));
+        ViewStateHolder.put(ViewStateKeys.地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.画面ステート, 画面ステート_2);
+        ViewStateHolder.put(ViewStateKeys.設定日, new FlexibleDate(RDate.getNowDate().toString()));
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.照会モードへ移行).respond();
     }
 
@@ -166,9 +166,9 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnMiteishaKanri(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_3);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new FlexibleDate(RDate.getNowDate().toString()));
+        ViewStateHolder.put(ViewStateKeys.地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.画面ステート, 画面ステート_3);
+        ViewStateHolder.put(ViewStateKeys.設定日, new FlexibleDate(RDate.getNowDate().toString()));
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.未定モードへ移行).respond();
     }
 

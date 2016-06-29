@@ -6,13 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.shikakuhenkorireki;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiValidationHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -58,7 +58,7 @@ public class ShikakuHenkoRireki {
             henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
             henkoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
         }
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_資格変更入力, handler.get資格変更入力Panel());
+        ViewStateHolder.put(ViewStateKeys.資格変更入力, handler.get資格変更入力Panel());
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
@@ -103,7 +103,7 @@ public class ShikakuHenkoRireki {
             henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
             henkoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
         }
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_資格変更入力, handler.get資格変更入力Panel());
+        ViewStateHolder.put(ViewStateKeys.資格変更入力, handler.get資格変更入力Panel());
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
@@ -131,7 +131,7 @@ public class ShikakuHenkoRireki {
                     && !input.isEmpty()) {
                 return ResponseData.of(henkoRirekiDiv).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
-            RString inputBef = ViewStateHolder.get(ViewStateKeys.資格変更履歴_資格変更入力, RString.class);
+            RString inputBef = ViewStateHolder.get(ViewStateKeys.資格変更入力, RString.class);
             if (henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Modify.getValue())
                     && !input.equals(inputBef)) {
                 return ResponseData.of(henkoRirekiDiv).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
@@ -162,7 +162,7 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoKakutei(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-        Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+        Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         HihokenshaDaicho hihokenshaDaicho;

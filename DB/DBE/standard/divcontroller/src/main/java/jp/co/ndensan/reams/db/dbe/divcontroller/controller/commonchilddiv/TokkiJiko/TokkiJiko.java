@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TokkiJiko.TokkiJiko.TokkiJikoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -44,10 +44,10 @@ public class TokkiJiko {
      * @return ResponseData<TokkiJikoDiv>
      */
     public ResponseData<TokkiJikoDiv> onLoad(TokkiJikoDiv div) {
-        NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        Image イメージ情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_イメージ情報, Image.class);
-        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
-        int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+        NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
+        Image イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, Image.class);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
             意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
                     .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
@@ -63,9 +63,9 @@ public class TokkiJiko {
         if (イメージ情報 == null || イメージ情報.getイメージ共有ファイルID() == null) {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
             if (イメージ情報 != null && イメージ情報.getイメージ共有ファイルID() == null) {
-                ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, イメージ情報.modifiedModel());
+                ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ情報.modifiedModel());
             } else {
-                ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, new Image(管理番号));
+                ViewStateHolder.put(ViewStateKeys.イメージ情報, new Image(管理番号));
             }
         } else {
             RString path = 共有ファイルを引き出す(イメージ情報);
@@ -73,7 +73,7 @@ public class TokkiJiko {
                 div.getTxtTokki().setVisible(false);
             }
             div.getImgTokkiJiko().setSrc(path);
-            ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, イメージ情報.modifiedModel());
+            ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ情報.modifiedModel());
         }
         return ResponseData.of(div).respond();
     }
@@ -86,9 +86,9 @@ public class TokkiJiko {
      */
     public ResponseData<TokkiJikoDiv> onClick_KakuTeyi(TokkiJikoDiv div) {
 
-        NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
-        int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+        NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
 
         if (!div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
@@ -105,7 +105,7 @@ public class TokkiJiko {
             ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
                     .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
             shujiiIkenshoJoho = shujiiIkenshoJoho.createBuilderForEdit().set特記事項(div.getTxtTokki().getValue()).build();
-            ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
+            ViewStateHolder.put(ViewStateKeys.意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
                     getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                     createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build()).build());
             return ResponseData.of(div).dialogOKClose();

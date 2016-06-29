@@ -80,14 +80,14 @@ public class TekiyoJogaiRirekiHandler {
             set適用除外者一覧(適用除外者情報);
             TekiyoJogaishaBusiness 適用除外者管理Model
                     = TekiyoJogaishaManager.createInstance().get適用除外者と施設入退所情報(識別コード, false);
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報,
+            ViewStateHolder.put(ViewStateKeys.適用除外者情報,
                     Models.create(適用除外者管理Model.get適用除外者List()));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報,
+            ViewStateHolder.put(ViewStateKeys.保険施設入退所情報,
                     Models.create(適用除外者管理Model.get施設入退所Lsit()));
         } else {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報,
+            ViewStateHolder.put(ViewStateKeys.適用除外者情報,
                     Models.create(new ArrayList()));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報,
+            ViewStateHolder.put(ViewStateKeys.保険施設入退所情報,
                     Models.create(new ArrayList()));
         }
         if (状態_適用登録.equals(親画面状態)) {
@@ -241,10 +241,10 @@ public class TekiyoJogaiRirekiHandler {
      */
     public void onClick_BtnKakunin(datagridTekiyoJogai_Row 選択データ, RString 画面状態) {
         Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報,
+                = ViewStateHolder.get(ViewStateKeys.適用除外者情報,
                         Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報,
+                = ViewStateHolder.get(ViewStateKeys.保険施設入退所情報,
                         Models.class);
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getHiddenInputShikibetsuCode());
@@ -402,8 +402,8 @@ public class TekiyoJogaiRirekiHandler {
         clear適用除外情報入力エリア();
         div.getBtnInputClear().setDisabled(true);
         div.getBtnKakutei().setDisabled(true);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, 適用除外者Model);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, 保険施設入退所Model);
+        ViewStateHolder.put(ViewStateKeys.適用除外者情報, 適用除外者Model);
+        ViewStateHolder.put(ViewStateKeys.保険施設入退所情報, 保険施設入退所Model);
     }
 
     /**
@@ -445,9 +445,9 @@ public class TekiyoJogaiRirekiHandler {
         List<datagridTekiyoJogai_Row> rowList = div.getDatagridTekiyoJogai().getDataSource();
         RString 画面状態 = new RString(div.getMode_DisplayMode().toString());
         Models<TekiyoJogaishaIdentifier, TekiyoJogaisha> 適用除外者Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_適用除外者情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.適用除外者情報, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.適用除外者管理_保険施設入退所情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.保険施設入退所情報, Models.class);
         for (datagridTekiyoJogai_Row row : rowList) {
             if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
                 continue;

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -87,7 +87,7 @@ public class NinteiChosaScheduleShosaiHander {
             List<ChosaChiku> 対象地区List,
             List<ChikuNinteiChosain> 認定調査スケジュールList,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
-        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
+        設定日 = ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class);
         if (モード_1.equals(モード)) {
             div.getTxtSetteiDate().setDisabled(非活性);
             div.getTxtSetteiDate().setValue(設定日);
@@ -100,7 +100,7 @@ public class NinteiChosaScheduleShosaiHander {
                 div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
             }
             clear();
-            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
+            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class).toString()));
             set保険者DDL(保険者List);
             div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
             set認定調査スケジュール詳細情報(認定調査スケジュールList);
@@ -125,7 +125,7 @@ public class NinteiChosaScheduleShosaiHander {
                 div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
             }
             clear();
-            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
+            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class).toString()));
             set保険者DDL(保険者List);
             div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
             set認定調査スケジュール詳細情報(認定調査スケジュールList);

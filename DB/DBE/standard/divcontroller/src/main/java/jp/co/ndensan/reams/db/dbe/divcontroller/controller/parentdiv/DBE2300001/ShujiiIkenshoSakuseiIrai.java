@@ -32,12 +32,12 @@ import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIk
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -179,8 +179,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 = Models.create(manager.get主治医意見書作成依頼情報(param).records());
         Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
                 = Models.create(manager.get要介護認定申請情報(param).records());
-        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
-        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, 要介護認定申請情報);
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
         return ResponseData.of(div).respond();
     }
 
@@ -331,9 +331,9 @@ public class ShujiiIkenshoSakuseiIrai {
 
     private void toHozon(ShujiiIkenshoSakuseiIraiDiv div) {
         Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
@@ -418,7 +418,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private void printData(ShujiiIkenshoSakuseiIraiDiv div, ReportManager reportManager) {
 
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         主治医意見書作成依頼情報ItemList = new ArrayList<>();
         主治医意見書作成依頼一覧表ItemList = new ArrayList<>();

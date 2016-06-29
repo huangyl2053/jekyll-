@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013.JigyoshaTourokuHandler;
-import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
 import jp.co.ndensan.reams.db.dba.service.core.jigyoshatouroku.JigyoshaTourokuFinder;
+import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
@@ -28,8 +28,8 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihy
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -82,15 +82,15 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onLoad(JigyoshaTourokuDiv div) {
-        JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
+        JigyoshaMode jigyoshaMode = ViewStateHolder.get(ViewStateKeys.介護事業者情報, JigyoshaMode.class);
         if (jigyoshaMode != null) {
-            ViewStateHolder.put(ViewStateKeys.事業者登録_事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
-            ViewStateHolder.put(ViewStateKeys.事業者登録_有効開始日, new FlexibleDate(jigyoshaMode.getYukoKaishiYMD()));
+            ViewStateHolder.put(ViewStateKeys.事業者番号, jigyoshaMode.getJigyoshaNo().getColumnValue());
+            ViewStateHolder.put(ViewStateKeys.有効開始日, new FlexibleDate(jigyoshaMode.getYukoKaishiYMD()));
         }
-        ViewStateHolder.put(ViewStateKeys.事業者登録_事業者種類コード, new RString("11"));
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
-        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
-        FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.事業者登録_有効開始日, FlexibleDate.class);
+        ViewStateHolder.put(ViewStateKeys.事業者種類コード, new RString("11"));
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
+        FlexibleDate 有効開始日 = ViewStateHolder.get(ViewStateKeys.有効開始日, FlexibleDate.class);
         事業者登録パラメータ = KaigoJigyoshaShisetsuKanriMapperParameter.createParam(
                 事業者番号, 有効開始日, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY);
         サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
@@ -161,12 +161,12 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnAddService(JigyoshaTourokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_追加);
-        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
+        ViewStateHolder.put(ViewStateKeys.画面状態, 状態_追加);
+        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
         } else {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
-                    ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
+            ViewStateHolder.put(ViewStateKeys.事業者番号,
+                    ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class));
         }
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス追加).respond();
     }
@@ -178,7 +178,7 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnModify(JigyoshaTourokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_修正);
+        ViewStateHolder.put(ViewStateKeys.画面状態, 状態_修正);
         set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス修正).respond();
     }
@@ -190,21 +190,21 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnDelete(JigyoshaTourokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.サービス登録_画面状態, 状態_削除);
+        ViewStateHolder.put(ViewStateKeys.画面状態, 状態_削除);
         set画面引数の設定(div);
         return ResponseData.of(div).forwardWithEventName(DBA2010013TransitionEventName.サービス削除).respond();
     }
 
     private void set画面引数の設定(JigyoshaTourokuDiv div) {
-        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
+        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.事業者番号, div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
         } else {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_事業者番号,
-                    ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class));
+            ViewStateHolder.put(ViewStateKeys.事業者番号,
+                    ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class));
         }
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス種類コード,
+        ViewStateHolder.put(ViewStateKeys.サービス種類コード,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getServiceShuruiCode());
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日,
+        ViewStateHolder.put(ViewStateKeys.有効開始日,
                 div.getServiceJoho().getDgServiceList().getClickedItem().getKaishiDate().getValue());
     }
 
@@ -215,7 +215,7 @@ public class JigyoshaTouroku {
      * @return ResponseData<JigyoshaTourokuDiv> 事業者登録Div
      */
     public ResponseData<JigyoshaTourokuDiv> onClick_btnSave(JigyoshaTourokuDiv div) {
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (初期_状態 == null || 状態_追加.equals(初期_状態)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -251,7 +251,7 @@ public class JigyoshaTouroku {
     }
 
     private ResponseData<JigyoshaTourokuDiv> get事業者情報の登録処理(JigyoshaTourokuDiv div) {
-        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者登録_事業者番号, RString.class);
+        RString 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class);
         JigyoshaNo jigyoshaNo = new JigyoshaNo(div.getServiceJigyoshaJoho().getTxtJigyoshaNo().getValue());
         FlexibleDate 有効開始日 = div.getServiceJigyoshaJoho().getTxtYukoKaishiYMD().getValue();
         if (jigyoshaTourokuFinder.事業者番号重複チェック(jigyoshaNo, 有効開始日)) {
@@ -266,7 +266,7 @@ public class JigyoshaTouroku {
         }
         KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
                 jigyoshaNo.getColumnValue(),
-                ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class
+                ViewStateHolder.get(ViewStateKeys.事業者種類コード, RString.class
                 ),
                 yukoKaishiYMD,
                 yukoShuryoYMD);
@@ -340,7 +340,7 @@ public class JigyoshaTouroku {
         kaigoJigyosha = kaigoJigyoshaBuilder.build();
         boolean insertFlag = manager.insertJigyoshaJoho(
                 kaigoJigyosha,
-                ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class),
+                ViewStateHolder.get(ViewStateKeys.事業者種類コード, RString.class),
                 null);
         if (insertFlag) {
             div.getKaigoKanryo().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
@@ -360,7 +360,7 @@ public class JigyoshaTouroku {
         }
         KaigoJigyoshaParameter kaigoJigyoshaParameter = KaigoJigyoshaParameter.createParam(
                 旧事業者情報.get事業者番号().getColumnValue(),
-                ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class),
+                ViewStateHolder.get(ViewStateKeys.事業者種類コード, RString.class),
                 yukoKaishiYMD,
                 yukoShuryoYMD);
         if (manager.checkKikanJufuku(kaigoJigyoshaParameter, yukoKaishiYMD)) {
@@ -445,7 +445,7 @@ public class JigyoshaTouroku {
         boolean updateFlag = manager.updateJigyoshaJoho(
                 旧事業者情報,
                 事業者情報,
-                ViewStateHolder.get(ViewStateKeys.事業者登録_事業者種類コード, RString.class),
+                ViewStateHolder.get(ViewStateKeys.事業者種類コード, RString.class),
                 null,
                 null);
         if (updateFlag) {

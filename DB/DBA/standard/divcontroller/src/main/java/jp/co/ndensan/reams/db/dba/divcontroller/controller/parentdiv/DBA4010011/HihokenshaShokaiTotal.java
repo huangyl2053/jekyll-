@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.Hiho
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichosakusei.HihokenshaDaichoSakuseiManager;
 import jp.co.ndensan.reams.db.dba.service.report.hihokenshadaicho.HihokenshaDaichoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -138,11 +138,11 @@ public class HihokenshaShokaiTotal {
         資格得喪情報.setShozaiHokensha(row.getShozaiHokenshaCode());
         資格得喪情報.setSochimotoHokensha(row.getSochimotoHokenshaCode());
         資格得喪情報.setKyuHokensha(row.getKyuHokenshaCode());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, 資格得喪情報);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, 資格得喪情報);
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, key.get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, key.get識別コード());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 照会);
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.状態, 照会);
         return ResponseData.of(div).forwardWithEventName(DBA4010011TransitionEventName.被保険者詳細).respond();
     }
 

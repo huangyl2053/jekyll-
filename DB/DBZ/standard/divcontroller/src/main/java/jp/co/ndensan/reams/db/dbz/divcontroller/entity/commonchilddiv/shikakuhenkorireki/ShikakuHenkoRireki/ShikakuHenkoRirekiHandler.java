@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sikakukanrenido.SikakuKanrenIdoParameter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkorireki.ShikakuhenkorirekiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.sikakukanrenidoa.SikakuKanrenIdoFinder;
@@ -196,7 +196,7 @@ public class ShikakuHenkoRirekiHandler {
      */
     public void updateEntryData(HihokenshaDaicho 被保険者台帳情報) {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
-                = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
         TextBoxFlexibleDate 変更日 = new TextBoxFlexibleDate();
         変更日.setValue(div.getTxtHenkoDate().getValue());
         TextBoxFlexibleDate 変更届出日 = new TextBoxFlexibleDate();
@@ -262,7 +262,7 @@ public class ShikakuHenkoRirekiHandler {
                 result.add(被保険者台帳情報);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_被保険者台帳情報, result);
+        ViewStateHolder.put(ViewStateKeys.被保険者台帳情報, result);
     }
 
     private HihokenshaDaicho setHihokenshaDaicho(HihokenshaDaicho hihokenshaDaicho, dgHenko_Row row) {
@@ -412,7 +412,7 @@ public class ShikakuHenkoRirekiHandler {
         for (SikakuKanrenIdo sikakuKanrenIdo : kanrenIdos) {
             rows.add(getDgHenko_RowFromSikakuKanrenIdo(sikakuKanrenIdo, 識別コード));
         }
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_被保険者台帳情報, result);
+        ViewStateHolder.put(ViewStateKeys.被保険者台帳情報, result);
         return rows;
     }
 

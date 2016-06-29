@@ -13,13 +13,13 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.Tato
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
+import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.shisetsutaishotsuchisho.ShisetsuTaishoTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -65,9 +65,9 @@ public class TatokureiTaishoTsuchishoHakko {
         List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
         if (tekiyoJohoList != null && !tekiyoJohoList.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
-            ViewStateHolder.put(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
+            ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
         } else {
-            ViewStateHolder.put(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(new ArrayList()));
         }
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100005.getReportId());
@@ -121,7 +121,7 @@ public class TatokureiTaishoTsuchishoHakko {
                 getHenshuNaiyo().getChkTaishoGonai().getSelectedKeys().get(0);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他市町村住所地特例
-                = ViewStateHolder.get(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         boolean 住所出力不要フラグ = false;
         if (転入後前の住所.equals(new RString("key0"))) {
             住所出力不要フラグ = true;

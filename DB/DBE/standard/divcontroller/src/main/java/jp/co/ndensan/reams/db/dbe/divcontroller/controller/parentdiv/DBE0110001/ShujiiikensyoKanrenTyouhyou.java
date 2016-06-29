@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110001
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110001.DBE0110001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110001.ShujiiikensyoKanrenTyouhyouDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110001.ShujiiikensyoKanrenTyouhyouHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -85,8 +85,8 @@ public class ShujiiikensyoKanrenTyouhyou {
             if (div.getChkShinsei().getSelectedKeys().contains(SELECT_KEY1)) {
                 要介護認定_要支援認定等申請者一覧フラグ = true;
             }
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定申請モニタリストフラグ, 要介護認定申請モニタリストフラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_要介護認定_要支援認定等申請者一覧フラグ, 要介護認定_要支援認定等申請者一覧フラグ);
+            ViewStateHolder.put(ViewStateKeys.要介護認定申請モニタリストフラグ, 要介護認定申請モニタリストフラグ);
+            ViewStateHolder.put(ViewStateKeys.要支援認定等申請者一覧フラグ, 要介護認定_要支援認定等申請者一覧フラグ);
         } else if (SELECT_KEY1.equals(div.getRadChohyoHakkoType().getSelectedKey())) {
             if (div.getChkNinteiChosa().getSelectedKeys().contains(SELECT_KEY0)) {
                 認定調査予定未定者一覧フラグ = true;
@@ -97,9 +97,9 @@ public class ShujiiikensyoKanrenTyouhyou {
             if (div.getChkNinteiChosa().getSelectedKeys().contains(SELECT_KEY2)) {
                 認定調査結果と主治医意見書のチェックリストフラグ = true;
             }
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査予定未定者一覧フラグ, 認定調査予定未定者一覧フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査依頼先変更者一覧表フラグ, 認定調査依頼先変更者一覧表フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_認定調査結果と主治医意見書のチェックリストフラグ, 認定調査結果と主治医意見書のチェックリストフラグ);
+            ViewStateHolder.put(ViewStateKeys.認定調査予定未定者一覧フラグ, 認定調査予定未定者一覧フラグ);
+            ViewStateHolder.put(ViewStateKeys.認定調査依頼先変更者一覧表フラグ, 認定調査依頼先変更者一覧表フラグ);
+            ViewStateHolder.put(ViewStateKeys.認定調査結果と主治医意見書のチェックリストフラグ, 認定調査結果と主治医意見書のチェックリストフラグ);
         } else {
             if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECT_KEY0)) {
                 主治医意見書未提出者一覧フラグ = true;
@@ -119,12 +119,12 @@ public class ShujiiikensyoKanrenTyouhyou {
             if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECT_KEY5)) {
                 主治医意見書作成料請求一覧表フラグ = true;
             }
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書未提出者一覧フラグ, 主治医意見書未提出者一覧フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書５項目確認一覧表フラグ, 主治医意見書５項目確認一覧表フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書依頼未処理者一覧表フラグ, 主治医意見書依頼未処理者一覧表フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書作成依頼変更者一覧表フラグ, 主治医意見書作成依頼変更者一覧表フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書依頼済み一覧表フラグ, 主治医意見書依頼済み一覧表フラグ);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請_依頼業務照会_主治医意見書作成料請求一覧表フラグ, 主治医意見書作成料請求一覧表フラグ);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書未提出者一覧フラグ, 主治医意見書未提出者一覧フラグ);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書５項目確認一覧表フラグ, 主治医意見書５項目確認一覧表フラグ);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書依頼未処理者一覧表フラグ, 主治医意見書依頼未処理者一覧表フラグ);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼変更者一覧表フラグ, 主治医意見書作成依頼変更者一覧表フラグ);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書依頼済み一覧表フラグ, 主治医意見書依頼済み一覧表フラグ);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成料請求一覧表フラグ, 主治医意見書作成料請求一覧表フラグ);
         }
     }
 

@@ -20,13 +20,13 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0510011.Kyo
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0510011.KyokaisoGaitoshaPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kyokaisogaitosha.KyokaisoGaitoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoGaitoshaIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankaiIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinseiIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -71,13 +71,13 @@ public class KyokaisoGaitoshaPanel {
         List<KyokaisoGaitoshaJoho> 境界層該当一覧情報
                 = KyokaisoGaitoshaManager.createInstance().getKyokaisoGaitoshaJohoList(被保険者番号).records();
         if (境界層該当一覧情報 == null || 境界層該当一覧情報.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層該当者情報, Models.create(new ArrayList()));
-            ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層措置申請情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.境界層該当者情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.境界層措置申請情報, Models.create(new ArrayList()));
             境界層該当一覧情報 = new ArrayList<>();
         } else {
             KyokaisoGaito 境界層該当者情報 = KyokaisoGaitoshaManager.createInstance().get境界層該当者情報(被保険者番号);
-            ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層該当者情報, Models.create(境界層該当者情報.get境界層該当者List()));
-            ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層措置申請情報, Models.create(境界層該当者情報.get境界層措置申請Lsit()));
+            ViewStateHolder.put(ViewStateKeys.境界層該当者情報, Models.create(境界層該当者情報.get境界層該当者List()));
+            ViewStateHolder.put(ViewStateKeys.境界層措置申請情報, Models.create(境界層該当者情報.get境界層措置申請Lsit()));
         }
         getHandler(div).onLoad(境界層該当一覧情報);
         return ResponseData.of(div).setState(DBU0510011StateName.Kousin);
@@ -90,7 +90,7 @@ public class KyokaisoGaitoshaPanel {
      * @return ResponseData<KyokaisoGaitoshaPanelDiv>
      */
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_btnTuika(KyokaisoGaitoshaPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(new ArrayList()));
+        ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(new ArrayList()));
         getHandler(div).onClick_btnTuika();
         return ResponseData.of(div).setState(DBU0510011StateName.Insert);
     }
@@ -232,11 +232,11 @@ public class KyokaisoGaitoshaPanel {
             int 最新履歴番号 = KyokaisoGaitoshaManager.createInstance().get最新履歴番号(parameter).intValue();
             int 最新リンク番号 = KyokaisoGaitoshaManager.createInstance().get最新リンク番号(parameter).intValue();
             Models<KyokaisoGaitoshaIdentifier, KyokaisoGaitosha> gaitoshaModels
-                    = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_境界層該当者情報, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.境界層該当者情報, Models.class);
             Models<KyokaisoSochiShinseiIdentifier, KyokaisoSochiShinsei> sochiShinseiModels
-                    = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_境界層措置申請情報, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.境界層措置申請情報, Models.class);
             Models<KyokaisoHokenryoDankaiIdentifier, KyokaisoHokenryoDankai> dankaiModels
-                    = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.境界層保険料段階情報, Models.class);
 
             if (状態_追加.equals(div.getKyokaisouGaitouItiran().getIranState())) {
                 KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新履歴番号, 最新リンク番号);
@@ -333,7 +333,7 @@ public class KyokaisoGaitoshaPanel {
         int 最新リンク番号 = KyokaisoGaitoshaManager.createInstance().get最新リンク番号(parameter).intValue();
         int 最新履歴番号 = KyokaisoGaitoshaManager.createInstance().get最新履歴番号(parameter).intValue();
         Models<KyokaisoHokenryoDankaiIdentifier, KyokaisoHokenryoDankai> models
-                = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.境界層保険料段階情報, Models.class);
         RString 状態 = div.getHokenryoNofuGengaku().getTekiyoState();
         if (状態.isEmpty() || 状態_追加.equals(状態)) {
             if (状態_修正.equals(イベント状態)) {
@@ -398,7 +398,7 @@ public class KyokaisoGaitoshaPanel {
                 models.deleteOrRemove(key);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(models));
+        ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(models));
         getHandler(div).onClick_btnKakutei(イベント状態, 最新リンク番号, 最新履歴番号);
         return ResponseData.of(div).respond();
     }
@@ -419,10 +419,10 @@ public class KyokaisoGaitoshaPanel {
         List<KyokaisoHokenryo> 境界層保険料段階情報
                 = KyokaisoGaitoshaManager.createInstance().getKyokaisoHokenryoDakaiJohoList(被保険者番号, リンク番号).records();
         if (境界層保険料段階情報 == null || 境界層保険料段階情報.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(new ArrayList()));
         } else {
             KyokaisoGaito 境界層該当者情報 = KyokaisoGaitoshaManager.createInstance().get境界層保険料段階情報(被保険者番号, リンク番号);
-            ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(境界層該当者情報.get境界層保険料段階List()));
+            ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(境界層該当者情報.get境界層保険料段階List()));
         }
         return 境界層保険料段階情報;
     }

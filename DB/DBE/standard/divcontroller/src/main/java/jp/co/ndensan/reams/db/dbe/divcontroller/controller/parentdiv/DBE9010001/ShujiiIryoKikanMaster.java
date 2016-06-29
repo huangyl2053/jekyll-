@@ -301,7 +301,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onbtnOkClose(ShujiiIryoKikanMasterDiv div) {
         KoseiShiChosonSelectorModel model = ViewStateHolder
-                .get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+                .get(ViewStateKeys.引き継ぎデータ, KoseiShiChosonSelectorModel.class);
         div.getShujiiJohoInput().getTxtShichosonmei().setValue(model.get市町村名称());
         div.getShujiiJohoInput().getTxtShichoson().setValue(model.get市町村コード());
         return ResponseData.of(div).respond();

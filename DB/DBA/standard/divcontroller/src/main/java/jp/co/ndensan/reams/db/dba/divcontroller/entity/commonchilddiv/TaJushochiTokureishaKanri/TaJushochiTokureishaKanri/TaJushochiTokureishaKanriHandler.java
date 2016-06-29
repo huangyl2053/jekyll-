@@ -89,20 +89,20 @@ public class TaJushochiTokureishaKanriHandler {
         if (適用情報 != null && !適用情報.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
             if (住所地特例Model.get住所地特例List() != null && !住所地特例Model.get住所地特例List().isEmpty()) {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
+                ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
             } else {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(new ArrayList()));
             }
             if (住所地特例Model.get施設入退所Lsit() != null && !住所地特例Model.get施設入退所Lsit().isEmpty()) {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(住所地特例Model.get施設入退所Lsit()));
+                ViewStateHolder.put(ViewStateKeys.保険施設入退所, Models.create(住所地特例Model.get施設入退所Lsit()));
             } else {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.保険施設入退所, Models.create(new ArrayList()));
             }
             set一覧の設定(適用情報);
             最新適用情報 = 適用情報.get(0);
         } else {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.保険施設入退所, Models.create(new ArrayList()));
         }
         switch (div.getMode_DisplayMode()) {
             case Shokai:
@@ -256,9 +256,9 @@ public class TaJushochiTokureishaKanriHandler {
      */
     public void onClick_BtnKakunin(dgJushochiTokureiRireki_Row rireki_Row, RString 親画面状態) {
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他住所地特例Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.保険施設入退所, Models.class);
 
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getTajushochiTokureiInput().getHiddenInputShikibetsuCode());
@@ -438,8 +438,8 @@ public class TaJushochiTokureishaKanriHandler {
         clear他市町村住所地特例情報入力エリア();
         div.getBtnKakunin().setDisabled(true);
         div.getBtnTorikeshi().setDisabled(true);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, 他住所地特例Model);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, 保険施設入退所Model);
+        ViewStateHolder.put(ViewStateKeys.他住所地特例, 他住所地特例Model);
+        ViewStateHolder.put(ViewStateKeys.保険施設入退所, 保険施設入退所Model);
     }
 
     /**
@@ -450,9 +450,9 @@ public class TaJushochiTokureishaKanriHandler {
     public void saveTaJushochiTokurei(ShikibetsuCode 識別コード) {
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他住所地特例Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.保険施設入退所, Models.class);
         for (dgJushochiTokureiRireki_Row row : rowList) {
             FlexibleDate 異動日 = new FlexibleDate(row.getIdoYMD());
             if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {

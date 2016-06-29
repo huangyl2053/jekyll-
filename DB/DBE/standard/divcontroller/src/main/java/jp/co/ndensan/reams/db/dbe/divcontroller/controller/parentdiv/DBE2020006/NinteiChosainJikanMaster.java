@@ -16,13 +16,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.Nin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.NinteiChosainJikanMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -476,7 +476,7 @@ public class NinteiChosainJikanMaster {
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
         Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
         if (!ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(UrWarningMessages.削除の確認.getMessage().getCode(),
                     UrWarningMessages.削除の確認.getMessage().replace(new RString("該当時間枠情報").toString()).evaluate());
@@ -501,7 +501,7 @@ public class NinteiChosainJikanMaster {
                     div.getMainPanel().getTxtJikanWaku().getValue());
             div.getMainPanel().getSettingDetail().setDisplayNone(true);
         }
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール情報, Models.create(ninteichosaModels));
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -517,7 +517,7 @@ public class NinteiChosainJikanMaster {
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
         Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCreate();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -552,7 +552,7 @@ public class NinteiChosainJikanMaster {
 
         getHandler(div).btnCreate(new FlexibleDate(div.getMainPanel().getTxtSetteiYMD().getValue().toString()),
                 div.getMainPanel().getTxtJikanWaku().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール情報, Models.create(ninteichosaModels));
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -640,7 +640,7 @@ public class NinteiChosainJikanMaster {
                 throw new ApplicationException(message);
             }
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
-                    = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
             List<dgTimeScheduleList_Row> 画面データ = div.getDgTimeScheduleList().getDataSource();
             for (dgTimeScheduleList_Row row : 画面データ) {
                 FlexibleDate 予定年月日
@@ -764,7 +764,7 @@ public class NinteiChosainJikanMaster {
             RString 認定調査員コード,
             LasdecCode 市町村コード) {
         if (認定調査情報 == null || 認定調査情報.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール情報, Models.create(new ArrayList()));
         } else {
             List<NinteichosaSchedule> 情報 = NinteiChosainJikanMasterManager.createInstance().
                     select時間枠設定一覧情報(
@@ -773,7 +773,7 @@ public class NinteiChosainJikanMaster {
                             認定調査委託先コード,
                             認定調査員コード,
                             市町村コード).records();
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(情報));
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール情報, Models.create(情報));
         }
     }
 
@@ -1248,7 +1248,7 @@ public class NinteiChosainJikanMaster {
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
         Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
         NinteichosaSchedule 情報PK = new NinteichosaSchedule(
                 予定年月日,
                 認定調査予定開始時間,
@@ -1259,7 +1259,7 @@ public class NinteiChosainJikanMaster {
                 認定調査員コード,
                 市町村コード);
         ninteichosaModels.add(情報PK.createBuilderForEdit().set予約可能フラグ(true).build());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール情報, Models.create(ninteichosaModels));
 
     }
 }

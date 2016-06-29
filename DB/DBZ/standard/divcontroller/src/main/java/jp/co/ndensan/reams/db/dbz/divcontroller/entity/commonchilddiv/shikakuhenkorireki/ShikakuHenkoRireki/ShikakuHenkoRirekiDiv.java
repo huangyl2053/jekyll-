@@ -12,9 +12,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -594,7 +594,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     @Override
     public SearchResult<HihokenshaDaicho> getGridData() {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
-                = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
         List<HihokenshaDaicho> hihokenshaList = new ArrayList<>(result.values());
         if (hihokenshaList.isEmpty()) {
             return SearchResult.of(Collections.<HihokenshaDaicho>emptyList(), 0, false);
@@ -610,7 +610,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     @Override
     public SearchResult<HihokenshaDaicho> getGridDataFor資格詳細異動() {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
-                = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
         List<HihokenshaDaicho> retList = new ArrayList<>();
         for (dgHenko_Row row : this.getDgHenko().getDataSource()) {
             retList.add(result.get(new HihokenshaDaichoIdentifier(new HihokenshaNo(row.getHihokenshaNo()),
