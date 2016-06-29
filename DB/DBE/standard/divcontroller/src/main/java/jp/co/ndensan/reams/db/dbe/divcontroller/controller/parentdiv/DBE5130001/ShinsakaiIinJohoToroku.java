@@ -17,12 +17,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;

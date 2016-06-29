@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.Shin
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.SinsakaiHanteiJyokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -33,8 +34,11 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     private static final String CSVSHUTSURYOKU = "csvShutsuryoku";
     private static final String SHUTSURYOKUFAIRU = "shutsuryokuFairu";
     private static final String HOKENSYANO = "hokensyaNo";
+    private static final String SHICHOSONCODE = "shichosonCode";
+    private static final String SHICHOSONNAME = "shichosonName";
     private static final String HIHOKENSYAKUBUN = "hiHokensyaKubun";
     private static final String GOGITAINO = "gogitaiNo";
+    private static final String GOGITAINAME = "gogitaiName";
     private static final String GOGITAINOLIST = "gogitaiNoList";
     private static final String TAISHOTSUKIKUBUN = "taishoTsukiKubun";
     private static final String TAISHOTSUKI = "taishoTsuki";
@@ -59,11 +63,17 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     private RString shutsuryokuFairu;
     @BatchParameter(key = HOKENSYANO, name = "保険者番号")
     private RString hokensyaNo;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
+    private LasdecCode shichosonCode;
+    @BatchParameter(key = SHICHOSONNAME, name = "市町村名称")
+    private RString shichosonName;
     @BatchParameter(key = HIHOKENSYAKUBUN, name = "被保険者区分")
     private RString hiHokensyaKubun;
     @BatchParameter(key = GOGITAINO, name = "合議体番号")
     private int gogitaiNo;
-    @BatchParameter(key = GOGITAINOLIST, name = "合議体番号")
+    @BatchParameter(key = GOGITAINAME, name = "合議体名称")
+    private RString gogitaiName;
+    @BatchParameter(key = GOGITAINOLIST, name = "合議体番号List")
     private List<Integer> gogitaiNoList;
     @BatchParameter(key = TAISHOTSUKIKUBUN, name = "対象月編集区分")
     private boolean isTaishoTsukiKubun;
@@ -98,8 +108,11 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
      * @param csvShutsuryoku CSV出力区分
      * @param shutsuryokuFairu 出力ファイル名
      * @param hokensyaNo 保険者番号
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名称
      * @param hiHokensyaKubun 被保険者区分
      * @param gogitaiNo 合議体番号
+     * @param gogitaiName 合議体名称
      * @param gogitaiNoList 合議体番号List
      * @param isTaishoTsukiKubun 対象月編集区分
      * @param taishoNendoYM 対象年月
@@ -118,8 +131,11 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
             boolean csvShutsuryoku,
             RString shutsuryokuFairu,
             RString hokensyaNo,
+            LasdecCode shichosonCode,
+            RString shichosonName,
             RString hiHokensyaKubun,
             int gogitaiNo,
+            RString gogitaiName,
             List<Integer> gogitaiNoList,
             boolean isTaishoTsukiKubun,
             RString taishoNendoYM,
@@ -136,8 +152,11 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
         this.csvShutsuryoku = csvShutsuryoku;
         this.shutsuryokuFairu = shutsuryokuFairu;
         this.hokensyaNo = hokensyaNo;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
         this.hiHokensyaKubun = hiHokensyaKubun;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiName = gogitaiName;
         this.gogitaiNoList = gogitaiNoList;
         this.isTaishoTsukiKubun = isTaishoTsukiKubun;
         this.taishoNendoYM = taishoNendoYM;
@@ -166,9 +185,12 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
+                shichosonCode,
+                shichosonName,
                 hiHokensyaKubun,
                 -1 == gogitaiNo,
                 gogitaiNo,
+                gogitaiName,
                 gogitaiNoList,
                 isTaishoTsukiKubun,
                 isTaishoGeppiKubun,
@@ -198,6 +220,8 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
+                shichosonCode,
+                shichosonName,
                 hiHokensyaKubun,
                 -1 == gogitaiNo,
                 gogitaiNo,
@@ -290,9 +314,12 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
                 kijyunYMD,
                 RString.isNullOrEmpty(hokensyaNo),
                 hokensyaNo,
+                shichosonCode,
+                shichosonName,
                 hiHokensyaKubun,
                 -1 == gogitaiNo,
                 gogitaiNo,
+                gogitaiName,
                 gogitaiNoList,
                 isTaishoTsukiKubun,
                 isTaishoGeppiKubun,

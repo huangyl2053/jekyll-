@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -168,6 +169,7 @@ public class TokuchoTaishoshaDoteiIkatsu {
             最新徴収方法Entity.setTokuchoTeishiNichiji(null);
             最新徴収方法Entity.setTokuchoTeishiJiyuCode(null);
             DbT2001ChoshuHohoEntity 徴収方法Entity = transDbV2001ToDbT2001(最新徴収方法Entity);
+            徴収方法Entity.setState(EntityDataState.Added);
             if (null != 徴収方法Entity.getFukaNendo()) {
                 db2001Dac.save(徴収方法Entity);
             }
@@ -190,6 +192,7 @@ public class TokuchoTaishoshaDoteiIkatsu {
                 ShoriName.特徴対象者同定.get名称(), 処理年度, 年度内連番);
         for (DbT7022ShoriDateKanriEntity entity : 日付List) {
             entity.setKijunTimestamp(new YMDHMS(処理日時));
+            entity.setState(EntityDataState.Modified);
             db7022Dac.save(entity);
         }
     }

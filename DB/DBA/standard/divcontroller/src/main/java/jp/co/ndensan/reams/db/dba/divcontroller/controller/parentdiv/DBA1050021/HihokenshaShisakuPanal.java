@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1050021.Hih
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakuteisei.HihokenshaShikakuTeiseiManager;
 import jp.co.ndensan.reams.db.dba.service.core.nyutaishoshakanri.NyutaishoshaKanriFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -67,11 +67,11 @@ public class HihokenshaShisakuPanal {
      * @return ResponseData<HihokenshaShisakuPanalDiv> 被保険者資格詳細異動Div
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onLoad(HihokenshaShisakuPanalDiv div) {
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_状態, RString.class);
-        HihokenshaNo 被保番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, ShikibetsuCode.class);
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        HihokenshaNo 被保番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ShikakuRirekiJoho 資格得喪情報
-                = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class);
+                = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
         if (状態_追加.equals(初期_状態)) {
             getHandler(div).initialize(初期_状態, 被保番号, 識別コード, 資格得喪情報);
             return ResponseData.of(div).setState(DBA1050021StateName.追加状態);
@@ -140,15 +140,15 @@ public class HihokenshaShisakuPanal {
     }
 
     private List<HihokenshaDaicho> 資格訂正登録リスト取得処理(HihokenshaShisakuPanalDiv div) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_識別コード, ShikibetsuCode.class);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ShikakuRirekiJoho 資格詳細情報 = getHandler(div).get資格詳細情報();
         List<HihokenshaDaicho> 住所地特例情報
                 = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().getDataList();
         List<HihokenshaDaicho> 資格変更履歴情報
                 = div.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().getGridDataFor資格詳細異動().records();
         List<HihokenshaDaicho> 資格訂正登録リスト = new ArrayList<>();
-        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_状態, RString.class);
+        RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (状態_追加.equals(初期_状態)) {
             資格訂正登録リスト = manager.getShikakuTorukuList(
                     資格詳細情報, 住所地特例情報, 資格変更履歴情報,
@@ -167,9 +167,9 @@ public class HihokenshaShisakuPanal {
     }
 
     private void 資格訂正処理(List<HihokenshaDaicho> 資格訂正情報) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
-        FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
-        FlexibleDate 喪失日 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class).getSoshitsuDate();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
+        FlexibleDate 喪失日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getSoshitsuDate();
         manager.saveHihokenshaShikakuTeisei(被保険者番号, 取得日, 喪失日, 資格訂正情報);
     }
 
@@ -190,8 +190,8 @@ public class HihokenshaShisakuPanal {
         }
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_被保番号, HihokenshaNo.class);
-            FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
+            HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+            FlexibleDate 取得日 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class).getShutokuDate();
             manager.deleteHihokenshaShikakuTeisei(被保険者番号, 取得日);
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(div).forwardWithEventName(DBA1050021TransitionEventName.履歴一覧に戻る).respond();
@@ -206,7 +206,7 @@ public class HihokenshaShisakuPanal {
      * @return ResponseData<HihokenshaShisakuPanalDiv> 被保険者資格詳細異動Div
      */
     public ResponseData<HihokenshaShisakuPanalDiv> onClick_Change(HihokenshaShisakuPanalDiv div) {
-        ShikakuRirekiJoho 資格得喪情報 = ViewStateHolder.get(ViewStateKeys.資格異動の訂正_資格得喪情報, ShikakuRirekiJoho.class);
+        ShikakuRirekiJoho 資格得喪情報 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
         RString 導入形態コード = div.getHiddenDonyuKeitaiCode();
         if (広域保険者.equals(getHandler(div).広域と市町村判断()) && !RString.isNullOrEmpty(広域保険者)) {
             List<Shichoson> 旧保険者情報 = getHandler(div).旧保険者取得(

@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSante
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NinshoshaSource;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NokigenShutsuryokuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -55,16 +55,16 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link HokenryoNonyuTsuchishoKigotoItem}
+     * @param item {@link HonSanteiNonyuTsuchiShoJoho}
      * @param 納入通知書期情報 納入通知書期情報
      * @param ninshoshaSource 認証者情報
      * @param 連番 連番
      */
-    protected HokenryoNonyuTsuchishoKigotoEditor(HokenryoNonyuTsuchishoKigotoItem item,
+    protected HokenryoNonyuTsuchishoKigotoEditor(HonSanteiNonyuTsuchiShoJoho item,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
             NinshoshaSource ninshoshaSource,
             int 連番) {
-        this.本算定納入通知書情報 = null == item.get本算定納入通知書情報() ? new HonSanteiNonyuTsuchiShoJoho() : item.get本算定納入通知書情報();
+        this.本算定納入通知書情報 = null == item ? new HonSanteiNonyuTsuchiShoJoho() : item;
         this.編集後本算定通知書共通情報 = null == 本算定納入通知書情報.get編集後本算定通知書共通情報()
                 ? new EditedHonSanteiTsuchiShoKyotsu() : 本算定納入通知書情報.get編集後本算定通知書共通情報();
         this.本算定納入通知書制御情報 = null == 本算定納入通知書情報.get本算定納入通知書制御情報()
@@ -205,15 +205,17 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     }
 
     private void editCompNinshosha(HokenryoNonyuTsuchishoKigotoSource source) {
-        source.denshiKoin = ninshoshaSource.get電子公印();
-        source.hakkoYMD = ninshoshaSource.get発効年月日();
-        source.ninshoshaYakushokuMei = ninshoshaSource.get承認者役職名();
-        source.ninshoshaYakushokuMei1 = ninshoshaSource.get承認者役職名1();
-        source.koinMojiretsu = ninshoshaSource.get公印文字列();
-        source.ninshoshaYakushokuMei2 = ninshoshaSource.get承認者役職名2();
-        source.ninshoshaShimeiKakenai = ninshoshaSource.get承認者氏名掛けない();
-        source.ninshoshaShimeiKakeru = ninshoshaSource.get承認者氏名掛ける();
-        source.koinShoryaku = ninshoshaSource.get公印書略();
+        if (ninshoshaSource != null) {
+            source.denshiKoin = ninshoshaSource.denshiKoin;
+            source.hakkoYMD = ninshoshaSource.hakkoYMD;
+            source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+            source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+            source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+            source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+            source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+            source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+            source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        }
     }
 
     private void editレイヤ１(HokenryoNonyuTsuchishoKigotoSource source) {

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,4 +35,5 @@ public class MaSuKinGuRelateEntity {
     private FlexibleDate ninteichosaKanryoYMD;
     private FlexibleDate ikenshoTorokuKanryoYMD;
     private FlexibleDate maskingKanryoYMD;
+    private RDateTime imageSharedFileId;
 }

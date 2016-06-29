@@ -42,8 +42,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
@@ -1548,14 +1549,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         }
         for (DbT4021ShiharaiHohoHenkoEntity 支払方法変更 : 支払方法変更リスト) {
             RString 受給情報tmp = RString.EMPTY;
-            if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更.getKanriKubun())) {
-                //TODO 809
-                //&& ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード().equals(支払方法変更.getTorokuKubun()
+            if (ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(支払方法変更.getKanriKubun())
+                    && ShiharaiHenkoTorokuKubun._１号償還払い化登録.getコード().equals(支払方法変更.getTorokuKubun())) {
                 受給情報tmp = 受給者_償還払い化;
             }
-            if (ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(支払方法変更.getKanriKubun())) {
-                //TODO 809
-                //&& ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード().equals(支払方法変更.getTorokuKubun()
+            if (ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(支払方法変更.getKanriKubun())
+                    && ShiharaiHenkoTorokuKubun._１号給付額減額登録.getコード().equals(支払方法変更.getTorokuKubun())) {
                 受給情報tmp = 受給者_給付額減額;
             }
             if (!RString.isNullOrEmpty(受給情報tmp)) {

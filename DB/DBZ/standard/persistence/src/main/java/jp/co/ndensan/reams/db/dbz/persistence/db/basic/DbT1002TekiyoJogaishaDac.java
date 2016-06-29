@@ -9,6 +9,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.idoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.kaijoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.tekiyoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
@@ -22,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -63,6 +67,34 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
+    }
+
+    /**
+     * 適用除外者を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 年齢到達日 年齢到達日
+     * @return DbT1002TekiyoJogaishaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1002TekiyoJogaishaEntity> select適用除外者(
+            ShikibetsuCode 識別コード,
+            FlexibleDate 年齢到達日) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1002TekiyoJogaisha.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                (or(
+                                        and(leq(tekiyoYMD, 年齢到達日), leq(年齢到達日, kaijoYMD)),
+                                        and(leq(tekiyoYMD, 年齢到達日), leq(kaijoYMD, null)))),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT1002TekiyoJogaishaEntity.class);
     }
 
     /**

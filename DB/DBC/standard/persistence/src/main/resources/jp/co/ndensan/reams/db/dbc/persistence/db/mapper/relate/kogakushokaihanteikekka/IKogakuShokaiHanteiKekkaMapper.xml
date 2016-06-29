@@ -50,6 +50,7 @@
         WHERE "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = #{被保険者番号}
         AND   "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = #{提供年月}
         ORDER BY
+        "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" ASC,
         "DbT3054KogakuKyufuTaishoshaMeisai"."jigyoshaNo" ASC,
         "DbT3054KogakuKyufuTaishoshaMeisai"."serviceShuruiCode" ASC
     </select>
@@ -114,6 +115,7 @@
         WHERE "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = #{被保険者番号}
         AND   "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = #{提供年月}
         ORDER BY
+        "DbT3110JigyoKogakuShikyuShinsei"."shoKisaiHokenshaNo" ASC,
         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."jigyoshaNo" ASC,
         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."serviceShuruiCode" ASC
     </select>

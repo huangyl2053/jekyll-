@@ -45,7 +45,6 @@ public final class JigyoshaInputGuideParameter {
     private final RString kannaiKangaiKubun2;
     private final boolean isKannaiKangaiKubun1Flg;
     private final boolean isKannaiKangaiKubun2Flg;
-    private final boolean isKannaiKangaiKubunFlg;
     private final int limitCount;
 
     private JigyoshaInputGuideParameter(
@@ -76,7 +75,6 @@ public final class JigyoshaInputGuideParameter {
             RString kannaiKangaiKubun2,
             boolean isKannaiKangaiKubun1Flg,
             boolean isKannaiKangaiKubun2Flg,
-            boolean isKannaiKangaiKubunFlg,
             int limitCount) {
         this.jigyoshaNo = jigyoshaNo;
         this.isJigyoshaNoFlag = isJigyoshaNoFlag;
@@ -105,7 +103,6 @@ public final class JigyoshaInputGuideParameter {
         this.kannaiKangaiKubun2 = kannaiKangaiKubun2;
         this.isKannaiKangaiKubun1Flg = isKannaiKangaiKubun1Flg;
         this.isKannaiKangaiKubun2Flg = isKannaiKangaiKubun2Flg;
-        this.isKannaiKangaiKubunFlg = isKannaiKangaiKubunFlg;
         this.limitCount = limitCount;
     }
 
@@ -159,7 +156,6 @@ public final class JigyoshaInputGuideParameter {
         boolean isGunshiCode = false;
         boolean isKannaiKangaiKubun1Flg = false;
         boolean isKannaiKangaiKubun2Flg = false;
-        boolean isKannaiKangaiKubunFlg = false;
 
         if (jigyoshaNo != null && !jigyoshaNo.value().isEmpty()) {
             isJigyoshaNoFlag = true;
@@ -194,7 +190,6 @@ public final class JigyoshaInputGuideParameter {
         isGunshiCode = gunshiCodeの判定(isGunshiCode, gunshiCode);
         isKannaiKangaiKubun1Flg = kannaiKangaiKubun1の判定(isKannaiKangaiKubun1Flg, kannaiKangaiKubun1, kannaiKangaiKubun2);
         isKannaiKangaiKubun2Flg = kannaiKangaiKubun2の判定(isKannaiKangaiKubun2Flg, kannaiKangaiKubun1, kannaiKangaiKubun2);
-        isKannaiKangaiKubunFlg = kannaiKangaiKubunの判定(isKannaiKangaiKubunFlg, kannaiKangaiKubun1, kannaiKangaiKubun2);
 
         return new JigyoshaInputGuideParameter(
                 jigyoshaNo,
@@ -224,7 +219,6 @@ public final class JigyoshaInputGuideParameter {
                 kannaiKangaiKubun2,
                 isKannaiKangaiKubun1Flg,
                 isKannaiKangaiKubun2Flg,
-                isKannaiKangaiKubunFlg,
                 limitCount);
     }
 
@@ -250,14 +244,6 @@ public final class JigyoshaInputGuideParameter {
             isKannaiKangaiKubun2Flg = true;
         }
         return isKannaiKangaiKubun2Flg;
-    }
-
-    private static boolean kannaiKangaiKubunの判定(boolean isKannaiKangaiKubunFlg, RString kannaiKangaiKubun1, RString kannaiKangaiKubun2) {
-
-        if (!RString.isNullOrEmpty(kannaiKangaiKubun1) && !RString.isNullOrEmpty(kannaiKangaiKubun2)) {
-            isKannaiKangaiKubunFlg = true;
-        }
-        return isKannaiKangaiKubunFlg;
     }
 
     /**
@@ -647,15 +633,6 @@ public final class JigyoshaInputGuideParameter {
      */
     public boolean isIsKannaiKangaiKubun2Flg() {
         return isKannaiKangaiKubun2Flg;
-    }
-
-    /**
-     * 全てフラグを返します。
-     *
-     * @return 全てフラグ
-     */
-    public boolean isIsKannaiKangaiKubunFlg() {
-        return isKannaiKangaiKubunFlg;
     }
 
     /**

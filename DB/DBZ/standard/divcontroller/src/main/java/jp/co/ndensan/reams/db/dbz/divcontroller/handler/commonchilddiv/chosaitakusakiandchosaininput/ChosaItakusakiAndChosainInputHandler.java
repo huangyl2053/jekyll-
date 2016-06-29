@@ -132,4 +132,15 @@ public class ChosaItakusakiAndChosainInputHandler {
         div.getTxtChosainName().setValue(chosaItakusakiAndChosain.get調査員氏名());
 
     }
+
+    /**
+     * onClick_btnClearボタンを押下した、共有子Div内の項目に設定された値をすべてクリアします。
+     */
+    public void onClick_BtnClear() {
+        div.getTxtChosaItakusakiCode().clearValue();
+        div.getTxtChosaItakusakiName().clearValue();
+        div.getTxtChosainCode().clearValue();
+        div.getTxtChosainName().clearValue();
+    }
+
 }

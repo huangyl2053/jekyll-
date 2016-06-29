@@ -6,7 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.Dbd207010BatchFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002.ShiharaiHohoKanriListMainHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -56,8 +56,8 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv のクラスファイル
      * @return ResponseData<ShiharaiHohoKanriListMainDiv>
      */
-    public ResponseData<Dbd207010BatchFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
-        ResponseData<Dbd207010BatchFlowParameter> responseData = new ResponseData<>();
+    public ResponseData<ShiharaiHohoHenkoListFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
+        ResponseData<ShiharaiHohoHenkoListFlowParameter> responseData = new ResponseData<>();
         responseData.data = createHandler(div).batchParameter();
         return responseData;
     }

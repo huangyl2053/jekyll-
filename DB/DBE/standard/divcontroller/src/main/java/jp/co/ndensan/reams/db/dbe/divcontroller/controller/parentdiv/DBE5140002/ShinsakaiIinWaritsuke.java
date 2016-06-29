@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.ShinsakaiIinWaritsukeValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiiinJohoManager;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -47,8 +47,8 @@ public class ShinsakaiIinWaritsuke {
      * コンストラクタです。
      */
     public ShinsakaiIinWaritsuke() {
-        開催番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class);
-        開催年月日 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催年月日, RString.class);
+        開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        開催年月日 = ViewStateHolder.get(ViewStateKeys.開催年月日, RString.class);
         kaisaiYoteiJohomanager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
         iinJohomanager = ShinsakaiiinJohoManager.createInstance();
     }

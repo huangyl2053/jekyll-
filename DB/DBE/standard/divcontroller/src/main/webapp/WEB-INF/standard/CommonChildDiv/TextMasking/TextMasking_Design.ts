@@ -8,6 +8,14 @@ module DBE {
 
         export class Events {
 
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
+            public static onClick_btnHozon(): string {
+                return "onClick_btnHozon";
+            }
+
         }
 
         export class Controls {

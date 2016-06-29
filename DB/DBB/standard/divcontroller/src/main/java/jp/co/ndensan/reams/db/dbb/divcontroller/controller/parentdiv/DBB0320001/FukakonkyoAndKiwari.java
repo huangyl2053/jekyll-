@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
@@ -129,7 +129,7 @@ public class FukakonkyoAndKiwari {
      */
     private FukaShokaiKey createFukaShokaiKey(Fuka model) {
         FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
 
         return key;
     }

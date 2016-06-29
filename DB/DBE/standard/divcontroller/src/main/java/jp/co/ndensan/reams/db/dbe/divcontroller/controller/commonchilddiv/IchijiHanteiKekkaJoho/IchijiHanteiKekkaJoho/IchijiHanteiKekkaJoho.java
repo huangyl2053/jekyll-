@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.Ichij
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJohoHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -71,7 +71,7 @@ public class IchijiHanteiKekkaJoho {
 
             if (ModeType.SHOKAI_MODE.equals(modeType)) {
                 RString 一次判定結果 = div.getTxtIchijiHanteiKekka().getValue();
-                ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果, 一次判定結果);
+                ViewStateHolder.put(ViewStateKeys.一次判定結果, 一次判定結果);
             } else if (ModeType.ADD_MODE.equals(modeType)) {
                 set一次判定結果情報(shinseishoKanriNo, div);
             }
@@ -84,7 +84,7 @@ public class IchijiHanteiKekkaJoho {
         jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho result
                 = getHandler(div).呼び出し元画面への戻り値(shinseishoKanriNo);
         if (result != null) {
-            ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果情報, result);
+            ViewStateHolder.put(ViewStateKeys.一次判定結果情報, result);
         }
 
     }

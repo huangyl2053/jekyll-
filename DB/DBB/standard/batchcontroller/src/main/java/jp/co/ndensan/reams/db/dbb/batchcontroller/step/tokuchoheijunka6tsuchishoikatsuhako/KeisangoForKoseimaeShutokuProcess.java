@@ -25,11 +25,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KeisangoForKoseimaeShutokuProcess extends BatchProcessBase<DbTKeisangoJohoTempTableEntity> {
 
     /**
-     * OutputParameter用キー systemTime
+     * OutputParameter用キー keisangoList
      */
     public static final RString KEISANGO;
 
-    private OutputParameter<Object> keisangoList;
+    private OutputParameter<List<DbTKeisangoJohoTempTableEntity>> keisangoList;
     List<DbTKeisangoJohoTempTableEntity> 計算後List;
 
     FukaJohoShutokuProcessParameter parameter;
@@ -62,7 +62,7 @@ public class KeisangoForKoseimaeShutokuProcess extends BatchProcessBase<DbTKeisa
 
     @Override
     protected void afterExecute() {
-        keisangoList.setValue(keisangoList);
+        keisangoList.setValue(計算後List);
     }
 
 }

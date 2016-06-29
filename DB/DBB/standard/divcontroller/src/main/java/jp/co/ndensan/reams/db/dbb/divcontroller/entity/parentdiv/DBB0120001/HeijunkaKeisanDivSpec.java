@@ -21,7 +21,7 @@ public enum HeijunkaKeisanDivSpec implements IPredicate<HeijunkaKeisanDiv> {
                  */
                 @Override
                 public boolean apply(HeijunkaKeisanDiv div) {
-                    return div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue() != null;
+                    return !div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue().isEmpty();
                 }
             }
 

@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.code.KaigoTatokuT
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -89,20 +89,20 @@ public class TaJushochiTokureishaKanriHandler {
         if (適用情報 != null && !適用情報.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
             if (住所地特例Model.get住所地特例List() != null && !住所地特例Model.get住所地特例List().isEmpty()) {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
+                ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
             } else {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(new ArrayList()));
             }
             if (住所地特例Model.get施設入退所Lsit() != null && !住所地特例Model.get施設入退所Lsit().isEmpty()) {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(住所地特例Model.get施設入退所Lsit()));
+                ViewStateHolder.put(ViewStateKeys.保険施設入退所, Models.create(住所地特例Model.get施設入退所Lsit()));
             } else {
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(new ArrayList()));
+                ViewStateHolder.put(ViewStateKeys.保険施設入退所, Models.create(new ArrayList()));
             }
             set一覧の設定(適用情報);
             最新適用情報 = 適用情報.get(0);
         } else {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.保険施設入退所, Models.create(new ArrayList()));
         }
         switch (div.getMode_DisplayMode()) {
             case Shokai:
@@ -256,9 +256,9 @@ public class TaJushochiTokureishaKanriHandler {
      */
     public void onClick_BtnKakunin(dgJushochiTokureiRireki_Row rireki_Row, RString 親画面状態) {
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他住所地特例Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.保険施設入退所, Models.class);
 
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getTajushochiTokureiInput().getHiddenInputShikibetsuCode());
@@ -438,8 +438,8 @@ public class TaJushochiTokureishaKanriHandler {
         clear他市町村住所地特例情報入力エリア();
         div.getBtnKakunin().setDisabled(true);
         div.getBtnTorikeshi().setDisabled(true);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, 他住所地特例Model);
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, 保険施設入退所Model);
+        ViewStateHolder.put(ViewStateKeys.他住所地特例, 他住所地特例Model);
+        ViewStateHolder.put(ViewStateKeys.保険施設入退所, 保険施設入退所Model);
     }
 
     /**
@@ -450,9 +450,9 @@ public class TaJushochiTokureishaKanriHandler {
     public void saveTaJushochiTokurei(ShikibetsuCode 識別コード) {
         List<dgJushochiTokureiRireki_Row> rowList = div.getDgJushochiTokureiRireki().getDataSource();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他住所地特例Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 保険施設入退所Model
-                = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.他住所地特例者管理_保険施設入退所, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.保険施設入退所, Models.class);
         for (dgJushochiTokureiRireki_Row row : rowList) {
             FlexibleDate 異動日 = new FlexibleDate(row.getIdoYMD());
             if (row.getRowState() == null || RowState.Unchanged.equals(row.getRowState())) {
@@ -816,6 +816,10 @@ public class TaJushochiTokureishaKanriHandler {
         if (更新前データ.get適用受付年月日() != null && !更新前データ.get適用受付年月日().isEmpty()) {
             編集Builder.set適用受付年月日(更新前データ.get適用受付年月日());
         }
+        if (row.getKaijoTodokedeYMD() != null && row.getKaijoTodokedeYMD().getValue() != null) {
+            編集Builder.set解除届出年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()));
+            編集Builder.set解除受付年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()));
+        }
         return 編集Builder
                 .set異動事由コード(row.getKaijoJiyu())
                 .set市町村コード(new LasdecCode(row.getShichosonCode()))
@@ -824,8 +828,6 @@ public class TaJushochiTokureishaKanriHandler {
                 .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
                 .set他市町村住所地特例解除事由コード(row.getKaijoJiyu())
                 .set解除年月日(new FlexibleDate(row.getKaijoYMD().getValue().toDateString()))
-                .set解除届出年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
-                .set解除受付年月日(new FlexibleDate(row.getKaijoTodokedeYMD().getValue().toDateString()))
                 .set論理削除フラグ(false)
                 .build();
     }

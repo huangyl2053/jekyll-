@@ -428,7 +428,7 @@ public class NonyuTsuchishoCVSMultiCoverEditor implements INonyuTsuchishoCVSMult
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
             if (item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計() != null) {
-                source.kaisanMeisaishoTokuchoGokei = new RString(item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計().toString());
+                source.kaisanMeisaishoTokuchoGokeiGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get特別徴収額合計().toString());
             }
             source.keisanMeisaishoKikanKaishi = item.get編集後本算定通知書共通情報().get更正後().get期間_自();
             if (item.get編集後本算定通知書共通情報().get更正後().get普通徴収額合計() != null) {

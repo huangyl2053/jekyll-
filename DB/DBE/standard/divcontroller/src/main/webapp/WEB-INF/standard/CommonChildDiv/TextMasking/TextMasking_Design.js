@@ -4,6 +4,13 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
+
+            Events.onClick_btnHozon = function () {
+                return "onClick_btnHozon";
+            };
             return Events;
         })();
         TextMasking.Events = Events;

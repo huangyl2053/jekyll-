@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSak
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
@@ -32,12 +32,12 @@ import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIk
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -57,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -124,6 +123,11 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(帳票発行, false);
+        LockingKey 排他キー
+                = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            return ResponseData.of(div).addValidationMessages(createValidationHandler(div).排他チェック()).respond();
+        }
         createHandler(div).load();
         div.getIraiprint().getTxtkigenymd().setValue(RDate.getNowDate());
         div.getTxtShujiiIkensahoSakuseiIraiDay().setValue(RDate.getNowDate());
@@ -179,8 +183,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 = Models.create(manager.get主治医意見書作成依頼情報(param).records());
         Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
                 = Models.create(manager.get要介護認定申請情報(param).records());
-        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
-        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, 要介護認定申請情報);
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
         return ResponseData.of(div).respond();
     }
 
@@ -231,27 +235,20 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHozon(ShujiiIkenshoSakuseiIraiDiv div) {
-        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).
                 equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            LockingKey 排他キー
-                    = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
-            if (!RealInitialLocker.tryGetLock(排他キー)) {
-                return ResponseData.of(div).addValidationMessages(validationHandler.排他チェック()).respond();
-            }
             toHozon(div);
             onClick_btnSearch(div);
-            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 発行押下のチェック処理を行います。
+     * 被保険者変更処理を行います。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -274,18 +271,8 @@ public class ShujiiIkenshoSakuseiIrai {
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).
-                equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-
-            LockingKey 排他キー
-                    = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
-            if (!RealInitialLocker.tryGetLock(排他キー)) {
-                return ResponseData.of(div).addValidationMessages(createValidationHandler(div).排他チェック()).respond();
-            }
         }
         return ResponseData.of(div).respond();
     }
@@ -297,14 +284,11 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<SourceDataCollection> onClick_btnHakkou(ShujiiIkenshoSakuseiIraiDiv div) {
-        LockingKey 排他キー
-                = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
-        RealInitialLocker.release(排他キー);
         return response;
     }
 
@@ -316,6 +300,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHakkouKanryo(ShujiiIkenshoSakuseiIraiDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            RealInitialLocker.release(new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))));
             return ResponseData.of(div).addMessage((UrInformationMessages.正常終了.getMessage().replace(依頼書印刷処理.toString()))).respond();
         }
         return ResponseData.of(div).respond();
@@ -331,9 +316,9 @@ public class ShujiiIkenshoSakuseiIrai {
 
     private void toHozon(ShujiiIkenshoSakuseiIraiDiv div) {
         Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_要介護認定申請情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
@@ -418,7 +403,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private void printData(ShujiiIkenshoSakuseiIraiDiv div, ReportManager reportManager) {
 
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         主治医意見書作成依頼情報ItemList = new ArrayList<>();
         主治医意見書作成依頼一覧表ItemList = new ArrayList<>();
@@ -427,6 +412,7 @@ public class ShujiiIkenshoSakuseiIrai {
         介護保険指定医依頼兼主治医意見書提出意見書ItemList = new ArrayList<>();
         主治医意見書記入用紙List = new ArrayList<>();
         主治医意見書記入用紙OCRList = new ArrayList<>();
+        List<ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報List = new ArrayList<>();
 
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
@@ -446,12 +432,14 @@ public class ShujiiIkenshoSakuseiIrai {
                 } else if (div.getIraiprint().getTxtkigenymd().getValue() != null) {
                     builder.set主治医意見書作成期限年月日(new FlexibleDate(div.getIraiprint().getTxtkigenymd().getValue().toDateString()));
                 }
-                ikenshoIraiJoho = builder.build();
-                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+                主治医意見書作成依頼情報.add(builder.build());
             }
             createChoHyoData(div, row);
         }
         toPrint(reportManager);
+        for (ShujiiIkenshoIraiJoho ikenshoIraiJoho : 主治医意見書作成依頼情報List) {
+            manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+        }
     }
 
     private RString getEditedYubinNo(RString yubinNo) {
@@ -528,7 +516,7 @@ public class ShujiiIkenshoSakuseiIrai {
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null) {
             iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
             if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
                 iraishoItem.setBirthGengoShowa(星);
                 iraishoItem.setBirthGengoTaisho(星);
@@ -565,7 +553,6 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
-
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
@@ -587,7 +574,7 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setListIchiranhyo_6(row.getJusho());
         item.setListIchiranhyo_7(row.getBirthYMD().getValue() == null ? RString.EMPTY
                 : row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         item.setListIchiranhyo_8(row.getSeibetsu());
         item.setListIchiranhyo_9(get主治医意見書作成期限年月日(row));
         item.setTsuchibun1(ReportUtil.get通知文(
@@ -610,7 +597,7 @@ public class ShujiiIkenshoSakuseiIrai {
         business.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null) {
-            business.setBirthYY(birthYMD.getYear().wareki().getEra());
+            business.setBirthYY(birthYMD.getYear().toDateString());
             business.setBirthMM(new RString(String.valueOf(birthYMD.getMonthValue())));
             business.setBirthDD(new RString(String.valueOf(birthYMD.getDayValue())));
             if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
@@ -673,8 +660,12 @@ public class ShujiiIkenshoSakuseiIrai {
         RString tempP_継続在宅金額 = IkenshoSakuseiRyo.在宅継続.get名称();
         RString tempP_継続施設金額 = IkenshoSakuseiRyo.施設継続.get名称();
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
+        item.setShinkiZaitakuKingaku(tempP_新規在宅金額);
+        item.setShinkiShisetsuKingaku(tempP_新規施設金額);
+        item.setKeizokuZaitakuKingaku(tempP_継続在宅金額);
+        item.setKeizokuShisetsuKingaku(tempP_継続施設金額);
         item.setGengo(RDate.getNowDate().toDateString());
-        item.setHihokenshaName(row.getHokensha());
+        item.setAtesakiHokenshaName(row.getHokensha());
         item.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
         item.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
         item.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));
@@ -687,9 +678,11 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
         item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         item.setHihokenshaName(row.getHihokennshaShimei());
+        item.setSeikyuIryokikanTel(row.getIryoKikanTelNo());
+        item.setSeikyuIryokikanJusho(row.getJusho());
         if (row.getBirthYMD().getValue() != null) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         }
         item.setSeibetsu(row.getSeibetsu());
         if (!row.getShisetsuNyushoFlag()) {
@@ -697,34 +690,50 @@ public class ShujiiIkenshoSakuseiIrai {
         } else {
             item.setShubetsuShisetsu(意見書作成料_種別);
         }
-        if (RString.isNullOrEmpty(row.getIraiKubun())) {
+        if (new RString(ShujiiIkenshoIraiKubun.初回.name()).equals(row.getIraiKubun())) {
             item.setShubetsuShinki(意見書作成料_種別);
         } else {
             item.setShubetsuKeizoku(意見書作成料_種別);
         }
         if (!row.getShisetsuNyushoFlag()) {
-            if (ShujiiIkenshoIraiKubun.初回.getCode().equals(row.getIraiKubun())) {
+            if (new RString(ShujiiIkenshoIraiKubun.初回.name()).equals(row.getIraiKubun())) {
                 item.setIkenshoSakuseiRyo1(tempP_新規在宅金額.substring(数字_0, 数字_1));
                 item.setIkenshoSakuseiRyo2(tempP_新規在宅金額.substring(数字_1, 数字_2));
                 item.setIkenshoSakuseiRyo3(tempP_新規在宅金額.substring(数字_2, 数字_3));
                 item.setIkenshoSakuseiRyo4(tempP_新規在宅金額.substring(数字_3));
-            } else if (ShujiiIkenshoIraiKubun.再依頼.getCode().equals(row.getIraiKubun())) {
+                item.setSeikyugakuIkenshoSakuseiRyo1(tempP_新規在宅金額.substring(数字_0, 数字_1));
+                item.setSeikyugakuIkenshoSakuseiRyo2(tempP_新規在宅金額.substring(数字_1, 数字_2));
+                item.setSeikyugakuIkenshoSakuseiRyo3(tempP_新規在宅金額.substring(数字_2, 数字_3));
+                item.setSeikyugakuIkenshoSakuseiRyo4(tempP_新規在宅金額.substring(数字_3));
+            } else if (new RString(ShujiiIkenshoIraiKubun.再依頼.name()).equals(row.getIraiKubun())) {
                 item.setIkenshoSakuseiRyo1(tempP_継続在宅金額.substring(数字_0, 数字_1));
                 item.setIkenshoSakuseiRyo2(tempP_継続在宅金額.substring(数字_1, 数字_2));
                 item.setIkenshoSakuseiRyo3(tempP_継続在宅金額.substring(数字_2, 数字_3));
                 item.setIkenshoSakuseiRyo4(tempP_継続在宅金額.substring(数字_3));
+                item.setSeikyugakuIkenshoSakuseiRyo1(tempP_継続在宅金額.substring(数字_0, 数字_1));
+                item.setSeikyugakuIkenshoSakuseiRyo2(tempP_継続在宅金額.substring(数字_1, 数字_2));
+                item.setSeikyugakuIkenshoSakuseiRyo3(tempP_継続在宅金額.substring(数字_2, 数字_3));
+                item.setSeikyugakuIkenshoSakuseiRyo4(tempP_継続在宅金額.substring(数字_3));
             }
         } else {
-            if (ShujiiIkenshoIraiKubun.初回.getCode().equals(row.getIraiKubun())) {
+            if (new RString(ShujiiIkenshoIraiKubun.初回.name()).equals(row.getIraiKubun())) {
                 item.setIkenshoSakuseiRyo1(tempP_新規施設金額.substring(数字_0, 数字_1));
                 item.setIkenshoSakuseiRyo2(tempP_新規施設金額.substring(数字_1, 数字_2));
                 item.setIkenshoSakuseiRyo3(tempP_新規施設金額.substring(数字_2, 数字_3));
                 item.setIkenshoSakuseiRyo4(tempP_新規施設金額.substring(数字_3));
-            } else if (ShujiiIkenshoIraiKubun.再依頼.getCode().equals(row.getIraiKubun())) {
+                item.setSeikyugakuIkenshoSakuseiRyo1(tempP_新規施設金額.substring(数字_0, 数字_1));
+                item.setSeikyugakuIkenshoSakuseiRyo2(tempP_新規施設金額.substring(数字_1, 数字_2));
+                item.setSeikyugakuIkenshoSakuseiRyo3(tempP_新規施設金額.substring(数字_2, 数字_3));
+                item.setSeikyugakuIkenshoSakuseiRyo4(tempP_新規施設金額.substring(数字_3));
+            } else if (new RString(ShujiiIkenshoIraiKubun.再依頼.name()).equals(row.getIraiKubun())) {
                 item.setIkenshoSakuseiRyo1(tempP_継続施設金額.substring(数字_0, 数字_1));
                 item.setIkenshoSakuseiRyo2(tempP_継続施設金額.substring(数字_1, 数字_2));
                 item.setIkenshoSakuseiRyo3(tempP_継続施設金額.substring(数字_2, 数字_3));
                 item.setIkenshoSakuseiRyo4(tempP_継続施設金額.substring(数字_3));
+                item.setSeikyugakuIkenshoSakuseiRyo1(tempP_継続施設金額.substring(数字_0, 数字_1));
+                item.setSeikyugakuIkenshoSakuseiRyo2(tempP_継続施設金額.substring(数字_1, 数字_2));
+                item.setSeikyugakuIkenshoSakuseiRyo3(tempP_継続施設金額.substring(数字_2, 数字_3));
+                item.setSeikyugakuIkenshoSakuseiRyo4(tempP_継続施設金額.substring(数字_3));
             }
         }
         return item;
@@ -746,6 +755,9 @@ public class ShujiiIkenshoSakuseiIrai {
         RString 通知文定型文
                 = ReportUtil.get通知文(
                         SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1).get(数字_1);
+        if (RString.isNullOrEmpty(通知文定型文)) {
+            通知文定型文 = RString.EMPTY;
+        }
         通知文定型文 = 通知文定型文.padRight(RString.HALF_SPACE, 数字_17);
         item.setTsuchibun1(通知文定型文.substring(数字_0, 数字_1));
         item.setTsuchibun2(通知文定型文.substring(数字_1));
@@ -785,7 +797,7 @@ public class ShujiiIkenshoSakuseiIrai {
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
             if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
                 item.setBirthGengoShowa(星);
                 item.setBirthGengoTaisho(星);
@@ -834,27 +846,27 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     private void toPrint(ReportManager reportManager) {
-        ShujiiIkenshoSakuseiIraiReportOutputService outputService = new ShujiiIkenshoSakuseiIraiReportOutputService(reportManager);
+        ShujiiIkenshoSakuseiIraiReportOutputService outputService = ShujiiIkenshoSakuseiIraiReportOutputService.createInstance();
         if (!主治医意見書作成依頼情報ItemList.isEmpty()) {
-            outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList);
+            outputService.print主治医意見書作成依頼情報(主治医意見書作成依頼情報ItemList, reportManager);
         }
         if (!主治医意見書作成依頼一覧表ItemList.isEmpty()) {
-            outputService.print主治医意見書作成依頼一覧表(主治医意見書作成依頼一覧表ItemList);
+            outputService.print主治医意見書作成依頼一覧表(主治医意見書作成依頼一覧表ItemList, reportManager);
         }
         if (!主治医意見書作成料請求書ItemList.isEmpty()) {
-            outputService.print主治医意見書作成料請求書(主治医意見書作成料請求書ItemList);
+            outputService.print主治医意見書作成料請求書(主治医意見書作成料請求書ItemList, reportManager);
         }
         if (!介護保険診断命令書ItemList.isEmpty()) {
-            outputService.print介護保険診断命令書(介護保険診断命令書ItemList);
+            outputService.print介護保険診断命令書(介護保険診断命令書ItemList, reportManager);
         }
         if (!介護保険指定医依頼兼主治医意見書提出意見書ItemList.isEmpty()) {
-            outputService.print介護保険指定医依頼兼主治医意見書提出意見書(介護保険指定医依頼兼主治医意見書提出意見書ItemList);
+            outputService.print介護保険指定医依頼兼主治医意見書提出意見書(介護保険指定医依頼兼主治医意見書提出意見書ItemList, reportManager);
         }
         if (!主治医意見書記入用紙List.isEmpty()) {
-            outputService.print主治医意見書記入用紙(主治医意見書記入用紙List);
+            outputService.print主治医意見書記入用紙(主治医意見書記入用紙List, reportManager);
         }
         if (!主治医意見書記入用紙OCRList.isEmpty()) {
-            outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList);
+            outputService.print主治医意見書記入用紙OCR(主治医意見書記入用紙OCRList, reportManager);
         }
     }
 

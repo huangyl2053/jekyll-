@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KeizokuHihokenshaKubunUpdateProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
-    private static final RString TABLE_NAME = new RString("DbT2002FukaZennendoTemp");
+    private static final RString TABLE_NAME = new RString("DbT2002FukaTemp");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako."
             + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select継続の被保険者区分TempTableEntity");
@@ -39,8 +39,7 @@ public class KeizokuHihokenshaKubunUpdateProcess extends BatchProcessBase<DbT200
 
     @Override
     protected void createWriter() {
-        batchEntityCreatedWriter = new BatchEntityCreatedTempTableWriter<>(TABLE_NAME,
-                DbT2002FukaTempTableEntity.class);
+        batchEntityCreatedWriter = new BatchEntityCreatedTempTableWriter<>(TABLE_NAME, DbT2002FukaTempTableEntity.class);
     }
 
     @Override

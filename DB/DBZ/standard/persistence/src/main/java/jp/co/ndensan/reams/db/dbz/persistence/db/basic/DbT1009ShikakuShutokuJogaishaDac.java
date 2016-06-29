@@ -59,6 +59,25 @@ public class DbT1009ShikakuShutokuJogaishaDac implements ISaveable<DbT1009Shikak
     }
 
     /**
+     * 識別コードで資格取得除外者を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return List<DbT1009ShikakuShutokuJogaishaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1009ShikakuShutokuJogaishaEntity> selectBy識別コード(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1009ShikakuShutokuJogaisha.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toList(DbT1009ShikakuShutokuJogaishaEntity.class);
+    }
+
+    /**
      * 資格取得除外者を全件返します。
      *
      * @return List<DbT1009ShikakuShutokuJogaishaEntity>

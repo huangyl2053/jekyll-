@@ -4,8 +4,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.KenHokokuShiryoSakuseiCSVEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.SinsakaiHanteiJyokyoHeaderEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<SinsakaiHanteiJyokyoHeaderEntity> {
+public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<CsvKenHokokuShiryoSakuseiHeaderEntity> {
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getCsvKenHokokuShiryoSakuseiHeader");
@@ -77,7 +77,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<SinsakaiH
     }
 
     @Override
-    protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
+    protected void process(CsvKenHokokuShiryoSakuseiHeaderEntity current) {
         List<CsvKenHokokuShiryoEntity> 県報告用資料 = get県報告用資料情報(current);
         writer非該当(県報告用資料);
         writer要支援1(県報告用資料);
@@ -95,7 +95,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<SinsakaiH
         manager.spool(eucFilename);
     }
 
-    private List<CsvKenHokokuShiryoEntity> get県報告用資料情報(SinsakaiHanteiJyokyoHeaderEntity current) {
+    private List<CsvKenHokokuShiryoEntity> get県報告用資料情報(CsvKenHokokuShiryoSakuseiHeaderEntity current) {
         CsvKenHokokuShiryoSakuseiMyBatisParameter batisParameter = paramter.toCsvKenHokokuShiryoSakuseiMyBatisParameter();
         batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());

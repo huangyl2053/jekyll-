@@ -123,8 +123,9 @@ public class ShikakuSeigoseiCheckJohoManager {
             HihokenshaDaicho 資格の情報 = new HihokenshaDaicho(現在の資格の情報.get被保険者番号(),
                     現在の資格の情報.get異動日(), add枝番(現在の資格の情報.get枝番()));
             dbt1001manager.save被保険者台帳管理(set資格の情報(現在の資格の情報, 資格の情報));
+        } else {
+            dbt1001manager.save被保険者台帳管理(修正後の資格の情報);
         }
-        dbt1001manager.save被保険者台帳管理(修正後の資格の情報);
         dbt1014manager.save整合性チェック(整合性情報.deleted());
     }
 

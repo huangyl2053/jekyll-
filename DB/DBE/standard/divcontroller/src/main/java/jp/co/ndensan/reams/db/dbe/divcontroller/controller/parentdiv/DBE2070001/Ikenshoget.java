@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2070001.Ike
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2070001.IkenshogetValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -178,8 +178,8 @@ public class Ikenshoget {
                 主治医意見書入手一覧データの複数行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, div.getCcdTaskList().getCheckbox().get(0).getChosaIraiKubun());
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, div.getCcdTaskList().getCheckbox().get(0).getChosaIraiKubun());
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.主治医意見書入手へ遷移する).respond();
         }

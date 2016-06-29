@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

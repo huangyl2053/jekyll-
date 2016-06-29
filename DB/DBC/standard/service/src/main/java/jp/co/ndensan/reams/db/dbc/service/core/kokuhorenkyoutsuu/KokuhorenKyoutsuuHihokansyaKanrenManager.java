@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,15 +18,18 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -102,10 +104,12 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         }
         if (!hokenshaNoSet.isEmpty()) {
             for (HokenshaNo hokenshaNo : hokenshaNoSet) {
-                List<GappeiCityJyoho> gcJohoList = new ArrayList<>();
-                // 870あり 方法の変数が不合です
-//                List<GappeiCityJyoho> gcJohoList = finder.getGappeijohokensaku(hokenshaNo);
-                if (null != gcJohoList && !gcJohoList.isEmpty()) {
+                GappeiJyohoSpecificParameter parameter
+                        = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(LasdecCode.EMPTY, hokenshaNo);
+                SearchResult<GappeiCityJyoho> gcJohoResult
+                        = finder.getGappeijohokensaku(RString.EMPTY, parameter, GyomuBunrui.介護事務);
+                if (null != gcJohoResult && null != gcJohoResult.records() && !gcJohoResult.records().isEmpty()) {
+                    List<GappeiCityJyoho> gcJohoList = gcJohoResult.records();
                     mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, gcJohoList.get(0).get旧市町村コード());
                     do新被保険者番号の登録(変換基準日);
                 }

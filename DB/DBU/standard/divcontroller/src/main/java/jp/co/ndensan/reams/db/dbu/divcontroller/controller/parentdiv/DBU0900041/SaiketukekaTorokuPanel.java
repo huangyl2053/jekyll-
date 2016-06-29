@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041.Sai
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900041.SaiketukekaTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;

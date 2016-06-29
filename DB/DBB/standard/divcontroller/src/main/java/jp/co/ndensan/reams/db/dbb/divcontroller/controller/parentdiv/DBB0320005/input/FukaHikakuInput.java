@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 
 /**
  * 賦課比較のインプットです。

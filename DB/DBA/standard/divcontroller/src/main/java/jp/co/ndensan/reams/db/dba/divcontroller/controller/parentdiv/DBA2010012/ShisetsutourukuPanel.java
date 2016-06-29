@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.DBA2
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010012.ShisetsutourukuPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010012.ShisetsutourukuPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJigyoshaShisetsuKanriManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -71,7 +71,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData<ShisetsutourukuPanel>
      */
     public ResponseData<ShisetsutourukuPanelDiv> onLoad(ShisetsutourukuPanelDiv div) {
-        RString 介護事業者_状態 = ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class);
+        RString 介護事業者_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (介護事業者_状態 == null || 追加.equals(介護事業者_状態)) {
             getHandler(div).追加_状態();
             return ResponseData.of(div).setState(DBA2010012StateName.追加状態);
@@ -118,7 +118,7 @@ public class ShisetsutourukuPanel {
      * @return ResponseData
      */
     public ResponseData<ShisetsutourukuPanelDiv> onClick_HoZonn(ShisetsutourukuPanelDiv div) {
-        if (ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class) == null || 追加.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
+        if (ViewStateHolder.get(ViewStateKeys.状態, RString.class) == null || 追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -129,7 +129,7 @@ public class ShisetsutourukuPanel {
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -140,7 +140,7 @@ public class ShisetsutourukuPanel {
                 return ResponseData.of(div).setState(DBA2010012StateName.完了状態);
             }
         }
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.介護事業者_状態, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
@@ -221,7 +221,7 @@ public class ShisetsutourukuPanel {
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の修正処理(ShisetsutourukuPanelDiv div) {
         有効期間合理性チェック(div);
         KaigoJogaiTokureiTaishoShisetsu 旧事業者情報
-                = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
+                = ViewStateHolder.get(ViewStateKeys.サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
         KaigoJogaiTokureiTaishoShisetsu 事業者情報;
         if (旧事業者情報.get有効開始年月日().equals(div.getTxtShisetsuYukoKaishiYMD().getValue())) {
             事業者情報 = 旧事業者情報;
@@ -260,7 +260,7 @@ public class ShisetsutourukuPanel {
 
     private ResponseData<ShisetsutourukuPanelDiv> get事業者情報の削除処理(ShisetsutourukuPanelDiv div) {
         KaigoJogaiTokureiTaishoShisetsu 事業者情報
-                = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
+                = ViewStateHolder.get(ViewStateKeys.サービス情報, KaigoJogaiTokureiTaishoShisetsu.class);
         事業者情報.toEntity().setState(EntityDataState.Deleted);
         事業者情報 = 事業者情報.deleted();
         manager.saveOrDelete(事業者情報);
@@ -272,7 +272,7 @@ public class ShisetsutourukuPanel {
     }
 
     private void 有効期間合理性チェック(ShisetsutourukuPanelDiv div) {
-        JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
+        JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者情報, JigyoshaMode.class);
         if (mode != null) {
             KaigoJigyoshaParameter paramter = KaigoJigyoshaParameter
                     .createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
@@ -295,9 +295,9 @@ public class ShisetsutourukuPanel {
     }
 
     private KaigoJigyoshaParameter 事業者情報取得paramter() {
-        JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者_介護事業者情報, JigyoshaMode.class);
+        JigyoshaMode mode = ViewStateHolder.get(ViewStateKeys.介護事業者情報, JigyoshaMode.class);
         return KaigoJigyoshaParameter.createParam(mode.getJigyoshaNo() == null ? RString.EMPTY : mode.getJigyoshaNo().value(),
-                ViewStateHolder.get(ViewStateKeys.介護事業者_事業者種別, RString.class),
+                ViewStateHolder.get(ViewStateKeys.事業者種別, RString.class),
                 new FlexibleDate(mode.getYukoKaishiYMD()),
                 FlexibleDate.EMPTY);
     }
@@ -308,8 +308,8 @@ public class ShisetsutourukuPanel {
         if (!事業者登録情報List.isEmpty()) {
             business = 事業者登録情報List.get(0);
         }
-        ViewStateHolder.put(ViewStateKeys.サービス登録_サービス情報, business);
-        ViewStateHolder.put(ViewStateKeys.サービス登録_有効開始日, div.getTxtShisetsuYukoKaishiYMD().getValue());
+        ViewStateHolder.put(ViewStateKeys.サービス情報, business);
+        ViewStateHolder.put(ViewStateKeys.有効開始日, div.getTxtShisetsuYukoKaishiYMD().getValue());
         return ResponseData.of(div).respond();
     }
 

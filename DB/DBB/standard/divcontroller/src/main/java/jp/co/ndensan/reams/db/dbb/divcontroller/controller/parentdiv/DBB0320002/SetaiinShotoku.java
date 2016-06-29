@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320002
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.core.viewstate.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName.比較;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.SetaiinShotokuDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -69,7 +69,7 @@ public class SetaiinShotoku {
      */
     public ResponseData<SetaiinShotokuDiv> onClick_Hikaku(SetaiinShotokuDiv div) {
         List<jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku> list = div.getCcdSetaiShotokuIchiran().get世帯員所得Selected();
-        FukaShokaiKey orgKey = ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
+        FukaShokaiKey orgKey = ViewStateHolder.get(ViewStateKeys.賦課照会キー, FukaShokaiKey.class);
         if (!list.isEmpty() && list.size() >= 2) {
             FukaShokaiKey key1 = new FukaShokaiKey(
                     orgKey.get調定年度(), orgKey.get賦課年度(), orgKey.get通知書番号(), 0,
@@ -82,7 +82,7 @@ public class SetaiinShotoku {
                     orgKey.get算定状態(), false, false, new AtenaMeisho(list.get(1).get氏名())
             );
 
-            ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor任意対象比較(key1, key2));
+            ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor任意対象比較(key1, key2));
         }
 
         return ResponseData.of(div).forwardWithEventName(比較).respond();

@@ -30,6 +30,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbService</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>UrzBatchController</artifactId>
+                    <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- DBX -->
         <dependency>
@@ -56,6 +62,10 @@
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBatchController</artifactId>
         </dependency>
     </dependencies>
 

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFu
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.FukaErrorReportViewHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;
@@ -161,7 +161,7 @@ public class FukaErrorReportView {
         createHandler(div).onSelect_dgFukaErrorList();
         Models<FukaErrorListIdentifier, FukaErrorList> models = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧, Models.class);
         dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
-        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧_賦課エラー情報, models.get(
+        ViewStateHolder.put(ViewStateKeys.賦課エラー情報, models.get(
                 new FukaErrorListIdentifier(new SubGyomuCode(row.getSubGyomuCode()),
                         row.getNaibuChohyoId(), new FlexibleYear(row.getFukaNendo().getValue().getYear().toDateString()),
                         new TsuchishoNo(row.getTsuchishoNo()))));
@@ -176,7 +176,7 @@ public class FukaErrorReportView {
      */
     public ResponseData onClick_btnShikakuFuseigo(FukaErrorReportViewDiv div) {
 
-        FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
+        FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
             return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.資格不整合修正).
                     parameter(DBB0020002TransitionEventName.資格不整合修正.getName());
@@ -198,7 +198,7 @@ public class FukaErrorReportView {
      */
     public ResponseData onClick_btnFukaKosei(FukaErrorReportViewDiv div) {
 
-        FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
+        FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
 
             return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.即時賦課更正).
@@ -221,7 +221,7 @@ public class FukaErrorReportView {
      * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onClick_btnMishori(FukaErrorReportViewDiv div) {
-        FukaErrorList errorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
+        FukaErrorList errorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         FukaErrorListService service = FukaErrorListService.createInstance();
         service.saveAs処理済み(errorList);
         createHandler(div).initialize(service.getFukaErrorList(errorList.get内部帳票作成日時()).records());

@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.NokitsukiCollection;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
-import jp.co.ndensan.reams.ur.urc.business.core.zenkizenno.ZenkiZennoKanri;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.authority.AuthorityKind;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -52,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -143,7 +141,8 @@ public class NonyuTsuchiShoJohoFactory {
         }
         List<SeikyuForPrinting> 請求情報リスト = create請求情報(収納科目, this.納期月コレクションマップ.get(調定年度),
                 本算定通知書情報.get地方公共団体().getLasdecCode_().getColumnValue(), 賦課年度, 調定年度, 通知書番号, 識別コード,
-                getOcrPatternOf(本算定通知書情報.get帳票ID()), get普徴期別金額リスト(賦課の情報_更正後), 本算定通知書情報.get普徴納期情報リスト());
+                getOcrPatternOf(本算定通知書情報.get帳票ID()), 賦課の情報_更正後, get普徴期別金額リスト(賦課の情報_更正後),
+                本算定通知書情報.get普徴納期情報リスト());
         NonyuTsuchiShoDataHenshu 納入通知書データ編集 = new NonyuTsuchiShoDataHenshu();
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 = 納入通知書データ編集.create本算定納入通知書情報(
                 本算定通知書情報,
@@ -282,7 +281,7 @@ public class NonyuTsuchiShoJohoFactory {
         }
         List<SeikyuForPrinting> 請求情報リスト = create請求情報(収納科目, this.納期月コレクションマップ.get(調定年度),
                 仮算定通知書情報.get地方公共団体().getLasdecCode_().getColumnValue(), 賦課年度,
-                調定年度, 通知書番号, 識別コード, getOcrPatternOf(仮算定通知書情報.get帳票ID()),
+                調定年度, 通知書番号, 識別コード, getOcrPatternOf(仮算定通知書情報.get帳票ID()), 賦課の情報_更正後,
                 get普徴期別金額リスト(賦課の情報_更正後), 仮算定通知書情報.get普徴納期情報リスト());
         NonyuTsuchiShoDataHenshu 納入通知書データ編集 = new NonyuTsuchiShoDataHenshu();
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = 納入通知書データ編集.create仮算定納入通知書情報(
@@ -307,13 +306,14 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 地方公共団体コード 地方公共団体コード
      * @param 納付書タイプ 納付書タイプ
      * @param 識別コード 識別コード
+     * @param 賦課の情報 賦課の情報
      * @param 普徴期別金額リスト 普徴期別金額リスト
      * @param 普徴納期情報リスト 普徴納期情報リスト
      * @return 請求情報リスト
      */
     public List<SeikyuForPrinting> create請求情報(IShunoKamoku 収納科目, NokitsukiCollection 納期月リスト, RString 地方公共団体コード,
             FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号, ShikibetsuCode 識別コード, OcrPattern 納付書タイプ,
-            List<UniversalPhase> 普徴期別金額リスト, List<NokiJoho> 普徴納期情報リスト) {
+            FukaAtena 賦課の情報, List<UniversalPhase> 普徴期別金額リスト, List<NokiJoho> 普徴納期情報リスト) {
         List<SeikyuForPrinting> 請求情報リスト = new ArrayList<>();
         for (NokiJoho 納期情報 : 普徴納期情報リスト) {
             int 期 = 納期情報.get期月().get期AsInt();
@@ -328,6 +328,16 @@ public class NonyuTsuchiShoJohoFactory {
             builder.setJigyoKubunCode(JigyoKubun.未使用);
             builder.setChoshukenUmu(true);
             builder.setKibetsu(期);
+            FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
+            if (賦課情報 != null) {
+                Long 収納ID = get収納IDBy期(期, 賦課情報);
+                if (null == 収納ID) {
+                    収納ID = Long.MIN_VALUE;
+                }
+                builder.setShunoId(収納ID);
+            } else {
+                builder.setShunoId(Long.MIN_VALUE);
+            }
             ShunoKanri shunoKanri = builder.build();
             ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
             Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
@@ -342,7 +352,7 @@ public class NonyuTsuchiShoJohoFactory {
                     納期情報.get納期().get通知書発行日(), 識別コード, 納期情報.get納期().get納期限(), null,
                     ToriatsukaiKigenCheckKubun.発行日を取扱期限とする, false, RString.EMPTY, false,
                     0, FukusuKibetsuShuyakuKamoku.複数科目を集約しない, FukusuKibetsuShuyakuNendo.年度毎に集約する, 請求明細リスト,
-                    納期情報.get納期().get現年過年区分(), ZenkiZennoKanri.newBuilder().build(), RDate.MAX);
+                    納期情報.get納期().get現年過年区分(), null, null);
             SeikyuManager seikyuManager = new SeikyuManager();
             if (納付書タイプ != null && 編集元情報 != null) {
                 List<SeikyuForPrinting> 請求情報リスト1 = seikyuManager.get印字用請求情報(SubGyomuCode.DBB介護賦課, 納付書タイプ, 編集元情報);
@@ -350,6 +360,39 @@ public class NonyuTsuchiShoJohoFactory {
             }
         }
         return 請求情報リスト;
+    }
+
+    private Long get収納IDBy期(int 期, FukaJoho 賦課情報) {
+        if (期 == 期_1) {
+            return 賦課情報.get収納ID01();
+        } else if (期 == 期_2) {
+            return 賦課情報.get収納ID02();
+        } else if (期 == 期_3) {
+            return 賦課情報.get収納ID03();
+        } else if (期 == 期_4) {
+            return 賦課情報.get収納ID04();
+        } else if (期 == 期_5) {
+            return 賦課情報.get収納ID05();
+        } else if (期 == 期_6) {
+            return 賦課情報.get収納ID06();
+        } else if (期 == 期_7) {
+            return 賦課情報.get収納ID07();
+        } else if (期 == 期_8) {
+            return 賦課情報.get収納ID08();
+        } else if (期 == 期_9) {
+            return 賦課情報.get収納ID09();
+        } else if (期 == 期_10) {
+            return 賦課情報.get収納ID10();
+        } else if (期 == 期_11) {
+            return 賦課情報.get収納ID11();
+        } else if (期 == 期_12) {
+            return 賦課情報.get収納ID12();
+        } else if (期 == 期_13) {
+            return 賦課情報.get収納ID13();
+        } else if (期 == 期_14) {
+            return 賦課情報.get収納ID14();
+        }
+        return null;
     }
 
     private Decimal get金額By期(List<UniversalPhase> 普徴期別金額リスト, int 期) {

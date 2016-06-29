@@ -1,8 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsahanteinohenkojokyo.ShinsahanteinoHenkojokyo;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsahanteinohenkojokyo.ShinsahanteinoHenkojokyoReport;
@@ -22,7 +20,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -33,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -41,13 +38,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiHanteiJyokyoHeaderEntity> {
+public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getShinsahanteinoHenkojokyoHeader");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShinsahanteinoHenkojokyoReportSource.ReportSourceFields.gogitaiName.name()),
-            new RString(ShinsahanteinoHenkojokyoReportSource.ReportSourceFields.shichosonNo.name())));
     private static final RString タイトル = new RString("認定審査会審査判定状況");
     private static final RString JIGYOJYOKYOHOKOKU = new RString("【事業状況報告出力区分】");
     private static final RString JISSIJYOKYOTOKEI = new RString("【実施状況統計出力区分】");
@@ -90,6 +84,8 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
     private static final RString 実施済 = new RString("2");
     private static final RString なし = new RString(0);
     private static final RString 全合議体 = new RString("全合議体");
+    private static final RString 全市町村 = new RString("全市町村");
+    private static final RString 全市町村コード = new RString("000000");
     private ShinsahanteinoHenkojokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
     private ShinsahanteinoHenkojokyo henkojokyo;
@@ -114,57 +110,49 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
     @Override
     protected void createWriter() {
         batchWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE701006.getReportId().value())
-                .addBreak(new BreakerCatalog<ShinsahanteinoHenkojokyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
-    protected void keyBreakProcess(SinsakaiHanteiJyokyoHeaderEntity headerJoho) {
-        if (hasBrek(getBefore(), headerJoho)) {
-            ShinsahanteinoHenkojokyoReport report = new ShinsahanteinoHenkojokyoReport(henkojokyo);
-            report.writeBy(reportSourceWriter);
-            henkojokyo = new ShinsahanteinoHenkojokyo();
+    protected void process(SinsakaiHanteiJyokyoHeaderEntity current) {
+        if (0 != current.getShinsakaiKaisaiNoCount()) {
+            isデータあり = true;
+            setヘッダ情報(current);
+            List<SinsakaiHanteiJyokyoEntity> 更新３ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間3ヶ月);
+            set更新申請３ヶ月(更新３ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新６ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間6ヶ月);
+            set更新申請６ヶ月(更新６ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新１２ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間12ヶ月);
+            set更新申請１２ヶ月(更新１２ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新２４ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間24ヶ月);
+            set更新申請２４ヶ月(更新２４ヶ月結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 更新その他結果情報 = get判定結果情報(current, 更新申請, 有効期間その他);
+            set更新申請その他(更新その他結果情報);
+            set更新申請();
+            List<SinsakaiHanteiJyokyoEntity> 新規３ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間3ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規６ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間6ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規１２ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間12ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規２４ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間24ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 新規その他結果情報 = get判定結果情報(current, 新規申請, 有効期間その他);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更３ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間3ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更６ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間6ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更１２ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間12ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更２４ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間24ヶ月);
+            List<SinsakaiHanteiJyokyoEntity> 区分変更その他結果情報 = get判定結果情報(current, 区分変更申請, 有効期間その他);
+            set新規区分変更エリア(新規３ヶ月結果情報, 新規６ヶ月結果情報, 新規１２ヶ月結果情報, 新規２４ヶ月結果情報, 新規その他結果情報,
+                    区分変更３ヶ月結果情報, 区分変更６ヶ月結果情報, 区分変更１２ヶ月結果情報, 区分変更２４ヶ月結果情報, 区分変更その他結果情報);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要支援);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要介護);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要支援);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要介護);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要支援);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要介護);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要支援);
+            List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要介護);
+            set認定有効期間延長件数(新規区分変更要支援要支援延長件数, 新規区分変更要支援要介護延長件数, 新規区分変更要介護要支援延長件数, 新規区分変更要介護要介護延長件数,
+                    更新申請要支援要支援延長件数, 更新申請要支援要介護延長件数, 更新申請要介護要支援延長件数, 更新申請要介護要介護延長件数);
         }
-    }
-
-    @Override
-    protected void usualProcess(SinsakaiHanteiJyokyoHeaderEntity current) {
-        isデータあり = true;
-        setヘッダ情報(current);
-        List<SinsakaiHanteiJyokyoEntity> 更新３ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間3ヶ月);
-        set更新申請３ヶ月(更新３ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新６ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間6ヶ月);
-        set更新申請６ヶ月(更新６ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新１２ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間12ヶ月);
-        set更新申請１２ヶ月(更新１２ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新２４ヶ月結果情報 = get判定結果情報(current, 更新申請, 有効期間24ヶ月);
-        set更新申請２４ヶ月(更新２４ヶ月結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 更新その他結果情報 = get判定結果情報(current, 更新申請, 有効期間その他);
-        set更新申請その他(更新その他結果情報);
-        set更新申請();
-        List<SinsakaiHanteiJyokyoEntity> 新規３ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間3ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規６ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間6ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規１２ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間12ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規２４ヶ月結果情報 = get判定結果情報(current, 新規申請, 有効期間24ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 新規その他結果情報 = get判定結果情報(current, 新規申請, 有効期間その他);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更３ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間3ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更６ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間6ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更１２ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間12ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更２４ヶ月結果情報 = get判定結果情報(current, 区分変更申請, 有効期間24ヶ月);
-        List<SinsakaiHanteiJyokyoEntity> 区分変更その他結果情報 = get判定結果情報(current, 区分変更申請, 有効期間その他);
-        set新規区分変更エリア(新規３ヶ月結果情報, 新規６ヶ月結果情報, 新規１２ヶ月結果情報, 新規２４ヶ月結果情報, 新規その他結果情報,
-                区分変更３ヶ月結果情報, 区分変更６ヶ月結果情報, 区分変更１２ヶ月結果情報, 区分変更２４ヶ月結果情報, 区分変更その他結果情報);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要支援);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要介護);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要支援);
-        List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要介護);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要支援);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要介護);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要支援);
-        List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要介護);
-        set認定有効期間延長件数(新規区分変更要支援要支援延長件数, 新規区分変更要支援要介護延長件数, 新規区分変更要介護要支援延長件数, 新規区分変更要介護要介護延長件数,
-                更新申請要支援要支援延長件数, 更新申請要支援要介護延長件数, 更新申請要介護要支援延長件数, 更新申請要介護要介護延長件数);
     }
 
     @Override
@@ -176,20 +164,11 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
         outputJokenhyo();
     }
 
-    private boolean hasBrek(SinsakaiHanteiJyokyoHeaderEntity before, SinsakaiHanteiJyokyoHeaderEntity current) {
-        if (paramter.isEmptyGogitaiNo()) {
-            return !before.getShichosonCode().equals(current.getShichosonCode());
-        }
-        return !(before.getGogitaiNo() == current.getGogitaiNo()
-                && before.getShichosonCode().equals(current.getShichosonCode()));
-    }
-
     private List<SinsakaiHanteiJyokyoEntity> get判定結果情報(
             SinsakaiHanteiJyokyoHeaderEntity current, RString 認定申請区分, int 認定有効期間) {
         ShinsahanteinoHenkojokyoMyBatisParameter batisParameter = paramter.toShinsahanteinoHenkojokyoMyBatisParameter();
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
-        batisParameter.setShichosonCode(current.getShichosonCode());
         batisParameter.setNinteiShinseiKubun(認定申請区分);
         batisParameter.setYukoKikan(認定有効期間);
         return mapper.getShinsahanteinoHenkojokyo(batisParameter);
@@ -198,10 +177,8 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
     private List<SinsakaiHanteiJyokyoEntity> get有効期間延長件数情報(
             SinsakaiHanteiJyokyoHeaderEntity current, RString 認定申請区分, RString 状態変更区分) {
         ShinsahanteinoHenkojokyoMyBatisParameter batisParameter = paramter.toShinsahanteinoHenkojokyoMyBatisParameter();
-        batisParameter.setGogitaiNo(current.getGogitaiNo());
         batisParameter.setTaishoGeppiFrom(current.getShinsakaiKaisaiYMDMin());
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
-        batisParameter.setShichosonCode(current.getShichosonCode());
         batisParameter.setNinteiShinseiKubun(認定申請区分);
         batisParameter.setJyotaiHenkoKubun(状態変更区分);
         batisParameter.setJissiZumi(実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
@@ -210,13 +187,22 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchKeyBreakBase<SinsakaiH
 
     private void setヘッダ情報(SinsakaiHanteiJyokyoHeaderEntity current) {
         henkojokyo.setタイトル(タイトル);
-        henkojokyo.set合議体番号(paramter.isEmptyGogitaiNo() ? RString.EMPTY : new RString(current.getGogitaiNo()));
-        henkojokyo.set合議体名称(paramter.isEmptyGogitaiNo() ? 全合議体 : current.getGogitaiMei());
+        if (paramter.isEmptyGogitaiNo()) {
+            henkojokyo.set合議体名称(全合議体);
+        } else {
+            henkojokyo.set合議体番号(new RString(paramter.getGogitaiNo()));
+            henkojokyo.set合議体名称(paramter.getGogitaiName());
+        }
         henkojokyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
         henkojokyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
         henkojokyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
-        henkojokyo.set市町村コード(current.getShichosonCode().value());
-        henkojokyo.set市町村名(current.getShichosonMeisho());
+        if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
+            henkojokyo.set市町村名(全市町村);
+            henkojokyo.set市町村コード(全市町村コード);
+        } else {
+            henkojokyo.set市町村名(paramter.getShichosonName());
+            henkojokyo.set市町村コード(paramter.getShichosonCode().value());
+        }
         henkojokyo.set発行日時(RDateTime.now());
     }
 

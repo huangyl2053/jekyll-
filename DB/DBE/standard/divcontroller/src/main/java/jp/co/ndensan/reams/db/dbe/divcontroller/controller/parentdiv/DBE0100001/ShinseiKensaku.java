@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -89,7 +89,7 @@ public class ShinseiKensaku {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         List<ShinseiKensakuBusiness> list = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter());
-        ViewStateHolder.put(ViewStateKeys.検索結果_認定申請情報, new ShinseiKensakuInfoBusiness(list));
+        ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(list));
         if (!list.isEmpty()) {
             getHandler(div).setShinseiJohoIchiran(list);
             div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
@@ -125,18 +125,18 @@ public class ShinseiKensaku {
         div.getTxtMaxDisp().setDisabled(false);
         div.getBtnKensaku().setDisabled(false);
         if (MENUID_DBEMN11001.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         } else if (MENUID_DBEMN11003.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         } else if (MENUID_DBEMN14001.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_証記載保険者番号, 証記載保険者番号);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_被保険者番号, 被保険者番号);
+            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定情報提供へ).respond();
         } else if (MENUID_DBEMN32002.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, 申請書管理番号);
-            ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
         } else if (MENUID_DBEMN31005.equals(menuID)) {
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
@@ -165,6 +165,16 @@ public class ShinseiKensaku {
     }
 
     /**
+     * 「選択した帳票を発行する」ボタンのclick後処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onClick_printAfter(ShinseiKensakuDiv div) {
+        return ResponseData.of(div).setState(DBE0100001StateName.完了);
+    }
+
+    /**
      * 「選択した帳票を発行する」ボタンのclick処理です。
      *
      * @param div ShinseiKensakuDiv
@@ -172,7 +182,7 @@ public class ShinseiKensaku {
      */
     public ResponseData<SourceDataCollection> onClick_btnitiranprint(ShinseiKensakuDiv div) {
         List<YokaigoYoshienShinseiIchiranItem> items = new ArrayList<>();
-        ShinseiKensakuInfoBusiness infoBusiness = ViewStateHolder.get(ViewStateKeys.検索結果_認定申請情報, ShinseiKensakuInfoBusiness.class);
+        ShinseiKensakuInfoBusiness infoBusiness = ViewStateHolder.get(ViewStateKeys.認定申請情報, ShinseiKensakuInfoBusiness.class);
         int renban = 1;
         for (ShinseiKensakuBusiness row : infoBusiness.getShinseiKensakuList()) {
             YokaigoYoshienShinseiIchiranItem item = new YokaigoYoshienShinseiIchiranItem();
@@ -198,7 +208,7 @@ public class ShinseiKensaku {
             item.setShujiiName(row.get主治医氏名());
             items.add(item);
         }
-        return ResponseData.of(new YokaigoYoshienShinseiIchiranPrintService().print(items)).setState(DBE0100001StateName.完了);
+        return ResponseData.of(new YokaigoYoshienShinseiIchiranPrintService().print(items)).respond();
     }
 
     private ShinseiKensakuHandler getHandler(ShinseiKensakuDiv div) {

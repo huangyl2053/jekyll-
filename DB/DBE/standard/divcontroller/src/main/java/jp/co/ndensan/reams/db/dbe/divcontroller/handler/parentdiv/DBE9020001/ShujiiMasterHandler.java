@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterDiv;

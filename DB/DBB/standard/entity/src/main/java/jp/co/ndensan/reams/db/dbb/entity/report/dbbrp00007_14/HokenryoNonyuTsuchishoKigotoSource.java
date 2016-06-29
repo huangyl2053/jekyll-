@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 保険料納入通知書（本算定過年度）【期毎タイプ】HokenryoNonyuTsuchishoKigotoSource
  *
- * @reamsid_L DBB-9110-140 liangbc
+ * @reamsid_L DBB-9110-140 wangjie2
  */
 public class HokenryoNonyuTsuchishoKigotoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

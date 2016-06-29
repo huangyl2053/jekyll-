@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.ShinsakaiKekkaTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuManager;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -43,7 +43,7 @@ public class ShinsakaiKekkaToroku {
      * コンストラクタです。
      */
     public ShinsakaiKekkaToroku() {
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_開催番号, new RString("209007"));
+        ViewStateHolder.put(ViewStateKeys.開催番号, new RString("209007"));
         this.manager = ShinsakaiKekkaTorokuManager.createInstance();
         //this.要介護認定結果情報Manager = NinteiShinseiJohoManager.createInstance();
         //this.介護認定審査会開催予定情報manager = new ShinsakaiWariateJohoManager();
@@ -56,18 +56,18 @@ public class ShinsakaiKekkaToroku {
      * @return ResponseData<ShinsakaiKekkaTorokuDiv> 介護認定審査会審査結果登録Div
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onLoad(ShinsakaiKekkaTorokuDiv div) {
-        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催結果登録_開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         getHandler(div).onLoad(headList, iChiRanList);
 
         List<ShinsakaiWariateJoho> yoteiJohoList = manager.get審査会委員一覧検索_業務概念_1(開催番号).records();
         Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
 
         List<NinteiShinseiJoho> shinseiJohoList = manager.get審査会委員一覧検索_業務概念_2(開催番号).records();
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho = Models.create(shinseiJohoList);
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会開催結果登録_要介護認定申請情報, ninteiShinseiJoho);
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
 
         return ResponseData.of(div).respond();
     }

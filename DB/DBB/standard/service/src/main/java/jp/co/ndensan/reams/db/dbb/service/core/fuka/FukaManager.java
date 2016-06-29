@@ -208,10 +208,6 @@ public class FukaManager {
         return new ShunoKey(get収納管理(介護賦課, 科目, 期), 科目, get納期月(科目, 期));
     }
 
-    /**
-     * TODO rshare."UrT0707ChoteiJokyo" NOT NULL。 builder.set調定状況ID builder.set収納処理状況 builder.set合計件数 builder.set合計金額
-     * builder.set調定年月日
-     */
     private Chotei get調定クラス(FlexibleYear 調定年度, Decimal 調定額, RDate 納期限, IShunoKamoku 科目) {
         Chotei.Builder builder = Chotei.newBuilder();
         long id = Saiban.get(SubGyomuCode.CAX収滞公開, new RString(SaibanKeysChotei.調定ID.name())).next();
@@ -221,6 +217,13 @@ public class FukaManager {
         builder.set科目枝番コード(科目.get枝番コード());
         builder.set料金種別コード(new RyokinShubetsuCodeValue(RString.EMPTY));
         builder.set事業区分(JigyoKubun.未使用);
+        // TODO QA#89276 回答待ち。DBはNOT NULL COLUMN ですが、対応する項目は設定しない、DBにINSERTする場合、エラーが発生しました。
+        // rshare."UrT0707ChoteiJokyo" NOT NULL
+        // builder.set調定状況ID
+        // builder.set収納処理状況
+        // builder.set合計件数
+        // builder.set合計金額
+        // builder.set調定年月日
         builder.set収納処理状況(ShunoShoriJokyo.未取込);
         builder.set合計件数(0);
         builder.set合計金額(Decimal.ZERO);

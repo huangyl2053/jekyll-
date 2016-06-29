@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchisho
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,13 +28,9 @@ public class HeijunkaKeisanPageJoho {
     private RString 増額平準化方法;
     private RString 減額平準化方法;
     private RString 帳票グループ;
-    private ReportId 帳票分類ＩＤ;
-    private RString 帳票名;
-    private RString 改頁出力順ID;
     private RString 出力対象指示フラグ;
     private FlexibleDate 発行日;
     private RString 文書番号;
-    private RString 遷移元区分;
     private boolean 一括発行フラグ;
     private List<OutputChohyoIchiran> 出力帳票一覧List;
 

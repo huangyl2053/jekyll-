@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -42,6 +43,7 @@ public class SystemKanriPanelHandler {
     private RString メニューID;
     private static final RString 対象としない = new RString("0");
     private static final RString 対象とする = new RString("1");
+    private static final RString 選択 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -57,6 +59,8 @@ public class SystemKanriPanelHandler {
      *
      */
     public void onload() {
+        List<RString> list選択 = new ArrayList<>();
+        list選択.add(選択);
         div.getSystemKanri().getTxtHokenjaCode().setValue(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         div.getSystemKanri().getTxtHokenjaName().setValue(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称,
@@ -70,7 +74,7 @@ public class SystemKanriPanelHandler {
         RString 最優先地区コード = DbBusinessConfig.get(ConfigNameDBU.保険者情報_最優先地区コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getSystemKanri().getDdlChikuCode().setSelectedKey(最優先地区コード);
         RString 氏名表示方法 = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_氏名表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        div.getSystemKanri().getDdlGaikokujinBirthdayHyoji().setSelectedKey(氏名表示方法);
+        div.getSystemKanri().getDdlGaikokujinHyoji().setSelectedKey(氏名表示方法);
         RString 生年月日表示方法 = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getSystemKanri().getDdlGaikokujinBirthdayHyoji().setSelectedKey(生年月日表示方法);
         div.getSystemKanri().getTxtRojinHokenShichosonNo().setValue(DbBusinessConfig.get(ConfigNameDBU.老人保健情報_市町村番号,
@@ -79,15 +83,16 @@ public class SystemKanriPanelHandler {
         div.getSystemKanri().getSearchCondition().getDdlCursorPosition().setSelectedKey(カーソル位置);
         RString 前方一致条件有無 = DbBusinessConfig.get(ConfigNameDBU.検索画面設定_検索オプション_前方一致条件有無,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        div.getSystemKanri().getSearchCondition().getRadForwardMatch().setSelectedKey(前方一致条件有無);
+        if (対象としない.equals(前方一致条件有無) || 対象とする.equals(前方一致条件有無)) {
+            div.getSystemKanri().getSearchCondition().getRadForwardMatch().setSelectedKey(前方一致条件有無);
+        }
         RString 被保険者対象有無 = DbBusinessConfig.get(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         switch (被保険者対象有無.toString()) {
             case "0":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().setIsAllSelectable(false);
                 break;
             case "1":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().setIsAllSelectable(true);
+                div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().setSelectedItemsByKey(list選択);
                 break;
             default:
                 break;
@@ -96,10 +101,9 @@ public class SystemKanriPanelHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         switch (要介護認定者対象有無.toString()) {
             case "0":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionYokaigoNinteisha().setIsAllSelectable(false);
                 break;
             case "1":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionYokaigoNinteisha().setIsAllSelectable(true);
+                div.getSystemKanri().getSearchCondition().getChkSearchOptionYokaigoNinteisha().setSelectedItemsByKey(list選択);
                 break;
             default:
                 break;
@@ -108,10 +112,9 @@ public class SystemKanriPanelHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         switch (住所地特例者対象有無.toString()) {
             case "0":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionJushochiTokureisha().setIsAllSelectable(false);
                 break;
             case "1":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionJushochiTokureisha().setIsAllSelectable(true);
+                div.getSystemKanri().getSearchCondition().getChkSearchOptionJushochiTokureisha().setSelectedItemsByKey(list選択);
                 break;
             default:
                 break;
@@ -120,10 +123,9 @@ public class SystemKanriPanelHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         switch (他市町村住所地特例者対象有無.toString()) {
             case "0":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionTajushochiTokureisha().setIsAllSelectable(false);
                 break;
             case "1":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionTajushochiTokureisha().setIsAllSelectable(true);
+                div.getSystemKanri().getSearchCondition().getChkSearchOptionTajushochiTokureisha().setSelectedItemsByKey(list選択);
                 break;
             default:
                 break;
@@ -132,10 +134,9 @@ public class SystemKanriPanelHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         switch (適用除外者対象有無.toString()) {
             case "0":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionTekiyoJogaisha().setIsAllSelectable(false);
                 break;
             case "1":
-                div.getSystemKanri().getSearchCondition().getChkSearchOptionTekiyoJogaisha().setIsAllSelectable(true);
+                div.getSystemKanri().getSearchCondition().getChkSearchOptionTekiyoJogaisha().setSelectedItemsByKey(list選択);
                 break;
             default:
                 break;
@@ -149,6 +150,8 @@ public class SystemKanriPanelHandler {
      * DDLの値を取得です。
      */
     public void set_DDL() {
+        div.getSystemKanri().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         div.setHdnTxtDonyuKeitaiCode(new RString(shichosonSecurityJoho.get導入形態コード().toString()));
         div.getSystemKanri().getDdlChikuCode().getDataSource().clear();
@@ -210,6 +213,7 @@ public class SystemKanriPanelHandler {
         setDB_更新(ConfigNameDBU.老人保健情報_市町村番号, div.getSystemKanri().getTxtRojinHokenShichosonNo().getValue());
         setDB_更新(ConfigNameDBU.検索画面設定_カーソル位置, div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getSelectedKey());
         setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_前方一致条件有無, div.getSystemKanri().getSearchCondition().getRadForwardMatch().getSelectedKey());
+        setDB_更新(ConfigNameDBU.検索制御_最大取得件数, new RString(div.getSystemKanri().getSearchCondition().getTxtMaxGetNumber().getValue().toString()));
         //TODO 介護宛先住所編集（共有子Div）が保存.
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().isAllSelected()) {
             setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, 対象とする);

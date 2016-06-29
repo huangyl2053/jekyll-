@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJo
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -272,9 +272,9 @@ public class ShikakuSoshitsuIdoTotalHandler {
      *
      */
     public void setパラメータ() {
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 状態_照会);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
         dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
                 getCcdShikakuTokusoRireki().getDataGridSelectItem();
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
@@ -298,7 +298,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
         joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
         joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
         joho.setState(row.getState());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, joho);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, joho);
     }
 
     private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード) {

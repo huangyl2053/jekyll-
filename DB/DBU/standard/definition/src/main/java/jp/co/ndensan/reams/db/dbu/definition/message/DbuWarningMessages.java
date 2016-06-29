@@ -13,12 +13,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBUの警告メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBB-9999-023 wangchao
  */
 public enum DbuWarningMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    年報集計を再処理(1, "指定した報告年月の年報集計は既に行われています。処理を継続する場合には、年報集計を再処理して下さい。 ");
 
     private final Message message;
 

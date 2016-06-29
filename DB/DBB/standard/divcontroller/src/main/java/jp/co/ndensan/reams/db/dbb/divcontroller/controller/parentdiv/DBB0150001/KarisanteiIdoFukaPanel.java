@@ -38,7 +38,6 @@ public class KarisanteiIdoFukaPanel {
      * @return ResponseData
      */
     public ResponseData<KarisanteiIdoFukaPanelDiv> onLoad(KarisanteiIdoFukaPanelDiv div) {
-
         if (getHandler(div).is基準日時()) {
             throw new ApplicationException(DbbErrorMessages.異動賦課の確定処理が未処理.getMessage());
         }

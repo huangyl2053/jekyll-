@@ -12,18 +12,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hokenjuryoininharaitoriatsuka
 import jp.co.ndensan.reams.db.dbc.entity.report.jyuryoitakuatukaijigyoshatorokutsuchishosource.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.toiawasesaki.Toiawasesaki;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.toiawasesaki.IToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.toiawasesaki._ToiawasesakiSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.toiawasesaki.IToiawasesakiFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.toiawasesaki.ToiawasesakiFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
@@ -79,7 +74,7 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
      * @param 発行日 FlexibleDate
      * @param reportManager ReportManager
      */
-    public void print(
+    private void print(
             HokenJuryoIninHaraiToriatsukaiEntity target,
             FlexibleDate 発行日, ReportManager reportManager) {
         JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty property = new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoProperty();
@@ -96,25 +91,22 @@ public class JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService {
             RString 通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100032.getReportId(),
                     KamokuCode.EMPTY, パターン番号, 項目番号_2, FlexibleDate.getNowDate());
 
-            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-            Ninshosha 認証者 = NinshoshaFinderFactory.createInstance().
-                    get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), 発行日);
-            NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
-                    認証者, 地方公共団体, assembler.getImageFolderPath(), new RDate(発行日.toString())).buildSource();
+            ReportSourceWriter<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+
+            NinshoshaSource sourceBuilder = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC100032.getReportId(), 発行日, NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
 
             IToiawasesakiFinder iToiawasesakiFinder = ToiawasesakiFinderFactory.createInstance();
             Toiawasesaki toiawase = iToiawasesakiFinder.
                     get問合せ先(GyomuCode.DB介護保険, ReportIdDBC.DBC100032.getReportId(),
                             BushoCode.EMPTY, RDate.getNowDate());
             IToiawasesakiSourceBuilder 問合せ先 = _ToiawasesakiSourceBuilderFactory.createInstance(toiawase);
-
             ToiawasesakiSource toiawasesakiSource = null;
             if (問合せ先 != null) {
                 toiawasesakiSource = 問合せ先.buildSource();
             }
 
-            ReportSourceWriter<JyuryoItakuAtukaiJigyoshaTorokuTsuchishoSource> reportSourceWriter
-                    = new ReportSourceWriter(assembler);
             new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoReport(target, sourceBuilder, toiawasesakiSource,
                     文書番号, 通知書定型文１, 通知書定型文2).writeBy(reportSourceWriter);
         }

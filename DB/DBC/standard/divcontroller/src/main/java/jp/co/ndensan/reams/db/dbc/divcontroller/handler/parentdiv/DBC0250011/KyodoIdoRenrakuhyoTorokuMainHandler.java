@@ -120,12 +120,12 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                 被保険者番号,
                 履歴番号);
         異動基本送付Entity = 異動基本送付Entity.createBuilderForEdit()
-                .set被保険者氏名(entity.get基本情報Entity().getHiHokenshaName())
-                .set郵便番号(entity.get基本情報Entity().getYubinNo())
-                .set住所カナ(entity.get基本情報Entity().getDdressKana())
-                .set住所(entity.get基本情報Entity().getAddress())
-                .set電話番号(entity.get基本情報Entity().getTelNo())
-                .set帳票出力順序コード(entity.get基本情報Entity().getChohyoOutputJunjyoCode()).build();
+                .set被保険者氏名(entity.get基本情報Entity().get被保険者氏名())
+                .set郵便番号(entity.get基本情報Entity().get郵便番号())
+                .set住所カナ(entity.get基本情報Entity().get住所カナ())
+                .set住所(entity.get基本情報Entity().get住所())
+                .set電話番号(entity.get基本情報Entity().get電話番号())
+                .set帳票出力順序コード(entity.get基本情報Entity().get帳票出力順序コード()).build();
         List<RString> チェック状態 = getチェックボックス状態();
         if (!チェック状態.isEmpty()) {
             異動基本送付Entity = 異動基本送付Entity.createBuilderForEdit().set訂正連絡票フラグ(true).build();
@@ -147,8 +147,8 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
                 被保険者番号,
                 履歴番号);
         異動償還送付Entity = 異動償還送付Entity.createBuilderForEdit()
-                .set保険給付支払一時差止開始年月日(entity.get償還情報Entity().getHokenKyufuIchijiSashitomeKaishiYMD())
-                .set保険給付支払一時差止終了年月日(entity.get償還情報Entity().getHokenKyufuIchijiSashitomeShuryoYMD())
+                .set保険給付支払一時差止開始年月日(entity.get償還情報Entity().get保険給付支払一時差止開始年月日())
+                .set保険給付支払一時差止終了年月日(entity.get償還情報Entity().get保険給付支払一時差止終了年月日())
                 .set保険給付支払一時差止区分コード(null)
                 .set保険給付支払一時差止金額(null)
                 .build();
@@ -216,8 +216,8 @@ public class KyodoIdoRenrakuhyoTorokuMainHandler {
         // TODO
         KyodoshoriyoJukyushaIdoRenrakuhyoParam entity = new KyodoshoriyoJukyushaIdoRenrakuhyoParam();
         div.getKanryoMessage().setMessage(完了メッセージメイン,
-                entity.get基本情報Entity().getHiHokenshaNo().getColumnValue(),
-                entity.get基本情報Entity().getHiHokenshaName(),
+                entity.get基本情報Entity().get被保険者番号().getColumnValue(),
+                entity.get基本情報Entity().get被保険者氏名(),
                 true);
     }
 

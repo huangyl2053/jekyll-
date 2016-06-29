@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 //import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;

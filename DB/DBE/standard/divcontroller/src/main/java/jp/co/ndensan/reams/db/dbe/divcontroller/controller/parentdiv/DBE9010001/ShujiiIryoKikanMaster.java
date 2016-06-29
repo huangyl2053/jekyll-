@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9010001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.DBE9010001StateName;
@@ -19,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.Kos
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.ShujiiIryoKikanJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
@@ -301,7 +301,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onbtnOkClose(ShujiiIryoKikanMasterDiv div) {
         KoseiShiChosonSelectorModel model = ViewStateHolder
-                .get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+                .get(ViewStateKeys.引き継ぎデータ, KoseiShiChosonSelectorModel.class);
         div.getShujiiJohoInput().getTxtShichosonmei().setValue(model.get市町村名称());
         div.getShujiiJohoInput().getTxtShichoson().setValue(model.get市町村コード());
         return ResponseData.of(div).respond();

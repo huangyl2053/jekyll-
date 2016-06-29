@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210003
 
 import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.DBE2210003TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -364,6 +364,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFirstTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(1, div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -377,6 +381,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtSecondTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(2, div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -390,6 +398,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtThirdTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(INT3, div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -403,6 +415,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFourthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(INT4, div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -416,6 +432,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFifthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(INT5, div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -440,9 +460,10 @@ public class GaikyoTokkiYichiranNyuroku {
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
     }
 
     /**

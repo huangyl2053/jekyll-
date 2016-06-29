@@ -7,13 +7,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai.PublicationShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -35,6 +39,9 @@ public class PublicationShiryoShinsakaiHandler {
     private final RString 委員用出力条件_予備判定記入表 = new RString("key2");
     private final RString 出力スタイル_A4 = new RString("1");
     private final PublicationShiryoShinsakaiDiv div;
+    private static final int INT_4 = 4;
+    private static final int INT_0 = 0;
+    private static final int INT_2 = 2;
 
     /**
      * コンストラクタです。
@@ -47,8 +54,25 @@ public class PublicationShiryoShinsakaiHandler {
 
     /**
      * 介護認定審査会資料作成の初期化を設定します。
+     *
+     * @param 開催予定情報 開催予定情報
      */
-    public void onLoad() {
+    public void onLoad(KaisaiYoteiJohoBusiness 開催予定情報) {
+        if (開催予定情報 != null) {
+            div.getTxtShinsakaiYoteiDate().setValue(to日期転換(開催予定情報.get予定年月日()));
+            div.getTxtShinsakaiKaijo().setValue(to転換(開催予定情報.get開催場所名称()));
+            if (!RString.isNullOrEmpty(開催予定情報.get開始予定時刻())) {
+                RString 開始予定時刻 = 開催予定情報.get開始予定時刻().padZeroToLeft(INT_4);
+                div.getTxtShinsakaiKaishiYoteiTime().setValue(RTime.of(Integer.parseInt(開始予定時刻.substring(INT_0, INT_2).toString()),
+                        Integer.parseInt(開始予定時刻.substring(INT_2).toString())));
+            }
+            div.getTxtShiryoSakusei().setValue(IsShiryoSakuseiZumi.toValue(開催予定情報.is資料作成済フラグ()).get名称());
+            div.getTxtGogitaiNo().setValue(new RString(開催予定情報.get合議体番号()));
+            div.getTxtGogitaiName().setValue(to転換(開催予定情報.get合議体名称()));
+            div.getTxtYoteiTeiin().setValue(new Decimal(開催予定情報.get予定定員()));
+            div.getTxtWariateNinzu().setValue(new Decimal(開催予定情報.get割当済み人数()));
+            div.getTxtOperationDate().setValue(to日期転換(開催予定情報.get資料作成年月日()));
+        }
         出力条件の設定();
         委員の審査会資料設定();
         List<RString> 事務 = new ArrayList<>();
@@ -182,9 +206,9 @@ public class PublicationShiryoShinsakaiHandler {
     /**
      * バッチパラメータを設定します。
      *
-     * @return PublicationShiryoShinsakaiBatchParameter
+     * @return ShiryoShinsakaiBatchParameter
      */
-    public PublicationShiryoShinsakaiBatchParameter onClick_btnKogakuParamSave() {
+    public ShiryoShinsakaiBatchParameter onClick_btnKogakuParamSave() {
 
         RString 事務_審査会開催通知書フラグ = new RString("0");
         RString 事務_特記事項フラグ = new RString("0");
@@ -262,7 +286,7 @@ public class PublicationShiryoShinsakaiHandler {
                 委員_予備判定記入表フラグ);
     }
 
-    private PublicationShiryoShinsakaiBatchParameter set項目(
+    private ShiryoShinsakaiBatchParameter set項目(
             RString 事務_審査会開催通知書フラグ,
             RString 事務_特記事項フラグ,
             RString 事務_一次判定結果票フラグ,
@@ -277,7 +301,7 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員_特記事項_一次判定フラグ,
             RString 委員_主治医意見書フラグ,
             RString 委員_予備判定記入表フラグ) {
-        return new PublicationShiryoShinsakaiBatchParameter(
+        return new ShiryoShinsakaiBatchParameter(
                 div.getTxtShinsakaiKaisaiNo().getValue(),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
@@ -445,5 +469,19 @@ public class PublicationShiryoShinsakaiHandler {
         委員_審査会資料.add(出力条件_主治医意見書);
         div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
         div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
+    }
+
+    private RString to転換(RString 項目) {
+        if (!RString.isNullOrEmpty(項目)) {
+            return 項目;
+        }
+        return RString.EMPTY;
+    }
+
+    private FlexibleDate to日期転換(FlexibleDate 項目) {
+        if (項目 != null && !項目.isEmpty()) {
+            return 項目;
+        }
+        return FlexibleDate.EMPTY;
     }
 }

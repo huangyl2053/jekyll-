@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.tokubetuchosyutaisyosyatoroku.Tok
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;

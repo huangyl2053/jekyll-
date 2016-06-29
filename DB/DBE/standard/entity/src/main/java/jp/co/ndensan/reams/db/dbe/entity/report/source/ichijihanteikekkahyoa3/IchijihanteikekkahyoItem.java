@@ -44,6 +44,7 @@ public class IchijihanteikekkahyoItem {
     private FlexibleDate 今回認定調査実施年月日;
     private FlexibleDate 今回認定審査年月日;
     private RString 一次判定結果;
+    private RString 認定調査実施場所名称;
     private RString 特定疾病名;
     private RString 要介護認定等基準時間;
     private RString 要介護認定等基準時間_食事;

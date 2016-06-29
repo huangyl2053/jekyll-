@@ -463,6 +463,7 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).addMessage(message).respond();
         } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || 入力内容変更なし) {
+            前排他キーの解除();
             set画面遷移パラメータ(div);
             return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.概況特記入力を表示).respond();
         }
@@ -498,6 +499,7 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || 入力内容変更なし) {
+            前排他キーの解除();
             set画面遷移パラメータ(div);
             return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.特記事項一覧を表示).respond();
         }
@@ -585,6 +587,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onclick_btnBackToTaishoshaIchiran(NinnteiChousaKekkaTouroku1Div div) {
+        前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.検索結果一覧に戻る).respond();
     }
 
@@ -595,6 +598,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onclick_btnComplete(NinnteiChousaKekkaTouroku1Div div) {
+        前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.処理終了).respond();
     }
 

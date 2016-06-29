@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakutokusor
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

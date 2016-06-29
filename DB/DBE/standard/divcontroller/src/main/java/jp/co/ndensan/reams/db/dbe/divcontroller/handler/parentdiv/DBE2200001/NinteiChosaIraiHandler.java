@@ -726,10 +726,6 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-            RStringBuilder builder = new RStringBuilder();
-            builder.append("*");
-            builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
-            builder.append("#");
             ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
                     new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
                     new ChosainCode(row.getNinteiChosainCode()));
@@ -756,7 +752,6 @@ public class NinteiChosaIraiHandler {
                     get名称付与(),
                     getカスタマーバーコード(調査員情報),
                     RString.EMPTY,
-                    builder.toRString(),
                     ConfigNameDBE.認定調査依頼書.get名称(),
                     通知文.get(1),
                     被保険者番号リスト.get(0),

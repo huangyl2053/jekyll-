@@ -33,14 +33,7 @@ public class ShutsuryokuKiKohoFactory {
     private final RString 文字列_前期 = new RString("前期");
     private final RString 文字列_中期 = new RString("中期");
     private final RString 文字列_後期 = new RString("後期");
-    private FlexibleYear 調定年度;
-
-    /**
-     * コンストラクタです。
-     */
-    ShutsuryokuKiKohoFactory() {
-        this.調定年度 = InstanceProvider.create(FlexibleYear.class);
-    }
+    private final FlexibleYear 調定年度;
 
     /**
      * 単体テスト用のコンストラクタです。
@@ -48,16 +41,18 @@ public class ShutsuryokuKiKohoFactory {
      * @param 調定年度 FlexibleYear
      */
     public ShutsuryokuKiKohoFactory(FlexibleYear 調定年度) {
-        this.調定年度 = 調定年度;
+        this.調定年度 = 調定年度 != null ? 調定年度 : new FlexibleYear(DbBusinessConfig.get(
+                ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShutsuryokuKiKohoFactory}のインスタンスを返します。
      *
+     * @param 調定年度 FlexibleYear
      * @return {@link InstanceProvider#create}にて生成した{@link ShutsuryokuKiKohoFactory}のインスタンス
      */
-    public static ShutsuryokuKiKohoFactory createInstance() {
-        return InstanceProvider.create(ShutsuryokuKiKohoFactory.class);
+    public static ShutsuryokuKiKohoFactory createInstance(FlexibleYear 調定年度) {
+        return InstanceProvider.create(ShutsuryokuKiKohoFactory.class, 調定年度);
     }
 
     /**
@@ -68,10 +63,6 @@ public class ShutsuryokuKiKohoFactory {
      * @return リスト出力期候補
      */
     public List<ShutsuryokuKiKoho> create出力期候補(boolean 期毎タイプフラグ, boolean is仮算定期間) {
-        if (調定年度 == null) {
-            調定年度 = new FlexibleYear(DbBusinessConfig.get(
-                    ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        }
         List<ShutsuryokuKiKoho> 出力期候補リスト = new ArrayList<>();
         if (is仮算定期間) {
             get仮算定納入通知書制御情報(出力期候補リスト, 期毎タイプフラグ);

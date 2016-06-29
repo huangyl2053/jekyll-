@@ -28,6 +28,10 @@ public class ShoriDateKanriManager {
 
     private final DbT7022ShoriDateKanriDac dac;
     private static final RString 処理名メッセージ = new RString("処理名");
+    private static final RString 年度メッセージ = new RString("年度");
+    private static final RString 市町村コードメッセージ = new RString("市町村コード");
+    private static final RString 処理枝番メッセージ = new RString("処理枝番");
+    private static final RString 年度内連番メッセージ = new RString("年度内連番");
 
     /**
      * コンストラクタです。
@@ -204,6 +208,30 @@ public class ShoriDateKanriManager {
             return null;
         }
         entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
+     * @param 市町村コード LasdecCode
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 年度 FlexibleYear
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get基年月日(LasdecCode 市町村コード,
+            RString 処理名, RString 処理枝番, FlexibleYear 年度) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードメッセージ.toString()));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage(処理枝番メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+
+        DbT7022ShoriDateKanriEntity entity = dac.select基準日時ByKey(市町村コード, 処理名, 処理枝番, 年度);
+        if (entity == null) {
+            return null;
+        }
         return new ShoriDateKanri(entity);
     }
 }

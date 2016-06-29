@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -31,9 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -89,13 +86,12 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
                         .replace(広域保険者でないため.toString()).evaluate());
             }
         }
-
         RString メニューID = ResponseHolder.getMenuID();
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime, SubGyomuCode.DBB介護賦課);
         RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime, SubGyomuCode.DBB介護賦課);
         if (所得情報抽出_連携異動.equals(メニューID) && !調定年度.equals(所得年度)) {
-            throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage().replace(当初所得引出.toString())
-                    .replace(所得引出.toString()).evaluate());
+            throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage()
+                    .replace(当初所得引出.toString(), 所得引出.toString()).evaluate());
         }
     }
 
@@ -103,17 +99,26 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
      * 市町村一覧情報の取得し,初期化設定のメソッドです
      *
      * @param currentTime RDate
-     * @param shichosonJohoList List<ShichosonJohoResult>
+     * @return SearchResult<KoikiZenShichosonJoho>
      */
-    public void shichosonIchiran(RDate currentTime, List<ShichosonJohoResult> shichosonJohoList) {
-        RString ログインユーザID = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+    public SearchResult<KoikiZenShichosonJoho> shichosonIchiran(RDate currentTime) {
+        RString ログインユーザID = ControlDataHolder.getUserId();
         List<KoikiZenShichosonJoho> list = new ArrayList<>();
         if (ログインユーザID != null) {
             List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
-            if (市町村識別ID != null) {
+            if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
                 handler市町村識別ID(市町村識別ID, list);
             }
         }
+        return SearchResult.of(list, 0, false);
+    }
+
+    /**
+     * 市町村情報Entity．処理区分チェックメソッドです
+     *
+     * @param shichosonJohoList List<ShichosonJohoResult>
+     */
+    public void check処理区分(List<ShichosonJohoResult> shichosonJohoList) {
         for (ShichosonJohoResult entity : shichosonJohoList) {
             if (処理区分_3.equals(entity.getEntity().get処理区分())) {
                 throw new ApplicationException(DbzErrorMessages.処理日付管理マスタなし.getMessage()
@@ -122,6 +127,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         }
         ShotokuJohoChushutsuKoikiPanelDiv koikiPanelDiv = div.getShotokuJohoChushutsuKoikiPanel();
         List<dgShichosonIchiran_Row> rowList = new ArrayList<>();
+        boolean flag = true;
         for (ShichosonJohoResult result : shichosonJohoList) {
             dgShichosonIchiran_Row row = new dgShichosonIchiran_Row();
             if (result.getEntity().get市町村コード() != null) {
@@ -141,6 +147,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
                 row.getTxtShoriState().setValue(処理状態);
                 if (処理待ち.equals(処理状態)) {
                     row.setSelectable(true);
+                    flag = false;
                 } else {
                     row.setSelectable(false);
                 }
@@ -149,24 +156,11 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         }
         DataGrid<dgShichosonIchiran_Row> grid = koikiPanelDiv.getDgShichosonIchiran();
         grid.setDataSource(rowList);
-        if (grid.getSelectedItems().isEmpty()) {
+        if (flag) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
         }
-    }
-
-    /**
-     * 共有ファイル化したCSVファイルのチェックを行う。
-     *
-     * @param files FileData[]
-     * @return ValidationMessageControlPairs
-     */
-    @SuppressWarnings("checkstyle:illegaltoken")
-    public ValidationMessageControlPairs checkFilesStates(FileData[] files) {
-        ShotokuJohoChushutsuKoikiBatchParameterValidationHandler validation
-                = new ShotokuJohoChushutsuKoikiBatchParameterValidationHandler(div);
-        return validation.必須チェックValidate(files);
     }
 
     /**
@@ -187,23 +181,21 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         return batchparam;
     }
 
-    private void handler市町村識別ID(List<AuthorityItem> 市町村識別ID,
+    private List<KoikiZenShichosonJoho> handler市町村識別ID(List<AuthorityItem> 市町村識別ID,
             List<KoikiZenShichosonJoho> list) {
-        if (!市町村識別ID_00.equals(new RString(市町村識別ID.get(0).toString()))) {
+        if (!市町村識別ID_00.equals(new RString(市町村識別ID.get(0).getItemId().toString()))) {
             throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
                     .replace(広域職員でないため.toString()).evaluate());
-        }
-        SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJohoList = KoikiShichosonJohoFinder
-                .createInstance().getGenShichosonJoho();
-        list.addAll(koikiZenShichosonJohoList.records());
-        if (市町村識別ID_00.equals(new RString(市町村識別ID.get(0).toString()))) {
-            koikiZenShichosonJohoList = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
+        } else {
+            SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJohoList = KoikiShichosonJohoFinder
+                    .createInstance().getGenShichosonJoho();
+            list.addAll(koikiZenShichosonJohoList.records());
             for (KoikiZenShichosonJoho entity : koikiZenShichosonJohoList.records()) {
-                if (entity.get所得引出方法() != なし) {
+                if (!entity.get所得引出方法().equals(なし)) {
                     list.remove(entity);
                 }
-
             }
+            return list;
         }
     }
 

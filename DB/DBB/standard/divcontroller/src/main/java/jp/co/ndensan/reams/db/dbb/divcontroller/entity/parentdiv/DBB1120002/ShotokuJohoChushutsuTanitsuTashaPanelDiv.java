@@ -8,8 +8,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
  * ShotokuJohoChushutsuTanitsuTashaPanel のクラスファイル

@@ -13,12 +13,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 /**
  * DBUの質問メッセージ定義列挙型です。
  *
- * @author N9606 漢那 憲作
+ * @reamsid_L DBE-9999-023 wangchao
  */
 public enum DbuQuestionMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    一括実行確認(1, "?一括処理を実行します。よろしいですか？");
 
     private final Message message;
 

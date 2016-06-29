@@ -140,7 +140,6 @@ public class ShokanKetteiTsuchiShoSealer {
     private RString tsuban2;
     private RString torikeshiShiharaikikan;
     private RString riyuTitle;
-    private RString 増減の理由;
     private RString torikeshiShiharaibasho;
     private RString hihokenshaNo21;
     private RString gyoseiku2;

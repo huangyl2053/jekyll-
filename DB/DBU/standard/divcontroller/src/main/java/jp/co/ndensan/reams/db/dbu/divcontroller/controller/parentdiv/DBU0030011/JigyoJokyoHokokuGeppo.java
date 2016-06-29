@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.S
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.yoshikibetsurenkeijoho.ShukeiYearMouthGetterFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -129,7 +129,7 @@ public class JigyoJokyoHokokuGeppo {
      * @return ResponseData<JigyoJokyoHokokuGeppoDiv>
      */
     public ResponseData<JigyoJokyoHokokuGeppoDiv> onClick_btnShichosonSentaku(JigyoJokyoHokokuGeppoDiv div) {
-        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.引き継ぎデータ, KoseiShiChosonSelectorModel.class);
         if (model != null) {
             div.setShichosonCode(model.get市町村コード());
         }

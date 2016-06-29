@@ -674,7 +674,7 @@ and open the template in the editor.
         SET
         "shisetyuJotaiFlag" = TRUE
         WHERE
-        "hihokenshaNo" = (
+        "hihokenshaNo" IN (
         SELECT DISTINCT 
         DbT4001."hihokenshaNo"
         FROM 
@@ -1845,18 +1845,18 @@ and open the template in the editor.
         Tmp."hihokenshaNo" = DbT3005Kyotaku."hihokenshaNo")DbT3005Joho
         LEFT JOIN
         (SELECT 
-        DbT3006.hihokenshaNo,
+        DbT3006."hihokenshaNo",
         DbT3006."taishoYM",
         DbT3006."rirekiNo",
         DbT3006."tekiyoKaishiYMD",
         DbT3006."itakusakiJigyoshaNo"
         FROM(SELECT
-        hihokenshaNo,
+        "hihokenshaNo",
         "taishoYM",
         "rirekiNo",
         "tekiyoKaishiYMD",
         "itakusakiJigyoshaNo",
-        row_number() over(partition by hihokenshaNo order by "taishoYM" desc,"rirekiNo" desc) as rank_number
+        row_number() over(partition by "hihokenshaNo" order by "taishoYM" desc,"rirekiNo" desc) as rank_number
         FROM
         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei")DbT3006
         WHERE
@@ -1864,7 +1864,7 @@ and open the template in the editor.
         OR rank_number = 2
         OR rank_number = 3)DbT3006Joho
         ON
-        DbT3006Joho.hihokenshaNo = DbT3005Joho."hihokenshaNo"
+        DbT3006Joho."hihokenshaNo" = DbT3005Joho."hihokenshaNo"
         AND DbT3006Joho."taishoYM" = DbT3005Joho."taishoYM"
         AND DbT3006Joho."rirekiNo" = DbT3005Joho."rirekiNo"   
     </select>

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTei
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShiSeiKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiToRoKuBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.NiJiHan
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShiSeiKeTuKeRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.yokaigoninteitasklist.IYokaigoNinteiTaskListMapper;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -47,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @reamsid_L DBE-3000-160 houtianpeng
  */
 public class YokaigoNinteiTaskListFinder {
-    
+
     private final MapperProvider mapperProvider;
 
     /**
@@ -56,7 +57,7 @@ public class YokaigoNinteiTaskListFinder {
     public YokaigoNinteiTaskListFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
-    
+
     /**
      * テスト用コンストラクタです。
      *
@@ -65,7 +66,7 @@ public class YokaigoNinteiTaskListFinder {
     YokaigoNinteiTaskListFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
-    
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンスを返します。
      *
@@ -75,7 +76,7 @@ public class YokaigoNinteiTaskListFinder {
     public static YokaigoNinteiTaskListFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiTaskListFinder.class);
     }
-    
+
     /**
      * 更新対象モードの場合でデータを検索します。
      *
@@ -436,5 +437,22 @@ public class YokaigoNinteiTaskListFinder {
             月例処理List.add(new GeTuReiSyoRiBusiness(entity));
         }
         return SearchResult.of(月例処理List, 0, false);
+    }
+
+    /**
+     * 審査受付モードの場合でデータを検索します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return SearchResult<ShinSaKeTuKeBusiness>
+     */
+    @Transaction
+    public SearchResult<ShinSaKeTuKeBusiness> get審査受付モード(YokaigoNinteiTaskListParameter parameter) {
+        List<ShinSaKeTuKeBusiness> 審査受付List = new ArrayList<>();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKeTuKeRelateEntity> entityList = mapper.get審査受付(parameter);
+        for (ShinSaKeTuKeRelateEntity entity : entityList) {
+            審査受付List.add(new ShinSaKeTuKeBusiness(entity));
+        }
+        return SearchResult.of(審査受付List, 0, false);
     }
 }

@@ -57,14 +57,14 @@
         ON 
             DOTEI."shikibetsuCode" = HIHOKENSHA."shikibetsuCode"								
         INNER JOIN 
-            "rgdb"."DbV2001ChoshuHoho" AS CHOSHUHOHO 
+            "rgdb"."DbT2001ChoshuHoho" AS CHOSHUHOHO 
         ON 
             HIHOKENSHA."hihokenshaNo" = CHOSHUHOHO."hihokenshaNo"
         WHERE								
             CHOSHUHOHO."fukaNendo" = #{処理年度}							
             AND 
             CHOSHUHOHO."rirekiNo" = 
-                (select max(A."rirekiNo") from "rgdb"."DbV2001ChoshuHoho" as A WHERE  CHOSHUHOHO."hihokenshaNo" = A."hihokenshaNo")								
+                (select max(A."rirekiNo") from "rgdb"."DbT2001ChoshuHoho" as A WHERE  CHOSHUHOHO."hihokenshaNo" = A."hihokenshaNo")								
         ORDER BY							
             HIHOKENSHA."hihokenshaNo"
     </select>

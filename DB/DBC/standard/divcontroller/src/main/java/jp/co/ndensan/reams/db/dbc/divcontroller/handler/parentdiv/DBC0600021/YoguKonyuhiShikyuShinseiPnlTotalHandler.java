@@ -379,10 +379,15 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      */
     public void 登録以外前回支払結果情報(SokanbaraiShiharaiKekkaResult soshkere1,
             SokanbaraiShiharaiKekkaResult soshkere2) {
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtZenkaiHiyogakuGokei().setValue(
-                soshkere1.get費用額合計().subtract(soshkere2.get費用額合計()));
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtZenkaiHokenTaishoHiyogakuGokei().setValue(
-                soshkere1.get保険対象費用額().subtract(soshkere2.get保険対象費用額()));
+        if (soshkere1.get費用額合計() != null && soshkere2.get費用額合計() != null) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtZenkaiHiyogakuGokei().setValue(
+                    soshkere1.get費用額合計().subtract(soshkere2.get費用額合計()));
+        }
+        if (soshkere1.get保険対象費用額() != null && soshkere2.get保険対象費用額() != null) {
+            div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().
+                    getTxtZenkaiHokenTaishoHiyogakuGokei().setValue(
+                            soshkere1.get保険対象費用額().subtract(soshkere2.get保険対象費用額()));
+        }
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtZenkaiHokenkyufugakuGokei().setValue(
                 new Decimal(soshkere1.get保険給付額()).subtract(new Decimal(soshkere2.get保険給付額())));
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getPnlSummary().getTxtZenkaiRiyoshaFutangakuGokei().setValue(

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002;
 
+import java.io.File;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
@@ -14,23 +16,21 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 所得情報抽出・連携（単一他社）のHandlerクラスです。
  *
  * @reamsid_L DBB-1690-030 sunhui
  */
-@SuppressWarnings("checkstyle:illegaltoken")
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
 
     private final ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div;
@@ -49,7 +49,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
     private static final RString 所得情報ファイル = new RString("BBKAIGOxxxxxxxx.CSV");
-    private static final RString FORMAT_平 = new RString("平%s");
 
     /**
      * コンストラクタです。
@@ -87,7 +86,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         RString メニューID = ResponseHolder.getMenuID();
         RString config = DbBusinessConfig.get(ConfigNameDBB.所得引出_所得引出方法, currentTime, SubGyomuCode.DBB介護賦課);
         if (所得情報抽出_連携当初.equals(メニューID)) {
-            if (!REAMS以外.equals(config) || !更正なし.equals(config)) {
+            if (!REAMS以外.equals(config) && !更正なし.equals(config)) {
                 throw new ApplicationException(DbzErrorMessages.使用不可.getMessage()
                         .replace(所得引出方法が不正のため.toString()).evaluate());
             }
@@ -101,61 +100,35 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * 所得情報取込処理状態の取得
      *
      * @param currentTime RDate
-     * @param files FileData[]
      */
-    public void initTorikoShori(FileData[] files, RDate currentTime) {
-        if (files[0].getFileName().contains(所得情報ファイル)) {
+    public void initTorikoShori(RDate currentTime) {
+        RString path = new RString(SharedFile.getBasePath() + File.separator);
+        File file = new File(path.toString());
+        if (file.exists() && file.getName().contains(所得情報ファイル)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
         } else {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);
         }
-        RString ログインユーザID = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        RString ログインユーザID = ControlDataHolder.getUserId();
         RString 遷移区分 = null;
-        FlexibleYear 年度 = null;
+        RString 年度 = null;
         if (ログインユーザID != null) {
-            RString 市町村識別ID = new RString(ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID).toString());
+            List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
             RString メニューID = ResponseHolder.getMenuID();
             if (所得情報抽出_連携当初.equals(メニューID)) {
                 遷移区分 = 遷移区分_0;
-                年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
-                        SubGyomuCode.DBB介護賦課));
-                RDate 処理年度 = new RDate(String.format(FORMAT_平.toString(), 年度.toString()));
-                div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(処理年度);
+                年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
+                        SubGyomuCode.DBB介護賦課);
             } else if (所得情報抽出_連携異動.equals(メニューID)) {
                 遷移区分 = 遷移区分_1;
-                年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
-                        SubGyomuCode.DBB介護賦課));
-                RDate 処理年度 = new RDate(String.format(FORMAT_平.toString(), 年度.toString()));
-                div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(処理年度);
+                年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
+                        SubGyomuCode.DBB介護賦課);
             }
-            RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID, 遷移区分, 年度);
-            処理区分Handler(メニューID, 処理区分);
+            if (年度 != null) {
+                RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
+                処理区分Handler(メニューID, 処理区分);
+            }
         }
-    }
-
-    /**
-     * CSVファイルのチェックのメソッドです。
-     *
-     * @param files FileData[]
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs getCheckFile(FileData[] files) {
-        ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
-                = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
-        return validation.必須チェックValidate(files);
-
-    }
-
-    /**
-     * 共有ファイル化したCSVファイルのチェックを行う。
-     *
-     * @param files FileData[]
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs checkFilesStates(FileData[] files) {
-        ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler validation
-                = new ShotokuJohoChushutsuTanitsuTashaBatchParameterValidationHandler(div);
-        return validation.必須チェックValidate(files);
     }
 
     /**
@@ -187,7 +160,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
             }
         } else if (所得情報抽出_連携異動.equals(メニューID) && 処理区分_2.equals(処理区分)) {
             throw new ApplicationException(DbbErrorMessages.処理不可_関連機能未処理済.getMessage()
-                    .replace(当初所得引出.toString()).replace(所得引出.toString()).evaluate());
+                    .replace(当初所得引出.toString(), 所得引出.toString()).evaluate());
         }
     }
 

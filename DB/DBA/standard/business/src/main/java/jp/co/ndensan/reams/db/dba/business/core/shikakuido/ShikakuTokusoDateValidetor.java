@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.shikakuido;
 
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 

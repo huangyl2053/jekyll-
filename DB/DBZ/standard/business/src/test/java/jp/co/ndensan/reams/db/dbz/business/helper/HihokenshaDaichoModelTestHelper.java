@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
 
 /**

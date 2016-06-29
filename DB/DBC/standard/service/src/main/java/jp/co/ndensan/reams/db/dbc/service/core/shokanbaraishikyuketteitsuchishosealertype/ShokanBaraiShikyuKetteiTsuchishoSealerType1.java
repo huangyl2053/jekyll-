@@ -87,6 +87,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     private static final int EIGHT = 8;
     private static final int NINE = 9;
     private static final int TEN = 10;
+    private static final int 文字数_38 = 38;
+    private static final int 文字数_76 = 76;
     private static final int パターン番号_5 = 5;
     private static final RString 帳票制御汎用キー_シーラタイプタイトル１ = new RString("シーラタイプタイトル１");
     private static final RString 帳票制御汎用キー_シーラタイプタイトル２ = new RString("シーラタイプタイトル２");
@@ -325,7 +327,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                         Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         ketteiTsuchiShoSealer.setKekka(ShikyuFushikyuKubun.toValue(business.get支給不支給決定区分()).get名称());
-        ketteiTsuchiShoSealer.set増減の理由(business.get増減理由等());
+        ketteiTsuchiShoSealer = set増減の理由(ketteiTsuchiShoSealer, business.get増減理由等());
         ketteiTsuchiShoSealer.setShiharaiBasho(batchPram.getShiharaiBasho());
         ketteiTsuchiShoSealer.setShiharaiStartYMD(business.get支払期間開始年月日() == null
                 ? RString.EMPTY : business.get支払期間開始年月日().wareki().eraType(
@@ -521,6 +523,20 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             ketteiTsuchiShoSealer.setTaishoYM4(business.get提供年月() == null ? RString.EMPTY : business.get提供年月().wareki().eraType(
                     EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             ketteiTsuchiShoSealer.setShikyuGaku4(nullToZero(business.get支給額()));
+        }
+        return ketteiTsuchiShoSealer;
+    }
+
+    private ShokanKetteiTsuchiShoSealer set増減の理由(ShokanKetteiTsuchiShoSealer ketteiTsuchiShoSealer, RString 増減の理由) {
+        if (RString.isNullOrEmpty(増減の理由) || 増減の理由.length() <= 文字数_38) {
+            ketteiTsuchiShoSealer.setRiyu1(増減の理由);
+        } else if (増減の理由.length() <= 文字数_76) {
+            ketteiTsuchiShoSealer.setRiyu1(増減の理由.substring(ZERO, 文字数_38));
+            ketteiTsuchiShoSealer.setRiyu2(増減の理由.substring(文字数_38));
+        } else {
+            ketteiTsuchiShoSealer.setRiyu1(増減の理由.substring(ZERO, 文字数_38));
+            ketteiTsuchiShoSealer.setRiyu2(増減の理由.substring(文字数_38, 文字数_76));
+            ketteiTsuchiShoSealer.setRiyu3(RString.EMPTY);
         }
         return ketteiTsuchiShoSealer;
     }

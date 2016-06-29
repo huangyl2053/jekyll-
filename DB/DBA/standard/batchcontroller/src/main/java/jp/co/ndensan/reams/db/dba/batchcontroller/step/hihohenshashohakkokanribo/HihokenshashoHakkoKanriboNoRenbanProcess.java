@@ -33,8 +33,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -42,8 +44,10 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -61,7 +65,9 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
     private static final RString 発行管理リスト = new RString("1");
     private static final RString 被保険者証発行 = new RString("介護保険　被保険者証発行管理一覧表");
     private static final RString 資格者証発行 = new RString("介護保険　資格者証発行管理一覧表");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("sakusei"));
+    private static final RString CSV名称_被保険者証発行 = new RString("被保険者証発行管理簿.csv");
+    private static final RString CSV名称_資格者証発行 = new RString("資格者証発行管理簿.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA200004"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
@@ -85,16 +91,17 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
 
     @Override
     protected void process() {
-        // TODO  QA377 AccessLogの実装方式 回復待ち　2016/01/20まで
-        AccessLogger.log(AccessLogType.照会);
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         relateEntityList = new AkasiHakouKanriRelateEntity();
         relateEntityList.setAkasihakoumode(processParameter.getAkasihakoumod());
+        RString csvName = CSV名称_被保険者証発行;
         if (証発行モード_001.equals(processParameter.getAkasihakoumod())) {
             relateEntityList.setChouhouTitle(被保険者証発行);
+            csvName = CSV名称_被保険者証発行;
         } else if (証発行モード_002.equals(processParameter.getAkasihakoumod())) {
             relateEntityList.setChouhouTitle(資格者証発行);
+            csvName = CSV名称_資格者証発行;
         }
         // TODO QA #73393 出力順ID実装方式 回復待ち  2016/01/20まで
         relateEntityList.setSortJun(processParameter.getSyuturyokujunid());
@@ -154,7 +161,7 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
         if (!eucCsvEntityList.isEmpty()) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
-            this.eucFilePath = Path.combinePath(spoolWorkPath, new RString("被保険者証発行管理簿.csv"));
+            this.eucFilePath = Path.combinePath(spoolWorkPath, csvName);
             eucCsvWriter = new EucCsvWriter.InstanceBuilder(this.eucFilePath, EUC_ENTITY_ID).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -162,11 +169,17 @@ public class HihokenshashoHakkoKanriboNoRenbanProcess extends SimpleBatchProcess
                     setNewLine(NewLine.CRLF).
                     hasHeader(relateEntityList.isKoumukumeyifukaflg()).
                     build();
+            List<PersonalData> personalDataList = new ArrayList<>();
             for (HihohenshashoHakoKanriboCsvDataNoRebanSakuseiEntity csvEntity : eucCsvEntityList) {
                 eucCsvWriter.writeLine(csvEntity);
+                ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"),
+                        new RString("被保険者番号"), csvEntity.getHihokenshaNo());
+                PersonalData personalData = PersonalData.of(new ShikibetsuCode(csvEntity.getShikibetsuCode()), expandedInformations);
+                personalDataList.add(personalData);
             }
             eucCsvWriter.close();
-            manager.spool(eucFilePath);
+            AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(eucFilePath, id);
         }
         if (!最新情報リスト.isEmpty()) {
             HihokenshashoHakkoKanriIchiranhyoHeadItem headItem = new HihokenshashoHakkoKanriIchiranhyoHeadItem(

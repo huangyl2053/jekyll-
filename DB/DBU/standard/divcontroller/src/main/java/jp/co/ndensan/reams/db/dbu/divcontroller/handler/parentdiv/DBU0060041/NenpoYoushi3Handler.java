@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataBuilder;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3DetalParameter;
-import jp.co.ndensan.reams.db.dbu.definition.core.viewstate.NenpoYoushi3ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.NenpoYoushi3Div;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -120,7 +120,7 @@ public class NenpoYoushi3Handler {
     public List<JigyoHokokuTokeiData> get修正データ() {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ = ViewStateHolder.
-                get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
+                get(ViewStateKeys.保険料収納状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
         for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
             for (JigyoHokokuTokeiData data : 保険料収納状況データ) {
@@ -135,7 +135,7 @@ public class NenpoYoushi3Handler {
             }
         }
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
-                get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
+                get(ViewStateKeys.保険給付支払状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
         for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
             for (JigyoHokokuTokeiData data : 保険給付支払状況データ) {

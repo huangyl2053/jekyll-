@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashik
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
 //import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 //import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

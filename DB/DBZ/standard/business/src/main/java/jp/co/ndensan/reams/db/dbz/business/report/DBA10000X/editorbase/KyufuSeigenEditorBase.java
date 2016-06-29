@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoCommonEditData;
 import jp.co.ndensan.reams.db.dbz.definition.core.IryoKikanAndJigyoshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

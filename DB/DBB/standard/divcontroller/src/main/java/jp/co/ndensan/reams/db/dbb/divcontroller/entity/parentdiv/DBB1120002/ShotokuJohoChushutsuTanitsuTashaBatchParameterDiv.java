@@ -8,8 +8,13 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.UploadPanel;
 
 /**
  * ShotokuJohoChushutsuTanitsuTashaBatchParameter のクラスファイル
@@ -27,6 +32,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
      */
     @JsonProperty("ShotokuJohoChushutsuTanitsuTashaPanel")
     private ShotokuJohoChushutsuTanitsuTashaPanelDiv ShotokuJohoChushutsuTanitsuTashaPanel;
+    @JsonProperty("hiddenResult")
+    private RString hiddenResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +57,24 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv extends PanelBatc
     @JsonProperty("ShotokuJohoChushutsuTanitsuTashaPanel")
     public void setShotokuJohoChushutsuTanitsuTashaPanel(ShotokuJohoChushutsuTanitsuTashaPanelDiv ShotokuJohoChushutsuTanitsuTashaPanel) {
         this.ShotokuJohoChushutsuTanitsuTashaPanel = ShotokuJohoChushutsuTanitsuTashaPanel;
+    }
+
+    /*
+     * gethiddenResult
+     * @return hiddenResult
+     */
+    @JsonProperty("hiddenResult")
+    public RString getHiddenResult() {
+        return hiddenResult;
+    }
+
+    /*
+     * sethiddenResult
+     * @param hiddenResult hiddenResult
+     */
+    @JsonProperty("hiddenResult")
+    public void setHiddenResult(RString hiddenResult) {
+        this.hiddenResult = hiddenResult;
     }
 
     /*

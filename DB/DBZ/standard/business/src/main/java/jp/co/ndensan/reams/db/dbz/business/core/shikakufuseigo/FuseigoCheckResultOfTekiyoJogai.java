@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo;
 
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakufuseigo.DaichoFuseigoJotai;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 不整合チェック結果（適用除外者）のビジネスクラスです
@@ -23,6 +23,6 @@ public class FuseigoCheckResultOfTekiyoJogai {
     private FuseigoRiyu 不整合理由;
     private IKojin 個人;
     private TekiyoJogaisha 現在の除外の情報;
-    private RString 適用除外者台帳状態;
+    private DaichoFuseigoJotai 適用除外者台帳状態;
     private TekiyoJogaisha 修正後の除外の情報;
 }

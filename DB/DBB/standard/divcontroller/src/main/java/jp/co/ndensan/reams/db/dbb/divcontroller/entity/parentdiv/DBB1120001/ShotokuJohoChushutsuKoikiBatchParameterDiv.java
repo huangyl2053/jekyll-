@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * ShotokuJohoChushutsuKoikiBatchParameter のクラスファイル

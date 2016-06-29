@@ -4,15 +4,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushoch
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.HokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * TajushochiTokureiInput のクラスファイル
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TajushochiTokureiInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -343,7 +346,7 @@ public class TajushochiTokureiInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHihoNo(TextBoxCode txtHihoNo) {
+    public void setTxtHihoNo(TextBoxCode txtHihoNo) {
         this.getPanSotimotoJyoho().setTxtHihoNo(txtHihoNo);
     }
 

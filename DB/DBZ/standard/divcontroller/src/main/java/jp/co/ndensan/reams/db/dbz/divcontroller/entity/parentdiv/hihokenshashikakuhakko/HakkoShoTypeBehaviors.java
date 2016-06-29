@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashik
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.ShiharaiHohoHenkoConfig;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.HihokenshashoKofuJiyu;

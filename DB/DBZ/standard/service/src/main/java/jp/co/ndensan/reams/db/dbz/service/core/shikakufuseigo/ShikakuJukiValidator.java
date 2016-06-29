@@ -217,13 +217,11 @@ public class ShikakuJukiValidator {
                 retMap.put(対象項目_資格取得日, DbzErrorMessages.資格不整合_年齢到達);
                 break;
             case 資格取得者_消除者:
+            case 資格喪失日_住基不一致:
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_職権削除);
                 break;
             case 資格取得者_死亡者:
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_死亡);
-                break;
-            case 資格喪失日_住基不一致:
-                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_1号年齢到達);
                 break;
             case 資格喪失日_転出予定者:
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
@@ -232,7 +230,7 @@ public class ShikakuJukiValidator {
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
                 break;
             case 資格変更者_１号被保険者到達:
-                retMap.put(対象項目_資格変更日, DbzErrorMessages.指定数誤り);
+                retMap.put(対象項目_資格変更日, DbzErrorMessages.資格不整合_1号年齢到達);
                 break;
             case 他住所地特例適用日_転入者:
                 retMap.put(対象項目_他市町村住所地特例適用, DbzErrorMessages.他住所地特例適用日_転入者);

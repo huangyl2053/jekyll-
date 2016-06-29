@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
-import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationCodeEntity;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAl
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;

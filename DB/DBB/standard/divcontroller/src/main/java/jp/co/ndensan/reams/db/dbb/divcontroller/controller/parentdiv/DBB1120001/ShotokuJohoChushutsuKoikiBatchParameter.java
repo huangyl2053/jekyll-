@@ -5,25 +5,29 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120001;
 
+import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki.ShotokuJohoChushutsuRenkeiKoiki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -38,7 +42,10 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51006");
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51008");
-    private static final RString FORMAT_平 = new RString("平%s");
+    private static final RString DEC05F001 = new RString("DEC05F001");
+    private static final RString DEE01F001 = new RString("DEE01F001");
+    private static final RString DEC05F001またはDEE01F001 = new RString("DEC05F001またはDEE01F001");
+    private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -48,29 +55,30 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      */
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onLoad(ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         RString 遷移区分 = null;
-        FlexibleYear 年度 = null;
+        RString 年度 = null;
         RDate currentTime = RDate.getNowDate();
         RString メニューID = ResponseHolder.getMenuID();
         if (所得情報抽出_連携当初.equals(メニューID)) {
             遷移区分 = 遷移区分_0;
-            年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
-                    SubGyomuCode.DBB介護賦課));
-            RDate 処理年度 = new RDate(String.format(FORMAT_平.toString(), 年度.toString()));
-            div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(処理年度);
+            年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
+                    SubGyomuCode.DBB介護賦課);
+            div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(new RDate(年度.toString()));
         } else if (所得情報抽出_連携異動.equals(メニューID)) {
             遷移区分 = 遷移区分_1;
-            年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
-                    SubGyomuCode.DBB介護賦課));
-            RDate 処理年度 = new RDate(String.format(FORMAT_平.toString(), 年度.toString()));
-            div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(処理年度);
+            年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
+                    SubGyomuCode.DBB介護賦課);
+            div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(new RDate(年度.toString()));
         }
-        SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJohoList = KoikiShichosonJohoFinder
-                .createInstance().getGenShichosonJoho();
-        List<ShichosonJohoResult> shichosonJohoList = ShotokuJohoChushutsuRenkeiKoiki.createInstance()
-                .getShichosonJoho(koikiZenShichosonJohoList.records(), 遷移区分, 年度);
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
         handler.initCheck(currentTime);
-        handler.shichosonIchiran(currentTime, shichosonJohoList);
+        SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJohoList = handler.shichosonIchiran(currentTime);
+        if (年度 != null) {
+            List<ShichosonJohoResult> shichosonJohoList = ShotokuJohoChushutsuRenkeiKoiki.createInstance()
+                    .getShichosonJoho(koikiZenShichosonJohoList.records(), 遷移区分, new FlexibleYear(年度));
+            if (shichosonJohoList != null) {
+                handler.check処理区分(shichosonJohoList);
+            }
+        }
         div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setDisabled(true);
         div.getShotokuJohoChushutsuKoikiPanel().getCcdChohyoShutsuryokujunKoiki().load(SubGyomuCode.DBB介護賦課, 帳票ID);
         return createResponse(div);
@@ -80,14 +88,19 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      * 「実行する」を押下場合、バリデーションメソッドです。
      *
      * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
-     * @param files FileData
      * @return ResponseData
      */
-    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onclick_checkRegister(
-            ShotokuJohoChushutsuKoikiBatchParameterDiv div, FileData[] files) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(getValidationHandler(div).checkFilesStates(files));
+            ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
+        RString path = new RString(SharedFile.getBasePath() + File.separator);
+        File file = new File(path.toString());
+        if (!file.exists()) {
+            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
+                    .replace(DEC05F001またはDEE01F001.toString()).evaluate());
+        } else if (!file.getName().startsWith(DEC05F001.toString()) || !file.getName().startsWith(DEE01F001.toString())) {
+            throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
+                    .replace(DEC05F001またはDEE01F001.toString()).evaluate());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -104,6 +117,23 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
         return ResponseData.of(parameter).respond();
     }
 
+    /**
+     * 「実行する」を押下場合、バリデーションメソッドです。
+     *
+     * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> onClick_onSelect(
+            ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
+        DataGrid<dgShichosonIchiran_Row> grid = div.getDgShichosonIchiran();
+        if (grid.getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
     private ResponseData<ShotokuJohoChushutsuKoikiBatchParameterDiv> createResponse(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         return ResponseData.of(div).respond();
@@ -113,8 +143,4 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
         return ShotokuJohoChushutsuKoikiBatchParameterHandler.of(div);
     }
 
-    private ShotokuJohoChushutsuKoikiBatchParameterHandler getValidationHandler(
-            ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        return new ShotokuJohoChushutsuKoikiBatchParameterHandler(div);
-    }
 }

@@ -46,7 +46,11 @@ public enum ReportIdDBD {
     /**
      * 給付減額滞納者把握リストの帳票ＩＤです。
      */
-    DBD200009(new ReportId("DBD200009_KyufuGengakuKanriIchiran"), new RString("給付減額滞納者把握リスト"));
+    DBD200009(new ReportId("DBD200009_KyufuGengakuKanriIchiran"), new RString("給付減額滞納者把握リスト")),
+    /**
+     * 支払方法変更管理リストの帳票ＩＤです。
+     */
+    DBD200007(new ReportId("DBD200007_ShiharaiHohoHenkoKanriIchiran"), new RString("支払方法変更管理リスト"));
     private final ReportId reportId;
     private final RString reportName;
 

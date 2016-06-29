@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.RoreiFukushiNenkinShokai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -117,7 +117,7 @@ public class RoreiFukushiNenkinShokai {
     private ResponseData<RoreiFukushiNenkinShokaiDiv> onClick_はい(RoreiFukushiNenkinShokaiDiv div) {
         RString イベント状態 = div.getPanelInput().getState();
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> models
-                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
         if (状態_追加.equals(イベント状態)) {
             RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin = new RoreiFukushiNenkinJukyusha(
                     new ShikibetsuCode(div.getShikibetsuCode()),
@@ -150,7 +150,7 @@ public class RoreiFukushiNenkinShokai {
                     new FlexibleDate(div.getPanelInput().getTxtStartDate().getValue().toString()));
             models.deleteOrRemove(key);
         }
-        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報_老齢福祉年金情報検索結果一覧, models);
+        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, models);
         getHandler(div).setDatagridRirekichiran(イベント状態);
         getHandler(div).set確定ボタン画面表示();
         return ResponseData.of(div).respond();

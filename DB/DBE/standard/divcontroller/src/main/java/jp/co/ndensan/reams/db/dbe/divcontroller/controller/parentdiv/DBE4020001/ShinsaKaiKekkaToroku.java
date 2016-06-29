@@ -20,11 +20,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
@@ -249,7 +249,7 @@ public class ShinsaKaiKekkaToroku {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
-                        = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+                        = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 getHandler(div).要介護認定完了更新(models);
                 前排他キーの解除();
                 div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().

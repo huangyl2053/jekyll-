@@ -88,7 +88,7 @@ public class ChosaJisshishaJohoHandler {
         }
         div.getDdlKinyusha().setDataSource(kinyusha);
         if (key.get記入者() != null && !key.get記入者().isEmpty()) {
-            div.getDdlShozokuKikan().setSelectedValue(key.get記入者());
+            div.getDdlKinyusha().setSelectedValue(key.get記入者());
         }
         List<NinteiShinseiJoho> ninteiShinseiJoho = service.get調査区分(key.
                 get申請書管理番号()).records();
@@ -106,7 +106,9 @@ public class ChosaJisshishaJohoHandler {
     }
 
     private void setShokai(ChosaJisshishaJohoModel key) {
-        div.getTxtChosaJisshiDate().setValue(new RDate(key.get調査実施日().toString()));
+        if (!RString.isNullOrEmpty(key.get調査実施日())) {
+            div.getTxtChosaJisshiDate().setValue(new RDate(key.get調査実施日().toString()));
+        }
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
         KeyValueDataSource chosaJisshi = new KeyValueDataSource(SHOKAI_KEY, key.get調査実施場所());
         chosaJisshiBasho.add(chosaJisshi);

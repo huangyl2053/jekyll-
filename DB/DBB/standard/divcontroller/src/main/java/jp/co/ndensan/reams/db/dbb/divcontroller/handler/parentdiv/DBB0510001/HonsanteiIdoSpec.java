@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 画面設計_DBBGM44001_本算定異動（現年度）の入力チェックSpecです。
+ *
+ * @reamsid_L DBB-0880-010 wangkanglei
  */
 public enum HonsanteiIdoSpec implements IPredicate<HonsanteiIdoDiv> {
 

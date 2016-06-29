@@ -200,7 +200,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         entity.setTsuchishoNo(fukaTemp.getKoseigo_tsuchishoNo());
         entity.setShikibetsuCode(fukaTemp.getKoseigo_shikibetsuCode());
         entity.setHihokenshaNo(fukaTemp.getKoseigo_hihokenshaNo());
-        entity.setKeisanTimestamp(new YMDHMS(param.get基準日時()));
+        entity.setKeisanTimestamp(fukaTemp.getKoseigo_choteiNichiji());
         entity.setGaitoRemban(連番);
         entity.setIdoAriFlag(false);
         dac.save(entity);

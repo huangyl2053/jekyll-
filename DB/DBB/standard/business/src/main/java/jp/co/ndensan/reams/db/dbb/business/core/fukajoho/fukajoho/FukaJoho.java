@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
@@ -944,6 +945,151 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
             収納IDList.add(介護期別.getChoteiKyotsu(identifier).get収納ID());
         }
         return 収納IDList;
+    }
+
+    /**
+     * 収納ID01を返します。
+     *
+     * @return 収納ID01
+     */
+    public Long get収納ID01() {
+        return get収納ID(INT_1, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID02を返します。
+     *
+     * @return 収納ID02
+     */
+    public Long get収納ID02() {
+        return get収納ID(INT_2, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID03を返します。
+     *
+     * @return 収納ID03
+     */
+    public Long get収納ID03() {
+        return get収納ID(INT_3, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID04を返します。
+     *
+     * @return 収納ID04
+     */
+    public Long get収納ID04() {
+        return get収納ID(INT_4, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID05を返します。
+     *
+     * @return 収納ID05
+     */
+    public Long get収納ID05() {
+        return get収納ID(INT_5, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID06を返します。
+     *
+     * @return 収納ID06
+     */
+    public Long get収納ID06() {
+        return get収納ID(INT_6, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID07を返します。
+     *
+     * @return 収納ID07
+     */
+    public Long get収納ID07() {
+        return get収納ID(INT_7, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID08を返します。
+     *
+     * @return 収納ID08
+     */
+    public Long get収納ID08() {
+        return get収納ID(INT_8, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID09を返します。
+     *
+     * @return 収納ID09
+     */
+    public Long get収納ID09() {
+        return get収納ID(INT_9, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID10を返します。
+     *
+     * @return 収納ID10
+     */
+    public Long get収納ID10() {
+        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID11を返します。
+     *
+     * @return 収納ID11
+     */
+    public Long get収納ID11() {
+        return get収納ID(INT_11, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID12を返します。
+     *
+     * @return 収納ID12
+     */
+    public Long get収納ID12() {
+        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID13を返します。
+     *
+     * @return 収納ID13
+     */
+    public Long get収納ID13() {
+        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    /**
+     * 収納ID14を返します。
+     *
+     * @return 収納ID14
+     */
+    public Long get収納ID14() {
+        return get収納ID(INT_14, ChoshuHohoKibetsu.普通徴収.getコード());
+    }
+
+    private Long get収納ID(int 期, RString 徴収方法期別) {
+
+        if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
+            return null;
+        }
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            if (徴収方法期別.equals(介護期別.get徴収方法())
+                    && 期 == 介護期別.get期()) {
+                for (ChoteiKyotsu 調定共通 : 介護期別.getChoteiKyotsuList()) {
+                    if (介護期別.get調定ID().longValue() == 調定共通.get調定ID()) {
+                        return 調定共通.get収納ID();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**

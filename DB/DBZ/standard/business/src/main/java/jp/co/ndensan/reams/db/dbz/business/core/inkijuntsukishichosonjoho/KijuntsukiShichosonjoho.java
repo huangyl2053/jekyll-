@@ -105,4 +105,13 @@ public class KijuntsukiShichosonjoho {
     public boolean is調査員状況フラグ() {
         return entity.isJokyoFlag2();
     }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
 }

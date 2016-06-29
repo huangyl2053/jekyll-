@@ -266,6 +266,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtSecondTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtSecondTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnSecondTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -281,6 +283,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key1, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -288,7 +292,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().toString()));
             gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
-                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
         }
 
         div.getTokkiNyuryoku()
@@ -328,6 +332,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtThirdTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnThirdTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -343,6 +349,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key2, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -350,7 +358,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().toString()));
             gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
-                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
         }
 
         div.getTokkiNyuryoku()
@@ -391,6 +399,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFourthTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtFourthTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnFourthTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -406,6 +416,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key3, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -413,7 +425,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().toString()));
             gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
-                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
         }
 
         div.getTokkiNyuryoku()
@@ -454,6 +466,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFifthTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtFifthTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnFifthTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -468,6 +482,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFourthTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key4, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key4).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -527,6 +543,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFifthTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key5, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key5).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -555,7 +573,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
-        RString 認定調査特記事項番号 = RString.EMPTY;
+        RString 認定調査特記事項番号;
 
         while (it.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
@@ -813,6 +831,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     public void tokkiJikoHasChanged(int record, RString 特記事項) {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        if (gaikyoTokkiNyurokuMap == null || gaikyoTokkiNyurokuMap.isEmpty()) {
+            return;
+        }
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key = new RString(String.valueOf(当前ページ数).concat(String.valueOf(record)));
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -21,10 +22,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IHistoryIterator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -301,9 +301,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
      *
      */
     public void setパラメータ() {
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_識別コード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_被保番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_状態, 状態_照会);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                 getCcdShikakuTokusoRireki().getDataGridSelectItem();
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
@@ -327,7 +327,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
         joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
         joho.setState(row.getState());
-        ViewStateHolder.put(ViewStateKeys.資格異動の訂正_資格得喪情報, joho);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, joho);
     }
 
     private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード) {

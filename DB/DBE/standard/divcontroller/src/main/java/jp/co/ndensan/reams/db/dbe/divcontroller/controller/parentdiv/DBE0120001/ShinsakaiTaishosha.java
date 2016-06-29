@@ -50,7 +50,7 @@ public class ShinsakaiTaishosha {
      * @return ResponseData
      */
     public ResponseData<ShinsakaiTaishoshaDiv> btn_Shokai(ShinsakaiTaishoshaDiv div) {
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.要介護認定申請検索_申請書管理番号,
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号,
                 div.getDgTaishoshaIchiran().getClickedItem().getShinseishoKanriNo());
         return ResponseData.of(div).forwardWithEventName(DBE0120001TransitionEventName.対象者選択).respond();
     }

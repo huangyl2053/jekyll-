@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosascheduleinput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.ninteichosascheduleinput.NinteiChosaSchedule;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosascheduleinput.NinteiChosaSchedule;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput.NinteiChosaScheduleInputParameter;

@@ -74,6 +74,8 @@ public class KaigoHokenryogakuPrintService {
      */
     public void printタイプ(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
             Long 出力順ID, ReportManager reportManager, RString タイトル) {
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100039.getReportId(), 出力順ID);
         KaigoHokenryogakuProperty property = new KaigoHokenryogakuProperty();
         try (ReportAssembler<KaigoHokenryogakuSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KaigoHokenryogakuSource> reportSourceWriter
@@ -82,7 +84,7 @@ public class KaigoHokenryogakuPrintService {
             Decimal 連番 = Decimal.ONE;
             if (編集後本算定通知書共通情報List != null && !編集後本算定通知書共通情報List.isEmpty()) {
                 for (EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 : 編集後本算定通知書共通情報List) {
-                    List<RString> 並び順List = get出力順(出力順ID);
+                    List<RString> 並び順List = get出力順(並び順);
                     KaigoHokenryogakuReport report = new KaigoHokenryogakuReport(編集後本算定通知書共通情報,
                             帳票作成日時, 地方公共団体, 並び順List, 連番, タイトル);
                     report.writeBy(reportSourceWriter);
@@ -92,9 +94,7 @@ public class KaigoHokenryogakuPrintService {
         }
     }
 
-    private List<RString> get出力順(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100039.getReportId(), 出力順ID);
+    private List<RString> get出力順(IOutputOrder 並び順) {
         List<RString> 並び順List = new ArrayList<>();
         int i = 0;
         if (並び順 != null) {

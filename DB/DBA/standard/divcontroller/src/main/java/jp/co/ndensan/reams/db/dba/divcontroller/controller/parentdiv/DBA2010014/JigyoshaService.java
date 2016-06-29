@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dba.service.core.kaigojigyoshashisetsukanri.KaigoJ
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
@@ -68,10 +68,10 @@ public class JigyoshaService {
      */
     public ResponseData<JigyoshaServiceDiv> onLoad(JigyoshaServiceDiv div) {
         setサービス種類(div);
-        RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+        RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
         if (状態_追加.equals(画面状態)) {
             getHandler(div).set状態_追加(ViewStateHolder
-                    .get(ViewStateKeys.サービス登録_事業者番号, RString.class));
+                    .get(ViewStateKeys.事業者番号, RString.class));
             return ResponseData.of(div).setState(DBA2010014StateName.追加状態);
         } else if (状態_修正.equals(画面状態)) {
             getHandler(div).set画面情報(get事業者サービス情報取得());
@@ -191,7 +191,7 @@ public class JigyoshaService {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && click_hai(div)) {
             RealInitialLocker.release(前排他ロックキー);
-            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
             if (状態_追加.equals(画面状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_追加);
             } else if (状態_修正.equals(画面状態)) {
@@ -219,7 +219,7 @@ public class JigyoshaService {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
-            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+            RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
             if (状態_追加.equals(画面状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBA2010014TransitionEventName.再検索する).parameter(状態_追加);
             } else if (状態_修正.equals(画面状態)) {
@@ -232,7 +232,7 @@ public class JigyoshaService {
     }
 
     private boolean click_hai(JigyoshaServiceDiv div) {
-        RString 画面状態 = ViewStateHolder.get(ViewStateKeys.サービス登録_画面状態, RString.class);
+        RString 画面状態 = ViewStateHolder.get(ViewStateKeys.画面状態, RString.class);
         if (状態_追加.equals(画面状態)) {
             KaigoJigyoshaShiteiService business = new KaigoJigyoshaShiteiService(new JigyoshaNo(div.getJigyoshaServiceKihon()
                     .getJigyosha().getTxtJigyoshaNo().getValue()),
@@ -245,13 +245,13 @@ public class JigyoshaService {
             データ更新チェック(div);
             return データ更新(div);
         } else if (状態_削除.equals(画面状態)) {
-            return getService_Delete().情報を物理削除(ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJigyoshaShiteiService.class));
+            return getService_Delete().情報を物理削除(ViewStateHolder.get(ViewStateKeys.サービス情報, KaigoJigyoshaShiteiService.class));
         }
         return false;
     }
 
     private boolean データ更新(JigyoshaServiceDiv div) {
-        KaigoJigyoshaShiteiService business = ViewStateHolder.get(ViewStateKeys.サービス登録_サービス情報, KaigoJigyoshaShiteiService.class);
+        KaigoJigyoshaShiteiService business = ViewStateHolder.get(ViewStateKeys.サービス情報, KaigoJigyoshaShiteiService.class);
         KaigoJigyoshaShiteiService businessUpdate;
         if (div.getJigyoshaServiceKihon().getJigyosha().getTxtYukoKaishiYMD().getValue().equals(business.get有効開始日())) {
             businessUpdate = getHandler(div).set事業者サービスDiv(business);
@@ -274,8 +274,8 @@ public class JigyoshaService {
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
         }
         KaigoJogaiTokureiParameter サービス一覧パラメータ = KaigoJogaiTokureiParameter.createParam(
-                ViewStateHolder.get(ViewStateKeys.サービス登録_事業者番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class),
+                ViewStateHolder.get(ViewStateKeys.事業者番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.有効開始日, FlexibleDate.class),
                 FlexibleDate.EMPTY, RDate.getNowDate().getYearMonth());
         List<ServiceItiranHyojiJohoBusiness> サービス一覧表示情報List = getService().getServiceItiranHyojiJoho(サービス一覧パラメータ).records();
         List<ServiceJohoBusiness> businessList = new ArrayList<>();
@@ -292,16 +292,16 @@ public class JigyoshaService {
 
     private List<KaigoJigyoshaShiteiService> get事業者サービス情報取得() {
         KaigoJigyoshaShisetsuKanriMapperParameter param = KaigoJigyoshaShisetsuKanriMapperParameter.createParam(ViewStateHolder
-                .get(ViewStateKeys.サービス登録_事業者番号, RString.class),
+                .get(ViewStateKeys.事業者番号, RString.class),
                 ViewStateHolder
-                .get(ViewStateKeys.サービス登録_有効開始日, FlexibleDate.class),
+                .get(ViewStateKeys.有効開始日, FlexibleDate.class),
                 null,
                 ViewStateHolder
-                .get(ViewStateKeys.サービス登録_サービス種類コード, RString.class),
+                .get(ViewStateKeys.サービス種類コード, RString.class),
                 null);
         List<KaigoJigyoshaShiteiService> service = KaigoJigyoshaShisetsuKanriManager.createInstance().getJigyoshaServiceJoho(param).records();
         if (!service.isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.サービス登録_サービス情報, service.get(0));
+            ViewStateHolder.put(ViewStateKeys.サービス情報, service.get(0));
         }
         return service;
     }

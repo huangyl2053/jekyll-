@@ -156,7 +156,7 @@ public class CyoSaiRaiBusiness {
      * @return 依頼書出力年月日
      */
     public FlexibleDate get依頼書出力年月日() {
-        return entity.getNinteichosaIraiKanryoYMD();
+        return entity.getIraishoShutsuryokuYMD();
     }
 
     /**
@@ -165,7 +165,7 @@ public class CyoSaiRaiBusiness {
      * @return 調査票等出力年月日
      */
     public FlexibleDate get調査票等出力年月日() {
-        return entity.getIraishoShutsuryokuYMD();
+        return entity.getChosahyoTouShutsuryokuYMD();
     }
 
     /**
@@ -174,7 +174,7 @@ public class CyoSaiRaiBusiness {
      * @return 認定調査期限年月日
      */
     public FlexibleDate get認定調査期限年月日() {
-        return entity.getChosahyoTouShutsuryokuYMD();
+        return entity.getNinteichosaKigenYMD();
     }
 
     /**
@@ -292,5 +292,14 @@ public class CyoSaiRaiBusiness {
      */
     public int get認定調査依頼履歴番号() {
         return entity.getNinteichosaIraiRirekiNo();
+    }
+
+    /**
+     * 厚労省IF識別コードを返します。
+     *
+     * @return 厚労省IF識別コード
+     */
+    public Code get厚労省IF識別コード() {
+        return entity.getKoroshoIfShikibetsuCode();
     }
 }

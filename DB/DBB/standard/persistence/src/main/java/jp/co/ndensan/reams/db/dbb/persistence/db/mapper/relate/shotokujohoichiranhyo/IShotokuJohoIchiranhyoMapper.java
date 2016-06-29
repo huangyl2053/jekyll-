@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shotokujohoichir
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyoKouikiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.shotokujohoichiranhyo.ShotokuJohoIchiranhyoParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.shotokujohoichiranhyo.TaishoShuryoYmdEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyo.TaishoShuryoYmdEntity;
 
 /**
  * ビジネス設計_DBBBZ51003_所得情報一覧表作成のMapper

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1;
 
-import jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

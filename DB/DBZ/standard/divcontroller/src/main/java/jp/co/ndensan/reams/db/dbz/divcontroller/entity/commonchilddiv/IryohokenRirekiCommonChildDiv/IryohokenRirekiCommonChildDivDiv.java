@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Iryohoken
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -179,7 +178,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     @Override
     public void initialize(RString モード, RString 識別コード) {
         createHandlerOf(this).initialize(モード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.医療保険情報_識別コード, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
     }
 
     @Override

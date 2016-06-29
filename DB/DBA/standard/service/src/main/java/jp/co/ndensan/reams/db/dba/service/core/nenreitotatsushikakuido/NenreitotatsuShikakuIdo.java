@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushikakuido.NenreitotatsuJokenEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -103,9 +103,9 @@ public class NenreitotatsuShikakuIdo {
      * @param 年齢到達期間終了日 年齢到達期間開始日
      * @return 65歳年齢到達資格異動バッチパラメータクラス
      */
-    public Dbamn71001BatchFlowParameter getNenreitotatsuJokenBatchParameter(FlexibleDate 年齢到達期間開始日, FlexibleDate 年齢到達期間終了日) {
+    public NenreitotatsuShikakuIdoBatchFlowParameter getNenreitotatsuJokenBatchParameter(FlexibleDate 年齢到達期間開始日, FlexibleDate 年齢到達期間終了日) {
 
-        return new Dbamn71001BatchFlowParameter().createRoreiFukushiParam(年齢到達期間開始日, 年齢到達期間終了日);
+        return new NenreitotatsuShikakuIdoBatchFlowParameter().createRoreiFukushiParam(年齢到達期間開始日, 年齢到達期間終了日);
     }
 
 }

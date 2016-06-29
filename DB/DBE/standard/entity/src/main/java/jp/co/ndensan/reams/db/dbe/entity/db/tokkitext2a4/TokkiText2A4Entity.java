@@ -20,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokkiText2A4Entity {
 
     private List<TokkiTextEntity> 特記事項リスト;
+    private List<TokkiTextEntity> 特記事項番号リスト;
     private RString 特記事項イメージ;
-    private List<RString> 特記事項番号リスト1;
-    private List<RString> 特記事項番号リスト2;
+    private List<TokkiTextEntity> 特記事項イメージリスト;
+    private RString 厚労省IF識別コード;
 }

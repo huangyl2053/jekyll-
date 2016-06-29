@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.koseishi
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.koseishichosonselector.KoseiShiChosonSelector.KoseiShiChosonSelectorDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.koseishichosonselector.KoseiShiChosonSelector.dgKoseiShichosonList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -27,9 +27,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBE-3000-060 dongyabin
  */
 public class KoseiShiChosonSelectorHandler {
-    
+
     private final KoseiShiChosonSelectorDiv div;
-    
+
     /**
      * コンストラクタです。
      * @param div 画面情報
@@ -37,7 +37,7 @@ public class KoseiShiChosonSelectorHandler {
     public KoseiShiChosonSelectorHandler(KoseiShiChosonSelectorDiv div) {
         this.div = div;
     }
-    
+
     /**
      * 画面初期化処理です。
      * @param koseiShichosonList 一覧検索情報
@@ -51,7 +51,7 @@ public class KoseiShiChosonSelectorHandler {
         }
         div.getDgKoseiShichosonList().setDataSource(rowList);
     }
-    
+
     /**
      * 構成市町村一覧データのチェック処理です。
      * @return ValidationMessageControlPairs
@@ -62,18 +62,18 @@ public class KoseiShiChosonSelectorHandler {
                 KoseiShiChosonSelectorMessage.データが存在しない));
         return validationMessages;
     }
-    
+
     /**
      * 構成市町村一覧データを選択の処理です。
      */
     public void onClick_Kensaku() {
-        
+
         KoseiShiChosonSelectorModel model = new KoseiShiChosonSelectorModel();
         model.set市町村コード(div.getDgKoseiShichosonList().getClickedItem().getShicosoncode());
         model.set市町村名称(div.getDgKoseiShichosonList().getClickedItem().getShichosonname());
-        ViewStateHolder.put(ViewStateKeys.構成市町村選択_引き継ぎデータ, model);
+        ViewStateHolder.put(ViewStateKeys.引き継ぎデータ, model);
     }
-    
+
     private static enum KoseiShiChosonSelectorMessage implements IValidationMessage {
 
         データが存在しない(UrErrorMessages.該当データなし);

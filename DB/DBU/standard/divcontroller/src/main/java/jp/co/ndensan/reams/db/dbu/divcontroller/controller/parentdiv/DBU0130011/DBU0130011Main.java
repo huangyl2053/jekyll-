@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0130011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0130011.DBU0130011MainHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RojinHokenJukyushaJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -62,7 +62,7 @@ public class DBU0130011Main {
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
             createHandler(div).update老健受給情報(key.get識別コード(), key.get被保険者番号(),
-                    ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_モード, RString.class),
+                    ViewStateHolder.get(ViewStateKeys.モード, RString.class),
                     ViewStateHolder.get(ViewStateKeys.老健受給情報, RojinHokenJukyushaJoho.class));
             initialize(div, RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(key.get識別コード()));
         }
@@ -95,11 +95,11 @@ public class DBU0130011Main {
 
     private void initialize(DBU0130011MainDiv div, RojinHokenJukyushaJoho 老健受給情報) {
         if (老健受給情報 == null) {
-            ViewStateHolder.put(ViewStateKeys.老人保健受給者台帳管理_モード, モード_データなし);
+            ViewStateHolder.put(ViewStateKeys.モード, モード_データなし);
             div.getMeisaiPanel().getTxtRokenJukyushaNo().setValue(RString.EMPTY);
             div.getMeisaiPanel().getTxtRoukenShichosonNo().setValue(RString.EMPTY);
         } else {
-            ViewStateHolder.put(ViewStateKeys.老人保健受給者台帳管理_モード, モード_データあり);
+            ViewStateHolder.put(ViewStateKeys.モード, モード_データあり);
             ViewStateHolder.put(ViewStateKeys.老健受給情報, 老健受給情報);
             div.getMeisaiPanel().getTxtRokenJukyushaNo().setValue(老健受給情報.get老人保健受給者番号());
             if (老健受給情報.get老人保健市町村コード() == null) {

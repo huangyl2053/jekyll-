@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparam
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

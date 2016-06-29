@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*

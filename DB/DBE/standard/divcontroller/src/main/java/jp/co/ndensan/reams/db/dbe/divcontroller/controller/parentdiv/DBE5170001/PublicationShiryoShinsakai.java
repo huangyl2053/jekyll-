@@ -5,21 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5170001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.publicationshiryoshinsakai.PublicationShiryoShinsakaiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShinsakaiBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.shiryoshinsakai.ShiryoShinsakaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -39,30 +38,14 @@ public class PublicationShiryoShinsakai {
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onLoad(PublicationShiryoShinsakaiDiv div) {
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        FlexibleDate 開催予定日 = ViewStateHolder.get(ViewStateKeys.開催予定日, FlexibleDate.class);
-        RString 審査会会場 = ViewStateHolder.get(ViewStateKeys.審査会会場, RString.class);
-        RTime 開始予定時間 = ViewStateHolder.get(ViewStateKeys.開始予定時間, RTime.class);
-        RString 資料作成 = ViewStateHolder.get(ViewStateKeys.資料作成, RString.class);
-        RString 合議体番号 = ViewStateHolder.get(ViewStateKeys.合議体番号, RString.class);
-        RString 合議体名称 = ViewStateHolder.get(ViewStateKeys.合議体名称, RString.class);
-        Decimal 予定定員 = ViewStateHolder.get(ViewStateKeys.予定定員, Decimal.class);
-        Decimal 割付人数 = ViewStateHolder.get(ViewStateKeys.割付人数, Decimal.class);
-        FlexibleDate 処理日 = ViewStateHolder.get(ViewStateKeys.処理日, FlexibleDate.class);
+        KaisaiYoteiJohoBusiness 開催予定情報
+                = ShiryoShinsakaiFinder.createInstance().get開催予定情報(審査会一覧_開催番号);
         div.getTxtShinsakaiKaisaiNo().setValue(審査会一覧_開催番号);
-        div.getTxtShinsakaiYoteiDate().setValue(開催予定日);
-        div.getTxtShinsakaiKaijo().setValue(審査会会場);
-        div.getTxtShinsakaiKaishiYoteiTime().setValue(開始予定時間);
-        div.getTxtShiryoSakusei().setValue(資料作成);
-        div.getTxtGogitaiNo().setValue(合議体番号);
-        div.getTxtGogitaiName().setValue(合議体名称);
-        div.getTxtYoteiTeiin().setValue(予定定員);
-        div.getTxtWariateNinzu().setValue(割付人数);
-        div.getTxtOperationDate().setValue(処理日);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))
                 .append(審査会一覧_開催番号);
         前排他キーのセット(builder.toRString());
-        getHandler(div).onLoad();
+        getHandler(div).onLoad(開催予定情報);
         return ResponseData.of(div).respond();
     }
 
@@ -128,9 +111,9 @@ public class PublicationShiryoShinsakai {
      * 実行するボタンを押下する場合、バッチ起動する。
      *
      * @param div PublicationShiryoShinsakaiDiv
-     * @return ResponseData<PublicationShiryoShinsakaiBatchParameter>
+     * @return ResponseData<ShiryoShinsakaiBatchParameter>
      */
-    public ResponseData<PublicationShiryoShinsakaiBatchParameter> onClick_btnExecute(PublicationShiryoShinsakaiDiv div) {
+    public ResponseData<ShiryoShinsakaiBatchParameter> onClick_btnExecute(PublicationShiryoShinsakaiDiv div) {
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))

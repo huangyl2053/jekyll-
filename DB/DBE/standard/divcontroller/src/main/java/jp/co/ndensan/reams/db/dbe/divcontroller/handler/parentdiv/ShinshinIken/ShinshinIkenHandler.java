@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItem;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.ShinshinIkenDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku08;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku10;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -166,7 +166,7 @@ public class ShinshinIkenHandler {
             for (ShujiiIkenshoKinyuItem 記入項目 : 記入項目List) {
                 要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().setShujiiIkenshoKinyuItem(記入項目).build();
             }
-            ViewStateHolder.put(ViewStateKeys.心身の意見入力_要介護認定主治医意見書情報, 要介護認定主治医意見書情報);
+            ViewStateHolder.put(ViewStateKeys.要介護認定主治医意見書情報, 要介護認定主治医意見書情報);
         }
     }
 

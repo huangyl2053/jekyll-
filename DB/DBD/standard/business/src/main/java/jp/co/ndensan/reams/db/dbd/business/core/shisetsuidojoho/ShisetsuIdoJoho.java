@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.core.shisetsuidojoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shisetsuidojoho.ShisetsuIdoJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -73,6 +74,15 @@ public class ShisetsuIdoJoho {
      */
     public RString get事業者名称() {
         return 介護施設入退所情報.get事業者名称();
+    }
+
+    /**
+     * 転出先保険者番号を返します。
+     *
+     * @return 転出先保険者番号
+     */
+    public HihokenshaNo get転出先保険者番号() {
+        return 介護施設入退所情報.get転出先保険者番号();
     }
 
 }

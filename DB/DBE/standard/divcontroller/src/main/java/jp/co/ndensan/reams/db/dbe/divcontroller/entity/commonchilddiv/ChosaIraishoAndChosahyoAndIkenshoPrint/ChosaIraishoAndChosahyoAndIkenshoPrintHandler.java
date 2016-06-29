@@ -408,10 +408,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
                 RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), FlexibleDate.getNowDate());
                 RString customerBarCode = ReportUtil.getCustomerBarCode(business.get調査委託先郵便番号(), business.get調査委託先住所());
-                RStringBuilder builder = new RStringBuilder();
-                builder.append("*");
-                builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
-                builder.append("#");
                 Map<Integer, RString> 通知文
                         = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
 
@@ -460,7 +456,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         get名称付与(),
                         customerBarCode,
                         business.get被保険者番号(),
-                        builder.toRString(),
                         タイトル,
                         通知文.get(1),
                         被保険者番号リスト.get(0),
