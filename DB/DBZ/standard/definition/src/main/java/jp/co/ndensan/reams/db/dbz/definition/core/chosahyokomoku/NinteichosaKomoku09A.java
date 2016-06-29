@@ -383,4 +383,21 @@ public enum NinteichosaKomoku09A {
 
         throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する特記事項名称").evaluate());
     }
+
+    /**
+     * 認定調査特記事項マッピングの調査特記事項番と一致する内容を探します。
+     *
+     * @param code 認定調査特記事項マッピングのコード
+     * @return {@code code} に対応する認定調査特記事項マッピング
+     * @throws IllegalArgumentException IllegalArgumentException
+     */
+    public static NinteichosaKomoku09A getAllBy調査特記事項番(RString code) throws IllegalArgumentException {
+        for (NinteichosaKomoku09A target : NinteichosaKomoku09A.values()) {
+            if (target.get調査特記事項番序().equals(code)) {
+                return target;
+            }
+        }
+
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する特記事項名称").evaluate());
+    }
 }
