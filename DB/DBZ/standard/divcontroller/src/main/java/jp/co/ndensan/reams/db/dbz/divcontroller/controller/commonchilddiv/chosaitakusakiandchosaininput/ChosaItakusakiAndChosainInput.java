@@ -61,10 +61,7 @@ public class ChosaItakusakiAndChosainInput {
      * @return レスポンス
      */
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_BtnClear(ChosaItakusakiAndChosainInputDiv div) {
-        div.getTxtChosaItakusakiCode().clearValue();
-        div.getTxtChosaItakusakiName().clearValue();
-        div.getTxtChosainCode().clearValue();
-        div.getTxtChosainName().clearValue();
+        getHandler(div).onClick_BtnClear();
         return ResponseData.of(div).respond();
     }
 

@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitak
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /*
  * このコードはツールによって生成されました。
@@ -41,4 +43,37 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      * @param HdnShinseishoKanriNo 申請管理番号
      */
     void setHdnShinseishoKanriNo(RString HdnShinseishoKanriNo);
+
+    /**
+     * 入力した調査委託先コードを取得します。
+     *
+     * @return　入力した調査委託先コード
+     */
+    TextBoxCode getTxtChosaItakusakiCode();
+
+    /**
+     * 入力した調査委託先名を取得します。
+     *
+     * @return　入力した調査委託先名
+     */
+    TextBox getTxtChosaItakusakiName();
+
+    /**
+     * 入力した調査員コードを取得します。
+     *
+     * @return　入力した調査員コード
+     */
+    TextBoxCode getTxtChosainCode();
+
+    /**
+     * 入力した調査員名を取得します。
+     *
+     * @return　入力した調査員名
+     */
+    TextBox getTxtChosainName();
+
+    /**
+     * 共有子Div内の項目に設定された値をすべてクリアします。
+     */
+    void clear();
 }
