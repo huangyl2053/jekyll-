@@ -85,6 +85,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     private static final RString なし = new RString(0);
     private static final RString 全合議体 = new RString("全合議体");
     private static final RString 全市町村 = new RString("全市町村");
+    private static final RString 全市町村コード = new RString("000000");
     private ShinsahanteinoHenkojokyoProcessParameter paramter;
     private IHokokuShiryoSakuSeiMapper mapper;
     private ShinsahanteinoHenkojokyo henkojokyo;
@@ -197,10 +198,11 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
         henkojokyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
         if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
             henkojokyo.set市町村名(全市町村);
+            henkojokyo.set市町村コード(全市町村コード);
         } else {
             henkojokyo.set市町村名(paramter.getShichosonName());
+            henkojokyo.set市町村コード(paramter.getShichosonCode().value());
         }
-        henkojokyo.set市町村コード(paramter.getShichosonCode().value());
         henkojokyo.set発行日時(RDateTime.now());
     }
 

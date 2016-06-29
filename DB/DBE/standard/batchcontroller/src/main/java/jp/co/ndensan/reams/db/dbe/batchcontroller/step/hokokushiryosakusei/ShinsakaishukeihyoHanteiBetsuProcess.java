@@ -63,6 +63,7 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchProcessBase<Sinsa
     private static final RString SINSEIKUBUNSINSEITOKI = new RString("【申請区分(申請時)】");
     private static final RString SINSEIKUBUNHOREI = new RString("【申請区分(法令)】");
     private static final RString 全市町村 = new RString("全市町村");
+    private static final RString 全市町村コード = new RString("000000");
     private static final RString 非該当タイトル = new RString("非該当");
     private static final RString 要支援1タイトル = new RString("要支援1");
     private static final RString 要支援2タイトル = new RString("要支援2");
@@ -143,10 +144,11 @@ public class ShinsakaishukeihyoHanteiBetsuProcess extends BatchProcessBase<Sinsa
         shinsakaishukeihyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
         if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
             shinsakaishukeihyo.set市町村名(全市町村);
+            shinsakaishukeihyo.set市町村コード(全市町村コード);
         } else {
             shinsakaishukeihyo.set市町村名(paramter.getShichosonName());
+            shinsakaishukeihyo.set市町村コード(paramter.getShichosonCode().value());
         }
-        shinsakaishukeihyo.set市町村コード(paramter.getShichosonCode().value());
         shinsakaishukeihyo.set発行日時(RDateTime.now());
         shinsakaishukeihyo.set二次判定非該当タイトル(非該当タイトル);
         shinsakaishukeihyo.set二次判定要支援1タイトル(要支援1タイトル);
