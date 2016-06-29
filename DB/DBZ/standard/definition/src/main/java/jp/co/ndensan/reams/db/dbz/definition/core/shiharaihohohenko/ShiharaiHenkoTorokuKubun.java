@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko;
+package jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -17,7 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbuQuestionMessages implements IMessageGettable {
 
-    一括実行確認(0, "?一括処理を実行します。よろしいですか？");
+    一括実行確認(1, "?一括処理を実行します。よろしいですか？");
 
     private final Message message;
 
