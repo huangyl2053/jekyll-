@@ -1062,11 +1062,10 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
      * 処理日付管理マスタテーブルから連携（当初）所得情報取得します。
      *
      * @param 年度 FlexibleYear
-     * @param 市町村識別ID RString
      * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction
-    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_当初所得情報抽出(FlexibleYear 年度, RString 市町村識別ID) {
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_当初所得情報抽出(FlexibleYear 年度) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
@@ -1074,7 +1073,6 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(shoriName, ShoriName.当初所得引出.get名称()),
                                 eq(shoriEdaban, 処理枝番_0001),
-                                eq(shichosonCode, new LasdecCode(市町村識別ID)),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番_1))).
                 toObject(DbT7022ShoriDateKanriEntity.class);

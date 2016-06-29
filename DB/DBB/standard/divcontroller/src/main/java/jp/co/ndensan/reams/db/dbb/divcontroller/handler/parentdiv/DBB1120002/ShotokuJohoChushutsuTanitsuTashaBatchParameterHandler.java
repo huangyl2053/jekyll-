@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002;
 
 import java.io.File;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -100,7 +102,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param currentTime RDate
      */
     public void initTorikoShori(RDate currentTime) {
-        RString path = new RString(SharedFile.getBasePath() + File.separator + 所得情報ファイル);
+        RString path = new RString(SharedFile.getBasePath() + File.separator);
         File file = new File(path.toString());
         if (file.exists() && file.getName().contains(所得情報ファイル)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
@@ -111,7 +113,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         RString 遷移区分 = null;
         RString 年度 = null;
         if (ログインユーザID != null) {
-            RString 市町村識別ID = new RString(ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID).toString());
+            List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
             RString メニューID = ResponseHolder.getMenuID();
             if (所得情報抽出_連携当初.equals(メニューID)) {
                 遷移区分 = 遷移区分_0;
@@ -122,8 +124,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                 年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                         SubGyomuCode.DBB介護賦課);
             }
-            RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID, 遷移区分, new FlexibleYear(年度));
-            処理区分Handler(メニューID, 処理区分);
+            if (年度 != null) {
+                RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
+                処理区分Handler(メニューID, 処理区分);
+            }
         }
     }
 
