@@ -69,7 +69,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         YMDHMS 基準日時;
         DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity;
         if (遷移区分_0.equals(遷移区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度, 市町村識別ID);
+            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度);
             if (処理日付管理異動情報Entity == null) {
                 処理区分 = 処理日付管理マスタ無し;
             } else {
@@ -79,7 +79,7 @@ public class ShotokuJohoChushutsuRenkeitanitu {
             return 処理区分;
         }
         if (遷移区分_1.equals(遷移区分)) {
-            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度, 市町村識別ID);
+            処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_当初所得情報抽出(年度);
             if (処理日付管理異動情報Entity == null) {
                 処理区分 = 不可;
                 return 処理区分;
