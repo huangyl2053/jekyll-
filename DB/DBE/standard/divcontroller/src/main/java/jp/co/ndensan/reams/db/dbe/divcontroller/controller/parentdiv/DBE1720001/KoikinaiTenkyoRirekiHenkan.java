@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE1720001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.DBE1720001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanHandler;
