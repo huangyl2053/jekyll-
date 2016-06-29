@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KyodoShoriyoJukyushaIdoKogakuSofu}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xupeng
  */
 public class KyodoShoriyoJukyushaIdoKogakuSofuBuilder {
 
@@ -131,7 +133,6 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKogakuSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKogakuSofuBuilder set世帯所得区分コード(RString 世帯所得区分コード) {
-        requireNonNull(世帯所得区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯所得区分コード"));
         entity.setSetaiShotokuKubunCode(世帯所得区分コード);
         return this;
     }
@@ -143,7 +144,6 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKogakuSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKogakuSofuBuilder set所得区分コード(RString 所得区分コード) {
-        requireNonNull(所得区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("所得区分コード"));
         entity.setShotokuKubunCode(所得区分コード);
         return this;
     }
@@ -205,6 +205,39 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuBuilder {
     public KyodoShoriyoJukyushaIdoKogakuSofuBuilder set送付年月(FlexibleYearMonth 送付年月) {
         requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
+        return this;
+    }
+
+    /**
+     * 訂正区分コードを設定します。
+     *
+     * @param 訂正区分コード 訂正区分コード
+     * @return {@link KyodoShoriyoJukyushaIdoKogakuSofuBuilder}
+     */
+    public KyodoShoriyoJukyushaIdoKogakuSofuBuilder set訂正区分コード(RString 訂正区分コード) {
+        entity.setTeiseiKubunCode(訂正区分コード);
+        return this;
+    }
+
+    /**
+     * 訂正年月日を設定します。
+     *
+     * @param 訂正年月日 訂正年月日
+     * @return {@link KyodoShoriyoJukyushaIdoKogakuSofuBuilder}
+     */
+    public KyodoShoriyoJukyushaIdoKogakuSofuBuilder set訂正年月日(FlexibleDate 訂正年月日) {
+        entity.setTeiseiYMD(訂正年月日);
+        return this;
+    }
+
+    /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link KyodoShoriyoJukyushaIdoKogakuSofuBuilder}
+     */
+    public KyodoShoriyoJukyushaIdoKogakuSofuBuilder set論理削除フラグ(boolean 論理削除フラグ) {
+        entity.setLogicalDeletedFlag(論理削除フラグ);
         return this;
     }
 

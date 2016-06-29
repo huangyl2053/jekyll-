@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.business.core.kyodoshorijukyushateiseirenrakuhyo.param;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKogakuSofu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofu;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +23,7 @@ import lombok.Setter;
 public class KyodoshoriyoJukyushaIdoRenrakuhyoParam implements Serializable {
 
     private KyoutuuEntity 共通項目Entity;
-    private DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity;
-    private DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 償還情報Entity;
-    private DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額情報Entity;
+    private KyodoShoriyoJukyushaIdoKihonSofu 基本情報Entity;
+    private KyodoShoriyoJukyushaIdoShokanSofu 償還情報Entity;
+    private KyodoShoriyoJukyushaIdoKogakuSofu 高額情報Entity;
 }
