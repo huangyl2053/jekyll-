@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.tokuchoheijunka6tsuchishoikatsuhako;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaZennendoTempTblCreateProcess;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -271,11 +269,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private KoseimaeJohoUpdateProcessParameter createKoseimaeUpdateParameter() {
 
         KoseimaeJohoUpdateProcessParameter parameter = new KoseimaeJohoUpdateProcessParameter();
-        List<DbTKeisangoJohoTempTableEntity> 計算後List = new ArrayList<>();
-        if (getResult(List.class, new RString(計算後情報更正前の取得), KeisangoForKoseimaeShutokuProcess.KEISANGO) != null) {
-            計算後List = getResult(List.class, new RString(計算後情報更正前の取得), KeisangoForKoseimaeShutokuProcess.KEISANGO);
-        }
-        parameter.set計算後List(計算後List);
+        parameter.set計算後List(getResult(List.class, new RString(計算後情報更正前の取得), KeisangoForKoseimaeShutokuProcess.KEISANGO));
         return parameter;
     }
 
