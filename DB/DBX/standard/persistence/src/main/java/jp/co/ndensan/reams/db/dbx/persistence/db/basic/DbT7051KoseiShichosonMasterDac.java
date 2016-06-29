@@ -390,4 +390,19 @@ public class DbT7051KoseiShichosonMasterDac {
                 order(by(DbT7051KoseiShichosonMaster.shichosonShokibetsuID, Order.ASC))
                 .toList(DbT7051KoseiShichosonMasterEntity.class);
     }
+
+    /**
+     * 証記載保険者番号、市町村名称を検索します。
+     *
+     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村名称による市町村Entityのリスト
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> select市町村名称() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                order(by(DbT7051KoseiShichosonMaster.shoKisaiHokenshaNo, Order.DESC))
+                .toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
 }
