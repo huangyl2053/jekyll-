@@ -88,7 +88,7 @@ public class ChosaJisshishaJohoHandler {
         }
         div.getDdlKinyusha().setDataSource(kinyusha);
         if (key.get記入者() != null && !key.get記入者().isEmpty()) {
-            div.getDdlShozokuKikan().setSelectedValue(key.get記入者());
+            div.getDdlKinyusha().setSelectedValue(key.get記入者());
         }
         List<NinteiShinseiJoho> ninteiShinseiJoho = service.get調査区分(key.
                 get申請書管理番号()).records();
