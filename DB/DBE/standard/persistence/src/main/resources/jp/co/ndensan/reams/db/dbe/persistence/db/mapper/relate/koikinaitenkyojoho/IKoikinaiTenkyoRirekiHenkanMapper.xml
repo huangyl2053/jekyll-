@@ -41,7 +41,7 @@
     </resultMap>
 
     <select id="selectKoikinaiTenkyoList" resultMap="resultMap_KoikinaiTenkyoRirekiHenkanRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter" 
             resultOrdered="true" fetchSize="500">
             SELECT
                 DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
@@ -198,7 +198,7 @@
     
     
     <select id="selectKoikinaiTenkyoListUpdate" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter" 
             resultOrdered="true" fetchSize="500">
             SELECT
                 DbT5101.*

@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koikinaitenkyojoho.IKoikinaiTenkyoRirekiHenkanMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
