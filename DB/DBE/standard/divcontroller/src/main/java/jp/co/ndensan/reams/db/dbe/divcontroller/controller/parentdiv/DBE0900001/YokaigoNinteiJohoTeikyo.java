@@ -90,16 +90,6 @@ public class YokaigoNinteiJohoTeikyo {
     }
 
     /**
-     * 「検索へ戻る」ボタン押下します。
-     *
-     * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_kensakuback(YokaigoNinteiJohoTeikyoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「一覧へ戻る」ボタン押下します。
      *
      * @param div YokaigoNinteiJohoTeikyoDiv
@@ -107,16 +97,6 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_BackSearchResult(YokaigoNinteiJohoTeikyoDiv div) {
         onLoad(div);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 再検索処理を実施します。
-     *
-     * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_ToSearch(YokaigoNinteiJohoTeikyoDiv div) {
         return ResponseData.of(div).respond();
     }
 
