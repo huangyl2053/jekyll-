@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkanEntity
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -71,7 +73,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             RString 最大連番 = hachilist.get(hachilist.size() - 1).get連番();
             RString 連番new = new RString(Integer.valueOf(最大連番.toString()) + 1);
             hachientity.set連番(連番new.padLeft(連番用, 桁目_7));
-            hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+            hachientity.setタイムスタンプ(format());
             hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
             hachientity.set市町村コード(shichosonCode);
             hachientity.set識別ＩＤ(識別ＩＤ_DA01);
@@ -84,7 +86,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         KaigoJyuminhyouTashajukiCSVDateEntity hachientity = new KaigoJyuminhyouTashajukiCSVDateEntity();
         hachientity.set市町村コード(shichosonCode);
         hachientity.set識別ＩＤ(識別ＩＤ_DA01);
-        hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+        hachientity.setタイムスタンプ(format());
         hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
         hachientity.set連番(連番);
         hachilist.add(hachientity);
@@ -97,7 +99,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         for (KaigoJyuminhyouTashajukiDateEntity entity : tashajyukiList) {
             KaigoJyuminhyouTashajukiCSVDateEntity hachientity = new KaigoJyuminhyouTashajukiCSVDateEntity();
             hachientity.set識別ＩＤ(識別ＩＤ_DA01);
-            hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+            hachientity.setタイムスタンプ(format());
             件数 = 件数 + 1;
             RString 連番号 = new RString(Integer.toString(件数));
             hachientity.set連番(連番号.padLeft(連番用, 桁目_7));
@@ -254,7 +256,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             RString 最大連番 = hachilist.get(hachilist.size() - 1).get連番();
             RString 連番new = new RString(Integer.valueOf(最大連番.toString()) + 1);
             hachientity.set連番(連番new.padLeft(連番用, 桁目_7));
-            hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+            hachientity.setタイムスタンプ(format());
             hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
             hachientity.set市町村コード(shichosonCode);
             hachientity.set識別ＩＤ(識別ＩＤ_AA65);
@@ -268,7 +270,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
         hachientity.set市町村コード(shichosonCode);
         hachientity.set識別ＩＤ(識別ＩＤ_AA65);
-        hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+        hachientity.setタイムスタンプ(format());
         hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
         hachientity.set連番(連番);
         hachilist.add(hachientity);
@@ -281,7 +283,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         for (KaigoJyuminhyouTashajukiDateEntity entity : tashajyukiList) {
             KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
             hachientity.set識別ＩＤ(識別ＩＤ_AA65);
-            hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+            hachientity.setタイムスタンプ(format());
             件数 = 件数 + 1;
             RString 連番号 = new RString(Integer.toString(件数));
             hachientity.set連番(連番号.padLeft(連番用, 桁目_7));
@@ -436,7 +438,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
             RString 最大連番 = hachilist.get(hachilist.size() - 1).get連番();
             RString 連番new = new RString(Integer.valueOf(最大連番.toString()) + 1);
             hachientity.set連番(連番new.padLeft(連番用, 桁目_7));
-            hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+            hachientity.setタイムスタンプ(format());
             hachientity.set最終レコード区分(最終ﾚｺｰﾄﾞ);
             hachientity.set市町村コード(shichosonCode);
             hachientity.set識別ＩＤ(識別ＩＤ_AA65);
@@ -451,7 +453,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         for (KaigoJyuminhyouTashajukiDateEntity entity : tashajyukiList) {
             KaigoJyuminhyouKoikiunyoJuniCSVDataEntity hachientity = new KaigoJyuminhyouKoikiunyoJuniCSVDataEntity();
             hachientity.set識別ＩＤ(識別ＩＤ_AA65);
-            hachientity.setタイムスタンプ(new RString(YMDHMS.now().toString()));
+            hachientity.setタイムスタンプ(format());
             件数 = 件数 + 1;
             RString 連番号 = new RString(Integer.toString(件数));
             hachientity.set連番(連番号.padLeft(連番用, 桁目_7));
@@ -598,7 +600,7 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         if (entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty()) {
             tashajukientity = get被保険者番号ある(entity, tashajukientity);
         }
-        if (entity.get受給者被保険者番号() != null && entity.get受給者被保険者番号().isEmpty()) {
+        if (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty()) {
             tashajukientity = get受給者被保険者番号ある(entity, tashajukientity);
         }
         return tashajukientity;
@@ -637,6 +639,13 @@ public class KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder {
         tashajukientity.set挿入日時(entity.get挿入日時());
         tashajukientity.set更新日時(entity.get更新日時());
         return tashajukientity;
+    }
+
+    private RString format() {
+        RStringBuilder 日時 = new RStringBuilder();
+        日時.append(YMDHMS.now().getRDateTime().getDate().toDateString());
+        日時.append(YMDHMS.now().getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss).toString());
+        return 日時.toRString().replace(":", "");
     }
 
     private KaigoJyuminhyouTashajukiDateEntity get受給者被保険者番号ある(KaigoJyuminhyouTashajukiDateEntity entity,
