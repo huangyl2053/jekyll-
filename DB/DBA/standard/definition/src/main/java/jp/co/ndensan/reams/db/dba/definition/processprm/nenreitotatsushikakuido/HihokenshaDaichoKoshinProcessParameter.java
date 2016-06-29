@@ -16,6 +16,8 @@ import lombok.Setter;
 
 /**
  * 資格異動対象者情報取得_バッチ用のパラメータです。
+ *
+ * @reamsid_L DBA-0330-010 xuyue
  */
 @Getter
 @Setter
