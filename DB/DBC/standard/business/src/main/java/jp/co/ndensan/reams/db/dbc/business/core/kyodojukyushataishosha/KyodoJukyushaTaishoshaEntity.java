@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyodoJukyushaTaishoshaEntity {
+public class KyodoJukyushaTaishoshaEntity implements Serializable {
 
     private FlexibleDate 異動日;
     private FlexibleYearMonth 対象年月;
