@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC20205",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "給付制限対象者一覧CSV",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD2020005",
+     "toLayoutTitle": "給付制限対象者一覧ＣＳＶ",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2020005",
+     "layoutTitle": "給付制限対象者一覧ＣＳＶ",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
