@@ -163,7 +163,7 @@ public class KoikinaiTenkyoRirekiHenkan {
         List<NinteiShinseiJoho> 一覧情報 = koikinaitenkyofinder.getUpdateDataList(parameter).records();
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
                 = Models.create(一覧情報);
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, ninteiShinseiJoho);
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
         getHandler(div).setShinseisyaitiran(申請者一覧情報List);
     }
 
@@ -210,7 +210,7 @@ public class KoikinaiTenkyoRirekiHenkan {
 
     private void upDateNinteiShinseiJoho(ShinseishoKanriNo shinseishoKanriNo, RString shokisaihokenshaNo, boolean flag) {
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> models
-                = ViewStateHolder.get(ViewStateKeys.申請書管理番号, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
         NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
         if (flag) {
             NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(shinseishoKanriNo);
