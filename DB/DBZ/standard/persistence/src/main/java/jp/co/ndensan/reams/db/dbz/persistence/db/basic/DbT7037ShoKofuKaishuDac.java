@@ -16,7 +16,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.lo
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7037ShoKofuKaishuMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -35,8 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 証交付回収のデータアクセスクラスです。
- * 
- * @reamsid_L DBZ-9999-020  suguangjun 
+ *
+ * @reamsid_L DBZ-9999-020 suguangjun
  */
 public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEntity> {
 
@@ -239,25 +238,5 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
                 order(new OrderBy(lastUpdateTimestamp, Order.DESC, NullsOrder.LAST)).
                 limit(1).
                 toObject(DbT7037ShoKofuKaishuEntity.class);
-    }
-
-    /**
-     * DbT7037ShoKofuKaishuEntityを更新します。状態によってinsert/update/delete処理に振り分けられます。
-     *
-     * @param entity entity
-     * @return 更新件数
-     */
-    public int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity) {
-        return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShoKaishuKanri(entity);
-    }
-
-    /**
-     * DbT7037ShoKofuKaishuEntityを更新します。
-     *
-     * @param entity 証交付回収テーブルのエンティティクラスです
-     * @return 更新件数
-     */
-    public int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity) {
-        return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShokaishuKanriRnlisakuju(entity);
     }
 }
