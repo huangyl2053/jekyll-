@@ -74,6 +74,8 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         div.getDdlHihokenshaNameMatchType().setSelectedIndex(DROPDOWNLIST_BLANK);
         div.getDdlShinseijiShinseiKubun().setSelectedIndex(DROPDOWNLIST_BLANK);
         div.getChkSeibetsu().setSelectedItemsByKey(isselect);
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        div.getTxtMaxCount().setValue(検索制御_最大取得件数上限);
     }
 
     /**
