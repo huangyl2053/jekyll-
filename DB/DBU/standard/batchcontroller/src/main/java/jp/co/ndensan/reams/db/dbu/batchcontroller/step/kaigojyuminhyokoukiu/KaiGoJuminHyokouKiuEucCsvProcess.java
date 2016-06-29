@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyumin
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.service.core.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
@@ -89,6 +89,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
     private IDbT1001HihokenshaDaichoMapper mapper;
     private OutputParameter<RString> outSharedFileName;
     private OutputParameter<RDateTime> outSharedFileID;
+    private static final RString 日付 = new RString("yyyyMMddHHmmssSSS");
 
     @Override
     protected void beforeExecute() {
@@ -503,12 +504,12 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
         if (entity.getInsertTimestamp() == null) {
             tashaJukiDataEntity.set挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set挿入日時(new RString(entity.getInsertTimestamp().toString()));
+            tashaJukiDataEntity.set挿入日時(entity.getInsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getLastUpdateTimestamp() == null) {
             tashaJukiDataEntity.set更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set更新日時(new RString(entity.getLastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set更新日時(entity.getLastUpdateTimestamp().format西暦(日付.toString()));
         }
         tashaJukiDataEntity.set受給者市町村コード(entity.getDbT4001ShichosonCode());
         tashaJukiDataEntity.set受給者被保険者番号(entity.getDbT4001HihokenshaNo());
@@ -593,12 +594,12 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
         if (entity.getDbT4001InsertTimestamp() == null) {
             tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001InsertTimestamp().toString()));
+            tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001InsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getDbT4001LastUpdateTimestamp() == null) {
             tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001LastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001LastUpdateTimestamp().format西暦(日付.toString()));
         }
         return tashaJukiDataEntity;
     }
