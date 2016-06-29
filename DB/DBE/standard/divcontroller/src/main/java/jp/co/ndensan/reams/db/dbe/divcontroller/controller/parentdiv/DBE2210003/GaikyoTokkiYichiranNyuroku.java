@@ -364,6 +364,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFirstTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(1, div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -377,6 +381,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtSecondTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(2, div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -390,6 +398,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtThirdTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(INT3, div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -403,6 +415,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFourthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(INT4, div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -416,6 +432,10 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFifthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
+        if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
         handler.tokkiJikoHasChanged(INT5, div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
@@ -443,7 +463,7 @@ public class GaikyoTokkiYichiranNyuroku {
             前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
     }
 
     /**
