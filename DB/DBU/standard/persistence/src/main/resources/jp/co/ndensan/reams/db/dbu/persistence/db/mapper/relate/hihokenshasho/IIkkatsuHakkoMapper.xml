@@ -1864,7 +1864,7 @@ and open the template in the editor.
         OR rank_number = 2
         OR rank_number = 3)DbT3006Joho
         ON
-        DbT3006Joho.hihokenshaNo = DbT3005Joho."hihokenshaNo"
+        DbT3006Joho."hihokenshaNo" = DbT3005Joho."hihokenshaNo"
         AND DbT3006Joho."taishoYM" = DbT3005Joho."taishoYM"
         AND DbT3006Joho."rirekiNo" = DbT3005Joho."rirekiNo"   
     </select>
