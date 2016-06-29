@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.definition.core.koikinaijushochitokurei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,15 +10,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 広域内住所地特例者Entityクラスです。
- * KoikinaiJushochiTokureiEntity.java
+ *
+ * @reamsid_L DBU-1140-030 dongyabin
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoikinaiJushochiTokureiEntity {
-    
+
     private RString 被保険者番号;
     private RString 氏名カナ;
     private RString 生年月日;
@@ -44,5 +43,4 @@ public class KoikinaiJushochiTokureiEntity {
     private RString 措置市町村コード;
     private RString 措置市町村名称;
     private RString 住民種別コード;
-    
 }
