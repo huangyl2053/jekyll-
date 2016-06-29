@@ -464,9 +464,7 @@ public class HanyoListCsvDataCreate {
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get判定結果情報Entity() != null) {
             csvEntity.set決定日(dataToRString(entity.get判定結果情報Entity().getKetteiYMD(), parameter));
-            csvEntity.set支給不支給区分(entity.get判定結果情報Entity().getShikyuHushikyuKetteiKubun().toString().equals("1")
-                    ? ShikyuFushikyuKubun.支給.get名称()
-                    : RString.EMPTY);
+            csvEntity.set支給不支給区分(ShikyuFushikyuKubun.to名称OrDefault(entity.get判定結果情報Entity().getShikyuHushikyuKetteiKubun(), RString.EMPTY));
             csvEntity.set支払金額(numToRString(entity.get判定結果情報Entity().getShiharaiKingaku()));
             csvEntity.set通知書作成日(dataToRString(entity.get判定結果情報Entity().getKetteiTsuchishoSakuseiYMD(), parameter));
             csvEntity.set通知書Ｎo(entity.get判定結果情報Entity().getKetteiTsuchiNo());
