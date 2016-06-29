@@ -53,13 +53,16 @@ public class ShiryoShinsakaiFinder {
      * 審査会自動割付を検索します。
      *
      * @param 審査会開催番号 審査会開催番号
-     * @return 審査会自動割付出力リスト
+     * @return KaisaiYoteiJohoBusiness
      */
     @Transaction
     public KaisaiYoteiJohoBusiness get開催予定情報(RString 審査会開催番号) {
         KaisaiYoteiJohoMyBatisParameter parametere = new KaisaiYoteiJohoMyBatisParameter(審査会開催番号);
         IShiryoShinsakaiIinMapper mapper = mapperProvider.create(IShiryoShinsakaiIinMapper.class);
         KaisaiYoteiJohoEntity 開催予定情報 = mapper.get開催予定情報(parametere);
+        if (開催予定情報 == null) {
+            return null;
+        }
         return new KaisaiYoteiJohoBusiness(開催予定情報);
     }
 }
