@@ -271,7 +271,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
-                        = ViewStateHolder.get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+                        = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
                 if (!RString.isNullOrEmpty(申請書管理番号)) {
                     NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
