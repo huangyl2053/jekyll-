@@ -165,14 +165,14 @@ public class HonsanteiFukaKeisanTotalHandler {
             if (shoriDateKanri.toEntity().getKijunTimestamp() == null || shoriDateKanri.toEntity().getKijunTimestamp().isEmpty()) {
                 row.setTxtJokyo(状況_未);
                 row.setTxtShoriNichiji(RString.EMPTY);
+                活性区分 = true;
             } else {
                 row.setTxtJokyo(状況_済);
                 row.setTxtShoriNichiji(shoriDateKanri.toEntity().getKijunTimestamp().toDateString());
-                活性区分 = true;
             }
             dgHonsanteiShoriKakuninList.add(row);
         }
-        if (活性区分) {
+        if (!活性区分) {
             if (定数_0.equals(遷移元区分)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_賦課計算, false);
             } else {
@@ -338,25 +338,15 @@ public class HonsanteiFukaKeisanTotalHandler {
         }
         ShutsuryokuKiKohoFactory shutsuryokuKiKohoFactory = ShutsuryokuKiKohoFactory.createInstance(調定年度);
         List<ShutsuryokuKiKoho> 出力期候補List = shutsuryokuKiKohoFactory.create出力期候補(期毎タイプフラグ, false);
-        List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
 
-        boolean 区分 = false;
         if (出力期候補List != null && !出力期候補List.isEmpty()) {
+            List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
             for (ShutsuryokuKiKoho 出力期候補 : 出力期候補List) {
-                if (!RString.isNullOrEmpty(出力期候補.get表示文字列())) {
-                    keyValueDataSource.add(new KeyValueDataSource(出力期候補.get期月().get期(), 出力期候補.get表示文字列()));
-                }
-                if (算定期.equals(出力期候補.get期月().get期())) {
-                    区分 = true;
-                    div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setSelectedKey(算定期);
-                }
+                keyValueDataSource.add(new KeyValueDataSource(出力期候補.get期月().get期(), 出力期候補.get表示文字列()));
             }
-        }
-        if (!区分) {
-            keyValueDataSource.add(new KeyValueDataSource(算定期, 調定期));
             div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setDataSource(keyValueDataSource);
+            div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setSelectedKey(算定期);
         }
-        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getDdlNotsuShuturyokuki2().setSelectedKey(算定期);
     }
 
     /**

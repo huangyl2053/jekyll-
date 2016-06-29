@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0310001;
 
-import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiFukaKeisanTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0310001.HonsanteiFukaKeisanTotalHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -56,8 +57,8 @@ public class HonsanteiFukaKeisanTotal {
         ViewStateHolder.put(ViewStateKeys.調定年度, 年度);
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtChoteiNendo().setValue(new FlexibleYear(年度.toString()).wareki().toDateString());
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtFukaNendo().setValue(new FlexibleYear(年度.toString()).wareki().toDateString());
-        KoseiTsukiHantei koseiTsukiHantei = new KoseiTsukiHantei();
-        Kitsuki 更正月 = koseiTsukiHantei.find更正月(RDate.getNowDate());
+        List<Kitsuki> 期月リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間().toList();
+        Kitsuki 更正月 = 期月リスト.get(0);
         算定期 = 更正月.get期();
         int 期 = 更正月.get期AsInt();
         RString 調定期 = 更正月.get表記().asX期括弧X月();
