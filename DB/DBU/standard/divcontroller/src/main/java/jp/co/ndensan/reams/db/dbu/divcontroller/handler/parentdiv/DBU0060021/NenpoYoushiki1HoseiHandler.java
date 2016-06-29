@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060021;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
+import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.TempJigyoHokokuNenpoDetalParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.NenpoYoushiki1HoseiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -66,8 +67,20 @@ public class NenpoYoushiki1HoseiHandler {
      * @param param 遷移画面と事業状況報告（年報）補正検索画面は渡す項目Entityクラスです。
      */
     public void initialize(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param) {
-        div.getHihokenshabango().getTxthokokuYM().setValue(new FlexibleDate("201501"));
-        div.getHihokenshabango().getTxtShukeiY().setValue(new FlexibleDate("201501"));
+        if (param.get画面報告年度().isEmpty()) {
+            div.getHihokenshabango().getTxthokokuYM().setValue(FlexibleDate.EMPTY);
+        } else {
+            div.getHihokenshabango().getTxthokokuYM().setValue(new FlexibleDate(Integer.parseInt(param.get画面報告年度().toString()),
+                    RDate.getNowDate().getMonthValue(),
+                    RDate.getNowDate().getDayValue()));
+        }
+        if (param.get画面集計年度().isEmpty()) {
+            div.getHihokenshabango().getTxtShukeiY().setValue(FlexibleDate.EMPTY);
+        } else {
+            div.getHihokenshabango().getTxtShukeiY().setValue(new FlexibleDate(Integer.parseInt(param.get画面集計年度().toString()),
+                    RDate.getNowDate().getMonthValue(),
+                    RDate.getNowDate().getDayValue()));
+        }
         div.getHihokenshabango().getTxtHihokenshabango().setValue(param.get保険者コード());
         div.getHihokenshabango().getTxthihokenshamei().setValue(param.get市町村名称());
         for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
