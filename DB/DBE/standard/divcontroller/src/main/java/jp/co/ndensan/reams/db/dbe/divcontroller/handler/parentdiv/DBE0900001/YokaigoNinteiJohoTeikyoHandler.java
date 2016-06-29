@@ -65,7 +65,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
         div.getNinteiKekkaShosai().setIsOpen(false);
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkensakuback"), false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToSearch"), false);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(被保険者番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());

@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011.dgNe
 import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -336,6 +338,7 @@ public class JogaishaTorokuHandler {
             dgRowList.set(rowcount, dgRow);
         }
         if (div.getJogaishaTorokuIchiran().getStart().equals(追加)) {
+            Association association = AssociationFinderFactory.createInstance().getAssociation();
             dgNenreiTotatshusha_Row addRow = new dgNenreiTotatshusha_Row();
             addRow.setRowState(RowState.Added);
             addRow.setShikibetsuCode(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode().getDomain().getColumnValue());
@@ -344,7 +347,7 @@ public class JogaishaTorokuHandler {
             addRow.getJogaiKaijyoDate().setValue(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().getValue());
             addRow.getJogaiTekiyoDate().setValue(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().getValue());
             addRow.getDateOfBirth().setValue(new FlexibleDate(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtDateOfBirth()));
-            addRow.setLasdecCode(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtLasdecCode());
+            addRow.setLasdecCode(association.get地方公共団体コード().value());
             addRow.setLasdecMei(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtLasdecMei());
             addRow.setGender(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtGender());
             addRow.setJuminJotai(div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJuminJotai());
