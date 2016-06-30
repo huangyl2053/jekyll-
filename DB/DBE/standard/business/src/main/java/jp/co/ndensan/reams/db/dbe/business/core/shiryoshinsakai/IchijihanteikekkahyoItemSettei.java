@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -683,7 +684,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString getカテーテル特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.カテーテル.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.カテーテル.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -698,7 +699,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString getじょくそうの処置特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.じょくそうの処置.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.じょくそうの処置.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -713,7 +714,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString getモニター測定特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.モニター測定.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.モニター測定.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -728,7 +729,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get気管切開の処置特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.気管切開の処置.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.気管切開の処置.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -803,7 +804,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get金銭の管理特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.金銭の管理.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.金銭の管理.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -818,7 +819,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get薬の内服特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.薬の内服.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.薬の内服.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -878,7 +879,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString getひどい物忘れ特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.ひどい物忘れ.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.ひどい物忘れ.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -893,7 +894,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get物や衣類を壊す特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.物や衣類を壊す.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.物や衣類を壊す.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -908,7 +909,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get収集癖特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.収集癖.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.収集癖.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -923,7 +924,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get一人で出たがる特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.一人で出たがる.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.一人で出たがる.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -938,7 +939,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get落ち着きなし特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.落ち着きなし.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.落ち着きなし.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -953,7 +954,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get介護に抵抗特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.介護に抵抗.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.介護に抵抗.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -968,7 +969,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get大声を出す特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.大声をだす.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.大声をだす.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -983,7 +984,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get同じ話をする特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.同じ話をする.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.同じ話をする.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -998,7 +999,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get昼夜逆転特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.昼夜逆転.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.昼夜逆転.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1013,7 +1014,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get感情が不安定特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.感情が不安定.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.感情が不安定.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1028,7 +1029,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get作話特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.作話.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.作話.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1043,7 +1044,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get被害的特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.被害的.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.被害的.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1058,22 +1059,22 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get外出して戻れない特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.外出して戻れない.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.外出して戻れない.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku06A.外出して戻れない.get調査特記事項番序(), 特記事項情報));
         } else if (A_09.equals(厚労省IF識別コード)) {
-            return get特記事項(is特記事項(NinteichosaKomoku09A.外出頻度.get調査特記事項番序(), 特記事項情報));
+            return get特記事項(is特記事項(NinteichosaKomoku09A.外出すると戻れない.get調査特記事項番序(), 特記事項情報));
         } else if (B_09.equals(厚労省IF識別コード)) {
-            return get特記事項(is特記事項(NinteichosaKomoku09B.外出頻度.get調査特記事項番序(), 特記事項情報));
+            return get特記事項(is特記事項(NinteichosaKomoku09B.外出すると戻れない.get調査特記事項番序(), 特記事項情報));
         }
         return RString.EMPTY;
     }
 
     private RString get徘徊特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.常時の徘徊.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.常時の徘徊.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1088,7 +1089,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get場所の理解特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.自分がいる場所の理解.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.自分がいる場所の理解.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1103,7 +1104,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get今の季節を理解特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.今の季節を理解.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.今の季節を理解.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1118,7 +1119,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get自分の名前をいう特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.自分の名前をいう.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.自分の名前をいう.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1133,7 +1134,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get短期記憶特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.短期記憶.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.短期記憶.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1148,7 +1149,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get生年月日をいう特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.生年月日や年齢をいう.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.生年月日や年齢をいう.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1163,7 +1164,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get毎日の日課を理解特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.毎日の日課を理解.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.毎日の日課を理解.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1178,7 +1179,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get意思の伝達特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.意思の伝達.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.意思の伝達.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1208,7 +1209,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString getズボン等の着脱特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.ズボン_パンツ等の着脱.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.ズボン等の着脱.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1223,7 +1224,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get口腔清潔特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.口腔清潔_はみがき等.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.口腔清潔.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1291,6 +1292,15 @@ public class IchijihanteikekkahyoItemSettei {
         }
     }
 
+    private RString getNinteichosaKomoku99A(RString 名称) {
+        for (NinteichosaKomoku99A komoku : NinteichosaKomoku99A.values()) {
+            if (komoku.get名称().equals(名称)) {
+                return komoku.get調査特記事項番序();
+            }
+        }
+        return RString.EMPTY;
+    }
+
     private RString getNinteichosaKomoku02A(RString 名称) {
         for (NinteichosaKomoku02A komoku : NinteichosaKomoku02A.values()) {
             if (komoku.get名称().equals(名称)) {
@@ -1329,7 +1339,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報, RString 名称) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(getNinteichosaKomoku99A(名称), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(getNinteichosaKomoku02A(名称), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1344,7 +1354,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get拘縮の有無特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.間接の動く範囲の制限の有無.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.間接の動く範囲の制限の有無.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1359,7 +1369,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get麻痺特記事項_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.麻痺等の有無.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.麻痺等の有無.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1374,7 +1384,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get認知症高齢者自立度_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.認知症高齢者の日常自立度.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.認知症高齢者自立度.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
@@ -1389,7 +1399,7 @@ public class IchijihanteikekkahyoItemSettei {
 
     private RString get障害高齢者自立度_ある(RString 厚労省IF識別コード, List<NinteichosahyoTokkijikoEntity> 特記事項情報) {
         if (A_99.equals(厚労省IF識別コード)) {
-            return RString.EMPTY;
+            return get特記事項(is特記事項(NinteichosaKomoku99A.障害高齢者の日常自立度_寝たきり度.get調査特記事項番序(), 特記事項情報));
         } else if (A_02.equals(厚労省IF識別コード)) {
             return get特記事項(is特記事項(NinteichosaKomoku02A.障害高齢者自立度.get調査特記事項番序(), 特記事項情報));
         } else if (A_06.equals(厚労省IF識別コード)) {
