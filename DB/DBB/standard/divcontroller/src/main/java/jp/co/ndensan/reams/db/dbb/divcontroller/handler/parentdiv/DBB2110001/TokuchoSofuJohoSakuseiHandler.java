@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.Toku
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchosofu.TokuChoSoufuJohoSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -51,6 +52,9 @@ public final class TokuchoSofuJohoSakuseiHandler {
     private static final RString 特徴開始月_4月 = new RString("04");
     private static final RString 漢字_月 = new RString("月");
     private static final RString 実行する = new RString("btnSakusei");
+    private static final RString 帳票グループコード = new RString("DBB2110001");
+    private static final RString 特別徴収依頼情報一覧表ID = new RString("DBB200019_TokubetsuChoshuIraiJohoIchiran");
+    private static final RString 特別徴収異動情報一覧表ID = new RString("DBB200021_TokubetsuChoshuIdojohoIchiran");
 
     private static final int 月分_1 = 1;
     private static final int 月分_2 = 2;
@@ -102,6 +106,14 @@ public final class TokuchoSofuJohoSakuseiHandler {
         set処理日時(処理日時Map);
         日付関連_所得年度コンフィグによる制御(賦課年度);
         set初期状態(now);
+
+        div.getCcdOutputChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 帳票グループコード);
+        List<dgOutputChohyoIchiran_Row> chohyoList = div.getCcdOutputChohyoIchiran().get出力帳票一覧();
+        if (null != chohyoList) {
+            for (dgOutputChohyoIchiran_Row row : chohyoList) {
+                row.setSelected(Boolean.FALSE);
+            }
+        }
     }
 
     private void set初期状態(RDate now) {
@@ -192,6 +204,25 @@ public final class TokuchoSofuJohoSakuseiHandler {
         Entry<RString, Boolean> entry = get処理対象月();
         YMDHMS now = YMDHMS.now();
         RString 本月 = new RString(now.getMonthValue()).concat(漢字_月);
+        List<dgOutputChohyoIchiran_Row> chohyoList = div.getCcdOutputChohyoIchiran().get出力帳票一覧();
+        dgOutputChohyoIchiran_Row 特別徴収依頼情報一覧表row = new dgOutputChohyoIchiran_Row();
+        dgOutputChohyoIchiran_Row 特別徴収異動情報一覧表row = new dgOutputChohyoIchiran_Row();
+        if (null != chohyoList) {
+            for (dgOutputChohyoIchiran_Row row : chohyoList) {
+                if (特別徴収依頼情報一覧表ID.equals(row.getChohyoID())) {
+                    特別徴収依頼情報一覧表row = row;
+                } else if (特別徴収異動情報一覧表ID.equals(row.getChohyoID())) {
+                    特別徴収異動情報一覧表row = row;
+                }
+            }
+        }
+        if (対象月_7月.equals(entry.getKey())) {
+            特別徴収依頼情報一覧表row.setSelected(Boolean.TRUE);
+            特別徴収異動情報一覧表row.setSelected(Boolean.FALSE);
+        } else {
+            特別徴収依頼情報一覧表row.setSelected(Boolean.FALSE);
+            特別徴収異動情報一覧表row.setSelected(Boolean.TRUE);
+        }
         if (本月.equals(entry.getKey()) && entry.getValue()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
         } else {
@@ -433,8 +464,14 @@ public final class TokuchoSofuJohoSakuseiHandler {
         TokuChoSoufuJohoSakuseiParameter param = new TokuChoSoufuJohoSakuseiParameter();
         param.set賦課年度(new RDate(div.getDdlFukaNendo().getSelectedValue().toString()).getYear());
         param.set処理対象月(get処理対象月().getKey());
-        //TODO 出力順IDが見つけりません　QA869
-        param.set出力順ID(RString.EMPTY);
+        List<dgOutputChohyoIchiran_Row> chohyoList = div.getCcdOutputChohyoIchiran().get出力帳票一覧();
+        RString 出力順ID = RString.EMPTY;
+        for (dgOutputChohyoIchiran_Row row : chohyoList) {
+            if (row.getSelected()) {
+                出力順ID = row.getChohyoID();
+            }
+        }
+        param.set出力順ID(出力順ID);
         return manager.createTokuChoSoufuJohoParameter(param);
     }
 
