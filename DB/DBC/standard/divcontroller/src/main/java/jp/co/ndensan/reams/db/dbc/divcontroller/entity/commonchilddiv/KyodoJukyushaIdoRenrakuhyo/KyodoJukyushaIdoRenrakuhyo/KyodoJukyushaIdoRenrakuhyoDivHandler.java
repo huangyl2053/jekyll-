@@ -162,16 +162,16 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
     }
 
     private void set初期値_新規(KyodoshoriyoJukyushaIdoRenrakuhyoParam entity) {
-
-        div.getTxtTaisyoYM().setValue(RDate.getNowDate());
-        div.getTxtIdoYMD().setValue(RDate.getNowDate());
+        RDate システム日付 = RDate.getNowDate();
+        div.getTxtTaisyoYM().setValue(システム日付);
+        div.getTxtIdoYMD().setValue(システム日付);
         div.getRadIdoKubunCode().setSelectedValue(JukyushaIF_IdoKubunCode.新規.get名称());
 
         div.getDdlJukyushaIdoJiyu().getDataSource().add(0, new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         div.getDdlJukyushaIdoJiyu().setIsBlankLine(true);
         List<KeyValueDataSource> items_基本 = div.getChkKihonSofuAdd().getDataSource();
         div.getChkKihonSofuAdd().setSelectedItems(items_基本);
-        div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().setValue(RDate.getNowDate());
+        div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtKihonIdoYMD().setValue(システム日付);
         div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtHiHokenshaName().setValue(entity.get基本情報Entity().get被保険者氏名());
         TelNo telNo = entity.get基本情報Entity().get電話番号();
         if (telNo != null && !telNo.isEmpty()) {
@@ -182,21 +182,21 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().getTxtAddressKana().setValue(entity.get基本情報Entity().get住所カナ());
 
         RString config償還 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システム日付, SubGyomuCode.DBC介護給付);
         if (受託あり.equals(config償還)) {
             List<KeyValueDataSource> items_償還 = div.getChkShokanSofuAdd().getDataSource();
             div.getChkShokanSofuAdd().setSelectedItems(items_償還);
         }
-        div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().setValue(RDate.getNowDate());
+        div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getTxtShokanIdoYMD().setValue(システム日付);
         div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getDdlHokenkyufuIchijiSashitomeKubun().setIsBlankLine(true);
 
         RString config高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システム日付, SubGyomuCode.DBC介護給付);
         if (受託あり.equals(config高額)) {
             List<KeyValueDataSource> items_高額 = div.getChkKogakuSofuAdd().getDataSource();
             div.getChkKogakuSofuAdd().setSelectedItems(items_高額);
         }
-        div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().setValue(RDate.getNowDate());
+        div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getTxtKogakuIdoYMD().setValue(システム日付);
         div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setIsBlankLine(true);
         div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlShotokuKubun().setIsBlankLine(true);
         div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getRadRoureiFukushiNenkinJukyuAriFlag().setSelectedKey(KEY_0);
@@ -468,8 +468,9 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         } else {
             div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().setDisabled(false);
         }
+        RDate システム日付 = RDate.getNowDate();
         RString config償還 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システム日付, SubGyomuCode.DBC介護給付);
         if (受託なし.equals(config償還)) {
             div.getChkShokanSofuAdd().setDisabled(true);
             div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
@@ -482,7 +483,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         }
 
         RString config高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                システム日付, SubGyomuCode.DBC介護給付);
         if (受託なし.equals(config高額)) {
             div.getChkKogakuSofuAdd().setDisabled(true);
             div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
@@ -521,7 +522,8 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             entity.get共通項目Entity().set異動事由(JukyushaIF_JukyushaIdoJiyu.受給資格取得.getコード());
         } else if (div.getDdlJukyushaIdoJiyu().getSelectedValue().equals(JukyushaIF_JukyushaIdoJiyu.受給資格喪失.get名称())) {
             entity.get共通項目Entity().set異動事由(JukyushaIF_JukyushaIdoJiyu.受給資格喪失.getコード());
-        } else if (div.getDdlJukyushaIdoJiyu().getSelectedValue().equals(JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.get名称())) {
+        } else if (div.getDdlJukyushaIdoJiyu().getSelectedValue().equals(
+                JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.get名称())) {
             entity.get共通項目Entity().set異動事由(JukyushaIF_JukyushaIdoJiyu.広域連合における受給者の市町村間転居異動.getコード());
         } else if (div.getDdlJukyushaIdoJiyu().getSelectedValue().equals(JukyushaIF_JukyushaIdoJiyu.合併による新規.get名称())) {
             entity.get共通項目Entity().set異動事由(JukyushaIF_JukyushaIdoJiyu.合併による新規.getコード());
