@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKo
 import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoProperty;
 import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -47,7 +47,7 @@ public class NinteiKoshinTsuchishoService {
     private static List<NinteiKoshinTsuchishoReport> toReports(List<NinteiKoshinTsuchishoItem> targets) {
         List<NinteiKoshinTsuchishoReport> list = new ArrayList();
         for (NinteiKoshinTsuchishoItem item : targets) {
-            item.set編集後宛先(JushoHenshu.createInstance().create編集後宛先(item.getIAtesaki(), item.get地方公共団体(), item.get帳票制御共通()));
+            item.set編集後宛先(JushoHenshu.create編集後宛先(item.getIAtesaki(), item.get地方公共団体(), item.get帳票制御共通()));
             list.add(new NinteiKoshinTsuchishoReport(item));
         }
         return list;
