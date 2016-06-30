@@ -181,7 +181,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverReport
             if (null == 納入通知書期情報) {
                 continue;
             }
-            if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) > 0) {
+            if (納入通知書期情報.get納付額() != null && 納入通知書期情報.get納付額().compareTo(Decimal.ZERO) > 0) {
                 return false;
             }
         }
