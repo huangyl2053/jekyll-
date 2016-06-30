@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.report.koikinaitenkyokekkaichiranhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.report.koikinaitenkyokekkaichiranhyo.KoikinaiTenkyoKekkaIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.koikinaitenkyokekkaichiranhyo.KoikinaiTenkyoKekkaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
