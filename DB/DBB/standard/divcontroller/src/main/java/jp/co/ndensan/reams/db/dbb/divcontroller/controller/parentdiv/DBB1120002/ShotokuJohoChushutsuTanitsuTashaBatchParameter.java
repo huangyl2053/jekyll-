@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
 
     private static final RString 処理待ち = new RString("処理待ち");
-    private static final RString 共有ファイル名 = new RString("ShotokuJohoChushutsuTanitsuTasha");
+    private static final RString ファイル付箋 = new RString("ShotokuJohoChushutsuTanitsuTasha");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterTanitsuTasha");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString BBKAIGO = new RString("BBKAIGO");
@@ -91,7 +91,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
             throw new ApplicationException(DbzErrorMessages.アップロードファイルが不正.getMessage()
                     .replace(BBKAIGO.toString()).evaluate());
         }
-        FilesystemName sharedFileName = new FilesystemName(共有ファイル名);
+        FilesystemName sharedFileName = new FilesystemName(ファイル付箋);
         SharedFile.defineSharedFile(sharedFileName);
         FilesystemPath 絶対パス = new FilesystemPath(files[0].getFilePath());
         SharedFile.copyToSharedFile(絶対パス, sharedFileName);

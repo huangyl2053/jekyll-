@@ -48,7 +48,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     private static final RString 所得引出方法が不正のため = new RString("所得引出方法が不正のため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
-    private static final RString 所得情報ファイル = new RString("BBKAIGOxxxxxxxx.CSV");
+    private static final RString 所得情報ファイル = new RString("BBKAIGO.CSV");
 
     /**
      * コンストラクタです。
@@ -102,7 +102,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      * @param currentTime RDate
      */
     public void initTorikoShori(RDate currentTime) {
-        RString path = new RString(SharedFile.getBasePath() + File.separator);
+        RString path = new RString(SharedFile.getBasePath() + File.separator + 所得情報ファイル);
         File file = new File(path.toString());
         if (file.exists() && file.getName().contains(所得情報ファイル)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
@@ -125,7 +125,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
                         SubGyomuCode.DBB介護賦課);
             }
             if (年度 != null) {
-                RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance().getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
+                RString 処理区分 = ShotokuJohoChushutsuRenkeitanitu.createInstance()
+                        .getShoriKubun(市町村識別ID.get(0).getItemId(), 遷移区分, new FlexibleYear(年度));
                 処理区分Handler(メニューID, 処理区分);
             }
         }
