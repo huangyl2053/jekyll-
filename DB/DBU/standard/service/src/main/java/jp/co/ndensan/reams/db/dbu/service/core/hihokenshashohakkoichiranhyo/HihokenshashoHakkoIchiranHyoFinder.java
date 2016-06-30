@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
@@ -148,7 +148,11 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             } else {
                 ichiranyoShohakkoshaEntity.set被保険者番号(ikkatsuHakkoRelateEntity.getHihokenshaNo());
             }
-            ichiranyoShohakkoshaEntity.set氏名(isNull(new RString(ikkatsuHakkoRelateEntity.getMeisho().toString())));
+            if (!ikkatsuHakkoRelateEntity.getMeisho().isEmpty()) {
+                ichiranyoShohakkoshaEntity.set氏名(new RString(ikkatsuHakkoRelateEntity.getMeisho().toString()));
+            } else {
+                ichiranyoShohakkoshaEntity.set氏名(RString.EMPTY);
+            }
             if (ikkatsuHakkoRelateEntity.getSeinengappiYMD() != null) {
                 ichiranyoShohakkoshaEntity.set生年月日_年齢(set生年月日_年齢(交付日, ikkatsuHakkoRelateEntity));
             } else {
@@ -159,17 +163,20 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             ichiranyoShohakkoshaEntity.set認定開始日_認定終了日(set認定開始日_認定終了日(ikkatsuHakkoRelateEntity));
             DbT7060KaigoJigyoshaDac dbT7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
             if (ShisetsuType.介護保険施設.getコード().equals(ikkatsuHakkoRelateEntity.getNyushoShisetsuShurui())) {
-                List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList = dbT7060Dac.select事業者名称(new JigyoshaNo(
-                        isNull(new RString(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().toString()))));
+                List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList = new ArrayList<>();
+                if (!ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().isEmpty()) {
+                    dbT7060EntityList = dbT7060Dac.select事業者名称(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode());
+                }
                 if (!dbT7060EntityList.isEmpty()) {
                     ichiranyoShohakkoshaEntity.set施設名(new RString(dbT7060EntityList.get(0).getJigyoshaName().toString()));
                 }
             }
             if (ShisetsuType.住所地特例対象施設.getコード().equals(ikkatsuHakkoRelateEntity.getNyushoShisetsuShurui())) {
-                DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
-                List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005EntityList
-                        = dbT1005Dac.select事業者名称(new JigyoshaNo(
-                                        isNull(new RString(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().toString()))));
+                List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005EntityList = new ArrayList<>();
+                if (!ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().isEmpty()) {
+                    DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
+                    dbT1005EntityList = dbT1005Dac.select事業者名称(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode());
+                }
                 if (!dbT1005EntityList.isEmpty()) {
                     ichiranyoShohakkoshaEntity.set施設名(new RString(dbT1005EntityList.get(0).getJigyoshaMeisho().toString()));
                 }
@@ -211,16 +218,19 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 && (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getShikakuShutokuYMD().toString())))
                 && (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getShikakuSoshitsuYMD().toString()))))
                 || (RString.isNullOrEmpty(ikkatsuHakkoRelateEntity.getHihokenshaNo().getColumnValue()))) {
-            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(
-                    SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("01"), new FlexibleDate(RDate.getNowDate().toString()));
+            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.被保険者証交付事由.getコード(),
+                    new Code("01"), new FlexibleDate(RDate.getNowDate().toString()));
             if (交付事由.isEmpty()) {
                 交付事由 = new RString("01");
             }
             ichiranyoShohakkoshaEntity.set交付_非交付事由(交付事由);
         } else {
-            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
-                    new Code(isNull(ikkatsuHakkoRelateEntity.getIdoJiyuCode())),
-                    new FlexibleDate(RDate.getNowDate().toString()));
+            Code 被保険者証交付事由 = Code.EMPTY;
+            if (!RString.isNullOrEmpty(ikkatsuHakkoRelateEntity.getIdoJiyuCode())) {
+                被保険者証交付事由 = new Code(ikkatsuHakkoRelateEntity.getIdoJiyuCode());
+            }
+            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.被保険者証交付事由.getコード(),
+                    被保険者証交付事由, new FlexibleDate(RDate.getNowDate().toString()));
             if (交付事由.isEmpty()) {
                 交付事由 = ikkatsuHakkoRelateEntity.getIdoJiyuCode();
             }
@@ -518,13 +528,5 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
         return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
-    }
-
-    private RString isNull(RString 対象項目) {
-        if (RString.isNullOrEmpty(対象項目)) {
-            return RString.EMPTY;
-        } else {
-            return 対象項目;
-        }
     }
 }
