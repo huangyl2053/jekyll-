@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -101,22 +100,5 @@ public class NinteiShinseiJohoManager {
             return false;
         }
         return 1 == dac.save(要介護認定申請情報.toEntity());
-    }
-
-    /**
-     * 広域内要介護認定申請情報{@link NinteiShinseiJoho}を保存します。
-     *
-     * @param 要介護認定申請情報 {@link NinteiShinseiJoho}
-     * @return 更新件数 更新結果の件数を返します。
-     */
-    @Transaction
-    public boolean save広域内要介護認定申請情報(NinteiShinseiJoho 要介護認定申請情報) {
-        requireNonNull(要介護認定申請情報, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報"));
-        if (!要介護認定申請情報.hasChanged()) {
-            return false;
-        }
-        DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
-        entity.setState(EntityDataState.Modified);
-        return 1 == dac.save(entity);
     }
 }
