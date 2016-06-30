@@ -180,12 +180,12 @@
                     AND DbT4001."yukoMukoKubun" = '1'
                     <choose>
                         <when test="抽出区分 == 2 and 基準年月日 != null and !基準年月日.isEmpty()">
-                            AND DbT4001.ninteiYukoKikanKaishiYMD <<![CDATA[<=]]> #{基準年月日}
-                            AND #{基準年月日} <<![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <![CDATA[<=]]> #{基準年月日}
+                            AND #{基準年月日} <![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD
                         </when>
                         <otherwise>
-                            AND DbT4001.ninteiYukoKikanKaishiYMD <<![CDATA[<=]]> DbT3005_all.todokedeYMD
-                            AND DbT3005_all.todokedeYMD <<![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD	
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <![CDATA[<=]]> DbT3005_all.todokedeYMD
+                            AND DbT3005_all.todokedeYMD <![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD	
                         </otherwise>
                     </choose>
                 ) AS DbT4001_corresponding
