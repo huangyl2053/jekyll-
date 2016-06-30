@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMast
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -52,7 +53,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkin
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -271,8 +271,9 @@ public class HihokenshaDaichoSakuseiManager {
             hihokenshaEntity.setJushoTitle(JUSHO_TITLE);
             ChohyoSeigyoKyotsu 帳票共通情報
                     = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100009.getReportId());
-            hihokenshaEntity.setJusho(JushoHenshu.createInstance().editJusho(帳票共通情報, shikibetsuTaisho));
-            hihokenshaEntity.setZenkokuJushoCode(JushoHenshu.createInstance().get住所コード(entitylist.get(0)));
+            hihokenshaEntity.setJusho(
+                    JushoHenshu.editJusho(帳票共通情報, shikibetsuTaisho, AssociationFinderFactory.createInstance().getAssociation()));
+            hihokenshaEntity.setZenkokuJushoCode(JushoHenshu.get住所コード(entitylist.get(0)));
             hihokenshaEntity.setGyoseikuTitle(GYOSEIKU_TITLE);
             hihokenshaEntity.setGyoseikuCode(shikibetsuTaisho.to個人().get行政区画().getGyoseiku().getコード());
             hihokenshaEntity.setTelephoneNoTitle(TELEPHONENO_TITLE);

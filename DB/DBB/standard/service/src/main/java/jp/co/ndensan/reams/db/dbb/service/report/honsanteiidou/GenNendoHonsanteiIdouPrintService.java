@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaK
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.GenNendoHonsanteiIdouSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -104,9 +104,8 @@ public class GenNendoHonsanteiIdouPrintService {
         for (KeisanjohoAtenaKozaKouseizengoEntity entity : 更正前後EntityList) {
 
             IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get計算後情報_宛名_口座_更正後Entity().get宛名Entity());
-            JushoHenshu jushoHenshu = JushoHenshu.createInstance();
             ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-            RString 住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
             住所編集リスト.add(住所編集);
         }
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
