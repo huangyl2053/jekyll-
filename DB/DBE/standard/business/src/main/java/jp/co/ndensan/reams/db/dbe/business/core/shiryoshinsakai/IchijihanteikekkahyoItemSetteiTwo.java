@@ -205,19 +205,31 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         item.set段階改善_集団への不適応(get段階改善(itemHensyu.get調査結果_集団への不適応(), itemHensyu.get前回結果_集団への不適応()));
         item.set段階改善_買い物(get段階改善(itemHensyu.get調査結果_買い物(), itemHensyu.get前回結果_買い物()));
         item.set段階改善_簡単な調理(get段階改善(itemHensyu.get調査結果_簡単な調理(), itemHensyu.get前回結果_簡単な調理()));
-        item.set段階改善_点滴の管理(get段階改善(itemHensyu.get調査結果_点滴の管理(), itemHensyu.get前回結果_点滴の管理()));
-        item.set段階改善_中心静脈栄養(get段階改善(itemHensyu.get調査結果_中心静脈栄養(), itemHensyu.get前回結果_中心静脈栄養()));
-        item.set段階改善_透析(get段階改善(itemHensyu.get調査結果_透析(), itemHensyu.get前回結果_透析()));
-        item.set段階改善_ストーマの処置(get段階改善(itemHensyu.get調査結果_ストーマの処置(), itemHensyu.get前回結果_ストーマの処置()));
-        item.set段階改善_酸素療法(get段階改善(itemHensyu.get調査結果_酸素療法(), itemHensyu.get前回結果_酸素療法()));
-        item.set段階改善_レスピレーター(get段階改善(itemHensyu.get調査結果_レスピレーター(), itemHensyu.get前回結果_レスピレーター()));
-        item.set段階改善_気管切開の処置(get段階改善(itemHensyu.get調査結果_気管切開の処置(), itemHensyu.get前回結果_気管切開の処置()));
-        item.set段階改善_疼痛の看護(get段階改善(itemHensyu.get調査結果_疼痛の看護(), itemHensyu.get前回結果_疼痛の看護()));
-        item.set段階改善_経管栄養(get段階改善(itemHensyu.get調査結果_経管栄養(), itemHensyu.get前回結果_経管栄養()));
-        item.set段階改善_モニター測定(get段階改善(itemHensyu.get調査結果_モニター測定(), itemHensyu.get前回結果_モニター測定()));
-        item.set段階改善_じょくそうの処置(get段階改善(itemHensyu.get調査結果_じょくそうの処置(), itemHensyu.get前回結果_じょくそうの処置()));
-        item.set段階改善_カテーテル(get段階改善(itemHensyu.get調査結果_カテーテル(), itemHensyu.get前回結果_カテーテル()));
+        item.set段階改善_点滴の管理(get特別な医療_段階改善(itemHensyu.get調査結果_点滴の管理(), itemHensyu.get前回結果_点滴の管理()));
+        item.set段階改善_中心静脈栄養(get特別な医療_段階改善(itemHensyu.get調査結果_中心静脈栄養(), itemHensyu.get前回結果_中心静脈栄養()));
+        item.set段階改善_透析(get特別な医療_段階改善(itemHensyu.get調査結果_透析(), itemHensyu.get前回結果_透析()));
+        item.set段階改善_ストーマの処置(get特別な医療_段階改善(itemHensyu.get調査結果_ストーマの処置(), itemHensyu.get前回結果_ストーマの処置()));
+        item.set段階改善_酸素療法(get特別な医療_段階改善(itemHensyu.get調査結果_酸素療法(), itemHensyu.get前回結果_酸素療法()));
+        item.set段階改善_レスピレーター(get特別な医療_段階改善(itemHensyu.get調査結果_レスピレーター(), itemHensyu.get前回結果_レスピレーター()));
+        item.set段階改善_気管切開の処置(get特別な医療_段階改善(itemHensyu.get調査結果_気管切開の処置(), itemHensyu.get前回結果_気管切開の処置()));
+        item.set段階改善_疼痛の看護(get特別な医療_段階改善(itemHensyu.get調査結果_疼痛の看護(), itemHensyu.get前回結果_疼痛の看護()));
+        item.set段階改善_経管栄養(get特別な医療_段階改善(itemHensyu.get調査結果_経管栄養(), itemHensyu.get前回結果_経管栄養()));
+        item.set段階改善_モニター測定(get特別な医療_段階改善(itemHensyu.get調査結果_モニター測定(), itemHensyu.get前回結果_モニター測定()));
+        item.set段階改善_じょくそうの処置(get特別な医療_段階改善(itemHensyu.get調査結果_じょくそうの処置(), itemHensyu.get前回結果_じょくそうの処置()));
+        item.set段階改善_カテーテル(get特別な医療_段階改善(itemHensyu.get調査結果_カテーテル(), itemHensyu.get前回結果_カテーテル()));
         return item;
+    }
+
+    private RString get特別な医療_段階改善(RString 調査結果, RString 前回結果) {
+        if (!RString.isNullOrEmpty(調査結果) && !RString.isNullOrEmpty(前回結果)) {
+            if (前回結果.compareTo(調査結果) < 0) {
+                return 悪化;
+            }
+            if (調査結果.compareTo(前回結果) < 0) {
+                return 改善;
+            }
+        }
+        return RString.EMPTY;
     }
 
     private RString get段階改善(RString 調査結果, RString 前回結果) {
