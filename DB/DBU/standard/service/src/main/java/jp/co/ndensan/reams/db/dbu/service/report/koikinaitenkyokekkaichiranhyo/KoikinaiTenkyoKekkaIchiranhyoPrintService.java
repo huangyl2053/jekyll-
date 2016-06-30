@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.koikinaitenkyokekkaichiranhyo;
+package jp.co.ndensan.reams.db.dbu.service.report.koikinaitenkyokekkaichiranhyo;
 
 import java.util.ArrayList;
 import java.util.List;

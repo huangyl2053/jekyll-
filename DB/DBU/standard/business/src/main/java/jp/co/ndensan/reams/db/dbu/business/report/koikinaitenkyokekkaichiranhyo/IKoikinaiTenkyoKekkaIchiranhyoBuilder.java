@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.koikinaitenkyokekkaichiranhyo;
+package jp.co.ndensan.reams.db.dbu.business.report.koikinaitenkyokekkaichiranhyo;
 
 import jp.co.ndensan.reams.db.dba.entity.report.koikinaitenkyokekkaichiranhyo.KoikinaiTenkyoKekkaIchiranhyoReportSource;
-import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
+import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 広域内転居結果一覧表のインターフェースクラスです。
+ * 広域内転居結果一覧表Builderのインターフェースクラスです。
  *
  * @reamsid_L DBU-1150-070 zhangguopeng
  */
-interface IKoikinaiTenkyoKekkaIchiranhyoEditor extends IReportEditor<KoikinaiTenkyoKekkaIchiranhyoReportSource> {
+interface IKoikinaiTenkyoKekkaIchiranhyoBuilder extends IReportBuilder<KoikinaiTenkyoKekkaIchiranhyoReportSource> {
 }
