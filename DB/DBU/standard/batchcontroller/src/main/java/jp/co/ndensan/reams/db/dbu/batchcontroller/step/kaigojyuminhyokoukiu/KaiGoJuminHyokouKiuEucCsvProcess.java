@@ -597,9 +597,9 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
             tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001InsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getDbT4001LastUpdateTimestamp() == null) {
-            tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
+            tashaJukiDataEntity.set受給者更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001LastUpdateTimestamp().format西暦(日付.toString()));
+            tashaJukiDataEntity.set受給者更新日時(entity.getDbT4001LastUpdateTimestamp().format西暦(日付.toString()));
         }
         return tashaJukiDataEntity;
     }
