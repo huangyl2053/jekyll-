@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshukaishitsuchishokarihakkoichiranreport;
+package jp.co.ndensan.reams.db.dbb.service.report.tokuchokarisanteitsuchishohakko;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  *
  * @reamsid_L DBB-0790-060 surun
  */
-public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranReportPrintService {
+public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService {
 
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
