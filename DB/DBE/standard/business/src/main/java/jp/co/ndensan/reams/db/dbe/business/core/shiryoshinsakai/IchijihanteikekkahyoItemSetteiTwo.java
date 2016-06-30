@@ -488,6 +488,8 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         } else if (setteiThree.get簡単な調理(entity.getKoroshoIfShikibetsuCode().value()) == entity.getRemban()) {
             item.set前回結果_簡単な調理(ChosaAnser10.toValue(entity.getResearchItem()).get名称());
             itemHensyu.set前回結果_簡単な調理(ChosaAnser10.toValue(entity.getResearchItem()).getコード());
+        } else {
+            set前回結果4(entity, itemHensyu, item);
         }
         return item;
     }

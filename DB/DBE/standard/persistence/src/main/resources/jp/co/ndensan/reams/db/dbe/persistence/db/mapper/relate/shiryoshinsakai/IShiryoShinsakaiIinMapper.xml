@@ -566,6 +566,25 @@
         ) AS ServiceJokyo,
         (
         SELECT
+        NinteichosahyoSF."ninteichosaRirekiNo" AS dbt5208_ninteichosaRirekiNo,
+        NinteichosahyoSF."shinseishoKanriNo" AS dbt5208_shinseishoKanriNo,
+        NinteichosahyoSF."remban" AS dbt5208_remban,
+        NinteichosahyoSF."koroshoIfShikibetsuCode" AS dbt5208_koroshoIfShikibetsuCode,
+        NinteichosahyoSF."serviceJokyoFlag" AS dbt5208_serviceJokyoFlag
+        FROM
+        (
+        SELECT * ,
+        ROW_NUMBER() OVER (PARTITION BY dbt5208."shinseishoKanriNo"
+        ORDER BY dbt5208."ninteichosaRirekiNo" DESC) AS dbt5208_RRKNO
+        FROM
+        rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS dbt5208
+        ) AS NinteichosahyoSF
+        WHERE
+        dbt5208_RRKNO = '1'
+        AND NinteichosahyoSF.dbt5208_remban = '1'
+        ) AS ServiceJokyoFlag,
+        (
+        SELECT
         Ninteichosa."ninteichosaRirekiNo" AS dbt5210_ninteichosaRirekiNo,
         Ninteichosa."shinseishoKanriNo" AS dbt5210_shinseishoKanriNo,
         Ninteichosa."remban" AS dbt5210_remban,
@@ -590,6 +609,7 @@
         AND NinteiJoho.dbt5502_shinseishoKanriNo = GaikyoChosa.dbt5202_shinseishoKanriNo
         AND NinteiJoho.dbt5502_shinseishoKanriNo = ServiceJokyo.dbt5207_shinseishoKanriNo
         AND NinteiJoho.dbt5502_shinseishoKanriNo = ShisetsuRiyo.dbt5210_shinseishoKanriNo
+        AND NinteiJoho.dbt5502_shinseishoKanriNo = ServiceJokyoFlag.dbt5208_shinseishoKanriNo
         <!--            ORDER BY
         <if test="isIsShuturyokuJun">
            NinteiJoho.dbT5502_shinsakaiOrder
@@ -1445,6 +1465,11 @@
         <result property="dbt5207_remban" column="dbt5207_remban" />
         <result property="dbt5207_koroshoIfShikibetsuCode" column="dbt5207_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="dbt5207_serviceJokyo" column="dbt5207_serviceJokyo" />
+        <result property="dbt5208_ninteichosaRirekiNo" column="dbt5208_ninteichosaRirekiNo" />
+        <result property="dbt5208_shinseishoKanriNo" column="dbt5208_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="dbt5208_remban" column="dbt5208_remban" />
+        <result property="dbt5208_koroshoIfShikibetsuCode" column="dbt5208_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="dbt5208_serviceJokyoFlag" column="dbt5208_serviceJokyoFlag" />
         <result property="dbt5210_ninteichosaRirekiNo" column="dbt5210_ninteichosaRirekiNo" />
         <result property="dbt5210_shinseishoKanriNo" column="dbt5210_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="dbt5210_remban" column="dbt5210_remban" />

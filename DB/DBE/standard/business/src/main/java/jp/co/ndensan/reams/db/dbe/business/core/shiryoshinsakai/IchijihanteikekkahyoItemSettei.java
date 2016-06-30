@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
@@ -170,9 +171,20 @@ public class IchijihanteikekkahyoItemSettei {
         RString dbt5207厚労省IF識別コード = entity.getDbt5207_koroshoIfShikibetsuCode().value();
         if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getDbt5202_serviceKubunCode().value())) {
             item = set介護給付サービス(item, dbt5207厚労省IF識別コード, 厚労省IF識別コード, entity, itiziHanteiEntityList);
+            if (entity.isDbt5208_serviceJokyoFlag()) {
+                item.set住宅改修1(IsJutakuKaishu.あり.get名称());
+            } else {
+                item.set住宅改修1(IsJutakuKaishu.なし.get名称());
+            }
         } else if (ServiceKubunCode.介護給付サービス.getコード().equals(entity.getDbt5202_serviceKubunCode().value())) {
             item = set予防給付サービス(item, dbt5207厚労省IF識別コード, 厚労省IF識別コード, entity, itiziHanteiEntityList);
+            if (entity.isDbt5208_serviceJokyoFlag()) {
+                item.set住宅改修2(IsJutakuKaishu.あり.get名称());
+            } else {
+                item.set住宅改修2(IsJutakuKaishu.なし.get名称());
+            }
         }
+
         RString dbT5211厚労省IF識別コード = entity.getDbt5211_koroshoIfShikibetsuCode().value();
         item = コード転換(item, entity);
         for (ItiziHanteiEntity itiziHanteiEntity : itiziHanteiEntityList) {
