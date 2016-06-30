@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_5期_連帳 HokenryoNonyuTsuchishoGinfuriFiveKiRenchoSource
  *
- * @reamsid_L DBB-9110-150 liangbc
+ * @reamsid_L DBB-9110-150 wangjie2
  */
 public class HokenryoNonyuTsuchishoGinfuriFiveKiRenchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
