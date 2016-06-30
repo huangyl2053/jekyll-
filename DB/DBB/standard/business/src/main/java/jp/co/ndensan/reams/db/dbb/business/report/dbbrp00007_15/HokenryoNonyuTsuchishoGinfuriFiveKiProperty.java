@@ -23,7 +23,7 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiProperty
      *
      */
     public HokenryoNonyuTsuchishoGinfuriFiveKiProperty() {
-        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100069.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100070.getReportId());
     }
 
 }

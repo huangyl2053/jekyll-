@@ -198,10 +198,14 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoKakko13 = 左括弧;
             source.nofushoKakko12 = 左括弧;
             source.nofushoKakko11 = 左括弧;
-            source.nofushoKakko34 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko33 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko32 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko31 = 納付書共通.get被代納人敬称().concat(右括弧);
+            RString 被代納人敬称 = 納付書共通.get被代納人敬称();
+            if (null == 被代納人敬称) {
+                被代納人敬称 = RString.EMPTY;
+            }
+            source.nofushoKakko34 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko33 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko32 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko31 = 被代納人敬称.concat(右括弧);
         } else {
             source.nofushoKakko14 = RString.EMPTY;
             source.nofushoKakko13 = RString.EMPTY;
@@ -577,8 +581,8 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         if (編集後本算定通知書共通情報.get調定年度_年度なし() != null) {
             source.titleKanendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
             source.ryoshushoKanendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
-            source.titleKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり().concat("分"));
-            source.ryoshushoKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり().concat("分"));
+            source.titleKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat("分");
+            source.ryoshushoKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat("分");
         }
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
         if (表示コード != null) {

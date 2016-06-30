@@ -205,11 +205,15 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiEditor implements IHokenryoNonyu
             source.nofushoKakko13 = 左括弧;
             source.nofushoKakko12 = 左括弧;
             source.nofushoKakko11 = 左括弧;
-            source.nofushoKakko35 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko34 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko33 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko32 = 納付書共通.get被代納人敬称().concat(右括弧);
-            source.nofushoKakko31 = 納付書共通.get被代納人敬称().concat(右括弧);
+            RString 被代納人敬称 = 納付書共通.get被代納人敬称();
+            if (null == 被代納人敬称) {
+                被代納人敬称 = RString.EMPTY;
+            }
+            source.nofushoKakko35 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko34 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko33 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko32 = 被代納人敬称.concat(右括弧);
+            source.nofushoKakko31 = 被代納人敬称.concat(右括弧);
         } else {
             source.nofushoKakko15 = RString.EMPTY;
             source.nofushoKakko14 = RString.EMPTY;
