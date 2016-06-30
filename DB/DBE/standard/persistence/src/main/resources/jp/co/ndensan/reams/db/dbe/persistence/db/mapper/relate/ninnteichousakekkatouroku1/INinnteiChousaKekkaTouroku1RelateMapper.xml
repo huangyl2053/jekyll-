@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBE-0040-010 xuyue -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe2210001.IDbe2210001RelateMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1.INinnteiChousaKekkaTouroku1RelateMapper">
 
     <!-- NinteiChosaJohoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_NinteiChosaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity" autoMapping="true">
@@ -18,10 +18,15 @@
         <result property="temp_特記" column="temp_特記" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査回数" column="temp_認定調査回数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査委託区分コード" column="temp_認定調査委託区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査実施場所コード" column="temp_調査実施場所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査実施場所名称" column="temp_調査実施場所名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査委託先コード" column="temp_調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査員コード" column="temp_調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査実施年月日" column="temp_調査実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="get認定調査情報"
             resultMap="resultMap_NinteiChosaJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter"
             fetchSize="500">
         SELECT
         DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode"  AS  temp_厚労省IF識別コード,
@@ -29,17 +34,17 @@
         DbT5201NinteichosaIraiJoho."ninteichosaIraiKaisu"  AS  temp_認定調査回数,
         DbT5910NinteichosaItakusakiJoho."chosaItakuKubun"  AS  temp_認定調査委託区分コード
         FROM
-        rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!-- 要介護認定申請情報 -->
+        rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
         LEFT JOIN
-        rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho  <!-- 認定調査依頼情報 -->
+        rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho
         ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = #{temp_認定調査依頼履歴番号}
         AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
         LEFT JOIN
-        rgdb."DbT7051KoseiShichosonMaster"  AS DbT7051KoseiShichosonMaster <!-- 構成市町村マスタ -->
+        rgdb."DbT7051KoseiShichosonMaster"  AS DbT7051KoseiShichosonMaster
         ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         LEFT JOIN
-        rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
+        rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = #{temp_認定調査委託先コード}
         WHERE
@@ -49,7 +54,7 @@
 
     <select resultOrdered="true" id="get既存概況調査情報"
             resultMap="resultMap_NinteiChosaJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter"
             fetchSize="500">
         SELECT
         CASE DbT5210NinteichosahyoShisetsuRiyo."shisetsuRiyoFlag"
@@ -60,11 +65,16 @@
         DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuJusho" AS temp_利用施設住所,
         DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuTelNo" AS temp_利用施設電話番号,
         DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuYubinNo" AS temp_利用施設郵便番号,
-        DbT5202NinteichosahyoGaikyoChosa."tokki" AS temp_特記
+        DbT5202NinteichosahyoGaikyoChosa."tokki" AS temp_特記,
+        DbT5202NinteichosahyoGaikyoChosa."chosaJisshiBashoCode" AS temp_調査実施場所コード,
+        DbT5202NinteichosahyoGaikyoChosa."chosaJisshiBashoMeisho" AS temp_調査実施場所名称,
+        DbT5202NinteichosahyoGaikyoChosa."chosaItakusakiCode" AS temp_調査委託先コード,
+        DbT5202NinteichosahyoGaikyoChosa."chosainCode" AS temp_調査員コード,
+        DbT5202NinteichosahyoGaikyoChosa."ninteichosaJisshiYMD" AS temp_調査実施年月日
         FROM
-        rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS  DbT5202NinteichosahyoGaikyoChosa  <!-- 認定調査票（概況調査）（子） -->
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS  DbT5202NinteichosahyoGaikyoChosa
         LEFT JOIN
-        rgdb."DbT5210NinteichosahyoShisetsuRiyo"  AS  DbT5210NinteichosahyoShisetsuRiyo  <!-- 認定調査票（概況調査）施設利用 -->
+        rgdb."DbT5210NinteichosahyoShisetsuRiyo"  AS  DbT5210NinteichosahyoShisetsuRiyo
         ON  DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = DbT5210NinteichosahyoShisetsuRiyo."shinseishoKanriNo"
         AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = DbT5210NinteichosahyoShisetsuRiyo."ninteichosaRirekiNo"
         WHERE

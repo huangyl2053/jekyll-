@@ -69,6 +69,7 @@ public class ChosaJisshishaJohoHandler {
         List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(key.
                 get申請書管理番号()).records();
         List<KeyValueDataSource> shozokuKikan = new ArrayList<>();
+        shozokuKikan.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (NinteichosaItakusakiJoho ninteichosaItakusakiJoho : ninteichosaItakusakiJohoList) {
             KeyValueDataSource date = new KeyValueDataSource(ninteichosaItakusakiJoho.get認定調査委託先コード(),
                     ninteichosaItakusakiJoho.get事業者名称());
@@ -81,6 +82,7 @@ public class ChosaJisshishaJohoHandler {
         List<ChosainJoho> chosainJohoList = service.getKinyusha(key
                 .get申請書管理番号()).records();
         List<KeyValueDataSource> kinyusha = new ArrayList<>();
+        kinyusha.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosainJoho chosainJoho : chosainJohoList) {
             KeyValueDataSource data = new KeyValueDataSource(chosainJoho.get認定調査員コード(),
                     chosainJoho.get調査員氏名());

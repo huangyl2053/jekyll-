@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe2210001;
+package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity;
 
 /**
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.Te
  *
  * @reamsid_L DBE-0040-010 xuyue
  */
-public interface IDbe2210001RelateMapper {
+public interface INinnteiChousaKekkaTouroku1RelateMapper {
 
     /**
      * 認定調査情報を取得します。

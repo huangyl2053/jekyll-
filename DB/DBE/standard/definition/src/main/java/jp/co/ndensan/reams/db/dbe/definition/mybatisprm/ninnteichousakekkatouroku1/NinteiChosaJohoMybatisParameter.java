@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001;
+package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
