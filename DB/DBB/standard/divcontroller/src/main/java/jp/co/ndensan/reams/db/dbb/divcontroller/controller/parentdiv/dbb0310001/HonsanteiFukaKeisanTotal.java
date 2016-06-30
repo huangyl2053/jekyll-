@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiFukaKeisanTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0310001.HonsanteiFukaKeisanTotalHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 本算定賦課計算クラスです。
@@ -38,6 +36,7 @@ public class HonsanteiFukaKeisanTotal {
     private static final RString 遷移元区分_1 = new RString("1");
     private RString 算定期;
     private RString 遷移元区分;
+    private RString 調定年度;
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -54,7 +53,7 @@ public class HonsanteiFukaKeisanTotal {
         }
         RString 年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(),
                 SubGyomuCode.DBB介護賦課);
-        ViewStateHolder.put(ViewStateKeys.調定年度, 年度);
+        調定年度 = 年度;
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtChoteiNendo().setValue(new FlexibleYear(年度.toString()).wareki().toDateString());
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtFukaNendo().setValue(new FlexibleYear(年度.toString()).wareki().toDateString());
         List<Kitsuki> 期月リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間().toList();
@@ -99,7 +98,7 @@ public class HonsanteiFukaKeisanTotal {
      * @return ResponseData<HonsanteiFukaKeisanTotalDiv>
      */
     public ResponseData<HonsanteifukaBatchParameter> onClick_btnSantei(HonsanteiFukaKeisanTotalDiv div) {
-        HonsanteifukaBatchParameter parameter = getKanendoFukaKakuteiHandler(div).setバッチパラメータ(算定期, 遷移元区分);
+        HonsanteifukaBatchParameter parameter = getKanendoFukaKakuteiHandler(div).setバッチパラメータ(調定年度, 算定期, 遷移元区分);
         return ResponseData.of(parameter).respond();
     }
 
@@ -110,7 +109,7 @@ public class HonsanteiFukaKeisanTotal {
      * @return ResponseData<HonsanteiFukaKeisanTotalDiv>
      */
     public ResponseData<HonsanteifukaBatchParameter> onClick_btnTsuchishoSakusei(HonsanteiFukaKeisanTotalDiv div) {
-        HonsanteifukaBatchParameter parameter = getKanendoFukaKakuteiHandler(div).setバッチパラメータ(算定期, 遷移元区分);
+        HonsanteifukaBatchParameter parameter = getKanendoFukaKakuteiHandler(div).setバッチパラメータ(調定年度, 算定期, 遷移元区分);
         return ResponseData.of(parameter).respond();
     }
 

@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.Hons
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.dgHonsanteiShoriKakunin_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.dgKanrijoho1_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.dgKanrijoho2_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteifuka.Honsanteifuka;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
@@ -51,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -441,12 +439,13 @@ public class HonsanteiFukaKeisanTotalHandler {
     /**
      * バッチパラメータの設定するメソッドです。
      *
+     * @param 調定年度 RString
      * @param 算定期 RString
      * @param 遷移元区分 RString
      * @return HonsanteifukaBatchParameter バッチパラメータ
      *
      */
-    public HonsanteifukaBatchParameter setバッチパラメータ(RString 算定期, RString 遷移元区分) {
+    public HonsanteifukaBatchParameter setバッチパラメータ(RString 調定年度, RString 算定期, RString 遷移元区分) {
 
         List<TyouhyouParameter> parameterList = new ArrayList<>();
         TyouhyouParameter chohyoMeter;
@@ -460,7 +459,6 @@ public class HonsanteiFukaKeisanTotalHandler {
             chohyoMeter.set出力順ID(entry.getValue());
             parameterList.add(chohyoMeter);
         }
-        RString 調定年度 = ViewStateHolder.get(ViewStateKeys.調定年度, RString.class);
         HonsanteifukaParameter paramter = new HonsanteifukaParameter();
         paramter.set調定年度(new FlexibleYear(調定年度));
         paramter.set賦課年度(new FlexibleYear(調定年度));
