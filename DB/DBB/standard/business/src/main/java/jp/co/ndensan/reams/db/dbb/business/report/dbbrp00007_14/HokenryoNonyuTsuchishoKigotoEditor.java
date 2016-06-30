@@ -180,8 +180,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoNokigen = 納入通知書期情報.get納期限表記();
         source.nofushoNofuin = 納入通知書期情報.get領収日付欄();
         source.nofushoRyoshuHizukein = 納入通知書期情報.get納付書領収印欄();
-        //TODO 本算定納入通知書情報.納付書情報リスト.納付書随時
-        source.nofushoZuiji = RString.EMPTY;
+        source.nofushoZuiji = 納入通知書期情報.get随時表記();
         source.ryoshushoNokigen = 納入通知書期情報.get納期限表記();
         source.ryoshushoNofugaku = 納入通知書期情報.get領収証書納付額欄();
         source.ryoshushoNofuin = 納入通知書期情報.get領収日付印欄();
@@ -289,8 +288,8 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
                 source.tsuki1 = 納入通知書期情報.get月表記();
             } else if (NokigenShutsuryokuHoho.全ての期分を印字する
                     .equals(本算定納入通知書制御情報.get納入通知書制御情報().get納期限出力方法())) {
-                source.ki1 = null == 一番目普徴納期情報.get期() ? RString.EMPTY : 一番目普徴納期情報.get期().padLeft(RString.HALF_SPACE, 2);
-                source.tsuki1 = null == 一番目普徴納期情報.get月() ? RString.EMPTY : 一番目普徴納期情報.get月().padLeft(RString.HALF_SPACE, 2);
+                source.ki1 = null == 納入通知書期情報.get期表記() ? RString.EMPTY : 納入通知書期情報.get期表記().padLeft(RString.HALF_SPACE, 2);
+                source.tsuki1 = null == 納入通知書期情報.get月表記() ? RString.EMPTY : 納入通知書期情報.get月表記().padLeft(RString.HALF_SPACE, 2);
             }
             source.nokiKaishi1 = 一番目普徴納期情報.get納期開始日();
             source.nokiShuryo1 = 一番目普徴納期情報.get納期終了日();
