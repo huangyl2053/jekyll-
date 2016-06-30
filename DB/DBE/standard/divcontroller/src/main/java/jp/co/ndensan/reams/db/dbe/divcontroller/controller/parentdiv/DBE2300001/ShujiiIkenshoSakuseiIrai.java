@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdent
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -48,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -126,7 +128,8 @@ public class ShujiiIkenshoSakuseiIrai {
         LockingKey 排他キー
                 = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
         if (!RealInitialLocker.tryGetLock(排他キー)) {
-            return ResponseData.of(div).addValidationMessages(createValidationHandler(div).排他チェック()).respond();
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
         }
         createHandler(div).load();
         div.getIraiprint().getTxtkigenymd().setValue(RDate.getNowDate());
