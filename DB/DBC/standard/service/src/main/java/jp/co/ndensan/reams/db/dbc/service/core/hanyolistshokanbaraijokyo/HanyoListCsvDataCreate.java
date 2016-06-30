@@ -399,7 +399,7 @@ public class HanyoListCsvDataCreate {
             FlexibleYearMonth 国保連送付年月 = entity.get支給申請Entity().getSofuYM();
             csvEntity.setサービス提供年月(monthToRString(サービス提供年月, parameter));
             csvEntity.set整理番号(entity.get支給申請Entity().getSeiriNo());
-            csvEntity.set様式番号(KyufuJissekiYoshikiKubun.toValue(get様式番号(entity)).get様式番号());
+            csvEntity.set様式番号(get様式番号(entity));
             csvEntity.set給付証記載保険者番号(給付証記載保険者番号 != null
                     ? 給付証記載保険者番号.getColumnValue() : RString.EMPTY);
             csvEntity.set申請日(dataToRString(entity.get支給申請Entity().getShinseiYMD(), parameter));
@@ -590,7 +590,6 @@ public class HanyoListCsvDataCreate {
             map様式番号.put(請求基本List.get(i).getYoshikiNo(), true);
             lst様式番号.add(KyufuJissekiYoshikiKubun.toValue(請求基本List.get(i).getYoshikiNo()).get様式番号());
         }
-
         if (lst様式番号.size() == 1) {
             return lst様式番号.get(0);
         }
