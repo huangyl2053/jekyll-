@@ -370,6 +370,10 @@ public enum ReportIdDBB {
      */
     DBB200004(new ReportId("DBB200004_TokuChoHeijunkaTsuchishoHakkoIchiran"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")),
     /**
+     * 普徴仮算定結果一覧表の帳票ID
+     */
+    DBB200006(new ReportId("DBB200006_FutsuChoshuKarisanteiKekkaIchiran"), new RString("普徴仮算定結果一覧表")),
+    /**
      * 介護保険所得情報一覧表の帳票ID
      */
     DBB200008(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"), new RString("介護保険所得情報一覧表")),
