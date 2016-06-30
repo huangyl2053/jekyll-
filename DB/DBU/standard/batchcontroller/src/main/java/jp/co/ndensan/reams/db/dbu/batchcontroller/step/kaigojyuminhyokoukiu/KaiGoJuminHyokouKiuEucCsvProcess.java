@@ -78,7 +78,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private KaiGoJuminHyokouKiuProcessParameter processParameter;
-    private final int maxKeepVersions = 50;
+    private final int maxKeepVersions = 1000;
     private FileSpoolManager manager;
     private KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder finder;
     List<KaigoJyuminhyouTashajukiCSVDateEntity> hachiCSVDataEntityList = new ArrayList<>();
@@ -335,7 +335,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
             List<KaigoJyuminhyouTashajukiDateEntity> entityList = get介護住民票個別事項連携情報リストのIsEmpty(kaigoJuminhyoEntityList);
             for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
                 junitoJugoCSVDataEntityList
-                        = finder.getKaigoJyuminhyouKoikiunyoJuniCSVData(entityList,
+                        = finder.getKaigoJyuminhyouKoikiunyoJugoCSVData(entityList,
                                 processParameter.getKobetsuKoikiunyoParameterList().get(i).getShichosonCode(),
                                 rendoPatternEntity.getCodeHenkanKubun()).records();
                 get広域12桁または15桁CSVデータのCSV出力(junitoJugoCSVDataEntityList);
