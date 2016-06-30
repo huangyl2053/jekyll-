@@ -177,16 +177,17 @@
                     rgdb.DbT4001JukyushaDaicho As DbT4001
                     ON DbT4001.hihokenshaNo = DbT3005_all.hihokenshaNo
                     AND DbT4001.logicalDeletedFlag = false
-                    <if test="抽出区分 == 2">
-                        <if test="基準年月日 != null and !基準年月日.isEmpty()">
+                    AND DbT4001."yukoMukoKubun" = '1'
+                    <choose>
+                        <when test="抽出区分 == 2 and 基準年月日 != null and !基準年月日.isEmpty()">
                             AND DbT4001.ninteiYukoKikanKaishiYMD <= BP.基準年月日
                             AND BP.基準年月日 <＝ DbT4001.ninteiYukoKikanShuryoYMD
-                        </if>
-                    </if>
-                    <if test="抽出区分 != 2">
-                        AND DbT4001.ninteiYukoKikanKaishiYMD <= DbT3005_all.todokedeYMD
-                        AND DbT3005_all.todokedeYMD <＝ DbT4001.ninteiYukoKikanShuryoYMD	
-                    </if>
+                        </when>
+                        <otherwise>
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <= DbT3005_all.todokedeYMD
+                            AND DbT3005_all.todokedeYMD <＝ DbT4001.ninteiYukoKikanShuryoYMD	
+                        </otherwise>
+                    </choose>
                 ) AS DbT4001_corresponding
                 WHERE
                 DbT4001_corresponding.番号 = 1

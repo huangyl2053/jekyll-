@@ -528,9 +528,9 @@
                         *
                 FROM (
                         SELECT
-                        DbT3055_all."hihokenshaNo" as 被保険者番号,
-                        DbT3055_all."serviceTeikyoYM" as サービス提供年月,
-                        DbT3055_all."rirekino" as 履歴番号,
+                        DbT3109_all."hihokenshaNo" as 被保険者番号,
+                        DbT3109_all."serviceTeikyoYM" as サービス提供年月,
+                        DbT3109_all."rirekino" as 履歴番号,
                         DbT4001."jukyuShinseiJiyu" as 受給申請事由,
                         DbT4001."jukyuShinseiYMD" as 受給申請年月日,
                         DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
@@ -542,21 +542,21 @@
                         DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
                         ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" OVER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
                         FROM
-                                rgdb.DbT3055KogakuKyufuTaishoshaGokei As DbT3055_all
+                                rgdb.DbT3109JigyoKogakuKyufuTaishoshaGokei As DbT3109_all
                         INNER JOIN
                                 rgdb.DbT4001JukyushaDaicho As DbT4001
-                                ON	DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo"
-                                AND	DbT4001."logicalDeletedFlag" = false
-                                AND	DbT4001."yukoMukoKubun" = '1'
-                                AND	DbT4001."ninteiYukoKikanKaishiYMD" <= (DbT3055_all."serviceTeikyoYM" || '31')
-                                AND	(DbT3055_all."serviceTeikyoYM" || '01') <＝ DbT4001."ninteiYukoKikanShuryoYMD"
+                                ON DbT4001."hihokenshaNo" = DbT3109_all."hihokenshaNo"
+                                AND DbT4001."logicalDeletedFlag" = false
+                                AND DbT4001."yukoMukoKubun" = '1'
+                                AND DbT4001."ninteiYukoKikanKaishiYMD" <= (DbT3109_all."serviceTeikyoYM" || '31')
+                                AND (DbT3109_all."serviceTeikyoYM" || '01') <＝ DbT4001."ninteiYukoKikanShuryoYMD"
                 ) AS DbT4001_corresponding
                 WHERE
                         DbT4001_corresponding.番号 = 1
         ) As DbT4001
-        ON	DbT4001."hihokenshaNo" = DbT3055."hihokenshaNo"
-        AND	DbT4001."serviceTeikyoYM" = DbT3055."serviceTeikyoYM"
-        AND	DbT4001."rirekino" = DbT3055."rirekino"
+        ON DbT4001."hihokenshaNo" = ."hihokenshaNo"
+        AND DbT4001."serviceTeikyoYM" = ."serviceTeikyoYM"
+        AND DbT4001."rirekino" = ."rirekino"
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.kozaSearchResult" />) AS koza
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
