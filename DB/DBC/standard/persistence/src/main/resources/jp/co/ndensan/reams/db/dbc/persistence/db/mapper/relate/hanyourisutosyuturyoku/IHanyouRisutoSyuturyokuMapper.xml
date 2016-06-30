@@ -208,8 +208,8 @@
                                 ON	DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo"
                                 AND	DbT4001."logicalDeletedFlag" = false
                                 AND	DbT4001."yukoMukoKubun" = '1'
-                                AND	DbT4001."ninteiYukoKikanKaishiYMD" <= (DbT3055_all."serviceTeikyoYM" || '31')
-                                AND	(DbT3055_all."serviceTeikyoYM" || '01') <＝ DbT4001."ninteiYukoKikanShuryoYMD"
+                                AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31')
+                                AND	(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
                 ) AS DbT4001_corresponding
                 WHERE
                         DbT4001_corresponding.番号 = 1
@@ -548,15 +548,15 @@
                                 ON DbT4001."hihokenshaNo" = DbT3109_all."hihokenshaNo"
                                 AND DbT4001."logicalDeletedFlag" = false
                                 AND DbT4001."yukoMukoKubun" = '1'
-                                AND DbT4001."ninteiYukoKikanKaishiYMD" <= (DbT3109_all."serviceTeikyoYM" || '31')
-                                AND (DbT3109_all."serviceTeikyoYM" || '01') <＝ DbT4001."ninteiYukoKikanShuryoYMD"
+                                AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3109_all."serviceTeikyoYM" || '31')
+                                AND (DbT3109_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
                 ) AS DbT4001_corresponding
                 WHERE
                         DbT4001_corresponding.番号 = 1
         ) As DbT4001
-        ON DbT4001."hihokenshaNo" = ."hihokenshaNo"
-        AND DbT4001."serviceTeikyoYM" = ."serviceTeikyoYM"
-        AND DbT4001."rirekino" = ."rirekino"
+        ON DbT4001."hihokenshaNo" = DbT3109."hihokenshaNo"
+        AND DbT4001."serviceTeikyoYM" = DbT3109."serviceTeikyoYM"
+        AND DbT4001."rirekino" = DbT3109."rirekino"
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.kozaSearchResult" />) AS koza
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"

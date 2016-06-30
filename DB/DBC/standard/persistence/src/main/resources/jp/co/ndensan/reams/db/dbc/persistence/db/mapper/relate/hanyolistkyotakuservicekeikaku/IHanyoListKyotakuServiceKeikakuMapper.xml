@@ -170,7 +170,7 @@
                     DbT4001."kyuSochishaFlag" as 旧措置フラグ,
                     DbT4001."minashiCode" as みなし要介護区分コード,
                     DbT4001."chokkinIdoYMD" as 直近異動事由コード,
-                    ROW_NUMBER() OVER (PARTITION BY shichosonCode, hihokenshaNo  OVER BY rirekiNo DESC, edaban DESC) As 番号
+                    ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" OVER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
                     FROM
                     rgdb.DbT3005KyotakuKeikakuTodokede As DbT3005_all
                     INNER JOIN
@@ -180,12 +180,12 @@
                     AND DbT4001."yukoMukoKubun" = '1'
                     <choose>
                         <when test="抽出区分 == 2 and 基準年月日 != null and !基準年月日.isEmpty()">
-                            AND DbT4001.ninteiYukoKikanKaishiYMD <= BP.基準年月日
-                            AND BP.基準年月日 <＝ DbT4001.ninteiYukoKikanShuryoYMD
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <<![CDATA[<=]]> #{基準年月日}
+                            AND #{基準年月日} <<![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD
                         </when>
                         <otherwise>
-                            AND DbT4001.ninteiYukoKikanKaishiYMD <= DbT3005_all.todokedeYMD
-                            AND DbT3005_all.todokedeYMD <＝ DbT4001.ninteiYukoKikanShuryoYMD	
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <<![CDATA[<=]]> DbT3005_all.todokedeYMD
+                            AND DbT3005_all.todokedeYMD <<![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD	
                         </otherwise>
                     </choose>
                 ) AS DbT4001_corresponding
