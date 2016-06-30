@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanDiv;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class KoikinaiTenkyoRirekiHenkanHandler {
 
     private final KoikinaiTenkyoRirekiHenkanDiv div;
-    private static final RString SELECTKEY_空白 = RString.EMPTY;
     private static final int DROPDOWNLIST_BLANK = 0;
 
     /**
@@ -49,7 +47,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      */
     public void setOnLoad() {
         List<KeyValueDataSource> kunbunCode = new ArrayList<>();
-        kunbunCode.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
+        kunbunCode.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         kunbunCode.addAll(createListFromNinteiShinseiShinseijiKubunCode());
         div.getDdlShinseijiShinseiKubun().getDataSource().clear();
         div.getDdlShinseijiShinseiKubun().getDataSource().addAll(kunbunCode);
@@ -153,7 +151,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         }
         setSentaku(row);
         List<KeyValueDataSource> shokisaihokensha = new ArrayList<>();
-        shokisaihokensha.add(new KeyValueDataSource(SELECTKEY_空白, row.getShoKisaiHokenshaNo()));
+        shokisaihokensha.add(new KeyValueDataSource(RString.EMPTY, row.getShoKisaiHokenshaNo()));
         shokisaihokensha.addAll(list);
         div.getDdlShokisaiHokenshaNoSaki().getDataSource().clear();
         div.getDdlShokisaiHokenshaNoSaki().getDataSource().addAll(shokisaihokensha);
@@ -190,19 +188,13 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      */
     public void onClick_btnTouroku() {
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        if (!div.getTxtShokisaiHokenshaNo().getValue().equals(div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedValue())) {
-            row.setColumnState(new RString("更新"));
-            List<KeyValueDataSource> datasource = div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getDataSource();
-            int index = div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedIndex();
-            row.setShoKisaiHokenshaNo(datasource.get(index).getKey());
-        }
+        row.setColumnState(new RString("更新"));
+        row.setShoKisaiHokenshaNo(div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedKey());
     }
 
     private RString setSeibetsu(Code code) {
         RString seibetsu = RString.EMPTY;
-        if (null == code) {
-            return null;
-        } else {
+        if (!(null == code)) {
             seibetsu = Seibetsu.toValue(code.value()).get名称();
         }
         return seibetsu;
@@ -210,9 +202,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
 
     private RString setNijiHanteiYokaigoJotaiKubunCode(Code code) {
         RString kunbuncode = RString.EMPTY;
-        if (null == code) {
-            return null;
-        } else {
+        if (!(null == code)) {
             kunbuncode = YokaigoJotaiKubun09.toValue(code.value()).get略称();
         }
         return kunbuncode;
@@ -276,9 +266,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
             RString chosaKanryobi,
             RString shujiiIryoKikanMeisho,
             RString shujiiName,
-            dgShinseishaIchiran_Row subRow) {
-        dgShinseishaIchiran_Row row = new dgShinseishaIchiran_Row();
-        row = subRow;
+            dgShinseishaIchiran_Row row) {
         row.setColumnState(columnState);
         row.setShinseishoKanriNo(shinseishoKanriNo);
         row.setShoKisaiHokenshaNo(shoKisaiHokenshaNo);
@@ -314,7 +302,6 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
             codes.add(code.getコード());
         }
-        Collections.sort(codes);
         for (RString code : codes) {
             NinteiShinseiShinseijiKubunCode kubuncode = NinteiShinseiShinseijiKubunCode.toValue(code);
             KeyValueDataSource dataSource = new KeyValueDataSource(kubuncode.getコード(), kubuncode.get名称());
