@@ -200,6 +200,7 @@ public class ShotokuJohoChushutsuHandler {
                 RString timeTemp = new RString(shoridatekanri.get基準日時().getRDateTime().toString().substring(NUM11, NUM19));
                 newRow.setTxtSaishinShoriNitiji(dateTemp.concat(RString.HALF_SPACE).concat(timeTemp));
             }
+            newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
             List<UzT0885SharedFileEntryEntity> entryEntityList = SharedFile.searchSharedFile(
                     異動_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
             if (entryEntityList == null || entryEntityList.isEmpty()) {
@@ -209,8 +210,8 @@ public class ShotokuJohoChushutsuHandler {
                 newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
                 newRow.setSelectButtonState(DataGridButtonState.Disabled);
             }
-            rowList.add(newRow);
         }
+        rowList.add(newRow);
     }
 
     /**
