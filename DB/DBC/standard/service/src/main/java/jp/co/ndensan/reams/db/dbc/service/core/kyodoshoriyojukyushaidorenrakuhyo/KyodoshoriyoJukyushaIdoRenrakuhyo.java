@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -148,8 +150,12 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         KyoutuuEntity 共通項目Entity = new KyoutuuEntity();
-        if (DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())
-                || DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ情報.get導入形態コード().value())) {
+        Code 導入形態 = 市町村セキュリティ情報.get導入形態コード();
+        if (導入形態 == null) {
+            return null;
+        }
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態.value())
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態.value())) {
             SearchResult<KoikiZenShichosonJoho> result = finder.koseiShichosonJoho();
             if (result.records() == null || result.records().isEmpty()) {
                 return null;
@@ -188,8 +194,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
 
         DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 基本情報Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
         if (宛名 != null) {
-            if (宛名.get名称().getName() != null && !宛名.get名称().getName().isEmpty()) {
-                基本情報Entity.setHiHokenshaName(宛名.get名称().getName().value());
+            AtenaMeisho name = 宛名.get名称().getName();
+            if (name != null && !name.isEmpty()) {
+                基本情報Entity.setHiHokenshaName(name.value());
             }
             基本情報Entity.setTelNo(宛名.get連絡先１());
             基本情報Entity.setYubinNo(宛名.get住所().get郵便番号());

@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 連動保留特定住所登録の取得するクラスです。
@@ -279,7 +280,7 @@ public class TennyuHoryuTokuteiHandler {
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
                 builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
-                manager.insertOrUpdateOrDel(builder.build());
+                manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Added);
             }
             if (RowState.Modified.equals(list.getRowState())) {
                 RendoHoryuTokuteiJushoIdentifier key = new RendoHoryuTokuteiJushoIdentifier(list.getTxtKanriNo(),
@@ -295,14 +296,12 @@ public class TennyuHoryuTokuteiHandler {
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
                 builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
-                rendoHoryu = builder.build().modifiedModel();
-                manager.insertOrUpdateOrDel(rendoHoryu);
+                manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Modified);
             }
             if (RowState.Deleted.equals(list.getRowState())) {
                 RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(list.getTxtKanriNo(), new LasdecCode(list.getTxtShichosonCode()));
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
-                rendoHoryu = builder.build().deleted();
-                manager.insertOrUpdateOrDel(rendoHoryu);
+                manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Deleted);
             }
         }
     }

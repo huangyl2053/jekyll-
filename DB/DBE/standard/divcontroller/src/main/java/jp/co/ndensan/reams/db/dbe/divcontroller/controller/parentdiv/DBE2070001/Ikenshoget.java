@@ -179,7 +179,7 @@ public class Ikenshoget {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
-            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, div.getCcdTaskList().getCheckbox().get(0).getChosaIraiKubun());
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, div.getCcdTaskList().getCheckbox().get(0).getIkenshoIraiRirekiNo());
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.主治医意見書入手へ遷移する).respond();
         }

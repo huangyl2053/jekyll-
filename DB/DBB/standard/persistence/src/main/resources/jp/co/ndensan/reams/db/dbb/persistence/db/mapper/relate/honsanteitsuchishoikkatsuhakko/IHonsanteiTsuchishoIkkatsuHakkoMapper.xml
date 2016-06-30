@@ -2601,14 +2601,6 @@
     <update id="update本算定通知書一時_計算後情報更正前_一時">
         UPDATE "TmpHonsanteiTsuchisho" AS A
         SET 
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
             "choteiNendo" = B."choteiNendo",
             "fukaNendo" = B."fukaNendo",
             "tsuchishoNo" = B."tsuchishoNo",
