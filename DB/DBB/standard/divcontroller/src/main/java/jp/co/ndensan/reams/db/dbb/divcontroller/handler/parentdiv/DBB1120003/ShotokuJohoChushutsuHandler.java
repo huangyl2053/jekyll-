@@ -144,7 +144,7 @@ public class ShotokuJohoChushutsuHandler {
             newRow.setTxtHokenshaNo(master.get証記載保険者番号().value());
         }
         if (shoridatekanri == null) {
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
             newRow.setSelectButtonState(DataGridButtonState.Disabled);
             newRow.setTxtSaishinShoriNitiji(RString.EMPTY);
             newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
@@ -153,16 +153,16 @@ public class ShotokuJohoChushutsuHandler {
             List<UzT0885SharedFileEntryEntity> entryEntityList = SharedFile.searchSharedFile(
                     当初_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
             if (entryEntityList == null || entryEntityList.isEmpty()) {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Enabled);
                 newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
             } else {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Disabled);
                 newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
             }
         } else if (shoridatekanri.get基準日時() != null && !shoridatekanri.get基準日時().isEmpty()) {
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
             newRow.setSelectButtonState(DataGridButtonState.Disabled);
             RString dateTemp = shoridatekanri.get基準日時().getDate().wareki().toDateString();
             RString timeTemp = new RString(shoridatekanri.get基準日時().getRDateTime().toString().substring(NUM11, NUM19));
@@ -190,7 +190,7 @@ public class ShotokuJohoChushutsuHandler {
             newRow.setTxtHokenshaNo(master.get証記載保険者番号().value());
         }
         if (shoridatekanri == null) {
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
             newRow.setSelectButtonState(DataGridButtonState.Disabled);
             newRow.setTxtSaishinShoriNitiji(RString.EMPTY);
             newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
@@ -204,10 +204,10 @@ public class ShotokuJohoChushutsuHandler {
             List<UzT0885SharedFileEntryEntity> entryEntityList = SharedFile.searchSharedFile(
                     異動_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
             if (entryEntityList == null || entryEntityList.isEmpty()) {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Enabled);
             } else {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Disabled);
             }
         }
