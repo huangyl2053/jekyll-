@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -147,6 +148,7 @@ public class ShikakuShutokuJogaishaKanriManager {
         for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : insertKuJogaishaList) {
             DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
             shikakuentity.setIsDeleted(false);
+            shikakuentity.setState(EntityDataState.Added);
             insertCount = insertCount + dac.save(shikakuentity);
         }
         return insertCount;
@@ -176,6 +178,7 @@ public class ShikakuShutokuJogaishaKanriManager {
         for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : deleteKuJogaishaList) {
             DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
             shikakuentity.setIsDeleted(true);
+            shikakuentity.setState(EntityDataState.Deleted);
             deleteCount = deleteCount + dac.save(shikakuentity);
         }
         return deleteCount;
