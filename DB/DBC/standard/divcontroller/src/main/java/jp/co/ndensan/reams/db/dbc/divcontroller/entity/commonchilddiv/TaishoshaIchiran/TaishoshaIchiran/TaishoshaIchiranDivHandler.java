@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJuky
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.taishoshaichiran.TaishoshaIchiranParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -58,7 +60,9 @@ public final class TaishoshaIchiranDivHandler {
      */
     public void initialize(RString メニューID, HihokenshaNo 被保険者番号, FlexibleDate 異動日From,
             FlexibleDate 異動日To, RString 表示モード, List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報) {
-
+        if (メニューID != null && !メニューID.isEmpty()) {
+            div.setMenuID(メニューID);
+        }
         if (受給者異動連絡票変更登録.equals(メニューID) || 共同処理用受給者異動連絡票変更登録.equals(メニューID)) {
             表示モード = 修正モード;
         } else if (受給者異動_訂正連絡票発行.equals(メニューID) || 受給者異動連絡票情報照会.equals(メニューID)
@@ -105,6 +109,7 @@ public final class TaishoshaIchiranDivHandler {
             row.setTxtRirekiNo(new RString(String.valueOf(entity.get履歴番号())));
             if (entity.is論理削除フラグ()) {
                 row.setTxtDeleteFlag(new RString(Boolean.TRUE.toString()));
+                row.setRowBgColor(DataGridCellBgColor.bgColorRed);
             } else {
                 row.setTxtDeleteFlag(new RString(Boolean.FALSE.toString()));
             }
@@ -134,8 +139,20 @@ public final class TaishoshaIchiranDivHandler {
                 entity.set論理削除フラグ(false);
             }
         }
-        if (row.getTxtRirekiNo() != null && !row.getTxtRirekiNo().isEmpty()) {
-            entity.set履歴番号(Integer.parseInt(row.getTxtRirekiNo().toString()));
+        RString メニューID = div.getMenuID();
+        if (受給者異動連絡票変更登録.equals(メニューID)
+                || 受給者異動_訂正連絡票発行.equals(メニューID)
+                || 受給者異動連絡票情報照会.equals(メニューID)) {
+            if (row.getTxtRirekiNo() != null && !row.getTxtRirekiNo().isEmpty()) {
+                entity.set履歴番号(Integer.parseInt(row.getTxtRirekiNo().toString()));
+            }
+        } else if (共同処理用受給者異動連絡票変更登録.equals(メニューID)
+                || 共同処理用受給者異動_訂正連絡票発行.equals(メニューID)
+                || 共同処理用受給者異動連絡票情報照会.equals(メニューID)) {
+            if (row.getTxtTaishoNengetsu().getValue() != null) {
+                entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
+                        getValue().getYearMonth().toString()));
+            }
         }
         return entity;
     }

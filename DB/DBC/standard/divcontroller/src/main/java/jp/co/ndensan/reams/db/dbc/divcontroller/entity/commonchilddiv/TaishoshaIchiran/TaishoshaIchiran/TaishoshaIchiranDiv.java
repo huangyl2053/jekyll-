@@ -41,6 +41,8 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
     private RString IdoToYMD;
     @JsonProperty("HihoNo")
     private RString HihoNo;
+    @JsonProperty("MenuID")
+    private RString MenuID;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -118,6 +120,24 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
     @JsonProperty("HihoNo")
     public void setHihoNo(RString HihoNo) {
         this.HihoNo = HihoNo;
+    }
+
+    /*
+     * getMenuID
+     * @return MenuID
+     */
+    @JsonProperty("MenuID")
+    public RString getMenuID() {
+        return MenuID;
+    }
+
+    /*
+     * setMenuID
+     * @param MenuID MenuID
+     */
+    @JsonProperty("MenuID")
+    public void setMenuID(RString MenuID) {
+        this.MenuID = MenuID;
     }
 
     /*
