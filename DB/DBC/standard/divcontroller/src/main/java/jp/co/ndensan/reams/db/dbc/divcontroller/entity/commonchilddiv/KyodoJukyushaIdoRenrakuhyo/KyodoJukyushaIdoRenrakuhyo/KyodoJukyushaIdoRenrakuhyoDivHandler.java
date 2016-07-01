@@ -49,6 +49,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
     private static final RString 受託なし = new RString("1");
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
+    private static final RString SPACE = new RString("空");
     private static final List<KeyValueDataSource> 空 = new ArrayList<>();
 
     private KyodoJukyushaIdoRenrakuhyoDivHandler(KyodoJukyushaIdoRenrakuhyoDiv div) {
@@ -121,6 +122,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
 
     private void init初期値() {
         List<KeyValueDataSource> 異動事由 = new ArrayList<>();
+        異動事由.add(new KeyValueDataSource(SPACE, RString.EMPTY));
         異動事由.add(new KeyValueDataSource(JukyushaIF_JukyushaIdoJiyu.受給資格取得.getコード(),
                 JukyushaIF_JukyushaIdoJiyu.受給資格取得.get名称()));
         異動事由.add(new KeyValueDataSource(JukyushaIF_JukyushaIdoJiyu.受給資格喪失.getコード(),
@@ -134,6 +136,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         div.getDdlJukyushaIdoJiyu().setDataSource(異動事由);
 
         List<KeyValueDataSource> 一時差止区分 = new ArrayList<>();
+        一時差止区分.add(new KeyValueDataSource(SPACE, RString.EMPTY));
         一時差止区分.add(new KeyValueDataSource(JukyushaIF_KyodoShokanIchijiSashitomeKubunCode.一部差止.getコード(),
                 JukyushaIF_KyodoShokanIchijiSashitomeKubunCode.一部差止.get名称()));
         一時差止区分.add(new KeyValueDataSource(JukyushaIF_KyodoShokanIchijiSashitomeKubunCode.全部差止.getコード(),
@@ -141,6 +144,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().getDdlHokenkyufuIchijiSashitomeKubun().setDataSource(一時差止区分);
 
         List<KeyValueDataSource> 世帯所得区分 = new ArrayList<>();
+        世帯所得区分.add(new KeyValueDataSource(SPACE, RString.EMPTY));
         世帯所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.getコード(),
                 JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.一般.get表示名称()));
         世帯所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuSetaiShotokuKubunCode.市町村民税世帯非課税者等.getコード(),
@@ -152,6 +156,7 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().getDdlSetaiShotokuKubun().setDataSource(世帯所得区分);
 
         List<KeyValueDataSource> 所得区分 = new ArrayList<>();
+        所得区分.add(new KeyValueDataSource(SPACE, RString.EMPTY));
         所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuShotokuKubunCode.一般.getコード(),
                 JukyushaIF_KyodoKogakuShotokuKubunCode.一般.get表示名称()));
         所得区分.add(new KeyValueDataSource(JukyushaIF_KyodoKogakuShotokuKubunCode.市町村民税世帯非課税者等.getコード(),
@@ -169,7 +174,6 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
         div.getTxtIdoYMD().setValue(システム日付);
         div.getRadIdoKubunCode().setSelectedValue(JukyushaIF_IdoKubunCode.新規.get名称());
 
-        div.getDdlJukyushaIdoJiyu().getDataSource().add(0, new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         div.getDdlJukyushaIdoJiyu().setIsBlankLine(true);
         List<KeyValueDataSource> items_基本 = div.getChkKihonSofuAdd().getDataSource();
         div.getChkKihonSofuAdd().setSelectedItems(items_基本);

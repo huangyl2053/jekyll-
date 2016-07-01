@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1A4;
+package jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1a4;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

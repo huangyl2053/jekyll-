@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikensho.ShujiiikenshoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1A4.ShujiiikenshoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1a4.ShujiiikenshoA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 

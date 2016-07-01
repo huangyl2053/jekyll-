@@ -194,7 +194,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
 
     private RString setSeibetsu(Code code) {
         RString seibetsu = RString.EMPTY;
-        if (!(null == code)) {
+        if (null != code) {
             seibetsu = Seibetsu.toValue(code.value()).get名称();
         }
         return seibetsu;
@@ -202,7 +202,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
 
     private RString setNijiHanteiYokaigoJotaiKubunCode(Code code) {
         RString kunbuncode = RString.EMPTY;
-        if (!(null == code)) {
+        if (null != code) {
             kunbuncode = YokaigoJotaiKubun09.toValue(code.value()).get略称();
         }
         return kunbuncode;
@@ -298,12 +298,8 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
 
     private List<KeyValueDataSource> createListFromNinteiShinseiShinseijiKubunCode() {
         List<KeyValueDataSource> list = new ArrayList<>();
-        List<RString> codes = new ArrayList<>();
         for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
-            codes.add(code.getコード());
-        }
-        for (RString code : codes) {
-            NinteiShinseiShinseijiKubunCode kubuncode = NinteiShinseiShinseijiKubunCode.toValue(code);
+            NinteiShinseiShinseijiKubunCode kubuncode = NinteiShinseiShinseijiKubunCode.toValue(code.getコード());
             KeyValueDataSource dataSource = new KeyValueDataSource(kubuncode.getコード(), kubuncode.get名称());
             list.add(dataSource);
         }

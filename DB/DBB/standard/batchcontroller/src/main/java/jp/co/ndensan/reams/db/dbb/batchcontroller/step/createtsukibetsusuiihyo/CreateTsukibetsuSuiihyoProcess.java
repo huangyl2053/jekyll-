@@ -138,7 +138,7 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
         StringBuilder builder = new StringBuilder();
         builder.append(mybatisPrm.getChoteiNendo());
         builder.append(getu);
-        builder.append(mybatisPrm.getKakutukiShikakuKijunNichi());
+        builder.append(mybatisPrm.getKakutukiShikakuKijunNichi().trim().padZeroToLeft(2));
         資格判断基準日 = new FlexibleDate(builder.toString());
         return psm.getIchigoShikakuShutokuYMD().isBeforeOrEquals(資格判断基準日)
                 && (psm.getShikakuSoshitsuYMD() == null || psm.getShikakuSoshitsuYMD().isEmpty()
@@ -150,10 +150,10 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
         CreateTsukibetsuSuiihyoMyBatisParameter parameter = CreateTsukibetsuSuiihyoMyBatisParameter
                 .create_現年度データの取得(mybatisPrm.getChoteiNendo(), mybatisPrm.getChoteiKijunNichiji());
         List<GennendoDate> list = iCreateTsukibetsuSuiihyoMapper.get現年度データの取得(parameter);
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         for (GennendoDate gennendoDate : list) {
-            gennendoDate.setGetu(get期に対する月の設定(gennendoDate));
+            gennendoDate.setGetu(get期に対する月の設定(gennendoDate, fuchoKiUtil));
             if (普通徴収.equals(gennendoDate.getChoshuHouhou())) {
-                FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
                 Kitsuki kitsuki = fuchoKiUtil.get期月リスト().get最終法定納期();
                 if (gennendoDate.getKi() > kitsuki.get期AsInt()) {
                     gennendoDate.setGetu(new RString("随"));
@@ -165,10 +165,9 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
         return gennendoList;
     }
 
-    private RString get期に対する月の設定(GennendoDate gennendoDate) {
+    private RString get期に対する月の設定(GennendoDate gennendoDate, FuchoKiUtil fuchoKiUtil) {
         List<Kitsuki> itsukiList = new ArrayList<>();
         if (普通徴収.equals(gennendoDate.getChoshuHouhou())) {
-            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
             itsukiList = fuchoKiUtil.get期月リスト().get期の月(gennendoDate.getKi());
         }
         if (特別徴収.equals(gennendoDate.getChoshuHouhou())) {
@@ -208,8 +207,9 @@ public class CreateTsukibetsuSuiihyoProcess extends BatchProcessBase<HihokenshaD
         CreateTsukibetsuSuiihyoMyBatisParameter parameter = CreateTsukibetsuSuiihyoMyBatisParameter
                 .create_不明のデータの取得(mybatisPrm.getChoteiNendo(), mybatisPrm.getChoteiKijunNichiji());
         List<GennendoDate> list = iCreateTsukibetsuSuiihyoMapper.get不明のデータの取得(parameter);
+        FuchoKiUtil fuchoKiUtil = new FuchoKiUtil();
         for (GennendoDate gennendoDate : list) {
-            gennendoDate.setGetu(get期に対する月の設定(gennendoDate));
+            gennendoDate.setGetu(get期に対する月の設定(gennendoDate, fuchoKiUtil));
             gennendoDate.setDankaiFumeyiFlg(true);
             介護情報一時テーブル.insert(gennendoDate);
         }
