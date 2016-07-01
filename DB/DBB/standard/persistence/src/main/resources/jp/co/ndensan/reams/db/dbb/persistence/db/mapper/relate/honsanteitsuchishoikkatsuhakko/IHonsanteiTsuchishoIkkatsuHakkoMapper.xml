@@ -1785,6 +1785,7 @@
             AND 計算後情報."fukaNendo" = #{賦課年度}
             AND 計算後情報."koseiZengoKubun" = '2'
             AND 計算後情報."sakuseiShoriName" = '本算定賦課'
+            AND 計算後情報."choteiNichiji" = '最新調定日時'
     </insert>
 
     <insert id="insert本算定通知書一時_一時"
