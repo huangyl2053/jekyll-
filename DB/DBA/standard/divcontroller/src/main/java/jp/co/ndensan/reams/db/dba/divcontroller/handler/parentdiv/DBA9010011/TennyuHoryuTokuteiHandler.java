@@ -75,18 +75,18 @@ public class TennyuHoryuTokuteiHandler {
         div.getCcdBunchiInput().initialize();
         div.getCcdSisetuInputGuide().initialize();
         List<ddlTennyuHoryuTokuteiJushoIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+        if (!SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
+            div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村コード).setVisible(false);
+            div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村名称).setVisible(false);
+        }
         if (businessList != null && !businessList.isEmpty()) {
             for (TennyuHoryuTokuteiBusiness tennyuhoryu : businessList) {
                 ddlTennyuHoryuTokuteiJushoIchiran_Row dgJigyoshaItiran = new ddlTennyuHoryuTokuteiJushoIchiran_Row();
                 dgJigyoshaItiran.setTxtKanriNo(tennyuhoryu.get管理番号());
-                ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-                Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
                 dgJigyoshaItiran.setTxtShichosonCode(tennyuhoryu.get市町村コード().value());
                 dgJigyoshaItiran.setTxtShichosonName(tennyuhoryu.get市町村名称());
-                if (!SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
-                    div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村コード).setVisible(false);
-                    div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村名称).setVisible(false);
-                }
                 dgJigyoshaItiran.setTxtJushoCode(tennyuhoryu.get住所コード());
                 dgJigyoshaItiran.setTxtJusho(tennyuhoryu.get住所().value());
                 dgJigyoshaItiran.setTxtBanchiCode1(tennyuhoryu.get番地コード1().value());
@@ -299,7 +299,9 @@ public class TennyuHoryuTokuteiHandler {
                 manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Modified);
             }
             if (RowState.Deleted.equals(list.getRowState())) {
-                RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(list.getTxtKanriNo(), new LasdecCode(list.getTxtShichosonCode()));
+                RendoHoryuTokuteiJushoIdentifier key = new RendoHoryuTokuteiJushoIdentifier(list.getTxtKanriNo(),
+                        new LasdecCode(list.getTxtShichosonCode()));
+                RendoHoryuTokuteiJusho rendoHoryu = models.get(key);
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
                 manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Deleted);
             }

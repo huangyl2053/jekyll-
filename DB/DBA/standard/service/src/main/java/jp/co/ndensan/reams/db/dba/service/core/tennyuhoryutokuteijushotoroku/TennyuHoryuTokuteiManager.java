@@ -121,10 +121,11 @@ public class TennyuHoryuTokuteiManager {
      */
     @Transaction
     public int insertOrUpdateOrDel(RendoHoryuTokuteiJusho rendoHoryu, EntityDataState state) {
-        if (!rendoHoryu.hasChanged()) {
-            return 0;
+        DbT7023RendoHoryuTokuteiJushoEntity entity = rendoHoryu.toEntity();
+        entity.setState(state);
+        if (state == EntityDataState.Deleted) {
+            entity.setIsDeleted(true);
         }
-        rendoHoryu.toEntity().setState(state);
-        return dac.save(rendoHoryu.toEntity());
+        return dac.save(entity);
     }
 }

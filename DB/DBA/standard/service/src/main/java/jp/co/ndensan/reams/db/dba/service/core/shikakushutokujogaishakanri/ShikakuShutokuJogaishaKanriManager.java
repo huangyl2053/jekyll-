@@ -147,6 +147,15 @@ public class ShikakuShutokuJogaishaKanriManager {
         int insertCount = 0;
         for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : insertKuJogaishaList) {
             DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
+            int 履歴番号 = dac.select履歴番号(shikakuentity.getShikibetsuCode()) == null
+                    ? 1 : dac.select履歴番号(shikakuentity.getShikibetsuCode()).getRirekiNo();
+            if (!EntityDataState.Added.equals(shikakuentity.getState())) {
+                if (shikakuentity.getRirekiNo() <= 履歴番号) {
+                    shikakuentity.setRirekiNo(履歴番号 + 1);
+                } else {
+                    shikakuentity.setRirekiNo(shikakuentity.getRirekiNo() + 1);
+                }
+            }
             shikakuentity.setIsDeleted(false);
             shikakuentity.setState(EntityDataState.Added);
             insertCount = insertCount + dac.save(shikakuentity);
@@ -209,6 +218,10 @@ public class ShikakuShutokuJogaishaKanriManager {
      */
     @Transaction
     public int select履歴番号(ShikibetsuCode 識別コード) {
-        return dac.select履歴番号(識別コード) == null ? 1 : dac.select履歴番号(識別コード).getRirekiNo();
+        DbT1009ShikakuShutokuJogaishaEntity entity = dac.select履歴番号(識別コード);
+        if (entity == null) {
+            return 1;
+        }
+        return entity.getRirekiNo() + 1;
     }
 }
