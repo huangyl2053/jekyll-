@@ -73,7 +73,7 @@ import jp.co.ndensan.reams.db.dbb.service.report.fukadaicho.FukaDaichoPrintServi
 import jp.co.ndensan.reams.db.dbb.service.report.gemmen.GenmenKetteiTsuchiShoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.gemmentorikesitsuchisho.GemmenTorikesiTsuchiShoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.henkokenchushitsuchisho.KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishobook.NonyuTsuchishoBookFuriKaePrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishobook.NonyuTsuchishoBookFuriKaePrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvskigoto.KanendoNonyuTsuchishoCVSKigotoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvsmulti.KanendoNonyuTsuchishoCVSMultiPrintService;
