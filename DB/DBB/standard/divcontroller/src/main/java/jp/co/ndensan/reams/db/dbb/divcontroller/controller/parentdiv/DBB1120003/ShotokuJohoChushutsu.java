@@ -26,7 +26,6 @@ public class ShotokuJohoChushutsu {
 
     private static final RString 定値_他社 = new RString("3");
     private static final RString 定値_REAMS = new RString("1");
-    private static final int NUM0 = 0;
 
     /**
      * onLoad処理です。
