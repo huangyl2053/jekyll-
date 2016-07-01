@@ -68,8 +68,8 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
         source.shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
-        source.imgSonotashiryo1 = item.getImgSonotashiryo1();
-        source.imgSonotashiryo2 = item.getImgSonotashiryo2();
+        source.imgSonotashiryo1 = item.get左のその他資料イメージ();
+        source.imgSonotashiryo2 = item.get右のその他資料イメージ();
 
         source.shikibetuCode = ShikibetsuCode.EMPTY;
 

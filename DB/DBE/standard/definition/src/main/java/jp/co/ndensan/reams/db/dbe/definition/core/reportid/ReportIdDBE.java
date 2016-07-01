@@ -111,6 +111,14 @@ public enum ReportIdDBE {
      */
     DBE202001(new ReportId("DBE202001_ChosaSchedulehyo"), new RString("認定調査スケジュール表(調査員)")),
     /**
+     * 事務局用概況特記A3の帳票ＩＤです。
+     */
+    DBE517041(new ReportId("DBE517041_GaikyotokkiTextA3"), new RString("事務局用概況特記")),
+    /**
+     * 事務局用概況特記A4の帳票ＩＤです。
+     */
+    DBE517141(new ReportId("DBE517141_GaikyotokkiTextA4"), new RString("事務局用概況特記")),
+    /**
      * 追加資料鑑の帳票ＩＤです。
      */
     DBE517009(new ReportId("DBE517009_TsuikashiryokagamiA3"), new RString("追加資料鑑")),

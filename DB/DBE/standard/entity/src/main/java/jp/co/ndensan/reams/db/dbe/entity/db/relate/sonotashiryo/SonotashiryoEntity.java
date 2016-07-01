@@ -25,7 +25,8 @@ public class SonotashiryoEntity {
     private FlexibleDate 認定申請年月日;
     private FlexibleDate 認定調査実施年月日;
     private FlexibleDate 介護認定審査会開催年月日;
-    private RString imgSonotashiryo1;
-    private RString imgSonotashiryo2;
-    private RString imgSonotashiryo;
+    private RString 左のその他資料イメージ;
+    private RString 右のその他資料イメージ;
+    private RString その他資料;
+
 }
