@@ -48,14 +48,14 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     private MeisaiGokeiHenshuPanelDiv MeisaiGokeiHenshuPanel;
     @JsonProperty("rowId")
     private TextBoxNum rowId;
-    @JsonProperty("jigyoshaCode")
-    private RString jigyoshaCode;
-    @JsonProperty("jigyoshaMeisho ")
-    private RString jigyoshaMeisho ;
-    @JsonProperty("serviceCode")
-    private RString serviceCode;
-    @JsonProperty("serviceMeisho")
-    private RString serviceMeisho;
+    @JsonProperty("JigyoshaMode")
+    private RString JigyoshaMode;
+    @JsonProperty("hdnServiceType")
+    private RString hdnServiceType;
+    @JsonProperty("hdnServiceTypeName")
+    private RString hdnServiceTypeName;
+    @JsonProperty("hdnServiceRyakusho")
+    private RString hdnServiceRyakusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -136,75 +136,75 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     /*
-     * getjigyoshaCode
-     * @return jigyoshaCode
+     * getJigyoshaMode
+     * @return JigyoshaMode
      */
-    @JsonProperty("jigyoshaCode")
-    public RString getJigyoshaCode() {
-        return jigyoshaCode;
+    @JsonProperty("JigyoshaMode")
+    public RString getJigyoshaMode() {
+        return JigyoshaMode;
     }
 
     /*
-     * setjigyoshaCode
-     * @param jigyoshaCode jigyoshaCode
+     * setJigyoshaMode
+     * @param JigyoshaMode JigyoshaMode
      */
-    @JsonProperty("jigyoshaCode")
-    public void setJigyoshaCode(RString jigyoshaCode) {
-        this.jigyoshaCode = jigyoshaCode;
+    @JsonProperty("JigyoshaMode")
+    public void setJigyoshaMode(RString JigyoshaMode) {
+        this.JigyoshaMode = JigyoshaMode;
     }
 
     /*
-     * getjigyoshaMeisho 
-     * @return jigyoshaMeisho 
+     * gethdnServiceType
+     * @return hdnServiceType
      */
-    @JsonProperty("jigyoshaMeisho ")
-    public RString getJigyoshaMeisho () {
-        return jigyoshaMeisho ;
+    @JsonProperty("hdnServiceType")
+    public RString getHdnServiceType() {
+        return hdnServiceType;
     }
 
     /*
-     * setjigyoshaMeisho 
-     * @param jigyoshaMeisho  jigyoshaMeisho 
+     * sethdnServiceType
+     * @param hdnServiceType hdnServiceType
      */
-    @JsonProperty("jigyoshaMeisho ")
-    public void setJigyoshaMeisho (RString jigyoshaMeisho ) {
-        this.jigyoshaMeisho  = jigyoshaMeisho ;
+    @JsonProperty("hdnServiceType")
+    public void setHdnServiceType(RString hdnServiceType) {
+        this.hdnServiceType = hdnServiceType;
     }
 
     /*
-     * getserviceCode
-     * @return serviceCode
+     * gethdnServiceTypeName
+     * @return hdnServiceTypeName
      */
-    @JsonProperty("serviceCode")
-    public RString getServiceCode() {
-        return serviceCode;
+    @JsonProperty("hdnServiceTypeName")
+    public RString getHdnServiceTypeName() {
+        return hdnServiceTypeName;
     }
 
     /*
-     * setserviceCode
-     * @param serviceCode serviceCode
+     * sethdnServiceTypeName
+     * @param hdnServiceTypeName hdnServiceTypeName
      */
-    @JsonProperty("serviceCode")
-    public void setServiceCode(RString serviceCode) {
-        this.serviceCode = serviceCode;
+    @JsonProperty("hdnServiceTypeName")
+    public void setHdnServiceTypeName(RString hdnServiceTypeName) {
+        this.hdnServiceTypeName = hdnServiceTypeName;
     }
 
     /*
-     * getserviceMeisho
-     * @return serviceMeisho
+     * gethdnServiceRyakusho
+     * @return hdnServiceRyakusho
      */
-    @JsonProperty("serviceMeisho")
-    public RString getServiceMeisho() {
-        return serviceMeisho;
+    @JsonProperty("hdnServiceRyakusho")
+    public RString getHdnServiceRyakusho() {
+        return hdnServiceRyakusho;
     }
 
     /*
-     * setserviceMeisho
-     * @param serviceMeisho serviceMeisho
+     * sethdnServiceRyakusho
+     * @param hdnServiceRyakusho hdnServiceRyakusho
      */
-    @JsonProperty("serviceMeisho")
-    public void setServiceMeisho(RString serviceMeisho) {
-        this.serviceMeisho = serviceMeisho;
+    @JsonProperty("hdnServiceRyakusho")
+    public void setHdnServiceRyakusho(RString hdnServiceRyakusho) {
+        this.hdnServiceRyakusho = hdnServiceRyakusho;
     }
 
     /*

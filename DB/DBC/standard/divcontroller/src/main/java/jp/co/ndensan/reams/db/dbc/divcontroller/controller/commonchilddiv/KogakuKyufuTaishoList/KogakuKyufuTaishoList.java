@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -86,8 +88,9 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onBeforeOpenDialog_btnJgyosha(
             KogakuKyufuTaishoListDiv div) {
-        div.setJigyoshaCode(DataPassingConverter.serialize(
-                div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue()));
+        JigyoshaMode jigyoshaMode = new JigyoshaMode();
+        jigyoshaMode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
+        div.setJigyoshaMode(DataPassingConverter.serialize(jigyoshaMode));
         return createResponse(div);
     }
 
@@ -99,10 +102,14 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onOkClose_btnJgyosha(
             KogakuKyufuTaishoListDiv div) {
-        RString jigyoshaCode = DataPassingConverter.deserialize(div.getJigyoshaCode(), RString.class);
-        RString jigyoshaMeisho = DataPassingConverter.deserialize(div.getJigyoshaMeisho(), RString.class);
-        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().setValue(jigyoshaCode);
-        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setValue(jigyoshaMeisho);
+        JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.
+                getJigyoshaMode(), JigyoshaMode.class);
+        if (jigyoshaMode.getJigyoshaNo() != null) {
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().setValue(jigyoshaMode.getJigyoshaNo().value());
+        }
+        if (jigyoshaMode.getJigyoshaName() != null) {
+            div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setValue(jigyoshaMode.getJigyoshaName().value());
+        }
         return createResponse(div);
     }
 
@@ -114,8 +121,7 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onBeforeOpenDialog_btnServiceSyurui(
             KogakuKyufuTaishoListDiv div) {
-        div.setJigyoshaCode(DataPassingConverter.serialize(
-                div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue()));
+        div.setHdnServiceType(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
         return createResponse(div);
     }
 
@@ -127,10 +133,8 @@ public class KogakuKyufuTaishoList {
      */
     public ResponseData<KogakuKyufuTaishoListDiv> onOkClose_btnServiceSyurui(
             KogakuKyufuTaishoListDiv div) {
-        RString serviceCode = DataPassingConverter.deserialize(div.getServiceCode(), RString.class);
-        RString serviceMeisho = DataPassingConverter.deserialize(div.getServiceMeisho(), RString.class);
-        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setValue(serviceCode);
-        div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().setValue(serviceMeisho);
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().setValue(div.getHdnServiceType());
+        div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().setValue(div.getHdnServiceRyakusho());
         return createResponse(div);
     }
 
