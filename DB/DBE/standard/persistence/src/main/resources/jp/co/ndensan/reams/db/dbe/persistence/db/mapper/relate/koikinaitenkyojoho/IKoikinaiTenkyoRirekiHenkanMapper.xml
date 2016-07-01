@@ -257,7 +257,7 @@
                     INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511
                             ON	DbT5511."shinsakaiKaisaiNo" = DbT5501."shinsakaiKaisaiNo"
             WHERE
-                    DbT5101."koikinaiTenkyoKubun" IN ('0','1','2')
+                    DbT5101."koikinaiTenkyoKubun" = '1'
                     AND	DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteichosaKanryoYMD" IS NOT NULL
