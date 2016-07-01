@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNa
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;

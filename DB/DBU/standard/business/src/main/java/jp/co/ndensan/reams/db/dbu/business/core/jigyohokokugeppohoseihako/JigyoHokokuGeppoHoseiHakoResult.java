@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
