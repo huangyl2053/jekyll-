@@ -143,12 +143,12 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             } else {
                 ichiranyoShohakkoshaEntity.set帳票連番(RString.EMPTY);
             }
-            if (ikkatsuHakkoRelateEntity.getHihokenshaNo().isEmpty()) {
+            if (ikkatsuHakkoRelateEntity.getHihokenshaNo() != null && ikkatsuHakkoRelateEntity.getHihokenshaNo().isEmpty()) {
                 ichiranyoShohakkoshaEntity.set被保険者番号(HihokenshaNo.EMPTY);
             } else {
                 ichiranyoShohakkoshaEntity.set被保険者番号(ikkatsuHakkoRelateEntity.getHihokenshaNo());
             }
-            if (!ikkatsuHakkoRelateEntity.getMeisho().isEmpty()) {
+            if (ikkatsuHakkoRelateEntity.getMeisho() != null && !ikkatsuHakkoRelateEntity.getMeisho().isEmpty()) {
                 ichiranyoShohakkoshaEntity.set氏名(new RString(ikkatsuHakkoRelateEntity.getMeisho().toString()));
             } else {
                 ichiranyoShohakkoshaEntity.set氏名(RString.EMPTY);
