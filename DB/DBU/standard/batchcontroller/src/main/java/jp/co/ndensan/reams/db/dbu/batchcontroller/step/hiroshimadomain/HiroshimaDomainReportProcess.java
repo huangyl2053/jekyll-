@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbu.business.report.koikinaitenkyokekkaichiranhyo.
 import jp.co.ndensan.reams.db.dbu.business.report.koikinaitenkyokekkaichiranhyo.KoikinaiTenkyoKekkaIchiranhyoHeadItem;
 import jp.co.ndensan.reams.db.dbu.business.report.koikinaitenkyokekkaichiranhyo.KoikinaiTenkyoKekkaIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hiroshimadomain.HiroshimaDomainProcessParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.hiroshimadomain.HiroshimaDomainEucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hiroshimadomain.HiroshimaDomainEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hiroshimadomain.HiroshimaDomainRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist.KoikinaiTenkyoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
