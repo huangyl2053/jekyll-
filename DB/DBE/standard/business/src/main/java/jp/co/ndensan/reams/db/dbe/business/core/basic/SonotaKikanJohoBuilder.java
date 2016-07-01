@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -16,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link SonotaKikanJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-021 suguangjun
  */
 public class SonotaKikanJohoBuilder {
 
@@ -36,32 +37,6 @@ public class SonotaKikanJohoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return {@link SonotaKikanJohoBuilder}
-     */
-    public SonotaKikanJohoBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
-
-    /**
-     * その他機関コードを設定します。
-     *
-     * @param その他機関コード その他機関コード
-     * @return {@link SonotaKikanJohoBuilder}
-     */
-    public SonotaKikanJohoBuilder setその他機関コード(RString その他機関コード) {
-        requireNonNull(その他機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("その他機関コード"));
-        entity.setSonotaKikanCode(その他機関コード);
-        return this;
     }
 
     /**
