@@ -243,8 +243,7 @@ public class ShotokuJohoChushutsuHandler {
                 }
             }
             div.getDataGrid1().getClickedItem().setSelectButtonState(DataGridButtonState.Disabled);
-            div.getUploadPanel().setVisible(false);
-            div.getBtnUpload().setDisabled(true);
+            initialize(div);
         }
     }
 }
