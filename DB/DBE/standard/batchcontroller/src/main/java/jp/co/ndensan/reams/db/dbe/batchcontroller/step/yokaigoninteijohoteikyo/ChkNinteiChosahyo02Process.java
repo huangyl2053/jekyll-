@@ -563,7 +563,11 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 

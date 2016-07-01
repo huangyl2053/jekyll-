@@ -148,13 +148,13 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
                 imagePath = getFilePath(イメージID, FILENAME);
             } else {
-                imagePath = getFilePath(イメージID, FILENAME_BAK);
+                imagePath = getFilePathBak(イメージID, FILENAME_BAK);
             }
         }
         return imagePath;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+    private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
@@ -162,10 +162,27 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
         try {
             SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
         } catch (Exception e) {
-            ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
-            SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
-            return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        ReadOnlySharedFileEntryDescriptor descriptor_BAK
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            try {
+                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
+                return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            } catch (Exception ex) {
+                return RString.EMPTY;
+            }
         }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
