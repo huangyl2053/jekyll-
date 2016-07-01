@@ -101,7 +101,9 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
             div.setHdnKyodoShoriyoJukyushaIdoEntity(DataPassingConverter.serialize(entity));
             div.getTxtHiHokenshaNo().setValue(被保険者番号.value());
             div.getTxtShoKisaiHokenshaNo().setValue(entity.get共通項目Entity().get証記載保険者番号().value());
-            if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shinki)) {
+            if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shinki)
+                    || (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.shokai)
+                    && 新規モード.equals(処理モード))) {
                 set初期値_新規(entity);
             } else if (div.getMode_DisplayMode().equals(KyodoJukyushaIdoRenrakuhyoDiv.DisplayMode.teisei)) {
                 div.getTxtTaisyoYM().setValue(new RDate(対象年月.toString()));
