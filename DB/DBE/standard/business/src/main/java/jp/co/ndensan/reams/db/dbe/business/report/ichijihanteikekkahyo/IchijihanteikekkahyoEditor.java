@@ -32,7 +32,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ShujiiikenshoEntity}
+     * @param item {@link IchijihanteikekkahyoEntity}
      * @param index Index
      */
     protected IchijihanteikekkahyoEditor(IchijihanteikekkahyoEntity item, int index) {
