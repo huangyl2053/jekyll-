@@ -197,6 +197,14 @@ public class KogakuServicehiShokaiMainHandler {
         }
     }
 
+//    private void clear並べて表示エリア() {
+////        ShowResultTwoDiv 並べて表示エリア = div.getShowResultTwo();
+////        HanteiKekkaLDiv 並べて表示エリア_左側 = 並べて表示エリア.getSetaiinL().getHanteiKekkaL();
+////        並べて表示エリア_左側.getTxtBikoL().clearValue();
+////        並べて表示エリア_左側.getTxtUketsukeDateL().setValue(new RDate(高額判定結果_左側.get受付年月日().toString()));
+////        並べて表示エリア_左側.getTxtKetteiDateL().setValue(new RDate(高額判定結果_左側.get決定年月日().toString()));
+//
+//    }
     private void set並べて表示エリア_右側(KogakuShokaiHanteiKekkaResult 高額判定結果_右側, HanteiKekkaRDiv 並べて表示エリア_右側) {
         List<dgJudgementResultR_Row> dataSources = new ArrayList<>();
         List<ShikyuMeisaiResult> 支給明細list = 高額判定結果_右側.get支給明細list();
@@ -204,8 +212,8 @@ public class KogakuServicehiShokaiMainHandler {
             dgJudgementResultR_Row row = new dgJudgementResultR_Row();
             row.setTxtJigyosha(支給明細entity.get事業者名称().getColumnValue());
             ServiceShuruiCode サービス種類コード = 支給明細entity.getサービス種類コード();
-            if (サービス種類コード == null || サービス種類コード.isEmpty()) {
-                row.setTxtServiceShurui(ServiceCategoryShurui.toValue(支給明細entity.getサービス種類コード().getColumnValue()).get略称());
+            if (サービス種類コード != null && !サービス種類コード.isEmpty()) {
+                row.setTxtServiceShurui(ServiceCategoryShurui.toValue(サービス種類コード.getColumnValue()).get略称());
             }
             row.getTxtServiceHiyoGokeigaku().setValue(支給明細entity.getサービス費用合計());
             row.getTxtRiyoshaFutangaku().setValue(支給明細entity.get利用者負担額());
