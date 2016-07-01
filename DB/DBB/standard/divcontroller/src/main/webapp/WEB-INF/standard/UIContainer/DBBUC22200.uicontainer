@@ -5,23 +5,48 @@
  "steps": [
   {
    "id": 1,
-   "name": "特徴制度間Ｉ／Ｆ作成",
+   "name": "特別徴収情報アップロード_市町村",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBB",
-     "toLayoutName": "DBB2310001",
-     "toLayoutTitle": "特別徴収制度間Ｉ／Ｆ作成",
-     "toState": ""
+     "toLayoutName": "DBB2220001",
+     "toLayoutTitle": "特別徴収情報アップロード",
+     "toState": "市町村"
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBB",
-     "layoutName": "DBB2310001",
-     "layoutTitle": "特別徴収制度間Ｉ／Ｆ作成",
+     "layoutName": "DBB2220001",
+     "layoutTitle": "特別徴収情報アップロード",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "特別徴収情報アップロード_月",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB2220001",
+     "toLayoutTitle": "特別徴収情報アップロード",
+     "toState": "月"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2220001",
+     "layoutTitle": "特別徴収情報アップロード",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
