@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SonoTashiryo {
+public class SonoTashiryoEntity {
 
     private RString 保険者番号;
     private RString 被保険者番号;
@@ -39,5 +39,4 @@ public class SonoTashiryo {
     private RString 審査日_月;
     private RString 審査日_日;
     private RString その他資料イメージ;
-
 }

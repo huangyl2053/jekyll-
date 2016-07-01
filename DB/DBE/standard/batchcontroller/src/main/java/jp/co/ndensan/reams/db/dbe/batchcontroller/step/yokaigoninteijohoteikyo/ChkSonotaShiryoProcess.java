@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryo.SonoTashiryoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.SonoTashiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryo;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -100,8 +100,8 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
         set出力条件表();
     }
 
-    private SonoTashiryo setBodyItem(YokaigoninteiEntity entity) {
-        SonoTashiryo sonoTashiryo = new SonoTashiryo();
+    private SonoTashiryoEntity setBodyItem(YokaigoninteiEntity entity) {
+        SonoTashiryoEntity sonoTashiryo = new SonoTashiryoEntity();
         sonoTashiryo.set保険者番号(entity.get保険者番号());
         sonoTashiryo.set被保険者番号(entity.get被保険者番号());
         sonoTashiryo.set被保険者氏名(entity.get被保険者氏名());
