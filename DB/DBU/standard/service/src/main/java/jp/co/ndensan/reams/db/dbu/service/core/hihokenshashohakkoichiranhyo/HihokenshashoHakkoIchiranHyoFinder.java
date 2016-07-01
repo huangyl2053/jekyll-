@@ -80,6 +80,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     private static final RString 番地のみ = new RString("4");
     private static final RString 表示無し_住所は印字しない = new RString("5");
     private static final RString 帳票ID_被保険者証 = new RString("DBA100001_Hihokenshasho");
+    private static final RString 受給者台帳 = new RString("1");
+    private static final RString 総合事業対象者 = new RString("2");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -451,12 +453,16 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     }
 
     private RString set要介護(IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity) {
-
-        FlexibleDate 認定有効期間開始年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanKaishiYMD();
-        FlexibleDate 認定有効期間終了年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanShuryoYMD();
-        RString 要介護 = get要介護状態区分コード(認定有効期間終了年月日, ikkatsuHakkoRelateEntity.getYokaigoJotaiKubunCode());
-        if (null == 認定有効期間開始年月日 && null == 認定有効期間終了年月日) {
-            要介護 = RString.EMPTY;
+        RString 要介護 = RString.EMPTY;
+        if (受給者台帳.equals(ikkatsuHakkoRelateEntity.getTaisyoKubun())) {
+            FlexibleDate 認定有効期間開始年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanKaishiYMD();
+            FlexibleDate 認定有効期間終了年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanShuryoYMD();
+            要介護 = get要介護状態区分コード(認定有効期間終了年月日, ikkatsuHakkoRelateEntity.getYokaigoJotaiKubunCode());
+            if (null == 認定有効期間開始年月日 && null == 認定有効期間終了年月日) {
+                要介護 = RString.EMPTY;
+            }
+        } else if (総合事業対象者.equals(ikkatsuHakkoRelateEntity.getTaisyoKubun())) {
+            要介護 = new RString("事業対象者");
         }
         return 要介護;
     }
