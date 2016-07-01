@@ -121,7 +121,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         source.shinseiYMD = パターン16(item.get今回認定調査実施年月日());
         source.shinsaYMD = パターン16(item.get今回認定審査年月日());
         source.hokenshaName = item.get氏名();
-        source.HihokenNo = item.get被保険者番号();
+        source.hihokenNo = item.get被保険者番号();
         source.hokenshaNo = item.get保険者番号();
         source.shichosonName = item.get市町村名();
         source.chosaItakusakiNo = item.get事業者番号();
