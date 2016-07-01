@@ -71,7 +71,6 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onSelectByDeleteButton_dgHenko(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ShikakuHenkoRirekiHandler handler = getHandler(henkoRirekiDiv);
-        henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(true);
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         handler.set資格変更入力Panel();
         if (!ViewExecutionStatus.Add.getValue().equals(henkoRirekiDiv.getInputMode())) {
@@ -89,7 +88,6 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onSelect_dgHenko(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ShikakuHenkoRirekiHandler handler = getHandler(henkoRirekiDiv);
-        henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(true);
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         handler.set資格変更入力Panel();
         if (henkoRirekiDiv.getDgHenko().getClickedItem().getState().equals(new RString("追加"))
@@ -101,6 +99,7 @@ public class ShikakuHenkoRireki {
             henkoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
         } else {
             henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
+            henkoRirekiDiv.getBtnAdd().setDisabled(false);
             henkoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
         }
         ViewStateHolder.put(ViewStateKeys.資格変更入力, handler.get資格変更入力Panel());
@@ -143,14 +142,13 @@ public class ShikakuHenkoRireki {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || ResponseHolder.getMessageCode().isNullOrEmpty()) {
             getHandler(henkoRirekiDiv).clear資格変更入力Panel();
-            if (!ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(henkoRirekiDiv.getMode_DisplayType())) {
+            if (!ShikakuHenkoRirekiDiv.MeisaiMode.shokai.equals(henkoRirekiDiv.getMode_MeisaiMode())) {
                 henkoRirekiDiv.getBtnAdd().setDisabled(false);
                 henkoRirekiDiv.getDgHenko().setDisabled(false);
                 henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
                 henkoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
             }
         }
-        henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
@@ -196,7 +194,6 @@ public class ShikakuHenkoRireki {
             henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
         }
 
-        henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(false);
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 
