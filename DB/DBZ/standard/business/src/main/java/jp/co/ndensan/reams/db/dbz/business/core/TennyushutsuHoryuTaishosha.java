@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -22,14 +21,14 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 転入保留対象者を管理するクラスです。
  */
-public class TennyushutsuHoryuTaishosha extends 
-        ModelBase<TennyushutsuHoryuTaishoshaIdentifier, 
-        DbT1010TennyushutsuHoryuTaishoshaEntity, TennyushutsuHoryuTaishosha> 
+public class TennyushutsuHoryuTaishosha extends
+        ModelBase<TennyushutsuHoryuTaishoshaIdentifier, DbT1010TennyushutsuHoryuTaishoshaEntity, TennyushutsuHoryuTaishosha>
         implements Serializable {
 
     private final DbT1010TennyushutsuHoryuTaishoshaEntity entity;
@@ -362,8 +361,6 @@ public class TennyushutsuHoryuTaishosha extends
 //    public Katagaki get転出確定方書() {
 //        return entity.getTenshutsuKakuteiKatagaki();
 //    }
-    
-    
     /**
      * 前住所全国住所コードを返します。
      *

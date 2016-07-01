@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.iinYobihanteiKinyuhyo;
+package jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.iinYobihanteiKinyuhyoReportSource.IinYobihanteiKinyuhyoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**

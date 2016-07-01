@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 事務局用概況特記一覧表の帳票ID。
+     */
+    DBE517007(new ReportId("DBE517007_GaikyoTokkiIchiran"), new RString("事務局用概況特記一覧表")),
+    /**
      * 事務局用一次判定結果票A3の帳票ID。
      */
     DBE517081(new ReportId("DBE517081_IchijihanteikekkahyoA3"), new RString("事務局用一次判定結果票A3")),
