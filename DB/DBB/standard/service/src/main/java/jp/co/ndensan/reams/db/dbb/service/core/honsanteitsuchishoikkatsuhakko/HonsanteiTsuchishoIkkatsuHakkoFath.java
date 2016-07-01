@@ -262,6 +262,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
         RString spoolWorkPath = manager.getEucOutputDirectry();
         //TODO
         //RString eucFilePath = Path.getTmpDirectoryPath();
+        //TO QA914 Encode.UTF_8withBOM
         RString eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収_EUCファイル名);
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
@@ -404,6 +405,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath, eucFileName);
+        //TO QA914 Encode.UTF_8withBOM
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -547,6 +549,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath, eucFileName);
+        //TO QA914 Encode.UTF_8withBOM
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
