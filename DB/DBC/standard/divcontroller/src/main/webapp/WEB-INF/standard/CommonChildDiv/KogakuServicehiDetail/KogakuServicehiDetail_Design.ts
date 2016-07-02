@@ -1,8 +1,8 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="./ShiharaiHohoJyoho/ShiharaiHohoJyoho.ts" />
-/// <reference path="./KogakuKyufuTaishoList.ts" />
+// <reference path="./ShiharaiHohoJyoho/ShiharaiHohoJyoho.ts" />
+// <reference path="./KogakuKyufuTaishoList/KogakuKyufuTaishoList.ts" />
 
 module DBC {
 
@@ -39,8 +39,8 @@ module DBC {
                 return new UZA.TextBoxDate(this.convFiledName("txtTeikyoYM"));
             }
 
-            public txtJotai(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtJotai"));
+            public txtJotai(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtJotai"));
             }
 
             public txtKanriBango(): UZA.TextBoxNum {
@@ -99,17 +99,17 @@ module DBC {
                 return new UZA.TabPanel(this.convFiledName("tplKoza"));
             }
 
-            public ccdShiharaiHohoJyoho(): DBC.ShiharaiHohoJyoho.ModeController {
-                return new DBC.ShiharaiHohoJyoho.ModeController(this.convFiledName("ccdShiharaiHohoJyoho"));
-            }
+            //public ccdShiharaiHohoJyoho(): DBC.ShiharaiHohoJyoho.ModeController {
+            //    return new DBC.ShiharaiHohoJyoho.ModeController(this.convFiledName("ccdShiharaiHohoJyoho"));
+            //}
 
             public tplJudgementResult(): UZA.TabPanel {
                 return new UZA.TabPanel(this.convFiledName("tplJudgementResult"));
             }
 
-            public ccdKogakuKyufuTaishoList(): DBC.KogakuKyufuTaishoList.ModeController {
-                return new DBC.KogakuKyufuTaishoList.ModeController(this.convFiledName("ccdKogakuKyufuTaishoList"));
-            }
+            //public ccdKogakuKyufuTaishoList(): DBC.KogakuKyufuTaishoList.ModeController {
+            //    return new DBC.KogakuKyufuTaishoList.ModeController(this.convFiledName("ccdKogakuKyufuTaishoList"));
+            //}
 
             public txtUketsukeYMD(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtUketsukeYMD"));
