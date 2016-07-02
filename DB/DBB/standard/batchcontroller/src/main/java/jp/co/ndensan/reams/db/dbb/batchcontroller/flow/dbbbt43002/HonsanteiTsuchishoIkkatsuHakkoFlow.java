@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt43002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.HonsanteiTsuchishoTempTableCreatProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.HonsanteiTsuchishoTempTableDropProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.InsTsuchishoHakkogoIdoshaHenkoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.InsTsuchishoHakkogoIdoshaKetteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.InsTsuchishoHakkogoIdoshaNonyuProcess;
@@ -42,6 +43,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
+    private static final String 計算後情報一時テーブル削除 = "dropKeisangoJohoTempProcess";
     private static final String CREAT_PROCESS = "creatTmpProcess";
     private static final String PRINT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS = "prtTokuchoKaishiTsuchishoHonsanteiProcess";
     private static final String INSERT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS = "insTsuchishoHakkogoIdoshaTokuchoKaishiProcess";
@@ -107,6 +109,9 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
                 executeStep(PRINT_NONYUTSUCHISHO_PROCESS);
                 executeStep(INSERT_NONYUTSUCHISHO_PROCESS);
             }
+            if (parameter.is一括発行起動フラグ()) {
+                executeStep(計算後情報一時テーブル削除);
+            }
         }
     }
 
@@ -125,6 +130,16 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
                 parameter.get打分け条件情報(), parameter.get処理日時(), parameter.is一括発行起動フラグ(), null,
                 parameter.get納入_生活保護対象者をまとめて先頭に出力());
         return simpleBatch(SystemTimeSakuseiProcess.class).arguments(para).define();
+    }
+
+    /**
+     * 計算後情報一時テーブル削除するメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(計算後情報一時テーブル削除)
+    protected IBatchFlowCommand dropKeisangoJohoTempProcess() {
+        return simpleBatch(HonsanteiTsuchishoTempTableDropProcess.class).define();
     }
 
     /**
