@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -53,8 +54,8 @@ public class NinteiChosaDataOutputHandler {
     public void load() {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
         div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("SimpleInputMode"));
-        div.getTxtMaxCount().setValue(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -66,7 +67,7 @@ public class NinteiChosaDataOutputHandler {
         return NinteiChosaDataOutputMybitisParameter.createSelectByKeyParam(
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
-                Integer.parseInt(div.getTxtMaxCount().getValue().toString()));
+                div.getTxtMaxCount().getValue());
     }
 
     /**
@@ -75,24 +76,6 @@ public class NinteiChosaDataOutputHandler {
     public void clear検索条件() {
         div.getCcdChosaltakusakiAndChosainInput().clear();
         div.getNinteiKensakuJyoken().getTxtMaxCount().clearValue();
-    }
-
-    /**
-     * 最大件数を越える判定のメッソドです。
-     *
-     * @return boolean
-     */
-    public boolean isMaxCountFlag() {
-        return maxCount < Integer.parseInt(div.getNinteiKensakuJyoken().getTxtMaxCount().getValue().toString());
-    }
-
-    /**
-     * 最大件数より小さい0を判定するメッソドです。
-     *
-     * @return boolean
-     */
-    public boolean isMinCountFlag() {
-        return Integer.parseInt(div.getNinteiKensakuJyoken().getTxtMaxCount().getValue().toString()) <= 0;
     }
 
     /**
@@ -120,8 +103,9 @@ public class NinteiChosaDataOutputHandler {
      */
     public void get認定調査一覧(List<NinteiChosaDataOutputBusiness> masterList) {
         List<dgNinteiChosaData_Row> rowList = new ArrayList<>();
+        boolean 共通ボタン活性フラグ = false;
         for (NinteiChosaDataOutputBusiness master : masterList) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
+            共通ボタン活性フラグ = true;
             dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
             row.setNinteiChosaItakusakiCode(master.get認定調査委託先コード());
             row.setJigyoshaMeisho(master.get調査委託先名称());
@@ -137,6 +121,9 @@ public class NinteiChosaDataOutputHandler {
             row.setShinseishoKanriNo(master.get申請書管理番号());
             rowList.add(row);
             アクセスログ(master.get申請書管理番号());
+        }
+        if (共通ボタン活性フラグ) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }
         div.getNinteiIchiran().getDgNinteiChosaData().setDataSource(rowList);
     }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 
 /**
@@ -23,7 +24,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
     private final RString ninteichosaItakusakiCode;
     private final RString ninteiChosainCode;
-    private final int maxCount;
+    private final Decimal maxCount;
     private final boolean isNinteichosaItakusakiCode;
     private final boolean isNinteiChosainCode;
 
@@ -38,7 +39,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
      */
     private NinteiChosaDataOutputMybitisParameter(RString 認定調査委託先コード,
             RString 認定調査員コード,
-            int 最大表示件数,
+            Decimal 最大表示件数,
             boolean is認定調査委託先コード,
             boolean is認定調査員コード) {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
@@ -59,7 +60,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
     public static NinteiChosaDataOutputMybitisParameter createSelectByKeyParam(
             RString 認定調査委託先コード,
             RString 認定調査員コード,
-            int 最大表示件数) {
+            Decimal 最大表示件数) {
 
         boolean is認定調査委託先コード = false;
         boolean is認定調査員コード = false;

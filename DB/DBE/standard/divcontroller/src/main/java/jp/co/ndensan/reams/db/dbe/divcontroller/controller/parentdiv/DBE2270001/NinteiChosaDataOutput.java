@@ -40,16 +40,15 @@ public class NinteiChosaDataOutput {
      * @return ResponseData<NinteiChosaDataOutputDiv>
      */
     public ResponseData<NinteiChosaDataOutputDiv> onClick_btnKensaku(NinteiChosaDataOutputDiv div) {
-        if (!getHandler(div).isMinCountFlag()) {
-            List<NinteiChosaDataOutputBusiness> businessList
-                    = NinteiChosaDataOutputFinder.createInstance().getChosaChikuList(getHandler(div).setParameter()).records();
-            getHandler(div).set共通ボタン();
-            getHandler(div).get認定調査一覧(businessList);
-            if (businessList.isEmpty()) {
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(getValidationHandler().checkデータ存在());
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
+
+        List<NinteiChosaDataOutputBusiness> businessList
+                = NinteiChosaDataOutputFinder.createInstance().getChosaChikuList(getHandler(div).setParameter()).records();
+        getHandler(div).set共通ボタン();
+        getHandler(div).get認定調査一覧(businessList);
+        if (businessList.isEmpty()) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(getValidationHandler().checkデータ存在());
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
     }

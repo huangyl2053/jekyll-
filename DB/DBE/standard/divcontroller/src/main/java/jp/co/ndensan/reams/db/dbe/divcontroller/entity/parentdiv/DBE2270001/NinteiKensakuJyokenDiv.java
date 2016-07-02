@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteiKensakuJyoken のクラスファイル
@@ -26,14 +26,14 @@ public class NinteiKensakuJyokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdChosaltakusakiAndChosainInput")
+    private ChosaItakusakiAndChosainInputDiv ccdChosaltakusakiAndChosainInput;
     @JsonProperty("txtMaxCount")
-    private TextBox txtMaxCount;
+    private TextBoxNum txtMaxCount;
     @JsonProperty("btnKyufuJissekiSearchClear")
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
-    @JsonProperty("ccdChosaltakusakiAndChosainInput")
-    private ChosaItakusakiAndChosainInputDiv ccdChosaltakusakiAndChosainInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,11 +42,20 @@ public class NinteiKensakuJyokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
+     * getccdChosaltakusakiAndChosainInput
+     * @return ccdChosaltakusakiAndChosainInput
+     */
+    @JsonProperty("ccdChosaltakusakiAndChosainInput")
+    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
+        return ccdChosaltakusakiAndChosainInput;
+    }
+
+    /*
      * gettxtMaxCount
      * @return txtMaxCount
      */
     @JsonProperty("txtMaxCount")
-    public TextBox getTxtMaxCount() {
+    public TextBoxNum getTxtMaxCount() {
         return txtMaxCount;
     }
 
@@ -55,7 +64,7 @@ public class NinteiKensakuJyokenDiv extends Panel {
      * @param txtMaxCount txtMaxCount
      */
     @JsonProperty("txtMaxCount")
-    public void setTxtMaxCount(TextBox txtMaxCount) {
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.txtMaxCount = txtMaxCount;
     }
 
@@ -93,15 +102,6 @@ public class NinteiKensakuJyokenDiv extends Panel {
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
         this.btnKensaku = btnKensaku;
-    }
-
-    /*
-     * getccdChosaltakusakiAndChosainInput
-     * @return ccdChosaltakusakiAndChosainInput
-     */
-    @JsonProperty("ccdChosaltakusakiAndChosainInput")
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
-        return ccdChosaltakusakiAndChosainInput;
     }
 
     // </editor-fold>

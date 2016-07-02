@@ -9,10 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * NinteiChosaDataOutput のクラスファイル
@@ -99,12 +97,17 @@ public class NinteiChosaDataOutputDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtMaxCount() {
+    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
+        return this.getNinteiKensakuJyoken().getCcdChosaltakusakiAndChosainInput();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxCount() {
         return this.getNinteiKensakuJyoken().getTxtMaxCount();
     }
 
     @JsonIgnore
-    public void setTxtMaxCount(TextBox txtMaxCount) {
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getNinteiKensakuJyoken().setTxtMaxCount(txtMaxCount);
     }
 
@@ -126,11 +129,6 @@ public class NinteiChosaDataOutputDiv extends Panel {
     @JsonIgnore
     public void setBtnKensaku(Button btnKensaku) {
         this.getNinteiKensakuJyoken().setBtnKensaku(btnKensaku);
-    }
-
-    @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
-        return this.getNinteiKensakuJyoken().getCcdChosaltakusakiAndChosainInput();
     }
 
     @JsonIgnore
