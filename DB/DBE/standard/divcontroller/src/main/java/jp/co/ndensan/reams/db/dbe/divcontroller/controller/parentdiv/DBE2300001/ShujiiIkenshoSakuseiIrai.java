@@ -503,10 +503,10 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setRemban(new RString("1"));
         ShujiiIraiAtenaJoho atenaJoho = get宛先(row);
         if (atenaJoho != null) {
-            iraishoItem.setYubinNo1(atenaJoho.getTemp_宛名郵便番号().value());
-            iraishoItem.setJushoText(atenaJoho.getTemp_宛名住所().value());
+            iraishoItem.setYubinNo1(atenaJoho.getTemp_宛名郵便番号() == null ? RString.EMPTY : atenaJoho.getTemp_宛名郵便番号().value());
+            iraishoItem.setJushoText(atenaJoho.getTemp_宛名住所() == null ? RString.EMPTY : atenaJoho.getTemp_宛名住所().value());
             iraishoItem.setKikanNameText(atenaJoho.getTemp_宛名機関名());
-            iraishoItem.setShimeiText(atenaJoho.getTemp_宛名氏名().value());
+            iraishoItem.setShimeiText(atenaJoho.getTemp_宛名氏名() == null ? RString.EMPTY : atenaJoho.getTemp_宛名氏名().value());
         }
         iraishoItem.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
@@ -517,9 +517,9 @@ public class ShujiiIkenshoSakuseiIrai {
         CustomerBarCodeResult result = barcode.convertCustomerBarCode(row.getYubinNo(), row.getJusho());
         iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
-        if (birthYMD != null) {
+        if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
             if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
                 iraishoItem.setBirthGengoShowa(星);
                 iraishoItem.setBirthGengoTaisho(星);
@@ -548,10 +548,10 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setKikanNameText(row.getShujiiIryoKikan());
         ShujiiIraiAtenaJoho atenaJoho = get宛先(row);
         if (atenaJoho != null) {
-            item.setYubinNo1(atenaJoho.getTemp_宛名郵便番号().value());
-            item.setJushoText(atenaJoho.getTemp_宛名住所().value());
+            item.setYubinNo1(atenaJoho.getTemp_宛名郵便番号() == null ? RString.EMPTY : atenaJoho.getTemp_宛名郵便番号().value());
+            item.setJushoText(atenaJoho.getTemp_宛名住所() == null ? RString.EMPTY : atenaJoho.getTemp_宛名住所().value());
             item.setKikanNameText(atenaJoho.getTemp_宛名機関名());
-            item.setShimeiText(atenaJoho.getTemp_宛名氏名().value());
+            item.setShimeiText(atenaJoho.getTemp_宛名氏名() == null ? RString.EMPTY : atenaJoho.getTemp_宛名氏名().value());
         }
         item.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
@@ -575,8 +575,8 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setListIchiranhyo_4(row.getHihokennshaShimei());
         item.setListIchiranhyo_5(row.getHihokenshaShimeiKana());
         item.setListIchiranhyo_6(row.getJusho());
-        item.setListIchiranhyo_7(row.getBirthYMD().getValue() == null ? RString.EMPTY
-                : row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
+        item.setListIchiranhyo_7(row.getBirthYMD().getValue() == null || FlexibleDate.EMPTY.equals(row.getBirthYMD().getValue())
+                ? RString.EMPTY : row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         item.setListIchiranhyo_8(row.getSeibetsu());
         item.setListIchiranhyo_9(get主治医意見書作成期限年月日(row));
@@ -599,7 +599,7 @@ public class ShujiiIkenshoSakuseiIrai {
         business.setIryokikanFax(row.getIryoKikanFaxNo());
         business.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
-        if (birthYMD != null) {
+        if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             business.setBirthYY(birthYMD.getYear().toDateString());
             business.setBirthMM(new RString(String.valueOf(birthYMD.getMonthValue())));
             business.setBirthDD(new RString(String.valueOf(birthYMD.getDayValue())));
@@ -642,8 +642,8 @@ public class ShujiiIkenshoSakuseiIrai {
         business.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
         RDate 認定申請日 = row.getShinseiDay().getValue();
         if (認定申請日 != null) {
-            business.setShinseiYY1(認定申請日.getYear().wareki().getEra());
-            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1));
+            business.setShinseiYY1(認定申請日.getYear().wareki().toDateString().substring(数字_0, 数字_1));
+            business.setShinseiYY2(認定申請日.getYear().wareki().toDateString().substring(数字_1, 数字_2));
             business.setShinseiMM1(new RString(String.valueOf(認定申請日.getMonthValue() / 数字_10)));
             business.setShinseiMM2(new RString(String.valueOf(認定申請日.getMonthValue() % 数字_10)));
             business.setShinseiDD1(new RString(String.valueOf(認定申請日.getDayValue() / 数字_10)));
@@ -683,7 +683,7 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaName(row.getHihokennshaShimei());
         item.setSeikyuIryokikanTel(row.getIryoKikanTelNo());
         item.setSeikyuIryokikanJusho(row.getJusho());
-        if (row.getBirthYMD().getValue() != null) {
+        if (row.getBirthYMD().getValue() != null && !FlexibleDate.EMPTY.equals(row.getBirthYMD().getValue())) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         }
@@ -798,9 +798,9 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setJusho(row.getJusho());
         item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
-        if (birthYMD != null) {
+        if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
             if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
                 item.setBirthGengoShowa(星);
                 item.setBirthGengoTaisho(星);

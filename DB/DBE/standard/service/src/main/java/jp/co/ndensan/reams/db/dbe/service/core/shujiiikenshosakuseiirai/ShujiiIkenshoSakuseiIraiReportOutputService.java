@@ -80,7 +80,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     public void print主治医意見書作成依頼情報(List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList,
             ReportManager reportManager) {
         List<ShujiiIkenshoSakuseiIraishoReport> list = new ArrayList<>();
-        list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(主治医意見書作成依頼情報ItemList));
         ShujiiIkenshoSakuseiIraishoProperty property = new ShujiiIkenshoSakuseiIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoSakuseiIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             INinshoshaSourceBuilder ninshosha = new _NinshoshaSourceBuilderCreator().create(GyomuCode.DB介護保険,
