@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKe
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -86,7 +87,9 @@ public class MainPanel {
         try {
             ChoshuHoho 徴収方法データ = ViewStateHolder.
                     get(ViewStateKeys.徴収方法データ, ChoshuHoho.class);
-            handler.saveボタンを押下(賦課年度, 被保険者番号, 徴収方法データ);
+            YMDHMS 停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
+            RString 停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
+            handler.saveボタンを押下(賦課年度, 被保険者番号, 徴収方法データ, 停止日時, 停止事由コード);
             div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(処理名,
                     賦課対象者.get識別コード().value(),
                     div.getAtenaInfo().getKiagoAtenaInfo().get氏名漢字(), true);

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.Main
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -311,10 +309,13 @@ public class MainPanelHandler {
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
      * @param 徴収方法データ ChoshuHoho
+     * @param 停止日時 YMDHMS
+     * @param 停止事由コード RString
      */
     public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
-        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ);
+            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ,
+            YMDHMS 停止日時, RString 停止事由コード) {
+        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ, 停止日時, 停止事由コード);
     }
 
     private DataGridCellBgColor setBgColor(RString コード) {
@@ -671,7 +672,8 @@ public class MainPanelHandler {
     }
 
     private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ) {
+            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ,
+            YMDHMS 停止日時, RString 停止事由コード) {
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
@@ -741,8 +743,8 @@ public class MainPanelHandler {
                 特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
                 break;
             } else {
-                特別徴収停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
-                特別徴収停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
+                特別徴収停止日時 = 停止日時;
+                特別徴収停止事由コード = 停止事由コード;
             }
 
         }
