@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 転出保留対象者管理クラスです。
+ * 転入 広域保留対象者情報の取得処理のEntityです。
  *
  * @reamsid_L DBA-0470-010 wangxiaodong
  */
-public class TennyushutsuHoryuTaishoshaEntity {
+public class TenshutsuHoryuTaishoshaEntity {
 
     private ShikibetsuCode 識別コード;
     private HihokenshaNo 被保険者番号;
@@ -31,10 +31,8 @@ public class TennyushutsuHoryuTaishoshaEntity {
     private FlexibleDate 生年月日;
     private RString 性別コード;
     private RString 異動事由コード;
-    private AtenaJusho 転出予定住所;
-    private AtenaJusho 転出確定住所;
-    private FlexibleDate 転出確定異動年月日;
-    private FlexibleDate 転出予定異動年月日;
+    private FlexibleDate 登録異動年月日;
+    private AtenaJusho 住所;
 
     /**
      * 識別コードのgetメソッドです。
@@ -217,74 +215,38 @@ public class TennyushutsuHoryuTaishoshaEntity {
     }
 
     /**
-     * get転出予定異動年月日のgetメソッドです。
+     * get登録異動年月日のgetメソッドです。
      *
-     * @return 転出予定異動年月日
+     * @return 登録異動年月日
      */
-    public FlexibleDate get転出予定異動年月日() {
-        return 転出予定異動年月日;
+    public FlexibleDate get登録異動年月日() {
+        return 登録異動年月日;
     }
 
     /**
-     * get転出予定異動年月日のsetメソッドです。
+     * get登録異動年月日のsetメソッドです。
      *
-     * @param 転出予定異動年月日 FlexibleDate
+     * @param 登録異動年月日 FlexibleDate
      */
-    public void set転出予定異動年月日(FlexibleDate 転出予定異動年月日) {
-        this.転出予定異動年月日 = 転出予定異動年月日;
+    public void set登録異動年月日(FlexibleDate 登録異動年月日) {
+        this.登録異動年月日 = 登録異動年月日;
     }
 
     /**
-     * get転出確定異動年月日のgetメソッドです。
+     * get住所のgetメソッドです。
      *
-     * @return 転出確定異動年月日
+     * @return 住所
      */
-    public FlexibleDate get転出確定異動年月日() {
-        return 転出確定異動年月日;
+    public AtenaJusho get住所() {
+        return 住所;
     }
 
     /**
-     * get転出確定異動年月日のsetメソッドです。
+     * get住所のsetメソッドです。
      *
-     * @param 転出確定異動年月日 FlexibleDate
+     * @param 住所 AtenaJusho
      */
-    public void set転出確定異動年月日(FlexibleDate 転出確定異動年月日) {
-        this.転出確定異動年月日 = 転出確定異動年月日;
-    }
-
-    /**
-     * get転出確定住所のgetメソッドです。
-     *
-     * @return 転出確定住所
-     */
-    public AtenaJusho get転出確定住所() {
-        return 転出確定住所;
-    }
-
-    /**
-     * get転出確定住所のsetメソッドです。
-     *
-     * @param 転出確定住所 AtenaJusho
-     */
-    public void set転出確定住所(AtenaJusho 転出確定住所) {
-        this.転出確定住所 = 転出確定住所;
-    }
-
-    /**
-     * get転出予定住所のgetメソッドです。
-     *
-     * @return 転出予定住所
-     */
-    public AtenaJusho get転出予定住所() {
-        return 転出予定住所;
-    }
-
-    /**
-     * get転出予定住所のsetメソッドです。
-     *
-     * @param 転出予定住所 AtenaJusho
-     */
-    public void set転出予定住所(AtenaJusho 転出予定住所) {
-        this.転出予定住所 = 転出予定住所;
+    public void set住所(AtenaJusho 住所) {
+        this.住所 = 住所;
     }
 }
