@@ -174,6 +174,24 @@ public class TenshutsuHoryuTaisho implements Serializable {
     }
 
     /**
+     * 被保険者台帳管理異動日のgetメソッドです。
+     *
+     * @return 被保険者台帳管理異動日
+     */
+    public FlexibleDate get被保険者異動日() {
+        return 被保険者台帳.get異動日();
+    }
+
+    /**
+     * 被保険者台帳管理枝番のgetメソッドです。
+     *
+     * @return 被保険者台帳管理枝番
+     */
+    public RString get被保険者枝番() {
+        return 被保険者台帳.get枝番();
+    }
+
+    /**
      * TenshutsuHoryuTaishoshaのgetメソッドです。
      *
      * @return TenshutsuHoryuTaishosha

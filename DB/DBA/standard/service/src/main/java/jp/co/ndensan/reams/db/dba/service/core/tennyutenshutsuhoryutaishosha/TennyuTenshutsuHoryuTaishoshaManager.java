@@ -144,7 +144,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @return true:削除した false:削除しない
      */
     @Transaction
-    public boolean delTenshutsuHoryuTaishosha(TenshutsuHoryuTaishosha 転出保留対象者) {
+    public boolean delete転出保留対象者(TenshutsuHoryuTaishosha 転出保留対象者) {
         return 1 == tenshutsuHoryuTaishoshaDac.deletePhysical(転出保留対象者.toEntity());
     }
 
@@ -155,7 +155,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @return true:削除した false:削除しない
      */
     @Transaction
-    public boolean delTennyushutsuHoryuTaishosha(TennyushutsuHoryuTaishosha 転入保留対象者) {
+    public boolean delete転入保留対象者(TennyushutsuHoryuTaishosha 転入保留対象者) {
         return 1 == tennyushutsuHoryuTaishoshaDac.deletePhysical(転入保留対象者.toEntity());
     }
 
@@ -165,6 +165,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @param 識別コードList List<ShikibetsuCode>
      * @return 宛名Map
      */
+    @Transaction
     public Map<ShikibetsuCode, IKojin> get宛名Map(List<ShikibetsuCode> 識別コードList) {
         IShikibetsuTaishoSearchKey 識別対象検索キー = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true)
@@ -183,10 +184,17 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @param 被保険者台帳 List<HihokenshaDaicho>
      * @param 転出保留対象者 List<TenshutsuHoryuTaishosha>
      */
-    public void ikkatsuSoshitsu(List<HihokenshaDaicho> 被保険者台帳, List<TenshutsuHoryuTaishosha> 転出保留対象者) {
-        for (int i = 0; i < 転出保留対象者.size(); i++) {
-            hihokenshaDaichoDac.save(被保険者台帳.get(i).toEntity());
-            delTenshutsuHoryuTaishosha(転出保留対象者.get(i));
+    @Transaction
+    public void do一括喪失(List<HihokenshaDaicho> 被保険者台帳, List<TenshutsuHoryuTaishosha> 転出保留対象者) {
+        save被保険者台帳(被保険者台帳);
+        for (TenshutsuHoryuTaishosha taishosha : 転出保留対象者) {
+            delete転出保留対象者(taishosha);
+        }
+    }
+
+    private void save被保険者台帳(List<HihokenshaDaicho> 被保険者台帳) {
+        for (HihokenshaDaicho hihokenshaDaicho : 被保険者台帳) {
+            hihokenshaDaichoDac.save(hihokenshaDaicho.toEntity());
         }
     }
 }

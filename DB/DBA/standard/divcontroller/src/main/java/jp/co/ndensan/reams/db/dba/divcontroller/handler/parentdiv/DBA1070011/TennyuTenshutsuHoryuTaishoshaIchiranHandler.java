@@ -41,6 +41,8 @@ public class TennyuTenshutsuHoryuTaishoshaIchiranHandler {
             row.getHihokenshaNo().setValue(taishosha.get被保険者番号().value());
             row.getShikibetsuCode().setValue(taishosha.get識別コード().value());
             row.setRirekiNo(new RString(taishosha.get履歴番号()));
+            row.getHihokenshaIdoYMD().setValue(taishosha.get被保険者異動日());
+            row.setHihokenshaEdaNo(taishosha.get被保険者枝番());
             if (taishosha.get宛名氏名() != null) {
                 row.setShimei(taishosha.get宛名氏名().value());
             }
