@@ -12,7 +12,7 @@ import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB11700
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1170001.ShotokuShokaiTaishoshaIchiranHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1170001.ShotokuShokaiTaishoshaIchiranValidationHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchosofu.TokuChoSoufuJo
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2110001.TokuchoSofuJohoSakuseiValidationHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;

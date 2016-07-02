@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020004.DBB9020004StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020004.NonyuTsuchishoTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020004.NonyuTsuchishoTotalHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
