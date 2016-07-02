@@ -41,10 +41,11 @@ public class FukaKijunTotal {
      * @return ResponseData<FukaKijunTotalDiv>
      */
     public ResponseData<FukaKijunTotalDiv> onload(FukaKijunTotalDiv div) {
+        RDate now = RDate.getNowDate();
         getHandler(div).前排他を設定する();
-        getHandler(div).賦課年度の設定();
+        getHandler(div).賦課年度の設定(now);
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
-        getHandler(div).ランクの取得(賦課年度);
+        getHandler(div).ランクの取得(賦課年度, now);
         return ResponseData.of(div).setState(getHandler(div).遷移先の設定(賦課年度));
     }
 
@@ -55,8 +56,9 @@ public class FukaKijunTotal {
      * @return ResponseData<FukaKijunTotalDiv>
      */
     public ResponseData<FukaKijunTotalDiv> onChange_DdlFukaNendo(FukaKijunTotalDiv div) {
+        RDate now = RDate.getNowDate();
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
-        getHandler(div).ランクの取得(賦課年度);
+        getHandler(div).ランクの取得(賦課年度, now);
         return ResponseData.of(div).setState(getHandler(div).遷移先の設定(賦課年度));
     }
 

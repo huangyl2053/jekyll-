@@ -133,10 +133,11 @@ public class FukaKijunTotalHandler {
 
     /**
      * 賦課年度の設定のメソッドます。
+     *
+     * @param now システム日時
      */
-    public void 賦課年度の設定() {
-        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(
-                ConfigNameDBB.日付関連_調定年度, RDate.getNowDate()));
+    public void 賦課年度の設定(RDate now) {
+        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, now));
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
         ShoriDateKanri 新年度管理情報作成 = manager.get抽出調定日時(
                 SubGyomuCode.DBB介護賦課, ShoriName.新年度管理情報作成.get名称(), 賦課年度.plusYear(NUM_1));
@@ -161,10 +162,10 @@ public class FukaKijunTotalHandler {
      * ランクを取得のメソッドます。
      *
      * @param 賦課年度 FlexibleYear
+     * @param now システム日時
      */
-    public void ランクの取得(FlexibleYear 賦課年度) {
+    public void ランクの取得(FlexibleYear 賦課年度, RDate now) {
         boolean isランク非表示 = false;
-        RDate now = RDate.getNowDate();
         RString ランク有無 = DbBusinessConfig.get(ConfigNameDBB.ランク管理情報_ランク有無, now, SubGyomuCode.DBB介護賦課);
         if (ランク_無.equals(ランク有無)) {
             isランク非表示 = true;
@@ -254,14 +255,10 @@ public class FukaKijunTotalHandler {
         DBB9020001StateName state = 遷移先の設定(賦課年度);
         Decimal 基準額 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
                 now, SubGyomuCode.DBB介護賦課).toString());
-        FlexibleYear 激変緩和_開始年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.激変緩和_開始年度,
-                now, SubGyomuCode.DBB介護賦課));
-        FlexibleYear 激変緩和_終了年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.激変緩和_終了年度,
-                now, SubGyomuCode.DBB介護賦課));
         if (DBB9020001StateName.平成17年以前.equals(state)) {
             set画面項目_平成17年以前(保険料段階一覧, 賦課年度, now);
         } else if (DBB9020001StateName.平成18年から平成20年.equals(state)) {
-            set画面項目_平成18年から平成20年まで(保険料段階一覧, 賦課年度, now, 基準額, 激変緩和_開始年度, 激変緩和_終了年度);
+            set画面項目_平成18年から平成20年まで(保険料段階一覧, 賦課年度, now, 基準額);
         } else if (DBB9020001StateName.平成21年から平成23年まで.equals(state)) {
             set画面項目_平成21年から平成23年まで(保険料段階一覧, 賦課年度, now, 基準額);
         } else if (DBB9020001StateName.平成24年から平25年まで.equals(state)
@@ -285,9 +282,11 @@ public class FukaKijunTotalHandler {
     private void set画面項目_平成18年から平成20年まで(List<HokenryoDankai> 保険料段階一覧,
             FlexibleYear 賦課年度,
             RDate now,
-            Decimal 基準額,
-            FlexibleYear 激変緩和_開始年度,
-            FlexibleYear 激変緩和_終了年度) {
+            Decimal 基準額) {
+        FlexibleYear 激変緩和_開始年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.激変緩和_開始年度,
+                now, SubGyomuCode.DBB介護賦課));
+        FlexibleYear 激変緩和_終了年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.激変緩和_終了年度,
+                now, SubGyomuCode.DBB介護賦課));
         div.getShotokuDankai().getShotokuDankaiTo2014().getTxtHokenryoRitsuDai1Dankai().setValue(
                 get保険料率From保険料段階一覧(保険料段階一覧, 段階インデックス_01));
         div.getShotokuDankai().getShotokuDankaiTo2014().getTxtHokenryoRitsuDai2Dankai().setValue(
@@ -351,7 +350,7 @@ public class FukaKijunTotalHandler {
 
     private void set画面項目_平成27年以降(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         for (HokenryoDankai 段階 : 保険料段階一覧) {
-            if (段階_031.equals(段階.get段階区分()) || 段階_031.equals(段階.get段階区分())) {
+            if (段階_031.equals(段階.get段階区分()) || 段階_041.equals(段階.get段階区分())) {
                 div.getShotokuDankai().getHokenryoDankaiFrom2015().getRadDankaihyokiNinisettei().setSelectedKey(STR_ONE);
                 break;
             }
@@ -1032,9 +1031,7 @@ public class FukaKijunTotalHandler {
         KeyValueDataSource source;
         for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
             source = new KeyValueDataSource(保険料段階.get段階区分(), get段階区分_平成27年以降(保険料段階.get段階区分()));
-            if (!dateSource.contains(source)) {
-                dateSource.add(source);
-            }
+            dateSource.add(source);
         }
         int 順番 = 1;
         for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
@@ -1043,7 +1040,7 @@ public class FukaKijunTotalHandler {
             row.getDdlHokenryoDankai().setDataSource(dateSource);
             row.getDdlHokenryoDankai().setSelectedKey(保険料段階.get段階区分());
             row.getTxtHokenryoRitsu().setValue(保険料段階.get保険料率());
-            if (STR_ONE.equals(選択Key) && 保険料段階.get特例表記() != null && !保険料段階.get特例表記().isEmpty()) {
+            if (STR_ONE.equals(選択Key) && 保険料段階.get特例表記() != null) {
                 row.getTxtTokureiHyoji().setValue(保険料段階.get特例表記());
             }
             if (順番 <= NUM_4) {
