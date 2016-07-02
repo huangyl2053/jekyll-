@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.KarisanteiGakuHenkoEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -55,6 +56,10 @@ public class FukaJohoShutokuProcess extends BatchProcessBase<KarisanteiGakuHenko
     @Override
     protected void process(KarisanteiGakuHenkoEntity entity) {
         仮算定額変更情報一時tableWriter.insert(entity.toDbT2002FukaTempTableEntity());
+
+        TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
+        service.update計算後情報更正前(new TokuchoHeijunka6gatsuMyBatisParameter(
+                parameter.is一括発行フラグ(), null, null, null, ShoriName.特徴平準化計算_6月分.get名称(), null, null, null, null));
     }
 
 }
