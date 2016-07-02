@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB9020001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -19,11 +20,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * FukaKijunTotal のクラスファイル
  *
- * @reamsid_L DBB-1770-010 zhangrui
+ * @reamsid_L DBB-1770-010 wangkanglei
  */
 public class FukaKijunTotalDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,6 +39,8 @@ public class FukaKijunTotalDiv extends Panel {
     private HokenryoRitsuIgaiInfoDiv HokenryoRitsuIgaiInfo;
     @JsonProperty("KanryoMessage")
     private KanryoMessageDiv KanryoMessage;
+    @JsonProperty("hdnPatan")
+    private RString hdnPatan;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -115,6 +118,24 @@ public class FukaKijunTotalDiv extends Panel {
     @JsonProperty("KanryoMessage")
     public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
         this.KanryoMessage = KanryoMessage;
+    }
+
+    /*
+     * gethdnPatan
+     * @return hdnPatan
+     */
+    @JsonProperty("hdnPatan")
+    public RString getHdnPatan() {
+        return hdnPatan;
+    }
+
+    /*
+     * sethdnPatan
+     * @param hdnPatan hdnPatan
+     */
+    @JsonProperty("hdnPatan")
+    public void setHdnPatan(RString hdnPatan) {
+        this.hdnPatan = hdnPatan;
     }
 
     /*

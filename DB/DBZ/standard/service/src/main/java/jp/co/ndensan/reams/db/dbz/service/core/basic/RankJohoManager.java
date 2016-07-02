@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class RankJohoManager {
 
     private final DbT2011RankJohoDac dac;
+    private static final RString 賦課年度KEY = new RString("賦課年度");
+    private static final RString ランク区分KEY = new RString("ランク区分");
 
     /**
      * コンストラクタです。
@@ -53,8 +55,8 @@ public class RankJohoManager {
     public RankJoho getランク情報(
             FlexibleYear 賦課年度,
             RString ランク区分) {
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
-        requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度KEY.toString()));
+        requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage(ランク区分KEY.toString()));
 
         DbT2011RankJohoEntity entity = dac.selectByKey(
                 賦課年度,
@@ -93,10 +95,10 @@ public class RankJohoManager {
     public List<RankJoho> getランク情報一覧By賦課年度(FlexibleYear 賦課年度) {
         List<RankJoho> businessList = new ArrayList<>();
 
-//        for (DbT2011RankJohoEntity entity : dac.selectBy賦課年度(賦課年度)) {
-//            entity.initializeMd5();
-//            businessList.add(new RankJoho(entity));
-//        }
+        for (DbT2011RankJohoEntity entity : dac.selectBy賦課年度(賦課年度)) {
+            entity.initializeMd5();
+            businessList.add(new RankJoho(entity));
+        }
         return businessList;
     }
 
@@ -108,7 +110,7 @@ public class RankJohoManager {
      */
     @Transaction
     public boolean saveランク情報(RankJoho ランク情報) {
-        requireNonNull(ランク情報, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク情報"));
+        requireNonNull(ランク情報, UrSystemErrorMessages.値がnull.getReplacedMessage(ランク区分KEY.toString()));
         if (!ランク情報.hasChanged()) {
             return false;
         }

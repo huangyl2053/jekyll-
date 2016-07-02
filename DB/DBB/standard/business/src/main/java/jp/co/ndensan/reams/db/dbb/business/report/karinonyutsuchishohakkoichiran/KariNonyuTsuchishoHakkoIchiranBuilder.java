@@ -18,12 +18,23 @@ class KariNonyuTsuchishoHakkoIchiranBuilder implements IKariNonyuTsuchishoHakkoI
     private final IKariNonyuTsuchishoHakkoIchiranEditor headerEditor;
     private final IKariNonyuTsuchishoHakkoIchiranEditor bodyEditor;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param headerEditor headerEditor
+     * @param bodyEditor bodyEditor
+     */
     public KariNonyuTsuchishoHakkoIchiranBuilder(IKariNonyuTsuchishoHakkoIchiranEditor headerEditor,
             IKariNonyuTsuchishoHakkoIchiranEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }
 
+    /**
+     * 帳票ソースをビルドします。
+     *
+     * @return {@link KariNonyuTsuchishoHakkoIchiranSource}
+     */
     @Override
     public KariNonyuTsuchishoHakkoIchiranSource build() {
         return ReportEditorJoiner.from(new KariNonyuTsuchishoHakkoIchiranSource()).join(headerEditor).join(bodyEditor).buildSource();

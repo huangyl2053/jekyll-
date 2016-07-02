@@ -15,11 +15,12 @@ import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 保険料納入通知書（仮算定）発行一覧表帳票クラスです。
@@ -39,18 +40,19 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private static final int NUM_7 = 7;
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
+    private final Association association;
 
     protected KariNonyuTsuchishoHakkoIchiranBodyEditor(List<KariSanteiNonyuTsuchiShoJoho> entityList,
-            List<RString> 並び順List, int 出力期) {
+            List<RString> 並び順List, int 出力期, Association association) {
         this.entityList = entityList;
         this.並び順List = 並び順List;
         this.出力期 = 出力期;
+        this.association = association;
     }
 
     @Override
     public KariNonyuTsuchishoHakkoIchiranSource edit(KariNonyuTsuchishoHakkoIchiranSource source) {
         int 連番 = 1;
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
         for (KariSanteiNonyuTsuchiShoJoho item : entityList) {
@@ -82,7 +84,8 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
                     source.listUpper_13 = RString.EMPTY;
                     source.listLower_5 = RString.EMPTY;
                 }
-                source.listUpper_9 = 編集後仮算定通知書共通情報.get更正後().get保険料率();
+                source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(
+                        new Decimal(編集後仮算定通知書共通情報.get更正後().get保険料率().toString()), 0);
                 List<UniversalPhase> 普徴期別金額リスト = 編集後仮算定通知書共通情報.get更正後()
                         .get更正後普徴期別金額リスト();
                 if (普徴期別金額リスト != null) {
@@ -101,8 +104,8 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
                 if (isNull(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計())) {
                     source.listLower_5 = RString.EMPTY;
                 }
-                source.listLower_5 = new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().
-                        toString());
+                source.listLower_5 = DecimalFormatter.toコンマ区切りRString(
+                        編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計(), 0);
                 if (普徴期別金額リスト != null) {
                     次期以降編集(source, 普徴期別金額リスト);
                 }
@@ -172,7 +175,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private void 当期編集(List<UniversalPhase> 普徴期別金額リスト, KariNonyuTsuchishoHakkoIchiranSource source) {
         for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
             if (出力期 == 普徴期別金額.get期()) {
-                source.listUpper_10 = new RString(普徴期別金額.get金額().toString());
+                source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0);
                 break;
             }
         }
@@ -185,7 +188,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if ((出力期 + 1) == 普徴期別金額.get期()) {
                     source.listLower_6 = isNull(普徴期別金額.get金額()) ? new RString(0)
-                            : new RString(普徴期別金額.get金額().toString());
+                            : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0);
                     break;
                 }
             }
