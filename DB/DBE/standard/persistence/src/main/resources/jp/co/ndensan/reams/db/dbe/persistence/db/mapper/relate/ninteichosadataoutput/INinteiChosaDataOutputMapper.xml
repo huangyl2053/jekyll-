@@ -52,7 +52,7 @@
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
           ON DbT5201."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
       WHERE
-<!--        DbT5201."ninteichosaIraiRirekiNo" = ( 
+        DbT5201."ninteichosaIraiRirekiNo" = ( 
           SELECT
             MAX("ninteichosaIraiRirekiNo") 
           FROM
@@ -66,8 +66,8 @@
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL 
-        AND DbT5105."centerSoshinYMD" IS NULL -->
-         DbT5101."shoriJotaiKubun" IN (#{通常},#{延期}) 
+        AND DbT5105."centerSoshinYMD" IS NULL 
+        AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期}) 
         AND DbT5101."logicalDeletedFlag" = false 
         <if test= "isNinteichosaItakusakiCode">
             AND DbT5201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
