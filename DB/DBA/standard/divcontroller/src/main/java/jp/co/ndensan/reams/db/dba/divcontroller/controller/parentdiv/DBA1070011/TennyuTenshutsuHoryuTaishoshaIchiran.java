@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishoshaIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishoshaIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -93,14 +94,12 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         } else {
             div.getTplKoiki().setVisible(false);
         }
-        List<TenshutsuHoryuTaisho> 転出保留対象者情報 = manager.getTenshutsuHoryuTaishoshas().records();
-        save転出保留対象者情報ToViewState(転出保留対象者情報);
+        loadTplTenshutsu(div);
         List<TennyuHoryuTaisho> 転入保留対象者情報 = manager.getTennyuHoryuTaishoshas().records();
         save転入保留対象者情報ToViewState(転入保留対象者情報);
         List<TennyuHoryuTaisho> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshas().records();
         save広域保留対象者情報ToViewState(広域保留対象者情報);
         TennyuTenshutsuHoryuTaishoshaIchiranHandler handler = getHandler(div);
-        handler.load_転出情報(転出保留対象者情報);
         handler.load_転入情報(転入保留対象者情報);
         handler.load_広域情報(広域保留対象者情報);
         return ResponseData.of(div).respond();
@@ -135,7 +134,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.転入保留対象者, Models.class);
-            manager.delTennyushutsuHoryuTaishosha(転入保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
+            manager.delete転入保留対象者(転入保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
                     new ShikibetsuCode(click転入保留対象者.getShikibetsuCode().getText()),
                     Integer.parseInt(click転入保留対象者.getRirekiNo().toString()))));
             div.getDgTennyu().getDataSource().remove(click転入保留対象者);
@@ -169,7 +168,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
                     = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.転出保留対象者, Models.class);
-            manager.delTenshutsuHoryuTaishosha(転出保留対象者情報.get(new TenshutsuHoryuTaishoshaIdentifier(
+            manager.delete転出保留対象者(転出保留対象者情報.get(new TenshutsuHoryuTaishoshaIdentifier(
                     new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()),
                     Integer.parseInt(click転出保留対象者.getRirekiNo().toString()))));
             div.getDgTenshutsu().getDataSource().remove(click転出保留対象者);
@@ -203,7 +202,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.広域転入保留対象者, Models.class);
-            manager.delTennyushutsuHoryuTaishosha(広域保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
+            manager.delete転入保留対象者(広域保留対象者情報.get(new TennyushutsuHoryuTaishoshaIdentifier(
                     new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()),
                     Integer.parseInt(click広域保留対象者.getRirekiNo().toString()))));
             div.getDgKoiki().getDataSource().remove(click広域保留対象者);
@@ -227,33 +226,23 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             if (message.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(message).respond();
             }
-
-            Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> 被保険者台帳
+            Map<ShikibetsuCode, IKojin> 宛名Map = manager.get宛名Map(get識別コードList(div));
+            Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> 被保険者台帳情報
                     = (Models<HihokenshaDaichoIdentifier, HihokenshaDaicho>) ViewStateHolder.get(
                             ViewStateKeys.被保険者台帳情報, Models.class);
-
-            Map<ShikibetsuCode, IKojin> 宛名Map = manager.get宛名Map(get識別コードList(div));
+            Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
+                    = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder.get(
+                            ViewStateKeys.転出保留対象者, Models.class);
             List<TenshutsuHoryuTaishosha> 転出保留対象者List = new ArrayList<>();
             List<HihokenshaDaicho> 被保険者台帳List = new ArrayList<>();
             for (dgTenshutsu_Row row : div.getDgTenshutsu().getSelectedItems()) {
-                IKojin 宛名 = 宛名Map.get(new ShikibetsuCode(row.getShikibetsuCode().getText()));
-                FlexibleDate 異動日 = FlexibleDate.EMPTY;
-                if (!宛名.get転出確定().get異動年月日().isEmpty()) {
-                    HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getHihokenshaNo().getText());
-
-                    異動日 = 宛名.get転出確定().get異動年月日();
-                    RString 枝番 = shikakuShutokuManager.getSaidaiEdaban(被保険者番号, 異動日);
-
-                } else if (!宛名.get転出予定().get異動年月日().isEmpty()) {
-                    異動日 = 宛名.get転出予定().get異動年月日();
-                }
+                ShikibetsuCode 識別コード = new ShikibetsuCode(row.getShikibetsuCode().getText());
+                get資格異動(被保険者台帳情報, 宛名Map.get(識別コード), row, 被保険者台帳List);
+                転出保留対象者List.add(転出保留対象者情報.get(
+                        new TenshutsuHoryuTaishoshaIdentifier(識別コード, Integer.valueOf(row.getRirekiNo().toString()))));
             }
-
-            dgTenshutsu_Row row = div.getDgTenshutsu().getSelectedItems().get(0);
-            TaishoshaKey key = new TaishoshaKey(new HihokenshaNo(row.getHihokenshaNo().getText()),
-                    new ShikibetsuCode(row.getShikibetsuCode().getText()), SetaiCode.EMPTY);
-            ViewStateHolder.put(ViewStateKeys.資格対象者, key);
-            return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
+            manager.do一括喪失(被保険者台帳List, 転出保留対象者List);
+            loadTplTenshutsu(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -267,6 +256,28 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
     public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onClick_btnComplete(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
 
         return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+    }
+
+    private void get資格異動(Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> 被保険者台帳情報,
+            IKojin 宛名, dgTenshutsu_Row row, List<HihokenshaDaicho> 被保険者台帳List) {
+        FlexibleDate 異動日 = FlexibleDate.EMPTY;
+        if (宛名 != null) {
+            if (!宛名.get転出確定().get異動年月日().isEmpty()) {
+                異動日 = 宛名.get転出確定().get異動年月日();
+            } else if (!宛名.get転出予定().get異動年月日().isEmpty()) {
+                異動日 = 宛名.get転出予定().get異動年月日();
+            }
+            if (!異動日.isEmpty()) {
+                HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getHihokenshaNo().getText());
+                RString 枝番 = shikakuShutokuManager.getSaidaiEdaban(被保険者番号, 異動日);
+                被保険者台帳List.add(
+                        被保険者台帳情報.get(new HihokenshaDaichoIdentifier(被保険者番号, row.getHihokenshaIdoYMD().getValue(), row.getHihokenshaEdaNo()))
+                        .createBuilderForEdit().set異動日(異動日)
+                        .set異動事由コード(ShikakuSoshitsuJiyu.転出.getコード())
+                        .set資格喪失事由コード(ShikakuSoshitsuJiyu.転出.getコード())
+                        .set資格喪失年月日(異動日).set資格喪失届出年月日(異動日).set枝番(枝番).build());
+            }
+        }
     }
 
     private List<ShikibetsuCode> get識別コードList(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
@@ -306,6 +317,12 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
         }
         Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報 = Models.create(広域保留対象者情報List);
         ViewStateHolder.put(ViewStateKeys.広域転入保留対象者, 広域保留対象者情報);
+    }
+
+    private void loadTplTenshutsu(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
+        List<TenshutsuHoryuTaisho> 転出保留対象者情報 = manager.getTenshutsuHoryuTaishoshas().records();
+        save転出保留対象者情報ToViewState(転出保留対象者情報);
+        getHandler(div).load_転出情報(転出保留対象者情報);
     }
 
     private TennyuTenshutsuHoryuTaishoshaIchiranHandler getHandler(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
