@@ -19,8 +19,8 @@ public interface IKogakuKyufuTaishoListDiv extends ICommonChildDivBaseProperties
      * @param 画面モード RString
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月 FlexibleYearMonth
-     * @param 履歴番号 RString
+     * @param 履歴番号 int
      */
     public void initialize(RString メニューID, RString 画面モード,
-            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 履歴番号);
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号);
 }
