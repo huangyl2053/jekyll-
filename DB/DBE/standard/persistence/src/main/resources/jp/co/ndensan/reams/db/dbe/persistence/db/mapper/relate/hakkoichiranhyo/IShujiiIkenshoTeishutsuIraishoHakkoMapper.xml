@@ -119,7 +119,7 @@
               ON DbT5602."shinseishoKanriNo" = DbT5302."shinseishoKanriNo" 
               AND DbT5602."shujiiIryoKikanCode" = DbT5302."shujiiIryoKikanCode" 
               AND DbT5602."ikenshoIraiRirekiNo" = DbT5302."ikenshoIraiRirekiNo"
-        WHERE
+<!--        WHERE
         <foreach  
             collection="shujiiIkenshoSakuseiIraiList"
             item="item"
@@ -157,7 +157,7 @@
             <if test="is意見書印刷済">
                 AND DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL
             </if>
-        </if>
+        </if>-->
         ORDER BY
             DbT5101."shujiiIryokikanCode",
             DbT5101."shujiiCode"
@@ -177,4 +177,16 @@
         AND "logicalDeletedFlag" = #{logicalDeletedFlag}
       </update>
       
+      <select resultOrdered="true" id="get主治医意見書作成依頼情報" 
+              resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
+          parameterType="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity" fetchSize="500">
+       SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+           "shinseishoKanriNo" = #{申請書管理番号}
+        AND "ikenshoIraiRirekiNo" = #{最大依頼履歴番号}
+        AND "logicalDeletedFlag" = false
+    </select>   
 </mapper>
