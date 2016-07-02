@@ -67,7 +67,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
-    private int 宛名連番 = 1;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
