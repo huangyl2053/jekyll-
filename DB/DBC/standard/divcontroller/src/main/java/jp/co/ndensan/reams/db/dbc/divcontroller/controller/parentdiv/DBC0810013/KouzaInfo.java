@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810013.KouzaInfoHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,9 +45,9 @@ public class KouzaInfo {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(ViewStateHolder.get(
-                ViewStateKeys.償還払申請一覧_サービス年月, RString.class).toString())).getYearMonth().toDateString());
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+                ViewStateKeys.サービス年月, RString.class).toString())).getYearMonth().toDateString());
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
 
         div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
@@ -80,12 +80,11 @@ public class KouzaInfo {
             parameter.setStartHHMM(new RTime(支給申請情報.get支払窓口開始時間()));
         }
         RString 支払窓口終了時間 = 支給申請情報.get支払窓口終了時間();
-        if (支払窓口終了時間 != null && !支払窓口開始時間.isEmpty()) {
+        if (支払窓口終了時間 != null && !支払窓口終了時間.isEmpty()) {
             parameter.setEndHHMM(new RTime(支給申請情報.get支払窓口終了時間()));
         }
         parameter.setKozaId(支給申請情報.get口座ID());
         parameter.setShiharaiBasho(支給申請情報.get支払場所());
-        // TODO QA638画面レイアウトと画面が一致しません。
         div.getPanelShinseiNaiyo().getCcdShiharaiHohoJyoho().initialize(parameter, 照会);
         return createResponse(div);
     }

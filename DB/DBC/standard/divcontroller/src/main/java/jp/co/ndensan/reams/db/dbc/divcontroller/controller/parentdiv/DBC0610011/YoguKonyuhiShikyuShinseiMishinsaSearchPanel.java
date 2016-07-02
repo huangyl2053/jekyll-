@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -50,12 +50,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         if (審査.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            RDate 支給申請日To = ViewStateHolder.get(ViewStateKeys.支給申請日_TO, RDate.class);
-            RDate 支給申請日From = ViewStateHolder.get(ViewStateKeys.支給申請日_FROM, RDate.class);
+            RDate 支給申請日To = ViewStateHolder.get(ViewStateKeys.支給申請日TO, RDate.class);
+            RDate 支給申請日From = ViewStateHolder.get(ViewStateKeys.支給申請日FROM, RDate.class);
             div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setToValue(支給申請日To);
             div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setFromValue(支給申請日From);
             ArrayList<ShokanShinseiEntityResult> resultList = getHandler(div).未審査分検索処理(支給申請日From, 支給申請日To);
-            ViewStateHolder.put(ViewStateKeys.福祉審査_決定, resultList);
+            ViewStateHolder.put(ViewStateKeys.福祉審査決定, resultList);
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtKetteiYMD().setValue(ViewStateHolder.get(ViewStateKeys.決定日, RDate.class));
             return ResponseData.of(div).setState(DBC0610011StateName.審査);
         }
@@ -73,9 +73,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         RDate 支給申請日From = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getFromValue();
         RDate 支給申請日To = div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().getToValue();
         ArrayList<ShokanShinseiEntityResult> resultList = getHandler(div).未審査分検索処理(支給申請日From, 支給申請日To);
-        ViewStateHolder.put(ViewStateKeys.福祉審査_決定, resultList);
-        ViewStateHolder.put(ViewStateKeys.支給申請日_FROM, 支給申請日From);
-        ViewStateHolder.put(ViewStateKeys.支給申請日_TO, 支給申請日To);
+        ViewStateHolder.put(ViewStateKeys.福祉審査決定, resultList);
+        ViewStateHolder.put(ViewStateKeys.支給申請日FROM, 支給申請日From);
+        ViewStateHolder.put(ViewStateKeys.支給申請日TO, 支給申請日To);
         return ResponseData.of(div).respond();
     }
 
@@ -116,7 +116,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         PnlTotalParameter param = new PnlTotalParameter(被保険者番号,
                 サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, param);
+        ViewStateHolder.put(ViewStateKeys.検索キー, param);
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 
@@ -143,7 +143,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
             div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
             div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
-            List<ShokanShinseiEntityResult> entityList = ViewStateHolder.get(ViewStateKeys.福祉審査_決定, List.class);
+            List<ShokanShinseiEntityResult> entityList = ViewStateHolder.get(ViewStateKeys.福祉審査決定, List.class);
             getHandler(div).保存処理(決定日, entityList);
             div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(保存MSG.toString()).evaluate()));

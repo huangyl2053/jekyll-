@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0710022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710022.MainPanelHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710022.ShoukanFutsuKetteiJouhouTourokuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -57,7 +57,7 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
 
-        ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索情報キー,
+        ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
                 ShokanharaKeteiJyohoParameter.class);
         ShikibetsuCode 識別コード = parameter.get識別コード();
         FlexibleYearMonth サービス年月 = parameter.getサービス提供年月();
@@ -82,7 +82,7 @@ public class MainPanel {
         }
 
         ShoukanFutsuKetteiJouhouTourokuParameter 画面データ = getHandler(div).set画面データ();
-        ViewStateHolder.put(ViewStateKeys.住宅改修費支給申請_償還払決定情報登録画面データ, 画面データ);
+        ViewStateHolder.put(ViewStateKeys.画面データ, 画面データ);
         return ResponseData.of(div).respond();
     }
 
@@ -93,7 +93,7 @@ public class MainPanel {
      * @return 住宅改修費支給申請_申請情報登録画面へ遷移
      */
     public ResponseData<MainPanelDiv> onClick_btnShinseiJyoho(MainPanelDiv div) {
-        ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索情報キー,
+        ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
                 ShokanharaKeteiJyohoParameter.class);
         if (修正.equals(parameter.get画面モード())) {
             if (!ResponseHolder.isReRequest()) {
@@ -159,7 +159,7 @@ public class MainPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索情報キー,
+            ShokanharaKeteiJyohoParameter parameter = ViewStateHolder.get(ViewStateKeys.検索キー,
                     ShokanharaKeteiJyohoParameter.class);
             if (照会.equals(parameter.get画面モード())) {
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報).respond();
@@ -193,7 +193,7 @@ public class MainPanel {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(MSG_理由.toString()));
         }
         ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.住宅改修費支給申請_償還払決定情報登録画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
+                ViewStateKeys.画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
         boolean flag = getHandler(div).is内容変更状態(parameter);
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
@@ -205,7 +205,7 @@ public class MainPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 try {
-                    ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索情報キー,
+                    ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索キー,
                             ShokanharaKeteiJyohoParameter.class);
                     boolean flags = getHandler(div).保存処理(検索情報キー);
                     setMessages(div, flags);

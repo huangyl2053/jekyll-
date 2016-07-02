@@ -4,16 +4,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-2020-030 quxiaodong
  */
 public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaishoListDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -228,7 +229,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -243,11 +244,11 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     /*
@@ -259,7 +260,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbMisaiGkeiKbun(RadioButton rdbMisaiGkeiKbun) {
+    public void setRdbMisaiGkeiKbun(RadioButton rdbMisaiGkeiKbun) {
         this.getMeisaiGokeiHenshuPanel().setRdbMisaiGkeiKbun(rdbMisaiGkeiKbun);
     }
 
@@ -269,7 +270,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtJgyoshaCode(TextBox txtJgyoshaCode) {
+    public void setTxtJgyoshaCode(TextBox txtJgyoshaCode) {
         this.getMeisaiGokeiHenshuPanel().setTxtJgyoshaCode(txtJgyoshaCode);
     }
 
@@ -279,7 +280,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setBtnJgyosha(ButtonDialog btnJgyosha) {
+    public void setBtnJgyosha(ButtonDialog btnJgyosha) {
         this.getMeisaiGokeiHenshuPanel().setBtnJgyosha(btnJgyosha);
     }
 
@@ -289,7 +290,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtJgyoshaName(TextBox txtJgyoshaName) {
+    public void setTxtJgyoshaName(TextBox txtJgyoshaName) {
         this.getMeisaiGokeiHenshuPanel().setTxtJgyoshaName(txtJgyoshaName);
     }
 
@@ -299,7 +300,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtServiceSyurui(TextBoxCode txtServiceSyurui) {
+    public void setTxtServiceSyurui(TextBoxCode txtServiceSyurui) {
         this.getMeisaiGokeiHenshuPanel().setTxtServiceSyurui(txtServiceSyurui);
     }
 
@@ -309,7 +310,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setBtnServiceSyurui(ButtonDialog btnServiceSyurui) {
+    public void setBtnServiceSyurui(ButtonDialog btnServiceSyurui) {
         this.getMeisaiGokeiHenshuPanel().setBtnServiceSyurui(btnServiceSyurui);
     }
 
@@ -319,7 +320,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtServiceSyuruiName(TextBox txtServiceSyuruiName) {
+    public void setTxtServiceSyuruiName(TextBox txtServiceSyuruiName) {
         this.getMeisaiGokeiHenshuPanel().setTxtServiceSyuruiName(txtServiceSyuruiName);
     }
 
@@ -329,7 +330,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtHyoGkei(TextBoxNum txtHyoGkei) {
+    public void setTxtHyoGkei(TextBoxNum txtHyoGkei) {
         this.getMeisaiGokeiHenshuPanel().setTxtHyoGkei(txtHyoGkei);
     }
 
@@ -339,7 +340,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtRiyoshafutanGokei(TextBoxNum txtRiyoshafutanGokei) {
+    public void setTxtRiyoshafutanGokei(TextBoxNum txtRiyoshafutanGokei) {
         this.getMeisaiGokeiHenshuPanel().setTxtRiyoshafutanGokei(txtRiyoshafutanGokei);
     }
 
@@ -349,7 +350,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtSanteiKijunGaku(TextBoxNum txtSanteiKijunGaku) {
+    public void setTxtSanteiKijunGaku(TextBoxNum txtSanteiKijunGaku) {
         this.getMeisaiGokeiHenshuPanel().setTxtSanteiKijunGaku(txtSanteiKijunGaku);
     }
 
@@ -359,7 +360,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setTxtSiharaiZumiGaku(TextBoxNum txtSiharaiZumiGaku) {
+    public void setTxtSiharaiZumiGaku(TextBoxNum txtSiharaiZumiGaku) {
         this.getMeisaiGokeiHenshuPanel().setTxtSiharaiZumiGaku(txtSiharaiZumiGaku);
     }
 
@@ -369,7 +370,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getMeisaiGokeiHenshuPanel().setLin1(lin1);
     }
 
@@ -379,7 +380,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbTsukiOkure(RadioButton rdbTsukiOkure) {
+    public void setRdbTsukiOkure(RadioButton rdbTsukiOkure) {
         this.getMeisaiGokeiHenshuPanel().setRdbTsukiOkure(rdbTsukiOkure);
     }
 
@@ -389,7 +390,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRabSetaiShotokuKubun(RadioButton rabSetaiShotokuKubun) {
+    public void setRabSetaiShotokuKubun(RadioButton rabSetaiShotokuKubun) {
         this.getMeisaiGokeiHenshuPanel().setRabSetaiShotokuKubun(rabSetaiShotokuKubun);
     }
 
@@ -399,7 +400,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbShotokuKubun(RadioButton rdbShotokuKubun) {
+    public void setRdbShotokuKubun(RadioButton rdbShotokuKubun) {
         this.getMeisaiGokeiHenshuPanel().setRdbShotokuKubun(rdbShotokuKubun);
     }
 
@@ -409,7 +410,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbGassan(RadioButton rdbGassan) {
+    public void setRdbGassan(RadioButton rdbGassan) {
         this.getMeisaiGokeiHenshuPanel().setRdbGassan(rdbGassan);
     }
 
@@ -419,7 +420,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbRoreiFukushiNenkin(RadioButton rdbRoreiFukushiNenkin) {
+    public void setRdbRoreiFukushiNenkin(RadioButton rdbRoreiFukushiNenkin) {
         this.getMeisaiGokeiHenshuPanel().setRdbRoreiFukushiNenkin(rdbRoreiFukushiNenkin);
     }
 
@@ -429,7 +430,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbRiyoshafutanDai2dankai(RadioButton rdbRiyoshafutanDai2dankai) {
+    public void setRdbRiyoshafutanDai2dankai(RadioButton rdbRiyoshafutanDai2dankai) {
         this.getMeisaiGokeiHenshuPanel().setRdbRiyoshafutanDai2dankai(rdbRiyoshafutanDai2dankai);
     }
 
@@ -439,7 +440,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setRdbGekihenkanwaKubun(RadioButton rdbGekihenkanwaKubun) {
+    public void setRdbGekihenkanwaKubun(RadioButton rdbGekihenkanwaKubun) {
         this.getMeisaiGokeiHenshuPanel().setRdbGekihenkanwaKubun(rdbGekihenkanwaKubun);
     }
 
@@ -449,7 +450,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setBtnTorikeshi(Button btnTorikeshi) {
+    public void setBtnTorikeshi(Button btnTorikeshi) {
         this.getMeisaiGokeiHenshuPanel().setBtnTorikeshi(btnTorikeshi);
     }
 
@@ -459,7 +460,7 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public void  setBtnkakutei(Button btnkakutei) {
+    public void setBtnkakutei(Button btnkakutei) {
         this.getMeisaiGokeiHenshuPanel().setBtnkakutei(btnkakutei);
     }
 

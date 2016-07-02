@@ -10,11 +10,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.F
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.DBC0600011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0600011.PnlTotalHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -42,7 +41,7 @@ public class PnlTotal {
      * @return 福祉用具購入費支給申請
      */
     public ResponseData<PnlTotalDiv> onLoad(PnlTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = key.get識別コード();
         HihokenshaNo 被保険者番号 = key.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
@@ -135,7 +134,7 @@ public class PnlTotal {
     private void putViewStateHolder(PnlTotalDiv div, RString 状態) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         PnlTotalParameter parameter = getHandler(div).getViesStateParameter(被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
     }
 
