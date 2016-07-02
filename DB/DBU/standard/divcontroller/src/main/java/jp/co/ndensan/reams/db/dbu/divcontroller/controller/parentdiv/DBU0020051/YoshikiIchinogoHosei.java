@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020051.Yosh
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051.YoshikiIchinogoHoseiCheckHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051.YoshikiIchinogoHoseiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
