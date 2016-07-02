@@ -70,19 +70,19 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
             if (出力帳票一覧.get帳票ID() == null) {
                 continue;
             }
+            processParameter = new HonsanteifukaProcessParameter(parameter.get調定年度(), parameter.get賦課年度(),
+                    parameter.get資格基準日(), 出力帳票一覧, parameter.get特徴_出力対象(), parameter.get特徴_発行日(),
+                    parameter.get決定変更_文書番号(), parameter.get決定変更_発行日(), parameter.get納入_出力方法(),
+                    parameter.get納入_出力期(), parameter.get納入_対象者(),
+                    parameter.get納入_発行日(), parameter.get納入_ページごとに山分け(),
+                    parameter.get打分け条件情報(), parameter.get処理日時(), parameter.is一括発行起動フラグ(),
+                    getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.SYSTEM_TIME),
+                    parameter.get納入_生活保護対象者をまとめて先頭に出力());
             if (特別徴収開始通知書本算定_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
                 if (parameter.is一括発行起動フラグ()) {
                     バッチフロー_帳票分類ID = 特別徴収開始通知書本算定_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
                 }
-                processParameter = new HonsanteifukaProcessParameter(parameter.get調定年度(), parameter.get賦課年度(),
-                        parameter.get資格基準日(), 出力帳票一覧, parameter.get特徴_出力対象(), parameter.get特徴_発行日(),
-                        parameter.get決定変更_文書番号(), parameter.get決定変更_発行日(), parameter.get納入_出力方法(),
-                        parameter.get納入_出力期(), parameter.get納入_対象者(),
-                        parameter.get納入_発行日(), parameter.get納入_ページごとに山分け(),
-                        parameter.get打分け条件情報(), parameter.get処理日時(), parameter.is一括発行起動フラグ(),
-                        new YMDHMS(getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.SYSTEM_TIME)),
-                        parameter.get納入_生活保護対象者をまとめて先頭に出力());
                 executeStep(PRINT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS);
                 executeStep(INSERT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS);
             } else if (決定変更通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID()) && is決定通知書(出力帳票一覧.get帳票ID())) {
@@ -90,14 +90,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
                     バッチフロー_帳票分類ID = 決定変更通知書_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
                 }
-                processParameter = new HonsanteifukaProcessParameter(parameter.get調定年度(), parameter.get賦課年度(),
-                        parameter.get資格基準日(), 出力帳票一覧, parameter.get特徴_出力対象(), parameter.get特徴_発行日(),
-                        parameter.get決定変更_文書番号(), parameter.get決定変更_発行日(), parameter.get納入_出力方法(),
-                        parameter.get納入_出力期(), parameter.get納入_対象者(),
-                        parameter.get納入_発行日(), parameter.get納入_ページごとに山分け(),
-                        parameter.get打分け条件情報(), parameter.get処理日時(), parameter.is一括発行起動フラグ(),
-                        new YMDHMS(getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.SYSTEM_TIME)),
-                        parameter.get納入_生活保護対象者をまとめて先頭に出力());
                 executeStep(PRINT_KETTEITSUCHISHO_PROCESS);
                 executeStep(INSERT_KETTEITSUCHISHO_PROCESS);
             } else if (決定変更通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID()) && is変更通知書(出力帳票一覧.get帳票ID())) {
@@ -105,14 +97,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
                     バッチフロー_帳票分類ID = 決定変更通知書_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
                 }
-                processParameter = new HonsanteifukaProcessParameter(parameter.get調定年度(), parameter.get賦課年度(),
-                        parameter.get資格基準日(), 出力帳票一覧, parameter.get特徴_出力対象(), parameter.get特徴_発行日(),
-                        parameter.get決定変更_文書番号(), parameter.get決定変更_発行日(), parameter.get納入_出力方法(),
-                        parameter.get納入_出力期(), parameter.get納入_対象者(),
-                        parameter.get納入_発行日(), parameter.get納入_ページごとに山分け(),
-                        parameter.get打分け条件情報(), parameter.get処理日時(), parameter.is一括発行起動フラグ(),
-                        new YMDHMS(getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.SYSTEM_TIME)),
-                        parameter.get納入_生活保護対象者をまとめて先頭に出力());
                 executeStep(PRINT_HENKOTSUCHISHO_PROCESS);
                 executeStep(INSERT_HENKOTSUCHISHO_PROCESS);
             } else if (納入通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
@@ -120,14 +104,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
                     バッチフロー_帳票分類ID = 納入通知書_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成);
                 }
-                processParameter = new HonsanteifukaProcessParameter(parameter.get調定年度(), parameter.get賦課年度(),
-                        parameter.get資格基準日(), 出力帳票一覧, parameter.get特徴_出力対象(), parameter.get特徴_発行日(),
-                        parameter.get決定変更_文書番号(), parameter.get決定変更_発行日(), parameter.get納入_出力方法(),
-                        parameter.get納入_出力期(), parameter.get納入_対象者(),
-                        parameter.get納入_発行日(), parameter.get納入_ページごとに山分け(),
-                        parameter.get打分け条件情報(), parameter.get処理日時(), parameter.is一括発行起動フラグ(),
-                        new YMDHMS(getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.SYSTEM_TIME)),
-                        parameter.get納入_生活保護対象者をまとめて先頭に出力());
                 executeStep(PRINT_NONYUTSUCHISHO_PROCESS);
                 executeStep(INSERT_NONYUTSUCHISHO_PROCESS);
             }
