@@ -94,19 +94,22 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport extends INonyuTsuch
             reportLst.add(getNewReport(納入通知書期情報リストReport));
             return reportLst;
         }
-        int 銀振印字位置Para = 0;
-        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
-            int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
-            if (銀振印字位置 <= 銀振印字位置Para) {
-                reportLst.add(getNewReport(納入通知書期情報リストReport));
-                納入通知書期情報リストReport = new ArrayList<>();
-                納入通知書期情報リストReport.add(納入通知書期情報);
-            } else {
-                納入通知書期情報リストReport.add(納入通知書期情報);
-            }
-            銀振印字位置Para = 銀振印字位置;
+
+        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
+        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
+        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
+
+        this.前中後期リストのedit(納入通知書期情報リスト, 納入通知書期情報リスト前期, 納入通知書期情報リスト中期, 納入通知書期情報リスト後期);
+        if (!納入通知書期情報リスト前期.isEmpty()) {
+            this.前中後期のdevidedEdit(納入通知書期情報リスト前期, 納入通知書期情報リストReport, reportLst);
         }
-        reportLst.add(getNewReport(納入通知書期情報リストReport));
+        if (!納入通知書期情報リスト中期.isEmpty()) {
+            this.前中後期のdevidedEdit(納入通知書期情報リスト中期, 納入通知書期情報リストReport, reportLst);
+        }
+        if (!納入通知書期情報リスト後期.isEmpty()) {
+            this.前中後期のdevidedEdit(納入通知書期情報リスト後期, 納入通知書期情報リストReport, reportLst);
+        }
+
         return reportLst;
     }
 
@@ -155,6 +158,26 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport extends INonyuTsuch
             銀振印字位置Para = 銀振印字位置;
         }
         edit(writer, 納入通知書期情報リストEdit, 連番);
+    }
+
+    private void 前中後期のdevidedEdit(
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストReport,
+            List<INonyuTsuchisho> reportLst) {
+
+        int 銀振印字位置Para = 0;
+        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+            int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
+            if (銀振印字位置 <= 銀振印字位置Para) {
+                reportLst.add(getNewReport(納入通知書期情報リストReport));
+                納入通知書期情報リストReport = new ArrayList<>();
+                納入通知書期情報リストReport.add(納入通知書期情報);
+            } else {
+                納入通知書期情報リストReport.add(納入通知書期情報);
+            }
+            銀振印字位置Para = 銀振印字位置;
+        }
+        reportLst.add(getNewReport(納入通知書期情報リストReport));
     }
 
     private void 前中後期リストのedit(
