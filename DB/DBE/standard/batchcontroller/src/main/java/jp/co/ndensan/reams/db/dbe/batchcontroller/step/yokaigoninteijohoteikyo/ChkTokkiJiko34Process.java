@@ -164,17 +164,17 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 特記事項番号_6056 = new RString("6056");
     private static final RString 特記事項番号_701 = new RString("701");
     private static final RString 特記事項番号_702 = new RString("702");
-    List<NinteichosaRelateEntity> 特記事項区分;
+    List<NinteichosaRelateEntity> 特記事項リスト;
 
     @Override
     protected void initialize() {
-        特記事項区分 = new ArrayList<>();
+        特記事項リスト = new ArrayList<>();
     }
 
     @Override
     protected void beforeExecute() {
         mapper = getMapper(IYokaigoNinteiJohoTeikyoMapper.class);
-        特記事項区分 = mapper.get特記事項区分(processPrm.toYokaigoBatchMybitisParamter());
+        特記事項リスト = mapper.get特記事項リスト(processPrm.toYokaigoBatchMybitisParamter());
     }
 
     @Override
@@ -229,7 +229,7 @@ public class ChkTokkiJiko34Process extends BatchProcessBase<YokaigoninteiEntity>
     private TokkiText2A4Entity setBodyItem(YokaigoninteiEntity entity) {
         TokkiText2A4Entity ninteiEntity = new TokkiText2A4Entity();
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
-        setBodyItem01(特記事項区分, ninteiEntity);
+        setBodyItem01(特記事項リスト, ninteiEntity);
         return ninteiEntity;
     }
 
