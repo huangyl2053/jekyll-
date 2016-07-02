@@ -38,7 +38,7 @@ public class TennyuHoryuTaisho implements Serializable {
      */
     public TennyuHoryuTaisho(TennyushutsuHoryuTaishoshaRelateEntity entity) {
         this.被保険者台帳 = new HihokenshaDaicho(entity.getHihokenshaDaicho());
-        this.転入保留対象者 = new TennyushutsuHoryuTaishosha(entity.getTennyushutsuHoryuTaishosha());;
+        this.転入保留対象者 = new TennyushutsuHoryuTaishosha(entity.getTennyushutsuHoryuTaishosha());
     }
 
     /**
