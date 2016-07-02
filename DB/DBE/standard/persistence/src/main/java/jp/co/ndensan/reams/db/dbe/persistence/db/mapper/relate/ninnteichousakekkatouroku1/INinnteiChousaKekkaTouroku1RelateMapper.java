@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity;
 
@@ -21,7 +22,7 @@ public interface INinnteiChousaKekkaTouroku1RelateMapper {
      * @param parameter 検索条件
      * @return NinteiChosaTokusokujoRelateEntity 検索結果の{@link NinteiChosaJohoEntity}
      */
-    TempDataEntity get認定調査情報(NinteiChosaJohoMybatisParameter parameter);
+    List<TempDataEntity> get認定調査情報(NinteiChosaJohoMybatisParameter parameter);
 
     /**
      * 既存概況調査情報を取得します。

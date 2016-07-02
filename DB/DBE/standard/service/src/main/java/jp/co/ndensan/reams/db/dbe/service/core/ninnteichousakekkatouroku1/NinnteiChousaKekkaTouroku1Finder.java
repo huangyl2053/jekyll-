@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ninnteichousakekkatouroku1;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity;
@@ -62,11 +63,12 @@ public class NinnteiChousaKekkaTouroku1Finder {
             RString temp_認定調査委託先コード,
             ShinseishoKanriNo temp_申請書管理番号) {
         INinnteiChousaKekkaTouroku1RelateMapper mapper = mapperProvider.create(INinnteiChousaKekkaTouroku1RelateMapper.class);
-        TempDataEntity entity = mapper.get認定調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, temp_認定調査委託先コード,
+        List<TempDataEntity> entityList = mapper.get認定調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, temp_認定調査委託先コード,
                 temp_申請書管理番号, RString.EMPTY));
 
         TempData data = new TempData();
-        if (entity != null) {
+        if (entityList != null && entityList.size() > 0) {
+            TempDataEntity entity = entityList.get(0);
             data.setTemp_厚労省IF識別コード(entity.getTemp_厚労省IF識別コード());
             data.setTemp_認定調査依頼区分コード(entity.getTemp_認定調査依頼区分コード());
             data.setTemp_認定調査回数(entity.getTemp_認定調査回数());
