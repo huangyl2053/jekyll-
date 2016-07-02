@@ -970,7 +970,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
     }
 
     /**
-     * 発行日を取得メソッドです。
+     * 出力期リストを取得メソッドです。
      *
      * @param 出力期 RString
      * @return 出力期リスト List<Kitsuki>

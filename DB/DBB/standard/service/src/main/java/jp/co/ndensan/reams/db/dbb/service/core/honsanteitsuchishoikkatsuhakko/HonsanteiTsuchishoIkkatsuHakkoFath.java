@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -602,7 +603,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 }
                 set当期(編集後本算定通知書共通情報, 出力期, bodyList);
                 //TODO QA912 納付人/送付先
-                bodyList.add(RString.EMPTY);
+                set納付人_送付先(編集後本算定通知書共通情報, bodyList);
 
                 if (isNull(編集後本算定通知書共通情報.get更正後())) {
                     bodyList.add(RString.EMPTY);
@@ -645,6 +646,15 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+        }
+    }
+
+    private void set納付人_送付先(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, List<RString> bodyList) {
+        if (isNull(編集後本算定通知書共通情報.get編集後宛先())) {
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(AtesakiShubetsu.本人.equals(編集後本算定通知書共通情報.get編集後宛先().get宛先種別())
+                    ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName().getColumnValue());
         }
     }
 
