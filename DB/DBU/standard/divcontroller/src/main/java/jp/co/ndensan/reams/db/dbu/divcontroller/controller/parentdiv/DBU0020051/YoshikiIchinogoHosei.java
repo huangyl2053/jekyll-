@@ -313,6 +313,7 @@ public class YoshikiIchinogoHosei {
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
         }
 
+        ダイアログいいえチェック(予防要支援結果チェック, div, 介護要支援結果チェック, 合計要支援結果チェック);
         if (!ResponseHolder.isReRequest() && !修正データ.isEmpty()) {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -327,6 +328,25 @@ public class YoshikiIchinogoHosei {
             return ResponseData.of(div).setState(DBU0020051StateName.完了状態);
         } else {
             return ResponseData.of(div).respond();
+        }
+    }
+
+    private void ダイアログいいえチェック(boolean 予防要支援結果チェック, YoshikiIchinogoHoseiDiv div,
+            boolean 介護要支援結果チェック, boolean 合計要支援結果チェック) {
+        if ((new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)
+                || (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(
+                        ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
+            if (予防要支援結果チェック) {
+                div.set要支援計(RString.EMPTY);
+            }
+            if (介護要支援結果チェック) {
+                div.set要介護計(RString.EMPTY);
+            }
+            if (合計要支援結果チェック) {
+                div.set合計(RString.EMPTY);
+            }
         }
     }
 
