@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchish
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.Dbb100012MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranProperty.DBB100012ShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.ShutsuRyokuTaishoShutokuMyBatisParameter;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TsuchishoIdoshaTorokuProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
     private TsuchishoIdoshaTorokuProcessParameter parameter;
-    TsuchishoHakoProcessParameter param;
 
     private int 連番;
     private static final ReportId REPORT_ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
@@ -37,26 +35,17 @@ public class TsuchishoIdoshaTorokuProcess extends BatchProcessBase<DbT2002FukaTe
     @Override
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(param.get出力順ID().toString()));
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(parameter.get出力順ID().toString()));
         RString 出力順 = Dbb100012MyBatisOrderByClauseCreator.create(DBB100012ShutsuryokujunEnum.class, outputOrder);
 
-        return new BatchDbReader(MYBATIS_SELECT_ID, new ShutsuRyokuTaishoShutokuMyBatisParameter(出力順, param.get出力対象区分()));
-    }
-
-    @Override
-    protected void beforeExecute() {
-        連番 = 1;
-        param = new TsuchishoHakoProcessParameter();
-        param.set帳票作成日時(parameter.get帳票作成日時());
-        param.set出力対象区分(Integer.valueOf(parameter.get出力対象区分().toString()));
-        param.set基準日時(parameter.get基準日時());
+        return new BatchDbReader(MYBATIS_SELECT_ID, new ShutsuRyokuTaishoShutokuMyBatisParameter(出力順, parameter.get出力対象区分()));
     }
 
     @Override
     protected void process(DbT2002FukaTempTableEntity entity) {
 
         TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-        service.insTsuchishoHakkogoIdosha(entity, param, 連番);
+        service.insTsuchishoHakkogoIdosha(entity, parameter, 連番);
         連番++;
     }
 
