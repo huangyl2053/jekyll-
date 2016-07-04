@@ -347,8 +347,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             }
         }
         出力条件リスト.add(builder.toRString());
-        //TEST false
-        getFukaJoho(調定年度, 調定年度, false);
+        getFukaJoho(調定年度, 調定年度, true);
         Map<String, Object> parameter = new HashMap<>();
         parameter.put(キー_出力対象.toString(), 出力対象);
         parameter.put(キー_出力順.toString(), 出力順);
@@ -368,35 +367,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             宛名連番 = 定値_宛名連番;
         }
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
-//        HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-//        // List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
-//        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-//        SourceDataCollection sourceDataCollection;
-//        try (ReportManager reportManager = new ReportManager()) {
-//            for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
-//                HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-//                本算定通知書情報.set発行日(発行日);
-//                本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
-//                本算定通知書情報.set帳票ID(帳票ID);
-//                本算定通知書情報.set処理区分(ShoriKubun.バッチ);
-//                本算定通知書情報.set地方公共団体(地方公共団体);
-//                本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
-//                本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
-//                本算定通知書情報.set納組情報(tmpResult.get納組情報());
-//                本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
-//                本算定通知書情報.set口座情報(tmpResult.get口座情報());
-//                本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
-//                本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
-//                本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
-//                本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-//                本算定通知書情報.set収入情報(tmpResult.get収入情報());
-//                本算定通知書情報.set帳票制御共通(帳票制御共通);
-//                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
-//                //new TokubetsuChoshuKaishiTsuchishoPrintService().print(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
-//                //編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
-//            }
-//            sourceDataCollection = reportManager.publish();
-//        }
         PrtTokuchoKaishiTsuchishoHonsanteiResult result = new PrtTokuchoKaishiTsuchishoHonsanteiResult();
         result.set特徴開始通知書ResultList(tmpResultList);
         result.set調定年度(調定年度);
@@ -409,11 +379,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         result.set通知書定型文(通知書定型文);
         result.set帳票制御共通(帳票制御共通);
         return result;
-//        publish特別徴収開始通知書発行一覧表(調定年度, 帳票作成日時, 編集後本算定通知書共通情報List);
-//        new TokubetsuChoshuKaishiPrintService().printSingle(編集後本算定通知書共通情報List,
-//                調定年度, Long.parseLong(出力順ID.toString()), 帳票作成日時);
-//        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
-//        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_一覧表, 帳票名);
     }
 
     /**
@@ -421,16 +386,15 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
      *
      * @param result PrtTokuchoKaishiTsuchishoHonsanteiResult
      * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
-     * @param sourceDataCollection SourceDataCollection
+     * @param 総ページ数 int
      */
     public void publishTokuchoKaishiTsuchishoHonsantei(PrtTokuchoKaishiTsuchishoHonsanteiResult result,
-            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, SourceDataCollection sourceDataCollection) {
+            List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, int 総ページ数) {
 
         publish特別徴収開始通知書発行一覧表(result.get調定年度(), result.get帳票作成日時(), 編集後本算定通知書共通情報List);
         new TokubetsuChoshuKaishiPrintService().printSingle(編集後本算定通知書共通情報List,
                 result.get調定年度(), Long.parseLong(result.get出力順ID().toString()), result.get帳票作成日時());
-        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
-        loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(), 出力ページ数,
+        loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(), new RString(総ページ数),
                 CSV出力有無_あり, CSVファイル名_一覧表, result.get帳票名());
     }
 
