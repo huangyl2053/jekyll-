@@ -74,6 +74,11 @@ public enum ReportIdDBC {
     DBC100006(
             new ReportId("DBC100006_ShokanKetteiTsuchiShoSealer2"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）")),
     /**
+     * 高額介護サービス費対象者一覧表 の帳票ＩＤです。
+     */
+    DBC200016(
+            new ReportId("DBC200016_KogakuServicehiTaishoshaIchiran"), new RString("高額介護サービス費対象者一覧表")),
+    /**
      * 償還払不支給決定者一覧情報 の帳票ＩＤです。
      */
     DBC200022(
@@ -92,6 +97,10 @@ public enum ReportIdDBC {
      * 過誤決定通知書情報取込一覧表（保険者分）の帳票ＩＤです。
      */
     DBC200050(new ReportId("DBC200050_KagoKetteitsuchishoTorikomiIchiranHokenshaBun"), new RString("過誤決定通知書情報取込一覧表（保険者分）")),
+    /**
+     * 高額総合事業サービス費対象者一覧表 の帳票ＩＤです。
+     */
+    DBC200077(new ReportId("DBC200077_KogakuSogoJigyoServiceHiTaishoshaIchiran"), new RString("高額総合事業サービス費対象者一覧表")),
     /**
      * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書の帳票ＩＤです。
      */
