@@ -769,6 +769,7 @@ public class NinnteiChousaKekkaTouroku1 {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || 入力内容変更なし) {
             resetData(div);
+            onLoad(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -1445,7 +1446,6 @@ public class NinnteiChousaKekkaTouroku1 {
         getHandler(div).住宅改修と記入項目のクリア();
         div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().clearValue();
         getHandler(div).施設tplのクリア();
-        onLoad(div);
     }
 
     private NinnteiChousaKekkaTouroku1Handler getHandler(NinnteiChousaKekkaTouroku1Div div) {
