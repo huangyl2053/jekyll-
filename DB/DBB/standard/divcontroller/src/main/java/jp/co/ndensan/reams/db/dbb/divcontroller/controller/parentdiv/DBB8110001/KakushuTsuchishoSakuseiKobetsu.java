@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.Kakushu
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -95,7 +94,7 @@ public class KakushuTsuchishoSakuseiKobetsu {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索する, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ, true);
         } else {
-            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+            FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
             通知書番号 = key.get通知書番号();
             賦課年度 = key.get賦課年度();
             市町村コード = key.get市町村コード();

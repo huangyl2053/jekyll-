@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -43,7 +42,7 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
 
-        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
         FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
@@ -80,7 +79,7 @@ public class MainPanel {
      * @return ResponseData
      */
     public ResponseData<MainPanelDiv> onClick_btnUpdate(MainPanelDiv div) {
-        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         MainPanelHandler handler = new MainPanelHandler(div);
         FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
