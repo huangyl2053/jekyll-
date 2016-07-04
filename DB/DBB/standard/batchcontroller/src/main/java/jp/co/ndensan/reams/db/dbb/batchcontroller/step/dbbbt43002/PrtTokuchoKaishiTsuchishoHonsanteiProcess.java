@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.PrtTokuchoKaishiTsuchishoHonsanteiResult;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5Property;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5Report;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
@@ -40,7 +39,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -55,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -107,46 +104,38 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
         dbb100032ReportSourceWriter = new ReportSourceWriter<>(reportWriter);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        SourceDataCollection sourceDataCollection;
-        try (ReportManager reportManager = new ReportManager()) {
-            for (HonsanteiTsuchishoTempResult tmpResult : result.get特徴開始通知書ResultList()) {
-                HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-                本算定通知書情報.set発行日(processParameter.get特徴_発行日());
-                本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
-                本算定通知書情報.set帳票ID(出力帳票一覧.get帳票ID());
-                本算定通知書情報.set処理区分(ShoriKubun.バッチ);
-                本算定通知書情報.set地方公共団体(地方公共団体);
-                本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
-                本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
-                本算定通知書情報.set納組情報(tmpResult.get納組情報());
-                本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
-                本算定通知書情報.set口座情報(tmpResult.get口座情報());
-                本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
-                本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
-                本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
-                本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-                本算定通知書情報.set収入情報(tmpResult.get収入情報());
-                本算定通知書情報.set帳票制御共通(result.get帳票制御共通());
-                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
-                publish特徴開始通知書(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報, reportManager);
-                //new TokubetsuChoshuKaishiTsuchishoPrintService().print(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
+        int 総ページ数 = 0;
+        for (HonsanteiTsuchishoTempResult tmpResult : result.get特徴開始通知書ResultList()) {
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
+            本算定通知書情報.set発行日(processParameter.get特徴_発行日());
+            本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
+            本算定通知書情報.set帳票ID(出力帳票一覧.get帳票ID());
+            本算定通知書情報.set処理区分(ShoriKubun.バッチ);
+            本算定通知書情報.set地方公共団体(地方公共団体);
+            本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
+            本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
+            本算定通知書情報.set納組情報(tmpResult.get納組情報());
+            本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
+            本算定通知書情報.set口座情報(tmpResult.get口座情報());
+            本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
+            本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
+            本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
+            本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
+            本算定通知書情報.set収入情報(tmpResult.get収入情報());
+            本算定通知書情報.set帳票制御共通(result.get帳票制御共通());
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
+            総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報);
 
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
-            }
-            sourceDataCollection = reportManager.publish();
+            編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
         }
-        //test
-        JobContextHolder.getJobId();
-        manager.publishTokuchoKaishiTsuchishoHonsantei(result, 編集後本算定通知書共通情報List, sourceDataCollection);
+        manager.publishTokuchoKaishiTsuchishoHonsantei(result, 編集後本算定通知書共通情報List, 総ページ数);
 
     }
 
-    private void publish特徴開始通知書(HonsanteifukaBatchTyouhyou 出力帳票一覧, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
-            PrtTokuchoKaishiTsuchishoHonsanteiResult result, HonSanteiTsuchiShoKyotsu 本算定通知書情報, ReportManager reportManager) {
+    private int publish特徴開始通知書(HonsanteifukaBatchTyouhyou 出力帳票一覧, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            PrtTokuchoKaishiTsuchishoHonsanteiResult result, HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
 
         if (ReportIdDBB.DBB100032.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            TokubetsuChoshuKaishiTsuchishoB5Property property = new TokubetsuChoshuKaishiTsuchishoB5Property();
-//            try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoB5Source> assembler = createAssembler(property, reportManager)) {
             FlexibleDate 開始年月日 = FlexibleDate.getNowDate();
             if (本算定通知書情報.get発行日() != null) {
                 開始年月日 = new FlexibleDate(本算定通知書情報.get発行日().toString());
@@ -166,19 +155,15 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
                     認証者,
                     地方公共団体,
                     dbb100032ReportSourceWriter.getImageFolderPath(),
-                    //                        assembler.getImageFolderPath(),
                     本算定通知書情報.get発行日(),
                     is公印に掛ける,
                     is公印を省略,
                     KenmeiFuyoKubunType.付与なし).buildSource();
-//                ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoB5Source> reportSourceWriter
-//                        = new ReportSourceWriter(assembler);
-//                new TokubetsuChoshuKaishiTsuchishoB5Report(編集後本算定通知書共通情報, result.get宛名連番(), sourceBuilder)
-//                        .writeBy(reportSourceWriter);
             new TokubetsuChoshuKaishiTsuchishoB5Report(編集後本算定通知書共通情報, result.get宛名連番(), sourceBuilder)
                     .writeBy(dbb100032ReportSourceWriter);
-//            }
+            reportWriter.close();
         }
+        return dbb100032ReportSourceWriter.pageCount().value();
 //        else if (ReportIdDBB.DBB100033.getReportId().equals(出力帳票一覧.get帳票ID())) {
 //            new TokubetsuChoshuKaishiTsuchishoB5RenchoReport(編集後本算定通知書共通情報, result.get宛名連番(), sourceBuilder).
 //                    writeBy(dbb100032ReportSourceWriter);
