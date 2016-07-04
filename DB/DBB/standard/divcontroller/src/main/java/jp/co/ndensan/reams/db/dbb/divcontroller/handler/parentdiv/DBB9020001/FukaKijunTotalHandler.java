@@ -670,9 +670,7 @@ public class FukaKijunTotalHandler {
      */
     public void 前排他を解除する() {
         LockingKey key = new LockingKey(UrControlDataFactory.createInstance().getMenuID());
-        if (RealInitialLocker.tryGetLock(key)) {
-            RealInitialLocker.release(key);
-        }
+        RealInitialLocker.release(key);
     }
 
     /**
