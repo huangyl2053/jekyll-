@@ -126,27 +126,28 @@ public class KougakuSabisuhiShousaiNaiyou {
      */
     public int getTenshutsuNyuuHantei(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) {
         int i = 0;
-        DbT1001HihokenshaDaichoEntity 被保険者台帳管理1 = 被保険者台帳管理Dac.selectMax異動日(被保険者番号, サービス年月);
-        if (被保険者台帳管理1 != null && 被保険者台帳管理1.getIdoYMD().getYearMonth().compareTo(サービス年月) < 0) {
+        DbT1001HihokenshaDaichoEntity max異動日対応の保険者台帳管理
+                = 被保険者台帳管理Dac.selectMax異動日(被保険者番号, サービス年月);
+        if (max異動日対応の保険者台帳管理 != null
+                && max異動日対応の保険者台帳管理.getIdoYMD().getYearMonth().compareTo(サービス年月) < 0) {
             List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
                     new CodeShubetsu(介護資格喪失事由), FlexibleDate.getNowDate());
             for (UzT0007CodeEntity list : codeList) {
-                if (list.getコード().value().equals(被保険者台帳管理1.getIdoJiyuCode())) {
+                if (list.getコード().value().equals(max異動日対応の保険者台帳管理.getIdoJiyuCode())) {
                     throw new ApplicationException(DbcErrorMessages.対象年月被保険者データなし.getMessage());
                 }
             }
         }
-        if (被保険者台帳管理1 != null) {
-            if (被保険者台帳管理1.getIdoYMD() != null && 被保険者台帳管理1.getIdoYMD().getYearMonth().equals(サービス年月)
-                    && ShikakuHenkoJiyu.広域内転居.getCode().equals(被保険者台帳管理1.getIdoJiyuCode())) {
+        if (max異動日対応の保険者台帳管理 != null) {
+            if (検索件数(max異動日対応の保険者台帳管理, サービス年月) == 1) {
                 i = 1;
             }
         } else {
-            DbT1001HihokenshaDaichoEntity 被保険者台帳管理2 = 被保険者台帳管理Dac.
+            DbT1001HihokenshaDaichoEntity min異動日対応の保険者台帳管理 = 被保険者台帳管理Dac.
                     selectMin異動日(被保険者番号, サービス年月);
-            if (被保険者台帳管理2 != null) {
-                check条件２異動事由(被保険者台帳管理2);
-                i = 条件２検索件数(被保険者台帳管理2, サービス年月);
+            if (min異動日対応の保険者台帳管理 != null) {
+                check条件２異動事由(min異動日対応の保険者台帳管理);
+                i = 検索件数(min異動日対応の保険者台帳管理, サービス年月);
 
             } else {
                 throw new ApplicationException(DbcErrorMessages.対象年月被保険者データなし.getMessage());
@@ -235,9 +236,9 @@ public class KougakuSabisuhiShousaiNaiyou {
         }
     }
 
-    private int 条件２検索件数(DbT1001HihokenshaDaichoEntity 被保険者台帳管理2, FlexibleYearMonth サービス年月) {
-        if (被保険者台帳管理2.getIdoYMD() != null && 被保険者台帳管理2.getIdoYMD().getYearMonth().equals(サービス年月)
-                && ShikakuHenkoJiyu.広域内転居.getCode().equals(被保険者台帳管理2.getIdoJiyuCode())) {
+    private int 検索件数(DbT1001HihokenshaDaichoEntity 被保険者台帳管理, FlexibleYearMonth サービス年月) {
+        if (被保険者台帳管理.getIdoYMD() != null && 被保険者台帳管理.getIdoYMD().getYearMonth().equals(サービス年月)
+                && ShikakuHenkoJiyu.広域内転居.getCode().equals(被保険者台帳管理.getIdoJiyuCode())) {
             return 1;
         } else {
             return 0;
