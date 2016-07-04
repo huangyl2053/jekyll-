@@ -90,7 +90,7 @@ public class ShafukuKeigenGakuPanel {
                 = (ArrayList<ShokanShakaiFukushiHojinKeigengakuResult>) ShokanbaraiJyokyoShokai.createInstance()
                 .getSeikyuShakaifukushiHoujinKeigengaku(
                         被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        ViewStateHolder.put(ViewStateKeys.情報, hojinKeigengakuEntityList);
+        ViewStateHolder.put(ViewStateKeys.社福軽減額一覧情報, hojinKeigengakuEntityList);
         getHandler(div).initialize(hojinKeigengakuEntityList);
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
@@ -278,7 +278,7 @@ public class ShafukuKeigenGakuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
+                List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.社福軽減額一覧情報, List.class);
                 getHandler(div).内容の破棄(list);
                 return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.一覧に戻る).respond();
             }
@@ -302,7 +302,7 @@ public class ShafukuKeigenGakuPanel {
                     ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.明細検索キー,
                             ShoukanharaihishinseimeisaikensakuParameter.class);
                     List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList = ViewStateHolder.get(
-                            ViewStateKeys.情報, List.class);
+                            ViewStateKeys.社福軽減額一覧情報, List.class);
                     getHandler(div).登録Save(meisaiPar, hojinKeigengakuEntityList);
                     return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                             .replace(登録.toString())).respond();
