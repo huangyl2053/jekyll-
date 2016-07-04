@@ -144,8 +144,9 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
         }
         if (isNull(更正後.get更正後特徴期別金額合計())) {
             source.listLower_5 = RString.EMPTY;
+        } else {
+            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額合計(), 0);
         }
-        source.listLower_5 = DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額合計(), 0);
         if (普徴期別金額リスト != null) {
             次期以降編集(source, 普徴期別金額リスト);
         }
