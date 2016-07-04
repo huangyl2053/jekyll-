@@ -862,11 +862,11 @@ public class YokaigoNinteiTaskListHandler {
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
-        if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
-            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
+        if (business.get認定審査会完了年月日() != null && !business.get認定審査会完了年月日().isEmpty()) {
+            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
         }
-        if (business.get介護認定審査会割当年月日() != null && !business.get介護認定審査会割当年月日().isEmpty()) {
-            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get介護認定審査会割当年月日().toString()));
+        if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
+            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
         }
         if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
             row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
