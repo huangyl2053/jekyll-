@@ -29,7 +29,7 @@ public class DbT0700ShunoKanriTempTableEntity extends DbTableEntityBase<DbT0700S
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("DbT0700ShunoKanriTemp");
+        TABLE_NAME = new RString("UrT0700ShunoKanri_work");
     }
     @TempTableColumnOrder(1)
     private long shunoId;
