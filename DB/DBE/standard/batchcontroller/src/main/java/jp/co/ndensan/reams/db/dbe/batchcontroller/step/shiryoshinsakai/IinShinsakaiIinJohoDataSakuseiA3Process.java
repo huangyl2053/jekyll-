@@ -103,13 +103,6 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         return mapper.get前回二次判定(myBatisParameter);
     }
 
-    private RString get前回期間(int 期間) {
-        RStringBuilder 前回期間 = new RStringBuilder();
-        前回期間.append(期間);
-        前回期間.append(new RString("ヵ月"));
-        return 前回期間.toRString();
-    }
-
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         RString id = ReportIdDBE.DBE517001.getReportId().getColumnValue();
