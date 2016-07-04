@@ -246,7 +246,8 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
             reportWriter4.close();
             return dbb100032ReportSourceWriter4.pageCount().value();
         }
-        return publish特徴開始通知書_その他(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報, 認証者, is公印に掛ける, is公印を省略, info);
+        return publish特徴開始通知書_その他(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報,
+                認証者, is公印に掛ける, is公印を省略, info);
     }
 
     private int publish特徴開始通知書_その他(HonsanteifukaBatchTyouhyou 出力帳票一覧, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
