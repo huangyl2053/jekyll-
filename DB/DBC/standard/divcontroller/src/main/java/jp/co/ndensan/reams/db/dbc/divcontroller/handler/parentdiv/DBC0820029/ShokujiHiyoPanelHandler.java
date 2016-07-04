@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(食事費用）の画面クラスです。
@@ -158,24 +156,24 @@ public class ShokujiHiyoPanelHandler {
      * 保存処理confirmのメソッド
      *
      * @param row dgdShokuji_Row
+     * @param 状態 RString
      */
-    public void confirm(dgdShokuji_Row row) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        if (修正.equals(state)) {
+    public void confirm(dgdShokuji_Row row, RString 状態) {
+        if (修正.equals(状態)) {
             if (RowState.Added.equals(row.getRowState())) {
                 row.setRowState(RowState.Added);
                 set食事費用登録グリッド(row);
             } else {
                 modifiedConfirm(row);
             }
-        } else if (削除.equals(state)) {
+        } else if (削除.equals(状態)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getDataSource().remove(row);
             } else {
                 row.setRowState(RowState.Deleted);
                 set食事費用登録グリッド(row);
             }
-        } else if (登録.equals(state)) {
+        } else if (登録.equals(状態)) {
             List<dgdShokuji_Row> list = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getDataSource();
             row.setRowState(RowState.Added);
             set食事費用登録グリッド(row);
@@ -371,24 +369,6 @@ public class ShokujiHiyoPanelHandler {
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
                 null);
         return paramter;
-    }
-
-    /**
-     * modifyRowのメソッド
-     *
-     * @param row dgdShokuji_Row
-     */
-    public void modifyRow(dgdShokuji_Row row) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        if (修正.equals(state)) {
-            row.setRowState(RowState.Modified);
-        } else if (削除.equals(state)) {
-            row.setRowState(RowState.Deleted);
-        } else if (登録.equals(state)) {
-            row.setRowState(RowState.Added);
-        }
-        clear食事費用登録エリア１();
-        div.getPanelShokuji().getPanelDetail1().setVisible(false);
     }
 
     /**
@@ -657,10 +637,12 @@ public class ShokujiHiyoPanelHandler {
      * @param paramter ShoukanharaihishinseimeisaikensakuParameter
      * @param shokanShokujiHiyoList List<ShokanShokujiHiyo>
      * @param shokanMeisaiList List<ShokanMeisai>
+     * @param 処理モード RString
      */
     public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter paramter,
             List<ShokanShokujiHiyo> shokanShokujiHiyoList,
-            List<ShokanMeisai> shokanMeisaiList) {
+            List<ShokanMeisai> shokanMeisaiList,
+            RString 処理モード) {
 
         HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
         FlexibleYearMonth サービス提供年月 = paramter.getサービス年月();
@@ -671,7 +653,7 @@ public class ShokujiHiyoPanelHandler {
         ShokanKihonParameter par = ShokanKihonParameter.createSelectByKeyParam(
                 被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 0);
 
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
                     被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {

@@ -239,8 +239,9 @@ public class ShokujiHiyoPanel {
                     .get(ViewStateKeys.食事費用データ, List.class);
             List<ShokanMeisai> shokanMeisaiList = ViewStateHolder.get(
                     ViewStateKeys.償還払請求食事費用, List.class);
+            RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
             if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList);
+                getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了
                         .getMessage().replace(削除.toString())).respond();
             }
@@ -269,10 +270,11 @@ public class ShokujiHiyoPanel {
                 ShoukanharaihishinseimeisaikensakuParameter.class);
         List<ShokanMeisai> shokanMeisaiList = ViewStateHolder.get(
                 ViewStateKeys.償還払請求食事費用, List.class);
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         try {
             Boolean flag = getHandler(div).get内容変更状態(サービス提供年月, shokanShokujiHiyoList);
             if (flag) {
-                return save(div, paramter, shokanShokujiHiyoList, shokanMeisaiList);
+                return save(div, paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
             } else {
                 return noChange(div);
             }
@@ -285,9 +287,10 @@ public class ShokujiHiyoPanel {
     private ResponseData<ShokujiHiyoPanelDiv> save(ShokujiHiyoPanelDiv div,
             ShoukanharaihishinseimeisaikensakuParameter paramter,
             List<ShokanShokujiHiyo> shokanShokujiHiyoList,
-            List<ShokanMeisai> shokanMeisaiList) {
+            List<ShokanMeisai> shokanMeisaiList,
+            RString 処理モード) {
         if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList);
+            getHandler(div).保存処理(paramter, shokanShokujiHiyoList, shokanMeisaiList, 処理モード);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
                     replace(登録.toString())).respond();
         }
@@ -432,12 +435,13 @@ public class ShokujiHiyoPanel {
      * @return ResponseData<ShokujiHiyoPanelDiv>
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnConfirm2(ShokujiHiyoPanelDiv div) {
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        if (状態.equals(登録)) {
             dgdShokuji_Row row = new dgdShokuji_Row();
-            getHandler(div).confirm(row);
+            getHandler(div).confirm(row, 状態);
         } else {
             dgdShokuji_Row row = getHandler(div).selectRow();
-            getHandler(div).confirm(row);
+            getHandler(div).confirm(row, 状態);
         }
         getHandler(div).clear食事費用登録エリア2();
         div.getPanelShokuji().getPanelDetail2().setVisible(false);
