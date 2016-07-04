@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyuf
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
@@ -579,11 +580,12 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
      * @param サービス年月 FlexibleYearMonth
      * @param 証記載保険者番号 HokenshaNo
      * @param 履歴番号 int
+     * @param 識別コード ShikibetsuCode
      */
     @Override
     public void initialize(RString 画面モード, RString メニューID, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号) {
+            FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード) {
         KogakuServicehiDetailDivHandler.of(this).画面初期化(
-                画面モード, メニューID, 被保険者番号, サービス年月, 証記載保険者番号, 履歴番号);
+                画面モード, メニューID, 被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
     }
 }

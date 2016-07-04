@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuSer
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -22,7 +23,8 @@ public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties
      * @param サービス年月 FlexibleYearMonth
      * @param 証記載保険者番号 HokenshaNo
      * @param 履歴番号 int
+     * @param 識別コード ShikibetsuCode
      */
     public void initialize(RString 画面モード, RString メニューID, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号);
+            FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード);
 }
