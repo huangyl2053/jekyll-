@@ -13,6 +13,14 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 遷移元区分
+     */
+    遷移元区分,
+    /**
+     * 算定期
+     */
+    算定期,
+    /**
      * 審査会開催番号
      */
     審査会開催番号,

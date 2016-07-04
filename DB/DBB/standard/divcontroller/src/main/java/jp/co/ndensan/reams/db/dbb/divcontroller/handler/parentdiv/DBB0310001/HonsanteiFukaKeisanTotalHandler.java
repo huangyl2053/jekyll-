@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0310001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0310001;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -43,12 +42,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -61,6 +57,7 @@ public class HonsanteiFukaKeisanTotalHandler {
 
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
+    private static final RString FORMAT_M = new RString("_");
     private static final RString 出力方法_別々 = new RString("別々出力");
     private static final RString 出力方法_全件 = new RString("全件出力");
     private static final RString 項目名 = new RString("当初出力_出力方法");
@@ -85,15 +82,6 @@ public class HonsanteiFukaKeisanTotalHandler {
     private static final RString 状況_未 = new RString("未");
     private static final RString 状況_済 = new RString("済");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
-    private static final RString 特徴開始通知書_帳票分類ID = new RString("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
-    private static final RString 決定変更通知書_帳票分類ID = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
-    private static final RString 納入通知書帳票分類ID = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
-    private static final RString MESSAGE_1 = new RString("所得異動基準日");
-    private static final RString MESSAGE_2 = new RString("資格基準日");
-    private static final RString MESSAGE_3 = new RString("特徴開始通知書の発行日");
-    private static final RString MESSAGE_4 = new RString("決定/変更通知書の発行日");
-    private static final RString MESSAGE_5 = new RString("納入通知書の発行日");
-    private static final RString MESSAGE_6 = new RString("対象者");
     private final HonsanteiFukaKeisanTotalDiv div;
 
     /**
@@ -111,7 +99,7 @@ public class HonsanteiFukaKeisanTotalHandler {
      * @param 更正月 Kitsuki
      */
     public void set調定期(Kitsuki 更正月) {
-        RString 調定期 = 更正月.get表記().asX期括弧X月();
+        RString 調定期 = 更正月.get表記().asX期括弧X月().replace(FORMAT_M, 定数_0);
         List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
         keyValueDataSource.add(new KeyValueDataSource(更正月.get期(), 調定期));
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getDdlChoteiKi().setDataSource(keyValueDataSource);
@@ -125,6 +113,7 @@ public class HonsanteiFukaKeisanTotalHandler {
      * @param 調定年度 調定年度
      */
     public void set処理状態(RString 遷移元区分, FlexibleYear 調定年度) {
+
         Honsanteifuka honsanteifuka = Honsanteifuka.createInstance();
         List<ShoriDateKanri> shoriDateKanriList = honsanteifuka.getShoriDateKanriList(遷移元区分, 調定年度);
         List<dgHonsanteiShoriKakunin_Row> dgHonsanteiShoriKakuninList = new ArrayList<>();
@@ -140,7 +129,7 @@ public class HonsanteiFukaKeisanTotalHandler {
                 row.setTxtJokyo(状況_未);
                 row.setTxtShoriNichiji(RString.EMPTY);
                 dgHonsanteiShoriKakuninList.add(row);
-            } else {
+            } else if (定数_1.equals(遷移元区分)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_通知書, true);
                 row.setTxtShoriMei(ShoriName.本算定賦課.get名称());
                 row.setTxtJokyo(状況_未);
@@ -166,20 +155,24 @@ public class HonsanteiFukaKeisanTotalHandler {
                 活性区分 = true;
             } else {
                 row.setTxtJokyo(状況_済);
-                row.setTxtShoriNichiji(shoriDateKanri.toEntity().getKijunTimestamp().toDateString());
+                if (shoriDateKanri.toEntity().getKijunTimestamp() != null || !shoriDateKanri.toEntity().getKijunTimestamp().isEmpty()) {
+                    row.setTxtShoriNichiji(shoriDateKanri.toEntity().getKijunTimestamp().getDate().wareki().toDateString()
+                            .concat(RString.HALF_SPACE).concat(shoriDateKanri.toEntity().getKijunTimestamp().getRDateTime()
+                                    .getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+                }
             }
             dgHonsanteiShoriKakuninList.add(row);
         }
         if (!活性区分) {
             if (定数_0.equals(遷移元区分)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_賦課計算, false);
-            } else {
+            } else if (定数_1.equals(遷移元区分)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_通知書, false);
             }
         } else {
             if (定数_0.equals(遷移元区分)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_賦課計算, true);
-            } else {
+            } else if (定数_1.equals(遷移元区分)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する_通知書, true);
             }
         }
@@ -354,60 +347,9 @@ public class HonsanteiFukaKeisanTotalHandler {
      */
     public ValidationMessageControlPairs set入力チェック() {
 
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD().getValue() == null) {
-            pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalHandler.IdocheckMessages(
-                    UrErrorMessages.必須, MESSAGE_1.toString()),
-                    div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD()));
-        }
-        if (div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShikakuKijunYMD().getValue() == null) {
-            pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalHandler.IdocheckMessages(
-                    UrErrorMessages.必須, MESSAGE_2.toString()),
-                    div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShikakuKijunYMD()));
-        }
-        Map<RString, RString> 帳票一覧Map = div.getHonsanteiChohyoHakko2().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
-        Set<Map.Entry<RString, RString>> set = 帳票一覧Map.entrySet();
-        Iterator<Map.Entry<RString, RString>> it = set.iterator();
-        while (it.hasNext()) {
-            Map.Entry<RString, RString> entry = it.next();
-            RString key = entry.getKey();
-            if (特徴開始通知書_帳票分類ID.equals(key)
-                    && div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue() == null) {
-                pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalHandler.IdocheckMessages(
-                        UrErrorMessages.必須, MESSAGE_3.toString()),
-                        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2()));
-            } else if (決定変更通知書_帳票分類ID.equals(key)
-                    && div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtKetteTsuchiHakkoYMD2().getValue() == null) {
-                pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalHandler.IdocheckMessages(
-                        UrErrorMessages.必須, MESSAGE_4.toString()),
-                        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtKetteTsuchiHakkoYMD2()));
-            } else if (納入通知書帳票分類ID.equals(key)
-                    && div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2().getValue() == null) {
-                pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalHandler.IdocheckMessages(
-                        UrErrorMessages.必須, MESSAGE_5.toString()),
-                        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2()));
-            } else if (納入通知書帳票分類ID.equals(key)
-                    && div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2().getSelectedItems().isEmpty()) {
-                pairs.add(new ValidationMessageControlPair(new HonsanteiFukaKeisanTotalHandler.IdocheckMessages(
-                        UrErrorMessages.必須, MESSAGE_6.toString()),
-                        div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getChkNotsuTaishosha2()));
-            }
-        }
+        HonsanteiFukaKeisanTotalValidationHandler validation = new HonsanteiFukaKeisanTotalValidationHandler(div);
+        ValidationMessageControlPairs pairs = validation.set入力チェック();
         return pairs;
-    }
-
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 
     /**
