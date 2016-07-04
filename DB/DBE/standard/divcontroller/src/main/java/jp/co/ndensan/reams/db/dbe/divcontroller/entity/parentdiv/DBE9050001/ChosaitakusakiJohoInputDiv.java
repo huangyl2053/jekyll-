@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
@@ -54,7 +55,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("ddlItakusakikubun")
     private DropDownList ddlItakusakikubun;
     @JsonProperty("txtteiin")
-    private TextBoxYubinNo txtteiin;
+    private TextBoxNum txtteiin;
     @JsonProperty("ddlKikankubun")
     private DropDownList ddlKikankubun;
     @JsonProperty("radHaishiFlag")
@@ -65,10 +66,10 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
-    @JsonProperty("ccdChiku")
-    private CodeInputDiv ccdChiku;
     @JsonProperty("ccdHokenshaJoho")
     private HokenshaJohoDiv ccdHokenshaJoho;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -229,7 +230,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @return txtteiin
      */
     @JsonProperty("txtteiin")
-    public TextBoxYubinNo getTxtteiin() {
+    public TextBoxNum getTxtteiin() {
         return txtteiin;
     }
 
@@ -238,7 +239,7 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
      * @param txtteiin txtteiin
      */
     @JsonProperty("txtteiin")
-    public void setTxtteiin(TextBoxYubinNo txtteiin) {
+    public void setTxtteiin(TextBoxNum txtteiin) {
         this.txtteiin = txtteiin;
     }
 
@@ -333,21 +334,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getccdChiku
-     * @return ccdChiku
-     */
-    @JsonProperty("ccdChiku")
-    public ICodeInputDiv getCcdChiku() {
-        return ccdChiku;
-    }
-
-    /*
      * getccdHokenshaJoho
      * @return ccdHokenshaJoho
      */
     @JsonProperty("ccdHokenshaJoho")
     public IHokenshaJohoDiv getCcdHokenshaJoho() {
         return ccdHokenshaJoho;
+    }
+
+    /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
     }
 
     /*

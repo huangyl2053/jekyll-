@@ -38,6 +38,24 @@ public class NinteichosaMainValidationHandler {
     }
 
     /**
+     * 検索するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @param その他機関コードFrom その他機関コードFrom
+     * @param その他機関コードTo その他機関コードTo
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForSearchShujii(RString その他機関コードFrom, RString その他機関コードTo) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        RString sonotaKikanCode = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
+        if (その他機関コードFrom.compareTo(その他機関コードTo) > 0) {
+            validPairs.add(new ValidationMessageControlPair(new NinteichosaMainValidationHandler.IdocheckMessages(
+                    UrErrorMessages.大小関係が不正, String.valueOf(sonotaKikanCode)),
+                    div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom()));
+        }
+        return validPairs;
+    }
+
+    /**
      * ＣＳＶを出力するボタンを押下するとき、バリデーションチェックを行う。
      *
      * @return validPairs バリデーション結果

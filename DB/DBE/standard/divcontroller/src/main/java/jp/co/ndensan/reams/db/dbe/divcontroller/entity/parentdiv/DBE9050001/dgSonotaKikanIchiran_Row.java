@@ -3,14 +3,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 30 10:16:46 CST 2016 
+ * Fri Jul 01 16:50:49 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -25,7 +24,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
 
     private RString jotai;
     private RString hokensha;
-    private TextBoxCode sonotaKikanCode;
+    private RString sonotaKikanCode;
     private RString kikanMeisho;
     private RString kikanKana;
     private RString yubinNo;
@@ -42,7 +41,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         super();
         this.jotai = RString.EMPTY;
         this.hokensha = RString.EMPTY;
-        this.sonotaKikanCode = new TextBoxCode();
+        this.sonotaKikanCode = RString.EMPTY;
         this.kikanMeisho = RString.EMPTY;
         this.kikanKana = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
@@ -70,7 +69,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.setOriginalData("jokyoFlag", jokyoFlag);
     }
 
-    public dgSonotaKikanIchiran_Row(RString jotai, RString hokensha, TextBoxCode sonotaKikanCode, RString kikanMeisho, RString kikanKana, RString yubinNo, RString jusho, RString jushoKana, RString telNo, RString chosaItakuKubun, TextBoxNum waritsukeTeiin, RString chiku, RString kikanKubun, RString jokyoFlag) {
+    public dgSonotaKikanIchiran_Row(RString jotai, RString hokensha, RString sonotaKikanCode, RString kikanMeisho, RString kikanKana, RString yubinNo, RString jusho, RString jushoKana, RString telNo, RString chosaItakuKubun, TextBoxNum waritsukeTeiin, RString chiku, RString kikanKubun, RString jokyoFlag) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokensha", hokensha);
@@ -110,7 +109,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         return hokensha;
     }
 
-    public TextBoxCode getSonotaKikanCode() {
+    public RString getSonotaKikanCode() {
         return sonotaKikanCode;
     }
 
@@ -168,7 +167,7 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.hokensha = hokensha;
     }
 
-    public void setSonotaKikanCode(TextBoxCode sonotaKikanCode) {
+    public void setSonotaKikanCode(RString sonotaKikanCode) {
         this.setOriginalData("sonotaKikanCode", sonotaKikanCode);
         this.sonotaKikanCode = sonotaKikanCode;
     }

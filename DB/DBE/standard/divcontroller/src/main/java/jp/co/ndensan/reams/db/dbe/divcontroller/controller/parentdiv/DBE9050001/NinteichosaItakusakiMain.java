@@ -22,9 +22,15 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.SonotaKikanJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaster.NinteichosaMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -92,6 +98,12 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnSearchShujii(NinteichosaItakusakiMainDiv div) {
+        RString kanCodeFrom = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
+        RString kanCodeTo = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSearchShujii(kanCodeFrom, kanCodeTo);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         searchChosainInfo(div);
         return ResponseData.of(div).respond();
     }
@@ -116,7 +128,8 @@ public class NinteichosaItakusakiMain {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setSonotaKikanichiran(sonotaKikanJohoList);
-        ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(sonotaKikanJohoList));
+        List<SonotaKikanJoho> その他機関マスタList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
+        ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(その他機関マスタList));
     }
 
     /**
@@ -128,6 +141,7 @@ public class NinteichosaItakusakiMain {
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnInsert(NinteichosaItakusakiMainDiv div) {
         div.getChosaitakusakiJohoInput().setState(状態_追加);
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
+        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(false);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setDataSource(getHandler(div).setItakukubun());
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDataSource(getHandler(div).setKikankubun());
         getHandler(div).clearChosaitakusakiJohoInput();
@@ -230,7 +244,7 @@ public class NinteichosaItakusakiMain {
         }
         NinteichosaItakusakiCsvEntity data = new NinteichosaItakusakiCsvEntity(
                 row.getHokensha(),
-                row.getSonotaKikanCode().getValue(),
+                row.getSonotaKikanCode(),
                 row.getKikanMeisho(),
                 row.getKikanKana(),
                 row.getYubinNo(),
@@ -352,6 +366,24 @@ public class NinteichosaItakusakiMain {
             for (SonotaKikanJoho sonotaKikanJoho : models) {
                 sonotaKikanJohoManager.saveOrDeleteその他機関情報(sonotaKikanJoho);
             }
+            List<dgSonotaKikanIchiran_Row> ichiranList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
+            for (dgSonotaKikanIchiran_Row row : ichiranList) {
+                if (状態_削除.equals(row.getJotai())) {
+                    KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
+                    builder.set業務コード(GyomuCode.DB介護保険);
+                    builder.setサブ業務コード(SubGyomuCode.DBE認定支援);
+                    builder.set科目コード(new KamokuCode("004"));
+                    List<RString> 業務固有キー = new ArrayList<>();
+                    業務固有キー.add(new RString("その他機関コード"));
+                    builder.set業務固有キーリスト(業務固有キー);
+                    builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
+                    IKozaSearchKey searchKey = builder.build();
+                    List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
+                    for (Koza koza : kozaList) {
+                        koza.deleted();
+                    }
+                }
+            }
             div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE9050001StateName.完了);
         }
@@ -365,7 +397,7 @@ public class NinteichosaItakusakiMain {
             if (状態_削除.equals(row.getJotai())) {
                 NinteichosaMasterSearchParameter parameter = NinteichosaMasterSearchParameter.createParamForSelectByKey(
                         new ShoKisaiHokenshaNo(row.getHokensha()),
-                        row.getSonotaKikanCode().getValue());
+                        row.getSonotaKikanCode());
                 return getValidationHandler(div).validateForDelete(
                         masterFinder.getKaigoNinteiShinsakaiCount(parameter));
             }

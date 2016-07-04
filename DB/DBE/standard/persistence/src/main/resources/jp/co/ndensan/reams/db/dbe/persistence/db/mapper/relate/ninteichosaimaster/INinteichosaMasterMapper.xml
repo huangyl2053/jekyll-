@@ -67,7 +67,7 @@
             </if>
             <if test="user機関カナ名称">
                     AND
-                    dbT5914SonotaKi."kikanMeisho"  LIKE '%' || #{機関カナ名称} || '%'
+                    dbT5914SonotaKi."kikanMeishoKana"  LIKE '%' || #{機関カナ名称} || '%'
             </if>
             <if test="user調査委託区分">
                     AND
