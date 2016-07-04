@@ -245,7 +245,14 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
                     writeBy(dbb100032ReportSourceWriter4);
             reportWriter4.close();
             return dbb100032ReportSourceWriter4.pageCount().value();
-        } else if (ReportIdDBB.DBB100036.getReportId().equals(出力帳票一覧.get帳票ID())) {
+        }
+        return publish特徴開始通知書_その他(出力帳票一覧, 編集後本算定通知書共通情報, result, 本算定通知書情報, 認証者, is公印に掛ける, is公印を省略, info);
+    }
+
+    private int publish特徴開始通知書_その他(HonsanteifukaBatchTyouhyou 出力帳票一覧, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            PrtTokuchoKaishiTsuchishoHonsanteiResult result, HonSanteiTsuchiShoKyotsu 本算定通知書情報,
+            Ninshosha 認証者, boolean is公印に掛ける, boolean is公印を省略, ICheckListInfo info) {
+        if (ReportIdDBB.DBB100036.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                     認証者,
                     地方公共団体,
