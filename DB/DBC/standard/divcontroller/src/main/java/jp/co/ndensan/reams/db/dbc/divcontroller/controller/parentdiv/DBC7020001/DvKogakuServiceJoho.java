@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.Han
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7020001.DvKogakuServiceJohoHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -100,7 +100,8 @@ public class DvKogakuServiceJoho {
      */
     public ResponseData<HanyoListKogakuKaigoBatchParameter> click_batchRegister(DvKogakuServiceJohoDiv div) {
         DvKogakuServiceJohoHandler handler = getHandler(div);
-        HanyoListKogakuKaigoBatchParameter parameter = handler.getBatchParamter();
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        HanyoListKogakuKaigoBatchParameter parameter = handler.getBatchParamter(市町村判定);
         return ResponseData.of(parameter).respond();
     }
 
