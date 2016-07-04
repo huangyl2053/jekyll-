@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.Property;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KaishiTsuchishoKariHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiTsuchishoKariHakkoIchirReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -77,7 +77,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService {
             FlexibleYear 調定年度,
             YMDHMS 帳票作成日時,
             ReportManager reportManager) {
-        Property property = new Property();
+        KaishiTsuchishoKariHakkoIchiranProperty property = new KaishiTsuchishoKariHakkoIchiranProperty();
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> assembler
                 = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> reportSourceWriter
