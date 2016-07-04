@@ -284,7 +284,7 @@
         "koseimae_fuShunyuGaku14" = DbT2015KeisangoJohoTemp."fuShunyuGaku14",
         "koseimaeJohoUmuKubun" = '1'
         FROM
-        rgdb."DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
+        "DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
         WHERE
         "DbT2002FukaTemp"."koseigo_choteiNendo" = DbT2015KeisangoJohoTemp."choteiNendo"
         AND "DbT2002FukaTemp"."koseigo_fukaNendo" = DbT2015KeisangoJohoTemp."fukaNendo"

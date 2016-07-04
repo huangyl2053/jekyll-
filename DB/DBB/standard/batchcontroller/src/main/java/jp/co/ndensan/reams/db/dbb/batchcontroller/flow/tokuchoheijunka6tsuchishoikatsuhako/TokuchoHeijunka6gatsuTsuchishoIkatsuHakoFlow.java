@@ -41,6 +41,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private static final String 通知書発行後異動者の登録 = "tsuchishoIdoshaToroku";
 
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString 帳票分類ID = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 
     @Override
     protected void defineFlow() {
@@ -81,16 +82,12 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
      */
     @Step(計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
-        int size = getParameter().get出力帳票entity().size();
-        if (size == 0) {
-            return null;
+        OutputChohyoIchiran 出力帳票entity = new OutputChohyoIchiran();
+        for (OutputChohyoIchiran 出力帳票 : getParameter().get出力帳票entity()) {
+            if (帳票分類ID.equals(出力帳票.get帳票分類ID())) {
+                出力帳票entity = 出力帳票;
+            }
         }
-        OutputChohyoIchiran 出力帳票entity;
-        for (int i = 0; i < size - 1; i++) {
-            出力帳票entity = getParameter().get出力帳票entity().get(i);
-            otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(出力帳票entity.get帳票分類ID())).define();
-        }
-        出力帳票entity = getParameter().get出力帳票entity().get(size - 1);
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(出力帳票entity.get帳票分類ID())).define();
     }
 
@@ -169,8 +166,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
      */
     @Step(通知書の発行)
     protected IBatchFlowCommand tsuchishoHako() {
-
-        RString 帳票分類ID = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
         RString 帳票ID = RString.EMPTY;
         OutputChohyoIchiran 出力帳票entity = new OutputChohyoIchiran();
         for (OutputChohyoIchiran 出力帳票 : getParameter().get出力帳票entity()) {

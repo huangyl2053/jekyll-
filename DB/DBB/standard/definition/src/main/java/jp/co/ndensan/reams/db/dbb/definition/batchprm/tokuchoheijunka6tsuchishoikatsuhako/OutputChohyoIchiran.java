@@ -22,7 +22,6 @@ public class OutputChohyoIchiran {
     private RString 帳票分類ID;
     private RString 帳票ID;
     private RString 帳票名;
-    private RString 改頁ID;
     private RString 出力順ID;
 
 }
