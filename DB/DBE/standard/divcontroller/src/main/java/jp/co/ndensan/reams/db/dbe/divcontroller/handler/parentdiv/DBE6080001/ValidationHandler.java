@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6080001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6080001.ShujiiIkenshoSakuseiryoNyuryokuDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -39,7 +38,7 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs validateForMaxCount() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getShujiiKensakuJoken().getTxtMaxCount().getValue())) {
+        if (div.getShujiiKensakuJoken().getTxtMaxCount().getValue().intValue() == 0) {
             validPairs.add(new ValidationMessageControlPair(
                     ValidationCheckMessages.Validate最大表示件数の必須入力チェック, div.getShujiiKensakuJoken().getTxtMaxCount()));
         }

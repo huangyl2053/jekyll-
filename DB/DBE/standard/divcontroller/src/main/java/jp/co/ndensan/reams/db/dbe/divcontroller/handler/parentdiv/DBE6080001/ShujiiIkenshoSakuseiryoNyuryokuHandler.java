@@ -67,7 +67,8 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         // TODO QA内部:1354 Readmain:  (共通部品内部制御がなし、実装できない。)
         div.getShujiiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getShujiiKensakuJoken().getTxtMaxCount().setValue(
-                DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+                new Decimal(DbBusinessConfig.get(
+                                ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
     }
 
     /**
@@ -90,7 +91,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
     public ShujiiIkenshoSakuseiryoNyuryokuParameter setShujiiParameter() {
         ShujiiIkenshoSakuseiryoNyuryokuParameter parameter = ShujiiIkenshoSakuseiryoNyuryokuParameter
                 .createParam主治医情報(
-                        Integer.parseInt(div.getShujiiKensakuJoken().getTxtMaxCount().getValue().toString()),
+                        div.getShujiiKensakuJoken().getTxtMaxCount().getValue().intValue(),
                         div.getShujiiKensakuJoken().getCcdHokenshaList().getSelectedItem().get市町村コード().value(),
                         div.getShujiiKensakuJoken().getTxtShujiiei().getValue(),
                         div.getShujiiKensakuJoken().getDdlHihokenshaNameMatchType().getSelectedValue());
