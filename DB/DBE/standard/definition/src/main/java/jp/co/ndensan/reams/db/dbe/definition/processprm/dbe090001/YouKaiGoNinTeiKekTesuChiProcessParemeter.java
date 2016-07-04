@@ -13,7 +13,7 @@ import lombok.Setter;
 
 /**
  * 主治医への結果通知書のMyBatis用パラメータクラスです。
- * 
+ *
  * @reamsid_L DBE-0220-030 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -29,6 +29,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
     private RString shoKisaiHokenshaNo;
     private RString shishoCode;
     private RString ninteiJohoTeikyoYMD;
+    private RString shichosonCode;
 
     /**
      * コンストラクタ作成です。
@@ -41,6 +42,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
      * @param shoKisaiHokenshaNo 初期再保険者番号
      * @param shishoCode 支所コード
      * @param ninteiJohoTeikyoYMD 認定情報提供年月日
+     * @param shichosonCode 市町村コード
      */
     public YouKaiGoNinTeiKekTesuChiProcessParemeter(RString nijiHanteiYMDFrom,
             RString nijiHanteiYMDTo,
@@ -49,7 +51,8 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
             RString shinseishoKanriNo,
             RString shoKisaiHokenshaNo,
             RString shishoCode,
-            RString ninteiJohoTeikyoYMD) {
+            RString ninteiJohoTeikyoYMD,
+            RString shichosonCode) {
         this.nijiHanteiYMDFrom = nijiHanteiYMDFrom;
         this.nijiHanteiYMDTo = nijiHanteiYMDTo;
         this.maDaNyuRyoKu = maDaNyuRyoKu;
@@ -58,6 +61,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.shishoCode = shishoCode;
         this.ninteiJohoTeikyoYMD = ninteiJohoTeikyoYMD;
+        this.shichosonCode = shichosonCode;
     }
 
     /**

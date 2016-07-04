@@ -14,7 +14,7 @@ import lombok.Setter;
 
 /**
  * 主治医への結果通知書のMyBatis用パラメータクラスです。
- * 
+ *
  * @reamsid_L DBE-0220-030 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -22,45 +22,16 @@ import lombok.Setter;
 @Setter
 public class YouKaiGoNinTeiKekTesuChiFlowParameter extends BatchParameterBase {
 
-    /**
-     * 二次判定期間From
-     */
-    public static final String NIJIHANTEIYMDFROM = "nijiHanteiYMDFrom";
-
-    /**
-     * 二次判定期間To
-     */
-    public static final String NIJIHANTEIYMDTO = "nijiHanteiYMDTo";
-
-    /**
-     * 未出力フラグ
-     */
-    public static final String MADANYURYOKU = "maDaNyuRyoKu";
-
-    /**
-     * 主治医情報
-     */
-    public static final String SHUJIIJYOUHOU = "shuJiiJyouHou";
-
-    /**
-     * 申請書管理番号
-     */
-    public static final String SHINSEISHOKANRINO = "shinseishoKanriNo";
-
-    /**
-     * 証記載保険者番号
-     */
-    public static final String SHOKISAIHOKENSHANO = "shoKisaiHokenshaNo";
-
-    /**
-     * 支所コード
-     */
-    public static final String SHISHOCODE = "shishoCode";
-
-    /**
-     * 認定状況提供日
-     */
-    public static final String NINTEIJOHOTEIKYOYMD = "ninteiJohoTeikyoYMD";
+    private static final String NIJIHANTEIYMDFROM = "nijiHanteiYMDFrom";
+    private static final String NIJIHANTEIYMDTO = "nijiHanteiYMDTo";
+    private static final String MADANYURYOKU = "maDaNyuRyoKu";
+    private static final String SHUJIIJYOUHOU = "shuJiiJyouHou";
+    private static final String SHINSEISHOKANRINO = "shinseishoKanriNo";
+    private static final String SHOKISAIHOKENSHANO = "shoKisaiHokenshaNo";
+    private static final String SHISHOCODE = "shishoCode";
+    private static final String NINTEIJOHOTEIKYOYMD = "ninteiJohoTeikyoYMD";
+    private static final String SHICHOSON_CODE = "shichosonCode";
+    private static final long serialVersionUID = -5187631016597638486L;
 
     @BatchParameter(key = NIJIHANTEIYMDFROM, name = "二次判定期間From")
     private RString nijiHanteiYMDFrom;
@@ -78,6 +49,8 @@ public class YouKaiGoNinTeiKekTesuChiFlowParameter extends BatchParameterBase {
     private RString shishoCode;
     @BatchParameter(key = NINTEIJOHOTEIKYOYMD, name = "認定状況提供日")
     private RString ninteiJohoTeikyoYMD;
+    @BatchParameter(key = SHICHOSON_CODE, name = "市町村コード")
+    private RString shichosonCode;
 
     /**
      * 主治医への結果通知書のMybatisパラメータークラス作成
@@ -92,6 +65,7 @@ public class YouKaiGoNinTeiKekTesuChiFlowParameter extends BatchParameterBase {
                 shinseishoKanriNo,
                 shoKisaiHokenshaNo,
                 shishoCode,
-                ninteiJohoTeikyoYMD);
+                ninteiJohoTeikyoYMD,
+                shichosonCode);
     }
 }

@@ -53,7 +53,8 @@ public class MainPanelHandler {
                     youKaiGoNinTeiKekTesuChi.get主治医コード(),
                     youKaiGoNinTeiKekTesuChi.get主治医氏名(),
                     new RString(String.valueOf(youKaiGoNinTeiKekTesuChi.get対象件数())),
-                    youKaiGoNinTeiKekTesuChi.get申請書管理番号());
+                    youKaiGoNinTeiKekTesuChi.get申請書管理番号(),
+                    youKaiGoNinTeiKekTesuChi.get市町村コード());
             rowList.add(row);
         }
         div.getDoctorSelectionPanel().getDgDoctorSelection().setDataSource(rowList);
@@ -80,11 +81,21 @@ public class MainPanelHandler {
             TextBoxDate 有効期間開始 = new TextBoxDate();
             TextBoxDate 有効期間終了 = new TextBoxDate();
             TextBoxDate 二次判定日 = new TextBoxDate();
-            生年月日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get生年月日().toString()));
-            申請日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get申請日().toString()));
-            有効期間開始.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間開始().toString()));
-            有効期間終了.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間終了().toString()));
-            二次判定日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
+            if (!RString.isNullOrEmpty(youKaiGoNinTeiKekTesuChi.get生年月日())) {
+                生年月日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get生年月日().toString()));
+            }
+            if (!RString.isNullOrEmpty(youKaiGoNinTeiKekTesuChi.get申請日())) {
+                申請日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get申請日().toString()));
+            }
+            if (!RString.isNullOrEmpty(youKaiGoNinTeiKekTesuChi.get有効期間開始())) {
+                有効期間開始.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間開始().toString()));
+            }
+            if (!RString.isNullOrEmpty(youKaiGoNinTeiKekTesuChi.get有効期間終了())) {
+                有効期間終了.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get有効期間終了().toString()));
+            }
+            if (!RString.isNullOrEmpty(youKaiGoNinTeiKekTesuChi.get二次判定日())) {
+                二次判定日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get二次判定日().toString()));
+            }
             dgResultList_Row row = new dgResultList_Row(
                     new RString(String.valueOf(youKaiGoNinTeiKekTesuChi.get連番())),
                     youKaiGoNinTeiKekTesuChi.get被保険者番号(),

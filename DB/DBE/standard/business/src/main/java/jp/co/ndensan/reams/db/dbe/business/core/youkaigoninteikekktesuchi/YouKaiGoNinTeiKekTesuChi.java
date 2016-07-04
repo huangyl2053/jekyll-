@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class YouKaiGoNinTeiKekTesuChi implements Serializable {
 
+    private static final long serialVersionUID = 3085320666262315030L;
+
     private final YouKaiGoNinTeiKekTesuChiRelateEntity entity;
 
     /**
@@ -250,5 +252,14 @@ public class YouKaiGoNinTeiKekTesuChi implements Serializable {
      */
     public RString get申請書管理番号() {
         return entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
     }
 }
