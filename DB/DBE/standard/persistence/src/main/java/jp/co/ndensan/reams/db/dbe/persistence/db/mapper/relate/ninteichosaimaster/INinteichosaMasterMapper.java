@@ -26,6 +26,14 @@ public interface INinteichosaMasterMapper {
     List<DbT5914SonotaKikanJohoEntity> selectSonotaKikanichiranList(NinteichosaMasterMapperParameter 検索条件);
 
     /**
+     * 検索条件より、適当な条件を連結して、その他機関情報を検索する。
+     *
+     * @param 検索条件 その他機関情報検索条件
+     * @return DbT5914SonotaKikanJohoEntity 検索結果の{@link DbT5914SonotaKikanJohoEntity}
+     */
+    List<DbT5914SonotaKikanJohoEntity> selectSonotaKikanJohoList(NinteichosaMasterMapperParameter 検索条件);
+
+    /**
      * その他機関情報の重複チェック。
      *
      * @param 検索条件 その他機関情報検索条件

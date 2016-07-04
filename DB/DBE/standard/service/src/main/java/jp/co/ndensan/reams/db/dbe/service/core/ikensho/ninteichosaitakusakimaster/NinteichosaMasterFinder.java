@@ -70,6 +70,27 @@ public class NinteichosaMasterFinder {
         }
         List<SonotaKikanJoho> その他機関情報List = new ArrayList<>();
         for (DbT5914SonotaKikanJohoEntity entity : kikanJohoEntityList) {
+            その他機関情報List.add(new SonotaKikanJoho(entity));
+        }
+        return SearchResult.of(その他機関情報List, 0, false);
+    }
+
+    /**
+     * 検索条件に従い、その他機関情報を検索します。
+     *
+     * @param その他機関情報検索条件 その他機関情報検索条件
+     * @return ShujiiMaster その他機関情報 nullが返る可能性があります。
+     */
+    @Transaction
+    public SearchResult<SonotaKikanJoho> getSonotaKikanJohoList(NinteichosaMasterMapperParameter その他機関情報検索条件) {
+        requireNonNull(その他機関情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("その他機関情報検索条件"));
+        INinteichosaMasterMapper mapper = mapperProvider.create(INinteichosaMasterMapper.class);
+        List<DbT5914SonotaKikanJohoEntity> kikanJohoEntityList = mapper.selectSonotaKikanJohoList(その他機関情報検索条件);
+        if (kikanJohoEntityList.isEmpty()) {
+            return SearchResult.of(Collections.<SonotaKikanJoho>emptyList(), 0, false);
+        }
+        List<SonotaKikanJoho> その他機関情報List = new ArrayList<>();
+        for (DbT5914SonotaKikanJohoEntity entity : kikanJohoEntityList) {
             entity.initializeMd5();
             その他機関情報List.add(new SonotaKikanJoho(entity));
         }

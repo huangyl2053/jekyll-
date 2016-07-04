@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -227,7 +228,7 @@ public class NinteichosaItakusakiMainHandler {
      * @param row その他機関詳細情報
      */
     public void setChosaitakusakiJohoInput(dgSonotaKikanIchiran_Row row) {
-        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setHokenjaNo(row.getHokensha());
+        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().intialize(new HokenjaNo(row.getHokensha()));
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setValue(row.getSonotaKikanCode());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().setValue(row.getKikanMeisho());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanKananame().setValue(row.getKikanKana());
