@@ -85,6 +85,60 @@
             LIMIT #{最大表示件数}
         </if>
     </select>
+    
+    <select resultOrdered="true" id="selectSonotaKikanJohoList"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper.ResultMap_DbT5914SonotaKikanJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter" fetchSize="500">
+             SELECT
+                DbT5914SonotaKikanJoho.*	
+            FROM	
+                (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper.noDeleted_DbT5914SonotaKikanJoho" />) AS DbT5914SonotaKikanJoho
+         <where>
+            <if test="廃止フラグ">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = false
+            </if>
+            <if test="!廃止フラグ">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = true
+            </if>
+            <if test="user保険者">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_shoKisaiHokenshaNo" = #{保険者}
+            </if>
+            <if test="user機関コードFrom">
+                AND
+              #{機関コードFrom} <![CDATA[<=]]> DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode"
+            </if>
+            <if test="user機関コードTo">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode" <![CDATA[<=]]> #{機関コードTo}
+            </if>
+            <if test="user機関名称">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanMeisho"  LIKE '%' || #{機関名称} || '%'
+            </if>
+            <if test="user機関カナ名称">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanMeishoKana"  LIKE '%' || #{機関カナ名称} || '%'
+            </if>
+            <if test="user調査委託区分">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_chosaItakuKubun"  LIKE '%' || #{調査委託区分} || '%'
+            </if>
+            <if test="user機関の区分">
+                    AND
+                    DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanKubun"  LIKE '%' || #{機関の区分} || '%'
+            </if>
+        </where>
+        ORDER BY	
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_shoKisaiHokenshaNo",
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode"
+        <if test="user最大表示件数">
+            LIMIT #{最大表示件数}
+        </if>
+    </select>
+    
     <!--その他機関情報の重複チェック-->
     <select resultOrdered="true" id="selectSonotaKikanJohoCount"
             resultType="int"

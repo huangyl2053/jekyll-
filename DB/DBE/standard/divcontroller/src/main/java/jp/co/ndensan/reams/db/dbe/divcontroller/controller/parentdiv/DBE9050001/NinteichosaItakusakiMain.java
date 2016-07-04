@@ -99,7 +99,7 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnSearchShujii(NinteichosaItakusakiMainDiv div) {
         RString kanCodeFrom = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
-        RString kanCodeTo = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
+        RString kanCodeTo = div.getChosainSearch().getTxtSearchSonotaKikanCodeTo().getValue();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSearchShujii(kanCodeFrom, kanCodeTo);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -128,7 +128,7 @@ public class NinteichosaItakusakiMain {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setSonotaKikanichiran(sonotaKikanJohoList);
-        List<SonotaKikanJoho> その他機関マスタList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
+        List<SonotaKikanJoho> その他機関マスタList = NinteichosaMasterFinder.createInstance().getSonotaKikanJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(その他機関マスタList));
     }
 
@@ -142,6 +142,9 @@ public class NinteichosaItakusakiMain {
         div.getChosaitakusakiJohoInput().setState(状態_追加);
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setDataSource(getHandler(div).setItakukubun());
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDataSource(getHandler(div).setKikankubun());
         getHandler(div).clearChosaitakusakiJohoInput();
@@ -160,6 +163,9 @@ public class NinteichosaItakusakiMain {
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedItem();
         getHandler(div).setChosaitakusakiJohoInput(row);
+        div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(true);
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setDisabled(true);
         div.getChosaitakusakiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
@@ -200,6 +206,7 @@ public class NinteichosaItakusakiMain {
             div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         } else if (状態_削除.equals(row.getJotai())) {
             getHandler(div).setDisabledTrueToChosaitakusakiJohoInput();
+            div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(true);
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
             div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         } else if (RString.EMPTY.equals(row.getJotai())) {
@@ -208,7 +215,6 @@ public class NinteichosaItakusakiMain {
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(true);
             div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         }
-        div.getSonotaKikanichiran().setDisplayNone(false);
         return ResponseData.of(div).respond();
     }
 
@@ -378,9 +384,10 @@ public class NinteichosaItakusakiMain {
                     builder.set業務固有キーリスト(業務固有キー);
                     builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
                     IKozaSearchKey searchKey = builder.build();
+                    KozaManager manager = KozaManager.createInstance();
                     List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
                     for (Koza koza : kozaList) {
-                        koza.deleted();
+                        manager.save異動前後口座情報(koza, koza.deleted());
                     }
                 }
             }
