@@ -211,11 +211,11 @@ public class Ikenshoget {
             }
             boolean 完了条件 = get完了条件(div.getCcdTaskList().getCheckbox().get(0));
             if (完了条件) {
-                主治医意見書入手一覧選択行の完了処理チェック(validationMessages);
+                主治医意見書入手一覧選択行の完了処理事前チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (div.getCcdTaskList().getCheckbox().get(0).getIkenshoNyushuKanryoDay().getValue() != null) {
-                主治医意見書入手一覧選択行の完了処理事前チェック(validationMessages);
+                主治医意見書入手一覧選択行の完了処理チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
