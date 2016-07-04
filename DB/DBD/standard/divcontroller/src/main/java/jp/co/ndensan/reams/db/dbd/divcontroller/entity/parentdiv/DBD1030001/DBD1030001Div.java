@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanry
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DBD1030001Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +34,10 @@ public class DBD1030001Div extends Panel {
     private ShafukuRiyoshaKeigenDiv ShafukuRiyoshaKeigen;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("hiddenShikibetsuCode")
+    private RString hiddenShikibetsuCode;
+    @JsonProperty("hiddenHihokenshaNo")
+    private RString hiddenHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -65,6 +70,42 @@ public class DBD1030001Div extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
+    }
+
+    /*
+     * gethiddenShikibetsuCode
+     * @return hiddenShikibetsuCode
+     */
+    @JsonProperty("hiddenShikibetsuCode")
+    public RString getHiddenShikibetsuCode() {
+        return hiddenShikibetsuCode;
+    }
+
+    /*
+     * sethiddenShikibetsuCode
+     * @param hiddenShikibetsuCode hiddenShikibetsuCode
+     */
+    @JsonProperty("hiddenShikibetsuCode")
+    public void setHiddenShikibetsuCode(RString hiddenShikibetsuCode) {
+        this.hiddenShikibetsuCode = hiddenShikibetsuCode;
+    }
+
+    /*
+     * gethiddenHihokenshaNo
+     * @return hiddenHihokenshaNo
+     */
+    @JsonProperty("hiddenHihokenshaNo")
+    public RString getHiddenHihokenshaNo() {
+        return hiddenHihokenshaNo;
+    }
+
+    /*
+     * sethiddenHihokenshaNo
+     * @param hiddenHihokenshaNo hiddenHihokenshaNo
+     */
+    @JsonProperty("hiddenHihokenshaNo")
+    public void setHiddenHihokenshaNo(RString hiddenHihokenshaNo) {
+        this.hiddenHihokenshaNo = hiddenHihokenshaNo;
     }
 
     /*
