@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * ShujiiIkenshoSakuseiryoNyuryoku のクラスファイル
@@ -212,12 +213,12 @@ public class ShujiiIkenshoSakuseiryoNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMaxCount() {
+    public TextBoxNum getTxtMaxCount() {
         return this.getShujiiKensakuJoken().getTxtMaxCount();
     }
 
     @JsonIgnore
-    public void setTxtMaxCount(TextBox txtMaxCount) {
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getShujiiKensakuJoken().setTxtMaxCount(txtMaxCount);
     }
 

@@ -30,7 +30,7 @@ public class ShujiiKensakuJokenDiv extends Panel {
     @JsonProperty("txtKensakuNendo")
     private TextBoxDateRange txtKensakuNendo;
     @JsonProperty("txtMaxCount")
-    private TextBox txtMaxCount;
+    private TextBoxNum txtMaxCount;
     @JsonProperty("btnKyufuJissekiSearchClear")
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("btnKensaku")
@@ -103,7 +103,7 @@ public class ShujiiKensakuJokenDiv extends Panel {
      * @return txtMaxCount
      */
     @JsonProperty("txtMaxCount")
-    public TextBox getTxtMaxCount() {
+    public TextBoxNum getTxtMaxCount() {
         return txtMaxCount;
     }
 
@@ -112,7 +112,7 @@ public class ShujiiKensakuJokenDiv extends Panel {
      * @param txtMaxCount txtMaxCount
      */
     @JsonProperty("txtMaxCount")
-    public void setTxtMaxCount(TextBox txtMaxCount) {
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.txtMaxCount = txtMaxCount;
     }
 
