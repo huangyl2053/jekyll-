@@ -1,7 +1,8 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -134,9 +135,9 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            }
+            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            //}
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -398,8 +399,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtNinteiYukoKikan"));
             }
 
-            public txtCheckDay(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtCheckDay"));
+            public txtCheckDay(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtCheckDay"));
             }
 
             public txtNinteiYukoKaishiDateFrom(): UZA.TextBoxFlexibleDate {
@@ -526,17 +527,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            public txtGeninShikkanCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            }
-
-            public btnGeninShikkanGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnGeninShikkanGuide"));
-            }
-
-            public txtGeninShikkanName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtGeninShikkanName"));
-            }
+            //public cdlGeninShikkanCode(): URZ.CodeInput.ModeController {
+            //    return new URZ.CodeInput.ModeController(this.convFiledName("cdlGeninShikkanCode"));
+            //}
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));
