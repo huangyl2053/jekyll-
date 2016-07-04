@@ -1,0 +1,63 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6080001;
+
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6080001.ShujiiIkenshoSakuseiryoNyuryokuDiv;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+
+/**
+ * 主治医意見書作成料入力のバリデーションチェッククラスです。
+ *
+ * @reamsid_L DBE-1960-010 xuyannan
+ */
+public class ValidationHandler {
+
+    private final ShujiiIkenshoSakuseiryoNyuryokuDiv div;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param div 主治医意見書作成料入力Div
+     */
+    public ValidationHandler(ShujiiIkenshoSakuseiryoNyuryokuDiv div) {
+        this.div = div;
+    }
+
+    /**
+     * 最大表示件数の必須入力チェックを実施します。
+     *
+     * @return ValidationMessageControlPairs(バリデーション結果)
+     */
+    public ValidationMessageControlPairs validateForMaxCount() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (RString.isNullOrEmpty(div.getShujiiKensakuJoken().getTxtMaxCount().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    ValidationCheckMessages.Validate最大表示件数の必須入力チェック, div.getShujiiKensakuJoken().getTxtMaxCount()));
+        }
+        return validPairs;
+    }
+
+    private static enum ValidationCheckMessages implements IValidationMessage {
+
+        Validate最大表示件数の必須入力チェック(UrErrorMessages.必須, "最大表示件数");
+        private final Message message;
+
+        private ValidationCheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+}
