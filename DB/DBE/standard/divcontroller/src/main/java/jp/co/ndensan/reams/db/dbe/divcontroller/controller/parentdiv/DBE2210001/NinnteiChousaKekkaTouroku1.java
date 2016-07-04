@@ -1406,6 +1406,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * 入力内容を取り消します。
      */
     private void resetData(NinnteiChousaKekkaTouroku1Div div) {
+        前排他キーの解除();
         div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().clearValue();
         div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(new RString("1"));
         div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().clearValue();
