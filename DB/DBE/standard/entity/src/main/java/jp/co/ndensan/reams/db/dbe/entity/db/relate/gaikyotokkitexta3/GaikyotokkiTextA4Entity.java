@@ -25,6 +25,7 @@ public class GaikyotokkiTextA4Entity {
     private FlexibleDate 認定申請年月日;
     private FlexibleDate 介護認定審査会開催年月日;
     private RString 概況特記Img;
+    private RString two_概況特記Img;
     private RString 概況特記Text;
     private RString 住宅改修Img;
     private RString 市町村特別給付のサービス種類名Img;

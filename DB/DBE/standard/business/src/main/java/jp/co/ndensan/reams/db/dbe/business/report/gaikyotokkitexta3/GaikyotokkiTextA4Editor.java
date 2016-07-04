@@ -70,7 +70,7 @@ public class GaikyotokkiTextA4Editor implements IGaikyotokkiTextA4Editor {
         source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
         source.gaikyotokkiImg = item.get概況特記Img();
         source.gaikyotokkiText = item.get概況特記Text();
-        source.two_gaikyotokkiImg = item.get概況特記Img();
+        source.two_gaikyotokkiImg = item.getTwo_概況特記Img();
         source.two_hokenshaNo = item.get保険者番号();
         source.two_hihokenshaNo = item.get被保険者番号();
         source.two_hihokenshaName = item.get名前();
