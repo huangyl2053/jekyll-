@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.Nokitsuki;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -93,7 +95,9 @@ public class FukaManager {
         KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
         save介護期別By普通徴収07期(介護賦課, shunoKamokuManager, shunoManager, 納期, 期月リスト);
         save介護期別By普通徴収14期(介護賦課, shunoKamokuManager, shunoManager, 納期, 期月リスト);
-        介護賦課Dac.save(介護賦課.toEntity());
+        DbT2002FukaEntity 介護賦課Entity = 介護賦課.toEntity();
+        介護賦課Entity.setState(EntityDataState.Added);
+        介護賦課Dac.save(介護賦課Entity);
     }
 
     private void save介護期別By特別徴収(FukaJoho 介護賦課,

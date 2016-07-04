@@ -24,6 +24,14 @@ public interface IGemmenJohoRelateMapper {
     GemmenJohoRelateEntity select減免の情報ByKey(GemmenJohoRelateMapperParameter 減免の情報検索条件);
 
     /**
+     * 最新の減免情報をキー検索で１件取得します。
+     *
+     * @param 減免の情報検索条件 減免の情報検索条件
+     * @return GemmenJohoRelateEntity
+     */
+    GemmenJohoRelateEntity select最新の減免情報ByKey(GemmenJohoRelateMapperParameter 減免の情報検索条件);
+
+    /**
      * 減免の情報情報をキー検索で１件取得します。
      *
      * @param 減免の情報検索条件 減免の情報検索条件

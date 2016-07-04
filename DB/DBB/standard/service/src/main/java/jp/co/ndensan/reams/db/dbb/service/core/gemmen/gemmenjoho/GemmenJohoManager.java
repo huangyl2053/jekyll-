@@ -66,7 +66,8 @@ public class GemmenJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GemmenJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link GemmenJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link GemmenJohoManager}のインスタンス
      */
     public static GemmenJohoManager createInstance() {
         return InstanceProvider.create(GemmenJohoManager.class);
@@ -84,6 +85,25 @@ public class GemmenJohoManager {
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
         GemmenJohoRelateEntity relateEntity = mapper.select減免の情報ByKey(減免の情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new GemmenJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する最新の減免の情報を返します。
+     *
+     * @param 減免の情報検索条件 減免の情報検索条件
+     * @return GemmenJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public GemmenJoho get最新の減免情報(GemmenJohoRelateMapperParameter 減免の情報検索条件) {
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
+
+        GemmenJohoRelateEntity relateEntity = mapper.select最新の減免情報ByKey(減免の情報検索条件);
         if (relateEntity == null) {
             return null;
         }
