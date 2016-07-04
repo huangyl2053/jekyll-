@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9999-023 huangh
  */
-public abstract class INonyuTsuchisho<T extends IReportSource> extends Report<T> {
+public abstract class NonyuTsuchisho<T extends IReportSource> extends Report<T> {
 
     /**
      * writeByメソッド
@@ -33,5 +33,5 @@ public abstract class INonyuTsuchisho<T extends IReportSource> extends Report<T>
      *
      * @return List<INonyuTsuchisho>
      */
-    public abstract List<INonyuTsuchisho> devidedByPage();
+    public abstract List<NonyuTsuchisho<T>> devidedByPage();
 }

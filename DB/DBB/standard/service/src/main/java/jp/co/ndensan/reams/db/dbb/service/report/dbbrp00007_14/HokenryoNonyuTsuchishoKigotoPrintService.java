@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.dbbrp00007_14;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007_14.HokenryoNonyuTsuchishoKigotoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007_14.HokenryoNonyuTsuchishoKigotoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
@@ -105,9 +105,9 @@ public class HokenryoNonyuTsuchishoKigotoPrintService {
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoSource>> reportList
                         = HokenryoNonyuTsuchishoKigotoReport.createFrom(本算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }

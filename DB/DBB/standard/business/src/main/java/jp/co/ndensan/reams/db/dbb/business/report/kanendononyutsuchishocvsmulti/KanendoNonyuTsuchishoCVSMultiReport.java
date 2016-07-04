@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvsmulti
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvsmulti.KanendoNonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-170 huangh
  */
-public class KanendoNonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<KanendoNonyuTsuchishoCVSMultiSource> {
+public class KanendoNonyuTsuchishoCVSMultiReport extends NonyuTsuchisho<KanendoNonyuTsuchishoCVSMultiSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -47,8 +47,8 @@ public class KanendoNonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<Kanendo
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSMultiSource>> devidedByPage() {
+        List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSMultiSource>> nonyuTsuchishoList = new ArrayList<>();
         KanendoNonyuTsuchishoCVSMultiReport report
                 = new KanendoNonyuTsuchishoCVSMultiReport(item, ninshoshaSource);
         nonyuTsuchishoList.add(report);

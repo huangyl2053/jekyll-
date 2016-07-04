@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.karisanteihokenryononyutsuchishobook;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishobook.KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverProperty;
@@ -141,9 +141,9 @@ public class NonyuTsuchishoBookFuriKaePrintService {
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource>> reportList
                         = KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -176,9 +176,9 @@ public class NonyuTsuchishoBookFuriKaePrintService {
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource>> reportList
                         = KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -195,9 +195,9 @@ public class NonyuTsuchishoBookFuriKaePrintService {
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource>> reportList
                         = KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -273,9 +273,9 @@ public class NonyuTsuchishoBookFuriKaePrintService {
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverSource>> reportList
                         = KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-110 huangh
  */
-public class NonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<NonyuTsuchishoCVSMultiSource> {
+public class NonyuTsuchishoCVSMultiReport extends NonyuTsuchisho<NonyuTsuchishoCVSMultiSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -131,8 +131,8 @@ public class NonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<NonyuTsuchisho
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<NonyuTsuchishoCVSMultiSource>> devidedByPage() {
+        List<NonyuTsuchisho<NonyuTsuchishoCVSMultiSource>> nonyuTsuchishoList = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
@@ -146,14 +146,14 @@ public class NonyuTsuchishoCVSMultiReport extends INonyuTsuchisho<NonyuTsuchisho
         return nonyuTsuchishoList;
     }
 
-    private void editCover(List<INonyuTsuchisho> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストCover) {
+    private void editCover(List<NonyuTsuchisho<NonyuTsuchishoCVSMultiSource>> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストCover) {
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Cover = getNew本算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リストCover);
         NonyuTsuchishoCVSMultiReport reportCover
                 = new NonyuTsuchishoCVSMultiReport(本算定納入通知書情報Cover, ninshoshaSource);
         nonyuTsuchishoList.add(reportCover);
     }
 
-    private void editDetail(List<INonyuTsuchisho> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
+    private void editDetail(List<NonyuTsuchisho<NonyuTsuchishoCVSMultiSource>> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail1 = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail2 = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail3 = new ArrayList<>();

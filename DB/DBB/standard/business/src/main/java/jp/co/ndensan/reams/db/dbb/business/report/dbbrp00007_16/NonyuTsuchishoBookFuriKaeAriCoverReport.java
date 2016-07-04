@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbrp00007_16;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
@@ -27,7 +27,7 @@ import lombok.NonNull;
  *
  * @reamsid_L DBB-9110-160 wangjie2
  */
-public class NonyuTsuchishoBookFuriKaeAriCoverReport extends INonyuTsuchisho<NonyuTsuchishoBookFuriKaeAriCoverSource> {
+public class NonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchisho<NonyuTsuchishoBookFuriKaeAriCoverSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
@@ -184,8 +184,8 @@ public class NonyuTsuchishoBookFuriKaeAriCoverReport extends INonyuTsuchisho<Non
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<NonyuTsuchishoBookFuriKaeAriCoverSource>> devidedByPage() {
+        List<NonyuTsuchisho<NonyuTsuchishoBookFuriKaeAriCoverSource>> nonyuTsuchishoList = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Cover = getNew本算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リスト);
         NonyuTsuchishoBookFuriKaeAriCoverReport reportCover

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishokigoto;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoRenchoSource;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-080 huangh
  */
-public class HokenryoNonyuTsuchishoKigotoRenchoReport extends INonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource> {
+public class HokenryoNonyuTsuchishoKigotoRenchoReport extends NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -57,8 +57,8 @@ public class HokenryoNonyuTsuchishoKigotoRenchoReport extends INonyuTsuchisho<Ho
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> devidedByPage() {
+        List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> nonyuTsuchishoList = new ArrayList<>();
 
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 = item;
         if (null == 本算定納入通知書情報) {

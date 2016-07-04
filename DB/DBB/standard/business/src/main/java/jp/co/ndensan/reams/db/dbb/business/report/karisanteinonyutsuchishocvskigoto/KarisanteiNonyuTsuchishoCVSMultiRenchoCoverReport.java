@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvski
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
@@ -23,7 +23,7 @@ import lombok.NonNull;
  * @reamsid_L DBB-9110-070 wangjie2
  */
 public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
-        extends INonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> {
+        extends NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource> {
 
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
@@ -73,8 +73,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> reportLst = new ArrayList<>();
+    public List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource>> devidedByPage() {
+        List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource>> reportLst = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         if (納入通知書期情報リスト.isEmpty()) {
             納入通知書期情報リスト = new ArrayList<>();

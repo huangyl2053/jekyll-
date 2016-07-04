@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-060 huangh
  */
-public class KarisanteiNonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> {
+public class KarisanteiNonyuTsuchishoCVSKakukoRenchoReport extends NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource> {
 
     private final KariSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
@@ -120,8 +120,8 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchis
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
-        List<INonyuTsuchisho> nonyuTsuchishoList = new ArrayList<>();
+    public List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource>> devidedByPage() {
+        List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource>> nonyuTsuchishoList = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
@@ -135,14 +135,16 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoReport extends INonyuTsuchis
         return nonyuTsuchishoList;
     }
 
-    private void editCover(List<INonyuTsuchisho> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストCover) {
+    private void editCover(List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource>> nonyuTsuchishoList,
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストCover) {
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報Cover = getNew仮算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リストCover);
         KarisanteiNonyuTsuchishoCVSKakukoRenchoReport reportCover
                 = new KarisanteiNonyuTsuchishoCVSKakukoRenchoReport(仮算定納入通知書情報Cover, ninshoshaSource);
         nonyuTsuchishoList.add(reportCover);
     }
 
-    private void editDetail(List<INonyuTsuchisho> nonyuTsuchishoList, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
+    private void editDetail(List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKakukoRenchoSource>> nonyuTsuchishoList,
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail1 = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストDetail2 = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {

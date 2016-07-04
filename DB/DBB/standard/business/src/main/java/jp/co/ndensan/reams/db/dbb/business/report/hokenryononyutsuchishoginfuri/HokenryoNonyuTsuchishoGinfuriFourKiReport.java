@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishoginfuri
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-090 liangbc
  */
-public class HokenryoNonyuTsuchishoGinfuriFourKiReport extends INonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource> {
+public class HokenryoNonyuTsuchishoGinfuriFourKiReport extends NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource> {
 
     private final HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
@@ -86,9 +86,9 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiReport extends INonyuTsuchisho<H
     }
 
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
+    public List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource>> devidedByPage() {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
-        List<INonyuTsuchisho> reportLst = new ArrayList<>();
+        List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource>> reportLst = new ArrayList<>();
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストReport = new ArrayList<>();
         if (null == 納入通知書期情報リスト) {
             reportLst.add(getNewReport(納入通知書期情報リストReport));
@@ -163,7 +163,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiReport extends INonyuTsuchisho<H
     private void 前中後期のdevidedEdit(
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストReport,
-            List<INonyuTsuchisho> reportLst) {
+            List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource>> reportLst) {
 
         int 銀振印字位置Para = 0;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchi
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
@@ -24,7 +24,7 @@ import lombok.NonNull;
  * @reamsid_L DBB-9110-020 wangjie2
  */
 public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport
-        extends INonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource> {
+        extends NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource> {
 
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
@@ -81,9 +81,9 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport
      * @return List<NonyuTsuchisho>
      */
     @Override
-    public List<INonyuTsuchisho> devidedByPage() {
+    public List<NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource>> devidedByPage() {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
-        List<INonyuTsuchisho> reportLst = new ArrayList<>();
+        List<NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource>> reportLst = new ArrayList<>();
         if (null == 納入通知書期情報リスト) {
             return reportLst;
         }
