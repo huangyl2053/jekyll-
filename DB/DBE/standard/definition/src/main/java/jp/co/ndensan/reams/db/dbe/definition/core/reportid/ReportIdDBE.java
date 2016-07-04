@@ -397,7 +397,11 @@ public enum ReportIdDBE {
     /**
      * 特記事項の帳票ＩＤです。
      */
-    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項"));
+    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項")),
+    /**
+     * 要介護認定結果情報提供票（主治医）の帳票ID。
+     */
+    DBE090001(new ReportId("DBE090001_JohoTeikyoShiryo"), new RString("要介護認定結果情報提供票（主治医）"));
 
     private final ReportId reportId;
 
