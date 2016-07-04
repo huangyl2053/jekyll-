@@ -60,7 +60,7 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
      */
     public ResponseData<ShujiiIkenshoSakuseiryoNyuryokuDiv> onClik_Clear(ShujiiIkenshoSakuseiryoNyuryokuDiv div) {
         getHandler(div).clearValue();
-        return ResponseData.of(div).setState(DBE6080001StateName.検索状態);
+        return ResponseData.of(div).respond();
     }
 
     /**

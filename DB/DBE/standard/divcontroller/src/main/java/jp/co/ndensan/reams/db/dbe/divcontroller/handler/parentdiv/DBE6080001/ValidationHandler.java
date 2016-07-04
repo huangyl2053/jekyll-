@@ -38,7 +38,7 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs validateForMaxCount() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getShujiiKensakuJoken().getTxtMaxCount().getValue().intValue() == 0) {
+        if (div.getShujiiKensakuJoken().getTxtMaxCount().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(
                     ValidationCheckMessages.Validate最大表示件数の必須入力チェック, div.getShujiiKensakuJoken().getTxtMaxCount()));
         }
