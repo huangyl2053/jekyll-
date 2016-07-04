@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -39,10 +38,8 @@ public class NinteiChosaHoshuShokaiValidationHandler {
      */
     public ValidationMessageControlPairs validateForKakutei() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate 依頼日開始 = new FlexibleDate(div.getChosaIraibi().getTxtChosaIraibi().getMinDateString());
-        FlexibleDate 依頼日終了 = new FlexibleDate(div.getChosaIraibi().getTxtChosaIraibi().getMaxDateString());
-        if (依頼日開始.isBefore(依頼日終了)) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.終了日が開始日以前)));
+        if (div.getDgNinteiChosaHoshu().getSelectedItems().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象者を選択)));
         }
         return validPairs;
     }

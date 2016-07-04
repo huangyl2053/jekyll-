@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.Nin
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001.NinteiChosaHoshuShokaiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001.NinteiChosaHoshuShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahoshushokai.NinteiChosaHoshuShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査報酬照会の処理詳細です。
@@ -93,8 +95,12 @@ public class NinteiChosaHoshuShokai {
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
     public ResponseData<NinteiChosaHoshuShokaiFlowParameter> onClick_btnShutsutyoku(NinteiChosaHoshuShokaiDiv div) {
-
-        NinteiChosaHoshuShokaiFlowParameter tempData = getHandler(div).getTempData(new RString("1"));
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei();
+        NinteiChosaHoshuShokaiFlowParameter tempData = new NinteiChosaHoshuShokaiFlowParameter();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(tempData).addValidationMessages(validPairs).respond();
+        }
+        tempData = getHandler(div).getTempData(new RString("1"));
         return ResponseData.of(tempData).respond();
     }
 
@@ -105,9 +111,17 @@ public class NinteiChosaHoshuShokai {
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
     public ResponseData<NinteiChosaHoshuShokaiFlowParameter> onClick_btnPulish(NinteiChosaHoshuShokaiDiv div) {
-
-        NinteiChosaHoshuShokaiFlowParameter tempData = getHandler(div).getTempData(new RString("2"));
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei();
+        NinteiChosaHoshuShokaiFlowParameter tempData = new NinteiChosaHoshuShokaiFlowParameter();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(tempData).addValidationMessages(validPairs).respond();
+        }
+        tempData = getHandler(div).getTempData(new RString("2"));
         return ResponseData.of(tempData).respond();
+    }
+
+    private NinteiChosaHoshuShokaiValidationHandler getValidationHandler(NinteiChosaHoshuShokaiDiv div) {
+        return new NinteiChosaHoshuShokaiValidationHandler(div);
     }
 
     private NinteiChosaHoshuShokaiHandler getHandler(NinteiChosaHoshuShokaiDiv div) {
