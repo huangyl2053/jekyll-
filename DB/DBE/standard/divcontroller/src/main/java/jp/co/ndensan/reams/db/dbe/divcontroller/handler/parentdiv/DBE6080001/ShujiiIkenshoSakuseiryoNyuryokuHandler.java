@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubu
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shujii.ShiteiiFlg;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -164,6 +165,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         div.getShinseiJoho().getTxtIryoKikanName().setValue(div.getShujii().getDgShujii().getClickedItem().getIryokikan());
         div.getShinseiJoho().getTxtShujiiCode().setValue(div.getShujii().getDgShujii().getClickedItem().getCode());
         div.getShinseiJoho().getTxtShujiiName().setValue(div.getShujii().getDgShujii().getClickedItem().getShujiiName());
+        div.setHdnShichosonCode(div.getShujii().getDgShujii().getClickedItem().getShichosonCode());
         List<dgShinsakaiIin_Row> rowList = new ArrayList<>();
         for (ShujiiJissekiIchiranBusiness business : businessList) {
             dgShinsakaiIin_Row row = new dgShinsakaiIin_Row();
@@ -190,7 +192,6 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             } else {
                 row.setShiteiiFlag(ShiteiiFlg.なれない.get名称());
             }
-
             row.setHoshuJissekiRirekiNo(new RString(business.get主治医意見書作成依頼履歴番号_報酬実績情報()));
             rowList.add(row);
         }
@@ -356,8 +357,14 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
 
     private void setMeisai(dgShinsakaiIin_Row row) {
         div.getShinseiJohoMeisai().getTxtShinseibi().setValue(new FlexibleDate(row.getShinseibi()));
-        // TODO 共有子Divにて、初期化メソッドは提供なし、実装できない。
-//        div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput()
+        div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().initialize(
+                new LasdecCode(div.getHdnShichosonCode()),
+                new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                SubGyomuCode.DBE認定支援,
+                row.getShujiiIryoKikanCode(),
+                row.getShujiiIryoKikan(),
+                row.getShujiiCode(),
+                row.getShujii());
         div.getShinseiJohoMeisai().getXtIkenshoSakuseiIraiNengappi().setValue(new FlexibleDate(row.getIraiNengappi()));
         div.getShinseiJohoMeisai().getTxtIkenshoKinyuNengappi().setValue(new FlexibleDate(row.getKinyuNengappi()));
         div.getShinseiJohoMeisai().getTxtIkenshoJuryoNengappi().setValue(new FlexibleDate(row.getJuryoNengappi()));

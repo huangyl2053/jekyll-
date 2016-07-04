@@ -43,6 +43,8 @@ public class ShujiiIkenshoSakuseiryoNyuryokuDiv extends Panel {
     private ShinsakaiMessageDiv ShinsakaiMessage;
     @JsonProperty("hdnState")
     private RString hdnState;
+    @JsonProperty("hdnShichosonCode")
+    private RString hdnShichosonCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -156,6 +158,24 @@ public class ShujiiIkenshoSakuseiryoNyuryokuDiv extends Panel {
     @JsonProperty("hdnState")
     public void setHdnState(RString hdnState) {
         this.hdnState = hdnState;
+    }
+
+    /*
+     * gethdnShichosonCode
+     * @return hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public RString getHdnShichosonCode() {
+        return hdnShichosonCode;
+    }
+
+    /*
+     * sethdnShichosonCode
+     * @param hdnShichosonCode hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public void setHdnShichosonCode(RString hdnShichosonCode) {
+        this.hdnShichosonCode = hdnShichosonCode;
     }
 
     /*
