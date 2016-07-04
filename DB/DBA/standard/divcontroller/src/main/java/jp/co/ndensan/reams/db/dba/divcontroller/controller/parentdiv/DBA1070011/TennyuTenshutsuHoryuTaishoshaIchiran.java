@@ -221,7 +221,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && !div.getDgTenshutsu().getDataSource().isEmpty()) {
             ValidationMessageControlPairs message = new TennyuTenshutsuHoryuTaishoshaIchiranValidationHandler(div).doCheck();
             if (message.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(message).respond();
