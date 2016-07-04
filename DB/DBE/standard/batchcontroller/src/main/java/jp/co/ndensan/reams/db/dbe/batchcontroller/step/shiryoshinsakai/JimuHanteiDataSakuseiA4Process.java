@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IinYobihanteiKinyuhyoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReport;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -35,29 +35,29 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 委員用予備判定記入表情報バッチクラスです。
+ * 事務局予備判定記入表情報バッチクラスです。
  *
- * @reamsid_L DBE-0150-200 linghuhang
+ * @reamsid_L DBE-0150-190 linghuhang
  */
-public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoEntity> {
+public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoEntity> {
 
-    private static final RString SELECT_HANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
+    private static final RString SELECT_JIMUHANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getJimuHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
+            new RString(JimukyokuyoYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
-    private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
-    private IinYobihanteiKinyuhyoBusiness business;
+    private JimuTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
+    private JimuYobihanteiKinyuhyoBusiness business;
     private int データ件数;
     private static final int 満ページ件数 = 10;
     @BatchWriter
-    private BatchReportWriter<IinYobihanteiKinyuhyoReportSource> batchWrite;
-    private ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter;
+    private BatchReportWriter<JimukyokuyoYobihanteiKinyuhyoReportSource> batchWrite;
+    private ReportSourceWriter<JimukyokuyoYobihanteiKinyuhyoReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
         データ件数 = 0;
-        myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
+        myBatisParameter = paramter.toJimuTokkiJikouItiziHanteiMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
         myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
@@ -65,21 +65,21 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_HANTEIJOHO, myBatisParameter);
+        return new BatchDbReader(SELECT_JIMUHANTEIJOHO, myBatisParameter);
     }
 
     @Override
     protected void usualProcess(HanteiJohoEntity entity) {
-        business = new IinYobihanteiKinyuhyoBusiness(entity, paramter);
-        IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
+        business = new JimuYobihanteiKinyuhyoBusiness(entity, paramter);
+        JimukyokuyoYobihanteiKinyuhyoReport report = new JimukyokuyoYobihanteiKinyuhyoReport(business);
         データ件数 = データ件数 + 1;
         report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517022.getReportId().value())
-                .addBreak(new BreakerCatalog<IinYobihanteiKinyuhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517002.getReportId().value())
+                .addBreak(new BreakerCatalog<JimukyokuyoYobihanteiKinyuhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -91,14 +91,14 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
     @Override
     protected void keyBreakProcess(HanteiJohoEntity t) {
         if (データ件数 % 満ページ件数 == 0) {
-            IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
+            JimukyokuyoYobihanteiKinyuhyoReport report = new JimukyokuyoYobihanteiKinyuhyoReport(business);
             report.writeBy(reportSourceWriter);
         }
     }
 
     private void outputJokenhyoFactory() {
-        RString id = ReportIdDBE.DBE517022.getReportId().getColumnValue();
-        RString idName = ReportIdDBE.DBE517022.getReportName();
+        RString id = ReportIdDBE.DBE517002.getReportId().getColumnValue();
+        RString idName = ReportIdDBE.DBE517002.getReportName();
         RString 総ページ数 = new RString(batchWrite.getPageCount());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(

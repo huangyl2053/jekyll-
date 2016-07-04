@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.gaikyotokkiichiran;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuGaikyouTokkiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,16 +17,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class GaikyoTokkiIchiranReport extends Report<GaikyoTokkiIchiranReportSource> {
 
-    private final GaikyoTokkiIchiranEntity entity;
+    private final JimuGaikyouTokkiBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity 事務局用概況特記一覧表のEntity
+     * @param business 事務局用概況特記一覧表
      */
-    public GaikyoTokkiIchiranReport(GaikyoTokkiIchiranEntity entity) {
+    public GaikyoTokkiIchiranReport(JimuGaikyouTokkiBusiness business) {
 
-        this.entity = entity;
+        this.business = business;
     }
 
     /**
@@ -35,7 +35,7 @@ public class GaikyoTokkiIchiranReport extends Report<GaikyoTokkiIchiranReportSou
      */
     @Override
     public void writeBy(ReportSourceWriter<GaikyoTokkiIchiranReportSource> reportSourceWriter) {
-        IGaikyoTokkiIchiranEditor editor = new GaikyoTokkiIchiranEditor(entity);
+        IGaikyoTokkiIchiranEditor editor = new GaikyoTokkiIchiranEditor(business);
         IGaikyoTokkiIchiranBuilder builder = new GaikyoTokkiIchiranBuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }

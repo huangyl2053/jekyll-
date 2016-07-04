@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定申請者の情報です。
@@ -24,4 +27,8 @@ public class NinteiShinseiJohoEntity {
     private FlexibleDate ninteiShinseiYMD;
     private FlexibleDate shinsakaiKaisaiYMD;
     private FlexibleDate ninteichosaJisshiYMD;
+    private AtenaMeisho hihokenshaName;
+    private RString hihokenshaNo;
+    private RString shoKisaiHokenshaNo;
+    private Code koroshoIfShikibetsuCode;
 }

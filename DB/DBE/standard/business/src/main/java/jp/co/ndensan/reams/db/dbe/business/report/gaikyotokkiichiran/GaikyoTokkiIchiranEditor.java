@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.gaikyotokkiichiran;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuGaikyouTokkiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -28,15 +28,15 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
     private static final RString DATE_秒 = new RString("秒");
     private static final RString DATE_作成 = new RString("作成");
     private static final int INT_4 = 4;
-    private final GaikyoTokkiIchiranEntity item;
+    private final JimuGaikyouTokkiBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 事務局用概況特記一覧表
+     * @param business 事務局用概況特記一覧表
      */
-    protected GaikyoTokkiIchiranEditor(GaikyoTokkiIchiranEntity item) {
-        this.item = item;
+    protected GaikyoTokkiIchiranEditor(JimuGaikyouTokkiBusiness business) {
+        this.business = business;
     }
 
     /**
@@ -66,30 +66,30 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_作成);
         source.printTimeStamp = printTimeStampSb.toRString();
-        source.shinsakaiNo = get審査会番号(item.get審査会番号());
-        source.nendo = get年度(item.get審査会番号());
+        source.shinsakaiNo = get審査会番号(business.get審査会番号());
+        source.nendo = get年度(business.get審査会番号());
         source.title = new RString("認定情報<概況特記一覧>");
-        source.listNo_1 = item.getNo();
-        source.gaikyoTokkiText1 = item.get概況特記テキスト１();
-        source.gaikyoTokkiText2 = item.get概況特記テキスト２();
-        source.gaikyoTokkiText3 = item.get概況特記テキスト３();
-        source.gaikyoTokkiText4 = item.get概況特記テキスト４();
-        source.gaikyoTokkiText5 = item.get概況特記テキスト５();
-        source.gaikyoTokkiText6 = item.get概況特記テキスト６();
-        source.gaikyoTokkiText7 = item.get概況特記テキスト７();
-        source.gaikyoTokkiText8 = item.get概況特記テキスト８();
-        source.gaikyoTokkiText9 = item.get概況特記テキスト９();
-        source.gaikyoTokkiText10 = item.get概況特記テキスト１０();
-        source.imgGaikyoTokki1 = item.get概況特記イメージ１();
-        source.imgGaikyoTokki2 = item.get概況特記イメージ２();
-        source.imgGaikyoTokki3 = item.get概況特記イメージ３();
-        source.imgGaikyoTokki4 = item.get概況特記イメージ４();
-        source.imgGaikyoTokki5 = item.get概況特記イメージ５();
-        source.imgGaikyoTokki6 = item.get概況特記イメージ６();
-        source.imgGaikyoTokki7 = item.get概況特記イメージ７();
-        source.imgGaikyoTokki8 = item.get概況特記イメージ８();
-        source.imgGaikyoTokki9 = item.get概況特記イメージ９();
-        source.imgGaikyoTokki10 = item.get概況特記イメージ１０();
+        source.listNo_1 = business.getNo();
+        source.gaikyoTokkiText1 = business.get概況特記テキスト１();
+        source.gaikyoTokkiText2 = business.get概況特記テキスト２();
+        source.gaikyoTokkiText3 = business.get概況特記テキスト３();
+        source.gaikyoTokkiText4 = business.get概況特記テキスト４();
+        source.gaikyoTokkiText5 = business.get概況特記テキスト５();
+        source.gaikyoTokkiText6 = business.get概況特記テキスト６();
+        source.gaikyoTokkiText7 = business.get概況特記テキスト７();
+        source.gaikyoTokkiText8 = business.get概況特記テキスト８();
+        source.gaikyoTokkiText9 = business.get概況特記テキスト９();
+        source.gaikyoTokkiText10 = business.get概況特記テキスト１０();
+        source.imgGaikyoTokki1 = business.get概況特記イメージ１();
+        source.imgGaikyoTokki2 = business.get概況特記イメージ２();
+        source.imgGaikyoTokki3 = business.get概況特記イメージ３();
+        source.imgGaikyoTokki4 = business.get概況特記イメージ４();
+        source.imgGaikyoTokki5 = business.get概況特記イメージ５();
+        source.imgGaikyoTokki6 = business.get概況特記イメージ６();
+        source.imgGaikyoTokki7 = business.get概況特記イメージ７();
+        source.imgGaikyoTokki8 = business.get概況特記イメージ８();
+        source.imgGaikyoTokki9 = business.get概況特記イメージ９();
+        source.imgGaikyoTokki10 = business.get概況特記イメージ１０();
         return source;
     }
 

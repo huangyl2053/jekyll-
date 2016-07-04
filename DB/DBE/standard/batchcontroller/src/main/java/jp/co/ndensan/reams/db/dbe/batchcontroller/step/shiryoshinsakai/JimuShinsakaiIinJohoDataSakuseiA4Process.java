@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishi
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa4.ShinsakaishiryoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
@@ -39,18 +39,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 委員用審査対象者一覧表情報バッチクラスです。
+ * 事務局用介護認定審査対象者一覧表情報バッチクラスです。
  *
- * @reamsid_L DBE-0150-200 linghuhang
+ * @reamsid_L DBE-0150-190 linghuhang
  */
-public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<ShinseiJohoEntity> {
+public class JimuShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<ShinseiJohoEntity> {
 
-    private static final RString SELECT_SHINASKAIIINJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinseiJoho");
+    private static final RString SELECT_JIMUSHINASKAIIINJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getJimuShinseiJoho");
     private static final int INT_4 = 4;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
-    private IinShinsakaiIinJohoMyBatisParameter myBatisParameter;
+    private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private int no;
     private int count;
@@ -61,19 +61,19 @@ public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<Sh
     @Override
     protected void initialize() {
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
+        myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setHaishiFlag_False(IsHaishi.廃止されていない.is廃止());
         myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
         myBatisParameter.setSisutemuYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-        shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);
-        count = mapper.getShinseiJohoCount(myBatisParameter);
+        shinsakaiIinJohoList = mapper.getJimuShinsakaiIinJoho(myBatisParameter);
+        count = mapper.getJimuShinseiJohoCount(myBatisParameter);
         no = 0;
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_SHINASKAIIINJOHO, myBatisParameter);
+        return new BatchDbReader(SELECT_JIMUSHINASKAIIINJOHO, myBatisParameter);
     }
 
     @Override
@@ -98,9 +98,9 @@ public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<Sh
 
     private DbT5102NinteiKekkaJohoEntity get前回要介護認定結果情報(ShinseishoKanriNo 申請管理番号) {
         myBatisParameter.setShinseishoKanriNo(申請管理番号);
-        DbT5121ShinseiRirekiJohoEntity dbT5121Entity = mapper.get前回の申請管理番号(myBatisParameter);
+        DbT5121ShinseiRirekiJohoEntity dbT5121Entity = mapper.get事務局前回の申請管理番号(myBatisParameter);
         myBatisParameter.setShinseishoKanriNo(dbT5121Entity.getZenkaiShinseishoKanriNo());
-        return mapper.get前回二次判定(myBatisParameter);
+        return mapper.get事務局前回二次判定(myBatisParameter);
     }
 
     private void outputJokenhyoFactory() {

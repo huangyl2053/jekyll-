@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3.ShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -15,13 +16,9 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShins
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoItem;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -35,13 +32,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -90,8 +84,9 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
 
     @Override
     protected void process(ShinseiJohoEntity entity) {
-        ShinsakaishiryoItem item = setShinsakaishiryoItem(entity);
-        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(item);
+        DbT5102NinteiKekkaJohoEntity dbT5102Entity = get前回要介護認定結果情報(entity.getShinseishoKanriNo());
+        JimuShinsakaishiryoBusiness business = new JimuShinsakaishiryoBusiness(paramter, entity, dbT5102Entity, shinsakaiIinJohoList, no, count);
+        ShinsakaishiryoA3Report report = new ShinsakaishiryoA3Report(business);
         report.writeBy(reportSourceWriterA3);
         no = no + 1;
     }
@@ -99,32 +94,6 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
     @Override
     protected void afterExecute() {
         outputJokenhyoFactory();
-    }
-
-    private ShinsakaishiryoItem setShinsakaishiryoItem(ShinseiJohoEntity entity) {
-        ShinsakaishiryoItem item = new ShinsakaishiryoItem();
-        item.set審査会番号(paramter.getShinsakaiKaisaiNo());
-        item.set審査会開催年月日(get審査会開催年月日());
-        item.set合議体番号(paramter.getGogitaiNo());
-        item.set審査対象者数(new RString(count));
-        item.set審査員一覧(shinsakaiIinJohoList.get(no).getShinsakaiIinShimei().getColumnValue());
-        item.setNo(no + 1);
-        item.set審査会審査順(new RString(entity.getShinsakaiOrder()));
-        item.set保険者(entity.getShoKisaiHokenshaNo());
-        item.set被保険者(entity.getHihokenshaNo());
-        item.set氏名(entity.getHihokenshaName().getColumnValue());
-        item.set性別(Seibetsu.toValue(entity.getSeibetsu().getColumnValue()).get名称());
-        item.set年齢(new RString(entity.getAge()));
-        DbT5102NinteiKekkaJohoEntity dbT5102Entity = get前回要介護認定結果情報(entity.getShinseishoKanriNo());
-        item.set前回二次(get要介護状態区分(dbT5102Entity.getNijiHanteiYokaigoJotaiKubunCode()));
-        item.set前回期間(get前回期間(dbT5102Entity.getNijiHanteiNinteiYukoKikan()));
-        item.set二時判定認定有効開始年月日(dbT5102Entity.getNijiHanteiNinteiYukoKaishiYMD());
-        item.set二時判定認定有効終了年月日(dbT5102Entity.getNijiHanteiNinteiYukoShuryoYMD());
-        item.set一次判定(get要介護認定一次判定結果(entity.getIchijiHanteiKekkaCode()));
-        item.set二次判定(get要介護状態区分(entity.getJotaiKubunCode()));
-        item.set警告(entity.getIchijiHnateiKeikokuCode());
-        item.set基準時間(new RString(entity.getKijunJikan()));
-        return item;
     }
 
     private DbT5102NinteiKekkaJohoEntity get前回要介護認定結果情報(ShinseishoKanriNo 申請管理番号) {
@@ -139,37 +108,6 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         前回期間.append(期間);
         前回期間.append(new RString("ヵ月"));
         return 前回期間.toRString();
-    }
-
-    private RString get要介護状態区分(Code 状態区分コード) {
-        if (状態区分コード != null && !状態区分コード.isEmpty()) {
-            return YokaigoJotaiKubun09.toValue(状態区分コード.getColumnValue()).get名称();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get要介護認定一次判定結果(Code 判定結果コード) {
-        if (判定結果コード != null && !判定結果コード.isEmpty()) {
-            return IchijiHanteiKekkaCode09.toValue(判定結果コード.getColumnValue()).get名称();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get審査会開催年月日() {
-        RStringBuilder 審査会開催年月日 = new RStringBuilder();
-        審査会開催年月日.append(パターン33(paramter.getShinsakaiKaisaiYoteiYMD()));
-        審査会開催年月日.append(paramter.getShinsakaiKaishiYoteiTime().substring(0, 2));
-        審査会開催年月日.append(new RString("時"));
-        審査会開催年月日.append(paramter.getShinsakaiKaishiYoteiTime().substring(2));
-        審査会開催年月日.append(new RString("分"));
-        return 審査会開催年月日.toRString();
-    }
-
-    private RString パターン33(FlexibleDate 年月日) {
-        if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-        }
-        return RString.EMPTY;
     }
 
     private void outputJokenhyoFactory() {

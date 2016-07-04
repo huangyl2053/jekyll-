@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -51,5 +52,14 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      */
     public IinTuutishoMyBatisParameter toIinTuutishoMyBatisParameter() {
         return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo);
+    }
+
+    /**
+     * 事務局追加資料鑑情報のMyBatisParameterに転換します。
+     *
+     * @return IinTuutishoMyBatisParameter
+     */
+    public JimuTuutishoMyBatisParameter toJimuTuutishoMyBatisParameter() {
+        return new JimuTuutishoMyBatisParameter(shinsakaiKaisaiNo);
     }
 }

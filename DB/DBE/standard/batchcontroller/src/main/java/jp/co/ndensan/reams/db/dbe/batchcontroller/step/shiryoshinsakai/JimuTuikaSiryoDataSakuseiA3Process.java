@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.tsuikashiryokagamia3.TsuikashiryokagamiA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.IinTuikaSiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
@@ -28,20 +28,20 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護認定追加資料鑑情報バッチクラスです。
+ * 事務局用介護認定追加資料鑑情報バッチクラスです。
  *
- * @reamsid_L DBE-0150-200 linghuhang
+ * @reamsid_L DBE-0150-190 linghuhang
  */
-public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuikaSiryoEntity> {
+public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuikaSiryoEntity> {
 
-    private static final RString SELECT_IINTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getIinTuikaSiryo");
+    private static final RString SELECT_JIMUTUIKASIRYO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getJimuTuikaSiryo");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
             new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final int 満ページ件数 = 10;
     private IinTuikaSiryoProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
-    private IinTuutishoMyBatisParameter myBatisParameter;
+    private JimuTuutishoMyBatisParameter myBatisParameter;
     private JimuTuikaSiryoBusiness business;
     private int データ件数;
     @BatchWriter
@@ -50,14 +50,14 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuik
 
     @Override
     protected void initialize() {
-        myBatisParameter = paramter.toIinTuutishoMyBatisParameter();
+        myBatisParameter = paramter.toJimuTuutishoMyBatisParameter();
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
         データ件数 = 0;
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_IINTUIKASIRYO, myBatisParameter);
+        return new BatchDbReader(SELECT_JIMUTUIKASIRYO, myBatisParameter);
     }
 
     @Override
@@ -78,12 +78,12 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<IinTuik
 
     @Override
     protected void usualProcess(IinTuikaSiryoEntity entity) {
-        List<ShinsakaiIinJohoEntity> 審査員 = mapper.getIinShimei(myBatisParameter);
-        IinTuikaSiryoEntity siryoEntity = mapper.getShinsakaiKaisaiKekkaJoho(myBatisParameter);
+        List<ShinsakaiIinJohoEntity> 審査員 = mapper.getJimuShimei(myBatisParameter);
+        IinTuikaSiryoEntity siryoEntity = mapper.getJimuShinsakaiKaisaiKekkaJoho(myBatisParameter);
         business = new JimuTuikaSiryoBusiness(entity,
                 審査員,
                 paramter,
-                mapper.getShinsakaiWariateJohoCount(myBatisParameter),
+                mapper.getJimuShinsakaiWariateJohoCount(myBatisParameter),
                 siryoEntity,
                 RString.EMPTY);
 
