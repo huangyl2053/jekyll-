@@ -17,7 +17,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1690-020 dongyabin
  */
-public class IkenshoJissekiIchiranChange {
+public final class IkenshoJissekiIchiranChange {
+
+    private IkenshoJissekiIchiranChange() {
+    }
 
     private static final RString MARU = new RString("○");
 
@@ -73,5 +76,4 @@ public class IkenshoJissekiIchiranChange {
         RDate date_tem = new RDate(date.toString());
         return date_tem.wareki().toDateString();
     }
-
 }

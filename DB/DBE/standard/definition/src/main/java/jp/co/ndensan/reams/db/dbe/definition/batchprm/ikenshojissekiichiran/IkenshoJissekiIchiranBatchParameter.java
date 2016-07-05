@@ -10,9 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 報告資料作成_バッチフロークラスパラメータクラスです。
+ * 主治医意見書作成実績集計表_バッチフロークラスパラメータクラスです。
  *
- * @reamsid_L DBE-1450-020 wangxiaodong
+ * @reamsid_L DBE-1690-020 dongyabin
  */
 @Setter
 @Getter
