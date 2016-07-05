@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  */
 public class TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+
+    public static final String ITEM_NENDO2 = "nendo2";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+    public static final String ITEM_TSUCHISHONO = "tsuchishoNo";
 
     @ReportItem(name = "nendo2", length = 4, order = 1)
     public RString nendo2;

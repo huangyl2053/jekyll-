@@ -5,89 +5,86 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidotsuchisho;
 
+import java.util.List;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.NonNull;
 
 /**
  * 異動賦課情報一時テーブルに登録するパラメータです。
  *
- * @reamsid_L DBB-0890-040 zhangrui
+ * @reamsid_L DBB-0890-040 xicongwang
  */
+@lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class IdofukaJohoTempParameter {
+public final class IdofukaJohoTempParameter extends KozaSearchParameter
+        implements IMyBatisParameter {
 
     private final FlexibleYear 調定年度;
     private final FlexibleYear 調定年度前年;
     private final FlexibleYear 賦課年度;
-    private final RString 更正前後区分;
     private final RString 作成処理名;
     private final YMDHMS 調定日時;
     private final RString 特別徴収対象者情報;
     private final RString 特別徴収追加候補者情報;
+    private final RString 処理日;
+    private final RString 科目コード;
 
     private IdofukaJohoTempParameter(
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
-            RString 更正前後区分,
             RString 作成処理名,
-            YMDHMS 調定日時) {
+            YMDHMS 調定日時,
+            RString 特別徴収対象者情報,
+            RString 特別徴収追加候補者情報,
+            RString 処理日,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list,
+            RString 科目コード) {
+        super(searchkey, list);
+        this.科目コード = 科目コード;
+        this.処理日 = 処理日;
         this.調定年度 = 調定年度;
         this.調定年度前年 = 調定年度.minusYear(1);
         this.賦課年度 = 賦課年度;
-        this.更正前後区分 = 更正前後区分;
         this.作成処理名 = 作成処理名;
         this.調定日時 = 調定日時;
-        // TODO UE特徴分配.Enum.通知内容コード.特別徴収対象者情報
-        this.特別徴収対象者情報 = RString.EMPTY;
-        // TODO UE特徴分配.Enum.通知内容コード.特別徴収追加候補者情報
-        this.特別徴収追加候補者情報 = RString.EMPTY;
+        this.特別徴収対象者情報 = 特別徴収対象者情報;
+        this.特別徴収追加候補者情報 = 特別徴収追加候補者情報;
     }
 
     /**
      * パラメータを作成する。
      *
-     * @param 調定年度 調定年度
-     * @param 賦課年度 賦課年度
-     * @param 更正前後区分 更正前後区分
-     * @param 作成処理名 作成処理名
-     * @param 調定日時 調定日時
-     * @return 作成されたパラメータ
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 作成処理名 RString
+     * @param 調定日時 YMDHMS
+     * @param 特別徴収対象者情報 RString
+     * @param 特別徴収追加候補者情報 RString
+     * @param 処理日 RString
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
+     * @param 科目コード RString
+     * @return IdofukaJohoTempParameter パラメータ
      */
     public static IdofukaJohoTempParameter createParameter(
-            @NonNull FlexibleYear 調定年度,
-            @NonNull FlexibleYear 賦課年度,
-            @NonNull RString 更正前後区分,
-            @NonNull RString 作成処理名,
-            @NonNull YMDHMS 調定日時) {
-        return new IdofukaJohoTempParameter(調定年度, 賦課年度, 更正前後区分, 作成処理名, 調定日時);
-    }
-
-    /**
-     * パラメータを作成する。
-     *
-     * @param 調定年度 調定年度
-     * @param 賦課年度 賦課年度
-     * @param 更正前後区分 更正前後区分
-     * @return 作成されたパラメータ
-     */
-    public static IdofukaJohoTempParameter createParameter(
-            @NonNull FlexibleYear 調定年度,
-            @NonNull FlexibleYear 賦課年度,
-            @NonNull RString 更正前後区分) {
-        return new IdofukaJohoTempParameter(調定年度, 賦課年度, 更正前後区分, null, null);
-    }
-
-    /**
-     * パラメータを作成する。
-     *
-     * @param 調定年度 調定年度
-     * @return 作成されたパラメータ
-     */
-    public static IdofukaJohoTempParameter createParameter(
-            @NonNull FlexibleYear 調定年度) {
-        return new IdofukaJohoTempParameter(調定年度, null, null, null, null);
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            RString 作成処理名,
+            YMDHMS 調定日時,
+            RString 特別徴収対象者情報,
+            RString 特別徴収追加候補者情報,
+            RString 処理日,
+            IKozaSearchKey searchkey,
+            List<KamokuCode> list,
+            RString 科目コード) {
+        return new IdofukaJohoTempParameter(調定年度, 賦課年度, 作成処理名, 調定日時, 特別徴収対象者情報,
+                特別徴収追加候補者情報, 処理日, searchkey, list, 科目コード);
     }
 }
