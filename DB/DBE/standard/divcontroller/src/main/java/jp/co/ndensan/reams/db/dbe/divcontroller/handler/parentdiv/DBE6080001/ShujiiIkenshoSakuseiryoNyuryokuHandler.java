@@ -171,13 +171,13 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         for (ShujiiJissekiIchiranBusiness business : businessList) {
             dgShinsakaiIin_Row row = new dgShinsakaiIin_Row();
             row.setColumnState(RString.EMPTY);
-            row.setShinseibi(nullToEmpty(business.get認定申請年月日()));
+            row.setShinseibi(dateFormat(business.get認定申請年月日()));
             row.setNinteiShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時コード()).get名称());
             row.setShujiiIryoKikan(nullToEmpty(business.get医療機関名称()));
             row.setShujii(business.get主治医氏名());
-            row.setIraiNengappi(business.get主治医意見書作成依頼年月日());
-            row.setKinyuNengappi(business.get主治医意見書記入年月日());
-            row.setJuryoNengappi(business.get主治医意見書受領年月日());
+            row.setIraiNengappi(dateFormat(business.get主治医意見書作成依頼年月日()));
+            row.setKinyuNengappi(dateFormat(business.get主治医意見書記入年月日()));
+            row.setJuryoNengappi(dateFormat(business.get主治医意見書受領年月日()));
             row.setIshiKubun(IshiKubunCode.toValue(business.get医師区分コード()).get名称());
             row.setIkenshoSakuseiryo(DecimalFormatter.toコンマ区切りRString(new Decimal(business.get主治医意見書作成料()), 0));
             row.setIkenshoBettoShinryohi(DecimalFormatter.toコンマ区切りRString(new Decimal(business.get主治医意見書別途診療費()), 0));
@@ -355,7 +355,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
     }
 
     private void setMeisai(dgShinsakaiIin_Row row) {
-        div.getShinseiJohoMeisai().getTxtShinseibi().setValue(new FlexibleDate(row.getShinseibi()));
+        div.getShinseiJohoMeisai().getTxtShinseibi().setValue(toFlexibleDate(row.getShinseibi()));
         div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().initialize(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
@@ -364,9 +364,9 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
                 row.getShujiiIryoKikan(),
                 row.getShujiiCode(),
                 row.getShujii());
-        div.getShinseiJohoMeisai().getXtIkenshoSakuseiIraiNengappi().setValue(new FlexibleDate(row.getIraiNengappi()));
-        div.getShinseiJohoMeisai().getTxtIkenshoKinyuNengappi().setValue(new FlexibleDate(row.getKinyuNengappi()));
-        div.getShinseiJohoMeisai().getTxtIkenshoJuryoNengappi().setValue(new FlexibleDate(row.getJuryoNengappi()));
+        div.getShinseiJohoMeisai().getXtIkenshoSakuseiIraiNengappi().setValue(toFlexibleDate(row.getIraiNengappi()));
+        div.getShinseiJohoMeisai().getTxtIkenshoKinyuNengappi().setValue(toFlexibleDate(row.getKinyuNengappi()));
+        div.getShinseiJohoMeisai().getTxtIkenshoJuryoNengappi().setValue(toFlexibleDate(row.getJuryoNengappi()));
         div.getShinseiJohoMeisai().getTxtIshiKubun().setValue(row.getIshiKubun());
         div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().setValue(toDecimal(row.getIkenshoSakuseiryo()));
         div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().setValue(toDecimal(row.getIkenshoBettoShinryohi()));
@@ -386,6 +386,20 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         } else {
             return new Decimal(obj.replace(コンマ, RString.EMPTY).toString());
         }
+    }
+
+    private RString dateFormat(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(obj).wareki().toDateString();
+    }
+
+    private FlexibleDate toFlexibleDate(RString obj) {
+        if (obj == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return new FlexibleDate(new RDate(obj.toString()).toDateString());
     }
 
     private RString nullToEmpty(RString obj) {
