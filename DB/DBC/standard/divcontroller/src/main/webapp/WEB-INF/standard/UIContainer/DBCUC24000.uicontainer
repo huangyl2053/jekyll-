@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC24000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "住宅改修理由書作成手数料請求書兼申請書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2400011",
+     "toLayoutTitle": "住宅改修理由書作成手数料請求書兼申請書作成",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2400011",
+     "layoutTitle": "住宅改修理由書作成手数料請求書兼申請書作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -78,7 +78,7 @@
         DbT7060_Keikaku."jigyoshaNameKana"                              AS dbT7060_Keikaku事業者カナ名称,
         DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,
         DbT7060_Itaku."jigyoshaName"					AS dbT7060_Itaku事業者名称,
-        DbT7060_Itaku."jigyoshaNameKana"                                AS DbT7060_Itaku.事業者カナ名称,
+        DbT7060_Itaku."jigyoshaNameKana"                                AS DbT7060_Itaku事業者カナ名称,
         DbV4001."jukyuShinseiJiyu"						AS dbV4001受給申請事由,
         DbV4001."jukyuShinseiYMD"						AS dbV4001受給申請年月日,
         DbV4001."yokaigoJotaiKubunCode"					AS dbV4001要介護認定状態区分コード,
@@ -148,8 +148,54 @@
         (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
         FROM rgdb."DbT7062KaigoJigyoshaDaihyosha"
         GROUP BY "jigyoshaNo") AS A)
-        LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho"                                     AS DbV4001
-        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+        <if test="抽出区分 == 1">
+            LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho"                                     AS DbV4001
+            ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
+        </if>
+        <if test="抽出区分 != 1">
+            LEFT OUTER JOIN (
+                SELECT
+                *
+                FROM (
+                    SELECT
+                    DbT3005_all."hihokenshaNo" as 被保険者番号,
+                    DbT3005_all."taishoYM" as 対象年月,
+                    DbT3005_all."rarekiNo" as 履歴番号,
+                    DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+                    DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+                    DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+                    DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
+                    DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
+                    DbT4001."ninteiYMD" as 受給認定日,
+                    DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+                    DbT4001."minashiCode" as みなし要介護区分コード,
+                    DbT4001."chokkinIdoYMD" as 直近異動事由コード,
+                    ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" OVER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                    FROM
+                    rgdb.DbT3005KyotakuKeikakuTodokede As DbT3005_all
+                    INNER JOIN
+                    rgdb.DbT4001JukyushaDaicho As DbT4001
+                    ON DbT4001.hihokenshaNo = DbT3005_all.hihokenshaNo
+                    AND DbT4001.logicalDeletedFlag = false
+                    AND DbT4001."yukoMukoKubun" = '1'
+                    <choose>
+                        <when test="抽出区分 == 2 and 基準年月日 != null and !基準年月日.isEmpty()">
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <![CDATA[<=]]> #{基準年月日}
+                            AND #{基準年月日} <![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD
+                        </when>
+                        <otherwise>
+                            AND DbT4001.ninteiYukoKikanKaishiYMD <![CDATA[<=]]> DbT3005_all.todokedeYMD
+                            AND DbT3005_all.todokedeYMD <![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD	
+                        </otherwise>
+                    </choose>
+                ) AS DbT4001_corresponding
+                WHERE
+                DbT4001_corresponding.番号 = 1
+            )As DbV4001
+            ON DbV4001.hihokenshaNo = DbT3005.hihokenshaNo
+            AND DbV4001.taishoYM = DbT3005.taishoYM
+            AND DbV4001.rirekiNo = DbT3005.rirekiNo
+        </if>
         LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho"                                     AS DbT4001
         ON  DbT4001."shichosonCode" = DbV4001."shichosonCode"
         AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"

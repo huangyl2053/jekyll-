@@ -521,7 +521,7 @@ public class ShikibetsuNoKanri extends ModelBase<ShikibetsuNoKanriIdentifier, Db
      * @return 特定入所者設定区分
      */
     public RString get特定入所者設定区分() {
-        return entity.getTokuteinyushoshaSetteiKubun();
+        return entity.getShoteiShikkanSetteiKubun();
     }
 
     /**
@@ -548,7 +548,7 @@ public class ShikibetsuNoKanri extends ModelBase<ShikibetsuNoKanriIdentifier, Db
      * @return 特定疾患施設療養設定区分
      */
     public RString get特定疾患施設療養設定区分() {
-        return entity.getTokuteiShikkanSetteiKubun();
+        return entity.getShoteiShikkanSetteiKubun();
     }
 
     /**
