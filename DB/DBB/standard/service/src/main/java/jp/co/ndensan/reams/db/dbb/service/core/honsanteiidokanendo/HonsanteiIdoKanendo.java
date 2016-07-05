@@ -152,12 +152,12 @@ public class HonsanteiIdoKanendo {
         }
         for (HonsanteiIdoParameter choParameter : chohyoPara) {
             if (決定変更通知書_帳票分類ID.equals(choParameter.get帳票分類ID())) {
-                if (決定_変更通知書区分.equals(oneRS) || 決定_変更通知書区分.equals(threeRS)) {
+                if (oneRS.equals(決定_変更通知書区分) || threeRS.equals(決定_変更通知書区分)) {
                     HonsanteiIdoKanendoResult result1 = get決定通知書(choParameter.get帳票分類ID(),
                             choParameter.get出力順ID(), 調定年度);
                     resultList.add(result1);
                 }
-                if (決定_変更通知書区分.equals(twoRS) || 決定_変更通知書区分.equals(threeRS)) {
+                if (twoRS.equals(決定_変更通知書区分) || threeRS.equals(決定_変更通知書区分)) {
                     HonsanteiIdoKanendoResult result2 = get変更通知書(choParameter.get帳票分類ID(),
                             choParameter.get出力順ID(), 調定年度);
                     resultList.add(result2);
