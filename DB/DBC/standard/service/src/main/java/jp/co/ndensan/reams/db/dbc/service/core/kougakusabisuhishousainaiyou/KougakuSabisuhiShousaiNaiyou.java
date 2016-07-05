@@ -108,10 +108,10 @@ public class KougakuSabisuhiShousaiNaiyou {
         if (照会モード.equals(画面モード)) {
             if (高額介護サービス費照会.equals(メニューID)) {
                 KougakuSabisuhiShousaiNaiyouEntity 高額決定情報 = mapper.get高額決定エリア情報(parameter);
-                高額サービス費詳細内容Entity = get高額決定情報(高額決定情報);
+                get高額決定情報(高額決定情報, 高額サービス費詳細内容Entity);
             } else if (総合事業高額介護サービス費照会.equals(メニューID)) {
                 KougakuSabisuhiShousaiNaiyouEntity 事業高額決定情報 = mapper.get事業高額決定エリア情報(parameter);
-                高額サービス費詳細内容Entity = get事業高額決定情報(事業高額決定情報);
+                get事業高額決定情報(事業高額決定情報, 高額サービス費詳細内容Entity);
             }
         }
         return 高額サービス費詳細内容Entity;
@@ -139,16 +139,13 @@ public class KougakuSabisuhiShousaiNaiyou {
             }
         }
         if (max異動日対応の保険者台帳管理 != null) {
-            if (検索件数(max異動日対応の保険者台帳管理, サービス年月) == 1) {
-                i = 1;
-            }
+            i = 検索件数(max異動日対応の保険者台帳管理, サービス年月);
         } else {
             DbT1001HihokenshaDaichoEntity min異動日対応の保険者台帳管理 = 被保険者台帳管理Dac.
                     selectMin異動日(被保険者番号, サービス年月);
             if (min異動日対応の保険者台帳管理 != null) {
                 check条件２異動事由(min異動日対応の保険者台帳管理);
                 i = 検索件数(min異動日対応の保険者台帳管理, サービス年月);
-
             } else {
                 throw new ApplicationException(DbcErrorMessages.対象年月被保険者データなし.getMessage());
             }
@@ -196,11 +193,9 @@ public class KougakuSabisuhiShousaiNaiyou {
         }
     }
 
-    private KougakuSabisuhiShousaiNaiyouResult get高額決定情報(KougakuSabisuhiShousaiNaiyouEntity 高額決定情報) {
-        KougakuSabisuhiShousaiNaiyouResult result = new KougakuSabisuhiShousaiNaiyouResult();
-        if (高額決定情報 == null) {
-            return null;
-        } else {
+    private void get高額決定情報(KougakuSabisuhiShousaiNaiyouEntity 高額決定情報,
+            KougakuSabisuhiShousaiNaiyouResult result) {
+        if (高額決定情報 != null) {
             result.set高額介護サービス費支給審査決定Entity(
                     new DbT3058KogakuShikyuShinsaKettei(高額決定情報.get高額介護サービス費支給審査決定Entity()));
             if (高額決定情報.get高額介護サービス費支給判定結果Entity() != null) {
@@ -211,16 +206,13 @@ public class KougakuSabisuhiShousaiNaiyou {
                 result.set高額介護サービス費支給対象者合計Entity(
                         new KogakuKyufuTaishoshaGokei(高額決定情報.get高額介護サービス費支給対象者合計Entity()));
             }
-            return result;
         }
     }
 
-    private KougakuSabisuhiShousaiNaiyouResult get事業高額決定情報(
-            KougakuSabisuhiShousaiNaiyouEntity 事業高額決定情報) {
-        KougakuSabisuhiShousaiNaiyouResult result = new KougakuSabisuhiShousaiNaiyouResult();
-        if (事業高額決定情報 == null) {
-            return null;
-        } else {
+    private void get事業高額決定情報(
+            KougakuSabisuhiShousaiNaiyouEntity 事業高額決定情報,
+            KougakuSabisuhiShousaiNaiyouResult result) {
+        if (事業高額決定情報 != null) {
             result.set事業高額介護サービス費支給審査決定Entity(
                     new KogakuShikyuShinsaKettei(事業高額決定情報.get事業高額介護サービス費支給審査決定Entity()));
             if (事業高額決定情報.get高額介護サービス費支給判定結果Entity() != null) {
@@ -232,7 +224,6 @@ public class KougakuSabisuhiShousaiNaiyou {
                         new JigyoKogakuKyufuTaishoshaGokei(
                                 事業高額決定情報.get事業高額介護サービス費支給対象者合計Entity()));
             }
-            return result;
         }
     }
 
