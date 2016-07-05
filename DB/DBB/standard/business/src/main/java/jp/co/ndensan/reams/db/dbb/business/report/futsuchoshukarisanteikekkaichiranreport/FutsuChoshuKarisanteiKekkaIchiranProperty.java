@@ -27,7 +27,11 @@ public class FutsuChoshuKarisanteiKekkaIchiranProperty extends
         ReportPropertyBase<FutsuChoshuKarisanteiKekkaIchiranSource> {
 
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(FutsuChoshuKarisanteiKekkaIchiranSource.ReportSourceFields.listUpper_2.name())
+            new RString(FutsuChoshuKarisanteiKekkaIchiranSource.ReportSourceFields.listUpper_2.name()),
+            new RString(FutsuChoshuKarisanteiKekkaIchiranSource.ReportSourceFields.listCenter_2.name()),
+            new RString(FutsuChoshuKarisanteiKekkaIchiranSource.ReportSourceFields.listUpper_5.name()),
+            new RString(FutsuChoshuKarisanteiKekkaIchiranSource.ReportSourceFields.listUpper_6.name()),
+            new RString(FutsuChoshuKarisanteiKekkaIchiranSource.ReportSourceFields.hokenshaNo.name())
     ));
 
     /**
@@ -42,7 +46,6 @@ public class FutsuChoshuKarisanteiKekkaIchiranProperty extends
             Breakers<FutsuChoshuKarisanteiKekkaIchiranSource> breakers,
             BreakerCatalog<FutsuChoshuKarisanteiKekkaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
 
             PAGE_BREAK_KEYS) {
             @Override
