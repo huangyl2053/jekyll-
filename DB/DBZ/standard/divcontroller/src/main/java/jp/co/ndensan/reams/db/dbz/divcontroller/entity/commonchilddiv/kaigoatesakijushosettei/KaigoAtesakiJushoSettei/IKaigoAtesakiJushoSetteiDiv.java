@@ -21,26 +21,30 @@ public interface IKaigoAtesakiJushoSetteiDiv extends ICommonChildDivBaseProperti
     /**
      * 公開メソッドis帳票独自。
      *
+     * @return true
      */
-    void is帳票独自();
+    boolean is帳票独自();
 
     /**
      * 公開メソッドis帳票独自。
      *
+     * @return true
      */
-    void is都道府県名表示();
+    boolean is都道府県名表示();
 
     /**
      * 公開メソッドis郡名表示()。
      *
+     * @return true
      */
-    void is郡名表示();
+    boolean is郡名表示();
 
     /**
      * 公開メソッドis市町村名表示()。
      *
+     * @return true
      */
-    void is市町村名表示();
+    boolean is市町村名表示();
 
     /**
      * 公開メソッドiget町域編集方法()。
@@ -51,6 +55,7 @@ public interface IKaigoAtesakiJushoSetteiDiv extends ICommonChildDivBaseProperti
     /**
      * 公開メソッドis方書表示。
      *
+     * @return true
      */
-    void is方書表示();
+    boolean is方書表示();
 }
