@@ -96,8 +96,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KyodoshoriyoJukyushaIdoRenrakuhyo}のインスタンス
      */
     public static KyodoshoriyoJukyushaIdoRenrakuhyo createInstance() {
         return InstanceProvider.create(KyodoshoriyoJukyushaIdoRenrakuhyo.class);
@@ -265,6 +264,7 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             基本情報Entity.setChohyoOutputJunjyoCode(dbT3002Entity.getChohyoOutputJunjyoCode());
             基本情報Entity.setTeiseiKubunCode(dbT3002Entity.getTeiseiKubunCode());
             基本情報Entity.setTeiseiYMD(dbT3002Entity.getTeiseiYMD());
+            基本情報Entity.setLogicalDeletedFlag(dbT3002Entity.getLogicalDeletedFlag());
 
             KyodoShoriyoJukyushaIdoKihonSofu 基本情報 = new KyodoShoriyoJukyushaIdoKihonSofu(基本情報Entity);
             entity.set基本情報Entity(基本情報);
@@ -278,6 +278,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             償還情報Entity.setHokenKyufuIchijiSashitomeShuryoYMD(dbT3003Entity.getHokenKyufuIchijiSashitomeShuryoYMD());
             償還情報Entity.setHokenkyufuIchijiSashitomeKubunCode(dbT3003Entity.getHokenkyufuIchijiSashitomeKubunCode());
             償還情報Entity.setHokenkyufuIchijiSashitomeKingaku(dbT3003Entity.getHokenkyufuIchijiSashitomeKingaku());
+            償還情報Entity.setTeiseiKubunCode(dbT3003Entity.getTeiseiKubunCode());
+            償還情報Entity.setTeiseiYMD(dbT3003Entity.getTeiseiYMD());
+            償還情報Entity.setLogicalDeletedFlag(dbT3003Entity.getLogicalDeletedFlag());
             KyodoShoriyoJukyushaIdoShokanSofu 償還情報 = new KyodoShoriyoJukyushaIdoShokanSofu(償還情報Entity);
             entity.set償還情報Entity(償還情報);
         }
@@ -292,6 +295,9 @@ public class KyodoshoriyoJukyushaIdoRenrakuhyo {
             高額情報Entity.setRiyoshaFutan2DankaiAriFlag(dbT3004Entity.getRiyoshaFutan2DankaiAriFlag());
             高額情報Entity.setRoureiFukushiNenkinJukyuAriFlag(dbT3004Entity.getRoureiFukushiNenkinJukyuAriFlag());
             高額情報Entity.setShikyuShinseishoOutputAriFlag(dbT3004Entity.getShikyuShinseishoOutputAriFlag());
+            高額情報Entity.setTeiseiKubunCode(dbT3004Entity.getTeiseiKubunCode());
+            高額情報Entity.setTeiseiYMD(dbT3004Entity.getTeiseiYMD());
+            高額情報Entity.setLogicalDeletedFlag(dbT3004Entity.getLogicalDeletedFlag());
             KyodoShoriyoJukyushaIdoKogakuSofu 高額情報 = new KyodoShoriyoJukyushaIdoKogakuSofu(高額情報Entity);
             entity.set高額情報Entity(高額情報);
         }

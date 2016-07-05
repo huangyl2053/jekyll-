@@ -214,73 +214,81 @@ public final class KyodoJukyushaIdoRenrakuhyoDivHandler {
 
     private void set初期値_訂正(KyodoshoriyoJukyushaIdoRenrakuhyoParam entity) {
 
-        if (entity.get基本情報Entity() != null) {
-            div.getTxtIdoYMD().setValue(new RDate(entity.get基本情報Entity().get異動年月日().toString()));
-        } else if (entity.get償還情報Entity() != null) {
-            div.getTxtIdoYMD().setValue(new RDate(entity.get償還情報Entity().get異動年月日().toString()));
-        } else if (entity.get高額情報Entity() != null) {
-            div.getTxtIdoYMD().setValue(new RDate(entity.get高額情報Entity().get異動年月日().toString()));
-        }
+        setHead(entity);
         setエリア(entity);
-        if (JukyushaIF_IdoKubunCode.新規.getコード().equals(entity.get共通項目Entity().get異動区分())) {
-            div.getRadIdoKubunCode().setSelectedValue(JukyushaIF_IdoKubunCode.新規.get名称());
-        } else if (JukyushaIF_IdoKubunCode.変更.getコード().equals(entity.get共通項目Entity().get異動区分())) {
-            div.getRadIdoKubunCode().setSelectedValue(JukyushaIF_IdoKubunCode.変更.get名称());
-        }
-        if (entity.get共通項目Entity().get異動事由() != null && !entity.get共通項目Entity().get異動事由().isEmpty()) {
-            div.getDdlJukyushaIdoJiyu().setSelectedKey(entity.get共通項目Entity().get異動事由());
-        }
-
+        RDate システム日付 = RDate.getNowDate();
         if (JukyushaIF_TeiseiKubunCode.修正.get名称().equals(div.getRadTeiseiKubunCode().getSelectedValue())) {
             if (entity.get基本情報Entity() != null) {
                 List<KeyValueDataSource> add_基本 = div.getChkKihonSofuAdd().getDataSource();
                 div.getChkKihonSofuAdd().setSelectedItems(add_基本);
-            } else {
-                div.getChkKihonSofuAdd().setDisplayNone(true);
             }
             div.getChkKihonSofuDelete().setDisplayNone(true);
 
             if (entity.get償還情報Entity() != null) {
                 List<KeyValueDataSource> add_償還 = div.getChkShokanSofuAdd().getDataSource();
                 div.getChkShokanSofuAdd().setSelectedItems(add_償還);
-            } else {
-                div.getChkShokanSofuAdd().setDisplayNone(true);
             }
             div.getChkShokanSofuDelete().setDisplayNone(true);
 
             if (entity.get高額情報Entity() != null) {
                 List<KeyValueDataSource> add_高額 = div.getChkKogakuSofuAdd().getDataSource();
                 div.getChkKogakuSofuAdd().setSelectedItems(add_高額);
-            } else {
-                div.getChkKogakuSofuAdd().setDisplayNone(true);
             }
             div.getChkKogakuSofuDelete().setDisplayNone(true);
         } else if (JukyushaIF_TeiseiKubunCode.削除.get名称().equals(div.getRadTeiseiKubunCode().getSelectedValue())) {
-            if (entity.get基本情報Entity() != null) {
+            if (entity.get基本情報Entity() != null && entity.get基本情報Entity().is論理削除フラグ()) {
                 List<KeyValueDataSource> delete_基本 = div.getChkKihonSofuDelete().getDataSource();
                 div.getChkKihonSofuDelete().setSelectedItems(delete_基本);
-            } else {
-                div.getChkKihonSofuDelete().setDisplayNone(true);
             }
             div.getChkKihonSofuAdd().setDisplayNone(true);
 
-            if (entity.get償還情報Entity() != null) {
+            if (entity.get償還情報Entity() != null && entity.get償還情報Entity().is論理削除フラグ()) {
                 List<KeyValueDataSource> delete_償還 = div.getChkShokanSofuDelete().getDataSource();
                 div.getChkShokanSofuDelete().setSelectedItems(delete_償還);
-            } else {
-                div.getChkShokanSofuDelete().setDisplayNone(true);
             }
             div.getChkShokanSofuAdd().setDisplayNone(true);
 
-            if (entity.get高額情報Entity() != null) {
+            if (entity.get高額情報Entity() != null && entity.get高額情報Entity().is論理削除フラグ()) {
                 List<KeyValueDataSource> delete_高額 = div.getChkKogakuSofuDelete().getDataSource();
                 div.getChkKogakuSofuDelete().setSelectedItems(delete_高額);
-            } else {
-                div.getChkKogakuSofuDelete().setDisplayNone(true);
             }
             div.getChkKogakuSofuAdd().setDisplayNone(true);
         }
-        setエリア制御();
+
+        if (div.getChkKihonSofuAdd().getSelectedItems().isEmpty()) {
+            div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().setDisabled(true);
+        } else {
+            div.getKyodoJukyushaIdoRenrakuhyoKihonPanel().setDisabled(false);
+        }
+        RString config償還 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+                システム日付, SubGyomuCode.DBC介護給付);
+        if (受託なし.equals(config償還)) {
+            List<KeyValueDataSource> add_償還 = new ArrayList<>();
+            div.getChkKihonSofuAdd().setSelectedItems(add_償還);
+            div.getChkShokanSofuAdd().setDisabled(true);
+            div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
+        } else {
+            if (div.getChkShokanSofuAdd().getSelectedItems().isEmpty()) {
+                div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(true);
+            } else {
+                div.getKyodoJukyushaIdoRenrakuhyoShokanPanel().setDisabled(false);
+            }
+        }
+
+        RString config高額 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
+                システム日付, SubGyomuCode.DBC介護給付);
+        if (受託なし.equals(config高額)) {
+            List<KeyValueDataSource> add_高額 = new ArrayList<>();
+            div.getChkKogakuSofuAdd().setSelectedItems(add_高額);
+            div.getChkKogakuSofuAdd().setDisabled(true);
+            div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
+        } else {
+            if (div.getChkKogakuSofuAdd().getSelectedItems().isEmpty()) {
+                div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(true);
+            } else {
+                div.getKyodoJukyushaIdoRenrakuhyoKogakuPanel().setDisabled(false);
+            }
+        }
     }
 
     private void set初期値_削除(KyodoshoriyoJukyushaIdoRenrakuhyoParam entity) {
