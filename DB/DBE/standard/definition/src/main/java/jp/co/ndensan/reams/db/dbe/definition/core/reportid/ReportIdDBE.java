@@ -399,6 +399,10 @@ public enum ReportIdDBE {
      */
     DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項")),
     /**
+     * 主治医意見書作成報酬支払通知書の帳票ＩＤです。
+     */
+    DBE621002(new ReportId("DBE621002_shujiihoshushiharai"), new RString("主治医意見書作成報酬支払通知書")),
+    /**
      * 要介護認定結果情報提供票（主治医）の帳票ID。
      */
     DBE090001(new ReportId("DBE090001_JohoTeikyoShiryo"), new RString("要介護認定結果情報提供票（主治医）"));
