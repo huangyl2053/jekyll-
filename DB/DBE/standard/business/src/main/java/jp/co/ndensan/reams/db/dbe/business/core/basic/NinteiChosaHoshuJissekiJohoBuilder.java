@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link NinteiChosaHoshuJissekiJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 wanghui
  */
 public class NinteiChosaHoshuJissekiJohoBuilder {
 

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 認定調査委託料入力RelateEntityくラスです。
+ * 認定調査委託料入力RelateEntityクラスです。
  *
  * @reamsid_L DBE-1970-010 wanghui
  */

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
- * 認定調査委託料入力ラスです。
+ * 認定調査委託料入力クラスです。
  *
  * @reamsid_L DBE-1970-010 wanghui
  */
