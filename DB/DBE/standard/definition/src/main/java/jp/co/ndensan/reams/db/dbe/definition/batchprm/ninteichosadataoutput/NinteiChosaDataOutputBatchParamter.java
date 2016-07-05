@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosadataoutput;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,5 +55,17 @@ public class NinteiChosaDataOutputBatchParamter extends BatchParameterBase {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
         this.ninteiChosainCode = 認定調査員コード;
         this.shinseishoKanriNoList = 申請書管理番号リスト;
+    }
+
+    /**
+     * NinteiChosaDataOutputProcessParamterを作成します。
+     *
+     * @return NinteiChosaDataOutputProcessParamter
+     */
+    public NinteiChosaDataOutputProcessParamter toNinteiChosaDataOutputProcessParamter() {
+        return new NinteiChosaDataOutputProcessParamter(ninteichosaItakusakiCode,
+                ninteiChosainCode,
+                shinseishoKanriNoList);
+
     }
 }

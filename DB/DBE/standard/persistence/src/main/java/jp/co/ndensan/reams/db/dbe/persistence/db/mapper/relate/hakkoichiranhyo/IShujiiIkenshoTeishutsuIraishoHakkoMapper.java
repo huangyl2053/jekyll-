@@ -33,11 +33,4 @@ public interface IShujiiIkenshoTeishutsuIraishoHakkoMapper {
      */
     DbT5301ShujiiIkenshoIraiJohoEntity get主治医意見書作成依頼情報(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity);
 
-    /**
-     * 主治医意見書作成依頼情報を更新します。
-     *
-     * @param entity DbT5301ShujiiIkenshoIraiJohoEntity
-     * @return 更新件数
-     */
-    int update主治医意見書作成依頼情報(DbT5301ShujiiIkenshoIraiJohoEntity entity);
 }
