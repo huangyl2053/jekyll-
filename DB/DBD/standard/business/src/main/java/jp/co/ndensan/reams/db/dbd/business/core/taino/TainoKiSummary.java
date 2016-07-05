@@ -48,7 +48,7 @@ public final class TainoKiSummary {
     private final TaishoHanteiKubun 対象管理区分;
     private final Decimal 控除額;
 
-    private TainoKiSummary(FlexibleYear 賦課年度,
+    public TainoKiSummary(FlexibleYear 賦課年度,
             FlexibleYear 調定年度,
             boolean is過年度,
             RString 期,
