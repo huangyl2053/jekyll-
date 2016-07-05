@@ -166,7 +166,7 @@ public class HomonChosaItakuNyuryokuHandler {
      *
      */
     public void set状態_更新() {
-        div.getTxtShinseibi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi().toString()));
+        div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
         div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
         div.getTxtNinteiChosaIraiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi().toString()));
         div.getTxtNinteiChosaJisshiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi().toString()));
