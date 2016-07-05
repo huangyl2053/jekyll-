@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa3;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -20,14 +20,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3ReportSource> {
 
-    private final IchijihanteikekkahyoItem item;
+    private final IchijihanteikekkahyoEntity item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item 委員用一次判定結果票Entity
      */
-    public IchijihanteikekkahyoA3Report(IchijihanteikekkahyoItem item) {
+    public IchijihanteikekkahyoA3Report(IchijihanteikekkahyoEntity item) {
         this.item = item;
     }
 

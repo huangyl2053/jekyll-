@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEn
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ZenzenkayiJyohouEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA4ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -47,7 +47,7 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
             new RString(IchijihanteikekkahyoA4ReportSource.ReportSourceFields.shinseiCount.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
-    private IchijihanteikekkahyoItem item;
+    private IchijihanteikekkahyoEntity item;
     private IShiryoShinsakaiIinMapper mapper;
     List<ItiziHanteiEntity> itiziHanteiEntityList;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
@@ -71,7 +71,7 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
 
     @Override
     protected void usualProcess(ItiziHanteiEntity entity) {
-
+        int 申請書管理番号の個数 = mapper.get申請書管理番号の個数(myBatisParameter);
         myBatisParameter.setShinseishoKanri(entity.getDbt5502_shinseishoKanriNo());
         ShinseishoKanriNo 前回申請管理番号 = mapper.getZenShinseishoKanriNo(myBatisParameter);
         myBatisParameter.setShinseishoKanri(前回申請管理番号);
@@ -88,7 +88,8 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
         myBatisParameter.setShinseishoKanri(前々回の申請書管理番号);
         ZenzenkayiJyohouEntity dbT5102Entity = mapper.get前々回情報(myBatisParameter);
         IchijihanteikekkahyoItemSettei itemSettei = new IchijihanteikekkahyoItemSettei();
-        item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList, entityList, dbT5116Entity, dbT5102Entity);
+        item = itemSettei.set項目(entity, 特記事項情報, paramter, itiziHanteiEntityList, entityList,
+                dbT5116Entity, dbT5102Entity, 申請書管理番号の個数);
         IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }

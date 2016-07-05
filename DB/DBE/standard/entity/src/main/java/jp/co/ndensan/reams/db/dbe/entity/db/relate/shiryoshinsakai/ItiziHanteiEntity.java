@@ -40,6 +40,7 @@ public class ItiziHanteiEntity {
     private RString dbt5101_hihokenshaNo;
     private RString dbt5101_shoKisaiHokenshaNo;
     private Code dbt5101_nigoTokuteiShippeiCode;
+    private Code dbt5101_chikuCode;
     private Code dbt5116_ichijiHanteiKekkaCode;
     private int dbt5116_kijunJikan;
     private int dbt5116_kijunJikanShokuji;

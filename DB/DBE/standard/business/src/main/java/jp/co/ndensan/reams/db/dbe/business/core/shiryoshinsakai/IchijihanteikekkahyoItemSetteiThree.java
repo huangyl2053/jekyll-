@@ -10,6 +10,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKom
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping99A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping02A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping06A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -1575,6 +1580,111 @@ public class IchijihanteikekkahyoItemSetteiThree {
             return Integer.valueOf(NinteichosaKomokuMapping09A.経管栄養.getコード().toString());
         } else if (B_09.equals(厚労省IF識別コード)) {
             return Integer.valueOf(NinteichosaKomokuMapping09B.経管栄養.getコード().toString());
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * 認知症高齢者の日常生活自立度コードの取得です。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return コード
+     */
+    public int get主治医意見書_認知症高齢者の日常生活自立度(RString 厚労省IF識別コード) {
+        if (A_99.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().toString());
+        } else if (A_02.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().toString());
+        } else if (A_06.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().toString());
+        } else if (A_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().toString());
+        } else if (B_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().toString());
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * 短期記憶コードの取得です。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return コード
+     */
+    public int get主治医意見書_短期記憶(RString 厚労省IF識別コード) {
+        if (A_99.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping99A.短期記憶.getコード().toString());
+        } else if (A_02.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping02A.短期記憶.getコード().toString());
+        } else if (A_06.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping06A.短期記憶.getコード().toString());
+        } else if (A_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09A.短期記憶.getコード().toString());
+        } else if (B_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09B.短期記憶.getコード().toString());
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * 日常の意思決定を行うための認知能力コードの取得です。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return コード
+     */
+    public int get主治医意見書_認知能力(RString 厚労省IF識別コード) {
+        if (A_99.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping99A.認知能力.getコード().toString());
+        } else if (A_02.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping02A.認知能力.getコード().toString());
+        } else if (A_06.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping06A.認知能力.getコード().toString());
+        } else if (A_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09A.認知能力.getコード().toString());
+        } else if (B_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09B.認知能力.getコード().toString());
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * 自分の意思の伝達能力コードの取得です。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return コード
+     */
+    public int get主治医意見書_自分の意思の伝達能力(RString 厚労省IF識別コード) {
+        if (A_99.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping99A.伝達能力.getコード().toString());
+        } else if (A_02.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping02A.伝達能力.getコード().toString());
+        } else if (A_06.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping06A.伝達能力.getコード().toString());
+        } else if (A_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09A.伝達能力.getコード().toString());
+        } else if (B_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09B.伝達能力.getコード().toString());
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * 食事行為コードの取得です。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @return コード
+     */
+    public int get主治医意見書_食事行為(RString 厚労省IF識別コード) {
+        if (A_99.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping99A.食事.getコード().toString());
+        } else if (A_02.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping02A.食事.getコード().toString());
+        } else if (A_06.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping06A.食事行為.getコード().toString());
+        } else if (A_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09A.食事行為.getコード().toString());
+        } else if (B_09.equals(厚労省IF識別コード)) {
+            return Integer.valueOf(IkenshoKomokuMapping09B.食事行為.getコード().toString());
         }
         return Integer.MAX_VALUE;
     }

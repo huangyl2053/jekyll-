@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo;
+package jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 事務局用一次判定結果票のEntityクラスです。
+ * 委員用一次判定結果票のEntityクラスです。
  *
- * @reamsid_L DBE-0150-040 lishengli
+ * @reamsid_L DBE-0150-130 lishengli
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JimukyokuyouIchijihanteikekkahyoEntity {
+public class IchijihanteikekkahyoEntity {
 
-    private RString name;
     private RString 申請書管理番号;
     private RString 帳票名;
     private RString 管理番号;
     private RString 審査人数;
+    private RString 申請書管理番号の個数;
     private RString 合議体番号;
     private RString 審査会審査順;
     private RString 被保険者区分;
@@ -464,4 +464,5 @@ public class JimukyokuyouIchijihanteikekkahyoEntity {
     private RString 結果比較_じょくそうの処置;
     private RString 結果比較_カテーテル;
     private RString 頁番号;
+
 }

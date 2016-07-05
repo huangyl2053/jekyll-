@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy99A;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -77,7 +77,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
      * @param itiziHanteiEntity ItiziHanteiEntity
      * @return IchijihanteikekkahyoItem
      */
-    public IchijihanteikekkahyoItem set認定調査と主治医意見書の結果比較(IchijihanteikekkahyoItem item,
+    public IchijihanteikekkahyoEntity set認定調査と主治医意見書の結果比較(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査左_上肢コード = RString.EMPTY;
         RString 医意見書左_上肢コード = RString.EMPTY;
@@ -142,7 +142,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
      * @param itemHensyu IchijihanteikekkahyoItemHensyu
      * @return IchijihanteikekkahyoItem
      */
-    public IchijihanteikekkahyoItem set段階改善(IchijihanteikekkahyoItem item, IchijihanteikekkahyoItemHensyu itemHensyu) {
+    public IchijihanteikekkahyoEntity set段階改善(IchijihanteikekkahyoEntity item, IchijihanteikekkahyoItemHensyu itemHensyu) {
         item.set段階改善_麻痺_左_上肢(get段階改善(itemHensyu.get調査結果_麻痺_左_上肢(), itemHensyu.get前回結果_麻痺_左_上肢()));
         item.set段階改善_麻痺_左_下肢(get段階改善(itemHensyu.get調査結果_麻痺_左_下肢(), itemHensyu.get前回結果_麻痺_左_下肢()));
         item.set段階改善_麻痺_右_上肢(get段階改善(itemHensyu.get調査結果_麻痺_右_上肢(), itemHensyu.get前回結果_麻痺_右_上肢()));
@@ -263,11 +263,12 @@ public class IchijihanteikekkahyoItemSetteiTwo {
      *
      * @param item IchijihanteikekkahyoItem
      * @param entityList List<DbT5211NinteichosahyoChosaItemEntity>
-     * @return 現在の状況
+     * @param itemHensyu IchijihanteikekkahyoItemHensyu
+     * @return IchijihanteikekkahyoEntity
      */
-    public IchijihanteikekkahyoItem set前回結果(IchijihanteikekkahyoItem item, List<DbT5211NinteichosahyoChosaItemEntity> entityList) {
+    public IchijihanteikekkahyoEntity set前回結果(IchijihanteikekkahyoEntity item, List<DbT5211NinteichosahyoChosaItemEntity> entityList,
+            IchijihanteikekkahyoItemHensyu itemHensyu) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
-        IchijihanteikekkahyoItemHensyu itemHensyu = new IchijihanteikekkahyoItemHensyu();
         for (DbT5211NinteichosahyoChosaItemEntity entity : entityList) {
             if ((entity.getKoroshoIfShikibetsuCode() == null || entity.getKoroshoIfShikibetsuCode().isEmpty()
                     && RString.isNullOrEmpty(entity.getResearchItem()))) {
@@ -316,8 +317,8 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set前回結果1(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
-            IchijihanteikekkahyoItem item) {
+    private IchijihanteikekkahyoEntity set前回結果1(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
+            IchijihanteikekkahyoEntity item) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
         if (setteiThree.get両足での立位(entity.getKoroshoIfShikibetsuCode().value()) == entity.getRemban()) {
             item.set前回結果_両足での立位(ChosaAnser04.toValue(entity.getResearchItem()).get名称());
@@ -368,8 +369,8 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set前回結果2(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
-            IchijihanteikekkahyoItem item) {
+    private IchijihanteikekkahyoEntity set前回結果2(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
+            IchijihanteikekkahyoEntity item) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
         if (setteiThree.get口腔清潔(entity.getKoroshoIfShikibetsuCode().value()) == entity.getRemban()) {
             item.set前回結果_口腔清潔(ChosaAnser22.toValue(entity.getResearchItem()).get名称());
@@ -431,8 +432,8 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set前回結果3(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
-            IchijihanteikekkahyoItem item) {
+    private IchijihanteikekkahyoEntity set前回結果3(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
+            IchijihanteikekkahyoEntity item) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
         if (setteiThree.get昼夜逆転(entity.getKoroshoIfShikibetsuCode().value()) == entity.getRemban()) {
             item.set前回結果_昼夜逆転(ChosaAnser16.toValue(entity.getResearchItem()).get名称());
@@ -494,8 +495,8 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set前回結果4(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
-            IchijihanteikekkahyoItem item) {
+    private IchijihanteikekkahyoEntity set前回結果4(DbT5211NinteichosahyoChosaItemEntity entity, IchijihanteikekkahyoItemHensyu itemHensyu,
+            IchijihanteikekkahyoEntity item) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
         if (setteiThree.get点滴の管理(entity.getKoroshoIfShikibetsuCode().value()) == entity.getRemban()) {
             itemHensyu.set前回結果_点滴の管理(ChosaAnser10.toValue(entity.getResearchItem()).getコード());
@@ -525,7 +526,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較1(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較1(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査右_下肢コード = RString.EMPTY;
         RString 医意見書右_下肢コード = RString.EMPTY;
@@ -575,7 +576,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較_食事摂取(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較_食事摂取(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査食事摂取 = RString.EMPTY;
         RString 医意見書食事摂取 = RString.EMPTY;
@@ -600,7 +601,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較2(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較2(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
         set結果比較_食事摂取(item, 厚労省IF識別コード, dbT5211厚労省IF識別コード, itiziHanteiEntity);
@@ -639,7 +640,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較3(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較3(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         IchijihanteikekkahyoItemSetteiThree setteiThree = new IchijihanteikekkahyoItemSetteiThree();
         RString 認定調査短期記憶 = RString.EMPTY;
@@ -677,7 +678,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較4(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較4(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査昼夜逆転 = RString.EMPTY;
         RString 医意見書昼夜逆転 = RString.EMPTY;
@@ -715,7 +716,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較_日常の意思決定(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較_日常の意思決定(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査日常の意思決定 = RString.EMPTY;
         RString 医意見書日常の意思決定 = RString.EMPTY;
@@ -738,7 +739,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較5(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較5(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査点滴の管理 = RString.EMPTY;
         RString 医意見書点滴の管理 = RString.EMPTY;
@@ -788,7 +789,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較6(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較6(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査ストーマの処置 = RString.EMPTY;
         RString 医意見書ストーマの処置 = RString.EMPTY;
@@ -838,7 +839,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較7(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較7(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査気管切開の処置 = RString.EMPTY;
         RString 医意見書気管切開の処置 = RString.EMPTY;
@@ -888,7 +889,7 @@ public class IchijihanteikekkahyoItemSetteiTwo {
         return item;
     }
 
-    private IchijihanteikekkahyoItem set結果比較8(IchijihanteikekkahyoItem item,
+    private IchijihanteikekkahyoEntity set結果比較8(IchijihanteikekkahyoEntity item,
             RString 厚労省IF識別コード, RString dbT5211厚労省IF識別コード, ItiziHanteiEntity itiziHanteiEntity) {
         RString 認定調査モニター測定 = RString.EMPTY;
         RString 医意見書モニター測定 = RString.EMPTY;
