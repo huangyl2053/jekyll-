@@ -182,7 +182,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         }
         if (普徴仮算定計算後賦課 != null && 普徴仮算定計算後賦課.get特別徴収業務者コード() != null
                 && !普徴仮算定計算後賦課.get特別徴収業務者コード().isEmpty()) {
-            source.listCenter_4 = CodeMaster.getCodeMeisho(UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+            source.listCenter_4 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(普徴仮算定計算後賦課.get特別徴収業務者コード()));
         }
     }
@@ -195,7 +195,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
     private void setListCenterTwo(FutsuChoshuKarisanteiKekkaIchiranSource source) {
         if (普徴仮算定計算後賦課 != null && 普徴仮算定計算後賦課.get本徴収年金コード() != null
                 && !普徴仮算定計算後賦課.get本徴収年金コード().isEmpty() && 普徴仮算定計算後賦課.get本徴収年金コード().length() >= NUM3) {
-            source.listCenter_5 = CodeMaster.getCodeMeisho(UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+            source.listCenter_5 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(普徴仮算定計算後賦課.get本徴収年金コード().substring(0, NUM3)));
         }
         source.listCenter_6 = 定数4月;
