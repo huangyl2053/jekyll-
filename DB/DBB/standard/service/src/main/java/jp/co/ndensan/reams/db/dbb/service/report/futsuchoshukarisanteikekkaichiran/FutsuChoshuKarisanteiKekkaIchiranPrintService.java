@@ -116,20 +116,21 @@ public class FutsuChoshuKarisanteiKekkaIchiranPrintService {
             List<RString> 出力項目リスト,
             List<RString> 改頁項目リスト,
             ReportSourceWriter<FutsuChoshuKarisanteiKekkaIchiranSource> reportSourceWriter) {
-        Collections.sort(普徴仮算定計算後賦課list, new Comparator<FuchoKariKeisanGoFukaEntity>() {
-            @Override
-            public int compare(FuchoKariKeisanGoFukaEntity o1, FuchoKariKeisanGoFukaEntity o2) {
-                return o1.get通知書番号().compareTo(o2.get通知書番号());
+        if (普徴仮算定計算後賦課list != null && 普徴仮算定計算後賦課list.size() > NUM0) {
+            Collections.sort(普徴仮算定計算後賦課list, new Comparator<FuchoKariKeisanGoFukaEntity>() {
+                @Override
+                public int compare(FuchoKariKeisanGoFukaEntity o1, FuchoKariKeisanGoFukaEntity o2) {
+                    return o1.get通知書番号().compareTo(o2.get通知書番号());
+                }
+            });
+            int i = NUM1;
+            for (FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課 : 普徴仮算定計算後賦課list) {
+                FutsuChoshuKarisanteiKekkaIchiranReport report = new FutsuChoshuKarisanteiKekkaIchiranReport(普徴仮算定計算後賦課,
+                        調定年度, 賦課年度, 調定日時, association, 出力項目リスト, 改頁項目リスト, i);
+                report.writeBy(reportSourceWriter);
+                i = i + NUM1;
             }
-        });
-        int i = NUM1;
-        for (FuchoKariKeisanGoFukaEntity 普徴仮算定計算後賦課 : 普徴仮算定計算後賦課list) {
-            FutsuChoshuKarisanteiKekkaIchiranReport report = new FutsuChoshuKarisanteiKekkaIchiranReport(普徴仮算定計算後賦課,
-                    調定年度, 賦課年度, 調定日時, association, 出力項目リスト, 改頁項目リスト, i);
-            report.writeBy(reportSourceWriter);
-            i = i + NUM1;
         }
-
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
