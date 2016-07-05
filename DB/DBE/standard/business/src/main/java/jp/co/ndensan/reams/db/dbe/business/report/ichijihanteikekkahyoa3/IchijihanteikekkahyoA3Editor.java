@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa3;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA3ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -25,14 +25,14 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Editor {
 
-    private final IchijihanteikekkahyoItem item;
+    private final IchijihanteikekkahyoEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link IchijihanteikekkahyoItem}
+     * @param item {@link IchijihanteikekkahyoEntity}
      */
-    protected IchijihanteikekkahyoA3Editor(IchijihanteikekkahyoItem item) {
+    protected IchijihanteikekkahyoA3Editor(IchijihanteikekkahyoEntity item) {
         this.item = item;
     }
 
@@ -43,7 +43,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
 
     private IchijihanteikekkahyoA3ReportSource editSource(IchijihanteikekkahyoA3ReportSource source) {
         source.shinseiCount = item.get審査人数();
-        source.shinseiCountGokei = item.get審査人数();
+        source.shinseiCountGokei = item.get申請書管理番号の個数();
         source.gogitaiNo = item.get合議体番号();
         source.kanriNo = item.get管理番号();
         source.hihokenshaKubun = item.get被保険者区分();

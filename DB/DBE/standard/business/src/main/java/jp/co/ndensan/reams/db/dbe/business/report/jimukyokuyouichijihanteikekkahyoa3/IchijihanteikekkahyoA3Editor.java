@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa3;
 
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA3ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.JimukyokuyouIchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -81,14 +81,14 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
     private static final RString 定期巡回_随時対応型訪問介護看護 = new RString("定期巡回・随時対応型訪問介護看護  ：");
     private static final RString 看護小規模多機能型居宅介護 = new RString("看護小規模多機能型居宅介護        ：");
 
-    private final JimukyokuyouIchijihanteikekkahyoEntity item;
+    private final IchijihanteikekkahyoEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link JimukyokuyouIchijihanteikekkahyoItem}
+     * @param item {@link IchijihanteikekkahyoEntity}
      */
-    protected IchijihanteikekkahyoA3Editor(JimukyokuyouIchijihanteikekkahyoEntity item) {
+    protected IchijihanteikekkahyoA3Editor(IchijihanteikekkahyoEntity item) {
         this.item = item;
     }
 
@@ -99,7 +99,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
 
     private IchijihanteikekkahyoA3ReportSource editSource(IchijihanteikekkahyoA3ReportSource source) {
         source.shinseiCount = item.get審査人数();
-        source.shinseiCountGokei = item.get審査人数();
+        source.shinseiCountGokei = item.get申請書管理番号の個数();
         source.gogitaiNo = item.get合議体番号();
         source.hihokenshaKubun = item.get被保険者区分();
         source.shinseiKubun = item.get申請区分();
@@ -165,9 +165,6 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         } else {
             source.sabisuText1 = new RString("                          (なし)");
         }
-        source.imgSisetuName1 = item.getName();
-        source.imgSisetuTel1 = item.getName();
-        source.imgSisetuAddress1 = item.getName();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get申請書管理番号() == null) {
             source.shinseishoKanriNo = null;

@@ -64,7 +64,9 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 年度 = new RString("年度");
     private static final RString 定値_L = new RString("(");
     private static final RString 定値_R = new RString(")");
-    private static final int 定値_0 = 0;
+//    private static final RString 特別徴収仮算定結果一覧表_帳票分類ID = new RString("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
+//    private static final RString 特別徴収開始通知書_仮算定_帳票分類ID = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
+    private static final int NUM0 = 0;
     private static final int NUM1 = 1;
     private static final int NUM11 = 11;
     private static final int NUM19 = 19;
@@ -92,10 +94,8 @@ public final class TokutyoKariSanteiFukaHandler {
         RDate nowDate = RDate.getNowDate();
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 nowDate, SubGyomuCode.DBB介護賦課));
-        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                nowDate, SubGyomuCode.DBB介護賦課));
         div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度);
-        div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);
+        div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().setDomain(調定年度);
         RString 遷移元区分 = RString.EMPTY;
         if (DBB0110001StateName.特徴仮算定賦課.getName().equals(ResponseHolder.getState())) {
             遷移元区分 = 遷移元区分_0;
@@ -103,7 +103,7 @@ public final class TokutyoKariSanteiFukaHandler {
             遷移元区分 = 遷移元区分_1;
         }
         HokenryoDankaiSettings 保険料段階取得Mgr = HokenryoDankaiSettings.createInstance();
-        HokenryoDankaiList 保険料段階List = 保険料段階取得Mgr.get保険料段階ListIn(賦課年度);
+        HokenryoDankaiList 保険料段階List = 保険料段階取得Mgr.get保険料段階ListIn(調定年度);
         List<KeyValueDataSource> list = new ArrayList();
         for (TokuchoKaishiTsuhishoKariOutputJoken tokuchokai : TokuchoKaishiTsuhishoKariOutputJoken.values()) {
             KeyValueDataSource keyvaluedatasource = new KeyValueDataSource();
@@ -112,57 +112,61 @@ public final class TokutyoKariSanteiFukaHandler {
             list.add(keyvaluedatasource);
         }
         div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDataSource(list);
-        div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setSelectedIndex(定値_0);
+        div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setSelectedIndex(NUM0);
         List<ShoriDateKanri> 処理状況list = tokuchokarisanteifuka.getShoriDateKanriList(遷移元区分, 調定年度);
         List<dgTokutyoKariSanteiShoriKakunin_Row> rowlist = new ArrayList();
         if (遷移元区分_0.equals(遷移元区分)) {
-            List<dgKanrijoho1_Row> lists = new ArrayList<>();
+            List<dgKanrijoho1_Row> 保険料RowLists = new ArrayList<>();
             for (HokenryoDankai hokenryodankai : 保険料段階List.asList()) {
                 dgKanrijoho1_Row row = new dgKanrijoho1_Row();
                 row.setTxtHokenryoDankai(hokenryodankai.get表記());
                 row.setTxtHokenryoritsu(new RString(hokenryodankai.get保険料率().toString()));
-                lists.add(row);
+                保険料RowLists.add(row);
             }
-            div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDataSource(lists);
-            div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDisabled(true);
+            div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDataSource(保険料RowLists);
             List<dgKanrijoho2_Row> list2 = new ArrayList<>();
-            dgKanrijoho2_Row row1 = new dgKanrijoho2_Row();
-            row1.setTxtKoumoku(年額基準年度);
+            dgKanrijoho2_Row 年額基準年度row = new dgKanrijoho2_Row();
+            年額基準年度row.setTxtKoumoku(年額基準年度);
             if (TokuchoNengakuKijunNendo6Gatsu.当年度.getコード().equals(
-                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate, SubGyomuCode.DBB介護賦課))) {
-                row1.setTxtNaiyo(当年度.concat(定値_L).concat(new FlexibleYear(調定年度.minusYear(NUM1).toDateString().toString())
+                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate.minusYear(NUM1), SubGyomuCode.DBB介護賦課))) {
+                年額基準年度row.setTxtNaiyo(当年度.concat(定値_L).concat(new FlexibleYear(調定年度.minusYear(NUM1).toDateString().toString())
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()).concat(年度).concat(定値_R));
             } else if (TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード().equals(
-                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate, SubGyomuCode.DBB介護賦課))) {
-                row1.setTxtNaiyo(翌年度.concat(定値_L).concat(new FlexibleYear(調定年度.toDateString().toString())
+                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate.minusYear(NUM1), SubGyomuCode.DBB介護賦課))) {
+                年額基準年度row.setTxtNaiyo(翌年度.concat(定値_L).concat(new FlexibleYear(調定年度.toDateString().toString())
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()).concat(年度).concat(定値_R));
             }
-            dgKanrijoho2_Row row2 = new dgKanrijoho2_Row();
-            row2.setTxtKoumoku(特徴開始計算方法6月);
-            row2.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(DbBusinessConfig.get(
+            dgKanrijoho2_Row 特徴開始計算方法6月row = new dgKanrijoho2_Row();
+            特徴開始計算方法6月row.setTxtKoumoku(特徴開始計算方法6月);
+            特徴開始計算方法6月row.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(DbBusinessConfig.get(
                     ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate, SubGyomuCode.DBB介護賦課)).get略称());
-            list2.add(row1);
-            list2.add(row2);
+            list2.add(年額基準年度row);
+            list2.add(特徴開始計算方法6月row);
             div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(list2);
-            div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDisabled(true);
-            div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDisabled(true);
             div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 特徴仮算定賦課);
+//            List<dgOutputChohyoIchiran_Row> 帳票作成List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
+//            for (dgOutputChohyoIchiran_Row row : 帳票作成List) {
+//                if (特別徴収仮算定結果一覧表_帳票分類ID.compareTo(row.getChohyoID()) == NUM0) {
+            //TODO 特別徴収仮算定結果一覧表を選択し、チェックが外せない。
+//                }
+//            }
             RString shoriname = ShoriName.年度切替.get名称();
-            dgTokutyoKariSanteiShoriKakunin_Row row = getGridDate(処理状況list, shoriname);
-            if (状況未.equals(row.getTxtJokyo())) {
+            dgTokutyoKariSanteiShoriKakunin_Row 処理状況row = getGridDate(処理状況list, shoriname);
+            if (状況未.equals(処理状況row.getTxtJokyo())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, false);
             }
-            rowlist.add(row);
+            rowlist.add(処理状況row);
             div.getShoriJokyo().getTokuchoKarisanteiShoriKakunin().getDgTokutyoKariSanteiShoriKakunin().setDataSource(rowlist);
         } else if (遷移元区分_1.equals(遷移元区分)) {
-            KeyValueDataSource keyvaluedatasource = new KeyValueDataSource();
-            keyvaluedatasource.setKey(TokuchoKaishiTsuhishoKariOutputJoken.全件_追加候補者含む.get名称());
-            keyvaluedatasource.setValue(TokuchoKaishiTsuhishoKariOutputJoken.全件_追加候補者含む.get名称());
-            list.remove(keyvaluedatasource);
-            div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDisabledItem(list);
             div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 特徴仮算定通知書一括発行);
+//            List<dgOutputChohyoIchiran_Row> 帳票作成List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
+//            for (dgOutputChohyoIchiran_Row row : 帳票作成List) {
+//                if (特別徴収開始通知書_仮算定_帳票分類ID.compareTo(row.getChohyoID()) == NUM0) {
+            //TODO  特別徴収開始通知書（仮算定）を選択し、チェックが外せない。
+//                }
+//            }
             RString shoriname = ShoriName.特徴仮算定賦課.get名称();
             dgTokutyoKariSanteiShoriKakunin_Row row = getGridDate(処理状況list, shoriname);
             rowlist.add(row);
@@ -226,22 +230,22 @@ public final class TokutyoKariSanteiFukaHandler {
         }
         param.set調定年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().getDomain());
         param.set賦課年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().getDomain());
-        List<dgOutputChohyoIchiran_Row> 出力帳票一覧list = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
-        param.set出力帳票一覧List(listChange(出力帳票一覧list));
+        List<dgOutputChohyoIchiran_Row> 出力帳票一覧List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
+        param.set出力帳票一覧List(listChange(出力帳票一覧List));
         return tokuchokarisanteifuka.createTokuchoKariSanteiParameter(param);
     }
 
-    private List<TokuchoKariSanteiEntity> listChange(List<dgOutputChohyoIchiran_Row> 出力帳票一覧list) {
-        List<TokuchoKariSanteiEntity> list = new ArrayList();
-        for (dgOutputChohyoIchiran_Row row : 出力帳票一覧list) {
+    private List<TokuchoKariSanteiEntity> listChange(List<dgOutputChohyoIchiran_Row> 出力帳票一覧List) {
+        List<TokuchoKariSanteiEntity> 帳票InfoList = new ArrayList();
+        for (dgOutputChohyoIchiran_Row row : 出力帳票一覧List) {
             if (row.getSelected()) {
                 TokuchoKariSanteiEntity tokuchokarisanteientity = new TokuchoKariSanteiEntity();
                 tokuchokarisanteientity.set出力順ID(row.getShutsuryokujunID());
                 tokuchokarisanteientity.set帳票分類ID(new ReportId(row.getChohyoID()));
                 tokuchokarisanteientity.set帳票名(row.getChohyoName());
-                list.add(tokuchokarisanteientity);
+                帳票InfoList.add(tokuchokarisanteientity);
             }
         }
-        return list;
+        return 帳票InfoList;
     }
 }

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.JimukyokuyouIchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -74,14 +74,14 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
-    private final JimukyokuyouIchijihanteikekkahyoEntity item;
+    private final IchijihanteikekkahyoEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link JimukyokuyouIchijihanteikekkahyoItem}
+     * @param item {@link IchijihanteikekkahyoEntity}
      */
-    protected IchijihanteikekkahyoA4Editor(JimukyokuyouIchijihanteikekkahyoEntity item) {
+    protected IchijihanteikekkahyoA4Editor(IchijihanteikekkahyoEntity item) {
         this.item = item;
     }
 

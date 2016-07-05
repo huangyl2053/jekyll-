@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA4ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -30,14 +30,14 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
-    private final IchijihanteikekkahyoItem item;
+    private final IchijihanteikekkahyoEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link IchijihanteikekkahyoItem}
+     * @param item {@link IchijihanteikekkahyoEntity}
      */
-    protected IchijihanteikekkahyoA4Editor(IchijihanteikekkahyoItem item) {
+    protected IchijihanteikekkahyoA4Editor(IchijihanteikekkahyoEntity item) {
         this.item = item;
     }
 

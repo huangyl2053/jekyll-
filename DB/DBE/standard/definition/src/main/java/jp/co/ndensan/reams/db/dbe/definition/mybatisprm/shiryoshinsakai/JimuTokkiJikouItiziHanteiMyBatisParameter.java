@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -33,6 +36,12 @@ public class JimuTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParame
     private boolean isOrderKakuteiFlg;
     private RString isShoriJotaiKubun0;
     private RString isShoriJotaiKubun3;
+    private RString shoKisaiHokenshaNo;
+    private LasdecCode shichosonCode;
+    private JigyoshaNo ninteichosaItakusakiCode;
+    private Code ninteiChosainCode;
+    private RString shujiiIryokikanCode;
+    private RString shujiiCode;
 
     /**
      * コンストラクタです。

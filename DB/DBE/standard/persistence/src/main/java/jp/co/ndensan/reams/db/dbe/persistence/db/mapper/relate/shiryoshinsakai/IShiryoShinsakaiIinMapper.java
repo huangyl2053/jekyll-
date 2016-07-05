@@ -35,11 +35,17 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.SonotaJohoEnt
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkiIranJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ZenzenkayiJyohouEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 
 /**
  * 審査会資料一括作成（委員）のMapperクラスです。
@@ -161,6 +167,14 @@ public interface IShiryoShinsakaiIinMapper {
     DbT5116IchijiHanteiKekkaJohoEntity get前回の要介護認定一次判定結果情報(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
 
     /**
+     * 介護認定審査会開催番号に該当する申請書管理番号の個数の取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return 申請書管理番号の個数
+     */
+    int get申請書管理番号の個数(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
      * 前回申請管理番号を取得する。
      *
      * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
@@ -183,6 +197,110 @@ public interface IShiryoShinsakaiIinMapper {
      * @return List<NinteichosahyoTokkijikoEntity> 特記事項情報
      */
     List<NinteichosahyoTokkijikoEntity> getNinteichosahyoTokkijiko(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 事務局用一次判定結果を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<ItiziHanteiEntity> 委員用一次判定結果
+     */
+    List<ItiziHanteiEntity> getJimuItiziHantei(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前回結果情報を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<DbT5211NinteichosahyoChosaItemEntity>
+     */
+    List<DbT5211NinteichosahyoChosaItemEntity> getJimu前回結果(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前々回情報を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5102NinteiKekkaJohoEntity
+     */
+    ZenzenkayiJyohouEntity getJimu前々回情報(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前回の要介護認定一次判定結果情報を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5116IchijiHanteiKekkaJohoEntity
+     */
+    DbT5116IchijiHanteiKekkaJohoEntity getJimu前回の要介護認定一次判定結果情報(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前回申請管理番号を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return 前回申請管理番号
+     */
+    ShinseishoKanriNo getJimuZenShinseishoKanriNo(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 要介護認定申請者の調査結果に関する特記事項情報を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<NinteichosahyoTokkijikoEntity> 特記事項情報
+     */
+    List<NinteichosahyoTokkijikoEntity> getJimuNinteichosahyoTokkijiko(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 要介護認定申請者の調査結果に関する特記事項情報を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<NinteichosahyoTokkijikoEntity> 特記事項情報
+     */
+    DbT7051KoseiShichosonMasterEntity getJimu市町村名(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 事業者名を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5910NinteichosaItakusakiJohoEntity
+     */
+    DbT5910NinteichosaItakusakiJohoEntity getJimu事業者名(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 調査員情報を取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5913ChosainJohoEntity
+     */
+    DbT5913ChosainJohoEntity getJimu調査員情報(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 医療機関名称の取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5911ShujiiIryoKikanJohoEntity
+     */
+    DbT5911ShujiiIryoKikanJohoEntity getJimu医療機関名称(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 主治医氏名の取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return DbT5912ShujiiJohoEntity
+     */
+    DbT5912ShujiiJohoEntity getJimu主治医氏名(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 前回要介護認定主治医意見書意見項目情報の取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<DbT5304ShujiiIkenshoIkenItemEntity>
+     */
+    List<DbT5304ShujiiIkenshoIkenItemEntity> getJimu前回要介護認定主治医意見書意見項目情報(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 介護認定審査会開催番号に該当する申請書管理番号の個数の取得する。
+     *
+     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @return 申請書管理番号の個数
+     */
+    int getJimu申請書管理番号の個数(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
 
     /**
      * 要介護認定申請者の主治医意見書イメージ情報を取得する。
