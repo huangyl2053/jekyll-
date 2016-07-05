@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosahoshujissekijoho;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,12 +23,12 @@ public class NinteichosahyoGaikyoChosaRelateEntity {
     private RString ninteichosaRirekiNo;
     private RString chosaItakusakiCode;
     private RString chosainCode;
-    private RString ninteichosaJisshiYMD;
-    private RString ninteichosaJuryoYMD;
+    private FlexibleDate ninteichosaJisshiYMD;
+    private FlexibleDate ninteichosaJuryoYMD;
     private RString chosaJisshiBashoMeisho;
-    private RString ninteichosaIraiYMD;
+    private FlexibleDate ninteichosaIraiYMD;
     private RString chosainShimei;
-    private RString ninteiShinseiYMD;
+    private FlexibleDate ninteiShinseiYMD;
     private RString ninteiShinseiShinseijiKubunCode;
     private RString ninteichosaIraiRirekiNo;
     private RString chosaItakuryo;

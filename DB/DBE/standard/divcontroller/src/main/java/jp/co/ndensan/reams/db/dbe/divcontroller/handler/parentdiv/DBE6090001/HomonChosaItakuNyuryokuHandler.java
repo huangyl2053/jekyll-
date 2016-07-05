@@ -85,7 +85,7 @@ public class HomonChosaItakuNyuryokuHandler {
      *
      * @param list List<NinteiChosaHoshuJissekiJohoBusiness>
      */
-    public void setdgChosain(List<NinteiChosaHoshuJissekiJohoBusiness> list) {
+    public void setDgChosain(List<NinteiChosaHoshuJissekiJohoBusiness> list) {
         List<dgChosain_Row> dgChosainList = new ArrayList<>();
         if (!list.isEmpty()) {
             for (NinteiChosaHoshuJissekiJohoBusiness business : list) {
