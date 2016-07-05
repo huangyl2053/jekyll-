@@ -27,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 計算中間Tempの更新後データを更新する処理クラスです。
+ * 期別金額から計算中間Tempのデータを更新する処理クラスです。
  *
  * @reamsid_L DBB-9060-010 duanzhanli
  */
-public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRelateEntity> {
+public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRelateEntity> {
 
     private static final RString 期別金額取得 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
             + "IKeisangoJohoSakuseiMapper.get期別金額");
@@ -39,7 +39,6 @@ public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuse
     private IKeisangoJohoSakuseiMapper iKeisangoJohoSakuseiMapper;
     private KeisangoJohoResult keisangoJohoResult;
     private KeisangoJohoSakuseiProcessParamter processParamter;
-    private KeisangoJohoSakuseiMybitisParamter mybatisParamter;
     private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
 
     @BatchWriter
@@ -54,7 +53,7 @@ public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuse
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(期別金額取得, mybatisParamter);
+        return new BatchDbReader(期別金額取得, setMybatisParamter());
     }
 
     @Override
@@ -74,30 +73,18 @@ public class TyukanTempUpdateProcess extends BatchProcessBase<KeisangoJohoSakuse
 
     @Override
     protected void afterExecute() {
-        update計算中間Temp情報();
         if (!processParamter.is更新前フラグ()) {
-            List<DbT2002FukaEntity> 更新前賦課情報EntityList = iKeisangoJohoSakuseiMapper.get更新前賦課情報(mybatisParamter);
+            List<DbT2002FukaEntity> 更新前賦課情報EntityList = iKeisangoJohoSakuseiMapper.get更新前賦課情報(setMybatisParamter());
             for (DbT2002FukaEntity dbT2002FukaEntity : 更新前賦課情報EntityList) {
                 計算中間Temp.insert(keisangoJohoResult.get計算中間Entity(dbT2002FukaEntity));
             }
         }
     }
 
-    private void update計算中間Temp情報() {
-        tsuchishoNo = TsuchishoNo.EMPTY;
-        List<KeisangoJohoSakuseiRelateEntity> 収入情報EntityList = iKeisangoJohoSakuseiMapper.get収入情報(mybatisParamter);
-        for (KeisangoJohoSakuseiRelateEntity entity : 収入情報EntityList) {
-            if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
-                tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
-                計算中間Temp.update(keisangoJohoResult.get収入情報(entity, entity.get計算中間Entity()));
-            }
-        }
-    }
-
-    private void setMybatisParamter() {
+    private KeisangoJohoSakuseiMybitisParamter setMybatisParamter() {
         TotalShunyuSearchKeyBuilder searchKey = new TotalShunyuSearchKeyBuilder(SearchSokuhoKubun.全て, SearchSaishutsuKubun.全て);
         CaFt702FindTotalShunyuFunction psmEntity = new CaFt702FindTotalShunyuFunction(searchKey);
-        mybatisParamter = KeisangoJohoSakuseiMybitisParamter.createSelectByKeyParam(processParamter.getChoteiNendo(),
+        return KeisangoJohoSakuseiMybitisParamter.createSelectByKeyParam(processParamter.getChoteiNendo(),
                 processParamter.getFukaNendo(),
                 processParamter.getChoteiNichiji(),
                 processParamter.getChohyoBunruiID(),
