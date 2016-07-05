@@ -351,6 +351,16 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlNowPhase().setDataSource(ddlNowPhase);
         div.getDdlNowPhase().setSelectedIndex(0);
+        div.getChkShoriJotai().setDisabled(true);
+        div.getChkKoshinTaishoChushutsu().setDisabled(true);
+        div.getChkTsuchiShori().setDisabled(true);
+        clearChk();
+    }
+
+    /**
+     * 完了情報初期化処理です。
+     */
+    public void clearChk() {
         List<RString> keys = new ArrayList<>();
         div.getChkShoriJotai().setDisabled(true);
         div.getChkShoriJotai().setSelectedItemsByKey(keys);
@@ -366,7 +376,6 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setSelectedItemsByKey(keys);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(keys);
         div.getChkGetsureiShori().setSelectedItemsByKey(keys);
-
     }
 
     private List<KeyValueDataSource> getNijiHanteiKekkaDataSource() {
