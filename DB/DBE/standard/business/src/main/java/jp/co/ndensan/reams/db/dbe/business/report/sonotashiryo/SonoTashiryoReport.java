@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.sonotashiryo;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryo;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.SonoTashiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class SonoTashiryoReport extends Report<SonoTashiryoReportSource> {
 
-    private final SonoTashiryo data;
+    private final SonoTashiryoEntity data;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 要介護認定情報提供その他資料情報のdataList
      */
-    public SonoTashiryoReport(SonoTashiryo data) {
+    public SonoTashiryoReport(SonoTashiryoEntity data) {
         this.data = data;
     }
 

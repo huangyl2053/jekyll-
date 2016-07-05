@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120003;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120003.DataGrid1_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120003.ShotokuJohoChushutsuDiv;
@@ -108,21 +107,17 @@ public class ShotokuJohoChushutsuHandler {
         RDate nowDate = RDate.getNowDate();
         if (当初.equals(ResponseHolder.getMenuID())) {
             RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課);
+            div.getTxtShoriNendo().setValue(new RDate(調定年度.toString()));
             for (KoikiZenShichosonJoho master : 構成市町村List) {
-                RString 処理枝番 = null;
-                if (master.get市町村識別ID() != null) {
-                    処理枝番 = RS00.concat(master.get市町村識別ID());
-                }
+                RString 処理枝番 = RS00.concat(master.get市町村識別ID());
                 ShoriDateKanri shoridatekanri = manager.get基年月日(master.get市町村コード(), 当初所得引出, 処理枝番, new FlexibleYear(調定年度));
                 set当初の基準日時(shoridatekanri, master, rowList);
             }
         } else if (異動.equals(ResponseHolder.getMenuID())) {
             RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, nowDate, SubGyomuCode.DBB介護賦課);
+            div.getTxtShoriNendo().setValue(new RDate(所得年度.toString()));
             for (KoikiZenShichosonJoho master : 構成市町村List) {
-                RString 処理枝番 = null;
-                if (master.get市町村識別ID() != null) {
-                    処理枝番 = RS00.concat(master.get市町村識別ID());
-                }
+                RString 処理枝番 = RS00.concat(master.get市町村識別ID());
                 ShoriDateKanri shoridatekanri = manager.get基年月日(master.get市町村コード(), 所得引出, 処理枝番, new FlexibleYear(所得年度));
                 set異動の基準日時(shoridatekanri, master, rowList);
             }
@@ -149,27 +144,25 @@ public class ShotokuJohoChushutsuHandler {
             newRow.setTxtHokenshaNo(master.get証記載保険者番号().value());
         }
         if (shoridatekanri == null) {
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
             newRow.setSelectButtonState(DataGridButtonState.Disabled);
             newRow.setTxtSaishinShoriNitiji(RString.EMPTY);
             newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
         } else if (shoridatekanri.get基準日時() == null || shoridatekanri.get基準日時().isEmpty()) {
             newRow.setTxtSaishinShoriNitiji(RString.EMPTY);
-            List<UzT0885SharedFileEntryEntity> entryEntityList = Collections.EMPTY_LIST;
-            if (!RString.isNullOrEmpty(master.get市町村識別ID())) {
-                entryEntityList = SharedFile.searchSharedFile(当初_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
-            }
+            List<UzT0885SharedFileEntryEntity> entryEntityList = SharedFile.searchSharedFile(
+                    当初_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
             if (entryEntityList == null || entryEntityList.isEmpty()) {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Enabled);
                 newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
             } else {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Disabled);
                 newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
             }
         } else if (shoridatekanri.get基準日時() != null && !shoridatekanri.get基準日時().isEmpty()) {
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
             newRow.setSelectButtonState(DataGridButtonState.Disabled);
             RString dateTemp = shoridatekanri.get基準日時().getDate().wareki().toDateString();
             RString timeTemp = new RString(shoridatekanri.get基準日時().getRDateTime().toString().substring(NUM11, NUM19));
@@ -197,27 +190,26 @@ public class ShotokuJohoChushutsuHandler {
             newRow.setTxtHokenshaNo(master.get証記載保険者番号().value());
         }
         if (shoridatekanri == null) {
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
             newRow.setSelectButtonState(DataGridButtonState.Disabled);
             newRow.setTxtSaishinShoriNitiji(RString.EMPTY);
             newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
-        } else if (shoridatekanri.get基準日時() == null || shoridatekanri.get基準日時().isEmpty()) {
-            newRow.setTxtSaishinShoriNitiji(RString.EMPTY);
-            List<UzT0885SharedFileEntryEntity> entryEntityList = Collections.EMPTY_LIST;
-            if (!RString.isNullOrEmpty(master.get市町村識別ID())) {
-                entryEntityList = SharedFile.searchSharedFile(異動_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
+        } else {
+            if (shoridatekanri.get基準日時() != null && !shoridatekanri.get基準日時().isEmpty()) {
+                RString dateTemp = shoridatekanri.get基準日時().getDate().wareki().toDateString();
+                RString timeTemp = new RString(shoridatekanri.get基準日時().getRDateTime().toString().substring(NUM11, NUM19));
+                newRow.setTxtSaishinShoriNitiji(dateTemp.concat(RString.HALF_SPACE).concat(timeTemp));
             }
+            newRow.setTxtShoriKbn(RendoKekkaLogShoriKubun.可.getコード());
+            List<UzT0885SharedFileEntryEntity> entryEntityList = SharedFile.searchSharedFile(
+                    異動_共有ファイル名.replace(定値_市町村ID, master.get市町村識別ID()));
             if (entryEntityList == null || entryEntityList.isEmpty()) {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Enabled);
             } else {
-                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.getコード());
+                newRow.setTxtShoriState(RendoKekkaLogShoriJotai.正常終了.get名称());
                 newRow.setSelectButtonState(DataGridButtonState.Disabled);
             }
-        } else if (shoridatekanri.get基準日時() != null && !shoridatekanri.get基準日時().isEmpty()) {
-            newRow.setTxtSaishinShoriNitiji(shoridatekanri.get基準日時().toDateString());
-            newRow.setTxtShoriState(RendoKekkaLogShoriJotai.状態なし.getコード());
-            newRow.setSelectButtonState(DataGridButtonState.Enabled);
         }
         rowList.add(newRow);
     }
@@ -251,8 +243,7 @@ public class ShotokuJohoChushutsuHandler {
                 }
             }
             div.getDataGrid1().getClickedItem().setSelectButtonState(DataGridButtonState.Disabled);
-            div.getUploadPanel().setVisible(false);
-            div.getBtnUpload().setDisabled(true);
+            initialize(div);
         }
     }
 }

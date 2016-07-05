@@ -39,7 +39,7 @@
     </repositories>
     <properties>
         <!-- 自業務公開系 DBXのバージョンと一致させること-->
-        <jp.co.ndensan.reams.dbx.version>1.10.0</jp.co.ndensan.reams.dbx.version>
+        <jp.co.ndensan.reams.dbx.version>1.10.0-SNAPSHOT</jp.co.ndensan.reams.dbx.version>
         <!-- UZ -->
         <jp.co.ndensan.reams.uz.version>1.10.0</jp.co.ndensan.reams.uz.version>
         <!-- 公開系 -->
@@ -47,7 +47,7 @@
         <jp.co.ndensan.reams.uax.version>1.10.0</jp.co.ndensan.reams.uax.version>
         <jp.co.ndensan.reams.uex.version>1.10.0</jp.co.ndensan.reams.uex.version>
         <jp.co.ndensan.reams.uxx.version>1.10.0</jp.co.ndensan.reams.uxx.version>
-        <jp.co.ndensan.reams.cax.version>1.10.0</jp.co.ndensan.reams.cax.version>
+        <jp.co.ndensan.reams.cax.version>1.10.2</jp.co.ndensan.reams.cax.version>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -479,7 +479,7 @@
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexPersistence</artifactId>
                 <version>${jp.co.ndensan.reams.uex.version}</version>
-            </dependency>            
+            </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexDivController</artifactId>

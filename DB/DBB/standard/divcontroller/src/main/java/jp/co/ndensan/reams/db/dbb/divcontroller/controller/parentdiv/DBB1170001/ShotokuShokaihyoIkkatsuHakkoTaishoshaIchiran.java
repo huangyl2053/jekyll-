@@ -12,8 +12,7 @@ import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB11700
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1170001.ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1170001.ShotokuShokaiTaishoshaIchiranHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1170001.ShotokuShokaiTaishoshaIchiranValidationHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -66,7 +65,7 @@ public class ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiran {
      */
     public ResponseData<ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv> onDoubleClick_dgTaishoshaIchiran(
             ShotokuShokaihyoIkkatsuHakkoTaishoshaIchiranDiv div) {
-        ViewStateHolder.put(ViewStateKey.賦課対象者, getHandler(div).do遷移前データ準備_引数());
+        ViewStateHolder.put(ViewStateKeys.賦課対象者, getHandler(div).do遷移前データ準備_引数());
         ViewStateHolder.put(ViewStateKeys.所得照会状況一覧KEY,
                 (Serializable) getHandler(div).do遷移前データ準備_抽出条件());
         return ResponseData.of(div).forwardWithEventName(選択).respond();

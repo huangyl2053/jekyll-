@@ -31,8 +31,6 @@ public class IchijihanteikekkahyoA4BodyEditor implements IIchijihanteikekkahyoA4
     }
 
     private IchijihanteikekkahyoA4ReportSource editSource(IchijihanteikekkahyoA4ReportSource source) {
-        source.yobo_listKaigokyufu_1 = item.getYobo_listKaigokyufu_1();
-        source.kaigo_listKaigokyufu_1 = item.getKaigo_listKaigokyufu_1();
         source.ｌistNichijoseikatsujiritsudo_1 = item.getListNichijoseikatsujiritsudo_1();
         source.listtokki1_1 = item.getListtokki1_1();
         source.listtokki2_1 = item.getListtokki2_1();

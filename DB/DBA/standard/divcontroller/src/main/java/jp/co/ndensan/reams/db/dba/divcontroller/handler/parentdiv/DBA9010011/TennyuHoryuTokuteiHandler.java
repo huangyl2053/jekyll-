@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 連動保留特定住所登録の取得するクラスです。
@@ -74,18 +75,18 @@ public class TennyuHoryuTokuteiHandler {
         div.getCcdBunchiInput().initialize();
         div.getCcdSisetuInputGuide().initialize();
         List<ddlTennyuHoryuTokuteiJushoIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
+        if (!SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
+            div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村コード).setVisible(false);
+            div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村名称).setVisible(false);
+        }
         if (businessList != null && !businessList.isEmpty()) {
             for (TennyuHoryuTokuteiBusiness tennyuhoryu : businessList) {
                 ddlTennyuHoryuTokuteiJushoIchiran_Row dgJigyoshaItiran = new ddlTennyuHoryuTokuteiJushoIchiran_Row();
                 dgJigyoshaItiran.setTxtKanriNo(tennyuhoryu.get管理番号());
-                ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-                Code 導入形態コード = 市町村セキュリティ情報.get導入形態コード();
                 dgJigyoshaItiran.setTxtShichosonCode(tennyuhoryu.get市町村コード().value());
                 dgJigyoshaItiran.setTxtShichosonName(tennyuhoryu.get市町村名称());
-                if (!SHICHOSONCODE_VALUE.equals(導入形態コード.getKey().substring(1))) {
-                    div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村コード).setVisible(false);
-                    div.getDdlTennyuHoryuTokuteiJushoIchiran().getGridSetting().getColumn(市町村名称).setVisible(false);
-                }
                 dgJigyoshaItiran.setTxtJushoCode(tennyuhoryu.get住所コード());
                 dgJigyoshaItiran.setTxtJusho(tennyuhoryu.get住所().value());
                 dgJigyoshaItiran.setTxtBanchiCode1(tennyuhoryu.get番地コード1().value());
@@ -279,7 +280,7 @@ public class TennyuHoryuTokuteiHandler {
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
                 builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
-                manager.insertOrUpdateOrDel(builder.build());
+                manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Added);
             }
             if (RowState.Modified.equals(list.getRowState())) {
                 RendoHoryuTokuteiJushoIdentifier key = new RendoHoryuTokuteiJushoIdentifier(list.getTxtKanriNo(),
@@ -295,14 +296,14 @@ public class TennyuHoryuTokuteiHandler {
                 builder.set番地コード２(new BanchiCode(list.getTxtBanchiCode2()));
                 builder.set番地コード３(new BanchiCode(list.getTxtBanchiCode3()));
                 builder.set施設名称(new AtenaMeisho(list.getTxtShisetsuJoho().split(RString.HALF_SPACE.toString()).get(1)));
-                rendoHoryu = builder.build().modifiedModel();
-                manager.insertOrUpdateOrDel(rendoHoryu);
+                manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Modified);
             }
             if (RowState.Deleted.equals(list.getRowState())) {
-                RendoHoryuTokuteiJusho rendoHoryu = new RendoHoryuTokuteiJusho(list.getTxtKanriNo(), new LasdecCode(list.getTxtShichosonCode()));
+                RendoHoryuTokuteiJushoIdentifier key = new RendoHoryuTokuteiJushoIdentifier(list.getTxtKanriNo(),
+                        new LasdecCode(list.getTxtShichosonCode()));
+                RendoHoryuTokuteiJusho rendoHoryu = models.get(key);
                 RendoHoryuTokuteiJushoBuilder builder = rendoHoryu.createBuilderForEdit();
-                rendoHoryu = builder.build().deleted();
-                manager.insertOrUpdateOrDel(rendoHoryu);
+                manager.insertOrUpdateOrDel(builder.build(), EntityDataState.Deleted);
             }
         }
     }

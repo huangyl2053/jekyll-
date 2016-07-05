@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,10 +32,10 @@ public class NinteiChosaNyuryokuDiv extends Panel {
      */
     @JsonProperty("ChosaTaisho")
     private ChosaTaishoDiv ChosaTaisho;
-    @JsonProperty("tabChosaShurui")
-    private tabChosaShuruiDiv tabChosaShurui;
     @JsonProperty("ccdChosaJisshishaJoho")
     private ChosaJisshishaJohoDiv ccdChosaJisshishaJoho;
+    @JsonProperty("tabChosaShurui")
+    private tabChosaShuruiDiv tabChosaShurui;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +62,15 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
+     * getccdChosaJisshishaJoho
+     * @return ccdChosaJisshishaJoho
+     */
+    @JsonProperty("ccdChosaJisshishaJoho")
+    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
+        return ccdChosaJisshishaJoho;
+    }
+
+    /*
      * gettabChosaShurui
      * @return tabChosaShurui
      */
@@ -77,15 +86,6 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     @JsonProperty("tabChosaShurui")
     public void setTabChosaShurui(tabChosaShuruiDiv tabChosaShurui) {
         this.tabChosaShurui = tabChosaShurui;
-    }
-
-    /*
-     * getccdChosaJisshishaJoho
-     * @return ccdChosaJisshishaJoho
-     */
-    @JsonProperty("ccdChosaJisshishaJoho")
-    public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
-        return ccdChosaJisshishaJoho;
     }
 
     /*

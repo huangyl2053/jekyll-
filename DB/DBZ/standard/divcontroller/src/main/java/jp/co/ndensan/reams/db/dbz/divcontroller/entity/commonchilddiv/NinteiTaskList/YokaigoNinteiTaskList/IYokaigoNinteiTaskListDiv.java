@@ -14,4 +14,6 @@ public interface IYokaigoNinteiTaskListDiv extends ICommonChildDivBaseProperties
     public abstract RString 一览件数();
 
     public abstract List<dgNinteiTaskList_Row> getCheckbox();
+
+    public abstract List<dgNinteiTaskList_Row> getDataSource();
 }

@@ -127,10 +127,6 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
             };
 
-            Controls.prototype.ddlHokenshaNumber = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            };
-
             Controls.prototype.ddlShichosonCode = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
             };
@@ -392,7 +388,7 @@ var DBZ;
             };
 
             Controls.prototype.txtCheckDay = function () {
-                return new UZA.TextBox(this.convFiledName("txtCheckDay"));
+                return new UZA.TextBoxDate(this.convFiledName("txtCheckDay"));
             };
 
             Controls.prototype.txtNinteiYukoKaishiDateFrom = function () {
@@ -517,18 +513,6 @@ var DBZ;
 
             Controls.prototype.SonotaJoho = function () {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
-            };
-
-            Controls.prototype.txtGeninShikkanCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            };
-
-            Controls.prototype.btnGeninShikkanGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnGeninShikkanGuide"));
-            };
-
-            Controls.prototype.txtGeninShikkanName = function () {
-                return new UZA.TextBox(this.convFiledName("txtGeninShikkanName"));
             };
 
             Controls.prototype.txtShinseiKeikaNissu = function () {

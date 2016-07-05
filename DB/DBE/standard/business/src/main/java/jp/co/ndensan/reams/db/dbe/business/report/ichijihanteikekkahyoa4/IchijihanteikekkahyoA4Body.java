@@ -24,10 +24,6 @@ public class IchijihanteikekkahyoA4Body {
     private RString listtokki5_1;
     private RString listtokki6_1;
     private RString listtokki8_1;
-    private RString kaigo_listKaigokyufu_1;
-    private RString kaigo_tokuteiFukushiyoguKikan;
-    private RString yobo_listKaigokyufu_1;
-    private RString yobo_tokuteiFukushiyoguKikan;
     private RString listNichijoseikatsujiritsudo_1;
     private RString listIchigun_1;
     private RString listIchigun_2;

@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuy
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoSource;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
@@ -174,12 +174,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoPrintService {
 
     private EditedAtesaki get編集後宛先(KaigoHokenryoChoshuyuyoKetteiTsuchishoB5YokoJoho 徴収猶予決定通知書情報) {
 
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
         EditedAtesaki 編集後宛先 = new EditedAtesaki(徴収猶予決定通知書情報.get宛先(),
                 徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通());
         if (isNotNull(徴収猶予決定通知書情報.get宛先()) && isNotNull(徴収猶予決定通知書情報.get地方公共団体())
                 && isNotNull(徴収猶予決定通知書情報.get帳票制御共通())) {
-            編集後宛先 = jushoHenshu.create編集後宛先(徴収猶予決定通知書情報.get宛先(),
+            編集後宛先 = JushoHenshu.create編集後宛先(徴収猶予決定通知書情報.get宛先(),
                     徴収猶予決定通知書情報.get地方公共団体(), 徴収猶予決定通知書情報.get帳票制御共通());
         }
         return 編集後宛先;

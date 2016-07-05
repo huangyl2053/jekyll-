@@ -55,6 +55,7 @@ public class KihonChosaInput5 {
             ArrayList<KihonChosaInput> 認定調査基本情報リスト = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
             ArrayList<KihonChosaInput> new認定調査基本情報リスト = getHandler(div).onClick_btnConfirm(認定調査基本情報リスト);
             ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, new認定調査基本情報リスト);
+            必須入力チェック(new認定調査基本情報リスト);
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -72,6 +73,14 @@ public class KihonChosaInput5 {
 
     private KihonChosaInputHandler5 getHandler(KihonChosaInput5Div div) {
         return new KihonChosaInputHandler5(div);
+    }
+
+    private void 必須入力チェック(ArrayList<KihonChosaInput> new認定調査基本情報リスト) {
+        if (new認定調査基本情報リスト != null && new認定調査基本情報リスト.size() == 6) {
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("1"));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("0"));
+        }
     }
 
 }

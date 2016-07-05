@@ -167,7 +167,6 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             } else {
                 性別.add(性別_女);
             }
-            //TODO種別と状態　QA765　コードマストよりパラメータはない。
             種別.add(entity.getJuminShubetsuCode() == null
                     ? RString.EMPTY : JuminShubetsu.toValue(entity.getJuminShubetsuCode()).toRString());
             状態.add(entity.getJuminJotaiCode() == null
@@ -267,7 +266,9 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     }
 
     private RString 共通ポリシfomart(FlexibleDate date) {
-
+        if (date == null) {
+            return RString.EMPTY;
+        }
         return (date.
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());

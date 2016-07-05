@@ -70,8 +70,15 @@ public class KogakuShinseiListDivHandler {
                 getYearMonth().minusMonth(THREE);
         div.getTxtServiceYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         set証記載保険者番号(被保険者番号, サービス年月, 導入形態コード);
-        List<KougakuShinseiIchiranJohyouEntityResult> kogaList = new ArrayList<>();
-        set高額申請一覧情報(kogaList);
+        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        List<dgShinseiJoho_Row> rowList = new ArrayList<>();
+        div.getDgShinseiJoho().setDataSource(rowList);
+        if (受託区分.equals(ONE)) {
+            div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(false);
+            div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(審査年月);
+            div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(登録年月日);
+        }
         if (高額介護サービス費照会.equals(メニューID)) {
             set照会モード();
         }
@@ -101,6 +108,8 @@ public class KogakuShinseiListDivHandler {
     public void 検索一覧(HihokenshaNo 被保険者番号, RString メニューID) {
         FlexibleYearMonth サービス年月From = null;
         FlexibleYearMonth サービス年月To = null;
+        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (div.getTxtServiceYMFrom().getDomain() != null) {
             サービス年月From = new FlexibleYearMonth(div.getTxtServiceYMFrom().getDomain().toString());
         }
@@ -110,11 +119,11 @@ public class KogakuShinseiListDivHandler {
         if (高額サービス費支給申請書登録.equals(メニューID)) {
             List<KougakuShinseiIchiranJohyouEntityResult> kogaList = KougakuShinseiIchiranJohyou.createInstance().
                     getKogakuKyuufuTaishouList(被保険者番号, サービス年月From, サービス年月To);
-            set高額申請一覧情報(kogaList);
+            set高額申請一覧情報(kogaList, 受託区分);
         } else if (高額介護サービス費照会.equals(メニューID)) {
             List<KougakuShinseiIchiranJohyouEntityResult> jishList = KougakuShinseiIchiranJohyou.createInstance().
                     getJigyouKougakuShinseiIchiranJohyou(被保険者番号, サービス年月From, サービス年月To);
-            set高額申請一覧情報(jishList);
+            set高額申請一覧情報(jishList, 受託区分);
         }
     }
 
@@ -122,12 +131,11 @@ public class KogakuShinseiListDivHandler {
      * 高額申請一覧情報を抽出する
      *
      * @param kogaList List<KougakuShinseiIchiranJohyouEntityResult>
+     * @param 受託区分 RString
      */
-    public void set高額申請一覧情報(List<KougakuShinseiIchiranJohyouEntityResult> kogaList) {
+    public void set高額申請一覧情報(List<KougakuShinseiIchiranJohyouEntityResult> kogaList, RString 受託区分) {
         List<dgShinseiJoho_Row> rowList = new ArrayList<>();
         dgShinseiJoho_Row row = new dgShinseiJoho_Row();
-        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         for (KougakuShinseiIchiranJohyouEntityResult koga : kogaList) {
             if (koga.getEntity().getサービス年月() != null) {
                 row.setData1(koga.getEntity().getサービス年月().wareki().toDateString());
@@ -155,11 +163,9 @@ public class KogakuShinseiListDivHandler {
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(登録年月日);
                 if (koga.getEntity().get対象者判定審査年月() != null) {
                     row.setData10(koga.getEntity().get対象者判定審査年月().wareki().toDateString());
-                    //TODO  QA881
                 }
                 if (koga.getEntity().get決定年月日() != null) {
                     row.setData11(koga.getEntity().get決定年月日().wareki().toDateString());
-                    //TODO QA881
                 }
             }
             if (koga.getEntity().get証記載番号() != null && !koga.getEntity().get証記載番号().isEmpty()) {

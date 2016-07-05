@@ -17,19 +17,19 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710021.JutakuKaishuShinseiJyohoTorokuValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.JutakuGaisuDataParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.JutakuGaisuViewStateHolderParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHanntei;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuyaokaigojyotaisandannkaihantei.JutakuKaishuYaokaigoJyotaiSandannkaiHanteiManager;
-import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
@@ -97,12 +97,12 @@ public class JutakuKaishuShinseiJyohoToroku {
         div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(識別コード);
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
         JutakuGaisuViewStateHolderParameter param = new JutakuGaisuViewStateHolderParameter();
-        param.set償還払申請一覧_サービス年月(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class));
+        param.set償還払申請一覧_サービス年月(ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class));
         param.set償還払申請一覧_被保険者番号(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class));
-        param.set償還払申請一覧_整理番号(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class));
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        param.set償還払申請一覧_整理番号(ViewStateHolder.get(ViewStateKeys.整理番号, RString.class));
         handler.onLoad(識別コード, 被保険者番号, サービス提供年月, 整理番号, 画面モード, param);
-        ViewStateHolder.put(ViewStateKeys.住宅改修費_申請情報, param);
+        ViewStateHolder.put(ViewStateKeys.申請情報, param);
         return ResponseData.of(div).respond();
     }
 
@@ -162,7 +162,7 @@ public class JutakuKaishuShinseiJyohoToroku {
                 ResponseHolder.getMessageCode());
         boolean 確認_汎用 = new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(
                 ResponseHolder.getMessageCode());
-        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.住宅改修費_申請情報,
+        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);
         if (!handler.is画面データが変更(画面モード, param)) {
             if (isCheckデータ変更(内容変更, 判断基準, 限度額, 削除の確認, 保存の確認, 確認_汎用)) {
@@ -275,7 +275,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.set画面遷移パラメータ(引き継ぎデータEntity.get識別コード(),
                     引き継ぎデータEntity.get被保険者番号(), 画面モード_修正, param);
-            ViewStateHolder.put(ViewStateKeys.検索情報キー, param.get償還払決定情報());
+            ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報).respond();
         }
         if (確認_汎用 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
@@ -554,7 +554,7 @@ public class JutakuKaishuShinseiJyohoToroku {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         RString 画面モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         JutakuKaishuShinseiJyohoTorokuHandler handler = getHandler(div);
-        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.住宅改修費_申請情報, JutakuGaisuViewStateHolderParameter.class);
+        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報, JutakuGaisuViewStateHolderParameter.class);
         if (画面モード_修正.equals(画面モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(
@@ -566,18 +566,18 @@ public class JutakuKaishuShinseiJyohoToroku {
                     ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
-                ViewStateHolder.put(ViewStateKeys.検索情報キー, param.get償還払決定情報());
+                ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
                 return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                         .respond();
             }
         } else if (画面モード_登録.equals(画面モード) || 画面モード_事前申請.equals(画面モード)) {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード_修正, param);
-            ViewStateHolder.put(ViewStateKeys.検索情報キー, param.get償還払決定情報());
+            ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .respond();
         } else {
             handler.set画面遷移パラメータ(識別コード, 被保険者番号, 画面モード, param);
-            ViewStateHolder.put(ViewStateKeys.検索情報キー, param.get償還払決定情報());
+            ViewStateHolder.put(ViewStateKeys.検索キー, param.get償還払決定情報());
             return ResponseData.of(div).forwardWithEventName(DBC0710021TransitionEventName.to償還払決定情報)
                     .respond();
         }
@@ -604,11 +604,11 @@ public class JutakuKaishuShinseiJyohoToroku {
         if (valid2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid2).respond();
         }
-        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.住宅改修費_申請情報,
+        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);
         handler.過去の住宅改修費取得と支払結果の設定(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
                 param);
-        ViewStateHolder.put(ViewStateKeys.住宅改修費_申請情報, param);
+        ViewStateHolder.put(ViewStateKeys.申請情報, param);
         return ResponseData.of(div).respond();
     }
 
@@ -709,14 +709,14 @@ public class JutakuKaishuShinseiJyohoToroku {
             return ResponseData.of(div).respond();
         }
         handler.支払結果の設定(被保険者番号);
-        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.住宅改修費_申請情報,
+        JutakuGaisuViewStateHolderParameter param = ViewStateHolder.get(ViewStateKeys.申請情報,
                 JutakuGaisuViewStateHolderParameter.class);
         JutakuGaisuDataParameter 住宅改修データ = new JutakuGaisuDataParameter();
         住宅改修データ.set限度額リセット(要介護状態区分３段階変更チェック);
         住宅改修データ.set住宅改修データ(handler.get住宅改修内容一覧データ(
                 div.getJutakuKaishuShinseiContents().getCcdJutakugaisyunaiyoList().get住宅改修内容一覧()));
         param.set住宅改修データ(住宅改修データ);
-        ViewStateHolder.put(ViewStateKeys.住宅改修費_申請情報, param);
+        ViewStateHolder.put(ViewStateKeys.申請情報, param);
         return ResponseData.of(div).respond();
     }
 

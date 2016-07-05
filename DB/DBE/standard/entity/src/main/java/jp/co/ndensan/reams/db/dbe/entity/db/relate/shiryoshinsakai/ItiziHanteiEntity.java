@@ -40,6 +40,7 @@ public class ItiziHanteiEntity {
     private RString dbt5101_hihokenshaNo;
     private RString dbt5101_shoKisaiHokenshaNo;
     private Code dbt5101_nigoTokuteiShippeiCode;
+    private Code dbt5101_chikuCode;
     private Code dbt5116_ichijiHanteiKekkaCode;
     private int dbt5116_kijunJikan;
     private int dbt5116_kijunJikanShokuji;
@@ -91,6 +92,11 @@ public class ItiziHanteiEntity {
     private int dbt5207_remban;
     private Code dbt5207_koroshoIfShikibetsuCode;
     private int dbt5207_serviceJokyo;
+    private int dbt5208_ninteichosaRirekiNo;
+    private ShinseishoKanriNo dbt5208_shinseishoKanriNo;
+    private int dbt5208_remban;
+    private Code dbt5208_koroshoIfShikibetsuCode;
+    private boolean dbt5208_serviceJokyoFlag;
     private int dbt5210_ninteichosaRirekiNo;
     private ShinseishoKanriNo dbt5210_shinseishoKanriNo;
     private int dbt5210_remban;

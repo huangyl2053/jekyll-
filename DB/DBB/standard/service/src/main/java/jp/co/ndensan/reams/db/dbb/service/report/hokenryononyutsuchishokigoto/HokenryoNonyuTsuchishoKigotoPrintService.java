@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishokigoto;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoRenchoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoRenchoReport;
@@ -175,9 +175,9 @@ public class HokenryoNonyuTsuchishoKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoSource>> reportList
                         = new HokenryoNonyuTsuchishoKigotoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -194,9 +194,9 @@ public class HokenryoNonyuTsuchishoKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> reportList
                         = new HokenryoNonyuTsuchishoKigotoRenchoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotashiryo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,23 +21,12 @@ public class SonotashiryoEntity {
     private RString 保険者番号;
     private RString 被保険者番号;
     private RString 名前;
-    private RString 審査会資料作成年;
-    private RString 審査会資料作成月;
-    private RString 審査会資料作成日;
-    private RString 今回認定申請年;
-    private RString 今回認定申請月;
-    private RString 今回認定申請日;
-    private RString 今回認定調査実施年;
-    private RString 今回認定調査実施月;
-    private RString 今回認定調査実施日;
-    private RString 今回認定審査年;
-    private RString 今回認定審査月;
-    private RString 今回認定審査日;
-    private RString sakuseiGengo;
-    private RString chosaGengo;
-    private RString shinseiGengo;
-    private RString shinsaGengo;
-    private RString imgSonotashiryo1;
-    private RString imgSonotashiryo2;
-    private RString imgSonotashiryo;
+    private FlexibleDate 審査会資料作成年月日;
+    private FlexibleDate 認定申請年月日;
+    private FlexibleDate 認定調査実施年月日;
+    private FlexibleDate 介護認定審査会開催年月日;
+    private RString 左のその他資料イメージ;
+    private RString 右のその他資料イメージ;
+    private RString その他資料;
+
 }

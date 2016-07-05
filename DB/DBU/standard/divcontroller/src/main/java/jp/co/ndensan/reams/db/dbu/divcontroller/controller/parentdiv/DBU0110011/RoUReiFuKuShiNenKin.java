@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0110011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0110011.DBU0110011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0110011.RoUReiFuKuShiNenKinDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.datagridRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -53,8 +53,8 @@ public class RoUReiFuKuShiNenKin {
      * @return ResponseData<RoUReiFuKuShiNenKinDiv>
      */
     public ResponseData<RoUReiFuKuShiNenKinDiv> onLoad(RoUReiFuKuShiNenKinDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(識別コード);
         div.getRoreiFukushiNenkinJohoList().getCcdRoreiFukushiNenkinRireki().initialize(識別コード, 被保険者番号);
@@ -85,7 +85,7 @@ public class RoUReiFuKuShiNenKin {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getRoreiFukushiNenkinJohoList().getCcdRoreiFukushiNenkinRireki().click_Save();
             RealInitialLocker.release(LOCKINGKEY);
-            アクセスログ(AccessLogType.更新, ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+            アクセスログ(AccessLogType.更新, ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
             div.getKihonJoho().getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBU0110011StateName.完了状態);

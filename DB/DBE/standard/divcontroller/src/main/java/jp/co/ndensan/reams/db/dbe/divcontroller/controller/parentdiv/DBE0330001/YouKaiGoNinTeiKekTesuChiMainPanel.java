@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -235,9 +237,15 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         param.setShuJiiJyouHou(builder.toRString());
         param.setNinteiJohoTeikyoYMD(div.getTxtNinteiJokyoTeikyoYMD().getValue().toDateString());
         param.setShinseishoKanriNo(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShinseishoKanriNo());
-        // QA 326 支所コード  市町村セキュリティより取得した「証記載保険者番号」
-        param.setShishoCode(RString.EMPTY);
-        param.setShoKisaiHokenshaNo(new RString("209006"));
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        RString 支所コード = RString.EMPTY;
+        if (市町村セキュリティ情報.get支所管理有無フラグ()) {
+            支所コード = ShishoSecurityJoho.createInstance().getShishoCode(UrControlDataFactory.
+                    createInstance().getLoginInfo().getUserId());
+        }
+        param.setShichosonCode(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShichosonCode());
+        param.setShishoCode(支所コード);
+        param.setShoKisaiHokenshaNo(市町村セキュリティ情報.get市町村情報().get証記載保険者番号().value());
         response.data = param;
         return response;
     }

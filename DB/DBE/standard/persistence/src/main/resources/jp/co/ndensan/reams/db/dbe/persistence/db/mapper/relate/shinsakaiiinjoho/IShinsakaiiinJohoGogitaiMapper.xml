@@ -27,6 +27,10 @@
             rgdb."DbT5591GogitaiJoho" AS DBT5591
         ON
             DBT5591."gogitaiNo" = DBT5501."gogitaiNo"
+        AND
+            DBT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
+        AND 
+            DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
             DBT5594."haishiFlag" = FALSE
     </select>

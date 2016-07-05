@@ -41,10 +41,10 @@ public class KoikinaiTenkyoRirekiValidationHandler {
     public ValidationMessageControlPairs 認定申請日範囲チェック(ValidationMessageControlPairs validPairs) {
         FlexibleDate shinnseikafrom = div.getTxtNinteiShinseiDateFrom().getValue();
         FlexibleDate shinnseikato = div.getTxtNinteiShinseiDateTo().getValue();
-        if (shinnseikafrom == null || shinnseikafrom.isEmpty()) {
+        if (shinnseikafrom.isEmpty()) {
             shinnseikafrom = FlexibleDate.MIN;
         }
-        if (shinnseikato == null || shinnseikato.isEmpty()) {
+        if (shinnseikato.isEmpty()) {
             shinnseikato = FlexibleDate.MAX;
         }
         if (shinnseikato.isBefore(shinnseikafrom)) {

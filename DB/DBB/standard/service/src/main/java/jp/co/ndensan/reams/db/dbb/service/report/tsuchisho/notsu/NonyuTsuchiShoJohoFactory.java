@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.Nokitsuki;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.NokitsukiCollection;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
@@ -53,6 +54,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -315,8 +318,12 @@ public class NonyuTsuchiShoJohoFactory {
             FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号, ShikibetsuCode 識別コード, OcrPattern 納付書タイプ,
             FukaAtena 賦課の情報, List<UniversalPhase> 普徴期別金額リスト, List<NokiJoho> 普徴納期情報リスト) {
         List<SeikyuForPrinting> 請求情報リスト = new ArrayList<>();
+        for (Nokitsuki 納期月 : 納期月リスト.getソート済納期月リスト()) {
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, String.valueOf(納期月.get期別()));
+        }
         for (NokiJoho 納期情報 : 普徴納期情報リスト) {
             int 期 = 納期情報.get期月().get期AsInt();
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, String.valueOf(期));
             ShunoKanri.Builder builder = ShunoKanri.newBuilder();
             builder.setKamokuCode(収納科目.getコード());
             builder.setKamokuEdabanCode(収納科目.get枝番コード());

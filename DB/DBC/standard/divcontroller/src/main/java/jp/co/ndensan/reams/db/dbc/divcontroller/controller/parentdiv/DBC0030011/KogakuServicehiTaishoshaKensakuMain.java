@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0030011.KogakuServicehiTaishoshaKensakuMainValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0030011.KogakuServiceData;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -161,13 +161,13 @@ public class KogakuServicehiTaishoshaKensakuMain {
         }
         ViewStateHolder.put(ViewStateKeys.被保険者番号, mapStr.get(被保険者番号R));
         ViewStateHolder.put(ViewStateKeys.被保険者名, mapStr.get(被保険者名R));
-        ViewStateHolder.put(ViewStateKeys.提供年月From, mapRDate.get(提供年月FROMR));
-        ViewStateHolder.put(ViewStateKeys.提供年月To, mapRDate.get(提供年月TOR));
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月From, mapRDate.get(提供年月FROMR));
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月To, mapRDate.get(提供年月TOR));
         ViewStateHolder.put(ViewStateKeys.申請年月From, mapRDate.get(申請年月FROMR));
         ViewStateHolder.put(ViewStateKeys.申請年月To, mapRDate.get(申請年月TOR));
         ViewStateHolder.put(ViewStateKeys.決定年月From, mapRDate.get(決定年月FROMR));
         ViewStateHolder.put(ViewStateKeys.決定年月To, mapRDate.get(決定年月TOR));
-        ViewStateHolder.put(ViewStateKeys.提供年月, mapRDate.get(提供年月R));
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, mapRDate.get(提供年月R));
         ViewStateHolder.put(ViewStateKeys.申請年月, mapRDate.get(申請年月R));
         ViewStateHolder.put(ViewStateKeys.決定年月, mapRDate.get(決定年月R));
     }

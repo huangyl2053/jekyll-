@@ -258,6 +258,14 @@ public class YokaigoNinteiTaskListHandler {
             List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().
                     getマスキングモード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!マスキングList.isEmpty()) {
+                ShinSaKaiBusiness 前マスキングModel = YokaigoNinteiTaskListFinder.createInstance().
+                        get前マスキング(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前マスキングModel.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             マスキングモード(マスキングList);
         }
         if (審査会登録モード.equals(モード)) {
@@ -292,12 +300,28 @@ public class YokaigoNinteiTaskListHandler {
             List<GeTuReiSyoRiBusiness> 月例処理List = YokaigoNinteiTaskListFinder.createInstance().
                     get月例処理モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!月例処理List.isEmpty()) {
+                ShinSaKaiBusiness 前月例処理Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前月例処理(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前月例処理Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             月例処理モード(月例処理List);
         }
         if (審査受付モード.equals(モード)) {
             List<ShinSaKeTuKeBusiness> 審査受付List = YokaigoNinteiTaskListFinder.createInstance().
                     get審査受付モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!審査受付List.isEmpty()) {
+                ShinSaKaiBusiness 前審査受付Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前審査受付(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査受付Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             審査受付モード(審査受付List);
         }
     }
@@ -862,11 +886,11 @@ public class YokaigoNinteiTaskListHandler {
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
-        if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
-            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
+        if (business.get認定審査会完了年月日() != null && !business.get認定審査会完了年月日().isEmpty()) {
+            row.getShinsakaiKanryoDay().setValue(new RDate(business.get認定審査会完了年月日().toString()));
         }
-        if (business.get介護認定審査会割当年月日() != null && !business.get介護認定審査会割当年月日().isEmpty()) {
-            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get介護認定審査会割当年月日().toString()));
+        if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
+            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
         }
         if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
             row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
@@ -1137,5 +1161,14 @@ public class YokaigoNinteiTaskListHandler {
     public List<dgNinteiTaskList_Row> getCheckbox() {
 
         return div.getDgNinteiTaskList().getSelectedItems();
+    }
+
+    /**
+     * 一览にデータを取得します。
+     *
+     * @return 一览のデータ
+     */
+    public List<dgNinteiTaskList_Row> getDataSource() {
+        return div.getDgNinteiTaskList().getDataSource();
     }
 }

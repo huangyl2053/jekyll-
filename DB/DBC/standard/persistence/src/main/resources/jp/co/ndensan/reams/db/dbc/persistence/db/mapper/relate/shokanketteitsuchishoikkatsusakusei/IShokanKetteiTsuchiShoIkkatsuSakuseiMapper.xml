@@ -373,7 +373,7 @@
             AND
             DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[<=]]> #{dataTo}
         </if>
-        <if test="chusyutuKetteiFlag">
+        <if test="chusyutuKetteiShaUketsukeFlag">
             AND
             DbT3036ShokanHanteiKekka."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
@@ -440,9 +440,7 @@
         SELECT
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3043ShokanShokujiHiyo."yoshikiNo" AS "yoshikiNo"
-        <!-- TODO QA1178確認中-->
-        --,DbT3043ShokanShokujiHiyo.サービスコード AS "serviceCode"
-        ,'' AS "serviceCode"
+        ,'500000' AS "serviceCode"
         ,DbT3043ShokanShokujiHiyo."tensuKingaku" AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"

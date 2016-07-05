@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.DbV7902FukaSearchBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.FukaTaishoshaRelateBusiness;
@@ -25,7 +26,6 @@ import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ03000
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 //import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
 //import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
@@ -198,7 +198,7 @@ public class FukaTaishoshaSearch {
             save最近処理者(div, 対象者);
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(newResult));
             set賦課年度(div);
-            ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_1);
+            ViewStateHolder.put(ViewStateKeys.各種通知書作成フラグ, フラグ_1);
             // 次画面遷移
             return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
             // 検索結果が２件以上の場合
@@ -298,7 +298,7 @@ public class FukaTaishoshaSearch {
             }
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(対象者));
         }
-        ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_1);
+        ViewStateHolder.put(ViewStateKeys.各種通知書作成フラグ, フラグ_1);
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
@@ -315,7 +315,7 @@ public class FukaTaishoshaSearch {
         save最近処理者(div);
         // ViewState_個人確定キーの保存
         put対象者Key(create対象者Key(div));
-        ViewStateHolder.put(ViewStateKey.各種通知書作成フラグ, フラグ_2);
+        ViewStateHolder.put(ViewStateKeys.各種通知書作成フラグ, フラグ_2);
         // 次画面遷移
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
@@ -447,7 +447,7 @@ public class FukaTaishoshaSearch {
     }
 
     private void put対象者Key(FukaTaishoshaKey key) {
-        ViewStateHolder.put(ViewStateKey.賦課対象者, key);
+        ViewStateHolder.put(ViewStateKeys.賦課対象者, key);
     }
 
     private void save最近処理者(FukaTaishoshaSearchDiv div) {

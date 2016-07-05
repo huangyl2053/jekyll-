@@ -132,7 +132,7 @@
                     INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511
                             ON	DbT5511."shinsakaiKaisaiNo" = DbT5501."shinsakaiKaisaiNo"
             WHERE
-                    DbT5101."koikinaiTenkyoKubun" IN ('0','1','2')
+                    DbT5101."koikinaiTenkyoKubun" = '1'
                     AND	DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteichosaKanryoYMD" IS NOT NULL
@@ -142,7 +142,7 @@
                     AND	DbT5105."maskingKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-                    AND	DbT5101."shoriJotaiKubun" IN ('0','3')
+                    AND	DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
                     AND	DbT5101."logicalDeletedFlag" = FALSE
                     <if test="被保険者番号フラグ">
                         AND DbT5101."hihokenshaNo" = #{被保険者番号}
@@ -178,16 +178,14 @@
                         AND DbT5101."ninteiShinseiShinseijiKubunCode" = #{申請区分}
                     </if>
                     <if test="男フラグ">
-                        AND DbT5101."seibetsu" = '男'
+                        AND DbT5101."seibetsu" = '1'
                     </if>
                     <if test="女フラグ">
-                        AND DbT5101."seibetsu" = '女'
+                        AND DbT5101."seibetsu" = '2'
                     </if>
-                    <if test="女フラグ">
-                        <if test="男フラグ">
-                            AND DbT5101."seibetsu" = '男'
-                            OR DbT5101."seibetsu" = '女'
-                         </if>
+                    <if test="性別フラグ">                
+                        AND DbT5101."seibetsu" = '1'
+                        OR DbT5101."seibetsu" = '2'
                     </if>
             ORDER BY
                     DbT5101."shinseishoKanriNo"
@@ -259,7 +257,7 @@
                     INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511
                             ON	DbT5511."shinsakaiKaisaiNo" = DbT5501."shinsakaiKaisaiNo"
             WHERE
-                    DbT5101."koikinaiTenkyoKubun" IN ('0','1','2')
+                    DbT5101."koikinaiTenkyoKubun" = '1'
                     AND	DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteichosaKanryoYMD" IS NOT NULL
@@ -269,7 +267,7 @@
                     AND	DbT5105."maskingKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
                     AND	DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-                    AND	DbT5101."shoriJotaiKubun" IN ('0','3')
+                    AND	DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
                     AND	DbT5101."logicalDeletedFlag" = FALSE
                     <if test="被保険者番号フラグ">
                         AND DbT5101."hihokenshaNo" = #{被保険者番号}
@@ -305,16 +303,14 @@
                         AND DbT5101."ninteiShinseiShinseijiKubunCode" = #{申請区分}
                     </if>
                     <if test="男フラグ">
-                        AND DbT5101."seibetsu" = '男'
+                        AND DbT5101."seibetsu" = '1'
                     </if>
                     <if test="女フラグ">
-                        AND DbT5101."seibetsu" = '女'
+                        AND DbT5101."seibetsu" = '2'
                     </if>
-                    <if test="女フラグ">
-                        <if test="男フラグ">
-                            AND DbT5101."seibetsu" = '男'
-                            OR DbT5101."seibetsu" = '女'
-                         </if>
+                    <if test="性別フラグ">
+                        AND DbT5101."seibetsu" = '1'
+                        OR DbT5101."seibetsu" = '2'
                     </if>
             ORDER BY
                     DbT5101."shinseishoKanriNo"

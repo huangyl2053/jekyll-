@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoA4ReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoItem;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.IchijihanteikekkahyoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -25,19 +26,61 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Editor {
 
+    private static final RString 品目_6月間 = new RString("品目/6月間");
+    private static final RString 品目 = new RString("品目");
+    private static final RString 回月 = new RString("回 /月");
+    private static final RString 日月 = new RString("日 /月");
+    private static final RString 住宅改修 = new RString("住宅改修                                           ：");
+    private static final RString 予防サービス状況リスト = new RString("(予防サービス状況リスト)");
+    private static final RString 介護予防訪問介護 = new RString("介護予防訪問介護（ホームヘルプ）・訪問型サービス   ：");
+    private static final RString 介護予防訪問入浴介護 = new RString("介護予防訪問入浴介護                               ：");
+    private static final RString 介護予防訪問看護 = new RString("介護予防訪問看護                                   ：");
+    private static final RString 介護予防訪問リハビリテーション = new RString("介護予防訪問リハビリテーション                     ：");
+    private static final RString 介護予防居宅療養管理指導 = new RString("介護予防居宅療養管理指導                           ：");
+    private static final RString 介護予防通所介護 = new RString("介護予防通所介護（デイサービス）・通所型サービス   ：");
+    private static final RString 介護予防通所リハビリテーション = new RString("介護予防通所リハビリテーション                     ：");
+    private static final RString 介護予防短期入所生活介護 = new RString("介護予防短期入所生活介護（ショートステイ）         ：");
+    private static final RString 介護予防短期入所療養介護 = new RString("介護予防短期入所療養介護                           ：");
+    private static final RString 介護予防特定施設入居者生活介護 = new RString("介護予防特定施設入居者生活介護                     ：");
+    private static final RString 介護予防福祉用具貸与 = new RString("介護予防福祉用具貸与                               ：");
+    private static final RString 特定介護予防福祉用具販売 = new RString("特定介護予防福祉用具販売                           ：");
+    private static final RString 介護予防小規模多機能型居宅介護 = new RString("介護予防小規模多機能型居宅介護                     ：");
+    private static final RString 介護予防認知症対応型共同生活介護 = new RString("介護予防認知症対応型共同生活介護（グループホーム） ：");
+
+    private static final RString 介護サービス状況リスト = new RString("(介護サービス状況リスト)");
+    private static final RString 訪問介護_ホームヘルプサービス = new RString("訪問介護（ホームヘルプサービス）            ：");
+    private static final RString 訪問入浴介護 = new RString("訪問入浴介護                                ：");
+    private static final RString 訪問看護 = new RString("訪問看護                                    ：");
+    private static final RString 訪問リハビリテーション = new RString("訪問リハビリテーション                      ：");
+    private static final RString 居宅療養管理指導 = new RString("居宅療養管理指導                            ：");
+    private static final RString 通所介護_デイサービス = new RString("通所介護（デイサービス）                    ：");
+    private static final RString 通所リハビリテーション = new RString("通所リハビリテーション                      ：");
+    private static final RString 短期入所生活介護 = new RString("短期入所生活介護（ショートステイ）          ：");
+    private static final RString 短期入所療養介護 = new RString("短期入所療養介護                            ：");
+    private static final RString 特定施設入居者生活介護 = new RString("特定施設入居者生活介護                      ：");
+    private static final RString 福祉用具貸与 = new RString("福祉用具貸与                                ：");
+    private static final RString 特定福祉用具販売 = new RString("特定福祉用具販売                            ：");
+    private static final RString 夜間対応型訪問介護 = new RString("夜間対応型訪問介護                          ：");
+    private static final RString 認知症対応型通所介護 = new RString("認知症対応型通所介護                        ：");
+    private static final RString 小規模多機能型住宅介護 = new RString("小規模多機能型住宅介護                      ：");
+    private static final RString 認知症対応型共同生活介護 = new RString("認知症対応型共同生活介護（グループホーム）　：");
+    private static final RString 地域密着型特定施設入所者生活介護 = new RString("地域密着型特定施設入所者生活介護　          ：");
+    private static final RString 地域密着型介護老人福祉施設入所者生活介護 = new RString("地域密着型介護老人福祉施設入所者生活介護    ：");
+    private static final RString 定期巡回_随時対応型訪問介護看護 = new RString("定期巡回・随時対応型訪問介護看護　　　　　　：");
+    private static final RString 看護小規模多機能型居宅介護 = new RString("看護小規模多機能型居宅介護　　　　　　　　　：");
     private static final int INT_4 = 4;
     private static final int INT_6 = 6;
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
-    private final IchijihanteikekkahyoItem item;
+    private final IchijihanteikekkahyoEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link IchijihanteikekkahyoItem}
+     * @param item {@link IchijihanteikekkahyoEntity}
      */
-    protected IchijihanteikekkahyoA4Editor(IchijihanteikekkahyoItem item) {
+    protected IchijihanteikekkahyoA4Editor(IchijihanteikekkahyoEntity item) {
         this.item = item;
     }
 
@@ -105,6 +148,13 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
         source.jotainoanteisei = item.get状態の安定性();
         source.kyufukubun = item.get給付区分();
         source.sabisuName = item.get現在のサービス利用状況();
+        if (ServiceKubunCode.予防給付サービス.get名称().equals(item.get現在のサービス利用状況())) {
+            source.sabisuText = get予防サービス状況リスト();
+        } else if (ServiceKubunCode.介護給付サービス.get名称().equals(item.get現在のサービス利用状況())) {
+            source.sabisuText = get介護サービス状況リスト();
+        } else {
+            source.sabisuText = new RString("                                      (なし)");
+        }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get申請書管理番号() == null) {
             source.shinseishoKanriNo = null;
@@ -153,5 +203,163 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
         return 年月日.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString get予防サービス状況リスト() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(予防サービス状況リスト);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防訪問介護);
+        builder.append(item.get介護予防訪問介護_ﾎｰﾑﾍﾙﾌﾟ_訪問型ｻｰﾋﾞｽ());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防訪問入浴介護);
+        builder.append(item.get介護予防訪問入浴介護());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防訪問看護);
+        builder.append(item.get介護予防訪問看護());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防訪問リハビリテーション);
+        builder.append(item.get介護予防訪問リハビリテーション());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防居宅療養管理指導);
+        builder.append(item.get介護予防居宅療養管理指導());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防通所介護);
+        builder.append(item.get介護予防通所介護_ﾃﾞｲｻｰﾋﾞｽ_通所型ｻｰﾋﾞｽ());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防通所リハビリテーション);
+        builder.append(item.get介護予防通所リハビリテーション());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防短期入所生活介護);
+        builder.append(item.get介護予防短期入所生活介護_ショートステイ());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防短期入所療養介護);
+        builder.append(item.get介護予防短期入所療養介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防特定施設入居者生活介護);
+        builder.append(item.get介護予防特定施設入居者生活介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防福祉用具貸与);
+        builder.append(item.get介護予防福祉用具貸与());
+        builder.append(品目);
+        builder.append(System.lineSeparator());
+        builder.append(特定介護予防福祉用具販売);
+        builder.append(item.get特定介護予防福祉用具販売());
+        builder.append(品目_6月間);
+        builder.append(System.lineSeparator());
+        builder.append(住宅改修);
+        builder.append(item.get住宅改修1());
+        builder.append(System.lineSeparator());
+        builder.append(特定介護予防福祉用具販売);
+        builder.append(item.get特定介護予防福祉用具販売());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防小規模多機能型居宅介護);
+        builder.append(item.get介護予防小規模多機能型居宅介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(介護予防認知症対応型共同生活介護);
+        builder.append(item.get介護予防認知症対応型共同生活介護_グループホーム());
+        builder.append(日月);
+        return builder.toRString();
+    }
+
+    private RString get介護サービス状況リスト() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(介護サービス状況リスト);
+        builder.append(System.lineSeparator());
+        builder.append(訪問介護_ホームヘルプサービス);
+        builder.append(item.get訪問介護_ホームヘルプサービス());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(訪問入浴介護);
+        builder.append(item.get訪問入浴介護());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(訪問看護);
+        builder.append(item.get訪問看護());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(訪問リハビリテーション);
+        builder.append(item.get訪問リハビリテーション());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(居宅療養管理指導);
+        builder.append(item.get居宅療養管理指導());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(通所介護_デイサービス);
+        builder.append(item.get通所介護_デイサービス());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(通所リハビリテーション);
+        builder.append(item.get通所リハビリテーション());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(短期入所生活介護);
+        builder.append(item.get短期入所生活介護_ショートステイ());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(短期入所療養介護);
+        builder.append(item.get短期入所療養介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(特定施設入居者生活介護);
+        builder.append(item.get特定施設入居者生活介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(福祉用具貸与);
+        builder.append(item.get福祉用具貸与());
+        builder.append(品目);
+        builder.append(System.lineSeparator());
+        builder.append(特定福祉用具販売);
+        builder.append(item.get特定福祉用具販売());
+        builder.append(品目_6月間);
+        builder.append(System.lineSeparator());
+        builder.append(住宅改修);
+        builder.append(item.get住宅改修2());
+        builder.append(System.lineSeparator());
+        builder.append(夜間対応型訪問介護);
+        builder.append(item.get夜間対応型訪問介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(認知症対応型通所介護);
+        builder.append(item.get認知症対応型通所介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(小規模多機能型住宅介護);
+        builder.append(item.get小規模多機能型居宅介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(認知症対応型共同生活介護);
+        builder.append(item.get認知症対応型共同生活介護_グループホーム());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(地域密着型特定施設入所者生活介護);
+        builder.append(item.get地域密着型特定施設入居者生活介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(地域密着型介護老人福祉施設入所者生活介護);
+        builder.append(item.get地域密着型介護老人福祉施設入所者生活介護());
+        builder.append(日月);
+        builder.append(System.lineSeparator());
+        builder.append(定期巡回_随時対応型訪問介護看護);
+        builder.append(item.get定期巡回_随時対応型訪問介護看護());
+        builder.append(回月);
+        builder.append(System.lineSeparator());
+        builder.append(看護小規模多機能型居宅介護);
+        builder.append(item.get看護小規模多機能型居宅介護());
+        builder.append(日月);
+        return builder.toRString();
     }
 }

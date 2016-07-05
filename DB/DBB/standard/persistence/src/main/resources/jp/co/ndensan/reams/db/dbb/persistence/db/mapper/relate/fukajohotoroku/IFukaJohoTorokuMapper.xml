@@ -180,8 +180,8 @@
         DbT0700."kazeiNendo",
         DbT0700."tsuchishoNo"
         FROM
-        "DbT0700ShunoKanriTemp" DbT0700,
-        "DbT0705ChoteiKyotsuTemp" DbT0705
+        "UrT0700ShunoKanri_work" DbT0700,
+        "UrT0705ChoteiKyotsu_work" DbT0705
         WHERE
         DbT0700."shunoId" = DbT0705."shunoId"
         )choteiIdToroku

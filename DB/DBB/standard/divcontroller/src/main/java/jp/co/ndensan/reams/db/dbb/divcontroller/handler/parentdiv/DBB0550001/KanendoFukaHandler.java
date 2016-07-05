@@ -87,8 +87,7 @@ public class KanendoFukaHandler {
         set算定帳票作成();
         set対象賦課年度();
         set帳票作成個別情報();
-        boolean flag = 処理日付管理マスタ(shdaList);
-        return flag;
+        return 処理日付管理マスタ(shdaList);
     }
 
     /**

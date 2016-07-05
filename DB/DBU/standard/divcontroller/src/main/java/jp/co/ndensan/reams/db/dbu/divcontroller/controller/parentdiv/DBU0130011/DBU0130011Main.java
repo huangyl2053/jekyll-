@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0130011.DBU
 import jp.co.ndensan.reams.db.dbu.service.core.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RojinHokenJukyushaJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -39,7 +38,7 @@ public class DBU0130011Main {
      * @return ResponseData<DBU0130011MainDiv>
      */
     public ResponseData<DBU0130011MainDiv> onLoad(DBU0130011MainDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
         initialize(div, RoujinHokenJukyushaDaichoKanriManager.createInstance().getRoukenJukyuJoho(shikibetsuCode));
@@ -60,7 +59,7 @@ public class DBU0130011Main {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             createHandler(div).update老健受給情報(key.get識別コード(), key.get被保険者番号(),
                     ViewStateHolder.get(ViewStateKeys.モード, RString.class),
                     ViewStateHolder.get(ViewStateKeys.老健受給情報, RojinHokenJukyushaJoho.class));

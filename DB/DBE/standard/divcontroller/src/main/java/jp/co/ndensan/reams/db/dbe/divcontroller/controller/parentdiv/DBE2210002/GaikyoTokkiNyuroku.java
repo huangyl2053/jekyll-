@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -23,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -51,10 +50,23 @@ public class GaikyoTokkiNyuroku {
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onLoad(GaikyoTokkiNyurokuDiv div) {
 
-        getHandler(div).initialize();
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        int 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+
+        RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
+        RString 調査実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class);
+        RString 実施場所名称 = ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class);
+        RString 所属機関 = ViewStateHolder.get(ViewStateKeys.所属機関, RString.class);
+        RString 記入者 = ViewStateHolder.get(ViewStateKeys.記入者, RString.class);
+        RString 調査区分 = ViewStateHolder.get(ViewStateKeys.調査区分, RString.class);
+
+        GaikyoTokki gaikyoTokki = getHandler(div).initialize(申請書管理番号, 認定調査履歴番号,
+                調査実施日, 調査実施場所, 実施場所名称, 所属機関, 記入者, 調査区分);
+        ViewStateHolder.put(ViewStateKeys.初期の概況特記, gaikyoTokki);
+
         boolean gotLock = 前排他キーのセット();
         if (!gotLock) {
-            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
+            throw new PessimisticLockingException();
         }
         return ResponseData.of(div).respond();
     }
@@ -66,8 +78,7 @@ public class GaikyoTokkiNyuroku {
      * @return レスポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onActive(GaikyoTokkiNyurokuDiv div) {
-        getHandler(div).initialize();
-        return ResponseData.of(div).respond();
+        return onLoad(div);
     }
 
     /**
@@ -77,7 +88,7 @@ public class GaikyoTokkiNyuroku {
      * @return スポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onClick_btnZenkaiCopy(GaikyoTokkiNyurokuDiv div) {
-
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         if (!ResponseHolder.isReRequest() && (!div.getTxtJutakuKaishu().getValue().isEmpty()
                 || !div.getTxtChosaTaishoShuso().getValue().isEmpty()
                 || !div.getTxtChosaTishoKazokuJokyo().getValue().isEmpty()
@@ -89,10 +100,10 @@ public class GaikyoTokkiNyuroku {
         }
         if (new RString(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).zenkaiCopy();
+            getHandler(div).zenkaiCopy(申請書管理番号);
             return ResponseData.of(div).respond();
         }
-        getHandler(div).zenkaiCopy();
+        getHandler(div).zenkaiCopy(申請書管理番号);
         return ResponseData.of(div).respond();
     }
 
@@ -141,6 +152,10 @@ public class GaikyoTokkiNyuroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE2210002TransitionEventName.認定調査結果登録へ戻る).respond();
+        } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE2210002TransitionEventName.認定調査結果登録へ戻る).respond();
@@ -160,7 +175,7 @@ public class GaikyoTokkiNyuroku {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).resetData();
+            getHandler(div).resetData(ViewStateHolder.get(ViewStateKeys.初期の概況特記, GaikyoTokki.class));
         }
         return ResponseData.of(div).respond();
     }
@@ -233,14 +248,14 @@ public class GaikyoTokkiNyuroku {
     }
 
     private void 調査結果保存(GaikyoTokkiNyurokuDiv div) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        Integer 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(),
-                getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
+        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
         if (認定調査票_概況特記 == null) {
-            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(),
-                    getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
+            認定調査票_概況特記 = new GaikyoTokki(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
         }
         GaikyoTokkiBuilder builder = 認定調査票_概況特記.createBuilderForEdit();
         builder.set住宅改修(div.getTxtJutakuKaishu().getValue());

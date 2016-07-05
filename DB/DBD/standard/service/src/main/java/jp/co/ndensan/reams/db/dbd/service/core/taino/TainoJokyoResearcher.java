@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.taino.KyufugakuGengakuMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoHanteiKikan;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoHanteiResult;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoKiSummary;
+import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoKiSummaryBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.TainoJokyoMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.TainoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taino.ITainoJokyoMapper;
@@ -167,7 +168,7 @@ public class TainoJokyoResearcher {
     private List<TainoKiSummary> getTainoKiSummaryList(List<TainoJohoRelateEntity> 滞納情報リスト, FlexibleDate 基準日) {
         List<TainoKiSummary> tainoKiSummarys = new ArrayList<>();
         for (TainoJohoRelateEntity relateEntity : 滞納情報リスト) {
-            tainoKiSummarys.add(TainoKiSummary.createTainoKiSummary(relateEntity, 基準日));
+            tainoKiSummarys.add(TainoKiSummaryBuilder.createTainoKiSummary(relateEntity, 基準日));
         }
         return tainoKiSummarys;
     }

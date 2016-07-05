@@ -52,7 +52,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
      */
     @Step(業務被保険者情報作成_月次)
     protected IBatchFlowCommand callCreateGyomuHokenshaJohoGetsujiProcess() {
-        return simpleBatch(CreateGyomuHokenshaJohoGetsujiProcess.class).
+        return loopBatch(CreateGyomuHokenshaJohoGetsujiProcess.class).
                 arguments(getParameter().toCreateGyomuHokenshaJohoGetsujiProcessParameter()).define();
     }
 
@@ -63,7 +63,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
      */
     @Step(業務被保険者情報作成_年次)
     protected IBatchFlowCommand callCreateGyomuHokenshaJohoNenjiProcess() {
-        return simpleBatch(CreateGyomuHokenshaJohoNenjiProcess.class).
+        return loopBatch(CreateGyomuHokenshaJohoNenjiProcess.class).
                 define();
     }
 
@@ -89,7 +89,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
      */
     @Step(同定情報を取得する)
     protected IBatchFlowCommand callGetDoteiJohoProcess() {
-        return simpleBatch(GetDoteiJohoProcess.class).
+        return loopBatch(GetDoteiJohoProcess.class).
                 arguments(getParameter().toGetDoteiJohoProcessParameter()).define();
     }
 
@@ -100,7 +100,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
      */
     @Step(未同定情報を取得する)
     protected IBatchFlowCommand callGetMiDoteiJohoProcess() {
-        return simpleBatch(GetMiDoteiJohoProcess.class).
+        return loopBatch(GetMiDoteiJohoProcess.class).
                 arguments(getParameter().toGetMiDoteiJohoProcessParameter()).define();
     }
 

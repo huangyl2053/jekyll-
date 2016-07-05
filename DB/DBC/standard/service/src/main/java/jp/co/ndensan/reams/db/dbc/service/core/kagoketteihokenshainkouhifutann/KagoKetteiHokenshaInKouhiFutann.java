@@ -115,15 +115,20 @@ public class KagoKetteiHokenshaInKouhiFutann {
         List<KagoKetteiHokenshaInKouhiFutannEntity> csvlist = csvファイル読込(保存先フォルダ, エントリ情報List);
         IKagoKetteiHokenshaInKouhiFutannMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInKouhiFutannMapper.class);
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
+        errorTempentity.setエラー区分(NUM);
+        int 集計データ登録件数 = INDEX_0;
+        int 明細データ登録件数 = INDEX_0;
         FlowEntity getEntity = バッチフロ(csvlist);
         int レコード件数合算 = getEntity.getCodeNum();
-        errorTempentity.setエラー区分(NUM);
-        if (レコード件数合算 == INDEX_0) {
-            mapper.処理結果リスト一時TBLに登録(errorTempentity);
-        } else {
-            過誤決定集計一時TBLに登録(処理年月, csvlist);
-            過誤決定明細一時TBLに登録(処理年月, csvlist);
+        if (レコード件数合算 != INDEX_0) {
+            集計データ登録件数 = 過誤決定集計一時TBLに登録(処理年月, csvlist);
+            明細データ登録件数 = 過誤決定明細一時TBLに登録(処理年月, csvlist);
         }
+        if ((レコード件数合算 == INDEX_0) || (集計データ登録件数 + 明細データ登録件数) == INDEX_0) {
+            mapper.処理結果リスト一時TBLに登録(errorTempentity);
+        }
+        getEntity.set集計データ登録件数(集計データ登録件数);
+        getEntity.set明細データ登録件数(明細データ登録件数);
         return getEntity;
 
     }
@@ -149,7 +154,7 @@ public class KagoKetteiHokenshaInKouhiFutann {
     }
 
     @Transaction
-    private void 過誤決定集計一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInKouhiFutannEntity> csvlist) {
+    private int 過誤決定集計一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInKouhiFutannEntity> csvlist) {
         IKagoKetteiHokenshaInKouhiFutannMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInKouhiFutannMapper.class);
         int 連番 = INDEX_0;
         for (int i = INDEX_0; i < csvlist.size(); i++) {
@@ -187,6 +192,7 @@ public class KagoKetteiHokenshaInKouhiFutann {
             }
 
         }
+        return 連番;
     }
 
     private void set件数と単位数と費用額(DbWT3060KagoKetteiShukeiTempEntity shukeiTempentity, KagoKetteiHokenshaInKouhiFutannDataEntity dataEntity) {
@@ -233,7 +239,7 @@ public class KagoKetteiHokenshaInKouhiFutann {
     }
 
     @Transaction
-    private void 過誤決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInKouhiFutannEntity> csvlist) {
+    private int 過誤決定明細一時TBLに登録(FlexibleYearMonth 処理年月, List<KagoKetteiHokenshaInKouhiFutannEntity> csvlist) {
         IKagoKetteiHokenshaInKouhiFutannMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInKouhiFutannMapper.class);
         int 連番 = INDEX_0;
         int 履歴番号 = INDEX_0;
@@ -275,6 +281,7 @@ public class KagoKetteiHokenshaInKouhiFutann {
             }
 
         }
+        return 連番;
     }
 
     private void setサービスと過誤(DbWT3061KagoKetteiMeisaiTempEntity meisaiTempentity, KagoKetteiHokenshaInKouhiFutannCsvMeisaiEntity meisaiEntity) {

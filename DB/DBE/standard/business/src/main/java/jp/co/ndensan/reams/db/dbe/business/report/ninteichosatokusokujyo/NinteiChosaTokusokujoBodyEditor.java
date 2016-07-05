@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -213,7 +214,8 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     }
 
     private void edit申請日(NinteiChosaTokusokujoReportSource source) {
-        RString 申請年月日 = entity.getNinteiShinseiYMD() == null ? RString.EMPTY : entity.getNinteiShinseiYMD().wareki()
+        FlexibleDate 年月日 = entity.getNinteiShinseiYMD();
+        RString 申請年月日 = 年月日 == null ? RString.EMPTY : 年月日.wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         source.shinseiYMD = 申請年月日;

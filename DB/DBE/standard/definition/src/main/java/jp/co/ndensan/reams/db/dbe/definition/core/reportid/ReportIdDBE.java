@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 事務局用概況特記一覧表の帳票ID。
+     */
+    DBE517007(new ReportId("DBE517007_GaikyoTokkiIchiran"), new RString("事務局用概況特記一覧表")),
+    /**
+     * 事務局用一次判定結果票A3の帳票ID。
+     */
+    DBE517081(new ReportId("DBE517081_IchijihanteikekkahyoA3"), new RString("事務局用一次判定結果票A3")),
+    /**
      * 委員用一次判定結果票A3の帳票ID。
      */
     DBE517085(new ReportId("DBE517085_IchijihanteikekkahyoA3"), new RString("委員用一次判定結果票A3")),
@@ -106,6 +114,14 @@ public enum ReportIdDBE {
      * 認定調査スケジュール表(調査員)の帳票ＩＤです。
      */
     DBE202001(new ReportId("DBE202001_ChosaSchedulehyo"), new RString("認定調査スケジュール表(調査員)")),
+    /**
+     * 事務局用概況特記A3の帳票ＩＤです。
+     */
+    DBE517041(new ReportId("DBE517041_GaikyotokkiTextA3"), new RString("事務局用概況特記")),
+    /**
+     * 事務局用概況特記A4の帳票ＩＤです。
+     */
+    DBE517141(new ReportId("DBE517141_GaikyotokkiTextA4"), new RString("事務局用概況特記")),
     /**
      * 追加資料鑑の帳票ＩＤです。
      */
@@ -381,7 +397,19 @@ public enum ReportIdDBE {
     /**
      * 特記事項の帳票ＩＤです。
      */
-    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項"));
+    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項")),
+    /**
+     * 主治医意見書作成報酬支払通知書の帳票ＩＤです。
+     */
+    DBE621002(new ReportId("DBE621002_shujiihoshushiharai"), new RString("主治医意見書作成報酬支払通知書")),
+    /**
+     * 要介護認定結果情報提供票（主治医）の帳票ID。
+     */
+    DBE090001(new ReportId("DBE090001_JohoTeikyoShiryo"), new RString("要介護認定結果情報提供票（主治医）")),
+    /**
+     * 主治医意見書作成実績集計表の帳票ID。
+     */
+    DBE601001(new ReportId("DBE601001_IkenshoJissekiIchiran"), new RString("主治医意見書作成実績集計表"));
 
     private final ReportId reportId;
 

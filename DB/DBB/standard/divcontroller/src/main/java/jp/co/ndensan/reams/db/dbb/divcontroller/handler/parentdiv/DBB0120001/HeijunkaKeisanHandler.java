@@ -46,6 +46,8 @@ public class HeijunkaKeisanHandler {
     private final RString 状況未 = new RString("未");
     private final RString 状況済 = new RString("済");
     private final RString 平準化しない = new RString("0");
+    private final RString 前半と後半1_1 = new RString("前半と後半を１：１にする");
+    private final RString 年額より４月分 = new RString("年額より４月分を引いた額を５期で割る");
     private final RString 平準化するを判定し = new RString("1");
     private final RString 特別徴収平準化計算_特別徴収6月分 = new RString("特別徴収平準化計算（特別徴収6月分）");
     private final RString 仮算定額変更通知書_平準化 = new RString("仮算定額変更通知書(平準化)");
@@ -171,8 +173,21 @@ public class HeijunkaKeisanHandler {
         HeijunkaKeisanPageJoho data = new HeijunkaKeisanPageJoho();
         data.set調定年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().getDomain());
         data.set賦課年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().getDomain());
-        data.set増額平準化方法(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText());
-        data.set減額平準化方法(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText());
+        if (平準化しない.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(new RString("0"));
+        } else if (前半と後半1_1.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(new RString("1"));
+        } else if (年額より４月分.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().getText())) {
+            data.set増額平準化方法(new RString("2"));
+        }
+
+        if (平準化しない.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(new RString("0"));
+        } else if (前半と後半1_1.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(new RString("1"));
+        } else if (年額より４月分.equals(div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().getText())) {
+            data.set減額平準化方法(new RString("2"));
+        }
         data.set帳票グループ(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get帳票出力グループコード());
 
         List<OutputChohyoIchiran> outputChohyoIchiranList = new ArrayList<>();
@@ -181,8 +196,7 @@ public class HeijunkaKeisanHandler {
             outputChohyoIchiran = new OutputChohyoIchiran();
             outputChohyoIchiran.set帳票分類ID(row.getChohyoID());
             outputChohyoIchiran.set帳票名(row.getChohyoName());
-            outputChohyoIchiran.set改頁ID(row.getKaiPageKomoku());
-            outputChohyoIchiran.set出力順ID(row.getShutsuryokujun());
+            outputChohyoIchiran.set出力順ID(row.getShutsuryokujunID());
             outputChohyoIchiranList.add(outputChohyoIchiran);
         }
         data.set出力帳票一覧List(outputChohyoIchiranList);

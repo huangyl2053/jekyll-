@@ -111,6 +111,7 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
         List<NinteiShinseiJoho> updateDataList = new ArrayList<>();
 
         for (DbT5101NinteiShinseiJohoEntity entity : relateEntity) {
+            entity.initializeMd5();
             updateDataList.add(new NinteiShinseiJoho(entity));
         }
         return SearchResult.of(updateDataList, 0, false);
@@ -136,10 +137,8 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
         for (int index = 0; index < entitylist.size(); index++) {
             if (!entitylist.get(index).getShoKisaiHokenshaNo().isEmpty()) {
                 KeyValueDataSource keyvaule = new KeyValueDataSource();
-                RString key = RString.EMPTY;
-                RString value = RString.EMPTY;
-                key = entitylist.get(index).getShoKisaiHokenshaNo().value();
-                value = entitylist.get(index).getShichosonMeisho();
+                RString key = entitylist.get(index).getShoKisaiHokenshaNo().value();
+                RString value = entitylist.get(index).getShichosonMeisho();
                 keyvaule.setKey(key);
                 RStringBuilder rstBuilder = new RStringBuilder();
                 rstBuilder.append(key);

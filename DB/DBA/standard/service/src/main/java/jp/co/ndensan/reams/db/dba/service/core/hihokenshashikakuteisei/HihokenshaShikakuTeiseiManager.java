@@ -39,8 +39,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCodeJoho;
-import jp.co.ndensan.reams.db.dbz.service.core.sikakuidocheck.SikakuIdoCheckManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakutokuso.ShikakuTokusoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.sikakuidocheck.SikakuIdoCheckManager;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -322,7 +322,7 @@ public class HihokenshaShikakuTeiseiManager {
                 }
                 if (資格訂正情報Entity.getShikakuShutokuJiyuCode() != null) {
                     資格訂正登録リスト.add(this.getList取得事由コード(資格訂正情報Entity, 被保険者番号,
-                            識別コード, 市町村コード, 広住特措置元市町村コード, 旧市町村コード));
+                            識別コード, 市町村コード, 広住特措置元市町村コード, 旧市町村コード, 市町村セキュリティ情報));
                 }
                 if (資格訂正情報Entity.getShikakuSoshitsuJiyuCode() != null) {
                     this.getList喪失事由コード(資格訂正登録リスト, 資格訂正情報Entity);
@@ -389,11 +389,15 @@ public class HihokenshaShikakuTeiseiManager {
     }
 
     private HihokenshaDaicho getList取得事由コード(DbT1001HihokenshaDaichoEntity entity, HihokenshaNo 被保番号, ShikibetsuCode 識別コード,
-            LasdecCode 市町村コード, LasdecCode 広住特措置元市町村コード, LasdecCode 旧市町村コード) {
+            LasdecCode 市町村コード, LasdecCode 広住特措置元市町村コード, LasdecCode 旧市町村コード, ShichosonSecurityJoho 市町村セキュリティ情報) {
         DbT1001HihokenshaDaichoEntity dbt1001Entity = new DbT1001HihokenshaDaichoEntity();
         dbt1001Entity.shallowCopy(entity);
         dbt1001Entity.setHihokenshaNo(被保番号);
-        dbt1001Entity.setShichosonCode(市町村コード);
+        if (市町村コード == null || 市町村コード.isEmpty()) {
+            dbt1001Entity.setShichosonCode(市町村セキュリティ情報.get市町村情報().get市町村コード());
+        } else {
+            dbt1001Entity.setShichosonCode(市町村コード);
+        }
         dbt1001Entity.setShikibetsuCode(識別コード);
         if (RSTRING_1.equals(entity.getHihokennshaKubunCode())) {
             dbt1001Entity.setIchigoShikakuShutokuYMD(entity.getIdoYMD());
@@ -419,6 +423,9 @@ public class HihokenshaShikakuTeiseiManager {
         dbt1001Entity.setJushochitokureiKaijoJiyuCode(RString.EMPTY);
         dbt1001Entity.setJushochitokureiKaijoYMD(FlexibleDate.EMPTY);
         dbt1001Entity.setJushochitokureiKaijoTodokedeYMD(FlexibleDate.EMPTY);
+        dbt1001Entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
+        dbt1001Entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);
+        dbt1001Entity.setShikakuHenkoJiyuCode(RString.EMPTY);
         資格訂正登録リスト.add(new HihokenshaDaicho(dbt1001Entity));
     }
 
@@ -432,13 +439,6 @@ public class HihokenshaShikakuTeiseiManager {
         dbt1001Entity.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
         dbt1001Entity.setShikakuHenkoYMD(entity.getShikakuHenkoYMD());
         dbt1001Entity.setShikakuHenkoTodokedeYMD(entity.getShikakuHenkoTodokedeYMD());
-        dbt1001Entity.setJushochitokureiTekiyoJiyuCode(RString.EMPTY);
-        dbt1001Entity.setJushochitokureiTekiyoYMD(FlexibleDate.EMPTY);
-        dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(FlexibleDate.EMPTY);
-        dbt1001Entity.setJushochitokureiTekiyoJiyuCode(RString.EMPTY);
-        dbt1001Entity.setJushochitokureiTekiyoYMD(FlexibleDate.EMPTY);
-        dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(FlexibleDate.EMPTY);
-
         if (ShikakuHenkoJiyu.広域内転居.getコード().equals(entity.getShikakuHenkoJiyuCode())) {
             dbt1001Entity.setShichosonCode(市町村コード);
             dbt1001Entity.setShikibetsuCode(識別コード);
@@ -487,9 +487,6 @@ public class HihokenshaShikakuTeiseiManager {
         dbt1001Entity.setJushochitokureiTekiyoYMD(entity.getJushochitokureiTekiyoYMD());
         dbt1001Entity.setJushochitokureiTekiyoTodokedeYMD(entity.getJushochitokureiTekiyoTodokedeYMD());
         dbt1001Entity.setJushochiTokureiFlag(RSTRING_1);
-        dbt1001Entity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
-        dbt1001Entity.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
-        dbt1001Entity.setShikakuSoshitsuTodokedeYMD(FlexibleDate.EMPTY);
         dbt1001Entity.setShikakuHenkoJiyuCode(RString.EMPTY);
         dbt1001Entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
         dbt1001Entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);
@@ -506,9 +503,6 @@ public class HihokenshaShikakuTeiseiManager {
         dbt1001Entity.setJushochitokureiKaijoYMD(entity.getJushochitokureiKaijoYMD());
         dbt1001Entity.setJushochitokureiKaijoTodokedeYMD(entity.getJushochitokureiKaijoTodokedeYMD());
         dbt1001Entity.setJushochiTokureiFlag(RSTRING_SPACE);
-        dbt1001Entity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
-        dbt1001Entity.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
-        dbt1001Entity.setShikakuSoshitsuTodokedeYMD(FlexibleDate.EMPTY);
         dbt1001Entity.setShikakuHenkoJiyuCode(RString.EMPTY);
         dbt1001Entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
         dbt1001Entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);

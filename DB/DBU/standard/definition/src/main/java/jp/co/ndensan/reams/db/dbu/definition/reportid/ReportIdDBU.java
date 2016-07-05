@@ -25,7 +25,7 @@ public enum ReportIdDBU {
     /**
      * 介護保険　広域内転居結果一覧表の帳票ＩＤです。
      */
-    DBA200011(new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"), new RString("介護保険　広域内転居結果一覧表"));
+    DBU200004(new ReportId("DBU200004_KoikinaiTenkyoKekkaIchiranhyo"), new RString("介護保険　広域内転居結果一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

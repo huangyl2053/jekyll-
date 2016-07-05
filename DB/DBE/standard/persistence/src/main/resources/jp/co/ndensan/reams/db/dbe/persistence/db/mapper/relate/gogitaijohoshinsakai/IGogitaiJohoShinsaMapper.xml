@@ -25,6 +25,10 @@
         rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593
         ON
         DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
+        AND
+        DbT5591."gogitaiYukoKikanKaishiYMD" = DbT5593."gogitaiYukoKikanKaishiYMD"
+        AND
+        DbT5591."gogitaiYukoKikanShuryoYMD" = DbT5593."gogitaiYukoKikanShuryoYMD"
         INNER JOIN
         rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
         ON
@@ -60,7 +64,11 @@
         rgdb."DbT5591GogitaiJoho" AS DbT5591
         ON
         DbT5501."gogitaiNo" =  DbT5591."gogitaiNo"
+        AND
+        DBT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
+        AND 
+        DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
-        SUBSTRING(DbT5501."shinsakaiKaisaiYoteiYMD", 7, 2) = #{コピー日}
+        DbT5501."shinsakaiKaisaiYoteiYMD" = #{コピー日}
     </select>
 </mapper>

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa4;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikensho.ShujiiikenshoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1A4.ShujiiikenshoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1a4.ShujiiikenshoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -17,15 +17,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiikenshoA3Report extends Report<ShujiiikenshoA3ReportSource> {
 
-    private final ShujiiikenshoEntity item;
+    private final JimuShinsakaiWariateJohoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 事務局用主治医意見書のITEM
+     * @param business 事務局用主治医意見書
      */
-    public ShujiiikenshoA3Report(ShujiiikenshoEntity item) {
-        this.item = item;
+    public ShujiiikenshoA3Report(JimuShinsakaiWariateJohoBusiness business) {
+        this.business = business;
     }
 
     /**
@@ -34,7 +34,7 @@ public class ShujiiikenshoA3Report extends Report<ShujiiikenshoA3ReportSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<ShujiiikenshoA3ReportSource> reportSourceWriter) {
-        IShujiiikenshoA3Editor headerEditor = new ShujiiikenshoA3Editor(item);
+        IShujiiikenshoA3Editor headerEditor = new ShujiiikenshoA3Editor(business);
         IShujiiikenshoA3Builder builder = new ShujiiikenshoA3Builder(headerEditor);
         reportSourceWriter.writeLine(builder);
     }

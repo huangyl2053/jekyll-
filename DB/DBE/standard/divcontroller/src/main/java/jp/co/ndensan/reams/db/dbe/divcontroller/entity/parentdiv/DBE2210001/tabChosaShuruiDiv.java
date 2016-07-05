@@ -7,26 +7,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tabChosaShurui のクラスファイル
- *
+ * tabChosaShurui のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tabChosaShuruiDiv extends TabContainer {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -89,7 +80,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setRadGenzaiservis(RadioButton radGenzaiservis) {
+    public void  setRadGenzaiservis(RadioButton radGenzaiservis) {
         this.getTplGaikyoChosa().setRadGenzaiservis(radGenzaiservis);
     }
 
@@ -99,7 +90,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTabChosaBasho(tabChosaBashoDiv tabChosaBasho) {
+    public void  setTabChosaBasho(tabChosaBashoDiv tabChosaBasho) {
         this.getTplGaikyoChosa().setTabChosaBasho(tabChosaBasho);
     }
 
@@ -109,7 +100,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTplZaitaku(tplZaitakuDiv tplZaitaku) {
+    public void  setTplZaitaku(tplZaitakuDiv tplZaitaku) {
         this.getTplGaikyoChosa().getTabChosaBasho().setTplZaitaku(tplZaitaku);
     }
 
@@ -119,7 +110,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setJutakuGaikyoChosa(JutakuGaikyoChosaDiv JutakuGaikyoChosa) {
+    public void  setJutakuGaikyoChosa(JutakuGaikyoChosaDiv JutakuGaikyoChosa) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setJutakuGaikyoChosa(JutakuGaikyoChosa);
     }
 
@@ -129,7 +120,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setRadJutakuKaishu(RadioButton radJutakuKaishu) {
+    public void  setRadJutakuKaishu(RadioButton radJutakuKaishu) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setRadJutakuKaishu(radJutakuKaishu);
     }
 
@@ -139,7 +130,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setDgRiyoSerViceFirstHalf(DataGrid<dgRiyoSerViceFirstHalf_Row> dgRiyoSerViceFirstHalf) {
+    public void  setDgRiyoSerViceFirstHalf(DataGrid<dgRiyoSerViceFirstHalf_Row> dgRiyoSerViceFirstHalf) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setDgRiyoSerViceFirstHalf(dgRiyoSerViceFirstHalf);
     }
 
@@ -149,7 +140,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setDgRiyoSerViceSecondHalf(DataGrid<dgRiyoSerViceSecondHalf_Row> dgRiyoSerViceSecondHalf) {
+    public void  setDgRiyoSerViceSecondHalf(DataGrid<dgRiyoSerViceSecondHalf_Row> dgRiyoSerViceSecondHalf) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setDgRiyoSerViceSecondHalf(dgRiyoSerViceSecondHalf);
     }
 
@@ -159,7 +150,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
+    public void  setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtShichosonTokubetsuKyufu(txtShichosonTokubetsuKyufu);
     }
 
@@ -169,7 +160,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
+    public void  setTxtKyufuIgaiJutakuService(TextBox txtKyufuIgaiJutakuService) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getJutakuGaikyoChosa().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
     }
 
@@ -179,7 +170,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTplShisetsu(tplShisetsuDiv tplShisetsu) {
+    public void  setTplShisetsu(tplShisetsuDiv tplShisetsu) {
         this.getTplGaikyoChosa().getTabChosaBasho().setTplShisetsu(tplShisetsu);
     }
 
@@ -189,7 +180,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setGaikyoTokkiShisetsu(GaikyoTokkiShisetsuDiv GaikyoTokkiShisetsu) {
+    public void  setGaikyoTokkiShisetsu(GaikyoTokkiShisetsuDiv GaikyoTokkiShisetsu) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().setGaikyoTokkiShisetsu(GaikyoTokkiShisetsu);
     }
 
@@ -199,7 +190,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setDgRiyoShisetsu(DataGrid<dgRiyoShisetsu_Row> dgRiyoShisetsu) {
+    public void  setDgRiyoShisetsu(DataGrid<dgRiyoShisetsu_Row> dgRiyoShisetsu) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getGaikyoTokkiShisetsu().setDgRiyoShisetsu(dgRiyoShisetsu);
     }
 
@@ -209,7 +200,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setGaigyoShisetsuRenrakusaki(GaigyoShisetsuRenrakusakiDiv GaigyoShisetsuRenrakusaki) {
+    public void  setGaigyoShisetsuRenrakusaki(GaigyoShisetsuRenrakusakiDiv GaigyoShisetsuRenrakusaki) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().setGaigyoShisetsuRenrakusaki(GaigyoShisetsuRenrakusaki);
     }
 
@@ -219,7 +210,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuMeisdho(TextBox txtShisetsuMeisdho) {
+    public void  setTxtShisetsuMeisdho(TextBox txtShisetsuMeisdho) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setTxtShisetsuMeisdho(txtShisetsuMeisdho);
     }
 
@@ -229,7 +220,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuYubinNo(TextBoxYubinNo txtShisetsuYubinNo) {
+    public void  setTxtShisetsuYubinNo(TextBoxYubinNo txtShisetsuYubinNo) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setTxtShisetsuYubinNo(txtShisetsuYubinNo);
     }
 
@@ -239,7 +230,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtShisetsuJusho(TextBoxJusho txtShisetsuJusho) {
+    public void  setTxtShisetsuJusho(TextBoxJusho txtShisetsuJusho) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setTxtShisetsuJusho(txtShisetsuJusho);
     }
 
@@ -249,7 +240,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
+    public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setTxtTelNo(txtTelNo);
     }
 
@@ -259,7 +250,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setGaikyoTokkiInput(GaikyoTokkiInputDiv GaikyoTokkiInput) {
+    public void  setGaikyoTokkiInput(GaikyoTokkiInputDiv GaikyoTokkiInput) {
         this.getTplGaikyoChosa().setGaikyoTokkiInput(GaikyoTokkiInput);
     }
 
@@ -269,7 +260,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setLblGaigyoTokkiComment(Label lblGaigyoTokkiComment) {
+    public void  setLblGaigyoTokkiComment(Label lblGaigyoTokkiComment) {
         this.getTplGaikyoChosa().getGaikyoTokkiInput().setLblGaigyoTokkiComment(lblGaigyoTokkiComment);
     }
 
@@ -279,7 +270,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtGaikyoTokkiNyuroku(TextBoxMultiLine txtGaikyoTokkiNyuroku) {
+    public void  setTxtGaikyoTokkiNyuroku(TextBoxMultiLine txtGaikyoTokkiNyuroku) {
         this.getTplGaikyoChosa().getGaikyoTokkiInput().setTxtGaikyoTokkiNyuroku(txtGaikyoTokkiNyuroku);
     }
 
@@ -289,7 +280,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnTeikeibun(ButtonDialog btnTeikeibun) {
+    public void  setBtnTeikeibun(ButtonDialog btnTeikeibun) {
         this.getTplGaikyoChosa().getGaikyoTokkiInput().setBtnTeikeibun(btnTeikeibun);
     }
 
@@ -299,7 +290,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKiteichiSettei(Button btnKiteichiSettei) {
+    public void  setBtnKiteichiSettei(Button btnKiteichiSettei) {
         this.getTplKihonChosa().setBtnKiteichiSettei(btnKiteichiSettei);
     }
 
@@ -309,7 +300,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnZenkaiCopy(Button btnZenkaiCopy) {
+    public void  setBtnZenkaiCopy(Button btnZenkaiCopy) {
         this.getTplKihonChosa().setBtnZenkaiCopy(btnZenkaiCopy);
     }
 
@@ -319,7 +310,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setTxtIchijiHanteiKekka(TextBox txtIchijiHanteiKekka) {
+    public void  setTxtIchijiHanteiKekka(TextBox txtIchijiHanteiKekka) {
         this.getTplKihonChosa().setTxtIchijiHanteiKekka(txtIchijiHanteiKekka);
     }
 
@@ -329,7 +320,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnIchiHanteiJisshi(ButtonDialog btnIchiHanteiJisshi) {
+    public void  setBtnIchiHanteiJisshi(ButtonDialog btnIchiHanteiJisshi) {
         this.getTplKihonChosa().setBtnIchiHanteiJisshi(btnIchiHanteiJisshi);
     }
 
@@ -339,7 +330,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setKihonchosaSelect(kihonchosaSelectDiv kihonchosaSelect) {
+    public void  setKihonchosaSelect(kihonchosaSelectDiv kihonchosaSelect) {
         this.getTplKihonChosa().setKihonchosaSelect(kihonchosaSelect);
     }
 
@@ -349,7 +340,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa1(ButtonDialog btnKihonchosa1) {
+    public void  setBtnKihonchosa1(ButtonDialog btnKihonchosa1) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa1(btnKihonchosa1);
     }
 
@@ -359,7 +350,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa2(ButtonDialog btnKihonchosa2) {
+    public void  setBtnKihonchosa2(ButtonDialog btnKihonchosa2) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa2(btnKihonchosa2);
     }
 
@@ -369,7 +360,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa3(ButtonDialog btnKihonchosa3) {
+    public void  setBtnKihonchosa3(ButtonDialog btnKihonchosa3) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa3(btnKihonchosa3);
     }
 
@@ -379,7 +370,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa4(ButtonDialog btnKihonchosa4) {
+    public void  setBtnKihonchosa4(ButtonDialog btnKihonchosa4) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa4(btnKihonchosa4);
     }
 
@@ -389,7 +380,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa5(ButtonDialog btnKihonchosa5) {
+    public void  setBtnKihonchosa5(ButtonDialog btnKihonchosa5) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa5(btnKihonchosa5);
     }
 
@@ -399,7 +390,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa6(ButtonDialog btnKihonchosa6) {
+    public void  setBtnKihonchosa6(ButtonDialog btnKihonchosa6) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa6(btnKihonchosa6);
     }
 
@@ -409,7 +400,7 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
+    public void  setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa7(btnKihonchosa7);
     }
 

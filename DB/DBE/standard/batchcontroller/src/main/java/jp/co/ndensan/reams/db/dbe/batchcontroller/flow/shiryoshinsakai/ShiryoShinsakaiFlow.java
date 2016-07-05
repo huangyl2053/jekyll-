@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shiryoshinsakai.ShiryoShin
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -48,6 +49,8 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
     private static final String 委員_概況特記 = "iinTokkiIran";
     private static final String 委員_その他資料 = "iinSonotaJoho";
     private static final String 審査会開催予定情報更新 = "kousin";
+    private static final String JIMU_SHIRYOFLOW = "jimuShiryoShinsakaiFlow";
+    private static final RString JIMU_SHIRYOFLOW_FLOWID = new RString("DBE517001_ShinsakaiShiryoJImukyoku");
     private static final RString 選択 = new RString("1");
     private static final RString 作成条件_範囲指定 = new RString("範囲指定");
     private static final RString 作成条件_追加分 = new RString("追加分");
@@ -59,7 +62,7 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
                     && !作成条件_範囲指定.equals(getParameter().getSakuseiJoken())) {
                 executeStep(委員_審査会開催通知書);
             }
-//        // TODO 帳票実装しない。
+//        // TODO 凌護行　QA回答まち、帳票仕様確認する、2016/07/10
 //        if (選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())) {
 //            executeStep(委員_特記事項);
 //        }
@@ -67,7 +70,7 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
                     && 選択.equals(getParameter().getShuturyokuSutairu())) {
                 executeStep(委員_一次判定結果);
             }
-//        // TODO 帳票実装しない。
+//        // TODO 凌護行　QA回答まち、帳票仕様確認する、2016/07/10
 //        if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
 //            executeStep(委員_特記事項_一次判定結果);
 //        }
@@ -83,18 +86,17 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
                     || (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
                     && 選択.equals(getParameter().getChohyoIin_ikenshoFalg()))
                     && 作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-                // TODO 審査対象者一覧帳票実装しない
-//            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-                executeStep(委員_追加資料鑑);
-//            }
-//            else {
-//                executeStep(委員_審査対象者一覧);
-//            }
+                if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+                    executeStep(委員_追加資料鑑);
+                } else {
+                    executeStep(委員_審査対象者一覧);
+                }
             }
-////        // TODO 帳票実装しない。
+////        // TODO　凌護行　 QA回答まち、帳票にRSE記載が不正、2016/07/10
 //////        executeStep(委員_概況特記);
             executeStep(委員_その他資料);
         }
+        executeStep(JIMU_SHIRYOFLOW);
         executeStep(審査会開催予定情報更新);
     }
 
@@ -247,6 +249,16 @@ public class ShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchParam
             return loopBatch(SonotaJohoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         }
+    }
+
+    /**
+     * 介護認定審査会スケジュール表かがみバッチのです。
+     *
+     * @return JimuShiryoShinsakaiFlow
+     */
+    @Step(JIMU_SHIRYOFLOW)
+    protected IBatchFlowCommand callJimuShiryoShinsakaiFlow() {
+        return otherBatchFlow(JIMU_SHIRYOFLOW_FLOWID, SubGyomuCode.DBE認定支援, getParameter()).define();
     }
 
     /**

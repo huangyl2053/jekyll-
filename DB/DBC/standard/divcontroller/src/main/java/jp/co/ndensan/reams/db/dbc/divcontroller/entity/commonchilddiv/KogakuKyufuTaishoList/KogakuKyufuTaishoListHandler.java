@@ -78,10 +78,10 @@ public class KogakuKyufuTaishoListHandler {
      * @param 画面モード RString
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月 FlexibleYearMonth
-     * @param 履歴番号 RString
+     * @param 履歴番号 int
      */
     public void 画面初期化(RString メニューID, RString 画面モード, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, RString 履歴番号) {
+            FlexibleYearMonth サービス提供年月, int 履歴番号) {
         if ((高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID))) {
             List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧
                     = KogakuKyuufuTaishouList.createInstance().getKogakuKyuufuTaishouList(被保険者番号, サービス提供年月);

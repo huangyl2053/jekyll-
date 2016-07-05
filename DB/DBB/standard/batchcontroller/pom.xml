@@ -64,6 +64,12 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxBatchController</artifactId>
+            <version>${jp.co.ndensan.reams.cax.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBatchController</artifactId>
         </dependency>

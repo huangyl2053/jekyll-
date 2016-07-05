@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dbb.service.core.honsanteitsuchishoikkatsuhakko.Ho
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,9 +34,9 @@ public class SystemTimeSakuseiProcess extends SimpleBatchProcessBase {
         KIJUN_TIME = new RString("kijunTime");
     }
 
-    private OutputParameter<RDateTime> systemTime;
+    private OutputParameter<YMDHMS> systemTime;
     private OutputParameter<RString> kijunTime;
-    RDateTime バッチ起動時処理日時_年月日時分秒;
+    YMDHMS バッチ起動時処理日時_年月日時分秒;
     RString 最新調定日時;
 
     @Override
@@ -52,7 +50,7 @@ public class SystemTimeSakuseiProcess extends SimpleBatchProcessBase {
         HonsanteiTsuchishoIkkatsuHakko manager = HonsanteiTsuchishoIkkatsuHakko.createInstance();
         YMDHMS tmp調定日時 = manager.get最新調定日時(parameter.get調定年度());
         最新調定日時 = tmp調定日時 == null ? RString.EMPTY : new RString(tmp調定日時.toString());
-        バッチ起動時処理日時_年月日時分秒 = RDate.getNowDateTime();
+        バッチ起動時処理日時_年月日時分秒 = YMDHMS.now();
     }
 
     @Override

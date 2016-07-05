@@ -6,23 +6,26 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * その他機関情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-021 suguangjun
  */
 public class SonotaKikanJoho
-        extends ParentModelBase<SonotaKikanJohoIdentifier, DbT5914SonotaKikanJohoEntity, SonotaKikanJoho>
+        extends ModelBase<SonotaKikanJohoIdentifier, DbT5914SonotaKikanJohoEntity, SonotaKikanJoho>
         implements Serializable {
 
     private final DbT5914SonotaKikanJohoEntity entity;
@@ -75,7 +78,6 @@ public class SonotaKikanJoho
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 証記載保険者番号を返します。
      *
@@ -214,15 +216,13 @@ public class SonotaKikanJoho
     }
 
     /**
-     * その他機関情報のみを変更対象とします。<br/>
-     * {@link DbT5914SonotaKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * その他機関情報のみを変更対象とします。<br/> {@link DbT5914SonotaKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link SonotaKikanJoho}
      */
-    @Override
     public SonotaKikanJoho modifiedModel() {
         DbT5914SonotaKikanJohoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new SonotaKikanJoho(
@@ -230,8 +230,7 @@ public class SonotaKikanJoho
     }
 
     /**
-     * 保持するその他機関情報を削除対象とします。<br/>
-     * {@link DbT5914SonotaKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持するその他機関情報を削除対象とします。<br/> {@link DbT5914SonotaKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link SonotaKikanJoho}
      */
@@ -259,7 +258,7 @@ public class SonotaKikanJoho
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -288,5 +287,25 @@ public class SonotaKikanJoho
         return new SonotaKikanJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SonotaKikanJoho other = (SonotaKikanJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

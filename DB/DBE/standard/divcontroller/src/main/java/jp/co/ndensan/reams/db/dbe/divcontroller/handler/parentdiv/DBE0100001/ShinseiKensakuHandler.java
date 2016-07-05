@@ -98,9 +98,9 @@ public class ShinseiKensakuHandler {
             parameter.setUseNijiHanteiNinteiYukoKikan(true);
             useNinteiKekkaJoho = true;
         }
-        RString 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
-        if (!RString.isNullOrEmpty(認定有効な申請時点)) {
-            parameter.setYokaiYMD(認定有効期間);
+        RDate 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
+        if (認定有効な申請時点 != null) {
+            parameter.setYokaiYMD(認定有効な申請時点.toDateString());
             parameter.setUseYokaiYMD(true);
             useNinteiKekkaJoho = true;
         }
@@ -208,9 +208,9 @@ public class ShinseiKensakuHandler {
             parameter.setZenkaiYukoKikanStartTo(設定有効開始日To);
             parameter.setUseZenkaiYukoKikanStartTo(true);
         }
-        RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
-        if (!RString.isNullOrEmpty(原因疾患)) {
-            parameter.setGeninShikkanCode(原因疾患);
+        Code 原因疾患 = finderDiv.getCdlGeninShikkanCode().getCode();
+        if (原因疾患 != null && !RString.isNullOrEmpty(原因疾患.value())) {
+            parameter.setGeninShikkanCode(原因疾患.value());
             parameter.setUseGeninShikkanCode(true);
             parameter.setUseGeninShikkan(true);
         }

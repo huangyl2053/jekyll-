@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -74,7 +73,7 @@ public class ShoKaishuKirokuKanriJoho {
      * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onLoad(ShoKaishuKirokuKanriJohoDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         getHandler(div).onLoad(key.get識別コード(), key.get被保険者番号());
         アクセスログ(key.get識別コード());
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
@@ -97,7 +96,7 @@ public class ShoKaishuKirokuKanriJoho {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setHozon(div);
             RealInitialLocker.release(LOCKINGKEY);
-            アクセスログ(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+            アクセスログ(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
             return ResponseData.of(div).setState(DBU0500011StateName.完了状態);
         }
         if (!ResponseHolder.isReRequest()) {
@@ -145,7 +144,7 @@ public class ShoKaishuKirokuKanriJoho {
         List<dgKoufuKaishu_Row> dgkoufuKaishuList = div.getShoKaishuList().getCcdShokaishuKirokuKanri().get証交付回収情報一覧();
         for (dgKoufuKaishu_Row dgKoufuKaishu : dgkoufuKaishuList) {
             ShoKofuKaishuIdentifier key = new ShoKofuKaishuIdentifier(
-                    ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号(),
                     dgKoufuKaishu.getKoufuTypeNo(), Integer.valueOf(dgKoufuKaishu.getRirekiNo().toString()));
             ShoKofuKaishu shoKofuKaishu = models.get(key);
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();

@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JohoTeikyoShiryoReport extends Report<JohoTeikyoShiryoReportSource> {
 
-    private final JohoTeikyoShiryoItem item;
+    private final JohoTeikyoShiryo item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item 要介護認定結果情報提供票（主治医）のitem
      */
-    public JohoTeikyoShiryoReport(JohoTeikyoShiryoItem item) {
+    public JohoTeikyoShiryoReport(JohoTeikyoShiryo item) {
         this.item = item;
     }
 

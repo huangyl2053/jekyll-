@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -51,9 +50,9 @@ public class SinsaSeikyusyoMeisaiPanel {
 
         ResponseData<SinsaSeikyusyoMeisaiPanelDiv> responseData = new ResponseData<>();
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         requestDiv.getAtenaInfoCommonChildDiv().initialize(識別コード);
-        requestDiv.getKaigoShikakuKihonCommonChildDiv().initialize(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
+        requestDiv.getKaigoShikakuKihonCommonChildDiv().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
         if (追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
             createHandlerOf(requestDiv).追加_初期化の編集();

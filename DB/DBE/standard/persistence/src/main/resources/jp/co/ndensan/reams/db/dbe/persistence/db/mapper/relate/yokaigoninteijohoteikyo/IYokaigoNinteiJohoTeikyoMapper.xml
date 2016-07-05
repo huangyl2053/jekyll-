@@ -378,11 +378,7 @@
         order by DbT5209NinteichosahyoKinyuItem."remban"
     </select>
     
-    <resultMap id="resultMap_DbT5205Entity" type="jp.co.ndensan.reams.uz.uza.lang.RString" autoMapping="true">
-        <result property="ninteichosaTokkijikoNo"  column="認定調査特記事項番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-    </resultMap>
-    
-    <select resultOrdered="true" id="get認定調査特記事項番号" resultMap="resultMap_DbT5205Entity"
+    <select resultOrdered="true" id="get認定調査特記事項番号" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter" fetchSize="500">
         SELECT
             DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoNo" AS 認定調査特記事項番号

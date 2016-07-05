@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.service.report.karisanteinonyutsuchishocvskigoto;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.report.INonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoRenchoProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto.KarisanteiNonyuTsuchishoCVSKigotoReport;
@@ -106,9 +106,9 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSMultiRenchoCoverSource>> reportList
                         = KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -124,9 +124,9 @@ public class KarisanteiNonyuTsuchishoCVSKigotoPrintService {
 
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-                List<INonyuTsuchisho> reportList
+                List<NonyuTsuchisho<KarisanteiNonyuTsuchishoCVSKigotoSource>> reportList
                         = KarisanteiNonyuTsuchishoCVSKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
-                for (INonyuTsuchisho report : reportList) {
+                for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
             }

@@ -26,10 +26,11 @@ public interface IShujiiIkenshoTeishutsuIraishoHakkoMapper {
     List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> get主治医意見書提出依頼書発行(ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter param);
 
     /**
-     * 主治医意見書作成依頼情報を更新します。
+     * 主治医意見書提出依頼書発行を取得します。
      *
-     * @param entity DbT5301ShujiiIkenshoIraiJohoEntity
-     * @return 更新件数
+     * @param entity 主治医意見書提出依頼書発行のEntity
+     * @return DbT5301ShujiiIkenshoIraiJohoEntity
      */
-    int update主治医意見書作成依頼情報(DbT5301ShujiiIkenshoIraiJohoEntity entity);
+    DbT5301ShujiiIkenshoIraiJohoEntity get主治医意見書作成依頼情報(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity);
+
 }

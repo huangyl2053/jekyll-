@@ -204,23 +204,23 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         if (連番 < 特記事項区分.size()) {
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09B.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku06A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku02A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku99A.toValue(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
             }
         }
         return 名称;
@@ -288,7 +288,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
                 imagePath = getFilePath(イメージID, fileName);
             } else {
-                imagePath = getFilePath(イメージID, fileName.replace(".png", "_BAK.png"));
+                imagePath = getFilePathBak(イメージID, fileName.replace(".png", "_BAK.png"));
             }
         }
         return imagePath;
@@ -849,17 +849,16 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     private RString 共有ファイルを引き出す(RDateTime イメージID) {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
-            if (フラグ.equals(processPrm.getRadTokkiJikoMasking())
-                    && !RString.isNullOrEmpty(getFilePath(イメージID, FILENAME))) {
+            if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
                 imagePath = getFilePath(イメージID, FILENAME);
             } else {
-                imagePath = getFilePath(イメージID, FILENAME_BAK);
+                imagePath = getFilePathBak(イメージID, FILENAME_BAK);
             }
         }
         return imagePath;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+    private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
@@ -867,10 +866,27 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         try {
             SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
         } catch (Exception e) {
-            ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
-            SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
-            return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        ReadOnlySharedFileEntryDescriptor descriptor_BAK
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            try {
+                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(imagePath));
+                return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName.replace(".png", "_BAK.png"));
+            } catch (Exception ex) {
+                return RString.EMPTY;
+            }
         }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }

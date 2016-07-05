@@ -16,11 +16,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310012.PnlTotalPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310012.PnlTotalPanelValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -103,10 +103,10 @@ public class PnlTotalPanel {
             RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
             if (事業者検索.equals(表示モード)) {
                 PnlTotalPanelParameter param = ViewStateHolder
-                        .get(ViewStateKeys.受領委任契約契約者詳細データ, PnlTotalPanelParameter.class);
+                        .get(ViewStateKeys.契約者詳細データ, PnlTotalPanelParameter.class);
                 getHandler(div).set登録データ(param);
                 JuryoininKeiyakuJigyosha data = ViewStateHolder
-                        .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
+                        .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
                 ViewStateHolder.put(ViewStateKeys.契約事業者番号, data.get契約事業者番号());
                 ViewStateHolder.put(ViewStateKeys.契約事業者名, data.get契約事業者名称() == null
                         || data.get契約事業者名称().isEmpty() ? null : data.get契約事業者名称().getColumnValue());
@@ -169,7 +169,7 @@ public class PnlTotalPanel {
         if (登録.equals(画面モード)) {
             TaishoshaKey キー = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             PnlTotalPanelParameter parameter = getHandler(div).createParameter(キー);
-            ViewStateHolder.put(ViewStateKeys.受領委任契約契約者詳細データ, parameter);
+            ViewStateHolder.put(ViewStateKeys.契約者詳細データ, parameter);
             ViewStateHolder.put(ViewStateKeys.表示モード, 事業者検索);
             ViewStateHolder.put(ViewStateKeys.状態, 参照);
             return ResponseData.of(div).forwardWithEventName(DBC0310011TransitionEventName.事業者検索).respond();

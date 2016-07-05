@@ -44,7 +44,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 番地コード
          */
-        番地コード(new RString("0003"), new RString("番地コード"), new RString("")),
+        番地コード(new RString("0003"), new RString("番地コード"), FORMAT.concat(new RString("ShikibetsuTaisho_banchiCode1")).concat(FORMAT)),
         /**
          * 行政区コード
          */
@@ -72,7 +72,7 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("")),
+        氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), FORMAT.concat(new RString("ShikibetsuTaisho_meisho")).concat(FORMAT)),
         /**
          * 生年月日
          */
@@ -84,7 +84,8 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("")),
+        市町村コード(new RString("0016"), new RString("市町村コード"), FORMAT
+                .concat(new RString("dbT2015KeisangoJoho_insertDantaiCd")).concat(FORMAT)),
         /**
          * 被保険者番号
          */
@@ -101,23 +102,25 @@ public class KaigoHokenryogakuProperty extends ReportPropertyBase<KaigoHokenryog
         /**
          * 生活保護
          */
-        生活保護(new RString("0133"), new RString("生活保護"), new RString("")),
+        生活保護(new RString("0133"), new RString("生活保護"), FORMAT.concat(new RString("生活保護区分")).concat(FORMAT)),
         /**
          * 生活保護種別
          */
-        生活保護種別(new RString("0116"), new RString("生活保護種別"), new RString("")),
+        生活保護種別(new RString("0116"), new RString("生活保護種別"), FORMAT.concat(new RString("生活保護区分")).concat(FORMAT)),
         /**
          * 現金口座区分
          */
-        現金口座区分(new RString("0210"), new RString("現金口座区分"), new RString("")),
+        現金口座区分(new RString("0210"), new RString("現金口座区分"), FORMAT.concat(new RString("dbT2015KeisangoJoho_kozaKubun")).concat(FORMAT)),
         /**
          * 8月特徴開始者
          */
-        八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), new RString("")),
+        八月特徴開始者(new RString("0220"), new RString("八月特徴開始者"), FORMAT
+                .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT)),
         /**
          * 10月特徴開始者
          */
-        十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), new RString(""));
+        十月特徴開始者(new RString("0219"), new RString("十月特徴開始者"), FORMAT
+                .concat(new RString("dbT2015KeisangoJoho_sakuseiShoriName")).concat(FORMAT));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

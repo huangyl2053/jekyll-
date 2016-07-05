@@ -58,7 +58,7 @@ public class ShinsakaiKaisaiOshiraseTsuchiReportSource implements IReportSource 
     public RString gogitaiNo;
     @ReportItem(name = "tsuchibun2", order = 23)
     public RString tsuchibun2;
-    @ReportItem(name = "listKaisaiJoho_1", length = 5, order = 24)
+    @ReportItem(name = "listKaisaiJoho_1", length = 6, order = 24)
     public RString listKaisaiJoho_1;
     @ReportItem(name = "listKaisaiJoho_2", length = 11, order = 25)
     public RString listKaisaiJoho_2;

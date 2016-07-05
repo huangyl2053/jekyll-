@@ -170,6 +170,7 @@
         "DbT2002Fuka"."choteiNendo",
         "DbT2002Fuka"."fukaNendo",
         "DbT2002Fuka"."tsuchishoNo",
+        "DbT2002Fuka"."rirekiNo",
         "DbT2003Kibetsu"."ki"
     </select>
     

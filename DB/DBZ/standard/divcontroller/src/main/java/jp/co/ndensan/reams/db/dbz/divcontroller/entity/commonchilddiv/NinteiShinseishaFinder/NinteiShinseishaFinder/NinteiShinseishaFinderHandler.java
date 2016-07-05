@@ -175,8 +175,7 @@ public class NinteiShinseishaFinderHandler {
     public void openSonotaJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getSonotaJoho().setIsOpen(true);
-        div.getTxtGeninShikkanCode().clearValue();
-        div.getTxtGeninShikkanName().clearValue();
+        div.getCdlGeninShikkanCode().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.原因疾患コード.getコード());
         div.getTxtShinseiKeikaNissu().clearFromValue();
         div.getTxtShinseiKeikaNissu().clearToValue();
     }

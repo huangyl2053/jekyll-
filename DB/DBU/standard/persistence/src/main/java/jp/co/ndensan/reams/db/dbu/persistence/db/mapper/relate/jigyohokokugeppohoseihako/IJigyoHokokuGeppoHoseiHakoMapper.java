@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppo
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 
 /**
  * 事業報告（月報）補正発行のMapperクラスです。

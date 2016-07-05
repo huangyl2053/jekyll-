@@ -20,9 +20,7 @@ public class FukaJohoTorokuFlow extends BatchFlowBase<FukaJohoTorokuBatchParamet
     @Override
     protected void defineFlow() {
         executeStep(HENSHU_PROCESS);
-        //TODO 内部QA1119　DBでrgdb.UrT0772KamokubetsuKoyuJohoがない
         executeStep(CALL_CHOTEITOROKU_FLOW);
-        //TODO　QA1123　DB登録する場合、エラーが発生
         executeStep(FUKAJOHOINSERTPROCESS);
     }
 

@@ -27,7 +27,7 @@ public class DbT0705ChoteiKyotsuTempTableEntity extends DbTableEntityBase<DbT070
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("DbT0705ChoteiKyotsuTemp");
+        TABLE_NAME = new RString("UrT0705ChoteiKyotsu_work");
     }
 
     @TempTableColumnOrder(1)

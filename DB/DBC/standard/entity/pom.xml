@@ -28,12 +28,11 @@
             <artifactId>DbzEntity</artifactId>
         </dependency>
         <!-- å…¬é–‹ç³» -->
-        <!-- ãƒ?‚¹ãƒ?-->
-        <!-- ãƒ??ãƒ« -->
+        <!-- ï¿½?ï¿½ï¿½ï¿½?-->
+        <!-- ï¿½??ãƒ« -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
     </dependencies>
