@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020001.Fuk
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB9020001.FukaKijunTotalValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * システム管理（賦課基準）のイベント処理です。
+ * システム管理（賦課基準）のクラスです。
  *
  * @reamsid_L DBB-1770-010 wangkanglei
  */
@@ -42,7 +43,10 @@ public class FukaKijunTotal {
      */
     public ResponseData<FukaKijunTotalDiv> onload(FukaKijunTotalDiv div) {
         RDate now = RDate.getNowDate();
-        getHandler(div).前排他を設定する();
+        boolean gotLock = getHandler(div).前排他キーのセット();
+        if (!gotLock) {
+            throw new PessimisticLockingException();
+        }
         getHandler(div).賦課年度の設定(now);
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
         getHandler(div).ランクの取得(賦課年度, now);

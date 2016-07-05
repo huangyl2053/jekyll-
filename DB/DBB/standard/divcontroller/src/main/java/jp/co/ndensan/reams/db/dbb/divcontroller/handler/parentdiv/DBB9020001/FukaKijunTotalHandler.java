@@ -26,10 +26,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.RankJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * システム管理（賦課基準）のhandler処理です。
+ * システム管理（賦課基準）のハンドラクラスです。
  *
  * @reamsid_L DBB-1770-010 wangkanglei
  */
@@ -655,14 +655,13 @@ public class FukaKijunTotalHandler {
 
     /**
      * 前排他を設定のメソッドます。
+     *
+     * @return Boolean
      */
-    public void 前排他を設定する() {
-        LockingKey key = new LockingKey(UrControlDataFactory.createInstance().getMenuID());
-        if (RealInitialLocker.tryGetLock(key)) {
-            RealInitialLocker.lock(key);
-        } else {
-            throw new PessimisticLockingException();
-        }
+    public Boolean 前排他キーのセット() {
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        LockingKey 排他キー = new LockingKey(controlData.getMenuID());
+        return RealInitialLocker.tryGetLock(排他キー);
     }
 
     /**
