@@ -157,7 +157,6 @@ public class ShujiiIkenshoSakuseiryoNyuryokuFinder {
      * @param 報酬実績情報 {@link ShujiiIkenshoHoshuJissekiJoho}
      * @return 登録/登録件数 更新/更新件数 の件数を返します。
      */
-    @Transaction
     public int insertOrUpdate(ShujiiIkenshoHoshuJissekiJoho 報酬実績情報) {
         if (!報酬実績情報.hasChanged()) {
             return 0;
@@ -172,7 +171,6 @@ public class ShujiiIkenshoSakuseiryoNyuryokuFinder {
      * @param key 報酬実績情報の識別子
      * @return 物理削除件数 物理削除結果の件数を返します。
      */
-    @Transaction
     public boolean delete(Models<ShujiiIkenshoHoshuJissekiJohoIdentifier, ShujiiIkenshoHoshuJissekiJoho> models,
             ShujiiIkenshoHoshuJissekiJohoIdentifier key) {
         ShujiiIkenshoHoshuJissekiJoho 報酬実績情報 = models.get(key);

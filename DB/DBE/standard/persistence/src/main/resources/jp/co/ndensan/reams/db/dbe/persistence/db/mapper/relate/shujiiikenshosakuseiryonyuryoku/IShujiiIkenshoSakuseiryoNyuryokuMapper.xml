@@ -65,7 +65,7 @@
     
     <resultMap id="resultMap_ShujiiJissekiIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiryonyuryoku.ShujiiJissekiIchiranRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="dbT5302_ikenshoIraiRirekiNo" column="dbT5302_ikenshoIraiRirekiNo" />
+        <result property="dbT5302_ikenshoIraiRirekiNo" column="dbT5302_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -77,7 +77,7 @@
         <result property="ikenshoKinyuYMD" column="ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoSakuseiIraiYMD" column="ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ishiKubunCode" column="ishiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="dbT5602_ikenshoIraiRirekiNo" column="dbT5602_ikenshoIraiRirekiNo" />
+        <result property="dbT5602_ikenshoIraiRirekiNo" column="dbT5602_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoSakuseiryo" column="ikenshoSakuseiryo" />
         <result property="ikenshoBettoShinryohi" column="ikenshoBettoShinryohi" />
         <result property="ikenshoHoshu" column="ikenshoHoshu" />

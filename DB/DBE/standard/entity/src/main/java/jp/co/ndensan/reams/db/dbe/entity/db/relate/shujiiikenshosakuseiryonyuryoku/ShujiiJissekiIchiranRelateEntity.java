@@ -20,7 +20,7 @@ import lombok.Setter;
 public class ShujiiJissekiIchiranRelateEntity {
 
     private RString shinseishoKanriNo;
-    private int dbT5302_ikenshoIraiRirekiNo;
+    private RString dbT5302_ikenshoIraiRirekiNo;
     private RString shujiiIryoKikanCode;
     private RString shujiiCode;
     private RString iryoKikanMeisho;
@@ -32,7 +32,7 @@ public class ShujiiJissekiIchiranRelateEntity {
     private RString ikenshoKinyuYMD;
     private RString ikenshoSakuseiIraiYMD;
     private RString ishiKubunCode;
-    private int dbT5602_ikenshoIraiRirekiNo;
+    private RString dbT5602_ikenshoIraiRirekiNo;
     private int ikenshoSakuseiryo;
     private int ikenshoBettoShinryohi;
     private int ikenshoHoshu;

@@ -112,6 +112,15 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
      */
     public ResponseData<ShujiiIkenshoSakuseiryoNyuryokuDiv> onClick_ModifyBtn(ShujiiIkenshoSakuseiryoNyuryokuDiv div) {
         getHandler(div).onClick_ModifyOrDeleteBtn(状態_修正);
+        if (Decimal.ZERO.equals(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue())) {
+            Decimal tanka = ShujiiIkenshoSakuseiryoNyuryokuFinder.createInstance().getTanka(
+                    div.getShinseiJohoMeisai().getDdlZaitakuShisetsuKubun().getSelectedValue(),
+                    div.getShinseiJohoMeisai().getDdlIkenshoSakuseiKaisuKubun().getSelectedValue(),
+                    div.getShinseiJohoMeisai().getTxtIkenshoKinyuNengappi().getValue(),
+                    div.getShinseiJohoMeisai().getTxtIkenshoJuryoNengappi().getValue());
+            getHandler(div).setTanka(tanka);
+            getHandler(div).onChange_Kuben();
+        }
         return ResponseData.of(div).setState(DBE6080001StateName.実績明細状態);
     }
 

@@ -109,12 +109,12 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         if (div.getShujiiKensakuJoken().getTxtKensakuNendo().getFromValue() == null) {
             nendoFrom = RString.EMPTY;
         } else {
-            nendoFrom = div.getShujiiKensakuJoken().getTxtKensakuNendo().getFromValue().toDateString();
+            nendoFrom = div.getShujiiKensakuJoken().getTxtKensakuNendo().getFromValue().getYearMonth().toDateString();
         }
         if (div.getShujiiKensakuJoken().getTxtKensakuNendo().getToValue() == null) {
             nendoTo = RString.EMPTY;
         } else {
-            nendoTo = div.getShujiiKensakuJoken().getTxtKensakuNendo().getToValue().toDateString();
+            nendoTo = div.getShujiiKensakuJoken().getTxtKensakuNendo().getToValue().getYearMonth().toDateString();
         }
         ShujiiIkenshoSakuseiryoNyuryokuParameter parameter = ShujiiIkenshoSakuseiryoNyuryokuParameter
                 .createParam主治医実績一覧(
@@ -185,7 +185,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             row.setShiharaiMemo(nullToEmpty(business.get主治医意見書報酬支払メモ()));
             row.setFurikomi(IsGinkoFurikomiShutsuryoku.toValue(business.is銀行振込出力済フラグ()).get名称());
             row.setShinseishoKanriNo(business.get申請書管理番号());
-            row.setIkenshoIraiRirekiNo(new RString(business.get主治医意見書作成依頼履歴番号_意見書情報()));
+            row.setIkenshoIraiRirekiNo(business.get主治医意見書作成依頼履歴番号_意見書情報());
             row.setShujiiIryoKikanCode(business.get主治医医療機関コード());
             row.setShujiiCode(business.get主治医コード());
             if (business.is指定医フラグ()) {
@@ -193,7 +193,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             } else {
                 row.setShiteiiFlag(ShiteiiFlg.なれない.get名称());
             }
-            row.setHoshuJissekiRirekiNo(new RString(business.get主治医意見書作成依頼履歴番号_報酬実績情報()));
+            row.setHoshuJissekiRirekiNo(business.get主治医意見書作成依頼履歴番号_報酬実績情報());
             rowList.add(row);
         }
         div.getShinseiJoho().getDgShinsakaiIin().setDataSource(rowList);
@@ -254,7 +254,13 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         List<dgShinsakaiIin_Row> rowList = div.getShinseiJoho().getDgShinsakaiIin().getDataSource();
         int rowCount = div.getShinseiJoho().getDgShinsakaiIin().getClickedItem().getId();
         dgShinsakaiIin_Row row = rowList.get(rowCount);
-        if (状態_修正.equals(div.getHdnState())) {
+        if (状態_追加.equals(row.getColumnState())) {
+            if (状態_修正.equals(div.getHdnState())) {
+                row.setColumnState(状態_追加);
+            } else if (状態_削除.equals(div.getHdnState())) {
+                row.setColumnState(RString.EMPTY);
+            }
+        } else if (状態_修正.equals(div.getHdnState())) {
             if (RString.isNullOrEmpty(row.getHoshuJissekiRirekiNo())) {
                 row.setColumnState(状態_追加);
             } else {
@@ -283,16 +289,8 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             } else {
                 row.setShiteiiFlag(ShiteiiFlg.なれない.get名称());
             }
-        }
-        if (状態_削除.equals(div.getHdnState())) {
+        } else if (状態_削除.equals(div.getHdnState())) {
             row.setColumnState(状態_削除);
-        }
-        if (状態_追加.equals(row.getColumnState())) {
-            if (状態_修正.equals(div.getHdnState())) {
-                row.setColumnState(状態_追加);
-            } else if (状態_削除.equals(div.getHdnState())) {
-                row.setColumnState(RString.EMPTY);
-            }
         }
     }
 

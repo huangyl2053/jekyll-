@@ -40,7 +40,7 @@ public class ShujiiJissekiIchiranBusiness {
      *
      * @return 主治医意見書作成依頼履歴番号(要介護認定主治医意見書情報)
      */
-    public int get主治医意見書作成依頼履歴番号_意見書情報() {
+    public RString get主治医意見書作成依頼履歴番号_意見書情報() {
         return entity.getDbT5302_ikenshoIraiRirekiNo();
     }
 
@@ -148,7 +148,7 @@ public class ShujiiJissekiIchiranBusiness {
      *
      * @return 主治医意見書作成依頼履歴番号(主治医意見書作成報酬実績情報)
      */
-    public int get主治医意見書作成依頼履歴番号_報酬実績情報() {
+    public RString get主治医意見書作成依頼履歴番号_報酬実績情報() {
         return entity.getDbT5602_ikenshoIraiRirekiNo();
     }
 
