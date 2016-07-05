@@ -1,134 +1,56 @@
 ﻿{
- "uiContainerName": "DBEUC57101",
+ "uiContainerName": "DBEUC56101",
  "displayWizard": false,
  "subGyomuCode": "DBE",
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定イメージ情報出力",
+   "name": "完了処理・センター送信",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
+     "toLayoutName": "DBE0220001",
+     "toLayoutTitle": "完了処理・センター送信",
+     "toState": "初期表示"
     },
     {
      "id": "2",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710001",
-     "layoutTitle": "要介護認定イメージ情報管理",
-     "eventName": "イメージ出力へ",
+     "layoutName": "DBE0220001",
+     "layoutTitle": "完了処理・センター送信",
+     "eventName": "センター送信",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710002",
-     "toLayoutTitle": "要介護認定イメージ情報出力",
-     "toState": "初期状態"
+     "toLayoutName": "DBE5610001",
+     "toLayoutTitle": "センター送信準備",
+     "toState": "初期表示"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710002",
-     "layoutTitle": "要介護認定イメージ情報出力",
-     "eventName": "イメージ管理へ",
+     "layoutName": "DBE5610001",
+     "layoutTitle": "センター送信準備",
+     "eventName": "完了戻る",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
+     "toLayoutName": "DBE0220001",
+     "toLayoutTitle": "完了処理・センター送信",
+     "toState": "初期表示"
     },
     {
      "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710001",
-     "layoutTitle": "要介護認定イメージ情報管理",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 2,
-   "name": "介護認定イメージ情報削除DBE",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
-    },
-    {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710001",
-     "layoutTitle": "要介護認定イメージ情報管理",
-     "eventName": "イメージ削除へ",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710003",
-     "toLayoutTitle": "要介護認定イメージ情報削除",
-     "toState": "初期状態"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710003",
-     "layoutTitle": "要介護認定イメージ情報削除",
-     "eventName": "イメージ管理へ",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
-    },
-    {
-     "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710001",
-     "layoutTitle": "要介護認定イメージ情報管理",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 3,
-   "name": "要介護認定イメージ情報管理",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
-    },
-    {
-     "id": "2",
-     "type": "end",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE5710001",
-     "layoutTitle": "要介護認定イメージ情報管理",
-     "eventName": "完了",
+     "layoutName": "DBE0220001",
+     "layoutTitle": "完了処理・センター送信",
+     "eventName": "完了状態",
      "destroy": false,
      "condition": ""
     }
