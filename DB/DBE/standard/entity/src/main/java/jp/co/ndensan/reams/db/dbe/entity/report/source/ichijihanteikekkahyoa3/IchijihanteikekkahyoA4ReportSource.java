@@ -207,14 +207,6 @@ public class IchijihanteikekkahyoA4ReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
 
-    @ReportItem(name = "listKaigokyufu_1", length = 3, order = 93)
-    public RString kaigo_listKaigokyufu_1;
-    @ReportItem(name = "tokuteiFukushiyoguKikan", length = 2, order = 94)
-    public RString kaigo_tokuteiFukushiyoguKikan;
-    @ReportItem(name = "listKaigokyufu_1", length = 3, order = 95)
-    public RString yobo_listKaigokyufu_1;
-    @ReportItem(name = "tokuteiFukushiyoguKikan", length = 2, order = 96)
-    public RString yobo_tokuteiFukushiyoguKikan;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")

@@ -75,10 +75,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
         body.setListSeikatsujiritsu_1(item.get障害高齢者自立度());
         body.setListSeikatsujiritsu_2(item.get障害高齢者自立度_ある());
-        body.setYobo_listYobokyufu_1(item.get介護予防訪問介護_ﾎｰﾑﾍﾙﾌﾟ_訪問型ｻｰﾋﾞｽ());
-        body.setYobo_listYobokyufu1_1(item.get介護予防認知症対応型通所介護());
-        body.setKaigo_listKaigokyufu_1(item.get訪問介護_ホームヘルプサービス());
-        body.setKaigo_listKaigokyufu1_1(item.get認知症対応型通所介護());
         body.setListChukanhyoka_1(item.get中間評価項目得点表第1群());
         body.setListChukanhyoka_2(item.get中間評価項目得点表第2群());
         body.setListChukanhyoka_3(item.get中間評価項目得点表第3群());
@@ -127,10 +123,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
         body.setListSeikatsujiritsu_1(item.get認知症高齢者自立度());
         body.setListSeikatsujiritsu_2(item.get認知症高齢者自立度_ある());
-        body.setYobo_listYobokyufu_1(item.get介護予防訪問入浴介護());
-        body.setYobo_listYobokyufu1_1(item.get介護予防小規模多機能型居宅介護());
-        body.setKaigo_listKaigokyufu_1(item.get訪問入浴介護());
-        body.setKaigo_listKaigokyufu1_1(item.get小規模多機能型居宅介護());
         body.setListChukanhyoka_1(item.get前回中間評価項目得点表第1群());
         body.setListChukanhyoka_2(item.get前回中間評価項目得点表第2群());
         body.setListChukanhyoka_3(item.get前回中間評価項目得点表第3群());
@@ -175,10 +167,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody3() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防訪問看護());
-        body.setYobo_listYobokyufu1_1(item.get介護予防認知症対応型共同生活介護_グループホーム());
-        body.setKaigo_listKaigokyufu_1(item.get訪問看護());
-        body.setKaigo_listKaigokyufu1_1(item.get認知症対応型共同生活介護_グループホーム());
         body.setListFuseigo1_1(item.get結果比較_麻痺_左_下肢());
         body.setListFuseigo5_1(item.get結果比較_日常の意思決定());
         body.setListFuseigo1_2(item.get調査結果_麻痺_左_下肢_ある());
@@ -219,9 +207,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody4() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防訪問リハビリテーション());
-        body.setKaigo_listKaigokyufu_1(item.get訪問リハビリテーション());
-        body.setKaigo_listKaigokyufu1_1(item.get地域密着型特定施設入居者生活介護());
         body.setListFuseigo1_1(item.get結果比較_麻痺_右_下肢());
         body.setListFuseigo2_1(item.get結果比較_食事摂取());
         body.setListFuseigo3_1(item.get結果比較_短期記憶());
@@ -264,9 +249,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody5() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防居宅療養管理指導());
-        body.setKaigo_listKaigokyufu_1(item.get居宅療養管理指導());
-        body.setKaigo_listKaigokyufu1_1(item.get地域密着型介護老人福祉施設入所者生活介護());
         body.setListFuseigo1_1(item.get結果比較_麻痺_その他());
         body.setListFuseigo1_2(item.get調査結果_麻痺_その他_ある());
         body.setListIchigun_1(item.get調査結果_麻痺_その他());
@@ -306,9 +288,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody6() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防通所介護_ﾃﾞｲｻｰﾋﾞｽ_通所型ｻｰﾋﾞｽ());
-        body.setKaigo_listKaigokyufu_1(item.get通所介護_デイサービス());
-        body.setKaigo_listKaigokyufu1_1(item.get定期巡回_随時対応型訪問介護看護());
         body.setListFuseigo1_1(item.get結果比較_拘縮_肩関節());
         body.setListFuseigo1_2(item.get調査結果_拘縮_肩関節_ある());
         body.setListIchigun_1(item.get調査結果_拘縮_肩関節());
@@ -348,9 +327,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody7() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防通所リハビリテーション());
-        body.setKaigo_listKaigokyufu_1(item.get通所リハビリテーション());
-        body.setKaigo_listKaigokyufu1_1(item.get看護小規模多機能型居宅介護());
         body.setListFuseigo4_1(item.get結果比較_介護に抵抗());
         body.setListFuseigo1_2(item.get調査結果_拘縮_股関節_ある());
         body.setListIchigun_1(item.get調査結果_拘縮_股関節());
@@ -377,8 +353,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody8() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防短期入所生活介護_ショートステイ());
-        body.setKaigo_listKaigokyufu_1(item.get短期入所生活介護_ショートステイ());
         body.setListFuseigo3_1(item.get結果比較_徘徊());
         body.setListFuseigo1_2(item.get調査結果_拘縮_膝関節_ある());
         body.setListIchigun_1(item.get調査結果_拘縮_膝関節());
@@ -405,8 +379,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody9() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防短期入所療養介護());
-        body.setKaigo_listKaigokyufu_1(item.get短期入所療養介護());
         body.setListFuseigo1_2(item.get調査結果_拘縮_その他_ある());
         body.setListIchigun_1(item.get調査結果_拘縮_その他());
         body.setListIchigun_2(get段階改善1(item.get段階改善_拘縮_その他()));
@@ -432,8 +404,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody10() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防特定施設入居者生活介護());
-        body.setKaigo_listKaigokyufu_1(item.get特定施設入居者生活介護());
         body.setListFuseigo1_2(item.get調査結果_寝返り_ある());
         body.setListIchigun_1(item.get調査結果_寝返り());
         body.setListIchigun_2(get段階改善1(item.get段階改善_寝返り()));
@@ -454,8 +424,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody11() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get介護予防福祉用具貸与());
-        body.setKaigo_listKaigokyufu_1(item.get福祉用具貸与());
         body.setListFuseigo1_2(item.get調査結果_起き上がり_ある());
         body.setListIchigun_1(item.get調査結果_起き上がり());
         body.setListIchigun_2(get段階改善1(item.get段階改善_起き上がり()));
@@ -476,8 +444,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody12() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get特定介護予防福祉用具販売());
-        body.setKaigo_listKaigokyufu_1(item.get特定福祉用具販売());
         body.setListFuseigo1_2(item.get調査結果_座位保持_ある());
         body.setListIchigun_1(item.get調査結果_座位保持());
         body.setListIchigun_2(get段階改善1(item.get段階改善_座位保持()));
@@ -498,8 +464,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody13() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setYobo_listYobokyufu_1(item.get住宅改修2());
-        body.setKaigo_listKaigokyufu_1(item.get住宅改修1());
         body.setListFuseigo1_2(item.get調査結果_両足での立位_ある());
         body.setListIchigun_1(item.get調査結果_両足での立位());
         body.setListIchigun_2(get段階改善1(item.get段階改善_両足での立位()));
@@ -515,7 +479,6 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
 
     private IchijihanteikekkahyoA3Body getBody14() {
         IchijihanteikekkahyoA3Body body = new IchijihanteikekkahyoA3Body();
-        body.setKaigo_listKaigokyufu_1(item.get夜間対応型訪問介護());
         body.setListFuseigo1_2(item.get調査結果_歩行_ある());
         body.setListIchigun_1(item.get調査結果_歩行());
         body.setListIchigun_2(get段階改善1(item.get段階改善_歩行()));
