@@ -49,7 +49,7 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
     /**
      * 帳票分類ID「DBB100014_arisanteiHokenryoNonyuTsuchishoDaihyo」（仮算定額変更通知書(平準化)）出力順設定可能項目です。
      */
-    public enum DBB100014KarisanteiNonyuTsuchishoEnum implements IReportItems {
+    public enum DBB100014NonyuTsuchishoEnum implements IReportItems {
 
         /**
          * 郵便番号
@@ -134,7 +134,7 @@ public class KariNonyuTsuchishoHakkoIchiranProperty extends ReportPropertyBase<K
         private final RString フォームフィールド名;
         private final RString myBatis項目名;
 
-        private DBB100014KarisanteiNonyuTsuchishoEnum(
+        private DBB100014NonyuTsuchishoEnum(
                 RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
             this.項目ID = 項目ID;
             this.フォームフィールド名 = フォームフィールド名;
