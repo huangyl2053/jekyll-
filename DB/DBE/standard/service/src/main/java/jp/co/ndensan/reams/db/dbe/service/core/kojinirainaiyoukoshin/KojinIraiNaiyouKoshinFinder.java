@@ -67,8 +67,7 @@ public class KojinIraiNaiyouKoshinFinder {
             IKojinIraiNaiyouKoshinMapper mapper = mapperProvider.create(IKojinIraiNaiyouKoshinMapper.class);
             List<KojinIraiNaiyouRelateEntity> entity = mapper.getChousaIraiJouhou(dbt5121Entity.getZenkaiShinseishoKanriNo());
             if (entity != null && !entity.isEmpty()) {
-                KojinIraiNaiyouBusiness 前回調査情報 = new KojinIraiNaiyouBusiness(entity.get(0));
-                return 前回調査情報;
+                return new KojinIraiNaiyouBusiness(entity.get(0));
             }
         }
         return null;
@@ -85,8 +84,7 @@ public class KojinIraiNaiyouKoshinFinder {
         IKojinIraiNaiyouKoshinMapper mapper = mapperProvider.create(IKojinIraiNaiyouKoshinMapper.class);
         List<KojinIraiNaiyouRelateEntity> entity = mapper.getChousaIraiJouhou(申請書管理番号);
         if (entity != null && !entity.isEmpty()) {
-            KojinIraiNaiyouBusiness 今回調査情報 = new KojinIraiNaiyouBusiness(entity.get(0));
-            return 今回調査情報;
+            return new KojinIraiNaiyouBusiness(entity.get(0));
         }
         return null;
     }
@@ -104,8 +102,7 @@ public class KojinIraiNaiyouKoshinFinder {
             IKojinIraiNaiyouKoshinMapper mapper = mapperProvider.create(IKojinIraiNaiyouKoshinMapper.class);
             List<KojinIraiNaiyouRelateEntity> entity = mapper.getSyujiIraiJouhou(dbt5121Entity.getZenkaiShinseishoKanriNo());
             if (entity != null && !entity.isEmpty()) {
-                KojinIraiNaiyouBusiness 前回主治医情報 = new KojinIraiNaiyouBusiness(entity.get(0));
-                return 前回主治医情報;
+                return new KojinIraiNaiyouBusiness(entity.get(0));
             }
         }
         return null;
@@ -122,8 +119,7 @@ public class KojinIraiNaiyouKoshinFinder {
         IKojinIraiNaiyouKoshinMapper mapper = mapperProvider.create(IKojinIraiNaiyouKoshinMapper.class);
         List<KojinIraiNaiyouRelateEntity> entity = mapper.getSyujiIraiJouhou(申請書管理番号);
         if (entity != null && !entity.isEmpty()) {
-            KojinIraiNaiyouBusiness 今回主治医情報 = new KojinIraiNaiyouBusiness(entity.get(0));
-            return 今回主治医情報;
+            return new KojinIraiNaiyouBusiness(entity.get(0));
         }
         return null;
     }
