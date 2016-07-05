@@ -125,6 +125,7 @@ public class HonsanteiFukaKeisanTotalHandler {
                 row.setTxtJokyo(状況_未);
                 row.setTxtShoriNichiji(RString.EMPTY);
                 dgHonsanteiShoriKakuninList.add(row);
+                row = new dgHonsanteiShoriKakunin_Row();
                 row.setTxtShoriMei(ShoriName.依頼金額計算.get名称());
                 row.setTxtJokyo(状況_未);
                 row.setTxtShoriNichiji(RString.EMPTY);
