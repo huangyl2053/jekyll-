@@ -98,6 +98,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
     private Decimal 連番;
+    private FlexibleDate システム日付;
 //    private RString preBreakKey;
 //    private HanyoListShokanbaraiJokyoEntity preEntity;
 //    private Map<RString, Object> mapFlag;
@@ -111,7 +112,8 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     protected void beforeExecute() {
         連番 = Decimal.ONE;
 //        preBreakKey = RString.EMPTY;
-        dataCreate = new HanyoListCsvDataCreate();
+        システム日付 = FlexibleDate.getNowDate();
+        dataCreate = new HanyoListCsvDataCreate(システム日付);
         personalDataList = new ArrayList<>();
 //        mapFlag = new HashMap<>();
 //        lstDbt3038List = new ArrayList<>();

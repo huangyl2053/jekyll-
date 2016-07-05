@@ -90,13 +90,15 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanProcess extends BatchProcessB
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
+    private FlexibleDate システム日付;
 
     @BatchWriter
     private EucCsvWriter<HanyoListKyotakuServiceKeikakuNoRenbanCsvEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
-        csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor();
+        システム日付 = FlexibleDate.getNowDate();
+        csvEntityEditor = new HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor(システム日付);
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 

@@ -57,15 +57,15 @@
         DbV1005."faxNo" as fax番号_05,
         DbV1005."yukoKaishiYMD" as 有効開始日_05,
         DbV1005."yukoShuryoYMD" as 有効終了日_05,
-        DbV4001."jukyuShinseiJiyu" as 受給申請事由,
-        DbV4001."jukyuShinseiYMD" as 受給申請年月日,
-        DbV4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
-        DbV4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
-        DbV4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
-        DbV4001."ninteiYMD" as 受給認定日,
+        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
+        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
+        DbT4001."ninteiYMD" as 受給認定日,
         DbT4001."minashiCode" as みなし要介護区分コード,
-        DbV4001."kyuSochishaFlag" as 旧措置フラグ,
-        DbV4001."chokkinIdoJiyuCode" as 直近異動事由コード,
+        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
         DbT3056."dbT3056KogakuShikyuShinsei_shiharaiBasho" as 支払場所,
         DbT3056."dbT3056KogakuShikyuShinsei_shiharaiKaishiYMD" as 支払期間開始年月日,
         DbT3056."dbT3056KogakuShikyuShinsei_shiharaiShuryoYMD" as 支払期間終了年月日,
@@ -183,14 +183,40 @@
         ON DbV1004."nyushoShisetsuCode" = DbT7062."jigyoshaNo"
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from
         rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
-        LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho" As DbV4001
-        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
-        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
-        ON DbT4001."shichosonCode" = DbV4001."shichosonCode"
-        AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
-        AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
-        AND DbT4001."edaban" = DbV4001."edaban"
-        AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
+        LEFT OUTER JOIN (
+                SELECT
+                        *
+                FROM (
+                        SELECT
+                        DbT3055_all."hihokenshaNo" as 被保険者番号,
+                        DbT3055_all."serviceTeikyoYM" as サービス提供年月,
+                        DbT3055_all."rirekino" as 履歴番号,
+                        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+                        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+                        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+                        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
+                        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
+                        DbT4001."ninteiYMD" as 受給認定日,
+                        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+                        DbT4001."minashiCode" as みなし要介護区分コード,
+                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
+                        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" OVER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                        FROM
+                                rgdb.DbT3055KogakuKyufuTaishoshaGokei As DbT3055_all
+                        INNER JOIN
+                                rgdb.DbT4001JukyushaDaicho As DbT4001
+                                ON	DbT4001."hihokenshaNo" = DbT3055_all."hihokenshaNo"
+                                AND	DbT4001."logicalDeletedFlag" = false
+                                AND	DbT4001."yukoMukoKubun" = '1'
+                                AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31')
+                                AND	(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+                ) AS DbT4001_corresponding
+                WHERE
+                        DbT4001_corresponding.番号 = 1
+        ) As DbT4001
+        ON	DbT4001."hihokenshaNo" = DbT3055."hihokenshaNo"
+        AND	DbT4001."serviceTeikyoYM" = DbT3055."serviceTeikyoYM"
+        AND	DbT4001."rirekino" = DbT3055."rirekino"
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON DbT3056."dbT3056KogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
@@ -401,15 +427,15 @@
         DbV1005."faxNo" as fax番号_05,
         DbV1005."yukoKaishiYMD" as 有効開始日_05,
         DbV1005."yukoShuryoYMD" as 有効終了日_05,
-        DbV4001."jukyuShinseiJiyu" as 受給申請事由,
-        DbV4001."jukyuShinseiYMD" as 受給申請年月日,
-        DbV4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
-        DbV4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
-        DbV4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
-        DbV4001."ninteiYMD" as 受給認定日,
+        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
+        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
+        DbT4001."ninteiYMD" as 受給認定日,
         DbT4001."minashiCode" as みなし要介護区分コード,
-        DbV4001."kyuSochishaFlag" as 旧措置フラグ,
-        DbV4001."chokkinIdoJiyuCode" as 直近異動事由コード,
+        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
         DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiBasho" as 支払場所,
         DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiKaishiYMD" as 支払期間開始年月日,
         DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiShuryoYMD" as 支払期間終了年月日,
@@ -497,14 +523,40 @@
         ON DbV1004."nyushoShisetsuCode" = DbT7062."jigyoshaNo"
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from
         rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
-        LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho" As DbV4001
-        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
-        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
-        ON DbT4001."shichosonCode" = DbV4001."shichosonCode"
-        AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
-        AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
-        AND DbT4001."edaban" = DbV4001."edaban"
-        AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
+        LEFT OUTER JOIN (
+                SELECT
+                        *
+                FROM (
+                        SELECT
+                        DbT3109_all."hihokenshaNo" as 被保険者番号,
+                        DbT3109_all."serviceTeikyoYM" as サービス提供年月,
+                        DbT3109_all."rirekino" as 履歴番号,
+                        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+                        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+                        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+                        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
+                        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,	
+                        DbT4001."ninteiYMD" as 受給認定日,
+                        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+                        DbT4001."minashiCode" as みなし要介護区分コード,
+                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
+                        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" OVER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                        FROM
+                                rgdb.DbT3109JigyoKogakuKyufuTaishoshaGokei As DbT3109_all
+                        INNER JOIN
+                                rgdb.DbT4001JukyushaDaicho As DbT4001
+                                ON DbT4001."hihokenshaNo" = DbT3109_all."hihokenshaNo"
+                                AND DbT4001."logicalDeletedFlag" = false
+                                AND DbT4001."yukoMukoKubun" = '1'
+                                AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3109_all."serviceTeikyoYM" || '31')
+                                AND (DbT3109_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+                ) AS DbT4001_corresponding
+                WHERE
+                        DbT4001_corresponding.番号 = 1
+        ) As DbT4001
+        ON DbT4001."hihokenshaNo" = DbT3109."hihokenshaNo"
+        AND DbT4001."serviceTeikyoYM" = DbT3109."serviceTeikyoYM"
+        AND DbT4001."rirekino" = DbT3109."rirekino"
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.kozaSearchResult" />) AS koza
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
