@@ -65,7 +65,7 @@
         AND Shunyu."sokuhoKubun" = FALSE
         )AS D
         ON
-        C."choteiId" = D."shunoId"
+        C."shunoId" = D."shunoId"
         LEFT JOIN
         (
         SELECT
@@ -79,7 +79,7 @@
         "shunoId"
         ) AS F
         ON
-        F."shunoId" = C."choteiId"
+        F."shunoId" = C."shunoId"
         LEFT JOIN
         (
         SELECT
@@ -134,4 +134,87 @@
         D."shunyuYMD"
     </select>
 
+    <select id = "searchShiharaiHohoHenkoTaino" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.SearchShiharaiHohoHenkoTainoParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        A.*
+        FROM(<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />)AS A
+        INNER JOIN
+        (
+        SELECT
+        B1."hihokenshaNo",
+        B1."kanriKubun",
+        B1."rirekiNo",
+        B1."tainoHanteiKubun",
+        B1."choteiNendo",
+        B1."fukaNendo",
+        B1."Tokucho_fuchoKubun",
+        B1."shuno_Ki_Tsuki",
+        B1."renNo",
+        MAX("tsuchishoNo") AS tsuchishoNo
+        FROM
+        rgdb."DbT4022ShiharaiHohoHenkoTaino" B1
+        INNER JOIN
+        (
+        SELECT
+        A1."hihokenshaNo",
+        A1."kanriKubun",
+        A1."rirekiNo",
+        A1."tainoHanteiKubun",
+        A1."choteiNendo",
+        A1."fukaNendo",
+        A1."Tokucho_fuchoKubun",
+        A1."shuno_Ki_Tsuki",
+        MAX("renNo") AS renNo
+        FROM
+        rgdb."DbT4022ShiharaiHohoHenkoTaino" A1
+        WHERE
+        A1."hihokenshaNo" = #{被保険者番号}
+        AND	A1."kanriKubun" = #{管理区分}
+        AND	A1."rirekiNo" = #{履歴番号}
+        AND	A1."tainoHanteiKubun" = #{滞納判定区分}
+        GROUP BY
+        A1."hihokenshaNo",
+        A1."kanriKubun",
+        A1."rirekiNo",
+        A1."tainoHanteiKubun",
+        A1."choteiNendo",
+        A1."fukaNendo",
+        A1."Tokucho_fuchoKubun",
+        A1."shuno_Ki_Tsuki"
+        ) A2
+        ON	A2."hihokenshaNo" = B1."hihokenshaNo"
+        AND	A2."kanriKubun" = B1."kanriKubun"
+        AND	A2."rirekiNo" = B1."rirekiNo"
+        AND	A2."tainoHanteiKubun" = B1."tainoHanteiKubun"
+        AND	A2."choteiNendo" = B1."choteiNendo"
+        AND	A2."fukaNendo" = B1."fukaNendo"
+        AND	A2."Tokucho_fuchoKubun" = B1."Tokucho_fuchoKubun"
+        AND	A2."shuno_Ki_Tsuki" = B1."shuno_Ki_Tsuki"
+        AND	A2.renNo = B1."renNo"
+        GROUP BY
+        B1."hihokenshaNo",
+        B1."kanriKubun",
+        B1."rirekiNo",
+        B1."tainoHanteiKubun",
+        B1."choteiNendo",
+        B1."fukaNendo",
+        B1."Tokucho_fuchoKubun",
+        B1."shuno_Ki_Tsuki",
+        B1."renNo"
+        ) B
+        ON	B."hihokenshaNo" = A."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo"
+        AND	B."kanriKubun" = A."dbT4022ShiharaiHohoHenkoTaino_kanriKubun"
+        AND	B."rirekiNo" = A."dbT4022ShiharaiHohoHenkoTaino_rirekiNo"
+        AND	B."tainoHanteiKubun" = A."dbT4022ShiharaiHohoHenkoTaino_tainoHanteiKubun"
+        AND	B."choteiNendo" = A."dbT4022ShiharaiHohoHenkoTaino_choteiNendo"
+        AND	B."fukaNendo" = A."dbT4022ShiharaiHohoHenkoTaino_fukaNendo"
+        AND	B."Tokucho_fuchoKubun" = A."dbT4022ShiharaiHohoHenkoTaino_Tokucho_fuchoKubun"
+        AND	B."shuno_Ki_Tsuki" = A."dbT4022ShiharaiHohoHenkoTaino_shuno_Ki_Tsuki"
+        AND	B."renNo" = A."dbT4022ShiharaiHohoHenkoTaino_renNo"
+        AND	B.tsuchishoNo = A."dbT4022ShiharaiHohoHenkoTaino_tsuchishoNo"
+        ORDER BY
+        A."dbT4022ShiharaiHohoHenkoTaino_fukaNendo" DESC,
+        A."dbT4022ShiharaiHohoHenkoTaino_choteiNendo",
+        A."dbT4022ShiharaiHohoHenkoTaino_shuno_Ki_Tsuki"
+    </select>
 </mapper>

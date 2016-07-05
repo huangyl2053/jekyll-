@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo;
 
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IinYobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -16,32 +17,32 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class IinYobihanteiKinyuhyoReport extends Report<IinYobihanteiKinyuhyoReportSource> {
 
-    private final IinYobihanteiKinyuhyoItem item;
+    private final IinYobihanteiKinyuhyoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 委員用予備判定記入表のITEM
+     * @param business 委員用予備判定記入表
      * @return 委員用予備判定記入表のReport
      */
-    public static IinYobihanteiKinyuhyoReport createFrom(IinYobihanteiKinyuhyoItem item) {
+    public static IinYobihanteiKinyuhyoReport createFrom(IinYobihanteiKinyuhyoBusiness business) {
 
-        return new IinYobihanteiKinyuhyoReport(item);
+        return new IinYobihanteiKinyuhyoReport(business);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 委員用予備判定記入表のITEM
+     * @param business 委員用予備判定記入表
      */
-    protected IinYobihanteiKinyuhyoReport(IinYobihanteiKinyuhyoItem item) {
-        this.item = item;
+    protected IinYobihanteiKinyuhyoReport(IinYobihanteiKinyuhyoBusiness business) {
+        this.business = business;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<IinYobihanteiKinyuhyoReportSource> reportSourceWriter) {
 
-        IinYobihanteiKinyuhyoEditor editor = new IinYobihanteiKinyuhyoEditor(item);
+        IinYobihanteiKinyuhyoEditor editor = new IinYobihanteiKinyuhyoEditor(business);
         IinYobihanteiKinyuhyoBuilder builder = new IinYobihanteiKinyuhyoBuilder(editor);
         reportSourceWriter.writeLine(builder);
 

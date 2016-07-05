@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  */
 public class TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+
+    public static final String ITEM_TITLENENDO = "titleNendo";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+    public static final String ITEM_TSUCHISHONO = "tsuchishoNo";
 
     @ReportItem(name = "titleNendo", length = 4, order = 1)
     public RString titleNendo;
