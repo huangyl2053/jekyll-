@@ -27,6 +27,9 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends NonyuTsuchi
 
     private final HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
+    private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
+    private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
+    private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
     private static final int INT_4 = 4;
     private static final int INT_7 = 7;
     private static final int INT_10 = 10;
@@ -49,19 +52,16 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends NonyuTsuchi
         if (is全部の納付額が0(納入通知書期情報リスト)) {
             return;
         }
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
 
-        this.前中後期リストのedit(納入通知書期情報リスト, 納入通知書期情報リスト前期, 納入通知書期情報リスト中期, 納入通知書期情報リスト後期);
+        this.edit前中後期リスト(納入通知書期情報リスト);
         if (!納入通知書期情報リスト前期.isEmpty()) {
-            this.前中後期のedit(納入通知書期情報リスト前期, writer);
+            this.edit前中後期(納入通知書期情報リスト前期, writer);
         }
         if (!納入通知書期情報リスト中期.isEmpty()) {
-            this.前中後期のedit(納入通知書期情報リスト中期, writer);
+            this.edit前中後期(納入通知書期情報リスト中期, writer);
         }
         if (!納入通知書期情報リスト後期.isEmpty()) {
-            this.前中後期のedit(納入通知書期情報リスト後期, writer);
+            this.edit前中後期(納入通知書期情報リスト後期, writer);
         }
     }
 
@@ -95,19 +95,15 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends NonyuTsuchi
             return reportLst;
         }
 
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
-
-        this.前中後期リストのedit(納入通知書期情報リスト, 納入通知書期情報リスト前期, 納入通知書期情報リスト中期, 納入通知書期情報リスト後期);
+        this.edit前中後期リスト(納入通知書期情報リスト);
         if (!納入通知書期情報リスト前期.isEmpty()) {
-            this.前中後期のdevidedEdit(納入通知書期情報リスト前期, 納入通知書期情報リストReport, reportLst);
+            this.devidedEdit前中後期(納入通知書期情報リスト前期, 納入通知書期情報リストReport, reportLst);
         }
         if (!納入通知書期情報リスト中期.isEmpty()) {
-            this.前中後期のdevidedEdit(納入通知書期情報リスト中期, 納入通知書期情報リストReport, reportLst);
+            this.devidedEdit前中後期(納入通知書期情報リスト中期, 納入通知書期情報リストReport, reportLst);
         }
         if (!納入通知書期情報リスト後期.isEmpty()) {
-            this.前中後期のdevidedEdit(納入通知書期情報リスト後期, 納入通知書期情報リストReport, reportLst);
+            this.devidedEdit前中後期(納入通知書期情報リスト後期, 納入通知書期情報リストReport, reportLst);
         }
 
         return reportLst;
@@ -136,7 +132,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends NonyuTsuchi
         本算定納入通知書情報Report.set編集後本算定通知書共通情報(本算定納入通知書情報.get編集後本算定通知書共通情報());
     }
 
-    private void 前中後期のedit(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
+    private void edit前中後期(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             ReportSourceWriter<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource> writer) {
 
         int 銀振印字位置Para = 0;
@@ -160,7 +156,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends NonyuTsuchi
         edit(writer, 納入通知書期情報リストEdit, 連番);
     }
 
-    private void 前中後期のdevidedEdit(
+    private void devidedEdit前中後期(
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストReport,
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource>> reportLst) {
@@ -180,11 +176,8 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends NonyuTsuchi
         reportLst.add(getNewReport(納入通知書期情報リストReport));
     }
 
-    private void 前中後期リストのedit(
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期) {
+    private void edit前中後期リスト(
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
 
         int 中期開始期 = INT_7;
         int 後期開始期 = INT_10;
