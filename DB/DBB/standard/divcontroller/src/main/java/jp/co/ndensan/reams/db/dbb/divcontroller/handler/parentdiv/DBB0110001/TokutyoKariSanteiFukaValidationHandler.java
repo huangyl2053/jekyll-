@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class TokutyoKariSanteiFukaValidationHandler {
 
     private static final RString 発行日 = new RString("発行日");
+    private static final RString 特別徴収開始通知書_仮算定_帳票分類ID = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private final TokutyoKariSanteiFukaDiv div;
 
     /**
@@ -41,11 +42,11 @@ public class TokutyoKariSanteiFukaValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 発行日未入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        Map<RString, RString> map = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
         RString publishidate = div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().
                 getTxtTokuKaishiTsuchiHakkoYMD2().getText();
-        if (!map.isEmpty() && RString.isNullOrEmpty(publishidate)) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        Map<RString, RString> map = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        if (!map.isEmpty() && map.containsKey(特別徴収開始通知書_仮算定_帳票分類ID) && RString.isNullOrEmpty(publishidate)) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.必須, (発行日.toString()))));
         }

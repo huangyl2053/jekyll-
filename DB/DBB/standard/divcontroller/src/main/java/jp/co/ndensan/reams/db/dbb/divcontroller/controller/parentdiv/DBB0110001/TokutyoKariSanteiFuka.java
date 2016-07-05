@@ -45,17 +45,6 @@ public class TokutyoKariSanteiFuka {
     }
 
     /**
-     * 特徴仮算定賦課を「予約する」を押下する。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<TokuchoKariSanteiParameter> btnSanteiYoyaku(TokutyoKariSanteiFukaDiv div) {
-        TokuchoKariSanteiParameter param = getHandler(div).btncommon(div);
-        return ResponseData.of(param).respond();
-    }
-
-    /**
      * 発行日未入力チェックのンメソッドです。
      *
      * @param div コントロールdiv
