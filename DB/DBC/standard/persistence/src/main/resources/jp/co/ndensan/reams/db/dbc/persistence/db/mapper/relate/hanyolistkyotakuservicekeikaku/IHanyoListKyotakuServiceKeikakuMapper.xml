@@ -78,7 +78,7 @@
         DbT7060_Keikaku."jigyoshaNameKana"                              AS dbT7060_Keikaku事業者カナ名称,
         DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,
         DbT7060_Itaku."jigyoshaName"					AS dbT7060_Itaku事業者名称,
-        DbT7060_Itaku."jigyoshaNameKana"                                AS DbT7060_Itaku.事業者カナ名称,
+        DbT7060_Itaku."jigyoshaNameKana"                                AS DbT7060_Itaku事業者カナ名称,
         DbV4001."jukyuShinseiJiyu"						AS dbV4001受給申請事由,
         DbV4001."jukyuShinseiYMD"						AS dbV4001受給申請年月日,
         DbV4001."yokaigoJotaiKubunCode"					AS dbV4001要介護認定状態区分コード,
