@@ -348,7 +348,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         }
         parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
         Code 原因疾患 = finderDiv.getCdlGeninShikkanCode().getCode();
-        if (原因疾患 != null) {
+        if (原因疾患 != null && !原因疾患.isEmpty()) {
             parameter.setGeninShikkanCode(原因疾患.value());
             parameter.setUseGeninShikkanCode(true);
             parameter.setUseGeninShikkan(true);
@@ -774,6 +774,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             parameter.setNowPhaseNijiHantei(true);
         } else if (KanryoInfoPhase.月例処理.getコード().equals(現在のフェーズ)) {
             parameter.setNowPhaseGetsureiShori(true);
+        } else if (KanryoInfoPhase.調査入手.getコード().equals(現在のフェーズ)) {
+            parameter.setNowPhaseChosaNyushu(true);
         }
     }
 
