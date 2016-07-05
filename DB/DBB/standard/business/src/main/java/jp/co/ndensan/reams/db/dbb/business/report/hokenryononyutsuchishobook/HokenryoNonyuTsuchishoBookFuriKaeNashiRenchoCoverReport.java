@@ -31,6 +31,9 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
 
     private final HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報;
     private final NinshoshaSource ninshoshaSource;
+    private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
+    private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
+    private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -58,25 +61,21 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
             return;
         }
 
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
-
-        this.前中後期リストのedit(納入通知書期情報リスト, 納入通知書期情報リスト前期, 納入通知書期情報リスト中期, 納入通知書期情報リスト後期);
+        this.edit前中後期リスト(納入通知書期情報リスト);
 
         if (!納入通知書期情報リスト前期.isEmpty()) {
-            this.前中後期のedit(納入通知書期情報リスト前期, writer);
+            this.edit前中後期(納入通知書期情報リスト前期, writer);
         }
         if (!納入通知書期情報リスト中期.isEmpty()) {
-            this.前中後期のedit(納入通知書期情報リスト中期, writer);
+            this.edit前中後期(納入通知書期情報リスト中期, writer);
         }
         if (!納入通知書期情報リスト後期.isEmpty()) {
-            this.前中後期のedit(納入通知書期情報リスト後期, writer);
+            this.edit前中後期(納入通知書期情報リスト後期, writer);
         }
 
     }
 
-    private void 前中後期のedit(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
+    private void edit前中後期(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource> writer) {
 
         if (HenshuHaniKubun.Detailのみ.equals(本算定納入通知書情報.get編集範囲区分())) {
@@ -242,29 +241,25 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
             return nonyuTsuchishoList;
         }
 
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期 = new ArrayList<>();
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期 = new ArrayList<>();
-
-        this.前中後期リストのedit(納入通知書期情報リスト, 納入通知書期情報リスト前期, 納入通知書期情報リスト中期, 納入通知書期情報リスト後期);
+        this.edit前中後期リスト(納入通知書期情報リスト);
 
         if (!納入通知書期情報リスト前期.isEmpty()) {
             boolean isBegin = false;
-            this.前中後期のdevidedEdit(納入通知書期情報リスト前期, isBegin, nonyuTsuchishoList, isブック開始位置が1);
+            this.devidedEdit前中後期(納入通知書期情報リスト前期, isBegin, nonyuTsuchishoList, isブック開始位置が1);
         }
         if (!納入通知書期情報リスト中期.isEmpty()) {
             boolean isBegin = true;
-            this.前中後期のdevidedEdit(納入通知書期情報リスト中期, isBegin, nonyuTsuchishoList, isブック開始位置が1);
+            this.devidedEdit前中後期(納入通知書期情報リスト中期, isBegin, nonyuTsuchishoList, isブック開始位置が1);
         }
         if (!納入通知書期情報リスト後期.isEmpty()) {
             boolean isBegin = true;
-            this.前中後期のdevidedEdit(納入通知書期情報リスト後期, isBegin, nonyuTsuchishoList, isブック開始位置が1);
+            this.devidedEdit前中後期(納入通知書期情報リスト後期, isBegin, nonyuTsuchishoList, isブック開始位置が1);
         }
 
         return nonyuTsuchishoList;
     }
 
-    private void 前中後期のdevidedEdit(
+    private void devidedEdit前中後期(
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             boolean isBegin,
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource>> nonyuTsuchishoList,
@@ -351,11 +346,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
         return new本算定納入通知書情報;
     }
 
-    private void 前中後期リストのedit(
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト前期,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト中期,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト後期) {
+    private void edit前中後期リスト(
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
 
         int 中期開始期 = INT_7;
         int 後期開始期 = INT_10;
