@@ -57,10 +57,16 @@ public class HonsanteiFukaKeisanTotalHandler {
 
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
+    private static final RString 定数_2 = new RString("2");
+    private static final RString 定数_課税 = new RString("課税");
+    private static final RString 定数_非課税 = new RString("非課税");
+    private static final RString 定数_徴収する = new RString("徴収する");
+    private static final RString 定数_徴収しない = new RString("徴収しない");
     private static final RString FORMAT_M = new RString("_");
     private static final RString 出力方法_別々 = new RString("別々出力");
     private static final RString 出力方法_全件 = new RString("全件出力");
     private static final RString 項目名 = new RString("当初出力_出力方法");
+    private static final RString 定数_円 = new RString("円");
     private static final RString FORMAT_L = new RString("円（");
     private static final RString FORMAT_R = new RString("）");
     private static final RString 管理項目名_1 = new RString("年額端数");
@@ -202,31 +208,68 @@ public class HonsanteiFukaKeisanTotalHandler {
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
         row.setTxtKoumoku(管理項目名_2);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分, 適用基準日, SubGyomuCode.DBB介護賦課);
+        if (定数_1.equals(未申告課税区分)) {
+            row.setTxtNaiyo(定数_課税);
+        } else if (定数_2.equals(未申告課税区分)) {
+            row.setTxtNaiyo(定数_非課税);
+        }
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
         row.setTxtKoumoku(管理項目名_3);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分,
+                適用基準日, SubGyomuCode.DBB介護賦課);
+        if (定数_1.equals(所得調査中課税区分)) {
+            row.setTxtNaiyo(定数_課税);
+        } else if (定数_2.equals(所得調査中課税区分)) {
+            row.setTxtNaiyo(定数_非課税);
+        }
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
         row.setTxtKoumoku(管理項目名_4);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
+                適用基準日, SubGyomuCode.DBB介護賦課);
+        if (定数_1.equals(課税取消課税区分)) {
+            row.setTxtNaiyo(定数_課税);
+        } else if (定数_2.equals(課税取消課税区分)) {
+            row.setTxtNaiyo(定数_非課税);
+        }
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
+        builder = new RStringBuilder();
         row.setTxtKoumoku(管理項目名_5);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 特徴_期別端数 = builder.append(DecimalFormatter.toコンマ区切りRString(
+                new Decimal(Integer.parseInt(DbBusinessConfig.get(ConfigNameDBB.特別徴収_期別端数,
+                                        適用基準日, SubGyomuCode.DBB介護賦課).toString())), 0)).append(定数_円).toRString();
+        row.setTxtNaiyo(特徴_期別端数);
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
         row.setTxtKoumoku(管理項目名_6);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 特徴開始前普通徴収_8月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_8月,
+                適用基準日, SubGyomuCode.DBB介護賦課);
+        if (定数_1.equals(特徴開始前普通徴収_8月)) {
+            row.setTxtNaiyo(定数_徴収する);
+        } else if (定数_0.equals(特徴開始前普通徴収_8月)) {
+            row.setTxtNaiyo(定数_徴収しない);
+        }
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
         row.setTxtKoumoku(管理項目名_7);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 特徴開始前普通徴収_10月 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始前普通徴収_10月,
+                適用基準日, SubGyomuCode.DBB介護賦課);
+        if (定数_1.equals(特徴開始前普通徴収_10月)) {
+            row.setTxtNaiyo(定数_徴収する);
+        } else if (定数_0.equals(特徴開始前普通徴収_10月)) {
+            row.setTxtNaiyo(定数_徴収しない);
+        }
         dgKanrijoho2List.add(row);
         row = new dgKanrijoho2_Row();
+        builder = new RStringBuilder();
         row.setTxtKoumoku(管理項目名_8);
-        row.setTxtNaiyo(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数, 適用基準日, SubGyomuCode.DBB介護賦課));
+        RString 普徴_期別端数 = builder.append(DecimalFormatter.toコンマ区切りRString(
+                new Decimal(Integer.parseInt(DbBusinessConfig.get(ConfigNameDBB.普通徴収_期別端数,
+                                        適用基準日, SubGyomuCode.DBB介護賦課).toString())), 0)).append(定数_円).toRString();
+        row.setTxtNaiyo(普徴_期別端数);
         dgKanrijoho2List.add(row);
         div.getHonsanteiFukaKakunin().getHonsanteiKanrijoho().getDgKanrijoho2().setDataSource(dgKanrijoho2List);
     }
