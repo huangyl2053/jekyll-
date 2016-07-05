@@ -234,42 +234,53 @@ public class ShikakuFuseigoShuseiMain {
         }
         ShikakuFuseigoBusiness shikakuFusei = ViewStateHolder.get(ViewStateKeys.不整合修正中, ShikakuFuseigoBusiness.class);
         RString 台帳種別 = shikakuFusei.get台帳種別();
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.修正後の資格の情報, HihokenshaDaicho.class);
         TekiyoJogaisha 修正後の除外の情報 = ViewStateHolder.get(ViewStateKeys.修正後の除外の情報, TekiyoJogaisha.class);
         TashichosonJushochiTokurei 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.修正後の他特の情報, TashichosonJushochiTokurei.class);
-        validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,
-                修正後の資格の情報, 修正後の除外の情報, 修正後の他特の情報));
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && div.getChkToTaishoGai().isAllSelected()) {
+            manager.saveAs対象外(shikakuFusei.get整合性チェック情報());
+            div.getShikakuFuseigoIchiran().setDisabled(false);
+            return onLoad(div);
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (div.getChkToTaishoGai().isAllSelected()) {
-                manager.saveAs対象外(shikakuFusei.get整合性チェック情報());
-                div.getShikakuFuseigoIchiran().setDisabled(false);
-                return onLoad(div);
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);
+        if (台帳種別.equals(DaichoType.被保険者.getコード())) {
+            修正後の資格の情報 = getHandler(div).set資格の情報(不整合理由, 修正後の資格の情報);
+            int 履歴番号 = manager.getMax履歴番号(修正後の資格の情報.get識別コード());
+            ShikakuShutokuJogaisha 取得除外の情報 = getHandler(div).set取得除外の情報(不整合理由, 履歴番号, 修正後の資格の情報);
+            validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,
+                    修正後の資格の情報, 修正後の除外の情報, 修正後の他特の情報));
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.不整合理由, FuseigoRiyu.class);
-            if (台帳種別.equals(DaichoType.被保険者.getコード())) {
-                修正後の資格の情報 = getHandler(div).set資格の情報(不整合理由, 修正後の資格の情報);
-                int 履歴番号 = manager.getMax履歴番号(修正後の資格の情報.get識別コード());
-                ShikakuShutokuJogaisha 取得除外の情報 = getHandler(div).set取得除外の情報(不整合理由, 履歴番号, 修正後の資格の情報);
-                save修正後の情報By被保険者(shikakuFusei, div, 修正後の資格の情報, 取得除外の情報);
+            save修正後の情報By被保険者(shikakuFusei, div, 修正後の資格の情報, 取得除外の情報);
+        }
+        if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
+            修正後の除外の情報 = getHandler(div).set除外の情報(不整合理由, 修正後の除外の情報);
+            validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,
+                    修正後の資格の情報, 修正後の除外の情報, 修正後の他特の情報));
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
-                修正後の除外の情報 = getHandler(div).set除外の情報(不整合理由, 修正後の除外の情報);
-                manager.save除外情報(
-                        ViewStateHolder.get(ViewStateKeys.現在の除外の情報, TekiyoJogaisha.class),
-                        修正後の除外の情報,
-                        shikakuFusei.get整合性チェック情報());
+            manager.save除外情報(
+                    ViewStateHolder.get(ViewStateKeys.現在の除外の情報, TekiyoJogaisha.class),
+                    修正後の除外の情報,
+                    shikakuFusei.get整合性チェック情報());
+        }
+        if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
+            修正後の他特の情報 = getHandler(div).set他特の情報(不整合理由, 修正後の他特の情報);
+            validationMessages.add(getValidationHandler(div).beforeUpdCheck(台帳種別, shikakuFusei,
+                    修正後の資格の情報, 修正後の除外の情報, 修正後の他特の情報));
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
-                修正後の他特の情報 = getHandler(div).set他特の情報(不整合理由, 修正後の他特の情報);
-                manager.save他特情報(
-                        ViewStateHolder.get(ViewStateKeys.現在の他特の情報, TashichosonJushochiTokurei.class),
-                        修正後の他特の情報,
-                        shikakuFusei.get整合性チェック情報());
-            }
+            manager.save他特情報(
+                    ViewStateHolder.get(ViewStateKeys.現在の他特の情報, TashichosonJushochiTokurei.class),
+                    修正後の他特の情報,
+                    shikakuFusei.get整合性チェック情報());
         }
         div.getShikakuFuseigoIchiran().setDisabled(false);
         return onLoad(div);
