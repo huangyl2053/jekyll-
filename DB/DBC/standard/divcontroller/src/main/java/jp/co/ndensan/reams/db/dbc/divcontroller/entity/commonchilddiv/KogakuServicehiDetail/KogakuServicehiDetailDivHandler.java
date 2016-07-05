@@ -51,6 +51,7 @@ public class KogakuServicehiDetailDivHandler {
     private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMN42002");
     private static final RString 総合事業高額介護サービス費照会 = new RString("DBCMN11016");
     private static final RString 受付日と決定日 = new RString("受付日と決定日");
+    private static final RString 高額自動償還の対象者です = new RString("高額自動償還の対象者です。");
     private static final RString key0 = new RString("key0");
     private static final RString key1 = new RString("key1");
     private static final RString ONE = new RString("1");
@@ -206,9 +207,7 @@ public class KogakuServicehiDetailDivHandler {
             div.getTplShinseisha().getTxtShiharaiTotalAmount().
                     setValue(result.get高額介護サービス費支給対象者合計Entity().get利用者負担額合計());
             if (result.get高額介護サービス費支給対象者合計Entity().is自動償還対象フラグ()) {
-                div.getTplShinseisha().getTxtKotei().setVisible(true);
-            } else {
-                div.getTplShinseisha().getTxtKotei().setVisible(false);
+                div.getTplShinseisha().getTxtKotei().setValue(高額自動償還の対象者です);
             }
         }
     }
@@ -254,9 +253,7 @@ public class KogakuServicehiDetailDivHandler {
             div.getTplShinseisha().getTxtShiharaiTotalAmount().
                     setValue(result.get事業高額介護サービス費支給対象者合計Entity().get利用者負担額合計());
             if (result.get事業高額介護サービス費支給対象者合計Entity().is自動償還対象フラグ()) {
-                div.getTplShinseisha().getTxtKotei().setVisible(true);
-            } else {
-                div.getTplShinseisha().getTxtKotei().setVisible(false);
+                div.getTplShinseisha().getTxtKotei().setValue(高額自動償還の対象者です);
             }
         }
     }
@@ -282,7 +279,8 @@ public class KogakuServicehiDetailDivHandler {
                 div.getRdbShikyuKubun().setSelectedKey(key1);
                 div.getTxtShikyuKingaku().setDisabled(true);
             }
-            div.getTxtShikyuKingaku().setValue(result.get高額介護サービス費支給判定結果Entity().get本人支払額());
+            div.getTxtHonninShiharaiGaku().setValue(result.get高額介護サービス費支給判定結果Entity().get本人支払額());
+            div.getTxtShikyuKingaku().setValue(result.get高額介護サービス費支給判定結果Entity().get支給金額());
             div.getTxtShikyusinaiRiyu().setValue(result.get高額介護サービス費支給判定結果Entity().get不支給理由());
             if (ONE.equals(result.get高額介護サービス費支給判定結果Entity().get審査方法区分())) {
                 div.getRdbShinsaHohoKubun().setSelectedKey(key0);
@@ -319,7 +317,8 @@ public class KogakuServicehiDetailDivHandler {
             } else if (TWO.equals(result.get事業高額介護サービス費支給判定結果Entity().get支給区分コード())) {
                 div.getRdbShikyuKubun().setSelectedKey(key1);
             }
-            div.getTxtShikyuKingaku().setValue(result.get事業高額介護サービス費支給判定結果Entity().get本人支払額());
+            div.getTxtHonninShiharaiGaku().setValue(result.get事業高額介護サービス費支給判定結果Entity().get本人支払額());
+            div.getTxtShikyuKingaku().setValue(result.get事業高額介護サービス費支給判定結果Entity().get支給金額());
             div.getTxtShikyusinaiRiyu().setValue(result.get事業高額介護サービス費支給判定結果Entity().get不支給理由());
             if (ONE.equals(result.get事業高額介護サービス費支給判定結果Entity().get審査方法区分())) {
                 div.getRdbShinsaHohoKubun().setSelectedKey(key0);
