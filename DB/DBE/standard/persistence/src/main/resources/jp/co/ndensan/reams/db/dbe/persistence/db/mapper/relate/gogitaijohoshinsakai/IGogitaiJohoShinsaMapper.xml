@@ -67,7 +67,7 @@
         AND
         DBT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
         AND 
-        DBT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
+        DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
         DbT5501."shinsakaiKaisaiYoteiYMD" = #{コピー日}
     </select>
