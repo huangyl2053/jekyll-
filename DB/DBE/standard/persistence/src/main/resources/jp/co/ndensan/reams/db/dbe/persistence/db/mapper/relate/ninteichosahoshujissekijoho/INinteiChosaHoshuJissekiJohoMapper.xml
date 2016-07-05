@@ -22,12 +22,12 @@
         <result property="ninteichosaRirekiNo" column="DbT5202_ninteichosaRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosaItakusakiCode" column="DbT5202_chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosainCode" column="DbT5202_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteichosaJuryoYMD" column="DbT5202_ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteichosaJuryoYMD" column="DbT5202_ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="chosaJisshiBashoMeisho" column= "DbT5202_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteichosaIraiYMD" column="DbT5202_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaIraiYMD" column="DbT5202_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="chosainShimei" column="DbT5913_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column="DbT5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteichosaIraiRirekiNo" column="DbT5601_ninteichosaIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosaItakuryo" column="DbT5601_chosaItakuryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -151,10 +151,10 @@
         WHERE
         DbT5202."chosainCode" =#{認定調査員コード}
         <if test="検索年度月FROMフラグ">
-           AND  DbT5202."ninteichosaJisshiYMD"<![CDATA[>=]]>#{検索年度月FROM}
+           AND #{検索年度月FROM}<![CDATA[<=]]> DbT5202."ninteichosaJisshiYMD"
         </if>
         <if test="検索年度月TOフラグ">
-          AND  #{検索年度月TO}<![CDATA[>=]]>DbT5202."ninteichosaJisshiYMD"
+          AND DbT5202."ninteichosaJisshiYMD"<![CDATA[<=]]> #{検索年度月TO}
         </if>
         ORDER BY
             DbT5601."ninteichosaItakusakiCode" desc,

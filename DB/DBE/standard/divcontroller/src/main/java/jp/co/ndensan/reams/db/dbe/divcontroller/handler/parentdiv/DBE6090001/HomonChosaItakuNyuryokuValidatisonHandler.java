@@ -33,7 +33,7 @@ public class HomonChosaItakuNyuryokuValidatisonHandler {
     }
 
     /**
-     * 抽出データの件数がNULLの場合、エラーとする。
+     * 調査員一覧の件数が空の場合、エラーとする。
      *
      * @return バリデーション結果
      */
@@ -44,7 +44,7 @@ public class HomonChosaItakuNyuryokuValidatisonHandler {
     }
 
     /**
-     * 抽出データの件数がNULLの場合、エラーとする。
+     * 調査実績一覧の件数が空の場合、エラーとする。
      *
      * @return バリデーション結果
      */
@@ -70,7 +70,7 @@ public class HomonChosaItakuNyuryokuValidatisonHandler {
     }
 
     /**
-     * データ空チェック
+     * 実績一覧データ空チェック
      *
      * @param validPairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs

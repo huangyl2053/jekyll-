@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuJissekiJoh
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.IsGinkoFurikomiShutsuryoku;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.HomonChosaItakuNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgChosain_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgShinsakaiIin_Row;
@@ -62,7 +64,7 @@ public class HomonChosaItakuNyuryokuHandler {
      */
     public void intialize() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getTxtMaxCount().setValue(new RString(DbBusinessConfig.
+        div.getTextBoxNum().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
@@ -75,11 +77,11 @@ public class HomonChosaItakuNyuryokuHandler {
         div.getTxtKensakuNendo().clearToValue();
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getDdlHihokenshaNameMatchType().setSelectedKey(new RString("key0"));
-        div.getTxtMaxCount().clearValue();
+        div.getTextBoxNum().clearValue();
     }
 
     /**
-     * 画面調査員一覧編すです。
+     * 画面調査員一覧編集です。
      *
      * @param list List<NinteiChosaHoshuJissekiJohoBusiness>
      */
@@ -88,12 +90,12 @@ public class HomonChosaItakuNyuryokuHandler {
         if (!list.isEmpty()) {
             for (NinteiChosaHoshuJissekiJohoBusiness business : list) {
                 dgChosain_Row dgchosain_Row = new dgChosain_Row();
-                dgchosain_Row.setShokisaiHokenshaNo(business.get証記載保険者番号());
-                dgchosain_Row.setShichosonCode(business.get市町村コード());
-                dgchosain_Row.setHokensha(business.get市町村名称());
-                dgchosain_Row.setNinteiChosainCode(business.get認定調査員コード());
-                dgchosain_Row.setChosainShimei(business.get調査員氏名());
-                dgchosain_Row.setChosainKanaShimei(business.get調査員氏名カナ());
+                dgchosain_Row.setShokisaiHokenshaNo(nullToEmpty(business.get証記載保険者番号()));
+                dgchosain_Row.setShichosonCode(nullToEmpty(business.get市町村コード()));
+                dgchosain_Row.setHokensha(nullToEmpty(business.get市町村名称()));
+                dgchosain_Row.setNinteiChosainCode(nullToEmpty(business.get認定調査員コード()));
+                dgchosain_Row.setChosainShimei(nullToEmpty(business.get調査員氏名()));
+                dgchosain_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
                 if (business.get調査員資格().isNullOrEmpty()) {
                     dgchosain_Row.setChosainShikaku(RString.EMPTY);
                 } else {
@@ -116,22 +118,22 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
-     * 調査委託料検索条件クリアです。
+     * 調査実績一覧Gridの編集です。
      *
      * @param list List<NinteichosahyoGaikyoChosaBusiness>
      */
-    public void setdgShinsakaiIin(List<NinteichosahyoGaikyoChosaBusiness> list) {
+    public void setDgShinsakaiIin(List<NinteichosahyoGaikyoChosaBusiness> list) {
         List<dgShinsakaiIin_Row> dgChosainList = new ArrayList<>();
         if (!list.isEmpty()) {
             for (NinteichosahyoGaikyoChosaBusiness business : list) {
                 dgShinsakaiIin_Row row = new dgShinsakaiIin_Row();
-                row.setShinseibi(nullToEmpty(business.get認定申請年月日()));
+                row.setShinseibi(nullToEmpty(business.get認定申請年月日().wareki().toDateString()));
                 row.setNinteiShinseiKubun(nullToEmpty(NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分申請時コード()).get名称()));
                 row.setNinteiChosaItakusaki(nullToEmpty(business.get事業者名称()));
                 row.setNinteiChosain(nullToEmpty(business.get調査員氏名()));
-                row.setIraiNengappi(nullToEmpty(business.get認定調査依頼年月日()));
-                row.setJisshiNengappi(nullToEmpty(business.get認定調査実施年月日()));
-                row.setJuryoNengappi(nullToEmpty(business.get認定調査受領年月日()));
+                row.setIraiNengappi(nullToEmpty(business.get認定調査依頼年月日().wareki().toDateString()));
+                row.setJisshiNengappi(nullToEmpty(business.get認定調査実施年月日().wareki().toDateString()));
+                row.setJuryoNengappi(nullToEmpty(business.get認定調査受領年月日().wareki().toDateString()));
                 row.setShurui(nullToEmpty(business.get認定調査実施場所名称()));
                 row.setNinteiChosaItakuryo(nullToEmpty(business.get認定調査委託料()));
                 row.setShiharaiMemo(nullToEmpty(business.get認定調査委託料支払メモ()));
@@ -148,9 +150,9 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
-     * 調査委託料検索条件クリアです。
+     * 「入力を取りやめる」ボタンを押下し、編集内容クリアです。
      */
-    public void setKuria() {
+    public void kuria() {
         div.getTxtShinseibi().clearValue();
         div.getTxtNinteiChosaIraiNengappi().clearValue();
         div.getTxtNinteiChosaJisshiNengappi().clearValue();
@@ -160,7 +162,7 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
-     * 調査委託料検索条件クリアです。
+     * 一覧状態「更新」の編集です。
      *
      */
     public void set状態_更新() {
@@ -189,10 +191,10 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
-     * 調査委託料検索条件クリアです。
+     * 一覧状態「削除」の編集です。
      */
     public void set状態_削除() {
-        div.getTxtShinseibi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi().toString()));
+        div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
         div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
         div.getTxtNinteiChosaIraiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi().toString()));
         div.getTxtNinteiChosaJisshiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi().toString()));
@@ -211,7 +213,7 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
-     * 調査委託料検索条件クリアです。
+     * 「登録する」ボタンを押下し、編集です。
      */
     public void setbtnToroku() {
         List<dgShinsakaiIin_Row> dgChosainList = div.getDgShinsakaiIin().getDataSource();
@@ -313,5 +315,41 @@ public class HomonChosaItakuNyuryokuHandler {
         } else {
             return new Decimal(obj.replace(コンマ, RString.EMPTY).toString());
         }
+    }
+
+    /**
+     * 調査員一覧のパラメタ編集です。
+     *
+     * @param div HomonChosaItakuNyuryokuDiv
+     * @return NinteiChosaHoshuJissekiJohoMybatisParameter
+     */
+    public NinteiChosaHoshuJissekiJohoMybatisParameter createParam_初期(HomonChosaItakuNyuryokuDiv div) {
+        return NinteiChosaHoshuJissekiJohoMybatisParameter.createParam(
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value(),
+                new Decimal(div.getTextBoxNum().getValue().toString()),
+                div.getChosainShimei().getValue(),
+                div.getDdlHihokenshaNameMatchType().getSelectedKey());
+    }
+
+    /**
+     * 実績調査員一覧のパラメタ編集です。
+     *
+     * @param div HomonChosaItakuNyuryokuDiv
+     * @return NinteichosahyoGaikyoChosaMybatisParameter
+     */
+    public NinteichosahyoGaikyoChosaMybatisParameter createParam_実績(HomonChosaItakuNyuryokuDiv div) {
+        return NinteichosahyoGaikyoChosaMybatisParameter.createParam(
+                div.getChosain().getDgChosain().getClickedItem().getShichosonCode(),
+                div.getChosain().getDgChosain().getClickedItem().getShokisaiHokenshaNo(),
+                div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode(),
+                div.getTxtKensakuNendo().getFromText(),
+                div.getTxtKensakuNendo().getToText());
+    }
+
+    private FlexibleDate toFlexibleDate(RString obj) {
+        if (obj == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return new FlexibleDate(new RDate(obj.toString()).toDateString());
     }
 }
