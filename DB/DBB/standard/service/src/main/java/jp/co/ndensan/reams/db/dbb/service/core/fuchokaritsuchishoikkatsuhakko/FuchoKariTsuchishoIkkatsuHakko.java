@@ -277,10 +277,6 @@ public class FuchoKariTsuchishoIkkatsuHakko {
      * @param 帳票分類ID ReportId
      */
     public void getFukaJoho(FlexibleYear 調定年度, FlexibleYear 賦課年度, boolean 一括発行起動フラグ, ReportId 帳票分類ID) {
-//        ShoriDateKanriManager 処理日付管理 = new ShoriDateKanriManager();
-//        ShoriDateKanri entity = 処理日付管理.get最新調定日時(
-//                SubGyomuCode.DBB介護賦課, ShoriName.普徴仮算定賦課.get名称(), 調定年度);
-//        YMDHMS 調定日時 = entity.get基準日時();
         IFuchoKariTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IFuchoKariTsuchishoIkkatsuHakkoMapper.class);
         mapper.creat異動賦課情報一時();
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
@@ -440,24 +436,19 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                         保険料納入通知書仮算定情報, 仮算定納入通知書制御情報, 出力期リスト, 宛先情報.get宛先名称());
                 仮算定納入通知書情報リスト.add(仮算定納入通知書情報);
                 RString 口座情報 = 通知書の口座情報編集(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get編集後口座());
-                // 5.4 　BatchReportWriterの設定 TODO　QA913
+                // TODO　QA913
                 publish納入通知書仮算定(帳票ID, 仮算定納入通知書情報, reportManager);
             }
             sourceDataCollection = reportManager.publish();
         }
-        // 5.5 ＣＳＶファイルに出力する項目を編集する
-//        for (KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 : 仮算定納入通知書情報リスト) {
-//            setCSVEntity(仮算定納入通知書情報, 出力期, 賦課年度, 調定日時, csvEntity);
-//            csvEntityList.add(csvEntity);
-//        }
-        // 5.7 　通知書帳票をスプール登録する TODO
+        // TODO
         List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
         for (KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 : 仮算定納入通知書情報リスト) {
             編集後本算定通知書共通情報List.add(仮算定納入通知書情報.get編集後仮算定通知書共通情報());
         }
         KariNonyuTsuchishoHakkoIchiranPrintService printService = new KariNonyuTsuchishoHakkoIchiranPrintService();
         printService.print(仮算定納入通知書情報リスト, 出力順ID, YMDHMS.now(), 出力期);
-        // 5.9 CSVファイルの文字コードを指定された文字コードに変換する
+        // TODO
         RString 文字コード = DbBusinessConfig.get(
                 ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         publish納入通知書発行一覧表(調定日時, 編集後本算定通知書共通情報List, 出力期);
@@ -486,27 +477,9 @@ public class FuchoKariTsuchishoIkkatsuHakko {
 
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID)) {
             new KarisanteiHokenryoNonyuTsuchishoKigotoPrintService().print(仮算定納入通知書情報, reportManager);
-//        } else if (ReportIdDBB.DBB100015.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100028.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100029.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100019.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100021.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100023.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100020.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100022.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100026.getReportId().equals(帳票ID)) {
-//        } else if (ReportIdDBB.DBB100027.getReportId().equals(帳票ID)) {
         } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID)) {
             new KarisanteiNonyuTsuchishoCVSKakukoPrintService().print(仮算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100025.getReportId().equals(帳票ID)) {
-            new KarisanteiNonyuTsuchishoCVSKigotoPrintService().print(仮算定納入通知書情報, reportManager);
-        }
-        if (ReportIdDBB.DBB100045.getReportId().equals(帳票ID) || ReportIdDBB.DBB100046.getReportId().equals(帳票ID)) {
-            new KarisanteiHokenryoNonyuTsuchishoKigotoPrintService().print(仮算定納入通知書情報, reportManager);
-        } else if (ReportIdDBB.DBB100059.getReportId().equals(帳票ID) || ReportIdDBB.DBB100060.getReportId().equals(帳票ID)) {
-            new KarisanteiNonyuTsuchishoCVSKakukoPrintService().print(仮算定納入通知書情報, reportManager);
-        } else if (ReportIdDBB.DBB100063.getReportId().equals(帳票ID) || ReportIdDBB.DBB100064.getReportId().equals(帳票ID)) {
             new KarisanteiNonyuTsuchishoCVSKigotoPrintService().print(仮算定納入通知書情報, reportManager);
         }
     }
@@ -532,33 +505,6 @@ public class FuchoKariTsuchishoIkkatsuHakko {
         return RString.EMPTY;
     }
 
-    //    private void setCSVEntity(KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, int 出力期, RDateTime 調定日時,
-    //            KariNonyuTsuchishoHakkoIchiranCSVEntity csvEntity) {
-    //        List<UniversalPhase> 普徴期別金額リスト = 仮算定納入通知書情報.get編集後仮算定通知書共通情報().get更正後()
-    //                .get更正後普徴期別金額リスト();
-    //        for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
-    //            if (出力期 == 普徴期別金額.get期()) {
-    //                csvEntity.set当期(new RString(普徴期別金額.get金額().toString()));
-    //                break;
-    //            }
-    //        }
-    //        csvEntity.set代納人送付先(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get宛先名称().
-    //                getName().value());
-    //        if (!AtesakiShubetsu.本人.equals(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get宛先種別())) {
-    //            csvEntity.set代納人送付先(RString.EMPTY);
-    //        }
-    //        csvEntity.set生保開始日(仮算定納入通知書情報.get編集後仮算定通知書共通情報().get更正後().get生保開始日_西暦());
-    //        if (出力期 == 1) {
-    //            csvEntity.set次期以降(new RString(0));
-    //        } else {
-    //            for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
-    //                if ((出力期 + 1) == 普徴期別金額.get期()) {
-    //                    csvEntity.set次期以降(new RString(普徴期別金額.get金額().toString()));
-    //                    break;
-    //                }
-    //            }
-    //        }
-    //    }
     private void publish納入通知書発行一覧表(RDateTime 帳票作成日時,
             List<EditedKariSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, int 出力期) {
 
@@ -1421,16 +1367,6 @@ public class FuchoKariTsuchishoIkkatsuHakko {
                     .concat(編集後口座.get口座番号Or通帳記号番号()).concat(スペース)
                     .concat(編集後口座.get口座名義人漢字優先());
         }
-//        KozaRelateEntity relateEntity = new KozaRelateEntity();
-//        relateEntity.setKinyuKikanEntity(null);
-//        Koza koza = new Koza(relateEntity);
-//        if (編集後口座.get金融機関コード() != null) {
-//            if (ゆうちょ銀行.equals(編集後口座.get金融機関コードCombinedWith支店コード().subSequence(NUM_0, NUM_4))) {
-//                koza.createKozaKihonBuilderForEdit().set金融機関コード(new KinyuKikanCode(
-//                        編集後口座.get金融機関コードCombinedWith支店コード()));
-//            } else {
-//            }
-//        }
         return 口座情報;
     }
 }
