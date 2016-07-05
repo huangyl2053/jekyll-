@@ -168,9 +168,9 @@ public class HomonChosaItakuNyuryokuHandler {
     public void set状態_更新() {
         div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
         div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
-        div.getTxtNinteiChosaIraiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi().toString()));
-        div.getTxtNinteiChosaJisshiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi().toString()));
-        div.getTxtNinteiJuryoNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi().toString()));
+        div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
+        div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
+        div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
         div.getTxtHomonShurui().setValue(div.getDgShinsakaiIin().getClickedItem().getShurui() == null
                 ? RString.EMPTY : div.getDgShinsakaiIin().getClickedItem().getShurui());
         div.getTxtNinteiChosaItakuryo().setValue(toDecimal(div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo()));
@@ -196,9 +196,9 @@ public class HomonChosaItakuNyuryokuHandler {
     public void set状態_削除() {
         div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
         div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
-        div.getTxtNinteiChosaIraiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi().toString()));
-        div.getTxtNinteiChosaJisshiNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi().toString()));
-        div.getTxtNinteiJuryoNengappi().setValue(new FlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi().toString()));
+        div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
+        div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
+        div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
         div.getTxtHomonShurui().setValue(div.getDgShinsakaiIin().getClickedItem().getShurui());
         div.getTxtNinteiChosaItakuryo().setValue(toDecimal(div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo()));
         if (銀行振込.equals(div.getDgShinsakaiIin().getClickedItem().getFurikomi())) {
