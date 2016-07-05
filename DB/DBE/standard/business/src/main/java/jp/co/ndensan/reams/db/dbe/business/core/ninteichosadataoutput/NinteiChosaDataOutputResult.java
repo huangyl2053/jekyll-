@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -17,6 +18,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査データ出力（モバイル）CSVEntity設定のビジネスです。
@@ -38,19 +42,19 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
         eucCsvEntity.set証記載保険者番号(entity.get証記載保険者番号());
         eucCsvEntity.set被保険者番号(entity.get被保険者番号());
-        eucCsvEntity.set認定申請年月日(entity.get認定申請年月日());
+        eucCsvEntity.set認定申請年月日(setDateFormat(entity.get認定申請年月日()));
         eucCsvEntity.set認定申請区分_申請時_コード(entity.get認定申請区分_申請時_コード());
         eucCsvEntity.set認定申請区分申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get名称());
         eucCsvEntity.set被保険者氏名(entity.get被保険者氏名());
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
-        eucCsvEntity.set生年月日(entity.get生年月日());
+        eucCsvEntity.set生年月日(setDateFormat(entity.get生年月日()));
         eucCsvEntity.set年齢(entity.get年齢());
-        eucCsvEntity.set性別(entity.get性別());
-        eucCsvEntity.set郵便番号(entity.get郵便番号());
+        eucCsvEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
+        eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
         eucCsvEntity.set住所(entity.get住所());
         eucCsvEntity.set電話番号(entity.get電話番号());
         eucCsvEntity.set保険者名(entity.get市町村名称());
-        eucCsvEntity.set認定調査依頼完了年月日(entity.get認定調査依頼完了年月日());
+        eucCsvEntity.set認定調査依頼完了年月日(setDateFormat(entity.get認定調査依頼完了年月日()));
         eucCsvEntity.set認定調査依頼履歴番号(entity.get認定調査依頼履歴番号());
         eucCsvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
         eucCsvEntity.set調査委託先(entity.get事業者名称());
@@ -61,8 +65,8 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
         eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         eucCsvEntity.set認定調査回数(entity.get認定調査回数());
-        eucCsvEntity.set認定調査実施年月日(entity.get認定調査実施年月日());
-        eucCsvEntity.set認定調査受領年月日(entity.get認定調査受領年月日());
+        eucCsvEntity.set認定調査実施年月日(setDateFormat(entity.get認定調査実施年月日()));
+        eucCsvEntity.set認定調査受領年月日(setDateFormat(entity.get認定調査受領年月日()));
         eucCsvEntity.set認定調査区分コード(entity.get認定調査区分コード());
         eucCsvEntity.set認定調査区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査区分コード()).get名称());
         eucCsvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
@@ -73,15 +77,15 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set利用施設名(entity.get利用施設名());
         eucCsvEntity.set利用施設住所(entity.get利用施設住所());
         eucCsvEntity.set利用施設電話番号(entity.get利用施設電話番号());
-        eucCsvEntity.set利用施設郵便番号(entity.get利用施設郵便番号());
+        eucCsvEntity.set利用施設郵便番号(setYobuinNoFormat(entity.get利用施設郵便番号()));
         eucCsvEntity.set特記(entity.get特記());
-        eucCsvEntity.set認定調査特記事項受付年月日(entity.get認定調査特記事項受付年月日());
-        eucCsvEntity.set認定調査特記事項受領年月日(entity.get認定調査特記事項受領年月日());
+        eucCsvEntity.set認定調査特記事項受付年月日(setDateFormat(entity.get認定調査特記事項受付年月日()));
+        eucCsvEntity.set認定調査特記事項受領年月日(setDateFormat(entity.get認定調査特記事項受領年月日()));
         eucCsvEntity.set住宅改修(entity.get住宅改修());
         eucCsvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
         eucCsvEntity.set在宅サービス種類名(entity.get在宅サービス種類名());
         eucCsvEntity.set主訴(entity.get主訴());
-        eucCsvEntity.set家族状況(entity.get家族状況());
+        eucCsvEntity.set家族状況(setYobuinNoFormat(entity.get家族状況()));
         eucCsvEntity.set居住環境(entity.get居住環境());
         eucCsvEntity.set機器_器械(entity.get機器_器械());
         eucCsvEntity.set認定調査特記事項番号(entity.get認定調査特記事項番号());
@@ -105,5 +109,21 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set調査項目文言(NinteichosaKomokuMapping09B.toValue(entity.get調査項目連番()).get名称());
         eucCsvEntity.set内容(entity.get調査項目());
         return eucCsvEntity;
+    }
+
+    private RString setYobuinNoFormat(RString yobuinNo) {
+        RString formatYobuinNo = RString.EMPTY;
+        if (!RString.isNullOrEmpty(yobuinNo)) {
+            formatYobuinNo = new YubinNo(yobuinNo).getEditedYubinNo();
+        }
+        return formatYobuinNo;
+    }
+
+    private RString setDateFormat(RString date) {
+        RString formatDate = RString.EMPTY;
+        if (!RString.isNullOrEmpty(date)) {
+            formatDate = new FlexibleDate(date).wareki().toDateString();
+        }
+        return formatDate;
     }
 }
