@@ -35,8 +35,8 @@ public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBas
     @BatchParameter(key = KEY_SHINSAYMFROM, name = "審査年月From")
     private FlexibleYearMonth ShinsaYMFrom;
     @BatchParameter(key = KEY_SHINSAYMTO, name = "審査年月To")
-    private RString ShinsaYMTo;
+    private FlexibleYearMonth ShinsaYMTo;
     @BatchParameter(key = KEY_SHUTURYOKUFLG, name = "出力フラグ")
-    private RString shuturyokuFlg;
+    private boolean shuturyokuFlg;
 
 }
