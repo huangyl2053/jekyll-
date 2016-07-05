@@ -405,7 +405,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定結果情報提供票（主治医）の帳票ID。
      */
-    DBE090001(new ReportId("DBE090001_JohoTeikyoShiryo"), new RString("要介護認定結果情報提供票（主治医）"));
+    DBE090001(new ReportId("DBE090001_JohoTeikyoShiryo"), new RString("要介護認定結果情報提供票（主治医）")),
+    /**
+     * 主治医意見書作成実績集計表の帳票ID。
+     */
+    DBE601001(new ReportId("DBE601001_IkenshoJissekiIchiran"), new RString("主治医意見書作成実績集計表"));
 
     private final ReportId reportId;
 
