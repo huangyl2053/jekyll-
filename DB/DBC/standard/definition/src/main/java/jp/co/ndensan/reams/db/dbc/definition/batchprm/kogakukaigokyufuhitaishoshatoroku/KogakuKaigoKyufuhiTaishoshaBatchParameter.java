@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -29,7 +30,7 @@ public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBas
     private static final String KEY_SHUTURYOKUFLG = "shuturyokuFlg";
 
     @BatchParameter(key = KEY_MENUID, name = "メニューID")
-    private FlexibleYearMonth shoriYM;
+    private RString menuId;
     @BatchParameter(key = KEY_SHUTURYOKUJUNN, name = "出力順ID")
     private RString shuturyokuJunn;
     @BatchParameter(key = KEY_SHINSAYMFROM, name = "審査年月From")
@@ -38,5 +39,19 @@ public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBas
     private FlexibleYearMonth ShinsaYMTo;
     @BatchParameter(key = KEY_SHUTURYOKUFLG, name = "出力フラグ")
     private boolean shuturyokuFlg;
+
+    /**
+     * processのパラメータを生成します。
+     *
+     * @return processパラメータ
+     */
+    public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter toCreateGyomuHokenshaJohoGetsujiProcessParameter() {
+        return new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
+                menuId,
+                shuturyokuJunn,
+                ShinsaYMFrom,
+                ShinsaYMTo,
+                shuturyokuFlg);
+    }
 
 }
