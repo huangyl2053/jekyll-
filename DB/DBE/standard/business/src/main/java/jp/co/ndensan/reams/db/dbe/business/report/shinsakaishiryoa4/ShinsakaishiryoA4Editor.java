@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
 
+    private static final int INT_4 = 4;
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -42,7 +43,7 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
     }
 
     private ShinsakaishiryoA4ReportSource editItem(ShinsakaishiryoA4ReportSource source) {
-        source.shinsakaiNo = business.get審査会番号();
+        source.shinsakaiNo = get審査会番号(business.get審査会番号());
         source.year = business.get審査会開催年月日();
         source.listshinsainName_1 = business.get審査員一覧();
         source.gogitaiNo = RStringUtil.convert半角to全角(business.get合議体番号());
@@ -67,6 +68,17 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
         }
         return source;
+    }
+
+    private RString get審査会番号(RString 審査会番号) {
+        if (!RString.isNullOrEmpty(審査会番号)) {
+            if (審査会番号.length() <= INT_4) {
+                return 審査会番号;
+            } else {
+                return 審査会番号.substring(審査会番号.length() - INT_4);
+            }
+        }
+        return RString.EMPTY;
     }
 
 }

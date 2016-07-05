@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
 
+    private static final int INT_4 = 4;
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -48,7 +49,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
     }
 
     private ShinsakaishiryoA3ReportSource editItem(ShinsakaishiryoA3ReportSource source) {
-        source.shinsakaiNo = business.get審査会番号();
+        source.shinsakaiNo = get審査会番号(business.get審査会番号());
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
         source.gogitaiNo = RStringUtil.convert半角to全角(business.get合議体番号());
         source.listShinsainName_1 = business.get審査員一覧();
@@ -90,6 +91,17 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
         }
         return source;
+    }
+
+    private RString get審査会番号(RString 審査会番号) {
+        if (!RString.isNullOrEmpty(審査会番号)) {
+            if (審査会番号.length() <= INT_4) {
+                return 審査会番号;
+            } else {
+                return 審査会番号.substring(審査会番号.length() - INT_4);
+            }
+        }
+        return RString.EMPTY;
     }
 
     private RString get二時判定認定有効年月日() {
