@@ -45,6 +45,7 @@ public class JohoTeikyoShiryo {
     private final RString meishoFuyo;
     private final RString sonota;
     private final RString tsuchibun2;
+    private final RString yubinNo;
 
     /**
      * インスタンスを生成します。
@@ -76,6 +77,7 @@ public class JohoTeikyoShiryo {
      * @param meishoFuyo 宛名名称付与
      * @param sonota 宛名その他
      * @param tsuchibun2 通知文２
+     * @param yubinNo 宛名郵便番号
      */
     public JohoTeikyoShiryo(RDate hakkoYMD,
             RString title,
@@ -103,7 +105,8 @@ public class JohoTeikyoShiryo {
             RString shimeiText,
             RString meishoFuyo,
             RString sonota,
-            RString tsuchibun2) {
+            RString tsuchibun2,
+            RString yubinNo) {
         this.hakkoYMD = hakkoYMD;
         this.title = title;
         this.tsuchibun1 = tsuchibun1;
@@ -131,5 +134,6 @@ public class JohoTeikyoShiryo {
         this.meishoFuyo = meishoFuyo;
         this.sonota = sonota;
         this.tsuchibun2 = tsuchibun2;
+        this.yubinNo = yubinNo;
     }
 }

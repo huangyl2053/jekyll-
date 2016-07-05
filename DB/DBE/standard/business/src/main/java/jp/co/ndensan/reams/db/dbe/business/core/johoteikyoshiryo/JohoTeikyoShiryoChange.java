@@ -76,7 +76,8 @@ public final class JohoTeikyoShiryoChange {
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 RString.EMPTY,
-                通知文.get(2));
+                通知文.get(2),
+                宛先情報.getTemp_宛名郵便番号().value());
         return headItem;
 
     }
