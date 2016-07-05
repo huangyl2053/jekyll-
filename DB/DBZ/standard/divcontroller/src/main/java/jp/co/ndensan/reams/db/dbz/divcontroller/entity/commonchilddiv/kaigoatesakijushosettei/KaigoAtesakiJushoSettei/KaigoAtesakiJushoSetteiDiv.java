@@ -315,8 +315,8 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     @Override
     @JsonIgnore
-    public void get町域編集方法() {
-        createHandler().get町域編集方法();
+    public RString get町域編集方法() {
+        return createHandler().get町域編集方法();
     }
 
     @Override

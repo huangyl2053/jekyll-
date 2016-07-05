@@ -49,8 +49,9 @@ public interface IKaigoAtesakiJushoSetteiDiv extends ICommonChildDivBaseProperti
     /**
      * 公開メソッドiget町域編集方法()。
      *
+     * @return 町域編集方法
      */
-    void get町域編集方法();
+    RString get町域編集方法();
 
     /**
      * 公開メソッドis方書表示。
