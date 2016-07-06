@@ -34,9 +34,9 @@ public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBas
     @BatchParameter(key = KEY_SHUTURYOKUJUNN, name = "出力順ID")
     private RString shuturyokuJunn;
     @BatchParameter(key = KEY_SHINSAYMFROM, name = "審査年月From")
-    private FlexibleYearMonth ShinsaYMFrom;
+    private FlexibleYearMonth shinsaYMFrom;
     @BatchParameter(key = KEY_SHINSAYMTO, name = "審査年月To")
-    private FlexibleYearMonth ShinsaYMTo;
+    private FlexibleYearMonth shinsaYMTo;
     @BatchParameter(key = KEY_SHUTURYOKUFLG, name = "出力フラグ")
     private boolean shuturyokuFlg;
 
@@ -49,8 +49,8 @@ public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBas
         return new KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
                 menuId,
                 shuturyokuJunn,
-                ShinsaYMFrom,
-                ShinsaYMTo,
+                shinsaYMFrom,
+                shinsaYMTo,
                 shuturyokuFlg);
     }
 

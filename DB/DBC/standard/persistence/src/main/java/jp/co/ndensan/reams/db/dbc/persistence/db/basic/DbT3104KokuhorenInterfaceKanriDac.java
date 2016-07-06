@@ -6,10 +6,14 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.SofuTorikomiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.isDeleted;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.kokanShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriJotaiKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.sofuTorikomiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,9 +21,12 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -85,6 +92,27 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
                                 eq(isDeleted, 論理削除フラグ))).
                 toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連インターフェース管理を審査年月取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> selectSinsaYM(RString 交換情報識別番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(DbT3104KokuhorenInterfaceKanri.chushutsuKaishiTimestamp,
+                DbT3104KokuhorenInterfaceKanri.chushutsuShuryoTimestamp).
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外),
+                                or(eq(shoriJotaiKubun, ShoriJotaiKubun.処理前), eq(shoriJotaiKubun, ShoriJotaiKubun.再処理前)))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 
     /**
