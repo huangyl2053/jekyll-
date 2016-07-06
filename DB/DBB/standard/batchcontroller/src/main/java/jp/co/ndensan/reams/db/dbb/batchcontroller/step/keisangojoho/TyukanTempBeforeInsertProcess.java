@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho;
 
+import java.util.List;
 import jp.co.ndensan.reams.ca.cax.business.search.CaFt702FindTotalShunyuFunction;
 import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSaishutsuKubun;
@@ -13,8 +14,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.keisangojoho.KeisangoJohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.keisangojoho.KeisangoJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisangoJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -24,44 +25,32 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 検索した賦課情報を計算中間Tempテーブルに登録する処理クラスです。
+ * 検索した更新前賦課情報を計算中間Tempテーブルに登録する処理クラスです。
  *
  * @reamsid_L DBB-9060-010 duanzhanli
  */
-public class TyukanTempInsertProcess extends BatchProcessBase<DbT2002FukaEntity> {
+public class TyukanTempBeforeInsertProcess extends BatchProcessBase<DbT2002FukaEntity> {
 
-    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
-            + "IKeisangoJohoSakuseiMapper.");
-    private static final RString 全賦課最新情報2 = new RString(MAPPERPATH + "get全賦課最新情報2");
-    private static final RString 全賦課最新情報3 = new RString(MAPPERPATH + "get全賦課最新情報3");
-    private static final RString 全賦課最新情報4 = new RString(MAPPERPATH + "get全賦課最新情報4");
-    private static final RString 全賦課最新情報5 = new RString(MAPPERPATH + "get全賦課最新情報5");
-    private static final RString システムエラー = new RString("バッチパラメータの調定年度または賦課年度が未設定のため、処理を中止します。"
-            + "バッチパラメータに調定年度または賦課年度を設定してください。");
+    private static final RString 更新前賦課情報 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
+            + "IKeisangoJohoSakuseiMapper.get更新前賦課情報");
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
+    private IKeisangoJohoSakuseiMapper iKeisangoJohoSakuseiMapper;
+    private KeisangoJohoResult keisangoJohoResult;
     private KeisangoJohoSakuseiProcessParamter processParamter;
-    private KeisangoJohoSakuseiMybitisParamter mybatisParamter;
+
     @BatchWriter
     BatchEntityCreatedTempTableWriter 計算中間Temp;
 
     @Override
     protected void initialize() {
         setMybatisParamter();
+        iKeisangoJohoSakuseiMapper = getMapper(IKeisangoJohoSakuseiMapper.class);
+        keisangoJohoResult = new KeisangoJohoResult();
     }
 
     @Override
     protected IBatchReader createReader() {
-        if (processParamter.isSaishinFlag1()) {
-            throw new BatchInterruptedException(システムエラー.toString());
-        } else if (processParamter.isSaishinFlag2()) {
-            return new BatchDbReader(全賦課最新情報2, mybatisParamter);
-        } else if (processParamter.isSaishinFlag3()) {
-            return new BatchDbReader(全賦課最新情報3, mybatisParamter);
-        } else if (processParamter.isSaishinFlag4()) {
-            return new BatchDbReader(全賦課最新情報4, mybatisParamter);
-        } else {
-            return new BatchDbReader(全賦課最新情報5, mybatisParamter);
-        }
+        return new BatchDbReader(更新前賦課情報, setMybatisParamter());
     }
 
     @Override
@@ -72,13 +61,21 @@ public class TyukanTempInsertProcess extends BatchProcessBase<DbT2002FukaEntity>
 
     @Override
     protected void process(DbT2002FukaEntity entity) {
-        計算中間Temp.insert(new KeisangoJohoResult().get計算中間Entity(entity));
+        計算中間Temp.insert(keisangoJohoResult.get計算中間Entity(entity));
     }
 
-    private void setMybatisParamter() {
+    @Override
+    protected void afterExecute() {
+        List<DbTKeisangoJohoTempTableEntity> tempEntityList = iKeisangoJohoSakuseiMapper.get計算中間Temp更新後情報();
+        for (DbTKeisangoJohoTempTableEntity tempEntity : tempEntityList) {
+            計算中間Temp.delete(tempEntity);
+        }
+    }
+
+    private KeisangoJohoSakuseiMybitisParamter setMybatisParamter() {
         TotalShunyuSearchKeyBuilder searchKey = new TotalShunyuSearchKeyBuilder(SearchSokuhoKubun.全て, SearchSaishutsuKubun.全て);
         CaFt702FindTotalShunyuFunction psmEntity = new CaFt702FindTotalShunyuFunction(searchKey);
-        mybatisParamter = KeisangoJohoSakuseiMybitisParamter.createSelectByKeyParam(processParamter.getChoteiNendo(),
+        return KeisangoJohoSakuseiMybitisParamter.createSelectByKeyParam(processParamter.getChoteiNendo(),
                 processParamter.getFukaNendo(),
                 processParamter.getChoteiNichiji(),
                 processParamter.getChohyoBunruiID(),

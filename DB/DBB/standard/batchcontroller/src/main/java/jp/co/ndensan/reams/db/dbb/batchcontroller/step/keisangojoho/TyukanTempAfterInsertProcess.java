@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.keisangojoho.KeisangoJohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.keisangojoho.KeisangoJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -24,18 +24,23 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 期別金額から計算中間Tempのデータを更新する処理クラスです。
+ * 検索した賦課情報を計算中間Tempテーブルに登録する処理クラスです。
  *
  * @reamsid_L DBB-9060-010 duanzhanli
  */
-public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRelateEntity> {
+public class TyukanTempAfterInsertProcess extends BatchProcessBase<DbT2002FukaEntity> {
 
-    private static final RString 期別金額取得 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
-            + "IKeisangoJohoSakuseiMapper.get期別金額");
+    private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
+            + "IKeisangoJohoSakuseiMapper.");
+    private static final RString 全賦課最新情報2 = new RString(MAPPERPATH + "get全賦課最新情報2");
+    private static final RString 全賦課最新情報3 = new RString(MAPPERPATH + "get全賦課最新情報3");
+    private static final RString 全賦課最新情報4 = new RString(MAPPERPATH + "get全賦課最新情報4");
+    private static final RString 全賦課最新情報5 = new RString(MAPPERPATH + "get全賦課最新情報5");
+    private static final RString システムエラー = new RString("バッチパラメータの調定年度または賦課年度が未設定のため、処理を中止します。"
+            + "バッチパラメータに調定年度または賦課年度を設定してください。");
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
     private KeisangoJohoSakuseiProcessParamter processParamter;
-    private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
-
+    private KeisangoJohoSakuseiMybitisParamter mybatisParamter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 計算中間Temp;
 
@@ -46,7 +51,17 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(期別金額取得, setMybatisParamter());
+        if (processParamter.isSaishinFlag1()) {
+            throw new BatchInterruptedException(システムエラー.toString());
+        } else if (processParamter.isSaishinFlag2()) {
+            return new BatchDbReader(全賦課最新情報2, mybatisParamter);
+        } else if (processParamter.isSaishinFlag3()) {
+            return new BatchDbReader(全賦課最新情報3, mybatisParamter);
+        } else if (processParamter.isSaishinFlag4()) {
+            return new BatchDbReader(全賦課最新情報4, mybatisParamter);
+        } else {
+            return new BatchDbReader(全賦課最新情報5, mybatisParamter);
+        }
     }
 
     @Override
@@ -56,18 +71,14 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
     }
 
     @Override
-    protected void process(KeisangoJohoSakuseiRelateEntity entity) {
-        tsuchishoNo = TsuchishoNo.EMPTY;
-        if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
-            tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
-            計算中間Temp.update(new KeisangoJohoResult().get中間Entity(entity, processParamter.is更新前フラグ(), entity.get計算中間Entity()));
-        }
+    protected void process(DbT2002FukaEntity entity) {
+        計算中間Temp.insert(new KeisangoJohoResult().get計算中間Entity(entity));
     }
 
-    private KeisangoJohoSakuseiMybitisParamter setMybatisParamter() {
+    private void setMybatisParamter() {
         TotalShunyuSearchKeyBuilder searchKey = new TotalShunyuSearchKeyBuilder(SearchSokuhoKubun.全て, SearchSaishutsuKubun.全て);
         CaFt702FindTotalShunyuFunction psmEntity = new CaFt702FindTotalShunyuFunction(searchKey);
-        return KeisangoJohoSakuseiMybitisParamter.createSelectByKeyParam(processParamter.getChoteiNendo(),
+        mybatisParamter = KeisangoJohoSakuseiMybitisParamter.createSelectByKeyParam(processParamter.getChoteiNendo(),
                 processParamter.getFukaNendo(),
                 processParamter.getChoteiNichiji(),
                 processParamter.getChohyoBunruiID(),
