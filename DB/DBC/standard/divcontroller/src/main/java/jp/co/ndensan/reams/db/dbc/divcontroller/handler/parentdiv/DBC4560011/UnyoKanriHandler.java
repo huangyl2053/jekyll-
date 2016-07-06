@@ -51,10 +51,11 @@ public class UnyoKanriHandler {
      * 画面ロード時の動作です。
      */
     public void initializeDisplay() {
-        RString 本人未申告区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分);
-        RString 本人所得調査中区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分);
-        RString 年次負担割合処理済年度 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度);
-        RString 年次負担割合処理状態 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態);
+        RDate 適用基準日 = RDate.getNowDate();
+        RString 本人未申告区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分, 適用基準日);
+        RString 本人所得調査中区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分, 適用基準日);
+        RString 年次負担割合処理済年度 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 適用基準日);
+        RString 年次負担割合処理状態 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, 適用基準日);
         initializeControl(年次負担割合処理済年度);
         if (!本人未申告区分.isNullOrEmpty()) {
             div.getDdlHonninMishinkokuKubun().setSelectedKey(本人未申告区分);
@@ -112,8 +113,8 @@ public class UnyoKanriHandler {
         }
     }
 
-    private RString get業務Config(Enum キー名称) {
-        return DbBusinessConfig.get(キー名称, RDate.getNowDate(),
+    private RString get業務Config(Enum キー名称, RDate 適用基準日) {
+        return DbBusinessConfig.get(キー名称, 適用基準日,
                 SubGyomuCode.DBC介護給付);
     }
 

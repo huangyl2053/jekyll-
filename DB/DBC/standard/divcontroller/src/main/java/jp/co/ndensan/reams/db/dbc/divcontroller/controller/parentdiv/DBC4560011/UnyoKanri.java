@@ -11,12 +11,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.Unyo
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4560011.UnyoKanriHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4560011.UnyoKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -44,7 +43,7 @@ public class UnyoKanri {
     public ResponseData<UnyoKanriDiv> onLoad(UnyoKanriDiv div) {
         LockingKey 前排他キー = new LockingKey(ResponseHolder.getMenuID());
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            throw new PessimisticLockingException();
         }
         UnyoKanriHandler handler = getHandler(div);
         handler.initializeDisplay();
