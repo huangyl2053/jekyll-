@@ -9,11 +9,13 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shafukukeigen.IShafukuRiyoshaFutanKeigenMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -166,5 +168,27 @@ public class ShafukuRiyoshaFutanKeigenManager {
         for (GemmenGengakuShinsei 減免減額申請 : 減免減額申請List) {
             減免減額申請Manager.delete減免減額申請(減免減額申請);
         }
+    }
+
+    /**
+     * 被保険者番号、減免減額種類、履歴番号により、取得された社会福祉法人等利用者負担軽減を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 減免減額種類 減免減額種類
+     * @param 履歴番号 履歴番号
+     * @return ShafukuRiyoshaFutanKeigen
+     */
+    @Transaction
+    public ShakaifukuRiyoshaFutanKeigen get社会福祉法人等利用者負担軽減(HihokenshaNo 被保険者番号, RString 減免減額種類, int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        IShafukuRiyoshaFutanKeigenMapper mapper = mapperProvider.create(IShafukuRiyoshaFutanKeigenMapper.class);
+        NinteiJohoParameter 検索条件 = NinteiJohoParameter.createParameter(被保険者番号, 減免減額種類, 履歴番号);
+        ShafukuRiyoshaFutanKeigenEntity relateEntity = mapper.select社会福祉法人等利用者負担軽減(検索条件);
+        relateEntity.initializeMd5ToEntities();
+        return new ShakaifukuRiyoshaFutanKeigen(relateEntity);
+
     }
 }

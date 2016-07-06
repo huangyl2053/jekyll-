@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.fu
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 
@@ -64,4 +65,12 @@ public interface IFutanGendogakuNinteiMapper {
      * @return FutanGendogakuNinteiEntity{@code list}
      */
     List<FutanGendogakuNinteiEntity> select負担限度額認定リストBy被保険者番号(FutanGendogakuNinteiShinseiMapperParameter param);
+
+    /**
+     * 被保険者番号、減免減額種類、履歴番号により、負担限度額認定申請の情報を取得する。
+     *
+     * @param parameter 負担限度額認定検索条件
+     * @return FutanGendogakuNinteiEntity
+     */
+    FutanGendogakuNinteiEntity select負担限度額認定(NinteiJohoParameter parameter);
 }
