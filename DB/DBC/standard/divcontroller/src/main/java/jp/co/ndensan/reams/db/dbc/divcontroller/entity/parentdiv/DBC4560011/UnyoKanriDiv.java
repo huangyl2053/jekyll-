@@ -4,17 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * UnyoKanri のクラスファイル 
- * 
- * @author 自動生成
+ * UnyoKanri のクラスファイル
+ *
+ * @reamsid_L DBC-5820-010 tianshuai
  */
 public class UnyoKanriDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
