@@ -391,9 +391,7 @@ public class HonsanteiFukaKeisanTotalHandler {
      */
     public ValidationMessageControlPairs set入力チェック() {
 
-        HonsanteiFukaKeisanTotalValidationHandler validation = new HonsanteiFukaKeisanTotalValidationHandler(div);
-        ValidationMessageControlPairs pairs = validation.set入力チェック();
-        return pairs;
+        return new HonsanteiFukaKeisanTotalValidationHandler(div).set入力チェック();
     }
 
     /**

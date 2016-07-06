@@ -68,14 +68,13 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.dbx.version}</version>
             <scope>test</scope>
+            <version>${jp.co.ndensan.reams.dbx.version}</version>
             <classifier>tests</classifier>
         </dependency>
     </dependencies>
