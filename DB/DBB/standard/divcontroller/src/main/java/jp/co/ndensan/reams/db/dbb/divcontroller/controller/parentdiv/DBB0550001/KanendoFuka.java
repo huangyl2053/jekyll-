@@ -75,8 +75,8 @@ public class KanendoFuka {
                 && div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected()) {
             決定_変更通知書区分 = THREE;
         }
-        check帳票ID(決定_変更通知書区分, div);
         boolean flag = getHandler(div).initialize(調定年度, shdaList, shoriDate3);
+        check帳票ID(決定_変更通知書区分, div);
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
@@ -119,7 +119,7 @@ public class KanendoFuka {
         KanendoKiUtil kanUtil = new KanendoKiUtil();
         KitsukiList 期月リスト = kanUtil.get期月リスト();
         Kitsuki 期月 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
-                getDdlShoritsuki().getSelectedValue())));
+                getDdlShoritsuki().getSelectedKey())));
         List<HonsanteiIdoParameter> hoList = getHandler(div).get各通知書の帳票ID();
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());

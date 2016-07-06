@@ -73,23 +73,23 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
      */
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onClick_btnModUpdate(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
-        JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (DBU0020021StateName.削除状態.getName().equals(状態) && !ResponseHolder.isReRequest()) {
-            handler.delete(引き継ぎデータ);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         List<JigyoHokokuTokeiData> 第1号被保険者数情報
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者数情報, List.class);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中増
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中増, List.class);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ,
+        JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
+        if (DBU0020021StateName.削除状態.getName().equals(状態) && !ResponseHolder.isReRequest()) {
+            handler.delete(第1号被保険者数情報);
+            handler.delete(第1号被保険者増減内訳情報_当月中増);
+            handler.delete(第1号被保険者増減内訳情報_当月中滅);
+            InformationMessage message = new InformationMessage(
+                    UrInformationMessages.正常終了.getMessage().getCode(),
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(
                 第1号被保険者数情報, 第1号被保険者増減内訳情報_当月中増, 第1号被保険者増減内訳情報_当月中滅);
         if (handler.is修正データ無し(修正データリスト) && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -138,8 +138,6 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
      */
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onClick_btnModBack(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.被保険者, JigyoHokokuGeppoParameter.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
         if (DBU0020021StateName.削除状態.getName().equals(状態)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.補正発行検索に戻る).respond();
@@ -150,7 +148,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中増, List.class);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 第1号被保険者数情報,
+        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(第1号被保険者数情報,
                 第1号被保険者増減内訳情報_当月中増, 第1号被保険者増減内訳情報_当月中滅
         );
         if (handler.is修正データ無し(修正データリスト)) {

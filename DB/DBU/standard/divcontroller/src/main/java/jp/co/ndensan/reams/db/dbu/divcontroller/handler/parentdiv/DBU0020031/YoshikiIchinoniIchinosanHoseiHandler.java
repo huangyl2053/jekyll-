@@ -619,7 +619,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     /**
      * 引き継ぎデータより、画面修正データを抽出する。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 引き継ぎデータ JigyoHokokuGeppoHoseiHakoResult
      * @param 様式種類List11 List
      * @param 様式種類List12 List
      * @param 様式種類List21 List
@@ -970,58 +970,10 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
      * 引き継ぎデータより、データ削除する。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 様式種類List11 List
-     * @param 様式種類List12 List
-     * @param 様式種類List21 List
-     * @param 様式種類List22 List
-     * @param 様式種類List31 List
-     * @param 様式種類List32 List
      */
-    public void delete(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            List<RString> 様式種類List11,
-            List<RString> 様式種類List12,
-            List<RString> 様式種類List21,
-            List<RString> 様式種類List22,
-            List<RString> 様式種類List31,
-            List<RString> 様式種類List32) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        if (様式種類List11.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０７１０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (様式種類List21.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_１０１０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (様式種類List31.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０６００);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (様式種類List12.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０９００);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (様式種類List22.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０７２０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_０７０２);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (様式種類List32.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_１０２０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_１００２);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        }
-    }
-
-    private JigyoHokokuGeppoDetalSearchParameter getParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 集計番号) {
-        return JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                new FlexibleYear(引き継ぎデータ.get行報告年()),
-                引き継ぎデータ.get行報告月(),
-                new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                引き継ぎデータ.get行集計対象月(),
-                引き継ぎデータ.get行統計対象区分(),
-                new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                new Code(引き継ぎデータ.get行表番号()),
-                集計番号);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     /**

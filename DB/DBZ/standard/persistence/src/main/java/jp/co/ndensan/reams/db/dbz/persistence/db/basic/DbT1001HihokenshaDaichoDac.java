@@ -130,7 +130,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 leq(substr(idoYMD, 開始桁, 終了桁), サービス年月),
-                                not(eq(logicalDeletedFlag, false))
+                                eq(logicalDeletedFlag, false)
                         )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).
@@ -157,7 +157,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 lt(サービス年月, substr(idoYMD, 開始桁, 終了桁)),
-                                not(eq(logicalDeletedFlag, false))
+                                eq(logicalDeletedFlag, false)
                         )).
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.ASC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 limit(1).

@@ -24,10 +24,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.TokeiTaishoKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -290,22 +290,20 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告月報詳細データの削除するメソッド
      *
-     * @param parameter パラメータ
+     * @param 事業報告月報詳細データリスト List<JigyoHokokuTokeiData>
      * @return 削除件数
      */
     @Transaction
-    public int deleteJigyoHokokuGeppoData(JigyoHokokuGeppoDetalSearchParameter parameter) {
-        DbT7021JigyoHokokuTokeiDataEntity dataEntity = new DbT7021JigyoHokokuTokeiDataEntity();
-        dataEntity.setHokokuYSeireki(parameter.get報告年());
-        dataEntity.setHokokuM(parameter.get報告月());
-        dataEntity.setShukeiTaishoYSeireki(parameter.get集計対象年());
-        dataEntity.setShukeiTaishoM(parameter.get集計対象月());
-        dataEntity.setToukeiTaishoKubun(parameter.get統計対象区分());
-        dataEntity.setShichosonCode(parameter.get市町村コード());
-        dataEntity.setHyoNo(parameter.get表番号());
-        dataEntity.setShukeiNo(parameter.get集計番号());
-        dataEntity.setState(EntityDataState.Deleted);
-        return dac.delete(dataEntity);
+    public int deleteJigyoHokokuGeppoData(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト) {
+        int deletecount = 0;
+        if (事業報告月報詳細データリスト != null && !事業報告月報詳細データリスト.isEmpty()) {
+            for (JigyoHokokuTokeiData data : 事業報告月報詳細データリスト) {
+                DbT7021JigyoHokokuTokeiDataEntity entity = data.toEntity();
+                entity.setState(EntityDataState.Deleted);
+                deletecount = dac.delete(entity);
+            }
+        }
+        return deletecount;
     }
 
     /**

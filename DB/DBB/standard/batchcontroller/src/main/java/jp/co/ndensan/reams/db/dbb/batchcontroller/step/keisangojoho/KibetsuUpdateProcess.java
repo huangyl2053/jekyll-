@@ -73,10 +73,14 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
 
     @Override
     protected void afterExecute() {
-        if (!processParamter.is更新前フラグ()) {
+        if (processParamter.is更新前フラグ()) {
             List<DbT2002FukaEntity> 更新前賦課情報EntityList = iKeisangoJohoSakuseiMapper.get更新前賦課情報(setMybatisParamter());
             for (DbT2002FukaEntity dbT2002FukaEntity : 更新前賦課情報EntityList) {
                 計算中間Temp.insert(keisangoJohoResult.get計算中間Entity(dbT2002FukaEntity));
+            }
+            List<DbTKeisangoJohoTempTableEntity> tempEntityList = iKeisangoJohoSakuseiMapper.get計算中間Temp更新後情報();
+            for (DbTKeisangoJohoTempTableEntity tempEntity : tempEntityList) {
+                計算中間Temp.delete(tempEntity);
             }
         }
     }

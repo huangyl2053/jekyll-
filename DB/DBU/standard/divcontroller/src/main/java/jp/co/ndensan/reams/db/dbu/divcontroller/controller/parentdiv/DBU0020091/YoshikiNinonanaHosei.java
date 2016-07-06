@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020091;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020091.DBU0020091StateName;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,6 +44,18 @@ public class YoshikiNinonanaHosei {
     private static final RString 様式種類_040 = new RString("040");
     private static final RString 様式種類_140 = new RString("140");
     private static final RString 様式種類_240 = new RString("240");
+    private static final Code 集計番号_0701 = new Code("0701");
+    private static final Code 集計番号_0702 = new Code("0702");
+    private static final Code 集計番号_0703 = new Code("0703");
+    private static final Code 集計番号_0704 = new Code("0704");
+    private static final Code 集計番号_0705 = new Code("0705");
+    private static final Code 集計番号_0706 = new Code("0706");
+    private static final Code 集計番号_0707 = new Code("0707");
+    private static final Code 集計番号_0801 = new Code("0801");
+    private static final Code 集計番号_0802 = new Code("0802");
+    private static final Code 集計番号_0803 = new Code("0803");
+    private static final Code 集計番号_0804 = new Code("0804");
+    private static final Code 集計番号_0805 = new Code("0805");
 
     /**
      * 画面初期化のメソッドます。
@@ -56,6 +70,8 @@ public class YoshikiNinonanaHosei {
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         handler.setViewState(引き継ぎデータ);
         handler.onLoad(引き継ぎデータ, 様式種類);
+        set高額介護(div);
+        set高額医療合算介護(div);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (様式種類.equalsIgnoreCase(様式種類_039)
                     || 様式種類.equalsIgnoreCase(様式種類_139)
@@ -94,12 +110,41 @@ public class YoshikiNinonanaHosei {
                 JigyoHokokuGeppoParameter.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
+        List<JigyoHokokuTokeiData> 利用者負担第四段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第四段階, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担第三段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第三段階, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担第二段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第二段階, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担第一段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第一段階, List.class);
+        List<JigyoHokokuTokeiData> 高額介護_合計 = ViewStateHolder.get(ViewStateKeys.高額介護_合計, List.class);
+        List<JigyoHokokuTokeiData> 再掲利用者負担第三段階 = ViewStateHolder.get(ViewStateKeys.再掲利用者負担第三段階, List.class);
+        List<JigyoHokokuTokeiData> 再掲利用者負担第二段階 = ViewStateHolder.get(ViewStateKeys.再掲利用者負担第二段階, List.class);
+
+        List<JigyoHokokuTokeiData> 現役並み所得者 = ViewStateHolder.get(ViewStateKeys.現役並み所得者, List.class);
+        List<JigyoHokokuTokeiData> 一般 = ViewStateHolder.get(ViewStateKeys.一般, List.class);
+        List<JigyoHokokuTokeiData> 低所得者Ⅱ = ViewStateHolder.get(ViewStateKeys.低所得者Ⅱ, List.class);
+        List<JigyoHokokuTokeiData> 低所得者Ⅰ = ViewStateHolder.get(ViewStateKeys.低所得者Ⅰ, List.class);
+        List<JigyoHokokuTokeiData> 高額医療合算介護_合計 = ViewStateHolder.get(ViewStateKeys.高額医療合算介護_合計, List.class);
+
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
-            handler.delete(引き継ぎデータ, 様式種類);
+
+            handler.delete(利用者負担第四段階);
+            handler.delete(利用者負担第三段階);
+            handler.delete(利用者負担第二段階);
+            handler.delete(利用者負担第一段階);
+            handler.delete(高額介護_合計);
+            handler.delete(再掲利用者負担第三段階);
+            handler.delete(再掲利用者負担第二段階);
+            handler.delete(現役並み所得者);
+            handler.delete(一般);
+            handler.delete(低所得者Ⅱ);
+            handler.delete(低所得者Ⅰ);
+            handler.delete(高額医療合算介護_合計);
             handler.show削除正常終了();
             return ResponseData.of(div).setState(DBU0020091StateName.完了状態);
         }
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 様式種類);
+        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ,
+                様式種類, 利用者負担第四段階, 利用者負担第三段階, 利用者負担第二段階, 利用者負担第一段階,
+                高額介護_合計, 再掲利用者負担第三段階, 再掲利用者負担第二段階, 現役並み所得者,
+                一般, 低所得者Ⅱ, 低所得者Ⅰ, 高額医療合算介護_合計);
         if (handler.is修正データ無し(修正データリスト) && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
@@ -141,13 +186,29 @@ public class YoshikiNinonanaHosei {
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        List<JigyoHokokuTokeiData> 利用者負担第四段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第四段階, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担第三段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第三段階, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担第二段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第二段階, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担第一段階 = ViewStateHolder.get(ViewStateKeys.利用者負担第一段階, List.class);
+        List<JigyoHokokuTokeiData> 高額介護_合計 = ViewStateHolder.get(ViewStateKeys.高額介護_合計, List.class);
+        List<JigyoHokokuTokeiData> 再掲利用者負担第三段階 = ViewStateHolder.get(ViewStateKeys.再掲利用者負担第三段階, List.class);
+        List<JigyoHokokuTokeiData> 再掲利用者負担第二段階 = ViewStateHolder.get(ViewStateKeys.再掲利用者負担第二段階, List.class);
+
+        List<JigyoHokokuTokeiData> 現役並み所得者 = ViewStateHolder.get(ViewStateKeys.現役並み所得者, List.class);
+        List<JigyoHokokuTokeiData> 一般 = ViewStateHolder.get(ViewStateKeys.一般, List.class);
+        List<JigyoHokokuTokeiData> 低所得者Ⅱ = ViewStateHolder.get(ViewStateKeys.低所得者Ⅱ, List.class);
+        List<JigyoHokokuTokeiData> 低所得者Ⅰ = ViewStateHolder.get(ViewStateKeys.低所得者Ⅰ, List.class);
+        List<JigyoHokokuTokeiData> 高額医療合算介護_合計 = ViewStateHolder.get(ViewStateKeys.高額医療合算介護_合計, List.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         YoshikiNinonanaHoseiHandler handler = getHandler(div);
         if (DBU0020091StateName.削除状態1.getName()
                 .equals(状態) || DBU0020091StateName.削除状態1.getName().equals(状態)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020091TransitionEventName.補正発行検索に戻る).respond();
         }
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 様式種類);
+        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ,
+                様式種類, 利用者負担第四段階, 利用者負担第三段階, 利用者負担第二段階, 利用者負担第一段階,
+                高額介護_合計, 再掲利用者負担第三段階, 再掲利用者負担第二段階, 現役並み所得者, 一般, 低所得者Ⅱ,
+                低所得者Ⅰ, 高額医療合算介護_合計);
         if (handler.is修正データ無し(修正データリスト)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020091TransitionEventName.補正発行検索に戻る).respond();
         }
@@ -163,6 +224,64 @@ public class YoshikiNinonanaHosei {
         } else {
             return ResponseData.of(div).respond();
         }
+    }
+
+    /**
+     * set高額介護
+     *
+     * @param div YoshikiNinonanaHoseiDiv
+     */
+    public void set高額介護(YoshikiNinonanaHoseiDiv div) {
+        YoshikiNinonanaHoseiHandler handler = getHandler(div);
+        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
+                JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 利用者負担第四段階 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0701);
+        List<JigyoHokokuTokeiData> 利用者負担第三段階 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0702);
+        List<JigyoHokokuTokeiData> 利用者負担第二段階 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0703);
+        List<JigyoHokokuTokeiData> 利用者負担第一段階 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0704);
+        List<JigyoHokokuTokeiData> 高額介護_合計 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0705);
+        List<JigyoHokokuTokeiData> 再掲利用者負担第三段階 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0706);
+        List<JigyoHokokuTokeiData> 再掲利用者負担第二段階 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0707);
+        ViewStateHolder.put(ViewStateKeys.利用者負担第四段階, (Serializable) 利用者負担第四段階);
+        ViewStateHolder.put(ViewStateKeys.利用者負担第三段階, (Serializable) 利用者負担第三段階);
+        ViewStateHolder.put(ViewStateKeys.利用者負担第二段階, (Serializable) 利用者負担第二段階);
+        ViewStateHolder.put(ViewStateKeys.利用者負担第一段階, (Serializable) 利用者負担第一段階);
+        ViewStateHolder.put(ViewStateKeys.高額介護_合計, (Serializable) 高額介護_合計);
+        ViewStateHolder.put(ViewStateKeys.再掲利用者負担第三段階, (Serializable) 再掲利用者負担第三段階);
+        ViewStateHolder.put(ViewStateKeys.再掲利用者負担第二段階, (Serializable) 再掲利用者負担第二段階);
+    }
+
+    /**
+     * set高額医療合算介護
+     *
+     * @param div YoshikiNinonanaHoseiDiv
+     */
+    public void set高額医療合算介護(YoshikiNinonanaHoseiDiv div) {
+        YoshikiNinonanaHoseiHandler handler = getHandler(div);
+        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
+                JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 現役並み所得者 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0801);
+        List<JigyoHokokuTokeiData> 一般 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0802);
+        List<JigyoHokokuTokeiData> 低所得者Ⅱ = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0803);
+        List<JigyoHokokuTokeiData> 低所得者Ⅰ = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0804);
+        List<JigyoHokokuTokeiData> 高額医療合算介護_合計 = handler.get事業報告月報詳細データリスト(
+                引き継ぎデータ, 集計番号_0805);
+        ViewStateHolder.put(ViewStateKeys.現役並み所得者, (Serializable) 現役並み所得者);
+        ViewStateHolder.put(ViewStateKeys.一般, (Serializable) 一般);
+        ViewStateHolder.put(ViewStateKeys.低所得者Ⅱ, (Serializable) 低所得者Ⅱ);
+        ViewStateHolder.put(ViewStateKeys.低所得者Ⅰ, (Serializable) 低所得者Ⅰ);
+        ViewStateHolder.put(ViewStateKeys.高額医療合算介護_合計, (Serializable) 高額医療合算介護_合計);
     }
 
     private YoshikiNinonanaHoseiHandler getHandler(YoshikiNinonanaHoseiDiv div) {

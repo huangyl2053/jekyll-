@@ -48,6 +48,8 @@ public class HomonChosaItakuNyuryokuHandler {
     private static final RString 銀行振込_出力済 = new RString("key0");
     private static final RString 銀行振込_出力未 = new RString("key1");
     private static final RString 単純照会状態 = new RString("SimpleShokaiMode");
+    private static final RString 有効 = new RString("有効");
+    private static final RString 無効 = new RString("無効");
     private static final RString コンマ = new RString(",");
 
     /**
@@ -103,10 +105,10 @@ public class HomonChosaItakuNyuryokuHandler {
                 }
                 dgchosain_Row.setShozokuKikanName(business.get所属機関名称());
                 if (business.is状況フラグ()) {
-                    RString 状況フラグ = new RString("有効");
+                    RString 状況フラグ = 有効;
                     dgchosain_Row.setJokyoFlag(状況フラグ);
                 } else {
-                    RString 状況フラグ = new RString("無効");
+                    RString 状況フラグ = 無効;
                     dgchosain_Row.setJokyoFlag(状況フラグ);
                 }
                 dgchosain_Row.setNintechosaItakusakiCode(business.get認定調査委託先コード());
@@ -265,7 +267,8 @@ public class HomonChosaItakuNyuryokuHandler {
         builder.set認定調査員コード(div.getTxtChousaInCode().getValue());
         builder.set認定調査委託先コード(div.getTxtItakusakiCode().getValue());
         builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString()));
-        builder.set認定調査委託料支払メモ(RString.EMPTY);
+        builder.set認定調査委託料支払メモ(row.getShiharaiMemo());
+        builder.set認定調査委託料支払年月日(FlexibleDate.MAX);
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);
         } else {
@@ -338,12 +341,24 @@ public class HomonChosaItakuNyuryokuHandler {
      * @return NinteichosahyoGaikyoChosaMybatisParameter
      */
     public NinteichosahyoGaikyoChosaMybatisParameter createParam_実績(HomonChosaItakuNyuryokuDiv div) {
+        RString 検索年度月FROM;
+        RString 検索年度月TO;
+        if (div.getChosaItakuKensaku().getTxtKensakuNendo().getFromValue() == null) {
+            検索年度月FROM = RString.EMPTY;
+        } else {
+            検索年度月FROM = div.getChosaItakuKensaku().getTxtKensakuNendo().getFromValue().getYearMonth().toDateString();
+        }
+        if (div.getChosaItakuKensaku().getTxtKensakuNendo().getToValue() == null) {
+            検索年度月TO = RString.EMPTY;
+        } else {
+            検索年度月TO = div.getChosaItakuKensaku().getTxtKensakuNendo().getToValue().getYearMonth().toDateString();
+        }
         return NinteichosahyoGaikyoChosaMybatisParameter.createParam(
                 div.getChosain().getDgChosain().getClickedItem().getShichosonCode(),
                 div.getChosain().getDgChosain().getClickedItem().getShokisaiHokenshaNo(),
                 div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode(),
-                div.getTxtKensakuNendo().getFromText(),
-                div.getTxtKensakuNendo().getToText());
+                検索年度月FROM,
+                検索年度月TO);
     }
 
     private FlexibleDate toFlexibleDate(RString obj) {

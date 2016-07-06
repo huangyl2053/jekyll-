@@ -151,10 +151,10 @@
         WHERE
         DbT5202."chosainCode" =#{認定調査員コード}
         <if test="検索年度月FROMフラグ">
-           AND #{検索年度月FROM}<![CDATA[<=]]> DbT5202."ninteichosaJisshiYMD"
+           AND #{検索年度月FROM}<![CDATA[<=]]>SUBSTR( DbT5202."ninteichosaJisshiYMD",1,6)
         </if>
         <if test="検索年度月TOフラグ">
-          AND DbT5202."ninteichosaJisshiYMD"<![CDATA[<=]]> #{検索年度月TO}
+           AND SUBSTR( DbT5202."ninteichosaJisshiYMD",1,6)<![CDATA[<=]]> #{検索年度月TO}
         </if>
         ORDER BY
             DbT5601."ninteichosaItakusakiCode" desc,
