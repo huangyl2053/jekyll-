@@ -132,12 +132,13 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 賦課年度の設定のメソッドます。
+     * 賦課年度の設定のメソッドです。
      *
      * @param now システム日時
      */
     public void 賦課年度の設定(RDate now) {
-        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, now));
+        FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(
+                ConfigNameDBB.日付関連_調定年度, now, SubGyomuCode.DBB介護賦課));
         ShoriDateKanriManager manager = new ShoriDateKanriManager();
         ShoriDateKanri 新年度管理情報作成 = manager.get抽出調定日時(
                 SubGyomuCode.DBB介護賦課, ShoriName.新年度管理情報作成.get名称(), 賦課年度.plusYear(NUM_1));
@@ -145,21 +146,19 @@ public class FukaKijunTotalHandler {
                 || null == 新年度管理情報作成.get基準年月日()
                 || 新年度管理情報作成.get基準年月日().isEmpty();
         FlexibleYear 年度 = is新年度管理情報未作成 ? 賦課年度 : 賦課年度.plusYear(NUM_1);
-        FlexibleYear 開始年度 = 平成12年.isBeforeOrEquals(年度) ? 平成12年 : 年度;
-        FlexibleYear 終了年度 = 平成12年.isBeforeOrEquals(年度) ? 年度 : 平成12年;
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        while (開始年度.isBeforeOrEquals(終了年度)) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(終了年度.seireki().toDateString(),
-                    終了年度.wareki().toDateString());
+        for (int index = 年度.getYearValue(); 平成12年.getYearValue() <= index; index--) {
+            FlexibleYear 開始年度 = new FlexibleYear(new RString(index));
+            KeyValueDataSource dataSource = new KeyValueDataSource(開始年度.seireki().toDateString(),
+                    開始年度.wareki().toDateString());
             dataSourceList.add(dataSource);
-            終了年度 = 終了年度.minusYear(NUM_1);
         }
         div.getKonkaiShoriNaiyo().getDdlFukaNendo().setDataSource(dataSourceList);
         div.getKonkaiShoriNaiyo().getDdlFukaNendo().setSelectedKey(賦課年度.seireki().toDateString());
     }
 
     /**
-     * ランクを取得のメソッドます。
+     * ランクを取得のメソッドです。
      *
      * @param 賦課年度 FlexibleYear
      * @param now システム日時
@@ -199,7 +198,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 賦課年度より、遷移先を設定のメソッドます。
+     * 賦課年度より、遷移先を設定のメソッドです。
      *
      * @param 賦課年度 FlexibleYear
      * @return DBB9020001StateName
@@ -222,7 +221,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 保険料率の取得と画面表示の設定のメソッドます。
+     * 保険料率の取得と画面表示の設定のメソッドです。
      *
      * @param now システム日時
      * @return 保険料段階一覧 List
@@ -245,27 +244,25 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 画面項目の保険料率の値の設定のメソッドます。
+     * 画面項目の保険料率の値の設定のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
      */
     public void 画面項目の保険料率の値の設定(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
-        DBB9020001StateName state = 遷移先の設定(賦課年度);
         Decimal 基準額 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
                 now, SubGyomuCode.DBB介護賦課).toString());
-        if (DBB9020001StateName.平成17年以前.equals(state)) {
-            set画面項目_平成17年以前(保険料段階一覧, 賦課年度, now);
-        } else if (DBB9020001StateName.平成18年から平成20年.equals(state)) {
-            set画面項目_平成18年から平成20年まで(保険料段階一覧, 賦課年度, now, 基準額);
-        } else if (DBB9020001StateName.平成21年から平成23年まで.equals(state)) {
-            set画面項目_平成21年から平成23年まで(保険料段階一覧, 賦課年度, now, 基準額);
-        } else if (DBB9020001StateName.平成24年から平25年まで.equals(state)
-                || DBB9020001StateName.平成26年.equals(state)) {
-            set画面項目_平成24年から平成26年まで(保険料段階一覧, 賦課年度, now, 基準額);
-        } else if (DBB9020001StateName.平成27年以降.equals(state)) {
+        if (平成27年.isBeforeOrEquals(賦課年度)) {
             set画面項目_平成27年以降(保険料段階一覧, now);
+        } else if (平成24年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成26年)) {
+            set画面項目_平成24年から平成26年まで(保険料段階一覧, 賦課年度, now, 基準額);
+        } else if (平成21年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成23年)) {
+            set画面項目_平成21年から平成23年まで(保険料段階一覧, 賦課年度, now, 基準額);
+        } else if (平成18年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成20年)) {
+            set画面項目_平成18年から平成20年まで(保険料段階一覧, 賦課年度, now, 基準額);
+        } else if (賦課年度.isBeforeOrEquals(平成17年)) {
+            set画面項目_平成17年以前(保険料段階一覧, 賦課年度, now);
         }
     }
 
@@ -440,12 +437,9 @@ public class FukaKijunTotalHandler {
         if (平成21年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成23年)) {
             最終インデックス = インデックス_11;
         }
-        if (平成24年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成26年)) {
-            for (HokenryoDankai 段階 : 保険料段階List) {
-                if (Integer.valueOf(最終インデックス.toString()) < Integer.valueOf(段階.get段階インデックス().toString())) {
-                    最終インデックス = 段階.get段階インデックス();
-                }
-            }
+        if (平成24年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成26年)
+                && !保険料段階List.isEmpty()) {
+            最終インデックス = 保険料段階List.get(保険料段階List.size() - NUM_1).get段階インデックス();
         }
 
         List<dgHokenryoDankai_Row> rowList = new ArrayList<>();
@@ -534,7 +528,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 本人保険料段階強制設定の設定段階の設定のメソッドます。
+     * 本人保険料段階強制設定の設定段階の設定のメソッドです。
      *
      * @param now システム日時
      * @return 段階DateSource Map
@@ -612,7 +606,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 画面項目「5 保険料段階2015年以降」の表示を制御のメソッドます。
+     * 画面項目「5 保険料段階2015年以降」の表示を制御のメソッドです。
      *
      * @param now システム日時
      */
@@ -654,7 +648,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 前排他を設定のメソッドます。
+     * 前排他を設定のメソッドです。
      *
      * @return Boolean
      */
@@ -665,7 +659,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 前排他を解除のメソッドます。
+     * 前排他を解除のメソッドです。
      */
     public void 前排他を解除する() {
         LockingKey key = new LockingKey(UrControlDataFactory.createInstance().getMenuID());
@@ -673,7 +667,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 世帯非課税の軽減措置の変更のメソッドます。
+     * 世帯非課税の軽減措置の変更のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -710,7 +704,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 世帯非課税の段階表記の変更のメソッドます。
+     * 世帯非課税の段階表記の変更のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -861,7 +855,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 本人非課税の軽減措置の変更のメソッドます。
+     * 本人非課税の軽減措置の変更のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -890,7 +884,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 本人非課税の段階表記の変更のメソッドます。
+     * 本人非課税の段階表記の変更のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -1001,7 +995,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 段階表記の任意設定の変更のメソッドます。
+     * 段階表記の任意設定の変更のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -1078,7 +1072,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 項目表示を制御のメソッドます。
+     * 項目表示を制御のメソッドです。
      *
      * @param now システム日時
      */
@@ -1154,7 +1148,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 未申告の本人保険料段階の強制設定のメソッドます。
+     * 未申告の本人保険料段階の強制設定のメソッドです。
      *
      * @param dateSource 保険料段階DATESOURCE
      */
@@ -1174,7 +1168,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 所得調査中の本人保険料段階の強制設定のメソッドます。
+     * 所得調査中の本人保険料段階の強制設定のメソッドです。
      *
      * @param dateSource 保険料段階DATESOURCE
      */
@@ -1194,7 +1188,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 課税取消の場合本人保険料段階の強制設定のメソッドます。
+     * 課税取消の場合本人保険料段階の強制設定のメソッドです。
      *
      * @param dateSource 保険料段階DATESOURCE
      */
@@ -1229,17 +1223,14 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 保険料段階マスタチェックのメソッドます。
+     * 保険料段階マスタチェックのメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param 賦課年度 FlexibleYear
      * @return boolean
      */
     public boolean check保険料段階マスタ(List<HokenryoDankai> 保険料段階一覧, FlexibleYear 賦課年度) {
-        DBB9020001StateName state = 遷移先の設定(賦課年度);
-        if (DBB9020001StateName.平成21年から平成23年まで.equals(state)
-                || DBB9020001StateName.平成24年から平25年まで.equals(state)
-                || DBB9020001StateName.平成26年.equals(state)) {
+        if (平成21年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成26年)) {
             HokenryoDankaiPatternHantei 保険料段階パターン = new HokenryoDankaiPatternHantei();
             HokenryoDankaiPattern パターン = 保険料段階パターン.decideHokenryoDankaiPattern(賦課年度, 保険料段階一覧);
             return HokenryoDankaiPattern.パターン無し.getコード().equals(パターン.getコード());
@@ -1248,7 +1239,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 状態定義のメソッドます。
+     * 状態定義のメソッドです。
      *
      * @param 賦課年度 FlexibleYear
      */
@@ -1300,7 +1291,7 @@ public class FukaKijunTotalHandler {
     }
 
     /**
-     * 保険料率チェックのメソッドます。
+     * 保険料率チェックのメソッドです。
      *
      * @param 保険料段階一覧 List
      * @return boolean

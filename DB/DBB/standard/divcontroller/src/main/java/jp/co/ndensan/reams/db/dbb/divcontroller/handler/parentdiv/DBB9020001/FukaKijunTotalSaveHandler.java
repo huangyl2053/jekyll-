@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
- * システム管理（賦課基準）保存のhandler処理です。
+ * システム管理（賦課基準）保存のハンドラクラスです。
  *
  * @reamsid_L DBB-1770-010 wangkanglei
  */
@@ -137,7 +137,7 @@ public class FukaKijunTotalSaveHandler {
     }
 
     /**
-     * 変更内容を取得のメソッドます。
+     * 変更内容を取得のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -160,7 +160,7 @@ public class FukaKijunTotalSaveHandler {
     }
 
     /**
-     * 変更内容を保存のメソッドます。
+     * 変更内容を保存のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時

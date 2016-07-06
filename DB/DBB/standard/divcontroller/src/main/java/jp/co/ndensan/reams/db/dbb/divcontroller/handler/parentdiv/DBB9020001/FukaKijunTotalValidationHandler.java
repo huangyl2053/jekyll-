@@ -41,7 +41,7 @@ public class FukaKijunTotalValidationHandler {
     }
 
     /**
-     * グリッド内の基準所得金額の必須チェックのバリデーションチェック。
+     * グリッド内の基準所得金額の必須チェックのバリデーションチェックです。
      *
      * @return バリデーション突合結果
      */
@@ -64,7 +64,7 @@ public class FukaKijunTotalValidationHandler {
     }
 
     /**
-     * 保険料段階マスタが不正チェックのバリデーションチェック。
+     * 保険料段階マスタが不正チェックのバリデーションチェックです。
      *
      * @param 賦課年度 FlexibleYear
      * @return バリデーション突合結果
@@ -77,7 +77,7 @@ public class FukaKijunTotalValidationHandler {
     }
 
     /**
-     * 保険料率が不正チェックのバリデーションチェック。
+     * 保険料率が不正チェックのバリデーションチェックです。
      *
      * @return バリデーション突合結果
      */
