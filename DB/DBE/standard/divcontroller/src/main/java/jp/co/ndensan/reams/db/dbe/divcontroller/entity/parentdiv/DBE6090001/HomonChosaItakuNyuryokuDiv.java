@@ -316,13 +316,13 @@ public class HomonChosaItakuNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMaxCount() {
-        return this.getChosaItakuKensaku().getTxtMaxCount();
+    public TextBoxNum getTextBoxNum() {
+        return this.getChosaItakuKensaku().getTextBoxNum();
     }
 
     @JsonIgnore
-    public void setTxtMaxCount(TextBox txtMaxCount) {
-        this.getChosaItakuKensaku().setTxtMaxCount(txtMaxCount);
+    public void setTextBoxNum(TextBoxNum TextBoxNum) {
+        this.getChosaItakuKensaku().setTextBoxNum(TextBoxNum);
     }
 
     @JsonIgnore

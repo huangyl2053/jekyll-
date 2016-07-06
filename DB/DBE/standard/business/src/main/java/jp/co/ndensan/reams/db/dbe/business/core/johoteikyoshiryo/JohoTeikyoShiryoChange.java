@@ -48,7 +48,7 @@ public final class JohoTeikyoShiryoChange {
             ShujiiIraiAtenaJoho 宛先情報,
             RString ページ番号) {
         CustomerBarCode barcode = new CustomerBarCode();
-        CustomerBarCodeResult result = barcode.convertCustomerBarCode(宛先情報.getTemp_宛名住所().value(), 宛先情報.getTemp_宛名郵便番号().value());
+        CustomerBarCodeResult result = barcode.convertCustomerBarCode(宛先情報.getTemp_宛名郵便番号().value(), 宛先情報.getTemp_宛名住所().value());
         JohoTeikyoShiryo headItem = new JohoTeikyoShiryo(RDate.getNowDate(),
                 DbBusinessConfig.get(ConfigNameDBE.要介護認定結果情報提供票_主治医, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 通知文.get(1),

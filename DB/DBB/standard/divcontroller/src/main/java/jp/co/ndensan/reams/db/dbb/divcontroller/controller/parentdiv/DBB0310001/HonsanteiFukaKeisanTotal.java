@@ -131,16 +131,6 @@ public class HonsanteiFukaKeisanTotal {
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
         return ResponseData.of(parameter).respond();
     }
-//    /**
-//     * 「実行する」ボタンを設定する。
-//     *
-//     * @param div KarisanteiIdoFukaPanelDiv
-//     * @return ResponseData
-//     */
-//    public ResponseData<HonsanteiFukaKeisanTotalDiv> onStateTransition(HonsanteiFukaKeisanTotalDiv div) {
-//        getKanendoFukaKakuteiHandler(div).set実行ボタン(遷移元区分flg);
-//        return ResponseData.of(div).respond();
-//    }
 
     /**
      * handlerの取得を実行する

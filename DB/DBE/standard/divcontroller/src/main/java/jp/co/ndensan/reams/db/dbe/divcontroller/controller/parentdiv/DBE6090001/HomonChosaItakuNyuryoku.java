@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuJissekiJoh
 import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuJissekiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.DBE6090001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.HomonChosaItakuNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgShinsakaiIin_Row;
@@ -23,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -79,15 +76,11 @@ public class HomonChosaItakuNyuryoku {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnKensaku(HomonChosaItakuNyuryokuDiv div) {
-        List<NinteiChosaHoshuJissekiJohoBusiness> 調査員情報List = manager.get初期化調査員情報検索(createParam(div)).records();
-        getHandler(div).setdgChosain(調査員情報List);
+        List<NinteiChosaHoshuJissekiJohoBusiness> 調査員情報List = manager.get初期化調査員情報検索(getHandler(div).createParam_初期(div)).records();
+        getHandler(div).setDgChosain(調査員情報List);
         ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).データ空のチェック();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-        ValidationMessageControlPairs messages = getValidatisonHandlerr(div).データ空のチェック();
-        if (messages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(messages).respond();
         }
         return ResponseData.of(div).setState(DBE6090001StateName.調査員一覧);
     }
@@ -107,8 +100,8 @@ public class HomonChosaItakuNyuryoku {
         div.getTxtItakusakiName().setValue(div.getHdt認定調査委託先名称());
         div.getTxtChousaInCode().setValue(div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode());
         div.getTxtChousainName().setValue(div.getChosain().getDgChosain().getClickedItem().getChosainShimei());
-        List<NinteichosahyoGaikyoChosaBusiness> 報酬情報List = manager.get調査員実績検索(実績_createParam(div)).records();
-        getHandler(div).setdgShinsakaiIin(報酬情報List);
+        List<NinteichosahyoGaikyoChosaBusiness> 報酬情報List = manager.get調査員実績検索(getHandler(div).createParam_実績(div)).records();
+        getHandler(div).setDgShinsakaiIin(報酬情報List);
         ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).調査実績一覧のチェック();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
@@ -125,7 +118,7 @@ public class HomonChosaItakuNyuryoku {
      * 「入力を取りやめる」ボタン処理です。
      *
      * @param div 認定調査委託料入力div
-     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
+     * @return ResponseData<HomonChosaItakuNyuryokuDiv> 認定調査委託料入力div
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnNyuryokuToriyameru(HomonChosaItakuNyuryokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
@@ -133,7 +126,7 @@ public class HomonChosaItakuNyuryoku {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).setKuria();
+            getHandler(div).kuria();
             return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧);
         }
         return ResponseData.of(div).respond();
@@ -143,7 +136,7 @@ public class HomonChosaItakuNyuryoku {
      * 「登録する　ボタン」ボタン処理です。
      *
      * @param div 認定調査委託料入力div
-     * @return ResponseData<RoreiFukushiNenkinShokaiDiv> 老齢福祉年金情報Div
+     * @return ResponseData<HomonChosaItakuNyuryokuDiv> 認定調査委託料入力div
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnToroku(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).setbtnToroku();
@@ -170,23 +163,6 @@ public class HomonChosaItakuNyuryoku {
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_DeleteButton(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).set状態_削除();
         return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細);
-    }
-
-    private NinteiChosaHoshuJissekiJohoMybatisParameter createParam(HomonChosaItakuNyuryokuDiv div) {
-        return NinteiChosaHoshuJissekiJohoMybatisParameter.createParam(
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value(),
-                new Decimal(div.getTxtMaxCount().getValue().toString()),
-                div.getChosainShimei().getValue(),
-                div.getDdlHihokenshaNameMatchType().getSelectedKey());
-    }
-
-    private NinteichosahyoGaikyoChosaMybatisParameter 実績_createParam(HomonChosaItakuNyuryokuDiv div) {
-        return NinteichosahyoGaikyoChosaMybatisParameter.createParam(
-                div.getChosain().getDgChosain().getClickedItem().getShichosonCode(),
-                div.getChosain().getDgChosain().getClickedItem().getShokisaiHokenshaNo(),
-                div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode(),
-                div.getTxtKensakuNendo().getFromText(),
-                div.getTxtKensakuNendo().getToText());
     }
 
     /**

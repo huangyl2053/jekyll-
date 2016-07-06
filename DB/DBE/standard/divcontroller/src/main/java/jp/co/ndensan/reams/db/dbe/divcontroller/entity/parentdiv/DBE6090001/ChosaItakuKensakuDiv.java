@@ -29,8 +29,8 @@ public class ChosaItakuKensakuDiv extends Panel {
     private DropDownList ddlHihokenshaNameMatchType;
     @JsonProperty("txtKensakuNendo")
     private TextBoxDateRange txtKensakuNendo;
-    @JsonProperty("txtMaxCount")
-    private TextBox txtMaxCount;
+    @JsonProperty("TextBoxNum")
+    private TextBoxNum TextBoxNum;
     @JsonProperty("btnKyufuJissekiSearchClear")
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("btnKensaku")
@@ -99,21 +99,21 @@ public class ChosaItakuKensakuDiv extends Panel {
     }
 
     /*
-     * gettxtMaxCount
-     * @return txtMaxCount
+     * getTextBoxNum
+     * @return TextBoxNum
      */
-    @JsonProperty("txtMaxCount")
-    public TextBox getTxtMaxCount() {
-        return txtMaxCount;
+    @JsonProperty("TextBoxNum")
+    public TextBoxNum getTextBoxNum() {
+        return TextBoxNum;
     }
 
     /*
-     * settxtMaxCount
-     * @param txtMaxCount txtMaxCount
+     * setTextBoxNum
+     * @param TextBoxNum TextBoxNum
      */
-    @JsonProperty("txtMaxCount")
-    public void setTxtMaxCount(TextBox txtMaxCount) {
-        this.txtMaxCount = txtMaxCount;
+    @JsonProperty("TextBoxNum")
+    public void setTextBoxNum(TextBoxNum TextBoxNum) {
+        this.TextBoxNum = TextBoxNum;
     }
 
     /*

@@ -53,11 +53,31 @@ public enum ShikyuFushikyuKubun {
      */
     public static ShikyuFushikyuKubun toValue(RString code) {
 
+        ShikyuFushikyuKubun s = toValueOrNull(code);
+        if (s == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("支給不支給区分"));
+        }
+        return s;
+    }
+
+    /**
+     * 支給不支給区分の名称とEmptyを返します
+     *
+     * @param code
+     * @param defaultValue
+     * @return
+     */
+    public static RString to名称OrDefault(RString code, RString defaultValue) {
+        ShikyuFushikyuKubun s = toValueOrNull(code);
+        return s == null ? defaultValue : s.get名称();
+    }
+
+    public static ShikyuFushikyuKubun toValueOrNull(RString code) {
         for (ShikyuFushikyuKubun shikyuFushikyuKubun : ShikyuFushikyuKubun.values()) {
             if (shikyuFushikyuKubun.code.equals(code)) {
                 return shikyuFushikyuKubun;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("支給不支給区分"));
+        return null;
     }
 }

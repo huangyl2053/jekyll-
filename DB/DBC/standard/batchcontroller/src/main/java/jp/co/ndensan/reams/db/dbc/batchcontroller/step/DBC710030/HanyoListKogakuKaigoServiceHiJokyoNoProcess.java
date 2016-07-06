@@ -121,6 +121,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     private Association 地方公共団体;
     private Decimal 連番;
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
+    private FlexibleDate システム日付;
 
     @BatchWriter
     private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvNoEntity> eucNoCsvWriter;
@@ -129,7 +130,8 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     protected void beforeExecute() {
         連番 = Decimal.ONE;
         preBreakKey = RString.EMPTY;
-        dataNoCreate = new HanyoListKogakuKaigoEucCsvNoEntityEditor();
+        システム日付 = FlexibleDate.getNowDate();
+        dataNoCreate = new HanyoListKogakuKaigoEucCsvNoEntityEditor(システム日付);
         personalDataList = new ArrayList<>();
         lstKinyuKikanEntity = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();

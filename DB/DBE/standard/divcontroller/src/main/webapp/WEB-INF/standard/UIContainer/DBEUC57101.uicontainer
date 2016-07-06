@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC56101",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "完了処理・センター送信",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0220001",
+     "toLayoutTitle": "完了処理・センター送信",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0220001",
+     "layoutTitle": "完了処理・センター送信",
+     "eventName": "センター送信",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5610001",
+     "toLayoutTitle": "センター送信準備",
+     "toState": "初期表示"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5610001",
+     "layoutTitle": "センター送信準備",
+     "eventName": "完了戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0220001",
+     "toLayoutTitle": "完了処理・センター送信",
+     "toState": "初期表示"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0220001",
+     "layoutTitle": "完了処理・センター送信",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

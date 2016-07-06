@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishu.JutakukaishuShinseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
@@ -78,6 +81,16 @@ public class HanyoListCsvDataCreate {
     private static final RString 他 = new RString("他");
     private static final int INDEX_13 = 13;
     private static final int INDEX_15 = 15;
+    private final FlexibleDate システム日付;
+
+    /**
+     * コンストラクタ
+     *
+     * @param システム日付
+     */
+    public HanyoListCsvDataCreate(FlexibleDate システム日付) {
+        this.システム日付 = システム日付;
+    }
 
     /**
      * createCsvData
@@ -443,7 +456,7 @@ public class HanyoListCsvDataCreate {
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get判定結果情報Entity() != null) {
             csvEntity.set決定日(dataToRString(entity.get判定結果情報Entity().getKetteiYMD(), parameter));
-            csvEntity.set支給不支給区分(entity.get判定結果情報Entity().getShikyuHushikyuKetteiKubun());
+            csvEntity.set支給不支給区分(ShikyuFushikyuKubun.to名称OrDefault(entity.get判定結果情報Entity().getShikyuHushikyuKetteiKubun(), RString.EMPTY));
             csvEntity.set支払金額(numToRString(entity.get判定結果情報Entity().getShiharaiKingaku()));
             csvEntity.set通知書作成日(dataToRString(entity.get判定結果情報Entity().getKetteiTsuchishoSakuseiYMD(), parameter));
             csvEntity.set通知書Ｎo(entity.get判定結果情報Entity().getKetteiTsuchiNo());
@@ -488,7 +501,7 @@ public class HanyoListCsvDataCreate {
         csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity));
         csvEntity.set受給申請事由(codeToRString(entity.get受給申請事由()));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日(), parameter));
-        csvEntity.set受給要介護度(codeToRString(entity.get要介護認定状態区分コード()));
+        csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, codeToRString(entity.get要介護認定状態区分コード())).getName());
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.get受給認定日(), parameter));
@@ -575,7 +588,7 @@ public class HanyoListCsvDataCreate {
                 continue;
             }
             map様式番号.put(請求基本List.get(i).getYoshikiNo(), true);
-            lst様式番号.add(請求基本List.get(i).getYoshikiNo());
+            lst様式番号.add(KyufuJissekiYoshikiKubun.toValue(請求基本List.get(i).getYoshikiNo()).get様式番号());
         }
         if (lst様式番号.size() == 1) {
             return lst様式番号.get(0);

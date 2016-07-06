@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosahos
 
 /**
  *
- * 認定調査委託料入力クラスです。
+ * 認定調査委託料入力Mapperクラスです。
  *
  * @reamsid_L DBE-1970-010 wanghui
  */

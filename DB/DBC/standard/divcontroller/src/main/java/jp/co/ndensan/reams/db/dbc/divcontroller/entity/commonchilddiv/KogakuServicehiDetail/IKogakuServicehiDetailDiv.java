@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 画面設計_KogakuServicehiDetail_高額サービス費詳細内容入力共有子Div
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties {
 
     /**
-     * 高額申請一覧共有子DivのInterface
+     * 高額申請一覧共有子DivのInterfaceです。
      *
      * @param 画面モード RString
      * @param メニューID RString
@@ -27,4 +28,11 @@ public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties
      */
     public void initialize(RString 画面モード, RString メニューID, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード);
+
+    /**
+     * 受付日と決定日のチェックです。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check受付日と決定日();
 }

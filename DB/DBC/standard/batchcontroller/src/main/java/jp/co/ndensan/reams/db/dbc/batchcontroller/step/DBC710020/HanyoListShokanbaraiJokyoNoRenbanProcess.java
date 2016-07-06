@@ -96,6 +96,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
+    private FlexibleDate システム日付;
 //    private RString preBreakKey;
 //    private HanyoListShokanbaraiJokyoEntity preEntity;
 //    private Map<RString, Object> mapFlag;
@@ -108,7 +109,8 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     @Override
     protected void beforeExecute() {
 //        preBreakKey = RString.EMPTY;
-        dataCreate = new HanyoListCsvNoRenbanDataCreate();
+        システム日付 = FlexibleDate.getNowDate();
+        dataCreate = new HanyoListCsvNoRenbanDataCreate(システム日付);
         personalDataList = new ArrayList<>();
 //        mapFlag = new HashMap<>();
 //        lstDbt3038List = new ArrayList<>();

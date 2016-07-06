@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC51001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "宛名シール作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA5010011",
+     "toLayoutTitle": "宛名シール作成（資格管理）",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA5010011",
+     "layoutTitle": "宛名シール作成（資格管理）",
+     "eventName": "finish",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

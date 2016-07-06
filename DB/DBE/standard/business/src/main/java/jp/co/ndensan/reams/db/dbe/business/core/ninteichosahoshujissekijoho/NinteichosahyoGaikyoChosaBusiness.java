@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -69,7 +70,7 @@ public class NinteichosahyoGaikyoChosaBusiness {
      *
      * @return 認定調査実施年月日
      */
-    public RString get認定調査実施年月日() {
+    public FlexibleDate get認定調査実施年月日() {
         return entity.getNinteichosaJisshiYMD();
     }
 
@@ -78,7 +79,7 @@ public class NinteichosahyoGaikyoChosaBusiness {
      *
      * @return 認定調査受領年月日
      */
-    public RString get認定調査受領年月日() {
+    public FlexibleDate get認定調査受領年月日() {
         return entity.getNinteichosaJuryoYMD();
     }
 
@@ -96,7 +97,7 @@ public class NinteichosahyoGaikyoChosaBusiness {
      *
      * @return 認定調査依頼年月日
      */
-    public RString get認定調査依頼年月日() {
+    public FlexibleDate get認定調査依頼年月日() {
         return entity.getNinteichosaIraiYMD();
     }
 
@@ -114,7 +115,7 @@ public class NinteichosahyoGaikyoChosaBusiness {
      *
      * @return 認定申請年月日
      */
-    public RString get認定申請年月日() {
+    public FlexibleDate get認定申請年月日() {
         return entity.getNinteiShinseiYMD();
     }
 

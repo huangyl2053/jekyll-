@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC08000",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "全国保険者マスタ更新",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0800011",
+     "toLayoutTitle": "全国保険者マスタ更新",
+     "toState": "更新"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0800011",
+     "layoutTitle": "全国保険者マスタ更新",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

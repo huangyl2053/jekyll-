@@ -441,10 +441,10 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
-            div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get略称());
+            div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get名称());
             div.getTxtCurrentTekiyoJogaiTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
             div.getTxtCurrentTekiyoJogaiTekiyoTodokedeYmd().setValue(現在の他特の情報.get適用届出年月日());
-            div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(現在の他特の情報.get適用除外解除事由コード()).get略称());
+            div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(現在の他特の情報.get適用除外解除事由コード()).get名称());
             div.getTxtCurrentTekiyoJogaiKaijoYmd().setValue(現在の他特の情報.get解除年月日());
             div.getTxtCurrentTekiyoJogaiKaijoTodokedeYmd().setValue(現在の他特の情報.get解除届出年月日());
         }
@@ -511,11 +511,11 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
             div.getTxtCurrentTatokuTekiyoJiyu().setValue(
-                    TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get略称());
+                    TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get名称());
             div.getTxtCurrentTatokuTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
             div.getTxtCurrentTatokuTekiyoTodokedeYmd().setValue(現在の他特の情報.get適用届出年月日());
             div.getTxtCurrentTatokuKaijoJiyu().setValue(
-                    TatokureiKaijoJiyu.toValue(現在の他特の情報.get他市町村住所地特例解除事由コード()).get略称());
+                    TatokureiKaijoJiyu.toValue(現在の他特の情報.get他市町村住所地特例解除事由コード()).get名称());
             div.getTxtCurrentTatokuKaijoYmd().setValue(現在の他特の情報.get解除年月日());
             div.getTxtCurrentTatokuKaijoTodokedeYmd().setValue(現在の他特の情報.get解除届出年月日());
         }
