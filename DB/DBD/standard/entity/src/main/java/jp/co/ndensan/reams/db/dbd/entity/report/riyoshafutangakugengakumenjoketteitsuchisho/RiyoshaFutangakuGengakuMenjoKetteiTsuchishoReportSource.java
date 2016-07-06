@@ -4,6 +4,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 利用者負担額減額･免除認定決定通知書のReportSource
+ *
+ * @reamsid_L DBD-3540-070 wangchao
+ */
 public class RiyoshaFutangakuGengakuMenjoKetteiTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

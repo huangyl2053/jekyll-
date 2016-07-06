@@ -4,6 +4,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 特別地域加算減免・訪問介護利用者負担減額決定通知書のReportSource
+ *
+ * @reamsid_L DBD-3540-130 wangchao
+ */
 public class HomonKaigoRiyoshaFutanGeｍmenKetteiTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
