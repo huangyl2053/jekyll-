@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.definition.core.ikenshojissekiichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -13,12 +15,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1690-020 dongyabin
  */
-@lombok.Getter
+@Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IkenshoJissekiIchiranKey {
+public final class IkenshoJissekiIchiranKey {
 
-    private RString 主治医医療機関コード;
-    private RString 主治医コード;
-    private RString 申請書管理番号;
-    private RString 主治医意見書作成依頼履歴番号;
+    private RString shujiiIryoKikanCode;
+    private RString shujiiCode;
+    private RString shinseishoKanriNo;
+    private int ikenshoIraiRirekiNo;
 }
