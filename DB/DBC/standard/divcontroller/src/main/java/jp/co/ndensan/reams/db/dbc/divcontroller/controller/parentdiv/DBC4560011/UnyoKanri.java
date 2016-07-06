@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4560011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.DBC4560011TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.DBC4560011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.UnyoKanriDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4560011.UnyoKanriHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4560011.UnyoKanriValidationHandler;
@@ -83,7 +83,7 @@ public class UnyoKanri {
                 変更理由, 適用基準日);
         LockingKey 前排他キー = new LockingKey(メニューID);
         RealInitialLocker.release(前排他キー);
-        return ResponseData.of(div).forwardWithEventName(DBC4560011TransitionEventName.完了).respond();
+        return ResponseData.of(div).setState(DBC4560011StateName.完了状態);
     }
 
     private void updateConfigData(ConfigNameDBC キー名称, RString キー値, RString 変更理由, RDate 適用基準日) {

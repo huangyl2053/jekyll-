@@ -403,6 +403,10 @@ public enum ReportIdDBE {
      */
     DBE621002(new ReportId("DBE621002_shujiihoshushiharai"), new RString("主治医意見書作成報酬支払通知書")),
     /**
+     * 主治医意見書作成報酬請求書の帳票ＩＤです。
+     */
+    DBE621004(new ReportId("DBE621004_ikenshohoshuseikyu"), new RString("主治医意見書作成報酬請求書")),
+    /**
      * 要介護認定結果情報提供票（主治医）の帳票ID。
      */
     DBE090001(new ReportId("DBE090001_JohoTeikyoShiryo"), new RString("要介護認定結果情報提供票（主治医）")),

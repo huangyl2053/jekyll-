@@ -27,7 +27,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ShujiiIkensho5komokuEntity}
+     * @param item {@link ShujiiHoshuShiharaiEntity}
      */
     protected ShujiiHoshuShiharaiEditor(ShujiiHoshuShiharaiEntity item) {
         this.item = item;
@@ -51,7 +51,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
         source.meishoFuyo = item.get名称付与();
         source.customerBarCode = item.getバーコード();
         source.sonota = item.getその他();
-        source.pageCount = item.getページ番号();
+        source.pageCount2 = item.getページ番号();
         source.title = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬支払通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.主治医意見書作成報酬支払通知書.get名称());
         source.tsuchibun1 = item.get通知文1();

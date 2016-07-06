@@ -47,8 +47,8 @@ public class ShujiiHoshuShiharaiReportSource implements IReportSource {
     public RString meishoFuyo;
     @ReportItem(name = "customerBarCode", order = 15)
     public RString customerBarCode;
-    @ReportItem(name = "pageCount", length = 8, order = 16)
-    public RString pageCount;
+    @ReportItem(name = "pageCount2", length = 8, order = 16)
+    public RString pageCount2;
     @ReportItem(name = "sonota", length = 14, order = 17)
     public RString sonota;
     @ReportItem(name = "title", length = 30, order = 18)
