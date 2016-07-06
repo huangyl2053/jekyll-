@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
@@ -418,10 +419,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
         List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
         if (本算定通知書情報.get賦課の情報_更正前() != null) {
-            特徴期別金額リスト = get特徴期別金額リスト(本算定通知書情報);
+            特徴期別金額リスト = get特徴期別金額リスト(本算定通知書情報.get賦課の情報_更正前().get賦課情報());
             更正前.set特徴期別金額リスト(特徴期別金額リスト);
             更正前.set特別徴収額合計(get特徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_6));
-            普徴期別金額リスト = get普徴期別金額リスト(本算定通知書情報);
+            普徴期別金額リスト = get普徴期別金額リスト(本算定通知書情報.get賦課の情報_更正前().get賦課情報());
             更正前.set普徴期別金額リスト(普徴期別金額リスト);
             更正前.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正前().get賦課情報(), 1, SIZE_14));
         }
@@ -516,10 +517,10 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 fillType(FillType.BLANK).toDateString());
         更正後.set老齢廃止日_西暦(更正後_賦課情報.get老年廃止日().seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
-        List<CharacteristicsPhase> 特徴期別金額リスト = get特徴期別金額リスト(本算定通知書情報);
+        List<CharacteristicsPhase> 特徴期別金額リスト = get特徴期別金額リスト(本算定通知書情報.get賦課の情報_更正後().get賦課情報());
         更正後.set特徴期別金額リスト(特徴期別金額リスト);
         更正後.set特別徴収額合計(get特徴納付済額(本算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, SIZE_6));
-        List<UniversalPhase> 普徴期別金額リスト = get普徴期別金額リスト(本算定通知書情報);
+        List<UniversalPhase> 普徴期別金額リスト = get普徴期別金額リスト(本算定通知書情報.get賦課の情報_更正後().get賦課情報());
         更正後.set普徴期別金額リスト(普徴期別金額リスト);
         更正後.set特別徴収額合計(get普徴納付済額(本算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, SIZE_14));
         NenkinTokuchoKaifuJoho 対象者_追加含む_情報_更正後 = 本算定通知書情報.get対象者_追加含む_情報_更正後();
@@ -584,95 +585,124 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         }
     }
 
-    private List<CharacteristicsPhase> get特徴期別金額リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
-        FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+    private List<CharacteristicsPhase> get特徴期別金額リスト(FukaJoho 賦課情報) {
+        List<Kibetsu> kibetsuList = 賦課情報.getKibetsuList();
         List<CharacteristicsPhase> 特徴期別金額リスト = new ArrayList<>();
-        CharacteristicsPhase characteristicsPhase1 = new CharacteristicsPhase();
-        characteristicsPhase1.set期(期_1);
-        characteristicsPhase1.set金額(賦課情報.get特徴期別金額01());
-        特徴期別金額リスト.add(characteristicsPhase1);
-        CharacteristicsPhase characteristicsPhase2 = new CharacteristicsPhase();
-        characteristicsPhase2.set期(期_2);
-        characteristicsPhase2.set金額(賦課情報.get特徴期別金額02());
-        特徴期別金額リスト.add(characteristicsPhase2);
-        CharacteristicsPhase characteristicsPhase3 = new CharacteristicsPhase();
-        characteristicsPhase3.set期(期_3);
-        characteristicsPhase3.set金額(賦課情報.get特徴期別金額03());
-        特徴期別金額リスト.add(characteristicsPhase3);
-        CharacteristicsPhase characteristicsPhase4 = new CharacteristicsPhase();
-        characteristicsPhase4.set期(期_4);
-        characteristicsPhase4.set金額(賦課情報.get特徴期別金額04());
-        特徴期別金額リスト.add(characteristicsPhase4);
-        CharacteristicsPhase characteristicsPhase5 = new CharacteristicsPhase();
-        characteristicsPhase5.set期(期_5);
-        characteristicsPhase5.set金額(賦課情報.get特徴期別金額05());
-        特徴期別金額リスト.add(characteristicsPhase5);
-        CharacteristicsPhase characteristicsPhase6 = new CharacteristicsPhase();
-        characteristicsPhase6.set期(期_6);
-        characteristicsPhase6.set金額(賦課情報.get特徴期別金額06());
-        特徴期別金額リスト.add(characteristicsPhase6);
+        for (Kibetsu kibetsu : kibetsuList) {
+            RString 期 = new RString(kibetsu.get期());
+            if (期_1.equals(期)) {
+                CharacteristicsPhase characteristicsPhase1 = new CharacteristicsPhase();
+                characteristicsPhase1.set期(期_1);
+                characteristicsPhase1.set金額(賦課情報.get特徴期別金額01());
+                特徴期別金額リスト.add(characteristicsPhase1);
+            } else if (期_2.equals(期)) {
+                CharacteristicsPhase characteristicsPhase2 = new CharacteristicsPhase();
+                characteristicsPhase2.set期(期_2);
+                characteristicsPhase2.set金額(賦課情報.get特徴期別金額02());
+                特徴期別金額リスト.add(characteristicsPhase2);
+            } else if (期_3.equals(期)) {
+                CharacteristicsPhase characteristicsPhase3 = new CharacteristicsPhase();
+                characteristicsPhase3.set期(期_3);
+                characteristicsPhase3.set金額(賦課情報.get特徴期別金額03());
+                特徴期別金額リスト.add(characteristicsPhase3);
+            } else if (期_4.equals(期)) {
+                CharacteristicsPhase characteristicsPhase4 = new CharacteristicsPhase();
+                characteristicsPhase4.set期(期_4);
+                characteristicsPhase4.set金額(賦課情報.get特徴期別金額04());
+                特徴期別金額リスト.add(characteristicsPhase4);
+            } else if (期_5.equals(期)) {
+                CharacteristicsPhase characteristicsPhase5 = new CharacteristicsPhase();
+                characteristicsPhase5.set期(期_5);
+                characteristicsPhase5.set金額(賦課情報.get特徴期別金額05());
+                特徴期別金額リスト.add(characteristicsPhase5);
+            } else if (期_6.equals(期)) {
+                CharacteristicsPhase characteristicsPhase6 = new CharacteristicsPhase();
+                characteristicsPhase6.set期(期_6);
+                characteristicsPhase6.set金額(賦課情報.get特徴期別金額06());
+                特徴期別金額リスト.add(characteristicsPhase6);
+            }
+        }
+
         return 特徴期別金額リスト;
     }
 
-    private List<UniversalPhase> get普徴期別金額リスト(HonSanteiTsuchiShoKyotsu 本算定通知書情報) {
-        FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();
+    private List<UniversalPhase> get普徴期別金額リスト(FukaJoho 賦課情報) {
+        List<Kibetsu> kibetsuList = 賦課情報.getKibetsuList();
         List<UniversalPhase> 普徴期別金額リスト = new ArrayList<>();
-        UniversalPhase universalPhase1 = new UniversalPhase();
-        universalPhase1.set期(Integer.parseInt(期_1.toString()));
-        universalPhase1.set金額(賦課情報.get普徴期別金額01());
-        普徴期別金額リスト.add(universalPhase1);
-        UniversalPhase universalPhase2 = new UniversalPhase();
-        universalPhase2.set期(Integer.parseInt(期_2.toString()));
-        universalPhase2.set金額(賦課情報.get普徴期別金額02());
-        普徴期別金額リスト.add(universalPhase2);
-        UniversalPhase universalPhase3 = new UniversalPhase();
-        universalPhase3.set期(Integer.parseInt(期_3.toString()));
-        universalPhase3.set金額(賦課情報.get普徴期別金額03());
-        普徴期別金額リスト.add(universalPhase3);
-        UniversalPhase universalPhase4 = new UniversalPhase();
-        universalPhase4.set期(Integer.parseInt(期_4.toString()));
-        universalPhase4.set金額(賦課情報.get普徴期別金額04());
-        普徴期別金額リスト.add(universalPhase4);
-        UniversalPhase universalPhase5 = new UniversalPhase();
-        universalPhase5.set期(Integer.parseInt(期_5.toString()));
-        universalPhase5.set金額(賦課情報.get普徴期別金額05());
-        普徴期別金額リスト.add(universalPhase5);
-        UniversalPhase universalPhase6 = new UniversalPhase();
-        universalPhase6.set期(Integer.parseInt(期_6.toString()));
-        universalPhase6.set金額(賦課情報.get普徴期別金額06());
-        普徴期別金額リスト.add(universalPhase6);
-        UniversalPhase universalPhase7 = new UniversalPhase();
-        universalPhase7.set期(Integer.parseInt(期_7.toString()));
-        universalPhase7.set金額(賦課情報.get普徴期別金額07());
-        普徴期別金額リスト.add(universalPhase7);
-        UniversalPhase universalPhase8 = new UniversalPhase();
-        universalPhase8.set期(Integer.parseInt(期_8.toString()));
-        universalPhase8.set金額(賦課情報.get普徴期別金額08());
-        普徴期別金額リスト.add(universalPhase8);
-        UniversalPhase universalPhase9 = new UniversalPhase();
-        universalPhase9.set期(Integer.parseInt(期_9.toString()));
-        universalPhase9.set金額(賦課情報.get普徴期別金額09());
-        普徴期別金額リスト.add(universalPhase9);
-        UniversalPhase universalPhase10 = new UniversalPhase();
-        universalPhase10.set期(Integer.parseInt(期_10.toString()));
-        universalPhase10.set金額(賦課情報.get普徴期別金額10());
-        普徴期別金額リスト.add(universalPhase10);
-        UniversalPhase universalPhase11 = new UniversalPhase();
-        universalPhase11.set期(Integer.parseInt(期_11.toString()));
-        universalPhase11.set金額(賦課情報.get普徴期別金額11());
-        普徴期別金額リスト.add(universalPhase11);
-        UniversalPhase universalPhase12 = new UniversalPhase();
-        universalPhase12.set期(Integer.parseInt(期_12.toString()));
-        universalPhase12.set金額(賦課情報.get普徴期別金額12());
-        普徴期別金額リスト.add(universalPhase12);
-        UniversalPhase universalPhase13 = new UniversalPhase();
-        universalPhase13.set期(Integer.parseInt(期_13.toString()));
-        universalPhase13.set金額(賦課情報.get普徴期別金額13());
-        普徴期別金額リスト.add(universalPhase13);
-        UniversalPhase universalPhase14 = new UniversalPhase();
-        universalPhase14.set期(Integer.parseInt(期_14.toString()));
-        universalPhase14.set金額(賦課情報.get普徴期別金額14());
-        普徴期別金額リスト.add(universalPhase14);
+        for (Kibetsu kibetsu : kibetsuList) {
+            RString 期 = new RString(kibetsu.get期());
+            if (期_1.equals(期)) {
+                UniversalPhase universalPhase1 = new UniversalPhase();
+                universalPhase1.set期(Integer.parseInt(期_1.toString()));
+                universalPhase1.set金額(賦課情報.get普徴期別金額01());
+                普徴期別金額リスト.add(universalPhase1);
+            } else if (期_2.equals(期)) {
+                UniversalPhase universalPhase2 = new UniversalPhase();
+                universalPhase2.set期(Integer.parseInt(期_2.toString()));
+                universalPhase2.set金額(賦課情報.get普徴期別金額02());
+                普徴期別金額リスト.add(universalPhase2);
+            } else if (期_3.equals(期)) {
+                UniversalPhase universalPhase3 = new UniversalPhase();
+                universalPhase3.set期(Integer.parseInt(期_3.toString()));
+                universalPhase3.set金額(賦課情報.get普徴期別金額03());
+                普徴期別金額リスト.add(universalPhase3);
+            } else if (期_4.equals(期)) {
+                UniversalPhase universalPhase4 = new UniversalPhase();
+                universalPhase4.set期(Integer.parseInt(期_4.toString()));
+                universalPhase4.set金額(賦課情報.get普徴期別金額04());
+                普徴期別金額リスト.add(universalPhase4);
+            } else if (期_5.equals(期)) {
+                UniversalPhase universalPhase5 = new UniversalPhase();
+                universalPhase5.set期(Integer.parseInt(期_5.toString()));
+                universalPhase5.set金額(賦課情報.get普徴期別金額05());
+                普徴期別金額リスト.add(universalPhase5);
+            } else if (期_6.equals(期)) {
+                UniversalPhase universalPhase6 = new UniversalPhase();
+                universalPhase6.set期(Integer.parseInt(期_6.toString()));
+                universalPhase6.set金額(賦課情報.get普徴期別金額06());
+                普徴期別金額リスト.add(universalPhase6);
+            } else if (期_7.equals(期)) {
+                UniversalPhase universalPhase7 = new UniversalPhase();
+                universalPhase7.set期(Integer.parseInt(期_7.toString()));
+                universalPhase7.set金額(賦課情報.get普徴期別金額07());
+                普徴期別金額リスト.add(universalPhase7);
+            } else if (期_8.equals(期)) {
+                UniversalPhase universalPhase8 = new UniversalPhase();
+                universalPhase8.set期(Integer.parseInt(期_8.toString()));
+                universalPhase8.set金額(賦課情報.get普徴期別金額08());
+                普徴期別金額リスト.add(universalPhase8);
+            } else if (期_9.equals(期)) {
+                UniversalPhase universalPhase9 = new UniversalPhase();
+                universalPhase9.set期(Integer.parseInt(期_9.toString()));
+                universalPhase9.set金額(賦課情報.get普徴期別金額09());
+                普徴期別金額リスト.add(universalPhase9);
+            } else if (期_10.equals(期)) {
+                UniversalPhase universalPhase10 = new UniversalPhase();
+                universalPhase10.set期(Integer.parseInt(期_10.toString()));
+                universalPhase10.set金額(賦課情報.get普徴期別金額10());
+                普徴期別金額リスト.add(universalPhase10);
+            } else if (期_11.equals(期)) {
+                UniversalPhase universalPhase11 = new UniversalPhase();
+                universalPhase11.set期(Integer.parseInt(期_11.toString()));
+                universalPhase11.set金額(賦課情報.get普徴期別金額11());
+                普徴期別金額リスト.add(universalPhase11);
+            } else if (期_12.equals(期)) {
+                UniversalPhase universalPhase12 = new UniversalPhase();
+                universalPhase12.set期(Integer.parseInt(期_12.toString()));
+                universalPhase12.set金額(賦課情報.get普徴期別金額12());
+                普徴期別金額リスト.add(universalPhase12);
+            } else if (期_13.equals(期)) {
+                UniversalPhase universalPhase13 = new UniversalPhase();
+                universalPhase13.set期(Integer.parseInt(期_13.toString()));
+                universalPhase13.set金額(賦課情報.get普徴期別金額13());
+                普徴期別金額リスト.add(universalPhase13);
+            } else if (期_14.equals(期)) {
+                UniversalPhase universalPhase14 = new UniversalPhase();
+                universalPhase14.set期(Integer.parseInt(期_14.toString()));
+                universalPhase14.set金額(賦課情報.get普徴期別金額14());
+                普徴期別金額リスト.add(universalPhase14);
+            }
+        }
 
         return 普徴期別金額リスト;
     }
