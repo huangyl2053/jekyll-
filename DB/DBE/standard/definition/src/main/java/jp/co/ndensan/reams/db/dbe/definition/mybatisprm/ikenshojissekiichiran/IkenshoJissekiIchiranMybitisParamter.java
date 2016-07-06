@@ -31,7 +31,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
     private final boolean 保険者Flag;
     private final RString 保険者;
     private final boolean 件数Flag;
-    private final RString 件数;
+    private final int 件数;
     private final boolean gamenFlag;
     private final List<IkenshoJissekiIchiranKey> keyJoho;
 
@@ -43,7 +43,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
             boolean 保険者Flag,
             RString 保険者,
             boolean 件数Flag,
-            RString 件数,
+            int 件数,
             boolean gamenFlag,
             List<IkenshoJissekiIchiranKey> keyJoho) {
         this.batchFlag = batchFlag;
@@ -82,7 +82,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
                 !RString.isNullOrEmpty(保険者),
                 保険者,
                 false,
-                RString.EMPTY,
+                0,
                 false,
                 keyJoho);
     }
@@ -110,7 +110,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
                 !RString.isNullOrEmpty(保険者),
                 保険者,
                 !RString.isNullOrEmpty(最大表示件数),
-                最大表示件数,
+                Integer.parseInt(最大表示件数.toString()),
                 true,
                 null);
     }
