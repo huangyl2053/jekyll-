@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -880,7 +879,7 @@ public class HonsanteiIdoGennendo {
         } else if (全件出力.equals(parameter.get納入_出力方法())) {
             result.set納入_出力方法(oneRS);
         }
-        result.set納入_出力期(new FlexibleDate(parameter.get納入_出力期()));
+        result.set納入_出力期(parameter.get納入_出力期());
 
         if (する.equals(parameter.get納入_生活保護対象者())) {
             result.set納入_生活保護対象者(zeroRS);

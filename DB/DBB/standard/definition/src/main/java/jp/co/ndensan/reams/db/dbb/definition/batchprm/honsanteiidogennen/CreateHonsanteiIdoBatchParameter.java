@@ -96,7 +96,7 @@ public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_納入_出力方法, name = "納入_出力方法")
     private RString 納入_出力方法;
     @BatchParameter(key = KEY_納入_出力期, name = "納入_出力期")
-    private FlexibleDate 納入_出力期;
+    private RString 納入_出力期;
     @BatchParameter(key = KEY_納入_生活保護対象者, name = "納入_生活保護対象者")
     private RString 納入_生活保護対象者;
     @BatchParameter(key = KEY_納入_ページごとに山分け, name = "納入_ページごとに山分け")
