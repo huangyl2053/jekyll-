@@ -266,7 +266,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     }
 
     private RString 共通ポリシfomart(FlexibleDate date) {
-        if (FlexibleDate == null) {
+        if (date == null) {
             return RString.EMPTY;
         }
         return (date.
