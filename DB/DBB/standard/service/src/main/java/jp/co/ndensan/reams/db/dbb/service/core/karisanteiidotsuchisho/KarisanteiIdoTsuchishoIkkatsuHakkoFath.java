@@ -394,6 +394,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                     bodyList.add(isNull(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01(), 0));
                 }
+                bodyList.add(RString.EMPTY);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -423,7 +424,10 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
         }
         if (isNull(編集後仮算定通知書共通情報.get前年度情報())) {
             bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
         } else {
+            bodyList.add(isNull(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料率()) ? RString.EMPTY
+                    : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get前年度情報().get前年度保険料率(), 0));
             bodyList.add(isNull(編集後仮算定通知書共通情報.get前年度情報().get前年度最終期特徴期別介護保険料()) ? RString.EMPTY
                     : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get前年度情報().get前年度最終期特徴期別介護保険料(), 0));
         }
