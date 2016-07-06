@@ -153,7 +153,7 @@ public class KoikinaiTenkyoRirekiHenkan {
                 div.getChkSeibetsu().getSelectedKeys(),
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード(),
-                new Decimal(div.getTxtMaxCount().getValue().toString())
+                div.getTextBoxNum().getValue()
         );
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan> 申請者一覧情報List
