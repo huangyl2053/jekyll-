@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.fuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.SetaiHaakuEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019SetaiSudeTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
@@ -88,7 +88,7 @@ public class SetaiShotokuKazeiHantei {
                 continue;
             }
             for (IKojin iKojin : 世帯員リスト) {
-                DbT2019SetaiSudeTempEntity 世帯員所得情報Entity = new DbT2019SetaiSudeTempEntity();
+                SetaiShotokuEntity 世帯員所得情報Entity = new SetaiShotokuEntity();
                 世帯員所得情報Entity.setHihokenshaNo(世帯員把握入力Entity.getHihokenshaNo());
                 世帯員所得情報Entity.setShikibetsuCode(iKojin.get識別コード());
                 世帯員所得情報Entity.setKijunYMD(世帯員把握入力Entity.getKijunYMD());

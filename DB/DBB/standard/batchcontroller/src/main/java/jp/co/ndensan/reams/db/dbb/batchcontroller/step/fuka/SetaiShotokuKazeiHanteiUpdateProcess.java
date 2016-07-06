@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.fuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.fuka.SetaiShotokuKazeiHanteiProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.SetaiHaakuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019SetaiSudeTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.SetaiHaakuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 
 /**
@@ -45,9 +45,9 @@ public interface ISetaiShotokuKazeiHanteiMapper {
     /**
      * 世帯員所得情報一時を作成します
      *
-     * @param 世帯員所得情報Entity DbT2019SetaiSudeTempEntity
+     * @param 世帯員所得情報Entity SetaiShotokuEntity
      */
-    void insert世帯員所得情報一時(DbT2019SetaiSudeTempEntity 世帯員所得情報Entity);
+    void insert世帯員所得情報一時(SetaiShotokuEntity 世帯員所得情報Entity);
 
     /**
      * 介護所得のデータの取得
