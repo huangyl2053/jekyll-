@@ -92,7 +92,7 @@ public class NinteichosaItakusakiMain {
     }
 
     /**
-     * クリアボタン押下で検索条件入力項目をクリアします。
+     * 検索ボタン押下で検索条件に従い、その他機関情報を検索します。
      *
      * @param div NinteichosaItakusakiMainDiv
      * @return ResponseData<NinteichosaItakusakiMainDiv>

@@ -95,27 +95,11 @@ public class NinteichosaItakusakiMainHandler {
      */
     public List<KeyValueDataSource> setItakukubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource kukubunDataSource1 = new KeyValueDataSource(ChosaItakuKubunCode.保険者_市町村等.getコード(),
-                ChosaItakuKubunCode.保険者_市町村等.get名称());
-        KeyValueDataSource kukubunDataSource2 = new KeyValueDataSource(ChosaItakuKubunCode.指定市町村事務受託法人.getコード(),
-                ChosaItakuKubunCode.指定市町村事務受託法人.get名称());
-        KeyValueDataSource kukubunDataSource3 = new KeyValueDataSource(ChosaItakuKubunCode.指定居宅介護支援事業者.getコード(),
-                ChosaItakuKubunCode.指定居宅介護支援事業者.get名称());
-        KeyValueDataSource kukubunDataSource4 = new KeyValueDataSource(ChosaItakuKubunCode.介護保険施設.getコード(),
-                ChosaItakuKubunCode.介護保険施設.get名称());
-        KeyValueDataSource kukubunDataSource5 = new KeyValueDataSource(ChosaItakuKubunCode.介護支援専門員.getコード(),
-                ChosaItakuKubunCode.介護支援専門員.get名称());
-        KeyValueDataSource kukubunDataSource6 = new KeyValueDataSource(ChosaItakuKubunCode.他市町村.getコード(),
-                ChosaItakuKubunCode.他市町村.get名称());
-        KeyValueDataSource kukubunDataSource9 = new KeyValueDataSource(ChosaItakuKubunCode.その他.getコード(),
-                ChosaItakuKubunCode.その他.get名称());
-        dataSource.add(kukubunDataSource1);
-        dataSource.add(kukubunDataSource2);
-        dataSource.add(kukubunDataSource3);
-        dataSource.add(kukubunDataSource4);
-        dataSource.add(kukubunDataSource5);
-        dataSource.add(kukubunDataSource6);
-        dataSource.add(kukubunDataSource9);
+        for (ChosaItakuKubunCode kubunCode : ChosaItakuKubunCode.values()) {
+            KeyValueDataSource kukubunDataSource = new KeyValueDataSource(kubunCode.getコード(),
+                    kubunCode.get名称());
+            dataSource.add(kukubunDataSource);
+        }
         return dataSource;
     }
 
@@ -126,12 +110,11 @@ public class NinteichosaItakusakiMainHandler {
      */
     public List<KeyValueDataSource> setKikankubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource kukubunDataSource1 = new KeyValueDataSource(ChosaKikanKubun.非調査機関.getコード(),
-                ChosaKikanKubun.非調査機関.get名称());
-        KeyValueDataSource kukubunDataSource2 = new KeyValueDataSource(ChosaKikanKubun.調査機関.getコード(),
-                ChosaKikanKubun.調査機関.get名称());
-        dataSource.add(kukubunDataSource1);
-        dataSource.add(kukubunDataSource2);
+        for (ChosaKikanKubun kubun : ChosaKikanKubun.values()) {
+            KeyValueDataSource kukubunDataSource = new KeyValueDataSource(kubun.getコード(),
+                    kubun.get名称());
+            dataSource.add(kukubunDataSource);
+        }
         return dataSource;
     }
 
