@@ -128,11 +128,13 @@ public final class TokutyoKariSanteiFukaHandler {
             dgKanrijoho2_Row 年額基準年度row = new dgKanrijoho2_Row();
             年額基準年度row.setTxtKoumoku(年額基準年度);
             if (TokuchoNengakuKijunNendo6Gatsu.当年度.getコード().equals(
-                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate.minusYear(NUM1), SubGyomuCode.DBB介護賦課))) {
+                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate.minusYear(
+                                    nowDate.getYearValue() + NUM1 - 調定年度.getYearValue()), SubGyomuCode.DBB介護賦課))) {
                 年額基準年度row.setTxtNaiyo(当年度.concat(定値_L).concat(new FlexibleYear(調定年度.minusYear(NUM1).toDateString().toString())
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()).concat(年度).concat(定値_R));
             } else if (TokuchoNengakuKijunNendo6Gatsu.翌年度.getコード().equals(
-                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate.minusYear(NUM1), SubGyomuCode.DBB介護賦課))) {
+                    DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_6月開始, nowDate.minusYear(
+                                    nowDate.getYearValue() + NUM1 - 調定年度.getYearValue()), SubGyomuCode.DBB介護賦課))) {
                 年額基準年度row.setTxtNaiyo(翌年度.concat(定値_L).concat(new FlexibleYear(調定年度.toDateString().toString())
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString()).concat(年度).concat(定値_R));
             }
