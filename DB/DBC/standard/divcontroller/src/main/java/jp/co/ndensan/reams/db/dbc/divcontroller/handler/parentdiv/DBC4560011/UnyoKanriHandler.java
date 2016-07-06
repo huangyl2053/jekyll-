@@ -73,7 +73,11 @@ public class UnyoKanriHandler {
             div.getTxtNenjiFutanWariaiShoriZumiNendo().setValue(new RDate(年次負担割合処理済年度.toString()));
             if (!年次負担割合処理状態.isNullOrEmpty()) {
                 div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(年次負担割合処理状態);
+            } else {
+                div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(CODE_未処理);
             }
+        } else {
+            div.getTxtNenjiFutanWariaiShoriZumiNendo().clearValue();
         }
         if (!年次負担割合処理状態.isNullOrEmpty()) {
             div.setHdnNenjiFutanWariaiShoriJotai(年次負担割合処理状態);
