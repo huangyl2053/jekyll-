@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -69,11 +70,6 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
     private static final RString 定期巡回_随時対応型訪問介護看護 = new RString("定期巡回・随時対応型訪問介護看護　　　　　　：");
     private static final RString 看護小規模多機能型居宅介護 = new RString("看護小規模多機能型居宅介護　　　　　　　　　：");
 
-    private static final int INT_4 = 4;
-    private static final int INT_6 = 6;
-    private static final int INT_7 = 7;
-    private static final int INT_8 = 8;
-    private static final int INT_10 = 10;
     private final IchijihanteikekkahyoEntity item;
 
     /**
@@ -140,12 +136,11 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
         source.iryokikanName = item.get医療機関名称();
         source.ishiNo = item.get主治医番号();
         source.ishiName = item.get主治医氏名();
-        source.ishiName = item.get主治医氏名();
         source.ichijiHanteiKekka = item.get一次判定結果();
-        source.nijiHanteiKekka = item.get二次判定結果();
-        source.ｙukokikan = item.get認定有効期間();
-        source.nijihanteiKaishiYMD = item.get認定有効期間開始年月日();
-        source.nijihanteishuryoYMD = item.get認定有効期間終了年月日();
+        source.nijiHanteiKekka = RString.EMPTY;
+        source.ｙukokikan = RString.EMPTY;
+        source.nijihanteiKaishiYMD = RString.EMPTY;
+        source.nijihanteishuryoYMD = RString.EMPTY;
         source.tokuteishippeiName = item.get特定疾病名();
         source.jotaizo = item.get状態像名称();
         source.kijunGokeiTime = item.get要介護認定等基準時間();
@@ -198,36 +193,36 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
 
     private RString get元号(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(0, 2);
+            return パターン12(年月日).getEra();
         }
         return RString.EMPTY;
     }
 
     private RString get年(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(2, INT_4);
+            return パターン12(年月日).getYear();
         }
         return RString.EMPTY;
     }
 
     private RString get月(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(INT_6, INT_7);
+            return パターン12(年月日).getMonth();
         }
         return RString.EMPTY;
     }
 
     private RString get日(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).substring(INT_8, INT_10);
+            return パターン12(年月日).getDay();
         }
         return RString.EMPTY;
     }
 
-    private RString パターン12(FlexibleDate 年月日) {
+    private FillTypeFormatted パターン12(FlexibleDate 年月日) {
         return 年月日.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
+                .fillType(FillType.BLANK);
     }
 
     private RString get予防サービス状況リスト() {
