@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
@@ -18,9 +21,16 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
  * 認定調査データ出力（モバイル）CSVEntity設定のビジネスです。
@@ -125,5 +135,45 @@ public class NinteiChosaDataOutputResult {
             formatDate = new FlexibleDate(date).wareki().toDateString();
         }
         return formatDate;
+    }
+
+    /**
+     * 出力条件を作成するメッソドです。
+     *
+     * @param processParamter processParamter
+     * @return List<RString> 出力条件List
+     */
+    public List<RString> get出力条件(NinteiChosaDataOutputProcessParamter processParamter) {
+        RStringBuilder jokenBuilder = new RStringBuilder();
+        List<RString> 出力条件List = new ArrayList<>();
+        jokenBuilder.append(new RString("【認定調査委託先コード】"));
+        jokenBuilder.append(processParamter.getNinteichosaItakusakiCode());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("【認定調査員コード】"));
+        jokenBuilder.append(processParamter.getNinteiChosainCode());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("【申請書管理番号リスト】"));
+        List<RString> shinseishoKanriNoList = processParamter.getShinseishoKanriNoList();
+        for (RString shinseishoKanriNo : shinseishoKanriNoList) {
+            jokenBuilder.append(shinseishoKanriNo);
+            出力条件List.add(jokenBuilder.toRString());
+        }
+        return 出力条件List;
+    }
+
+    /**
+     * アクセスログを出力するメッソドです。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     */
+    public void getアクセスログ(RString 申請書管理番号) {
+        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
+    }
+
+    private PersonalData toPersonalData(RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 }

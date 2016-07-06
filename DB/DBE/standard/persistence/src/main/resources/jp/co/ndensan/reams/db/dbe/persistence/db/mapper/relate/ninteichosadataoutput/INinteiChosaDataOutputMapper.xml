@@ -330,8 +330,8 @@
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
     FROM 
         rgdb."DbT5201NinteichosaIraiJoho"
-    WHERE
     <if test= "!isShinseishoKanriNo">
+    WHERE
          "ninteichosaIraiRirekiNo" = ( SELECT
                 MAX(Dbt5201."ninteichosaIraiRirekiNo") 
               FROM
