@@ -261,8 +261,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        //TODO
-        //RString eucFilePath = Path.getTmpDirectoryPath();
         //TO QA914 Encode.UTF_8withBOM
         RString eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収_EUCファイル名);
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
