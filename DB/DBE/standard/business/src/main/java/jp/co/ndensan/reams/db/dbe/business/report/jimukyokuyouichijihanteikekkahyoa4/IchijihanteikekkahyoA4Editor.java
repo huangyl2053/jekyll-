@@ -70,6 +70,7 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
     private static final RString 定期巡回_随時対応型訪問介護看護 = new RString("定期巡回・随時対応型訪問介護看護　　　　　　：");
     private static final RString 看護小規模多機能型居宅介護 = new RString("看護小規模多機能型居宅介護　　　　　　　　　：");
 
+    private static final int INT_4 = 4;
     private final IchijihanteikekkahyoEntity item;
 
     /**
@@ -200,21 +201,21 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
 
     private RString get年(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).getYear();
+            return パターン12(年月日).toDateString().substring(2, INT_4);
         }
         return RString.EMPTY;
     }
 
     private RString get月(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).getMonth();
+            return new RString(年月日.getMonthValue());
         }
         return RString.EMPTY;
     }
 
     private RString get日(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
-            return パターン12(年月日).getDay();
+            return new RString(年月日.getDayValue());
         }
         return RString.EMPTY;
     }
