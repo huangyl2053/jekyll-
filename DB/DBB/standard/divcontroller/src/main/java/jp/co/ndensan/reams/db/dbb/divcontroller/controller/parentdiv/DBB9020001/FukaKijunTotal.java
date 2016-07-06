@@ -54,7 +54,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 賦課年度選択イベント処理。
+     * 賦課年度選択イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -67,7 +67,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * ランク選択イベント処理。
+     * ランク選択イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -91,7 +91,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 所得段階パネル（画面項目２～５を載せているパネル）イベント処理。
+     * 所得段階パネル（画面項目２～５を載せているパネル）イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -118,7 +118,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 世帯非課税段階（２段階以外）の軽減措置イベント処理。
+     * 世帯非課税段階（２段階以外）の軽減措置イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -133,7 +133,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 世帯非課税段階（２段階以外）の段階表記イベント処理。
+     * 世帯非課税段階（２段階以外）の段階表記イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -148,7 +148,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 本人非課税・世帯課税段階の軽減措置イベント処理。
+     * 本人非課税・世帯課税段階の軽減措置イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -163,7 +163,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 本人非課税・世帯課税段階の段階表記イベント処理。
+     * 本人非課税・世帯課税段階の段階表記イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -178,7 +178,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 保険料段階2015年以降の段階表記の任意設定イベント処理。
+     * 保険料段階2015年以降の段階表記の任意設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -191,7 +191,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「未申告」の場合本人保険料段階の強制設定イベント処理。
+     * 「未申告」の場合本人保険料段階の強制設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -203,7 +203,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「所得調査中」の場合本人保険料段階の強制設定イベント処理。
+     * 「所得調査中」の場合本人保険料段階の強制設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -215,7 +215,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 課税取消の場合本人保険料段階の強制設定イベント処理。
+     * 課税取消の場合本人保険料段階の強制設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -227,7 +227,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「完了する」ボタンのイベント処理。
+     * 「完了する」ボタンのイベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -238,7 +238,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「保存する」ボタンのイベント処理。
+     * 「保存する」ボタンのイベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>

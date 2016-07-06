@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -282,6 +281,7 @@ public class HonsanteiIdoHandler {
             RString 処理名_異動 = ShoriName.異動賦課.get名称();
             set状況と処理日時(entityList, rowList, row, 処理名_異動, flag);
         }
+        div.getShotiJokyo().getDgHonsanteiIdoShoriKakunin().setDataSource(rowList);
         return flag;
     }
 
@@ -487,50 +487,60 @@ public class HonsanteiIdoHandler {
         paramter.set調定年度(new FlexibleYear(div.getTxtChoteiNendo().getDomain().toString()));
         paramter.set賦課年度(new FlexibleYear(div.getTxtFukaNendo().getDomain().toString()));
         paramter.set処理対象(div.getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey());
-        dgChushutsuKikan_Row row = div.getDgChushutsuKikan().getDataSource().get(0);
-        YMDHMS 抽出開始日時 = new YMDHMS(row.getTxtChushutsuStYMD().getValue(), row.getTxtChushutsuStTime().getValue());
-        YMDHMS 抽出終了日時 = new YMDHMS(row.getTxtChushutsuEdYMD().getValue(), row.getTxtChushutsuEdTime().getValue());
-        paramter.set抽出開始日時(抽出開始日時);
-        paramter.set抽出終了日時(抽出終了日時);
-        paramter.set特徴捕捉分(div.getXtTaishoTokuchoKaishiTsuki().getValue());
-        paramter.set依頼金額計算(div.getRadTokuchoHosokuIraiKingakuKeisan().getSelectedKey());
+        if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
+            dgChushutsuKikan_Row row = div.getDgChushutsuKikan().getDataSource().get(0);
+            YMDHMS 抽出開始日時 = new YMDHMS(row.getTxtChushutsuStYMD().getValue(), row.getTxtChushutsuStTime().getValue());
+            YMDHMS 抽出終了日時 = new YMDHMS(row.getTxtChushutsuEdYMD().getValue(), row.getTxtChushutsuEdTime().getValue());
+            paramter.set抽出開始日時(抽出開始日時);
+            paramter.set抽出終了日時(抽出終了日時);
+            paramter.set特徴捕捉分(div.getXtTaishoTokuchoKaishiTsuki().getValue());
+            paramter.set依頼金額計算(div.getRadTokuchoHosokuIraiKingakuKeisan().getSelectedKey());
+        }
         List<ChohyoMeter> 出力帳票一覧 = new ArrayList<>();
+        Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
         ChohyoMeter chohyoMeter;
-        for (dgOutputChohyoIchiran_Row 帳票 : div.getCcdChohyoIchiran().get出力帳票一覧()) {
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        for (Map.Entry<RString, RString> entry : set) {
             chohyoMeter = new ChohyoMeter();
-            chohyoMeter.set出力順ID(帳票.getShutsuryokujunID());
-            chohyoMeter.set帳票分類ID(new ReportId(帳票.getChohyoID()));
+            chohyoMeter.set帳票分類ID(new ReportId(entry.getKey()));
+            chohyoMeter.set出力順ID(entry.getValue());
             出力帳票一覧.add(chohyoMeter);
         }
         paramter.set出力帳票一覧List(出力帳票一覧);
-        paramter.set特徴_出力対象(div.getRadTokuchoKaishiTsuchiTaishosha().getSelectedKey());
+        paramter.set特徴_出力対象(div.getRadTokuchoKaishiTsuchiTaishosha().getSelectedValue());
         RDate 特徴_発行日 = div.getTxtTokuchoKaishiTsuchishoHakkoYMD().getValue();
         if (特徴_発行日 != null) {
             paramter.set特徴_発行日(new FlexibleDate(特徴_発行日.toString()));
         }
-        paramter.set決定_チェックボックス(div.getChkKetteiTsuchi().getSelectedKeys().get(NUM_0));
-        paramter.set決定_文書番号(div.getCcdBushiNoKetteiTsuchi().get文書番号());
-        RDate 決定_発行日 = div.getTxtKetteiTsuchiHakkoYMD().getValue();
-        if (決定_発行日 != null) {
-            paramter.set決定_発行日(new FlexibleDate(決定_発行日.toString()));
+        List<RString> 決定_チェックボックス = div.getChkKetteiTsuchi().getSelectedKeys();
+        if (決定_チェックボックス != null && !決定_チェックボックス.isEmpty()) {
+            paramter.set決定_チェックボックス(決定_チェックボックス.get(NUM_0));
+            paramter.set決定_文書番号(div.getCcdBushiNoKetteiTsuchi().get文書番号());
+            RDate 決定_発行日 = div.getTxtKetteiTsuchiHakkoYMD().getValue();
+            if (決定_発行日 != null) {
+                paramter.set決定_発行日(new FlexibleDate(決定_発行日.toString()));
+            }
         }
-        paramter.set変更_チェックボックス(div.getChkHenkoTsuchi().getSelectedKeys().get(NUM_0));
-        paramter.set変更_対象者(div.getChkHenkoTsuchiTaishosha().getSelectedKeys().get(NUM_0));
-        paramter.set変更_文書番号(div.getCcdBunshoBangoHenkoTsuchi().get文書番号());
-        RDate 変更_発行日 = div.getTxtHenkoTsuchiHakkoYMD().getValue();
-        if (変更_発行日 != null) {
-            paramter.set変更_発行日(new FlexibleDate(変更_発行日.toString()));
+        List<RString> 変更_チェックボックス = div.getChkHenkoTsuchi().getSelectedKeys();
+        if (変更_チェックボックス != null && !変更_チェックボックス.isEmpty()) {
+            paramter.set変更_チェックボックス(変更_チェックボックス.get(NUM_0));
+            paramter.set変更_対象者(div.getChkHenkoTsuchiTaishosha().getSelectedValues().get(NUM_0));
+            paramter.set変更_文書番号(div.getCcdBunshoBangoHenkoTsuchi().get文書番号());
+            RDate 変更_発行日 = div.getTxtHenkoTsuchiHakkoYMD().getValue();
+            if (変更_発行日 != null) {
+                paramter.set変更_発行日(new FlexibleDate(変更_発行日.toString()));
+            }
         }
-        paramter.set納入_対象者(div.getChkNotsuTaishoSha().getSelectedKeys().get(NUM_0));
-        paramter.set納入_口座振替者(div.getRadNotsuKozaShutsuryokuYoshiki().getSelectedKey());
+        paramter.set納入_対象者(div.getChkNotsuTaishoSha().getSelectedValues().get(NUM_0));
+        paramter.set納入_口座振替者(div.getRadNotsuKozaShutsuryokuYoshiki().getSelectedValue());
         RDate 納入_発行日 = div.getTxtNotsuHakkoYMD().getValue();
         if (納入_発行日 != null) {
             paramter.set納入_発行日(new FlexibleDate(納入_発行日.toString()));
         }
         paramter.set納入_出力方法(div.getTxtNotsuShutsuryokuKi().getValue());
-        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedKey());
-        paramter.set納入_生活保護対象者(div.getRadNotsuSeikatsuHogo().getSelectedKey());
-        paramter.set納入_ページごとに山分け(div.getRadNotsuYamawake().getSelectedKey());
+        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedValue());
+        paramter.set納入_生活保護対象者(div.getRadNotsuSeikatsuHogo().getSelectedValue());
+        paramter.set納入_ページごとに山分け(div.getRadNotsuYamawake().getSelectedValue());
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
             paramter.set一括発行起動フラグ(false);
         } else {
