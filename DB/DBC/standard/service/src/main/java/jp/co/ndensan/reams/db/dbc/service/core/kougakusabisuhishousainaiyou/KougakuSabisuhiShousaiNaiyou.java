@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakusabisuhish
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -229,7 +229,7 @@ public class KougakuSabisuhiShousaiNaiyou {
 
     private int 検索件数(DbT1001HihokenshaDaichoEntity 被保険者台帳管理, FlexibleYearMonth サービス年月) {
         if (被保険者台帳管理.getIdoYMD() != null && 被保険者台帳管理.getIdoYMD().getYearMonth().equals(サービス年月)
-                && ShikakuHenkoJiyu.広域内転居.getCode().equals(被保険者台帳管理.getIdoJiyuCode())) {
+                && ShikakuHenkoJiyu.広域内転居.getコード().equals(被保険者台帳管理.getIdoJiyuCode())) {
             return 1;
         } else {
             return 0;
