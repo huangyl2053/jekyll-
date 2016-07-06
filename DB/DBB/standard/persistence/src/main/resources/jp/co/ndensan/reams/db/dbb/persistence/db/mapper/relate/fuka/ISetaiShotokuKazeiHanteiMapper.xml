@@ -22,6 +22,8 @@
         "shikibetsuCode" rshare."UDD001ShikibetsuCode",
         "shotokuNendo" rshare."UDD012YSeireki"
         )
+    </insert>
+    
      <resultMap id="resultMap_SetaiHaakuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.SetaiHaakuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
