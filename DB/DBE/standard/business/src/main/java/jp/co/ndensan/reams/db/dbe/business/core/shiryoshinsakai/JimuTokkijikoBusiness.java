@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class JimuTokkijikoBusiness {
 
     private final NinteiShinseiJohoEntity entity;
-    List<NinteiTokkijikoEntity> 特記事項情報;
+    private final List<NinteiTokkijikoEntity> 特記事項情報;
     private static final RString 特記事項番号_101 = new RString("101");
     private static final RString 特記事項番号_102 = new RString("102");
     private static final RString 特記事項番号_103 = new RString("103");
@@ -126,6 +126,11 @@ public class JimuTokkijikoBusiness {
         this.特記事項情報 = 特記事項情報;
     }
 
+    /**
+     * 名前を取得します。
+     *
+     * @return 名前
+     */
     public RString get名前() {
         if (entity.getHihokenshaName() == null || RString.isNullOrEmpty(entity.getHihokenshaName().getColumnValue())) {
             return RString.EMPTY;
@@ -133,22 +138,47 @@ public class JimuTokkijikoBusiness {
         return entity.getHihokenshaName().getColumnValue();
     }
 
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @return 被保険者番号
+     */
     public RString get被保険者番号() {
         return entity.getHihokenshaNo();
     }
 
+    /**
+     * 保険者番号を取得します。
+     *
+     * @return 保険者番号
+     */
     public RString get保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 
+    /**
+     * 認定申請年月日を取得します。
+     *
+     * @return 認定申請年月日
+     */
     public FlexibleDate get認定申請年月日() {
         return entity.getNinteiShinseiYMD();
     }
 
+    /**
+     * 認定調査実施年月日を取得します。
+     *
+     * @return 認定調査実施年月日
+     */
     public FlexibleDate get認定調査実施年月日() {
         return entity.getNinteichosaJisshiYMD();
     }
 
+    /**
+     * 介護認定審査会開催年月日を取得します。
+     *
+     * @return 介護認定審査会開催年月日
+     */
     public FlexibleDate get介護認定審査会開催年月日() {
         return entity.getShinsakaiKaisaiYMD();
     }

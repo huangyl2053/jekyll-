@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHante
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuIkenshoDataSakuseiA4Process;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuItiziHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuShinsakaiIinJohoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuSonotaJohoDataSakuseiA3Process;
@@ -36,6 +37,7 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
     private static final String 事務局_その他資料 = "jimuSonotaJoho";
     private static final String 事務局_主治医意見書 = "jimuIkensho";
     private static final String 事務局_概況特記一覧表 = "jimuGaikyouTokkiIran";
+    private static final String 事務局_一次判定結果 = "jimuItiziHantei";
     // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
 //    private static final String 事務局_特記事項 = "jimuTokkiJikou";
 //    private static final String 事務局_概況特記 = "jimuTokkiIran";
@@ -69,6 +71,9 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
             }
             if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
                 executeStep(事務局_概況特記一覧表);
+            }
+            if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
+                executeStep(事務局_一次判定結果);
             }
             // TODO 凌護行　QA回答まち、帳票仕様にRSE記載不正、2016/07/10
 //            if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())) {
@@ -177,6 +182,16 @@ public class JimuShiryoShinsakaiFlow extends BatchFlowBase<ShiryoShinsakaiBatchP
         }
     }
 
+    /**
+     * 事務局一次判定結果情報データの作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(事務局_一次判定結果)
+    protected IBatchFlowCommand createJimuItiziHanteiData() {
+        return loopBatch(JimuItiziHanteiDataSakuseiA4Process.class)
+                .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
+    }
 //    /**
 //     * 事務局概況特記情報データの作成を行います。
 //     *
