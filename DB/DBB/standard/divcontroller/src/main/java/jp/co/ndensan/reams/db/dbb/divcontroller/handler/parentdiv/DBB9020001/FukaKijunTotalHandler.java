@@ -1086,7 +1086,8 @@ public class FukaKijunTotalHandler {
         RString 課税区分の見直し方_未申告 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
                 now, SubGyomuCode.DBB介護賦課);
         div.getHokenryoRitsuIgaiInfo().getMishinkoku().getRadMishinkokuKyoseiSettei().setSelectedKey(強制設定_未申告);
-        if (!div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().getDataSource().isEmpty()) {
+        if (!div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().getDataSource().isEmpty()
+                && !設定段階_未申告.isEmpty()) {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedKey(設定段階_未申告);
         }
         div.getHokenryoRitsuIgaiInfo().getMishinkoku().getRadtMishinkokuKazeiKbn()
@@ -1106,7 +1107,7 @@ public class FukaKijunTotalHandler {
         div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getRadShotokuChosaChuKyoseiSettei()
                 .setSelectedKey(強制設定_所得調査中);
         if (!div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
-                .getDataSource().isEmpty()) {
+                .getDataSource().isEmpty() && !設定段階_所得調査中.isEmpty()) {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
                     .setSelectedKey(設定段階_所得調査中);
         }
@@ -1128,7 +1129,7 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKyoseiSettei()
                     .setSelectedKey(強制設定_課税取消);
             if (!div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
-                    .getDataSource().isEmpty()) {
+                    .getDataSource().isEmpty() && !設定段階_課税取消.isEmpty()) {
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
                         .setSelectedKey(設定段階_課税取消);
             }
@@ -1244,8 +1245,7 @@ public class FukaKijunTotalHandler {
      * @param 賦課年度 FlexibleYear
      */
     public void set状態定義(FlexibleYear 賦課年度) {
-        DBB9020001StateName state = 遷移先の設定(賦課年度);
-        if (DBB9020001StateName.平成17年以前.equals(state)) {
+        if (賦課年度.isBeforeOrEquals(平成17年)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaiHikazeiDankai().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaikazeiHonninHikazeiDankai().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai4DankaiFrom2008To2010().setDisplayNone(true);
@@ -1253,7 +1253,7 @@ public class FukaKijunTotalHandler {
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai3Dankai().setDisplayNone(false);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(false);
-        } else if (DBB9020001StateName.平成18年から平成20年.equals(state)) {
+        } else if (平成18年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成20年)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaiHikazeiDankai().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaikazeiHonninHikazeiDankai().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai4DankaiFrom2008To2010().setDisplayNone(false);
@@ -1261,15 +1261,15 @@ public class FukaKijunTotalHandler {
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai3Dankai().setDisplayNone(false);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(false);
-        } else if (DBB9020001StateName.平成21年から平成23年まで.equals(state)) {
+        } else if (平成21年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成23年)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaiHikazeiDankai().setDisplayNone(false);
-            div.getShotokuDankai().getShotokuDankaiTo2014().getSetaikazeiHonninHikazeiDankai().setDisplayNone(true);
+            div.getShotokuDankai().getShotokuDankaiTo2014().getSetaikazeiHonninHikazeiDankai().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai4DankaiFrom2008To2010().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().getKijunShotokuKingakuDankai2().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai3Dankai().setDisplayNone(false);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(false);
-        } else if (DBB9020001StateName.平成24年から平25年まで.equals(state)) {
+        } else if (平成24年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成25年)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaiHikazeiDankai().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaikazeiHonninHikazeiDankai().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai4DankaiFrom2008To2010().setDisplayNone(true);
@@ -1277,7 +1277,7 @@ public class FukaKijunTotalHandler {
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai3Dankai().setDisplayNone(true);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().setDisplayNone(true);
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(false);
-        } else if (DBB9020001StateName.平成26年.equals(state)) {
+        } else if (平成26年.equals(賦課年度)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaiHikazeiDankai().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().getSetaikazeiHonninHikazeiDankai().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai4DankaiFrom2008To2010().setDisplayNone(true);
@@ -1285,7 +1285,7 @@ public class FukaKijunTotalHandler {
             div.getShotokuDankai().getShotokuDankaiTo2014().getHokenryoRitsuDai3Dankai().setDisplayNone(true);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().setDisplayNone(false);
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(false);
-        } else if (DBB9020001StateName.平成27年以降.equals(state)) {
+        } else if (平成27年.isBeforeOrEquals(賦課年度)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(true);
         }
     }

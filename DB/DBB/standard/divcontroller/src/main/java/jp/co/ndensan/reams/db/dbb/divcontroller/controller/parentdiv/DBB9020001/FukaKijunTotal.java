@@ -33,7 +33,7 @@ public class FukaKijunTotal {
 
     private static final RString MESSAGE = new RString("システム管理登録_賦課基準保存処理は正常に行われました。");
     private static final RString MESSAGE_KEY = new RString("賦課年度：平XX年度");
-    private static final RString 引数_XX = new RString("XX");
+    private static final RString 引数_XX = new RString("平XX");
 
     /**
      * 画面初期化です。
@@ -260,7 +260,7 @@ public class FukaKijunTotal {
         getSaveHandler(div).変更内容を保存(変更内容List, now);
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(MESSAGE,
-                new RString(MESSAGE_KEY.toString().replace(引数_XX, 賦課年度.toDateString())),
+                new RString(MESSAGE_KEY.toString().replace(引数_XX, 賦課年度.wareki().toDateString())),
                 RString.EMPTY,
                 true);
         return ResponseData.of(div).setState(DBB9020001StateName.完了);
