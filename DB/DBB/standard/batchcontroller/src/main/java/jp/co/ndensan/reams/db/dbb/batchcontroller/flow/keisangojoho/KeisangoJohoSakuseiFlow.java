@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.keisangojoho;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.KeisangoJohoInsertProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.KibetsuUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.ShuyuJohoUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempAfterInsertProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempBeforeInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempInsertProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -53,7 +53,7 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
     @Step(TYUKANTEMPINSERTPROCESS)
     protected IBatchFlowCommand callTyukanTempInsertProcess() {
         getParameter().set更新前フラグ(false);
-        return loopBatch(TyukanTempInsertProcess.class)
+        return loopBatch(TyukanTempAfterInsertProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
 
