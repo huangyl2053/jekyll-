@@ -216,4 +216,26 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                 order(by(komokuName, Order.ASC)).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
+
+    /**
+     * 帳票制御汎用を取得します。
+     *
+     * @param 帳票分類ID ChohyoBunruiID
+     * @param 項目名 KomokuName
+     * @return DbT7067ChohyoSeigyoHanyoEntity
+     */
+    @Transaction
+    public DbT7067ChohyoSeigyoHanyoEntity get帳票制御汎用(ReportId 帳票分類ID,
+            RString 項目名) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(chohyoBunruiID, 帳票分類ID),
+                                eq(komokuName, 項目名))).
+                toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
 }

@@ -57,7 +57,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンの必須チェックのメソッドます。
+     * 「実行する」ボタンの必須チェックのメソッドです。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -79,7 +79,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンをクリックのメソッドます。
+     * 「実行する」ボタンをクリックのメソッドです。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -91,7 +91,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンを設定する。
+     * 「実行する」ボタン表示制御を設定です。
      *
      * @param div HonsanteiIdoDiv
      * @return ResponseData
@@ -105,7 +105,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 抽出条件のメソッドます。
+     * 抽出条件のメソッドです。
      *
      * @param div HonsanteiIdoDiv
      * @return ResponseData

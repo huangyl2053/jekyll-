@@ -909,4 +909,21 @@ public class HonsanteiIdoGennendo {
         DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.selectMax基準日(調定年度, 処理名);
         return new ShoriDateKanri(shoriDateKanri);
     }
+
+    /**
+     * 帳票制御汎用キー取得
+     *
+     * @param 帳票分類ID 帳票分類ID
+     * @param 項目名 項目名
+     * @return ChohyoSeigyoHanyo
+     */
+    public ChohyoSeigyoHanyo get帳票制御汎用(ReportId 帳票分類ID, RString 項目名) {
+        DbT7067ChohyoSeigyoHanyoEntity entity
+                = 帳票制御汎用Dac.get帳票制御汎用(帳票分類ID, 項目名);
+        if (entity == null) {
+            return null;
+        } else {
+            return new ChohyoSeigyoHanyo(entity);
+        }
+    }
 }

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.Shoriku;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.KozaIdoNomiPrint;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.HonsanteiIdoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.dgChushutsuKikan_Row;
@@ -67,6 +68,8 @@ public class HonsanteiIdoHandler {
     private static final RString 済 = new RString("済");
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
+    private static final RString 口座異動のみ通知書_出力否 = new RString("0");
+    private static final RString 口座異動のみ通知書_出力要 = new RString("1");
     private static final RString 算定月_2 = new RString("02");
     private static final RString 算定月_10 = new RString("10");
     private static final RString 算定月_12 = new RString("12");
@@ -76,6 +79,7 @@ public class HonsanteiIdoHandler {
     private static final RString 現年度異動賦課 = new RString("DBBMN44001");
     private static final RString 実行する = new RString("btnRegister");
     private static final ReportId 帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
+    private static final ReportId 帳票分類ID_39 = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final RString 項目名 = new RString("当初出力_出力方法");
     private static final RString 別々出力 = new RString("別々出力");
     private static final RString 全件出力 = new RString("全件出力");
@@ -106,6 +110,7 @@ public class HonsanteiIdoHandler {
     private static final RString 処理対象なし = new RString("処理対象なし");
     private static final RString 本算定異動賦課 = new RString("DBB0510001");
     private static final RString 現年度異動_通知書作成 = new RString("DBB0510003");
+    private static final RString 口座対象者プリント条件KEY = new RString("口座対象者プリント条件");
 
     /**
      * コンストラクタです。
@@ -117,7 +122,7 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 画面初期化のメソッドます。
+     * 画面初期化のメソッドです。
      *
      * @param 調定年度 FlexibleYear
      * @return flag boolean
@@ -204,7 +209,7 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 抽出条件設定のメソッドます。
+     * 抽出条件設定のメソッドです。
      *
      * @param 調定年度 RString
      */
@@ -316,7 +321,7 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 異動賦課に対応する賦課確定処理のメソッドます。
+     * 異動賦課に対応する賦課確定処理のメソッドです。
      *
      * @param choteiNendo 調定年度
      * @return boolean
@@ -346,6 +351,18 @@ public class HonsanteiIdoHandler {
         Noki 普徴納期 = FukaNokiResearcher.createInstance().get普徴納期(更正月.get期AsInt());
         div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().setValue(普徴納期.get通知書発行日());
 
+        ChohyoSeigyoHanyo 変更通知書_帳票制御汎用キー = HonsanteiIdoGennendo.createInstance().get帳票制御汎用(
+                帳票分類ID_39, 口座対象者プリント条件KEY);
+        if (変更通知書_帳票制御汎用キー != null) {
+            if (口座異動のみ通知書_出力否.equals(変更通知書_帳票制御汎用キー.get設定値())) {
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiKozaIdoNomiShutsuryoku().setValue(
+                        KozaIdoNomiPrint.口座異動のみの場合にﾌﾟﾘﾝﾄは不要.get名称());
+            } else if (口座異動のみ通知書_出力要.equals(変更通知書_帳票制御汎用キー.get設定値())) {
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiKozaIdoNomiShutsuryoku().setValue(
+                        KozaIdoNomiPrint.口座異動のみの場合にﾌﾟﾘﾝﾄを行う.get名称());
+            }
+        }
+
         ChohyoSeigyoHanyo 帳票制御汎用キー = HonsanteiIdoGennendo.createInstance().getChohyoHanyoKey(
                 SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
         if (帳票制御汎用キー != null) {
@@ -358,6 +375,7 @@ public class HonsanteiIdoHandler {
 
         FuchoKiUtil util = new FuchoKiUtil();
         KitsukiList 期月リスト = util.get期月リスト();
+        // TODO
 //        KitsukiList 本算定期間_期月リスト = 期月リスト.filtered本算定期間();
         RString 処理対象月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
 //        boolean 本算定異動 = false;
@@ -400,13 +418,17 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 帳票IDのチェック。
+     * 帳票IDのチェックです。
      *
      * @param 調定年度 FlexibleYear
      */
     public void check帳票ID(FlexibleYear 調定年度) {
+        FuchoKiUtil util = new FuchoKiUtil();
+        KitsukiList 期月リスト = util.get期月リスト();
+        RString 処理対象月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
+        Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue(処理対象月));
         try {
-            HonsanteiIdoGennendo.createInstance().getChohyoID(調定年度, 月, get各通知書の帳票ID());
+            HonsanteiIdoGennendo.createInstance().getChohyoID(調定年度, new RString(月の期.get期AsInt()), get各通知書の帳票ID());
         } catch (ApplicationException e) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
@@ -427,7 +449,7 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 入力チェックのメソッドます。
+     * 入力チェックのメソッドです。
      *
      * @return ResponseData
      */
@@ -456,7 +478,7 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 本算定異動（現年度）画面divのParamter。
+     * 本算定異動（現年度）画面divのパラメータ設定です。
      *
      * @return 画面で入力した項目
      */
@@ -506,7 +528,7 @@ public class HonsanteiIdoHandler {
             paramter.set納入_発行日(new FlexibleDate(納入_発行日.toString()));
         }
         paramter.set納入_出力方法(div.getTxtNotsuShutsuryokuKi().getValue());
-//       paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedKey());
+        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedKey());
         paramter.set納入_生活保護対象者(div.getRadNotsuSeikatsuHogo().getSelectedKey());
         paramter.set納入_ページごとに山分け(div.getRadNotsuYamawake().getSelectedKey());
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
@@ -520,7 +542,7 @@ public class HonsanteiIdoHandler {
     }
 
     /**
-     * 実行ボタン設定する。
+     * 実行ボタン設定です。
      *
      * @param flag boolean
      */
