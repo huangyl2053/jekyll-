@@ -22,8 +22,8 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
 
     private RString menuId;
     private Long shuturyokuJunn;
-    private FlexibleYearMonth ShinsaYMFrom;
-    private FlexibleYearMonth ShinsaYMTo;
+    private FlexibleYearMonth shinsaYMFrom;
+    private FlexibleYearMonth shinsaYMTo;
     private boolean shuturyokuFlg;
 
     /**
@@ -32,20 +32,20 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
      *
      * @param menuId RString
      * @param shuturyokuJunn RString
-     * @param ShinsaYMFrom FlexibleYearMonth
-     * @param ShinsaYMTo FlexibleYearMonth
+     * @param shinsaYMFrom FlexibleYearMonth
+     * @param shinsaYMTo FlexibleYearMonth
      * @param shuturyokuFlg boolean
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
             RString menuId,
             Long shuturyokuJunn,
-            FlexibleYearMonth ShinsaYMFrom,
-            FlexibleYearMonth ShinsaYMTo,
+            FlexibleYearMonth shinsaYMFrom,
+            FlexibleYearMonth shinsaYMTo,
             boolean shuturyokuFlg) {
         this.menuId = menuId;
         this.shuturyokuJunn = shuturyokuJunn;
-        this.ShinsaYMFrom = ShinsaYMFrom;
-        this.ShinsaYMTo = ShinsaYMTo;
+        this.shinsaYMFrom = shinsaYMFrom;
+        this.shinsaYMTo = shinsaYMTo;
         this.shuturyokuFlg = shuturyokuFlg;
     }
 

@@ -86,6 +86,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcess extends BatchProcessBase<K
     private static final RString TABLE_給付実績基本情報高額一時３ = new RString("TempKyufujissekiKihon3");
     private static final RString TABLE_給付実績基本情報事業高額一時3 = new RString("TempKyufujissekiKihonJigyo3");
     private static final RString TABLE_世帯員把握入力高額一時 = new RString("TempSetaiinHaakuNyuryoku");
+    private static final RString TABLE_世帯員把握入力事業高額一時 = new RString("TempSetaiinHaakuNyuryokuJigyo");
     private static final RString TABLE_給付実績基本情報高額一時4 = new RString("TempKyufujissekiKihon4");
     private static final RString TABLE_給付実績基本情報事業高額一時4 = new RString("TempKyufujissekiKihonJigyo4");
     private static final RString TABLE_被保険者台帳情報一時3 = new RString("TempHihokenshaDaicho3");
@@ -184,6 +185,8 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcess extends BatchProcessBase<K
     @BatchWriter
     BatchEntityCreatedTempTableWriter setaiinHaakuNyuryokuWriter;
     @BatchWriter
+    BatchEntityCreatedTempTableWriter setaiinHaakuNyuryokuJigyoWriter;
+    @BatchWriter
     BatchEntityCreatedTempTableWriter kyufujissekiKihon4Writer;
     @BatchWriter
     BatchEntityCreatedTempTableWriter kyufujissekiKihonJigyo4Writer;
@@ -262,67 +265,130 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcess extends BatchProcessBase<K
     }
 
     private void createTempTable() {
-        kogakuShikyuShinseiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給申請全件一時, DbT3056KogakuShikyuShinseiEntity.class);
-        kogakuShikyuHanteiKekkaZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給判定結果全件一時, DbT3057KogakuShikyuHanteiKekkaEntity.class);
-        kogakuShikyuShinsaKetteiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給審査決定全件一時, DbT3058KogakuShikyuShinsaKetteiEntity.class);
-        kogakuKyufuTaishoshaGokeiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費給付対象者合計全件一時, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
-        kogakuKyufuTaishoshaMeisaiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費給付対象者明細全件一時, DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
-        jigyokogakuShikyuShinseiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費支給申請全件一時, DbT3110JigyoKogakuShikyuShinseiEntity.class);
-        jigyokogakuShikyuHanteiKekkaZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費支給判定結果全件一時, DbT3111JigyoKogakuShikyuHanteiKekkaEntity.class);
-        jigyokogakuShikyuShinsaKetteiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費支給審査決定全件一時, DbT3112KogakuShikyuShinsaKetteiEntity.class);
-        jigyokogakuKyufuTaishoshaGokeiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費給付対象者合計全件一時, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity.class);
-        jigyokogakuKyufuTaishoshaMeisaiZenWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費給付対象者明細全件一時, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity.class);
-        kyufujissekiKihon1Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報高額一時1, DbT3017KyufujissekiKihonEntity.class);
-        kyufujissekiKihon2Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報高額一時2, DbT3017KyufujissekiKihonEntity.class);
-        kyufujissekiKihonJigyo1Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報事業高額一時1, DbT3017KyufujissekiKihonEntity.class);
-        kyufujissekiKihonJigyo2Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報事業高額一時2, DbT3017KyufujissekiKihonEntity.class);
-        hihokenshaDaicho1Writer = new BatchEntityCreatedTempTableWriter(TABLE_被保険者台帳情報一時1, DbT1001HihokenshaDaichoEntity.class);
-        hihokenshaDaicho2Writer = new BatchEntityCreatedTempTableWriter(TABLE_被保険者台帳情報一時2, DbT1001HihokenshaDaichoEntity.class);
-        gappeiNaiJutokushaShinKyuNoHenkanWriter = new BatchEntityCreatedTempTableWriter(TABLE_合併内住特者新旧番号変換一時, DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity.class);
-        shiharaiHohoHenkoWriter = new BatchEntityCreatedTempTableWriter(TABLE_支払方法変更管理一時, DbT4021ShiharaiHohoHenkoEntity.class);
-        yokaisoGaitoshaWriter = new BatchEntityCreatedTempTableWriter(TABLE_境界層管理一時, DbT1006KyokaisoGaitoshaEntity.class);
-        kyufujissekiShukeiWriter = new BatchEntityCreatedTempTableWriter(TABLE_給付実績集計一時, DbT3033KyufujissekiShukeiEntity.class);
-        kyufujissekiShakaiFukushiHojinKeigengakuWriter = new BatchEntityCreatedTempTableWriter(TABLE_給付実績社会福祉法人軽減額一時, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity.class);
-        kijunShunyugakuTekiyoKanriWriter = new BatchEntityCreatedTempTableWriter(TABLE_基準収入額適用管理一時, DbT3116KijunShunyugakuTekiyoKanriEntity.class);
-        kogakuShikyuShinseiWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給申請一時, DbT3056KogakuShikyuShinseiEntity.class);
-        kogakuShikyuHanteiKekkaWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給判定結果一時, DbT3057KogakuShikyuHanteiKekkaEntity.class);
-        kogakuShikyuShinsaKetteiWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給審査決定一時, DbT3058KogakuShikyuShinsaKetteiEntity.class);
-        kogakuKyufuTaishoshaGokeiWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費給付対象者合計一時, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
-        kogakuKyufuTaishoshaMeisaiWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費給付対象者明細一時, DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
-        jigyokogakuShikyuShinseiWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費支給申請一時, DbT3110JigyoKogakuShikyuShinseiEntity.class);
-        jigyokogakuShikyuHanteiKekkaWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費支給判定結果一時, DbT3111JigyoKogakuShikyuHanteiKekkaEntity.class);
-        jigyoTempkogakuShikyuShinsaKetteiWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費支給審査決定一時, DbT3112KogakuShikyuShinsaKetteiEntity.class);
-        jigyokogakuKyufuTaishoshaGokeiWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費給付対象者合計一時, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity.class);
-        jigyokogakuKyufuTaishoshaMeisaiWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費給付対象者明細一時, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity.class);
-        kyufujissekiKihon3Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報高額一時３, DbT3017KyufujissekiKihonEntity.class);
-        kyufujissekiKihonJigyo3Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報事業高額一時3, DbT3017KyufujissekiKihonEntity.class);
-        setaiinHaakuNyuryokuWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員把握入力高額一時, TempSetaiinHaakuNyuryokuEntity.class);
-        kyufujissekiKihon4Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報高額一時4, DbT3017KyufujissekiKihonEntity.class);
-        kyufujissekiKihonJigyo4Writer = new BatchEntityCreatedTempTableWriter(TABLE_給付実績基本情報事業高額一時4, DbT3017KyufujissekiKihonEntity.class);
-        hihokenshaDaicho3Writer = new BatchEntityCreatedTempTableWriter(TABLE_被保険者台帳情報一時3, DbT1001HihokenshaDaichoEntity.class);
-        setaiinShotokuHanteiWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細高額一時, TempSetaiinShotokuHanteiEntity.class);
-        setaiinShotokuHanteiJigyoWriter = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細事業高額一時, TempSetaiinShotokuHanteiEntity.class);
-        kyufujissekiTyukannWriter = new BatchEntityCreatedTempTableWriter(TABLE_給付実績中間高額一時, TempKyufujissekiTyukannEntity.class);
-        kyufujissekiTyukannJigyoWriter = new BatchEntityCreatedTempTableWriter(TABLE_給付実績中間事業高額一時, TempKyufujissekiTyukannEntity.class);
-        kogakuShikyuShinsei1Writer = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給申請一時1, DbT3056KogakuShikyuShinseiEntity.class);
-        kogakuShikyuHanteiKekka1Writer = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給判定結果一時1, DbT3057KogakuShikyuHanteiKekkaEntity.class);
-        kogakuShikyuShinsaKettei1Writer = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費支給審査決定一時1, DbT3058KogakuShikyuShinsaKetteiEntity.class);
-        kogakuHanteiEraaWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額判定エラー一時, TempKogakuHanteiEraaEntity.class);
-        jigyokogakuHanteiEraaWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額判定エラー一時, TempKogakuHanteiEraaEntity.class);
-        kyufuHihokenAtenaWriter = new BatchEntityCreatedTempTableWriter(TABLE_給付被保宛名情報高額一時, TempKyufuHihokenAtenaEntity.class);
-        kyufuHihokenAtenaJigyoWriter = new BatchEntityCreatedTempTableWriter(TABLE_給付被保宛名情報事業高額一時, TempKyufuHihokenAtenaEntity.class);
-        shorikekkaKakuninRisutoWriter = new BatchEntityCreatedTempTableWriter(TABLE_処理結果確認リスト高額一時, DbT3056KogakuShikyuShinseiEntity.class);
-        shorikekkaKakuninRisutoJigyoWriter = new BatchEntityCreatedTempTableWriter(TABLE_処理結果確認リスト事業高額一時, DbT3056KogakuShikyuShinseiEntity.class);
-        setaiinShotokuHantei1Writer = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細高額一時1, TempSetaiinShotokuHanteiEntity.class);
-        setaiinShotokuHanteiJigyo1Writer = new BatchEntityCreatedTempTableWriter(TABLE_世帯員所得判定明細事業高額一時1, TempSetaiinShotokuHanteiEntity.class);
-        kogakuShinseishaJokenWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額申請者条件高額一時, TempKogakuShinseishaJokenEntity.class);
-        kokuhorenIfWriter = new BatchEntityCreatedTempTableWriter(TABLE_国保連IF高額一時, TempKokuhorenIfEntity.class);
-        shinseishaJokenJigyoWriter = new BatchEntityCreatedTempTableWriter(TABLE_申請者条件事業高額一時, TempKogakuShinseishaJokenEntity.class);
-        kokuhorenIfJigyoWriter = new BatchEntityCreatedTempTableWriter(TABLE_国保連IF事業高額一時, TempKokuhorenIfEntity.class);
-        kogakuKyufuTaishoshaMeisaiZenUpdateWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費給付対象者明細全件更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
-        kogakuKyufuTaishoshaMeisaiUpdateWriter = new BatchEntityCreatedTempTableWriter(TABLE_高額介護サービス費給付対象者明細更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
-        jigyokogakuKyufuTaishoshaMeisaiUpdateWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費給付対象者明細更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
-        jigyokogakuKyufuTaishoshaMeisaiZenUpdateWriter = new BatchEntityCreatedTempTableWriter(TABLE_事業高額介護サービス費給付対象者明細全件更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
+        kogakuShikyuShinseiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給申請全件一時, DbT3056KogakuShikyuShinseiEntity.class);
+        kogakuShikyuHanteiKekkaZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給判定結果全件一時, DbT3057KogakuShikyuHanteiKekkaEntity.class);
+        kogakuShikyuShinsaKetteiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給審査決定全件一時, DbT3058KogakuShikyuShinsaKetteiEntity.class);
+        kogakuKyufuTaishoshaGokeiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者合計全件一時, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
+        kogakuKyufuTaishoshaMeisaiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者明細全件一時, DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
+        jigyokogakuShikyuShinseiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費支給申請全件一時, DbT3110JigyoKogakuShikyuShinseiEntity.class);
+        jigyokogakuShikyuHanteiKekkaZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費支給判定結果全件一時, DbT3111JigyoKogakuShikyuHanteiKekkaEntity.class);
+        jigyokogakuShikyuShinsaKetteiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費支給審査決定全件一時, DbT3112KogakuShikyuShinsaKetteiEntity.class);
+        jigyokogakuKyufuTaishoshaGokeiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費給付対象者合計全件一時, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity.class);
+        jigyokogakuKyufuTaishoshaMeisaiZenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費給付対象者明細全件一時, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity.class);
+        kyufujissekiKihon1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報高額一時1, DbT3017KyufujissekiKihonEntity.class);
+        kyufujissekiKihon2Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報高額一時2, DbT3017KyufujissekiKihonEntity.class);
+        kyufujissekiKihonJigyo1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報事業高額一時1, DbT3017KyufujissekiKihonEntity.class);
+        kyufujissekiKihonJigyo2Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報事業高額一時2, DbT3017KyufujissekiKihonEntity.class);
+        hihokenshaDaicho1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_被保険者台帳情報一時1, DbT1001HihokenshaDaichoEntity.class);
+        hihokenshaDaicho2Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_被保険者台帳情報一時2, DbT1001HihokenshaDaichoEntity.class);
+        gappeiNaiJutokushaShinKyuNoHenkanWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_合併内住特者新旧番号変換一時, DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity.class);
+        shiharaiHohoHenkoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_支払方法変更管理一時, DbT4021ShiharaiHohoHenkoEntity.class);
+        yokaisoGaitoshaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_境界層管理一時, DbT1006KyokaisoGaitoshaEntity.class);
+        kyufujissekiShukeiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績集計一時, DbT3033KyufujissekiShukeiEntity.class);
+        kyufujissekiShakaiFukushiHojinKeigengakuWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績社会福祉法人軽減額一時, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity.class);
+        kijunShunyugakuTekiyoKanriWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_基準収入額適用管理一時, DbT3116KijunShunyugakuTekiyoKanriEntity.class);
+        kogakuShikyuShinseiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給申請一時, DbT3056KogakuShikyuShinseiEntity.class);
+        kogakuShikyuHanteiKekkaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給判定結果一時, DbT3057KogakuShikyuHanteiKekkaEntity.class);
+        kogakuShikyuShinsaKetteiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給審査決定一時, DbT3058KogakuShikyuShinsaKetteiEntity.class);
+        kogakuKyufuTaishoshaGokeiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者合計一時, DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
+        kogakuKyufuTaishoshaMeisaiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者明細一時, DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
+        jigyokogakuShikyuShinseiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費支給申請一時, DbT3110JigyoKogakuShikyuShinseiEntity.class);
+        jigyokogakuShikyuHanteiKekkaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費支給判定結果一時, DbT3111JigyoKogakuShikyuHanteiKekkaEntity.class);
+        jigyoTempkogakuShikyuShinsaKetteiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費支給審査決定一時, DbT3112KogakuShikyuShinsaKetteiEntity.class);
+        jigyokogakuKyufuTaishoshaGokeiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費給付対象者合計一時, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity.class);
+        jigyokogakuKyufuTaishoshaMeisaiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費給付対象者明細一時, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity.class);
+        kyufujissekiKihon3Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報高額一時３, DbT3017KyufujissekiKihonEntity.class);
+        kyufujissekiKihonJigyo3Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報事業高額一時3, DbT3017KyufujissekiKihonEntity.class);
+        setaiinHaakuNyuryokuWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員把握入力高額一時, TempSetaiinHaakuNyuryokuEntity.class);
+        setaiinHaakuNyuryokuJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員把握入力事業高額一時, TempSetaiinHaakuNyuryokuEntity.class);
+        kyufujissekiKihon4Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報高額一時4, DbT3017KyufujissekiKihonEntity.class);
+        kyufujissekiKihonJigyo4Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績基本情報事業高額一時4, DbT3017KyufujissekiKihonEntity.class);
+        hihokenshaDaicho3Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_被保険者台帳情報一時3, DbT1001HihokenshaDaichoEntity.class);
+        setaiinShotokuHanteiWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員所得判定明細高額一時, TempSetaiinShotokuHanteiEntity.class);
+        setaiinShotokuHanteiJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員所得判定明細事業高額一時, TempSetaiinShotokuHanteiEntity.class);
+        kyufujissekiTyukannWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績中間高額一時, TempKyufujissekiTyukannEntity.class);
+        kyufujissekiTyukannJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付実績中間事業高額一時, TempKyufujissekiTyukannEntity.class);
+        kogakuShikyuShinsei1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給申請一時1, DbT3056KogakuShikyuShinseiEntity.class);
+        kogakuShikyuHanteiKekka1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給判定結果一時1, DbT3057KogakuShikyuHanteiKekkaEntity.class);
+        kogakuShikyuShinsaKettei1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費支給審査決定一時1, DbT3058KogakuShikyuShinsaKetteiEntity.class);
+        kogakuHanteiEraaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額判定エラー一時, TempKogakuHanteiEraaEntity.class);
+        jigyokogakuHanteiEraaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額判定エラー一時, TempKogakuHanteiEraaEntity.class);
+        kyufuHihokenAtenaWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付被保宛名情報高額一時, TempKyufuHihokenAtenaEntity.class);
+        kyufuHihokenAtenaJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_給付被保宛名情報事業高額一時, TempKyufuHihokenAtenaEntity.class);
+        shorikekkaKakuninRisutoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_処理結果確認リスト高額一時, DbT3056KogakuShikyuShinseiEntity.class);
+        shorikekkaKakuninRisutoJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_処理結果確認リスト事業高額一時, DbT3056KogakuShikyuShinseiEntity.class);
+        setaiinShotokuHantei1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員所得判定明細高額一時1, TempSetaiinShotokuHanteiEntity.class);
+        setaiinShotokuHanteiJigyo1Writer = new BatchEntityCreatedTempTableWriter(
+                TABLE_世帯員所得判定明細事業高額一時1, TempSetaiinShotokuHanteiEntity.class);
+        kogakuShinseishaJokenWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額申請者条件高額一時, TempKogakuShinseishaJokenEntity.class);
+        kokuhorenIfWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_国保連IF高額一時, TempKokuhorenIfEntity.class);
+        shinseishaJokenJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_申請者条件事業高額一時, TempKogakuShinseishaJokenEntity.class);
+        kokuhorenIfJigyoWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_国保連IF事業高額一時, TempKokuhorenIfEntity.class);
+        kogakuKyufuTaishoshaMeisaiZenUpdateWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者明細全件更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
+        kogakuKyufuTaishoshaMeisaiUpdateWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_高額介護サービス費給付対象者明細更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
+        jigyokogakuKyufuTaishoshaMeisaiUpdateWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費給付対象者明細更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
+        jigyokogakuKyufuTaishoshaMeisaiZenUpdateWriter = new BatchEntityCreatedTempTableWriter(
+                TABLE_事業高額介護サービス費給付対象者明細全件更新一時, TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity.class);
     }
 
 }
