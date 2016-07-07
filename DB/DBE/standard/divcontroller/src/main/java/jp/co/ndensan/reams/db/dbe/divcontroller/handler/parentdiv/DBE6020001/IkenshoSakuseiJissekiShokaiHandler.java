@@ -131,12 +131,14 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         IkenshoJissekiIchiranBatchParameter param = new IkenshoJissekiIchiranBatchParameter();
         List<IkenshoJissekiIchiranKey> keyJoho = new ArrayList<>();
         for (dgIkenshoSakuseiJisseki_Row row : div.getDgIkenshoSakuseiJisseki().getDataSource()) {
-            IkenshoJissekiIchiranKey key = new IkenshoJissekiIchiranKey();
-            key.setShujiiIryoKikanCode(row.getCode());
-            key.setShujiiCode(row.getShujiiCode());
-            key.setShinseishoKanriNo(row.getShinseishoKanriNo());
-            key.setIkenshoIraiRirekiNo(Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
-            keyJoho.add(key);
+            if (row.getSelectable()) {
+                IkenshoJissekiIchiranKey key = new IkenshoJissekiIchiranKey();
+                key.setShujiiIryoKikanCode(row.getCode());
+                key.setShujiiCode(row.getShujiiCode());
+                key.setShinseishoKanriNo(row.getShinseishoKanriNo());
+                key.setIkenshoIraiRirekiNo(Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
+                keyJoho.add(key);
+            }
         }
         param.setKeyJoho(keyJoho);
         RString 意見書記入日FROM = RString.EMPTY;
