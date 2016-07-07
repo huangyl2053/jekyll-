@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0140001;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.BatchFuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.fuchokarisanteifuka.FuchoKariSanteiFukaEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
@@ -208,18 +207,6 @@ public class FuchoKarisanteiFukaMenuPanelHandler {
         }
         IOutputChohyoIchiranDiv 算定帳票作成共有子Div = div.getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran();
         算定帳票作成共有子Div.load(SubGyomuCode.DBB介護賦課, 帳票グループコード);
-        Map<RString, RString> rowMap = div.getMainPanelBatchParameter().getFuchoKarisanteiChohyoHakko2().getCcdChohyoIchiran()
-                .getSelected帳票IdAnd出力順Id();
-        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
-        for (Map.Entry<RString, RString> entry : set) {
-            if (普徴仮算定賦課メニュー.equals(メニューID)
-                    && 普通徴収仮算定結果一覧表_帳票分類ID.equals(entry.getKey())) {
-                算定帳票作成共有子Div.setグリッドのチェックボックスDisplayNone(true);
-            } else if (普徴仮算定通知書一括発行メニュー.equals(メニューID)
-                    && 保険料納入通知書_仮算定_帳票分類ID.equals(entry.getKey())) {
-                算定帳票作成共有子Div.setグリッドのチェックボックスDisplayNone(true);
-            }
-        }
     }
 
     /**
