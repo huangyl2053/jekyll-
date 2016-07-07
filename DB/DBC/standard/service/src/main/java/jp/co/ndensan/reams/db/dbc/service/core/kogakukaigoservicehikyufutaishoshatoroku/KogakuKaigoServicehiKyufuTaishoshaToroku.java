@@ -47,6 +47,15 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     }
 
     /**
+     * 初期化メソッドです。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KogakuKaigoServicehiKyufuTaishoshaToroku}のインスタンス
+     */
+    public static KogakuKaigoServicehiKyufuTaishoshaToroku createInstance() {
+        return InstanceProvider.create(KogakuKaigoServicehiKyufuTaishoshaToroku.class);
+    }
+
+    /**
      * 登録先台帳検索結果を返します。
      *
      * @param 交換情報識別番号 交換情報識別番号
@@ -55,7 +64,7 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     public KokuhorenInterfaceKanri getSinsaYM(RString 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(PARAMETER.toString()));
         List<DbT3104KokuhorenInterfaceKanriEntity> list = dbT3104KokuhorenKanriDac.selectSinsaYM(交換情報識別番号);
-        if (list.isEmpty()) {
+        if (list != null && list.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.処理状態処理前未設定.getMessage());
         }
         if (2 <= list.size()) {
