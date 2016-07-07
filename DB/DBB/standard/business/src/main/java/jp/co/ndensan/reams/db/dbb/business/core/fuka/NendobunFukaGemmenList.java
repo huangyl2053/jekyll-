@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NendobunFukaGemmenList {
+public class NendobunFukaGemmenList implements Serializable {
 
     private FlexibleYear 賦課年度;
     private TsuchishoNo 通知書番号;

@@ -61,7 +61,8 @@ public class FukaJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link FukaJohoManager}のインスタンス
      */
     public static FukaJohoManager createInstance() {
         return InstanceProvider.create(FukaJohoManager.class);
@@ -84,6 +85,28 @@ public class FukaJohoManager {
         }
         relateEntity.initializeMd5ToEntities();
         return new FukaJoho(relateEntity);
+    }
+
+    /**
+     * 主キーに合致する最新賦課の情報を返します。
+     *
+     * @param 賦課の情報検索条件 FukaJohoRelateMapperParameter
+     * @return FukaJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public List<FukaJoho> get最新の賦課情報(FukaJohoRelateMapperParameter 賦課の情報検索条件) {
+        requireNonNull(賦課の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課の情報検索条件"));
+        IFukaJohoRelateMapper mapper = mapperProvider.create(IFukaJohoRelateMapper.class);
+        List<FukaJohoRelateEntity> relateEntityList = mapper.select最新賦課の情報ByKey(賦課の情報検索条件);
+        if (relateEntityList == null || relateEntityList.isEmpty()) {
+            return null;
+        }
+        List<FukaJoho> 最新の賦課情報List = new ArrayList<>();
+        for (FukaJohoRelateEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            最新の賦課情報List.add(new FukaJoho(relateEntity));
+        }
+        return 最新の賦課情報List;
     }
 
     /**
