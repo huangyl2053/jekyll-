@@ -146,7 +146,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         IkenshoJissekiIchiranBatchParameter param = new IkenshoJissekiIchiranBatchParameter();
         List<IkenshoJissekiIchiranKey> keyJoho = new ArrayList<>();
         for (dgIkenshoSakuseiJisseki_Row row : div.getDgIkenshoSakuseiJisseki().getDataSource()) {
-            if (row.getSelectable()) {
+            if (row.getSelected()) {
                 IkenshoJissekiIchiranKey key = new IkenshoJissekiIchiranKey();
                 key.setShujiiIryoKikanCode(row.getCode());
                 key.setShujiiCode(row.getShujiiCode());
