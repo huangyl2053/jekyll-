@@ -475,10 +475,6 @@ public class YokaigoNinteiTaskListHandler {
 
     private void 調査依頼モードの日付設定(dgNinteiTaskList_Row row, CyoSaiRaiBusiness business) {
 
-        if (business.get認定調査期限年月日() != null) {
-            row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
-        }
-
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
