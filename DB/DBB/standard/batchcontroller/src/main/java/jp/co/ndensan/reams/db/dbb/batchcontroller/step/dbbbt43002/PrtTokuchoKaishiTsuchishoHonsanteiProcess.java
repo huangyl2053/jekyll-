@@ -117,7 +117,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
         int 総ページ数 = 0;
         for (HonsanteiTsuchishoTempResult tmpResult : result.get特徴開始通知書ResultList()) {
             HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-            本算定通知書情報.set発行日(processParameter.get特徴_発行日());
+            本算定通知書情報.set発行日(result.get発行日());
             本算定通知書情報.set帳票分類ID(特別徴収開始通知書本算定_帳票分類ID);
             本算定通知書情報.set帳票ID(出力帳票一覧.get帳票ID());
             本算定通知書情報.set処理区分(ShoriKubun.バッチ);
