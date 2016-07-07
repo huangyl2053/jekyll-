@@ -71,7 +71,7 @@ public class IkenshoSakuseiJissekiShokai {
             意見書記入日FROM = div.getTxtIkenshoKinyubi().getFromValue().toDateString();
         }
         if (div.getTxtIkenshoKinyubi().getToValue() != null) {
-            意見書記入日FROM = div.getTxtIkenshoKinyubi().getToValue().toDateString();
+            意見書記入日TO = div.getTxtIkenshoKinyubi().getToValue().toDateString();
         }
         IkenshoJissekiIchiranMybitisParamter paramter = IkenshoJissekiIchiranMybitisParamter.createGamenParamter(false,
                 意見書記入日FROM,

@@ -16,8 +16,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -56,6 +62,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
     public void onClick_BtnKensaku(List<IkenshoJissekiIchiran> ikenshoJissekiIchiranList) {
         List<dgIkenshoSakuseiJisseki_Row> rowList = new ArrayList<>();
         for (IkenshoJissekiIchiran data : ikenshoJissekiIchiranList) {
+            AccessLogger.log(AccessLogType.照会, toPersonalData(data.get申請書管理番号()));
             RString 在宅_新 = RString.EMPTY;
             RString 在宅_継 = RString.EMPTY;
             RString 施設_新 = RString.EMPTY;
@@ -97,6 +104,11 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             rowList.add(row);
         }
         div.getDgIkenshoSakuseiJisseki().setDataSource(rowList);
+    }
+
+    private PersonalData toPersonalData(RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**
@@ -147,7 +159,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             意見書記入日FROM = div.getTxtIkenshoKinyubi().getFromValue().toDateString();
         }
         if (div.getTxtIkenshoKinyubi().getToValue() != null) {
-            意見書記入日FROM = div.getTxtIkenshoKinyubi().getToValue().toDateString();
+            意見書記入日TO = div.getTxtIkenshoKinyubi().getToValue().toDateString();
         }
         param.setIkenshoKinyubiFrom(意見書記入日FROM);
         param.setIkenshoKinyubiTo(意見書記入日TO);
