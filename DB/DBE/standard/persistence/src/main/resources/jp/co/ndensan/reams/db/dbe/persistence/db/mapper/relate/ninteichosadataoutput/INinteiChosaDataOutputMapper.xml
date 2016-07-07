@@ -337,7 +337,7 @@
               FROM
                 rgdb."DbT5201NinteichosaIraiJoho" AS Dbt5201
               WHERE
-                "shinseishoKanriNo" = Dbt5201."shinseishoKanriNo"
+                "shinseishoKanriNo" = Dbt5201."shinseishoKanriNo")
      AND  "shinseishoKanriNo" IN #{shinseishoKanriNo}
     </if>
     </select>
