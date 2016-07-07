@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishos
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
@@ -51,16 +52,17 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
      * @param 交換情報識別番号 交換情報識別番号
      * @return 検索結果
      */
-    public DbT3104KokuhorenInterfaceKanriEntity getSinsaYM(RString 交換情報識別番号) {
+    public KokuhorenInterfaceKanri getSinsaYM(RString 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(PARAMETER.toString()));
         List<DbT3104KokuhorenInterfaceKanriEntity> list = dbT3104KokuhorenKanriDac.selectSinsaYM(交換情報識別番号);
+        KokuhorenInterfaceKanri result = new KokuhorenInterfaceKanri(list.get(0));
         if (list.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.処理状態処理前未設定.getMessage());
         }
         if (2 <= list.size()) {
             throw new ApplicationException(DbcErrorMessages.高額判定_処理状態処理前数不正.getMessage());
         }
-        return list.get(0);
+        return result;
     }
 
     /**
@@ -75,13 +77,12 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     public KogakuKaigoKyufuhiTaishoshaBatchParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
             RString 審査年月From, RString 審査年月To, boolean 出力フラグ, Long 出力順ID) {
         KogakuKaigoKyufuhiTaishoshaBatchParameter param = new KogakuKaigoKyufuhiTaishoshaBatchParameter();
-
-        if (審査年月From != null || !審査年月From.isEmpty()) {
+        if (RString.isNullOrEmpty(審査年月From)) {
             param.setShinsaYMFrom(new FlexibleYearMonth(審査年月From));
         } else {
             param.setShinsaYMFrom(new FlexibleYearMonth(RString.EMPTY));
         }
-        if (審査年月To != null || !審査年月To.isEmpty()) {
+        if (RString.isNullOrEmpty(審査年月To)) {
             param.setShinsaYMTo(new FlexibleYearMonth(審査年月To));
         } else {
             param.setShinsaYMTo(new FlexibleYearMonth(RString.EMPTY));
