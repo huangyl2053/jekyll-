@@ -57,8 +57,8 @@ public class KojinIraiNaiyouKoshinFinder {
     /**
      * 検索条件に従い、前回訪問調査依頼情報を検索します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
-     * @return KojinIraiNaiyouBusiness 前回訪問調査依頼情報
+     * @param 申請書管理番号 申請書管理番号
+     * @return 前回訪問調査依頼情報
      */
     @Transaction
     public KojinIraiNaiyouBusiness getZennkaiChousa(ShinseishoKanriNo 申請書管理番号) {
@@ -76,8 +76,8 @@ public class KojinIraiNaiyouKoshinFinder {
     /**
      * 検索条件に従い、今回訪問調査依頼情報を検索します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
-     * @return KojinIraiNaiyouBusiness 今回訪問調査依頼情報
+     * @param 申請書管理番号 申請書管理番号
+     * @return 今回訪問調査依頼情報
      */
     @Transaction
     public KojinIraiNaiyouBusiness getKonnkaiChousa(ShinseishoKanriNo 申請書管理番号) {
@@ -92,8 +92,8 @@ public class KojinIraiNaiyouKoshinFinder {
     /**
      * 検索条件に従い、前回主治医依頼情報を検索します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
-     * @return KojinIraiNaiyouBusiness 前回主治医依頼情報
+     * @param 申請書管理番号 申請書管理番号
+     * @return 前回主治医依頼情報
      */
     @Transaction
     public KojinIraiNaiyouBusiness getZennkaiSyuji(ShinseishoKanriNo 申請書管理番号) {
@@ -111,8 +111,8 @@ public class KojinIraiNaiyouKoshinFinder {
     /**
      * 検索条件に従い、今回主治医依頼情報を検索します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
-     * @return KojinIraiNaiyouBusiness 今回主治医依頼情報
+     * @param 申請書管理番号 申請書管理番号
+     * @return 今回主治医依頼情報
      */
     @Transaction
     public KojinIraiNaiyouBusiness getKonnkaiSyuji(ShinseishoKanriNo 申請書管理番号) {

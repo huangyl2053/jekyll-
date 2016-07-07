@@ -45,11 +45,11 @@ public class KojinIraiNaiyouKoshinHandler {
     /**
      * 個人依頼内容更新の初期化設定します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
-     * @param 今回調査情報 KojinIraiNaiyouBusiness
-     * @param 今回主治医情報 KojinIraiNaiyouBusiness
-     * @param 前回調査情報 KojinIraiNaiyouBusiness
-     * @param 前回主治医情報 KojinIraiNaiyouBusiness
+     * @param 申請書管理番号 申請書管理番号
+     * @param 今回調査情報 今回調査情報
+     * @param 今回主治医情報 今回主治医情報
+     * @param 前回調査情報 前回調査情報
+     * @param 前回主治医情報 前回主治医情報
      */
     public void onLoad(ShinseishoKanriNo 申請書管理番号, KojinIraiNaiyouBusiness 今回調査情報,
             KojinIraiNaiyouBusiness 今回主治医情報, KojinIraiNaiyouBusiness 前回調査情報,
@@ -133,8 +133,8 @@ public class KojinIraiNaiyouKoshinHandler {
         }
         if (前回調査情報 != null && (NinteiChousaIraiKubunCode.再依頼.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())
                 || NinteiChousaIraiKubunCode.再調査.getコード().equals(前回調査情報.get認定調査依頼区分コード().value()))) {
-            div.getTxtChosaBashoKubunSaiZen().setValue(ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード() == null
-                    ? RString.EMPTY : 前回調査情報.get認定調査実施場所コード().value()).get名称());
+            div.getTxtChosaBashoKubunSaiZen().setValue(前回調査情報.get認定調査実施場所コード() == null
+                    ? RString.EMPTY : ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード().value()).get名称());
             if (前回調査情報.get認定調査実施年月日() != null) {
                 div.getTxtChosaJisshibiSaiZen().setValue(new RDate(前回調査情報.get認定調査実施年月日().toString()));
             }
@@ -156,8 +156,8 @@ public class KojinIraiNaiyouKoshinHandler {
 
     private void set今回調査依頼情報(KojinIraiNaiyouBusiness 今回調査情報) {
         if (今回調査情報 != null && NinteiChousaIraiKubunCode.初回.getコード().equals(今回調査情報.get認定調査依頼区分コード().value())) {
-            div.getTxtChosaBashoKubun().setValue(ChosaJisshiBashoCode.toValue(今回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
-                    : 今回調査情報.get認定調査実施場所コード().value()).get名称());
+            div.getTxtChosaBashoKubun().setValue(今回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
+                    : ChosaJisshiBashoCode.toValue(今回調査情報.get認定調査実施場所コード().value()).get名称());
             if (今回調査情報.get認定調査実施年月日() != null) {
                 div.getTxtChosaJisshibi().setValue(new RDate(今回調査情報.get認定調査実施年月日().toString()));
             }
