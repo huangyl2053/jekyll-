@@ -1396,7 +1396,7 @@
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
     </select>
-    <resultMap id="resultMap_IChiJiHanTeiRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelate" autoMapping="true">
+    <resultMap id="resultMap_IChiJiHanTeiRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
    </resultMap>
      <select resultOrdered="true" id="get前一次判定" resultMap="resultMap_IChiJiHanTeiRelate" 
