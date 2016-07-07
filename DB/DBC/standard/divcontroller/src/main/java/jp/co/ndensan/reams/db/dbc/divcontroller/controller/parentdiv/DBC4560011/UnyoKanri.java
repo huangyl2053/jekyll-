@@ -66,7 +66,7 @@ public class UnyoKanri {
                 && CODE_再処理前.equals(div.getDdlNenjiFutanWariaiShoriJotai().getSelectedKey())) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().
-                        replace(handler.getパターン105(div.getTxtNenjiFutanWariaiShoriZumiNendo().getValue().getYear()).toString())).respond();
+                        replace(handler.getパターン102(div.getTxtNenjiFutanWariaiShoriZumiNendo().getValue().getYear()).toString())).respond();
             }
             if (ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
