@@ -64,8 +64,6 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 年度 = new RString("年度");
     private static final RString 定値_L = new RString("(");
     private static final RString 定値_R = new RString(")");
-//    private static final RString 特別徴収仮算定結果一覧表_帳票分類ID = new RString("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
-//    private static final RString 特別徴収開始通知書_仮算定_帳票分類ID = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
     private static final int NUM11 = 11;
@@ -104,27 +102,27 @@ public final class TokutyoKariSanteiFukaHandler {
         }
         HokenryoDankaiSettings 保険料段階取得Mgr = HokenryoDankaiSettings.createInstance();
         HokenryoDankaiList 保険料段階List = 保険料段階取得Mgr.get保険料段階ListIn(調定年度);
-        List<KeyValueDataSource> list = new ArrayList();
+        List<KeyValueDataSource> radTokuKaishiTsuchiTaishoList = new ArrayList();
         for (TokuchoKaishiTsuhishoKariOutputJoken tokuchokai : TokuchoKaishiTsuhishoKariOutputJoken.values()) {
             KeyValueDataSource keyvaluedatasource = new KeyValueDataSource();
             keyvaluedatasource.setKey(tokuchokai.get名称());
             keyvaluedatasource.setValue(tokuchokai.get名称());
-            list.add(keyvaluedatasource);
+            radTokuKaishiTsuchiTaishoList.add(keyvaluedatasource);
         }
-        div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDataSource(list);
+        div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setDataSource(radTokuKaishiTsuchiTaishoList);
         div.getTokutyoKariSanteiFukaChohyoHakko().getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().setSelectedIndex(NUM0);
-        List<ShoriDateKanri> 処理状況list = tokuchokarisanteifuka.getShoriDateKanriList(遷移元区分, 調定年度);
-        List<dgTokutyoKariSanteiShoriKakunin_Row> rowlist = new ArrayList();
+        List<ShoriDateKanri> 処理状況List = tokuchokarisanteifuka.getShoriDateKanriList(遷移元区分, 調定年度);
+        List<dgTokutyoKariSanteiShoriKakunin_Row> rowList = new ArrayList();
         if (遷移元区分_0.equals(遷移元区分)) {
             List<dgKanrijoho1_Row> 保険料RowLists = new ArrayList<>();
             for (HokenryoDankai hokenryodankai : 保険料段階List.asList()) {
-                dgKanrijoho1_Row row = new dgKanrijoho1_Row();
-                row.setTxtHokenryoDankai(hokenryodankai.get表記());
-                row.setTxtHokenryoritsu(new RString(hokenryodankai.get保険料率().toString()));
-                保険料RowLists.add(row);
+                dgKanrijoho1_Row newRow = new dgKanrijoho1_Row();
+                newRow.setTxtHokenryoDankai(hokenryodankai.get表記());
+                newRow.setTxtHokenryoritsu(new RString(hokenryodankai.get保険料率().toString()));
+                保険料RowLists.add(newRow);
             }
             div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDataSource(保険料RowLists);
-            List<dgKanrijoho2_Row> list2 = new ArrayList<>();
+            List<dgKanrijoho2_Row> dgKanrijoho2List = new ArrayList<>();
             dgKanrijoho2_Row 年額基準年度row = new dgKanrijoho2_Row();
             年額基準年度row.setTxtKoumoku(年額基準年度);
             if (TokuchoNengakuKijunNendo6Gatsu.当年度.getコード().equals(
@@ -142,53 +140,41 @@ public final class TokutyoKariSanteiFukaHandler {
             特徴開始計算方法6月row.setTxtKoumoku(特徴開始計算方法6月);
             特徴開始計算方法6月row.setTxtNaiyo(TokuchoIraikingakuKeisanHoho6Gatsu.toValue(DbBusinessConfig.get(
                     ConfigNameDBB.特別徴収_依頼金額計算方法_6月開始, nowDate, SubGyomuCode.DBB介護賦課)).get略称());
-            list2.add(年額基準年度row);
-            list2.add(特徴開始計算方法6月row);
-            div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(list2);
+            dgKanrijoho2List.add(年額基準年度row);
+            dgKanrijoho2List.add(特徴開始計算方法6月row);
+            div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho2().setDataSource(dgKanrijoho2List);
             div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 特徴仮算定賦課);
-//            List<dgOutputChohyoIchiran_Row> 帳票作成List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
-//            for (dgOutputChohyoIchiran_Row row : 帳票作成List) {
-//                if (特別徴収仮算定結果一覧表_帳票分類ID.compareTo(row.getChohyoID()) == NUM0) {
-            //TODO 特別徴収仮算定結果一覧表を選択し、チェックが外せない。
-//                }
-//            }
             RString shoriname = ShoriName.年度切替.get名称();
-            dgTokutyoKariSanteiShoriKakunin_Row 処理状況row = getGridDate(処理状況list, shoriname);
+            dgTokutyoKariSanteiShoriKakunin_Row 処理状況row = getGridDate(処理状況List, shoriname);
             if (状況未.equals(処理状況row.getTxtJokyo())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, true);
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する, false);
             }
-            rowlist.add(処理状況row);
-            div.getShoriJokyo().getTokuchoKarisanteiShoriKakunin().getDgTokutyoKariSanteiShoriKakunin().setDataSource(rowlist);
+            rowList.add(処理状況row);
+            div.getShoriJokyo().getTokuchoKarisanteiShoriKakunin().getDgTokutyoKariSanteiShoriKakunin().setDataSource(rowList);
         } else if (遷移元区分_1.equals(遷移元区分)) {
             div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 特徴仮算定通知書一括発行);
-//            List<dgOutputChohyoIchiran_Row> 帳票作成List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
-//            for (dgOutputChohyoIchiran_Row row : 帳票作成List) {
-//                if (特別徴収開始通知書_仮算定_帳票分類ID.compareTo(row.getChohyoID()) == NUM0) {
-            //TODO  特別徴収開始通知書（仮算定）を選択し、チェックが外せない。
-//                }
-//            }
             RString shoriname = ShoriName.特徴仮算定賦課.get名称();
-            dgTokutyoKariSanteiShoriKakunin_Row row = getGridDate(処理状況list, shoriname);
-            rowlist.add(row);
+            dgTokutyoKariSanteiShoriKakunin_Row row = getGridDate(処理状況List, shoriname);
+            rowList.add(row);
             shoriname = ShoriName.特徴平準化_6月分_確定.get名称();
-            dgTokutyoKariSanteiShoriKakunin_Row rowt = getGridDate(処理状況list, shoriname);
-            if (状況済.equals(row.getTxtJokyo()) && 状況済.equals(rowt.getTxtJokyo())) {
+            dgTokutyoKariSanteiShoriKakunin_Row newRow = getGridDate(処理状況List, shoriname);
+            if (状況済.equals(row.getTxtJokyo()) && 状況済.equals(newRow.getTxtJokyo())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する1, false);
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する1, true);
             }
-            rowlist.add(rowt);
-            div.getShoriJokyo().getTokuchoKarisanteiShoriKakunin().getDgTokutyoKariSanteiShoriKakunin().setDataSource(rowlist);
+            rowList.add(newRow);
+            div.getShoriJokyo().getTokuchoKarisanteiShoriKakunin().getDgTokutyoKariSanteiShoriKakunin().setDataSource(rowList);
         }
     }
 
-    private dgTokutyoKariSanteiShoriKakunin_Row getGridDate(List<ShoriDateKanri> 処理状況list, RString shoriname) {
-        if (処理状況list == null || 処理状況list.isEmpty()) {
+    private dgTokutyoKariSanteiShoriKakunin_Row getGridDate(List<ShoriDateKanri> 処理状況List, RString shoriname) {
+        if (処理状況List == null || 処理状況List.isEmpty()) {
             return データがない制御(shoriname);
         }
-        for (ShoriDateKanri shoridatekanri : 処理状況list) {
+        for (ShoriDateKanri shoridatekanri : 処理状況List) {
             if (shoriname.equals(shoridatekanri.get処理名())) {
                 dgTokutyoKariSanteiShoriKakunin_Row newRow = new dgTokutyoKariSanteiShoriKakunin_Row();
                 newRow.setTxtShoriMei(shoriname);
