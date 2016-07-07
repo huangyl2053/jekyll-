@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -41,11 +42,22 @@ public class TyukanTempAfterInsertProcess extends BatchProcessBase<DbT2002FukaEn
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
     private KeisangoJohoSakuseiProcessParamter processParamter;
     private KeisangoJohoSakuseiMybitisParamter mybatisParamter;
+    /**
+     * データ有無の判定です。
+     */
+    public static final RString データ有無;
+
+    static {
+        データ有無 = new RString("outData");
+    }
+    private OutputParameter<Boolean> outData;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 計算中間Temp;
 
     @Override
     protected void initialize() {
+        outData = new OutputParameter<>();
+        outData.setValue(false);
         setMybatisParamter();
     }
 
@@ -73,6 +85,7 @@ public class TyukanTempAfterInsertProcess extends BatchProcessBase<DbT2002FukaEn
     @Override
     protected void process(DbT2002FukaEntity entity) {
         計算中間Temp.insert(new KeisangoJohoResult().get計算中間Entity(entity));
+        outData.setValue(true);
     }
 
     private void setMybatisParamter() {

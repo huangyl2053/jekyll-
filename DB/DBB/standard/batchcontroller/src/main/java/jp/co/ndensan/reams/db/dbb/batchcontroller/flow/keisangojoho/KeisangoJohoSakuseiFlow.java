@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoS
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 計算後情報作成_バッチフロークラスです。
@@ -34,14 +35,16 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
     @Override
     protected void defineFlow() {
         executeStep(TYUKANTEMPINSERTPROCESS);
-        executeStep(KIBETSUAFTERUPDATE);
-        executeStep(SHUYUJOHOAFTERUPDATE);
-        executeStep(KEISANGOJOHOAFTERINSERT);
+        if (getResult(Boolean.class, new RString(TYUKANTEMPINSERTPROCESS), TyukanTempAfterInsertProcess.データ有無)) {
+            executeStep(KIBETSUAFTERUPDATE);
+            executeStep(SHUYUJOHOAFTERUPDATE);
+            executeStep(KEISANGOJOHOAFTERINSERT);
 
-        executeStep(TYUKANTEMPBEFOREINSERTPROCESS);
-        executeStep(KIBETSUBEFOREUPDATE);
-        executeStep(SHUYUJOHOBEFOREUPDATE);
-        executeStep(KEISANGOJOHOBEFOREINSERT);
+            executeStep(TYUKANTEMPBEFOREINSERTPROCESS);
+            executeStep(KIBETSUBEFOREUPDATE);
+            executeStep(SHUYUJOHOBEFOREUPDATE);
+            executeStep(KEISANGOJOHOBEFOREINSERT);
+        }
 
     }
 
