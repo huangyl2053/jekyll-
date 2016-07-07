@@ -479,7 +479,6 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.setバーコード情報(空白);
             納入通知書期情報.setバーコード情報上段(空白);
             納入通知書期情報.setバーコード情報下段(空白);
-            納入通知書期情報.setコンビニ支払期限(new RDate(空白.toString()));
         }
         set納付額欄(is現金納付, is口座振替, 納入通知書期情報, 納付額, 納入通知書制御情報);
         納入通知書期情報.set領収証書領収印欄(RyoshuinranHyojiKubun._口座振替_を印字する.equals(納入通知書制御情報.get領収証書領収印欄()) ? 口座振替 : 空白);
