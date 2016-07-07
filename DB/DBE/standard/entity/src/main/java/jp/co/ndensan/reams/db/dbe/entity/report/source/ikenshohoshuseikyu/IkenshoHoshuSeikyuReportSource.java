@@ -19,12 +19,12 @@ public class IkenshoHoshuSeikyuReportSource implements IReportSource {
 
     @ReportItem(name = "hakkoYMD", length = 11, order = 1)
     public RString hakkoYMD;
-    @ReportItem(name = "IryokikanYubimNo", length = 8, order = 2)
-    public RString IryokikanYubimNo;
-    @ReportItem(name = "IryokikanJusho", length = 30, order = 3)
-    public RString IryokikanJusho;
-    @ReportItem(name = "IryokikanName", length = 30, order = 4)
-    public RString IryokikanName;
+    @ReportItem(name = "iryokikanYubimNo", length = 8, order = 2)
+    public RString iryokikanYubimNo;
+    @ReportItem(name = "iryokikanJusho", length = 30, order = 3)
+    public RString iryokikanJusho;
+    @ReportItem(name = "iryokikanName", length = 30, order = 4)
+    public RString iryokikanName;
     @ReportItem(name = "daihyoshaName", length = 30, order = 5)
     public RString daihyoshaName;
     @ReportItem(name = "title", length = 30, order = 6)
