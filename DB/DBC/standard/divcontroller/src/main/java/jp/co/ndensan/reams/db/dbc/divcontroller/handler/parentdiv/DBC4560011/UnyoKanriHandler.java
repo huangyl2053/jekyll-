@@ -74,10 +74,11 @@ public class UnyoKanriHandler {
             if (!年次負担割合処理状態.isNullOrEmpty()) {
                 div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(年次負担割合処理状態);
             } else {
-                div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(CODE_未処理);
+                div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(CODE_処理済);
             }
         } else {
-            div.getTxtNenjiFutanWariaiShoriZumiNendo().clearValue();
+            div.getTxtNenjiFutanWariaiShoriZumiNendo().setPlaceHolder(RString.EMPTY);
+            div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(CODE_未処理);
         }
         if (!年次負担割合処理状態.isNullOrEmpty()) {
             div.setHdnNenjiFutanWariaiShoriJotai(年次負担割合処理状態);
