@@ -49,8 +49,8 @@ public final class ChkIchijiHanteiKekkaBusiness {
     private static final RString 識別コード02A = new RString("02A");
     private static final RString 識別コード09A = new RString("09A");
     private static final RString 識別コード99A = new RString("99A");
-    private static final RString 予防給付 = new RString("予防給付");
-    private static final RString 介護給付 = new RString("介護給付");
+    private static final RString 予防給付 = new RString("予防給付サービス");
+    private static final RString 介護給付 = new RString("介護給付サービス");
     private static final RString 回月 = new RString("回 /月");
     private static final RString 日月 = new RString("日 /月");
     private static final RString 住宅改修 = new RString("住宅改修                                           ：");
