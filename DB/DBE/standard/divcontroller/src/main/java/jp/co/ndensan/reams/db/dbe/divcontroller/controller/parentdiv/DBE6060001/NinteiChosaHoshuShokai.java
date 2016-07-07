@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -39,7 +40,10 @@ public class NinteiChosaHoshuShokai {
      */
     public ResponseData<NinteiChosaHoshuShokaiDiv> onLoad(NinteiChosaHoshuShokaiDiv div) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-        div.getTxtMaxKensu().setValue(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnModoru"), false);
         div.getChosaIraibi().setDisplayNone(false);
@@ -60,7 +64,7 @@ public class NinteiChosaHoshuShokai {
         FlexibleDate 依頼日終了 = new FlexibleDate(div.getTxtChosaIraibi().getToValue().toDateString());
         NinteiChosaHoshuShokaiMapperParameter chosaParamter = NinteiChosaHoshuShokaiMapperParameter.createSelectBy情報(
                 DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
-                依頼日開始, 依頼日終了, Integer.parseInt(div.getChosaIraibi().getTxtMaxKensu().getValue().toString()));
+                依頼日開始, 依頼日終了, Integer.parseInt(div.getChosaIraibi().getTxtMaxKensu().getValue().toString()), false, null);
         List<NinteichosahoshushokaiBusiness> 調査情報 = NinteiChosaHoshuShokaiFinder.createInstance().get認定調査報酬情報(chosaParamter).records();
         if (調査情報.isEmpty()) {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
