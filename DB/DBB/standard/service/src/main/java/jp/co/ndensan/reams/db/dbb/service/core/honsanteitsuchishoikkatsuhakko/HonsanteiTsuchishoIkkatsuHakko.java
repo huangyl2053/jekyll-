@@ -370,6 +370,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         PrtTokuchoKaishiTsuchishoHonsanteiResult result = new PrtTokuchoKaishiTsuchishoHonsanteiResult();
         result.set特徴開始通知書ResultList(tmpResultList);
         result.set調定年度(調定年度);
+        result.set発行日(発行日);
         result.set帳票作成日時(帳票作成日時);
         result.set出力順ID(出力順ID);
         result.set出力条件リスト(出力条件リスト);
