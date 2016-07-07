@@ -69,11 +69,11 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
      * @param 審査年月From RString
      * @param 審査年月To RString
      * @param 出力フラグ RString
-     * @param 出力順ID RString
+     * @param 出力順ID Long
      * @return KogakuKaigoKyufuhiTaishoshaBatchParameter
      */
     public KogakuKaigoKyufuhiTaishoshaBatchParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
-            RString 審査年月From, RString 審査年月To, boolean 出力フラグ, RString 出力順ID) {
+            RString 審査年月From, RString 審査年月To, boolean 出力フラグ, Long 出力順ID) {
         KogakuKaigoKyufuhiTaishoshaBatchParameter param = new KogakuKaigoKyufuhiTaishoshaBatchParameter();
 
         if (審査年月From != null || !審査年月From.isEmpty()) {

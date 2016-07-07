@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatchProcessParameter {
 
     private RString menuId;
-    private RString shuturyokuJunn;
+    private Long shuturyokuJunn;
     private FlexibleYearMonth ShinsaYMFrom;
     private FlexibleYearMonth ShinsaYMTo;
     private boolean shuturyokuFlg;
@@ -38,7 +38,7 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
             RString menuId,
-            RString shuturyokuJunn,
+            Long shuturyokuJunn,
             FlexibleYearMonth ShinsaYMFrom,
             FlexibleYearMonth ShinsaYMTo,
             boolean shuturyokuFlg) {

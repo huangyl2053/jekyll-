@@ -32,7 +32,7 @@ public class KogakuKaigoKyufuhiTaishoshaBatchParameter extends BatchParameterBas
     @BatchParameter(key = KEY_MENUID, name = "メニューID")
     private RString menuId;
     @BatchParameter(key = KEY_SHUTURYOKUJUNN, name = "出力順ID")
-    private RString shuturyokuJunn;
+    private long shuturyokuJunn;
     @BatchParameter(key = KEY_SHINSAYMFROM, name = "審査年月From")
     private FlexibleYearMonth shinsaYMFrom;
     @BatchParameter(key = KEY_SHINSAYMTO, name = "審査年月To")
