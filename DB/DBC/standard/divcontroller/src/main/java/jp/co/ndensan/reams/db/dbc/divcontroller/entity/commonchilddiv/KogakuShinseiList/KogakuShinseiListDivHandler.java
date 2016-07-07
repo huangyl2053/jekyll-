@@ -29,9 +29,13 @@ public class KogakuShinseiListDivHandler {
 
     private final KogakuShinseiListDiv div;
     private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
+    private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMN42002");
     private static final RString 高額介護サービス費照会 = new RString("DBCMN11004");
+    private static final RString 総合事業高額介護サービス費照会 = new RString("DBCMN11016");
     private static final RString 審査年月 = new RString("審査年月");
     private static final RString 登録年月日 = new RString("登録年月日");
+    private static final RString 判定送付年月 = new RString("判定送付年月");
+    private static final RString 判定取込年月 = new RString("判定取込年月");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final int THREE = 3;
@@ -59,7 +63,7 @@ public class KogakuShinseiListDivHandler {
     }
 
     /**
-     * 画面初期化
+     * 画面初期化です。
      *
      * @param メニューID RString
      * @param 被保険者番号 HihokenshaNo
@@ -79,13 +83,13 @@ public class KogakuShinseiListDivHandler {
             div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(審査年月);
             div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(登録年月日);
         }
-        if (高額介護サービス費照会.equals(メニューID)) {
+        if (高額介護サービス費照会.equals(メニューID) || 総合事業高額介護サービス費照会.equals(メニューID)) {
             set照会モード();
         }
     }
 
     /**
-     * set証記載保険者番号
+     * set証記載保険者番号です。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス年月 FlexibleYearMonth
@@ -100,7 +104,7 @@ public class KogakuShinseiListDivHandler {
     }
 
     /**
-     * 検索
+     * 検索です。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param メニューID RString
@@ -116,11 +120,11 @@ public class KogakuShinseiListDivHandler {
         if (div.getTxtServiceYMTo().getDomain() != null) {
             サービス年月To = new FlexibleYearMonth(div.getTxtServiceYMTo().getDomain().toString());
         }
-        if (高額サービス費支給申請書登録.equals(メニューID)) {
+        if (高額サービス費支給申請書登録.equals(メニューID) || 総合事業高額サービス費支給申請書登録.equals(メニューID)) {
             List<KougakuShinseiIchiranJohyouEntityResult> kogaList = KougakuShinseiIchiranJohyou.createInstance().
                     getKogakuKyuufuTaishouList(被保険者番号, サービス年月From, サービス年月To);
             set高額申請一覧情報(kogaList, 受託区分);
-        } else if (高額介護サービス費照会.equals(メニューID)) {
+        } else if (高額介護サービス費照会.equals(メニューID) || 総合事業高額介護サービス費照会.equals(メニューID)) {
             List<KougakuShinseiIchiranJohyouEntityResult> jishList = KougakuShinseiIchiranJohyou.createInstance().
                     getJigyouKougakuShinseiIchiranJohyou(被保険者番号, サービス年月From, サービス年月To);
             set高額申請一覧情報(jishList, 受託区分);
@@ -128,7 +132,7 @@ public class KogakuShinseiListDivHandler {
     }
 
     /**
-     * 高額申請一覧情報を抽出する
+     * 高額申請一覧情報を抽出するです。
      *
      * @param kogaList List<KougakuShinseiIchiranJohyouEntityResult>
      * @param 受託区分 RString
@@ -148,6 +152,9 @@ public class KogakuShinseiListDivHandler {
             row.getData7().setValue(koga.getEntity().get決定支給額());
             row.setData8(koga.getEntity().get支給区分());
             if (受託区分.equals(TWO)) {
+                div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(true);
+                div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(判定送付年月);
+                div.getDgShinseiJoho().getGridSetting().getColumns().get(TEN).setColumnName(判定取込年月);
                 if (koga.getEntity().get対象取込年月() != null) {
                     row.setData9(koga.getEntity().get対象取込年月().wareki().toDateString());
                 }
@@ -177,7 +184,7 @@ public class KogakuShinseiListDivHandler {
     }
 
     /**
-     * set照会モード
+     * set照会モードです。
      */
     public void set照会モード() {
         div.getTxtServiceYM().setDisplayNone(true);
