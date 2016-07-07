@@ -64,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class KanryoshoriIchijihantei {
 
     private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
-    private static final RString CSVファイル名 = new RString("KanryoshoriIchijihantei.csv");
+    private static final RString CSVファイル名 = new RString("IchijiHanteiIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
@@ -113,7 +113,7 @@ public class KanryoshoriIchijihantei {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<KanryoshoriCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
@@ -147,6 +147,7 @@ public class KanryoshoriIchijihantei {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             申請書管理番号リスト(rowList);
+            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE3100001TransitionEventName.一次判定処理).respond();
         }
         return ResponseData.of(div).respond();
@@ -179,7 +180,7 @@ public class KanryoshoriIchijihantei {
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
 
-                if (row.getIchijiHanteiKanryoDay().getValue() == null) {
+                if (row.getIchijiHanteiKanryoDay().getValue() != null) {
                     getValidationHandler().一次判定完了対象者一覧選択行の完了処理チェック(validationMessages);
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
@@ -188,7 +189,7 @@ public class KanryoshoriIchijihantei {
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
 
-                if (!RString.isNullOrEmpty(申請書管理番号) && is仮一次判定(申請書管理番号)) {
+                if (!RString.isNullOrEmpty(申請書管理番号) && !is仮一次判定(申請書管理番号)) {
                     NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                     KanryoshoriIchijihanteiManager.createInstance().要介護認定完了情報更新(getHandler(div)

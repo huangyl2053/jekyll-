@@ -4,21 +4,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDownLoad;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KanryoshoriIchijihantei のクラスファイル 
- * 
+ * KanryoshoriIchijihantei のクラスファイル
+ *
  * @author 自動生成
  */
 public class KanryoshoriIchijihanteiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -107,7 +107,7 @@ public class KanryoshoriIchijihanteiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
+    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
         this.getChosairaiselect().setBtndataoutput(btndataoutput);
     }
 
