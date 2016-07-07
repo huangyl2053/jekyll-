@@ -5,7 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteikohifutanshain.KagoKetteiKohifutanshaChohyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.KagoKetteiKohifutanshaInSource;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -15,59 +22,74 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain.
  */
 public class KagoKetteiKohifutanshaInBodyEditor implements IKagoKetteiKohifutanshaInEditor {
 
-    private final KagoKetteiKohifutanshaInItem item;
+    private final KagoKetteiKohifutanshaChohyoEntity 帳票出力対象データ;
+    private final boolean 集計Flag;
 
     /**
      * コンストラクタです
      *
-     * @param item KagoKetteiKohifutanshaInItem
+     * @param 帳票出力対象データ KagoKetteiKohifutanshaChohyoEntity
+     * @param 集計Flag boolean
      */
-    public KagoKetteiKohifutanshaInBodyEditor(KagoKetteiKohifutanshaInItem item) {
-        this.item = item;
+    public KagoKetteiKohifutanshaInBodyEditor(KagoKetteiKohifutanshaChohyoEntity 帳票出力対象データ,
+            boolean 集計Flag) {
+        this.帳票出力対象データ = 帳票出力対象データ;
+        this.集計Flag = 集計Flag;
     }
 
     @Override
     public KagoKetteiKohifutanshaInSource edit(KagoKetteiKohifutanshaInSource source) {
-        source.kohiFutanshaName = item.get公費負担者名();
-        source.shutsuryokujun1 = item.get並び順１();
-        source.shutsuryokujun2 = item.get並び順２();
-        source.shutsuryokujun3 = item.get並び順３();
-        source.shutsuryokujun4 = item.get並び順４();
-        source.shutsuryokujun5 = item.get並び順５();
-        source.kaipage1 = item.get改頁１();
-        source.kaipage2 = item.get改頁２();
-        source.kaipage3 = item.get改頁３();
-        source.kaipage4 = item.get改頁４();
-        source.kaipage5 = item.get改頁５();
-        source.listUpper_1 = item.getNo();
-        source.listUpper_2 = item.get取り扱い年月();
-        source.listUpper_3 = item.get事業者番号();
-        source.listUpper_4 = item.get公費受給者番号();
-        source.listUpper_5 = item.get公費受給者名();
-        source.listUpper_6 = item.getサービ提供年月();
-        source.listUpper_7 = item.getサービス種類コード();
-        source.listUpper_8 = item.get申立事由コード();
-        source.listUpper_9 = item.get単位数();
-        source.listLower_1 = item.get事業者名();
-        source.listLower_2 = item.get被保険者番号();
-        source.listLower_3 = item.getサービス種類名();
-        source.listLower_4 = item.get申立事由();
-        source.listLower_5 = item.get公費負担額();
-        source.kensuTitle = item.get件数タイトル();
-        source.tanisuTitle = item.get単位数タイトル();
-        source.futanGakuTitle = item.get負担額タイトル();
-        source.kyufuhiTitle = item.get給付費タイトル();
-        source.servicehiTitle = item.getサービス費タイトル();
-        source.shokujihiTitle = item.get食事費タイトル();
-        source.kensuGokei1 = item.get介護給付費の件数();
-        source.tanisuGokei1 = item.get介護給付費の単位数();
-        source.futanGakuGokei1 = item.get介護給付費の公費負担額();
-        source.kensuGokei2 = item.get高額介護サービス費の件数();
-        source.tanisuGokei2 = item.get高額介護サービス費の単位数();
-        source.futanGakuGokei2 = item.get高額介護サービス費の公費負担額();
-        source.kensuGokei3 = item.get特定入所者介護サービス費等の件数();
-        source.tanisuGokei3 = item.get特定入所者介護サービス費等の単位数();
-        source.futanGakuGokei3 = item.get特定入所者介護サービス費等の公費負担額();
+        edit明細(source);
+        if (集計Flag) {
+            edit集計(source);
+        }
         return source;
+    }
+
+    private void edit明細(KagoKetteiKohifutanshaInSource source) {
+        source.listUpper_1 = new RString(帳票出力対象データ.getNo());
+        source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
+        source.listUpper_3 = 帳票出力対象データ.get事業者番号().getColumnValue();
+        source.listUpper_4 = 帳票出力対象データ.get公費受給者番号();
+        source.listUpper_5 = 帳票出力対象データ.get公費受給者名();
+        source.listUpper_6 = doパターン54(帳票出力対象データ.getサービ提供年月());
+        source.listUpper_7 = 帳票出力対象データ.getサービス種類コード().getColumnValue();
+        source.listUpper_8 = 帳票出力対象データ.get過誤申立事由コード().getColumnValue();
+        source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get単位数(), 0);
+        source.listLower_1 = 帳票出力対象データ.get事業者名();
+        source.listLower_2 = 帳票出力対象データ.get被保険者番号().getColumnValue();
+        source.listLower_3 = 帳票出力対象データ.getサービス種類名();
+        source.listLower_4 = 帳票出力対象データ.get過誤申立事由();
+        source.listLower_5 = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get公費負担額(), 0);
+    }
+
+    private void edit集計(KagoKetteiKohifutanshaInSource source) {
+
+        source.kaigoKyufuhiKensu
+                = DecimalFormatter.toコンマ区切りRString(new Decimal(帳票出力対象データ.get介護給付費の件数()), 0);
+        source.kaigoKyufuhiTanisu
+                = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get介護給付費の単位数(), 0);
+        source.kaigoKyufuhiFutangaku
+                = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get介護給付費の負担額(), 0);
+        source.kogakuServicehiKensu
+                = DecimalFormatter.toコンマ区切りRString(new Decimal(帳票出力対象データ.get高額介護サービス費の件数()), 0);
+        source.kogakuServicehiTanisu
+                = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get高額介護サービス費の単位数(), 0);
+        source.kogakuServicehiFutangaku
+                = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get高額介護サービス費の負担額(), 0);
+        source.tokuteiNyushoshaKaigohiKensu
+                = DecimalFormatter.toコンマ区切りRString(new Decimal(帳票出力対象データ.get特定入所者介護費等の件数()), 0);
+        source.tokuteiNyushoshaKaigohiTanisu
+                = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get特定入所者介護費等の単位数(), 0);
+        source.tokuteiNyushoshaKaigohiFutangaku
+                = DecimalFormatter.toコンマ区切りRString(帳票出力対象データ.get特定入所者介護費等の負担額(), 0);
+
+    }
+
+    private RString doパターン54(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 }
