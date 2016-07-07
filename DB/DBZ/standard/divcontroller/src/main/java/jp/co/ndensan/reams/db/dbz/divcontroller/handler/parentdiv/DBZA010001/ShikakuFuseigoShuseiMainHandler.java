@@ -441,10 +441,18 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
-            div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get名称());
+            try {
+                div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTekiyoJogaiTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
             div.getTxtCurrentTekiyoJogaiTekiyoTodokedeYmd().setValue(現在の他特の情報.get適用届出年月日());
-            div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(現在の他特の情報.get適用除外解除事由コード()).get名称());
+            try {
+                div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(現在の他特の情報.get適用除外解除事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTekiyoJogaiKaijoYmd().setValue(現在の他特の情報.get解除年月日());
             div.getTxtCurrentTekiyoJogaiKaijoTodokedeYmd().setValue(現在の他特の情報.get解除届出年月日());
         }
@@ -510,12 +518,20 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
-            div.getTxtCurrentTatokuTekiyoJiyu().setValue(
-                    TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get名称());
+            try {
+                div.getTxtCurrentTatokuTekiyoJiyu().setValue(
+                        TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTatokuTekiyoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTatokuTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
             div.getTxtCurrentTatokuTekiyoTodokedeYmd().setValue(現在の他特の情報.get適用届出年月日());
-            div.getTxtCurrentTatokuKaijoJiyu().setValue(
-                    TatokureiKaijoJiyu.toValue(現在の他特の情報.get他市町村住所地特例解除事由コード()).get名称());
+            try {
+                div.getTxtCurrentTatokuKaijoJiyu().setValue(
+                        TatokureiKaijoJiyu.toValue(現在の他特の情報.get他市町村住所地特例解除事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTatokuKaijoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTatokuKaijoYmd().setValue(現在の他特の情報.get解除年月日());
             div.getTxtCurrentTatokuKaijoTodokedeYmd().setValue(現在の他特の情報.get解除届出年月日());
         }
@@ -567,16 +583,32 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の資格の情報 != null) {
-            div.getTxtCurrentShikakuShutokuJiyu().setValue(ShikakuShutokuJiyu.toValue(現在の資格の情報.get資格取得事由コード()).get名称());
+            try {
+                div.getTxtCurrentShikakuShutokuJiyu().setValue(ShikakuShutokuJiyu.toValue(現在の資格の情報.get資格取得事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentShikakuShutokuJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentShikakuShutokuYmd().setValue(現在の資格の情報.get資格取得年月日());
             div.getTxtCurrentShikakuShutokuTodokedeYmd().setValue(現在の資格の情報.get資格取得届出年月日());
-            div.getTxtCurrentShikakuHenkoJiyu().setValue(ShikakuHenkoJiyu.toValue(現在の資格の情報.get資格変更事由コード()).get名称());
+            try {
+                div.getTxtCurrentShikakuHenkoJiyu().setValue(ShikakuHenkoJiyu.toValue(現在の資格の情報.get資格変更事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentShikakuHenkoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentShikakuHenkoYmd().setValue(現在の資格の情報.get資格変更年月日());
             div.getTxtCurrentShikakuHenkoTodokedeYmd().setValue(現在の資格の情報.get資格変更届出年月日());
-            div.getTxtCurrentJutokuTekiyoJiyu().setValue(ShikakuJutokuTekiyoJiyu.toValue(現在の資格の情報.get住所地特例適用事由コード()).get名称());
+            try {
+                div.getTxtCurrentJutokuTekiyoJiyu().setValue(ShikakuJutokuTekiyoJiyu.toValue(現在の資格の情報.get住所地特例適用事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentJutokuTekiyoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentJutokuTekiyoDate().setValue(現在の資格の情報.get適用年月日());
             div.getTxtCurrentJutokuTekiyoTodokedeDate().setValue(現在の資格の情報.get適用届出年月日());
-            div.getTxtCurrentShikakuSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(現在の資格の情報.get資格喪失事由コード()).get名称());
+            try {
+                div.getTxtCurrentShikakuSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(現在の資格の情報.get資格喪失事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentShikakuSoshitsuJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentShikakuSoshitsuYmd().setValue(現在の資格の情報.get資格喪失年月日());
             div.getTxtCurrentShikakuSoshitsuTodokedeYmd().setValue(現在の資格の情報.get資格喪失届出年月日());
         }

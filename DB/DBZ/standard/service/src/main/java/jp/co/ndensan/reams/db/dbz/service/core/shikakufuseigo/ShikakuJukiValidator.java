@@ -172,9 +172,10 @@ public class ShikakuJukiValidator {
         }
         FuseigoRiyu 不整合理由 = null;
         if (JukiIdoJiyu.転入.get異動事由コード().equals(個人情報.get登録事由().get異動事由コード())
-                && TatokureiTekiyoJiyu.他特例適用.getコード().equals(他特の情報.get他市町村住所地特例適用事由コード())
-                && 他特の情報.get適用年月日().compareTo(個人情報.get登録異動年月日()) != 0) {
-            不整合理由 = FuseigoRiyu.他住所地特例適用日_転入者;
+                && TatokureiTekiyoJiyu.他特例適用.getコード().equals(他特の情報.get他市町村住所地特例適用事由コード())) {
+            if (他特の情報.get適用年月日().compareTo(個人情報.get登録異動年月日()) != 0) {
+                不整合理由 = FuseigoRiyu.他住所地特例適用日_転入者;
+            }
         }
         if (JukiIdoJiyu.職権消除.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())
                 || JukiIdoJiyu.死亡.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())
@@ -351,7 +352,7 @@ public class ShikakuJukiValidator {
             FlexibleDate 資格喪失年月日, RString 資格喪失事由コード,
             FlexibleDate 転出確定, FlexibleDate 転出予定,
             FuseigoRiyu 不整合理由) {
-        if (!(!isNullOrEmpty(適用年月日) && isNullOrEmpty(解除年月日)) && isNullOrEmpty(資格喪失年月日)) {
+        if (isNullOrEmpty(適用年月日) && !isNullOrEmpty(解除年月日) && isNullOrEmpty(資格喪失年月日)) {
             不整合理由 = FuseigoRiyu.資格取得者_転出者;
         }
         if (ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由コード)) {
