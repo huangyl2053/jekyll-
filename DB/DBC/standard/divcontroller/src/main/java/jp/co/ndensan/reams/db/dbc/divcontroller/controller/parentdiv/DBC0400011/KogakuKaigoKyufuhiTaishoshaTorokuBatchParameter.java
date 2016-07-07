@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0400011;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -34,9 +35,10 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuBatchParameter {
      * @param div KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv
      * @return ResponseData
      */
-    public ResponseData<KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv> onClick_btnJikko(KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv div) {
-        //TODO
-        return ResponseData.of(div).respond();
+    public ResponseData<KogakuKaigoKyufuhiTaishoshaBatchParameter> onClick_btnJikko(KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv div) {
+        KogakuKaigoKyufuhiTaishoshaTorokuHandler handler = getHandler(div);
+        KogakuKaigoKyufuhiTaishoshaBatchParameter parameter = handler.getBatchParameter();
+        return ResponseData.of(parameter).respond();
     }
 
     private KogakuKaigoKyufuhiTaishoshaTorokuHandler getHandler(KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv div) {
