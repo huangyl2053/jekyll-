@@ -33,6 +33,11 @@ public class KogakuShinseiListDivValidationHandler {
         this.div = div;
     }
 
+    /**
+     * 入力チェックです。
+     *
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs 入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getTxtServiceYMFrom().getDomain() == null && div.getTxtServiceYMTo().getDomain() == null) {
