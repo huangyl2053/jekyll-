@@ -42,7 +42,7 @@ public class FukaKijunTotalSaveHandler {
     private static final FlexibleYear 平成20年 = new FlexibleYear("2008");
     private static final FlexibleYear 平成18年 = new FlexibleYear("2006");
     private static final FlexibleYear 平成17年 = new FlexibleYear("2005");
-    private static final int NUM_0 = 1;
+    private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
