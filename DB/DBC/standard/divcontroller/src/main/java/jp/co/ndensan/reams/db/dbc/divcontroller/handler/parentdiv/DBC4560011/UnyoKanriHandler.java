@@ -90,12 +90,12 @@ public class UnyoKanriHandler {
     /**
      * 引数で指定された年を和暦年（前半角スペース埋め）に編集し、元年表記で返却します。<br />
      * 変換元：2014<br />
-     * 変換後：平成26年度（年がそれぞれ一桁の場合、前半角スペース埋めする）
+     * 変換後：平成26（年がそれぞれ一桁の場合、前半角スペース埋めする）
      *
      * @param date 年
      * @return RString 年度
      */
-    public RString getパターン105(RYear date) {
+    public RString getパターン102(RYear date) {
         RString wareki = RString.EMPTY;
         if (date != null) {
             wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear();
