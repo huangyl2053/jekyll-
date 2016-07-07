@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -70,14 +70,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private static final Decimal 縦番号_36 = new Decimal("36");
     private static final Decimal 縦番号_37 = new Decimal("37");
     private static final Decimal 縦番号_38 = new Decimal("38");
-    private static final Code 集計番号_0102 = new Code("0102");
-    private static final Code 集計番号_0202 = new Code("0202");
-    private static final Code 集計番号_0302 = new Code("0302");
-    private static final Code 集計番号_0402 = new Code("0402");
-    private static final Decimal 単位数総数 = new Decimal("01");
-    private static final Decimal 単位数第２号被保険者分再掲 = new Decimal("02");
-    private static final Decimal 単位数総数特例分 = new Decimal("03");
-    private static final Decimal 単位数第２号被保険者分再掲特例分 = new Decimal("04");
+    private static final RString 単位数総数 = new RString("01");
+    private static final RString 単位数第２号被保険者分再掲 = new RString("02");
+    private static final RString 単位数総数特例分 = new RString("03");
+    private static final RString 単位数第２号被保険者分再掲特例分 = new RString("04");
 
     private final HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div;
 
@@ -879,13 +875,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
 //        RString 集計番号 = new RString(事業報告基本データ.get集計番号().toString());
-        if (事業報告基本データ.get行集計番号().startsWith(単位数総数.toString())) {
+        if (事業報告基本データ.get行集計番号().startsWith(単位数総数)) {
             事業報告月報詳細データリスト = 単位数引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(単位数第２号被保険者分再掲.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(単位数第２号被保険者分再掲)) {
             事業報告月報詳細データリスト = 単位数引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(単位数総数特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(単位数総数特例分)) {
             事業報告月報詳細データリスト = 単位数引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(単位数第２号被保険者分再掲特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(単位数第２号被保険者分再掲特例分)) {
             事業報告月報詳細データリスト = 単位数引き継ぎデータ;
         }
 
