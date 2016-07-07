@@ -18,7 +18,6 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 public enum DbuErrorMessages implements IMessageGettable {
 
     開始日不正(1, "?以降の日付を設定してください。"),
-    最大取得件数範囲外(2, "最大取得件数は1～999の範囲で設定してください。"),
     保険者番号重複(3, "同一の保険者番号が既に登録されています。"),
     保険者番号都道府県エラー(4, "選択された都道府県と異なります。"),
     月報全て未処理(5, "集計範囲内で、月報未処理の月があります。?"),
