@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.taino;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.DateDuration;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TainoHanteiResult {
+public class TainoHanteiResult implements Serializable {
 
     private FlexibleDate 滞納判定基準日;
     private FlexibleDate 最古滞納納期限;
