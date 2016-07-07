@@ -11,9 +11,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.TsukiShorkiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.TsukiShorkiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -120,12 +120,13 @@ public class KitsukiList {
         if (is特徴() || is過年度()) {
             throw new IllegalArgumentException();
         }
+        Kitsuki 最大の期月 = new Kitsuki(Tsuki._4月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
         for (Kitsuki kitsuki : kitsukiのList) {
-            if (!FuchokiJohoTsukiShoriKubun.現年随時.equals(kitsuki.get月処理区分())) {
-                return kitsuki;
+            if (FuchokiJohoTsukiShoriKubun.本算定異動.equals(kitsuki.get月処理区分())) {
+                最大の期月 =  kitsuki;
             }
         }
-        return new Kitsuki(Tsuki._4月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
+        return 最大の期月;
     }
 
     /**
