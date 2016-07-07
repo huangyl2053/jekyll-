@@ -95,6 +95,9 @@ public class ShikakuHenkouIdou {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
         }
+        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
+        }
         RealInitialLocker.release(前排他ロックキー);
         div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
         return ResponseData.of(div).setState(DBA1040011StateName.完了状態);

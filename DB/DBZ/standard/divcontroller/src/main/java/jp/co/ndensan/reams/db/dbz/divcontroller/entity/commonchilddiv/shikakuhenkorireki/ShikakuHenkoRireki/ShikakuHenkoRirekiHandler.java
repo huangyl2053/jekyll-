@@ -67,6 +67,9 @@ public class ShikakuHenkoRirekiHandler {
     private static final RString MENUID_DBAMN52003 = new RString("DBAMN52003");
     private static final RString MENUID_DBAMN52004 = new RString("DBAMN52004");
     private static final RString MENUID_DBAMN52002 = new RString("DBAMN52002");
+    private static final RString MENUID_DBAMN23001 = new RString("DBAMN23001");
+    private static final RString MENUID_DBAMN23002 = new RString("DBAMN23002");
+    private static final RString MENUID_DBAMN23003 = new RString("DBAMN23003");
 
     private final ShikakuHenkoRirekiDiv div;
 
@@ -167,7 +170,19 @@ public class ShikakuHenkoRirekiHandler {
     public void clear資格変更入力Panel() {
         div.getTxtHenkoDate().clearValue();
         div.getTxtHenkoTodokedeDate().clearValue();
-        div.getDdlHenkoJiyu().setSelectedIndex(0);
+        RString menuID = ResponseHolder.getMenuID();
+        if (MENUID_DBAMN23001.equals(menuID)) {
+            div.getDdlHenkoJiyu().setSelectedKey(ShikakuHenkoJiyu.転居.getコード());
+            div.getDdlHenkoJiyu().setDisabled(true);
+        } else if (MENUID_DBAMN23002.equals(menuID)) {
+            div.getDdlHenkoJiyu().setSelectedKey(ShikakuHenkoJiyu.氏名変更.getコード());
+            div.getDdlHenkoJiyu().setDisabled(true);
+        } else if (MENUID_DBAMN23003.equals(menuID)) {
+            div.getDdlHenkoJiyu().setSelectedKey(ShikakuHenkoJiyu.その他.getコード());
+            div.getDdlHenkoJiyu().setDisabled(false);
+        } else {
+            div.getDdlHenkoJiyu().setSelectedIndex(0);
+        }
         div.getDdlHenkoSochimotoHokensha().setSelectedIndex(0);
         div.getDdlHenkoKyuHokensha().setSelectedIndex(0);
         div.getDdlJuminJoho().setSelectedIndex(0);
