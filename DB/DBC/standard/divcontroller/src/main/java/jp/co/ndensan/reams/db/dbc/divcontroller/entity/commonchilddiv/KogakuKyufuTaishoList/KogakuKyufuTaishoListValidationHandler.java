@@ -75,22 +75,18 @@ public class KogakuKyufuTaishoListValidationHandler {
                                 FlexibleDate.EMPTY, FlexibleDate.EMPTY, new AtenaMeisho(RString.EMPTY),
                                 new YubinNo(RString.EMPTY), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                                 RString.EMPTY, FlexibleDate.getNowDate(), RString.EMPTY, 0));
-        for (ServiceJigyoshaInputGuide jiresult : Jigyosha.records()) {
-            if (jiresult.get事業者番号() == null || jiresult.get事業者番号().value().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(
-                        new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
-                                UrErrorMessages.存在しない, 事業者番号.toString())));
-            }
+        if (Jigyosha.records().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(
+                            UrErrorMessages.存在しない, 事業者番号.toString())));
         }
         SearchResult<KaigoServiceShurui> kalist = KaigoServiceShuruiManager.createInstance().
                 getServiceTypeList(KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
                                 new ServiceShuruiCode(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue()),
                                 new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString())));
-        for (KaigoServiceShurui result : kalist.records()) {
-            if (result.getサービス種類コード() == null || result.getサービス種類コード().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(
-                        new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(UrErrorMessages.コードマスタなし)));
-            }
+        if (kalist.records().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new KogakuKyufuTaishoListValidationHandler.IdocheckMessages(UrErrorMessages.コードマスタなし)));
         }
         if (div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue().intValue()
                 < div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue().intValue()) {
