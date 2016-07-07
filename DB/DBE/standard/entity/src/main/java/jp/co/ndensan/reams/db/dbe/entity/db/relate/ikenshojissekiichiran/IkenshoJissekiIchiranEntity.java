@@ -26,25 +26,25 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 医療機関コード;
     @CsvField(order = 3, name = "医療機関名")
     private final RString 医療機関名称;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 4, name = "主治医名")
     private final RString 主治医氏名;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 5, name = "被保険者番号")
     private final RString 被保険者番号;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 6, name = "申請者名")
     private final RString 申請者氏名;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 7, name = "記入日")
     private final RString 記入日;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 8, name = "入手日")
     private final RString 入手日;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 9, name = "在宅_新")
     private final RString 入手パターン_在新;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 10, name = "在宅_継")
     private final RString 入手パターン_在継;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 11, name = "施設_新")
     private final RString 入手パターン_施新;
-    @CsvField(order = 3, name = "施設_継")
+    @CsvField(order = 12, name = "施設_継")
     private final RString 入手パターン_施継;
-    @CsvField(order = 3, name = "医師区分")
+    @CsvField(order = 13, name = "医師区分")
     private final RString 医師区分;
 
     /**

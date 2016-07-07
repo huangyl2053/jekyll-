@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class IkenshoJissekiIchiranFlow extends BatchFlowBase<IkenshoJissekiIchiranBatchParameter> {
 
-    private static final String 事業状況データ作成 = "IkenshoJissekiIchiran";
+    private static final String IKENSHO_JISSEKI_ICHIRAN = "ikenshoJissekiIchiran";
 
     @Override
     protected void defineFlow() {
-        executeStep(事業状況データ作成);
+        if (!getParameter().getKeyJoho().isEmpty()) {
+            executeStep(IKENSHO_JISSEKI_ICHIRAN);
+        }
     }
 
     /**
@@ -25,8 +27,8 @@ public class IkenshoJissekiIchiranFlow extends BatchFlowBase<IkenshoJissekiIchir
      *
      * @return バッチコマンド
      */
-    @Step(事業状況データ作成)
-    protected IBatchFlowCommand createJigyoJyokyoHokokuData() {
+    @Step(IKENSHO_JISSEKI_ICHIRAN)
+    IBatchFlowCommand ikenshoJissekiIchiran() {
         return loopBatch(IkenshoJissekiIchiranProcess.class)
                 .arguments(getParameter().toProcessParamter()).define();
     }
