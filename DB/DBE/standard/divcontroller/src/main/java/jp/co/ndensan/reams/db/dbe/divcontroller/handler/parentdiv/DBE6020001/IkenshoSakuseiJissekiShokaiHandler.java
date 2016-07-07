@@ -34,6 +34,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class IkenshoSakuseiJissekiShokaiHandler {
 
     private static final RString MARU = new RString("○");
+    private static final RString 集計表を発行する = new RString("btnPulish");
+    private static final RString CSVを出力する = new RString("btnShutsutyoku");
+    private static final RString 条件に戻る = new RString("btnBackToKensaku");
     private final IkenshoSakuseiJissekiShokaiDiv div;
 
     /**
@@ -115,9 +118,9 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * 画面初期状態の設定です。
      */
     public void set初期状態() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToKensaku"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
         div.getIkenshoSakuseiJisseki().setDisplayNone(true);
         div.getIkenshoKinyubi().setDisplayNone(false);
     }
@@ -126,9 +129,9 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * 画面一覧状態の設定です。
      */
     public void set一覧状態() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToKensaku"), true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, true);
         div.getIkenshoSakuseiJisseki().setDisplayNone(false);
         div.getIkenshoKinyubi().setDisplayNone(true);
     }
@@ -170,7 +173,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
 
     private RString dataFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
-            return date;
+            return RString.EMPTY;
         }
         RDate date_tmp = new RDate(date.toString());
         return date_tmp.wareki().toDateString();
