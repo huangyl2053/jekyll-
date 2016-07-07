@@ -7,21 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0550001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoResult;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.DBB0550001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550001.KanendoFukaHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550001.KanendoFukaValidationHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendo.HonsanteiIdoKanendo;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
@@ -44,10 +38,6 @@ public class KanendoFuka {
     private static final RString 過年度賦課 = new RString("過年度賦課");
     private static final RString 過年度賦課確定 = new RString("過年度賦課確定");
     private final RString 過年度異動通知書作成 = new RString("DBBMN45002");
-    private static final RString ZERO = new RString("0");
-    private static final RString ONE = new RString("1");
-    private static final RString TWO = new RString("2");
-    private static final RString THREE = new RString("2");
 
     /**
      * onLoad事件
@@ -66,17 +56,7 @@ public class KanendoFuka {
             throw new ApplicationException(DbbErrorMessages.前回過年度賦課確定未処理.getMessage());
         }
         List<ShoriDateKanri> shdaList = HonsanteiIdoKanendo.createInstance().getShoriJokyo(調定年度);
-        RString 決定_変更通知書区分 = ZERO;
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().isAllSelected()) {
-            決定_変更通知書区分 = ONE;
-        } else if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected()) {
-            決定_変更通知書区分 = TWO;
-        } else if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().isAllSelected()
-                && div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected()) {
-            決定_変更通知書区分 = THREE;
-        }
         boolean flag = getHandler(div).initialize(調定年度, shdaList, shoriDate3);
-        check帳票ID(決定_変更通知書区分, div);
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
@@ -99,7 +79,6 @@ public class KanendoFuka {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        check帳票ID(ZERO, div);
         return ResponseData.of(div).respond();
     }
 
@@ -113,24 +92,6 @@ public class KanendoFuka {
         HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
         HonsanteiIdoKanendoBatchParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
         return ResponseData.of(para).respond();
-    }
-
-    private void check帳票ID(RString 決定_変更通知書区分, KanendoFukaDiv div) {
-        KanendoKiUtil kanUtil = new KanendoKiUtil();
-        KitsukiList 期月リスト = kanUtil.get期月リスト();
-        Kitsuki 期月 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
-                getDdlShoritsuki().getSelectedKey())));
-        List<HonsanteiIdoParameter> hoList = getHandler(div).get各通知書の帳票ID();
-        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
-                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
-        List<HonsanteiIdoKanendoResult> hoKnList = HonsanteiIdoKanendo.
-                createInstance().getChohyoID(調定年度, 期月.get期(), hoList, 決定_変更通知書区分);
-        for (HonsanteiIdoKanendoResult list : hoKnList) {
-            RString 帳票ID = list.get帳票ID();
-            if (帳票ID == null || 帳票ID.isEmpty()) {
-                throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
-            }
-        }
     }
 
     /**

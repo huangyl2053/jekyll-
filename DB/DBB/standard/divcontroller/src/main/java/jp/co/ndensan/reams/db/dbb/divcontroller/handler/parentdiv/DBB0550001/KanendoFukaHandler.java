@@ -94,6 +94,7 @@ public class KanendoFukaHandler {
     public boolean initialize(FlexibleYear 調定年度, List<ShoriDateKanri> shdaList, ShoriDateKanri shoriDate3) {
         set処理対象();
         div.getKanendoShoriNaiyo().getTxtChoteiNendo().setDomain(new RYear(調定年度.toString()));
+        set抽出開始日時(shoriDate3);
         set算定帳票作成();
         set対象賦課年度();
         set帳票作成個別情報();
@@ -130,20 +131,21 @@ public class KanendoFukaHandler {
      * @param shoriDate ShoriDateKanri
      */
     public void set抽出開始日時(ShoriDateKanri shoriDate) {
-        RString 前日まで = RDate.getNowDate().minusDay(1).toDateString().
+        RString 前日まで = RDate.getNowDate().minusDay(1).toDateString().concat(RString.HALF_SPACE).
                 concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
         RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).
-                toDateString().concat(String.valueOf(前月末の日)).concat(定値_日時);
+                toDateString().concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(定値_日時);
         RString 当日を含む = RDate.getNowDate().getYearMonth().
-                toDateString().concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+                toDateString().concat(RString.HALF_SPACE).concat(
+                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         List<dgChushutsuKikan_Row> rowList = new ArrayList<>();
         dgChushutsuKikan_Row row = new dgChushutsuKikan_Row();
         if (shoriDate != null && shoriDate.get基準日時() != null) {
             RString 年月日 = shoriDate.get基準日時().getRDateTime().getDate().wareki().toDateString();
             RString 時刻 = shoriDate.get基準日時().getRDateTime().getTime().
                     toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            RString 基準日時 = 年月日.concat(時刻);
+            RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
             row.getTxtChishutsuStNichiji().setValue(基準日時);
         }
         if (div.getKanendoFukaChushutsuJoken().getRadChushutsuJoken().getSelectedKey().equals(ZERO_RS)) {
@@ -164,8 +166,9 @@ public class KanendoFukaHandler {
      * @return flag
      */
     public boolean 処理日付管理マスタ(List<ShoriDateKanri> shdaList) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+//        IUrControlData controlData = UrControlDataFactory.createInstance();
+//        RString menuID = controlData.getMenuID();
+        RString menuID = 過年度異動通知書作成;
         List<dgShoriKakunin_Row> rowList = new ArrayList<>();
         dgShoriKakunin_Row row = new dgShoriKakunin_Row();
         boolean flag = false;
@@ -208,6 +211,32 @@ public class KanendoFukaHandler {
         } else if (過年度異動通知書作成.equals(menuID)) {
             div.getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 過年度異動通知書);
         }
+    }
+
+    /**
+     * 対象賦課年度取得
+     *
+     *
+     */
+    public void set対象賦課年度() {
+        List<KeyValueDataSource> 対象賦課年度 = new ArrayList<>();
+        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        int 賦課年度1 = Integer.parseInt(調定年度.toString()) - 1;
+        int 賦課年度2 = Integer.parseInt(調定年度.toString()) - 2;
+        KeyValueDataSource dataSource1 = new KeyValueDataSource(ZERO_RS, new RString(賦課年度1));
+        KeyValueDataSource dataSource2 = new KeyValueDataSource(ONE_RS, new RString(賦課年度2));
+        対象賦課年度.add(dataSource1);
+        対象賦課年度.add(dataSource2);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchiTaishoNendo().setDataSource(対象賦課年度);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishoFukaNendo().setDataSource(対象賦課年度);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishoFukaNedno().setDataSource(対象賦課年度);
+    }
+
+    /**
+     * 帳票作成個別情報取得
+     *
+     */
+    public void set帳票作成個別情報() {
         try {
             KanendoKiUtil kanUtil = new KanendoKiUtil();
             KitsukiList 期月リスト = kanUtil.get期月リスト();
@@ -239,35 +268,8 @@ public class KanendoFukaHandler {
         } catch (ApplicationException e) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
-    }
-
-    /**
-     * 対象賦課年度取得
-     *
-     *
-     */
-    public void set対象賦課年度() {
-        List<KeyValueDataSource> 対象賦課年度 = new ArrayList<>();
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        int 賦課年度1 = Integer.parseInt(調定年度.toString()) - 1;
-        int 賦課年度2 = Integer.parseInt(調定年度.toString()) - 2;
-        KeyValueDataSource dataSource1 = new KeyValueDataSource(ZERO_RS, new RString(賦課年度1));
-        KeyValueDataSource dataSource2 = new KeyValueDataSource(ONE_RS, new RString(賦課年度2));
-        対象賦課年度.add(dataSource1);
-        対象賦課年度.add(dataSource2);
-        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchiTaishoNendo().setDataSource(対象賦課年度);
-        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishoFukaNendo().setDataSource(対象賦課年度);
-        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishoFukaNedno().setDataSource(対象賦課年度);
-    }
-
-    /**
-     * 帳票作成個別情報取得
-     *
-     */
-    public void set帳票作成個別情報() {
         List<KeyValueDataSource> 対象者 = new ArrayList<>();
         List<KeyValueDataSource> 口座振替者 = new ArrayList<>();
-        //TODO 発行日 出力期
         for (NotsuKozaShutsuryokuTaisho notko : NotsuKozaShutsuryokuTaisho.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(notko.getコード(), notko.get名称());
             対象者.add(dataSource);
