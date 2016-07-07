@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -72,10 +71,6 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
     private static final Decimal 縦番号_36 = new Decimal("36");
     private static final Decimal 縦番号_37 = new Decimal("37");
     private static final Decimal 縦番号_38 = new Decimal("38");
-    private static final Code 集計番号_0104 = new Code("0104");
-    private static final Code 集計番号_0204 = new Code("0204");
-    private static final Code 集計番号_0304 = new Code("0304");
-    private static final Code 集計番号_0404 = new Code("0404");
     private static final RString 給付額総数 = new RString("01");
     private static final RString 給付額第２号被保険者分再掲 = new RString("02");
     private static final RString 給付額総数特例分 = new RString("03");
@@ -198,13 +193,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuDataHandler {
 
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-        if (事業報告基本データ.get行集計番号().startsWith(給付額総数.toString())) {
+        if (事業報告基本データ.get行集計番号().startsWith(給付額総数)) {
             事業報告月報詳細データリスト = 給付額引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(給付額第２号被保険者分再掲.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(給付額第２号被保険者分再掲)) {
             事業報告月報詳細データリスト = 給付額引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(給付額総数特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(給付額総数特例分)) {
             事業報告月報詳細データリスト = 給付額引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(給付額第２号被保険者分再掲特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(給付額第２号被保険者分再掲特例分)) {
             事業報告月報詳細データリスト = 給付額引き継ぎデータ;
         }
         修正データリスト = get事業報告給付額修正データリスト(事業報告月報詳細データリスト, 修正データリスト);

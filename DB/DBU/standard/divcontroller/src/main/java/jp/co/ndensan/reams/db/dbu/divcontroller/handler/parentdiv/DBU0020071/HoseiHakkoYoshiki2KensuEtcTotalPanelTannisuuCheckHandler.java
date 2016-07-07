@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -70,14 +70,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuCheckHandler {
     private static final Decimal 縦番号_36 = new Decimal("36");
     private static final Decimal 縦番号_37 = new Decimal("37");
     private static final Decimal 縦番号_38 = new Decimal("38");
-    private static final Code 集計番号_0103 = new Code("0103");
-    private static final Code 集計番号_0203 = new Code("0203");
-    private static final Code 集計番号_0303 = new Code("0303");
-    private static final Code 集計番号_0403 = new Code("0403");
-    private static final Decimal 費用額総数 = new Decimal("01");
-    private static final Decimal 費用額第２号被保険者分再掲 = new Decimal("02");
-    private static final Decimal 費用額総数特例分 = new Decimal("03");
-    private static final Decimal 費用額第２号被保険者分再掲特例分 = new Decimal("04");
+    private static final RString 費用額総数 = new RString("01");
+    private static final RString 費用額第２号被保険者分再掲 = new RString("02");
+    private static final RString 費用額総数特例分 = new RString("03");
+    private static final RString 費用額第２号被保険者分再掲特例分 = new RString("04");
 
     private final HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div;
 
@@ -1087,13 +1083,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuCheckHandler {
 
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-        if (事業報告基本データ.get行集計番号().startsWith(費用額総数.toString())) {
+        if (事業報告基本データ.get行集計番号().startsWith(費用額総数)) {
             事業報告月報詳細データリスト = 費用額引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(費用額第２号被保険者分再掲.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(費用額第２号被保険者分再掲)) {
             事業報告月報詳細データリスト = 費用額引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(費用額総数特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(費用額総数特例分)) {
             事業報告月報詳細データリスト = 費用額引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(費用額第２号被保険者分再掲特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(費用額第２号被保険者分再掲特例分)) {
             事業報告月報詳細データリスト = 費用額引き継ぎデータ;
         }
         修正データリスト = get事業報告費用額修正データリスト(事業報告月報詳細データリスト, 修正データリスト);

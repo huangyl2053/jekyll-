@@ -39,7 +39,6 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
     private static final RString MSG_ZGHIHOKENSHASUKSRESULT = new RString("前月末世帯数から増減した被保険者数の計算結果");
     private static final RString MSG_KOUSIN = new RString("更新");
     private static final RString MSG_SAKUJO = new RString("削除");
-
     private static final RString KEY_第1号被保険者数情報 = new RString("第1号被保険者数情報");
     private static final RString KEY_第1号被保険者増減内訳情報_当月中増 = new RString("第1号被保険者増減内訳情報_当月中増");
     private static final RString KEY_第1号被保険者増減内訳情報_当月中滅 = new RString("第1号被保険者増減内訳情報_当月中滅");
@@ -80,7 +79,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (DBU0020021StateName.削除状態.getName().equals(状態) && !ResponseHolder.isReRequest()) {
+        if (MSG_SAKUJO.equals(状態) && !ResponseHolder.isReRequest()) {
             handler.delete(第1号被保険者数情報);
             handler.delete(第1号被保険者増減内訳情報_当月中増);
             handler.delete(第1号被保険者増減内訳情報_当月中滅);
@@ -139,7 +138,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onClick_btnModBack(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (DBU0020021StateName.削除状態.getName().equals(状態)) {
+        if (MSG_SAKUJO.equals(状態)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.補正発行検索に戻る).respond();
         }
         List<JigyoHokokuTokeiData> 第1号被保険者数情報

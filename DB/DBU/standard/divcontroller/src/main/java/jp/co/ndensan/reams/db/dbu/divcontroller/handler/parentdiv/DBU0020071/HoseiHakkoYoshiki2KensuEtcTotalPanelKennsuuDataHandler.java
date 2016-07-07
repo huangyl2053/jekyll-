@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -75,11 +74,6 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
     private static final RString 件数第２号被保険者分再掲 = new RString("02");
     private static final RString 件数総数特例分 = new RString("03");
     private static final RString 件数第２号被保険者分再掲特例分 = new RString("04");
-    private static final Code 集計番号_0101 = new Code("0101");
-    private static final Code 集計番号_0201 = new Code("0201");
-    private static final Code 集計番号_0301 = new Code("0301");
-    private static final Code 集計番号_0401 = new Code("0401");
-
     private final HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div;
 
     /**
@@ -1143,13 +1137,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuDataHandler {
 
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-        if (事業報告基本データ.get行集計番号().startsWith(件数総数.toString())) {
+        if (事業報告基本データ.get行集計番号().startsWith(件数総数)) {
             事業報告月報詳細データリスト = 件数引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(件数第２号被保険者分再掲.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(件数第２号被保険者分再掲)) {
             事業報告月報詳細データリスト = 件数引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(件数総数特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(件数総数特例分)) {
             事業報告月報詳細データリスト = 件数引き継ぎデータ;
-        } else if (事業報告基本データ.get行集計番号().startsWith(件数第２号被保険者分再掲特例分.toString())) {
+        } else if (事業報告基本データ.get行集計番号().startsWith(件数第２号被保険者分再掲特例分)) {
             事業報告月報詳細データリスト = 件数引き継ぎデータ;
         }
         修正データリスト = get事業報告修正データリスト(事業報告月報詳細データリスト, 修正データリスト);
