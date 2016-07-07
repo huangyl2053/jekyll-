@@ -127,7 +127,6 @@ public class PntTokuchouKaishiTutishoKarisanteiProcess extends SimpleBatchProces
             仮算定通知書情報.set前年度賦課情報(tmpResult.get賦課の情報_更正後().get賦課情報());
             仮算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
             仮算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-            仮算定通知書情報.set収入情報(tmpResult.get収入情報());
             仮算定通知書情報.set帳票制御共通(result.get帳票制御共通());
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定共通情報作成.create仮算定通知書共通情報(仮算定通知書情報);
 
