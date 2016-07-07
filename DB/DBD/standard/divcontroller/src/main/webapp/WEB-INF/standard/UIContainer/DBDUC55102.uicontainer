@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBDUC55101",
+ "uiContainerName": "DBDUC55102",
  "displayWizard": false,
  "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
-   "name": "職権修正／職権取消(一部)／認定結果入力(サ変・区変)",
+   "name": "職権取消(一部喪失)",
    "transitionList": [
     {
      "id": "1",
@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5510001",
      "toLayoutTitle": "職権修正",
-     "toState": "職権修正"
+     "toState": "職権一部喪失"
     },
     {
      "id": "3",
