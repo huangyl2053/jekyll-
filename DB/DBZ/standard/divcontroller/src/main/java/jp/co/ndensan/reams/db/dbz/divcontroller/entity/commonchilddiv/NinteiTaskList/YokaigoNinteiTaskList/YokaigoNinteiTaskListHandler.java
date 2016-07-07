@@ -252,6 +252,14 @@ public class YokaigoNinteiTaskListHandler {
             List<IChiJiHanTeiBusiness> 一次判定List = YokaigoNinteiTaskListFinder.createInstance().
                     get一次判定モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!一次判定List.isEmpty()) {
+                ShinSaKaiBusiness 前一次判定Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前一次判定(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前一次判定Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             一次判定モード(一次判定List);
         }
         if (マスキングモード.equals(モード)) {

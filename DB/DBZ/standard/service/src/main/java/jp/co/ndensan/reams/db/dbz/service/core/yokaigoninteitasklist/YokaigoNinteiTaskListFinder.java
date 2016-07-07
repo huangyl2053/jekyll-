@@ -444,6 +444,36 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     /**
+     * 前一次判定リストを取得します。
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return 他住所地特例者管理 他住所地特例者管理
+     */
+    @Transaction
+    public ShinSaKaiBusiness get前一次判定(YokaigoNinteiTaskListParameter parameter) {
+        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前一次判定(parameter);
+        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
+            set前一次判定(要介護認定完了情報, shinSaKaiBusiness);
+        }
+        return shinSaKaiBusiness;
+    }
+
+    private void set前一次判定(
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
+
+        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
+        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
+            entity.initializeMd5();
+            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
+        }
+        shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
+    }
+
+    /**
      * 前マスキングリストを取得します。
      *
      * @param parameter YokaigoNinteiTaskListParameter

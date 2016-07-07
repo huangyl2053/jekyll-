@@ -206,4 +206,12 @@ public interface IYokaigoNinteiTaskListMapper {
      * @return List<ShinSaKaiToRoKuRelate>
      */
     List<ShinSaKaiToRoKuRelate> get前審査受付(YokaigoNinteiTaskListParameter parameter);
+
+    /**
+     * 要介護認定申請情報＆構成市町村マスタ＆要介護認定完了情報＆要介護認定一次判定結果情報
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return List<ShinSaKaiToRoKuRelate>
+     */
+    List<ShinSaKaiToRoKuRelate> get前一次判定(YokaigoNinteiTaskListParameter parameter);
 }
