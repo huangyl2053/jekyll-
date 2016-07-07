@@ -254,7 +254,6 @@
         DbT5206."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     AND DbT5201."ninteichosaIraiRirekiNo" = DbT5206."ninteichosaRirekiNo"
     AND DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun"
-    --AND DbT5206."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
     LEFT JOIN 
         rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
     ON 
@@ -296,7 +295,6 @@
     ON 
         DbT5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     AND DbT5201."ninteichosaIraiRirekiNo" = DbT5205."ninteichosaRirekiNo"
-    --AND DbT5205."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
     WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
