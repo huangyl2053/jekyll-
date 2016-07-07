@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu;
 
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HihokenshaAndHenkanBangoEntity extends HihokenshaItijiEntity {
+public class HihokenshaAndHenkanBangoEntity extends DbWT0001HihokenshaTempEntity {
 
     private LasdecCode shichosonCode2;
     private RString shinNo;

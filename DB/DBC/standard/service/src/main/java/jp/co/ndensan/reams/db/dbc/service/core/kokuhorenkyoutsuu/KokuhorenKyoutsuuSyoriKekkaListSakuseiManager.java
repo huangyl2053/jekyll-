@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.entity.csv.SyoriKekkaListItijiCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -116,11 +116,11 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
         headerList.add(HEADER_備考);
 
         IKokuhorenKyoutsuuMapper mapper = mapperProvider.create(IKokuhorenKyoutsuuMapper.class);
-        List<SyoriKekkaListItijiEntity> entityList = mapper.select処理結果リスト一時TBL();
+        List<DbWT0002KokuhorenTorikomiErrorTempEntity> entityList = mapper.select処理結果リスト一時TBL();
         if (null != entityList && !entityList.isEmpty()) {
             List<SyoriKekkaListItijiCSVEntity> csvEntityList = new ArrayList<>();
             boolean isFirst = true;
-            for (SyoriKekkaListItijiEntity data : entityList) {
+            for (DbWT0002KokuhorenTorikomiErrorTempEntity data : entityList) {
                 SyoriKekkaListItijiCSVEntity entity = new SyoriKekkaListItijiCSVEntity();
                 if (isFirst) {
                     YMDHMS currentTime = YMDHMS.now();
@@ -185,7 +185,7 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                 if (!RString.isNullOrEmpty(key5)) {
                     rList.add(getNotNull(data.getキー5()));
                 }
-                rList.add(data.getエラー内容());
+                rList.add(getNotNull(data.getエラー内容()));
                 rList.add(getNotNull(data.get備考()));
                 csvListWriter.writeLine(rList);
             }

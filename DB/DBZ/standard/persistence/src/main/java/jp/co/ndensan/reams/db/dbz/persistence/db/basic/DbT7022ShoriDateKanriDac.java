@@ -17,6 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.s
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shoriEdaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shoriName;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.subGyomuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.taishoShuryoTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -1608,5 +1609,26 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 年度))).
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 特徴送付情報作成（バッチ）の処理対象期間取得
+     *
+     * @param 年度 Nendo
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理対象期間(FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, ShoriName.特徴異動情報作成),
+                                eq(nendo, 年度))).
+                order(by(taishoShuryoTimestamp, Order.DESC)).limit(1)
+                .toObject(DbT7022ShoriDateKanriEntity.class);
     }
 }

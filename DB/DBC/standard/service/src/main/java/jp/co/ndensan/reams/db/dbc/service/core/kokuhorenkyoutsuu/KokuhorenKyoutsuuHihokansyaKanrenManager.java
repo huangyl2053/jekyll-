@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.service.core.kokuhorenkyoutsuu;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaAndDaichouAndAtenaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaAndHenkanBangoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.HihokenshaItijiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu.SyoriKekkaListItijiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -97,13 +97,14 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
     }
 
     private void do旧市町村コードの取得(FlexibleDate 変換基準日) {
-        List<HihokenshaItijiEntity> list = mapper.select被保険者番号変換対象(変換基準日);
-        Set<HokenshaNo> hokenshaNoSet = new HashSet<>();
-        for (HihokenshaItijiEntity entity : list) {
-            hokenshaNoSet.add(entity.getShoHokenshaNo());
+        List<DbWT0001HihokenshaTempEntity> list = mapper.select被保険者番号変換対象(変換基準日);
+        Set<ShoKisaiHokenshaNo> hokenshaNoSet = new HashSet<>();
+        for (DbWT0001HihokenshaTempEntity entity : list) {
+            hokenshaNoSet.add(entity.get証記載保険者番号());
         }
         if (!hokenshaNoSet.isEmpty()) {
-            for (HokenshaNo hokenshaNo : hokenshaNoSet) {
+            for (ShoKisaiHokenshaNo shoHokenshaNo : hokenshaNoSet) {
+                HokenshaNo hokenshaNo = new HokenshaNo(shoHokenshaNo.getColumnValue());
                 GappeiJyohoSpecificParameter parameter
                         = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(LasdecCode.EMPTY, hokenshaNo);
                 SearchResult<GappeiCityJyoho> gcJohoResult
@@ -125,7 +126,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
             if (null == entity.getShichosonCode2() || RString.isNullOrEmpty(entity.getShichosonCode2().value())) {
                 doエラー登録(entity);
             }
-            mapper.update被保険者一時TBLWith新被保険者番号(entity.getMeisaiRenban(), entity.getShinNo());
+            mapper.update被保険者一時TBLWith新被保険者番号(entity.get連番(), entity.getShinNo());
         }
         mapper.update被保険者一時TBLWith現被保険者番号(変換基準日);
     }
@@ -137,71 +138,71 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
     private void do被保険者宛名情報を被保険者一時TBLに登録(HihokenshaAndDaichouAndAtenaEntity entity) {
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.createKojin(entity.getAtena());
         DbT1001HihokenshaDaichoEntity daicho = entity.getDaicho();
-        HihokenshaItijiEntity saveEntity = entity.getHihokensha();
-        saveEntity.setKannaiKangaiKubun(識別対象.get住所().get管内管外().toRString());
-        saveEntity.setYubinNo(識別対象.get住所().get郵便番号().getYubinNo());
-        saveEntity.setChoikiCode(識別対象.get住所().get町域コード().getColumnValue());
-        saveEntity.setGyoseikuCode(識別対象.get行政区画().getGyoseiku().getコード().getColumnValue());
-        saveEntity.setGyoseikuMei(識別対象.get行政区画().getGyoseiku().get名称());
-        saveEntity.setJusho(識別対象.get住所().get住所());
-        saveEntity.setBanchi(識別対象.get住所().get番地().getBanchi().getColumnValue());
-        saveEntity.setKatagaki(識別対象.get住所().get方書().getColumnValue());
-        saveEntity.setKanaMeisho(識別対象.get名称().getKana().getColumnValue());
-        saveEntity.setMeisho(識別対象.get名称().getName().getColumnValue());
-        saveEntity.setShimei50onKana(RStringUtil.convertTo清音化(識別対象.get名称().getKana().getColumnValue()));
-        saveEntity.setShikibetsuCode(識別対象.get識別コード());
-        saveEntity.setShichosonCode(daicho.getShichosonCode());
-        saveEntity.setShikakuShutokuYmd(daicho.getShikakuShutokuYMD());
-        saveEntity.setShikakuShutokuJiyuCode(daicho.getShikakuShutokuJiyuCode());
-        saveEntity.setShikakuSoshitsuYmd(daicho.getShikakuSoshitsuYMD());
-        saveEntity.setShikakuSoshitsuJiyuCode(daicho.getShikakuSoshitsuJiyuCode());
+        DbWT0001HihokenshaTempEntity saveEntity = entity.getHihokensha();
+        saveEntity.set管内管外区分(識別対象.get住所().get管内管外().toRString());
+        saveEntity.set郵便番号(識別対象.get住所().get郵便番号().getYubinNo());
+        saveEntity.set町域コード(識別対象.get住所().get町域コード().getColumnValue());
+        saveEntity.set行政区コード(識別対象.get行政区画().getGyoseiku().getコード().getColumnValue());
+        saveEntity.set行政区名(識別対象.get行政区画().getGyoseiku().get名称());
+        saveEntity.set住所(識別対象.get住所().get住所());
+        saveEntity.set番地(識別対象.get住所().get番地().getBanchi().getColumnValue());
+        saveEntity.set方書(識別対象.get住所().get方書().getColumnValue());
+        saveEntity.set宛名カナ名称(識別対象.get名称().getKana().getColumnValue());
+        saveEntity.set宛名名称(識別対象.get名称().getName().getColumnValue());
+        saveEntity.set氏名50音カナ(RStringUtil.convertTo清音化(識別対象.get名称().getKana().getColumnValue()));
+        saveEntity.set識別コード(識別対象.get識別コード().getColumnValue());
+        saveEntity.set市町村コード(daicho.getShichosonCode());
+        saveEntity.set資格取得日(daicho.getShikakuShutokuYMD());
+        saveEntity.set資格取得事由コード(daicho.getShikakuShutokuJiyuCode());
+        saveEntity.set資格喪失日(daicho.getShikakuSoshitsuYMD());
+        saveEntity.set資格喪失事由コード(daicho.getShikakuSoshitsuJiyuCode());
         mapper.update被保険者一時TBLWith被保険者宛名情報(saveEntity);
     }
 
     private void doエラー登録(HihokenshaAndHenkanBangoEntity entity) {
-        SyoriKekkaListItijiEntity kekka = new SyoriKekkaListItijiEntity();
+        DbWT0002KokuhorenTorikomiErrorTempEntity kekka = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         kekka.setエラー区分(MSG_エラー区分10);
-        kekka.set証記載保険者番号(new ShoKisaiHokenshaNo(entity.getShoHokenshaNo().value()));
-        kekka.set被保険者番号(entity.getHihokenshaNo());
+        kekka.set証記載保険者番号(entity.get証記載保険者番号());
+        kekka.set被保険者番号(entity.get被保険者番号());
         kekka.setキー1(RString.EMPTY);
         kekka.setキー2(RString.EMPTY);
         kekka.setキー3(RString.EMPTY);
         kekka.setキー4(RString.EMPTY);
         kekka.setキー5(RString.EMPTY);
-        kekka.set被保険者カナ氏名(entity.getOrgHihokenshaKanaShimei());
-        kekka.set被保険者氏名(entity.getOrgHihokenshaShimei());
+        kekka.set被保険者カナ氏名(entity.get被保険者カナ氏名());
+        kekka.set被保険者氏名(entity.get被保険者氏名());
         kekka.set備考(RString.EMPTY);
         mapper.insert処理結果リスト一時TBL(kekka);
     }
 
-    private void do被保険者情報が取得できなかったデータをエラー登録する(HihokenshaItijiEntity hihokensha) {
-        SyoriKekkaListItijiEntity kekka = new SyoriKekkaListItijiEntity();
+    private void do被保険者情報が取得できなかったデータをエラー登録する(DbWT0001HihokenshaTempEntity hihokensha) {
+        DbWT0002KokuhorenTorikomiErrorTempEntity kekka = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         kekka.setエラー区分(MSG_エラー区分20);
-        kekka.set証記載保険者番号(new ShoKisaiHokenshaNo(hihokensha.getShoHokenshaNo().value()));
-        kekka.set被保険者番号(hihokensha.getHihokenshaNo());
+        kekka.set証記載保険者番号(hihokensha.get証記載保険者番号());
+        kekka.set被保険者番号(hihokensha.get被保険者番号());
         kekka.setキー1(RString.EMPTY);
         kekka.setキー2(RString.EMPTY);
         kekka.setキー3(RString.EMPTY);
         kekka.setキー4(RString.EMPTY);
         kekka.setキー5(RString.EMPTY);
-        kekka.set被保険者カナ氏名(hihokensha.getOrgHihokenshaKanaShimei());
-        kekka.set被保険者氏名(hihokensha.getOrgHihokenshaShimei());
+        kekka.set被保険者カナ氏名(hihokensha.get被保険者カナ氏名());
+        kekka.set被保険者氏名(hihokensha.get被保険者氏名());
         kekka.set備考(RString.EMPTY);
         mapper.insert処理結果リスト一時TBL(kekka);
     }
 
-    private void do宛名情報が取得できなかったデータをエラー登録する(HihokenshaItijiEntity hihokensha) {
-        SyoriKekkaListItijiEntity kekka = new SyoriKekkaListItijiEntity();
+    private void do宛名情報が取得できなかったデータをエラー登録する(DbWT0001HihokenshaTempEntity hihokensha) {
+        DbWT0002KokuhorenTorikomiErrorTempEntity kekka = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         kekka.setエラー区分(MSG_エラー区分30);
-        kekka.set証記載保険者番号(new ShoKisaiHokenshaNo(hihokensha.getShoHokenshaNo().value()));
-        kekka.set被保険者番号(hihokensha.getHihokenshaNo());
+        kekka.set証記載保険者番号(hihokensha.get証記載保険者番号());
+        kekka.set被保険者番号(hihokensha.get被保険者番号());
         kekka.setキー1(RString.EMPTY);
         kekka.setキー2(RString.EMPTY);
         kekka.setキー3(RString.EMPTY);
         kekka.setキー4(RString.EMPTY);
         kekka.setキー5(RString.EMPTY);
-        kekka.set被保険者カナ氏名(hihokensha.getOrgHihokenshaKanaShimei());
-        kekka.set被保険者氏名(hihokensha.getOrgHihokenshaShimei());
+        kekka.set被保険者カナ氏名(hihokensha.get被保険者カナ氏名());
+        kekka.set被保険者氏名(hihokensha.get被保険者氏名());
         kekka.set備考(RString.EMPTY);
         mapper.insert処理結果リスト一時TBL(kekka);
     }
