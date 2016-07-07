@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.ShotokuJouhouTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -38,22 +39,27 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class KaigoHokenShotokuJohoIchiranPrintService {
 
+    private static final ReportId 帳票分類ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
+
     /**
      * print介護保険所得情報
      *
-     * @param 所得情報一覧リスト List<ShotokuJouhouTempEntity>
+     * @param 所得情報一覧リスト List<KaigoHokenShotokuTempEntity>
      * @param 導入形態コード RString
      * @param 市町村コード LasdecCode
      * @param 市町村名称 RString
      * @param 出力順ID Long
      * @return SourceDataCollection
      */
-    public SourceDataCollection print介護保険所得情報(List<ShotokuJouhouTempEntity> 所得情報一覧リスト,
+    public SourceDataCollection print介護保険所得情報(List<KaigoHokenShotokuTempEntity> 所得情報一覧リスト,
             RString 導入形態コード,
             LasdecCode 市町村コード,
             RString 市町村名称,
             Long 出力順ID) {
-        KaigoHokenShotokuJohoIchiranProperty property = new KaigoHokenShotokuJohoIchiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
+
+        KaigoHokenShotokuJohoIchiranProperty property = new KaigoHokenShotokuJohoIchiranProperty(並び順);
         List<RString> 出力順項目リスト = get出力順(出力順ID);
         List<RString> 改頁項目リスト = get改頁項目(出力順ID);
         IAssociationFinder finder = AssociationFinderFactory.createInstance();

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -40,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class ShotokushokaihyoHakkoIchiranPrintService {
 
+    private static final ReportId 帳票分類ID = new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran");
+
     /**
      * 所得照会票発行一覧表printメソッドです。
      *
@@ -57,7 +60,9 @@ public class ShotokushokaihyoHakkoIchiranPrintService {
             FlexibleYear 処理年度,
             boolean テストプリント,
             Long 出力順ID) {
-        ShotokushokaihyoHakkoIchiranProperty property = new ShotokushokaihyoHakkoIchiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
+        ShotokushokaihyoHakkoIchiranProperty property = new ShotokushokaihyoHakkoIchiranProperty(並び順);
 
         List<RString> 出力順項目リスト = get出力順(出力順ID);
         List<RString> 改頁項目リスト = get改頁項目(出力順ID);
