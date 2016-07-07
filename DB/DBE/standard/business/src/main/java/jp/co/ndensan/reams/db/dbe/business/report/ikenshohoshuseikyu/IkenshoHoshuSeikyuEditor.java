@@ -36,9 +36,9 @@ public class IkenshoHoshuSeikyuEditor implements IIkenshoHoshuSeikyuEditor {
     @Override
     public IkenshoHoshuSeikyuReportSource edit(IkenshoHoshuSeikyuReportSource source) {
         source.hakkoYMD = item.get発行年月日();
-        source.IryokikanYubimNo = (item.get郵便番号() == null ? RString.EMPTY : new RString(item.get郵便番号().toString()));
-        source.IryokikanJusho = item.get住所();
-        source.IryokikanName = item.get医療機関();
+        source.iryokikanYubimNo = (item.get郵便番号() == null ? RString.EMPTY : new RString(item.get郵便番号().toString()));
+        source.iryokikanJusho = item.get住所();
+        source.iryokikanName = item.get医療機関();
         source.daihyoshaName = item.get代表者名();
         source.title = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬請求書, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.主治医意見書作成報酬請求書.get名称());
