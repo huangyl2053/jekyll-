@@ -225,6 +225,7 @@ public class KaigoHokenryoGemmen {
         if (!登録flag) {
             DbT2004GemmenEntity del介護賦課減免Entity = 減免情報.getGemmenList().get(0).toEntity();
             if (del介護賦課減免Entity != null) {
+                del介護賦課減免Entity.setState(EntityDataState.Deleted);
                 介護賦課減免Dac.delete(del介護賦課減免Entity);
             }
         }
