@@ -1405,21 +1405,21 @@
            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
        FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051                                                                       
-                ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+            INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
+                ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" 
-                ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        WHERE                                                                                
+                ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116
+                ON  DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        WHERE
                 "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NULL
-            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NULL
-            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NULL
-            AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
             AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
-            AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY  DbT5101."hihokenshaKana",
