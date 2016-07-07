@@ -79,7 +79,7 @@ public class KanryoshoriIchijihanteiManager {
         if (entity != null) {
             return entity.getKariIchijiHanteiKubun();
         }
-        return false;
+        return true;
     }
 
 }
