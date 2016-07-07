@@ -57,7 +57,7 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
         if (list.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.処理状態処理前未設定.getMessage());
         }
-        if (list.size() >= 2) {
+        if (2 <= list.size()) {
             throw new ApplicationException(DbcErrorMessages.高額判定_処理状態処理前数不正.getMessage());
         }
         return list.get(0);
@@ -76,12 +76,12 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
             RString 審査年月From, RString 審査年月To, boolean 出力フラグ, RString 出力順ID) {
         KogakuKaigoKyufuhiTaishoshaBatchParameter param = new KogakuKaigoKyufuhiTaishoshaBatchParameter();
 
-        if (!審査年月From.isEmpty() || 審査年月From != null) {
+        if (審査年月From != null || !審査年月From.isEmpty()) {
             param.setShinsaYMFrom(new FlexibleYearMonth(審査年月From));
         } else {
             param.setShinsaYMFrom(new FlexibleYearMonth(RString.EMPTY));
         }
-        if (!審査年月To.isEmpty() || 審査年月To != null) {
+        if (審査年月To != null || !審査年月To.isEmpty()) {
             param.setShinsaYMTo(new FlexibleYearMonth(審査年月To));
         } else {
             param.setShinsaYMTo(new FlexibleYearMonth(RString.EMPTY));
