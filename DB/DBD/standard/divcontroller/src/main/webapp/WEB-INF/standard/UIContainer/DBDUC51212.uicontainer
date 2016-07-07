@@ -1,34 +1,34 @@
 ﻿{
- "uiContainerName": "DBDUC51202",
+ "uiContainerName": "DBDUC51212",
  "displayWizard": false,
  "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定申請受付（更新）",
+   "name": "要介護認定申請取下（区分変更）",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "該当者一覧"
+     "toLayoutName": "DBZ5100001",
+     "toLayoutTitle": "要介護認定申請情報検索",
+     "toState": "初期表示"
     },
     {
      "id": "2",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "対象者特定",
+     "layoutName": "DBZ5100001",
+     "layoutTitle": "要介護認定申請情報検索",
+     "eventName": "検索結果選択",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5120001",
      "toLayoutTitle": "要介護認定申請登録",
-     "toState": "更新追加"
+     "toState": "区分変更取下"
     },
     {
      "id": "3",
@@ -40,9 +40,9 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "該当者一覧"
+     "toLayoutName": "DBZ5100001",
+     "toLayoutTitle": "要介護認定申請情報検索",
+     "toState": "初期表示"
     },
     {
      "id": "4",

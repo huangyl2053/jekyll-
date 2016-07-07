@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBDUC51202",
+ "uiContainerName": "DBDUC51205",
  "displayWizard": false,
  "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定申請受付（更新）",
+   "name": "受給者転入",
    "transitionList": [
     {
      "id": "1",
@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5120001",
      "toLayoutTitle": "要介護認定申請登録",
-     "toState": "更新追加"
+     "toState": "受給者転入追加"
     },
     {
      "id": "3",
