@@ -178,11 +178,11 @@ public final class TokutyoKariSanteiFukaHandler {
             if (shoriname.equals(shoridatekanri.get処理名())) {
                 dgTokutyoKariSanteiShoriKakunin_Row newRow = new dgTokutyoKariSanteiShoriKakunin_Row();
                 newRow.setTxtShoriMei(shoriname);
+                newRow.setTxtJokyo(状況済);
                 if (shoridatekanri.get基準年月日() == null || shoridatekanri.get基準年月日().isEmpty()) {
                     newRow.setTxtJokyo(状況未);
                     newRow.setTxtShoriNichiji(RString.EMPTY);
-                } else {
-                    newRow.setTxtJokyo(状況済);
+                } else if (shoridatekanri.get基準日時() != null && !shoridatekanri.get基準日時().isEmpty()) {
                     RString dateTemp = shoridatekanri.get基準日時().getDate().wareki().toDateString();
                     RString timeTemp = new RString(shoridatekanri.get基準日時().getRDateTime().toString().substring(NUM11, NUM19));
                     newRow.setTxtShoriNichiji(dateTemp.concat(RString.HALF_SPACE).concat(timeTemp));
