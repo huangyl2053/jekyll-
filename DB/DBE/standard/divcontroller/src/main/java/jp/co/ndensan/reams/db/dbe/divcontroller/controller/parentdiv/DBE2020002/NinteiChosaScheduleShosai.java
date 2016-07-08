@@ -98,10 +98,14 @@ public class NinteiChosaScheduleShosai {
         if (遷移元画面番号_10.equals(遷移元画面番号)) {
             調査員状況 = ViewStateHolder.get(ViewStateKeys.調査員状況02, RString.class);
             認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(設定日, 調査員状況, 地区コード, 保険者, 認定調査委託先コード);
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(
+                    設定日, 調査員状況, 地区コード, 保険者, 認定調査委託先コード);
             認定調査スケジュールList = ChosainJohoFander.createInstance().get認定調査スケジュール詳細情報(parameter).records();
         }
-        getHandler(div).onLoad(通常件数, 重要件数, モード, 対象地区List, 認定調査スケジュールList, 保険者List);
+        FlexibleDate viewState_設定日 = ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class);
+        RString viewState_地区コード = ViewStateHolder.get(ViewStateKeys.地区コード, RString.class);
+        getHandler(div).onLoad(通常件数, 重要件数, モード, 対象地区List,
+                認定調査スケジュールList, 保険者List, viewState_設定日, viewState_地区コード);
         return ResponseData.of(div).respond();
     }
 

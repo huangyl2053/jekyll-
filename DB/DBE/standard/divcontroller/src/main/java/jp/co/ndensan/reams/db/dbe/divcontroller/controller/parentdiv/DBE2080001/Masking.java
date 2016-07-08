@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2080001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.DBE2080001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.DBE2080001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.MaskingDiv;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -35,19 +35,18 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -76,9 +75,7 @@ public class Masking {
     public ResponseData<MaskingDiv> onLoad(MaskingDiv div) {
         getHandler(div).initialize();
         if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-            throw new ApplicationException(errorMessage);
+            throw new PessimisticLockingException();
         }
         List<PersonalData> personalDataList = new ArrayList<>();
         List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
@@ -161,7 +158,7 @@ public class Masking {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgYokaigoNinteiTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+            申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getCheckbox());
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
         }
@@ -226,6 +223,16 @@ public class Masking {
                 getパターン1(row.getIkenshoIraiKanryoDay().getValue()),
                 getパターン1(row.getIkenshoNyushuKanryoDay().getValue()),
                 getパターン1(row.getMaskingKanryoDay().getValue()));
+    }
+
+    private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
+        List<RString> 申請書管理番号リスト = new ArrayList<>();
+        for (dgNinteiTaskList_Row データ : 選択データ) {
+            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
+        }
+        ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
+        shinseishoKanriNoList.setShinseishoKanriNoS(申請書管理番号リスト);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号リスト, shinseishoKanriNoList);
     }
 
     private RString getパターン1(RDate date) {
