@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -87,13 +88,14 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDa
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
-                association.getLasdecCode_().getColumnValue(),
+                association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 new RString("認定調査データ出力（モバイル）.csv"),
                 new RString("ChosaKekkaNyuryokuMobile.csv"),
-                new RString(String.valueOf(eucCsvWriter.getCount())),
+                new NinteiChosaDataOutputResult().get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new NinteiChosaDataOutputResult().get出力条件(processParamter));
         OutputJokenhyoFactory.createInstance(item).print();
     }
+
 }
