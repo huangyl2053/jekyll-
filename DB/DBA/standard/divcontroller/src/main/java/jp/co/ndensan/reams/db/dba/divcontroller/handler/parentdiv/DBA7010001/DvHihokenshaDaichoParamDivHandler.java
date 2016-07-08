@@ -81,13 +81,13 @@ public class DvHihokenshaDaichoParamDivHandler {
      */
     @CheckForNull
     public HizukeChushutsuKubun get日付抽出区分() {
-        if (RString.isNullOrEmpty(this.div.getRadChushutsuChokkin().getSelectedKey())) {
+        if (!RString.isNullOrEmpty(this.div.getRadChushutsuChokkin().getSelectedKey())) {
             return HizukeChushutsuKubun.直近;
         }
-        if (RString.isNullOrEmpty(this.div.getRadChushutsuKijunBi().getSelectedKey())) {
+        if (!RString.isNullOrEmpty(this.div.getRadChushutsuKijunBi().getSelectedKey())) {
             return HizukeChushutsuKubun.基準日;
         }
-        if (RString.isNullOrEmpty(this.div.getRadChushutsuHani().getSelectedKey())) {
+        if (!RString.isNullOrEmpty(this.div.getRadChushutsuHani().getSelectedKey())) {
             return HizukeChushutsuKubun.範囲;
         }
         return null;

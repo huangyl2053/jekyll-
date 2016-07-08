@@ -49,11 +49,11 @@ public class HanyoListAtenaSelectHandler {
      */
     public void initialize(HokenshaKosei 保険者構成) {
         if (HokenshaKosei.単一市町村.getコード().equals(保険者構成.getコード())) {
-            div.getCcdHokenshaList().setVisible(false);
-            div.getDvChiku().setVisible(true);
+            div.getCcdHokenshaList().setDisplayNone(true);
+            div.getDvChiku().setDisplayNone(false);
         } else if (HokenshaKosei.広域市町村.getコード().equals(保険者構成.getコード())) {
-            div.getCcdHokenshaList().setVisible(true);
-            div.getDvChiku().setVisible(false);
+            div.getCcdHokenshaList().setDisplayNone(false);
+            div.getDvChiku().setDisplayNone(true);
         }
         set初期項目状態();
         set初期項目内容();

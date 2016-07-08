@@ -63,10 +63,6 @@ var DBZ;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtSeinengappi"));
             };
 
-            Controls.prototype.ccdHokenshaList = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
-            };
-
             Controls.prototype.DvChiku = function () {
                 return new UZA.Panel(this.convFiledName("DvChiku"));
             };
@@ -79,48 +75,8 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblStart"));
             };
 
-            Controls.prototype.ccdJushoFrom = function () {
-                return new URA.ChoikiInput.ModeController(this.convFiledName("ccdJushoFrom"));
-            };
-
-            Controls.prototype.ccdGyoseikuFrom = function () {
-                return new URA.GyoseikuInput.ModeController(this.convFiledName("ccdGyoseikuFrom"));
-            };
-
-            Controls.prototype.ccdChiku1From = function () {
-                return new URA.Chiku1Input.ModeController(this.convFiledName("ccdChiku1From"));
-            };
-
-            Controls.prototype.ccdChiku2From = function () {
-                return new URA.Chiku2Input.ModeController(this.convFiledName("ccdChiku2From"));
-            };
-
-            Controls.prototype.ccdChiku3From = function () {
-                return new URA.Chiku3Input.ModeController(this.convFiledName("ccdChiku3From"));
-            };
-
             Controls.prototype.lblEnd = function () {
                 return new UZA.Label(this.convFiledName("lblEnd"));
-            };
-
-            Controls.prototype.ccdJushoTo = function () {
-                return new URA.ChoikiInput.ModeController(this.convFiledName("ccdJushoTo"));
-            };
-
-            Controls.prototype.ccdGyoseikuTo = function () {
-                return new URA.GyoseikuInput.ModeController(this.convFiledName("ccdGyoseikuTo"));
-            };
-
-            Controls.prototype.ccdChiku1To = function () {
-                return new URA.Chiku1Input.ModeController(this.convFiledName("ccdChiku1To"));
-            };
-
-            Controls.prototype.ccdChiku2To = function () {
-                return new URA.Chiku2Input.ModeController(this.convFiledName("ccdChiku2To"));
-            };
-
-            Controls.prototype.ccdChiku3To = function () {
-                return new URA.Chiku3Input.ModeController(this.convFiledName("ccdChiku3To"));
             };
             return Controls;
         })();
