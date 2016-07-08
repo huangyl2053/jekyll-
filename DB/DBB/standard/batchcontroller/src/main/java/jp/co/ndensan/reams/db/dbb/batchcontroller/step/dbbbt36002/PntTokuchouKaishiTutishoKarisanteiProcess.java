@@ -282,7 +282,7 @@ public class PntTokuchouKaishiTutishoKarisanteiProcess extends SimpleBatchProces
     private int publish特徴開始通知書_その他(TyouhyouEntity 出力帳票一覧, KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
             KarisanteiIdoTsuchishoIkkatsuHakkoResult result, KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             Ninshosha 認証者, boolean is公印に掛ける, boolean is公印を省略, FlexibleDate 発行日, ICheckListInfo info, EditedAtesaki 編集後宛先) {
-        if (ReportIdDBB.DBB100008.getReportId().equals(出力帳票一覧.get帳票ID())) {
+        if (ReportIdDBB.DBB100009.getReportId().equals(出力帳票一覧.get帳票ID())) {
             IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
                     SubGyomuCode.DBB介護賦課, 仮算定通知書情報.get帳票分類ID());
             CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
