@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 認定調査報酬支払明細書のチェックリストのReportSourceクラスです。
@@ -54,10 +58,25 @@ public class ChosaHoshumeisaiReportSource implements IReportSource {
     public RString listGokeikensu_4;
     @ReportItem(name = "listGokeiKingaku_1", length = 9, order = 21)
     public RString listGokeiKingaku_1;
+    @ReportItem(name = "ninteichosainCode", length = 9, order = 22)
+    public RString ninteichosainCode;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        chosaItakusakiNam,
+        ninteichosainCode
+    }
 }
