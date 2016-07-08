@@ -53,8 +53,8 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
     private static final RString 状況未 = new RString("未");
-    private static final RString 特徴仮算定賦課 = new RString("DBB0110001");
-    private static final RString 特徴仮算定通知書一括発行 = new RString("DBB0110003");
+    private static final RString 特徴仮算定賦課 = new RString("0110001");
+    private static final RString 特徴仮算定通知書一括発行 = new RString("0110003");
     private static final RString 実行する = new RString("btnSantei");
     private static final RString 実行する1 = new RString("btnTsuchishoSakusei");
     private static final RString 年額基準年度 = new RString("年額基準年度");
