@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -71,6 +73,43 @@ public class DbT2008ShotokuKanriDac implements ISaveable<DbT2008ShotokuKanriEnti
         return accessor.select().
                 table(DbT2008ShotokuKanri.class).
                 toList(DbT2008ShotokuKanriEntity.class);
+    }
+
+    /**
+     * 介護所得管理を検索します。
+     *
+     * @param 所得年度 ShotokuNendo
+     * @param 識別コード ShikibetsuCode
+     * @return DbT2008ShotokuKanriEntity
+     */
+    @Transaction
+    public DbT2008ShotokuKanriEntity select介護所得管理(FlexibleYear 所得年度, ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2008ShotokuKanri.class).
+                where(and(
+                                eq(shotokuNendo, 所得年度),
+                                eq(shikibetsuCode, 識別コード))).
+                toObject(DbT2008ShotokuKanriEntity.class);
+    }
+
+    /**
+     * 介護所得管理制限を検索します。
+     *
+     * @param 所得年度 ShotokuNendo
+     * @param 識別コード ShikibetsuCode
+     * @return DbT2008ShotokuKanriEntity
+     */
+    @Transaction
+    public DbT2008ShotokuKanriEntity select介護所得管理制限(FlexibleYear 所得年度, ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2008ShotokuKanri.class).
+                where(and(
+                                eq(shotokuNendo, 所得年度),
+                                eq(shikibetsuCode, 識別コード))).
+                order(by(DbT2008ShotokuKanri.rirekiNo, Order.DESC)).limit(1).
+                toObject(DbT2008ShotokuKanriEntity.class);
     }
 
     /**

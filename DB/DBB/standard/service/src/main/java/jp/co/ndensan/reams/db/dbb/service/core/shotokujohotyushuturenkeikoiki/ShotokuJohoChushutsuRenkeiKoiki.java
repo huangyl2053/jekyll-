@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -45,6 +46,12 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     private static final RString SPLIT = new RString("_");
     private static final RString 当初所得情報ファイル名 = new RString("DEC05F001");
     private static final RString 異動所得情報ファイル名 = new RString("DEE01F001");
+    private static final RString 共有ファイル名 = new RString("DEC05F001");
+    private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
+    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
+    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
+    private static final RString 当初_広域 = new RString("1");
+    private static final RString 異動_広域 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -143,8 +150,14 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
-        result.set共有ファイル名(parameter.get共有ファイル名());
-        result.set共有ファイルID(parameter.get共有ファイルID());
+        result.set共有ファイル名(共有ファイル名);
+        result.set共有ファイルID(共有ファイルID);
+        RString メニューID = ResponseHolder.getMenuID();
+        if (所得情報抽出_連携当初.equals(メニューID)) {
+            result.set処理区分(当初_広域);
+        } else if (所得情報抽出_連携異動.equals(メニューID)) {
+            result.set処理区分(異動_広域);
+        }
         result.set処理区分(parameter.get処理区分());
         return result;
     }
