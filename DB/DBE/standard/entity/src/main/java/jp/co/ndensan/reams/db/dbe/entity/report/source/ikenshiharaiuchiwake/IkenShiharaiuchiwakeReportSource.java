@@ -89,6 +89,8 @@ public class IkenShiharaiuchiwakeReportSource implements IReportSource {
     public RString listShiharaiuchiwake_5;
     @ReportItem(name = "tsuchibun2", order = 34)
     public RString tsuchibun2;
+    @ReportItem(name = "iryokikanCode", length = 7, order = 35)
+    public RString iryokikanCode;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
@@ -99,4 +101,12 @@ public class IkenShiharaiuchiwakeReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        iryokikanCode
+    }
 }

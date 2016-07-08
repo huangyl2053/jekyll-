@@ -53,4 +53,5 @@ public class IkenShiharaiuchiwakeEntity {
     private RString 内訳住所;
     private RString 金額;
     private RString 通知文2;
+    private RString 医療機関コード;
 }
