@@ -85,12 +85,12 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     public KogakuKaigoKyufuhiTaishoshaBatchParameter getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
             RString 審査年月From, RString 審査年月To, boolean 出力フラグ, Long 出力順ID) {
         KogakuKaigoKyufuhiTaishoshaBatchParameter param = new KogakuKaigoKyufuhiTaishoshaBatchParameter();
-        if (RString.isNullOrEmpty(審査年月From)) {
+        if (!RString.isNullOrEmpty(審査年月From)) {
             param.setShinsaYMFrom(new FlexibleYearMonth(審査年月From));
         } else {
             param.setShinsaYMFrom(new FlexibleYearMonth(RString.EMPTY));
         }
-        if (RString.isNullOrEmpty(審査年月To)) {
+        if (!RString.isNullOrEmpty(審査年月To)) {
             param.setShinsaYMTo(new FlexibleYearMonth(審査年月To));
         } else {
             param.setShinsaYMTo(new FlexibleYearMonth(RString.EMPTY));
