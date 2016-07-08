@@ -43,6 +43,7 @@ public class ShikakuSoshitsuIdoTotal {
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString SHORUIJOKYO = new RString("証交付回収");
     private static final RString 修正 = new RString("修正");
+    private static final RString 状態_照会 = new RString("照会");
     private static final Integer FIRSTINDEX = Integer.valueOf("0");
 
     /**
@@ -117,8 +118,12 @@ public class ShikakuSoshitsuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuSoshitsuIdoTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
         RealInitialLocker.release(前排他ロックキー);
-        createHandler(div).setパラメータ();
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.詳細へ).respond();
     }
 
