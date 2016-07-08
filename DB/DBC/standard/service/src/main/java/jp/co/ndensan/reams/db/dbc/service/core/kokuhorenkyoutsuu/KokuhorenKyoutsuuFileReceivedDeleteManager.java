@@ -87,7 +87,7 @@ public class KokuhorenKyoutsuuFileReceivedDeleteManager {
             toList.add(to);
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険,
-                FilesystemName.fromString(new File(保存先フォルダ.toString()).getName()));
+                FilesystemName.fromString(アンダーライン.concat(new File(保存先フォルダ.toString()).getName())));
         sfd = SharedFile.defineSharedFile(sfd);
         RString 保管日数 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_取込ファイル_保管日数,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);

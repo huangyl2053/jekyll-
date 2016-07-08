@@ -19,10 +19,8 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakaiiinhoshunyuryoku.S
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -44,16 +42,9 @@ public class ShinsakaiIinHoshuNyuryoku {
     private static final RString 後方一致 = new RString("後方一致");
     private static final RString 完全一致 = new RString("完全一致");
     private static final RString 部分一致 = new RString("部分一致");
-    private RString 介護認定審査会委員氏名;
-    private Decimal 最大表示件数;
-    private boolean is前方一致 = false;
-    private boolean is後方一致 = false;
-    private boolean is完全一致 = false;
-    private boolean is部分一致 = false;
-    private RString コード;
-    private RDate fromDate;
-    private RDate toDate;
     private final ShinsakaiIinHoshuJissekiJohoManager shinasamanager;
+    private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -91,7 +82,12 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Check(ShinsakaiIinHoshuNyuryokuDiv div) {
-
+        Decimal 最大表示件数;
+        boolean is前方一致 = false;
+        boolean is後方一致 = false;
+        boolean is完全一致 = false;
+        boolean is部分一致 = false;
+        boolean has最大表示件数 = false;
         if (前方一致.equals(div.getShinsakaiIinKensakuJoken().getDdlHihokenshaNameMatchType().getSelectedValue())) {
             is前方一致 = true;
         }
@@ -104,17 +100,26 @@ public class ShinsakaiIinHoshuNyuryoku {
         if (部分一致.equals(div.getShinsakaiIinKensakuJoken().getDdlHihokenshaNameMatchType().getSelectedValue())) {
             is部分一致 = true;
         }
-        介護認定審査会委員氏名 = div.getShinsakaiIinKensakuJoken().getTxtShinsaIinmei().getValue();
-        最大表示件数 = new Decimal(Integer.valueOf(div.getShinsakaiIinKensakuJoken().getTxtMaxCount().getValue().toString()));
+        RString 介護認定審査会委員氏名 = div.getShinsakaiIinKensakuJoken().getTxtShinsaIinmei().getValue();
+        if (!div.getShinsakaiIinKensakuJoken()
+                .getTextBoxNum().getValue().toString().isEmpty()) {
+            最大表示件数 = new Decimal(Integer.valueOf(div.getShinsakaiIinKensakuJoken().getTextBoxNum().getValue().toString()));
+            has最大表示件数 = true;
+        } else {
+            最大表示件数 = new Decimal(0);
+        }
         List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
                 .createInstance().get審査会委員一覧(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
-                                介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, コード, fromDate, toDate)).records();
+                                介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, null,
+                                null, null, null, has最大表示件数, false, false)).records();
+
         if (shinsakaiIinHoshuNyuryoku.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        div.getShinsakaiIinKensakuJoken().getTxtShinsaIinmei().setValue(new RString(shinsakaiIinHoshuNyuryoku.size()));
-        getHandler(div).edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会委員一覧);
+        getHandler(div)
+                .edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);
+        return ResponseData.of(div)
+                .setState(DBE6070001StateName.審査会委員一覧);
     }
 
     /**
@@ -124,16 +129,24 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClik_SelectButton(ShinsakaiIinHoshuNyuryokuDiv div) {
+        boolean hasFromDate = false;
+        boolean hasToDate = false;
         List<ShinsakaiIinHoshuJissekiJoho> shinasa = shinasamanager.get介護認定審査会委員報酬実績情報一覧().records();
         Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> chikuNinteiChosain = Models.create(shinasa);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, chikuNinteiChosain);
-        コード = div.getDgShinsakaiIin().getSelectedItems().get(0).getCode();
-        div.getShinsakaiIinKensakuJoken().getTxtMaxCount().setValue(コード);
-        fromDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getFromValue();
-        toDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getToValue();
+        RString コード = div.getDgShinsakaiIin().getSelectedItems().get(0).getCode();
+        RDate fromDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getFromValue();
+        if (fromDate != null) {
+            hasFromDate = true;
+        }
+        RDate toDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getToValue();
+        if (toDate != null) {
+            hasToDate = true;
+        }
         List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
                 .createInstance().get審査会実績(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
-                                介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, コード, fromDate, toDate)).records();
+                                null, false, false, false, false, null, コード,
+                                fromDate, toDate, null, false, hasFromDate, hasToDate)).records();
         if (shinsakaiIinHoshuNyuryoku.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -148,7 +161,13 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Modify(ShinsakaiIinHoshuNyuryokuDiv div) {
-        getHandler(div).set審査会実績明細();
+        RString コード = div.getDgShinsakaiIin().getSelectedItems().get(0).getCode();
+        RDate 実施日 = new RDate(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi().toString());
+        List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
+                .createInstance().get介護認定審査会委員別単価(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
+                                null, false, false, false, false, null, コード,
+                                null, null, 実施日, false, false, false)).records();
+        getHandler(div).set審査会実績明細(shinsakaiIinHoshuNyuryoku);
         return ResponseData.of(div).respond();
     }
 
@@ -160,7 +179,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Delete(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).get削除();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
     }
 
     /**
@@ -171,7 +190,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_HoshuZeiritsu(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set報酬税率();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
     }
 
     /**
@@ -182,7 +201,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_ShinsaHoshugaku(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set審査報酬額();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
     }
 
     /**
@@ -193,7 +212,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_SonotaHoshu(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).setその他報酬();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
     }
 
     /**
@@ -204,7 +223,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_Kotsuhito(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set交通費等();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
     }
 
     /**
@@ -215,7 +234,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_btnToroku(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set登録する();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績一覧);
     }
 
     /**
@@ -256,17 +275,14 @@ public class ShinsakaiIinHoshuNyuryoku {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> models = ViewStateHolder.get(
-                    ViewStateKeys.介護認定審査会開催予定情報, Models.class);
+                    ViewStateKeys.介護認定審査会開催予定情報, Models.class
+            );
             List<dgShinsakaiJisseki_Row> listEntity = div.getDgShinsakaiJisseki().getDataSource();
             for (dgShinsakaiJisseki_Row row : listEntity) {
-                if (new RString("修正").equals(row.getColumnState())) {
+                if (状態_修正.equals(row.getColumnState())) {
                     ShinsakaiIinHoshuNyuryokuFinder.createInstance().update(getHandler(div).onClick_Update(models, row).build());
-                } else if (new RString("削除").equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuJissekiJohoIdentifier key = new ShinsakaiIinHoshuJissekiJohoIdentifier(
-                            new RString(div.getShinsakaiJisseki().getTxtShisakaiIinCode().toString()),
-                            new Code(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun().toString()),
-                            new FlexibleDate(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()),
-                            Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getRemban().toString()));
+                } else if (状態_削除.equals(row.getColumnState())) {
+                    ShinsakaiIinHoshuJissekiJohoIdentifier key = getHandler(div).getKey();
                     ShinsakaiIinHoshuNyuryokuFinder.createInstance().delete(models, key);
                 }
             }
