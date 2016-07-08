@@ -71,6 +71,12 @@
                 <artifactId>framework</artifactId>
                 <version>${jp.co.ndensan.reams.uz.version}</version>
             </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.uz</groupId>
+                <artifactId>UziDivController</artifactId>
+                <version>${jp.co.ndensan.reams.uz.version}</version>
+                <classifier>classes</classifier>
+            </dependency>
             <!-- UR
                 URはcommonpomに定義済み。と思いきや古いため、こちらで再定義する。
             -->
