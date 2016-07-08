@@ -53,6 +53,11 @@
         </dependency>
         <!-- 公開系 -->
         <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>UziDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
             <classifier>classes</classifier>
@@ -87,6 +92,12 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>UZ</artifactId>
+            <version>1.10.0</version>
+            <type>pom</type>
         </dependency>
     </dependencies>
     <build>
