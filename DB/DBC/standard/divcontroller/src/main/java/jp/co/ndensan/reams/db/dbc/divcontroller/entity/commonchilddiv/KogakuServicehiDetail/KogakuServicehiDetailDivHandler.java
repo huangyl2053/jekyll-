@@ -316,8 +316,10 @@ public class KogakuServicehiDetailDivHandler {
             }
             if (ONE.equals(result.get事業高額介護サービス費支給判定結果Entity().get支給区分コード())) {
                 div.getRdbShikyuKubun().setSelectedKey(KEY0);
+                div.getTxtShikyusinaiRiyu().setDisabled(true);
             } else if (ZERO.equals(result.get事業高額介護サービス費支給判定結果Entity().get支給区分コード())) {
                 div.getRdbShikyuKubun().setSelectedKey(KEY1);
+                div.getTxtShikyuKingaku().setDisabled(true);
             }
             div.getTxtHonninShiharaiGaku().setValue(result.get事業高額介護サービス費支給判定結果Entity().get本人支払額());
             div.getTxtShikyuKingaku().setValue(result.get事業高額介護サービス費支給判定結果Entity().get支給金額());
@@ -544,6 +546,7 @@ public class KogakuServicehiDetailDivHandler {
         div.getRdbShinseisyaKubun().setDisabled(true);
         div.getTxtHokenJyaBango().setDisabled(true);
         div.getTxtShimeiKanji().setDisabled(true);
+        div.getTplShinseisha().getTxtShimeiKana().setDisabled(true);
         div.getTxtTelNo().setDisabled(true);
         div.getTxtShinseiRiyu().setDisabled(true);
         div.getTxtShiharaiTotalAmount().setDisabled(true);
