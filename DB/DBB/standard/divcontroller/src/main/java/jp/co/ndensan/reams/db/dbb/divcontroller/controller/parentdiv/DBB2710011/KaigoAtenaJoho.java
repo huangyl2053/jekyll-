@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -40,7 +41,7 @@ public class KaigoAtenaJoho {
      */
     public ResponseData<KaigoAtenaJohoDiv> onload(KaigoAtenaJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(
+            InformationMessage message = new InformationMessage(
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode(),
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().evaluate());
             FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
@@ -61,7 +62,8 @@ public class KaigoAtenaJoho {
      * @return 特別徴収対象者登録情報Divを持つResponseData
      */
     public ResponseData<KaigoAtenaJohoDiv> onClick_btnNenkinInfoKensaku(KaigoAtenaJohoDiv div) {
-        getHandler(div).onClick_btnNenkinInfoKensaku();
+        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
+        getHandler(div).onClick_btnNenkinInfoKensaku(key);
         return ResponseData.of(div).respond();
     }
 

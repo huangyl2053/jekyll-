@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.NenkinHokenshaHantei;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -25,6 +26,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.ue.uex.service.core.INenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -86,10 +91,32 @@ public class TokubetuChosyutaisyosyaTorokuManager {
 
     /**
      * 特徴対象者（追加含む）取得
+     *
+     * @param 年度 年度
+     * @param 捕捉月 捕捉月
+     * @param 基礎年金番号 基礎年金番号
+     * @param 年金コード 年金コード
+     * @return 特徴の情報
      */
-    //TODO
-    public void getTokuchoTaishosha() {
-
+    public NenkinTokuchoKaifuJoho getTokuchoTaishosha(FlexibleYear 年度, RString 捕捉月, RString 基礎年金番号, RString 年金コード) {
+        FlexibleYear 処理年度;
+        if (null == 年度) {
+            処理年度 = FlexibleYear.EMPTY;
+        } else {
+            if (TokuchoHosokuMonth.特徴2月捕捉.getコード().equals(捕捉月)) {
+                処理年度 = 年度.minusYear(1);
+            } else {
+                処理年度 = 年度;
+            }
+        }
+        if (null == 基礎年金番号) {
+            基礎年金番号 = RString.EMPTY;
+        }
+        if (null == 年金コード) {
+            年金コード = RString.EMPTY;
+        }
+        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+        return manager.get年金特徴対象者情報(GyomuCode.DB介護保険, 処理年度, 基礎年金番号, 年金コード, 捕捉月);
     }
 
     /**
@@ -168,9 +195,10 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      * @param 被保険者番号 被保険者番号
      * @param 基礎年金番号 基礎年金番号
      * @param 年金コード 年金コード
+     * @param 特徴義務者コード 特徴義務者コード
      * @return 登録件数
      */
-    public int insChoshuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号, RString 基礎年金番号, RString 年金コード) {
+    public int insChoshuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号, RString 基礎年金番号, RString 年金コード, RString 特徴義務者コード) {
         SearchResult<ChoshuHoho> choshuHohoSearchResult = getChoshuHoho(賦課年度, 被保険者番号);
         if (null == choshuHohoSearchResult) {
             return 0;
@@ -235,8 +263,8 @@ public class TokubetuChosyutaisyosyaTorokuManager {
                 dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(普通徴収);
             }
         } else {
-            //TODO 介護賦課共通クラスの年金保険者判定．is厚労省（特徴義務者コード）来月
-            RString 特徴方法 = true ? 特別徴収_厚生労働省 : 特別徴収_地共済;
+            NenkinHokenshaHantei 年金保険者判定 = NenkinHokenshaHantei.createInstance();
+            RString 特徴方法 = 年金保険者判定.is厚労省(特徴義務者コード) ? 特別徴収_厚生労働省 : 特別徴収_地共済;
             if (連番_0001.equals(年度内処理済み連番)) {
                 dbT2001ChoshuHohoEntity.setChoshuHoho8gatsu(特徴方法);
                 dbT2001ChoshuHohoEntity.setChoshuHoho9gatsu(特徴方法);
