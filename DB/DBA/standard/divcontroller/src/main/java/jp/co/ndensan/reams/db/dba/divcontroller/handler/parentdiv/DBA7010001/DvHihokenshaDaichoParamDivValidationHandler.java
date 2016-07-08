@@ -39,15 +39,15 @@ public class DvHihokenshaDaichoParamDivValidationHandler {
      */
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (HizukeChushutsuKubun.基準日.getコード().equals(div.getRadChushutsu().getSelectedKey())
-                && div.getTxtKijunDate().getValue() == null) {
+        if (HizukeChushutsuKubun.基準日.getコード().equals(div.getRadChushutsuKijunBi().getSelectedKey())
+            && div.getTxtKijunDate().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate日付必須, div.getTxtKijunDate()));
         }
-        if (HizukeChushutsuKubun.範囲.getコード().equals(div.getRadChushutsu().getSelectedKey())
-                && div.getTxtChushutsuHani() != null
-                && div.getTxtChushutsuHani().getFromValue() != null
-                && div.getTxtChushutsuHani().getToValue() != null
-                && div.getTxtChushutsuHani().getToValue().isBefore(div.getTxtChushutsuHani().getFromValue())) {
+        if (HizukeChushutsuKubun.範囲.getコード().equals(div.getRadChushutsuHani().getSelectedKey())
+            && div.getTxtChushutsuHani() != null
+            && div.getTxtChushutsuHani().getFromValue() != null
+            && div.getTxtChushutsuHani().getToValue() != null
+            && div.getTxtChushutsuHani().getToValue().isBefore(div.getTxtChushutsuHani().getFromValue())) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.Validate日付不正, div.getTxtChushutsuHani()));
         }
         return validPairs;

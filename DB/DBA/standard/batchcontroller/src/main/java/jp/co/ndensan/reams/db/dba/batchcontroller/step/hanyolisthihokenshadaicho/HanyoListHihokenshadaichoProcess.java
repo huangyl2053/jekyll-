@@ -136,7 +136,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         hasCSVデータ = false;
         //TODO システム日時は使用なし
 //        RDateTime システム日時 = RDate.getNowDateTime();
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
         eucFilename = Path.combinePath(spoolWorkPath, new RString("HanyoList_Hihokenshadaicho.csv"));
         RString 文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
@@ -233,7 +233,7 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         }
         outputJokenhyoFactory();
         eucCsvWriterJunitoJugo.close();
-        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilename, id);
     }
 

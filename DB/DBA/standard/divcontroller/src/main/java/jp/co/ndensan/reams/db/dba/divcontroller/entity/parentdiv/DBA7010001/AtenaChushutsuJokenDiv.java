@@ -5,15 +5,16 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect.HanyoListAtenaSelectDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect.IHanyoListAtenaSelectDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * DvCsvHenshuHoho のクラスファイル 
+ * AtenaChushutsuJoken のクラスファイル 
  * 
  * @author 自動生成
  */
-public class DvCsvHenshuHohoDiv extends Panel {
+public class AtenaChushutsuJokenDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -21,8 +22,8 @@ public class DvCsvHenshuHohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkCsvHenshuHoho")
-    private CheckBoxList chkCsvHenshuHoho;
+    @JsonProperty("ccdHanyoListAtenaSelect")
+    private HanyoListAtenaSelectDiv ccdHanyoListAtenaSelect;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class DvCsvHenshuHohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkCsvHenshuHoho
-     * @return chkCsvHenshuHoho
+     * getccdHanyoListAtenaSelect
+     * @return ccdHanyoListAtenaSelect
      */
-    @JsonProperty("chkCsvHenshuHoho")
-    public CheckBoxList getChkCsvHenshuHoho() {
-        return chkCsvHenshuHoho;
-    }
-
-    /*
-     * setchkCsvHenshuHoho
-     * @param chkCsvHenshuHoho chkCsvHenshuHoho
-     */
-    @JsonProperty("chkCsvHenshuHoho")
-    public void setChkCsvHenshuHoho(CheckBoxList chkCsvHenshuHoho) {
-        this.chkCsvHenshuHoho = chkCsvHenshuHoho;
+    @JsonProperty("ccdHanyoListAtenaSelect")
+    public IHanyoListAtenaSelectDiv getCcdHanyoListAtenaSelect() {
+        return ccdHanyoListAtenaSelect;
     }
 
     // </editor-fold>
