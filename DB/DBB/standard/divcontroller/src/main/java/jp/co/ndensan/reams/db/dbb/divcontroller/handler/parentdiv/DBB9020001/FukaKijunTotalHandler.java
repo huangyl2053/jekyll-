@@ -1021,7 +1021,8 @@ public class FukaKijunTotalHandler {
         List<KeyValueDataSource> dateSource = new ArrayList<>();
         KeyValueDataSource source;
         for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
-            source = new KeyValueDataSource(保険料段階.get段階区分(), get段階区分_平成27年以降(保険料段階.get段階区分()));
+            source = new KeyValueDataSource(保険料段階.get段階インデックス().concat(保険料段階.get段階区分()),
+                    get段階区分_平成27年以降(保険料段階.get段階区分()));
             dateSource.add(source);
         }
         int 順番 = 1;
@@ -1029,7 +1030,7 @@ public class FukaKijunTotalHandler {
             row = new dgHokenryoDankai_Row();
             row.getTxtHokenryoDankaiIndex().setValue(保険料段階.get段階インデックス());
             row.getDdlHokenryoDankai().setDataSource(dateSource);
-            row.getDdlHokenryoDankai().setSelectedKey(保険料段階.get段階区分());
+            row.getDdlHokenryoDankai().setSelectedKey(保険料段階.get段階インデックス().concat(保険料段階.get段階区分()));
             row.getTxtHokenryoRitsu().setValue(保険料段階.get保険料率());
             if (STR_ONE.equals(選択Key) && 保険料段階.get特例表記() != null) {
                 row.getTxtTokureiHyoji().setValue(保険料段階.get特例表記());
@@ -1078,6 +1079,7 @@ public class FukaKijunTotalHandler {
      */
     public void set項目表示を制御(RDate now) {
 
+        List<KeyValueDataSource> dateSource = new ArrayList<>();
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
         RString 強制設定_未申告 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
                 now, SubGyomuCode.DBB介護賦課);
@@ -1086,17 +1088,18 @@ public class FukaKijunTotalHandler {
         RString 課税区分の見直し方_未申告 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
                 now, SubGyomuCode.DBB介護賦課);
         div.getHokenryoRitsuIgaiInfo().getMishinkoku().getRadMishinkokuKyoseiSettei().setSelectedKey(強制設定_未申告);
-        if (!div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().getDataSource().isEmpty()
-                && !設定段階_未申告.isEmpty()) {
-            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedKey(設定段階_未申告);
+        if (STR_ZERO.equals(強制設定_未申告)) {
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDataSource(dateSource);
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(true);
+        } else {
+            if (!div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().getDataSource().isEmpty()
+                    && !設定段階_未申告.isEmpty()) {
+                div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedKey(設定段階_未申告);
+            }
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
         }
         div.getHokenryoRitsuIgaiInfo().getMishinkoku().getRadtMishinkokuKazeiKbn()
                 .setSelectedKey(課税区分の見直し方_未申告);
-        if (STR_ZERO.equals(強制設定_未申告)) {
-            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(true);
-        } else {
-            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
-        }
 
         RString 強制設定_所得調査中 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階使用,
                 now, SubGyomuCode.DBB介護賦課);
@@ -1106,16 +1109,17 @@ public class FukaKijunTotalHandler {
                 now, SubGyomuCode.DBB介護賦課);
         div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getRadShotokuChosaChuKyoseiSettei()
                 .setSelectedKey(強制設定_所得調査中);
-        if (!div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
-                .getDataSource().isEmpty() && !設定段階_所得調査中.isEmpty()) {
-            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
-                    .setSelectedKey(設定段階_所得調査中);
-        }
         div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getRadShotokuChosaChuKazeiKbn()
                 .setSelectedKey(課税区分の見直し方_所得調査中);
         if (STR_ZERO.equals(強制設定_所得調査中)) {
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDataSource(dateSource);
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(true);
         } else {
+            if (!div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
+                    .getDataSource().isEmpty() && !設定段階_所得調査中.isEmpty()) {
+                div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
+                        .setSelectedKey(設定段階_所得調査中);
+            }
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
         }
 
@@ -1136,6 +1140,7 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKazeiKbn()
                     .setSelectedKey(課税区分の見直し方_課税取消);
             if (STR_ZERO.equals(強制設定_課税取消)) {
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDataSource(dateSource);
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(true);
             } else {
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
