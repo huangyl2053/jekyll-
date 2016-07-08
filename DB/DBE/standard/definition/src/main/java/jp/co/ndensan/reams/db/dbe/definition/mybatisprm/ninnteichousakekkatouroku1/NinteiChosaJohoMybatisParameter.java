@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
+ * 認定調査結果登録1のMybatisパラメータクラスです。
  *
- * 要介護認定調査督促状のMybatisパラメータクラスです。
+ * @reamsid_L DBE-0040-010 xuyue
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
