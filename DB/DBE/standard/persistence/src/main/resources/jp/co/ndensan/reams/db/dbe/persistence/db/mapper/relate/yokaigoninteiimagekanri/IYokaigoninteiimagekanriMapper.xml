@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： イメージ管理情報のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1670-010 wangxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteiimagekanri.IYokaigoninteiimagekanriMapper">
+
+    <select id="getImageJoho"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            fetchSize="500"
+            resultOrdered="true" >
+        SELECT T5101."shinseishoKanriNo",
+        T5201."ninteichosaIraiRirekiNo",
+        T5301."ikenshoIraiRirekiNo",
+        T5202."ninteichosaJisshiYMD",
+        T5202."ninteichosaJuryoYMD",
+        T5202."gaikyoChosaTextImageKubun",
+        T5202."chosaItakusakiCode",
+        T5202."chosainCode",
+        T5206."gaikyoTokkiTextImageKubun",
+        T5302."ikenshoReadYMD",
+        T5302."ikenshoKinyuYMD",
+        T5302."shujiiIryoKikanCode",
+        T5302."shujiiCode",
+        T5101."ninteiShinseiYMD",
+        T5115."imageSharedFileId",
+        T5105."ninteiShinsakaiKanryoYMD",
+        T5105."centerSoshinYMD",
+        T5101."shoKisaiHokenshaNo",
+        T5101."hihokenshaNo"
+        FROM rgdb."DbT5101NinteiShinseiJoho" T5101
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" T5105
+        ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" T5201
+        ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+        AND T5101."logicalDeletedFlag" = FALSE
+        AND NOT EXISTS (SELECT 'X'
+        FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
+        WHERE T5201."shinseishoKanriNo" = B1."shinseishoKanriNo"
+        AND B1."logicalDeletedFlag" = FALSE
+        AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo")
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301
+        ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+        AND T5301."logicalDeletedFlag" = FALSE
+        AND NOT EXISTS (SELECT 'X'
+        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B2
+        WHERE T5301."shinseishoKanriNo" = B2."shinseishoKanriNo"
+        AND B2."logicalDeletedFlag" = FALSE
+        AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo")
+        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202
+        ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+        AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+        LEFT JOIN rgdb."DbT5206GaikyoTokki" T5206
+        ON T5206."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+        AND T5206."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302
+        ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+        AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
+        LEFT JOIN rgdb."DbT5115Image" T5115
+        ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+        WHERE T5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND T5101."logicalDeletedFlag" = FALSE
+    </select>
+
+</mapper>
