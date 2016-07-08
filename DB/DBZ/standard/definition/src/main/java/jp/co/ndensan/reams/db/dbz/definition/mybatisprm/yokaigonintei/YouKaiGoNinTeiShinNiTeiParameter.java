@@ -43,8 +43,10 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
     private final FlexibleDate seinengappiYMDTo;
     private final boolean isNinteiShinseiKubunCode;
     private final Code ninteiShinseiKubunCode;
-    private final boolean isSeibetsu;
-    private final Code seibetsu;
+    private final boolean isSeibetsuOtoko;
+    private final boolean isSeibetsuOna;
+    private final Code seibetsuOtoko;
+    private final Code seibetsuOna;
     private final boolean isHihokenshaKubunCode;
     private final RString hihokenshaKubunCode;
     private final boolean isNinteiShinseiHoreiKubunCode;
@@ -179,8 +181,10 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
             FlexibleDate seinengappiYMDTo,
             boolean isNinteiShinseiKubunCode,
             Code ninteiShinseiKubunCode,
-            boolean isSeibetsu,
-            Code seibetsu,
+            boolean isSeibetsuOtoko,
+            boolean isSeibetsuOna,
+            Code seibetsuOtoko,
+            Code seibetsuOna,
             boolean isHihokenshaKubunCode,
             RString hihokenshaKubunCode,
             boolean isNinteiShinseiHoreiKubunCode,
@@ -314,8 +318,10 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
         this.seinengappiYMDTo = seinengappiYMDTo;
         this.isNinteiShinseiKubunCode = isNinteiShinseiKubunCode;
         this.ninteiShinseiKubunCode = ninteiShinseiKubunCode;
-        this.isSeibetsu = isSeibetsu;
-        this.seibetsu = seibetsu;
+        this.isSeibetsuOtoko = isSeibetsuOtoko;
+        this.isSeibetsuOna = isSeibetsuOna;
+        this.seibetsuOtoko = seibetsuOtoko;
+        this.seibetsuOna = seibetsuOna;
         this.isHihokenshaKubunCode = isHihokenshaKubunCode;
         this.hihokenshaKubunCode = hihokenshaKubunCode;
         this.isNinteiShinseiHoreiKubunCode = isNinteiShinseiHoreiKubunCode;
@@ -442,7 +448,8 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
      * @param seinengappiYMDTo 生年月日To
      * @param ninteiShinseiKubunCode 申請区分(申請時)
      * @param hihokenshaKubunCode 被保険者区分
-     * @param seibetsu 性別
+     * @param seibetsuOtoko 性別男
+     * @param seibetsuOna 性別女
      * @param ninteiShinseiHoreiKubunCode 申請区分(法令)
      * @param shoriJotaiKubun 処理状態区分
      * @param yubinNo 郵便番号
@@ -517,7 +524,8 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
             FlexibleDate seinengappiYMDFrom,
             FlexibleDate seinengappiYMDTo,
             Code ninteiShinseiKubunCode,
-            Code seibetsu,
+            Code seibetsuOtoko,
+            Code seibetsuOna,
             RString hihokenshaKubunCode,
             Code ninteiShinseiHoreiKubunCode,
             Code shoriJotaiKubun,
@@ -581,125 +589,127 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
             int limitCount
     ) {
         return new YouKaiGoNinTeiShinNiTeiParameter(
-                認定_被保険者番号の判定(false, hihokenshaNo),
+                !RString.isNullOrEmpty(hihokenshaNo),
                 hihokenshaNo,
-                認定_保険者の判定(false, shoKisaiHokenshaNo),
+                !RString.isNullOrEmpty(shoKisaiHokenshaNo),
                 shoKisaiHokenshaNo,
-                認定_支所の判定(false, shishoCode),
+                !RString.isNullOrEmpty(shishoCode),
                 shishoCode,
-                認定_被保険者氏名の判定(false, hihokenshaName),
-                認定_前方一致の判定(false, jyoKen),
+                !RString.isNullOrEmpty(hihokenshaName),
+                jyoKen.equals(new RString("key0")),
                 hihokenshaName,
                 jyoKen,
-                認定_後方一致の判定(false, jyoKen),
-                認定_部分一致の判定(false, jyoKen),
+                jyoKen.equals(new RString("key3")),
+                jyoKen.equals(new RString("key2")),
                 isMinashiNigoEtcTaishoFlag,
-                認定_認定申請日Fromの判定(false, ninteiShinseiYMDFrom),
+                ninteiShinseiYMDFrom != null && !ninteiShinseiYMDFrom.isEmpty(),
                 ninteiShinseiYMDFrom,
-                認定_認定申請日Toの判定(false, ninteiShinseiYMDTo),
+                ninteiShinseiYMDTo != null && !ninteiShinseiYMDTo.isEmpty(),
                 ninteiShinseiYMDTo,
-                認定_生年月日Fromの判定(false, seinengappiYMDFrom),
+                seinengappiYMDFrom != null && !seinengappiYMDFrom.isEmpty(),
                 seinengappiYMDFrom,
-                認定_生年月日Toの判定(false, seinengappiYMDTo),
+                seinengappiYMDTo != null && !seinengappiYMDTo.isEmpty(),
                 seinengappiYMDTo,
-                認定_申請区分_申請時の判定(false, ninteiShinseiKubunCode),
+                ninteiShinseiKubunCode != null && !ninteiShinseiKubunCode.value().isEmpty(),
                 ninteiShinseiKubunCode,
-                認定_性別の判定(false, seibetsu),
-                seibetsu,
-                認定_被保険者区分の判定(false, hihokenshaKubunCode),
+                seibetsuOtoko != null && !seibetsuOtoko.value().isEmpty(),
+                seibetsuOna != null && !seibetsuOna.value().isEmpty(),
+                seibetsuOtoko,
+                seibetsuOna,
+                !RString.isNullOrEmpty(hihokenshaKubunCode),
                 hihokenshaKubunCode,
-                認定_申請区分_法令の判定(false, ninteiShinseiHoreiKubunCode),
+                !RString.isNullOrEmpty(ninteiShinseiHoreiKubunCode.value()),
                 ninteiShinseiHoreiKubunCode,
-                認定_処理状態区分の判定(false, shoriJotaiKubun),
+                !RString.isNullOrEmpty(shoriJotaiKubun.value()),
                 shoriJotaiKubun,
-                認定_郵便番号の判定(false, yubinNo),
+                !RString.isNullOrEmpty(yubinNo.value()),
                 yubinNo,
-                認定_地区コードの判定(false, chikuCode),
+                !RString.isNullOrEmpty(chikuCode.value()),
                 chikuCode,
                 isShisetsuNyushoFlag,
-                認定_認定調査委託先名称の判定(false, jigyoshaMeisho),
+                !RString.isNullOrEmpty(jigyoshaMeisho),
                 jigyoshaMeisho,
-                認定_認定調査員氏名の判定(false, chosainShimei),
+                !RString.isNullOrEmpty(chosainShimei),
                 chosainShimei,
-                認定_調査実施場所の判定(false, chosaJisshiBashoCode),
+                !RString.isNullOrEmpty(chosaJisshiBashoCode.value()),
                 chosaJisshiBashoCode,
-                認定_調査区分の判定(false, ninteiChosaKubunCode),
+                !RString.isNullOrEmpty(ninteiChosaKubunCode.value()),
                 ninteiChosaKubunCode,
-                認定_調査実施日Fromの判定(false, ninteichosaJisshiYMDFrom),
+                ninteichosaJisshiYMDFrom != null && !ninteichosaJisshiYMDFrom.isEmpty(),
                 ninteichosaJisshiYMDFrom,
-                認定_調査実施日Toの判定(false, ninteichosaJisshiYMDTo),
+                ninteichosaJisshiYMDTo != null && !ninteichosaJisshiYMDTo.isEmpty(),
                 ninteichosaJisshiYMDTo,
-                認定_寝たきり度の判定(false, ninchishoNichijoSeiCode),
+                !RString.isNullOrEmpty(ninchishoNichijoSeiCode.value()),
                 ninchishoNichijoSeiCode,
-                認定_認知度の判定(false, shogaiNichijoJiritsudoCode),
+                !RString.isNullOrEmpty(shogaiNichijoJiritsudoCode.value()),
                 shogaiNichijoJiritsudoCode,
-                認定_主治医医療機関名称の判定(false, iryoKikanMeisho),
+                !RString.isNullOrEmpty(iryoKikanMeisho),
                 iryoKikanMeisho,
-                認定_主治医氏名の判定(false, shujiiName),
+                !RString.isNullOrEmpty(shujiiName),
                 shujiiName,
-                認定_主治医区分の判定(false, ishiKubunCode),
+                !RString.isNullOrEmpty(ishiKubunCode.value()),
                 ishiKubunCode,
-                認定_意見受領日Fromの判定(false, ikenshoJuryoYMDFrom),
+                ikenshoJuryoYMDFrom != null && !ikenshoJuryoYMDFrom.isEmpty(),
                 ikenshoJuryoYMDFrom,
-                認定_意見受領日Toの判定(false, ikenshoJuryoYMDTo),
+                ikenshoJuryoYMDTo != null && !ikenshoJuryoYMDTo.isEmpty(),
                 ikenshoJuryoYMDTo,
-                認定_寝たきり度の判定(false, neTaKiRi),
+                !RString.isNullOrEmpty(neTaKiRi),
                 neTaKiRi,
-                認定_認知度の判定(false, niChiDo),
+                !RString.isNullOrEmpty(niChiDo),
                 niChiDo,
-                認定_一次判定日Fromの判定(false, ichijiHanteiYMDFrom),
+                ichijiHanteiYMDFrom != null && !ichijiHanteiYMDFrom.isEmpty(),
                 ichijiHanteiYMDFrom,
-                認定_一次判定日Toの判定(false, ichijiHanteiYMDTo),
+                ichijiHanteiYMDTo != null && !ichijiHanteiYMDTo.isEmpty(),
                 ichijiHanteiYMDTo,
-                認定_一次判定結果の判定(false, ichijiHanteiKekkaCode),
+                !RString.isNullOrEmpty(ichijiHanteiKekkaCode.value()),
                 ichijiHanteiKekkaCode,
-                認定_1_5次判定日From(false, ichiGojiHanteiYMDFrom),
+                ichiGojiHanteiYMDFrom != null && !ichiGojiHanteiYMDFrom.isEmpty(),
                 ichiGojiHanteiYMDFrom,
-                認定_1_5次判定日To(false, ichiGojiHanteiYMDTo),
+                ichiGojiHanteiYMDTo != null && !ichiGojiHanteiYMDTo.isEmpty(),
                 ichiGojiHanteiYMDTo,
-                認定_1_5次判定結果(false, ichiGojiHanteiKekkaCode),
+                !RString.isNullOrEmpty(ichiGojiHanteiKekkaCode.value()),
                 ichiGojiHanteiKekkaCode,
-                認定_二次判定結果(false, nijiHanteiKekkaInputHoho),
+                !RString.isNullOrEmpty(nijiHanteiKekkaInputHoho.value()),
                 nijiHanteiKekkaInputHoho,
-                認定_認定有効期間(false, nijiHanteiNinteiYukoKikan),
+                nijiHanteiNinteiYukoKikan != 0,
                 nijiHanteiNinteiYukoKikan,
-                認定_認定有効開始日From(false, nijiHanteiNinteiYMDFrom),
+                nijiHanteiNinteiYMDFrom != null && !nijiHanteiNinteiYMDFrom.isEmpty(),
                 nijiHanteiNinteiYMDFrom,
-                認定_認定有効開始日To(false, nijiHanteiNinteiYMDTo),
+                nijiHanteiNinteiYMDTo != null && !nijiHanteiNinteiYMDTo.isEmpty(),
                 nijiHanteiNinteiYMDTo,
-                認定_認定有効終了日From(false, nijiHanteiShuryoYMDFrom),
+                nijiHanteiShuryoYMDFrom != null && !nijiHanteiShuryoYMDFrom.isEmpty(),
                 nijiHanteiShuryoYMDFrom,
-                認定_認定有効終了日To(false, nijiHanteiShuryoYMDTo),
+                nijiHanteiShuryoYMDTo != null && !nijiHanteiShuryoYMDTo.isEmpty(),
                 nijiHanteiShuryoYMDTo,
-                認定_二次判定結果From(false, nijiHanteiKekkaInputYMDFrom),
+                nijiHanteiKekkaInputYMDFrom != null && !nijiHanteiKekkaInputYMDFrom.isEmpty(),
                 nijiHanteiKekkaInputYMDFrom,
-                認定_二次判定結果To(false, nijiHanteiKekkaInputYMDTo),
+                nijiHanteiKekkaInputYMDTo != null && !nijiHanteiKekkaInputYMDTo.isEmpty(),
                 nijiHanteiKekkaInputYMDTo,
-                認定_開催日From(false, shinsakaiKaisaiYMDFrom),
+                shinsakaiKaisaiYMDFrom != null && !shinsakaiKaisaiYMDFrom.isEmpty(),
                 shinsakaiKaisaiYMDFrom,
-                認定_開催日To(false, shinsakaiKaisaiYMDTo),
+                shinsakaiKaisaiYMDTo != null && !shinsakaiKaisaiYMDTo.isEmpty(),
                 shinsakaiKaisaiYMDTo,
-                認定_開催番号From(false, shinsakaiKaisaiNoFrom),
+                !RString.isNullOrEmpty(shinsakaiKaisaiNoFrom),
                 shinsakaiKaisaiNoFrom,
-                認定_開催番号To(false, shinsakaiKaisaiNoTo),
+                !RString.isNullOrEmpty(shinsakaiKaisaiNoTo),
                 shinsakaiKaisaiNoTo,
-                認定_認定調査委託先(false, zenkaiJigyoshaMeisho),
+                !RString.isNullOrEmpty(zenkaiJigyoshaMeisho),
                 zenkaiJigyoshaMeisho,
-                認定_主治医医療機関(false, zenkaiIryoKikanMeisho),
+                !RString.isNullOrEmpty(zenkaiIryoKikanMeisho),
                 zenkaiIryoKikanMeisho,
-                認定_前回二次判定結果(false, zenkaiNijiHanteiKekka),
+                !RString.isNullOrEmpty(zenkaiNijiHanteiKekka.value()),
                 zenkaiNijiHanteiKekka,
-                認定_前回二次判定有効期間(false, zenkaiNijiHanteiNintei),
+                zenkaiNijiHanteiNintei != 0,
                 zenkaiNijiHanteiNintei,
-                認定_前回認定有効開始日From(false, zenkaiYukoKikanStartFrom),
+                zenkaiYukoKikanStartFrom != null && !zenkaiYukoKikanStartFrom.isEmpty(),
                 zenkaiYukoKikanStartFrom,
-                認定_前回認定有効開始日To(false, zenkaiYukoKikanStartTo),
+                zenkaiYukoKikanStartTo != null && !zenkaiYukoKikanStartTo.isEmpty(),
                 zenkaiYukoKikanStartTo,
-                認定_原因疾患(false, geninShikkanCode),
+                !RString.isNullOrEmpty(geninShikkanCode.value()),
                 geninShikkanCode,
-                認定_経過日数Form(false, ninteiShinseiYMDSystemFrom),
+                ninteiShinseiYMDSystemFrom != null && !ninteiShinseiYMDSystemFrom.isEmpty(),
                 ninteiShinseiYMDSystemFrom,
-                認定_経過日数To(false, ninteiShinseiYMDSystemTo),
+                ninteiShinseiYMDSystemTo != null && !ninteiShinseiYMDSystemTo.isEmpty(),
                 ninteiShinseiYMDSystemTo,
                 isKoShiTaiJyo,
                 ninteiShinseiYukoKubunCode,
@@ -716,483 +726,6 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
                 false,
                 limitCount
         );
-    }
-
-    private static boolean 認定_被保険者番号の判定(boolean isHihokenshaNo, RString hihokenshaNo) {
-        if (!RString.isNullOrEmpty(hihokenshaNo)) {
-            isHihokenshaNo = true;
-        }
-        return isHihokenshaNo;
-    }
-
-    private static boolean 認定_保険者の判定(boolean isShoKisaiHokenshaNo, RString shoKisaiHokenshaNo) {
-        if (!RString.isNullOrEmpty(shoKisaiHokenshaNo)) {
-            isShoKisaiHokenshaNo = true;
-        }
-        return isShoKisaiHokenshaNo;
-    }
-
-    private static boolean 認定_支所の判定(boolean isShishoCode, RString shishoCode) {
-        if (!RString.isNullOrEmpty(shishoCode)) {
-            isShishoCode = true;
-        }
-        return isShishoCode;
-    }
-
-    private static boolean 認定_被保険者氏名の判定(boolean isHihokenshaName, RString hihokenshaName) {
-        if (!RString.isNullOrEmpty(hihokenshaName)) {
-            isHihokenshaName = true;
-        }
-        return isHihokenshaName;
-    }
-
-    private static boolean 認定_前方一致の判定(boolean isJyoKenMae, RString jyoKen) {
-        if (jyoKen.equals(new RString("key0"))) {
-            isJyoKenMae = true;
-        }
-        return isJyoKenMae;
-    }
-
-    private static boolean 認定_後方一致の判定(boolean isJyoKenAto, RString jyoKen) {
-        if (jyoKen.equals(new RString("key3"))) {
-            isJyoKenAto = true;
-        }
-        return isJyoKenAto;
-    }
-
-    private static boolean 認定_部分一致の判定(boolean isJyoKenBuFun, RString jyoKen) {
-        if (jyoKen.equals(new RString("key2"))) {
-            isJyoKenBuFun = true;
-        }
-        return isJyoKenBuFun;
-    }
-
-    private static boolean 認定_認定申請日Fromの判定(boolean isNinteiShinseiYMDFrom, FlexibleDate ninteiShinseiYMDFrom) {
-
-        if (ninteiShinseiYMDFrom != null
-                && !ninteiShinseiYMDFrom.isEmpty()) {
-            isNinteiShinseiYMDFrom = true;
-        }
-        return isNinteiShinseiYMDFrom;
-    }
-
-    private static boolean 認定_認定申請日Toの判定(boolean isNinteiShinseiYMDTo, FlexibleDate ninteiShinseiYMDTo) {
-
-        if (ninteiShinseiYMDTo != null
-                && !ninteiShinseiYMDTo.isEmpty()) {
-            isNinteiShinseiYMDTo = false;
-        }
-        return isNinteiShinseiYMDTo;
-    }
-
-    private static boolean 認定_生年月日Fromの判定(boolean isSeinengappiYMDFrom, FlexibleDate seinengappiYMDFrom) {
-
-        if (seinengappiYMDFrom != null && !seinengappiYMDFrom.isEmpty()) {
-            isSeinengappiYMDFrom = true;
-        }
-        return isSeinengappiYMDFrom;
-    }
-
-    private static boolean 認定_生年月日Toの判定(boolean isSeinengappiYMDTo, FlexibleDate seinengappiYMDTo) {
-
-        if (seinengappiYMDTo != null && !seinengappiYMDTo.isEmpty()) {
-            isSeinengappiYMDTo = true;
-        }
-        return isSeinengappiYMDTo;
-    }
-
-    private static boolean 認定_申請区分_申請時の判定(boolean isNinteiShinseiKubunCode,
-            Code ninteiShinseiKubunCode) {
-
-        if (ninteiShinseiKubunCode != null
-                && !ninteiShinseiKubunCode.value().isEmpty()) {
-            isNinteiShinseiKubunCode = true;
-        }
-        return isNinteiShinseiKubunCode;
-    }
-
-    private static boolean 認定_被保険者区分の判定(boolean isHihokenshaKubunCode, RString hihokenshaKubunCode) {
-
-        if (!RString.isNullOrEmpty(hihokenshaKubunCode)) {
-            isHihokenshaKubunCode = true;
-        }
-        return isHihokenshaKubunCode;
-    }
-
-    private static boolean 認定_性別の判定(boolean isSeibetsu, Code seibetsu) {
-
-        if (seibetsu != null
-                && !seibetsu.value().isEmpty()) {
-            isSeibetsu = true;
-        }
-        return isSeibetsu;
-    }
-
-    private static boolean 認定_申請区分_法令の判定(boolean isNinteiShinseiHoreiKubunCode, Code ninteiShinseiHoreiKubunCode) {
-
-        if (!RString.isNullOrEmpty(ninteiShinseiHoreiKubunCode.value())) {
-            isNinteiShinseiHoreiKubunCode = true;
-        }
-        return isNinteiShinseiHoreiKubunCode;
-    }
-
-    private static boolean 認定_処理状態区分の判定(boolean isShoriJotaiKubun, Code shoriJotaiKubun) {
-
-        if (!RString.isNullOrEmpty(shoriJotaiKubun.value())) {
-            isShoriJotaiKubun = true;
-        }
-        return isShoriJotaiKubun;
-    }
-
-    private static boolean 認定_郵便番号の判定(boolean isYubinNo, YubinNo yubinNo) {
-
-        if (!RString.isNullOrEmpty(yubinNo.value())) {
-            isYubinNo = true;
-        }
-        return isYubinNo;
-    }
-
-    private static boolean 認定_地区コードの判定(boolean isChikuCode, ChikuCode chikuCode) {
-
-        if (!RString.isNullOrEmpty(chikuCode.value())) {
-            isChikuCode = true;
-        }
-        return isChikuCode;
-    }
-
-    private static boolean 認定_認定調査委託先名称の判定(boolean isJigyoshaMeisho, RString jigyoshaMeisho) {
-
-        if (!RString.isNullOrEmpty(jigyoshaMeisho)) {
-            isJigyoshaMeisho = true;
-        }
-        return isJigyoshaMeisho;
-    }
-
-    private static boolean 認定_認定調査員氏名の判定(boolean isChosainShimei, RString chosainShimei) {
-
-        if (!RString.isNullOrEmpty(chosainShimei)) {
-            isChosainShimei = true;
-        }
-        return isChosainShimei;
-    }
-
-    private static boolean 認定_調査実施場所の判定(boolean isChosaJisshiBashoCode, Code chosaJisshiBashoCode) {
-
-        if (!RString.isNullOrEmpty(chosaJisshiBashoCode.value())) {
-            isChosaJisshiBashoCode = true;
-        }
-        return isChosaJisshiBashoCode;
-    }
-
-    private static boolean 認定_調査区分の判定(boolean isNinteiChosaKubunCode, Code ninteiChosaKubunCode) {
-
-        if (!RString.isNullOrEmpty(ninteiChosaKubunCode.value())) {
-            isNinteiChosaKubunCode = true;
-        }
-        return isNinteiChosaKubunCode;
-    }
-
-    private static boolean 認定_調査実施日Fromの判定(boolean isNinteichosaJisshiYMDFrom, FlexibleDate ninteichosaJisshiYMDFrom) {
-
-        if (ninteichosaJisshiYMDFrom != null && !ninteichosaJisshiYMDFrom.isEmpty()) {
-            isNinteichosaJisshiYMDFrom = true;
-        }
-        return isNinteichosaJisshiYMDFrom;
-    }
-
-    private static boolean 認定_調査実施日Toの判定(boolean isNinteichosaJisshiYMDTo, FlexibleDate ninteichosaJisshiYMDTo) {
-
-        if (ninteichosaJisshiYMDTo != null && !ninteichosaJisshiYMDTo.isEmpty()) {
-            isNinteichosaJisshiYMDTo = true;
-        }
-        return isNinteichosaJisshiYMDTo;
-    }
-
-    private static boolean 認定_寝たきり度の判定(boolean isNinchisho, Code ninchishoNichijoSeiCode) {
-
-        if (!RString.isNullOrEmpty(ninchishoNichijoSeiCode.value())) {
-            isNinchisho = true;
-        }
-        return isNinchisho;
-    }
-
-    private static boolean 認定_認知度の判定(boolean isShogai, Code shogaiNichijoJiritsudoCode) {
-
-        if (!RString.isNullOrEmpty(shogaiNichijoJiritsudoCode.value())) {
-            isShogai = true;
-        }
-        return isShogai;
-    }
-
-    private static boolean 認定_主治医医療機関名称の判定(boolean isIryoKikanMeisho, RString iryoKikanMeisho) {
-
-        if (!RString.isNullOrEmpty(iryoKikanMeisho)) {
-            isIryoKikanMeisho = true;
-        }
-        return isIryoKikanMeisho;
-    }
-
-    private static boolean 認定_主治医氏名の判定(boolean isShujiiName, RString shujiiName) {
-
-        if (!RString.isNullOrEmpty(shujiiName)) {
-            isShujiiName = true;
-        }
-        return isShujiiName;
-    }
-
-    private static boolean 認定_主治医区分の判定(boolean isIshiKubunCode, Code ishiKubunCode) {
-
-        if (!RString.isNullOrEmpty(ishiKubunCode.value())) {
-            isIshiKubunCode = true;
-        }
-        return isIshiKubunCode;
-    }
-
-    private static boolean 認定_意見受領日Fromの判定(boolean isIkenshoJuryoYMDFrom, FlexibleDate ikenshoJuryoYMDFrom) {
-
-        if (ikenshoJuryoYMDFrom != null && !ikenshoJuryoYMDFrom.isEmpty()) {
-            isIkenshoJuryoYMDFrom = true;
-        }
-        return isIkenshoJuryoYMDFrom;
-    }
-
-    private static boolean 認定_意見受領日Toの判定(boolean isIkenshoJuryoYMDTo, FlexibleDate ikenshoJuryoYMDTo) {
-
-        if (ikenshoJuryoYMDTo != null && !ikenshoJuryoYMDTo.isEmpty()) {
-            isIkenshoJuryoYMDTo = true;
-        }
-        return isIkenshoJuryoYMDTo;
-    }
-
-    private static boolean 認定_寝たきり度の判定(boolean isNeTaKiRi, RString neTaKiRi) {
-
-        if (!RString.isNullOrEmpty(neTaKiRi)) {
-            isNeTaKiRi = true;
-        }
-        return isNeTaKiRi;
-    }
-
-    private static boolean 認定_認知度の判定(boolean isNiChiDo, RString niChiDo) {
-
-        if (!RString.isNullOrEmpty(niChiDo)) {
-            isNiChiDo = true;
-        }
-        return isNiChiDo;
-    }
-
-    private static boolean 認定_一次判定日Fromの判定(boolean isIchijiHanteiYMDFrom, FlexibleDate ichijiHanteiYMDFrom) {
-
-        if (ichijiHanteiYMDFrom != null && !ichijiHanteiYMDFrom.isEmpty()) {
-            isIchijiHanteiYMDFrom = true;
-        }
-        return isIchijiHanteiYMDFrom;
-    }
-
-    private static boolean 認定_一次判定日Toの判定(boolean isIchijiHanteiYMDTo, FlexibleDate ichijiHanteiYMDTo) {
-
-        if (ichijiHanteiYMDTo != null && !ichijiHanteiYMDTo.isEmpty()) {
-            isIchijiHanteiYMDTo = true;
-        }
-        return isIchijiHanteiYMDTo;
-    }
-
-    private static boolean 認定_一次判定結果の判定(boolean isIchijiHanteiKekkaCode, Code ichijiHanteiKekkaCode) {
-
-        if (!RString.isNullOrEmpty(ichijiHanteiKekkaCode.value())) {
-            isIchijiHanteiKekkaCode = true;
-        }
-        return isIchijiHanteiKekkaCode;
-    }
-
-    private static boolean 認定_1_5次判定日From(boolean isIchiGojiHanteiYMDFrom, FlexibleDate ichiGojiHanteiYMDFrom) {
-
-        if (ichiGojiHanteiYMDFrom != null && !ichiGojiHanteiYMDFrom.isEmpty()) {
-            isIchiGojiHanteiYMDFrom = true;
-        }
-        return isIchiGojiHanteiYMDFrom;
-    }
-
-    private static boolean 認定_1_5次判定日To(boolean isIchiGojiHanteiYMDTo, FlexibleDate ichiGojiHanteiYMDTo) {
-
-        if (ichiGojiHanteiYMDTo != null && !ichiGojiHanteiYMDTo.isEmpty()) {
-            isIchiGojiHanteiYMDTo = true;
-        }
-        return isIchiGojiHanteiYMDTo;
-    }
-
-    private static boolean 認定_1_5次判定結果(boolean isIchiGojiHanteiKekkaCode, Code ichiGojiHanteiKekkaCode) {
-
-        if (!RString.isNullOrEmpty(ichiGojiHanteiKekkaCode.value())) {
-            isIchiGojiHanteiKekkaCode = true;
-        }
-        return isIchiGojiHanteiKekkaCode;
-    }
-
-    private static boolean 認定_二次判定結果(boolean isNijiHanteiKekkaInputHoho, Code nijiHanteiKekkaInputHoho) {
-
-        if (!RString.isNullOrEmpty(nijiHanteiKekkaInputHoho.value())) {
-            isNijiHanteiKekkaInputHoho = true;
-        }
-        return isNijiHanteiKekkaInputHoho;
-    }
-
-    private static boolean 認定_認定有効期間(boolean isNijiHanteiNinteiYukoKikan, int nijiHanteiNinteiYukoKikan) {
-
-        if (nijiHanteiNinteiYukoKikan != 0) {
-            isNijiHanteiNinteiYukoKikan = true;
-        }
-        return isNijiHanteiNinteiYukoKikan;
-    }
-
-    private static boolean 認定_認定有効開始日From(boolean isNijiHanteiNinteiYMDFrom, FlexibleDate nijiHanteiNinteiYMDFrom) {
-
-        if (nijiHanteiNinteiYMDFrom != null && !nijiHanteiNinteiYMDFrom.isEmpty()) {
-            isNijiHanteiNinteiYMDFrom = true;
-        }
-        return isNijiHanteiNinteiYMDFrom;
-    }
-
-    private static boolean 認定_認定有効開始日To(boolean isNijiHanteiNinteiYMDTo, FlexibleDate nijiHanteiNinteiYMDTo) {
-
-        if (nijiHanteiNinteiYMDTo != null && !nijiHanteiNinteiYMDTo.isEmpty()) {
-            isNijiHanteiNinteiYMDTo = true;
-        }
-        return isNijiHanteiNinteiYMDTo;
-    }
-
-    private static boolean 認定_認定有効終了日From(boolean isNijiHanteiShuryoYMDFrom, FlexibleDate nijiHanteiShuryoYMDFrom) {
-
-        if (nijiHanteiShuryoYMDFrom != null && !nijiHanteiShuryoYMDFrom.isEmpty()) {
-            isNijiHanteiShuryoYMDFrom = true;
-        }
-        return isNijiHanteiShuryoYMDFrom;
-    }
-
-    private static boolean 認定_認定有効終了日To(boolean isNijiHanteiShuryoYMDTo, FlexibleDate nijiHanteiShuryoYMDTo) {
-
-        if (nijiHanteiShuryoYMDTo != null && !nijiHanteiShuryoYMDTo.isEmpty()) {
-            isNijiHanteiShuryoYMDTo = true;
-        }
-        return isNijiHanteiShuryoYMDTo;
-    }
-
-    private static boolean 認定_二次判定結果From(boolean isNijiHanteiKekkaInputYMDFrom, FlexibleDate nijiHanteiKekkaInputYMDFrom) {
-
-        if (nijiHanteiKekkaInputYMDFrom != null && !nijiHanteiKekkaInputYMDFrom.isEmpty()) {
-            isNijiHanteiKekkaInputYMDFrom = true;
-        }
-        return isNijiHanteiKekkaInputYMDFrom;
-    }
-
-    private static boolean 認定_二次判定結果To(boolean isNijiHanteiKekkaInputYMDTo, FlexibleDate nijiHanteiKekkaInputYMDTo) {
-
-        if (nijiHanteiKekkaInputYMDTo != null && !nijiHanteiKekkaInputYMDTo.isEmpty()) {
-            isNijiHanteiKekkaInputYMDTo = true;
-        }
-        return isNijiHanteiKekkaInputYMDTo;
-    }
-
-    private static boolean 認定_開催日From(boolean isShinsakaiKaisaiYMDFrom, FlexibleDate shinsakaiKaisaiYMDFrom) {
-
-        if (shinsakaiKaisaiYMDFrom != null && !shinsakaiKaisaiYMDFrom.isEmpty()) {
-            isShinsakaiKaisaiYMDFrom = true;
-        }
-        return isShinsakaiKaisaiYMDFrom;
-    }
-
-    private static boolean 認定_開催日To(boolean isShinsakaiKaisaiYMDTo, FlexibleDate shinsakaiKaisaiYMDTo) {
-
-        if (shinsakaiKaisaiYMDTo != null && !shinsakaiKaisaiYMDTo.isEmpty()) {
-            isShinsakaiKaisaiYMDTo = true;
-        }
-        return isShinsakaiKaisaiYMDTo;
-    }
-
-    private static boolean 認定_開催番号From(boolean isShinsakaiKaisaiNoFrom, RString shinsakaiKaisaiNoFrom) {
-
-        if (!RString.isNullOrEmpty(shinsakaiKaisaiNoFrom)) {
-            isShinsakaiKaisaiNoFrom = true;
-        }
-        return isShinsakaiKaisaiNoFrom;
-    }
-
-    private static boolean 認定_開催番号To(boolean isShinsakaiKaisaiNoTo, RString shinsakaiKaisaiNoTo) {
-
-        if (!RString.isNullOrEmpty(shinsakaiKaisaiNoTo)) {
-            isShinsakaiKaisaiNoTo = true;
-        }
-        return isShinsakaiKaisaiNoTo;
-    }
-
-    private static boolean 認定_認定調査委託先(boolean isZenkaiJigyoshaMeisho, RString zenkaiJigyoshaMeisho) {
-
-        if (!RString.isNullOrEmpty(zenkaiJigyoshaMeisho)) {
-            isZenkaiJigyoshaMeisho = true;
-        }
-        return isZenkaiJigyoshaMeisho;
-    }
-
-    private static boolean 認定_主治医医療機関(boolean isZenkaiIryoKikanMeisho, RString zenkaiIryoKikanMeisho) {
-
-        if (!RString.isNullOrEmpty(zenkaiIryoKikanMeisho)) {
-            isZenkaiIryoKikanMeisho = true;
-        }
-        return isZenkaiIryoKikanMeisho;
-    }
-
-    private static boolean 認定_前回二次判定結果(boolean isZenkaiNijiHanteiKekka, Code zenkaiNijiHanteiKekka) {
-
-        if (!RString.isNullOrEmpty(zenkaiNijiHanteiKekka.value())) {
-            isZenkaiNijiHanteiKekka = true;
-        }
-        return isZenkaiNijiHanteiKekka;
-    }
-
-    private static boolean 認定_前回二次判定有効期間(boolean isZenkaiNijiHanteiNintei, int zenkaiNijiHanteiNintei) {
-
-        if (zenkaiNijiHanteiNintei != 0) {
-            isZenkaiNijiHanteiNintei = true;
-        }
-        return isZenkaiNijiHanteiNintei;
-    }
-
-    private static boolean 認定_前回認定有効開始日From(boolean isZenkaiYukoKikanStartFrom, FlexibleDate zenkaiYukoKikanStartFrom) {
-
-        if (zenkaiYukoKikanStartFrom != null && !zenkaiYukoKikanStartFrom.isEmpty()) {
-            isZenkaiYukoKikanStartFrom = true;
-        }
-        return isZenkaiYukoKikanStartFrom;
-    }
-
-    private static boolean 認定_前回認定有効開始日To(boolean isZenkaiYukoKikanStartTo, FlexibleDate zenkaiYukoKikanStartTo) {
-
-        if (zenkaiYukoKikanStartTo != null && !zenkaiYukoKikanStartTo.isEmpty()) {
-            isZenkaiYukoKikanStartTo = true;
-        }
-        return isZenkaiYukoKikanStartTo;
-    }
-
-    private static boolean 認定_原因疾患(boolean isGeninShikkanCode, Code geninShikkanCode) {
-
-        if (!RString.isNullOrEmpty(geninShikkanCode.value())) {
-            isGeninShikkanCode = true;
-        }
-        return isGeninShikkanCode;
-    }
-
-    private static boolean 認定_経過日数Form(boolean isNinteiShinseiYMDSystemFrom, FlexibleDate ninteiShinseiYMDSystemFrom) {
-
-        if (ninteiShinseiYMDSystemFrom != null && !ninteiShinseiYMDSystemFrom.isEmpty()) {
-            isNinteiShinseiYMDSystemFrom = true;
-        }
-        return isNinteiShinseiYMDSystemFrom;
-    }
-
-    private static boolean 認定_経過日数To(boolean isNinteiShinseiYMDSystemTo, FlexibleDate ninteiShinseiYMDSystemTo) {
-        if (ninteiShinseiYMDSystemTo != null && !ninteiShinseiYMDSystemTo.isEmpty()) {
-            isNinteiShinseiYMDSystemTo = true;
-        }
-        return isNinteiShinseiYMDSystemTo;
     }
 
     /**
@@ -1313,12 +846,21 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
     }
 
     /**
-     * 性別フラグを返します。
+     * 性別男フラグを返します。
      *
-     * @return 性別フラグ
+     * @return 性別男フラグ
      */
-    public boolean isIsSeibetsu() {
-        return isSeibetsu;
+    public boolean isIsSeibetsuOtoko() {
+        return isSeibetsuOtoko;
+    }
+
+    /**
+     * 性別女フラグを返します。
+     *
+     * @return 性別女フラグ
+     */
+    public boolean isIsSeibetsuOna() {
+        return isSeibetsuOna;
     }
 
     /**

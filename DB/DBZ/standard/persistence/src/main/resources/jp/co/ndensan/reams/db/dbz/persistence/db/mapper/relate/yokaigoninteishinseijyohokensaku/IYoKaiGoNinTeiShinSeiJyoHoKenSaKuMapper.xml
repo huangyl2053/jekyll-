@@ -531,10 +531,19 @@
             AND 
             DbT4101."ninteiShinseiShinseijiKubunCode" = #{ninteiShinseiKubunCode} 
         </if>
-        <if test = "isSeibetsu">
+        <if test = "isSeibetsuOtoko and !isSeibetsuOna">
             AND 
-            DbT4101."seibetsu" = #{seibetsu}                                  
+            DbT4101."seibetsu" = #{seibetsuOtoko}                                  
         </if>
+        <if test = "!isSeibetsuOtoko and isSeibetsuOna">
+            AND 
+            DbT4101."seibetsu" = #{seibetsuOna}                                  
+        </if>
+        <if test = "isSeibetsuOtoko and isSeibetsuOna">
+            AND 
+            DbT4101."seibetsu" in (#{seibetsuOtoko},#{seibetsuOna})                                  
+        </if>
+        
 </sql>
  <sql id="認定_基本の検索条件">
         <if test = "isHihokenshaNo">
@@ -590,9 +599,17 @@
             AND 
             DbT5101."ninteiShinseiShinseijiKubunCode" = #{ninteiShinseiKubunCode} 
         </if>
-        <if test = "isSeibetsu">
+        <if test = "isSeibetsuOtoko and !isSeibetsuOna">
             AND 
-            DbT5101."seibetsu" = #{seibetsu}                                  
+            DbT5101."seibetsu" = #{seibetsuOtoko}                                  
+        </if>
+        <if test = "!isSeibetsuOtoko and isSeibetsuOna">
+            AND 
+            DbT5101."seibetsu" = #{seibetsuOna}                                  
+        </if>
+        <if test = "isSeibetsuOtoko and isSeibetsuOna">
+            AND 
+            DbT5101."seibetsu" in (#{seibetsuOtoko},#{seibetsuOna})                                  
         </if>
 </sql>
  <sql id="受給_基本情報">
@@ -736,7 +753,7 @@
        AND 
        DbT5302."ikenshoJuryoYMD"  <![CDATA[<=]]>  #{ikenshoJuryoYMDTo}                                           
     </if>  
-    <if test = "isNeTaKiRi">
+    <if test = "isNeTaKiRi and !isNiChiDo">
        AND 
        DbT5304."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
        AND                                                                                          
@@ -749,7 +766,7 @@
        AND 
        DbT5304."ikenItem" = #{neTaKiRi}
      </if>                                    
-    <if test = "isNiChiDo">
+    <if test = "!isNeTaKiRi and isNiChiDo">
        AND 
        DbT5304."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
        AND 
@@ -761,7 +778,20 @@
                                                                          END)
        AND 
        DbT5304."ikenItem" = #{niChiDo}
-    </if>                  
+    </if>   
+    <if test = "isNeTaKiRi and isNiChiDo">
+       AND 
+       DbT5304."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode" 
+       AND 
+       DbT5304."remban" = (select CASE DbT5101."koroshoIfShikibetsuCode" 
+                                                                         WHEN '99A' THEN 14
+                                                                         WHEN '02A' THEN 14
+                                                                         WHEN '06A' THEN 13
+                                                                         WHEN '09A' THEN 13
+                                                                         WHEN '09B' THEN 13
+                                                                         END)
+      AND DbT5304."ikenItem" = #{neTaKiRi} OR #{niChiDo}
+    </if>                 
  </sql>
  
   <sql id="受給_主治医情報">
@@ -789,7 +819,7 @@
        AND 
        DbT4302."ikenshoJuryoYMD"  <![CDATA[<=]]>  #{ikenshoJuryoYMDTo}                                           
     </if>  
-    <if test = "isNeTaKiRi">
+    <if test = "isNeTaKiRi and !isNiChiDo">
        AND 
        DbT4304."koroshoIfShikibetsuCode" = DbT4101."koroshoIfShikibetsuCode"
        AND                                                                                          
@@ -802,7 +832,7 @@
        AND 
        DbT4304."ikenItem" = #{neTaKiRi}
      </if>                                    
-    <if test = "isNiChiDo">
+    <if test = "!isNeTaKiRi and isNiChiDo">
        AND 
        DbT4304."koroshoIfShikibetsuCode" = DbT4101."koroshoIfShikibetsuCode"
        AND 
@@ -814,7 +844,20 @@
                                                                          END)
        AND 
        DbT4304."ikenItem" = #{niChiDo}
-    </if>                  
+    </if>   
+    <if test = "isNeTaKiRi and isNiChiDo">
+       AND 
+       DbT4304."koroshoIfShikibetsuCode" = DbT4101."koroshoIfShikibetsuCode" 
+       AND 
+       DbT4304."remban" = (select CASE DbT4101."koroshoIfShikibetsuCode" 
+                                                                         WHEN '99A' THEN 14
+                                                                         WHEN '02A' THEN 14
+                                                                         WHEN '06A' THEN 13
+                                                                         WHEN '09A' THEN 13
+                                                                         WHEN '09B' THEN 13
+                                                                         END)
+      AND DbT4304."ikenItem" = #{neTaKiRi} OR #{niChiDo}
+    </if>               
  </sql>
 
  <sql id="認定_一次判定">

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigonintei.YouKaiGoNinTeiShinJyuKyuParameter;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigonintei.YouKaiGoNinTeiShinNiTeiParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.KaigoNinteiShinseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.dgKensakuKekkaIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.core.saikinshoririreki.ScopeCode;
@@ -79,42 +80,43 @@ public class KaigoNinteiShinseiKensakuHandler {
         if (!介護認定申請情報受給.records().isEmpty()) {
 
             int rowSize;
-            if (検索件数 > 介護認定申請情報受給.records().size()) {
+            if (介護認定申請情報受給.records().size() < 検索件数) {
                 rowSize = 介護認定申請情報受給.records().size();
             } else {
                 rowSize = 検索件数;
             }
             for (int i = 0; i < rowSize; i++) {
 
+                HokenshaNinteiShinseiJoho shinseiJoho = 介護認定申請情報受給.records().get(i);
                 dgKensakuKekkaIchiran_Row dgJigyoshaItiran = new dgKensakuKekkaIchiran_Row();
-                dgJigyoshaItiran.setHihokenshaNo(nullTOEmpty(介護認定申請情報受給.records().get(i).get被保険者番号()));
-                if (介護認定申請情報受給.records().get(i).get被保険者氏名() != null) {
-                    dgJigyoshaItiran.setShimei(nullTOEmpty(介護認定申請情報受給.records().get(i).get被保険者氏名().value()));
+                dgJigyoshaItiran.setHihokenshaNo(nullTOEmpty(shinseiJoho.get被保険者番号()));
+                if (shinseiJoho.get被保険者氏名() != null) {
+                    dgJigyoshaItiran.setShimei(nullTOEmpty(shinseiJoho.get被保険者氏名().value()));
                 }
-                dgJigyoshaItiran.setHihokenshaKubun(介護認定申請情報受給.records().get(i).get被保険者区分コード());
+                dgJigyoshaItiran.setHihokenshaKubun(shinseiJoho.get被保険者区分コード());
                 RString 性別 = RString.EMPTY;
                 if (Seibetsu.男.getコード().
-                        equals(介護認定申請情報受給.records().get(i).get性別().value())) {
+                        equals(shinseiJoho.get性別().value())) {
                     性別 = Seibetsu.男.get名称();
                 } else if (Seibetsu.女.getコード().
-                        equals(介護認定申請情報受給.records().get(i).get性別().value())) {
+                        equals(shinseiJoho.get性別().value())) {
                     性別 = Seibetsu.女.get名称();
                 }
                 dgJigyoshaItiran.setSeibetsu(性別);
-                if (介護認定申請情報受給.records().get(i).get生年月日() != null
-                        && !介護認定申請情報受給.records().get(i).get生年月日().isEmpty()) {
+                if (shinseiJoho.get生年月日() != null
+                        && !shinseiJoho.get生年月日().isEmpty()) {
                     dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報受給.
                             records().get(i).get生年月日().toString()));
                 }
-                if (介護認定申請情報受給.records().get(i).get郵便番号() != null) {
-                    dgJigyoshaItiran.setYubinNo(介護認定申請情報受給.records().get(i).get郵便番号().value());
+                if (shinseiJoho.get郵便番号() != null) {
+                    dgJigyoshaItiran.setYubinNo(shinseiJoho.get郵便番号().value());
                 }
-                if (介護認定申請情報受給.records().get(i).get住所() != null) {
-                    dgJigyoshaItiran.setJusho(介護認定申請情報受給.records().get(i).get住所().value());
+                if (shinseiJoho.get住所() != null) {
+                    dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
                 }
-                if (介護認定申請情報受給.records().get(i).get申請書管理番号() != null
-                        && !介護認定申請情報受給.records().get(i).get申請書管理番号().isEmpty()) {
-                    dgJigyoshaItiran.setShinseishoKnriNo(介護認定申請情報受給.records().get(i).get申請書管理番号().value());
+                if (shinseiJoho.get申請書管理番号() != null
+                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
+                    dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
                 }
                 dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
             }
@@ -145,42 +147,43 @@ public class KaigoNinteiShinseiKensakuHandler {
         if (!介護認定申請情報認定.records().isEmpty()) {
 
             int rowSize;
-            if (検索件数 > 介護認定申請情報認定.records().size()) {
+            if (介護認定申請情報認定.records().size() < 検索件数) {
                 rowSize = 介護認定申請情報認定.records().size();
             } else {
                 rowSize = 検索件数;
             }
             for (int i = 0; i < rowSize; i++) {
 
+                NinteiShinseiJoho shinseiJoho = 介護認定申請情報認定.records().get(i);
                 dgKensakuKekkaIchiran_Row dgJigyoshaItiran = new dgKensakuKekkaIchiran_Row();
-                dgJigyoshaItiran.setHihokenshaNo(nullTOEmpty(介護認定申請情報認定.records().get(i).get被保険者番号()));
-                if (介護認定申請情報認定.records().get(i).get被保険者氏名() != null) {
-                    dgJigyoshaItiran.setShimei(nullTOEmpty(介護認定申請情報認定.records().get(i).get被保険者氏名().value()));
+                dgJigyoshaItiran.setHihokenshaNo(nullTOEmpty(shinseiJoho.get被保険者番号()));
+                if (shinseiJoho.get被保険者氏名() != null) {
+                    dgJigyoshaItiran.setShimei(nullTOEmpty(shinseiJoho.get被保険者氏名().value()));
                 }
-                dgJigyoshaItiran.setHihokenshaKubun(介護認定申請情報認定.records().get(i).get被保険者区分コード());
+                dgJigyoshaItiran.setHihokenshaKubun(shinseiJoho.get被保険者区分コード());
                 RString 性別 = RString.EMPTY;
                 if (Seibetsu.男.getコード().toString().
-                        equals(介護認定申請情報認定.records().get(i).get性別().toString())) {
+                        equals(shinseiJoho.get性別().toString())) {
                     性別 = Seibetsu.男.get名称();
                 } else if (Seibetsu.女.getコード().toString().
-                        equals(介護認定申請情報認定.records().get(i).get性別().toString())) {
+                        equals(shinseiJoho.get性別().toString())) {
                     性別 = Seibetsu.女.get名称();
                 }
                 dgJigyoshaItiran.setSeibetsu(性別);
-                if (介護認定申請情報認定.records().get(i).get生年月日() != null
-                        && !介護認定申請情報認定.records().get(i).get生年月日().isEmpty()) {
+                if (shinseiJoho.get生年月日() != null
+                        && !shinseiJoho.get生年月日().isEmpty()) {
                     dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報認定.
                             records().get(i).get生年月日().toString()));
                 }
-                if (介護認定申請情報認定.records().get(i).get郵便番号() != null) {
-                    dgJigyoshaItiran.setYubinNo(介護認定申請情報認定.records().get(i).get郵便番号().value());
+                if (shinseiJoho.get郵便番号() != null) {
+                    dgJigyoshaItiran.setYubinNo(shinseiJoho.get郵便番号().value());
                 }
-                if (介護認定申請情報認定.records().get(i).get住所() != null) {
-                    dgJigyoshaItiran.setJusho(介護認定申請情報認定.records().get(i).get住所().value());
+                if (shinseiJoho.get住所() != null) {
+                    dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
                 }
-                if (介護認定申請情報認定.records().get(i).get申請書管理番号() != null
-                        && !介護認定申請情報認定.records().get(i).get申請書管理番号().isEmpty()) {
-                    dgJigyoshaItiran.setShinseishoKnriNo(介護認定申請情報認定.records().get(i).get申請書管理番号().value());
+                if (shinseiJoho.get申請書管理番号() != null
+                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
+                    dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
                 }
                 dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
             }
@@ -205,9 +208,10 @@ public class KaigoNinteiShinseiKensakuHandler {
     public YouKaiGoNinTeiShinJyuKyuParameter 介護認定申請情報受給Parameter() {
 
         int 認定有効期間 = 0;
-        if (!div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
-                getTxtZenkaiNinteiYukoKikan().getValue().isNullOrEmpty()) {
-            認定有効期間 = Integer.valueOf(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv();
+        if (!RString.isNullOrEmpty(finderDiv.
+                getTxtZenkaiNinteiYukoKikan().getValue())) {
+            認定有効期間 = Integer.valueOf(finderDiv.
                     getTxtZenkaiNinteiYukoKikan().getValue().toString());
         }
         int 検索件数 = 0;
@@ -216,51 +220,52 @@ public class KaigoNinteiShinseiKensakuHandler {
         }
         return YouKaiGoNinTeiShinJyuKyuParameter.
                 createParam_受給(
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().
+                        finderDiv.getTxtHihokenshaNumber().getValue(),
+                        finderDiv.getDdlHokenshaNumber().
                         getSelectedItem().get証記載保険者番号().value(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShichosonCode().getSelectedKey(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().getSelectedKey(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getChkMinashiFlag().getSelectedKeys().isEmpty(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtBirthDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtBirthDateTO().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey()),
-                        性別の取得(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHihokenshaKubun().getSelectedKey(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHoreiShinseiji().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShoriKubun().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtYubinNo().getValue(),
-                        new ChikuCode(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlChiku().getSelectedKey()),
+                        finderDiv.getDdlShichosonCode().getSelectedKey(),
+                        finderDiv.getTxtHihokenshaName().getValue(),
+                        finderDiv.getDdlHihokenshaNameMatchType().getSelectedKey(),
+                        !finderDiv.getChkMinashiFlag().getSelectedKeys().isEmpty(),
+                        finderDiv.getTxtNinteiShinseiDateFrom().getValue(),
+                        finderDiv.getTxtNinteiShinseiDateTo().getValue(),
+                        finderDiv.getTxtBirthDateFrom().getValue(),
+                        finderDiv.getTxtBirthDateTO().getValue(),
+                        new Code(finderDiv.getDdlShinseijiShinseiKubun().getSelectedKey()),
+                        性別男の取得(),
+                        性別女の取得(),
+                        finderDiv.getDdlHihokenshaKubun().getSelectedKey(),
+                        new Code(finderDiv.getDdlHoreiShinseiji().getSelectedKey()),
+                        new Code(finderDiv.getDdlShoriKubun().getSelectedKey()),
+                        finderDiv.getTxtYubinNo().getValue(),
+                        new ChikuCode(finderDiv.getDdlChiku().getSelectedKey()),
                         施設入所_あり.equals(div.getCcdNinteiShinseishaFinder().
                                 getNinteiShinseishaFinderDiv().getRadShisetsuNyusho().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiChosaItakusakiName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiChosainName().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlChosaJisshiBasho().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlChosaKubun().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtChosaJisshiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtChosaJisshiDateTo().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNinteiChosaNetakirido().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNinteiChosaNinchido().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtShujiiIryokikanName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtShujiiName().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShujiIkubun().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIkenshoKinyuDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIkenshoKinyuDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShujiJohoNetakirido().getSelectedKey(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShujiJohoNinchido().getSelectedKey(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIchijiHanteiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIchijiHanteiDateTo().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlIchijiHanteiKekka().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiNinteiChosaItakusakiName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiShujiiIryokikanName().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlZenkaiNijiHanteiKekka().getSelectedKey()),
+                        finderDiv.getTxtNinteiChosaItakusakiName().getValue(),
+                        finderDiv.getTxtNinteiChosainName().getValue(),
+                        new Code(finderDiv.getDdlChosaJisshiBasho().getSelectedKey()),
+                        new Code(finderDiv.getDdlChosaKubun().getSelectedKey()),
+                        finderDiv.getTxtChosaJisshiDateFrom().getValue(),
+                        finderDiv.getTxtChosaJisshiDateTo().getValue(),
+                        new Code(finderDiv.getDdlNinteiChosaNetakirido().getSelectedKey()),
+                        new Code(finderDiv.getDdlNinteiChosaNinchido().getSelectedKey()),
+                        finderDiv.getTxtShujiiIryokikanName().getValue(),
+                        finderDiv.getTxtShujiiName().getValue(),
+                        new Code(finderDiv.getDdlShujiIkubun().getSelectedKey()),
+                        finderDiv.getTxtIkenshoKinyuDateFrom().getValue(),
+                        finderDiv.getTxtIkenshoKinyuDateTo().getValue(),
+                        finderDiv.getDdlShujiJohoNetakirido().getSelectedKey(),
+                        finderDiv.getDdlShujiJohoNinchido().getSelectedKey(),
+                        finderDiv.getTxtIchijiHanteiDateFrom().getValue(),
+                        finderDiv.getTxtIchijiHanteiDateTo().getValue(),
+                        new Code(finderDiv.getDdlIchijiHanteiKekka().getSelectedKey()),
+                        finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue(),
+                        finderDiv.getTxtZenkaiShujiiIryokikanName().getValue(),
+                        new Code(finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey()),
                         認定有効期間,
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiYukoKaishiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiYukoKaishiDateTo().getValue(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getChkTsuchiShori().getSelectedKeys().isEmpty(),
+                        finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue(),
+                        finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue(),
+                        !finderDiv.getChkTsuchiShori().getSelectedKeys().isEmpty(),
                         検索件数);
     }
 
@@ -272,27 +277,28 @@ public class KaigoNinteiShinseiKensakuHandler {
     public YouKaiGoNinTeiShinNiTeiParameter 介護認定申請情報認定Parameter() {
 
         int 認定有効期間 = 0;
-        if (!div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
-                getTxtNinteiYukoKikan().getValue().isNullOrEmpty()) {
-            認定有効期間 = Integer.valueOf(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv();
+        if (!RString.isNullOrEmpty(finderDiv.
+                getTxtNinteiYukoKikan().getValue())) {
+            認定有効期間 = Integer.valueOf(finderDiv.
                     getTxtNinteiYukoKikan().getValue().toString());
         }
         int 前回認定有効期間 = 0;
-        if (!div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
-                getTxtZenkaiNinteiYukoKikan().getValue().isNullOrEmpty()) {
-            前回認定有効期間 = Integer.valueOf(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+        if (!RString.isNullOrEmpty(finderDiv.
+                getTxtZenkaiNinteiYukoKikan().getValue())) {
+            前回認定有効期間 = Integer.valueOf(finderDiv.
                     getTxtZenkaiNinteiYukoKikan().getValue().toString());
         }
         int 経過日数Form = 0;
-        if (div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv()
+        if (finderDiv
                 .getTxtShinseiKeikaNissu().getFromValue() != null) {
-            経過日数Form = div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv()
+            経過日数Form = finderDiv
                     .getTxtShinseiKeikaNissu().getFromValue().intValue();
         }
         int 経過日数To = 0;
-        if (div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv()
+        if (finderDiv
                 .getTxtShinseiKeikaNissu().getFromValue() != null) {
-            経過日数To = div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv()
+            経過日数To = finderDiv
                     .getTxtShinseiKeikaNissu().getToValue().intValue();
         }
         int 検索件数 = 0;
@@ -301,90 +307,91 @@ public class KaigoNinteiShinseiKensakuHandler {
         }
         return YouKaiGoNinTeiShinNiTeiParameter.
                 createParam_認定(
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().
+                        finderDiv.getTxtHihokenshaNumber().getValue(),
+                        finderDiv.getDdlHokenshaNumber().
                         getSelectedItem().get証記載保険者番号().value(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShichosonCode().getSelectedKey(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().getSelectedKey(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getChkMinashiFlag().getSelectedKeys().isEmpty(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtBirthDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtBirthDateTO().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey()),
-                        性別の取得(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHihokenshaKubun().getSelectedKey(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHoreiShinseiji().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShoriKubun().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtYubinNo().getValue(),
-                        new ChikuCode(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlChiku().getSelectedKey()),
+                        finderDiv.getDdlShichosonCode().getSelectedKey(),
+                        finderDiv.getTxtHihokenshaName().getValue(),
+                        finderDiv.getDdlHihokenshaNameMatchType().getSelectedKey(),
+                        !finderDiv.getChkMinashiFlag().getSelectedKeys().isEmpty(),
+                        finderDiv.getTxtNinteiShinseiDateFrom().getValue(),
+                        finderDiv.getTxtNinteiShinseiDateTo().getValue(),
+                        finderDiv.getTxtBirthDateFrom().getValue(),
+                        finderDiv.getTxtBirthDateTO().getValue(),
+                        new Code(finderDiv.getDdlShinseijiShinseiKubun().getSelectedKey()),
+                        性別男の取得(),
+                        性別女の取得(),
+                        finderDiv.getDdlHihokenshaKubun().getSelectedKey(),
+                        new Code(finderDiv.getDdlHoreiShinseiji().getSelectedKey()),
+                        new Code(finderDiv.getDdlShoriKubun().getSelectedKey()),
+                        finderDiv.getTxtYubinNo().getValue(),
+                        new ChikuCode(finderDiv.getDdlChiku().getSelectedKey()),
                         施設入所_あり.equals(div.getCcdNinteiShinseishaFinder().
                                 getNinteiShinseishaFinderDiv().getRadShisetsuNyusho().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiChosaItakusakiName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiChosainName().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlChosaJisshiBasho().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlChosaKubun().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtChosaJisshiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtChosaJisshiDateTo().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNinteiChosaNetakirido().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNinteiChosaNinchido().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtShujiiIryokikanName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtShujiiName().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShujiIkubun().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIkenshoKinyuDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIkenshoKinyuDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShujiJohoNetakirido().getSelectedKey(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShujiJohoNinchido().getSelectedKey(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIchijiHanteiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIchijiHanteiDateTo().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlIchijiHanteiKekka().getSelectedKey()),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIchiGoHanteiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtIchiGoHanteiDateTo().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlIchiGohanteiKekka().getSelectedKey()),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNijiHanteiKekka().getSelectedKey()),
+                        finderDiv.getTxtNinteiChosaItakusakiName().getValue(),
+                        finderDiv.getTxtNinteiChosainName().getValue(),
+                        new Code(finderDiv.getDdlChosaJisshiBasho().getSelectedKey()),
+                        new Code(finderDiv.getDdlChosaKubun().getSelectedKey()),
+                        finderDiv.getTxtChosaJisshiDateFrom().getValue(),
+                        finderDiv.getTxtChosaJisshiDateTo().getValue(),
+                        new Code(finderDiv.getDdlNinteiChosaNetakirido().getSelectedKey()),
+                        new Code(finderDiv.getDdlNinteiChosaNinchido().getSelectedKey()),
+                        finderDiv.getTxtShujiiIryokikanName().getValue(),
+                        finderDiv.getTxtShujiiName().getValue(),
+                        new Code(finderDiv.getDdlShujiIkubun().getSelectedKey()),
+                        finderDiv.getTxtIkenshoKinyuDateFrom().getValue(),
+                        finderDiv.getTxtIkenshoKinyuDateTo().getValue(),
+                        finderDiv.getDdlShujiJohoNetakirido().getSelectedKey(),
+                        finderDiv.getDdlShujiJohoNinchido().getSelectedKey(),
+                        finderDiv.getTxtIchijiHanteiDateFrom().getValue(),
+                        finderDiv.getTxtIchijiHanteiDateTo().getValue(),
+                        new Code(finderDiv.getDdlIchijiHanteiKekka().getSelectedKey()),
+                        finderDiv.getTxtIchiGoHanteiDateFrom().getValue(),
+                        finderDiv.getTxtIchiGoHanteiDateTo().getValue(),
+                        new Code(finderDiv.getDdlIchiGohanteiKekka().getSelectedKey()),
+                        new Code(finderDiv.getDdlNijiHanteiKekka().getSelectedKey()),
                         認定有効期間,
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiYukoKaishiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiYukoKaishiDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiYukoShuryoDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiYukoShuryoDate().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHanteiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHnateiDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtKaisaiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtKaisaiDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtKaisaiNumberStart().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtKaisaiNumberEnd().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiNinteiChosaItakusakiName().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiShujiiIryokikanName().getValue(),
-                        new Code(div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlZenkaiNijiHanteiKekka().getSelectedKey()),
+                        finderDiv.getTxtNinteiYukoKaishiDateFrom().getValue(),
+                        finderDiv.getTxtNinteiYukoKaishiDateTo().getValue(),
+                        finderDiv.getTxtNinteiYukoShuryoDateFrom().getValue(),
+                        finderDiv.getTxtNinteiYukoShuryoDate().getValue(),
+                        finderDiv.getTxtNijiHanteiDateFrom().getValue(),
+                        finderDiv.getTxtNijiHnateiDateTo().getValue(),
+                        finderDiv.getTxtKaisaiDateFrom().getValue(),
+                        finderDiv.getTxtKaisaiDateTo().getValue(),
+                        finderDiv.getTxtKaisaiNumberStart().getValue(),
+                        finderDiv.getTxtKaisaiNumberEnd().getValue(),
+                        finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue(),
+                        finderDiv.getTxtZenkaiShujiiIryokikanName().getValue(),
+                        new Code(finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey()),
                         前回認定有効期間,
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiYukoKaishiDateFrom().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtZenkaiYukoKaishiDateTo().getValue(),
-                        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getCdlGeninShikkanCode().getCode(),
+                        finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue(),
+                        finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue(),
+                        finderDiv.getCdlGeninShikkanCode().getCode(),
                         FlexibleDate.getNowDate().plusDay(経過日数Form),
                         FlexibleDate.getNowDate().plusDay(経過日数To),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkKoshinTaishoChushutsu().getSelectedKeys().isEmpty(),
                         new Code(NinteiShinseiYukoKubunCode.仮状態.getコード()),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkIchijiHantei().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkShinseiUketsuke().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkMasking().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkChosaIrai().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkShinsakaiToroku().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkIkenshoIrai().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkNijiHantei().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkChosaNyushu().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkIkenshoNyushu().getSelectedKeys().isEmpty(),
-                        !div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().
+                        !finderDiv.
                         getChkGetsureiShori().getSelectedKeys().isEmpty(),
                         検索件数);
     }
@@ -396,33 +403,27 @@ public class KaigoNinteiShinseiKensakuHandler {
         return 項目;
     }
 
-    private Code 性別の取得() {
+    private Code 性別男の取得() {
 
         RString 性別_男 = RString.EMPTY;
-        RString 性別_女 = RString.EMPTY;
-        RString 性別 = RString.EMPTY;
         for (RString seibetsu : div.getCcdNinteiShinseishaFinder().
                 getNinteiShinseishaFinderDiv().getChkSeibetsu().getSelectedValues()) {
             if (Seibetsu.男.get名称().equals(seibetsu)) {
                 性別_男 = Seibetsu.男.getコード();
-            } else if (Seibetsu.女.getコード().equals(seibetsu)) {
+            }
+        }
+        return new Code(性別_男);
+    }
+
+    private Code 性別女の取得() {
+
+        RString 性別_女 = RString.EMPTY;
+        for (RString seibetsu : div.getCcdNinteiShinseishaFinder().
+                getNinteiShinseishaFinderDiv().getChkSeibetsu().getSelectedValues()) {
+            if (Seibetsu.女.get名称().equals(seibetsu)) {
                 性別_女 = Seibetsu.女.getコード();
             }
         }
-        if (!性別_男.isEmpty() && 性別_女.isEmpty()) {
-
-            性別 = Seibetsu.男.getコード();
-        }
-
-        if (性別_男.isEmpty() && !性別_女.isEmpty()) {
-
-            性別 = Seibetsu.女.getコード();
-        }
-
-        if ((性別_男.isEmpty() && 性別_女.isEmpty()) || (!性別_男.isEmpty() && !性別_女.isEmpty())) {
-
-            性別 = RString.EMPTY;
-        }
-        return new Code(性別);
+        return new Code(性別_女);
     }
 }
