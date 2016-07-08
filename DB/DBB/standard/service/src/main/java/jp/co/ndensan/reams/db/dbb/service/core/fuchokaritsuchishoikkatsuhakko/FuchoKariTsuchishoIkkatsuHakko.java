@@ -116,6 +116,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 普徴仮算定通知書一括発行（バッチ）クラスです。
+ *
+ * @reamsid_L DBB-0710-040 yebangqiang
  */
 public class FuchoKariTsuchishoIkkatsuHakko {
 
