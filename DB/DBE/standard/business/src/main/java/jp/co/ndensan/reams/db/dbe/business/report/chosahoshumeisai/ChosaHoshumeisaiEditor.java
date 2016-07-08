@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosahoshumeisai;
 
 import jp.co.ndensan.reams.db.dbe.business.core.chosahoshumeisai.ChosaHoshumeisai;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai.ChosaHoshumeisaiReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 認定調査報酬支払明細書のEditorです。
@@ -48,6 +51,10 @@ public class ChosaHoshumeisaiEditor implements IChosaHoshumeisaiEditor {
         source.chosaItakusakiName = item.get調査機関名();
         source.chosainName = item.get調査員名();
         source.printTimeStamp = printTimeStampSb;
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (item.get被保険者番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+        }
         return source;
     }
 }

@@ -71,11 +71,31 @@ public class KogakuShinseiListDivHandler {
      */
     public void 画面初期化(RString メニューID, HihokenshaNo 被保険者番号, RString 導入形態コード) {
         FlexibleYearMonth サービス年月 = FlexibleDate.getNowDate().
-                getYearMonth().minusMonth(THREE);
-        div.getTxtServiceYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
-        set証記載保険者番号(被保険者番号, サービス年月, 導入形態コード);
-        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                getYearMonth();
+        int 設定値 = 0;
+        RString 受託区分 = RString.EMPTY;
+        if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
+            RString 設定値の年月 = DbBusinessConfig.get(ConfigNameDBC.初期表示_高額サービス費申請登録初期,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            if (設定値の年月 != null && !設定値の年月.isEmpty()) {
+                設定値 = Integer.valueOf(設定値の年月.toString());
+            }
+            受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID) || 総合事業高額介護サービス費照会.equals(メニューID)) {
+            RString 設定値の年月 = DbBusinessConfig.get(ConfigNameDBC.初期表示_事業高額サービス費申請登録初期,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+            if (設定値の年月 != null && !設定値の年月.isEmpty()) {
+                設定値 = Integer.valueOf(設定値の年月.toString());
+            }
+            受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
+        div.getTxtServiceYM().setDomain(new RYearMonth(サービス年月.minusMonth(設定値).toString()));
+        div.getTxtServiceYMFrom().setDomain(new RYearMonth(サービス年月.minusMonth(設定値).toString()));
+        div.getTxtServiceYMTo().setDomain(new RYearMonth(サービス年月.minusMonth(設定値).toString()));
+        set証記載保険者番号(被保険者番号, サービス年月.minusMonth(設定値), 導入形態コード);
         List<dgShinseiJoho_Row> rowList = new ArrayList<>();
         div.getDgShinseiJoho().setDataSource(rowList);
         if (受託区分.equals(ONE)) {
@@ -112,8 +132,15 @@ public class KogakuShinseiListDivHandler {
     public void 検索一覧(HihokenshaNo 被保険者番号, RString メニューID) {
         FlexibleYearMonth サービス年月From = null;
         FlexibleYearMonth サービス年月To = null;
-        RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        RString 受託区分 = RString.EMPTY;
+        if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
+            受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
+        if (総合事業高額サービス費支給申請書登録.equals(メニューID) || 総合事業高額介護サービス費照会.equals(メニューID)) {
+            受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_事業高額,
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        }
         if (div.getTxtServiceYMFrom().getDomain() != null) {
             サービス年月From = new FlexibleYearMonth(div.getTxtServiceYMFrom().getDomain().toString());
         }
