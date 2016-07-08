@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -53,8 +54,6 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
     private static final int リストサイズ８ = 8;
     private static final int リストサイズ９ = 9;
     private static final int リストサイズ１０ = 10;
-
-    private static final int INT_6 = 6;
 
     /**
      * インスタンスを生成します。
@@ -135,7 +134,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             }
         }
 
-        source.notsuRenban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        source.notsuRenban = NotsuReportEditorUtil.get納通連番(renban);
 
         this.納入通知書期情報設定(source);
 

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmulti;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -131,7 +132,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiCoverEditor implements IKarisanteiN
             }
         }
 
-        source.noutsu_renban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        source.noutsu_renban = NotsuReportEditorUtil.get納通連番(renban);
 
         this.納入通知書期情報設定(source);
 
