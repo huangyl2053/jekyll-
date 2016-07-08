@@ -42,4 +42,5 @@ public class ShujiiHoshumeisaiEntity {
     private RString 合計金額;
     private RString 消費税;
     private RString 合計請求額;
+    private RString 主治医コード;
 }
