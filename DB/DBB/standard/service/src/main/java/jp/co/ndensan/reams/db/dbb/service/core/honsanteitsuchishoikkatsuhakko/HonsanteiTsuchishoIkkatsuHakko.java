@@ -1489,7 +1489,9 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             Decimal 更正後_特徴本算定額, RString 徴収方法更正前_特別徴収停止事由コード) {
 
         if (賦課の情報_更正後.get資格喪失日() == null || 賦課の情報_更正後.get資格喪失日().isEmpty()) {
-            if (更正前_普徴特徴仮算定額合計 == 賦課の情報_更正後.get減免前介護保険料_年額()) {
+            if ((更正前_普徴特徴仮算定額合計 == null && 賦課の情報_更正後.get減免前介護保険料_年額() == null)
+                    || (更正前_普徴特徴仮算定額合計 != null
+                    && 更正前_普徴特徴仮算定額合計.equals(賦課の情報_更正後.get減免前介護保険料_年額()))) {
                 return INT_1;
             }
             if (更正前_普徴特徴仮算定額合計 != null && 賦課の情報_更正後.get減免前介護保険料_年額() != null
@@ -1497,18 +1499,27 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                     && 定値区分_1.equals(get判定結果(賦課の情報_更正後.get減免前介護保険料_年額()))) {
                 return INT_2;
             }
-        } else {
-            if (更正前_普徴特徴仮算定額合計 == 賦課の情報_更正後.get減免前介護保険料_年額()) {
-                return INT_3;
-            }
-            if (更正前_普徴特徴仮算定額合計 != null && 賦課の情報_更正後.get減免前介護保険料_年額() != null
-                    && (更正前_普徴特徴仮算定額合計.compareTo(賦課の情報_更正後.get減免前介護保険料_年額()) == INT_1)
-                    && 定値区分_1.equals(get判定結果(賦課の情報_更正後.get減免前介護保険料_年額()))) {
-                return INT_4;
-            }
-            if (賦課の情報_更正後.get減免前介護保険料_年額() == Decimal.ZERO) {
-                return INT_5;
-            }
+        }
+
+        return get選択通知書No_部分1(賦課の情報_更正後, 更正前_普徴特徴仮算定額合計, 更正前_特徴仮算定額,
+                更正後_特徴本算定額, 徴収方法更正前_特別徴収停止事由コード);
+    }
+
+    private int get選択通知書No_部分1(FukaJoho 賦課の情報_更正後, Decimal 更正前_普徴特徴仮算定額合計, Decimal 更正前_特徴仮算定額,
+            Decimal 更正後_特徴本算定額, RString 徴収方法更正前_特別徴収停止事由コード) {
+
+        if ((更正前_普徴特徴仮算定額合計 == null && 賦課の情報_更正後.get減免前介護保険料_年額() == null)
+                || (更正前_普徴特徴仮算定額合計 != null
+                && 更正前_普徴特徴仮算定額合計.equals(賦課の情報_更正後.get減免前介護保険料_年額()))) {
+            return INT_3;
+        }
+        if (更正前_普徴特徴仮算定額合計 != null && 賦課の情報_更正後.get減免前介護保険料_年額() != null
+                && (更正前_普徴特徴仮算定額合計.compareTo(賦課の情報_更正後.get減免前介護保険料_年額()) == INT_1)
+                && 定値区分_1.equals(get判定結果(賦課の情報_更正後.get減免前介護保険料_年額()))) {
+            return INT_4;
+        }
+        if (Decimal.ZERO.equals(賦課の情報_更正後.get減免前介護保険料_年額())) {
+            return INT_5;
         }
         if (定値区分_1.equals(get判定結果(更正前_特徴仮算定額)) && 定値区分_1.equals(get判定結果(更正後_特徴本算定額))) {
             if (!定値_特別徴収停止事由コード.equals(徴収方法更正前_特別徴収停止事由コード)) {
@@ -1517,7 +1528,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                 return INT_7;
             }
         }
-        return 0;
+        return INT_0;
     }
 
     private int get選択通知書No_部分(FukaJoho 賦課の情報_更正後, Decimal 更正前_特徴仮算定額, Decimal 更正前_普徴仮算定額,
