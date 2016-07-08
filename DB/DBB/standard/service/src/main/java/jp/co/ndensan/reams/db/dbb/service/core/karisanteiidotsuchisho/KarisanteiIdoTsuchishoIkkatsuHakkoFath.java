@@ -108,9 +108,9 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
     private static final RString タイトル_特別徴収業務者 = new RString("特別徴収業務者");
     private static final RString タイトル_特別徴収対象年金コード = new RString("特別徴収対象年金コード");
     private static final RString タイトル_特別徴収対象年金 = new RString("特別徴収対象年金");
-    private static final RString タイトル_本徴収額_4月 = new RString("本徴収額（4月）");
-    private static final RString タイトル_本徴収額_6月 = new RString("本徴収額（6月）");
-    private static final RString タイトル_本徴収額_8月 = new RString("本徴収額（8月）");
+    private static final RString タイトル_仮徴収額_4月 = new RString("仮徴収額（4月）");
+    private static final RString タイトル_仮徴収額_6月 = new RString("仮徴収額（6月）");
+    private static final RString タイトル_仮徴収額_8月 = new RString("仮徴収額（8月）");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200001");
     private static final RString 特別徴収_EUCファイル名 = new RString("TokubetsuChoshuKaishiTsuchishoKairiHakkoIchiranData.csv");
     private static final EucEntityId 特別徴収依頼金額明細_EUC_ENTITY_ID = new EucEntityId("DBB200023");
@@ -197,9 +197,9 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
         headerList.add(タイトル_特別徴収業務者);
         headerList.add(タイトル_特別徴収対象年金コード);
         headerList.add(タイトル_特別徴収対象年金);
-        headerList.add(タイトル_本徴収額_4月);
-        headerList.add(タイトル_本徴収額_6月);
-        headerList.add(タイトル_本徴収額_8月);
+        headerList.add(タイトル_仮徴収額_4月);
+        headerList.add(タイトル_仮徴収額_6月);
+        headerList.add(タイトル_仮徴収額_8月);
 
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
