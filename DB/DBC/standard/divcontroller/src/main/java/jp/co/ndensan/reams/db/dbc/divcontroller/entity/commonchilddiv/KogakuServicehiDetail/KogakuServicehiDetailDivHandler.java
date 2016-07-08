@@ -96,7 +96,6 @@ public class KogakuServicehiDetailDivHandler {
             div.getTplShinseisha().getRdbShinseisyaKubun().setSelectedKey(KEY0);
             div.getRdbShikyuKubun().setSelectedKey(KEY0);
             div.getRdbShinsaHohoKubun().setSelectedKey(KEY0);
-            div.getRdbKogakuJidoSyokanTaisyo().setSelectedKey(KEY0);
             if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                 div.getTplShinseisha().getTxtHokenJyaBango().setValue(証記載保険者番号.value());
             }
@@ -139,7 +138,7 @@ public class KogakuServicehiDetailDivHandler {
         if (追加モード.equals(画面モード)) {
             div.getTplShinseisha().getTxtKotei().setVisible(false);
             div.getTxtShikyusinaiRiyu().setDisabled(true);
-            div.getRdbKogakuJidoSyokanTaisyo().setSelectedKey(KEY0);
+            div.getRdbKogakuJidoSyokanTaisyo().setSelectedKey(KEY1);
             if (ONE.equals(受託区分)) {
                 div.getRdbShinsaHohoKubun().setDisabled(true);
             }
