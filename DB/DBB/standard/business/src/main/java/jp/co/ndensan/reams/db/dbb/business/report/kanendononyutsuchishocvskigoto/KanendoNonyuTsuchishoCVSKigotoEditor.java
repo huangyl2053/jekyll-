@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskigoto;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -127,7 +128,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
             }
         }
 
-        source.nitsuRenban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        source.nitsuRenban = NotsuReportEditorUtil.get納通連番(renban);
         this.納入通知書期情報設定(source);
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
