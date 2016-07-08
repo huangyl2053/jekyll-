@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsakaiIinJoho implements Serializable {
 
-    //private final DbT5594ShinsakaiIinJohoEntity entity;
     private final ShinsakaiIinHoshuNyuryokuEntity entity;
 
     /**
@@ -285,5 +284,15 @@ public class ShinsakaiIinJoho implements Serializable {
      */
     public RString get開催結果開催番号() {
         return entity.getShinsakaiKaisaiNo();
+    }
+
+    /**
+     * 介護認定審査会委員別単価を返します。
+     *
+     * @return 介護認定審査会委員別単価
+     *
+     */
+    public RString get介護認定審査会委員別単価() {
+        return entity.getTanka();
     }
 }

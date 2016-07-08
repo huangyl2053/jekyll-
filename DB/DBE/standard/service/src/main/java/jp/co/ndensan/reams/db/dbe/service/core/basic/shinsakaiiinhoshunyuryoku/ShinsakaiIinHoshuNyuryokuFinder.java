@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakaiiinhoshunyuryoku;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuJissekiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuJissekiJohoIdentifier;
@@ -67,10 +68,13 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
         List<ShinsakaiIinJoho> businessList = new ArrayList<>();
         IShinsakaiIinHoshuNyuryokuMapper shimapper = mapperProvider.create(IShinsakaiIinHoshuNyuryokuMapper.class);
         List<ShinsakaiIinHoshuNyuryokuEntity> youKaiEntityList = shimapper.getShinsakaiIin(param);
+        if (youKaiEntityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShinsakaiIinJoho>emptyList(), 0, false);
+        }
         for (ShinsakaiIinHoshuNyuryokuEntity entity : youKaiEntityList) {
             businessList.add(new ShinsakaiIinJoho(entity));
         }
-        return SearchResult.of(businessList, businessList.size(), true);
+        return SearchResult.of(businessList, 0, false);
     }
 
     /**
@@ -83,10 +87,13 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
         List<ShinsakaiIinJoho> businessList = new ArrayList<>();
         IShinsakaiIinHoshuNyuryokuMapper shimapper = mapperProvider.create(IShinsakaiIinHoshuNyuryokuMapper.class);
         List<ShinsakaiIinHoshuNyuryokuEntity> youKaiEntityList = shimapper.getdgShinsakaiJisseki(param);
+        if (youKaiEntityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShinsakaiIinJoho>emptyList(), 0, false);
+        }
         for (ShinsakaiIinHoshuNyuryokuEntity entity : youKaiEntityList) {
             businessList.add(new ShinsakaiIinJoho(entity));
         }
-        return SearchResult.of(businessList, businessList.size(), true);
+        return SearchResult.of(businessList, 0, false);
     }
 
     /**
@@ -112,9 +119,25 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
     public boolean delete(Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> models,
             ShinsakaiIinHoshuJissekiJohoIdentifier key) {
         ShinsakaiIinHoshuJissekiJoho 審査会委員情報 = models.get(key);
-        if (審査会委員情報.hasChanged()) {
-            return false;
-        }
         return 1 == dbT5603.delete(審査会委員情報.toEntity());
+    }
+
+    /**
+     * 介護認定審査会委員別単価を取得します。
+     *
+     * @param param 審査会委員報酬入力結果情報を特定するためのMyBatis用パラメータクラスです。
+     * @return ShinsakaiIinHoshuNyuryoku{@code list}
+     */
+    public SearchResult<ShinsakaiIinJoho> get介護認定審査会委員別単価(ShinsakaiIinHoshuNyuryokuMapperParameter param) {
+        List<ShinsakaiIinJoho> businessList = new ArrayList<>();
+        IShinsakaiIinHoshuNyuryokuMapper shimapper = mapperProvider.create(IShinsakaiIinHoshuNyuryokuMapper.class);
+        List<ShinsakaiIinHoshuNyuryokuEntity> youKaiEntityList = shimapper.getShinsaHoshugaku(param);
+        if (youKaiEntityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShinsakaiIinJoho>emptyList(), 0, false);
+        }
+        for (ShinsakaiIinHoshuNyuryokuEntity entity : youKaiEntityList) {
+            businessList.add(new ShinsakaiIinJoho(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
     }
 }

@@ -11,9 +11,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * @author soft863
+ * 審査会委員報酬入力パラメタクラです。
+ *
+ * @reamsid_L DBE-1950-010 zhengsongling
  */
-public class ShinsakaiIinHoshuNyuryokuMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Getter
+public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
 
     private final RString 介護認定審査会委員氏名;
     private final boolean is前方一致;
@@ -24,6 +28,10 @@ public class ShinsakaiIinHoshuNyuryokuMapperParameter {
     private final RString コード;
     private final RDate fromDate;
     private final RDate toDate;
+    private final RDate 実施日;
+    private final boolean has最大表示件数;
+    private final boolean hasFromDate;
+    private final boolean hasToDate;
 
     /**
      * コンストラクタです。
@@ -37,10 +45,25 @@ public class ShinsakaiIinHoshuNyuryokuMapperParameter {
      * @param コード コード
      * @param toDate ToDate
      * @param fromDate FromDate
+     * @param 実施日 実施日
+     * @param has最大表示件数 has最大表示件数
+     * @param hasFromDate hasFromDate
+     * @param hasToDate hasToDate
      */
-    public ShinsakaiIinHoshuNyuryokuMapperParameter(RString 介護認定審査会委員氏名, boolean is前方一致,
-            boolean is後方一致, boolean is完全一致, boolean is部分一致, Decimal 最大表示件数, RString コード,
-            RDate fromDate, RDate toDate) {
+    private ShinsakaiIinHoshuNyuryokuMapperParameter(
+            RString 介護認定審査会委員氏名,
+            boolean is前方一致,
+            boolean is後方一致,
+            boolean is完全一致,
+            boolean is部分一致,
+            Decimal 最大表示件数,
+            RString コード,
+            RDate fromDate,
+            RDate toDate,
+            RDate 実施日,
+            boolean has最大表示件数,
+            boolean hasFromDate,
+            boolean hasToDate) {
         this.介護認定審査会委員氏名 = 介護認定審査会委員氏名;
         this.is前方一致 = is前方一致;
         this.is後方一致 = is後方一致;
@@ -50,6 +73,10 @@ public class ShinsakaiIinHoshuNyuryokuMapperParameter {
         this.コード = コード;
         this.fromDate = fromDate;
         this.toDate = toDate;
+        this.実施日 = 実施日;
+        this.has最大表示件数 = has最大表示件数;
+        this.hasFromDate = hasFromDate;
+        this.hasToDate = hasToDate;
     }
 
     /**
@@ -64,11 +91,40 @@ public class ShinsakaiIinHoshuNyuryokuMapperParameter {
      * @param コード コード
      * @param fromDate fromDate
      * @param toDate toDate
+     * @param 実施日 実施日
+     * @param has最大表示件数 has最大表示件数
+     * @param hasFromDate hasFromDate
+     * @param hasToDate hasToDate
      * @return ShinsakaiIinHoshuNyuryokuMapperParameter 審査会委員報酬入力結果情報を特定するためのMyBatis用パラメータクラスです
      */
-    public static ShinsakaiIinHoshuNyuryokuMapperParameter createSelectListParam(RString 介護認定審査会委員氏名, boolean is前方一致,
-            boolean is後方一致, boolean is完全一致, boolean is部分一致, Decimal 最大表示件数, RString コード, RDate fromDate, RDate toDate) {
-        return new ShinsakaiIinHoshuNyuryokuMapperParameter(介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, コード, fromDate, toDate);
+    public static ShinsakaiIinHoshuNyuryokuMapperParameter createSelectListParam(
+            RString 介護認定審査会委員氏名,
+            boolean is前方一致,
+            boolean is後方一致,
+            boolean is完全一致,
+            boolean is部分一致,
+            Decimal 最大表示件数,
+            RString コード,
+            RDate fromDate,
+            RDate toDate,
+            RDate 実施日,
+            boolean has最大表示件数,
+            boolean hasFromDate,
+            boolean hasToDate) {
+        return new ShinsakaiIinHoshuNyuryokuMapperParameter(
+                介護認定審査会委員氏名,
+                is前方一致,
+                is後方一致,
+                is完全一致,
+                is部分一致,
+                最大表示件数,
+                コード,
+                fromDate,
+                toDate,
+                実施日,
+                has最大表示件数,
+                hasFromDate,
+                hasToDate);
     }
 
 }

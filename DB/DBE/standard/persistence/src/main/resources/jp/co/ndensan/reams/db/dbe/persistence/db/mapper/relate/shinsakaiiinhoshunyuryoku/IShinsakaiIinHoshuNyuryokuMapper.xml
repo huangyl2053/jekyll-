@@ -5,7 +5,10 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinhoshunyuryoku.IShinsakaiIinHoshuNyuryokuMapper">
     <resultMap id="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuEntity" autoMapping="true">
     </resultMap>
-    <select resultOrdered="true" id="getShinsakaiIin" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" fetchSize="500">
+    <select resultOrdered="true" id="getShinsakaiIin"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
+            resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" 
+            fetchSize="500">
     SELECT
         "shinsakaiIinCode",
         "shinsakaiIinKaishiYMD",
@@ -31,10 +34,15 @@
         </if>
         ORDER BY
         rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" DESC
-    limit #{最大表示件数}
+        <if test="has最大表示件数">
+            limit #{最大表示件数}
+        </if>
+    
     </select>
     
-<select resultOrdered="true" id="getdgShinsakaiJisseki" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" fetchSize="500">
+<select resultOrdered="true" id="getdgShinsakaiJisseki" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity"
+parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
+        fetchSize="500">
     SELECT
         T1."gogitaiNo" AS "gogitaiNo",
         T1."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo",
@@ -71,10 +79,10 @@
     AND T3."shinsakaiKaisaiYMD"  <![CDATA[<=]]> T4."gogitaiYukoKikanShuryoYMD"
     WHERE
         T2."shinsakaiIinCode" = #{コード}
-    <if test="fromDate != null">
+    <if test="hasFromDate">
         AND #{fromDate} <![CDATA[<=]]> T3.shinsakaiKaisaiYMD
     </if>
-    <if test="toDate != null">
+    <if test="hasToDate">
         AND T3.shinsakaiKaisaiYMD <![CDATA[<=]]> #{toDate}
     </if>
     ORDER BY
@@ -82,5 +90,20 @@
         T2."shinsakaiIinHoshuKubun" DESC,
         T2."shinsakaiKaisaiYMD" DESC,
         T2."remban" DESC
+    </select>
+    
+    <select  resultOrdered="true" id="getShinsaHoshugaku" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" 
+    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
+              fetchSize="500">
+    SELECT 
+        rgdb."DbT5034ShinsakaiIinBetsuTanka"."tanka" AS "tanka"
+    FROM
+        rgdb."DbT5034ShinsakaiIinBetsuTanka"
+    WHERE
+        rgdb."DbT5034ShinsakaiIinBetsuTanka"."ShinsakaiIinCode" = #{コード}
+    AND
+        rgdb."DbT5034ShinsakaiIinBetsuTanka"."kaishiYM" <![CDATA[<=]]> #{実施日}
+    AND
+        #{実施日} <![CDATA[<=]]> rgdb."DbT5034ShinsakaiIinBetsuTanka"."shuryoYM"
     </select>
 </mapper>

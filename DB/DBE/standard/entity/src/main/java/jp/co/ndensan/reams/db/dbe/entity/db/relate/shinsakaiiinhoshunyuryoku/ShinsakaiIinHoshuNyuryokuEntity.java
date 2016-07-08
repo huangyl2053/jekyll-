@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author soft863
+ * 審査会委員報酬入力のEntityです。
+ *
+ * @reamsid_L DBE-1950-010 zhengsongling
  */
 @lombok.Getter
 @lombok.Setter
@@ -28,7 +30,6 @@ public class ShinsakaiIinHoshuNyuryokuEntity {
     private AtenaKanaMeisho shinsakaiIinKanaShimei;
     private Code shinsakaiIinShikakuCode;
     private boolean haishiFlag;
-
     private int gogitaiNo;
     private RString shinsakaiKaisaiNo;
     private int remban;
@@ -47,4 +48,5 @@ public class ShinsakaiIinHoshuNyuryokuEntity {
     private RString shussekiTime;
     private RString taisekiTime;
     private Code gogitaichoKubunCode;
+    private RString tanka;
 }

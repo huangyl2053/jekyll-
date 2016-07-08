@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinHoshuNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,18 +34,6 @@ public class ShinsakaiIinHoshuNyuryokuDiv extends Panel {
     private ShinsakaiMessageDiv ShinsakaiMessage;
     @JsonProperty("HiddenColumnState")
     private RString HiddenColumnState;
-    @JsonProperty("HiddenShinsaHoshugaku")
-    private RString HiddenShinsaHoshugaku;
-    @JsonProperty("HiddenSonotaHoshu")
-    private RString HiddenSonotaHoshu;
-    @JsonProperty("HiddenHoshuZeiritsu")
-    private RString HiddenHoshuZeiritsu;
-    @JsonProperty("HiddenKotsuhito")
-    private RString HiddenKotsuhito;
-    @JsonProperty("HiddenShiharaiMemo")
-    private RString HiddenShiharaiMemo;
-    @JsonProperty("HiddenGinkoFurikomi")
-    private RString HiddenGinkoFurikomi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -144,114 +132,6 @@ public class ShinsakaiIinHoshuNyuryokuDiv extends Panel {
     }
 
     /*
-     * getHiddenShinsaHoshugaku
-     * @return HiddenShinsaHoshugaku
-     */
-    @JsonProperty("HiddenShinsaHoshugaku")
-    public RString getHiddenShinsaHoshugaku() {
-        return HiddenShinsaHoshugaku;
-    }
-
-    /*
-     * setHiddenShinsaHoshugaku
-     * @param HiddenShinsaHoshugaku HiddenShinsaHoshugaku
-     */
-    @JsonProperty("HiddenShinsaHoshugaku")
-    public void setHiddenShinsaHoshugaku(RString HiddenShinsaHoshugaku) {
-        this.HiddenShinsaHoshugaku = HiddenShinsaHoshugaku;
-    }
-
-    /*
-     * getHiddenSonotaHoshu
-     * @return HiddenSonotaHoshu
-     */
-    @JsonProperty("HiddenSonotaHoshu")
-    public RString getHiddenSonotaHoshu() {
-        return HiddenSonotaHoshu;
-    }
-
-    /*
-     * setHiddenSonotaHoshu
-     * @param HiddenSonotaHoshu HiddenSonotaHoshu
-     */
-    @JsonProperty("HiddenSonotaHoshu")
-    public void setHiddenSonotaHoshu(RString HiddenSonotaHoshu) {
-        this.HiddenSonotaHoshu = HiddenSonotaHoshu;
-    }
-
-    /*
-     * getHiddenHoshuZeiritsu
-     * @return HiddenHoshuZeiritsu
-     */
-    @JsonProperty("HiddenHoshuZeiritsu")
-    public RString getHiddenHoshuZeiritsu() {
-        return HiddenHoshuZeiritsu;
-    }
-
-    /*
-     * setHiddenHoshuZeiritsu
-     * @param HiddenHoshuZeiritsu HiddenHoshuZeiritsu
-     */
-    @JsonProperty("HiddenHoshuZeiritsu")
-    public void setHiddenHoshuZeiritsu(RString HiddenHoshuZeiritsu) {
-        this.HiddenHoshuZeiritsu = HiddenHoshuZeiritsu;
-    }
-
-    /*
-     * getHiddenKotsuhito
-     * @return HiddenKotsuhito
-     */
-    @JsonProperty("HiddenKotsuhito")
-    public RString getHiddenKotsuhito() {
-        return HiddenKotsuhito;
-    }
-
-    /*
-     * setHiddenKotsuhito
-     * @param HiddenKotsuhito HiddenKotsuhito
-     */
-    @JsonProperty("HiddenKotsuhito")
-    public void setHiddenKotsuhito(RString HiddenKotsuhito) {
-        this.HiddenKotsuhito = HiddenKotsuhito;
-    }
-
-    /*
-     * getHiddenShiharaiMemo
-     * @return HiddenShiharaiMemo
-     */
-    @JsonProperty("HiddenShiharaiMemo")
-    public RString getHiddenShiharaiMemo() {
-        return HiddenShiharaiMemo;
-    }
-
-    /*
-     * setHiddenShiharaiMemo
-     * @param HiddenShiharaiMemo HiddenShiharaiMemo
-     */
-    @JsonProperty("HiddenShiharaiMemo")
-    public void setHiddenShiharaiMemo(RString HiddenShiharaiMemo) {
-        this.HiddenShiharaiMemo = HiddenShiharaiMemo;
-    }
-
-    /*
-     * getHiddenGinkoFurikomi
-     * @return HiddenGinkoFurikomi
-     */
-    @JsonProperty("HiddenGinkoFurikomi")
-    public RString getHiddenGinkoFurikomi() {
-        return HiddenGinkoFurikomi;
-    }
-
-    /*
-     * setHiddenGinkoFurikomi
-     * @param HiddenGinkoFurikomi HiddenGinkoFurikomi
-     */
-    @JsonProperty("HiddenGinkoFurikomi")
-    public void setHiddenGinkoFurikomi(RString HiddenGinkoFurikomi) {
-        this.HiddenGinkoFurikomi = HiddenGinkoFurikomi;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -285,13 +165,13 @@ public class ShinsakaiIinHoshuNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMaxCount() {
-        return this.getShinsakaiIinKensakuJoken().getTxtMaxCount();
+    public TextBoxNum getTextBoxNum() {
+        return this.getShinsakaiIinKensakuJoken().getTextBoxNum();
     }
 
     @JsonIgnore
-    public void  setTxtMaxCount(TextBox txtMaxCount) {
-        this.getShinsakaiIinKensakuJoken().setTxtMaxCount(txtMaxCount);
+    public void  setTextBoxNum(TextBoxNum TextBoxNum) {
+        this.getShinsakaiIinKensakuJoken().setTextBoxNum(TextBoxNum);
     }
 
     @JsonIgnore
