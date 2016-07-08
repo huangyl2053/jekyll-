@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 認定調査報酬照会の帳票ID。
+     */
+    DBE601006(new ReportId("DBE601006_chosahoshuichiran"), new RString("認定調査報酬照会")),
+    /**
      * 事務局用概況特記一覧表の帳票ID。
      */
     DBE517007(new ReportId("DBE517007_GaikyoTokkiIchiran"), new RString("事務局用概況特記一覧表")),
