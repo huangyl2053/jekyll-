@@ -109,8 +109,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
                 table(DbT3104KokuhorenInterfaceKanri.class).
                 where(and(
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
-                                eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外),
-                                or(eq(shoriJotaiKubun, ShoriJotaiKubun.処理前), eq(shoriJotaiKubun, ShoriJotaiKubun.再処理前)))).
+                                eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外.getコード()),
+                                or(eq(shoriJotaiKubun, ShoriJotaiKubun.処理前.getコード()), eq(shoriJotaiKubun, ShoriJotaiKubun.再処理前.getコード())))).
                 order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.ASC)).
                 toList(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
