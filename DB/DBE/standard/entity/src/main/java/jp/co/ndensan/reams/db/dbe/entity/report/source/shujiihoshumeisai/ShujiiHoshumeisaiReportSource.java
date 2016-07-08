@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.report.source.shujiihoshumeisai;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBE622001_主治医意見書作成報酬支払明細書のReportSourceです。
@@ -59,6 +63,10 @@ public class ShujiiHoshumeisaiReportSource implements IReportSource {
     public RString listGokeikensu_4;
     @ReportItem(name = "listGokeiKingaku_1", length = 9, order = 21)
     public RString listGokeiKingaku_1;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
