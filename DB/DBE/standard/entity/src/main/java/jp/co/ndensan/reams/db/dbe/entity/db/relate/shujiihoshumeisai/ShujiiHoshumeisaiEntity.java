@@ -19,7 +19,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiHoshumeisaiEntity {
 
-    private RString 帳票タイトル;
     private RString 対象期間;
     private RString 保険者名;
     private RString 医療機関名;
