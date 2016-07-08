@@ -67,7 +67,7 @@ public class ShujiiHoshumeisaiReport extends Report<ShujiiHoshumeisaiReportSourc
 
     private List<ShujiiHoshumeisaiBodyEntity> getBodyDataBak(ShujiiHoshumeisaiEntity data) {
         List<ShujiiHoshumeisaiBodyEntity> dataList = new ArrayList<>();
-        dataList.add(new ShujiiHoshumeisaiBodyEntity(data.get明細番号(),
+        dataList.add(new ShujiiHoshumeisaiBodyEntity(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -84,7 +84,7 @@ public class ShujiiHoshumeisaiReport extends Report<ShujiiHoshumeisaiReportSourc
                 data.get消費税(),
                 RString.EMPTY,
                 RString.EMPTY));
-        dataList.add(new ShujiiHoshumeisaiBodyEntity(data.get明細番号(),
+        dataList.add(new ShujiiHoshumeisaiBodyEntity(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
