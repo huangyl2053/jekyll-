@@ -208,7 +208,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         if (確定保険料_年額 == null) {
             確定保険料_年額 = Decimal.ZERO;
         }
-        shoKyotsu.set増減額(確定保険料_年額.subtract(更正前.get確定保険料_年額()));
+        shoKyotsu.set増減額(確定保険料_年額.subtract(nullToZero(更正前.get確定保険料_年額())));
         shoKyotsu.set納付済額_未到来期含む(納付済額_未到来期含む);
         shoKyotsu.set納付済額_未到来期含まない(納付済額_未到来期含まない);
         shoKyotsu.set未到来期の納付済額(未到来期の納付済額);
