@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
@@ -169,13 +170,13 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
             source.koinShoryaku = ninshoshaSource.koinShoryaku;
         }
     }
-
+    
     private void editレイヤ１(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
         boolean isバッチ = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分());
         if (編集後仮算定通知書共通情報.get調定年度_年度なし() != null) {
             source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         }
-        source.noutsu_renban = isバッチ ? new RString("*").concat(new RString(String.valueOf(連番)).padLeft("0", INT6)).concat("#") : RString.EMPTY;
+        source.noutsu_renban = isバッチ ? NotsuReportEditorUtil.get納通連番(連番) : RString.EMPTY;
         source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
         source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
         source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();

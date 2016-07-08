@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
@@ -173,7 +174,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
             source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         }
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            source.noutsuRenban = new RString("*").concat(new RString(連番).padLeft("0", INT_6)).concat("#");
+            source.noutsuRenban = NotsuReportEditorUtil.get納通連番(連番);
             source.notsuShikibtsuBango = new RString("F").concat(new RString(連番).padLeft("0", INT_6)).concat("-1");
             source.keisanMeisaishoShikibtsuBango = new RString("F").concat(new RString(連番).padLeft("0", INT_6)).concat("-2");
         } else {
