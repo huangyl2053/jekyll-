@@ -139,6 +139,7 @@ public class KogakuServicehiDetailDivHandler {
         if (追加モード.equals(画面モード)) {
             div.getTplShinseisha().getTxtKotei().setVisible(false);
             div.getTxtShikyusinaiRiyu().setDisabled(true);
+            div.getRdbKogakuJidoSyokanTaisyo().setSelectedKey(KEY0);
             if (ONE.equals(受託区分)) {
                 div.getRdbShinsaHohoKubun().setDisabled(true);
             }
