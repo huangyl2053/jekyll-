@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengaku;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengaku.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengaku.ketteiKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengaku.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengaku.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
@@ -16,9 +17,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -89,5 +93,29 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuDac implements ISaveable<Db
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 訪問介護利用者負担額減額情報の件数を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int get訪問介護利用者負担額減額情報の件数(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4016HomonKaigoRiyoshaFutangakuGengaku.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(isNULL(ketteiKubun)),
+                                not(eq(ketteiKubun, RString.EMPTY)))).
+                getCount();
+
     }
 }

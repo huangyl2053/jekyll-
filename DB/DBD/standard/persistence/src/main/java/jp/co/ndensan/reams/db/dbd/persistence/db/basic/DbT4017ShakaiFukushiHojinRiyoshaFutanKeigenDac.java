@@ -10,6 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.kakuninNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.ketteiKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.shoKisaiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.tekiyoKaishiYMD;
@@ -28,7 +29,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -179,5 +182,27 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac {
                                 eq(hihokenshaNo, 被保険者番号))).
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity.class);
+    }
+
+    /**
+     * 被保険者番号より、社会福祉法人等利用者負担軽減情報の件数を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int get社会福祉法人等利用者負担軽減情報の件数(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(isNULL(ketteiKubun)),
+                                not(eq(ketteiKubun, RString.EMPTY)))).
+                getCount();
     }
 }
