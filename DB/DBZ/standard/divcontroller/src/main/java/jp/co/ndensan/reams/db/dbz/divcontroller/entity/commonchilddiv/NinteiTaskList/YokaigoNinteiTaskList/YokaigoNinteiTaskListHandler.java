@@ -1026,7 +1026,7 @@ public class YokaigoNinteiTaskListHandler {
                 completeCount++;
                 row.getKoshinTsuchiYMD().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
             }
-
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(審査受付List.size())));
