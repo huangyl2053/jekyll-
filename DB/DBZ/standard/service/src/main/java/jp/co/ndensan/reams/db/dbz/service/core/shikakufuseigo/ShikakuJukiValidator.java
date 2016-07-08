@@ -201,9 +201,10 @@ public class ShikakuJukiValidator {
      *
      * @param 不整合理由 FuseigoRiyu
      * @param 個人情報 IKojin
+     * @param 資格喪失日 修正後の資格喪失日
      * @return Map<RString, DbzErrorMessages>
      */
-    public Map<RString, DbzErrorMessages> createValidationMessages(FuseigoRiyu 不整合理由, IKojin 個人情報) {
+    public Map<RString, DbzErrorMessages> createValidationMessages(FuseigoRiyu 不整合理由, IKojin 個人情報, FlexibleDate 資格喪失日) {
         Map<RString, DbzErrorMessages> retMap = new HashMap<>();
         if (不整合理由 == null) {
             return retMap;
@@ -260,7 +261,7 @@ public class ShikakuJukiValidator {
             default:
                 break;
         }
-        setMsg(retMap, 個人情報, 不整合理由);
+        setMsg(retMap, 個人情報, 不整合理由, 資格喪失日);
         return retMap;
     }
 
@@ -272,7 +273,7 @@ public class ShikakuJukiValidator {
      * @return Map<RString, DbzErrorMessages>
      */
     public Map<RString, DbzErrorMessages> validate(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
-        return createValidationMessages(checkFor資格不整合(個人情報, 資格の情報), 個人情報);
+        return createValidationMessages(checkFor資格不整合(個人情報, 資格の情報), 個人情報, 資格の情報.get資格喪失年月日());
     }
 
     /**
@@ -283,7 +284,7 @@ public class ShikakuJukiValidator {
      * @return Map<RString, DbzErrorMessages>
      */
     public Map<RString, DbzErrorMessages> validate適用除外者(IKojin 個人情報, TekiyoJogaisha 除外の情報) {
-        return createValidationMessages(checkFor除外不整合(個人情報, 除外の情報), 個人情報);
+        return createValidationMessages(checkFor除外不整合(個人情報, 除外の情報), 個人情報, null);
     }
 
     /**
@@ -294,15 +295,15 @@ public class ShikakuJukiValidator {
      * @return Map<RString, DbzErrorMessages>
      */
     public Map<RString, DbzErrorMessages> validate他特例(IKojin 個人情報, TashichosonJushochiTokurei 他特の情報) {
-        return createValidationMessages(checkFor他特不整合(個人情報, 他特の情報), 個人情報);
+        return createValidationMessages(checkFor他特不整合(個人情報, 他特の情報), 個人情報, null);
     }
 
-    private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報, FuseigoRiyu 不整合理由) {
+    private void setMsg(Map<RString, DbzErrorMessages> retMap, IKojin 個人情報, FuseigoRiyu 不整合理由, FlexibleDate 資格喪失日) {
         if (不整合理由 == FuseigoRiyu.資格取得者_転出者) {
-            if (isNullOrEmpty(個人情報.get転出確定().get異動年月日())) {
-                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
-            } else {
+            if (isNullOrEmpty(個人情報.get転出確定().get異動年月日()) && 資格喪失日.compareTo(個人情報.get転出予定().get異動年月日()) != 0) {
                 retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出予定日);
+            } else if (個人情報.get転出確定().get異動年月日().compareTo(資格喪失日) != 0) {
+                retMap.put(対象項目_資格喪失日, DbzErrorMessages.資格不整合_転出_転出確定日);
             }
         }
     }

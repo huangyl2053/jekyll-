@@ -164,7 +164,6 @@ public class ShikakuFuseigoCorrector {
             資格の情報修正後Builder.set異動事由コード(ShikakuHenkoJiyu._１号到達.getコード());
             return 資格の情報修正後Builder.build();
         }
-
         return 資格の情報修正前;
     }
 
