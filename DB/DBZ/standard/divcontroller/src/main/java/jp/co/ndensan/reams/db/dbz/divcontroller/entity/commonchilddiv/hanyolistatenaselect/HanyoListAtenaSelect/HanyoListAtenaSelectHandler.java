@@ -112,11 +112,13 @@ public class HanyoListAtenaSelectHandler {
         div.getDdlChikuSelect().setDisabled(false);
         if (Chiku.全て.getコード().equals(地区)) {
             div.getCcdJushoFrom().setDisabled(true);
+            div.getCcdJushoFrom().setDisplayNone(false);
+            div.getCcdJushoFrom().setVisible(true);
             div.getCcdJushoFrom().clear();
             div.getCcdJushoTo().setDisabled(true);
-            div.getCcdJushoTo().clear();
-            div.getCcdJushoFrom().setDisplayNone(false);
             div.getCcdJushoTo().setDisplayNone(false);
+            div.getCcdJushoTo().setVisible(true);
+            div.getCcdJushoTo().clear();
             set住所CanBeInput(false);
             set地区sCanBeInput(false);
         } else if (Chiku.住所.getコード().equals(地区)) {
@@ -141,8 +143,10 @@ public class HanyoListAtenaSelectHandler {
             return;
         }
         div.getCcdJushoFrom().setDisabled(false);
+        div.getCcdJushoFrom().setVisible(true);
         div.getCcdJushoFrom().clear();
         div.getCcdJushoTo().setDisabled(false);
+        div.getCcdJushoTo().setVisible(true);
         div.getCcdJushoTo().clear();
     }
 
@@ -153,8 +157,10 @@ public class HanyoListAtenaSelectHandler {
             return;
         }
         div.getCcdGyoseikuFrom().setDisabled(false);
+        div.getCcdGyoseikuFrom().setVisible(true);
         div.getCcdGyoseikuFrom().clear();
         div.getCcdGyoseikuTo().setDisabled(false);
+        div.getCcdGyoseikuTo().setVisible(true);
         div.getCcdGyoseikuTo().clear();
     }
 
@@ -169,16 +175,22 @@ public class HanyoListAtenaSelectHandler {
             return;
         }
         div.getCcdChiku1From().setDisabled(false);
+        div.getCcdChiku1From().setVisible(true);
         div.getCcdChiku1From().clear();
         div.getCcdChiku2From().setDisabled(false);
+        div.getCcdChiku2From().setVisible(true);
         div.getCcdChiku2From().clear();
         div.getCcdChiku3From().setDisabled(false);
+        div.getCcdChiku3From().setVisible(true);
         div.getCcdChiku3From().clear();
         div.getCcdChiku1To().setDisabled(false);
+        div.getCcdChiku1To().setVisible(true);
         div.getCcdChiku1To().clear();
         div.getCcdChiku2To().setDisabled(false);
+        div.getCcdChiku2To().setVisible(true);
         div.getCcdChiku2To().clear();
         div.getCcdChiku3To().setDisabled(false);
+        div.getCcdChiku3To().setVisible(true);
         div.getCcdChiku3To().clear();
     }
 
