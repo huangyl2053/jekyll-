@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.report.ikenshiharaiuchiwake;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshiharaiuchiwake.IkenShiharaiuchiwakeEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshiharaiuchiwake.IkenShiharaiuchiwakeReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 帳票設計_DBE622004_主治医意見書作成料支払内訳確認書のIkenShiharaiuchiwakeEditorです。
@@ -59,7 +62,14 @@ public class IkenShiharaiuchiwakeEditor implements IIkenShiharaiuchiwakeEditor {
         source.shubetsu = item.get口座種別();
         source.bango = item.get口座番号();
         source.tsuchibun2 = item.get通知文2();
-        return source;
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        return edit2(source);
     }
 
+    private IkenShiharaiuchiwakeReportSource edit2(IkenShiharaiuchiwakeReportSource source) {
+        if (item.get被保険者番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+        }
+        return source;
+    }
 }
