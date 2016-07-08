@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.tokuchoheijunka6tsuchish
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaZennendoTempTblCreateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo4gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo6gatsuKaishiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.KeizokuHihokenshaKubunUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TokuchoKibetsuKingaku06UpdateProcess;
@@ -144,7 +146,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
      */
     @Step(被保険者区分4月開始)
     protected IBatchFlowCommand hihokenshaKubunTo4gatsuKaishi() {
-        return loopBatch(KeizokuHihokenshaKubunUpdateProcess.class)
+        return loopBatch(HihokenshaKubunTo4gatsuKaishiProcess.class)
                 .define();
     }
 
@@ -155,7 +157,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
      */
     @Step(被保険者区分6月開始)
     protected IBatchFlowCommand hihokenshaKubunTo6gatsuKaishi() {
-        return loopBatch(KeizokuHihokenshaKubunUpdateProcess.class)
+        return loopBatch(HihokenshaKubunTo6gatsuKaishiProcess.class)
                 .define();
     }
 
@@ -213,8 +215,6 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private TsuchishoIdoshaTorokuProcessParameter createTsuchishoIdoshaTorokuProcessParameter() {
 
         TsuchishoIdoshaTorokuProcessParameter parameter = new TsuchishoIdoshaTorokuProcessParameter();
-
-        RString 帳票分類ID = new RString("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
         parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
 
         for (OutputChohyoIchiran order : getParameter().get出力帳票entity()) {
