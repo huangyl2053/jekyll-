@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv.ShoriType;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -82,4 +83,11 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * テキストボックスのクリア
      */
     void clear();
+
+    /**
+     * ShoriTypeの設定
+     *
+     * @param value ShoriType
+     */
+    void setMode_ShoriType(ShoriType value);
 }
