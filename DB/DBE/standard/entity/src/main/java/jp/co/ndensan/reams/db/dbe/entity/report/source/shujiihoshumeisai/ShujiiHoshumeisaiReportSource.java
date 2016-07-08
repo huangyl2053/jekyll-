@@ -67,6 +67,8 @@ public class ShujiiHoshumeisaiReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokenshaNo;
+    @ReportItem(name = "shujiiCode", length = 40, order = 22)
+    public RString shujiiCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -79,6 +81,7 @@ public class ShujiiHoshumeisaiReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        iryokikanName
+        iryokikanName,
+        shujiiCode
     }
 }

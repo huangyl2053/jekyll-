@@ -54,6 +54,7 @@ public class ShujiiHoshumeisaiEditor implements IShujiiHoshumeisaiEditor {
         source.ishiName = item.get医師名();
         source.printTimeStamp = printTimeStampSb;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shujiiCode = item.get主治医コード();
         return edit2(source);
     }
 
