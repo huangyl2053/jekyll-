@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsainshiharaimeisaisho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shinsainshiharaimeisaisho.ShinsainShiharaimeisaisho;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsainshiharaimeisaisho.ShinsainShiharaimeisaishoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 介護認定審査会委員報酬支払明細書のEditorです。
@@ -37,6 +41,10 @@ public class ShinsainShiharaimeisaishoEditor implements IShinsainShiharaimeisais
         source.hokenshaName = item.get保険者名();
         source.shinsainName = item.get審査委員名();
         source.printTimeStamp = item.get帳票印刷日時();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (item.get被保険者番号() != null) {
+            source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
+        }
         return source;
     }
 }
