@@ -799,10 +799,6 @@
        AND  
        DbT4911."iryoKikanMeisho" LIKE '%' || #{iryoKikanMeisho} || '%' 
     </if>                                           
-    <if test = "isIryoKikanMeisho">
-       AND  
-       DbT4911."iryoKikanMeisho"  LIKE '%' || #{iryoKikanMeisho} || '%' 
-    </if> 
     <if test = "isShujiiName">
        AND  
        DbT4912."shujiiName"  LIKE '%' || #{shujiiName} || '%' 
