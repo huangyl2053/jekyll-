@@ -158,7 +158,7 @@ public final class TokutyoKariSanteiFukaHandler {
             RString shoriname = ShoriName.特徴仮算定賦課.get名称();
             dgTokutyoKariSanteiShoriKakunin_Row row = getGridDate(処理状況List, shoriname);
             rowList.add(row);
-            shoriname = ShoriName.特徴平準化_6月分_確定.get名称();
+            shoriname = ShoriName.特徴平準化計算_6月分.get名称();
             dgTokutyoKariSanteiShoriKakunin_Row newRow = getGridDate(処理状況List, shoriname);
             if (状況済.equals(row.getTxtJokyo()) && 状況済.equals(newRow.getTxtJokyo())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(実行する1, false);
