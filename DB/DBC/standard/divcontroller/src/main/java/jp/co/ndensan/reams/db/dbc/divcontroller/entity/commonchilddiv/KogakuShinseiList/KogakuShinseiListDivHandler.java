@@ -38,7 +38,6 @@ public class KogakuShinseiListDivHandler {
     private static final RString 判定取込年月 = new RString("判定取込年月");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
-    private static final int THREE = 3;
     private static final int EIGHT = 8;
     private static final int NINE = 9;
     private static final int TEN = 10;
@@ -214,6 +213,8 @@ public class KogakuShinseiListDivHandler {
      * set照会モードです。
      */
     public void set照会モード() {
+        div.getDgShinseiJoho().getGridSetting().setIsShowDeleteButtonColumn(false);
+        div.getDgShinseiJoho().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getTxtServiceYM().setDisplayNone(true);
         div.getTxtShokisai().setDisplayNone(true);
         div.getBtnShinseiJohoTsuika().setDisplayNone(true);
