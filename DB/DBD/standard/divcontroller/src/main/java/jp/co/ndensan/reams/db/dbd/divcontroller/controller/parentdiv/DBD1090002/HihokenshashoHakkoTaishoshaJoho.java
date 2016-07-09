@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.dgCh
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoHandler.HihokenshashoHakkoTaishosha;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoValidationHandler;
-import jp.co.ndensan.reams.db.dbd.service.report.genmengengaku.ninteishoketteitsuchishokobetsuhakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
