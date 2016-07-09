@@ -4,12 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * HitoriWarai のクラスファイル
@@ -17,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class HitoriWaraiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +25,6 @@ public class HitoriWaraiDiv extends Panel {
     private ButtonDialog btnHitoriWarai;
     @JsonProperty("radHitoriWarai")
     private RadioButton radHitoriWarai;
-    @JsonProperty("HitoriWaraiShinseishoKanriNo")
-    private RString HitoriWaraiShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,24 +66,6 @@ public class HitoriWaraiDiv extends Panel {
     @JsonProperty("radHitoriWarai")
     public void setRadHitoriWarai(RadioButton radHitoriWarai) {
         this.radHitoriWarai = radHitoriWarai;
-    }
-
-    /*
-     * getHitoriWaraiShinseishoKanriNo
-     * @return HitoriWaraiShinseishoKanriNo
-     */
-    @JsonProperty("HitoriWaraiShinseishoKanriNo")
-    public RString getHitoriWaraiShinseishoKanriNo() {
-        return HitoriWaraiShinseishoKanriNo;
-    }
-
-    /*
-     * setHitoriWaraiShinseishoKanriNo
-     * @param HitoriWaraiShinseishoKanriNo HitoriWaraiShinseishoKanriNo
-     */
-    @JsonProperty("HitoriWaraiShinseishoKanriNo")
-    public void setHitoriWaraiShinseishoKanriNo(RString HitoriWaraiShinseishoKanriNo) {
-        this.HitoriWaraiShinseishoKanriNo = HitoriWaraiShinseishoKanriNo;
     }
 
     // </editor-fold>

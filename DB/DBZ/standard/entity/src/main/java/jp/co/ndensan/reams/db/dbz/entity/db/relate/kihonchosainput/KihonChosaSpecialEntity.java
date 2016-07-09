@@ -5,32 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * 認定調査基本情報Entityです。
+ * 認定調査特記情報Entityです。
  *
  * @reamsid_L DBE-3000-090 wangjie2
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KihonChosaInputEntity implements Serializable {
+public class KihonChosaSpecialEntity {
 
     private ShinseishoKanriNo 申請書管理番号;
     private int 認定調査依頼履歴番号;
-    private Code 認知症高齢者自立度;
-    private Code 障害高齢者自立度;
-    private int 調査連番;
-    private RString 調査項目;
-    private Code 前回認知症高齢者自立度;
-    private Code 前回障害高齢者自立度;
-    private int 前回調査連番;
-    private RString 前回調査項目;
-    private boolean 特記事項有無;
+    private RString 認定調査特記事項番号;
+    private int 認定調査特記事項連番;
+    private Code 原本マスク区分;
+    private RString 特記事項;
 
 }

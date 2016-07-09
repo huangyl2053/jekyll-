@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KihonChosaInput3 {
 
+    private static final int 整数9 = 9;
+
     /**
      * 画面初期化
      *
@@ -76,7 +78,7 @@ public class KihonChosaInput3 {
     }
 
     private void 必須入力チェック(ArrayList<KihonChosaInput> new認定調査基本情報リスト) {
-        if (new認定調査基本情報リスト != null && new認定調査基本情報リスト.size() == 9) {
+        if (new認定調査基本情報リスト != null && new認定調査基本情報リスト.size() == 整数9) {
             ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("1"));
         } else {
             ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("0"));
