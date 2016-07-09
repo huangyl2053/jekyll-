@@ -79,7 +79,7 @@ public final class NinteiChosaHoshuJissekiJohoMybatisParameter {
         if (!RString.isNullOrEmpty(調査員氏名)) {
             調査員氏名フラグ = true;
         }
-        if (!saidaiHyojiKensu.equals(new Decimal(0))) {
+        if (saidaiHyojiKensu != null) {
             usesSaidaiHyojiKensu = true;
         }
         return new NinteiChosaHoshuJissekiJohoMybatisParameter(

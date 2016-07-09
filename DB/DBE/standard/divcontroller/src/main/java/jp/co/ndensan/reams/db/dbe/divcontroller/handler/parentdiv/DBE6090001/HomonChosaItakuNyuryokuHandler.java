@@ -68,6 +68,8 @@ public class HomonChosaItakuNyuryokuHandler {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTextBoxNum().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTextBoxNum().setMaxValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -155,12 +157,11 @@ public class HomonChosaItakuNyuryokuHandler {
      * 「入力を取りやめる」ボタンを押下し、編集内容クリアです。
      */
     public void kuria() {
-        div.getTxtShinseibi().clearValue();
-        div.getTxtNinteiChosaIraiNengappi().clearValue();
-        div.getTxtNinteiChosaJisshiNengappi().clearValue();
-        div.getTxtNinteiJuryoNengappi().clearValue();
-        div.getTxtHomonShurui().clearValue();
-        div.getRadGinkoFurikomi().clearSelectedItem();
+        if (div.getHdt状態().equals(状態_更新)) {
+            div.getTxtShiharaiMemo().clearValue();
+            div.getTxtNinteiChosaItakuryo().clearValue();
+            div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力済);
+        }
     }
 
     /**
@@ -169,7 +170,10 @@ public class HomonChosaItakuNyuryokuHandler {
      */
     public void set状態_更新() {
         div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
-        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
+        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, div.getDgShinsakaiIin().getClickedItem().getNintechosaItakusakiCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakusaki(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteichosainCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosain());
         div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
         div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
         div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
@@ -268,7 +272,7 @@ public class HomonChosaItakuNyuryokuHandler {
         builder.set認定調査委託先コード(div.getTxtItakusakiCode().getValue());
         builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString()));
         builder.set認定調査委託料支払メモ(row.getShiharaiMemo());
-        builder.set認定調査委託料支払年月日(FlexibleDate.MAX);
+        builder.set認定調査委託料支払年月日(FlexibleDate.EMPTY);
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);
         } else {

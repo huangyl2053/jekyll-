@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahoshujissekijoho.INinteiChosaHoshuJissekiJohoMapper">
     <resultMap id="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoRelateEntity" autoMapping="true">
         <result property="shoKisaiHokenshaNo" column="DbT7051_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonMeisho" column="DbT7051.shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonMeisho" column="DbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shichosonCode" column="DbT5913_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosaItakusakiCode" column="DbT5913_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosainCode" column="DbT5913_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -124,7 +124,7 @@
         ON
         DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
         AND
-        DbT5101."koroshoIfShikibetsuCode"=#{証記載保険者番号}
+        DbT5101."shoKisaiHokenshaNo"=#{証記載保険者番号}
         INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON
         DbT5202."chosaItakusakiCode" = DbT5913."ninteiChosaItakusakiCode"

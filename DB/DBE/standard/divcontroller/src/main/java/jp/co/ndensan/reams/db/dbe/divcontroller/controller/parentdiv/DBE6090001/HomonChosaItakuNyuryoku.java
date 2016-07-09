@@ -66,7 +66,7 @@ public class HomonChosaItakuNyuryoku {
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_searchClear(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).btnKyufuJissekiSearchClear();
-        return ResponseData.of(div).setState(DBE6090001StateName.初期表示);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -205,6 +205,8 @@ public class HomonChosaItakuNyuryoku {
                     manager.saveOrDelete(models, key);
                 }
             }
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString("認定調査委託料入力の保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE6090001StateName.完了状態);
         }
         return ResponseData.of(div).respond();
