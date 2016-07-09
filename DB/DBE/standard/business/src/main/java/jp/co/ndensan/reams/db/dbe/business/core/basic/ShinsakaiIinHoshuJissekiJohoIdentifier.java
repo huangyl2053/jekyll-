@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会委員報酬実績情報の識別子です。
+ *
+ * @reamsid_L DBE-9999-011 zhengsongling
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

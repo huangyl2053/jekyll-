@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 審査会委員報酬入力のEntityです。
  *
- * @reamsid_L DBE-1950-010 zhengsongling
+ * @reamsid_L DBE-9999-011 zhengsongling
  */
 @lombok.Getter
 @lombok.Setter

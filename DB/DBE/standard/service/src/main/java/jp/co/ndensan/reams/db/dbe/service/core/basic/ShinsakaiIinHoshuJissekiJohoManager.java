@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護認定審査会委員報酬実績情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 zhengsongling
  */
 public class ShinsakaiIinHoshuJissekiJohoManager {
 
