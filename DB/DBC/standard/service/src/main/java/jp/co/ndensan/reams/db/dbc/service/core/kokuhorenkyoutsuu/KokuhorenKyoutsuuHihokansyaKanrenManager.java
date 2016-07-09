@@ -109,7 +109,8 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
                         = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(LasdecCode.EMPTY, hokenshaNo);
                 SearchResult<GappeiCityJyoho> gcJohoResult
                         = finder.getGappeijohokensaku(RString.EMPTY, parameter, GyomuBunrui.介護事務);
-                if (null != gcJohoResult && null != gcJohoResult.records() && !gcJohoResult.records().isEmpty()) {
+                if (null != gcJohoResult && null != gcJohoResult.records() && !gcJohoResult.records().isEmpty()
+                        && !LasdecCode.EMPTY.equals(gcJohoResult.records().get(0).get旧市町村コード())) {
                     List<GappeiCityJyoho> gcJohoList = gcJohoResult.records();
                     mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, gcJohoList.get(0).get旧市町村コード());
                     do新被保険者番号の登録(変換基準日);
@@ -125,6 +126,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         for (HihokenshaAndHenkanBangoEntity entity : list) {
             if (null == entity.getShichosonCode2() || RString.isNullOrEmpty(entity.getShichosonCode2().value())) {
                 doエラー登録(entity);
+                return;
             }
             mapper.update被保険者一時TBLWith新被保険者番号(entity.get連番(), entity.getShinNo());
         }
