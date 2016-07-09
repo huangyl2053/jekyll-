@@ -23,7 +23,7 @@ import lombok.Setter;
 /**
  * 仮算定のデータのエンティティクラスです。
  *
- * @reamsid_L DBB-0790-040 chenaoqi
+ * @reamsid_L DBB-0790-030 chenaoqi
  */
 @Setter
 @Getter

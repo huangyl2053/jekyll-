@@ -5,13 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -31,22 +28,13 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
-import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -99,7 +87,6 @@ public class TokuchoKaishiTsuchishoDataHenshuCsvFath {
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final ReportId 帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 代行プリント送付票_帳票ID = new ReportId("URU000A10_DaikoPrintCheck");
-    private static final RString 拡張子_TEMP = new RString("Temp");
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuchoKaishiTsuchishoDataHenshuCsvFath}のインスタンスを返します。
@@ -147,6 +134,7 @@ public class TokuchoKaishiTsuchishoDataHenshuCsvFath {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
+        // QA939 新规提出
         //RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収_EUCファイル名);
 //        if (!new RString("1").equals(euc共通_文字コード)) {
@@ -231,40 +219,39 @@ public class TokuchoKaishiTsuchishoDataHenshuCsvFath {
         }
     }
 
-    private void 文字コード変換(RString filePath) {
-
-        try (FileReader reader = new FileReader(filePath, Encode.UTF_8);
-                ByteWriter writer = new ByteWriter(filePath.replace(拡張子_TEMP, RString.EMPTY))) {
-            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
-                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
-                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
-                        .enabledConvertError(true)
-                        .build();
-                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
-                writer.write(converter.convert(record));
-            }
-            writer.close();
-        }
-        deleteFile(filePath);
-    }
-
-    private void deleteFile(RString filePath) {
-        File file = new File(filePath.toString());
-        if (file.exists()) {
-            file.getAbsoluteFile().deleteOnExit();
-        }
-    }
-
-    private CharacterConvertTable getCharacterConvertTable() {
-        RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        if (new RString("2").equals(euc共通_文字コード)) {
-            return CharacterConvertTable.Sjis;
-        } else if (new RString("3").equals(euc共通_文字コード)) {
-            return CharacterConvertTable.SjisRuiji;
-        }
-        return null;
-    }
-
+//    private void 文字コード変換(RString filePath) {
+//
+//        try (FileReader reader = new FileReader(filePath, Encode.UTF_8);
+//                ByteWriter writer = new ByteWriter(filePath.replace(拡張子_TEMP, RString.EMPTY))) {
+//            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
+//                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
+//                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
+//                        .enabledConvertError(true)
+//                        .build();
+//                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
+//                writer.write(converter.convert(record));
+//            }
+//            writer.close();
+//        }
+//        deleteFile(filePath);
+//    }
+//
+//    private void deleteFile(RString filePath) {
+//        File file = new File(filePath.toString());
+//        if (file.exists()) {
+//            file.getAbsoluteFile().deleteOnExit();
+//        }
+//    }
+//
+//    private CharacterConvertTable getCharacterConvertTable() {
+//        RString euc共通_文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+//        if (new RString("2").equals(euc共通_文字コード)) {
+//            return CharacterConvertTable.Sjis;
+//        } else if (new RString("3").equals(euc共通_文字コード)) {
+//            return CharacterConvertTable.SjisRuiji;
+//        }
+//        return null;
+//    }
     /**
      * バッチ出力条件リストの出力メソッドです。
      *

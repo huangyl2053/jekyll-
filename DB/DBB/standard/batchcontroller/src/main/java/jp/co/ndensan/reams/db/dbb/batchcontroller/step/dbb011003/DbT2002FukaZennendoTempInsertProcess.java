@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003;
 
-import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.DbV2002FukaTempDataCreate;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.DbV2002FukaTempTableEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko.DbV2002FukaTempDataCreate;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;

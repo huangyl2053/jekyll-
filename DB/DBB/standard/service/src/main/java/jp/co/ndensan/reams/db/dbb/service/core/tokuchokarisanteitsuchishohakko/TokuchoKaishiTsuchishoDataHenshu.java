@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
@@ -211,8 +212,8 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
     public void insTsuchishoHakkogoIdosha(RString 出力対象区分, YMDHMS 帳票作成日時,
             Long 出力順ID, ReportId 帳票ID) {
         List<TsuchishoDataTempEntity> 出力対象List = get出力対象データ(出力対象区分, 出力順ID);
-        int 連番 = 1;
-        if (出力対象List != null && 出力対象List.isEmpty()) {
+        if (出力対象List != null && !出力対象List.isEmpty()) {
+            Decimal 連番 = Decimal.ONE;
             for (TsuchishoDataTempEntity 出力対象 : 出力対象List) {
                 if (出力対象.get計算後情報() == null || 出力対象.get計算後情報().getTsuchishoNo() == null) {
                     continue;
@@ -221,6 +222,7 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
                         帳票作成日時,
                         new LasdecCode(出力対象.get計算後情報().getTsuchishoNo().value()));
                 if (通知書発行後異動者 == null) {
+                    通知書発行後異動者 = new DbT2017TsuchishoHakkogoIdoshaEntity();
                     通知書発行後異動者.setReportID(帳票ID);
                     通知書発行後異動者.setChohyosakuseiTimestamp(帳票作成日時);
                     通知書発行後異動者.setTsuchishoNo(出力対象.get計算後情報().getTsuchishoNo());
@@ -228,11 +230,11 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
                     通知書発行後異動者.setShikibetsuCode(出力対象.get計算後情報().getShikibetsuCode());
                     通知書発行後異動者.setHihokenshaNo(出力対象.get計算後情報().getHihokenshaNo());
                     通知書発行後異動者.setKeisanTimestamp(出力対象.get計算後情報().getChoteiNichiji());
-                    通知書発行後異動者.setGaitoRemban(連番);
+                    通知書発行後異動者.setGaitoRemban(連番.intValue());
                     通知書発行後異動者.setIdoAriFlag(false);
                     通知書発行後異動者.setState(EntityDataState.Added);
                     通知書発行後異動者Dac.save(通知書発行後異動者);
-                    連番 = 連番++;
+                    連番 = 連番.add(Decimal.ONE);
                 }
             }
         }

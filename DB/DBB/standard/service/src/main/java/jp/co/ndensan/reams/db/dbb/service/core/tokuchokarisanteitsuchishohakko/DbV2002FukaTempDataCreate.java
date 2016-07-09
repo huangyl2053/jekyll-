@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko;
+package jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.DbV2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
@@ -15,6 +15,12 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
  */
 public class DbV2002FukaTempDataCreate {
 
+    /**
+     * 前年度賦課情報一時テーブルEntitydata
+     *
+     * @param entity DbT2002FukaEntity
+     * @return DbV2002FukaTempTableEntity
+     */
     public DbV2002FukaTempTableEntity toDbV2002FukaTempTableEntity(DbT2002FukaEntity entity) {
         DbV2002FukaTempTableEntity tempEntity = new DbV2002FukaTempTableEntity();
         tempEntity.setChoteiNendo(entity.getChoteiNendo());

@@ -25,7 +25,7 @@ import lombok.Setter;
 /**
  * 前年度賦課情報一時テーブルEntity項目定義クラスです。
  *
- * @reamsid_L DBB-0790-040 chenaoqi
+ * @reamsid_L DBB-0790-030 chenaoqi
  */
 @Setter
 @Getter
