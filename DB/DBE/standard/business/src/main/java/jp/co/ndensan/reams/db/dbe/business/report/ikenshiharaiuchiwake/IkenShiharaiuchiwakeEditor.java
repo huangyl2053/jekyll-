@@ -49,7 +49,7 @@ public class IkenShiharaiuchiwakeEditor implements IIkenShiharaiuchiwakeEditor {
         source.meishoFuyo = item.get名称付与();
         source.customerBarCode = item.getバーコード();
         source.sonota = item.getその他();
-        source.pageCount2 = item.getページ番号2();
+        source.pageCount = item.getページ番号2();
         source.title = TITLE;
         source.tsuchibun1 = item.get通知文1();
         source.gokeiKingaku = item.get合計金額();
