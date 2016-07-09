@@ -1336,4 +1336,49 @@ public class FukaKijunTotalHandler {
         }
         return keyList;
     }
+
+    /**
+     * ランクの変更_項目表示を制御のメソッドです。
+     *
+     * @param dateSource Map
+     */
+    public void setランクの変更_項目表示を制御(Map<RString, RString> dateSource) {
+        List<KeyValueDataSource> keyValueDateSource = new ArrayList<>();
+        FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
+        RString 強制設定_未申告 = div.getHokenryoRitsuIgaiInfo().getMishinkoku()
+                .getRadMishinkokuKyoseiSettei().getSelectedKey();
+        if (STR_ZERO.equals(強制設定_未申告)) {
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDataSource(keyValueDateSource);
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(true);
+        } else if (dateSource != null && dateSource.isEmpty()) {
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedIndex(NUM_0);
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
+        }
+
+        RString 強制設定_所得調査中 = div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu()
+                .getRadShotokuChosaChuKyoseiSettei().getSelectedKey();
+        if (STR_ZERO.equals(強制設定_所得調査中)) {
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
+                    .setDataSource(keyValueDateSource);
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(true);
+        } else if (dateSource != null && dateSource.isEmpty()) {
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setSelectedIndex(NUM_0);
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
+        }
+
+        if (平成26年.equals(賦課年度) || 平成27年.equals(賦課年度)) {
+            RString 強制設定_課税取消 = div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKyoseiSettei()
+                    .getSelectedKey();
+            if (STR_ZERO.equals(強制設定_課税取消)) {
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
+                        .setDataSource(keyValueDateSource);
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(true);
+            } else if (dateSource != null && dateSource.isEmpty()) {
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setSelectedIndex(NUM_0);
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
+            }
+        }
+        div.getHokenryoRitsuIgaiInfo().getNengakuHokenryo().getDdlHasu().setSelectedIndex(NUM_0);
+        div.getHokenryoRitsuIgaiInfo().getNengakuHokenryo().getDdlMarumeKata().setSelectedIndex(NUM_0);
+    }
 }
