@@ -540,7 +540,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                             new Code(編集後仮算定通知書共通情報.get更正後().get生活保護扶助種類()));
                     bodyList.add(生活保護扶助名称);
                 }
-                bodyList.add(get口座情報(編集後仮算定通知書共通情報));
+                bodyList.add(editTutishoKyoutuuKoumoku(編集後仮算定通知書共通情報));
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -683,7 +683,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                             : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計(), 0));
                 }
                 set次期以降期別金額(編集後仮算定通知書共通情報, 出力期, bodyList);
-                bodyList.add(get口座情報(編集後仮算定通知書共通情報));
+                bodyList.add(editTutishoKyoutuuKoumoku(編集後仮算定通知書共通情報));
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -986,7 +986,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
         return 普通調定額;
     }
 
-    private RString get口座情報(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+    private RString editTutishoKyoutuuKoumoku(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
 
         if (編集後仮算定通知書共通情報.get編集後口座() == null) {
             return RString.EMPTY;

@@ -600,7 +600,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
             return;
         }
 
-        //TO QA913
+        //TODO QA913
         int 山分け用スプール数 = get山分け用スプール数(帳票タイプ, 期月List, 出力期AsInt, ページごとに山分け);
         if (定値区分_1.equals(ページごとに山分け)) {
             通知書共通情報entity.set普徴納期情報リスト(期月List);
@@ -636,7 +636,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
                 IName 代納人氏名 = tmpResult.get宛先代納() != null ? tmpResult.get宛先代納().get宛先名称() : null;
                 KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報
                         = 仮算定納入通知書情報作成.create仮算定納入通知書情報(仮算定通知書情報, 仮算定納入通知書制御情報, 出力期リスト, 代納人氏名);
-                //TO QA913
+                //TODO QA913
                 publish納入通知書仮算定(帳票ID, 仮算定納入通知書情報, reportManager);
                 仮算定納入通知書情報List.add(仮算定納入通知書情報);
             }
