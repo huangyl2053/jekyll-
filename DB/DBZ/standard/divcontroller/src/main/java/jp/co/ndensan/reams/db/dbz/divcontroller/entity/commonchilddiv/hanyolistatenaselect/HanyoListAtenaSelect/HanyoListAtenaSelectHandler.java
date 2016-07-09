@@ -119,7 +119,7 @@ public class HanyoListAtenaSelectHandler {
             div.getCcdJushoTo().setDisplayNone(false);
             div.getCcdJushoTo().setVisible(true);
             div.getCcdJushoTo().clear();
-            set住所CanBeInput(false);
+            set行政区CanBeInput(false);
             set地区sCanBeInput(false);
         } else if (Chiku.住所.getコード().equals(地区)) {
             set住所CanBeInput(true);
