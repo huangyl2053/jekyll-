@@ -57,7 +57,7 @@ public class FukaKijunTotalValidationHandler {
             RString 段階区分 = row.getDdlHokenryoDankai().getSelectedValue();
             if (保険料率 != null && !状態 && (基準所得金額 == null || 基準所得金額.equals(Decimal.ZERO))) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.指定ファイルが存在しない, メッセージKEY.toString().replace(引数_XX, 段階区分))));
+                        UrErrorMessages.入力値が不正_追加メッセージあり, メッセージKEY.toString().replace(引数_XX, 段階区分))));
             }
         }
         return validPairs;
