@@ -110,7 +110,7 @@ public class HihokenshaFinderHandler {
     FlexibleYear get賦課年度() {
         DropDownList item = div.getKaigoFinder().getDdlFukaNendo();
         return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
-                ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
+               ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
     }
 
     /**
@@ -156,7 +156,7 @@ public class HihokenshaFinderHandler {
      * @return 宛名条件
      */
     IShikibetsuTaishoSearchKey get宛名条件() {
-        div.getCcdAtenaFinder().load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
+        // div.getCcdAtenaFinder().load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
         return div.getCcdAtenaFinder().makeShikibetsuTaishoSearchKey();
     }
 
