@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
  * 介護保険連絡票クラスです。
+ *
+ * @reamsid_L DBA-1290-070 lishengli
  */
 public class KaigohokenRenrakuhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
