@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -83,10 +82,9 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
             handler.delete(第1号被保険者数情報);
             handler.delete(第1号被保険者増減内訳情報_当月中増);
             handler.delete(第1号被保険者増減内訳情報_当月中滅);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            div.getKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate()));
+            return ResponseData.of(div).setState(DBU0020021StateName.完了状態);
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(
                 第1号被保険者数情報, 第1号被保険者増減内訳情報_当月中増, 第1号被保険者増減内訳情報_当月中滅);
@@ -115,18 +113,12 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データリスト);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOUSIN.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOUSIN.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020021StateName.完了状態);
+        } else {
+            return ResponseData.of(div).respond();
         }
-
-        return ResponseData.of(div).respond();
     }
 
     /**
