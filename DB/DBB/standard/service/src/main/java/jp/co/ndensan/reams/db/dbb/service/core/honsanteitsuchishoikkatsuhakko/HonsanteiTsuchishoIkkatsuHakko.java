@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoHoniOutputJoken;
-import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TsuchishoKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.DecideKetteiHenkoTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakkoParameter;
@@ -647,11 +646,10 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
      * @param 打分け条件 RString
-     * @param 出力対象 RString
      * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void prtHenkoTsuchisho(FlexibleYear 調定年度, RDate 発行日, RString 文書番号, RDateTime 帳票作成日時,
-            RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ, RString 打分け条件, RString 出力対象) throws InvocationTargetException {
+            RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ, RString 打分け条件) throws InvocationTargetException {
 
         RString 出力順 = get出力順(決定変更通知書_帳票分類ID, 出力順ID);
 
@@ -669,10 +667,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(RString.isNullOrEmpty(文書番号) ? RString.EMPTY : 文書番号));
-        出力条件リスト.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(RString.isNullOrEmpty(出力対象) ? RString.EMPTY : TsuchishoKozaShutsuryokuTaisho.toValue(出力対象).get名称()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
