@@ -87,6 +87,7 @@ public class FukaKijunTotal {
         ViewStateHolder.put(ViewStateKeys.保険料段階を全件, (Serializable) 保険料段階List);
         Map<RString, RString> dateSource = getHandler(div).本人保険料段階強制設定の設定段階の設定(now);
         ViewStateHolder.put(ViewStateKeys.保険料段階DATESOURCE, (Serializable) dateSource);
+        getHandler(div).setランクの変更_項目表示を制御(dateSource);
         return ResponseData.of(div).respond();
     }
 
