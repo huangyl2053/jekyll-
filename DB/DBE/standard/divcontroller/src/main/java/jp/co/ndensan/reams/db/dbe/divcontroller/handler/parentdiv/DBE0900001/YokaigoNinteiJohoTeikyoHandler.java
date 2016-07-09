@@ -219,7 +219,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
     }
 
     private RDate getNull(FlexibleDate date) {
-        if (date == null) {
+        if (date == null || date.isEmpty()) {
             return null;
         }
         return new RDate(date.toString());
