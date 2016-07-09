@@ -32,15 +32,15 @@ public class IinhoshushiharaiEditor implements IIinhoshushiharaiEditor {
     }
 
     private IinhoshushiharaiReportSource editSource(IinhoshushiharaiReportSource source) {
-//        source.denshiKoin = item.get電子公印();
-//        source.hakkoYMD1 = item.get発行日();
-//        source.ninshoshaYakushokuMei = item.get認証者役職名();
-//        source.ninshoshaYakushokuMei1 = item.get認証者役職名1();
-//        source.koinMojiretsu = item.get公印文字列();
-//        source.ninshoshaYakushokuMei2 = item.get認証者役職名2();
-//        source.ninshoshaShimeiKakenai = item.get認証者氏名カナ();
-//        source.ninshoshaShimeiKakeru = item.get認証者氏名掛ける();
-//        source.koinShoryaku = item.get公印省略();
+        source.denshiKoin = item.get電子公印();
+        source.hakkoYMD1 = item.get発行日();
+        source.ninshoshaYakushokuMei = item.get認証者役職名();
+        source.ninshoshaYakushokuMei1 = item.get認証者役職名1();
+        source.koinMojiretsu = item.get公印文字列();
+        source.ninshoshaYakushokuMei2 = item.get認証者役職名2();
+        source.ninshoshaShimeiKakenai = item.get認証者氏名カナ();
+        source.ninshoshaShimeiKakeru = item.get認証者氏名掛ける();
+        source.koinShoryaku = item.get公印省略();
         source.yubinNo = item.get郵便番号();
         source.jushoText = item.get住所();
         source.kikanNameText = item.get審査機関();

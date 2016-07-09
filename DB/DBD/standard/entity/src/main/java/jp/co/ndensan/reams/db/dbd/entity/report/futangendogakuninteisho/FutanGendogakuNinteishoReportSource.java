@@ -2,16 +2,22 @@ package jp.co.ndensan.reams.db.dbd.entity.report.futangendogakuninteisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 負担限度額認定証のReportSource
  *
- * @reamsid_L DBD-3540-050 wangchao
+ * @reamsid_L DBD-3540-040 wangchao
  */
 public class FutanGendogakuNinteishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    @ReportPerson(id = "001")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString hihokenshaNo;
     @ReportItem(name = "kofuGengo", length = 2, order = 1)
     public RString kofuGengo;
     @ReportItem(name = "kofuYYYY", length = 2, order = 2)
@@ -20,8 +26,6 @@ public class FutanGendogakuNinteishoReportSource implements IReportSource {
     public RString kofuMM;
     @ReportItem(name = "kofuDD", length = 2, order = 4)
     public RString kofuDD;
-    @ReportItem(name = "hihokenshaNo", length = 10, order = 5)
-    public RString hihokenshaNo;
     @ReportItem(name = "jusho", order = 6)
     public RString jusho;
     @ReportItem(name = "hihokenshaNameKana", length = 34, order = 7)
