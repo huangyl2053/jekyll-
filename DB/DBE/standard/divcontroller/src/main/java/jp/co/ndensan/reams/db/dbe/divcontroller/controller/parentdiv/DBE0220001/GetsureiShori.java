@@ -60,7 +60,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class GetsureiShori {
 
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
+    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("CenterSoshinIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -71,19 +71,19 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData<GetsureiShoriDiv> onLoad(GetsureiShoriDiv div) {
-        getHandler(div).initialize();
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
             throw new PessimisticLockingException();
         }
-        List<PersonalData> personalDataList = new ArrayList<>();
+        getHandler(div).initialize();
         List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getCcdNinteiTaskList().getDataSource();
         for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
+            List<PersonalData> personalDataList = new ArrayList<>();
             personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     row.getShinseishoKanriNo())));
             personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                     row.getHihoNumber())));
+            AccessLogger.log(AccessLogType.照会, personalDataList);
         }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
 
@@ -151,7 +151,7 @@ public class GetsureiShori {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            前排他キーの解除(SHINSEISHOKANRINO);
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
         }
         return ResponseData.of(div).respond();
@@ -202,8 +202,9 @@ public class GetsureiShori {
                 }
             }
             AccessLogger.log(AccessLogType.更新, personalDataList);
-            前排他キーの解除(SHINSEISHOKANRINO);
-            div.getCcdKanryoMessege().setMessage(new RString("完了処理・センター送信"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            RealInitialLocker.release(排他キー);
+            div.getCcdKanryoMessege().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE0220001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -226,16 +227,6 @@ public class GetsureiShori {
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 
     private GetsureiShoriHandler getHandler(GetsureiShoriDiv div) {
