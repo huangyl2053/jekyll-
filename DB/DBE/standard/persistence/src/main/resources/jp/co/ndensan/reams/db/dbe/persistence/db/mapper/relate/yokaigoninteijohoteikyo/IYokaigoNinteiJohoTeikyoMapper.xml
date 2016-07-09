@@ -181,7 +181,9 @@
             ON DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         WHERE DbT5101NinteiShinseiJoho."hihokenshaNo"=#{被保険者番号}
             AND DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"=#{証記載保険者番号}
+        <if test="shishoKengenuser">
             AND DbT5101NinteiShinseiJoho."shishoCode"=#{支所コード}
+        </if>
             AND (DbT5101NinteiShinseiJoho."shoriJotaiKubun"=#{延期} OR
             DbT5101NinteiShinseiJoho."shoriJotaiKubun"=#{通常})
             AND DbT5101NinteiShinseiJoho."logicalDeletedFlag"=FALSE

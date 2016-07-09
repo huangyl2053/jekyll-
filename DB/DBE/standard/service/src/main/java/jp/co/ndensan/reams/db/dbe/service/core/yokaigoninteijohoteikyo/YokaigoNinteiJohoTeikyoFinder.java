@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class YokaigoNinteiJohoTeikyoFinder {
 
     private final MapperProvider mapperProvider;
-    private final RString 支所 = new RString("支所");
+    private final RString 支所 = new RString("shishoKengen");
 
     /**
      * コンストラクタです。
@@ -73,7 +73,7 @@ public class YokaigoNinteiJohoTeikyoFinder {
     public HihokenshaJyuhouBusiness select被保険者情報(RString hihokenshaNo) {
         IYokaigoNinteiJohoTeikyoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoTeikyoMapper.class);
         HihokenshaJyuhouRelateEntity entityList = mapper
-                .get被保険者情報(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, RString.EMPTY, RString.EMPTY));
+                .get被保険者情報(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, RString.EMPTY, RString.EMPTY, false));
         if (entityList == null) {
             return null;
         }
@@ -91,20 +91,19 @@ public class YokaigoNinteiJohoTeikyoFinder {
         List<NinnteiRiriBusiness> resultList = new ArrayList<>();
         IYokaigoNinteiJohoTeikyoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoTeikyoMapper.class);
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        RString 証記載保険者番号 = RString.EMPTY;
-        if (市町村セキュリティ情報.get支所管理有無フラグ()) {
-            証記載保険者番号 = 市町村セキュリティ情報.get市町村情報().get証記載保険者番号().getColumnValue();
-        }
-        AuthType.Of 種類 = new AuthType.Of();
-        種類.kinds(支所);
-        List<AuthorityItem> item = AuthItem.getAuthorities(ControlDataHolder.getUserId(), 種類.create(), RDate.getNowDate());
+        RString 証記載保険者番号 = 市町村セキュリティ情報.get市町村情報().get証記載保険者番号().getColumnValue();
         RString 支所コード = RString.EMPTY;
-        if (item != null && !item.isEmpty()) {
-            支所コード = AuthItem.getAuthorities(ControlDataHolder.getUserId(), 種類.create(), RDate.getNowDate()).get(0).getItemId();
+        if (市町村セキュリティ情報.get支所管理有無フラグ()) {
+            AuthType.Of 種類 = new AuthType.Of();
+            種類.kinds(支所);
+            List<AuthorityItem> item = AuthItem.getAuthorities(ControlDataHolder.getUserId(), 種類.create(), RDate.getNowDate());
+            if (item != null && !item.isEmpty()) {
+                支所コード = AuthItem.getAuthorities(ControlDataHolder.getUserId(), 種類.create(), RDate.getNowDate()).get(0).getItemId();
+            }
         }
-        if (!RString.isNullOrEmpty(証記載保険者番号) && !RString.isNullOrEmpty(支所コード)) {
+        if (!RString.isNullOrEmpty(証記載保険者番号)) {
             List<NinnteiRiriRelateEntity> entityList = mapper
-                    .get認定履歴一覧(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, 証記載保険者番号, 支所コード));
+                    .get認定履歴一覧(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, 証記載保険者番号, 支所コード, false));
             if (entityList == null || entityList.isEmpty()) {
                 return SearchResult.of(Collections.<NinnteiRiriBusiness>emptyList(), 0, false);
             }
