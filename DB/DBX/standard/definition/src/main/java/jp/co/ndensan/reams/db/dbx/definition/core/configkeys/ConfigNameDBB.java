@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * コンフィグ名称(DBB)を表す列挙型です。
  *
- * @reamsid_L DBE-9999-021 sunhaidi
+ * @reamsid_L DBX-9999-021 sunhaidi
  */
 public enum ConfigNameDBB {
 

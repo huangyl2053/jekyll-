@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbx.definition.core.configkeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * コンフィグ名称(DBA)を表す列挙型です。
+ *
+ * @reamsid_L DBX-9999-023 wangchao
  */
 public enum ConfigNameDBA {
 
