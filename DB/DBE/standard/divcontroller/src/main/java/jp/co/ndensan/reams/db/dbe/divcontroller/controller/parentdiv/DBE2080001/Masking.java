@@ -62,7 +62,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class Masking {
 
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
+    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("DBE2080001_MaskingIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -73,10 +73,10 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onLoad(MaskingDiv div) {
-        getHandler(div).initialize();
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
             throw new PessimisticLockingException();
         }
+        getHandler(div).initialize();
         List<PersonalData> personalDataList = new ArrayList<>();
         List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
         for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
@@ -159,7 +159,7 @@ public class Masking {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getCheckbox());
-            前排他キーの解除(SHINSEISHOKANRINO);
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
         }
         return ResponseData.of(div).respond();
@@ -204,8 +204,9 @@ public class Masking {
                 }
             }
             AccessLogger.log(AccessLogType.更新, personalDataList);
-            前排他キーの解除(SHINSEISHOKANRINO);
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキング"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            RealInitialLocker.release(排他キー);
+            div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキングの保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2080001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -240,16 +241,6 @@ public class Masking {
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 
     private MaskingHandler getHandler(MaskingDiv div) {
