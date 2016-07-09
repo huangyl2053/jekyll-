@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * コンフィグ名称(DBU)を表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBX-9999-023 wangchao
  */
 public enum ConfigNameDBU {
 

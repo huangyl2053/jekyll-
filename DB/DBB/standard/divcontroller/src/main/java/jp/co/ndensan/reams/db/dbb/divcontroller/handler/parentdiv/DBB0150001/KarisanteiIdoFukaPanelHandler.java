@@ -371,13 +371,6 @@ public class KarisanteiIdoFukaPanelHandler {
         ChohyoMeter chohyoMeter;
         Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
         for (Map.Entry<RString, RString> entry : set) {
-            if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())
-                    && 仮算定異動一括結果一覧表_帳票分類ＩＤ.equals(new ReportId(entry.getKey()))) {
-                div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().setグリッドのチェックボックスDisplayNone(true);
-            } else if (仮算定異動賦課通知書作成_MENU.equals(ResponseHolder.getMenuID())
-                    && 仮算定額変更通知書_帳票分類ＩＤ.equals(new ReportId(entry.getKey()))) {
-                div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran().setグリッドのチェックボックスDisplayNone(true);
-            }
             chohyoMeter = new ChohyoMeter();
             chohyoMeter.set帳票分類ID(new ReportId(entry.getKey()));
             chohyoMeter.set出力順ID(entry.getValue());

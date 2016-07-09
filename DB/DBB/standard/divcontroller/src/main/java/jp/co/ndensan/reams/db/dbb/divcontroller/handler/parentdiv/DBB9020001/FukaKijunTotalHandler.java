@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * システム管理（賦課基準）のハンドラクラスです。
@@ -390,25 +391,25 @@ public class FukaKijunTotalHandler {
             }
             if (段階_041.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex04(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             } else if (段階_042.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex05(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             } else if (段階_043.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex06(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             } else if (段階_051.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex08(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             } else if (段階_052.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex09(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             } else if (段階_053.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex10(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             } else if (段階_054.equals(保険料段階.get段階区分())) {
                 div.getShotokuDankai().getShotokuDankaiTo2014().setHdnGekihenIndex11(
-                        new RString(保険料段階.get保険料率().toString()));
+                        DataPassingConverter.serialize(保険料段階.get保険料率()));
             }
         }
     }
@@ -1076,9 +1077,11 @@ public class FukaKijunTotalHandler {
      * 項目表示を制御のメソッドです。
      *
      * @param now システム日時
+     * @param source Map
      */
-    public void set項目表示を制御(RDate now) {
+    public void set項目表示を制御(RDate now, Map<RString, RString> source) {
 
+        List<RString> dataSourceKeyList = getKeyList(source);
         List<KeyValueDataSource> dateSource = new ArrayList<>();
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
         RString 強制設定_未申告 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
@@ -1092,9 +1095,10 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDataSource(dateSource);
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(true);
         } else {
-            if (!div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().getDataSource().isEmpty()
-                    && !設定段階_未申告.isEmpty()) {
+            if (!dataSourceKeyList.isEmpty() && dataSourceKeyList.contains(設定段階_未申告)) {
                 div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedKey(設定段階_未申告);
+            } else {
+                div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedIndex(NUM_0);
             }
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
         }
@@ -1115,10 +1119,11 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDataSource(dateSource);
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(true);
         } else {
-            if (!div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
-                    .getDataSource().isEmpty() && !設定段階_所得調査中.isEmpty()) {
+            if (!dataSourceKeyList.isEmpty() && dataSourceKeyList.contains(設定段階_所得調査中)) {
                 div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
                         .setSelectedKey(設定段階_所得調査中);
+            } else {
+                div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setSelectedIndex(NUM_0);
             }
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
         }
@@ -1132,10 +1137,11 @@ public class FukaKijunTotalHandler {
                     now, SubGyomuCode.DBB介護賦課);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKyoseiSettei()
                     .setSelectedKey(強制設定_課税取消);
-            if (!div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
-                    .getDataSource().isEmpty() && !設定段階_課税取消.isEmpty()) {
+            if (!dataSourceKeyList.isEmpty() && dataSourceKeyList.contains(設定段階_課税取消)) {
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
                         .setSelectedKey(設定段階_課税取消);
+            } else {
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setSelectedIndex(NUM_0);
             }
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKazeiKbn()
                     .setSelectedKey(課税区分の見直し方_課税取消);
@@ -1170,6 +1176,7 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei()
                     .setDataSource(getDateSource(dateSource));
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedIndex(NUM_0);
         }
     }
 
@@ -1190,6 +1197,7 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
                     .setDataSource(getDateSource(dateSource));
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setSelectedIndex(NUM_0);
         }
     }
 
@@ -1210,6 +1218,7 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
                     .setDataSource(getDateSource(dateSource));
+            div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setSelectedIndex(NUM_0);
         }
     }
 
@@ -1292,6 +1301,7 @@ public class FukaKijunTotalHandler {
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(false);
         } else if (平成27年.isBeforeOrEquals(賦課年度)) {
             div.getShotokuDankai().getShotokuDankaiTo2014().setDisplayNone(true);
+            div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().setDisplayNone(false);
         }
     }
 
@@ -1308,10 +1318,22 @@ public class FukaKijunTotalHandler {
         for (int index = NUM_1; index < count; index++) {
             保険料率 = 保険料段階一覧.get(index - NUM_1).get保険料率();
             次の保険料率 = 保険料段階一覧.get(index).get保険料率();
-            if (次の保険料率.compareTo(Decimal.ZERO) != NUM_0 && 保険料率.compareTo(次の保険料率) == NUM_1) {
+            if ((保険料率 == null || 保険料率.compareTo(Decimal.ZERO) == NUM_0)
+                    || (次の保険料率 == null || 次の保険料率.compareTo(Decimal.ZERO) == NUM_0)) {
+                return true;
+            } else if (保険料率.compareTo(次の保険料率) == NUM_1) {
                 return true;
             }
         }
         return false;
+    }
+
+    private List<RString> getKeyList(Map<RString, RString> source) {
+        List<RString> keyList = new ArrayList<>();
+        Set<Map.Entry<RString, RString>> set = source.entrySet();
+        for (Map.Entry<RString, RString> entry : set) {
+            keyList.add(entry.getKey());
+        }
+        return keyList;
     }
 }
