@@ -49,14 +49,22 @@ public class HanyoListAtenaSelectHandler {
      */
     public void initialize(HokenshaKosei 保険者構成) {
         if (HokenshaKosei.単一市町村.getコード().equals(保険者構成.getコード())) {
-            div.getCcdHokenshaList().setDisplayNone(true);
-            div.getDvChiku().setDisplayNone(false);
+            setPanelVisibilityAt単一(div);
         } else if (HokenshaKosei.広域市町村.getコード().equals(保険者構成.getコード())) {
-            div.getCcdHokenshaList().setDisplayNone(false);
-            div.getDvChiku().setDisplayNone(true);
+            setPanelVisibilityAt広域(div);
         }
         set初期項目状態();
         set初期項目内容();
+    }
+
+    private static void setPanelVisibilityAt広域(HanyoListAtenaSelectDiv div) {
+        div.getCcdHokenshaList().setVisible(true);
+        div.getDvChiku().setDisplayNone(true);
+    }
+
+    private static void setPanelVisibilityAt単一(HanyoListAtenaSelectDiv div) {
+        div.getCcdHokenshaList().setDisplayNone(true);
+        div.getDvChiku().setVisible(true);
     }
 
     /**
@@ -66,11 +74,9 @@ public class HanyoListAtenaSelectHandler {
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村情報 != null && 市町村情報.get導入形態コード() != null
             && DonyuKeitaiCode.toValue(市町村情報.get導入形態コード().getColumnValue()).is広域()) {
-            div.getCcdHokenshaList().setVisible(true);
-            div.getDvChiku().setVisible(false);
+            setPanelVisibilityAt広域(div);
         } else {
-            div.getCcdHokenshaList().setVisible(false);
-            div.getDvChiku().setVisible(true);
+            setPanelVisibilityAt単一(div);
         }
         set初期項目状態();
         set初期項目内容();
