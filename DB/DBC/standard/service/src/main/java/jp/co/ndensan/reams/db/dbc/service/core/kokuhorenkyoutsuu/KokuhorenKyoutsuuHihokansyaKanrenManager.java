@@ -109,10 +109,12 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
                         = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(LasdecCode.EMPTY, hokenshaNo);
                 SearchResult<GappeiCityJyoho> gcJohoResult
                         = finder.getGappeijohokensaku(RString.EMPTY, parameter, GyomuBunrui.介護事務);
-                if (null != gcJohoResult && null != gcJohoResult.records() && !gcJohoResult.records().isEmpty()
-                        && !LasdecCode.EMPTY.equals(gcJohoResult.records().get(0).get旧市町村コード())) {
-                    List<GappeiCityJyoho> gcJohoList = gcJohoResult.records();
-                    mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, gcJohoList.get(0).get旧市町村コード());
+                if (null == gcJohoResult || null == gcJohoResult.records() || gcJohoResult.records().isEmpty()) {
+                    continue;
+                }
+                LasdecCode 旧市町村コード = gcJohoResult.records().get(0).get旧市町村コード();
+                if (!LasdecCode.EMPTY.equals(旧市町村コード) && null != 旧市町村コード) {
+                    mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, 旧市町村コード);
                     do新被保険者番号の登録(変換基準日);
                 }
             }
