@@ -76,6 +76,10 @@ public class HomonChosaItakuNyuryoku {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnKensaku(HomonChosaItakuNyuryokuDiv div) {
+        ValidationMessageControlPairs validPairs = getValidatisonHandlerr(div).必須入力チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         List<NinteiChosaHoshuJissekiJohoBusiness> 調査員情報List = manager.get初期化調査員情報検索(getHandler(div).createParam_初期(div)).records();
         getHandler(div).setDgChosain(調査員情報List);
         ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).データ空のチェック();
