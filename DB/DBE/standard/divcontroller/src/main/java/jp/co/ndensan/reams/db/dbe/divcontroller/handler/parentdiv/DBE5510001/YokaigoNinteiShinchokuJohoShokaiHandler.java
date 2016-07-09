@@ -59,7 +59,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     public void onload() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKensakuHoho().setSelectedKey(DATE_SOURCE_KEY0);
-        div.getRadMatchType().setSelectedKey(DATE_SOURCE_KEY0);
+        div.getDdlNameMatchType().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
         div.getTxtShiteiHizukeForm().setDisabled(true);
         div.getTxtShiteiHizukeTo().setDisabled(true);
@@ -245,7 +245,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
         row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
-                .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
+                                              .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
                 .toValue(joho.get二次判定要介護状態区分コード()).get名称());
         row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));

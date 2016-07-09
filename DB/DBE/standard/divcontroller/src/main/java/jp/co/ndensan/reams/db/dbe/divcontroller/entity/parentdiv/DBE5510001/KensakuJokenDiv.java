@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -157,13 +157,13 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public RadioButton getRadMatchType() {
-        return this.getSerchFromHohokensha().getRadMatchType();
+    public DropDownList getDdlNameMatchType() {
+        return this.getSerchFromHohokensha().getDdlNameMatchType();
     }
 
     @JsonIgnore
-    public void  setRadMatchType(RadioButton radMatchType) {
-        this.getSerchFromHohokensha().setRadMatchType(radMatchType);
+    public void  setDdlNameMatchType(DropDownList ddlNameMatchType) {
+        this.getSerchFromHohokensha().setDdlNameMatchType(ddlNameMatchType);
     }
 
     @JsonIgnore

@@ -141,7 +141,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return YokaigoNinteiParamter.createParamter(
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
-                div.getRadMatchType().getSelectedKey(),
+                div.getDdlNameMatchType().getSelectedKey(),
                 div.getRadKensakuHoho().getSelectedKey(),
                 div.getTxtShiteiHizukeForm().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeForm().getValue().toDateString(),
                 div.getTxtShiteiHizukeTo().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeTo().getValue().toDateString(),
