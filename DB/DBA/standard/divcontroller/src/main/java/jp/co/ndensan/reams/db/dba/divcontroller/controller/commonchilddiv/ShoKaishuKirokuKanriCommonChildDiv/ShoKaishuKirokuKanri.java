@@ -52,10 +52,10 @@ public class ShoKaishuKirokuKanri {
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         if (dgKoufuKaishuRow.getKoufuDate().getValue() != null) {
-            requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
+            requestDiv.getPanelInput().getTxtKoufuDate().setValue(dgKoufuKaishuRow.getKoufuDate().getValue());
         }
         if (dgKoufuKaishuRow.getYukoKigen().getValue() != null) {
-            requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
+            requestDiv.getPanelInput().getTxtYukouKigen().setValue(dgKoufuKaishuRow.getYukoKigen().getValue());
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
             requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0002)));
@@ -65,7 +65,7 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         if (dgKoufuKaishuRow.getKaishuDate().getValue() != null) {
-            requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
+            requestDiv.getPanelInput().getTxtKaisyuDate().setValue(dgKoufuKaishuRow.getKaishuDate().getValue());
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
             requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0003)));
@@ -135,7 +135,7 @@ public class ShoKaishuKirokuKanri {
             return ResponseData.of(shoKaishuDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             if (状態_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
                 shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_修正);
                 List<dgKoufuKaishu_Row> list = shoKaishuDiv.getDgKoufuKaishu().getDataSource();

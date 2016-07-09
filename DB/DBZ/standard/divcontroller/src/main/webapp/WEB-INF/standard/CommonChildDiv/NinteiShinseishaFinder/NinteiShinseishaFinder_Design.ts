@@ -1,7 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
@@ -134,9 +134,9 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            }
+            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            //}
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -148,10 +148,6 @@ module DBZ {
 
             public txtHihokenshaName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
-            }
-
-            public btnHihokenshaGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnHihokenshaGuide"));
             }
 
             public ddlHihokenshaNameMatchType(): UZA.DropDownList {

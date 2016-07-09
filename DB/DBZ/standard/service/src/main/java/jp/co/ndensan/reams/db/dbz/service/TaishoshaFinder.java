@@ -17,11 +17,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
-import jp.co.ndensan.reams.ua.uax.business.core.psm.KojinSearchEntityHolder;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Restrictions;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
@@ -83,7 +84,6 @@ public class TaishoshaFinder {
 
         IItemList<TaishoshaRelateBusiness> resultB = ItemList.of(list);
 
-
         return SearchResult.of(resultB, totalCount, (最大件数 < totalCount));
     }
 
@@ -117,7 +117,7 @@ public class TaishoshaFinder {
         for (FukaTaishoshaRelateEntity entity : result) {
             list.add(new FukaTaishoshaRelateBusiness(entity));
         }
-        
+
         IItemList<FukaTaishoshaRelateBusiness> resultB = ItemList.of(list);
 
         return SearchResult.of(resultB, totalCount, (最大件数 < totalCount));
@@ -125,12 +125,12 @@ public class TaishoshaFinder {
 
     private ITrueFalseCriteria getCriteria(ISearchCondition 条件, ISearchCondition 除外条件) {
         return (条件 != null && 除外条件 != null) ? and(条件.makeSearchCondition(), not(除外条件.makeSearchCondition()))
-                : (条件 != null) ? 条件.makeSearchCondition()
-                : (除外条件 != null) ? not(除外条件.makeSearchCondition())
-                : null;
+               : (条件 != null) ? 条件.makeSearchCondition()
+                 : (除外条件 != null) ? not(除外条件.makeSearchCondition())
+                   : null;
     }
 
     private IPsmCriteria getPsmCriteria(IShikibetsuTaishoSearchKey 条件) {
-        return new KojinSearchEntityHolder(条件).getCriteria();
+        return Restrictions.PSM(new UaFt200FindShikibetsuTaishoFunction(条件.getPSMSearchKey()));
     }
 }

@@ -127,10 +127,6 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
             };
 
-            Controls.prototype.ddlHokenshaNumber = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            };
-
             Controls.prototype.ddlShichosonCode = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
             };
@@ -141,10 +137,6 @@ var DBZ;
 
             Controls.prototype.txtHihokenshaName = function () {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
-            };
-
-            Controls.prototype.btnHihokenshaGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnHihokenshaGuide"));
             };
 
             Controls.prototype.ddlHihokenshaNameMatchType = function () {

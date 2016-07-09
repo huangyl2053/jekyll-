@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAppendType;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITableClause;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -62,10 +62,10 @@ public class TaishoshaRelateDac {
     }
 
     private ITableClause create資格対象者TableClause(IPsmCriteria psm, boolean is内部結合) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
         ITableClause table = (is内部結合)
-                ? accessor.select().table(psm).innerJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode))
-                : accessor.select().table(psm).leftJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode));
+                             ? accessor.select().table(psm).innerJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode))
+                             : accessor.select().table(psm).leftJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode));
         return table;
     }
 
@@ -99,10 +99,10 @@ public class TaishoshaRelateDac {
     }
 
     private ITableClause create賦課対象者TableClause(IPsmCriteria psm, boolean is内部結合) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
         ITableClause table = (is内部結合)
-                ? accessor.select().table(psm).innerJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode))
-                : accessor.select().table(psm).leftJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode));
+                             ? accessor.select().table(psm).innerJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode))
+                             : accessor.select().table(psm).leftJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode));
         return table;
     }
 

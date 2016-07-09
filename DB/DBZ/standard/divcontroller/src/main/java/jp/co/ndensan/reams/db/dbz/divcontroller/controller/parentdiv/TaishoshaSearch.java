@@ -150,9 +150,9 @@ public class TaishoshaSearch {
         // 検索条件未指定チェック
         HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedItems().isEmpty()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
         boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
 
@@ -391,7 +391,7 @@ public class TaishoshaSearch {
         } else if (資格検索.getJukyushaDaichoHihokenshaNo() != null && !資格検索.getJukyushaDaichoHihokenshaNo().isEmpty()) {
             被保険者区分 = HihoKubun.受給;
         } else if ((資格検索.getHihokenshaNo() != null && !資格検索.getHihokenshaNo().isEmpty())
-                && (資格検索.getShikakuSoshitsuYMD() == null || 資格検索.getShikakuSoshitsuYMD().isEmpty())) {
+                   && (資格検索.getShikakuSoshitsuYMD() == null || 資格検索.getShikakuSoshitsuYMD().isEmpty())) {
             被保険者区分 = HihoKubun.資格;
         }
         return 被保険者区分;

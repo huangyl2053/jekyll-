@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -166,13 +168,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.setHokensha(nullToEmpty(joho.get市町村名称()));
         row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号().getColumnValue());
         row.setShimei(nullToEmpty(joho.get被保険者氏名()));
-        row.setHihoKubun(nullToEmpty(joho.get被保険者区分コード()));
+        row.setHihoKubun(HihokenshaKubunCode.to名称OrDefault(joho.get被保険者区分コード(), RString.EMPTY));
         if (joho.get認定申請年月日() == null || joho.get認定申請年月日().isEmpty()) {
             row.setShinseiDay(new TextBoxDate());
         } else {
             row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
         }
-        row.setShinseiKubun(nullToEmpty(joho.get認定申請区分申請時コード()));
+        row.setShinseiKubun(NinteiShinseiShinseijiKubunCode.to名称OrDefault(joho.get認定申請区分申請時コード(), RString.EMPTY));
         row.setChosaIrai(flexibleDateToRString(joho.get認定調査依頼完了年月日()));
         row.setChosaJisshi(flexibleDateToRString(joho.get認定調査完了年月日()));
         row.setChosaTokki(nullToEmpty(joho.get認定調査特記()));
