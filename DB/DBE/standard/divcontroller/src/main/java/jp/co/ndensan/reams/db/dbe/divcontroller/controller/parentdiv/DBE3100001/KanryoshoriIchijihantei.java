@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -35,19 +34,18 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -63,9 +61,10 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class KanryoshoriIchijihantei {
 
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
     private static final RString CSVファイル名 = new RString("IchijiHanteiIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final LockingKey LOCKINGKEY = new LockingKey(new RString("ShinseishoKanriNo"));
+    private static final RString ROOTTITLE = new RString("完了処理・一次判定の保存処理が完了しました。");
 
     /**
      * 画面初期化。(オンロード)<br/>
@@ -75,10 +74,8 @@ public class KanryoshoriIchijihantei {
      */
     public ResponseData<KanryoshoriIchijihanteiDiv> onLoad(KanryoshoriIchijihanteiDiv div) {
         getHandler(div).initialize();
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-            throw new ApplicationException(errorMessage);
+        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+            throw new PessimisticLockingException();
         }
         return ResponseData.of(div).setState(DBE3100001StateName.登録);
     }
@@ -147,7 +144,7 @@ public class KanryoshoriIchijihantei {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             申請書管理番号リスト(rowList);
-            前排他キーの解除(SHINSEISHOKANRINO);
+            RealInitialLocker.release(LOCKINGKEY);
             return ResponseData.of(div).forwardWithEventName(DBE3100001TransitionEventName.一次判定処理).respond();
         }
         return ResponseData.of(div).respond();
@@ -197,8 +194,8 @@ public class KanryoshoriIchijihantei {
 
                 }
             }
-            前排他キーの解除(SHINSEISHOKANRINO);
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・一次判定"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            RealInitialLocker.release(LOCKINGKEY);
+            div.getCcdKanryoMsg().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE3100001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -211,13 +208,14 @@ public class KanryoshoriIchijihantei {
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 row.getShinseiKubunShinseiji(),
-                getパターン1(row.getChosaIraiKanryoDay().getValue()),
-                getパターン1(row.getIkenshoIraiKanryoDay().getValue()),
+                getパターン1(row.getChosahyoKanryoDay().getValue()),
+                getパターン1(row.getIkenshoNyushuKanryoDay().getValue()),
                 getパターン1(row.getIchijiHanteiKanryoDay().getValue()),
                 getパターン1(row.getIchijiHanteiKanri().getValue()),
                 getパターン1(row.getIchijiHantei().getValue()),
                 row.getIchijiHanteiKekka(),
-                row.getIchijiHanteiWarningCode());
+                row.getIchijiHanteiWarningCode()
+        );
 
     }
 
@@ -228,19 +226,9 @@ public class KanryoshoriIchijihantei {
         return date.wareki().toDateString();
     }
 
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
     private boolean is仮一次判定(RString 申請書管理番号) {
 
         return KanryoshoriIchijihanteiManager.createInstance().get仮一次判定区分(new ShinseishoKanriNo(申請書管理番号));
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 
     private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {

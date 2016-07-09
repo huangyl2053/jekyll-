@@ -23,14 +23,14 @@ public class KanryoshoriIchijihanteiHandler {
     /**
      * コンストラクタです。
      *
-     * @param div ShujiiIkenshoIraiTaishoIchiranDiv
+     * @param div KanryoshoriIchijihanteiDiv
      */
     public KanryoshoriIchijihanteiHandler(KanryoshoriIchijihanteiDiv div) {
         this.div = div;
     }
 
     /**
-     * 完了処理・主治医意見書入手の初期化です。
+     * 完了処理・一次判定の初期化です。
      *
      */
     public void initialize() {

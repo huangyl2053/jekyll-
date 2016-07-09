@@ -63,7 +63,7 @@ public class KanryoshoriIchijihanteiValidationHandler {
 
         一次判定完了対象者一覧データの存在チェック(UrErrorMessages.該当データなし),
         一次判定完了対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
-        一次判定完了対象者一覧選択行の完了処理チェック(DbzErrorMessages.理由付き完了不可, "意見書作成依頼先が未確定");
+        一次判定完了対象者一覧選択行の完了処理チェック(DbzErrorMessages.理由付き完了不可, "完了済みデータ");
         private final Message message;
 
         private KanryoshoriIchijihanteiMessages(IMessageGettable message, String... replacements) {
