@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaishaIdentifier;
 import static jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysJukyuShikakuShomeishoHakko.資格取得除外者登録キー;
 import static jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysJukyuShikakuShomeishoHakko.除外者データキー;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -61,6 +62,10 @@ public class JogaishaToroku {
             ViewStateHolder.put(ViewStateKeys.資格取得除外者一覧, shikakuShutokuJogaisha);
         } else {
             JogaishaTorokuSetter jogaishaTorokuSetter = ViewStateHolder.get(除外者データキー, JogaishaTorokuSetter.class);
+            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+            ShikakuShutokuJogaishaKanri get宛名情報 = ShikakuShutokuJogaishaKanriManager.createInstance().get宛名情報(識別コード);
+            jogaishaTorokuSetter.setShikibetsuCode(識別コード.value());
+            jogaishaTorokuSetter.setShikibetsuCodeName(get宛名情報.getMeisho().value());
             getHandler(requestDiv).onLoadKen(jogaishaTorokuSetter);
         }
         return ResponseData.of(requestDiv).setState(DBA1080011StateName.初期状態);
