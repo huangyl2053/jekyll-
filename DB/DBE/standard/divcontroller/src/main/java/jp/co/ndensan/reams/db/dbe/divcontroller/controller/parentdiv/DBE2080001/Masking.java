@@ -77,13 +77,11 @@ public class Masking {
             throw new PessimisticLockingException();
         }
         getHandler(div).initialize();
-        List<PersonalData> personalDataList = new ArrayList<>();
         List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
         for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
-            personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    row.getShinseishoKanriNo())));
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                    new RString("申請書管理番号"), row.getShinseishoKanriNo())));
         }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         return ResponseData.of(div).setState(DBE2080001StateName.登録);
     }
 
@@ -115,15 +113,14 @@ public class Masking {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(MaskingDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
-                personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo())));
+                AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                        new RString("申請書管理番号"), row.getShinseishoKanriNo())));
             }
             csvWriter.close();
         }
@@ -131,7 +128,6 @@ public class Masking {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
@@ -188,22 +184,20 @@ public class Masking {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            List<PersonalData> personalDataList = new ArrayList<>();
             List<dgNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
                 if (!RString.isNullOrEmpty(申請書管理番号) && MaskingManager.createInstance().is更新(申請書管理番号)) {
-                    personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                            row.getShinseishoKanriNo())));
                     NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
+                    AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                            new RString("申請書管理番号"), row.getShinseishoKanriNo())));
                 }
             }
-            AccessLogger.log(AccessLogType.更新, personalDataList);
             RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキングの保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
