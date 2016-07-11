@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -56,9 +58,8 @@ public class KanendoFuka {
         List<ShoriDateKanri> shdaList = HonsanteiIdoKanendo.createInstance().getShoriJokyo(調定年度);
         boolean flag = getHandler(div).initialize(調定年度, shdaList, shoriDate3);
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
-//        IUrControlData controlData = UrControlDataFactory.createInstance();
-//        RString menuID = controlData.getMenuID();
-        RString menuID = 過年度賦課確定;
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
         if (過年度異動通知書作成.equals(menuID)) {
             div.getKanendoFukaChushutsuJoken().setDisplayNone(true);
             return ResponseData.of(div).setState(DBB0550001StateName.過年度通知書一括発行);

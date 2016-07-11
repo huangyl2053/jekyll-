@@ -184,10 +184,8 @@ public class KanendoFukaHandler {
     }
 
     private void set算定帳票作成() {
-//        IUrControlData controlData = UrControlDataFactory.createInstance();
-//        RString menuID = controlData.getMenuID();
-        RString menuID = 本算定異動_過年度;
-
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
         if (本算定異動_過年度.equals(menuID)) {
             div.getKanendoFukaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 過年度);
         } else if (過年度異動通知書作成.equals(menuID)) {
@@ -197,7 +195,8 @@ public class KanendoFukaHandler {
 
     private void set対象賦課年度() {
         List<KeyValueDataSource> 対象賦課年度 = new ArrayList<>();
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 調定年度 = DbBusinessConfig.get(
+                ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         int 賦課年度1 = Integer.parseInt(調定年度.toString()) - 1;
         int 賦課年度2 = Integer.parseInt(調定年度.toString()) - 2;
         KeyValueDataSource dataSource1 = new KeyValueDataSource(ZERO_RS, new RString(賦課年度1));
