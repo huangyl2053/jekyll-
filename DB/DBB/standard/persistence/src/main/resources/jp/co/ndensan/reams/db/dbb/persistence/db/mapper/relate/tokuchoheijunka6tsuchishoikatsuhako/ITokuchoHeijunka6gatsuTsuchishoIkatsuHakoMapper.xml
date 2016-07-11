@@ -82,7 +82,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get基準日時"
-            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
             fetchSize="500">
         SELECT MAX(A."kijunTimestamp") AS "基準日時"
