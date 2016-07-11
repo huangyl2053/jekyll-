@@ -42,7 +42,7 @@
                 rgdb."DbT1001HihokenshaDaicho" DbT1001
             WHERE
                 DbT1001."logicalDeletedFlag" = false
-        　　<!-- 取得取得時に設定される項目のみ、最初に判断する。 -->
+            <!-- 取得取得時に設定される項目のみ、最初に判断する。 -->
             <if test="is基準日">
                 <if test="is資格取得日">
                     AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni}
@@ -121,10 +121,10 @@
                         OR DbT1001."hihokennshaKubunCode" = '2'
                     </if>
                     <if test="is自特例者">
-                        OR DbT1001."jushochiTokureiFlag" = 'true'
+                        OR DbT1001."jushochiTokureiFlag" = '1'
                     </if>
                     <if test="is広域住特">
-                        OR DbT1001."koikinaiJushochiTokureiFlag" = 'true'
+                        OR DbT1001."koikinaiJushochiTokureiFlag" = '1'
                     </if>
                 )
                 <if test="is資格取得者のみ">
