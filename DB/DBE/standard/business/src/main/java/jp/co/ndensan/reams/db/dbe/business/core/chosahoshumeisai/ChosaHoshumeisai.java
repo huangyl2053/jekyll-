@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahoshumeisai;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +25,7 @@ public class ChosaHoshumeisai {
     private RString 調査機関名;
     private RString 調査員名;
     private RString 調査員コード;
-    private FlexibleDate 帳票印刷日時;
+    private RString 帳票印刷日時;
     private RString ページ数;
     private RString 明細番号;
     private RString 被保険者番号;
