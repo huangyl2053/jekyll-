@@ -406,6 +406,7 @@
      <include refid="受給_認定調査情報" />
      <include refid="受給_主治医情報" />
      <include refid="受給_一次判定" />
+     <include refid="受給_前回情報" />
      <include refid="受給_完了情報" />
  </select>
  <select id="get介護認定申請情報認定" resultMap="ResultMap_DbT5101NinteiShinseiJohoEntity" resultOrdered="true"
@@ -790,7 +791,7 @@
                                                                          WHEN '09A' THEN 13
                                                                          WHEN '09B' THEN 13
                                                                          END)
-      AND DbT5304."ikenItem" = #{neTaKiRi} OR #{niChiDo}
+      AND DbT5304."ikenItem" in (#{neTaKiRi}, #{niChiDo})
     </if>                 
  </sql>
  
@@ -852,7 +853,7 @@
                                                                          WHEN '09A' THEN 13
                                                                          WHEN '09B' THEN 13
                                                                          END)
-      AND DbT4304."ikenItem" = #{neTaKiRi} OR #{niChiDo}
+      AND DbT4304."ikenItem" in (#{neTaKiRi}, #{niChiDo})
     </if>               
  </sql>
 
@@ -892,7 +893,7 @@
     </if>
     <if test = "isIchiGojiHanteiYMDTo">
      AND
-     DbT5510."ichiGojiHanteiYMDTo"  <![CDATA[<=]]>  #{ichiGojiHanteiYMDTo}
+     DbT5510."ichiGojiHanteiYMD"  <![CDATA[<=]]>  #{ichiGojiHanteiYMDTo}
     </if>
     <if test = "isIchiGojiHanteiKekkaCode">
      AND
@@ -984,9 +985,9 @@
     </if> 
 </sql>
 <sql id="受給_前回情報">
-    <if test = "isJigyoshaMeisho">
+    <if test = "isZenkaiJigyoshaMeisho">
      AND 
-     DbT4910."ZenkaijigyoshaMeisho" LIKE '%' || #{zenkaiJigyoshaMeisho} || '%' 
+     DbT4910."jigyoshaMeisho" LIKE '%' || #{zenkaiJigyoshaMeisho} || '%' 
      AND 
      DbT4121."zenkaiShinseishoKanriNo" = DbT4101."shinseishoKanriNo"
     </if> 
