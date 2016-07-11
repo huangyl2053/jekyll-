@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigonintei.YouKaiGoNi
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.KaigoNinteiShinseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.dgKensakuKekkaIchiran_Row;
-import jp.co.ndensan.reams.ur.urz.definition.core.saikinshoririreki.ScopeCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.saikinshoririreki.ScopeCodeType;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,8 +49,6 @@ public class KaigoNinteiShinseiKensakuHandler {
      *
      */
     public void initialize() {
-        // TODO QA1366 最近処理者情報の引数が不明です。
-        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
         div.getCcdNinteiShinseishaFinder().initialize();
     }
 
@@ -61,7 +57,6 @@ public class KaigoNinteiShinseiKensakuHandler {
      *
      */
     public void kenSaKu() {
-        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
         div.getCcdNinteiShinseishaFinder().initialize();
     }
 
