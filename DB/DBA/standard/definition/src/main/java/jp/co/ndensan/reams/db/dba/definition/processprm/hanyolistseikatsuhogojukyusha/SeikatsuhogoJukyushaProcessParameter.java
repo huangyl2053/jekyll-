@@ -25,7 +25,7 @@ import lombok.Setter;
 public class SeikatsuhogoJukyushaProcessParameter implements IBatchProcessParameter {
 
     private RString chohyoId;
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
     private RString shutsuryokuKomokuId;
     private boolean komokumeiFuka;
     private boolean renbanFuka;
@@ -117,7 +117,7 @@ public class SeikatsuhogoJukyushaProcessParameter implements IBatchProcessParame
      */
     public SeikatsuhogoJukyushaProcessParameter(
             RString chohyoId,
-            RString shutsuryokujunId,
+            Long shutsuryokujunId,
             RString shutsuryokuKomokuId,
             boolean komokumeiFuka,
             boolean renbanFuka,

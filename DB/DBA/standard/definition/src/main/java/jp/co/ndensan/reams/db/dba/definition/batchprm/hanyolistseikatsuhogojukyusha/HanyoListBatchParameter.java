@@ -78,7 +78,7 @@ public class HanyoListBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_CHOHYOID, name = "帳票ID")
     private RString chohyoId;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "出力順ID")
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
     @BatchParameter(key = KEY_SHUTSURYOKUKOMOKUID, name = "出力項目ID")
     private RString shutsuryokuKomokuId;
     @BatchParameter(key = KEY_KOMOKUMEIFUKA, name = "項目名付加")
