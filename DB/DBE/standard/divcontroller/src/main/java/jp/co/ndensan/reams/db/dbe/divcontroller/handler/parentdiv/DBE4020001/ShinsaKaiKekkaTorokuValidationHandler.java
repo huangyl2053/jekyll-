@@ -42,7 +42,7 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 存在チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.存在チェック));
         }
         return validPairs;

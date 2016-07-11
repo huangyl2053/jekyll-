@@ -297,7 +297,7 @@ public class KaigoNinteiShinseiKensakuHandler {
         }
         int 経過日数To = 0;
         if (finderDiv
-                .getTxtShinseiKeikaNissu().getFromValue() != null) {
+                .getTxtShinseiKeikaNissu().getToValue() != null) {
             経過日数To = finderDiv
                     .getTxtShinseiKeikaNissu().getToValue().intValue();
         }

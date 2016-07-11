@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 高額介護サービス費支給審査決定を管理するクラスです。
  *
- * @reamsid_L DBC-4380-020 quxiaodong
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT3058KogakuShikyuShinsaKettei
         extends ParentModelBase<DbT3058KogakuShikyuShinsaKetteiIdentifier, DbT3058KogakuShikyuShinsaKetteiEntity, DbT3058KogakuShikyuShinsaKettei>

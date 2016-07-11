@@ -88,7 +88,7 @@ public class KanryoshoriIchijihantei {
      */
     public ResponseData<KanryoshoriIchijihanteiDiv> onBefore_Dataoutput(KanryoshoriIchijihanteiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
             getValidationHandler().一次判定完了対象者一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -143,7 +143,7 @@ public class KanryoshoriIchijihantei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
                 getValidationHandler().一次判定完了対象者一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -176,7 +176,7 @@ public class KanryoshoriIchijihantei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
                 getValidationHandler().一次判定完了対象者一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }

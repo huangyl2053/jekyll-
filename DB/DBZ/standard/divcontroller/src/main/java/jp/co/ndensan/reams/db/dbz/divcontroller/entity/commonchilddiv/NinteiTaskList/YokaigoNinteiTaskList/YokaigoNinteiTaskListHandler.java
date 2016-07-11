@@ -1148,11 +1148,11 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     /**
-     * 一览件数を取得します。
+     * 一覧件数を取得します。
      *
-     * @return 一览件数
+     * @return 一覧件数
      */
-    public RString 一览件数() {
+    public RString 一覧件数() {
 
         return div.getTxtTotalCount().getValue();
     }

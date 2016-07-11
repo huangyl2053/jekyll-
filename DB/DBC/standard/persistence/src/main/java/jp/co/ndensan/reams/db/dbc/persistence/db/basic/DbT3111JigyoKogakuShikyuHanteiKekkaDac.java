@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 事業高額介護サービス費支給判定結果のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT3111JigyoKogakuShikyuHanteiKekkaDac implements ISaveable<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> {
 

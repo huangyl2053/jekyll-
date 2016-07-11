@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 /**
  * 高額介護サービス費支給審査決定の識別子です。
  *
- * @reamsid_L DBC-4380-020 quxiaodong
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
