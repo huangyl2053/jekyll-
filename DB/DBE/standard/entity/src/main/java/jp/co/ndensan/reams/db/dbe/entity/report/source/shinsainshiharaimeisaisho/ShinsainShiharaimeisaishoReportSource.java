@@ -44,9 +44,13 @@ public class ShinsainShiharaimeisaishoReportSource implements IReportSource {
     public RString listChosaSakusei_8;
     @ReportItem(name = "listChosaSakusei_9", length = 6, order = 14)
     public RString listChosaSakusei_9;
-    @ReportItem(name = "listGokeiKingaku_1", length = 9, order = 15)
-    public RString listGokeiKingaku_1;
-    @ReportItem(name = "shinsakaiIinCode", length = 9, order = 16)
+    @ReportItem(name = "gokeiKingaku", length = 9, order = 15)
+    public RString gokeiKingaku;
+    @ReportItem(name = "shouhiZei", length = 9, order = 16)
+    public RString shouhiZei;
+    @ReportItem(name = "gokeiSeikyuKingaku", length = 9, order = 17)
+    public RString gokeiSeikyuKingaku;
+    @ReportItem(name = "shinsakaiIinCode", length = 9, order = 18)
     public RString shinsakaiIinCode;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;

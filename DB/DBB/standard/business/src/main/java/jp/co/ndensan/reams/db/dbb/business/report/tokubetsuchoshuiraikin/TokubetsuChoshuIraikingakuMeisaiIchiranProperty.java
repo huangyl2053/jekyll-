@@ -45,7 +45,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
      * @param outputOrder IOutputOrder
      */
     public TokubetsuChoshuIraikingakuMeisaiIchiranProperty(IOutputOrder outputOrder) {
-        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100003.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200023.getReportId());
 
         pageBreakKeys = new ArrayList<>();
 
@@ -100,6 +100,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
             Breakers<TokubetsuChoshuIraikingakuMeisaiIchiranSource> breakers,
             BreakerCatalog<TokubetsuChoshuIraikingakuMeisaiIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             pageBreakKeys) {
             @Override
