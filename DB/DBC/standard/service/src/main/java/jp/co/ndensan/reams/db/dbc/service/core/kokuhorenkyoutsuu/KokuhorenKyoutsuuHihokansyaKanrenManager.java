@@ -115,8 +115,8 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
                 LasdecCode 旧市町村コード = gcJohoResult.records().get(0).get旧市町村コード();
                 if (!LasdecCode.EMPTY.equals(旧市町村コード) && null != 旧市町村コード) {
                     mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, 旧市町村コード);
-                    do新被保険者番号の登録(変換基準日);
                 }
+                do新被保険者番号の登録(変換基準日);
             }
         } else {
             do変換被保険者番号の更新();
