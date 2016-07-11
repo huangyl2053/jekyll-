@@ -217,6 +217,7 @@ public class KogakuShinseiListDivHandler {
      * set照会モードです。
      */
     public void set照会モード() {
+        div.getDgShinseiJoho().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDgShinseiJoho().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgShinseiJoho().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getTxtServiceYM().setDisplayNone(true);
