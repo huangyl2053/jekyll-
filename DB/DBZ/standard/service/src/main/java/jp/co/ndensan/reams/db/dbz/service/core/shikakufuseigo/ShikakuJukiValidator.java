@@ -357,11 +357,12 @@ public class ShikakuJukiValidator {
             不整合理由 = FuseigoRiyu.資格取得者_転出者;
         }
         if (ShikakuSoshitsuJiyu.転出.getコード().equals(資格喪失事由コード)) {
-            if (!isNullOrEmpty(資格喪失年月日)
+            if (!isNullOrEmpty(転出確定)
                     && 資格喪失年月日.compareTo(転出確定) != 0) {
                 不整合理由 = FuseigoRiyu.資格喪失日_転出確定者;
             }
-            if (資格喪失年月日.compareTo(転出予定) != 0) {
+            if (isNullOrEmpty(転出確定)
+                    && 資格喪失年月日.compareTo(転出予定) != 0) {
                 不整合理由 = FuseigoRiyu.資格喪失日_転出予定者;
             }
         }
