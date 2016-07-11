@@ -97,6 +97,18 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
     }
 
     /**
+     * DbT3055KogakuKyufuTaishoshaGokeiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3055KogakuKyufuTaishoshaGokeiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費給付対象者合計エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 高額介護サービス費給付対象者合計の最新データを取得します。
      *
      * @param 被保険者番号 被保険者番号
