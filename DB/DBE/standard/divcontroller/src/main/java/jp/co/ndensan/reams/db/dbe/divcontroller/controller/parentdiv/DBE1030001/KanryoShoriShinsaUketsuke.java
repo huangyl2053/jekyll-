@@ -85,13 +85,9 @@ public class KanryoShoriShinsaUketsuke {
      */
     public ResponseData<KanryoShoriShinsaUketsukeDiv> onBefore_Dataoutput(KanryoShoriShinsaUketsukeDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
-            getValidationHandler().申請情報登録完了一覧データの存在チェック(validationMessages);
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-        if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
-            getValidationHandler().申請情報登録完了一覧データの行選択チェック(validationMessages);
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).一覧を出力するボタンの押下チェック処理(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -140,23 +136,13 @@ public class KanryoShoriShinsaUketsuke {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
-                getValidationHandler().申請情報登録完了一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
-                getValidationHandler().申請情報登録完了一覧データの行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).審査受付を完了するボタンを押下チェック処理(validationMessages);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
 
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
-
-                if (row.getShinseiUketsukeKanryoDay().getValue() != null) {
-                    getValidationHandler().申請情報登録完了一覧選択行の完了処理チェック(validationMessages);
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
@@ -199,8 +185,8 @@ public class KanryoShoriShinsaUketsuke {
         return new KanryoShoriShinsaUketsukeHandler(div);
     }
 
-    private KanryoShoriShinsaUketsukeValidationHandler getValidationHandler() {
-        return new KanryoShoriShinsaUketsukeValidationHandler();
+    private KanryoShoriShinsaUketsukeValidationHandler getValidationHandler(KanryoShoriShinsaUketsukeDiv div) {
+        return new KanryoShoriShinsaUketsukeValidationHandler(div);
     }
 
 }

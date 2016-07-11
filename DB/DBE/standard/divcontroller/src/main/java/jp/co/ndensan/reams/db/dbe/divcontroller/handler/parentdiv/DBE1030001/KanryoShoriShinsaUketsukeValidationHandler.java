@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1030001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -20,42 +24,60 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KanryoShoriShinsaUketsukeValidationHandler {
 
+    private final KanryoShoriShinsaUketsukeDiv div;
+
     /**
      * コンストラクタです。
+     *
+     * @param div 画面情報
      */
-    public KanryoShoriShinsaUketsukeValidationHandler() {
+    public KanryoShoriShinsaUketsukeValidationHandler(KanryoShoriShinsaUketsukeDiv div) {
+        this.div = div;
     }
 
     /**
-     * 申請情報登録完了一覧データの存在チェックを行います。
+     * 審査受付を完了するボタンを押下チェック処理
      *
      * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 申請情報登録完了一覧データの存在チェック(ValidationMessageControlPairs pairs) {
-        pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの存在チェック));
+    public ValidationMessageControlPairs 審査受付を完了するボタンを押下チェック処理(ValidationMessageControlPairs pairs) {
+        if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
+            pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの存在チェック));
+        }
+
+        if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
+            pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの行選択チェック));
+        }
+
+        List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
+        for (dgNinteiTaskList_Row row : rowList) {
+
+            if (row.getShinseiUketsukeKanryoDay().getValue() != null) {
+
+                pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧選択行の完了処理チェック));
+            }
+
+        }
+
         return pairs;
     }
 
     /**
-     * 申請情報登録完了一覧データの行選択チェックを行います。
+     * 一覧を出力するボタンの押下チェック処理。
      *
      * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 申請情報登録完了一覧データの行選択チェック(ValidationMessageControlPairs pairs) {
-        pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの行選択チェック));
-        return pairs;
-    }
+    public ValidationMessageControlPairs 一覧を出力するボタンの押下チェック処理(ValidationMessageControlPairs pairs) {
+        if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
+            pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの存在チェック));
+        }
 
-    /**
-     * 申請情報登録完了一覧選択行の完了処理チェックを行います。
-     *
-     * @param pairs バリデーションコントロール
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs 申請情報登録完了一覧選択行の完了処理チェック(ValidationMessageControlPairs pairs) {
-        pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧選択行の完了処理チェック));
+        if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
+            pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの行選択チェック));
+        }
+
         return pairs;
     }
 
