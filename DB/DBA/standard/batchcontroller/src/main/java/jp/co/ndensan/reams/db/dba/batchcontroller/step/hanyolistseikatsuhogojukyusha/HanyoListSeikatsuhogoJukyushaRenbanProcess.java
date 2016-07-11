@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hanyolistseikatsuhogojukyusha.HanyoListSeikatsuhogoJukyushaResult;
 import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaProcessParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaCsvEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -53,11 +53,11 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * 汎用リスト_生活保護受給者のデータを作成します。
+ * 汎用リスト_生活保護受給者のデータを作成します(連番なし)。
  *
  * @reamsid_L DBA-1580-030 xuyannan
  */
-public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<SeikatsuhogoJukyushaRelateEntity> {
+public class HanyoListSeikatsuhogoJukyushaRenbanProcess extends BatchProcessBase<SeikatsuhogoJukyushaRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolistseikatsuhogojukyusha."
@@ -73,9 +73,10 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
     private List<KoseiShichosonMaster> koseiShichosonJoho;
     private List<KaigoDonyuKeitai> kaigoDonyuKeitai;
     private Association association;
-    private EucCsvWriter<SeikatsuhogoJukyushaCsvEntity> eucCsvWriter;
+    private EucCsvWriter<SeikatsuhogoJukyushaRenbanCsvEntity> eucCsvWriter;
     private SeikatsuhogoJukyushaRelateEntity lastEntity;
     private List<PersonalData> personalDataList;
+    private int i;
     private RStringBuilder newBuilder;
     private RStringBuilder oldBuilder;
     private RStringBuilder 生活保護種別builder;
@@ -89,6 +90,7 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
         newBuilder = new RStringBuilder();
         oldBuilder = new RStringBuilder();
         生活保護種別builder = new RStringBuilder();
+        i = 0;
         lastEntity = new SeikatsuhogoJukyushaRelateEntity();
     }
 
@@ -128,7 +130,7 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
             生活保護種別builder.append(コンマ);
         } else {
             eucCsvWriter.writeLine(new HanyoListSeikatsuhogoJukyushaResult().
-                    setEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, association, 生活保護種別builder));
+                    setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, i, association, 生活保護種別builder));
             personalDataList.add(toPersonalData(entity));
             生活保護種別builder = new RStringBuilder();
             生活保護種別builder.append(new FujoShuruiCodeValue(entity.get生活保護種別()).getRyakusho());
@@ -142,7 +144,7 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
     @Override
     protected void afterExecute() {
         eucCsvWriter.writeLine(new HanyoListSeikatsuhogoJukyushaResult().
-                setEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, association, 生活保護種別builder));
+                setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, i, association, 生活保護種別builder));
         personalDataList.add(toPersonalData(lastEntity));
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
