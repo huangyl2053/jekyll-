@@ -401,6 +401,10 @@ public enum ReportIdDBE {
     /**
      * 特記事項の帳票ＩＤです。
      */
+    DBE517031(new ReportId("DBE517031_TokkiText1A3"), new RString("特記事項")),
+    /**
+     * 特記事項の帳票ＩＤです。
+     */
     DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項")),
     /**
      * 主治医意見書作成報酬支払通知書の帳票ＩＤです。

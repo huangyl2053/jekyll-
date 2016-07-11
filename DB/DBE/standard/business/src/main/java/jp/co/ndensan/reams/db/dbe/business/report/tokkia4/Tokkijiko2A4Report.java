@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia3;
+package jp.co.ndensan.reams.db.dbe.business.report.tokkia4;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkia3.TokkiText1A3Entity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkia4.TokkiText1A4Entity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.Tokkijiko2A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -14,16 +15,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-060 wangrenze
  */
-public class Tokkijiko1A3Report extends Report<TokkiText1A3ReportSource> {
+public class Tokkijiko2A4Report extends Report<Tokkijiko2A4ReportSource> {
 
-    private final TokkiText1A3Entity entity;
+    private final TokkiText1A4Entity entity;
 
     /**
      * インスタンスを生成します。
      *
      * @param entity 事務局用特記事項Entity
      */
-    public Tokkijiko1A3Report(TokkiText1A3Entity entity) {
+    public Tokkijiko2A4Report(TokkiText1A4Entity entity) {
         this.entity = entity;
     }
 
@@ -33,9 +34,9 @@ public class Tokkijiko1A3Report extends Report<TokkiText1A3ReportSource> {
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    public void writeBy(ReportSourceWriter<TokkiText1A3ReportSource> reportSourceWriter) {
-        ITokkijiko1A3Editor editor = new Tokkijiko1A3Editor(entity);
-        ITokkijiko1A3Builder buildera = new Tokkijiko1A3Builder(editor);
+    public void writeBy(ReportSourceWriter<Tokkijiko2A4ReportSource> reportSourceWriter) {
+        ITokkijiko2A4Editor editor = new Tokkijiko2A4Editor(entity);
+        ITokkijiko2A4Builder buildera = new Tokkijiko2A4Builder(editor);
         reportSourceWriter.writeLine(buildera);
     }
 }

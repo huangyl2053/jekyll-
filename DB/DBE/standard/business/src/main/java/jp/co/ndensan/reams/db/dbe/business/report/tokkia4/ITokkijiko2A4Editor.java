@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia3;
+package jp.co.ndensan.reams.db.dbe.business.report.tokkia4;
 
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.Tokkijiko2A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -12,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBE-0150-060 wangrenze
  */
-public interface ITokkijiko1A3Editor extends IReportEditor<TokkiText1A3ReportSource> {
+public interface ITokkijiko2A4Editor extends IReportEditor<Tokkijiko2A4ReportSource> {
 
 }
