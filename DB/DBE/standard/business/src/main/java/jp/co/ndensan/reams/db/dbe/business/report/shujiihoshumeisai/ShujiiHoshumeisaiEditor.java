@@ -53,8 +53,25 @@ public class ShujiiHoshumeisaiEditor implements IShujiiHoshumeisaiEditor {
         source.iryokikanName = item.get医療機関名();
         source.ishiName = item.get医師名();
         source.printTimeStamp = printTimeStampSb;
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.shujiiCode = item.get主治医コード();
+        source.listIkenshosakuseiryo_1 = item.get明細番号();
+        source.listIkenshosakuseiryo_2 = item.get被保険者番号();
+        source.listIkenshosakuseiryo_3 = item.get被保険者氏名();
+        source.listIkenshosakuseiryo_4 = item.get生年月日();
+        source.listIkenshosakuseiryo_5 = item.get意見書提出日();
+        source.listIkenshosakuseiryo_6 = item.get新規在宅();
+        source.listIkenshosakuseiryo_7 = item.get新規施設();
+        source.listIkenshosakuseiryo_8 = item.get継続在宅();
+        source.listIkenshosakuseiryo_9 = item.get継続施設();
+        source.listIkenshosakuseiryo_10 = item.get意見書作成料();
+        source.listGokeikensu_1 = item.get新規在宅件数();
+        source.listGokeikensu_2 = item.get新規施設件数();
+        source.listGokeikensu_3 = item.get継続在宅件数();
+        source.listGokeikensu_4 = item.get継続施設件数();
+        source.gokeiKingaku = item.get合計金額();
+        source.shouhiZei = item.get消費税();
+        source.gokeiSeikyuKingaku = item.get合計請求額();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
         return edit2(source);
     }
 

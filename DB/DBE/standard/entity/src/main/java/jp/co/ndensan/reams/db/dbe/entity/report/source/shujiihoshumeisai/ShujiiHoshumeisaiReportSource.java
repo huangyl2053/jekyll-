@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbe.entity.report.source.shujiihoshumeisai;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -61,13 +56,17 @@ public class ShujiiHoshumeisaiReportSource implements IReportSource {
     public RString listGokeikensu_3;
     @ReportItem(name = "listGokeikensu_4", length = 3, order = 20)
     public RString listGokeikensu_4;
-    @ReportItem(name = "listGokeiKingaku_1", length = 9, order = 21)
-    public RString listGokeiKingaku_1;
+    @ReportItem(name = "gokeiKingaku", length = 9, order = 21)
+    public RString gokeiKingaku;
+    @ReportItem(name = "shouhiZei", length = 9, order = 22)
+    public RString shouhiZei;
+    @ReportItem(name = "gokeiSeikyuKingaku", length = 9, order = 23)
+    public RString gokeiSeikyuKingaku;
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokenshaNo;
-    @ReportItem(name = "shujiiCode", length = 40, order = 22)
+    @ReportItem(name = "shujiiCode", length = 40, order = 24)
     public RString shujiiCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
