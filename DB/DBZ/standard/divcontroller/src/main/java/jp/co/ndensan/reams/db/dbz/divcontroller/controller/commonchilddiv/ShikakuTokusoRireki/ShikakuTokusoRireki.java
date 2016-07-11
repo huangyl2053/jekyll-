@@ -29,7 +29,6 @@ public class ShikakuTokusoRireki {
     public ResponseData<ShikakuTokusoRirekiDiv> initialize(ShikakuTokusoRirekiDiv div) {
 
         if (div.getMode() != null && !div.getMode().isEmpty()) {
-
             if (div.getMode().equals(照会モード_Dialog)) {
                 div.setDialogDisplay();
             } else {

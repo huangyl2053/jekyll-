@@ -77,6 +77,10 @@ public class HihokenshaShisakuPanalHandler {
         get宛名基本情報取得(識別コード);
         get資格系基本情報取得(被保番号);
         setドロップダウンリストの設定(viewState, 資格得喪情報, 識別コード);
+
+        System.out.println("sochimoto " + 資格得喪情報.getSochimotoHokensha());
+        System.out.println("shozai " + 資格得喪情報.getShozaiHokensha());
+
         if (状態_追加.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
             get住所地特例情報取得(被保番号, 識別コード, FlexibleDate.EMPTY);
@@ -95,12 +99,12 @@ public class HihokenshaShisakuPanalHandler {
     }
 
     private void get画面初期の追加更新モードの表示制御() {
-        panelDiv.getKihonJoho().setDisabled(true);
+        panelDiv.getKihonJoho().setDisabled(false);
         panelDiv.getShikakuShosai().setDisabled(false);
     }
 
     private void get画面初期の削除照会モードの表示制御() {
-        panelDiv.getKihonJoho().setDisabled(true);
+        panelDiv.getKihonJoho().setDisabled(false);
         panelDiv.getShikakuShosai().setDisabled(true);
     }
 
@@ -199,6 +203,10 @@ public class HihokenshaShisakuPanalHandler {
         ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();
+
+            System.out.println("donyukeitai " + 導入形態コード.toString());
+            System.out.println("shozai " + 所在保険者.toString());
+            System.out.println("sochimoto " + 措置元保険者.toString());
 
             List<Shichoson> 旧保険者情報 = 旧保険者取得(
                     RString.isNullOrEmpty(所在保険者) ? LasdecCode.EMPTY : new LasdecCode(所在保険者),
@@ -456,11 +464,4 @@ public class HihokenshaShisakuPanalHandler {
         return shikakuRirekiJoho;
     }
 
-    public void displaySuspendButton(RString state) {
-        if (state.equals(new RString("照会"))) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(CommonButtonHolder.SuspendButtonFieldName, true);
-        } else {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(CommonButtonHolder.SuspendButtonFieldName, false);
-        }
-    }
 }
