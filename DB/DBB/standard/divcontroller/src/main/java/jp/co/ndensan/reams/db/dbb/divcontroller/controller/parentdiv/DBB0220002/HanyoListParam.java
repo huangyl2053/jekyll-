@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class HanyoListParam {
 
     /**
-     * onLoad
+     * 初期化イベント。
      *
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamDiv>
@@ -31,13 +31,13 @@ public class HanyoListParam {
     }
 
     /**
-     * onClickRunButton
+     * 実行ボタンイベント。
      *
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamBatchParameter>
      */
-    public ResponseData<HanyoListParamBatchParameter> onClickRunButton(HanyoListParamDiv div) {
-        HanyoListParamBatchParameter parameter = getHandler(div).onClick実行ボタン();
+    public ResponseData<HanyoListParamBatchParameter> onClick_btnExecute(HanyoListParamDiv div) {
+        HanyoListParamBatchParameter parameter = getHandler(div).onClick_btnExecute();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAction();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(parameter).addValidationMessages(validPairs).respond();

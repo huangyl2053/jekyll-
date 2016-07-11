@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistparam.HanyoListParamBatchParameter;
@@ -68,7 +66,7 @@ public class HanyoListParamHandler {
     }
 
     /**
-     * onLoad
+     * 初期化イベント。
      */
     public void onLoad() {
         set初期項目状態();
@@ -76,11 +74,11 @@ public class HanyoListParamHandler {
     }
 
     /**
-     * onClick実行ボタン
+     * 実行ボタンイベント。
      *
      * @return HanyoListParamBatchParameter
      */
-    public HanyoListParamBatchParameter onClick実行ボタン() {
+    public HanyoListParamBatchParameter onClick_btnExecute() {
         HanyoListParamBatchParameter parameter = new HanyoListParamBatchParameter();
         if (div.getCcdShutsuryokujun() != null) {
             ReportId 帳票ID = div.getCcdShutsuryokujun().get帳票ID();
@@ -192,13 +190,13 @@ public class HanyoListParamHandler {
             宛名抽出条件.setAgeSelectKijun(年齢層抽出方法);
             Decimal 年齢開始 = div.getChushutsuPanel2().getCcdAtenaJoken().get年齢開始();
             Decimal 年齢終了 = div.getChushutsuPanel2().getCcdAtenaJoken().get年齢終了();
-            Range<Decimal> 年齢範囲 = new Range<Decimal>(年齢開始, 年齢終了);
+            Range<Decimal> 年齢範囲 = new Range<>(年齢開始, 年齢終了);
             宛名抽出条件.setNenreiRange(年齢範囲);
             RDate 年齢基準日 = div.getChushutsuPanel2().getCcdAtenaJoken().get年齢基準日();
             宛名抽出条件.setNenreiKijunbi(年齢基準日);
             RDate 生年月日開始 = div.getChushutsuPanel2().getCcdAtenaJoken().get生年月日開始();
             RDate 生年月日終了 = div.getChushutsuPanel2().getCcdAtenaJoken().get生年月日終了();
-            Range<RDate> 生年月日範囲 = new Range<RDate>(生年月日開始, 生年月日終了);
+            Range<RDate> 生年月日範囲 = new Range<>(生年月日開始, 生年月日終了);
             宛名抽出条件.setSeinengappiRange(生年月日範囲);
             LasdecCode 市町村コード = div.getChushutsuPanel2().getCcdAtenaJoken().get保険者().get市町村コード();
             宛名抽出条件.setShichoson_Code(市町村コード);
@@ -290,26 +288,13 @@ public class HanyoListParamHandler {
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         int start = Integer.parseInt(定数.toString());
         int end = Integer.parseInt(日付関連調定年度.toString());
-        for (int i = start; i <= end; i++) {
+        for (int i = end; i >= start; i--) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
             FlexibleYear flexibleYear = new FlexibleYear(new RString(i));
             keyValue.setKey(new RString(i));
             keyValue.setValue(flexibleYear.wareki().toDateString());
             dataSource.add(keyValue);
         }
-        Collections.sort(dataSource, new Comparator<KeyValueDataSource>() {
-            @Override
-            public int compare(KeyValueDataSource o1, KeyValueDataSource o2) {
-                int num = o1.getValue().compareTo(o2.getValue());
-                if (num > INDEX_ZERO) {
-                    return -1;
-                } else if (num < INDEX_ZERO) {
-                    return 1;
-                }
-                return num;
-            }
-        }
-        );
         div.getFukaNendo().getDdlFukaNendo().setDataSource(dataSource);
     }
 }
