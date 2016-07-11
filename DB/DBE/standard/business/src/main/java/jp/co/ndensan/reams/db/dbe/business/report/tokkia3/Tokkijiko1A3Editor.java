@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia3;
+package jp.co.ndensan.reams.db.dbe.business.report.tokkia3;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkia3.TokkiText1A3Entity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia3.TokkiText1A3ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
