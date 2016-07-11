@@ -25,14 +25,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -318,13 +317,17 @@ public class HihokenshaShisakuPanalHandler {
      * @return 広域保険者または単一保険者
      */
     public List<Shichoson> 旧保険者取得(LasdecCode 市町村コード, RString 導入形態コード, LasdecCode 広住特措置元市町村コード) {
-        if (市町村コード == null || 市町村コード.isEmpty() || RString.isNullOrEmpty(導入形態コード)) {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
+        if (RString.isNullOrEmpty(導入形態コード)) {
+            return new ArrayList<>();
+        }
+
+        if (市町村コード != null || !市町村コード.isEmpty()) {
+            return HihousyosaiFinder.createInstance().getGappeiShichosonList(市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
         }
         if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
             return HihousyosaiFinder.createInstance().getGappeiShichosonList(広住特措置元市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
         }
-        return HihousyosaiFinder.createInstance().getGappeiShichosonList(市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
+        return new ArrayList<>();
     }
 
     private void get宛名基本情報取得(ShikibetsuCode 識別コード) {
@@ -383,8 +386,15 @@ public class HihokenshaShisakuPanalHandler {
             panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuSochimotoHokensha().setSelectedKey(
                     措置元保険者.isEmpty() ? RString.EMPTY : 措置元保険者);
             RString 旧保険者 = 資格得喪情報.getKyuHokensha();
-            panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
-                    旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
+
+            DropDownList shutokuKeyHokensha = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
+            if (shutokuKeyHokensha.getDataSource().isEmpty()
+                    || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine() == true)) {
+                panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setDisabled(true);
+            } else {
+                panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
+                        旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
+            }
             RString 処理日時 = 資格得喪情報.getShoriDateTime();
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate().setValue(rStringToFlexibleDate(処理日時));
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuShoriDate().setValue(rStringToFlexibleDate(処理日時));

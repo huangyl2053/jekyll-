@@ -100,8 +100,12 @@ public class ShikakuHenkoRirekiHandler {
             div.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
         div.getDgHenko().setDataSource(get資格変更履歴(被保険者番号, 識別コード, 取得日));
-        div.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setDataSource(get措置元保険者DDL());
-        div.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setDataSource(get旧保険者リスト情報());
+        if (!is単一) {
+            div.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setDataSource(get措置元保険者DDL());
+        }
+        if (is合併有り) {
+            div.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setDataSource(get旧保険者リスト情報());
+        }
         div.getDdlHenkoJiyu().setDataSource(get変更事由リスト情報());
         div.getHenkoHokenshaJoho().getDdlJuminJoho().setDataSource(get住民情報DDL(識別コード));
         if (ShikakuHenkoRirekiDiv.DisplayType.shokai.equals(div.getMode_DisplayType())) {
