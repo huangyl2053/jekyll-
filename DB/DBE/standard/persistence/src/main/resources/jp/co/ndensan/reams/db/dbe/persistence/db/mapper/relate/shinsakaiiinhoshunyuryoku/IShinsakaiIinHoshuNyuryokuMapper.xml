@@ -6,7 +6,7 @@
     <resultMap id="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuEntity" autoMapping="true">
     </resultMap>
     <select resultOrdered="true" id="getShinsakaiIin"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
             resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" 
             fetchSize="500">
     SELECT
@@ -41,7 +41,7 @@
     </select>
     
 <select resultOrdered="true" id="getdgShinsakaiJisseki" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity"
-parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
+parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
         fetchSize="500">
     SELECT
         T1."gogitaiNo" AS "gogitaiNo",
@@ -93,17 +93,17 @@ parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinh
     </select>
     
     <select  resultOrdered="true" id="getShinsaHoshugaku" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" 
-    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
+    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
               fetchSize="500">
     SELECT 
-        rgdb."DbT5034ShinsakaiIinBetsuTanka"."tanka" AS "tanka"
+        rgdb."DbT5033ShinsakaiIinHoshuTanka"."tanka" AS "tanka"
     FROM
-        rgdb."DbT5034ShinsakaiIinBetsuTanka"
+        rgdb."DbT5033ShinsakaiIinHoshuTanka"
     WHERE
-        rgdb."DbT5034ShinsakaiIinBetsuTanka"."ShinsakaiIinCode" = #{コード}
+        rgdb."DbT5033ShinsakaiIinHoshuTanka"."kaigoNinteiShinsaIinShubetsu" = #{コード}
     AND
-        rgdb."DbT5034ShinsakaiIinBetsuTanka"."kaishiYM" <![CDATA[<=]]> #{実施日}
+        rgdb."DbT5033ShinsakaiIinHoshuTanka"."kaishiYM" <![CDATA[<=]]> #{実施日}
     AND
-        #{実施日} <![CDATA[<=]]> rgdb."DbT5034ShinsakaiIinBetsuTanka"."shuryoYM"
+        #{実施日} <![CDATA[<=]]> rgdb."DbT5033ShinsakaiIinHoshuTanka"."shuryoYM"
     </select>
 </mapper>
