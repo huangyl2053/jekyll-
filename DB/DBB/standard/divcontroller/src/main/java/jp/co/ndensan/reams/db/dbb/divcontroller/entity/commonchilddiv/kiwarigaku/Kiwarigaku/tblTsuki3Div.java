@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblTsuki3Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -67,7 +67,7 @@ public class tblTsuki3Div extends TablePanel {
  * @author 自動生成
  */
 class celTsuki14AttblTsuki3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki14")
     private Label lblTsuki14;
 
