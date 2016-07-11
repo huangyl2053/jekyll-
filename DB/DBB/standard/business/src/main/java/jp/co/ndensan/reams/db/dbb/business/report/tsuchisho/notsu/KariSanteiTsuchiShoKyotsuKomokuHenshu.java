@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuild
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
@@ -195,22 +196,46 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private HyojiCodes get表示コード(KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
-
+        IKojin 宛名 = 仮算定通知書情報.get賦課の情報_更正後().get宛名();
+        RString 町域コード = RString.EMPTY;
+        RString 行政区コード = RString.EMPTY;
+        RString 地区コード１ = RString.EMPTY;
+        RString 地区コード２ = RString.EMPTY;
+        RString 地区コード３ = RString.EMPTY;
+        RString 納組コード = RString.EMPTY;
+        if (宛名.get住所() != null && 宛名.get住所().get町域コード() != null) {
+            町域コード = 宛名.get住所().get町域コード().value();
+        }
+        if (宛名.get行政区画() != null) {
+            if (宛名.get行政区画().getGyoseiku() != null) {
+                行政区コード = 宛名.get行政区画().getGyoseiku().getコード().value();
+            }
+            if (宛名.get行政区画().getChiku1() != null) {
+                地区コード１ = 宛名.get行政区画().getChiku1().getコード().value();
+            }
+            if (宛名.get行政区画().getChiku2() != null) {
+                地区コード２ = 宛名.get行政区画().getChiku2().getコード().value();
+            }
+            if (宛名.get行政区画().getChiku3() != null) {
+                地区コード３ = 宛名.get行政区画().getChiku3().getコード().value();
+            }
+        }
+        if (仮算定通知書情報.get納組情報() != null && 仮算定通知書情報.get納組情報().getNokumi() != null) {
+            納組コード = 仮算定通知書情報.get納組情報().getNokumi().getNokumiCode();
+        }
         return new HyojiCodeResearcher().create表示コード情報(仮算定通知書情報.get帳票制御共通().toEntity(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get住所().get町域コード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getGyoseiku().getコード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku1().getコード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku2().getコード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku3().getコード().value(),
-                仮算定通知書情報.get納組情報().getNokumi().getNokumiCode());
+                町域コード, 行政区コード, 地区コード１, 地区コード２, 地区コード３, 納組コード);
     }
 
     private EditedKariSanteiTsuchiShoKyotsuBeforeCorrection get更正前(
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             Decimal 更正前普徴期別金額合計,
             Decimal 更正前特徴期別金額合計) {
-        FukaJoho 賦課情報_更正前 = 仮算定通知書情報.get賦課の情報_更正前().get賦課情報();
         EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前 = new EditedKariSanteiTsuchiShoKyotsuBeforeCorrection();
+        if (仮算定通知書情報.get賦課の情報_更正前() == null) {
+            return 更正前;
+        }
+        FukaJoho 賦課情報_更正前 = 仮算定通知書情報.get賦課の情報_更正前().get賦課情報();
         更正前.set更正前介護保険料仮徴収額合計(更正前特徴期別金額合計.add(更正前普徴期別金額合計));
         if (賦課情報_更正前 == null) {
             更正前.set更正前介護保険料減免額(Decimal.ZERO);
