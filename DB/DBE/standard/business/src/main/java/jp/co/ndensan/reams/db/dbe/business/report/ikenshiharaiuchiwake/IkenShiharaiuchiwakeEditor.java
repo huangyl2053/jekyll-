@@ -61,6 +61,11 @@ public class IkenShiharaiuchiwakeEditor implements IIkenShiharaiuchiwakeEditor {
         source.meiginin = item.get口座名義人();
         source.shubetsu = item.get口座種別();
         source.bango = item.get口座番号();
+        source.listShiharaiuchiwake_1 = item.get明細番号();
+        source.listShiharaiuchiwake_2 = item.get被保険者番号();
+        source.listShiharaiuchiwake_3 = item.get被保険者氏名();
+        source.listShiharaiuchiwake_4 = item.get内訳住所();
+        source.listShiharaiuchiwake_5 = item.get金額();
         source.tsuchibun2 = item.get通知文2();
         source.iryokikanCode = item.get医療機関コード();
         source.shikibetuCode = ShikibetsuCode.EMPTY;

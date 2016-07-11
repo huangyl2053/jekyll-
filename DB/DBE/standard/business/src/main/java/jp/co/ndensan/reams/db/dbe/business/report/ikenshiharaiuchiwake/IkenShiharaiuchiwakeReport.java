@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshiharaiuchiwake;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshiharaiuchiwake.IkenShiharaiuchiwakeBodyEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshiharaiuchiwake.IkenShiharaiuchiwakeEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshiharaiuchiwake.IkenShiharaiuchiwakeReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -33,23 +30,9 @@ public class IkenShiharaiuchiwakeReport extends Report<IkenShiharaiuchiwakeRepor
 
     @Override
     public void writeBy(ReportSourceWriter<IkenShiharaiuchiwakeReportSource> reportSourceWriter) {
-        for (IkenShiharaiuchiwakeBodyEntity bodyData : getBodyData(data)) {
-            IIkenShiharaiuchiwakeEditor editor = new IkenShiharaiuchiwakeEditor(data);
-            IIkenShiharaiuchiwakeBodyEditor bodyEditor = new IkenShiharaiuchiwakeBodyEditor(bodyData);
-            IIkenShiharaiuchiwakeBuilder builder = new IkenShiharaiuchiwakeBuilder(editor, bodyEditor);
-            reportSourceWriter.writeLine(builder);
-        }
-    }
-
-    private List<IkenShiharaiuchiwakeBodyEntity> getBodyData(IkenShiharaiuchiwakeEntity data) {
-        List<IkenShiharaiuchiwakeBodyEntity> dataList = new ArrayList<>();
-        dataList.add(new IkenShiharaiuchiwakeBodyEntity(
-                data.get明細番号(),
-                data.get被保険者番号(),
-                data.get被保険者氏名(),
-                data.get内訳住所(),
-                data.get金額()));
-        return dataList;
+        IIkenShiharaiuchiwakeEditor editor = new IkenShiharaiuchiwakeEditor(data);
+        IIkenShiharaiuchiwakeBuilder builder = new IkenShiharaiuchiwakeBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 
 }
