@@ -62,4 +62,9 @@ public interface IShikakuTokusoRirekiDiv extends ICommonChildDivBaseProperties {
      */
     public abstract void set追加するボタンの表示状態(boolean 表示モード);
 
+    /**
+     * ダイアログとして共有子Divを開いた場合のコントロール表示非表示を設定します。
+     *
+     */
+    void setDialogDisplay();
 }

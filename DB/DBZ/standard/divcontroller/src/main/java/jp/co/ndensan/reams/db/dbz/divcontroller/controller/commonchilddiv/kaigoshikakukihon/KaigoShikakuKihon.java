@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KaigoShikakuKihon {
 
-    private static final RString 照会モード = new RString("shokai");
+    private static final RString 照会モード = new RString("shokai_Dialog");
 
     /**
      * 連絡先DBZ.ShikakuTokusoRirekiを照会モードで呼び出す

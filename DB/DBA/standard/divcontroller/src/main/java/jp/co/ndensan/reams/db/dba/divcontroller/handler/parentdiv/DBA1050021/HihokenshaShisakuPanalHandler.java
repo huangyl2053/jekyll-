@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -128,11 +129,11 @@ public class HihokenshaShisakuPanalHandler {
         List<KeyValueDataSource> 被保区分リスト = new ArrayList<>();
         KeyValueDataSource dateSource = new KeyValueDataSource();
         dateSource.setKey(ShikakuKubun._１号.getコード());
-        dateSource.setValue(ShikakuKubun._１号.get名称());
+        dateSource.setValue(ShikakuKubun._１号.get略称());
         被保区分リスト.add(dateSource);
         KeyValueDataSource dateSource1 = new KeyValueDataSource();
         dateSource1.setKey(ShikakuKubun._２号.getコード());
-        dateSource1.setValue(ShikakuKubun._２号.get名称());
+        dateSource1.setValue(ShikakuKubun._２号.get略称());
         被保区分リスト.add(dateSource1);
         panelDiv.getShikakuShosai().getDdlHihoKubun().setDataSource(被保区分リスト);
     }
@@ -198,6 +199,7 @@ public class HihokenshaShisakuPanalHandler {
         ShichosonSecurityJoho 介護導入形態 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();
+
             List<Shichoson> 旧保険者情報 = 旧保険者取得(
                     RString.isNullOrEmpty(所在保険者) ? LasdecCode.EMPTY : new LasdecCode(所在保険者),
                     導入形態コード.getCode(),
@@ -321,10 +323,10 @@ public class HihokenshaShisakuPanalHandler {
             return new ArrayList<>();
         }
 
-        if (市町村コード != null || !市町村コード.isEmpty()) {
+        if (!市町村コード.isEmpty()) {
             return HihousyosaiFinder.createInstance().getGappeiShichosonList(市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
         }
-        if (広住特措置元市町村コード != null && !広住特措置元市町村コード.isEmpty()) {
+        if (!広住特措置元市町村コード.isEmpty()) {
             return HihousyosaiFinder.createInstance().getGappeiShichosonList(広住特措置元市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
         }
         return new ArrayList<>();
@@ -453,4 +455,5 @@ public class HihokenshaShisakuPanalHandler {
         shikakuRirekiJoho.setKyuHokensha(旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
         return shikakuRirekiJoho;
     }
+
 }

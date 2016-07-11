@@ -18,6 +18,7 @@ var DBZ;
                 return [
                     "DisplayType",
                     "BtnDisplayMode",
+                    "DialogCloseBtnDisplayMode",
                     "HokenshaJohoDisplayMode",
                     "DataGridWidth",
                     "DataGridHeight"
@@ -29,6 +30,10 @@ var DBZ;
             };
 
             ModeController.prototype.BtnDisplayMode = function () {
+                return new Modes.BtnDisplayMode(this.controls);
+            };
+
+            ModeController.prototype.DialogCloseBtnDisplayMode = function () {
                 return new Modes.BtnDisplayMode(this.controls);
             };
 
@@ -139,6 +144,21 @@ var DBZ;
                 return BtnDisplayMode;
             })();
             Modes.BtnDisplayMode = BtnDisplayMode;
+
+            var DialogCloseBtnDisplayMode = (function () {
+                function DialogCloseBtnDisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DialogCloseBtnDisplayMode.prototype.SetDisplay = function () {
+                    this.controls.btnClose().displayNone = false;
+                };
+
+                DialogCloseBtnDisplayMode.prototype.SetDisplayNone = function () {
+                    this.controls.btnClose().displayNone = true;
+                };
+                return DialogCloseBtnDisplayMode;
+            })();
+            Modes.DialogCloseBtnDisplayMode = DialogCloseBtnDisplayMode;
 
             var HokenshaJohoDisplayMode = (function () {
                 function HokenshaJohoDisplayMode(controls) {

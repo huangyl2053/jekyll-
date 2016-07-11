@@ -30,6 +30,7 @@ module DBZ
                 return [
                     "DisplayType",
                     "BtnDisplayMode",
+                    "DialogCloseBtnDisplayMode",
                     "HokenshaJohoDisplayMode",
                     "DataGridWidth",
                     "DataGridHeight"
@@ -41,6 +42,10 @@ module DBZ
                 }
 
                 public BtnDisplayMode() {
+                    return new Modes.BtnDisplayMode(this.controls);
+                }
+
+                public DialogCloseBtnDisplayMode() {
                     return new Modes.BtnDisplayMode(this.controls);
                 }
 
@@ -154,6 +159,23 @@ module DBZ
 
                     public SetDisplayNone(): void {
                         this.controls.btnAddShikakuShutoku().displayNone = true;
+                    }
+                }
+
+                export class DialogCloseBtnDisplayMode {
+                    private controls: Controls;
+
+                    constructor(controls: Controls) {
+                        this.controls = controls;
+                    }
+
+                    public SetDisplay(): void {
+                        this.controls.btnClose().displayNone = false;
+
+                    }
+
+                    public SetDisplayNone(): void {
+                        this.controls.btnClose().displayNone = true;
                     }
                 }
 
