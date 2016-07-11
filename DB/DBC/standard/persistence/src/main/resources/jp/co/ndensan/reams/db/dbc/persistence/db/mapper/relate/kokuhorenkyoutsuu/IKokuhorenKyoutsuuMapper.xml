@@ -235,7 +235,7 @@
         set
         "henkanHihokenshaNo" = "orgHihokenshaNo",
         "hihokenshaNo" = "orgHihokenshaNo"
-        where "henkanHihokenshaNo" = ''
+        where "henkanHihokenshaNo" = '' OR "henkanHihokenshaNo" IS NULL
     </update>
 
     <!--被保険者一時TBLと新旧被保険者番号変換TBL並びの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->

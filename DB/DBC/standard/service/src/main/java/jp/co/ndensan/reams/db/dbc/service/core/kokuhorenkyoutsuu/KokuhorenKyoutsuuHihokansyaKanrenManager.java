@@ -115,8 +115,8 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
                 LasdecCode 旧市町村コード = gcJohoResult.records().get(0).get旧市町村コード();
                 if (!LasdecCode.EMPTY.equals(旧市町村コード) && null != 旧市町村コード) {
                     mapper.update被保険者一時TBLWith旧市町村コード(hokenshaNo, 旧市町村コード);
-                    do新被保険者番号の登録(変換基準日);
                 }
+                do新被保険者番号の登録(変換基準日);
             }
         } else {
             do変換被保険者番号の更新();
@@ -167,7 +167,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         DbWT0002KokuhorenTorikomiErrorTempEntity kekka = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         kekka.setエラー区分(MSG_エラー区分10);
         kekka.set証記載保険者番号(entity.get証記載保険者番号());
-        kekka.set被保険者番号(entity.get被保険者番号());
+        kekka.set被保険者番号(entity.get登録被保険者番号());
         kekka.setキー1(RString.EMPTY);
         kekka.setキー2(RString.EMPTY);
         kekka.setキー3(RString.EMPTY);
@@ -183,7 +183,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         DbWT0002KokuhorenTorikomiErrorTempEntity kekka = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         kekka.setエラー区分(MSG_エラー区分20);
         kekka.set証記載保険者番号(hihokensha.get証記載保険者番号());
-        kekka.set被保険者番号(hihokensha.get被保険者番号());
+        kekka.set被保険者番号(hihokensha.get登録被保険者番号());
         kekka.setキー1(RString.EMPTY);
         kekka.setキー2(RString.EMPTY);
         kekka.setキー3(RString.EMPTY);
@@ -199,7 +199,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         DbWT0002KokuhorenTorikomiErrorTempEntity kekka = new DbWT0002KokuhorenTorikomiErrorTempEntity();
         kekka.setエラー区分(MSG_エラー区分30);
         kekka.set証記載保険者番号(hihokensha.get証記載保険者番号());
-        kekka.set被保険者番号(hihokensha.get被保険者番号());
+        kekka.set被保険者番号(hihokensha.get登録被保険者番号());
         kekka.setキー1(RString.EMPTY);
         kekka.setキー2(RString.EMPTY);
         kekka.setキー3(RString.EMPTY);
