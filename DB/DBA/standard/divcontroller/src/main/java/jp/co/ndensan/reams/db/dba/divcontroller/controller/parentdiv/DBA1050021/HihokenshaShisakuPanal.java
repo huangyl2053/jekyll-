@@ -74,6 +74,8 @@ public class HihokenshaShisakuPanal {
         HihokenshaNo 被保番号 = 対象者キー.get被保険者番号();
         ShikibetsuCode 識別コード = 対象者キー.get識別コード();
 
+        getHandler(div).displaySuspendButton(初期_状態);
+
         ShikakuRirekiJoho 資格得喪情報
                 = ViewStateHolder.get(ViewStateKeys.資格得喪情報, ShikakuRirekiJoho.class);
         if (状態_追加.equals(初期_状態)) {

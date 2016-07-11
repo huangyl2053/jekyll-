@@ -456,4 +456,11 @@ public class HihokenshaShisakuPanalHandler {
         return shikakuRirekiJoho;
     }
 
+    public void displaySuspendButton(RString state) {
+        if (state.equals(new RString("照会"))) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(CommonButtonHolder.SuspendButtonFieldName, true);
+        } else {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(CommonButtonHolder.SuspendButtonFieldName, false);
+        }
+    }
 }
