@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShinseiList;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -21,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KogakuShinseiListDivValidationHandler {
 
     private final KogakuShinseiListDiv div;
-    private static final RString サービス年月From = new RString("サービス年月From");
-    private static final RString サービス年月To = new RString("サービス年月To");
 
     /**
      * コンストラクタです。
@@ -50,7 +47,8 @@ public class KogakuShinseiListDivValidationHandler {
             validPairs.add(new ValidationMessageControlPair(
                     new KogakuShinseiListDivValidationHandler.IdocheckMessages(
                             UrErrorMessages.期間が不正_追加メッセージあり２,
-                            サービス年月From.toString(), サービス年月To.toString())));
+                            div.getTxtServiceYMFrom().getDomain().toString(),
+                            div.getTxtServiceYMTo().getDomain().toString())));
         }
         return validPairs;
     }

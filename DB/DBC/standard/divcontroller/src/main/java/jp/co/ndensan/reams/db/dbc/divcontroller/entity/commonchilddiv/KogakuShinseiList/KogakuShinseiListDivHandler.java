@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuShi
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouEntityResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -146,11 +147,12 @@ public class KogakuShinseiListDivHandler {
         if (div.getTxtServiceYMTo().getDomain() != null) {
             サービス年月To = new FlexibleYearMonth(div.getTxtServiceYMTo().getDomain().toString());
         }
-        if (高額サービス費支給申請書登録.equals(メニューID) || 総合事業高額サービス費支給申請書登録.equals(メニューID)) {
+        if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
             List<KougakuShinseiIchiranJohyouEntityResult> kogaList = KougakuShinseiIchiranJohyou.createInstance().
                     getKogakuKyuufuTaishouList(被保険者番号, サービス年月From, サービス年月To);
             set高額申請一覧情報(kogaList, 受託区分);
-        } else if (高額介護サービス費照会.equals(メニューID) || 総合事業高額介護サービス費照会.equals(メニューID)) {
+        } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)
+                || 総合事業高額介護サービス費照会.equals(メニューID)) {
             List<KougakuShinseiIchiranJohyouEntityResult> jishList = KougakuShinseiIchiranJohyou.createInstance().
                     getJigyouKougakuShinseiIchiranJohyou(被保険者番号, サービス年月From, サービス年月To);
             set高額申請一覧情報(jishList, 受託区分);
@@ -165,8 +167,8 @@ public class KogakuShinseiListDivHandler {
      */
     public void set高額申請一覧情報(List<KougakuShinseiIchiranJohyouEntityResult> kogaList, RString 受託区分) {
         List<dgShinseiJoho_Row> rowList = new ArrayList<>();
-        dgShinseiJoho_Row row = new dgShinseiJoho_Row();
         for (KougakuShinseiIchiranJohyouEntityResult koga : kogaList) {
+            dgShinseiJoho_Row row = new dgShinseiJoho_Row();
             if (koga.getEntity().getサービス年月() != null) {
                 row.setData1(koga.getEntity().getサービス年月().wareki().toDateString());
             }
@@ -176,7 +178,9 @@ public class KogakuShinseiListDivHandler {
             row.getData5().setValue(koga.getEntity().get支払済額合計());
             row.getData6().setValue(koga.getEntity().get高額支給額());
             row.getData7().setValue(koga.getEntity().get決定支給額());
-            row.setData8(koga.getEntity().get支給区分());
+            if (koga.getEntity().get支給区分() != null && !koga.getEntity().get支給区分().isEmpty()) {
+                row.setData8(ShikyuFushikyuKubun.toValue(koga.getEntity().get支給区分()).get名称());
+            }
             if (受託区分.equals(TWO)) {
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(EIGHT).setVisible(true);
                 div.getDgShinseiJoho().getGridSetting().getColumns().get(NINE).setColumnName(判定送付年月);
