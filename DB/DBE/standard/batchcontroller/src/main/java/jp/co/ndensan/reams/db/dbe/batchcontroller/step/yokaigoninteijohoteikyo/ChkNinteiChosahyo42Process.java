@@ -385,7 +385,7 @@ public class ChkNinteiChosahyo42Process extends BatchProcessBase<YokaigoninteiEn
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番10)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番11)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番12)));
-        if (dbt5208Entity.get(0).getServiceJokyoFlag()) {
+        if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
             サービス区分リスト.add(new RString("1"));
         } else {
             サービス区分リスト.add(new RString("0"));
@@ -487,8 +487,8 @@ public class ChkNinteiChosahyo42Process extends BatchProcessBase<YokaigoninteiEn
         List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity = mapper.get認定調査票記入項目(processPrm.toYokaigoBatchMybitisParamter());
         if (テキスト.equals(entity.getテキスト_イメージ区分())) {
             ninteiEntity.set実施場所名称(entity.get実施場所名称());
-            ninteiEntity.set市町村特別給付(dbt5209Entity.get(0).getServiceJokyoKinyu());
-            ninteiEntity.set介護保険給付外の在宅(dbt5209Entity.get(1).getServiceJokyoKinyu());
+            ninteiEntity.set市町村特別給付(get市町村特別給付(dbt5209Entity, 0));
+            ninteiEntity.set介護保険給付外の在宅(get市町村特別給付(dbt5209Entity, 連番1));
             ninteiEntity.set施設名(entity.get施設名());
             ninteiEntity.set施設住所(entity.get施設住所());
             ninteiEntity.set施設電話(entity.get施設電話番号());
@@ -516,6 +516,13 @@ public class ChkNinteiChosahyo42Process extends BatchProcessBase<YokaigoninteiEn
         日常生活自立度リスト.add(entity.get障害高齢者自立度());
         日常生活自立度リスト.add(entity.get認知症高齢者自立度());
         ninteiEntity.set日常生活自立度リスト(日常生活自立度リスト);
+    }
+
+    private RString get市町村特別給付(List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity, int 連番) {
+        if (連番 < dbt5209Entity.size()) {
+            return dbt5209Entity.get(連番).getServiceJokyoKinyu();
+        }
+        return RString.EMPTY;
     }
 
     private void setBodyItem02(NinteiChosaJohohyoEntity ninteiEntity, YokaigoninteiEntity entity) {
