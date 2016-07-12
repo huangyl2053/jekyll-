@@ -88,7 +88,7 @@ public class KanendoFuka {
      * @param div KanendoFukaDiv
      * @return ResponseData
      */
-    public ResponseData<HonsanteiIdoKanendoBatchParameter> onImplement(KanendoFukaDiv div) {
+    public ResponseData<HonsanteiIdoKanendoBatchParameter> onClick_Reserve(KanendoFukaDiv div) {
         HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
         HonsanteiIdoKanendoBatchParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
         return ResponseData.of(para).respond();
