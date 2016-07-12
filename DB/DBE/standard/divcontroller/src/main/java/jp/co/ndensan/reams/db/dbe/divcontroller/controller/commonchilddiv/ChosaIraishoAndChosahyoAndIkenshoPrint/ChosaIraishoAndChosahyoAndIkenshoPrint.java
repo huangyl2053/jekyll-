@@ -217,7 +217,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                         = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
             }
         } else if (CONFIGVALUE2.equals(期限設定方法)) {
-            作成期限年月日 = new FlexibleDate(row.getNinteiShinseibi()).plusDay(作成期限日数);
+            作成期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).toDateString()).plusDay(作成期限日数);
         }
         shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set主治医意見書作成期限年月日(作成期限年月日);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
@@ -403,9 +403,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void call認定調査差異チェック表(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            printService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            printService.print要介護認定調査票差異チェック票_片面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            printService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            printService.print要介護認定調査票差異チェック票_両面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         }
     }
 
