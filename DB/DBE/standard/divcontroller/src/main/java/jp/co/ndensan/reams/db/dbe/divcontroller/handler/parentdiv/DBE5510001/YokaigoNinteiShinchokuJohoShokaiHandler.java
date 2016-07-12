@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -245,11 +247,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
-        row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
+        row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体名())));
         row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
-                                              .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
+                .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
                 .toValue(joho.get二次判定要介護状態区分コード()).get名称());
-        row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
+        row.setHihokenshaYubinNo(new YubinNo(nullToEmpty(joho.get郵便番号())).getEditedYubinNo());
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
         if (joho.get生年月日() == null || joho.get生年月日().isEmpty()) {
