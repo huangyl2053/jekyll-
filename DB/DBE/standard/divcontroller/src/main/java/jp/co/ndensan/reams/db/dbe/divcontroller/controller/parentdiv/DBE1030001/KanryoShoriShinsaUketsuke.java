@@ -75,6 +75,12 @@ public class KanryoShoriShinsaUketsuke {
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             throw new PessimisticLockingException();
         }
+        List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getCcdNinteiTaskList().getDataSource();
+        for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
+            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                    new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+            AccessLogger.log(AccessLogType.照会, personalData);
+        }
         return ResponseData.of(div).setState(DBE1030001StateName.登録);
     }
 
