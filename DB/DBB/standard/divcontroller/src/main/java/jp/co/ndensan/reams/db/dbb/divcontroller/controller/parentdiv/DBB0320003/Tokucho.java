@@ -279,9 +279,9 @@ public class Tokucho {
                 ? kaifuJoho.get通知内容コード().value().get通知内容コード().concat(kaifuJoho.get通知内容コード().value().get通知内容名称()) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT各種区分() != null
                 ? (各種区分 != null ? 各種区分.get各種区分名称() : RString.EMPTY) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄１() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄２() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄３() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄１() != null && !kaifuJoho.getDT各種金額欄１().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄２() != null && !kaifuJoho.getDT各種金額欄２().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄３() != null && !kaifuJoho.getDT各種金額欄３().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT処理結果() != null
                 ? (処理結果 != null ? 処理結果.get処理結果名称() : RString.EMPTY) : RString.EMPTY);
     }

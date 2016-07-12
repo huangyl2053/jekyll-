@@ -793,16 +793,6 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKaisaiNumberStart() {
-        return this.getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberStart();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberStart(btnKaisaiNumberStart);
-    }
-
-    @JsonIgnore
     public TextBox getTxtKaisaiNumberStart() {
         return this.getKaigoNinteiShinsakaiJoho().getTxtKaisaiNumberStart();
     }
@@ -820,16 +810,6 @@ public class ShosaiJokenDiv extends Panel {
     @JsonIgnore
     public void  setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.getKaigoNinteiShinsakaiJoho().setLblKaisaiNoFor(lblKaisaiNoFor);
-    }
-
-    @JsonIgnore
-    public Button getBtnKaisaiNumberEnd() {
-        return this.getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberEnd();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberEnd(btnKaisaiNumberEnd);
     }
 
     @JsonIgnore
