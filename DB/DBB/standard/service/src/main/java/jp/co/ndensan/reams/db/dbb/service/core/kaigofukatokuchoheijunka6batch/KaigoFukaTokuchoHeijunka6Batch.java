@@ -14,17 +14,17 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.report.karinonyutsuchishohakkoichiran.KariNonyuTsuchishoHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.FuchJohoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TaishoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TmpHeijunkaKeisanKekaTempEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFuchJohoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.FukaJohoResult;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishoshaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFukaJohoResult;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
@@ -175,7 +175,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
      * @param 賦課年度 FlexibleYear
      */
     public void getMaeFukaJohoList(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
-        FuchJohoParameter parameter = FuchJohoParameter.createParam(調定年度, 賦課年度);
+        TokuchoHeijunkaRokuBatchFuchJohoParameter parameter = TokuchoHeijunkaRokuBatchFuchJohoParameter.createParam(調定年度, 賦課年度);
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
         mapper.insert平準化前賦課Temp(parameter);
     }
@@ -217,8 +217,8 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             for (int i = 仮算定期間_最小期; i < 仮算定期間_最大期; i++) {
                 普徴期別金額合計 = 普徴期別金額合計.add(普徴期別金額取得(i, fukaJoho));
             }
-            TaishogaiTempEntity 対象外データTempEntity = null;
-            TaishogaiTempEntity 対象者データTempEntity = null;
+            TokuchoHeijunkaRokuBatchTaishogaiTempEntity 対象外データTempEntity = null;
+            TokuchoHeijunkaRokuBatchTaishogaiTempEntity 対象者データTempEntity = null;
             if (Decimal.ZERO.compareTo(特徴期別金額合計) < 0 && Decimal.ZERO.compareTo(普徴期別金額合計) < 0) {
                 備考コード = 備考コード_併徴者;
             } else if (Decimal.ZERO.equals(普徴期別金額合計) && Decimal.ZERO.equals(特徴期別金額01)) {
@@ -227,10 +227,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 備考コード = 備考コード_仮徴収額修正者;
             }
             if (!備考コード.isEmpty()) {
-                対象外データTempEntity = new TaishogaiTempEntity(賦課情報, 備考コード);
+                対象外データTempEntity = new TokuchoHeijunkaRokuBatchTaishogaiTempEntity(賦課情報, 備考コード);
                 mapper.insert対象外データTemp(対象外データTempEntity);
             } else {
-                対象者データTempEntity = new TaishogaiTempEntity(賦課情報, RString.EMPTY);
+                対象者データTempEntity = new TokuchoHeijunkaRokuBatchTaishogaiTempEntity(賦課情報, RString.EMPTY);
                 mapper.insert対象者データTemp(対象者データTempEntity);
             }
         }
@@ -252,11 +252,11 @@ public class KaigoFukaTokuchoHeijunka6Batch {
      */
     public void editAtoFukaJohoList(FlexibleYear 賦課年度, RDateTime 調定日時, RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
-        List<TaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
+        List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
         mapper.create平準化計算結果Temp();
-        for (TaishogaiTempEntity entity : taishoshaTempEntityList) {
+        for (TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity : taishoshaTempEntityList) {
             if (true) {
-                TmpHeijunkaKeisanKekaTempEntity tmpEntity = new TmpHeijunkaKeisanKekaTempEntity(
+                TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity tmpEntity = new TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity(
                         Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, entity.getDbT2002Fuka_tsuchishoNo());
                 mapper.insert平準化計算結果Temp(tmpEntity);
             } else {
@@ -275,10 +275,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
      */
     public void insertKaigoFukaTbl(FlexibleYear 調定年度, FlexibleYear 賦課年度, YMDHMS 調定日時) {
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
-        List<FukaJohoResult> 賦課の情報 = mapper.get賦課の情報();
-        for (FukaJohoResult 賦課情報 : 賦課の情報) {
+        List<TokuchoHeijunkaRokuBatchFukaJohoResult> 賦課の情報 = mapper.get賦課の情報();
+        for (TokuchoHeijunkaRokuBatchFukaJohoResult 賦課情報 : 賦課の情報) {
             FukaJoho fukaJoho = new FukaJoho(賦課情報.get賦課の情報());
-            TmpHeijunkaKeisanKekaTempEntity 平準化計算結果 = 賦課情報.get平準化計算結果();
+            TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果 = 賦課情報.get平準化計算結果();
             FukaJohoBuilder builder = fukaJoho.createBuilderForEdit();
             特徴期別金額設定(fukaJoho, 平準化計算結果, builder);
             fukaJoho = builder.set履歴番号(fukaJoho.get履歴番号() + 1).set調定日時(調定日時).set異動基準日時(調定日時).set調定事由1(調定事由_平準化による変更6月).
@@ -303,22 +303,22 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(KariNonyuTsuchishoHakkoIchiranProperty.DBB100014NonyuTsuchishoEnum.class, outputOrder);
         }
-        TaishoParameter parameter = new TaishoParameter(調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 出力順);
-        List<TaishoshaEntity> 対象者データリスト = mapper.get対象者データ(parameter);
+        TokuchoHeijunkaRokuBatchTaishoParameter parameter = new TokuchoHeijunkaRokuBatchTaishoParameter(調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 出力順);
+        List<TokuchoHeijunkaRokuBatchTaishoshaEntity> 対象者データリスト = mapper.get対象者データ(parameter);
         List<TokuchoHeijyunkaTaishoshaEntity> 特徴平準化結果対象者一覧表リスト = new ArrayList<>();
         if (対象者データリスト != null && !対象者データリスト.isEmpty()) {
             for (int i = 0; i < 対象者データリスト.size(); i++) {
                 int nextIdx = i + 1;
-                TaishoshaEntity 対象者データ1 = 対象者データリスト.get(i);
+                TokuchoHeijunkaRokuBatchTaishoshaEntity 対象者データ1 = 対象者データリスト.get(i);
                 DbT2015KeisangoJohoEntity 計算後情報1 = 対象者データ1.get計算後情報();
                 if (計算後情報1 != null) {
                     特徴平準化計算対象者リスト作成(計算後情報1, 対象者データ1, 対象者データリスト, 特徴平準化結果対象者一覧表リスト, nextIdx);
                 }
             }
         }
-        List<TaishogaiEntity> 対象外データリスト = mapper.get対象外データ(parameter);
+        List<TokuchoHeijunkaRokuBatchTaishogaiEntity> 対象外データリスト = mapper.get対象外データ(parameter);
         List<TokuchoHeijyunkaTaishogaiEntity> 特徴平準化結果対象外一覧表リスト = new ArrayList<>();
-        for (TaishogaiEntity 対象外データ : 対象外データリスト) {
+        for (TokuchoHeijunkaRokuBatchTaishogaiEntity 対象外データ : 対象外データリスト) {
             FukaJohoRelateEntity 対象外データTemp = 対象外データ.get対象外データTemp();
             if (対象外データTemp != null) {
                 特徴平準化計算対象外リスト作成(対象外データTemp, 対象外データ, 特徴平準化結果対象外一覧表リスト);
@@ -663,10 +663,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         return 今年度保険料率;
     }
 
-    private void 特徴平準化計算対象者リスト作成(DbT2015KeisangoJohoEntity 計算後情報1, TaishoshaEntity 対象者データ1,
-            List<TaishoshaEntity> 対象者データ, List<TokuchoHeijyunkaTaishoshaEntity> 特徴平準化結果対象者一覧表リスト, int nextIdx) {
+    private void 特徴平準化計算対象者リスト作成(DbT2015KeisangoJohoEntity 計算後情報1, TokuchoHeijunkaRokuBatchTaishoshaEntity 対象者データ1,
+            List<TokuchoHeijunkaRokuBatchTaishoshaEntity> 対象者データ, List<TokuchoHeijyunkaTaishoshaEntity> 特徴平準化結果対象者一覧表リスト, int nextIdx) {
         for (int j = nextIdx; j < 対象者データ.size(); j++) {
-            TaishoshaEntity 対象者データ2 = 対象者データ.get(j);
+            TokuchoHeijunkaRokuBatchTaishoshaEntity 対象者データ2 = 対象者データ.get(j);
             DbT2015KeisangoJohoEntity 計算後情報2 = 対象者データ2.get計算後情報();
             if (計算後情報2 != null && 計算後情報2.getTsuchishoNo().equals(計算後情報1.getTsuchishoNo())) {
                 対象者データ.remove(j);
@@ -678,7 +678,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         }
     }
 
-    private void 特徴平準化計算対象外リスト作成(FukaJohoRelateEntity 対象外データTemp, TaishogaiEntity 対象外データ,
+    private void 特徴平準化計算対象外リスト作成(FukaJohoRelateEntity 対象外データTemp, TokuchoHeijunkaRokuBatchTaishogaiEntity 対象外データ,
             List<TokuchoHeijyunkaTaishogaiEntity> 特徴平準化結果対象外一覧表リスト) {
         FukaJoho 賦課情報 = new FukaJoho(対象外データTemp);
         TokuchoHeijyunkaTaishogaiEntity tokuchoHeijyunkaTaishogaiEntity = new TokuchoHeijyunkaTaishogaiEntity();
@@ -759,8 +759,8 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         特徴平準化結果対象外一覧表リスト.add(tokuchoHeijyunkaTaishogaiEntity);
     }
 
-    private void 特徴平準化計算対象者entity作成(DbT2015KeisangoJohoEntity 計算後情報1, TaishoshaEntity 対象者データ1,
-            DbT2015KeisangoJohoEntity 計算後情報2, TaishoshaEntity 対象者データ2, TokuchoHeijyunkaTaishoshaEntity tokuchoHeijyunkaTaishoshaEntity) {
+    private void 特徴平準化計算対象者entity作成(DbT2015KeisangoJohoEntity 計算後情報1, TokuchoHeijunkaRokuBatchTaishoshaEntity 対象者データ1,
+            DbT2015KeisangoJohoEntity 計算後情報2, TokuchoHeijunkaRokuBatchTaishoshaEntity 対象者データ2, TokuchoHeijyunkaTaishoshaEntity tokuchoHeijyunkaTaishoshaEntity) {
         if (更正前後区分_更正前.equals(計算後情報1.getKoseiZengoKubun())) {
             変更後項目設定(tokuchoHeijyunkaTaishoshaEntity, 計算後情報2, 対象者データ2);
             tokuchoHeijyunkaTaishoshaEntity.set平準化済フラグ(true);
@@ -774,7 +774,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     }
 
     private void 変更後項目設定(TokuchoHeijyunkaTaishoshaEntity tokuchoHeijyunkaTaishoshaEntity,
-            DbT2015KeisangoJohoEntity 計算後情報, TaishoshaEntity 対象者データ) {
+            DbT2015KeisangoJohoEntity 計算後情報, TokuchoHeijunkaRokuBatchTaishoshaEntity 対象者データ) {
         tokuchoHeijyunkaTaishoshaEntity.set調定年度(計算後情報.getChoteiNendo());
         tokuchoHeijyunkaTaishoshaEntity.set賦課年度(計算後情報.getFukaNendo());
         tokuchoHeijyunkaTaishoshaEntity.set通知書番号(計算後情報.getTsuchishoNo());
@@ -911,7 +911,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         tokuchoHeijyunkaTaishoshaEntity.set変更前特徴額_６期(計算後情報.getTkKibetsuGaku06());
     }
 
-    private void 特徴期別金額設定(FukaJoho fukaJoho, TmpHeijunkaKeisanKekaTempEntity 平準化計算結果, FukaJohoBuilder builder) {
+    private void 特徴期別金額設定(FukaJoho fukaJoho, TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果, FukaJohoBuilder builder) {
         List<Kibetsu> kibetsuList = fukaJoho.getKibetsuList();
         for (Kibetsu 介護期別 : kibetsuList) {
             for (ChoteiKyotsu 調定共通情報 : 介護期別.getChoteiKyotsuList()) {
@@ -931,7 +931,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     }
 
     private void 調定共通期より調定額の設定(Kibetsu 介護期別, ChoteiKyotsuBuilder 調定共通builder,
-            TmpHeijunkaKeisanKekaTempEntity 平準化計算結果) {
+            TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果) {
         if (NUM_期1 == 介護期別.get期()) {
             調定共通builder.set調定額(平準化計算結果.get変更後特徴期別額_１期());
         } else if (NUM_期2 == 介護期別.get期()) {

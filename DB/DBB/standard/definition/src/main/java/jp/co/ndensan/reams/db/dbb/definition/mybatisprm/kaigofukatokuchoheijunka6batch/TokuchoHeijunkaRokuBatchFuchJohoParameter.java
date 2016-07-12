@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class FuchJohoParameter implements IMyBatisParameter {
+public final class TokuchoHeijunkaRokuBatchFuchJohoParameter implements IMyBatisParameter {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
@@ -27,7 +27,7 @@ public final class FuchJohoParameter implements IMyBatisParameter {
      * @param 調定年度 FlexibleYear
      * @param 賦課年度 FlexibleYear
      */
-    private FuchJohoParameter(
+    private TokuchoHeijunkaRokuBatchFuchJohoParameter(
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度) {
         this.調定年度 = 調定年度;
@@ -41,9 +41,9 @@ public final class FuchJohoParameter implements IMyBatisParameter {
      * @param 賦課年度 FlexibleYear
      * @return パラメータ
      */
-    public static FuchJohoParameter createParam(
+    public static TokuchoHeijunkaRokuBatchFuchJohoParameter createParam(
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度) {
-        return new FuchJohoParameter(調定年度, 賦課年度);
+        return new TokuchoHeijunkaRokuBatchFuchJohoParameter(調定年度, 賦課年度);
     }
 }

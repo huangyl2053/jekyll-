@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kaigofukatokuchoheijunka6batch;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.FuchJohoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TaishoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFuchJohoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.FukaJohoResult;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishoshaEntity;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TmpHeijunkaKeisanKekaTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFukaJohoResult;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity;
 
 /**
  * 特徴平準化（特徴6月分）（バッチ） のマッパーインタフェースです。
@@ -25,16 +25,16 @@ public interface IKaigoFukaTokuchoHeijunka6BatchMapper {
     /**
      * 賦課情報を取得するメソッドです。
      *
-     * @param parameter FuchJohoParameter
+     * @param parameter TokuchoHeijunkaRokuBatchFuchJohoParameter
      */
-    void insert平準化前賦課Temp(FuchJohoParameter parameter);
+    void insert平準化前賦課Temp(TokuchoHeijunkaRokuBatchFuchJohoParameter parameter);
 
     /**
      * 対象外データTempテーブルに記録を追加するメソッドです。
      *
-     * @param parameter TaishogaiTempEntity
+     * @param parameter TokuchoHeijunkaRokuBatchTaishogaiTempEntity
      */
-    void insert対象外データTemp(TaishogaiTempEntity parameter);
+    void insert対象外データTemp(TokuchoHeijunkaRokuBatchTaishogaiTempEntity parameter);
 
     /**
      * Temp対象外データテーブルを作成するメソッドです。
@@ -49,9 +49,9 @@ public interface IKaigoFukaTokuchoHeijunka6BatchMapper {
     /**
      * 対象者データTempテーブルに記録を追加するメソッドです。
      *
-     * @param parameter TaishogaiTempEntity
+     * @param parameter TokuchoHeijunkaRokuBatchTaishogaiTempEntity
      */
-    void insert対象者データTemp(TaishogaiTempEntity parameter);
+    void insert対象者データTemp(TokuchoHeijunkaRokuBatchTaishogaiTempEntity parameter);
 
     /**
      * Temp対象者データテーブルを作成するメソッドです。
@@ -75,14 +75,14 @@ public interface IKaigoFukaTokuchoHeijunka6BatchMapper {
      *
      * @return List<TaishogaiTempEntity>
      */
-    List<TaishogaiTempEntity> get対象外データTemp();
+    List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> get対象外データTemp();
 
     /**
      * 平準化前賦課Temp情報を取得するメソッドです。
      *
      * @return List<TaishoshaTempEntity>
      */
-    List<TaishogaiTempEntity> get対象者データTemp();
+    List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> get対象者データTemp();
 
     /**
      * 平準化計算結果Tempテーブルを作成するメソッドです。
@@ -92,37 +92,37 @@ public interface IKaigoFukaTokuchoHeijunka6BatchMapper {
     /**
      * 準化計算結果Tempテーブルに記録を追加するメソッドです。
      *
-     * @param parameter TmpHeijunkaKeisanKekaTempEntity
+     * @param parameter TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity
      */
-    void insert平準化計算結果Temp(TmpHeijunkaKeisanKekaTempEntity parameter);
+    void insert平準化計算結果Temp(TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity parameter);
 
     /**
      * 賦課の情報を取得するメソッドです。
      *
      * @return List<TaishoshaTempEntity>
      */
-    List<FukaJohoResult> get賦課の情報();
+    List<TokuchoHeijunkaRokuBatchFukaJohoResult> get賦課の情報();
 
     /**
      * 賦課の情報を取得するメソッドです。
      *
      * @return List<TaishoshaTempEntity>
      */
-    List<TmpHeijunkaKeisanKekaTempEntity> get平準化計算結果Temp();
+    List<TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity> get平準化計算結果Temp();
 
     /**
      * 対象者データを取得するメソッドです。
      *
-     * @param parameter TaishoParameter
+     * @param parameter TokuchoHeijunkaRokuBatchTaishoParameter
      * @return List<TaishoshaTempEntity>
      */
-    List<TaishoshaEntity> get対象者データ(TaishoParameter parameter);
+    List<TokuchoHeijunkaRokuBatchTaishoshaEntity> get対象者データ(TokuchoHeijunkaRokuBatchTaishoParameter parameter);
 
     /**
      * 対象外データを取得するメソッドです。
      *
-     * @param parameter TaishoParameter
+     * @param parameter TokuchoHeijunkaRokuBatchTaishoParameter
      * @return List<TaishoshaTempEntity>
      */
-    List<TaishogaiEntity> get対象外データ(TaishoParameter parameter);
+    List<TokuchoHeijunkaRokuBatchTaishogaiEntity> get対象外データ(TokuchoHeijunkaRokuBatchTaishoParameter parameter);
 }

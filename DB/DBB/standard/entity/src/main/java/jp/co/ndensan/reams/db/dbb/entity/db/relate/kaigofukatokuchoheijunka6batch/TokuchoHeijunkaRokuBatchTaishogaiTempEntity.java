@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaishogaiTempEntity implements Cloneable, Serializable {
+public class TokuchoHeijunkaRokuBatchTaishogaiTempEntity implements Cloneable, Serializable {
 
     private RString 備考コード;
     private FlexibleYear dbT2002Fuka_choteiNendo;
@@ -113,7 +113,7 @@ public class TaishogaiTempEntity implements Cloneable, Serializable {
      * コンストラクタです。
      *
      */
-    public TaishogaiTempEntity() {
+    public TokuchoHeijunkaRokuBatchTaishogaiTempEntity() {
         this.dbT2002Fuka_choteiNendo = null;
         this.dbT2002Fuka_fukaNendo = null;
         this.dbT2002Fuka_tsuchishoNo = null;
@@ -127,7 +127,7 @@ public class TaishogaiTempEntity implements Cloneable, Serializable {
      * @param 賦課の情報 FukaJohoRelateEntity
      * @param 備考コード RString
      */
-    public TaishogaiTempEntity(FukaJohoRelateEntity 賦課の情報, RString 備考コード) {
+    public TokuchoHeijunkaRokuBatchTaishogaiTempEntity(FukaJohoRelateEntity 賦課の情報, RString 備考コード) {
         requireNonNull(賦課の情報.get介護賦課Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         requireNonNull(賦課の情報.get介護期別RelateEntity(), UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         final DbT2002FukaEntity 介護賦課 = 賦課の情報.get介護賦課Entity();

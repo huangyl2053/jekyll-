@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kaigofukatokuchoheijunka6batch.IKaigoFukaTokuchoHeijunka6BatchMapper">
 
-    <insert id="insert平準化前賦課Temp" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.FuchJohoParameter">
+    <insert id="insert平準化前賦課Temp" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFuchJohoParameter">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
@@ -89,20 +89,20 @@
         ADD
         "備考コード" text
     </insert>
-    <select id="get対象外データTemp" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiTempEntity">
+    <select id="get対象外データTemp" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity">
         SELECT
             *
         FROM
             "TmpTaishogai"
     </select>
-    <select id="get対象者データTemp" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiTempEntity">
+    <select id="get対象者データTemp" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity">
         SELECT
             *
         FROM
             "TmpTaishosha"
     </select>
     
-    <insert id="insert対象外データTemp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiTempEntity">
+    <insert id="insert対象外データTemp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity">
         INSERT INTO
         "TmpTaishogai"
         (
@@ -252,7 +252,7 @@
         )
     </insert>
     
-    <insert id="insert対象者データTemp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiTempEntity">
+    <insert id="insert対象者データTemp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity">
         INSERT INTO
         "TmpTaishosha"
         (
@@ -411,7 +411,7 @@
         "tsuchishoNo"  rgdb."DbUDD008TsuchishoNo"
         )
     </insert>
-    <insert id="insert平準化計算結果Temp" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TmpHeijunkaKeisanKekaTempEntity">
+    <insert id="insert平準化計算結果Temp" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity">
         INSERT INTO
         "TmpHeijunkaKeisanKeka"
         VALUES
@@ -440,19 +440,19 @@
         ON
             "TmpHeijunkaMae"."dbT2002Fuka_tsuchishoNo" = "TmpHeijunkaKeisanKeka"."tsuchishoNo"
     </select>
-    <resultMap id="resultMap_FukaHeijunkaKeisanKekaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.FukaJohoResult" autoMapping="true">
+    <resultMap id="resultMap_FukaHeijunkaKeisanKekaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFukaJohoResult" autoMapping="true">
         <id column="dbT2002Fuka_tsuchishoNo"/>
         <association property="賦課の情報" resultMap="resultMap_FukaInfo"/>
         <association property="平準化計算結果" resultMap="resultMap_HeijunkaKeisanKekaInfo"/>
     </resultMap>
-    <resultMap id="resultMap_HeijunkaKeisanKekaInfo" type="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TmpHeijunkaKeisanKekaTempEntity" autoMapping="true">
+    <resultMap id="resultMap_HeijunkaKeisanKekaInfo" type="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity" autoMapping="true">
         <result property="変更後特徴期別額_１期" column="henkogoTokuShoKibetsgaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="変更後特徴期別額_２期" column="henkogoTokuShoKibetsgaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="変更後特徴期別額_３期" column="henkogoTokuShoKibetsgaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler" />
     </resultMap>
     
-    <select id="get対象者データ" resultOrdered="true" resultMap="resultMap_Taishosha" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TaishoParameter">
+    <select id="get対象者データ" resultOrdered="true" resultMap="resultMap_Taishosha" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoParameter">
         SELECT
             計算後情報.*,
             "ShikibetsuTaisho".*,
@@ -485,7 +485,7 @@
             AND 年金特徴回付情報."shoriNendo" = #{調定前年度}
         ${出力順}
     </select>
-    <resultMap id="resultMap_Taishosha" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_Taishosha" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity" autoMapping="true">
         <id column="dbT2015KeisangoJoho_choteiNendo"/>
         <id column="dbT2015KeisangoJoho_fukaNendo"/>
         <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
@@ -629,7 +629,7 @@
         <result property="fuShunyuGaku14" column="dbT2015KeisangoJoho_fuShunyuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
-    <select id="get対象外データ" resultOrdered="true" resultMap="resultMap_Taishogai" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TaishoParameter">
+    <select id="get対象外データ" resultOrdered="true" resultMap="resultMap_Taishogai" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoParameter">
         SELECT
             対象外データTemp.*,
             "ShikibetsuTaisho".*,
@@ -661,7 +661,7 @@
             AND 年金特徴回付情報."shoriNendo" = #{調定前年度}
         ${出力順}
     </select>
-    <resultMap id="resultMap_Taishogai" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TaishogaiEntity" autoMapping="true">
+    <resultMap id="resultMap_Taishogai" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity" autoMapping="true">
         <id column="dbT2002Fuka_choteiNendo"/>
         <id column="dbT2002Fuka_fukaNendo"/>
         <id column="dbT2002Fuka_hihokenshaNo"/>

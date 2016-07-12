@@ -5,36 +5,36 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TmpHeijunkaKeisanKekaTempEntity;
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 
 /**
- * 対象者データTempEntity
+ * 賦課情報TempEntity
  *
  * @reamsid_L DBB-0810-020 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class FukaJohoResult implements Cloneable, Serializable {
+public final class TokuchoHeijunkaRokuBatchFukaJohoResult implements Cloneable, Serializable {
 
     private FukaJohoRelateEntity 賦課の情報;
-    private TmpHeijunkaKeisanKekaTempEntity 平準化計算結果;
+    private TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果;
 
     /**
      * コンストラクタです。
      */
-    public FukaJohoResult() {
+    public TokuchoHeijunkaRokuBatchFukaJohoResult() {
     }
 
     /**
      * コンストラクタです。
      *
      * @param 賦課の情報 FukaJohoRelateEntity
-     * @param 平準化計算結果 TmpHeijunkaKeisanKekaTempEntity
+     * @param 平準化計算結果 TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity
      */
-    public FukaJohoResult(FukaJohoRelateEntity 賦課の情報, TmpHeijunkaKeisanKekaTempEntity 平準化計算結果) {
+    public TokuchoHeijunkaRokuBatchFukaJohoResult(FukaJohoRelateEntity 賦課の情報, TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果) {
         this.賦課の情報 = 賦課の情報;
         this.平準化計算結果 = 平準化計算結果;
     }

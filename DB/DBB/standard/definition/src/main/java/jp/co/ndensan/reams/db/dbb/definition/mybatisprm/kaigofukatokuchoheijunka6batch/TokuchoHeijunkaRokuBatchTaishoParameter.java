@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TaishoParameter implements Cloneable, Serializable {
+public final class TokuchoHeijunkaRokuBatchTaishoParameter implements Cloneable, Serializable {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
@@ -29,7 +29,7 @@ public final class TaishoParameter implements Cloneable, Serializable {
     /**
      * コンストラクタです。
      */
-    public TaishoParameter() {
+    public TokuchoHeijunkaRokuBatchTaishoParameter() {
         this.調定年度 = null;
         this.賦課年度 = null;
         this.調定日時 = null;
@@ -46,7 +46,7 @@ public final class TaishoParameter implements Cloneable, Serializable {
      * @param 調定前年度 FlexibleYear
      * @param 出力順 RString
      */
-    public TaishoParameter(FlexibleYear 調定年度, FlexibleYear 賦課年度, YMDHMS 調定日時, FlexibleYear 調定前年度,
+    public TokuchoHeijunkaRokuBatchTaishoParameter(FlexibleYear 調定年度, FlexibleYear 賦課年度, YMDHMS 調定日時, FlexibleYear 調定前年度,
             RString 出力順) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;

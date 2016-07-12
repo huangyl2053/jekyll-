@@ -10,14 +10,14 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 対象者データTempEntity
+ * 平準化計算結果TempEntity
  *
  * @reamsid_L DBB-0810-020 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TmpHeijunkaKeisanKekaTempEntity implements IMyBatisParameter {
+public final class TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity implements IMyBatisParameter {
 
     private Decimal 変更後特徴期別額_１期;
     private Decimal 変更後特徴期別額_２期;
@@ -27,7 +27,7 @@ public final class TmpHeijunkaKeisanKekaTempEntity implements IMyBatisParameter 
     /**
      * コンストラクタです。
      */
-    public TmpHeijunkaKeisanKekaTempEntity() {
+    public TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity() {
         this.変更後特徴期別額_１期 = null;
         this.変更後特徴期別額_２期 = null;
         this.変更後特徴期別額_３期 = null;
@@ -42,7 +42,7 @@ public final class TmpHeijunkaKeisanKekaTempEntity implements IMyBatisParameter 
      * @param 変更後特徴期別額_３期 Decimal
      * @param 通知書番号 TsuchishoNo
      */
-    public TmpHeijunkaKeisanKekaTempEntity(Decimal 変更後特徴期別額_１期, Decimal 変更後特徴期別額_２期,
+    public TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity(Decimal 変更後特徴期別額_１期, Decimal 変更後特徴期別額_２期,
             Decimal 変更後特徴期別額_３期, TsuchishoNo 通知書番号) {
         this.変更後特徴期別額_１期 = 変更後特徴期別額_１期;
         this.変更後特徴期別額_２期 = 変更後特徴期別額_２期;

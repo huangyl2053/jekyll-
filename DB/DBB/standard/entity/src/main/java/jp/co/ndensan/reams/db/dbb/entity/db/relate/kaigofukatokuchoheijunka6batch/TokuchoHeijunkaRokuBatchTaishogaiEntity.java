@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TaishogaiEntity implements Cloneable, Serializable {
+public final class TokuchoHeijunkaRokuBatchTaishogaiEntity implements Cloneable, Serializable {
 
     private RString 特別徴収義務者コード;
     private RString 徴収方法Newest_仮徴収_年金コード;
@@ -29,7 +29,7 @@ public final class TaishogaiEntity implements Cloneable, Serializable {
     /**
      * コンストラクタです。
      */
-    public TaishogaiEntity() {
+    public TokuchoHeijunkaRokuBatchTaishogaiEntity() {
         this.特別徴収義務者コード = null;
         this.対象外データTemp = null;
         this.宛名 = null;
@@ -46,7 +46,7 @@ public final class TaishogaiEntity implements Cloneable, Serializable {
      * @param 徴収方法Newest_仮徴収_年金コード RString
      * @param 備考コード RString
      */
-    public TaishogaiEntity(RString 特別徴収義務者コード, FukaJohoRelateEntity 対象外データTemp,
+    public TokuchoHeijunkaRokuBatchTaishogaiEntity(RString 特別徴収義務者コード, FukaJohoRelateEntity 対象外データTemp,
             UaFt200FindShikibetsuTaishoEntity 宛名, RString 徴収方法Newest_仮徴収_年金コード, RString 備考コード) {
         this.特別徴収義務者コード = 特別徴収義務者コード;
         this.対象外データTemp = 対象外データTemp;
