@@ -182,18 +182,18 @@ public class KaigoAtenaJohoHandler {
             TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager, FlexibleYear 賦課年度, RString 年度内処理済み連番) {
         FlexibleDate 依頼金額計算基準日 = null;
         if (連番_0001.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 連番_0002);
         } else if (連番_0002.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.本算定賦課, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.本算定賦課, 連番_0001);
         } else if (連番_0003.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 連番_0004);
         } else if (連番_0004.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 連番_0005);
         } else if (連番_0005.equals(年度内処理済み連番)) {
-            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 年度内処理済み連番);
+            依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.依頼金額計算, 連番_0006);
         } else if (連番_0006.equals(年度内処理済み連番)) {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(
-                    new FlexibleYear(String.valueOf(賦課年度.getYearValue() + 1)), ShoriName.依頼金額計算, 年度内処理済み連番);
+                    new FlexibleYear(String.valueOf(賦課年度.getYearValue() + 1)), ShoriName.依頼金額計算, 連番_0001);
         }
         return 依頼金額計算基準日;
     }
