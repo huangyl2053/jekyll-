@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 /**
  * pritPublish1 のクラスファイル
  *
- * @reamsid_L DBB-1660-010 gongliang
+ * @reamsid_L DBB-1660-050 gongliang
  */
 public class pritPublish1Div extends PanelPublish {
 

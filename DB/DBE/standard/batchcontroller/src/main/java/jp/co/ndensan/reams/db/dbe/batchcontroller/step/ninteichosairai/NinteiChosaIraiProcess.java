@@ -74,7 +74,7 @@ public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRela
         ChosaIraiHakkoIchiranhyoHeadItem headItem = new ChosaIraiHakkoIchiranhyoHeadItem();
         headItem.set認定調査依頼書FLG(processParamter.getNinteiChosaIraisyo());
         headItem.set依頼日From(processParamter.getIraiFromYMD());
-        headItem.set依頼日From(processParamter.getIraiToYMD());
+        headItem.set依頼日To(processParamter.getIraiToYMD());
         return headItem;
     }
 

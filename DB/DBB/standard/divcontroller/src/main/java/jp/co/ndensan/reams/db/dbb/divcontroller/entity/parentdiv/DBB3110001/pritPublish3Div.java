@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 /**
  * pritPublish3 のクラスファイル
  *
- * @reamsid_L DBB-1660-010 gongliang
+ * @reamsid_L DBB-1660-050 gongliang
  */
 public class pritPublish3Div extends PanelPublish {
 

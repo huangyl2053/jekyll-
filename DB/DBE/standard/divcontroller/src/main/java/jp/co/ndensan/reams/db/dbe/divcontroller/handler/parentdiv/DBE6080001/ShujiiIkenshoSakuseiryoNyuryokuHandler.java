@@ -64,11 +64,10 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
      * 初期化の設定します。
      */
     public void onLoad() {
-        // TODO QA内部:1354 Readmain:  (共通部品内部制御がなし、実装できない。)
         div.getShujiiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getShujiiKensakuJoken().getTxtMaxCount().setValue(
                 new Decimal(DbBusinessConfig.get(
-                                ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+                                ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
