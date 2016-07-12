@@ -60,7 +60,7 @@ public class KanendoFukaHandler {
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
-    private final RString 本算定異動_過年度 = new RString("DBBMN45000");
+    private final RString 本算定異動_過年度 = new RString("DBBMN45001");
     private final RString 過年度異動通知書作成 = new RString("DBBMN45002");
     private final RString 本算定異動_過年度_ボタン = new RString("Element1");
     private final RString 過年度異動通知書作成_ボタン = new RString("Element2");
@@ -69,7 +69,7 @@ public class KanendoFukaHandler {
     private final RString 個人住民税処理状況 = new RString("BbT1901KojinJuminzeiShoriJokyo");
     private final RString 未 = new RString("未");
     private final RString 済 = new RString("済");
-    private static final RString 月 = new RString("月");
+    private static final RString 月分 = new RString("月");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final RString 納入通知書 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
@@ -94,7 +94,7 @@ public class KanendoFukaHandler {
     public boolean initialize(FlexibleYear 調定年度, List<ShoriDateKanri> shdaList, ShoriDateKanri shoriDate3) {
         set処理対象();
         div.getKanendoShoriNaiyo().getTxtChoteiNendo().setDomain(new RYear(調定年度.toString()));
-        set抽出開始日時(shoriDate3);
+        set抽出開始日時と終了日時(shoriDate3);
         set算定帳票作成();
         set対象賦課年度();
         set帳票作成個別情報();
@@ -108,19 +108,19 @@ public class KanendoFukaHandler {
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
         RString 属する月 = new RString(String.valueOf(date.getMonthValue()));
-        dataSource.add(new KeyValueDataSource(属する月.padZeroToLeft(NUM_2), 属する月.concat(月)));
+        dataSource.add(new KeyValueDataSource(属する月.padZeroToLeft(NUM_2), 属する月.concat(月分)));
         if (日 < 境界日付 || date.getMonthValue() == NUM_3) {
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(属する月.padZeroToLeft(NUM_2));
         } else {
             RString 翌月 = new RString(String.valueOf(date.plusMonth(NUM_1).getMonthValue()));
-            dataSource.add(new KeyValueDataSource(翌月.padZeroToLeft(NUM_2), 翌月.concat(月)));
+            dataSource.add(new KeyValueDataSource(翌月.padZeroToLeft(NUM_2), 翌月.concat(月分)));
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setDataSource(dataSource);
             div.getKanendoShoriNaiyo().getDdlShoritsuki().setSelectedKey(翌月.padZeroToLeft(NUM_2));
         }
     }
 
-    private void set抽出開始日時(ShoriDateKanri shoriDate) {
+    private void set抽出開始日時と終了日時(ShoriDateKanri shoriDate) {
         RString 前日まで = RDate.getNowDate().minusDay(1).toDateString().concat(RString.HALF_SPACE).
                 concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
@@ -218,7 +218,7 @@ public class KanendoFukaHandler {
             FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                     RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
             List<HonsanteiIdoKanendoResult> 帳票IDList = HonsanteiIdoKanendo.
-                    createInstance().getChohyoID(調定年度, 期月.get期(), hoList, null);
+                    createInstance().getChohyoID(調定年度, 期月.get期(), hoList, ZERO_RS);
             List<ShutsuryokuKiKoho> 出力期;
             ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
             if (帳票IDList != null) {

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -102,11 +101,11 @@ public class HonsanteiIdoKanendo {
      * 抽出開始日時取得
      *
      * @param 調定年度 FlexibleYear
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 RString
      * @return ShoriDateKanri
      */
-    public ShoriDateKanri getShuchutsuKaishiJikan(FlexibleYear 調定年度) {
-        SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
-        RString 処理名 = ShoriName.過年度賦課.get名称();
+    public ShoriDateKanri getShuchutsuKaishiJikan(FlexibleYear 調定年度, SubGyomuCode サブ業務コード, RString 処理名) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(定数調定年度.toString()));
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.
                 select抽出開始日時_本算定異動_過年度(調定年度, 処理名, サブ業務コード);
@@ -125,12 +124,12 @@ public class HonsanteiIdoKanendo {
         List<ShoriDateKanri> kanriList = new ArrayList<>();
         DbT7022ShoriDateKanriEntity shentity = 処理日付管理Dac.
                 select処理状況_本算定異動_過年度(調定年度);
+        if (shentity == null) {
+            return new ArrayList<>();
+        }
         entityList.add(shentity);
         for (DbT7022ShoriDateKanriEntity entity : entityList) {
             kanriList.add(new ShoriDateKanri(entity));
-        }
-        if (kanriList.isEmpty()) {
-            return new ArrayList<>();
         }
         return kanriList;
     }
@@ -272,6 +271,9 @@ public class HonsanteiIdoKanendo {
     }
 
     private RString get納付書の型(RString 算定期) {
+        if (算定期.startsWith(zeroRS)) {
+            算定期 = 算定期.substring(1);
+        }
         RString 設定値;
         switch (算定期.toString()) {
             case "1":
