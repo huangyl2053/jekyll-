@@ -257,8 +257,6 @@
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
         FROM
             "KeisanTyukanTemp" AS "KeisanTyukanTemp"
-        WHERE
-            "KeisanTyukanTemp"."koseiZengoKubun" = '1'
     </select>
     
     <select resultOrdered="true" id="get全賦課最新情報3" resultMap="ResultMap_FukaEntity"
