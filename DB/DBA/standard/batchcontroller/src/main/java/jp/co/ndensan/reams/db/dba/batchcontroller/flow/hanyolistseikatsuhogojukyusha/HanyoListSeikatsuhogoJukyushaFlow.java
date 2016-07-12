@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.flow.hanyolistseikatsuhogojukyusha;
 
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolistseikatsuhogojukyusha.HanyoListSeikatsuhogoJukyushaProcess;
+import jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolistseikatsuhogojukyusha.HanyoListSeikatsuhogoJukyushaRenbanProcess;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -19,10 +20,15 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class HanyoListSeikatsuhogoJukyushaFlow extends BatchFlowBase<HanyoListBatchParameter> {
 
     private static final String CSV_PROCESS = "csvProcess";
+    private static final String RENBAN_CSV_PROCESS = "renbanCsvProcess";
 
     @Override
     protected void defineFlow() {
-        executeStep(CSV_PROCESS);
+        if (getParameter().isRenbanFuka()) {
+            executeStep(RENBAN_CSV_PROCESS);
+        } else {
+            executeStep(CSV_PROCESS);
+        }
     }
 
     /**
@@ -33,6 +39,17 @@ public class HanyoListSeikatsuhogoJukyushaFlow extends BatchFlowBase<HanyoListBa
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
         return loopBatch(HanyoListSeikatsuhogoJukyushaProcess.class)
+                .arguments(getParameter().toSeikatsuhogoJukyushaProcessParameter()).define();
+    }
+
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(RENBAN_CSV_PROCESS)
+    protected IBatchFlowCommand reportRenbanProcess() {
+        return loopBatch(HanyoListSeikatsuhogoJukyushaRenbanProcess.class)
                 .arguments(getParameter().toSeikatsuhogoJukyushaProcessParameter()).define();
     }
 }

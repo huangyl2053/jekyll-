@@ -87,7 +87,7 @@
             fetchSize="500">
         SELECT MAX(A."kijunTimestamp") AS "基準日時"
         FROM   rgdb."DbT7022ShoriDateKanri" AS A
-        WHERE  A."subGyomuCode"=#{業務コード}
+        WHERE  A."subGyomuCode"=#{サブ業務コード}
         AND    A."nendo"=#{調定年度}
         AND    A."shoriName"=#{作成処理名}
     </select>

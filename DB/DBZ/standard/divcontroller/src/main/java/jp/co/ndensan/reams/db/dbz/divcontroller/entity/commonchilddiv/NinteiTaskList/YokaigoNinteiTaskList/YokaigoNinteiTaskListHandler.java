@@ -770,8 +770,8 @@ public class YokaigoNinteiTaskListHandler {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
-        if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
-            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+        if (business.get要介護認定一次判定完了年月日() != null && !business.get要介護認定一次判定完了年月日().isEmpty()) {
+            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定完了年月日().toString()));
         }
         if (business.is仮一次判定区分()) {
             if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {

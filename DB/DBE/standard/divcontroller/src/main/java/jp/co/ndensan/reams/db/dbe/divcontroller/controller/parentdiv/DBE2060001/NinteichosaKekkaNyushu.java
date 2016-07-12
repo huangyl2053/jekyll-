@@ -180,6 +180,8 @@ public class NinteichosaKekkaNyushu {
             }
             ViewStateHolder.put(ViewStateKeys.申請書管理番号,
                     new ShinseishoKanriNo(requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo()));
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.valueOf(
+                    requestDiv.getCcdTaskList().getCheckbox().get(0).getNinteichosaIraiRirekiNo().toString()));
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
         }

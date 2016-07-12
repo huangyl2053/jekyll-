@@ -117,4 +117,12 @@
         order by
         DbT7023Rendo."kanriNo"
     </select>
+    <select resultOrdered="true" id="getKanriNo" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+         dbt7023."kanriNo"
+        FROM
+         rgdb."DbT7023RendoHoryuTokuteiJusho" AS dbt7023
+         ORDER BY dbt7023."kanriNo" DESC
+	 LIMIT(1)
+    </select>
 </mapper>

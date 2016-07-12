@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho;
+package jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.seiho;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 範囲抽出日区分を表す列挙型です(臨時のファイル)。
+ * 範囲抽出日区分を表す列挙型です。
  *
- * @reamsid_L DBA-9999-021 xuyannan
+ * @reamsid_L DBA-9999-023 wangchao
  */
 public enum HaniChushutsubiKubun {
 

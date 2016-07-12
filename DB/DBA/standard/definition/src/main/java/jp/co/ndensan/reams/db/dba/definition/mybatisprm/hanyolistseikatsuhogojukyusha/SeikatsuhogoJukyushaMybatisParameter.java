@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolistseikatsuhogojukyusha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.seiho.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -142,10 +142,10 @@ public class SeikatsuhogoJukyushaMybatisParameter implements IMyBatisParameter {
         if (HaniChushutsubiKubun.生保終了日.getコード().equals(chushutsunichiKubun)) {
             isShuryoYMDFlag = true;
         }
-        if (RString.isNullOrEmpty(chushutsunichiFrom)) {
+        if (!RString.isNullOrEmpty(chushutsunichiFrom)) {
             isFromFlag = true;
         }
-        if (RString.isNullOrEmpty(chushutsunichiTo)) {
+        if (!RString.isNullOrEmpty(chushutsunichiTo)) {
             isToFlag = true;
         }
         return new SeikatsuhogoJukyushaMybatisParameter(

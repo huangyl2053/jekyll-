@@ -16,17 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 class ShinsainShiharaimeisaishoBuilder implements IShinsainShiharaimeisaishoBuilder {
 
     private final IShinsainShiharaimeisaishoEditor editor;
-    private final IShinsainShiharaimeisaishoBodyEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param editor {@link IShinsainShiharaimeisaishoEditor}
      */
-    public ShinsainShiharaimeisaishoBuilder(IShinsainShiharaimeisaishoEditor editor,
-            IShinsainShiharaimeisaishoBodyEditor bodyEditor) {
+    public ShinsainShiharaimeisaishoBuilder(IShinsainShiharaimeisaishoEditor editor) {
         this.editor = editor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -36,6 +33,6 @@ class ShinsainShiharaimeisaishoBuilder implements IShinsainShiharaimeisaishoBuil
      */
     @Override
     public ShinsainShiharaimeisaishoReportSource build() {
-        return ReportEditorJoiner.from(new ShinsainShiharaimeisaishoReportSource()).join(editor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ShinsainShiharaimeisaishoReportSource()).join(editor).buildSource();
     }
 }

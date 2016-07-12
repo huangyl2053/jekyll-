@@ -948,7 +948,7 @@ public class ShiharaiHohoJyohoHandler {
     public ShunoKamokuShubetsu get業務内区分コード() {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString uiContainerId = 高額サービス費支給申請;
+        RString uiContainerId = controlData.getUIContainerId();
 
         if (償還払い状況照会.equals(uiContainerId)
                 || 福祉用具購入費支給申請.equals(uiContainerId)

@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.INinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.SaikinShorishaRireki.ISaikinShorishaRirekiDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.SaikinShorishaRireki.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoNinteiShinseiKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,8 +30,6 @@ public class KaigoNinteiShinseiKensakuDiv extends Panel {
     private TextBoxNum txtMaxKensu;
     @JsonProperty("KensakuKekka")
     private KensakuKekkaDiv KensakuKekka;
-    @JsonProperty("ccdSaikinShorisha")
-    private SaikinShorishaRirekiDiv ccdSaikinShorisha;
     @JsonProperty("ccdNinteiShinseishaFinder")
     private NinteiShinseishaFinderDiv ccdNinteiShinseishaFinder;
 
@@ -95,15 +91,6 @@ public class KaigoNinteiShinseiKensakuDiv extends Panel {
     @JsonProperty("KensakuKekka")
     public void setKensakuKekka(KensakuKekkaDiv KensakuKekka) {
         this.KensakuKekka = KensakuKekka;
-    }
-
-    /*
-     * getccdSaikinShorisha
-     * @return ccdSaikinShorisha
-     */
-    @JsonProperty("ccdSaikinShorisha")
-    public ISaikinShorishaRirekiDiv getCcdSaikinShorisha() {
-        return ccdSaikinShorisha;
     }
 
     /*

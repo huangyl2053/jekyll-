@@ -9,12 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosahoshumeisai.ChosaHoshumeisa
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai.ChosaHoshumeisaiReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
@@ -41,16 +36,29 @@ public class ChosaHoshumeisaiEditor implements IChosaHoshumeisaiEditor {
     }
 
     private ChosaHoshumeisaiReportSource editSource(ChosaHoshumeisaiReportSource source) {
-        FlexibleDate printdate = item.get帳票印刷日時();
-        RString printTimeStampSb = printdate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString();
         source.title = item.getタイトル();
         source.taishoKikan = item.get対象期間();
         source.hokenshaName = item.get保険者名();
         source.chosaItakusakiName = item.get調査機関名();
         source.chosainName = item.get調査員名();
-        source.printTimeStamp = printTimeStampSb;
+        source.printTimeStamp = item.get帳票印刷日時();
+        source.listChosaSakusei_1 = item.get明細番号();
+        source.listChosaSakusei_2 = item.get被保険者番号();
+        source.listChosaSakusei_3 = item.get被保険者氏名();
+        source.listChosaSakusei_4 = item.get生年月日();
+        source.listChosaSakusei_5 = item.get調査票提出日();
+        source.listChosaSakusei_6 = item.get新規申請在宅();
+        source.listChosaSakusei_7 = item.get新規申請施設();
+        source.listChosaSakusei_8 = item.get継続申請在宅();
+        source.listChosaSakusei_9 = item.get継続申請施設();
+        source.listChosaSakusei_10 = item.get調査票作成料();
+        source.listGokeikensu_1 = item.get合計件数新規在宅();
+        source.listGokeikensu_2 = item.get合計件数新規施設();
+        source.listGokeikensu_3 = item.get合計件数継続在宅();
+        source.listGokeikensu_4 = item.get合計件数継続施設();
+        source.gokeiKingaku = item.get合計金額();
+        source.shouhiZei = item.get消費税();
+        source.gokeiSeikyuKingaku = item.get合計請求額();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get被保険者番号() != null) {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());

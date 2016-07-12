@@ -16,17 +16,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 class ChosaHoshumeisaiBuilder implements IChosaHoshumeisaiBuilder {
 
     private final IChosaHoshumeisaiEditor editor;
-    private final IChosaHoshumeisaiBodyEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param editor {@link IChosaHoshumeisaiEditor}
      */
-    public ChosaHoshumeisaiBuilder(IChosaHoshumeisaiEditor editor,
-            IChosaHoshumeisaiBodyEditor bodyEditor) {
+    public ChosaHoshumeisaiBuilder(IChosaHoshumeisaiEditor editor) {
         this.editor = editor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -36,6 +33,6 @@ class ChosaHoshumeisaiBuilder implements IChosaHoshumeisaiBuilder {
      */
     @Override
     public ChosaHoshumeisaiReportSource build() {
-        return ReportEditorJoiner.from(new ChosaHoshumeisaiReportSource()).join(editor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ChosaHoshumeisaiReportSource()).join(editor).buildSource();
     }
 }
