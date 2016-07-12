@@ -86,9 +86,13 @@ public class Tokucho {
         ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKeyWithoutRirekiNo();
         // 賦課照会コントロールキー.データ状態（仮徴収/本徴収）に応じて徴収ラジオボタンを設定しその内容を表示する。
         if (key.get算定状態() == SanteiState.仮算定) {
-            setDivFor仮算定(div, model);
+            if (model.get仮徴収_基礎年金番号() != null && !model.get仮徴収_基礎年金番号().isEmpty()) {
+                setDivFor仮算定(div, model);
+            }
         } else {
-            setDivFor本算定(div, model);
+            if (model.get本徴収_基礎年金番号() != null && !model.get本徴収_基礎年金番号().isEmpty()) {
+                setDivFor本算定(div, model);
+            }
         }
         return createResponseData(div);
     }
@@ -106,11 +110,17 @@ public class Tokucho {
         // 年金保険者突合情報について、仮徴収/本徴収/翌年度のいずれかの情報を再表示する
         ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKeyWithoutRirekiNo();
         if (div.getRadChoshu().getSelectedKey().equals(SanteiState.仮算定.getKey())) {
-            setDivFor仮算定(div, model);
+            if (model.get仮徴収_基礎年金番号() != null && !model.get仮徴収_基礎年金番号().isEmpty()) {
+                setDivFor仮算定(div, model);
+            }
         } else if (div.getRadChoshu().getSelectedKey().equals(SanteiState.本算定.getKey())) {
-            setDivFor本算定(div, model);
+            if (model.get本徴収_基礎年金番号() != null && !model.get本徴収_基礎年金番号().isEmpty()) {
+                setDivFor本算定(div, model);
+            }
         } else {
-            setDivFor翌年度(div, model);
+            if (model.get翌年度仮徴収_基礎年金番号() != null && !model.get翌年度仮徴収_基礎年金番号().isEmpty()) {
+                setDivFor翌年度(div, model);
+            }
         }
         return createResponseData(div);
     }
