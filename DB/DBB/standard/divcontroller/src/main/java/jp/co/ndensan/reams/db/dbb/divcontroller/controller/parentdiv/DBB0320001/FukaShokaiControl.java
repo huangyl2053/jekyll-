@@ -61,17 +61,17 @@ public class FukaShokaiControl {
      */
     public ResponseData<FukaShokaiControlDiv> initialize(FukaShokaiControlDiv div) {
 
-        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-        final FukaMiscManager fukaMiscManager = new FukaMiscManager();
-
-        // TODO 賦課根拠かこっちかでDBアクセスを一回にしたい
-        Fuka model = fukaMiscManager.find賦課直近(
-                fukaTaishoshaKey.get調定年度(),
-                fukaTaishoshaKey.get賦課年度(),
-                fukaTaishoshaKey.get通知書番号()).findFirst().get();
-
-        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
-
+//        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+//        final FukaMiscManager fukaMiscManager = new FukaMiscManager();
+//
+//        // TODO 賦課根拠かこっちかでDBアクセスを一回にしたい
+//        Fuka model = fukaMiscManager.find賦課直近(
+//                fukaTaishoshaKey.get調定年度(),
+//                fukaTaishoshaKey.get賦課年度(),
+//                fukaTaishoshaKey.get通知書番号()).findFirst().get();
+//
+//        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
+        FukaShokaiKey key = getkey();
 //        if (key == null) {
 //            return createResponseData(div);
 //        } else {
@@ -89,16 +89,43 @@ public class FukaShokaiControl {
     public ResponseData<FukaShokaiControlDiv> reLoad(FukaShokaiControlDiv div) {
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
 
+        if (key == null || key.get調定年度() == null || key.get賦課年度() == null || key.get被保険者番号() == null
+                || key.get調定年度().isEmpty() || key.get賦課年度().isEmpty() || key.get被保険者番号().isEmpty()) {
+            key = getkey();
+        }
+
         return createResponseData(setDisplay(div, key));
     }
 
-    private FukaShokaiControlDiv setDisplay(FukaShokaiControlDiv div, FukaShokaiKey key) {
-        div.getTxtChoteiNendo().setDomain(key.get調定年度());
-        div.getTxtFukaNendo().setDomain(key.get賦課年度());
-        div.getTxtKoseiM().setValue(key.get更正月());
-        div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));
-        div.getTxtKoseiTime().setValue(key.get更正日時().getRDateTime().getTime());
+    private FukaShokaiKey getkey() {
 
+        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        final FukaMiscManager fukaMiscManager = new FukaMiscManager();
+
+        // TODO 賦課根拠かこっちかでDBアクセスを一回にしたい
+        Fuka model = fukaMiscManager.find賦課直近(
+                fukaTaishoshaKey.get調定年度(),
+                fukaTaishoshaKey.get賦課年度(),
+                fukaTaishoshaKey.get通知書番号()).findFirst().get();
+
+        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
+        return key;
+    }
+
+    private FukaShokaiControlDiv setDisplay(FukaShokaiControlDiv div, FukaShokaiKey key) {
+        if (key.get調定年度() != null) {
+            div.getTxtChoteiNendo().setDomain(key.get調定年度());
+        }
+        if (key.get賦課年度() != null) {
+            div.getTxtFukaNendo().setDomain(key.get賦課年度());
+        }
+        if (key.get更正月() != null) {
+            div.getTxtKoseiM().setValue(key.get更正月());
+        }
+        if (key.get更正日時() != null) {
+            div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));
+            div.getTxtKoseiTime().setValue(key.get更正日時().getRDateTime().getTime());
+        }
         return div;
     }
 
