@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6210001;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbi.HoshuShiharaiJunbiBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6210001.HoshushiharaiJumbiDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 画面設計_DBE6210001_報酬支払い準備Handlerクラスです
@@ -27,13 +30,19 @@ public class HoshushiharaiJumbiHandler {
 
     /**
      * 発行するボタン処理です
+     *
+     * @return HoshuShiharaiJunbiBatchParameter
      */
-    public void onClick_btnHakkou() {
-        div.getTxtJissekiDateRange().getFromValue();
-        div.getTxtJissekiDateRange().getToValue();
-        div.getTxtFurikomiShiteiDay().getValue();
-        div.getChkChosa().getSelectedKeys();
-        div.getChkShujii().getSelectedKeys();
-        div.getChkShinsakai().getSelectedKeys();
+    public HoshuShiharaiJunbiBatchParameter onClick_btnHakkou() {
+        HoshuShiharaiJunbiBatchParameter batchParameter = new HoshuShiharaiJunbiBatchParameter();
+        RDateTime rtFrom = RDateTime.of(div.getTxtJissekiDateRange().getFromValue().toDateString(), new RString(""));
+        RDateTime rtTo = RDateTime.of(div.getTxtJissekiDateRange().getToValue().toDateString(), new RString(""));
+        batchParameter.setJissekidaterangefrom(rtFrom);
+        batchParameter.setJissekidaterangeto(rtTo);
+        batchParameter.setFurikomishiteiday(div.getTxtFurikomiShiteiDay().getValue());
+        batchParameter.setChkchosa(div.getChkChosa().getSelectedKeys());
+        batchParameter.setChkshinsakai(div.getChkShinsakai().getSelectedKeys());
+        batchParameter.setChkshujii(div.getChkShujii().getSelectedKeys());
+        return batchParameter;
     }
 }
