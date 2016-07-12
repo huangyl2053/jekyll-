@@ -341,11 +341,14 @@ public class KaigoHokenryoGemmen {
      * @return SourceDataCollection
      */
     public SourceDataCollection publish(TuuchisyoGaihatuParam 通知書発行パラメータ) {
+        if (通知書発行パラメータ == null) {
+            return KakushuTsuchishoSakusei.createInstance().publish(null);
+        }
         FukaJoho 賦課の情報_更正前 = 通知書発行パラメータ.get賦課の情報_更正前();
         FukaJoho 賦課の情報_更正後 = 通知書発行パラメータ.get賦課の情報_更正後();
         boolean is本算定 = HonsanteiIkoHantei.createInstance().is本算定後(賦課の情報_更正後);
         boolean is過年度 = false;
-        RString 徴 = RString.EMPTY;
+        RString 徴 = 徴_普徴;
         if (is本算定) {
             is過年度 = 賦課の情報_更正後.get賦課年度().compareTo(賦課の情報_更正後.get調定年度()) < 定値_ゼロ;
         }
