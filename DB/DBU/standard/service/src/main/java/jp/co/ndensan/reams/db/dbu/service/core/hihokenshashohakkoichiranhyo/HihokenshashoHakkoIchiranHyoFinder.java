@@ -273,8 +273,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
 
         RString 生年月日_年齢 = RString.EMPTY;
         IDateOfBirth dateOfBirth = new _DateOfBirth(new FlexibleDate(ikkatsuHakkoRelateEntity.getSeinengappiYMD().toString()));
-        AgeCalculator agecalculator = new AgeCalculator(
-                dateOfBirth, JuminJotai.valueOf(ikkatsuHakkoRelateEntity.getJuminJotaiCode().toString()),
+        AgeCalculator agecalculator = new AgeCalculator(dateOfBirth, JuminJotai.toValue(ikkatsuHakkoRelateEntity.getJuminJotaiCode()),
                 FlexibleDate.MAX, AgeArrivalDay.前日, 交付日);
         RString 年齢 = agecalculator.get年齢();
         if (null != 年齢 && !年齢.isEmpty()) {
