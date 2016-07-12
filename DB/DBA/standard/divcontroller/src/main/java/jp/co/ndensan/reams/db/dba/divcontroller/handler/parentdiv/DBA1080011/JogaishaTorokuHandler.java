@@ -105,6 +105,7 @@ public class JogaishaTorokuHandler {
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().setValue(jogaishaTorokuSetter.getJogaiTekiyoYMD());
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode()
                 .setDomain(new ShikibetsuCode(jogaishaTorokuSetter.getShikibetsuCode()));
+        div.getJogaishaTorokuIchiran().setStart(追加);
         div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().setValue(jogaishaTorokuSetter.getShikibetsuCodeName());
         List<dgNenreiTotatshusha_Row> rowList = new ArrayList<>();
         ArrayList<JogaishaTorokuParamter> params = jogaishaTorokuSetter.getViewState();
@@ -126,6 +127,15 @@ public class JogaishaTorokuHandler {
             アクセスログ(new ShikibetsuCode(param.getShikibetsuCode()));
         }
         div.getJogaishaTorokuIchiran().getNenreiTotatsh().getDgNenreiTotatshusha().setDataSource(rowList);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiRiyu().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiKaijyoYMD().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtJogaiTekiyoYMD().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCode().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getTxtShikibetsuCodeName().setDisabled(true);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnShikibetsuSearch().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnCacel().setDisabled(false);
+        div.getJogaishaTorokuIchiran().getJogaiTaishoIchiran().getBtnConfirm().setDisabled(false);
     }
 
     /**
