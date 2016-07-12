@@ -79,7 +79,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -141,11 +140,10 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
         personalDataList = new ArrayList<>();
         hasCSVデータ = false;
         //TODO システム日時は使用なし
-//        RDateTime システム日時 = RDate.getNowDateTime();
+        //RDateTime システム日時 = RDate.getNowDateTime();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
         eucFilename = Path.combinePath(spoolWorkPath, new RString("HanyoList_Hihokenshadaicho.csv"));
-        RString 文字コード = DbBusinessConfig.get(ConfigNameDBU.EUC共通_文字コード, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
@@ -214,8 +212,8 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
                 mybatisPrm.getPsmGyoseiku_To_Name(), mybatisPrm.getPsmChiku1_From_Name(), mybatisPrm.getPsmChiku1_To_Name(),
                 mybatisPrm.getPsmChiku2_From_Name(), mybatisPrm.getPsmChiku2_To_Name(), mybatisPrm.getPsmChiku3_From_Name(),
                 mybatisPrm.getPsmChiku3_To_Name(),
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
-                new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()));
+                new RString(uaFt200Psm.toString()),
+                new RString(uaFt250Psm.toString()));
         return new BatchDbReader(MYBATIS_SELECT_ID, myBatisParameter);
     }
 
@@ -252,12 +250,11 @@ public class HanyoListHihokenshadaichoProcess extends BatchProcessBase<HanyoList
     }
 
     private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                RString.EMPTY,
+                地方公共団体.get地方公共団体コード().value(),
+                地方公共団体.get市町村名(),
+                new RString(String.valueOf(processPrm.getJobId())),
                 new RString("汎用リスト 被保険者台帳CSV"),
                 new RString("HanyoList_Hihokenshadaicho.csv"),
                 new RString(String.valueOf(eucCsvWriterJunitoJugo.getCount())),
