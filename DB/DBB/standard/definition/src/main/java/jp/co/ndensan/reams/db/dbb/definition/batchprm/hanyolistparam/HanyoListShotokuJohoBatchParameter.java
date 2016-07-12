@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListParamBatchParameter extends BatchParameterBase {
+public class HanyoListShotokuJohoBatchParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 
