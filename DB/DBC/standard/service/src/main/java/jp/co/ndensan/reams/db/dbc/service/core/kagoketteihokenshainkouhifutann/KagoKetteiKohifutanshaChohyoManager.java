@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 過誤決定通知書情報取込一覧表（公費負担者分）の帳票出力対象データ取得
  *
- * @reamsid_L @reamsid_L DBC-0980-420 zhangrui
+ * @reamsid_L DBC-0980-420 zhangrui
  */
 public class KagoKetteiKohifutanshaChohyoManager {
 
