@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuJissekiJoh
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.IsGinkoFurikomiShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuTankaMybatisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.HomonChosaItakuNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgChosain_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgShinsakaiIin_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -51,6 +53,7 @@ public class HomonChosaItakuNyuryokuHandler {
     private static final RString 有効 = new RString("有効");
     private static final RString 無効 = new RString("無効");
     private static final RString コンマ = new RString(",");
+    private static final int 年月 = 6;
 
     /**
      * コンストラクタです。
@@ -339,6 +342,22 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
+     * 単価のパラメタ編集です。
+     *
+     * @param div HomonChosaItakuNyuryokuDiv
+     * @return NinteiChosaHoshuJissekiJohoMybatisParameter
+     */
+    public NinteiChosaHoshuTankaMybatisParamter createParam_単価(HomonChosaItakuNyuryokuDiv div) {
+        RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
+        return NinteiChosaHoshuTankaMybatisParamter.createParam(
+                div.getDgShinsakaiIin().getClickedItem().getShinseishoKanriNo(),
+                Integer.parseInt(div.getDgShinsakaiIin().getClickedItem().getNinteichosaIraiRirekiNo().toString()),
+                イメージ区分,
+                new RDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi().toString()).toDateString().substring(0, 年月));
+
+    }
+
+    /**
      * 実績調査員一覧のパラメタ編集です。
      *
      * @param div HomonChosaItakuNyuryokuDiv
@@ -363,6 +382,19 @@ public class HomonChosaItakuNyuryokuHandler {
                 div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode(),
                 検索年度月FROM,
                 検索年度月TO);
+    }
+
+    /**
+     * 単価の編集です。
+     *
+     * @param 単価List NinteichosahyoGaikyoChosaRelateEntity
+     */
+    public void 単価(List<NinteichosahyoGaikyoChosaBusiness> 単価List) {
+        if (div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo() == null) {
+            for (NinteichosahyoGaikyoChosaBusiness business : 単価List) {
+                div.getTxtNinteiChosaItakuryo().setValue(new Decimal(nullToEmpty(business.get単価()).toString()));
+            }
+        }
     }
 
     private FlexibleDate toFlexibleDate(RString obj) {
