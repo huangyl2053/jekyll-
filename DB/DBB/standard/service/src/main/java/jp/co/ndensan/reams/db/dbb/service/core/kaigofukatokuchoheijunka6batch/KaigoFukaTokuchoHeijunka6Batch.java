@@ -95,17 +95,13 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KaigoFukaTokuchoHeijunka6Batch {
 
-    private static final RString 徴収方法_特徴 = new RString("1");
-    private static final RString 徴収方法_普徴 = new RString("2");
     private static final RString 備考コード_併徴者 = new RString("1");
     private static final RString 備考コード_特徴6月開始者 = new RString("6");
     private static final RString 備考コード_仮徴収額修正者 = new RString("2");
     private static final RString 調定事由_平準化による変更6月 = new RString("E3");
     private static final RString 更正前後区分_更正前 = new RString("1");
-    private static final RString 更正前後区分_更正後 = new RString("2");
     private static final RString 編集コード_併徴者 = new RString("併徴者");
     private static final RString 編集コード_仮徴収額修正者 = new RString("仮徴収額修正者");
-    private static final RString 編集コード_平準化の結果0円以下 = new RString("平準化の結果0円以下");
     private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
     private static final RString 編集コード_対象外_増額 = new RString("象外_増額");
     private static final RString 編集コード_特徴6月開始者 = new RString("特徴6月開始者");
@@ -288,11 +284,6 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             fukaJoho = builder.set履歴番号(fukaJoho.get履歴番号() + 1).set調定日時(調定日時).set異動基準日時(調定日時).set調定事由1(調定事由_平準化による変更6月).
                     set調定事由2(RString.EMPTY).set調定事由3(RString.EMPTY).set調定事由4(RString.EMPTY).build();
             dbT2002FukaDac.save(fukaJoho.toEntity());
-//            FukaJohoRelateEntity 賦課Relate情報 = 賦課情報.get賦課の情報();
-//            UrT0705ChoteiKyotsuEntity 調定共通Entity = 賦課Relate情報.get介護期別RelateEntity().get(0).get調定共通Entity().get(0);
-//            調定共通Entity.setChoteigaku(Decimal.TEN);
-//            調定共通Entity.setState(EntityDataState.Modified);
-//            urT0705ChoteiKyotsuDac.save(調定共通Entity);
         }
     }
 
