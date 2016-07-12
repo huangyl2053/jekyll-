@@ -1350,7 +1350,7 @@ public class FukaKijunTotalHandler {
         if (STR_ZERO.equals(強制設定_未申告)) {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDataSource(keyValueDateSource);
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(true);
-        } else if (dateSource != null && dateSource.isEmpty()) {
+        } else if (dateSource != null && !dateSource.isEmpty()) {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedIndex(NUM_0);
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
         }
@@ -1361,7 +1361,7 @@ public class FukaKijunTotalHandler {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
                     .setDataSource(keyValueDateSource);
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(true);
-        } else if (dateSource != null && dateSource.isEmpty()) {
+        } else if (dateSource != null && !dateSource.isEmpty()) {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setSelectedIndex(NUM_0);
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
         }
@@ -1373,12 +1373,10 @@ public class FukaKijunTotalHandler {
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
                         .setDataSource(keyValueDateSource);
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(true);
-            } else if (dateSource != null && dateSource.isEmpty()) {
+            } else if (dateSource != null && !dateSource.isEmpty()) {
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setSelectedIndex(NUM_0);
                 div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
             }
         }
-        div.getHokenryoRitsuIgaiInfo().getNengakuHokenryo().getDdlHasu().setSelectedIndex(NUM_0);
-        div.getHokenryoRitsuIgaiInfo().getNengakuHokenryo().getDdlMarumeKata().setSelectedIndex(NUM_0);
     }
 }
