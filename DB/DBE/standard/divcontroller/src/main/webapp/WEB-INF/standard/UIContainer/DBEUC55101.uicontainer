@@ -47,7 +47,7 @@
      "layoutName": "DBE5410001",
      "layoutTitle": "要介護認定個人状況照会",
      "eventName": "進捗状況照会に遷移する",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5510001",

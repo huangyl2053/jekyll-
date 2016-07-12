@@ -31,8 +31,6 @@ public class KihonJohoDiv extends Panel {
     private DropDownList ddlKoroshoShikibetsuCode;
     @JsonProperty("lblYubinNo")
     private Label lblYubinNo;
-    @JsonProperty("btnYubinNoGuide")
-    private ButtonDialog btnYubinNoGuide;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("ddlChiku")
@@ -134,24 +132,6 @@ public class KihonJohoDiv extends Panel {
     @JsonProperty("lblYubinNo")
     public void setLblYubinNo(Label lblYubinNo) {
         this.lblYubinNo = lblYubinNo;
-    }
-
-    /*
-     * getbtnYubinNoGuide
-     * @return btnYubinNoGuide
-     */
-    @JsonProperty("btnYubinNoGuide")
-    public ButtonDialog getBtnYubinNoGuide() {
-        return btnYubinNoGuide;
-    }
-
-    /*
-     * setbtnYubinNoGuide
-     * @param btnYubinNoGuide btnYubinNoGuide
-     */
-    @JsonProperty("btnYubinNoGuide")
-    public void setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.btnYubinNoGuide = btnYubinNoGuide;
     }
 
     /*

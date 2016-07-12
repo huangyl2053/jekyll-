@@ -686,16 +686,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnYubinNoGuide() {
-        return this.getShosaiJoken().getKihonJoho().getBtnYubinNoGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.getShosaiJoken().getKihonJoho().setBtnYubinNoGuide(btnYubinNoGuide);
-    }
-
-    @JsonIgnore
     public TextBoxYubinNo getTxtYubinNo() {
         return this.getShosaiJoken().getKihonJoho().getTxtYubinNo();
     }

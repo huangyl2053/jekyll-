@@ -222,10 +222,6 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblYubinNo"));
             }
 
-            public btnYubinNoGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnYubinNoGuide"));
-            }
-
             public txtYubinNo(): UZA.TextBoxYubinNo {
                 return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
             }

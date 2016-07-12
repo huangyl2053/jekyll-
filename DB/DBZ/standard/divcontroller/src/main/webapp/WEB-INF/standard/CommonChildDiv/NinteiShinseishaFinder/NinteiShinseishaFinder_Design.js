@@ -211,10 +211,6 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblYubinNo"));
             };
 
-            Controls.prototype.btnYubinNoGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnYubinNoGuide"));
-            };
-
             Controls.prototype.txtYubinNo = function () {
                 return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
             };

@@ -131,10 +131,11 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(
-                    UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
-        }
+// 挙動があやしいため、一旦、コメントアウト
+//        if (!ResponseHolder.isReRequest()) {
+//            return ResponseData.of(div).addMessage(
+//                    UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
+//        }
         return ResponseData.of(div).respond();
     }
 

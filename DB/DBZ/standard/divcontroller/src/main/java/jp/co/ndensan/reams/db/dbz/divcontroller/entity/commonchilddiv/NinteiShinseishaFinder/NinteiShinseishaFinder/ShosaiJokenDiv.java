@@ -263,16 +263,6 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnYubinNoGuide() {
-        return this.getKihonJoho().getBtnYubinNoGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.getKihonJoho().setBtnYubinNoGuide(btnYubinNoGuide);
-    }
-
-    @JsonIgnore
     public TextBoxYubinNo getTxtYubinNo() {
         return this.getKihonJoho().getTxtYubinNo();
     }
