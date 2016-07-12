@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 画面設計_DBBGM22002_汎用リスト 所得情報のクラス
+ * バッチ設計_DBBBT22002_汎用リスト 所得情報BatchParameterのクラス
  *
- * @reamsid_L DBB-1901-010 surun
+ * @reamsid_L DBB-1901-030 surun
  */
 @lombok.Getter
 @lombok.Setter
