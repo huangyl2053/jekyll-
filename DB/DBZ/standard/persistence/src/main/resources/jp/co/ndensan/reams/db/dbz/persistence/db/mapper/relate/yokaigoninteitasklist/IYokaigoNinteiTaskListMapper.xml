@@ -146,6 +146,7 @@
 	<result property="ikenshoTorokuKanryoYMD"  column="ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 	<result property="shichosonMeisho"  column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 	<result property="johoTorokuKanryoYMD"  column="ninteiShinseiJohoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichijiHanteiKanryoYMD"  column="ichijiHanteiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 	<result property="ichijiHanteiYMD"  column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 	<result property="ichijiHanteiKekkaCode"  column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
 	<result property="ichijiHnateiKeikokuCode"  column="ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -973,6 +974,7 @@
             DbT5105."ikenshoTorokuKanryoYMD",
             DbT7051."shichosonMeisho",
             DbT5105."ninteiShinseiJohoTorokuKanryoYMD",
+            DbT5105."ichijiHanteiKanryoYMD",
             DbT5116."ichijiHanteiYMD",
             DbT5116."ichijiHanteiKekkaCode",
             DbT5116."ichijiHnateiKeikokuCode",
