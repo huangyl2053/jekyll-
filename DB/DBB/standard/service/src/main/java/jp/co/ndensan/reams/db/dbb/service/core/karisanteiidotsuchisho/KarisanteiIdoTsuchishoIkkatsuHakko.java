@@ -441,7 +441,6 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
             }
         }
         出力条件リスト.add(builder.toRString());
-        getZenkenFukaJoho(調定年度, 調定年度);
         Map<String, Object> parameter = new HashMap<>();
         parameter.put(キー_出力順.toString(), 出力順);
         IKarisanteiIdoFukaMapper mapper = provider.create(IKarisanteiIdoFukaMapper.class);
