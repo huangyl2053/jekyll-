@@ -243,8 +243,8 @@
         <if test="kensakuOptionKey2">
             AND DbT5101."torisageKubunCode" = #{torisageKubunCode}
         </if>
-        AND DbT5591."gogitaiYukoKikanKaishiYMD" <= DbT5511."shinsakaiKaisaiYMD"
-        AND DbT5511."shinsakaiKaisaiYMD" <= DbT5591."gogitaiYukoKikanShuryoYMD"
+        AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
+        AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
         ORDER BY
         DbT7051."shichosonMeisho",
         DbT5101."hihokenshaNo",
