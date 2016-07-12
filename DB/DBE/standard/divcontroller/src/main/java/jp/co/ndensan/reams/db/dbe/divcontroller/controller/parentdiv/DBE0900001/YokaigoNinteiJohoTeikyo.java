@@ -97,7 +97,8 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_BackSearchResult(YokaigoNinteiJohoTeikyoDiv div) {
         onLoad(div);
-        return ResponseData.of(div).respond();
+        getHandler(div).btn_BackSearchResult();
+        return ResponseData.of(div).setState(DBE0900001StateName.初期表示);
     }
 
     /**
