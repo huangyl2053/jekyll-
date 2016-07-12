@@ -418,20 +418,4 @@ public class KaigoAtenaJohoHandler {
         return RString.EMPTY.equals(単項目) || null == 単項目;
     }
 
-    /**
-     * 引数定義<br/>
-     *
-     */
-    public enum DBB2710011ViewStateKey {
-
-        /**
-         * 被保険者番号です。
-         */
-        被保険者番号,
-        /**
-         * 賦課年度です。
-         */
-        賦課年度;
-    }
-
 }
