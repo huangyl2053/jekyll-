@@ -97,7 +97,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnShokai(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgShinseiJoho().
-                getActiveRow().getShinseishoKanriNo());
+                getClickedItem().getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
 

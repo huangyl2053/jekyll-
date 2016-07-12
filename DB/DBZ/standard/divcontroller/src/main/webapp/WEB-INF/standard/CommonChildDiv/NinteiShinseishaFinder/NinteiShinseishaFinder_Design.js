@@ -439,20 +439,12 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblKaisaiNumber"));
             };
 
-            Controls.prototype.btnKaisaiNumberStart = function () {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberStart"));
-            };
-
             Controls.prototype.txtKaisaiNumberStart = function () {
                 return new UZA.TextBox(this.convFiledName("txtKaisaiNumberStart"));
             };
 
             Controls.prototype.lblKaisaiNoFor = function () {
                 return new UZA.Label(this.convFiledName("lblKaisaiNoFor"));
-            };
-
-            Controls.prototype.btnKaisaiNumberEnd = function () {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberEnd"));
             };
 
             Controls.prototype.txtKaisaiNumberEnd = function () {

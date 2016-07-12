@@ -1266,16 +1266,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     @JsonIgnore
-    public Button getBtnKaisaiNumberStart() {
-        return this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberStart();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberStart(btnKaisaiNumberStart);
-    }
-
-    @JsonIgnore
     public TextBox getTxtKaisaiNumberStart() {
         return this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().getTxtKaisaiNumberStart();
     }
@@ -1293,16 +1283,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @JsonIgnore
     public void  setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().setLblKaisaiNoFor(lblKaisaiNoFor);
-    }
-
-    @JsonIgnore
-    public Button getBtnKaisaiNumberEnd() {
-        return this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberEnd();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberEnd(btnKaisaiNumberEnd);
     }
 
     @JsonIgnore

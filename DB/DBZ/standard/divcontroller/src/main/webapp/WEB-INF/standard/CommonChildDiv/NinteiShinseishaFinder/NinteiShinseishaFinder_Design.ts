@@ -450,20 +450,12 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblKaisaiNumber"));
             }
 
-            public btnKaisaiNumberStart(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberStart"));
-            }
-
             public txtKaisaiNumberStart(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtKaisaiNumberStart"));
             }
 
             public lblKaisaiNoFor(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblKaisaiNoFor"));
-            }
-
-            public btnKaisaiNumberEnd(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberEnd"));
             }
 
             public txtKaisaiNumberEnd(): UZA.TextBox {

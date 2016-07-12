@@ -5,6 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode.V02A;
+import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode.V06A;
+import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode.V09A;
+import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode.V09B;
+import static jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode.V99A;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -88,5 +97,28 @@ public final class YokaigoJotaiKubunSupport {
      */
     public static IYokaigoJotaiKubun toValue(FlexibleYearMonth 基準年月, RString code) throws IllegalArgumentException {
         return toValue(new FlexibleDate(基準年月.toDateString()), code);
+    }
+
+    /**
+     * 指定の厚労省IF識別コードに該当する要介護状態区分をすべて返却します。
+     *
+     * @param koroshoIfCode 厚労省IF識別コード
+     * @return 該当する要介護状態区分すべて
+     */
+    public static List<IYokaigoJotaiKubun> values(KoroshoIfShikibetsuCode koroshoIfCode) {
+        switch (koroshoIfCode) {
+            case 認定ｿﾌﾄ2009_SP3:
+                return Arrays.<IYokaigoJotaiKubun>asList(YokaigoJotaiKubun09B.values());
+            case 認定ｿﾌﾄ2009:
+                return Arrays.<IYokaigoJotaiKubun>asList(YokaigoJotaiKubun09A.values());
+            case 認定ｿﾌﾄ2006_新要介護認定適用区分が未適用:
+                return Arrays.<IYokaigoJotaiKubun>asList(YokaigoJotaiKubun06A.values());
+            case 認定ｿﾌﾄ2002:
+                return Arrays.<IYokaigoJotaiKubun>asList(YokaigoJotaiKubun02A.values());
+            case 認定ｿﾌﾄ99:
+                return Arrays.<IYokaigoJotaiKubun>asList(YokaigoJotaiKubun99A.values());
+            default:
+                return Collections.emptyList();
+        }
     }
 }
