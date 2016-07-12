@@ -21,6 +21,10 @@ module DBZ {
                 return "onClick_ShosaiJoken";
             }
 
+            public static onChange_ddlKoroshoShikibetsuCode(): string {
+                return "onChange_ddlKoroshoShikibetsuCode";
+            }
+
             public static onClick_NinteiChosa(): string {
                 return "onClick_NinteiChosa";
             }

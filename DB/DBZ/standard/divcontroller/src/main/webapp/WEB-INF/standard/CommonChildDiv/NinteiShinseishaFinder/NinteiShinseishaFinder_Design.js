@@ -16,6 +16,10 @@ var DBZ;
                 return "onClick_ShosaiJoken";
             };
 
+            Events.onChange_ddlKoroshoShikibetsuCode = function () {
+                return "onChange_ddlKoroshoShikibetsuCode";
+            };
+
             Events.onClick_NinteiChosa = function () {
                 return "onClick_NinteiChosa";
             };

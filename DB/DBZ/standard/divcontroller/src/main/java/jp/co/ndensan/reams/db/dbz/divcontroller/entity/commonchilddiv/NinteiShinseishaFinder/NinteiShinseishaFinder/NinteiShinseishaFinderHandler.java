@@ -13,11 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -97,6 +92,7 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlShujiIkubun().setDataSource(ddlShujiIkubun);
         div.getShosaiJoken().setIsOpen(false);
+        init二次判定結果DDL();
         initKihonJoho();
         initNinteiChosa();
         initShujiiJoho();
@@ -105,34 +101,13 @@ public class NinteiShinseishaFinderHandler {
         initKaigoNinteiShinsakaiJoho();
         initZenkaiJoho();
         initKanryoJoho();
-        init二次判定結果DDL();
     }
 
     private void init二次判定結果DDL() {
-        List<KeyValueDataSource> dataSource = dataSourceOf二次判定結果On(FlexibleDate.getNowDate());
-        div.getDdlNijiHanteiKekka().setDataSource(dataSource);
+        div.getDdlNijiHanteiKekka().setDataSource(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
         div.getDdlNijiHanteiKekka().setSelectedIndex(0);
-        div.getDdlZenkaiNijiHanteiKekka().setDataSource(new ArrayList<>(dataSource));
+        div.getDdlZenkaiNijiHanteiKekka().setDataSource(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
         div.getDdlZenkaiNijiHanteiKekka().setSelectedIndex(0);
-    }
-
-    private static List<KeyValueDataSource> dataSourceOf二次判定結果On(FlexibleDate now) {
-        List<KeyValueDataSource> list = new ArrayList<>();
-        list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.非該当, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要支援1, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要支援2, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要介護1, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要介護2, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要介護3, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要介護4, now));
-        list.add(toKeyValueDataSource(YokaigoJotaiKubun.要介護5, now));
-        return list;
-    }
-
-    private static KeyValueDataSource toKeyValueDataSource(YokaigoJotaiKubun yokaigodo, FlexibleDate now) {
-        IYokaigoJotaiKubun current = YokaigoJotaiKubunSupport.toValue(now, yokaigodo.getCode());
-        return new KeyValueDataSource(current.getCode(), current.getName());
     }
 
     private KoroshoIfShikibetsuCode get厚労省IF識別コードOrNull() {
@@ -152,9 +127,11 @@ public class NinteiShinseishaFinderHandler {
     public void set二次判定結果DDL() {
         KoroshoIfShikibetsuCode koroshoIFCode = get厚労省IF識別コードOrNull();
         if (koroshoIFCode == null) {
-            _set二次判定結果DDL(dataSourceOf二次判定結果On(FlexibleDate.getNowDate()));
+            _set二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
+            _set前回二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
         } else {
             _set二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(koroshoIFCode));
+            _set前回二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(koroshoIFCode));
         }
     }
 
@@ -166,6 +143,9 @@ public class NinteiShinseishaFinderHandler {
         } else {
             div.getDdlNijiHanteiKekka().setSelectedKey(key1);
         }
+    }
+
+    private void _set前回二次判定結果DDL(List<KeyValueDataSource> dataSource) {
         RString key2 = findKey(div.getDdlZenkaiNijiHanteiKekka().getSelectedKey(), dataSource);
         div.getDdlZenkaiNijiHanteiKekka().setDataSource(new ArrayList<>(dataSource));
         if (key2.isEmpty()) {
@@ -247,7 +227,7 @@ public class NinteiShinseishaFinderHandler {
     public void openKaigoNinteiShinsakaiJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getKaigoNinteiShinsakaiJoho().setIsOpen(true);
-        div.getDdlNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
+        set二次判定結果DDL();
     }
 
     /**
@@ -256,7 +236,7 @@ public class NinteiShinseishaFinderHandler {
     public void openZenkaiJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getZenkaiJoho().setIsOpen(true);
-        div.getDdlZenkaiNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
+        set二次判定結果DDL();
     }
 
     /**
@@ -408,8 +388,6 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initKaigoNinteiShinsakaiJoho() {
-        div.getDdlNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
-        div.getDdlNijiHanteiKekka().setSelectedIndex(0);
         div.getTxtNinteiYukoKikan().clearValue();
         div.getTxtCheckDay().clearValue();
         div.getTxtNinteiYukoKaishiDateFrom().clearValue();
@@ -425,10 +403,8 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initZenkaiJoho() {
-        div.getDdlZenkaiNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
         div.getTxtZenkaiNinteiChosaItakusakiName().clearValue();
         div.getTxtZenkaiShujiiIryokikanName().clearValue();
-        div.getDdlZenkaiNijiHanteiKekka().setSelectedIndex(0);
         div.getTxtZenkaiNinteiYukoKikan().clearValue();
         div.getTxtZenkaiYukoKaishiDateFrom().clearValue();
         div.getTxtZenkaiYukoKaishiDateTo().clearValue();
@@ -457,31 +433,5 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setSelectedItemsByKey(keys);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(keys);
         div.getChkGetsureiShori().setSelectedItemsByKey(keys);
-
-    }
-
-    private List<KeyValueDataSource> getNijiHanteiKekkaDataSource() {
-        List<KeyValueDataSource> ddlNijiHanteiKekka = new ArrayList<>();
-        ddlNijiHanteiKekka.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        RString koroshoShikibetsuCode = div.getDdlKoroshoShikibetsuCode().getSelectedKey();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun99 code : YokaigoJotaiKubun99.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun02 code : YokaigoJotaiKubun02.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun06 code : YokaigoJotaiKubun06.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(koroshoShikibetsuCode)
-                   || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun09 code : YokaigoJotaiKubun09.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        }
-        return ddlNijiHanteiKekka;
     }
 }
