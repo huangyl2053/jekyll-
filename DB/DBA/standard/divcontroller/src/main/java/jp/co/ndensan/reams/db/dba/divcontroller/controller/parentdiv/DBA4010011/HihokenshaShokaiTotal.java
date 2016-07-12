@@ -138,10 +138,6 @@ public class HihokenshaShokaiTotal {
         資格得喪情報.setShozaiHokensha(row.getShozaiHokenshaCode());
         資格得喪情報.setSochimotoHokensha(row.getSochimotoHokenshaCode());
         資格得喪情報.setKyuHokensha(row.getKyuHokenshaCode());
-
-        System.out.println("sochimotoMae " + 資格得喪情報.getSochimotoHokensha());
-        System.out.println("shozaiAto " + 資格得喪情報.getShozaiHokensha());
-
         ViewStateHolder.put(ViewStateKeys.資格得喪情報, 資格得喪情報);
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
