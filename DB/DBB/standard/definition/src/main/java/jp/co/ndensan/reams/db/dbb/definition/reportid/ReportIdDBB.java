@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 帳票ＩＤの列挙型です。
  *
- * @reamsid_L DBB-9999-022 xicongwang
+ * @reamsid_L DBB-9999-022 liuyang
  */
 public enum ReportIdDBB {
 
@@ -419,6 +419,14 @@ public enum ReportIdDBB {
      * 所得照会票発行一覧表の帳票ID
      */
     DBB200024(new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran"), new RString("所得照会票発行一覧表")),
+    /**
+     * 介護保険　特別徴収同定一覧表の帳票ID
+     */
+    DBB200031(new ReportId("DBB200031_TokubetsuChoshuDoteiIchiran"), new RString("介護保険　特別徴収同定一覧表")),
+    /**
+     * 介護保険　特別徴収同定一覧表の帳票ID
+     */
+    DBB200032(new ReportId("DBB200032_TokubetsuChoshuMidoteiIchiran"), new RString("介護保険　特別徴収未同定一覧表")),
     /**
      *
      * 本算定異動（過年度）結果一覧表の帳票ID
