@@ -93,7 +93,11 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
                 row.getShinseiTorisageDay().setValue(getNull(business.get取下年月日()));
                 row.getNinteiDay().setValue(getNull(business.get二次判定年月日()));
-                row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
+                if (YokaigoJotaiKubun09.なし.getコード().equals(business.get二次判定区分コード().value())) {
+                    row.setYoKaigodo(RString.EMPTY);
+                } else {
+                    row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
+                }
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(business.get二次判定認定有効期間());
                 builder.append(月);
@@ -167,6 +171,33 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 row.getShujiiIryokikanCode(), row.getIryoKikanMeisho(), row.getShujiiCode(), row.getShujiiName());
         div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(row.getShinsakaiKaisaiYoteiYMD().getValue());
         div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(row.getKaigoNinteiShinsakaiKaisaiDay().getValue());
+    }
+
+    /**
+     * 「一覧へ戻る」ボタン押下します。
+     *
+     */
+    public void btn_BackSearchResult() {
+        div.getTxtShinseibi().clearValue();
+        div.getTxtShinseiKubunShin().clearValue();
+        div.getTxtShinseiKubun().clearValue();
+        div.getTxtNinteiChosaIraibi().clearValue();
+        div.getTxtNinteiChosaJisshibi().clearValue();
+        div.getTxtNinteiChosaJuryobi().clearValue();
+        div.getCcdChosaItakusakiAndChosainInput().clear();
+        div.getTxtIkenshoIraibi().clearValue();
+        div.getTxtIkenshoJuryobi().clearValue();
+        div.getCcdShujiiIryoKikanAndShujiiInput().clear();
+        div.getTxtShinsakaiYoteibi().clearValue();
+        div.getTxtShinsakaiKaisaibi().clearValue();
+        div.getChkNinteiChosahyo().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkTokkiJiko().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkShujiiIkensho().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkSonotaShiryo().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkIchijiHanteiKekka().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getRadTokkiJikoMasking().setSelectedKey(キー_0);
+        div.getRadShujii().setSelectedKey(キー_0);
+        div.getRadSohotaShiryoMasking().setSelectedKey(キー_0);
     }
 
     /**

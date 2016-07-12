@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -48,15 +49,19 @@ public class KanendoFuka {
     public ResponseData<KanendoFukaDiv> onLoad(KanendoFukaDiv div) {
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
-        ShoriDateKanri shoriDate1 = HonsanteiIdoKanendo.createInstance().get最大基準日時(過年度賦課, 調定年度);
-        ShoriDateKanri shoriDate2 = HonsanteiIdoKanendo.createInstance().get最大基準日時(過年度賦課確定, 調定年度);
-        ShoriDateKanri shoriDate3 = HonsanteiIdoKanendo.createInstance().getShuchutsuKaishiJikan(調定年度);
-        if (shoriDate2.get基準日時() != null && shoriDate1.get基準日時() != null
-                && shoriDate2.get基準日時().compareTo(shoriDate1.get基準日時()) < 0) {
+        ShoriDateKanri 過年度賦課基準日時 = HonsanteiIdoKanendo.createInstance().get最大基準日時(過年度賦課, 調定年度);
+        ShoriDateKanri 過年度賦課確定基準日時 = HonsanteiIdoKanendo.
+                createInstance().get最大基準日時(過年度賦課確定, 調定年度);
+        SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
+        RString 処理名 = ShoriName.過年度賦課.get名称();
+        ShoriDateKanri 基準日時 = HonsanteiIdoKanendo.createInstance().
+                getShuchutsuKaishiJikan(調定年度, サブ業務コード, 処理名);
+        if (過年度賦課確定基準日時.get基準日時() != null && 過年度賦課基準日時.get基準日時() != null
+                && 過年度賦課確定基準日時.get基準日時().isBefore(過年度賦課基準日時.get基準日時())) {
             throw new ApplicationException(DbbErrorMessages.前回過年度賦課確定未処理.getMessage());
         }
-        List<ShoriDateKanri> shdaList = HonsanteiIdoKanendo.createInstance().getShoriJokyo(調定年度);
-        boolean flag = getHandler(div).initialize(調定年度, shdaList, shoriDate3);
+        List<ShoriDateKanri> 処理状況list = HonsanteiIdoKanendo.createInstance().getShoriJokyo(調定年度);
+        boolean flag = getHandler(div).initialize(調定年度, 処理状況list, 基準日時);
         ViewStateHolder.put(ViewStateKeys.実行フラグ, flag);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
@@ -88,7 +93,7 @@ public class KanendoFuka {
      * @param div KanendoFukaDiv
      * @return ResponseData
      */
-    public ResponseData<HonsanteiIdoKanendoBatchParameter> onImplement(KanendoFukaDiv div) {
+    public ResponseData<HonsanteiIdoKanendoBatchParameter> onClick_Reserve(KanendoFukaDiv div) {
         HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
         HonsanteiIdoKanendoBatchParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
         return ResponseData.of(para).respond();

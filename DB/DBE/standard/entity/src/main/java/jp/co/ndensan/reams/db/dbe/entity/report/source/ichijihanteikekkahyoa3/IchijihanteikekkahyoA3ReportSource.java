@@ -16,16 +16,16 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class IchijihanteikekkahyoA3ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportItem(name = "ShisetsuNameTxit1", order = 1)
-    public RString ShisetsuNameTxit1;
+    @ReportItem(name = "shisetsuNameTxit1", order = 1)
+    public RString shisetsuNameTxit1;
     @ReportItem(name = "imgShisetsuName1", order = 2)
     public RString imgShisetsuName1;
     @ReportItem(name = "shisetsuAddressTxit1", order = 3)
     public RString shisetsuAddressTxit1;
     @ReportItem(name = "imgShisetsuAddress1", order = 4)
     public RString imgShisetsuAddress1;
-    @ReportItem(name = "ShisetsuTelTxit1", order = 5)
-    public RString ShisetsuTelTxit1;
+    @ReportItem(name = "shisetsuTelTxit1", order = 5)
+    public RString shisetsuTelTxit1;
     @ReportItem(name = "imgShisetsuTel1", order = 6)
     public RString imgShisetsuTel1;
     @ReportItem(name = "gogitaiNo", length = 3, order = 7)

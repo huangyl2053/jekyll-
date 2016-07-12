@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -139,7 +138,7 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         }
 
         if (editedData.get更正後() != null && editedData.get更正後().get生保開始日() != null) {
-            item.setListUpper_10(new FlexibleDate(editedData.get更正後().get生保開始日()).wareki().toDateString());
+            item.setListUpper_10(editedData.get更正後().get生保開始日());
         }
         if (editedData.get更正後() != null && editedData.get更正後().get生活保護扶助種類() != null) {
             item.setListUpper_11(CodeMaster.getCode(SubGyomuCode.DBB介護賦課, URZCodeShubetsu.扶助種類コード.getCodeShubetsu(),

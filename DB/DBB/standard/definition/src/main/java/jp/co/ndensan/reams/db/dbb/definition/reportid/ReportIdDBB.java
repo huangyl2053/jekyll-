@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 帳票ＩＤの列挙型です。
  *
- * @reamsid_L DBB-9999-022 xicongwang
+ * @reamsid_L DBB-9999-022 liuyang
  */
 public enum ReportIdDBB {
 
@@ -375,6 +375,10 @@ public enum ReportIdDBB {
      */
     DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定")),
     /**
+     * 特別徴収平準化計算（特別徴収6月分）結果一覧表の帳票ID
+     */
+    DBB200003(new ReportId("DBB200003_TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiran"), new RString("特別徴収平準化計算（特別徴収6月分）結果一覧表")),
+    /**
      * 特別徴収平準化仮算定額変更通知書発行一覧表の帳票ID
      */
     DBB200004(new ReportId("DBB200004_TokuChoHeijunkaTsuchishoHakkoIchiran"), new RString("特別徴収平準化仮算定額変更通知書発行一覧表")),
@@ -415,6 +419,14 @@ public enum ReportIdDBB {
      * 所得照会票発行一覧表の帳票ID
      */
     DBB200024(new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran"), new RString("所得照会票発行一覧表")),
+    /**
+     * 介護保険　特別徴収同定一覧表の帳票ID
+     */
+    DBB200031(new ReportId("DBB200031_TokubetsuChoshuDoteiIchiran"), new RString("介護保険　特別徴収同定一覧表")),
+    /**
+     * 介護保険　特別徴収同定一覧表の帳票ID
+     */
+    DBB200032(new ReportId("DBB200032_TokubetsuChoshuMidoteiIchiran"), new RString("介護保険　特別徴収未同定一覧表")),
     /**
      *
      * 本算定異動（過年度）結果一覧表の帳票ID

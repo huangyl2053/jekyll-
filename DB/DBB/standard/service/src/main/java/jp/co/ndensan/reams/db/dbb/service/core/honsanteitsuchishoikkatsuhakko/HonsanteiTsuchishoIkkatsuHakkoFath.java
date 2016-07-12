@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -168,6 +167,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
     private static final RString 定値_しない = new RString("しない");
     private static final RString 区分_管内 = new RString("1");
     private static final RString 区分_管外 = new RString("2");
+    private static final RString 定値_ほし = new RString("＊");
     private final DbT2017TsuchishoHakkogoIdoshaDac 通知書発行後異動者Dac;
 
     /**
@@ -261,7 +261,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        //TO QA914 Encode.UTF_8withBOM
         RString eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収_EUCファイル名);
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
@@ -404,7 +403,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath, eucFileName);
-        //TO QA914 Encode.UTF_8withBOM
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -548,7 +546,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath, eucFileName);
-        //TO QA914 Encode.UTF_8withBOM
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -600,7 +597,6 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                             ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額().toString()));
                 }
                 set当期(編集後本算定通知書共通情報, 出力期, bodyList);
-                //TODO QA912 納付人/送付先
                 set納付人_送付先(編集後本算定通知書共通情報, bodyList);
 
                 if (isNull(編集後本算定通知書共通情報.get更正後())) {
@@ -648,11 +644,15 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
     }
 
     private void set納付人_送付先(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, List<RString> bodyList) {
-        if (isNull(編集後本算定通知書共通情報.get編集後宛先())) {
+        if (isNull(編集後本算定通知書共通情報.get編集後宛先())
+                || (isNull(編集後本算定通知書共通情報.get編集後宛先().get宛先名称())
+                && isNull(編集後本算定通知書共通情報.get編集後宛先().get本人名称()))
+                || (!isNull(編集後本算定通知書共通情報.get編集後宛先().get宛先名称())
+                && 編集後本算定通知書共通情報.get編集後宛先().get宛先名称().equals(編集後本算定通知書共通情報.get編集後宛先().get本人名称()))) {
             bodyList.add(RString.EMPTY);
         } else {
-            bodyList.add(AtesakiShubetsu.本人.equals(編集後本算定通知書共通情報.get編集後宛先().get宛先種別())
-                    ? RString.EMPTY : 編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName().getColumnValue());
+            bodyList.add(定値_ほし.concat(RString.FULL_SPACE)
+                    .concat(編集後本算定通知書共通情報.get編集後宛先().get宛先名称().getName().getColumnValue()));
         }
     }
 

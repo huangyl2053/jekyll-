@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.tokuchoheijunka6tsuchishoikatsuhako;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuIkatsuHakoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaZennendoTempTblCreateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo4gatsuKaishiProcess;
@@ -34,6 +35,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 仮算定額変更情報一時テーブル作成 = "fukaJohoShutoku";
+    private static final String 仮算定額変更情報一時テーブル作成_一括発行 = "fukaJohoShutokuForIkatsuHako";
     private static final String 前年度賦課情報一時テーブル作成 = "zennendoJohoCreate";
     private static final String 前年度特徴期別金額06の更新 = "karisanteigakuTempTblUpdate";
     private static final String 継続の被保険者区分の更新 = "keizokuHihokenshaKubunUpdate";
@@ -52,16 +54,17 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
             executeStep(システム日時の取得);
             executeStep(計算後情報作成);
         }
-
-        executeStep(仮算定額変更情報一時テーブル作成);
+        if (getParameter().is一括発行フラグ()) {
+            executeStep(仮算定額変更情報一時テーブル作成_一括発行);
+        } else {
+            executeStep(仮算定額変更情報一時テーブル作成);
+        }
         executeStep(前年度賦課情報一時テーブル作成);
         executeStep(前年度特徴期別金額06の更新);
         executeStep(継続の被保険者区分の更新);
         executeStep(被保険者区分4月開始);
         executeStep(被保険者区分6月開始);
-
         executeStep(通知書の発行);
-
         executeStep(通知書発行後異動者の登録);
     }
 
@@ -91,6 +94,18 @@ public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<
             }
         }
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(出力帳票entity.get帳票分類ID())).define();
+    }
+
+    /**
+     * 仮算定額変更情報一時テーブル作成と賦課情報の取得を行います。（一括発行の場合）
+     *
+     * @return バッチコマンド
+     */
+    @Step(仮算定額変更情報一時テーブル作成_一括発行)
+    protected IBatchFlowCommand fukaJohoShutokuForIkatsuHako() {
+        return loopBatch(FukaJohoShutokuIkatsuHakoProcess.class)
+                .arguments(createFukaJohoShutokuParameter())
+                .define();
     }
 
     /**

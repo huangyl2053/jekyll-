@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistparam.HanyoListParamBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistparam.HanyoListShotokuJohoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220002.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -76,10 +76,10 @@ public class HanyoListParamHandler {
     /**
      * 実行ボタンイベント。
      *
-     * @return HanyoListParamBatchParameter
+     * @return HanyoListShotokuJohoBatchParameter
      */
-    public HanyoListParamBatchParameter onClick_btnExecute() {
-        HanyoListParamBatchParameter parameter = new HanyoListParamBatchParameter();
+    public HanyoListShotokuJohoBatchParameter onClick_btnExecute() {
+        HanyoListShotokuJohoBatchParameter parameter = new HanyoListShotokuJohoBatchParameter();
         if (div.getCcdShutsuryokujun() != null) {
             ReportId 帳票ID = div.getCcdShutsuryokujun().get帳票ID();
             parameter.set帳票ID(帳票ID);
@@ -122,9 +122,9 @@ public class HanyoListParamHandler {
     /**
      * 課税区分減免前後
      *
-     * @param parameter HanyoListParamBatchParameter
+     * @param parameter HanyoListShotokuJohoBatchParameter
      */
-    private void 課税区分減免前後(HanyoListParamBatchParameter parameter) {
+    private void 課税区分減免前後(HanyoListShotokuJohoBatchParameter parameter) {
         RString code = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         parameter.set住民税減免前後表示区分(code);
@@ -181,9 +181,9 @@ public class HanyoListParamHandler {
     /**
      * 宛名抽出条件と出力順と出力項目
      *
-     * @param parameter HanyoListParamBatchParameter
+     * @param parameter HanyoListShotokuJohoBatchParameter
      */
-    private void 宛名抽出条件と出力順と出力項目(HanyoListParamBatchParameter parameter) {
+    private void 宛名抽出条件と出力順と出力項目(HanyoListShotokuJohoBatchParameter parameter) {
         AtenaSelectBatchParameter 宛名抽出条件 = new AtenaSelectBatchParameter();
         if (div.getChushutsuPanel2() != null && div.getChushutsuPanel2().getCcdAtenaJoken() != null) {
             NenreiSoChushutsuHoho 年齢層抽出方法 = div.getChushutsuPanel2().getCcdAtenaJoken().get年齢層抽出方法();

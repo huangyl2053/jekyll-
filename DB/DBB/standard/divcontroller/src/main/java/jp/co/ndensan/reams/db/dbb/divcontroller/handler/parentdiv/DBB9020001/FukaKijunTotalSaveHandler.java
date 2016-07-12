@@ -834,6 +834,7 @@ public class FukaKijunTotalSaveHandler {
             RString 段階インデックス,
             List<dgHokenryoDankai_Row> rowList) {
         Decimal 保険料率;
+        HokenryoDankai 保険料段階Entity = null;
         for (dgHokenryoDankai_Row row : rowList) {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             RString 段階 = row.getDdlHokenryoDankai().getSelectedValue();
@@ -841,24 +842,34 @@ public class FukaKijunTotalSaveHandler {
                 continue;
             }
             if (インデックス_07.equals(段階インデックス) && 第5段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_050).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_050).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_08.equals(段階インデックス) && 第6段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_09.equals(段階インデックス) && 第7段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_10.equals(段階インデックス) && 第8段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_11.equals(段階インデックス) && 第9段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_12.equals(段階インデックス) && 第10段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_13.equals(段階インデックス) && 第11段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                break;
             } else {
-                return get保険料段階_第5段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                保険料段階Entity = get保険料段階_第5段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                if (保険料段階Entity != null) {
+                    break;
+                }
             }
         }
-        return null;
+        return 保険料段階Entity;
     }
 
     private HokenryoDankai get保険料段階_第5段階(HokenryoDankai 保険料段階,
@@ -891,6 +902,7 @@ public class FukaKijunTotalSaveHandler {
             RString 段階インデックス,
             List<dgHokenryoDankai_Row> rowList) {
         Decimal 保険料率;
+        HokenryoDankai 保険料段階Entity = null;
         for (dgHokenryoDankai_Row row : rowList) {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             RString 段階 = row.getDdlHokenryoDankai().getSelectedValue();
@@ -898,24 +910,34 @@ public class FukaKijunTotalSaveHandler {
                 continue;
             }
             if (インデックス_07.equals(段階インデックス) && 第6段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_08.equals(段階インデックス) && 第7段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_09.equals(段階インデックス) && 第8段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_10.equals(段階インデックス) && 第9段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_11.equals(段階インデックス) && 第10段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_12.equals(段階インデックス) && 第11段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_13.equals(段階インデックス) && 第12段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                break;
             } else {
-                return get保険料段階_第6段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                保険料段階Entity = get保険料段階_第6段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                if (保険料段階Entity != null) {
+                    break;
+                }
             }
         }
-        return null;
+        return 保険料段階Entity;
     }
 
     private HokenryoDankai get保険料段階_第6段階(HokenryoDankai 保険料段階,
@@ -946,6 +968,7 @@ public class FukaKijunTotalSaveHandler {
             RString 段階インデックス,
             List<dgHokenryoDankai_Row> rowList) {
         Decimal 保険料率;
+        HokenryoDankai 保険料段階Entity = null;
         for (dgHokenryoDankai_Row row : rowList) {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             RString 段階 = row.getDdlHokenryoDankai().getSelectedValue();
@@ -953,24 +976,34 @@ public class FukaKijunTotalSaveHandler {
                 continue;
             }
             if (インデックス_07.equals(段階インデックス) && 第7段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_08.equals(段階インデックス) && 第8段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_09.equals(段階インデックス) && 第9段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_10.equals(段階インデックス) && 第10段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_11.equals(段階インデックス) && 第11段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_12.equals(段階インデックス) && 第12段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_13.equals(段階インデックス) && 第13段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_130).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_130).set保険料率(保険料率).build();
+                break;
             } else {
-                return get保険料段階_第7段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                保険料段階Entity = get保険料段階_第7段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                if (保険料段階Entity != null) {
+                    break;
+                }
             }
         }
-        return null;
+        return 保険料段階Entity;
     }
 
     private HokenryoDankai get保険料段階_第7段階(HokenryoDankai 保険料段階,

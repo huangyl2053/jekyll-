@@ -2233,7 +2233,14 @@ and open the template in the editor.
         "jusho",
         "banchi",
         "katagaki",
-        "shisetyuJotaiFlag"
+        "shisetyuJotaiFlag",
+        "juminShubetsuCode",
+        "juminJotaiCode",
+        "gyoseikuName",
+        "kanaMeisho",
+        "yubinNo",
+        "seibetsuCode",
+        "jukyuKubun"
         FROM
         "TmpHihokenshasho_Ichi"
         WHERE
@@ -2421,7 +2428,14 @@ and open the template in the editor.
         "jusho",
         "banchi",
         "katagaki",
-        "shisetyuJotaiFlag"
+        "shisetyuJotaiFlag",
+        "juminShubetsuCode",
+        "juminJotaiCode",
+        "gyoseikuName",
+        "kanaMeisho",
+        "yubinNo",
+        "seibetsuCode",
+        "jukyuKubun"
         FROM
         "TmpHihokenshasho_Ichi"
         <if test="orderbyFlag">

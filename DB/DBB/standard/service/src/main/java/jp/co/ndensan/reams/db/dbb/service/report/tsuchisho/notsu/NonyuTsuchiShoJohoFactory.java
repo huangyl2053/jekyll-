@@ -100,6 +100,7 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 出力期リスト 出力期リスト
      * @param 代納人氏名 代納人氏名
      * @return 本算定納入通知書情報
+     * @throws NullPointerException パラメータのいずれかがNullの場合。
      */
     public HonSanteiNonyuTsuchiShoJoho create本算定納入通知書情報(
             HonSanteiTsuchiShoKyotsu 本算定通知書情報,
@@ -241,6 +242,7 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 出力期リスト 出力期リスト
      * @param 代納人氏名 代納人氏名
      * @return 仮算定納入通知書情報
+     * @throws NullPointerException パラメータのいずれかがNullの場合。
      */
     public KariSanteiNonyuTsuchiShoJoho create仮算定納入通知書情報(
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報,

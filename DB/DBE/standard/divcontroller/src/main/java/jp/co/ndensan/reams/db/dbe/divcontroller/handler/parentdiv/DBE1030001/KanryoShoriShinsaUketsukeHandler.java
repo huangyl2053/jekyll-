@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1030001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -40,12 +41,14 @@ public class KanryoShoriShinsaUketsukeHandler {
     /**
      * 要介護認定完了情報更新の処理です。
      *
-     * @param ninteiKanryoJoho NinteiKanryoJoho
-     * @return NinteiKanryoJoho
+     * @param list List<NinteiKanryoJoho>
+     * @return List<NinteiKanryoJoho>
      */
-    public NinteiKanryoJoho 要介護認定完了情報更新(NinteiKanryoJoho ninteiKanryoJoho) {
-        return ninteiKanryoJoho.createBuilderForEdit().set認定申請情報登録完了年月日(FlexibleDate.getNowDate()).build();
-
+    public List<NinteiKanryoJoho> 要介護認定完了情報更新(List<NinteiKanryoJoho> list) {
+        for (NinteiKanryoJoho ninteiKanryoJoho : list) {
+            ninteiKanryoJoho.createBuilderForEdit().set認定申請情報登録完了年月日(FlexibleDate.getNowDate()).build();
+        }
+        return list;
     }
 
 }

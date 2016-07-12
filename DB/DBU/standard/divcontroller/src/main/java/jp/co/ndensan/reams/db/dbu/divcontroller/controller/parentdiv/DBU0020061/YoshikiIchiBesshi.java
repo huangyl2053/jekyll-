@@ -16,13 +16,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParamete
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -72,10 +70,8 @@ public class YoshikiIchiBesshi {
 
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
             JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(引き継ぎデータ);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            getHandler(div).show削除正常終了();
+            return ResponseData.of(div).setState(DBU0020061StateName.完了状態);
         }
 
         List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ);
@@ -103,26 +99,10 @@ public class YoshikiIchiBesshi {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データ);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getMessage(div);
+            getHandler(div).show更新正常終了();
             return ResponseData.of(div).setState(DBU0020061StateName.完了状態);
         }
         return ResponseData.of(div).respond();
-    }
-
-    private void getMessage(YoshikiIchiBesshiDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).show削除正常終了();
-        }
-        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).show更新正常終了();
-        }
     }
 
     /**
@@ -133,7 +113,7 @@ public class YoshikiIchiBesshi {
      */
     public ResponseData<YoshikiIchiBesshiDiv> onClick_btnBack(YoshikiIchiBesshiDiv div) {
         YoshikiIchiBesshiHandler handler = getHandler(div);
-        List<JigyoHokokuTokeiData> 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本, List.class);
+        List<JigyoHokokuTokeiData> 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.業報告統計データ_リスト, List.class);
         if (!ResponseHolder.isReRequest()) {
             if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
                 return ResponseData.of(div).forwardWithEventName(

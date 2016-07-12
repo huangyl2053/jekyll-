@@ -228,8 +228,7 @@ public class NonyuTsuchiShoDataHenshu {
                 基礎.set金額(前年度情報有無 ? decimalToRString(前年度情報.get前年度最終期普徴期別介護保険料()) : 空白);
             } else {
                 基礎.set年度(編集後納入通知書共通情報.get賦課年度().toDateString());
-                基礎.set金額(前年度情報有無
-                        ? null == 編集後納入通知書共通情報.get更正後() ? 空白 : 編集後納入通知書共通情報.get更正後().get保険料率() : 空白);
+                基礎.set金額(null == 編集後納入通知書共通情報.get更正後() ? 空白 : 編集後納入通知書共通情報.get更正後().get保険料率());
             }
         }
         return 基礎;

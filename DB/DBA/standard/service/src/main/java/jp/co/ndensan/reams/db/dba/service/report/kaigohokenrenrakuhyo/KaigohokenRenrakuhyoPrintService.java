@@ -17,25 +17,28 @@ import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojushoeditor.KaigoJushoEditor;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.kogakukaigoservicehi.KogakuKaigoServiceHiJikoFutanJogenGaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.tokuteinyushosha.TokuteiNyushoshaFutanGendoNichigakuGetter;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -81,7 +84,7 @@ public class KaigohokenRenrakuhyoPrintService {
         KaigohokenRenrakuhyo renrakuhyo = new KaigohokenRenrakuhyo();
 
         TokuteiNyushoshaFutanGendoNichigakuGetter gendoNichigakuGetter = new TokuteiNyushoshaFutanGendoNichigakuGetter();
-        renrakuhyo.set作成年月日(hold.get連絡票作成日().wareki().toDateString());
+        renrakuhyo.set作成年月日(getパターン12(hold.get連絡票作成日()));
         renrakuhyo.set被保険者番号(get被保険者番号(hold));
         IKojin 個人 = hold.get個人();
         if (個人 == null) {
@@ -92,8 +95,10 @@ public class KaigohokenRenrakuhyoPrintService {
             renrakuhyo.set住所(RString.EMPTY);
             renrakuhyo.set電話番号(RString.EMPTY);
         } else {
-            renrakuhyo.set氏名フリガナ(個人.get名称().getKana().getColumnValue());
-            renrakuhyo.set被保険者氏名(個人.get名称().getName().getColumnValue());
+            if (個人.get名称() != null) {
+                renrakuhyo.set氏名フリガナ(get氏名フリガナ(個人.get名称().getKana()));
+                renrakuhyo.set被保険者氏名(get被保険者氏名(個人.get名称().getName()));
+            }
             renrakuhyo.set生年月日(get生年月日(個人));
             renrakuhyo.set性別(getチェック(個人.get性別() != null, 個人.get性別().getCommonName()));
             KaigoJushoEditor kaigoJushoEditor = new KaigoJushoEditor();
@@ -621,7 +626,7 @@ public class KaigohokenRenrakuhyoPrintService {
     private RString get生年月日(IKojin 個人) {
         IDateOfBirth 生年月日 = 個人.get生年月日();
         JuminShubetsu 住民種別 = 個人.get住民種別();
-        RString 表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
+        RString 表示方法 = DbBusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (生年月日 == null) {
             return RString.EMPTY;
         }
@@ -643,6 +648,20 @@ public class KaigohokenRenrakuhyoPrintService {
         if (hold != null && hold.get被保険者台帳() != null
                 && hold.get被保険者台帳().getShichosonCode() != null && hold.get被保険者台帳().getShichosonCode().isEmpty()) {
             return hold.get被保険者台帳().getShichosonCode().value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get氏名フリガナ(AtenaKanaMeisho 氏名フリガナ) {
+        if (氏名フリガナ != null && !氏名フリガナ.isEmpty()) {
+            return 氏名フリガナ.value();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get被保険者氏名(AtenaMeisho 被保険者氏名) {
+        if (被保険者氏名 != null && !被保険者氏名.isEmpty()) {
+            return 被保険者氏名.value();
         }
         return RString.EMPTY;
     }

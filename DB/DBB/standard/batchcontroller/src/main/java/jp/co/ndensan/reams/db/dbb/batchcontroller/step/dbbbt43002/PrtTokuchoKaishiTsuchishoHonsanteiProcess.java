@@ -330,8 +330,8 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目1 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_NENDO, "年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_TSUCHISHONO2, "通知書番号2");
+        key1(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_NENDO, "賦課年度"),
+        key2(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_TSUCHISHONO2, "通知書番号");
 
         private final RString itemName;
         private final RString printName;
@@ -386,8 +386,8 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目2 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_NENDO, "年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_TSUCHISHONO1, "通知書番号1");
+        key1(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_NENDO, "賦課年度"),
+        key2(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_TSUCHISHONO1, "通知書番号");
 
         private final RString itemName;
         private final RString printName;
@@ -441,7 +441,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目3 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_NENDO, "年度2"),
+        key1(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_NENDO, "賦課年度"),
         key2(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;
@@ -497,7 +497,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目4 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_NENDO, "年度2"),
+        key1(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_NENDO, "賦課年度"),
         key2(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;
@@ -553,7 +553,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目5 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_NENDO, "年度"),
+        key1(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_NENDO, "賦課年度"),
         key2(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;
@@ -608,7 +608,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目6 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_NENDO, "年度"),
+        key1(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_NENDO, "賦課年度"),
         key2(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;
@@ -662,7 +662,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProces
 
     private enum 特定項目7 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource.ITEM_TITLENENDO, "年度名"),
+        key1(TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource.ITEM_TITLENENDO, "賦課年度"),
         key2(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;

@@ -67,6 +67,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
@@ -83,8 +84,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -358,8 +357,13 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             return null;
         }
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(特別徴収開始通知書本算定_帳票分類ID);
+        int 定型文文字サイズ = 0;
+        if (帳票制御共通 != null && !RString.isNullOrEmpty(帳票制御共通.get定型文文字サイズ())) {
+            定型文文字サイズ = Integer.parseInt(帳票制御共通.get定型文文字サイズ().toString());
+        }
         //TODO QA912通知書定型文の取得
-        RString 通知書定型文 = RString.EMPTY;
+        RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
+                特別徴収開始通知書本算定_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, FlexibleDate.getNowDate());
         RString 宛名連番 = RString.EMPTY;
         ChohyoSeigyoHanyo 帳票制御 = load帳票制御汎用ByKey(特別徴収開始通知書本算定_帳票分類ID, 定値_管理年度, 定値_項目名);
         if (帳票制御 != null && 定値_印字する.equals(帳票制御.get設定値())) {
@@ -537,18 +541,12 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(決定変更通知書_帳票分類ID);
         //TODO QA912 「通知書定型文の取得」用メソッドが帳票共通クラスReportUtilに存在しない。
-        RString 通知書定型文 = RString.EMPTY;
-        if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.get定型文文字サイズ()).isEmpty()) {
-            int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.get定型文文字サイズ()).toString());
-            FlexibleDate システム日付 = FlexibleDate.getNowDate();
-            TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo
-                    = manager.get通知書定形文検索(SubGyomuCode.DBB介護賦課, 決定変更通知書_帳票分類ID,
-                            KamokuCode.EMPTY, パターン番号, INT_1, システム日付);
-            if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                通知書定型文 = tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        int 定型文文字サイズ = 0;
+        if (帳票制御共通 != null && !RString.isNullOrEmpty(帳票制御共通.get定型文文字サイズ())) {
+            定型文文字サイズ = Integer.parseInt(帳票制御共通.get定型文文字サイズ().toString());
         }
+        RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
+                特別徴収開始通知書本算定_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, FlexibleDate.getNowDate());
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
@@ -590,8 +588,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                 KaigoHokenHokenryogakuKetteiTsuchishoJoho 介護保険料額決定通知書 = new KaigoHokenHokenryogakuKetteiTsuchishoJoho();
                 介護保険料額決定通知書.set文書番号(文書番号);
                 介護保険料額決定通知書.set本算定決定通知書情報(本算定決定通知書情報);
-                //TODO QA912
-                介護保険料額決定通知書.set調定事由リスト(null);
                 介護保険料額決定通知書.set通知書定型文(通知書定型文);
                 entities.add(介護保険料額決定通知書);
                 if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
@@ -743,8 +739,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
                 KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 通知書情報 = new KaigoHokenryogakuHenkoKenChushiTsuchishoJoho();
                 通知書情報.set文書番号(文書番号);
                 通知書情報.set本算定決定通知書情報(本算定変更通知書情報);
-                //TODO QA912
-                通知書情報.set調定事由リスト(null);
                 entities.add(通知書情報);
                 if (ReportIdDBB.DBB100042.getReportId().equals(帳票ID)) {
                     new KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService().printB5Yoko(entities, reportManager);
