@@ -51,7 +51,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         kunbunCode.addAll(createListFromNinteiShinseiShinseijiKubunCode());
         div.getDdlShinseijiShinseiKubun().getDataSource().clear();
         div.getDdlShinseijiShinseiKubun().getDataSource().addAll(kunbunCode);
-        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTextBoxNum().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
     }
 
