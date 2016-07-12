@@ -393,9 +393,9 @@ public class HonsanteiIdoHandler {
                         flag = true;
                     }
                 }
-                出力期 = kohoFactory.create出力期候補(flag, false);
+                出力期 = kohoFactory.create出力期候補(flag, 月の期.get期());
             } else {
-                出力期 = kohoFactory.create出力期候補(false, false);
+                出力期 = kohoFactory.create出力期候補(false, 月の期.get期());
             }
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             for (ShutsuryokuKiKoho entity : 出力期) {
