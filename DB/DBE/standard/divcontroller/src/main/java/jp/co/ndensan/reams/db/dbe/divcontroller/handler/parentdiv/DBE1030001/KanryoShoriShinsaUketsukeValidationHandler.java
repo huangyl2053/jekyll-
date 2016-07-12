@@ -44,20 +44,20 @@ public class KanryoShoriShinsaUketsukeValidationHandler {
     public ValidationMessageControlPairs 審査受付を完了するボタンを押下チェック処理(ValidationMessageControlPairs pairs) {
         if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
             pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの存在チェック));
+            return pairs;
         }
 
         if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
             pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの行選択チェック));
+            return pairs;
         }
 
         List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
         for (dgNinteiTaskList_Row row : rowList) {
-
             if (row.getShinseiUketsukeKanryoDay().getValue() != null) {
-
                 pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧選択行の完了処理チェック));
+                return pairs;
             }
-
         }
 
         return pairs;
@@ -72,12 +72,11 @@ public class KanryoShoriShinsaUketsukeValidationHandler {
     public ValidationMessageControlPairs 一覧を出力するボタンの押下チェック処理(ValidationMessageControlPairs pairs) {
         if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
             pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの存在チェック));
-        }
-
-        if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
+            return pairs;
+        } else if (div.getCcdNinteiTaskList().getCheckbox() == null || div.getCcdNinteiTaskList().getCheckbox().isEmpty()) {
             pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.申請情報登録完了一覧データの行選択チェック));
+            return pairs;
         }
-
         return pairs;
     }
 

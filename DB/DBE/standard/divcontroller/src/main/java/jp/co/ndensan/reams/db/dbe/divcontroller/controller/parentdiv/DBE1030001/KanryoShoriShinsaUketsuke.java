@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE1030001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.DBE1030001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeDiv;
@@ -142,6 +143,7 @@ public class KanryoShoriShinsaUketsuke {
             }
 
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
+            List<NinteiKanryoJoho> list = new ArrayList();
             for (dgNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
@@ -150,11 +152,11 @@ public class KanryoShoriShinsaUketsuke {
                 if (!RString.isNullOrEmpty(申請書管理番号)) {
                     NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
-                    KanryoShoriShinsaUketsukeManager.createInstance().要介護認定完了情報更新(getHandler(div)
-                            .要介護認定完了情報更新(ninteiKanryoJoho));
-
+                    list.add(ninteiKanryoJoho);
                 }
             }
+            KanryoShoriShinsaUketsukeManager.createInstance().要介護認定完了情報更新(getHandler(div)
+                    .要介護認定完了情報更新(list));
             RealInitialLocker.release(LOCKINGKEY);
             div.getCcdKanryoMsg().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE1030001StateName.完了);

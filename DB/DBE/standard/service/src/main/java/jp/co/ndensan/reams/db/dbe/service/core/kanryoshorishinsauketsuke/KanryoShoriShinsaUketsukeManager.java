@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.kanryoshorishinsauketsuke;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -48,15 +49,19 @@ public class KanryoShoriShinsaUketsukeManager {
     /**
      * 要介護認定完了情報更新処理です。
      *
-     * @param ninteiKanryoJoho ninteiKanryoJoho
-     * @return int
+     * @param list List<NinteiKanryoJoho>
+     * @return 更新件数
      */
     @Transaction
-    public int 要介護認定完了情報更新(NinteiKanryoJoho ninteiKanryoJoho) {
-        if (ninteiKanryoJoho != null) {
-            return dac.save(ninteiKanryoJoho.toEntity());
+    public int 要介護認定完了情報更新(List<NinteiKanryoJoho> list) {
+        int 更新件数 = 0;
+        for (NinteiKanryoJoho ninteiKanryoJoho : list) {
+            if (ninteiKanryoJoho != null) {
+                dac.save(ninteiKanryoJoho.toEntity());
+                更新件数 = 更新件数 + 1;
+            }
         }
-        return 0;
+        return 更新件数;
     }
 
 }
