@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class NinteiChosaDataOutputHandler {
 
     private final NinteiChosaDataOutputDiv div;
-    private int maxCount;
     private static final RString BTNEXECUTE = new RString("btnExecute");
 
     /**
