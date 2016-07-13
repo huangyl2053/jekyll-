@@ -54,7 +54,7 @@ public class NonyuTsuchishoCVSKakukoNofushoEditor implements INonyuTsuchishoCVSK
     @Override
     public NonyuTsuchishoCVSKakukoSource edit(NonyuTsuchishoCVSKakukoSource source) {
         editSource(source);
-        source.layoutBreakItem = 1;
+        source.layoutBreakItem = 2;
         return source;
     }
 

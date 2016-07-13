@@ -124,7 +124,7 @@ public class ShiharaiHohoKanriListMainHandler {
         tempData.set償還決定登録者の選択(div.getChushutsuJoken().getDdl1GoShokanKettei().getSelectedKey());
         tempData.set償還決定登録者1の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiSashitomeAriOnly().getSelectedKey());
         tempData.set償還決定登録者2の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiKojoAriOnly().getSelectedKey());
-        tempData.set改頁出力順ID(new RString(String.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID())));
+        tempData.set改頁出力順ID(div.getCcdChohyoShutsuryokujun().get出力順ID());
         tempData.set帳票ID(ReportIdDBD.DBD200007.getReportId().value());
         ShiharaiHohoHenkoListFlowParameter batchParameter = new ShiharaiHohoHenkoListFlowParameter();
         batchParameter.toDbd207010BatchParameter(tempData);

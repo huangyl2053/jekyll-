@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ininteichosaschebusiness.Ninteic
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshohoshujissekijoho.ShujiiIkenshoHoshuJissekiJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuTankaMybatisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5601NinteiChosaHoshuJissekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaRelateEntity;
@@ -99,6 +100,27 @@ public class INinteiChosaHoshuJissekiJohoManager {
         List<NinteichosahyoGaikyoChosaBusiness> kojinJokyoShokaiList = new ArrayList();
         INinteiChosaHoshuJissekiJohoMapper mapper = mapperProvider.create(INinteiChosaHoshuJissekiJohoMapper.class);
         List<NinteichosahyoGaikyoChosaRelateEntity> 調査員実績list = mapper.get調査員実績一覧検索(parametere);
+        if (調査員実績list == null || 調査員実績list.isEmpty()) {
+            return SearchResult.of(Collections.<NinteichosaSchedulBusiness>emptyList(), 0, false);
+        }
+        for (NinteichosahyoGaikyoChosaRelateEntity entity : 調査員実績list) {
+            kojinJokyoShokaiList.add(new NinteichosahyoGaikyoChosaBusiness(entity));
+        }
+
+        return SearchResult.of(kojinJokyoShokaiList, 0, false);
+    }
+
+    /**
+     * 調査員実績検索情報を検索する。
+     *
+     * @param parametere NinteichosahyoGaikyoChosaMybatisParameter
+     * @return 調査員実績list
+     */
+    @Transaction
+    public SearchResult<NinteichosahyoGaikyoChosaBusiness> get単価検索(NinteiChosaHoshuTankaMybatisParamter parametere) {
+        List<NinteichosahyoGaikyoChosaBusiness> kojinJokyoShokaiList = new ArrayList();
+        INinteiChosaHoshuJissekiJohoMapper mapper = mapperProvider.create(INinteiChosaHoshuJissekiJohoMapper.class);
+        List<NinteichosahyoGaikyoChosaRelateEntity> 調査員実績list = mapper.get認定調査報酬単価(parametere);
         if (調査員実績list == null || 調査員実績list.isEmpty()) {
             return SearchResult.of(Collections.<NinteichosaSchedulBusiness>emptyList(), 0, false);
         }

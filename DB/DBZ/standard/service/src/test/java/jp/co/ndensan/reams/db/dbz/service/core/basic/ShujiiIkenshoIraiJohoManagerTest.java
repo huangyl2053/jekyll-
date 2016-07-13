@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5301ShujiiIkenshoIraiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5301ShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -119,30 +119,6 @@ public class ShujiiIkenshoIraiJohoManagerTest {
 
             DbT5301ShujiiIkenshoIraiJohoEntity entity = DbT5301ShujiiIkenshoIraiJohoEntityGenerator.createDbT5301ShujiiIkenshoIraiJohoEntity();
             ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = new ShujiiIkenshoIraiJoho(entity);
-
-            assertThat(sut.save主治医意見書作成依頼情報(主治医意見書作成依頼情報), is(false));
-        }
-
-        @Test
-        public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT5301ShujiiIkenshoIraiJohoEntity.class))).thenReturn(1);
-
-            DbT5301ShujiiIkenshoIraiJohoEntity entity = DbT5301ShujiiIkenshoIraiJohoEntityGenerator.createDbT5301ShujiiIkenshoIraiJohoEntity();
-            entity.initializeMd5();
-            ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = new ShujiiIkenshoIraiJoho(entity);
-            主治医意見書作成依頼情報 = 主治医意見書作成依頼情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
-
-            assertThat(sut.save主治医意見書作成依頼情報(主治医意見書作成依頼情報), is(true));
-        }
-
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT5301ShujiiIkenshoIraiJohoEntity.class))).thenReturn(0);
-
-            DbT5301ShujiiIkenshoIraiJohoEntity entity = DbT5301ShujiiIkenshoIraiJohoEntityGenerator.createDbT5301ShujiiIkenshoIraiJohoEntity();
-            entity.initializeMd5();
-            ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = new ShujiiIkenshoIraiJoho(entity);
-            主治医意見書作成依頼情報 = 主治医意見書作成依頼情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save主治医意見書作成依頼情報(主治医意見書作成依頼情報), is(false));
         }

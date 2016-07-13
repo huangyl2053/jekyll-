@@ -35,5 +35,4 @@ public class NinteiChosaHoshuShokaiFlow extends BatchFlowBase<NinteiChosaHoshuSh
         return loopBatch(NinteiChosaHoshuShokaiProcess.class)
                 .arguments(getParameter().toProcessParamter()).define();
     }
-
 }

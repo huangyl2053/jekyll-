@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku07;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書（オルカ）のEditorです。
@@ -43,7 +46,6 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
     private static final int LENGTH_10 = 10;
     private static final int LENGTH_11 = 11;
     private static final int LENGTH_12 = 12;
-    private static final int LENGTH_700 = 700;
     private static final RString チェック = new RString("✔");
     private final IkenshokinyuyoshiBusiness business;
 
@@ -223,16 +225,16 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         } else if (IkenKomoku02.C2.getコード().equals(business.get寝たきり度())) {
             source.shogaiC2 = チェック;
         }
-        return editSource4(source);
-    }
-
-    private Ikenshokinyuyoshi01ReportSource editSource4(Ikenshokinyuyoshi01ReportSource source) {
         if (IkenKomoku03.自立.getコード().equals(business.get認知症高齢者の日常生活自立度())) {
             source.ninchishoJiritsu = チェック;
         }
         if (IkenKomoku03.Ⅰ.getコード().equals(business.get認知症高齢者の日常生活自立度())) {
             source.ninchisho1 = チェック;
         }
+        return editSource4(source);
+    }
+
+    private Ikenshokinyuyoshi01ReportSource editSource4(Ikenshokinyuyoshi01ReportSource source) {
         if (IkenKomoku03.Ⅱa.getコード().equals(business.get認知症高齢者の日常生活自立度())) {
             source.ninchisho2a = チェック;
         }
@@ -274,15 +276,15 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         } else if (IkenKomoku06.伝えられない.getコード().equals(business.get伝達能力())) {
             source.dentatsuDekinai = チェック;
         }
-        return editSource5(source);
-    }
-
-    private Ikenshokinyuyoshi01ReportSource editSource5(Ikenshokinyuyoshi01ReportSource source) {
         if (問題なし.equals(business.get周辺症状有無())) {
             source.shuhenjokyoNashi = チェック;
         } else if (問題なし.equals(business.get周辺症状有無())) {
             source.shuhenjokyoAri = チェック;
         }
+        return editSource5(source);
+    }
+
+    private Ikenshokinyuyoshi01ReportSource editSource5(Ikenshokinyuyoshi01ReportSource source) {
         if (選択.equals(business.get周辺症状詳細().substring(0, 1))) {
             source.shuhenjokyoGenshi = チェック;
         } else if (選択.equals(business.get周辺症状詳細().substring(1, 2))) {
@@ -321,6 +323,10 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
             source.semmonijushinNashi = チェック;
         }
         source.semmonijushinName = business.get専門医受診科名();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        if (!RString.isNullOrEmpty(business.get被保険者番号())) {
+            source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), business.get被保険者番号());
+        }
         return source;
     }
 

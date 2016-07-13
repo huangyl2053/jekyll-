@@ -82,6 +82,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
     private static final RString 定数_特徴方法 = new RString("getTkKibetsuGaku");
     private static final RString 定数_普徴方法 = new RString("getFuKibetsuGaku");
     private static final RString タイトル_作成年月日 = new RString("作成年月日");
+    private static final RString タイトル_作成日時 = new RString("作成日時");
     private static final RString タイトル_作成時刻 = new RString("作成時刻");
     private static final RString タイトル_賦課年度 = new RString("賦課年度");
     private static final RString タイトル_郵便番号 = new RString("郵便番号");
@@ -443,7 +444,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
             List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List) {
 
         List<RString> headerList = new ArrayList<>();
-        headerList.add(タイトル_作成年月日);
+        headerList.add(タイトル_作成日時);
         headerList.add(タイトル_作成時刻);
         headerList.add(タイトル_賦課年度);
         headerList.add(タイトル_通知書番号);

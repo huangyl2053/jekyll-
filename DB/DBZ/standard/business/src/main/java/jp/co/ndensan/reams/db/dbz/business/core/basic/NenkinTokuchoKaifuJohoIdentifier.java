@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 年金特徴回付情報（介護継承）の識別子です。
+ *
+ * @reamsid_L DBZ-9999-012 yangchenbing
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

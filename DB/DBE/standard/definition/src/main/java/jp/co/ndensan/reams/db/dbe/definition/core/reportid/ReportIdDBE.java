@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 主治医意見書（オルカ）の帳票ID。
+     */
+    DBE231102(new ReportId("DBE231102_ikenshokinyuyoshi"), new RString("主治医意見書（オルカ）")),
+    /**
+     * 主治医意見書（オルカ）の帳票ID。
+     */
+    DBE231101(new ReportId("DBE231101_ikenshokinyuyoshi"), new RString("主治医意見書（オルカ）")),
+    /**
      * 認定調査報酬照会の帳票ID。
      */
     DBE601006(new ReportId("DBE601006_chosahoshuichiran"), new RString("認定調査報酬照会")),
@@ -457,7 +465,11 @@ public enum ReportIdDBE {
     /**
      * 介護認定審査会委員報酬支払通知書の帳票ID。
      */
-    DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書"));
+    DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書")),
+    /**
+     * 要介護認定調査票（概況特記）の帳票ID。
+     */
+    DBE221051(new ReportId("DBE221051_GaikyotokkiA4"), new RString("要介護認定調査票（概況特記）"));
 
     private final ReportId reportId;
 

@@ -592,6 +592,7 @@
                    ,A."seinengappiYMD"
                    ,A."seibetsu"
                    ,A."jusho"
+                   ,A."ninteiShinseiYMD"
                    ,B."ikenshoSakuseiIraiYMD"
                    ,B."ikenshoSakuseiKigenYMD"
                    ,B."shujiiIryokikanCode"

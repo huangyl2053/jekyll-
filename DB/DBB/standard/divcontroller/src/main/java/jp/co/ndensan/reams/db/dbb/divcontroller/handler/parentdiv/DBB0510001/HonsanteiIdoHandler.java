@@ -383,6 +383,7 @@ public class HonsanteiIdoHandler {
                     調定年度, new RString(月の期.get期AsInt()), get各通知書の帳票ID());
             List<ShutsuryokuKiKoho> 出力期;
             ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
+            RString 算定期 = 月の期.get期();
             if (帳票IDList != null) {
                 boolean flag = false;
                 for (ChohyoResult result : 帳票IDList) {
@@ -393,9 +394,9 @@ public class HonsanteiIdoHandler {
                         flag = true;
                     }
                 }
-                出力期 = kohoFactory.create出力期候補(flag, false);
+                出力期 = kohoFactory.create出力期候補(flag, 算定期);
             } else {
-                出力期 = kohoFactory.create出力期候補(false, false);
+                出力期 = kohoFactory.create出力期候補(false, 算定期);
             }
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             for (ShutsuryokuKiKoho entity : 出力期) {
@@ -403,6 +404,15 @@ public class HonsanteiIdoHandler {
             }
             div.getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setDataSource(dataSource);
             div.getHonSanteiIdoTsuchiKobetsuJoho().getDdlNotsuShuturyokuki().setSelectedIndex(NUM_0);
+            KitsukiList 期月_リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間();
+            if (!RString.isNullOrEmpty(算定期)
+                    && Integer.parseInt(算定期.toString()) <= 期月_リスト.get最終法定納期().get期AsInt()) {
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDisplayNone(true);
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuShutsuryokuKi().setDisplayNone(false);
+            } else {
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDisplayNone(false);
+                div.getHonSanteiIdoTsuchiKobetsuJoho().getTxtNotsuShutsuryokuKi().setDisplayNone(true);
+            }
         } catch (ApplicationException e) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
@@ -537,8 +547,18 @@ public class HonsanteiIdoHandler {
         } else {
             paramter.set一括発行起動フラグ(true);
         }
-        // 本算定異動（随時期）の場合、TRUE ||  本算定異動（法定納期内）の場合、FALSE
-//       paramter.set随時フラグ();
+        FuchoKiUtil util = new FuchoKiUtil();
+        KitsukiList 期月リスト = util.get期月リスト();
+        RString 処理対象月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
+        Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue(処理対象月));
+        KitsukiList 期月_リスト = 期月リスト.filtered本算定期間();
+        RString 算定期 = 月の期.get期();
+        if (!RString.isNullOrEmpty(算定期)
+                && Integer.parseInt(算定期.toString()) <= 期月_リスト.get最終法定納期().get期AsInt()) {
+            paramter.set随時フラグ(Boolean.TRUE);
+        } else {
+            paramter.set随時フラグ(Boolean.FALSE);
+        }
         return paramter;
     }
 

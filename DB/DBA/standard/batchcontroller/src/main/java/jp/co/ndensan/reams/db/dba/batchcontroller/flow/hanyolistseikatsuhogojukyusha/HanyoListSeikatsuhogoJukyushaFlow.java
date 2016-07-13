@@ -32,7 +32,7 @@ public class HanyoListSeikatsuhogoJukyushaFlow extends BatchFlowBase<HanyoListBa
     }
 
     /**
-     * batchProcessです。
+     * 連番なしbatchProcessです。
      *
      * @return IBatchFlowCommand
      */
@@ -43,7 +43,7 @@ public class HanyoListSeikatsuhogoJukyushaFlow extends BatchFlowBase<HanyoListBa
     }
 
     /**
-     * batchProcessです。
+     * 連番ありbatchProcessです。
      *
      * @return IBatchFlowCommand
      */

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class Chosahoshuseikyu {
 
-    private FlexibleDate 発行年月日;
+    private RString 発行年月日;
     private RString 郵便番号;
     private RString 住所;
     private RString 調査機関;
