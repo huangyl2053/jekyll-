@@ -123,29 +123,6 @@ public class ShujiiIkenshoIraiJohoManagerTest {
             assertThat(sut.save主治医意見書作成依頼情報(主治医意見書作成依頼情報), is(false));
         }
 
-//        @Test
-//        public void updateに成功するとtrueが返る() {
-//            when(dac.save(any(DbT5301ShujiiIkenshoIraiJohoEntity.class))).thenReturn(1);
-//
-//            DbT5301ShujiiIkenshoIraiJohoEntity entity = DbT5301ShujiiIkenshoIraiJohoEntityGenerator.createDbT5301ShujiiIkenshoIraiJohoEntity();
-//            entity.initializeMd5();
-//            ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = new ShujiiIkenshoIraiJoho(entity);
-//            主治医意見書作成依頼情報 = 主治医意見書作成依頼情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
-//
-//            assertThat(sut.save主治医意見書作成依頼情報(主治医意見書作成依頼情報), is(true));
-//        }
-//
-//        @Test
-//        public void updateに失敗するとfalseが返る() {
-//            when(dac.save(any(DbT5301ShujiiIkenshoIraiJohoEntity.class))).thenReturn(0);
-//
-//            DbT5301ShujiiIkenshoIraiJohoEntity entity = DbT5301ShujiiIkenshoIraiJohoEntityGenerator.createDbT5301ShujiiIkenshoIraiJohoEntity();
-//            entity.initializeMd5();
-//            ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = new ShujiiIkenshoIraiJoho(entity);
-//            主治医意見書作成依頼情報 = 主治医意見書作成依頼情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
-//
-//            assertThat(sut.save主治医意見書作成依頼情報(主治医意見書作成依頼情報), is(false));
-//        }
         @Test
         public void deleteに成功するとtrueが返る() {
             when(dac.save(any(DbT5301ShujiiIkenshoIraiJohoEntity.class))).thenReturn(1);
