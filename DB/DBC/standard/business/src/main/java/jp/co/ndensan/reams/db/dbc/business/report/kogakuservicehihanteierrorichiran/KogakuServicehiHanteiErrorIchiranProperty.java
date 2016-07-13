@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 帳票設計_DBCMN41002_高額介護サービス費判定エラーリスト Property
  *
- * @reamsid_L DBC-2010-110 sunhu
+ * @reamsid_L DBC-2010-110 sunhui
  */
 public class KogakuServicehiHanteiErrorIchiranProperty
         extends ReportPropertyBase<KogakuServicehiHanteiErrorIchiranSource> {

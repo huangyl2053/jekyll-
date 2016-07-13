@@ -1045,10 +1045,10 @@ public class GemmenJuminKihonHandler {
         boolean is減免決定通知書checked;
         boolean is取消決定通知書checked;
         if (減免決定通知書.equals(発行パネル.getPritPublish1().getTitle())) {
-            is減免決定通知書checked = 発行パネル.getPritPublish1().isIsPublish();
+            is減免決定通知書checked = 発行パネル.getPritPublish1().isIsPublish() && !発行パネル.getPritPublish1().isVisible();
             is取消決定通知書checked = false;
         } else {
-            is取消決定通知書checked = 発行パネル.getPritPublish1().isIsPublish();
+            is取消決定通知書checked = 発行パネル.getPritPublish1().isIsPublish() && !発行パネル.getPritPublish1().isVisible();
             is減免決定通知書checked = false;
         }
         RDate 発行日_減免 = 発行パネル.getPritPublish1().getComdiv1().getIssueDate();
@@ -1061,9 +1061,9 @@ public class GemmenJuminKihonHandler {
         FlexibleDate 納入_送付日 = 送付日_納入 == null ? null : new FlexibleDate(送付日_納入.toString());
         RString 減免_文書番号 = 発行パネル.getPritPublish1().getBunshoBango1().get文書番号();
 
-        boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().isIsPublish();
-        boolean is納入通知書checked = 発行パネル.getPritPublish3().isIsPublish();
-        boolean is賦課台帳checked = 発行パネル.getPritPublish4().isIsPublish();
+        boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().isIsPublish() && !発行パネル.getPritPublish2().isVisible();
+        boolean is納入通知書checked = 発行パネル.getPritPublish3().isIsPublish() && !発行パネル.getPritPublish3().isVisible();
+        boolean is賦課台帳checked = 発行パネル.getPritPublish4().isIsPublish() && !発行パネル.getPritPublish4().isVisible();
         if (!(is減免決定通知書checked || is取消決定通知書checked || is変更通知書兼特徴checked || is納入通知書checked || is賦課台帳checked)) {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace(出力対象チェックMESSAGE.toString()).evaluate());
         }
