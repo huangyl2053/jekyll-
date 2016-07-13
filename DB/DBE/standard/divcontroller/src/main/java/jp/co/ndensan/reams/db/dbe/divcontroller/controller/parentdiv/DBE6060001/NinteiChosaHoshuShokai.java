@@ -32,6 +32,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteiChosaHoshuShokai {
 
+    private static final RString BTNPULISH = new RString("btnPulish");
+    private static final RString BTNSHUTSUTYOKU = new RString("btnShutsutyoku");
+    private static final RString BTNMODORU = new RString("btnModoru");
+
     /**
      * 画面初期化処理です。
      *
@@ -39,13 +43,13 @@ public class NinteiChosaHoshuShokai {
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
     public ResponseData<NinteiChosaHoshuShokaiDiv> onLoad(NinteiChosaHoshuShokaiDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPULISH, false);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnModoru"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNSHUTSUTYOKU, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNMODORU, false);
         div.getChosaIraibi().setDisplayNone(false);
         div.getNinteiChosaHoshu().setDisplayNone(true);
         div.getChosaIraibi().setVisible(true);
@@ -98,14 +102,12 @@ public class NinteiChosaHoshuShokai {
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
-    public ResponseData<NinteiChosaHoshuShokaiFlowParameter> onClick_btnShutsutyoku(NinteiChosaHoshuShokaiDiv div) {
+    public ResponseData<NinteiChosaHoshuShokaiDiv> onClick_btnShutsutyoku(NinteiChosaHoshuShokaiDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei();
-        NinteiChosaHoshuShokaiFlowParameter tempData = new NinteiChosaHoshuShokaiFlowParameter();
         if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(tempData).addValidationMessages(validPairs).respond();
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        tempData = getHandler(div).getTempData(new RString("1"));
-        return ResponseData.of(tempData).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -114,14 +116,46 @@ public class NinteiChosaHoshuShokai {
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
-    public ResponseData<NinteiChosaHoshuShokaiFlowParameter> onClick_btnPulish(NinteiChosaHoshuShokaiDiv div) {
+    public ResponseData<NinteiChosaHoshuShokaiDiv> onClick_btnPulish(NinteiChosaHoshuShokaiDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei();
-        NinteiChosaHoshuShokaiFlowParameter tempData = new NinteiChosaHoshuShokaiFlowParameter();
         if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(tempData).addValidationMessages(validPairs).respond();
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        tempData = getHandler(div).getTempData(new RString("2"));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * バッチパラメータの設定します。
+     *
+     * @param div NinteiChosaHoshuShokaiDiv
+     * @return ResponseData<NinteiChosaHoshuShokaiFlowParameter>
+     */
+    public ResponseData<NinteiChosaHoshuShokaiFlowParameter> getParameterToCSV(NinteiChosaHoshuShokaiDiv div) {
+        NinteiChosaHoshuShokaiFlowParameter tempData = getHandler(div).getTempData(new RString("1"));
         return ResponseData.of(tempData).respond();
+    }
+
+    /**
+     * バッチパラメータの設定します。
+     *
+     * @param div NinteiChosaHoshuShokaiDiv
+     * @return ResponseData<NinteiChosaHoshuShokaiFlowParameter>
+     */
+    public ResponseData<NinteiChosaHoshuShokaiFlowParameter> getParameter(NinteiChosaHoshuShokaiDiv div) {
+        NinteiChosaHoshuShokaiFlowParameter tempData = getHandler(div).getTempData(new RString("2"));
+        return ResponseData.of(tempData).respond();
+    }
+
+    /**
+     * 「条件をクリアする」ボタン押下場合、検索条件をクリアします。
+     *
+     * @param div NinteiChosaHoshuShokaiDiv
+     * @return ResponseData<NinteiChosaHoshuShokaiDiv>
+     */
+    public ResponseData<NinteiChosaHoshuShokaiDiv> onClick_btnKensakuClear(NinteiChosaHoshuShokaiDiv div) {
+        div.getChosaIraibi().getTxtChosaIraibi().setFromValue(null);
+        div.getChosaIraibi().getTxtChosaIraibi().setToValue(null);
+        return onLoad(div);
     }
 
     private NinteiChosaHoshuShokaiValidationHandler getValidationHandler(NinteiChosaHoshuShokaiDiv div) {
