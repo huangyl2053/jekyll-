@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 保険料段階判定（機能見直し）パラメータ作成のクラスです。
  *
- * @reamsid_L DBB-0940-020 cuilin
+ * @reamsid_L DBB-9040-020 cuilin
  */
 public class SeigyojohoFactory {
 
