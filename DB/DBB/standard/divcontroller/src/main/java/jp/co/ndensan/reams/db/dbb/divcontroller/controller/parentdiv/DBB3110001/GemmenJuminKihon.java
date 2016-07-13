@@ -208,6 +208,8 @@ public class GemmenJuminKihon {
         boolean show発行ボタン = getHandler(div).onClick_btnUpt(年度分賦課減免リスト);
         if (show発行ボタン) {
             ViewStateHolder.put(ViewStateKeys.実行フラグ, 発行ボタンSHOW);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.実行フラグ, 処理_取消);
         }
         return ResponseData.of(div).setState(DBB3110001StateName.更新結果確認);
     }
