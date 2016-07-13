@@ -75,9 +75,9 @@ public class FukaShokaiControl {
 //        if (key == null) {
 //            return createResponseData(div);
 //        } else {
-            return createResponseData(setDisplay(div, key));
+        return createResponseData(setDisplay(div, key));
 //        }
-        
+
     }
 
     /**

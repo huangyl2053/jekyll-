@@ -115,6 +115,7 @@ public class TaishoshaFinder {
         List<FukaTaishoshaRelateBusiness> list = new ArrayList<>();
 
         for (FukaTaishoshaRelateEntity entity : result) {
+
             list.add(new FukaTaishoshaRelateBusiness(entity));
         }
 
@@ -125,9 +126,9 @@ public class TaishoshaFinder {
 
     private ITrueFalseCriteria getCriteria(ISearchCondition 条件, ISearchCondition 除外条件) {
         return (条件 != null && 除外条件 != null) ? and(条件.makeSearchCondition(), not(除外条件.makeSearchCondition()))
-               : (条件 != null) ? 条件.makeSearchCondition()
-                 : (除外条件 != null) ? not(除外条件.makeSearchCondition())
-                   : null;
+                : (条件 != null) ? 条件.makeSearchCondition()
+                : (除外条件 != null) ? not(除外条件.makeSearchCondition())
+                : null;
     }
 
     private IPsmCriteria getPsmCriteria(IShikibetsuTaishoSearchKey 条件) {

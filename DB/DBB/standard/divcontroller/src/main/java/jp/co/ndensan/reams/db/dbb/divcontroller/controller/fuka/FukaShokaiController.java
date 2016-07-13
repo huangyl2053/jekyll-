@@ -300,7 +300,7 @@ public final class FukaShokaiController {
             調定日時 = fuka.get調定日時().getRDateTime();
         }
 
-        if (調定日時.isAfter(基準日時)) {
+        if (調定日時.isAfter(基準日時) || 調定日時.isEqual(基準日時)) {
             return SanteiState.本算定;
         }
 

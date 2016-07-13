@@ -282,13 +282,14 @@ public class FukaTaishoshaSearch {
         // 該当者を検索する
         ShikibetsuCode 識別コード = new ShikibetsuCode(最近処理者);
         IShikibetsuTaishoGyomuHanteiKey 業務判定キー
-                = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+                = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoSearchKey 検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         TaishoshaFinder finder = new TaishoshaFinder();
         SearchResult<FukaTaishoshaRelateBusiness> 対象者 = finder.get賦課対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
         if (!対象者.records().isEmpty()) {
             for (FukaTaishoshaRelateBusiness entity : 対象者.records()) {
+
                 put対象者Key(create対象者Key(entity));
                 save最近処理者(div, entity);
                 FlexibleYear 賦課年度 = entity.get賦課検索エンティティ().getFukaNendo();
