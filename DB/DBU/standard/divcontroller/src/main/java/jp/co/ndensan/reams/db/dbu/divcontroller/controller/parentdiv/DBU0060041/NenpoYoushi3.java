@@ -136,24 +136,32 @@ public class NenpoYoushi3 {
             }
             return ResponseData.of(div).respond();
         } else if (補正フラグ.equals(フラグ_削除)) {
-            List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ
-                    = ViewStateHolder.get(ViewStateKeys.保険料収納状況データ, Models.class);
-            for (JigyoHokokuTokeiData 保険料収納 : 保険料収納状況データ) {
-                事業報告集計一覧データリスト.add(保険料収納);
-            }
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
-                    get(ViewStateKeys.保険給付支払状況データ, Models.class);
-            for (JigyoHokokuTokeiData 保険給付支払 : 保険給付支払状況データ) {
-                事業報告集計一覧データリスト.add(保険給付支払);
-            }
-            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(事業報告集計一覧データリスト);
+            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(del事業報告集計情報());
             div.getKanryoMessage().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("削除").evaluate()),
                     RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBU0060041StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private List<JigyoHokokuTokeiData> del事業報告集計情報() {
+        List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ
+                = ViewStateHolder.get(ViewStateKeys.保険料収納状況データ, Models.class);
+        if (保険料収納状況データ != null) {
+            for (JigyoHokokuTokeiData 件数 : 保険料収納状況データ) {
+                事業報告集計一覧データリスト.add(件数);
+            }
+        }
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
+                get(ViewStateKeys.保険給付支払状況データ, Models.class);
+        if (保険給付支払状況データ != null) {
+            for (JigyoHokokuTokeiData 費用額 : 保険給付支払状況データ) {
+                事業報告集計一覧データリスト.add(費用額);
+            }
+        }
+        return 事業報告集計一覧データリスト;
     }
 
     /**
