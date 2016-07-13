@@ -14,18 +14,21 @@ import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.honNe
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.kariNenkinCode;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.kariNenkinNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.tokuchoTeishiNichiji;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -171,5 +174,27 @@ public class DbT2001ChoshuHohoDac implements ISaveable<DbT2001ChoshuHohoEntity> 
                 order(by(fukaNendo, Order.DESC), by(rirekiNo, Order.DESC)).
                 limit(1).
                 toObject(DbT2001ChoshuHohoEntity.class);
+    }
+
+    /**
+     * 介護徴収方法を全件返します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @param 抽出開始日時 RDateTime
+     * @param 抽出終了日時 RDateTime
+     * @return List<DbT2001ChoshuHohoEntity>
+     */
+    @Transaction
+    public List<DbT2001ChoshuHohoEntity> get徴収方法の異動(FlexibleYear 賦課年度, RDateTime 抽出開始日時,
+            RDateTime 抽出終了日時) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                leq(抽出開始日時, tokuchoTeishiNichiji),
+                                leq(tokuchoTeishiNichiji, 抽出終了日時))).
+                toList(DbT2001ChoshuHohoEntity.class);
     }
 }
