@@ -4,6 +4,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 年金特徴回付情報テーブルの項目定義クラスです。
+ *
+ * @reamsid_L DBZ-9999-022 yangchenbing
  */
 public enum UeT0511NenkinTokuchoKaifuJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
