@@ -6,17 +6,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShutsuryokuTaishoPanel のクラスファイル<br/>
+ * TokuchoDoteiIchiran のクラスファイル <br/>
  *
  * 画面設計_DBBGM81003_1_特徴対象者一覧作成
  *
  * @reamsid_L DBB-1860-010 yangchenbing
  */
-public class ShutsuryokuTaishoPanelDiv extends Panel {
+public class TokuchoDoteiIchiranDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
@@ -25,8 +25,8 @@ public class ShutsuryokuTaishoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkShutsuryokuTaisho")
-    private CheckBoxList chkShutsuryokuTaisho;
+    @JsonProperty("dgTokubetChoshuTaishoshaIchiran")
+    private DataGrid<dgTokubetChoshuTaishoshaIchiran_Row> dgTokubetChoshuTaishoshaIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,21 +35,21 @@ public class ShutsuryokuTaishoPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkShutsuryokuTaisho
-     * @return chkShutsuryokuTaisho
+     * getdgTokubetChoshuTaishoshaIchiran
+     * @return dgTokubetChoshuTaishoshaIchiran
      */
-    @JsonProperty("chkShutsuryokuTaisho")
-    public CheckBoxList getChkShutsuryokuTaisho() {
-        return chkShutsuryokuTaisho;
+    @JsonProperty("dgTokubetChoshuTaishoshaIchiran")
+    public DataGrid<dgTokubetChoshuTaishoshaIchiran_Row> getDgTokubetChoshuTaishoshaIchiran() {
+        return dgTokubetChoshuTaishoshaIchiran;
     }
 
     /*
-     * setchkShutsuryokuTaisho
-     * @param chkShutsuryokuTaisho chkShutsuryokuTaisho
+     * setdgTokubetChoshuTaishoshaIchiran
+     * @param dgTokubetChoshuTaishoshaIchiran dgTokubetChoshuTaishoshaIchiran
      */
-    @JsonProperty("chkShutsuryokuTaisho")
-    public void setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
-        this.chkShutsuryokuTaisho = chkShutsuryokuTaisho;
+    @JsonProperty("dgTokubetChoshuTaishoshaIchiran")
+    public void setDgTokubetChoshuTaishoshaIchiran(DataGrid<dgTokubetChoshuTaishoshaIchiran_Row> dgTokubetChoshuTaishoshaIchiran) {
+        this.dgTokubetChoshuTaishoshaIchiran = dgTokubetChoshuTaishoshaIchiran;
     }
 
     // </editor-fold>
