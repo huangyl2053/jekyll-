@@ -465,7 +465,11 @@ public enum ReportIdDBE {
     /**
      * 介護認定審査会委員報酬支払通知書の帳票ID。
      */
-    DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書"));
+    DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書")),
+    /**
+     * 要介護認定調査票（概況特記）の帳票ID。
+     */
+    DBE221051(new ReportId("DBE221051_GaikyotokkiA4"), new RString("要介護認定調査票（概況特記）"));
 
     private final ReportId reportId;
 
