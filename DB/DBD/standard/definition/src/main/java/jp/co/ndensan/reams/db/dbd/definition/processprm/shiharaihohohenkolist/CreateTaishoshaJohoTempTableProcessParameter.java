@@ -13,13 +13,13 @@ import lombok.Setter;
 
 /**
  * 支払方法変更管理リスト作成用のパラメータクラスです。
- * 
- * @reamsid_L DBD-3630-010  zhulx
+ *
+ * @reamsid_L DBD-3630-010 liangbc
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiHohoKanriListProcessParameter implements IBatchProcessParameter {
+public class CreateTaishoshaJohoTempTableProcessParameter implements IBatchProcessParameter {
 
     private FlexibleDate 基準日;
     private RString 登録者選択;
@@ -27,10 +27,11 @@ public class ShiharaiHohoKanriListProcessParameter implements IBatchProcessParam
     private RString 差止登録者の選択;
     private RString 償還予告登録者の選択;
     private RString 償還決定登録者の選択;
-    private RString 償還決定登録者1の選択;
-    private RString 償還決定登録者2の選択;
-    private RString 改頁出力順ID;
+    private RString 償還決定登録者_差止中あり者のみの選択;
+    private RString 償還決定登録者_保険料控除あり者のみの選択;
+    private Long 改頁出力順ID;
     private RString 帳票ID;
+    private RString reamsLoginID;
 
     /**
      * コンストラクタ作成です。
@@ -46,7 +47,7 @@ public class ShiharaiHohoKanriListProcessParameter implements IBatchProcessParam
      * @param shuturokuJyunID 初期再保険者番号
      * @param tyouhyoID 支所コード
      */
-    public ShiharaiHohoKanriListProcessParameter(FlexibleDate kijyunYMD,
+    public CreateTaishoshaJohoTempTableProcessParameter(FlexibleDate kijyunYMD,
             RString torokushaSel,
             RString sashitomeYokoku,
             RString sashitomeToroku,
@@ -54,7 +55,7 @@ public class ShiharaiHohoKanriListProcessParameter implements IBatchProcessParam
             RString shokanKettei,
             RString shokanKetteiSashitomeAriOnly,
             RString shokanKetteiKojoAriOnly1Go,
-            RString shuturokuJyunID,
+            Long shuturokuJyunID,
             RString tyouhyoID) {
         this.基準日 = kijyunYMD;
         this.登録者選択 = torokushaSel;
@@ -62,8 +63,8 @@ public class ShiharaiHohoKanriListProcessParameter implements IBatchProcessParam
         this.差止登録者の選択 = sashitomeToroku;
         this.償還予告登録者の選択 = shokanYokoku;
         this.償還決定登録者の選択 = shokanKettei;
-        this.償還決定登録者1の選択 = shokanKetteiSashitomeAriOnly;
-        this.償還決定登録者2の選択 = shokanKetteiKojoAriOnly1Go;
+        this.償還決定登録者_差止中あり者のみの選択 = shokanKetteiSashitomeAriOnly;
+        this.償還決定登録者_保険料控除あり者のみの選択 = shokanKetteiKojoAriOnly1Go;
         this.改頁出力順ID = shuturokuJyunID;
         this.帳票ID = tyouhyoID;
     }
