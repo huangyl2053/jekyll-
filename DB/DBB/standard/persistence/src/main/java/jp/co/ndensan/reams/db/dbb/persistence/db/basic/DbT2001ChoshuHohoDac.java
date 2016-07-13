@@ -9,6 +9,10 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.honNenkinCode;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.honNenkinNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.kariNenkinCode;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.kariNenkinNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHoho.rirekiNo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -16,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -34,6 +39,8 @@ public class DbT2001ChoshuHohoDac implements ISaveable<DbT2001ChoshuHohoEntity> 
 
     @InjectSession
     private SqlSession session;
+    private static final RString メッセージ_基礎年金番号 = new RString("基礎年金番号");
+    private static final RString メッセージ_年金コード = new RString("年金コード");
 
     /**
      * 主キーで介護徴収方法を取得します。
@@ -118,5 +125,51 @@ public class DbT2001ChoshuHohoDac implements ISaveable<DbT2001ChoshuHohoEntity> 
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 仮徴収被保険者番号を取得します。
+     *
+     * @param 基礎年金番号 RString
+     * @param 年金コード RString
+     * @return DbT2001ChoshuHohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2001ChoshuHohoEntity get仮徴収被保険者番号(RString 基礎年金番号, RString 年金コード) throws NullPointerException {
+        requireNonNull(基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_基礎年金番号.toString()));
+        requireNonNull(年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_年金コード.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(hihokenshaNo).
+                table(DbT2001ChoshuHoho.class).
+                where(and(
+                                eq(kariNenkinNo, 基礎年金番号),
+                                eq(kariNenkinCode, 年金コード))).
+                order(by(fukaNendo, Order.DESC), by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT2001ChoshuHohoEntity.class);
+    }
+
+    /**
+     * 本徴収被保険者番号を取得します。
+     *
+     * @param 基礎年金番号 RString
+     * @param 年金コード RString
+     * @return DbT2001ChoshuHohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2001ChoshuHohoEntity get本徴収被保険者番号(RString 基礎年金番号, RString 年金コード) throws NullPointerException {
+        requireNonNull(基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_基礎年金番号.toString()));
+        requireNonNull(年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_年金コード.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(hihokenshaNo).
+                table(DbT2001ChoshuHoho.class).
+                where(and(
+                                eq(honNenkinNo, 基礎年金番号),
+                                eq(honNenkinCode, 年金コード))).
+                order(by(fukaNendo, Order.DESC), by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT2001ChoshuHohoEntity.class);
     }
 }
