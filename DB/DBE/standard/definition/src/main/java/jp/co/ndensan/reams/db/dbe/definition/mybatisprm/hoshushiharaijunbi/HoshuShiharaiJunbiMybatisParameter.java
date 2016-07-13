@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -22,6 +24,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
     private final RString 概況調査イメージ区分;
     private final RString 報酬基準日;
     private final boolean 基準日フラグ;
+    private final CodeShubetsu コード種別;
+    private final FlexibleDate 有効期間;
 
     /**
      * コンストラクタです。
@@ -34,6 +38,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
      * @param 概況調査イメージ区分 概況調査イメージ区分
      * @param 報酬基準日 主治医意見書報酬基準日
      * @param 基準日フラグ 基準日フラグ
+     * @param コード種別 コード種別
+     * @param 有効期間 有効期間
      */
     protected HoshuShiharaiJunbiMybatisParameter(FlexibleDate 実績期間From,
             FlexibleDate 実績期間To,
@@ -42,7 +48,9 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
             RString 処理状態区分_延期,
             RString 概況調査イメージ区分,
             RString 報酬基準日,
-            boolean 基準日フラグ
+            boolean 基準日フラグ,
+            CodeShubetsu コード種別,
+            FlexibleDate 有効期間
     ) {
         this.実績期間From = 実績期間From;
         this.実績期間To = 実績期間To;
@@ -52,6 +60,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
         this.概況調査イメージ区分 = 概況調査イメージ区分;
         this.報酬基準日 = 報酬基準日;
         this.基準日フラグ = 基準日フラグ;
+        this.コード種別 = コード種別;
+        this.有効期間 = 有効期間;
     }
 
     /**
@@ -84,6 +94,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
                 処理状態区分_延期,
                 概況調査イメージ区分,
                 主治医意見書報酬基準日,
-                基準日フラグ);
+                基準日フラグ,
+                DBECodeShubetsu.消費税率.getコード(),
+                FlexibleDate.getNowDate());
     }
 }

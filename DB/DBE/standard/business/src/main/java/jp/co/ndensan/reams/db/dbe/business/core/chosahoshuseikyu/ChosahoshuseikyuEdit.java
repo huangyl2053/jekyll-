@@ -7,10 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,9 +33,10 @@ public class ChosahoshuseikyuEdit {
      * 要介護認定・要支援認定等申請者の編集処理です。
      *
      * @param entity 要介護認定申請
+     * @param 消費税率 消費税率
      * @return Chosahoshuseikyu
      */
-    public Chosahoshuseikyu getChosahoshuseikyu(HoshuShiharaiJunbiRelateEntity entity) {
+    public Chosahoshuseikyu getChosahoshuseikyu(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率) {
         Chosahoshuseikyu shuseikyu = new Chosahoshuseikyu();
         shuseikyu.set郵便番号(entity.getYubinNo().value());
         shuseikyu.set住所(entity.getJusho());
@@ -85,8 +84,6 @@ public class ChosahoshuseikyuEdit {
         int 小計 = 新規在宅計 + 新規施設計 + 更新在宅計 + 更新施設計;
         shuseikyu.set更新施設計(kinngakuFormat(new Decimal(作成件数合計)));
         shuseikyu.set小計(kinngakuFormat(new Decimal(小計)));
-        // TODO
-        RString 消費税率 = CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, Code.EMPTY);
         int 消費税額 = 小計 * Integer.valueOf(消費税率.toString()) - 小計;
         shuseikyu.set消費税額(kinngakuFormat(new Decimal(消費税額)));
         shuseikyu.set合計金額(kinngakuFormat(new Decimal(小計 + 消費税額)));
