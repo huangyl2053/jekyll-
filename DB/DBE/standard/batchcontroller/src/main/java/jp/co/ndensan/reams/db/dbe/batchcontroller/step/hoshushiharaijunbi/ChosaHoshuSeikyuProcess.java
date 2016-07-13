@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu.Chosahoshuseikyu;
+import jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu.ChosahoshuseikyuEdit;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahoshuseikyu.ChosahoshuseikyuReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.HoshuShiharaiJunbiProcessParameter;
@@ -42,9 +43,9 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 申請情報印刷のデータを作成します。
+ * 報酬支払い通知書請求書・確認書のデータを作成します。
  *
- * @reamsid_L DBE-1390-020 suguangjun
+ * @reamsid_L DBE-1980-020 suguangjun
  */
 public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbiRelateEntity> {
 
@@ -90,7 +91,8 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
     @Override
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        Chosahoshuseikyu chosahoshuseikyu = new Chosahoshuseikyu();
+        ChosahoshuseikyuEdit edit = new ChosahoshuseikyuEdit();
+        Chosahoshuseikyu chosahoshuseikyu = edit.getChosahoshuseikyu(entity);
         RStringBuilder builder = new RStringBuilder();
         builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
         builder.append(new RString("～"));
