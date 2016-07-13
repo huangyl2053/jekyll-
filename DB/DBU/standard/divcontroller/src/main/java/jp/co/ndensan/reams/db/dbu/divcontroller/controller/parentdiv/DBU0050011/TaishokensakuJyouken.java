@@ -25,9 +25,9 @@ public class TaishokensakuJyouken {
 
     private static final RString 入力済 = new RString("入力済");
     private static final RString ADD = new RString("add");
-    private static final RString 様仕４ = new RString("様仕４");
-    private static final RString 様仕４の２ = new RString("様仕４の２");
-    private static final RString 様仕４の３ = new RString("様仕４の３");
+    private static final RString 様式４ = new RString("様式４");
+    private static final RString 様式４の２ = new RString("様式４の２");
+    private static final RString 様式４の３ = new RString("様式４の３");
 
     /**
      * 介護保険特別会計経理状況登録_検索を画面初期化処理しました。
@@ -98,11 +98,11 @@ public class TaishokensakuJyouken {
         InsuranceInformation insuranceInformation = getHandler(div).onClick_btnDelete();
         ViewStateHolder.put(ViewStateKey.様式４, insuranceInformation);
         if (入力済.equals(insuranceInformation.get様式４入力状況())) {
-            return ResponseData.of(div).forwardWithEventName(削除).parameter(様仕４);
+            return ResponseData.of(div).forwardWithEventName(削除).parameter(様式４);
         } else if (入力済.equals(insuranceInformation.get様式４の２入力状況())) {
-            return ResponseData.of(div).forwardWithEventName(削除).parameter(様仕４の２);
+            return ResponseData.of(div).forwardWithEventName(削除).parameter(様式４の２);
         } else {
-            return ResponseData.of(div).forwardWithEventName(削除).parameter(様仕４の３);
+            return ResponseData.of(div).forwardWithEventName(削除).parameter(様式４の３);
         }
     }
 
