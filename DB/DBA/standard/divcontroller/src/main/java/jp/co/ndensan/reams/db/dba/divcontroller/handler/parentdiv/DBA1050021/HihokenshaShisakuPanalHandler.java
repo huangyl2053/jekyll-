@@ -201,9 +201,9 @@ public class HihokenshaShisakuPanalHandler {
         if (介護導入形態 != null) {
             DonyuKeitaiCode 導入形態コード = 介護導入形態.get導入形態コード();
 
-            System.out.println("取得に使用した所在保険者:" + 所在保険者.toString());
-            System.out.println("取得に使用した導入形態コード:" + 導入形態コード.toString());
-            System.out.println("取得に使用した措置元保険者:" + 措置元保険者.toString());
+            System.out.println("取得に使用した所在保険者:導入形態コード:措置元保険者:" + 所在保険者.toString()
+                    + ":" + 導入形態コード.toString()
+                    + ":" + 措置元保険者.toString());
 
             List<Shichoson> 旧保険者情報 = 旧保険者取得(
                     RString.isNullOrEmpty(所在保険者) ? LasdecCode.EMPTY : new LasdecCode(所在保険者),
@@ -211,18 +211,18 @@ public class HihokenshaShisakuPanalHandler {
                     RString.isNullOrEmpty(措置元保険者) ? LasdecCode.EMPTY : new LasdecCode(措置元保険者));
 
             System.out.println("取得できた旧保険者情報の数:" + 旧保険者情報.size());
+            System.out.print("取得した旧保険者コード:");
 
             List<KeyValueDataSource> keyValueList = new ArrayList<>();
             for (Shichoson 旧保険者 : 旧保険者情報) {
 
-                System.out.println("旧市町村コード---:" + 旧保険者.get旧市町村コード());
-                System.out.println("旧市町村名称---:" + 旧保険者.get旧市町村名称());
-                System.out.println("----");
+                System.out.print(旧保険者.get旧市町村コード() + ",");
                 KeyValueDataSource keyValue = new KeyValueDataSource();
                 keyValue.setKey(旧保険者.get旧市町村コード().getColumnValue());
                 keyValue.setValue(new RString(旧保険者.get旧市町村コード().getColumnValue() + " " + 旧保険者.get旧市町村名称()));
                 keyValueList.add(keyValue);
             }
+            System.out.println();
             panelDiv.getShikakuShosai().getDdlShutokuKyuHokensha().setDataSource(keyValueList);
         }
     }
