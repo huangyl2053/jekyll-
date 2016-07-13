@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
@@ -72,6 +73,7 @@ public class KanendoFukaHandler {
     private static final RString 月分 = new RString("月");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
+    private static final RString 決定変更通知書 = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final RString 納入通知書 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
 
     /**
@@ -425,5 +427,27 @@ public class KanendoFukaHandler {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(過年度異動通知書作成_ボタン, flag);
         }
+    }
+
+    /**
+     * 入力チェックのメソッドです。
+     *
+     * @return ResponseData
+     */
+    public ValidationMessageControlPairs getCheckMessage() {
+        Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        boolean 決定変更通知書Flag = false;
+        boolean 納入通知書Flag = false;
+        for (Map.Entry<RString, RString> entry : set) {
+            if (決定変更通知書.equals(entry.getKey())) {
+                決定変更通知書Flag = true;
+            }
+            if (納入通知書.equals(entry.getKey())) {
+                納入通知書Flag = true;
+            }
+        }
+        KanendoFukaValidationHandler validation = new KanendoFukaValidationHandler(div);
+        return validation.check実行(決定変更通知書Flag, 納入通知書Flag);
     }
 }
