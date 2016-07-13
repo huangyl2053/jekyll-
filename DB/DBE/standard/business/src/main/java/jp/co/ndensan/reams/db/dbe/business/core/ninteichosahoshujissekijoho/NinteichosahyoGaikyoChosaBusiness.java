@@ -172,4 +172,13 @@ public class NinteichosahyoGaikyoChosaBusiness {
     public RString get事業者名称() {
         return entity.getJigyoshaMeisho();
     }
+
+    /**
+     * 単価を返します。
+     *
+     * @return 単価
+     */
+    public RString get単価() {
+        return entity.getTanka();
+    }
 }

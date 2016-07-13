@@ -35,5 +35,6 @@ public class NinteichosahyoGaikyoChosaRelateEntity {
     private RString chosaItakuryoShiharaiMemo;
     private boolean isGinkoFurikomiShutsuryoku;
     private RString jigyoshaMeisho;
+    private RString tanka;
 
 }

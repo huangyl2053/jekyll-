@@ -32,10 +32,10 @@ public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessPara
     /**
      * コンストラクタです。
      *
-     * @param 帳票出力区分 RString
-     * @param 調査依頼日開始 FlexibleDate
-     * @param 調査依頼日終了 FlexibleDate
-     * @param キー情報Entityリスト List<NinteiChosaHoshuShokaiFlowBusiness>
+     * @param 帳票出力区分 帳票出力区分
+     * @param 調査依頼日開始 調査依頼日開始
+     * @param 調査依頼日終了 調査依頼日終了
+     * @param キー情報Entityリスト キー情報Entityリスト
      */
     public NinteiChosaHoshuShokaiProcessParameter(RString 帳票出力区分, FlexibleDate 調査依頼日開始, FlexibleDate 調査依頼日終了,
             List<NinteiChosaHoshuShokaiFlowBusiness> キー情報Entityリスト) {
@@ -46,12 +46,12 @@ public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessPara
     }
 
     /**
+     * 認定調査報酬照会のmapperのparameterを作成します。
      *
-     * @return NinteiChosaHoshuShokaiMapperParameter
+     * @return 認定調査報酬照会のmapperのparameter
      */
     public NinteiChosaHoshuShokaiMapperParameter toMybitisParamter() {
         return NinteiChosaHoshuShokaiMapperParameter.createParamter(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援), 調査依頼日開始, 調査依頼日終了, true, キー情報Entityリスト);
     }
-
 }

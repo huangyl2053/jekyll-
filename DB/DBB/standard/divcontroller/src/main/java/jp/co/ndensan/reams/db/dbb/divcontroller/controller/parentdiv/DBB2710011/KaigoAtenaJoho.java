@@ -18,10 +18,10 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -128,13 +128,10 @@ public class KaigoAtenaJoho {
     public ResponseData<KaigoAtenaJohoDiv> onClick_btnUpdate(KaigoAtenaJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
             KaigoAtenaJohoHandler handler = getHandler(div);
-            QuestionMessage message = new QuestionMessage(
-                    DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
-                    DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
-            QuestionMessage message1 = new QuestionMessage(
-                    UrQuestionMessages.保存の確認.getMessage().getCode(), UrQuestionMessages.保存の確認.getMessage().evaluate());
-            return handler.is画面内容の変更有無() ? ResponseData.of(div).addMessage(message1).respond()
-                    : ResponseData.of(div).addMessage(message).respond();
+            if (!handler.is画面内容の変更有無()) {
+                throw new ApplicationException(DbzInformationMessages.内容変更なしで保存不可.getMessage());
+            }
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
