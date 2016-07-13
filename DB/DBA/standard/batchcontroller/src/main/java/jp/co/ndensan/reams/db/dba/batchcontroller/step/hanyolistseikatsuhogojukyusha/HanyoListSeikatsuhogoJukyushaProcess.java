@@ -79,6 +79,8 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
     private RStringBuilder newBuilder;
     private RStringBuilder oldBuilder;
     private RStringBuilder 生活保護種別builder;
+    private RString psmShikibetsuTaisho;
+    private RString psmAtesaki;
 
     @Override
     protected void initialize() {
@@ -90,19 +92,19 @@ public class HanyoListSeikatsuhogoJukyushaProcess extends BatchProcessBase<Seika
         oldBuilder = new RStringBuilder();
         生活保護種別builder = new RStringBuilder();
         lastEntity = new SeikatsuhogoJukyushaRelateEntity();
-    }
-
-    @Override
-    protected IBatchReader createReader() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBA介護資格));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
-        RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
+        psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
+    }
+
+    @Override
+    protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toSeikatsuhogoJukyushaMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
     }
 
