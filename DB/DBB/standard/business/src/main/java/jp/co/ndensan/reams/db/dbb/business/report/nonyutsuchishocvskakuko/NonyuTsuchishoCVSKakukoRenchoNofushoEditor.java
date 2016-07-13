@@ -243,8 +243,10 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
             source.detail_gokeigaku13 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd3 = 納入通知書期情報.get納期限表記();
             source.detail_honzei3 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen3 = 納入通知書期情報.getコンビニ支払期限().toDateString();

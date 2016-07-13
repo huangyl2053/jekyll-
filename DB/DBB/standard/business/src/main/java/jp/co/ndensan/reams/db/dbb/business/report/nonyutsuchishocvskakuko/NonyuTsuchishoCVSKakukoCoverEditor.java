@@ -237,8 +237,6 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             source.honzei = 印字位置1の納付書.get納付額表記();
             if (印字位置1の納付書.getOcr() != null) {
                 source.ocr1 = 印字位置1の納付書.getOcr().get(1);
-            }
-            if (印字位置1の納付書.getOcr() != null) {
                 source.ocr2 = 印字位置1の納付書.getOcr().get(2);
             }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {

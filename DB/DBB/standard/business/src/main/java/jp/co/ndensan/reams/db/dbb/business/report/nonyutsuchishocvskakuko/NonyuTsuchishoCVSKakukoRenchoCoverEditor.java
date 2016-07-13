@@ -218,8 +218,10 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.gokeigaku1 = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd1 = 印字位置1の納付書.get納期限表記();
             source.honzei1 = 印字位置1の納付書.get納付額表記();
-            source.ocr11 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr11 = 印字位置1の納付書.getOcr().get(1);
+                source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen1 = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
