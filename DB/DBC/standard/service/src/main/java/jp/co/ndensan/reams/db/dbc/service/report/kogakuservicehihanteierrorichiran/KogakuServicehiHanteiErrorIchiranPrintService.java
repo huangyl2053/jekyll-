@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  * 帳票設計_DBCMN41002_高額介護サービス費判定エラーリスト PrintService
  *
- * @reamsid_L DBC-2010-110 sunhu
+ * @reamsid_L DBC-2010-110 sunhui
  */
 public class KogakuServicehiHanteiErrorIchiranPrintService {
 
