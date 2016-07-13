@@ -23,65 +23,68 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class NinteiChosaHoshuShokaiChange {
 
+    private static final RString MARU = new RString("○");
+    private static RString 調査_再 = new RString("初");
+    private static RString ninteichosaItakusakiCode = RString.EMPTY;
+    private static int 件数_値;
+    private static final int 頁_件数 = 25;
+    private static final int ONE = 1;
+    private static final int ZERO = 0;
+
     private NinteiChosaHoshuShokaiChange() {
     }
-
-    private static final RString MARU = new RString("○");
-    private static RString 調査_再 = new RString("");
 
     /**
      * 認定調査報酬照会の帳票のパラメータを作成します。
      *
      * @param entity 認定調査報酬照会情報
-     * @param parameter NinteiChosaHoshuShokaiFlowParameter
+     * @param parameter 認定調査報酬照会のprocessのパラメータ
+     * @param 番号 番号
+     * @param 件数 件数
      * @return 認定調査報酬照会の帳票のパラメータ
      */
     public static NinteiChosaHoshuShokaiCsvEntity createShokaiData(NinteiChosaHoshuShokaiRelateEntity entity,
-            NinteiChosaHoshuShokaiProcessParameter parameter) {
+            NinteiChosaHoshuShokaiProcessParameter parameter, int 番号, int 件数) {
+
         RString 在宅_新 = RString.EMPTY;
         RString 在宅_継 = RString.EMPTY;
         RString 施設_新 = RString.EMPTY;
         RString 施設_継 = RString.EMPTY;
-        int 在宅_初 = 0;
-        int 在宅_再 = 0;
-        int 施設_初 = 0;
-        int 施設_再 = 0;
-        Decimal 委託料合計 = Decimal.ZERO;
-
-        if (NinteiChousaIraiKubunCode.初回.getコード().equals(entity.get認定調査依頼区分コード().value())) {
-            調査_再 = new RString("初");
-        } else {
+        if (!NinteiChousaIraiKubunCode.初回.getコード().equals(entity.get認定調査依頼区分コード().value())) {
             調査_再 = new RString("再");
         }
         if (ChosaKubun.新規調査.getコード().equals(entity.get認定調査区分コード().value())
                 && ChosaJisshiBashoCode.自宅内.getコード().equals(entity.get認定調査実施場所コード().value())) {
             在宅_新 = MARU;
-            在宅_初 = 在宅_初 + 1;
         }
         if (ChosaKubun.再調査.getコード().equals(entity.get認定調査区分コード().value())
                 && ChosaJisshiBashoCode.自宅内.getコード().equals(entity.get認定調査実施場所コード().value())) {
             在宅_継 = MARU;
-            在宅_再 = 在宅_再 + 1;
         }
         if (ChosaKubun.新規調査.getコード().equals(entity.get認定調査区分コード().value())
                 && !ChosaJisshiBashoCode.自宅内.getコード().equals(entity.get認定調査実施場所コード().value())) {
             施設_新 = MARU;
-            施設_初 = 施設_初 + 1;
         }
         if (ChosaKubun.再調査.getコード().equals(entity.get認定調査区分コード().value())
                 && !ChosaJisshiBashoCode.自宅内.getコード().equals(entity.get認定調査実施場所コード().value())) {
             施設_継 = MARU;
-            施設_再 = 施設_再 + 1;
         }
-        int count = 1;
-        Decimal 委託料 = new Decimal(entity.get認定調査委託料());
-        委託料合計 = 委託料.add(entity.get認定調査委託料());
         NinteiChosaHoshuShokaiCsvEntity data = new NinteiChosaHoshuShokaiCsvEntity(entity.get認定調査委託先コード(), entity.get事業者名称(),
                 entity.get認定調査員コード(), entity.get調査員氏名(), new RDate(entity.get認定調査依頼年月日().toString()),
                 new RDate(entity.get認定調査実施年月日().toString()), new RDate(entity.get認定調査受領年月日().toString()),
                 調査_再, entity.get証記載保険者番号(), entity.get被保険者番号(), entity.get被保険者氏名().getColumnValue(),
-                在宅_新, 在宅_継, 施設_新, 施設_継, new RString(委託料.toString()), 在宅_初, 在宅_再, 施設_初, 施設_再, 委託料合計,
-                parameter.get調査依頼日開始().wareki().toDateString(), parameter.get調査依頼日終了().wareki().toDateString(), count++);
+                在宅_新, 在宅_継, 施設_新, 施設_継, new RString(Integer.toString(entity.get認定調査委託料())), ZERO, ZERO,
+                ZERO, ZERO, parameter.get調査依頼日開始().wareki().toDateString(),
+                parameter.get調査依頼日終了().wareki().toDateString(), 番号, ZERO);
+        件数_値 = entity.get件数();
+        if (件数_値 - ONE <= 件数 && 番号 % 頁_件数 == ONE) {
+            data.set施設_再合計(entity.get施設再調査());
+            data.set在宅_初合計(entity.get在宅初回());
+            data.set在宅_再合計(entity.get在宅再調査());
+            data.set認定調査委託料(entity.get委託料合計());
+            data.set施設_初合計(entity.get施設初回());
+        }
+        ninteichosaItakusakiCode = entity.get認定調査委託先コード();
         return data;
     }
 
@@ -97,8 +100,6 @@ public final class NinteiChosaHoshuShokaiChange {
         RString 施設_新 = RString.EMPTY;
         RString 施設_継 = RString.EMPTY;
         if (NinteiChousaIraiKubunCode.初回.getコード().equals(entity.get認定調査依頼区分コード().value())) {
-            調査_再 = new RString("初");
-        } else {
             調査_再 = new RString("再");
         }
         if (ChosaKubun.新規調査.getコード().equals(entity.get認定調査区分コード().value())
