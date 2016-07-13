@@ -44,7 +44,15 @@ public class KaigoNinteiShinseiKensaku {
     private final RString 要介護認定申請取下_サービス種類変更 = new RString("DBDUC51213");
     private final RString 要介護認定申請延期 = new RString("DBDUC51214");
     private final RString 要介護認定申請却下 = new RString("DBDUC51215");
-    private static final RString 検索状態 = new RString("検索状態");
+    private final RString 要介護認定申請受付新規 = new RString("DBDUC51201");
+    private final RString 要介護認定申請受付更新 = new RString("DBDUC51202");
+    private final RString 要介護認定申請受付区分変更 = new RString("DBDUC51203");
+    private final RString 要介護認定申請受付サービス種類変更 = new RString("DBDUC51204");
+    private final RString 職権記載 = new RString("DBDUC51216");
+    private final RString 職権取消全喪失 = new RString("DBDUC51217");
+    private final RString 受給者転入 = new RString("DBDUC51205");
+
+    private final RString 検索状態 = new RString("検索状態");
 
     /**
      * コンストラクタです。
@@ -171,7 +179,14 @@ public class KaigoNinteiShinseiKensaku {
                 || 要介護認定申請取下_区分変更.equals(uiContainerId)
                 || 要介護認定申請取下_サービス種類変更.equals(uiContainerId)
                 || 要介護認定申請延期.equals(uiContainerId)
-                || 要介護認定申請却下.equals(uiContainerId)) {
+                || 要介護認定申請却下.equals(uiContainerId)
+                || 要介護認定申請受付新規.equals(uiContainerId)
+                || 要介護認定申請受付更新.equals(uiContainerId)
+                || 要介護認定申請受付区分変更.equals(uiContainerId)
+                || 要介護認定申請受付サービス種類変更.equals(uiContainerId)
+                || 職権記載.equals(uiContainerId)
+                || 職権取消全喪失.equals(uiContainerId)
+                || 受給者転入.equals(uiContainerId)) {
 
             return GyomuBunrui.介護事務;
         }
