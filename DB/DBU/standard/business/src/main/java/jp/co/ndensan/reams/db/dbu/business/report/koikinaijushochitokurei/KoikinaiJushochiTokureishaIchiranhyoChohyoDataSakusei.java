@@ -202,7 +202,10 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
     }
 
     private static RString timeToRString(RString time) {
-        return new FlexibleDate(time).wareki()
+        if (RString.isNullOrEmpty(time)) {
+            return RString.EMPTY;
+        }
+        return new RDate(time.toString()).wareki()
                 .separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
     }
 
