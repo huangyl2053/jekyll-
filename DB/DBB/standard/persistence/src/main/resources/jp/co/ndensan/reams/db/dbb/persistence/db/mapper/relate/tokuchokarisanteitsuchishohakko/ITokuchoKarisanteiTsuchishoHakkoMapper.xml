@@ -300,11 +300,11 @@
         <association property="前年度賦課情報" resultMap="resultMap_前年度賦課情報"/>
         <association property="宛名" resultMap="resultMap_宛名情報"/>
         <association property="宛先" resultMap="resultMap_宛先情報"/>
-<!--        <association property="納組" resultMap="resultMap_納組情報"/>-->
+        <association property="納組" resultMap="resultMap_納組情報"/>
         <association property="対象者_追加含む情報" resultMap="resultMap_対象者_追加含む情報"/>
     </resultMap>
     
-    <select id="select出力対象データ" resultMap="resultMap_出力対象情報の取得"
+    <select resultOrdered="true" id="select出力対象データ" resultMap="resultMap_出力対象情報の取得"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoMybatisParameter" fetchSize="500">
         SELECT
             A.*
