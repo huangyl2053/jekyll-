@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -71,6 +73,7 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
     private static final RString キー_出力順 = new RString("出力順");
     private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3060.\"hdrShoHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
+    private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
 
     @Override
@@ -111,8 +114,10 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID)
-                .setDelimiter(new RString(","))
-                .setEnclosure(new RString("\""))
+                .setDelimiter(コンマ)
+                .setEnclosure(ダブル引用符)
+                .setEncode(Encode.SJIS)
+                .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
         for (int index = 0; index < list.size(); index++) {
