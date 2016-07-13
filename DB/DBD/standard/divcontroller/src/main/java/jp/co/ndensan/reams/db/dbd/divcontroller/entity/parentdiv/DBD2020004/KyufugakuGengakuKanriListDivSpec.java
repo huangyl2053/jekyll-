@@ -40,7 +40,7 @@ public enum KyufugakuGengakuKanriListDivSpec implements IPredicate<KyufugakuGeng
             RDate 開始日 = div.getTxtGengakuShuryoRange().getFromValue();
             RDate 終了日 = div.getTxtGengakuShuryoRange().getToValue();
 
-            return !開始日.isBeforeOrEquals(終了日);
+            return !終了日.isBeforeOrEquals(開始日);
         }
     };
 
