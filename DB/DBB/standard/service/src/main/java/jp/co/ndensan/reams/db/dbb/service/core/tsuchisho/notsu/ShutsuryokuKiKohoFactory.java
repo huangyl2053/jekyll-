@@ -113,7 +113,7 @@ public class ShutsuryokuKiKohoFactory {
     private List<ShutsuryokuKiKoho> get出力期候補リストBy随時期(KitsukiList 期月リスト, RString 算定期) {
         List<ShutsuryokuKiKoho> 出力期候補リスト = new ArrayList<>();
         for (Kitsuki kitsuki : 期月リスト.toList()) {
-            if (kitsuki.get期().equals(算定期)) {
+            if (kitsuki.get期AsInt() == Integer.parseInt(算定期.toString())) {
                 ShutsuryokuKiKoho 出力期候補 = new ShutsuryokuKiKoho();
                 出力期候補.set期月(kitsuki);
                 出力期候補.set表示文字列(new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
