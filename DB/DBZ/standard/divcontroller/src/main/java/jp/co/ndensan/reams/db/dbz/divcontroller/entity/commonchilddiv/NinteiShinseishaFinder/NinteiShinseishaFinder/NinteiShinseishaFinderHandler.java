@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -433,5 +434,19 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setSelectedItemsByKey(keys);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(keys);
         div.getChkGetsureiShori().setSelectedItemsByKey(keys);
+    }
+
+    /**
+     * 被保険者氏名に平仮名のみが入力されている場合、すべてをカタカナへ変換します。
+     * 漢字を含む場合、この変換は行いません。
+     */
+    public void convert被保険者氏名ToカタカタIfNotContains漢字() {
+        RString txtShinseishaName = div.getTxtHihokenshaName().getValue();
+        if (!RString.isNullOrEmpty(txtShinseishaName)) {
+            txtShinseishaName = RStringUtil.convertひらがなtoカタカナ(txtShinseishaName);
+            if (RStringUtil.isカタカナOnly(txtShinseishaName)) {
+                div.getTxtHihokenshaName().setValue(txtShinseishaName);
+            }
+        }
     }
 }

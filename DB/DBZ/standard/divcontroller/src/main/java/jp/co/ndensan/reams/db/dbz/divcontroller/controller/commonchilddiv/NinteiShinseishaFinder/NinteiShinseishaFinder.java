@@ -12,10 +12,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -166,21 +164,14 @@ public class NinteiShinseishaFinder {
     }
 
     /**
-     * 入力された番号を桁数10になるよう左側に0(ゼロ)を埋める。
+     * 被保険者氏名に平仮名のみが入力されている場合、カタカナへ変換します。
+     * 漢字を含む場合、この変換は行いません。
      *
      * @param div NinteiShinseishaFinderDiv
      * @return ResponseData
      */
     public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtShinseishaName(NinteiShinseishaFinderDiv div) {
-        RString txtShinseishaName = div.getTxtHihokenshaName().getValue();
-        if (!RString.isNullOrEmpty(txtShinseishaName)) {
-            txtShinseishaName = RStringUtil.convertひらがなtoカタカナ(txtShinseishaName);
-            if (RStringUtil.isカタカナOnly(txtShinseishaName)) {
-                div.getTxtHihokenshaName().setValue(txtShinseishaName);
-            } else {
-                throw new ApplicationException(UrErrorMessages.使用不可文字.getMessage());
-            }
-        }
+        getHandler(div).convert被保険者氏名ToカタカタIfNotContains漢字();
         return ResponseData.of(div).respond();
     }
 

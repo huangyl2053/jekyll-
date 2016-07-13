@@ -4,10 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlur_txtHihokenshaNumber = function () {
-                return "onBlur_txtHihokenshaNumber";
-            };
-
             Events.onBlur_txtShinseishaName = function () {
                 return "onBlur_txtShinseishaName";
             };
@@ -128,7 +124,7 @@ var DBZ;
             };
 
             Controls.prototype.txtHihokenshaNumber = function () {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             };
 
             Controls.prototype.ddlShichosonCode = function () {

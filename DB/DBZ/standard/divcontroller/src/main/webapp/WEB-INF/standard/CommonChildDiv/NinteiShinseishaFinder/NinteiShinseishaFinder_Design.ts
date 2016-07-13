@@ -9,10 +9,6 @@ module DBZ {
 
         export class Events {
 
-            public static onBlur_txtHihokenshaNumber(): string {
-                return "onBlur_txtHihokenshaNumber";
-            }
-
             public static onBlur_txtShinseishaName(): string {
                 return "onBlur_txtShinseishaName";
             }
@@ -134,8 +130,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHihokenshaNumber(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
+            public txtHihokenshaNumber(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
             //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * 要介護認定申請検索のMyBatis用パラメータクラスです。
@@ -24,7 +25,7 @@ public class ShinseiKensakuMapperParameter {
     private RString shoKisaiHokenshaNo;
     // 支所コード
     private RString shishoCode;
-    // 被保険者氏名
+    // 被保険者氏名（カナ検索でも用いる）
     private RString hihokenshaName;
     // 認定申請日FROM
     private FlexibleDate ninteiShinseiYMDFrom;
@@ -190,6 +191,7 @@ public class ShinseiKensakuMapperParameter {
     private boolean useShoKisaiHokenshaNo;
     private boolean useShishoCode;
     private boolean useHihokenshaName;
+    private boolean useHihokenshaKana;
     private boolean is前方一致;
     private boolean is後方一致;
     private boolean is部分一致;
@@ -274,4 +276,16 @@ public class ShinseiKensakuMapperParameter {
     private boolean useGeninShikkan;
     // 画面詳細条件の完了情報を入力する場合
     private boolean useNinteiKanryoJoho;
+
+    /**
+     * 検索に用いる被保険者氏名を設定します。
+     * 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
+     *
+     * @param hihokenshaName 検索に用いる被保険者氏名
+     */
+    public void set被保険者名(RString hihokenshaName) {
+        this.hihokenshaName = hihokenshaName == null ? RString.EMPTY : hihokenshaName;
+        this.useHihokenshaKana = RStringUtil.isカタカナOnly(this.hihokenshaName);
+        this.useHihokenshaName = !this.useHihokenshaKana;
+    }
 }

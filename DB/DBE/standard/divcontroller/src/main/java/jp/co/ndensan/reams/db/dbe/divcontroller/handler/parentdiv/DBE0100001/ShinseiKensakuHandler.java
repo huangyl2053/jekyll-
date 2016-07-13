@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -440,8 +441,7 @@ public class ShinseiKensakuHandler {
             } else if (KEY3.equals(hihokenshaNameMatchType)) {
                 parameter.set後方一致(true);
             }
-            parameter.setHihokenshaName(被保険者氏名);
-            parameter.setUseHihokenshaName(true);
+            parameter.set被保険者名(被保険者氏名);
         }
         List<KeyValueDataSource> みなし２号申請 = finderDiv.getChkMinashiFlag().getSelectedItems();
         if (みなし２号申請.isEmpty()) {
