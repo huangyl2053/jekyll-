@@ -53,6 +53,8 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         div.getDdlShinseijiShinseiKubun().getDataSource().addAll(kunbunCode);
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTextBoxNum().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getTextBoxNum().setValue(new Decimal(検索制御_最大取得件数.toString()));
     }
 
     /**
@@ -73,6 +75,8 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         div.getDdlShinseijiShinseiKubun().setSelectedIndex(DROPDOWNLIST_BLANK);
         div.getChkSeibetsu().setSelectedItemsByKey(isselect);
         div.getTextBoxNum().clearValue();
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getTextBoxNum().setValue(new Decimal(検索制御_最大取得件数.toString()));
     }
 
     /**

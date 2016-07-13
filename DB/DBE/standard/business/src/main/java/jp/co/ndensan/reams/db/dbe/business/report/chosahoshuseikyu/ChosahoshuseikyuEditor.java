@@ -7,12 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosahoshuseikyu;
 
 import jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu.Chosahoshuseikyu;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshuseikyu.ChosahoshuseikyuReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 認定調査報酬請求書のEditorです。
@@ -38,11 +32,7 @@ public class ChosahoshuseikyuEditor implements IChosahoshuseikyuEditor {
     }
 
     private ChosahoshuseikyuReportSource editSource(ChosahoshuseikyuReportSource source) {
-        FlexibleDate printdate = item.get発行年月日();
-        RString printTimeStampSb = printdate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString();
-        source.hakkoYMD = printTimeStampSb;
+        source.hakkoYMD = item.get発行年月日();
         source.chosaItakusakiYubimNo = item.get郵便番号();
         source.chosaItakusakiJusho = item.get住所();
         source.chosaItakusakiName = item.get調査機関();

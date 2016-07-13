@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -15,8 +14,8 @@ import lombok.Getter;
 @Getter
 public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParameter {
 
-    private final RDateTime 実績期間From;
-    private final RDateTime 実績期間To;
+    private final FlexibleDate 実績期間From;
+    private final FlexibleDate 実績期間To;
     private final FlexibleDate 振込指定日;
     private final RString 処理状態区分_通常;
     private final RString 処理状態区分_延期;
@@ -36,8 +35,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
      * @param 報酬基準日 主治医意見書報酬基準日
      * @param 基準日フラグ 基準日フラグ
      */
-    protected HoshuShiharaiJunbiMybatisParameter(RDateTime 実績期間From,
-            RDateTime 実績期間To,
+    protected HoshuShiharaiJunbiMybatisParameter(FlexibleDate 実績期間From,
+            FlexibleDate 実績期間To,
             FlexibleDate 振込指定日,
             RString 処理状態区分_通常,
             RString 処理状態区分_延期,
@@ -68,8 +67,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
      * @param 基準日フラグ 基準日フラグ
      * @return HoshuShiharaiJunbiMybatisParameter
      */
-    public static HoshuShiharaiJunbiMybatisParameter creatParameter(RDateTime 実績期間From,
-            RDateTime 実績期間To,
+    public static HoshuShiharaiJunbiMybatisParameter creatParameter(FlexibleDate 実績期間From,
+            FlexibleDate 実績期間To,
             FlexibleDate 振込指定日,
             RString 処理状態区分_通常,
             RString 処理状態区分_延期,
