@@ -40,7 +40,7 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
     private static final int LENGTH_11 = 11;
     private static final int LENGTH_12 = 12;
     private static final int LENGTH_13 = 13;
-    private static final RString チェック = new RString("ﾚ");
+    private static final RString チェック = new RString("✔");
     private final IkenshokinyuyoshiBusiness business;
 
     /**
