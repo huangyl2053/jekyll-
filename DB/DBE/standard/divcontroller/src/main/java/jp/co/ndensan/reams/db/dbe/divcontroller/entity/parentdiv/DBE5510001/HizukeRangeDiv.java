@@ -23,10 +23,8 @@ public class HizukeRangeDiv extends Panel {
      */
     @JsonProperty("radHizukeHani")
     private RadioButton radHizukeHani;
-    @JsonProperty("txtShiteiHizukeForm")
-    private TextBoxDate txtShiteiHizukeForm;
-    @JsonProperty("txtShiteiHizukeTo")
-    private TextBoxDate txtShiteiHizukeTo;
+    @JsonProperty("txtShiteiHizukeRange")
+    private TextBoxDateRange txtShiteiHizukeRange;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,39 +51,21 @@ public class HizukeRangeDiv extends Panel {
     }
 
     /*
-     * gettxtShiteiHizukeForm
-     * @return txtShiteiHizukeForm
+     * gettxtShiteiHizukeRange
+     * @return txtShiteiHizukeRange
      */
-    @JsonProperty("txtShiteiHizukeForm")
-    public TextBoxDate getTxtShiteiHizukeForm() {
-        return txtShiteiHizukeForm;
+    @JsonProperty("txtShiteiHizukeRange")
+    public TextBoxDateRange getTxtShiteiHizukeRange() {
+        return txtShiteiHizukeRange;
     }
 
     /*
-     * settxtShiteiHizukeForm
-     * @param txtShiteiHizukeForm txtShiteiHizukeForm
+     * settxtShiteiHizukeRange
+     * @param txtShiteiHizukeRange txtShiteiHizukeRange
      */
-    @JsonProperty("txtShiteiHizukeForm")
-    public void setTxtShiteiHizukeForm(TextBoxDate txtShiteiHizukeForm) {
-        this.txtShiteiHizukeForm = txtShiteiHizukeForm;
-    }
-
-    /*
-     * gettxtShiteiHizukeTo
-     * @return txtShiteiHizukeTo
-     */
-    @JsonProperty("txtShiteiHizukeTo")
-    public TextBoxDate getTxtShiteiHizukeTo() {
-        return txtShiteiHizukeTo;
-    }
-
-    /*
-     * settxtShiteiHizukeTo
-     * @param txtShiteiHizukeTo txtShiteiHizukeTo
-     */
-    @JsonProperty("txtShiteiHizukeTo")
-    public void setTxtShiteiHizukeTo(TextBoxDate txtShiteiHizukeTo) {
-        this.txtShiteiHizukeTo = txtShiteiHizukeTo;
+    @JsonProperty("txtShiteiHizukeRange")
+    public void setTxtShiteiHizukeRange(TextBoxDateRange txtShiteiHizukeRange) {
+        this.txtShiteiHizukeRange = txtShiteiHizukeRange;
     }
 
     // </editor-fold>

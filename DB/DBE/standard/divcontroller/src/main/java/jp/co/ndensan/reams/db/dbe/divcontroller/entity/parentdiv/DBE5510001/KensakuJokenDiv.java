@@ -187,23 +187,13 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeForm() {
-        return this.getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeForm();
+    public TextBoxDateRange getTxtShiteiHizukeRange() {
+        return this.getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeRange();
     }
 
     @JsonIgnore
-    public void  setTxtShiteiHizukeForm(TextBoxDate txtShiteiHizukeForm) {
-        this.getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeForm(txtShiteiHizukeForm);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeTo() {
-        return this.getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShiteiHizukeTo(TextBoxDate txtShiteiHizukeTo) {
-        this.getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeTo(txtShiteiHizukeTo);
+    public void  setTxtShiteiHizukeRange(TextBoxDateRange txtShiteiHizukeRange) {
+        this.getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeRange(txtShiteiHizukeRange);
     }
 
     @JsonIgnore

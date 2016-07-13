@@ -163,23 +163,13 @@ public class SerchFromShinchokuJokyoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeForm() {
-        return this.getHizukeRange().getTxtShiteiHizukeForm();
+    public TextBoxDateRange getTxtShiteiHizukeRange() {
+        return this.getHizukeRange().getTxtShiteiHizukeRange();
     }
 
     @JsonIgnore
-    public void  setTxtShiteiHizukeForm(TextBoxDate txtShiteiHizukeForm) {
-        this.getHizukeRange().setTxtShiteiHizukeForm(txtShiteiHizukeForm);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeTo() {
-        return this.getHizukeRange().getTxtShiteiHizukeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShiteiHizukeTo(TextBoxDate txtShiteiHizukeTo) {
-        this.getHizukeRange().setTxtShiteiHizukeTo(txtShiteiHizukeTo);
+    public void  setTxtShiteiHizukeRange(TextBoxDateRange txtShiteiHizukeRange) {
+        this.getHizukeRange().setTxtShiteiHizukeRange(txtShiteiHizukeRange);
     }
 
     @JsonIgnore

@@ -14,12 +14,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.
 import jp.co.ndensan.reams.db.dbe.service.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -144,8 +142,8 @@ public class YokaigoNinteiShinchokuJohoShokai {
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
                 div.getDdlNameMatchType().getSelectedKey(),
                 div.getRadKensakuHoho().getSelectedKey(),
-                div.getTxtShiteiHizukeForm().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeForm().getValue().toDateString(),
-                div.getTxtShiteiHizukeTo().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeTo().getValue().toDateString(),
+                div.getTxtShiteiHizukeRange().getFromValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getFromValue().toDateString(),
+                div.getTxtShiteiHizukeRange().getToValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getToValue().toDateString(),
                 div.getTxtHihokenshaNo().getValue() == null ? RString.EMPTY : div.getTxtHihokenshaNo().getValue(),
                 div.getTxtShikibetsuCode().getValue() == null ? RString.EMPTY : div.getTxtShikibetsuCode().getValue(),
                 div.getTxtShimei().getValue() == null ? RString.EMPTY : div.getTxtShimei().getValue(),

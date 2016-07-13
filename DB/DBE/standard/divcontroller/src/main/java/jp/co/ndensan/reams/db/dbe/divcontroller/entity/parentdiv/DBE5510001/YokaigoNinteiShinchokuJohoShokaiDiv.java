@@ -166,23 +166,13 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeForm() {
-        return this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeForm();
+    public TextBoxDateRange getTxtShiteiHizukeRange() {
+        return this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeRange();
     }
 
     @JsonIgnore
-    public void  setTxtShiteiHizukeForm(TextBoxDate txtShiteiHizukeForm) {
-        this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeForm(txtShiteiHizukeForm);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeTo() {
-        return this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShiteiHizukeTo(TextBoxDate txtShiteiHizukeTo) {
-        this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeTo(txtShiteiHizukeTo);
+    public void  setTxtShiteiHizukeRange(TextBoxDateRange txtShiteiHizukeRange) {
+        this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeRange(txtShiteiHizukeRange);
     }
 
     @JsonIgnore
