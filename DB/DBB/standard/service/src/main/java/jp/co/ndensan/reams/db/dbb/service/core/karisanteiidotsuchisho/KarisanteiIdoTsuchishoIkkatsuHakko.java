@@ -119,7 +119,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
     private static final RString RIGHT_FORMAT = new RString("}'");
     private static final RString MIDDLE_FORMAT = new RString(",");
     private static final RString 定値区分_0 = new RString("0");
-    private static final RString 定値区分_1 = new RString("0");
+    private static final RString 定値区分_1 = new RString("1");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
     private static final RString CSVファイル名 = new RString("-");
