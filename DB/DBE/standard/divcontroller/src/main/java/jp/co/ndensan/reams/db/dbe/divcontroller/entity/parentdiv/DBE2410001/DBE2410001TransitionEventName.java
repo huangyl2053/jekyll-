@@ -17,7 +17,8 @@ public enum DBE2410001TransitionEventName implements IContainerEvents {
     認定調査依頼へ("認定調査依頼へ"),
     主治医意見書作成依頼へ("主治医意見書作成依頼へ"),
     調査依頼完了("調査依頼完了"),
-    意見書依頼完了("意見書依頼完了");
+    意見書依頼完了("意見書依頼完了"),
+    完了("完了");
 
     private final RString name;
 
