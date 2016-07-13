@@ -79,17 +79,16 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranEditor
      */
     @Override
     public KogakuSogoJigyoServicehiHanteiErrorIchiranSource edit(KogakuSogoJigyoServicehiHanteiErrorIchiranSource source) {
-
         RString 帳票作成年月日 = YMDHMS.now().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 帳票作成時 = YMDHMS.now().getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
         if (entityList != null) {
-            source.shinsaYMKaishi = entityList.get(0).get審査年月From().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.shinsaYMShuryo = entityList.get(0).get審査年月To().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.shinsaYMKaishi = entityList.get(0).get審査年月From().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            source.shinsaYMShuryo = entityList.get(0).get審査年月To().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             source.hokenshaNo = entityList.get(0).get市町村コード();
             source.hokenshaName = association.get市町村名();
             source.shutsuryokujun1 = 並び順の１件目;
