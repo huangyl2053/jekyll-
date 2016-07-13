@@ -4,9 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import static java.lang.Boolean.FALSE;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokennshaKubunCode;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -727,5 +730,25 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 資格の異動情報を取得します。
+     *
+     * @param 抽出開始日時 RDateTime
+     * @param 抽出終了日時 RDateTime
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get資格の異動(RDateTime 抽出開始日時, RDateTime 抽出終了日時) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokennshaKubunCode, ShikakuKubun._１号.getコード()),
+                                eq(logicalDeletedFlag, FALSE),
+                                leq(抽出開始日時, lastUpdateTimestamp),
+                                leq(lastUpdateTimestamp, 抽出終了日時)
+                        )).toList(DbT1001HihokenshaDaichoEntity.class);
     }
 }
