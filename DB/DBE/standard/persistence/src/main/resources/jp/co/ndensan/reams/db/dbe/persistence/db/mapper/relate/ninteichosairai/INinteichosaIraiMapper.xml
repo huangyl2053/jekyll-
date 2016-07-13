@@ -82,7 +82,7 @@
                     FROM rgdb."DbT5201NinteichosaIraiJoho"
                     WHERE "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo")
         AND
-            substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 0, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
+            substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 1, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
         AND
             DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
         AND

@@ -112,7 +112,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         RealInitialLocker.release(LOCKINGKEY);
         RString menuId = ResponseHolder.getMenuID();
         if (メニューID_転入転出保留対象者管理.equals(menuId)) {
-            return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.検索に戻る).respond();
+            return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.検索に戻る).parameter(new RString("他特例適用"));
         }
         return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.再検索).respond();
     }
@@ -172,6 +172,10 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onClick_btnReSearch(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
         RealInitialLocker.release(LOCKINGKEY);
+        RString menuId = ResponseHolder.getMenuID();
+        if (メニューID_転入転出保留対象者管理.equals(menuId)) {
+            return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.検索に戻る).respond();
+        }
         return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.再検索).parameter(PARAMETER);
     }
 

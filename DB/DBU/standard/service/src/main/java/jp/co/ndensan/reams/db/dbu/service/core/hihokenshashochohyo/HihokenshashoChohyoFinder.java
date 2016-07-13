@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.HonninJoh
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.SofusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IHihokenshashoChohyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -218,12 +218,18 @@ public class HihokenshashoChohyoFinder {
             business.set氏名(honni.get(0).getMeisho());
             set生年月日(business, honni.get(0));
             business.set交付年月日(new RString(hihoken.get(i).get交付日().toString()));
-            business.set保険者NO1(hihoken.get(i).get保険者().substring(桁数_0, 桁数_1));
-            business.set保険者NO2(hihoken.get(i).get保険者().substring(桁数_1, 桁数_2));
-            business.set保険者NO3(hihoken.get(i).get保険者().substring(桁数_2, 桁数_3));
-            business.set保険者NO4(hihoken.get(i).get保険者().substring(桁数_3, 桁数_4));
-            business.set保険者NO5(hihoken.get(i).get保険者().substring(桁数_4, 桁数_5));
-            business.set保険者NO6(hihoken.get(i).get保険者().substring(桁数_5, 桁数_6));
+            if (!RString.isNullOrEmpty(hihoken.get(i).get保険者())) {
+                RString 保険者 = hihoken.get(i).get保険者();
+                if (hihoken.get(i).get保険者().length() < 桁数_6) {
+                    保険者 = hihoken.get(i).get保険者().padRight(RString.HALF_SPACE, 桁数_6);
+                }
+                business.set保険者NO1(保険者.substring(桁数_0, 桁数_1));
+                business.set保険者NO2(保険者.substring(桁数_1, 桁数_2));
+                business.set保険者NO3(保険者.substring(桁数_2, 桁数_3));
+                business.set保険者NO4(保険者.substring(桁数_3, 桁数_4));
+                business.set保険者NO5(保険者.substring(桁数_4, 桁数_5));
+                business.set保険者NO6(保険者.substring(桁数_5, 桁数_6));
+            }
             business.set要介護認定区分(hihoken.get(i).get要介護認定状態区分コード());
             business.set認定年月日(hihoken.get(i).get認定年月日().wareki().eraType(EraType.KANJI_RYAKU)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
