@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName.様式４の２;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
@@ -57,13 +56,14 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         handler.onload(get引き継ぎデータ());
-        if (画面表示_追加.equals(div.getGamenMode())) {
-            return ResponseData.of(div).setState(DBU0050021StateName.add);
-        } else if (画面表示_修正.equals(div.getGamenMode())) {
-            return ResponseData.of(div).setState(DBU0050021StateName.mod);
-        } else {
-            return ResponseData.of(div).setState(DBU0050021StateName.del);
-        }
+//        if (画面表示_追加.equals(div.getGamenMode())) {
+//            return ResponseData.of(div).setState(DBU0050021StateName.add);
+//        } else if (画面表示_修正.equals(div.getGamenMode())) {
+//            return ResponseData.of(div).setState(DBU0050021StateName.mod);
+//        } else {
+//            return ResponseData.of(div).setState(DBU0050021StateName.del);
+//        }
+        return ResponseData.of(div).respond();
     }
 
     /**
