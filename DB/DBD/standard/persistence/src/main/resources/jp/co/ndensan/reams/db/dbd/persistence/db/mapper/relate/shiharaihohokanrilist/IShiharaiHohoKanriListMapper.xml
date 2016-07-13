@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohokanrilist.IShiharaiHohoKanriListMapper">
-<!--    <select id="selectTaishoshaJoho" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.shiharaihohokanrilist.ShiharaiHohoKanriListMapperParameter" fetchSize="500" resultOrdered="true">
+    <select id="selectTaishoshaJoho" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.shiharaihohokanrilist.ShiharaiHohoKanriListMapperParameter" fetchSize="500" resultOrdered="true">
         SELECT
         DISTINCT(dbt4021."hihokenshaNo")
         FROM
@@ -293,7 +293,7 @@
         </if>
         ORDER BY #{出力順}
     </select>
-
+    <!--
     <resultMap id="ResultMap_HenkouJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.HenkouJohoEntity" autoMapping="true">
         <id property="hihokenshaNo" column="tmp_hihokenshano" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="dbt4001Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
@@ -336,9 +336,10 @@
         <result property="lastUpdateTimestamp" column="dbT2003Kibetsu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT2003Kibetsu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="choteiId" column="dbT2003Kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-    </resultMap>
+    </resultMap>-->
 
-    <select id="selectHenkouJoho" resultMap="ResultMap_HenkouJohoEntity" fetchSize="500" resultOrdered="true">
+    <!--<select id="selectHenkouJoho" resultMap="ResultMap_HenkouJohoEntity" fetchSize="500" resultOrdered="true">-->
+    <select id="selectHenkouJoho" fetchSize="500" resultOrdered="true">
         SELECT
         tmptable."hihokenshaNo" as "tmp_hihokenshano",
         shikakujoho.*,
@@ -578,5 +579,5 @@
         "DbT4001JukyushaDaicho"."shikakuShutokuMaeShinseiFlag" as "dbT4001JukyushaDaicho_shikakuShutokuMaeShinseiFlag",
         "DbT4001JukyushaDaicho"."kyuSochishaFlag" as "dbT4001JukyushaDaicho_kyuSochishaFlag",
         "DbT4001JukyushaDaicho"."logicalDeletedFlag" as "dbT4001JukyushaDaicho_logicalDeletedFlag"
-    </sql>-->
+    </sql>
 </mapper>

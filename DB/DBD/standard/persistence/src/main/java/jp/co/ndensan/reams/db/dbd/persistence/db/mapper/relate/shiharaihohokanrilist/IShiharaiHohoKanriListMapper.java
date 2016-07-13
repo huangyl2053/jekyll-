@@ -27,5 +27,12 @@ public interface IShiharaiHohoKanriListMapper {
      */
     HihokenshaNo selectTaishoshaJoho(ShiharaiHohoKanriListMapperParameter param);
 
+    /**
+     * 変更情報の取得
+     *
+     * @param rDate基準日 基準日
+     * @param flexibleDate基準日 基準日
+     * @return 変更情報
+     */
     HenkouJohoEntity selectHenkouJoho(@Param("rDate基準日") RDate rDate基準日, @Param("flexibleDate基準日") FlexibleDate flexibleDate基準日);
 }
