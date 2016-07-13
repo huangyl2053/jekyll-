@@ -326,11 +326,14 @@ public class KaigoHokenryoGemmen {
         FukaJohoRelateMapperParameter 賦課の情報検索条件
                 = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
         List<FukaJoho> 賦課情報 = 賦課情報Manager.get最新の賦課情報(賦課の情報検索条件);
-        if (賦課情報 == null || 賦課情報.size() < 定値_二) {
+        if (賦課情報 == null || 賦課情報.isEmpty()) {
             return null;
+        } else if (賦課情報.size() < 定値_二) {
+            result.set賦課の情報_更正後(賦課情報.get(定値_ゼロ));
+        } else {
+            result.set賦課の情報_更正後(賦課情報.get(定値_ゼロ));
+            result.set賦課の情報_更正前(賦課情報.get(定値_イチ));
         }
-        result.set賦課の情報_更正後(賦課情報.get(定値_ゼロ));
-        result.set賦課の情報_更正前(賦課情報.get(定値_イチ));
         return result;
     }
 
