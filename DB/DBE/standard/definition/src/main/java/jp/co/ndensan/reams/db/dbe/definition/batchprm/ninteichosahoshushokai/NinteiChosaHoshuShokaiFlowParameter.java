@@ -43,7 +43,6 @@ public final class NinteiChosaHoshuShokaiFlowParameter extends BatchParameterBas
      * コンストラクタです。
      */
     public NinteiChosaHoshuShokaiFlowParameter() {
-
     }
 
     /**
@@ -65,10 +64,9 @@ public final class NinteiChosaHoshuShokaiFlowParameter extends BatchParameterBas
     /**
      * 認定調査報酬照会のProcessParameterを作成します。
      *
-     * @return NinteiChosaHoshuShokaiProcessParameter
+     * @return 認定調査報酬照会のProcessParameter
      */
     public NinteiChosaHoshuShokaiProcessParameter toProcessParamter() {
         return new NinteiChosaHoshuShokaiProcessParameter(帳票出力区分, 調査依頼日開始, 調査依頼日終了, 情報リスト);
     }
-
 }
