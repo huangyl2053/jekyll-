@@ -132,7 +132,7 @@ public class HanyoListSeikatsuhogoJukyushaRenbanProcess extends BatchProcessBase
             生活保護種別builder.append(コンマ);
         } else {
             eucCsvWriter.writeLine(new HanyoListSeikatsuhogoJukyushaResult().
-                    setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, i, association, 生活保護種別builder));
+                    setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, ++i, association, 生活保護種別builder));
             personalDataList.add(toPersonalData(entity));
             生活保護種別builder = new RStringBuilder();
             生活保護種別builder.append(new FujoShuruiCodeValue(entity.get生活保護種別()).getRyakusho());

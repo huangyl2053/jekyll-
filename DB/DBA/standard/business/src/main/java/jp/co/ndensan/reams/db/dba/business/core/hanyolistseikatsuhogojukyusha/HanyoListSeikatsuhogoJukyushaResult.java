@@ -212,7 +212,7 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             Association association,
             RStringBuilder 生活保護種別builder) {
         SeikatsuhogoJukyushaRenbanCsvEntity renbanEucCsvEntity = new SeikatsuhogoJukyushaRenbanCsvEntity();
-        renbanEucCsvEntity.set連番(new RString(String.valueOf(++i)));
+        renbanEucCsvEntity.set連番(new RString(String.valueOf(i)));
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             renbanEucCsvEntity.set識別コード(kojin.get識別コード().value());
