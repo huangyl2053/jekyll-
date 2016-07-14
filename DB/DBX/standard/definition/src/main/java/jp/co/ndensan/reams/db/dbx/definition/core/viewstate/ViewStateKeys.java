@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 対象年月
+     */
+    対象年月,
+    /**
      * 遷移元区分
      */
     遷移元区分,
