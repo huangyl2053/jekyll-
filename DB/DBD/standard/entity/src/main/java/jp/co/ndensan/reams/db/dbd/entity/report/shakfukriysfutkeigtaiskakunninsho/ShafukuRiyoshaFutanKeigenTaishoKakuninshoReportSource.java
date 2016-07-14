@@ -1,8 +1,10 @@
-package jp.co.ndensan.reams.db.dbd.entity.report.shafukuriyoshafutankeigentaishokakuninsho;
+package jp.co.ndensan.reams.db.dbd.entity.report.shakfukriysfutkeigtaiskakunninsho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 社会福祉法人等利用者負担軽減対象確認証のReportSource
@@ -12,6 +14,10 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 public class ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    @ReportPerson(id = "001")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString hihokenshaNo;
     @ReportItem(name = "kofuGengo", length = 2, order = 1)
     public RString kofuGengo;
     @ReportItem(name = "kofuYYYY", length = 2, order = 2)
@@ -44,8 +50,6 @@ public class ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource implements IR
     public RString birthMM;
     @ReportItem(name = "birthDD", length = 2, order = 16)
     public RString birthDD;
-    @ReportItem(name = "hihokenshaNo", length = 10, order = 17)
-    public RString hihokenshaNo;
     @ReportItem(name = "tekiyoGengo", length = 2, order = 18)
     public RString tekiyoGengo;
     @ReportItem(name = "tekiyoYYYY", length = 2, order = 19)

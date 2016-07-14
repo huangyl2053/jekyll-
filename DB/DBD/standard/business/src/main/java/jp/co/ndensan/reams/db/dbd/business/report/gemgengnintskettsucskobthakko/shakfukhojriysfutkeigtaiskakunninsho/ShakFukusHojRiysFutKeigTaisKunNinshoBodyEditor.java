@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.riysfutggengmenjnintsho;
+package jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.shakfukhojriysfutkeigtaiskakunninsho;
 
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.ChohyoSeigyoHanyoKeysDBD100015;
+import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.riysfutggengmenjnintsho.RiysFutgGengMenjNintshoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.hanyo.HokenshaNameOutput;
-import jp.co.ndensan.reams.db.dbd.entity.report.riysfutggengmenjnintsho.RiyoshaFutangakuGengakuMenjoNinteishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.shakfukriysfutkeigtaiskakunninsho.ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -26,42 +27,41 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 利用者負担額減額・免除等認定証ボディEditorです。
+ * 社会福祉法人等利用者負担軽減対象確認証ボディEditorです。
  *
- * @reamsid_L DBD-3540-060 wangchao
+ * @reamsid_L DBD-3540-100 wangchao
  */
-public class RiysFutgGengMenjNintshoBodyEditor implements IRiysFutgGengMenjNintshoEditor {
+public class ShakFukusHojRiysFutKeigTaisKunNinshoBodyEditor implements IShakFukusHojRiysFutKeigTaisKunNinshoEditor {
 
     private final RString ホシ = new RString("＊");
 
-    private final RiysFutgGengMenjNintshoItem item;
+    private final ShakFukusHojRiysFutKeigTaisKunNinshoItem item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item 利用者負担額減額・免除等認定証
+     * @param item 社会福祉法人等利用者負担軽減対象確認証
      */
-    public RiysFutgGengMenjNintshoBodyEditor(RiysFutgGengMenjNintshoItem item) {
+    public ShakFukusHojRiysFutKeigTaisKunNinshoBodyEditor(ShakFukusHojRiysFutKeigTaisKunNinshoItem item) {
         this.item = item;
     }
 
     /**
-     * 利用者負担額減額・免除等認定証ボディEditorです。
+     * 社会福祉法人等利用者負担軽減対象確認証ボディEditorです。
      *
-     * @param source 利用者負担額減額・免除等認定証Source
-     * @return 利用者負担額減額・免除等認定証Source
+     * @param source 社会福祉法人等利用者負担軽減対象確認証Source
+     * @return 社会福祉法人等利用者負担軽減対象確認証Source
      */
     @Override
-    public RiyoshaFutangakuGengakuMenjoNinteishoReportSource edit(RiyoshaFutangakuGengakuMenjoNinteishoReportSource source) {
+    public ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource edit(ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource source) {
         return bodyEdit(source);
     }
 
-    private RiyoshaFutangakuGengakuMenjoNinteishoReportSource bodyEdit(RiyoshaFutangakuGengakuMenjoNinteishoReportSource source) {
+    private ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource bodyEdit(ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource source) {
         source.kofuGengo = item.get交付日().wareki().toDateString().substring(1, 2);
         source.kofuYYYY = item.get交付日().wareki().toDateString().substring(2, 4);
         source.kofuMM = item.get交付日().wareki().toDateString().substring(5, 7);
         source.kofuDD = item.get交付日().wareki().toDateString().substring(8, 10);
-        source.hihokenshaNo = item.get利用者負担額減額情報().get被保険者番号().getColumnValue();
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.jusho = 編集後個人.get編集後住所();
@@ -105,23 +105,19 @@ public class RiysFutgGengMenjNintshoBodyEditor implements IRiysFutgGengMenjNints
             source.woman = RString.EMPTY;
         }
 
-        source.tekiyoGengo = item.get利用者負担額減額情報().get適用開始年月日().wareki().toDateString().substring(1, 2);
-        source.tekiyoYYYY = item.get利用者負担額減額情報().get適用開始年月日().wareki().toDateString().substring(2, 4);
-        source.tekiyoMM = item.get利用者負担額減額情報().get適用開始年月日().wareki().toDateString().substring(5, 7);
-        source.tekiyoDD = item.get利用者負担額減額情報().get適用開始年月日().wareki().toDateString().substring(8, 10);
-        source.yukoGengo = item.get利用者負担額減額情報().get適用終了年月日().wareki().toDateString().substring(1, 2);
-        source.yukoYYYY = item.get利用者負担額減額情報().get適用終了年月日().wareki().toDateString().substring(2, 4);
-        source.yukoMM = item.get利用者負担額減額情報().get適用終了年月日().wareki().toDateString().substring(5, 7);
-        source.yukoDD = item.get利用者負担額減額情報().get適用終了年月日().wareki().toDateString().substring(8, 10);
+        source.tekiyoGengo = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(1, 2);
+        source.tekiyoYYYY = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(2, 4);
+        source.tekiyoMM = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(5, 7);
+        source.tekiyoDD = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(8, 10);
+        source.yukoGengo = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(1, 2);
+        source.yukoYYYY = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(2, 4);
+        source.yukoMM = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(5, 7);
+        source.yukoDD = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(8, 10);
 
-        source.kyufuRitsu = new RString(item.get利用者負担額減額情報().get給付率().toString());
+        source.keigenRitsu1 = RString.EMPTY;
+        source.keigenRitsu2 = RString.EMPTY;
 
-        source.hokenshaNo1 = item.get利用者負担額減額情報().get被保険者番号().getColumnValue().substring(0, 1);
-        source.hokenshaNo2 = item.get利用者負担額減額情報().get被保険者番号().getColumnValue().substring(1, 2);
-        source.hokenshaNo3 = item.get利用者負担額減額情報().get被保険者番号().getColumnValue().substring(2, 3);
-        source.hokenshaNo4 = item.get利用者負担額減額情報().get被保険者番号().getColumnValue().substring(3, 4);
-        source.hokenshaNo5 = item.get利用者負担額減額情報().get被保険者番号().getColumnValue().substring(4, 5);
-        source.hokenshaNo6 = item.get利用者負担額減額情報().get被保険者番号().getColumnValue().substring(5, 6);
+        source = genmenWariai(source, item);
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100015.保険者名表示.name()).equals(entity.getKomokuName())
@@ -135,7 +131,18 @@ public class RiysFutgGengMenjNintshoBodyEditor implements IRiysFutgGengMenjNints
         }
 
         source.shikibetsuCode = item.getIKojin().get識別コード().getColumnValue();
-        source.hihokenshaNo = item.get利用者負担額減額情報().get被保険者番号().getColumnValue();
+        source.hihokenshaNo = item.get社会福祉法人等利用者負担軽減().get被保険者番号().getColumnValue();
+        return source;
+
+    }
+
+    private ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource genmenWariai(
+            ShafukuRiyoshaFutanKeigenTaishoKakuninshoReportSource source, ShakFukusHojRiysFutKeigTaisKunNinshoItem item) {
+        source.genmenNaiyo = RString.EMPTY;
+        source.genmenRitsu = RString.EMPTY;
+        source.keigenRitsu = RString.EMPTY;
+        source.genmenNaiyo1 = RString.EMPTY;
+        source.genmenNaiyo2 = RString.EMPTY;
         return source;
     }
 
@@ -143,7 +150,7 @@ public class RiysFutgGengMenjNintshoBodyEditor implements IRiysFutgGengMenjNints
         return new EditedKojin(kojin, 帳票制御共通);
     }
 
-    private static NinshoshaSource getCompNinshosha(RiysFutgGengMenjNintshoItem item) {
+    private static NinshoshaSource getCompNinshosha(ShakFukusHojRiysFutKeigTaisKunNinshoItem item) {
         return NinshoshaSourceBuilderFactory.createInstance(
                 item.get認証者(), item.get地方公共団体(), item.getイメージファイルパス(), item.get交付日()).buildSource();
     }

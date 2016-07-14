@@ -1,8 +1,10 @@
-package jp.co.ndensan.reams.db.dbd.entity.report.shakaifukushihojinriyoshafutankeigenketteitsuchisho;
+package jp.co.ndensan.reams.db.dbd.entity.report.shakfukushojriysfutkeigkettsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 社会福祉法人等利用者負担軽減対象決定通知書のReportSource
@@ -12,6 +14,10 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 public class ShakaiFukushiHojinRiyoshaFutanKeigenKetteiTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    @ReportPerson(id = "001")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString hihokenshaNo;
     @ReportItem(name = "bunshoNo", length = 36, order = 1)
     public RString bunshoNo;
     @ReportItem(name = "title1", length = 28, order = 2)

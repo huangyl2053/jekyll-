@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko;
+package jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.shakfukushojriysfutkeigkettsuchisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
@@ -26,7 +26,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShakaifukuRiyoshaFutanKeigenItem {
+public class ShakFukusHojRiysFutKeigTaisKetTsuchishoItem {
 
     private final ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減;
     private final IKojin iKojin;
@@ -57,7 +57,7 @@ public class ShakaifukuRiyoshaFutanKeigenItem {
      * @param 帳票分類ID 帳票分類ID
      * @param 認証者 認証者
      */
-    public ShakaifukuRiyoshaFutanKeigenItem(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減, IKojin iKojin, IAtesaki iAtesaki,
+    public ShakFukusHojRiysFutKeigTaisKetTsuchishoItem(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減, IKojin iKojin, IAtesaki iAtesaki,
             ChohyoSeigyoKyotsu 帳票制御共通, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用List, Association 地方公共団体, RDate 発行日,
             RString 文書番号, List<RString> 通知書定型文List, ReportId 帳票分類ID, Ninshosha 認証者) {
         this.社会福祉法人等利用者負担軽減 = 社会福祉法人等利用者負担軽減;
