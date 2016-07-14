@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.Yosh
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,7 +50,7 @@ public class YoshikiYonnosan {
      */
     public ResponseData<YoshikiYonnosanDiv> onload(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-        handler.onload(get引き継ぎデータ());
+        handler.onload(get引き継ぎデータ(div));
         if (画面表示_追加.equals(div.getGamenMode())) {
             return ResponseData.of(div).setState(DBU0050041StateName.追加状態);
         } else if (画面表示_修正.equals(div.getGamenMode())) {
@@ -95,12 +96,12 @@ public class YoshikiYonnosan {
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {
             return handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ()))
+            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
@@ -143,9 +144,9 @@ public class YoshikiYonnosan {
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {
             return handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
             return 内部処理モード_修正.equals(内部処理モード)
@@ -189,9 +190,9 @@ public class YoshikiYonnosan {
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             responseData = handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         if (responseData != null) {
@@ -225,12 +226,12 @@ public class YoshikiYonnosan {
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正新規.equals(内部処理モード)) {
             return handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ())) ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div))) ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
     }
@@ -259,7 +260,7 @@ public class YoshikiYonnosan {
         if (responseData != null) {
             return responseData;
         }
-        getHandler(div).onClick_btnSave(get引き継ぎデータ());
+        getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
         return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
     }
 
@@ -270,12 +271,12 @@ public class YoshikiYonnosan {
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {
             exception = !handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage()) : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            exception = !handler.is修正データ有(handler.get修正データ(get引き継ぎデータ()))
+            exception = !handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div)))
                     ? new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage()) : null;
         }
         if (exception != null) {
@@ -296,11 +297,13 @@ public class YoshikiYonnosan {
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.処理完了).respond();
     }
 
-    private InsuranceInformation get引き継ぎデータ() {
+    private InsuranceInformation get引き継ぎデータ(YoshikiYonnosanDiv div) {
         InsuranceInformation 引き継ぎデータ
                 = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(ADD);
+            引き継ぎデータ = new InsuranceInformation(ADD,
+                    new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey()),
+                    div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedValue());
         }
         return 引き継ぎデータ;
     }

@@ -368,7 +368,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         }
         KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
                 div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
-                div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
+                div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
                 insuranceInfEntity.get統計対象区分(), insuranceInfEntity.get市町村コード(), null, 集計番号, 集計単位_1, null, null, null, 詳細データエリア);
         return 画面入力データ;
     }

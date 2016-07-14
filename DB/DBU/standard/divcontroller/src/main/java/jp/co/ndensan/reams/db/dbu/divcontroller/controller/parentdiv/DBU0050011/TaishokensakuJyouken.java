@@ -11,6 +11,7 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00500
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.DBU0050011TransitionEventName.追加;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.TaishokensakuJyoukenDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050011.TaishokensakuJyoukenHandler;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -71,7 +72,9 @@ public class TaishokensakuJyouken {
      * @return 介護保険特別会計経理状況登録_検索情報Divを持つResponseData
      */
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnAdd(TaishokensakuJyoukenDiv div) {
-        InsuranceInformation isuranceInfEntity = new InsuranceInformation(ADD);
+        InsuranceInformation isuranceInfEntity = new InsuranceInformation(ADD,
+                new LasdecCode(div.getDdlShichoson().getSelectedKey()),
+                div.getDdlShichoson().getSelectedValue());
         ViewStateHolder.put(ViewStateKey.様式４, isuranceInfEntity);
         return ResponseData.of(div).forwardWithEventName(追加).respond();
     }
