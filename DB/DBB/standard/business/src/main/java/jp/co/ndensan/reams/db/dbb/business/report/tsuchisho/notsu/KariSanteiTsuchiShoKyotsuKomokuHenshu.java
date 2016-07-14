@@ -588,7 +588,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
+            納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
         }
         return 納付済額;
     }
@@ -596,7 +596,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By賦課情報(RString メソッド_賦課, FukaJoho 賦課情報, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
+            納付済額 = 納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
         }
         return 納付済額;
     }
