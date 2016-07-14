@@ -611,4 +611,19 @@
                 T5101."hihokenshaNo" 
     </select>
     
+    <select resultOrdered="true" id="get消費税率"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" fetchSize="500">
+        SELECT
+        UzT0007Code."codeMeisho"
+        FROM
+        rgdb."UzT0007Code" AS UzT0007Code
+        WHERE
+        UzT0007Code."codeShubetsu" = #{コード種別}
+        AND
+        UzT0007Code."yukoKaishiYMD" <![CDATA[<=]]> #{有効期間}
+        AND
+        #{有効期間} <![CDATA[<=]]> UzT0007Code."yukoShuryoYMD"
+    </select>
+    
 </mapper>
