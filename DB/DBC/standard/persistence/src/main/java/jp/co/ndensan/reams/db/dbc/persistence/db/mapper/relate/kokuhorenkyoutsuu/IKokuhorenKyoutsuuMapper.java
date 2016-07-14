@@ -44,8 +44,17 @@ public interface IKokuhorenKyoutsuuMapper {
      * 処理結果リスト一時テーブルの登録処理
      *
      * @param entity 処理結果リスト一時テーブルEntity
+     * @return int 更新の結果
      */
-    void insert処理結果リスト一時TBL(DbWT0002KokuhorenTorikomiErrorTempEntity entity);
+    int insert処理結果リスト一時TBL(DbWT0002KokuhorenTorikomiErrorTempEntity entity);
+
+    /**
+     * 処理結果リスト一時テーブルに登録する前に一意判断
+     *
+     * @param entity 処理結果リスト一時テーブルEntity
+     * @return int 0:登録できる 1:登録できない
+     */
+    int count処理結果ByPK(DbWT0002KokuhorenTorikomiErrorTempEntity entity);
 
     /**
      * 処理結果リスト一時TBLを取得する。

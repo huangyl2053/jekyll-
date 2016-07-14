@@ -176,7 +176,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         kekka.set被保険者カナ氏名(entity.get被保険者カナ氏名());
         kekka.set被保険者氏名(entity.get被保険者氏名());
         kekka.set備考(RString.EMPTY);
-        mapper.insert処理結果リスト一時TBL(kekka);
+        do一意排他登録処理結果(kekka);
     }
 
     private void do被保険者情報が取得できなかったデータをエラー登録する(DbWT0001HihokenshaTempEntity hihokensha) {
@@ -192,7 +192,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         kekka.set被保険者カナ氏名(hihokensha.get被保険者カナ氏名());
         kekka.set被保険者氏名(hihokensha.get被保険者氏名());
         kekka.set備考(RString.EMPTY);
-        mapper.insert処理結果リスト一時TBL(kekka);
+        do一意排他登録処理結果(kekka);
     }
 
     private void do宛名情報が取得できなかったデータをエラー登録する(DbWT0001HihokenshaTempEntity hihokensha) {
@@ -208,7 +208,16 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         kekka.set被保険者カナ氏名(hihokensha.get被保険者カナ氏名());
         kekka.set被保険者氏名(hihokensha.get被保険者氏名());
         kekka.set備考(RString.EMPTY);
-        mapper.insert処理結果リスト一時TBL(kekka);
+        do一意排他登録処理結果(kekka);
+    }
+
+    private boolean do一意排他登録処理結果(DbWT0002KokuhorenTorikomiErrorTempEntity kekka) {
+        if (mapper.count処理結果ByPK(kekka) == 0) {
+            mapper.insert処理結果リスト一時TBL(kekka);
+        } else {
+            return false;
+        }
+        return true;
     }
 
 }
