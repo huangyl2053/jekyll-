@@ -48,7 +48,7 @@ public class TokuteiNyushoshaHiyo {
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
-        ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, parameter.getServiceTeikyoYM());
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
@@ -86,7 +86,7 @@ public class TokuteiNyushoshaHiyo {
      * @return ResponseData
      */
     public ResponseData<TokuteiNyushoshaHiyoDiv> onClick_dgdTokuteiYichiran(TokuteiNyushoshaHiyoDiv div) {
-        getHandler(div).set特定入所者費用照会パネル(ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
+        getHandler(div).set特定入所者費用照会パネル(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
         return createResponse(div);
     }
