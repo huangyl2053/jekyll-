@@ -1114,7 +1114,7 @@ public class YokaigoNinteiTaskListHandler {
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時コード().getKey()).get名称());
             if (business.get認定申請情報登録完了年月日() != null && !business.get認定申請情報登録完了年月日().isEmpty()) {
                 completeCount++;
-                row.getKoshinTsuchiYMD().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
+                row.getShinseiUketsukeKanryoDay().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
             }
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
