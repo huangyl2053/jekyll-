@@ -30,5 +30,5 @@ public class NendobunFukaList {
     private FukaJoho 過年度5;
     private FlexibleDate 賦課期日;
     private FukaJoho 最新賦課の情報;
-    private boolean hasChanged;
+    private boolean has過年度賦課;
 }

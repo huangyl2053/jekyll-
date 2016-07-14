@@ -222,7 +222,7 @@ public class SokujiFukaKoseiService {
         年度分賦課リスト.set賦課期日(賦課の情報.get賦課期日());
         年度分賦課リスト.set現年度(賦課の情報);
         年度分賦課リスト.set最新賦課の情報(賦課の情報);
-        年度分賦課リスト.setHasChanged(false);
+        年度分賦課リスト.setHas過年度賦課(false);
 
         KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();
         更正前後賦課.set更正前(年度分賦課リスト);
@@ -443,7 +443,7 @@ public class SokujiFukaKoseiService {
             }
             fukaList.set最新賦課の情報(get最新の賦課(fukaList));
             fukaList.set賦課期日(fukaList.get現年度().get賦課期日());
-            fukaList.setHasChanged(flg);
+            fukaList.setHas過年度賦課(flg);
             年度分賦課リスト.add(fukaList);
         }
         return 年度分賦課リスト;
@@ -645,7 +645,7 @@ public class SokujiFukaKoseiService {
         年度分賦課リスト.set賦課期日(賦課の情報.get賦課期日());
         年度分賦課リスト.set現年度(賦課の情報);
         年度分賦課リスト.set最新賦課の情報(賦課の情報);
-        年度分賦課リスト.setHasChanged(false);
+        年度分賦課リスト.setHas過年度賦課(false);
         return 年度分賦課リスト;
 
     }
