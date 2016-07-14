@@ -228,10 +228,10 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             }
             if (entity.getSochimotoShichosonCode() != null) {
                 広域内住所地特例者Entity.set措置市町村コード(entity.getSochimotoShichosonCode().value());
+                List<ShichosonCodeYoriShichoson> 市町村情報 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(entity
+                        .getSochimotoShichosonCode()).records();
+                広域内住所地特例者Entity.set措置市町村名称(市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称());
             }
-            List<ShichosonCodeYoriShichoson> 市町村情報 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(entity
-                    .getSochimotoShichosonCode()).records();
-            広域内住所地特例者Entity.set措置市町村名称(市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称());
             広域内住所地特例者Entity.set住民種別コード(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get住民種別().getCode());
             広域内住所地特例者List.add(広域内住所地特例者Entity);
