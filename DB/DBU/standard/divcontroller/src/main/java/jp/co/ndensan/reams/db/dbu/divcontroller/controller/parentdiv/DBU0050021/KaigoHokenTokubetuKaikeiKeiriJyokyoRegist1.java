@@ -43,8 +43,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
-    private static final RString 画面表示_修正 = new RString("修正");
-    private static final RString 画面表示_追加 = new RString("追加");
     private static final RString ADD = new RString("add");
 
     /**
@@ -56,13 +54,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         handler.onload(get引き継ぎデータ());
-//        if (画面表示_追加.equals(div.getGamenMode())) {
-//            return ResponseData.of(div).setState(DBU0050021StateName.add);
-//        } else if (画面表示_修正.equals(div.getGamenMode())) {
-//            return ResponseData.of(div).setState(DBU0050021StateName.mod);
-//        } else {
-//            return ResponseData.of(div).setState(DBU0050021StateName.del);
-//        }
         return ResponseData.of(div).respond();
     }
 
