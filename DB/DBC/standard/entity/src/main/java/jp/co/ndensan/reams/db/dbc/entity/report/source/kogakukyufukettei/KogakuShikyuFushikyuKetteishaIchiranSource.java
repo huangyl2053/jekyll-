@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyufushikyuketteishaichiran;
+package jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -89,4 +89,44 @@ public class KogakuShikyuFushikyuKetteishaIchiranSource implements IReportSource
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * KogakuShikyuFushikyuKetteishaIchiranSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        kokuhorenName,
+        hokenshaName,
+        hokenshaNo,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage4,
+        kaipage1,
+        kaipage2,
+        kaipage5,
+        kaipage3,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listUpper_10,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6,
+        listLower_7,
+        listLower_8,
+        listLower_9
+    }
 }
