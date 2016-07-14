@@ -18,9 +18,7 @@ public enum DBE0100001TransitionEventName implements IContainerEvents {
     要介護認定情報提供へ("要介護認定情報提供へ"),
     主治医意見書登録へ("主治医意見書登録へ"),
     認定調査結果登録1へ("認定調査結果登録1へ"),
-    完了処理("完了処理"),
-    個人依頼内容更新へ("個人依頼内容更新へ"),
-    要介護認定イメージ情報管理へ("要介護認定イメージ情報管理へ");
+    完了処理("完了処理");
 
     private final RString name;
 
