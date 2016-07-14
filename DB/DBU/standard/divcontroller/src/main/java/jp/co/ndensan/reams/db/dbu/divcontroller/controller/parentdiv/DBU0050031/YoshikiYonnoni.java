@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -66,7 +64,6 @@ public class YoshikiYonnoni {
     private static final RString 更新する = new RString("btnModUpdate");
     private static final RString 追加する = new RString("btnAddUpdate");
     private static final RString 保存する = new RString("btnSaveCancel");
-    private static final RString 該当一覧へ戻る = new RString("btnBackGaitoIchiran");
     private static final RString 完了する = new RString("btnEnd");
     private static final RString 座標1_1 = new RString("1_1");
     private static final RString 座標1_2 = new RString("1_2");
@@ -127,15 +124,12 @@ public class YoshikiYonnoni {
                     集計番号_0200);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisplayNone(true);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisplayNone(true);
-            TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
-            hokokuYM.setValue(new FlexibleDate(new RDate(insuranceInf.get報告年().toString()).toString()));
-            div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
-            TextBoxCode txtHihokenshabango = new TextBoxCode();
-            TextBox txthihokenshamei = new TextBox();
-            txthihokenshamei.setValue(insuranceInf.get市町村名称());
-            txtHihokenshabango.setValue(insuranceInf.get保険者コード().getColumnValue());
-            div.getYoshikiYonnoniMeisai().setTxtHihokenshaNo(txtHihokenshabango);
-            div.getYoshikiYonnoniMeisai().setTxtHihokenshaName(txthihokenshamei);
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(
+                    new FlexibleDate(new RDate(insuranceInf.get報告年().getYearValue()).toString()));
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(
+                    new FlexibleDate(new RDate(insuranceInf.get集計対象年().getYearValue()).toString()));
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setValue(insuranceInf.get市町村コード().getColumnValue());
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setValue(insuranceInf.get市町村名称());
             if (list.isEmpty()) {
                 内部処理モード = 内部処理モード_修正追加;
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
