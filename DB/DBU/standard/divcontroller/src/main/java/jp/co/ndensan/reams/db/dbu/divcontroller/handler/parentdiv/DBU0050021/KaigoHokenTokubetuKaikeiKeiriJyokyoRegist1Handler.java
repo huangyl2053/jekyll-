@@ -720,9 +720,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkofukin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業支援交付金横縦番号), new RString("0")).toString()));
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanantei().setValue(new Decimal(ObjectUtil.defaultIfNull(
-                詳細データ.get詳細データエリア().get(保険料横縦番号), new RString("0")).toString()));
-        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財政安定化基金拠出金横縦番号), new RString("0")).toString()));
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(都道府県負担金横縦番号), new RString("0")).toString()));
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkozaisan().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(相互財政安定化事業負担金横縦番号), new RString("0")).toString()));
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaiseiantei().setValue(new Decimal(ObjectUtil.defaultIfNull(

@@ -487,7 +487,7 @@ public class YoshikiYonnoni {
             return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
     /**
