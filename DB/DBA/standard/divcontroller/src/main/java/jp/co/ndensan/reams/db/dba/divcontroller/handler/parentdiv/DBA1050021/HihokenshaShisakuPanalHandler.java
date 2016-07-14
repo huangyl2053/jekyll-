@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -179,12 +178,6 @@ public class HihokenshaShisakuPanalHandler {
 
     private void get旧保険者(RString viewState, ShikakuRirekiJoho 資格得喪情報, ShikibetsuCode 識別コード) {
 
-        if (資格得喪情報 != null) {
-            RLogger.info("取得に使用する資格得喪情報:" + 資格得喪情報.getShozaiHokensha() + ":" + 資格得喪情報.getSochimotoHokensha());
-        } else {
-            return;
-        }
-
         if (!is合併市町村()) {
             if (状態_修正.equals(viewState)) {
                 List<KeyValueDataSource> keyValueList = new ArrayList<>();
@@ -213,18 +206,13 @@ public class HihokenshaShisakuPanalHandler {
                     導入形態コード.getCode(),
                     RString.isNullOrEmpty(措置元保険者) ? LasdecCode.EMPTY : new LasdecCode(措置元保険者));
 
-            StringBuilder gatKyuShichosonCode = new StringBuilder("取得した旧市町村コード:");
-
             List<KeyValueDataSource> keyValueList = new ArrayList<>();
             for (Shichoson 旧保険者 : 旧保険者情報) {
-                gatKyuShichosonCode.append(旧保険者.get旧市町村コード()).append(",");
-
                 KeyValueDataSource keyValue = new KeyValueDataSource();
                 keyValue.setKey(旧保険者.get旧市町村コード().getColumnValue());
                 keyValue.setValue(new RString(旧保険者.get旧市町村コード().getColumnValue() + " " + 旧保険者.get旧市町村名称()));
                 keyValueList.add(keyValue);
             }
-            RLogger.info(gatKyuShichosonCode.toString());
 
             panelDiv.getShikakuShosai().getDdlShutokuKyuHokensha().setDataSource(keyValueList);
         }
@@ -338,11 +326,11 @@ public class HihokenshaShisakuPanalHandler {
             return new ArrayList<>();
         }
 
-        if (!市町村コード.isEmpty()) {
-            return HihousyosaiFinder.createInstance().getGappeiShichosonList(市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
-        }
         if (!広住特措置元市町村コード.isEmpty()) {
             return HihousyosaiFinder.createInstance().getGappeiShichosonList(広住特措置元市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
+        }
+        if (!市町村コード.isEmpty()) {
+            return HihousyosaiFinder.createInstance().getGappeiShichosonList(市町村コード, DonyuKeitaiCode.toValue(導入形態コード)).records();
         }
         return new ArrayList<>();
     }
@@ -407,18 +395,12 @@ public class HihokenshaShisakuPanalHandler {
             DropDownList shutokuKeyHokensha = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
             if (shutokuKeyHokensha.getDataSource().isEmpty()
                     || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine() == true)) {
-                shutokuKeyHokensha.setDisabled(true);
+                panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setDisabled(true);
             } else {
-                List<KeyValueDataSource> dataSource = shutokuKeyHokensha.getDataSource();
-
-                for (KeyValueDataSource source : dataSource) {
-                    if (旧保険者.equals(source.getKey())) {
-                        shutokuKeyHokensha.setSelectedKey(旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
-                        break;
-                    }
-                }
-                shutokuKeyHokensha.setDisabled(false);
+                panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
+                        旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
             }
+
             RString 処理日時 = 資格得喪情報.getShoriDateTime();
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate().setValue(rStringToFlexibleDate(処理日時));
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtSoshitsuShoriDate().setValue(rStringToFlexibleDate(処理日時));
