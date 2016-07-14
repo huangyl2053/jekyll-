@@ -467,7 +467,7 @@ public class NonyuTsuchiShoDataHenshu {
             納入通知書期情報.setバーコード情報下段((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニバーコード表示())
                     ? 請求情報.getCvs().getバーコード情報下段() : 空白));
             納入通知書期情報.setコンビニ支払期限((HyojiUmu.表示する.equals(納入通知書制御情報.getコンビニ納付書取扱期限表示())
-                    ? 請求情報.getCvs().getコンビニ支払期限() : new RDate(空白.toString())));
+                    ? 請求情報.getCvs().getコンビニ支払期限() : null));
         } else {
             納入通知書期情報.set収納機関番号表示用(空白);
             納入通知書期情報.set納付番号(空白);
