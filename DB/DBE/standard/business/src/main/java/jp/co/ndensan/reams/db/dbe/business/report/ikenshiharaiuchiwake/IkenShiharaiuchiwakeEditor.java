@@ -33,6 +33,7 @@ public class IkenShiharaiuchiwakeEditor implements IIkenShiharaiuchiwakeEditor {
 
     @Override
     public IkenShiharaiuchiwakeReportSource edit(IkenShiharaiuchiwakeReportSource source) {
+        source.layoutBreakItem = item.getLayoutBreakItem();
         source.denshiKoin = item.get電子公印();
         source.hakkoYMD1 = item.get発行日();
         source.ninshoshaYakushokuMei = item.get認証者役職名();
