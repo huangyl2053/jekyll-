@@ -161,10 +161,14 @@ public class YoshikiIchinoniIchinosanHosei {
 
         if (削除状態.equals(状態)) {
 
-            getHandler(div).delete(食費_居住費データリスト);
-            getHandler(div).delete(利用者負担滅額データリスト);
-            getHandler(div).delete(特定負担限度額データリスト);
-            getHandler(div).delete(利用者負担データリスト);
+            if (様式種類List11.contains(様式種類) || 様式種類List21.contains(様式種類)) {
+                getHandler(div).delete(食費_居住費データリスト);
+            } else if (様式種類List31.contains(様式種類) || 様式種類List12.contains(様式種類)) {
+                getHandler(div).delete(利用者負担滅額データリスト);
+            } else if (様式種類List22.contains(様式種類) || 様式種類List32.contains(様式種類)) {
+                getHandler(div).delete(特定負担限度額データリスト);
+                getHandler(div).delete(利用者負担データリスト);
+            }
             div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020031StateName.完了状態);

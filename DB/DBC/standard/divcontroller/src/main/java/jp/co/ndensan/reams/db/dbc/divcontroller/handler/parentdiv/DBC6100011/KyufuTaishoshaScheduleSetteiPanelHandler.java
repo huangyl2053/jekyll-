@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -166,8 +167,12 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
         List<KokuhorenInterfaceKanri> データ登録リスト = new ArrayList<>();
         List<dgScheduleList_Row> rowList = div.getDgScheduleList().getDataSource();
         KokuhorenInterfaceKanri データ登録;
+        FlexibleYearMonth 処理年月;
+        RDate 処理年月Date;
         for (dgScheduleList_Row row : rowList) {
-            データ登録 = get国保連インターフェース管理(スケジュール履歴情報List, row);
+            処理年月Date = new RDate(row.getShoriNengetsu().toString());
+            処理年月 = new FlexibleYearMonth(処理年月Date.getYearMonth().toDateString());
+            データ登録 = get国保連インターフェース管理(スケジュール履歴情報List, 処理年月);
             if (データ登録 != null) {
                 データ登録 = データ登録.createBuilderForEdit()
                         .set送付取込区分(SofuTorikomiKubun.それ以外.getコード())
@@ -175,14 +180,12 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                         .build();
                 データ登録リスト.add(データ登録);
             } else {
-                RDate 処理年月Date = new RDate(row.getShoriNengetsu().toString());
-                FlexibleYearMonth 処理年月 = new FlexibleYearMonth(処理年月Date.toDateString());
                 データ登録 = new KokuhorenInterfaceKanri(処理年月, ResponseHolder.getMenuID());
                 RDate 開始日時 = new RDate(row.getShoriNengetsu().toString());
                 RDate 終了日時 = new RDate(row.getShoriNengetsu().toString());
-                YMDHMS 抽出開始日時 = new YMDHMS(開始日時.toDateString());
-                YMDHMS 抽出終了日時 = new YMDHMS(終了日時.toDateString());
-                データ登録.createBuilderForEdit()
+                YMDHMS 抽出開始日時 = new YMDHMS(開始日時, RTime.now());
+                YMDHMS 抽出終了日時 = new YMDHMS(終了日時, RTime.now());
+                データ登録 = データ登録.createBuilderForEdit()
                         .set送付取込区分(SofuTorikomiKubun.それ以外.getコード())
                         .set処理状態区分(row.getDdlShoriJokyo().getSelectedKey())
                         // TODO QA961
@@ -202,10 +205,8 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
 
     private KokuhorenInterfaceKanri get国保連インターフェース管理(
             List<KokuhorenInterfaceKanri> スケジュール履歴情報List,
-            dgScheduleList_Row row) {
-        FlexibleYearMonth 処理年月;
+            FlexibleYearMonth 処理年月) {
         for (KokuhorenInterfaceKanri スケジュール履歴情報 : スケジュール履歴情報List) {
-            処理年月 = new FlexibleYearMonth(row.getShoriNengetsu());
             if (処理年月.equals(スケジュール履歴情報.get処理年月())) {
                 return スケジュール履歴情報;
             }
