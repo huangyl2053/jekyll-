@@ -8,13 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Hihosyosa
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.IShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IJushochiTokureiRirekiListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.JushochiTokureiRirekiListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -42,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  * @reamsid_L DBA-0170-010 linghuhang
  */
 public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -619,7 +614,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -634,11 +629,11 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     /*
@@ -650,7 +645,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     @JsonIgnore
-    public void  setTabPnlJyusyoti(tabPnlJyusyotiDiv tabPnlJyusyoti) {
+    public void setTabPnlJyusyoti(tabPnlJyusyotiDiv tabPnlJyusyoti) {
         this.getTabContainerDetail().setTabPnlJyusyoti(tabPnlJyusyoti);
     }
 
@@ -665,7 +660,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     @JsonIgnore
-    public void  setTabPnlShikaku(tabPnlShikakuDiv tabPnlShikaku) {
+    public void setTabPnlShikaku(tabPnlShikakuDiv tabPnlShikaku) {
         this.getTabContainerDetail().setTabPnlShikaku(tabPnlShikaku);
     }
 
@@ -680,7 +675,7 @@ public class HihosyosaiDiv extends Panel implements IHihosyosaiDiv {
     }
 
     @JsonIgnore
-    public void  setTabPnlShisetu(tabPnlShisetuDiv tabPnlShisetu) {
+    public void setTabPnlShisetu(tabPnlShisetuDiv tabPnlShisetu) {
         this.getTabContainerDetail().setTabPnlShisetu(tabPnlShisetu);
     }
 
