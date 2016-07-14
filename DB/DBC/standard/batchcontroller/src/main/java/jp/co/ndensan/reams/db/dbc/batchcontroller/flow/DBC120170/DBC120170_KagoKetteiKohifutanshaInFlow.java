@@ -62,26 +62,28 @@ public class DBC120170_KagoKetteiKohifutanshaInFlow
 
     @Override
     protected void defineFlow() {
-        RDate now = RDate.getNowDate();
-        交換情報識別番号 = DbBusinessConfig.get(
-                ConfigNameDBC.国保連取込_介護給付費過誤決定通知書公費情報_交換情報識別番号, now, SubGyomuCode.DBC介護給付);
-        executeStep(ファイル取得);
-        returnEntity
-                = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
-                        KohifutanshaGetFileProcess.PARAMETER_OUT_RETURNENTITY);
-        executeStep(CSVファイル取込);
-        flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
-                KohifutanshaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-        if (0 == flowEntity.get明細データ登録件数() && 0 == flowEntity.get集計データ登録件数()) {
-            executeStep(国保連インタフェース管理更新);
-            executeStep(処理結果リスト作成);
-            executeStep(取込済ファイル削除);
-        } else {
-            executeStep(被保険者関連処理);
-            executeStep(マスタ登録);
-            executeStep(国保連インタフェース管理更新);
-            executeStep(一覧表作成);
-            executeStep(処理結果リスト作成);
+        try {
+            RDate now = RDate.getNowDate();
+            交換情報識別番号 = DbBusinessConfig.get(
+                    ConfigNameDBC.国保連取込_介護給付費過誤決定通知書公費情報_交換情報識別番号, now, SubGyomuCode.DBC介護給付);
+            executeStep(ファイル取得);
+            returnEntity
+                    = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
+                            KohifutanshaGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            executeStep(CSVファイル取込);
+            flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
+                    KohifutanshaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+            if (0 == flowEntity.get明細データ登録件数() && 0 == flowEntity.get集計データ登録件数()) {
+                executeStep(国保連インタフェース管理更新);
+                executeStep(処理結果リスト作成);
+            } else {
+                executeStep(被保険者関連処理);
+                executeStep(マスタ登録);
+                executeStep(国保連インタフェース管理更新);
+                executeStep(一覧表作成);
+                executeStep(処理結果リスト作成);
+            }
+        } finally {
             executeStep(取込済ファイル削除);
         }
 

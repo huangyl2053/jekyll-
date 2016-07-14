@@ -26,10 +26,10 @@ public class pritPublish1Div extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("comdiv1")
-    private PrintContentsSettingDiv comdiv1;
     @JsonProperty("BunshoBango1")
     private BunshoBangoInputDiv BunshoBango1;
+    @JsonProperty("comdiv1")
+    private PrintContentsSettingDiv comdiv1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,21 +38,21 @@ public class pritPublish1Div extends PanelPublish {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getcomdiv1
-     * @return comdiv1
-     */
-    @JsonProperty("comdiv1")
-    public IPrintContentsSettingDiv getComdiv1() {
-        return comdiv1;
-    }
-
-    /*
      * getBunshoBango1
      * @return BunshoBango1
      */
     @JsonProperty("BunshoBango1")
     public IBunshoBangoInputDiv getBunshoBango1() {
         return BunshoBango1;
+    }
+
+    /*
+     * getcomdiv1
+     * @return comdiv1
+     */
+    @JsonProperty("comdiv1")
+    public IPrintContentsSettingDiv getComdiv1() {
+        return comdiv1;
     }
 
     // </editor-fold>

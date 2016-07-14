@@ -83,7 +83,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set世帯コード(SetaiCode 世帯コード) {
-        requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
         entity.setSetaiCode(世帯コード);
         return this;
     }
@@ -95,7 +94,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set世帯員数(int 世帯員数) {
-        requireNonNull(世帯員数, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員数"));
         entity.setSetaiInsu(世帯員数);
         return this;
     }
@@ -131,7 +129,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set資格喪失日(FlexibleDate 資格喪失日) {
-        requireNonNull(資格喪失日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失日"));
         entity.setShikakuSoshitsuYMD(資格喪失日);
         return this;
     }
@@ -179,7 +176,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set生保廃止日(FlexibleDate 生保廃止日) {
-        requireNonNull(生保廃止日, UrSystemErrorMessages.値がnull.getReplacedMessage("生保廃止日"));
         entity.setSeihoHaishiYMD(生保廃止日);
         return this;
     }
@@ -251,7 +247,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set合計所得金額(Decimal 合計所得金額) {
-        requireNonNull(合計所得金額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計所得金額"));
         entity.setGokeiShotokuGaku(合計所得金額);
         return this;
     }
@@ -263,7 +258,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set公的年金収入額(Decimal 公的年金収入額) {
-        requireNonNull(公的年金収入額, UrSystemErrorMessages.値がnull.getReplacedMessage("公的年金収入額"));
         entity.setNenkinShunyuGaku(公的年金収入額);
         return this;
     }
@@ -275,7 +269,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set保険料段階(RString 保険料段階) {
-        requireNonNull(保険料段階, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階"));
         entity.setHokenryoDankai(保険料段階);
         return this;
     }
@@ -287,7 +280,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set保険料算定段階1(RString 保険料算定段階1) {
-        requireNonNull(保険料算定段階1, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料算定段階1"));
         entity.setHokenryoDankai1(保険料算定段階1);
         return this;
     }
@@ -299,7 +291,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set算定年額保険料1(Decimal 算定年額保険料1) {
-        requireNonNull(算定年額保険料1, UrSystemErrorMessages.値がnull.getReplacedMessage("算定年額保険料1"));
         entity.setNengakuHokenryo1(算定年額保険料1);
         return this;
     }
@@ -311,7 +302,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set月割開始年月1(FlexibleYearMonth 月割開始年月1) {
-        requireNonNull(月割開始年月1, UrSystemErrorMessages.値がnull.getReplacedMessage("月割開始年月1"));
         entity.setTsukiwariStartYM1(月割開始年月1);
         return this;
     }
@@ -323,7 +313,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set月割終了年月1(FlexibleYearMonth 月割終了年月1) {
-        requireNonNull(月割終了年月1, UrSystemErrorMessages.値がnull.getReplacedMessage("月割終了年月1"));
         entity.setTsukiwariEndYM1(月割終了年月1);
         return this;
     }
@@ -335,7 +324,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set保険料算定段階2(RString 保険料算定段階2) {
-        requireNonNull(保険料算定段階2, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料算定段階2"));
         entity.setHokenryoDankai2(保険料算定段階2);
         return this;
     }
@@ -347,7 +335,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set算定年額保険料2(Decimal 算定年額保険料2) {
-        requireNonNull(算定年額保険料2, UrSystemErrorMessages.値がnull.getReplacedMessage("算定年額保険料2"));
         entity.setNengakuHokenryo2(算定年額保険料2);
         return this;
     }
@@ -359,7 +346,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set月割開始年月2(FlexibleYearMonth 月割開始年月2) {
-        requireNonNull(月割開始年月2, UrSystemErrorMessages.値がnull.getReplacedMessage("月割開始年月2"));
         entity.setTsukiwariStartYM2(月割開始年月2);
         return this;
     }
@@ -371,7 +357,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set月割終了年月2(FlexibleYearMonth 月割終了年月2) {
-        requireNonNull(月割終了年月2, UrSystemErrorMessages.値がnull.getReplacedMessage("月割終了年月2"));
         entity.setTsukiwariEndYM2(月割終了年月2);
         return this;
     }
@@ -455,8 +440,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set減免前介護保険料_年額(Decimal 減免前介護保険料_年額) {
-        requireNonNull(減免前介護保険料_年額, UrSystemErrorMessages.値がnull.getReplacedMessage("減免前介護保険料_年額")
-        );
         entity.setGemmenMaeHokenryo(減免前介護保険料_年額);
         return this;
     }
@@ -468,7 +451,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set減免額(Decimal 減免額) {
-        requireNonNull(減免額, UrSystemErrorMessages.値がnull.getReplacedMessage("減免額"));
         entity.setGemmenGaku(減免額);
         return this;
     }
@@ -480,8 +462,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set確定介護保険料_年額(Decimal 確定介護保険料_年額) {
-        requireNonNull(確定介護保険料_年額, UrSystemErrorMessages.値がnull.getReplacedMessage("確定介護保険料_年額")
-        );
         entity.setKakuteiHokenryo(確定介護保険料_年額);
         return this;
     }
@@ -566,7 +546,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set職権区分(RString 職権区分) {
-        requireNonNull(職権区分, UrSystemErrorMessages.値がnull.getReplacedMessage("職権区分"));
         entity.setShokkenKubun(職権区分);
         return this;
     }
@@ -578,7 +557,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set賦課市町村コード(LasdecCode 賦課市町村コード) {
-        requireNonNull(賦課市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課市町村コード"));
         entity.setFukaShichosonCode(賦課市町村コード);
         return this;
     }
@@ -590,7 +568,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set特徴歳出還付額(Decimal 特徴歳出還付額) {
-        requireNonNull(特徴歳出還付額, UrSystemErrorMessages.値がnull.getReplacedMessage("特徴歳出還付額"));
         entity.setTkSaishutsuKampuGaku(特徴歳出還付額);
         return this;
     }
@@ -602,7 +579,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set普徴歳出還付額(Decimal 普徴歳出還付額) {
-        requireNonNull(普徴歳出還付額, UrSystemErrorMessages.値がnull.getReplacedMessage("普徴歳出還付額"));
         entity.setFuSaishutsuKampuGaku(普徴歳出還付額);
         return this;
     }

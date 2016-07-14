@@ -231,12 +231,12 @@ public enum ReportIdDBB {
     /**
      * 介護保険料額変更兼特別徴収中止通知書【B5横タイプ】
      */
-    DBB100042(new ReportId("DBB100042_KaigoHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
+    DBB100042(new ReportId("DBB100042_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
             new RString("介護保険料額変更兼特別徴収中止通知書【B5横タイプ】")),
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】
      */
-    DBB100043(new ReportId("DBB100043_KaigoHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
+    DBB100043(new ReportId("DBB100043_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
             new RString("介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】")),
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ（連帳）】

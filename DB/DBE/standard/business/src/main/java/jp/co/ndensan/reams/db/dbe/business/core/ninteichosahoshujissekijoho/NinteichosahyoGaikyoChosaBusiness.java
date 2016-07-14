@@ -142,7 +142,7 @@ public class NinteichosahyoGaikyoChosaBusiness {
      *
      * @return 認定調査委託料
      */
-    public RString get認定調査委託料() {
+    public int get認定調査委託料() {
         return entity.getChosaItakuryo();
     }
 

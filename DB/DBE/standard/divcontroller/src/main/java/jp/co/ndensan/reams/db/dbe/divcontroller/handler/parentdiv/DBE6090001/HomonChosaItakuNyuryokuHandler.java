@@ -31,8 +31,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -142,7 +144,8 @@ public class HomonChosaItakuNyuryokuHandler {
                 row.setJisshiNengappi(nullToEmpty(business.get認定調査実施年月日().wareki().toDateString()));
                 row.setJuryoNengappi(nullToEmpty(business.get認定調査受領年月日().wareki().toDateString()));
                 row.setShurui(nullToEmpty(business.get認定調査実施場所名称()));
-                row.setNinteiChosaItakuryo(nullToEmpty(business.get認定調査委託料()));
+                row.setNinteiChosaItakuryo(DecimalFormatter
+                        .toコンマ区切りRString(new Decimal((business.get認定調査委託料())), 0));
                 row.setShiharaiMemo(nullToEmpty(business.get認定調査委託料支払メモ()));
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.toValue(business.is銀行振込出力フラグ()).get名称());
                 row.setShinseishoKanriNo(nullToEmpty(business.get申請書管理番号()));
@@ -150,9 +153,12 @@ public class HomonChosaItakuNyuryokuHandler {
                 row.setNintechosaItakusakiCode(nullToEmpty(business.get認定調査委託先コード()));
                 row.setNinteichosainCode(nullToEmpty(business.get認定調査委託先コード()));
                 row.setRaiRirekiNo(nullToEmpty(business.get履歴番号()));
+                if (nullToEmpty(business.get履歴番号()).isNullOrEmpty()) {
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                }
                 dgChosainList.add(row);
+                div.getDgShinsakaiIin().setDataSource(dgChosainList);
             }
-            div.getDgShinsakaiIin().setDataSource(dgChosainList);
         }
     }
 
@@ -204,12 +210,16 @@ public class HomonChosaItakuNyuryokuHandler {
      */
     public void set状態_削除() {
         div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
-        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
+        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, div.getDgShinsakaiIin().getClickedItem().getNintechosaItakusakiCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakusaki(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteichosainCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosain());
         div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
         div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
         div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
         div.getTxtHomonShurui().setValue(div.getDgShinsakaiIin().getClickedItem().getShurui());
         div.getTxtNinteiChosaItakuryo().setValue(toDecimal(div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo()));
+        div.getTxtShiharaiMemo().setValue(div.getDgShinsakaiIin().getClickedItem().getShiharaiMemo());
         if (銀行振込.equals(div.getDgShinsakaiIin().getClickedItem().getFurikomi())) {
             div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力済);
         } else {

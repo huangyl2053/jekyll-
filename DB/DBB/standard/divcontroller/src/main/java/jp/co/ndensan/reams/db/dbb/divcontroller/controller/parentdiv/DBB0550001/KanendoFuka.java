@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.DBB0550001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550001.KanendoFukaHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550001.KanendoFukaValidationHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendo.HonsanteiIdoKanendo;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -56,8 +55,9 @@ public class KanendoFuka {
         RString 処理名 = ShoriName.過年度賦課.get名称();
         ShoriDateKanri 基準日時 = HonsanteiIdoKanendo.createInstance().
                 getShuchutsuKaishiJikan(調定年度, サブ業務コード, 処理名);
-        if (過年度賦課確定基準日時.get基準日時() != null && 過年度賦課基準日時.get基準日時() != null
-                && 過年度賦課確定基準日時.get基準日時().isBefore(過年度賦課基準日時.get基準日時())) {
+        if ((過年度賦課確定基準日時.get基準日時() != null && 過年度賦課基準日時.get基準日時() != null
+                && 過年度賦課確定基準日時.get基準日時().isBefore(過年度賦課基準日時.get基準日時()))
+                || (過年度賦課確定基準日時.get基準日時() == null || 過年度賦課基準日時.get基準日時() == null)) {
             throw new ApplicationException(DbbErrorMessages.前回過年度賦課確定未処理.getMessage());
         }
         List<ShoriDateKanri> 処理状況list = HonsanteiIdoKanendo.createInstance().getShoriJokyo(調定年度);
@@ -80,7 +80,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onClick_onBeforeCheck(KanendoFukaDiv div) {
-        ValidationMessageControlPairs pairs = getValidationHandler(div).実行チェック();
+        ValidationMessageControlPairs pairs = getHandler(div).getCheckMessage();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -114,9 +114,4 @@ public class KanendoFuka {
     private KanendoFukaHandler getHandler(KanendoFukaDiv div) {
         return new KanendoFukaHandler(div);
     }
-
-    private KanendoFukaValidationHandler getValidationHandler(KanendoFukaDiv div) {
-        return new KanendoFukaValidationHandler(div);
-    }
-
 }

@@ -31,7 +31,7 @@ public class NinteichosahyoGaikyoChosaRelateEntity {
     private FlexibleDate ninteiShinseiYMD;
     private RString ninteiShinseiShinseijiKubunCode;
     private RString ninteichosaIraiRirekiNo;
-    private RString chosaItakuryo;
+    private int chosaItakuryo;
     private RString chosaItakuryoShiharaiMemo;
     private boolean isGinkoFurikomiShutsuryoku;
     private RString jigyoshaMeisho;

@@ -184,8 +184,10 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
 
         eucCsvWriter.close();
 
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(eucFilePath, accessLogUUID);
+        if (!personalDataList.isEmpty()) {
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(eucFilePath, accessLogUUID);
+        }
     }
 
     private void clear集計(KohifutanshaIchiranCSVEntity output) {
@@ -209,40 +211,55 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
 
     private KohifutanshaIchiranCSVEntity createOutput(KagoKetteiKohifutanshaChohyoEntity entity) {
         KohifutanshaIchiranCSVEntity csvEntity = new KohifutanshaIchiranCSVEntity();
-        csvEntity.set公費負担者番号(entity.get公費負担者番号().getColumnValue());
+        if (null != entity.get公費負担者番号()) {
+            csvEntity.set公費負担者番号(entity.get公費負担者番号().getColumnValue());
+        }
         csvEntity.set公費負担者名(entity.get公費負担者名());
-        csvEntity.set取扱年月(entity.get取扱年月().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString());
-        csvEntity.set事業者番号(entity.get事業者番号().getColumnValue());
+        if (null != entity.get取扱年月()) {
+            csvEntity.set取扱年月(entity.get取扱年月().wareki().separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString());
+        }
+        if (null != entity.get事業者番号()) {
+            csvEntity.set事業者番号(entity.get事業者番号().getColumnValue());
+        }
         csvEntity.set事業者名(entity.get事業者名());
         csvEntity.set公費受給者番号(entity.get公費受給者番号());
         csvEntity.set公費受給者名(entity.get公費受給者名());
         csvEntity.set証記載保険者番号(entity.get公費証記載保険者番号());
-        csvEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
-        csvEntity.setサービス提供年月(entity.getサービ提供年月().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString());
-        csvEntity.setサービス種類コード(entity.getサービス種類コード().getColumnValue());
+        if (null != entity.get被保険者番号()) {
+            csvEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
+        }
+        if (null != entity.getサービ提供年月()) {
+            csvEntity.setサービス提供年月(entity.getサービ提供年月().wareki().separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString());
+        }
+        if (null != entity.getサービス種類コード()) {
+            csvEntity.setサービス種類コード(entity.getサービス種類コード().getColumnValue());
+        }
         csvEntity.setサービス種類名(entity.getサービス種類名());
-        csvEntity.set過誤申立事由コード(entity.get過誤申立事由コード().getColumnValue());
+        if (null != entity.get過誤申立事由コード()) {
+            csvEntity.set過誤申立事由コード(entity.get過誤申立事由コード().getColumnValue());
+        }
         csvEntity.set過誤申立事由(entity.get過誤申立事由());
-        csvEntity.set単位数(DecimalFormatter.toコンマ区切りRString(entity.get単位数(), 0));
-        csvEntity.set負担額(DecimalFormatter.toコンマ区切りRString(entity.get公費負担額(), 0));
-        csvEntity.set介護給付費_件数(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get介護給付費の件数()), 0));
-        csvEntity.set介護給付費_単位数(DecimalFormatter.toコンマ区切りRString(entity.get介護給付費の単位数(), 0));
-        csvEntity.set介護給付費_負担額(DecimalFormatter.toコンマ区切りRString(entity.get介護給付費の負担額(), 0));
-        csvEntity.set高額介護サービス費_件数(DecimalFormatter
-                .toコンマ区切りRString(new Decimal(entity.get高額介護サービス費の件数()), 0));
-        csvEntity.set高額介護サービス費_単位数(DecimalFormatter
-                .toコンマ区切りRString(entity.get高額介護サービス費の単位数(), 0));
-        csvEntity.set高額介護サービス費_負担額(DecimalFormatter
-                .toコンマ区切りRString(entity.get高額介護サービス費の負担額(), 0));
-        csvEntity.set特定入所者介護サービス費等_件数(DecimalFormatter
-                .toコンマ区切りRString(new Decimal(entity.get特定入所者介護費等の件数()), 0));
-        csvEntity.set特定入所者介護サービス費等_単位数(DecimalFormatter
-                .toコンマ区切りRString(entity.get特定入所者介護費等の単位数(), 0));
-        csvEntity.set特定入所者介護サービス費等_負担額(DecimalFormatter
-                .toコンマ区切りRString(entity.get特定入所者介護費等の負担額(), 0));
+        csvEntity.set単位数(doカンマ編集(entity.get単位数()));
+        csvEntity.set負担額(doカンマ編集(entity.get公費負担額()));
+        csvEntity.set介護給付費_件数(doカンマ編集(new Decimal(entity.get介護給付費の件数())));
+        csvEntity.set介護給付費_単位数(doカンマ編集(entity.get介護給付費の単位数()));
+        csvEntity.set介護給付費_負担額(doカンマ編集(entity.get介護給付費の負担額()));
+        csvEntity.set高額介護サービス費_件数(doカンマ編集(new Decimal(entity.get高額介護サービス費の件数())));
+        csvEntity.set高額介護サービス費_単位数(doカンマ編集(entity.get高額介護サービス費の単位数()));
+        csvEntity.set高額介護サービス費_負担額(doカンマ編集(entity.get高額介護サービス費の負担額()));
+        csvEntity.set特定入所者介護サービス費等_件数(doカンマ編集(new Decimal(entity.get特定入所者介護費等の件数())));
+        csvEntity.set特定入所者介護サービス費等_単位数(doカンマ編集(entity.get特定入所者介護費等の単位数()));
+        csvEntity.set特定入所者介護サービス費等_負担額(doカンマ編集(entity.get特定入所者介護費等の負担額()));
         return csvEntity;
+    }
+
+    private RString doカンマ編集(Decimal number) {
+        if (null == number) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
 }

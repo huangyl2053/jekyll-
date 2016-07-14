@@ -1,9 +1,11 @@
 // TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshumidoteiichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBBPR81003_2_特別徴収未同定一覧表のソースクラスです。
@@ -70,6 +72,8 @@ public class TokubetsuChoshuMidoteiIchiranSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "A")
+    public ShikibetsuCode shikibetsuCode;
 
     /**
      * ReportSourceFields
@@ -101,7 +105,8 @@ public class TokubetsuChoshuMidoteiIchiranSource implements IReportSource {
         listList1_9,
         listList2_1,
         listList2_2,
-        listList2_3
+        listList2_3,
+        shikibetsuCode
     }
 // </editor-fold>
 }
