@@ -452,7 +452,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
                                 div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString()),
                 DOUBLE_ZEOR,
                 new FlexibleYear(new RDate(
-                                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString()),
+                                div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().getText().toString()).getYear().toString()),
                 DOUBLE_ZEOR,
                 insuranceInf.get統計対象区分(), insuranceInf.get市町村コード(), 表番号_09, 集計番号_0100,
                 集計単位_1, null, null, null, 画面入力詳細データエリ
