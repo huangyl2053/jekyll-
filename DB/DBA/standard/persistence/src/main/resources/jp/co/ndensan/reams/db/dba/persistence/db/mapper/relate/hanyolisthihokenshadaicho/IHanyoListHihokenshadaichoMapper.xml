@@ -43,30 +43,26 @@
             WHERE
                 DbT1001."logicalDeletedFlag" = false
             <!-- 取得取得時に設定される項目のみ、最初に判断する。 -->
-            <if test="is基準日">
-                <if test="is資格取得日">
-                    AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni}
-                    AND (#{kijunni} <![CDATA[<]]> DbT1001."shikakuSoshitsuYMD"
-                        OR DbT1001."shikakuSoshitsuYMD" IS NULL
-                        OR DbT1001."shikakuSoshitsuYMD" = '')
-                </if>
-                <if test="is資格取得届出日">
-                    AND DbT1001."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{kijunni}
-                    AND (#{kijunni} <![CDATA[<]]> DbT1001."shikakuSoshitsuYMD"
-                        OR DbT1001."shikakuSoshitsuYMD" IS NULL
-                        OR DbT1001."shikakuSoshitsuYMD" = '')
-                </if>
-            </if>
-            <if test="is範囲">
-                <if test="is取得日">
-                    AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
-                    AND DbT1001."shikakuShutokuYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
-                </if>
-                <if test="is取得届出日">
-                    AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuShutokuTodokedeYMD"
-                    AND DbT1001."shikakuShutokuTodokedeYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
-                </if>
-            </if>
+            <choose>
+                <when test="is基準日">
+                    <if test="is資格取得日">
+                        AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> #{kijunni}
+                    </if>
+                    <if test="is資格取得届出日">
+                        AND DbT1001."shikakuShutokuTodokedeYMD" <![CDATA[<=]]> #{kijunni}
+                    </if>
+                </when>
+                <when test="is範囲">
+                    <if test="is取得日">
+                        AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
+                        AND DbT1001."shikakuShutokuYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
+                    </if>
+                    <if test="is取得届出日">
+                        AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuShutokuTodokedeYMD"
+                        AND DbT1001."shikakuShutokuTodokedeYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
+                    </if>
+                </when>
+            </choose>
             <if test="has取得事由">
                 AND DbT1001."shikakuShutokuJiyuCode" IN
                 <foreach
@@ -102,17 +98,24 @@
                         AND DbT1001."shikakuShutokuYMD" = DbT1001_2."shikakuShutokuYMD"
                         AND (DbT1001."idoYMD" || DbT1001."edaNo") <![CDATA[<]]> (DbT1001_2."idoYMD" || DbT1001_2."edaNo")
                 )
-                <if test="is範囲">
+                <choose>
                     <!-- 喪失日, 喪失届出日は、同一取得日を持つ履歴の最終データのみに設定されるため、ここで検査する -->
-                    <if test="is喪失日">
-                        AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuSoshitsuYMD"
-                        AND DbT1001."shikakuSoshitsuYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
-                    </if>
-                    <if test="is喪失届出日">
-                        AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuSoshitsuTodokedeYMD"
-                        AND DbT1001."shikakuSoshitsuTodokedeYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
-                    </if>
-                </if>
+                    <when test="is基準日">
+                        AND (#{kijunni} <![CDATA[<]]> DbT1001."shikakuSoshitsuYMD"
+                            OR DbT1001."shikakuSoshitsuYMD" IS NULL
+                            OR DbT1001."shikakuSoshitsuYMD" = '')
+                    </when>
+                    <when test="is範囲">
+                        <if test="is喪失日">
+                            AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuSoshitsuYMD"
+                            AND DbT1001."shikakuSoshitsuYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
+                        </if>
+                        <if test="is喪失届出日">
+                            AND #{rangeChushutsuhiFrom} <![CDATA[<=]]> DbT1001."shikakuSoshitsuTodokedeYMD"
+                            AND DbT1001."shikakuSoshitsuTodokedeYMD"  <![CDATA[<=]]> #{rangeChushutsuhiTo}
+                        </if>
+                    </when>
+                </choose>
                 AND( 1 = 1
                     <if test="is1号">
                         OR DbT1001."hihokennshaKubunCode" = '1'
