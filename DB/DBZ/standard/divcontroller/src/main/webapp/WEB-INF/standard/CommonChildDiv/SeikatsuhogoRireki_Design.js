@@ -4,13 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onOk_Cancel = function () {
-                return "onOk_Cancel";
-            };
-
-            Events.onbtn_AddRow = function () {
-                return "onbtn_AddRow";
-            };
             return Events;
         })();
         SeikatsuhogoRireki.Events = Events;
@@ -35,8 +28,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.btnAddRow = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnAddRow"));
+            Controls.prototype.btnRirekiAdd = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnRirekiAdd"));
             };
 
             Controls.prototype.dgSeikatsuhogoRireki = function () {
