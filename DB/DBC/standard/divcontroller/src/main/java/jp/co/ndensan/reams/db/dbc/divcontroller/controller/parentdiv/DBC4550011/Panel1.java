@@ -112,7 +112,7 @@ public class Panel1 {
     public ResponseData<Panel1Div> onClick_btnCancle(Panel1Div div) {
 
         getHandler(div).初期登録状態();
-        getHandler(div).選択ボタン押下時();
+        getHandler(div).set入力値破棄();
         return ResponseData.of(div).setState(DBC4550011StateName.初期登録状態);
     }
 

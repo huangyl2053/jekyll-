@@ -217,21 +217,9 @@ public class HonsanteiIdoKanendo {
         result.set納入_発行日(parameter.get納入_発行日());
         result.set納入_出力期(parameter.get納入_出力期());
         result.set納入_対象者(parameter.get納入_対象者());
-        if (oneRS.equals(parameter.get納入_口座振替様式())) {
-            result.set納入_口座振替様式(oneRS);
-        } else if (twoRS.equals(parameter.get納入_口座振替様式())) {
-            result.set納入_口座振替様式(twoRS);
-        }
-        if (zeroRS.equals(parameter.get納入_生活保護対象者())) {
-            result.set納入_生活保護対象者(zeroRS);
-        } else if (oneRS.equals(parameter.get納入_生活保護対象者())) {
-            result.set納入_生活保護対象者(oneRS);
-        }
-        if (zeroRS.equals(parameter.get納入_ページごとに山分け())) {
-            result.set納入_ページごとに山分け(zeroRS);
-        } else if (oneRS.equals(parameter.get納入_ページごとに山分け())) {
-            result.set納入_ページごとに山分け(oneRS);
-        }
+        result.set納入_口座振替様式(parameter.get納入_口座振替様式());
+        result.set納入_生活保護対象者(parameter.get納入_生活保護対象者());
+        result.set納入_ページごとに山分け(parameter.get納入_ページごとに山分け());
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         return result;
     }
@@ -376,14 +364,13 @@ public class HonsanteiIdoKanendo {
             ChohyoSeigyoHanyo 帳票_コンビニ期毎出力,
             ReportId 帳票分類ID,
             RString 出力順ID) {
-        if (帳票タイプを != null) {
-            if (twlZRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
+        if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
+            if (twlZRS.equals(帳票タイプを.get設定値())) {
                 return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100075.getReportId().value(), 出力順ID);
-            } else if (twlTRS.equals(帳票タイプを.get設定値()) && zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
+            } else if (twlTRS.equals(帳票タイプを.get設定値())) {
                 return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100073.getReportId().value(), 出力順ID);
             }
-        }
-        if (oneRS.equals(帳票_コンビニ期毎出力.get設定値())) {
+        } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値())) {
             return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100063.getReportId().value(), 出力順ID);
         }
         return null;
@@ -416,15 +403,11 @@ public class HonsanteiIdoKanendo {
                         調定年度, アイテムとして);
                 return getブックタイプ(帳票タイプを, 帳票_口座振替依頼, 帳票分類ID, 出力順ID);
             case "6":
-                項目名 = コンビニ期毎タイプ;
+                項目名 = その他納入通知書タイプ;
                 アイテムとして = コンビニ期毎出力;
                 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                ChohyoSeigyoHanyo 帳票_コンビニ期毎出力 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                        調定年度, アイテムとして);
-                if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
-                    帳票_コンビニ期毎出力 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                            調定年度, その他納入通知書タイプ);
-                }
+                ChohyoSeigyoHanyo 帳票_コンビニ期毎出力 = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課,
+                        帳票分類ID, 調定年度, アイテムとして);
                 return getコンビニ収納タイプ(帳票タイプを, 帳票_コンビニ期毎出力, 帳票分類ID, 出力順ID);
             default:
                 return null;
