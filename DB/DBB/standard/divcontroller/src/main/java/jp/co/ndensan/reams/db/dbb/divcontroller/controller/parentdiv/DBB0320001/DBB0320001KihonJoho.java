@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 賦課照会の基本情報Divです。
@@ -76,4 +79,16 @@ public class DBB0320001KihonJoho {
         return ResponseData.of(div).respond();
     }
 
+    public ResponseData<DBB0320001KihonJohoDiv> onClick_btnZenkairesultHyoji(DBB0320001KihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<DBB0320001KihonJohoDiv> clearViewStateKeys(DBB0320001KihonJohoDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    public ResponseData<DBB0320001KihonJohoDiv> onClick_btnResearch(DBB0320001KihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
 }

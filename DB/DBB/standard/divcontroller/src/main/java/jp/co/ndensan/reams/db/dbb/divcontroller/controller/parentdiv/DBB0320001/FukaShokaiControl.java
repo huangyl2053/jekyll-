@@ -71,13 +71,12 @@ public class FukaShokaiControl {
 //                fukaTaishoshaKey.get通知書番号()).findFirst().get();
 //
 //        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
-        FukaShokaiKey key = getkey();
-//        if (key == null) {
-//            return createResponseData(div);
-//        } else {
-        return createResponseData(setDisplay(div, key));
-//        }
-
+        FukaShokaiKey key = getkeyOrNull();
+        if (key == null) {
+            return createResponseData(setButtonsDisabled(div, true));
+        } else {
+            return createResponseData(setDisplay(div, key));
+        }
     }
 
     /**
@@ -90,14 +89,14 @@ public class FukaShokaiControl {
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
 
         if (key == null || key.get調定年度() == null || key.get賦課年度() == null || key.get被保険者番号() == null
-                || key.get調定年度().isEmpty() || key.get賦課年度().isEmpty() || key.get被保険者番号().isEmpty()) {
-            key = getkey();
+            || key.get調定年度().isEmpty() || key.get賦課年度().isEmpty() || key.get被保険者番号().isEmpty()) {
+            return initialize(div);
         }
 
         return createResponseData(setDisplay(div, key));
     }
 
-    private FukaShokaiKey getkey() {
+    private FukaShokaiKey getkeyOrNull() {
 
         FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         final FukaMiscManager fukaMiscManager = new FukaMiscManager();
@@ -106,10 +105,21 @@ public class FukaShokaiControl {
         Fuka model = fukaMiscManager.find賦課直近(
                 fukaTaishoshaKey.get調定年度(),
                 fukaTaishoshaKey.get賦課年度(),
-                fukaTaishoshaKey.get通知書番号()).findFirst().get();
-
+                fukaTaishoshaKey.get通知書番号()).findFirst().orElse(null);
+        if (model == null) {
+            return null;
+        }
         FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
         return key;
+    }
+
+    private FukaShokaiControlDiv setButtonsDisabled(FukaShokaiControlDiv div, boolean disabled) {
+        div.getBtnFukakonkyoKiwari().setDisabled(true);
+        div.getBtnSetaiinShotoku().setDisabled(disabled);
+        div.getBtnTokucho().setDisabled(disabled);
+        div.getBtnGemmen().setDisabled(disabled);
+        div.getBtnRirekiHyoji().setDisabled(disabled);
+        return div;
     }
 
     private FukaShokaiControlDiv setDisplay(FukaShokaiControlDiv div, FukaShokaiKey key) {

@@ -90,14 +90,18 @@ public class FukakonkyoAndKiwari {
 
         init();
 
-        final FukaMiscManager manager = new FukaMiscManager();
+        final FukaMiscManager fukaManager = new FukaMiscManager();
         FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
 
 //        Fuka model = FukaShokaiController.getFukaModelByFukaShokaiKey();
-        Fuka model = manager.find賦課直近(
+        Fuka model = fukaManager.find賦課直近(
                 fukaTaishoshaKey.get調定年度(),
                 fukaTaishoshaKey.get賦課年度(),
-                fukaTaishoshaKey.get通知書番号()).findFirst().get();
+                fukaTaishoshaKey.get通知書番号()).findFirst().orElse(null);
+
+        if (model == null) {
+            return createResponseData(div);
+        }
 
         FukaShokaiKey key = createFukaShokaiKey(model);
 

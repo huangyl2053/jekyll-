@@ -69,8 +69,8 @@ public class TaishoshaRelateDac {
     private ITableClause create資格対象者TableClause(IPsmCriteria psm, boolean is内部結合) {
         DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
         ITableClause table = (is内部結合)
-                ? accessor.select().table(psm).innerJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode))
-                : accessor.select().table(psm).leftJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode));
+                             ? accessor.select().table(psm).innerJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode))
+                             : accessor.select().table(psm).leftJoin(DbV7901ShikakuSearch.class, using(DbV7901ShikakuSearch.shikibetsuCode));
         return table;
     }
 
@@ -101,22 +101,22 @@ public class TaishoshaRelateDac {
     public IItemList<FukaTaishoshaRelateEntity> select賦課対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
         ITableClause table = create賦課対象者TableClause(psm, is内部結合);
         return to賦課ModelList(((条件 != null)
-                ? createOrderByClause(table.where(条件)).limit(最大件数)
-                : createOrderByClause(table).limit(最大件数)).toList(FukaTaishoshaRelateEntity.class));
+                              ? createOrderByClause(table.where(条件)).limit(最大件数)
+                              : createOrderByClause(table).limit(最大件数)).toList(FukaTaishoshaRelateEntity.class));
     }
 
     private ITableClause create賦課対象者TableClause(IPsmCriteria psm, boolean is内部結合) {
         DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
         ITableClause table = (is内部結合)
-                ? accessor.select().table(psm).innerJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode))
-                : accessor.select().table(psm).leftJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode));
+                             ? accessor.select().table(psm).innerJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode))
+                             : accessor.select().table(psm).leftJoin(DbV7902FukaSearch.class, using(DbV7902FukaSearch.shikibetsuCode));
         return table;
     }
 
     private IOrderClause createOrderByClause(IOrderable table) {
-        return table.order(new OrderBy(DbV7902FukaSearch.fukaNendo, Order.ASC, NullsOrder.LAST),
-                new OrderBy(DbV7902FukaSearch.choteiNendo, Order.ASC, NullsOrder.LAST),
-                new OrderBy(DbV7902FukaSearch.tsuchishoNo, Order.ASC, NullsOrder.LAST));
+        return table.order(new OrderBy(DbV7902FukaSearch.fukaNendo, Order.DESC, NullsOrder.LAST),
+                new OrderBy(DbV7902FukaSearch.choteiNendo, Order.DESC, NullsOrder.LAST),
+                new OrderBy(DbV7902FukaSearch.tsuchishoNo, Order.DESC, NullsOrder.LAST));
     }
 
     private IItemList<TaishoshaRelateEntity> to資格ModelList(List<TaishoshaRelateEntity> entityList) {
