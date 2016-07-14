@@ -205,8 +205,7 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
     private PersonalData getPersonalData(KagoKetteiKohifutanshaChohyoEntity entity) {
         ExpandedInformation expandedInformations = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 entity.get被保険者番号().getColumnValue());
-        PersonalData personalData = PersonalData.of(entity.get識別コード(), expandedInformations);
-        return personalData;
+        return PersonalData.of(entity.get識別コード(), expandedInformations);
     }
 
     private KohifutanshaIchiranCSVEntity createOutput(KagoKetteiKohifutanshaChohyoEntity entity) {
