@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7020001;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class HanyoListParamHandler {
 
-    private static final RString 適用除外者のみ = new RString("1");
-    private static final RString 適用除外解除者のみ = new RString("2");
     private static final RString 両方 = new RString("0");
     private static final RString 他特例適用者のみ = new RString("1");
     private static final RString 他特例解除者のみ = new RString("2");
@@ -38,7 +36,7 @@ public class HanyoListParamHandler {
     private static final RString 施設変更あり = new RString("key0");
     private static final RString 施設変更なし = new RString("key1");
     private static final RString 項目名 = new RString("1");
-    private static final RString 連番 = new RString("3");
+    private static final RString 連番 = new RString("2");
     private static final RString 日付 = new RString("3");
     private static final RString 適用開始日 = new RString("1");
     private static final RString 適用日 = new RString("1");
@@ -116,17 +114,18 @@ public class HanyoListParamHandler {
      */
     public void onChange_適用除外者事由抽出区分() {
         RString 事由抽出区分 = div.getRadTekiyoJogaisha().getSelectedKey();
-        if (適用除外者のみ.equals(事由抽出区分)) {
+        if (JiyuChushutsuKubun.適用除外者のみ.getコード().equals(事由抽出区分)) {
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(true);
-        } else if (適用除外解除者のみ.equals(事由抽出区分)) {
+        } else if (JiyuChushutsuKubun.適用除外解除者のみ.getコード().equals(事由抽出区分)) {
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(true);
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
-        } else if (両方.equals(事由抽出区分)) {
+        } else if (JiyuChushutsuKubun.両方.getコード().equals(事由抽出区分)) {
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
             div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
         }
     }
+
     /**
      * 他市町村住所地特例者事由抽出区分のonChangeです。
      */
@@ -207,6 +206,7 @@ public class HanyoListParamHandler {
         }
         宛名抽出条件復元(restoreBatchParameterMap);
     }
+
     private void set基準日Disable(RString モード) {
         if (モード.equals(モード2)) {
             div.getRadTekiyoJogaishaTekiyoKijyun().setDisabled(true);
@@ -288,9 +288,10 @@ public class HanyoListParamHandler {
         parameter.setShichoson_Name(市町村名称);
         宛名抽出条件保存(parameter);
     }
+
     private void 宛名抽出条件保存(HanyoListBatchParameter parameter) {
         AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
-        parameter.setPsmChushutsu_Kubun(宛名抽出条件.getChiku_Kubun().getコード());
+        parameter.setPsmChushutsu_Kubun(宛名抽出条件.getAgeSelectKijun().getコード());
         parameter.setPsmChushutsuAge_Start(宛名抽出条件.getNenreiRange().getFrom());
         parameter.setPsmChushutsuAge_End(宛名抽出条件.getNenreiRange().getTo());
         parameter.setPsmSeinengappiYMD_Start(宛名抽出条件.getSeinengappiRange().getFrom());
