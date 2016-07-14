@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijun
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBE621001_報酬支払い通知書請求書・確認書マッパーインタフェースです
@@ -95,4 +96,12 @@ public interface IHoshuShiharaiJunbiMapper {
      * @return HoshuShiharaiJunbiRelateEntity 検索結果の{@link HoshuShiharaiJunbiRelateEntity}
      */
     List<HoshuShiharaiJunbiRelateEntity> get介護認定審査会委員報酬支払明細書(HoshuShiharaiJunbiMybatisParameter 検索条件);
+
+    /**
+     * 検索条件より、適当な条件を連結して、消費税率を検索する。
+     *
+     * @param 検索条件 検索条件
+     * @return HoshuShiharaiJunbiRelateEntity 検索結果の{@link HoshuShiharaiJunbiRelateEntity}
+     */
+    RString get消費税率(HoshuShiharaiJunbiMybatisParameter 検索条件);
 }
