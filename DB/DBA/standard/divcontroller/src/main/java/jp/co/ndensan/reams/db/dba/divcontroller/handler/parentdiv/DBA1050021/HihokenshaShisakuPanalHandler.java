@@ -407,10 +407,17 @@ public class HihokenshaShisakuPanalHandler {
             DropDownList shutokuKeyHokensha = panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha();
             if (shutokuKeyHokensha.getDataSource().isEmpty()
                     || (shutokuKeyHokensha.getDataSource().size() == 1 && shutokuKeyHokensha.getIsBlankLine() == true)) {
-                panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setDisabled(true);
+                shutokuKeyHokensha.setDisabled(true);
             } else {
-                panelDiv.getShikakuShosai().getTblShikakuShosai().getDdlShutokuKyuHokensha().setSelectedKey(
-                        旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
+                List<KeyValueDataSource> dataSource = shutokuKeyHokensha.getDataSource();
+
+                for (KeyValueDataSource source : dataSource) {
+                    if (旧保険者.equals(source.getKey())) {
+                        shutokuKeyHokensha.setSelectedKey(旧保険者.isEmpty() ? RString.EMPTY : 旧保険者);
+                        break;
+                    }
+                }
+                shutokuKeyHokensha.setDisabled(false);
             }
             RString 処理日時 = 資格得喪情報.getShoriDateTime();
             panelDiv.getShikakuShosai().getTblShikakuShosai().getTxtShutokuShoriDate().setValue(rStringToFlexibleDate(処理日時));
