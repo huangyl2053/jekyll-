@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -127,6 +128,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      * @param list List<KeyValueDataSource>
      */
     public void onClick_btnSentaku(List<KeyValueDataSource> list) {
+        div.getDdlShokisaiHokenshaNoSaki().getDataSource().clear();
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
         div.getKoikinaiTenkyoTenkyomae().getTxtShokisaiHokenshaNo().setValue(row.getShoKisaiHokenshaNo());
         div.getTxtShokisaiHokensha().setValue(row.getShokisaiHokensha());
@@ -191,8 +193,14 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      */
     public void onClick_btnTouroku() {
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        row.setColumnState(new RString("更新"));
-        row.setShoKisaiHokenshaNo(div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedKey());
+        if (!div.getTxtShokisaiHokenshaNo().getValue().equals(div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedValue())) {
+            row.setColumnState(new RString("更新"));
+            List<KeyValueDataSource> datasource = div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getDataSource();
+            int index = div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedIndex();
+            int position = datasource.get(index).getValue().indexOf(RString.HALF_SPACE);
+            row.setShoKisaiHokenshaNo(datasource.get(index).getKey());
+            row.setShokisaiHokensha(datasource.get(index).getValue().substring(position + 1));
+        }
     }
 
     private RString setSeibetsu(Code code) {
@@ -216,28 +224,28 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         if (shinseisya.get主治医意見書作成依頼年月日() == null) {
             row.setIkenshoSakuseiIraibi(RString.EMPTY);
         } else {
-            row.setIkenshoSakuseiIraibi(new RString(shinseisya.get主治医意見書作成依頼年月日().toString()));
+            row.setIkenshoSakuseiIraibi(dateFormat(shinseisya.get主治医意見書作成依頼年月日()));
         }
         if (null == shinseisya.get主治医意見書受領年月日()) {
             row.setIkenshoJuryobi(RString.EMPTY);
         } else {
-            row.setIkenshoJuryobi(new RString(shinseisya.get主治医意見書受領年月日().toString()));
+            row.setIkenshoJuryobi(dateFormat(shinseisya.get主治医意見書受領年月日()));
         }
         if (null == shinseisya.get主治医意見書登録完了年月日()) {
             row.setIkenshoTorokuKanryobi(RString.EMPTY);
         } else {
-            row.setIkenshoTorokuKanryobi(new RString(shinseisya.get主治医意見書登録完了年月日().toString()));
+            row.setIkenshoTorokuKanryobi(dateFormat(shinseisya.get主治医意見書登録完了年月日()));
         }
         row.setShinsakaiNo(shinseisya.get介護認定審査会開催番号());
         if (null == shinseisya.get介護認定審査会開催予定年月日()) {
             row.setShinsakaiKaisaiYoteibi(RString.EMPTY);
         } else {
-            row.setShinsakaiKaisaiYoteibi(new RString(shinseisya.get介護認定審査会開催予定年月日().toString()));
+            row.setShinsakaiKaisaiYoteibi(dateFormat(shinseisya.get介護認定審査会開催予定年月日()));
         }
         if (null == shinseisya.get介護認定審査会開催年月日()) {
             row.setShinsakaiKaisaibi(RString.EMPTY);
         } else {
-            row.setShinsakaiKaisaibi(new RString(shinseisya.get介護認定審査会開催年月日().toString()));
+            row.setShinsakaiKaisaibi(dateFormat(shinseisya.get介護認定審査会開催年月日()));
         }
         return row;
     }
@@ -277,23 +285,23 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         row.setHihokenshaNo(hihokenshaNo);
         row.setHihokenshaName(hihokenshaName);
         row.setSex(sex);
-        row.setBirthYMD(birthYMD);
+        row.setBirthYMD(dateFormat(new FlexibleDate(birthYMD)));
         row.setAge(age);
         row.setJusho(jusho);
         row.setYubinNo(yubinNo);
         row.setTelNo(telNo);
-        row.setNinteiShinseiYMD(ninteiShinseiYMD);
+        row.setNinteiShinseiYMD(dateFormat(new FlexibleDate(ninteiShinseiYMD)));
         row.setNijiHanteiKekka(nijiHanteiKekka);
-        row.setNijiHanteibi(nijiHanteibi);
+        row.setNijiHanteibi(dateFormat(new FlexibleDate(nijiHanteibi)));
         row.setNijiHanteiNinteiYukoKikan(nijiHanteiNinteiYukoKikan);
-        row.setNijiHanteiNinteiYukoKaishiYMD(nijiHanteiNinteiYukoKaishiYMD);
-        row.setNijiHanteiNinteiYukoShuryoYMD(nijiHanteiNinteiYukoShuryoYMD);
-        row.setShinsakaiKanryobi(shinsakaiKanryobi);
+        row.setNijiHanteiNinteiYukoKaishiYMD(dateFormat(new FlexibleDate(nijiHanteiNinteiYukoKaishiYMD)));
+        row.setNijiHanteiNinteiYukoShuryoYMD(dateFormat(new FlexibleDate(nijiHanteiNinteiYukoShuryoYMD)));
+        row.setShinsakaiKanryobi(dateFormat(new FlexibleDate(shinsakaiKanryobi)));
         row.setChosaItakusakiMeisho(chosaItakusakiMeisho);
         row.setChosainName(chosainName);
-        row.setChosaIraibi(chosaIraibi);
-        row.setChosaJisshibi(chosaJisshibi);
-        row.setChosaKanryobi(chosaKanryobi);
+        row.setChosaIraibi(dateFormat(new FlexibleDate(chosaIraibi)));
+        row.setChosaJisshibi(dateFormat(new FlexibleDate(chosaJisshibi)));
+        row.setChosaKanryobi(dateFormat(new FlexibleDate(chosaKanryobi)));
         row.setShujiiIryoKikanMeisho(shujiiIryoKikanMeisho);
         row.setShujiiName(shujiiName);
         return row;
@@ -307,5 +315,12 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
             list.add(dataSource);
         }
         return list;
+    }
+
+    private RString dateFormat(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().toDateString();
     }
 }

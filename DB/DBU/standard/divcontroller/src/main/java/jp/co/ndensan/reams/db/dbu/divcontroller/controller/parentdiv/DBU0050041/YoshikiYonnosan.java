@@ -35,8 +35,6 @@ public class YoshikiYonnosan {
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final RString 内部処理モード_削除 = new RString("削除");
-    private static final RString 画面表示_修正 = new RString("修正");
-    private static final RString 画面表示_追加 = new RString("追加");
     private static final RString 前年度以前データ = new RString("前年度以前データ");
     private static final RString 今年度データ = new RString("今年度データ");
     private static final RString 実質的な収支についてデータ = new RString("実質的な収支についてデータ");
@@ -51,13 +49,7 @@ public class YoshikiYonnosan {
     public ResponseData<YoshikiYonnosanDiv> onload(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         handler.onload(get引き継ぎデータ(div));
-        if (画面表示_追加.equals(div.getGamenMode())) {
-            return ResponseData.of(div).setState(DBU0050041StateName.追加状態);
-        } else if (画面表示_修正.equals(div.getGamenMode())) {
-            return ResponseData.of(div).setState(DBU0050041StateName.修正状態);
-        } else {
-            return ResponseData.of(div).setState(DBU0050041StateName.削除状態);
-        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -301,9 +293,17 @@ public class YoshikiYonnosan {
         InsuranceInformation 引き継ぎデータ
                 = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(ADD,
-                    new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey()),
-                    div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedValue());
+            if (div.getYoshikiYonnosanMeisai().getDdlShicyoson().isDisplayNone()) {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        LasdecCode.EMPTY,
+                        RString.EMPTY);
+            } else {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey()),
+                        div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedValue());
+            }
         }
         return 引き継ぎデータ;
     }

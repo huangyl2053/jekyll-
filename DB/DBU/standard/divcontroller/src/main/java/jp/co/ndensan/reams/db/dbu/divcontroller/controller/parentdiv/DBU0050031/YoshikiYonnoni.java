@@ -125,19 +125,21 @@ public class YoshikiYonnoni {
                     insuranceInf.get統計対象区分(),
                     insuranceInf.get市町村コード(),
                     集計番号_0200);
+            div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisplayNone(true);
+            div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisplayNone(true);
+            TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
+            hokokuYM.setValue(new FlexibleDate(new RDate(insuranceInf.get報告年().toString()).toString()));
+            div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
+            TextBoxCode txtHihokenshabango = new TextBoxCode();
+            TextBox txthihokenshamei = new TextBox();
+            txthihokenshamei.setValue(insuranceInf.get市町村名称());
+            txtHihokenshabango.setValue(insuranceInf.get保険者コード().getColumnValue());
+            div.getYoshikiYonnoniMeisai().setTxtHihokenshaNo(txtHihokenshabango);
+            div.getYoshikiYonnoniMeisai().setTxtHihokenshaName(txthihokenshamei);
             if (list.isEmpty()) {
                 内部処理モード = 内部処理モード_修正追加;
-                TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
-                hokokuYM.setValue(new FlexibleDate(insuranceInf.get報告年().toString()));
-                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
-                TextBoxCode txtHihokenshabango = new TextBoxCode();
-                TextBox txthihokenshamei = new TextBox();
-                txthihokenshamei.setValue(insuranceInf.get市町村名称());
-                txtHihokenshabango.setValue(insuranceInf.get保険者コード().getColumnValue());
-                div.getYoshikiYonnoniMeisai().setTxtHihokenshaNo(txtHihokenshabango);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
-                div.getYoshikiYonnoniMeisai().setTxtHihokenshaName(txthihokenshamei);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
             } else {
                 if (UPDATE.equals(insuranceInf.get処理フラグ())) {
@@ -485,7 +487,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnEnd(YoshikiYonnoniDiv div) {
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.処理完了).respond();
     }
 
     /**
@@ -567,12 +569,19 @@ public class YoshikiYonnoni {
      */
     private InsuranceInformation get引き継ぎデータ(YoshikiYonnoniDiv div) {
         InsuranceInformation 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKey.様式４の2, InsuranceInformation.class);
+                = ViewStateHolder.get(ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(
-                    ADD,
-                    new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey()),
-                    div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedValue());
+            if (div.getYoshikiYonnoniMeisai().getDdlShicyoson().isDisplayNone()) {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        LasdecCode.EMPTY,
+                        RString.EMPTY);
+            } else {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey()),
+                        div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedValue());
+            }
         }
         return 引き継ぎデータ;
     }
