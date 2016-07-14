@@ -105,7 +105,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
      "toLayoutTitle": "要介護認定申請検索",
-     "toState": "検索結果一覧"
+     "toState": "個人依頼内容更新"
     },
     {
      "id": "2",
