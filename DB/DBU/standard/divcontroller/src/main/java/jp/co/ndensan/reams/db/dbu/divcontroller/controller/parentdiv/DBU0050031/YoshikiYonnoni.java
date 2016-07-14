@@ -152,11 +152,6 @@ public class YoshikiYonnoni {
                     div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
                     div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
                     div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, false);
                     内部処理モード = 内部処理モード_修正;
                 } else {
                     div.getKanryoMessage().setVisible(false);
@@ -167,11 +162,6 @@ public class YoshikiYonnoni {
                     div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
                     div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
                     div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, false);
                     内部処理モード = 内部処理モード_削除;
                 }
             }
@@ -485,12 +475,6 @@ public class YoshikiYonnoni {
         div.getKanryoMessage().setVisible(true);
         div.getYoshikiButtonArea().setVisible(false);
         div.getYoshikiYonnoniMeisai().setVisible(false);
-
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(削除をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存する, false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
 
         if (ADD.equals(insuranceInf.get処理フラグ())) {
             // TODO
