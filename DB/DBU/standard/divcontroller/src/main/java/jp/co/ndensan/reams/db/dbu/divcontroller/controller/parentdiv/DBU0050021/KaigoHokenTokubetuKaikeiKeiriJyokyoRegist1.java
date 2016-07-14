@@ -309,8 +309,17 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         InsuranceInformation 引き継ぎデータ
                 = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(
-                    ADD, new LasdecCode(div.getDdlShicyoson().getSelectedKey()), div.getDdlShicyoson().getSelectedValue());
+            if (div.getDdlShicyoson().isDisplayNone()) {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        LasdecCode.EMPTY,
+                        RString.EMPTY);
+            } else {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        new LasdecCode(div.getDdlShicyoson().getSelectedKey()),
+                        div.getDdlShicyoson().getSelectedValue());
+            }
         }
         return 引き継ぎデータ;
     }

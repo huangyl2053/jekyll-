@@ -143,6 +143,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     public void onload(InsuranceInformation insuranceInf) {
         if (DELETE.equals(insuranceInf.get処理フラグ())
                 || UPDATE.equals(insuranceInf.get処理フラグ())) {
+            div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisplayNone(true);
+            div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisplayNone(false);
             onload一覧修正Or一覧削除(insuranceInf);
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
             List<Shichoson> 市町村Lst = get市町村Lst();
