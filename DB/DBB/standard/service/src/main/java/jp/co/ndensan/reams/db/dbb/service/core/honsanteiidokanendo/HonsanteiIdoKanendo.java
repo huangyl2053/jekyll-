@@ -380,35 +380,35 @@ public class HonsanteiIdoKanendo {
             ReportId 帳票分類ID, FlexibleYear 調定年度, RString 算定期, RString 出力順ID) {
         RString 項目名;
         RString アイテムとして;
-        ChohyoSeigyoHanyo 帳票タイプを;
+        ChohyoSeigyoHanyo 帳票タイプ;
         RString 設定値 = new RString(get納付書の型(算定期).toString().split(",")[0]);
         switch (設定値.toString()) {
             case "1":
                 項目名 = 期毎納入通知書タイプ;
-                帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                return get期毎タイプ(帳票タイプを, 帳票分類ID, 出力順ID);
+                帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
+                return get期毎タイプ(帳票タイプ, 帳票分類ID, 出力順ID);
             case "2":
                 項目名 = 銀振納入通知書タイプ;
-                帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                return get銀振型5期タイプ(帳票タイプを, 帳票分類ID, 出力順ID);
+                帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
+                return get銀振型5期タイプ(帳票タイプ, 帳票分類ID, 出力順ID);
             case "4":
                 項目名 = 銀振納入通知書タイプ;
-                帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
-                return get銀振型４期タイプ(帳票タイプを, 帳票分類ID, 出力順ID);
+                帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
+                return get銀振型４期タイプ(帳票タイプ, 帳票分類ID, 出力順ID);
             case "5":
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = ブック口座振替依頼表示;
-                帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
+                帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 ChohyoSeigyoHanyo 帳票_口座振替依頼 = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                         調定年度, アイテムとして);
-                return getブックタイプ(帳票タイプを, 帳票_口座振替依頼, 帳票分類ID, 出力順ID);
+                return getブックタイプ(帳票タイプ, 帳票_口座振替依頼, 帳票分類ID, 出力順ID);
             case "6":
                 項目名 = その他納入通知書タイプ;
                 アイテムとして = コンビニ期毎出力;
-                帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
+                帳票タイプ = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID, 調定年度, 項目名);
                 ChohyoSeigyoHanyo 帳票_コンビニ期毎出力 = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課,
                         帳票分類ID, 調定年度, アイテムとして);
-                return getコンビニ収納タイプ(帳票タイプを, 帳票_コンビニ期毎出力, 帳票分類ID, 出力順ID);
+                return getコンビニ収納タイプ(帳票タイプ, 帳票_コンビニ期毎出力, 帳票分類ID, 出力順ID);
             default:
                 return null;
         }
