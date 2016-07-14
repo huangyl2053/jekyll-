@@ -233,7 +233,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.tsuchishoNo1 = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo1 = HOSHI_4;
@@ -241,7 +241,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.kibetsu1 = HOSHI_2;
             source.ryoshushoNenbun1 = HOSHI_4;
             source.gokeigaku1 = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.tsuchishoNo1 = HOSHI_16;
             source.nokigenYmd1 = HOSHI_11;
             source.hakkoYmd1 = HOSHI_11;
             source.honzei1 = HOSHI_13;
@@ -303,7 +303,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.tsuchishoNo2 = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo2 = HOSHI_4;
@@ -311,7 +311,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.kibetsu2 = HOSHI_2;
             source.ryoshushoNenbun2 = HOSHI_4;
             source.gokeigaku2 = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.tsuchishoNo2 = HOSHI_16;
             source.nokigenYmd2 = HOSHI_11;
             source.hakkoYmd2 = HOSHI_11;
             source.honzei2 = HOSHI_13;
