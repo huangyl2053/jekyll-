@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.Vali
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.YoshikiYonnoniDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -115,7 +114,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onload(YoshikiYonnoniDiv div) {
 
-        InsuranceInformation insuranceInf = get引き継ぎデータ();
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
         if (UPDATE.equals(insuranceInf.get処理フラグ())
@@ -152,11 +151,6 @@ public class YoshikiYonnoni {
                     div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
                     div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
                     div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, false);
                     内部処理モード = 内部処理モード_修正;
                 } else {
                     div.getKanryoMessage().setVisible(false);
@@ -167,11 +161,6 @@ public class YoshikiYonnoni {
                     div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
                     div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
                     div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, false);
                     内部処理モード = 内部処理モード_削除;
                 }
             }
@@ -395,7 +384,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnSave(YoshikiYonnoniDiv div) {
 
-        InsuranceInformation insuranceInf = get引き継ぎデータ();
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
         if (内部処理モード_追加.equals(内部処理モード)) {
@@ -485,25 +474,7 @@ public class YoshikiYonnoni {
         div.getKanryoMessage().setVisible(true);
         div.getYoshikiButtonArea().setVisible(false);
         div.getYoshikiYonnoniMeisai().setVisible(false);
-
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(削除をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存する, false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
-
-        if (ADD.equals(insuranceInf.get処理フラグ())) {
-            // TODO
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        } else if (UPDATE.equals(insuranceInf.get処理フラグ())) {
-            // TODO
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        } else if (DELETE.equals(insuranceInf.get処理フラグ())) {
-            // TODO
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
-
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
     /**
@@ -570,7 +541,7 @@ public class YoshikiYonnoni {
      * @return KaigoHokenJigyoHokokuNenpo
      */
     public KaigoHokenJigyoHokokuNenpo 修正データの取得(YoshikiYonnoniDiv div) {
-        InsuranceInformation insuranceInf = get引き継ぎデータ();
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
         List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoDetal(
@@ -594,11 +565,14 @@ public class YoshikiYonnoni {
      * 引き継ぎデータ取得処理です。
      *
      */
-    private InsuranceInformation get引き継ぎデータ() {
+    private InsuranceInformation get引き継ぎデータ(YoshikiYonnoniDiv div) {
         InsuranceInformation 引き継ぎデータ
                 = ViewStateHolder.get(ViewStateKey.様式４の2, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(ADD);
+            引き継ぎデータ = new InsuranceInformation(
+                    ADD,
+                    new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey()),
+                    div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedValue());
         }
         return 引き継ぎデータ;
     }

@@ -79,31 +79,48 @@ public class ShutsuryokuKiKohoFactory {
      */
     public List<ShutsuryokuKiKoho> create出力期候補(boolean is期毎タイプ, RString 算定期) {
         KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト().filtered本算定期間();
-        boolean is法定納期 = false;
-        if (!RString.isNullOrEmpty(算定期) && Integer.parseInt(算定期.toString()) <= 期月リスト.get最終法定納期().get期AsInt()) {
-            is法定納期 = true;
+        if (!RString.isNullOrEmpty(算定期)
+                && Integer.parseInt(算定期.toString()) <= 期月リスト.get最終法定納期().get期AsInt()) {
+            return get出力期候補リストBy法定納期(算定期, 期月リスト, is期毎タイプ);
         }
-        if (is法定納期) {
-            return get出力期候補リストBy法定納期(期月リスト, is期毎タイプ);
-        }
-        return get出力期候補リストBy随時期(期月リスト);
+        return get出力期候補リストBy随時期(期月リスト, 算定期);
     }
 
-    private List<ShutsuryokuKiKoho> get出力期候補リストBy法定納期(KitsukiList 期月リスト, boolean is期毎タイプ) {
+    private List<ShutsuryokuKiKoho> get出力期候補リストBy法定納期(RString 算定期, KitsukiList 期月リスト, boolean is期毎タイプ) {
         NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance(調定年度)
                 .get本算定納入通知書制御情報().get納入通知書制御情報();
-        return get出力期候補リスト(is期毎タイプ, 期月リスト, 納入通知書制御情報);
-    }
-
-    private List<ShutsuryokuKiKoho> get出力期候補リストBy随時期(KitsukiList 期月リスト) {
+        ToshoShutsuryokuHoho 当初出力_出力方法 = 納入通知書制御情報.get当初出力_出力方法();
+        if (!納入通知書制御情報.getExists中期開始期()) {
+            納入通知書制御情報.set当初出力_中期開始期(設定なし);
+        }
+        if (!納入通知書制御情報.getExists後期開始期()) {
+            納入通知書制御情報.set当初出力_後期開始期(設定なし);
+        }
         List<ShutsuryokuKiKoho> 出力期候補リスト = new ArrayList<>();
         for (Kitsuki kitsuki : 期月リスト.toList()) {
-            ShutsuryokuKiKoho 出力期候補 = new ShutsuryokuKiKoho();
-            出力期候補.set期月(kitsuki);
-            出力期候補.set表示文字列(new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
-                    .append(kitsuki.get月().getコード()).append(文字列_月分).toRString());
-            出力期候補.set期月(kitsuki);
-            出力期候補リスト.add(出力期候補);
+            if (Integer.parseInt(算定期.toString()) <= kitsuki.get期AsInt()
+                    && kitsuki.get期AsInt() <= 期月リスト.get最終法定納期().get期AsInt()) {
+                ShutsuryokuKiKoho 出力期候補 = new ShutsuryokuKiKoho();
+                出力期候補.set期月(kitsuki);
+                set表示文字列(納入通知書制御情報, 当初出力_出力方法, 出力期候補, is期毎タイプ, kitsuki);
+                set出力期リスト(当初出力_出力方法, 期月リスト, 出力期候補, kitsuki);
+                出力期候補リスト.add(出力期候補);
+            }
+        }
+        return 出力期候補リスト;
+    }
+
+    private List<ShutsuryokuKiKoho> get出力期候補リストBy随時期(KitsukiList 期月リスト, RString 算定期) {
+        List<ShutsuryokuKiKoho> 出力期候補リスト = new ArrayList<>();
+        for (Kitsuki kitsuki : 期月リスト.toList()) {
+            if (kitsuki.get期AsInt() == Integer.parseInt(算定期.toString())) {
+                ShutsuryokuKiKoho 出力期候補 = new ShutsuryokuKiKoho();
+                出力期候補.set期月(kitsuki);
+                出力期候補.set表示文字列(new RStringBuilder().append(kitsuki.get期()).append(文字列_期)
+                        .append(kitsuki.get月().getコード()).append(文字列_月分).toRString());
+                出力期候補.set出力期リスト(Arrays.asList(kitsuki));
+                出力期候補リスト.add(出力期候補);
+            }
         }
         return 出力期候補リスト;
     }

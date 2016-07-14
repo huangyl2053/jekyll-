@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.riysfutggengmenjnintsho;
 
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.ChohyoSeigyoHanyoKeysDBD100015;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.ChohyoSeigyoHanyoKeysDBD100020;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.futangendogakuninteisho.FutanGendogakuNinteishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.hanyo.HokenshaNameOutput;
 import jp.co.ndensan.reams.db.dbd.entity.report.riysfutggengmenjnintsho.RiyoshaFutangakuGengakuMenjoNinteishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;

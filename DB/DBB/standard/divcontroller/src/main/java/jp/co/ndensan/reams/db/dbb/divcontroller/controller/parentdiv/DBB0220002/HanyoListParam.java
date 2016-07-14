@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0220002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistparam.HanyoListParamBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho.HanyoListShotokuJohoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220002.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002.HanyoListParamHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002.HanyoListParamValidationHandler;
@@ -36,8 +36,8 @@ public class HanyoListParam {
      * @param div HanyoListParamDiv
      * @return ResponseData<HanyoListParamBatchParameter>
      */
-    public ResponseData<HanyoListParamBatchParameter> onClick_btnExecute(HanyoListParamDiv div) {
-        HanyoListParamBatchParameter parameter = getHandler(div).onClick_btnExecute();
+    public ResponseData<HanyoListShotokuJohoBatchParameter> onClick_btnExecute(HanyoListParamDiv div) {
+        HanyoListShotokuJohoBatchParameter parameter = getHandler(div).onClick_btnExecute();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAction();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(parameter).addValidationMessages(validPairs).respond();

@@ -57,6 +57,8 @@ public class IraishoIkkatsuHakkoHandler {
         div.getDgNinteiChosaIraiTaishoIchiran().init();
         div.getTxtIraibiFrom().clearValue();
         div.getTxtIraibiTo().clearValue();
+        div.getTxtChosaDispMax().clearValue();
+        div.getNinteiChosaIraiTaishoIchiran().getDgNinteiChosaIraiTaishoIchiran().getDataSource().clear();
         List<RString> selectKeys = new ArrayList<>();
         selectKeys.add(COMMON_SELECTED);
         div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
@@ -79,6 +81,8 @@ public class IraishoIkkatsuHakkoHandler {
         div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().init();
         div.getTxtShujiiIkenshoSakuseiIraibiFrom().clearValue();
         div.getTxtShujiiIkenshoSakuseiIraibiTo().clearValue();
+        div.getTxtIkenshoDispMax().clearValue();
+        div.getShujiiIkenshoSakuseiIraiTaishoIchiran().getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getDataSource().clear();
         List<RString> selectKeys = new ArrayList<>();
         selectKeys.add(COMMON_SELECTED);
         div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
@@ -86,9 +90,6 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
         setShujiiChkShinseiTani(true);
         div.getChkShujiiIkenshoShutsuryoku().setSelectedItemsByKey(Collections.<RString>emptyList());
-        List<RString> disabledKeys = new ArrayList<>();
-        disabledKeys.add(CHOHYO_CHECKED);
-        div.getChkShujiiIkenshoShutsuryoku().setDisabledItemsByKey(disabledKeys);
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_SHUJII);
@@ -189,6 +190,9 @@ public class IraishoIkkatsuHakkoHandler {
     }
 
     private void setShujiiChkShinseiTani(boolean flag) {
+        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabled(flag);
+        div.getChkShujiiIkenshoSakuseiIraisho().setDisabled(flag);
+        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisabled(flag);
         if (!flag) {
             List<RString> shujiiIkenshoDisabledKeys = new ArrayList<>();
             List<RString> ocrDisabledKeys = new ArrayList<>();
@@ -200,13 +204,6 @@ public class IraishoIkkatsuHakkoHandler {
                 div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(ocrDisabledKeys);
             }
         }
-        // TODO 帳票「主治医意見書記入用紙」が未実装
-        List<RString> disabledKeys = new ArrayList<>();
-        disabledKeys.add(COMMON_SELECTED);
-        disabledKeys.add(CHOHYO_CHECKED);
-        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(disabledKeys);
-        div.getChkShujiiIkenshoSakuseiIraisho().setDisabled(flag);
-        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisabled(flag);
     }
 
     private void setNinteiChkShinseiTani(boolean flag) {
@@ -218,17 +215,17 @@ public class IraishoIkkatsuHakkoHandler {
         if (!flag) {
             List<RString> ninteiChosahyoDisabledKeys = new ArrayList<>();
             List<RString> ocrDisabledKeys = new ArrayList<>();
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            if (!OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
                 ninteiChosahyoDisabledKeys.add(COMMON_SELECTED);
             } else {
                 ocrDisabledKeys.add(COMMON_SELECTED);
             }
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            if (!OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
                 ninteiChosahyoDisabledKeys.add(CHOHYO_CHECKED);
             } else {
                 ocrDisabledKeys.add(CHOHYO_CHECKED);
             }
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            if (!OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
                 ninteiChosahyoDisabledKeys.add(SHUTSU_CHECKED);
             } else {
                 ocrDisabledKeys.add(SHUTSU_CHECKED);

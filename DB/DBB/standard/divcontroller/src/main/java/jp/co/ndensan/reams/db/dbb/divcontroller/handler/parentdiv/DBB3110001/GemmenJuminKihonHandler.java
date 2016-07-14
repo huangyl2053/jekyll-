@@ -122,6 +122,7 @@ public class GemmenJuminKihonHandler {
     private static final RString 画面モード_取消 = new RString("取消");
     private static final RString 画面モード_訂正 = new RString("訂正");
     private static final RString 減免決定通知書 = new RString("保険料減免決定通知書");
+    private static final RString 賦課台帳 = new RString("賦課台帳（更正決定決議書）");
     private static final RString 減免取消通知書 = new RString("保険料減免取消通知書");
     private static final RString 発行するボタン = new RString("btnPrt");
 //    private static final RString 帳票分類ID_本算定 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
@@ -964,6 +965,7 @@ public class GemmenJuminKihonHandler {
         発行パネル.getPritPublish2().setVisible(true);
         発行パネル.getPritPublish3().setVisible(true);
         発行パネル.getPritPublish4().setVisible(true);
+        発行パネル.getPritPublish4().setTitle(賦課台帳);
         発行パネル.getPritPublish1().setTitle(減免決定通知書);
         if ((定値_ゼロ.equals(減免状態区分) && 定値_ゼロ.equals(減免作成区分))
                 || (定値_ゼロ.equals(減免状態区分) && 定値_ミ.equals(減免作成区分))) {
@@ -1045,10 +1047,10 @@ public class GemmenJuminKihonHandler {
         boolean is減免決定通知書checked;
         boolean is取消決定通知書checked;
         if (減免決定通知書.equals(発行パネル.getPritPublish1().getTitle())) {
-            is減免決定通知書checked = 発行パネル.getPritPublish1().disabledPublishCheckBox();
+            is減免決定通知書checked = 発行パネル.getPritPublish1().isIsPublish() && 発行パネル.getPritPublish1().isVisible();
             is取消決定通知書checked = false;
         } else {
-            is取消決定通知書checked = 発行パネル.getPritPublish1().disabledPublishCheckBox();
+            is取消決定通知書checked = 発行パネル.getPritPublish1().isIsPublish() && 発行パネル.getPritPublish1().isVisible();
             is減免決定通知書checked = false;
         }
         RDate 発行日_減免 = 発行パネル.getPritPublish1().getComdiv1().getIssueDate();
@@ -1061,10 +1063,10 @@ public class GemmenJuminKihonHandler {
         FlexibleDate 納入_送付日 = 送付日_納入 == null ? null : new FlexibleDate(送付日_納入.toString());
         RString 減免_文書番号 = 発行パネル.getPritPublish1().getBunshoBango1().get文書番号();
 
-        boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().disabledPublishCheckBox();
-        boolean is納入通知書checked = 発行パネル.getPritPublish3().disabledPublishCheckBox();
-        boolean is賦課台帳checked = 発行パネル.getPritPublish4().disabledPublishCheckBox();
-        if (is減免決定通知書checked || is取消決定通知書checked || is変更通知書兼特徴checked || is納入通知書checked || is賦課台帳checked) {
+        boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().isIsPublish() && 発行パネル.getPritPublish2().isVisible();
+        boolean is納入通知書checked = 発行パネル.getPritPublish3().isIsPublish() && 発行パネル.getPritPublish3().isVisible();
+        boolean is賦課台帳checked = 発行パネル.getPritPublish4().isIsPublish() && 発行パネル.getPritPublish4().isVisible();
+        if (!(is減免決定通知書checked || is取消決定通知書checked || is変更通知書兼特徴checked || is納入通知書checked || is賦課台帳checked)) {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace(出力対象チェックMESSAGE.toString()).evaluate());
         }
         通知書発行パラメータ.set減免決定_出力有無(is減免決定通知書checked);

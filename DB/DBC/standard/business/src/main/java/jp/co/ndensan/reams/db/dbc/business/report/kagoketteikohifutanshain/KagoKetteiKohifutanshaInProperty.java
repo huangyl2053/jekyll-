@@ -27,7 +27,6 @@ public class KagoKetteiKohifutanshaInProperty
         extends ReportPropertyBase<KagoKetteiKohifutanshaInSource> {
 
     private final List<RString> pageBreakKeys;
-    private static final RString FORMAT = new RString("\"");
 
     /**
      * コンストラクタです。

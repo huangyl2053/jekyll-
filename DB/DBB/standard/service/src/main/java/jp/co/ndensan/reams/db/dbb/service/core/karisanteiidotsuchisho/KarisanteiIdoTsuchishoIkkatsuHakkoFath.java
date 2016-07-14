@@ -82,6 +82,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
     private static final RString 定数_特徴方法 = new RString("getTkKibetsuGaku");
     private static final RString 定数_普徴方法 = new RString("getFuKibetsuGaku");
     private static final RString タイトル_作成年月日 = new RString("作成年月日");
+    private static final RString タイトル_作成日時 = new RString("作成日時");
     private static final RString タイトル_作成時刻 = new RString("作成時刻");
     private static final RString タイトル_賦課年度 = new RString("賦課年度");
     private static final RString タイトル_郵便番号 = new RString("郵便番号");
@@ -274,6 +275,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                     bodyList.add(isNull(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額03()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額03(), 0));
                 }
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -393,6 +395,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                             : DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01(), 0));
                 }
                 bodyList.add(RString.EMPTY);
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -443,7 +446,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
             List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List) {
 
         List<RString> headerList = new ArrayList<>();
-        headerList.add(タイトル_作成年月日);
+        headerList.add(タイトル_作成日時);
         headerList.add(タイトル_作成時刻);
         headerList.add(タイトル_賦課年度);
         headerList.add(タイトル_通知書番号);
@@ -539,6 +542,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                     bodyList.add(生活保護扶助名称);
                 }
                 bodyList.add(editTutishoKyoutuuKoumoku(編集後仮算定通知書共通情報));
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -675,6 +679,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                 }
                 set次期以降期別金額(編集後仮算定通知書共通情報, 出力期, bodyList);
                 bodyList.add(editTutishoKyoutuuKoumoku(編集後仮算定通知書共通情報));
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -700,13 +705,18 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                 || 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額リスト().isEmpty()) {
             bodyList.add(RString.EMPTY);
         } else {
+            boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額リスト();
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (Integer.parseInt(出力期.toString()) == 普徴期別金額.get期()) {
+                    区分 = true;
                     bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }
+            }
+            if (!区分) {
+                bodyList.add(RString.EMPTY);
             }
         }
     }
@@ -717,13 +727,18 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
                 || 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額リスト().isEmpty()) {
             bodyList.add(RString.EMPTY);
         } else {
+            boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額リスト();
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (Integer.parseInt(出力期.toString()) == 普徴期別金額.get期() + INT_1) {
+                    区分 = true;
                     bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }
+            }
+            if (!区分) {
+                bodyList.add(RString.EMPTY);
             }
         }
     }
@@ -1033,5 +1048,14 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFath {
      */
     public boolean isNull(Object 項目) {
         return 項目 == null;
+    }
+
+    private void toBodyList(List<RString> bodyList) {
+        for (int i = INT_0; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
+        }
     }
 }

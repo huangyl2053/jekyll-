@@ -30,13 +30,14 @@
         <result property="ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column="DbT5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteichosaIraiRirekiNo" column="DbT5601_ninteichosaIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="chosaItakuryo" column="DbT5601_chosaItakuryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosaItakuryo" column="DbT5601_chosaItakuryo"/>
         <result property="chosaItakuryoShiharaiMemo" column="DbT5601_chosaItakuryoShiharaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="isGinkoFurikomiShutsuryoku" column="DbT5601_isGinkoFurikomiShutsuryoku" />
         <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tanka" column="DbT5031_tanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="get調査員情報検索" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter" fetchSize="500">
         SELECT
         DbT7051."shoKisaiHokenshaNo" AS "DbT7051_shoKisaiHokenshaNo",
         DbT7051."shichosonMeisho" AS "DbT7051_shichosonMeisho",
@@ -91,7 +92,7 @@
         </if>
     </select>
     <select resultOrdered="true" id="get調査員実績一覧検索" resultMap="resultMap_GaikyoChosaRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter" fetchSize="500">
        SELECT
         DbT5202."shinseishoKanriNo" AS "DbT5202_shinseishoKanriNo",
         DbT5202."ninteichosaRirekiNo" AS "DbT5202_ninteichosaRirekiNo",
@@ -161,5 +162,46 @@
             DbT5601."ninteichosainCode" desc,
             DbT5601."shinseishoKanriNo" desc,
             DbT5601."ninteichosaIraiRirekiNo" desc
+    </select>
+     <select resultOrdered="true" id="get認定調査報酬単価" resultMap="resultMap_GaikyoChosaRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuTankaMybatisParamter" fetchSize="500">
+       SELECT
+          DbT5031.tanka as "DbT5031_tanka"
+        FROM
+        rgdb."DbT5031NinteiChosaHoshuTanka" AS DbT5031
+      INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+        ON
+        DbT5202."shinseishoKanriNo" =#{申請書管理番号}
+        AND
+        DbT5202."ninteichosaRirekiNo" =#{認定調査依頼履歴番号}
+        AND
+        DbT5202."gaikyoChosaTextImageKubun"=#{イメージ区分}
+     INNER JOIN (
+         SELECT
+              CASE WHEN
+                DbT5210.remban ='1'
+              THEN 
+                 '1'
+              ELSE
+                 '2'
+               END AS "homonShubetsu"
+         FROM
+            rgdb."DbT5210NinteichosahyoShisetsuRiyo" as DbT5210
+         WHERE
+            DbT5210."shinseishoKanriNo" = #{申請書管理番号}
+         AND
+            DbT5210."ninteichosaRirekiNo" = #{認定調査依頼履歴番号}
+         AND
+           DbT5210."shisetsuRiyoFlag" = TRUE
+           ) X5210
+         ON
+            DbT5031."homonShubetsu" =  X5210."homonShubetsu"  
+
+        WHERE
+           DbT5031."chosaKubun" = DbT5202."ninteichousaIraiKubunCode"
+        AND
+           DbT5031."kaishiYM" <![CDATA[<=]]> #{認定調査実施日} 
+        AND
+           #{認定調査実施日}<![CDATA[<=]]>DbT5031."shuryoYM"       
     </select>
 </mapper>

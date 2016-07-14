@@ -111,6 +111,9 @@ public class ShikakuHenkouIdou {
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnReSearch(ShikakuHenkouIdouDiv div) {
         RealInitialLocker.release(前排他ロックキー);
+        if (new RString("DBAMN61002").equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).parameter(new RString("広域内転居"));
+        }
         return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
     }
 

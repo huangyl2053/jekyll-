@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HokenshaNinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.DBZ5100001StateName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.DBZ5100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.KaigoNinteiShinseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ5100001.KaigoNinteiShinseiKensakuHandler;
@@ -45,8 +44,15 @@ public class KaigoNinteiShinseiKensaku {
     private final RString 要介護認定申請取下_サービス種類変更 = new RString("DBDUC51213");
     private final RString 要介護認定申請延期 = new RString("DBDUC51214");
     private final RString 要介護認定申請却下 = new RString("DBDUC51215");
-    private final RString 要介護認定申請者登録 = new RString("DBD5120001");
-    private final RString みなし2号等受付 = new RString("DBE1010001");
+    private final RString 要介護認定申請受付新規 = new RString("DBDUC51201");
+    private final RString 要介護認定申請受付更新 = new RString("DBDUC51202");
+    private final RString 要介護認定申請受付区分変更 = new RString("DBDUC51203");
+    private final RString 要介護認定申請受付サービス種類変更 = new RString("DBDUC51204");
+    private final RString 職権記載 = new RString("DBDUC51216");
+    private final RString 職権取消全喪失 = new RString("DBDUC51217");
+    private final RString 受給者転入 = new RString("DBDUC51205");
+
+    private final RString 検索状態 = new RString("検索状態");
 
     /**
      * コンストラクタです。
@@ -63,8 +69,10 @@ public class KaigoNinteiShinseiKensaku {
      * @return ResponseData<KaigoNinteiShinseiKensakuDiv>
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onLoad(KaigoNinteiShinseiKensakuDiv div) {
+
         getHandler(div).initialize();
-        return ResponseData.of(div).setState(DBZ5100001StateName.初期表示);
+        getHandler(div).setJyoTai(get受給と認定の判定(), RString.EMPTY);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -75,6 +83,18 @@ public class KaigoNinteiShinseiKensaku {
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnJokenClear(KaigoNinteiShinseiKensakuDiv div) {
         div.getCcdNinteiShinseishaFinder().initialize();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 再検索ボタン。
+     *
+     * @param div KaigoNinteiShinseiKensakuDiv
+     * @return ResponseData<KaigoNinteiShinseiKensakuDiv>
+     */
+    public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnSaiKensaku(KaigoNinteiShinseiKensakuDiv div) {
+        div.getCcdNinteiShinseishaFinder().initialize();
+        getHandler(div).setJyoTai(get受給と認定の判定(), RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -90,7 +110,8 @@ public class KaigoNinteiShinseiKensaku {
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-        return ResponseData.of(div).setState(DBZ5100001StateName.一覧表示);
+        getHandler(div).setJyoTai(get受給と認定の判定(), 検索状態);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -103,14 +124,10 @@ public class KaigoNinteiShinseiKensaku {
 
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getKensakuKekka().
                 getDgKensakuKekkaIchiran().getActiveRow().getShinseishoKnriNo());
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
         GyomuBunrui bunrui = get受給と認定の判定();
-        if (GyomuBunrui.介護事務.equals(bunrui) && 要介護認定申請者登録.equals(menuID)) {
+        if (GyomuBunrui.介護事務.equals(bunrui)
+                || GyomuBunrui.介護認定.equals(bunrui)) {
 
-            return ResponseData.of(div).forwardWithEventName(DBZ5100001TransitionEventName.検索結果選択).respond();
-        }
-        if (GyomuBunrui.介護認定.equals(bunrui) && みなし2号等受付.equals(menuID)) {
             return ResponseData.of(div).forwardWithEventName(DBZ5100001TransitionEventName.検索結果選択).respond();
         }
         return ResponseData.of(div).respond();
@@ -162,7 +179,14 @@ public class KaigoNinteiShinseiKensaku {
                 || 要介護認定申請取下_区分変更.equals(uiContainerId)
                 || 要介護認定申請取下_サービス種類変更.equals(uiContainerId)
                 || 要介護認定申請延期.equals(uiContainerId)
-                || 要介護認定申請却下.equals(uiContainerId)) {
+                || 要介護認定申請却下.equals(uiContainerId)
+                || 要介護認定申請受付新規.equals(uiContainerId)
+                || 要介護認定申請受付更新.equals(uiContainerId)
+                || 要介護認定申請受付区分変更.equals(uiContainerId)
+                || 要介護認定申請受付サービス種類変更.equals(uiContainerId)
+                || 職権記載.equals(uiContainerId)
+                || 職権取消全喪失.equals(uiContainerId)
+                || 受給者転入.equals(uiContainerId)) {
 
             return GyomuBunrui.介護事務;
         }

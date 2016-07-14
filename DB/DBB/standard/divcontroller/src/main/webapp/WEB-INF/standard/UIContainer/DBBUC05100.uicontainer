@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC05100",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "本算定異動（現年度）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0510001",
+     "toLayoutTitle": "本算定異動（現年度）",
+     "toState": "現年度異動賦課"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0510001",
+     "layoutTitle": "本算定異動（現年度）",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

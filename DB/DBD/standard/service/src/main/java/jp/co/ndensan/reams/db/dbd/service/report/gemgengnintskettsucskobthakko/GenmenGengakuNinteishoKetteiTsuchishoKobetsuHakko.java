@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.GemmenGengakuNinteishoKetteiTs
 import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.futangendogakuninteisho.FutanGendogakuNinteishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.homkaigriysfutggengnintsho.HomKaigRiysFutgGengNintshoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.riysfutggengmenjnintsho.RiysFutgGengMenjNintshoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.ShakaifukuRiyoshaFutanKeigenItem;
+import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.shakfukushojriysfutkeigkettsuchisho.ShakFukusHojRiysFutKeigTaisKetTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.TokubetsuchiikiKasanGemmenItem;
 import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.futangendogakuketteitsuchisho.FutanGendogakuKetteiTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.homkaigriysfutggengkettsuchisho.HomKaigRiysFutgGengKettsuchishoItem;
@@ -257,8 +257,8 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
 
             ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減
                     = getShafukuKeigen(被保険者番号, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 履歴番号);
-            List<ShakaifukuRiyoshaFutanKeigenItem> itemList = new ArrayList<>();
-            ShakaifukuRiyoshaFutanKeigenItem item = new ShakaifukuRiyoshaFutanKeigenItem(
+            List<ShakFukusHojRiysFutKeigTaisKetTsuchishoItem> itemList = new ArrayList<>();
+            ShakFukusHojRiysFutKeigTaisKetTsuchishoItem item = new ShakFukusHojRiysFutKeigTaisKetTsuchishoItem(
                     社会福祉法人等利用者負担軽減,
                     ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
                     AtesakiFactory.createInstance(uaFt250Entity),

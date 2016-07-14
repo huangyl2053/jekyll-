@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  * 帳票設計_DBBRP00007_10_保険料納入通知書（本算定）【ブックタイプ】のプリントサービスです。
  *
- * @reamsid_L DBB-9110-010 huangh
+ * @reamsid_L DBB-9110-100 huangh
  */
 public class HokenryoNonyuTsuchishoBookPrintService {
 

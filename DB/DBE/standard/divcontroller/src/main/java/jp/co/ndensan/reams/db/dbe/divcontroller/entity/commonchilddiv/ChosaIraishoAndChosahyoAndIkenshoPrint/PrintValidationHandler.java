@@ -79,7 +79,7 @@ public class PrintValidationHandler {
             }
 
             RString selectKey = div.getRadJyushinKikan().getSelectedKey();
-            if (div.getShindanMeirei().isVisible()) {
+            if (!div.getShindanMeirei().isDisplayNone()) {
                 if (KEY0.equals(selectKey)) {
 
                     if (div.getTxtJyushinymd().getValue() == null) {

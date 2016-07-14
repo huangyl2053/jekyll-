@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link NenkinTokuchoKaifuJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-012 yangchenbing
  */
 public class NenkinTokuchoKaifuJohoBuilder {
 

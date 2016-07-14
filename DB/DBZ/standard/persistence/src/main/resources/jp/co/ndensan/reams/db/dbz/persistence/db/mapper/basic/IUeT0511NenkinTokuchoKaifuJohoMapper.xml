@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： UeT0511NenkinTokuchoKaifuJohoマスタとエンティティのマッピング用XMLです。 -->
+<!--@reamsid_L DBZ-9999-022 yangchenbing-->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper">
@@ -32,8 +33,7 @@
         "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" as "ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo",
         "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" as "ueT0511NenkinTokuchoKaifuJoho_nenkinCode",
         "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" as "ueT0511NenkinTokuchoKaifuJoho_koseiCityCode",
-        "UeT0511NenkinTokuchoKaifuJoho"."renban" as "ueT0511NenkinTokuchoKaifuJoho_renban"
-        ,
+        "UeT0511NenkinTokuchoKaifuJoho"."renban" as "ueT0511NenkinTokuchoKaifuJoho_renban",
         "UeT0511NenkinTokuchoKaifuJoho"."shoriTimestamp" as "ueT0511NenkinTokuchoKaifuJoho_shoriTimestamp",
         "UeT0511NenkinTokuchoKaifuJoho"."renkeiShubetsu" as "ueT0511NenkinTokuchoKaifuJoho_renkeiShubetsu",
         "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" as "ueT0511NenkinTokuchoKaifuJoho_hosokuTsuki",
@@ -147,7 +147,7 @@
         <result property="kokuhoYoteiSoshitsuKubun" column="ueT0511NenkinTokuchoKaifuJoho_kokuhoYoteiSoshitsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="selectAllNoDeleted" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity">
+    <select resultOrdered="true" id="selectAllNoDeleted" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity">
         <include refid="noDeleted_UeT0511NenkinTokuchoKaifuJoho" />
     </select>
 </mapper>

@@ -29,7 +29,7 @@ public class ChosahoshuichiranEditor implements IChosahoshuichiranEditor {
     private static final RString DATE_秒 = new RString("秒");
 
     /**
-     * NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity インスタンスを生成します。
+     * NinteiChosaHoshuShokaiCsvEntity インスタンスを生成します。
      *
      * @param item NinteiChosaHoshuShokaiFlowBusiness
      */
@@ -54,12 +54,14 @@ public class ChosahoshuichiranEditor implements IChosahoshuichiranEditor {
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
-        source.listGokei_1 = new RString(item.get在宅_初合計());
-        source.listGokei_2 = new RString(item.get在宅_再合計());
-        source.listGokei_3 = new RString(item.get施設_初合計());
-        source.listGokei_4 = new RString(item.get施設_再合計());
-        source.listGokei_5 = new RString(item.get委託料合計().toString());
-        source.listchosasakuseiryo_1 = new RString(Integer.toString(item.getNo()));
+        if (0 < item.get在宅_初合計()) {
+            source.listGokei_1 = new RString(item.get在宅_初合計());
+            source.listGokei_2 = new RString(item.get在宅_再合計());
+            source.listGokei_3 = new RString(item.get施設_初合計());
+            source.listGokei_4 = new RString(item.get施設_再合計());
+            source.listGokei_5 = new RString(item.get認定調査委託料());
+        }
+        source.listchosasakuseiryo_1 = new RString(Integer.toString(item.get番号()));
         source.listchosasakuseiryo_2 = item.get調査員_コード();
         source.listchosasakuseiryo_3 = item.get調査員_氏名();
         source.listchosasakuseiryo_4 = item.get依頼日().toDateString();

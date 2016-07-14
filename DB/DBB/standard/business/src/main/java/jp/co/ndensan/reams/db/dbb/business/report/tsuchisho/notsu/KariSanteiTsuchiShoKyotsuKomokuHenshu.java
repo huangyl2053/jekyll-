@@ -588,7 +588,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
+            納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
         }
         return 納付済額;
     }
@@ -596,7 +596,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By賦課情報(RString メソッド_賦課, FukaJoho 賦課情報, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
+            納付済額 = 納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
         }
         return 納付済額;
     }
@@ -654,7 +654,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         Class clazz = 収入情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            納付額 = ((Decimal) getMethod.invoke(収入情報));
+            納付額 = nullToZero((Decimal) getMethod.invoke(収入情報));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -671,7 +671,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         Class clazz = 賦課情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            納付額 = ((Decimal) getMethod.invoke(賦課情報));
+            納付額 = nullToZero((Decimal) getMethod.invoke(賦課情報));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -705,5 +705,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         return 随時.equals(期月.get月処理区分().getName())
                 || 現年随時.equals(期月.get月処理区分().getName()) ? 随時 : RString.EMPTY;
+    }
+
+    private Decimal nullToZero(Decimal number) {
+        if (number == null) {
+            return Decimal.ZERO;
+        }
+        return number;
     }
 }

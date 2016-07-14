@@ -499,8 +499,6 @@ public class KakushuTsuchishoSakuseiFath {
         requireNonNull(仮算定_本算定_過年度区分, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_仮算定_本算定_過年度区分.toString()));
 
         RString 納入通知書タイプ = get納入通知書タイプ(出力期);
-        System.out.println("納入通知書タイプtest" + 納入通知書タイプ);
-        System.out.println("出力期test" + 出力期);
         if (仮算定_区分.equals(仮算定_本算定_過年度区分)) {
             return get仮算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
         } else if (本算定_区分.equals(仮算定_本算定_過年度区分)) {

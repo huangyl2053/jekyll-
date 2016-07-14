@@ -235,8 +235,12 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             source.gokeigaku = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd = 印字位置1の納付書.get納期限表記();
             source.honzei = 印字位置1の納付書.get納付額表記();
-            source.ocr1 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr1 = 印字位置1の納付書.getOcr().get(1);
+            }
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
@@ -248,7 +252,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.coverNofu_tsuchishoNo = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo = HOSHI_4;
@@ -256,7 +260,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             source.kibetsu = HOSHI_2;
             source.ryoshushoNenbun = HOSHI_4;
             source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.coverNofu_tsuchishoNo = HOSHI_16;
             source.nokigenYmd = HOSHI_11;
             source.hakkoYmd = HOSHI_11;
             source.honzei = HOSHI_13;

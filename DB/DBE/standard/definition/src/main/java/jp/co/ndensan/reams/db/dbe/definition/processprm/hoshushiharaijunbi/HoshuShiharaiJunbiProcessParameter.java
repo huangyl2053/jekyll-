@@ -2,9 +2,13 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HoshuShiharaiJunbiProcessParameter implements IBatchProcessParameter {
 
-    private RDateTime jissekidaterangefrom;
-    private RDateTime jissekidaterangeto;
+    private FlexibleDate jissekidaterangefrom;
+    private FlexibleDate jissekidaterangeto;
     private FlexibleDate furikomishiteiday;
     private List<RString> chkchosa;
     private List<RString> chkshujii;
@@ -34,8 +38,8 @@ public class HoshuShiharaiJunbiProcessParameter implements IBatchProcessParamete
      * @param chkshujii 主治医意見書作成報酬対象
      * @param chkshinsakai 審査会委員報酬対象
      */
-    public HoshuShiharaiJunbiProcessParameter(RDateTime jissekidaterangefrom,
-            RDateTime jissekidaterangeto,
+    public HoshuShiharaiJunbiProcessParameter(FlexibleDate jissekidaterangefrom,
+            FlexibleDate jissekidaterangeto,
             FlexibleDate furikomishiteiday,
             List<RString> chkchosa,
             List<RString> chkshujii,
@@ -55,10 +59,19 @@ public class HoshuShiharaiJunbiProcessParameter implements IBatchProcessParamete
      * @return HoshuShiharaiJunbiMybatisParameter
      */
     public HoshuShiharaiJunbiMybatisParameter toHoshuShiharaiJunbiProcessParameter() {
+
+        RString 報酬基準日 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書報酬基準日, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援);
+        RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援);
         return HoshuShiharaiJunbiMybatisParameter.creatParameter(
                 jissekidaterangefrom,
                 jissekidaterangeto,
-                furikomishiteiday
-        );
+                furikomishiteiday,
+                ShoriJotaiKubun.通常.getコード(),
+                ShoriJotaiKubun.延期.getコード(),
+                イメージ区分,
+                報酬基準日,
+                new RString("1").equals(報酬基準日));
     }
 }

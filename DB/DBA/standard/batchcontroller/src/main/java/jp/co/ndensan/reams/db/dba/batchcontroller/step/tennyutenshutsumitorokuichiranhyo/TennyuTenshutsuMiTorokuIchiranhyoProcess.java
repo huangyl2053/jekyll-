@@ -140,8 +140,30 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
                 }
             });
         }
-        RString backShichosonCode = new RString("back");
+        if (processParamter.getShichosoncode().size() > 1) {
+            setFilePath(RString.EMPTY, spoolWorkPath);
+            set全市町村Csv();
+        } else {
+            set市町村コードCsv(spoolWorkPath);
+        }
+        if (!eucCsvList.isEmpty()) {
+            eucCsvWriter.close();
+            manager.spool(eucFilePath);
+        }
+        TennyuTenshutsuMiTorokuIchiranhyoReport report = TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(headItem, bodyItemList);
+        report.writeBy(reportSourceWriter);
+
+    }
+
+    private void set全市町村Csv() {
+        for (TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity eucCsvEntity : eucCsvList) {
+            eucCsvWriter.writeLine(eucCsvEntity);
+        }
+    }
+
+    private void set市町村コードCsv(RString spoolWorkPath) {
         int i = 1;
+        RString backShichosonCode = new RString("back");
         for (TennyuTenshutsuMitorokuIchiranhyoEucCsvEntity eucCsvEntity : eucCsvList) {
             RString shichosonCode = eucCsvEntity.getShichosonCode();
             if (!backShichosonCode.equals(shichosonCode)) {
@@ -154,13 +176,6 @@ public class TennyuTenshutsuMiTorokuIchiranhyoProcess extends BatchProcessBase<T
             eucCsvWriter.writeLine(eucCsvEntity);
             i++;
         }
-        if (!eucCsvList.isEmpty()) {
-            eucCsvWriter.close();
-            manager.spool(eucFilePath);
-        }
-        TennyuTenshutsuMiTorokuIchiranhyoReport report = TennyuTenshutsuMiTorokuIchiranhyoReport.createFrom(headItem, bodyItemList);
-        report.writeBy(reportSourceWriter);
-
     }
 
     private void setFilePath(RString shichosonCode, RString spoolWorkPath) {

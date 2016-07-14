@@ -30,6 +30,7 @@ public class ShisetsuJohoHandler {
     private static final RString 被保険者 = new RString("被保険者");
     private static final RString 他市町村住所地特例者 = new RString("他市町村住所地特例者");
     private static final RString 適用除外者 = new RString("適用除外者");
+    private static final RString 事業者入力モード = new RString("事業者入力モード");
 
     /**
      * コンストラクタです。
@@ -88,12 +89,17 @@ public class ShisetsuJohoHandler {
                 div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
                 div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             }
-            if (適用除外者.equals(ViewStateHolder.get(ViewStateKeys.適用除外者, RString.class))) {
+            if (適用除外者.equals(ViewStateHolder.get(ViewStateKeys.適用除外者, RString.class))
+                    || 事業者入力モード.equals(ViewStateHolder.get(ViewStateKeys.事業者入力モード, RString.class))) {
 
                 div.getRadKaigoHokenShisetsu().setVisible(false);
                 div.getRadOtherTokureiShisetsu().setVisible(false);
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
                 div.getDdlDaichoShubetsu().setVisible(false);
+                if (事業者入力モード.equals(ViewStateHolder.get(ViewStateKeys.事業者入力モード, RString.class))) {
+
+                    div.getTxtNyuryokuShisetsuKodo().setLabelLText(new RString("事業者"));
+                }
             }
         }
     }
@@ -144,7 +150,8 @@ public class ShisetsuJohoHandler {
                 && div.getRadKaigoHokenShisetsu().getSelectedKey() != null
                 && !div.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
                 || (台帳種別表示無し.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))
-                && 他市町村住所地特例者.equals(ViewStateHolder.get(ViewStateKeys.他市町村住所地特例者, RString.class))
+                && (他市町村住所地特例者.equals(ViewStateHolder.get(ViewStateKeys.他市町村住所地特例者, RString.class))
+                || 事業者入力モード.equals(ViewStateHolder.get(ViewStateKeys.事業者入力モード, RString.class)))
                 && div.getRadKaigoHokenShisetsu().getSelectedKey() != null
                 && !div.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())) {
 
