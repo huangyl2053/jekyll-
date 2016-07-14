@@ -43,7 +43,7 @@
         DbT7051KoseiShicho."shichosonMeisho" as "DbT7051KoseiShicho_shichosonMeisho",
         DbT1001Hiho."koikinaiTokureiSochimotoShichosonCode" as "DbT7051Kosei_shichosonCode2",
         DbT7051Kosei."shichosonMeisho" as "DbT7051Kosei_shichosonMeisho2",
-        DbT7056Gappei."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
+        DbT1001Hiho."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
         DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho",
         DbT1001Hiho."lastUpdateTimestamp" as "DbT1001Hiho_lastUpdateTimestamp"
 
