@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBDUC55201",
+ "uiContainerName": "DBDUC55203",
  "displayWizard": false,
  "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
-   "name": "特殊処理（追加）",
+   "name": "特殊処理（削除）",
    "transitionList": [
     {
      "id": "1",
@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5520001",
      "toLayoutTitle": "特殊処理　履歴修正",
-     "toState": "追加"
+     "toState": "削除"
     },
     {
      "id": "3",
