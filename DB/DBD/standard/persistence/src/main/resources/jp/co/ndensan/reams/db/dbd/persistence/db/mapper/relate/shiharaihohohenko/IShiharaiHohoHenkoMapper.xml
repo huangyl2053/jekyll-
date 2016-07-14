@@ -54,7 +54,7 @@
         AND "dbT4021ShiharaiHohoHenko_kanriKubun",
         AND "dbT4021ShiharaiHohoHenko_rirekiNo" DESC
     </select>
-    <select id="find償還払支給申請" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo" resultOrdered="true">
+    <!--    <select id="find償還払支給申請" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo" resultOrdered="true">
         SELECT
         dbt3034.*,
         dbt3036.*,
@@ -112,5 +112,5 @@
         dbt3036."dbT3036ShokanHanteiKekka_seiriNo"
         dbt3036."dbT3036ShokanHanteiKekka_serviceTeikyoYM"
         dbt3053."dbT3053ShokanShukei_jigyoshaNo"
-    </select>
+    </select>-->
 </mapper>
