@@ -25,7 +25,8 @@ public enum DBE5100001StateName implements IStateEnumerations {
     開催結果登録("開催結果登録"),
     データ取込み_モバイル("データ取込み_モバイル"),
     結果登録_OCR("結果登録_OCR"),
-    事前審査結果登録("事前審査結果登録");
+    事前審査結果登録("事前審査結果登録"),
+    審査会委員割付("審査会委員割付");
 
     private final RString name;
 

@@ -20,7 +20,8 @@ public enum DBE5100001TransitionEventName implements IContainerEvents {
     データ出力を実行する("データ出力を実行する"),
     審査会対象者割付へ遷移する("審査会対象者割付へ遷移する"),
     自動割付を実行する("自動割付を実行する"),
-    データ取込みを実行する("データ取込みを実行する");
+    データ取込みを実行する("データ取込みを実行する"),
+    審査会開催予定登録2へ("審査会開催予定登録2へ");
 
     private final RString name;
 

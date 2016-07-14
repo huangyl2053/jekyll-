@@ -15,8 +15,7 @@ public enum DBA4020011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    他市町村住所特例者照会("他市町村住所特例者照会"),
-    完了("完了");
+    他市町村住所特例者照会("他市町村住所特例者照会");
 
     private final RString name;
 
