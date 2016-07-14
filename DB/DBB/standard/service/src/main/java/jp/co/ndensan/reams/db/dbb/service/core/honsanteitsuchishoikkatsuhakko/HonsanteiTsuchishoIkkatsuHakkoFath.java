@@ -326,6 +326,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                     bodyList.add(編集後本算定通知書共通情報.get更正後().get特別徴収対象年金());
                 }
                 set本徴収額(編集後本算定通知書共通情報, bodyList);
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -493,6 +494,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                     bodyList.add(編集後本算定通知書共通情報.get更正後().get徴収方法());
                 }
                 bodyList.add(get口座情報(編集後本算定通知書共通情報));
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -637,6 +639,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                         ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
                 set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
                 bodyList.add(get口座情報(編集後本算定通知書共通情報));
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -662,13 +665,18 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 || 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト().isEmpty()) {
             bodyList.add(RString.EMPTY);
         } else {
+            boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (Integer.parseInt(出力期.toString()) == 普徴期別金額.get期()) {
+                    区分 = true;
                     bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }
+            }
+            if (!区分) {
+                bodyList.add(RString.EMPTY);
             }
         }
     }
@@ -679,13 +687,18 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 || 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト().isEmpty()) {
             bodyList.add(RString.EMPTY);
         } else {
+            boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (Integer.parseInt(出力期.toString()) == 普徴期別金額.get期() + INT_1) {
+                    区分 = true;
                     bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }
+            }
+            if (!区分) {
+                bodyList.add(RString.EMPTY);
             }
         }
     }
@@ -1100,5 +1113,14 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
      */
     public boolean isNull(Object 項目) {
         return 項目 == null;
+    }
+
+    private void toBodyList(List<RString> bodyList) {
+        for (int i = INT_0; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
+        }
     }
 }
