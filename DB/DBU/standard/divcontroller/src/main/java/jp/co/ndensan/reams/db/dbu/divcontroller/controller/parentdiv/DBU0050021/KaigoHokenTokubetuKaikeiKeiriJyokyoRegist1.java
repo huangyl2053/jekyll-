@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName.様式４の２;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
@@ -219,7 +220,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             return getResponseData_btnSave(div);
         }
         getHandler(div).onClick_btnSave(get引き継ぎデータ());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBU0050021StateName.com);
     }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div>
@@ -237,7 +238,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         } else if (内部処理モード_削除.equals(div.getShoriMode())) {
             return ResponseData.of(div).addMessage(message).respond();
         }
-        return null;
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div>
