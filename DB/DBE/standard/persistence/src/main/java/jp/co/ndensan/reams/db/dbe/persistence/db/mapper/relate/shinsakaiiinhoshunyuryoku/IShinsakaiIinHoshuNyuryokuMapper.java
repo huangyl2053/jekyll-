@@ -32,12 +32,4 @@ public interface IShinsakaiIinHoshuNyuryokuMapper {
      * @return ShinsakaiIinHoshuNyuryokuEntity 審査会委員報酬入力結果情報RelateEntityクラスです。
      */
     List<ShinsakaiIinHoshuNyuryokuEntity> getdgShinsakaiJisseki(ShinsakaiIinHoshuNyuryokuMapperParameter param);
-
-    /**
-     * 介護認定審査会委員別単価取得します。
-     *
-     * @param param 審査会委員報酬入力を特定するためのMyBatis用パラメータクラスです。
-     * @return ShinsakaiIinHoshuNyuryokuEntity 審査会委員報酬入力結果情報RelateEntityクラスです。
-     */
-    List<ShinsakaiIinHoshuNyuryokuEntity> getShinsaHoshugaku(ShinsakaiIinHoshuNyuryokuMapperParameter param);
 }

@@ -29,7 +29,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
     private final RDate fromDate;
     private final RDate toDate;
     private final RDate 実施日;
-    private final boolean has最大表示件数;
     private final boolean hasFromDate;
     private final boolean hasToDate;
 
@@ -46,7 +45,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
      * @param toDate ToDate
      * @param fromDate FromDate
      * @param 実施日 実施日
-     * @param has最大表示件数 has最大表示件数
      * @param hasFromDate hasFromDate
      * @param hasToDate hasToDate
      */
@@ -61,7 +59,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
             RDate fromDate,
             RDate toDate,
             RDate 実施日,
-            boolean has最大表示件数,
             boolean hasFromDate,
             boolean hasToDate) {
         this.介護認定審査会委員氏名 = 介護認定審査会委員氏名;
@@ -74,7 +71,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.実施日 = 実施日;
-        this.has最大表示件数 = has最大表示件数;
         this.hasFromDate = hasFromDate;
         this.hasToDate = hasToDate;
     }
@@ -92,7 +88,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
      * @param fromDate fromDate
      * @param toDate toDate
      * @param 実施日 実施日
-     * @param has最大表示件数 has最大表示件数
      * @param hasFromDate hasFromDate
      * @param hasToDate hasToDate
      * @return ShinsakaiIinHoshuNyuryokuMapperParameter 審査会委員報酬入力結果情報を特定するためのMyBatis用パラメータクラスです
@@ -108,7 +103,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
             RDate fromDate,
             RDate toDate,
             RDate 実施日,
-            boolean has最大表示件数,
             boolean hasFromDate,
             boolean hasToDate) {
         return new ShinsakaiIinHoshuNyuryokuMapperParameter(
@@ -122,7 +116,6 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
                 fromDate,
                 toDate,
                 実施日,
-                has最大表示件数,
                 hasFromDate,
                 hasToDate);
     }
