@@ -516,7 +516,8 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         }
         new KariSanteigakuHenkoTsuchishoHakkoIchiranPrintService().print仮算定額変更通知書発行一覧表(編集後仮算定通知書共通情報List,
                 出力順１, 出力順２, 出力順３, 出力順４, 出力順５, 帳票作成日時.getRDateTime());
-        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
+        RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
+                ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_変更一覧表, 帳票名);
     }
 
@@ -666,7 +667,8 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
                 仮算定納入通知書情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
         new KariNonyuTsuchishoHakkoIchiranPrintService()
                 .print(仮算定納入通知書情報List, Long.parseLong(出力順ID.toString()), 帳票作成日時, 出力期AsInt);
-        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
+        RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
+                ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 納入通知書仮算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
         load代行プリント送付票(調定年度, 賦課年度, 代行プリント送付票_帳票ID, 発行日, 出力期, 対象者区分, 生活保護対象者, ページごとに山分け,
