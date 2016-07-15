@@ -46,7 +46,7 @@ public class JigoSakuseiMeisaiTouroku {
     private static final Decimal 給付率_0 = new Decimal("0");
     private static final Decimal 率 = new Decimal("100");
     private static final RString 限度対象外フラグ = new RString("0");
-    private static final Decimal 設定してない = new Decimal("ー");
+    private static final Decimal 設定してない = Decimal.ZERO;
     private static final RString 設定してないR = new RString("ー");
     private static final RString 事業者 = new RString("合計");
     private static final RString 事業者コード = new RString("ALL*");
@@ -69,11 +69,16 @@ public class JigoSakuseiMeisaiTouroku {
         this.dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
 
+    JigoSakuseiMeisaiTouroku(MapperProvider mapperProvider,
+            DbT4001JukyushaDaichoDac dac) {
+        this.mapperProvider = mapperProvider;
+        this.dac = dac;
+    }
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JigoSakuseiMeisaiTouroku}のインスタンス
      */
     public static JigoSakuseiMeisaiTouroku createInstance() {
         return InstanceProvider.create(JigoSakuseiMeisaiTouroku.class);
@@ -134,14 +139,12 @@ public class JigoSakuseiMeisaiTouroku {
         Decimal 全額利用者負担額 = Decimal.ZERO;
 
         for (KyufuJikoSakuseiEntity entity : list) {
-            if (entity.is合計フラグ()) {
-                if (限度対象外フラグ.equals(entity.get限度額対象外フラグ())) {
-                    サービス単位 = entity.getサービス単位().add(サービス単位);
-                    種類限度内単位 = entity.get種類限度内単位().add(種類限度内単位);
-                    種類限度超過単位 = entity.get種類限度超過単位().add(種類限度超過単位);
-                    区分限度内単位 = entity.get区分限度内単位().add(区分限度内単位);
-                    区分限度超過単位 = entity.get区分限度超過単位().add(区分限度超過単位);
-                }
+            if (entity.is合計フラグ() && 限度対象外フラグ.equals(entity.get限度額対象外フラグ())) {
+                サービス単位 = entity.getサービス単位().add(サービス単位);
+                種類限度内単位 = entity.get種類限度内単位().add(種類限度内単位);
+                種類限度超過単位 = entity.get種類限度超過単位().add(種類限度超過単位);
+                区分限度内単位 = entity.get区分限度内単位().add(区分限度内単位);
+                区分限度超過単位 = entity.get区分限度超過単位().add(区分限度超過単位);
             }
             費用総額 = entity.get費用総額().add(費用総額);
             保険給付額 = entity.get保険給付額().add(保険給付額);
@@ -347,15 +350,19 @@ public class JigoSakuseiMeisaiTouroku {
             param.put(KEY_利用年月.toString(), 利用年月);
             param.put(KEY_被保険者番号.toString(), new HihokenshaNo(被保険者番号));
             KubunGendoEntity entity = mapper.get区分限度額統計処理(param);
-            gendo.set区分支給限度額(entity.get支給限度単位数());
-            gendo.set管理期間開始日(entity.get適用開始年月日());
-            gendo.set管理期間終了日(entity.get適用終了年月日());
+            if (entity != null) {
+                gendo.set区分支給限度額(entity.get支給限度単位数());
+                gendo.set管理期間開始日(entity.get適用開始年月日());
+                gendo.set管理期間終了日(entity.get適用終了年月日());
+            }
         }
         if (居宅.equals(居宅総合事業区分)) {
             DbT4001JukyushaDaichoEntity entity = dac.select居宅総合事業区分(new HihokenshaNo(被保険者番号), 開始利用年月, 終了利用年月);
-            gendo.set区分支給限度額(entity.getShikyuGendoTanisu());
-            gendo.set管理期間開始日(entity.getNinteiYukoKikanKaishiYMD());
-            gendo.set管理期間終了日(entity.getNinteiYukoKikanShuryoYMD());
+            if (entity != null) {
+                gendo.set区分支給限度額(entity.getShikyuGendoTanisu());
+                gendo.set管理期間開始日(entity.getNinteiYukoKikanKaishiYMD());
+                gendo.set管理期間終了日(entity.getNinteiYukoKikanShuryoYMD());
+            }
         }
         return gendo;
     }
