@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,9 +28,9 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
 
     private final List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト;
     private final List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト;
-    private final List<RString> 並び順List;
     private final YMDHMS 調定日時;
     private final FlexibleYear 賦課年度;
+    private final IOutputOrder outputOrder;
     private final Association association;
     private static final RString タイトル_特徴平準化対象者一覧表 = new RString("特徴平準化対象者一覧表");
     private static final RString タイトル_特徴平準化対象外一覧表 = new RString("特徴平準化対象外一覧表");
@@ -39,22 +40,21 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
      *
      * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijyunkaTaishoshaEntity>
      * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijyunkaTaishogaiEntity>
-     * @param 並び順List List<RString>
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param association Association
+     * @param outputOrder IOutputOrder
      */
     public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(
             List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
             List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
-            List<RString> 並び順List, YMDHMS 調定日時, FlexibleYear 賦課年度,
-            Association association) {
+            YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, IOutputOrder outputOrder) {
         this.特徴平準化結果対象者一覧表リスト = 特徴平準化結果対象者一覧表リスト;
         this.特徴平準化結果対象外一覧表リスト = 特徴平準化結果対象外一覧表リスト;
-        this.並び順List = 並び順List;
         this.調定日時 = 調定日時;
         this.賦課年度 = 賦課年度;
         this.association = association;
+        this.outputOrder = outputOrder;
     }
 
     /**
@@ -62,18 +62,18 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
      *
      * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijyunkaTaishoshaEntity>
      * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijyunkaTaishogaiEntity>
-     * @param 並び順List List<RString>
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param association Association
+     * @param outputOrder IOutputOrder
      * @return TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport
      */
     public static TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport createForm(
             @NonNull List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
-            @NonNull List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, List<RString> 並び順List,
-            YMDHMS 調定日時, FlexibleYear 賦課年度, Association association) {
+            @NonNull List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
+            YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, IOutputOrder outputOrder) {
         return new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(特徴平準化結果対象者一覧表リスト,
-                特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度, association);
+                特徴平準化結果対象外一覧表リスト, 調定日時, 賦課年度, association, outputOrder);
     }
 
     @Override
@@ -83,10 +83,10 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
             title = タイトル_特徴平準化対象者一覧表;
         }
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor headerEditor
-                = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時, 賦課年度, title);
+                = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時, 賦課年度, title, outputOrder);
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
                 = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(特徴平準化結果対象者一覧表リスト,
-                        並び順List, 特徴平準化結果対象外一覧表リスト, association);
+                        特徴平準化結果対象外一覧表リスト, association);
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
                 headerEditor, bodyEditor);
         writer.writeLine(builder);

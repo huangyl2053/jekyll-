@@ -82,7 +82,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -257,11 +256,11 @@ public class KaigoFukaTokuchoHeijunka6Batch {
      * 平準化計算後で、抽出した賦課情報によって、ＤＢ項目を編集するメソッドです。
      *
      * @param 賦課年度 FlexibleYear
-     * @param 調定日時 RDateTime
+     * @param 調定日時 YMDHMS
      * @param 平準化計算方法_増額 RString
      * @param 平準化計算方法_減額 RString
      */
-    public void editAtoFukaJohoList(FlexibleYear 賦課年度, RDateTime 調定日時, RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
+    public void editAtoFukaJohoList(FlexibleYear 賦課年度, YMDHMS 調定日時, RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
         List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
         mapper.create平準化計算結果Temp();
