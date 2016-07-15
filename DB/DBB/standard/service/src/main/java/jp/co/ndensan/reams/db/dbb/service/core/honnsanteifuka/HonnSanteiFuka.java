@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.honnsanteifuka;
+package jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.honnsanteifuka.IHonnSanteiFukaMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
@@ -188,20 +188,6 @@ public class HonnSanteiFuka {
     private static final RString 定数_調定年度 = new RString("調定年度");
     private static final RString 年度 = new RString("年度");
     private static final RString 定数_出力順 = new RString("出力順");
-    private static final RString 期月_4月 = new RString("4月");
-    private static final RString 期月_5月 = new RString("5月");
-    private static final RString 期月_6月 = new RString("6月");
-    private static final RString 期月_7月 = new RString("7月");
-    private static final RString 期月_8月 = new RString("8月");
-    private static final RString 期月_9月 = new RString("9月");
-    private static final RString 期月_10月 = new RString("10月");
-    private static final RString 期月_11月 = new RString("11月");
-    private static final RString 期月_12月 = new RString("12月");
-    private static final RString 期月_1月 = new RString("1月");
-    private static final RString 期月_2月 = new RString("2月");
-    private static final RString 期月_3月 = new RString("3月");
-    private static final RString 期月_翌年度4月 = new RString("翌年度4月");
-    private static final RString 期月_翌年度5月 = new RString("翌年度5月");
     private static final RString CSV出力有無_有り = new RString("有り");
     private static final RString CSVファイル名_一覧表 = new RString("本算定結果一覧表");
     private static final RString 本算定_EUCファイル名 = new RString("HonsanteiKekkaIcihiranData.csv");
