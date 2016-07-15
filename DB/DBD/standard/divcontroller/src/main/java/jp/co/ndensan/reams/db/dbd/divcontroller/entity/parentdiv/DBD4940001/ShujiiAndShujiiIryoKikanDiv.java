@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosaItakusakiAndChosain のクラスファイル
+ * ShujiiAndShujiiIryoKikan のクラスファイル
  *
  * @author 自動生成
  */
-public class ChosaItakusakiAndChosainDiv extends Panel {
+public class ShujiiAndShujiiIryoKikanDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
@@ -24,8 +24,8 @@ public class ChosaItakusakiAndChosainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChosaItakusakiAndChosainInput")
-    private ChosaItakusakiAndChosainInputDiv ccdChosaItakusakiAndChosainInput;
+    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
+    private ShujiiIryokikanAndShujiiInputDiv ccdShujiiIryokikanAndShujiiInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,12 +34,12 @@ public class ChosaItakusakiAndChosainDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdChosaItakusakiAndChosainInput
-     * @return ccdChosaItakusakiAndChosainInput
+     * getccdShujiiIryokikanAndShujiiInput
+     * @return ccdShujiiIryokikanAndShujiiInput
      */
-    @JsonProperty("ccdChosaItakusakiAndChosainInput")
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
-        return ccdChosaItakusakiAndChosainInput;
+    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+        return ccdShujiiIryokikanAndShujiiInput;
     }
 
     // </editor-fold>

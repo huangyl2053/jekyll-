@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.Sho
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituHandler.GamenJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,6 +57,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
 
         ValidationMessageControlPairs pairs = getValidationHandler(div).validate履歴番号();
         if (pairs.iterator().hasNext()) {
+            div.setHdnKekkaCommonDivMode(new RString(KekkaShosaiJohoDiv.ShoriType.ShokaiMode.toString()));
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 

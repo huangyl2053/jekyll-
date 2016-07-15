@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinte
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.IKaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.KaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -37,10 +37,6 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("btnIryohokenGuide")
     private ButtonDialog btnIryohokenGuide;
     @JsonProperty("btnRenrakusaki")
@@ -55,10 +51,6 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     private ButtonDialog btnTainoJokyo;
     @JsonProperty("btnJogaiShinsain")
     private ButtonDialog btnJogaiShinsain;
-    @JsonProperty("ccdKaigoNinteiShinseiKihonJohoInput")
-    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihonJohoInput;
-    @JsonProperty("ccdShinseiTodokedesha")
-    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
     @JsonProperty("ShujiiIryokikanAndShujii")
     private ShujiiIryokikanAndShujiiDiv ShujiiIryokikanAndShujii;
     @JsonProperty("ChosaItakusakiAndChosain")
@@ -67,6 +59,14 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     private TextBoxDate txtSoshitsubi;
     @JsonProperty("tblRireki")
     private tblRirekiDiv tblRireki;
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
+    @JsonProperty("ccdKaigoNinteiShinseiKihonJohoInput")
+    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihonJohoInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,24 +74,6 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKaigoNinteiAtenaInfo
-     * @return ccdKaigoNinteiAtenaInfo
-     */
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
-        return ccdKaigoNinteiAtenaInfo;
-    }
-
-    /*
-     * getccdKaigoNinteiShikakuInfo
-     * @return ccdKaigoNinteiShikakuInfo
-     */
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
-        return ccdKaigoNinteiShikakuInfo;
-    }
-
     /*
      * getbtnIryohokenGuide
      * @return btnIryohokenGuide
@@ -219,24 +201,6 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiShinseiKihonJohoInput
-     * @return ccdKaigoNinteiShinseiKihonJohoInput
-     */
-    @JsonProperty("ccdKaigoNinteiShinseiKihonJohoInput")
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
-        return ccdKaigoNinteiShinseiKihonJohoInput;
-    }
-
-    /*
-     * getccdShinseiTodokedesha
-     * @return ccdShinseiTodokedesha
-     */
-    @JsonProperty("ccdShinseiTodokedesha")
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return ccdShinseiTodokedesha;
-    }
-
-    /*
      * getShujiiIryokikanAndShujii
      * @return ShujiiIryokikanAndShujii
      */
@@ -309,15 +273,51 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     }
 
     /*
+     * getccdKaigoNinteiShikakuInfo
+     * @return ccdKaigoNinteiShikakuInfo
+     */
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
+        return ccdKaigoNinteiShikakuInfo;
+    }
+
+    /*
+     * getccdKaigoNinteiAtenaInfo
+     * @return ccdKaigoNinteiAtenaInfo
+     */
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
+        return ccdKaigoNinteiAtenaInfo;
+    }
+
+    /*
+     * getccdKaigoNinteiShinseiKihonJohoInput
+     * @return ccdKaigoNinteiShinseiKihonJohoInput
+     */
+    @JsonProperty("ccdKaigoNinteiShinseiKihonJohoInput")
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
+        return ccdKaigoNinteiShinseiKihonJohoInput;
+    }
+
+    /*
+     * getccdShinseiTodokedesha
+     * @return ccdShinseiTodokedesha
+     */
+    @JsonProperty("ccdShinseiTodokedesha")
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return ccdShinseiTodokedesha;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getShujiiIryokikanAndShujii().getCcdShujiiIryokikanAndShujiiInput();
     }
 
     @JsonIgnore
-    public ChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
+    public IChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
         return this.getChosaItakusakiAndChosain().getCcdChosaItakusakiAndChosainInput();
     }
 

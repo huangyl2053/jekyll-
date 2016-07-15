@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJohoBuilder;
@@ -16,9 +18,9 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.Shok
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -37,12 +39,18 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv.InputType;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -61,6 +69,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
     private final ShokkenTorikeshiIchibuSoshituDiv div;
     private final ShokkenTorikeshiIchibuSoshituMainDiv mainDiv;
+    private final Association association;
 
     private static final RString 連絡符号 = new RString(",");
     private static int index = 0;
@@ -130,6 +139,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     public ShokkenTorikeshiIchibuSoshituHandler(ShokkenTorikeshiIchibuSoshituDiv div) {
         this.div = div;
         this.mainDiv = div.getShokkenTorikeshiIchibuSoshituMain();
+        this.association = AssociationFinderFactory.createInstance().getAssociation();
     }
 
     /**
@@ -154,7 +164,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
         YokaigoNinteiJoho 前回情報 = get前回情報(申請書管理番号);
 
-        ヘッダ初期化(被保険者番号);
+        ヘッダ初期化(申請書管理番号, 被保険者番号);
         認定申請情報初期化(今回情報, 申請書管理番号, 市町村セキュリティ情報.get導入形態コード());
         認定情報初期化(今回情報, 前回情報, 市町村セキュリティ情報.get導入形態コード());
 
@@ -197,11 +207,12 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         YokaigoNinteiJohoManager.createInstance().save(前回情報, 今回情報);
     }
 
-    private void ヘッダ初期化(RString 被保険者番号) {
+    private void ヘッダ初期化(RString 申請書管理番号, RString 被保険者番号) {
         // TOOD. 引数：ViewState.申請書管理番号
         mainDiv.getCcdKaigoNinteiAtenaInfo().initialize();
         // TODO. initialize方法がない。　
-        mainDiv.getCcdKaigoNinteiShikakuInfo().set被保険者番号(被保険者番号);
+        mainDiv.getCcdKaigoNinteiShikakuInfo().initialize(association.get地方公共団体コード().value(), RString.EMPTY,
+                RString.EMPTY, 被保険者番号);
 
         mainDiv.getBtnIryohokenGuide().setDisabled(true);
         mainDiv.getBtnRenrakusaki().setDisabled(false);
@@ -215,25 +226,21 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     private void 認定申請情報初期化(YokaigoNinteiJoho 今回情報, RString 申請書管理番号, Code 導入形態コード) {
         IKaigoNinteiShinseiKihonJohoInputDiv 介護認定申請基本情報入力Div = mainDiv.getCcdKaigoNinteiShinseiKihonJohoInput();
         介護認定申請基本情報入力Div.initialize();
-        // TODO. 要介護申請・要支援申請の区分
-        介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(今回情報.get認定申請年月日()));
-        介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(今回情報.get認定申請区分法令コード().value()));
+        介護認定申請基本情報入力Div.setRadShinseishoKubun(今回情報.get要支援申請の区分受給());
+        介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(今回情報.get認定申請年月日受給()));
+        介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(今回情報.get認定申請区分法令コード受給().value()));
         介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
-                NinteiShinseiShinseijiKubunCode.toValue(今回情報.get認定申請区分申請時コード().value()));
-        介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(今回情報.get被保険者区分コード()));
-        介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(今回情報.get二号特定疾病コード().value()));
-        介護認定申請基本情報入力Div.setShisho(new ShishoCode(今回情報.get支所コード()));
-        介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(今回情報.get認定申請理由());
-        // TODO. 受給申請事由
+                NinteiShinseiShinseijiKubunCode.toValue(今回情報.get認定申請区分申請時コード受給().value()));
+        介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(今回情報.get被保険者区分コード受給()));
+        介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(今回情報.get二号特定疾病コード受給().value()));
+        介護認定申請基本情報入力Div.setShisho(new ShishoCode(今回情報.get支所コード受給()));
+        介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(今回情報.get認定申請理由受給());
+        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(今回情報.get受給申請事由()));
         介護認定申請基本情報入力Div.setTxtShinseiJokyo(今回情報.get申請状況区分());
-        // TODO. 旧措置者フラグ
-//        介護認定申請基本情報入力Div.getKaigoNinteiShinseiKihonJohoInputDiv().setChkKyuSochisha(今回情報.get旧措置者フラグ());
-        // TODO. 資格取得前申請フラグ
-//        介護認定申請基本情報入力Div.getKaigoNinteiShinseiKihonJohoInputDiv().setChkShikakuShutokuMae(今回情報.get資格取得前申請フラグ());
+        介護認定申請基本情報入力Div.setKyuSochisha(今回情報.get旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
+        介護認定申請基本情報入力Div.setChkShikakuShutokuMae(今回情報.get資格取得前申請フラグ()
+                ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
 
-//        介護認定申請基本情報入力Div.setRadShinseishoKubun(被保険者番号);
-//        介護認定申請基本情報入力Div.setServiceSakujoTeikeibun(被保険者番号);
-//        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.初回申請);
         介護認定申請基本情報入力Div.setInputMode(new RString(InputType.NinteiMode.toString()));
 
         INinteiShinseiTodokedeshaDiv 申請届出者Div = mainDiv.getCcdShinseiTodokedesha();
@@ -243,27 +250,36 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         申請届出者Div.set状態(new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
         申請届出者Div.set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管内.toString()));
 
-        ShujiiIryokikanAndShujiiInputDiv 主治医Div = mainDiv.getShujiiIryokikanAndShujii().getCcdShujiiIryokikanAndShujiiInput();
-        // TOOD. initializeとセット方法がない。
-        // TODO. mode:ShoriType=ShokaiMode設定できない。
-//        主治医Div.
+        IShujiiIryokikanAndShujiiInputDiv 主治医Div = mainDiv.getShujiiIryokikanAndShujii().getCcdShujiiIryokikanAndShujiiInput();
+        主治医Div.setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.ShokaiMode);
         if (is表示(画面表示エリア.主治医と医療機関, 導入形態コード)) {
-            // TODO. 項目設定がない。
-//        主治医Div.getCcdShujiiIryokikanAndShujiiInput().setTxtIryoKikanCode(今回情報.get主治医医療機関コード());
-//        主治医Div.getCcdShujiiIryokikanAndShujiiInput().setTxtIryoKikanName(今回情報.get医療機関名称());
-//        主治医Div.getCcdShujiiIryokikanAndShujiiInput().setShiteiiFlag(今回情報.get指定医フラグ());
-//        主治医Div.getCcdShujiiIryokikanAndShujiiInput().setTxtShujiiCode(今回情報.get主治医コード());
-//        主治医Div.getCcdShujiiIryokikanAndShujiiInput().setTxtShujiiName(今回情報.get主治医氏名());
+            主治医Div.initialize(
+                    association.get地方公共団体コード(),
+                    new ShinseishoKanriNo(申請書管理番号),
+                    SubGyomuCode.DBD介護受給,
+                    今回情報.get主治医医療機関コード受給(),
+                    今回情報.get医療機関名称受給(),
+                    今回情報.get主治医コード受給(),
+                    今回情報.get主治医氏名受給());
+            // TODO. 今回情報.get指定医フラグ受給()が設定できない。
+//            主治医Div.
+        } else {
+            主治医Div.initialize(association.get地方公共団体コード(), new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBD介護受給);
         }
 
-        ChosaItakusakiAndChosainInputDiv 調査Div = mainDiv.getChosaItakusakiAndChosain().getCcdChosaItakusakiAndChosainInput();
-        // TODO. initialinze方法がない。
-        // TODO. mode:ShoriType=ShokaiMode設定できない。
+        IChosaItakusakiAndChosainInputDiv 調査Div = mainDiv.getChosaItakusakiAndChosain().getCcdChosaItakusakiAndChosainInput();
+        調査Div.setMode_ShoriType(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode);
         if (is表示(画面表示エリア.調査委託先と調査員, 導入形態コード)) {
-            // TODO. 項目設定がない。
+            調査Div.initialize(
+                    new RString(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode.toString()),
+                    今回情報.get認定調査委託先コード受給().value(),
+                    今回情報.get事業者名称(),
+                    今回情報.get認定調査員コード受給().value(),
+                    今回情報.get調査員氏名());
+        } else {
+            調査Div.initialize(new RString(ChosaItakusakiAndChosainInputDiv.ShoriType.ShokaiMode.toString()));
         }
 
-//        調査Div.
         mainDiv.getTxtSoshitsubi().setValue(convertFlexibleDateToRDate(今回情報.get喪失年月日()));
         mainDiv.getTxtSoshitsubi().setDisabled(true);
     }
@@ -339,38 +355,32 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     }
 
     private void set画面タイトル(YokaigoNinteiJoho 今回情報) {
-        Code 認定申請区分申請時コード = 今回情報.get認定申請区分申請時コード();
-        Code 取下区分コード = 今回情報.get取下区分コード();
+        Code 認定申請区分申請時コード = 今回情報.get認定申請区分申請時コード受給();
+        Code 取下区分コード = 今回情報.get取下区分コード受給();
         RString タイトル = 画面タイトル.要介護認定.getTitle();
-        // TODO. NinteiShinseijiKubunがDBEのEnumですので
-//        if (NinteiShinseijiKubun.新規申請.getCode().equals(認定申請区分申請時コード.value())) {
-        if (new RString("01").equals(認定申請区分申請時コード.value())) {
-            // TODO. TorisageKubunにCodeがない。
-            if (TorisageKubun.認定申請有効.equals(取下区分コード)) {
+        if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(認定申請区分申請時コード.value())) {
+            if (TorisageKubunCode.認定申請有効.getコード().equals(取下区分コード.value())) {
                 タイトル = 画面タイトル.要介護認定新規認定.getTitle();
-            } else if (TorisageKubun.区分変更却下.equals(取下区分コード)) {
+            } else if (TorisageKubunCode.区分変更却下.getコード().equals(取下区分コード.value())) {
                 タイトル = 画面タイトル.要介護認定新規却下.getTitle();
             }
-//        } else if (NinteiShinseijiKubun.更新申請.getCode().equals(認定申請区分申請時コード.value())) {
-        } else if (new RString("02").equals(認定申請区分申請時コード.value())) {
-            // TODO. TorisageKubunにCodeがない。
-            if (TorisageKubun.認定申請有効.equals(取下区分コード)) {
+        } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(認定申請区分申請時コード.value())) {
+            if (TorisageKubunCode.認定申請有効.getコード().equals(取下区分コード.value())) {
                 タイトル = 画面タイトル.要介護認定更新認定.getTitle();
-            } else if (TorisageKubun.区分変更却下.equals(取下区分コード)) {
+            } else if (TorisageKubunCode.区分変更却下.getコード().equals(取下区分コード.value())) {
                 タイトル = 画面タイトル.要介護認定更新却下.getTitle();
             }
         }
         div.setTitle(タイトル);
     }
 
-    private void set子Divモード(boolean inputModeFlg) {
-        // TODO.2.　6.　1.　結果詳細情報共有子Divのモードを「ShokaiMode」にする。
-        if (inputModeFlg) {
-
+    private void set子Divモード(boolean shokaiModeFlg) {
+        if (shokaiModeFlg) {
+            div.setHdnKekkaCommonDivMode(new RString(KekkaShosaiJohoDiv.ShoriType.ShokaiMode.toString()));
         } else {
-
+            div.setHdnKekkaCommonDivMode(new RString(KekkaShosaiJohoDiv.ShoriType.InputMode.toString()));
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), !inputModeFlg);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), shokaiModeFlg);
     }
 
     private YokaigoNinteiJoho get今回情報(Code 導入形態コード, RString 申請書管理番号) {
@@ -451,7 +461,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         builder.set受給者台帳直近異動年月日(FlexibleDate.getNowDate());
 
         if (今回Flg && div.getHdnKonkaiRirekiNo().equals(new RString("0000"))) {
-            RString 履歴番号 = getMax履歴番号(認定情報.get申請書管理番号());
+            RString 履歴番号 = getMax履歴番号(認定情報.get申請書管理番号受給());
             builder.set受給者台帳履歴番号(履歴番号);
             builder.set受給者台帳同一連番(履歴番号);
             builder.set受給者台帳申請状況区分(ShinseiJokyoKubun.認定完了.getコード());
@@ -519,18 +529,16 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     private void edit要介護認定申請情報(YokaigoNinteiJoho 認定情報) {
         YokaigoNinteiJohoBuilder builder = 認定情報.createBuilderForEdit();
         if (div.getTitle().contains("却下")) {
-            // TODO. codeがない。
-            builder.set要介護認定申請情報取下区分コード(new Code(TorisageKubun.認定申請有効.name()));
-
-            builder.set要介護認定申請情報却下年月日(new FlexibleDate(div.getTxtNinteibiKonkai().getValue()));
+            builder.set要介護認定申請情報受給取下区分コード(new Code(TorisageKubunCode.認定申請有効.getコード()));
+            builder.set要介護認定申請情報受給却下年月日(new FlexibleDate(div.getTxtNinteibiKonkai().getValue()));
             // TODO. 結果詳細ダイアログの理由
 //            builder.set要介護認定申請情報却下理由(new Code(TorisageKubun.認定申請有効.name()));
         } else {
-            // TODO. codeがない。
-            builder.set要介護認定申請情報取下区分コード(new Code(TorisageKubun.区分変更却下.name()));
+            builder.set要介護認定申請情報受給取下区分コード(new Code(TorisageKubunCode.区分変更却下.getコード()));
         }
-        builder.set要介護認定申請情報市町村連絡事項(連絡符号);
-        builder.set要介護認定申請情報審査継続区分(false);
+        // TODO. 画面の画面の市町村連絡事項わからない。
+//        builder.set要介護認定申請情報受給市町村連絡事項(連絡符号);
+        builder.set要介護認定申請情報受給審査継続区分(false);
 
         認定情報 = builder.build();
     }
@@ -539,7 +547,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         YokaigoNinteiJohoBuilder builder;
         if (insertFlg) {
             builder = 認定情報.createNewKekkaEntityBuilderForEdit();
-            builder.set要介護認定結果情報申請書管理番号(new ShinseishoKanriNo(認定情報.get申請書管理番号()));
+            builder.set要介護認定結果情報申請書管理番号(new ShinseishoKanriNo(認定情報.get申請書管理番号受給()));
             builder.set要介護認定結果情報二次判定年月日(new FlexibleDate(div.getTxtNinteibiKonkai().getValue()));
             if (is審査依頼日更新(認定情報, 導入形態コード)) {
                 builder.set要介護認定結果情報介護認定審査会資料作成年月日(認定情報.get審査会資料作成年月日());

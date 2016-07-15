@@ -41,4 +41,20 @@ public interface IYokaigoNinteiJohoMapper {
      * @return Max履歴番号 RString
      */
     RString getMax履歴番号(@Param("申請書管理番号") RString 申請書管理番号);
+
+    /**
+     * 認定情報受給の取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 認定情報受給 List<YokaigoNinteiJohoEntity>
+     */
+    List<YokaigoNinteiJohoEntity> get認定情報受給(@Param("被保険者番号") RString 被保険者番号);
+
+    /**
+     * 認定情報認定の取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 認定情報認定 List<YokaigoNinteiJohoEntity>
+     */
+    List<YokaigoNinteiJohoEntity> get認定情報認定(@Param("被保険者番号") RString 被保険者番号);
 }

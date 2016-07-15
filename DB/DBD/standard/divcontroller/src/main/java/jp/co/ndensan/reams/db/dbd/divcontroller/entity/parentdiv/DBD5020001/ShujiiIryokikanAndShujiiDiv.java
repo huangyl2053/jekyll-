@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -37,7 +38,7 @@ public class ShujiiIryokikanAndShujiiDiv extends Panel {
      * @return ccdShujiiIryokikanAndShujiiInput
      */
     @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
-    public ShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return ccdShujiiIryokikanAndShujiiInput;
     }
 
