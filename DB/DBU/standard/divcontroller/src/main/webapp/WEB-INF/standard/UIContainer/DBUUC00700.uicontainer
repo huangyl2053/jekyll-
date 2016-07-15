@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBAUC61001",
+ "uiContainerName": "DBUUC00700",
  "displayWizard": false,
- "subGyomuCode": "DBA",
+ "subGyomuCode": "DBU",
  "steps": [
   {
    "id": 1,
-   "name": "介護保険連絡票発行",
+   "name": "介護保険連絡票作成",
    "transitionList": [
     {
      "id": "1",
@@ -25,17 +25,17 @@
      "eventName": "対象者特定",
      "destroy": false,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBA",
-     "toLayoutName": "DBA6010011",
-     "toLayoutTitle": "介護保険連絡票発行",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0070011",
+     "toLayoutTitle": "介護保険連絡票作成",
      "toState": "Higaito"
     },
     {
      "id": "3",
      "type": "end",
-     "layoutSubGyomuCode": "DBA",
-     "layoutName": "DBA6010011",
-     "layoutTitle": "介護保険連絡票発行",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0070011",
+     "layoutTitle": "介護保険連絡票作成",
      "eventName": "finish",
      "destroy": false,
      "condition": ""
