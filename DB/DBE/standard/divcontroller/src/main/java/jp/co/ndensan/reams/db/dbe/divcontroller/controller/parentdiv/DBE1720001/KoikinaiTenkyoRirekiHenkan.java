@@ -194,12 +194,14 @@ public class KoikinaiTenkyoRirekiHenkan {
                     dataGridList.get(index).getShinseishoKanriNo());
             RString shokisaihokenshaNo = dataGridList.get(index).getShoKisaiHokenshaNo();
             boolean flag = true;
-            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo).isEmpty()) {
+            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo) == null) {
                 flag = false;
             }
             if (状態_更新.equals(state)) {
                 upDateNinteiShinseiJoho(shinseishoKanriNo, shokisaihokenshaNo, false);
-                upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                if (flag) {
+                    upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                }
             }
         }
     }
