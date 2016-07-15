@@ -33,8 +33,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBuilderImpl implements IShakFuksHjR
      */
     @Override
     public ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
 
 }

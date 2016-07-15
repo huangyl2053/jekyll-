@@ -159,9 +159,13 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
             }
         }
         editSanteiKisoKi(source);
-        if (編集後仮算定通知書共通情報.get更正後() != null && 編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計() != null) {
-            editSanteiKisoGenmenGaku(source);
-            editSanteiKisoKariGokeiGaku(source);
+        if (編集後仮算定通知書共通情報.get更正後() != null) {
+            if (編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計() != null) {
+                editSanteiKisoKariGokeiGaku(source);
+            }
+            if (編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額() != null) {
+                editSanteiKisoGenmenGaku(source);
+            }
         }
         editSanteiKisoKiTitle1(source);
         editSanteiKisoZanteikiHokenryoGaku1(source);
@@ -900,7 +904,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editSanteiKisoGenmenGaku(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().toString());
+        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額().toString());
     }
 
     private void editSanteiKisoKariGokeiGaku(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
