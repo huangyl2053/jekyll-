@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMast
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -158,7 +159,11 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
      * @return ShinseishoKanriNo
      */
     public ShinseishoKanriNo getZenkaiShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
-        ShinseiRirekiJoho shinseirireki = new ShinseiRirekiJoho(dacDbT5121.selectByKey(shinseishoKanriNo));
+        DbT5121ShinseiRirekiJohoEntity entity = dacDbT5121.selectByKey(shinseishoKanriNo);
+        if (entity == null) {
+            return null;
+        }
+        ShinseiRirekiJoho shinseirireki = new ShinseiRirekiJoho(entity);
         return shinseirireki.get前回申請管理番号();
     }
 }
