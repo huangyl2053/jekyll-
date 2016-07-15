@@ -50,6 +50,12 @@
         <jp.co.ndensan.reams.cax.version>1.10.0</jp.co.ndensan.reams.cax.version>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- MyBatisプラグイン用 -->
+        <jp.co.ndensan.reams.dbxVersion>${jp.co.ndensan.reams.dbx.version}</jp.co.ndensan.reams.dbxVersion>
+        <jp.co.ndensan.reams.uaxVersion>${jp.co.ndensan.reams.uax.version}</jp.co.ndensan.reams.uaxVersion>
+        <jp.co.ndensan.reams.caxVersion>${jp.co.ndensan.reams.cax.version}</jp.co.ndensan.reams.caxVersion>
+        <jp.co.ndensan.reams.uxxVersion>${jp.co.ndensan.reams.uxx.version}</jp.co.ndensan.reams.uxxVersion>
+        <jp.co.ndensan.reams.urVersion>${jp.co.ndensan.reams.ur.version}</jp.co.ndensan.reams.urVersion>
     </properties>
     <dependencies>
         <dependency>
@@ -479,7 +485,7 @@
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexPersistence</artifactId>
                 <version>${jp.co.ndensan.reams.uex.version}</version>
-            </dependency>            
+            </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexDivController</artifactId>
@@ -527,4 +533,57 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                    <artifactId>myBatis-maven-plugin</artifactId>
+                    <version>1.9.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                    <artifactId>myBatisValidator-maven-plugin</artifactId>
+                    <version>1.10.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>jp.co.ndensan.reams.uz</groupId>
+                            <artifactId>framework</artifactId>
+                            <version>1.9.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                <artifactId>myBatis-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>createMyBatisSettings</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                <artifactId>myBatisValidator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>createMyBatisSettings</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <checkmode>full</checkmode>  <!-- full:DB接続を伴う完全なチェック, skip:チェックしない, default:1.9.1と同じ、DB接続なしのチェック -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
