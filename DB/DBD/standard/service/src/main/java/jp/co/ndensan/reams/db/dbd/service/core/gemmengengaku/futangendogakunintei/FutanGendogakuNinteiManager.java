@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4018FutanGendogakuNinteiDac;
@@ -223,5 +224,27 @@ public class FutanGendogakuNinteiManager {
         }
         return 介護保険負担限度額認定List;
 
+    }
+
+    /**
+     * 被保険者番号、減免減額種類、履歴番号により、取得された負担限度額認定申請の情報を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 減免減額種類 減免減額種類
+     * @param 履歴番号 履歴番号
+     * @return FutanGendogakuNintei
+     */
+    @Transaction
+    public FutanGendogakuNintei get負担限度額認定(HihokenshaNo 被保険者番号, RString 減免減額種類, int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
+        NinteiJohoParameter 検索条件 = NinteiJohoParameter.createParameter(被保険者番号, 減免減額種類, 履歴番号);
+        FutanGendogakuNinteiEntity relateEntity = mapper.select負担限度額認定(検索条件);
+
+        relateEntity.initializeMd5ToEntities();
+        return new FutanGendogakuNintei(relateEntity);
     }
 }

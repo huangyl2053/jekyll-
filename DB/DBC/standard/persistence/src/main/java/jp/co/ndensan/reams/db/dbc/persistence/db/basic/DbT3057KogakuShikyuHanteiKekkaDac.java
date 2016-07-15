@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額介護サービス費支給判定結果のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057KogakuShikyuHanteiKekkaEntity> {
 
@@ -93,5 +95,17 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT3057KogakuShikyuHanteiKekkaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3057KogakuShikyuHanteiKekkaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費支給判定結果エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

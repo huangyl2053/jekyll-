@@ -100,7 +100,7 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
         }
         source.shokaiYMD = 所得照会票.get発行日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
-        source.setaiCode = 所得照会票.get世帯コード();
+        source.setaiCode = 所得照会票.get世帯コード().value();
         if (所得照会票.get前住所().length() <= INT_50) {
             source.zenJusho = 所得照会票.get前住所();
         } else {
@@ -144,7 +144,9 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
         source.kazeiNendo = 所得照会票.get住民税課税年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
                 .fillType(FillType.BLANK).toDateString();
         source.denshiKoin = sourceBuilder.denshiKoin;
-        // TODO  CompNinshosha
+        source.hakkoYMD = sourceBuilder.hakkoYMD;
+        source.ninshoshaShimeiKakenai = sourceBuilder.ninshoshaShimeiKakenai;
+        source.ninshoshaYakushokuMei = sourceBuilder.ninshoshaYakushokuMei;
         source.koinShoryaku = sourceBuilder.koinShoryaku;
         if (所得照会票.get差出人_郵便番号() != null) {
             if (所得照会票.get差出人_郵便番号().value().length() == INT_5 || 所得照会票.get差出人_郵便番号().value().length() == INT_7) {
@@ -167,14 +169,18 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private void set転入年月日_4(ShotokuShokaihyoYokoSource source) throws IllegalArgumentException {
         if (INT_4 <= 所得照会票.get世帯員リスト().size()) {
-            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_3).get住民状態コード())) {
+            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_3).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_3).get転出日().isEmpty() && 所得照会票.get世帯員リスト().get(INT_3).get転出日() != null) {
                 source.tennyuYMD4 = new RDate(所得照会票.get世帯員リスト().get(INT_3).get転出日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            } else {
+            }
+            if (!RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_3).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_3).get転入異動日().isEmpty()
+                    && 所得照会票.get世帯員リスト().get(INT_3).get転入異動日() != null) {
                 source.tennyuYMD4 = new RDate(所得照会票.get世帯員リスト().get(INT_3).get転入異動日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.shikibetsuCode4 = 所得照会票.get世帯員リスト().get(INT_3).get識別コード();
+            source.shikibetsuCode4 = 所得照会票.get世帯員リスト().get(INT_3).get識別コード().value();
             source.shimeiKana4 = 所得照会票.get世帯員リスト().get(INT_3).getカナ氏名();
             source.shimei4 = 所得照会票.get世帯員リスト().get(INT_3).get氏名();
             source.birthYMD4 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_3).get生年月日().toString()));
@@ -183,14 +189,18 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private void set転入年月日_3(ShotokuShokaihyoYokoSource source) throws IllegalArgumentException {
         if (INT_3 <= 所得照会票.get世帯員リスト().size()) {
-            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_2).get住民状態コード())) {
+            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_2).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_2).get転出日().isEmpty() && 所得照会票.get世帯員リスト().get(INT_2).get転出日() != null) {
                 source.tennyuYMD3 = new RDate(所得照会票.get世帯員リスト().get(INT_2).get転出日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            } else {
+            }
+            if (!RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_2).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_2).get転入異動日().isEmpty()
+                    && 所得照会票.get世帯員リスト().get(INT_2).get転入異動日() != null) {
                 source.tennyuYMD3 = new RDate(所得照会票.get世帯員リスト().get(INT_2).get転入異動日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.shikibetsuCode3 = 所得照会票.get世帯員リスト().get(INT_2).get識別コード();
+            source.shikibetsuCode3 = 所得照会票.get世帯員リスト().get(INT_2).get識別コード().value();
             source.shimeiKana3 = 所得照会票.get世帯員リスト().get(INT_2).getカナ氏名();
             source.shimei3 = 所得照会票.get世帯員リスト().get(INT_2).get氏名();
             source.birthYMD3 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_2).get生年月日().toString()));
@@ -199,14 +209,18 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private void set転入年月日_2(ShotokuShokaihyoYokoSource source) throws IllegalArgumentException {
         if (INT_2 <= 所得照会票.get世帯員リスト().size()) {
-            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_1).get住民状態コード())) {
+            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_1).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_1).get転出日().isEmpty() && 所得照会票.get世帯員リスト().get(INT_1).get転出日() != null) {
                 source.tennyuYMD2 = new RDate(所得照会票.get世帯員リスト().get(INT_1).get転出日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            } else {
+            }
+            if (!RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_1).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_1).get転入異動日().isEmpty()
+                    && 所得照会票.get世帯員リスト().get(INT_1).get転入異動日() != null) {
                 source.tennyuYMD2 = new RDate(所得照会票.get世帯員リスト().get(INT_1).get転入異動日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.shikibetsuCode2 = 所得照会票.get世帯員リスト().get(INT_1).get識別コード();
+            source.shikibetsuCode2 = 所得照会票.get世帯員リスト().get(INT_1).get識別コード().value();
             source.shimeiKana2 = 所得照会票.get世帯員リスト().get(INT_1).getカナ氏名();
             source.shimei2 = 所得照会票.get世帯員リスト().get(INT_1).get氏名();
             source.birthYMD2 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_1).get生年月日().toString()));
@@ -215,14 +229,18 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private void set転入年月日_1(ShotokuShokaihyoYokoSource source) throws IllegalArgumentException {
         if (INT_1 <= 所得照会票.get世帯員リスト().size()) {
-            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_0).get住民状態コード())) {
+            if (RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_0).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_0).get転出日().isEmpty() && 所得照会票.get世帯員リスト().get(INT_0).get転出日() != null) {
                 source.tennyuYMD1 = new RDate(所得照会票.get世帯員リスト().get(INT_0).get転出日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            } else {
+            }
+            if (!RSTRING_3.equals(所得照会票.get世帯員リスト().get(INT_0).get住民状態コード())
+                    && !所得照会票.get世帯員リスト().get(INT_0).get転入異動日().isEmpty()
+                    && 所得照会票.get世帯員リスト().get(INT_0).get転入異動日() != null) {
                 source.tennyuYMD1 = new RDate(所得照会票.get世帯員リスト().get(INT_0).get転入異動日().toString()).wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
-            source.shikibetsuCode1 = 所得照会票.get世帯員リスト().get(INT_0).get識別コード();
+            source.shikibetsuCode1 = 所得照会票.get世帯員リスト().get(INT_0).get識別コード().value();
             source.shimeiKana1 = 所得照会票.get世帯員リスト().get(INT_0).getカナ氏名();
             source.shimei1 = 所得照会票.get世帯員リスト().get(INT_0).get氏名();
             source.birthYMD1 = 生年月日のフォーマット(new RDate(所得照会票.get世帯員リスト().get(INT_0).get生年月日().toString()));

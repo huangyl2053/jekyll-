@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyokobetsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
 
 /**
  * 広域運用抽出期間情報を取得クラスです。

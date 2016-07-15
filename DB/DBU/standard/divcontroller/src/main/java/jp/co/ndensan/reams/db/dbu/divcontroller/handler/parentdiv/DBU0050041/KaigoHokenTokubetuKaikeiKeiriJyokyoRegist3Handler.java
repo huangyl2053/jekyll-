@@ -265,23 +265,23 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         if (data実質的な収支についてデータ != null) {
             set実質的な収支についてデータ(data実質的な収支についてデータ);
         }
+        div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setValue(new RDate(insuranceInfEntity.get報告年().getYearValue()));
+        div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(insuranceInfEntity.get集計対象年().getYearValue()));
+        div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setValue(insuranceInfEntity.get市町村コード().getColumnValue());
+        div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setValue(insuranceInfEntity.get市町村名称());
+        div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisplayNone(true);
+        div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisplayNone(true);
+        div.getKanryoMessage().setDisplayNone(true);
+        div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(true);
+        div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setReadOnly(true);
+        div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setReadOnly(true);
+        div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setReadOnly(true);
         if ((null == data前年度以前データ || data前年度以前データ.get詳細データエリア().isEmpty())
                 && (null == data今年度データ || data今年度データ.get詳細データエリア().isEmpty())
                 && (null == data実質的な収支についてデータ || data実質的な収支についてデータ.get詳細データエリア().isEmpty())
                 && !DELETE.equals(insuranceInfEntity.get処理フラグ())) {
             div.setShoriMode(内部処理モード_修正新規);
         } else {
-            div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setValue(new RDate(insuranceInfEntity.get報告年().getYearValue()));
-            div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(insuranceInfEntity.get集計対象年().getYearValue()));
-            div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setValue(insuranceInfEntity.get市町村コード().getColumnValue());
-            div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setValue(insuranceInfEntity.get市町村名称());
-            div.getKanryoMessage().setDisplayNone(true);
-            div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(true);
-            div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setReadOnly(true);
-            div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setReadOnly(true);
-            div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setReadOnly(true);
-            div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisplayNone(true);
-            div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisplayNone(true);
             boolean 処理 = UPDATE.equals(insuranceInfEntity.get処理フラグ());
             div.setShoriMode(処理 ? 内部処理モード_修正 : 内部処理モード_削除);
             set詳細データエリア入力可否(処理 ? 状態2 : 状態3);
@@ -368,7 +368,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         }
         KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
                 div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
-                div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
+                div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
                 insuranceInfEntity.get統計対象区分(), insuranceInfEntity.get市町村コード(), null, 集計番号, 集計単位_1, null, null, null, 詳細データエリア);
         return 画面入力データ;
     }
@@ -693,7 +693,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     public void onClick_btnSave(InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-        KaigoHokenShoriDateKanri 処理日付管理マスタ = get処理日付管理マスタ();
+        KaigoHokenShoriDateKanri 処理日付管理マスタ = get処理日付管理マスタ(insuranceInfEntity);
         if (内部処理モード_追加.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.insertShoriDateKanri(処理日付管理マスタ);
         } else if (内部処理モード_修正.equals(div.getShoriMode()) || 内部処理モード_削除.equals(div.getShoriMode())) {
@@ -721,19 +721,24 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             前年度以前データLst.add(画面入力前年度以前データ);
             今年度データLst.add(画面入力今年度データ);
             実質的な収支についてデータLst.add(画面入力実質的な収支についてデータ);
-            介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(前年度以前データLst);
-            介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(今年度データLst);
-            介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(実質的な収支についてデータLst);
+            介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(前年度以前データLst);
+            介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(今年度データLst);
+            介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(実質的な収支についてデータLst);
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             List<KaigoHokenJigyoHokokuNenpo> 修正データLst = get修正データ(insuranceInfEntity);
             介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データLst);
         }
     }
 
-    private KaigoHokenShoriDateKanri get処理日付管理マスタ() {
-        FlexibleYear 集計年度 = new FlexibleYear(div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().getValue());
-        LasdecCode 市町村コード = new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
-        //TODO
+    private KaigoHokenShoriDateKanri get処理日付管理マスタ(InsuranceInformation insuranceInfEntity) {
+        FlexibleYear 集計年度
+                = new FlexibleYear(new RDate(div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getText().toString()).getYear().toString());
+        LasdecCode 市町村コード;
+        if (!div.getYoshikiYonnosanMeisai().getDdlShicyoson().isDisplayNone()) {
+            市町村コード = new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
+        } else {
+            市町村コード = insuranceInfEntity.get市町村コード();
+        }
         KaigoHokenShoriDateKanri 処理日付管理マスタ = new KaigoHokenShoriDateKanri(SubGyomuCode.DBU介護統計報告, 市町村コード,
                 JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況, DOUBLE_ZEOR, 集計年度, DOUBLE_ZEOR,
                 FlexibleDate.EMPTY, RDate.getNowDateTime(), new FlexibleDate(集計年度.getYearValue(), INT4, 1),

@@ -63,7 +63,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
         myBatisParameter = paramter.toIinShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-        myBatisParameter.setHaishiFlag_False(IsHaishi.廃止されていない.is廃止());
+        myBatisParameter.setHaishiFlag_False(IsHaishi.有効.is廃止());
         myBatisParameter.setHaishiFlag_True(IsHaishi.廃止.is廃止());
         myBatisParameter.setSisutemuYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
         shinsakaiIinJohoList = mapper.getShinsakaiIinJoho(myBatisParameter);

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005SetaiHaakuTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019SetaiSudeTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 
 /**
@@ -17,6 +17,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
  * @reamsid_L DBB-0640-020 chenaoqi
  */
 public interface ISetaiShotokuKazeiHanteiMapper {
+
+    /**
+     * 世帯員所得情報一時テーブルを作成
+     */
+    void createTmpSetaiShotoku();
 
     /**
      * 世帯員所得情報一時が1を作成します
@@ -35,14 +40,14 @@ public interface ISetaiShotokuKazeiHanteiMapper {
      *
      * @return 世帯員把握入力Tempのデータ
      */
-    List<DbT2005SetaiHaakuTempEntity> get世帯員把握入力Temp();
+    List<SetaiHaakuEntity> get世帯員把握入力Temp();
 
     /**
      * 世帯員所得情報一時を作成します
      *
-     * @param 世帯員所得情報Entity DbT2019SetaiSudeTempEntity
+     * @param 世帯員所得情報Entity SetaiShotokuEntity
      */
-    void insert世帯員所得情報一時(DbT2019SetaiSudeTempEntity 世帯員所得情報Entity);
+    void insert世帯員所得情報一時(SetaiShotokuEntity 世帯員所得情報Entity);
 
     /**
      * 介護所得のデータの取得
@@ -63,13 +68,13 @@ public interface ISetaiShotokuKazeiHanteiMapper {
      *
      * @return 世帯員把握入力Temp
      */
-    List<DbT2005SetaiHaakuTempEntity> selectNotNull();
+    List<SetaiHaakuEntity> selectNotNull();
 
     /**
      * 世帯員把握入力Tempを更新します
      *
-     * @param entity DbT2005SetaiHaakuTempEntity
+     * @param entity SetaiHaakuEntity
      */
-    void update世帯員把握入力Temp(DbT2005SetaiHaakuTempEntity entity);
+    void update世帯員把握入力Temp(SetaiHaakuEntity entity);
 
 }

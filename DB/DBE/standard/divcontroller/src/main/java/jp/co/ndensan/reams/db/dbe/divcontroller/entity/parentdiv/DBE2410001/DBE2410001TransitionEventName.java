@@ -14,12 +14,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBE2410001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    認定調査依頼へ("認定調査依頼へ"),
-    主治医意見書作成依頼へ("主治医意見書作成依頼へ"),
     調査依頼完了("調査依頼完了"),
-    意見書依頼完了("意見書依頼完了"),
-    完了("完了"),
-    検索へ戻る("検索へ戻る");
+    意見書依頼完了("意見書依頼完了");
 
     private final RString name;
 

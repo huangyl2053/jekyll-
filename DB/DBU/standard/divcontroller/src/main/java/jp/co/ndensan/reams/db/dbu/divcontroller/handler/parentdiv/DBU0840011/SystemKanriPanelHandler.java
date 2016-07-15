@@ -214,7 +214,28 @@ public class SystemKanriPanelHandler {
         setDB_更新(ConfigNameDBU.検索画面設定_カーソル位置, div.getSystemKanri().getSearchCondition().getDdlCursorPosition().getSelectedKey());
         setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_前方一致条件有無, div.getSystemKanri().getSearchCondition().getRadForwardMatch().getSelectedKey());
         setDB_更新(ConfigNameDBU.検索制御_最大取得件数, new RString(div.getSystemKanri().getSearchCondition().getTxtMaxGetNumber().getValue().toString()));
-        //TODO 介護宛先住所編集（共有子Div）が保存.
+        if (div.getSystemKanri().getChohyoJushoDefault().getCcdKaigoAtesakiJushoSettei().is都道府県名表示()) {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, 対象とする);
+        } else {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, 対象としない);
+        }
+        if (div.getSystemKanri().getChohyoJushoDefault().getCcdKaigoAtesakiJushoSettei().is郡名表示()) {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, 対象とする);
+        } else {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, 対象としない);
+        }
+        if (div.getSystemKanri().getChohyoJushoDefault().getCcdKaigoAtesakiJushoSettei().is市町村名表示()) {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, 対象とする);
+        } else {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, 対象としない);
+        }
+        setDB_更新(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                div.getSystemKanri().getChohyoJushoDefault().getCcdKaigoAtesakiJushoSettei().get町域編集方法());
+        if (div.getSystemKanri().getChohyoJushoDefault().getCcdKaigoAtesakiJushoSettei().is方書表示()) {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, 対象とする);
+        } else {
+            setDB_更新(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, 対象としない);
+        }
         if (div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().isAllSelected()) {
             setDB_更新(ConfigNameDBU.検索画面設定_検索オプション_被保険者対象有無, 対象とする);
         } else if (!div.getSystemKanri().getSearchCondition().getChkSearchOptionHihokensha().isAllSelected()) {

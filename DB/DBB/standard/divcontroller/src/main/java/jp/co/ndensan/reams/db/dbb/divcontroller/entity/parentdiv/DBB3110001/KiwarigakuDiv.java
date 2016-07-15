@@ -7,16 +7,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * Kiwarigaku のクラスファイル 
- * 
- * @author 自動生成
+ * Kiwarigaku のクラスファイル
+ *
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class KiwarigakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -189,6 +193,26 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi13() {
+        return this.getKiwarigakuPanel1().getLblFuchoKi13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae13() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemMae13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo13() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemGo13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen13() {
+        return this.getKiwarigakuPanel1().getLblFuchoNokigen13();
+    }
+
+    @JsonIgnore
     public Label getLblTokuchoKi1() {
         return this.getKiwarigakuPanel1().getLblTokuchoKi1();
     }
@@ -206,6 +230,26 @@ public class KiwarigakuDiv extends Panel {
     @JsonIgnore
     public Label getLblKiwarigaku5Gatsu() {
         return this.getKiwarigakuPanel1().getLblKiwarigaku5Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi14() {
+        return this.getKiwarigakuPanel1().getLblFuchoKi14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae14() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemMae14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo14() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemGo14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen14() {
+        return this.getKiwarigakuPanel1().getLblFuchoNokigen14();
     }
 
     @JsonIgnore
@@ -539,8 +583,48 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi11() {
+        return this.getKiwarigakuPanel1().getLblFuchoKi11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae11() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemMae11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo11() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemGo11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen11() {
+        return this.getKiwarigakuPanel1().getLblFuchoNokigen11();
+    }
+
+    @JsonIgnore
     public Label getLblKiwarigaku5Gatsu2() {
         return this.getKiwarigakuPanel1().getLblKiwarigaku5Gatsu2();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi12() {
+        return this.getKiwarigakuPanel1().getLblFuchoKi12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae12() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemMae12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo12() {
+        return this.getKiwarigakuPanel1().getLblFuchoGemmemGo12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen12() {
+        return this.getKiwarigakuPanel1().getLblFuchoNokigen12();
     }
 
     @JsonIgnore
@@ -574,7 +658,7 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoChoteiYY1(TextBoxDate txtKanendoChoteiYY1) {
+    public void setTxtKanendoChoteiYY1(TextBoxDate txtKanendoChoteiYY1) {
         this.getKiwarigakuKanendo1().setTxtKanendoChoteiYY1(txtKanendoChoteiYY1);
     }
 
@@ -584,7 +668,7 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoFukaYY1(TextBoxDate txtKanendoFukaYY1) {
+    public void setTxtKanendoFukaYY1(TextBoxDate txtKanendoFukaYY1) {
         this.getKiwarigakuKanendo1().setTxtKanendoFukaYY1(txtKanendoFukaYY1);
     }
 
@@ -594,7 +678,7 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuPanel2(KiwarigakuPanel2Div KiwarigakuPanel2) {
+    public void setKiwarigakuPanel2(KiwarigakuPanel2Div KiwarigakuPanel2) {
         this.getKiwarigakuKanendo1().setKiwarigakuPanel2(KiwarigakuPanel2);
     }
 
@@ -629,6 +713,26 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getKi1() {
+        return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getKi1();
+    }
+
+    @JsonIgnore
+    public Label getMae1() {
+        return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getMae1();
+    }
+
+    @JsonIgnore
+    public Label getGo1() {
+        return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getGo1();
+    }
+
+    @JsonIgnore
+    public Label getNokigen1() {
+        return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getNokigen1();
+    }
+
+    @JsonIgnore
     public Label getLblKiwarigaku2Total() {
         return this.getKiwarigakuKanendo1().getKiwarigakuPanel2().getLblKiwarigaku2Total();
     }
@@ -639,7 +743,7 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoChoteiYY2(TextBoxDate txtKanendoChoteiYY2) {
+    public void setTxtKanendoChoteiYY2(TextBoxDate txtKanendoChoteiYY2) {
         this.getKiwarigakuKanendo2().setTxtKanendoChoteiYY2(txtKanendoChoteiYY2);
     }
 
@@ -649,7 +753,7 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoFukaYY2(TextBoxDate txtKanendoFukaYY2) {
+    public void setTxtKanendoFukaYY2(TextBoxDate txtKanendoFukaYY2) {
         this.getKiwarigakuKanendo2().setTxtKanendoFukaYY2(txtKanendoFukaYY2);
     }
 
@@ -659,7 +763,7 @@ public class KiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuPanel3(KiwarigakuPanel3Div KiwarigakuPanel3) {
+    public void setKiwarigakuPanel3(KiwarigakuPanel3Div KiwarigakuPanel3) {
         this.getKiwarigakuKanendo2().setKiwarigakuPanel3(KiwarigakuPanel3);
     }
 
@@ -691,6 +795,26 @@ public class KiwarigakuDiv extends Panel {
     @JsonIgnore
     public Label getLblKiwarigaku34Gatsu() {
         return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getLblKiwarigaku34Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getKi2() {
+        return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getKi2();
+    }
+
+    @JsonIgnore
+    public Label getMae2() {
+        return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getMae2();
+    }
+
+    @JsonIgnore
+    public Label getGo2() {
+        return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getGo2();
+    }
+
+    @JsonIgnore
+    public Label getNokigen() {
+        return this.getKiwarigakuKanendo2().getKiwarigakuPanel3().getNokigen();
     }
 
     @JsonIgnore

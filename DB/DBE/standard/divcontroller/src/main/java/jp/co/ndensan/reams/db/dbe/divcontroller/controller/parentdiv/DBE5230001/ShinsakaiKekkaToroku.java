@@ -5,21 +5,39 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5230001;
 
+import java.util.Collection;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.ShinsakaiKekkaTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -34,19 +52,19 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ShinsakaiKekkaToroku {
 
     private static final RString HASDATA = new RString("1");
+    private static final RString 認定_01 = new RString("認定");
+    private static final RString 申請時コード_5 = new RString("5");
+    private static final RString 申請時コード_6 = new RString("6");
+    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
 
     private final ShinsakaiKekkaTorokuManager manager;
-    //private final NinteiShinseiJohoManager 要介護認定結果情報Manager;
-    //private final ShinsakaiWariateJohoManager 介護認定審査会開催予定情報manager;
 
     /**
      * コンストラクタです。
      */
     public ShinsakaiKekkaToroku() {
-        ViewStateHolder.put(ViewStateKeys.開催番号, new RString("209007"));
+        ViewStateHolder.put(ViewStateKeys.開催番号, new RString("11256"));
         this.manager = ShinsakaiKekkaTorokuManager.createInstance();
-        //this.要介護認定結果情報Manager = NinteiShinseiJohoManager.createInstance();
-        //this.介護認定審査会開催予定情報manager = new ShinsakaiWariateJohoManager();
     }
 
     /**
@@ -56,18 +74,28 @@ public class ShinsakaiKekkaToroku {
      * @return ResponseData<ShinsakaiKekkaTorokuDiv> 介護認定審査会審査結果登録Div
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onLoad(ShinsakaiKekkaTorokuDiv div) {
+        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
+            throw new PessimisticLockingException();
+        }
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         getHandler(div).onLoad(headList, iChiRanList);
-
-        List<ShinsakaiWariateJoho> yoteiJohoList = manager.get審査会委員一覧検索_業務概念_1(開催番号).records();
+        List<ShinsakaiWariateJoho> yoteiJohoList = manager.get介護認定審査会割当情報(開催番号).records();
         Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
 
-        List<NinteiShinseiJoho> shinseiJohoList = manager.get審査会委員一覧検索_業務概念_2(開催番号).records();
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho = Models.create(shinseiJohoList);
+        List<NinteiShinseiJoho> ninteiShinseiJohoList = manager.get要介護認定申請情報(開催番号).records();
+        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho = Models.create(ninteiShinseiJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
+
+        List<NinteiKekkaJoho> ninteiKekkaJohoList = manager.get要介護認定結果情報(開催番号).records();
+        Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho = Models.create(ninteiKekkaJohoList);
+        ViewStateHolder.put(ViewStateKeys.要介護認定結果情報, ninteiKekkaJoho);
+
+        List<NinteiKanryoJoho> ninteiKanryoJohoList = manager.get要介護認定完了情報(開催番号).records();
+        Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho = Models.create(ninteiKanryoJohoList);
+        ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, ninteiKanryoJoho);
 
         return ResponseData.of(div).respond();
     }
@@ -114,15 +142,16 @@ public class ShinsakaiKekkaToroku {
                 getHandler(div).有効月数チェック();
                 getHandler(div).有効月数範囲チェック();
                 getHandler(div).入力チェック();
-                getHandler(div).setKobetsuHyojiArea();
+                getHandler(div).setTaishoshaIchiran();
             }
         } else {
             getHandler(div).設定期間Fromと設定期間Toの前後順();
             getHandler(div).有効月数チェック();
             getHandler(div).有効月数範囲チェック();
             getHandler(div).入力チェック();
-            getHandler(div).setKobetsuHyojiArea();
+            getHandler(div).setTaishoshaIchiran();
         }
+        getHandler(div).setKobetsuHyojiAreaClear();
         return ResponseData.of(div).respond();
     }
 
@@ -141,10 +170,195 @@ public class ShinsakaiKekkaToroku {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            getHandler(div).setKobetsuHyojiArea();
+            審査結果登録処理(div);
+            前排他キーの解除(SHINSEISHOKANRINO);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 審査結果登録処理(ShinsakaiKekkaTorokuDiv div) {
+        List<dgTaishoshaIchiran_Row> rowList = div.getDgTaishoshaIchiran().getDataSource();
+        Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
+                = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
+        Collection<NinteiKekkaJoho> ninteiKekkaJohoList = ninteiKekkaJoho.values();
+        upd介護認定審査会割当情報(rowList);
+        for (dgTaishoshaIchiran_Row row : rowList) {
+            if (HASDATA.equals(row.getUpDateFlag()) && 認定_01.equals(row.getHanteiKekka())) {
+                if (ninteiKekkaJohoList.isEmpty()) {
+                    ins要介護認定結果情報(rowList);
+                    upd要介護認定申請情報(rowList);
+                } else {
+                    upd要介護認定結果情報(rowList);
+                }
+            }
+            if (HASDATA.equals(row.getUpDateFlag()) && !認定_01.equals(row.getHanteiKekka())) {
+                upd要介護認定完了情報(rowList);
+                if (!ninteiKekkaJohoList.isEmpty()) {
+                    del要介護認定結果情報(rowList);
+                }
+            }
+        }
+    }
+
+    private void upd介護認定審査会割当情報(List<dgTaishoshaIchiran_Row> rowList) {
+        Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiWariateJohoJoho
+                = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
+        Collection<ShinsakaiWariateJoho> shinsakaiWariateJohoList = shinsakaiWariateJohoJoho.values();
+        int count = 0;
+        for (ShinsakaiWariateJoho shinsakaiWariateJoho : shinsakaiWariateJohoList) {
+            dgTaishoshaIchiran_Row row = rowList.get(count);
+            Code 判定結果 = Code.EMPTY;
+            if (!RString.isNullOrEmpty(row.getHanteiKekkaCode())) {
+                判定結果 = new Code(row.getHanteiKekkaCode());
+            }
+            if (HASDATA.equals(row.getUpDateFlag())) {
+                ShinsakaiWariateJohoBuilder shinsakaiWariate = shinsakaiWariateJoho.createBuilderForEdit();
+                shinsakaiWariate.set判定結果コード(判定結果);
+                shinsakaiWariateJoho = shinsakaiWariate.build();
+                manager.upd介護認定審査会割当情報(shinsakaiWariateJoho);
+            }
+            count = count + 1;
+        }
+    }
+
+    private void upd要介護認定申請情報(List<dgTaishoshaIchiran_Row> rowList) {
+        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
+                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
+        Collection<NinteiShinseiJoho> ninteiShinseiJohoList = ninteiShinseiJoho.values();
+        int count = 0;
+        for (NinteiShinseiJoho ninteiShinsei : ninteiShinseiJohoList) {
+            dgTaishoshaIchiran_Row row = rowList.get(count);
+            Code 法令コード = Code.EMPTY;
+            if (!RString.isNullOrEmpty(row.getHanteiKekkaCode())) {
+                法令コード = new Code(row.getShinseiKubunLawCode());
+            }
+            if (申請時コード_5.equals(row.getShinseiKubunShinseijiCode())
+                    || 申請時コード_6.equals(row.getShinseiKubunShinseijiCode())) {
+                法令コード = new Code("4");
+            }
+            if (HASDATA.equals(row.getUpDateFlag())) {
+                NinteiShinseiJohoBuilder ninteiShinseiBuilder = ninteiShinsei.createBuilderForEdit();
+                ninteiShinseiBuilder.set認定申請区分_法令_コード(法令コード);
+                ninteiShinsei = ninteiShinseiBuilder.build();
+                manager.upd要介護認定申請情報(ninteiShinsei);
+            }
+            count = count + 1;
+        }
+    }
+
+    private void ins要介護認定結果情報(List<dgTaishoshaIchiran_Row> rowList) {
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        for (dgTaishoshaIchiran_Row row : rowList) {
+            if (HASDATA.equals(row.getUpDateFlag())) {
+                NinteiKekkaJoho ninteiKekka = new NinteiKekkaJoho(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                NinteiKekkaJohoBuilder ninteiKekkaBuilder = ninteiKekka.createBuilderForEdit();
+                ninteiKekkaBuilder.set二次判定年月日(row.getNijiHanteiDate().getValue());
+                RString 二次判定コード = row.getKonkaiNijiHanteiCode();
+                if (!RString.isNullOrEmpty(二次判定コード)) {
+                    ninteiKekkaBuilder.set二次判定要介護状態区分コード(new Code(二次判定コード));
+                } else {
+                    ninteiKekkaBuilder.set二次判定要介護状態区分コード(Code.EMPTY);
+                }
+                RString 月数 = row.getNinteiKikanTukisu();
+                if (!RString.isNullOrEmpty(月数)) {
+                    ninteiKekkaBuilder.set二次判定認定有効期間(Integer.parseInt(月数.toString()));
+                }
+                ninteiKekkaBuilder.set二次判定認定有効開始年月日(row.getNinteiKikanKaishi().getValue());
+                ninteiKekkaBuilder.set二次判定認定有効終了年月日(row.getNinteiKikanShuryo().getValue());
+                ninteiKekkaBuilder.set介護認定審査会開催番号(開催番号);
+                ninteiKekkaBuilder.set介護認定審査会意見(row.getHidIken());
+                ninteiKekkaBuilder.set一次判定結果変更理由(row.getIchijiHanteiKekkaHenkoRiyu());
+                RString 状態像例コード = row.getJotaizoCode();
+                if (!RString.isNullOrEmpty(状態像例コード)) {
+                    ninteiKekkaBuilder.set要介護状態像例コード(new Code(状態像例コード));
+                } else {
+                    ninteiKekkaBuilder.set要介護状態像例コード(Code.EMPTY);
+                }
+                ninteiKekkaBuilder.set認定審査会意見種類(row.getHidIkenCode());
+                ninteiKekkaBuilder.set審査会メモ(row.getHidMemo());
+                ninteiKekkaBuilder.set二次判定結果入力方法(new Code("1"));
+                ninteiKekkaBuilder.set二次判定結果入力年月日(new FlexibleDate(RDate.getNowDate().toString()));
+                ninteiKekka = ninteiKekkaBuilder.build();
+                manager.ins要介護認定結果情報(ninteiKekka);
+            }
+        }
+    }
+
+    private void upd要介護認定結果情報(List<dgTaishoshaIchiran_Row> rowList) {
+        Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
+                = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        Collection<NinteiKekkaJoho> ninteiKekkaJohoList = ninteiKekkaJoho.values();
+        int count = 0;
+        for (NinteiKekkaJoho ninteiKekka : ninteiKekkaJohoList) {
+            dgTaishoshaIchiran_Row row = rowList.get(count);
+            if (HASDATA.equals(row.getUpDateFlag())) {
+                NinteiKekkaJohoBuilder ninteiKekkaBuilder = ninteiKekka.createBuilderForEdit();
+                ninteiKekkaBuilder.set二次判定年月日(row.getNijiHanteiDate().getValue());
+                RString 二次判定コード = row.getKonkaiNijiHanteiCode();
+                if (!RString.isNullOrEmpty(二次判定コード)) {
+                    ninteiKekkaBuilder.set二次判定要介護状態区分コード(new Code(二次判定コード));
+                } else {
+                    ninteiKekkaBuilder.set二次判定要介護状態区分コード(Code.EMPTY);
+                }
+                RString 月数 = row.getNinteiKikanTukisu();
+                if (!RString.isNullOrEmpty(月数)) {
+                    ninteiKekkaBuilder.set二次判定認定有効期間(Integer.parseInt(月数.toString()));
+                }
+                ninteiKekkaBuilder.set二次判定認定有効開始年月日(row.getNinteiKikanKaishi().getValue());
+                ninteiKekkaBuilder.set二次判定認定有効終了年月日(row.getNinteiKikanShuryo().getValue());
+                ninteiKekkaBuilder.set介護認定審査会開催番号(開催番号);
+                ninteiKekkaBuilder.set介護認定審査会意見(row.getHidIken());
+                ninteiKekkaBuilder.set一次判定結果変更理由(row.getIchijiHanteiKekkaHenkoRiyu());
+                RString 状態像例コード = row.getJotaizoCode();
+                if (!RString.isNullOrEmpty(状態像例コード)) {
+                    ninteiKekkaBuilder.set要介護状態像例コード(new Code(状態像例コード));
+                } else {
+                    ninteiKekkaBuilder.set要介護状態像例コード(Code.EMPTY);
+                }
+                ninteiKekkaBuilder.set認定審査会意見種類(row.getHidIkenCode());
+                ninteiKekkaBuilder.set審査会メモ(row.getHidMemo());
+                ninteiKekkaBuilder.set二次判定結果入力方法(new Code("1"));
+                ninteiKekkaBuilder.set二次判定結果入力年月日(new FlexibleDate(RDate.getNowDate().toString()));
+                ninteiKekka = ninteiKekkaBuilder.build();
+                manager.upd要介護認定結果情報(ninteiKekka);
+            }
+            count = count + 1;
+        }
+    }
+
+    private void del要介護認定結果情報(List<dgTaishoshaIchiran_Row> rowList) {
+        Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
+                = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
+        Collection<NinteiKekkaJoho> ninteiKekkaJohoList = ninteiKekkaJoho.values();
+        int count = 0;
+        for (NinteiKekkaJoho ninteiKekka : ninteiKekkaJohoList) {
+            dgTaishoshaIchiran_Row row = rowList.get(count);
+            if (HASDATA.equals(row.getUpDateFlag())) {
+                NinteiKekkaJohoBuilder ninteiKekkaBuilder = ninteiKekka.createBuilderForEdit();
+                ninteiKekkaBuilder.set二次判定年月日(row.getNijiHanteiDate().getValue());
+                ninteiKekka = ninteiKekkaBuilder.build();
+                manager.del要介護認定結果情報(ninteiKekka);
+            }
+            count = count + 1;
+        }
+    }
+
+    private void upd要介護認定完了情報(List<dgTaishoshaIchiran_Row> rowList) {
+        Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho
+                = ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, Models.class);
+        Collection<NinteiKanryoJoho> ninteiKanryoJohoList = ninteiKanryoJoho.values();
+        int count = 0;
+        for (NinteiKanryoJoho ninteiKanryo : ninteiKanryoJohoList) {
+            dgTaishoshaIchiran_Row row = rowList.get(count);
+            if (HASDATA.equals(row.getUpDateFlag())) {
+                NinteiKanryoJohoBuilder ninteiKanryoBuilder = ninteiKanryo.createBuilderForEdit();
+                ninteiKanryoBuilder.set認定審査会割当完了年月日(FlexibleDate.EMPTY);
+                ninteiKanryo = ninteiKanryoBuilder.build();
+                manager.upd要介護認定完了情報(ninteiKanryo);
+            }
+            count = count + 1;
+        }
     }
 
     /**
@@ -154,18 +368,12 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onChange_HanteiKekka(ShinsakaiKekkaTorokuDiv div) {
-        if (HASDATA.equals(div.getKobetsuHyojiArea().getHasData()) && getHandler(div).hasChange()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).setKobetsuHyojiArea();
-            }
+        boolean hyojiSeigyoFlag = false;
+        if (認定_01.equals(div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedValue())) {
+            hyojiSeigyoFlag = true;
+            getHandler(div).setDdlNijiHanteiHenkouSeigyo(hyojiSeigyoFlag);
         } else {
-            getHandler(div).setKobetsuHyojiArea();
+            getHandler(div).setDdlNijiHanteiHenkouSeigyo(hyojiSeigyoFlag);
         }
         return ResponseData.of(div).respond();
     }
@@ -177,19 +385,8 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
-        if (HASDATA.equals(div.getKobetsuHyojiArea().getHasData()) && getHandler(div).hasChange()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).setKobetsuHyojiArea();
-            }
-        } else {
-            getHandler(div).setKobetsuHyojiArea();
-        }
+        getHandler(div).setNinteiKikan();
+        getHandler(div).setHanteiKekka();
         return ResponseData.of(div).respond();
     }
 
@@ -200,19 +397,7 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onChange_NinteiKikanMonth(ShinsakaiKekkaTorokuDiv div) {
-        if (HASDATA.equals(div.getKobetsuHyojiArea().getHasData()) && getHandler(div).hasChange()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).setKobetsuHyojiArea();
-            }
-        } else {
-            getHandler(div).setKobetsuHyojiArea();
-        }
+        getHandler(div).setShinsakaiIken();
         return ResponseData.of(div).respond();
     }
 
@@ -229,6 +414,22 @@ public class ShinsakaiKekkaToroku {
     }
 
     /**
+     * ダイアログ上で選択したメモ定型文情報を取得します。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return ResponseData
+     */
+    public ResponseData onOkClose_btnMemoTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
+
+        RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtShinsakaiMemo().getValue() == null
+                ? RString.EMPTY : div.getTxtShinsakaiMemo().getValue());
+        serviceSakujo.append(div.getHdnSampleText());
+        div.getTxtShinsakaiMemo().setValue(serviceSakujo.toRString());
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 意見書定型文ダイアログ表示前、データを設定します。
      *
      * @param div 介護認定審査会審査結果登録Div
@@ -237,6 +438,22 @@ public class ShinsakaiKekkaToroku {
     public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnIkenTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
         div.setHdnSubGyomuCd(GyomuCode.DB介護保険.value());
         div.setHdnGroupCd(new RString("5201"));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * ダイアログ上で選択した意見書定型文情報を取得します。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return ResponseData
+     */
+    public ResponseData onOkClose_btnIkenTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
+
+        RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtShinsakaiIken().getValue() == null
+                ? RString.EMPTY : div.getTxtShinsakaiIken().getValue());
+        serviceSakujo.append(div.getHdnSampleText());
+        div.getTxtShinsakaiIken().setValue(serviceSakujo.toRString());
+
         return ResponseData.of(div).respond();
     }
 
@@ -253,15 +470,51 @@ public class ShinsakaiKekkaToroku {
     }
 
     /**
-     * 審査会データ空チェックを実施します。
+     * ダイアログ上で選択した一次判定結果変更理由定型文情報を取得します。
      *
      * @param div 介護認定審査会審査結果登録Div
-     * @return ResponseData<NenreiTotatsuTorokushaListDiv>
+     * @return ResponseData
      */
-    public ResponseData<ShinsakaiKekkaTorokuDiv> onClick_Check(ShinsakaiKekkaTorokuDiv div) {
-//        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+    public ResponseData onOkClose_btnIChiTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
+
+        RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtIchijiHanteiKekkaHenkoRiyu().getValue() == null
+                ? RString.EMPTY : div.getTxtIchijiHanteiKekkaHenkoRiyu().getValue());
+        serviceSakujo.append(div.getHdnSampleText());
+        div.getTxtIchijiHanteiKekkaHenkoRiyu().setValue(serviceSakujo.toRString());
 
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 認定調査状況照会ダイアログ表示前、データを設定します。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return ResponseData<ShinsakaiKekkaTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnNinteiChosaJokyoShokai(ShinsakaiKekkaTorokuDiv div) {
+//
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 1.5次判定ダイアログ表示前、データを設定します。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return ResponseData<ShinsakaiKekkaTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnIchigoHantei(ShinsakaiKekkaTorokuDiv div) {
+
+        return ResponseData.of(div).respond();
+    }
+
+    private boolean 前排他キーのセット(RString 申請書管理番号) {
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除(RString 申請書管理番号) {
+        LockingKey 排他キー = new LockingKey(申請書管理番号);
+        RealInitialLocker.release(排他キー);
     }
 
     private ShinsakaiKekkaTorokuHandler getHandler(ShinsakaiKekkaTorokuDiv div) {

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-5110-010 xupeng --> 
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.teikyohyobeppyo.ITeikyohyoBeppyoMapper">
+                    
+    <select id="get被保険者情報"
+            resultMap="resultMap_TeikyohyoBeppyoEntity"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT 
+        A."hihokenshaNo" as 被保険者番号,
+        A."kyotaku_SogoJigyoKubun" as 総合事業区分,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM rgdb."DbT3007KyotakuKeikakuJikoSakusei" as A     
+        INNER JOIN rgdb."DbV1001HihokenshaDaicho"  as B
+        ON  B."hihokenshaNo" = A."hihokenshaNo"
+        LEFT JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('2',#{基準日},false,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') as "ShikibetsuTaisho"
+        ON  "ShikibetsuTaisho"."shikibetsuCode" = B."shikibetsuCode"
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND A."taishoYM" = #{対象年月}
+        AND A."rirekiNo" = #{履歴番号}
+        <!--AND A."hihokenshaNo" = #{自己作成計画年月} //TODO-->
+    </select>
+    <resultMap id="resultMap_TeikyohyoBeppyoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TeikyohyoBeppyoEntity">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="総合事業区分" column="総合事業区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    
+    <select id="get短期入所利用日数"
+            resultMap="resultMap_TankiRiyoNissuEntity"
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
+        SELECT
+        A."zenkaiRiyoNissu" as 前回迄利用日数,
+        A."konkaiKeikakuRiyoNissu" as 今回計画利用日数
+        FROM
+        rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" as A     
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND A."taishoYM" = #{対象年月}
+        AND A."rirekiNo" = #{履歴番号}
+        AND A."riyoYM" = #{自己作成計画年月}
+        UNION
+        SELECT 
+        B."zenkaiRiyoNissu" as 前回迄利用日数,
+        B."konkaiKeikakuRiyoNissu" as 今回計画利用日数
+        FROM
+        rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" as B 
+        WHERE
+        B."hihokenshaNo" = #{被保険者番号}
+        AND B."taishoYM" = #{対象年月}
+        AND B."rirekiNo" = #{履歴番号}
+        AND B."riyoYM" = #{自己作成計画年月}
+    </select>
+    <resultMap id="resultMap_TankiRiyoNissuEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.teikyohyobeppyo.TankiRiyoNissuEntity">
+        <result property="前回迄利用日数" column="前回迄利用日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="今回計画利用日数" column="今回計画利用日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+    </resultMap>
+</mapper>

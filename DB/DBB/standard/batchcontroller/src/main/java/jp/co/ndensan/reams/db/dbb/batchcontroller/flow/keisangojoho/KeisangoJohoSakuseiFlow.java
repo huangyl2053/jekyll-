@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.keisangojoho;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.KeisangoJohoInsertProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.KibetsuUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.ShuyuJohoUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempInsertProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempAfterInsertProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempBeforeInsertProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 計算後情報作成_バッチフロークラスです。
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBatchParamter> {
 
     private static final String TYUKANTEMPINSERTPROCESS = "tyukanTempInsertProcess";
+    private static final String TYUKANTEMPBEFOREINSERTPROCESS = "tyukanTempBeforeInsertProcess";
     private static final String KIBETSUAFTERUPDATE = "kibetsuAfterUpdate";
     private static final String KIBETSUBEFOREUPDATE = "kibetsuBeforeUpdate";
     private static final String SHUYUJOHOAFTERUPDATE = "shuyuJohoAfterUpdate";
@@ -32,23 +35,40 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
     @Override
     protected void defineFlow() {
         executeStep(TYUKANTEMPINSERTPROCESS);
-        executeStep(KIBETSUAFTERUPDATE);
-        executeStep(SHUYUJOHOAFTERUPDATE);
-        executeStep(KEISANGOJOHOAFTERINSERT);
-        executeStep(KIBETSUBEFOREUPDATE);
-        executeStep(SHUYUJOHOBEFOREUPDATE);
-        executeStep(KEISANGOJOHOBEFOREINSERT);
+        if (getResult(Boolean.class, new RString(TYUKANTEMPINSERTPROCESS), TyukanTempAfterInsertProcess.データ有無)) {
+            executeStep(KIBETSUAFTERUPDATE);
+            executeStep(SHUYUJOHOAFTERUPDATE);
+            executeStep(KEISANGOJOHOAFTERINSERT);
+
+            executeStep(TYUKANTEMPBEFOREINSERTPROCESS);
+            executeStep(KIBETSUBEFOREUPDATE);
+            executeStep(SHUYUJOHOBEFOREUPDATE);
+            executeStep(KEISANGOJOHOBEFOREINSERT);
+        }
+
     }
 
     /**
-     * 検索した賦課情報を計算中間Tempテーブルに登録する処理クラスです。
+     * 検索した更新後賦課情報を計算中間Tempテーブルに登録する処理クラスです。
      *
      * @return TyukanTempInsertProcess
      */
     @Step(TYUKANTEMPINSERTPROCESS)
     protected IBatchFlowCommand callTyukanTempInsertProcess() {
         getParameter().set更新前フラグ(false);
-        return loopBatch(TyukanTempInsertProcess.class)
+        return loopBatch(TyukanTempAfterInsertProcess.class)
+                .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
+    }
+
+    /**
+     * 検索した更新前賦課情報を計算中間Tempテーブルに登録する処理クラスです。
+     *
+     * @return TyukanTempBeforeInsertProcess
+     */
+    @Step(TYUKANTEMPBEFOREINSERTPROCESS)
+    protected IBatchFlowCommand callTyukanTempBeforeInsertProcess() {
+        getParameter().set更新前フラグ(true);
+        return loopBatch(TyukanTempBeforeInsertProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
 
@@ -59,7 +79,6 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
      */
     @Step(KIBETSUAFTERUPDATE)
     protected IBatchFlowCommand callTyukanTempAfterUpdate() {
-        getParameter().set更新前フラグ(false);
         return loopBatch(KibetsuUpdateProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
@@ -71,7 +90,6 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
      */
     @Step(KIBETSUBEFOREUPDATE)
     protected IBatchFlowCommand callTyukanTempBeforeUpdate() {
-        getParameter().set更新前フラグ(true);
         return loopBatch(KibetsuUpdateProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
@@ -83,7 +101,6 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
      */
     @Step(SHUYUJOHOAFTERUPDATE)
     protected IBatchFlowCommand callShuyuJohoAfterUpdate() {
-        getParameter().set更新前フラグ(false);
         return loopBatch(ShuyuJohoUpdateProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
@@ -95,7 +112,6 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
      */
     @Step(SHUYUJOHOBEFOREUPDATE)
     protected IBatchFlowCommand callShuyuJohoBeforeUpdate() {
-        getParameter().set更新前フラグ(true);
         return loopBatch(ShuyuJohoUpdateProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
@@ -108,7 +124,6 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
      */
     @Step(KEISANGOJOHOAFTERINSERT)
     protected IBatchFlowCommand callKeisangoJohoAfterInsert() {
-        getParameter().set更新前フラグ(false);
         return loopBatch(KeisangoJohoInsertProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }
@@ -121,7 +136,6 @@ public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBa
      */
     @Step(KEISANGOJOHOBEFOREINSERT)
     protected IBatchFlowCommand callKeisangoJohoBeforeInsert() {
-        getParameter().set更新前フラグ(true);
         return loopBatch(KeisangoJohoInsertProcess.class)
                 .arguments(getParameter().toKeisangoJohoSakuseiProcessParamter()).define();
     }

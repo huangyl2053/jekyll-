@@ -76,7 +76,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
     public void printFukusu(List<KariTokuchoKaishiTsuchisyoJoho> 通知書情報List,
             RString 出力順ID, RYear 調定年度, YMDHMS 帳票作成日時, ReportManager reportManager) {
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200023.getReportId(),
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100003.getReportId(),
                         Long.valueOf(出力順ID.toString()));
         TokubetsuChoshuIraikingakuMeisaiIchiranProperty property = new TokubetsuChoshuIraikingakuMeisaiIchiranProperty(並び順);
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();

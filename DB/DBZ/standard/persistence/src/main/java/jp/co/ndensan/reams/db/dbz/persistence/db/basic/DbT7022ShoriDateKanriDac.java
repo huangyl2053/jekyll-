@@ -17,6 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.s
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shoriEdaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.shoriName;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.subGyomuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanri.taishoShuryoTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -846,6 +847,51 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
+     *
+     * @param 市町村識別ID RString
+     * @param 処理年度 処理年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select異動広域最大年度内連番(RString 市町村識別ID, FlexibleYear 処理年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, ShoriName.所得引出.get名称()),
+                                eq(shoriEdaban, String.format(FORMAT_補00.toString(), 市町村識別ID)),
+                                eq(nendo, 処理年度))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
+     *
+     * @param 処理年度 処理年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select異動単一最大年度内連番(FlexibleYear 処理年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, ShoriName.所得引出.get名称()),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(nendo, 処理年度))).
+                order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
      * 処理日付管理マスタテーブルから、処理状況取得する。
      *
      * @param 調定年度 調定年度
@@ -1551,6 +1597,48 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
+     * 最新の基準日時を取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最新調定日時_仮算定(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.仮算定異動賦課.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 最新の基準日時を取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最新調定日時_現年度(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.異動賦課.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
      * MAX(年度内連番)を取得します。
      *
      * @param 処理名 RString
@@ -1608,5 +1696,26 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 年度))).
                 order(by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
                 toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 特徴送付情報作成（バッチ）の処理対象期間取得
+     *
+     * @param 年度 Nendo
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理対象期間(FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, ShoriName.特徴異動情報作成),
+                                eq(nendo, 年度))).
+                order(by(taishoShuryoTimestamp, Order.DESC)).limit(1)
+                .toObject(DbT7022ShoriDateKanriEntity.class);
     }
 }

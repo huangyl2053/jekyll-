@@ -32,6 +32,8 @@
         ON  dbt5592."shinsakaiKaisaiBashoCode" = dbt5501."shinsakaiKaisaiYoteiBashoCode"
         WHERE
             dbt5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        LIMIT
+            1
     </select>
     
     <select id="getShinsakaiIinCode" resultMap="Result_ShinsakaiIinCode"
@@ -581,7 +583,7 @@
         ) AS NinteichosahyoSF
         WHERE
         dbt5208_RRKNO = '1'
-        AND NinteichosahyoSF.dbt5208_remban = '1'
+        AND remban = '1'
         ) AS ServiceJokyoFlag,
         (
         SELECT
@@ -1047,7 +1049,7 @@
         ) AS NinteichosahyoSF
         WHERE
         dbt5208_RRKNO = '1'
-        AND NinteichosahyoSF.dbt5208_remban = '1'
+        AND remban = '1'
         ) AS ServiceJokyoFlag,
         (
         SELECT

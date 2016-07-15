@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -114,7 +113,6 @@ public class KoikinaiTenkyoRirekiHenkan {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -123,7 +121,6 @@ public class KoikinaiTenkyoRirekiHenkan {
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).setState(DBE1720001StateName.完了);
         }
-        前排他キーの解除(SHINSEISHOKANRINO);
         return ResponseData.of(div).respond();
     }
 
@@ -153,7 +150,7 @@ public class KoikinaiTenkyoRirekiHenkan {
                 div.getChkSeibetsu().getSelectedKeys(),
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード(),
-                new Decimal(div.getTxtMaxCount().getValue().toString())
+                div.getTextBoxNum().getValue()
         );
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan> 申請者一覧情報List
@@ -197,12 +194,14 @@ public class KoikinaiTenkyoRirekiHenkan {
                     dataGridList.get(index).getShinseishoKanriNo());
             RString shokisaihokenshaNo = dataGridList.get(index).getShoKisaiHokenshaNo();
             boolean flag = true;
-            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo).isEmpty()) {
+            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo) == null) {
                 flag = false;
             }
             if (状態_更新.equals(state)) {
                 upDateNinteiShinseiJoho(shinseishoKanriNo, shokisaihokenshaNo, false);
-                upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                if (flag) {
+                    upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                }
             }
         }
     }

@@ -21,12 +21,10 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgCh
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgHisetsugaigosabisujukyu_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060031.dgItakuyobosabisujukyusu_Row;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -200,12 +198,17 @@ public class NenpoYoushiki2No8Handler {
     /**
      * 画面の修正データを取得します。
      *
+     * @param 件数タブデータ Models
+     * @param 費用額データ Models
+     * @param 給付額データ Models
      * @return List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト
      */
-    public List<JigyoHokokuTokeiData> get修正データ() {
+    public List<JigyoHokokuTokeiData> get修正データ(
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ,
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ,
+            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ
+    ) {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
-        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ = ViewStateHolder.
-                get(ViewStateKeys.件数データグリッド, Models.class);
         List<DetalParameter> 件数Parameter = get件数データ();
         for (DetalParameter detal : 件数Parameter) {
             for (JigyoHokokuTokeiData viewdata : 件数タブデータ) {
@@ -217,8 +220,6 @@ public class NenpoYoushiki2No8Handler {
                 }
             }
         }
-        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ = ViewStateHolder.
-                get(ViewStateKeys.費用額データグリッド, Models.class);
         List<DetalParameter> 費用額Parameter = get費用額データ();
         for (DetalParameter detal : 費用額Parameter) {
             for (JigyoHokokuTokeiData viewdata : 費用額データ) {
@@ -232,8 +233,6 @@ public class NenpoYoushiki2No8Handler {
                 }
             }
         }
-        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ = ViewStateHolder.
-                get(ViewStateKeys.給付額データグリッド, Models.class);
         List<DetalParameter> 給付額Parameter = get給付額データ();
         for (DetalParameter detal : 給付額Parameter) {
             for (JigyoHokokuTokeiData viewdata : 給付額データ) {

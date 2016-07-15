@@ -40,6 +40,7 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString ROOTTITLE = new RString("主治医意見書作成料入力の保存処理が完了しました。");
 
     /**
      * 初期化の設定します。
@@ -231,6 +232,7 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
                     ShujiiIkenshoSakuseiryoNyuryokuFinder.createInstance().delete(models, key);
                 }
             }
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE6080001StateName.完了状態);
         }
         return ResponseData.of(div).respond();

@@ -16,7 +16,7 @@ public enum DBD1090002StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    setaiInfo("setaiInfo");
+    利用者負担額減免("利用者負担額減免");
 
     private final RString name;
 

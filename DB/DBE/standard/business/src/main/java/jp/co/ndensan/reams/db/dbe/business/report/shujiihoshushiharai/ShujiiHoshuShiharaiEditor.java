@@ -27,7 +27,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ShujiiIkensho5komokuEntity}
+     * @param item {@link ShujiiHoshuShiharaiEntity}
      */
     protected ShujiiHoshuShiharaiEditor(ShujiiHoshuShiharaiEntity item) {
         this.item = item;

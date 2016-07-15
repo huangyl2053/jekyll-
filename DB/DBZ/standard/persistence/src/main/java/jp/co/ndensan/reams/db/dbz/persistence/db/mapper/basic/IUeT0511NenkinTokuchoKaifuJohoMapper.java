@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoE
 /**
  * {@link jp.co.ndensan.reams.db.dbb.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity}のマッパーIFです。
  *
- * @author 陳奥奇
+ * @reamsid_L DBZ-9999-022 yangchenbing
  */
 public interface IUeT0511NenkinTokuchoKaifuJohoMapper {
 

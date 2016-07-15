@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-9999-013 wangchao-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IAtesakiPSMMybatisMapper">
+    <select id="selectAtesakiPSMMybatis"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.AtesakiPSMMybatisParameter" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" />
+        AS
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />
+    </select>
+</mapper>

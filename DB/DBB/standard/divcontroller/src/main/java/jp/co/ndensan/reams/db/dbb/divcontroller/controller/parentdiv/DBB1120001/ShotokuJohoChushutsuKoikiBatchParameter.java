@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120001
 
 import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
@@ -108,12 +108,12 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      * 「実行する」を押下場合、バッチを起動します。
      *
      * @param div 異動チェックリストDIV
-     * @return ResponseData<ShotokuJohoTyushutuRenkeiKoikiParameter>
+     * @return ResponseData<ShotokuJohoBatchresultKoikiParameter>
      */
-    public ResponseData<ShotokuJohoTyushutuRenkeiKoikiParameter> onclick_batchRegister(
+    public ResponseData<ShotokuJohoBatchresultKoikiParameter> onclick_batchRegister(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
-        ShotokuJohoTyushutuRenkeiKoikiParameter parameter = handler.getBatchParamter();
+        ShotokuJohoBatchresultKoikiParameter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 

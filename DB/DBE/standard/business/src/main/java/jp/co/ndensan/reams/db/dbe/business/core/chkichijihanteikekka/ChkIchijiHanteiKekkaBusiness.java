@@ -49,8 +49,8 @@ public final class ChkIchijiHanteiKekkaBusiness {
     private static final RString 識別コード02A = new RString("02A");
     private static final RString 識別コード09A = new RString("09A");
     private static final RString 識別コード99A = new RString("99A");
-    private static final RString 予防給付 = new RString("予防給付");
-    private static final RString 介護給付 = new RString("介護給付");
+    private static final RString 予防給付 = new RString("予防給付サービス");
+    private static final RString 介護給付 = new RString("介護給付サービス");
     private static final RString 回月 = new RString("回 /月");
     private static final RString 日月 = new RString("日 /月");
     private static final RString 住宅改修 = new RString("住宅改修                                           ：");
@@ -1054,7 +1054,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(予防サービス状況リスト);
             builder.append(System.lineSeparator());
             builder.append(介護予防訪問介護);
-            builder.append(dbt5207Entity.get(0).getServiceJokyo());
+            builder.append(getサービス連番の状況(dbt5207Entity, 0));
             builder.append(回月);
             builder.append(System.lineSeparator());
             builder.append(介護予防訪問入浴介護);
@@ -1102,7 +1102,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(品目_6月間);
             builder.append(System.lineSeparator());
             builder.append(住宅改修);
-            if (dbt5208Entity.get(0).getServiceJokyoFlag()) {
+            if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
                 builder.append(new RString("1"));
             } else {
                 builder.append(new RString("0"));
@@ -1125,7 +1125,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(予防サービス状況リスト);
             builder.append(System.lineSeparator());
             builder.append(介護予防訪問介護);
-            builder.append(dbt5207Entity.get(0).getServiceJokyo());
+            builder.append(getサービス連番の状況(dbt5207Entity, 0));
             builder.append(回月);
             builder.append(System.lineSeparator());
             builder.append(介護予防訪問入浴介護);
@@ -1173,7 +1173,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(品目_6月間);
             builder.append(System.lineSeparator());
             builder.append(住宅改修);
-            if (dbt5208Entity.get(0).getServiceJokyoFlag()) {
+            if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
                 builder.append(new RString("1"));
             } else {
                 builder.append(new RString("0"));
@@ -1207,7 +1207,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(介護サービス状況リスト);
             builder.append(System.lineSeparator());
             builder.append(訪問介護_ホームヘルプサービス);
-            builder.append(dbt5207Entity.get(0).getServiceJokyo());
+            builder.append(getサービス連番の状況(dbt5207Entity, 0));
             builder.append(回月);
             builder.append(System.lineSeparator());
             builder.append(訪問入浴介護);
@@ -1255,7 +1255,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(品目_6月間);
             builder.append(System.lineSeparator());
             builder.append(住宅改修);
-            if (dbt5208Entity.get(0).getServiceJokyoFlag()) {
+            if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
                 builder.append(new RString("1"));
             } else {
                 builder.append(new RString("0"));
@@ -1314,7 +1314,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(介護サービス状況リスト);
             builder.append(System.lineSeparator());
             builder.append(訪問介護_ホームヘルプサービス);
-            builder.append(dbt5207Entity.get(0).getServiceJokyo());
+            builder.append(getサービス連番の状況(dbt5207Entity, 0));
             builder.append(回月);
             builder.append(System.lineSeparator());
             builder.append(訪問入浴介護);
@@ -1362,7 +1362,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             builder.append(品目_6月間);
             builder.append(System.lineSeparator());
             builder.append(住宅改修);
-            if (dbt5208Entity.get(0).getServiceJokyoFlag()) {
+            if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
                 builder.append(new RString("1"));
             } else {
                 builder.append(new RString("0"));

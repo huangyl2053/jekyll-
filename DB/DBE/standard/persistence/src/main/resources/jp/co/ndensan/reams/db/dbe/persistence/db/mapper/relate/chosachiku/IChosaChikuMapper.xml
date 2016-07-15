@@ -54,13 +54,4 @@
         AND DbT5223ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
         ORDER BY DbT5223ChikuNinteiChosain."yusenNo"
     </select>
-    
-    <delete id="delete認定調査員情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachiku.ChosaChikuMapperParameter">
-        DELETE 
-        FROM rgdb."DbT5223ChikuNinteiChosain" AS DbT5223ChikuNinteiChosain
-        WHERE DbT5223ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
-        AND DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
-        AND DbT5223ChikuNinteiChosain."ninteiChosainCode" = #{ninteiChosainCode}
-        AND DbT5223ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
-    </delete>
 </mapper>

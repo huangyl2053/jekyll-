@@ -7,19 +7,29 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.inputShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.kokanJohoShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.kyufuJissekiKubunCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.kyufuSakuseiKubunCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.recodeShubetsuCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.shokisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehi.toshiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -27,11 +37,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 給付実績高額介護サービス費のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-2020-070 quxiaodong
  */
 public class DbT3028KyufujissekiKogakuKaigoServicehiDac implements ISaveable<DbT3028KyufujissekiKogakuKaigoServicehiEntity> {
 
     @InjectSession
     private SqlSession session;
+    private static final RString 定値_識別番号 = new RString("3411");
 
     /**
      * 主キーで給付実績高額介護サービス費を取得します。
@@ -98,6 +111,35 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiDac implements ISaveable<DbT
         return accessor.select().
                 table(DbT3028KyufujissekiKogakuKaigoServicehi.class).
                 toList(DbT3028KyufujissekiKogakuKaigoServicehiEntity.class);
+    }
+
+    /**
+     * 給付実績高額介護サービス費を全件返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 証記載保険者番号 HokenshaNo
+     * @return List<DbT3028KyufujissekiKogakuKaigoServicehiEntity>
+     */
+    @Transaction
+    public DbT3028KyufujissekiKogakuKaigoServicehiEntity selectAllByKey(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            HokenshaNo 証記載保険者番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3028KyufujissekiKogakuKaigoServicehi.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(shokisaiHokenshaNo, 証記載保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(inputShikibetsuNo, new NyuryokuShikibetsuNo(定値_識別番号)))).
+                order(by(DbT3028KyufujissekiKogakuKaigoServicehi.shinsaYM, Order.DESC),
+                        by(DbT3028KyufujissekiKogakuKaigoServicehi.kyufuSakuseiKubunCode, Order.ASC)).limit(1).
+                toObject(DbT3028KyufujissekiKogakuKaigoServicehiEntity.class);
     }
 
     /**

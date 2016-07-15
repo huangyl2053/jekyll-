@@ -41,7 +41,7 @@ public class FukaKijunTotalValidationHandler {
     }
 
     /**
-     * グリッド内の基準所得金額の必須チェックのバリデーションチェック。
+     * グリッド内の基準所得金額の必須チェックのバリデーションチェックです。
      *
      * @return バリデーション突合結果
      */
@@ -57,14 +57,14 @@ public class FukaKijunTotalValidationHandler {
             RString 段階区分 = row.getDdlHokenryoDankai().getSelectedValue();
             if (保険料率 != null && !状態 && (基準所得金額 == null || 基準所得金額.equals(Decimal.ZERO))) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.指定ファイルが存在しない, メッセージKEY.toString().replace(引数_XX, 段階区分))));
+                        UrErrorMessages.入力値が不正_追加メッセージあり, メッセージKEY.toString().replace(引数_XX, 段階区分))));
             }
         }
         return validPairs;
     }
 
     /**
-     * 保険料段階マスタが不正チェックのバリデーションチェック。
+     * 保険料段階マスタが不正チェックのバリデーションチェックです。
      *
      * @param 賦課年度 FlexibleYear
      * @return バリデーション突合結果
@@ -77,7 +77,7 @@ public class FukaKijunTotalValidationHandler {
     }
 
     /**
-     * 保険料率が不正チェックのバリデーションチェック。
+     * 保険料率が不正チェックのバリデーションチェックです。
      *
      * @return バリデーション突合結果
      */

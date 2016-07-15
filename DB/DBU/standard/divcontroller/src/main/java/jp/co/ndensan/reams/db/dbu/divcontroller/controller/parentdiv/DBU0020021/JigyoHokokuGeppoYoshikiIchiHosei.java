@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -39,7 +38,6 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
     private static final RString MSG_ZGHIHOKENSHASUKSRESULT = new RString("前月末世帯数から増減した被保険者数の計算結果");
     private static final RString MSG_KOUSIN = new RString("更新");
     private static final RString MSG_SAKUJO = new RString("削除");
-
     private static final RString KEY_第1号被保険者数情報 = new RString("第1号被保険者数情報");
     private static final RString KEY_第1号被保険者増減内訳情報_当月中増 = new RString("第1号被保険者増減内訳情報_当月中増");
     private static final RString KEY_第1号被保険者増減内訳情報_当月中滅 = new RString("第1号被保険者増減内訳情報_当月中滅");
@@ -73,23 +71,22 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
      */
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onClick_btnModUpdate(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
-        JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (DBU0020021StateName.削除状態.getName().equals(状態) && !ResponseHolder.isReRequest()) {
-            handler.delete(引き継ぎデータ);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         List<JigyoHokokuTokeiData> 第1号被保険者数情報
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者数情報, List.class);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中増
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中増, List.class);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ,
+        JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
+        if (MSG_SAKUJO.equals(状態) && !ResponseHolder.isReRequest()) {
+            handler.delete(第1号被保険者数情報);
+            handler.delete(第1号被保険者増減内訳情報_当月中増);
+            handler.delete(第1号被保険者増減内訳情報_当月中滅);
+            div.getKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate()));
+            return ResponseData.of(div).setState(DBU0020021StateName.完了状態);
+        }
+        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(
                 第1号被保険者数情報, 第1号被保険者増減内訳情報_当月中増, 第1号被保険者増減内訳情報_当月中滅);
         if (handler.is修正データ無し(修正データリスト) && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -116,18 +113,12 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データリスト);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOUSIN.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getKanryo().getCcdKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOUSIN.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020021StateName.完了状態);
+        } else {
+            return ResponseData.of(div).respond();
         }
-
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -138,10 +129,8 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
      */
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onClick_btnModBack(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.被保険者, JigyoHokokuGeppoParameter.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (DBU0020021StateName.削除状態.getName().equals(状態)) {
+        if (MSG_SAKUJO.equals(状態)) {
             return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.補正発行検索に戻る).respond();
         }
         List<JigyoHokokuTokeiData> 第1号被保険者数情報
@@ -150,7 +139,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中増, List.class);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
                 = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ, 第1号被保険者数情報,
+        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(第1号被保険者数情報,
                 第1号被保険者増減内訳情報_当月中増, 第1号被保険者増減内訳情報_当月中滅
         );
         if (handler.is修正データ無し(修正データリスト)) {

@@ -48,7 +48,7 @@ public class ShinsakaiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 存在チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.存在チェック));
         }
         return validPairs;
@@ -57,10 +57,10 @@ public class ShinsakaiTorokuValidationHandler {
     /**
      * 選択チェックを行う。
      *
-     * @param validPairs ValidationMessageControlPairs
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 選択チェック(ValidationMessageControlPairs validPairs) {
+    public ValidationMessageControlPairs 選択チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.対象行を選択チェック));
         }
@@ -70,10 +70,10 @@ public class ShinsakaiTorokuValidationHandler {
     /**
      * 割付可能チェックを行う。
      *
-     * @param validPairs ValidationMessageControlPairs
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 割付可能チェック(ValidationMessageControlPairs validPairs) {
+    public ValidationMessageControlPairs 割付可能チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
             if (データ.getShinsakaiwaritukeDay().getValue() != null) {
@@ -87,10 +87,10 @@ public class ShinsakaiTorokuValidationHandler {
     /**
      * 完了処理事前チェックを行う。
      *
-     * @param validPairs ValidationMessageControlPairs
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 完了処理事前チェック(ValidationMessageControlPairs validPairs) {
+    public ValidationMessageControlPairs 完了処理事前チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
             if (データ.getShinsakaiwaritukeDay().getValue() == null) {

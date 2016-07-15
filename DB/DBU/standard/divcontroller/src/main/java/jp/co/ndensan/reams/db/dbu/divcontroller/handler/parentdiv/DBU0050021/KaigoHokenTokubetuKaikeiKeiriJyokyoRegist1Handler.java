@@ -143,6 +143,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     public void onload(InsuranceInformation insuranceInf) {
         if (DELETE.equals(insuranceInf.get処理フラグ())
                 || UPDATE.equals(insuranceInf.get処理フラグ())) {
+            div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisplayNone(true);
+            div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisplayNone(false);
             onload一覧修正Or一覧削除(insuranceInf);
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
             List<Shichoson> 市町村Lst = get市町村Lst();
@@ -325,11 +327,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     }
 
     private void 報告年度の確定処理(TextBoxFlexibleDate 報告年度Box, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        FlexibleDate 報告年度 = 報告年度Box.getValue();
+        FlexibleYear 報告年度 = new FlexibleYear(new RDate(
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString());
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
-                = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(報告年度.getYear(), 市町村コード, 保険者区分);
+                = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(報告年度, 市町村コード, 保険者区分);
         if (!一覧データLst.isEmpty() && 一覧データLst.get(0) != null && !一覧データLst.get(0).get詳細データエリア().isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
         } else {
@@ -398,7 +401,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
                         insuranceInf.get統計対象区分(),
                         insuranceInf.get市町村コード(),
                         集計番号_0100.getColumnValue());
-        KaigoHokenJigyoHokokuNenpo 詳細データ = 詳細データLst.get(0);
+        KaigoHokenJigyoHokokuNenpo 詳細データ = null;
+        if (!詳細データLst.isEmpty()) {
+            詳細データ = 詳細データLst.get(0);
+        }
         KaigoHokenJigyoHokokuNenpo 画面入力データ = get画面入力データ(insuranceInf);
         Map<RString, Decimal> 修正データエリア = new HashMap<>();
         if (詳細データ != null) {
@@ -444,10 +450,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         set画面入力詳細データエリ3(画面入力詳細データエリ);
         set画面入力詳細データエリ4(画面入力詳細データエリ);
         KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
-                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getValue().getYear(), DOUBLE_ZEOR,
-                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getValue().getYear(), DOUBLE_ZEOR,
+                new FlexibleYear(new RDate(
+                                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString()),
+                DOUBLE_ZEOR,
+                new FlexibleYear(new RDate(
+                                div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().getText().toString()).getYear().toString()),
+                DOUBLE_ZEOR,
                 insuranceInf.get統計対象区分(), insuranceInf.get市町村コード(), 表番号_09, 集計番号_0100,
-                集計単位_1, null, null, null, 画面入力詳細データエリ);
+                集計単位_1, null, null, null, 画面入力詳細データエリ
+        );
         return 画面入力データ;
 
     }
@@ -639,7 +650,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
      * @return 処理日付管理マスタ
      */
     public KaigoHokenShoriDateKanri get処理日付管理マスタ() {
-        FlexibleYear 集計年度 = div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getValue().getYear();
+        FlexibleYear 集計年度 = new FlexibleYear(new RDate(
+                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString());
         KaigoHokenShoriDateKanri 処理日付管理マスタ = new KaigoHokenShoriDateKanri(SubGyomuCode.DBU介護統計報告, LasdecCode.EMPTY,
                 JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況, DOUBLE_ZEOR, 集計年度, DOUBLE_ZEOR, FlexibleDate.EMPTY,
                 RDate.getNowDateTime(), new FlexibleDate(集計年度.getYearValue(), INT4, 01),
@@ -710,9 +722,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtchiikishienkofukin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(地域支援事業支援交付金横縦番号), new RString("0")).toString()));
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaisanantei().setValue(new Decimal(ObjectUtil.defaultIfNull(
-                詳細データ.get詳細データエリア().get(保険料横縦番号), new RString("0")).toString()));
-        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(財政安定化基金拠出金横縦番号), new RString("0")).toString()));
+        div.getHihokenshabango().getYoshikiyonMeisai().getTxttodofukenfutankin().setValue(new Decimal(ObjectUtil.defaultIfNull(
+                詳細データ.get詳細データエリア().get(都道府県負担金横縦番号), new RString("0")).toString()));
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtkokkozaisan().setValue(new Decimal(ObjectUtil.defaultIfNull(
                 詳細データ.get詳細データエリア().get(相互財政安定化事業負担金横縦番号), new RString("0")).toString()));
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtzaiseiantei().setValue(new Decimal(ObjectUtil.defaultIfNull(

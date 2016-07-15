@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -30,11 +31,11 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
 
     private static final RString EN = new RString("円");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
-    private static final RString NOKIGEN = new RString("納期限");
+    private static final RString NOKIGEN = new RString("本状の納期限");
     private static final RString BANK_CODE_TITLE = new RString("金融機関コード");
     private static final RString KOZA_SHURUI_TITLE = new RString("種別");
     private static final RString BANK_NAME_TITLE = new RString("金融機関");
-    private static final RString KOZA_MEIGININ_TITLE = new RString("`名義人");
+    private static final RString KOZA_MEIGININ_TITLE = new RString("名義人");
     private static final RString HANKAKU_X = new RString("X");
     private static final RString HOSHI_2 = new RString("**");
     private static final RString HOSHI_4 = new RString("****");
@@ -133,7 +134,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             }
         }
 
-        source.notsuRenban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        source.notsuRenban = NotsuReportEditorUtil.get納通連番(renban);
 
         this.納入通知書期情報設定(source);
 
@@ -234,8 +235,12 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             source.gokeigaku = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd = 印字位置1の納付書.get納期限表記();
             source.honzei = 印字位置1の納付書.get納付額表記();
-            source.ocr1 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr1 = 印字位置1の納付書.getOcr().get(1);
+            }
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
@@ -247,7 +252,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.coverNofu_tsuchishoNo = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo = HOSHI_4;
@@ -255,7 +260,7 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             source.kibetsu = HOSHI_2;
             source.ryoshushoNenbun = HOSHI_4;
             source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.coverNofu_tsuchishoNo = HOSHI_16;
             source.nokigenYmd = HOSHI_11;
             source.hakkoYmd = HOSHI_11;
             source.honzei = HOSHI_13;

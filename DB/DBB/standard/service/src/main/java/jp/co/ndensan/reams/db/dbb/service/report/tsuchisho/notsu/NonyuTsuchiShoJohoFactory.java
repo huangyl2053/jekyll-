@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ca.cax.definition.core.seikyu.ocr.OcrPattern;
 import jp.co.ndensan.reams.ca.cax.service.core.seikyu.SeikyuManager;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoSeigyoJoho;
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.Nokitsuki;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokitsuki.NokitsukiCollection;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
@@ -54,8 +54,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -102,6 +100,7 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 出力期リスト 出力期リスト
      * @param 代納人氏名 代納人氏名
      * @return 本算定納入通知書情報
+     * @throws NullPointerException パラメータのいずれかがNullの場合。
      */
     public HonSanteiNonyuTsuchiShoJoho create本算定納入通知書情報(
             HonSanteiTsuchiShoKyotsu 本算定通知書情報,
@@ -243,6 +242,7 @@ public class NonyuTsuchiShoJohoFactory {
      * @param 出力期リスト 出力期リスト
      * @param 代納人氏名 代納人氏名
      * @return 仮算定納入通知書情報
+     * @throws NullPointerException パラメータのいずれかがNullの場合。
      */
     public KariSanteiNonyuTsuchiShoJoho create仮算定納入通知書情報(
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
@@ -318,12 +318,8 @@ public class NonyuTsuchiShoJohoFactory {
             FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号, ShikibetsuCode 識別コード, OcrPattern 納付書タイプ,
             FukaAtena 賦課の情報, List<UniversalPhase> 普徴期別金額リスト, List<NokiJoho> 普徴納期情報リスト) {
         List<SeikyuForPrinting> 請求情報リスト = new ArrayList<>();
-        for (Nokitsuki 納期月 : 納期月リスト.getソート済納期月リスト()) {
-            _Logger.gyomuLog(_GyomuLogData.LogType.Info, String.valueOf(納期月.get期別()));
-        }
         for (NokiJoho 納期情報 : 普徴納期情報リスト) {
             int 期 = 納期情報.get期月().get期AsInt();
-            _Logger.gyomuLog(_GyomuLogData.LogType.Info, String.valueOf(期));
             ShunoKanri.Builder builder = ShunoKanri.newBuilder();
             builder.setKamokuCode(収納科目.getコード());
             builder.setKamokuEdabanCode(収納科目.get枝番コード());
@@ -337,10 +333,11 @@ public class NonyuTsuchiShoJohoFactory {
             builder.setKibetsu(期);
             FukaJoho 賦課情報 = 賦課の情報.get賦課情報();
             if (賦課情報 != null) {
-                Long 収納ID = get収納IDBy期(期, 賦課情報);
-                if (null == 収納ID) {
-                    収納ID = Long.MIN_VALUE;
+                List<Kibetsu> kibetsuList = 賦課情報.getKibetsuList();
+                if (!is該当期ある(期, kibetsuList)) {
+                    continue;
                 }
+                Long 収納ID = get収納IDBy期(期, 賦課情報);
                 builder.setShunoId(収納ID);
             } else {
                 builder.setShunoId(Long.MIN_VALUE);
@@ -348,9 +345,6 @@ public class NonyuTsuchiShoJohoFactory {
             ShunoKanri shunoKanri = builder.build();
             ShunoKey 収納キー = new ShunoKey(shunoKanri, 収納科目, 納期月リスト.get納期月From期(期));
             Decimal 普徴期別金額 = get金額By期(普徴期別金額リスト, 期);
-            if (普徴期別金額.compareTo(Decimal.ZERO) <= 0) {
-                continue;
-            }
             SeikyuItemMeisai 請求明細 = new SeikyuItemMeisai(
                     収納キー, 普徴期別金額, Decimal.ZERO, Decimal.ZERO, Decimal.ZERO, Collections.EMPTY_LIST, 納期情報.get納期().get納期限());
             List<SeikyuItemMeisai> 請求明細リスト = new ArrayList<>();
@@ -367,6 +361,15 @@ public class NonyuTsuchiShoJohoFactory {
             }
         }
         return 請求情報リスト;
+    }
+
+    private boolean is該当期ある(int 期, List<Kibetsu> kibetsuList) {
+        for (Kibetsu kibetsu : kibetsuList) {
+            if (kibetsu.get期() == 期) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Long get収納IDBy期(int 期, FukaJoho 賦課情報) {

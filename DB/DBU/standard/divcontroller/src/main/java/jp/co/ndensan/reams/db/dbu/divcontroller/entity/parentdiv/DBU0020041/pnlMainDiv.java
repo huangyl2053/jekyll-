@@ -4,16 +4,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * pnlMain のクラスファイル 
- * 
- * @author 自動生成
+ * pnlMain のクラスファイル
+ *
+ * @reamsid_L DBU-1100-040 yebangqiang
  */
 public class pnlMainDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]

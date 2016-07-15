@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
@@ -572,7 +573,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     /**
-     * 画面初期化
+     * 画面初期化です。
      *
      * @param 画面モード RString
      * @param メニューID RString
@@ -587,5 +588,17 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード) {
         KogakuServicehiDetailDivHandler.of(this).画面初期化(
                 画面モード, メニューID, 被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
+    }
+
+    /**
+     * 受付日と決定日のチェックです。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    @Override
+    public ValidationMessageControlPairs check受付日と決定日() {
+        ValidationMessageControlPairs validPairs = KogakuServicehiDetailDivValidationHandler.
+                of(this).受付日と決定日のチェック();
+        return validPairs;
     }
 }

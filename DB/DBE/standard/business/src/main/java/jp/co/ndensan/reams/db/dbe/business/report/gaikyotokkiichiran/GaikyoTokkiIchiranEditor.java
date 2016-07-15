@@ -7,10 +7,14 @@ package jp.co.ndensan.reams.db.dbe.business.report.gaikyotokkiichiran;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuGaikyouTokkiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.gaikyotokkiichiran.GaikyoTokkiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -27,6 +31,7 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
     private static final RString DATE_作成 = new RString("作成");
+    private static final RString テキスト = new RString("1");
     private static final int INT_4 = 4;
     private final JimuGaikyouTokkiBusiness business;
 
@@ -70,26 +75,29 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
         source.nendo = get年度(business.get審査会番号());
         source.title = new RString("認定情報<概況特記一覧>");
         source.listNo_1 = business.getNo();
-        source.gaikyoTokkiText1 = business.get概況特記テキスト１();
-        source.gaikyoTokkiText2 = business.get概況特記テキスト２();
-        source.gaikyoTokkiText3 = business.get概況特記テキスト３();
-        source.gaikyoTokkiText4 = business.get概況特記テキスト４();
-        source.gaikyoTokkiText5 = business.get概況特記テキスト５();
-        source.gaikyoTokkiText6 = business.get概況特記テキスト６();
-        source.gaikyoTokkiText7 = business.get概況特記テキスト７();
-        source.gaikyoTokkiText8 = business.get概況特記テキスト８();
-        source.gaikyoTokkiText9 = business.get概況特記テキスト９();
-        source.gaikyoTokkiText10 = business.get概況特記テキスト１０();
-        source.imgGaikyoTokki1 = business.get概況特記イメージ１();
-        source.imgGaikyoTokki2 = business.get概況特記イメージ２();
-        source.imgGaikyoTokki3 = business.get概況特記イメージ３();
-        source.imgGaikyoTokki4 = business.get概況特記イメージ４();
-        source.imgGaikyoTokki5 = business.get概況特記イメージ５();
-        source.imgGaikyoTokki6 = business.get概況特記イメージ６();
-        source.imgGaikyoTokki7 = business.get概況特記イメージ７();
-        source.imgGaikyoTokki8 = business.get概況特記イメージ８();
-        source.imgGaikyoTokki9 = business.get概況特記イメージ９();
-        source.imgGaikyoTokki10 = business.get概況特記イメージ１０();
+        if (テキスト.equals(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            source.gaikyoTokkiText1 = business.get概況特記テキスト１();
+            source.gaikyoTokkiText2 = business.get概況特記テキスト２();
+            source.gaikyoTokkiText3 = business.get概況特記テキスト３();
+            source.gaikyoTokkiText4 = business.get概況特記テキスト４();
+            source.gaikyoTokkiText5 = business.get概況特記テキスト５();
+            source.gaikyoTokkiText6 = business.get概況特記テキスト６();
+            source.gaikyoTokkiText7 = business.get概況特記テキスト７();
+            source.gaikyoTokkiText8 = business.get概況特記テキスト８();
+            source.gaikyoTokkiText9 = business.get概況特記テキスト９();
+            source.gaikyoTokkiText10 = business.get概況特記テキスト１０();
+        } else {
+            source.imgGaikyoTokki1 = business.get概況特記イメージ１();
+            source.imgGaikyoTokki2 = business.get概況特記イメージ２();
+            source.imgGaikyoTokki3 = business.get概況特記イメージ３();
+            source.imgGaikyoTokki4 = business.get概況特記イメージ４();
+            source.imgGaikyoTokki5 = business.get概況特記イメージ５();
+            source.imgGaikyoTokki6 = business.get概況特記イメージ６();
+            source.imgGaikyoTokki7 = business.get概況特記イメージ７();
+            source.imgGaikyoTokki8 = business.get概況特記イメージ８();
+            source.imgGaikyoTokki9 = business.get概況特記イメージ９();
+            source.imgGaikyoTokki10 = business.get概況特記イメージ１０();
+        }
         return source;
     }
 

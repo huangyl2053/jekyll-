@@ -88,6 +88,7 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
             source.meishoFuyo = item.getMeishoFuyo();
             source.sonota = item.getSonota();
             source.tsuchibun2 = item.getTsuchibun2();
+            source.yubinNo = item.getYubinNo();
         }
         return source;
     }

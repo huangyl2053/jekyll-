@@ -20,9 +20,9 @@ public enum IsHaishi {
      */
     廃止(true, "廃止"),
     /**
-     * コード:False 名称:廃止されていない 略称:定義なし
+     * コード:False 名称:有効 略称:定義なし
      */
-    廃止されていない(false, "廃止されていない");
+    有効(false, "有効");
 
     private final boolean code;
     private final RString fullName;

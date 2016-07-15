@@ -149,6 +149,12 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         } else {
             source.sabisuText1 = new RString("                          (なし)");
         }
+        source.shisetsuNameTxit1 = item.get施設名テキスト();
+        source.imgShisetsuName1 = item.get施設名イメージ();
+        source.shisetsuAddressTxit1 = item.get住所テキスト();
+        source.imgShisetsuAddress1 = item.get住所イメージ();
+        source.shisetsuTelTxit1 = item.get電話番号テキスト();
+        source.imgShisetsuTel1 = item.get電話番号イメージ();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get申請書管理番号() == null) {
             source.shinseishoKanriNo = null;

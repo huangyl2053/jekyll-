@@ -2036,7 +2036,7 @@ and open the template in the editor.
         INNER JOIN
         rgua.${psmAtesaki} AS psmAtesaki
         ON
-        psmAtesaki."shikibetsuCode" = Tmp."shichosonCode"     
+        psmAtesaki."shikibetsuCode" = Tmp."shikibetsuCode"     
     </select>  
       
     <!--送付先情報を一時テーブルに更新します。-->
@@ -2233,7 +2233,14 @@ and open the template in the editor.
         "jusho",
         "banchi",
         "katagaki",
-        "shisetyuJotaiFlag"
+        "shisetyuJotaiFlag",
+        "juminShubetsuCode",
+        "juminJotaiCode",
+        "gyoseikuName",
+        "kanaMeisho",
+        "yubinNo",
+        "seibetsuCode",
+        "jukyuKubun"
         FROM
         "TmpHihokenshasho_Ichi"
         WHERE
@@ -2421,7 +2428,14 @@ and open the template in the editor.
         "jusho",
         "banchi",
         "katagaki",
-        "shisetyuJotaiFlag"
+        "shisetyuJotaiFlag",
+        "juminShubetsuCode",
+        "juminJotaiCode",
+        "gyoseikuName",
+        "kanaMeisho",
+        "yubinNo",
+        "seibetsuCode",
+        "jukyuKubun"
         FROM
         "TmpHihokenshasho_Ichi"
         <if test="orderbyFlag">

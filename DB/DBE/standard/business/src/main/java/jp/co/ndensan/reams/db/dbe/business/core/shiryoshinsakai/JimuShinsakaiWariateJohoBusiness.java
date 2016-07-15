@@ -163,7 +163,7 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ２
      */
     public RString get主治医意見書イメージ２() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
+        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
     }
 
     private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
@@ -193,7 +193,11 @@ public class JimuShinsakaiWariateJohoBusiness {
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }

@@ -1052,7 +1052,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      * @return 収納ID12
      */
     public Long get収納ID12() {
-        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+        return get収納ID(INT_12, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**
@@ -1061,7 +1061,7 @@ public class FukaJoho extends ParentModelBase<FukaJohoIdentifier, DbT2002FukaEnt
      * @return 収納ID13
      */
     public Long get収納ID13() {
-        return get収納ID(INT_10, ChoshuHohoKibetsu.普通徴収.getコード());
+        return get収納ID(INT_13, ChoshuHohoKibetsu.普通徴収.getコード());
     }
 
     /**

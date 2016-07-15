@@ -51,6 +51,25 @@
         ORDER BY A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_shinseiYMD" DESC
     </select>
 
+    <select id="select訪問介護利用者負担額減額"
+            resultMap="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter"
+            fetchSize="500" 
+            resultOrdered="true">
+        SELECT
+        A.*,
+        B.*
+        FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.noDeleted_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />) AS A
+        LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS B
+         ON A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = B."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
+        WHERE
+            A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
+        AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo"  = #{履歴番号}
+    </select>
+    
     <resultMap id="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity" autoMapping="true">
         <id property="訪問介護利用者負担額減額Entity.hihokenshaNo" column="dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="訪問介護利用者負担額減額Entity.rirekiNo" column="dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" />

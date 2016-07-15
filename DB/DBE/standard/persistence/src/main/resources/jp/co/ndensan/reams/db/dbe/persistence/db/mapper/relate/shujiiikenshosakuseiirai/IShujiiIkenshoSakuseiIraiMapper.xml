@@ -326,13 +326,19 @@
         <if test="useIkenshoJuryoYMDTo">
             AND DbT5302ShujiiIkenshoJoho."ikenshoJuryoYMD" <![CDATA[<=]]> #{ikenshoJuryoYMDTo}
         </if>
-        <if test="useIkenItem13">
-            AND DbT5304ShujiiIkenshoIkenItem."remban" = 13
-            AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13}
+        <if test="useIkenItem13 and !useIkenItem14">
+             AND DbT5304ShujiiIkenshoIkenItem."remban" = 13
+             AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13}
         </if>
-        <if test="useIkenItem14">
-            AND DbT5304ShujiiIkenshoIkenItem."remban" = 14
-            AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}
+        <if test="!useIkenItem13 and useIkenItem14">
+             AND DbT5304ShujiiIkenshoIkenItem."remban" = 14
+             AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}
+        </if>
+        <if test="useIkenItem13 and useIkenItem14">
+             AND ((DbT5304ShujiiIkenshoIkenItem."remban" = 13
+                 AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13})
+             OR (DbT5304ShujiiIkenshoIkenItem."remban" = 14
+                 AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}))
         </if>
         <if test="useIchijiHanteiYMDFrom">
             AND DbT5116IchijiHanteiKekkaJoho."ichijiHanteiYMD" <![CDATA[>=]]> #{ichijiHanteiYMDFrom}

@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -552,17 +553,17 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
 
     private void set月別取得段階(KeisangojohoAtenaKozaEntity entity, HonsanteiKekkaIcihiranReportSource source) {
         RString 更正前後区分 = entity.get更正前後区分();
-        FlexibleDate 月割開始年月1 = entity.get月割開始年月1();
+        FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
         int 開始月1 = 月割開始年月1.getMonthValue();
-        FlexibleDate 月割終了年月1 = entity.get月割終了年月1();
+        FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
         int 終了月1 = 月割終了年月1.getMonthValue();
         if (entity.get保険料算定段階1().length() >= NUM_2) {
             RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
             set月別取得段階(source, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
-        FlexibleDate 月割開始年月2 = entity.get月割開始年月2();
+        FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
         int 開始月2 = 月割開始年月2.getMonthValue();
-        FlexibleDate 月割終了年月2 = entity.get月割終了年月2();
+        FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
         int 終了月2 = 月割終了年月2.getMonthValue();
         if (entity.get保険料算定段階2().length() >= NUM_2) {
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);

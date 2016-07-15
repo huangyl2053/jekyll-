@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020041;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.DBU0020041StateName;
@@ -63,7 +64,7 @@ public class YoshikiIchinoyonHosei {
         List<JigyoHokokuTokeiData> 更新前データリスト = handler.get更新前データリスト(引き継ぎデータ, 様式種類);
         handler.initializeKihoneria(引き継ぎデータ);
         handler.initializeTabList(更新前データリスト, 様式種類);
-
+        ViewStateHolder.put(ViewStateKeys.様式１の４業報告統計データ_リスト, (Serializable) 更新前データリスト);
         final RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正_状態.equals(状態)) {
             if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
@@ -92,15 +93,17 @@ public class YoshikiIchinoyonHosei {
         YoshikiIchinoyonHoseiHandler handler = getHandler(div);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 業報告統計データ = ViewStateHolder.get(
+                ViewStateKeys.様式１の４業報告統計データ_リスト, List.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
         if (削除_状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            handler.delete(引き継ぎデータ, 様式種類);
+            handler.delete(業報告統計データ);
             div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(MSG_SAKJYO.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020041StateName.完了状態);
         }
 
-        List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ, 様式種類);
+        List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(業報告統計データ, 様式種類);
         if (修正_状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (修正データ.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -160,7 +163,9 @@ public class YoshikiIchinoyonHosei {
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        final List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ, 様式種類);
+        List<JigyoHokokuTokeiData> 業報告統計データ = ViewStateHolder.get(
+                ViewStateKeys.様式１の４業報告統計データ_リスト, List.class);
+        final List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(業報告統計データ, 様式種類);
         if (修正データ.isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBU0020041TransitionEventName.補正発行検索に戻る).respond();
         } else {

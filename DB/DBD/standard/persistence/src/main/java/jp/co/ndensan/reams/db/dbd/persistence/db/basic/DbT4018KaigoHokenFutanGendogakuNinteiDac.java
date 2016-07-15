@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNintei;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNintei.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNintei.ketteiKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNintei.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNintei.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiEntity;
@@ -15,9 +16,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -58,6 +62,29 @@ public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT4018KaigoHokenFutanGendogakuNinteiEntity.class);
+    }
+
+    /**
+     * 被保険者番号より、負担限度額認定情報の件数を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int get負担限度額認定情報の件数(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4018KaigoHokenFutanGendogakuNintei.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(isNULL(ketteiKubun)),
+                                not(eq(ketteiKubun, RString.EMPTY)))).
+                getCount();
     }
 
 }

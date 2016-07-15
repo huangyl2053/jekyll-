@@ -45,6 +45,7 @@ public class ShikakuShutokuIdoTotal {
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString 追加 = new RString("追加");
+    private static final RString 状態_照会 = new RString("照会");
 
     /**
      * 資格取得異動の初期化します。
@@ -150,7 +151,11 @@ public class ShikakuShutokuIdoTotal {
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
         前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
         RealInitialLocker.release(前排他ロックキー);
-        createHandler(div).setパラメータ();
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }
 

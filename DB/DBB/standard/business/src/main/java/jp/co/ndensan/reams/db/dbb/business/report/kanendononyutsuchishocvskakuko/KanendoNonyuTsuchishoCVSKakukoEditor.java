@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskakuko;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -94,18 +95,21 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = item.get編集後本算定通知書共通情報();
 
         if (編集後本算定通知書共通情報 != null) {
-            source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
-            source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
-            source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+            if (編集後本算定通知書共通情報.get表示コード() != null) {
+                source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
+                source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
+                source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+                source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
+                source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
+                source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+            }
             if (編集後本算定通知書共通情報.get調定年度_年度なし() != null) {
                 source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
             }
             if (編集後本算定通知書共通情報.get調定年度_年度あり() != null) {
                 source.titleNendoBun = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度あり()).concat("分");
             }
-            source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
-            source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
-            source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+
             if (編集後本算定通知書共通情報.get編集後個人() != null
                     && 編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
                 source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
@@ -127,7 +131,7 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
             }
         }
 
-        source.notsuRenban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        source.notsuRenban = NotsuReportEditorUtil.get納通連番(renban);
 
         this.納入通知書期情報設定(source);
 

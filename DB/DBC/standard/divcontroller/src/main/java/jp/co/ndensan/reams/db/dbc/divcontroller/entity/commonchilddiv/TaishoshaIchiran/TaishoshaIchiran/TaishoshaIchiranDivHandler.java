@@ -56,10 +56,12 @@ public final class TaishoshaIchiranDivHandler {
      * @param 異動日From FlexibleDate
      * @param 異動日To FlexibleDate
      * @param 表示モード RString
+     * @param 削除データ検索 RString
      * @param 対象者一覧情報 List<KyodoJukyushaTaishoshaEntity>
      */
     public void initialize(RString メニューID, HihokenshaNo 被保険者番号, FlexibleDate 異動日From,
-            FlexibleDate 異動日To, RString 表示モード, List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報) {
+            FlexibleDate 異動日To, RString 表示モード, RString 削除データ検索,
+            List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報) {
         if (メニューID != null && !メニューID.isEmpty()) {
             div.setMenuID(メニューID);
         }
@@ -88,6 +90,7 @@ public final class TaishoshaIchiranDivHandler {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             div.setHihoNo(DataPassingConverter.serialize(被保険者番号));
         }
+        div.setDeleteDateFlag(削除データ検索);
     }
 
     private void setGrid(List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報) {
@@ -146,13 +149,12 @@ public final class TaishoshaIchiranDivHandler {
             if (row.getTxtRirekiNo() != null && !row.getTxtRirekiNo().isEmpty()) {
                 entity.set履歴番号(Integer.parseInt(row.getTxtRirekiNo().toString()));
             }
-        } else if (共同処理用受給者異動連絡票変更登録.equals(メニューID)
+        } else if ((共同処理用受給者異動連絡票変更登録.equals(メニューID)
                 || 共同処理用受給者異動_訂正連絡票発行.equals(メニューID)
-                || 共同処理用受給者異動連絡票情報照会.equals(メニューID)) {
-            if (row.getTxtTaishoNengetsu().getValue() != null) {
-                entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
-                        getValue().getYearMonth().toString()));
-            }
+                || 共同処理用受給者異動連絡票情報照会.equals(メニューID))
+                && row.getTxtTaishoNengetsu().getValue() != null) {
+            entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
+                    getValue().getYearMonth().toString()));
         }
         return entity;
     }
@@ -166,10 +168,9 @@ public final class TaishoshaIchiranDivHandler {
         FlexibleDate 異動日From = DataPassingConverter.deserialize(div.getIdoFromYMD(), FlexibleDate.class);
         FlexibleDate 異動日To = DataPassingConverter.deserialize(div.getIdoToYMD(), FlexibleDate.class);
         HihokenshaNo 被保険者番号 = DataPassingConverter.deserialize(div.getHihoNo(), HihokenshaNo.class);
-
-        //TODO QA内部番号905
+        RString 削除データ検索 = div.getDeleteDateFlag();
         TaishoshaIchiranParameter parameter = new TaishoshaIchiranParameter(異動日From, 異動日To,
-                被保険者番号, null);
+                被保険者番号, 削除データ検索);
         return parameter;
     }
 

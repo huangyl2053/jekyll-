@@ -85,8 +85,9 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
      * 基本エリアの初期化するメソッドです。
      *
      * @param 引き継ぎデータ 引き継ぎデータ
+     * @return List<JigyoHokokuTokeiData>
      */
-    public void initialize(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> initialize(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         initializeKihoneria(引き継ぎデータ);
         int 様式種類コード = Integer.parseInt(引き継ぎデータ.get行様式種類コード().toString());
         JigyoHokokuGeppoDetalSearchParameter param_kensu;
@@ -134,8 +135,10 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
                             new Code(引き継ぎデータ.get行表番号()),
                             new Code(集計番号_0206));
         }
-        initialize_kensu(param_kensu);
-        initialize_kyufuGaku(param_kyufuGaku);
+        List<JigyoHokokuTokeiData> dataList1 = initialize_kensu(param_kensu);
+        List<JigyoHokokuTokeiData> dataList2 = initialize_kyufuGaku(param_kyufuGaku);
+        dataList1.addAll(dataList2);
+        return dataList1;
     }
 
     private void initializeKihoneria(JigyoHokokuGeppoParameter 引き継ぎデータ) {
@@ -145,7 +148,7 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
         div.getPnl2().getTxtHokensyaName().setValue(引き継ぎデータ.get市町村名称());
     }
 
-    private void initialize_kensu(JigyoHokokuGeppoDetalSearchParameter param_kensu) {
+    private List<JigyoHokokuTokeiData> initialize_kensu(JigyoHokokuGeppoDetalSearchParameter param_kensu) {
         List<JigyoHokokuTokeiData> dataList = JigyoHokokuGeppoHoseiHako.createInstance().
                 getJigyoHokokuGeppoDetal(param_kensu);
         for (JigyoHokokuTokeiData 更新前データ : dataList) {
@@ -206,9 +209,10 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
                     break;
             }
         }
+        return dataList;
     }
 
-    private void initialize_kyufuGaku(JigyoHokokuGeppoDetalSearchParameter param_kyufuGaku) {
+    private List<JigyoHokokuTokeiData> initialize_kyufuGaku(JigyoHokokuGeppoDetalSearchParameter param_kyufuGaku) {
         List<JigyoHokokuTokeiData> dataList = JigyoHokokuGeppoHoseiHako.createInstance().
                 getJigyoHokokuGeppoDetal(param_kyufuGaku);
         for (JigyoHokokuTokeiData 更新前データ : dataList) {
@@ -269,6 +273,7 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
                     break;
             }
         }
+        return dataList;
     }
 
     private void set件数_食費の集計結果値(JigyoHokokuTokeiData 更新前データ, Decimal 集計結果値) {
@@ -1575,33 +1580,10 @@ public final class YoshikiNinogoHoseiNinorokuHoseiHandler {
      * 引き継ぎデータより、データ削除する。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 様式種類 様式種類
-     * @return boolean DB操作結果
      */
-    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
-        int row = 0;
-        if (Integer.parseInt(様式種類.toString()) % 2 > 0) {
-            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_0105));
-            row = row + deleteByParameter(引き継ぎデータ, new Code(集計番号_0106));
-        } else {
-            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_0205));
-            row = row + deleteByParameter(引き継ぎデータ, new Code(集計番号_0206));
-        }
-        return 0 <= row;
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
+        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
-    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
-        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.deleteJigyoHokokuGeppoData(parameter);
-    }
 }

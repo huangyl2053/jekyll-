@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * {@link DbT3058KogakuShikyuShinsaKettei}の編集を行うビルダークラスです。
  *
- * @reamsid_L DBC-4380-020 quxiaodong
+ * @reamsid_L DBC-9999-012 quxiaodong
  */
 public class DbT3058KogakuShikyuShinsaKetteiBuilder {
 

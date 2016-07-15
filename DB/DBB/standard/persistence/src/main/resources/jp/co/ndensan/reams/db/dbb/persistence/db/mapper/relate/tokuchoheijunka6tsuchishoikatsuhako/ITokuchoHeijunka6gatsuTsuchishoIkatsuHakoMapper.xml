@@ -82,17 +82,17 @@
     </resultMap>
 
     <select resultOrdered="true" id="get基準日時"
-            resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
             fetchSize="500">
         SELECT MAX(A."kijunTimestamp") AS "基準日時"
         FROM   rgdb."DbT7022ShoriDateKanri" AS A
-        WHERE  A."subGyomuCode"=#{業務コード}
+        WHERE  A."subGyomuCode"=#{サブ業務コード}
         AND    A."nendo"=#{調定年度}
         AND    A."shoriName"=#{作成処理名}
     </select>
 
-    <select resultOrdered="true" id="select特徴平準化_6月分更新後とリアルのデータ"
+    <select resultOrdered="true" id="select特徴平準化_6月分更新後とリアルのデータ_一括発行起動"
             resultMap="resultMap_KarisanteiGakuHenkoEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
             fetchSize="500">
@@ -138,12 +138,61 @@
         "DbT2015KeisangoJohoTemp"."choteiNendo" = #{調定年度}
         AND  "DbT2015KeisangoJohoTemp"."fukaNendo" = #{調定年度}
         AND  "DbT2015KeisangoJohoTemp"."koseiZengoKubun" = #{更正前後区分}
-        <if test="一括発行起動">
-            AND  "DbT2015KeisangoJohoTemp"."sakuseiShoriName" = #{作成処理名}
-        </if>
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku01" != 0
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku02" != 0
         AND  "DbT2015KeisangoJohoTemp"."tkKibetsuGaku03" != 0
+    </select>
+
+    <select resultOrdered="true" id="select特徴平準化_6月分更新後とリアルのデータ"
+            resultMap="resultMap_KarisanteiGakuHenkoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
+            fetchSize="500">
+        SELECT
+        <include refid="allColumns_DbT2015KeisangoJoho" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />,
+        <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.columns_Nokumi" />,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt310FindKozaFunctionMapper.columns_Koza" />,
+        年金特徴回付情報.*
+        FROM
+        "DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
+        '','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        ON
+        "ShikibetsuTaisho"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
+        INNER JOIN
+        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','true','true','') AS "Atesaki"
+        ON
+        "Atesaki"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
+        LEFT JOIN
+        rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', NULL, NULL, NULL) AS "Nokumi"
+        ON
+        "Nokumi"."CaT0714shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
+        LEFT JOIN
+        rgua."UaFt310FindKoza"(NULL, NULL, NULL, NULL, NULL, NULL) AS "Koza"
+        ON
+        "Koza"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
+        INNER JOIN
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+        ON   年金特徴回付情報."gyomuCode" = #{業務コード}
+        AND  年金特徴回付情報."shoriNendo" = #{調定年度minus1}
+        AND  年金特徴回付情報."tsuchiNaiyoCode" IN
+        <foreach item="通知内容コード" index="index" collection="通知内容コード" open="(" separator="," close=")">
+            #{通知内容コード}
+        </foreach>
+        AND  "DbT2015KeisangoJoho"."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND  "DbT2015KeisangoJoho"."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND  "DbT2015KeisangoJoho"."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+        WHERE
+        "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
+        AND  "DbT2015KeisangoJoho"."fukaNendo" = #{調定年度}
+        AND  "DbT2015KeisangoJoho"."koseiZengoKubun" = #{更正前後区分}
+        AND  "DbT2015KeisangoJoho"."sakuseiShoriName" = #{作成処理名}
+        AND  "DbT2015KeisangoJoho"."tkKibetsuGaku01" != 0
+        AND  "DbT2015KeisangoJoho"."tkKibetsuGaku02" != 0
+        AND  "DbT2015KeisangoJoho"."tkKibetsuGaku03" != 0
     </select>
 
     <update id="update計算後情報更正前For一括発行起動"
@@ -291,24 +340,10 @@
         AND "DbT2002FukaTemp"."koseigo_fukaNendo" = DbT2015KeisangoJohoTemp."fukaNendo"
         AND "DbT2002FukaTemp"."koseigo_tsuchishoNo" = DbT2015KeisangoJohoTemp."tsuchishoNo"
         AND DbT2015KeisangoJohoTemp."koseiZengoKubun" = '1'
-        <if test="一括発行起動">
+        <if test="!一括発行起動">
             AND DbT2015KeisangoJohoTemp."sakuseiShoriName" = #{作成処理名}
         </if>
     </update>
-
-    <select resultOrdered="true" id="select計算後情報For計算後情報更正前"
-            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter"
-            fetchSize="500">
-        SELECT *
-        FROM
-        "DbT2015KeisangoJohoTemp"  AS DbT2015KeisangoJohoTemp
-        WHERE
-        DbT2015KeisangoJohoTemp."koseiZengoKubun" = '1'
-        <if test="一括発行起動">
-            AND DbT2015KeisangoJohoTemp."sakuseiShoriName" = #{作成処理名}
-        </if>
-    </select>
 
     <select resultOrdered="true" id="select前年度賦課情報"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity"
@@ -418,7 +453,7 @@
         "DbT2002FukaTemp"
         WHERE
         ("koseigo_choshuHoho4gatsu" != #{特別徴収_厚生労働省} AND "koseigo_choshuHoho4gatsu" != #{特別徴収_地共済})
-        AND ("choshuHoho6gatsu" = #{特別徴収_厚生労働省} OR "choshuHoho6gatsu" = #{特別徴収_地共済})
+        AND ("koseigo_choshuHoho4gatsu" = #{特別徴収_厚生労働省} OR "koseigo_choshuHoho4gatsu" = #{特別徴収_地共済})
     </select>
 
     <select resultOrdered="true" id="select出力対象情報" resultMap="resultMap_出力対象情報の取得"
@@ -597,6 +632,139 @@
         "DbT2015KeisangoJohoTemp"."fuShunyuGaku12" as "keisangoJohoTemp_fuShunyuGaku12",
         "DbT2015KeisangoJohoTemp"."fuShunyuGaku13" as "keisangoJohoTemp_fuShunyuGaku13",
         "DbT2015KeisangoJohoTemp"."fuShunyuGaku14" as "keisangoJohoTemp_fuShunyuGaku14"
+    </sql>
+
+    <sql id="allColumns_DbT2015KeisangoJoho">
+        "DbT2015KeisangoJoho"."insertDantaiCd" as "keisangoJohoTemp_insertDantaiCd",
+        "DbT2015KeisangoJoho"."insertTimestamp" as "keisangoJohoTemp_insertTimestamp",
+        "DbT2015KeisangoJoho"."insertReamsLoginId" as "keisangoJohoTemp_insertReamsLoginId",
+        "DbT2015KeisangoJoho"."insertContextId" as "keisangoJohoTemp_insertContextId",
+        "DbT2015KeisangoJoho"."isDeleted" as "keisangoJohoTemp_isDeleted",
+        "DbT2015KeisangoJoho"."updateCount" as "keisangoJohoTemp_updateCount",
+        "DbT2015KeisangoJoho"."lastUpdateTimestamp" as "keisangoJohoTemp_lastUpdateTimestamp",
+        "DbT2015KeisangoJoho"."lastUpdateReamsLoginId" as "keisangoJohoTemp_lastUpdateReamsLoginId",
+        "DbT2015KeisangoJoho"."choteiNendo" as "keisangoJohoTemp_choteiNendo",
+        "DbT2015KeisangoJoho"."fukaNendo" as "keisangoJohoTemp_fukaNendo",
+        "DbT2015KeisangoJoho"."tsuchishoNo" as "keisangoJohoTemp_tsuchishoNo",
+        "DbT2015KeisangoJoho"."koseiZengoKubun" as "keisangoJohoTemp_koseiZengoKubun",
+        "DbT2015KeisangoJoho"."sakuseiShoriName" as "keisangoJohoTemp_sakuseiShoriName",
+        "DbT2015KeisangoJoho"."fukaRirekiNo" as "keisangoJohoTemp_fukaRirekiNo",
+        "DbT2015KeisangoJoho"."hihokenshaNo" as "keisangoJohoTemp_hihokenshaNo",
+        "DbT2015KeisangoJoho"."shikibetsuCode" as "keisangoJohoTemp_shikibetsuCode",
+        "DbT2015KeisangoJoho"."setaiCode" as "keisangoJohoTemp_setaiCode",
+        "DbT2015KeisangoJoho"."setaiInsu" as "keisangoJohoTemp_setaiInsu",
+        "DbT2015KeisangoJoho"."shikakuShutokuYMD" as "keisangoJohoTemp_shikakuShutokuYMD",
+        "DbT2015KeisangoJoho"."shikakuShutokuJiyu" as "keisangoJohoTemp_shikakuShutokuJiyu",
+        "DbT2015KeisangoJoho"."shikakuSoshitsuYMD" as "keisangoJohoTemp_shikakuSoshitsuYMD",
+        "DbT2015KeisangoJoho"."shikakuSoshitsuJiyu" as "keisangoJohoTemp_shikakuSoshitsuJiyu",
+        "DbT2015KeisangoJoho"."seihofujoShurui" as "keisangoJohoTemp_seihofujoShurui",
+        "DbT2015KeisangoJoho"."seihoKaishiYMD" as "keisangoJohoTemp_seihofujoShurui",
+        "DbT2015KeisangoJoho"."seihoHaishiYMD" as "keisangoJohoTemp_seihoHaishiYMD",
+        "DbT2015KeisangoJoho"."ronenKaishiYMD" as "keisangoJohoTemp_ronenKaishiYMD",
+        "DbT2015KeisangoJoho"."ronenHaishiYMD" as "keisangoJohoTemp_ronenHaishiYMD",
+        "DbT2015KeisangoJoho"."fukaYMD" as "keisangoJohoTemp_fukaYMD",
+        "DbT2015KeisangoJoho"."kazeiKubun" as "keisangoJohoTemp_kazeiKubun",
+        "DbT2015KeisangoJoho"."setaikazeiKubun" as "keisangoJohoTemp_setaikazeiKubun",
+        "DbT2015KeisangoJoho"."gokeiShotokuGaku" as "keisangoJohoTemp_gokeiShotokuGaku",
+        "DbT2015KeisangoJoho"."nenkinShunyuGaku" as "keisangoJohoTemp_nenkinShunyuGaku",
+        "DbT2015KeisangoJoho"."hokenryoDankai" as "keisangoJohoTemp_hokenryoDankai",
+        "DbT2015KeisangoJoho"."hokenryoDankai1" as "keisangoJohoTemp_hokenryoDankai1",
+        "DbT2015KeisangoJoho"."nengakuHokenryo1" as "keisangoJohoTemp_nengakuHokenryo1",
+        "DbT2015KeisangoJoho"."tsukiwariStartYM1" as "keisangoJohoTemp_tsukiwariStartYM1",
+        "DbT2015KeisangoJoho"."tsukiwariEndYM1" as "keisangoJohoTemp_tsukiwariEndYM1",
+        "DbT2015KeisangoJoho"."hokenryoDankai2" as "keisangoJohoTemp_hokenryoDankai2",
+        "DbT2015KeisangoJoho"."nengakuHokenryo2" as "keisangoJohoTemp_nengakuHokenryo2",
+        "DbT2015KeisangoJoho"."tsukiwariStartYM2" as "keisangoJohoTemp_tsukiwariStartYM2",
+        "DbT2015KeisangoJoho"."tsukiwariEndYM2" as "keisangoJohoTemp_tsukiwariEndYM2",
+        "DbT2015KeisangoJoho"."choteiNichiji" as "keisangoJohoTemp_choteiNichiji",
+        "DbT2015KeisangoJoho"."choteiJiyu1" as "keisangoJohoTemp_choteiJiyu1",
+        "DbT2015KeisangoJoho"."choteiJiyu2" as "keisangoJohoTemp_choteiJiyu2",
+        "DbT2015KeisangoJoho"."choteiJiyu3" as "keisangoJohoTemp_choteiJiyu3",
+        "DbT2015KeisangoJoho"."choteiJiyu4" as "keisangoJohoTemp_choteiJiyu4",
+        "DbT2015KeisangoJoho"."koseiM" as "keisangoJohoTemp_koseiM",
+        "DbT2015KeisangoJoho"."gemmenMaeHokenryo" as "keisangoJohoTemp_gemmenMaeHokenryo",
+        "DbT2015KeisangoJoho"."gemmenGaku" as "keisangoJohoTemp_gemmenGaku",
+        "DbT2015KeisangoJoho"."kakuteiHokenryo" as "keisangoJohoTemp_kakuteiHokenryo",
+        "DbT2015KeisangoJoho"."hokenryoDankaiKarisanntei" as "keisangoJohoTemp_hokenryoDankaiKarisanntei",
+        "DbT2015KeisangoJoho"."choshuHohoRirekiNo" as "keisangoJohoTemp_choshuHohoRirekiNo",
+        "DbT2015KeisangoJoho"."idoKijunNichiji" as "keisangoJohoTemp_idoKijunNichiji",
+        "DbT2015KeisangoJoho"."kozaKubun" as "keisangoJohoTemp_kozaKubun",
+        "DbT2015KeisangoJoho"."kyokaisoKubun" as "keisangoJohoTemp_kyokaisoKubun",
+        "DbT2015KeisangoJoho"."shokkenKubun" as "keisangoJohoTemp_shokkenKubun",
+        "DbT2015KeisangoJoho"."fukaShichosonCode" as "keisangoJohoTemp_fukaShichosonCode",
+        "DbT2015KeisangoJoho"."tkSaishutsuKampuGaku" as "keisangoJohoTemp_tkSaishutsuKampuGaku",
+        "DbT2015KeisangoJoho"."fuSaishutsuKampuGaku" as "keisangoJohoTemp_fuSaishutsuKampuGaku",
+        "DbT2015KeisangoJoho"."tkKibetsuGaku01" as "keisangoJohoTemp_tkKibetsuGaku01",
+        "DbT2015KeisangoJoho"."tkKibetsuGaku02" as "keisangoJohoTemp_tkKibetsuGaku02",
+        "DbT2015KeisangoJoho"."tkKibetsuGaku03" as "keisangoJohoTemp_tkKibetsuGaku03",
+        "DbT2015KeisangoJoho"."tkKibetsuGaku04" as "keisangoJohoTemp_tkKibetsuGaku04",
+        "DbT2015KeisangoJoho"."tkKibetsuGaku05" as "keisangoJohoTemp_tkKibetsuGaku05",
+        "DbT2015KeisangoJoho"."tkKibetsuGaku06" as "keisangoJohoTemp_tkKibetsuGaku06",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku01" as "keisangoJohoTemp_fuKibetsuGaku01",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku02" as "keisangoJohoTemp_fuKibetsuGaku02",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku03" as "keisangoJohoTemp_fuKibetsuGaku03",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku04" as "keisangoJohoTemp_fuKibetsuGaku04",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku05" as "keisangoJohoTemp_fuKibetsuGaku05",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku06" as "keisangoJohoTemp_fuKibetsuGaku06",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku07" as "keisangoJohoTemp_fuKibetsuGaku07",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku08" as "keisangoJohoTemp_fuKibetsuGaku08",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku09" as "keisangoJohoTemp_fuKibetsuGaku09",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku10" as "keisangoJohoTemp_fuKibetsuGaku10",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku11" as "keisangoJohoTemp_fuKibetsuGaku11",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku12" as "keisangoJohoTemp_fuKibetsuGaku12",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku13" as "keisangoJohoTemp_fuKibetsuGaku13",
+        "DbT2015KeisangoJoho"."fuKibetsuGaku14" as "keisangoJohoTemp_fuKibetsuGaku14",
+        "DbT2015KeisangoJoho"."choshuHoho4gatsu" as "keisangoJohoTemp_choshuHoho4gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho5gatsu" as "keisangoJohoTemp_choshuHoho5gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho6gatsu" as "keisangoJohoTemp_choshuHoho6gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho7gatsu" as "keisangoJohoTemp_choshuHoho7gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho8gatsu" as "keisangoJohoTemp_choshuHoho8gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho9gatsu" as "keisangoJohoTemp_choshuHoho9gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho10gatsu" as "keisangoJohoTemp_choshuHoho10gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho11gatsu" as "keisangoJohoTemp_choshuHoho11gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho12gatsu" as "keisangoJohoTemp_choshuHoho12gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho1gatsu" as "keisangoJohoTemp_choshuHoho1gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho2gatsu" as "keisangoJohoTemp_choshuHoho2gatsu",
+        "DbT2015KeisangoJoho"."choshuHoho3gatsu" as "keisangoJohoTemp_choshuHoho3gatsu",
+        "DbT2015KeisangoJoho"."choshuHohoYoku4gatsu" as "keisangoJohoTemp_choshuHohoYoku4gatsu",
+        "DbT2015KeisangoJoho"."choshuHohoYoku5gatsu" as "keisangoJohoTemp_choshuHohoYoku5gatsu",
+        "DbT2015KeisangoJoho"."choshuHohoYoku6gatsu" as "keisangoJohoTemp_choshuHohoYoku6gatsu",
+        "DbT2015KeisangoJoho"."choshuHohoYoku7gatsu" as "keisangoJohoTemp_choshuHohoYoku7gatsu",
+        "DbT2015KeisangoJoho"."choshuHohoYoku8gatsu" as "keisangoJohoTemp_choshuHohoYoku8gatsu",
+        "DbT2015KeisangoJoho"."choshuHohoYoku9gatsu" as "keisangoJohoTemp_choshuHohoYoku9gatsu",
+        "DbT2015KeisangoJoho"."kariNenkinNo" as "keisangoJohoTemp_kariNenkinNo",
+        "DbT2015KeisangoJoho"."kariNenkinCode" as "keisangoJohoTemp_kariNenkinCode",
+        "DbT2015KeisangoJoho"."kariHosokuM" as "keisangoJohoTemp_kariHosokuM",
+        "DbT2015KeisangoJoho"."honNenkinNo" as "keisangoJohoTemp_honNenkinNo",
+        "DbT2015KeisangoJoho"."honNenkinCode" as "keisangoJohoTemp_honNenkinCode",
+        "DbT2015KeisangoJoho"."honHosokuM" as "keisangoJohoTemp_honHosokuM",
+        "DbT2015KeisangoJoho"."yokunendoKariNenkinNo" as "keisangoJohoTemp_yokunendoKariNenkinNo",
+        "DbT2015KeisangoJoho"."yokunendoKariNenkinCode" as "keisangoJohoTemp_yokunendoKariNenkinCode",
+        "DbT2015KeisangoJoho"."yokunendoKariHosokuM" as "keisangoJohoTemp_yokunendoKariHosokuM",
+        "DbT2015KeisangoJoho"."iraiSohuzumiFlag" as "keisangoJohoTemp_iraiSohuzumiFlag",
+        "DbT2015KeisangoJoho"."tsuikaIraiSohuzumiFlag" as "keisangoJohoTemp_tsuikaIraiSohuzumiFlag",
+        "DbT2015KeisangoJoho"."tokuchoTeishiNichiji" as "keisangoJohoTemp_tokuchoTeishiNichiji",
+        "DbT2015KeisangoJoho"."tokuchoTeishiJiyuCode" as "keisangoJohoTemp_tokuchoTeishiJiyuCode",
+        "DbT2015KeisangoJoho"."tkShunyuGaku01" as "keisangoJohoTemp_tkShunyuGaku01",
+        "DbT2015KeisangoJoho"."tkShunyuGaku02" as "keisangoJohoTemp_tkShunyuGaku02",
+        "DbT2015KeisangoJoho"."tkShunyuGaku03" as "keisangoJohoTemp_tkShunyuGaku03",
+        "DbT2015KeisangoJoho"."tkShunyuGaku04" as "keisangoJohoTemp_tkShunyuGaku04",
+        "DbT2015KeisangoJoho"."tkShunyuGaku05" as "keisangoJohoTemp_tkShunyuGaku05",
+        "DbT2015KeisangoJoho"."tkShunyuGaku06" as "keisangoJohoTemp_tkShunyuGaku06",
+        "DbT2015KeisangoJoho"."fuShunyuGaku01" as "keisangoJohoTemp_fuShunyuGaku01",
+        "DbT2015KeisangoJoho"."fuShunyuGaku02" as "keisangoJohoTemp_fuShunyuGaku02",
+        "DbT2015KeisangoJoho"."fuShunyuGaku03" as "keisangoJohoTemp_fuShunyuGaku03",
+        "DbT2015KeisangoJoho"."fuShunyuGaku04" as "keisangoJohoTemp_fuShunyuGaku04",
+        "DbT2015KeisangoJoho"."fuShunyuGaku05" as "keisangoJohoTemp_fuShunyuGaku05",
+        "DbT2015KeisangoJoho"."fuShunyuGaku06" as "keisangoJohoTemp_fuShunyuGaku06",
+        "DbT2015KeisangoJoho"."fuShunyuGaku07" as "keisangoJohoTemp_fuShunyuGaku07",
+        "DbT2015KeisangoJoho"."fuShunyuGaku08" as "keisangoJohoTemp_fuShunyuGaku08",
+        "DbT2015KeisangoJoho"."fuShunyuGaku09" as "keisangoJohoTemp_fuShunyuGaku09",
+        "DbT2015KeisangoJoho"."fuShunyuGaku10" as "keisangoJohoTemp_fuShunyuGaku10",
+        "DbT2015KeisangoJoho"."fuShunyuGaku11" as "keisangoJohoTemp_fuShunyuGaku11",
+        "DbT2015KeisangoJoho"."fuShunyuGaku12" as "keisangoJohoTemp_fuShunyuGaku12",
+        "DbT2015KeisangoJoho"."fuShunyuGaku13" as "keisangoJohoTemp_fuShunyuGaku13",
+        "DbT2015KeisangoJoho"."fuShunyuGaku14" as "keisangoJohoTemp_fuShunyuGaku14"
     </sql>
 
     <resultMap id="resultMap_DbT2015KeisangoJohoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity" autoMapping="true">

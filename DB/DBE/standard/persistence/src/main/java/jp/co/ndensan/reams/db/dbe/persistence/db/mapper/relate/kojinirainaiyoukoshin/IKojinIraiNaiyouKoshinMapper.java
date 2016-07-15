@@ -19,7 +19,7 @@ public interface IKojinIraiNaiyouKoshinMapper {
     /**
      * 訪問調査依頼情報を検索します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 申請書管理番号 申請書管理番号
      * @return List<KojinIraiNaiyouRelateEntity>
      */
     List<KojinIraiNaiyouRelateEntity> getChousaIraiJouhou(ShinseishoKanriNo 申請書管理番号);
@@ -27,7 +27,7 @@ public interface IKojinIraiNaiyouKoshinMapper {
     /**
      * 主治医依頼情報を検索します。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 申請書管理番号 申請書管理番号
      * @return List<KojinIraiNaiyouRelateEntity>
      */
     List<KojinIraiNaiyouRelateEntity> getSyujiIraiJouhou(ShinseishoKanriNo 申請書管理番号);

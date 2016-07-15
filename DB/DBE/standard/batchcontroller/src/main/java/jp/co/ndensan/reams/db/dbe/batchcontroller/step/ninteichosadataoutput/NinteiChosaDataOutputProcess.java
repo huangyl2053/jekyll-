@@ -9,6 +9,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChos
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -20,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -68,12 +74,28 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDa
     @Override
     protected void process(NinteiChosaDataOutputBatchRelateEntity entity) {
         eucCsvWriter.writeLine(new NinteiChosaDataOutputResult().setEucCsvEntity(entity));
+        new NinteiChosaDataOutputResult().getアクセスログ(entity.get申請書管理番号());
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
         manager.spool(eucFilePath);
+        outputJokenhyoFactory();
+    }
+
+    private void outputJokenhyoFactory() {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                EUC_ENTITY_ID.toRString(),
+                association.getLasdecCode_().value(),
+                association.get市町村名(),
+                new RString(String.valueOf(JobContextHolder.getJobId())),
+                new RString("認定調査データ出力（モバイル）.csv"),
+                new RString("ChosaKekkaNyuryokuMobile.csv"),
+                new NinteiChosaDataOutputResult().get出力件数(new Decimal(eucCsvWriter.getCount())),
+                new NinteiChosaDataOutputResult().get出力条件(processParamter));
+        OutputJokenhyoFactory.createInstance(item).print();
     }
 
 }

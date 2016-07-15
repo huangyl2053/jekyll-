@@ -22,11 +22,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuild
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -195,22 +197,46 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private HyojiCodes get表示コード(KariSanteiTsuchiShoKyotsu 仮算定通知書情報) {
-
+        IKojin 宛名 = 仮算定通知書情報.get賦課の情報_更正後().get宛名();
+        RString 町域コード = RString.EMPTY;
+        RString 行政区コード = RString.EMPTY;
+        RString 地区コード１ = RString.EMPTY;
+        RString 地区コード２ = RString.EMPTY;
+        RString 地区コード３ = RString.EMPTY;
+        RString 納組コード = RString.EMPTY;
+        if (宛名.get住所() != null && 宛名.get住所().get町域コード() != null) {
+            町域コード = 宛名.get住所().get町域コード().value();
+        }
+        if (宛名.get行政区画() != null) {
+            if (宛名.get行政区画().getGyoseiku() != null) {
+                行政区コード = 宛名.get行政区画().getGyoseiku().getコード().value();
+            }
+            if (宛名.get行政区画().getChiku1() != null) {
+                地区コード１ = 宛名.get行政区画().getChiku1().getコード().value();
+            }
+            if (宛名.get行政区画().getChiku2() != null) {
+                地区コード２ = 宛名.get行政区画().getChiku2().getコード().value();
+            }
+            if (宛名.get行政区画().getChiku3() != null) {
+                地区コード３ = 宛名.get行政区画().getChiku3().getコード().value();
+            }
+        }
+        if (仮算定通知書情報.get納組情報() != null && 仮算定通知書情報.get納組情報().getNokumi() != null) {
+            納組コード = 仮算定通知書情報.get納組情報().getNokumi().getNokumiCode();
+        }
         return new HyojiCodeResearcher().create表示コード情報(仮算定通知書情報.get帳票制御共通().toEntity(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get住所().get町域コード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getGyoseiku().getコード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku1().getコード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku2().getコード().value(),
-                仮算定通知書情報.get賦課の情報_更正後().get宛名().get行政区画().getChiku3().getコード().value(),
-                仮算定通知書情報.get納組情報().getNokumi().getNokumiCode());
+                町域コード, 行政区コード, 地区コード１, 地区コード２, 地区コード３, 納組コード);
     }
 
     private EditedKariSanteiTsuchiShoKyotsuBeforeCorrection get更正前(
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
             Decimal 更正前普徴期別金額合計,
             Decimal 更正前特徴期別金額合計) {
-        FukaJoho 賦課情報_更正前 = 仮算定通知書情報.get賦課の情報_更正前().get賦課情報();
         EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前 = new EditedKariSanteiTsuchiShoKyotsuBeforeCorrection();
+        if (仮算定通知書情報.get賦課の情報_更正前() == null) {
+            return 更正前;
+        }
+        FukaJoho 賦課情報_更正前 = 仮算定通知書情報.get賦課の情報_更正前().get賦課情報();
         更正前.set更正前介護保険料仮徴収額合計(更正前特徴期別金額合計.add(更正前普徴期別金額合計));
         if (賦課情報_更正前 == null) {
             更正前.set更正前介護保険料減免額(Decimal.ZERO);
@@ -342,11 +368,11 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set更正後普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正後));
         更正後.set更正後特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                         仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正後() == null
                 || 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                         new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収義務者コード(仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null ? RString.EMPTY
@@ -562,7 +588,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
+            納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
         }
         return 納付済額;
     }
@@ -570,7 +596,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By賦課情報(RString メソッド_賦課, FukaJoho 賦課情報, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
+            納付済額 = 納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
         }
         return 納付済額;
     }
@@ -628,7 +654,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         Class clazz = 収入情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            納付額 = ((Decimal) getMethod.invoke(収入情報));
+            納付額 = nullToZero((Decimal) getMethod.invoke(収入情報));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -645,7 +671,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         Class clazz = 賦課情報.getClass();
         try {
             Method getMethod = clazz.getDeclaredMethod(sb.toString());
-            納付額 = ((Decimal) getMethod.invoke(賦課情報));
+            納付額 = nullToZero((Decimal) getMethod.invoke(賦課情報));
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException ex) {
             Logger.getLogger(HonSanteiTsuchiShoKyotsuKomokuHenshu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -679,5 +705,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         return 随時.equals(期月.get月処理区分().getName())
                 || 現年随時.equals(期月.get月処理区分().getName()) ? 随時 : RString.EMPTY;
+    }
+
+    private Decimal nullToZero(Decimal number) {
+        if (number == null) {
+            return Decimal.ZERO;
+        }
+        return number;
     }
 }

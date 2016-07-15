@@ -55,6 +55,50 @@
         </where>
     </sql>
 
+    <select resultOrdered="true" id="select最新賦課の情報ByKey" resultMap="resultMap_FukaInfo" fetchSize="500">
+        <include refid="selectsaishenFukaJohoRelateEntity" />
+    </select>
+
+    <sql id="selectsaishenFukaJohoRelateEntity">
+        SELECT
+        DbT2002Fuka.*,
+        DbT2003Kibetsu.*,
+        UrT0705ChoteiKyotsu.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.noDeleted_DbT2002Fuka" />) AS DbT2002Fuka
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
+        ON
+        DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2003Kibetsu."dbT2003Kibetsu_choteiNendo" and
+        DbT2002Fuka."dbT2002Fuka_fukaNendo" = DbT2003Kibetsu."dbT2003Kibetsu_fukaNendo" and
+        DbT2002Fuka."dbT2002Fuka_tsuchishoNo" = DbT2003Kibetsu."dbT2003Kibetsu_tsuchishoNo" and
+        DbT2002Fuka."dbT2002Fuka_rirekiNo" = DbT2003Kibetsu."dbT2003Kibetsu_rirekiNo"
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+        FROM
+        rgdb."UrT0705ChoteiKyotsu"
+        ) AS UrT0705ChoteiKyotsu
+        ON
+        DbT2003Kibetsu."dbT2003Kibetsu_choteiId" = UrT0705ChoteiKyotsu."urT0705ChoteiKyotsu_choteiId"
+        <where>
+            <if test="uses調定年度">
+                AND DbT2002Fuka."dbT2002Fuka_choteiNendo" = #{調定年度}
+            </if>
+            <if test="uses賦課年度">
+                and DbT2002Fuka."dbT2002Fuka_fukaNendo" = #{賦課年度}
+            </if>
+            <if test="uses通知書番号">
+                and DbT2002Fuka."dbT2002Fuka_tsuchishoNo" = #{通知書番号}
+            </if>
+            <if test="uses履歴番号">
+                and DbT2002Fuka."dbT2002Fuka_rirekiNo" = #{履歴番号}
+            </if>
+        </where>
+        ORDER BY DbT2002Fuka."dbT2002Fuka_rirekiNo" DESC
+    </sql>
+
     <resultMap id="resultMap_FukaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity" autoMapping="true">
         <id property="介護賦課Entity.choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="介護賦課Entity.fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>

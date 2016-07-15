@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.taino;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TainoHanteiKikan {
+public class TainoHanteiKikan implements Serializable {
 
     private final int 合計月数;
     private final int 年数;

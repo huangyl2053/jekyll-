@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KiwarigakuKanendo1 のクラスファイル 
- * 
- * @author 自動生成
+ * KiwarigakuKanendo1 のクラスファイル
+ *
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class KiwarigakuKanendo1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -120,6 +123,26 @@ public class KiwarigakuKanendo1Div extends Panel {
     @JsonIgnore
     public Label getLblKiwarigaku24Gatsu() {
         return this.getKiwarigakuPanel2().getLblKiwarigaku24Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getKi1() {
+        return this.getKiwarigakuPanel2().getKi1();
+    }
+
+    @JsonIgnore
+    public Label getMae1() {
+        return this.getKiwarigakuPanel2().getMae1();
+    }
+
+    @JsonIgnore
+    public Label getGo1() {
+        return this.getKiwarigakuPanel2().getGo1();
+    }
+
+    @JsonIgnore
+    public Label getNokigen1() {
+        return this.getKiwarigakuPanel2().getNokigen1();
     }
 
     @JsonIgnore

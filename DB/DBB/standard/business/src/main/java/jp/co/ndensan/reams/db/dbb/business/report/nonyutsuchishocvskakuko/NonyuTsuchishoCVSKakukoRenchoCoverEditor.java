@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
@@ -34,7 +35,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
     private static final RString BANK_CODE_TITLE = new RString("金融機関コード");
     private static final RString KOZA_SHURUI_TITLE = new RString("種別");
     private static final RString BANK_NAME_TITLE = new RString("金融機関");
-    private static final RString KOZA_MEIGININ_TITLE = new RString("`名義人");
+    private static final RString KOZA_MEIGININ_TITLE = new RString("名義人");
     private static final RString HANKAKU_X = new RString("X");
     private static final RString HOSHI_2 = new RString("**");
     private static final RString HOSHI_4 = new RString("****");
@@ -53,8 +54,6 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
     private static final int リストサイズ８ = 8;
     private static final int リストサイズ９ = 9;
     private static final int リストサイズ１０ = 10;
-
-    private static final int INT_6 = 6;
 
     /**
      * インスタンスを生成します。
@@ -135,7 +134,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             }
         }
 
-        source.notsuRenban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        source.notsuRenban = NotsuReportEditorUtil.get納通連番(renban);
 
         this.納入通知書期情報設定(source);
 
@@ -219,8 +218,10 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.gokeigaku1 = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd1 = 印字位置1の納付書.get納期限表記();
             source.honzei1 = 印字位置1の納付書.get納付額表記();
-            source.ocr11 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr11 = 印字位置1の納付書.getOcr().get(1);
+                source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen1 = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
@@ -232,7 +233,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.tsuchishoNo1 = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo1 = HOSHI_4;
@@ -240,7 +241,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.kibetsu1 = HOSHI_2;
             source.ryoshushoNenbun1 = HOSHI_4;
             source.gokeigaku1 = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.tsuchishoNo1 = HOSHI_16;
             source.nokigenYmd1 = HOSHI_11;
             source.hakkoYmd1 = HOSHI_11;
             source.honzei1 = HOSHI_13;
@@ -302,7 +303,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.tsuchishoNo2 = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo2 = HOSHI_4;
@@ -310,7 +311,7 @@ public class NonyuTsuchishoCVSKakukoRenchoCoverEditor implements INonyuTsuchisho
             source.kibetsu2 = HOSHI_2;
             source.ryoshushoNenbun2 = HOSHI_4;
             source.gokeigaku2 = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.tsuchishoNo2 = HOSHI_16;
             source.nokigenYmd2 = HOSHI_11;
             source.hakkoYmd2 = HOSHI_11;
             source.honzei2 = HOSHI_13;

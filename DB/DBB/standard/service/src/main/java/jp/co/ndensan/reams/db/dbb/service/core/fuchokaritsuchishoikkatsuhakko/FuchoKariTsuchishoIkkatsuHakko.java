@@ -116,6 +116,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 普徴仮算定通知書一括発行（バッチ）クラスです。
+ *
+ * @reamsid_L DBB-0710-040 yebangqiang
  */
 public class FuchoKariTsuchishoIkkatsuHakko {
 
@@ -127,7 +129,7 @@ public class FuchoKariTsuchishoIkkatsuHakko {
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
     private static final RString スペース = new RString(" ");
-    private static RDate nowDate;
+    private final RDate nowDate;
     private static final RString 帳票タイプ_期毎タイプ = new RString("期毎タイプ");
     private static final RString 帳票タイプ_銀振タイプ = new RString("銀振タイプ");
     private static final RString 帳票タイプ_ブックタイプ = new RString("ブックタイプ");

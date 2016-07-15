@@ -21,10 +21,7 @@ public enum DBE0100001StateName implements IStateEnumerations {
     情報提供("情報提供"),
     完了("完了"),
     条件指定("条件指定"),
-    検索結果一覧("検索結果一覧"),
-    審査依頼受付("審査依頼受付"),
-    個人依頼内容更新("個人依頼内容更新"),
-    要介護認定イメージ情報管理("要介護認定イメージ情報管理");
+    検索結果一覧("検索結果一覧");
 
     private final RString name;
 

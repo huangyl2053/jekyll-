@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyoutsuu;
 
+import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.Setter;
 public class HihokenshaAndDaichouAndAtenaEntity {
 
     private int id;
-    private HihokenshaItijiEntity hihokensha;
+    private DbWT0001HihokenshaTempEntity hihokensha;
     private DbT1001HihokenshaDaichoEntity daicho;
     private UaFt200FindShikibetsuTaishoEntity atena;
 

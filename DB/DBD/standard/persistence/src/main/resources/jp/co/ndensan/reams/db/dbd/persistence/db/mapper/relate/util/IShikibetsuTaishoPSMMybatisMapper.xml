@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-9999-013 wangchao-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IShikibetsuTaishoPSMMybatisMapper">
+    <select id="selectShikibetsuTaishoPSMMybatis"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.ShikibetsuTaishoPSMMybatisParameter" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+    </select>
+</mapper>

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ninteichosahoshushokai;
 
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosahoshushokai.NinteiChosaHoshuShokaiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiFlowParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -13,42 +14,25 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 認定調査報酬照会のバッチフロークラスです。
  *
- * @reamsid_L DBE-1940-010 jinjue
+ * @reamsid_L DBE-1940-020 jinjue
  */
 public class NinteiChosaHoshuShokaiFlow extends BatchFlowBase<NinteiChosaHoshuShokaiFlowParameter> {
 
-    private static final String 認定調査報酬照会一覧表の作成 = "ninteiChosaHoshuShokaiReport";
-    private static final String 認定調査報酬照会一覧表CSVの作成 = "ninteiChosaHoshuShokaiCsv";
-    private static final String CSV出力_選択された = "1";
-    private static final String 一覧表_選択された = "2";
+    private static final String データ作成 = "ninteichosahoshushokai";
 
     @Override
     protected void defineFlow() {
-        if (CSV出力_選択された.equals(getParameter().get帳票出力区分())) {
-            executeStep(認定調査報酬照会一覧表CSVの作成);
-        }
-        if (一覧表_選択された.equals(getParameter().get帳票出力区分())) {
-            executeStep(認定調査報酬照会一覧表の作成);
-        }
+        executeStep(データ作成);
     }
 
     /**
-     * 認定調査報酬照会一覧表の作成を行います。
+     * 認定調査報酬照会データの作成を行います。
      *
      * @return バッチコマンド
      */
-    @Step(認定調査報酬照会一覧表の作成)
-    protected IBatchFlowCommand shujiiIkenTokusokuTaishoshaIchiranhyoReport() {
-        return null;
-    }
-
-    /**
-     * 認定調査報酬照会一覧表CSVの作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(認定調査報酬照会一覧表CSVの作成)
-    protected IBatchFlowCommand shujiiIkenTokusokuTaishoshaIchiranhyoCsv() {
-        return null;
+    @Step(データ作成)
+    protected IBatchFlowCommand ninteichosahoshushokai() {
+        return loopBatch(NinteiChosaHoshuShokaiProcess.class)
+                .arguments(getParameter().toProcessParamter()).define();
     }
 }

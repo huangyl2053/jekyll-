@@ -3019,9 +3019,9 @@
          "UeT0511_dtYobi4Juminzei" = B."dtYobi4Juminzei",
          "UeT0511_dtKojinNo" = B."dtKojinNo"
         FROM rgue."UeT0511NenkinTokuchoKaifuJoho" AS B
-        WHERE A."kariNenkinNo" = B."kisoNenkinNo"
-             AND A."kariNenkinCode" = B."nenkinCode"
-             AND A."kariHosokuM" = B."hosokuTsuki"
+        WHERE A."honNenkinNo" = B."kisoNenkinNo"
+             AND A."honNenkinCode" = B."nenkinCode"
+             AND A."honHosokuM" = B."hosokuTsuki"
              AND A."choteiNendo" <![CDATA[>=]]> #{最新調定日時}
              AND B."tsuchiNaiyoCode" in ('00', '30')
              AND B."shoriNendo" = #{調定年度}
@@ -3761,46 +3761,46 @@
         WHERE 
              1 = 1
             <if test="出力期 == 1">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku01" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku01" <![CDATA[>]]> '0'   
             </if>
             <if test="2 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku02" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku02" <![CDATA[>]]> '0'   
             </if>
             <if test="3 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku03" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku03" <![CDATA[>]]> '0'   
             </if>
             <if test="4 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku04" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku04" <![CDATA[>]]> '0'   
             </if>
             <if test="5 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku05" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku05" <![CDATA[>]]> '0'   
             </if>
             <if test="6 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku06" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku06" <![CDATA[>]]> '0'   
             </if>
             <if test="7 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku07" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku07" <![CDATA[>]]> '0'   
             </if>
             <if test="8 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku08" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku08" <![CDATA[>]]> '0'   
             </if>
             <if test="9 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku09" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku09" <![CDATA[>]]> '0'   
             </if>
             <if test="10 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku10" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku10" <![CDATA[>]]> '0'   
             </if>
             <if test="11 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku11" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku11" <![CDATA[>]]> '0'   
             </if>
             <if test="12 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku12" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku12" <![CDATA[>]]> '0'   
             </if>
             <if test="13 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku13" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku13" <![CDATA[>]]> '0'   
             </if>
             <if test="14 >= 出力期">              
-                AND A."dbT2015KeisangoJoho_fuKibetsuGaku14" <![CDATA[>]]> '0'   
+                OR A."dbT2015KeisangoJoho_fuKibetsuGaku14" <![CDATA[>]]> '0'   
             </if>
             <if test="口座区分 != null">              
                 AND A."dbT2015KeisangoJoho_kozaKubun" = #{口座区分} 

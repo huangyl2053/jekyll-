@@ -191,12 +191,15 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintFinder {
     @Transaction
     public SearchResult<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> get認定調査票差異チェック票(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter) {
         IChosaIraishoAndChosahyoAndIkenshoPrintMapper mapper = mapperProvider.create(IChosaIraishoAndChosahyoAndIkenshoPrintMapper.class);
-        ChosaIraishoAndChosahyoAndIkenshoPrintEntity entity = mapper.select認定調査票差異チェック票(parameter);
+        List<ChosaIraishoAndChosahyoAndIkenshoPrintEntity> entityList = mapper.select認定調査票差異チェック票(parameter);
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = new ArrayList<>();
-        if (entity == null) {
+        if (entityList.isEmpty()) {
             return SearchResult.of(new ArrayList(), 0, true);
         }
-        list.add(new ChosaIraishoAndChosahyoAndIkenshoPrintBusiness(entity));
+        for (ChosaIraishoAndChosahyoAndIkenshoPrintEntity entity : entityList) {
+            list.add(new ChosaIraishoAndChosahyoAndIkenshoPrintBusiness(entity));
+        }
+
         return SearchResult.of(list, list.size(), true);
     }
 

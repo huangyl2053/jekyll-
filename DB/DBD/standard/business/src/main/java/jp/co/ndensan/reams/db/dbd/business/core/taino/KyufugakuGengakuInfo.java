@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.taino;
 
+import java.io.Serializable;
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufugakuGengakuInfo {
+public class KyufugakuGengakuInfo implements Serializable {
 
     private final Decimal 徴収権消滅期間;
     private final Decimal 納付済期間;

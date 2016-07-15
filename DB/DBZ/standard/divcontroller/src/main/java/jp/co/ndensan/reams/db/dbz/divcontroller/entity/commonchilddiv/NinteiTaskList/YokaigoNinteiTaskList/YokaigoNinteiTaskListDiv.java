@@ -166,13 +166,13 @@ public class YokaigoNinteiTaskListDiv extends Panel implements IYokaigoNinteiTas
     }
 
     /**
-     * 一览件数を取得します。
+     * 一覧件数を取得します。
      *
-     * @return 一览件数
+     * @return 一覧件数
      */
     @Override
-    public RString 一览件数() {
-        return getHandler().一览件数();
+    public RString 一覧件数() {
+        return getHandler().一覧件数();
     }
 
     /**
