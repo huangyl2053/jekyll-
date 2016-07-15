@@ -505,31 +505,31 @@
         AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND D."ichijiHanteiKanryoYMD" IS NOT NULL
         AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -611,33 +611,33 @@
         AND F."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND F."ichijiHanteiKanryoYMD" IS NOT NULL
         AND F."maskingKanryoYMD" IS NOT NULL
-        AND F."ninteichosaKanryoYMD" IS NOT NULL
+        AND F."ninteiShinsakaiKanryoYMD" IS NOT NULL
         AND E."ichijiHanteiKekkaNinchishoKasanCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25', '31')
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <if test="isShinseiji">
@@ -722,31 +722,31 @@
         AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND D."ichijiHanteiKanryoYMD" IS NOT NULL
         AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -862,31 +862,31 @@
         AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND D."ichijiHanteiKanryoYMD" IS NOT NULL
         AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -966,72 +966,72 @@
         AND E."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND E."ichijiHanteiKanryoYMD" IS NOT NULL
         AND E."maskingKanryoYMD" IS NOT NULL
-        AND E."ninteichosaKanryoYMD" IS NOT NULL
+        AND E."ninteiShinsakaiKanryoYMD" IS NOT NULL
         AND D."nijiHanteiYMD" IS NOT NULL
         AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <if test="isShinseiji">
             <choose>
-                <when test="#{ninteiShinseiKubun == '1'}">
+                <when test='"1".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiShinseijiKubunCode" = '1'
                 </when>
-                <when test="#{ninteiShinseiKubun == '2'}">
+                <when test='"2".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiShinseijiKubunCode" = '2'
                 </when>
-                <when test="#{ninteiShinseiKubun == '3'}">
+                <when test='"3".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiShinseijiKubunCode" = '3'
                 </when>
             </choose>
         </if>
         <if test="isHorei">
             <choose>
-                <when test="#{ninteiShinseiKubun == '1'}">
+                <when test='"1".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiHoreiKubunCode" = '1'
                 </when>
-                <when test="#{ninteiShinseiKubun == '2'}">
+                <when test='"2".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiHoreiKubunCode" = '2'
                 </when>
-                <when test="#{ninteiShinseiKubun == '3'}">
+                <when test='"3".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiHoreiKubunCode" = '3'
                 </when>
             </choose>
         </if>
         <if test="!isShinseiji and !isHorei">
             <choose>
-                <when test="#{ninteiShinseiKubun == '1'}">
+                <when test='"1".equals(ninteiShinseiKubun.toString())'>
                     AND (C."ninteiShinseiShinseijiKubunCode" = '1'
                     OR C."ninteiShinseiHoreiKubunCode" = '1')
                 </when>
-                <when test="#{ninteiShinseiKubun == '2'}">
+                <when test='"2".equals(ninteiShinseiKubun.toString())'>
                     AND (C."ninteiShinseiShinseijiKubunCode" = '2'
                     OR C."ninteiShinseiHoreiKubunCode" = '2')
                 </when>
-                <when test="#{ninteiShinseiKubun == '3'}">
+                <when test='"3".equals(ninteiShinseiKubun.toString())'>
                     AND (C."ninteiShinseiShinseijiKubunCode" = '3'
                     OR C."ninteiShinseiHoreiKubunCode" = '3')
                 </when>
@@ -1094,68 +1094,68 @@
         AND E."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND E."ichijiHanteiKanryoYMD" IS NOT NULL
         AND E."maskingKanryoYMD" IS NOT NULL
-        AND E."ninteichosaKanryoYMD" IS NOT NULL
+        AND E."ninteiShinsakaiKanryoYMD" IS NOT NULL
         AND D."nijiHanteiYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <if test="isShinseiji">
             <choose>
-                <when test="#{ninteiShinseiKubun == '0'}">
+                <when test='"0".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '3')
                 </when>
-                <when test="#{ninteiShinseiKubun == '2'}">
+                <when test='"2".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiShinseijiKubunCode" = '2'
                 </when>
             </choose>
         </if>
         <if test="isHorei">
             <choose>
-                <when test="#{ninteiShinseiKubun == '0'}">
+                <when test='"0".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiHoreiKubunCode" IN ('1', '3')
                 </when>
-                <when test="#{ninteiShinseiKubun == '2'}">
+                <when test='"2".equals(ninteiShinseiKubun.toString())'>
                     AND C."ninteiShinseiHoreiKubunCode" = '2'
                 </when>
             </choose>
         </if>
         <if test="!isShinseiji and !isHorei">
             <choose>
-                <when test="#{ninteiShinseiKubun == '0'}">
+                <when test='"0".equals(ninteiShinseiKubun.toString())'>
                     AND (C."ninteiShinseiShinseijiKubunCode" IN ('1', '3')
                     OR C."ninteiShinseiHoreiKubunCode" IN ('1', '3'))
                 </when>
-                <when test="#{ninteiShinseiKubun == '2'}">
+                <when test='"2".equals(ninteiShinseiKubun.toString())'>
                     AND (C."ninteiShinseiShinseijiKubunCode" = '2'
                     OR C."ninteiShinseiHoreiKubunCode" = '2')
                 </when>
             </choose>
         </if>
         <choose>
-            <when test="#{ninteiShinseiKubun == '0'}">
+            <when test='"0".equals(ninteiShinseiKubun.toString())'>
                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
                 AND 6 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
                 AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 12
@@ -1170,24 +1170,24 @@
                     </when>
                     <otherwise>
                         <choose>
-                            <when test="#{jyotaiHenkoKubun == '0'}">
+                            <when test='"0".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiNinteiYukoKikan" = 12)
                             </when>
-                            <when test="#{jyotaiHenkoKubun == '1'}">
+                            <when test='"1".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND 6 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
                                 AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 12)
                             </when>
-                            <when test="#{jyotaiHenkoKubun == '2'}">
+                            <when test='"2".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND 6 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
                                 AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 12)
                             </when>
-                            <when test="#{jyotaiHenkoKubun == '3'}">
+                            <when test='"3".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND 12 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
@@ -1270,31 +1270,31 @@
         AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND D."ichijiHanteiKanryoYMD" IS NOT NULL
         AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -1369,33 +1369,33 @@
         AND E."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND E."ichijiHanteiKanryoYMD" IS NOT NULL
         AND E."maskingKanryoYMD" IS NOT NULL
-        AND E."ninteichosaKanryoYMD" IS NOT NULL
+        AND E."ninteiShinsakaiKanryoYMD" IS NOT NULL
         AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         AND I."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -2442,31 +2442,31 @@
         AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND D."ichijiHanteiKanryoYMD" IS NOT NULL
         AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
+        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -2576,26 +2576,26 @@
             AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND C."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND C."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND C."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND C."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND C."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <if test="isShinseiji">
@@ -2732,26 +2732,26 @@
             AND A."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND A."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND A."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND A."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND A."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND A."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND A."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND A."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
@@ -2785,31 +2785,32 @@
         AND C."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND C."ichijiHanteiKanryoYMD" IS NOT NULL
         AND C."maskingKanryoYMD" IS NOT NULL
+        AND C."ninteiShinsakaiKanryoYMD" IS NOT NULL
         AND A."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
             AND B."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
-            <when test="#{hihokenshaKubun=='0'}">
-                AND B."hihokenshaKubunCode" IN ('1', '2', '3')
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND B."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
-            <when test="#{hihokenshaKubun=='1'}">
+            <when test='"1".equals(hihokenshaKubun.toString())'>
                 AND B."hihokenshaKubunCode" = '1'
             </when>
-            <when test="#{hihokenshaKubun=='2'}">
+            <when test='"2".equals(hihokenshaKubun.toString())'>
                 AND B."hihokenshaKubunCode" = '2'
             </when>
-            <when test="#{hihokenshaKubun=='3'}">
-                AND B."hihokenshaKubunCode" = '3'
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND B."hihokenshaKubunCode" = '9'
             </when>
-            <when test="#{hihokenshaKubun=='4'}">
+            <when test='"4".equals(hihokenshaKubun.toString())'>
                 AND B."hihokenshaKubunCode" IN ('1', '2')
             </when>
-            <when test="#{hihokenshaKubun=='5'}">
-                AND B."hihokenshaKubunCode" IN ('1', '3')
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND B."hihokenshaKubunCode" IN ('1', '9')
             </when>
-            <when test="#{hihokenshaKubun=='6'}">
-                AND B."hihokenshaKubunCode" IN ('2', '3')
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND B."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
         <choose>
