@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements ITokubchiiKasHomKaigRiysFutGengKakuninshoEditor {
 
     private final RString ホシ = new RString("＊");
+    private final static int INDEX_0 = 0;
     private final static int INDEX_1 = 1;
     private final static int INDEX_2 = 2;
     private final static int INDEX_3 = 3;
@@ -37,9 +38,7 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
     private final static int INDEX_5 = 5;
     private final static int INDEX_6 = 6;
     private final static int INDEX_7 = 7;
-    private final static int INDEX_8 = 8;
-    private final static int INDEX_10 = 10;
-    private final static int INDEX_11 = 11;
+    private final static int INDEX_9 = 9;
     private final TokubchiiKasHomKaigRiysFutGengKakuninshoItem item;
 
     /**
@@ -64,10 +63,10 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
 
     private TokubChiiKasRiysFutGengKakuninshoReportSource bodyEdit(TokubChiiKasRiysFutGengKakuninshoReportSource source) {
 
-        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_2);
-        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_2, INDEX_4);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_5, INDEX_7);
-        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_8, INDEX_10);
+        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
         source.kakuninNo = item.get特別地域加算減免().get確認番号();
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
@@ -75,7 +74,7 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
 
-        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_2);
+        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
             if (new RString("明治").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
@@ -90,18 +89,18 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
             }
-            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_2, INDEX_4);
-            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_5, INDEX_7);
-            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_8, INDEX_10);
+            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
+            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
+            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_7, INDEX_9);
         } else {
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
             RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                     FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(INDEX_2, INDEX_5);
-            source.birthMM = 生年月日.substring(INDEX_5, INDEX_8);
-            source.birthDD = 生年月日.substring(INDEX_8, INDEX_11);
+            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_4);
+            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
+            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
         }
 
         if (Gender.MALE.equals(item.getIKojin().get性別())) {
@@ -112,26 +111,26 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
             source.woman = RString.EMPTY;
         }
 
-        source.tekiyoGengo = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_1, INDEX_2);
-        source.tekiyoYYYY = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_2, INDEX_4);
-        source.tekiyoMM = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_5, INDEX_7);
-        source.tekiyoDD = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_8, INDEX_10);
-        source.yukoGengo = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_1, INDEX_2);
-        source.yukoYYYY = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_2, INDEX_4);
-        source.yukoMM = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_5, INDEX_7);
-        source.yukoDD = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_8, INDEX_10);
+        source.tekiyoGengo = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.tekiyoYYYY = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.tekiyoMM = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.tekiyoDD = item.get特別地域加算減免().get適用開始年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
+        source.yukoGengo = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.yukoYYYY = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.yukoMM = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.yukoDD = item.get特別地域加算減免().get適用終了年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
 
         source.genmenRitsu = RString.EMPTY;
         source.genmenNaiyo1 = RString.EMPTY;
         source.gengakuRitsu = new RString(item.get特別地域加算減免().get減額率().getColumnValue().toString());
         source.genmenNaiyo2 = RString.EMPTY;
 
-        source.hokenshaNo1 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
-        source.hokenshaNo2 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
-        source.hokenshaNo3 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
-        source.hokenshaNo4 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
-        source.hokenshaNo5 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
-        source.hokenshaNo6 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_6, INDEX_7);
+        source.hokenshaNo1 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
+        source.hokenshaNo2 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
+        source.hokenshaNo3 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
+        source.hokenshaNo4 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
+        source.hokenshaNo5 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
+        source.hokenshaNo6 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100022.保険者名表示.name()).equals(entity.getKomokuName())

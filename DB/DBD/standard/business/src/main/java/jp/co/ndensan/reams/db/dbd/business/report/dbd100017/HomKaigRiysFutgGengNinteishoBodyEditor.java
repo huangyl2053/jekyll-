@@ -39,8 +39,7 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
     private final static int INDEX_6 = 6;
     private final static int INDEX_7 = 7;
     private final static int INDEX_8 = 8;
-    private final static int INDEX_10 = 10;
-    private final static int INDEX_11 = 11;
+    private final static int INDEX_9 = 9;
     private final HomKaigRiysFutgGengNinteishoItem item;
 
     /**
@@ -64,10 +63,10 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
     }
 
     private HomKaigRiysFutgGengNinteishoReportSource bodyEdit(HomKaigRiysFutgGengNinteishoReportSource source) {
-        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_2);
-        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_2, INDEX_4);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_5, INDEX_7);
-        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_8, INDEX_10);
+        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
 
         source.futanNo1 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_0, INDEX_1);
         source.futanNo2 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_1, INDEX_2);
@@ -91,7 +90,7 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
 
-        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_2);
+        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
             if (new RString("明治").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
@@ -106,18 +105,18 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
             }
-            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_2, INDEX_4);
-            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_5, INDEX_7);
-            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_8, INDEX_10);
+            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
+            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
+            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_7, INDEX_9);
         } else {
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
             RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                     FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(INDEX_2, INDEX_5);
-            source.birthMM = 生年月日.substring(INDEX_5, INDEX_8);
-            source.birthDD = 生年月日.substring(INDEX_8, INDEX_11);
+            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_3);
+            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
+            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
         }
         if (Gender.MALE.equals(item.getIKojin().get性別())) {
             source.man = RString.EMPTY;
