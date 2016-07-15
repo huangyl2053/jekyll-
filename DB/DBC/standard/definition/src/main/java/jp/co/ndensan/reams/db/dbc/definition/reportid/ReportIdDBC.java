@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 給付実績更新結果情報一覧表
+     */
+    DBC200054(new ReportId("DBC200054_KyufujissekiKoshinkekkaIchiran"), new RString("給付実績更新結果情報一覧表")),
+    /**
+     * 利用者負担２割対応・利用者負担割合更正
+     */
+    DBC100065(new ReportId("DBC100065_FutanWariaisho"), new RString("利用者負担２割対応・利用者負担割合更正 ")),
+    /**
      * 高額総合事業サービス費判定エラーリスト
      */
     DBC200076(new ReportId("DBC200076_KogakuSogoJigyoServicehiHanteiErrorIchiran"), new RString("高額総合事業サービス費判定エラーリスト ")),
