@@ -11,17 +11,23 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanj
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -33,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 特別徴収平準化計算（特別徴収6月分）結果一覧表帳票クラスです。
@@ -42,6 +49,8 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
 
     private static final ReportId 帳票分類ID = new ReportId("DBB200003_TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiran");
+    private final RString コード_ログコード = new RString("0003");
+    private static final RString 定数_被保険者番号 = new RString("被保険者番号");
 
     /**
      * 特徴平準化結果対象者一覧表
@@ -56,9 +65,14 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
             long 出力順ID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            AccessLogUUID taishoshaAccessLog = null;
+            List<PersonalData> taishoshaPersonalDataList = new ArrayList<>();
+            AccessLogUUID taishoshaAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishoshaPersonalDataList);
+            for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者 : 特徴平準化結果対象者一覧表リスト) {
+                TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
+                taishoshaPersonalDataList.add(toPersonalDataTaishosha(item));
+            }
             print(特徴平準化結果対象者一覧表リスト, new ArrayList<TokuchoHeijunkaRokuBatchTaishogaiIchiran>(),
-                    出力順ID, 調定日時, 賦課年度, reportManager, taishoshaAccessLog, null);
+                    出力順ID, 調定日時, 賦課年度, reportManager);
             collection = reportManager.publish(taishoshaAccessLog);
         }
         return collection;
@@ -78,9 +92,14 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
             long 出力順ID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            AccessLogUUID taishogaiAccessLog = null;
+            List<PersonalData> taishogaiPersonalDataList = new ArrayList<>();
+            AccessLogUUID taishogaiAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishogaiPersonalDataList);
+            for (TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象者 : 特徴平準化結果対象外一覧表リスト) {
+                TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象者.get特徴平準化結果対象外();
+                taishogaiPersonalDataList.add(toPersonalDataTaishogai(item));
+            }
             print(new ArrayList<TokuchoHeijunkaRokuBatchTaishoshaIchiran>(), 特徴平準化結果対象外一覧表リスト,
-                    出力順ID, 調定日時, 賦課年度, reportManager, null, taishogaiAccessLog);
+                    出力順ID, 調定日時, 賦課年度, reportManager);
             collection = reportManager.publish(taishogaiAccessLog);
         }
         return collection;
@@ -96,12 +115,10 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param reportManager ReportManager
-     * @param taishoshaAccessLog AccessLogUUID
-     * @param taishogaiAccessLog AccessLogUUID
      */
     public void print(List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
             List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Long 出力順ID, YMDHMS 調定日時,
-            FlexibleYear 賦課年度, ReportManager reportManager, AccessLogUUID taishoshaAccessLog, AccessLogUUID taishogaiAccessLog) {
+            FlexibleYear 賦課年度, ReportManager reportManager) {
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty();
         List<RString> 並び順List = get出力順(出力順ID);
         try (ReportAssembler<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
@@ -110,7 +127,7 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport report = TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport.createForm(
                     特徴平準化結果対象者一覧表リスト, 特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度,
-                    association, taishoshaAccessLog, taishogaiAccessLog);
+                    association);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -130,13 +147,22 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
             FlexibleYear 賦課年度) {
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty();
         List<RString> 並び順List = get出力順(出力順ID);
-        AccessLogUUID taishoshaAccessLog = null;
-        AccessLogUUID taishogaiAccessLog = null;
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         return new Printer<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource>().spool(property,
                 new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(特徴平準化結果対象者一覧表リスト,
-                        特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度, association, taishoshaAccessLog,
-                        taishogaiAccessLog));
+                        特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度, association));
+    }
+
+    private PersonalData toPersonalDataTaishosha(TokuchoHeijyunkaTaishoshaEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
+                entity.get被保険者番号().value());
+        return PersonalData.of(entity.get識別コード(), expandedInfo);
+    }
+
+    private PersonalData toPersonalDataTaishogai(TokuchoHeijyunkaTaishogaiEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
+                entity.get被保険者番号().value());
+        return PersonalData.of(entity.get識別コード(), expandedInfo);
     }
 
     private List<RString> get出力順(Long 出力順ID) {

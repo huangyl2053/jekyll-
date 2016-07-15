@@ -5,6 +5,9 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kaigofukatokuchoheijunka6batch.IKaigoFukaTokuchoHeijunka6BatchMapper">
 
+    <update id="delete平準化前賦課Temp">
+        DROP TABLE IF EXISTS "TmpHeijunkaMae"
+    </update>
     <insert id="insert平準化前賦課Temp" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFuchJohoParameter">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
