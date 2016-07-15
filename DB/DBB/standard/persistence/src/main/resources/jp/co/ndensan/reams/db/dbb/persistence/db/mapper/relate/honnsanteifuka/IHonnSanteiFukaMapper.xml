@@ -3,7 +3,7 @@
  <!--概要： 本算定賦課のマッピング用XMLです。--> 
 <!-- @reamsid_L DBB-0730-020 lijunjun -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.honnsanteifuka.IHonnSanteiFukaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper">
 
     <!--業務概念．賦課の情報を取得します。-->
     <select id="select賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"

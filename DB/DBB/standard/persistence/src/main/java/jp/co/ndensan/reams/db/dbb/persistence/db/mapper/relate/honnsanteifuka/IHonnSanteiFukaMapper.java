@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.honnsanteifuka;
+package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
