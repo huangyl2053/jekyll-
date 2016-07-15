@@ -132,28 +132,16 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
         div.getKoikinaiTenkyoTenkyomae().getTxtShokisaiHokenshaNo().setValue(row.getShoKisaiHokenshaNo());
         div.getTxtShokisaiHokensha().setValue(row.getShokisaiHokensha());
-        if (row.getHihokenshaNo() != null && !row.getHihokenshaNo().isEmpty()) {
-            Double dle = Double.parseDouble(row.getHihokenshaNo().toString());
-            div.getTxtHihokenshaNo().setValue(Decimal.valueOf(dle));
-        }
+        div.getTxtHihokenshaNo().setValue(row.getHihokenshaNo());
         div.getTxtHihokenshaName().setValue(row.getHihokenshaName());
         div.getTxtJusho().setValue(row.getJusho());
         div.getTxtSex().setValue(row.getSex());
         if (row.getBirthYMD() != null && !row.getBirthYMD().isEmpty()) {
             div.getTxtBirthYMD().setValue(new RDate(row.getBirthYMD().toString()));
         }
-        if (row.getAge() != null && !row.getAge().isEmpty()) {
-            Double dle = Double.parseDouble(row.getAge().toString());
-            div.getTxtAge().setValue(Decimal.valueOf(dle));
-        }
-        if (row.getTelNo() != null && !row.getTelNo().isEmpty()) {
-            Double dle = Double.parseDouble(row.getTelNo().toString());
-            div.getTxtTelNo().setValue(Decimal.valueOf(dle));
-        }
-        if (row.getYubinNo() != null && !row.getYubinNo().isEmpty()) {
-            Double dle = Double.parseDouble(row.getYubinNo().toString());
-            div.getTxtYubinNo().setValue(Decimal.valueOf(dle));
-        }
+        div.getTxtAge().setValue(row.getAge());
+        div.getTxtTelNo().setValue(row.getTelNo());
+        div.getTxtYubinNo().setValue(row.getYubinNo());
         setSentaku(row);
         List<KeyValueDataSource> shokisaihokensha = new ArrayList<>();
         shokisaihokensha.add(new KeyValueDataSource(RString.EMPTY, row.getShoKisaiHokenshaNo()));
@@ -179,10 +167,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         div.getTxtNinteiChosainName().setValue(row.getChosainName());
         div.getTxtShujiiIryoKikanMeisho().setValue(row.getShujiiIryoKikanMeisho());
         div.getTxtShujiiName().setValue(row.getShujiiName());
-        if (row.getShinsakaiNo() != null && !row.getShinsakaiNo().isEmpty()) {
-            Double dle = Double.parseDouble(row.getShinsakaiNo().toString());
-            div.getTxtKaigoNinteiShinsakaiNo().setValue(Decimal.valueOf(dle));
-        }
+        div.getTxtKaigoNinteiShinsakaiNo().setValue(row.getShinsakaiNo());
         if (row.getShinsakaiKaisaibi() != null && !row.getShinsakaiKaisaibi().isEmpty()) {
             div.getTxtKaigoNinteiShinsakaiKaisabi().setValue(new RDate(row.getShinsakaiKaisaibi().toString()));
         }

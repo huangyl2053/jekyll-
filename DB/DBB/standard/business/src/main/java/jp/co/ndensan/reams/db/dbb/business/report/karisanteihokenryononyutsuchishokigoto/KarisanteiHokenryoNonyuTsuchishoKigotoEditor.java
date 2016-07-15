@@ -161,23 +161,27 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().isEmpty()) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.ki1 = 納入通知書期情報.get期表記();
+            return;
+        }
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().isEmpty()) {
             return;
         }
         source.ki1
-                = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? 納入通知書期情報.get期表記()
-                : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(0).get期月().get期AsInt()))
+                = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(0).get期月().get期AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
     private void editTsuki1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().isEmpty()) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.tsuki1 = 納入通知書期情報.get月表記();
             return;
         }
-        source.tsuki1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? 納入通知書期情報.get月表記()
-                : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(0).get期月().get月AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().isEmpty()) {
+            return;
+        }
+        source.tsuki1 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(0).get期月().get月AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
@@ -192,20 +196,26 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 2) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.ki2 = RString.EMPTY;
             return;
         }
-        source.ki2 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(1).get期月().get期AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 2) {
+            return;
+        }
+        source.ki2 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(1).get期月().get期AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
     private void editTsuki2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 2) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.tsuki2 = RString.EMPTY;
             return;
         }
-        source.tsuki2 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(1).get期月().get月AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 2) {
+            return;
+        }
+        source.tsuki2 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(1).get期月().get月AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
@@ -218,20 +228,26 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_3) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.ki3 = RString.EMPTY;
             return;
         }
-        source.ki3 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(2).get期月().get期AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_3) {
+            return;
+        }
+        source.ki3 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(2).get期月().get期AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
     private void editTsuki3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_3) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.tsuki3 = RString.EMPTY;
             return;
         }
-        source.tsuki3 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(2).get期月().get月AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_3) {
+            return;
+        }
+        source.tsuki3 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(2).get期月().get月AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
@@ -244,20 +260,26 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi4(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_4) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.ki4 = RString.EMPTY;
             return;
         }
-        source.ki4 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(期_3).get期月().get期AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_4) {
+            return;
+        }
+        source.ki4 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(期_3).get期月().get期AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
     private void editTsuki4(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_4) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.tsuki4 = RString.EMPTY;
             return;
         }
-        source.tsuki4 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(期_3).get期月().get月AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_4) {
+            return;
+        }
+        source.tsuki4 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(期_3).get期月().get月AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
@@ -270,20 +292,26 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi5(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_5) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.ki5 = RString.EMPTY;
             return;
         }
-        source.ki5 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(期_4).get期月().get期AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_5) {
+            return;
+        }
+        source.ki5 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(期_4).get期月().get期AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
     private void editTsuki5(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_5) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.tsuki5 = RString.EMPTY;
             return;
         }
-        source.tsuki5 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(期_4).get期月().get月AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_5) {
+            return;
+        }
+        source.tsuki5 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(期_4).get期月().get月AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
@@ -296,20 +324,26 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editKi6(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_6) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.ki6 = RString.EMPTY;
             return;
         }
-        source.ki6 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(期_5).get期月().get期AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_6) {
+            return;
+        }
+        source.ki6 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(期_5).get期月().get期AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 
     private void editTsuki6(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get普徴収入情報リスト() || 編集後仮算定通知書共通情報.get普徴収入情報リスト().size() < 期_6) {
+        if (NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())) {
+            source.tsuki6 = RString.EMPTY;
             return;
         }
-        source.tsuki6 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴収入情報リスト().get(期_5).get期月().get月AsInt()))
+        if (null == 編集後仮算定通知書共通情報.get普徴納期情報リスト() || 編集後仮算定通知書共通情報.get普徴納期情報リスト().size() < 期_6) {
+            return;
+        }
+        source.tsuki6 = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴納期情報リスト().get(期_5).get期月().get月AsInt()))
                 .padLeft(RString.HALF_SPACE, 2);
     }
 

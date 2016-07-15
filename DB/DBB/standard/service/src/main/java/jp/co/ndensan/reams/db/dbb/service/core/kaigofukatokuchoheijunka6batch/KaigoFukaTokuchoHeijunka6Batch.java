@@ -146,7 +146,6 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final RString パラメータ名_賦課年度 = new RString("賦課年度");
     private static final RString 年度 = new RString("年度");
     private static final RString CSV出力有無_有り = new RString("有り");
-    private static final RString 定値区分_0 = new RString("0");
     private static final RString SIGN_GT = new RString("＞");
     private static final RString 平準化対象外理由区分_最小値未満 = new RString("1");
     private static final RString 平準化対象外理由区分_計算方法より = new RString("2");
@@ -186,6 +185,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     public void getMaeFukaJohoList(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         TokuchoHeijunkaRokuBatchFuchJohoParameter parameter = TokuchoHeijunkaRokuBatchFuchJohoParameter.createParam(調定年度, 賦課年度);
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
+        mapper.delete平準化前賦課Temp();
         mapper.insert平準化前賦課Temp(parameter);
     }
 
@@ -333,7 +333,8 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(KariNonyuTsuchishoHakkoIchiranProperty.DBB100014NonyuTsuchishoEnum.class, outputOrder);
         }
-        TokuchoHeijunkaRokuBatchTaishoParameter parameter = new TokuchoHeijunkaRokuBatchTaishoParameter(調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 出力順);
+        TokuchoHeijunkaRokuBatchTaishoParameter parameter = new TokuchoHeijunkaRokuBatchTaishoParameter(
+                調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 出力順);
         List<TokuchoHeijunkaRokuBatchTaishoshaEntity> 対象者データリスト = mapper.get対象者データ(parameter);
         List<TokuchoHeijyunkaTaishoshaEntity> 特徴平準化結果対象者一覧表リスト = new ArrayList<>();
         if (対象者データリスト != null && !対象者データリスト.isEmpty()) {
@@ -433,9 +434,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
-        // TODO ５．帳票をスプール登録する
-//        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
-        バッチ出力条件リストの出力(調定年度, 賦課年度, 市町村コード, 市町村名, 定値区分_0, 出力順ID);
+        int 対象外出力ページ数 = taishogaiSourceData == null ? NUM_0 : taishogaiSourceData.iterator().next().getPageCount();
+        int 対象者出力ページ数 = taishoshaSourceData == null ? NUM_0 : taishoshaSourceData.iterator().next().getPageCount();
+        RString 出力ページ数 = new RString(対象外出力ページ数 + 対象者出力ページ数);
+        バッチ出力条件リストの出力(調定年度, 賦課年度, 市町村コード, 市町村名, 出力ページ数, 出力順ID);
     }
 
     private void set出力順_改頁(IOutputOrder outputOrder, List<RString> 出力順項目List) {
@@ -576,12 +578,40 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate()));
         }
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額01(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額02(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額03(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額04(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額05(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額06(), 0));
+        特徴期期別金額設定(特徴平準化結果対象外, bodyList);
+    }
+
+    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishogaiEntity 特徴平準化結果対象外, List<RString> bodyList) {
+        if (特徴平準化結果対象外.get特徴期期別金額01() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額01(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象外.get特徴期期別金額02() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額02(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象外.get特徴期期別金額03() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額03(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象外.get特徴期期別金額04() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額04(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象外.get特徴期期別金額05() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額05(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象外.get特徴期期別金額06() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get特徴期期別金額06(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
     }
 
     private void 特徴平準化対象者CSV項目編集(List<RString> bodyList, YMDHMS 調定日時, FlexibleYear 賦課年度,
@@ -632,12 +662,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         } else {
             bodyList.add(RString.EMPTY);
         }
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_１期(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_２期(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_３期(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_４期(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_５期(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_６期(), 0));
+        変更前特徴額設定(特徴平準化結果対象者, bodyList);
         bodyList.add(特徴平準化結果対象者.get保険料段階仮算定時());
         bodyList.add(DecimalFormatter.toコンマ区切りRString(今年度保険料率, 0));
         bodyList.add(DecimalFormatter.toコンマ区切りRString(new Decimal(調整金額), 0));
@@ -671,12 +696,73 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate()));
         }
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額01(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額02(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額03(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額04(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額05(), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額06(), 0));
+        特徴期期別金額設定(特徴平準化結果対象者, bodyList);
+    }
+
+    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, List<RString> bodyList) {
+        if (特徴平準化結果対象者.get特徴期期別金額01() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額01(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get特徴期期別金額02() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額02(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get特徴期期別金額03() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額03(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get特徴期期別金額04() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額04(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get特徴期期別金額05() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額05(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get特徴期期別金額06() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get特徴期期別金額06(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+    }
+
+    private void 変更前特徴額設定(TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, List<RString> bodyList) {
+        if (特徴平準化結果対象者.get変更前特徴額_１期() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_１期(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get変更前特徴額_２期() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_２期(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get変更前特徴額_３期() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_３期(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get変更前特徴額_４期() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_４期(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get変更前特徴額_５期() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_５期(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
+        if (特徴平準化結果対象者.get変更前特徴額_６期() != null) {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get変更前特徴額_６期(), 0));
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
     }
 
     private RString 備考名を転換(RString 編集コード) {

@@ -121,8 +121,6 @@ public class KohifutanshaDoIchiranhyoSakuseiProcess extends SimpleBatchProcessBa
                 .hasHeader(true)
                 .build();
         for (int index = 0; index < list.size(); index++) {
-            PersonalData personalData = getPersonalData(list.get(index));
-            personalDataList.add(personalData);
             boolean 集計Flag = false;
             if (list.size() <= (index + 1)) {
                 集計Flag = true;

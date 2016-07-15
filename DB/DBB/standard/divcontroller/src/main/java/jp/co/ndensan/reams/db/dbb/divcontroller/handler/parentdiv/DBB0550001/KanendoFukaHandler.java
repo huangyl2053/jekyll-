@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -40,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -55,9 +55,12 @@ public class KanendoFukaHandler {
 
     private final KanendoFukaDiv div;
     private static final RString 定値_日時 = new RString("23:59:59");
+    private static final RString 日時 = new RString("235959");
     private static final RString ZERO_RS = new RString("0");
     private static final RString ONE_RS = new RString("1");
     private static final RString TWO_RS = new RString("2");
+    private static final RString する = new RString("する");
+    private static final RString 全て = new RString("全て");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -123,12 +126,12 @@ public class KanendoFukaHandler {
     }
 
     private void set抽出開始日時と終了日時(ShoriDateKanri shoriDate) {
-        RString 前日まで = RDate.getNowDate().minusDay(1).toDateString().concat(RString.HALF_SPACE).
+        RString 前日まで = RDate.getNowDate().minusDay(1).wareki().toDateString().concat(RString.HALF_SPACE).
                 concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
-        RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).
+        RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).wareki().
                 toDateString().concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(定値_日時);
-        RString 当日を含む = RDate.getNowDate().getYearMonth().
+        RString 当日を含む = RDate.getNowDate().wareki().
                 toDateString().concat(RString.HALF_SPACE).concat(
                         RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         List<dgChushutsuKikan_Row> rowList = new ArrayList<>();
@@ -139,14 +142,24 @@ public class KanendoFukaHandler {
                     toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
             row.getTxtChishutsuStNichiji().setValue(基準日時);
+            row.getTxtChushutsuStYMD().setValue(shoriDate.get基準日時().getRDateTime().getDate());
+            row.getTxtChushutsuStTime().setValue(shoriDate.get基準日時().getRDateTime().getTime());
         }
         if (div.getKanendoFukaChushutsuJoken().getRadChushutsuJoken().getSelectedKey().equals(ZERO_RS)) {
             row.getTxtChishutsuEdNichiji().setValue(前月まで);
+            row.getTxtChushutsuEdYMD().setValue(new RDate(RDate.getNowDate().
+                    getYearMonth().minusMonth(1).toDateString().concat(String.valueOf(前月末の日)).toString()));
+            row.getTxtChushutsuEdTime().setValue(new RTime(日時));
         } else if (div.getKanendoFukaChushutsuJoken().getRadChushutsuJoken().getSelectedKey().equals(ONE_RS)) {
             row.getTxtChishutsuEdNichiji().setValue(前日まで);
+            row.getTxtChushutsuEdYMD().setValue(RDate.getNowDate().minusDay(1));
+            row.getTxtChushutsuEdTime().setValue(RDate.getNowTime());
         } else if (div.getKanendoFukaChushutsuJoken().getRadChushutsuJoken().getSelectedKey().equals(TWO_RS)) {
             row.getTxtChishutsuEdNichiji().setValue(当日を含む);
+            row.getTxtChushutsuEdYMD().setValue(RDate.getNowDate());
+            row.getTxtChushutsuEdTime().setValue(RDate.getNowTime());
         }
+
         rowList.add(row);
         div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().setDataSource(rowList);
     }
@@ -245,8 +258,10 @@ public class KanendoFukaHandler {
         List<KeyValueDataSource> 対象者 = new ArrayList<>();
         List<KeyValueDataSource> 口座振替者 = new ArrayList<>();
         for (NotsuKozaShutsuryokuTaisho notko : NotsuKozaShutsuryokuTaisho.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(notko.getコード(), notko.get名称());
-            対象者.add(dataSource);
+            if (!notko.get名称().equals(全て)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(notko.getコード(), notko.get名称());
+                対象者.add(dataSource);
+            }
         }
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().setDataSource(対象者);
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().setDataSource(対象者);
@@ -273,18 +288,28 @@ public class KanendoFukaHandler {
                 getDataSource().get(0).getTxtChishutsuStNichiji().getValue() != null
                 && div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
                 getDataSource().get(0).getTxtChishutsuEdNichiji().getValue() != null) {
-            parameter.set抽出開始日時(new YMDHMS(div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
-                    getDataSource().get(0).getTxtChishutsuStNichiji().getValue()));
-            parameter.set抽出終了日時(new YMDHMS(div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
-                    getDataSource().get(0).getTxtChishutsuEdNichiji().getValue()));
+            YMDHMS 抽出開始日時 = new YMDHMS(div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
+                    getDataSource().get(0).getTxtChushutsuStYMD().getValue(),
+                    div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
+                    getDataSource().get(0).getTxtChushutsuStTime().getValue());
+            YMDHMS 抽出終了日時 = new YMDHMS(div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
+                    getDataSource().get(0).getTxtChushutsuEdYMD().getValue(),
+                    div.getKanendoFukaChushutsuJoken().getDgChushutsuKikan().
+                    getDataSource().get(0).getTxtChushutsuEdTime().getValue());
+            parameter.set抽出開始日時(抽出開始日時);
+            parameter.set抽出終了日時(抽出終了日時);
         }
-        List<HonsanteiIdoKanendoResult> hoList = new ArrayList<>();
-        for (dgOutputChohyoIchiran_Row row : div.getCcdChohyoIchiran().get出力帳票一覧()) {
-            HonsanteiIdoKanendoResult par = new HonsanteiIdoKanendoResult(
-                    決定変更通知書_帳票分類ID, row.getChohyoID(), row.getShutsuryokujunID());
-            hoList.add(par);
+        List<HonsanteiIdoParameter> 出力帳票一覧 = new ArrayList<>();
+        Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        HonsanteiIdoParameter chohyoMeter;
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        for (Map.Entry<RString, RString> entry : set) {
+            chohyoMeter = new HonsanteiIdoParameter();
+            chohyoMeter.set帳票分類ID(new ReportId(entry.getKey()));
+            chohyoMeter.set出力順ID(entry.getValue());
+            出力帳票一覧.add(chohyoMeter);
         }
-        parameter.set出力帳票一覧(hoList);
+        parameter.set出力帳票一覧(出力帳票一覧);
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().isAllSelected()) {
             parameter.set決定_チェックボックス(ONE_RS);
         } else {
@@ -363,14 +388,14 @@ public class KanendoFukaHandler {
             納入list.add(FlexibleYear.EMPTY);
             納入list.add(調定年度.minusYear(2));
         }
-        parameter.set変更_対象賦課年度(納入list);
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiHakkoYMD().getValue() != null) {
+        parameter.set納入_対象賦課年度(納入list);
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().getValue() != null) {
             parameter.set納入_発行日(new FlexibleDate(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                     getTxtNotsuHakkoYMD().getValue().toString()));
         }
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedValue() != null) {
-            parameter.set納入_出力期(new FlexibleDate(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                    getDdlNotsuShutsuryokuKi().getSelectedValue().toString()));
+            parameter.set納入_出力期(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                    getDdlNotsuShutsuryokuKi().getSelectedValue());
         }
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().isAllSelected()) {
             parameter.set納入_対象者(TWO_RS);
@@ -383,11 +408,23 @@ public class KanendoFukaHandler {
         }
         parameter.set納入_口座振替様式(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getRadNotsuKozaShutsuryokuYoshiki().getSelectedKey());
-        parameter.set納入_生活保護対象者(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                getRadNotsuSeikatsuHogo().getSelectedKey());
-        parameter.set納入_ページごとに山分け(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                getRadNotsuYamawake().getSelectedKey());
-        parameter.set一括発行起動フラグ(true);
+        if (する.equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getRadNotsuSeikatsuHogo().getSelectedValue())) {
+            parameter.set納入_生活保護対象者(ZERO_RS);
+        } else {
+            parameter.set納入_生活保護対象者(ONE_RS);
+        }
+        if (する.equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getRadNotsuYamawake().getSelectedValue())) {
+            parameter.set納入_ページごとに山分け(ZERO_RS);
+        } else {
+            parameter.set納入_ページごとに山分け(ONE_RS);
+        }
+        if (過年度異動通知書.equals(ResponseHolder.getMenuID())) {
+            parameter.set一括発行起動フラグ(true);
+        } else {
+            parameter.set一括発行起動フラグ(false);
+        }
         return parameter;
     }
 

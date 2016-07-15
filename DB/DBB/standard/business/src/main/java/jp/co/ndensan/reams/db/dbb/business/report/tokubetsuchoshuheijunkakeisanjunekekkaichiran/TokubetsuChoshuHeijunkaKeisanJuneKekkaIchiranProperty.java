@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends ReportPropertyBase<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> {
 
-    private static final ReportId ID = ReportIdDBB.DBB200007.getReportId();
+    private static final ReportId ID = ReportIdDBB.DBB200003.getReportId();
     private static final RString ENCLOSURE = new RString("\"");
 
     /**

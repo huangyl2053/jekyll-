@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 支払方法変更滞納者把握リストクラスです．
+ *
+ * @reamsid_L DBD-3650-010 x_lilh
  */
 public class ShiharaiHohoHenkoHakuListMain {
 
