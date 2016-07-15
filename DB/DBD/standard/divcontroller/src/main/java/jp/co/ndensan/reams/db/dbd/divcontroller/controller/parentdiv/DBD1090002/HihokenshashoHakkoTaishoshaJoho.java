@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -48,9 +47,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HihokenshashoHakkoTaishoshaJoho {
 
     public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> onLoad(HihokenshashoHakkoTaishoshaJohoDiv div) {
-        TaishoshaKey 資格対象者 = new TaishoshaKey(new HihokenshaNo("9990000007"), new ShikibetsuCode("000000000999904"), new SetaiCode("1"));
-        ViewStateHolder.put(ViewStateKeys.資格対象者, 資格対象者);
-
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();

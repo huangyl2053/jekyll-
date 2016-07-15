@@ -2036,7 +2036,7 @@ and open the template in the editor.
         INNER JOIN
         rgua.${psmAtesaki} AS psmAtesaki
         ON
-        psmAtesaki."shikibetsuCode" = Tmp."shichosonCode"     
+        psmAtesaki."shikibetsuCode" = Tmp."shikibetsuCode"     
     </select>  
       
     <!--送付先情報を一時テーブルに更新します。-->

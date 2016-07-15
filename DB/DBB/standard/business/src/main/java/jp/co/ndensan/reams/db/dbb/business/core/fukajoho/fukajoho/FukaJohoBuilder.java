@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.KibetsuIdentifier;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -50,6 +53,42 @@ public class FukaJohoBuilder {
         this.id = id;
         this.kibetsu = kibetsu.clone();
 
+    }
+
+    /**
+     * 調定年度を設定します。
+     *
+     * @param 調定年度 調定年度
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set調定年度(FlexibleYear 調定年度) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        entity.setChoteiNendo(調定年度);
+        return this;
+    }
+
+    /**
+     * 賦課年度を設定します。
+     *
+     * @param 賦課年度 賦課年度
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set賦課年度(FlexibleYear 賦課年度) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        entity.setFukaNendo(賦課年度);
+        return this;
+    }
+
+    /**
+     * 通知書番号を設定します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set通知書番号(TsuchishoNo 通知書番号) {
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        entity.setTsuchishoNo(通知書番号);
+        return this;
     }
 
     /**

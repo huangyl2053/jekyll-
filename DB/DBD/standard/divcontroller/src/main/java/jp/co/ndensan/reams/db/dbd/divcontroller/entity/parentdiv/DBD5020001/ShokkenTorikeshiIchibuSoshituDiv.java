@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanry
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.IKaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -54,6 +54,8 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     private RString hdnZenkaiRirekiNo;
     @JsonProperty("hdnKonkaiRirekiNo")
     private RString hdnKonkaiRirekiNo;
+    @JsonProperty("hdnKekkaCommonDivMode")
+    private RString hdnKekkaCommonDivMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -215,18 +217,26 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     /*
+     * gethdnKekkaCommonDivMode
+     * @return hdnKekkaCommonDivMode
+     */
+    @JsonProperty("hdnKekkaCommonDivMode")
+    public RString getHdnKekkaCommonDivMode() {
+        return hdnKekkaCommonDivMode;
+    }
+
+    /*
+     * sethdnKekkaCommonDivMode
+     * @param hdnKekkaCommonDivMode hdnKekkaCommonDivMode
+     */
+    @JsonProperty("hdnKekkaCommonDivMode")
+    public void setHdnKekkaCommonDivMode(RString hdnKekkaCommonDivMode) {
+        this.hdnKekkaCommonDivMode = hdnKekkaCommonDivMode;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
-        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiAtenaInfo();
-    }
-
-    @JsonIgnore
-    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
-        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiShikakuInfo();
-    }
-
     @JsonIgnore
     public ButtonDialog getBtnIryohokenGuide() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getBtnIryohokenGuide();
@@ -298,16 +308,6 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
-        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiShinseiKihonJohoInput();
-    }
-
-    @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdShinseiTodokedesha();
-    }
-
-    @JsonIgnore
     public ShujiiIryokikanAndShujiiDiv getShujiiIryokikanAndShujii() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getShujiiIryokikanAndShujii();
     }
@@ -318,7 +318,7 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     @JsonIgnore
-    public ShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getShujiiIryokikanAndShujii().getCcdShujiiIryokikanAndShujiiInput();
     }
 
@@ -333,7 +333,7 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     @JsonIgnore
-    public ChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
+    public IChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainInput() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getChosaItakusakiAndChosain().getCcdChosaItakusakiAndChosainInput();
     }
 
@@ -465,6 +465,26 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtShinsakaiIkenKonkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtShinsakaiIkenKonkai();
+    }
+
+    @JsonIgnore
+    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
+        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiShikakuInfo();
+    }
+
+    @JsonIgnore
+    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
+        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiAtenaInfo();
+    }
+
+    @JsonIgnore
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
+        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiShinseiKihonJohoInput();
+    }
+
+    @JsonIgnore
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdShinseiTodokedesha();
     }
 
     // </editor-fold>

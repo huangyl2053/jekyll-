@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJoh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -30,11 +33,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class YokaigoNinteiJohoBuilder {
 
-    private final DbT4101NinteiShinseiJohoEntity 要介護認定申請情報Entity;
+    private final DbT5101NinteiShinseiJohoEntity 要介護認定申請情報認定Entity;
+    private final DbT5911ShujiiIryoKikanJohoEntity 主治医医療機関情報認定Entity;
+    private final DbT5912ShujiiJohoEntity 主治医情報認定Entity;
+    private final DbT4101NinteiShinseiJohoEntity 要介護認定申請情報受給Entity;
     private final DbV4001JukyushaDaichoEntity 受給者台帳Entity;
     private final DbT4910NinteichosaItakusakiJohoEntity 認定調査委託先情報Entity;
-    private final DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報Entity;
-    private final DbT4912ShujiiJohoEntity 主治医情報Entity;
+    private final DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報受給Entity;
+    private final DbT4912ShujiiJohoEntity 主治医情報受給Entity;
     private final DbT4913ChosainJohoEntity 調査員情報Entity;
     private final DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
@@ -42,30 +48,39 @@ public class YokaigoNinteiJohoBuilder {
     /**
      * {@link HomonKaigoRiyoshaFutangakuGengaku}の編集用Builderクラスを生成します。
      *
-     * @param 要介護認定申請情報Entity DbT4101NinteiShinseiJohoEntity
+     * @param 要介護認定申請情報認定Entity DbT5101NinteiShinseiJohoEntity
+     * @param 主治医医療機関情報認定Entity DbT5911ShujiiIryoKikanJohoEntity
+     * @param 主治医情報認定Entity DbT5912ShujiiJohoEntity
+     * @param 要介護認定申請情報受給Entity DbT4101NinteiShinseiJohoEntity
      * @param 受給者台帳Entity DbV4001JukyushaDaichoEntity
      * @param 認定調査委託先情報Entity DbT4910NinteichosaItakusakiJohoEntity
-     * @param 主治医医療機関情報Entity DbT4911ShujiiIryoKikanJohoEntity
-     * @param 主治医情報Entity DbT4912ShujiiJohoEntity
+     * @param 主治医医療機関情報受給Entity DbT4911ShujiiIryoKikanJohoEntity
+     * @param 主治医情報受給Entity DbT4912ShujiiJohoEntity
      * @param 調査員情報Entity DbT4913ChosainJohoEntity
      * @param 要介護認定結果情報Entity DbT4102NinteiKekkaJohoEntity
      * @param 要介護認定インターフェース情報Entity DbT4003YokaigoNinteiInterfaceEntity
      */
     YokaigoNinteiJohoBuilder(
-            DbT4101NinteiShinseiJohoEntity 要介護認定申請情報Entity,
+            DbT5101NinteiShinseiJohoEntity 要介護認定申請情報認定Entity,
+            DbT5911ShujiiIryoKikanJohoEntity 主治医医療機関情報認定Entity,
+            DbT5912ShujiiJohoEntity 主治医情報認定Entity,
+            DbT4101NinteiShinseiJohoEntity 要介護認定申請情報受給Entity,
             DbV4001JukyushaDaichoEntity 受給者台帳Entity,
             DbT4910NinteichosaItakusakiJohoEntity 認定調査委託先情報Entity,
-            DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報Entity,
-            DbT4912ShujiiJohoEntity 主治医情報Entity,
+            DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報受給Entity,
+            DbT4912ShujiiJohoEntity 主治医情報受給Entity,
             DbT4913ChosainJohoEntity 調査員情報Entity,
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity,
             DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity
     ) {
-        this.要介護認定申請情報Entity = 要介護認定申請情報Entity.clone();
+        this.要介護認定申請情報認定Entity = 要介護認定申請情報認定Entity.clone();
+        this.主治医医療機関情報認定Entity = 主治医医療機関情報認定Entity.clone();
+        this.主治医情報認定Entity = 主治医情報認定Entity.clone();
+        this.要介護認定申請情報受給Entity = 要介護認定申請情報受給Entity.clone();
         this.受給者台帳Entity = 受給者台帳Entity.clone();
         this.認定調査委託先情報Entity = 認定調査委託先情報Entity.clone();
-        this.主治医医療機関情報Entity = 主治医医療機関情報Entity.clone();
-        this.主治医情報Entity = 主治医情報Entity.clone();
+        this.主治医医療機関情報受給Entity = 主治医医療機関情報受給Entity.clone();
+        this.主治医情報受給Entity = 主治医情報受給Entity.clone();
         this.調査員情報Entity = 調査員情報Entity.clone();
         this.要介護認定結果情報Entity = 要介護認定結果情報Entity.clone();
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity.clone();
@@ -624,26 +639,14 @@ public class YokaigoNinteiJohoBuilder {
     }
 
     /**
-     * 要介護認定申請情報取下区分コードを設定します。
-     *
-     * @param 要介護認定申請情報取下区分コード 要介護認定申請情報取下区分コード
-     * @return {@link YokaigoNinteiJohoBuilder}
-     */
-    public YokaigoNinteiJohoBuilder set要介護認定申請情報取下区分コード(Code 要介護認定申請情報取下区分コード) {
-        requireNonNull(要介護認定申請情報取下区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報取下区分コード"));
-        this.要介護認定申請情報Entity.setTorisageKubunCode(要介護認定申請情報取下区分コード);
-        return this;
-    }
-
-    /**
      * 要介護認定申請情報市町村連絡事項を設定します。
      *
      * @param 要介護認定申請情報市町村連絡事項 要介護認定申請情報市町村連絡事項
      * @return {@link YokaigoNinteiJohoBuilder}
      */
-    public YokaigoNinteiJohoBuilder set要介護認定申請情報市町村連絡事項(RString 要介護認定申請情報市町村連絡事項) {
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給市町村連絡事項(RString 要介護認定申請情報市町村連絡事項) {
         requireNonNull(要介護認定申請情報市町村連絡事項, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報市町村連絡事項"));
-        this.要介護認定申請情報Entity.setShichosonRenrakuJiko(要介護認定申請情報市町村連絡事項);
+        this.要介護認定申請情報受給Entity.setShichosonRenrakuJiko(要介護認定申請情報市町村連絡事項);
         return this;
     }
 
@@ -653,9 +656,9 @@ public class YokaigoNinteiJohoBuilder {
      * @param 要介護認定申請情報却下年月日 要介護認定申請情報却下年月日
      * @return {@link YokaigoNinteiJohoBuilder}
      */
-    public YokaigoNinteiJohoBuilder set要介護認定申請情報却下年月日(FlexibleDate 要介護認定申請情報却下年月日) {
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給却下年月日(FlexibleDate 要介護認定申請情報却下年月日) {
         requireNonNull(要介護認定申請情報却下年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報却下年月日"));
-        this.要介護認定申請情報Entity.setKyakkaYMD(要介護認定申請情報却下年月日);
+        this.要介護認定申請情報受給Entity.setKyakkaYMD(要介護認定申請情報却下年月日);
         return this;
     }
 
@@ -665,9 +668,9 @@ public class YokaigoNinteiJohoBuilder {
      * @param 要介護認定申請情報却下理由 要介護認定申請情報却下理由
      * @return {@link YokaigoNinteiJohoBuilder}
      */
-    public YokaigoNinteiJohoBuilder set要介護認定申請情報却下理由(RString 要介護認定申請情報却下理由) {
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給却下理由(RString 要介護認定申請情報却下理由) {
         requireNonNull(要介護認定申請情報却下理由, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報却下理由"));
-        this.要介護認定申請情報Entity.setKyakkaRiyu(要介護認定申請情報却下理由);
+        this.要介護認定申請情報受給Entity.setKyakkaRiyu(要介護認定申請情報却下理由);
         return this;
     }
 
@@ -677,9 +680,81 @@ public class YokaigoNinteiJohoBuilder {
      * @param 要介護認定申請情報審査継続区分 要介護認定申請情報審査継続区分
      * @return {@link YokaigoNinteiJohoBuilder}
      */
-    public YokaigoNinteiJohoBuilder set要介護認定申請情報審査継続区分(boolean 要介護認定申請情報審査継続区分) {
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給審査継続区分(boolean 要介護認定申請情報審査継続区分) {
         requireNonNull(要介護認定申請情報審査継続区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報審査継続区分"));
-        this.要介護認定申請情報Entity.setShinsaKeizokuFlag(要介護認定申請情報審査継続区分);
+        this.要介護認定申請情報受給Entity.setShinsaKeizokuFlag(要介護認定申請情報審査継続区分);
+        return this;
+    }
+
+    /**
+     * 要介護認定申請情報受給取下区分コードを設定します。
+     *
+     * @param 要介護認定申請情報受給取下区分コード 要介護認定申請情報受給取下区分コード
+     * @return {@link YokaigoNinteiJohoBuilder}
+     */
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給取下区分コード(Code 要介護認定申請情報受給取下区分コード) {
+        requireNonNull(要介護認定申請情報受給取下区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報受給取下区分コード"));
+        this.要介護認定申請情報受給Entity.setTorisageKubunCode(要介護認定申請情報受給取下区分コード);
+        return this;
+    }
+
+    /**
+     * 要介護認定申請情報受給取下年月日を設定します。
+     *
+     * @param 要介護認定申請情報受給取下年月日 要介護認定申請情報受給取下年月日
+     * @return {@link YokaigoNinteiJohoBuilder}
+     */
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給取下年月日(FlexibleDate 要介護認定申請情報受給取下年月日) {
+        requireNonNull(要介護認定申請情報受給取下年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報受給取下年月日"));
+        this.要介護認定申請情報受給Entity.setTorisageYMD(要介護認定申請情報受給取下年月日);
+        return this;
+    }
+
+    /**
+     * 要介護認定申請情報受給取下理由を設定します。
+     *
+     * @param 要介護認定申請情報受給取下理由 要介護認定申請情報受給取下理由
+     * @return {@link YokaigoNinteiJohoBuilder}
+     */
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報受給取下理由(RString 要介護認定申請情報受給取下理由) {
+        requireNonNull(要介護認定申請情報受給取下理由, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報受給取下理由"));
+        this.要介護認定申請情報受給Entity.setTorisageRiyu(要介護認定申請情報受給取下理由);
+        return this;
+    }
+
+    /**
+     * 要介護認定申請情報認定取下区分コードを設定します。
+     *
+     * @param 要介護認定申請情報認定取下区分コード 要介護認定申請情報認定取下区分コード
+     * @return {@link YokaigoNinteiJohoBuilder}
+     */
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報認定取下区分コード(Code 要介護認定申請情報認定取下区分コード) {
+        requireNonNull(要介護認定申請情報認定取下区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報認定取下区分コード"));
+        this.要介護認定申請情報認定Entity.setTorisageKubunCode(要介護認定申請情報認定取下区分コード);
+        return this;
+    }
+
+    /**
+     * 要介護認定申請情報認定取下年月日を設定します。
+     *
+     * @param 要介護認定申請情報認定取下年月日 要介護認定申請情報認定取下年月日
+     * @return {@link YokaigoNinteiJohoBuilder}
+     */
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報認定取下年月日(FlexibleDate 要介護認定申請情報認定取下年月日) {
+        requireNonNull(要介護認定申請情報認定取下年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報認定取下年月日"));
+        this.要介護認定申請情報認定Entity.setTorisageYMD(要介護認定申請情報認定取下年月日);
+        return this;
+    }
+
+    /**
+     * 要介護認定申請情報認定取下理由を設定します。
+     *
+     * @param 要介護認定申請情報認定取下理由 要介護認定申請情報認定取下理由
+     * @return {@link YokaigoNinteiJohoBuilder}
+     */
+    public YokaigoNinteiJohoBuilder set要介護認定申請情報認定取下理由(RString 要介護認定申請情報認定取下理由) {
+        requireNonNull(要介護認定申請情報認定取下理由, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報認定取下理由"));
+        this.要介護認定申請情報認定Entity.setTorisageRiyu(要介護認定申請情報認定取下理由);
         return this;
     }
 
@@ -817,11 +892,15 @@ public class YokaigoNinteiJohoBuilder {
      * @return {@link YokaigoNinteiJoho}のインスタンス
      */
     public YokaigoNinteiJoho build() {
-        return new YokaigoNinteiJoho(要介護認定申請情報Entity,
+        return new YokaigoNinteiJoho(
+                要介護認定申請情報認定Entity,
+                主治医医療機関情報認定Entity,
+                主治医情報認定Entity,
+                要介護認定申請情報受給Entity,
                 受給者台帳Entity,
                 認定調査委託先情報Entity,
-                主治医医療機関情報Entity,
-                主治医情報Entity,
+                主治医医療機関情報受給Entity,
+                主治医情報受給Entity,
                 調査員情報Entity,
                 要介護認定結果情報Entity,
                 要介護認定インターフェース情報Entity);

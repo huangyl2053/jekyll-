@@ -371,7 +371,7 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
      * @param 項目名 項目名
      * @return ChohyoSeigyoHanyo
      */
-    private ChohyoSeigyoHanyo load帳票制御汎用ByKey(ReportId 帳票分類ID,
+    public ChohyoSeigyoHanyo load帳票制御汎用ByKey(ReportId 帳票分類ID,
             FlexibleYear 管理年度, RString 項目名) {
         DbT7067ChohyoSeigyoHanyoEntity entity
                 = 帳票制御汎用Dac.select帳票制御汎用キー(SubGyomuCode.DBB介護賦課, 帳票分類ID, 管理年度, 項目名);

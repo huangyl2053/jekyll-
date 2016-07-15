@@ -99,9 +99,9 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
             set出力順And改ページ(source);
             int i = 1;
             source.listHanteiError_1 = new RString(i++);
-            source.listHanteiError_2 = entityList.get(0).get被保険者名();
+            source.listHanteiError_2 = entityList.get(0).get被保険者番号();
             source.listHanteiError_3 = new RString(entityList.get(0).getサービス提供年月().toString());
-            source.listHanteiError_4 = entityList.get(0).get被保険者番号();
+            source.listHanteiError_4 = entityList.get(0).get被保険者名();
             source.listHanteiError_5 = entityList.get(0).getエラーコード();
             source.listHanteiError_6 = entityList.get(0).get世帯コード();
             source.listHanteiError_7 = entityList.get(0).get世帯員識別コード();

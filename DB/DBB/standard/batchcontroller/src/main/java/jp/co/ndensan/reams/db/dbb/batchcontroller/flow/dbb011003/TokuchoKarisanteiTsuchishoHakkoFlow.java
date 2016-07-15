@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 仮算定通知書一括発行するクラスです。
+ * 特徴仮算定通知書一括発行するクラスです。
  *
  * @reamsid_L DBB-0790-030 chenaoqi
  */
@@ -59,7 +59,7 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
             executeStep(仮算定一括発行一時テーブル作成);
             executeStep(前年度賦課情報一時テーブル作成);
             executeStep(賦課情報取得);
-            //executeStep(通知書一覧表の発行);
+            executeStep(通知書一覧表の発行);
             executeStep(特徴開始仮算定通知書発行);
             executeStep(通知書発行後異動者登録);
         }

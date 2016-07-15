@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiYonnoni {
 
-    private RString 内部処理モード;
     private static final RString UPDATE = new RString("modify");
     private static final RString DELETE = new RString("delete");
     private static final RString ADD = new RString("add");
@@ -131,7 +130,7 @@ public class YoshikiYonnoni {
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setValue(insuranceInf.get市町村コード().getColumnValue());
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setValue(insuranceInf.get市町村名称());
             if (list.isEmpty()) {
-                内部処理モード = 内部処理モード_修正追加;
+                div.setShoriMode(内部処理モード_修正追加);
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
@@ -147,7 +146,7 @@ public class YoshikiYonnoni {
                     div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
                     div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
                     div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    内部処理モード = 内部処理モード_修正;
+                    div.setShoriMode(内部処理モード_修正);
                 } else {
                     div.getKanryoMessage().setVisible(false);
                     this.btnDisabled(div, insuranceInf);
@@ -157,7 +156,7 @@ public class YoshikiYonnoni {
                     div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
                     div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
                     div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    内部処理モード = 内部処理モード_削除;
+                    div.setShoriMode(内部処理モード_削除);
                 }
             }
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
@@ -220,7 +219,7 @@ public class YoshikiYonnoni {
             if (DBU0050031StateName.完了状態.getName().equals(ResponseHolder.getState())) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
             }
-            内部処理モード = 内部処理モード_追加;
+            div.setShoriMode(内部処理モード_追加);
         }
         return ResponseData.of(div).respond();
     }
@@ -233,7 +232,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnYoshikiyon(
             YoshikiYonnoniDiv div) {
-        内部処理モード = ResponseHolder.getState();
+        RString 内部処理モード = ResponseHolder.getState();
         if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
@@ -259,7 +258,7 @@ public class YoshikiYonnoni {
      * @return ResponseData<YoshikiYonnoniDiv>
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnYoskiyonosan(YoshikiYonnoniDiv div) {
-        内部処理モード = ResponseHolder.getState();
+        RString 内部処理モード = ResponseHolder.getState();
         if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
@@ -345,7 +344,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnUpdate(YoshikiYonnoniDiv div) {
 
-        if (内部処理モード_修正.equals(内部処理モード)) {
+        if (内部処理モード_修正.equals(div.getShoriMode())) {
 
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア().isEmpty()) {
@@ -353,7 +352,7 @@ public class YoshikiYonnoni {
             } else {
                 this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
             }
-        } else if (内部処理モード_修正追加.equals(内部処理モード)
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 && this.入力項目いずれか空白ではない(div)) {
             this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
@@ -383,7 +382,7 @@ public class YoshikiYonnoni {
         InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
-        if (内部処理モード_追加.equals(内部処理モード)) {
+        if (内部処理モード_追加.equals(div.getShoriMode())) {
             if (!this.入力項目いずれか空白ではない(div)) {
 
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -397,20 +396,19 @@ public class YoshikiYonnoni {
                         new RString("00"),
                         new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText()),
                         new RString("00"),
-                        // TODOset統計対象区分
-                        new RString("統計対象区分"),
+                        insuranceInf.get統計対象区分(),
                         new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                         new Code("09"),
                         CODE_0200,
                         new Code("1"),
-                        内部処理モード,
+                        div.getShoriMode(),
                         Code.EMPTY,
                         Code.EMPTY,
                         詳細データエリア);
 
                 this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
             }
-        } else if (内部処理モード_修正.equals(内部処理モード)) {
+        } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ == null) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -418,7 +416,7 @@ public class YoshikiYonnoni {
                 this.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データ, manager, div);
             }
 
-        } else if (内部処理モード_修正追加.equals(内部処理モード)) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
             if (!this.入力項目いずれか空白ではない(div)) {
 
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -433,20 +431,19 @@ public class YoshikiYonnoni {
                         new RString("00"),
                         new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText()),
                         new RString("00"),
-                        // TODOset統計対象区分
-                        new RString("統計対象区分"),
+                        insuranceInf.get統計対象区分(),
                         new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                         new Code("09"),
                         CODE_0200,
                         new Code("1"),
-                        内部処理モード,
+                        div.getShoriMode(),
                         Code.EMPTY,
                         Code.EMPTY,
                         詳細データエリア);
 
                 this.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
             }
-        } else if (内部処理モード_削除.equals(内部処理モード)) {
+        } else if (内部処理モード_削除.equals(div.getShoriMode())) {
 
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -611,10 +608,10 @@ public class YoshikiYonnoni {
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             if (DBU0050031TransitionEventName.検索に戻る.equals(events) || DBU0050031TransitionEventName.処理完了.equals(events)) {
                 return ResponseData.of(div).forwardWithEventName(events).respond();
-            } else if (内部処理モード_修正追加.equals(内部処理モード) || RString.isNullOrEmpty(内部処理モード)) {
+            } else if (内部処理モード_修正追加.equals(div.getShoriMode()) || RString.isNullOrEmpty(div.getShoriMode())) {
                 return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード_修正);
             } else {
-                return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード);
+                return ResponseData.of(div).forwardWithEventName(events).parameter(div.getShoriMode());
             }
         }
         return ResponseData.of(div).respond();
