@@ -71,7 +71,8 @@ public class JushotiTokureiFinder {
     private SearchResult<JushotiTokureiBusiness> get住所地特例リスト(List<DbT1001HihokenshaDaichoEntity> 住所地特例List) {
         List<JushotiTokureiBusiness> jushotiTokureiList = new ArrayList<>();
         for (DbT1001HihokenshaDaichoEntity entity : 住所地特例List) {
-            if (entity.getJushochitokureiKaijoYMD() != null) {
+            FlexibleDate 住所地特例解除日 = entity.getJushochitokureiKaijoYMD();
+            if (住所地特例解除日 != null && !住所地特例解除日.isEmpty()) {
                 entity.setJushochitokureiTekiyoYMD(FlexibleDate.EMPTY);
                 entity.setJushochitokureiTekiyoTodokedeYMD(FlexibleDate.EMPTY);
                 entity.setJushochitokureiTekiyoJiyuCode(RString.EMPTY);
