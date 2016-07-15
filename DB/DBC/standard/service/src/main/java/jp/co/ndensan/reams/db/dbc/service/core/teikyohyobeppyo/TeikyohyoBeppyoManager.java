@@ -100,10 +100,9 @@ public class TeikyohyoBeppyoManager {
      */
     public KubunGendo get合計Entity(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 自己作成計画年月) {
-        //TeikyohyoBeppyoEntityResult result = get被保険者情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
-        RString 総合事業 = new RString("総合事業");
+        TeikyohyoBeppyoEntityResult result = get被保険者情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
         JigoSakuseiMeisaiTouroku jigoSakuseiMeisaiTouroku = JigoSakuseiMeisaiTouroku.createInstance();
-        KubunGendo 合計Entity = jigoSakuseiMeisaiTouroku.getKubunGendo(被保険者番号.value(), 総合事業, 自己作成計画年月);
+        KubunGendo 合計Entity = jigoSakuseiMeisaiTouroku.getKubunGendo(被保険者番号.value(), result.get総合事業区分(), 自己作成計画年月);
 
         return 合計Entity;
     }
