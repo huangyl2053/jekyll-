@@ -53,7 +53,6 @@ public class HonsanteiIdoKanendo {
     private final RString 期毎納入通知書タイプ = new RString("期毎納入通知書タイプ");
     private final RString 銀振納入通知書タイプ = new RString("銀振納入通知書タイプ");
     private final RString その他納入通知書タイプ = new RString("その他納入通知書タイプ");
-    private final RString コンビニ期毎タイプ = new RString("コンビニ期毎タイプ");
     private final RString ブック口座振替依頼表示 = new RString("ブック口座振替依頼表示");
     private final RString コンビニ期毎出力 = new RString("コンビニ期毎出力");
     private static final ReportId 決定変更通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
@@ -203,7 +202,18 @@ public class HonsanteiIdoKanendo {
         result.set処理対象(parameter.get処理対象());
         result.set抽出開始日時(parameter.get抽出開始日時());
         result.set抽出終了日時(parameter.get抽出終了日時());
-        result.set出力帳票一覧(parameter.get出力帳票一覧());
+        RString 決定_変更通知書区分 = RString.EMPTY;
+        if (parameter.get決定_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = oneRS;
+        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = twoRS;
+        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+                && parameter.get変更_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = threeRS;
+        }
+        List<HonsanteiIdoKanendoResult> 出力帳票 = getChohyoID(parameter.get調定年度(),
+                parameter.get算定期(), parameter.get出力帳票一覧(), 決定_変更通知書区分);
+        result.set出力帳票一覧(出力帳票);
         result.set決定_チェックボックス(parameter.get決定_チェックボックス());
         result.set決定_対象賦課年度(parameter.get決定_対象賦課年度());
         result.set決定_発行日(parameter.get決定_発行日());
