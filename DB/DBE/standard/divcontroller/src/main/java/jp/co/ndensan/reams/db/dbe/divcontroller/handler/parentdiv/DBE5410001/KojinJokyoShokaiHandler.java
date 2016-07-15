@@ -17,10 +17,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -31,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -170,7 +165,7 @@ public class KojinJokyoShokaiHandler {
                     toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分申請時().toString())).get名称());
         }
         if (識別コード_09A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-                || 識別コード_09B.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
+            || 識別コード_09B.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get認定申請区分法令時() != null && !kojinJokyoShokaiList.get(0).get認定申請区分法令時().isEmpty()) {
                 div.getTxtShinseiKubunHorei().setValue(NinteiShinseiHoreiCode.
                         toValue(kojinJokyoShokaiList.get(0).get認定申請区分法令時().value()).get名称());
@@ -211,76 +206,34 @@ public class KojinJokyoShokaiHandler {
 
     private void set認定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         if (識別コード_09A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-                || 識別コード_09B.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
+            || 識別コード_09B.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                    && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
+                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
                 div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun09.
                         toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
             }
         } else if (識別コード_06A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                    && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
+                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
                 div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun06.
                         toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
             }
         } else if (識別コード_02A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
             if (kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                    && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
+                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
                 div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun02.
                         toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
             }
         } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-                && kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
-                && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
+                   && kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード() != null
+                   && !kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().isEmpty()) {
             div.getTxtNinteiKekka().setValue(YokaigoJotaiKubun99.
                     toValue(kojinJokyoShokaiList.get(0).get二次判定要介護状態区分コード().value()).get名称());
         }
     }
 
     private void set一次判定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
-        RString 一次判定結果 = RString.EMPTY;
-        RString 一次判定結果認知症加算 = RString.EMPTY;
-        if (識別コード_09A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-                || 識別コード_09B.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
-                    && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
-                一次判定結果 = IchijiHanteiKekkaCode09.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
-            }
-        } else if (識別コード_06A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
-                    && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
-                一次判定結果 = IchijiHanteiKekkaCode06.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
-            }
-        } else if (識別コード_02A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())) {
-            if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
-                    && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
-                一次判定結果 = IchijiHanteiKekkaCode02.
-                        toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
-            }
-        } else if (識別コード_99A.equals(kojinJokyoShokaiList.get(0).get厚労省IF識別コード())
-                && kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null
-                && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().isEmpty()) {
-            一次判定結果 = IchijiHanteiKekkaCode99.
-                    toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().value()).get名称();
-        }
-        if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算() != null
-                && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算().isEmpty()) {
-            一次判定結果認知症加算 = IchijiHanteiKekkaCode09.
-                    toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算().value()).get名称();
-        }
-        if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().equals(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算())) {
-            div.getTxtIchijiHantei().setValue(一次判定結果認知症加算);
-        } else {
-            RStringBuilder 一次判定 = new RStringBuilder();
-            一次判定.append(一次判定結果);
-            if (!RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果認知症加算)) {
-                一次判定.append("→");
-            }
-            一次判定.append(一次判定結果認知症加算);
-            div.getTxtIchijiHantei().setValue(一次判定.toRString());
-        }
+        div.getTxtIchijiHantei().setValue(kojinJokyoShokaiList.get(0).get一次判定結果名称());
     }
 
     /**
@@ -301,7 +254,7 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setHihokenshaNameKana(kojinJokyoShokaiList.get(0).get被保険者氏名カナ());
         jokyohyoEntity.setShinseiYMD(new RString(kojinJokyoShokaiList.get(0).get認定申請年月日().toString()));
         jokyohyoEntity.setSeibetsu(kojinJokyoShokaiList.get(0).get性別() == null ? RString.EMPTY
-                : Seibetsu.toValue(kojinJokyoShokaiList.get(0).get性別()).get名称());
+                                   : Seibetsu.toValue(kojinJokyoShokaiList.get(0).get性別()).get名称());
         jokyohyoEntity.setHihokenshaName(kojinJokyoShokaiList.get(0).get被保険者氏名());
         jokyohyoEntity.setBirthYMD(new RString(kojinJokyoShokaiList.get(0).get生年月日().toString()));
         jokyohyoEntity.setAge(new RString(String.valueOf(kojinJokyoShokaiList.get(0).get年齢())));

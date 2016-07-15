@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 huangh
  */
-public enum IchijiHanteiKekkaCode09 {
+public enum IchijiHanteiKekkaCode09 implements IIchijiHanteiKekkaCode {
 
     /**
      * コード:01 名称:非該 略称:定義なし
@@ -63,6 +63,7 @@ public enum IchijiHanteiKekkaCode09 {
      *
      * @return 要介護認定一次判定結果コード09のコード
      */
+    @Override
     public RString getコード() {
         return code;
     }
@@ -72,15 +73,17 @@ public enum IchijiHanteiKekkaCode09 {
      *
      * @return 要介護認定一次判定結果コード09の名称
      */
+    @Override
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 要介護認定一次判定結果コード09の名称を返します。
+     * 要介護認定一次判定結果コード09の略称を返します。
      *
-     * @return 要介護認定一次判定結果コード09の名称
+     * @return 要介護認定一次判定結果コード09の略称
      */
+    @Override
     public RString get略称() {
         return shortName;
     }
@@ -92,12 +95,19 @@ public enum IchijiHanteiKekkaCode09 {
      * @return {@code code} に対応する要介護認定一次判定結果コード09
      */
     public static IchijiHanteiKekkaCode09 toValue(RString code) {
+        IchijiHanteiKekkaCode09 value = toValueOrNull(code);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード09"));
+        }
+        return value;
+    }
 
+    static IchijiHanteiKekkaCode09 toValueOrNull(RString code) {
         for (IchijiHanteiKekkaCode09 ichijiHanteiKekkaCode09 : IchijiHanteiKekkaCode09.values()) {
             if (ichijiHanteiKekkaCode09.code.equals(code)) {
                 return ichijiHanteiKekkaCode09;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード09"));
+        return null;
     }
 }
