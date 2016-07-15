@@ -5,6 +5,7 @@
      <!--介護の３つのテーブルの全件対象者一覧データ取得-->
     <select id="get特別徴収同定一覧情報" 
             resultMap="resultMap_TokubetsuChoshuDoteiIchiranEntity" resultOrdered="true" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter" 
             fetchSize="500">
         SELECT 
             "DbT1001HihokenshaDaicho"."hihokenshaNo" as "hihokenshaNo",
@@ -29,31 +30,19 @@
                 rgdb."DbV2001ChoshuHoho" as "DbT2001ChoshuHoho"
             ON 
                 "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"  
-                <if test="kaishuTsuki == '08'">
-                 and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."kariNenkinNo" 
+                <if test="kaishuTsuki == 8">
+                 and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."kariNenkinNo"
+                 and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."kariNenkinCode"
+                 and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."kariHosokuM"   
                 </if>
-                <if test="kaishuTsuki == '10' or kaishuTsuki == '12' or kaishuTsuki == '02'">
+                <if test="kaishuTsuki == 10 or kaishuTsuki == 12 or kaishuTsuki == 2">
                  and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."honNenkinNo"
-                </if>
-                <if test="kaishuTsuki == '04' or kaishuTsuki == '06'">
-                 and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."yokunendoKariNenkinNo"
-                </if>
-                <if test="kaishuTsuki == '08'">
-                 and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."kariNenkinCode" 
-                </if>
-                <if test="kaishuTsuki == '10' or kaishuTsuki == '12' or kaishuTsuki == '02'">
-                 and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."honNenkinCode" 
-                </if>
-                <if test="kaishuTsuki == '04' or kaishuTsuki == '06'">
-                 and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."yokunendoKariNenkinCode" 
-                </if>
-                <if test="kaishuTsuki == '08'">
-                 and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."kariHosokuM" 
-                </if>
-                <if test="kaishuTsuki == '10' or kaishuTsuki == '12' or kaishuTsuki == '02'">
+                 and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."honNenkinCode"           
                  and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."honHosokuM" 
                 </if>
-                <if test="kaishuTsuki == '04' or kaishuTsuki == '06'">
+                <if test="kaishuTsuki == 4 or kaishuTsuki == 6">
+                 and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."yokunendoKariNenkinNo"
+                 and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."yokunendoKariNenkinCode" 
                  and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."yokunendoKariHosokuM" 
                 </if>
             INNER JOIN 
@@ -77,6 +66,7 @@
     
     <select id="get特別徴収未同定一覧情報" 
             resultMap="resultMap_TokubetsuChoshuMidoteiIchiranEntity" resultOrdered="true" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter" 
             fetchSize="500">
         SELECT
             "DbT2019TokuchoMidoteiJoho"."kisoNenkinNo" as "kisoNenkinNo",

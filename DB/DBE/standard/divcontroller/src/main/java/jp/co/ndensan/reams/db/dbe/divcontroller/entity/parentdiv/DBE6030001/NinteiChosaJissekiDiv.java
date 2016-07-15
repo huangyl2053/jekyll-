@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * LatestPublication のクラスファイル 
+ * NinteiChosaJisseki のクラスファイル 
  * 
  * @author 自動生成
  */
-public class LatestPublicationDiv extends Panel {
+public class NinteiChosaJissekiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -21,8 +21,8 @@ public class LatestPublicationDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtOperationDate")
-    private TextBoxFlexibleDate txtOperationDate;
+    @JsonProperty("dgNinteiChosaJisseki")
+    private DataGrid<dgNinteiChosaJisseki_Row> dgNinteiChosaJisseki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class LatestPublicationDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtOperationDate
-     * @return txtOperationDate
+     * getdgNinteiChosaJisseki
+     * @return dgNinteiChosaJisseki
      */
-    @JsonProperty("txtOperationDate")
-    public TextBoxFlexibleDate getTxtOperationDate() {
-        return txtOperationDate;
+    @JsonProperty("dgNinteiChosaJisseki")
+    public DataGrid<dgNinteiChosaJisseki_Row> getDgNinteiChosaJisseki() {
+        return dgNinteiChosaJisseki;
     }
 
     /*
-     * settxtOperationDate
-     * @param txtOperationDate txtOperationDate
+     * setdgNinteiChosaJisseki
+     * @param dgNinteiChosaJisseki dgNinteiChosaJisseki
      */
-    @JsonProperty("txtOperationDate")
-    public void setTxtOperationDate(TextBoxFlexibleDate txtOperationDate) {
-        this.txtOperationDate = txtOperationDate;
+    @JsonProperty("dgNinteiChosaJisseki")
+    public void setDgNinteiChosaJisseki(DataGrid<dgNinteiChosaJisseki_Row> dgNinteiChosaJisseki) {
+        this.dgNinteiChosaJisseki = dgNinteiChosaJisseki;
     }
 
     // </editor-fold>

@@ -42,24 +42,18 @@ public class PublicationShiryoShinsakaiValidationHandler {
      */
     public ValidationMessageControlPairs 発行チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-//        Decimal 事務部数 = div.getTxtCopyNumForJimukyoku1().getValue();
-        Decimal 委員部数 = div.getTxtCopyNumForShinsakaiIin1().getValue();
-//        List<RString> 事務帳票 = div.getChkPrintChoyoJimu().getSelectedKeys();
-        List<RString> 委員帳票 = div.getChkPrintChohyoIin().getSelectedKeys();
+        List<RString> 印刷帳票_事務局審査会資料 = div.getChkPrintChohyoShinsakaiJimu().getSelectedKeys();
+        List<RString> 印刷帳票_委員審査会資料 = div.getChkPrintChohyoShinsakaiIin().getSelectedKeys();
+        List<RString> 事務局_概況特記 = div.getChkPrintChoyoJimu2().getSelectedKeys();
+        List<RString> 委員_概況特記 = div.getChkPrintChohyoIin2().getSelectedKeys();
         RString 作成条件 = div.getRadSakuseiJokenType().getSelectedKey();
         Decimal 印刷範囲指定開始 = div.getTxtShiryoNoStart().getValue();
         Decimal 印刷範囲指定終了 = div.getTxtSiryoNoEnd().getValue();
-//        if (事務部数 == null || 事務部数.intValue() == 0) {
-//            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForJimukyoku1()));
-//        }
-        if (委員部数 == null || 委員部数.intValue() == 0) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.部数未入力, div.getTxtCopyNumForShinsakaiIin1()));
-        }
-//        if (事務帳票 == null || 事務帳票.isEmpty()) {
-//            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChoyoJimu()));
-//        }
-        if (委員帳票 == null || 委員帳票.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChohyoIin()));
+        if ((印刷帳票_事務局審査会資料 == null || 印刷帳票_事務局審査会資料.isEmpty())
+                && (印刷帳票_委員審査会資料 == null || 印刷帳票_委員審査会資料.isEmpty())
+                && (事務局_概況特記 == null || 事務局_概況特記.isEmpty())
+                && (委員_概況特記 == null || 委員_概況特記.isEmpty())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.印刷帳票未選択, div.getChkPrintChoyoJimu()));
         }
         if (作成条件_範囲指定.equals(作成条件)) {
             if (印刷範囲指定開始 == null || 印刷範囲指定開始.intValue() == 0 || 印刷範囲指定終了 == null || 印刷範囲指定終了.intValue() == 0) {
