@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
@@ -30,11 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -60,16 +54,11 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
     private static final RString 編集コード_対象外_増額 = new RString("象外_増額");
     private static final RString 編集コード_特徴6月開始者 = new RString("特徴6月開始者");
-    private final RString コード_ログコード = new RString("0003");
-    private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private final Association association;
-    private AccessLogUUID taishoshaAccessLog;
-    private AccessLogUUID taishogaiAccessLog;
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
             List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト, List<RString> 並び順List,
-            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Association association,
-            AccessLogUUID taishoshaAccessLog, AccessLogUUID taishogaiAccessLog) {
+            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Association association) {
         this.特徴平準化結果対象者一覧表リスト = 特徴平準化結果対象者一覧表リスト;
         this.特徴平準化結果対象外一覧表リスト = 特徴平準化結果対象外一覧表リスト;
         this.並び順List = 並び順List;
@@ -82,40 +71,18 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         source.hokenshaName = association.get市町村名();
         出力帳票entities(source);
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
-        List<PersonalData> taishoshaPersonalDataList = new ArrayList<>();
-        List<PersonalData> taishogaiPersonalDataList = new ArrayList<>();
         for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者 : 特徴平準化結果対象者一覧表リスト) {
-            対象者項目編集(特徴平準化結果対象者, source, 帳票制御共通, taishoshaPersonalDataList);
-        }
-        if (!taishoshaPersonalDataList.isEmpty()) {
-            taishoshaAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishoshaPersonalDataList);
+            対象者項目編集(特徴平準化結果対象者, source, 帳票制御共通);
         }
         for (TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外 : 特徴平準化結果対象外一覧表リスト) {
-            対象外項目編集(特徴平準化結果対象外, source, 帳票制御共通, taishogaiPersonalDataList);
-        }
-        if (!taishogaiPersonalDataList.isEmpty()) {
-            taishogaiAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishogaiPersonalDataList);
+            対象外項目編集(特徴平準化結果対象外, source, 帳票制御共通);
         }
         return source;
     }
 
-    private PersonalData toPersonalDataTaishosha(TokuchoHeijyunkaTaishoshaEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
-                entity.get被保険者番号().value());
-        return PersonalData.of(entity.get識別コード(), expandedInfo);
-    }
-
-    private PersonalData toPersonalDataTaishogai(TokuchoHeijyunkaTaishogaiEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
-                entity.get被保険者番号().value());
-        return PersonalData.of(entity.get識別コード(), expandedInfo);
-    }
-
     private void 対象者項目編集(TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者,
-            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通,
-            List<PersonalData> taishoshaPersonalDataList) {
+            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通) {
         TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
-        taishoshaPersonalDataList.add(toPersonalDataTaishosha(item));
         RString 編集備考 = 備考名を転換(item.get備考コード());
         TsuchishoNo 通知書番号 = item.get通知書番号();
         if (通知書番号 != null) {
@@ -148,15 +115,14 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(特別徴収業務者コード), FlexibleDate.getNowDate());
         }
-        source.listUpper_6 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_１期(), 0);
-        source.listUpper_7 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_２期(), 0);
-        source.listUpper_8 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_３期(), 0);
-        source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_４期(), 0);
-        source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_５期(), 0);
-        source.listUpper_11 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_６期(), 0);
+        変更前特徴額設定(item, source);
         source.listCenter_1 = item.get保険料段階仮算定時();
-        source.listCenter_2 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get今年度保険料率(), 0);
-        source.listCenter_3 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get調整金額(), 0);
+        if (特徴平準化結果対象者.get今年度保険料率() != null) {
+            source.listCenter_2 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get今年度保険料率(), 0);
+        }
+        if (特徴平準化結果対象者.get調整金額() != null) {
+            source.listCenter_3 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象者.get調整金額(), 0);
+        }
         source.listCenter_4 = 編集備考;
         HihokenshaNo 被保険者番号 = item.get被保険者番号();
         if (被保険者番号 != null) {
@@ -172,19 +138,54 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate());
         }
-        source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
-        source.listLower_7 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額02(), 0);
-        source.listLower_8 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額03(), 0);
-        source.listLower_9 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額04(), 0);
-        source.listLower_10 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額05(), 0);
-        source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
+        特徴期期別金額設定(item, source);
+    }
+
+    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishoshaEntity item, TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+        if (item.get特徴期期別金額01() != null) {
+            source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
+        }
+        if (item.get特徴期期別金額02() != null) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額02(), 0);
+        }
+        if (item.get特徴期期別金額03() != null) {
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額03(), 0);
+        }
+        if (item.get特徴期期別金額04() != null) {
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額04(), 0);
+        }
+        if (item.get特徴期期別金額05() != null) {
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額05(), 0);
+        }
+        if (item.get特徴期期別金額06() != null) {
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
+        }
+    }
+
+    private void 変更前特徴額設定(TokuchoHeijyunkaTaishoshaEntity item, TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+        if (item.get変更前特徴額_１期() != null) {
+            source.listUpper_6 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_１期(), 0);
+        }
+        if (item.get変更前特徴額_２期() != null) {
+            source.listUpper_7 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_２期(), 0);
+        }
+        if (item.get変更前特徴額_３期() != null) {
+            source.listUpper_8 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_３期(), 0);
+        }
+        if (item.get変更前特徴額_４期() != null) {
+            source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_４期(), 0);
+        }
+        if (item.get変更前特徴額_５期() != null) {
+            source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_５期(), 0);
+        }
+        if (item.get変更前特徴額_６期() != null) {
+            source.listUpper_11 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_６期(), 0);
+        }
     }
 
     private void 対象外項目編集(TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外,
-            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通,
-            List<PersonalData> taishogaiPersonalDataList) {
+            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通) {
         TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象外.get特徴平準化結果対象外();
-        taishogaiPersonalDataList.add(toPersonalDataTaishogai(item));
         RString 編集備考 = 備考名を転換(item.get備考コード());
         TsuchishoNo 通知書番号 = item.get通知書番号();
         if (通知書番号 != null) {
@@ -218,8 +219,12 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
                     new Code(特別徴収業務者コード), FlexibleDate.getNowDate());
         }
         source.listCenter_1 = item.get保険料段階仮算定時();
-        source.listCenter_2 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get今年度保険料率(), 0);
-        source.listCenter_3 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get調整金額(), 0);
+        if (特徴平準化結果対象外.get今年度保険料率() != null) {
+            source.listCenter_2 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get今年度保険料率(), 0);
+        }
+        if (特徴平準化結果対象外.get調整金額() != null) {
+            source.listCenter_3 = DecimalFormatter.toコンマ区切りRString(特徴平準化結果対象外.get調整金額(), 0);
+        }
         source.listCenter_4 = 編集備考;
         HihokenshaNo 被保険者番号 = item.get被保険者番号();
         if (被保険者番号 != null) {
@@ -235,12 +240,28 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate());
         }
-        source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
-        source.listLower_7 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額02(), 0);
-        source.listLower_8 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額03(), 0);
-        source.listLower_9 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額04(), 0);
-        source.listLower_10 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額05(), 0);
-        source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
+        特徴期期別金額設定(item, source);
+    }
+
+    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishogaiEntity item, TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+        if (item.get特徴期期別金額01() != null) {
+            source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
+        }
+        if (item.get特徴期期別金額02() != null) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額02(), 0);
+        }
+        if (item.get特徴期期別金額03() != null) {
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額03(), 0);
+        }
+        if (item.get特徴期期別金額04() != null) {
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額04(), 0);
+        }
+        if (item.get特徴期期別金額05() != null) {
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額05(), 0);
+        }
+        if (item.get特徴期期別金額06() != null) {
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
+        }
     }
 
     private RString 備考名を転換(RString 編集コード) {

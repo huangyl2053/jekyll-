@@ -53,7 +53,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
      "toLayoutTitle": "要介護認定申請検索",
-     "toState": "検索結果一覧"
+     "toState": "審査依頼受付"
     },
     {
      "id": "2",

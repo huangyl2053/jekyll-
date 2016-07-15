@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -32,8 +31,6 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
     private final YMDHMS 調定日時;
     private final FlexibleYear 賦課年度;
     private final Association association;
-    private final AccessLogUUID taishoshaAccessLog;
-    private final AccessLogUUID taishogaiAccessLog;
     private static final RString タイトル_特徴平準化対象者一覧表 = new RString("特徴平準化対象者一覧表");
     private static final RString タイトル_特徴平準化対象外一覧表 = new RString("特徴平準化対象外一覧表");
 
@@ -46,22 +43,18 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param association Association
-     * @param taishoshaAccessLog AccessLogUUID
-     * @param taishogaiAccessLog AccessLogUUID
      */
     public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(
             List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
             List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
             List<RString> 並び順List, YMDHMS 調定日時, FlexibleYear 賦課年度,
-            Association association, AccessLogUUID taishoshaAccessLog, AccessLogUUID taishogaiAccessLog) {
+            Association association) {
         this.特徴平準化結果対象者一覧表リスト = 特徴平準化結果対象者一覧表リスト;
         this.特徴平準化結果対象外一覧表リスト = 特徴平準化結果対象外一覧表リスト;
         this.並び順List = 並び順List;
         this.調定日時 = 調定日時;
         this.賦課年度 = 賦課年度;
         this.association = association;
-        this.taishoshaAccessLog = taishoshaAccessLog;
-        this.taishogaiAccessLog = taishogaiAccessLog;
     }
 
     /**
@@ -73,17 +66,14 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param association Association
-     * @param taishoshaAccessLog AccessLogUUID
-     * @param taishogaiAccessLog AccessLogUUID
      * @return TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport
      */
     public static TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport createForm(
             @NonNull List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
             @NonNull List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, List<RString> 並び順List,
-            YMDHMS 調定日時, FlexibleYear 賦課年度, Association association,
-            AccessLogUUID taishoshaAccessLog, AccessLogUUID taishogaiAccessLog) {
+            YMDHMS 調定日時, FlexibleYear 賦課年度, Association association) {
         return new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(特徴平準化結果対象者一覧表リスト,
-                特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度, association, taishoshaAccessLog, taishogaiAccessLog);
+                特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度, association);
     }
 
     @Override
@@ -96,7 +86,7 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
                 = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時, 賦課年度, title);
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
                 = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(特徴平準化結果対象者一覧表リスト,
-                        並び順List, 特徴平準化結果対象外一覧表リスト, association, taishoshaAccessLog, taishogaiAccessLog);
+                        並び順List, 特徴平準化結果対象外一覧表リスト, association);
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
                 headerEditor, bodyEditor);
         writer.writeLine(builder);

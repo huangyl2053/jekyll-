@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoE
 /**
  * 特徴仮算定一時テーブルから情報を取得するEntityクラスです。
  *
- * @reamsid_DBB-0880-040 xicongwang
+ * @reamsid_L DBB-0880-040 xicongwang
  */
 @lombok.Getter
 @lombok.Setter
