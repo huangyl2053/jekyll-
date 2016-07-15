@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 要介護認定イメージ情報出力のFinderクラスです。
  *
- * @author soft863
+ * @reamsid_L DBE-1670-011 wangxiaodong
  */
 public class YokaigoninteiimageShutsuryokuFinder {
 
