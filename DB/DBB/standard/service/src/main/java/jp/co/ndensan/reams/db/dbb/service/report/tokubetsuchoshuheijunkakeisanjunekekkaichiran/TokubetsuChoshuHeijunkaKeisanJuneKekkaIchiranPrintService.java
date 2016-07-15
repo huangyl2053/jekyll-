@@ -120,14 +120,15 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
             List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Long 出力順ID, YMDHMS 調定日時,
             FlexibleYear 賦課年度, ReportManager reportManager) {
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty();
-        List<RString> 並び順List = get出力順(出力順ID);
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
         try (ReportAssembler<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport report = TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport.createForm(
-                    特徴平準化結果対象者一覧表リスト, 特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度,
-                    association);
+                    特徴平準化結果対象者一覧表リスト, 特徴平準化結果対象外一覧表リスト, 調定日時, 賦課年度,
+                    association, 並び順);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -146,11 +147,12 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
             List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Long 出力順ID, YMDHMS 調定日時,
             FlexibleYear 賦課年度) {
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty();
-        List<RString> 並び順List = get出力順(出力順ID);
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         return new Printer<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource>().spool(property,
                 new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(特徴平準化結果対象者一覧表リスト,
-                        特徴平準化結果対象外一覧表リスト, 並び順List, 調定日時, 賦課年度, association));
+                        特徴平準化結果対象外一覧表リスト, 調定日時, 賦課年度, association, 並び順));
     }
 
     private PersonalData toPersonalDataTaishosha(TokuchoHeijyunkaTaishoshaEntity entity) {
