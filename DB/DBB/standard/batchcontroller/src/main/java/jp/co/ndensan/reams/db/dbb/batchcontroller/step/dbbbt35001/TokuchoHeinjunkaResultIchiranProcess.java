@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt35001;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6batch.KaigoFukaTokuchoHeijunka6Batch;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 「特徴平準化結果一覧表出力」処理クラスです。
@@ -28,6 +27,6 @@ public class TokuchoHeinjunkaResultIchiranProcess extends SimpleBatchProcessBase
     @Override
     protected void process() {
         business.insertKaigoKibetsuTbl(processParameter.get調定年度(), processParameter.get賦課年度(),
-                new YMDHMS(processParameter.get調定日時()), Long.parseLong(processParameter.get出力帳票一覧().get出力順ID().toString()));
+                processParameter.get調定日時(), Long.parseLong(processParameter.get出力帳票一覧().get出力順ID().toString()));
     }
 }

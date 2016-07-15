@@ -50,7 +50,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
         processParameter.set賦課年度(new FlexibleYear(parameter.get賦課年度()));
         processParameter.set増額平準化方法(parameter.get増額平準化方法());
         processParameter.set減額平準化方法(parameter.get減額平準化方法());
-        processParameter.set調定日時(システム日時.getRDateTime());
+        processParameter.set調定日時(システム日時);
         executeStep(平準化前賦課TEMP作成);
         executeStep(平準化対象者と対象外データTEMP作成);
         executeStep(介護情報の登録);
