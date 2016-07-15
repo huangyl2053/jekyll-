@@ -95,9 +95,11 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = item.get編集後本算定通知書共通情報();
 
         if (編集後本算定通知書共通情報 != null) {
-            source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
-            source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
-            source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+            if (編集後本算定通知書共通情報.get表示コード() != null) {
+                source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
+                source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
+                source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+            }
             if (編集後本算定通知書共通情報.get調定年度_年度なし() != null) {
                 source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
             }
@@ -154,6 +156,7 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
                 source.keisanMeisaishoGenmenGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免額().toString());
             }
             source.keisanMeisaishoNendo = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
+            source.keisanMeisaishoNendoBun = item.get編集後本算定通知書共通情報().get調定年度_年度あり();
             source.keisanMeisaishoNendo3 = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
 
             this.更正後情報相関設定(source);
