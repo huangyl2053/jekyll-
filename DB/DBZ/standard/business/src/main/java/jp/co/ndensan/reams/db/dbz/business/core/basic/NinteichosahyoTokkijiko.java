@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class NinteichosahyoTokkijiko extends
         ParentModelBase<NinteichosahyoTokkijikoIdentifier, DbT5205NinteichosahyoTokkijikoEntity, NinteichosahyoTokkijiko> implements Serializable {
 
+    private static final long serialVersionUID = -4038342742033810215L;
     private final DbT5205NinteichosahyoTokkijikoEntity entity;
     private final NinteichosahyoTokkijikoIdentifier id;
 
@@ -183,7 +184,8 @@ public class NinteichosahyoTokkijiko extends
     }
 
     /**
-     * 認定調査票（特記情報）のみを変更対象とします。<br/> {@link DbT5205NinteichosahyoTokkijikoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票（特記情報）のみを変更対象とします。<br/>
+     * {@link DbT5205NinteichosahyoTokkijikoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoTokkijiko}
      */
@@ -198,7 +200,8 @@ public class NinteichosahyoTokkijiko extends
     }
 
     /**
-     * 保持する認定調査票（特記情報）を削除対象とします。<br/> {@link DbT5205NinteichosahyoTokkijikoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票（特記情報）を削除対象とします。<br/>
+     * {@link DbT5205NinteichosahyoTokkijikoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoTokkijiko}
      */
@@ -226,7 +229,7 @@ public class NinteichosahyoTokkijiko extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
