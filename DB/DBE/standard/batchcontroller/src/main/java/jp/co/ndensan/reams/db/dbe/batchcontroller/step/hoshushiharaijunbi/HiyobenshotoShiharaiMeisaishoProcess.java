@@ -99,7 +99,6 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
 
     @Override
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
-
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         HiyobenshotoShiharaiMeisaishoEdit edit = new HiyobenshotoShiharaiMeisaishoEdit();
         HiyobenshotoShiharaimeisaisho meisaisho = edit.getHiyobenshotoShiharaiMeisai(entity);

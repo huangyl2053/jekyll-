@@ -21,7 +21,7 @@ import lombok.Setter;
 public class HiyobenshotoShiharaiMeisaishoEdit {
 
     /**
-     * 介護認定審査会委員報酬支払明細書の編集処理です。
+     * 介護認定審査委員報酬・費用弁償等支払明細書の編集処理です。
      *
      * @param entity HoshuShiharaiJunbiRelateEntity
      * @return HiyobenshotoShiharaimeisaisho
