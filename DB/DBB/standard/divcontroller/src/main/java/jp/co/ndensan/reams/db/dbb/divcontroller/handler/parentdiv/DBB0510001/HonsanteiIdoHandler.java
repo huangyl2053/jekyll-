@@ -171,12 +171,13 @@ public class HonsanteiIdoHandler {
         if (計算未完了.equals(処理区分.get計算処理区分())) {
             set対象特徴開始月テキストボックス(date);
         } else if (計算完了.equals(処理区分.get計算処理区分())) {
-            div.getXtTaishoTokuchoKaishiTsuki().setDisplayNone(true);
+            div.getXtTaishoTokuchoKaishiTsuki().setVisible(false);
+            div.getRadTokuchoHosokuIraiKingakuKeisan().setDisabled(false);
         }
     }
 
     private void set対象特徴開始月テキストボックス(RDate date) {
-        div.getXtTaishoTokuchoKaishiTsuki().setDisplayNone(false);
+        div.getXtTaishoTokuchoKaishiTsuki().setVisible(true);
         RString 処理月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
         RString 捕捉月;
         if (処理月10月.equals(処理月)) {
