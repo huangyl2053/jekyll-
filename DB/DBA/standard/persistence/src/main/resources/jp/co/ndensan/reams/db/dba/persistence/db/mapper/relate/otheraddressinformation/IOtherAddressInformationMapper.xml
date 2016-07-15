@@ -76,7 +76,6 @@
         INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" B
         ON B."shikibetsuCode"=A."識別コード"
         AND B."daichoShubetsu"='2'
-        AND B."nyushoShisetsuShurui"='12'
         LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
         ON B."nyushoShisetsuCode"=C."jigyoshaNo"
         AND B."nyushoShisetsuShurui"=C."jigyoshaShubetsu"
