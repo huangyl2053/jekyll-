@@ -43,7 +43,9 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -115,6 +117,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final RString タイトル_対象外一覧表 = new RString("介護保険　特徴仮算定平準化対象外一覧表");
     private static final RString 英数字ファイル名 = new RString("TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranData.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200003"));
+    private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final int 仮算定期間_期1 = 1;
     private static final int 仮算定期間_期2 = 2;
     private static final int 仮算定期間_期3 = 3;
@@ -1149,5 +1152,30 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             普徴期別金額合計 = 普徴期別金額合計.add(普徴期別金額);
         }
         return 普徴期別金額合計;
+    }
+
+    /**
+     * 処理日付管理テーブル更新
+     *
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 年度 FlexibleYear
+     * @param 年度内連番 RString
+     * @param システム日時 YMDHMS
+     */
+    public void update処理日付管理(RString 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番, YMDHMS システム日時) {
+        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課,
+                処理名, 処理枝番, 年度, 年度内連番);
+        if (entityList != null) {
+            update処理日付管理(entityList, システム日時);
+        }
+    }
+
+    private void update処理日付管理(List<DbT7022ShoriDateKanriEntity> entityList, YMDHMS システム日時) {
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.setKijunTimestamp(システム日時);
+            entity.setState(EntityDataState.Modified);
+            処理日付管理Dac.save(entity);
+        }
     }
 }
