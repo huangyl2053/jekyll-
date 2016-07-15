@@ -15,6 +15,8 @@ import lombok.Setter;
 
 /**
  * 支払方法変更滞納者把握リスト（画面）バッチパラメタークラスです．
+ *
+ * @reamsid_L DBD-3650-030 x_lilh
  */
 @Getter
 @Setter

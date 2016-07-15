@@ -13,6 +13,8 @@ import lombok.Setter;
 
 /**
  * 支払方法変更滞納者把握リスト（画面）バッチProcess用パラメータクラスです。
+ *
+ * @reamsid_L DBD-3650-030 x_lilh
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

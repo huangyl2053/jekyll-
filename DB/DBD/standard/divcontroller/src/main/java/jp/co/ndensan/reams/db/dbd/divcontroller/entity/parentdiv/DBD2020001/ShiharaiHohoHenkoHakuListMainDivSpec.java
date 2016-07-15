@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 支払方法変更滞納者把握リストバリデーションクラスです。
+ *
+ * @reamsid_L DBD-3650-010 x_lilh
  */
 public enum ShiharaiHohoHenkoHakuListMainDivSpec implements IPredicate<ShiharaiHohoHenkoHakuListMainDiv> {
 

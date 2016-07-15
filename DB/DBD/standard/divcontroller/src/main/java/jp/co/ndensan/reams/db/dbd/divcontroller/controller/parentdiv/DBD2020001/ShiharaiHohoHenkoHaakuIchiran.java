@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * ビジネス設計_DBDBZ32001_1_支払方法変更滞納者把握リスト（画面）クラスです．
+ *
+ * @reamsid_L DBD-3650-030 x_lilh
  */
 public class ShiharaiHohoHenkoHaakuIchiran {
 
