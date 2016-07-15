@@ -53,6 +53,42 @@ public class FukaJohoBuilder {
     }
 
     /**
+     * 調定年度を設定します。
+     *
+     * @param 調定年度 調定年度
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set調定年度(FlexibleYear 調定年度) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        entity.setChoteiNendo(調定年度);
+        return this;
+    }
+
+    /**
+     * 賦課年度を設定します。
+     *
+     * @param 賦課年度 賦課年度
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set賦課年度(FlexibleYear 賦課年度) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        entity.setFukaNendo(賦課年度);
+        return this;
+    }
+
+    /**
+     * 通知書番号を設定します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return {@link FukaJohoBuilder}
+     */
+    public FukaJohoBuilder set通知書番号(TsuchishoNo 通知書番号) {
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        entity.setTsuchishoNo(通知書番号);
+        return this;
+    }
+
+    /**
      * 被保険者番号を設定します。
      *
      * @param 被保険者番号 被保険者番号
