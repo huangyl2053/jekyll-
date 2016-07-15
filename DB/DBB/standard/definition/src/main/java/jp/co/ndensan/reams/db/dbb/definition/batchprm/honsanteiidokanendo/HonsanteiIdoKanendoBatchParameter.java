@@ -81,7 +81,7 @@ public class HonsanteiIdoKanendoBatchParameter {
     @BatchParameter(key = KEY_納入_発行日, name = "納入_発行日")
     private FlexibleDate 納入_発行日;
     @BatchParameter(key = KEY_納入_出力期, name = "納入_出力期")
-    private FlexibleDate 納入_出力期;
+    private RString 納入_出力期;
     @BatchParameter(key = KEY_納入_対象者, name = "納入_対象者")
     private RString 納入_対象者;
     @BatchParameter(key = KEY_納入_口座振替様式, name = "納入_口座振替様式")
