@@ -876,7 +876,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editYen2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.yen1 = 仮算定納入通知書情報.get算定の基礎().get基礎2().get単位();
+        source.yen2 = 仮算定納入通知書情報.get算定の基礎().get基礎2().get単位();
     }
 
     private void editNendo5(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
