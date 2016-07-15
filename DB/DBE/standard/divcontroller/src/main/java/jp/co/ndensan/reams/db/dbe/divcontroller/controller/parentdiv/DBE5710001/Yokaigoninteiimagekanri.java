@@ -87,7 +87,7 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnImageOutput(YokaigoninteiimagekanriDiv div) {
 
-        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.イメージ出力へ).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.要介護認定イメージ情報出力へ).respond();
     }
 
     /**
@@ -98,7 +98,7 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnImageDelete(YokaigoninteiimagekanriDiv div) {
 
-        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.イメージ削除へ).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.要介護認定イメージ情報削除へ).respond();
     }
 
     /**
