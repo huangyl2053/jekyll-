@@ -22,8 +22,8 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoReport extends Report<Tokub
     /**
      * インスタンスを生成します。
      *
-     * @param bodyItem 社会福祉法人等利用者負担軽減対象決定通知書
-     * @return 社会福祉法人等利用者負担軽減対象決定通知書
+     * @param bodyItem 特別地域加算に係る訪問介護利用者負担減額確認証
+     * @return 特別地域加算に係る訪問介護利用者負担減額確認証
      */
     public static TokubchiiKasHomKaigRiysFutGengKakuninshoReport createReport(@NonNull TokubchiiKasHomKaigRiysFutGengKakuninshoItem bodyItem) {
         return new TokubchiiKasHomKaigRiysFutGengKakuninshoReport(bodyItem);

@@ -22,29 +22,13 @@ import lombok.Setter;
 public class TokushoTaishioIchiranMidoteiEntity {
 
     /**
-     * 仮徴収・基礎年金番号
+     * 基礎年金番号
      */
-    private RString karichoshuKisoNenkinNo;
+    private RString kisoNenkinNo;
     /**
-     * 本徴収・基礎年金番号
+     * 年金コード
      */
-    private RString honchoshuKisoNenkinNo;
-    /**
-     * 翌年度仮徴収・基礎年金番号
-     */
-    private RString yokunendoKarichoshuKisoNenkinNo;
-    /**
-     * 仮徴収・年金コード
-     */
-    private RString karichoshuNenkinCode;
-    /**
-     * 本徴収・基礎年金コード
-     */
-    private RString honchoshuKisonenkinCode;
-    /**
-     * 翌年度仮徴収・基礎年金コード
-     */
-    private RString yokunendoKariChoshuKisonenkinCode;
+    private RString nenkinCode;
     /**
      * 識別コード
      */
@@ -95,12 +79,8 @@ public class TokushoTaishioIchiranMidoteiEntity {
     /**
      * 特徴対象一覧未同定エンティティクラスのコンストラクタです。
      *
-     * @param karichoshuKisoNenkinNo 仮徴収・基礎年金番号
-     * @param honchoshuKisoNenkinNo 本徴収・基礎年金番号
-     * @param yokunendoKarichoshuKisoNenkinNo 翌年度仮徴収・基礎年金番号
-     * @param karichoshuNenkinCode 仮徴収・年金コード
-     * @param honchoshuKisonenkinCode 本徴収・基礎年金コード
-     * @param yokunendoKariChoshuKisonenkinCode 翌年度仮徴収・基礎年金コード
+     * @param kisoNenkinNo 基礎年金番号
+     * @param nenkinCode 年金コード
      * @param shikibetuCode 識別コード
      * @param umareYMD 生年月日
      * @param juminShubetsuCode 住民種別コード
@@ -109,15 +89,11 @@ public class TokushoTaishioIchiranMidoteiEntity {
      * @param kanjiShimei 漢字氏名
      * @param yubinNo 郵便番号
      * @param jusho 住所
-     * @param koroshoHantei koroshoHantei
+     * @param koroshoHantei 厚労省判定
      * @param fuichiRiyuCode 不一致理由コード
      */
-    public TokushoTaishioIchiranMidoteiEntity(RString karichoshuKisoNenkinNo,
-            RString honchoshuKisoNenkinNo,
-            RString yokunendoKarichoshuKisoNenkinNo,
-            RString karichoshuNenkinCode,
-            RString honchoshuKisonenkinCode,
-            RString yokunendoKariChoshuKisonenkinCode,
+    public TokushoTaishioIchiranMidoteiEntity(RString kisoNenkinNo,
+            RString nenkinCode,
             ShikibetsuCode shikibetuCode,
             RDate umareYMD,
             RString juminShubetsuCode,
@@ -129,12 +105,8 @@ public class TokushoTaishioIchiranMidoteiEntity {
             Boolean koroshoHantei,
             RString fuichiRiyuCode
     ) {
-        this.karichoshuKisoNenkinNo = karichoshuKisoNenkinNo;
-        this.honchoshuKisoNenkinNo = honchoshuKisoNenkinNo;
-        this.yokunendoKarichoshuKisoNenkinNo = yokunendoKarichoshuKisoNenkinNo;
-        this.karichoshuNenkinCode = karichoshuNenkinCode;
-        this.honchoshuKisonenkinCode = honchoshuKisonenkinCode;
-        this.yokunendoKariChoshuKisonenkinCode = yokunendoKariChoshuKisonenkinCode;
+        this.kisoNenkinNo = kisoNenkinNo;
+        this.nenkinCode = nenkinCode;
         this.shikibetuCode = shikibetuCode;
         this.umareYMD = umareYMD;
         this.juminShubetsuCode = juminShubetsuCode;

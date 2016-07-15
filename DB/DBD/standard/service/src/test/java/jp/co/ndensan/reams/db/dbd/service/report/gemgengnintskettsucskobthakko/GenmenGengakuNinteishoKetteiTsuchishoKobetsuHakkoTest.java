@@ -24,17 +24,23 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakkoTest {
     @Test
     public void testCreateInstance() {
         System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
-        RString AA = new RString("0123456789");
+        RString AA = new RString("平02.01.01");
+        RString BB = new RString("平02年01月01日");
         RString A1 = AA.substring(0, 1);
-        RString A2 = AA.substring(0, 2);
-        RString A3 = AA.substring(8, 9);
-        RString A4 = AA.substring(9, 9);
-        RString A5 = AA.substring(9, 10);
+        RString A2 = AA.substring(1, 3);
+        RString A3 = AA.substring(4, 6);
+        RString A4 = AA.substring(7, 9);
         System.out.println("A1:" + A1);
         System.out.println("A2:" + A2);
         System.out.println("A3:" + A3);
         System.out.println("A4:" + A4);
-        System.out.println("A5:" + A5);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        RString B1 = BB.substring(1, 3);
+        RString B2 = BB.substring(4, 6);
+        RString B3 = BB.substring(7, 9);
+        System.out.println("B1:" + B1);
+        System.out.println("B2:" + B2);
+        System.out.println("B3:" + B3);
         // TODO review the generated test code and remove the default call to fail.
     }
 

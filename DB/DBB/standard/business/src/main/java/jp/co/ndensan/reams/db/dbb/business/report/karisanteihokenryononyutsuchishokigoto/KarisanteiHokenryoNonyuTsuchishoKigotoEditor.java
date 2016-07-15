@@ -140,9 +140,13 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
             }
         }
         editSanteiKisoKi(source);
-        if (編集後仮算定通知書共通情報.get更正後() != null && 編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計() != null) {
-            editSanteiKisoGenmenGaku(source);
-            editSanteiKisoKariGokeiGaku(source);
+        if (編集後仮算定通知書共通情報.get更正後() != null) {
+            if (編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計() != null) {
+                editSanteiKisoKariGokeiGaku(source);
+            }
+            if (編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額() != null) {
+                editSanteiKisoGenmenGaku(source);
+            }
         }
         editSanteiKisoKiTitle1(source);
         editSanteiKisoZanteikiHokenryoGaku1(source);
@@ -481,7 +485,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editYen2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.yen1 = 仮算定納入通知書情報.get算定の基礎().get基礎2().get単位();
+        source.yen2 = 仮算定納入通知書情報.get算定の基礎().get基礎2().get単位();
     }
 
     private void editNendo5(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
@@ -505,7 +509,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoEditor implements IKarisantei
     }
 
     private void editSanteiKisoGenmenGaku(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().toString());
+        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額().toString());
     }
 
     private void editSanteiKisoKariGokeiGaku(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {

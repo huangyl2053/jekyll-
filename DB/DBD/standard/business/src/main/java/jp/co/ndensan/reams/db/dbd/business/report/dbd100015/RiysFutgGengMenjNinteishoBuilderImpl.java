@@ -33,7 +33,6 @@ public class RiysFutgGengMenjNinteishoBuilderImpl implements IRiysFutgGengMenjNi
      */
     @Override
     public RiysFutgGengMenjNinteishoReportSource build() {
-        return ReportEditorJoiner.from(new RiysFutgGengMenjNinteishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new RiysFutgGengMenjNinteishoReportSource()).join(bodyEditor).buildSource();
     }
 }

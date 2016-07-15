@@ -37,8 +37,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigy
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranProperty.DBB200009ShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
@@ -2268,19 +2266,19 @@ public class HonnSanteiFuka {
         RDate nowDate = RDate.getNowDate();
         Decimal 端数単位 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_通常,
                 nowDate, SubGyomuCode.DBB介護賦課).toString());
-        年額制御情報.set端数単位(端数単位);
+//        年額制御情報.set端数単位(端数単位);
         RString 端数調整方法 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常,
                 nowDate, SubGyomuCode.DBB介護賦課);
-        年額制御情報.set端数調整方法(HasuChoseiHoho.toValue(端数調整方法));
+//        年額制御情報.set端数調整方法(HasuChoseiHoho.toValue(端数調整方法));
         Decimal 端数単位_ランク用 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_ランク変更のみ,
                 nowDate, SubGyomuCode.DBB介護賦課).toString());
-        年額制御情報.set端数単位_ランク用(端数単位_ランク用);
+//        年額制御情報.set端数単位_ランク用(端数単位_ランク用);
         RString 端数調整方法_ランク用 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常,
                 nowDate, SubGyomuCode.DBB介護賦課);
-        年額制御情報.set端数調整方法_ランク用(HasuChoseiHoho.toValue(端数調整方法_ランク用));
+//        年額制御情報.set端数調整方法_ランク用(HasuChoseiHoho.toValue(端数調整方法_ランク用));
         RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
                 nowDate, SubGyomuCode.DBB介護賦課);
-        年額制御情報.set端数調整対象(HasuChoseiTaisho.toValue(端数調整対象));
+//        年額制御情報.set端数調整対象(HasuChoseiTaisho.toValue(端数調整対象));
     }
 
 }

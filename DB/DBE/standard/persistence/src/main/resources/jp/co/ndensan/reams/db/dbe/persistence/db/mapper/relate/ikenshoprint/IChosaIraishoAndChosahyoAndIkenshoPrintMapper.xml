@@ -657,7 +657,7 @@
                      ,A."yubinNo"
                      ,A."telNo"
                      ,A."shujiiIryokikanCode"
-                     ,A"shujiiCode"
+                     ,A."shujiiCode"
                      ,B."shichosonCode"
                      ,C."iryoKikanMeisho"
                      ,C."jusho" AS "iryoKikanJusho"
@@ -729,7 +729,7 @@
                    rgdb."DbT5911ShujiiIryoKikanJoho" AS E
                    ON E."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                    AND E."shichosonCode" = C."shichosonCode"
-                   AND E."jokyoFlag" = FALSE
+                   AND E."jokyoFlag" = TRUE
              WHERE
                   A."shinseishoKanriNo" = #{申請書管理番号}
               AND A."logicalDeletedFlag" = FALSE
