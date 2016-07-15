@@ -636,7 +636,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         }
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
-                特別徴収開始通知書仮算定_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, システム日付);
+                決定変更通知書_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, システム日付);
 
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList);
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
