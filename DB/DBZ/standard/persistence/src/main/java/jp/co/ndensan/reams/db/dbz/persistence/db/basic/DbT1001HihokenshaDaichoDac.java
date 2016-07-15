@@ -65,6 +65,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_サービス年月 = new RString("サービス年月");
     private static final RString メッセージ_異動日 = new RString("異動日");
+    private static final RString 数字１ = new RString("1");
     private static final int 開始桁 = 1;
     private static final int 終了桁 = 6;
     @InjectSession
