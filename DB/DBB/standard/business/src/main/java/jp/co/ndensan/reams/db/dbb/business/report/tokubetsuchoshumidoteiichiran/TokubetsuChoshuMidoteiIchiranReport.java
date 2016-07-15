@@ -24,7 +24,6 @@ public class TokubetsuChoshuMidoteiIchiranReport extends
     private final List<RString> 出力順項目リスト;
     private final List<RString> 改頁項目リスト;
     private final Association association;
-    private final RString 特徴開始月;
 
     /**
      * コンストラクタです.
@@ -32,26 +31,23 @@ public class TokubetsuChoshuMidoteiIchiranReport extends
      * @param 出力順項目リスト List<RString>
      * @param 特徴対象一覧未同定リスト 特徴対象一覧未同定リスト
      * @param 改頁項目リスト List<RString>
-     * @param 特徴開始月 特徴開始月
      * @param association Association
      */
     public TokubetsuChoshuMidoteiIchiranReport(Association association,
             List<RString> 出力順項目リスト,
             List<RString> 改頁項目リスト,
-            List<TokushoTaishioIchiranMidoteiEntity> 特徴対象一覧未同定リスト,
-            RString 特徴開始月) {
+            List<TokushoTaishioIchiranMidoteiEntity> 特徴対象一覧未同定リスト) {
         this.特徴対象一覧未同定リスト = 特徴対象一覧未同定リスト;
         this.出力順項目リスト = 出力順項目リスト;
         this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
-        this.特徴開始月 = 特徴開始月;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokubetsuChoshuMidoteiIchiranSource> writer) {
         for (TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定 : 特徴対象一覧未同定リスト) {
             ITokubetsuChoshuMidoteiIchiranEditor editor = new TokubetsuChoshuMidoteiIchiranEditor(
-                    特徴対象一覧未同定, 出力順項目リスト, 改頁項目リスト, 特徴開始月, association);
+                    特徴対象一覧未同定, 出力順項目リスト, 改頁項目リスト, association);
             TokubetsuChoshuMidoteiIchiranBuilder builder = new TokubetsuChoshuMidoteiIchiranBuilder(editor);
             writer.writeLine(builder);
         }

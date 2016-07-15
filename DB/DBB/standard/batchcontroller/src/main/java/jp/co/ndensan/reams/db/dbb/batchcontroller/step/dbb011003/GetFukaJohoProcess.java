@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003;
 
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoDataHenshu;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 public class GetFukaJohoProcess extends SimpleBatchProcessBase {
 
     private TokuchoKaishiTsuchishoDataHenshu manager;
-    private TokuchoKaishiTsuchishoProcessParameter processParameter;
 
     @Override
     protected void beforeExecute() {
