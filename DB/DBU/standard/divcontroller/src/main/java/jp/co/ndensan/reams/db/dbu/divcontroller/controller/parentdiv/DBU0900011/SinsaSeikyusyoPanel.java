@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.db.dbu.service.core.benmeisyo.BenmeisyoFinder;
 import jp.co.ndensan.reams.db.dbu.service.core.sinsasei.SinsaSeikyusyoJohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.FufukuMoshitate;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class SinsaSeikyusyoPanel {
 
     private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_更新 = new RString("更新");
     private static final RString 状態_削除 = new RString("削除");
 
     /**
@@ -38,14 +40,18 @@ public class SinsaSeikyusyoPanel {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onLoad(SinsaSeikyusyoPanelDiv div) {
-//        div.getAtenainfoCommonChildDiv1().onLoad(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-//        // 資格系基本情報を取得。
-//        div.getShikakuKihonCommonChildDiv1().initialize(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
-        // 宛名基本情報を取得する。
+        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        div.getAtenainfoCommonChildDiv1().initialize(shikibetsuCode);
+        div.getShikakuKihonCommonChildDiv1().initialize(hihokenshaNo);
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_更新);
         List<FufukuMoshitate> sinsaSeikyusyoJohoList
-                = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
+                = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(
+                        ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
                         ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).records();
         getHandler(div).onLoad(sinsaSeikyusyoJohoList);
+
         return createResponse(div);
     }
 
@@ -87,11 +93,12 @@ public class SinsaSeikyusyoPanel {
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnShuuSei(SinsaSeikyusyoPanelDiv sindiv) {
         ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
         ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
-        ViewStateHolder.put(ViewStateKeys.状態, 状態_修正);
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_更新);
         ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                 new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
-        // TODO QA72883
-        return ResponseData.of(sindiv).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_修正);
+        ViewStateHolder.put(ViewStateKeys.弁明書作成日,
+                new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtBenmeishoSakuseiYMD().getValue().toDateString()));
+        return ResponseData.of(sindiv).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_更新);
     }
 
     /**
@@ -106,7 +113,8 @@ public class SinsaSeikyusyoPanel {
         ViewStateHolder.put(ViewStateKeys.状態, 状態_削除);
         ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                 new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
-        // TODO QA72883
+        ViewStateHolder.put(ViewStateKeys.弁明書作成日,
+                new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtBenmeishoSakuseiYMD().getValue().toDateString()));
         return ResponseData.of(sindiv).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_削除);
     }
     // TODO 弁明書の発行処理 該当機能実装しない。
