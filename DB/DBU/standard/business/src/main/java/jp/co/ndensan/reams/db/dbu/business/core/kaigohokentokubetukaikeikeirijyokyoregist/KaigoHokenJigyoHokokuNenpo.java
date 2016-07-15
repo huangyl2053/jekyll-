@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist;
 
+import java.util.HashMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpoEntity;
@@ -43,7 +44,8 @@ public class KaigoHokenJigyoHokokuNenpo {
      */
     public KaigoHokenJigyoHokokuNenpo() {
         this.事業報告集計一覧データ = new KaigoHokenJigyoHokokuNenpoEntity(FlexibleYear.EMPTY, RString.EMPTY, FlexibleYear.EMPTY, RString.EMPTY,
-                RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Code.EMPTY, RString.EMPTY, Code.EMPTY, Code.EMPTY, null);
+                RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Code.EMPTY, RString.EMPTY, Code.EMPTY, Code.EMPTY,
+                new HashMap<RString, Decimal>());
     }
 
     /**
