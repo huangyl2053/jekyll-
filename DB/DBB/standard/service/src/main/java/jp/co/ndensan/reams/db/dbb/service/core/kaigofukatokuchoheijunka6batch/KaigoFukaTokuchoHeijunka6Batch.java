@@ -188,7 +188,6 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     public void getMaeFukaJohoList(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         TokuchoHeijunkaRokuBatchFuchJohoParameter parameter = TokuchoHeijunkaRokuBatchFuchJohoParameter.createParam(調定年度, 賦課年度);
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
-        mapper.delete平準化前賦課Temp();
         mapper.insert平準化前賦課Temp(parameter);
     }
 
