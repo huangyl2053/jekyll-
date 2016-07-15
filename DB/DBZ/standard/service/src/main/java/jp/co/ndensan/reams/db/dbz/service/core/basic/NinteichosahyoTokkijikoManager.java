@@ -44,6 +44,16 @@ public class NinteichosahyoTokkijikoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link NinteichosahyoTokkijikoManager}のインスタンスを返します。
+     *
+     *
+     * @return NinteichosahyoTokkijikoManager
+     */
+    public static NinteichosahyoTokkijikoManager createInstance() {
+        return InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+    }
+
+    /**
      * 主キーに合致する認定調査票_特記情報を返します。
      *
      * @param 申請書管理番号 申請書管理番号
