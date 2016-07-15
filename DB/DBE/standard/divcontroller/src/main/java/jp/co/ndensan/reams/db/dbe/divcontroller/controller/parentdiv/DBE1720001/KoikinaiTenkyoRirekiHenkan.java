@@ -113,7 +113,6 @@ public class KoikinaiTenkyoRirekiHenkan {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -122,7 +121,6 @@ public class KoikinaiTenkyoRirekiHenkan {
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).setState(DBE1720001StateName.完了);
         }
-        前排他キーの解除(SHINSEISHOKANRINO);
         return ResponseData.of(div).respond();
     }
 
