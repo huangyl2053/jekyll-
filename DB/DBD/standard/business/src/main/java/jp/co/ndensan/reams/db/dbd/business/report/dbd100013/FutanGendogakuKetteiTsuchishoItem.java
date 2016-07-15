@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100013;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,8 +39,7 @@ public class FutanGendogakuKetteiTsuchishoItem {
     private final List<RString> 通知書定型文List;
     private final ReportId 帳票分類ID;
     private final Ninshosha 認証者;
-    private RString イメージファイルパス;
-    private EditedAtesaki 編集後宛先;
+    private NinshoshaSource ninshoshaSource;
 
     /**
      * インスタンスを生成します。
@@ -74,20 +73,11 @@ public class FutanGendogakuKetteiTsuchishoItem {
     }
 
     /**
-     * 編集後宛先を設定
-     *
-     * @param 編集後宛先 編集後宛先
-     */
-    public void set編集後宛先(EditedAtesaki 編集後宛先) {
-        this.編集後宛先 = 編集後宛先;
-    }
-
-    /**
      * イメージファイルパスを設定
      *
-     * @param イメージファイルパス イメージファイルパス
+     * @param ninshoshaSource NinshoshaSource
      */
-    public void setイメージファイルパス(RString イメージファイルパス) {
-        this.イメージファイルパス = イメージファイルパス;
+    public void setNinshoshaSource(NinshoshaSource ninshoshaSource) {
+        this.ninshoshaSource = ninshoshaSource;
     }
 }
