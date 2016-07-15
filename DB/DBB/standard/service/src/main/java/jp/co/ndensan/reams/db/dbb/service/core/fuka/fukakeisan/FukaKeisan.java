@@ -120,6 +120,7 @@ public class FukaKeisan {
     private static final RString 使用する = new RString("1");
     private static final RString 使用しない = new RString("0");
     private static final RString 汎用キー_通知書番号 = new RString("通知書番号");
+    private static final RString ゼロ_0000 = new RString("0000");
 
     /**
      * にて生成した{@link FukaKeisan}のインスタンスを返します。
@@ -529,7 +530,10 @@ public class FukaKeisan {
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         CountedItem saiban = Saiban.get(SubGyomuCode.DBB介護賦課, 汎用キー_通知書番号, FlexibleDate.getNowDate().getNendo());
-        FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, param.get賦課年度(), new TsuchishoNo(saiban.nextString().trim()), 0);
+        TsuchishoNo 通知書番号 = create通知書番号(param.get資格の情報().get被保険者番号().getColumnValue(),
+                saiban.nextString().trim());
+        FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, param.get賦課年度(), 通知書番号, 0);
+
         賦課根拠パラメータ.set賦課の情報_設定前(新しい賦課の情報);
         FukaJoho 賦課の情報 = reflect賦課根拠(賦課根拠パラメータ);
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
@@ -576,6 +580,14 @@ public class FukaKeisan {
         result.get年度分賦課リスト_更正後().set最新賦課の情報(賦課の情報);
         result.set資格の情報(調定計算.get資格の情報());
         return result;
+    }
+
+    private TsuchishoNo create通知書番号(RString 被保険者番号, RString 枝番号) {
+        RStringBuilder rst = new RStringBuilder();
+        rst.append(ゼロ_0000);
+        rst.append(被保険者番号);
+        rst.append(枝番号.padZeroToLeft(INT_2));
+        return new TsuchishoNo(rst.toRString());
     }
 
     private KoseiShorikoaResult create既存の賦課処理コア(KoseiShorikoaParameter param, FukaKokyoParameter 賦課根拠パラメータ,
@@ -1355,7 +1367,6 @@ public class FukaKeisan {
 
         FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         ChoshuHoho 出力用徴収方法の情報 = param.get徴収方法の情報_更正前();
-        ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
         if (!Tsuki._3月.getコード().equals(param.get調定日時().getMonthValue())) {
             Decimal 更正前の特別徴収額 = Decimal.ZERO;
             if (更正前.get特徴期別金額01() != null) {
@@ -1382,6 +1393,7 @@ public class FukaKeisan {
             }
             if (更正前の特別徴収額.compareTo(更正後の特別徴収額) < 0
                     || (特徴停止事由コード != null && !特徴停止事由コード.isEmpty())) {
+                ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
                 builder.set特別徴収停止事由コード(特徴停止事由コード)
                         .set特別徴収停止日時(param.get調定日時());
                 出力用徴収方法の情報 = builder.build();
