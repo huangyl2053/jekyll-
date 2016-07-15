@@ -574,12 +574,12 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnIchigoHantei() {
+    public ButtonDialog getBtnIchigoHantei() {
         return this.getKobetsuHyojiArea().getBtnIchigoHantei();
     }
 
     @JsonIgnore
-    public void  setBtnIchigoHantei(Button btnIchigoHantei) {
+    public void  setBtnIchigoHantei(ButtonDialog btnIchigoHantei) {
         this.getKobetsuHyojiArea().setBtnIchigoHantei(btnIchigoHantei);
     }
 
