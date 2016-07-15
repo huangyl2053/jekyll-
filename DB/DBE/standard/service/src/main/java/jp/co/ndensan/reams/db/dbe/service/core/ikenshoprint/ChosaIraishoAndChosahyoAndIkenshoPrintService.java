@@ -309,7 +309,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     public void print要介護認定調査票差異チェック票_両面(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
-        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty();
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003_SaiChekkuhyoHidari.getReportId());
         try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
             for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
                 ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
