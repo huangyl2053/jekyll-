@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護予防・日常生活支援総合事業区分支給限度額を管理するクラスです。
+ *
+ * @reamsid_L DBC-3363-010 xuxin
  */
 public class SogoJigyoKubunShikyuGendoGakuManager {
 
@@ -82,6 +84,22 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
             businessList.add(new SogoJigyoKubunShikyuGendoGaku(entity));
         }
 
+        return businessList;
+    }
+
+    /**
+     * 介護予防・日常生活支援総合事業区分支給限度額適用開始日の降順を全件返します。
+     *
+     * @return List<SogoJigyoKubunShikyuGendoGaku>
+     */
+    @Transaction
+    public List<SogoJigyoKubunShikyuGendoGaku> get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧() {
+
+        List<SogoJigyoKubunShikyuGendoGaku> businessList = new ArrayList<>();
+        for (DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity : dac.selectAllDesc()) {
+            entity.initializeMd5();
+            businessList.add(new SogoJigyoKubunShikyuGendoGaku(entity));
+        }
         return businessList;
     }
 

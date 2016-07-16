@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護予防・日常生活支援総合事業区分支給限度額を管理するクラスです。
+ *
+ * @reamsid_L DBC-3363-010 xuxin
  */
 public class SogoJigyoKubunShikyuGendoGaku
         extends ModelBase<SogoJigyoKubunShikyuGendoGakuIdentifier, DbT7117SogoJigyoKubunShikyuGendoGakuEntity, SogoJigyoKubunShikyuGendoGaku>
@@ -146,7 +148,7 @@ public class SogoJigyoKubunShikyuGendoGaku
     }
 
     /**
-     * 保持する介護予防・日常生活支援総合事業区分支給限度額を削除対象とします。<br/> null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link 
+     * 保持する介護予防・日常生活支援総合事業区分支給限度額を削除対象とします。<br/> null null null null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link
      * EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link SogoJigyoKubunShikyuGendoGaku}
@@ -175,7 +177,7 @@ public class SogoJigyoKubunShikyuGendoGaku
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
