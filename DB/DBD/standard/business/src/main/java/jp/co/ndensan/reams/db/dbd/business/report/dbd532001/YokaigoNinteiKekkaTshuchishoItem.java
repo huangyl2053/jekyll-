@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.yokaigoninteikekkatshuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd532001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -295,6 +295,5 @@ public class YokaigoNinteiKekkaTshuchishoItem {
         this.kakkoRight1 = kakkoRight1;
         this.kakkoRight2 = kakkoRight2;
         this.customerBarCode = customerBarCode;
-
     }
 }

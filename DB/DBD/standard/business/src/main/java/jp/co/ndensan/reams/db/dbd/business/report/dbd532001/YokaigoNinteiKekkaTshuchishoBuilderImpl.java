@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.yokaigoninteikekkatshuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd532001;
 
 import jp.co.ndensan.reams.db.dbd.entity.report.yokaigoninteikekkatshuchisho.YokaigoNinteiKekkaTshuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
@@ -29,12 +29,11 @@ public class YokaigoNinteiKekkaTshuchishoBuilderImpl implements IYokaigoNinteiKe
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link ShakaiFukushiHojinRiyoshaFutanKeigenKetteiTsuchishoReportSource}
+     * @return {@link YokaigoNinteiKekkaTshuchishoReportSource}
      */
     @Override
     public YokaigoNinteiKekkaTshuchishoReportSource build() {
-        return ReportEditorJoiner.from(new YokaigoNinteiKekkaTshuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new YokaigoNinteiKekkaTshuchishoReportSource()).join(bodyEditor).buildSource();
     }
 
 }
