@@ -74,7 +74,7 @@ public enum ReportIdDBD {
     /**
      * 利用者負担額減額_免除決定通知書の帳票ＩＤです。
      */
-    DBD100009(new ReportId("DBD100009_RiyoshaFatangakuGengakuMenjoKetteiTsuchisho"), new RString("利用者負担額減額_免除決定通知書")),
+    DBD100009(new ReportId("DBD100009_RiyoshaFutangakuGengakuMenjoKetteiTsuchisho"), new RString("利用者負担額減額_免除決定通知書")),
     /**
      * 負担限度額決定通知書の帳票ＩＤです。
      */
