@@ -255,12 +255,12 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
-        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? 記号_星 : RString.EMPTY);
-        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? 記号_星 : RString.EMPTY);
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
         RString 年号 = new FlexibleDate(entity.get生年月日()).wareki().eraType(EraType.KANJI).toDateString();
-        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号_星 : RString.EMPTY);
-        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号_星 : RString.EMPTY);
-        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号_星 : RString.EMPTY);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         item.setBirthYMD(get和暦(entity.get生年月日(), false));
         item.setJusho(entity.get住所());
         RString 郵便番号 = entity.get郵便番号();
@@ -707,8 +707,7 @@ public class IraishoIkkatsuHakkoBusiness {
         RString 和暦 = RString.EMPTY;
         if (!RString.isNullOrEmpty(日付)) {
             FlexibleDate flexibleDate = new FlexibleDate(日付);
-            和暦 = flexibleDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            和暦 = flexibleDate.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
         }
         return 和暦;
     }

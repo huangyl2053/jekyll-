@@ -116,7 +116,6 @@ public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIrais
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        内部QA：614　Redmine：＃75422　排他制限の確認
         getcheckEntityList(entity);
         update認定調査依頼情報(entity);
     }
@@ -136,7 +135,6 @@ public class SaiChekkuhyo_292001Process extends BatchProcessBase<HomonChosaIrais
 
     private void getcheckEntityList(HomonChosaIraishoRelateEntity entity) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
-
         前回連番Map.put(entity.get前回連番(), entity.get前回連番に対する調査項目());
         checkEntity.set被保険者番号(entity.get被保険者番号());
         checkEntity.set被保険者氏名(entity.get被保険者氏名());
