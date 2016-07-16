@@ -23,11 +23,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosahoshuseikyuEdit {
 
-    private static int 新規在宅件数 = 1;
-    private static int 新規施設件数 = 1;
-    private static int 更新在宅件数 = 1;
-    private static int 更新施設件数 = 1;
-    private static RString shinsakaiiincode = RString.EMPTY;
+    private int index;
+    private RString shinsakaiiincode = RString.EMPTY;
 
     /**
      * 要介護認定・要支援認定等申請者の編集処理です。
@@ -43,24 +40,21 @@ public class ChosahoshuseikyuEdit {
         shuseikyu.set調査機関(entity.getJigyoshaMeisho());
         shuseikyu.set代表者名(entity.getDaihyoshaName());
         if (!shinsakaiiincode.equals(entity.getShinsakaiIinCode())) {
+            index = 1;
             if (new Code("0").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
-                新規在宅件数 = 1;
-                shuseikyu.set新規在宅件数(kinngakuFormat(new Decimal(新規在宅件数)));
+                shuseikyu.set新規在宅件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set新規在宅単価(kinngakuFormat(entity.getTanka()));
             }
             if (new Code("0").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
-                新規施設件数 = 1;
-                shuseikyu.set新規施設件数(kinngakuFormat(new Decimal(新規施設件数)));
+                shuseikyu.set新規施設件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set新規施設単価(kinngakuFormat(entity.getTanka()));
             }
             if (new Code("1").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
-                更新在宅件数 = 1;
-                shuseikyu.set更新在宅件数(kinngakuFormat(new Decimal(更新在宅件数)));
+                shuseikyu.set更新在宅件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set更新在宅単価(kinngakuFormat(entity.getTanka()));
             }
             if (new Code("1").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
-                更新施設件数 = 更新施設件数 + 1;
-                shuseikyu.set更新施設件数(kinngakuFormat(new Decimal(更新施設件数)));
+                shuseikyu.set更新施設件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set更新施設単価(kinngakuFormat(entity.getTanka()));
             }
         }
@@ -71,16 +65,17 @@ public class ChosahoshuseikyuEdit {
         int 更新在宅計 = 0;
         int 更新施設計 = 0;
         if (entity.getTanka() != null) {
-            新規在宅計 = 新規在宅件数 * Integer.valueOf(entity.getTanka().toString());
-            新規施設計 = 新規施設件数 * Integer.valueOf(entity.getTanka().toString());
-            更新在宅計 = 更新在宅件数 * Integer.valueOf(entity.getTanka().toString());
-            更新施設計 = 更新施設件数 * Integer.valueOf(entity.getTanka().toString());
+            新規在宅計 = Integer.valueOf(shuseikyu.get新規在宅件数().toString()) * Integer.valueOf(entity.getTanka().toString());
+            新規施設計 = Integer.valueOf(shuseikyu.get新規施設件数().toString()) * Integer.valueOf(entity.getTanka().toString());
+            更新在宅計 = Integer.valueOf(shuseikyu.get更新在宅件数().toString()) * Integer.valueOf(entity.getTanka().toString());
+            更新施設計 = Integer.valueOf(shuseikyu.get更新施設件数().toString()) * Integer.valueOf(entity.getTanka().toString());
         }
         shuseikyu.set新規在宅計(kinngakuFormat(new Decimal(新規在宅計)));
         shuseikyu.set新規施設計(kinngakuFormat(new Decimal(新規施設計)));
         shuseikyu.set更新在宅計(kinngakuFormat(new Decimal(更新在宅計)));
         shuseikyu.set更新施設計(kinngakuFormat(new Decimal(更新施設計)));
-        int 作成件数合計 = 新規在宅件数 + 新規施設件数 + 更新在宅件数 + 更新施設件数;
+        int 作成件数合計 = Integer.valueOf(shuseikyu.get新規在宅件数().toString()) + Integer.valueOf(shuseikyu.get新規施設件数().toString())
+                + Integer.valueOf(shuseikyu.get更新在宅件数().toString()) + Integer.valueOf(shuseikyu.get更新施設件数().toString());
         int 小計 = 新規在宅計 + 新規施設計 + 更新在宅計 + 更新施設計;
         shuseikyu.set更新施設計(kinngakuFormat(new Decimal(作成件数合計)));
         shuseikyu.set小計(kinngakuFormat(new Decimal(小計)));
@@ -93,23 +88,23 @@ public class ChosahoshuseikyuEdit {
     private Chosahoshuseikyu getChosahoshusei(HoshuShiharaiJunbiRelateEntity entity, Chosahoshuseikyu shuseikyu) {
         if (shinsakaiiincode.equals(entity.getShinsakaiIinCode())) {
             if (new Code("0").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
-                新規在宅件数 = 新規在宅件数 + 1;
-                shuseikyu.set新規在宅件数(kinngakuFormat(new Decimal(新規在宅件数)));
+                index++;
+                shuseikyu.set新規在宅件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set新規在宅単価(kinngakuFormat(entity.getTanka()));
             }
             if (new Code("0").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
-                新規施設件数 = 新規施設件数 + 1;
-                shuseikyu.set新規施設件数(kinngakuFormat(new Decimal(新規施設件数)));
+                index++;
+                shuseikyu.set新規施設件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set新規施設単価(kinngakuFormat(entity.getTanka()));
             }
             if (new Code("1").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
-                更新在宅件数 = 更新在宅件数 + 1;
-                shuseikyu.set更新在宅件数(kinngakuFormat(new Decimal(更新在宅件数)));
+                index++;
+                shuseikyu.set更新在宅件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set更新在宅単価(kinngakuFormat(entity.getTanka()));
             }
             if (new Code("1").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
-                更新施設件数 = 更新施設件数 + 1;
-                shuseikyu.set更新施設件数(kinngakuFormat(new Decimal(更新施設件数)));
+                index++;
+                shuseikyu.set更新施設件数(kinngakuFormat(new Decimal(index)));
                 shuseikyu.set更新施設単価(kinngakuFormat(entity.getTanka()));
             }
         }

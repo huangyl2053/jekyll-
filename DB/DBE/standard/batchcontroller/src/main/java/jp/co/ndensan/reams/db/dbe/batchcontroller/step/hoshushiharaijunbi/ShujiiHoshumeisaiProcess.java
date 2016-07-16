@@ -6,41 +6,33 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.chosahoshushiharai.ChosaHoshuShiharaiEdit;
-import jp.co.ndensan.reams.db.dbe.business.report.chosahoshushiharai.ChosaHoshuShiharaiReport;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiihoshumeisai.ShujiiHoshumeisaiEdit;
+import jp.co.ndensan.reams.db.dbe.business.report.shujiihoshumeisai.ShujiiHoshumeisaiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.HoshuShiharaiJunbiProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahoshushiharai.ChosaHoshuShiharaiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshushiharai.ChosaHoshuShiharaiReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiihoshumeisai.ShujiiHoshumeisaiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinseimonitor.ShinseiMonitorReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiihoshumeisai.ShujiiHoshumeisaiReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -52,6 +44,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -59,23 +53,32 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
-public class ChosaHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbiRelateEntity> {
+public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
 
-    private static final ReportId REPORT_ID = ReportIdDBE.DBE621003.getReportId();
+    private static final ReportId REPORT_ID = ReportIdDBE.DBE622001.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi."
-            + "IHoshuShiharaiJunbiMapper.get認定調査報酬支払通知書");
+            + "IHoshuShiharaiJunbiMapper.get主治医意見書作成報酬支払明細書");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(ShujiiHoshumeisaiReportSource.ReportSourceFields.iryokikanName.name()),
+                            new RString(ShujiiHoshumeisaiReportSource.ReportSourceFields.shujiiCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
-    private static final int パターン番号 = 1;
+    private Decimal 合計件数新規在宅 = Decimal.ZERO;
+    private Decimal 合計件数新規施設 = Decimal.ZERO;
+    private Decimal 合計件数継続在宅 = Decimal.ZERO;
+    private Decimal 合計件数継続施設 = Decimal.ZERO;
+    private Decimal 合計金額 = Decimal.ZERO;
+
     @BatchWriter
-    private BatchReportWriter<ChosaHoshuShiharaiReportSource> batchWrite;
-    private ReportSourceWriter<ChosaHoshuShiharaiReportSource> reportSourceWriter;
+    private BatchReportWriter<ShujiiHoshumeisaiReportSource> batchWrite;
+    private ReportSourceWriter<ShujiiHoshumeisaiReportSource> reportSourceWriter;
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;
+    private int index_tmp = 0;
 
     @Override
     protected void beforeExecute() {
@@ -93,7 +96,9 @@ public class ChosaHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJun
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ShinseiMonitorReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -103,16 +108,34 @@ public class ChosaHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJun
     }
 
     @Override
-    protected void process(HoshuShiharaiJunbiRelateEntity entity) {
+    protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
+            ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
+            ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(current, 消費税率);
+            editShujiiHoshumeisaiEntity(shumeisaiEntity, current);
+            ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
+            report.writeBy(reportSourceWriter);
+            index_tmp++;
+        }
+    }
+
+    private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
+        return !before.getJigyoshaMeisho().equals(current.getJigyoshaMeisho())
+                || !before.getNinteichosainCode().equals(current.getNinteichosainCode());
+    }
+
+    @Override
+    protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        ChosaHoshuShiharaiEdit edit = new ChosaHoshuShiharaiEdit();
-        List<RString> 業務固有キー = new ArrayList<>();
-        業務固有キー.add(entity.getNinteichosaItakusakiCode());
-        ChosaHoshuShiharaiEntity shiharaiEntity
-                = edit.getChosaHoshuShiharaiEntity(entity, 消費税率, get認証者(), get通知文(), get口座情報(new KamokuCode("003"), 業務固有キー));
-        shiharaiEntity.set対象期間(get対象期間());
-        ChosaHoshuShiharaiReport report = new ChosaHoshuShiharaiReport(shiharaiEntity);
+        ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
+        ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(entity, 消費税率);
+        editShujiiHoshumeisaiEntity(shumeisaiEntity, entity);
+        ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
+        index_tmp++;
+        report.writeBy(reportSourceWriter);
+        index_tmp++;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
@@ -127,7 +150,7 @@ public class ChosaHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJun
         ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE012001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE622002.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
@@ -143,7 +166,7 @@ public class ChosaHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJun
         出力条件.add(実績期間開始日.toRString());
         出力条件.add(実績期間終了日.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE622001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
@@ -165,50 +188,43 @@ public class ChosaHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJun
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
     }
 
-    /**
-     * 口座情報の編集処理です。
-     *
-     * @param kamokuCode 科目コード
-     * @param 業務固有キー 業務固有キー
-     * @return ChosaHoshuShiharaiEntity
-     */
-    public static Koza get口座情報(KamokuCode kamokuCode, List<RString> 業務固有キー) {
-        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        builder.set業務コード(GyomuCode.DB介護保険);
-        builder.setサブ業務コード(SubGyomuCode.DBE認定支援);
-        builder.set科目コード(kamokuCode);
-        builder.set業務固有キーリスト(業務固有キー);
-        builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
-        IKozaSearchKey searchKey = builder.build();
-        List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
-        Koza koza = null;
-        if (!kozaList.isEmpty()) {
-            koza = kozaList.get(0);
-        }
-        return koza;
-    }
-
-    private NinshoshaSource get認証者() {
-        return ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                REPORT_ID,
-                FlexibleDate.getNowDate(),
-                reportSourceWriter);
-    }
-
-    /**
-     * 通知文の編集処理です。
-     *
-     * @return 通知文
-     */
-    public static Map<Integer, RString> get通知文() {
-        return ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, パターン番号);
-    }
-
     private RString get対象期間() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
         builder.append(new RString("～"));
         builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
         return builder.toRString();
+    }
+
+    private ShujiiHoshumeisaiEntity editShujiiHoshumeisaiEntity(ShujiiHoshumeisaiEntity shumeisaiEntity,
+            HoshuShiharaiJunbiRelateEntity current) {
+        if (shumeisaiEntity.get新規在宅件数() != null) {
+            合計件数新規在宅 = 合計件数新規在宅.add(new Decimal(shumeisaiEntity.get新規在宅件数().toString()));
+        }
+        if (shumeisaiEntity.get新規施設件数() != null) {
+            合計件数新規施設 = 合計件数新規施設.add(new Decimal(shumeisaiEntity.get新規施設件数().toString()));
+        }
+        if (shumeisaiEntity.get継続在宅件数() != null) {
+            合計件数継続在宅 = 合計件数継続在宅.add(new Decimal(shumeisaiEntity.get継続在宅件数().toString()));
+        }
+        if (shumeisaiEntity.get継続施設件数() != null) {
+            合計件数継続施設 = 合計件数継続施設.add(new Decimal(shumeisaiEntity.get継続施設件数().toString()));
+        }
+
+        shumeisaiEntity.set新規在宅件数(new RString(String.valueOf(合計件数新規在宅)));
+        shumeisaiEntity.set新規施設件数(new RString(String.valueOf(合計件数新規施設)));
+        shumeisaiEntity.set継続在宅件数(new RString(String.valueOf(合計件数継続在宅)));
+        shumeisaiEntity.set継続施設件数(new RString(String.valueOf(合計件数継続施設)));
+        if (shumeisaiEntity.get合計金額() != null) {
+            合計金額 = 合計金額.add(new Decimal(shumeisaiEntity.get合計金額().toString()));
+        }
+        shumeisaiEntity.set合計金額(new RString(合計金額.toString()));
+        Decimal 消費税 = 合計金額.multiply(new Decimal(消費税率.toString())).subtract(合計金額);
+        shumeisaiEntity.set対象期間(get対象期間());
+        shumeisaiEntity.set明細番号(new RString(String.valueOf(index_tmp)));
+        shumeisaiEntity.set生年月日(dateFormat9(current.getSeinengappiYMD()));
+        shumeisaiEntity.set消費税(new RString(消費税.toString()));
+        shumeisaiEntity.set合計請求額(new RString(合計金額.add(消費税).toString()));
+        return shumeisaiEntity;
     }
 }
