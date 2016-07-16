@@ -485,51 +485,11 @@
     </resultMap>
     
     <!--特徴仮算定抽出Tempからデータを削除する。-->
-    <delete id="delete特徴仮算定抽出Temp">
+    <delete id="delete特徴仮算定抽出Temp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokutyoukariSannteiTyuushutuEntity">
         delete from "TokutyoukariSannteiTyuushutuTemp"
         where "fukaNendo" = #{fukaNendo}
+        and "hihokenshaNo" = #{hihokenshaNo}
         and "rirekiNo" = #{rirekiNo}
-        and "choshuHoho4gatsu" = #{choshuHoho4gatsu}
-        and "choshuHoho5gatsu" = #{choshuHoho5gatsu}
-        and "choshuHoho6gatsu" = #{choshuHoho6gatsu}
-        and "choshuHoho7gatsu" = #{choshuHoho7gatsu}
-        and "choshuHoho8gatsu" = #{choshuHoho8gatsu}
-        and "choshuHoho9gatsu" = #{choshuHoho9gatsu}
-        and "choshuHoho10gatsu" = #{choshuHoho10gatsu}
-        and "choshuHoho11gatsu" = #{choshuHoho11gatsu}
-        and "choshuHoho11gatsu" = #{choshuHoho11gatsu}
-        and "choshuHoho1gatsu" = #{choshuHoho1gatsu}
-        and "choshuHoho2gatsu" = #{choshuHoho2gatsu}
-        and "choshuHoho3gatsu" = #{choshuHoho3gatsu}
-        and "choshuHohoYoku4gatsu" = #{choshuHohoYoku4gatsu}
-        and "choshuHohoYoku5gatsu" = #{choshuHohoYoku5gatsu}
-        and "choshuHohoYoku6gatsu" = #{choshuHohoYoku6gatsu}
-        and "choshuHohoYoku7gatsu" = #{choshuHohoYoku7gatsu}
-        and "choshuHohoYoku8gatsu" = #{choshuHohoYoku8gatsu}
-        and "choshuHohoYoku9gatsu" = #{choshuHohoYoku9gatsu}
-        and "kariNenkinNo" = #{kariNenkinNo}
-        and "kariNenkinCode" = #{kariNenkinCode}
-        and "kariHosokuM" = #{kariHosokuM}
-        and "honNenkinNo" = #{honNenkinNo}
-        and "honNenkinCode" = #{honNenkinCode}
-        and "honHosokuM" = #{honHosokuM}
-        and "yokunendoKariNenkinNo" = #{yokunendoKariNenkinNo}
-        and "yokunendoKariNenkinCode" = #{yokunendoKariNenkinCode}
-        and "yokunendoKariHosokuM" = #{yokunendoKariHosokuM}
-        and "iraiSohuzumiFlag" = #{iraiSohuzumiFlag}
-        and "tsuikaIraiSohuzumiFlag" = #{tsuikaIraiSohuzumiFlag}
-        and "tokuchoTeishiNichiji" = #{tokuchoTeishiNichiji}
-        and "tokuchoTeishiJiyuCode" = #{tokuchoTeishiJiyuCode}
-        and "tsuchishoNo" = #{tsuchishoNo}
-        and "choteigaku" = #{choteigaku}
-        and "seihoKaishiYMD" = #{seihoKaishiYMD}
-        and "seihoHaishiYMD" = #{seihoHaishiYMD}
-        and "ronenKaishiYMD" = #{ronenKaishiYMD}
-        and "ronenHaishiYMD" = #{ronenHaishiYMD}
-        and "setaikazeiKubun" = #{setaikazeiKubun}
-        and "kazeiKubun" = #{kazeiKubun}
-        and "gokeiShotokuGaku" = #{gokeiShotokuGaku}
-        and "nenkinShunyuGaku" = #{nenkinShunyuGaku}
     </delete>
     
     <select resultOrdered="true" id="select資格等最新化_４月開始" parameterType="java.util.Map" 
