@@ -12,10 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
-import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -61,7 +62,8 @@ public class HokenshaListDivHandler {
 
         Map<RString, HokenshaSummary> map = new HashMap<>();
         for (HokenshaSummary s : hokenshaList) {
-            RString key = s.get市町村コード().value();
+            //RString key = s.get市町村コード().value();
+            RString key = new RString(UUID.randomUUID().toString());
             list.add(new KeyValueDataSource(key, create表示名(s)));
             map.put(key, s);
         }

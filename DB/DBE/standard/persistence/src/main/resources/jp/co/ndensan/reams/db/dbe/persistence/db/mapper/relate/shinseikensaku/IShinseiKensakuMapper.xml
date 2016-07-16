@@ -134,13 +134,13 @@
         LEFT JOIN
             (
             SELECT
-                DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo"
+                DbT5121."shinseishoKanriNo" AS "shinseishoKanriNo"
                 ,DbT5101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode"
                 ,DbT5101."shujiiIryokikanCode" AS "shujiiIryokikanCode"
                 ,DbT5102."nijiHanteiYokaigoJotaiKubunCode" AS "nijiHanteiYokaigoJotaiKubunCode"
                 ,DbT5102."nijiHanteiNinteiYukoKikan" AS "nijiHanteiNinteiYukoKikan"
-            FROM rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+            FROM rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+            LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
                 ON DbT5101."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
             LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
                 ON DbT5101."shinseishoKanriNo" = DbT5102."shinseishoKanriNo"

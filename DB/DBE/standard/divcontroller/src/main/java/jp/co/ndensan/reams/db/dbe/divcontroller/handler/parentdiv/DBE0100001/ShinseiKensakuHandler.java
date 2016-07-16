@@ -676,7 +676,7 @@ public class ShinseiKensakuHandler {
             }
             YubinNo 郵便番号 = business.get郵便番号();
             if (郵便番号 != null) {
-                row.setYubinno(郵便番号.value());
+                row.setYubinno(郵便番号.getEditedYubinNo());
             }
             TelNo 電話番号 = business.get電話番号();
             if (電話番号 != null) {
