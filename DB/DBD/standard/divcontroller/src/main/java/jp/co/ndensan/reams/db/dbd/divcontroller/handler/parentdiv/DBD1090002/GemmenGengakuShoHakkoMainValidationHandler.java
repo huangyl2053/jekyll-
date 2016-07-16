@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002;
 
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoDivSpec;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDivSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @reamsid_L DBD-3540-010 xuyue
  */
-public class HihokenshashoHakkoTaishoshaJohoValidationHandler {
+public class GemmenGengakuShoHakkoMainValidationHandler {
 
     /**
      * 画面に一つ出力チェックボックスを選択しない場合、エラーとする。
@@ -32,10 +33,10 @@ public class HihokenshashoHakkoTaishoshaJohoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor出力チェックボックス(ValidationMessageControlPairs pairs,
-            HihokenshashoHakkoTaishoshaJohoDiv div) {
+            GemmenGengakuShoHakkoMainDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(HihokenshashoHakkoTaishoshaJohoDivSpec.出力対象の選択されていない)
+        messages.add(ValidateChain.validateStart(div).ifNot(GemmenGengakuShoHakkoMainDivSpec.出力対象の選択されていない)
                 .thenAdd(NoInputMessages.出力対象の選択されていない).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.出力対象の選択されていない,
@@ -52,10 +53,10 @@ public class HihokenshashoHakkoTaishoshaJohoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor申請情報の存在(ValidationMessageControlPairs pairs,
-            HihokenshashoHakkoTaishoshaJohoDiv div) {
+            GemmenGengakuShoHakkoMainDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(HihokenshashoHakkoTaishoshaJohoDivSpec.申請情報の存在しない)
+        messages.add(ValidateChain.validateStart(div).ifNot(GemmenGengakuShoHakkoMainDivSpec.申請情報の存在しない)
                 .thenAdd(NoInputMessages.申請情報の存在).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.申請情報の存在,
@@ -72,10 +73,10 @@ public class HihokenshashoHakkoTaishoshaJohoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor発行日の必須入力(ValidationMessageControlPairs pairs,
-            HihokenshashoHakkoTaishoshaJohoDiv div) {
+            GemmenGengakuShoHakkoMainDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(HihokenshashoHakkoTaishoshaJohoDivSpec.発行日の非空チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(GemmenGengakuShoHakkoMainDivSpec.発行日の非空チェック)
                 .thenAdd(NoInputMessages.発行日の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.発行日の必須入力,
@@ -91,10 +92,10 @@ public class HihokenshashoHakkoTaishoshaJohoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor交付日の必須入力(ValidationMessageControlPairs pairs,
-            HihokenshashoHakkoTaishoshaJohoDiv div) {
+            GemmenGengakuShoHakkoMainDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(HihokenshashoHakkoTaishoshaJohoDivSpec.交付日の非空チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(GemmenGengakuShoHakkoMainDivSpec.交付日の非空チェック)
                 .thenAdd(NoInputMessages.交付日の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.交付日の必須入力,
@@ -110,14 +111,14 @@ public class HihokenshashoHakkoTaishoshaJohoValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs validateFor文書番号の必須入力(ValidationMessageControlPairs pairs,
-            HihokenshashoHakkoTaishoshaJohoDiv div) {
+            GemmenGengakuShoHakkoMainDiv div) {
 
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(HihokenshashoHakkoTaishoshaJohoDivSpec.文書番号の非空チェック)
+        messages.add(ValidateChain.validateStart(div).ifNot(GemmenGengakuShoHakkoMainDivSpec.文書番号の非空チェック)
                 .thenAdd(NoInputMessages.文書番号の必須入力).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 NoInputMessages.文書番号の必須入力,
-                div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo()).build().check(messages));
+                div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu()).build().check(messages));
         return pairs;
     }
 
