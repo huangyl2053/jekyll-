@@ -14,6 +14,7 @@
     </parent>
     <properties>
         <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
+        <jp.co.ndensan.reams.dbzVersion>${jp.co.ndensan.reams.dbz.version}</jp.co.ndensan.reams.dbzVersion>
     </properties>
     <modules>
         <module>entity</module>

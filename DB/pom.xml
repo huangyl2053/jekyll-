@@ -55,6 +55,7 @@
         <jp.co.ndensan.reams.uaxVersion>${jp.co.ndensan.reams.uax.version}</jp.co.ndensan.reams.uaxVersion>
         <jp.co.ndensan.reams.caxVersion>${jp.co.ndensan.reams.cax.version}</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.uxxVersion>${jp.co.ndensan.reams.uxx.version}</jp.co.ndensan.reams.uxxVersion>
+        <jp.co.ndensan.reams.uexVersion>${jp.co.ndensan.reams.uex.version}</jp.co.ndensan.reams.uexVersion>
         <jp.co.ndensan.reams.urVersion>${jp.co.ndensan.reams.ur.version}</jp.co.ndensan.reams.urVersion>
     </properties>
     <dependencies>
@@ -533,6 +534,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+<!--
     <build>
         <pluginManagement>
             <plugins>
@@ -581,9 +583,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>full</checkmode>  <!-- full:DB接続を伴う完全なチェック, skip:チェックしない, default:1.9.1と同じ、DB接続なしのチェック -->
+                    <checkmode>full</checkmode>  <!- - full:DB接続を伴う完全なチェック, skip:チェックしない, default:1.9.1と同じ、DB接続なしのチェック - ->
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    -->
 </project>
