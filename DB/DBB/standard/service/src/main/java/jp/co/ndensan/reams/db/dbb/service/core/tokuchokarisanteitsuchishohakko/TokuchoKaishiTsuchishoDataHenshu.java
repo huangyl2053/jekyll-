@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.PrtTokuchoKaishiTsuchishoKarisanteiResult;
@@ -21,13 +19,11 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
@@ -37,13 +33,17 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoId
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteitsuchishohakko.ITokuchoKarisanteiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.report.tokuchokarisanteitsuchishohakko.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -56,8 +56,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderBy
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -185,10 +183,6 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
                 仮算定通知書情報.set徴収方法情報_更正後(result.get徴収方法情報());
                 仮算定通知書情報.set対象者_追加含む_情報_更正後(result.get対象者_追加含む_情報());
                 仮算定通知書情報.set帳票制御共通(帳票制御共通);
-                //TODO TEST
-                List<NokiJoho> testList = new ArrayList<>();
-                仮算定通知書情報.set普徴納期情報リスト(testList);
-                仮算定通知書情報.set特徴納期情報リスト(testList);
                 EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定通知書共通情報作成.create仮算定通知書共通情報(仮算定通知書情報);
                 編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
             }
@@ -213,7 +207,7 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
             Long 出力順ID, ReportId 帳票ID) {
         List<TsuchishoDataTempEntity> 出力対象List = get出力対象データ(出力対象区分, 出力順ID);
         if (出力対象List != null && !出力対象List.isEmpty()) {
-            Decimal 連番 = Decimal.ONE;
+            int 連番 = 1;
             for (TsuchishoDataTempEntity 出力対象 : 出力対象List) {
                 if (出力対象.get計算後情報() == null || 出力対象.get計算後情報().getTsuchishoNo() == null) {
                     continue;
@@ -230,11 +224,11 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
                     通知書発行後異動者.setShikibetsuCode(出力対象.get計算後情報().getShikibetsuCode());
                     通知書発行後異動者.setHihokenshaNo(出力対象.get計算後情報().getHihokenshaNo());
                     通知書発行後異動者.setKeisanTimestamp(出力対象.get計算後情報().getChoteiNichiji());
-                    通知書発行後異動者.setGaitoRemban(連番.intValue());
+                    通知書発行後異動者.setGaitoRemban(連番);
                     通知書発行後異動者.setIdoAriFlag(false);
                     通知書発行後異動者.setState(EntityDataState.Added);
                     通知書発行後異動者Dac.save(通知書発行後異動者);
-                    連番 = 連番.add(Decimal.ONE);
+                    連番 = 連番++;
                 }
             }
         }
@@ -264,25 +258,15 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
         if (設定値_1.equals(帳票制御汎用.get設定値())) {
             宛名連番 = 宛名連番値;
         }
-
-        RString 通知書定型文1 = RString.EMPTY;
-        RString 通知書定型文2 = RString.EMPTY;
+        RString 通知書定型文1 = null;
+        RString 通知書定型文2 = null;
         if (帳票制御共通 != null && !nullTOEmpty(帳票制御共通.get定型文文字サイズ()).isEmpty()) {
             int パターン番号 = Integer.parseInt(nullTOEmpty(帳票制御共通.get定型文文字サイズ()).toString());
             FlexibleDate システム日付 = FlexibleDate.getNowDate();
-            TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo1
-                    = manager.get通知書定形文検索(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                            KamokuCode.EMPTY, パターン番号, INT_1, システム日付);
-            TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo2
-                    = manager.get通知書定形文検索(SubGyomuCode.DBB介護賦課, 帳票分類ID,
-                            KamokuCode.EMPTY, パターン番号, INT_2, システム日付);
-            if (tsuchishoTeikeibunInfo1 != null && tsuchishoTeikeibunInfo1.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                通知書定型文1 = tsuchishoTeikeibunInfo1.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
-            if (tsuchishoTeikeibunInfo2 != null && tsuchishoTeikeibunInfo2.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                通知書定型文2 = tsuchishoTeikeibunInfo2.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+            通知書定型文1 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課, 帳票分類ID, KamokuCode.EMPTY,
+                    パターン番号, INT_1, システム日付);
+            通知書定型文2 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課, 帳票分類ID, KamokuCode.EMPTY,
+                    パターン番号, INT_2, システム日付);
         }
         List<TsuchishoDataTempResult> tempResultList = get仮算定情報(出力対象List);
         prtResult.set出力条件リスト(出力条件リスト);
@@ -313,17 +297,15 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
     }
 
     private List<TsuchishoDataTempEntity> get出力対象データ(RString 出力対象区分, Long 出力順ID) {
-        RString 出力順 = RString.EMPTY;
-
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
         IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
-        if (outputOrder == null) {
-            出力順 = RString.EMPTY;
-        }
-        出力順 = MyBatisOrderByClauseCreator.create(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.class, outputOrder);
         TokuchoKaishiTsuchishoMybatisParameter parameter = new TokuchoKaishiTsuchishoMybatisParameter();
+        if (outputOrder != null) {
+            RString 出力順 = MyBatisOrderByClauseCreator.create(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.class,
+                    outputOrder);
+            parameter.set出力順(出力順);
+        }
         parameter.set出力対象(get出力対象(出力対象区分));
-        parameter.set出力順(出力順);
         ITokuchoKarisanteiTsuchishoHakkoMapper mapper = provider.create(ITokuchoKarisanteiTsuchishoHakkoMapper.class);
         return mapper.select出力対象データ(parameter);
     }
@@ -392,7 +374,6 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
             result.set賦課の情報(get賦課の情報(tempEntity));
             IAtesaki 宛先 = AtesakiFactory.createInstance(tempEntity.get宛先());
             result.set宛先情報(宛先);
-            //TODO
             if (tempEntity.get対象者_追加含む情報() != null) {
                 result.set対象者_追加含む_情報(new NenkinTokuchoKaifuJoho(tempEntity.get対象者_追加含む情報()));
             }

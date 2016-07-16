@@ -145,7 +145,7 @@
         "dbV2002Fuka_tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
         "dbV2002Fuka_fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku"
         FROM "DbT2002FukaZennendoTemp" AS B
-        WHERE A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
+        WHERE A."dbT2015KeisangoJoho_hihokenshaNo" = B."hihokenshaNo"
     </update>
     
     <update id="update仮算定一括発行一時_特徴調定額">

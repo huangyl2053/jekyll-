@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.PrtTokuchoKaishiTsuchishoKarisanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TsuchishoDataTempResult;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport;
@@ -19,7 +17,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoK
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NokiJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
@@ -120,10 +117,6 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             仮算定通知書情報.set徴収方法情報_更正後(tempResult.get徴収方法情報());
             仮算定通知書情報.set対象者_追加含む_情報_更正後(tempResult.get対象者_追加含む_情報());
             仮算定通知書情報.set帳票制御共通(result.get帳票制御共通());
-            //TODO TEST
-            List<NokiJoho> testList = new ArrayList<>();
-            仮算定通知書情報.set普徴納期情報リスト(testList);
-            仮算定通知書情報.set特徴納期情報リスト(testList);
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定通知書共通情報作成.create仮算定通知書共通情報(仮算定通知書情報);
             仮算定特徴開始通知書情報.set発行日(processParameter.get発行日());
             仮算定特徴開始通知書情報.set編集後仮算定通知書共通情報(編集後仮算定通知書共通情報);
