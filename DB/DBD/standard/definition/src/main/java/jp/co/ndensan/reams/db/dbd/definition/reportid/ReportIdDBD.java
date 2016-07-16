@@ -92,6 +92,14 @@ public enum ReportIdDBD {
      */
     DBD100014(new ReportId("DBD100014_HomonKaigoRiyoshaFutanGeｍmenKetteiTsuchisho"), new RString("特別地域加算減免・訪問介護利用者負担減額決定通知書")),
     /**
+     * 支払方法変更予告通知書の帳票ＩＤです。
+     */
+    DBD100001(new ReportId("DBD100001_ShiharaiHohoHenkoYokokuTsuchisho"), new RString("支払方法変更予告通知書")),
+    /**
+     * 滞納保険料控除通知書の帳票ＩＤです。
+     */
+    DBD100004(new ReportId("DBD100004_TainoHokenryoKojoTsuchisho"), new RString("滞納保険料控除通知書")),
+    /**
      * 要介護認定結果通知書の帳票ＩＤです。
      */
     DBD532001(new ReportId("DBD532001_YokaigoNinteiKekkaTshuchisho"), new RString("要介護認定結果通知書"));
