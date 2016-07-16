@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishoginfuri;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NofuShoKyotsu;
@@ -145,6 +146,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
         editTsuchiShuryoKi(source);
         editTsuchishoNo(source);
         editERenban(source);
+        editEHokensyaName(source);
         edit納入通知書期情報(source);
         editCompNinshosha(source);
         editDBBCompNofushoItem(source);
@@ -301,7 +303,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
             source.nofushohyojicodeName34 = 納付書共通.get表示コード().get表示コード名３();
             source.nofushohyojicode34 = 納付書共通.get表示コード().get表示コード３();
         }
-        editMRenban(source);
+        editMRenban1(source);
         source.nofushoShichosonMei11 = 納付書共通.get納付書市町村名();
         source.nofushoShichosonMei12 = 納付書共通.get納付書市町村名();
         source.nofushoShichosonMei13 = 納付書共通.get納付書市町村名();
@@ -441,17 +443,19 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editSanteiKisoGenmenGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額()) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
             return;
         }
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額().toString());
+        source.santeiKisoGenmenGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額());
     }
 
     private void editSanteiKisoTokuchoKariGokeiGaku(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額合計()) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
             return;
         }
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後普徴期別金額合計().toString());
+        source.santeiKisoTokuchoKariGokeiGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計());
     }
 
     private void editSanteiKisoKiTitle1(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
@@ -646,12 +650,12 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editTsuchiKaishiKi(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        int 最小期 = 0;
-        RString 最小の期 = RString.EMPTY;
         List<Kitsuki> 出力期リスト = 仮算定納入通知書情報.get出力期リスト();
         if (null == 出力期リスト) {
             return;
         }
+        int 最小期 = 出力期リスト.get(0).get期AsInt();
+        RString 最小の期 = 出力期リスト.get(0).get期();
         for (Kitsuki 出力期 : 出力期リスト) {
             if (最小期 > 出力期.get期AsInt()) {
                 最小期 = 出力期.get期AsInt();
@@ -662,14 +666,14 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     }
 
     private void editTsuchiShuryoKi(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
-        int 最大期 = 0;
-        RString 最大の期 = RString.EMPTY;
         List<Kitsuki> 出力期リスト = 仮算定納入通知書情報.get出力期リスト();
         if (null == 出力期リスト) {
             return;
         }
+        int 最大期 = 出力期リスト.get(0).get期AsInt();
+        RString 最大の期 = 出力期リスト.get(0).get期();
         for (Kitsuki 出力期 : 出力期リスト) {
-            if (最大期 > 出力期.get期AsInt()) {
+            if (最大期 < 出力期.get期AsInt()) {
                 最大期 = 出力期.get期AsInt();
                 最大の期 = 出力期.get期();
             }
@@ -684,9 +688,14 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
     private void editERenban(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            連番.padLeft(連番, INT6);
+            source.eRenban = 連番.padLeft("0", INT6);
+        } else {
+            source.eRenban = RString.EMPTY;
         }
-        source.eRenban = 連番;
+    }
+
+    private void editEHokensyaName(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
+        source.eHokensyaName = 編集後仮算定通知書共通情報.get保険者名();
     }
 
     private RString get金額(List<UniversalPhase> 更正後普徴期別金額リスト, int 期) {
@@ -695,18 +704,19 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
         }
         for (UniversalPhase 更正後普徴期別金額 : 更正後普徴期別金額リスト) {
             if (期 == 更正後普徴期別金額.get期()) {
-                return new RString(更正後普徴期別金額.get金額().toString());
+                return NotsuReportEditorUtil.get共通ポリシー金額1(更正後普徴期別金額.get金額());
             }
         }
         return RString.EMPTY;
     }
 
-    private void editMRenban(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
+    private void editMRenban1(KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            連番.padLeft(連番, INT6);
+            source.mRenban1 = 連番.padLeft("0", INT6);
+        } else {
+            source.mRenban1 = RString.EMPTY;
         }
-        source.mRenban1 = 連番;
     }
 
     private boolean is銀振印字位置の納入通知書期情報がある(int 銀振印字位置) {
