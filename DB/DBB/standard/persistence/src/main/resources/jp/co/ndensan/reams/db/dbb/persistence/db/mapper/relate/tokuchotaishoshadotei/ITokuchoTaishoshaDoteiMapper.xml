@@ -267,7 +267,7 @@
             <result property="shisetsuHenkoTsuchiHakkoYMD"       column="TOKUREI_shisetsuHenkoTsuchiHakkoYMD"          typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
             <result property="logicalDeletedFlag"       column="TOKUREI_logicalDeletedFlag"      />
         </association>
-        <association property="choshuhoho" javaType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity">
+        <association property="choshuhoho" javaType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity">
             <result property="fukaNendo" column="CHOSHUHOHO_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
             <result property="hihokenshaNo" column="CHOSHUHOHO_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
             <result property="rirekiNo" column="CHOSHUHOHO_rirekiNo" />
@@ -388,7 +388,7 @@
         <result property="tokubetsuChoshuGimushaYusenjuni" column="tokubetsuChoshuGimushaYusenjuni" />
     </resultMap>
     <!--    徴収方法を挿入する-->
-    <update id="insert徴収方法" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity" >
+    <update id="insert徴収方法" parameterType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity" >
         INSERT INTO rgdb."DbT2001ChoshuHoho"
         VALUES(
             ${insertDantaiCd},
@@ -475,7 +475,7 @@
     </insert>
     
     <!--    特徴未同定情報を作成する-->
-    <update id="do特徴未同定情報作成" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity" >
+    <update id="do特徴未同定情報作成" parameterType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity" >
         INSERT INTO rgdb."DbT2019TokuchoMidoteiJoho"
             ("shoriNendo",
             "kisoNenkinNo",

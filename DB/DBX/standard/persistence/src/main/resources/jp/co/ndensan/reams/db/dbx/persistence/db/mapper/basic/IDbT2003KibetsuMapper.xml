@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2003Kibetsuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2003Kibetsu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu" />
+     FROM
+         rgdb."DbT2003Kibetsu"
+     WHERE
+         rgdb."DbT2003Kibetsu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2003Kibetsu">
+         "DbT2003Kibetsu"."choteiNendo" as "dbT2003Kibetsu_choteiNendo",
+         "DbT2003Kibetsu"."fukaNendo" as "dbT2003Kibetsu_fukaNendo",
+         "DbT2003Kibetsu"."tsuchishoNo" as "dbT2003Kibetsu_tsuchishoNo",
+         "DbT2003Kibetsu"."rirekiNo" as "dbT2003Kibetsu_rirekiNo",
+         "DbT2003Kibetsu"."choshuHouhou" as "dbT2003Kibetsu_choshuHouhou",
+         "DbT2003Kibetsu"."ki" as "dbT2003Kibetsu_ki",
+         "DbT2003Kibetsu"."insertDantaiCd" as "dbT2003Kibetsu_insertDantaiCd",
+         "DbT2003Kibetsu"."insertTimestamp" as "dbT2003Kibetsu_insertTimestamp",
+         "DbT2003Kibetsu"."insertReamsLoginId" as "dbT2003Kibetsu_insertReamsLoginId",
+         "DbT2003Kibetsu"."insertContextId" as "dbT2003Kibetsu_insertContextId",
+         "DbT2003Kibetsu"."isDeleted" as "dbT2003Kibetsu_isDeleted",
+         "DbT2003Kibetsu"."updateCount" as "dbT2003Kibetsu_updateCount",
+         "DbT2003Kibetsu"."lastUpdateTimestamp" as "dbT2003Kibetsu_lastUpdateTimestamp",
+         "DbT2003Kibetsu"."lastUpdateReamsLoginId" as "dbT2003Kibetsu_lastUpdateReamsLoginId",
+         "DbT2003Kibetsu"."choteiId" as "dbT2003Kibetsu_choteiId"
+    </sql>
+
+
+    <!--テーブルDbT2003Kibetsuの項目をDbT2003KibetsuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity" autoMapping="true">
+        <id property="choteiNendo" column="dbT2003Kibetsu_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="dbT2003Kibetsu_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2003Kibetsu_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT2003Kibetsu_rirekiNo" />
+        <id property="choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ki" column="dbT2003Kibetsu_ki" />
+        <result property="insertDantaiCd" column="dbT2003Kibetsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2003Kibetsu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2003Kibetsu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2003Kibetsu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2003Kibetsu_isDeleted" />
+        <result property="updateCount" column="dbT2003Kibetsu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2003Kibetsu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2003Kibetsu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choteiId" column="dbT2003Kibetsu_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2003KibetsuEntity">
+        SELECT
+        <include refid="allColumns_DbT2003Kibetsu" />
+        FROM
+        rgdb."DbT2003Kibetsu"
+    </select>
+    
+</mapper>

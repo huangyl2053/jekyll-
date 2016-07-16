@@ -10,8 +10,8 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM rgdb."DbV2002Fuka" AS "DbT2002Fuka"
         INNER JOIN
             rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
@@ -182,7 +182,7 @@
         <result property="fukaYMD" column="fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="資格の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
-        <association property="徴収方法の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
+        <association property="徴収方法の情報" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="月別ランク" resultMap="resultMap_KuBunnGaTsurakuTempEntity"/>
         <collection property="境界層の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kyokaisogaitosha.IKyokaisoGaitoshaMapper.resultMap_KyokaisoGaitoshaEntity"/>
         <collection property="世帯員所得情報" resultMap="resultMap_SetaiShotokuTempEntity"/>
@@ -200,11 +200,11 @@
             "HonSanJonTyuShutuTemp"."tsuchishoNo",
             "HonSanJonTyuShutuTemp"."fukaKijitsu",
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             "KuBunnGaTsurakuTemp".*,
             <include refid="allColumns_SetaiShotokuTemp"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
             <include refid="allColumns_UrT0508SeikatsuHogoJukyusha" />,
             <include refid="allColumns_UrT0526SeikatsuHogoFujoShurui" />,
             <include refid="allColumns_UrT0528SeikatsuHogoTeishikikan" />,

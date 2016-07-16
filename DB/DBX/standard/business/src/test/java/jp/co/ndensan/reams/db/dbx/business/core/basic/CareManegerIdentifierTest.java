@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7064CareManegerEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;

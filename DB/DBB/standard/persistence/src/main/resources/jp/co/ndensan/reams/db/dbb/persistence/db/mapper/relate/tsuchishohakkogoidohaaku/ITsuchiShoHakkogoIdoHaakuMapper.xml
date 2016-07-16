@@ -12,7 +12,7 @@
         <id column="dbV2001ChoshuHoho_hihokenshaNo"/>
         <id column="dbV2001ChoshuHoho_rirekiNo" />
         <association property="dbT2017Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity"/>
-        <association property="dbv2001Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
+        <association property="dbv2001Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
     </resultMap>
     <select id="get対象データTwo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.QualificationsParamter"
@@ -25,7 +25,7 @@
         FROM (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.noDeleted_DbT2017TsuchishoHakkogoIdosha" />)
         AS A
        INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho" />)
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho" />)
         AS B
         ON B."dbV2001ChoshuHoho_hihokenshaNo" = A."dbT2017TsuchishoHakkogoIdosha_hihokenshaNo"
         WHERE A."dbT2017TsuchishoHakkogoIdosha_reportID" = #{帳票ID}

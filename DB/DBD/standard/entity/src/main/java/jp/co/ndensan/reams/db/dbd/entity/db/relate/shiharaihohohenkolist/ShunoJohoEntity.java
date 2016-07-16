@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import lombok.Getter;
 import lombok.Setter;
 

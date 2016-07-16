@@ -31,7 +31,6 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
     private final int renban;
 
     private static final RString EN = new RString("円");
-    private static final RString TSUGIKI_IKOU = new RString("次期以降");
     private static final RString NOKIGEN = new RString("納期限");
     private static final RString BANK_CODE_TITLE = new RString("金融機関コード");
     private static final RString KOZA_SHURUI_TITLE = new RString("種別");
@@ -43,6 +42,7 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int リストサイズ１ = 1;
@@ -157,7 +157,14 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
                 source.keisanMeisaishoGenmenGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免額().toString());
             }
             source.keisanMeisaishoNendo = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
-            source.keisanMeisaishoNendo3 = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
+            source.keisanMeisaishoNendoBun = item.get編集後本算定通知書共通情報().get調定年度_年度あり();
+            source.keisanMeisaishoNendo3 = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get調定年度_年度なし());
+            if (item.get編集後本算定通知書共通情報().get納付済額_未到来期含む() != null) {
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get納付済額_未到来期含む().toString());
+            }
+            if (item.get編集後本算定通知書共通情報().get今後納付すべき額() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額().toString());
+            }
 
             this.更正後情報相関設定(source);
 
@@ -185,15 +192,15 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
             source.keisanMeisaishoKomokuTitle1 = new RString("第　期");
         }
 
-        source.keisanMeisaishYen2 = EN;
-        source.keisanMeisaishoKomokuTitle2 = TSUGIKI_IKOU;
+        source.keisanMeisaishYen2 = RString.EMPTY;
+        source.keisanMeisaishoKomokuTitle2 = RString.EMPTY;
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
             source.notsuRenban2 = new RString(renban).padZeroToLeft(INT_6);
         }
         source.pageCount2 = new RString(renban + "-2");
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.renban = new RString(renban).padZeroToLeft(INT_6);
+            source.renban = new RString(String.valueOf(renban));
         }
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
@@ -257,7 +264,7 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
             source.nokigenYmd = HOSHI_11;
             source.hakkoYmd = HOSHI_11;
             source.honzei = HOSHI_13;
-            source.ocr1 = HOSHI_28;
+            source.ocr1 = HOSHI_22;
             source.ocr2 = HOSHI_28;
             source.cvsToriatsukaikigen = HOSHI_16;
         }
@@ -367,7 +374,7 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
 
         if (item.get編集後本算定通知書共通情報().get更正後() != null) {
 
-            source.keisanMeisaishoShotokuDankai = item.get編集後本算定通知書共通情報().get更正後().get保険料段階();
+            source.keisanMeisaishoShotokuDankai = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get更正後().get保険料段階());
             if (item.get編集後本算定通知書共通情報().get更正後().get保険料率() != null) {
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
@@ -379,9 +386,12 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
                 source.kaisanMeisaishoFuchoGokeiGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get普通徴収額合計().toString());
             }
             source.keisanMeisaishoKikanShuryo = item.get編集後本算定通知書共通情報().get更正後().get期間_至();
-            source.keisanMeisaishoTsukisu = new RString(item.get編集後本算定通知書共通情報().get更正後().get月数());
+            source.keisanMeisaishoTsukisu = item.get編集後本算定通知書共通情報().get更正後().get月数_ケ月();
             if (item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額() != null) {
-                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額().toString());
+                source.keisanMeisaishoCalHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額().toString());
+            }
+            if (item.get編集後本算定通知書共通情報().get更正後().get確定保険料_年額() != null) {
+                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get確定保険料_年額().toString());
             }
         }
     }

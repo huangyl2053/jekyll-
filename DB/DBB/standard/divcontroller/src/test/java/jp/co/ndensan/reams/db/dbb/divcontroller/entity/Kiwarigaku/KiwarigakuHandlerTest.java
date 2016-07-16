@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.KiwarigakuCalculator;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
+import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;

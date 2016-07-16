@@ -113,4 +113,74 @@
         dbt3036."dbT3036ShokanHanteiKekka_serviceTeikyoYM"
         dbt3053."dbT3053ShokanShukei_jigyoshaNo"
     </select>-->
+
+    <select id="select支払方法変更ByKey" resultMap="resultMap_ShiharaiHohoHenkoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.shiharaihohohenko.ShiharaiHohoHenkoMapperParameter"
+            fetchSize="500" resultOrdered="true">
+        <include refid="selectShiharaiHohoHenkoEntity" />
+    </select>
+
+    <sql id="selectShiharaiHohoHenkoEntity">
+        SELECT
+        DbT4021ShiharaiHohoHenko.*,
+        DbT4022ShiharaiHohoHenkoTaino.*,
+        DbT4024ShiharaiHohoHenkoSashitome.*,
+        DbT4025ShiharaiHohoHenkoGengaku.*,
+        DbT4026ShiharaiHohoHenkoGengakuMeisai.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.noDeleted_DbT4021ShiharaiHohoHenko" />) AS DbT4021ShiharaiHohoHenko
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />) AS DbT4022ShiharaiHohoHenkoTaino
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_kanriKubun" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4022ShiharaiHohoHenkoTaino."dbT4022ShiharaiHohoHenkoTaino_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.noDeleted_DbT4024ShiharaiHohoHenkoSashitome" />) AS DbT4024ShiharaiHohoHenkoSashitome
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_hihokenshaNo" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_kanriKubun" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4024ShiharaiHohoHenkoSashitome."dbT4024ShiharaiHohoHenkoSashitome_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.noDeleted_DbT4025ShiharaiHohoHenkoGengaku" />) AS DbT4025ShiharaiHohoHenkoGengaku
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_hihokenshaNo" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_kanriKubun" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4025ShiharaiHohoHenkoGengaku."dbT4025ShiharaiHohoHenkoGengaku_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4026ShiharaiHohoHenkoGengakuMeisaiMapper.noDeleted_DbT4026ShiharaiHohoHenkoGengakuMeisai" />) AS DbT4026ShiharaiHohoHenkoGengakuMeisai
+        ON
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_hihokenshaNo" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_hihokenshaNo" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_kanriKubun" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_kanriKubun" and
+        DbT4021ShiharaiHohoHenko."dbT4021ShiharaiHohoHenko_rirekiNo" = DbT4026ShiharaiHohoHenkoGengakuMeisai."dbT4026ShiharaiHohoHenkoGengakuMeisai_rirekiNo"
+        <where>
+            <if test="uses被保険者番号">
+                AND DbT4025ShiharaiHohoHenkoGengaku."dbT4021ShiharaiHohoHenko_hihokenshaNo" = #{被保険者番号}
+            </if>
+            <if test="uses管理区分">
+                AND DbT4025ShiharaiHohoHenkoGengaku."dbT4021ShiharaiHohoHenko_kanriKubun" = #{管理区分}
+            </if>
+            <if test="uses履歴番号">
+                AND DbT4025ShiharaiHohoHenkoGengaku."dbT4021ShiharaiHohoHenko_rirekiNo" = #{履歴番号}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_ShiharaiHohoHenkoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity" autoMapping="true">
+        <id property="支払方法変更Entity.hihokenshaNo" column="dbT4021ShiharaiHohoHenko_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="支払方法変更Entity.kanriKubun" column="dbT4021ShiharaiHohoHenko_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="支払方法変更Entity.rirekiNo" column="dbT4021ShiharaiHohoHenko_rirekiNo" />
+        <association property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
+        <collection property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
+        <collection property="支払方法変更差止Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
+        <collection property="介護期別Entity" resultMap="resultMap_IShiharaiHohoHenkoGengakuEntity"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_IShiharaiHohoHenkoGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoGengakuEntity" autoMapping="true">
+        <result property="支払方法変更減額Entity.hihokenshaNo" column="dbT4025ShiharaiHohoHenkoGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="支払方法変更減額Entity.kanriKubun" column="dbT4025ShiharaiHohoHenkoGengaku_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支払方法変更減額Entity.rirekiNo" column="dbT4025ShiharaiHohoHenkoGengaku_rirekiNo"/>
+        <association property="支払方法変更減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.ResultMap_DbT4025ShiharaiHohoHenkoGengakuEntity"/>
+        <collection property="支払方法変更減額明細Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4026ShiharaiHohoHenkoGengakuMeisaiMapper.ResultMap_DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity"/>
+    </resultMap>
 </mapper>

@@ -46,7 +46,7 @@ and open the template in the editor.
         Fuka."fukaNendo" DESC
     </select>  
     
-    <select resultOrdered="true" id="select調定共通ForUpdate" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
+    <select resultOrdered="true" id="select調定共通ForUpdate" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
         select distinct ChoteiKyotsu.*
         from rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu 
         INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu 

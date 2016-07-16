@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokane
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
  * 本算定異動（過年度）賦課確定（削除込）用マッパーです。

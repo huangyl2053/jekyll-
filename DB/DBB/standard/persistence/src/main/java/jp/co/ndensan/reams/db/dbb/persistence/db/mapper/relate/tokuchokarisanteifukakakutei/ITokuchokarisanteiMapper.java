@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisante
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
  *

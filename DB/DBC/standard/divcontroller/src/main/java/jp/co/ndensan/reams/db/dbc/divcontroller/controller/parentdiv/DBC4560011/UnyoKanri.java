@@ -30,8 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class UnyoKanri {
 
-    private static final RString CODE_処理済 = new RString("2");
-    private static final RString CODE_再処理前 = new RString("1");
+    private static final RString CODE_処理済 = new RString("1");
+    private static final RString CODE_再処理前 = new RString("2");
     private static final RString を使用して更新 = new RString("を使用して更新");
 
     /**

@@ -313,7 +313,7 @@ public class MainPanelHandler {
      * @param 停止事由コード RString
      */
     public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ,
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ,
             YMDHMS 停止日時, RString 停止事由コード) {
         dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ, 停止日時, 停止事由コード);
     }
@@ -672,15 +672,15 @@ public class MainPanelHandler {
     }
 
     private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
-            jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ,
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ,
             YMDHMS 停止日時, RString 停止事由コード) {
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
         RString 特別徴収停止事由コード = null;
         RDate システム日付 = RDate.getNowDate();
-        jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法_変更後
-                = new jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho(
+        jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法_変更後
+                = new jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho(
                         賦課年度, 被保険者番号, 徴収方法データ.get履歴番号() + 1);
         RStringBuilder builder = new RStringBuilder(賦課年度.plusYear(1).toString());
         RString 賦課年度日付 = builder.append(RSTR_0331).toRString();

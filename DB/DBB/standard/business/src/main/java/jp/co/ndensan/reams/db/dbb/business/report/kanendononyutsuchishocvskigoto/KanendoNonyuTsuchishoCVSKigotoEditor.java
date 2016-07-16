@@ -156,7 +156,14 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
                 source.keisanMeisaishoGenmenGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免額().toString());
             }
             source.keisanMeisaishoNendo = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
-            source.keisanMeisaishoNendo3 = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
+            source.keisanMeisaishoNendoBun = item.get編集後本算定通知書共通情報().get調定年度_年度あり();
+            source.keisanMeisaishoNendo3 = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get調定年度_年度なし());
+            if (item.get編集後本算定通知書共通情報().get納付済額_未到来期含む() != null) {
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get納付済額_未到来期含む().toString());
+            }
+            if (item.get編集後本算定通知書共通情報().get今後納付すべき額() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額().toString());
+            }
 
             this.更正後情報相関設定(source);
 
@@ -186,7 +193,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
         }
         source.pageCount2 = new RString(renban + "-2");
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.renban = new RString(renban).padZeroToLeft(INT_6);
+            source.renban = new RString(String.valueOf(renban));
         }
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
@@ -359,7 +366,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
 
         if (item.get編集後本算定通知書共通情報().get更正後() != null) {
 
-            source.keisanMeisaishoShotokuDankai = item.get編集後本算定通知書共通情報().get更正後().get保険料段階();
+            source.keisanMeisaishoShotokuDankai = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get更正後().get保険料段階());
             if (item.get編集後本算定通知書共通情報().get更正後().get保険料率() != null) {
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
@@ -371,9 +378,12 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
                 source.kaisanMeisaishoFuchoGokeiGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get普通徴収額合計().toString());
             }
             source.keisanMeisaishoKikanShuryo = item.get編集後本算定通知書共通情報().get更正後().get期間_至();
-            source.keisanMeisaishoTsukisu = new RString(item.get編集後本算定通知書共通情報().get更正後().get月数());
+            source.keisanMeisaishoTsukisu = item.get編集後本算定通知書共通情報().get更正後().get月数_ケ月();
             if (item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額() != null) {
-                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額().toString());
+                source.keisanMeisaishoCalHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額().toString());
+            }
+            if (item.get編集後本算定通知書共通情報().get更正後().get確定保険料_年額() != null) {
+                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get確定保険料_年額().toString());
             }
         }
     }

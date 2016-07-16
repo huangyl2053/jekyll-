@@ -63,7 +63,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
         int 領収書連番 = 1;
         int 連番 = 1;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
-            if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
+            if (null == 納入通知書期情報.get納付額() || 納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
                 continue;
             }
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor editor

@@ -2223,8 +2223,8 @@
         (
           SELECT
           <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
-          <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+          <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+          <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
           FROM
           (
             SELECT
@@ -4295,7 +4295,7 @@
         <result property="fuSaishutsuKampuGaku" column="dbT2002FukaBefore_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
 
-    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2003KibetsuBefore_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2003KibetsuBefore_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="tsuchishoNo" column="dbT2003KibetsuBefore_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
@@ -4313,7 +4313,7 @@
         <result property="choteiId" column="dbT2003KibetsuBefore_choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
-    <resultMap id="ResultMap_UrT0705ChoteiKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" autoMapping="true">
+    <resultMap id="ResultMap_UrT0705ChoteiKyotsuEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity" autoMapping="true">
         <id property="choteiId" column="urT0705ChoteiKyotsuBefore_choteiId" />
         <result property="insertDantaiCd" column="urT0705ChoteiKyotsuBefore_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="urT0705ChoteiKyotsuBefore_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -4367,8 +4367,8 @@
     <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
         <id property="介護期別Entity.choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="介護期別Entity.ki" column="dbT2003Kibetsu_ki" />
-        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
-        <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+        <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_TmpIdoGennendoKarisantei" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidogennendotsuchisyoikatsuhako.TmpIdoGennendoKarisanteiEntity"
@@ -4378,7 +4378,7 @@
         <id column="dbT2002Fuka_tsuchishoNo"/>
         <id column="dbT2002Fuka_rirekiNo" />
         <association property="賦課の情報_更正後" resultMap="resultMap_FukaInfo"/>
-        <association property="徴収方法" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
+        <association property="徴収方法" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="今年度賦課情報" resultMap="resultMap_FukaInfobefore"/>
         <association property="対象者_追加含む_情報_更正前" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>

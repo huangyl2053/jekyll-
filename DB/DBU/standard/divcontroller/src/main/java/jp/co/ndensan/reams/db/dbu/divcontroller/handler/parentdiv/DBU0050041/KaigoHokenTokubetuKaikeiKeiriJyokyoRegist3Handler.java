@@ -726,7 +726,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(実質的な収支についてデータLst);
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             List<KaigoHokenJigyoHokokuNenpo> 修正データLst = get修正データ(insuranceInfEntity);
-            介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データLst);
+            介護保険特別会計経理状況登録Manager.updateJigyoHokokuNenpoData(修正データLst);
         }
     }
 

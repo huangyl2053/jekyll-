@@ -169,6 +169,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends NonyuTsuchish
             return true;
         }
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+            if (null == 納入通知書期情報.get納付額()) {
+                continue;
+            }
             if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) > 0) {
                 return false;
             }
