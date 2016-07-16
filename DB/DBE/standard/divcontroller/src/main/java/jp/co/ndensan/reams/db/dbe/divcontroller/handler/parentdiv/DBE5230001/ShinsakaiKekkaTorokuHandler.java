@@ -385,6 +385,7 @@ public class ShinsakaiKekkaTorokuHandler {
         }
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
+        div.getKobetsuHyojiArea().setHasData(new RString("1"));
         div.setHdnHasChanged(getSelectItem());
     }
 
