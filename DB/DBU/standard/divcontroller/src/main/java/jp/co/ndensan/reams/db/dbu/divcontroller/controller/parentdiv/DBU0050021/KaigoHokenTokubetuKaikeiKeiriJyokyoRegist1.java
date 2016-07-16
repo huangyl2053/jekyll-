@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -220,8 +221,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (!ResponseHolder.isReRequest()) {
             return getResponseData_btnSave(div);
         }
-        getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
-        return ResponseData.of(div).setState(DBU0050021StateName.com);
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
+            return ResponseData.of(div).setState(DBU0050021StateName.com);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div>
@@ -301,7 +307,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        getHandler(div).onClick_btnConfirm();
+        getHandler(div).onClick_btnConfirm(get引き継ぎデータ(div));
         return ResponseData.of(div).respond();
     }
 

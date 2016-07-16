@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class PublishReportProcess extends BatchProcessBase<HenkouJohoEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohokanrilist.selectTaishoshaJoho");
+            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohokanrilist."
+                    + "IShiharaiHohoKanriListMapper.selectTaishoshaJoho");
     private PublishReportProcessParameter processParameter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
