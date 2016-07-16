@@ -17,25 +17,29 @@ import jp.co.ndensan.reams.db.dbd.business.report.GemmenGengakuNinteishoKetteiTs
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.HakkoRirekiKoyuJohoDBD100018;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.HakkoRirekiKoyuJohoDBD100020;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.DBD1090002StateName;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.dgChohyoSentaku_Row;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoHandler.HihokenshashoHakkoTaishosha;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoValidationHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainHandler.GemmenGengakuShoHakkoEnum;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -44,9 +48,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @reamsid_L DBD-3540-010 xuyue
  */
-public class HihokenshashoHakkoTaishoshaJoho {
+public class GemmenGengakuShoHakkoMain {
 
-    public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> onLoad(HihokenshashoHakkoTaishoshaJohoDiv div) {
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onLoad(GemmenGengakuShoHakkoMainDiv div) {
+        viewStateKeyの廃棄();
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
@@ -101,86 +106,118 @@ public class HihokenshashoHakkoTaishoshaJoho {
         if (is利用者負担額減免の情報存在) {
             ArrayList<RiyoshaFutangakuGengaku> list = getHandler(div).get利用者負担額減免の情報(被保険者番号);
             getHandler(div).利用者負担額減額を選択する場合の設定(list, 被保険者番号);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.利用者負担額減額List, list);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.減免減額種類, GemmenGengakuShurui.利用者負担額減額.get名称());
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.利用者負担額減額List, list);
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.利用者負担額減額.get名称());
 
         } else if (is負担限度額認定の情報存在) {
             ArrayList<FutanGendogakuNintei> list = getHandler(div).get負担限度額認定の情報(被保険者番号);
             getHandler(div).負担限度額認定を選択する場合の設定(list, 被保険者番号);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.負担限度額認定List, list);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.減免減額種類, GemmenGengakuShurui.負担限度額認定.get名称());
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.負担限度額認定List, list);
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.負担限度額認定.get名称());
 
         } else if (is社会福祉法人等利用者負担軽減の情報存在) {
             ArrayList<ShakaifukuRiyoshaFutanKeigen> list = getHandler(div).get社会福祉法人等利用者負担軽減の情報(被保険者番号);
             getHandler(div).社会福祉法人等利用者負担軽減を選択する場合の設定(list, 被保険者番号);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.社会福祉法人等利用者負担軽減List, list);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.減免減額種類, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称());
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.社会福祉法人等利用者負担軽減List, list);
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称());
 
         } else if (is訪問介護利用者負担額減額の情報存在) {
             ArrayList<HomonKaigoRiyoshaFutangakuGengaku> list = getHandler(div).get訪問介護利用者負担額減額の情報(被保険者番号);
             getHandler(div).訪問介護利用者負担額減額を選択する場合の設定(list, 被保険者番号);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.訪問介護利用者負担額減額List, list);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.減免減額種類, GemmenGengakuShurui.訪問介護利用者負担額減額.get名称());
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.訪問介護利用者負担額減額List, list);
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.訪問介護利用者負担額減額.get名称());
 
         } else if (is特別地域加算減免の情報存在) {
             ArrayList<TokubetsuchiikiKasanGemmen> list = getHandler(div).get特別地域加算減免の情報(被保険者番号);
             getHandler(div).特別地域加算減免を選択する場合の設定(list, 被保険者番号);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.特別地域加算減免List, list);
-            ViewStateHolder.put(HihokenshashoHakkoTaishosha.減免減額種類, GemmenGengakuShurui.特別地域加算減免.get名称());
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.特別地域加算減免List, list);
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.特別地域加算減免.get名称());
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), true);
         }
 
         getHandler(div).initialize(識別コード, 被保険者番号);
-        return ResponseData.of(div).setState(DBD1090002StateName.利用者負担額減免);
+        return ResponseData.of(div).setState(DBD1090002StateName.Default);
+    }
+
+    /**
+     * 世帯情報を表示するボタンをクッリク
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onClick_btnOutputSetaiJoho(
+            GemmenGengakuShoHakkoMainDiv div) {
+        if (ViewStateHolder.get(GemmenGengakuShoHakkoEnum.is世帯初期化, Boolean.class) == null
+                || !ViewStateHolder.get(GemmenGengakuShoHakkoEnum.is世帯初期化, Boolean.class)) {
+            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+            div.getSetaiShotokuShokai().getSetaiJoho().getCcdSetaiShotokuIchiran().
+                    initialize(識別コード, FlexibleDate.getNowDate(), new HizukeConfig().get所得年度(), YMDHMS.now());
+            ViewStateHolder.put(GemmenGengakuShoHakkoEnum.is世帯初期化, true);
+        }
+
+        return ResponseData.of(div).setState(DBD1090002StateName.setaiInfo);
+    }
+
+    /**
+     * 帳票発行へ戻るボタンをクッリク
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onClick_btnReturnChohyoHakko(
+            GemmenGengakuShoHakkoMainDiv div) {
+        return ResponseData.of(div).setState(DBD1090002StateName.Default);
     }
 
     /**
      * 発行帳票グリッドを選択する処理です。
      *
-     * @param div HihokenshashoHakkoTaishoshaJohoDiv
+     * @param div GemmenGengakuShoHakkoEnumJohoDiv
      * @return レスポンスデータ
      */
-    public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> onClick_dgChohyoSentaku(HihokenshashoHakkoTaishoshaJohoDiv div) {
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onClick_dgChohyoSentaku(GemmenGengakuShoHakkoMainDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
-        RString 表示名 = div.getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getActiveRow().getTxtChohyoSentaku();
-        ViewStateHolder.put(HihokenshashoHakkoTaishosha.減免減額種類, 表示名);
+        RString 表示名 = div.getHakkoChohyoSentaku().getTsuchishoSakuseiKobetsu().getDgChohyoSentaku().getActiveRow().getTxtChohyoSentaku();
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, 表示名);
         if (GemmenGengakuShurui.利用者負担額減額.get名称().equals(表示名)) {
             ArrayList<RiyoshaFutangakuGengaku> list
-                    = ViewStateHolder.get(HihokenshashoHakkoTaishosha.利用者負担額減額List, ArrayList.class);
+                    = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.利用者負担額減額List, ArrayList.class);
             if (list == null) {
                 list = getHandler(div).get利用者負担額減免の情報(被保険者番号);
-                ViewStateHolder.put(HihokenshashoHakkoTaishosha.利用者負担額減額List, list);
+                ViewStateHolder.put(GemmenGengakuShoHakkoEnum.利用者負担額減額List, list);
             }
             getHandler(div).利用者負担額減額を選択する場合の設定(list, 被保険者番号);
         } else if (GemmenGengakuShurui.負担限度額認定.get名称().equals(表示名)) {
-            ArrayList<FutanGendogakuNintei> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.負担限度額認定List, ArrayList.class);
+            ArrayList<FutanGendogakuNintei> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.負担限度額認定List, ArrayList.class);
             if (list == null) {
                 list = getHandler(div).get負担限度額認定の情報(被保険者番号);
-                ViewStateHolder.put(HihokenshashoHakkoTaishosha.負担限度額認定List, list);
+                ViewStateHolder.put(GemmenGengakuShoHakkoEnum.負担限度額認定List, list);
             }
             getHandler(div).負担限度額認定を選択する場合の設定(list, 被保険者番号);
         } else if (GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称().equals(表示名)) {
             ArrayList<ShakaifukuRiyoshaFutanKeigen> list
-                    = ViewStateHolder.get(HihokenshashoHakkoTaishosha.社会福祉法人等利用者負担軽減List, ArrayList.class);
+                    = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.社会福祉法人等利用者負担軽減List, ArrayList.class);
             if (list == null) {
                 list = getHandler(div).get社会福祉法人等利用者負担軽減の情報(被保険者番号);
-                ViewStateHolder.put(HihokenshashoHakkoTaishosha.社会福祉法人等利用者負担軽減List, list);
+                ViewStateHolder.put(GemmenGengakuShoHakkoEnum.社会福祉法人等利用者負担軽減List, list);
             }
             getHandler(div).社会福祉法人等利用者負担軽減を選択する場合の設定(list, 被保険者番号);
         } else if (GemmenGengakuShurui.訪問介護利用者負担額減額.get名称().equals(表示名)) {
             ArrayList<HomonKaigoRiyoshaFutangakuGengaku> list
-                    = ViewStateHolder.get(HihokenshashoHakkoTaishosha.訪問介護利用者負担額減額List, ArrayList.class);
+                    = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.訪問介護利用者負担額減額List, ArrayList.class);
             if (list == null) {
                 list = getHandler(div).get訪問介護利用者負担額減額の情報(被保険者番号);
-                ViewStateHolder.put(HihokenshashoHakkoTaishosha.訪問介護利用者負担額減額List, list);
+                ViewStateHolder.put(GemmenGengakuShoHakkoEnum.訪問介護利用者負担額減額List, list);
             }
             getHandler(div).訪問介護利用者負担額減額を選択する場合の設定(list, 被保険者番号);
         } else if (GemmenGengakuShurui.特別地域加算減免.get名称().equals(表示名)) {
-            ArrayList<TokubetsuchiikiKasanGemmen> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.特別地域加算減免List, ArrayList.class);
+            ArrayList<TokubetsuchiikiKasanGemmen> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.特別地域加算減免List, ArrayList.class);
             if (list == null) {
                 list = getHandler(div).get特別地域加算減免の情報(被保険者番号);
-                ViewStateHolder.put(HihokenshashoHakkoTaishosha.特別地域加算減免List, list);
+                ViewStateHolder.put(GemmenGengakuShoHakkoEnum.特別地域加算減免List, list);
             }
             getHandler(div).特別地域加算減免を選択する場合の設定(list, 被保険者番号);
         }
@@ -193,21 +230,20 @@ public class HihokenshashoHakkoTaishoshaJoho {
      * @param div FutanGendogakuNinteiKousinTsuchisyoKobetHakkoDiv
      * @return ResponseData
      */
-    public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> onClick_btnZenrireki(HihokenshashoHakkoTaishoshaJohoDiv div) {
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onClick_btnZenrireki(GemmenGengakuShoHakkoMainDiv div) {
 
         div.getBtnOutputAtoRireki().setDisabled(false);
 
-        RString 表示名 = ViewStateHolder.get(HihokenshashoHakkoTaishosha.減免減額種類, RString.class);
+        RString 表示名 = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.減免減額種類, RString.class);
         if (GemmenGengakuShurui.利用者負担額減額.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getRiyoshaFutanGenmenInfoIndex().toString()) - 1;
             if (listIndex == 0) {
                 div.getBtnOutputMaeRireki().setDisabled(true);
             }
             div.setRiyoshaFutanGenmenInfoIndex(new RString(listIndex));
-            ArrayList<RiyoshaFutangakuGengaku> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.利用者負担額減額List, ArrayList.class);
+            ArrayList<RiyoshaFutangakuGengaku> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.利用者負担額減額List, ArrayList.class);
 
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("利用者負担額減額・免除等認定証"),
-                    new RString("利用者負担額減額・免除認定決定通知書"));
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("利用者負担額減額・免除等認定証"));
             getHandler(div).set利用者負担額減免エリア(list.get(listIndex));
 
         } else if (GemmenGengakuShurui.負担限度額認定.get名称().equals(表示名)) {
@@ -216,9 +252,9 @@ public class HihokenshashoHakkoTaishoshaJoho {
                 div.getBtnOutputMaeRireki().setDisabled(true);
             }
             div.setFutanGendogakuNinteiIndex(new RString(listIndex));
-            ArrayList<FutanGendogakuNintei> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.負担限度額認定List, ArrayList.class);
+            ArrayList<FutanGendogakuNintei> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.負担限度額認定List, ArrayList.class);
 
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("負担限度額認定証"), new RString("負担限度額決定通知書"));
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("負担限度額認定証"));
             getHandler(div).set負担限度額認定エリア(list.get(listIndex));
         } else if (GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getShafukuHojinToRiyushaFutanKeigenIndex().toString()) - 1;
@@ -226,10 +262,9 @@ public class HihokenshashoHakkoTaishoshaJoho {
                 div.getBtnOutputMaeRireki().setDisabled(true);
             }
             div.setShafukuHojinToRiyushaFutanKeigenIndex(new RString(listIndex));
-            ArrayList<ShakaifukuRiyoshaFutanKeigen> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.社会福祉法人等利用者負担軽減List, ArrayList.class);
+            ArrayList<ShakaifukuRiyoshaFutanKeigen> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.社会福祉法人等利用者負担軽減List, ArrayList.class);
 
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("社会福祉法人等利用者負担軽減確認証"),
-                    new RString("社会福祉法人等利用者負担軽減対象決定通知書"));
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("社会福祉法人等利用者負担軽減確認証"));
             getHandler(div).set社会福祉法人等利用者負担軽減エリア(list.get(listIndex));
 
         } else if (GemmenGengakuShurui.訪問介護利用者負担額減額.get名称().equals(表示名)) {
@@ -238,10 +273,9 @@ public class HihokenshashoHakkoTaishoshaJoho {
                 div.getBtnOutputMaeRireki().setDisabled(true);
             }
             div.setHomonKaigoRiyoshaFutangakuGengakuIndex(new RString(listIndex));
-            ArrayList<HomonKaigoRiyoshaFutangakuGengaku> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.訪問介護利用者負担額減額List, ArrayList.class);
+            ArrayList<HomonKaigoRiyoshaFutangakuGengaku> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.訪問介護利用者負担額減額List, ArrayList.class);
 
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("訪問介護等利用者負担額減額認定証"),
-                    new RString("訪問介護等利用者負担額減額決定通知書"));
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("訪問介護等利用者負担額減額認定証"));
             getHandler(div).set訪問介護利用者負担額減額エリア(list.get(listIndex));
         } else if (GemmenGengakuShurui.特別地域加算減免.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getTokubetsuChilkiKasanGenmenIndex().toString()) - 1;
@@ -249,10 +283,9 @@ public class HihokenshashoHakkoTaishoshaJoho {
                 div.getBtnOutputMaeRireki().setDisabled(true);
             }
             div.setTokubetsuChilkiKasanGenmenIndex(new RString(listIndex));
-            ArrayList<TokubetsuchiikiKasanGemmen> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.特別地域加算減免List, ArrayList.class);
+            ArrayList<TokubetsuchiikiKasanGemmen> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.特別地域加算減免List, ArrayList.class);
 
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("特別地域加算に係る訪問介護利用者負担減額確認証"),
-                    new RString("特別地域加算に係る訪問介護利用者負担減額決定通知書"));
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("特別地域加算に係る訪問介護利用者負担減額確認証"));
             getHandler(div).set特別地域加算減免エリア(list.get(listIndex));
         }
 
@@ -262,19 +295,18 @@ public class HihokenshashoHakkoTaishoshaJoho {
     /**
      * 「後履歴を表示する」ボタンをクリックする
      *
-     * @param div HihokenshashoHakkoTaishoshaJohoDiv
+     * @param div GemmenGengakuShoHakkoEnumJohoDiv
      * @return ResponseData
      */
-    public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> onClick_btnGorireki(HihokenshashoHakkoTaishoshaJohoDiv div) {
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onClick_btnGorireki(GemmenGengakuShoHakkoMainDiv div) {
 
         div.getBtnOutputMaeRireki().setDisabled(false);
 
-        RString 表示名 = ViewStateHolder.get(HihokenshashoHakkoTaishosha.減免減額種類, RString.class);
+        RString 表示名 = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.減免減額種類, RString.class);
         if (GemmenGengakuShurui.利用者負担額減額.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getRiyoshaFutanGenmenInfoIndex().toString()) + 1;
-            ArrayList<RiyoshaFutangakuGengaku> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.利用者負担額減額List, ArrayList.class);
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("利用者負担額減額・免除等認定証"),
-                    new RString("利用者負担額減額・免除認定決定通知書"));
+            ArrayList<RiyoshaFutangakuGengaku> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.利用者負担額減額List, ArrayList.class);
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("利用者負担額減額・免除等認定証"));
             getHandler(div).set利用者負担額減免エリア(list.get(listIndex));
 
             if (listIndex == list.size() - 1) {
@@ -283,8 +315,8 @@ public class HihokenshashoHakkoTaishoshaJoho {
             div.setRiyoshaFutanGenmenInfoIndex(new RString(listIndex));
         } else if (GemmenGengakuShurui.負担限度額認定.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getFutanGendogakuNinteiIndex().toString()) + 1;
-            ArrayList<FutanGendogakuNintei> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.負担限度額認定List, ArrayList.class);
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("負担限度額認定証"), new RString("負担限度額決定通知書"));
+            ArrayList<FutanGendogakuNintei> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.負担限度額認定List, ArrayList.class);
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("負担限度額認定証"));
             getHandler(div).set負担限度額認定エリア(list.get(listIndex));
 
             if (listIndex == list.size() - 1) {
@@ -293,9 +325,8 @@ public class HihokenshashoHakkoTaishoshaJoho {
             div.setFutanGendogakuNinteiIndex(new RString(listIndex));
         } else if (GemmenGengakuShurui.社会福祉法人等利用者負担軽減.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getShafukuHojinToRiyushaFutanKeigenIndex().toString()) + 1;
-            ArrayList<ShakaifukuRiyoshaFutanKeigen> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.社会福祉法人等利用者負担軽減List, ArrayList.class);
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("社会福祉法人等利用者負担軽減確認証"),
-                    new RString("社会福祉法人等利用者負担軽減対象決定通知書"));
+            ArrayList<ShakaifukuRiyoshaFutanKeigen> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.社会福祉法人等利用者負担軽減List, ArrayList.class);
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("社会福祉法人等利用者負担軽減確認証"));
             getHandler(div).set社会福祉法人等利用者負担軽減エリア(list.get(listIndex));
 
             if (listIndex == list.size() - 1) {
@@ -304,9 +335,8 @@ public class HihokenshashoHakkoTaishoshaJoho {
             div.setShafukuHojinToRiyushaFutanKeigenIndex(new RString(listIndex));
         } else if (GemmenGengakuShurui.訪問介護利用者負担額減額.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getHomonKaigoRiyoshaFutangakuGengakuIndex().toString()) + 1;
-            ArrayList<HomonKaigoRiyoshaFutangakuGengaku> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.訪問介護利用者負担額減額List, ArrayList.class);
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("訪問介護等利用者負担額減額認定証"),
-                    new RString("訪問介護等利用者負担額減額決定通知書"));
+            ArrayList<HomonKaigoRiyoshaFutangakuGengaku> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.訪問介護利用者負担額減額List, ArrayList.class);
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("訪問介護等利用者負担額減額認定証"));
             getHandler(div).set訪問介護利用者負担額減額エリア(list.get(listIndex));
 
             if (listIndex == list.size() - 1) {
@@ -315,9 +345,8 @@ public class HihokenshashoHakkoTaishoshaJoho {
             div.setHomonKaigoRiyoshaFutangakuGengakuIndex(new RString(listIndex));
         } else if (GemmenGengakuShurui.特別地域加算減免.get名称().equals(表示名)) {
             int listIndex = Integer.valueOf(div.getTokubetsuChilkiKasanGenmenIndex().toString()) + 1;
-            ArrayList<TokubetsuchiikiKasanGemmen> list = ViewStateHolder.get(HihokenshashoHakkoTaishosha.特別地域加算減免List, ArrayList.class);
-            getHandler(div).set認定証と通知書(list.get(listIndex).get決定区分(), new RString("特別地域加算に係る訪問介護利用者負担減額確認証"),
-                    new RString("特別地域加算に係る訪問介護利用者負担減額決定通知書"));
+            ArrayList<TokubetsuchiikiKasanGemmen> list = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.特別地域加算減免List, ArrayList.class);
+            getHandler(div).set認定証(list.get(listIndex).get決定区分(), new RString("特別地域加算に係る訪問介護利用者負担減額確認証"));
             getHandler(div).set特別地域加算減免エリア(list.get(listIndex));
 
             if (listIndex == list.size() - 1) {
@@ -332,10 +361,10 @@ public class HihokenshashoHakkoTaishoshaJoho {
     /**
      * 「発行」ボタン実行前、必須入力チェックを行います。
      *
-     * @param div HihokenshashoHakkoTaishoshaJohoDiv
+     * @param div GemmenGengakuShoHakkoEnumJohoDiv
      * @return レスポンスデータ
      */
-    public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> onClick_validate(HihokenshashoHakkoTaishoshaJohoDiv div) {
+    public ResponseData<GemmenGengakuShoHakkoMainDiv> onClick_validate(GemmenGengakuShoHakkoMainDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler().validateFor出力チェックボックス(pairs, div);
         getValidationHandler().validateFor申請情報の存在(pairs, div);
@@ -357,10 +386,10 @@ public class HihokenshashoHakkoTaishoshaJoho {
     /**
      * 「発行」ボタンをクリックする
      *
-     * @param div HihokenshashoHakkoTaishoshaJohoDiv
+     * @param div GemmenGengakuShoHakkoEnumJohoDiv
      * @return レスポンスデータ
      */
-    public ResponseData<SourceDataCollection> onClick_btnPublish(HihokenshashoHakkoTaishoshaJohoDiv div) {
+    public ResponseData<SourceDataCollection> onClick_btnPublish(GemmenGengakuShoHakkoMainDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
 
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -372,7 +401,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
         RString 減免減額種類 = RString.EMPTY;
         List<RString> 帳票タイプリスト = new ArrayList<>();
         HashMap<Code, RString> hashMap = new HashMap();
-        RString 表示名 = ViewStateHolder.get(HihokenshashoHakkoTaishosha.減免減額種類, RString.class);
+        RString 表示名 = ViewStateHolder.get(GemmenGengakuShoHakkoEnum.減免減額種類, RString.class);
         if (GemmenGengakuShurui.利用者負担額減額.get名称().equals(表示名)) {
             減免減額種類 = GemmenGengakuShurui.利用者負担額減額.get名称();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), 被保険者番号.getColumnValue());
@@ -443,12 +472,22 @@ public class HihokenshashoHakkoTaishoshaJoho {
         return response;
     }
 
-    private HihokenshashoHakkoTaishoshaJohoHandler getHandler(HihokenshashoHakkoTaishoshaJohoDiv div) {
-        return new HihokenshashoHakkoTaishoshaJohoHandler(div);
+    private void viewStateKeyの廃棄() {
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.is世帯初期化, false);
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, null);
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.利用者負担額減額List, null);
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.負担限度額認定List, null);
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.社会福祉法人等利用者負担軽減List, null);
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.訪問介護利用者負担額減額List, null);
+        ViewStateHolder.put(GemmenGengakuShoHakkoEnum.特別地域加算減免List, null);
     }
 
-    private HihokenshashoHakkoTaishoshaJohoValidationHandler getValidationHandler() {
-        return new HihokenshashoHakkoTaishoshaJohoValidationHandler();
+    private GemmenGengakuShoHakkoMainHandler getHandler(GemmenGengakuShoHakkoMainDiv div) {
+        return new GemmenGengakuShoHakkoMainHandler(div);
+    }
+
+    private GemmenGengakuShoHakkoMainValidationHandler getValidationHandler() {
+        return new GemmenGengakuShoHakkoMainValidationHandler();
     }
 
 }

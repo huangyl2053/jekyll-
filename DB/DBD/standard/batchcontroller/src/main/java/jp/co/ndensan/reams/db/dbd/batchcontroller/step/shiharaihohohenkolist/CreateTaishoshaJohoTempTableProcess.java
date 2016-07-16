@@ -35,7 +35,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class CreateTaishoshaJohoTempTableProcess extends BatchProcessBase<HihokenshaNo> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohokanrilist.selectTaishoshaJoho");
+            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohokanrilist."
+                    + "IShiharaiHohoKanriListMapper.selectTaishoshaJoho");
     private CreateTaishoshaJohoTempTableProcessParameter processParamter;
     private RString 出力順;
     private LasdecCode 市町村コード;

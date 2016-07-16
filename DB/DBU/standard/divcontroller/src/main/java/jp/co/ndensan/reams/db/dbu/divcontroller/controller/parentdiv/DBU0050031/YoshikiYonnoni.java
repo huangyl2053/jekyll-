@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.Yosh
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -101,6 +102,7 @@ public class YoshikiYonnoni {
     private static final RString 座標21_1 = new RString("21_1");
     private static final RString 集計番号_0200 = new RString("0200");
     private static final Code CODE_0200 = new Code("0200");
+    private static final RString 報告月 = new RString("00");
 
     /**
      * 画面初期化処理です。
@@ -136,7 +138,6 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
             } else if (UPDATE.equals(insuranceInf.get処理フラグ())) {
                 set詳細データエリア(list.get(0).get詳細データエリア(), div);
-                div.getKanryoMessage().setVisible(false);
                 div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
                 div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
                 div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
@@ -149,7 +150,6 @@ public class YoshikiYonnoni {
                 div.setShoriMode(内部処理モード_修正);
             } else {
                 set詳細データエリア(list.get(0).get詳細データエリア(), div);
-                div.getKanryoMessage().setVisible(false);
                 this.btnDisabled(div, insuranceInf);
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
@@ -194,7 +194,6 @@ public class YoshikiYonnoni {
                 shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             }
-            div.getKanryoMessage().setVisible(false);
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
             div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
             div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
@@ -238,12 +237,12 @@ public class YoshikiYonnoni {
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_修正);
             } else {
-                this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
             }
 
         } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
                 && this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
         } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_削除);
         }
@@ -265,11 +264,11 @@ public class YoshikiYonnoni {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_修正);
             } else {
 
-                this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
             }
         } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
                 && this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
         } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_削除);
         }
@@ -461,12 +460,11 @@ public class YoshikiYonnoni {
                         insuranceInf.get市町村コード(),
                         insuranceInf.get表番号(),
                         CODE_0200);
+                div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                        new RString(UrInformationMessages.正常終了.getMessage().replace("削除").evaluate()), RString.EMPTY, RString.EMPTY, true);
             }
         }
 
-        div.getKanryoMessage().setVisible(true);
-        div.getYoshikiButtonArea().setVisible(false);
-        div.getYoshikiYonnoniMeisai().setVisible(false);
         return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
@@ -549,6 +547,15 @@ public class YoshikiYonnoni {
 
             this.修正データの取得_１(修正データ, list, i, div);
             this.修正データの取得_２(修正データ, list, i, div);
+            修正データ.set報告年(insuranceInf.get報告年());
+            修正データ.set報告月(報告月);
+            修正データ.set集計対象年(insuranceInf.get集計対象年());
+            修正データ.set集計対象月(報告月);
+            修正データ.set統計対象区分(insuranceInf.get統計対象区分());
+            修正データ.set表番号(new Code("09"));
+            修正データ.set集計番号(CODE_0200);
+            修正データ.set集計単位(new Code("1"));
+            修正データ.set市町村コード(insuranceInf.get市町村コード());
         }
 
         return 修正データ;
@@ -617,6 +624,17 @@ public class YoshikiYonnoni {
         return ResponseData.of(div).respond();
     }
 
+    private boolean is変更あり(List<KaigoHokenJigyoHokokuNenpo> list, int i, RString 座標, Decimal value) {
+        if (list.get(i).get詳細データエリア().get(座標) == null) {
+            if (value != null) {
+                return true;
+            }
+        } else if (!list.get(i).get詳細データエリア().get(座標).equals(value)) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 修正データ１の取得する。
      *
@@ -626,77 +644,60 @@ public class YoshikiYonnoni {
             List<KaigoHokenJigyoHokokuNenpo> list,
             int i,
             YoshikiYonnoniDiv div) {
-        if (list.get(i).get詳細データエリア().get(座標1_1) != null
-                && !list.get(i).get詳細データエリア().get(座標1_1).equals(div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue())) {
+        if (is変更あり(list, i, 座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標1_2) != null
-                && !list.get(i).get詳細データエリア().get(座標1_2).equals(div.getYoshikiYonnoniMeisai().getTxtsomu().getValue())) {
+        if (is変更あり(list, i, 座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue())) {
             修正データ.get詳細データエリア().put(座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標2_1) != null
-                && !list.get(i).get詳細データエリア().get(座標2_1).equals(div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue())) {
+        if (is変更あり(list, i, 座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標2_2) != null
-                && !list.get(i).get詳細データエリア().get(座標2_2).equals(div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue())) {
+        if (is変更あり(list, i, 座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue())) {
             修正データ.get詳細データエリア().put(座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標3_1) != null
-                && !list.get(i).get詳細データエリア().get(座標3_1).equals(div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue())) {
+        if (is変更あり(list, i, 座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標3_2) != null
-                && !list.get(i).get詳細データエリア().get(座標3_2).equals(div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue())) {
+        if (is変更あり(list, i, 座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue())) {
             修正データ.get詳細データエリア().put(座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標4_1) != null
-                && !list.get(i).get詳細データエリア().get(座標4_1).equals(div.getYoshikiYonnoniMeisai().getTxtjiki().getValue())) {
+        if (is変更あり(list, i, 座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue())) {
             修正データ.get詳細データエリア().put(座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標4_2) != null
-                && !list.get(i).get詳細データエリア().get(座標4_2).equals(div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue())) {
+        if (is変更あり(list, i, 座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue())) {
             修正データ.get詳細データエリア().put(座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標5_1) != null
-                && !list.get(i).get詳細データエリア().get(座標5_1).equals(div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue())) {
+        if (is変更あり(list, i, 座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標5_2) != null
-                && !list.get(i).get詳細データエリア().get(座標5_2).equals(div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue())) {
+        if (is変更あり(list, i, 座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue())) {
             修正データ.get詳細データエリア().put(座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標6_1) != null
-                && !list.get(i).get詳細データエリア().get(座標6_1).equals(div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue())) {
+        if (is変更あり(list, i, 座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue())) {
             修正データ.get詳細データエリア().put(座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標6_2) != null
-                && !list.get(i).get詳細データエリア().get(座標6_2).equals(div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue())) {
+        if (is変更あり(list, i, 座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue())) {
             修正データ.get詳細データエリア().put(座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標7_1) != null
-                && !list.get(i).get詳細データエリア().get(座標7_1).equals(div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue())) {
+        if (is変更あり(list, i, 座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue())) {
             修正データ.get詳細データエリア().put(座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標7_2) != null
-                && !list.get(i).get詳細データエリア().get(座標7_2).equals(div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue())) {
+        if (is変更あり(list, i, 座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue())) {
             修正データ.get詳細データエリア().put(座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標8_1) != null
-                && !list.get(i).get詳細データエリア().get(座標8_1).equals(div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue())) {
+        if (is変更あり(list, i, 座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue())) {
             修正データ.get詳細データエリア().put(座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標8_2) != null
-                && !list.get(i).get詳細データエリア().get(座標8_2).equals(div.getYoshikiYonnoniMeisai().getTxtkosai().getValue())) {
+        if (is変更あり(list, i, 座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue())) {
             修正データ.get詳細データエリア().put(座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標9_1) != null
-                && !list.get(i).get詳細データエリア().get(座標9_1).equals(div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
+        if (is変更あり(list, i, 座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
             修正データ.get詳細データエリア().put(座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標9_2) != null
-                && !list.get(i).get詳細データエリア().get(座標9_2).equals(div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
+        if (is変更あり(list, i, 座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
             修正データ.get詳細データエリア().put(座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue());
+
         }
     }
 
@@ -710,73 +711,57 @@ public class YoshikiYonnoni {
             int i,
             YoshikiYonnoniDiv div) {
 
-        if (list.get(i).get詳細データエリア().get(座標10_1) != null
-                && !list.get(i).get詳細データエリア().get(座標10_1).equals(div.getYoshikiYonnoniMeisai().getTxtkokko().getValue())) {
+        if (is変更あり(list, i, 座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue())) {
             修正データ.get詳細データエリア().put(座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標10_2) != null
-                && !list.get(i).get詳細データエリア().get(座標10_2).equals(div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue())) {
+        if (is変更あり(list, i, 座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue())) {
             修正データ.get詳細データエリア().put(座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標11_1) != null
-                && !list.get(i).get詳細データエリア().get(座標11_1).equals(div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue())) {
+        if (is変更あり(list, i, 座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue())) {
             修正データ.get詳細データエリア().put(座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標11_2) != null
-                && !list.get(i).get詳細データエリア().get(座標11_2).equals(div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue())) {
+        if (is変更あり(list, i, 座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue())) {
             修正データ.get詳細データエリア().put(座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標12_1) != null
-                && !list.get(i).get詳細データエリア().get(座標12_1).equals(div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue())) {
+        if (is変更あり(list, i, 座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue())) {
             修正データ.get詳細データエリア().put(座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標12_2) != null
-                && !list.get(i).get詳細データエリア().get(座標12_2).equals(div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue())) {
+        if (is変更あり(list, i, 座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue())) {
             修正データ.get詳細データエリア().put(座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標13_1) != null
-                && !list.get(i).get詳細データエリア().get(座標13_1).equals(div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue())) {
+        if (is変更あり(list, i, 座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue())) {
             修正データ.get詳細データエリア().put(座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標13_2) != null
-                && !list.get(i).get詳細データエリア().get(座標13_2).equals(div.getYoshikiYonnoniMeisai().getTxtshohi().getValue())) {
+        if (is変更あり(list, i, 座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue())) {
             修正データ.get詳細データエリア().put(座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標14_1) != null
-                && !list.get(i).get詳細データエリア().get(座標14_1).equals(div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue())) {
+        if (is変更あり(list, i, 座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue())) {
             修正データ.get詳細データエリア().put(座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標15_1) != null
-                && !list.get(i).get詳細データエリア().get(座標15_1).equals(div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue())) {
+        if (is変更あり(list, i, 座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue())) {
             修正データ.get詳細データエリア().put(座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標16_1) != null
-                && !list.get(i).get詳細データエリア().get(座標16_1).equals(div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue())) {
+        if (is変更あり(list, i, 座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue())) {
             修正データ.get詳細データエリア().put(座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標17_1) != null
-                && !list.get(i).get詳細データエリア().get(座標17_1).equals(div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue())) {
+        if (is変更あり(list, i, 座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue())) {
             修正データ.get詳細データエリア().put(座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標18_1) != null
-                && !list.get(i).get詳細データエリア().get(座標18_1).equals(div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue())) {
+        if (is変更あり(list, i, 座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue())) {
             修正データ.get詳細データエリア().put(座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標19_1) != null
-                && !list.get(i).get詳細データエリア().get(座標19_1).equals(div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue())) {
+        if (is変更あり(list, i, 座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue())) {
             修正データ.get詳細データエリア().put(座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標19_2) != null
-                && !list.get(i).get詳細データエリア().get(座標19_2).equals(div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue())) {
+        if (is変更あり(list, i, 座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue())) {
             修正データ.get詳細データエリア().put(座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標20_1) != null
-                && !list.get(i).get詳細データエリア().get(座標20_1).equals(div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
+        if (is変更あり(list, i, 座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
             修正データ.get詳細データエリア().put(座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue());
         }
-        if (list.get(i).get詳細データエリア().get(座標21_1) != null
-                && !list.get(i).get詳細データエリア().get(座標21_1).equals(div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
+        if (is変更あり(list, i, 座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
             修正データ.get詳細データエリア().put(座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
+
         }
     }
 
@@ -924,6 +909,8 @@ public class YoshikiYonnoni {
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
         }
+        div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
@@ -949,6 +936,8 @@ public class YoshikiYonnoni {
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
         }
+        div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
@@ -974,6 +963,8 @@ public class YoshikiYonnoni {
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
         }
+        div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3540-010 xuyue
  */
-public enum HihokenshashoHakkoTaishoshaJohoDivSpec implements IPredicate<HihokenshashoHakkoTaishoshaJohoDiv> {
+public enum GemmenGengakuShoHakkoMainDivSpec implements IPredicate<GemmenGengakuShoHakkoMainDiv> {
 
     出力対象の選択されていない {
                 /**
@@ -23,7 +23,7 @@ public enum HihokenshashoHakkoTaishoshaJohoDivSpec implements IPredicate<Hihoken
                  * @return true:出力対象が選択、false:画面に一つ出力チェックボックスを選択しない、エラーとする
                  */
                 @Override
-                public boolean apply(HihokenshashoHakkoTaishoshaJohoDiv div) {
+                public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
                     return div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().isIsPublish()
                     || div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().isIsPublish();
                 }
@@ -36,7 +36,7 @@ public enum HihokenshashoHakkoTaishoshaJohoDivSpec implements IPredicate<Hihoken
                  * @return true:存在、false:存在しない
                  */
                 @Override
-                public boolean apply(HihokenshashoHakkoTaishoshaJohoDiv div) {
+                public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
                     return !new RString("-1").equals(div.getHiddenRirekiNo());
                 }
             },
@@ -48,7 +48,7 @@ public enum HihokenshashoHakkoTaishoshaJohoDivSpec implements IPredicate<Hihoken
                  * @return true:交付日が非空です、false:交付日が空です。
                  */
                 @Override
-                public boolean apply(HihokenshashoHakkoTaishoshaJohoDiv div) {
+                public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
                     return !div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().isEmpty();
                 }
             },
@@ -60,7 +60,7 @@ public enum HihokenshashoHakkoTaishoshaJohoDivSpec implements IPredicate<Hihoken
                  * @return true:発行日が非空です、false:発行日が空です。
                  */
                 @Override
-                public boolean apply(HihokenshashoHakkoTaishoshaJohoDiv div) {
+                public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
                     return !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().isEmpty();
                 }
             },
@@ -72,8 +72,8 @@ public enum HihokenshashoHakkoTaishoshaJohoDivSpec implements IPredicate<Hihoken
                  * @return true:文書番号が非空です、false:文書番号が空です。
                  */
                 @Override
-                public boolean apply(HihokenshashoHakkoTaishoshaJohoDiv div) {
-                    return !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiBunshoNo().getValue().isNullOrEmpty();
+                public boolean apply(GemmenGengakuShoHakkoMainDiv div) {
+                    return !div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().get文書番号().isNullOrEmpty();
                 }
             },
 }

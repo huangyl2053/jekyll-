@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.genmengengakuninteishotsuchisho;
+package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakushohakkomain;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
@@ -19,7 +19,7 @@ import org.apache.ibatis.annotations.Param;
  *
  * @reamsid_L DBD-3540-010 xuyue
  */
-public interface IGenmenGengakuNinteishoTsuchishoMapper {
+public interface IGemmenGengakuShoHakkoMainMapper {
 
     /**
      * 利用者負担額減免の情報を取得します。

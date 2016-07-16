@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -22,8 +21,30 @@ public class ShafukuHojinToRiyushaFutanKeigenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShafukuHojinToRiyushaFutanKeigenInfo")
-    private ShafukuHojinToRiyushaFutanKeigenInfoDiv ShafukuHojinToRiyushaFutanKeigenInfo;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKetteiKubun")
+    private TextBox txtShafukuHojinToRiyushaFutanKeigenKetteiKubun;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKeigenritsu")
+    private TextBox txtShafukuHojinToRiyushaFutanKeigenKeigenritsu;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenShinseibi")
+    private TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenShinseibi;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKetteibi")
+    private TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenKetteibi;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenTekiyobi")
+    private TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenTekiyobi;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenYukoKigen")
+    private TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenYukoKigen;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKakuninNo")
+    private TextBoxCode txtShafukuHojinToRiyushaFutanKeigenKakuninNo;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei")
+    private TextBox txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei")
+    private TextBox txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei")
+    private TextBox txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu")
+    private TextBox txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu;
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu")
+    private TextBoxMultiLine txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,144 +53,219 @@ public class ShafukuHojinToRiyushaFutanKeigenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getShafukuHojinToRiyushaFutanKeigenInfo
-     * @return ShafukuHojinToRiyushaFutanKeigenInfo
+     * gettxtShafukuHojinToRiyushaFutanKeigenKetteiKubun
+     * @return txtShafukuHojinToRiyushaFutanKeigenKetteiKubun
      */
-    @JsonProperty("ShafukuHojinToRiyushaFutanKeigenInfo")
-    public ShafukuHojinToRiyushaFutanKeigenInfoDiv getShafukuHojinToRiyushaFutanKeigenInfo() {
-        return ShafukuHojinToRiyushaFutanKeigenInfo;
-    }
-
-    /*
-     * setShafukuHojinToRiyushaFutanKeigenInfo
-     * @param ShafukuHojinToRiyushaFutanKeigenInfo ShafukuHojinToRiyushaFutanKeigenInfo
-     */
-    @JsonProperty("ShafukuHojinToRiyushaFutanKeigenInfo")
-    public void setShafukuHojinToRiyushaFutanKeigenInfo(ShafukuHojinToRiyushaFutanKeigenInfoDiv ShafukuHojinToRiyushaFutanKeigenInfo) {
-        this.ShafukuHojinToRiyushaFutanKeigenInfo = ShafukuHojinToRiyushaFutanKeigenInfo;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKetteiKubun")
     public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKetteiKubun() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKetteiKubun();
+        return txtShafukuHojinToRiyushaFutanKeigenKetteiKubun;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKetteiKubun(TextBox txtShafukuHojinToRiyushaFutanKeigenKetteiKubun) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKetteiKubun(txtShafukuHojinToRiyushaFutanKeigenKetteiKubun);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKetteiKubun
+     * @param txtShafukuHojinToRiyushaFutanKeigenKetteiKubun txtShafukuHojinToRiyushaFutanKeigenKetteiKubun
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKetteiKubun")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKetteiKubun(TextBox txtShafukuHojinToRiyushaFutanKeigenKetteiKubun) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKetteiKubun = txtShafukuHojinToRiyushaFutanKeigenKetteiKubun;
     }
 
-    @JsonIgnore
-    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu();
-    }
-
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu(TextBox txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu(txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtShafukuHojinToRiyushaFutanKeigenShinseibi() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenShinseibi();
-    }
-
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenShinseibi(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenShinseibi) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenShinseibi(txtShafukuHojinToRiyushaFutanKeigenShinseibi);
-    }
-
-    @JsonIgnore
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKeigenritsu
+     * @return txtShafukuHojinToRiyushaFutanKeigenKeigenritsu
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKeigenritsu")
     public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu();
+        return txtShafukuHojinToRiyushaFutanKeigenKeigenritsu;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu(TextBox txtShafukuHojinToRiyushaFutanKeigenKeigenritsu) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu(txtShafukuHojinToRiyushaFutanKeigenKeigenritsu);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKeigenritsu
+     * @param txtShafukuHojinToRiyushaFutanKeigenKeigenritsu txtShafukuHojinToRiyushaFutanKeigenKeigenritsu
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKeigenritsu")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKeigenritsu(TextBox txtShafukuHojinToRiyushaFutanKeigenKeigenritsu) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKeigenritsu = txtShafukuHojinToRiyushaFutanKeigenKeigenritsu;
     }
 
-    @JsonIgnore
-    public TextBoxCode getTxtShafukuHojinToRiyushaFutanKeigenKakuninNo() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKakuninNo();
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenShinseibi
+     * @return txtShafukuHojinToRiyushaFutanKeigenShinseibi
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenShinseibi")
+    public TextBoxFlexibleDate getTxtShafukuHojinToRiyushaFutanKeigenShinseibi() {
+        return txtShafukuHojinToRiyushaFutanKeigenShinseibi;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKakuninNo(TextBoxCode txtShafukuHojinToRiyushaFutanKeigenKakuninNo) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKakuninNo(txtShafukuHojinToRiyushaFutanKeigenKakuninNo);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenShinseibi
+     * @param txtShafukuHojinToRiyushaFutanKeigenShinseibi txtShafukuHojinToRiyushaFutanKeigenShinseibi
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenShinseibi")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenShinseibi(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenShinseibi) {
+        this.txtShafukuHojinToRiyushaFutanKeigenShinseibi = txtShafukuHojinToRiyushaFutanKeigenShinseibi;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKetteibi
+     * @return txtShafukuHojinToRiyushaFutanKeigenKetteibi
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKetteibi")
     public TextBoxFlexibleDate getTxtShafukuHojinToRiyushaFutanKeigenKetteibi() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKetteibi();
+        return txtShafukuHojinToRiyushaFutanKeigenKetteibi;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKetteibi(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenKetteibi) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKetteibi(txtShafukuHojinToRiyushaFutanKeigenKetteibi);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKetteibi
+     * @param txtShafukuHojinToRiyushaFutanKeigenKetteibi txtShafukuHojinToRiyushaFutanKeigenKetteibi
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKetteibi")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKetteibi(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenKetteibi) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKetteibi = txtShafukuHojinToRiyushaFutanKeigenKetteibi;
     }
 
-    @JsonIgnore
-    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei();
-    }
-
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei(TextBox txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei(txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei();
-    }
-
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei(TextBox txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei(txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei);
-    }
-
-    @JsonIgnore
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenTekiyobi
+     * @return txtShafukuHojinToRiyushaFutanKeigenTekiyobi
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenTekiyobi")
     public TextBoxFlexibleDate getTxtShafukuHojinToRiyushaFutanKeigenTekiyobi() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenTekiyobi();
+        return txtShafukuHojinToRiyushaFutanKeigenTekiyobi;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenTekiyobi(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenTekiyobi) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenTekiyobi(txtShafukuHojinToRiyushaFutanKeigenTekiyobi);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenTekiyobi
+     * @param txtShafukuHojinToRiyushaFutanKeigenTekiyobi txtShafukuHojinToRiyushaFutanKeigenTekiyobi
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenTekiyobi")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenTekiyobi(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenTekiyobi) {
+        this.txtShafukuHojinToRiyushaFutanKeigenTekiyobi = txtShafukuHojinToRiyushaFutanKeigenTekiyobi;
     }
 
-    @JsonIgnore
-    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei();
-    }
-
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei(TextBox txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei(txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei);
-    }
-
-    @JsonIgnore
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenYukoKigen
+     * @return txtShafukuHojinToRiyushaFutanKeigenYukoKigen
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenYukoKigen")
     public TextBoxFlexibleDate getTxtShafukuHojinToRiyushaFutanKeigenYukoKigen() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenYukoKigen();
+        return txtShafukuHojinToRiyushaFutanKeigenYukoKigen;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenYukoKigen(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenYukoKigen) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenYukoKigen(txtShafukuHojinToRiyushaFutanKeigenYukoKigen);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenYukoKigen
+     * @param txtShafukuHojinToRiyushaFutanKeigenYukoKigen txtShafukuHojinToRiyushaFutanKeigenYukoKigen
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenYukoKigen")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenYukoKigen(TextBoxFlexibleDate txtShafukuHojinToRiyushaFutanKeigenYukoKigen) {
+        this.txtShafukuHojinToRiyushaFutanKeigenYukoKigen = txtShafukuHojinToRiyushaFutanKeigenYukoKigen;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKakuninNo
+     * @return txtShafukuHojinToRiyushaFutanKeigenKakuninNo
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKakuninNo")
+    public TextBoxCode getTxtShafukuHojinToRiyushaFutanKeigenKakuninNo() {
+        return txtShafukuHojinToRiyushaFutanKeigenKakuninNo;
+    }
+
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKakuninNo
+     * @param txtShafukuHojinToRiyushaFutanKeigenKakuninNo txtShafukuHojinToRiyushaFutanKeigenKakuninNo
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKakuninNo")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKakuninNo(TextBoxCode txtShafukuHojinToRiyushaFutanKeigenKakuninNo) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKakuninNo = txtShafukuHojinToRiyushaFutanKeigenKakuninNo;
+    }
+
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei
+     * @return txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei")
+    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei() {
+        return txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei;
+    }
+
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei
+     * @param txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei(TextBox txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei = txtShafukuHojinToRiyushaFutanKeigenKyotakuServiceGentei;
+    }
+
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei
+     * @return txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei")
+    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei() {
+        return txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei;
+    }
+
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei
+     * @param txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei(TextBox txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei = txtShafukuHojinToRiyushaFutanKeigenKyojuhiShokuhiGentei;
+    }
+
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei
+     * @return txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei")
+    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei() {
+        return txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei;
+    }
+
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei
+     * @param txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei(TextBox txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei = txtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei;
+    }
+
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu
+     * @return txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu")
+    public TextBox getTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu() {
+        return txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu;
+    }
+
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu
+     * @param txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenKeigenJiyu(TextBox txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu) {
+        this.txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu = txtShafukuHojinToRiyushaFutanKeigenKeigenJiyu;
+    }
+
+    /*
+     * gettxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu
+     * @return txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu")
     public TextBoxMultiLine getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu() {
-        return this.getShafukuHojinToRiyushaFutanKeigenInfo().getTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu();
+        return txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu;
     }
 
-    @JsonIgnore
-    public void  setTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu(TextBoxMultiLine txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu) {
-        this.getShafukuHojinToRiyushaFutanKeigenInfo().setTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu(txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu);
+    /*
+     * settxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu
+     * @param txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu
+     */
+    @JsonProperty("txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu")
+    public void setTxtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu(TextBoxMultiLine txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu) {
+        this.txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu = txtShafukuHojinToRiyushaFutanKeigenShoninShinaiRiyu;
     }
 
     // </editor-fold>
