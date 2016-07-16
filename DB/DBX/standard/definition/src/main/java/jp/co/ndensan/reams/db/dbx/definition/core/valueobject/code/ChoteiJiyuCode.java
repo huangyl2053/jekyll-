@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
