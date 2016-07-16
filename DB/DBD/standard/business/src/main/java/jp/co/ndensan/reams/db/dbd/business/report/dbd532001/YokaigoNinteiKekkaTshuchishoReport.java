@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd532001;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.yokaigoninteikekkatshuchisho.YokaigoNinteiKekkaTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd532001.YokaigoNinteiKekkaTshuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -34,7 +34,7 @@ public final class YokaigoNinteiKekkaTshuchishoReport extends Report<YokaigoNint
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<YokaigoNinteiKekkaTshuchishoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<YokaigoNinteiKekkaTshuchishoReportSource> writer) {
         IYokaigoNinteiKekkaTshuchishoEditor bodyEditor = new YokaigoNinteiKekkaTshuchishoBodyEditor(bodyItem);
         IYokaigoNinteiKekkaTshuchishoBuilder builder = new YokaigoNinteiKekkaTshuchishoBuilderImpl(bodyEditor);
         writer.writeLine(builder);

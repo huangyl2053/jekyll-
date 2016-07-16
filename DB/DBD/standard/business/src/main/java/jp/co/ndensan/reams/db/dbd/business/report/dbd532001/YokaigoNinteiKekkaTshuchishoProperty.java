@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd532001;
 
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.report.yokaigoninteikekkatshuchisho.YokaigoNinteiKekkaTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd532001.YokaigoNinteiKekkaTshuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
