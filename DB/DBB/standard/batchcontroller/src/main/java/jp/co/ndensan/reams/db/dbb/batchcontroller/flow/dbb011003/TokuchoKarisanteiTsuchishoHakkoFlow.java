@@ -13,12 +13,10 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.KarisanteiIkkat
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrintTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrtTokuchoKaishiTsuchishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.SystemTimeSakuseiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -161,9 +159,8 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
-                getParameter().get賦課年度().toDateString(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.KIJUN_TIME),
-                ShoriName.特徴仮算定賦課.get名称(), 帳票分類ID);
+                getParameter().get調定年度().toDateString(),
+                null, null, 帳票分類ID);
     }
 
     private TokuchoKaishiTsuchishoProcessParameter createProcessParameter() {

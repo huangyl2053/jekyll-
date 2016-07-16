@@ -298,7 +298,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                     認証者,
                     地方公共団体,
-                    dbb100006ReportSourceWriter.getImageFolderPath(),
+                    dbb100009ReportSourceWriter.getImageFolderPath(),
                     new RDate(仮算定通知書情報.get発行日().toString()),
                     is公印に掛ける,
                     is公印を省略,
