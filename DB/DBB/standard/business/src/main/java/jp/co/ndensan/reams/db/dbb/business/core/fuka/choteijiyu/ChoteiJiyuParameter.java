@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 
 /**

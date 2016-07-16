@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import java.util.Collections;
 import java.util.Comparator;
 

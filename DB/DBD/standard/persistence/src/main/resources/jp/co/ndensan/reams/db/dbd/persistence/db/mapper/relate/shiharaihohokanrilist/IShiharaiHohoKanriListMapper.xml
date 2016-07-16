@@ -317,7 +317,7 @@
         <id property="dbt2002Entity.rirekiNo" column="dbT2002Fuka_rirekiNo" />
         <association property="dbt2002Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <collection property="dbt2003Entity" resultMap="ResultMap_DbT2003KibetsuEntity"/>
-        <collection property="urt0705Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+        <collection property="urt0705Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
         <collection property="dbt4023Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4023JikoKisambiKanriMapper.ResultMap_DbT4023JikoKisambiKanriEntity"/>
     </resultMap>
     <resultMap id="ResultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.KibetsuEntity" autoMapping="true">
@@ -372,7 +372,7 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
         <include refid="allColumns_DbT2003Kibetsu" />,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />,
         jikokisambikanri.*
         FROM
         rgdb."DbV2002Fuka" "DbT2002Fuka"

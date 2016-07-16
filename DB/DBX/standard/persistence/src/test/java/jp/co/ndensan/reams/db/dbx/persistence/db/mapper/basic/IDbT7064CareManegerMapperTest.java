@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7064CareManegerEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7064CareManegerDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;

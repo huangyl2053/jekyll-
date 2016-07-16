@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 
 /**
  * 対象データ

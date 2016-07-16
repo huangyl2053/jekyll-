@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendokoseikeisan.KoseigoFukaEntity;
 
 /**

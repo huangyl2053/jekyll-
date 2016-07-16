@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.core.relate;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoteiKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
+import jp.co.ndensan.reams.db.dbx.business.core.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
