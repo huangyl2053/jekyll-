@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho;
+package jp.co.ndensan.reams.db.dbd.entity.report.dbd100008;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
  *
  * @reamsid_L DBD-3570-040 liangbc
  */
-public class NinteiKoshinTsuchisho implements IReportSource {
+public class NinteiKoshinTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "bunshoNo", length = 36, order = 1)

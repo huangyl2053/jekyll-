@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100008;
 
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.ChohyoSeigyoHanyoKeysDBD100008;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
-import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
@@ -35,7 +35,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
     }
 
     @Override
-    public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
+    public NinteiKoshinTsuchishoReportSource edit(NinteiKoshinTsuchishoReportSource source) {
         source.bunshoNo = item.get文書番号();
         if (item.get帳票情報() == null || KyuSochishaKubun.非該当.getコード().equals(item.get帳票情報().get旧措置者区分())) {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {

@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbd.service.core.ninteikoshintsuchisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoProperty;
-import jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho.NinteiKoshinTsuchishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoProperty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100008.NinteiKoshinTsuchishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -36,9 +36,9 @@ public class NinteiKoshinTsuchishoService {
      */
     public void print(List<NinteiKoshinTsuchishoItem> targets, ReportManager reportManager) {
         NinteiKoshinTsuchishoProperty property = new NinteiKoshinTsuchishoProperty();
-        try (ReportAssembler<NinteiKoshinTsuchisho> assembler = createAssembler(property, reportManager)) {
+        try (ReportAssembler<NinteiKoshinTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             for (NinteiKoshinTsuchishoReport report : toReports(targets)) {
-                ReportSourceWriter<NinteiKoshinTsuchisho> reportSourceWriter = new ReportSourceWriter(assembler);
+                ReportSourceWriter<NinteiKoshinTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }
         }

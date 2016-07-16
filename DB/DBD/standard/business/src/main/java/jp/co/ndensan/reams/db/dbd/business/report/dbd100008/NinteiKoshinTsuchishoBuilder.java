@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100008;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -22,9 +22,9 @@ public class NinteiKoshinTsuchishoBuilder implements INinteiKoshinTsuchishoBuild
     /**
      * インスタンスを生成します。
      *
-     * @param layer1Editor NinteiKoshinTsuchishoLayer1Editor
-     * @param compNinshoshaEditor NinteiKoshinTsuchishoCompNinshoshaEditor
-     * @param compSofubutsuAtesakiEditor NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor
+     * @param layer1Editor NinteiKoshinTsuchishoReportSourceLayer1Editor
+     * @param compNinshoshaEditor NinteiKoshinTsuchishoReportSourceCompNinshoshaEditor
+     * @param compSofubutsuAtesakiEditor NinteiKoshinTsuchishoReportSourceCompSofubutsuAtesakiEditor
      */
     public NinteiKoshinTsuchishoBuilder(NinteiKoshinTsuchishoLayer1Editor layer1Editor,
             NinteiKoshinTsuchishoCompNinshoshaEditor compNinshoshaEditor,
@@ -35,9 +35,9 @@ public class NinteiKoshinTsuchishoBuilder implements INinteiKoshinTsuchishoBuild
     }
 
     @Override
-    public NinteiKoshinTsuchisho build() {
+    public NinteiKoshinTsuchishoReportSource build() {
         return ReportEditorJoiner.from(
-                new NinteiKoshinTsuchisho()).join(layer1Editor).join(compNinshoshaEditor).join(compSofubutsuAtesakiEditor).buildSource();
+                new NinteiKoshinTsuchishoReportSource()).join(layer1Editor).join(compNinshoshaEditor).join(compSofubutsuAtesakiEditor).buildSource();
     }
 
 }

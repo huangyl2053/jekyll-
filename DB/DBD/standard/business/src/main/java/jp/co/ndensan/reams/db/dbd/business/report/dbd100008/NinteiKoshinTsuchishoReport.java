@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100008;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-3570-040 liangbc
  */
-public class NinteiKoshinTsuchishoReport extends Report<NinteiKoshinTsuchisho> {
+public class NinteiKoshinTsuchishoReport extends Report<NinteiKoshinTsuchishoReportSource> {
 
     private final NinteiKoshinTsuchishoItem target;
 
@@ -28,7 +28,7 @@ public class NinteiKoshinTsuchishoReport extends Report<NinteiKoshinTsuchisho> {
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<NinteiKoshinTsuchisho> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<NinteiKoshinTsuchishoReportSource> reportSourceWriter) {
         target.setイメージファイルパス(reportSourceWriter.getImageFolderPath());
         NinteiKoshinTsuchishoLayer1Editor layer1Editor = new NinteiKoshinTsuchishoLayer1Editor(target);
         NinteiKoshinTsuchishoCompNinshoshaEditor compNinshoshaEditor = new NinteiKoshinTsuchishoCompNinshoshaEditor(target);

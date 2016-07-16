@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100008;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 
@@ -21,14 +21,14 @@ public class NinteiKoshinTsuchishoCompNinshoshaEditor implements INinteiKoshinTs
     /**
      * コンストラクタです。
      *
-     * @param item NinteiKoshinTsuchishoItem
+     * @param item NinteiKoshinTsuchishoReportSourceItem
      */
     protected NinteiKoshinTsuchishoCompNinshoshaEditor(NinteiKoshinTsuchishoItem item) {
         this.item = item;
     }
 
     @Override
-    public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
+    public NinteiKoshinTsuchishoReportSource edit(NinteiKoshinTsuchishoReportSource source) {
         NinshoshaSource ninshoshaSource = getCompNinshosha(item);
         source.denshiKoin = ninshoshaSource.denshiKoin;
         source.hakkoYMD = ninshoshaSource.hakkoYMD;

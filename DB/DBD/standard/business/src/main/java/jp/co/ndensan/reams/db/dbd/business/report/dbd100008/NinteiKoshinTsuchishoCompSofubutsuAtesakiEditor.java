@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.ninteikoshintsuchisho;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100008;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.ninteikoshintsuchisho.NinteiKoshinTsuchisho;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100008.NinteiKoshinTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,7 +30,7 @@ public class NinteiKoshinTsuchishoCompSofubutsuAtesakiEditor implements INinteiK
     }
 
     @Override
-    public NinteiKoshinTsuchisho edit(NinteiKoshinTsuchisho source) {
+    public NinteiKoshinTsuchishoReportSource edit(NinteiKoshinTsuchishoReportSource source) {
         SofubutsuAtesakiSource atesakiSource = getSofubutsuAtesakiSource(item.get編集後宛先());
         source.yubinNo = atesakiSource.yubinNo;
         source.gyoseiku1 = 空白;
