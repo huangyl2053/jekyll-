@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.service.core.genmengengakuninteishotsuchisho;
+package jp.co.ndensan.reams.db.dbd.service.core.gemmengengakushohakkomain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4016HomonKaigoRiyoshaF
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4018KaigoHokenFutanGendogakuNinteiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4020TokubetsuchiikiKasanGemmenDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.genmengengakuninteishotsuchisho.IGenmenGengakuNinteishoTsuchishoMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakushohakkomain.IGemmenGengakuShoHakkoMainMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBD-3540-010 xuyue
  */
-public class GenmenGengakuNinteishoTsuchishoFinder {
+public class IGemmenGengakuShoHakkoMainMapperFinder {
 
     private final MapperProvider mapperProvider;
     private final DbT4014RiyoshaFutangakuGengakuDac dbt4014Dac;
@@ -45,7 +45,7 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
     /**
      * コンストラクタです。
      */
-    GenmenGengakuNinteishoTsuchishoFinder() {
+    IGemmenGengakuShoHakkoMainMapperFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbt4014Dac = InstanceProvider.create(DbT4014RiyoshaFutangakuGengakuDac.class);
         this.dbt4018Dac = InstanceProvider.create(DbT4018KaigoHokenFutanGendogakuNinteiDac.class);
@@ -59,8 +59,8 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
      *
      * @return GenmenGengakuNinteishoTsuchishoFinder
      */
-    public static GenmenGengakuNinteishoTsuchishoFinder createIntance() {
-        return InstanceProvider.create(GenmenGengakuNinteishoTsuchishoFinder.class);
+    public static IGemmenGengakuShoHakkoMainMapperFinder createIntance() {
+        return InstanceProvider.create(IGemmenGengakuShoHakkoMainMapperFinder.class);
     }
 
     /**
@@ -123,7 +123,7 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
     public ArrayList<RiyoshaFutangakuGengaku> get利用者負担額減免の情報(HihokenshaNo 被保険者番号) {
         ArrayList<RiyoshaFutangakuGengaku> 利用者負担額減免の情報List = new ArrayList<>();
 
-        IGenmenGengakuNinteishoTsuchishoMapper mapper = mapperProvider.create(IGenmenGengakuNinteishoTsuchishoMapper.class);
+        IGemmenGengakuShoHakkoMainMapper mapper = mapperProvider.create(IGemmenGengakuShoHakkoMainMapper.class);
         List<RiyoshaFutangakuGengakuEntity> entityList = mapper.get利用者負担額減免の情報(被保険者番号);
         if (entityList != null && !entityList.isEmpty()) {
             for (RiyoshaFutangakuGengakuEntity entity : entityList) {
@@ -143,7 +143,7 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
     public ArrayList<FutanGendogakuNintei> get負担限度額認定の情報(HihokenshaNo 被保険者番号) {
         ArrayList<FutanGendogakuNintei> 負担限度額認定の情報List = new ArrayList<>();
 
-        IGenmenGengakuNinteishoTsuchishoMapper mapper = mapperProvider.create(IGenmenGengakuNinteishoTsuchishoMapper.class);
+        IGemmenGengakuShoHakkoMainMapper mapper = mapperProvider.create(IGemmenGengakuShoHakkoMainMapper.class);
         List<FutanGendogakuNinteiEntity> entityList = mapper.get負担限度額認定の情報(被保険者番号);
         if (entityList != null && !entityList.isEmpty()) {
             for (FutanGendogakuNinteiEntity entity : entityList) {
@@ -163,7 +163,7 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
     public ArrayList<ShakaifukuRiyoshaFutanKeigen> get社会福祉法人等利用者負担軽減の情報(HihokenshaNo 被保険者番号) {
         ArrayList<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();
 
-        IGenmenGengakuNinteishoTsuchishoMapper mapper = mapperProvider.create(IGenmenGengakuNinteishoTsuchishoMapper.class);
+        IGemmenGengakuShoHakkoMainMapper mapper = mapperProvider.create(IGemmenGengakuShoHakkoMainMapper.class);
         List<ShafukuRiyoshaFutanKeigenEntity> entityList = mapper.get社会福祉法人等利用者負担軽減の情報(被保険者番号);
         if (entityList != null && !entityList.isEmpty()) {
             for (ShafukuRiyoshaFutanKeigenEntity entity : entityList) {
@@ -183,7 +183,7 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
     public ArrayList<HomonKaigoRiyoshaFutangakuGengaku> get訪問介護利用者負担額減額の情報(HihokenshaNo 被保険者番号) {
         ArrayList<HomonKaigoRiyoshaFutangakuGengaku> 訪問介護利用者負担額減額の情報List = new ArrayList<>();
 
-        IGenmenGengakuNinteishoTsuchishoMapper mapper = mapperProvider.create(IGenmenGengakuNinteishoTsuchishoMapper.class);
+        IGemmenGengakuShoHakkoMainMapper mapper = mapperProvider.create(IGemmenGengakuShoHakkoMainMapper.class);
         List<HomonKaigoRiyoshaFutangakuGengakuEntity> entityList = mapper.get訪問介護利用者負担額減額の情報(被保険者番号);
         if (entityList != null && !entityList.isEmpty()) {
             for (HomonKaigoRiyoshaFutangakuGengakuEntity entity : entityList) {
@@ -203,7 +203,7 @@ public class GenmenGengakuNinteishoTsuchishoFinder {
     public ArrayList<TokubetsuchiikiKasanGemmen> get特別地域加算減免の情報(HihokenshaNo 被保険者番号) {
         ArrayList<TokubetsuchiikiKasanGemmen> 訪問介護利用者負担額減額の情報List = new ArrayList<>();
 
-        IGenmenGengakuNinteishoTsuchishoMapper mapper = mapperProvider.create(IGenmenGengakuNinteishoTsuchishoMapper.class);
+        IGemmenGengakuShoHakkoMainMapper mapper = mapperProvider.create(IGemmenGengakuShoHakkoMainMapper.class);
         List<TokubetsuchiikiKasanGemmenEntity> entityList = mapper.get特別地域加算減免の情報(被保険者番号);
         if (entityList != null && !entityList.isEmpty()) {
             for (TokubetsuchiikiKasanGemmenEntity entity : entityList) {

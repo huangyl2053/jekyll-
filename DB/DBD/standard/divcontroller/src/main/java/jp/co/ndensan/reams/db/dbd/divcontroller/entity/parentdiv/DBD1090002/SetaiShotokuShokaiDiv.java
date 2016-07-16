@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ZengoRireki のクラスファイル 
+ * SetaiShotokuShokai のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ZengoRirekiDiv extends Panel {
+public class SetaiShotokuShokaiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -21,10 +21,10 @@ public class ZengoRirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnOutputMaeRireki")
-    private Button btnOutputMaeRireki;
-    @JsonProperty("btnOutputAtoRireki")
-    private Button btnOutputAtoRireki;
+    @JsonProperty("btnReturnChohyoHakko")
+    private Button btnReturnChohyoHakko;
+    @JsonProperty("SetaiJoho")
+    private SetaiJohoDiv SetaiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +33,39 @@ public class ZengoRirekiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnOutputMaeRireki
-     * @return btnOutputMaeRireki
+     * getbtnReturnChohyoHakko
+     * @return btnReturnChohyoHakko
      */
-    @JsonProperty("btnOutputMaeRireki")
-    public Button getBtnOutputMaeRireki() {
-        return btnOutputMaeRireki;
+    @JsonProperty("btnReturnChohyoHakko")
+    public Button getBtnReturnChohyoHakko() {
+        return btnReturnChohyoHakko;
     }
 
     /*
-     * setbtnOutputMaeRireki
-     * @param btnOutputMaeRireki btnOutputMaeRireki
+     * setbtnReturnChohyoHakko
+     * @param btnReturnChohyoHakko btnReturnChohyoHakko
      */
-    @JsonProperty("btnOutputMaeRireki")
-    public void setBtnOutputMaeRireki(Button btnOutputMaeRireki) {
-        this.btnOutputMaeRireki = btnOutputMaeRireki;
+    @JsonProperty("btnReturnChohyoHakko")
+    public void setBtnReturnChohyoHakko(Button btnReturnChohyoHakko) {
+        this.btnReturnChohyoHakko = btnReturnChohyoHakko;
     }
 
     /*
-     * getbtnOutputAtoRireki
-     * @return btnOutputAtoRireki
+     * getSetaiJoho
+     * @return SetaiJoho
      */
-    @JsonProperty("btnOutputAtoRireki")
-    public Button getBtnOutputAtoRireki() {
-        return btnOutputAtoRireki;
+    @JsonProperty("SetaiJoho")
+    public SetaiJohoDiv getSetaiJoho() {
+        return SetaiJoho;
     }
 
     /*
-     * setbtnOutputAtoRireki
-     * @param btnOutputAtoRireki btnOutputAtoRireki
+     * setSetaiJoho
+     * @param SetaiJoho SetaiJoho
      */
-    @JsonProperty("btnOutputAtoRireki")
-    public void setBtnOutputAtoRireki(Button btnOutputAtoRireki) {
-        this.btnOutputAtoRireki = btnOutputAtoRireki;
+    @JsonProperty("SetaiJoho")
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+        this.SetaiJoho = SetaiJoho;
     }
 
     // </editor-fold>
