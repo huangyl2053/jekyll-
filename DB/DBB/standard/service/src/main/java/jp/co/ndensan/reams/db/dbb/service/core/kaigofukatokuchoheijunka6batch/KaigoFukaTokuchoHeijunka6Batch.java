@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyot
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.business.report.karinonyutsuchishohakkoichiran.KariNonyuTsuchishoHakkoIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFuchJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoParameter;
@@ -154,6 +154,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final RString 備考コード_結果0円以下 = new RString("3");
     private static final RString 備考コード_対象外減額 = new RString("4");
     private static final RString 備考コード_対象外増額 = new RString("5");
+    private static final RString 年金特徴回付情報_テーブル = new RString("年金特徴回付情報.");
+    private static final RString 世帯コード = new RString("\"setaiCode\"");
+    private static final RString 識別コード = new RString("\"shikibetsuCode\"");
+    private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
     private final MapperProvider mapperProvider;
     private final DbT2002FukaDac dbT2002FukaDac;
     private final DbT2003KibetsuDac dbT2003KibetsuDac;
@@ -332,8 +336,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId(), 出力順ID);
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
-            出力順 = MyBatisOrderByClauseCreator.create(KariNonyuTsuchishoHakkoIchiranProperty.DBB100014NonyuTsuchishoEnum.class, outputOrder);
+            出力順 = MyBatisOrderByClauseCreator.create(
+                    TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty.DBB200003_HeijunkaKeisanJuneKekkaIchiran.class, outputOrder);
         }
+        出力順 = 出力順再設定(出力順);
         TokuchoHeijunkaRokuBatchTaishoParameter parameter = new TokuchoHeijunkaRokuBatchTaishoParameter(
                 調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 出力順);
         List<TokuchoHeijunkaRokuBatchTaishoshaEntity> 対象者データリスト = mapper.get対象者データ(parameter);
@@ -439,6 +445,19 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         int 対象者出力ページ数 = taishoshaSourceData == null ? NUM_0 : taishoshaSourceData.iterator().next().getPageCount();
         RString 出力ページ数 = new RString(対象外出力ページ数 + 対象者出力ページ数);
         バッチ出力条件リストの出力(調定年度, 賦課年度, 市町村コード, 市町村名, 出力ページ数, 出力順ID);
+    }
+
+    private RString 出力順再設定(RString 出力順) {
+        if (出力順.contains(世帯コード)) {
+            出力順 = 出力順.replace(世帯コード, 年金特徴回付情報_テーブル.concat(世帯コード));
+        }
+        if (出力順.contains(識別コード)) {
+            出力順 = 出力順.replace(識別コード, 年金特徴回付情報_テーブル.concat(識別コード));
+        }
+        if (出力順.contains(被保険者番号)) {
+            出力順 = 出力順.replace(被保険者番号, 年金特徴回付情報_テーブル.concat(被保険者番号));
+        }
+        return 出力順;
     }
 
     private void set出力順_改頁(IOutputOrder outputOrder, List<RString> 出力順項目List) {

@@ -486,11 +486,11 @@
         ${出力順}
     </select>
     <resultMap id="resultMap_Taishosha" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity" autoMapping="true">
-        <id column="dbT2015KeisangoJoho_choteiNendo"/>
-        <id column="dbT2015KeisangoJoho_fukaNendo"/>
-        <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
-        <id column="dbT2015KeisangoJoho_koseiZengoKubun"/>
-        <id column="dbT2015KeisangoJoho_sakuseiShoriName"/>
+        <id column="choteiNendo"/>
+        <id column="fukaNendo"/>
+        <id column="tsuchishoNo"/>
+        <id column="koseiZengoKubun"/>
+        <id column="sakuseiShoriName"/>
         <result property="特別徴収義務者コード" column="dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報" resultMap="ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
