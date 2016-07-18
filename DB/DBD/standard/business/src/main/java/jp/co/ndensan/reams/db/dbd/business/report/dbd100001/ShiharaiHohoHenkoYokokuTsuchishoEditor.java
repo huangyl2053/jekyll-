@@ -43,6 +43,16 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     private final Ninshosha 認証者;
     private final ShiharaiHohoHenko 帳票情報;
     private final RString イメージファイルパス;
+    private static final int NOCOUNT_1 = 1;
+    private static final int NOCOUNT_2 = 2;
+    private static final int NOCOUNT_3 = 3;
+    private static final int NOCOUNT_4 = 4;
+    private static final int NOCOUNT_5 = 5;
+    private static final int NOCOUNT_6 = 6;
+    private static final int NOCOUNT_7 = 7;
+    private static final int NOCOUNT_8 = 8;
+    private static final int NOCOUNT_9 = 9;
+    private static final int NOCOUNT_10 = 10;
 
     /**
      * インスタンスを生成します。
@@ -151,17 +161,43 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo1 = this.帳票情報.getShiharaiHohoHenkoGengakuList().get(0).get被保険者番号().getColumnValue();
-        //source.hihokenshaNo2 = ;
-        //source.hihokenshaNo3 = ;
-        //source.hihokenshaNo4 = ;
-        //source.hihokenshaNo5 = ;
-        //source.hihokenshaNo6 = ;
-        //source.hihokenshaNo7 = ;
-        //source.hihokenshaNo8 = ;
-        //source.hihokenshaNo9 = ;
-        //source.hihokenshaNo10 = ;
-        //source.nendoTitle1 = ;
+        if (this.帳票情報.get被保険者番号() != null) {
+            RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
+            for (int i = 1; i <= 被保険者番号.length(); i++) {
+                if (i == NOCOUNT_1) {
+                    source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
+                }
+                if (i == NOCOUNT_2) {
+                    source.hihokenshaNo2 = 被保険者番号.substring(NOCOUNT_1, NOCOUNT_2);
+                }
+                if (i == NOCOUNT_3) {
+                    source.hihokenshaNo3 = 被保険者番号.substring(NOCOUNT_2, NOCOUNT_3);
+                }
+                if (i == NOCOUNT_4) {
+                    source.hihokenshaNo4 = 被保険者番号.substring(NOCOUNT_3, NOCOUNT_4);
+                }
+                if (i == NOCOUNT_5) {
+                    source.hihokenshaNo5 = 被保険者番号.substring(NOCOUNT_4, NOCOUNT_5);
+                }
+                if (i == NOCOUNT_6) {
+                    source.hihokenshaNo6 = 被保険者番号.substring(NOCOUNT_5, NOCOUNT_6);
+                }
+                if (i == NOCOUNT_7) {
+                    source.hihokenshaNo7 = 被保険者番号.substring(NOCOUNT_6, NOCOUNT_7);
+                }
+                if (i == NOCOUNT_8) {
+                    source.hihokenshaNo8 = 被保険者番号.substring(NOCOUNT_7, NOCOUNT_8);
+                }
+                if (i == NOCOUNT_9) {
+                    source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
+                }
+                if (i == NOCOUNT_10) {
+                    source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
+                }
+            }
+        }
+        //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),このリストの値の数は知らない
+        // source.nendoTitle1 = 支払方法変更滞納.get賦課年度().toDateString();
         //source.nendoTitle2 = ;
         //source.nendoTitle3 = ;
         //source.listTainoJokyo_1(15) = ;
@@ -181,18 +217,14 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         //source.entaiGokei3 =;
         //source.hanteiYMD =;
         //source.izenhokenryo =;
-        //source.pageCount= ;
-
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun1 = 通知書定型文リスト.get(0);
         }
         if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
             source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
-        //source.tsuchibun2
-        //source.shikibetsuCode = new RString(this.個人情報.get識別コード().toString());
-        //TODO  帳票情報が知らない
-        //source.hihokenshaNo = new RString(item.get負担限度額認定().get被保険者番号().toString());
+        source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
+        source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
 
     }
 

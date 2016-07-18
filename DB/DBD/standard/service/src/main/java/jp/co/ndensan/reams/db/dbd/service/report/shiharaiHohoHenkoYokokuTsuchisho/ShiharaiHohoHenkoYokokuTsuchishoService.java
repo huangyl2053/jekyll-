@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbd.service.report.shiharaiHohoHenkoYokokuTsuchis
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.shiharaiHohoHenkoYokokuTsuchisho.ShiharaiHohoHenkoYokokuTsuchishoProerty;
-import jp.co.ndensan.reams.db.dbd.business.report.shiharaiHohoHenkoYokokuTsuchisho.ShiharaiHohoHenkoYokokuTsuchishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.report.shiharaiHohoHenkoYokokuTsuchisho.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -39,22 +40,27 @@ public class ShiharaiHohoHenkoYokokuTsuchishoService {
      *
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文, RString 帳票分類ID, Ninshosha 認証者, RString 帳票情報, ReportManager reportManager) {
+    public void print(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号,
+            List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報,
+            ReportManager reportManager) {
         ShiharaiHohoHenkoYokokuTsuchishoProerty property = new ShiharaiHohoHenkoYokokuTsuchishoProerty();
         try (ReportAssembler<ShiharaiHohoHenkoYokokuTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-            for (ShiharaiHohoHenkoYokokuTsuchishoReport report : toReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体, 発行日, 文書番号, 通知書定型文, 帳票分類ID, 認証者, 帳票情報)) {
+            for (ShiharaiHohoHenkoYokokuTsuchishoReport report : toReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通,
+                    地方公共団体, 発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報)) {
                 ReportSourceWriter<ShiharaiHohoHenkoYokokuTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }
         }
     }
 
-    private static List<ShiharaiHohoHenkoYokokuTsuchishoReport> toReport(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文, RString 帳票分類ID, Ninshosha 認証者, RString 帳票情報) {
+    private static List<ShiharaiHohoHenkoYokokuTsuchishoReport> toReport(IKojin 個人情報, IAtesaki 宛先,
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
+            FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者,
+            ShiharaiHohoHenko 帳票情報) {
         List<ShiharaiHohoHenkoYokokuTsuchishoReport> list = new ArrayList();
-//        list.add(ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
-//                発行日, 文書番号, 通知書定型文, 帳票分類ID, 認証者, 帳票情報));
+        list.add(ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
+                発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報));
         return list;
     }
 
