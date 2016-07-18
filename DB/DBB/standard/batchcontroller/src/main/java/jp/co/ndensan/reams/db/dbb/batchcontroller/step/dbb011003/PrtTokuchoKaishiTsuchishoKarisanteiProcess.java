@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.PrtTokuchoKaishiTsuchishoKarisanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TsuchishoDataTempResult;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport;
@@ -100,8 +102,12 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
                 processParameter.get調定年度(), processParameter.get発行日(),
                 processParameter.get帳票作成日時(), 出力帳票一覧Entity.get出力順ID(), 出力帳票一覧Entity.get帳票ID(),
                 processParameter.get出力対象());
+        if (result == null) {
+            return;
+        }
         KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報 = new KariTokuchoKaishiTsuchisyoJoho();
         KariSanteiTsuchiShoKyotsuKomokuHenshu 仮算定通知書共通情報作成 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
+        List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List = new ArrayList<>();
         int 総ページ数 = 0;
         for (TsuchishoDataTempResult tempResult : result.get特徴開始通知書ResultList()) {
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
@@ -118,6 +124,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             仮算定通知書情報.set対象者_追加含む_情報_更正後(tempResult.get対象者_追加含む_情報());
             仮算定通知書情報.set帳票制御共通(result.get帳票制御共通());
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定通知書共通情報作成.create仮算定通知書共通情報(仮算定通知書情報);
+            編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
             仮算定特徴開始通知書情報.set発行日(processParameter.get発行日());
             仮算定特徴開始通知書情報.set編集後仮算定通知書共通情報(編集後仮算定通知書共通情報);
             仮算定特徴開始通知書情報.set帳票分類ID(特別徴収開始通知書仮算定_帳票分類ID);
@@ -125,7 +132,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             仮算定特徴開始通知書情報.set宛先情報(tempResult.get宛先情報());
             総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧Entity, 仮算定特徴開始通知書情報, result, 仮算定通知書情報);
         }
-        manager.publishTokuchoKaishiTsuchishoHonsantei(result, 総ページ数);
+        manager.printTsuchisho(result, 総ページ数, 編集後仮算定通知書共通情報List);
     }
 
     private int publish特徴開始通知書(KarisanteiBatchEntity 出力帳票一覧Entity,
@@ -315,8 +322,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目1 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_NENDO, "年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_TSUCHISHONO2, "通知書番号2");
+        key1(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_NENDO, "調定年度"),
+        key2(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_TSUCHISHONO2, "通知書番号");
 
         private final RString itemName;
         private final RString printName;
@@ -369,8 +376,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目2 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_NENDO, "年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_TSUCHISHONO2, "通知書番号2");
+        key1(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_NENDO, "調定年度"),
+        key2(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_TSUCHISHONO2, "通知書番号");
 
         private final RString itemName;
         private final RString printName;
@@ -424,7 +431,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目3 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_NENDO, "年度"),
+        key1(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_NENDO, "調定年度"),
         key2(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;
@@ -480,7 +487,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目4 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_NENDO2, "年度2"),
+        key1(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_NENDO2, "調定年度"),
         key2(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;
@@ -536,7 +543,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目5 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TITLENENDO, "titleNendo"),
+        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TITLENENDO, "調定年度"),
         key2(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TSUCHISHONO, "通知書番号");
 
         private final RString itemName;

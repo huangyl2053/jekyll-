@@ -19,10 +19,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.PrtTokuchoKaishiTsuchishoKarisanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TsuchishoDataTempResult;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KaishiTsuchishoKariHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiTsuchiShoKyotsuKomokuHenshu;
-import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoMybatisParameter;
@@ -35,7 +32,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohak
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoIdoshaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteitsuchishohakko.ITokuchoKarisanteiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbb.service.report.tokuchokarisanteitsuchishohakko.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
@@ -69,8 +65,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -149,54 +143,17 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
     /**
      * 通知書の発行
      *
-     * @param 調定年度 FlexibleYear
-     * @param 出力対象区分 RString
-     * @param 発行日 FlexibleDate
-     * @param 帳票作成日時 YMDHMS
-     * @param 出力順ID Long
-     * @param 帳票ID ReportId
+     * @param result PrtTokuchoKaishiTsuchishoKarisanteiResult
+     * @param 総ページ数 int
+     * @param 編集後仮算定通知書共通情報List List<EditedKariSanteiTsuchiShoKyotsu>
      */
-    public void printTsuchisho(FlexibleYear 調定年度, RString 出力対象区分, FlexibleDate 発行日, YMDHMS 帳票作成日時,
-            Long 出力順ID, ReportId 帳票ID) {
-        List<TsuchishoDataTempEntity> 出力対象List = get出力対象データ(出力対象区分, 出力順ID);
-        List<RString> 出力条件リスト = get出力条件リスト(発行日, 出力対象区分, 出力順ID);
-        ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類ID);
-        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-        if (出力対象List == null || 出力対象List.isEmpty() || 出力対象List.get(INT_0).get計算後情報() == null) {
-            load代行プリント送付票(発行日, 出力対象区分, 帳票制御共通, 地方公共団体, 出力順ID, Decimal.ZERO);
-            loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_0,
-                    CSV出力有無_なし, CSVファイル名_一覧表, CSVファイル名);
-            return;
-        }
-        List<TsuchishoDataTempResult> tempResultList = get仮算定情報(出力対象List);
-        List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List = new ArrayList<>();
-        KariSanteiTsuchiShoKyotsuKomokuHenshu 仮算定通知書共通情報作成 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
-        SourceDataCollection sourceDataCollection;
-        try (ReportManager reportManager = new ReportManager()) {
-            for (TsuchishoDataTempResult result : tempResultList) {
-                KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
-                仮算定通知書情報.set発行日(発行日);
-                仮算定通知書情報.set帳票分類ID(帳票分類ID);
-                仮算定通知書情報.set帳票ID(帳票ID);
-                仮算定通知書情報.set処理区分(ShoriKubun.バッチ);
-                仮算定通知書情報.set地方公共団体(地方公共団体);
-                仮算定通知書情報.set賦課の情報_更正後(result.get賦課の情報());
-                仮算定通知書情報.set納組情報(result.get納組情報());
-                仮算定通知書情報.set宛先情報(result.get宛先情報());
-                仮算定通知書情報.set前年度賦課情報(result.get前年度賦課情報());
-                仮算定通知書情報.set徴収方法情報_更正後(result.get徴収方法情報());
-                仮算定通知書情報.set対象者_追加含む_情報_更正後(result.get対象者_追加含む_情報());
-                仮算定通知書情報.set帳票制御共通(帳票制御共通);
-                EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定通知書共通情報作成.create仮算定通知書共通情報(仮算定通知書情報);
-                編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
-            }
-            new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService().print(編集後仮算定通知書共通情報List,
-                    出力順ID, 調定年度, 帳票作成日時, reportManager);
-            sourceDataCollection = reportManager.publish();
-        }
-        int 出力ページ数 = sourceDataCollection.iterator().next().getPageCount();
-        load代行プリント送付票(発行日, 出力対象区分, 帳票制御共通, 地方公共団体, 出力順ID, new Decimal(出力ページ数));
-        publish特別徴収開始通知書仮算定発行一覧表(調定年度, 帳票作成日時, 編集後仮算定通知書共通情報List);
+    public void printTsuchisho(PrtTokuchoKaishiTsuchishoKarisanteiResult result,
+            int 総ページ数, List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List) {
+        loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(), new RString(総ページ数),
+                CSV出力有無_あり, CSVファイル名_一覧表, result.get帳票名());
+        load代行プリント送付票(result.get発行日(), result.get出力対象区分(), result.get帳票制御共通(),
+                result.get地方公共団体(), result.get出力順ID(), new Decimal(総ページ数));
+        publish特別徴収開始通知書仮算定発行一覧表(result.get調定年度(), result.get帳票作成日時(), 編集後仮算定通知書共通情報List);
     }
 
     /**
@@ -255,8 +212,15 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
         PrtTokuchoKaishiTsuchishoKarisanteiResult prtResult = new PrtTokuchoKaishiTsuchishoKarisanteiResult();
         List<TsuchishoDataTempEntity> 出力対象List = get出力対象データ(出力対象, 出力順ID);
         List<RString> 出力条件リスト = get出力条件リスト(発行日, 出力対象, 出力順ID);
-        RString 帳票名 = get帳票名_特徴(帳票ID.getColumnValue());
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類ID);
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        if (出力対象List == null || 出力対象List.isEmpty() || 出力対象List.get(INT_0).get計算後情報() == null) {
+            load代行プリント送付票(発行日, 出力対象, 帳票制御共通, 地方公共団体, 出力順ID, Decimal.ZERO);
+            loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_0,
+                    CSV出力有無_なし, CSVファイル名_一覧表, CSVファイル名);
+            return null;
+        }
+        RString 帳票名 = get帳票名_特徴(帳票ID.getColumnValue());
         ChohyoSeigyoHanyo 帳票制御汎用 = load帳票制御汎用ByKey(帳票分類ID, 管理年度, 項目名);
         RString 宛名連番 = RString.EMPTY;
         if (設定値_1.equals(帳票制御汎用.get設定値())) {
@@ -284,20 +248,10 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
         prtResult.set帳票名(帳票名);
         prtResult.set調定年度(調定年度);
         prtResult.set帳票作成日時(帳票作成日時);
+        prtResult.set発行日(発行日);
+        prtResult.set出力対象区分(出力対象);
+        prtResult.set地方公共団体(地方公共団体);
         return prtResult;
-    }
-
-    /**
-     * 特徴開始通知書(仮算定）の発行メソッドです。
-     *
-     * @param result PrtTokuchoKaishiTsuchishoKarisanteiResult
-     * @param 総ページ数 int
-     */
-    public void publishTokuchoKaishiTsuchishoHonsantei(PrtTokuchoKaishiTsuchishoKarisanteiResult result, int 総ページ数) {
-        if (総ページ数 != 0) {
-            loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(), new RString(総ページ数),
-                    CSV出力有無_あり, CSVファイル名_一覧表, result.get帳票名());
-        }
     }
 
     private List<TsuchishoDataTempEntity> get出力対象データ(RString 出力対象区分, Long 出力順ID) {
