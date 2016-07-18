@@ -4,10 +4,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuSer
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * KokuhorenKetteiJohoPanel2 のクラスファイル
@@ -15,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBC-4380-010 quxiaodong
  */
 public class KokuhorenKetteiJohoPanel2Div extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
