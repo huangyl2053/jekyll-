@@ -135,7 +135,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
                 getParameter().get賦課年度(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME),
+                getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME).toDateString(),
                 ShoriName.特徴平準化計算_6月分.get名称(), 帳票分類ID);
     }
 

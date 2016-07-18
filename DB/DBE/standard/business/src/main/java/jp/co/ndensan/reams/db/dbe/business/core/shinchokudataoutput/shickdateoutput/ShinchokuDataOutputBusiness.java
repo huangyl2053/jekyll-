@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDat
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShujiiIkenshoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -29,8 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class ShinchokuDataOutputBusiness {
 
     private int 項番 = 0;
-    private static final int 桁目_7 = 7;
-    private static final RString 連番用 = new RString("0");
+    private static final int 桁目_5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private static final RString 厚労省IF識別コード_99A = new RString("99A");
@@ -53,31 +53,31 @@ public class ShinchokuDataOutputBusiness {
                 && map.get(厚労省IF識別コード.toString()).equals(nullToEmpty(entity.getKoroshoIfShikibetsuCode()))) {
             switch (nullToEmpty(entity.getRemban()).toString()) {
                 case "2":
-                    temoTableEntity.setRemban2(entity.getServiceJokyo());
+                    temoTableEntity.setRemban2(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "3":
-                    temoTableEntity.setRemban3(entity.getServiceJokyo());
+                    temoTableEntity.setRemban3(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "4":
-                    temoTableEntity.setRemban4(entity.getServiceJokyo());
+                    temoTableEntity.setRemban4(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "5":
-                    temoTableEntity.setRemban5(entity.getServiceJokyo());
+                    temoTableEntity.setRemban5(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "6":
-                    temoTableEntity.setRemban6(entity.getServiceJokyo());
+                    temoTableEntity.setRemban6(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "7":
-                    temoTableEntity.setRemban7(entity.getServiceJokyo());
+                    temoTableEntity.setRemban7(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "8":
-                    temoTableEntity.setRemban8(entity.getServiceJokyo());
+                    temoTableEntity.setRemban8(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "9":
-                    temoTableEntity.setRemban9(entity.getServiceJokyo());
+                    temoTableEntity.setRemban9(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 case "10":
-                    temoTableEntity.setRemban10(entity.getServiceJokyo());
+                    temoTableEntity.setRemban10(nullToEmpty(entity.getServiceJokyo()));
                     break;
                 default:
                     break;
@@ -88,7 +88,7 @@ public class ShinchokuDataOutputBusiness {
                 temoTableEntity = new NinteichosaJohoTempTableEntity();
                 temoTableEntity.setShinseishoKanriNo(nullToEmpty(entity.getShinseishoKanriNo()));
                 temoTableEntity.setKoroshoIfShikibetsuCode(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
-                temoTableEntity.setRemban1(entity.getServiceJokyo());
+                temoTableEntity.setRemban1(nullToEmpty(entity.getServiceJokyo()));
 
             }
             if (temoTableEntity != null) {
@@ -115,31 +115,31 @@ public class ShinchokuDataOutputBusiness {
                 && map.get(厚労省IF識別コード.toString()).equals(entity.getKoroshoIfShikibetsuCode())) {
             switch (entity.getRemban().toString()) {
                 case "2":
-                    temoTableEntity.setRemban2(entity.getResearchItem());
+                    temoTableEntity.setRemban2(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "3":
-                    temoTableEntity.setRemban3(entity.getResearchItem());
+                    temoTableEntity.setRemban3(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "4":
-                    temoTableEntity.setRemban4(entity.getResearchItem());
+                    temoTableEntity.setRemban4(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "5":
-                    temoTableEntity.setRemban5(entity.getResearchItem());
+                    temoTableEntity.setRemban5(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "6":
-                    temoTableEntity.setRemban6(entity.getResearchItem());
+                    temoTableEntity.setRemban6(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "7":
-                    temoTableEntity.setRemban7(entity.getResearchItem());
+                    temoTableEntity.setRemban7(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "8":
-                    temoTableEntity.setRemban8(entity.getResearchItem());
+                    temoTableEntity.setRemban8(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "9":
-                    temoTableEntity.setRemban9(entity.getResearchItem());
+                    temoTableEntity.setRemban9(nullToEmpty(entity.getResearchItem()));
                     break;
                 case "10":
-                    temoTableEntity.setRemban10(entity.getResearchItem());
+                    temoTableEntity.setRemban10(nullToEmpty(entity.getResearchItem()));
                     break;
                 default:
                     break;
@@ -158,7 +158,7 @@ public class ShinchokuDataOutputBusiness {
                 temoTableEntity = new ChosaItemJohoTempTableEntity();
                 temoTableEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
                 temoTableEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
-                temoTableEntity.setRemban1(entity.getResearchItem());
+                temoTableEntity.setRemban1(nullToEmpty(entity.getResearchItem()));
             }
             if (temoTableEntity != null) {
                 調査調査項目リスト.add(temoTableEntity);
@@ -184,22 +184,22 @@ public class ShinchokuDataOutputBusiness {
                 && map.get(厚労省IF識別コード.toString()).equals(entity.getKoroshoIfShikibetsuCode())) {
             switch (entity.getRemban().toString()) {
                 case "15":
-                    temoTableEntity.setRemban15(entity.getIkenItem());
+                    temoTableEntity.setRemban15(nullToEmpty(entity.getIkenItem()));
                     break;
                 case "16":
-                    temoTableEntity.setRemban16(entity.getIkenItem());
+                    temoTableEntity.setRemban16(nullToEmpty(entity.getIkenItem()));
                     break;
                 case "17":
-                    temoTableEntity.setRemban17(entity.getIkenItem());
+                    temoTableEntity.setRemban17(nullToEmpty(entity.getIkenItem()));
                     break;
                 case "18":
-                    temoTableEntity.setRemban18(entity.getIkenItem());
+                    temoTableEntity.setRemban18(nullToEmpty(entity.getIkenItem()));
                     break;
                 case "19":
-                    temoTableEntity.setRemban19(entity.getIkenItem());
+                    temoTableEntity.setRemban19(nullToEmpty(entity.getIkenItem()));
                     break;
                 case "69":
-                    temoTableEntity.setRemban69(entity.getIkenItem());
+                    temoTableEntity.setRemban69(nullToEmpty(entity.getIkenItem()));
                     break;
                 default:
                     break;
@@ -209,7 +209,7 @@ public class ShinchokuDataOutputBusiness {
                 temoTableEntity = new ShujiiIkenshoJohoTempTableEntity();
                 temoTableEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
                 temoTableEntity.setKoroshoIfShikibetsuCode(entity.getKoroshoIfShikibetsuCode());
-                temoTableEntity.setRemban14(entity.getIkenItem());
+                temoTableEntity.setRemban14(nullToEmpty(entity.getIkenItem()));
 
             }
             if (temoTableEntity != null) {
@@ -272,7 +272,7 @@ public class ShinchokuDataOutputBusiness {
         ShinchokuDataOutputEucCsvEntity eucEntity = new ShinchokuDataOutputEucCsvEntity();
         項番 = 項番 + 1;
         RString 連番号 = new RString(Integer.toString(項番));
-        eucEntity.set項番(連番号.padLeft(連番用, 桁目_7));
+        eucEntity.set項番(連番号.padZeroToLeft(桁目_5));
         eucEntity.setステータス(RString.EMPTY);
         eucEntity.set識別コード(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
         eucEntity.set保険者番号(nullToEmpty(entity.getShoKisaiHokenshaNo()));
@@ -357,7 +357,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set介護予防通所介護デイサービス(nullToEmpty(entity.getサービスremban6()));
         eucEntity.set介護予防通所リハビリテーション(nullToEmpty(entity.getサービスremban7()));
         eucEntity.set住宅改修予防給付(nullToEmpty(entity.getServiceJokyoFlag()));
-        if (new RString("予防給付サービス").equals(entity.getServiceKubunCode())) {
+        if (ServiceKubunCode.予防給付サービス.getコード().equals(entity.getServiceKubunCode())) {
             予防給付サービス(entity, eucEntity);
             前回予防給付サービス(entity, eucEntity);
         }
@@ -990,34 +990,34 @@ public class ShinchokuDataOutputBusiness {
     private void 項番編集(NinteichosahyoServiceJokyoRelateEntity entity, NinteichosaJohoTempTableEntity temoTableEntity) {
         switch (nullToEmpty(entity.getRemban()).toString()) {
             case "11":
-                temoTableEntity.setRemban11(entity.getServiceJokyo());
+                temoTableEntity.setRemban11(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "12":
-                temoTableEntity.setRemban12(entity.getServiceJokyo());
+                temoTableEntity.setRemban12(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "13":
-                temoTableEntity.setRemban13(entity.getServiceJokyo());
+                temoTableEntity.setRemban13(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "14":
-                temoTableEntity.setRemban14(entity.getServiceJokyo());
+                temoTableEntity.setRemban14(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "15":
-                temoTableEntity.setRemban15(entity.getServiceJokyo());
+                temoTableEntity.setRemban15(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "16":
-                temoTableEntity.setRemban16(entity.getServiceJokyo());
+                temoTableEntity.setRemban16(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "17":
-                temoTableEntity.setRemban17(entity.getServiceJokyo());
+                temoTableEntity.setRemban17(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "18":
-                temoTableEntity.setRemban18(entity.getServiceJokyo());
+                temoTableEntity.setRemban18(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "19":
-                temoTableEntity.setRemban19(entity.getServiceJokyo());
+                temoTableEntity.setRemban19(nullToEmpty(entity.getServiceJokyo()));
                 break;
             case "20":
-                temoTableEntity.setRemban20(entity.getServiceJokyo());
+                temoTableEntity.setRemban20(nullToEmpty(entity.getServiceJokyo()));
                 break;
             default:
                 break;
@@ -1028,34 +1028,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "11":
-                temoTableEntity.setRemban11(entity.getResearchItem());
+                temoTableEntity.setRemban11(nullToEmpty(entity.getResearchItem()));
                 break;
             case "12":
-                temoTableEntity.setRemban12(entity.getResearchItem());
+                temoTableEntity.setRemban12(nullToEmpty(entity.getResearchItem()));
                 break;
             case "13":
-                temoTableEntity.setRemban13(entity.getResearchItem());
+                temoTableEntity.setRemban13(nullToEmpty(entity.getResearchItem()));
                 break;
             case "14":
-                temoTableEntity.setRemban14(entity.getResearchItem());
+                temoTableEntity.setRemban14(nullToEmpty(entity.getResearchItem()));
                 break;
             case "15":
-                temoTableEntity.setRemban15(entity.getResearchItem());
+                temoTableEntity.setRemban15(nullToEmpty(entity.getResearchItem()));
                 break;
             case "16":
-                temoTableEntity.setRemban16(entity.getResearchItem());
+                temoTableEntity.setRemban16(nullToEmpty(entity.getResearchItem()));
                 break;
             case "17":
-                temoTableEntity.setRemban17(entity.getResearchItem());
+                temoTableEntity.setRemban17(nullToEmpty(entity.getResearchItem()));
                 break;
             case "18":
-                temoTableEntity.setRemban18(entity.getResearchItem());
+                temoTableEntity.setRemban18(nullToEmpty(entity.getResearchItem()));
                 break;
             case "19":
-                temoTableEntity.setRemban19(entity.getResearchItem());
+                temoTableEntity.setRemban19(nullToEmpty(entity.getResearchItem()));
                 break;
             case "20":
-                temoTableEntity.setRemban20(entity.getResearchItem());
+                temoTableEntity.setRemban20(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1066,34 +1066,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "21":
-                temoTableEntity.setRemban21(entity.getResearchItem());
+                temoTableEntity.setRemban21(nullToEmpty(entity.getResearchItem()));
                 break;
             case "22":
-                temoTableEntity.setRemban22(entity.getResearchItem());
+                temoTableEntity.setRemban22(nullToEmpty(entity.getResearchItem()));
                 break;
             case "23":
-                temoTableEntity.setRemban23(entity.getResearchItem());
+                temoTableEntity.setRemban23(nullToEmpty(entity.getResearchItem()));
                 break;
             case "24":
-                temoTableEntity.setRemban24(entity.getResearchItem());
+                temoTableEntity.setRemban24(nullToEmpty(entity.getResearchItem()));
                 break;
             case "25":
-                temoTableEntity.setRemban25(entity.getResearchItem());
+                temoTableEntity.setRemban25(nullToEmpty(entity.getResearchItem()));
                 break;
             case "26":
-                temoTableEntity.setRemban26(entity.getResearchItem());
+                temoTableEntity.setRemban26(nullToEmpty(entity.getResearchItem()));
                 break;
             case "27":
-                temoTableEntity.setRemban27(entity.getResearchItem());
+                temoTableEntity.setRemban27(nullToEmpty(entity.getResearchItem()));
                 break;
             case "28":
-                temoTableEntity.setRemban28(entity.getResearchItem());
+                temoTableEntity.setRemban28(nullToEmpty(entity.getResearchItem()));
                 break;
             case "29":
-                temoTableEntity.setRemban29(entity.getResearchItem());
+                temoTableEntity.setRemban29(nullToEmpty(entity.getResearchItem()));
                 break;
             case "30":
-                temoTableEntity.setRemban30(entity.getResearchItem());
+                temoTableEntity.setRemban30(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1104,34 +1104,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "31":
-                temoTableEntity.setRemban31(entity.getResearchItem());
+                temoTableEntity.setRemban31(nullToEmpty(entity.getResearchItem()));
                 break;
             case "32":
-                temoTableEntity.setRemban32(entity.getResearchItem());
+                temoTableEntity.setRemban32(nullToEmpty(entity.getResearchItem()));
                 break;
             case "33":
-                temoTableEntity.setRemban33(entity.getResearchItem());
+                temoTableEntity.setRemban33(nullToEmpty(entity.getResearchItem()));
                 break;
             case "34":
-                temoTableEntity.setRemban34(entity.getResearchItem());
+                temoTableEntity.setRemban34(nullToEmpty(entity.getResearchItem()));
                 break;
             case "35":
-                temoTableEntity.setRemban35(entity.getResearchItem());
+                temoTableEntity.setRemban35(nullToEmpty(entity.getResearchItem()));
                 break;
             case "36":
-                temoTableEntity.setRemban36(entity.getResearchItem());
+                temoTableEntity.setRemban36(nullToEmpty(entity.getResearchItem()));
                 break;
             case "37":
-                temoTableEntity.setRemban37(entity.getResearchItem());
+                temoTableEntity.setRemban37(nullToEmpty(entity.getResearchItem()));
                 break;
             case "38":
-                temoTableEntity.setRemban38(entity.getResearchItem());
+                temoTableEntity.setRemban38(nullToEmpty(entity.getResearchItem()));
                 break;
             case "39":
-                temoTableEntity.setRemban39(entity.getResearchItem());
+                temoTableEntity.setRemban39(nullToEmpty(entity.getResearchItem()));
                 break;
             case "40":
-                temoTableEntity.setRemban40(entity.getResearchItem());
+                temoTableEntity.setRemban40(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1142,34 +1142,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "41":
-                temoTableEntity.setRemban41(entity.getResearchItem());
+                temoTableEntity.setRemban41(nullToEmpty(entity.getResearchItem()));
                 break;
             case "42":
-                temoTableEntity.setRemban42(entity.getResearchItem());
+                temoTableEntity.setRemban42(nullToEmpty(entity.getResearchItem()));
                 break;
             case "43":
-                temoTableEntity.setRemban43(entity.getResearchItem());
+                temoTableEntity.setRemban43(nullToEmpty(entity.getResearchItem()));
                 break;
             case "44":
-                temoTableEntity.setRemban44(entity.getResearchItem());
+                temoTableEntity.setRemban44(nullToEmpty(entity.getResearchItem()));
                 break;
             case "45":
-                temoTableEntity.setRemban45(entity.getResearchItem());
+                temoTableEntity.setRemban45(nullToEmpty(entity.getResearchItem()));
                 break;
             case "46":
-                temoTableEntity.setRemban46(entity.getResearchItem());
+                temoTableEntity.setRemban46(nullToEmpty(entity.getResearchItem()));
                 break;
             case "47":
-                temoTableEntity.setRemban47(entity.getResearchItem());
+                temoTableEntity.setRemban47(nullToEmpty(entity.getResearchItem()));
                 break;
             case "48":
-                temoTableEntity.setRemban48(entity.getResearchItem());
+                temoTableEntity.setRemban48(nullToEmpty(entity.getResearchItem()));
                 break;
             case "49":
-                temoTableEntity.setRemban49(entity.getResearchItem());
+                temoTableEntity.setRemban49(nullToEmpty(entity.getResearchItem()));
                 break;
             case "50":
-                temoTableEntity.setRemban50(entity.getResearchItem());
+                temoTableEntity.setRemban50(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1180,34 +1180,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "51":
-                temoTableEntity.setRemban51(entity.getResearchItem());
+                temoTableEntity.setRemban51(nullToEmpty(entity.getResearchItem()));
                 break;
             case "52":
-                temoTableEntity.setRemban52(entity.getResearchItem());
+                temoTableEntity.setRemban52(nullToEmpty(entity.getResearchItem()));
                 break;
             case "53":
-                temoTableEntity.setRemban53(entity.getResearchItem());
+                temoTableEntity.setRemban53(nullToEmpty(entity.getResearchItem()));
                 break;
             case "54":
-                temoTableEntity.setRemban54(entity.getResearchItem());
+                temoTableEntity.setRemban54(nullToEmpty(entity.getResearchItem()));
                 break;
             case "55":
-                temoTableEntity.setRemban55(entity.getResearchItem());
+                temoTableEntity.setRemban55(nullToEmpty(entity.getResearchItem()));
                 break;
             case "56":
-                temoTableEntity.setRemban56(entity.getResearchItem());
+                temoTableEntity.setRemban56(nullToEmpty(entity.getResearchItem()));
                 break;
             case "57":
-                temoTableEntity.setRemban57(entity.getResearchItem());
+                temoTableEntity.setRemban57(nullToEmpty(entity.getResearchItem()));
                 break;
             case "58":
-                temoTableEntity.setRemban58(entity.getResearchItem());
+                temoTableEntity.setRemban58(nullToEmpty(entity.getResearchItem()));
                 break;
             case "59":
-                temoTableEntity.setRemban59(entity.getResearchItem());
+                temoTableEntity.setRemban59(nullToEmpty(entity.getResearchItem()));
                 break;
             case "60":
-                temoTableEntity.setRemban60(entity.getResearchItem());
+                temoTableEntity.setRemban60(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1218,34 +1218,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "61":
-                temoTableEntity.setRemban61(entity.getResearchItem());
+                temoTableEntity.setRemban61(nullToEmpty(entity.getResearchItem()));
                 break;
             case "62":
-                temoTableEntity.setRemban62(entity.getResearchItem());
+                temoTableEntity.setRemban62(nullToEmpty(entity.getResearchItem()));
                 break;
             case "63":
-                temoTableEntity.setRemban63(entity.getResearchItem());
+                temoTableEntity.setRemban63(nullToEmpty(entity.getResearchItem()));
                 break;
             case "64":
-                temoTableEntity.setRemban64(entity.getResearchItem());
+                temoTableEntity.setRemban64(nullToEmpty(entity.getResearchItem()));
                 break;
             case "65":
-                temoTableEntity.setRemban65(entity.getResearchItem());
+                temoTableEntity.setRemban65(nullToEmpty(entity.getResearchItem()));
                 break;
             case "66":
-                temoTableEntity.setRemban66(entity.getResearchItem());
+                temoTableEntity.setRemban66(nullToEmpty(entity.getResearchItem()));
                 break;
             case "67":
-                temoTableEntity.setRemban67(entity.getResearchItem());
+                temoTableEntity.setRemban67(nullToEmpty(entity.getResearchItem()));
                 break;
             case "68":
-                temoTableEntity.setRemban68(entity.getResearchItem());
+                temoTableEntity.setRemban68(nullToEmpty(entity.getResearchItem()));
                 break;
             case "69":
-                temoTableEntity.setRemban69(entity.getResearchItem());
+                temoTableEntity.setRemban69(nullToEmpty(entity.getResearchItem()));
                 break;
             case "70":
-                temoTableEntity.setRemban70(entity.getResearchItem());
+                temoTableEntity.setRemban70(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1256,34 +1256,34 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "71":
-                temoTableEntity.setRemban71(entity.getResearchItem());
+                temoTableEntity.setRemban71(nullToEmpty(entity.getResearchItem()));
                 break;
             case "72":
-                temoTableEntity.setRemban72(entity.getResearchItem());
+                temoTableEntity.setRemban72(nullToEmpty(entity.getResearchItem()));
                 break;
             case "73":
-                temoTableEntity.setRemban73(entity.getResearchItem());
+                temoTableEntity.setRemban73(nullToEmpty(entity.getResearchItem()));
                 break;
             case "74":
-                temoTableEntity.setRemban74(entity.getResearchItem());
+                temoTableEntity.setRemban74(nullToEmpty(entity.getResearchItem()));
                 break;
             case "75":
-                temoTableEntity.setRemban75(entity.getResearchItem());
+                temoTableEntity.setRemban75(nullToEmpty(entity.getResearchItem()));
                 break;
             case "76":
-                temoTableEntity.setRemban76(entity.getResearchItem());
+                temoTableEntity.setRemban76(nullToEmpty(entity.getResearchItem()));
                 break;
             case "77":
-                temoTableEntity.setRemban77(entity.getResearchItem());
+                temoTableEntity.setRemban77(nullToEmpty(entity.getResearchItem()));
                 break;
             case "78":
-                temoTableEntity.setRemban78(entity.getResearchItem());
+                temoTableEntity.setRemban78(nullToEmpty(entity.getResearchItem()));
                 break;
             case "79":
-                temoTableEntity.setRemban79(entity.getResearchItem());
+                temoTableEntity.setRemban79(nullToEmpty(entity.getResearchItem()));
                 break;
             case "80":
-                temoTableEntity.setRemban80(entity.getResearchItem());
+                temoTableEntity.setRemban80(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;
@@ -1294,19 +1294,19 @@ public class ShinchokuDataOutputBusiness {
             ChosaItemJohoTempTableEntity temoTableEntity) {
         switch (entity.getRemban().toString()) {
             case "81":
-                temoTableEntity.setRemban81(entity.getResearchItem());
+                temoTableEntity.setRemban81(nullToEmpty(entity.getResearchItem()));
                 break;
             case "82":
-                temoTableEntity.setRemban82(entity.getResearchItem());
+                temoTableEntity.setRemban82(nullToEmpty(entity.getResearchItem()));
                 break;
             case "83":
-                temoTableEntity.setRemban83(entity.getResearchItem());
+                temoTableEntity.setRemban83(nullToEmpty(entity.getResearchItem()));
                 break;
             case "84":
-                temoTableEntity.setRemban84(entity.getResearchItem());
+                temoTableEntity.setRemban84(nullToEmpty(entity.getResearchItem()));
                 break;
             case "85":
-                temoTableEntity.setRemban85(entity.getResearchItem());
+                temoTableEntity.setRemban85(nullToEmpty(entity.getResearchItem()));
                 break;
             default:
                 break;

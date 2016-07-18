@@ -309,7 +309,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     public void print要介護認定調査票差異チェック票_両面右(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
-        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002_SaiChekkuhyoMigi.getReportId());
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002.getReportId());
         try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
             for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
                 ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -317,7 +317,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             }
         }
     }
-      /**
+
+    /**
      * 要介護認定調査票差異チェック票_両面左を出力します。
      *
      * @param チェック票List 要介護認定調査票差異チェック票List
@@ -325,7 +326,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     public void print要介護認定調査票差異チェック票_両面左(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
-        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003_SaiChekkuhyoHidari.getReportId());
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003.getReportId());
         try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
             for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
                 ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);

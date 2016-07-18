@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.kaigohokenrenrakuhyo;
+package jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo;
 
-import jp.co.ndensan.reams.db.dba.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 

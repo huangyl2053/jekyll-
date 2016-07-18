@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1030001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,16 +39,25 @@ public class KanryoShoriShinsaUketsukeHandler {
     }
 
     /**
+     * 要介護認定完了情報追加の処理です。
+     *
+     * @param 申請書管理番号 RString
+     * @return NinteiKanryoJoho
+     */
+    public NinteiKanryoJoho 要介護認定完了情報が追加(RString 申請書管理番号) {
+        NinteiKanryoJoho ninteiKanryoJoho = new NinteiKanryoJoho(new ShinseishoKanriNo(申請書管理番号));
+        return ninteiKanryoJoho.createBuilderForEdit().set認定申請情報登録完了年月日(FlexibleDate.getNowDate()).build();
+    }
+
+    /**
      * 要介護認定完了情報更新の処理です。
      *
-     * @param list List<NinteiKanryoJoho>
-     * @return List<NinteiKanryoJoho>
+     * @param ninteiKanryoJoho NinteiKanryoJoho
+     * @return NinteiKanryoJoho
      */
-    public List<NinteiKanryoJoho> 要介護認定完了情報更新(List<NinteiKanryoJoho> list) {
-        for (NinteiKanryoJoho ninteiKanryoJoho : list) {
-            ninteiKanryoJoho.createBuilderForEdit().set認定申請情報登録完了年月日(FlexibleDate.getNowDate()).build();
-        }
-        return list;
+    public NinteiKanryoJoho 要介護認定完了情報更新(NinteiKanryoJoho ninteiKanryoJoho) {
+
+        return ninteiKanryoJoho.createBuilderForEdit().set認定申請情報登録完了年月日(FlexibleDate.getNowDate()).build();
     }
 
 }

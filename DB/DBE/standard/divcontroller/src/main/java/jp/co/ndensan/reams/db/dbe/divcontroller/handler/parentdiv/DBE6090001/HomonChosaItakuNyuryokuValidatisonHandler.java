@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6090001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.HomonChosaItakuNyuryokuDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -112,9 +111,9 @@ public class HomonChosaItakuNyuryokuValidatisonHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        Validate対象者一覧未表示(UrInformationMessages.該当データなし),
+        Validate対象者一覧未表示(UrErrorMessages.該当データなし),
         Validate最大表示件数の必須入力チェック(UrErrorMessages.必須, "最大表示件数"),
-        Validate調査実績一覧未表示(UrInformationMessages.該当データなし);
+        Validate調査実績一覧未表示(UrErrorMessages.該当データなし);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

@@ -32,6 +32,8 @@ public class NinteichosahyoServiceJokyoSkuseyiProcess extends BatchProcessBase<N
     private static final RString TABLE_計算中間_NAME = new RString("NinteichosaJohoTemp");
     private ShinchokuDataOutputProcessParamter paramter;
     private List<NinteichosaJohoTempTableEntity> サービスの状況一時リスト;
+    private static final RString 申請書管理番号 = new RString("申請書管理番号");
+    private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private NinteichosaJohoTempTableEntity temoTableEntity;
     private ShinchokuDataOutputBusiness business;
     private Map<String, RString> map;
@@ -43,8 +45,8 @@ public class NinteichosahyoServiceJokyoSkuseyiProcess extends BatchProcessBase<N
         サービスの状況一時リスト = new ArrayList<>();
         business = new ShinchokuDataOutputBusiness();
         map = new HashMap<>();
-        map.put("申請書管理番号", RString.EMPTY);
-        map.put("厚労省IF識別コード", RString.EMPTY);
+        map.put(申請書管理番号.toString(), RString.EMPTY);
+        map.put(厚労省IF識別コード.toString(), RString.EMPTY);
     }
 
     @Override

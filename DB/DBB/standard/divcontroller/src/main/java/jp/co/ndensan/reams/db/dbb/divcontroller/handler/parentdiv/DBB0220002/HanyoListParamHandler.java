@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoCh
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -111,8 +112,8 @@ public class HanyoListParamHandler {
             parameter.set賦課年度(賦課年度);
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null) {
-            parameter.set抽出期間From(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue());
-            parameter.set抽出期間To(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue());
+            parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue().toDateString()));
+            parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue().toDateString()));
         }
         課税区分減免前後(parameter);
         宛名抽出条件と出力順と出力項目(parameter);
