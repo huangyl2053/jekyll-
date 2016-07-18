@@ -235,7 +235,7 @@ public class HomonChosaItakuNyuryokuHandler {
         int rowCount = div.getDgShinsakaiIin().getClickedItem().getId();
         dgShinsakaiIin_Row row = dgChosainList.get(rowCount);
         if (状態_更新.equals(div.getHdt状態())) {
-            row.setNinteiChosaItakuryo(DecimalFormatter.toRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));
+            row.setNinteiChosaItakuryo(DecimalFormatter.toコンマ区切りRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));
             row.setShiharaiMemo(div.getTxtShiharaiMemo().getValue());
             if (銀行振込_出力済.equals(div.getRadGinkoFurikomi().getSelectedKey())) {
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());
