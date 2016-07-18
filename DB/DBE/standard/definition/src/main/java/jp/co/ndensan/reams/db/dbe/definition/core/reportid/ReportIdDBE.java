@@ -477,7 +477,11 @@ public enum ReportIdDBE {
     /**
      * 帳票出力用認定調査実績集計表の帳票ID。
      */
-    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表"));
+    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表")),
+    /**
+     * 介護認定審査会委員実績集計表の帳票ID。
+     */
+    DBE601003(new ReportId("DBE601003_ShinsaiinJissekiIchiran"), new RString("介護認定審査会委員実績集計表"));
 
     private final ReportId reportId;
 
