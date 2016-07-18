@@ -30,6 +30,8 @@ public class NinteichosahyoChosaItemSkuseyiProcess extends BatchProcessBase<Nint
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinchokudataoutput."
             + "IShinchokuDataOutputMapper.getNinteichosahyoChosa");
     private static final RString 調査調査項目 = new RString("ChosaItemJohoTemp");
+    private static final RString 申請書管理番号 = new RString("申請書管理番号");
+    private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private ShinchokuDataOutputProcessParamter paramter;
     private List<ChosaItemJohoTempTableEntity> 調査調査項目リスト;
     private ChosaItemJohoTempTableEntity temoTableEntity;
@@ -43,8 +45,8 @@ public class NinteichosahyoChosaItemSkuseyiProcess extends BatchProcessBase<Nint
         調査調査項目リスト = new ArrayList<>();
         business = new ShinchokuDataOutputBusiness();
         map = new HashMap<>();
-        map.put("申請書管理番号", RString.EMPTY);
-        map.put("厚労省IF識別コード", RString.EMPTY);
+        map.put(申請書管理番号.toString(), RString.EMPTY);
+        map.put(厚労省IF識別コード.toString(), RString.EMPTY);
     }
 
     @Override
