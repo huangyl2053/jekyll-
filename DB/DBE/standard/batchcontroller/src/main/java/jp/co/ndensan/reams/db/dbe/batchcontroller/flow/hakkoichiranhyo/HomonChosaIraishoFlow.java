@@ -122,8 +122,10 @@ public class HomonChosaIraishoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBatc
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
             executeStep(SAICHEKKUHYO1);
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-            executeStep(SAICHEKKUHYO2);
             executeStep(SAICHEKKUHYO3);
+            executeStep(SAICHEKKUHYO4);
+        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            executeStep(SAICHEKKUHYO2);
             executeStep(SAICHEKKUHYO4);
         }
     }
