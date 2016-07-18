@@ -33,9 +33,9 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.kyushichosoncode.KyuShichosonCodeJoho;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
@@ -105,6 +105,7 @@ public final class FutsuChoshuTotalHandler {
     private static final int 数字_５ = 5;
     private static final int 数字_４ = 4;
     private static final int 数字_３ = 3;
+    private static final int 数字_２ = 2;
     private static final int 数字_１ = 1;
     private static final RString 月の期_00 = new RString("00");
     private static final RString 第４月 = new RString("04");
@@ -1427,7 +1428,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳカット印字位置ddl() {
         List<KeyValueDataSource> ＣＶＳカット印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_１３; i = i + 1) {
-            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳカット印字位置;
     }
@@ -1435,7 +1437,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳカット印字位置ddl_過年度() {
         List<KeyValueDataSource> ＣＶＳカット印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_５; i = i + 1) {
-            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳカット印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳカット印字位置;
     }
@@ -1443,7 +1446,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳ連帳印字位置ddl() {
         List<KeyValueDataSource> ＣＶＳ連帳印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_１３; i = i + 1) {
-            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳ連帳印字位置;
     }
@@ -1451,7 +1455,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setＣＶＳ連帳印字位置ddl_過年度() {
         List<KeyValueDataSource> ＣＶＳ連帳印字位置 = new ArrayList<>();
         for (int i = 1; i < 数字_７; i = i + 1) {
-            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ＣＶＳ連帳印字位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ＣＶＳ連帳印字位置;
     }
@@ -1459,7 +1464,8 @@ public final class FutsuChoshuTotalHandler {
     private List<KeyValueDataSource> setブック開始位置ddl() {
         List<KeyValueDataSource> ブック開始位置 = new ArrayList<>();
         for (int i = 1; i < 数字_６; i = i + 1) {
-            ブック開始位置.add(new KeyValueDataSource(new RString(String.valueOf(i)), new RString(String.valueOf(i))));
+            ブック開始位置.add(new KeyValueDataSource(new RString(String.valueOf(i)).padZeroToLeft(数字_２),
+                    new RString(String.valueOf(i))));
         }
         return ブック開始位置;
     }

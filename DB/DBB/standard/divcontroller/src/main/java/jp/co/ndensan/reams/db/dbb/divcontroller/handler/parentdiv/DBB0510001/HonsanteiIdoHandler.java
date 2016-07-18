@@ -560,6 +560,7 @@ public class HonsanteiIdoHandler {
         } else {
             paramter.set随時フラグ(Boolean.FALSE);
         }
+        paramter.set算定期(算定期);
         return paramter;
     }
 
