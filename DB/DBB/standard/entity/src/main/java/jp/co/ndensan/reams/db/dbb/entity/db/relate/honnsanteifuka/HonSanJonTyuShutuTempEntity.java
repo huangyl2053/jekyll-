@@ -55,5 +55,5 @@ public class HonSanJonTyuShutuTempEntity implements IDbAccessable {
     private FlexibleYear choteiNendo;
     private FlexibleYear fukaNendo;
     private TsuchishoNo tsuchishoNo;
-    private FlexibleDate fukaYMD;
+    private FlexibleDate kijunYMD;
 }

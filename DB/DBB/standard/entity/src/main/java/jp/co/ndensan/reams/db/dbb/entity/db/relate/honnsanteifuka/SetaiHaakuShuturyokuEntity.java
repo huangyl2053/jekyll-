@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class SetaiHaakuShuturyokuEntity {
 
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
-    private FlexibleDate fukaYMD;
+    private FlexibleDate kijunYMD;
+    private FlexibleYear shotokuNendo;
     private RString jushochiTokureiFlag;
 }
