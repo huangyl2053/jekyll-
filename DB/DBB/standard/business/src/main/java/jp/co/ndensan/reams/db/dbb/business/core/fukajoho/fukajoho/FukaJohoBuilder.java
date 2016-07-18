@@ -110,7 +110,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         entity.setShikibetsuCode(識別コード);
         return this;
     }
@@ -144,7 +143,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set資格取得日(FlexibleDate 資格取得日) {
-        requireNonNull(資格取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得日"));
         entity.setShikakuShutokuYMD(資格取得日);
         return this;
     }
@@ -156,7 +154,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set資格取得事由(RString 資格取得事由) {
-        requireNonNull(資格取得事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由"));
         entity.setShikakuShutokuJiyu(資格取得事由);
         return this;
     }
@@ -179,7 +176,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set資格喪失事由(RString 資格喪失事由) {
-        requireNonNull(資格喪失事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由"));
         entity.setShikakuSoshitsuJiyu(資格喪失事由);
         return this;
     }
@@ -191,7 +187,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set生活保護扶助種類(RString 生活保護扶助種類) {
-        requireNonNull(生活保護扶助種類, UrSystemErrorMessages.値がnull.getReplacedMessage("生活保護扶助種類"));
         entity.setSeihofujoShurui(生活保護扶助種類);
         return this;
     }
@@ -203,7 +198,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set生保開始日(FlexibleDate 生保開始日) {
-        requireNonNull(生保開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("生保開始日"));
         entity.setSeihoKaishiYMD(生保開始日);
         return this;
     }
@@ -226,7 +220,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set老年開始日(FlexibleDate 老年開始日) {
-        requireNonNull(老年開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("老年開始日"));
         entity.setRonenKaishiYMD(老年開始日);
         return this;
     }
@@ -238,7 +231,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set老年廃止日(FlexibleDate 老年廃止日) {
-        requireNonNull(老年廃止日, UrSystemErrorMessages.値がnull.getReplacedMessage("老年廃止日"));
         entity.setRonenHaishiYMD(老年廃止日);
         return this;
     }
@@ -250,7 +242,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set賦課期日(FlexibleDate 賦課期日) {
-        requireNonNull(賦課期日, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課期日"));
         entity.setFukaYMD(賦課期日);
         return this;
     }
@@ -262,7 +253,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set課税区分(RString 課税区分) {
-        requireNonNull(課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("課税区分"));
         entity.setKazeiKubun(課税区分);
         return this;
     }
@@ -274,7 +264,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set世帯課税区分(RString 世帯課税区分) {
-        requireNonNull(世帯課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯課税区分"));
         entity.setSetaikazeiKubun(世帯課税区分);
         return this;
     }
@@ -407,7 +396,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set調定日時(YMDHMS 調定日時) {
-        requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
         entity.setChoteiNichiji(調定日時);
         return this;
     }
@@ -419,7 +407,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set調定事由1(RString 調定事由1) {
-        requireNonNull(調定事由1, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由1"));
         entity.setChoteiJiyu1(調定事由1);
         return this;
     }
@@ -431,7 +418,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set調定事由2(RString 調定事由2) {
-        requireNonNull(調定事由2, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由2"));
         entity.setChoteiJiyu2(調定事由2);
         return this;
     }
@@ -443,7 +429,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set調定事由3(RString 調定事由3) {
-        requireNonNull(調定事由3, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由3"));
         entity.setChoteiJiyu3(調定事由3);
         return this;
     }
@@ -455,7 +440,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set調定事由4(RString 調定事由4) {
-        requireNonNull(調定事由4, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由4"));
         entity.setChoteiJiyu4(調定事由4);
         return this;
     }
@@ -467,7 +451,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set更正月(RString 更正月) {
-        requireNonNull(更正月, UrSystemErrorMessages.値がnull.getReplacedMessage("更正月"));
         entity.setKoseiM(更正月);
         return this;
     }
@@ -512,8 +495,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set保険料段階_仮算定時(RString 保険料段階_仮算定時) {
-        requireNonNull(保険料段階_仮算定時, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階_仮算定時")
-        );
         entity.setHokenryoDankaiKarisanntei(保険料段階_仮算定時);
         return this;
     }
@@ -525,7 +506,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set徴収方法履歴番号(int 徴収方法履歴番号) {
-        requireNonNull(徴収方法履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法履歴番号"));
         entity.setChoshuHohoRirekiNo(徴収方法履歴番号);
         return this;
     }
@@ -549,7 +529,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set異動基準日時(YMDHMS 異動基準日時) {
-        requireNonNull(異動基準日時, UrSystemErrorMessages.値がnull.getReplacedMessage("異動基準日時"));
         entity.setIdoKijunNichiji(異動基準日時);
         return this;
     }
@@ -561,7 +540,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set口座区分(RString 口座区分) {
-        requireNonNull(口座区分, UrSystemErrorMessages.値がnull.getReplacedMessage("口座区分"));
         entity.setKozaKubun(口座区分);
         return this;
     }
@@ -573,7 +551,6 @@ public class FukaJohoBuilder {
      * @return {@link FukaJohoBuilder}
      */
     public FukaJohoBuilder set境界層区分(RString 境界層区分) {
-        requireNonNull(境界層区分, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層区分"));
         entity.setKyokaisoKubun(境界層区分);
         return this;
     }

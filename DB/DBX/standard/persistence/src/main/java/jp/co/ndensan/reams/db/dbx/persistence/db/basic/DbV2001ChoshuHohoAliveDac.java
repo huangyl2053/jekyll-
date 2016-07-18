@@ -6,15 +6,22 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho10gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho11gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho12gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho1gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho2gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho3gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho9gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHohoYoku4gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHohoYoku5gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.fukaNendo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.rirekiNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -38,6 +45,7 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
     private static final RString MSG_賦課年度 = new RString("賦課年度");
     private static final RString 特別徴収厚生労働省 = new RString("1");
     private static final RString 特別徴収地共済 = new RString("2");
+    private static final RString 普通徴収 = new RString("3");
 
     @InjectSession
     private SqlSession session;
@@ -169,5 +177,80 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
                                 or(eq(choshuHoho9gatsu, 特別徴収厚生労働省),
                                         eq(choshuHoho9gatsu, 特別徴収地共済)))).
                 toList(DbT2001ChoshuHohoEntity.class);
+    }
+
+    /**
+     * 12月特別徴収開始者を抽出する
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<DbV2001ChoshuHohoEntity>
+     */
+    @Transaction
+    public List<DbV2001ChoshuHohoEntity> get特別徴収開始者_12月(FlexibleYear 賦課年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(choshuHoho10gatsu, 普通徴収),
+                                eq(choshuHoho11gatsu, 普通徴収),
+                                or(eq(choshuHoho12gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHoho12gatsu, 特別徴収地共済)),
+                                or(eq(choshuHoho1gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHoho1gatsu, 特別徴収地共済))
+                        )).
+                toList(DbV2001ChoshuHohoEntity.class);
+
+    }
+
+    /**
+     * 2月特別徴収開始者を抽出する
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<DbV2001ChoshuHohoEntity>
+     */
+    @Transaction
+    public List<DbV2001ChoshuHohoEntity> get特別徴収開始者_2月(FlexibleYear 賦課年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(choshuHoho12gatsu, 普通徴収),
+                                eq(choshuHoho1gatsu, 普通徴収),
+                                or(eq(choshuHoho2gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHoho2gatsu, 特別徴収地共済)),
+                                or(eq(choshuHoho3gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHoho3gatsu, 特別徴収地共済))
+                        )).
+                toList(DbV2001ChoshuHohoEntity.class);
+
+    }
+
+    /**
+     * 4月特別徴収開始者を抽出する
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<DbV2001ChoshuHohoEntity>
+     */
+    @Transaction
+    public List<DbV2001ChoshuHohoEntity> get特別徴収開始者_4月(FlexibleYear 賦課年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(choshuHoho2gatsu, 普通徴収),
+                                eq(choshuHoho3gatsu, 普通徴収),
+                                or(eq(choshuHohoYoku4gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHohoYoku4gatsu, 特別徴収地共済)),
+                                or(eq(choshuHohoYoku5gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHohoYoku5gatsu, 特別徴収地共済))
+                        )).
+                toList(DbV2001ChoshuHohoEntity.class);
+
     }
 }
