@@ -75,7 +75,7 @@
                        DbT5211."ninteichosaRirekiNo" <![CDATA[<]]> DbT5211_bak."ninteichosaRirekiNo"   
         )
        AND
-          DbT5211.remban ![CDATA[<=]]> '85'
+          DbT5211.remban <![CDATA[<=]]> '85'
        AND
          DbT5211."koroshoIfShikibetsuCode" = (
                                  SELECT
@@ -157,7 +157,7 @@
                        DbT5207."ninteichosaRirekiNo" <![CDATA[<]]> DbT5207_bak."ninteichosaRirekiNo"   
         )
         AND
-          DbT5207.remban ![CDATA[<=]]> '20'
+          DbT5207.remban <![CDATA[<=]]> '20'
         AND
          DbT5207."koroshoIfShikibetsuCode" = (
                                  SELECT
@@ -206,7 +206,7 @@
                        DbT5211."ninteichosaRirekiNo" <![CDATA[<]]> DbT5211_bak."ninteichosaRirekiNo"   
         )
         AND
-          DbT5211.remban ![CDATA[<=]]> '85'
+          DbT5211.remban <![CDATA[<=]]> '85'
         AND
          DbT5211."koroshoIfShikibetsuCode" = (
                                  SELECT
