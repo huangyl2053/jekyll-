@@ -80,6 +80,13 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
     boolean hasShiteii();
 
     /**
+     * 指定医を設定します
+     *
+     * @param isChecked TRUE:指定医有り FALSE:指定医なし
+     */
+    void setShiteii(boolean isChecked);
+
+    /**
      * テキストボックスのクリア
      */
     void clear();
