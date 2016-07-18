@@ -21,16 +21,11 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengakushohakkomain.IGemmenGengakuShoHakkoMainMapperFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
  * 減免減額認定証・決定通知書個別発行のハンドラークラスです。
@@ -55,15 +50,6 @@ public class GemmenGengakuShoHakkoMainHandler {
     public GemmenGengakuShoHakkoMainHandler(GemmenGengakuShoHakkoMainDiv div) {
         this.div = div;
         this.finder = IGemmenGengakuShoHakkoMainMapperFinder.createIntance();
-    }
-
-    public void initialize(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        div.getCcdHakkoTaishosaInfo().initialize(識別コード);
-        div.getHihokenshashoHakkoTaishoshaJoho().getCcdHakkoTaishoshaShikaku().initialize(被保険者番号);
-
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
-        PersonalData personalData = PersonalData.of(識別コード, expandedInfo);
-        AccessLogger.log(AccessLogType.照会, personalData);
     }
 
     /**
@@ -557,7 +543,10 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
         div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
                 setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-        div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().initialize(通知書帳票ID);
+        try {
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().initialize(通知書帳票ID);
+        } catch (ApplicationException e) {
+        }
     }
 
     /**

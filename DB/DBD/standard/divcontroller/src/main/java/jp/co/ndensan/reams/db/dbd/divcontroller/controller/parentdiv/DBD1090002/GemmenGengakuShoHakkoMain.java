@@ -29,13 +29,19 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -55,6 +61,9 @@ public class GemmenGengakuShoHakkoMain {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+
+        div.getCcdHakkoTaishosaInfo().initialize(識別コード);
+        div.getHihokenshashoHakkoTaishoshaJoho().getCcdHakkoTaishoshaShikaku().initialize(被保険者番号);
 
         div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().setDisplayNone(true);
         div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(true);
@@ -134,9 +143,12 @@ public class GemmenGengakuShoHakkoMain {
             ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.特別地域加算減免.get名称());
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), true);
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("減免減額認定証・決定通知書の情報"));
         }
 
-        getHandler(div).initialize(識別コード, 被保険者番号);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
+        PersonalData personalData = PersonalData.of(識別コード, expandedInfo);
+        AccessLogger.log(AccessLogType.照会, personalData);
         return ResponseData.of(div).setState(DBD1090002StateName.Default);
     }
 
