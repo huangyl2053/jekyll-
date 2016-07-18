@@ -116,9 +116,6 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     private static final RString 定値区分_0 = new RString("0");
     private static final RString 定値区分_1 = new RString("1");
     private static final RString 定値区分_2 = new RString("2");
-    private static final RString 回目１ = new RString("1");
-    private static final RString 回目２ = new RString("2");
-    private static final RString 回目３ = new RString("3");
     private static final ReportId 介護保険料額決定通知書_帳票分類ID = new ReportId("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
     private static final ReportId 納入通知書本算定_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final RString キー_出力順 = new RString("出力順");
@@ -246,16 +243,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         }
         RString 処理日 = new RString(FlexibleDate.getNowDate().toString());
         IdoFukaJohoParameter parameter = null;
-        if (回目１.equals(回目)) {
-            parameter = IdoFukaJohoParameter.createParameter(
-                    調定年度, 調定年度.minusYear(1), 調定年度.minusYear(2), 最新の基準日, 処理日, kozaSearchKey, list, 科目コード, 回目１);
-        } else if (回目２.equals(回目)) {
-            parameter = IdoFukaJohoParameter.createParameter(
-                    調定年度, 調定年度.minusYear(1), 調定年度.minusYear(2), 最新の基準日, 処理日, kozaSearchKey, list, 科目コード, 回目２);
-        } else if (回目３.equals(回目)) {
-            parameter = IdoFukaJohoParameter.createParameter(
-                    調定年度, 調定年度.minusYear(1), 調定年度.minusYear(2), 最新の基準日, 処理日, kozaSearchKey, list, 科目コード, 回目３);
-        }
+        parameter = IdoFukaJohoParameter.createParameter(
+                調定年度, 調定年度.minusYear(1), 調定年度.minusYear(2), 最新の基準日, 処理日, kozaSearchKey, list, 科目コード, 回目);
         mapper.insert賦課情報一時FROM計算後情報FLAGTRUE(parameter);
         mapper.update異動賦課情報一時テーブルFROM計算後情報一時FLAGTRUE();
     }
