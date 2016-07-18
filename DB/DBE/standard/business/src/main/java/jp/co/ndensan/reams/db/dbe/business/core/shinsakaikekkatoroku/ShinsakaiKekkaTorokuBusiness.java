@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -80,7 +81,11 @@ public class ShinsakaiKekkaTorokuBusiness {
      * @return 審査会地区コード
      */
     public RString get審査会地区コード() {
-        return entity.get地区コード();
+        Code 地区コード = entity.get地区コード();
+        if (地区コード != null) {
+            return entity.get地区コード().getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     /**
