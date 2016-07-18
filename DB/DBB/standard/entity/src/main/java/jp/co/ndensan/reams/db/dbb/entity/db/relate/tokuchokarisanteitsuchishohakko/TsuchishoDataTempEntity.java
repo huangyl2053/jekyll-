@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko;
 
 import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
@@ -35,7 +35,7 @@ public class TsuchishoDataTempEntity extends DbTableEntityBase<TsuchishoDataTemp
     private UaFt250FindAtesakiEntity 宛先;
     private CaFt703FindNokumiEntity 納組;
     private UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む情報;
-    private DbT2002FukaEntity 前年度賦課情報;
+    private FukaJohoRelateEntity 前年度賦課情報;
     private RString 被保険者区分;
     private Decimal 前年度特徴期別金額01;
     private Decimal 前年度特徴期別金額02;

@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.PrtTokuchoKaishiTsuchishoKarisanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TsuchishoDataTempResult;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KaishiTsuchishoKariHakkoIchiranProperty;
@@ -105,6 +108,7 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
+    private static final int INT_6 = 6;
     private static final int INT_7 = 7;
     private static final int INT_14 = 14;
 
@@ -379,9 +383,22 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
             }
             result.set徴収方法情報(get徴収方法情報(tempEntity));
             result.set納組情報(tempEntity.get納組());
-            FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
-            fukaJohoRelateEntity.set介護賦課Entity(tempEntity.get前年度賦課情報());
-            FukaJoho 賦課情報 = new FukaJoho(fukaJohoRelateEntity);
+            FukaJoho 賦課情報 = new FukaJoho(tempEntity.get前年度賦課情報());
+            List<Decimal> 期別金額リスト = new ArrayList<>();
+            期別金額リスト.add(tempEntity.get前年度特徴期別金額01());
+            期別金額リスト.add(tempEntity.get前年度特徴期別金額02());
+            期別金額リスト.add(tempEntity.get前年度特徴期別金額03());
+            期別金額リスト.add(tempEntity.get前年度特徴期別金額04());
+            期別金額リスト.add(tempEntity.get前年度特徴期別金額05());
+            期別金額リスト.add(tempEntity.get前年度特徴期別金額06());
+            int index = 0;
+            for (int 期 = INT_1; 期 <= INT_6; 期++) {
+                set期別金額(賦課情報, 期, ChoshuHohoKibetsu.特別徴収.getコード(), 期別金額リスト, index);
+                index = index + 1;
+                if (期別金額リスト.size() < index) {
+                    break;
+                }
+            }
             result.set前年度賦課情報(賦課情報);
             tmpResultList.add(result);
         }
@@ -505,6 +522,25 @@ public class TokuchoKaishiTsuchishoDataHenshu extends TokuchoKaishiTsuchishoData
                 .set特別徴収停止日時(計算後情報.getTokuchoTeishiNichiji())
                 .set特別徴収停止事由コード(計算後情報.getTokuchoTeishiJiyuCode()).build();
         return 徴収方法情報;
+    }
+
+    private void set期別金額(FukaJoho 賦課の情報_設定後, int 期, RString 徴収方法,
+            List<Decimal> 期別金額リスト, int index) {
+        List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
+        for (Kibetsu kibetsu : kibetsuList) {
+            if (kibetsu.get期() == 期 && 徴収方法.equals(kibetsu.get徴収方法())) {
+                List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
+                for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
+                    if (choteiKyotsu.get調定ID().equals(kibetsu.get調定ID().longValue())) {
+                        ChoteiKyotsuBuilder builder = choteiKyotsu.createBuilderForEdit();
+                        builder.set調定額(期別金額リスト.get(index)).build();
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
     }
 
     private Decimal get特徴調定額(DbTKeisangoJohoTempTableEntity entity, int index) {
