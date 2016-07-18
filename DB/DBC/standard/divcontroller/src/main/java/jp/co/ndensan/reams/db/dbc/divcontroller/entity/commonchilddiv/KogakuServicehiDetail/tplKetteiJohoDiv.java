@@ -7,11 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuSer
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tplKetteiJoho のクラスファイル
@@ -19,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-4380-010 quxiaodong
  */
 public class tplKetteiJohoDiv extends TabPanel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -103,7 +99,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtTsuchiBango(TextBoxCode txtTsuchiBango) {
+    public void  setTxtTsuchiBango(TextBoxCode txtTsuchiBango) {
         this.getKokuhorenKetteiJohoPanel1().setTxtTsuchiBango(txtTsuchiBango);
     }
 
@@ -113,7 +109,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShikyuKubun(TextBox txtShikyuKubun) {
+    public void  setTxtShikyuKubun(TextBox txtShikyuKubun) {
         this.getKokuhorenKetteiJohoPanel1().setTxtShikyuKubun(txtShikyuKubun);
     }
 
@@ -123,7 +119,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKetteiYM(TextBoxDate txtKetteiYM) {
+    public void  setTxtKetteiYM(TextBoxDate txtKetteiYM) {
         this.getKokuhorenKetteiJohoPanel1().setTxtKetteiYM(txtKetteiYM);
     }
 
@@ -133,7 +129,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtShiharaiKingakuGokei(TextBoxNum txtShiharaiKingakuGokei) {
+    public void  setTxtShiharaiKingakuGokei(TextBoxNum txtShiharaiKingakuGokei) {
         this.getKokuhorenKetteiJohoPanel1().setTxtShiharaiKingakuGokei(txtShiharaiKingakuGokei);
     }
 
@@ -143,7 +139,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
+    public void  setTxtKogakuShikyuGaku(TextBoxNum txtKogakuShikyuGaku) {
         this.getKokuhorenKetteiJohoPanel1().setTxtKogakuShikyuGaku(txtKogakuShikyuGaku);
     }
 
@@ -153,7 +149,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setKokuhorenKetteiJohoPanel2(KokuhorenKetteiJohoPanel2Div KokuhorenKetteiJohoPanel2) {
+    public void  setKokuhorenKetteiJohoPanel2(KokuhorenKetteiJohoPanel2Div KokuhorenKetteiJohoPanel2) {
         this.getSakuseiPanel().setKokuhorenKetteiJohoPanel2(KokuhorenKetteiJohoPanel2);
     }
 
@@ -163,7 +159,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtSakuseiYMD1(TextBoxDate txtSakuseiYMD1) {
+    public void  setTxtSakuseiYMD1(TextBoxDate txtSakuseiYMD1) {
         this.getSakuseiPanel().getKokuhorenKetteiJohoPanel2().setTxtSakuseiYMD1(txtSakuseiYMD1);
     }
 
@@ -173,7 +169,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setFurikomiMeisaiJohoPanel(FurikomiMeisaiJohoPanelDiv FurikomiMeisaiJohoPanel) {
+    public void  setFurikomiMeisaiJohoPanel(FurikomiMeisaiJohoPanelDiv FurikomiMeisaiJohoPanel) {
         this.getSakuseiPanel().setFurikomiMeisaiJohoPanel(FurikomiMeisaiJohoPanel);
     }
 
@@ -183,7 +179,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtSakuseiYMD2(TextBoxDate txtSakuseiYMD2) {
+    public void  setTxtSakuseiYMD2(TextBoxDate txtSakuseiYMD2) {
         this.getSakuseiPanel().getFurikomiMeisaiJohoPanel().setTxtSakuseiYMD2(txtSakuseiYMD2);
     }
 
@@ -193,7 +189,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtTaisyoUketoriYM(TextBoxDate txtTaisyoUketoriYM) {
+    public void  setTxtTaisyoUketoriYM(TextBoxDate txtTaisyoUketoriYM) {
         this.getKokuhorenSoufuJohoPanel().setTxtTaisyoUketoriYM(txtTaisyoUketoriYM);
     }
 
@@ -203,7 +199,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKekkaSoufuYM(TextBoxDate txtKekkaSoufuYM) {
+    public void  setTxtKekkaSoufuYM(TextBoxDate txtKekkaSoufuYM) {
         this.getKokuhorenSoufuJohoPanel().setTxtKekkaSoufuYM(txtKekkaSoufuYM);
     }
 
@@ -213,7 +209,7 @@ public class tplKetteiJohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKetteiSyaUketoriYM(TextBoxDate txtKetteiSyaUketoriYM) {
+    public void  setTxtKetteiSyaUketoriYM(TextBoxDate txtKetteiSyaUketoriYM) {
         this.getKokuhorenSoufuJohoPanel().setTxtKetteiSyaUketoriYM(txtKetteiSyaUketoriYM);
     }
 
