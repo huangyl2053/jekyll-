@@ -309,7 +309,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         IHonsanteiIdoGennendoTsuchisyoIkatsuMapper mapper = mapperProvider.create(IHonsanteiIdoGennendoTsuchisyoIkatsuMapper.class);
         mapper.clear特徴仮算定一時();
         mapper.insert特徴仮算定一時(parameter);
-        mapper.update特徴仮算定一時(parameter);
     }
 
     /**
