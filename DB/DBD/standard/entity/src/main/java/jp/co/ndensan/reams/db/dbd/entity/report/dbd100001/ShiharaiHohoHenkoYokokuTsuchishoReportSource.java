@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd100001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 支払方法変更予告通知書のReportSource
@@ -160,6 +162,10 @@ public class ShiharaiHohoHenkoYokokuTsuchishoReportSource implements IReportSour
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 74)
     public RString koinShoryaku;
+    @ReportPerson(id = "001")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
