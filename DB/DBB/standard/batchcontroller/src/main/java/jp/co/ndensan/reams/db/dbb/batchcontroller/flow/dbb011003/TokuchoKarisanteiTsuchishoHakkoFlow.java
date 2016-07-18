@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.DbT2002FukaZenn
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.GetFukaJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.InsTsuchishoHakkogoIdoshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.KarisanteiIkkatsuHakkoTempInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrintTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrtTokuchoKaishiTsuchishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
@@ -36,7 +35,6 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
     private static final String 仮算定一括発行一時テーブル作成 = "karisanteiShutoku";
     private static final String 前年度賦課情報一時テーブル作成 = "fukaZennendoShutoku";
     private static final String 賦課情報取得 = "getFukaJoho";
-    private static final String 通知書一覧表の発行 = "tsuchishoPrint";
     private static final String 特徴開始仮算定通知書発行 = "prtTokuchoKaishiTsuchishoKarisantei";
     private static final String 通知書発行後異動者登録 = "insTsuchishoHakkogoIdosha";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
@@ -57,7 +55,6 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
             executeStep(仮算定一括発行一時テーブル作成);
             executeStep(前年度賦課情報一時テーブル作成);
             executeStep(賦課情報取得);
-            executeStep(通知書一覧表の発行);
             executeStep(特徴開始仮算定通知書発行);
             executeStep(通知書発行後異動者登録);
         }
@@ -117,18 +114,6 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
     @Step(賦課情報取得)
     protected IBatchFlowCommand getFukaJoho() {
         return simpleBatch(GetFukaJohoProcess.class)
-                .arguments(createProcessParameter())
-                .define();
-    }
-
-    /**
-     * 通知書一覧表の発行の発行バッチを呼び出す。
-     *
-     * @return バッチコマンド
-     */
-    @Step(通知書一覧表の発行)
-    protected IBatchFlowCommand tsuchishoPrint() {
-        return simpleBatch(PrintTsuchishoProcess.class)
                 .arguments(createProcessParameter())
                 .define();
     }
