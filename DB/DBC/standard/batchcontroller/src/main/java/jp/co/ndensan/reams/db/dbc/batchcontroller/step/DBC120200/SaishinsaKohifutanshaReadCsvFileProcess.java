@@ -18,10 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-2820-010 sunhui
  */
 public class SaishinsaKohifutanshaReadCsvFileProcess extends SimpleBatchProcessBase {
-//パラメータ名
 
     /**
-     * returnEntity
+     * flowEntity
      */
     public static final RString PARAMETER_OUT_FLOWENTITY;
 
@@ -31,7 +30,6 @@ public class SaishinsaKohifutanshaReadCsvFileProcess extends SimpleBatchProcessB
         PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
     }
 
-    //パラメータ引渡変数
     OutputParameter<FlowEntity> flowEntity;
 
     @Override
