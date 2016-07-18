@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.entity.report.kaigohokenrenrakuhyo;
+package jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.report.kaigohokenrenrakuhyo;
+package jp.co.ndensan.reams.db.dbu.service.report.kaigohokenrenrakuhyo;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.Hokenryo;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.KaigoHokenRenrakuhyoHold;
-import jp.co.ndensan.reams.db.dba.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyo;
-import jp.co.ndensan.reams.db.dba.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.core.riyoshafutandankai.RiyoshaFutanDankai;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojushoeditor.KaigoJushoEditor;
+import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyo;
+import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoProerty;
+import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReport;
+import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
+import jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.kogakukaigoservicehi.KogakuKaigoServiceHiJikoFutanJogenGaku;
@@ -59,6 +59,7 @@ public class KaigohokenRenrakuhyoPrintService {
     private static final int INT_9 = 9;
     private static final int INT_10 = 10;
     private static final int INT_11 = 11;
+    private static final int INT_12 = 12;
     private boolean 保険料チェックFlg = false;
 
     /**
@@ -103,7 +104,7 @@ public class KaigohokenRenrakuhyoPrintService {
             renrakuhyo.set性別(getチェック(個人.get性別() != null, 個人.get性別().getCommonName()));
             KaigoJushoEditor kaigoJushoEditor = new KaigoJushoEditor();
             RString 住所 = kaigoJushoEditor.create編集後住所(個人.get住所(), 個人.get行政区画().getGyoseiku(),
-                    SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100008.getReportId().value(), get市町村コード(hold));
+                    SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU100002.getReportId().value(), get市町村コード(hold));
             renrakuhyo.set住所(住所);
             renrakuhyo.set電話番号(getチェック(個人.get連絡先１() != null, 個人.get連絡先１().getColumnValue()));
         }
@@ -240,7 +241,7 @@ public class KaigohokenRenrakuhyoPrintService {
         renrakuhyo.set保険料金額10(get保険料金額(INT_10, hold));
         renrakuhyo.set保険料チェック11(get保険料チェック(INT_11, hold));
         renrakuhyo.set保険料金額11(get保険料金額(INT_11, hold));
-        renrakuhyo.set保険料チェックその他(getチェック(保険料チェックFlg));
+        renrakuhyo.set保険料チェックその他(チェックその他(hold));
         renrakuhyo.set保険料金額その他(get金額_5(保険料金額その他(hold)));
         if (is末尾の文字が_0です(1, hold)) {
             renrakuhyo.set保険料段階1(get保険料段階(1, hold));
@@ -318,6 +319,18 @@ public class KaigohokenRenrakuhyoPrintService {
         return renrakuhyo;
     }
 
+    private RString チェックその他(KaigoHokenRenrakuhyoHold hold) {
+        if (hold.get介護保険料() == null) {
+            return RString.EMPTY;
+        }
+        if (hold.get介護保険料().is介護保険料の記載あり() && !保険料チェックFlg
+                && hold.get介護保険料().get保険料段階一覧() != null && !hold.get介護保険料().get保険料段階一覧().isEmpty()
+                && INT_12 <= hold.get介護保険料().get保険料段階一覧().size()) {
+            return レ;
+        }
+        return RString.EMPTY;
+    }
+
     private Decimal 保険料金額その他(KaigoHokenRenrakuhyoHold hold) {
         if (hold.get介護保険料() == null) {
             return Decimal.ZERO;
@@ -325,7 +338,7 @@ public class KaigohokenRenrakuhyoPrintService {
         List<Hokenryo> 保険料段階一覧 = hold.get介護保険料().get保険料段階一覧();
         if (保険料段階一覧 != null && !保険料段階一覧.isEmpty()) {
             for (Hokenryo hokenryo : 保険料段階一覧) {
-                if (hold.get介護保険料().get対象者保険料段階区分().equals(hokenryo.get段階区分())) {
+                if (!保険料チェックFlg && hold.get介護保険料().get対象者保険料段階区分().equals(hokenryo.get段階区分())) {
                     return hokenryo.get保険料額();
                 }
             }
@@ -370,7 +383,7 @@ public class KaigohokenRenrakuhyoPrintService {
             return RString.EMPTY;
         }
         List<Hokenryo> hokenryoList = hold.get介護保険料().get保険料段階一覧();
-        if (hokenryoList != null && !hokenryoList.isEmpty()) {
+        if (hokenryoList != null && !hokenryoList.isEmpty() && INT_12 <= hokenryoList.size()) {
             return hokenryoList.get(hokenryoList.size() - 1).get保険料段階();
         }
         return RString.EMPTY;
@@ -381,7 +394,7 @@ public class KaigohokenRenrakuhyoPrintService {
             return RString.EMPTY;
         }
         List<Hokenryo> hokenryoList = hold.get介護保険料().get保険料段階一覧();
-        if (hokenryoList != null && !hokenryoList.isEmpty()) {
+        if (hokenryoList != null && !hokenryoList.isEmpty() && INT_12 <= hokenryoList.size()) {
             return hokenryoList.get(hokenryoList.size() - 1).get特例表記();
         }
         return RString.EMPTY;
@@ -395,7 +408,7 @@ public class KaigohokenRenrakuhyoPrintService {
             RString 段階区分 = hold.get介護保険料().get保険料段階一覧().get(hold.get介護保険料().get保険料段階一覧().size() - 1).get段階区分();
             if (RString.isNullOrEmpty(段階区分)) {
                 return false;
-            } else if (段階区分.length() > 1) {
+            } else if (1 < 段階区分.length()) {
                 return new RString("0").equals(段階区分.substring(段階区分.length() - 1));
             } else {
                 return new RString("0").equals(段階区分);
@@ -409,11 +422,11 @@ public class KaigohokenRenrakuhyoPrintService {
             return false;
         }
         if (hold.get介護保険料().get保険料段階一覧() != null && !hold.get介護保険料().get保険料段階一覧().isEmpty()
-                && hold.get介護保険料().get保険料段階一覧().size() > i) {
+                && i < hold.get介護保険料().get保険料段階一覧().size()) {
             RString 段階区分 = hold.get介護保険料().get保険料段階一覧().get(i - 1).get段階区分();
             if (RString.isNullOrEmpty(段階区分)) {
                 return false;
-            } else if (段階区分.length() > 1) {
+            } else if (1 < 段階区分.length()) {
                 return 段階区分.substring(段階区分.length() - 1).equals(new RString("0"));
             } else {
                 return 段階区分.equals(new RString("0"));
@@ -428,7 +441,7 @@ public class KaigohokenRenrakuhyoPrintService {
             return RString.EMPTY;
         }
         if (hold.get介護保険料().get保険料段階一覧() != null && !hold.get介護保険料().get保険料段階一覧().isEmpty()
-                && hold.get介護保険料().get保険料段階一覧().size() > i) {
+                && i <= hold.get介護保険料().get保険料段階一覧().size()) {
             return hold.get介護保険料().get保険料段階一覧().get(i - 1).get保険料段階();
         }
         return RString.EMPTY;
@@ -440,7 +453,7 @@ public class KaigohokenRenrakuhyoPrintService {
             return RString.EMPTY;
         }
         if (hold.get介護保険料().get保険料段階一覧() != null && !hold.get介護保険料().get保険料段階一覧().isEmpty()
-                && hold.get介護保険料().get保険料段階一覧().size() > i) {
+                && i <= hold.get介護保険料().get保険料段階一覧().size()) {
             return hold.get介護保険料().get保険料段階一覧().get(i - 1).get特例表記();
         }
         return RString.EMPTY;
@@ -452,7 +465,7 @@ public class KaigohokenRenrakuhyoPrintService {
             return 保険料額;
         }
         if (hold.get介護保険料().get保険料段階一覧() != null && !hold.get介護保険料().get保険料段階一覧().isEmpty()
-                && hold.get介護保険料().get保険料段階一覧().size() > i
+                && i <= hold.get介護保険料().get保険料段階一覧().size()
                 && hold.get介護保険料().get保険料段階一覧().get(i - 1).get保険料額() != null) {
             保険料額 = get金額_5(hold.get介護保険料().get保険料段階一覧().get(i - 1).get保険料額());
         }
@@ -464,7 +477,7 @@ public class KaigohokenRenrakuhyoPrintService {
         if (hold.get介護保険料() == null) {
             return RString.EMPTY;
         }
-        if (!hold.get介護保険料().get保険料段階一覧().isEmpty() && hold.get介護保険料().get保険料段階一覧().size() > i) {
+        if (!hold.get介護保険料().get保険料段階一覧().isEmpty() && i <= hold.get介護保険料().get保険料段階一覧().size()) {
             段階区分 = hold.get介護保険料().get保険料段階一覧().get(i - 1).get段階区分();
         }
         if (hold.get介護保険料().is介護保険料の記載あり() && hold.get介護保険料().get対象者保険料段階区分().compareTo(段階区分) == 0) {
@@ -476,57 +489,61 @@ public class KaigohokenRenrakuhyoPrintService {
 
     private RString get高額介護金額その他(RString 金額1, RString 金額2, RString 金額3, RString 金額4,
             KaigoHokenRenrakuhyoHold hold) {
-        RString 対象者自己負担額 = RString.EMPTY;
+        Decimal 対象者自己負担額 = Decimal.ZERO;
         if (hold.get高額介護サービス費支給による自己負担限度額() == null) {
             return RString.EMPTY;
         }
         if (hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額() != null) {
-            対象者自己負担額 = get金額_5(hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額());
+            対象者自己負担額 = hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額();
         }
-        if ((金額1.compareTo(対象者自己負担額) != 0) && (金額2.compareTo(対象者自己負担額) != 0)
-                && (金額3.compareTo(対象者自己負担額) != 0) && (金額4.compareTo(対象者自己負担額) != 0)) {
-            return 対象者自己負担額;
+        if (toDecimal(金額1).compareTo(対象者自己負担額) != 0 && toDecimal(金額2).compareTo(対象者自己負担額) != 0
+                && toDecimal(金額3).compareTo(対象者自己負担額) != 0 && toDecimal(金額4).compareTo(対象者自己負担額) != 0
+                && hold.get高額介護サービス費支給による自己負担限度額().is高額介護サービス費の記載あり()) {
+            return get金額_5(hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額());
         }
         return RString.EMPTY;
     }
 
     private RString get高額介護チェック(RString 金額, KaigoHokenRenrakuhyoHold hold) {
-        RString 対象者自己負担額 = RString.EMPTY;
+        Decimal 対象者自己負担額 = Decimal.ZERO;
         if (hold.get高額介護サービス費支給による自己負担限度額() == null) {
             return RString.EMPTY;
         }
         if (hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額() != null) {
-            対象者自己負担額 = new RString(hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額().toString());
+            対象者自己負担額 = hold.get高額介護サービス費支給による自己負担限度額().get対象者自己負担額();
         }
-        if (hold.get高額介護サービス費支給による自己負担限度額().is高額介護サービス費の記載あり() && 対象者自己負担額.compareTo(金額) == 0) {
+        if (hold.get高額介護サービス費支給による自己負担限度額().is高額介護サービス費の記載あり()
+                && toDecimal(金額).compareTo(対象者自己負担額) == 0) {
             return レ;
         }
         return RString.EMPTY;
     }
 
     private RString get食費金額その他(RString 食費1, RString 食費2, RString 食費3, RString 食費4, KaigoHokenRenrakuhyoHold hold) {
-        RString 食費 = RString.EMPTY;
+        Decimal 食費 = Decimal.ZERO;
         if (hold.get食費の_特定_負担限度額() == null) {
             return RString.EMPTY;
         }
         if (hold.get食費の_特定_負担限度額().get対象者食費負担限度額() != null) {
-            食費 = get金額_5(hold.get食費の_特定_負担限度額().get対象者食費負担限度額());
+            食費 = hold.get食費の_特定_負担限度額().get対象者食費負担限度額();
         }
-        if ((食費1.compareTo(食費) != 0) && (食費2.compareTo(食費) != 0) && (食費3.compareTo(食費) != 0) && (食費4.compareTo(食費) != 0)) {
-            return 食費;
+        if (toDecimal(食費1).compareTo(食費) != 0 && toDecimal(食費2).compareTo(食費) != 0
+                && toDecimal(食費3).compareTo(食費) != 0 && toDecimal(食費4).compareTo(食費) != 0
+                && hold.get食費の_特定_負担限度額().is食費の記載あり()) {
+            return get金額_5(hold.get食費の_特定_負担限度額().get対象者食費負担限度額());
         }
         return RString.EMPTY;
     }
 
     private RString get食費チェック(RString 食費1, KaigoHokenRenrakuhyoHold hold) {
-        RString 食費2 = RString.EMPTY;
+        Decimal 食費2 = Decimal.ZERO;
         if (hold.get食費の_特定_負担限度額() == null) {
             return RString.EMPTY;
         }
         if (hold.get食費の_特定_負担限度額().get対象者食費負担限度額() != null) {
-            食費2 = new RString(hold.get食費の_特定_負担限度額().get対象者食費負担限度額().toString());
+            食費2 = hold.get食費の_特定_負担限度額().get対象者食費負担限度額();
         }
-        if (hold.get食費の_特定_負担限度額().is食費の記載あり() && 食費1.compareTo(食費2) == 0) {
+        if (hold.get食費の_特定_負担限度額().is食費の記載あり() && toDecimal(食費1).compareTo(食費2) == 0) {
             return レ;
         }
         return RString.EMPTY;
@@ -577,7 +594,7 @@ public class KaigohokenRenrakuhyoPrintService {
         if (要介護認定状態区分コード != null && !要介護認定状態区分コード.isEmpty()) {
             if (YokaigoJotaiKubun09.要支援1.getコード().equals(要介護認定状態区分コード.getColumnValue())) {
                 return new RString("1");
-            } else if (YokaigoJotaiKubun09.要支援1.getコード().equals(要介護認定状態区分コード.getColumnValue())) {
+            } else if (YokaigoJotaiKubun09.要支援2.getコード().equals(要介護認定状態区分コード.getColumnValue())) {
                 return new RString("2");
             }
         }
@@ -630,7 +647,7 @@ public class KaigohokenRenrakuhyoPrintService {
         if (生年月日 == null) {
             return RString.EMPTY;
         }
-        if (JuminShubetsu.外国人.getCode().equals(住民種別.getCode()) || 西暦表示.equals(表示方法)) {
+        if (JuminShubetsu.外国人.getCode().equals(住民種別.getCode()) && 西暦表示.equals(表示方法)) {
             return getパターン37(生年月日.toFlexibleDate());
         }
         return getパターン12(生年月日.toFlexibleDate());
@@ -638,7 +655,7 @@ public class KaigohokenRenrakuhyoPrintService {
 
     private RString get被保険者番号(KaigoHokenRenrakuhyoHold hold) {
         if (hold != null && hold.get被保険者台帳() != null
-                && hold.get被保険者台帳().getHihokenshaNo() != null && hold.get被保険者台帳().getHihokenshaNo().isEmpty()) {
+                && hold.get被保険者台帳().getHihokenshaNo() != null && !hold.get被保険者台帳().getHihokenshaNo().isEmpty()) {
             return hold.get被保険者台帳().getHihokenshaNo().value();
         }
         return RString.EMPTY;
@@ -664,6 +681,13 @@ public class KaigohokenRenrakuhyoPrintService {
             return 被保険者氏名.value();
         }
         return RString.EMPTY;
+    }
+
+    private Decimal toDecimal(RString 金額) {
+        if (!RString.isNullOrEmpty(金額)) {
+            return new Decimal(金額転換(金額.split(",")).toString());
+        }
+        return Decimal.ZERO;
     }
 
     private RString getパターン37(FlexibleDate 年月日) {

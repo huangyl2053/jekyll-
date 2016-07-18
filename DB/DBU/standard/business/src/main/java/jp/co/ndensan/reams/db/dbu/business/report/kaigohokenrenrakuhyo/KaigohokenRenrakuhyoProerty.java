@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.kaigohokenrenrakuhyo;
+package jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo;
 
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
+import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
+import jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -22,6 +22,6 @@ public class KaigohokenRenrakuhyoProerty extends ReportPropertyBase<KaigohokenRe
      * コンストラクタです。
      */
     public KaigohokenRenrakuhyoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100008.getReportId());
+        super(SubGyomuCode.DBU介護統計報告, ReportIdDBU.DBU100002.getReportId());
     }
 }
