@@ -71,16 +71,16 @@ public class GenNendoHonsanteiIdouPrintService {
      * printTaitsuメソッド(単一帳票出力用)
      *
      * @param 更正前後EntityList List<KeisanjohoAtenaKozaKouseizengoEntity>
-     * @param shutsuryokujunID RString
+     * @param 出力順ID Long
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @return SourceDataCollection
      */
     public SourceDataCollection printTaitsu(List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
-            RString shutsuryokujunID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
+            Long 出力順ID, YMDHMS 調定日時, FlexibleYear 賦課年度) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            printFukusu(更正前後EntityList, shutsuryokujunID, 調定日時, 賦課年度, reportManager);
+            printFukusu(更正前後EntityList, 出力順ID, 調定日時, 賦課年度, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -90,13 +90,13 @@ public class GenNendoHonsanteiIdouPrintService {
      * printFukusuメソッド(複数帳票出力用)
      *
      * @param 更正前後EntityList List<KeisanjohoAtenaKozaKouseizengoEntity>
-     * @param shutsuryokujunID RString
+     * @param 出力順ID Long
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param reportManager ReportManager
      */
     public void printFukusu(List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
-            RString shutsuryokujunID, YMDHMS 調定日時, FlexibleYear 賦課年度, ReportManager reportManager) {
+            Long 出力順ID, YMDHMS 調定日時, FlexibleYear 賦課年度, ReportManager reportManager) {
 
         GenNendoHonsanteiIdouProperty property = new GenNendoHonsanteiIdouProperty();
 
@@ -113,8 +113,7 @@ public class GenNendoHonsanteiIdouPrintService {
         try (ReportAssembler<GenNendoHonsanteiIdouSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<GenNendoHonsanteiIdouSource> reportSourceWriter = new ReportSourceWriter(assembler);
             IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200015.getReportId(),
-                            Long.valueOf(shutsuryokujunID.toString()));
+                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200015.getReportId(), 出力順ID);
             int i = 0;
             RString 並び順の１件目 = RString.EMPTY;
             RString 並び順の２件目 = RString.EMPTY;
