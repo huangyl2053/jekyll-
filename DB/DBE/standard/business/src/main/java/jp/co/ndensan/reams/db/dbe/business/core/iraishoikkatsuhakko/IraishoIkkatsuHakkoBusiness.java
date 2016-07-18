@@ -439,16 +439,16 @@ public class IraishoIkkatsuHakkoBusiness {
         帳票Entity.set主治医意見書記入年月日(getFlexibleDate(entity.get主治医意見書記入年月日()));
         帳票Entity.set主治医意見書読取年月日(getFlexibleDate(entity.get主治医意見書読取年月日()));
         if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.get意見書作成回数区分())) {
-            帳票Entity.set主治医意見書作成料(SakuseiryoSeikyuKubun.在宅新規.get名称());
+            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.toValue(new RString("11")).get名称());
         } else if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.get意見書作成回数区分())) {
-            帳票Entity.set主治医意見書作成料(SakuseiryoSeikyuKubun.在宅継続.get名称());
+            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.toValue(new RString("12")).get名称());
         }
         if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(entity.get在宅施設区分())
                 || SakuseiryoSeikyuKubun.在宅継続.getコード().equals(entity.get在宅施設区分())) {
-            帳票Entity.set主治医意見書作成料(SakuseiryoSeikyuKubun.施設新規.get名称());
+            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.toValue(new RString("21")).get名称());
         } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(entity.get在宅施設区分())
                 || SakuseiryoSeikyuKubun.施設継続.getコード().equals(entity.get在宅施設区分())) {
-            帳票Entity.set主治医意見書作成料(SakuseiryoSeikyuKubun.施設継続.get名称());
+            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.toValue(new RString("22")).get名称());
         }
         帳票Entity.set主治医意見書別途診療費(entity.get主治医意見書別途診療費());
         帳票Entity.set報酬支払年月日(getFlexibleDate(entity.get主治医意見書報酬支払年月日()));
