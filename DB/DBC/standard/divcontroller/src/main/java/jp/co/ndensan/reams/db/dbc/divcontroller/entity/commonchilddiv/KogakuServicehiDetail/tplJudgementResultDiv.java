@@ -4,16 +4,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuSer
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.IKogakuKyufuTaishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.KogakuKyufuTaishoListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tplJudgementResult のクラスファイル
@@ -21,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBC-4380-010 quxiaodong
  */
 public class tplJudgementResultDiv extends TabPanel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
