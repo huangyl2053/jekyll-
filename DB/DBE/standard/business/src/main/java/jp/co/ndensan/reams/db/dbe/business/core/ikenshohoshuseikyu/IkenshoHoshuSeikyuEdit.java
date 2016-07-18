@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshuseikyu;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshuseikyu.IkenshoHoshuSeikyuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,9 +36,11 @@ public class IkenshoHoshuSeikyuEdit {
      *
      * @param entity 主治医意見書作成報酬請求書
      * @param 消費税率 消費税率
+     * @param 通知文 通知文
      * @return IkenshoHoshuSeikyuEntity
      */
-    public IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率) {
+    public IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率,
+            Map<Integer, RString> 通知文) {
         IkenshoHoshuSeikyuEntity seikyuEntity = new IkenshoHoshuSeikyuEntity();
         seikyuEntity.set郵便番号(entity.getYubinNo());
         seikyuEntity.set住所(entity.getJusho());
@@ -46,84 +48,93 @@ public class IkenshoHoshuSeikyuEdit {
         seikyuEntity.set代表者名(entity.getDaihyoshaName());
         seikyuEntity.set帳票タイトル(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬請求書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
+        seikyuEntity.set通知文1(通知文.get(1));
+        seikyuEntity.set通知文2(通知文.get(2));
+        Decimal 単価 = entity.getTanka();
         if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
             index = 1;
             if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
-                seikyuEntity.set新規在宅件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set新規在宅単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set新規在宅件数(intToRString(index));
+                seikyuEntity.set新規在宅単価(decimalToRString(単価));
             }
             if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
-                seikyuEntity.set新規施設件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set新規施設単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set新規施設件数(intToRString(index));
+                seikyuEntity.set新規施設単価(decimalToRString(単価));
             }
             if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
-                seikyuEntity.set更新在宅件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set更新在宅単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set更新在宅件数(intToRString(index));
+                seikyuEntity.set更新在宅単価(decimalToRString(単価));
             }
             if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
-                seikyuEntity.set更新施設件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set更新施設単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set更新施設件数(intToRString(index));
+                seikyuEntity.set更新施設単価(decimalToRString(単価));
             }
         }
-        getIkenshoHoshuSeikyuEntity(entity, seikyuEntity);
+        getIkenshoHoshuSeikyuEntity(entity, seikyuEntity, 単価);
         shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
-        int 新規在宅計 = 0;
-        int 新規施設計 = 0;
-        int 更新在宅計 = 0;
-        int 更新施設計 = 0;
-        if (entity.getTanka() != null) {
-            新規在宅計 = Integer.valueOf(seikyuEntity.get新規在宅件数().toString()) * Integer.valueOf(entity.getTanka().toString());
-            新規施設計 = Integer.valueOf(seikyuEntity.get新規施設件数().toString()) * Integer.valueOf(entity.getTanka().toString());
-            更新在宅計 = Integer.valueOf(seikyuEntity.get更新在宅件数().toString()) * Integer.valueOf(entity.getTanka().toString());
-            更新施設計 = Integer.valueOf(seikyuEntity.get更新施設件数().toString()) * Integer.valueOf(entity.getTanka().toString());
-        }
-        seikyuEntity.set新規在宅計(kinngakuFormat(new Decimal(新規在宅計)));
-        seikyuEntity.set新規施設計(kinngakuFormat(new Decimal(新規施設計)));
-        seikyuEntity.set更新在宅計(kinngakuFormat(new Decimal(更新在宅計)));
-        seikyuEntity.set更新施設計(kinngakuFormat(new Decimal(更新施設計)));
-        int 作成件数合計 = Integer.valueOf(seikyuEntity.get新規在宅件数().toString()) + Integer.valueOf(seikyuEntity.get新規施設件数().toString())
-                + Integer.valueOf(seikyuEntity.get更新在宅件数().toString()) + Integer.valueOf(seikyuEntity.get更新施設件数().toString());
-        int 小計 = 新規在宅計 + 新規施設計 + 更新在宅計 + 更新施設計;
-        seikyuEntity.set更新施設計(kinngakuFormat(new Decimal(作成件数合計)));
-        seikyuEntity.set小計(kinngakuFormat(new Decimal(小計)));
-        int 消費税額 = 小計 * Integer.valueOf(消費税率.toString()) - 小計;
-        seikyuEntity.set消費税額(kinngakuFormat(new Decimal(消費税額)));
-        int 合計金額 = 小計 + 消費税額;
-        seikyuEntity.set合計金額(kinngakuFormat(new Decimal(合計金額)));
-        seikyuEntity.set請求金額(kinngakuFormat(new Decimal(合計金額)));
+        Decimal 新規在宅計 = 単価.multiply(rstringToInt(seikyuEntity.get新規在宅件数()));
+        Decimal 新規施設計 = 単価.multiply(rstringToInt(seikyuEntity.get新規施設件数()));
+        Decimal 更新在宅計 = 単価.multiply(rstringToInt(seikyuEntity.get更新在宅件数()));
+        Decimal 更新施設計 = 単価.multiply(rstringToInt(seikyuEntity.get更新施設件数()));
+        seikyuEntity.set新規在宅計(decimalToRString(新規在宅計));
+        seikyuEntity.set新規施設計(decimalToRString(新規施設計));
+        seikyuEntity.set更新在宅計(decimalToRString(更新在宅計));
+        seikyuEntity.set更新施設計(decimalToRString(更新施設計));
+        Decimal 作成件数合計 = Decimal.ZERO;
+        作成件数合計 = 作成件数合計.add(rstringToInt(seikyuEntity.get新規在宅件数())).add(rstringToInt(seikyuEntity.get新規施設件数()))
+                .add(rstringToInt(seikyuEntity.get更新在宅件数())).add(rstringToInt(seikyuEntity.get更新施設件数()));
+        seikyuEntity.set作成件数合計(decimalToRString(作成件数合計));
+        Decimal 小計 = 新規在宅計.add(新規施設計).add(更新在宅計).add(更新施設計);
+        seikyuEntity.set小計(decimalToRString(小計));
+        Decimal 消費税額 = 小計.multiply(new Decimal(消費税率.toString())).subtract(小計);
+        seikyuEntity.set消費税額(decimalToRString(消費税額));
+        seikyuEntity.set合計金額(decimalToRString(小計.add(消費税額)));
+        seikyuEntity.set請求金額(seikyuEntity.get合計金額());
         return seikyuEntity;
     }
 
-    private IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, IkenshoHoshuSeikyuEntity seikyuEntity) {
+    private IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, IkenshoHoshuSeikyuEntity seikyuEntity,
+            Decimal 単価) {
         if (shujiiIryokikanCode.equals(entity.getShinsakaiIinCode())) {
             if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
                 index++;
-                seikyuEntity.set新規在宅件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set新規在宅単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set新規在宅件数(intToRString(index));
+                seikyuEntity.set新規在宅単価(decimalToRString(単価));
             }
             if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
                 index++;
-                seikyuEntity.set新規施設件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set新規施設単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set新規施設件数(intToRString(index));
+                seikyuEntity.set新規施設単価(decimalToRString(単価));
             }
             if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
                 index++;
-                seikyuEntity.set更新在宅件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set更新在宅単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set更新在宅件数(intToRString(index));
+                seikyuEntity.set更新在宅単価(decimalToRString(単価));
             }
             if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
                 index++;
-                seikyuEntity.set更新施設件数(kinngakuFormat(new Decimal(index)));
-                seikyuEntity.set更新施設単価(kinngakuFormat(entity.getTanka()));
+                seikyuEntity.set更新施設件数(intToRString(index));
+                seikyuEntity.set更新施設単価(decimalToRString(単価));
             }
         }
         return seikyuEntity;
     }
 
-    private RString kinngakuFormat(Decimal date) {
+    private RString decimalToRString(Decimal date) {
         if (date == null) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(date, 0);
+        return new RString(date.toString());
+    }
+
+    private RString intToRString(int date) {
+        return new RString(String.valueOf(date));
+    }
+
+    private int rstringToInt(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return 0;
+        }
+        return Integer.valueOf(date.toString());
     }
 }

@@ -95,12 +95,8 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ChosahoshuseikyuEdit edit = new ChosahoshuseikyuEdit();
-        Chosahoshuseikyu chosahoshuseikyu = edit.getChosahoshuseikyu(entity, 消費税率);
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-        builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-        chosahoshuseikyu.set対象期間(builder.toRString());
+        Chosahoshuseikyu chosahoshuseikyu = edit.getChosahoshuseikyu(entity, 消費税率, ChosaHoshuShiharaiProcess.get通知文());
+        chosahoshuseikyu.set対象期間(get対象期間());
         chosahoshuseikyu.set発行年月日(dateFormat9(FlexibleDate.getNowDate()));
         ChosahoshuseikyuReport report = new ChosahoshuseikyuReport(chosahoshuseikyu);
         report.writeBy(reportSourceWriter);
@@ -154,5 +150,13 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString get対象期間() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
+        builder.append(new RString("～"));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        return builder.toRString();
     }
 }

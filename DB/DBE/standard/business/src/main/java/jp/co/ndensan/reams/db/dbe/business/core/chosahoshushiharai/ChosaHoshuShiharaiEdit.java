@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahoshushiharai;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.shujiihoshushiharai.ShujiiHoshuShiharaiEdit;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahoshushiharai.ChosaHoshuShiharaiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -18,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -125,7 +126,7 @@ public class ChosaHoshuShiharaiEdit {
         shiharaientity.setその他の金額合計(decimalToRString(その他の金額));
         Decimal 合計金額 = 在宅新規合計.add(在宅再調査合計).add(施設新規合計).add(施設再調査合計).add(その他の金額);
         shiharaientity.set合計金額(decimalToRString(合計金額));
-        shiharaientity.setバーコード(ShujiiHoshuShiharaiEdit.getバーコード(entity));
+        shiharaientity.setバーコード(getバーコード(entity));
         return shiharaientity;
     }
 
@@ -169,5 +170,21 @@ public class ChosaHoshuShiharaiEdit {
 
     private RString intToRString(int date) {
         return new RString(String.valueOf(date));
+    }
+
+    /**
+     * バーコードの編集処理です。
+     *
+     * @param entity バーコード
+     * @return RString
+     */
+    public static RString getバーコード(HoshuShiharaiJunbiRelateEntity entity) {
+        CustomerBarCode code = new CustomerBarCode();
+        CustomerBarCodeResult result = code.convertCustomerBarCode(entity.getYubinNo().value(), entity.getJusho());
+        RString バーコード = RString.EMPTY;
+        if (result != null) {
+            バーコード = result.getCustomerBarCode();
+        }
+        return バーコード;
     }
 }

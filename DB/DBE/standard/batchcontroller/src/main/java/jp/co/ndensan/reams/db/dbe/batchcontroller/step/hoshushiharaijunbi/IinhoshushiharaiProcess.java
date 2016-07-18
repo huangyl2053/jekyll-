@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.iinhoshushiharai.Iinhoshushiharai;
 import jp.co.ndensan.reams.db.dbe.business.core.iinhoshushiharai.IinhoshushiharaiEdit;
 import jp.co.ndensan.reams.db.dbe.business.report.iinhoshushiharai.IinhoshushiharaiReport;
@@ -63,8 +62,6 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
-    private static final int index_1 = 1;
-    private static final int index_2 = 2;
 
     @BatchWriter
     private BatchReportWriter<IinhoshushiharaiReportSource> batchWrite;
@@ -100,23 +97,15 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         IinhoshushiharaiEdit edit = new IinhoshushiharaiEdit();
-        Iinhoshushiharai iinhoshushiharai = edit.getIinhoshushiharai(entity);
+        Iinhoshushiharai iinhoshushiharai = edit.getIinhoshushiharai(entity, get認証者(), ChosaHoshuShiharaiProcess.get通知文(), getKoza(entity));
         RStringBuilder builder = new RStringBuilder();
         builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
         builder.append(new RString("～"));
         builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
         iinhoshushiharai.set対象期間(builder.toRString());
         iinhoshushiharai.set振込予定日(new RString(processParameter.getFurikomishiteiday().toString()));
-        Koza koza = getKoza(entity);
-        if (null != koza) {
-            iinhoshushiharai.set金融機関(new RString(koza.getCombined金融機関名and支店名().toString()));
-            iinhoshushiharai.set名議人(new RString(koza.get口座名義人().toString()));
-            iinhoshushiharai.set種別(new RString(koza.get預金種別().toString()));
-            iinhoshushiharai.set番号(new RString(koza.get口座番号().toString()));
-        }
         IinhoshushiharaiReport report = new IinhoshushiharaiReport(iinhoshushiharai);
         report.writeBy(reportSourceWriter);
-
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
@@ -174,10 +163,6 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
                 REPORT_ID,
                 FlexibleDate.getNowDate(),
                 reportSourceWriter);
-    }
-
-    private Map<Integer, RString> get通知文(int index) {
-        return ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, index);
     }
 
     private Koza getKoza(HoshuShiharaiJunbiRelateEntity entity) {

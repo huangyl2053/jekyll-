@@ -95,12 +95,8 @@ public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJun
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         IkenshoHoshuSeikyuEdit edit = new IkenshoHoshuSeikyuEdit();
-        IkenshoHoshuSeikyuEntity seikyuEntity = edit.getIkenshoHoshuSeikyuEntity(entity, 消費税率);
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-        builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-        seikyuEntity.set対象期間(builder.toRString());
+        IkenshoHoshuSeikyuEntity seikyuEntity = edit.getIkenshoHoshuSeikyuEntity(entity, 消費税率, ChosaHoshuShiharaiProcess.get通知文());
+        seikyuEntity.set対象期間(get対象期間());
         seikyuEntity.set発行年月日(dateFormat9(FlexibleDate.getNowDate()));
         IkenshoHoshuSeikyuReport report = new IkenshoHoshuSeikyuReport(seikyuEntity);
         report.writeBy(reportSourceWriter);
@@ -134,7 +130,7 @@ public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJun
         出力条件.add(実績期間開始日.toRString());
         出力条件.add(実績期間終了日.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE621004.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
@@ -154,5 +150,13 @@ public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJun
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString get対象期間() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
+        builder.append(new RString("～"));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        return builder.toRString();
     }
 }
