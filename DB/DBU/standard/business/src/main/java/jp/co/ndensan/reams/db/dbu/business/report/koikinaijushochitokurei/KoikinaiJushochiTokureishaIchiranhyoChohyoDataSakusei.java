@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbu.definition.core.koikinaijushochitokurei.Koikin
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -97,14 +98,11 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(DATE_時);
-        printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
         printTimeStampSb.append(DATE_分);
-        printTimeStampSb.append(RString.HALF_SPACE);
-        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(DATE_作成);
@@ -168,7 +166,7 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 データ.set住特(該当データ.get住特());
                 データ.set識別コード(該当データ.get識別コード());
                 データ.set氏名(該当データ.get氏名());
-                データ.set性別(該当データ.get性別());
+                データ.set性別(Seibetsu.toValue(該当データ.get性別()).get名称());
                 データ.set世帯コード(該当データ.get世帯コード());
                 データ.set住所(該当データ.get住所());
                 データ.set広住取得日(timeToRString(該当データ.get広住取得日()));
