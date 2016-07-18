@@ -19,11 +19,11 @@
             rgdb."DbT5101NinteiShinseiJoho"                  
         <where>                    
             AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
+            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode"                  
             AND "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"                  
-            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
+            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode"                  
+            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5101NinteiShinseiJoho"."ninteiChosainCode"                  
+            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                  
             AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = 
             (SELECT 
                 MAX("ninteichosaIraiRirekiNo") 
@@ -31,7 +31,6 @@
                 rgdb."DbT5201NinteichosaIraiJoho"
             WHERE
                 "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            AND "logicalDeletedFlag" = false
             )                  
             AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false                  
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"      
@@ -120,7 +119,6 @@
                 rgdb."DbT5301ShujiiIkenshoIraiJoho"
             WHERE
                 "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            AND "logicalDeletedFlag" = false
             )										
             AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag"=false										
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
