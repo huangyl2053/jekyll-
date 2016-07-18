@@ -40,7 +40,6 @@ public class GensenChoshuDataSakuseiValidationHandler {
     public ValidationMessageControlPairs validateForKakutei() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (!RDate.getNowDate().getYear().equals(div.getTxtNendo().getValue().getYear())) {
-            // TODO 「UrErrorMessages.期間が不正_未来日付不可」 QA:1420
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり１,
                     div.getTxtNendo().getValue().getYear().toString(), RDate.getNowDate().getYear().toString())));
         }
