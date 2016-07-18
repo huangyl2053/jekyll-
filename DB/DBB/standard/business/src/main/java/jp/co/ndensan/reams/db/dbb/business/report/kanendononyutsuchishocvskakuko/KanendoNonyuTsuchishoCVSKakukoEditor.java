@@ -217,33 +217,30 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
             source.shimei = item.get納付書共通().get納付者氏名();
             source.gimushaShimei = item.get納付書共通().get被代納人氏名();
         }
-        List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
-        NonyuTsuchiShoKiJoho 印字位置1の納付書 = null;
-        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
-            if (納入通知書期情報.getコンビニカット印字位置() == 1) {
-                印字位置1の納付書 = 納入通知書期情報;
-            }
+        NonyuTsuchiShoKiJoho 納付書 = null;
+        if (item.get納入通知書期情報リスト() != null) {
+            納付書 = item.get納入通知書期情報リスト().get(0);
         }
 
-        if (印字位置1の納付書 != null) {
-            source.shunoKikanBango = 印字位置1の納付書.get収納機関番号表示用();
-            source.nofuBango = 印字位置1の納付書.get納付番号();
-            source.kakuninBango = 印字位置1の納付書.get確認番号();
-            source.nofuKubun = 印字位置1の納付書.get納付区分();
-            source.ocrId1 = 印字位置1の納付書.getOcrid();
-            source.barcodeCvsBarcode1 = 印字位置1の納付書.getバーコード情報();
-            source.cvsBarcodeNaiyo3 = 印字位置1の納付書.getバーコード情報上段();
-            source.cvsBarcodeNaiyo4 = 印字位置1の納付書.getバーコード情報下段();
-            source.kibetsu = 印字位置1の納付書.get期表記();
-            source.gokeigaku = 印字位置1の納付書.get納付額表記();
-            source.nokigenYmd = 印字位置1の納付書.get納期限表記();
-            source.honzei = 印字位置1の納付書.get納付額表記();
-            if (印字位置1の納付書.getOcr() != null) {
-                source.ocr1 = 印字位置1の納付書.getOcr().get(1);
-                source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+        if (納付書 != null) {
+            source.shunoKikanBango = 納付書.get収納機関番号表示用();
+            source.nofuBango = 納付書.get納付番号();
+            source.kakuninBango = 納付書.get確認番号();
+            source.nofuKubun = 納付書.get納付区分();
+            source.ocrId1 = 納付書.getOcrid();
+            source.barcodeCvsBarcode1 = 納付書.getバーコード情報();
+            source.cvsBarcodeNaiyo3 = 納付書.getバーコード情報上段();
+            source.cvsBarcodeNaiyo4 = 納付書.getバーコード情報下段();
+            source.kibetsu = 納付書.get期表記();
+            source.gokeigaku = 納付書.get納付額表記();
+            source.nokigenYmd = 納付書.get納期限表記();
+            source.honzei = 納付書.get納付額表記();
+            if (納付書.getOcr() != null) {
+                source.ocr1 = 納付書.getOcr().get(1);
+                source.ocr2 = 納付書.getOcr().get(2);
             }
-            if (印字位置1の納付書.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen = 印字位置1の納付書.getコンビニ支払期限().toDateString();
+            if (納付書.getコンビニ支払期限() != null) {
+                source.cvsToriatsukaikigen = 納付書.getコンビニ支払期限().toDateString();
             }
             if (item.get納付書共通() != null) {
                 source.ryoshushoNendo = item.get納付書共通().get調定年度表記();
