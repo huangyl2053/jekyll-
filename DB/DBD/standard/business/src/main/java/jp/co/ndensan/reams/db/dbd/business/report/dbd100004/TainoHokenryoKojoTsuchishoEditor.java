@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.dbd100001;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100004;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100004.TainoHokenryoKojoTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -23,13 +23,15 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 支払方法変更予告通知書Editorです。
+ * 滞納保険料控除通知書Editorです。
  *
- * @reamsid_L DBD-3640-040 b_liuyang2
+ * @reamsid_L DBD-3640-050 b_liuyang2
  */
-public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenkoYokokuTsuchishoEditor {
+public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuchishoEditor {
 
     private final IKojin 個人情報;
     private final IAtesaki 宛先;
@@ -42,7 +44,9 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     private final RString 帳票分類ID;
     private final Ninshosha 認証者;
     private final ShiharaiHohoHenko 帳票情報;
+    private final List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト;
     private final RString イメージファイルパス;
+    private final int Index;
     private static final int NOCOUNT_1 = 1;
     private static final int NOCOUNT_2 = 2;
     private static final int NOCOUNT_3 = 3;
@@ -68,12 +72,12 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param 帳票分類ID 帳票分類ID
      * @param 認証者 認証者
      * @param 帳票情報 帳票情報
+     * @param 償還払集計情報リスト 償還払集計情報リスト
      * @param イメージファイルパス イメージファイルパス
      */
-    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先,
-            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
-            FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト,
-            RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報, RString イメージファイルパス) {
+    public TainoHokenryoKojoTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト,
+            RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト, RString イメージファイルパス, int index) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御汎用リスト = 帳票制御汎用リスト;
@@ -85,20 +89,25 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         this.帳票分類ID = 帳票分類ID;
         this.認証者 = 認証者;
         this.帳票情報 = 帳票情報;
+        this.償還払集計情報リスト = 償還払集計情報リスト;
         this.イメージファイルパス = イメージファイルパス;
+        this.Index = index;
     }
 
     @Override
-    public ShiharaiHohoHenkoYokokuTsuchishoReportSource edit(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    public TainoHokenryoKojoTsuchishoReportSource edit(TainoHokenryoKojoTsuchishoReportSource source) {
 
         setCompSofubutsuAtesaki(source);
         setCompNinshosha(source);
         setLayer1(source);
+        setLayerFontLarge(source);
+        setLayerFontKonzai(source);
+        setLayerFontKonzai1(source);
         アクセスログeditor(source);
         return source;
     }
 
-    private void setCompSofubutsuAtesaki(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    private void setCompSofubutsuAtesaki(TainoHokenryoKojoTsuchishoReportSource source) {
         EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(this.宛先, this.地方公共団体, this.帳票制御共通);
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
@@ -109,16 +118,16 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
-//       source source.jusho4 = sofubutsuAtesakiSource.jusho4;
-//        source.jusho5 = sofubutsuAtesakiSource.jusho5;
-//        source.jusho6 = sofubutsuAtesakiSource.jusho6;
+        //source.jusho4 = sofubutsuAtesakiSource.jusho4;
+        //source.jusho5 = RString.EMPTY;
+        //source.jusho6 = RString.EMPTY;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
         source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-//         source.katagaki3 = sofubutsuAtesakiSource.katagaki3;
-//         source.katagaki4 = sofubutsuAtesakiSource.katagaki4;
+        // source.katagaki3 = RString.EMPTY;
+        // source.katagaki4 = RString.EMPTY;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
         source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
@@ -131,15 +140,15 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
         source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-//         source.shimei3 = sofubutsuAtesakiSource.shimei3;
-//         source.shimei4 = sofubutsuAtesakiSource.shimei4;
+        // source.shimei3 = RString.EMPTY;
+        // source.shimei4 = RString.EMPTY;
         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
     }
 
-    private void setCompNinshosha(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    private void setCompNinshosha(TainoHokenryoKojoTsuchishoReportSource source) {
         NinshoshaSource ninshoshaSource = getCompNinshosha();
         source.denshiKoin = ninshoshaSource.denshiKoin;
         source.hakkoYMD = ninshoshaSource.hakkoYMD;
@@ -158,7 +167,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
                 this.認証者, this.地方公共団体, this.イメージファイルパス, 発行日RDate).buildSource();
     }
 
-    private void setLayer1(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    private void setLayer1(TainoHokenryoKojoTsuchishoReportSource source) {
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
@@ -197,44 +206,93 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
                 }
             }
         }
-        //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),getShiharaiHohoHenkoTainoListの値の数は知らない
-        // source.nendoTitle1 = 支払方法変更滞納.get賦課年度().toDateString();
-        //source.nendoTitle2 = ;
-        //source.nendoTitle3 = ;
-        //source.listTainoJokyo_1(15) = ;
-        //source.listTainoJokyo_2(15) = ;
-        //source.listTainoJokyo_3(15) = ;
-        //source.listTainoJokyo_4(15) = ;
-        //source.listTainoJokyo_5(15) = ;
-        //source.listTainoJokyo_6(15) = ;
-        //source.listTainoJokyo_7(15) = ;
-        //source.listTainoJokyo_8(15) = ;
-        //source.listTainoJokyo_9(15) = ;
-        //source.hokenGokei1 =;
-        //source.entaiGokei1 =;
-        //source.hokenGokei2 =;
-        //source.entaiGokei2 =;
-        //source.hokenGokei3 =;
-        //source.entaiGokei3 =;
-        //source.hanteiYMD =;
-        //source.izenhokenryo =;
+
+        if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > Index) {
+            ShokanHaraiShukkeJyoho 償還払集計情報 = this.償還払集計情報リスト.get(Index);
+            source.listKyufuhiNaiyo_1 = 償還払集計情報.getサービス提供年月().wareki().toDateString();
+            source.listKyufuhiNaiyo_2 = 償還払集計情報.getサービス種類コード();
+            source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(償還払集計情報.get支払金額(), 0);
+        }
+        //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),このリストの値の数は知らない
+//        if(null != 支払方法変更滞納リスト && 支払方法変更滞納リスト.size() > Index){
+//         ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.支払方法変更滞納リスト.get(Index);
+//        source.listKojoHokenryo_1 =支払方法変更滞納.賦課年度;
+//        source.listKojoHokenryo_2 =;
+//        source.listKojoHokenryo_3 =;
+//        source.listKojoHokenryo_4 =;
+//        }
+        //source.hokenryoGokei=;
+        //source.shikyuGaku= ;
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun1 = 通知書定型文リスト.get(0);
         }
         if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
             source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
+        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 3) {
+            source.tsuchibun3 = 通知書定型文リスト.get(2);
+        }
+        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(1)) {
+            source.renrakusakiHoka = 通知書定型文リスト.get(3);
+        } else {
+            source.renrakusakiHoka = RString.EMPTY;
+        }
 
+    }
+
+    private RString get給付額合計() {
+        Decimal 給付額合計 = Decimal.ZERO;
+        for (ShokanHaraiShukkeJyoho 償還払集計情報 : 償還払集計情報リスト) {
+            給付額合計 = 給付額合計.add(償還払集計情報.get支払金額());
+        }
+
+        return DecimalFormatter.toコンマ区切りRString(給付額合計, 0);
+    }
+
+    //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),このリストの値の数は知らない
+//    private RString het保険料額合計() {
+//        Decimal 保険料額合計 = Decimal.ZERO;
+//        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 支払方法変更滞納リスト) {
+//            保険料額合計 = 保険料額合計.add(支払方法変更滞納.調定額)
+//        }
+//    }
+    //TODO:TainoHokenryoKojoTsuchishoReportSourceの中は、
+    //renrakusakiHokaLarge、renrakusakiHokaLarge、renrakusakiHokaJodanSmall、renrakusakiHokaGedanLargeがないです。
+    private void setLayerFontLarge(TainoHokenryoKojoTsuchishoReportSource source) {
+//        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(2)) {
+//        source.renrakusakiHokaLarge = 通知書定型文リスト.get(3);
+//        } else {
+//        source.renrakusakiHokaLarge = RString.EMPTY;
+//        }
+    }
+
+    private void setLayerFontKonzai(TainoHokenryoKojoTsuchishoReportSource source) {
+//        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(3)) {
+//        source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(3);
+//        source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(4);
+//        } else {
+//        source.renrakusakiHokaJodanSmall = RString.EMPTY;
+//        source.renrakusakiHokaGedanLarge = RString.EMPTY;
+//        }
+    }
+
+    private void setLayerFontKonzai1(TainoHokenryoKojoTsuchishoReportSource source) {
+        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(4)) {
+            source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(3);
+            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(4);
+        } else {
+            source.renrakusakiHokaJodanLarge = RString.EMPTY;
+            source.renrakusakiHokaGedanSmall = RString.EMPTY;
+        }
     }
 
     private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通) {
         return new EditedKojin(個人情報, 帳票制御共通);
     }
 
-    private void アクセスログeditor(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    private void アクセスログeditor(TainoHokenryoKojoTsuchishoReportSource source) {
         source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
         source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
 
     }
-
 }
