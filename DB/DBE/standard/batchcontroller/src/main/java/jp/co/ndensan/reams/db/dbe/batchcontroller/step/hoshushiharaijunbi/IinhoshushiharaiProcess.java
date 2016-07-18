@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.Hoshu
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinhoshushiharai.IinhoshushiharaiReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -105,6 +106,14 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
         builder.append(new RString("～"));
         builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
         iinhoshushiharai.set対象期間(builder.toRString());
+        iinhoshushiharai.set振込予定日(new RString(processParameter.getFurikomishiteiday().toString()));
+        Koza koza = getKoza(entity);
+        if (null != koza) {
+            iinhoshushiharai.set金融機関(new RString(koza.getCombined金融機関名and支店名().toString()));
+            iinhoshushiharai.set名議人(new RString(koza.get口座名義人().toString()));
+            iinhoshushiharai.set種別(new RString(koza.get預金種別().toString()));
+            iinhoshushiharai.set番号(new RString(koza.get口座番号().toString()));
+        }
         IinhoshushiharaiReport report = new IinhoshushiharaiReport(iinhoshushiharai);
         report.writeBy(reportSourceWriter);
 
@@ -169,6 +178,23 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
 
     private Map<Integer, RString> get通知文(int index) {
         return ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, index);
+    }
+
+    private Koza getKoza(HoshuShiharaiJunbiRelateEntity entity) {
+        List<RString> 業務固有キー = new ArrayList<>();
+        if (entity.getNinteichosaItakusakiCode() != null && !entity.getNinteichosaItakusakiCode().isEmpty()) {
+            業務固有キー.add(entity.getNinteichosaItakusakiCode());
+            return ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("003"), 業務固有キー);
+        }
+        if (entity.getShujiiIryoKikanCode() != null && !entity.getShujiiIryoKikanCode().isEmpty()) {
+            業務固有キー.add(entity.getShujiiIryoKikanCode());
+            return ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー);
+        }
+        if (entity.getSonotaKikanCode() != null && !entity.getSonotaKikanCode().isEmpty()) {
+            業務固有キー.add(entity.getSonotaKikanCode());
+            return ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("004"), 業務固有キー);
+        }
+        return null;
     }
 
 }
