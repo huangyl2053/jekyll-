@@ -92,9 +92,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * ファイル取得処理クラスです。
+     * ファイル取得です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaGetFileProcess
      */
     @Step(ファイル取得)
     protected IBatchFlowCommand callGetFileProcess() {
@@ -105,9 +105,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * CSVファイル取込処理クラスです。
+     * CSVファイル取込です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return SaishinsaKohifutanshaReadCsvFileProcess
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
@@ -119,9 +119,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * 被保険者関連処理クラスです。
+     * 被保険者関連処理です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDoHihokenshaKanrenProcess
      */
     @Step(被保険者関連処理)
     protected IBatchFlowCommand callDoHihokenshaKanrenProcess() {
@@ -129,9 +129,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * マスタ登録処理クラスです。
+     * マスタ登録です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return SaishinsaKohifutanshaDoDBTorokuProcess
      */
     @Step(マスタ登録)
     protected IBatchFlowCommand callDoMasterTorokuProcess() {
@@ -143,9 +143,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * 国保連インタフェース管理更新処理クラスです。
+     * 国保連インタフェース管理更新です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDoInterfaceKanriKousinProcess
      */
     @Step(国保連インタフェース管理更新)
     protected IBatchFlowCommand callDoInterfaceKanriKousinProcess() {
@@ -160,9 +160,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * 一覧表作成クラスです。
+     * 一覧表作成です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess
      */
     @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
@@ -178,9 +178,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * 処理結果リスト作成クラスです。
+     * 処理結果リスト作成です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDoShoriKekkaListSakuseiProcess
      */
     @Step(処理結果リスト作成)
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
@@ -191,9 +191,9 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
     }
 
     /**
-     * 取込済ファイル削除クラスです。
+     * 取込済ファイル削除です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDeleteReveicedFileProcess
      */
     @Step(取込済ファイル削除)
     protected IBatchFlowCommand callDeleteReveicedFileProcess() {

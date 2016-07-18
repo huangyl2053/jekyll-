@@ -30,7 +30,6 @@ public class KohifutanshaGetFileProcess extends SimpleBatchProcessBase {
         PARAMETER_OUT_RETURNENTITY = new RString("returnEntity");
     }
 
-    //パラメータ引渡変数
     OutputParameter<KokuhorenKyoutsuuFileGetReturnEntity> returnEntity;
 
     @Override
