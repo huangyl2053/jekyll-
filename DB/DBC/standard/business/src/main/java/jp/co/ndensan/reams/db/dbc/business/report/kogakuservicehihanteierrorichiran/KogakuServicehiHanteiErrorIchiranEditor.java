@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehiHanteiErrorIchiranEditor {
 
-    private final List<KogakuServicehiHanteiErrorListEntity> entityList;
+    private final KogakuServicehiHanteiErrorListEntity entity;
     private final Association association;
     private final RString 並び順の１件目;
     private final RString 並び順の２件目;
@@ -32,6 +32,8 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
     private final RString 並び順の４件目;
     private final RString 並び順の５件目;
     private final List<RString> 改頁項目List;
+    private final YMDHMS システム日時;
+    private final int 連番;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -42,7 +44,7 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
     /**
      * コンストラクタです
      *
-     * @param entityList List<KogakuServicehiHanteiErrorListEntity>
+     * @param entity KogakuServicehiHanteiErrorListEntity
      * @param association Association
      * @param 並び順の１件目 RString
      * @param 並び順の２件目 RString
@@ -50,17 +52,21 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
      * @param 並び順の４件目 RString
      * @param 並び順の５件目 RString
      * @param 改頁項目List List<RString>
+     * @param システム日時 YMDHMS
+     * @param 連番 int
      */
     public KogakuServicehiHanteiErrorIchiranEditor(
-            List<KogakuServicehiHanteiErrorListEntity> entityList,
+            KogakuServicehiHanteiErrorListEntity entity,
             Association association,
             RString 並び順の１件目,
             RString 並び順の２件目,
             RString 並び順の３件目,
             RString 並び順の４件目,
             RString 並び順の５件目,
-            List<RString> 改頁項目List) {
-        this.entityList = entityList;
+            List<RString> 改頁項目List,
+            YMDHMS システム日時,
+            int 連番) {
+        this.entity = entity;
         this.association = association;
         this.並び順の１件目 = 並び順の１件目;
         this.並び順の２件目 = 並び順の２件目;
@@ -68,6 +74,8 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
         this.並び順の４件目 = 並び順の４件目;
         this.並び順の５件目 = 並び順の５件目;
         this.改頁項目List = 改頁項目List;
+        this.システム日時 = システム日時;
+        this.連番 = 連番;
     }
 
     /**
@@ -79,17 +87,17 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
     @Override
     public KogakuServicehiHanteiErrorIchiranSource edit(KogakuServicehiHanteiErrorIchiranSource source) {
 
-        RString 帳票作成年月日 = YMDHMS.now().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+        RString 帳票作成年月日 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        RString 帳票作成時 = YMDHMS.now().getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        RString 帳票作成時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
                 .concat(RString.HALF_SPACE).concat(SAKUSEI);
-        if (entityList != null) {
-            source.titleNengetsuKaishi = entityList.get(0).get審査年月From().wareki().eraType(EraType.KANJI)
+        if (entity != null) {
+            source.titleNengetsuKaishi = entity.get審査年月From().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.titleNengetsu1 = entityList.get(0).get審査年月To().wareki().eraType(EraType.KANJI)
+            source.titleNengetsu1 = entity.get審査年月To().wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            source.shichosonNo = entityList.get(0).get市町村コード();
+            source.shichosonNo = entity.get市町村コード();
             source.shichosonName = association.get市町村名();
             source.shutsuryokujun1 = 並び順の１件目;
             source.shutsuryokujun2 = 並び順の２件目;
@@ -97,25 +105,19 @@ public class KogakuServicehiHanteiErrorIchiranEditor implements IKogakuServicehi
             source.shutsuryokujun4 = 並び順の４件目;
             source.shutsuryokujun5 = 並び順の５件目;
             set出力順And改ページ(source);
-            int i = 1;
-            source.listHanteiError_1 = new RString(i++);
-            source.listHanteiError_2 = entityList.get(0).get被保険者番号();
-            source.listHanteiError_3 = new RString(entityList.get(0).getサービス提供年月().toString());
-            source.listHanteiError_4 = entityList.get(0).get被保険者名();
-            source.listHanteiError_5 = entityList.get(0).getエラーコード();
-            source.listHanteiError_6 = entityList.get(0).get世帯コード();
-            source.listHanteiError_7 = entityList.get(0).get世帯員識別コード();
-            entityList.add(entityList.get(0));
+            source.listHanteiError_1 = new RString(連番);
+            source.listHanteiError_2 = entity.get被保険者番号();
+            source.listHanteiError_3 = new RString(entity.getサービス提供年月().toString());
+            source.listHanteiError_4 = entity.get被保険者名();
+            //TODO エラーコードより、.エラーコード内容を出力する (QA#989)
+            source.listHanteiError_5 = entity.getエラーコード();
+            source.listHanteiError_6 = entity.get世帯コード();
+            source.listHanteiError_7 = entity.get世帯員識別コード();
         }
         return source;
     }
 
     private void set出力順And改ページ(KogakuServicehiHanteiErrorIchiranSource source) {
-        source.shutsuryokujun1 = 並び順の１件目;
-        source.shutsuryokujun2 = 並び順の２件目;
-        source.shutsuryokujun3 = 並び順の３件目;
-        source.shutsuryokujun4 = 並び順の４件目;
-        source.shutsuryokujun5 = 並び順の５件目;
         if (null != 改頁項目List && !改頁項目List.isEmpty()) {
             if (改頁項目List.size() > NUM_0) {
                 source.kaipage1 = 改頁項目List.get(NUM_0);
