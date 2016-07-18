@@ -50,7 +50,7 @@ public class NinteiChosaJissekiShokaiHandler {
     public void onClick_BtnKensakuClear() {
         div.getChosaJisshibi().getTxtChosaJisshibi().clearFromValue();
         div.getChosaJisshibi().getTxtChosaJisshibi().clearToValue();
-        div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護事務);
+        div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
     }
 
     /**

@@ -87,7 +87,7 @@ public final class ChosahyoJissekiIchiranMybitisParamter implements IMyBatisPara
     }
 
     /**
-     * 意見書作成実績照会のデータ取得のパラメータを作成します。
+     * 帳票出力用認定調査実績集計表のデータ取得のパラメータを作成します。
      *
      * @param batchFlag batchFlag
      * @param 調査実施日FROM 意見書記入日FROM

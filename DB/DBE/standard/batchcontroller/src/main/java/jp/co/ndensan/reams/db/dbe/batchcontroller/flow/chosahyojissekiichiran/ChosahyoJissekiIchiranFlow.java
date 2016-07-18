@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.chosahyojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.chosahyojissekiichiran.ChosahyoJissekiIchiranProcess;
@@ -13,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class ChosahyoJissekiIchiranFlow extends BatchFlowBase<ChosahyoJissekiIchiranBatchParameter> {
 
-    private static final String CHOSAHYO_JISSEKI_ICHIRAN = "chosahyoJissekiIchiran";
+    private static final String CHOSAHYO_JISSEKI_ICHIRAN = "chosahyojissekiichiran";
 
     @Override
     protected void defineFlow() {
@@ -28,7 +33,7 @@ public class ChosahyoJissekiIchiranFlow extends BatchFlowBase<ChosahyoJissekiIch
      * @return バッチコマンド
      */
     @Step(CHOSAHYO_JISSEKI_ICHIRAN)
-    IBatchFlowCommand chosahyoJissekiIchiran() {
+    IBatchFlowCommand chosahyojissekiichiran() {
         return loopBatch(ChosahyoJissekiIchiranProcess.class)
                 .arguments(getParameter().toProcessParamter()).define();
     }

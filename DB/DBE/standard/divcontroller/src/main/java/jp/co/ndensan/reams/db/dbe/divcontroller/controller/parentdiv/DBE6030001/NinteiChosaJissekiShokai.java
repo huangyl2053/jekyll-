@@ -34,12 +34,14 @@ public class NinteiChosaJissekiShokai {
      * 画面の初期化です。
      *
      * @param div 画面情報
-     * @return ResponseData<Nintei Chosa Jisseki　Shokai　Div>
+     * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onLoad(NinteiChosaJissekiShokaiDiv div) {
         div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getChosaJisshibi().getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getChosaJisshibi().getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getChosaJisshibi().getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getChosaJisshibi().getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
