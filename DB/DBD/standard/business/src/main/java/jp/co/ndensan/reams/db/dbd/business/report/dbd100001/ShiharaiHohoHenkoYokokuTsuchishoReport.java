@@ -84,10 +84,10 @@ public final class ShiharaiHohoHenkoYokokuTsuchishoReport extends Report<Shihara
     @Override
     public void writeBy(ReportSourceWriter<ShiharaiHohoHenkoYokokuTsuchishoReportSource> writer) {
 
-        IShiharaiHohoHenkoYokokuTsuchishoEditor bodyEditor
-                = new ShiharaiHohoHenkoYokokuTsuchishoEditor(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
-                        発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報, writer.getImageFolderPath());
-        IShiharaiHohoHenkoYokokuTsuchishoBuilder builder = new ShiharaiHohoHenkoYokokuTsuchishoBuilder(bodyEditor);
-        writer.writeLine(builder);
+//        IShiharaiHohoHenkoYokokuTsuchishoEditor bodyEditor
+//                = new ShiharaiHohoHenkoYokokuTsuchishoEditor(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
+//                        発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報, writer.getImageFolderPath());
+//        IShiharaiHohoHenkoYokokuTsuchishoBuilder builder = new ShiharaiHohoHenkoYokokuTsuchishoBuilder(bodyEditor);
+//        writer.writeLine(builder);
     }
 }

@@ -151,7 +151,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo1 = this.帳票情報.
+//        source.hihokenshaNo1 = this.帳票情報.
         //source.hihokenshaNo2 = ;
         //source.hihokenshaNo3 = ;
         //source.hihokenshaNo4 = ;
