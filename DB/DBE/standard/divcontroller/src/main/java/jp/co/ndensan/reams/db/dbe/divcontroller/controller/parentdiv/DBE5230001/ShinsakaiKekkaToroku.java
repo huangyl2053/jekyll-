@@ -66,7 +66,6 @@ public class ShinsakaiKekkaToroku {
      * コンストラクタです。
      */
     public ShinsakaiKekkaToroku() {
-        ViewStateHolder.put(ViewStateKeys.開催番号, new RString("11256"));
         this.manager = ShinsakaiKekkaTorokuManager.createInstance();
     }
 
