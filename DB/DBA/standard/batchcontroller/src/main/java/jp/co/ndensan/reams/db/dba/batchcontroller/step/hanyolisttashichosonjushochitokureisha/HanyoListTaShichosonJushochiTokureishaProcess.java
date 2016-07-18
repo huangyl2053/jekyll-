@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolisttekiyojogaisha;
+package jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolisttashichosonjushochitokureisha;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaResult;
-import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaProcessParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRelateEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRenbanCsvEntity;
+import jp.co.ndensan.reams.db.dba.business.core.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaResult;
+import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaProcessParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaCsvEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -56,27 +56,27 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * 汎用リスト_適用除外者のデータを作成します。
+ * 汎用リスト_他市町村住所地特例者のデータを作成します。
  *
- * @reamsid_L DBA-1600-030 yaodongsheng
+ * @reamsid_L DBA-1590-030 yaodongsheng
  */
-public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<HanyoListTekiyoJogaishaRelateEntity> {
+public class HanyoListTaShichosonJushochiTokureishaProcess extends BatchProcessBase<HanyoListTaShichosonJushochiTokureishaRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolisttekiyokaisha.IHanyoListTekiyoJogaishaMapper.getTekiyoKaisha");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA701003");
-    private static final RString FILENAME = new RString("HanyoList_TekiyoJogaisha.csv");
+            "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolisttashichosonjushochitokureisha"
+            + ".IHanyoListTaShichosonJushochiTokureishaMapper.getTaShichoson");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBA701002");
+    private static final RString FILENAME = new RString("HanyoList_TaShichosonJushochiTokureisha.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private HanyoListTekiyoJogaishaProcessParameter processParamter;
+    private HanyoListTaShichosonJushochiTokureishaProcessParameter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private List<KoseiShichosonMaster> koseiShichosonJoho;
     private List<KaigoDonyuKeitai> kaigoDonyuKeitai;
     private Association association;
-    private EucCsvWriter<HanyoListTekiyoJogaishaRenbanCsvEntity> eucCsvWriter;
+    private EucCsvWriter<HanyoListTaShichosonJushochiTokureishaCsvEntity> eucCsvWriter;
     private List<PersonalData> personalDataList;
-    private int i;
 
     @Override
     protected void initialize() {
@@ -84,7 +84,6 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
         kaigoDonyuKeitai = KaigoDonyuKeitaiManager.createInstance().get介護導入形態By業務分類(GyomuBunrui.介護事務);
         association = AssociationFinderFactory.createInstance().getAssociation();
         personalDataList = new ArrayList<>();
-        i = 0;
     }
 
     @Override
@@ -144,7 +143,8 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBA介護資格));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoListTekiyoJogaishaMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHanyoListTaShichosonJushochiTokureishaMybatisParameter(
+                psmShikibetsuTaisho, psmAtesaki));
     }
 
     @Override
@@ -161,9 +161,9 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
     }
 
     @Override
-    protected void process(HanyoListTekiyoJogaishaRelateEntity entity) {
-        eucCsvWriter.writeLine(new HanyoListTekiyoJogaishaResult()
-                .setRenbanEucCsvEntity(processParamter, entity, koseiShichosonJoho, ++i, association));
+    protected void process(HanyoListTaShichosonJushochiTokureishaRelateEntity entity) {
+        eucCsvWriter.writeLine(new HanyoListTaShichosonJushochiTokureishaResult()
+                .setEucCsvEntity(processParamter, entity, koseiShichosonJoho, association));
         personalDataList.add(toPersonalData(entity));
     }
 
@@ -181,14 +181,14 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("汎用リスト 適用除外者CSVV"),
-                new RString("HanyoList_TekiyoJogaisha.csv"),
+                new RString("汎用リスト 他市町村住所地特例者CSV"),
+                new RString("HanyoList_TaShichosonJushochiTokureisha.csv"),
                 new RString(String.valueOf(eucCsvWriter.getCount())),
-                new HanyoListTekiyoJogaishaResult().get出力条件(processParamter, kaigoDonyuKeitai));
+                new HanyoListTaShichosonJushochiTokureishaResult().get出力条件(processParamter, kaigoDonyuKeitai));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private PersonalData toPersonalData(HanyoListTekiyoJogaishaRelateEntity entity) {
+    private PersonalData toPersonalData(HanyoListTaShichosonJushochiTokureishaRelateEntity entity) {
         if (RString.isNullOrEmpty(entity.get被保険者番号())) {
             return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode());
         } else {
@@ -196,6 +196,5 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
                     entity.get被保険者番号());
             return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
         }
-
     }
 }

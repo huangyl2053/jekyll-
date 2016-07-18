@@ -182,15 +182,15 @@ public class HanyoListParamHandler {
     public void onClick_btnKogakuParamRestore(RString モード) {
         BatchParameterMap restoreBatchParameterMap = div.getBtnParamRestore().getRestoreBatchParameterMap();
         List<RString> 編集方法 = new ArrayList<>();
-        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("komokumeiFuka"));
+        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
         if (is項目名付加) {
             編集方法.add(項目名);
         }
-        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("renbanFuka"));
+        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
         if (is連番付加) {
             編集方法.add(連番);
         }
-        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("hitsukeHenshu"));
+        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("hitsukeHenshu"));
         if (is日付編集) {
             編集方法.add(日付);
         }
@@ -446,24 +446,24 @@ public class HanyoListParamHandler {
         div.getRadTekiyoJogaishaTekiyoKijyun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMDkubun")));
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
-        if (!基準年月日.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(基準年月日)) {
             div.getTexTekiyoJogaishaKijyunDate().setValue(new RDate(基準年月日.toString()));
         }
         div.getRadTekiyoJogaishaTekiyoHani().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiKubun")));
         RString 範囲抽出日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiFrom"));
-        if (!範囲抽出日From.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日From)) {
             div.getTexTekiyoJogaishaTekiyoDateHani().setFromValue(new RDate(範囲抽出日From.toString()));
         }
         RString 範囲抽出日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiTo"));
-        if (!範囲抽出日To.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日To)) {
             div.getTexTekiyoJogaishaTekiyoDateHani().setToValue(new RDate(範囲抽出日To.toString()));
         }
         List<RString> selectKey = new ArrayList<>();
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("jukyushaJoho_Nihonjin"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("jukyushaJoho_Nihonjin"))) {
             selectKey.add(日本人);
         }
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("jukyushaJoho_Gaikokujin"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("jukyushaJoho_Gaikokujin"))) {
             selectKey.add(外国人);
         }
         div.getChkTekiyoJogaishaJoho().setSelectedItemsByKey(selectKey);
@@ -471,10 +471,10 @@ public class HanyoListParamHandler {
         div.getChkTekiyoJogaishaTekiyoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("dekyujyu")));
         div.getChkTekiyoJogaishaKaijoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("kaijyojyu")));
         List<RString> 施設変更 = new ArrayList<>();
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("shisetsuHenkoari"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("shisetsuHenkoari"))) {
             施設変更.add(施設変更あり);
         }
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("shisetsuHenkonashi"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("shisetsuHenkonashi"))) {
             施設変更.add(施設変更なし);
         }
         div.getChkTekiyoJogaishaShisetsuHenko().setSelectedItemsByKey(施設変更);
@@ -486,24 +486,24 @@ public class HanyoListParamHandler {
         div.getRadTaShichosonJushotiTokureishaTekiyoKijyun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMDkubun")));
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
-        if (!基準年月日.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(基準年月日)) {
             div.getTexTaShichosonJushotiTokureishaKijyunDate().setValue(new RDate(基準年月日.toString()));
         }
         div.getRadTaShichosonJushotiTokureishaTekiyoHani().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiKubun")));
         RString 範囲抽出日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiFrom"));
-        if (!範囲抽出日From.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日From)) {
             div.getTexTaShichosonJushotiTokureishaTekiyoDateHani().setFromValue(new RDate(範囲抽出日From.toString()));
         }
         RString 範囲抽出日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiTo"));
-        if (!範囲抽出日To.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日To)) {
             div.getTexTaShichosonJushotiTokureishaTekiyoDateHani().setToValue(new RDate(範囲抽出日To.toString()));
         }
         List<RString> selectKey = new ArrayList<>();
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("jukyushaJoho_Nihonjin"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("jukyushaJoho_Nihonjin"))) {
             selectKey.add(日本人);
         }
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("jukyushaJoho_Gaikokujin"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("jukyushaJoho_Gaikokujin"))) {
             selectKey.add(外国人);
         }
         div.getChkTaShichosonJushotiTokureishaJoho().setSelectedItemsByKey(selectKey);
@@ -511,10 +511,10 @@ public class HanyoListParamHandler {
         div.getChkTaShichosonJushotiTokureishaTekiyoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("dekyujyu")));
         div.getChkTaShichosonJushotiTokureishaKaijoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("kaijyojyu")));
         List<RString> 施設変更 = new ArrayList<>();
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("shisetsuHenkoari"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("shisetsuHenkoari"))) {
             施設変更.add(施設変更あり);
         }
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("shisetsuHenkonashi"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("shisetsuHenkonashi"))) {
             施設変更.add(施設変更なし);
         }
         div.getChkTaShichosonJushotiTokureishaShisetsuHenko().setSelectedItemsByKey(施設変更);
@@ -524,17 +524,17 @@ public class HanyoListParamHandler {
         div.getRadRoreiFukushiNenkinJukyushaChushutsu().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun")));
         RString 日付抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
-        if (!日付抽出区分.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(日付抽出区分)) {
             div.getTexRoreiFukushiNenkinJukyushaKijyunDate().setValue(new RDate(日付抽出区分.toString()));
         }
         div.getRadRoreiFukushiNenkinJukyushaHani().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiKubun")));
         RString 範囲抽出日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiFrom"));
-        if (!範囲抽出日From.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日From)) {
             div.getTexRoreiFukushiNenkinJukyushaDateHani().setFromValue(new RDate(範囲抽出日From.toString()));
         }
         RString 範囲抽出日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiTo"));
-        if (!範囲抽出日To.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日To)) {
             div.getTexRoreiFukushiNenkinJukyushaDateHani().setToValue(new RDate(範囲抽出日To.toString()));
         }
     }
@@ -543,24 +543,24 @@ public class HanyoListParamHandler {
         div.getRadSeikatuhogoJukyushaChushutsu().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun")));
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
-        if (!基準年月日.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(基準年月日)) {
             div.getTexSeikatuhogoKijunDate().setValue(new RDate(基準年月日.toString()));
         }
         div.getRadSeikatuhogoHani().setSelectedKey(restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiKubun")));
         RString 範囲抽出日From = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiFrom"));
-        if (!範囲抽出日From.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日From)) {
             div.getTexSeikatuhogoDateHani().setFromValue(new RDate(範囲抽出日From.toString()));
         }
         RString 範囲抽出日To = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiTo"));
-        if (!範囲抽出日To.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(範囲抽出日To)) {
             div.getTexSeikatuhogoDateHani().setToValue(new RDate(範囲抽出日To.toString()));
         }
 
         List<RString> selectKey = new ArrayList<>();
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("jukyushaJoho_Nihonjin"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("jukyushaJoho_Nihonjin"))) {
             selectKey.add(日本人);
         }
-        if (restoreBatchParameterMap.getParameterValue(boolean.class, new RString("jukyushaJoho_Gaikokujin"))) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("jukyushaJoho_Gaikokujin"))) {
             selectKey.add(外国人);
         }
         div.getChkSeikatsuHogoJukyushaJoho().setSelectedItemsByKey(selectKey);
