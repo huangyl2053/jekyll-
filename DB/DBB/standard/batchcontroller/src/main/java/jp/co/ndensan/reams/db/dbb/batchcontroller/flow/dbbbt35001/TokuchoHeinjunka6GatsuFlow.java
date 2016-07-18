@@ -39,7 +39,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
-    private RString バッチフロー_帳票分類ID;
+    private RString バッチフロー_帳票分類ID = RString.EMPTY;
 
     private TokuchoHeinjunka6GatsuParameter parameter;
     private TokuchoHeinjunka6GatsuProcessParameter processParameter;
@@ -63,7 +63,9 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
         executeStep(介護情報の登録);
         for (TyouhyouEntity entity : parameter.get出力帳票一覧()) {
             processParameter.set出力帳票一覧(entity);
-            バッチフロー_帳票分類ID = entity.get帳票分類ID().getColumnValue();
+            if (entity.get帳票分類ID() != null) {
+                バッチフロー_帳票分類ID = entity.get帳票分類ID().getColumnValue();
+            }
             executeStep(計算後情報作成);
             executeStep(特徴平準化結果一覧表出力);
         }
