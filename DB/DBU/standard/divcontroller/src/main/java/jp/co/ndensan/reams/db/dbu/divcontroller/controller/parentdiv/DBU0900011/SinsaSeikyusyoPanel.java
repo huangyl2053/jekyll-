@@ -51,7 +51,6 @@ public class SinsaSeikyusyoPanel {
                         shikibetsuCode,
                         hihokenshaNo).records();
         getHandler(div).onLoad(sinsaSeikyusyoJohoList);
-
         return createResponse(div);
     }
 
