@@ -14,18 +14,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6070001.DBE6
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6070001.ShinsakaiIinHoshuNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6070001.dgShinsakaiJisseki_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6070001.ShinsakaiIinHoshuNyuryokuHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6070001.ShinsakaiIinHoshuNyuryokuValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShinsakaiIinHoshuJissekiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -84,6 +84,10 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Check(ShinsakaiIinHoshuNyuryokuDiv div) {
+        ValidationMessageControlPairs validPairs = getValidatison(div).必須入力チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         Decimal 最大表示件数;
         boolean is前方一致 = false;
         boolean is後方一致 = false;
@@ -111,20 +115,10 @@ public class ShinsakaiIinHoshuNyuryoku {
                 .createInstance().get審査会委員一覧(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
                                 介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, null,
                                 null, null, null, false, false)).records();
-        if (shinsakaiIinHoshuNyuryoku == null || shinsakaiIinHoshuNyuryoku.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrInformationMessages.該当データなし.getMessage().getCode(),
-                        UrInformationMessages.該当データなし.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrInformationMessages.該当データなし.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getShinsakaiIin().setIsOpen(false);
-                return ResponseData.of(div).respond();
-            } else {
-                div.getShinsakaiIin().setIsOpen(false);
-                return ResponseData.of(div).respond();
-            }
+        ValidationMessageControlPairs validPairs実績一覧データ空チェック = getValidatison(div).validateFor実績一覧データ空チェック(shinsakaiIinHoshuNyuryoku);
+        if (validPairs実績一覧データ空チェック.iterator().hasNext()) {
+            div.getShinsakaiIin().setIsOpen(false);
+            return ResponseData.of(div).addValidationMessages(validPairs実績一覧データ空チェック).respond();
         }
         getHandler(div).edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);
         return ResponseData.of(div).setState(DBE6070001StateName.審査会委員一覧);
@@ -312,7 +306,22 @@ public class ShinsakaiIinHoshuNyuryoku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「実施日」onChangeです。
+     *
+     * @param div 審査会委員報酬入力DIV
+     * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
+     */
+    public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onChange_JissekiNengappi(ShinsakaiIinHoshuNyuryokuDiv div) {
+        getHandler(div).edit実施日();
+        return ResponseData.of(div).respond();
+    }
+
     private ShinsakaiIinHoshuNyuryokuHandler getHandler(ShinsakaiIinHoshuNyuryokuDiv div) {
         return new ShinsakaiIinHoshuNyuryokuHandler(div);
+    }
+
+    private ShinsakaiIinHoshuNyuryokuValidatisonHandler getValidatison(ShinsakaiIinHoshuNyuryokuDiv div) {
+        return new ShinsakaiIinHoshuNyuryokuValidatisonHandler(div);
     }
 }
