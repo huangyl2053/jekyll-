@@ -60,10 +60,10 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param 帳票情報 ShiharaiHohoHenko
      * @param イメージファイルパス RString
      */
-    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号,
-            List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者,
-            ShiharaiHohoHenko 帳票情報, RString イメージファイルパス) {
+    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先,
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
+            FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト,
+            RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報, RString イメージファイルパス) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御汎用リスト = 帳票制御汎用リスト;
@@ -151,7 +151,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-//        source.hihokenshaNo1 = this.帳票情報.
+        source.hihokenshaNo1 = this.帳票情報.getShiharaiHohoHenkoGengakuList().get(0).get被保険者番号().getColumnValue();
         //source.hihokenshaNo2 = ;
         //source.hihokenshaNo3 = ;
         //source.hihokenshaNo4 = ;
