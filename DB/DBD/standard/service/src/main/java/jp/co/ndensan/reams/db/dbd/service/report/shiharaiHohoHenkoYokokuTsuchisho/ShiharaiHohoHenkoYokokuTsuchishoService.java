@@ -53,8 +53,8 @@ public class ShiharaiHohoHenkoYokokuTsuchishoService {
     private static List<ShiharaiHohoHenkoYokokuTsuchishoReport> toReport(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文, RString 帳票分類ID, Ninshosha 認証者, RString 帳票情報) {
         List<ShiharaiHohoHenkoYokokuTsuchishoReport> list = new ArrayList();
-        list.add(ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
-                発行日, 文書番号, 通知書定型文, 帳票分類ID, 認証者, 帳票情報));
+//        list.add(ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
+//                発行日, 文書番号, 通知書定型文, 帳票分類ID, 認証者, 帳票情報));
         return list;
     }
 
