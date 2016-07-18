@@ -1776,6 +1776,7 @@
               ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
               AND 年金特徴回付情報."shoriNendo" = #{調定年度前年}
         WHERE
@@ -2586,6 +2587,7 @@
               ON 計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
               AND 年金特徴回付情報."shoriNendo" = #{調定年度前年}
         WHERE
@@ -2937,6 +2939,7 @@
         WHERE A."kariNenkinNo" = B."kisoNenkinNo"
              AND A."kariNenkinCode" = B."nenkinCode"
              AND A."kariHosokuM" = B."hosokuTsuki"
+             AND B."gyomuCode" = 'DB'
              AND B."tsuchiNaiyoCode" in (#{特別徴収対象者情報}, #{特別徴収追加候補者情報})
              AND B."shoriNendo" = #{調定年度前年}
     </update>
