@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.skaigohokenrenrakuhyojisshitsufutan;
+package jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyojisshitsufutan;
 
-import jp.co.ndensan.reams.db.dba.entity.report.skaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource;
 
 /**
  * 介護保険連絡票_実質負担軽減者用のEditorです。
  *
- * @reamsid_L DBA-1290-060 wangrenze
+ * @reamsid_L DBU-1290-060 wangrenze
  */
 public class KaigohokenRenrakuhyoJisshitsuFutanEditor implements IKaigohokenRenrakuhyoJisshitsuFutanEditor {
 
@@ -26,7 +26,7 @@ public class KaigohokenRenrakuhyoJisshitsuFutanEditor implements IKaigohokenRenr
     }
 
     @Override
-    public KaigohokenRenrakuhyoJisshitsuFutanReportSource edit(KaigohokenRenrakuhyoJisshitsuFutanReportSource source) {
+    public KaigohokenRenrakuhyoJisshitsuFutanReportSource edit(jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource source) {
 
         source.sakuseiDate = jisshitsufutan.get作成年月日();
         source.hihokenshaNo = jisshitsufutan.get被保険者番号();

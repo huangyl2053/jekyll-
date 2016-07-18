@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.skaigohokenrenrakuhyojisshitsufutan;
+package jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyojisshitsufutan;
 
-import jp.co.ndensan.reams.db.dba.entity.report.skaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  * 介護保険連絡票_実質負担軽減者用Builderクラスです。
  *
- * @reamsid_L DBA-1290-060 wangrenze
+ * @reamsid_L DBU-1290-060 wangrenze
  */
 public class KaigohokenRenrakuhyoJisshitsuFutanBuilder implements IKaigohokenRenrakuhyoJisshitsuFutanBuilder {
 
@@ -33,6 +33,6 @@ public class KaigohokenRenrakuhyoJisshitsuFutanBuilder implements IKaigohokenRen
      */
     @Override
     public KaigohokenRenrakuhyoJisshitsuFutanReportSource build() {
-        return ReportEditorJoiner.from(new KaigohokenRenrakuhyoJisshitsuFutanReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource()).join(editor).buildSource();
     }
 }

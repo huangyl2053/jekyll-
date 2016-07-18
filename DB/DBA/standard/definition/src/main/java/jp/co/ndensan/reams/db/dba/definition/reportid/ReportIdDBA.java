@@ -16,10 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBA {
 
     /**
-     * 介護保険連絡票_実質負担軽減者用の帳票ID。
-     */
-    DBA100013(new ReportId("DBA100013_KaigohokenRenrakuhyoJisshitsuFutan"), new RString("介護保険連絡票_実質負担軽減者用")),
-    /**
      * 適用除外者台帳の帳票ID。
      */
     DBA100010(new ReportId("DBA100010_TekiyojogaishaDaicho"), new RString("適用除外者台帳")),
