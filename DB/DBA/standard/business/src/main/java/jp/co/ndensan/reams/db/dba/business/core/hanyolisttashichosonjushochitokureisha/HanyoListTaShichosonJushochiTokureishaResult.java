@@ -75,7 +75,7 @@ public class HanyoListTaShichosonJushochiTokureishaResult {
      * EucCsvEntityの設定メッソドです。
      *
      * @param processParameter processParameter
-     * @param entity他市町村住所地特例者Entity
+     * @param entity 他市町村住所地特例者Entity
      * @param koseiShichosonJoho 構成市町村マスタ
      * @param association 地方公共団体管理
      * @return HanyoListTaShichosonJushochiTokureishaRenbanCsvEntity
@@ -203,7 +203,7 @@ public class HanyoListTaShichosonJushochiTokureishaResult {
      * RenbanEucCsvEntityの設定メッソドです。
      *
      * @param processParameter processParameter
-     * @param entity他市町村住所地特例者Entity
+     * @param entity 他市町村住所地特例者Entity
      * @param koseiShichosonJoho 構成市町村マスタ
      * @param i index
      * @param association 地方公共団体管理

@@ -30,7 +30,6 @@ public class KohifutanshaReadCsvFileProcess extends SimpleBatchProcessBase {
         PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
     }
 
-    //パラメータ引渡変数
     OutputParameter<FlowEntity> flowEntity;
 
     @Override

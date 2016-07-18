@@ -90,9 +90,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * ファイル取得処理クラスです。
+     * ファイル取得です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaGetFileProcess
      */
     @Step(ファイル取得)
     protected IBatchFlowCommand callGetFileProcess() {
@@ -103,9 +103,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * CSVファイル取込処理クラスです。
+     * CSVファイル取込です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KogakuKyufuKetteiReadCsvFileProcess
      */
     @Step(CSVファイル取込)
     protected IBatchFlowCommand callReadCsvFileProcess() {
@@ -117,9 +117,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * 被保険者関連処理クラスです。
+     * 被保険者関連処理です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDoHihokenshaKanrenProcess
      */
     @Step(被保険者関連処理)
     protected IBatchFlowCommand callDoHihokenshaKanrenProcess() {
@@ -127,9 +127,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * マスタ登録処理クラスです。
+     * マスタ登録です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KogakuKyufuKetteiDoDBTorokuProcess
      */
     @Step(マスタ登録)
     protected IBatchFlowCommand callDoMasterTorokuProcess() {
@@ -140,9 +140,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * 国保連インタフェース管理更新処理クラスです。
+     * 国保連インタフェース管理更新です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDoInterfaceKanriKousinProcess
      */
     @Step(国保連インタフェース管理更新)
     protected IBatchFlowCommand callDoInterfaceKanriKousinProcess() {
@@ -157,9 +157,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * 一覧表作成クラスです。
+     * 一覧表作成です。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KogakuKyufuKetteiDoIchiranhyoSakuseiProcess
      */
     @Step(一覧表作成)
     protected IBatchFlowCommand callDoIchiranhyoSakuseiProcess() {
@@ -175,9 +175,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * 処理結果リスト作成クラスです。
+     * 処理結果リストです。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDoShoriKekkaListSakuseiProcess
      */
     @Step(処理結果リスト作成)
     protected IBatchFlowCommand callDoShoriKekkaListSakuseiProcess() {
@@ -188,9 +188,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
     }
 
     /**
-     * 取込済ファイル削除クラスです。
+     * 取込済ファイルです。
      *
-     * @return CreateGyomuHokenshaJohoGetsujiProcess
+     * @return KohifutanshaDeleteReveicedFileProcess
      */
     @Step(取込済ファイル削除)
     protected IBatchFlowCommand callDeleteReveicedFileProcess() {
