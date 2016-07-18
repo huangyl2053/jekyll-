@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.shiharaiHohoHenkoYokokuTsuchisho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.entity.report.shiharaiHohoHenkoYokokuTsuchisho.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -40,7 +41,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     private final List<RString> 通知書定型文;
     private final RString 帳票分類ID;
     private final Ninshosha 認証者;
-    private final RString 帳票情報;
+    private final ShiharaiHohoHenko 帳票情報;
     private final RString イメージファイルパス;
 
     /**
@@ -56,12 +57,12 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param 通知書定型文 List<RString>
      * @param 帳票分類ID RString
      * @param 認証者 Ninshosha
-     * @param 帳票情報 RString
+     * @param 帳票情報 ShiharaiHohoHenko
      * @param イメージファイルパス RString
      */
     public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文, RString 帳票分類ID, Ninshosha 認証者,
-            RString 帳票情報, RString イメージファイルパス) {
+            ShiharaiHohoHenko 帳票情報, RString イメージファイルパス) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御汎用リスト = 帳票制御汎用リスト;

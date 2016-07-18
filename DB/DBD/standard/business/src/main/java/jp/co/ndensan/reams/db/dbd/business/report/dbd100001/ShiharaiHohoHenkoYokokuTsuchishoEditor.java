@@ -60,8 +60,9 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param 帳票情報 ShiharaiHohoHenko
      * @param イメージファイルパス RString
      */
-    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者,
+    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
+            List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号,
+            List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者,
             ShiharaiHohoHenko 帳票情報, RString イメージファイルパス) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
@@ -97,17 +98,16 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
-        // TODO帳票情報が知らない
-        //source.jusho4 = sofubutsuAtesakiSource.j;
-        //source.jusho5 = RString.EMPTY;
-        //source.jusho6 = RString.EMPTY;
+//       source source.jusho4 = sofubutsuAtesakiSource.jusho4;
+//        source.jusho5 = sofubutsuAtesakiSource.jusho5;
+//        source.jusho6 = sofubutsuAtesakiSource.jusho6;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
         source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
-        // source.katagaki3 = RString.EMPTY;
-        // source.katagaki4 = RString.EMPTY;
+//         source.katagaki3 = sofubutsuAtesakiSource.katagaki3;
+//         source.katagaki4 = sofubutsuAtesakiSource.katagaki4;
         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
         source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
         source.katagakiText = sofubutsuAtesakiSource.katagakiText;
@@ -120,8 +120,8 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
         source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-        // source.shimei3 = RString.EMPTY;
-        // source.shimei4 = RString.EMPTY;
+//         source.shimei3 = sofubutsuAtesakiSource.shimei3;
+//         source.shimei4 = sofubutsuAtesakiSource.shimei4;
         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
@@ -151,8 +151,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        //TODO  帳票情報が知らない
-        //source.hihokenshaNo1 = ;
+        source.hihokenshaNo1 = this.帳票情報.
         //source.hihokenshaNo2 = ;
         //source.hihokenshaNo3 = ;
         //source.hihokenshaNo4 = ;
