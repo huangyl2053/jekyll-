@@ -653,6 +653,9 @@ public class TokuchoKaishiTsuchishoDataHenshu {
     }
 
     private FukaJoho get賦課情報(FukaJohoRelateEntity fukaJohoRelateEntity, List<Decimal> 期別金額リスト) {
+        if (fukaJohoRelateEntity == null) {
+            return null;
+        }
         DbT2002FukaEntity 介護賦課Entity = fukaJohoRelateEntity.get介護賦課Entity();
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
         int i = 0;
@@ -675,25 +678,6 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             介護期別Relate.set調定共通Entity(調定共通EntityList);
             介護期別RelateEntity.add(介護期別Relate);
             i = i++;
-        }
-        for (int index = INT_1; index <= INT_14; index++) {
-            KibetsuEntity 介護期別Relate = new KibetsuEntity();
-            DbT2003KibetsuEntity 介護期別Entity = new DbT2003KibetsuEntity();
-            介護期別Entity.setChoteiNendo(介護賦課Entity.getChoteiNendo());
-            介護期別Entity.setFukaNendo(介護賦課Entity.getFukaNendo());
-            介護期別Entity.setTsuchishoNo(介護賦課Entity.getTsuchishoNo());
-            介護期別Entity.setRirekiNo(介護賦課Entity.getRirekiNo());
-            介護期別Entity.setChoteiId(new Decimal(index).add(Decimal.TEN));
-            介護期別Entity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.getコード());
-            介護期別Entity.setKi(index);
-            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
-            UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
-            調定共通Entity.setChoteiId(new Decimal(index).add(Decimal.TEN).longValue());
-            調定共通Entity.setChoteigaku(Decimal.ZERO);
-            調定共通EntityList.add(調定共通Entity);
-            介護期別Relate.set介護期別Entity(介護期別Entity);
-            介護期別Relate.set調定共通Entity(調定共通EntityList);
-            介護期別RelateEntity.add(介護期別Relate);
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         return new FukaJoho(fukaJohoRelateEntity);
