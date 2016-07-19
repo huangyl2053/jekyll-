@@ -95,10 +95,30 @@ public enum ReportIdDBD {
      * 支払方法変更予告通知書の帳票ＩＤです。
      */
     DBD100001(new ReportId("DBD100001_ShiharaiHohoHenkoYokokuTsuchisho"), new RString("支払方法変更予告通知書")),
+    	/**
+     * 支払方法変更通知書の帳票ＩＤです。
+     */
+    DBD100002(new ReportId("DBD100002_ShiharaiHohoHenkoTsuchisho"), new RString("支払方法変更通知書")),
+    /**
+     * 支払一時差止通知書の帳票ＩＤです。
+     */
+    DBD100003(new ReportId("DBD100003_ShiharaiIchijiSashitomeTsuchisho"), new RString("支払一時差止通知書")),
     /**
      * 滞納保険料控除通知書の帳票ＩＤです。
      */
     DBD100004(new ReportId("DBD100004_TainoHokenryoKojoTsuchisho"), new RString("滞納保険料控除通知書")),
+    	/**
+     * 給付額減額通知書の帳票ＩＤです。
+     */
+    DBD100005(new ReportId("DBD100005_KyufugakuGengakuTsuchisho"), new RString("給付額減額通知書")),
+    /**
+     * 差止予告通知書_２号用の帳票ＩＤです。
+     */
+    DBD100006(new ReportId("DBD100006_SashitomeYokokuTsuchishoNigo"), new RString("差止予告通知書_２号用")),
+    /**
+     * 差止処分通知書_２号用の帳票ＩＤです。
+     */
+    DBD100007(new ReportId("DBD100007_SashitomeShobunTsuchishoNigo"), new RString("差止処分通知書_２号用")),
     /**
      * 要介護認定結果通知書の帳票ＩＤです。
      */
