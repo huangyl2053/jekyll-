@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
-import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -40,7 +39,7 @@ public class GensenChoshuDataSakuseiCsvEntity implements IGensenChoshuCsvEucEnti
     @CsvField(order = 8, name = "FAX番号")
     private final TelNo 番号_FAX;
     @CsvField(order = 9, name = "生年月日")
-    private final FillTypeFormatted 生年月日;
+    private final RString 生年月日;
     @CsvField(order = 10, name = "年齢")
     private final int 年齢;
     @CsvField(order = 11, name = "認定審査会報酬合計")
@@ -74,7 +73,7 @@ public class GensenChoshuDataSakuseiCsvEntity implements IGensenChoshuCsvEucEnti
      * @param 合計 合計
      */
     public GensenChoshuDataSakuseiCsvEntity(RString 審査員コード, AtenaMeisho 審査員名, RString 職種, RString 所属機関,
-            YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, TelNo 番号_FAX, FillTypeFormatted 生年月日, int 年齢, int 認定審査会報酬合計,
+            YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, TelNo 番号_FAX, RString 生年月日, int 年齢, int 認定審査会報酬合計,
             int その他随時報酬合計, int 認定審査交通費等合計, int 源泉徴収額, int 合計) {
         this.審査員コード = 審査員コード;
         this.審査員名 = 審査員名;

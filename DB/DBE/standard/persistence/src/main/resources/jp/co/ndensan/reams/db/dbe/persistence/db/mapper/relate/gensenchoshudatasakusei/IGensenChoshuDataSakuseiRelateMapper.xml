@@ -69,8 +69,6 @@
         WHERE		#{指定年}||'0101'<![CDATA[<=]]>T5603."shinsakaiKaisaiYMD"
         AND		T5603."shinsakaiKaisaiYMD"<![CDATA[<=]]>(#{指定年}||'1231')
         ORDER BY		T5603."shinsakaiIinCode"
-
-
     </select>
     <resultMap id="resultMap_GensenChoshuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.GensenChoshuRelateEntity" autoMapping="true">
         <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

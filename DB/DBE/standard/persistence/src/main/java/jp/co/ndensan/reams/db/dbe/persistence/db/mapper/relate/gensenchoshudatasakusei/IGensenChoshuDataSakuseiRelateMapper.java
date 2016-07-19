@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.Gense
 /**
  * 「源泉徴収データ作成」のMapperです。
  *
- * @reamsid_L DBE-2000-010 jinjue
+ * @reamsid_L DBE-2000-020 jinjue
  */
 public interface IGensenChoshuDataSakuseiRelateMapper {
 

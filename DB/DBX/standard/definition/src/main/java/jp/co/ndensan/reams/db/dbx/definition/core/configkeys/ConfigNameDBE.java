@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ConfigNameDBE {
 
     /**
+     * 一次判定IF文字コード
+     */
+    一次判定IF文字コード("一次判定IF文字コード"),
+    /**
      * 要支援認定結果
      */
     要支援認定結果("要支援認定結果"),

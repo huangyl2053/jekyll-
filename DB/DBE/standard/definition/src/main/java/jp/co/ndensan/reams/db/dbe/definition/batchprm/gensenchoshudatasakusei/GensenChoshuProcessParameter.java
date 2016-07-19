@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei;
 
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
  * 「源泉徴収データ作成」のProcessParameterです。
@@ -15,16 +16,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GensenChoshuProcessParameter {
+public class GensenChoshuProcessParameter implements IBatchProcessParameter {
 
-    private final RDate 指定年;
+    private final RYear 指定年;
 
     /**
      * コンストラクタです。
      *
      * @param 指定年 指定年
      */
-    public GensenChoshuProcessParameter(RDate 指定年) {
+    public GensenChoshuProcessParameter(RYear 指定年) {
         this.指定年 = 指定年;
     }
 

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +26,7 @@ public class GensenChoshuDataSakuseiFlowParameter extends BatchParameterBase imp
     private static final long serialVersionUID = 1L;
 
     @BatchParameter(key = KEY_DATE, name = "指定年")
-    private RDate 指定年;
+    private RYear 指定年;
 
     /**
      * コンストラクタです。
@@ -39,7 +39,7 @@ public class GensenChoshuDataSakuseiFlowParameter extends BatchParameterBase imp
      *
      * @param 指定年 指定年
      */
-    public GensenChoshuDataSakuseiFlowParameter(RDate 指定年) {
+    public GensenChoshuDataSakuseiFlowParameter(RYear 指定年) {
         this.指定年 = 指定年;
     }
 
