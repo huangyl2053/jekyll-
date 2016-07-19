@@ -163,6 +163,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     private static final RString 定数_ページごとに山分け = new RString("ページごとに山分け");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
+    private static final RString 帳票タイプ_銀振型5 = new RString("銀振型5期タイプ");
 
     private final MapperProvider mapperProvider;
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
@@ -293,56 +294,55 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         HonSanteiTsuchiShoKyotsuKomokuHenshu 本算定共通情報作成 = InstanceProvider.create(HonSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
         SourceDataCollection sourceDataCollection;
-        try (ReportManager reportManager = new ReportManager()) {
-            for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
-                HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
-                本算定通知書情報.set現年度_過年度区分(GennenKanen.過年度);
-                本算定通知書情報.set発行日(発行日);
-                本算定通知書情報.set帳票分類ID(介護保険料額決定通知書_帳票分類ID);
-                本算定通知書情報.set帳票ID(帳票ID);
-                本算定通知書情報.set処理区分(ShoriKubun.バッチ);
-                本算定通知書情報.set地方公共団体(地方公共団体);
-                本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
-                本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
-                本算定通知書情報.set納組情報(tmpResult.get納組情報());
-                本算定通知書情報.set普徴納期情報リスト(通知書共通情報entity.get普徴納期情報リスト());
-                本算定通知書情報.set特徴納期情報リスト(通知書共通情報entity.get特徴納期情報リスト());
-                本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
-                本算定通知書情報.set口座情報(tmpResult.get口座情報());
-                本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
-                本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
-                本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
-                本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
-                本算定通知書情報.set収入情報(tmpResult.get収入情報());
-                本算定通知書情報.set帳票制御共通(帳票制御共通);
-                EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
-                HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
-                本算定決定通知書情報.set現年度_過年度区分(GennenKanen.過年度);
-                本算定決定通知書情報.set発行日(発行日);
-                本算定決定通知書情報.set帳票分類ID(介護保険料額決定通知書_帳票分類ID);
-                本算定決定通知書情報.set帳票ID(帳票ID);
-                本算定決定通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
-                本算定決定通知書情報.set宛先情報(tmpResult.get宛先情報());
-                本算定決定通知書情報.set処理区分(ShoriKubun.バッチ);
-                本算定決定通知書情報.set地方公共団体(地方公共団体);
+        ReportManager reportManager = new ReportManager();
+        for (HonsanteiTsuchishoTempResult tmpResult : tmpResultList) {
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報 = new HonSanteiTsuchiShoKyotsu();
+            本算定通知書情報.set現年度_過年度区分(GennenKanen.過年度);
+            本算定通知書情報.set発行日(発行日);
+            本算定通知書情報.set帳票分類ID(介護保険料額決定通知書_帳票分類ID);
+            本算定通知書情報.set帳票ID(帳票ID);
+            本算定通知書情報.set処理区分(ShoriKubun.バッチ);
+            本算定通知書情報.set地方公共団体(地方公共団体);
+            本算定通知書情報.set賦課の情報_更正前(tmpResult.get賦課の情報_更正前());
+            本算定通知書情報.set賦課の情報_更正後(tmpResult.get賦課の情報_更正後());
+            本算定通知書情報.set納組情報(tmpResult.get納組情報());
+            本算定通知書情報.set普徴納期情報リスト(通知書共通情報entity.get普徴納期情報リスト());
+            本算定通知書情報.set特徴納期情報リスト(通知書共通情報entity.get特徴納期情報リスト());
+            本算定通知書情報.set宛先情報(tmpResult.get宛先情報());
+            本算定通知書情報.set口座情報(tmpResult.get口座情報());
+            本算定通知書情報.set徴収方法情報_更正前(tmpResult.get徴収方法情報_更正前());
+            本算定通知書情報.set徴収方法情報_更正後(tmpResult.get徴収方法情報_更正後());
+            本算定通知書情報.set対象者_追加含む_情報_更正前(tmpResult.get対象者_追加含む_情報_更正前());
+            本算定通知書情報.set対象者_追加含む_情報_更正後(tmpResult.get対象者_追加含む_情報_更正後());
+            本算定通知書情報.set収入情報(tmpResult.get収入情報());
+            本算定通知書情報.set帳票制御共通(帳票制御共通);
+            EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = 本算定共通情報作成.create本算定通知書共通情報(本算定通知書情報);
+            HonSanteiKetteiTsuchiShoJoho 本算定決定通知書情報 = new HonSanteiKetteiTsuchiShoJoho();
+            本算定決定通知書情報.set現年度_過年度区分(GennenKanen.過年度);
+            本算定決定通知書情報.set発行日(発行日);
+            本算定決定通知書情報.set帳票分類ID(介護保険料額決定通知書_帳票分類ID);
+            本算定決定通知書情報.set帳票ID(帳票ID);
+            本算定決定通知書情報.set編集後本算定通知書共通情報(編集後本算定通知書共通情報);
+            本算定決定通知書情報.set宛先情報(tmpResult.get宛先情報());
+            本算定決定通知書情報.set処理区分(ShoriKubun.バッチ);
+            本算定決定通知書情報.set地方公共団体(地方公共団体);
 
-                List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities = new ArrayList<>();
-                KaigoHokenHokenryogakuKetteiTsuchishoJoho 介護保険料額決定通知書 = new KaigoHokenHokenryogakuKetteiTsuchishoJoho();
-                介護保険料額決定通知書.set文書番号(文書番号);
-                介護保険料額決定通知書.set本算定決定通知書情報(本算定決定通知書情報);
-                介護保険料額決定通知書.set通知書定型文(通知書定型文);
-                entities.add(介護保険料額決定通知書);
-                if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
-                    new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printB5Yoko(entities, reportManager);
-                } else if (ReportIdDBB.DBB100040.getReportId().equals(帳票ID)) {
-                    new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities, reportManager);
-                }
-                編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
+            List<KaigoHokenHokenryogakuKetteiTsuchishoJoho> entities = new ArrayList<>();
+            KaigoHokenHokenryogakuKetteiTsuchishoJoho 介護保険料額決定通知書 = new KaigoHokenHokenryogakuKetteiTsuchishoJoho();
+            介護保険料額決定通知書.set文書番号(文書番号);
+            介護保険料額決定通知書.set本算定決定通知書情報(本算定決定通知書情報);
+            介護保険料額決定通知書.set通知書定型文(通知書定型文);
+            entities.add(介護保険料額決定通知書);
+            if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
+                new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printB5Yoko(entities, reportManager);
+            } else if (ReportIdDBB.DBB100040.getReportId().equals(帳票ID)) {
+                new KaigoHokenHokenryogakuKetteiTsuchishoPrintService().printA4Tate(entities, reportManager);
             }
-            new KaigoHokenryogakuPrintService().printタイプ(
-                    編集後本算定通知書共通情報List, 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), reportManager, 帳票名);
-            sourceDataCollection = reportManager.publish();
+            編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
         }
+        new KaigoHokenryogakuPrintService().printタイプ(
+                編集後本算定通知書共通情報List, 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), reportManager, 帳票名);
+        sourceDataCollection = reportManager.publish();
         publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 決定_EUC_ENTITY_ID, 決定_EUCファイル名);
         new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
                 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), 定値_タイトル);
@@ -574,12 +574,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         List<RString> 出力条件リスト = 納入出力条件リスト取得(発行日, 出力期, 納入通知書対象者, 口座振替分出力様式, 生活保護者先頭出力区分, ページごとに山分け);
         RString 帳票名 = get帳票名_本算定保険料納入通知書(帳票ID.getColumnValue());
         RStringBuilder orderByClause = new RStringBuilder(ソート);
-        if (定値区分_0.equals(生活保護者先頭出力区分)) {
+        if (定値区分_1.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(定値_生活保護区分).concat(FORMAT).concat(RString.HALF_SPACE)
                     .concat(ソート順_降順).concat(カンマ)
                     .concat(RString.HALF_SPACE).concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
-        } else if (定値区分_1.equals(生活保護者先頭出力区分)) {
+        } else if (定値区分_0.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
         }
@@ -918,13 +918,13 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         RString 帳票タイプ = RString.EMPTY;
         if (ReportIdDBB.DBB100066.getReportId().equals(帳票ID) || ReportIdDBB.DBB100076.getReportId().equals(帳票ID)) {
             帳票タイプ = TyohyoType.期毎タイプ.get名称();
-        } else if (ReportIdDBB.DBB100018.getReportId().equals(帳票ID) || ReportIdDBB.DBB100019.getReportId().equals(帳票ID)) {
+        } else if (ReportIdDBB.DBB100069.getReportId().equals(帳票ID)) {
             帳票タイプ = TyohyoType.銀振型4期タイプ.get名称();
-        } else if (ReportIdDBB.DBB100020.getReportId().equals(帳票ID) || ReportIdDBB.DBB100021.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100022.getReportId().equals(帳票ID) || ReportIdDBB.DBB100023.getReportId().equals(帳票ID)) {
+        } else if (ReportIdDBB.DBB100070.getReportId().equals(帳票ID)) {
+            帳票タイプ = 帳票タイプ_銀振型5;
+        } else if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID) || ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
             帳票タイプ = TyohyoType.ブックタイプ.get名称();
-        } else if (ReportIdDBB.DBB100024.getReportId().equals(帳票ID) || ReportIdDBB.DBB100025.getReportId().equals(帳票ID)
-                || ReportIdDBB.DBB100026.getReportId().equals(帳票ID) || ReportIdDBB.DBB100027.getReportId().equals(帳票ID)) {
+        } else if (ReportIdDBB.DBB100073.getReportId().equals(帳票ID) || ReportIdDBB.DBB100075.getReportId().equals(帳票ID)) {
             帳票タイプ = TyohyoType.コンビニ収納タイプ.get名称();
         }
         return 帳票タイプ;

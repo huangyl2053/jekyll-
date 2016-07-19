@@ -1775,6 +1775,7 @@
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               <choose>
                   <when test="判定フラグ == 1">   
                       AND 年金特徴回付情報."shoriNendo" = #{調定年度前１年}
@@ -2735,6 +2736,7 @@
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               <choose>
                   <when test="判定フラグ == 3">   
                       AND 年金特徴回付情報."shoriNendo" = #{調定年度前２年}
@@ -2963,6 +2965,7 @@
              AND A."honNenkinCode" = B."nenkinCode"
              AND A."honHosokuM" = B."hosokuTsuki"
              AND B."tsuchiNaiyoCode" in ('特別徴収対象者情報', '特別徴収追加候補者情報')
+             AND B."gyomuCode" = 'DB'
             <choose>
                   <when test="判定フラグ == 1">   
                       AND B."shoriNendo" = #{調定年度前１年}
