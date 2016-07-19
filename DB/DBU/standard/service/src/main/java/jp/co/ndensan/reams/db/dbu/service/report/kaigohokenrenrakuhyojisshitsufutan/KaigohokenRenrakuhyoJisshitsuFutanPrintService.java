@@ -86,7 +86,7 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
         KaigohokenRenrakuhyoJisshitsuFutan renrakuhyo = new KaigohokenRenrakuhyoJisshitsuFutan();
 
         TokuteiNyushoshaFutanGendoNichigakuGetter gendoNichigakuGetter = new TokuteiNyushoshaFutanGendoNichigakuGetter();
-        renrakuhyo.set作成年月日(hold.get連絡票作成日().wareki().toDateString());
+        renrakuhyo.set作成年月日(getパターン12(hold.get連絡票作成日()));
         renrakuhyo.set被保険者番号(get被保険者番号(hold));
         IKojin 個人 = hold.get個人();
         if (個人 == null) {
@@ -101,8 +101,6 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
                 renrakuhyo.set氏名フリガナ(get氏名フリガナ(個人.get名称().getKana()));
                 renrakuhyo.set被保険者氏名(get被保険者氏名(個人.get名称().getName()));
             }
-            renrakuhyo.set氏名フリガナ(個人.get名称().getKana().getColumnValue());
-            renrakuhyo.set被保険者氏名(個人.get名称().getName().getColumnValue());
             renrakuhyo.set生年月日(get生年月日(個人));
             renrakuhyo.set性別(getチェック(個人.get性別() != null, 個人.get性別().getCommonName()));
             KaigoJushoEditor kaigoJushoEditor = new KaigoJushoEditor();
@@ -189,8 +187,7 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
         renrakuhyo.set基準額_多床室チェック(getチェック(hold.get居住費の負担限度額().is居住費の記載あり()
                 && is課税層第3段階(hold.get利用者負担段階())));
         renrakuhyo.set基準額_多床室金額(get金額_5(gendoNichigakuGetter.get多床室_基準費用額(hold.get連絡票作成日())));
-        renrakuhyo.set食費負担限度額記載チェック(getチェック(hold.get食費の_特定_負担限度額().is食費の記載あり()
-                && is第1段階(hold.get利用者負担段階())));
+        renrakuhyo.set食費負担限度額記載チェック(getチェック(hold.get食費の_特定_負担限度額().is食費の記載あり()));
         renrakuhyo.set食費チェック1(get食費チェック(gendoNichigakuGetter.get旧措軽減食費１(hold.get連絡票作成日()), hold));
         renrakuhyo.set食費金額1(get金額_5(gendoNichigakuGetter.get旧措軽減食費１(hold.get連絡票作成日())));
         renrakuhyo.set食費チェック2(get食費チェック(gendoNichigakuGetter.get旧措軽減食費２(hold.get連絡票作成日()), hold));
@@ -214,11 +211,11 @@ public class KaigohokenRenrakuhyoJisshitsuFutanPrintService {
                 .get高額介護サービス費支給による自己負担限度額().is高額介護サービス費の記載あり()));
         renrakuhyo.set高額介護チェック1(get高額介護チェック(hiJikoFutanJogenGaku.get第1段階(hold.get連絡票作成日()), hold));
         renrakuhyo.set高額介護金額1(get金額_5(hiJikoFutanJogenGaku.get第1段階(hold.get連絡票作成日())));
-        renrakuhyo.set高額介護チェック2(get高額介護チェック(hiJikoFutanJogenGaku.get第1段階(hold.get連絡票作成日()), hold));
+        renrakuhyo.set高額介護チェック2(get高額介護チェック(hiJikoFutanJogenGaku.get第2段階(hold.get連絡票作成日()), hold));
         renrakuhyo.set高額介護金額2(get金額_5(hiJikoFutanJogenGaku.get第2段階(hold.get連絡票作成日())));
-        renrakuhyo.set高額介護チェック3(get高額介護チェック(hiJikoFutanJogenGaku.get第1段階(hold.get連絡票作成日()), hold));
+        renrakuhyo.set高額介護チェック3(get高額介護チェック(hiJikoFutanJogenGaku.get第3段階(hold.get連絡票作成日()), hold));
         renrakuhyo.set高額介護金額3(get金額_5(hiJikoFutanJogenGaku.get第3段階(hold.get連絡票作成日())));
-        renrakuhyo.set高額介護チェック4(get高額介護チェック(hiJikoFutanJogenGaku.get第1段階(hold.get連絡票作成日()), hold));
+        renrakuhyo.set高額介護チェック4(get高額介護チェック(hiJikoFutanJogenGaku.get第4段階(hold.get連絡票作成日()), hold));
         renrakuhyo.set高額介護金額4(get金額_5(hiJikoFutanJogenGaku.get第4段階(hold.get連絡票作成日())));
         renrakuhyo.set高額介護金額その他(get高額介護金額その他(hiJikoFutanJogenGaku.get第1段階(hold.get連絡票作成日()),
                 hiJikoFutanJogenGaku.get第2段階(hold.get連絡票作成日()),
