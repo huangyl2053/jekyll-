@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 報酬支払い通知書請求書・確認書のデータを作成します。
+ * 主治医意見書作成報酬支払明細書のprocessです。
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
@@ -113,7 +113,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
             ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
             ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(current);
-            editShujiiHoshumeisaiEntity(shumeisaiEntity, current);
+            shumeisaiEntity = editShujiiHoshumeisaiEntity(shumeisaiEntity, current);
             ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
             report.writeBy(reportSourceWriter);
             index_tmp++;
@@ -130,7 +130,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
         ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(entity);
-        editShujiiHoshumeisaiEntity(shumeisaiEntity, entity);
+        shumeisaiEntity = editShujiiHoshumeisaiEntity(shumeisaiEntity, entity);
         ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
         index_tmp++;

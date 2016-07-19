@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 報酬支払い通知書請求書・確認書のデータを作成します。
+ * 認定調査報酬支払明細書のprocessです。
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
@@ -132,8 +132,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ChosaHoshumeisaiEdit edit = new ChosaHoshumeisaiEdit();
         ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(entity);
-        chosaHoshumeisai.set対象期間(get対象期間());
-        chosaHoshumeisai.set明細番号(new RString(String.valueOf(index_tmp)));
+        chosaHoshumeisai = getChosaHoshumeisai(chosaHoshumeisai, entity);
         ChosaHoshumeisaiReport report = new ChosaHoshumeisaiReport(chosaHoshumeisai);
         report.writeBy(reportSourceWriter);
         index_tmp++;

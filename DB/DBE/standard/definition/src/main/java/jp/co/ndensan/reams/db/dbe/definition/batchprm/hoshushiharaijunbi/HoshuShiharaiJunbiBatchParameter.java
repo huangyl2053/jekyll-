@@ -63,8 +63,7 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
             FlexibleDate furikomishiteiday,
             List<RString> chkchosa,
             List<RString> chkshujii,
-            List<RString> chkshinsakai
-    ) {
+            List<RString> chkshinsakai) {
         this.jissekidaterangefrom = jissekidaterangefrom;
         this.jissekidaterangeto = jissekidaterangeto;
         this.furikomishiteiday = furikomishiteiday;
@@ -84,7 +83,6 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
                 furikomishiteiday,
                 chkchosa,
                 chkshujii,
-                chkshinsakai
-        );
+                chkshinsakai);
     }
 }

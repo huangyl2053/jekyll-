@@ -25,7 +25,7 @@ import lombok.Setter;
 /**
  * 介護認定審査会委員報酬支払明細書のEditクラスです。
  *
- * @reamsid_L DBE-1980-046 suguangjun
+ * @reamsid_L DBE-1980-020 suguangjun
  */
 @Getter
 @Setter

@@ -534,15 +534,13 @@ public class ShujiiIkenshoSakuseiIrai {
             iraishoItem.setJushoText(atenaJoho.getTemp_宛名住所() == null ? RString.EMPTY : atenaJoho.getTemp_宛名住所().value());
             iraishoItem.setKikanNameText(atenaJoho.getTemp_宛名機関名());
             iraishoItem.setShimeiText(atenaJoho.getTemp_宛名氏名() == null ? RString.EMPTY : atenaJoho.getTemp_宛名氏名().value());
+            iraishoItem.setCustomerBarCode(ReportUtil.getCustomerBarCode(iraishoItem.getYubinNo1(), iraishoItem.getJushoText()));
         }
         iraishoItem.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
         iraishoItem.setSonota(RString.EMPTY);
 
-        CustomerBarCode barcode = new CustomerBarCode();
-        CustomerBarCodeResult result = barcode.convertCustomerBarCode(row.getYubinNo(), row.getJusho());
-        iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).

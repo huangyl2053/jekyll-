@@ -42,7 +42,7 @@ public class ChosaHoshumeisaiEdit {
     private Decimal 合計金額 = Decimal.ZERO;
 
     /**
-     * 要介護認定・要支援認定等申請者の編集処理です。
+     * 認定調査報酬支払通知書の編集処理です。
      *
      * @param entity 要介護認定申請
      * @return ChosaHoshuShiharaiEntity

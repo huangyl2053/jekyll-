@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 認定調査報酬支払通知書のデータを作成します。
+ * 認定調査報酬支払通知書のprocessです。
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */

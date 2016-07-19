@@ -15,6 +15,9 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.chosh
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho1gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho2gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho3gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho6gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho7gatsu;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho8gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHoho9gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHohoYoku4gatsu;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHoho.choshuHohoYoku5gatsu;
@@ -253,4 +256,31 @@ public class DbV2001ChoshuHohoAliveDac implements ISaveable<DbV2001ChoshuHohoEnt
                 toList(DbV2001ChoshuHohoEntity.class);
 
     }
+
+    /**
+     * 特別徴収開始者抽出
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<DbV2001ChoshuHohoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbV2001ChoshuHohoEntity> get特別徴収開始者データ(
+            FlexibleYear 賦課年度) throws NullPointerException {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_賦課年度.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(choshuHoho6gatsu, 普徴),
+                                eq(choshuHoho7gatsu, 普徴),
+                                or(eq(choshuHoho8gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHoho8gatsu, 特別徴収地共済)),
+                                or(eq(choshuHoho9gatsu, 特別徴収厚生労働省),
+                                        eq(choshuHoho9gatsu, 特別徴収地共済)))).
+                toList(DbV2001ChoshuHohoEntity.class);
+    }
+
 }
