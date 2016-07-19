@@ -119,6 +119,6 @@ public class ShujiiHoshumeisaiEdit {
     }
 
     private RString intToRString(int date) {
-        return new RString(String.valueOf(date));
+        return new RString(date);
     }
 }

@@ -50,7 +50,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護認定審査会委員報酬支払明細書のprocessです。
  *
- * @reamsid_L DBE-1980-046 suguangjun
+ * @reamsid_L DBE-1980-020 suguangjun
  */
 public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
 

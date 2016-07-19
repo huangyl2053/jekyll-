@@ -43,8 +43,7 @@ public class HoshuShiharaiJunbiProcessParameter implements IBatchProcessParamete
             FlexibleDate furikomishiteiday,
             List<RString> chkchosa,
             List<RString> chkshujii,
-            List<RString> chkshinsakai
-    ) {
+            List<RString> chkshinsakai) {
         this.jissekidaterangefrom = jissekidaterangefrom;
         this.jissekidaterangeto = jissekidaterangeto;
         this.furikomishiteiday = furikomishiteiday;

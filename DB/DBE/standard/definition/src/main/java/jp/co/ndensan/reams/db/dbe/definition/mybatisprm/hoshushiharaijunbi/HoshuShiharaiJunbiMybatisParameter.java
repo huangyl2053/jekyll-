@@ -50,8 +50,7 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
             RString 報酬基準日,
             boolean 基準日フラグ,
             CodeShubetsu コード種別,
-            FlexibleDate 有効期間
-    ) {
+            FlexibleDate 有効期間) {
         this.実績期間From = 実績期間From;
         this.実績期間To = 実績期間To;
         this.振込指定日 = 振込指定日;
@@ -84,8 +83,7 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
             RString 処理状態区分_延期,
             RString 概況調査イメージ区分,
             RString 主治医意見書報酬基準日,
-            boolean 基準日フラグ
-    ) {
+            boolean 基準日フラグ) {
         return new HoshuShiharaiJunbiMybatisParameter(
                 実績期間From,
                 実績期間To,
