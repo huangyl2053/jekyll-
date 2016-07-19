@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu;
 
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.HomonShubetsu;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
@@ -45,19 +46,27 @@ public class ChosahoshuseikyuEdit {
         Decimal 単価 = entity.getTanka();
         if (!shinsakaiiincode.equals(entity.getShinsakaiIinCode())) {
             index = 1;
-            if (new Code("0").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.新規調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.在宅.getコード().equals(entity.getHomonShubetsu().value())) {
                 shuseikyu.set新規在宅件数(intToRString(index));
                 shuseikyu.set新規在宅単価(decimalToRString(単価));
             }
-            if (new Code("0").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.新規調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.施設.getコード().equals(entity.getHomonShubetsu().value())) {
                 shuseikyu.set新規施設件数(intToRString(index));
                 shuseikyu.set新規施設単価(decimalToRString(単価));
             }
-            if (new Code("1").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.再調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.在宅.getコード().equals(entity.getHomonShubetsu().value())) {
                 shuseikyu.set更新在宅件数(intToRString(index));
                 shuseikyu.set更新在宅単価(decimalToRString(単価));
             }
-            if (new Code("1").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.再調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.施設.getコード().equals(entity.getHomonShubetsu().value())) {
                 shuseikyu.set更新施設件数(intToRString(index));
                 shuseikyu.set更新施設単価(decimalToRString(単価));
             }
@@ -87,22 +96,30 @@ public class ChosahoshuseikyuEdit {
 
     private Chosahoshuseikyu getChosahoshusei(HoshuShiharaiJunbiRelateEntity entity, Chosahoshuseikyu shuseikyu, Decimal 単価) {
         if (shinsakaiiincode.equals(entity.getShinsakaiIinCode())) {
-            if (new Code("0").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.新規調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.在宅.getコード().equals(entity.getHomonShubetsu().value())) {
                 index++;
                 shuseikyu.set新規在宅件数(intToRString(index));
                 shuseikyu.set新規在宅単価(decimalToRString(単価));
             }
-            if (new Code("0").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.新規調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.施設.getコード().equals(entity.getHomonShubetsu().value())) {
                 index++;
                 shuseikyu.set新規施設件数(intToRString(index));
                 shuseikyu.set新規施設単価(decimalToRString(単価));
             }
-            if (new Code("1").equals(entity.getChosaKubun()) && new Code("1").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.再調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.在宅.getコード().equals(entity.getHomonShubetsu().value())) {
                 index++;
                 shuseikyu.set更新在宅件数(intToRString(index));
                 shuseikyu.set更新在宅単価(decimalToRString(単価));
             }
-            if (new Code("1").equals(entity.getChosaKubun()) && new Code("2").equals(entity.getHomonShubetsu())) {
+            if (entity.getChosaKubun() != null && entity.getHomonShubetsu() != null
+                    && ChosaKubun.再調査.getコード().equals(entity.getChosaKubun().value())
+                    && HomonShubetsu.施設.getコード().equals(entity.getHomonShubetsu().value())) {
                 index++;
                 shuseikyu.set更新施設件数(intToRString(index));
                 shuseikyu.set更新施設単価(decimalToRString(単価));
@@ -119,7 +136,7 @@ public class ChosahoshuseikyuEdit {
     }
 
     private RString intToRString(int date) {
-        return new RString(String.valueOf(date));
+        return new RString(date);
     }
 
     private int rstringToInt(RString date) {
