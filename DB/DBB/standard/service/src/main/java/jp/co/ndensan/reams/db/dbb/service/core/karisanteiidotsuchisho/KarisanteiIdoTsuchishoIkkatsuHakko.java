@@ -1459,7 +1459,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         List<NokiJoho> 特徴納期情報リスト = new ArrayList<>();
         TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
         KitsukiList 期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
-        for (int index = INT_1; index <= INT_6; index++) {
+        for (int index = INT_1; index <= INT_3; index++) {
             Kitsuki 期月情報 = 期月リスト_特徴.get期の最初月(index);
             Noki 特徴納期 = fukaNokiResearcher.get特徴納期(index);
             NokiJoho nokiJoho = new NokiJoho();
