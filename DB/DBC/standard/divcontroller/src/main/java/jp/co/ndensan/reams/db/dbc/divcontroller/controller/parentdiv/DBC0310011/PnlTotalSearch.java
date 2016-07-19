@@ -86,7 +86,7 @@ public class PnlTotalSearch {
                             SubGyomuCode.DBU介護統計報告).toString()));
         } else {
             ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
-                    .get(ViewStateKeys.検索キー, ShokanJuryoininKeiyakushaParameter.class);
+                    .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
             getHandler(div).set基本情報パラメータ(parameter);
             RString 保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
             div.getPnlSearch().getTxtName().setValue(保険者名);
@@ -115,7 +115,7 @@ public class PnlTotalSearch {
         }
         if (契約者選択.equals(表示モード)) {
             ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
-                    .get(ViewStateKeys.検索キー, ShokanJuryoininKeiyakushaParameter.class);
+                    .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
             List<ShokanJuryoininKeiyakushaResult> shokanResultList = getHandler(div).get契約者一覧(parameter);
             Decimal 最大取得件数 = ViewStateHolder
                     .get(ViewStateKeys.最大件数, Decimal.class);
@@ -132,7 +132,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onClick_btnHihokensyaSearch(PnlTotalSearchDiv div) {
-        ViewStateHolder.put(ViewStateKeys.検索キー, getHandler(div).createParameter());
+        ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, getHandler(div).createParameter());
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
         ViewStateHolder.put(ViewStateKeys.最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
@@ -169,7 +169,7 @@ public class PnlTotalSearch {
      * @return ResponseData<PnlTotalSearchDiv>
      */
     public ResponseData<PnlTotalSearchDiv> onClick_btnJigyoshakeiyakuSearch(PnlTotalSearchDiv div) {
-        ViewStateHolder.put(ViewStateKeys.検索キー, getHandler(div).createParameter());
+        ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, getHandler(div).createParameter());
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
         ViewStateHolder.put(ViewStateKeys.最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
@@ -247,7 +247,7 @@ public class PnlTotalSearch {
         }
         ShokanJuryoininKeiyakushaParameter parameter = getHandler(div).createParameter();
         Decimal 最大取得件数 = div.getPnlSearch().getTxtMaxCount().getValue();
-        ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
+        ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, parameter);
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getPnlSearch().getTxtName().getValue());
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getPnlSearch().getTxtJigyoshakeiyakuName().getValue());
         ViewStateHolder.put(ViewStateKeys.最大件数, 最大取得件数);
@@ -301,7 +301,7 @@ public class PnlTotalSearch {
         div.getBtnSearchAgain().setDisabled(true);
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(getHandler(div).createDropDownList());
         ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
-                .get(ViewStateKeys.検索キー, ShokanJuryoininKeiyakushaParameter.class);
+                .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
         if (parameter != null) {
             getHandler(div).set基本情報パラメータ(parameter);
             RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
