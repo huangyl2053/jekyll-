@@ -470,7 +470,7 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue().toDateString())
                 .append(div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue().toDateString())
-                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() != null ? div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() : RString.EMPTY)
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue())
                 .append(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue())
