@@ -423,6 +423,7 @@ public final class DateConverter {
 
     /**
      * 1989/01/08（共通ポリシー 基本形1）<br/>
+     * 平元.01.08　平02.01.01<br/>
      *
      * @param date RDate
      * @return RString
@@ -431,8 +432,8 @@ public final class DateConverter {
         if (date == null || date.equals(RDate.MAX) || date.equals(RDate.MIN)) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString();
     }
 
     /**
