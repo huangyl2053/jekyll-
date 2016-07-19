@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanriEntity> {
 
     private static final RString 介護住民票個別事項連携情報作成_他社住基 = new RString("介護住民票個別事項連携情報作成【他社住基】");
+    private static final RString 定数_基準収入額適用申請書発行 = new RString("基準収入額適用申請書発行");
     private static final RString SUB_CODE = new RString("DBU");
     @InjectSession
     private SqlSession session;
@@ -1717,5 +1718,24 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 年度))).
                 order(by(taishoShuryoTimestamp, Order.DESC)).limit(1)
                 .toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタ情報作成するメソッドです。
+     *
+     * @param 年度 FlexibleYear
+     * @return int 取得件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int select処理日付管理マスタ(FlexibleYear 年度) throws NullPointerException {
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBC介護給付),
+                                eq(shoriName, 定数_基準収入額適用申請書発行),
+                                eq(nendo, 年度))).getCount();
     }
 }
