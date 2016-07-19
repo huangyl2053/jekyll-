@@ -34,6 +34,30 @@ public class TokushoTaishioIchiranEntity {
      */
     private RString nenkinCode;
     /**
+     * 仮徴収・基礎年金番号
+     */
+    private RString karichoshuKisoNenkinNo;
+    /**
+     * 本徴収・基礎年金番号
+     */
+    private RString honchoshuKisoNenkinNo;
+    /**
+     * 翌年度仮徴収・基礎年金番号
+     */
+    private RString yokunendoKarichoshuKisoNenkinNo;
+    /**
+     * 仮徴収・年金コード
+     */
+    private RString karichoshuNenkinCode;
+    /**
+     * 本徴収・基礎年金コード
+     */
+    private RString honchoshuKisonenkinCode;
+    /**
+     * 翌年度仮徴収・基礎年金コード
+     */
+    private RString yokunendoKariChoshuKisonenkinCode;
+    /**
      * 識別コード
      */
     private ShikibetsuCode shikibetuCode;
@@ -133,4 +157,46 @@ public class TokushoTaishioIchiranEntity {
         this.jusho = jusho;
     }
 
+    /**
+     * 特徴対象一覧エンティティクラスのコンストラクタです。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @param karichoshuKisoNenkinNo 仮徴収・基礎年金番号
+     * @param honchoshuKisoNenkinNo 本徴収・基礎年金番号
+     * @param yokunendoKarichoshuKisoNenkinNo 翌年度仮徴収・基礎年金番号
+     * @param karichoshuNenkinCode 仮徴収・年金コード
+     * @param honchoshuKisonenkinCode 本徴収・基礎年金コード
+     * @param yokunendoKariChoshuKisonenkinCode 翌年度仮徴収・基礎年金コード
+     * @param shikibetuCode 識別コード
+     * @param setaiCode 世帯コード
+     * @param gyoseikuCode 行政区コード
+     * @param umareYMD 生年月日
+     * @param juminShubetsuCode 住民種別コード
+     * @param seibetsuCode 性別コード
+     * @param kanashimeiJodan カナ氏名上段
+     * @param kanashimeiKadan カナ氏名下段
+     * @param kanjiShimei 漢字氏名
+     * @param yubinNo 郵便番号
+     * @param jusho 住所
+     */
+    public TokushoTaishioIchiranEntity(RString hihokenshaNo, RString karichoshuKisoNenkinNo, RString honchoshuKisoNenkinNo, RString yokunendoKarichoshuKisoNenkinNo, RString karichoshuNenkinCode, RString honchoshuKisonenkinCode, RString yokunendoKariChoshuKisonenkinCode, ShikibetsuCode shikibetuCode, RString setaiCode, RString gyoseikuCode, RDate umareYMD, RString juminShubetsuCode, RString seibetsuCode, RString kanashimeiJodan, RString kanashimeiKadan, RString kanjiShimei, RString yubinNo, RString jusho) {
+        this.hihokenshaNo = hihokenshaNo;
+        this.karichoshuKisoNenkinNo = karichoshuKisoNenkinNo;
+        this.honchoshuKisoNenkinNo = honchoshuKisoNenkinNo;
+        this.yokunendoKarichoshuKisoNenkinNo = yokunendoKarichoshuKisoNenkinNo;
+        this.karichoshuNenkinCode = karichoshuNenkinCode;
+        this.honchoshuKisonenkinCode = honchoshuKisonenkinCode;
+        this.yokunendoKariChoshuKisonenkinCode = yokunendoKariChoshuKisonenkinCode;
+        this.shikibetuCode = shikibetuCode;
+        this.setaiCode = setaiCode;
+        this.gyoseikuCode = gyoseikuCode;
+        this.umareYMD = umareYMD;
+        this.juminShubetsuCode = juminShubetsuCode;
+        this.seibetsuCode = seibetsuCode;
+        this.kanashimeiJodan = kanashimeiJodan;
+        this.kanashimeiKadan = kanashimeiKadan;
+        this.kanjiShimei = kanjiShimei;
+        this.yubinNo = yubinNo;
+        this.jusho = jusho;
+    }
 }

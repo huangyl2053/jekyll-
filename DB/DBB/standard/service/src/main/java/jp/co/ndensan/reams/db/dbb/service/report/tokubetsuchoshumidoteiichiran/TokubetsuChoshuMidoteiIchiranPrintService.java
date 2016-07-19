@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran.
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshumidoteiichiran.TokubetsuChoshuMidoteiIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -33,16 +34,22 @@ public class TokubetsuChoshuMidoteiIchiranPrintService {
      * 特別徴収未同定一覧表
      *
      * @param 特別徴収未同定一覧情報entityList 特別徴収未同定一覧情報entityList
+     * @param 出力順リスト 出力順リスト
+     * @param 改頁リスト 改頁リスト
      * @param reportManager ReportManager
+     * @param 特徴開始月 特徴開始月
      */
-    public void print(List<TokushoTaishioIchiranMidoteiEntity> 特別徴収未同定一覧情報entityList, ReportManager reportManager) {
+    public void print(List<TokushoTaishioIchiranMidoteiEntity> 特別徴収未同定一覧情報entityList,
+            List<RString> 出力順リスト,
+            List<RString> 改頁リスト, ReportManager reportManager,
+            RString 特徴開始月) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         TokubetsuChoshuMidoteiIchiranProperty property = new TokubetsuChoshuMidoteiIchiranProperty();
         try (ReportAssembler<TokubetsuChoshuMidoteiIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuMidoteiIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            TokubetsuChoshuMidoteiIchiranReport report = TokubetsuChoshuMidoteiIchiranReport.createForm(
-                    特別徴収未同定一覧情報entityList, association);
+            TokubetsuChoshuMidoteiIchiranReport report = TokubetsuChoshuMidoteiIchiranReport
+                    .createForm(特別徴収未同定一覧情報entityList, 出力順リスト, 改頁リスト, association, 特徴開始月);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -51,12 +58,16 @@ public class TokubetsuChoshuMidoteiIchiranPrintService {
      * 特別徴収未同定一覧表
      *
      * @param 特別徴収未同定一覧情報entityList List<TokushoTaishioIchiranMidoteiEntity>
+     * @param 出力順リスト 出力順リスト
+     * @param 改頁リスト 改頁リスト
+     * @param 特徴開始月 改頁リスト
      * @return SourceDataCollection
      */
-    public SourceDataCollection printChohyo(List<TokushoTaishioIchiranMidoteiEntity> 特別徴収未同定一覧情報entityList) {
+    public SourceDataCollection printChohyo(List<TokushoTaishioIchiranMidoteiEntity> 特別徴収未同定一覧情報entityList,
+            List<RString> 出力順リスト, List<RString> 改頁リスト, RString 特徴開始月) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(特別徴収未同定一覧情報entityList, reportManager);
+            print(特別徴収未同定一覧情報entityList, 出力順リスト, 改頁リスト, reportManager, 特徴開始月);
             collection = reportManager.publish();
         }
         return collection;

@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.BatchTokuchoKariSanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.FukaParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiEntity;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.ShuturyokuTyoutuke;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoIraikingakuKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
@@ -59,6 +62,7 @@ public final class TokutyoKariSanteiFukaHandler {
     private static final RString 実行する1 = new RString("btnTsuchishoSakusei");
     private static final RString 年額基準年度 = new RString("年額基準年度");
     private static final RString 特徴開始計算方法6月 = new RString("6月特徴開始計算方法");
+//    private static final RString 特別徴収開始通知書_仮算定_帳票分類ID = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final RString 当年度 = new RString("当年度");
     private static final RString 翌年度 = new RString("翌年度");
     private static final RString 年度 = new RString("年度");
@@ -202,12 +206,12 @@ public final class TokutyoKariSanteiFukaHandler {
     }
 
     /**
-     * parameterを生成する.
+     * 特徴仮算定通知書一括発行BatchParameterを生成する.
      *
      * @param div TokutyoKariSanteiFukaDiv
      * @return TokuchoKariSanteiParameter
      */
-    public TokuchoKariSanteiParameter btncommon(TokutyoKariSanteiFukaDiv div) {
+    public TokuchoKariSanteiParameter 特徴仮算定通知書一括発行BatchParam(TokutyoKariSanteiFukaDiv div) {
         FukaParameter param = new FukaParameter();
         param.set出力対象(div.getTokutyoKariSanteiFukaChohyoHakko().
                 getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().getSelectedValue());
@@ -221,6 +225,34 @@ public final class TokutyoKariSanteiFukaHandler {
         List<dgOutputChohyoIchiran_Row> 出力帳票一覧List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
         param.set出力帳票一覧List(listChange(出力帳票一覧List));
         return tokuchokarisanteifuka.createTokuchoKariSanteiParameter(param);
+    }
+
+    /**
+     * parameterを生成する.
+     *
+     * @param div TokutyoKariSanteiFukaDiv
+     * @return TokuchoKariSanteiParameter
+     */
+    public TokuchoKarisanteiFukaBatchParameter 特徴仮算定賦課BatchParam(TokutyoKariSanteiFukaDiv div) {
+        TokuchoKarisanteiFukaBatchParameter batchParam = new TokuchoKarisanteiFukaBatchParameter();
+        batchParam.set調定年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().getDomain());
+        batchParam.set賦課年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().getDomain());
+        FukaParameter fukaParameter = new FukaParameter();
+        List<dgOutputChohyoIchiran_Row> 出力帳票一覧List = div.getTokutyoKariSanteiFukaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧();
+        fukaParameter.set出力帳票一覧List(listChange(出力帳票一覧List));
+        tokuchokarisanteifuka.createTokuchoKariSanteiParameter(fukaParameter);
+        TokuchoKariSanteiParameter param = tokuchokarisanteifuka.createTokuchoKariSanteiParameter(fukaParameter);
+        List<ShuturyokuTyoutuke> 出力帳票一覧 = new ArrayList();
+        for (BatchTokuchoKariSanteiResult result : param.get出力帳票一覧List()) {
+            if (result.getEntity() != null && result.getEntity().get出力順ID() != null) {
+                ShuturyokuTyoutuke shuturyokutyoutuke = new ShuturyokuTyoutuke();
+                shuturyokutyoutuke.set出力順ID(Long.parseLong(result.getEntity().get出力順ID().toString()));
+                shuturyokutyoutuke.set帳票ID(new ReportId(result.getEntity().get帳票ID()));
+                出力帳票一覧.add(shuturyokutyoutuke);
+            }
+        }
+        batchParam.set出力帳票一覧(出力帳票一覧);
+        return batchParam;
     }
 
     private List<TokuchoKariSanteiEntity> listChange(List<dgOutputChohyoIchiran_Row> 出力帳票一覧List) {

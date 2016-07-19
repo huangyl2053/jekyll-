@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -29,24 +30,54 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     private static final RString 住登外外国人 = new RString("4");
     private static final RString 日本人 = new RString("1");
     private static final RString 住登外日本人 = new RString("3");
+    private static final RString 年度 = new RString("年度");
+    private static final int NUM_0 = 0;
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_10 = 10;
+    private static final int NUM_12 = 12;
     private static final RString SHORTLINE = new RString("-");
+    private static final List<Integer> 仮徴収月リスト = new ArrayList<>();
+    private static final List<Integer> 本徴収月リスト = new ArrayList<>();
+    private static final List<Integer> 翌年度仮徴収月リスト = new ArrayList<>();
     private static final List<RString> 住民種別日本人 = new ArrayList<>();
     private static final List<RString> 住民種別外国人 = new ArrayList<>();
     private final Association association;
+    private final List<RString> 出力順項目リスト;
+    private final List<RString> 改頁項目リスト;
     private final TokushoTaishioIchiranEntity 特徴対象一覧;
+    private final RString 特徴開始月;
 
     /**
      * コンストラクタです.
      *
      * @param 特徴対象一覧 TokushoTaishioIchiranEntity
+     * @param 出力順項目リスト List<RString>
+     * @param 改頁項目リスト List<RString>
      * @param association Association
+     * @param 特徴開始月 RString
      */
     public TokubetsuChoshuDoteiIchiranEditor(TokushoTaishioIchiranEntity 特徴対象一覧,
-            Association association) {
+            List<RString> 出力順項目リスト,
+            List<RString> 改頁項目リスト,
+            Association association,
+            RString 特徴開始月) {
+        this.出力順項目リスト = 出力順項目リスト;
+        this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
+        this.特徴開始月 = 特徴開始月;
         this.特徴対象一覧 = 特徴対象一覧;
+        仮徴収月リスト.add(NUM_8);
+        本徴収月リスト.add(NUM_10);
+        本徴収月リスト.add(NUM_12);
+        本徴収月リスト.add(NUM_2);
+        翌年度仮徴収月リスト.add(NUM_4);
+        翌年度仮徴収月リスト.add(NUM_6);
         住民種別日本人.add(日本人);
         住民種別日本人.add(住登外日本人);
         住民種別外国人.add(住登外外国人);
@@ -59,6 +90,8 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         set作成日時(source);
         set導入団体コード(source);
         set導入市町村名(source);
+        set出力順(source);
+        set改ページ(source);
         set被保険者番号(source);
         set年金番号と年金コード(source);
         set識別コード(source);
@@ -74,12 +107,12 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     }
 
     private void set年度(TokubetsuChoshuDoteiIchiranSource source) {
-        RString 年 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課);
+        RString 年 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         if (RString.isNullOrEmpty(年)) {
             return;
         }
         FlexibleYear fYear = new FlexibleYear(年);
-        source.nendo = fYear.wareki().toDateString();
+        source.nendo = fYear.wareki().toDateString().concat(年度);
     }
 
     private void set作成日時(TokubetsuChoshuDoteiIchiranSource source) {
@@ -99,8 +132,24 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     }
 
     private void set年金番号と年金コード(TokubetsuChoshuDoteiIchiranSource source) {
-        source.listList1_2 = this.特徴対象一覧.getKisoNenkinNo();
-        source.listList2_1 = this.特徴対象一覧.getNenkinCode();
+        if (RString.isNullOrEmpty(特徴開始月)) {
+            source.listList1_2 = this.特徴対象一覧.getKisoNenkinNo();
+            source.listList2_1 = this.特徴対象一覧.getNenkinCode();
+            return;
+        }
+        Integer 特徴開始月 = Integer.parseInt(this.特徴開始月.toString());
+        if (仮徴収月リスト.contains(特徴開始月)) {
+            source.listList1_2 = this.特徴対象一覧.getKarichoshuKisoNenkinNo();
+            source.listList2_1 = this.特徴対象一覧.getKarichoshuNenkinCode();
+        }
+        if (本徴収月リスト.contains(特徴開始月)) {
+            source.listList1_2 = this.特徴対象一覧.getHonchoshuKisoNenkinNo();
+            source.listList2_1 = this.特徴対象一覧.getHonchoshuKisonenkinCode();
+        }
+        if (翌年度仮徴収月リスト.contains(特徴開始月)) {
+            source.listList1_2 = this.特徴対象一覧.getYokunendoKarichoshuKisoNenkinNo();
+            source.listList2_1 = this.特徴対象一覧.getYokunendoKariChoshuKisonenkinCode();
+        }
     }
 
     private void set識別コード(TokubetsuChoshuDoteiIchiranSource source) {
@@ -163,4 +212,41 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         source.listList2_6 = this.特徴対象一覧.getJusho();
     }
 
+    private void set出力順(TokubetsuChoshuDoteiIchiranSource source) {
+        if (出力順項目リスト == null || 出力順項目リスト.isEmpty()) {
+            return;
+        }
+        source.sortJunArea1 = 出力順項目リスト.get(NUM_0);
+        if (出力順項目リスト.size() > NUM_1) {
+            source.sortJunArea2 = 出力順項目リスト.get(NUM_1);
+        }
+        if (出力順項目リスト.size() > NUM_2) {
+            source.sortJunArea3 = 出力順項目リスト.get(NUM_2);
+        }
+        if (出力順項目リスト.size() > NUM_3) {
+            source.sortJunArea4 = 出力順項目リスト.get(NUM_3);
+        }
+        if (出力順項目リスト.size() > NUM_4) {
+            source.sortJunArea5 = 出力順項目リスト.get(NUM_4);
+        }
+    }
+
+    private void set改ページ(TokubetsuChoshuDoteiIchiranSource source) {
+        if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
+            return;
+        }
+        source.kaiPageArea1 = 改頁項目リスト.get(NUM_0);
+        if (改頁項目リスト.size() > NUM_1) {
+            source.kaiPageArea2 = 改頁項目リスト.get(NUM_1);
+        }
+        if (改頁項目リスト.size() > NUM_2) {
+            source.kaiPageArea3 = 改頁項目リスト.get(NUM_2);
+        }
+        if (改頁項目リスト.size() > NUM_3) {
+            source.kaiPageArea4 = 改頁項目リスト.get(NUM_3);
+        }
+        if (改頁項目リスト.size() > NUM_4) {
+            source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
+        }
+    }
 }
