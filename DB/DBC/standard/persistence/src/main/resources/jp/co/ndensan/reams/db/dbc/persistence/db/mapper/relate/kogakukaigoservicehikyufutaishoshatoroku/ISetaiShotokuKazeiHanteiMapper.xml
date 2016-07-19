@@ -141,7 +141,7 @@
     
      <!-- 世帯員所得情報高額一時に一括Insertする。 -->
     <insert id="insert世帯員所得情報高額一時に一括住所地特例該当が1以外"
-        parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter">
         INSERT INTO "TmpSetaiHaakuNyuryoku"
         (
            "hihokenshaNo",
@@ -208,7 +208,7 @@
 
     <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
     <insert id="insert世帯員所得情報事業高額一時に一括住所地特例該当が1以外"
-        parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter">
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter">
         INSERT INTO "TmpSetaiJigyoHaakuNyuryoku"
         (
            "hihokenshaNo",
