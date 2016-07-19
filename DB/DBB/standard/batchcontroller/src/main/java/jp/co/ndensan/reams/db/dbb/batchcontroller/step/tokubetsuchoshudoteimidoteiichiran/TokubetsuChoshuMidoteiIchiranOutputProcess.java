@@ -173,7 +173,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
             );
             targets.add(target);
         }
-        TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(導入団体クラス, null, null, targets);
+        TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(導入団体クラス, targets);
         report.writeBy(reportSourceWriter);
     }
 
