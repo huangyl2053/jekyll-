@@ -70,15 +70,18 @@ public class BenmeiTorokuPanel {
         RString 初期_状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         panelDiv.getAtenaPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         panelDiv.getShikakukihonPanel().getCcdKaigoShikakuKihon();
-        get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
         if (初期_状態.equals(状態_更新)) {
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
+            if (benmeiTorokuMeisaiJoho != null) {
+                get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
+            }
             ViewStateHolder.put(ViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
             getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
         } else if (初期_状態.equals(状態_削除)) {
             CommonButtonHolder.setTextByCommonButtonFieldName(new RString("btnSave"), "削除");
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (benmeiTorokuMeisaiJoho != null) {
+                get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
                 getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
             } else {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("削除データ"));
