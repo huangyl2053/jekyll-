@@ -140,6 +140,9 @@ public class FukakonkyoAndKiwari {
 
     private FukakonkyoAndKiwariDiv setDisplay(FukakonkyoAndKiwariDiv div, Fuka model, FukaShokaiKey key) {
 
+        div.getLblNenkinShunyuValue().setText(RString.EMPTY);
+        div.getLblHokenryoDankaiValue().setText(RString.EMPTY);
+
         changeDivState(div, key.get算定状態());
         set賦課根拠(div.getTblFukakonkyoMeisai(), model);
 
@@ -299,15 +302,24 @@ public class FukakonkyoAndKiwari {
     private void set調定事由(tblFukaKonkyoDiv div, Fuka model) {
         if (model.get調定事由1() != null) {
             div.getTxtFukashokaiChoteiJiyu1().setValue(model.get調定事由1().getRyakusho());
+        } else {
+            div.getTxtFukashokaiChoteiJiyu1().setValue(RString.EMPTY);
         }
         if (model.get調定事由2() != null) {
             div.getTxtFukashokaiChoteiJiyu2().setValue(model.get調定事由2().getRyakusho());
+        } else {
+            div.getTxtFukashokaiChoteiJiyu2().setValue(RString.EMPTY);
+
         }
         if (model.get調定事由3() != null) {
             div.getTxtFukashokaiChoteiJiyu3().setValue(model.get調定事由3().getRyakusho());
+        } else {
+            div.getTxtFukashokaiChoteiJiyu3().setValue(RString.EMPTY);
         }
         if (model.get調定事由4() != null) {
             div.getTxtFukashokaiChoteiJiyu4().setValue(model.get調定事由4().getRyakusho());
+        } else {
+            div.getTxtFukashokaiChoteiJiyu4().setValue(RString.EMPTY);
         }
 
     }
