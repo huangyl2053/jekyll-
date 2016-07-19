@@ -64,6 +64,7 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
+    private RString shinsakaiIinCode = RString.EMPTY;
 
     @BatchWriter
     private BatchReportWriter<ShinsainShiharaimeisaishoReportSource> batchWrite;
@@ -88,18 +89,8 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
         if (hasBrek(getBefore(), entity)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
             ShinsainShiharaiMeisaishoEdit edit = new ShinsainShiharaiMeisaishoEdit();
-            ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity, 消費税率);
-            RStringBuilder builder = new RStringBuilder();
-            builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-            builder.append(new RString("～"));
-            builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-            shinsainshi.set対象期間(builder.toRString());
-            shinsainshi.set明細番号(new RString(String.valueOf(index)));
-            合計金額 = 合計金額.add(new Decimal(shinsainshi.get報酬合計().toString()));
-            Decimal 消費税 = (合計金額.multiply(new Decimal(消費税率.toString()))).subtract(合計金額);
-            shinsainshi.set合計金額(new RString(合計金額.toString()));
-            shinsainshi.set消費税(new RString(消費税.toString()));
-            shinsainshi.set合計請求額(new RString(合計金額.add(消費税).toString()));
+            ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity);
+            shinsainshi = getShinsainShiharaimeisaisho(shinsainshi, entity);
             ShinsainShiharaimeisaishoReport report = new ShinsainShiharaimeisaishoReport(shinsainshi);
             report.writeBy(reportSourceWriter);
             ++index;
@@ -114,18 +105,8 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
     protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ShinsainShiharaiMeisaishoEdit edit = new ShinsainShiharaiMeisaishoEdit();
-        ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity, 消費税率);
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-        builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-        shinsainshi.set対象期間(builder.toRString());
-        shinsainshi.set明細番号(new RString(String.valueOf(index)));
-        合計金額 = 合計金額.add(new Decimal(shinsainshi.get報酬合計().toString()));
-        Decimal 消費税 = (合計金額.multiply(new Decimal(消費税率.toString()))).subtract(合計金額);
-        shinsainshi.set合計金額(new RString(合計金額.toString()));
-        shinsainshi.set消費税(new RString(消費税.toString()));
-        shinsainshi.set合計請求額(new RString(合計金額.add(消費税).toString()));
+        ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity);
+        shinsainshi = getShinsainShiharaimeisaisho(shinsainshi, entity);
         ShinsainShiharaimeisaishoReport report = new ShinsainShiharaimeisaishoReport(shinsainshi);
         report.writeBy(reportSourceWriter);
         ++index;
@@ -199,4 +180,40 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
     }
 
+    private RString get対象期間() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
+        builder.append(new RString("～"));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        return builder.toRString();
+    }
+
+    private Decimal rstringToDecimal(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(date.toString());
+    }
+
+    private RString decimalToRString(Decimal date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new RString(date.toString());
+    }
+
+    private ShinsainShiharaimeisaisho getShinsainShiharaimeisaisho(ShinsainShiharaimeisaisho shinsainshi, HoshuShiharaiJunbiRelateEntity entity) {
+        if (!shinsakaiIinCode.equals(entity.getShinsakaiIinCode())) {
+            合計金額 = Decimal.ZERO;
+            shinsakaiIinCode = entity.getShinsakaiIinCode();
+        }
+        shinsainshi.set対象期間(get対象期間());
+        shinsainshi.set明細番号(new RString(index));
+        合計金額 = 合計金額.add(rstringToDecimal(shinsainshi.get報酬合計()));
+        Decimal 消費税 = (合計金額.multiply(rstringToDecimal(消費税率))).subtract(合計金額);
+        shinsainshi.set合計金額(decimalToRString(合計金額));
+        shinsainshi.set消費税(decimalToRString(消費税));
+        shinsainshi.set合計請求額(decimalToRString(合計金額.add(消費税)));
+        return shinsainshi;
+    }
 }

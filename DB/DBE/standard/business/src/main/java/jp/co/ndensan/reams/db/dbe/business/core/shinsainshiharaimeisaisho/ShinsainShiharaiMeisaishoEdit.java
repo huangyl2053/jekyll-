@@ -36,10 +36,9 @@ public class ShinsainShiharaiMeisaishoEdit {
      * 介護認定審査会委員報酬支払明細書の編集処理です。
      *
      * @param entity HoshuShiharaiJunbiRelateEntity
-     * @param 消費税率 消費税率
-     * @return ChosaHoshuShiharaiEntity
+     * @return ShinsainShiharaimeisaisho
      */
-    public ShinsainShiharaimeisaisho getShinsainShiharaimeisaishoEntity(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率) {
+    public ShinsainShiharaimeisaisho getShinsainShiharaimeisaishoEntity(HoshuShiharaiJunbiRelateEntity entity) {
         ShinsainShiharaimeisaisho meisaisho = new ShinsainShiharaimeisaisho();
         meisaisho.setタイトル(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会委員報酬支払明細書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));

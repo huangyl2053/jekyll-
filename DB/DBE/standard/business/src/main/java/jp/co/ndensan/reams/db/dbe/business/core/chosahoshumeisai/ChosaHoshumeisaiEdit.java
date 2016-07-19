@@ -102,8 +102,7 @@ public class ChosaHoshumeisaiEdit {
                 fillType(FillType.ZERO).toDateString());
         hakkoYMD.append(RString.HALF_SPACE);
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        RString 印刷日時 = hakkoYMD.toRString();
-        return 印刷日時;
+        return hakkoYMD.toRString();
     }
 
     private RString decimalToRString(Decimal date) {

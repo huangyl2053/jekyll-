@@ -26,11 +26,11 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     private static final String CHOSAHOSHUSEIKYU_PROCESS = "ChosaHoshuSeikyuProcess";
     private static final String CHOSAHOSHUSHIHARAI_PROCESS = "ChosaHoshuShiharaiProcess";
     private static final String CHOSAHOSHUMEISAI_PROCESS = "ChosaHoshumeisaiProcess";
-    private static final String HIYOBENSHOTOSHIHARAIMEISAISHO_PROCESS = "HiyobenshotoShiharaiMeisaishoProcess";
+    private static final String HIYOBENSHOTOSHIHARAI_PROCESS = "HiyobenshotoShiharaiProcess";
     private static final String IINHOSHUSHIHARAI_PROCESS = "IinhoshushiharaiProcess";
     private static final String IKENSHIHARAIUCHIWAKE_PROCESS = "IkenShiharaiuchiwakeProcess";
     private static final String IKENSHOHOSHUSEIKYU_PROCESS = "IkenshoHoshuSeikyuProcess";
-    private static final String SHINSAINSHIHARAIMEISAISHOPROCESS_PROCESS = "ShinsainShiharaiMeisaishoProcess";
+    private static final String SHINSAINSHIHARAI_PROCESS = "ShinsainShiharaiProcess";
     private static final String SHUJIIHOSHUSHIHARAI_PROCESS = "ShujiiHoshuShiharaiProcess";
     private static final String SHUJIIHOSHUMEISAI_PROCESS = "ShujiiHoshumeisaiProcess";
 
@@ -45,26 +45,26 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
         if (getParameter().getChkchosa().contains(new RString("3"))) {
             executeStep(CHOSAHOSHUMEISAI_PROCESS);
         }
-        if (getParameter().getChkchosa().contains(new RString("1"))) {
-            executeStep(HIYOBENSHOTOSHIHARAIMEISAISHO_PROCESS);
-        }
-        if (getParameter().getChkchosa().contains(new RString("2"))) {
-            executeStep(IINHOSHUSHIHARAI_PROCESS);
-        }
-        if (getParameter().getChkchosa().contains(new RString("3"))) {
-            executeStep(IKENSHIHARAIUCHIWAKE_PROCESS);
-        }
-        if (getParameter().getChkchosa().contains(new RString("1"))) {
+        if (getParameter().getChkshujii().contains(new RString("1"))) {
             executeStep(IKENSHOHOSHUSEIKYU_PROCESS);
         }
-        if (getParameter().getChkchosa().contains(new RString("2"))) {
-            executeStep(SHINSAINSHIHARAIMEISAISHOPROCESS_PROCESS);
-        }
-        if (getParameter().getChkchosa().contains(new RString("3"))) {
+        if (getParameter().getChkshujii().contains(new RString("2"))) {
             executeStep(SHUJIIHOSHUSHIHARAI_PROCESS);
         }
-        if (getParameter().getChkchosa().contains(new RString("3"))) {
+        if (getParameter().getChkshujii().contains(new RString("3"))) {
+            executeStep(IKENSHIHARAIUCHIWAKE_PROCESS);
+        }
+        if (getParameter().getChkshujii().contains(new RString("4"))) {
             executeStep(SHUJIIHOSHUMEISAI_PROCESS);
+        }
+        if (getParameter().getChkshinsakai().contains(new RString("1"))) {
+            executeStep(IINHOSHUSHIHARAI_PROCESS);
+        }
+        if (getParameter().getChkshinsakai().contains(new RString("2"))) {
+            executeStep(HIYOBENSHOTOSHIHARAI_PROCESS);
+        }
+        if (getParameter().getChkshinsakai().contains(new RString("3"))) {
+            executeStep(SHINSAINSHIHARAI_PROCESS);
         }
     }
 
@@ -91,7 +91,7 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 認定調査報酬支払明細書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
@@ -102,18 +102,18 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 介護認定審査委員報酬・費用弁償等支払明細書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
-    @Step(HIYOBENSHOTOSHIHARAIMEISAISHO_PROCESS)
+    @Step(HIYOBENSHOTOSHIHARAI_PROCESS)
     protected IBatchFlowCommand createHiyobenshotoShiharaiMeisaishoData() {
         return loopBatch(HiyobenshotoShiharaiMeisaishoProcess.class).arguments(
                 getParameter().toHoshuShiharaiJunbiProcessParameter()).define();
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 介護認定審査会委員報酬支払通知書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
@@ -124,7 +124,7 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 主治医意見書作成料支払内訳確認書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
@@ -135,7 +135,7 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 主治医意見書作成報酬請求書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
@@ -146,18 +146,18 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 介護認定審査会委員報酬支払明細書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
-    @Step(SHINSAINSHIHARAIMEISAISHOPROCESS_PROCESS)
+    @Step(SHINSAINSHIHARAI_PROCESS)
     protected IBatchFlowCommand createShinsainShiharaiMeisaishoData() {
         return loopBatch(ShinsainShiharaiMeisaishoProcess.class).arguments(
                 getParameter().toHoshuShiharaiJunbiProcessParameter()).define();
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 主治医意見書作成報酬支払通知書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
@@ -168,7 +168,7 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
     }
 
     /**
-     * 要介護認定申請モニタリストのデータを作成します。
+     * 主治医意見書作成報酬支払明細書のデータを作成します。
      *
      * @return IBatchFlowCommand
      */
@@ -177,5 +177,4 @@ public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatc
         return loopBatch(ShujiiHoshumeisaiProcess.class).arguments(
                 getParameter().toHoshuShiharaiJunbiProcessParameter()).define();
     }
-
 }

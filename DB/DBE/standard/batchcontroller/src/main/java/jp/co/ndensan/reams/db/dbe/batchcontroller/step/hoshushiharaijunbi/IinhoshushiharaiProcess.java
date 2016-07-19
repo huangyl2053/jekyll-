@@ -103,7 +103,7 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
         builder.append(new RString("～"));
         builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
         iinhoshushiharai.set対象期間(builder.toRString());
-        iinhoshushiharai.set振込予定日(new RString(processParameter.getFurikomishiteiday().toString()));
+        iinhoshushiharai.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
         IinhoshushiharaiReport report = new IinhoshushiharaiReport(iinhoshushiharai);
         report.writeBy(reportSourceWriter);
     }
@@ -181,5 +181,4 @@ public class IinhoshushiharaiProcess extends BatchProcessBase<HoshuShiharaiJunbi
         }
         return null;
     }
-
 }

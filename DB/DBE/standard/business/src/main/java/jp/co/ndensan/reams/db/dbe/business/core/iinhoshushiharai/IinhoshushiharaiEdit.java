@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +40,7 @@ public class IinhoshushiharaiEdit {
      */
     public Iinhoshushiharai getIinhoshushiharai(HoshuShiharaiJunbiRelateEntity entity, NinshoshaSource 認証者, Map<Integer, RString> 通知文,
             Koza 口座情報) {
-        int 差引支給額 = entity.getHoshu() - entity.getShinsakaiKojoZeigaku();
+        Decimal 差引支給額 = new Decimal(entity.getHoshu()).subtract(entity.getShinsakaiKojoZeigaku());
         Iinhoshushiharai iinhoshushiharai = new Iinhoshushiharai();
         iinhoshushiharai.set電子公印(認証者.denshiKoin);
         iinhoshushiharai.set発行日(認証者.hakkoYMD);
@@ -78,14 +79,20 @@ public class IinhoshushiharaiEdit {
         iinhoshushiharai.setその他(entity.getShinsakaiIinCode());
         iinhoshushiharai.setタイトル(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会委員報酬支払通知書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
-        iinhoshushiharai.set審査会委員氏名(new RString(entity.getShinsakaiIinShimei().toString()));
+        iinhoshushiharai.set審査会委員氏名(entity.getShinsakaiIinShimei().value());
         iinhoshushiharai.set報酬報償費(new RString(entity.getHoshu()));
         iinhoshushiharai.set源泉所得税(new RString(entity.getShinsakaiKojoZeigaku()));
-        iinhoshushiharai.set差引支給額(new RString(差引支給額));
+        iinhoshushiharai.set差引支給額(decimalToRString(差引支給額));
         iinhoshushiharai.set費用弁償(new RString(entity.getShinsakaiKotsuhi()));
-        iinhoshushiharai.set合計(new RString(差引支給額 + entity.getShinsakaiKotsuhi()));
+        iinhoshushiharai.set合計(decimalToRString(差引支給額.add(entity.getShinsakaiKotsuhi())));
         iinhoshushiharai.set審査会出席回数(new RString(entity.getX5603_count()));
         return iinhoshushiharai;
     }
 
+    private RString decimalToRString(Decimal date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new RString(date.toString());
+    }
 }

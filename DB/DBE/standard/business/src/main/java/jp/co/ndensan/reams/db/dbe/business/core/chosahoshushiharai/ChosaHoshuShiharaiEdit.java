@@ -39,7 +39,7 @@ public class ChosaHoshuShiharaiEdit {
     private int その他の件数 = 1;
     private Decimal その他の金額 = Decimal.ZERO;
 
-    private static RString ninteichosaItakusakiCode = RString.EMPTY;
+    private RString ninteichosaItakusakiCode = RString.EMPTY;
 
     /**
      * 要介護認定・要支援認定等申請者の編集処理です。
