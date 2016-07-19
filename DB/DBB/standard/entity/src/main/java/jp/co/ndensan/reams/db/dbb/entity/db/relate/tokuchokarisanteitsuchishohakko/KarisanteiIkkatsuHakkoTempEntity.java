@@ -1270,6 +1270,43 @@ public class KarisanteiIkkatsuHakkoTempEntity extends DbTableEntityBase<Karisant
     private Decimal dbV2002Fuka_tkSaishutsuKampuGaku;
     @TempTableColumnOrder(603)
     private Decimal dbV2002Fuka_fuSaishutsuKampuGaku;
+    private FlexibleYear dbT2003Kibetsu_choteiNendo;
+    private FlexibleYear dbT2003Kibetsu_fukaNendo;
+    private TsuchishoNo dbT2003Kibetsu_tsuchishoNo;
+    private int dbT2003Kibetsu_rirekiNo;
+    private RString dbT2003Kibetsu_choshuHouhou;
+    private int dbT2003Kibetsu_ki;
+    private RString dbT2003Kibetsu_insertDantaiCd;
+    private RDateTime dbT2003Kibetsu_insertTimestamp;
+    private RString dbT2003Kibetsu_insertReamsLoginId;
+    private UUID dbT2003Kibetsu_insertContextId;
+    private boolean dbT2003Kibetsu_isDeleted;
+    private int dbT2003Kibetsu_updateCount;
+    private RDateTime dbT2003Kibetsu_lastUpdateTimestamp;
+    private RString dbT2003Kibetsu_lastUpdateReamsLoginId;
+    private Decimal dbT2003Kibetsu_choteiId;
+    private RString urT0705ChoteiKyotsu_insertDantaiCd;
+    private RDateTime urT0705ChoteiKyotsu_insertTimestamp;
+    private RString urT0705ChoteiKyotsu_insertReamsLoginId;
+    private UUID urT0705ChoteiKyotsu_insertContextId;
+    private boolean isDeleted;
+    private int urT0705ChoteiKyotsu_updateCount;
+    private RDateTime urT0705ChoteiKyotsu_lastUpdateTimestamp;
+    private RString urT0705ChoteiKyotsu_lastUpdateReamsLoginId;
+    @PrimaryKey
+    private Long urT0705ChoteiKyotsu_choteiId;
+    private Long urT0705ChoteiKyotsu_shunoId;
+    private RYear urT0705ChoteiKyotsu_kaikeiNendo;
+    private RYear urT0705ChoteiKyotsu_shoriNendo;
+    private int urT0705ChoteiKyotsu_shoriNo;
+    private int urT0705ChoteiKyotsu_koseiKaisu;
+    private RString urT0705ChoteiKyotsu_choteiJiyuCode;
+    private RDate urT0705ChoteiKyotsu_choteiYMD;
+    private Decimal urT0705ChoteiKyotsu_choteigaku;
+    private Decimal urT0705ChoteiKyotsu_shohizei;
+    private RDate urT0705ChoteiKyotsu_nokigenYMD;
+    private RDate urT0705ChoteiKyotsu_hoteiNokigenToYMD;
+    private boolean urT0705ChoteiKyotsu_fukaShoriJokyo;
     @TempTableColumnOrder(604)
     private RString hihokenshaKubun;
     @TempTableColumnOrder(605)
