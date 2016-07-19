@@ -44,8 +44,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -1173,153 +1175,204 @@ public class KarisanteiIkkatsuHakkoTempEntity extends DbTableEntityBase<Karisant
     private RString nenkinTokuchoKaifuJoho_dtKojinNo;
 
     @TempTableColumnOrder(555)
-    private FlexibleYear dbV2002Fuka_choteiNendo;
+    private FlexibleYear dbT2002Fuka_choteiNendo;
     @TempTableColumnOrder(556)
-    private FlexibleYear dbV2002Fuka_fukaNendo;
+    private FlexibleYear dbT2002Fuka_fukaNendo;
     @TempTableColumnOrder(557)
-    private TsuchishoNo dbV2002Fuka_tsuchishoNo;
+    private TsuchishoNo dbT2002Fuka_tsuchishoNo;
     @TempTableColumnOrder(558)
-    private int dbV2002Fuka_rirekiNo;
+    private int dbT2002Fuka_rirekiNo;
     @TempTableColumnOrder(559)
-    private HihokenshaNo dbV2002Fuka_hihokenshaNo;
+    private HihokenshaNo dbT2002Fuka_hihokenshaNo;
     @TempTableColumnOrder(560)
-    private ShikibetsuCode dbV2002Fuka_shikibetsuCode;
+    private ShikibetsuCode dbT2002Fuka_shikibetsuCode;
     @TempTableColumnOrder(561)
-    private SetaiCode dbV2002Fuka_setaiCode;
+    private SetaiCode dbT2002Fuka_setaiCode;
     @TempTableColumnOrder(562)
-    private int dbV2002Fuka_setaiInsu;
+    private int dbT2002Fuka_setaiInsu;
     @TempTableColumnOrder(563)
-    private FlexibleDate dbV2002Fuka_shikakuShutokuYMD;
+    private FlexibleDate dbT2002Fuka_shikakuShutokuYMD;
     @TempTableColumnOrder(564)
-    private RString dbV2002Fuka_shikakuShutokuJiyu;
+    private RString dbT2002Fuka_shikakuShutokuJiyu;
     @TempTableColumnOrder(565)
-    private FlexibleDate dbV2002Fuka_shikakuSoshitsuYMD;
+    private FlexibleDate dbT2002Fuka_shikakuSoshitsuYMD;
     @TempTableColumnOrder(566)
-    private RString dbV2002Fuka_shikakuSoshitsuJiyu;
+    private RString dbT2002Fuka_shikakuSoshitsuJiyu;
     @TempTableColumnOrder(567)
-    private RString dbV2002Fuka_seihofujoShurui;
+    private RString dbT2002Fuka_seihofujoShurui;
     @TempTableColumnOrder(568)
-    private FlexibleDate dbV2002Fuka_seihoKaishiYMD;
+    private FlexibleDate dbT2002Fuka_seihoKaishiYMD;
     @TempTableColumnOrder(569)
-    private FlexibleDate dbV2002Fuka_seihoHaishiYMD;
+    private FlexibleDate dbT2002Fuka_seihoHaishiYMD;
     @TempTableColumnOrder(570)
-    private FlexibleDate dbV2002Fuka_ronenKaishiYMD;
+    private FlexibleDate dbT2002Fuka_ronenKaishiYMD;
     @TempTableColumnOrder(571)
-    private FlexibleDate dbV2002Fuka_ronenHaishiYMD;
+    private FlexibleDate dbT2002Fuka_ronenHaishiYMD;
     @TempTableColumnOrder(572)
-    private FlexibleDate dbV2002Fuka_fukaYMD;
+    private FlexibleDate dbT2002Fuka_fukaYMD;
     @TempTableColumnOrder(573)
-    private RString dbV2002Fuka_kazeiKubun;
+    private RString dbT2002Fuka_kazeiKubun;
     @TempTableColumnOrder(574)
-    private RString dbV2002Fuka_setaikazeiKubun;
+    private RString dbT2002Fuka_setaikazeiKubun;
     @TempTableColumnOrder(575)
-    private Decimal dbV2002Fuka_gokeiShotokuGaku;
+    private Decimal dbT2002Fuka_gokeiShotokuGaku;
     @TempTableColumnOrder(576)
-    private Decimal dbV2002Fuka_nenkinShunyuGaku;
+    private Decimal dbT2002Fuka_nenkinShunyuGaku;
     @TempTableColumnOrder(577)
-    private RString dbV2002Fuka_hokenryoDankai;
+    private RString dbT2002Fuka_hokenryoDankai;
     @TempTableColumnOrder(578)
-    private RString dbV2002Fuka_hokenryoDankai1;
+    private RString dbT2002Fuka_hokenryoDankai1;
     @TempTableColumnOrder(579)
-    private Decimal dbV2002Fuka_nengakuHokenryo1;
+    private Decimal dbT2002Fuka_nengakuHokenryo1;
     @TempTableColumnOrder(582)
-    private FlexibleYearMonth dbV2002Fuka_tsukiwariStartYM1;
+    private FlexibleYearMonth dbT2002Fuka_tsukiwariStartYM1;
     @TempTableColumnOrder(581)
-    private FlexibleYearMonth dbV2002Fuka_tsukiwariEndYM1;
+    private FlexibleYearMonth dbT2002Fuka_tsukiwariEndYM1;
     @TempTableColumnOrder(582)
-    private RString dbV2002Fuka_hokenryoDankai2;
+    private RString dbT2002Fuka_hokenryoDankai2;
     @TempTableColumnOrder(583)
-    private Decimal dbV2002Fuka_nengakuHokenryo2;
+    private Decimal dbT2002Fuka_nengakuHokenryo2;
     @TempTableColumnOrder(584)
-    private FlexibleYearMonth dbV2002Fuka_tsukiwariStartYM2;
+    private FlexibleYearMonth dbT2002Fuka_tsukiwariStartYM2;
     @TempTableColumnOrder(585)
-    private FlexibleYearMonth dbV2002Fuka_tsukiwariEndYM2;
+    private FlexibleYearMonth dbT2002Fuka_tsukiwariEndYM2;
     @TempTableColumnOrder(586)
-    private YMDHMS dbV2002Fuka_choteiNichiji;
+    private YMDHMS dbT2002Fuka_choteiNichiji;
     @TempTableColumnOrder(587)
-    private RString dbV2002Fuka_choteiJiyu1;
+    private RString dbT2002Fuka_choteiJiyu1;
     @TempTableColumnOrder(588)
-    private RString dbV2002Fuka_choteiJiyu2;
+    private RString dbT2002Fuka_choteiJiyu2;
     @TempTableColumnOrder(589)
-    private RString dbV2002Fuka_choteiJiyu3;
+    private RString dbT2002Fuka_choteiJiyu3;
     @TempTableColumnOrder(590)
-    private RString dbV2002Fuka_choteiJiyu4;
+    private RString dbT2002Fuka_choteiJiyu4;
     @TempTableColumnOrder(591)
-    private RString dbV2002Fuka_koseiM;
+    private RString dbT2002Fuka_koseiM;
     @TempTableColumnOrder(592)
-    private Decimal dbV2002Fuka_gemmenMaeHokenryo;
+    private Decimal dbT2002Fuka_gemmenMaeHokenryo;
     @TempTableColumnOrder(593)
-    private Decimal dbV2002Fuka_gemmenGaku;
+    private Decimal dbT2002Fuka_gemmenGaku;
     @TempTableColumnOrder(594)
-    private Decimal dbV2002Fuka_kakuteiHokenryo;
+    private Decimal dbT2002Fuka_kakuteiHokenryo;
     @TempTableColumnOrder(595)
-    private RString dbV2002Fuka_hokenryoDankaiKarisanntei;
+    private RString dbT2002Fuka_hokenryoDankaiKarisanntei;
     @TempTableColumnOrder(596)
-    private int dbV2002Fuka_choshuHohoRirekiNo;
+    private int dbT2002Fuka_choshuHohoRirekiNo;
     @TempTableColumnOrder(597)
-    private YMDHMS dbV2002Fuka_idoKijunNichiji;
+    private YMDHMS dbT2002Fuka_idoKijunNichiji;
     @TempTableColumnOrder(598)
-    private RString dbV2002Fuka_kozaKubun;
+    private RString dbT2002Fuka_kozaKubun;
     @TempTableColumnOrder(599)
-    private RString dbV2002Fuka_kyokaisoKubun;
+    private RString dbT2002Fuka_kyokaisoKubun;
     @TempTableColumnOrder(600)
-    private RString dbV2002Fuka_shokkenKubun;
+    private RString dbT2002Fuka_shokkenKubun;
     @TempTableColumnOrder(601)
-    private LasdecCode dbV2002Fuka_fukaShichosonCode;
+    private LasdecCode dbT2002Fuka_fukaShichosonCode;
     @TempTableColumnOrder(602)
-    private Decimal dbV2002Fuka_tkSaishutsuKampuGaku;
+    private Decimal dbT2002Fuka_tkSaishutsuKampuGaku;
     @TempTableColumnOrder(603)
-    private Decimal dbV2002Fuka_fuSaishutsuKampuGaku;
-    private FlexibleYear dbT2003Kibetsu_choteiNendo;
-    private FlexibleYear dbT2003Kibetsu_fukaNendo;
-    private TsuchishoNo dbT2003Kibetsu_tsuchishoNo;
-    private int dbT2003Kibetsu_rirekiNo;
-    private RString dbT2003Kibetsu_choshuHouhou;
-    private int dbT2003Kibetsu_ki;
-    private RString dbT2003Kibetsu_insertDantaiCd;
-    private RDateTime dbT2003Kibetsu_insertTimestamp;
-    private RString dbT2003Kibetsu_insertReamsLoginId;
-    private UUID dbT2003Kibetsu_insertContextId;
-    private boolean dbT2003Kibetsu_isDeleted;
-    private int dbT2003Kibetsu_updateCount;
-    private RDateTime dbT2003Kibetsu_lastUpdateTimestamp;
-    private RString dbT2003Kibetsu_lastUpdateReamsLoginId;
-    private Decimal dbT2003Kibetsu_choteiId;
-    private RString urT0705ChoteiKyotsu_insertDantaiCd;
-    private RDateTime urT0705ChoteiKyotsu_insertTimestamp;
-    private RString urT0705ChoteiKyotsu_insertReamsLoginId;
-    private UUID urT0705ChoteiKyotsu_insertContextId;
-    private boolean isDeleted;
-    private int urT0705ChoteiKyotsu_updateCount;
-    private RDateTime urT0705ChoteiKyotsu_lastUpdateTimestamp;
-    private RString urT0705ChoteiKyotsu_lastUpdateReamsLoginId;
-    @PrimaryKey
-    private Long urT0705ChoteiKyotsu_choteiId;
-    private Long urT0705ChoteiKyotsu_shunoId;
-    private RYear urT0705ChoteiKyotsu_kaikeiNendo;
-    private RYear urT0705ChoteiKyotsu_shoriNendo;
-    private int urT0705ChoteiKyotsu_shoriNo;
-    private int urT0705ChoteiKyotsu_koseiKaisu;
-    private RString urT0705ChoteiKyotsu_choteiJiyuCode;
-    private RDate urT0705ChoteiKyotsu_choteiYMD;
-    private Decimal urT0705ChoteiKyotsu_choteigaku;
-    private Decimal urT0705ChoteiKyotsu_shohizei;
-    private RDate urT0705ChoteiKyotsu_nokigenYMD;
-    private RDate urT0705ChoteiKyotsu_hoteiNokigenToYMD;
-    private boolean urT0705ChoteiKyotsu_fukaShoriJokyo;
+    private Decimal dbT2002Fuka_fuSaishutsuKampuGaku;
     @TempTableColumnOrder(604)
-    private RString hihokenshaKubun;
+    private RString dbT2002Fuka_insertDantaiCd;
     @TempTableColumnOrder(605)
-    private Decimal zennendoTokuchoKibetsuKingaku01;
+    private RDateTime dbT2002Fuka_insertTimestamp;
     @TempTableColumnOrder(606)
-    private Decimal zennendoTokuchoKibetsuKingaku02;
+    private RString dbT2002Fuka_insertReamsLoginId;
     @TempTableColumnOrder(607)
-    private Decimal zennendoTokuchoKibetsuKingaku03;
+    private UUID dbT2002Fuka_insertContextId;
     @TempTableColumnOrder(608)
-    private Decimal zennendoTokuchoKibetsuKingaku04;
+    private boolean dbT2002Fuka_isDeleted;
     @TempTableColumnOrder(609)
-    private Decimal zennendoTokuchoKibetsuKingaku05;
+    private int dbT2002Fuka_updateCount;
     @TempTableColumnOrder(610)
+    private RDateTime ddbT2002Fuka_lastUpdateTimestamp;
+    @TempTableColumnOrder(611)
+    private RString dbT2002Fuka_lastUpdateReamsLoginId;
+    @TempTableColumnOrder(612)
+    private FlexibleYear dbT2003Kibetsu_choteiNendo;
+    @TempTableColumnOrder(613)
+    private FlexibleYear dbT2003Kibetsu_fukaNendo;
+    @TempTableColumnOrder(614)
+    private TsuchishoNo dbT2003Kibetsu_tsuchishoNo;
+    @TempTableColumnOrder(615)
+    private int dbT2003Kibetsu_rirekiNo;
+    @TempTableColumnOrder(616)
+    private RString dbT2003Kibetsu_choshuHouhou;
+    @TempTableColumnOrder(617)
+    private int dbT2003Kibetsu_ki;
+    @TempTableColumnOrder(618)
+    private RString dbT2003Kibetsu_insertDantaiCd;
+    @TempTableColumnOrder(619)
+    private RDateTime dbT2003Kibetsu_insertTimestamp;
+    @TempTableColumnOrder(620)
+    private RString dbT2003Kibetsu_insertReamsLoginId;
+    @TempTableColumnOrder(621)
+    private UUID dbT2003Kibetsu_insertContextId;
+    @TempTableColumnOrder(622)
+    private boolean dbT2003Kibetsu_isDeleted;
+    @TempTableColumnOrder(623)
+    private int dbT2003Kibetsu_updateCount;
+    @TempTableColumnOrder(624)
+    private RDateTime dbT2003Kibetsu_lastUpdateTimestamp;
+    @TempTableColumnOrder(625)
+    private RString dbT2003Kibetsu_lastUpdateReamsLoginId;
+    @TempTableColumnOrder(626)
+    private Decimal dbT2003Kibetsu_choteiId;
+    @TempTableColumnOrder(627)
+    private RString urT0705ChoteiKyotsu_insertDantaiCd;
+    @TempTableColumnOrder(628)
+    private RDateTime urT0705ChoteiKyotsu_insertTimestamp;
+    @TempTableColumnOrder(629)
+    private RString urT0705ChoteiKyotsu_insertReamsLoginId;
+    @TempTableColumnOrder(630)
+    private UUID urT0705ChoteiKyotsu_insertContextId;
+    @TempTableColumnOrder(631)
+    private boolean isDeleted;
+    @TempTableColumnOrder(632)
+    private int urT0705ChoteiKyotsu_updateCount;
+    @TempTableColumnOrder(633)
+    private RDateTime urT0705ChoteiKyotsu_lastUpdateTimestamp;
+    @TempTableColumnOrder(634)
+    private RString urT0705ChoteiKyotsu_lastUpdateReamsLoginId;
+    @TempTableColumnOrder(635)
+    private Long urT0705ChoteiKyotsu_choteiId;
+    @TempTableColumnOrder(636)
+    private Long urT0705ChoteiKyotsu_shunoId;
+    @TempTableColumnOrder(637)
+    private RYear urT0705ChoteiKyotsu_kaikeiNendo;
+    @TempTableColumnOrder(638)
+    private RYear urT0705ChoteiKyotsu_shoriNendo;
+    @TempTableColumnOrder(639)
+    private int urT0705ChoteiKyotsu_shoriNo;
+    @TempTableColumnOrder(640)
+    private int urT0705ChoteiKyotsu_koseiKaisu;
+    @TempTableColumnOrder(641)
+    private RString urT0705ChoteiKyotsu_choteiJiyuCode;
+    @TempTableColumnOrder(642)
+    private RDate urT0705ChoteiKyotsu_choteiYMD;
+    @TempTableColumnOrder(643)
+    private Decimal urT0705ChoteiKyotsu_choteigaku;
+    @TempTableColumnOrder(644)
+    private Decimal urT0705ChoteiKyotsu_shohizei;
+    @TempTableColumnOrder(645)
+    private RDate urT0705ChoteiKyotsu_nokigenYMD;
+    @TempTableColumnOrder(646)
+    private RDate urT0705ChoteiKyotsu_hoteiNokigenToYMD;
+    @TempTableColumnOrder(647)
+    private boolean urT0705ChoteiKyotsu_fukaShoriJokyo;
+    @TempTableColumnOrder(648)
+    private RString hihokenshaKubun;
+    @TempTableColumnOrder(649)
+    private Decimal zennendoTokuchoKibetsuKingaku01;
+    @TempTableColumnOrder(650)
+    private Decimal zennendoTokuchoKibetsuKingaku02;
+    @TempTableColumnOrder(651)
+    private Decimal zennendoTokuchoKibetsuKingaku03;
+    @TempTableColumnOrder(652)
+    private Decimal zennendoTokuchoKibetsuKingaku04;
+    @TempTableColumnOrder(653)
+    private Decimal zennendoTokuchoKibetsuKingaku05;
+    @TempTableColumnOrder(654)
     private Decimal zennendoTokuchoKibetsuKingaku06;
 
 }
