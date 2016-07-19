@@ -13,7 +13,7 @@
           T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
           , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
           , T5910."jigyoshaMeisho" AS 事業者名称
-          , T5601."ninteichosainCode" AS 認定調査員コード
+          , T5601."ninteichosainCode" AS 調査員コード
           , T5913."chosainShimei" AS 調査員氏名
           , T5101."hihokenshaNo" AS 被保険者番号
           , T5101."hihokenshaName" AS 被保険者氏名
