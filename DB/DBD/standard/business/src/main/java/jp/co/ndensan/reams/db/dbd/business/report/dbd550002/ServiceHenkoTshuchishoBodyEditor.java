@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd550002;
 
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550002.ServiceHenkoTshuchishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * サービス変更通知書ボディEditorです。
@@ -51,7 +55,8 @@ public class ServiceHenkoTshuchishoBodyEditor implements IServiceHenkoTshuchisho
         source.hihokenshaNo8 = item.getHihokenshaNo8();
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
-        source.henkoYMD = item.getHenkoYMD();
+        source.henkoYMD = item.getHenkoYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         source.maeService = item.getMaeService();
         source.atoService = item.getAtoService();
         source.riyu = item.getRiyu();

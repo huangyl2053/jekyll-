@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd550003;
 
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550003.YokaigodoHenkoTshuchishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護度変更通知書ボディEditorです。
@@ -55,12 +59,16 @@ public class YokaigodoHenkoTshuchishoBodyEditor implements IYokaigodoHenkoTshuch
         source.kosho2 = item.getKosho2();
         source.beforeYokaigoKubun = item.getBeforeYokaigoKubun();
         source.afterYokaigoKubun = item.getAfterYokaigoKubun();
-        source.henkoYMD = item.getHenkoYmd();
-        source.yukoKaishiYMD = item.getYukoKaishiYMD();
-        source.yukoShuryoYMD = item.getYukoShuryoYMD();
+        source.henkoYMD = item.getHenkoYmd().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        source.yukoKaishiYMD = item.getYukoKaishiYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        source.yukoShuryoYMD = item.getYukoShuryoYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         source.tsuchibun2 = item.getTsuchibun2();
         source.kigenKosho = item.getKigenKosho();
-        source.kigenYMD = item.getKigenYMD();
+        source.kigenYMD = item.getKigenYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         source.tsuchibun3 = item.getTsuchibun3();
         source.tsuchibun4 = item.getTsuchibun4();
         source.tsuchibun5 = item.getTsuchibun5();
