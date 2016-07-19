@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.PrtTokuchoKaishiTsuchishoKarisanteiResult;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TsuchishoDataTempResult;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KaishiTsuchishoKariHakkoIchiranProperty;
@@ -155,7 +152,6 @@ public class TokuchoKaishiTsuchishoDataHenshu {
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_5 = 5;
-    private static final int INT_6 = 6;
     private static final int INT_7 = 7;
     private static final int INT_14 = 14;
 
@@ -734,25 +730,6 @@ public class TokuchoKaishiTsuchishoDataHenshu {
                 .set特別徴収停止日時(計算後情報.getTokuchoTeishiNichiji())
                 .set特別徴収停止事由コード(計算後情報.getTokuchoTeishiJiyuCode()).build();
         return 徴収方法情報;
-    }
-
-    private void set期別金額(FukaJoho 賦課の情報_設定後, int 期, RString 徴収方法,
-            List<Decimal> 期別金額リスト, int index) {
-        List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
-            if (kibetsu.get期() == 期 && 徴収方法.equals(kibetsu.get徴収方法())) {
-                List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
-                for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
-                    if (choteiKyotsu.get調定ID().equals(kibetsu.get調定ID().longValue())) {
-                        ChoteiKyotsuBuilder builder = choteiKyotsu.createBuilderForEdit();
-                        builder.set調定額(期別金額リスト.get(index)).build();
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-
     }
 
     private Decimal get特徴調定額(DbTKeisangoJohoTempTableEntity entity, int index) {
