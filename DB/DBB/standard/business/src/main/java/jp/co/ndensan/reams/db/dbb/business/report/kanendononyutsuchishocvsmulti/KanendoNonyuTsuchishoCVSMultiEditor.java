@@ -251,7 +251,7 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.coverNofu_tsuchishoNo = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo = HOSHI_4;
@@ -259,7 +259,7 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
             source.kibetsu = HOSHI_2;
             source.ryoshushoNenbun = HOSHI_4;
             source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
+            source.coverNofu_tsuchishoNo = HOSHI_16;
             source.nokigenYmd = HOSHI_11;
             source.hakkoYmd = HOSHI_11;
             source.honzei = HOSHI_13;

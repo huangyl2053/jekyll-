@@ -28,6 +28,7 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int INT_3 = 3;
@@ -42,7 +43,7 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link KariSanteiNonyuTsuchiShoJoho}
+     * @param item {@link HonSanteiNonyuTsuchiShoJoho}
      * @param map Map<Integer, NonyuTsuchiShoKiJoho>
      */
     public NonyuTsuchishoCVSMultiRenchoNofushoEditor(
@@ -89,7 +90,6 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango1 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango1 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango1 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun1 = 納入通知書期情報.get納付区分();
@@ -101,8 +101,10 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_gokeigaku1 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd1 = 納入通知書期情報.get納期限表記();
             source.detail_honzei1 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr11 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr21 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr11 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr21 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen1 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -127,7 +129,7 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_nokigenYmd1 = HOSHI_11;
             source.detail_hakkoYmd1 = HOSHI_11;
             source.detail_honzei1 = HOSHI_13;
-            source.detail_ocr11 = HOSHI_28;
+            source.detail_ocr11 = HOSHI_22;
             source.detail_ocr21 = HOSHI_28;
             source.detail_cvsToriatsukaikigen1 = HOSHI_16;
         }
@@ -160,7 +162,6 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango2 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango2 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango2 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun2 = 納入通知書期情報.get納付区分();
@@ -172,8 +173,10 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_gokeigaku2 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd2 = 納入通知書期情報.get納期限表記();
             source.detail_honzei2 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr12 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr22 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr12 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr22 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen2 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -198,7 +201,7 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_nokigenYmd2 = HOSHI_11;
             source.detail_hakkoYmd2 = HOSHI_11;
             source.detail_honzei2 = HOSHI_13;
-            source.detail_ocr12 = HOSHI_28;
+            source.detail_ocr12 = HOSHI_22;
             source.detail_ocr22 = HOSHI_28;
             source.detail_cvsToriatsukaikigen2 = HOSHI_16;
         }
@@ -231,7 +234,6 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango3 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango3 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango3 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun3 = 納入通知書期情報.get納付区分();
@@ -243,8 +245,10 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_gokeigaku3 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd3 = 納入通知書期情報.get納期限表記();
             source.detail_honzei3 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen3 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -269,7 +273,7 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_nokigenYmd3 = HOSHI_11;
             source.detail_hakkoYmd3 = HOSHI_11;
             source.detail_honzei3 = HOSHI_13;
-            source.detail_ocr13 = HOSHI_28;
+            source.detail_ocr13 = HOSHI_22;
             source.detail_ocr23 = HOSHI_28;
             source.detail_cvsToriatsukaikigen3 = HOSHI_16;
         }
@@ -302,7 +306,6 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango4 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango4 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango4 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun4 = 納入通知書期情報.get納付区分();
@@ -314,8 +317,10 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_gokeigaku4 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd4 = 納入通知書期情報.get納期限表記();
             source.detail_honzei4 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr14 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr24 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr14 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr24 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen4 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -340,7 +345,7 @@ public class NonyuTsuchishoCVSMultiRenchoNofushoEditor implements INonyuTsuchish
             source.detail_nokigenYmd4 = HOSHI_11;
             source.detail_hakkoYmd4 = HOSHI_11;
             source.detail_honzei4 = HOSHI_13;
-            source.detail_ocr14 = HOSHI_28;
+            source.detail_ocr14 = HOSHI_22;
             source.detail_ocr24 = HOSHI_28;
             source.detail_cvsToriatsukaikigen4 = HOSHI_16;
         }
