@@ -48,6 +48,7 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
 
     private static final int リストサイズ１ = 1;
 
+    private static final int INT_2 = 2;
     private static final int INT_6 = 6;
 
     /**
@@ -155,9 +156,9 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
         this.納入通知書期情報設定(source);
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban1 = new RString(renban);
+            source.notsuRenban1 = new RString(renban).padZeroToLeft(INT_6);
         }
-        source.pageCount1 = new RString(renban).concat(new RString("-1"));
+        source.pageCount1 = new RString(renban).concat("-1");
 
         return source;
     }
@@ -344,8 +345,8 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
         }
 
         if (納入通知書期情報リスト.size() >= リストサイズ１) {
-            source.ki1 = 納入通知書期情報リスト.get(0).get期表記();
-            source.tsuki1 = 納入通知書期情報リスト.get(0).get月表記();
+            source.ki1 = 納入通知書期情報リスト.get(0).get期表記().padLeft(RString.HALF_SPACE, INT_2);
+            source.tsuki1 = 納入通知書期情報リスト.get(0).get月表記().padLeft(RString.HALF_SPACE, INT_2);
             source.nofuGaku1 = 納入通知書期情報リスト.get(0).get納付額表記();
             source.nokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
         }
@@ -372,7 +373,9 @@ public class KanendoNonyuTsuchishoCVSKakukoEditor implements IKanendoNonyuTsuchi
 
         if (item.get編集後本算定通知書共通情報().get更正後() != null) {
 
-            source.keisanMeisaishoShotokuDankai = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get更正後().get保険料段階());
+            if (item.get編集後本算定通知書共通情報().get更正後().get保険料段階() != null) {
+                source.keisanMeisaishoShotokuDankai = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get更正後().get保険料段階());
+            }
             if (item.get編集後本算定通知書共通情報().get更正後().get保険料率() != null) {
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
