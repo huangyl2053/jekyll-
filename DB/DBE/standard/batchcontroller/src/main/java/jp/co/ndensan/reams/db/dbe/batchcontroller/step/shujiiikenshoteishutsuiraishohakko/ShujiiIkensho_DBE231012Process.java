@@ -41,11 +41,6 @@ public class ShujiiIkensho_DBE231012Process extends BatchProcessBase<ShujiiIkens
     private ReportSourceWriter<IkenshokinyuyoshiReportSource> reportSourceWriter;
 
     @Override
-    protected void initialize() {
-
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter());
     }
