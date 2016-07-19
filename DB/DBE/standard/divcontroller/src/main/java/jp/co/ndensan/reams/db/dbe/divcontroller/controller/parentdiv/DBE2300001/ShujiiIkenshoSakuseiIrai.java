@@ -288,7 +288,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSelect_dgShinseishaIchiran(ShujiiIkenshoSakuseiIraiDiv div) {
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        if (new RString(ShujiiIkenshoIraiKubun.再依頼.name()).equals(row.getIraiKubun())) {
+        if (!RString.isNullOrEmpty(row.getIraiKubun())) {
             div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()),
                     new ShinseishoKanriNo(row.getShiseishoKanriNo()), SubGyomuCode.DBE認定支援,
                     row.getShujiiIryoKikanCode(), row.getShujiiIryoKikan(), row.getShujiiCode(), row.getShujii());
