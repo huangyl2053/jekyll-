@@ -211,24 +211,8 @@ public class DeletePanel {
 
     private void updateOrDelete(DeletePanelDiv div) {
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-        for (RString key : div.getChkImage().getSelectedKeys()) {
-            if (KEY_調査票特記.equals(key)) {
-                YokaigoninteiimagesakujoManager.createInstance().update調査票特記(
-                        イメージ管理情報.get申請書管理番号(),
-                        イメージ管理情報.get認定調査依頼履歴番号(),
-                        div.getRadDeleteTaisho().getSelectedKey());
-            } else if (KEY_調査票概況.equals(key)) {
-                YokaigoninteiimagesakujoManager.createInstance().update調査票概況(
-                        イメージ管理情報.get申請書管理番号(),
-                        イメージ管理情報.get認定調査依頼履歴番号(),
-                        div.getRadDeleteTaisho().getSelectedKey());
-            } else if (KEY_主治医意見書.equals(key)) {
-                YokaigoninteiimagesakujoManager.createInstance().update主治医意見書(
-                        イメージ管理情報.get申請書管理番号(),
-                        イメージ管理情報.get主治医意見書作成依頼履歴番号(),
-                        div.getRadDeleteTaisho().getSelectedKey());
-            }
-        }
+        YokaigoninteiimagesakujoManager.createInstance().updateOrDelete(イメージ管理情報,
+                div.getChkImage().getSelectedKeys(), div.getRadDeleteTaisho().getSelectedKey());
     }
 
 }

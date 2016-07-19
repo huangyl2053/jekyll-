@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5601NinteiChosaHoshuJissekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5602ShujiiIkenshoHoshuJissekiJohoEntity;
@@ -37,6 +39,9 @@ public class YokaigoninteiimagesakujoManager {
     private static final RString 原本を削除 = new RString("1");
     private static final RString マスキングを削除 = new RString("2");
     private static final RString 両方を削除 = new RString("3");
+    private static final RString KEY_調査票特記 = new RString("1");
+    private static final RString KEY_調査票概況 = new RString("2");
+    private static final RString KEY_主治医意見書 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -111,14 +116,36 @@ public class YokaigoninteiimagesakujoManager {
     }
 
     /**
-     * 調査票(概況+調査票特記)を選択された場合、DBを更新します。
+     * 「削除」ボタンを押下する場合、イメージを削除して、DBを更新します。
      *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
-     * @param 削除対象区分 削除対象区分
+     * @param イメージ管理情報 イメージ管理情報
+     * @param 選択されたイメージ対象 選択されたイメージ対象
+     * @param 削除対象 削除対象
      */
     @Transaction
-    public void update調査票特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
+    public void updateOrDelete(ImagekanriJoho イメージ管理情報, List<RString> 選択されたイメージ対象, RString 削除対象) {
+        for (RString key : 選択されたイメージ対象) {
+            if (KEY_調査票特記.equals(key)) {
+                update調査票特記(
+                        イメージ管理情報.get申請書管理番号(),
+                        イメージ管理情報.get認定調査依頼履歴番号(),
+                        削除対象);
+            } else if (KEY_調査票概況.equals(key)) {
+                update調査票概況(
+                        イメージ管理情報.get申請書管理番号(),
+                        イメージ管理情報.get認定調査依頼履歴番号(),
+                        削除対象);
+            } else if (KEY_主治医意見書.equals(key)) {
+                update主治医意見書(
+                        イメージ管理情報.get申請書管理番号(),
+                        イメージ管理情報.get主治医意見書作成依頼履歴番号(),
+                        削除対象);
+            }
+        }
+    }
+
+    @Transaction
+    private void update調査票特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
         DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本を削除.equals(削除対象区分)) {
@@ -164,15 +191,8 @@ public class YokaigoninteiimagesakujoManager {
         }
     }
 
-    /**
-     * 調査票概況を選択された場合、DBを更新します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
-     * @param 削除対象区分 削除対象区分
-     */
     @Transaction
-    public void update調査票概況(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
+    private void update調査票概況(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
         DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本を削除.equals(削除対象区分)) {
@@ -193,15 +213,8 @@ public class YokaigoninteiimagesakujoManager {
         }
     }
 
-    /**
-     * 主治医意見書を選択された場合、DBを更新します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
-     * @param 削除対象区分 削除対象区分
-     */
     @Transaction
-    public void update主治医意見書(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 削除対象区分) {
+    private void update主治医意見書(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
         DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本を削除.equals(削除対象区分)) {
