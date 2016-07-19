@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaShikakuPair {
+public class FukaShikakuPair implements Serializable {
 
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;
