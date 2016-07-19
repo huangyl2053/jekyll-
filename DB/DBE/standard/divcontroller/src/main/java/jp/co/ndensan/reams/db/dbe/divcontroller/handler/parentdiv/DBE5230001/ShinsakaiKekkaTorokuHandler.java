@@ -465,7 +465,7 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(div.getKobetsuHyojiArea().getTxtIchijiHantei().getValue())
                 .append(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue())
                 .append(div.getKobetsuHyojiArea().getTxtTokuteiShippei().getValue())
-                .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedKey())
+                .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedValue())
                 .append(div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue().toDateString())
