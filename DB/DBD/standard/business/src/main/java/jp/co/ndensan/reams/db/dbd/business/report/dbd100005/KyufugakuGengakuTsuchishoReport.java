@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.ｄｂｄ100005;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100005;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.entity.report.ｄｂｄ100005.KyufugakuGengakuTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100005.KyufugakuGengakuTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
