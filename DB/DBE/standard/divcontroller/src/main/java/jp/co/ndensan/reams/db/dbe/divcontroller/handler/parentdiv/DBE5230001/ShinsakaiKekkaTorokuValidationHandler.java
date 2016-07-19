@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShinsakaiKekkaTorokuValidationHandler {
 
     private final ShinsakaiKekkaTorokuDiv div;
-    private static final RString 介護１ = new RString("介護１");
+    private static final RString 介護１ = new RString("介1");
 
     /**
      * コンストラクタです。
