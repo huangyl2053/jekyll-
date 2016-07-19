@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  * 画面設計_DBC0140011_計画届出情報リスト
  *
- * @@reamsid_L DBC-1960-010 wangxingpeng
+ * @reamsid_L DBC-1960-010 wangxingpeng
  */
 public class KeikakuTodokeJohoList {
 
