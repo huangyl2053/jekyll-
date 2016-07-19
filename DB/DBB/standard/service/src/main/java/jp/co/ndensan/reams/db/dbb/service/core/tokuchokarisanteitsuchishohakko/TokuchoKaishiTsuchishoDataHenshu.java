@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.report.tokuchokarisanteitsuchishohakko.TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
@@ -141,10 +142,10 @@ public class TokuchoKaishiTsuchishoDataHenshu {
     private static final RString タイトル_特別徴収業務者 = new RString("特別徴収業務者");
     private static final RString タイトル_特別徴収対象年金コード = new RString("特別徴収対象年金コード");
     private static final RString タイトル_特別徴収対象年金 = new RString("特別徴収対象年金");
-    private static final RString タイトル_本徴収額_10月 = new RString("本徴収額（10月）");
-    private static final RString タイトル_本徴収額_12月 = new RString("本徴収額（12月）");
-    private static final RString タイトル_本徴収額_2月 = new RString("本徴収額（2月）");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran");
+    private static final RString タイトル_本徴収額_4月 = new RString("仮徴収額（4月）");
+    private static final RString タイトル_本徴収額_6月 = new RString("仮徴収額（6月）");
+    private static final RString タイトル_本徴収額_8月 = new RString("仮徴収額（8月）");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200001");
     private static final RString 特別徴収_EUCファイル名 = new RString("TokubetsuChoshuKaishiTsuchishoKairiHakkoIchiranData.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -325,9 +326,9 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         headerList.add(タイトル_特別徴収業務者);
         headerList.add(タイトル_特別徴収対象年金コード);
         headerList.add(タイトル_特別徴収対象年金);
-        headerList.add(タイトル_本徴収額_10月);
-        headerList.add(タイトル_本徴収額_12月);
-        headerList.add(タイトル_本徴収額_2月);
+        headerList.add(タイトル_本徴収額_4月);
+        headerList.add(タイトル_本徴収額_6月);
+        headerList.add(タイトル_本徴収額_8月);
 
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -397,12 +398,18 @@ public class TokuchoKaishiTsuchishoDataHenshu {
                     bodyList.add(編集後仮算定通知書共通情報.get更正後().get更正後特別徴収対象年金());
                     if (編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01() != null) {
                         bodyList.add(DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額01(), 0));
+                    } else {
+                        bodyList.add(RString.EMPTY);
                     }
                     if (編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額02() != null) {
                         bodyList.add(DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額02(), 0));
+                    } else {
+                        bodyList.add(RString.EMPTY);
                     }
                     if (編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額03() != null) {
                         bodyList.add(DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額03(), 0));
+                    } else {
+                        bodyList.add(RString.EMPTY);
                     }
                 }
                 csvListWriter.writeLine(bodyList);
@@ -548,7 +555,6 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             }
             result.set徴収方法情報(get徴収方法情報(tempEntity));
             result.set納組情報(tempEntity.get納組());
-            FukaJoho 賦課情報 = new FukaJoho(tempEntity.get前年度賦課情報());
             List<Decimal> 期別金額リスト = new ArrayList<>();
             期別金額リスト.add(tempEntity.get前年度特徴期別金額01());
             期別金額リスト.add(tempEntity.get前年度特徴期別金額02());
@@ -556,14 +562,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             期別金額リスト.add(tempEntity.get前年度特徴期別金額04());
             期別金額リスト.add(tempEntity.get前年度特徴期別金額05());
             期別金額リスト.add(tempEntity.get前年度特徴期別金額06());
-            int index = 0;
-            for (int 期 = INT_1; 期 <= INT_6; 期++) {
-                set期別金額(賦課情報, 期, ChoshuHohoKibetsu.特別徴収.getコード(), 期別金額リスト, index);
-                index = index + 1;
-                if (期別金額リスト.size() < index) {
-                    break;
-                }
-            }
+            FukaJoho 賦課情報 = get賦課情報(tempEntity.get前年度賦課情報(), 期別金額リスト);
             result.set前年度賦課情報(賦課情報);
             tmpResultList.add(result);
         }
@@ -655,6 +654,54 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(tempEntity.get宛名());
         fukaAtena.set宛名(宛名);
         return fukaAtena;
+    }
+
+    private FukaJoho get賦課情報(FukaJohoRelateEntity fukaJohoRelateEntity, List<Decimal> 期別金額リスト) {
+        DbT2002FukaEntity 介護賦課Entity = fukaJohoRelateEntity.get介護賦課Entity();
+        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
+        int i = 0;
+        for (int index = INT_1; index < INT_7; index++) {
+            KibetsuEntity 介護期別Relate = new KibetsuEntity();
+            DbT2003KibetsuEntity 介護期別Entity = new DbT2003KibetsuEntity();
+            介護期別Entity.setChoteiNendo(介護賦課Entity.getChoteiNendo());
+            介護期別Entity.setFukaNendo(介護賦課Entity.getFukaNendo());
+            介護期別Entity.setTsuchishoNo(介護賦課Entity.getTsuchishoNo());
+            介護期別Entity.setRirekiNo(介護賦課Entity.getRirekiNo());
+            介護期別Entity.setChoteiId(new Decimal(index));
+            介護期別Entity.setChoshuHouhou(ChoshuHohoKibetsu.特別徴収.getコード());
+            介護期別Entity.setKi(index);
+            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
+            UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
+            調定共通Entity.setChoteiId(new Decimal(index).longValue());
+            調定共通Entity.setChoteigaku(期別金額リスト.get(i));
+            調定共通EntityList.add(調定共通Entity);
+            介護期別Relate.set介護期別Entity(介護期別Entity);
+            介護期別Relate.set調定共通Entity(調定共通EntityList);
+            介護期別RelateEntity.add(介護期別Relate);
+            i = i++;
+        }
+        for (int index = INT_1; index <= INT_14; index++) {
+            KibetsuEntity 介護期別Relate = new KibetsuEntity();
+            DbT2003KibetsuEntity 介護期別Entity = new DbT2003KibetsuEntity();
+            介護期別Entity.setChoteiNendo(介護賦課Entity.getChoteiNendo());
+            介護期別Entity.setFukaNendo(介護賦課Entity.getFukaNendo());
+            介護期別Entity.setTsuchishoNo(介護賦課Entity.getTsuchishoNo());
+            介護期別Entity.setRirekiNo(介護賦課Entity.getRirekiNo());
+            介護期別Entity.setChoteiId(new Decimal(index).add(Decimal.TEN));
+            介護期別Entity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.getコード());
+            介護期別Entity.setKi(index);
+            List<UrT0705ChoteiKyotsuEntity> 調定共通EntityList = new ArrayList<>();
+            UrT0705ChoteiKyotsuEntity 調定共通Entity = new UrT0705ChoteiKyotsuEntity();
+            調定共通Entity.setChoteiId(new Decimal(index).add(Decimal.TEN).longValue());
+            調定共通Entity.setChoteigaku(Decimal.ZERO);
+            調定共通EntityList.add(調定共通Entity);
+            介護期別Relate.set介護期別Entity(介護期別Entity);
+            介護期別Relate.set調定共通Entity(調定共通EntityList);
+            介護期別RelateEntity.add(介護期別Relate);
+        }
+        fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        return new FukaJoho(fukaJohoRelateEntity);
+
     }
 
     private ChoshuHoho get徴収方法情報(TsuchishoDataTempEntity tempEntity) {
