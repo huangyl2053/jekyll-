@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoH
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaGetFileProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaDoDBTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaReadCsvFileProcess;
@@ -74,7 +73,7 @@ public class DBC120200_SaishinsaKetteiKohifutanshaInFlow
                             KohifutanshaGetFileProcess.PARAMETER_OUT_RETURNENTITY);
             executeStep(CSVファイル取込);
             flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
-                    KohifutanshaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                    SaishinsaKohifutanshaReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
             if (0 == flowEntity.get明細データ登録件数() && 0 == flowEntity.get集計データ登録件数()) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
