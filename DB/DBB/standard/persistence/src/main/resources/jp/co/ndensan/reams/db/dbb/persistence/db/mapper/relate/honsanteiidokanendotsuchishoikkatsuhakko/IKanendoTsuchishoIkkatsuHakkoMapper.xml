@@ -1787,9 +1787,9 @@
         WHERE
             <choose>
                   <when test="判定フラグ == 1">  
-                      (計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前１年})
+                      (計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前１年}
                       OR
-                      (計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年})
+                      計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年})
                   </when>
                   <otherwise>
                       計算後情報."choteiNendo" = #{調定年度} 
@@ -2755,8 +2755,8 @@
                       AND (計算後情報."fukaNendo" = #{調定年度前１年} OR 計算後情報."fukaNendo" = #{調定年度前２年})
                   </when>
                   <otherwise>
-                      (計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前２年})
-                      OR (計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年})
+                      ((計算後情報."choteiNendo" = #{調定年度} AND 計算後情報."fukaNendo" = #{調定年度前２年})
+                      OR (計算後情報."choteiNendo" = #{調定年度前１年} AND 計算後情報."fukaNendo" = #{調定年度前１年}))
                   </otherwise>
             </choose> 
             AND 計算後情報."koseiZengoKubun" = '2'
@@ -2964,7 +2964,7 @@
         WHERE A."honNenkinNo" = B."kisoNenkinNo"
              AND A."honNenkinCode" = B."nenkinCode"
              AND A."honHosokuM" = B."hosokuTsuki"
-             AND B."tsuchiNaiyoCode" in ('特別徴収対象者情報', '特別徴収追加候補者情報')
+             AND B."tsuchiNaiyoCode" in ('00', '30')
              AND B."gyomuCode" = 'DB'
             <choose>
                   <when test="判定フラグ == 1">   
