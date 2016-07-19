@@ -20,6 +20,11 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.Ga
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk99A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg02A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg06A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09A;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg99A;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping02A;
@@ -122,6 +127,7 @@ public class ChosaKekkaInfoGaikyoHandler {
             }
             grdSinsaSeiList.add(dgJigyoshaItiran);
         }
+        gaikyoDiv.getRiyoShisetsuPanel().getDgRiyoShisetsu().setDataSource(grdSinsaSeiList);
         return grdSinsaSeiList;
     }
 
@@ -133,22 +139,54 @@ public class ChosaKekkaInfoGaikyoHandler {
         for (RembanServiceJokyoBusiness serviceJokyo : serviceJokyos) {
             dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
             if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceJokyo1(GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番())).get名称());
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
             if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceJokyo1(GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番())).get名称());
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
             if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceJokyo1(GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番())).get名称());
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
             if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceJokyo1(GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番())).get名称());
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
             if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceJokyo1(GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番())).get名称());
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
+            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg02A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg06A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg09A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg99A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg09B.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番())).get名称());
+            }
+
             grdSinsaSeiList.add(dgJigyoshaItiran);
         }
+        gaikyoDiv.getServiceJokyoPanel().getDgServiceJokyo().setDataSource(grdSinsaSeiList);
         return grdSinsaSeiList;
     }
 
