@@ -32,10 +32,10 @@ public class NushiJuminJohoDiv extends Panel {
     private ShotokuShokaihyoShuseiNyuryokuPanelDiv ShotokuShokaihyoShuseiNyuryokuPanel;
     @JsonProperty("HakkoKakuninPanel")
     private HakkoKakuninPanelDiv HakkoKakuninPanel;
-    @JsonProperty("ccdKaigoFukaKihon")
-    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
     @JsonProperty("ccdKaigoAtenaInfo")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
+    @JsonProperty("ccdKaigoFukaKihon")
+    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -98,21 +98,21 @@ public class NushiJuminJohoDiv extends Panel {
     }
 
     /*
-     * getccdKaigoFukaKihon
-     * @return ccdKaigoFukaKihon
-     */
-    @JsonProperty("ccdKaigoFukaKihon")
-    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
-        return ccdKaigoFukaKihon;
-    }
-
-    /*
      * getccdKaigoAtenaInfo
      * @return ccdKaigoAtenaInfo
      */
     @JsonProperty("ccdKaigoAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
         return ccdKaigoAtenaInfo;
+    }
+
+    /*
+     * getccdKaigoFukaKihon
+     * @return ccdKaigoFukaKihon
+     */
+    @JsonProperty("ccdKaigoFukaKihon")
+    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
+        return ccdKaigoFukaKihon;
     }
 
     // </editor-fold>
