@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.createtsukibetsusuiihyo.ReportDateHensyu;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoReport;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.Koumo
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsukibetsusuiihyo.TsukibetsuSuiihyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -59,6 +61,7 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     private static final RString 市町村 = new RString("市町村");
     private static final int INT_8 = 8;
     private List<KoumokuGoukey> koumokuGoukeyList;
+    private List<RString> 表記List;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
     private ICreateTsukibetsuSuiihyoMapper iCreateTsukibetsuSuiihyoMapper;
@@ -73,6 +76,9 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
     protected void initialize() {
         mybatisPrm = processPrm.toCreateTsukibetsuSuiihyoMyBatisParameter();
         iCreateTsukibetsuSuiihyoMapper = getMapper(ICreateTsukibetsuSuiihyoMapper.class);
+        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
+        表記List = hokenryoDankaiList.to表記List();
         koumokuGoukeyList = new ArrayList<>();
     }
 
@@ -110,7 +116,7 @@ public class FutuChoushuProcess extends BatchProcessBase<KoumokuGoukey> {
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
                 new RString("普通徴収"),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
-                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue());
+                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(), 表記List);
     }
 
     private void outputJokenhyoFactory() {
