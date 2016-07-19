@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 源泉徴収データ作成のRelateEntityクラスです。
  *
- * @reamsid_L DBE-2000-010 jinjue
+ * @reamsid_L DBE-2000-020 jinjue
  */
 @lombok.Getter
 @lombok.Setter

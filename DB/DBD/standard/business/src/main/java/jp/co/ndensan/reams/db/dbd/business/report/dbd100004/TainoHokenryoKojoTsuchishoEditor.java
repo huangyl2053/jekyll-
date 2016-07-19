@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100004;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100004.TainoHokenryoKojoTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -46,7 +47,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
     private final ShiharaiHohoHenko 帳票情報;
     private final List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト;
     private final RString イメージファイルパス;
-    private final int Index;
+    private final int index;
     private static final int NOCOUNT_1 = 1;
     private static final int NOCOUNT_2 = 2;
     private static final int NOCOUNT_3 = 3;
@@ -76,8 +77,9 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
      * @param イメージファイルパス イメージファイルパス
      */
     public TainoHokenryoKojoTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト,
-            RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト, RString イメージファイルパス, int index) {
+            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号,
+            List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報,
+            List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト, RString イメージファイルパス, int index) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御汎用リスト = 帳票制御汎用リスト;
@@ -91,7 +93,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         this.帳票情報 = 帳票情報;
         this.償還払集計情報リスト = 償還払集計情報リスト;
         this.イメージファイルパス = イメージファイルパス;
-        this.Index = index;
+        this.index = index;
     }
 
     @Override
@@ -207,22 +209,22 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
             }
         }
 
-        if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > Index) {
-            ShokanHaraiShukkeJyoho 償還払集計情報 = this.償還払集計情報リスト.get(Index);
+        if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > index) {
+            ShokanHaraiShukkeJyoho 償還払集計情報 = this.償還払集計情報リスト.get(index);
             source.listKyufuhiNaiyo_1 = 償還払集計情報.getサービス提供年月().wareki().toDateString();
             source.listKyufuhiNaiyo_2 = 償還払集計情報.getサービス種類コード();
             source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(償還払集計情報.get支払金額(), 0);
+            source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
         }
-        //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),このリストの値の数は知らない
-//        if(null != 支払方法変更滞納リスト && 支払方法変更滞納リスト.size() > Index){
-//         ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.支払方法変更滞納リスト.get(Index);
-//        source.listKojoHokenryo_1 =支払方法変更滞納.賦課年度;
-//        source.listKojoHokenryo_2 =;
-//        source.listKojoHokenryo_3 =;
-//        source.listKojoHokenryo_4 =;
-//        }
-        //source.hokenryoGokei=;
-        //source.shikyuGaku= ;
+        ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0);
+        if (null != this.帳票情報.getShiharaiHohoHenkoTainoList() && this.帳票情報.getShiharaiHohoHenkoTainoList().size() > index) {
+            source.listKojoHokenryo_1 = 支払方法変更滞納.get賦課年度().toDateString();
+            source.listKojoHokenryo_2 = 支払方法変更滞納.get収納期_月();
+            source.listKojoHokenryo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更滞納.get調定額(), 0);
+            source.listKojoHokenryo_4 = 支払方法変更滞納.get納期限().wareki().toDateString();
+            source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(get保険料額合計(), 0);
+            source.shikyuGaku = DecimalFormatter.toコンマ区切りRString(get給付額合計().subtract(get保険料額合計()), 0);
+        }
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun1 = 通知書定型文リスト.get(0);
         }
@@ -240,40 +242,38 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
 
     }
 
-    private RString get給付額合計() {
+    private Decimal get給付額合計() {
         Decimal 給付額合計 = Decimal.ZERO;
         for (ShokanHaraiShukkeJyoho 償還払集計情報 : 償還払集計情報リスト) {
             給付額合計 = 給付額合計.add(償還払集計情報.get支払金額());
         }
-
-        return DecimalFormatter.toコンマ区切りRString(給付額合計, 0);
+        return 給付額合計;
     }
 
-    //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),このリストの値の数は知らない
-//    private RString het保険料額合計() {
-//        Decimal 保険料額合計 = Decimal.ZERO;
-//        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 支払方法変更滞納リスト) {
-//            保険料額合計 = 保険料額合計.add(支払方法変更滞納.調定額)
-//        }
-//    }
-    //TODO:TainoHokenryoKojoTsuchishoReportSourceの中は、
-    //renrakusakiHokaLarge、renrakusakiHokaLarge、renrakusakiHokaJodanSmall、renrakusakiHokaGedanLargeがないです。
+    private Decimal get保険料額合計() {
+        Decimal 保険料額合計 = Decimal.ZERO;
+        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : this.帳票情報.getShiharaiHohoHenkoTainoList()) {
+            保険料額合計 = 保険料額合計.add(支払方法変更滞納.get調定額());
+        }
+        return 保険料額合計;
+    }
+
     private void setLayerFontLarge(TainoHokenryoKojoTsuchishoReportSource source) {
-//        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(2)) {
-//        source.renrakusakiHokaLarge = 通知書定型文リスト.get(3);
-//        } else {
-//        source.renrakusakiHokaLarge = RString.EMPTY;
-//        }
+        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(2)) {
+            source.renrakusakiHokaLarge = 通知書定型文リスト.get(3);
+        } else {
+            source.renrakusakiHokaLarge = RString.EMPTY;
+        }
     }
 
     private void setLayerFontKonzai(TainoHokenryoKojoTsuchishoReportSource source) {
-//        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(3)) {
-//        source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(3);
-//        source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(4);
-//        } else {
-//        source.renrakusakiHokaJodanSmall = RString.EMPTY;
-//        source.renrakusakiHokaGedanLarge = RString.EMPTY;
-//        }
+        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ().equals(3)) {
+            source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(3);
+            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(4);
+        } else {
+            source.renrakusakiHokaJodanSmall = RString.EMPTY;
+            source.renrakusakiHokaGedanLarge = RString.EMPTY;
+        }
     }
 
     private void setLayerFontKonzai1(TainoHokenryoKojoTsuchishoReportSource source) {

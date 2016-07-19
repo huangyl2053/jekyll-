@@ -33,7 +33,7 @@ public class GensenChoshuDataSakuseiHandler {
      */
     public GensenChoshuDataSakuseiFlowParameter getTempData() {
         GensenChoshuDataSakuseiFlowParameter tempData = new GensenChoshuDataSakuseiFlowParameter();
-        tempData.set指定年(div.getTxtNendo().getValue());
+        tempData.set指定年(div.getTxtNendo().getValue().getYear());
         return tempData;
     }
 }

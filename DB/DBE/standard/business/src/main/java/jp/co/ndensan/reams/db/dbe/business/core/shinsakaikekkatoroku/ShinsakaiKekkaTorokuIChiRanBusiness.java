@@ -293,7 +293,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 認定期間月数
      */
     public RString get認定期間月数() {
-        return entity.get被保険者区分コード();
+        return new RString(entity.get二次判定認定有効期間());
     }
 
     /**

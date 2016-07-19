@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.dbd100004;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100005;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100004.TainoHokenryoKojoTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100005.KyufugakuGengakuTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -20,11 +20,11 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 滞納保険料控除通知書のReportです。
+ * 給付額減額通知書のReportです。
  *
- * @reamsid_L DBD-3640-050 b_liuyang2
+ * @reamsid_L DBD-3640-060 b_liuyang2
  */
-public final class TainoHokenryoKojoTsuchishoReport extends Report<TainoHokenryoKojoTsuchishoReportSource> {
+public final class KyufugakuGengakuTsuchishoReport extends Report<KyufugakuGengakuTsuchishoReportSource> {
 
     private final IKojin 個人情報;
     private final IAtesaki 宛先;
@@ -37,7 +37,6 @@ public final class TainoHokenryoKojoTsuchishoReport extends Report<TainoHokenryo
     private final RString 帳票分類ID;
     private final Ninshosha 認証者;
     private final ShiharaiHohoHenko 帳票情報;
-    private final List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト;
 
     /**
      * インスタンスを生成します。
@@ -53,21 +52,20 @@ public final class TainoHokenryoKojoTsuchishoReport extends Report<TainoHokenryo
      * @param 帳票分類ID 帳票分類ID
      * @param 認証者 認証者
      * @param 帳票情報 帳票情報
-     * @param 償還払集計情報リスト 償還払集計情報リスト
-     * @return 滞納保険料控除通知書
+     * @return 給付額減額通知書
      */
-    public static TainoHokenryoKojoTsuchishoReport createReport(IKojin 個人情報, IAtesaki 宛先,
+    public static KyufugakuGengakuTsuchishoReport createReport(IKojin 個人情報, IAtesaki 宛先,
             List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
             FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者,
-            ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト) {
-        return new TainoHokenryoKojoTsuchishoReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体, 発行日,
-                文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報, 償還払集計情報リスト);
+            ShiharaiHohoHenko 帳票情報) {
+        return new KyufugakuGengakuTsuchishoReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体, 発行日,
+                文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報);
     }
 
-    private TainoHokenryoKojoTsuchishoReport(IKojin 個人情報, IAtesaki 宛先,
+    private KyufugakuGengakuTsuchishoReport(IKojin 個人情報, IAtesaki 宛先,
             List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
             FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者,
-            ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト) {
+            ShiharaiHohoHenko 帳票情報) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御汎用リスト = 帳票制御汎用リスト;
@@ -79,21 +77,16 @@ public final class TainoHokenryoKojoTsuchishoReport extends Report<TainoHokenryo
         this.帳票分類ID = 帳票分類ID;
         this.認証者 = 認証者;
         this.帳票情報 = 帳票情報;
-        this.償還払集計情報リスト = 償還払集計情報リスト;
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<TainoHokenryoKojoTsuchishoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<KyufugakuGengakuTsuchishoReportSource> writer) {
 
-        ITainoHokenryoKojoTsuchishoEditor bodyEditor;
-        ITainoHokenryoKojoTsuchishoBuilder builder;
-        for (int index = 0; index < 償還払集計情報リスト.size() || index < this.帳票情報.getShiharaiHohoHenkoTainoList().size(); index++) {
-            bodyEditor = new TainoHokenryoKojoTsuchishoEditor(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通,
-                    地方公共団体, 発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報, 償還払集計情報リスト,
-                    writer.getImageFolderPath(), index);
-            builder = new TainoHokenryoKojoTsuchishoBuilder(bodyEditor);
-            writer.writeLine(builder);
-        }
+        IKyufugakuGengakuTsuchishoEditor bodyEditor = new KyufugakuGengakuTsuchishoEditor(個人情報, 宛先,
+                帳票制御汎用リスト, 帳票制御共通, 地方公共団体, 発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者,
+                帳票情報, writer.getImageFolderPath());
+        IKyufugakuGengakuTsuchishoBuilder builder = new KyufugakuGengakuTsuchishoBuilder(bodyEditor);
+        writer.writeLine(builder);
     }
 
 }

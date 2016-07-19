@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.Gense
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.GensenChoshuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 源泉徴収データ作成csvのパラメータを作成します。
@@ -46,10 +47,11 @@ public final class GensenChoshuDataSakuseiChange {
         } else if (!entity.getその他機関コード().isNullOrEmpty()) {
             所属機関 = entity.get機関名称();
         }
-        int 年齢 = paramter.get指定年().getBetweenYears(new RDate(entity.get生年月日().toString()));
+        RString 生年月日 = entity.get生年月日().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+        int 年齢 = paramter.get指定年().getBetweenYears(new RYear(entity.get生年月日().getYear().toString()));
         GensenChoshuDataSakuseiCsvEntity data = new GensenChoshuDataSakuseiCsvEntity(entity.get介護認定審査会委員コード(),
                 entity.get介護認定審査会委員名(), 職種, 所属機関, entity.get郵便番号(), entity.get住所(), entity.get電話番号(), entity.get番号_FAX(),
-                entity.get生年月日().seireki().fillType(FillType.BLANK), 年齢, entity.get認定審査会報酬合計(), entity.getその他随時報酬合計(),
+                生年月日, 年齢, entity.get認定審査会報酬合計(), entity.getその他随時報酬合計(),
                 entity.get認定審査交通費等合計(), entity.get源泉徴収額(), entity.get合計());
         return data;
     }

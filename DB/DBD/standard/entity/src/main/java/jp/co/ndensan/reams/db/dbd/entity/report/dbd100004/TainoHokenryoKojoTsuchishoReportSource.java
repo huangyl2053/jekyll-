@@ -155,6 +155,12 @@ public class TainoHokenryoKojoTsuchishoReportSource implements IReportSource {
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 68)
     public RString koinShoryaku;
+    @ReportItem(name = "renrakusakiHokaLarge", order = 69)
+    public RString renrakusakiHokaLarge;
+    @ReportItem(name = "renrakusakiHokaJodanSmall", order = 70)
+    public RString renrakusakiHokaJodanSmall;
+    @ReportItem(name = "renrakusakiHokaGedanLarge", order = 71)
+    public RString renrakusakiHokaGedanLarge;
     @ReportPerson(id = "001")
     public RString shikibetsuCode;
     @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
