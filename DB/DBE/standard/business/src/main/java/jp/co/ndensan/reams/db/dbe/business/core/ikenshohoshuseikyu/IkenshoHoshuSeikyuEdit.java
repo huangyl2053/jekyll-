@@ -10,7 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiha
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshuseikyu.IkenshoHoshuSeikyuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,19 +54,27 @@ public class IkenshoHoshuSeikyuEdit {
         Decimal 単価 = entity.getTanka();
         if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
             index = 1;
-            if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 seikyuEntity.set新規在宅件数(intToRString(index));
                 seikyuEntity.set新規在宅単価(decimalToRString(単価));
             }
-            if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 seikyuEntity.set新規施設件数(intToRString(index));
                 seikyuEntity.set新規施設単価(decimalToRString(単価));
             }
-            if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 seikyuEntity.set更新在宅件数(intToRString(index));
                 seikyuEntity.set更新在宅単価(decimalToRString(単価));
             }
-            if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 seikyuEntity.set更新施設件数(intToRString(index));
                 seikyuEntity.set更新施設単価(decimalToRString(単価));
             }
@@ -96,22 +105,30 @@ public class IkenshoHoshuSeikyuEdit {
     private IkenshoHoshuSeikyuEntity getIkenshoHoshuSeikyuEntity(HoshuShiharaiJunbiRelateEntity entity, IkenshoHoshuSeikyuEntity seikyuEntity,
             Decimal 単価) {
         if (shujiiIryokikanCode.equals(entity.getShinsakaiIinCode())) {
-            if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 index++;
                 seikyuEntity.set新規在宅件数(intToRString(index));
                 seikyuEntity.set新規在宅単価(decimalToRString(単価));
             }
-            if (new Code("1").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 index++;
                 seikyuEntity.set新規施設件数(intToRString(index));
                 seikyuEntity.set新規施設単価(decimalToRString(単価));
             }
-            if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("1").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.在宅.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 index++;
                 seikyuEntity.set更新在宅件数(intToRString(index));
                 seikyuEntity.set更新在宅単価(decimalToRString(単価));
             }
-            if (new Code("2").equals(entity.getIkenshoSakuseiKaisuKubun()) && new Code("2").equals(entity.getZaitakuShisetsuKubun())) {
+            if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
+                    && IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.getIkenshoSakuseiKaisuKubun().value())
+                    && ZaitakuShisetsuKubun.施設.getコード().equals(entity.getZaitakuShisetsuKubun().value())) {
                 index++;
                 seikyuEntity.set更新施設件数(intToRString(index));
                 seikyuEntity.set更新施設単価(decimalToRString(単価));
@@ -128,7 +145,7 @@ public class IkenshoHoshuSeikyuEdit {
     }
 
     private RString intToRString(int date) {
-        return new RString(String.valueOf(date));
+        return new RString(date);
     }
 
     private int rstringToInt(RString date) {

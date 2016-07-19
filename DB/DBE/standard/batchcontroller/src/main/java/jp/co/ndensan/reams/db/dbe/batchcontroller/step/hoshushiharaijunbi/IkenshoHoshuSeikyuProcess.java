@@ -137,7 +137,6 @@ public class IkenshoHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJun
     }
 
     private RString dateFormat(FlexibleDate date) {
-
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }

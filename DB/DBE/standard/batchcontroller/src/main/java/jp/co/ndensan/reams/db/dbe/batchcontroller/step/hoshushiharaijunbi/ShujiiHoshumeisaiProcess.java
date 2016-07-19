@@ -134,8 +134,6 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
         ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
         index_tmp++;
-        report.writeBy(reportSourceWriter);
-        index_tmp++;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
@@ -218,7 +216,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
     }
 
     private RString intToRString(int date) {
-        return new RString(String.valueOf(date));
+        return new RString(date);
     }
 
     private RString decimalToRString(Decimal date) {
