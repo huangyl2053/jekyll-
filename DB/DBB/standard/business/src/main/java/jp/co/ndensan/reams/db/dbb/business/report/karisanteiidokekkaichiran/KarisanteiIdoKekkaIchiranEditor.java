@@ -47,6 +47,12 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
     private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
+    private static final int NUM_10 = 10;
+    private static final int NUM_11 = 11;
+    private static final int NUM_12 = 12;
+    private static final int NUM_13 = 13;
+    private static final int NUM_14 = 14;
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString 現金 = new RString("現金");
@@ -293,20 +299,50 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         Decimal 仮算定特徴期合計 = nullTOZero(entity.get特徴期別金額01())
                 .add(nullTOZero(entity.get特徴期別金額02()))
                 .add(nullTOZero(entity.get特徴期別金額03()));
-        Decimal 仮算定普徴期合計 = nullTOZero(entity.get普徴期別金額01())
-                .add(nullTOZero(entity.get普徴期別金額02()))
-                .add(nullTOZero(entity.get普徴期別金額03()))
-                .add(nullTOZero(entity.get普徴期別金額04()))
-                .add(nullTOZero(entity.get普徴期別金額05()))
-                .add(nullTOZero(entity.get普徴期別金額06()))
-                .add(nullTOZero(entity.get普徴期別金額07()))
-                .add(nullTOZero(entity.get普徴期別金額08()))
-                .add(nullTOZero(entity.get普徴期別金額09()))
-                .add(nullTOZero(entity.get普徴期別金額10()))
-                .add(nullTOZero(entity.get普徴期別金額11()))
-                .add(nullTOZero(entity.get普徴期別金額12()))
-                .add(nullTOZero(entity.get普徴期別金額13()))
-                .add(nullTOZero(entity.get普徴期別金額14()));
+        Decimal 仮算定普徴期合計 = new Decimal(0);
+        if (月List.contains(NUM_1)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額01()));
+        }
+        if (月List.contains(NUM_2)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額02()));
+        }
+        if (月List.contains(NUM_3)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額03()));
+        }
+        if (月List.contains(NUM_4)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額04()));
+        }
+        if (月List.contains(NUM_5)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額05()));
+        }
+        if (月List.contains(NUM_6)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額06()));
+        }
+        if (月List.contains(NUM_7)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額07()));
+        }
+        if (月List.contains(NUM_8)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額08()));
+        }
+        if (月List.contains(NUM_9)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額09()));
+        }
+        if (月List.contains(NUM_10)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額10()));
+        }
+        if (月List.contains(NUM_11)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額11()));
+        }
+        if (月List.contains(NUM_12)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額12()));
+        }
+        if (月List.contains(NUM_13)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額13()));
+        }
+        if (月List.contains(NUM_14)) {
+            仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額14()));
+        }
+
         if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
                 && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
             return RString.EMPTY;

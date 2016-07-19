@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteiidokekkaichiran.KarisanteiIdoKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -37,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 帳票設計_DBBRP36001_2_仮算定異動（一括）結果一覧表クラスです。
@@ -47,14 +45,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KarisanteiIdoKekkaIchiranPrintService {
 
     private final ReportId REPORTID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
-    private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
-
-    /**
-     * コンストラクタです。
-     */
-    public KarisanteiIdoKekkaIchiranPrintService() {
-        this.帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-    }
 
     /**
      * printメソッド(単一帳票出力用)

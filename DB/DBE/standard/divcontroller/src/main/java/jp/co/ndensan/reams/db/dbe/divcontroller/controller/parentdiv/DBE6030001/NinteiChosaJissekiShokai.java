@@ -55,6 +55,8 @@ public class NinteiChosaJissekiShokai {
     public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnKensakuClear(NinteiChosaJissekiShokaiDiv div) {
         getHandler(div).set初期状態();
         getHandler(div).onClick_BtnKensakuClear();
+        div.getChosaJisshibi().getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         return ResponseData.of(div).respond();
     }
 
