@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -63,7 +64,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
         executeStep(介護情報の登録);
         for (TyouhyouEntity entity : parameter.get出力帳票一覧()) {
             processParameter.set出力帳票一覧(entity);
-            if (entity.get帳票分類ID() != null) {
+            if (entity.get帳票分類ID() != null && !ReportId.EMPTY.equals(entity.get帳票分類ID())) {
                 バッチフロー_帳票分類ID = entity.get帳票分類ID().getColumnValue();
             }
             executeStep(計算後情報作成);
@@ -137,7 +138,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
                 getParameter().get賦課年度(),
-                getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME).toDateString(),
+                new RString(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME).toString()),
                 ShoriName.特徴平準化計算_6月分.get名称(), 帳票分類ID);
     }
 
