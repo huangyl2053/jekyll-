@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoToiawasesakiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
@@ -31,6 +32,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.chihokokyodantai.ShichosonAtesaki;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.tashichosonsofusakimaintenance.SofusakiGroup;
 import jp.co.ndensan.reams.ur.urz.service.core.chihokokyodantai.CityAtesakiService;
@@ -42,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -52,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
- * 画面設計_DBBGM51002_所得照会票作成
+ * 所得照会票作成のハンドラクラスです。
  *
  * @reamsid_L DBB-1710-010 xuhao
  */
@@ -86,14 +89,13 @@ public final class NushiJuminJohoHandler {
     private static final RString 村 = new RString("村");
     private static final RString 役所 = new RString("役所");
     private static final RString 役場 = new RString("役場");
-    private static final RString 識別対象コード = new RString("txtShikibetsuCode");
 
     private NushiJuminJohoHandler(NushiJuminJohoDiv div) {
         this.div = div;
     }
 
     /**
-     * of
+     * コンストラクタです。
      *
      * @param div div
      * @return NushiJuminJohoServiceHandler
@@ -103,7 +105,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * 所得照会票発行対象世帯員リスト
+     * get所得照会票発行対象世帯員リストのメソッドます。
      *
      * @param 識別コード ShikibetsuCode
      * @return 所得照会票発行対象世帯員リスト
@@ -114,7 +116,7 @@ public final class NushiJuminJohoHandler {
         for (SetaiinJoho entity : 世帯所得情報一覧List) {
             ShotokushokaihyoTaishoSetaiin 所得照会票発行対象世帯員 = new ShotokushokaihyoTaishoSetaiin();
             IShikibetsuTaisho 識別対象 = entity.get識別対象();
-            所得照会票発行対象世帯員.set識別対象(entity.get識別対象());
+            所得照会票発行対象世帯員.set識別対象(識別対象);
             ZenkokuJushoCode 全国住所コード入力;
             if (!文字列_THREE.equals(識別対象.to個人().get住民状態().コード())) {
                 全国住所コード入力 = 所得照会票発行対象世帯員.get識別対象().to個人().get転入前().get全国住所コード();
@@ -128,13 +130,15 @@ public final class NushiJuminJohoHandler {
                 }
             }
             所得照会票発行対象世帯員.set送付先全国住所コード(全国住所コード入力);
+            所得照会票発行対象世帯員.set前住所(get住所(所得照会票発行対象世帯員));
+            所得照会票発行対象世帯員.set現住所(get現住所(所得照会票発行対象世帯員));
             所得照会票発行対象世帯員リスト.add(所得照会票発行対象世帯員);
         }
         return 所得照会票発行対象世帯員リスト;
     }
 
     /**
-     * set所得照会票個別発行個人一覧
+     * set所得照会票個別発行個人一覧のメソッドます。
      *
      * @param 所得照会票発行対象世帯員リスト List<ShotokushokaihyoTaishoSetaiin>
      */
@@ -158,7 +162,6 @@ public final class NushiJuminJohoHandler {
                 row.setTxtKetsugo03(new RString(生年月日.toString()));
                 RString 転入異動日 = 識別対象.to個人().get登録異動年月日().wareki().toDateString();
                 row.setTxtTennyuTodokedeBi(転入異動日);
-                // TODO yiyang de
                 RString 転入届出日 = 識別対象.to個人().get登録届出年月日().wareki().toDateString();
                 row.setTxtTennyuTodokedeBi(転入届出日);
                 ITennyuMae 転入前住所 = 識別対象.to個人().get転入前();
@@ -205,7 +208,7 @@ public final class NushiJuminJohoHandler {
             if (!名称.isNullOrEmpty()) {
                 役所_役場名 = set役所_役場名(名称, 役所_役場名, atesaki);
             }
-            if (役所_役場名.length() >= 整数_TEN) {
+            if (整数_TEN <= 役所_役場名.length()) {
                 役所_役場名の上段 = 役所_役場名.substring(整数_ZERO, 整数_NINE);
                 所得照会票発行対象世帯員.set送付先役所名１段目(役所_役場名の上段);
                 役所_役場名の下段 = 役所_役場名.substring(整数_NINE, 役所_役場名.length());
@@ -218,7 +221,7 @@ public final class NushiJuminJohoHandler {
                 所得照会票発行対象世帯員.set送付先役所名２段目(役所_役場名の下段);
             }
             住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-            if (住所.length() >= 整数_FIFTEEN) {
+            if (整数_FIFTEEN <= 住所.length()) {
                 住所の上段 = 住所.substring(整数_ZERO, 整数_FIFTEEN);
                 所得照会票発行対象世帯員.set送付先住所１段目(住所の上段);
                 住所の下段 = 住所.substring(整数_FIFTEEN, 住所.length());
@@ -242,7 +245,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * set世帯員の所得照会票印字内容の修正エリア
+     * set世帯員の所得照会票印字内容の修正エリアのメソッドます。
      */
     public void set世帯員の所得照会票印字内容の修正エリア() {
         List<dgShotokuShokaiHyoHakko_Row> rowList = div.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().getSelectedItems();
@@ -260,7 +263,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * 所得照会送付先
+     * set所得照会送付先のメソッドます。
      *
      * @param 所得照会票発行対象世帯員リスト List<ShotokushokaihyoTaishoSetaiin>
      */
@@ -275,7 +278,6 @@ public final class NushiJuminJohoHandler {
             RString 役所_役場名 = RString.EMPTY;
             RString 役所_役場名の上段 = RString.EMPTY;
             RString 役所_役場名の下段 = RString.EMPTY;
-            RString 住所;
             RString 住所の上段 = RString.EMPTY;
             RString 住所の下段 = RString.EMPTY;
             ICityAtesakiFinder finder = CityAtesakiService.createCityAtesakiFinder();
@@ -298,7 +300,7 @@ public final class NushiJuminJohoHandler {
             if (!名称.isNullOrEmpty()) {
                 役所_役場名 = set役所_役場名(名称, 役所_役場名, atesaki);
             }
-            if (役所_役場名.length() >= 整数_TEN) {
+            if (整数_TEN <= 役所_役場名.length()) {
                 役所_役場名の上段 = 役所_役場名.substring(整数_ZERO, 整数_NINE);
                 役所_役場名の下段 = 役所_役場名.substring(整数_NINE, 役所_役場名.length());
             }
@@ -306,7 +308,7 @@ public final class NushiJuminJohoHandler {
                 役所_役場名の下段 = 役所_役場名;
             }
             住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-            if (住所.length() >= 整数_FIFTEEN) {
+            if (整数_FIFTEEN <= 住所.length()) {
                 住所の上段 = 住所.substring(整数_ZERO, 整数_FIFTEEN);
                 住所の下段 = 住所.substring(整数_FIFTEEN, 住所.length());
             }
@@ -338,7 +340,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * get住所
+     * get住所のメソッドます。
      *
      * @param 所得照会票発行対象世帯員 ShotokushokaihyoTaishoSetaiin
      * @return 住所
@@ -441,7 +443,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * get現住所
+     * get現住所のメソッドます。
      *
      * @param 所得照会票発行対象世帯員 ShotokushokaihyoTaishoSetaiin
      * @return RString
@@ -465,7 +467,7 @@ public final class NushiJuminJohoHandler {
         RString 転出先住所_住所 = RString.EMPTY;
         RString 転出先住所_番地 = RString.EMPTY;
         RString 転出先住所_方書 = RString.EMPTY;
-        ITennyuMae 転入前住所 = 所得照会票発行対象世帯員.get識別対象().to個人().get転入前();
+        IJusho 転入前住所 = 所得照会票発行対象世帯員.get識別対象().get住所();
         if (転入前住所 != null) {
             転出先住所_住所 = 転入前住所.get住所();
             転出先住所_番地 = 転入前住所.get番地().getBanchi().value();
@@ -627,7 +629,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * 所得照会票の発行
+     * set所得照会票の発行のメソッドます。
      *
      * @param 所得照会票発行対象世帯員リスト List<ShotokushokaihyoTaishoSetaiin>
      */
@@ -664,7 +666,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * 所得照会票モデルを作成
+     * get所得照会票モデルを作成のメソッドます。
      *
      * @param 所得照会票発行対象世帯員リスト List<ShotokushokaihyoTaishoSetaiin>
      * @return 所得照会票モデル
@@ -747,7 +749,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * 所得照会送付先エリアの全国住所コードの変更
+     * 所得照会送付先エリアの全国住所コードの変更のメソッドます。
      */
     public void onChange_全国住所コード() {
         RString 役所_役場名 = RString.EMPTY;
@@ -769,7 +771,7 @@ public final class NushiJuminJohoHandler {
             if (!名称.isNullOrEmpty()) {
                 役所_役場名 = set役所_役場名(名称, 役所_役場名, atesaki);
             }
-            if (役所_役場名.length() >= 整数_TEN) {
+            if (整数_TEN <= 役所_役場名.length()) {
                 役所_役場名の上段 = 役所_役場名.substring(整数_ZERO, 整数_NINE);
                 役所_役場名の下段 = 役所_役場名.substring(整数_NINE, 役所_役場名.length());
             }
@@ -777,7 +779,7 @@ public final class NushiJuminJohoHandler {
                 役所_役場名の下段 = 役所_役場名;
             }
             住所 = atesaki.get住所().concat(RString.FULL_SPACE).concat(atesaki.get番地().value());
-            if (住所.length() >= 整数_FIFTEEN) {
+            if (整数_FIFTEEN <= 住所.length()) {
                 住所の上段 = 住所.substring(整数_ZERO, 整数_FIFTEEN);
                 住所の下段 = 住所.substring(整数_FIFTEEN, 住所.length());
             }
@@ -810,7 +812,7 @@ public final class NushiJuminJohoHandler {
     }
 
     /**
-     * 該当修正内容をメモリに保存して
+     * save所得照会票発行対象世帯員のメソッドます。
      *
      * @param 所得照会票発行対象世帯員リスト List<ShotokushokaihyoTaishoSetaiin>
      * @return 所得照会票発行対象世帯員
@@ -877,5 +879,45 @@ public final class NushiJuminJohoHandler {
         }
         div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel().getTextNo().setValue(flag);
         return 所得照会票発行対象世帯員リスト;
+    }
+
+    /**
+     * 識別コードを取得のメソッドます。
+     *
+     * @return List<DbT2008ShotokuKanriEntity>
+     */
+    public List<DbT2008ShotokuKanriEntity> get識別コード() {
+        FlexibleYear 所得年度 = new FlexibleYear(div.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().getSelectedKey());
+        List<ShikibetsuCode> 識別コードList = new ArrayList<>();
+        List<dgShotokuShokaiHyoHakko_Row> 世帯員一覧 = div.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().getSelectedItems();
+        for (dgShotokuShokaiHyoHakko_Row row : 世帯員一覧) {
+            ShikibetsuCode 識別コード = new ShikibetsuCode(row.getTxtShikibetsuCode());
+            識別コードList.add(識別コード);
+        }
+        List<DbT2008ShotokuKanriEntity> entityList = NushiJuminJohoService.createInstance().get識別コード(所得年度, 識別コードList);
+        return entityList;
+    }
+
+    /**
+     * db出力のメソッドます。
+     *
+     * @param 所得照会票発行対象世帯員リスト List<ShotokushokaihyoTaishoSetaiin>
+     */
+    public void db出力(List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト) {
+        FlexibleYear 所得年度 = new FlexibleYear(div.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().getSelectedKey());
+        FlexibleDate 発行日 = new FlexibleDate(div.getShotokuShokaiHyoHakkoIchiranPanel().getTxtHakkoNengappi().getValue().toDateString());
+        LasdecCode 全国住所コード = LasdecCode.EMPTY;
+        if (!div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().
+                getSofusakiNyuryokuPanel().getCcdZenkokuJushoInput1().get全国住所コード().isEmpty()) {
+            全国住所コード = new LasdecCode(div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().
+                    getSofusakiNyuryokuPanel().getCcdZenkokuJushoInput1().get全国住所コード().getShichosonCode6());
+        }
+        List<dgShotokuShokaiHyoHakko_Row> 世帯員一覧 = div.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().getSelectedItems();
+        for (dgShotokuShokaiHyoHakko_Row row : 世帯員一覧) {
+            ShikibetsuCode 識別コード = new ShikibetsuCode(row.getTxtShikibetsuCode());
+            int no = row.getId();
+            SetaiCode 世帯コード = 所得照会票発行対象世帯員リスト.get(no).get識別対象().to個人().get世帯コード();
+            NushiJuminJohoService.createInstance().db出力(所得年度, 識別コード, 全国住所コード, 世帯コード, 発行日);
+        }
     }
 }

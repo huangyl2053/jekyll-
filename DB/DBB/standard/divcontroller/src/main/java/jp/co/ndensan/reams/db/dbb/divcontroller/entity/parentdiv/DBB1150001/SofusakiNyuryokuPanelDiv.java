@@ -43,10 +43,12 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     private TextBox txtSofusakiSama;
     @JsonProperty("lblSama")
     private Label lblSama;
-    @JsonProperty("ccdZenkokuJushoInput1")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput1;
     @JsonProperty("TextNo")
     private TextBox TextNo;
+    @JsonProperty("ccdZenkokuJushoInput1")
+    private ZenkokuJushoInputDiv ccdZenkokuJushoInput1;
+    @JsonProperty("TextNO1")
+    private TextBox TextNO1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -199,15 +201,6 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     }
 
     /*
-     * getccdZenkokuJushoInput1
-     * @return ccdZenkokuJushoInput1
-     */
-    @JsonProperty("ccdZenkokuJushoInput1")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput1() {
-        return ccdZenkokuJushoInput1;
-    }
-
-    /*
      * getTextNo
      * @return TextNo
      */
@@ -223,6 +216,33 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     @JsonProperty("TextNo")
     public void setTextNo(TextBox TextNo) {
         this.TextNo = TextNo;
+    }
+
+    /*
+     * getccdZenkokuJushoInput1
+     * @return ccdZenkokuJushoInput1
+     */
+    @JsonProperty("ccdZenkokuJushoInput1")
+    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput1() {
+        return ccdZenkokuJushoInput1;
+    }
+
+    /*
+     * getTextNO1
+     * @return TextNO1
+     */
+    @JsonProperty("TextNO1")
+    public TextBox getTextNO1() {
+        return TextNO1;
+    }
+
+    /*
+     * setTextNO1
+     * @param TextNO1 TextNO1
+     */
+    @JsonProperty("TextNO1")
+    public void setTextNO1(TextBox TextNO1) {
+        this.TextNO1 = TextNO1;
     }
 
     // </editor-fold>
