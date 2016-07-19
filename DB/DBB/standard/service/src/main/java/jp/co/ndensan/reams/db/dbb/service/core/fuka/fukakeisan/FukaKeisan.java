@@ -836,47 +836,43 @@ public class FukaKeisan {
     }
 
     private boolean isTsuchishoNo変更(TsuchishoNo 更正前, TsuchishoNo 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = TsuchishoNo.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = TsuchishoNo.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isHihokenshaNo変更(HihokenshaNo 更正前, HihokenshaNo 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = HihokenshaNo.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = HihokenshaNo.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isShikibetsuCode変更(ShikibetsuCode 更正前, ShikibetsuCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = ShikibetsuCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = ShikibetsuCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isSetaiCode変更(SetaiCode 更正前, SetaiCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = SetaiCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = SetaiCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isInt変更(int 更正前, int 更正後) {
@@ -884,56 +880,53 @@ public class FukaKeisan {
     }
 
     private boolean isFlexibleDate変更(FlexibleDate 更正前, FlexibleDate 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleDate.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleDate.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isRString変更(RString 更正前, RString 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = RString.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = RString.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isFlexibleYearMonth変更(FlexibleYearMonth 更正前, FlexibleYearMonth 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleYearMonth.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleYearMonth.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isLasdecCode変更(LasdecCode 更正前, LasdecCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = LasdecCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = LasdecCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isDecimal変更(Decimal 更正前, Decimal 更正後) {
-        if (更正後 != null && !更正後.equals(更正前)) {
-            return true;
-        } else if (更正後 == null && 更正前 != null) {
-            return true;
+        if (更正前 == null) {
+            更正前 = Decimal.ZERO;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = Decimal.ZERO;
+        }
+        return !更正後.equals(更正前);
     }
 
     /**
@@ -1046,8 +1039,10 @@ public class FukaKeisan {
             Collections.sort(生活保護の情報のリスト, new Comparator<SeikatsuHogoJukyusha>() {
                 @Override
                 public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
-                    int flag = o2.get受給開始日().compareTo(o1.get受給開始日());
-                    return flag;
+                    if (o2.get受給開始日().isBefore(o1.get受給開始日())) {
+                        return 1;
+                    }
+                    return -1;
                 }
             });
             // TODO QAのNo.950(Redmine#91760)
@@ -1099,8 +1094,10 @@ public class FukaKeisan {
             Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
-                    int flag = o2.get受給開始年月日().compareTo(o1.get受給開始年月日());
-                    return flag;
+                    if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
+                        return 1;
+                    }
+                    return -1;
                 }
             });
             builder.set老年開始日(老齢福祉の情報リスト.get(0).get受給開始年月日());
