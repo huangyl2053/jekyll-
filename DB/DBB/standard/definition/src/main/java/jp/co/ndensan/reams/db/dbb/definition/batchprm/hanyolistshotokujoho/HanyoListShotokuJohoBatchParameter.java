@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -60,9 +60,9 @@ public class HanyoListShotokuJohoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_8, name = "賦課年度")
     private FlexibleYear 賦課年度;
     @BatchParameter(key = KEY_9, name = "抽出期間From")
-    private RDate 抽出期間From;
+    private YMDHMS 抽出期間From;
     @BatchParameter(key = KEY_10, name = "抽出期間To")
-    private RDate 抽出期間To;
+    private YMDHMS 抽出期間To;
     @BatchParameter(key = KEY_11, name = "住民税減免前後表示区分")
     private RString 住民税減免前後表示区分;
     @BatchParameter(key = KEY_12, name = "課税区分減免前s")

@@ -56,10 +56,10 @@
             separator="OR"  
             close=")">
                 (
-                T5601."ninteichosaItakusakiCode" = #{item.shujiiIryoKikanCode}
-                AND T5601."ninteichosainCode" = #{item.shujiiCode}
+                T5601."ninteichosaItakusakiCode" = #{item.ninteichosaItakusakiCode}
+                AND T5601."ninteichosainCode" = #{item.ninteichosainCode}
                 AND T5601."shinseishoKanriNo" = #{item.shinseishoKanriNo}
-                AND T5601."ninteichosaIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
+                AND T5601."ninteichosaIraiRirekiNo" = #{item.ninteichosaRirekiNo}
                 )
             </foreach>
         </if>

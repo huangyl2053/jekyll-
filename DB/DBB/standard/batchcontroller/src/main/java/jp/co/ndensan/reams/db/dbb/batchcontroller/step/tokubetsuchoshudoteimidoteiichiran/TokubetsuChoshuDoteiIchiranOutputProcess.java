@@ -168,7 +168,7 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
             targets.add(target);
         }
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(導入団体クラス,
-                null, null, targets, parameter.get特別徴収開始月());
+                targets);
         report.writeBy(reportSourceWriter);
     }
 

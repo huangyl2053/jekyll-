@@ -425,8 +425,8 @@
             rgdb."DbV2502KaigoShotoku" AS A
         WHERE
             A."shotokuNendo" = #{調定年度}
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[>=]]> substring(#{抽出開始日時},0,8)
-        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> substring(#{抽出終了日時},0,8)
+        AND substring(A."shoriTimeStamp",0,8) <![CDATA[>=]]> to_char(to_date(#{抽出開始日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
+        AND substring(A."shoriTimeStamp",0,8) <![CDATA[<=]]> to_char(to_date(#{抽出終了日時}, 'yyyy-mm-dd hh24:mi:ss'),'yyyyMMDD')
     </select>
     
     <!-- 所得異動一時テーブルを作成します。 -->
@@ -1486,6 +1486,7 @@
         <id property="shikibetsuCode" column="UrT0526SeikatsuHogoFujoShurui_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="gyomuCode" column="UrT0526SeikatsuHogoFujoShurui_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="UrT0526SeikatsuHogoFujoShurui_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <!--// TODO QAのNo.949(Redmine#91760) -->
         <!--<id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
         <result property="insertDantaiCd" column="UrT0526SeikatsuHogoFujoShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="UrT0526SeikatsuHogoFujoShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
