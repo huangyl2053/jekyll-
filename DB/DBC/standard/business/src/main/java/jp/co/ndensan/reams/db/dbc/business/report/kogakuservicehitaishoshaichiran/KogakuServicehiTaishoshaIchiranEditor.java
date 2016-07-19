@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTaishoshaIchiranEditor {
 
     private static final RString SAKUSEI = new RString("作成");
-    private static final RString 定数 = new RString("単");
+    private static final RString 単独合算 = new RString("単");
     private final KogakuServicehiTaishoshaIchiranEntity 高額介護サービス費対象者一覧表;
     private final YMDHMS システム日時;
     private final Association association;
@@ -96,7 +96,7 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
         if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.get被保険者番号() != null) {
             source.listTaishosha_2 = 高額介護サービス費対象者一覧表.get被保険者番号().getColumnValue();
         }
-        //TODO 識別コード 常に非表示
+        //TODO 識別コード 常に非表示 QA(#948)
         if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.getサービス提供年月() != null) {
             source.listTaishosha_3 = 高額介護サービス費対象者一覧表.getサービス提供年月().toDateString();
         }
@@ -160,7 +160,7 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
         if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.get世帯コード() != null) {
             source.listTaishosha_9 = 高額介護サービス費対象者一覧表.get世帯コード().getColumnValue();
         }
-        source.listTaishosha_10 = 定数;
+        source.listTaishosha_10 = 単独合算;
         if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.get利用者負担額() != null) {
             source.listTaishosha_11 = new RString(高額介護サービス費対象者一覧表.get利用者負担額().toString());
         }

@@ -70,6 +70,9 @@ public class NinteiChosaHoshuShokaiCsvEntity implements IChosaHoshuShokaiCsvEucE
     @CsvField(order = 25, name = "認定調査委託料")
     private int 認定調査委託料;
 
+    /**
+     * コンストラクタです。
+     */
     public NinteiChosaHoshuShokaiCsvEntity() {
     }
 

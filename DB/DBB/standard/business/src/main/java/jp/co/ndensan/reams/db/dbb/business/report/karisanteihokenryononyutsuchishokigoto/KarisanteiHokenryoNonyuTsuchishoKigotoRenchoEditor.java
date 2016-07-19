@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteihokenryononyutsuchishokigoto;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoSeigyoJoho;
@@ -159,9 +160,13 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
             }
         }
         editSanteiKisoKi(source);
-        if (編集後仮算定通知書共通情報.get更正後() != null && 編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計() != null) {
-            editSanteiKisoGenmenGaku(source);
-            editSanteiKisoKariGokeiGaku(source);
+        if (編集後仮算定通知書共通情報.get更正後() != null) {
+            if (編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計() != null) {
+                editSanteiKisoKariGokeiGaku(source);
+            }
+            if (編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額() != null) {
+                editSanteiKisoGenmenGaku(source);
+            }
         }
         editSanteiKisoKiTitle1(source);
         editSanteiKisoZanteikiHokenryoGaku1(source);
@@ -833,10 +838,11 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editHokenryoGaku(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        if (null == 編集後仮算定通知書共通情報.get更正後() || null == 編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計()) {
+        if (null == 編集後仮算定通知書共通情報.get更正後()) {
             return;
         }
-        source.hokenryoGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計().toString());
+        source.hokenryoGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料仮徴収額合計());
     }
 
     private void editNendo2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -876,7 +882,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editYen2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.yen1 = 仮算定納入通知書情報.get算定の基礎().get基礎2().get単位();
+        source.yen2 = 仮算定納入通知書情報.get算定の基礎().get基礎2().get単位();
     }
 
     private void editNendo5(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -900,11 +906,12 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editSanteiKisoGenmenGaku(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().toString());
+        source.santeiKisoGenmenGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後介護保険料減免額().toString());
     }
 
     private void editSanteiKisoKariGokeiGaku(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.santeiKisoKariGokeiGaku = new RString(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計().toString());
+        source.santeiKisoKariGokeiGaku = NotsuReportEditorUtil
+                .get共通ポリシー金額1(編集後仮算定通知書共通情報.get更正後().get更正後特徴期別金額合計());
     }
 
     private void editSanteiKisoKiTitle1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -943,9 +950,10 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     private void editRenban(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            連番.padLeft(連番, 連番_6);
+            source.renban = 連番.padLeft("0", 連番_6);
+        } else {
+            source.renban = RString.EMPTY;
         }
-        source.renban = 連番;
     }
 
     private void editHokenshaName(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -982,7 +990,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
         }
         for (UniversalPhase 更正後普徴期別金額 : 更正後普徴期別金額リスト) {
             if (期 == 更正後普徴期別金額.get期()) {
-                return new RString(更正後普徴期別金額.get金額().toString());
+                return NotsuReportEditorUtil.get共通ポリシー金額1(更正後普徴期別金額.get金額());
             }
         }
         return RString.EMPTY;

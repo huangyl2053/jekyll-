@@ -6,12 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistshotokujoho.HanyoListShotokuJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,6 +41,7 @@ public class HanyoListShotokuJohoBatchParameter extends BatchParameterBase {
     private static final String KEY_11 = "住民税減免前後表示区分";
     private static final String KEY_12 = "課税区分減免前s";
     private static final String KEY_13 = "課税区分減免後s";
+    private static final String KEY_14 = "宛名検索条件";
 
     @BatchParameter(key = KEY_1, name = "帳票ID")
     private ReportId 帳票ID;
@@ -57,14 +60,26 @@ public class HanyoListShotokuJohoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_8, name = "賦課年度")
     private FlexibleYear 賦課年度;
     @BatchParameter(key = KEY_9, name = "抽出期間From")
-    private RDate 抽出期間From;
+    private YMDHMS 抽出期間From;
     @BatchParameter(key = KEY_10, name = "抽出期間To")
-    private RDate 抽出期間To;
+    private YMDHMS 抽出期間To;
     @BatchParameter(key = KEY_11, name = "住民税減免前後表示区分")
     private RString 住民税減免前後表示区分;
     @BatchParameter(key = KEY_12, name = "課税区分減免前s")
     private List<RString> 課税区分減免前s;
     @BatchParameter(key = KEY_13, name = "課税区分減免後s")
     private List<RString> 課税区分減免後s;
+    @BatchParameter(key = KEY_14, name = "宛名検索条件")
+    private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
+
+    /**
+     * toProcessParameter
+     *
+     * @return HanyoListShotokuJohoProcessParameter
+     */
+    public HanyoListShotokuJohoProcessParameter toProcessParameter() {
+        return new HanyoListShotokuJohoProcessParameter(帳票ID, 宛名抽出条件, 出力順ID, 出力項目ID, 項目名付加, 連番付加, 日付編集,
+                賦課年度, 抽出期間From, 抽出期間To, 住民税減免前後表示区分, 課税区分減免前s, 課税区分減免後s, 宛名検索条件);
+    }
 
 }

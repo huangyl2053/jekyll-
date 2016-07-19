@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNint
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,7 +39,7 @@ public class YokaigoNinteiJoho implements Serializable {
     private final DbT5911ShujiiIryoKikanJohoEntity 主治医医療機関情報認定Entity;
     private final DbT5912ShujiiJohoEntity 主治医情報認定Entity;
     private final DbT4101NinteiShinseiJohoEntity 要介護認定申請情報受給Entity;
-    private final DbV4001JukyushaDaichoEntity 受給者台帳Entity;
+    private final DbT4001JukyushaDaichoEntity 受給者台帳Entity;
     private final DbT4910NinteichosaItakusakiJohoEntity 認定調査委託先情報Entity;
     private final DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報受給Entity;
     private final DbT4912ShujiiJohoEntity 主治医情報受給Entity;
@@ -55,7 +55,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @param 主治医医療機関情報認定Entity DbT5911ShujiiIryoKikanJohoEntity
      * @param 主治医情報認定Entity DbT5912ShujiiJohoEntity
      * @param 要介護認定申請情報受給Entity DbT4101NinteiShinseiJohoEntity
-     * @param 受給者台帳Entity DbV4001JukyushaDaichoEntity
+     * @param 受給者台帳Entity DbT4001JukyushaDaichoEntity
      * @param 認定調査委託先情報Entity DbT4910NinteichosaItakusakiJohoEntity
      * @param 主治医医療機関情報受給Entity DbT4911ShujiiIryoKikanJohoEntity
      * @param 主治医情報受給Entity DbT4912ShujiiJohoEntity
@@ -68,7 +68,7 @@ public class YokaigoNinteiJoho implements Serializable {
             DbT5911ShujiiIryoKikanJohoEntity 主治医医療機関情報認定Entity,
             DbT5912ShujiiJohoEntity 主治医情報認定Entity,
             DbT4101NinteiShinseiJohoEntity 要介護認定申請情報受給Entity,
-            DbV4001JukyushaDaichoEntity 受給者台帳Entity,
+            DbT4001JukyushaDaichoEntity 受給者台帳Entity,
             DbT4910NinteichosaItakusakiJohoEntity 認定調査委託先情報Entity,
             DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報受給Entity,
             DbT4912ShujiiJohoEntity 主治医情報受給Entity,
@@ -1109,6 +1109,46 @@ public class YokaigoNinteiJoho implements Serializable {
                 || 調査員情報Entity.hasChanged()
                 || 要介護認定結果情報Entity.hasChanged()
                 || 要介護認定インターフェース情報Entity.hasChanged();
+    }
+
+    /**
+     * 前回認定情報MD5値変更かどうか。
+     *
+     * @return 変更かどうか boolean
+     */
+    public boolean hasChanged前回認定情報() {
+        return 受給者台帳Entity.hasChanged();
+    }
+
+    /**
+     * 今回認定情報MD5値変更かどうか。
+     *
+     * @return 変更かどうか boolean
+     */
+    public boolean hasChanged今回認定情報() {
+        return 要介護認定申請情報受給Entity.hasChanged()
+                || 受給者台帳Entity.hasChanged()
+                || 要介護認定結果情報Entity.hasChanged()
+                || (null != 要介護認定インターフェース情報Entity && 要介護認定インターフェース情報Entity.hasChanged());
+    }
+
+    /**
+     * 介護認定処理情報MD5値変更かどうか。
+     *
+     * @return 変更かどうか boolean
+     */
+    public boolean hasChanged受給認定情報() {
+        return 要介護認定申請情報受給Entity.hasChanged()
+                || 受給者台帳Entity.hasChanged();
+    }
+
+    /**
+     * 介護認定処理情報MD5値変更かどうか。
+     *
+     * @return 変更かどうか boolean
+     */
+    public boolean hasChanged認定認定情報() {
+        return 要介護認定申請情報認定Entity.hasChanged();
     }
 
     /**

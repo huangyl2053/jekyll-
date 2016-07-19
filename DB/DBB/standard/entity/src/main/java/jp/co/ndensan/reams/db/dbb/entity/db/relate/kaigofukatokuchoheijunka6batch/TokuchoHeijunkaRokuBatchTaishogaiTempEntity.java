@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6bat
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;

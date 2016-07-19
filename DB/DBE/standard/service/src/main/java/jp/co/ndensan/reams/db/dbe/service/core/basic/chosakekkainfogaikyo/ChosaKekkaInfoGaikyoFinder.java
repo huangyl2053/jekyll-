@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.RembanServiceJokyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosakekkainfogaikyo.IChosaKekkaInfoGaikyoMapper;

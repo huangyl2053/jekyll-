@@ -37,4 +37,11 @@ public interface IPrintContentsSettingDiv extends ICommonChildDivBaseProperties 
      * @return RDate
      */
     public RDate getSendDate();
+
+    /**
+     * 送付日の活性を設します。
+     *
+     * @param flag True:非活性　False:活性
+     */
+    public void setSendDateDisable(boolean flag);
 }

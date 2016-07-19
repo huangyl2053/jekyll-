@@ -36,8 +36,10 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
     private static final String 賦課の情報登録フロー_6月開始 = "call_FukaJohoTorokuFlow_June";
     private static final String 計算後情報作成 = "call_KeisangoJohoSakuseiFlow";
     private static final String 特徴仮算定結果一覧表出力 = "spoolTokuchoKarisanteiKekkaIchiran";
+    private static final String 仮算定異動通知書一括発行 = "call_TokuchoKarisanteiTsuchishoHakkoFlow";
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("FukaJohoTorokuFlow");
+    private static final RString TOKUCHOKARISANTEITSUSHISHOHAKKO_FLOWID = new RString("TokuchoKarisanteiTsuchishoHakkoFlow");
 
     private YMDHMS システム日時;
 
@@ -54,6 +56,9 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
 //        executeStep(賦課の情報登録フロー_6月開始);
         executeStep(計算後情報作成);
         executeStep(特徴仮算定結果一覧表出力);
+        if (getParameter().isFlag()) {
+            executeStep(仮算定異動通知書一括発行);
+        }
     }
 
     /**
@@ -164,6 +169,17 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
     protected IBatchFlowCommand spoolTokuchoKarisanteiKekkaIchiran() {
         return simpleBatch(SpoolTokuchoKarisanteiKekkaIchiranProcess.class).
                 arguments(getParameter().toSpoolTokuchoKarisanteiKekkaIchiranProcessParameter(システム日時)).define();
+    }
+
+    /**
+     * 特徴仮算定通知書一括発行バッチ
+     *
+     * @return TokuchoKarisanteiTsuchishoHakkoFlow
+     */
+    @Step(仮算定異動通知書一括発行)
+    protected IBatchFlowCommand call_TokuchoKarisanteiTsuchishoHakkoFlow() {
+        return otherBatchFlow(TOKUCHOKARISANTEITSUSHISHOHAKKO_FLOWID, SubGyomuCode.DBB介護賦課,
+                getParameter().getParameter()).define();
     }
 
 }

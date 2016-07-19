@@ -23,11 +23,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 public interface IKaigoFukaTokuchoHeijunka6BatchMapper {
 
     /**
-     * 平準化前賦課Tempの削除するメソッドです。
-     */
-    void delete平準化前賦課Temp();
-
-    /**
      * 賦課情報を取得するメソッドです。
      *
      * @param parameter TokuchoHeijunkaRokuBatchFuchJohoParameter

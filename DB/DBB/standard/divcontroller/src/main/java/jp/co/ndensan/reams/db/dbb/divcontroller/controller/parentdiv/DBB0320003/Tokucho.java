@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320003
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;

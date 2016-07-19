@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -275,6 +276,25 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * レコードをクリックの場合、主治医意見書作成依頼情報が「主治医医療機関/主治医エリア」に正しく書き込みします。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSelect_dgShinseishaIchiran(ShujiiIkenshoSakuseiIraiDiv div) {
+        dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
+        if (!RString.isNullOrEmpty(row.getIraiKubun())) {
+            div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()),
+                    new ShinseishoKanriNo(row.getShiseishoKanriNo()), SubGyomuCode.DBE認定支援,
+                    row.getShujiiIryoKikanCode(), row.getShujiiIryoKikan(), row.getShujiiCode(), row.getShujii());
+            div.getCcdShujiiIryoKikanAndShujiiInput().setShiteii(row.getShiteiiFlag());
+        } else {
+            div.getCcdShujiiIryoKikanAndShujiiInput().clear();
         }
         return ResponseData.of(div).respond();
     }

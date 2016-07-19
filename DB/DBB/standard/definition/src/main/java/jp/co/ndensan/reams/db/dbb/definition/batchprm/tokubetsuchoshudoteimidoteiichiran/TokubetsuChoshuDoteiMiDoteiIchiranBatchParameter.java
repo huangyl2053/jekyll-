@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -29,4 +30,10 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter extends BatchParam
     private RString 特別徴収開始月;
     private RString 出力対象;
     private YMDHMS 処理日時;
+
+    public TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter toProcessParameter() {
+        return new TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter(
+                処理年度, 捕捉月リスト, 特別徴収開始月, 出力対象, 処理日時
+        );
+    }
 }

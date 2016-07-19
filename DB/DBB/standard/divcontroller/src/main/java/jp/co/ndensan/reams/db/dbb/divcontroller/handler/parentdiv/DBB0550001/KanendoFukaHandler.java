@@ -66,8 +66,8 @@ public class KanendoFukaHandler {
     private static final int NUM_3 = 3;
     private final RString 本算定異動_過年度 = new RString("DBBMN45001");
     private final RString 過年度異動通知書作成 = new RString("DBBMN45002");
-    private final RString 本算定異動_過年度_ボタン = new RString("Element1");
-    private final RString 過年度異動通知書作成_ボタン = new RString("Element2");
+    private final RString 過年度実行ボタン = new RString("Element1");
+    private final RString 過年度通知書作成実行ボタン = new RString("btnRegister");
     private final RString 過年度 = new RString("DBB0550001");
     private final RString 過年度異動通知書 = new RString("DBB0550003");
     private final RString 個人住民税処理状況 = new RString("BbT1901KojinJuminzeiShoriJokyo");
@@ -103,6 +103,21 @@ public class KanendoFukaHandler {
         set算定帳票作成();
         set対象賦課年度();
         set帳票作成個別情報();
+        List<KeyValueDataSource> 対象者 = new ArrayList<>();
+        List<KeyValueDataSource> 口座振替者 = new ArrayList<>();
+        for (NotsuKozaShutsuryokuTaisho notko : NotsuKozaShutsuryokuTaisho.values()) {
+            if (!notko.get名称().equals(全て)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(notko.getコード(), notko.get名称());
+                対象者.add(dataSource);
+            }
+        }
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().setDataSource(対象者);
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().setDataSource(対象者);
+        for (KozaFurikaeOutputType kofu : KozaFurikaeOutputType.values()) {
+            KeyValueDataSource dataSource = new KeyValueDataSource(kofu.getコード(), kofu.get名称());
+            口座振替者.add(dataSource);
+        }
+        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDataSource(口座振替者);
         return 処理日付管理マスタ(shdaList);
     }
 
@@ -125,7 +140,12 @@ public class KanendoFukaHandler {
         }
     }
 
-    private void set抽出開始日時と終了日時(ShoriDateKanri shoriDate) {
+    /**
+     * 抽出開始日時と終了日時
+     *
+     * @param shoriDate ShoriDateKanri
+     */
+    public void set抽出開始日時と終了日時(ShoriDateKanri shoriDate) {
         RString 前日まで = RDate.getNowDate().minusDay(1).wareki().toDateString().concat(RString.HALF_SPACE).
                 concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
@@ -223,7 +243,10 @@ public class KanendoFukaHandler {
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishoFukaNedno().setDataSource(対象賦課年度);
     }
 
-    private void set帳票作成個別情報() {
+    /**
+     * set帳票作成個別情報
+     */
+    public void set帳票作成個別情報() {
         try {
             KanendoKiUtil kanUtil = new KanendoKiUtil();
             KitsukiList 期月リスト = kanUtil.get期月リスト();
@@ -249,27 +272,18 @@ public class KanendoFukaHandler {
             }
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             for (ShutsuryokuKiKoho entity : 出力期) {
-                dataSource.add(new KeyValueDataSource(entity.get期月().get期(), entity.get表示文字列()));
+                if (div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                        getSelectedKey().equals(entity.get期月().get月().getコード())) {
+                    dataSource.add(new KeyValueDataSource(entity.get期月().get月().getコード(), entity.get表示文字列()));
+                    div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDataSource(dataSource);
+                    div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                            getDdlNotsuShutsuryokuKi().setSelectedKey(entity.get期月().get月().getコード());
+                }
             }
-            div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDataSource(dataSource);
+            div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDisabled(true);
         } catch (ApplicationException e) {
             throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
         }
-        List<KeyValueDataSource> 対象者 = new ArrayList<>();
-        List<KeyValueDataSource> 口座振替者 = new ArrayList<>();
-        for (NotsuKozaShutsuryokuTaisho notko : NotsuKozaShutsuryokuTaisho.values()) {
-            if (!notko.get名称().equals(全て)) {
-                KeyValueDataSource dataSource = new KeyValueDataSource(notko.getコード(), notko.get名称());
-                対象者.add(dataSource);
-            }
-        }
-        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().setDataSource(対象者);
-        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().setDataSource(対象者);
-        for (KozaFurikaeOutputType kofu : KozaFurikaeOutputType.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(kofu.getコード(), kofu.get名称());
-            口座振替者.add(dataSource);
-        }
-        div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().setDataSource(口座振替者);
     }
 
     /**
@@ -420,7 +434,16 @@ public class KanendoFukaHandler {
         } else {
             parameter.set納入_ページごとに山分け(ONE_RS);
         }
-        if (過年度異動通知書.equals(ResponseHolder.getMenuID())) {
+        Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        boolean 納入通知書Flag = false;
+        for (Map.Entry<RString, RString> entry : set) {
+            if (納入通知書.equals(entry.getKey())) {
+                納入通知書Flag = true;
+            }
+        }
+        if (過年度異動通知書作成.equals(ResponseHolder.getMenuID())
+                || (納入通知書Flag && 本算定異動_過年度.equals(ResponseHolder.getMenuID()))) {
             parameter.set一括発行起動フラグ(true);
         } else {
             parameter.set一括発行起動フラグ(false);
@@ -460,9 +483,9 @@ public class KanendoFukaHandler {
     public void set実行ボタン(boolean flag) {
         RString メニューID = ResponseHolder.getMenuID();
         if (本算定異動_過年度.equals(メニューID)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(本算定異動_過年度_ボタン, flag);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(過年度実行ボタン, flag);
         } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(過年度異動通知書作成_ボタン, flag);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(過年度通知書作成実行ボタン, flag);
         }
     }
 

@@ -110,6 +110,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
                 SearchResult<GappeiCityJyoho> gcJohoResult
                         = finder.getGappeijohokensaku(RString.EMPTY, parameter, GyomuBunrui.介護事務);
                 if (null == gcJohoResult || null == gcJohoResult.records() || gcJohoResult.records().isEmpty()) {
+                    do新被保険者番号の登録(変換基準日);
                     continue;
                 }
                 LasdecCode 旧市町村コード = gcJohoResult.records().get(0).get旧市町村コード();

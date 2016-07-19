@@ -30,58 +30,29 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final RString 住登外外国人 = new RString("4");
     private static final RString 日本人 = new RString("1");
     private static final RString 住登外日本人 = new RString("3");
-    private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
-    private static final int NUM_8 = 8;
-    private static final int NUM_10 = 10;
-    private static final int NUM_12 = 12;
     private static final int 住所上段長さ = 30;
     private static final RString 厚労省 = new RString("厚労省");
     private static final RString 地共済 = new RString("地共済");
     private static final RString SHORTLINE = new RString("-");
-    private static final List<Integer> 仮徴収月リスト = new ArrayList<>();
-    private static final List<Integer> 本徴収月リスト = new ArrayList<>();
-    private static final List<Integer> 翌年度仮徴収月リスト = new ArrayList<>();
     private static final List<RString> 住民種別日本人 = new ArrayList<>();
     private static final List<RString> 住民種別外国人 = new ArrayList<>();
 
-    private final List<RString> 出力順項目リスト;
-    private final List<RString> 改頁項目リスト;
     private final Association association;
-    private final RString 特徴開始月;
     private final TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定;
 
     /**
      * コンストラクタです。
      *
      * @param 特徴対象一覧未同定
-     * @param 出力順項目リスト List<RString>
-     * @param 改頁項目リスト List<RString>
-     * @param 特徴開始月
      * @param association Association
      */
     public TokubetsuChoshuMidoteiIchiranEditor(
             TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定,
-            List<RString> 出力順項目リスト,
-            List<RString> 改頁項目リスト,
-            RString 特徴開始月,
             Association association) {
         this.特徴対象一覧未同定 = 特徴対象一覧未同定;
-        this.出力順項目リスト = 出力順項目リスト;
-        this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
-        this.特徴開始月 = 特徴開始月;
-        仮徴収月リスト.add(NUM_8);
-        本徴収月リスト.add(NUM_10);
-        本徴収月リスト.add(NUM_12);
-        本徴収月リスト.add(NUM_2);
-        翌年度仮徴収月リスト.add(NUM_4);
-        翌年度仮徴収月リスト.add(NUM_6);
         住民種別日本人.add(日本人);
         住民種別日本人.add(住登外日本人);
         住民種別外国人.add(住登外外国人);
@@ -105,8 +76,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set住所(source);
         set天引先区分(source);
         set出力事由(source);
-        set出力順(source);
-        set改ページ(source);
         return source;
     }
 
@@ -132,23 +101,8 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     }
 
     private void set年金番号と年金コード(TokubetsuChoshuMidoteiIchiranSource source) {
-        if (RString.isNullOrEmpty(特徴開始月)) {
-            return;
-        }
-        Integer 特徴開始月 = Integer.parseInt(this.特徴開始月.toString());
-        if (仮徴収月リスト.contains(特徴開始月)) {
-            source.listList1_1 = this.特徴対象一覧未同定.getKarichoshuKisoNenkinNo();
-            source.listList1_2 = this.特徴対象一覧未同定.getKarichoshuNenkinCode();
-        }
-        if (本徴収月リスト.contains(特徴開始月)) {
-            source.listList1_1 = this.特徴対象一覧未同定.getHonchoshuKisoNenkinNo();
-            source.listList1_2 = this.特徴対象一覧未同定.getHonchoshuKisonenkinCode();
-
-        }
-        if (翌年度仮徴収月リスト.contains(特徴開始月)) {
-            source.listList1_1 = this.特徴対象一覧未同定.getYokunendoKarichoshuKisoNenkinNo();
-            source.listList1_2 = this.特徴対象一覧未同定.getYokunendoKariChoshuKisonenkinCode();
-        }
+        source.listList1_1 = this.特徴対象一覧未同定.getKisoNenkinNo();
+        source.listList1_2 = this.特徴対象一覧未同定.getNenkinCode();
     }
 
     private void set識別コード(TokubetsuChoshuMidoteiIchiranSource source) {
@@ -221,48 +175,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
             return;
         }
         source.listList1_9 = DoteiFuitchiRiyu.toValue(不一致理由コード).get不一致理由名();
-    }
-
-    private void set出力順(TokubetsuChoshuMidoteiIchiranSource source) {
-        if (出力順項目リスト == null || 出力順項目リスト.isEmpty()) {
-            return;
-        }
-        if (出力順項目リスト.size() > NUM_0) {
-            source.sortJunArea1 = 出力順項目リスト.get(NUM_0);
-        }
-        if (出力順項目リスト.size() > NUM_1) {
-            source.sortJunArea2 = 出力順項目リスト.get(NUM_1);
-        }
-        if (出力順項目リスト.size() > NUM_2) {
-            source.sortJunArea3 = 出力順項目リスト.get(NUM_2);
-        }
-        if (出力順項目リスト.size() > NUM_3) {
-            source.sortJunArea4 = 出力順項目リスト.get(NUM_3);
-        }
-        if (出力順項目リスト.size() > NUM_4) {
-            source.sortJunArea5 = 出力順項目リスト.get(NUM_4);
-        }
-    }
-
-    private void set改ページ(TokubetsuChoshuMidoteiIchiranSource source) {
-        if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
-            return;
-        }
-        if (改頁項目リスト.size() > NUM_0) {
-            source.kaiPageArea1 = 改頁項目リスト.get(NUM_0);
-        }
-        if (改頁項目リスト.size() > NUM_1) {
-            source.kaiPageArea2 = 改頁項目リスト.get(NUM_1);
-        }
-        if (改頁項目リスト.size() > NUM_2) {
-            source.kaiPageArea3 = 改頁項目リスト.get(NUM_2);
-        }
-        if (改頁項目リスト.size() > NUM_3) {
-            source.kaiPageArea4 = 改頁項目リスト.get(NUM_3);
-        }
-        if (改頁項目リスト.size() > NUM_4) {
-            source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
-        }
     }
 
 }

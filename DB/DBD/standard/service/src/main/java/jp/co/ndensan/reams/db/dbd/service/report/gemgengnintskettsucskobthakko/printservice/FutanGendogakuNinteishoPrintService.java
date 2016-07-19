@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100020.FutanGendogakuNinteishoReportSource;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -31,26 +34,20 @@ public class FutanGendogakuNinteishoPrintService {
     /**
      * 帳票を出力
      *
-     * @param targets パラメータ
+     * @param target パラメータ
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(List<FutanGendogakuNinteishoItem> targets, ReportManager reportManager) {
+    public void print(FutanGendogakuNinteishoItem target, ReportManager reportManager) {
         FutanGendogakuNinteishoProerty property = new FutanGendogakuNinteishoProerty();
         try (ReportAssembler<FutanGendogakuNinteishoReportSource> assembler = createAssembler(property, reportManager)) {
-            for (FutanGendogakuNinteishoReport report : toReports(targets)) {
-                ReportSourceWriter<FutanGendogakuNinteishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                report.writeBy(reportSourceWriter);
-            }
+            ReportSourceWriter<FutanGendogakuNinteishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),
+                    new FlexibleDate(target.get発行日().toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            target.setNinshoshaSource(ninshoshaSource);
+            FutanGendogakuNinteishoReport report = FutanGendogakuNinteishoReport.createReport(target);
+            report.writeBy(reportSourceWriter);
         }
-    }
-
-    private static List<FutanGendogakuNinteishoReport> toReports(List<FutanGendogakuNinteishoItem> targets) {
-        List<FutanGendogakuNinteishoReport> list = new ArrayList();
-        for (FutanGendogakuNinteishoItem item : targets) {
-            item.set編集後宛先(JushoHenshu.create編集後宛先(item.getIAtesaki(), item.get地方公共団体(), item.get帳票制御共通()));
-            list.add(FutanGendogakuNinteishoReport.createReport(item));
-        }
-        return list;
     }
 
     private <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(IReportProperty<T> property, ReportManager manager) {

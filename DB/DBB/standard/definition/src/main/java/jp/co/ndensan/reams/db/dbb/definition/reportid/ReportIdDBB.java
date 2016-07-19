@@ -327,6 +327,10 @@ public enum ReportIdDBB {
      */
     DBB100009(new ReportId("DBB100009_TokubetsuChoshuKaishiTsuchishoKariOverlayB5Yoko"), new RString("特別徴収開始通知書（仮算定）【B5横・オーバレイタイプ】")),
     /**
+     * 仮算定異動（一括）結果一覧表の帳票ID
+     */
+    DBB200013(new ReportId("DBB200013_KarisanteiIdoKekkaIchiran"), new RString("仮算定異動（一括）結果一覧表")),
+    /**
      * 調定簿（帳票）
      */
     DBB3001(new ReportId("DBB300001_Choteibo"), new RString("介護保険料　調定簿")),

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidogennendotsuchisy
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.ca.cax.entity.db.psm.CaFt703FindNokumiEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;

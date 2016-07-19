@@ -31,8 +31,8 @@ public class UnyoKanriHandler {
     private static final RString CODE_２割負担 = new RString("2");
     private static final RString NAME_１割負担 = new RString("１割負担");
     private static final RString NAME_２割負担 = new RString("２割負担");
-    private static final RString CODE_処理済 = new RString("2");
-    private static final RString CODE_再処理前 = new RString("1");
+    private static final RString CODE_処理済 = new RString("1");
+    private static final RString CODE_再処理前 = new RString("2");
     private static final RString CODE_未処理 = new RString("0");
     private static final RString NAME_処理済 = new RString("処理済");
     private static final RString NAME_再処理前 = new RString("再処理前");

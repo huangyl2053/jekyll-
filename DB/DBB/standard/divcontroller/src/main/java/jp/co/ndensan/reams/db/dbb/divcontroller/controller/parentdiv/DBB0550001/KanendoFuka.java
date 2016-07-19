@@ -111,6 +111,34 @@ public class KanendoFuka {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「抽出日時」ボタンを設定する。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KanendoFukaDiv> onChange_radChushutsuJoken(KanendoFukaDiv div) {
+        FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
+        SubGyomuCode サブ業務コード = SubGyomuCode.DBB介護賦課;
+        RString 処理名 = ShoriName.過年度賦課.get名称();
+        ShoriDateKanri 基準日時 = HonsanteiIdoKanendo.createInstance().
+                getShuchutsuKaishiJikan(調定年度, サブ業務コード, 処理名);
+        getHandler(div).set抽出開始日時と終了日時(基準日時);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「出力期」ボタンを設定する。
+     *
+     * @param div KarisanteiIdoFukaPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KanendoFukaDiv> onChange_ddlShoritsuki(KanendoFukaDiv div) {
+        getHandler(div).set帳票作成個別情報();
+        return ResponseData.of(div).respond();
+    }
+
     private KanendoFukaHandler getHandler(KanendoFukaDiv div) {
         return new KanendoFukaHandler(div);
     }

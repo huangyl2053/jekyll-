@@ -87,7 +87,9 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                     parameter.get納入_口座振替様式(), parameter.get納入_先頭出力(), parameter.get納入_ページ山分け(),
                     parameter.is一括発行起動フラグ(), getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.SYSTEM_TIME));
 
-            if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get決定_チェックボックス())) {
+            if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get決定_チェックボックス())
+                    && (ReportIdDBB.DBB100039.getReportId().getColumnValue().equals(出力帳票.get帳票ID())
+                    || ReportIdDBB.DBB100040.getReportId().getColumnValue().equals(出力帳票.get帳票ID()))) {
                 バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
                 executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
@@ -102,18 +104,34 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
 
                 executeStep(PRINT_KETTEITSUCHISHO_PROCESS);
                 executeStep(INSERT_KETTEITSUCHISHO_PROCESS);
-            } else if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && is変更通知書(出力帳票.get帳票ID())) {
+            } else if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get変更_チェックボックス())
+                    && (ReportIdDBB.DBB100042.getReportId().getColumnValue().equals(出力帳票.get帳票ID())
+                    || ReportIdDBB.DBB100043.getReportId().getColumnValue().equals(出力帳票.get帳票ID()))) {
+                バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
+                executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
-                    バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成_ONE);
+                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS);
+                    executeStep(計算後情報作成_TWO);
+                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS);
+                    executeStep(計算後情報作成_THREE);
+                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS);
                 }
+                executeStep(INSERT_IDOFUKAJOHOFLGFALSE_PROCESS);
                 executeStep(PRINT_HENKOTSUCHISHO_PROCESS);
                 executeStep(INSERT_HENKOTSUCHISHO_PROCESS);
             } else if (納入通知書本算定_帳票分類ID.equals(出力帳票.get帳票分類ID())) {
+                バッチフロー_帳票分類ID = 納入通知書本算定_帳票分類ID.getColumnValue();
+                executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
-                    バッチフロー_帳票分類ID = 納入通知書本算定_帳票分類ID.getColumnValue();
                     executeStep(計算後情報作成_ONE);
+                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS);
+                    executeStep(計算後情報作成_TWO);
+                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS);
+                    executeStep(計算後情報作成_THREE);
+                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS);
                 }
+                executeStep(INSERT_IDOFUKAJOHOFLGFALSE_PROCESS);
                 executeStep(PRINT_NONYUTSUCHISHO_PROCESS);
                 executeStep(INSERT_NONYUTSUCHISHO_PROCESS);
             }
@@ -127,7 +145,13 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
      */
     @Step(システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
-        return simpleBatch(SystemTimeSakuseiKanendoProcess.class).arguments(processParameter).define();
+        KanendoHonsanteifukaProcessParameter para = new KanendoHonsanteifukaProcessParameter(parameter.get調定年度(), parameter.get出力帳票List().get(0),
+                parameter.get決定_対象賦課年度(), parameter.get変更_対象賦課年度(), parameter.get納入_対象賦課年度(),
+                parameter.get決定_発行日(), parameter.get決定_文書番号(), parameter.get変更_発行日(), parameter.get変更_文書番号(),
+                parameter.get変更_対象者(), parameter.get納入_発行日(), parameter.get納入_出力期(), parameter.get納入_対象者(),
+                parameter.get納入_口座振替様式(), parameter.get納入_先頭出力(), parameter.get納入_ページ山分け(),
+                parameter.is一括発行起動フラグ(), YMDHMS.now());
+        return simpleBatch(SystemTimeSakuseiKanendoProcess.class).arguments(para).define();
     }
 
     /**
@@ -316,25 +340,5 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
             return new IdoFukaJohoFlgTrueProcessParameter(getParameter().get調定年度().minusYear(1), 回目３);
         }
         return null;
-    }
-
-    private boolean is決定通知書(ReportId 帳票ID) {
-
-        if (ReportIdDBB.DBB100039.getReportId().equals(帳票ID)) {
-            return true;
-        } else if (ReportIdDBB.DBB100040.getReportId().equals(帳票ID)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean is変更通知書(RString 帳票ID) {
-
-        if (ReportIdDBB.DBB100042.getReportId().equals(帳票ID)) {
-            return true;
-        } else if (ReportIdDBB.DBB100043.getReportId().equals(帳票ID)) {
-            return true;
-        }
-        return false;
     }
 }

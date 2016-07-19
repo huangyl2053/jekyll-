@@ -37,7 +37,7 @@
      "layoutName": "DBD1090002",
      "layoutTitle": "減免減額認定証・決定通知書個別発行",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

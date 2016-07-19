@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV4001JukyushaDaichoEntity;
 
 /**
  * 介護認定処理情報Entityのクラスです。
@@ -32,7 +32,7 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
     private DbT5911ShujiiIryoKikanJohoEntity 主治医医療機関情報認定Entity;
     private DbT5912ShujiiJohoEntity 主治医情報認定Entity;
     private DbT4101NinteiShinseiJohoEntity 要介護認定申請情報受給Entity;
-    private DbV4001JukyushaDaichoEntity 受給者台帳Entity;
+    private DbT4001JukyushaDaichoEntity 受給者台帳Entity;
     private DbT4910NinteichosaItakusakiJohoEntity 認定調査委託先情報Entity;
     private DbT4911ShujiiIryoKikanJohoEntity 主治医医療機関情報受給Entity;
     private DbT4912ShujiiJohoEntity 主治医情報受給Entity;
@@ -48,7 +48,7 @@ public class YokaigoNinteiJohoEntity implements Cloneable, Serializable {
         主治医医療機関情報認定Entity = new DbT5911ShujiiIryoKikanJohoEntity();
         主治医情報認定Entity = new DbT5912ShujiiJohoEntity();
         要介護認定申請情報受給Entity = new DbT4101NinteiShinseiJohoEntity();
-        受給者台帳Entity = new DbV4001JukyushaDaichoEntity();
+        受給者台帳Entity = new DbT4001JukyushaDaichoEntity();
         認定調査委託先情報Entity = new DbT4910NinteichosaItakusakiJohoEntity();
         主治医医療機関情報受給Entity = new DbT4911ShujiiIryoKikanJohoEntity();
         主治医情報受給Entity = new DbT4912ShujiiJohoEntity();

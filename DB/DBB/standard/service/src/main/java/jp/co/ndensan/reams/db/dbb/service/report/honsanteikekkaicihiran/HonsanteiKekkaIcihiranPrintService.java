@@ -72,8 +72,9 @@ public class HonsanteiKekkaIcihiranPrintService {
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             Long 出力順ID) {
-
-        HonsanteiKekkaIcihiranProperty property = new HonsanteiKekkaIcihiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類Id, 出力順ID);
+        HonsanteiKekkaIcihiranProperty property = new HonsanteiKekkaIcihiranProperty(並び順);
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();

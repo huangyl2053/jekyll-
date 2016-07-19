@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -135,6 +135,10 @@ public class KaigoAtenaJohoHandler {
         if (!資格喪失フラグ) {
             RString 捕捉月 = get捕捉月(年度内処理済み連番, 最新介護徴収方法情報データ);
             div.setCatchMoon(捕捉月);
+            TokuchoStartMonth 特別徴収開始月 = get特別徴収開始月(捕捉月);
+            if (特別徴収開始月 != null) {
+                div.getTxtKaishiTsuki().setValue(特別徴収開始月.getコード());
+            }
             NenkinTokuchoKaifuJoho 特徴の情報
                     = 特別徴収対象者登録Manager.getTokuchoTaishosha(賦課年度, 捕捉月, 基礎年金番号Old, 年金コードOld);
             set年金情報パネル(特徴の情報);
@@ -145,10 +149,6 @@ public class KaigoAtenaJohoHandler {
     private void set年金情報パネル(NenkinTokuchoKaifuJoho 特徴の情報) {
         if (null == 特徴の情報) {
             return;
-        }
-        TokuchoStartMonth 特別徴収開始月 = get特別徴収開始月(特徴の情報.get捕捉月());
-        if (特別徴収開始月 != null) {
-            div.getTxtKaishiTsuki().setValue(特別徴収開始月.get名称());
         }
         div.getTxtHosokuTsuki().setValue(特徴の情報.get捕捉月());
         div.getTxtShimeiKana().setValue(特徴の情報.getDTカナ氏名());

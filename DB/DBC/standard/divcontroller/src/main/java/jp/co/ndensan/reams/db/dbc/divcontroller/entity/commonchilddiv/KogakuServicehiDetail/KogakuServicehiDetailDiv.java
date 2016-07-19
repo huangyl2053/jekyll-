@@ -8,13 +8,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuSer
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.IKogakuKyufuTaishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.IShiharaiHohoJyohoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -52,6 +55,8 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     private TextBoxNum txtKanriBango;
     @JsonProperty("tabKogakuServicehiDetail")
     private tabKogakuServicehiDetailDiv tabKogakuServicehiDetail;
+    @JsonProperty("KogakuServicehiDetailEntity")
+    private RString KogakuServicehiDetailEntity;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -129,6 +134,24 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     @JsonProperty("tabKogakuServicehiDetail")
     public void setTabKogakuServicehiDetail(tabKogakuServicehiDetailDiv tabKogakuServicehiDetail) {
         this.tabKogakuServicehiDetail = tabKogakuServicehiDetail;
+    }
+
+    /*
+     * getKogakuServicehiDetailEntity
+     * @return KogakuServicehiDetailEntity
+     */
+    @JsonProperty("KogakuServicehiDetailEntity")
+    public RString getKogakuServicehiDetailEntity() {
+        return KogakuServicehiDetailEntity;
+    }
+
+    /*
+     * setKogakuServicehiDetailEntity
+     * @param KogakuServicehiDetailEntity KogakuServicehiDetailEntity
+     */
+    @JsonProperty("KogakuServicehiDetailEntity")
+    public void setKogakuServicehiDetailEntity(RString KogakuServicehiDetailEntity) {
+        this.KogakuServicehiDetailEntity = KogakuServicehiDetailEntity;
     }
 
     /*
@@ -600,5 +623,195 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
         ValidationMessageControlPairs validPairs = KogakuServicehiDetailDivValidationHandler.
                 of(this).受付日と決定日のチェック();
         return validPairs;
+    }
+
+    /**
+     * 画面初期化データします。
+     *
+     * @return KougakuSabisuhiShousaiNaiyouResult
+     */
+    @Override
+    public KougakuSabisuhiShousaiNaiyouResult get画面初期化データ() {
+        return KogakuServicehiDetailDivHandler.of(this).get画面初期化データ();
+    }
+
+    /**
+     * 申請日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate get申請日() {
+        return KogakuServicehiDetailDivHandler.of(this).get申請日();
+    }
+
+    /**
+     * 申請者区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get申請者区分() {
+        return KogakuServicehiDetailDivHandler.of(this).get申請者区分();
+    }
+
+    /**
+     * 申請者区分を取得します。
+     *
+     * @return HokenshaNo
+     */
+    @Override
+    public RString get証記載保険者番号() {
+        return KogakuServicehiDetailDivHandler.of(this).get証記載保険者番号();
+    }
+
+    /**
+     * 国保連再送を取得します。
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is国保連再送() {
+        return KogakuServicehiDetailDivHandler.of(this).is国保連再送();
+    }
+
+    /**
+     * 氏名_漢字を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get氏名_漢字() {
+        return KogakuServicehiDetailDivHandler.of(this).get氏名_漢字();
+    }
+
+    /**
+     * 氏名_カナを取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get氏名_カナ() {
+        return KogakuServicehiDetailDivHandler.of(this).get氏名_カナ();
+    }
+
+    /**
+     * 電話番号を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get電話番号() {
+        return KogakuServicehiDetailDivHandler.of(this).get電話番号();
+    }
+
+    /**
+     * 申請理由を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get申請理由() {
+        return KogakuServicehiDetailDivHandler.of(this).get申請理由();
+    }
+
+    /**
+     * 支払金額合計を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public Decimal get支払金額合計() {
+        return KogakuServicehiDetailDivHandler.of(this).get支払金額合計();
+    }
+
+    /**
+     * 受付日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate get受付日() {
+        return KogakuServicehiDetailDivHandler.of(this).get受付日();
+    }
+
+    /**
+     * 本人支払額を取得します。
+     *
+     * @return Decimal
+     */
+    @Override
+    public Decimal get本人支払額() {
+        return KogakuServicehiDetailDivHandler.of(this).get本人支払額();
+    }
+
+    /**
+     * 決定日を取得します。
+     *
+     * @return RDate
+     */
+    @Override
+    public RDate get決定日() {
+        return KogakuServicehiDetailDivHandler.of(this).get決定日();
+    }
+
+    /**
+     * 支給区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get支給区分() {
+        return KogakuServicehiDetailDivHandler.of(this).get支給区分();
+    }
+
+    /**
+     * 審査方法区分を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get審査方法区分() {
+        return KogakuServicehiDetailDivHandler.of(this).get審査方法区分();
+    }
+
+    /**
+     * 世帯集約番号を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get世帯集約番号() {
+        return KogakuServicehiDetailDivHandler.of(this).get世帯集約番号();
+    }
+
+    /**
+     * 支給金額を取得します。
+     *
+     * @return Decimal
+     */
+    @Override
+    public Decimal get支給金額() {
+        return KogakuServicehiDetailDivHandler.of(this).get支給金額();
+    }
+
+    /**
+     * 高額自動償還を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get高額自動償還() {
+        return KogakuServicehiDetailDivHandler.of(this).get高額自動償還();
+    }
+
+    /**
+     * 支給しない理由を取得します。
+     *
+     * @return RString
+     */
+    @Override
+    public RString get支給しない理由() {
+        return KogakuServicehiDetailDivHandler.of(this).get支給しない理由();
     }
 }

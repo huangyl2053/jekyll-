@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoInfo;
@@ -53,6 +52,7 @@ import jp.co.ndensan.reams.db.dbb.service.report.kaigohokenryogaku.KaigoHokenryo
 import jp.co.ndensan.reams.db.dbb.service.report.ketteitsuchisho.KaigoHokenHokenryogakuKetteiTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchisho.notsu.NonyuTsuchiShoJohoFactory;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -361,7 +361,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         if (帳票制御共通 != null && !RString.isNullOrEmpty(帳票制御共通.get定型文文字サイズ())) {
             定型文文字サイズ = Integer.parseInt(帳票制御共通.get定型文文字サイズ().toString());
         }
-        //TODO QA912通知書定型文の取得
         RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
                 特別徴収開始通知書本算定_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, FlexibleDate.getNowDate());
         RString 宛名連番 = RString.EMPTY;
@@ -540,7 +539,6 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
             return;
         }
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(決定変更通知書_帳票分類ID);
-        //TODO QA912 「通知書定型文の取得」用メソッドが帳票共通クラスReportUtilに存在しない。
         int 定型文文字サイズ = 0;
         if (帳票制御共通 != null && !RString.isNullOrEmpty(帳票制御共通.get定型文文字サイズ())) {
             定型文文字サイズ = Integer.parseInt(帳票制御共通.get定型文文字サイズ().toString());
@@ -1290,40 +1288,40 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         RString 設定値 = RString.EMPTY;
         RDate 運用日 = RDate.getNowDate();
         switch (月) {
-            case INT_1:
+            case INT_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_2:
+            case INT_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_3:
+            case INT_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_4:
+            case INT_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_5:
+            case INT_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_6:
+            case INT_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_7:
+            case INT_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_8:
+            case INT_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_9:
+            case INT_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_10:
+            case INT_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_11:
+            case INT_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_12:
+            case INT_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case INT_14:
@@ -1946,12 +1944,4 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
         }
         return 出力順グループ名;
     }
-
-    private RString nullTOEmpty(RString 項目) {
-        if (項目 == null || 項目.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return 項目;
-    }
-
 }

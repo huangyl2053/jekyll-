@@ -30,6 +30,9 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManage
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -73,6 +76,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onLoad(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
+        }
+
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (model != null) {
             getHandler(div).initialize(model.get申請書管理番号リスト(), model.get遷移元画面区分());
@@ -102,7 +110,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onChange_radJyushinKikan(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         getHandler(div).setRadJyushinKikan();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).clearValidateMessage().respond();
     }
 
     /**
@@ -113,7 +121,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onChange_radTeishutsuKigen(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         getHandler(div).setRadTeishutsuKigen();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).clearValidateMessage().respond();
     }
 
     /**
@@ -129,9 +137,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             }
             if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+                RealInitialLocker.release(排他キー);
                 return ResponseData.of(div).dialogOKClose();
             }
         } else {
+            LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -171,6 +183,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             response.data = reportManager.publish();
         }
         updateData(div);
+        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+        RealInitialLocker.release(排他キー);
         return response;
     }
 
@@ -405,7 +419,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             printService.print要介護認定調査票差異チェック票_片面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            printService.print要介護認定調査票差異チェック票_両面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            printService.print要介護認定調査票差異チェック票_両面右(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            printService.print要介護認定調査票差異チェック票_両面左(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         }
     }
 

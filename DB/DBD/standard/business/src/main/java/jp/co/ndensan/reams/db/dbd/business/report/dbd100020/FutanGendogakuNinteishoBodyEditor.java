@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100020;
 
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.ChohyoSeigyoHanyoKeysDBD100020;
 import jp.co.ndensan.reams.db.dbd.business.report.hanyo.HokenshaNameOutput;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubetsu;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
@@ -16,9 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -39,6 +36,15 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     private final RString ハイフン = new RString("-");
     private final RString 金額単位 = new RString("円");
     private final RString ホシ = new RString("＊");
+    private final static int INDEX_0 = 0;
+    private final static int INDEX_1 = 1;
+    private final static int INDEX_2 = 2;
+    private final static int INDEX_3 = 3;
+    private final static int INDEX_4 = 4;
+    private final static int INDEX_5 = 5;
+    private final static int INDEX_6 = 6;
+    private final static int INDEX_7 = 7;
+    private final static int INDEX_9 = 9;
     private final FutanGendogakuNinteishoItem item;
 
     /**
@@ -62,10 +68,10 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     }
 
     private FutanGendogakuNinteishoReportSource bodyEdit(FutanGendogakuNinteishoReportSource source) {
-        source.kofuGengo = item.get交付日().wareki().toDateString().substring(1, 2);
-        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(2, 4);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(5, 7);
-        source.kofuDD = item.get交付日().wareki().toDateString().substring(8, 10);
+        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_6, INDEX_6);
+        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
         source.hihokenshaNo = item.get負担限度額認定().get被保険者番号().getColumnValue();
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
@@ -73,7 +79,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
 
-        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(1, 2);
+        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
             if (new RString("明治").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
@@ -88,18 +94,18 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
             }
-            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(2, 4);
-            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(5, 7);
-            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(8, 10);
+            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
+            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
+            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_7, INDEX_9);
         } else {
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
             RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                     FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(2, 5);
-            source.birthMM = 生年月日.substring(5, 8);
-            source.birthDD = 生年月日.substring(8, 11);
+            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_3);
+            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
+            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
         }
         if (Gender.MALE.equals(item.getIKojin().get性別())) {
             source.man = RString.EMPTY;
@@ -109,24 +115,24 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.woman = RString.EMPTY;
         }
 
-        source.tekiyoGengo = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(1, 2);
-        source.tekiyoYYYY = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(2, 4);
-        source.tekiyoMM = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(5, 7);
-        source.tekiyoDD = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(8, 10);
-        source.yukoGengo = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(1, 2);
-        source.yukoYYYY = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(2, 4);
-        source.yukoMM = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(5, 7);
-        source.yukoDD = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(8, 10);
+        source.tekiyoGengo = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.tekiyoYYYY = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.tekiyoMM = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.tekiyoDD = item.get負担限度額認定().get適用開始年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
+        source.yukoGengo = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.yukoYYYY = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.yukoMM = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.yukoDD = item.get負担限度額認定().get適用終了年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
 
         setKyojuhiName(source, item);
         setFutanGaku(source, item);
 
-        source.hokenshaNo1 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(0, 1);
-        source.hokenshaNo2 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(1, 2);
-        source.hokenshaNo3 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(2, 3);
-        source.hokenshaNo4 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(3, 4);
-        source.hokenshaNo5 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(4, 5);
-        source.hokenshaNo6 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(5, 6);
+        source.hokenshaNo1 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
+        source.hokenshaNo2 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
+        source.hokenshaNo3 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
+        source.hokenshaNo4 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
+        source.hokenshaNo5 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
+        source.hokenshaNo6 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100020.保険者名表示.name()).equals(entity.getKomokuName())
@@ -134,7 +140,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
                 source.hokenshaJusho = DbBusinessConfig.get(ConfigNameDBU.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
                 source.hokenshaName1 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
                 source.hokenshaTelNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-                source.denshiKoin = getCompNinshosha(item).denshiKoin;
+                source.denshiKoin = item.getNinshoshaSource().denshiKoin;
                 break;
             }
         }
@@ -265,10 +271,5 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
         return new EditedKojin(kojin, 帳票制御共通);
-    }
-
-    private static NinshoshaSource getCompNinshosha(FutanGendogakuNinteishoItem item) {
-        return NinshoshaSourceBuilderFactory.createInstance(
-                item.get認証者(), item.get地方公共団体(), item.getイメージファイルパス(), item.get交付日()).buildSource();
     }
 }

@@ -11,8 +11,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.ChoteiJiyuParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.FukaJohoList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.CalculateChoteiParameter;
@@ -27,8 +25,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiTaishoParam
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiZengoFuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.NendobunFukaList;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
@@ -58,22 +54,27 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KyokaisoKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -208,27 +209,24 @@ public class FukaKeisan {
     public List<FukaShikakuPair> pair賦課With資格(FlexibleYear 賦課年度, List<NendobunFukaList> 年度分賦課リスト,
             List<HihokenshaDaicho> 資格の情報リスト) {
         List<FukaShikakuPair> 賦課の情報_資格の情報ペアのリスト = new ArrayList<>();
-        if (資格の情報リスト.isEmpty()) {
-            throw new SystemException(エラーメッセージ.toString());
-        }
         List<HihokenshaDaicho> 有効な資格の情報リスト = get有効な資格の情報(資格の情報リスト, 賦課年度);
-
-        if (有効な資格の情報リスト.isEmpty()) {
-            throw new SystemException(エラーメッセージ.toString());
-        }
 
         Collections.sort(有効な資格の情報リスト, new Comparator<HihokenshaDaicho>() {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                int flag = o2.get第1号資格取得年月日().compareTo(o1.get第1号資格取得年月日());
-                return flag;
+                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
+                    return 1;
+                }
+                return -1;
             }
         });
         Collections.sort(年度分賦課リスト, new Comparator<NendobunFukaList>() {
             @Override
             public int compare(NendobunFukaList o1, NendobunFukaList o2) {
-                int flag = o1.get賦課期日().compareTo(o2.get賦課期日());
-                return flag;
+                if (o1.get賦課期日().isBefore(o2.get賦課期日())) {
+                    return 1;
+                }
+                return -1;
             }
         });
 
@@ -241,6 +239,13 @@ public class FukaKeisan {
                 賦課の情報_資格の情報ペア.set年度分賦課リスト(年度分賦課リスト.get(i));
                 賦課の情報_資格の情報ペアのリスト.add(賦課の情報_資格の情報ペア);
             }
+            for (int i = 年度分賦課リスト.size(); i < 有効な資格の情報リスト.size(); i++) {
+                FukaShikakuPair 賦課の情報_資格の情報ペア = new FukaShikakuPair();
+                賦課の情報_資格の情報ペア.set被保険者番号(有効な資格の情報リスト.get(i).get被保険者番号());
+                賦課の情報_資格の情報ペア.set識別コード(有効な資格の情報リスト.get(i).get識別コード());
+                賦課の情報_資格の情報ペア.set資格の情報(有効な資格の情報リスト.get(i));
+                賦課の情報_資格の情報ペアのリスト.add(賦課の情報_資格の情報ペア);
+            }
         } else {
             throw new SystemException(エラーメッセージ.toString());
         }
@@ -251,9 +256,14 @@ public class FukaKeisan {
         Collections.sort(資格の情報リスト, new Comparator<HihokenshaDaicho>() {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                int flag = o2.get第1号資格取得年月日().compareTo(o1.get第1号資格取得年月日());
+                int flag = 0;
+                if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())) {
+                    flag = 1;
+                }
                 if (flag == 0) {
-                    flag = o2.get異動日().compareTo(o1.get異動日());
+                    if (o2.get異動日().isBefore(o1.get異動日())) {
+                        flag = 1;
+                    }
                     if (flag == 0) {
                         flag = o2.get枝番().compareTo(o1.get枝番());
                     }
@@ -272,18 +282,21 @@ public class FukaKeisan {
         }
         FlexibleDate 本年度開始日 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課年度).toDateString());
         FlexibleDate 本年度終了日 = new FlexibleDate(賦課年度.plusYear(INT_1).getYearValue(), Month.MARCH.getValue(), DAY);
-        FlexibleDate 資格喪失日 = new FlexibleDate(賦課年度.getYearValue(), Month.MAY.getValue(), DAY);
+        FlexibleDate 本年度資格喪失日 = new FlexibleDate(賦課年度.getYearValue(), Month.MAY.getValue(), INT_1);
         for (HihokenshaDaicho 資格の情報 : tmpList) {
-            if ((資格の情報.get第1号資格取得年月日() == null || 資格の情報.get第1号資格取得年月日().isEmpty()
-                    || 資格の情報.get第1号資格取得年月日().isBeforeOrEquals(本年度開始日))
-                    && ((資格の情報.get資格喪失年月日() == null || 資格の情報.get資格喪失年月日().isEmpty())
-                    || 本年度終了日.isBeforeOrEquals(資格の情報.get資格喪失年月日()))) {
+            FlexibleDate 第1号資格取得日 = 資格の情報.get第1号資格取得年月日();
+            if (資格の情報.get第1号資格取得年月日() == null || 資格の情報.get第1号資格取得年月日().isEmpty()) {
+                第1号資格取得日 = FlexibleDate.MIN;
+            }
+            FlexibleDate 資格喪失日 = 資格の情報.get資格喪失年月日();
+            if (資格の情報.get資格喪失年月日() == null || 資格の情報.get資格喪失年月日().isEmpty()) {
+                資格喪失日 = FlexibleDate.MAX;
+            }
+            if (第1号資格取得日.isBeforeOrEquals(本年度開始日) && 本年度終了日.isBeforeOrEquals(資格喪失日)) {
                 有効な資格の情報リスト.add(資格の情報);
-            } else if (資格の情報.get第1号資格取得年月日().isBeforeOrEquals(本年度終了日)
-                    && 本年度開始日.isBeforeOrEquals(資格の情報.get第1号資格取得年月日())) {
+            } else if (本年度開始日.isBefore(第1号資格取得日) && 第1号資格取得日.isBefore(本年度終了日)) {
                 有効な資格の情報リスト.add(資格の情報);
-            } else if (資格喪失日.isBeforeOrEquals(資格の情報.get資格喪失年月日())
-                    && 資格の情報.get資格喪失年月日().isBeforeOrEquals(本年度終了日)) {
+            } else if (本年度資格喪失日.isBeforeOrEquals(資格喪失日) && 資格喪失日.isBefore(本年度終了日)) {
                 有効な資格の情報リスト.add(資格の情報);
             }
         }
@@ -307,7 +320,7 @@ public class FukaKeisan {
         }
         List<FukaShikakuPair> 賦課の情報_資格の情報ペアリスト = param.get賦課の情報_資格の情報ペアのリスト();
         for (FukaShikakuPair pair : 賦課の情報_資格の情報ペアリスト) {
-            if (is状況が変化(pair.get年度分賦課リスト().get最新賦課の情報(), pair.get資格の情報(), param)) {
+            if (is状況が変化(pair.get年度分賦課リスト(), pair.get資格の情報(), param)) {
                 出力用ペアリスト.add(pair);
             }
         }
@@ -316,7 +329,10 @@ public class FukaKeisan {
 
     private boolean is生活保護(KoseiTaishoParameter param) {
         for (FukaShikakuPair pair : param.get賦課の情報_資格の情報ペアのリスト()) {
-            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get最新賦課の情報();
+            if (pair.get年度分賦課リスト() == null) {
+                return false;
+            }
+            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get現年度();
             if (is受給者として賦課(賦課の情報.get生保開始日())) {
                 if (!is年度内に受給期間あり_生保(param.get生保の情報のリスト(), param.get賦課年度())) {
                     return true;
@@ -331,7 +347,10 @@ public class FukaKeisan {
 
     private boolean is老齢福祉年金(KoseiTaishoParameter param) {
         for (FukaShikakuPair pair : param.get賦課の情報_資格の情報ペアのリスト()) {
-            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get最新賦課の情報();
+            if (pair.get年度分賦課リスト() == null) {
+                return false;
+            }
+            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get現年度();
             if (is受給者として賦課(賦課の情報.get老年開始日())) {
                 if (!is年度内に受給期間あり_福祉(param.get老福の情報のリスト(), param.get賦課年度())) {
                     return true;
@@ -346,7 +365,10 @@ public class FukaKeisan {
 
     private boolean is境界層(KoseiTaishoParameter param) {
         for (FukaShikakuPair pair : param.get賦課の情報_資格の情報ペアのリスト()) {
-            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get最新賦課の情報();
+            if (pair.get年度分賦課リスト() == null) {
+                return false;
+            }
+            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get現年度();
             if (is境界層該当として賦課(賦課の情報.get境界層区分())) {
                 if (!is年度内に適用期間あり(param.get境界層の情報のリスト(), param.get賦課年度())) {
                     return true;
@@ -370,17 +392,21 @@ public class FukaKeisan {
             return false;
         }
         for (SeikatsuHogoJukyusha entity : 生保の情報リスト) {
-            if (entity.get受給開始日() == null || entity.get受給開始日().isEmpty()) {
-                return false;
-            } else if (entity.get受給開始日().isBefore(本年度開始日)
-                    && entity.get受給廃止日() != null && !entity.get受給廃止日().isEmpty()
-                    && entity.get受給廃止日().isBefore(本年度開始日)) {
-                return false;
-            } else if (本年度終了日.isBefore(entity.get受給開始日())) {
-                return false;
+            FlexibleDate 受給開始日 = entity.get受給開始日();
+            FlexibleDate 受給廃止日 = entity.get受給廃止日();
+            if (受給開始日 == null || 受給開始日.isEmpty()) {
+                受給開始日 = FlexibleDate.MIN;
+            }
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                return true;
+            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean is年度内に受給期間あり_福祉(List<RoreiFukushiNenkinJukyusha> 老福の情報のリスト,
@@ -390,18 +416,23 @@ public class FukaKeisan {
         if (老福の情報のリスト == null || 老福の情報のリスト.isEmpty()) {
             return false;
         }
+
         for (RoreiFukushiNenkinJukyusha entity : 老福の情報のリスト) {
-            if (entity.get受給開始年月日() == null || entity.get受給開始年月日().isEmpty()) {
-                return false;
-            } else if (entity.get受給開始年月日().isBefore(本年度開始日)
-                    && (entity.get受給終了年月日() != null && !entity.get受給終了年月日().isEmpty()
-                    && entity.get受給終了年月日().isBefore(本年度開始日))) {
-                return false;
-            } else if (本年度終了日.isBeforeOrEquals(entity.get受給開始年月日())) {
-                return false;
+            FlexibleDate 受給開始日 = entity.get受給開始年月日();
+            FlexibleDate 受給廃止日 = entity.get受給終了年月日();
+            if (受給開始日 == null || 受給開始日.isEmpty()) {
+                受給開始日 = FlexibleDate.MIN;
+            }
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                return true;
+            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean is境界層該当として賦課(RString 境界層区分) {
@@ -416,45 +447,46 @@ public class FukaKeisan {
             return false;
         }
         for (KyokaisoGaitosha entity : 境界層の情報のリスト) {
-            if (entity.get適用開始年月日() == null || entity.get適用開始年月日().isEmpty()) {
-                return false;
-            } else if (entity.get適用開始年月日().isBefore(本年度開始日)
-                    && (entity.get適用終了年月日() != null && !entity.get適用終了年月日().isEmpty()
-                    || entity.get適用終了年月日().isBefore(本年度開始日))) {
-                return false;
-            } else if (本年度終了日.isBeforeOrEquals(entity.get適用開始年月日())) {
-                return false;
+            FlexibleDate 受給開始日 = entity.get適用開始年月日();
+            FlexibleDate 受給廃止日 = entity.get適用終了年月日();
+            if (受給開始日 == null || 受給開始日.isEmpty()) {
+                受給開始日 = FlexibleDate.MIN;
             }
-        }
-        return true;
-    }
-
-    private boolean is状況が変化(FukaJoho 賦課の情報, HihokenshaDaicho 資格の情報, KoseiTaishoParameter param) {
-        if (賦課の情報 == null) {
-            return true;
-        } else {
-            if (賦課の情報.get通知書番号().equals(param.get通知書番号())) {
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                 return true;
-            }
-            for (SetaiinShotoku setai : param.get世帯員所得情報List()) {
-                if (HonninKubun.本人.getCode().equals(setai.get本人区分())
-                        && isRString変更(賦課の情報.get課税区分(), setai.get課税区分_住民税減免前())) {
-                    return true;
-                } else if (HonninKubun.世帯構成員.getCode().equals(setai.get本人区分())
-                        && isRString変更(賦課の情報.get世帯課税区分(), setai.get課税区分_住民税減免前())) {
-                    return true;
-                }
-                if (isDecimal変更(賦課の情報.get合計所得金額(), setai.get合計所得金額())
-                        || isDecimal変更(賦課の情報.get公的年金収入額(), setai.get年金収入額())) {
-                    return true;
-                }
-            }
-            if (isFlexibleDate変更(賦課の情報.get資格取得日(), 資格の情報.get資格取得年月日())
-                    || isFlexibleDate変更(賦課の情報.get資格喪失日(), 資格の情報.get資格喪失年月日())) {
+            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean is状況が変化(NendobunFukaList 年度分賦課リスト, HihokenshaDaicho 資格の情報, KoseiTaishoParameter param) {
+        if (年度分賦課リスト == null || 年度分賦課リスト.get現年度() == null) {
+            return true;
+        }
+        FukaJoho 賦課の情報 = 年度分賦課リスト.get現年度();
+        if (賦課の情報.get通知書番号().equals(param.get通知書番号())) {
+            return true;
+        }
+        for (SetaiinShotoku setai : param.get世帯員所得情報List()) {
+            if (HonninKubun.本人.getCode().equals(setai.get本人区分())
+                    && isRString変更(賦課の情報.get課税区分(), setai.get課税区分_住民税減免前())) {
+                return true;
+            } else if (HonninKubun.世帯構成員.getCode().equals(setai.get本人区分())
+                    && isRString変更(賦課の情報.get世帯課税区分(), setai.get課税区分_住民税減免前())) {
+                return true;
+            }
+            if (isDecimal変更(賦課の情報.get合計所得金額(), setai.get合計所得金額())
+                    || isDecimal変更(賦課の情報.get公的年金収入額(), setai.get年金収入額())) {
+                return true;
+            }
+        }
+        return isFlexibleDate変更(賦課の情報.get資格取得日(), 資格の情報.get資格取得年月日())
+                || isFlexibleDate変更(賦課の情報.get資格喪失日(), 資格の情報.get資格喪失年月日());
     }
 
     /**
@@ -912,21 +944,26 @@ public class FukaKeisan {
      * @return FlexibleDate
      */
     public FlexibleDate findOut賦課基準日(FlexibleYear 賦課年度, HihokenshaDaicho 資格の情報) {
-        FlexibleDate 年度_0331 = new FlexibleDate(賦課年度.getYearValue(), Month.MARCH.getValue(), DAY);
+        FlexibleDate 年度_0331 = new FlexibleDate(賦課年度.plusYear(INT_1).getYearValue(), Month.MARCH.getValue(), DAY);
         FlexibleDate 年度_0401 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課年度).toDateString());
         if (資格の情報 == null) {
             throw new IllegalArgumentException();
         }
-        if (年度_0331.isBefore(資格の情報.get第1号資格取得年月日())) {
+        FlexibleDate 資格取得日 = 資格の情報.get第1号資格取得年月日();
+        if (資格取得日 == null || 資格取得日.isEmpty()) {
+            資格取得日 = FlexibleDate.MIN;
+        }
+        FlexibleDate 資格喪失日 = 資格の情報.get資格喪失年月日();
+        if (資格喪失日 == null || 資格喪失日.isEmpty()) {
+            資格喪失日 = FlexibleDate.MAX;
+        }
+
+        if (年度_0331.isBefore(資格取得日) || 資格喪失日.isBefore(年度_0401)) {
             throw new IllegalArgumentException();
-        } else if (資格の情報.get資格喪失年月日() != null
-                && !資格の情報.get資格喪失年月日().isEmpty()
-                && 資格の情報.get資格喪失年月日().isBefore(年度_0401)) {
-            throw new IllegalArgumentException();
-        } else if (資格の情報.get第1号資格取得年月日().isBefore(年度_0401)) {
+        } else if (資格取得日.isBefore(年度_0401)) {
             return 年度_0401;
         } else {
-            return 資格の情報.get第1号資格取得年月日();
+            return 資格取得日;
         }
     }
 
@@ -991,14 +1028,17 @@ public class FukaKeisan {
         }
         List<SeikatsuHogoJukyusha> 生活保護の情報のリスト = new ArrayList<>();
         for (SeikatsuHogoJukyusha entity : 生保情報のリスト) {
-            if (entity.get受給開始日().isBeforeOrEquals(本年度終了日)
-                    && (entity.get受給廃止日() == null || entity.get受給廃止日().isEmpty()
-                    || 本年度開始日.isBeforeOrEquals(entity.get受給廃止日()))) {
+            FlexibleDate 受給開始日 = entity.get受給開始日();
+            FlexibleDate 受給廃止日 = entity.get受給廃止日();
+            if (受給開始日 == null || 受給開始日.isEmpty()) {
+                受給開始日 = FlexibleDate.MIN;
+            }
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                 生活保護の情報のリスト.add(entity);
-            } else if (本年度終了日.isBeforeOrEquals(entity.get受給開始日())
-                    && entity.get受給開始日().isBefore(本年度開始日)) {
-                生活保護の情報のリスト.add(entity);
-            } else if (entity.get受給廃止日().isBeforeOrEquals(本年度開始日)) {
+            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
                 生活保護の情報のリスト.add(entity);
             }
         }
@@ -1041,14 +1081,17 @@ public class FukaKeisan {
         }
         List<RoreiFukushiNenkinJukyusha> 老齢福祉の情報リスト = new ArrayList<>();
         for (RoreiFukushiNenkinJukyusha entity : 老福の情報リスト) {
-            if (entity.get受給開始年月日().isBeforeOrEquals(本年度終了日)
-                    && (entity.get受給終了年月日() == null || entity.get受給終了年月日().isEmpty()
-                    || 本年度開始日.isBeforeOrEquals(entity.get受給終了年月日()))) {
+            FlexibleDate 受給開始日 = entity.get受給開始年月日();
+            FlexibleDate 受給廃止日 = entity.get受給終了年月日();
+            if (受給開始日 == null || 受給開始日.isEmpty()) {
+                受給開始日 = FlexibleDate.MIN;
+            }
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                 老齢福祉の情報リスト.add(entity);
-            } else if (本年度終了日.isBeforeOrEquals(entity.get受給開始年月日())
-                    && entity.get受給開始年月日().isBefore(本年度開始日)) {
-                老齢福祉の情報リスト.add(entity);
-            } else if (entity.get受給終了年月日().isBeforeOrEquals(本年度開始日)) {
+            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
                 老齢福祉の情報リスト.add(entity);
             }
         }
@@ -1075,15 +1118,17 @@ public class FukaKeisan {
         }
         List<KyokaisoGaitosha> 境界層の情報のリスト = new ArrayList<>();
         for (KyokaisoGaitosha entity : 境界層の情報リスト) {
-            if (entity.get適用開始年月日().isBeforeOrEquals(本年度終了日)
-                    && (entity.get適用終了年月日() == null
-                    || entity.get適用終了年月日().isEmpty()
-                    || 本年度開始日.isBeforeOrEquals(entity.get適用終了年月日()))) {
+            FlexibleDate 受給開始日 = entity.get適用開始年月日();
+            FlexibleDate 受給廃止日 = entity.get適用終了年月日();
+            if (受給開始日 == null || 受給開始日.isEmpty()) {
+                受給開始日 = FlexibleDate.MIN;
+            }
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                 境界層の情報のリスト.add(entity);
-            } else if (本年度終了日.isBeforeOrEquals(entity.get適用開始年月日())
-                    && entity.get適用開始年月日().isBefore(本年度開始日)) {
-                境界層の情報のリスト.add(entity);
-            } else if (entity.get適用終了年月日().isBeforeOrEquals(本年度開始日)) {
+            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
                 境界層の情報のリスト.add(entity);
             }
         }
@@ -1197,70 +1242,66 @@ public class FukaKeisan {
         dankaiList.add(月別保険料段階.get保険料段階01月());
         dankaiList.add(月別保険料段階.get保険料段階02月());
         dankaiList.add(月別保険料段階.get保険料段階03月());
-        int i;
-        for (i = 0; i < dankaiList.size(); i++) {
+        List<RString> 月 = new ArrayList<>();
+        for (int i = INT_4; i <= INT_12; i++) {
+            RStringBuilder rst = new RStringBuilder();
+            rst.append(賦課年度).append(new RString(i).padZeroToLeft(INT_2));
+            月.add(rst.toRString());
+        }
+        for (int i = INT_1; i <= INT_3; i++) {
+            RStringBuilder rst = new RStringBuilder();
+            rst.append(賦課年度.plusYear(INT_1)).append(new RString(i).padZeroToLeft(INT_2));
+            月.add(rst.toRString());
+        }
+        int count = 0;
+        for (int i = 0; i < dankaiList.size(); i++) {
+            count = count + INT_1;
             if (dankaiList.get(i).get段階区分() != null && !dankaiList.get(i).get段階区分().isEmpty()) {
                 builder.set保険料算定段階1(dankaiList.get(i).get段階区分());
                 builder.set算定年額保険料1(dankaiList.get(i).get保険料率());
-                RStringBuilder rst = new RStringBuilder();
-                if (i < INT_9) {
-                    rst.append(賦課年度).append(new RString(i + INT_4).padZeroToLeft(INT_2));
-                } else {
-                    rst.append(賦課年度.plusYear(INT_1)).append(i - INT_8);
-                }
-                builder.set月割開始年月1(new FlexibleYearMonth(rst.toRString()));
+                builder.set月割開始年月1(new FlexibleYearMonth(月.get(i)));
                 break;
             }
         }
-        if (i == dankaiList.size()) {
+        if (count == dankaiList.size()) {
+            builder.set月割終了年月1(new FlexibleYearMonth(月.get(count - INT_1)));
             return;
         }
-        int j;
-        for (j = i; j < dankaiList.size(); j++) {
-            if (!dankaiList.get(i).get段階区分().equals(dankaiList.get(j).get段階区分())) {
-                RStringBuilder rst = new RStringBuilder();
-                if (j < INT_9) {
-                    rst.append(賦課年度).append(new RString(j + INT_3).padZeroToLeft(INT_2));
-                } else {
-                    rst.append(賦課年度.plusYear(INT_1)).append(new RString(j - INT_9).padZeroToLeft(INT_2));
-                }
-                builder.set月割終了年月1(new FlexibleYearMonth(rst.toRString()));
+        int count2 = 0;
+        for (int i = count; i < dankaiList.size(); i++) {
+            count2 = count2 + INT_1;
+            if (!dankaiList.get(count).get段階区分().equals(dankaiList.get(i).get段階区分())) {
+                builder.set月割終了年月1(new FlexibleYearMonth(月.get(i)));
                 break;
             }
         }
 
-        if (j == dankaiList.size()) {
+        if (count2 == dankaiList.size()) {
             return;
         }
-        int k;
-        for (k = j; k < dankaiList.size(); k++) {
-            if (dankaiList.get(k).get段階区分() != null && !dankaiList.get(k).get段階区分().isEmpty()) {
-                builder.set保険料算定段階2(dankaiList.get(k).get段階区分());
-                builder.set算定年額保険料2(dankaiList.get(k).get保険料率());
-                RStringBuilder rst = new RStringBuilder();
-                if (j < INT_9) {
-                    rst.append(賦課年度).append(new RString(k + INT_4).padZeroToLeft(INT_2));
-                } else {
-                    rst.append(賦課年度.plusYear(INT_1)).append(new RString(k - INT_8).padZeroToLeft(INT_2));
-                }
-                builder.set月割開始年月2(new FlexibleYearMonth(rst.toRString()));
+        int count3 = 0;
+        for (int i = count2; i < dankaiList.size(); i++) {
+            count3 = count3 + INT_1;
+            if (dankaiList.get(count2).get段階区分() != null && !dankaiList.get(i).get段階区分().isEmpty()) {
+                builder.set保険料算定段階2(dankaiList.get(i).get段階区分());
+                builder.set算定年額保険料2(dankaiList.get(i).get保険料率());
+                builder.set月割開始年月2(new FlexibleYearMonth(月.get(i)));
                 break;
             }
         }
-        if (k == dankaiList.size()) {
+        if (count3 == dankaiList.size()) {
+            builder.set月割終了年月2(new FlexibleYearMonth(月.get(count3 - INT_1)));
             return;
         }
-        for (int n = k; n < dankaiList.size(); n++) {
-            if (!dankaiList.get(k).get段階区分().equals(dankaiList.get(n).get段階区分())) {
-                RStringBuilder rst = new RStringBuilder();
-                if (n < INT_9) {
-                    rst.append(賦課年度).append(new RString(n + INT_3).padZeroToLeft(INT_2));
-                } else {
-                    rst.append(賦課年度.plusYear(INT_1)).append(new RString(n - INT_9).padZeroToLeft(INT_2));
-                }
-                builder.set月割終了年月2(new FlexibleYearMonth(rst.toRString()));
+        for (int i = count3; i < dankaiList.size(); i++) {
+            count3 = count3 + INT_1;
+            if (!dankaiList.get(i).get段階区分().equals(dankaiList.get(i).get段階区分())) {
+                builder.set月割終了年月2(new FlexibleYearMonth(月.get(i)));
                 break;
             }
+        }
+        if (count3 == dankaiList.size()) {
+            builder.set月割終了年月2(new FlexibleYearMonth(月.get(count3 - INT_1)));
         }
     }
 
@@ -1356,14 +1397,18 @@ public class FukaKeisan {
         RString 特徴停止事由コード = new RString("01");
 
         FukaJoho 現年度 = param.get年度分賦課リスト_更正前().get現年度();
-        List<Kibetsu> kibetsuList = 現年度.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
+        FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
+        fukaJohoRelateEntity.set介護賦課Entity(現年度.toEntity());
+        List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
+        for (Kibetsu kibetsu : 現年度.getKibetsuList()) {
             if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
-                set特徴期別金額(kibetsu, 特徴期別金額);
+                set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
             } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
-                set普徴期別金額(kibetsu, 普徴期別金額);
+                set普徴期別金額(kibetsu, 普徴期別金額, 介護期別RelateEntity);
             }
         }
+        fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
+        現年度 = new FukaJoho(fukaJohoRelateEntity);
 
         FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         ChoshuHoho 出力用徴収方法の情報 = param.get徴収方法の情報_更正前();
@@ -1427,86 +1472,88 @@ public class FukaKeisan {
         return result;
     }
 
-    private void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額) {
+    private void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
         switch (kibetsu.get期()) {
             case INT_1:
-                set期別金額(kibetsu, 特徴期別金額.get(0));
+                set期別金額(kibetsu, 特徴期別金額.get(0), 介護期別RelateEntity);
                 break;
             case INT_2:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_1));
+                set期別金額(kibetsu, 特徴期別金額.get(INT_1), 介護期別RelateEntity);
                 break;
             case INT_3:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_2));
+                set期別金額(kibetsu, 特徴期別金額.get(INT_2), 介護期別RelateEntity);
                 break;
             case INT_4:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_3));
+                set期別金額(kibetsu, 特徴期別金額.get(INT_3), 介護期別RelateEntity);
                 break;
             case INT_5:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_4));
+                set期別金額(kibetsu, 特徴期別金額.get(INT_4), 介護期別RelateEntity);
                 break;
             case INT_6:
-                set期別金額(kibetsu, 特徴期別金額.get(INT_5));
+                set期別金額(kibetsu, 特徴期別金額.get(INT_5), 介護期別RelateEntity);
                 break;
             default:
         }
     }
 
-    private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額) {
+    private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
         switch (kibetsu.get期()) {
             case INT_1:
-                set期別金額(kibetsu, 普徴期別金額.get(0));
+                set期別金額(kibetsu, 普徴期別金額.get(0), 介護期別RelateEntity);
                 break;
             case INT_2:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_1));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_1), 介護期別RelateEntity);
                 break;
             case INT_3:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_2));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_2), 介護期別RelateEntity);
                 break;
             case INT_4:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_3));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_3), 介護期別RelateEntity);
                 break;
             case INT_5:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_4));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_4), 介護期別RelateEntity);
                 break;
             case INT_6:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_5));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_5), 介護期別RelateEntity);
                 break;
             case INT_7:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_6));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_6), 介護期別RelateEntity);
                 break;
             case INT_8:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_7));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_7), 介護期別RelateEntity);
                 break;
             case INT_9:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_8));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_8), 介護期別RelateEntity);
                 break;
             case INT_10:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_9));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_9), 介護期別RelateEntity);
                 break;
             case INT_11:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_10));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_10), 介護期別RelateEntity);
                 break;
             case INT_12:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_11));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_11), 介護期別RelateEntity);
                 break;
             case INT_13:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_12));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_12), 介護期別RelateEntity);
                 break;
             case INT_14:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_13));
+                set期別金額(kibetsu, 普徴期別金額.get(INT_13), 介護期別RelateEntity);
                 break;
             default:
         }
     }
 
-    private void set期別金額(Kibetsu kibetsu, Decimal 期別金額) {
-        List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
-        for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
-            ChoteiKyotsuBuilder builder = choteiKyotsu.createBuilderForEdit();
-            if (choteiKyotsu.get調定ID().equals(kibetsu.get調定ID().longValue())) {
-                builder.set調定額(期別金額).build();
-                break;
-            }
+    private void set期別金額(Kibetsu kibetsu, Decimal 期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
+        if (kibetsu.getChoteiKyotsuList() != null && !kibetsu.getChoteiKyotsuList().isEmpty()) {
+            KibetsuEntity kibetsuEntity = new KibetsuEntity();
+            kibetsuEntity.set介護期別Entity(kibetsu.toEntity());
+            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
+            entity.setChoteigaku(期別金額);
+            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
+            entityList.add(entity);
+            kibetsuEntity.set調定共通Entity(entityList);
+            介護期別RelateEntity.add(kibetsuEntity);
         }
     }
 

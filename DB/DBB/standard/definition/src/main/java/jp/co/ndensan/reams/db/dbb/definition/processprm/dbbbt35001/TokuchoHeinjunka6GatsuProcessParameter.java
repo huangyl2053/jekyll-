@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,7 @@ public class TokuchoHeinjunka6GatsuProcessParameter implements IBatchProcessPara
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
-    private RDateTime 調定日時;
+    private YMDHMS 調定日時;
     private TyouhyouEntity 出力帳票一覧;
     private RDate 発行日;
     private RString 文書番号;

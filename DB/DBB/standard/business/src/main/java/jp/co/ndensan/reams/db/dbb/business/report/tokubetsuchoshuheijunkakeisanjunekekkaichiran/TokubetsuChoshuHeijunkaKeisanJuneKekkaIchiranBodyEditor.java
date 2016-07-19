@@ -41,7 +41,6 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
 
     private final List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト;
     private final List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト;
-    private final List<RString> 並び順List;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -57,11 +56,10 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private final Association association;
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
-            List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト, List<RString> 並び順List,
+            List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
             List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Association association) {
         this.特徴平準化結果対象者一覧表リスト = 特徴平準化結果対象者一覧表リスト;
         this.特徴平準化結果対象外一覧表リスト = 特徴平準化結果対象外一覧表リスト;
-        this.並び順List = 並び順List;
         this.association = association;
     }
 
@@ -69,7 +67,6 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource edit(TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
-        出力帳票entities(source);
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
         for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者 : 特徴平準化結果対象者一覧表リスト) {
             対象者項目編集(特徴平準化結果対象者, source, 帳票制御共通);
@@ -292,18 +289,5 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
             return 備考名;
         }
         return RString.EMPTY;
-    }
-
-    /**
-     * 出力帳票entities
-     *
-     * @param source TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource
-     */
-    private void 出力帳票entities(TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
-        source.shutsuryokujun1 = 並び順List.size() <= NUM_0 ? RString.EMPTY : 並び順List.get(NUM_0);
-        source.shutsuryokujun2 = 並び順List.size() <= NUM_1 ? RString.EMPTY : 並び順List.get(NUM_1);
-        source.shutsuryokujun3 = 並び順List.size() <= NUM_2 ? RString.EMPTY : 並び順List.get(NUM_2);
-        source.shutsuryokujun4 = 並び順List.size() <= NUM_3 ? RString.EMPTY : 並び順List.get(NUM_3);
-        source.shutsuryokujun5 = 並び順List.size() <= NUM_4 ? RString.EMPTY : 並び順List.get(NUM_4);
     }
 }

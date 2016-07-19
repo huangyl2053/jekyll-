@@ -309,7 +309,6 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         IHonsanteiIdoGennendoTsuchisyoIkatsuMapper mapper = mapperProvider.create(IHonsanteiIdoGennendoTsuchisyoIkatsuMapper.class);
         mapper.clear特徴仮算定一時();
         mapper.insert特徴仮算定一時(parameter);
-        mapper.update特徴仮算定一時(parameter);
     }
 
     /**
@@ -1598,40 +1597,40 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         RString 設定値 = RString.EMPTY;
         RDate 運用日 = RDate.getNowDate();
         switch (月) {
-            case INT_1:
+            case INT_4:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置1, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_2:
+            case INT_5:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置2, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_3:
+            case INT_6:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置3, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_4:
+            case INT_7:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置4, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_5:
+            case INT_8:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置5, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_6:
+            case INT_9:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置6, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_7:
+            case INT_10:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置7, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_8:
+            case INT_11:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置8, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_9:
+            case INT_12:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置9, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_10:
+            case INT_1:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置10, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_11:
+            case INT_2:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置11, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
-            case INT_12:
+            case INT_3:
                 設定値 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_ブック開始位置12, 運用日, SubGyomuCode.DBB介護賦課);
                 break;
             case INT_14:

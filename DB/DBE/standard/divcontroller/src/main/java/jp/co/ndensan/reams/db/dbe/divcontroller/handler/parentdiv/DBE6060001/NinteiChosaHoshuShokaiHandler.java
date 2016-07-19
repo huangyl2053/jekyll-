@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 認定調査報酬照会のハンドラークラスです。
@@ -67,7 +68,7 @@ public class NinteiChosaHoshuShokaiHandler {
             row.setChosakikanMei(調査一覧.get事業者名称());
             row.setHihokenshaBango(調査一覧.get被保険者番号());
             row.setHokenshaBango(調査一覧.get証記載保険者番号());
-            row.setNinteichosaIraiRirekiNo(調査一覧.get認定調査依頼区分コード().getColumnValue());
+            row.setNinteichosaIraiRirekiNo(new RString(調査一覧.get認定調査依頼履歴番号()));
             row.setShinseishoKanriNo(調査一覧.get申請書管理番号().getColumnValue());
             if (!調査一覧.get認定調査依頼年月日().isEmpty()) {
                 row.getIraibi().setValue(new RDate(調査一覧.get認定調査依頼年月日().getYearValue(),
@@ -108,7 +109,7 @@ public class NinteiChosaHoshuShokaiHandler {
                 row.setShisetsuSai(項目状態);
                 施設_再 = 施設_再 + 1;
             }
-            row.getItakuryo().setValue(new Decimal(調査一覧.get認定調査委託料()));
+            row.setItakuryo(DecimalFormatter.toコンマ区切りRString(new Decimal(調査一覧.get認定調査委託料()), 0).concat("円"));
             委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
             listRow.add(row);
             アクセスログ(調査一覧.get申請書管理番号().getColumnValue());

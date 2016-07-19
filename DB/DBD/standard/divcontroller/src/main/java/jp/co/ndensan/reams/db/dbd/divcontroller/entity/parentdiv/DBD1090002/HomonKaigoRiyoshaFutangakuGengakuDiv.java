@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -22,8 +21,24 @@ public class HomonKaigoRiyoshaFutangakuGengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HomonKaigoRiyoshaFutangakuGengakuInfo")
-    private HomonKaigoRiyoshaFutangakuGengakuInfoDiv HomonKaigoRiyoshaFutangakuGengakuInfo;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun")
+    private TextBox txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu")
+    private TextBox txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun")
+    private TextBox txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo")
+    private TextBoxCode txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuShinseibi")
+    private TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuShinseibi;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKetteibi")
+    private TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuKetteibi;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi")
+    private TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen")
+    private TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen;
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu")
+    private TextBoxMultiLine txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,114 +47,165 @@ public class HomonKaigoRiyoshaFutangakuGengakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getHomonKaigoRiyoshaFutangakuGengakuInfo
-     * @return HomonKaigoRiyoshaFutangakuGengakuInfo
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun
      */
-    @JsonProperty("HomonKaigoRiyoshaFutangakuGengakuInfo")
-    public HomonKaigoRiyoshaFutangakuGengakuInfoDiv getHomonKaigoRiyoshaFutangakuGengakuInfo() {
-        return HomonKaigoRiyoshaFutangakuGengakuInfo;
-    }
-
-    /*
-     * setHomonKaigoRiyoshaFutangakuGengakuInfo
-     * @param HomonKaigoRiyoshaFutangakuGengakuInfo HomonKaigoRiyoshaFutangakuGengakuInfo
-     */
-    @JsonProperty("HomonKaigoRiyoshaFutangakuGengakuInfo")
-    public void setHomonKaigoRiyoshaFutangakuGengakuInfo(HomonKaigoRiyoshaFutangakuGengakuInfoDiv HomonKaigoRiyoshaFutangakuGengakuInfo) {
-        this.HomonKaigoRiyoshaFutangakuGengakuInfo = HomonKaigoRiyoshaFutangakuGengakuInfo;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun")
     public TextBox getTxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun();
+        return txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun(TextBox txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun(txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun(TextBox txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun = txtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun;
     }
 
-    @JsonIgnore
-    public TextBox getTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun();
-    }
-
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun(TextBox txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun(txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi();
-    }
-
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuShinseibi) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi(txtHomonKaigoRiyoshaFutangakuGengakuShinseibi);
-    }
-
-    @JsonIgnore
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu")
     public TextBox getTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu();
+        return txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu(TextBox txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu(txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu(TextBox txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu = txtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu;
     }
 
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi();
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun")
+    public TextBox getTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun() {
+        return txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuKetteibi) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi(txtHomonKaigoRiyoshaFutangakuGengakuKetteibi);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun(TextBox txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun = txtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo")
     public TextBoxCode getTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo();
+        return txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo(TextBoxCode txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo(txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo(TextBoxCode txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo = txtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuShinseibi
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuShinseibi
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuShinseibi")
+    public TextBoxFlexibleDate getTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi() {
+        return txtHomonKaigoRiyoshaFutangakuGengakuShinseibi;
+    }
+
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuShinseibi
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuShinseibi txtHomonKaigoRiyoshaFutangakuGengakuShinseibi
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuShinseibi")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuShinseibi) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuShinseibi = txtHomonKaigoRiyoshaFutangakuGengakuShinseibi;
+    }
+
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuKetteibi
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuKetteibi
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKetteibi")
+    public TextBoxFlexibleDate getTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi() {
+        return txtHomonKaigoRiyoshaFutangakuGengakuKetteibi;
+    }
+
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuKetteibi
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuKetteibi txtHomonKaigoRiyoshaFutangakuGengakuKetteibi
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuKetteibi")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuKetteibi) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuKetteibi = txtHomonKaigoRiyoshaFutangakuGengakuKetteibi;
+    }
+
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi")
     public TextBoxFlexibleDate getTxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi();
+        return txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi(txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi = txtHomonKaigoRiyoshaFutangakuGengakuTekiyobi;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen")
     public TextBoxFlexibleDate getTxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen();
+        return txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen(txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen(TextBoxFlexibleDate txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen = txtHomonKaigoRiyoshaFutangakuGengakuYukoKigen;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu
+     * @return txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu")
     public TextBoxMultiLine getTxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu() {
-        return this.getHomonKaigoRiyoshaFutangakuGengakuInfo().getTxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu();
+        return txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu;
     }
 
-    @JsonIgnore
-    public void  setTxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu(TextBoxMultiLine txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu) {
-        this.getHomonKaigoRiyoshaFutangakuGengakuInfo().setTxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu(txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu);
+    /*
+     * settxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu
+     * @param txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu
+     */
+    @JsonProperty("txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu")
+    public void setTxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu(TextBoxMultiLine txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu) {
+        this.txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu = txtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu;
     }
 
     // </editor-fold>

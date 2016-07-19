@@ -10,12 +10,11 @@ import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.futangendogakunintei.KyuSochishaKubun;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100013.FutanGendogakuKetteiTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -43,6 +42,20 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     private final RString 負担名_居住費負担限度額従来型個室 = new RString("居住費負担限度額従来型個室");
     private final RString 負担名_居住費負担限度額従来型個室_特養等 = new RString("居住費負担限度額従来型個室（特養等）");
     private final RString 負担名_居住費負担限度額従来型個室_老健_療養等 = new RString("居住費負担限度額従来型個室（老健・療養等）");
+    private final static int INDEX_0 = 0;
+    private final static int INDEX_1 = 1;
+    private final static int INDEX_2 = 2;
+    private final static int INDEX_3 = 3;
+    private final static int INDEX_4 = 4;
+    private final static int INDEX_5 = 5;
+    private final static int INDEX_6 = 6;
+    private final static int INDEX_7 = 7;
+    private final static int INDEX_8 = 8;
+    private final static int INDEX_9 = 9;
+    private final static int INDEX_10 = 10;
+    private final static int INDEX_11 = 11;
+    private final static int INDEX_14 = 14;
+    private final static int INDEX_15 = 15;
     private final FutanGendogakuKetteiTsuchishoItem item;
 
     /**
@@ -72,16 +85,16 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
-        source.hihokenshaNo1 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(0, 1);
-        source.hihokenshaNo2 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(1, 2);
-        source.hihokenshaNo3 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(2, 3);
-        source.hihokenshaNo4 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(3, 4);
-        source.hihokenshaNo5 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(4, 5);
-        source.hihokenshaNo6 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(5, 6);
-        source.hihokenshaNo7 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(6, 7);
-        source.hihokenshaNo8 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(7, 8);
-        source.hihokenshaNo9 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(8, 9);
-        source.hihokenshaNo10 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(9, 10);
+        source.hihokenshaNo1 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
+        source.hihokenshaNo2 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
+        source.hihokenshaNo3 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
+        source.hihokenshaNo4 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
+        source.hihokenshaNo5 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
+        source.hihokenshaNo6 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
+        source.hihokenshaNo7 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_6, INDEX_7);
+        source.hihokenshaNo8 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_7, INDEX_8);
+        source.hihokenshaNo9 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_8, INDEX_9);
+        source.hihokenshaNo10 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_9, INDEX_10);
         source.ketteiYMD = item.get負担限度額認定().get決定年月日().wareki().toDateString();
         source.ninteiKekka1 = RString.EMPTY;
         source.ninteiKekka2 = RString.EMPTY;
@@ -126,16 +139,16 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         }
 
         if (TeikeibunMojiSize.フォント大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-            set通知書定型文(source, 3, item, 通知文Large);
+            set通知書定型文(source, INDEX_3, item, 通知文Large);
 
         }
         if (TeikeibunMojiSize.フォント上小下大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-            set通知書定型文(source, 3, item, 通知文混在);
-            set通知書定型文(source, 4, item, 通知文混在);
+            set通知書定型文(source, INDEX_3, item, 通知文混在);
+            set通知書定型文(source, INDEX_4, item, 通知文混在);
         }
         if (TeikeibunMojiSize.フォント上大下小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-            set通知書定型文(source, 3, item, 通知文混在２);
-            set通知書定型文(source, 4, item, 通知文混在２);
+            set通知書定型文(source, INDEX_3, item, 通知文混在２);
+            set通知書定型文(source, INDEX_4, item, 通知文混在２);
         }
 
         setCompNinshosha(source, item);
@@ -146,8 +159,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         return source;
     }
 
-    private FutanGendogakuKetteiTsuchishoReportSource setTitle(FutanGendogakuKetteiTsuchishoReportSource source,
-            FutanGendogakuKetteiTsuchishoItem item) {
+    private void setTitle(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if (KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
                 || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
@@ -163,7 +175,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
                 }
             }
 
-            set通知書定型文(source, 2, item, 通知文);
+            set通知書定型文(source, INDEX_2, item, 通知文);
         } else {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100013.帳票タイトル_上段.name()).equals(entity.getKomokuName())) {
@@ -177,51 +189,47 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
                     break;
                 }
             }
-
-            set通知書定型文(source, 1, item, 通知文);
+            set通知書定型文(source, INDEX_1, item, 通知文);
         }
-        return source;
     }
 
-    private FutanGendogakuKetteiTsuchishoReportSource set通知書定型文(FutanGendogakuKetteiTsuchishoReportSource source, int index,
-            FutanGendogakuKetteiTsuchishoItem item, RString taisyou) {
+    private void set通知書定型文(FutanGendogakuKetteiTsuchishoReportSource source, int index, FutanGendogakuKetteiTsuchishoItem item,
+            RString taisyou) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(index).split(折り返す符号.toString());
         Class reportSource = source.getClass();
         for (int i = 0; i <= 通知書定型文List.size(); i++) {
             try {
-                if (index == 2) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 1))).set(source, 通知書定型文List.get(i));
-                    if (i == 1) {
+                if (index == INDEX_2) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_1))).set(source, 通知書定型文List.get(i));
+                    if (i == INDEX_1) {
                         break;
                     }
-                } else if (index == 3 && (通知文).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 2))).set(source, 通知書定型文List.get(i + 2));
+                } else if (index == INDEX_3 && (通知文).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_2))).set(source, 通知書定型文List.get(i + INDEX_2));
                 } else if ((通知文Large).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 3))).set(source, 通知書定型文List.get(i + 2));
-                } else if (index == 3 && (通知文混在).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 3))).set(source, 通知書定型文List.get(i + 2));
-                    if (i == 11) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
+                } else if (index == INDEX_3 && (通知文混在).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
+                    if (i == INDEX_11) {
                         break;
                     }
-                } else if (index == 4 && (通知文混在).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 15))).set(source, 通知書定型文List.get(i + 14));
-                } else if (index == 3 && (通知文混在２).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 3))).set(source, 通知書定型文List.get(i + 2));
-                    if (i == 6) {
+                } else if (index == INDEX_4 && (通知文混在).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_15))).set(source, 通知書定型文List.get(i + INDEX_14));
+                } else if (index == INDEX_3 && (通知文混在２).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
+                    if (i == INDEX_6) {
                         break;
                     }
-                } else if (index == 4 && (通知文混在２).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + 10))).set(source, 通知書定型文List.get(i + 9));
+                } else if (index == INDEX_4 && (通知文混在２).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_10))).set(source, 通知書定型文List.get(i + INDEX_9));
                 }
             } catch (IllegalAccessException | NoSuchFieldException ex) {
                 break;
             }
         }
-        return source;
     }
 
-    private FutanGendogakuKetteiTsuchishoReportSource setFutanGaku(FutanGendogakuKetteiTsuchishoReportSource source,
-            FutanGendogakuKetteiTsuchishoItem item) {
+    private void setFutanGaku(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if ((item.get負担限度額認定().get食費負担限度額() != Decimal.ZERO) && (item.get負担限度額認定().get食費負担限度額() != null)) {
             source.futanGaku1 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get食費負担限度額(), 0);
         } else if (item.get負担限度額認定().is境界層該当者区分()) {
@@ -281,11 +289,9 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         } else {
             source.futanGaku6 = RString.EMPTY;
         }
-        return source;
     }
 
-    private FutanGendogakuKetteiTsuchishoReportSource 承認しない(FutanGendogakuKetteiTsuchishoReportSource source,
-            FutanGendogakuKetteiTsuchishoItem item) {
+    private void 承認しない(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         source.tekiyoYMD = RString.EMPTY;
         source.ninteiKekka3 = RString.EMPTY;
         source.shoninSuru = RString.EMPTY;
@@ -317,27 +323,24 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
                 break;
             }
         }
-        return source;
     }
 
-    private FutanGendogakuKetteiTsuchishoReportSource setCompNinshosha(FutanGendogakuKetteiTsuchishoReportSource source,
-            FutanGendogakuKetteiTsuchishoItem item) {
-        source.denshiKoin = getCompNinshosha(item).denshiKoin;
-        source.hakkoYMD = getCompNinshosha(item).hakkoYMD;
-        source.ninshoshaYakushokuMei1 = getCompNinshosha(item).ninshoshaYakushokuMei1;
-        source.koinMojiretsu = getCompNinshosha(item).koinMojiretsu;
-        source.ninshoshaYakushokuMei2 = getCompNinshosha(item).ninshoshaYakushokuMei2;
-        source.ninshoshaShimeiKakenai = getCompNinshosha(item).ninshoshaShimeiKakenai;
-        source.ninshoshaShimeiKakeru = getCompNinshosha(item).ninshoshaShimeiKakeru;
-        source.koinShoryaku = getCompNinshosha(item).koinShoryaku;
-        return source;
+    private void setCompNinshosha(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
+        source.denshiKoin = item.getNinshoshaSource().denshiKoin;
+        source.hakkoYMD = item.getNinshoshaSource().hakkoYMD;
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaSource().ninshoshaYakushokuMei1;
+        source.koinMojiretsu = item.getNinshoshaSource().koinMojiretsu;
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaSource().ninshoshaYakushokuMei2;
+        source.ninshoshaShimeiKakenai = item.getNinshoshaSource().ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = item.getNinshoshaSource().ninshoshaShimeiKakeru;
+        source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;
     }
 
-    private FutanGendogakuKetteiTsuchishoReportSource setCompSofubutsuAtesaki(FutanGendogakuKetteiTsuchishoReportSource source,
-            FutanGendogakuKetteiTsuchishoItem item) {
+    private void setCompSofubutsuAtesaki(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
-            sofubutsuAtesakiSource = item.get編集後宛先().getSofubutsuAtesakiSource().get送付物宛先ソース();
+            sofubutsuAtesakiSource = JushoHenshu.create編集後宛先(
+                    item.getIAtesaki(), item.get地方公共団体(), item.get帳票制御共通()).getSofubutsuAtesakiSource().get送付物宛先ソース();
         } catch (Exception e) {
             sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
         }
@@ -372,15 +375,9 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        return source;
     }
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
         return new EditedKojin(kojin, 帳票制御共通);
-    }
-
-    private static NinshoshaSource getCompNinshosha(FutanGendogakuKetteiTsuchishoItem item) {
-        return NinshoshaSourceBuilderFactory.createInstance(
-                item.get認証者(), item.get地方公共団体(), item.getイメージファイルパス(), item.get発行日()).buildSource();
     }
 }

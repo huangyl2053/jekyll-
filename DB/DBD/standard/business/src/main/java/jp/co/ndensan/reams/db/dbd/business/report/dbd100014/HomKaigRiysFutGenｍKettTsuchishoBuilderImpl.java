@@ -33,7 +33,6 @@ public class HomKaigRiysFutGenｍKettTsuchishoBuilderImpl implements IHomKaigRiy
      */
     @Override
     public HomKaigRiysFutGenｍKettTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new HomKaigRiysFutGenｍKettTsuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new HomKaigRiysFutGenｍKettTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
 }

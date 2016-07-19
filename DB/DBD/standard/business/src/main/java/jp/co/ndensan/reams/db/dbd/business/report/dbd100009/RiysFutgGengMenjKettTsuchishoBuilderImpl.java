@@ -33,7 +33,6 @@ public class RiysFutgGengMenjKettTsuchishoBuilderImpl implements IRiysFutgGengMe
      */
     @Override
     public RiysFutgGengMenjKettTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new RiysFutgGengMenjKettTsuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new RiysFutgGengMenjKettTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
 }

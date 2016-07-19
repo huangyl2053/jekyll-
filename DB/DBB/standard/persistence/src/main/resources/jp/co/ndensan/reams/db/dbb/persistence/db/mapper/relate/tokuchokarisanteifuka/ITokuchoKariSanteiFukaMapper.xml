@@ -485,51 +485,11 @@
     </resultMap>
     
     <!--特徴仮算定抽出Tempからデータを削除する。-->
-    <delete id="delete特徴仮算定抽出Temp">
+    <delete id="delete特徴仮算定抽出Temp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokutyoukariSannteiTyuushutuEntity">
         delete from "TokutyoukariSannteiTyuushutuTemp"
         where "fukaNendo" = #{fukaNendo}
+        and "hihokenshaNo" = #{hihokenshaNo}
         and "rirekiNo" = #{rirekiNo}
-        and "choshuHoho4gatsu" = #{choshuHoho4gatsu}
-        and "choshuHoho5gatsu" = #{choshuHoho5gatsu}
-        and "choshuHoho6gatsu" = #{choshuHoho6gatsu}
-        and "choshuHoho7gatsu" = #{choshuHoho7gatsu}
-        and "choshuHoho8gatsu" = #{choshuHoho8gatsu}
-        and "choshuHoho9gatsu" = #{choshuHoho9gatsu}
-        and "choshuHoho10gatsu" = #{choshuHoho10gatsu}
-        and "choshuHoho11gatsu" = #{choshuHoho11gatsu}
-        and "choshuHoho11gatsu" = #{choshuHoho11gatsu}
-        and "choshuHoho1gatsu" = #{choshuHoho1gatsu}
-        and "choshuHoho2gatsu" = #{choshuHoho2gatsu}
-        and "choshuHoho3gatsu" = #{choshuHoho3gatsu}
-        and "choshuHohoYoku4gatsu" = #{choshuHohoYoku4gatsu}
-        and "choshuHohoYoku5gatsu" = #{choshuHohoYoku5gatsu}
-        and "choshuHohoYoku6gatsu" = #{choshuHohoYoku6gatsu}
-        and "choshuHohoYoku7gatsu" = #{choshuHohoYoku7gatsu}
-        and "choshuHohoYoku8gatsu" = #{choshuHohoYoku8gatsu}
-        and "choshuHohoYoku9gatsu" = #{choshuHohoYoku9gatsu}
-        and "kariNenkinNo" = #{kariNenkinNo}
-        and "kariNenkinCode" = #{kariNenkinCode}
-        and "kariHosokuM" = #{kariHosokuM}
-        and "honNenkinNo" = #{honNenkinNo}
-        and "honNenkinCode" = #{honNenkinCode}
-        and "honHosokuM" = #{honHosokuM}
-        and "yokunendoKariNenkinNo" = #{yokunendoKariNenkinNo}
-        and "yokunendoKariNenkinCode" = #{yokunendoKariNenkinCode}
-        and "yokunendoKariHosokuM" = #{yokunendoKariHosokuM}
-        and "iraiSohuzumiFlag" = #{iraiSohuzumiFlag}
-        and "tsuikaIraiSohuzumiFlag" = #{tsuikaIraiSohuzumiFlag}
-        and "tokuchoTeishiNichiji" = #{tokuchoTeishiNichiji}
-        and "tokuchoTeishiJiyuCode" = #{tokuchoTeishiJiyuCode}
-        and "tsuchishoNo" = #{tsuchishoNo}
-        and "choteigaku" = #{choteigaku}
-        and "seihoKaishiYMD" = #{seihoKaishiYMD}
-        and "seihoHaishiYMD" = #{seihoHaishiYMD}
-        and "ronenKaishiYMD" = #{ronenKaishiYMD}
-        and "ronenHaishiYMD" = #{ronenHaishiYMD}
-        and "setaikazeiKubun" = #{setaikazeiKubun}
-        and "kazeiKubun" = #{kazeiKubun}
-        and "gokeiShotokuGaku" = #{gokeiShotokuGaku}
-        and "nenkinShunyuGaku" = #{nenkinShunyuGaku}
     </delete>
     
     <select resultOrdered="true" id="select資格等最新化_４月開始" parameterType="java.util.Map" 
@@ -537,9 +497,9 @@
         
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
         被保険者台帳管理Newest.*,
         生活保護受給者.*,
         生活保護扶助種類.*,
@@ -602,7 +562,7 @@
         <collection property="生保の情報" resultMap="ResultMap_SeikatsuHogoJukyushaRelateEntity"/>
         <collection property="老齢の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
     </resultMap>
-    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbV2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="hihokenshaNo" column="dbV2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbV2001ChoshuHoho_rirekiNo" />
@@ -889,7 +849,7 @@
         特徴仮算定抽出Temp."gokeiShotokuGaku",
         特徴仮算定抽出Temp."nenkinShunyuGaku",
         被保険者台帳管理Newest.*,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
         生活保護受給者.*,
         生活保護扶助種類.*,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.allColumns_DbT7006RoreiFukushiNenkinJukyusha"/>
@@ -945,7 +905,7 @@
         特徴仮算定抽出Temp."gokeiShotokuGaku",
         特徴仮算定抽出Temp."nenkinShunyuGaku",
         被保険者台帳管理Newest.*,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
         生活保護受給者.*,
         生活保護扶助種類.*,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.allColumns_DbT7006RoreiFukushiNenkinJukyusha"/>
@@ -1058,7 +1018,7 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>
         FROM rgdb."DbV2002Fuka" AS "DbV2002Fuka"
         INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
         ON "DbV2001ChoshuHoho"."fukaNendo" = #{choteiNendo_1}
@@ -1105,7 +1065,7 @@
         <id column="dbV2002Fuka_rirekiNo"/>
         <association property="賦課Newest" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2002FukaMapper.ResultMap_DbV2002FukaEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="徴収方法Newest" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
+        <association property="徴収方法Newest" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
     </resultMap>
 </mapper>
 

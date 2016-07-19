@@ -33,8 +33,6 @@ public class FutanGendogakuNinteishoBuilderImpl implements IFutanGendogakuNintei
      */
     @Override
     public FutanGendogakuNinteishoReportSource build() {
-        return ReportEditorJoiner.from(new FutanGendogakuNinteishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new FutanGendogakuNinteishoReportSource()).join(bodyEditor).buildSource();
     }
-
 }

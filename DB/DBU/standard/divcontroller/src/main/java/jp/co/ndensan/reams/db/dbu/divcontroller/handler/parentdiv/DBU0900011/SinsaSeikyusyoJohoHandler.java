@@ -42,7 +42,6 @@ public class SinsaSeikyusyoJohoHandler {
      * @param sinsaSeikyusyoJohoList 審査請求書登録明細情報
      */
     public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList) {
-
         if (状態_照会.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
             sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(false);
@@ -69,14 +68,14 @@ public class SinsaSeikyusyoJohoHandler {
             dgJigyoshaItiran.setTxtShinsaSeikyuJinName(jigyoshaInput.get審査請求人氏名() == null ? RString.EMPTY : jigyoshaInput.get審査請求人氏名().value());
             dgJigyoshaItiran.setTxtShobunNaiyo(jigyoshaInput.get処分種類コード() == null
                     ? RString.EMPTY : ShobunShuruiCode.toValue(jigyoshaInput.get処分種類コード()).get名称());
-            if (jigyoshaInput.get処分があったことを知った日() != null) {
+            if (jigyoshaInput.get処分があったことを知った日() != null && !jigyoshaInput.get処分があったことを知った日().isEmpty()) {
                 dgJigyoshaItiran.getTxtShobunShitaYMD().setValue(new RDate(jigyoshaInput.get処分があったことを知った日().toString()));
             }
-            if (jigyoshaInput.get弁明書作成日() != null) {
+            if (jigyoshaInput.get弁明書作成日() != null && !jigyoshaInput.get弁明書作成日().isEmpty()) {
                 dgJigyoshaItiran.getTxtBenmeishoSakuseiYMD().setValue(new RDate(jigyoshaInput.get弁明書作成日().toString()));
             }
             dgJigyoshaItiran.setTxtSaiketsuKekka(nullToEmpty(jigyoshaInput.get裁決結果()));
-            if (jigyoshaInput.get審査請求取下日() != null) {
+            if (jigyoshaInput.get審査請求取下日() != null && !jigyoshaInput.get審査請求取下日().isEmpty()) {
                 dgJigyoshaItiran.getTxtShinsaSeikyuToriageYMD().setValue(new RDate(jigyoshaInput.get審査請求取下日().toString()));
             }
             grdSinsaSeiList.add(dgJigyoshaItiran);

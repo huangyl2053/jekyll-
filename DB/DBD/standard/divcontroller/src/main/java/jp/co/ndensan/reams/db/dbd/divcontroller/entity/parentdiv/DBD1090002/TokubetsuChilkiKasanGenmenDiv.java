@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -22,8 +21,22 @@ public class TokubetsuChilkiKasanGenmenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TokubetsuChilkiKasanGenmenInfo")
-    private TokubetsuChilkiKasanGenmenInfoDiv TokubetsuChilkiKasanGenmenInfo;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKetteiKubun")
+    private TextBox txtTokubetsuChilkiKasanGenmenKetteiKubun;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKeigenritsu")
+    private TextBox txtTokubetsuChilkiKasanGenmenKeigenritsu;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKakuninNo")
+    private TextBoxCode txtTokubetsuChilkiKasanGenmenKakuninNo;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenShinseibi")
+    private TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenShinseibi;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKetteibi")
+    private TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenKetteibi;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenTekiyobi")
+    private TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenTekiyobi;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenYukoKigen")
+    private TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenYukoKigen;
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu")
+    private TextBoxMultiLine txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,104 +45,147 @@ public class TokubetsuChilkiKasanGenmenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTokubetsuChilkiKasanGenmenInfo
-     * @return TokubetsuChilkiKasanGenmenInfo
+     * gettxtTokubetsuChilkiKasanGenmenKetteiKubun
+     * @return txtTokubetsuChilkiKasanGenmenKetteiKubun
      */
-    @JsonProperty("TokubetsuChilkiKasanGenmenInfo")
-    public TokubetsuChilkiKasanGenmenInfoDiv getTokubetsuChilkiKasanGenmenInfo() {
-        return TokubetsuChilkiKasanGenmenInfo;
-    }
-
-    /*
-     * setTokubetsuChilkiKasanGenmenInfo
-     * @param TokubetsuChilkiKasanGenmenInfo TokubetsuChilkiKasanGenmenInfo
-     */
-    @JsonProperty("TokubetsuChilkiKasanGenmenInfo")
-    public void setTokubetsuChilkiKasanGenmenInfo(TokubetsuChilkiKasanGenmenInfoDiv TokubetsuChilkiKasanGenmenInfo) {
-        this.TokubetsuChilkiKasanGenmenInfo = TokubetsuChilkiKasanGenmenInfo;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKetteiKubun")
     public TextBox getTxtTokubetsuChilkiKasanGenmenKetteiKubun() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenKetteiKubun();
+        return txtTokubetsuChilkiKasanGenmenKetteiKubun;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenKetteiKubun(TextBox txtTokubetsuChilkiKasanGenmenKetteiKubun) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenKetteiKubun(txtTokubetsuChilkiKasanGenmenKetteiKubun);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenKetteiKubun
+     * @param txtTokubetsuChilkiKasanGenmenKetteiKubun txtTokubetsuChilkiKasanGenmenKetteiKubun
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKetteiKubun")
+    public void setTxtTokubetsuChilkiKasanGenmenKetteiKubun(TextBox txtTokubetsuChilkiKasanGenmenKetteiKubun) {
+        this.txtTokubetsuChilkiKasanGenmenKetteiKubun = txtTokubetsuChilkiKasanGenmenKetteiKubun;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenKeigenritsu
+     * @return txtTokubetsuChilkiKasanGenmenKeigenritsu
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKeigenritsu")
     public TextBox getTxtTokubetsuChilkiKasanGenmenKeigenritsu() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenKeigenritsu();
+        return txtTokubetsuChilkiKasanGenmenKeigenritsu;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenKeigenritsu(TextBox txtTokubetsuChilkiKasanGenmenKeigenritsu) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenKeigenritsu(txtTokubetsuChilkiKasanGenmenKeigenritsu);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenKeigenritsu
+     * @param txtTokubetsuChilkiKasanGenmenKeigenritsu txtTokubetsuChilkiKasanGenmenKeigenritsu
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKeigenritsu")
+    public void setTxtTokubetsuChilkiKasanGenmenKeigenritsu(TextBox txtTokubetsuChilkiKasanGenmenKeigenritsu) {
+        this.txtTokubetsuChilkiKasanGenmenKeigenritsu = txtTokubetsuChilkiKasanGenmenKeigenritsu;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenKakuninNo
+     * @return txtTokubetsuChilkiKasanGenmenKakuninNo
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKakuninNo")
     public TextBoxCode getTxtTokubetsuChilkiKasanGenmenKakuninNo() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenKakuninNo();
+        return txtTokubetsuChilkiKasanGenmenKakuninNo;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenKakuninNo(TextBoxCode txtTokubetsuChilkiKasanGenmenKakuninNo) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenKakuninNo(txtTokubetsuChilkiKasanGenmenKakuninNo);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenKakuninNo
+     * @param txtTokubetsuChilkiKasanGenmenKakuninNo txtTokubetsuChilkiKasanGenmenKakuninNo
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKakuninNo")
+    public void setTxtTokubetsuChilkiKasanGenmenKakuninNo(TextBoxCode txtTokubetsuChilkiKasanGenmenKakuninNo) {
+        this.txtTokubetsuChilkiKasanGenmenKakuninNo = txtTokubetsuChilkiKasanGenmenKakuninNo;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenShinseibi
+     * @return txtTokubetsuChilkiKasanGenmenShinseibi
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenShinseibi")
     public TextBoxFlexibleDate getTxtTokubetsuChilkiKasanGenmenShinseibi() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenShinseibi();
+        return txtTokubetsuChilkiKasanGenmenShinseibi;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenShinseibi(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenShinseibi) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenShinseibi(txtTokubetsuChilkiKasanGenmenShinseibi);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenShinseibi
+     * @param txtTokubetsuChilkiKasanGenmenShinseibi txtTokubetsuChilkiKasanGenmenShinseibi
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenShinseibi")
+    public void setTxtTokubetsuChilkiKasanGenmenShinseibi(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenShinseibi) {
+        this.txtTokubetsuChilkiKasanGenmenShinseibi = txtTokubetsuChilkiKasanGenmenShinseibi;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenKetteibi
+     * @return txtTokubetsuChilkiKasanGenmenKetteibi
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKetteibi")
     public TextBoxFlexibleDate getTxtTokubetsuChilkiKasanGenmenKetteibi() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenKetteibi();
+        return txtTokubetsuChilkiKasanGenmenKetteibi;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenKetteibi(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenKetteibi) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenKetteibi(txtTokubetsuChilkiKasanGenmenKetteibi);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenKetteibi
+     * @param txtTokubetsuChilkiKasanGenmenKetteibi txtTokubetsuChilkiKasanGenmenKetteibi
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenKetteibi")
+    public void setTxtTokubetsuChilkiKasanGenmenKetteibi(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenKetteibi) {
+        this.txtTokubetsuChilkiKasanGenmenKetteibi = txtTokubetsuChilkiKasanGenmenKetteibi;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenTekiyobi
+     * @return txtTokubetsuChilkiKasanGenmenTekiyobi
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenTekiyobi")
     public TextBoxFlexibleDate getTxtTokubetsuChilkiKasanGenmenTekiyobi() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenTekiyobi();
+        return txtTokubetsuChilkiKasanGenmenTekiyobi;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenTekiyobi(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenTekiyobi) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenTekiyobi(txtTokubetsuChilkiKasanGenmenTekiyobi);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenTekiyobi
+     * @param txtTokubetsuChilkiKasanGenmenTekiyobi txtTokubetsuChilkiKasanGenmenTekiyobi
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenTekiyobi")
+    public void setTxtTokubetsuChilkiKasanGenmenTekiyobi(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenTekiyobi) {
+        this.txtTokubetsuChilkiKasanGenmenTekiyobi = txtTokubetsuChilkiKasanGenmenTekiyobi;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenYukoKigen
+     * @return txtTokubetsuChilkiKasanGenmenYukoKigen
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenYukoKigen")
     public TextBoxFlexibleDate getTxtTokubetsuChilkiKasanGenmenYukoKigen() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenYukoKigen();
+        return txtTokubetsuChilkiKasanGenmenYukoKigen;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenYukoKigen(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenYukoKigen) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenYukoKigen(txtTokubetsuChilkiKasanGenmenYukoKigen);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenYukoKigen
+     * @param txtTokubetsuChilkiKasanGenmenYukoKigen txtTokubetsuChilkiKasanGenmenYukoKigen
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenYukoKigen")
+    public void setTxtTokubetsuChilkiKasanGenmenYukoKigen(TextBoxFlexibleDate txtTokubetsuChilkiKasanGenmenYukoKigen) {
+        this.txtTokubetsuChilkiKasanGenmenYukoKigen = txtTokubetsuChilkiKasanGenmenYukoKigen;
     }
 
-    @JsonIgnore
+    /*
+     * gettxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu
+     * @return txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu")
     public TextBoxMultiLine getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu() {
-        return this.getTokubetsuChilkiKasanGenmenInfo().getTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu();
+        return txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu;
     }
 
-    @JsonIgnore
-    public void  setTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu(TextBoxMultiLine txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu) {
-        this.getTokubetsuChilkiKasanGenmenInfo().setTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu(txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu);
+    /*
+     * settxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu
+     * @param txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu
+     */
+    @JsonProperty("txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu")
+    public void setTxtTokubetsuChilkiKasanGenmenShoninShinaiRiyu(TextBoxMultiLine txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu) {
+        this.txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu = txtTokubetsuChilkiKasanGenmenShoninShinaiRiyu;
     }
 
     // </editor-fold>

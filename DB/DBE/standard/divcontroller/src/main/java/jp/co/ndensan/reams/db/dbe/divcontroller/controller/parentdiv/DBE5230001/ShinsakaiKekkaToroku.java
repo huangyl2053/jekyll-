@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoBuilde
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.ShinsakaiKekkaTorokuHandler;
@@ -27,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -55,15 +58,14 @@ public class ShinsakaiKekkaToroku {
     private static final RString 認定_01 = new RString("認定");
     private static final RString 申請時コード_5 = new RString("5");
     private static final RString 申請時コード_6 = new RString("6");
+    private static final RString 審査結果登録 = new RString("審査結果登録");
     private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
-
     private final ShinsakaiKekkaTorokuManager manager;
 
     /**
      * コンストラクタです。
      */
     public ShinsakaiKekkaToroku() {
-        ViewStateHolder.put(ViewStateKeys.開催番号, new RString("11256"));
         this.manager = ShinsakaiKekkaTorokuManager.createInstance();
     }
 
@@ -84,19 +86,15 @@ public class ShinsakaiKekkaToroku {
         List<ShinsakaiWariateJoho> yoteiJohoList = manager.get介護認定審査会割当情報(開催番号).records();
         Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
-
         List<NinteiShinseiJoho> ninteiShinseiJohoList = manager.get要介護認定申請情報(開催番号).records();
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho = Models.create(ninteiShinseiJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
-
         List<NinteiKekkaJoho> ninteiKekkaJohoList = manager.get要介護認定結果情報(開催番号).records();
         Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho = Models.create(ninteiKekkaJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定結果情報, ninteiKekkaJoho);
-
         List<NinteiKanryoJoho> ninteiKanryoJohoList = manager.get要介護認定完了情報(開催番号).records();
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho = Models.create(ninteiKanryoJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, ninteiKanryoJoho);
-
         return ResponseData.of(div).respond();
     }
 
@@ -156,6 +154,16 @@ public class ShinsakaiKekkaToroku {
     }
 
     /**
+     * 戻るボタンを押下しました。。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onClick_btnBack(ShinsakaiKekkaTorokuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
+    }
+
+    /**
      * 「保存する」ボタンを押下しました。。
      *
      * @param div 介護認定審査会審査結果登録Div
@@ -172,6 +180,9 @@ public class ShinsakaiKekkaToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             審査結果登録処理(div);
             前排他キーの解除(SHINSEISHOKANRINO);
+            div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace(審査結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBE5230001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }

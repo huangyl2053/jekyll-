@@ -12,11 +12,14 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt35001.SystemTimeUpda
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt35001.TaisyoushaToTaisyoukaiDataTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt35001.TokuchoHeinjunkaResultIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunka6gatsu.TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +37,10 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     private static final String 介護情報の登録 = "creatKaigoProcess";
     private static final String 特徴平準化結果一覧表出力 = "printResultIchiranProcess";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
+    private static final String 計算後情報作成 = "keisangoJohoSakusei";
+    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private RString バッチフロー_帳票分類ID = RString.EMPTY;
+
     private TokuchoHeinjunka6GatsuParameter parameter;
     private TokuchoHeinjunka6GatsuProcessParameter processParameter;
 
@@ -50,12 +57,16 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
         processParameter.set賦課年度(new FlexibleYear(parameter.get賦課年度()));
         processParameter.set増額平準化方法(parameter.get増額平準化方法());
         processParameter.set減額平準化方法(parameter.get減額平準化方法());
-        processParameter.set調定日時(システム日時.getRDateTime());
+        processParameter.set調定日時(システム日時);
         executeStep(平準化前賦課TEMP作成);
         executeStep(平準化対象者と対象外データTEMP作成);
         executeStep(介護情報の登録);
         for (TyouhyouEntity entity : parameter.get出力帳票一覧()) {
             processParameter.set出力帳票一覧(entity);
+            if (entity.get帳票分類ID() != null) {
+                バッチフロー_帳票分類ID = entity.get帳票分類ID().getColumnValue();
+            }
+            executeStep(計算後情報作成);
             executeStep(特徴平準化結果一覧表出力);
         }
         executeStep(処理日付管理テーブル更新);
@@ -110,6 +121,24 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     @Step(特徴平準化結果一覧表出力)
     protected IBatchFlowCommand printResultIchiranProcess() {
         return simpleBatch(TokuchoHeinjunkaResultIchiranProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 計算後情報作成バッチを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(計算後情報作成)
+    protected IBatchFlowCommand keisangoJohoSakusei() {
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
+                getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID)).define();
+    }
+
+    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
+                getParameter().get賦課年度(),
+                getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME).toDateString(),
+                ShoriName.特徴平準化計算_6月分.get名称(), 帳票分類ID);
     }
 
     /**

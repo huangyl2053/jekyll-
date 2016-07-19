@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.CreateFukaJohoJuneProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.CreateFukaJohoKeizokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.ReflectShikakuToSaishinAprilProcessParameter;
@@ -35,6 +36,8 @@ public class TokuchoKarisanteiFukaBatchParameter extends BatchParameterBase {
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
     private List<ShuturyokuTyoutuke> 出力帳票一覧;
+    private boolean flag;
+    private TokuchoKaishiTsuchishoBatchParameter parameter;
 
     /**
      * processのパラメータを生成します。

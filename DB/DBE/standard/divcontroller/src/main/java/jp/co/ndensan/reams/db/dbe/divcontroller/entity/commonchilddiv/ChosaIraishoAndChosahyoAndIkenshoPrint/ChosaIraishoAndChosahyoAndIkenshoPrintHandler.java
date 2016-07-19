@@ -205,10 +205,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getDgShujiiIkensho().setDataSource(rowList);
             setDisableToShujiiIkenshoChk();
         }
-        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+        RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード());
-        if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
+        if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
             div.getRadTeishutsuKigen().setDisabled(true);
         } else {
             div.getRadTeishutsuKigen().setDisabled(false);
@@ -250,13 +250,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getTxtJyushinymd().setDisabled(false);
             div.getTxtJyushinymd().setRequired(true);
             div.getTxtJushinTime().setDisabled(false);
-            div.getTxtJyushinymd().setRequired(true);
+            div.getTxtJushinTime().setRequired(true);
             div.getTxtJushinKikan().setDisabled(true);
+            div.getTxtJushinKikan().setFromRequired(false);
+            div.getTxtJushinKikan().setToRequired(false);
             div.getTxtJushinBasho().setDisabled(false);
             div.getTxtJushinBasho().setRequired(true);
         } else {
             div.getTxtJyushinymd().setDisabled(true);
+            div.getTxtJyushinymd().setRequired(false);
             div.getTxtJushinTime().setDisabled(true);
+            div.getTxtJushinTime().setRequired(false);
             div.getTxtJushinKikan().setDisabled(false);
             div.getTxtJushinKikan().setFromRequired(true);
             div.getTxtJushinKikan().setToRequired(true);
@@ -1199,9 +1203,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setIryokikanNameTel(business.get医療機関電話番号());
                 item.setIryokikanFax(business.get医療機関FAX番号());
                 item.setYubinNo(business.get郵便番号());
-                item.setBirthYY(年号.substring(INDEX_3, INDEX_5));
-                item.setBirthMM(年号.substring(INDEX_6, INDEX_8));
-                item.setBirthDD(年号.substring(INDEX_9));
+                item.setBirthYY(年号.substring(2, INDEX_4));
+                item.setBirthMM(年号.substring(INDEX_5, INDEX_7));
+                item.setBirthDD(年号.substring(INDEX_8));
                 RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                         .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
                 item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -1210,11 +1214,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setShinseiMM2(ninteiShinseiDay.substring(INDEX_5, INDEX_6));
                 item.setShinseiDD1(ninteiShinseiDay.substring(INDEX_7, INDEX_8));
                 item.setShinseiDD2(ninteiShinseiDay.substring(INDEX_8));
-                item.setSeibetsuMan(Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
-                item.setSeibetsuWoman(Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY);
-                item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
-                item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
-                item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
+                item.setSeibetsuMan(Seibetsu.男.get名称().equals(row.getSeibetsu()) ? RString.EMPTY : HOUSI);
+                item.setSeibetsuWoman(Seibetsu.女.get名称().equals(row.getSeibetsu()) ? RString.EMPTY : HOUSI);
+                item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : HOUSI);
+                item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : HOUSI);
+                item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : HOUSI);
                 itemList.add(item);
             }
         }
@@ -1412,7 +1416,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     }
 
     private void set意見書作成料(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             RString shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiZaitakuKingaku.substring(0, 1));
@@ -1424,7 +1428,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setSeikyugakuIkenshoSakuseiRyo3(shinkiZaitakuKingaku.substring(2, INDEX_3));
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiZaitakuKingaku.substring(INDEX_3, INDEX_4));
         }
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
             RString shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiShisetsuKingaku.substring(0, 1));
@@ -1437,7 +1441,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiShisetsuKingaku.substring(INDEX_3, INDEX_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
             RString keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuZaitakuKingaku.substring(0, 1));
@@ -1450,7 +1454,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(keizokuZaitakuKingaku.substring(INDEX_3, INDEX_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get主治医意見書依頼区分())
+        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
                 && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
             RString keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuShisetsuKingaku.substring(0, 1));

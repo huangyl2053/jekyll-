@@ -101,8 +101,8 @@ public class TeikyohyoBeppyoManager {
     public KubunGendo get合計Entity(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 自己作成計画年月) {
         TeikyohyoBeppyoEntityResult result = get被保険者情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
-        KubunGendo 合計Entity = JigoSakuseiMeisaiTouroku.createInstance().
-                getKubunGendo(被保険者番号.value(), result.get総合事業区分(), 自己作成計画年月);
+        JigoSakuseiMeisaiTouroku jigoSakuseiMeisaiTouroku = JigoSakuseiMeisaiTouroku.createInstance();
+        KubunGendo 合計Entity = jigoSakuseiMeisaiTouroku.getKubunGendo(被保険者番号.value(), result.get総合事業区分(), 自己作成計画年月);
 
         return 合計Entity;
     }
@@ -119,7 +119,6 @@ public class TeikyohyoBeppyoManager {
     public Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> get事業者別マップ(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月, int 履歴番号, FlexibleYearMonth 自己作成計画年月) {
         Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップ = new HashMap<>();
-        Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップResult = new HashMap<>();
         JigoSakuseiMeisaiTouroku touroku = new JigoSakuseiMeisaiTouroku();
         List<KyufuJikoSakuseiEntityResult> 計画EntityResutl = new ArrayList<>();
         List<KyufuJikoSakuseiEntity> 計画Entity = touroku.getServiceRiyouHyo(被保険者番号.value(), 対象年月, 履歴番号, 自己作成計画年月);
@@ -158,12 +157,13 @@ public class TeikyohyoBeppyoManager {
 
                 計画EntityResutl.add(result);
             }
-            KubunGendo 合計Entity = get合計Entity(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
-            事業者別マップResult = getMapマップ(計画EntityResutl, 合計Entity, 事業者別マップ);
 
+            KubunGendo 合計Entity = get合計Entity(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
+            Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 事業者別マップResult
+                    = getMapマップ(計画EntityResutl, 合計Entity, 事業者別マップ);
             //2.5 map  事業者別マップResultpaixu TODO
+            return 事業者別マップResult;
         }
-        return 事業者別マップResult;
     }
 
     /**
@@ -191,8 +191,8 @@ public class TeikyohyoBeppyoManager {
                 detail.set限度額対象外フラグ(askuseiEntity.get限度額対象外フラグ());
                 details.add(detail);
             }
-            List<ServiceTypeTotal> totals = touroku.getServiceTypeGendo(自己作成計画年月, details);
-            return totals;
+
+            return touroku.getServiceTypeGendo(自己作成計画年月, details);
         }
     }
 

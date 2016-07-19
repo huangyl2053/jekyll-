@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003;
 
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendotsuchishoikkatsuhakko.IKanendoTsuchishoIkkatsuHakkoMapper;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
@@ -16,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 public class HonsanteiIdoTsuchishoKanendoTempCreatProcess extends SimpleBatchProcessBase {
 
     private IKanendoTsuchishoIkkatsuHakkoMapper mapper;
+
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter tempTableWriter;
 
     @Override
     protected void beforeExecute() {

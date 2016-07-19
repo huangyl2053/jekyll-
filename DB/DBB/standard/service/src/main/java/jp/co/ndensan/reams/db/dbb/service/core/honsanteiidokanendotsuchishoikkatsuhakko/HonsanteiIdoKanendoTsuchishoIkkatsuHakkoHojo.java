@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
@@ -22,7 +20,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.ShunyuJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -32,7 +29,10 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoId
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakkoFath;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendohokenryononyutsuchishoginfuri.KanendoHokenryoNonyuTsuchishoGinfuriPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishobookfurikae.KanendoNonyuTsuchishoBookFuriKaePrintService;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -319,6 +319,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                     bodyList.add(編集後本算定通知書共通情報.get更正後().get徴収方法());
                 }
                 bodyList.add(tutishoKyoutuKoumokuHenshuu(編集後本算定通知書共通情報));
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -500,6 +501,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                         ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
                 set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
                 bodyList.add(tutishoKyoutuKoumokuHenshuu(編集後本算定通知書共通情報));
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -779,13 +781,18 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 || 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト().isEmpty()) {
             bodyList.add(RString.EMPTY);
         } else {
+            boolean 区分 = false;
             List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
             for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
                 if (Integer.parseInt(出力期.toString()) == 普徴期別金額.get期()) {
+                    区分 = true;
                     bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
                             : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
                     break;
                 }
+            }
+            if (!区分) {
+                bodyList.add(RString.EMPTY);
             }
         }
     }
@@ -807,4 +814,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
         }
     }
 
+    private void toBodyList(List<RString> bodyList) {
+        for (int i = INT_0; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
+        }
+    }
 }

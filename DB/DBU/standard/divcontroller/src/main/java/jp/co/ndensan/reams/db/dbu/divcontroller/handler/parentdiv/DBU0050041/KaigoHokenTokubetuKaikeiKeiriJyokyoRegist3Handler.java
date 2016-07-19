@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyok
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -221,7 +222,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setSelectedIndex(0);
         div.setShoriMode(内部処理モード_追加);
         div.setGamenMode(画面表示_追加);
-        div.getKanryoMessage().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(false);
         div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setReadOnly(true);
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setDisplayNone(true);
@@ -271,7 +271,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setValue(insuranceInfEntity.get市町村名称());
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisplayNone(true);
-        div.getKanryoMessage().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setReadOnly(true);
         div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setReadOnly(true);
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setReadOnly(true);
@@ -369,7 +368,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
                 div.getYoshikiYonnosanMeisai().getTxtHokokuYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
                 div.getYoshikiYonnosanMeisai().getTxtShukeiYM().getValue().toFlexibleDate().getYear(), DOUBLE_ZEOR,
-                insuranceInfEntity.get統計対象区分(), insuranceInfEntity.get市町村コード(), null, 集計番号, 集計単位_1, null, null, null, 詳細データエリア);
+                insuranceInfEntity.get統計対象区分(), insuranceInfEntity.get市町村コード(), new Code("09"), 集計番号, 集計単位_1, null, null, null, 詳細データエリア);
         return 画面入力データ;
     }
 
@@ -696,6 +695,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         KaigoHokenShoriDateKanri 処理日付管理マスタ = get処理日付管理マスタ(insuranceInfEntity);
         if (内部処理モード_追加.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.insertShoriDateKanri(処理日付管理マスタ);
+            div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
         } else if (内部処理モード_修正.equals(div.getShoriMode()) || 内部処理モード_削除.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.updateShoriDateKanri(処理日付管理マスタ);
         }
@@ -710,6 +711,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                     insuranceInfEntity.get統計対象区分(),
                     insuranceInfEntity.get市町村コード(),
                     insuranceInfEntity.get表番号(), 集計番号list);
+            div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("削除").evaluate()), RString.EMPTY, RString.EMPTY, true);
         }
         if (内部処理モード_修正新規.equals(div.getShoriMode()) || 内部処理モード_追加.equals(div.getShoriMode())) {
             List<KaigoHokenJigyoHokokuNenpo> 前年度以前データLst = new ArrayList<>();
@@ -724,9 +727,13 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(前年度以前データLst);
             介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(今年度データLst);
             介護保険特別会計経理状況登録Manager.insertJigyoHokokuNenpoData(実質的な収支についてデータLst);
+            div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             List<KaigoHokenJigyoHokokuNenpo> 修正データLst = get修正データ(insuranceInfEntity);
-            介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データLst);
+            介護保険特別会計経理状況登録Manager.updateJigyoHokokuNenpoData(修正データLst);
+            div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
         }
     }
 

@@ -33,8 +33,6 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBuilderImpl implements IShakfukus
      */
     @Override
     public ShakfukusRiysFutKeigTaisKakuninshoReportSource build() {
-        return ReportEditorJoiner.from(new ShakfukusRiysFutKeigTaisKakuninshoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ShakfukusRiysFutKeigTaisKakuninshoReportSource()).join(bodyEditor).buildSource();
     }
-
 }

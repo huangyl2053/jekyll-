@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShotokuRirekiIchiranCompar
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInfomations;

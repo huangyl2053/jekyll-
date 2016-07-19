@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -15,15 +14,18 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定意見書イメージ情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
-public class IkenshoImageJoho extends 
-        ParentModelBase<IkenshoImageJohoIdentifier, 
-        DbT5305IkenshoImageJohoEntity, IkenshoImageJoho> implements Serializable {
+public class IkenshoImageJoho extends
+        ParentModelBase<IkenshoImageJohoIdentifier, DbT5305IkenshoImageJohoEntity, IkenshoImageJoho> implements Serializable {
 
+    private static final long serialVersionUID = -338823555606394862L;
     private final DbT5305IkenshoImageJohoEntity entity;
     private final IkenshoImageJohoIdentifier id;
 
@@ -222,7 +224,7 @@ public class IkenshoImageJoho extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

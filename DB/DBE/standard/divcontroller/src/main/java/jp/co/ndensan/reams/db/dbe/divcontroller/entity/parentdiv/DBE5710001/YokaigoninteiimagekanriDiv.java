@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -28,6 +29,12 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     private ImagePanelDiv ImagePanel;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnNinteichosaRirekiNo")
+    private RString hdnNinteichosaRirekiNo;
+    @JsonProperty("hdnGaikyoChosaTextImageKubun")
+    private RString hdnGaikyoChosaTextImageKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -60,6 +67,60 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return ccdNinteiShinseishaKihonInfo;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
+    }
+
+    /*
+     * gethdnNinteichosaRirekiNo
+     * @return hdnNinteichosaRirekiNo
+     */
+    @JsonProperty("hdnNinteichosaRirekiNo")
+    public RString getHdnNinteichosaRirekiNo() {
+        return hdnNinteichosaRirekiNo;
+    }
+
+    /*
+     * sethdnNinteichosaRirekiNo
+     * @param hdnNinteichosaRirekiNo hdnNinteichosaRirekiNo
+     */
+    @JsonProperty("hdnNinteichosaRirekiNo")
+    public void setHdnNinteichosaRirekiNo(RString hdnNinteichosaRirekiNo) {
+        this.hdnNinteichosaRirekiNo = hdnNinteichosaRirekiNo;
+    }
+
+    /*
+     * gethdnGaikyoChosaTextImageKubun
+     * @return hdnGaikyoChosaTextImageKubun
+     */
+    @JsonProperty("hdnGaikyoChosaTextImageKubun")
+    public RString getHdnGaikyoChosaTextImageKubun() {
+        return hdnGaikyoChosaTextImageKubun;
+    }
+
+    /*
+     * sethdnGaikyoChosaTextImageKubun
+     * @param hdnGaikyoChosaTextImageKubun hdnGaikyoChosaTextImageKubun
+     */
+    @JsonProperty("hdnGaikyoChosaTextImageKubun")
+    public void setHdnGaikyoChosaTextImageKubun(RString hdnGaikyoChosaTextImageKubun) {
+        this.hdnGaikyoChosaTextImageKubun = hdnGaikyoChosaTextImageKubun;
     }
 
     /*

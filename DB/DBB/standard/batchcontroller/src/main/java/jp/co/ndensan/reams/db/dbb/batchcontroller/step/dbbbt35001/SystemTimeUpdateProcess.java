@@ -35,7 +35,7 @@ public class SystemTimeUpdateProcess extends SimpleBatchProcessBase {
         RString 処理枝番 = 枝番;
         RString 年度内連番 = 枝番;
         FlexibleYear 年度 = processParameter.get調定年度();
-        YMDHMS システム日時 = new YMDHMS(processParameter.get調定日時());
+        YMDHMS システム日時 = processParameter.get調定日時();
         business.update処理日付管理(処理名, 処理枝番, 年度, 年度内連番, システム日時);
     }
 

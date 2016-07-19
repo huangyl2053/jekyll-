@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBCMN41002_高額総合事業サービス費判定エラーリストのReportSourceクラスです。
@@ -50,6 +51,7 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranSource implements IReport
     public RString kaipage5;
     @ReportItem(name = "listHanteiError_1", length = 4, order = 16)
     public RString listHanteiError_1;
+    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listHanteiError_2", length = 10, order = 17)
     public RString listHanteiError_2;

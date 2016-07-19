@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -44,26 +45,32 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranPrintService {
     private static final int INDEX_4 = 4;
 
     /**
-     * 高額介護サービス費判定エラーリストを印刷します。
+     * 高額総合事業サービス費判定エラーリストを印刷します。
      *
      * @param shutsuryokujunID RString
      * @param entityList List<KogakuSogoJigyoServicehiHanteiErrorListEntity>
+     * @param システム日時 YMDHMS
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(Long shutsuryokujunID, List<KogakuSogoJigyoServicehiHanteiErrorListEntity> entityList) {
+    public SourceDataCollection print(Long shutsuryokujunID, List<KogakuSogoJigyoServicehiHanteiErrorListEntity> entityList, YMDHMS システム日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            printFukusu(shutsuryokujunID, entityList, reportManager);
+            printFukusu(shutsuryokujunID, entityList, reportManager, システム日時);
             collection = reportManager.publish();
         }
         return collection;
     }
 
     /**
-     * 高額介護サービス費判定エラーリストを印刷します。
+     * 高額総合事業サービス費判定エラーリストを印刷します。
      *
+     * @param shutsuryokujunID Long
+     * @param entityList List<KogakuSogoJigyoServicehiHanteiErrorListEntity>
+     * @param reportManager ReportManager
+     * @param システム日時 YMDHMS
      */
-    private void printFukusu(Long shutsuryokujunID, List<KogakuSogoJigyoServicehiHanteiErrorListEntity> entityList, ReportManager reportManager) {
+    private void printFukusu(Long shutsuryokujunID, List<KogakuSogoJigyoServicehiHanteiErrorListEntity> entityList, ReportManager reportManager,
+            YMDHMS システム日時) {
         KogakuSogoJigyoServicehiHanteiErrorIchiranProperty property = new KogakuSogoJigyoServicehiHanteiErrorIchiranProperty();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
@@ -100,7 +107,7 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranPrintService {
                 }
             }
             new KogakuSogoJigyoServicehiHanteiErrorIchiranReport(entityList, association, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List).writeBy(reportSourceWriter);
+                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時).writeBy(reportSourceWriter);
         }
     }
 

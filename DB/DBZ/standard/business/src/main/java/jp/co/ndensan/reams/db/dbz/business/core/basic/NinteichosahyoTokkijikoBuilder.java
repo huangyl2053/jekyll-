@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link NinteichosahyoTokkijiko}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBE-9999-011 chengsanyuan
  */
 public class NinteichosahyoTokkijikoBuilder {
 
@@ -107,6 +109,18 @@ public class NinteichosahyoTokkijikoBuilder {
     public NinteichosahyoTokkijikoBuilder set原本マスク区分(Code 原本マスク区分) {
         requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
         entity.setGenponMaskKubun(原本マスク区分);
+        return this;
+    }
+
+    /**
+     * 特記事項を設定します。
+     *
+     * @param 特記事項 特記事項
+     * @return {@link NinteichosahyoTokkijikoBuilder}
+     */
+    public NinteichosahyoTokkijikoBuilder set特記事項(RString 特記事項) {
+        requireNonNull(特記事項, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項"));
+        entity.setTokkiJiko(特記事項);
         return this;
     }
 

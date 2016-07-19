@@ -15,6 +15,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBU {
 
     /**
+     * 介護保険連絡票の帳票ID。
+     */
+    DBU100002(new ReportId("DBU100002_KaigohokenRenrakuhyo"), new RString("介護保険連絡票")),
+    /**
+     * 介護保険連絡票_実質負担軽減者用の帳票ID。
+     */
+    DBU100003(new ReportId("DBU100003_KaigohokenRenrakuhyoJisshitsuFutan"), new RString("介護保険連絡票_実質負担軽減者用")),
+    /**
      * 境界層管理マスタリストの帳票ID。
      */
     DBA200005(new ReportId("DBU200003_KyokaisoKanriMasterList"), new RString("境界層管理マスタリスト")),

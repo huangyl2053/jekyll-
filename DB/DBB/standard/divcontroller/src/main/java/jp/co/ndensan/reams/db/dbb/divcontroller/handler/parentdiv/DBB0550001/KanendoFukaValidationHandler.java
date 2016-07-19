@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -60,19 +61,23 @@ public class KanendoFukaValidationHandler {
                     && (変更チェックボックス == null || 変更チェックボックス.isEmpty())) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.必須, 通知書チェックボックス.toString())));
-            } else if (決定チェックボックス != null && !決定チェックボックス.isEmpty()) {
+            }
+            if (決定チェックボックス != null && !決定チェックボックス.isEmpty()) {
                 check決定通知書(validPairs);
-            } else if (変更チェックボックス != null && !変更チェックボックス.isEmpty()) {
-                check変更通知書(validPairs);
-            } else if ((決定チェックボックス != null && !決定チェックボックス.isEmpty())
-                    && (変更チェックボックス != null && !変更チェックボックス.isEmpty())) {
-                check決定通知書(validPairs);
+            }
+            if (変更チェックボックス != null && !変更チェックボックス.isEmpty()) {
                 check変更通知書(validPairs);
             }
         }
         if (納入通知書Flag) {
             check納入通知書(validPairs);
         }
+        if (!div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedKey().
+                equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedKey())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbbErrorMessages.賦課処理対象月と通知書出力月の不整合)));
+        }
+
         return validPairs;
     }
 

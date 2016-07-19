@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;

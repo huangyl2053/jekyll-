@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyoHokokuNenpoShoriName;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -33,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 介護保険特別会計経理状況登録_様式４ハンドラクラスです。
@@ -293,14 +291,20 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             KaigoHokenJigyoHokokuNenpo 画面入力データ = get画面入力データ(insuranceInf);
             画面入力データLst.add(画面入力データ);
             介護保険特別会計経理状況登録Manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(画面入力データLst);
+            div.getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = get修正データ(insuranceInf);
             画面入力データLst.add(修正データ);
             介護保険特別会計経理状況登録Manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(画面入力データLst);
+            div.getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 画面入力データ = get画面入力データ(insuranceInf);
             画面入力データLst.add(画面入力データ);
             介護保険特別会計経理状況登録Manager.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(画面入力データLst);
+            div.getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
         } else if (内部処理モード_削除.equals(div.getShoriMode())) {
             介護保険特別会計経理状況登録Manager.delKaigoHokenTokubetuKaikeiKeiriJyokyo(
                     insuranceInf.get報告年(),
@@ -308,46 +312,51 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
                     insuranceInf.get統計対象区分(),
                     insuranceInf.get市町村コード(),
                     insuranceInf.get表番号(), 集計番号_0100);
+            div.getCcdKanryoMessage().setMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("削除").evaluate()), RString.EMPTY, RString.EMPTY, true);
         }
         div.getHihokenshabango().setDisplayNone(true);
         div.getCcdKanryoMessage().setDisplayNone(false);
+
     }
 
     /**
      * 「報告年度を確定する」ボタンを押下すること処理です。
+     *
+     * @param insuranceInf 引き継ぎデータ
      */
-    public void onClick_btnConfirm() {
-        List<Shichoson> 市町村Lst = get市町村Lst();
+    public void onClick_btnConfirm(InsuranceInformation insuranceInf) {
         TextBoxFlexibleDate 報告年度Box = div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM();
-        int choice = div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().getSelectedIndex();
-        Shichoson 市町村 = 市町村Lst.get(choice);
-        TokeiTaishoKubun 保険者区分 = 市町村.get保険者区分();
-        LasdecCode 市町村コード = 市町村.get市町村コード();
+        LasdecCode 市町村コード = insuranceInf.get市町村コード();
+        TokeiTaishoKubun 保険者区分 = TokeiTaishoKubun.空;
+        List<Shichoson> 市町村Lst = get市町村Lst();
+        for (Shichoson shichoson : 市町村Lst) {
+            if (shichoson.get市町村コード().equals(市町村コード)) {
+                保険者区分 = shichoson.get保険者区分();
+                break;
+            }
+        }
         報告年度の確定処理(報告年度Box, 市町村コード, 保険者区分);
     }
 
     private void 報告年度の確定処理(TextBoxFlexibleDate 報告年度Box, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        FlexibleYear 報告年度 = new FlexibleYear(new RDate(
-                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString());
+        FlexibleYear 報告年度 = get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM());
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
                 = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(報告年度, 市町村コード, 保険者区分);
-        if (!一覧データLst.isEmpty() && 一覧データLst.get(0) != null && !一覧データLst.get(0).get詳細データエリア().isEmpty()) {
+        if (!一覧データLst.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
         } else {
             報告年度Box.setReadOnly(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(true);
-            if (ResponseHolder.getState().equals(DBU0050021StateName.add.getName())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnAddUpdate"), false);
-            } else if (ResponseHolder.getState().equals(DBU0050021StateName.del.getName())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnModUpdate"), false);
-            } else if (ResponseHolder.getState().equals(DBU0050021StateName.mod.getName())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnDelUpdate"), false);
-            }
             詳細データエリ表示(null, 状態1_確定);
         }
+    }
+
+    private FlexibleYear get年度(TextBoxFlexibleDate date) {
+        return new FlexibleYear(new RString(date.getValue().toString()).substring(0, INT4));
     }
 
     /**
@@ -450,11 +459,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         set画面入力詳細データエリ3(画面入力詳細データエリ);
         set画面入力詳細データエリ4(画面入力詳細データエリ);
         KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
-                new FlexibleYear(new RDate(
-                                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString()),
+                get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM()),
                 DOUBLE_ZEOR,
-                new FlexibleYear(new RDate(
-                                div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM().getText().toString()).getYear().toString()),
+                get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM()),
                 DOUBLE_ZEOR,
                 insuranceInf.get統計対象区分(), insuranceInf.get市町村コード(), 表番号_09, 集計番号_0100,
                 集計単位_1, null, null, null, 画面入力詳細データエリ
@@ -650,8 +657,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
      * @return 処理日付管理マスタ
      */
     public KaigoHokenShoriDateKanri get処理日付管理マスタ() {
-        FlexibleYear 集計年度 = new FlexibleYear(new RDate(
-                div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM().getText().toString()).getYear().toString());
+        FlexibleYear 集計年度 = get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM());
         KaigoHokenShoriDateKanri 処理日付管理マスタ = new KaigoHokenShoriDateKanri(SubGyomuCode.DBU介護統計報告, LasdecCode.EMPTY,
                 JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況, DOUBLE_ZEOR, 集計年度, DOUBLE_ZEOR, FlexibleDate.EMPTY,
                 RDate.getNowDateTime(), new FlexibleDate(集計年度.getYearValue(), INT4, 01),

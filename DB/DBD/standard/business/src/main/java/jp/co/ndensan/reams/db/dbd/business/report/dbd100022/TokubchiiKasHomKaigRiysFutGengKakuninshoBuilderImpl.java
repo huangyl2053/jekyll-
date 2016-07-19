@@ -33,8 +33,6 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBuilderImpl implements ITok
      */
     @Override
     public TokubChiiKasRiysFutGengKakuninshoReportSource build() {
-        return ReportEditorJoiner.from(new TokubChiiKasRiysFutGengKakuninshoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new TokubChiiKasRiysFutGengKakuninshoReportSource()).join(bodyEditor).buildSource();
     }
-
 }

@@ -18,12 +18,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6090001.Hom
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahoshujissekijoho.INinteiChosaHoshuJissekiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -83,22 +81,11 @@ public class HomonChosaItakuNyuryoku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         List<NinteiChosaHoshuJissekiJohoBusiness> 調査員情報List = manager.get初期化調査員情報検索(getHandler(div).createParam_初期(div)).records();
-        if (調査員情報List == null || 調査員情報List.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrInformationMessages.該当データなし.getMessage().getCode(),
-                        UrInformationMessages.該当データなし.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrInformationMessages.該当データなし.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getChosain().setIsOpen(false);
-                return ResponseData.of(div).respond();
-            } else {
-                div.getChosain().setIsOpen(false);
-                return ResponseData.of(div).respond();
-            }
-        }
         getHandler(div).setDgChosain(調査員情報List);
+        ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).データ空のチェック();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         return ResponseData.of(div).setState(DBE6090001StateName.調査員一覧);
     }
 
@@ -118,21 +105,6 @@ public class HomonChosaItakuNyuryoku {
         div.getTxtChousaInCode().setValue(div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode());
         div.getTxtChousainName().setValue(div.getChosain().getDgChosain().getClickedItem().getChosainShimei());
         List<NinteichosahyoGaikyoChosaBusiness> 報酬情報List = manager.get調査員実績検索(getHandler(div).createParam_実績(div)).records();
-        if (報酬情報List == null || 報酬情報List.isEmpty()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrInformationMessages.該当データなし.getMessage().getCode(),
-                        UrInformationMessages.該当データなし.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrInformationMessages.該当データなし.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                div.getChosaJissekiJoho().setIsOpen(false);
-                return ResponseData.of(div).respond();
-            } else {
-                div.getChosaJissekiJoho().setIsOpen(false);
-                return ResponseData.of(div).respond();
-            }
-        }
         getHandler(div).setDgShinsakaiIin(報酬情報List);
         List<NinteiChosaHoshuJissekiJoho> 報酬実績情報 = manager.get報酬実績情報(div.getDgChosain().getClickedItem().getNintechosaItakusakiCode(),
                 div.getDgChosain().getClickedItem().getNinteiChosainCode()).records();

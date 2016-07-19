@@ -212,7 +212,7 @@
     </resultMap>
     
     <resultMap id="ResultMap_KogakuKyufuKetteiHanteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiHanteiEntity" autoMapping="true">
-        <id property="dbWT3058KogakuShikyuShinsaKettei_renban" />
+        <id column="dbWT3058KogakuShikyuShinsaKettei_renban" />
         <association property="ketteiTemp" resultMap="ResultMap_DbWT3058KogakuShikyuShinsaKetteiTempEntity"/>
         <association property="hihokenshaTemp" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
         <collection property="kekkaList" ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
@@ -236,7 +236,7 @@
     </resultMap>
     
     <resultMap id="ResultMap_KogakuKyufuKetteiChohyoDataEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiChohyoDataEntity" autoMapping="true">
-        <id property="dbWT3058KogakuShikyuShinsaKettei_renban" />
+        <id column="dbWT3058KogakuShikyuShinsaKettei_renban" />
         <association property="ketteiTemp" resultMap="ResultMap_DbWT3058KogakuShikyuShinsaKetteiTempEntity"/>
         <association property="hihokenshaTemp" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
     </resultMap>

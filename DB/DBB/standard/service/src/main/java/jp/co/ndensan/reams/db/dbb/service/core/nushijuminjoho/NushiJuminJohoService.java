@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nushijuminjoho.NushiJumi
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRirekiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2020ShotokuShokaihyoHakkoRirekiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nushijuminjoho.INushiJuminJohoMapper;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT2008ShotokuKanriDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

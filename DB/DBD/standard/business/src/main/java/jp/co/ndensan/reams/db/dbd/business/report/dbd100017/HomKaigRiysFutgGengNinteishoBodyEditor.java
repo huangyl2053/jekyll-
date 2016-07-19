@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -32,6 +30,16 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgGengNinteishoEditor {
 
     private final RString ホシ = new RString("＊");
+    private final static int INDEX_0 = 0;
+    private final static int INDEX_1 = 1;
+    private final static int INDEX_2 = 2;
+    private final static int INDEX_3 = 3;
+    private final static int INDEX_4 = 4;
+    private final static int INDEX_5 = 5;
+    private final static int INDEX_6 = 6;
+    private final static int INDEX_7 = 7;
+    private final static int INDEX_8 = 8;
+    private final static int INDEX_9 = 9;
     private final HomKaigRiysFutgGengNinteishoItem item;
 
     /**
@@ -55,34 +63,34 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
     }
 
     private HomKaigRiysFutgGengNinteishoReportSource bodyEdit(HomKaigRiysFutgGengNinteishoReportSource source) {
-        source.kofuGengo = item.get交付日().wareki().toDateString().substring(1, 2);
-        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(2, 4);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(5, 7);
-        source.kofuDD = item.get交付日().wareki().toDateString().substring(8, 10);
+        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
 
-        source.futanNo1 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(0, 1);
-        source.futanNo2 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(1, 2);
-        source.futanNo3 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(2, 3);
-        source.futanNo4 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(3, 4);
-        source.futanNo5 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(4, 5);
-        source.futanNo6 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(5, 6);
-        source.futanNo7 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(6, 7);
-        source.futanNo8 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(7, 8);
+        source.futanNo1 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_0, INDEX_1);
+        source.futanNo2 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_1, INDEX_2);
+        source.futanNo3 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_2, INDEX_3);
+        source.futanNo4 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_3, INDEX_4);
+        source.futanNo5 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_4, INDEX_5);
+        source.futanNo6 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_5, INDEX_6);
+        source.futanNo7 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_6, INDEX_7);
+        source.futanNo8 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_7, INDEX_8);
 
-        source.jukyuNo1 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(0, 1);
-        source.jukyuNo2 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(1, 2);
-        source.jukyuNo3 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(2, 3);
-        source.jukyuNo4 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(3, 4);
-        source.jukyuNo5 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(4, 5);
-        source.jukyuNo6 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(5, 6);
-        source.jukyuNo7 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(6, 7);
+        source.jukyuNo1 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_0, INDEX_1);
+        source.jukyuNo2 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_1, INDEX_2);
+        source.jukyuNo3 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_2, INDEX_3);
+        source.jukyuNo4 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_3, INDEX_4);
+        source.jukyuNo5 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_4, INDEX_5);
+        source.jukyuNo6 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_5, INDEX_6);
+        source.jukyuNo7 = item.get訪問介護利用者負担額減額().get公費受給者番号().substring(INDEX_6, INDEX_7);
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
         source.jusho = 編集後個人.get編集後住所();
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
 
-        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(1, 2);
+        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
             if (new RString("明治").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
@@ -97,18 +105,18 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
             }
-            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(2, 4);
-            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(5, 7);
-            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(8, 10);
+            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
+            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
+            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_7, INDEX_9);
         } else {
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
             RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
                     FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(2, 5);
-            source.birthMM = 生年月日.substring(5, 8);
-            source.birthDD = 生年月日.substring(8, 11);
+            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_3);
+            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
+            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
         }
         if (Gender.MALE.equals(item.getIKojin().get性別())) {
             source.man = RString.EMPTY;
@@ -126,7 +134,7 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
                 source.hokenshaJusho = DbBusinessConfig.get(ConfigNameDBU.保険者情報_住所, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
                 source.hokenshaName1 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
                 source.hokenshaTelNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_電話番号, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
-                source.denshiKoin = getCompNinshosha(item).denshiKoin;
+                source.denshiKoin = item.getNinshoshaSource().denshiKoin;
                 break;
             }
         }
@@ -140,10 +148,5 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
         return new EditedKojin(kojin, 帳票制御共通);
-    }
-
-    private static NinshoshaSource getCompNinshosha(HomKaigRiysFutgGengNinteishoItem item) {
-        return NinshoshaSourceBuilderFactory.createInstance(
-                item.get認証者(), item.get地方公共団体(), item.getイメージファイルパス(), item.get交付日()).buildSource();
     }
 }
