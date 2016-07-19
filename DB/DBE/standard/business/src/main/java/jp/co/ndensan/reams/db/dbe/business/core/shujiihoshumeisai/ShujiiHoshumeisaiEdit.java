@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,20 +41,15 @@ public class ShujiiHoshumeisaiEdit {
     private int 合計件数新規施設 = 0;
     private int 合計件数継続在宅 = 0;
     private int 合計件数継続施設 = 0;
-    private int 合計金額 = 0;
+    private Decimal 合計金額 = Decimal.ZERO;
 
     /**
      * 主治医意見書作成報酬支払明細書の編集処理です。
      *
      * @param entity 要介護認定申請
-     * @param 消費税率 消費税率
      * @return ChosaHoshuShiharaiEntity
      */
-    public ShujiiHoshumeisaiEntity getShujiiHoshumeisaiEntity(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率) {
-        int 税率 = 0;
-        if (!RString.isNullOrEmpty(消費税率)) {
-            税率 = Integer.valueOf(消費税率.toString());
-        }
+    public ShujiiHoshumeisaiEntity getShujiiHoshumeisaiEntity(HoshuShiharaiJunbiRelateEntity entity) {
         ShujiiHoshumeisaiEntity shumeisaiEntity = new ShujiiHoshumeisaiEntity();
         shumeisaiEntity.set保険者名(entity.getShichosonMeisho());
         shumeisaiEntity.set医療機関名(entity.getIryoKikanMeisho());
@@ -93,11 +89,12 @@ public class ShujiiHoshumeisaiEdit {
             shumeisaiEntity.set継続在宅(MARU);
             合計件数継続施設 = 合計件数継続施設 + 1;
         }
-        shumeisaiEntity.set意見書作成料(new RString(String.valueOf(entity.getIkenshoSakuseiryo())));
-        shumeisaiEntity.set新規在宅件数(new RString(String.valueOf(合計件数新規在宅)));
-        shumeisaiEntity.set新規施設件数(new RString(String.valueOf(合計件数新規施設)));
-        shumeisaiEntity.set継続在宅件数(new RString(String.valueOf(合計件数継続在宅)));
-        shumeisaiEntity.set継続施設件数(new RString(String.valueOf(合計件数継続施設)));
+        shumeisaiEntity.set意見書作成料(intToRString(entity.getIkenshoSakuseiryo()));
+        shumeisaiEntity.set新規在宅件数(intToRString(合計件数新規在宅));
+        shumeisaiEntity.set新規施設件数(intToRString(合計件数新規施設));
+        shumeisaiEntity.set継続在宅件数(intToRString(合計件数継続在宅));
+        shumeisaiEntity.set継続施設件数(intToRString(合計件数継続施設));
+        shumeisaiEntity.set合計金額(shumeisaiEntity.get意見書作成料());
         return shumeisaiEntity;
     }
 
@@ -120,5 +117,9 @@ public class ShujiiHoshumeisaiEdit {
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString intToRString(int date) {
+        return new RString(String.valueOf(date));
     }
 }

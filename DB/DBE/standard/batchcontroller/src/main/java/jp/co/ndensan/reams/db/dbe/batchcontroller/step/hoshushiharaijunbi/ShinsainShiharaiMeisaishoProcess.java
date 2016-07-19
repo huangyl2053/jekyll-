@@ -68,8 +68,8 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
     @BatchWriter
     private BatchReportWriter<ShinsainShiharaimeisaishoReportSource> batchWrite;
     private ReportSourceWriter<ShinsainShiharaimeisaishoReportSource> reportSourceWriter;
-    private static int index = 1;
-    private static Decimal 合計金額;
+    private int index = 1;
+    private Decimal 合計金額;
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;

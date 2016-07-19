@@ -193,8 +193,7 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
         builder.set業務固有キーリスト(業務固有キー);
         builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
         IKozaSearchKey searchKey = builder.build();
-        List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
-        return kozaList;
+        return KozaManager.createInstance().get口座(searchKey);
     }
 
 }

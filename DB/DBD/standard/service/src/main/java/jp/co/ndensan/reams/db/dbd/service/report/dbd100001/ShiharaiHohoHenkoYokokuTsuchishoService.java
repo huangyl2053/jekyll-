@@ -40,9 +40,9 @@ public class ShiharaiHohoHenkoYokokuTsuchishoService {
      *
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, FlexibleDate 発行日, RString 文書番号,
-            List<RString> 通知書定型文リスト, RString 帳票分類ID, Ninshosha 認証者, ShiharaiHohoHenko 帳票情報, ReportManager reportManager) {
+    public void print(IKojin 個人情報, IAtesaki 宛先, List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通,
+            Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, RString 帳票分類ID,
+            Ninshosha 認証者, ShiharaiHohoHenko 帳票情報, ReportManager reportManager) {
         ShiharaiHohoHenkoYokokuTsuchishoProerty property = new ShiharaiHohoHenkoYokokuTsuchishoProerty();
         try (ReportAssembler<ShiharaiHohoHenkoYokokuTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             for (ShiharaiHohoHenkoYokokuTsuchishoReport report : toReport(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通,

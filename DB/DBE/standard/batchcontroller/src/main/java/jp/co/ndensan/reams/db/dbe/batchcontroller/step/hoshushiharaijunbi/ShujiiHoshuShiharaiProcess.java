@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiihoshushiharai.ShujiiHoshuShiharaiEdit;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiihoshushiharai.ShujiiHoshuShiharaiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -63,7 +62,6 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
-    private static final int パターン番号 = 1;
 
     @BatchWriter
     private BatchReportWriter<ShujiiHoshuShiharaiReportSource> batchWrite;
@@ -101,14 +99,11 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ShujiiHoshuShiharaiEdit edit = new ShujiiHoshuShiharaiEdit();
-        ShujiiHoshuShiharaiEntity shiharaiEntity = edit.getShujiiHoshuShiharaiEntity(entity, 消費税率, get認証者());
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-        builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-        shiharaiEntity.set対象期間(builder.toRString());
-        shiharaiEntity.set通知文1(get通知文().get(1));
-        shiharaiEntity.set通知文1(get通知文().get(2));
+        List<RString> 業務固有キー = new ArrayList<>();
+        業務固有キー.add(entity.getShujiiIryoKikanCode());
+        ShujiiHoshuShiharaiEntity shiharaiEntity = edit.getShujiiHoshuShiharaiEntity(entity, 消費税率, get認証者(),
+                ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
+        shiharaiEntity.set対象期間(get対象期間());
         ShujiiHoshuShiharaiReport report = new ShujiiHoshuShiharaiReport(shiharaiEntity);
         report.writeBy(reportSourceWriter);
     }
@@ -125,7 +120,7 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
         ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE012001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE621002.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
@@ -170,7 +165,11 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
                 reportSourceWriter);
     }
 
-    private Map<Integer, RString> get通知文() {
-        return ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, パターン番号);
+    private RString get対象期間() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
+        builder.append(new RString("～"));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        return builder.toRString();
     }
 }

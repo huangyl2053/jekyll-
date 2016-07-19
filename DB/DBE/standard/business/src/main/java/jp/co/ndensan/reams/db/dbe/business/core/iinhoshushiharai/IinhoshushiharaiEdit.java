@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.iinhoshushiharai;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shujiihoshushiharai.ShujiiHoshuShiharaiEdit;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.chosahoshushiharai.ChosaHoshuShiharaiEdit;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,11 +32,32 @@ public class IinhoshushiharaiEdit {
      * 介護認定審査会委員報酬支払明細書の編集処理です。
      *
      * @param entity HoshuShiharaiJunbiRelateEntity
+     * @param 認証者 認証者
+     * @param 通知文 通知文
+     * @param 口座情報 口座情報
      * @return Iinhoshushiharai
      */
-    public Iinhoshushiharai getIinhoshushiharai(HoshuShiharaiJunbiRelateEntity entity) {
+    public Iinhoshushiharai getIinhoshushiharai(HoshuShiharaiJunbiRelateEntity entity, NinshoshaSource 認証者, Map<Integer, RString> 通知文,
+            Koza 口座情報) {
         int 差引支給額 = entity.getHoshu() - entity.getShinsakaiKojoZeigaku();
         Iinhoshushiharai iinhoshushiharai = new Iinhoshushiharai();
+        iinhoshushiharai.set電子公印(認証者.denshiKoin);
+        iinhoshushiharai.set発行日(認証者.hakkoYMD);
+        iinhoshushiharai.set認証者役職名(認証者.ninshoshaYakushokuMei);
+        iinhoshushiharai.set認証者役職名1(認証者.ninshoshaYakushokuMei1);
+        iinhoshushiharai.set公印文字列(認証者.koinMojiretsu);
+        iinhoshushiharai.set認証者役職名2(認証者.ninshoshaYakushokuMei2);
+        iinhoshushiharai.set認証者氏名カナ(認証者.ninshoshaShimeiKakenai);
+        iinhoshushiharai.set認証者氏名掛ける(認証者.ninshoshaShimeiKakeru);
+        iinhoshushiharai.set公印省略(認証者.koinShoryaku);
+        iinhoshushiharai.set通知文1(通知文.get(1));
+        iinhoshushiharai.set通知文2(通知文.get(2));
+        if (null != 口座情報) {
+            iinhoshushiharai.set金融機関(口座情報.getCombined金融機関名and支店名());
+            iinhoshushiharai.set名議人(口座情報.get口座名義人().value());
+            iinhoshushiharai.set種別(口座情報.get預金種別().get預金種別名称());
+            iinhoshushiharai.set番号(口座情報.get口座番号());
+        }
         iinhoshushiharai.set郵便番号(entity.getYubinNo().value());
         iinhoshushiharai.set住所(entity.getJusho());
         if (entity.getShujiiCode() != null && !entity.getShujiiCode().isEmpty()) {
@@ -50,7 +74,7 @@ public class IinhoshushiharaiEdit {
         }
         iinhoshushiharai.set名称付与(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会委員報酬支払通知書_宛先敬称, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
-        iinhoshushiharai.setバーコード(ShujiiHoshuShiharaiEdit.getバーコード(entity));
+        iinhoshushiharai.setバーコード(ChosaHoshuShiharaiEdit.getバーコード(entity));
         iinhoshushiharai.setその他(entity.getShinsakaiIinCode());
         iinhoshushiharai.setタイトル(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会委員報酬支払通知書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));

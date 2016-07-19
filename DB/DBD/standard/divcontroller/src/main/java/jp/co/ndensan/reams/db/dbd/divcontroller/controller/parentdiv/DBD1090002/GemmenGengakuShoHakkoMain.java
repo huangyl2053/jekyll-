@@ -56,6 +56,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class GemmenGengakuShoHakkoMain {
 
+    /**
+     * 初期化処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
     public ResponseData<GemmenGengakuShoHakkoMainDiv> onLoad(GemmenGengakuShoHakkoMainDiv div) {
         viewStateKeyの廃棄();
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);

@@ -30,10 +30,10 @@
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
             ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
           INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-            ON T5910."insertDantaiCd" = T7051."insertDantaiCd" 
+            ON T5910."shichosonCode" = T7051."shichosonCode" 
             AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode" 
           INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
-            ON T5913."insertDantaiCd" = T7051."insertDantaiCd" 
+            ON T5913."shichosonCode" = T7051."shichosonCode" 
             AND T5913."ninteiChosaItakusakiCode" = T5601."ninteichosaItakusakiCode" 
             AND T5913."ninteiChosainCode" = T5601."ninteichosainCode" 
           INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 

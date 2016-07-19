@@ -47,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 報酬支払い通知書請求書・確認書のデータを作成します。
@@ -67,11 +66,13 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
-    private static int 合計件数新規在宅 = 0;
-    private static int 合計件数新規施設 = 0;
-    private static int 合計件数継続在宅 = 0;
-    private static int 合計件数継続施設 = 0;
-    private static int 合計金額 = 0;
+    private Decimal 合計件数新規在宅 = Decimal.ZERO;
+    private Decimal 合計件数新規施設 = Decimal.ZERO;
+    private Decimal 合計件数継続在宅 = Decimal.ZERO;
+    private Decimal 合計件数継続施設 = Decimal.ZERO;
+    private Decimal 合計金額 = Decimal.ZERO;
+    private RString chosaItakusakiNam = RString.EMPTY;
+    private RString ninteichosainCode = RString.EMPTY;
 
     @BatchWriter
     private BatchReportWriter<ChosaHoshumeisaiReportSource> batchWrite;
@@ -113,22 +114,8 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         if (hasBrek(getBefore(), current)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
             ChosaHoshumeisaiEdit edit = new ChosaHoshumeisaiEdit();
-            ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(current, 消費税率);
-            合計件数新規在宅 = 合計件数新規在宅 + Integer.valueOf(chosaHoshumeisai.get合計件数新規在宅().toString());
-            合計件数新規施設 = 合計件数新規施設 + Integer.valueOf(chosaHoshumeisai.get合計件数新規施設().toString());
-            合計件数継続在宅 = 合計件数継続在宅 + Integer.valueOf(chosaHoshumeisai.get合計件数継続在宅().toString());
-            合計件数継続施設 = 合計件数継続施設 + Integer.valueOf(chosaHoshumeisai.get合計件数継続施設().toString());
-            chosaHoshumeisai.set合計件数新規在宅(new RString(String.valueOf(合計件数新規在宅)));
-            chosaHoshumeisai.set合計件数新規施設(new RString(String.valueOf(合計件数新規施設)));
-            chosaHoshumeisai.set合計件数継続在宅(new RString(String.valueOf(合計件数継続在宅)));
-            chosaHoshumeisai.set合計件数継続施設(new RString(String.valueOf(合計件数継続施設)));
-            合計金額 = 合計金額 + Integer.valueOf(chosaHoshumeisai.get合計金額().toString());
-            chosaHoshumeisai.set合計金額(kinngakuFormat(new Decimal(合計金額)));
-            int 消費税 = 合計金額 * Integer.valueOf(消費税率.toString()) - 合計金額;
-            chosaHoshumeisai.set対象期間(get対象期間());
-            chosaHoshumeisai.set明細番号(new RString(String.valueOf(index_tmp)));
-            chosaHoshumeisai.set消費税(kinngakuFormat(new Decimal(消費税)));
-            chosaHoshumeisai.set合計請求額(kinngakuFormat(new Decimal(消費税 + 合計金額)));
+            ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(current);
+            chosaHoshumeisai = getChosaHoshumeisai(chosaHoshumeisai, current);
             ChosaHoshumeisaiReport report = new ChosaHoshumeisaiReport(chosaHoshumeisai);
             report.writeBy(reportSourceWriter);
             index_tmp++;
@@ -144,7 +131,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ChosaHoshumeisaiEdit edit = new ChosaHoshumeisaiEdit();
-        ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(entity, 消費税率);
+        ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(entity);
         chosaHoshumeisai.set対象期間(get対象期間());
         chosaHoshumeisai.set明細番号(new RString(String.valueOf(index_tmp)));
         ChosaHoshumeisaiReport report = new ChosaHoshumeisaiReport(chosaHoshumeisai);
@@ -210,10 +197,54 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         return builder.toRString();
     }
 
-    private RString kinngakuFormat(Decimal date) {
+    private ChosaHoshumeisai getChosaHoshumeisai(ChosaHoshumeisai chosaHoshumeisai, HoshuShiharaiJunbiRelateEntity entity) {
+        if (!chosaItakusakiNam.equals(entity.getJigyoshaMeisho()) || !ninteichosainCode.equals(entity.getNinteichosainCode())) {
+            合計金額 = Decimal.ZERO;
+            index_tmp = 1;
+            合計件数新規在宅 = Decimal.ZERO;
+            合計件数新規施設 = Decimal.ZERO;
+            合計件数継続在宅 = Decimal.ZERO;
+            合計件数継続施設 = Decimal.ZERO;
+            chosaItakusakiNam = entity.getJigyoshaMeisho();
+            ninteichosainCode = entity.getNinteichosainCode();
+        }
+        合計件数新規在宅 = 合計件数新規在宅.add(rstringToInt(chosaHoshumeisai.get合計件数新規在宅()));
+        合計件数新規施設 = 合計件数新規施設.add(rstringToInt(chosaHoshumeisai.get合計件数新規施設()));
+        合計件数継続在宅 = 合計件数継続在宅.add(rstringToInt(chosaHoshumeisai.get合計件数継続在宅()));
+        合計件数継続施設 = 合計件数継続施設.add(rstringToInt(chosaHoshumeisai.get合計件数継続施設()));
+        chosaHoshumeisai.set合計件数新規在宅(decimalToRString(合計件数新規在宅));
+        chosaHoshumeisai.set合計件数新規施設(decimalToRString(合計件数新規施設));
+        chosaHoshumeisai.set合計件数継続在宅(decimalToRString(合計件数継続在宅));
+        chosaHoshumeisai.set合計件数継続施設(decimalToRString(合計件数継続施設));
+        合計金額 = 合計金額.add(rstringToDecimal(chosaHoshumeisai.get合計金額()));
+        chosaHoshumeisai.set合計金額(decimalToRString(合計金額));
+        Decimal 消費税 = 合計金額.multiply(rstringToDecimal(消費税率)).subtract(合計金額);
+        chosaHoshumeisai.set対象期間(get対象期間());
+        chosaHoshumeisai.set生年月日(dateFormat9(entity.getSeinengappiYMD()));
+        chosaHoshumeisai.set明細番号(new RString(String.valueOf(index_tmp)));
+        chosaHoshumeisai.set消費税(decimalToRString(消費税));
+        chosaHoshumeisai.set合計請求額(decimalToRString(消費税.add(合計金額)));
+        return chosaHoshumeisai;
+    }
+
+    private int rstringToInt(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return 0;
+        }
+        return Integer.valueOf(date.toString());
+    }
+
+    private Decimal rstringToDecimal(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(date.toString());
+    }
+
+    private RString decimalToRString(Decimal date) {
         if (date == null) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(date, 0);
+        return new RString(date.toString());
     }
 }

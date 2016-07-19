@@ -436,6 +436,20 @@ public final class DateConverter {
     }
 
     /**
+     * 年月 平 1年 1月 平 2年 1月
+     *
+     * @param date RYearMonth
+     * @return 共通ポリシーパターン256
+     */
+    public static RString getDate256(RYearMonth date) {
+        if (date == null || date.equals(RYearMonth.MAX) || date.equals(RYearMonth.MIN)) {
+            return RString.EMPTY;
+        }
+        return date.wareki().firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
+    }
+
+    /**
      * FlexibleDate => RDate
      *
      * @param fd FlexibleDate

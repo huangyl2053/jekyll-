@@ -41,17 +41,17 @@ public final class ShiharaiHohoHenkoYokokuTsuchishoReport extends Report<Shihara
     /**
      * インスタンスを生成します。
      *
-     * @param 個人情報 IKojin
-     * @param 宛先 IAtesaki
-     * @param 帳票制御汎用リスト List<ChohyoSeigyoHanyo>
-     * @param 帳票制御共通 ChohyoSeigyoKyotsu
-     * @param 地方公共団体 Association
-     * @param 発行日 FlexibleDate
-     * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
-     * @param 帳票分類ID RString
-     * @param 認証者 Ninshosha
-     * @param 帳票情報 ShiharaiHohoHenko
+     * @param 個人情報 個人情報
+     * @param 宛先 宛先
+     * @param 帳票制御汎用リスト 帳票制御汎用リスト
+     * @param 帳票制御共通 帳票制御共通
+     * @param 地方公共団体 地方公共団体
+     * @param 発行日 発行日
+     * @param 文書番号 文書番号
+     * @param 通知書定型文リスト 通知書定型文リスト
+     * @param 帳票分類ID 帳票分類ID
+     * @param 認証者 認証者
+     * @param 帳票情報 帳票情報
      * @return 支払方法変更予告通知書
      */
     public static ShiharaiHohoHenkoYokokuTsuchishoReport createReport(IKojin 個人情報, IAtesaki 宛先,

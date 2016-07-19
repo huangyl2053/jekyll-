@@ -13,7 +13,7 @@
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiJisshiNinzu" AS "shinsakaiJisshiNinzu"
         ,DbT5501ShinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
         ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName"
-        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode" AS "shinsakaiKaisaiYoteiBashoCode"
+        ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaishiTime" AS "shinsakaiKaishiTime"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiShuryoTime" AS "shinsakaiShuryoTime"
@@ -37,7 +37,7 @@
         <result property="介護認定審査会実施人数" column="shinsakaiJisshiNinzu"/>
         <result property="進捗状況" column="ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催場所名称" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="地区コード" column="shinsakaiKaisaiYoteiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="地区コード" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="開催日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="開催開始時間" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="開催終了時間" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

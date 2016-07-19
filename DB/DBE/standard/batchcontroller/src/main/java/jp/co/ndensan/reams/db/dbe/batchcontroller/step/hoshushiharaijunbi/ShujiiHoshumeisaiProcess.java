@@ -112,7 +112,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
         if (hasBrek(getBefore(), current)) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(current));
             ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
-            ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(current, 消費税率);
+            ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(current);
             editShujiiHoshumeisaiEntity(shumeisaiEntity, current);
             ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
             report.writeBy(reportSourceWriter);
@@ -129,7 +129,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
     protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
-        ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(entity, 消費税率);
+        ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(entity);
         editShujiiHoshumeisaiEntity(shumeisaiEntity, entity);
         ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
@@ -198,33 +198,40 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
 
     private ShujiiHoshumeisaiEntity editShujiiHoshumeisaiEntity(ShujiiHoshumeisaiEntity shumeisaiEntity,
             HoshuShiharaiJunbiRelateEntity current) {
-        if (shumeisaiEntity.get新規在宅件数() != null) {
-            合計件数新規在宅 = 合計件数新規在宅.add(new Decimal(shumeisaiEntity.get新規在宅件数().toString()));
-        }
-        if (shumeisaiEntity.get新規施設件数() != null) {
-            合計件数新規施設 = 合計件数新規施設.add(new Decimal(shumeisaiEntity.get新規施設件数().toString()));
-        }
-        if (shumeisaiEntity.get継続在宅件数() != null) {
-            合計件数継続在宅 = 合計件数継続在宅.add(new Decimal(shumeisaiEntity.get継続在宅件数().toString()));
-        }
-        if (shumeisaiEntity.get継続施設件数() != null) {
-            合計件数継続施設 = 合計件数継続施設.add(new Decimal(shumeisaiEntity.get継続施設件数().toString()));
-        }
-
-        shumeisaiEntity.set新規在宅件数(new RString(String.valueOf(合計件数新規在宅)));
-        shumeisaiEntity.set新規施設件数(new RString(String.valueOf(合計件数新規施設)));
-        shumeisaiEntity.set継続在宅件数(new RString(String.valueOf(合計件数継続在宅)));
-        shumeisaiEntity.set継続施設件数(new RString(String.valueOf(合計件数継続施設)));
-        if (shumeisaiEntity.get合計金額() != null) {
-            合計金額 = 合計金額.add(new Decimal(shumeisaiEntity.get合計金額().toString()));
-        }
-        shumeisaiEntity.set合計金額(new RString(合計金額.toString()));
-        Decimal 消費税 = 合計金額.multiply(new Decimal(消費税率.toString())).subtract(合計金額);
+        合計件数新規在宅 = 合計件数新規在宅.add(rstringToDecimal(shumeisaiEntity.get新規在宅件数()));
+        合計件数新規施設 = 合計件数新規施設.add(rstringToDecimal(shumeisaiEntity.get新規施設件数()));
+        合計件数継続在宅 = 合計件数継続在宅.add(rstringToDecimal(shumeisaiEntity.get継続在宅件数()));
+        合計件数継続施設 = 合計件数継続施設.add(rstringToDecimal(shumeisaiEntity.get継続施設件数()));
+        shumeisaiEntity.set新規在宅件数(decimalToRString(合計件数新規在宅));
+        shumeisaiEntity.set新規施設件数(decimalToRString(合計件数新規施設));
+        shumeisaiEntity.set継続在宅件数(decimalToRString(合計件数継続在宅));
+        shumeisaiEntity.set継続施設件数(decimalToRString(合計件数継続施設));
+        合計金額 = 合計金額.add(rstringToDecimal(shumeisaiEntity.get合計金額()));
+        shumeisaiEntity.set合計金額(decimalToRString(合計金額));
+        Decimal 消費税 = 合計金額.multiply(rstringToDecimal(消費税率)).subtract(合計金額);
         shumeisaiEntity.set対象期間(get対象期間());
-        shumeisaiEntity.set明細番号(new RString(String.valueOf(index_tmp)));
+        shumeisaiEntity.set明細番号(intToRString(index_tmp));
         shumeisaiEntity.set生年月日(dateFormat9(current.getSeinengappiYMD()));
-        shumeisaiEntity.set消費税(new RString(消費税.toString()));
-        shumeisaiEntity.set合計請求額(new RString(合計金額.add(消費税).toString()));
+        shumeisaiEntity.set消費税(decimalToRString(消費税));
+        shumeisaiEntity.set合計請求額(decimalToRString(合計金額.add(消費税)));
         return shumeisaiEntity;
+    }
+
+    private RString intToRString(int date) {
+        return new RString(String.valueOf(date));
+    }
+
+    private RString decimalToRString(Decimal date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new RString(date.toString());
+    }
+
+    private Decimal rstringToDecimal(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(date.toString());
     }
 }

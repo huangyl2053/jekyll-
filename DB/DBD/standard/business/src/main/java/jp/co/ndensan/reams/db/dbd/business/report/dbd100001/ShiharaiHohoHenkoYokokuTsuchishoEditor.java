@@ -57,18 +57,18 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
     /**
      * インスタンスを生成します。
      *
-     * @param 個人情報 IKojin
-     * @param 宛先 IAtesaki
-     * @param 帳票制御汎用リスト List<ChohyoSeigyoHanyo>
-     * @param 帳票制御共通 ChohyoSeigyoKyotsu
-     * @param 地方公共団体 Association
-     * @param 発行日 FlexibleDate
-     * @param 文書番号 RString
-     * @param 通知書定型文リスト List<RString>
-     * @param 帳票分類ID RString
-     * @param 認証者 Ninshosha
-     * @param 帳票情報 ShiharaiHohoHenko
-     * @param イメージファイルパス RString
+     * @param 個人情報 個人情報
+     * @param 宛先 宛先
+     * @param 帳票制御汎用リスト 帳票制御汎用リスト
+     * @param 帳票制御共通 帳票制御共通
+     * @param 地方公共団体 地方公共団体
+     * @param 発行日 発行日
+     * @param 文書番号 文書番号
+     * @param 通知書定型文リスト 通知書定型文リスト
+     * @param 帳票分類ID 帳票分類ID
+     * @param 認証者 認証者
+     * @param 帳票情報 帳票情報
+     * @param イメージファイルパス イメージファイルパス
      */
     public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先,
             List<ChohyoSeigyoHanyo> 帳票制御汎用リスト, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
@@ -94,6 +94,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         setCompSofubutsuAtesaki(source);
         setCompNinshosha(source);
         setLayer1(source);
+        アクセスログeditor(source);
         return source;
     }
 
@@ -196,7 +197,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
                 }
             }
         }
-        //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),このリストの値の数は知らない
+        //TODO:RString 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(0),getShiharaiHohoHenkoTainoListの値の数は知らない
         // source.nendoTitle1 = 支払方法変更滞納.get賦課年度().toDateString();
         //source.nendoTitle2 = ;
         //source.nendoTitle3 = ;
@@ -223,13 +224,17 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
             source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
-        source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
-        source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
 
     }
 
     private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通) {
         return new EditedKojin(個人情報, 帳票制御共通);
+    }
+
+    private void アクセスログeditor(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+        source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
+        source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
+
     }
 
 }

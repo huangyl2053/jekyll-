@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,20 +39,15 @@ public class ChosaHoshumeisaiEdit {
     private int 合計件数新規施設 = 0;
     private int 合計件数継続在宅 = 0;
     private int 合計件数継続施設 = 0;
-    private int 合計金額 = 0;
+    private Decimal 合計金額 = Decimal.ZERO;
 
     /**
      * 要介護認定・要支援認定等申請者の編集処理です。
      *
      * @param entity 要介護認定申請
-     * @param 消費税率 消費税率
      * @return ChosaHoshuShiharaiEntity
      */
-    public ChosaHoshumeisai getChosaHoshumeisai(HoshuShiharaiJunbiRelateEntity entity, RString 消費税率) {
-        int 税率 = 0;
-        if (!RString.isNullOrEmpty(消費税率)) {
-            税率 = Integer.valueOf(消費税率.toString());
-        }
+    public ChosaHoshumeisai getChosaHoshumeisai(HoshuShiharaiJunbiRelateEntity entity) {
         ChosaHoshumeisai hoshumeisai = new ChosaHoshumeisai();
         hoshumeisai.setタイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査報酬支払明細書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
@@ -89,24 +83,14 @@ public class ChosaHoshumeisaiEdit {
             hoshumeisai.set継続申請施設(MARU);
             合計件数継続施設 = 合計件数継続施設 + 1;
         }
-        hoshumeisai.set調査票作成料(kinngakuFormat(new Decimal(entity.getChosaItakuryo())));
-        hoshumeisai.set合計件数新規在宅(new RString(String.valueOf(合計件数新規在宅)));
-        hoshumeisai.set合計件数新規施設(new RString(String.valueOf(合計件数新規施設)));
-        hoshumeisai.set合計件数継続在宅(new RString(String.valueOf(合計件数継続在宅)));
-        hoshumeisai.set合計件数継続施設(new RString(String.valueOf(合計件数継続施設)));
-        合計金額 = 合計金額 + entity.getChosaItakuryo();
-        hoshumeisai.set合計金額(kinngakuFormat(new Decimal(合計金額)));
-        int 消費税 = 合計金額 * 税率 - 合計金額;
-        hoshumeisai.set消費税(kinngakuFormat(new Decimal(消費税)));
-        hoshumeisai.set合計請求額(kinngakuFormat(new Decimal(合計金額 + 消費税)));
+        hoshumeisai.set調査票作成料(intToRString(entity.getChosaItakuryo()));
+        hoshumeisai.set合計件数新規在宅(intToRString(合計件数新規在宅));
+        hoshumeisai.set合計件数新規施設(intToRString(合計件数新規施設));
+        hoshumeisai.set合計件数継続在宅(intToRString(合計件数継続在宅));
+        hoshumeisai.set合計件数継続施設(intToRString(合計件数継続施設));
+        合計金額 = 合計金額.add(entity.getChosaItakuryo());
+        hoshumeisai.set合計金額(decimalToRString(合計金額));
         return hoshumeisai;
-    }
-
-    private RString kinngakuFormat(Decimal date) {
-        if (date == null) {
-            return RString.EMPTY;
-        }
-        return DecimalFormatter.toコンマ区切りRString(date, 0);
     }
 
     private RString get帳票印刷日時() {
@@ -120,5 +104,16 @@ public class ChosaHoshumeisaiEdit {
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 印刷日時 = hakkoYMD.toRString();
         return 印刷日時;
+    }
+
+    private RString decimalToRString(Decimal date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new RString(date.toString());
+    }
+
+    private RString intToRString(int date) {
+        return new RString(String.valueOf(date));
     }
 }

@@ -271,10 +271,10 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getBtnOutputAtoRireki().setDisabled(false);
 
         if (list != null && !list.isEmpty()) {
-            HomonKaigoRiyoshaFutangakuGengaku homonKaigoRiyoshaFutangakuGengaku = list.get(list.size() - 1);
-            set認定証(homonKaigoRiyoshaFutangakuGengaku.get決定区分(), new RString("訪問介護等利用者負担額減額認定証"));
+            HomonKaigoRiyoshaFutangakuGengaku homonKaigoRiyoshaFutangaku = list.get(list.size() - 1);
+            set認定証(homonKaigoRiyoshaFutangaku.get決定区分(), new RString("訪問介護等利用者負担額減額認定証"));
             set通知書(new RString("訪問介護等利用者負担額減額決定通知書"), ReportIdDBD.DBD100011.getReportId());
-            set訪問介護利用者負担額減額エリア(homonKaigoRiyoshaFutangakuGengaku);
+            set訪問介護利用者負担額減額エリア(homonKaigoRiyoshaFutangaku);
             div.setHomonKaigoRiyoshaFutangakuGengakuIndex(new RString(Integer.toString(list.size() - 1)));
             div.getBtnOutputAtoRireki().setDisabled(true);
             if (1 == list.size()) {
@@ -332,6 +332,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuShoninShinaiRiyu().clearValue();
     }
 
+    /**
+     * 利用者負担額減免エリアの設定処理です。
+     *
+     * @param riyoshaFutangakuGengaku 利用者負担額減額情報
+     */
     public void set利用者負担額減免エリア(RiyoshaFutangakuGengaku riyoshaFutangakuGengaku) {
         div.setHiddenRirekiNo(new RString(riyoshaFutangakuGengaku.get履歴番号()));
         div.getRiyoshaFutangakuGenmen().getTxtRiyoshaFutanGendogakuKetteiKubun().setValue(riyoshaFutangakuGengaku.get決定区分() == null
@@ -370,6 +375,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiTashoshitsu().clearValue();
     }
 
+    /**
+     * 負担限度額認定エリアの設定処理です。
+     *
+     * @param futanGendogakuNintei 介護保険負担限度額認定情報
+     */
     public void set負担限度額認定エリア(FutanGendogakuNintei futanGendogakuNintei) {
         div.setHiddenRirekiNo(new RString(futanGendogakuNintei.get履歴番号()));
         div.getFutanGendogakuNintei().getTxtFutanGendogakuNinteiKetteiKubun().setValue(futanGendogakuNintei.get決定区分() == null
@@ -411,32 +421,37 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo().clearValue();
     }
 
-    public void set訪問介護利用者負担額減額エリア(HomonKaigoRiyoshaFutangakuGengaku homonKaigoRiyoshaFutangakuGengaku) {
-        div.setHiddenRirekiNo(new RString(homonKaigoRiyoshaFutangakuGengaku.get履歴番号()));
+    /**
+     * 訪問介護利用者負担額減額エリアの設定処理です。
+     *
+     * @param homonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報
+     */
+    public void set訪問介護利用者負担額減額エリア(HomonKaigoRiyoshaFutangakuGengaku homonKaigoRiyoshaFutangaku) {
+        div.setHiddenRirekiNo(new RString(homonKaigoRiyoshaFutangaku.get履歴番号()));
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKetteiKubun().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get決定区分() == null || homonKaigoRiyoshaFutangakuGengaku.get決定区分().isEmpty()
-                        ? RString.EMPTY : KetteiKubun.toValue(homonKaigoRiyoshaFutangakuGengaku.get決定区分()).get名称());
+                setValue(homonKaigoRiyoshaFutangaku.get決定区分() == null || homonKaigoRiyoshaFutangaku.get決定区分().isEmpty()
+                        ? RString.EMPTY : KetteiKubun.toValue(homonKaigoRiyoshaFutangaku.get決定区分()).get名称());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuShinseibi().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get申請年月日());
+                setValue(homonKaigoRiyoshaFutangaku.get申請年月日());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKetteibi().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get決定年月日());
+                setValue(homonKaigoRiyoshaFutangaku.get決定年月日());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuTekiyobi().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get適用開始年月日());
+                setValue(homonKaigoRiyoshaFutangaku.get適用開始年月日());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuYukoKigen().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get適用終了年月日());
+                setValue(homonKaigoRiyoshaFutangaku.get適用終了年月日());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuShoninShinaiRiyu().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get非承認理由());
+                setValue(homonKaigoRiyoshaFutangaku.get非承認理由());
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuHobetsuKubun().setValue(
-                homonKaigoRiyoshaFutangakuGengaku.get法別区分() == null || homonKaigoRiyoshaFutangakuGengaku.get法別区分().isEmpty()
-                        ? RString.EMPTY : HobetsuKubun.toValue(homonKaigoRiyoshaFutangakuGengaku.get法別区分()).get名称());
-        if (homonKaigoRiyoshaFutangakuGengaku.get給付率() != null) {
+                homonKaigoRiyoshaFutangaku.get法別区分() == null || homonKaigoRiyoshaFutangaku.get法別区分().isEmpty()
+                        ? RString.EMPTY : HobetsuKubun.toValue(homonKaigoRiyoshaFutangaku.get法別区分()).get名称());
+        if (homonKaigoRiyoshaFutangaku.get給付率() != null) {
             div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu().
-                    setValue(new RString(homonKaigoRiyoshaFutangakuGengaku.get給付率().getColumnValue().toString()));
+                    setValue(new RString(homonKaigoRiyoshaFutangaku.get給付率().getColumnValue().toString()));
         } else {
             div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKyufuritsu().clearValue();
         }
         div.getHomonKaigoRiyoshaFutangakuGengaku().getTxtHomonKaigoRiyoshaFutangakuGengakuKohiJukyushaNo().
-                setValue(homonKaigoRiyoshaFutangakuGengaku.get公費受給者番号());
+                setValue(homonKaigoRiyoshaFutangaku.get公費受給者番号());
     }
 
     private void クリア社会福祉法人等利用者負担軽減エリア() {
@@ -454,6 +469,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKyuSothishaUnitgataKoshitsuGentei().clearValue();
     }
 
+    /**
+     * 社会福祉法人等利用者負担軽減エリアの設定処理です。
+     *
+     * @param shakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報
+     */
     public void set社会福祉法人等利用者負担軽減エリア(ShakaifukuRiyoshaFutanKeigen shakaifukuRiyoshaFutanKeigen) {
         div.setHiddenRirekiNo(new RString(shakaifukuRiyoshaFutanKeigen.get履歴番号()));
         div.getShafukuHojinToRiyushaFutanKeigen().getTxtShafukuHojinToRiyushaFutanKeigenKetteiKubun().
@@ -495,6 +515,11 @@ public class GemmenGengakuShoHakkoMainHandler {
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenKakuninNo().clearValue();
     }
 
+    /**
+     * 特別地域加算減免エリアの設定処理です。
+     *
+     * @param tokubetsuchiikiKasanGemmen 特別地域加算減免情報
+     */
     public void set特別地域加算減免エリア(TokubetsuchiikiKasanGemmen tokubetsuchiikiKasanGemmen) {
         div.setHiddenRirekiNo(new RString(tokubetsuchiikiKasanGemmen.get履歴番号()));
         div.getTokubetsuChilkiKasanGenmen().getTxtTokubetsuChilkiKasanGenmenKetteiKubun().setValue(tokubetsuchiikiKasanGemmen.get決定区分() == null
@@ -538,14 +563,19 @@ public class GemmenGengakuShoHakkoMainHandler {
     }
 
     private void set通知書(RString 通知書title, ReportId 通知書帳票ID) {
-        div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
-        div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setTitle(通知書title);
-        div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
-        div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
-                setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         try {
             div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().initialize(通知書帳票ID);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setTitle(通知書title);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
+                    setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         } catch (ApplicationException e) {
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setDisplayNone(false);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setTitle(通知書title);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().setIsPublish(true);
+            div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().
+                    setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         }
     }
 
