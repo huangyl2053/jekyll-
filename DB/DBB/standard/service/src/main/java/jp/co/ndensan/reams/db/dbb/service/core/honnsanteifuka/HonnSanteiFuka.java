@@ -177,6 +177,7 @@ public class HonnSanteiFuka {
     private final DbT2010FukaErrorListDac 賦課エラーDac;
     private final DbT2002FukaDac 介護賦課Dac;
     private final DbT2003KibetsuDac 介護期別Dac;
+    private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
     private final UrT0705ChoteiKyotsuDac choteiKyotsuDac;
     private static final RString T5 = new RString("T5");
     private static final RString SIGN = new RString(" ＞ ");
@@ -268,7 +269,6 @@ public class HonnSanteiFuka {
     private static final RString タイトル_普徴額11期 = new RString("普徴額11期");
     private static final RString タイトル_普徴額12期 = new RString("普徴額12期");
     private static final RString タイトル_備考 = new RString("備考");
-    private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final int NUM_負1 = -1;
     private static final int 四月 = 4;
     private static final int NUM_0 = 0;
@@ -292,6 +292,7 @@ public class HonnSanteiFuka {
      */
     public HonnSanteiFuka() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         this.徴収方法Dac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         this.介護徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
         this.賦課エラーDac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
@@ -320,7 +321,8 @@ public class HonnSanteiFuka {
             DbT2010FukaErrorListDac 賦課エラーDac,
             DbT2002FukaDac 介護賦課Dac,
             DbT2003KibetsuDac 介護期別Dac,
-            UrT0705ChoteiKyotsuDac choteiKyotsuDac) {
+            UrT0705ChoteiKyotsuDac choteiKyotsuDac,
+            DbT7022ShoriDateKanriDac 処理日付管理Dac) {
         this.mapperProvider = mapperProvider;
         this.徴収方法Dac = 徴収方法Dac;
         this.帳票制御共通Dac = 帳票制御共通Dac;
@@ -329,6 +331,7 @@ public class HonnSanteiFuka {
         this.介護賦課Dac = 介護賦課Dac;
         this.介護期別Dac = 介護期別Dac;
         this.choteiKyotsuDac = choteiKyotsuDac;
+        this.処理日付管理Dac = 処理日付管理Dac;
     }
 
     /**
@@ -665,6 +668,9 @@ public class HonnSanteiFuka {
             YMDHMS 調定日時) {
         IHonnSanteiFukaMapper mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
         KozaSearchKeyBuilder kozabuilder = new KozaSearchKeyBuilder();
+        kozabuilder.set業務コード(GyomuCode.DB介護保険);
+        kozabuilder.set用途区分(new KozaYotoKubunCodeValue(CODE));
+        kozabuilder.set基準日(FlexibleDate.getNowDate());
         IKozaSearchKey kozaSearchKey = kozabuilder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
@@ -675,6 +681,14 @@ public class HonnSanteiFuka {
         collectSetaiin();
         // ------------------------------Test-------------------------------------//
         List<KakuShugyoumuJouHouEntity> 各種業務情報List = mapper.get賦課計算情報(parameter);
+        // ------------------------------Test-------------------------------------//
+        for (KakuShugyoumuJouHouEntity entity : 各種業務情報List) {
+            List<SetaiShotokuEntity> 世帯員所得情報 = entity.get世帯員所得情報();
+            for (SetaiShotokuEntity shotokuEntity : 世帯員所得情報) {
+                shotokuEntity.setKazeiKubun(new RString("3"));
+            }
+        }
+        // ------------------------------Test-------------------------------------//
         if (各種業務情報List == null || 各種業務情報List.isEmpty()) {
             return;
         }
@@ -780,8 +794,24 @@ public class HonnSanteiFuka {
         if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) == NUM_0) {
             賦課の情報_更正後 = creat出力対象(賦課年度, 賦課の情報_更正後,
                     賦課の情報_更正前, 調定日時, 徴収方法の情報_更正後, jouHouEntity);
-        }
-        if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) == NUM_負1) {
+            FukaJoho 賦課の情報_設定後 = setChoteiJiyu(賦課の情報_更正前, 賦課の情報_更正後,
+                    new ChoshuHoho(jouHouEntity.get徴収方法の情報()));
+            DbT2002FukaEntity 介護賦課 = 賦課の情報_設定後.toEntity();
+            介護賦課.setState(EntityDataState.Added);
+            介護賦課Dac.save(介護賦課);
+            List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
+            for (Kibetsu kibetsu : kibetsuList) {
+                DbT2003KibetsuEntity 介護期別 = kibetsu.toEntity();
+                介護期別.setState(EntityDataState.Added);
+                介護期別Dac.save(介護期別);
+                List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
+                for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
+                    UrT0705ChoteiKyotsuEntity choteiKyotsuEntity = choteiKyotsu.toEntity();
+                    choteiKyotsuEntity.setState(EntityDataState.Added);
+                    choteiKyotsuDac.save(choteiKyotsuEntity);
+                }
+            }
+        } else if (Decimal.ZERO.compareTo(賦課の情報_更正前.get減免額()) == NUM_負1) {
             DbT2010FukaErrorListEntity errorListEntity = new DbT2010FukaErrorListEntity();
             errorListEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
             errorListEntity.setInternalReportId(内部帳票ID);
@@ -801,29 +831,14 @@ public class HonnSanteiFuka {
             errorListEntity.setState(EntityDataState.Added);
             賦課エラーDac.save(errorListEntity);
         }
-        FukaJoho 賦課の情報_設定後 = setChoteiJiyu(賦課の情報_更正前, 賦課の情報_更正後,
-                new ChoshuHoho(jouHouEntity.get徴収方法の情報()));
-        DbT2002FukaEntity 介護賦課 = 賦課の情報_設定後.toEntity();
-        介護賦課.setState(EntityDataState.Added);
-        介護賦課Dac.save(介護賦課);
-        List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
-            DbT2003KibetsuEntity 介護期別 = kibetsu.toEntity();
-            介護期別.setState(EntityDataState.Added);
-            介護期別Dac.save(介護期別);
-            List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
-            for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
-                UrT0705ChoteiKyotsuEntity choteiKyotsuEntity = choteiKyotsu.toEntity();
-                choteiKyotsuEntity.setState(EntityDataState.Added);
-                choteiKyotsuDac.save(choteiKyotsuEntity);
-            }
-        }
+
     }
 
     private FukaJoho creat出力対象(FlexibleYear 賦課年度,
             FukaJoho 賦課の情報_更正後, FukaJoho 賦課の情報_更正前, YMDHMS 調定日時,
             ChoshuHoho 徴収方法の情報_更正後, KakuShugyoumuJouHouEntity jouHouEntity) {
         FukaJohoBuilder builder = 賦課の情報_更正後.createBuilderForEdit();
+        builder.set被保険者番号(new HihokenshaDaicho(jouHouEntity.get資格の情報()).get被保険者番号());
         if (賦課の情報_更正前 == null) {
             builder.set履歴番号(NUM_0);
         } else if (is変化有り(賦課の情報_更正前, 賦課の情報_更正後)) {
@@ -1346,8 +1361,7 @@ public class HonnSanteiFuka {
     public void spoolHonsanteiKekkaIchiran(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
-            Long 出力順ID
-    ) {
+            Long 出力順ID) {
         IHonnSanteiFukaMapper mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBB介護賦課, 帳票ID, 出力順ID);
@@ -2363,4 +2377,5 @@ public class HonnSanteiFuka {
             処理日付管理Dac.save(entity);
         }
     }
+
 }
