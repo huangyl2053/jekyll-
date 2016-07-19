@@ -106,6 +106,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
+        manager.spool(eucFilePath);
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 rseId,
                 導入団体クラス.getLasdecCode_().value(),
