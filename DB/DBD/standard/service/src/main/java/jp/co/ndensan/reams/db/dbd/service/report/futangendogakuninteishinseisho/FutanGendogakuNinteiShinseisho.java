@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbd.service.report.futangendogakuninteishinseisho
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoProerty;
-import jp.co.ndensan.reams.db.dbd.business.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800001.FutangendogakuNinteiShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800001.FutangendogakuNinteiShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

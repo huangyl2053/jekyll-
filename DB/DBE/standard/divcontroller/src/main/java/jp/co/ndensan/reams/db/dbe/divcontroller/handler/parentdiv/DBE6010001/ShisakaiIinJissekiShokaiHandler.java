@@ -1,0 +1,131 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001;
+
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiran;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgShisakaiIinJisseki_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+
+/**
+ * 審査会委員実績照会の画面処理Handlerクラスです
+ *
+ * @reamsid_L DBE-1700-010 wanghuafeng
+ */
+public class ShisakaiIinJissekiShokaiHandler {
+
+    private static final RString 集計表を発行する = new RString("btnPulish");
+    private static final RString CSVを出力する = new RString("btnShutsutyoku");
+    private static final RString 条件に戻る = new RString("btnBackToKensaku");
+    private final ShisakaiIinJissekiShokaiDiv div;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param div 画面情報
+     */
+    public ShisakaiIinJissekiShokaiHandler(ShisakaiIinJissekiShokaiDiv div) {
+        this.div = div;
+    }
+
+    /**
+     * 画面初期状態の設定です。
+     */
+    public void set初期状態() {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
+        div.getShisakaiIinJisseki().setDisplayNone(true);
+        div.getShinsakaiKaisaibi().setDisplayNone(false);
+    }
+
+    /**
+     * 条件をクリアする」ボタンを押します。
+     */
+    public void onClick_BtnKensakuClear() {
+        div.getTxtShinsakaiKaisaibi().clearFromValue();
+        div.getTxtShinsakaiKaisaibi().clearToValue();
+        div.getTxtMaxKensu().clearValue();
+    }
+
+    /**
+     * 画面一覧状態の設定です。
+     */
+    public void set一覧状態() {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, true);
+        div.getShisakaiIinJisseki().setDisplayNone(false);
+        div.getShinsakaiKaisaibi().setDisplayNone(true);
+    }
+
+    /**
+     * 「検索する」ボタンを押します。
+     *
+     * @param shinsaiinjissekiichiranList 審査会委員実績照会
+     */
+    public void onClick_BtnKensaku(List<ShinsaiinJissekiIchiran> shinsaiinjissekiichiranList) {
+        List<dgShisakaiIinJisseki_Row> rowList = new ArrayList<>();
+        for (ShinsaiinJissekiIchiran data : shinsaiinjissekiichiranList) {
+            dgShisakaiIinJisseki_Row row = new dgShisakaiIinJisseki_Row(data.getコード(),
+                    data.get氏名(),
+                    data.get報酬区分(),
+                    data.get所属機関(),
+                    data.get審査会地区(),
+                    data.get審査会番号(),
+                    data.get実施日(),
+                    data.get開始(),
+                    data.get終了(),
+                    ShinsakaiIinHoshukubun.toValue(data.get報酬区分()).get名称(),
+                    IsShusseki.toValue(data.is出欠()).get名称(),
+                    data.get実施年月日(),
+                    new RString(Integer.toString(data.get連番())));
+            rowList.add(row);
+        }
+        div.getDgShisakaiIinJisseki().setDataSource(rowList);
+    }
+
+    /**
+     * バッチパラメータを作成します。
+     *
+     * @param 帳票出力区分 帳票出力区分
+     * @return バッチパラメータ
+     */
+    public ShinsaiinJissekiIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
+        ShinsaiinJissekiIchiranBatchParameter param = new ShinsaiinJissekiIchiranBatchParameter();
+        List<ShinsaiinJissekiIchiranKey> keyJoho = new ArrayList<>();
+        for (dgShisakaiIinJisseki_Row row : div.getDgShisakaiIinJisseki().getDataSource()) {
+            if (row.getSelected()) {
+                ShinsaiinJissekiIchiranKey key = new ShinsaiinJissekiIchiranKey();
+                key.setShinsakaiIinCode(row.getCode());
+                key.setShinsakaiIinHoshuKubun(row.getHoshuKubun());
+                key.setShinsakaiKaisaiYMD(row.getShinsakaiKaisaiYMD());
+                key.setRemban(Integer.parseInt(row.getRemban().toString()));
+                keyJoho.add(key);
+            }
+        }
+        param.setKeyJoho(keyJoho);
+        RString 審査会開催日FROM = RString.EMPTY;
+        RString 審査会開催日TO = RString.EMPTY;
+        if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
+            審査会開催日FROM = div.getTxtShinsakaiKaisaibi().getFromValue().toDateString();
+        }
+        if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
+            審査会開催日TO = div.getTxtShinsakaiKaisaibi().getToValue().toDateString();
+        }
+        param.setShinsakaikaisaibiFrom(審査会開催日FROM);
+        param.setShinsakaikaisaibiTo(審査会開催日TO);
+        param.setSyohyoSyuturyoku(帳票出力区分);
+        return param;
+    }
+}

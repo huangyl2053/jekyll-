@@ -61,13 +61,11 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
      * @return 社会福祉法人等利用者負担軽減対象決定通知書Source
      */
     @Override
-    public ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource edit(
-            ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
+    public ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource edit(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
         return bodyEdit(source);
     }
 
-    private ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource bodyEdit(
-            ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
+    private ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource bodyEdit(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
 
         source.bunshoNo = item.get文書番号();
         source.title1 = new RString("社会福祉法人等利用者負担軽減対象決定通知書");
@@ -171,9 +169,8 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
         return source;
     }
 
-    private ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource set通知書定型文(
-            ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source, int index,
-            ShakFuksHjRiysFutKgTsKtTsuchishoItem item, RString taisyou) {
+    private void set通知書定型文(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source, int index, ShakFuksHjRiysFutKgTsKtTsuchishoItem item,
+            RString taisyou) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(index).split(折り返す符号.toString());
         Class reportSource = source.getClass();
         for (int i = 0; i <= 通知書定型文List.size(); i++) {
@@ -206,11 +203,9 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
                 break;
             }
         }
-        return source;
     }
 
-    private ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource setCompNinshosha(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source,
-            ShakFuksHjRiysFutKgTsKtTsuchishoItem item) {
+    private void setCompNinshosha(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source, ShakFuksHjRiysFutKgTsKtTsuchishoItem item) {
         source.denshiKoin = item.getNinshoshaSource().denshiKoin;
         source.hakkoYMD = item.getNinshoshaSource().hakkoYMD;
         source.ninshoshaYakushokuMei1 = item.getNinshoshaSource().ninshoshaYakushokuMei1;
@@ -219,11 +214,9 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
         source.ninshoshaShimeiKakenai = item.getNinshoshaSource().ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = item.getNinshoshaSource().ninshoshaShimeiKakeru;
         source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;
-        return source;
     }
 
-    private ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource setCompSofubutsuAtesaki(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source,
-            ShakFuksHjRiysFutKgTsKtTsuchishoItem item) {
+    private void setCompSofubutsuAtesaki(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source, ShakFuksHjRiysFutKgTsKtTsuchishoItem item) {
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
             sofubutsuAtesakiSource = JushoHenshu.create編集後宛先(
@@ -262,7 +255,6 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        return source;
     }
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {

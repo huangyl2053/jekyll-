@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
@@ -23,10 +25,8 @@ public class HenkoTsuchiKobetsuDiv extends PanelPublish {
      */
     @JsonProperty("txtHenkoTsuchiHakkoYMD")
     private TextBoxFlexibleDate txtHenkoTsuchiHakkoYMD;
-    @JsonProperty("lblHenkoTsuchiBunshoNo")
-    private Label lblHenkoTsuchiBunshoNo;
-    @JsonProperty("txtHenkoTsuchiBunshoNo")
-    private TextBox txtHenkoTsuchiBunshoNo;
+    @JsonProperty("ccdBunshoNo")
+    private BunshoBangoInputDiv ccdBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,39 +53,12 @@ public class HenkoTsuchiKobetsuDiv extends PanelPublish {
     }
 
     /*
-     * getlblHenkoTsuchiBunshoNo
-     * @return lblHenkoTsuchiBunshoNo
+     * getccdBunshoNo
+     * @return ccdBunshoNo
      */
-    @JsonProperty("lblHenkoTsuchiBunshoNo")
-    public Label getLblHenkoTsuchiBunshoNo() {
-        return lblHenkoTsuchiBunshoNo;
-    }
-
-    /*
-     * setlblHenkoTsuchiBunshoNo
-     * @param lblHenkoTsuchiBunshoNo lblHenkoTsuchiBunshoNo
-     */
-    @JsonProperty("lblHenkoTsuchiBunshoNo")
-    public void setLblHenkoTsuchiBunshoNo(Label lblHenkoTsuchiBunshoNo) {
-        this.lblHenkoTsuchiBunshoNo = lblHenkoTsuchiBunshoNo;
-    }
-
-    /*
-     * gettxtHenkoTsuchiBunshoNo
-     * @return txtHenkoTsuchiBunshoNo
-     */
-    @JsonProperty("txtHenkoTsuchiBunshoNo")
-    public TextBox getTxtHenkoTsuchiBunshoNo() {
-        return txtHenkoTsuchiBunshoNo;
-    }
-
-    /*
-     * settxtHenkoTsuchiBunshoNo
-     * @param txtHenkoTsuchiBunshoNo txtHenkoTsuchiBunshoNo
-     */
-    @JsonProperty("txtHenkoTsuchiBunshoNo")
-    public void setTxtHenkoTsuchiBunshoNo(TextBox txtHenkoTsuchiBunshoNo) {
-        this.txtHenkoTsuchiBunshoNo = txtHenkoTsuchiBunshoNo;
+    @JsonProperty("ccdBunshoNo")
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return ccdBunshoNo;
     }
 
     // </editor-fold>

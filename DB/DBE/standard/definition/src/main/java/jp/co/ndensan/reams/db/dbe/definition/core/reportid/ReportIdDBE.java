@@ -253,11 +253,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定調査票差異チェック票(両面左)の帳票ＩＤです。
      */
-    DBE292003_SaiChekkuhyoHidari(new ReportId("DBE292003_SaiChekkuhyoHidari"), new RString("要介護認定調査票差異チェック票(両面左)")),
+    DBE292003(new ReportId("DBE292003_SaiChekkuhyoHidari"), new RString("要介護認定調査票差異チェック票(両面左)")),
     /**
      * 要介護認定調査票差異チェック票(両面右)の帳票ＩＤです。
      */
-    DBE292002_SaiChekkuhyoMigi(new ReportId("DBE292002_SaiChekkuhyoMigi"), new RString("要介護認定調査票差異チェック票(両面右)")),
+    DBE292002(new ReportId("DBE292002_SaiChekkuhyoMigi"), new RString("要介護認定調査票差異チェック票(両面右)")),
     /**
      * 介護認定審査会集計表（現在の状況別）の帳票ＩＤです。
      */
@@ -477,7 +477,11 @@ public enum ReportIdDBE {
     /**
      * 帳票出力用認定調査実績集計表の帳票ID。
      */
-    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表"));
+    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表")),
+    /**
+     * 介護認定審査会委員実績集計表の帳票ID。
+     */
+    DBE601003(new ReportId("DBE601003_ShinsaiinJissekiIchiran"), new RString("介護認定審査会委員実績集計表"));
 
     private final ReportId reportId;
 

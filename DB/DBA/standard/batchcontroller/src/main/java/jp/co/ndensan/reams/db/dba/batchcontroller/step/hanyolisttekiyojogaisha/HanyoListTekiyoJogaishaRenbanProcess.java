@@ -189,8 +189,13 @@ public class HanyoListTekiyoJogaishaRenbanProcess extends BatchProcessBase<Hanyo
     }
 
     private PersonalData toPersonalData(HanyoListTekiyoJogaishaRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号());
-        return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
+        if (RString.isNullOrEmpty(entity.get被保険者番号())) {
+            return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode());
+        } else {
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                    entity.get被保険者番号());
+            return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
+        }
+
     }
 }

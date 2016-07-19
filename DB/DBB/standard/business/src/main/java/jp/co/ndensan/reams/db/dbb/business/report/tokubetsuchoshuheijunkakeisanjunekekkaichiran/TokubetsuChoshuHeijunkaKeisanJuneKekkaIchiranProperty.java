@@ -47,94 +47,40 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
     }
 
     /**
-     * 帳票分類ID「DBB100014_arisanteiHokenryoNonyuTsuchishoDaihyo」（仮算定額変更通知書(平準化)）出力順設定可能項目です。
+     * 帳票分類ID「DBB200003_TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiran」（特別徴収平準化計算（特別徴収6月分）結果一覧表）出力順設定可能項目です。
      */
-    public enum DBB100014NonyuTsuchishoEnum implements IReportItems {
+    public enum DBB200003_HeijunkaKeisanJuneKekkaIchiran implements IReportItems {
 
-        /**
-         * 郵便番号
-         */
-        郵便番号(new RString("0001"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_yubinNo").concat(ENCLOSURE))),
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_choikiCode").concat(ENCLOSURE))),
-        /**
-         * 番地コード
-         */
-        番地コード(new RString("0003"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("choikiCode").concat(ENCLOSURE))),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_gyoseikuCode").concat(ENCLOSURE))),
-        /**
-         * 地区１
-         */
-        地区１(new RString("0005"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_chikuCode1").concat(ENCLOSURE))),
-        /**
-         * 地区２
-         */
-        地区２(new RString("0006"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_chikuCode2").concat(ENCLOSURE))),
-        /**
-         * 地区３
-         */
-        地区３(new RString("0007"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_chikuCode3").concat(ENCLOSURE))),
+        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("gyoseikuCode").concat(ENCLOSURE))),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString(""), ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_setaiCode").concat(
-                ENCLOSURE))),
+        世帯コード(new RString("0008"), new RString(""), ENCLOSURE.concat(new RString("setaiCode").concat(ENCLOSURE))),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString(""), ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_shikibetsuCode").concat(ENCLOSURE))),
-        /**
-         * 氏名５０音カナ
-         */
-        氏名５０音カナ(new RString("0010"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
-        /**
-         * 生年月日
-         */
-        生年月日(new RString("0012"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_seinengappiYMD").concat(ENCLOSURE))),
-        /**
-         * 性別
-         */
-        性別(new RString("0013"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_seibetsuCode").concat(ENCLOSURE))),
+        識別コード(new RString("0009"), new RString(""), ENCLOSURE.concat(new RString("shikibetsuCode").concat(ENCLOSURE))),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), ENCLOSURE.concat(new RString("").concat(ENCLOSURE))),
+        市町村コード(new RString("0016"), new RString(""), ENCLOSURE.concat(new RString("dtCityCode").concat(ENCLOSURE))),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), ENCLOSURE.concat(new RString("dbT2015KeisangoJoho_hihokenshaNo").concat(ENCLOSURE))),
-        /**
-         * 生活保護種別
-         */
-        生活保護種別(new RString("0116"), new RString(""), ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
-        /**
-         * 現金口座区分
-         */
-        現金口座区分(new RString("0210"), new RString(""), ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
-        /**
-         * 8月特徴開始者
-         */
-        月8特徴開始者(new RString("0220"), new RString(""), ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
-        /**
-         * 10月特徴開始者
-         */
-        月10特徴開始者(new RString("0219"), new RString(""), ENCLOSURE.concat(new RString("6").concat(ENCLOSURE))),
-        /**
-         * 納組コード
-         */
-        納組コード(new RString("0208"), new RString(""), ENCLOSURE.concat(
-                new RString("CaT0714nokumiCode").concat(ENCLOSURE)));
+        被保険者番号(new RString("0104"), new RString(""), ENCLOSURE.concat(new RString("hihokenshaNo").concat(ENCLOSURE)));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;
 
-        private DBB100014NonyuTsuchishoEnum(
+        private DBB200003_HeijunkaKeisanJuneKekkaIchiran(
                 RString 項目ID, RString フォームフィールド名, RString myBatis項目名) {
             this.項目ID = 項目ID;
             this.フォームフィールド名 = フォームフィールド名;

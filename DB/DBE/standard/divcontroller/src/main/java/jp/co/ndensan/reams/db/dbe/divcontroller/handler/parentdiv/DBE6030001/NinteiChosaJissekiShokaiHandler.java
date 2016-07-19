@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyojissekiichiran.Chosahy
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.NinteiChosaJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.dgNinteiChosaJisseki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -50,7 +52,7 @@ public class NinteiChosaJissekiShokaiHandler {
     public void onClick_BtnKensakuClear() {
         div.getChosaJisshibi().getTxtChosaJisshibi().clearFromValue();
         div.getChosaJisshibi().getTxtChosaJisshibi().clearToValue();
-        div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護事務);
+        div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
     }
 
     /**
@@ -69,8 +71,8 @@ public class NinteiChosaJissekiShokaiHandler {
                     data.get被保険者番号(),
                     data.get被保険者氏名(),
                     dataFormat(data.get認定調査実施年月日()),
-                    data.get認定調査区分コード(),
-                    data.get認定調査依頼区分コード(),
+                    ChosaKubun.toValue(data.get認定調査区分コード()).get名称(),
+                    NinteiChousaIraiKubunCode.toValue(data.get認定調査依頼区分コード()).get名称(),
                     data.get調査員コード(),
                     data.get申請書管理番号(),
                     data.get認定調査依頼履歴番号()

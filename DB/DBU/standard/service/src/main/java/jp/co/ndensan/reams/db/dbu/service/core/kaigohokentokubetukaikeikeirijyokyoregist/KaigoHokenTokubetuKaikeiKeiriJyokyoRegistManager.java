@@ -459,6 +459,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         entity.setShichosonCode(市町村コード);
         entity.setHyoNo(表番号);
         entity.setShukeiNo(集計番号);
+        entity.setShukeiTani(new Code("1"));
+        entity.setState(EntityDataState.Deleted);
         DbT7021JigyoHokokuTokeiDataDac dbT7021dac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
         int 削除件数 = dbT7021dac.delete(entity);
         KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity(

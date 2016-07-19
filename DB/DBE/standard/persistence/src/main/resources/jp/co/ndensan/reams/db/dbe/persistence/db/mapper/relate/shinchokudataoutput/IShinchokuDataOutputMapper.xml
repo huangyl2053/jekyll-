@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 要介護認定申請情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinchokudataoutput.IShinchokuDataOutputMapper">
+<resultMap id="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosahyoServiceJokyoRelateEntity" autoMapping="true">
+        <result property="shinseishoKanriNo" column="DbT5207_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="DbT5207_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="remban" column="DbT5207_remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceJokyo" column="DbT5207_serviceJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="researchItem" column="DbT5207_researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenItem" column="DbT5304_ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="zenkaiShinseishoKanriNo" column= "DbT5121_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="getNinteiShinseiJohoEntity"
+            resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
+     parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        DbT5207."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
+        DbT5207."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",
+        DbT5207.remban as "DbT5207_remban",
+        DbT5207."serviceJokyo" as "DbT5207_serviceJokyo"
+        FROM
+        rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
+        WHERE
+         DbT5207."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        AND NOT EXISTS(
+                    SELECT
+                       'X'
+                    FROM
+                      rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207_bak 
+                    WHERE
+                       DbT5207."shinseishoKanriNo" = DbT5207_bak."shinseishoKanriNo"
+                    AND
+                       DbT5207."ninteichosaRirekiNo" <![CDATA[<]]> DbT5207_bak."ninteichosaRirekiNo"   
+        )
+       AND
+          DbT5207.remban <![CDATA[<=]]> '20'
+       AND
+         DbT5207."koroshoIfShikibetsuCode" = (
+                                 SELECT
+                                    "koroshoIfShikibetsuCode"
+                                 FROM
+                                  rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101 
+                                 WHERE
+                                   DbT5101."shinseishoKanriNo" = DbT5207."shinseishoKanriNo" 
+                                 AND
+                                  DbT5101."logicalDeletedFlag" = FALSE                               
+        )
+        ORDER BY
+        DbT5207.remban asc    
+</select>
+<select resultOrdered="true" id="getNinteichosahyoChosa" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
+        SELECT
+        DbT5211."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
+        DbT5211."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",
+        DbT5211.remban as "DbT5207_remban",
+        DbT5211."researchItem" as "DbT5207_researchItem"
+        FROM
+        rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
+        WHERE
+        DbT5211."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        AND NOT EXISTS(
+                    SELECT
+                       'X'
+                    FROM
+                      rgdb."DbT5211NinteichosahyoChosaItem" as DbT5211_bak 
+                    WHERE
+                       DbT5211."shinseishoKanriNo" = DbT5211_bak."shinseishoKanriNo"
+                    AND
+                       DbT5211."ninteichosaRirekiNo" <![CDATA[<]]> DbT5211_bak."ninteichosaRirekiNo"   
+        )
+       AND
+          DbT5211.remban <![CDATA[<=]]> '85'
+       AND
+         DbT5211."koroshoIfShikibetsuCode" = (
+                                 SELECT
+                                    "koroshoIfShikibetsuCode"
+                                 FROM
+                                  rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101 
+                                 WHERE
+                                   DbT5101."shinseishoKanriNo" = DbT5211."shinseishoKanriNo" 
+                                 AND
+                                  DbT5101."logicalDeletedFlag" = FALSE                          
+        )
+        ORDER BY
+        DbT5211.remban asc    
+    </select>
+    <select resultOrdered="true" id="get要介護認定主治医意見書意見項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
+        SELECT
+        DbT5304."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
+        DbT5304."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",
+        DbT5304.remban as "DbT5207_remban",
+        DbT5304."ikenItem" as "DbT5304_ikenItem"
+        FROM
+        rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304
+        WHERE
+        DbT5304."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        AND NOT EXISTS(
+                    SELECT
+                       'X'
+                    FROM
+                      rgdb."DbT5304ShujiiIkenshoIkenItem" as DbT5304_bak 
+                    WHERE
+                       DbT5304."shinseishoKanriNo" = DbT5304_bak."shinseishoKanriNo"
+                    AND
+                       DbT5304."ikenshoIraiRirekiNo" <![CDATA[<]]> DbT5304_bak."ikenshoIraiRirekiNo"   
+        )
+       AND
+          DbT5304.remban IN(14,15,16,17,18,19,69)
+       AND
+          DbT5304."koroshoIfShikibetsuCode" = (
+                                 SELECT
+                                    "koroshoIfShikibetsuCode"
+                                 FROM
+                                  rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101 
+                                 WHERE
+                                   DbT5101."shinseishoKanriNo" = DbT5304."shinseishoKanriNo" 
+                                 AND
+                                  DbT5101."logicalDeletedFlag" = FALSE                               
+        )
+        ORDER BY
+        DbT5304.remban asc
+      </select>
+      <select resultOrdered="true" id="get前回調査票概況調査サービスの状況" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
+        DbT5121."zenkaiShinseishoKanriNo" as "DbT5121_zenkaiShinseishoKanriNo",
+        DbT5207."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",  
+        DbT5207.remban as "DbT5207_remban",
+        DbT5207."serviceJokyo" as "DbT5207_serviceJokyo"
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+        ON
+         DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
+        LEFT JOIN
+         rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
+         ON
+          DbT5121."zenkaiShinseishoKanriNo" = DbT5207."shinseishoKanriNo" 
+        AND NOT EXISTS(
+                    SELECT
+                       'X'
+                    FROM
+                      rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207_bak 
+                    WHERE
+                       DbT5207."shinseishoKanriNo" = DbT5207_bak."shinseishoKanriNo"
+                    AND
+                       DbT5207."ninteichosaRirekiNo" <![CDATA[<]]> DbT5207_bak."ninteichosaRirekiNo"   
+        )
+        AND
+          DbT5207.remban <![CDATA[<=]]> '20'
+        AND
+         DbT5207."koroshoIfShikibetsuCode" = (
+                                 SELECT
+                                    "koroshoIfShikibetsuCode"
+                                 FROM
+                                  rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101 
+                                 WHERE
+                                   DbT5101."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+                                 AND
+                                  DbT5101."logicalDeletedFlag" = FALSE                               
+        )  
+        WHERE
+          DbT5101."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+      AND
+        DbT5101."logicalDeletedFlag" = FALSE
+        ORDER BY
+        DbT5207.remban asc
+      </select>
+      <select resultOrdered="true" id="get前回認定調査票基本調査調査項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo" as "DbT5207_shinseishoKanriNo",
+        DbT5121."zenkaiShinseishoKanriNo" as "DbT5121_zenkaiShinseishoKanriNo",
+        DbT5211."koroshoIfShikibetsuCode" as "DbT5207_koroshoIfShikibetsuCode",  
+        DbT5211.remban as "DbT5207_remban",
+        DbT5211."researchItem" as "DbT5211_researchItem"
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+        ON
+         DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
+        LEFT JOIN
+         rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
+         ON
+          DbT5121."zenkaiShinseishoKanriNo" = DbT5211."shinseishoKanriNo" 
+        AND NOT EXISTS(
+                    SELECT
+                       'X'
+                    FROM
+                      rgdb."DbT5211NinteichosahyoChosaItem" as DbT5211_bak 
+                    WHERE
+                       DbT5211."shinseishoKanriNo" = DbT5211_bak."shinseishoKanriNo"
+                    AND
+                       DbT5211."ninteichosaRirekiNo" <![CDATA[<]]> DbT5211_bak."ninteichosaRirekiNo"   
+        )
+        AND
+          DbT5211.remban <![CDATA[<=]]> '85'
+        AND
+         DbT5211."koroshoIfShikibetsuCode" = (
+                                 SELECT
+                                    "koroshoIfShikibetsuCode"
+                                 FROM
+                                  rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101 
+                                 WHERE
+                                   DbT5101."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+                                 AND
+                                  DbT5101."logicalDeletedFlag" = FALSE                               
+        )  
+        WHERE
+         DbT5101."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach> AND
+        DbT5101."logicalDeletedFlag" = FALSE
+        ORDER BY
+        DbT5211.remban asc
+      </select>
+      <resultMap id="resultMap_ShinchokuDataOutputRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity" autoMapping="true">
+        <result property="shinseishoKanriNo" column="A_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="A_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="A_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="A_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiYMD" column="A_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiEdabanCode" column="A_ninteiShinseiEdabanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiHoreiKubunCode" column="A_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column= "A_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torisageKubunCode" column="A_torisageKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaKubunCode" column="A_hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseiTodokedeDaikoKubunCode" column="B_shinseiTodokedeDaikoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seinengappiYMD" column="A_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="age" column="A_age" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seibetsu" column="A_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaKana" column= "A_hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaName" column="A_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="A_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jusho" column="A_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="telNo" column="A_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaName" column="C_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaAddress" column="C_jigyoshaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="zenYokaigoKubunCode" column= "A_zenYokaigoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zenkaiYukoKikanStart" column="A_zenkaiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zenkaiYukoKikanEnd" column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryokikanCode" column="A_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiCode" column="A_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenshoJuryoYMD" column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医一時remban14" column= "要介護認定主治医一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医一時remban15" column="要介護認定主治医一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医一時remban16" column="要介護認定主治医一時テーブル_remban16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医一時remban17" column="要介護認定主治医一時テーブル_remban17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医一時remban18" column="要介護認定主治医一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医一時remban19" column="要介護認定主治医一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医一時remban69" column="要介護認定主治医一時テーブル_remban69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaIraiYMD" column= "G_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaJisshiYMD" column="H_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaNo" column="I_jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosaItakuKubun" column="I_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosainCode" column="G_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainShikaku" column="J_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiYMD" column="K_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaCode" column="K_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column= "K_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunJikan" column="K_kijunJikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunJikanShokuji" column="K_kijunJikanShokuji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanHaisetsu" column="K_kijunJikanHaisetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanIdo" column="K_kijunJikanIdo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanSeiketsuHoji" column="K_kijunJikanSeiketsuHoji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanKansetsuCare" column="K_kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanBPSDKanren" column= "K_kijunJikanBPSDKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunJikanKinoKunren" column="K_kijunJikanKinoKunren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunJikanIryoKanren" column="K_kijunJikanIryoKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kijunJikanNinchishoKasan"  column="K_kijunJikanNinchishoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku1gun" column="K_chukanHyokaKomoku1gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku2gun" column="K_chukanHyokaKomoku2gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku3gun" column="K_chukanHyokaKomoku3gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku4gun" column="K_chukanHyokaKomoku4gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chukanHyokaKomoku5gun" column= "K_chukanHyokaKomoku5gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHnateiKeikokuCode" column="K_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jotaiAnteiseiCode" column="K_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninchishoJiritsudoIIijoNoGaizensei" column="K_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="suiteiKyufuKubunCode" column="K_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiShiryoSakuseiYMD" column="M_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiYoteiYMD" column="M_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiNo" column= "M_gogitaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYMD" column="N_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="N_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="N_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="N_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nigoTokuteiShippeiCode" column="A_nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yokaigoJotaizoReiCode" column="N_yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceKubunCode" column= "H_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="remban" column="PO1_PO1_remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスremban1" column="サービスの状況一時テーブル_remban1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban2" column="サービスの状況一時テーブル_remban2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban3" column="サービスの状況一時テーブル_remban3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban4" column="サービスの状況一時テーブル_remban4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban5" column="サービスの状況一時テーブル_remban5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban6" column= "サービスの状況一時テーブル_remban6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスremban7" column="サービスの状況一時テーブル_remban7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスremban8" column="サービスの状況一時テーブル_remban8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban9" column="サービスの状況一時テーブル_remban9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban10" column="サービスの状況一時テーブル_remban10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban11" column="サービスの状況一時テーブル_remban11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban12" column="サービスの状況一時テーブル_remban12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban13" column= "サービスの状況一時テーブル_remban13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスremban14" column="サービスの状況一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスremban15" column="サービスの状況一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban16" column="サービスの状況一時テーブル_remban16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban17" column="サービスの状況一時テーブル_remban17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban18" column="サービスの状況一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban19" column="サービスの状況一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="サービスremban20" column= "サービスの状況一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスremban20" column= "P_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban1" column="認定調査票基本調査一時テーブル_remban1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban2" column="認定調査票基本調査一時テーブル_remban2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban3" column="認定調査票基本調査一時テーブル_remban3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban4" column="認定調査票基本調査一時テーブル_remban4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban5" column="認定調査票基本調査一時テーブル_remban5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban6" column= "認定調査票基本調査一時テーブル_remban6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban7" column="認定調査票基本調査一時テーブル_remban7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban8" column="認定調査票基本調査一時テーブル_remban8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban9" column="認定調査票基本調査一時テーブル_remban9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban10" column="認定調査票基本調査一時テーブル_remban10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban11" column="認定調査票基本調査一時テーブル_remban11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban12" column="認定調査票基本調査一時テーブル_remban12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban13" column= "認定調査票基本調査一時テーブル_remban13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban14" column="認定調査票基本調査一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban15" column="認定調査票基本調査一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban16" column="認定調査票基本調査一時テーブル_remban16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban17" column="認定調査票基本調査一時テーブル_remban17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban18" column="認定調査票基本調査一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban19" column="認定調査票基本調査一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban20" column= "認定調査票基本調査一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban21" column="認定調査票基本調査一時テーブル_remban21" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban22" column="認定調査票基本調査一時テーブル_remban22" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban23" column="認定調査票基本調査一時テーブル_remban23" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban24" column="認定調査票基本調査一時テーブル_remban24" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban25" column= "認定調査票基本調査一時テーブル_remban25" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban26" column="認定調査票基本調査一時テーブル_remban26" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban27" column="認定調査票基本調査一時テーブル_remban27" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban28" column="認定調査票基本調査一時テーブル_remban28" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban29" column="認定調査票基本調査一時テーブル_remban29" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban30" column="認定調査票基本調査一時テーブル_remban30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban31" column="認定調査票基本調査一時テーブル_remban31" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban32" column= "認定調査票基本調査一時テーブル_remban32" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban33" column="認定調査票基本調査一時テーブル_remban33" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban34" column="認定調査票基本調査一時テーブル_remban34" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban35" column="認定調査票基本調査一時テーブル_remban35" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban36" column="認定調査票基本調査一時テーブル_remban36" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban37" column="認定調査票基本調査一時テーブル_remban37" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban38" column="認定調査票基本調査一時テーブル_remban38" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban39" column= "認定調査票基本調査一時テーブル_remban39" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban40" column="認定調査票基本調査一時テーブル_remban40" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban41" column="認定調査票基本調査一時テーブル_remban41" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban42" column="認定調査票基本調査一時テーブル_remban42" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban43" column="認定調査票基本調査一時テーブル_remban43" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban44" column= "認定調査票基本調査一時テーブル_remban44" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban45" column="認定調査票基本調査一時テーブル_remban45" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban46" column="認定調査票基本調査一時テーブル_remban46" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban47" column="認定調査票基本調査一時テーブル_remban47" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban48" column="認定調査票基本調査一時テーブル_remban48" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban49" column="認定調査票基本調査一時テーブル_remban49" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban50" column="認定調査票基本調査一時テーブル_remban50" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban51" column= "認定調査票基本調査一時テーブル_remban51" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban52" column="認定調査票基本調査一時テーブル_remban52" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban53" column="認定調査票基本調査一時テーブル_remban53" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban54" column="認定調査票基本調査一時テーブル_remban54" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban55" column="認定調査票基本調査一時テーブル_remban55" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban56" column="認定調査票基本調査一時テーブル_remban56" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban57" column="認定調査票基本調査一時テーブル_remban57" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban58" column= "認定調査票基本調査一時テーブル_remban58" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban59" column="認定調査票基本調査一時テーブル_remban59" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban60" column="認定調査票基本調査一時テーブル_remban60" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban61" column="認定調査票基本調査一時テーブル_remban61" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban62" column="認定調査票基本調査一時テーブル_remban62" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban63" column="認定調査票基本調査一時テーブル_remban63" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban64" column= "認定調査票基本調査一時テーブル_remban64" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban65" column="認定調査票基本調査一時テーブル_remban65" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban66" column="認定調査票基本調査一時テーブル_remban66" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban67" column="認定調査票基本調査一時テーブル_remban67" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban68" column="認定調査票基本調査一時テーブル_remban68" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban69" column="認定調査票基本調査一時テーブル_remban69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban70" column="認定調査票基本調査一時テーブル_remban70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban71" column= "認定調査票基本調査一時テーブル_remban71" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban72" column="認定調査票基本調査一時テーブル_remban72" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban73" column="認定調査票基本調査一時テーブル_remban73" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban74" column="認定調査票基本調査一時テーブル_remban74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban75" column="認定調査票基本調査一時テーブル_remban75" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban76" column="認定調査票基本調査一時テーブル_remban76" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban77" column="認定調査票基本調査一時テーブル_remban77" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban78" column= "認定調査票基本調査一時テーブル_remban78" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban79" column="認定調査票基本調査一時テーブル_remban79" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban80" column="認定調査票基本調査一時テーブル_remban80" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban81" column="認定調査票基本調査一時テーブル_remban81" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban82" column="認定調査票基本調査一時テーブル_remban82" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査remban83" column= "認定調査票基本調査一時テーブル_remban83" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban84" column="認定調査票基本調査一時テーブル_remban84" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査remban85" column="認定調査票基本調査一時テーブル_remban85" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="R_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="R_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban1" column="前回認定調査票一時テーブル_remban1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban2" column="前回認定調査票一時テーブル_remban2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban3" column="前回認定調査票一時テーブル_remban3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban4" column="前回認定調査票一時テーブル_remban4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban5" column="前回認定調査票一時テーブル_remban5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban6" column= "前回認定調査票一時テーブル_remban6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban7" column="前回認定調査票一時テーブル_remban7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban8" column="前回認定調査票一時テーブル_remban8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban9" column="前回認定調査票一時テーブル_remban9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban10" column="前回認定調査票一時テーブル_remban10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban11" column="前回認定調査票一時テーブル_remban11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban12" column="前回認定調査票一時テーブル_remban12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban13" column= "前回認定調査票一時テーブル_remban13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban14" column="前回認定調査票一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban15" column="前回認定調査票一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban16" column="前回認定調査票一時テーブル_remban16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban17" column="前回認定調査票一時テーブル_remban17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban18" column="前回認定調査票一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban19" column="前回認定調査票一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban20" column= "前回認定調査票一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban21" column="前回認定調査票一時テーブル_remban21" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban22" column="前回認定調査票一時テーブル_remban22" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban23" column="前回認定調査票一時テーブル_remban23" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban24" column="前回認定調査票一時テーブル_remban24" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban25" column= "前回認定調査票一時テーブル_remban25" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban26" column="前回認定調査票一時テーブル_remban26" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban27" column="前回認定調査票一時テーブル_remban27" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban28" column="前回認定調査票一時テーブル_remban28" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban29" column="前回認定調査票一時テーブル_remban29" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban30" column="前回認定調査票一時テーブル_remban30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban31" column="前回認定調査票一時テーブル_remban31" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban32" column= "前回認定調査票一時テーブル_remban32" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban33" column="前回認定調査票一時テーブル_remban33" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban34" column="前回認定調査票一時テーブル_remban34" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban35" column="前回認定調査票一時テーブル_remban35" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban36" column="前回認定調査票一時テーブル_remban36" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban37" column="前回認定調査票一時テーブル_remban37" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban38" column="前回認定調査票一時テーブル_remban38" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban39" column= "前回認定調査票一時テーブル_remban39" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban40" column="前回認定調査票一時テーブル_remban40" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban41" column="前回認定調査票一時テーブル_remban41" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban42" column="前回認定調査票一時テーブル_remban42" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban43" column="前回認定調査票一時テーブル_remban43" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban44" column= "前回認定調査票一時テーブル_remban44" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban45" column="前回認定調査票一時テーブル_remban45" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban46" column="前回認定調査票一時テーブル_remban46" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban47" column="前回認定調査票一時テーブル_remban47" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban48" column="前回認定調査票一時テーブル_remban48" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban49" column="前回認定調査票一時テーブル_remban49" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban50" column="前回認定調査票一時テーブル_remban50" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban51" column= "前回認定調査票一時テーブル_remban51" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban52" column="前回認定調査票一時テーブル_remban52" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban53" column="前回認定調査票一時テーブル_remban53" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban54" column="前回認定調査票一時テーブル_remban54" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban55" column="前回認定調査票一時テーブル_remban55" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban56" column="前回認定調査票一時テーブル_remban56" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban57" column="前回認定調査票一時テーブル_remban57" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban58" column= "前回認定調査票一時テーブル_remban58" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban59" column="前回認定調査票一時テーブル_remban59" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban60" column="前回認定調査票一時テーブル_remban60" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban61" column="前回認定調査票一時テーブル_remban61" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban62" column="前回認定調査票一時テーブル_remban62" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban63" column="前回認定調査票一時テーブル_remban63" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban64" column= "前回認定調査票一時テーブル_remban64" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban65" column="前回認定調査票一時テーブル_remban65" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban66" column="前回認定調査票一時テーブル_remban66" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban67" column="前回認定調査票一時テーブル_remban67" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban68" column="前回認定調査票一時テーブル_remban68" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban69" column="前回認定調査票一時テーブル_remban69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban70" column="前回認定調査票一時テーブル_remban70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban71" column= "前回認定調査票一時テーブル_remban71" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban72" column="前回認定調査票一時テーブル_remban72" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban73" column="前回認定調査票一時テーブル_remban73" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban74" column="前回認定調査票一時テーブル_remban74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban75" column="前回認定調査票一時テーブル_remban75" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban76" column="前回認定調査票一時テーブル_remban76" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban77" column="前回認定調査票一時テーブル_remban77" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban78" column= "前回認定調査票一時テーブル_remban78" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban79" column="前回認定調査票一時テーブル_remban79" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban80" column="前回認定調査票一時テーブル_remban80" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban81" column="前回認定調査票一時テーブル_remban81" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban82" column="前回認定調査票一時テーブル_remban82" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回認定remban83" column= "前回認定調査票一時テーブル_remban83" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban84" column="前回認定調査票一時テーブル_remban84" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定remban85" column="前回認定調査票一時テーブル_remban85" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回ninchishoNichijoSeikatsuJiritsudoCode" column= "U_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回shogaiNichijoSeikatsuJiritsudoCode" column="U_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回ichijiHanteiKekkaCode" column="V_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回ichijiHanteiKekkaNinchishoKasanCode" column="V_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikan" column="V_kijunJikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanShokuji" column="V_kijunJikanShokuji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanHaisetsu" column="V_kijunJikanHaisetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanIdo" column= "V_kijunJikanIdo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回kijunJikanSeiketsuHoji" column="V_kijunJikanSeiketsuHoji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanKansetsuCare" column="V_kijunJikanKansetsuCare" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanBPSDKanren" column="V_kijunJikanBPSDKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanKinoKunren" column="V_kijunJikanKinoKunren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanIryoKanren" column="V_kijunJikanIryoKanren" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回kijunJikanNinchishoKasan" column= "V_kijunJikanNinchishoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回chukanHyokaKomoku1gun" column="V_chukanHyokaKomoku1gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回chukanHyokaKomoku2gun" column="V_chukanHyokaKomoku2gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回chukanHyokaKomoku3gun" column="V_chukanHyokaKomoku3gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回chukanHyokaKomoku4gun" column="V_chukanHyokaKomoku4gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回chukanHyokaKomoku5gun" column="V_chukanHyokaKomoku5gun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回ichijiHnateiKeikokuCode" column="V_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回jotaiAnteiseiCode" column= "V_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回ninchishoJiritsudoIIijoNoGaizensei" column="V_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回suiteiKyufuKubunCode" column="V_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回ninteiShinseiYMD" column="A2_A2_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回nijiHanteiYMD" column="W_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回serviceKubunCode" column="X_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="po2remban" column="P02_P02_remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+         <result property="前回サービスremban1" column="前回調査票概況調査状況一時テーブル_remban1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban2" column="前回調査票概況調査状況一時テーブル_remban2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban3" column="前回調査票概況調査状況一時テーブル_remban3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban4" column="前回調査票概況調査状況一時テーブル_remban4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban5" column="前回調査票概況調査状況一時テーブル_remban5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban6" column= "前回調査票概況調査状況一時テーブル_remban6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回サービスremban7" column="前回調査票概況調査状況一時テーブル_remban7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回サービスremban8" column="前回調査票概況調査状況一時テーブル_remban8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban9" column="前回調査票概況調査状況一時テーブル_remban9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban10" column="前回調査票概況調査状況一時テーブル_remban10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban11" column="前回調査票概況調査状況一時テーブル_remban11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban12" column="前回調査票概況調査状況一時テーブル_remban12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban13" column= "前回調査票概況調査状況一時テーブル_remban13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回サービスremban14" column="前回調査票概況調査状況一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回サービスremban15" column="前回調査票概況調査状況一時テーブル_remban15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban16" column="前回調査票概況調査状況一時テーブル_remban16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban17" column="前回調査票概況調査状況一時テーブル_remban17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban18" column="前回調査票概況調査状況一時テーブル_remban18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban19" column="前回調査票概況調査状況一時テーブル_remban19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回サービスremban20" column= "前回調査票概況調査状況一時テーブル_remban20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回serviceJokyoFlag" column="DbT5208Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回koroshoIfShikibetsuCode" column="Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="前回ninteishinsakaiIkenShurui" column= "A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回shinsakaiMemo" column= "N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+       <select resultOrdered="true" id="get日次進捗データ作成CSV出力" resultMap="resultMap_ShinchokuDataOutputRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
+         SELECT
+             A."shinseishoKanriNo"                      AS "A_shinseishoKanriNo"
+           , A."koroshoIfShikibetsuCode"                AS "A_koroshoIfShikibetsuCode"
+           , A."shoKisaiHokenshaNo"                     AS "A_shoKisaiHokenshaNo"
+           , A."hihokenshaNo"                           AS "A_hihokenshaNo"
+           , A."ninteiShinseiYMD"                       AS "A_ninteiShinseiYMD"
+           , A."ninteiShinseiEdabanCode"                AS "A_ninteiShinseiEdabanCode"
+           , A."ninteiShinseiHoreiKubunCode"            AS "A_ninteiShinseiHoreiKubunCode"
+           , A."ninteiShinseiShinseijiKubunCode"        AS "A_ninteiShinseiShinseijiKubunCode"
+           , A."torisageKubunCode"                      AS "A_torisageKubunCode"
+           , A."hihokenshaKubunCode"                    AS "A_hihokenshaKubunCode"
+           , B."shinseiTodokedeDaikoKubunCode"          AS "B_shinseiTodokedeDaikoKubunCode"
+           , A."seinengappiYMD"                         AS "A_seinengappiYMD"
+           , A."age"                                    AS "A_age"
+           , A."seibetsu"                               AS "A_seibetsu"
+           , A."hihokenshaKana"                         AS "A_hihokenshaKana"
+           , A."hihokenshaName"                         AS "A_hihokenshaName"
+           , A."yubinNo"                                AS "A_yubinNo"
+           , A."jusho"                                  AS "A_jusho"
+           , A."telNo"                                  AS "A_telNo"
+           , C."jigyoshaName"                           AS "C_jigyoshaName"
+           , C."jigyoshaAddress"                        AS "C_jigyoshaAddress"
+           , A."zenYokaigoKubunCode"                    AS "A_zenYokaigoKubunCode"
+           , A."zenkaiYukoKikanStart"                   AS "A_zenkaiYukoKikanStart"
+           , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
+           , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
+           , A."shujiiCode"                             AS "A_shujiiCode"
+           , D."ikenshoIraiRirekiNo"                    AS "D_ikenshoIraiRirekiNo"
+           , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
+           ,要介護認定主治医一時テーブル."remban14" as "要介護認定主治医一時テーブル_remban14"
+           ,要介護認定主治医一時テーブル."remban15" as "要介護認定主治医一時テーブル_remban15"
+           ,要介護認定主治医一時テーブル."remban16" as "要介護認定主治医一時テーブル_remban16"
+           ,要介護認定主治医一時テーブル."remban17" as "要介護認定主治医一時テーブル_remban17"
+           ,要介護認定主治医一時テーブル."remban18" as "要介護認定主治医一時テーブル_remban18"
+           ,要介護認定主治医一時テーブル."remban19" as "要介護認定主治医一時テーブル_remban19"
+           ,要介護認定主治医一時テーブル."remban69" as "要介護認定主治医一時テーブル_remban69"  
+           , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
+           , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
+           , I."jigyoshaNo"                             AS "I_jigyoshaNo"
+           , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
+           , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
+           , J."chosainShikaku"                         AS "J_chosainShikaku"
+           , K."ichijiHanteiYMD"                        AS "K_ichijiHanteiYMD"
+           , K."ichijiHanteiKekkaCode"                  AS "K_ichijiHanteiKekkaCode"
+           , K."ichijiHanteiKekkaNinchishoKasanCode"    AS "K_ichijiHanteiKekkaNinchishoKasanCode"
+           , K."kijunJikan"                             AS "K_kijunJikan"
+           , K."kijunJikanShokuji"                      AS "K_kijunJikanShokuji"
+           , K."kijunJikanHaisetsu"                     AS "K_kijunJikanHaisetsu"
+           , K."kijunJikanIdo"                          AS "K_kijunJikanIdo"
+           , K."kijunJikanSeiketsuHoji"                 AS "K_kijunJikanSeiketsuHoji"
+           , K."kijunJikanKansetsuCare"                 AS "K_kijunJikanKansetsuCare"
+           , K."kijunJikanBPSDKanren"                   AS "K_kijunJikanBPSDKanren"
+           , K."kijunJikanKinoKunren"                   AS "K_kijunJikanKinoKunren"
+           , K."kijunJikanIryoKanren"                   AS "K_kijunJikanIryoKanren"
+           , K."kijunJikanNinchishoKasan"               AS "K_kijunJikanNinchishoKasan"
+           , K."chukanHyokaKomoku1gun"                  AS "K_chukanHyokaKomoku1gun"
+           , K."chukanHyokaKomoku2gun"                  AS "K_chukanHyokaKomoku2gun"
+           , K."chukanHyokaKomoku3gun"                  AS "K_chukanHyokaKomoku3gun"
+           , K."chukanHyokaKomoku4gun"                  AS "K_chukanHyokaKomoku4gun"
+           , K."chukanHyokaKomoku5gun"                  AS "K_chukanHyokaKomoku5gun"
+           , K."ichijiHnateiKeikokuCode"                AS "K_ichijiHnateiKeikokuCode"
+           , K."jotaiAnteiseiCode"                      AS "K_jotaiAnteiseiCode"
+           , K."ninchishoJiritsudoIIijoNoGaizensei"     AS "K_ninchishoJiritsudoIIijoNoGaizensei"
+           , K."suiteiKyufuKubunCode"                   AS "K_suiteiKyufuKubunCode"
+           , M."shinsakaiShiryoSakuseiYMD"              AS "M_shinsakaiShiryoSakuseiYMD"
+           , M."shinsakaiKaisaiYoteiYMD"                AS "M_shinsakaiKaisaiYoteiYMD"
+           , M."gogitaiNo"                              AS "M_gogitaiNo"
+           , N."nijiHanteiYMD"                          AS "N_nijiHanteiYMD"
+           , N."nijiHanteiYokaigoJotaiKubunCode"        AS "N_nijiHanteiYokaigoJotaiKubunCode"
+           , N."nijiHanteiNinteiYukoKaishiYMD"          AS "N_nijiHanteiNinteiYukoKaishiYMD"
+           , N."nijiHanteiNinteiYukoShuryoYMD"          AS "N_nijiHanteiNinteiYukoShuryoYMD"
+           , A."nigoTokuteiShippeiCode"                 AS "A_nigoTokuteiShippeiCode"
+           , N."yokaigoJotaizoReiCode"                  AS "N_yokaigoJotaizoReiCode"
+           , H."serviceKubunCode"                       AS "H_serviceKubunCode"
+           , PO1."PO1_remban"                           AS "PO1_PO1_remban"
+           ,サービスの状況一時テーブル."remban1" as "サービスの状況一時テーブル_remban1"
+           ,サービスの状況一時テーブル."remban2" as "サービスの状況一時テーブル_remban2"
+           ,サービスの状況一時テーブル."remban3" as "サービスの状況一時テーブル_remban3"
+           ,サービスの状況一時テーブル."remban4" as "サービスの状況一時テーブル_remban4"
+           ,サービスの状況一時テーブル."remban5" as "サービスの状況一時テーブル_remban5"
+           ,サービスの状況一時テーブル."remban6" as "サービスの状況一時テーブル_remban6"
+           ,サービスの状況一時テーブル."remban7" as "サービスの状況一時テーブル_remban7"
+           ,サービスの状況一時テーブル."remban8" as "サービスの状況一時テーブル_remban8"
+           ,サービスの状況一時テーブル."remban9" as "サービスの状況一時テーブル_remban9"
+           ,サービスの状況一時テーブル."remban10" as "サービスの状況一時テーブル_remban10"
+           ,サービスの状況一時テーブル."remban11" as "サービスの状況一時テーブル_remban11"
+           ,サービスの状況一時テーブル."remban12" as "サービスの状況一時テーブル_remban12"
+           ,サービスの状況一時テーブル."remban13" as "サービスの状況一時テーブル_remban13"
+           ,サービスの状況一時テーブル."remban14" as "サービスの状況一時テーブル_remban14"
+           ,サービスの状況一時テーブル."remban15" as "サービスの状況一時テーブル_remban15"
+           ,サービスの状況一時テーブル."remban16" as "サービスの状況一時テーブル_remban16"
+           ,サービスの状況一時テーブル."remban17" as "サービスの状況一時テーブル_remban17"
+           ,サービスの状況一時テーブル."remban18" as "サービスの状況一時テーブル_remban18"
+           ,サービスの状況一時テーブル."remban19" as "サービスの状況一時テーブル_remban19"
+           ,サービスの状況一時テーブル."remban20" as "サービスの状況一時テーブル_remban20"
+           , P."serviceJokyoFlag"                       AS "P_serviceJokyoFlag"
+           ,認定調査票基本調査一時テーブル."remban1" as "認定調査票基本調査一時テーブル_remban1"
+           ,認定調査票基本調査一時テーブル."remban2" as "認定調査票基本調査一時テーブル_remban2"
+           ,認定調査票基本調査一時テーブル."remban3" as "認定調査票基本調査一時テーブル_remban3"
+           ,認定調査票基本調査一時テーブル."remban4" as "認定調査票基本調査一時テーブル_remban4"
+           ,認定調査票基本調査一時テーブル."remban5" as "認定調査票基本調査一時テーブル_remban5"
+           ,認定調査票基本調査一時テーブル."remban6" as "認定調査票基本調査一時テーブル_remban6"
+           ,認定調査票基本調査一時テーブル."remban7" as "認定調査票基本調査一時テーブル_remban7"
+           ,認定調査票基本調査一時テーブル."remban8" as "認定調査票基本調査一時テーブル_remban8"
+           ,認定調査票基本調査一時テーブル."remban9" as "認定調査票基本調査一時テーブル_remban9"
+           ,認定調査票基本調査一時テーブル."remban10" as "認定調査票基本調査一時テーブル_remban10"
+           ,認定調査票基本調査一時テーブル."remban11" as "認定調査票基本調査一時テーブル_remban11"
+           ,認定調査票基本調査一時テーブル."remban12" as "認定調査票基本調査一時テーブル_remban12"
+           ,認定調査票基本調査一時テーブル."remban13" as "認定調査票基本調査一時テーブル_remban13"
+           ,認定調査票基本調査一時テーブル."remban14" as "認定調査票基本調査一時テーブル_remban14"
+           ,認定調査票基本調査一時テーブル."remban15" as "認定調査票基本調査一時テーブル_remban15"
+           ,認定調査票基本調査一時テーブル."remban16" as "認定調査票基本調査一時テーブル_remban16"
+           ,認定調査票基本調査一時テーブル."remban17" as "認定調査票基本調査一時テーブル_remban17"
+           ,認定調査票基本調査一時テーブル."remban18" as "認定調査票基本調査一時テーブル_remban18"
+           ,認定調査票基本調査一時テーブル."remban19" as "認定調査票基本調査一時テーブル_remban19"
+           ,認定調査票基本調査一時テーブル."remban20" as "認定調査票基本調査一時テーブル_remban20"
+           ,認定調査票基本調査一時テーブル."remban21" as "認定調査票基本調査一時テーブル_remban21"
+           ,認定調査票基本調査一時テーブル."remban22" as "認定調査票基本調査一時テーブル_remban22"
+           ,認定調査票基本調査一時テーブル."remban23" as "認定調査票基本調査一時テーブル_remban23"
+           ,認定調査票基本調査一時テーブル."remban24" as "認定調査票基本調査一時テーブル_remban24"
+           ,認定調査票基本調査一時テーブル."remban25" as "認定調査票基本調査一時テーブル_remban25"
+           ,認定調査票基本調査一時テーブル."remban26" as "認定調査票基本調査一時テーブル_remban26"
+           ,認定調査票基本調査一時テーブル."remban27" as "認定調査票基本調査一時テーブル_remban27"
+           ,認定調査票基本調査一時テーブル."remban28" as "認定調査票基本調査一時テーブル_remban28"
+           ,認定調査票基本調査一時テーブル."remban29" as "認定調査票基本調査一時テーブル_remban29"
+           ,認定調査票基本調査一時テーブル."remban30" as "認定調査票基本調査一時テーブル_remban30"
+           ,認定調査票基本調査一時テーブル."remban31" as "認定調査票基本調査一時テーブル_remban31"
+           ,認定調査票基本調査一時テーブル."remban32" as "認定調査票基本調査一時テーブル_remban32"
+           ,認定調査票基本調査一時テーブル."remban33" as "認定調査票基本調査一時テーブル_remban33"
+           ,認定調査票基本調査一時テーブル."remban34" as "認定調査票基本調査一時テーブル_remban34"
+           ,認定調査票基本調査一時テーブル."remban35" as "認定調査票基本調査一時テーブル_remban35"
+           ,認定調査票基本調査一時テーブル."remban36" as "認定調査票基本調査一時テーブル_remban36"
+           ,認定調査票基本調査一時テーブル."remban37" as "認定調査票基本調査一時テーブル_remban37"
+           ,認定調査票基本調査一時テーブル."remban38" as "認定調査票基本調査一時テーブル_remban38"
+           ,認定調査票基本調査一時テーブル."remban39" as "認定調査票基本調査一時テーブル_remban39"
+           ,認定調査票基本調査一時テーブル."remban40" as "認定調査票基本調査一時テーブル_remban40" 
+           ,認定調査票基本調査一時テーブル."remban41" as "認定調査票基本調査一時テーブル_remban41"
+           ,認定調査票基本調査一時テーブル."remban42" as "認定調査票基本調査一時テーブル_remban42"
+           ,認定調査票基本調査一時テーブル."remban43" as "認定調査票基本調査一時テーブル_remban43"
+           ,認定調査票基本調査一時テーブル."remban44" as "認定調査票基本調査一時テーブル_remban44"
+           ,認定調査票基本調査一時テーブル."remban45" as "認定調査票基本調査一時テーブル_remban45"
+           ,認定調査票基本調査一時テーブル."remban46" as "認定調査票基本調査一時テーブル_remban46"
+           ,認定調査票基本調査一時テーブル."remban47" as "認定調査票基本調査一時テーブル_remban47"
+           ,認定調査票基本調査一時テーブル."remban48" as "認定調査票基本調査一時テーブル_remban48"
+           ,認定調査票基本調査一時テーブル."remban49" as "認定調査票基本調査一時テーブル_remban49"
+           ,認定調査票基本調査一時テーブル."remban50" as "認定調査票基本調査一時テーブル_remban50"
+           ,認定調査票基本調査一時テーブル."remban51" as "認定調査票基本調査一時テーブル_remban51"
+           ,認定調査票基本調査一時テーブル."remban52" as "認定調査票基本調査一時テーブル_remban52"
+           ,認定調査票基本調査一時テーブル."remban53" as "認定調査票基本調査一時テーブル_remban53"
+           ,認定調査票基本調査一時テーブル."remban54" as "認定調査票基本調査一時テーブル_remban54"
+           ,認定調査票基本調査一時テーブル."remban55" as "認定調査票基本調査一時テーブル_remban55"
+           ,認定調査票基本調査一時テーブル."remban56" as "認定調査票基本調査一時テーブル_remban56"
+           ,認定調査票基本調査一時テーブル."remban57" as "認定調査票基本調査一時テーブル_remban57"
+           ,認定調査票基本調査一時テーブル."remban58" as "認定調査票基本調査一時テーブル_remban58"
+           ,認定調査票基本調査一時テーブル."remban59" as "認定調査票基本調査一時テーブル_remban59"
+           ,認定調査票基本調査一時テーブル."remban60" as "認定調査票基本調査一時テーブル_remban60" 
+           ,認定調査票基本調査一時テーブル."remban61" as "認定調査票基本調査一時テーブル_remban61"
+           ,認定調査票基本調査一時テーブル."remban62" as "認定調査票基本調査一時テーブル_remban62"
+           ,認定調査票基本調査一時テーブル."remban63" as "認定調査票基本調査一時テーブル_remban63"
+           ,認定調査票基本調査一時テーブル."remban64" as "認定調査票基本調査一時テーブル_remban64"
+           ,認定調査票基本調査一時テーブル."remban65" as "認定調査票基本調査一時テーブル_remban65"
+           ,認定調査票基本調査一時テーブル."remban66" as "認定調査票基本調査一時テーブル_remban66"
+           ,認定調査票基本調査一時テーブル."remban67" as "認定調査票基本調査一時テーブル_remban67"
+           ,認定調査票基本調査一時テーブル."remban68" as "認定調査票基本調査一時テーブル_remban68"
+           ,認定調査票基本調査一時テーブル."remban69" as "認定調査票基本調査一時テーブル_remban69"
+           ,認定調査票基本調査一時テーブル."remban70" as "認定調査票基本調査一時テーブル_remban70"
+           ,認定調査票基本調査一時テーブル."remban71" as "認定調査票基本調査一時テーブル_remban71"
+           ,認定調査票基本調査一時テーブル."remban72" as "認定調査票基本調査一時テーブル_remban72"
+           ,認定調査票基本調査一時テーブル."remban73" as "認定調査票基本調査一時テーブル_remban73"
+           ,認定調査票基本調査一時テーブル."remban74" as "認定調査票基本調査一時テーブル_remban74"
+           ,認定調査票基本調査一時テーブル."remban75" as "認定調査票基本調査一時テーブル_remban75"
+           ,認定調査票基本調査一時テーブル."remban76" as "認定調査票基本調査一時テーブル_remban76"
+           ,認定調査票基本調査一時テーブル."remban77" as "認定調査票基本調査一時テーブル_remban77"
+           ,認定調査票基本調査一時テーブル."remban78" as "認定調査票基本調査一時テーブル_remban78"
+           ,認定調査票基本調査一時テーブル."remban79" as "認定調査票基本調査一時テーブル_remban79"
+           ,認定調査票基本調査一時テーブル."remban80" as "認定調査票基本調査一時テーブル_remban80"
+           ,認定調査票基本調査一時テーブル."remban81" as "認定調査票基本調査一時テーブル_remban81"
+           ,認定調査票基本調査一時テーブル."remban82" as "認定調査票基本調査一時テーブル_remban82"
+           ,認定調査票基本調査一時テーブル."remban83" as "認定調査票基本調査一時テーブル_remban83"
+           ,認定調査票基本調査一時テーブル."remban84" as "認定調査票基本調査一時テーブル_remban84"
+           ,認定調査票基本調査一時テーブル."remban85" as "認定調査票基本調査一時テーブル_remban85"
+           , R."ninchishoNichijoSeikatsuJiritsudoCode"  AS "R_ninchishoNichijoSeikatsuJiritsudoCode"
+           , R."shogaiNichijoSeikatsuJiritsudoCode"     AS "R_shogaiNichijoSeikatsuJiritsudoCode"
+           ,前回認定調査票一時テーブル."remban1" as "前回認定調査票一時テーブル_remban1"
+           ,前回認定調査票一時テーブル."remban2" as "前回認定調査票一時テーブル_remban2"
+           ,前回認定調査票一時テーブル."remban3" as "前回認定調査票一時テーブル_remban3"
+           ,前回認定調査票一時テーブル."remban4" as "前回認定調査票一時テーブル_remban4"
+           ,前回認定調査票一時テーブル."remban5" as "前回認定調査票一時テーブル_remban5"
+           ,前回認定調査票一時テーブル."remban6" as "前回認定調査票一時テーブル_remban6"
+           ,前回認定調査票一時テーブル."remban7" as "前回認定調査票一時テーブル_remban7"
+           ,前回認定調査票一時テーブル."remban8" as "前回認定調査票一時テーブル_remban8"
+           ,前回認定調査票一時テーブル."remban9" as "前回認定調査票一時テーブル_remban9"
+           ,前回認定調査票一時テーブル."remban10" as "前回認定調査票一時テーブル_remban10"
+           ,前回認定調査票一時テーブル."remban11" as "前回認定調査票一時テーブル_remban11"
+           ,前回認定調査票一時テーブル."remban12" as "前回認定調査票一時テーブル_remban12"
+           ,前回認定調査票一時テーブル."remban13" as "前回認定調査票一時テーブル_remban13"
+           ,前回認定調査票一時テーブル."remban14" as "前回認定調査票一時テーブル_remban14"
+           ,前回認定調査票一時テーブル."remban15" as "前回認定調査票一時テーブル_remban15"
+           ,前回認定調査票一時テーブル."remban16" as "前回認定調査票一時テーブル_remban16"
+           ,前回認定調査票一時テーブル."remban17" as "前回認定調査票一時テーブル_remban17"
+           ,前回認定調査票一時テーブル."remban18" as "前回認定調査票一時テーブル_remban18"
+           ,前回認定調査票一時テーブル."remban19" as "前回認定調査票一時テーブル_remban19"
+           ,前回認定調査票一時テーブル."remban20" as "前回認定調査票一時テーブル_remban20"
+           ,前回認定調査票一時テーブル."remban21" as "前回認定調査票一時テーブル_remban21"
+           ,前回認定調査票一時テーブル."remban22" as "前回認定調査票一時テーブル_remban22"
+           ,前回認定調査票一時テーブル."remban23" as "前回認定調査票一時テーブル_remban23"
+           ,前回認定調査票一時テーブル."remban24" as "前回認定調査票一時テーブル_remban24"
+           ,前回認定調査票一時テーブル."remban25" as "前回認定調査票一時テーブル_remban25"
+           ,前回認定調査票一時テーブル."remban26" as "前回認定調査票一時テーブル_remban26"
+           ,前回認定調査票一時テーブル."remban27" as "前回認定調査票一時テーブル_remban27"
+           ,前回認定調査票一時テーブル."remban28" as "前回認定調査票一時テーブル_remban28"
+           ,前回認定調査票一時テーブル."remban29" as "前回認定調査票一時テーブル_remban29"
+           ,前回認定調査票一時テーブル."remban30" as "前回認定調査票一時テーブル_remban30"
+           ,前回認定調査票一時テーブル."remban31" as "前回認定調査票一時テーブル_remban31"
+           ,前回認定調査票一時テーブル."remban32" as "前回認定調査票一時テーブル_remban32"
+           ,前回認定調査票一時テーブル."remban33" as "前回認定調査票一時テーブル_remban33"
+           ,前回認定調査票一時テーブル."remban34" as "前回認定調査票一時テーブル_remban34"
+           ,前回認定調査票一時テーブル."remban35" as "前回認定調査票一時テーブル_remban35"
+           ,前回認定調査票一時テーブル."remban36" as "前回認定調査票一時テーブル_remban36"
+           ,前回認定調査票一時テーブル."remban37" as "前回認定調査票一時テーブル_remban37"
+           ,前回認定調査票一時テーブル."remban38" as "前回認定調査票一時テーブル_remban38"
+           ,前回認定調査票一時テーブル."remban39" as "前回認定調査票一時テーブル_remban39"
+           ,前回認定調査票一時テーブル."remban40" as "前回認定調査票一時テーブル_remban40" 
+           ,前回認定調査票一時テーブル."remban41" as "前回認定調査票一時テーブル_remban41"
+           ,前回認定調査票一時テーブル."remban42" as "前回認定調査票一時テーブル_remban42"
+           ,前回認定調査票一時テーブル."remban43" as "前回認定調査票一時テーブル_remban43"
+           ,前回認定調査票一時テーブル."remban44" as "前回認定調査票一時テーブル_remban44"
+           ,前回認定調査票一時テーブル."remban45" as "前回認定調査票一時テーブル_remban45"
+           ,前回認定調査票一時テーブル."remban46" as "前回認定調査票一時テーブル_remban46"
+           ,前回認定調査票一時テーブル."remban47" as "前回認定調査票一時テーブル_remban47"
+           ,前回認定調査票一時テーブル."remban48" as "前回認定調査票一時テーブル_remban48"
+           ,前回認定調査票一時テーブル."remban49" as "前回認定調査票一時テーブル_remban49"
+           ,前回認定調査票一時テーブル."remban50" as "前回認定調査票一時テーブル_remban50"
+           ,前回認定調査票一時テーブル."remban51" as "前回認定調査票一時テーブル_remban51"
+           ,前回認定調査票一時テーブル."remban52" as "前回認定調査票一時テーブル_remban52"
+           ,前回認定調査票一時テーブル."remban53" as "前回認定調査票一時テーブル_remban53"
+           ,前回認定調査票一時テーブル."remban54" as "前回認定調査票一時テーブル_remban54"
+           ,前回認定調査票一時テーブル."remban55" as "前回認定調査票一時テーブル_remban55"
+           ,前回認定調査票一時テーブル."remban56" as "前回認定調査票一時テーブル_remban56"
+           ,前回認定調査票一時テーブル."remban57" as "前回認定調査票一時テーブル_remban57"
+           ,前回認定調査票一時テーブル."remban58" as "前回認定調査票一時テーブル_remban58"
+           ,前回認定調査票一時テーブル."remban59" as "前回認定調査票一時テーブル_remban59"
+           ,前回認定調査票一時テーブル."remban60" as "前回認定調査票一時テーブル_remban60" 
+           ,前回認定調査票一時テーブル."remban61" as "前回認定調査票一時テーブル_remban61"
+           ,前回認定調査票一時テーブル."remban62" as "前回認定調査票一時テーブル_remban62"
+           ,前回認定調査票一時テーブル."remban63" as "前回認定調査票一時テーブル_remban63"
+           ,前回認定調査票一時テーブル."remban64" as "前回認定調査票一時テーブル_remban64"
+           ,前回認定調査票一時テーブル."remban65" as "前回認定調査票一時テーブル_remban65"
+           ,前回認定調査票一時テーブル."remban66" as "前回認定調査票一時テーブル_remban66"
+           ,前回認定調査票一時テーブル."remban67" as "前回認定調査票一時テーブル_remban67"
+           ,前回認定調査票一時テーブル."remban68" as "前回認定調査票一時テーブル_remban68"
+           ,前回認定調査票一時テーブル."remban69" as "前回認定調査票一時テーブル_remban69"
+           ,前回認定調査票一時テーブル."remban70" as "前回認定調査票一時テーブル_remban70"
+           ,前回認定調査票一時テーブル."remban71" as "前回認定調査票一時テーブル_remban71"
+           ,前回認定調査票一時テーブル."remban72" as "前回認定調査票一時テーブル_remban72"
+           ,前回認定調査票一時テーブル."remban73" as "前回認定調査票一時テーブル_remban73"
+           ,前回認定調査票一時テーブル."remban74" as "前回認定調査票一時テーブル_remban74"
+           ,前回認定調査票一時テーブル."remban75" as "前回認定調査票一時テーブル_remban75"
+           ,前回認定調査票一時テーブル."remban76" as "前回認定調査票一時テーブル_remban76"
+           ,前回認定調査票一時テーブル."remban77" as "前回認定調査票一時テーブル_remban77"
+           ,前回認定調査票一時テーブル."remban78" as "前回認定調査票一時テーブル_remban78"
+           ,前回認定調査票一時テーブル."remban79" as "前回認定調査票一時テーブル_remban79"
+           ,前回認定調査票一時テーブル."remban80" as "前回認定調査票一時テーブル_remban80"
+           ,前回認定調査票一時テーブル."remban81" as "前回認定調査票一時テーブル_remban81"
+           ,前回認定調査票一時テーブル."remban82" as "前回認定調査票一時テーブル_remban82"
+           ,前回認定調査票一時テーブル."remban83" as "前回認定調査票一時テーブル_remban83"
+           ,前回認定調査票一時テーブル."remban84" as "前回認定調査票一時テーブル_remban84"
+           ,前回認定調査票一時テーブル."remban85" as "前回認定調査票一時テーブル_remban85"
+           , U."ninchishoNichijoSeikatsuJiritsudoCode"  AS "U_ninchishoNichijoSeikatsuJiritsudoCode"
+           , U."shogaiNichijoSeikatsuJiritsudoCode"     AS "U_shogaiNichijoSeikatsuJiritsudoCode"
+           , V."ichijiHanteiKekkaCode"                  AS "V_ichijiHanteiKekkaCode"
+           , V."ichijiHanteiKekkaNinchishoKasanCode"    AS "V_ichijiHanteiKekkaNinchishoKasanCode"
+           , V."kijunJikan"                             AS "V_kijunJikan"
+           , V."kijunJikanShokuji"                      AS "V_kijunJikanShokuji"
+           , V."kijunJikanHaisetsu"                     AS "V_kijunJikanHaisetsu"
+           , V."kijunJikanIdo"                          AS "V_kijunJikanIdo"
+           , V."kijunJikanSeiketsuHoji"                 AS "V_kijunJikanSeiketsuHoji"
+           , V."kijunJikanKansetsuCare"                 AS "V_kijunJikanKansetsuCare"
+           , V."kijunJikanBPSDKanren"                   AS "V_kijunJikanBPSDKanren"
+           , V."kijunJikanKinoKunren"                   AS "V_kijunJikanKinoKunren"
+           , V."kijunJikanIryoKanren"                   AS "V_kijunJikanIryoKanren"
+           , V."kijunJikanNinchishoKasan"               AS "V_kijunJikanNinchishoKasan"
+           , V."chukanHyokaKomoku1gun"                  AS "V_chukanHyokaKomoku1gun"
+           , V."chukanHyokaKomoku2gun"                  AS "V_chukanHyokaKomoku2gun"
+           , V."chukanHyokaKomoku3gun"                  AS "V_chukanHyokaKomoku3gun"
+           , V."chukanHyokaKomoku4gun"                  AS "V_chukanHyokaKomoku4gun"
+           , V."chukanHyokaKomoku5gun"                  AS "V_chukanHyokaKomoku5gun"
+           , V."ichijiHnateiKeikokuCode"                AS "V_ichijiHnateiKeikokuCode"
+           , V."jotaiAnteiseiCode"                      AS "V_jotaiAnteiseiCode"
+           , V."ninchishoJiritsudoIIijoNoGaizensei"     AS "V_ninchishoJiritsudoIIijoNoGaizensei"
+           , V."suiteiKyufuKubunCode"                   AS "V_suiteiKyufuKubunCode"
+           , A2."A2_ninteiShinseiYMD"                   AS "A2_A2_ninteiShinseiYMD"
+           , W."nijiHanteiYMD"                          AS "W_nijiHanteiYMD"
+           , X."serviceKubunCode"                       AS "X_serviceKubunCode"
+           , P02."P02_remban"                           AS "P02_P02_remban"
+           ,前回調査票概況調査状況一時テーブル."remban1" as "前回調査票概況調査状況一時テーブル_remban1"
+           ,前回調査票概況調査状況一時テーブル."remban2" as "前回調査票概況調査状況一時テーブル_remban2"
+           ,前回調査票概況調査状況一時テーブル."remban3" as "前回調査票概況調査状況一時テーブル_remban3"
+           ,前回調査票概況調査状況一時テーブル."remban4" as "前回調査票概況調査状況一時テーブル_remban4"
+           ,前回調査票概況調査状況一時テーブル."remban5" as "前回調査票概況調査状況一時テーブル_remban5"
+           ,前回調査票概況調査状況一時テーブル."remban6" as "前回調査票概況調査状況一時テーブル_remban6"
+           ,前回調査票概況調査状況一時テーブル."remban7" as "前回調査票概況調査状況一時テーブル_remban7"
+           ,前回調査票概況調査状況一時テーブル."remban8" as "前回調査票概況調査状況一時テーブル_remban8"
+           ,前回調査票概況調査状況一時テーブル."remban9" as "前回調査票概況調査状況一時テーブル_remban9"
+           ,前回調査票概況調査状況一時テーブル."remban10" as "前回調査票概況調査状況一時テーブル_remban10"
+           ,前回調査票概況調査状況一時テーブル."remban11" as "前回調査票概況調査状況一時テーブル_remban11"
+           ,前回調査票概況調査状況一時テーブル."remban12" as "前回調査票概況調査状況一時テーブル_remban12"
+           ,前回調査票概況調査状況一時テーブル."remban13" as "前回調査票概況調査状況一時テーブル_remban13"
+           ,前回調査票概況調査状況一時テーブル."remban14" as "前回調査票概況調査状況一時テーブル_remban14"
+           ,前回調査票概況調査状況一時テーブル."remban15" as "前回調査票概況調査状況一時テーブル_remban15"
+           ,前回調査票概況調査状況一時テーブル."remban16" as "前回調査票概況調査状況一時テーブル_remban16"
+           ,前回調査票概況調査状況一時テーブル."remban17" as "前回調査票概況調査状況一時テーブル_remban17"
+           ,前回調査票概況調査状況一時テーブル."remban18" as "前回調査票概況調査状況一時テーブル_remban18"
+           ,前回調査票概況調査状況一時テーブル."remban19" as "前回調査票概況調査状況一時テーブル_remban19"
+           ,前回調査票概況調査状況一時テーブル."remban20" as "前回調査票概況調査状況一時テーブル_remban20"
+           , Z."serviceJokyoFlag"                       AS "Z_serviceJokyoFlag"
+           , A2."A2_koroshoIfShikibetsuCode"            AS "A2_A2_koroshoIfShikibetsuCode"
+           , N."shinsakaiIken"                          AS "N_shinsakaiIken"
+          FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS A 
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS A1
+            ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"  
+            LEFT JOIN rgdb."DbT5120ShinseitodokedeJoho" AS B 
+              ON A."shinseishoKanriNo" = B."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS C 
+              ON A."nyushoShisetsuCode" = C."jigyoshaNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT7060KaigoJigyosha" AS C1 
+                WHERE
+                  C."jigyoshaNo" = C1."jigyoshaNo" 
+                  AND C."yukoKaishiYMD" <![CDATA[<]]> C1."yukoKaishiYMD"
+              ) 
+            LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS D 
+              ON A."shinseishoKanriNo" = D."shinseishoKanriNo" 
+              AND D."logicalDeletedFlag" = FALSE 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS D1 
+                WHERE
+                  D."shinseishoKanriNo" = D1."shinseishoKanriNo" 
+                  AND D1."logicalDeletedFlag" = FALSE 
+                  AND D."ikenshoIraiRirekiNo" <![CDATA[<]]> D1."ikenshoIraiRirekiNo"
+              ) 
+            LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS E 
+              ON A."shinseishoKanriNo" = E."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5302ShujiiIkenshoJoho" AS E1 
+                WHERE
+                  E."shinseishoKanriNo" = E1."shinseishoKanriNo" 
+                  AND E."ikenshoIraiRirekiNo" <![CDATA[<]]> E1."ikenshoIraiRirekiNo"
+              ) 
+          LEFT JOIN
+             "ShujiiIkenshoJohoTemp" as 要介護認定主治医一時テーブル
+          ON A."shinseishoKanriNo" =  要介護認定主治医一時テーブル."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS G 
+              ON A."shinseishoKanriNo" = G."shinseishoKanriNo" 
+              AND G."logicalDeletedFlag" = FALSE 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5201NinteichosaIraiJoho" AS G1 
+                WHERE
+                  G."shinseishoKanriNo" = G1."shinseishoKanriNo" 
+                  AND G1."logicalDeletedFlag" = FALSE 
+                  AND G."ninteichosaIraiRirekiNo" <![CDATA[<]]> G1."ninteichosaIraiRirekiNo"
+              ) 
+            LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H 
+              ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H1 
+                WHERE
+                  H."shinseishoKanriNo" = H1."shinseishoKanriNo" 
+                  AND H."ninteichosaRirekiNo" <![CDATA[<]]> H1."ninteichosaRirekiNo"
+              ) 
+              AND H."gaikyoChosaTextImageKubun" = '1' 
+            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I 
+              ON G."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode" 
+              AND I."shichosonCode" = A1."shichosonCode" 
+              AND I."jokyoFlag" = TRUE 
+            LEFT JOIN rgdb."DbT5913ChosainJoho" AS J 
+              ON G."ninteichosaItakusakiCode" = J."ninteiChosaItakusakiCode" 
+              AND G."ninteiChosainCode" = J."ninteiChosainCode" 
+              AND J."shichosonCode" = A1."shichosonCode" 
+              AND J."jokyoFlag" = TRUE 
+            LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS K 
+              ON A."shinseishoKanriNo" = K."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS L 
+              ON A."shinseishoKanriNo" = L."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS M 
+              ON L."shinsakaiKaisaiNo" = M."shinsakaiKaisaiNo" 
+            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS N 
+              ON A."shinseishoKanriNo" = N."shinseishoKanriNo" 
+           LEFT JOIN
+            "NinteichosaJohoTemp" as サービスの状況一時テーブル
+           ON A."shinseishoKanriNo" = サービスの状況一時テーブル."shinseishoKanriNo"    
+            LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS P 
+              ON A."shinseishoKanriNo" = P."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS P1 
+                WHERE
+                  P."shinseishoKanriNo" = P1."shinseishoKanriNo" 
+                  AND P."ninteichosaRirekiNo" <![CDATA[<]]> P1."ninteichosaRirekiNo"
+              ) 
+              AND P.remban = 1 
+              AND P."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode" 
+            LEFT JOIN ( 
+              SELECT
+                P001."remban" AS "PO1_remban"
+                , P001."shinseishoKanriNo" AS "PO1_shinseishoKanriNo" 
+              FROM
+                rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS P001
+                , rgdb."DbT5101NinteiShinseiJoho" AS A 
+              WHERE
+                P001."shinseishoKanriNo" = A."shinseishoKanriNo" 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                    rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS P002 
+                  WHERE
+                    P001."shinseishoKanriNo" = P002."shinseishoKanriNo" 
+                    AND P001."ninteichosaRirekiNo" <![CDATA[<]]> P002."ninteichosaRirekiNo"
+                ) 
+                AND P001."shisetsuRiyoFlag" = TRUE 
+                AND P001."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode" 
+              ORDER BY
+                P001."remban" 
+              LIMIT(1)
+            ) AS PO1 
+              ON A."shinseishoKanriNo" = PO1."PO1_shinseishoKanriNo"
+             LEFT JOIN
+            "ChosaItemJohoTemp" as 認定調査票基本調査一時テーブル
+            ON A."shinseishoKanriNo" =認定調査票基本調査一時テーブル."shinseishoKanriNo"   
+            LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS R 
+              ON A."shinseishoKanriNo" = R."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5203NinteichosahyoKihonChosa" AS R1 
+                WHERE
+                  R."shinseishoKanriNo" = R1."shinseishoKanriNo" 
+                  AND R."ninteichosaRirekiNo" <![CDATA[<]]> R1."ninteichosaRirekiNo"
+              ) 
+              AND R."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
+            LEFT JOIN
+              "ZenkaiChosaItemJohoTemp" as 前回認定調査票一時テーブル
+             ON A."shinseishoKanriNo"= 前回認定調査票一時テーブル."shinseishoKanriNo"   
+            LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS T 
+              ON A."shinseishoKanriNo" = T."shinseishoKanriNo"  
+            LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS U 
+              ON T."zenkaiShinseishoKanriNo" = U."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5203NinteichosahyoKihonChosa" AS U1 
+                WHERE
+                  U."shinseishoKanriNo" = U1."shinseishoKanriNo" 
+                  AND U."ninteichosaRirekiNo" <![CDATA[<]]> U1."ninteichosaRirekiNo"
+              ) 
+              AND U."koroshoIfShikibetsuCode" = ( 
+                SELECT
+                  A2."koroshoIfShikibetsuCode" 
+                FROM
+                  rgdb."DbT5101NinteiShinseiJoho" AS A2 
+                WHERE
+                  A2."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
+                  AND A2."logicalDeletedFlag" = FALSE
+              ) 
+            LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS V 
+              ON T."zenkaiShinseishoKanriNo" = V."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS W 
+              ON T."zenkaiShinseishoKanriNo" = W."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS X 
+              ON T."zenkaiShinseishoKanriNo" = X."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS X1 
+                WHERE
+                  X."shinseishoKanriNo" = X1."shinseishoKanriNo" 
+                  AND X."ninteichosaRirekiNo" <![CDATA[<]]> X1."ninteichosaRirekiNo"
+              ) 
+              AND X."gaikyoChosaTextImageKubun" = #{イメージ区分}
+            LEFT JOIN ( 
+              SELECT
+                P003."remban" AS "P02_remban"
+                , P003."shinseishoKanriNo" AS "P02_shinseishoKanriNo"
+                , T."shinseishoKanriNo"
+              FROM
+                rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS P003
+                , rgdb."DbT5121ShinseiRirekiJoho" AS T 
+              WHERE
+                P003."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                    rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS P004 
+                  WHERE
+                    P003."shinseishoKanriNo" = P004."shinseishoKanriNo" 
+                    AND P003."ninteichosaRirekiNo" <![CDATA[<]]> P004."ninteichosaRirekiNo"
+                ) 
+                AND P003."shisetsuRiyoFlag" = TRUE 
+                AND P003."koroshoIfShikibetsuCode" = ( 
+                  SELECT
+                    A2."koroshoIfShikibetsuCode" 
+                  FROM
+                    rgdb."DbT5101NinteiShinseiJoho" AS A2 
+                  WHERE
+                    A2."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
+                    AND A2."logicalDeletedFlag" = FALSE
+                ) 
+              ORDER BY
+                P003."remban" 
+              LIMIT(1)
+            ) AS P02 
+              ON A."shinseishoKanriNo" = P02."P02_shinseishoKanriNo" 
+            LEFT JOIN
+                    "ZenkaiChosaGaikyouJohoTemp" as 前回調査票概況調査状況一時テーブル
+             ON A."shinseishoKanriNo" = 前回調査票概況調査状況一時テーブル."shinseishoKanriNo"  
+            LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS Z 
+              ON T."zenkaiShinseishoKanriNo" = Z."shinseishoKanriNo" 
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS Z1 
+                WHERE
+                  Z."shinseishoKanriNo" = Z1."shinseishoKanriNo" 
+                  AND Z."ninteichosaRirekiNo" <![CDATA[<]]> Z1."ninteichosaRirekiNo"
+              ) 
+              AND Z."remban" = 1 
+              AND Z."koroshoIfShikibetsuCode" = ( 
+                SELECT
+                  A2."koroshoIfShikibetsuCode" 
+                FROM
+                  rgdb."DbT5101NinteiShinseiJoho" AS A2 
+                WHERE
+                  A2."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
+                  AND A2."logicalDeletedFlag" = FALSE
+              ) 
+                  LEFT JOIN ( 
+              SELECT
+                A."shinseishoKanriNo" AS "A2_shinseishoKanriNo"
+                    ,A."ninteiShinseiYMD" AS "A2_ninteiShinseiYMD"
+                    ,A."koroshoIfShikibetsuCode" AS "A2_koroshoIfShikibetsuCode"
+              FROM
+                rgdb."DbT5101NinteiShinseiJoho" AS A
+                , rgdb."DbT5121ShinseiRirekiJoho" AS T 
+              WHERE
+                A."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
+              ORDER BY
+                A."shinseishoKanriNo" 
+              LIMIT(1)
+            ) AS A2 
+              ON A."shinseishoKanriNo" = A2."A2_shinseishoKanriNo" 
+          WHERE
+            A."logicalDeletedFlag" = FALSE  AND
+            A."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+          ORDER BY
+            A."shinseishoKanriNo"             
+      </select>
+</mapper>

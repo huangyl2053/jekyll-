@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.Ho
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.IdoFukaJohoFlgTrueProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.KanendoHonsanteifukaProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -86,7 +87,9 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                     parameter.get納入_口座振替様式(), parameter.get納入_先頭出力(), parameter.get納入_ページ山分け(),
                     parameter.is一括発行起動フラグ(), getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.SYSTEM_TIME));
 
-            if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get決定_チェックボックス())) {
+            if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get決定_チェックボックス())
+                    && (ReportIdDBB.DBB100039.getReportId().getColumnValue().equals(出力帳票.get帳票ID())
+                    || ReportIdDBB.DBB100040.getReportId().getColumnValue().equals(出力帳票.get帳票ID()))) {
                 バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
                 executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
@@ -101,7 +104,9 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
 
                 executeStep(PRINT_KETTEITSUCHISHO_PROCESS);
                 executeStep(INSERT_KETTEITSUCHISHO_PROCESS);
-            } else if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get変更_チェックボックス())) {
+            } else if (介護保険料額決定通知書_帳票分類ID.equals(出力帳票.get帳票分類ID()) && チェックする.equals(parameter.get変更_チェックボックス())
+                    && (ReportIdDBB.DBB100042.getReportId().getColumnValue().equals(出力帳票.get帳票ID())
+                    || ReportIdDBB.DBB100043.getReportId().getColumnValue().equals(出力帳票.get帳票ID()))) {
                 バッチフロー_帳票分類ID = 介護保険料額決定通知書_帳票分類ID.getColumnValue();
                 executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {

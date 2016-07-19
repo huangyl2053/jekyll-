@@ -7,13 +7,11 @@ package jp.co.ndensan.reams.db.dbb.service.core.fuka.sokujikosei;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.CalculateChoteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.FukaKokyoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.KoseiShoriParameter;
@@ -32,19 +30,20 @@ import jp.co.ndensan.reams.db.dbb.business.core.sokujikosei.YokunenFukaKoseiResu
 import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.sokujikosei.ISokujiFukaKoseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
@@ -166,13 +165,13 @@ public class SokujiFukaKoseiService {
             result.set更正前後賦課のリスト(仮算定の更正.get更正前後賦課のリスト());
             result.set更正前後徴収方法(仮算定の更正.get更正前後徴収方法());
             result.set資格の情報(仮算定の更正.get資格の情報());
-            result.set本算定処理済フラグ(true);
+            result.set本算定処理済フラグ(false);
         } else {
             KoseiShoriResult 本算定の更正 = get本算定の更正(param);
             result.set更正前後賦課のリスト(本算定の更正.get更正前後賦課のリスト());
             result.set更正前後徴収方法(本算定の更正.get更正前後徴収方法());
             result.set資格の情報(本算定の更正.get資格の情報());
-            result.set本算定処理済フラグ(false);
+            result.set本算定処理済フラグ(true);
         }
         return result;
     }
@@ -260,21 +259,11 @@ public class SokujiFukaKoseiService {
             koseiParam.set徴収方法の情報(徴収方法の情報);
             List<DbT1001HihokenshaDaichoEntity> daichoEntity = 被保険者台帳管理Dac.get被保険者台帳管理情報(param.get被保険者番号());
             List<HihokenshaDaicho> 資格の情報 = new ArrayList<>();
-            for (DbT1001HihokenshaDaichoEntity entity : daichoEntity) {
-                資格の情報.add(new HihokenshaDaicho(entity));
+            for (int i = 0; i < daichoEntity.size(); i++) {
+                資格の情報.add(new HihokenshaDaicho(daichoEntity.get(i)));
             }
             koseiParam.set資格の情報リスト(資格の情報);
 
-            Collections.sort(資格の情報, new Comparator<HihokenshaDaicho>() {
-                @Override
-                public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                    int flag = o2.get異動日().compareTo(o1.get異動日());
-                    if (flag == 0) {
-                        flag = o2.get枝番().compareTo(o1.get枝番());
-                    }
-                    return flag;
-                }
-            });
             ShikibetsuCode 識別コード = 資格の情報.get(0).get識別コード();
             Map<String, Object> map = new HashMap<>();
             map.put(KEY_SHIKIBETSUCODE.toString(), 識別コード);
@@ -330,9 +319,6 @@ public class SokujiFukaKoseiService {
 
             FukaKeisan fukaKeisan = FukaKeisan.createInstance();
             KoseiShorikoaResult 調定計算 = fukaKeisan.do調定計算(calParam);
-
-            List<NendobunFukaList> 年度分賦課リスト = new ArrayList<>();
-            年度分賦課リスト.add(調定計算.get年度分賦課リスト_更正後());
 
             List<KoseiZengoFuka> 更正前後賦課リスト = new ArrayList<>();
             KoseiZengoFuka 更正前後賦課 = new KoseiZengoFuka();

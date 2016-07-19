@@ -74,7 +74,6 @@ public class SaiChekkuhyo_292004Process extends BatchProcessBase<HomonChosaIrais
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        内部QA：614　Redmine：＃75422　排他制限の確認
         getcheckEntityList(entity);
     }
 

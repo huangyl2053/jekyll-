@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
@@ -31,7 +31,7 @@ public class KakuShugyoumuJouHouEntity {
     private FlexibleYear choteiNendo;
     private FlexibleYear fukaNendo;
     private TsuchishoNo tsuchishoNo;
-    private FlexibleDate fukaYMD;
+    private FlexibleDate kijunYMD;
     private FukaJohoRelateEntity 賦課の情報;
     private DbT1001HihokenshaDaichoEntity 資格の情報;
     private KuBunnGaTsurakuTempEntity 月別ランク;

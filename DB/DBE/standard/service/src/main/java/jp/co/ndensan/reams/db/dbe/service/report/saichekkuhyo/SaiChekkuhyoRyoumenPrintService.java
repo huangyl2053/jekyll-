@@ -40,10 +40,10 @@ public class SaiChekkuhyoRyoumenPrintService {
         SaiChekkuhyoRyoumenProperty property = null;
         if (CONFIGVALUE2.equals(
                 DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            property = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003_SaiChekkuhyoHidari.getReportId());
+            property = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003.getReportId());
         } else if (CONFIGVALUE3.equals(
                 DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            property = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002_SaiChekkuhyoMigi.getReportId());
+            property = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002.getReportId());
         }
         return new Printer<SaiChekkuhyoReportSource>().spool(property, toReports(itemList));
     }

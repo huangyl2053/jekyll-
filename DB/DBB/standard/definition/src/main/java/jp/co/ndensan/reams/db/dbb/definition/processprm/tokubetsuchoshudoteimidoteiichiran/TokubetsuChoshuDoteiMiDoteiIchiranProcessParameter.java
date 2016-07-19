@@ -9,8 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  *
@@ -24,11 +25,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatchProcessParameter {
 
-    private RString 処理年度;
+    private FlexibleYear 処理年度;
     private List<RString> 捕捉月;
     private RString 特別徴収開始月;
     private RString 出力対象;
-    private RTime 処理日時;
+    private YMDHMS 処理日時;
     private RString 通知内容コード;
     private IShikibetsuTaishoPSMSearchKey atenaKey;
 
@@ -41,8 +42,8 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
      * @param 出力対象 出力対象
      * @param 処理日時 処理日時
      */
-    public TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter(RString 処理年度, List<RString> 捕捉月, RString 特別徴収開始月,
-            RString 出力対象, RTime 処理日時) {
+    public TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter(FlexibleYear 処理年度, List<RString> 捕捉月, RString 特別徴収開始月,
+            RString 出力対象, YMDHMS 処理日時) {
         this.処理年度 = 処理年度;
         this.捕捉月 = 捕捉月;
         this.特別徴収開始月 = 特別徴収開始月;
@@ -56,7 +57,7 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter implements IBatc
      * @return {@link TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter}
      */
     public TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter getMybatisParameter() {
-        return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(処理年度, 特別徴収開始月, 捕捉月, 通知内容コード, atenaKey);
+        return new TokubetsuChoshuDoteiMiDoteiIchiranMybatisParameter(処理年度.toDateString(), 特別徴収開始月, 捕捉月, 通知内容コード, atenaKey);
     }
 
 }

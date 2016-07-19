@@ -1188,6 +1188,7 @@
          "urT0705ChoteiKyotsuBefore_lastUpdateTimestamp" timestamp without time zone,
          "urT0705ChoteiKyotsuBefore_lastUpdateReamsLoginId" text,
          "urT0705ChoteiKyotsuBefore_choteiId" bigint,
+         "urT0705ChoteiKyotsuBefore_rirekiNo" smallint,
          "urT0705ChoteiKyotsuBefore_shunoId" bigint,
          "urT0705ChoteiKyotsuBefore_kaikeiNendo" rshare."UDD053Year",
          "urT0705ChoteiKyotsuBefore_shoriNendo" rshare."UDD053Year",
@@ -1635,99 +1636,7 @@
             介護期別.*,
             調定共通.*,
             徴収方法Newest.*,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            C.*,
             年金特徴回付情報.*,
             "ShikibetsuTaisho"."shikibetsuCode",
             "ShikibetsuTaisho"."genLasdecCode",
@@ -2109,8 +2018,50 @@
               ON 徴収方法Newest."yokunendoKariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 徴収方法Newest."yokunendoKariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 徴収方法Newest."yokunendoKariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
               AND 年金特徴回付情報."shoriNendo" = #{調定年度}
+          LEFT JOIN
+           (
+             SELECT
+                "DbT2002Fuka".*,
+                "DbT2003Kibetsu".*,
+                "UrT0705ChoteiKyotsu".*
+             FROM
+             (
+                 SELECT
+                   賦課Newest.*
+                 FROM 
+                   rgdb."DbV2002Fuka" AS 賦課Newest,
+                  (
+                    SELECT
+                      B."hihokenshaNo",
+                      MAX(B."tsuchishoNo") AS "tsuchishoNo"
+                    FROM 
+                      rgdb."DbV2002Fuka" AS B
+                   WHERE
+                      B."choteiNendo" = #{調定年度}
+                     AND B."fukaNendo" = #{賦課年度}
+                  GROUP BY
+                  B."hihokenshaNo"
+                 ) AS A
+               WHERE
+                  賦課Newest."choteiNendo" = #{調定年度}
+                  AND 賦課Newest."fukaNendo" = #{賦課年度}
+                  AND 賦課Newest."tsuchishoNo" = A."tsuchishoNo"
+                  AND 賦課Newest."hihokenshaNo" = A."hihokenshaNo"
+            ) AS "DbT2002Fuka"
+           INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+              ON "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
+              AND "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
+              AND "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
+              AND "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+              AND "DbT2003Kibetsu"."ki" in ('1','2','3','4','5','6')
+              AND "DbT2003Kibetsu"."choshuHouhou" = '1' 
+           INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+              ON "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
+           ) AS C
+          ON 賦課Newest."hihokenshaNo" = C."hihokenshaNo"
         WHERE
             賦課Newest."choteiNendo" = #{調定年度plus1}
             AND 賦課Newest."fukaNendo" = #{賦課年度plus1}
@@ -2121,146 +2072,6 @@
             介護期別."ki" ASC,
             介護期別."choshuHouhou" ASC
     </insert>
-
-    <update id="update特徴仮算定一時"
-    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidogennendotsuchisyoikatsuhako.IdoGennendoKarisanteiParameter">
-        UPDATE "TmpIdoGennendoKarisantei" AS D
-        SET 
-         "dbT2002FukaBefore_insertDantaiCd" =  C."dbT2002Fuka_insertDantaiCd",
-         "dbT2002FukaBefore_insertTimestamp" =  C."dbT2002Fuka_insertTimestamp",
-         "dbT2002FukaBefore_insertReamsLoginId" =  C."dbT2002Fuka_insertReamsLoginId",
-         "dbT2002FukaBefore_insertContextId" =  C."dbT2002Fuka_insertContextId",
-         "dbT2002FukaBefore_isDeleted" =  C."dbT2002Fuka_isDeleted",
-         "dbT2002FukaBefore_updateCount" =  C."dbT2002Fuka_updateCount",
-         "dbT2002FukaBefore_lastUpdateTimestamp" =  C."dbT2002Fuka_lastUpdateTimestamp",
-         "dbT2002FukaBefore_lastUpdateReamsLoginId"  =  C."dbT2002Fuka_lastUpdateReamsLoginId",
-         "dbT2002FukaBefore_choteiNendo" =  C."dbT2002Fuka_choteiNendo",
-         "dbT2002FukaBefore_fukaNendo" =  C."dbT2002Fuka_fukaNendo",
-         "dbT2002FukaBefore_tsuchishoNo" =  C."dbT2002Fuka_tsuchishoNo",
-         "dbT2002FukaBefore_rirekiNo" =  C."dbT2002Fuka_rirekiNo",
-         "dbT2002FukaBefore_hihokenshaNo" =  C."dbT2002Fuka_hihokenshaNo",
-         "dbT2002FukaBefore_shikibetsuCode" =  C."dbT2002Fuka_shikibetsuCode",
-         "dbT2002FukaBefore_setaiCode" =  C."dbT2002Fuka_setaiCode",
-         "dbT2002FukaBefore_setaiInsu" =  C."dbT2002Fuka_setaiInsu",
-         "dbT2002FukaBefore_shikakuShutokuYMD" =  C."dbT2002Fuka_shikakuShutokuYMD",
-         "dbT2002FukaBefore_shikakuShutokuJiyu" =  C."dbT2002Fuka_shikakuShutokuJiyu",
-         "dbT2002FukaBefore_shikakuSoshitsuYMD" =  C."dbT2002Fuka_shikakuSoshitsuYMD",
-         "dbT2002FukaBefore_shikakuSoshitsuJiyu" =  C."dbT2002Fuka_shikakuSoshitsuJiyu",
-         "dbT2002FukaBefore_seihofujoShurui" =  C."dbT2002Fuka_seihofujoShurui",
-         "dbT2002FukaBefore_seihoKaishiYMD" =  C."dbT2002Fuka_seihoKaishiYMD",
-         "dbT2002FukaBefore_seihoHaishiYMD" =  C."dbT2002Fuka_seihoHaishiYMD",
-         "dbT2002FukaBefore_ronenKaishiYMD" =  C."dbT2002Fuka_ronenKaishiYMD",
-         "dbT2002FukaBefore_ronenHaishiYMD" =  C."dbT2002Fuka_ronenHaishiYMD",
-         "dbT2002FukaBefore_fukaYMD" =  C."dbT2002Fuka_fukaYMD",
-         "dbT2002FukaBefore_kazeiKubun" =  C."dbT2002Fuka_kazeiKubun",
-         "dbT2002FukaBefore_setaikazeiKubun" =  C."dbT2002Fuka_setaikazeiKubun",
-         "dbT2002FukaBefore_gokeiShotokuGaku" =  C."dbT2002Fuka_gokeiShotokuGaku",
-         "dbT2002FukaBefore_nenkinShunyuGaku" =  C."dbT2002Fuka_nenkinShunyuGaku",
-         "dbT2002FukaBefore_hokenryoDankai" =  C."dbT2002Fuka_hokenryoDankai",
-         "dbT2002FukaBefore_hokenryoDankai1" =  C."dbT2002Fuka_hokenryoDankai1",
-         "dbT2002FukaBefore_nengakuHokenryo1" =  C."dbT2002Fuka_nengakuHokenryo1",
-         "dbT2002FukaBefore_tsukiwariStartYM1" =  C."dbT2002Fuka_tsukiwariStartYM1",
-         "dbT2002FukaBefore_tsukiwariEndYM1" =  C."dbT2002Fuka_tsukiwariEndYM1",
-         "dbT2002FukaBefore_hokenryoDankai2" =  C."dbT2002Fuka_hokenryoDankai2",
-         "dbT2002FukaBefore_nengakuHokenryo2" =  C."dbT2002Fuka_nengakuHokenryo2",
-         "dbT2002FukaBefore_tsukiwariStartYM2" =  C."dbT2002Fuka_tsukiwariStartYM2",
-         "dbT2002FukaBefore_tsukiwariEndYM2" =  C."dbT2002Fuka_tsukiwariEndYM2",
-         "dbT2002FukaBefore_choteiNichiji" =  C."dbT2002Fuka_choteiNichiji",
-         "dbT2002FukaBefore_choteiJiyu1" =  C."dbT2002Fuka_choteiJiyu1",
-         "dbT2002FukaBefore_choteiJiyu2" =  C."dbT2002Fuka_choteiJiyu2",
-         "dbT2002FukaBefore_choteiJiyu3" =  C."dbT2002Fuka_choteiJiyu3",
-         "dbT2002FukaBefore_choteiJiyu4" =  C."dbT2002Fuka_choteiJiyu4",
-         "dbT2002FukaBefore_koseiM" =  C."dbT2002Fuka_koseiM",
-         "dbT2002FukaBefore_gemmenMaeHokenryo" =  C."dbT2002Fuka_gemmenMaeHokenryo",
-         "dbT2002FukaBefore_gemmenGaku" =  C."dbT2002Fuka_gemmenGaku",
-         "dbT2002FukaBefore_kakuteiHokenryo" =  C."dbT2002Fuka_kakuteiHokenryo",
-         "dbT2002FukaBefore_hokenryoDankaiKarisanntei" =  C."dbT2002Fuka_hokenryoDankaiKarisanntei",
-         "dbT2002FukaBefore_choshuHohoRirekiNo" =  C."dbT2002Fuka_choshuHohoRirekiNo",
-         "dbT2002FukaBefore_idoKijunNichiji" =  C."dbT2002Fuka_idoKijunNichiji",
-         "dbT2002FukaBefore_kozaKubun" =  C."dbT2002Fuka_kozaKubun",
-         "dbT2002FukaBefore_kyokaisoKubun" =  C."dbT2002Fuka_kyokaisoKubun",
-         "dbT2002FukaBefore_shokkenKubun" =  C."dbT2002Fuka_shokkenKubun",
-         "dbT2002FukaBefore_fukaShichosonCode" =  C."dbT2002Fuka_fukaShichosonCode",
-         "dbT2002FukaBefore_tkSaishutsuKampuGaku" =  C."dbT2002Fuka_tkSaishutsuKampuGaku",
-         "dbT2002FukaBefore_fuSaishutsuKampuGaku" =  C."dbT2002Fuka_fuSaishutsuKampuGaku",
-         "dbT2003KibetsuBefore_insertDantaiCd" =  C."dbT2003Kibetsu_insertDantaiCd",
-         "dbT2003KibetsuBefore_insertTimestamp" =  C."dbT2003Kibetsu_insertTimestamp",
-         "dbT2003KibetsuBefore_insertReamsLoginId" =  C."dbT2003Kibetsu_insertReamsLoginId",
-         "dbT2003KibetsuBefore_insertContextId" =  C."dbT2003Kibetsu_insertContextId",
-         "dbT2003KibetsuBefore_isDeleted" =  C."dbT2003Kibetsu_isDeleted",
-         "dbT2003KibetsuBefore_updateCount" =  C."dbT2003Kibetsu_updateCount",
-         "dbT2003KibetsuBefore_lastUpdateTimestamp" =  C."dbT2003Kibetsu_lastUpdateTimestamp",
-         "dbT2003KibetsuBefore_lastUpdateReamsLoginId" =  C."dbT2003Kibetsu_lastUpdateReamsLoginId",
-         "dbT2003KibetsuBefore_choteiNendo" =  C."dbT2003Kibetsu_choteiNendo",
-         "dbT2003KibetsuBefore_fukaNendo" =  C."dbT2003Kibetsu_fukaNendo",
-         "dbT2003KibetsuBefore_tsuchishoNo" =  C."dbT2003Kibetsu_tsuchishoNo",
-         "dbT2003KibetsuBefore_rirekiNo" =  C."dbT2003Kibetsu_rirekiNo",
-         "dbT2003KibetsuBefore_choshuHouhou" =  C."dbT2003Kibetsu_choshuHouhou",
-         "dbT2003KibetsuBefore_ki" =  C."dbT2003Kibetsu_ki",
-         "dbT2003KibetsuBefore_choteiId" =  C."dbT2003Kibetsu_choteiId",
-         "urT0705ChoteiKyotsuBefore_insertDantaiCd" =  C."urT0705ChoteiKyotsu_insertDantaiCd",
-         "urT0705ChoteiKyotsuBefore_insertTimestamp" =  C."urT0705ChoteiKyotsu_insertTimestamp",
-         "urT0705ChoteiKyotsuBefore_insertReamsLoginId" =  C."urT0705ChoteiKyotsu_insertReamsLoginId",
-         "urT0705ChoteiKyotsuBefore_insertContextId" =  C."urT0705ChoteiKyotsu_insertContextId",
-         "urT0705ChoteiKyotsuBefore_isDeleted" =  C."urT0705ChoteiKyotsu_isDeleted",
-         "urT0705ChoteiKyotsuBefore_updateCount" =  C."urT0705ChoteiKyotsu_updateCount",
-         "urT0705ChoteiKyotsuBefore_lastUpdateTimestamp" =  C."urT0705ChoteiKyotsu_lastUpdateTimestamp",
-         "urT0705ChoteiKyotsuBefore_lastUpdateReamsLoginId" =  C."urT0705ChoteiKyotsu_lastUpdateReamsLoginId",
-         "urT0705ChoteiKyotsuBefore_choteiId" =  C."urT0705ChoteiKyotsu_choteiId",
-         "urT0705ChoteiKyotsuBefore_shunoId" =  C."urT0705ChoteiKyotsu_shunoId",
-         "urT0705ChoteiKyotsuBefore_kaikeiNendo" =  C."urT0705ChoteiKyotsu_kaikeiNendo",
-         "urT0705ChoteiKyotsuBefore_shoriNendo" =  C."urT0705ChoteiKyotsu_shoriNendo",
-         "urT0705ChoteiKyotsuBefore_shoriNo" =  C."urT0705ChoteiKyotsu_shoriNo",
-         "urT0705ChoteiKyotsuBefore_koseiKaisu" =  C."urT0705ChoteiKyotsu_koseiKaisu",
-         "urT0705ChoteiKyotsuBefore_choteiJiyuCode" =  C."urT0705ChoteiKyotsu_choteiJiyuCode",
-         "urT0705ChoteiKyotsuBefore_choteiYMD" =  C."urT0705ChoteiKyotsu_choteiYMD",
-         "urT0705ChoteiKyotsuBefore_choteigaku" =  C."urT0705ChoteiKyotsu_choteigaku",
-         "urT0705ChoteiKyotsuBefore_shohizei" =  C."urT0705ChoteiKyotsu_shohizei",
-         "urT0705ChoteiKyotsuBefore_nokigenYMD" =  C."urT0705ChoteiKyotsu_nokigenYMD",
-         "urT0705ChoteiKyotsuBefore_hoteiNokigenToYMD" =  C."urT0705ChoteiKyotsu_hoteiNokigenToYMD",
-         "urT0705ChoteiKyotsuBefore_fukaShoriJokyo" =  C."urT0705ChoteiKyotsu_fukaShoriJokyo"
-        FROM 
-        (
-          SELECT
-          <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
-          <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-          <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
-          FROM
-          (
-            SELECT
-               賦課Newest.*
-            FROM 
-              rgdb."DbV2002Fuka" AS 賦課Newest,
-              (
-               SELECT
-                 B."hihokenshaNo",
-                 MAX(B."tsuchishoNo") AS "tsuchishoNo"
-               FROM 
-               rgdb."DbV2002Fuka" AS B
-              WHERE
-                B."choteiNendo" = #{調定年度}
-                AND B."fukaNendo" = #{賦課年度}
-              GROUP BY
-                B."hihokenshaNo"
-              ) AS A
-           WHERE
-              賦課Newest."choteiNendo" = #{調定年度}
-              AND 賦課Newest."fukaNendo" = #{賦課年度}
-              AND 賦課Newest."tsuchishoNo" = A."tsuchishoNo"
-              AND 賦課Newest."hihokenshaNo" = A."hihokenshaNo"
-          ) AS "DbT2002Fuka"
-         INNER JOIN rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
-           ON "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
-           AND "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
-           AND "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
-           AND "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
-           AND "DbT2003Kibetsu"."ki" in ('1','2','3','4','5','6')
-           AND "DbT2003Kibetsu"."choshuHouhou" = '1' 
-         INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
-              ON "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
-        ) AS C
-        WHERE D."dbT2002Fuka_hihokenshaNo" = C."dbT2002Fuka_hihokenshaNo"
-    </update>
 
     <insert id="insert賦課情報一時FROM計算後情報"
      parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidogennendotsuchisyoikatsuhako.IdoFukaJohoInfoParameter">
@@ -3062,6 +2873,7 @@
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
               AND 年金特徴回付情報."shoriNendo" = #{調定年度}
         WHERE
@@ -3872,6 +3684,7 @@
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
               AND 年金特徴回付情報."shoriNendo" = #{調定年度}
         WHERE
@@ -4223,6 +4036,7 @@
         WHERE A."honNenkinNo" = B."kisoNenkinNo"
              AND A."honNenkinCode" = B."nenkinCode"
              AND A."honHosokuM" = B."hosokuTsuki"
+             AND B."gyomuCode" = 'DB'
              AND B."tsuchiNaiyoCode" in ('00', '30')
              AND B."shoriNendo" = #{調定年度}
     </update>

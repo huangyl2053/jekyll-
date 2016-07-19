@@ -165,7 +165,7 @@ public class KogakuKyufuKetteiJohoManager {
             errorTempentity.setエラー区分(エラー区分_登録対象なし);
             hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
-        flowEntity.setCodeNum(連番);
+        flowEntity.setCodeNum(レコード件数合算);
         return flowEntity;
     }
 

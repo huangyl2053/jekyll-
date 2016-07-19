@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -48,18 +49,20 @@ public class KogakuServicehiHanteiErrorIchiranPrintService {
      *
      * @param shutsuryokujunID RString
      * @param entityList List<KogakuServicehiHanteiErrorListEntity>
+     * @param システム日時 YMDHMS
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(Long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList) {
+    public SourceDataCollection print(Long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList, YMDHMS システム日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            printFukusu(shutsuryokujunID, entityList, reportManager);
+            printFukusu(shutsuryokujunID, entityList, reportManager, システム日時);
             collection = reportManager.publish();
         }
         return collection;
     }
 
-    private void printFukusu(Long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList, ReportManager reportManager) {
+    private void printFukusu(Long shutsuryokujunID, List<KogakuServicehiHanteiErrorListEntity> entityList,
+            ReportManager reportManager, YMDHMS システム日時) {
         KogakuServicehiHanteiErrorIchiranProperty property = new KogakuServicehiHanteiErrorIchiranProperty();
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
@@ -96,7 +99,7 @@ public class KogakuServicehiHanteiErrorIchiranPrintService {
                 }
             }
             new KogakuServicehiHanteiErrorIchiranReport(entityList, association, 並び順の１件目, 並び順の２件目,
-                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List).writeBy(reportSourceWriter);
+                    並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目List, システム日時).writeBy(reportSourceWriter);
         }
     }
 

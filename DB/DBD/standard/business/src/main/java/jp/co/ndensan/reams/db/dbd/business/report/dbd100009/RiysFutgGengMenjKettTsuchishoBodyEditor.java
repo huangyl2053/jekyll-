@@ -180,8 +180,8 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         return source;
     }
 
-    private RiysFutgGengMenjKettTsuchishoReportSource set通知書定型文(RiysFutgGengMenjKettTsuchishoReportSource source,
-            int index, RiysFutgGengMenjKettTsuchishoItem item, RString taisyou) {
+    private void set通知書定型文(RiysFutgGengMenjKettTsuchishoReportSource source, int index, RiysFutgGengMenjKettTsuchishoItem item,
+            RString taisyou) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(index).split(折り返す符号.toString());
         Class reportSource = source.getClass();
         for (int i = 0; i <= 通知書定型文List.size(); i++) {
@@ -214,11 +214,9 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
                 break;
             }
         }
-        return source;
     }
 
-    private RiysFutgGengMenjKettTsuchishoReportSource setCompNinshosha(RiysFutgGengMenjKettTsuchishoReportSource source,
-            RiysFutgGengMenjKettTsuchishoItem item) {
+    private void setCompNinshosha(RiysFutgGengMenjKettTsuchishoReportSource source, RiysFutgGengMenjKettTsuchishoItem item) {
         source.denshiKoin = item.getNinshoshaSource().denshiKoin;
         source.hakkoYMD = item.getNinshoshaSource().hakkoYMD;
         source.ninshoshaYakushokuMei1 = item.getNinshoshaSource().ninshoshaYakushokuMei1;
@@ -227,11 +225,9 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.ninshoshaShimeiKakenai = item.getNinshoshaSource().ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = item.getNinshoshaSource().ninshoshaShimeiKakeru;
         source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;
-        return source;
     }
 
-    private RiysFutgGengMenjKettTsuchishoReportSource setCompSofubutsuAtesaki(
-            RiysFutgGengMenjKettTsuchishoReportSource source, RiysFutgGengMenjKettTsuchishoItem item) {
+    private void setCompSofubutsuAtesaki(RiysFutgGengMenjKettTsuchishoReportSource source, RiysFutgGengMenjKettTsuchishoItem item) {
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
             sofubutsuAtesakiSource = JushoHenshu.create編集後宛先(
@@ -270,7 +266,6 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        return source;
     }
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {

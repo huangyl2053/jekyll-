@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbd.service.report.tokubetsuchiikikasanhomonkaigo
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
-import jp.co.ndensan.reams.db.dbd.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800007.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800007.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800007.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
-import jp.co.ndensan.reams.db.dbd.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800007.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

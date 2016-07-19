@@ -82,9 +82,9 @@
         <result property="lastUpdateReamsLoginId" column="UrT0508SeikatsuHogoJukyusha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jukyuHaishiYMD" column="UrT0508SeikatsuHogoJukyusha_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jukyushaNo" column="UrT0508SeikatsuHogoJukyusha_jukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kaigoRyoDairiNofuKubun" column="UrT0508SeikatsuHogoJukyusha_kaigoRyoDairiNofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaigoRyoDairiNofuKubun" column="UrT0508SeikatsuHogoJukyusha_kaigoRyoDairiNofuKubun" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.KaigoRyoDairiNofuKubunTypeHandler"/>
         <result property="kaigoRyoDairiNofuYM" column="UrT0508SeikatsuHogoJukyusha_kaigoRyoDairiNofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="kyugoShisetsuNyuTaishoKubun" column="UrT0508SeikatsuHogoJukyusha_kyugoShisetsuNyuTaishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyugoShisetsuNyuTaishoKubun" column="UrT0508SeikatsuHogoJukyusha_kyugoShisetsuNyuTaishoKubun" typeHandler="jp.co.ndensan.reams.ur.urd.entity.typehandlers.KyugoShisetsuNyuTaishoKubunTypeHandler"/>
         <result property="kyugoShisetsuNyutaishoYMD" column="UrT0508SeikatsuHogoJukyusha_kyugoShisetsuNyutaishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
@@ -93,7 +93,7 @@
         <id property="shikibetsuCode" column="UrT0526SeikatsuHogoFujoShurui_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="gyomuCode" column="UrT0526SeikatsuHogoFujoShurui_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="UrT0526SeikatsuHogoFujoShurui_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <!--<id property="fujoShuruiCode" column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
         <result property="insertDantaiCd" column="UrT0526SeikatsuHogoFujoShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="UrT0526SeikatsuHogoFujoShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="UrT0526SeikatsuHogoFujoShurui_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

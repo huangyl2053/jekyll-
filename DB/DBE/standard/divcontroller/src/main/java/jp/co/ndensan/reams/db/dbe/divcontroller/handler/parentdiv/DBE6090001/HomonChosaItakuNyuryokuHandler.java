@@ -105,12 +105,8 @@ public class HomonChosaItakuNyuryokuHandler {
                 dgchosain_Row.setNinteiChosainCode(nullToEmpty(business.get認定調査員コード()));
                 dgchosain_Row.setChosainShimei(nullToEmpty(business.get調査員氏名()));
                 dgchosain_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
-                if (business.get調査員資格().isNullOrEmpty()) {
-                    dgchosain_Row.setChosainShikaku(RString.EMPTY);
-                } else {
-                    dgchosain_Row.setChosainShikaku(Sikaku.toValue(business.get調査員資格()).get名称());
-                }
-                dgchosain_Row.setShozokuKikanName(business.get所属機関名称());
+                dgchosain_Row.setChosainShikaku(Sikaku.toValue(nullToEmpty(business.get調査員資格())).get名称());
+                dgchosain_Row.setShozokuKikanName(nullToEmpty(business.get所属機関名称()));
                 if (business.is状況フラグ()) {
                     RString 状況フラグ = 有効;
                     dgchosain_Row.setJokyoFlag(状況フラグ);
@@ -239,7 +235,7 @@ public class HomonChosaItakuNyuryokuHandler {
         int rowCount = div.getDgShinsakaiIin().getClickedItem().getId();
         dgShinsakaiIin_Row row = dgChosainList.get(rowCount);
         if (状態_更新.equals(div.getHdt状態())) {
-            row.setNinteiChosaItakuryo(new RString(div.getTxtNinteiChosaItakuryo().getValue().toString()));
+            row.setNinteiChosaItakuryo(DecimalFormatter.toコンマ区切りRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));
             row.setShiharaiMemo(div.getTxtShiharaiMemo().getValue());
             if (銀行振込_出力済.equals(div.getRadGinkoFurikomi().getSelectedKey())) {
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());

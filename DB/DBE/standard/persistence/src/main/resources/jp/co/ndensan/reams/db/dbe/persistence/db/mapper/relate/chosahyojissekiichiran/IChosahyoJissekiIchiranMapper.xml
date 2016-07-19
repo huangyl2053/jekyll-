@@ -11,9 +11,9 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true">
         SELECT
           T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
-          , T5601."ninteichosaItakusakiCode" AS 認定調査委託先コード
+          , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
           , T5910."jigyoshaMeisho" AS 事業者名称
-          , T5601."ninteichosainCode" AS 認定調査員コード
+          , T5601."ninteichosainCode" AS 調査員コード
           , T5913."chosainShimei" AS 調査員氏名
           , T5101."hihokenshaNo" AS 被保険者番号
           , T5101."hihokenshaName" AS 被保険者氏名
@@ -30,10 +30,10 @@
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
             ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
           INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-            ON T5910."insertDantaiCd" = T7051."insertDantaiCd" 
+            ON T5910."shichosonCode" = T7051."shichosonCode" 
             AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode" 
           INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
-            ON T5913."insertDantaiCd" = T7051."insertDantaiCd" 
+            ON T5913."shichosonCode" = T7051."shichosonCode" 
             AND T5913."ninteiChosaItakusakiCode" = T5601."ninteichosaItakusakiCode" 
             AND T5913."ninteiChosainCode" = T5601."ninteichosainCode" 
           INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
@@ -56,10 +56,10 @@
             separator="OR"  
             close=")">
                 (
-                T5601."ninteichosaItakusakiCode" = #{item.shujiiIryoKikanCode}
-                AND T5601."ninteichosainCode" = #{item.shujiiCode}
+                T5601."ninteichosaItakusakiCode" = #{item.ninteichosaItakusakiCode}
+                AND T5601."ninteichosainCode" = #{item.ninteichosainCode}
                 AND T5601."shinseishoKanriNo" = #{item.shinseishoKanriNo}
-                AND T5601."ninteichosaIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
+                AND T5601."ninteichosaIraiRirekiNo" = #{item.ninteichosaRirekiNo}
                 )
             </foreach>
         </if>

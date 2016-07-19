@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -118,6 +119,8 @@ public class KoikinaiTenkyoRirekiHenkan {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             updateDbT5101NinteiShinseiJoho(div);
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
             前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).setState(DBE1720001StateName.完了);
         }

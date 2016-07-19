@@ -92,7 +92,8 @@ public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaH
                 count = count + 1;
             }
             ninteichosaItakusakiCode = relateEntity.get認定調査委託先コード();
-            ChosahoshuichiranReport report = new ChosahoshuichiranReport(NinteiChosaHoshuShokaiChange.createShokaiData(relateEntity, parameter, count, reportSourceWriter.pageCount().value()));
+            ChosahoshuichiranReport report = new ChosahoshuichiranReport(NinteiChosaHoshuShokaiChange.createShokaiData(relateEntity,
+                    parameter, count, reportSourceWriter.pageCount().value()));
             report.writeBy(reportSourceWriter);
         }
     }

@@ -48,10 +48,9 @@ public class SinsaSeikyusyoPanel {
         ViewStateHolder.put(ViewStateKeys.状態, 状態_更新);
         List<FufukuMoshitate> sinsaSeikyusyoJohoList
                 = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(
-                        ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                        ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).records();
+                        shikibetsuCode,
+                        hihokenshaNo).records();
         getHandler(div).onLoad(sinsaSeikyusyoJohoList);
-
         return createResponse(div);
     }
 
@@ -62,8 +61,9 @@ public class SinsaSeikyusyoPanel {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnTuika(SinsaSeikyusyoPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 状態_追加);
         // TODO QA72883
         return ResponseData.of(div).forwardWithEventName(DBU0900011TransitionEventName.登録画面に遷移).parameter(状態_追加);
@@ -77,8 +77,9 @@ public class SinsaSeikyusyoPanel {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_BtnSenTaKu(SinsaSeikyusyoPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                 new FlexibleDate(div.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
         return ResponseData.of(div).respond();
@@ -91,8 +92,9 @@ public class SinsaSeikyusyoPanel {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnShuuSei(SinsaSeikyusyoPanelDiv sindiv) {
-        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 状態_更新);
         ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                 new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));
@@ -108,8 +110,9 @@ public class SinsaSeikyusyoPanel {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoPanelDiv> onClick_btnSakuzyo(SinsaSeikyusyoPanelDiv sindiv) {
-        ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
+        TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
         ViewStateHolder.put(ViewStateKeys.状態, 状態_削除);
         ViewStateHolder.put(ViewStateKeys.審査請求届出日,
                 new FlexibleDate(sindiv.getGrdSinsaSeikyusyoJoho().getActiveRow().getTxtShinsaSeikyuTodokeYMD().getValue().toDateString()));

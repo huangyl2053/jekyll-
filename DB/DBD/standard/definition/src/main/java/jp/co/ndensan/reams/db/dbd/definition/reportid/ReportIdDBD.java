@@ -40,7 +40,7 @@ public enum ReportIdDBD {
      */
     DBD800007(new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseisho"), new RString("特別地域加算減免・訪問介護等利用者負担減額対象確認申請書")),
     /**
-     * 給付減額滞納者把握リストの帳票ＩＤです。
+     * 社会福祉法人等利用者負担軽減対象確認申請書の帳票ＩＤです。
      */
     DBD800006(new ReportId("DBD800006_ShafukuRiyoshaFutangakuKeigentaishoShinseisho"), new RString("社会福祉法人等利用者負担軽減対象確認申請書")),
     /**
@@ -92,9 +92,45 @@ public enum ReportIdDBD {
      */
     DBD100014(new ReportId("DBD100014_HomonKaigoRiyoshaFutanGeｍmenKetteiTsuchisho"), new RString("特別地域加算減免・訪問介護利用者負担減額決定通知書")),
     /**
+     * 支払方法変更予告通知書の帳票ＩＤです。
+     */
+    DBD100001(new ReportId("DBD100001_ShiharaiHohoHenkoYokokuTsuchisho"), new RString("支払方法変更予告通知書")),
+    	/**
+     * 支払方法変更通知書の帳票ＩＤです。
+     */
+    DBD100002(new ReportId("DBD100002_ShiharaiHohoHenkoTsuchisho"), new RString("支払方法変更通知書")),
+    /**
+     * 支払一時差止通知書の帳票ＩＤです。
+     */
+    DBD100003(new ReportId("DBD100003_ShiharaiIchijiSashitomeTsuchisho"), new RString("支払一時差止通知書")),
+    /**
+     * 滞納保険料控除通知書の帳票ＩＤです。
+     */
+    DBD100004(new ReportId("DBD100004_TainoHokenryoKojoTsuchisho"), new RString("滞納保険料控除通知書")),
+    	/**
+     * 給付額減額通知書の帳票ＩＤです。
+     */
+    DBD100005(new ReportId("DBD100005_KyufugakuGengakuTsuchisho"), new RString("給付額減額通知書")),
+    /**
+     * 差止予告通知書_２号用の帳票ＩＤです。
+     */
+    DBD100006(new ReportId("DBD100006_SashitomeYokokuTsuchishoNigo"), new RString("差止予告通知書_２号用")),
+    /**
+     * 差止処分通知書_２号用の帳票ＩＤです。
+     */
+    DBD100007(new ReportId("DBD100007_SashitomeShobunTsuchishoNigo"), new RString("差止処分通知書_２号用")),
+    /**
      * 要介護認定結果通知書の帳票ＩＤです。
      */
-    DBD532001(new ReportId("DBD532001_YokaigoNinteiKekkaTshuchisho"), new RString("要介護認定結果通知書"));
+    DBD532001(new ReportId("DBD532001_YokaigoNinteiKekkaTshuchisho"), new RString("要介護認定結果通知書")),
+    /**
+     * サービス変更通知書の帳票ＩＤです。
+     */
+    DBD550002(new ReportId("DBD550002_ServiceHenkoTshuchisho"), new RString("サービス変更通知書")),
+    /**
+     * 要介護度変更通知書の帳票ＩＤです。
+     */
+    DBD550003(new ReportId("DBD550003_YokaigodoHenkoTshuchisho"), new RString("要介護度変更通知書"));
 
     private final ReportId reportId;
     private final RString reportName;

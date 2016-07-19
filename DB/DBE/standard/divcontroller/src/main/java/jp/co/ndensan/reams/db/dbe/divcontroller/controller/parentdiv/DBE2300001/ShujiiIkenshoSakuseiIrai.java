@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -275,6 +276,25 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * レコードをクリックの場合、主治医意見書作成依頼情報が「主治医医療機関/主治医エリア」に正しく書き込みします。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSelect_dgShinseishaIchiran(ShujiiIkenshoSakuseiIraiDiv div) {
+        dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
+        if (!RString.isNullOrEmpty(row.getIraiKubun())) {
+            div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()),
+                    new ShinseishoKanriNo(row.getShiseishoKanriNo()), SubGyomuCode.DBE認定支援,
+                    row.getShujiiIryoKikanCode(), row.getShujiiIryoKikan(), row.getShujiiCode(), row.getShujii());
+            div.getCcdShujiiIryoKikanAndShujiiInput().setShiteii(row.getShiteiiFlag());
+        } else {
+            div.getCcdShujiiIryoKikanAndShujiiInput().clear();
         }
         return ResponseData.of(div).respond();
     }
@@ -514,15 +534,13 @@ public class ShujiiIkenshoSakuseiIrai {
             iraishoItem.setJushoText(atenaJoho.getTemp_宛名住所() == null ? RString.EMPTY : atenaJoho.getTemp_宛名住所().value());
             iraishoItem.setKikanNameText(atenaJoho.getTemp_宛名機関名());
             iraishoItem.setShimeiText(atenaJoho.getTemp_宛名氏名() == null ? RString.EMPTY : atenaJoho.getTemp_宛名氏名().value());
+            iraishoItem.setCustomerBarCode(ReportUtil.getCustomerBarCode(iraishoItem.getYubinNo1(), iraishoItem.getJushoText()));
         }
         iraishoItem.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
         iraishoItem.setSonota(RString.EMPTY);
 
-        CustomerBarCode barcode = new CustomerBarCode();
-        CustomerBarCodeResult result = barcode.convertCustomerBarCode(row.getYubinNo(), row.getJusho());
-        iraishoItem.setCustomerBarCode(result.getCustomerBarCode());
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).

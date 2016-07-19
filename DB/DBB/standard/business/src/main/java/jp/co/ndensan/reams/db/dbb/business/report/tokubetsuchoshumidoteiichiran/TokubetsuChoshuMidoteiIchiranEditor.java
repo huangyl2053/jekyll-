@@ -39,8 +39,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
     private static final List<RString> 住民種別日本人 = new ArrayList<>();
     private static final List<RString> 住民種別外国人 = new ArrayList<>();
 
-//    private final List<RString> 出力順項目リスト;
-//    private final List<RString> 改頁項目リスト;
     private final Association association;
     private final TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定;
 
@@ -48,18 +46,12 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
      * コンストラクタです。
      *
      * @param 特徴対象一覧未同定
-     * @param 出力順項目リスト List<RString>
-     * @param 改頁項目リスト List<RString>
      * @param association Association
      */
     public TokubetsuChoshuMidoteiIchiranEditor(
             TokushoTaishioIchiranMidoteiEntity 特徴対象一覧未同定,
-            List<RString> 出力順項目リスト,
-            List<RString> 改頁項目リスト,
             Association association) {
         this.特徴対象一覧未同定 = 特徴対象一覧未同定;
-//        this.出力順項目リスト = 出力順項目リスト;
-//        this.改頁項目リスト = 改頁項目リスト;
         this.association = association;
         住民種別日本人.add(日本人);
         住民種別日本人.add(住登外日本人);
@@ -84,8 +76,6 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         set住所(source);
         set天引先区分(source);
         set出力事由(source);
-//        set出力順(source);
-//        set改ページ(source);
         return source;
     }
 
@@ -186,47 +176,5 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         }
         source.listList1_9 = DoteiFuitchiRiyu.toValue(不一致理由コード).get不一致理由名();
     }
-//
-//    private void set出力順(TokubetsuChoshuMidoteiIchiranSource source) {
-//        if (出力順項目リスト == null || 出力順項目リスト.isEmpty()) {
-//            return;
-//        }
-//        if (出力順項目リスト.size() > NUM_0) {
-//            source.sortJunArea1 = 出力順項目リスト.get(NUM_0);
-//        }
-//        if (出力順項目リスト.size() > NUM_1) {
-//            source.sortJunArea2 = 出力順項目リスト.get(NUM_1);
-//        }
-//        if (出力順項目リスト.size() > NUM_2) {
-//            source.sortJunArea3 = 出力順項目リスト.get(NUM_2);
-//        }
-//        if (出力順項目リスト.size() > NUM_3) {
-//            source.sortJunArea4 = 出力順項目リスト.get(NUM_3);
-//        }
-//        if (出力順項目リスト.size() > NUM_4) {
-//            source.sortJunArea5 = 出力順項目リスト.get(NUM_4);
-//        }
-//    }
-//
-//    private void set改ページ(TokubetsuChoshuMidoteiIchiranSource source) {
-//        if (改頁項目リスト == null || 改頁項目リスト.isEmpty()) {
-//            return;
-//        }
-//        if (改頁項目リスト.size() > NUM_0) {
-//            source.kaiPageArea1 = 改頁項目リスト.get(NUM_0);
-//        }
-//        if (改頁項目リスト.size() > NUM_1) {
-//            source.kaiPageArea2 = 改頁項目リスト.get(NUM_1);
-//        }
-//        if (改頁項目リスト.size() > NUM_2) {
-//            source.kaiPageArea3 = 改頁項目リスト.get(NUM_2);
-//        }
-//        if (改頁項目リスト.size() > NUM_3) {
-//            source.kaiPageArea4 = 改頁項目リスト.get(NUM_3);
-//        }
-//        if (改頁項目リスト.size() > NUM_4) {
-//            source.kaiPageArea5 = 改頁項目リスト.get(NUM_4);
-//        }
-//    }
 
 }

@@ -82,6 +82,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     protected void afterExecute() {
         KoikinaiJushochitokureishaIchiranhyoReport report = new KoikinaiJushochitokureishaIchiranhyoReport(getHeadItem(), getBodyItem());
         report.writeBy(retortWrite);
+        batchWrite.close();
     }
 
     private KoikinaiJushochitokureishaIchiranhyoHead getHeadItem() {
@@ -196,8 +197,8 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             広域内住所地特例者Entity.set被保険者番号(entity.getHihokenshaNo().value());
             広域内住所地特例者Entity.set氏名カナ(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get名称().getKana().value());
-            広域内住所地特例者Entity.set生年月日(nullToEmtiy(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get生年月日()));
+            広域内住所地特例者Entity.set生年月日(new RString(ShikibetsuTaishoFactory
+                    .createKojin(entity.getFt200Entity()).get生年月日().toFlexibleDate().toString()));
             広域内住所地特例者Entity.set住所コード(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get住所().get全国住所コード().value());
             広域内住所地特例者Entity.set行政区CD(ShikibetsuTaishoFactory

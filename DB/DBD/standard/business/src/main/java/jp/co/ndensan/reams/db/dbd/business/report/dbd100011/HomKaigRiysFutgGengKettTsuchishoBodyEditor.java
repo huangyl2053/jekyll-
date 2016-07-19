@@ -66,8 +66,7 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         return bodyEdit(source);
     }
 
-    private HomKaigRiysFutgGengKettTsuchishoReportSource bodyEdit(
-            HomKaigRiysFutgGengKettTsuchishoReportSource source) {
+    private HomKaigRiysFutgGengKettTsuchishoReportSource bodyEdit(HomKaigRiysFutgGengKettTsuchishoReportSource source) {
 
         source.bunshoNo = item.get文書番号();
         source.title1 = new RString("訪問介護等利用者負担額減額　決定通知書");
@@ -178,8 +177,7 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
 
     }
 
-    private HomKaigRiysFutgGengKettTsuchishoReportSource set通知書定型文(
-            HomKaigRiysFutgGengKettTsuchishoReportSource source, int index,
+    private void set通知書定型文(HomKaigRiysFutgGengKettTsuchishoReportSource source, int index,
             HomKaigRiysFutgGengKettTsuchishoItem item, RString taisyou) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(index).split(折り返す符号.toString());
         Class reportSource = source.getClass();
@@ -213,11 +211,9 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
                 break;
             }
         }
-        return source;
     }
 
-    private HomKaigRiysFutgGengKettTsuchishoReportSource setCompNinshosha(HomKaigRiysFutgGengKettTsuchishoReportSource source,
-            HomKaigRiysFutgGengKettTsuchishoItem item) {
+    private void setCompNinshosha(HomKaigRiysFutgGengKettTsuchishoReportSource source, HomKaigRiysFutgGengKettTsuchishoItem item) {
         source.denshiKoin = item.getNinshoshaSource().denshiKoin;
         source.hakkoYMD = item.getNinshoshaSource().hakkoYMD;
         source.ninshoshaYakushokuMei1 = item.getNinshoshaSource().ninshoshaYakushokuMei1;
@@ -226,11 +222,9 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.ninshoshaShimeiKakenai = item.getNinshoshaSource().ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = item.getNinshoshaSource().ninshoshaShimeiKakeru;
         source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;
-        return source;
     }
 
-    private HomKaigRiysFutgGengKettTsuchishoReportSource setCompSofubutsuAtesaki(
-            HomKaigRiysFutgGengKettTsuchishoReportSource source, HomKaigRiysFutgGengKettTsuchishoItem item) {
+    private void setCompSofubutsuAtesaki(HomKaigRiysFutgGengKettTsuchishoReportSource source, HomKaigRiysFutgGengKettTsuchishoItem item) {
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
             sofubutsuAtesakiSource = JushoHenshu.create編集後宛先(
@@ -269,7 +263,6 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
-        return source;
     }
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {

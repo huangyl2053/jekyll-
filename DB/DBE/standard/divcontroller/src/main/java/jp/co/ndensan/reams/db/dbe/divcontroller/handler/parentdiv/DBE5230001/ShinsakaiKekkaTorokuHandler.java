@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NinteiShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -113,7 +109,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKyotsuHyojiArea().getTxtShinsaTaishosha().setValue(new RString(head.get割付人数()));
             div.getKyotsuHyojiArea().getTxtShinsakaiKaijo().setValue(head.get審査会会場());
             div.getKyotsuHyojiArea().getTxtChiku().setValue(head.get審査会地区コード());
-            div.getKyotsuHyojiArea().getTxtChiku().
+            div.getKyotsuHyojiArea().getTxtShinsakaijoJusho().
                     setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(), new Code(head.get審査会地区コード())));
             div.getKyotsuHyojiArea().getTxtTaishoNinzu().setValue(new RString(head.get対象人数()));
             div.getKyotsuHyojiArea().getTxtKaisaiNichiji().setValue(head.get開催日());
@@ -185,10 +181,10 @@ public class ShinsakaiKekkaTorokuHandler {
                     意見フラグ,
                     business.get審査会意見種類(),
                     business.get一次判定結果変更理由(),
-                    キー_0,
-                    キー_0,
-                    キー_0,
-                    キー_0,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
                     business.get生年月日(),
                     business.get審査会メモ(),
                     business.get審査会意見(),
@@ -205,91 +201,12 @@ public class ShinsakaiKekkaTorokuHandler {
     }
 
     /**
-     * 設定期間Fromと設定期間Toの前後順チェック
-     *
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 設定期間Fromと設定期間Toの前後順() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue()
-                .isBefore(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuHandler.IdocheckMessages(
-                    UrErrorMessages.期間が不正_追加メッセージあり２, "設定期間From", "設定期間To")));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 有効月数チェック
-     *
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 有効月数チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ZERO) == 0) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinsakaiKekkaTorokuHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 有効月数範囲チェック
-     *
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 有効月数範囲チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if ((NinteiShinseiShinseijiKubunCode.新規申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
-                || NinteiShinseiShinseijiKubunCode.区分変更申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue()))
-                && !((div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ONE) >= 0)
-                && (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(new Decimal("12"))) <= 0)) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinsakaiKekkaTorokuHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
-        } else if (NinteiShinseiShinseijiKubunCode.更新申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
-                && !((div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ONE) >= 0)
-                && (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(new Decimal("24"))) <= 0)) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinsakaiKekkaTorokuHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 対象者一覧件数チェック
-     *
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 対象者一覧件数チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuHandler.IdocheckMessages(UrErrorMessages.該当データなし)));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 入力チェック
-     *
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (介護１.equals(div.getTxtIchijiHantei().getValue())
-                && div.getDdlJotaiZo().getSelectedKey().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinsakaiKekkaTorokuHandler.IdocheckMessages(UrErrorMessages.必須項目), div.getDdlJotaiZo()));
-        }
-        return validPairs;
-    }
-
-    /**
      * 個別エリアのデータを変更しました。
      *
      * @return boolean 変更あり：TRUE、変更なし：FALSE
      */
     public boolean hasChange() {
-        return !div.getKobetsuHyojiArea().getHasData().equals(getInputItem());
+        return !div.getHdnHasChanged().equals(getInputItem());
     }
 
     /**
@@ -329,6 +246,7 @@ public class ShinsakaiKekkaTorokuHandler {
     public void setKobetsuHyojiArea() {
         dgTaishoshaIchiran_Row row = div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem();
         div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().setValue(row.getShinsakaiJunjo());
+        div.getKobetsuHyojiArea().getTxtShinseiDay().setValue(row.getShinseiDay().getValue());
         div.getKobetsuHyojiArea().getTxtBirthYMD().setValue(new FlexibleDate(row.getSeiNenGaBi()));
         div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().setValue(row.getShinseiKubunShinseiji());
         div.getKobetsuHyojiArea().getTxtShinseiKubunLow().setValue(row.getShinseiKubunLaw());
@@ -347,13 +265,13 @@ public class ShinsakaiKekkaTorokuHandler {
         }
         div.getKobetsuHyojiArea().getDdlNijiHantei().setSelectedValue(row.getKonkaiNijiHantei());
         FlexibleDate ninteiKikanKaishi = row.getNinteiKikanKaishi().getValue();
-        if (ninteiKikanKaishi != null) {
+        if (ninteiKikanKaishi != null && !ninteiKikanKaishi.isEmpty()) {
             div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setValue(new RDate(row.getNinteiKikanKaishi().getValue().toString()));
         } else {
             div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().clearValue();
         }
         FlexibleDate ninteiKikanShuryo = row.getNinteiKikanShuryo().getValue();
-        if (ninteiKikanShuryo != null) {
+        if (ninteiKikanShuryo != null && !ninteiKikanShuryo.isEmpty()) {
             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(row.getNinteiKikanShuryo().getValue().toString()));
         } else {
             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().clearValue();
@@ -385,6 +303,7 @@ public class ShinsakaiKekkaTorokuHandler {
         }
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
+        div.getKobetsuHyojiArea().setHasData(new RString("1"));
         div.setHdnHasChanged(getSelectItem());
     }
 
@@ -525,8 +444,8 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(row.getNijiHanteiDate().getValue())
                 .append(row.getTokuteiShippei())
                 .append(row.getJotaizo())
-                .append(row.getHanteiKekka())
-                .append(row.getKonkaiNijiHantei())
+                .append(row.getHanteiKekkaCode())
+                .append(row.getKonkaiNijiHanteiCode())
                 .append(row.getNinteiKikanKaishi().getValue().toString())
                 .append(row.getNinteiKikanShuryo().getValue().toString())
                 .append(row.getNinteiKikanTukisu().toString())
@@ -647,7 +566,6 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      */
     public void setNinteiKikan() {
-        div.getKobetsuHyojiArea().getTxtShinseiDay().setValue(new FlexibleDate("20160101"));
         TextBoxDate ninteiKikanFrom = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom();
         TextBoxDate ninteiKikanTo = div.getKobetsuHyojiArea().getTxtNinteiKikanTo();
         TextBox shinseiKubun = div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji();
@@ -694,6 +612,8 @@ public class ShinsakaiKekkaTorokuHandler {
                 || キー_24.equals(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
                 || キー_25.equals(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())) {
             div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(キー_01);
+        } else {
+            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
         }
     }
 

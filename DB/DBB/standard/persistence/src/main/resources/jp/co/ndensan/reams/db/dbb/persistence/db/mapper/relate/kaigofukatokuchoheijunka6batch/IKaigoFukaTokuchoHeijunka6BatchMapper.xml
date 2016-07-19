@@ -70,8 +70,23 @@
     <insert id="alter対象外データTemp備考コード">
         ALTER TABLE
         "TmpTaishogai"
-        ADD
-        "備考コード" text
+        ADD "hokenryoDankaiKarisanntei" character varying(3),
+        ADD "tokuchoKibetsuChoteigaku1" numeric(20,0),
+        ADD "tokuchoKibetsuChoteigaku2" numeric(20,0),
+        ADD "tokuchoKibetsuChoteigaku3" numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku1"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku2"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku3"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku4"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku5"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku6"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku7"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku8"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku9"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku10" numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku11" numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku12" numeric(20,0),
+        ADD "備考コード" text
     </insert>
     <insert id="create対象者データTemp">
         CREATE TEMP TABLE 
@@ -86,8 +101,23 @@
     <insert id="alter対象者データTemp備考コード">
         ALTER TABLE
         "TmpTaishosha"
-        ADD
-        "備考コード" text
+        ADD "hokenryoDankaiKarisanntei" character varying(3),
+        ADD "tokuchoKibetsuChoteigaku1" numeric(20,0),
+        ADD "tokuchoKibetsuChoteigaku2" numeric(20,0),
+        ADD "tokuchoKibetsuChoteigaku3" numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku1"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku2"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku3"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku4"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku5"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku6"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku7"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku8"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku9"  numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku10" numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku11" numeric(20,0),
+        ADD "fuchoKibetsuChoteigaku12" numeric(20,0),
+        ADD "備考コード" text
     </insert>
     <select id="get対象外データTemp" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity">
         SELECT
@@ -175,6 +205,22 @@
         "urT0705ChoteiKyotsu_nokigenYMD",
         "urT0705ChoteiKyotsu_hoteiNokigenToYMD",
         "urT0705ChoteiKyotsu_fukaShoriJokyo",
+        "hokenryoDankaiKarisanntei",
+        "tokuchoKibetsuChoteigaku1",
+        "tokuchoKibetsuChoteigaku2",
+        "tokuchoKibetsuChoteigaku3",
+        "fuchoKibetsuChoteigaku1",
+        "fuchoKibetsuChoteigaku2",
+        "fuchoKibetsuChoteigaku3",
+        "fuchoKibetsuChoteigaku4",
+        "fuchoKibetsuChoteigaku5",
+        "fuchoKibetsuChoteigaku6",
+        "fuchoKibetsuChoteigaku7",
+        "fuchoKibetsuChoteigaku8",
+        "fuchoKibetsuChoteigaku9",
+        "fuchoKibetsuChoteigaku10",
+        "fuchoKibetsuChoteigaku11",
+        "fuchoKibetsuChoteigaku12",
         "備考コード"
         )
         VALUES
@@ -248,6 +294,22 @@
             #{urT0705ChoteiKyotsu_nokigenYMD},
             #{urT0705ChoteiKyotsu_hoteiNokigenToYMD},
             #{urT0705ChoteiKyotsu_fukaShoriJokyo},
+            #{hokenryoDankaiKarisanntei},
+            #{tokuchoKibetsuChoteigaku1},
+            #{tokuchoKibetsuChoteigaku2},
+            #{tokuchoKibetsuChoteigaku3},
+            #{fuchoKibetsuChoteigaku1},
+            #{fuchoKibetsuChoteigaku2},
+            #{fuchoKibetsuChoteigaku3},
+            #{fuchoKibetsuChoteigaku4},
+            #{fuchoKibetsuChoteigaku5},
+            #{fuchoKibetsuChoteigaku6},
+            #{fuchoKibetsuChoteigaku7},
+            #{fuchoKibetsuChoteigaku8},
+            #{fuchoKibetsuChoteigaku9},
+            #{fuchoKibetsuChoteigaku10},
+            #{fuchoKibetsuChoteigaku11},
+            #{fuchoKibetsuChoteigaku12},
             #{備考コード}
         )
     </insert>
@@ -325,6 +387,22 @@
         "urT0705ChoteiKyotsu_nokigenYMD",
         "urT0705ChoteiKyotsu_hoteiNokigenToYMD",
         "urT0705ChoteiKyotsu_fukaShoriJokyo",
+        "hokenryoDankaiKarisanntei",
+        "tokuchoKibetsuChoteigaku1",
+        "tokuchoKibetsuChoteigaku2",
+        "tokuchoKibetsuChoteigaku3",
+        "fuchoKibetsuChoteigaku1",
+        "fuchoKibetsuChoteigaku2",
+        "fuchoKibetsuChoteigaku3",
+        "fuchoKibetsuChoteigaku4",
+        "fuchoKibetsuChoteigaku5",
+        "fuchoKibetsuChoteigaku6",
+        "fuchoKibetsuChoteigaku7",
+        "fuchoKibetsuChoteigaku8",
+        "fuchoKibetsuChoteigaku9",
+        "fuchoKibetsuChoteigaku10",
+        "fuchoKibetsuChoteigaku11",
+        "fuchoKibetsuChoteigaku12",
         "備考コード"
         )
         VALUES
@@ -398,6 +476,22 @@
             #{urT0705ChoteiKyotsu_nokigenYMD},
             #{urT0705ChoteiKyotsu_hoteiNokigenToYMD},
             #{urT0705ChoteiKyotsu_fukaShoriJokyo},
+            #{hokenryoDankaiKarisanntei},
+            #{tokuchoKibetsuChoteigaku1},
+            #{tokuchoKibetsuChoteigaku2},
+            #{tokuchoKibetsuChoteigaku3},
+            #{fuchoKibetsuChoteigaku1},
+            #{fuchoKibetsuChoteigaku2},
+            #{fuchoKibetsuChoteigaku3},
+            #{fuchoKibetsuChoteigaku4},
+            #{fuchoKibetsuChoteigaku5},
+            #{fuchoKibetsuChoteigaku6},
+            #{fuchoKibetsuChoteigaku7},
+            #{fuchoKibetsuChoteigaku8},
+            #{fuchoKibetsuChoteigaku9},
+            #{fuchoKibetsuChoteigaku10},
+            #{fuchoKibetsuChoteigaku11},
+            #{fuchoKibetsuChoteigaku12},
             #{備考コード}
         )
     </insert>
@@ -460,7 +554,7 @@
         FROM 
             rgdb."DbT2015KeisangoJoho" AS 計算後情報
         LEFT JOIN
-            rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+            rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON
             計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
             AND 計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -486,11 +580,11 @@
         ${出力順}
     </select>
     <resultMap id="resultMap_Taishosha" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaEntity" autoMapping="true">
-        <id column="dbT2015KeisangoJoho_choteiNendo"/>
-        <id column="dbT2015KeisangoJoho_fukaNendo"/>
-        <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
-        <id column="dbT2015KeisangoJoho_koseiZengoKubun"/>
-        <id column="dbT2015KeisangoJoho_sakuseiShoriName"/>
+        <id column="choteiNendo"/>
+        <id column="fukaNendo"/>
+        <id column="tsuchishoNo"/>
+        <id column="koseiZengoKubun"/>
+        <id column="sakuseiShoriName"/>
         <result property="特別徴収義務者コード" column="dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="計算後情報" resultMap="ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
@@ -643,7 +737,7 @@
             対象外データTemp."dbT2002Fuka_fukaNendo" = 徴収方法Newest."fukaNendo"
             AND 対象外データTemp."dbT2002Fuka_hihokenshaNo" = 徴収方法Newest."hihokenshaNo"
         LEFT JOIN
-            rgdb."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
+            rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報
         ON
             徴収方法Newest."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
             AND 徴収方法Newest."kariNenkinCode" = 年金特徴回付情報."nenkinCode"

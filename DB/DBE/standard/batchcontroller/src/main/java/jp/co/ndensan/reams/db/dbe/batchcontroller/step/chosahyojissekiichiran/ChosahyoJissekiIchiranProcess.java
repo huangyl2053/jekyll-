@@ -50,12 +50,13 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  * 帳票出力用認定調査実績集計表のReportSourceクラスです。
  *
- * @reamsid_L DBE-1691-020 dangjingjing
+ * @reamsid_L DBE-1691-020 dangjigjing
  */
 public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJissekiIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosahyojissekiichiran.IChosahyoJissekiIchiranMapper.get帳票出力用認定調査実績集計表");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosahyojissekiichiran."
+            + "IChosahyoJissekiIchiranMapper.get帳票出力用認定調査実績集計表");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601002.getReportId();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601002"));
     private static final RString CSV_NAME = new RString("ChosahyoJissekiIchiran.csv");
@@ -132,7 +133,7 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE601002.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
@@ -147,7 +148,7 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         出力条件.add(調査実施日To_SB.toRString());
         出力条件.add(保険者_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE601002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
@@ -169,7 +170,7 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         出力条件.add(調査実施日To_SB.toRString());
         出力条件.add(保険者_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("帳票出力用認定調査実績集計CSV"), 導入団体コード, 市町村名, ジョブ番号,
+                new RString("認定調査実績集計CSV"), 導入団体コード, 市町村名, ジョブ番号,
                 CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }

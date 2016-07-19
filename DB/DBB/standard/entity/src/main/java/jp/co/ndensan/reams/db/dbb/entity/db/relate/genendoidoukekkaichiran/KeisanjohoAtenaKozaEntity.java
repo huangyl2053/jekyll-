@@ -191,7 +191,7 @@ public class KeisanjohoAtenaKozaEntity {
         this.生保開始日 = 計算後情報.getSeihoKaishiYMD();
         this.生保廃止日 = 計算後情報.getSeihoHaishiYMD();
         this.老齢開始日 = 計算後情報.getRonenKaishiYMD();
-        this.老齢開始日 = 計算後情報.getRonenKaishiYMD();
+        this.老齢廃止日 = 計算後情報.getRonenHaishiYMD();
         this.賦課期日 = 計算後情報.getFukaYMD();
         this.課税区分 = 計算後情報.getKazeiKubun();
         this.世帯課税区分 = 計算後情報.getSetaikazeiKubun();

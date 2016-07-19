@@ -118,4 +118,14 @@ public class PrintContentsSettingDiv extends Panel implements IPrintContentsSett
     public RDate getSendDate() {
         return this.getTxtSendDate().getValue();
     }
+
+    /**
+     * 送付日の活性を設します。
+     *
+     * @param flag True:非活性　False:活性
+     */
+    @Override
+    public void setSendDateDisable(boolean flag) {
+        this.getTxtSendDate().setDisabled(flag);
+    }
 }

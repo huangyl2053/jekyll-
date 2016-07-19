@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--概要：源泉徴収データ作成のマッピング用XMLです。
+@reamsid_L DBE-2000-020 jinjue
+どのマッパーインターフェースと対応するかを指定する-->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gensenchoshudatasakusei.IGensenChoshuDataSakuseiRelateMapper">
+
+    <select id="getデータ情報" resultMap="resultMap_GensenChoshuRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.gensenchoshudatasakusei.GensenChoshuMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT          T5603."shinsakaiIinCode",
+        T5594."shinsakaiIinShimei",
+        T5594."shinsakaiIinShikakuCode",
+        T5910."jigyoshaMeisho",
+        X5595."ninteiChosainNo",
+        T5911."iryoKikanMeisho",
+        X5595."shujiiCode",
+        T5914."kikanMeisho",
+        X5595."sonotaKikanCode",
+        T5594."yubinNo",
+        T5594."Jusho",
+        T5594."telNo",
+        T5594."faxNo",
+        T5594."seinengappiYMD",
+        X5603.shinsakaiHoshu,
+        X5603.sonotaHoshu,
+        X5603.shinsakaiKotsuhi,
+        X5603.kojoZeigaku,
+        X5603.hoshuGokei
+        FROM	rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
+        INNER JOIN	rgdb."DbT5594ShinsakaiIinJoho" AS T5594
+        ON		T5594."shinsakaiIinCode"=T5603."shinsakaiIinCode"
+        INNER JOIN	(
+        SELECT	T5603."shinsakaiIinCode",
+        SUM ("shinsakaiHoshu")AS shinsakaiHoshu,
+        SUM ("shinsakaiSonotaHoshu")AS sonotaHoshu,
+        SUM ("shinsakaiKotsuhi")AS shinsakaiKotsuhi,
+        SUM ("shinsakaiKojoZeigaku")AS kojoZeigaku,
+        SUM ("shinsakaiHoshuGokei")AS hoshuGokei
+        FROM	rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
+        WHERE	 #{指定年}||'0101' <![CDATA[<=]]>T5603."shinsakaiKaisaiYMD"
+        AND      T5603."shinsakaiKaisaiYMD"<![CDATA[<=]]>(#{指定年}||'1231')
+        GROUP BY	T5603."shinsakaiIinCode"
+        )	X5603
+        ON		X5603."shinsakaiIinCode"=T5603."shinsakaiIinCode"
+        INNER JOIN	(
+        SELECT A.* from ( SELECT	T5595."shinsakaiIinCode",
+        T5595."shoKisaiHokenshaNo",
+        T5595."shujiiIryokikanCode",
+        T5595."shujiiCode",
+        T5595."ninteichosaItakusakiCode",
+        T5595."ninteiChosainNo",
+        T5595."sonotaKikanCode",
+        row_number() over(PARTITION  BY T5595."shinsakaiIinCode" order by T5595."remban" desc) as rank_number
+        FROM     rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595	) as A
+        WHERE		A.rank_number= 1
+        )	X5595
+        ON		X5595."shinsakaiIinCode"=T5594."shinsakaiIinCode"
+        INNER JOIN		rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        ON		T7051."shoKisaiHokenshaNo"=X5595."shoKisaiHokenshaNo"
+        LEFT JOIN		rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
+        ON		T7051."shichosonCode"=T5910."shichosonCode"
+        AND		X5595."ninteichosaItakusakiCode"=T5910."ninteichosaItakusakiCode"
+        LEFT JOIN		rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+        ON		T7051."shichosonCode"=T5911."shichosonCode"
+        AND		X5595."shujiiIryokikanCode"=T5911."shujiiIryokikanCode"
+        LEFT JOIN		rgdb."DbT5914SonotaKikanJoho" AS T5914
+        ON		X5595."shoKisaiHokenshaNo"=T5914."shoKisaiHokenshaNo"
+        AND		X5595."sonotaKikanCode"=T5914."sonotaKikanCode"
+        WHERE		#{指定年}||'0101'<![CDATA[<=]]>T5603."shinsakaiKaisaiYMD"
+        AND		T5603."shinsakaiKaisaiYMD"<![CDATA[<=]]>(#{指定年}||'1231')
+        ORDER BY		T5603."shinsakaiIinCode"
+    </select>
+    <resultMap id="resultMap_GensenChoshuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gensenchoshudatasakusei.GensenChoshuRelateEntity" autoMapping="true">
+        <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会委員名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="介護認定審査員資格コード" column="shinsakaiIinShikakuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="事業者名称" column="jigyoshaMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査員コード" column="ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療機関名称" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医コード" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="機関名称" column="kikanMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="その他機関コード" column="sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="住所" column="Jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="番号_FAX" column="faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定審査会報酬合計" column="shinsakaiHoshu" />
+        <result property="その他随時報酬合計" column="sonotaHoshu" />
+        <result property="認定審査交通費等合計" column="shinsakaiKotsuhi" />
+        <result property="源泉徴収額" column="kojoZeigaku" />
+        <result property="合計" column="hoshuGokei" />
+    </resultMap>
+</mapper>

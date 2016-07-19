@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 報酬支払い通知書請求書・確認書のデータを作成します。
+ * 認定調査報酬請求書のprocessです。
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
@@ -95,12 +95,8 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ChosahoshuseikyuEdit edit = new ChosahoshuseikyuEdit();
-        Chosahoshuseikyu chosahoshuseikyu = edit.getChosahoshuseikyu(entity, 消費税率);
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-        builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-        chosahoshuseikyu.set対象期間(builder.toRString());
+        Chosahoshuseikyu chosahoshuseikyu = edit.getChosahoshuseikyu(entity, 消費税率, ChosaHoshuShiharaiProcess.get通知文());
+        chosahoshuseikyu.set対象期間(get対象期間());
         chosahoshuseikyu.set発行年月日(dateFormat9(FlexibleDate.getNowDate()));
         ChosahoshuseikyuReport report = new ChosahoshuseikyuReport(chosahoshuseikyu);
         report.writeBy(reportSourceWriter);
@@ -118,7 +114,7 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
         ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE012001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE621005.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
@@ -134,7 +130,7 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
         出力条件.add(実績期間開始日.toRString());
         出力条件.add(実績期間終了日.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE621005.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
@@ -154,5 +150,13 @@ public class ChosaHoshuSeikyuProcess extends BatchProcessBase<HoshuShiharaiJunbi
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString get対象期間() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
+        builder.append(new RString("～"));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        return builder.toRString();
     }
 }

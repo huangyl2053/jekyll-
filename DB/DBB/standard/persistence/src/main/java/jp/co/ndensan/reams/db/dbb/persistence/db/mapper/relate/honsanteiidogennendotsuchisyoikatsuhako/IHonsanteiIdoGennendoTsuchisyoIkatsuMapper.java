@@ -103,13 +103,6 @@ public interface IHonsanteiIdoGennendoTsuchisyoIkatsuMapper {
     void insert特徴仮算定一時(IdoGennendoKarisanteiParameter parameter);
 
     /**
-     * 特徴仮算定一時情報を更新するメソッドです。
-     *
-     * @param parameter IdoGennendoKarisanteiParameter
-     */
-    void update特徴仮算定一時(IdoGennendoKarisanteiParameter parameter);
-
-    /**
      * 特徴仮算定一時情報の抽出ですメソッドです。
      *
      * @param parameter Map<String, Object>

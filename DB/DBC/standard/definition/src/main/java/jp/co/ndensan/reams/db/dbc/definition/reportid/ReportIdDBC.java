@@ -97,6 +97,11 @@ public enum ReportIdDBC {
     /**
      * 償還払不支給決定者一覧情報 の帳票ＩＤです。
      */
+    DBC200021(
+            new ReportId("DBC200021_ShokanbaraiShikyuKetteishaIchiran"), new RString("償還払支給決定者一覧表")),
+    /**
+     * 償還払不支給決定者一覧情報 の帳票ＩＤです。
+     */
     DBC200022(
             new ReportId("DBC200022_ShokanbaraiFushikyuKetteishaIchiran"), new RString("償還払不支給決定者一覧情報")),
     /**

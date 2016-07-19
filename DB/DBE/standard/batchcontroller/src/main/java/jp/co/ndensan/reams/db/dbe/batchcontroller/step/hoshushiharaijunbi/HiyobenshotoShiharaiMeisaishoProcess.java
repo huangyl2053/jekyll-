@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護認定審査委員報酬・費用弁償等支払明細書のprocessです。
  *
- * @reamsid_L DBE-1980-048 suguangjun
+ * @reamsid_L DBE-1980-020 suguangjun
  */
 public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<HoshuShiharaiJunbiRelateEntity> {
 
@@ -101,20 +101,9 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         HiyobenshotoShiharaiMeisaishoEdit edit = new HiyobenshotoShiharaiMeisaishoEdit();
-        HiyobenshotoShiharaimeisaisho meisaisho = edit.getHiyobenshotoShiharaiMeisai(entity);
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
-        builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
-        meisaisho.set対象期間(builder.toRString());
-        List<Koza> koza = getKoza(entity);
-        if (null != koza) {
-            meisaisho.set金融機関(new RString(koza.get(0).get金融機関().toString()));
-            meisaisho.set支店(new RString(koza.get(0).get支店().toString()));
-            meisaisho.set種別(new RString(koza.get(0).get預金種別().toString()));
-            meisaisho.set番号(new RString(koza.get(0).get口座番号().toString()));
-        }
-        meisaisho.set振込予定日(new RString(processParameter.getFurikomishiteiday().toString()));
+        HiyobenshotoShiharaimeisaisho meisaisho = edit.getHiyobenshotoShiharaiMeisai(entity, getKoza(entity));
+        meisaisho.set対象期間(get対象期間());
+        meisaisho.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
         HiyobenshotoShiharaimeisaishoReport report = new HiyobenshotoShiharaimeisaishoReport(meisaisho, index);
         report.writeBy(reportSourceWriter);
         ++index;
@@ -193,8 +182,14 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
         builder.set業務固有キーリスト(業務固有キー);
         builder.set用途区分(new KozaYotoKubunCodeValue(new RString("1")));
         IKozaSearchKey searchKey = builder.build();
-        List<Koza> kozaList = KozaManager.createInstance().get口座(searchKey);
-        return kozaList;
+        return KozaManager.createInstance().get口座(searchKey);
     }
 
+    private RString get対象期間() {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
+        builder.append(new RString("～"));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        return builder.toRString();
+    }
 }

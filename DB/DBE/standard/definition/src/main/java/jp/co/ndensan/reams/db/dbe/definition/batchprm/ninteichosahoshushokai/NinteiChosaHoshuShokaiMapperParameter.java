@@ -62,7 +62,7 @@ public final class NinteiChosaHoshuShokaiMapperParameter implements IMyBatisPara
     public static NinteiChosaHoshuShokaiMapperParameter createSelectBy情報(RString テキストイメージ区分, FlexibleDate 調査依頼日開始,
             FlexibleDate 調査依頼日終了, int 最大表示件数, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa) {
         return new NinteiChosaHoshuShokaiMapperParameter(テキストイメージ区分, 調査依頼日開始, 調査依頼日終了, true, 最大表示件数,
-                ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), batchFlag, null);
+                ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), batchFlag, ninteiChosa);
     }
 
     /**

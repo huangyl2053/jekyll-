@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -72,6 +74,51 @@ public class NinteiChosaJissekiShokaiDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public TextBoxDateRange getTxtChosaJisshibi() {
+        return this.getChosaJisshibi().getTxtChosaJisshibi();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaJisshibi(TextBoxDateRange txtChosaJisshibi) {
+        this.getChosaJisshibi().setTxtChosaJisshibi(txtChosaJisshibi);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxKensu() {
+        return this.getChosaJisshibi().getTxtMaxKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.getChosaJisshibi().setTxtMaxKensu(txtMaxKensu);
+    }
+
+    @JsonIgnore
+    public Button getBtnKensaku() {
+        return this.getChosaJisshibi().getBtnKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnKensaku(Button btnKensaku) {
+        this.getChosaJisshibi().setBtnKensaku(btnKensaku);
+    }
+
+    @JsonIgnore
+    public Button getBtnKensakuClear() {
+        return this.getChosaJisshibi().getBtnKensakuClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnKensakuClear(Button btnKensakuClear) {
+        this.getChosaJisshibi().setBtnKensakuClear(btnKensakuClear);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getChosaJisshibi().getCcdHokensya();
+    }
+
     @JsonIgnore
     public DataGrid<dgNinteiChosaJisseki_Row> getDgNinteiChosaJisseki() {
         return this.getNinteiChosaJisseki().getDgNinteiChosaJisseki();

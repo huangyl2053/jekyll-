@@ -533,7 +533,10 @@ public class HonsanteiIdoHandler {
                 paramter.set変更_発行日(new FlexibleDate(変更_発行日.toString()));
             }
         }
-        paramter.set納入_対象者(div.getChkNotsuTaishoSha().getSelectedValues().get(NUM_0));
+        List<RString> 納入_対象者 = div.getChkNotsuTaishoSha().getSelectedValues();
+        if (納入_対象者 != null && !納入_対象者.isEmpty()) {
+            paramter.set納入_対象者(納入_対象者.get(NUM_0));
+        }
         paramter.set納入_口座振替者(div.getRadNotsuKozaShutsuryokuYoshiki().getSelectedValue());
         RDate 納入_発行日 = div.getTxtNotsuHakkoYMD().getValue();
         if (納入_発行日 != null) {
@@ -560,6 +563,7 @@ public class HonsanteiIdoHandler {
         } else {
             paramter.set随時フラグ(Boolean.FALSE);
         }
+        paramter.set算定期(算定期);
         return paramter;
     }
 

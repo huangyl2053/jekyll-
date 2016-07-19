@@ -81,7 +81,15 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onLoad(ImageJohoMaskingDiv div) {
         div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
-        return ResponseData.of(div).setState(DBE4050001StateName.初期表示);
+        ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
+        if (shinseishoKanriNoList != null) {
+            ImageJohoMaskingParameter param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(LasdecCode.EMPTY, FlexibleDate.MAX,
+                    FlexibleDate.MAX, RString.EMPTY, shinseishoKanriNoList.getShinseishoKanriNoS());
+            List<ImageJohoMaskingResult> resultList = finder.getDataForLoad(param).records();
+            getHandler(div).setDataGrid(resultList);
+            return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -91,19 +99,12 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTaishoKensaku(ImageJohoMaskingDiv div) {
-        ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
-        ImageJohoMaskingParameter param = null;
-        if (shinseishoKanriNoList != null) {
-            param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(LasdecCode.EMPTY, FlexibleDate.MAX,
-                    FlexibleDate.MAX, RString.EMPTY, shinseishoKanriNoList.getShinseishoKanriNoS());
-        } else {
-            param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
-                    div.getCcdHokensya().getSelectedItem().get市町村コード(),
-                    div.getTxtSearchStYMD().getValue(),
-                    div.getTxtSearchEdYMD().getValue(),
-                    div.getDdlKensakuTaisho().getSelectedKey(),
-                    null);
-        }
+        ImageJohoMaskingParameter param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
+                div.getCcdHokensya().getSelectedItem().get市町村コード(),
+                div.getTxtSearchStYMD().getValue(),
+                div.getTxtSearchEdYMD().getValue(),
+                div.getDdlKensakuTaisho().getSelectedKey(),
+                null);
         List<ImageJohoMaskingResult> resultList = finder.getDataForLoad(param).records();
         getHandler(div).setDataGrid(resultList);
         return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
@@ -241,12 +242,19 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnUpdate(ImageJohoMaskingDiv div) {
-        for (dgImageMaskShoriTaishosha_Row row : div.getDgImageMaskShoriTaishosha().getDataSource()) {
-            if (!RString.isNullOrEmpty(row.get状態())) {
-                saveGamenData(row);
-            }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            for (dgImageMaskShoriTaishosha_Row row : div.getDgImageMaskShoriTaishosha().getDataSource()) {
+                if (!RString.isNullOrEmpty(row.get状態())) {
+                    saveGamenData(row);
+                }
+            }
+            return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     private void saveGamenData(dgImageMaskShoriTaishosha_Row row) {

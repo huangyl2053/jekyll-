@@ -41,7 +41,7 @@ public class HomKaigRiysFutGenｍKettTsuchishoPrintService {
         HomKaigRiysFutGenｍKettTsuchishoProerty property = new HomKaigRiysFutGenｍKettTsuchishoProerty();
         try (ReportAssembler<HomKaigRiysFutGenｍKettTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<HomKaigRiysFutGenｍKettTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, target.get帳票分類ID(),
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),
                     new FlexibleDate(target.get発行日().toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             target.setNinshoshaSource(ninshoshaSource);

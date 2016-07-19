@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.CaluculateFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -90,9 +91,10 @@ public interface IHonnSanteiFukaMapper {
     /**
      * get賦課計算情報
      *
+     * @param parameter CaluculateFukaParameter
      * @return List<KakuShugyoumuJouHouEntity>
      */
-    List<KakuShugyoumuJouHouEntity> get賦課計算情報();
+    List<KakuShugyoumuJouHouEntity> get賦課計算情報(CaluculateFukaParameter parameter);
 
     /**
      * select本算定計算後賦課情報

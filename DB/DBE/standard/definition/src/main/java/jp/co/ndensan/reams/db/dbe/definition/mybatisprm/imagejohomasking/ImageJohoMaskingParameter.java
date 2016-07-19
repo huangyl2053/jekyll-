@@ -39,12 +39,12 @@ public final class ImageJohoMaskingParameter {
     private final boolean isメニュー;
     private final boolean is保険者;
     private final boolean is審査会開催予定日;
-    private final boolean is日付範囲開始;
-    private final boolean is日付範囲終了;
     private final boolean is一次判定日;
     private final boolean is主治医意見書受領日;
     private final boolean is認定調査結果受領日;
     private final boolean is申請日;
+    private final boolean is日付範囲開始;
+    private final boolean is日付範囲終了;
 
     /**
      * コンストラクタです。

@@ -387,7 +387,7 @@
             X5595."ninteiChosainNo" AS "ninteiChosainNo",
             T5910."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
             T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
-            T5910."daihyoshaName" AS "T5910_daihyoshaName",
+            T5910."daihyoshaName" AS "daihyoshaName",
             X5595."sonotaKikanCode" AS "sonotaKikanCode",
             T5914."kikanMeisho" AS "kikanMeisho",
             T5594."shinsakaiIinShimei" AS "shinsakaiIinShimei",
