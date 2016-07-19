@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelec
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,8 +35,8 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
     private boolean 連番付加;
     private boolean 日付編集;
     private FlexibleYear 賦課年度;
-    private RDate 抽出期間From;
-    private RDate 抽出期間To;
+    private YMDHMS 抽出期間From;
+    private YMDHMS 抽出期間To;
     private RString 住民税減免前後表示区分;
     private List<RString> 課税区分減免前s;
     private List<RString> 課税区分減免後s;
@@ -53,16 +53,16 @@ public class HanyoListShotokuJohoProcessParameter implements IBatchProcessParame
      * @param 連番付加 boolean
      * @param 日付編集 boolean
      * @param 賦課年度 FlexibleYear
-     * @param 抽出期間From RDate
-     * @param 抽出期間To RDate
+     * @param 抽出期間From YMDHMS
+     * @param 抽出期間To YMDHMS
      * @param 住民税減免前後表示区分 RString
      * @param 課税区分減免前s List<RString>
      * @param 課税区分減免後s List<RString>
      * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
      */
     public HanyoListShotokuJohoProcessParameter(ReportId 帳票ID, AtenaSelectBatchParameter 宛名抽出条件, long 出力順ID,
-            RString 出力項目ID, boolean 項目名付加, boolean 連番付加, boolean 日付編集, FlexibleYear 賦課年度, RDate 抽出期間From,
-            RDate 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s,
+            RString 出力項目ID, boolean 項目名付加, boolean 連番付加, boolean 日付編集, FlexibleYear 賦課年度, YMDHMS 抽出期間From,
+            YMDHMS 抽出期間To, RString 住民税減免前後表示区分, List<RString> 課税区分減免前s, List<RString> 課税区分減免後s,
             IShikibetsuTaishoPSMSearchKey 宛名検索条件) {
         this.帳票ID = 帳票ID;
         this.宛名抽出条件 = 宛名抽出条件;
