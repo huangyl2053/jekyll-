@@ -204,9 +204,9 @@ public class HonnSanteiFuka {
     private static final RString 本算定賦課 = new RString("A1");
     private static final RString 年金保険者からの通知 = new RString("T1");
     private static final RString 保険料額の減額変更 = new RString("T2");
-    private static final RString 徴収方法修正 = new RString("T3");
-    private static final RString 特別徴収対象者外 = new RString("T4");
-    private static final RString 資格喪失特徴中止 = new RString("T5");
+    private static final RString 徴収方法修正 = new RString("T4");
+    private static final RString 特別徴収対象者外 = new RString("T5");
+    private static final RString 資格喪失特徴中止 = new RString("T6");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
     private static final Code CODE = new Code("0");
@@ -353,12 +353,10 @@ public class HonnSanteiFuka {
         List<DbT2001ChoshuHohoEntity> 徴収方法情報リスト = 徴収方法Dac.select徴収方法情報(賦課年度);
         List<ChoshuHoho> 徴収方法情報List = new ArrayList<>();
         for (DbT2001ChoshuHohoEntity 徴収方法情報entity : 徴収方法情報リスト) {
-            徴収方法情報entity.initializeMd5();
             徴収方法情報List.add(new ChoshuHoho(徴収方法情報entity));
         }
-        DbT2001ChoshuHohoEntity 介護徴収方法Entity;
         for (ChoshuHoho 徴収方法entity : 徴収方法情報List) {
-            介護徴収方法Entity = new DbT2001ChoshuHohoEntity();
+            DbT2001ChoshuHohoEntity 介護徴収方法Entity = new DbT2001ChoshuHohoEntity();
             FlexibleYear fukaNendo = 徴収方法entity.get賦課年度();
             if (fukaNendo != null) {
                 介護徴収方法Entity.setFukaNendo(fukaNendo);
@@ -417,20 +415,19 @@ public class HonnSanteiFuka {
             FlexibleDate 資格基準日) {
         FlexibleDate 賦課年度_修正後 = new FlexibleDate(賦課年度.getYearValue(), 四月, NUM_1);
         IHonnSanteiFukaMapper mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
-        KeisanTaishoshaParameter parameter = KeisanTaishoshaParameter.createSelectByKeyParam(調定年度, 賦課年度, 資格基準日, 賦課年度_修正後);
+        KeisanTaishoshaParameter parameter = KeisanTaishoshaParameter
+                .createSelectByKeyParam(調定年度, 賦課年度, 資格基準日, 賦課年度_修正後);
         List<DbT1001HihokenshaDaichoEntity> 資格の情報 = mapper.select資格の情報(parameter);
         List<FukaJohoRelateEntity> 賦課の情報 = mapper.select賦課の情報(parameter);
         List<HihokenshaDaicho> 資格 = new ArrayList<>();
-        HihokenshaNo fukaHihokenshaNo;
-        HihokenshaNo daichoHihokenshaNo;
         //--------------------Test------------------------------//
         mapper.creat本算定抽出Temp();
         //--------------------Test------------------------------//
         for (DbT1001HihokenshaDaichoEntity daichoEntity : 資格の情報) {
             int count = 0;
             for (FukaJohoRelateEntity relateEntity : 賦課の情報) {
-                fukaHihokenshaNo = relateEntity.get介護賦課Entity().getHihokenshaNo();
-                daichoHihokenshaNo = daichoEntity.getHihokenshaNo();
+                HihokenshaNo fukaHihokenshaNo = relateEntity.get介護賦課Entity().getHihokenshaNo();
+                HihokenshaNo daichoHihokenshaNo = daichoEntity.getHihokenshaNo();
                 if (fukaHihokenshaNo != null && daichoHihokenshaNo != null) {
                     count = editor本算定抽出Temp(fukaHihokenshaNo, daichoHihokenshaNo, count,
                             daichoEntity, parameter, relateEntity, mapper);
@@ -639,26 +636,6 @@ public class HonnSanteiFuka {
     }
 
     /**
-     * テスト用
-     */
-    public void testCreateTBL() {
-        IHonnSanteiFukaMapper mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
-//        mapper.create月別ランクTemp();
-        KuBunnGaTsurakuTempEntity rankuEntity = new KuBunnGaTsurakuTempEntity();
-        rankuEntity.setHihokenshaNo(new HihokenshaNo("1234567890"));
-        mapper.insert月別ランクTemp(rankuEntity);
-        KuBunnGaTsurakuTempEntity rankuEntity1 = new KuBunnGaTsurakuTempEntity();
-        rankuEntity1.setHihokenshaNo(new HihokenshaNo("1000000000"));
-        mapper.insert月別ランクTemp(rankuEntity1);
-        // ---------------------------テスト用-----------------------------------
-        // ---------------------------テスト用-----------------------------------
-
-        selectKeisanTaishosha(new FlexibleYear("2016"), new FlexibleYear("2016"), new FlexibleDate("20150101"));
-        collectSetaiin();
-
-    }
-
-    /**
      * 賦課計算のメソッドます。
      *
      * @param 賦課年度 FlexibleYear
@@ -782,9 +759,8 @@ public class HonnSanteiFuka {
         fukaKokyoBatchParameter.set賦課の情報_設定前(賦課の情報_更正前);
         FukaJoho 賦課の情報_更正後 = FukaKeisan.createInstance().reflect賦課根拠(fukaKokyoBatchParameter);
         ChoshuHoho 徴収方法の情報_更正後 = new ChoshuHoho(jouHouEntity.get徴収方法の情報());
-        if (賦課の情報_更正後.get減免前介護保険料_年額().equals(年額保険料.getHokenryoNengaku())
-                || (new ChoshuHoho(jouHouEntity.get徴収方法の情報()).get特別徴収停止事由コード() != null
-                || !new ChoshuHoho(jouHouEntity.get徴収方法の情報()).get特別徴収停止事由コード().isEmpty())) {
+        if (!賦課の情報_更正後.get減免前介護保険料_年額().equals(年額保険料.getHokenryoNengaku())
+                || jouHouEntity.get徴収方法の情報().getTokuchoTeishiJiyuCode() != null) {
             CalculateChoteiResult choteiResult = caluculateChotei(調定日時, 賦課の情報_更正後,
                     new ChoshuHoho(jouHouEntity.get徴収方法の情報()), 年額保険料,
                     new HihokenshaDaicho(jouHouEntity.get資格の情報()));
@@ -930,7 +906,7 @@ public class HonnSanteiFuka {
     private boolean is普徴期別がZERO(FukaJoho 賦課の情報_更正後) {
         return Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額01())
                 && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額02())
-                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額02())
+                && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額03())
                 && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額04())
                 && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額05())
                 && Decimal.ZERO.equals(賦課の情報_更正後.get普徴期別金額06())
@@ -1026,47 +1002,44 @@ public class HonnSanteiFuka {
     }
 
     private boolean isTsuchishoNo変更(TsuchishoNo 更正前, TsuchishoNo 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = TsuchishoNo.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = TsuchishoNo.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isHihokenshaNo変更(HihokenshaNo 更正前, HihokenshaNo 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = HihokenshaNo.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = HihokenshaNo.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isShikibetsuCode変更(ShikibetsuCode 更正前, ShikibetsuCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+
+        if (更正前 == null) {
+            更正前 = ShikibetsuCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = ShikibetsuCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isSetaiCode変更(SetaiCode 更正前, SetaiCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = SetaiCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = SetaiCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isInt変更(int 更正前, int 更正後) {
@@ -1074,56 +1047,53 @@ public class HonnSanteiFuka {
     }
 
     private boolean isFlexibleDate変更(FlexibleDate 更正前, FlexibleDate 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleDate.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleDate.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isRString変更(RString 更正前, RString 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = RString.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = RString.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isFlexibleYearMonth変更(FlexibleYearMonth 更正前, FlexibleYearMonth 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleYearMonth.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleYearMonth.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isLasdecCode変更(LasdecCode 更正前, LasdecCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = LasdecCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = LasdecCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isDecimal変更(Decimal 更正前, Decimal 更正後) {
-        if (更正後 != null && !更正後.equals(更正前)) {
-            return true;
-        } else if (更正後 == null && 更正前 != null) {
-            return true;
+        if (更正前 == null) {
+            更正前 = Decimal.ZERO;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = Decimal.ZERO;
+        }
+        return !更正後.equals(更正前);
     }
 
     private LasdecCode get最終月の市町村コード(List<MonthShichoson> 月別ランク情報) {
@@ -1260,7 +1230,7 @@ public class HonnSanteiFuka {
     private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額) {
         switch (kibetsu.get期()) {
             case NUM_1:
-                set期別金額(kibetsu, 普徴期別金額.get(0));
+                set期別金額(kibetsu, 普徴期別金額.get(NUM_0));
                 break;
             case NUM_2:
                 set期別金額(kibetsu, 普徴期別金額.get(NUM_1));
@@ -1331,17 +1301,35 @@ public class HonnSanteiFuka {
         RString 調定事由２ = RString.EMPTY;
         RString 調定事由３ = RString.EMPTY;
         RString 調定事由４ = RString.EMPTY;
-        if (設定前賦課情報.get履歴番号() == NUM_0 && 設定前賦課情報.get資格喪失事由() != null) {
-            調定事由２ = 設定前賦課情報.get資格喪失事由();
-        } else {
-            if (is特別徴収停止事由コード(徴収方法情報) && is調定事由(当初賦課情報)) {
-                調定事由２ = 徴収方法情報.get特別徴収停止事由コード();
-                調定事由３ = 徴収方法情報.get特別徴収停止事由コード();
-                調定事由４ = 徴収方法情報.get特別徴収停止事由コード();
-            } else if (設定前賦課情報.get資格喪失事由() != null) {
+        if (設定前賦課情報.get履歴番号() == NUM_0) {
+            if (!設定前賦課情報.get資格喪失事由().isNullOrEmpty()) {
                 調定事由２ = 設定前賦課情報.get資格喪失事由();
-                調定事由３ = 設定前賦課情報.get資格喪失事由();
-                調定事由４ = 設定前賦課情報.get資格喪失事由();
+            }
+        } else {
+            if (is特別徴収停止事由コード(徴収方法情報) && is調定事由(当初賦課情報, 徴収方法情報)) {
+                if (当初賦課情報.get調定事由2().isNullOrEmpty()) {
+                    調定事由２ = 徴収方法情報.get特別徴収停止事由コード();
+                }
+                if (!当初賦課情報.get調定事由2().isNullOrEmpty() && 当初賦課情報.get調定事由3().isNullOrEmpty()) {
+                    調定事由３ = 徴収方法情報.get特別徴収停止事由コード();
+
+                }
+                if (!当初賦課情報.get調定事由2().isNullOrEmpty() && !当初賦課情報.get調定事由3().isNullOrEmpty()
+                        && 当初賦課情報.get調定事由4().isNullOrEmpty()) {
+                    調定事由４ = 徴収方法情報.get特別徴収停止事由コード();
+                }
+            } else if (!設定前賦課情報.get資格喪失事由().isNullOrEmpty()) {
+                if (当初賦課情報.get調定事由2().isNullOrEmpty()) {
+                    調定事由２ = 設定前賦課情報.get資格喪失事由();
+                }
+                if (!当初賦課情報.get調定事由2().isNullOrEmpty() && 当初賦課情報.get調定事由3().isNullOrEmpty()) {
+                    調定事由３ = 設定前賦課情報.get資格喪失事由();
+
+                }
+                if (!当初賦課情報.get調定事由2().isNullOrEmpty() && !当初賦課情報.get調定事由3().isNullOrEmpty()
+                        && 当初賦課情報.get調定事由4().isNullOrEmpty()) {
+                    調定事由４ = 設定前賦課情報.get資格喪失事由();
+                }
             }
         }
         FukaJoho 設定後賦課情報 = 設定前賦課情報;
@@ -1626,215 +1614,55 @@ public class HonnSanteiFuka {
 
     private void set普徴額_x期(KeisangojohoAtenaKozaEntity entity,
             List<RString> bodyList) {
-        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        KitsukiList kitsukiList = 期月リスト_普徴.filtered本算定期間();
-        Kitsuki 最終法定納期 = kitsukiList.get最終法定納期();
-        if (最終法定納期.get期AsInt() == NUM_1) {
-            editor1期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_2) {
-            editor2期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_3) {
-            editor3期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_4) {
-            editor4期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_5) {
-            editor5期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_6) {
-            editor6期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_7) {
-            editor7期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_8) {
-            editor8期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_9) {
-            editor9期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_10) {
-            editor10期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_11) {
-            editor11期(bodyList, entity);
-        } else if (最終法定納期.get期AsInt() == NUM_12) {
-            editor12期(bodyList, entity);
+        for (int i = 0; i < NUM_12; i++) {
+            bodyList.add(RString.EMPTY);
         }
-    }
-
-    private void editor1期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor2期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor3期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor4期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor5期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor6期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor7期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor8期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor9期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor10期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0));
-        bodyList.add(RString.EMPTY);
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor11期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額11()), 0));
-        bodyList.add(RString.EMPTY);
-    }
-
-    private void editor12期(List<RString> bodyList, KeisangojohoAtenaKozaEntity entity) {
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額11()), 0));
-        bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額12()), 0));
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList kitsukiList = 月期対応取得_普徴.get期月リスト().filtered本算定期間();
+        Kitsuki 最終法定納期 = kitsukiList.get最終法定納期();
+        int 期 = 最終法定納期.get期AsInt();
+        for (int i = 1; i <= 期; i++) {
+            switch (i) {
+                case NUM_1:
+                    bodyList.set(NUM_0, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0));
+                    break;
+                case NUM_2:
+                    bodyList.set(NUM_1, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0));
+                    break;
+                case NUM_3:
+                    bodyList.set(NUM_2, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0));
+                    break;
+                case NUM_4:
+                    bodyList.set(NUM_3, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0));
+                    break;
+                case NUM_5:
+                    bodyList.set(NUM_4, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0));
+                    break;
+                case NUM_6:
+                    bodyList.set(NUM_5, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0));
+                    break;
+                case NUM_7:
+                    bodyList.set(NUM_6, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0));
+                    break;
+                case NUM_8:
+                    bodyList.set(NUM_7, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0));
+                    break;
+                case NUM_9:
+                    bodyList.set(NUM_8, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0));
+                    break;
+                case NUM_10:
+                    bodyList.set(NUM_9, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0));
+                    break;
+                case NUM_11:
+                    bodyList.set(NUM_10, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額11()), 0));
+                    break;
+                case NUM_12:
+                    bodyList.set(NUM_11, DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額12()), 0));
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類Id) throws NullPointerException {
@@ -1865,6 +1693,9 @@ public class HonnSanteiFuka {
 
     private void set月別取得段階(int 開始月, int 終了月,
             RString 保険料算定段階, List<RString> 月別所得段階リスト) {
+        for (int i = 0; i < NUM_12; i++) {
+            月別所得段階リスト.add(RString.EMPTY);
+        }
         for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + NUM_12) : 終了月); i++) {
             int currentMonth = (i - 1) % NUM_12 + 1;
             set保険料算定段階(currentMonth, 保険料算定段階, 月別所得段階リスト);
@@ -1873,68 +1704,46 @@ public class HonnSanteiFuka {
 
     private void set保険料算定段階(int currentMonth, RString 保険料算定段階,
             List<RString> 月別所得段階リスト) {
-
-        if (currentMonth == NUM_1) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
+        switch (currentMonth) {
+            case NUM_4:
+                月別所得段階リスト.set(NUM_0, 保険料算定段階);
+                break;
+            case NUM_5:
+                月別所得段階リスト.set(NUM_1, 保険料算定段階);
+                break;
+            case NUM_6:
+                月別所得段階リスト.set(NUM_2, 保険料算定段階);
+                break;
+            case NUM_7:
+                月別所得段階リスト.set(NUM_3, 保険料算定段階);
+                break;
+            case NUM_8:
+                月別所得段階リスト.set(NUM_4, 保険料算定段階);
+                break;
+            case NUM_9:
+                月別所得段階リスト.set(NUM_5, 保険料算定段階);
+                break;
+            case NUM_10:
+                月別所得段階リスト.set(NUM_6, 保険料算定段階);
+                break;
+            case NUM_11:
+                月別所得段階リスト.set(NUM_7, 保険料算定段階);
+                break;
+            case NUM_12:
+                月別所得段階リスト.set(NUM_8, 保険料算定段階);
+                break;
+            case NUM_1:
+                月別所得段階リスト.set(NUM_9, 保険料算定段階);
+                break;
+            case NUM_2:
+                月別所得段階リスト.set(NUM_10, 保険料算定段階);
+                break;
+            case NUM_3:
+                月別所得段階リスト.set(NUM_11, 保険料算定段階);
+                break;
+            default:
+                break;
         }
-        if (currentMonth == NUM_2) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_3) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_4) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_5) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_6) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_7) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_8) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_9) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_10) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_11) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-        if (currentMonth == NUM_12) {
-            月別所得段階リスト.add(保険料算定段階);
-        } else {
-            月別所得段階リスト.add(RString.EMPTY);
-        }
-
     }
 
     private KeisangojohoAtenaKozaEntity setKeisangojohoAtenaKozaEntity(
@@ -2121,8 +1930,8 @@ public class HonnSanteiFuka {
             } else {
                 金融機関コード = koza.get金融機関コード().value();
             }
-            if (koza.get支店コード().value().length() >= NUM_5) {
-                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_5);
+            if (koza.get支店コード().value().length() >= NUM_3) {
+                支店コード = koza.get支店コード().value().substring(NUM_0, NUM_3);
             } else {
                 支店コード = koza.get支店コード().value();
             }
@@ -2156,13 +1965,17 @@ public class HonnSanteiFuka {
                 .add(nullTOZero(entity.get普徴期別金額10())).add(nullTOZero(entity.get普徴期別金額11()))
                 .add(nullTOZero(entity.get普徴期別金額12())).add(nullTOZero(entity.get普徴期別金額13()))
                 .add(nullTOZero(entity.get普徴期別金額14()));
-        if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
+        if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0
+                && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 徴収方法;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
+        } else if (Decimal.ZERO.compareTo(特徴期の期別金額の合計) < NUM_0
+                && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 特別徴収;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0
+                && Decimal.ZERO.compareTo(普徴期の期別金額の合計) < NUM_0) {
             return 普通徴収;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1) {
+        } else if (Decimal.ZERO.compareTo(特徴期の期別金額の合計) < NUM_0
+                && Decimal.ZERO.compareTo(普徴期の期別金額の合計) < NUM_0) {
             return 併用徴収;
         } else {
             return 徴収方法;
@@ -2182,22 +1995,28 @@ public class HonnSanteiFuka {
                 .add(nullTOZero(entity.get普徴期別金額10())).add(nullTOZero(entity.get普徴期別金額11()))
                 .add(nullTOZero(entity.get普徴期別金額12())).add(nullTOZero(entity.get普徴期別金額13()))
                 .add(nullTOZero(entity.get普徴期別金額14()));
-        if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
+        if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0
+                && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 本算定賦課なし;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
+        } else if (Decimal.ZERO.compareTo(特徴期の期別金額の合計) < NUM_0
+                && 普徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0) {
             return 本算定前半普徴;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) == NUM_負1) {
+        } else if (特徴期の期別金額の合計.compareTo(Decimal.ZERO) == NUM_0
+                && Decimal.ZERO.compareTo(普徴期の期別金額の合計) < NUM_0) {
             return 備考;
-        } else if (特徴期の期別金額の合計.compareTo(Decimal.ONE) != NUM_負1 && 普徴期の期別金額の合計.compareTo(Decimal.ONE) == NUM_負1) {
+        } else if (Decimal.ZERO.compareTo(特徴期の期別金額の合計) < NUM_0
+                && Decimal.ZERO.compareTo(普徴期の期別金額の合計) < NUM_0) {
             return 備考;
         } else {
             return 備考;
         }
     }
 
-    private boolean is調定事由(FukaJoho 当初賦課情報) {
-        return 当初賦課情報.get調定事由1() == null && 当初賦課情報.get調定事由2() == null
-                && 当初賦課情報.get調定事由3() == null && 当初賦課情報.get調定事由4() == null;
+    private boolean is調定事由(FukaJoho 当初賦課情報, ChoshuHoho 徴収方法情報) {
+        return 当初賦課情報.get調定事由1().equals(徴収方法情報.get特別徴収停止事由コード())
+                && 当初賦課情報.get調定事由2().equals(徴収方法情報.get特別徴収停止事由コード())
+                && 当初賦課情報.get調定事由3().equals(徴収方法情報.get特別徴収停止事由コード())
+                && 当初賦課情報.get調定事由4().equals(徴収方法情報.get特別徴収停止事由コード());
     }
 
     private boolean is特別徴収停止事由コード(ChoshuHoho 徴収方法情報) {

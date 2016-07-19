@@ -168,6 +168,11 @@
     </select>
     
     <resultMap id="resultMap_HonsenteiKeisangojohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonsenteiKeisangojohoEntity" autoMapping="true">
+        <id column="dbT2015KeisangoJoho_choteiNendo" />
+        <id column="dbT2015KeisangoJoho_fukaNendo" />
+        <id column="dbT2015KeisangoJoho_tsuchishoNo" />
+        <id column="dbT2015KeisangoJoho_koseiZengoKubun" />
+        <id column="dbT2015KeisangoJoho_sakuseiShoriName" />
         <association property="計算後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.ResultMap_DbT2015KeisangoJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="口座" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.resultMap_KozaRelateEntity"/>
