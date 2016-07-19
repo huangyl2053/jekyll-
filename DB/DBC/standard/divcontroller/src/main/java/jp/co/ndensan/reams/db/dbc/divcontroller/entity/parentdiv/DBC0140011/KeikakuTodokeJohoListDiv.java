@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * KeikakuTodokeJohoList のクラスファイル 
  * 
- * @author 自動生成
+ * @reamsid_L DBC-1960-010 wangxingpeng
  */
 public class KeikakuTodokeJohoListDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
