@@ -55,7 +55,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonsenteiKeisa
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KakuShugyoumuJouHouEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KuBunnGaTsurakuTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.OutputFileEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.SetaiHaakuShuturyokuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
@@ -98,9 +97,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosh
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -267,6 +268,7 @@ public class HonnSanteiFuka {
     private static final RString タイトル_普徴額11期 = new RString("普徴額11期");
     private static final RString タイトル_普徴額12期 = new RString("普徴額12期");
     private static final RString タイトル_備考 = new RString("備考");
+    private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final int NUM_負1 = -1;
     private static final int 四月 = 4;
     private static final int NUM_0 = 0;
@@ -1340,13 +1342,12 @@ public class HonnSanteiFuka {
      * @param 賦課年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @param 出力順ID Long
-     * @param 出力帳票一覧リスト List<OutputFileEntity>
      */
     public void spoolHonsanteiKekkaIchiran(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
-            Long 出力順ID,
-            List<OutputFileEntity> 出力帳票一覧リスト) {
+            Long 出力順ID
+    ) {
         IHonnSanteiFukaMapper mapper = mapperProvider.create(IHonnSanteiFukaMapper.class);
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBB介護賦課, 帳票ID, 出力順ID);
@@ -2338,4 +2339,28 @@ public class HonnSanteiFuka {
         return 年額制御情報;
     }
 
+    /**
+     * 処理日付管理テーブル更新
+     *
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 年度 FlexibleYear
+     * @param 年度内連番 RString
+     * @param システム日時 YMDHMS
+     */
+    public void update処理日付管理(RString 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番, YMDHMS システム日時) {
+        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課,
+                処理名, 処理枝番, 年度, 年度内連番);
+        if (entityList != null) {
+            update処理日付管理(entityList, システム日時);
+        }
+    }
+
+    private void update処理日付管理(List<DbT7022ShoriDateKanriEntity> entityList, YMDHMS システム日時) {
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.setKijunTimestamp(システム日時);
+            entity.setState(EntityDataState.Modified);
+            処理日付管理Dac.save(entity);
+        }
+    }
 }
