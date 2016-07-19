@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -37,6 +40,9 @@ public final class ShiharaiHohoHenkoYokokuTsuchishoReport extends Report<Shihara
     private final RString 帳票分類ID;
     private final Ninshosha 認証者;
     private final ShiharaiHohoHenko 帳票情報;
+    private List<ShiharaiHohoHenkoTaino> 一昨年年度リスト = new ArrayList<>();
+    private List<ShiharaiHohoHenkoTaino> 去年年度リスト = new ArrayList<>();
+    private List<ShiharaiHohoHenkoTaino> 最新年度リスト = new ArrayList<>();
 
     /**
      * インスタンスを生成します。
@@ -83,11 +89,44 @@ public final class ShiharaiHohoHenkoYokokuTsuchishoReport extends Report<Shihara
 
     @Override
     public void writeBy(ReportSourceWriter<ShiharaiHohoHenkoYokokuTsuchishoReportSource> writer) {
-
-//        IShiharaiHohoHenkoYokokuTsuchishoEditor bodyEditor
-//                = new ShiharaiHohoHenkoYokokuTsuchishoEditor(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通, 地方公共団体,
-//                        発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報, writer.getImageFolderPath());
-//        IShiharaiHohoHenkoYokokuTsuchishoBuilder builder = new ShiharaiHohoHenkoYokokuTsuchishoBuilder(bodyEditor);
-//        writer.writeLine(builder);
+        IShiharaiHohoHenkoYokokuTsuchishoEditor bodyEditor;
+        IShiharaiHohoHenkoYokokuTsuchishoBuilder builder;
+        FlexibleYear 最新賦課年度 = get最新賦課年度();
+        get年度リスト(最新賦課年度);
+        for (int index = 0; index < 一昨年年度リスト.size() || index < 去年年度リスト.size() || index < 最新年度リスト.size(); index++) {
+            bodyEditor = new ShiharaiHohoHenkoYokokuTsuchishoEditor(個人情報, 宛先, 帳票制御汎用リスト, 帳票制御共通,
+                    地方公共団体, 発行日, 文書番号, 通知書定型文リスト, 帳票分類ID, 認証者, 帳票情報, writer.getImageFolderPath(),
+                    一昨年年度リスト, 去年年度リスト, 最新年度リスト, 最新賦課年度, index);
+            builder = new ShiharaiHohoHenkoYokokuTsuchishoBuilder(bodyEditor);
+            writer.writeLine(builder);
+        }
     }
+
+    private FlexibleYear get最新賦課年度() {
+        FlexibleYear year = FlexibleYear.EMPTY;
+        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 帳票情報.getShiharaiHohoHenkoTainoList()) {
+            if (year.isEmpty() || year.compareTo(支払方法変更滞納.get賦課年度()) < 0) {
+                year = 支払方法変更滞納.get賦課年度();
+            }
+        }
+        return year;
+    }
+
+    private void get年度リスト(FlexibleYear 最新賦課年度) {
+        if (最新賦課年度.isEmpty()) {
+            return;
+        }
+
+        for (ShiharaiHohoHenkoTaino 支払方法変更滞納 : 帳票情報.getShiharaiHohoHenkoTainoList()) {
+            if (最新賦課年度.minusYear(2).equals(支払方法変更滞納.get賦課年度())) {
+                一昨年年度リスト.add(支払方法変更滞納);
+            } else if (最新賦課年度.minusYear(1).equals(支払方法変更滞納.get賦課年度())) {
+                去年年度リスト.add(支払方法変更滞納);
+            } else if (最新賦課年度.equals(支払方法変更滞納.get賦課年度())) {
+                最新年度リスト.add(支払方法変更滞納);
+            }
+        }
+
+    }
+
 }
