@@ -57,8 +57,8 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 有効月数チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ZERO) == 0
-                || div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() == null) {
+        if (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() == null
+                || div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ZERO) == 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
         }
