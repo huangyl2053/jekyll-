@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1090002;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.HihokenshashoHakkoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDivSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
