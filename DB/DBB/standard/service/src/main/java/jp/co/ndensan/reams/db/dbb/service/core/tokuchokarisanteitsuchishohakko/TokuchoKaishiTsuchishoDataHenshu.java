@@ -769,7 +769,6 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         builder = new RStringBuilder();
         builder.append(定数_発行日.concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
         出力条件リスト.add(builder.toRString());
-        出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(定数_出力対象.concat(RString.FULL_SPACE)
                 .concat(RString.isNullOrEmpty(出力対象区分) ? RString.EMPTY : TokuchoKaishiTsuhishoKariOutputJoken.valueOf(出力対象区分.toString()).get名称()));

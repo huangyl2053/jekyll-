@@ -258,6 +258,8 @@ public class KanendoNonyuTsuchishoCVSKakukoSource implements IReportSource {
     public RString nokigenTitle;
     @ReportItem(name = "ocrId1", length = 3, order = 121)
     public RString ocrId1;
+    @ReportItem(name = "tsuchishoNo", length = 20, order = 122)
+    public RString coverNofu_tsuchishoNo;
     @ReportItem(name = "nokigenYmd", length = 16, order = 123)
     public RString nokigenYmd;
     @ReportItem(name = "hakkoYmd", length = 16, order = 124)
