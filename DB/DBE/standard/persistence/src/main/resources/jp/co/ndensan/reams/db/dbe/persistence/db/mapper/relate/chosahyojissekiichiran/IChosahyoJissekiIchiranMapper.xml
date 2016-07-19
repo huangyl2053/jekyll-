@@ -11,7 +11,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true">
         SELECT
           T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
-          , T5601."ninteichosaItakusakiCode" AS 認定調査委託先コード
+          , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
           , T5910."jigyoshaMeisho" AS 事業者名称
           , T5601."ninteichosainCode" AS 認定調査員コード
           , T5913."chosainShimei" AS 調査員氏名
