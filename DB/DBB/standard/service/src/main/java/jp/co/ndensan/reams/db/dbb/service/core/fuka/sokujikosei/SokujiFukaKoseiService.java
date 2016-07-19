@@ -559,7 +559,7 @@ public class SokujiFukaKoseiService {
     }
 
     private boolean is金額あり(Decimal 金額) {
-        return 金額 == null || Decimal.ZERO.equals(金額);
+        return 金額 != null && !Decimal.ZERO.equals(金額);
     }
 
     private LasdecCode get最終月の市町村コード(List<MonthShichoson> 月別ランク情報) {
@@ -616,8 +616,8 @@ public class SokujiFukaKoseiService {
 
     private LasdecCode get市町村コード(List<MonthShichoson> 月別ランク情報, RString 月) {
         for (MonthShichoson choson : 月別ランク情報) {
-            if (月.equals(choson.get月()) && choson.get市町村コード() != null
-                    && !choson.get市町村コード().getColumnValue().isEmpty()) {
+            if (choson.get市町村コード() != null && !choson.get市町村コード().getColumnValue().isEmpty()
+                    && 月.equals(choson.get月().getコード())) {
                 return choson.get市町村コード();
             }
         }
@@ -714,47 +714,43 @@ public class SokujiFukaKoseiService {
     }
 
     private boolean isTsuchishoNo変更(TsuchishoNo 更正前, TsuchishoNo 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = TsuchishoNo.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = TsuchishoNo.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isHihokenshaNo変更(HihokenshaNo 更正前, HihokenshaNo 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = HihokenshaNo.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = HihokenshaNo.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isShikibetsuCode変更(ShikibetsuCode 更正前, ShikibetsuCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = ShikibetsuCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = ShikibetsuCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isSetaiCode変更(SetaiCode 更正前, SetaiCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = SetaiCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = SetaiCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isInt変更(int 更正前, int 更正後) {
@@ -762,55 +758,52 @@ public class SokujiFukaKoseiService {
     }
 
     private boolean isFlexibleDate変更(FlexibleDate 更正前, FlexibleDate 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleDate.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleDate.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isRString変更(RString 更正前, RString 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = RString.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = RString.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isFlexibleYearMonth変更(FlexibleYearMonth 更正前, FlexibleYearMonth 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleYearMonth.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleYearMonth.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isLasdecCode変更(LasdecCode 更正前, LasdecCode 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = LasdecCode.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = LasdecCode.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isDecimal変更(Decimal 更正前, Decimal 更正後) {
-        if (更正後 != null && !更正後.equals(更正前)) {
-            return true;
-        } else if (更正後 == null && 更正前 != null) {
-            return true;
+        if (更正前 == null) {
+            更正前 = Decimal.ZERO;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = Decimal.ZERO;
+        }
+        return !更正後.equals(更正前);
     }
 }
