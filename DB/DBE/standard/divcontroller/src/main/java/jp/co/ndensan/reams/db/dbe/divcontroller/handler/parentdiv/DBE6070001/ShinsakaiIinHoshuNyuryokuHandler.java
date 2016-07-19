@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6070001.ShinsakaiIinHoshuNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6070001.dgShinsakaiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6070001.dgShinsakaiJisseki_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
@@ -29,7 +30,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -86,7 +90,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().clearFromValue();
         div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().clearToValue();
         div.getShinsakaiIinKensakuJoken().getDdlHihokenshaNameMatchType().setSelectedValue(前方一致);
-        div.getShinsakaiIinKensakuJoken().getTextBoxNum().clearValue();
+        div.getTextBoxNum().clearValue();
     }
 
     /**
@@ -136,8 +140,8 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
             rowList.add(row);
+            row.setDeleteButtonState(DataGridButtonState.Disabled);
             div.getDgShinsakaiJisseki().setDataSource(rowList);
-            div.getDgShinsakaiJisseki().getGridSetting().setIsShowDeleteButtonColumn(false);
         } else {
             for (ShinsakaiIinJoho shinsakaiIinJoho : shinsakaiIinHoshuNyuryoku) {
                 if (shinsakaiIinJoho.get出欠()) {
@@ -184,6 +188,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
                         shinsakaiIinJoho.get開催結果開催番号()
                 );
                 rowList.add(row);
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
             }
             div.getDgShinsakaiJisseki().setDataSource(rowList);
         }
@@ -195,7 +200,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
      */
     public void set修正() {
         div.setHiddenColumnState(状態_修正);
-        div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setDisabled(true);
         if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
             div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setSelectedValue(SHINCHAKAI);
         } else {
@@ -203,25 +208,25 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         }
         div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setValue(toFlexibleDate(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()));
-        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setReadOnly(true);
-        div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setReadOnly(true);
-        div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setReadOnly(true);
-        div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setDisabled(true);
+        div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setDisabled(true);
+        div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setDisabled(true);
+        div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsakaiKaisaiBango());
         div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getGogitaiBango());
         div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getGogitaichoKubun());
-        div.getShinsakaiJissekiMeisai().getTxtShukketsu().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtShukketsu().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShukketsu().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShukketsu());
-        div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setDisabled(true);
         if (!div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShusseki().isEmpty()) {
             div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setValue(new RTime(
                     div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShusseki()));
         }
-        div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setDisabled(true);
         if (!div.getDgShinsakaiJisseki().getSelectedItems().get(0).getTaiseki().isEmpty()) {
             div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setValue(new RTime(
                     div.getDgShinsakaiJisseki().getSelectedItems().get(0).getTaiseki()));
@@ -229,38 +234,38 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsaHoshukaku()));
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
-            div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setReadOnly(false);
+            div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setDisabled(false);
         } else {
-            div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setReadOnly(true);
+            div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setDisabled(true);
         }
         div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getSonotaHoshukaku()));
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
-            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(true);
+            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(true);
         } else {
-            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(false);
+            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(false);
         }
         div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(new Decimal(
                 Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu().toString())));
-        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(false);
         div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKotsuhito()));
-        div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setReadOnly(false);
-        div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(false);
+        div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKojozeigaku()));
-        div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeibikigoShiharaigaku()));
         div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShiharaiMemo());
-        div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setDisabled(false);
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getFurikomi())) {
             div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setSelectedValue(銀行振込_する);
         } else {
             div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setSelectedValue(銀行振込_しない);
         }
-        div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setDisabled(false);
     }
 
     /**
@@ -269,45 +274,52 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
      */
     public void set追加() {
         div.setHiddenColumnState(状態_追加);
-        div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setDisabled(false);
         div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setSelectedValue(SHINCHAKAI);
-        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setDisabled(false);
         div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setValue(FlexibleDate.getNowDate());
-        div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsakaiKaisaiBango());
-        div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getGogitaiBango());
-        div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getGogitaichoKubun());
-        div.getShinsakaiJissekiMeisai().getTxtShukketsu().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtShukketsu().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShukketsu().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShukketsu());
-        div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setValue(null);
-        div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setValue(null);
+        div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setDisabled(true);
         //TODO 追加状態,審査報酬額未実装。
         //TODO 追加状態,交通費等未実装。
-        //TODO 追加状態,報酬税率未実装。
+        edit実施日();
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
-            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(true);
-            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setReadOnly(true);
-            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setReadOnly(true);
+            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(true);
+            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(true);
+            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(true);
         } else {
-            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(false);
-            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setReadOnly(false);
-            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setReadOnly(false);
+            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(false);
+            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(false);
+            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(false);
         }
+        div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setValue(null);
-        div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setReadOnly(true);
         div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(null);
-        div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(null);
-        div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setReadOnly(false);
-        div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setReadOnly(false);
+        div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setDisabled(false);
+        div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setDisabled(false);
+        if (振込_出力未.equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getFurikomi())) {
+            div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setSelectedValue(銀行振込_しない);
+        } else {
+            div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setSelectedValue(銀行振込_する);
+        }
+
     }
 
     /**
@@ -316,7 +328,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
      */
     public void get削除() {
         div.setHiddenColumnState(状態_削除);
-        div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setDisabled(true);
         if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
             div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setSelectedValue(SHINCHAKAI);
         } else {
@@ -324,56 +336,56 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         }
         div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setValue(toFlexibleDate(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()));
-        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setReadOnly(true);
-        div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().setDisabled(true);
+        div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShinsakaiKaisaiBango().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsakaiKaisaiBango());
-        div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtGogitaiBango().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getGogitaiBango());
-        div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtGogitaichoKubun().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getGogitaichoKubun());
-        div.getShinsakaiJissekiMeisai().getTxtShukketsu().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtShukketsu().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtShukketsu().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShukketsu());
-        div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setDisabled(true);
         if (!div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShusseki().isEmpty()) {
             div.getShinsakaiJissekiMeisai().getTxtShussekiJikan().setValue(new RTime(
                     div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShusseki()));
         }
-        div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setDisabled(true);
         if (!div.getDgShinsakaiJisseki().getSelectedItems().get(0).getTaiseki().isEmpty()) {
             div.getShinsakaiJissekiMeisai().getTxtTaisekiJikan().setValue(new RTime(
                     div.getDgShinsakaiJisseki().getSelectedItems().get(0).getTaiseki()));
         }
         div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsaHoshukaku()));
-        div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtShinsaHoshugaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getSonotaHoshukaku()));
-        div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(new Decimal(Integer.valueOf(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu().toString())));
-        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKotsuhito()));
-        div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setReadOnly(true);
-        div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(true);
+        div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKojozeigaku()));
-        div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setDisabled(true);
         div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeibikigoShiharaigaku()));
         div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setValue(
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShiharaiMemo());
-        div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getTxtShiharaiMemo().setDisabled(true);
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getFurikomi())) {
             div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setSelectedValue(銀行振込_する);
         } else {
             div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setSelectedValue(銀行振込_しない);
         }
-        div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setReadOnly(true);
+        div.getShinsakaiJissekiMeisai().getRadGinkoFurikomi().setDisabled(true);
     }
 
     /**
@@ -509,9 +521,6 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
             } else {
                 div.getDgShinsakaiJisseki().getSelectedItems().get(0).setFurikomi(IsGinkoFurikomiShutsuryoku.出力未.get名称());
             }
-            if (状態_追加.equals(div.getHiddenColumnState())) {
-                div.getDgShinsakaiJisseki().getGridSetting().setIsShowDeleteButtonColumn(true);
-            }
         }
         if (状態_削除.equals(div.getHiddenColumnState())) {
             div.getDgShinsakaiJisseki().getSelectedItems().get(0).setColumnState(div.getHiddenColumnState());
@@ -525,13 +534,13 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
     public void edit報酬区分() {
         RString 報酬区分 = div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue();
         if (SHINCHAKAI.equals(報酬区分)) {
-            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(true);
-            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setReadOnly(true);
-            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setReadOnly(true);
+            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(true);
+            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(true);
+            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(true);
         } else {
-            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setReadOnly(false);
-            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setReadOnly(false);
-            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setReadOnly(false);
+            div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().setDisabled(false);
+            edit実施日();
+            div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(false);
         }
     }
 
@@ -549,15 +558,15 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         ShinsakaiIinHoshuJissekiJoho shinasa = models.get(key);
         ShinsakaiIinHoshuJissekiJohoBuilder build = shinasa.createBuilderForEdit();
         build.set介護認定審査会報酬税率(Integer.valueOf(row.getZeiritsu().toString()));
-        build.set介護認定審査報酬(Integer.valueOf(row.getShinsaHoshukaku().toString()));
-        build.set介護認定審査その他報酬(Integer.valueOf(row.getSonotaHoshukaku().toString()));
-        build.set介護認定審査交通費等(Integer.valueOf(row.getKotsuhito().toString()));
-        build.set介護認定審査控除税額(Integer.valueOf(row.getKojozeigaku().toString()));
-        build.set介護認定審査報酬合計(Integer.valueOf(row.getZeibikigoShiharaigaku().toString()));
+        build.set介護認定審査報酬(toDecimal(row.getShinsaHoshukaku()).intValue());
+        build.set介護認定審査その他報酬(toDecimal(row.getSonotaHoshukaku()).intValue());
+        build.set介護認定審査交通費等(toDecimal(row.getKotsuhito()).intValue());
+        build.set介護認定審査控除税額(toDecimal(row.getKojozeigaku()).intValue());
+        build.set介護認定審査報酬合計(toDecimal(row.getZeibikigoShiharaigaku()).intValue());
         build.set介護認定審査報酬支払メモ(row.getShiharaiMemo());
-        if (振込_出力済.equals(row.getGogitaichoKubun())) {
+        if (振込_出力済.equals(row.getFurikomi())) {
             build.set銀行振込出力フラグ(true);
-        } else if (振込_出力未.equals(row.getGogitaichoKubun())) {
+        } else if (振込_出力未.equals(row.getFurikomi())) {
             build.set銀行振込出力フラグ(false);
         }
         shinasa.toEntity().setState(EntityDataState.Modified);
@@ -580,7 +589,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         ShinsakaiIinHoshuJissekiJohoIdentifier key = new ShinsakaiIinHoshuJissekiJohoIdentifier(
                 審査会委員報酬区分,
                 new Code(kuBun.toString()),
-                new FlexibleDate(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()),
+                toFlexibleDate(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()),
                 Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getRemban().toString()));
         return key;
     }
@@ -613,12 +622,12 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         );
         ShinsakaiIinHoshuJissekiJohoBuilder build = shinsakaiIinHoshuJissekiJoho.createBuilderForEdit();
         build.set介護認定審査会開催番号(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsakaiKaisaiBango());
-        build.set介護認定審査会報酬税率(Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu().toString()));
-        build.set介護認定審査報酬(Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsaHoshukaku().toString()));
-        build.set介護認定審査その他報酬(Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getSonotaHoshukaku().toString()));
-        build.set介護認定審査交通費等(Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKotsuhito().toString()));
-        build.set介護認定審査控除税額(Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKojozeigaku().toString()));
-        build.set介護認定審査報酬合計(Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeibikigoShiharaigaku().toString()));
+        build.set介護認定審査会報酬税率(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu()).intValue());
+        build.set介護認定審査報酬(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsaHoshukaku()).intValue());
+        build.set介護認定審査その他報酬(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getSonotaHoshukaku()).intValue());
+        build.set介護認定審査交通費等(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKotsuhito()).intValue());
+        build.set介護認定審査控除税額(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKojozeigaku()).intValue());
+        build.set介護認定審査報酬合計(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeibikigoShiharaigaku()).intValue());
         build.set介護認定審査報酬支払年月日(FlexibleDate.EMPTY);
         build.set介護認定審査報酬支払メモ(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShiharaiMemo());
         if (振込_出力済.equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getFurikomi())) {
@@ -627,6 +636,21 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
             build.set銀行振込出力フラグ(false);
         }
         return build;
+    }
+
+    /**
+     * 実施日のonChange、報酬税率が値の設立です。
+     *
+     */
+    public void edit実施日() {
+        boolean 実施日Flag = false;
+        List<UzT0007CodeEntity> entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.控除税率.getコード(), FlexibleDate.getNowDate());
+        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(new Decimal(entity.get(0).getコード名称().toString()));
+        div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().getValue();
+        for (UzT0007CodeEntity tity : entity) {
+            実施日Flag = div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().getValue().isBeforeOrEquals(tity.get有効開始年月日());
+        }
+        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(実施日Flag);
     }
 
     private RString dateFormat(RString obj) {
