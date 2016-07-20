@@ -19,7 +19,7 @@ public interface IGensenChoshuDataSakuseiRelateMapper {
     /**
      * 「源泉徴収データ作成」データの取得です。
      *
-     * @param gensenChoshuparam 「源泉徴収データ作成のparameter
+     * @param gensenChoshuparam 源泉徴収データ作成のパラメータ
      * @return データ情報
      */
     List<GensenChoshuRelateEntity> getデータ情報(GensenChoshuMapperParameter gensenChoshuparam);
