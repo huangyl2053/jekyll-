@@ -42,21 +42,28 @@ public class TokuChoSoufuJohoSakuseiBatch {
 
     private final RString 年度_2016 = new RString("2016");
     private final RString 年度_2015 = new RString("2015");
-    private final RString 前年度2月 = new RString("201502");
-    private final RString 前年度4月 = new RString("201504");
-    private final RString 前年度6月 = new RString("201506");
-    private final RString 前年度8月 = new RString("201508");
-    private final RString 前年度10月 = new RString("201510");
-    private final RString 前年度12月 = new RString("201512");
-    private final RString 月2 = new RString("201602");
-    private final RString 月4 = new RString("201604");
-    private final RString 月6 = new RString("201606");
-    private final RString 月8 = new RString("201608");
-    private final RString 月10 = new RString("201610");
-    private final RString 月12 = new RString("201612");
-    private final RString 翌2月 = new RString("201702");
-    private final RString 翌4月 = new RString("201704");
-    private final RString 翌6月 = new RString("201706");
+    //    2015
+    private final RString 前年度2月 = new RString("02");
+    private final RString 前年度4月 = new RString("04");
+    private final RString 前年度6月 = new RString("06");
+    private final RString 前年度8月 = new RString("08");
+    private final RString 前年度10月 = new RString("10");
+    private final RString 前年度12月 = new RString("12");
+//    2015
+//    2016
+    private final RString 月2 = new RString("02");
+    private final RString 月4 = new RString("04");
+    private final RString 月6 = new RString("06");
+    private final RString 月8 = new RString("08");
+    private final RString 月10 = new RString("10");
+    private final RString 月12 = new RString("12");
+    //    2016
+//    2017
+    private final RString 翌2月 = new RString("02");
+    private final RString 翌4月 = new RString("04");
+    private final RString 翌6月 = new RString("06");
+    //    2017
+
     private static final RString RS0 = new RString("0");
     private static final RString RS1 = new RString("1");
     private static final RString RS2 = new RString("2");
@@ -115,7 +122,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
