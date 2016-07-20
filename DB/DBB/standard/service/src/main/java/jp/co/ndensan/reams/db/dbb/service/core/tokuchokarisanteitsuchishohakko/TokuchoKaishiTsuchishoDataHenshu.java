@@ -236,7 +236,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             通知書発行後異動者.setIdoAriFlag(false);
             通知書発行後異動者.setState(EntityDataState.Added);
             通知書発行後異動者Dac.save(通知書発行後異動者);
-            連番 = 連番++;
+            連番 = 連番 + INT_1;
         }
     }
 
