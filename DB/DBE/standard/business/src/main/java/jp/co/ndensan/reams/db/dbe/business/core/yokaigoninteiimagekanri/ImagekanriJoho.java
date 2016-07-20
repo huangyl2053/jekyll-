@@ -119,7 +119,7 @@ public class ImagekanriJoho implements Serializable {
      * @return 主治医意見書読取年月日
      */
     public FlexibleDate get主治医意見書読取年月日() {
-        return entity.getIkenshoKinyuYMD();
+        return entity.getIkenshoReadYMD();
     }
 
     /**
@@ -128,7 +128,7 @@ public class ImagekanriJoho implements Serializable {
      * @return 主治医意見書記入年月日
      */
     public FlexibleDate get主治医意見書記入年月日() {
-        return entity.getIkenshoReadYMD();
+        return entity.getIkenshoKinyuYMD();
     }
 
     /**
