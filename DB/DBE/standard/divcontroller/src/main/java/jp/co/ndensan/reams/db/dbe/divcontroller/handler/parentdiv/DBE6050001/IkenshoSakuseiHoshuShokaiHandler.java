@@ -149,7 +149,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
     }
 
     /**
-     * バッチパラメータの作成する。
+     * バッチパラメータの作成します。
      *
      * @param 帳票出力区分 帳票出力区分
      * @return 意見書作成報酬照会の合計額リスト_バッチフロークラスパラメータ
@@ -189,7 +189,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
     }
 
     /**
-     * 作成依頼日をクリアする。
+     * 作成依頼日をクリアします。
      */
     public void clear作成依頼日() {
         div.getTxtSakuseiIraibi().clearFromValue();
