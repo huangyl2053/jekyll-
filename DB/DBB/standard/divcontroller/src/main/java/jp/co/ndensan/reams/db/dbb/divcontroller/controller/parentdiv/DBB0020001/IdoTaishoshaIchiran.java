@@ -225,18 +225,14 @@ public class IdoTaishoshaIchiran {
     }
 
     private void putViewState(IdoTaishoshaIchiranDiv div) {
-        List<IdoTaishoshaIchiranparameter> listPar = new ArrayList<>();
-        List<dgIdoTaishoshaIchiran_Row> rowList = div.getDgIdoTaishoshaIchiran().getDataSource();
-        for (dgIdoTaishoshaIchiran_Row row : rowList) {
-            IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
-                    new FlexibleYear(row.getTexYSeireki().toString()),
-                    new HihokenshaNo(row.getTxtHihoNo().toString()),
-                    new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
-                    new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
-            );
-            listPar.add(par);
-        }
-        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, (Serializable) listPar);
+        dgIdoTaishoshaIchiran_Row row = div.getDgIdoTaishoshaIchiran().getClickedItem();
+        IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
+                new FlexibleYear(row.getTexYSeireki().toString()),
+                new HihokenshaNo(row.getTxtHihoNo().toString()),
+                new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
+                new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
+        );
+        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, par);
     }
 
 }
