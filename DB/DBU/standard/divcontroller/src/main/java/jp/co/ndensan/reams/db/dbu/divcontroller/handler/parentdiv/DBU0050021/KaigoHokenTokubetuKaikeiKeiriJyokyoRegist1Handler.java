@@ -195,8 +195,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         集計年度Box.setReadOnly(true);
         div.getHihokenshabango().getYoshikiyonMeisai().getTxtHihokenshabango().setReadOnly(true);
         div.getHihokenshabango().getYoshikiyonMeisai().getTxthihokenshamei().setReadOnly(true);
-        div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setVisible(true);
-        div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setVisible(true);
+        div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setVisible(false);
+        div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setVisible(false);
         if (UPDATE.equals(insuranceInf.get処理フラグ())) {
             詳細データエリ表示(詳細データ, 状態2);
             div.getCcdKanryoMessage().setDisplayNone(true);
