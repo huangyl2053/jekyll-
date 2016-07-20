@@ -160,7 +160,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             div.getHihokenshabango().getYoshikiyonMeisai().getTxtHihokenshabango().setDisplayNone(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getTxthihokenshamei().setDisplayNone(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDataSource(dataSource);
-            div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
+            div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(false);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setSelectedIndex(0);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(false);
             div.setShoriMode(内部処理モード_追加);
