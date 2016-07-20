@@ -126,7 +126,9 @@ public class KogakuServicehiDetailDivHandler {
                 set事業高額決定情報エリア(result);
             }
         }
-        div.setKogakuServicehiDetailEntity(DataPassingConverter.serialize(result));
+        if (result != null) {
+            div.setKogakuServicehiDetailEntity(DataPassingConverter.serialize(result));
+        }
         div.getCcdKogakuKyufuTaishoList().initialize(メニューID, 照会モード, 被保険者番号, サービス年月, 履歴番号);
         set画面制御(画面モード);
         if (0 == KougakuSabisuhiShousaiNaiyou.createInstance().getTenshutsuNyuuHantei(被保険者番号, サービス年月)) {
