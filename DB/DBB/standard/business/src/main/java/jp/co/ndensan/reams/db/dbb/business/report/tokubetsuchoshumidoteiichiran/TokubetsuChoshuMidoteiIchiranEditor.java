@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMidoteiIchiranEditor {
 
+    private static final RString 男性 = new RString("1");
+    private static final RString 女性 = new RString("2");
     private static final RString 外国人 = new RString("2");
     private static final RString 住登外外国人 = new RString("4");
     private static final RString 日本人 = new RString("1");
@@ -173,11 +175,15 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
 
     private void set性別(TokubetsuChoshuMidoteiIchiranSource source) {
         RString seibetsuCode = this.特徴対象一覧未同定.getSeibetsuCode();
-        if (RString.isNullOrEmpty(seibetsuCode)) {
-            source.listList1_4 = RString.EMPTY;
+        if (男性.equals(seibetsuCode)) {
+            source.listList2_3 = Seibetsu.男.get名称();
             return;
         }
-        source.listList1_4 = Seibetsu.toValue(seibetsuCode).get名称();
+        if (女性.equals(seibetsuCode)) {
+            source.listList2_3 = Seibetsu.女.get名称();
+            return;
+        }
+        source.listList2_3 = RString.EMPTY;
     }
 
     private void setカナ氏名(TokubetsuChoshuMidoteiIchiranSource source) {

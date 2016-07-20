@@ -31,6 +31,8 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     private static final RString 日本人 = new RString("1");
     private static final RString 住登外日本人 = new RString("3");
     private static final RString 年度 = new RString("年度");
+    private static final RString 男性 = new RString("1");
+    private static final RString 女性 = new RString("2");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -182,11 +184,15 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
 
     private void set性別(TokubetsuChoshuDoteiIchiranSource source) {
         RString seibetsuCode = this.特徴対象一覧.getSeibetsuCode();
-        if (RString.isNullOrEmpty(seibetsuCode)) {
-            source.listList2_3 = RString.EMPTY;
+        if (男性.equals(seibetsuCode)) {
+            source.listList2_3 = Seibetsu.男.get名称();
             return;
         }
-        source.listList2_3 = Seibetsu.toValue(seibetsuCode).get名称();
+        if (女性.equals(seibetsuCode)) {
+            source.listList2_3 = Seibetsu.女.get名称();
+            return;
+        }
+        source.listList2_3 = RString.EMPTY;
     }
 
     private void setカナ氏名(TokubetsuChoshuDoteiIchiranSource source) {
