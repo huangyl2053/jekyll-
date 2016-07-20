@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -99,6 +101,45 @@ public class DbV1001HihokenshaDaichoAliveDac {
      */
     @Transaction
     public DbV1001HihokenshaDaichoEntity get最新の被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号により、被保険者台帳管理Aliveを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号))
+                .order(by(DbV1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbV1001HihokenshaDaicho.edaNo, Order.DESC)).limit(1).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号により、被保険者台帳管理Aliveを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get被保険者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
