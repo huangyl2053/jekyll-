@@ -105,7 +105,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             return handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
-        return ResponseData.of(div).respond();
+        return null;
     }
 
     /**
