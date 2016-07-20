@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額介護サービス費給付対象者-スケジュール設定のハンドラクラスです。
@@ -77,7 +76,7 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                     RString 年月日 = 履歴情報.get処理実施日時().getDate().wareki().eraType(EraType.KANJI)
                             .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                     RString 時分 = 履歴情報.get処理実施日時().getRDateTime().getTime().toFormattedTimeString(
-                            DisplayTimeFormat.HH時mm分ss秒);
+                            DisplayTimeFormat.HH時mm分);
                     row.setShoriTimestamp(年月日.concat(RString.HALF_SPACE).concat(時分));
                 }
                 rowList.add(row);
@@ -180,7 +179,9 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                         .build();
                 データ登録リスト.add(データ登録);
             } else {
-                データ登録 = new KokuhorenInterfaceKanri(処理年月, ResponseHolder.getMenuID());
+                // TODO QA961
+//                データ登録 = new KokuhorenInterfaceKanri(処理年月, ResponseHolder.getMenuID());
+                データ登録 = new KokuhorenInterfaceKanri(処理年月, new RString("999"));
                 RDate 開始日時 = new RDate(row.getShoriNengetsu().toString());
                 RDate 終了日時 = new RDate(row.getShoriNengetsu().toString());
                 YMDHMS 抽出開始日時 = new YMDHMS(開始日時, RTime.now());
@@ -199,8 +200,11 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
                 データ登録リスト.add(データ登録);
             }
         }
+        // TODO QA961
+//        KogakuKaigoServicehiKyufuTaishoshaScheduleSettei.createInstance().sukijyuruRirekiJyohoToroku(
+//                ResponseHolder.getMenuID(), データ登録リスト, 確認Flag);
         KogakuKaigoServicehiKyufuTaishoshaScheduleSettei.createInstance().sukijyuruRirekiJyohoToroku(
-                ResponseHolder.getMenuID(), データ登録リスト, 確認Flag);
+                new RString("999"), データ登録リスト, 確認Flag);
     }
 
     private KokuhorenInterfaceKanri get国保連インターフェース管理(
