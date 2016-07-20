@@ -92,7 +92,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
     }
 
     /**
-     * 総合事業種類支給限度額登録一覧DataGridの「修正」「削除」ボタン、「追加する」ボタンは使用不可です。
+     * 総合事業区分支給限度額登録一覧DataGridの「修正」「削除」ボタン、「追加する」ボタンは使用不可です。
      */
     private void setBtn非活性() {
         div.getBtnTsuika().setDisabled(true);
@@ -125,7 +125,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
     }
 
     /**
-     * 総合事業種類支給限度額登録一覧DataGrid．「修正」ボタン押下時の処理です。
+     * 総合事業区分支給限度額登録一覧DataGrid．「修正」ボタン押下時の処理です。
      */
     public void set修正状態() {
         setBtn非活性();
@@ -134,7 +134,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
     }
 
     /**
-     * 総合事業種類支給限度額登録一覧DataGrid選択行の内容が詳細パネルに表示します。
+     * 総合事業区分支給限度額登録一覧DataGrid選択行の内容が詳細パネルに表示します。
      */
     private void set選択行内容表示() {
         dgShikyuGendogaku_Row row = div.getDgShikyuGendogaku().getClickedItem();
@@ -154,7 +154,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
     }
 
     /**
-     * 総合事業種類支給限度額登録一覧DataGrid．「削除」ボタン押下時の処理です。
+     * 総合事業区分支給限度額登録一覧DataGrid．「削除」ボタン押下時の処理です。
      */
     public void set削除状態() {
         setBtn非活性();
