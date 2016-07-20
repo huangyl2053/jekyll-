@@ -323,7 +323,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             } else {
                 引き継ぎデータ = new InsuranceInformation(
                         ADD,
-                        new LasdecCode(div.getDdlShicyoson().getSelectedKey()),
+                        getHandler(div).get市町村コード(div.getDdlShicyoson().getSelectedKey()),
                         div.getDdlShicyoson().getSelectedValue());
             }
         }

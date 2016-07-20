@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -458,14 +459,26 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         set画面入力詳細データエリ2(画面入力詳細データエリ);
         set画面入力詳細データエリ3(画面入力詳細データエリ);
         set画面入力詳細データエリ4(画面入力詳細データエリ);
-        KaigoHokenJigyoHokokuNenpo 画面入力データ = new KaigoHokenJigyoHokokuNenpo(
-                get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM()),
-                DOUBLE_ZEOR,
-                get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM()),
-                DOUBLE_ZEOR,
-                insuranceInf.get統計対象区分(), insuranceInf.get市町村コード(), 表番号_09, 集計番号_0100,
-                集計単位_1, null, null, null, 画面入力詳細データエリ
-        );
+        KaigoHokenJigyoHokokuNenpo 画面入力データ;
+        if (div.getDdlShicyoson().isDisplayNone()) {
+            画面入力データ = new KaigoHokenJigyoHokokuNenpo(
+                    get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM()),
+                    DOUBLE_ZEOR,
+                    get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM()),
+                    DOUBLE_ZEOR,
+                    insuranceInf.get統計対象区分(),
+                    insuranceInf.get市町村コード(), 表番号_09, 集計番号_0100,
+                    集計単位_1, null, null, null, 画面入力詳細データエリ);
+        } else {
+            画面入力データ = new KaigoHokenJigyoHokokuNenpo(
+                    get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM()),
+                    DOUBLE_ZEOR,
+                    get年度(div.getHihokenshabango().getYoshikiyonMeisai().getTxtShukeiYM()),
+                    DOUBLE_ZEOR,
+                    get保険者区分(div.getDdlShicyoson().getSelectedKey()).getコード(),
+                    get市町村コード(div.getDdlShicyoson().getSelectedKey()), 表番号_09, 集計番号_0100,
+                    集計単位_1, null, null, null, 画面入力詳細データエリ);
+        }
         return 画面入力データ;
 
     }
@@ -674,10 +687,38 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     private List<KeyValueDataSource> getDataSourceFrom市町村Lst(List<Shichoson> 市町村Lst) {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (Shichoson shichoson : 市町村Lst) {
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(shichoson.get市町村コード().getColumnValue(), shichoson.get市町村名称());
+            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(create市町村Key(shichoson), shichoson.get市町村名称());
             dataSource.add(keyValueDataSource);
         }
         return dataSource;
+    }
+
+    private RString create市町村Key(Shichoson shichoson) {
+        return new RStringBuilder().append(shichoson.get市町村コード().getColumnValue()).append("_")
+                .append(shichoson.get保険者コード().getColumnValue()).append("_").append(shichoson.get保険者区分().getコード()).toRString();
+    }
+
+    /**
+     * 市町村コード取得処理です。
+     *
+     * @param 市町村Key 市町村Key
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード(RString 市町村Key) {
+        if (市町村Key.split("_").size() < 1) {
+            return LasdecCode.EMPTY;
+        } else {
+            System.out.println(市町村Key.split("_").get(0).toString());
+            return new LasdecCode(市町村Key.split("_").get(0));
+        }
+    }
+
+    private TokeiTaishoKubun get保険者区分(RString 市町村Key) {
+        if (市町村Key.split("_").size() < INT3) {
+            return TokeiTaishoKubun.空;
+        } else {
+            return TokeiTaishoKubun.toValue(市町村Key.split("_").get(2));
+        }
     }
 
     private void set詳細データエリア(KaigoHokenJigyoHokokuNenpo 詳細データ) {
