@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 調定簿作成のマッピング用XMLです。 -->
-<!-- @reamsid_L DBC-2010-090 jiangzongyue -->
+ 概要： 調定簿作成のマッピング用XMLです。 
+ @reamsid_L DBC-2010-090 jiangzongyue 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiShotokuKazeiHanteiMapper">
     
-    <!--世帯員所得情報高額一時テーブルを作成する -->
+    世帯員所得情報高額一時テーブルを作成する 
     <insert id="creat世帯員所得情報高額一時"> 
         CREATE TEMP TABLE "TmpSetaiHaakuNyuryoku"
         ( "hihokenshaNo" character varying(10),
@@ -56,7 +56,7 @@
         <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <!--世帯員所得情報事業高額一時テーブルを作成する -->
+    世帯員所得情報事業高額一時テーブルを作成する 
     <insert id="creat世帯員所得情報事業高額一時"> 
         CREATE TEMP TABLE "TmpSetaiJigyoHaakuNyuryoku"
         ( "hihokenshaNo" character varying(10),
@@ -109,7 +109,7 @@
         <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-     <!-- 世帯員所得情報高額一時に一括Insertする。 -->
+      世帯員所得情報高額一時に一括Insertする。 
     <insert id="insert世帯員所得情報高額一時に一括住所地特例該当が1">
         INSERT INTO "TmpSetaiHaakuNyuryoku"
         (
@@ -139,7 +139,7 @@
          WHERE "TempSetai"."jushochiTokureiFlag"= '1'
     </insert>
     
-     <!-- 世帯員所得情報高額一時に一括Insertする。 -->
+      世帯員所得情報高額一時に一括Insertする。 
     <insert id="insert世帯員所得情報高額一時に一括住所地特例該当が1以外"
         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter">
         INSERT INTO "TmpSetaiHaakuNyuryoku"
@@ -174,7 +174,7 @@
               AND "KaigoSetai"."kanriShikibetsuKubun" = #{管理識別区分}
     </insert>
     
-    <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
+     世帯員所得情報事業高額一時に一括Insertする。 
     <insert id="insert世帯員所得情報事業高額一時に一括住所地特例該当が1">
         INSERT INTO "TmpSetaiJigyoHaakuNyuryoku"
         (
@@ -206,7 +206,7 @@
          WHERE "TempSetaiGymou"."jushochiTokureiFlag"= '1'
     </insert>
 
-    <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
+     世帯員所得情報事業高額一時に一括Insertする。 
     <insert id="insert世帯員所得情報事業高額一時に一括住所地特例該当が1以外"
         parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter">
         INSERT INTO "TmpSetaiJigyoHaakuNyuryoku"
@@ -249,7 +249,7 @@
         <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-     <!-- 世帯員所得情報高額一時に一括Insertする。 -->
+      世帯員所得情報高額一時に一括Insertする。 
     <select resultOrdered="true" id="select世帯員所得情報高額一時に一括" resultMap="resultMap_TempSetaiinHaakuNyuryoku" fetchSize="500">
         SELECT 
             "TempSetai".*
@@ -266,7 +266,7 @@
         <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-     <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
+      世帯員所得情報事業高額一時に一括Insertする。 
     <select resultOrdered="true" id="select世帯員所得情報事業高額一時に一括" resultMap="resultMap_TempSetaiinHaakuNyuryokuJigyo" fetchSize="500">
         SELECT 
             "TempSetaiJigyo".*
@@ -275,7 +275,7 @@
         WHERE "TempSetaiJigyo"."hihokenshaNo"<![CDATA[!=]]> "TmpSetaiHaakuJigyo"."hihokenshaNo"
     </select>
     
-    <!-- update世帯員所得情報高額一時合併内住所地特例者番号変換処理-->
+     update世帯員所得情報高額一時合併内住所地特例者番号変換処理
     <update id="update世帯員所得情報高額一時合併内住所地特例者番号変換処理">
        UPDATE "TmpSetaiHaakuNyuryoku"
        SET "shikibetsuCode" = (SELECT "shikibetsuCodeSochiMoto" 
@@ -283,7 +283,7 @@
        WHERE "TmpSetaiHaakuNyuryoku"."shikibetsuCode"="TempGappeiNaiJutokushaShinKyuNoHenkan"."shikibetsuCode")
     </update>
     
-    <!-- update世帯員所得情報高額一時合併内住所地特例者番号変換処理-->
+     update世帯員所得情報高額一時合併内住所地特例者番号変換処理
     <update id="update世帯員所得情報事業高額一時合併内住所地特例者番号変換処理">
        UPDATE "TmpSetaiJigyoHaakuNyuryoku"
        SET "shikibetsuCode" = (SELECT "shikibetsuCodeSochiMoto" 
@@ -291,7 +291,7 @@
        WHERE "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"="TempGappeiNaiJutokushaShinKyuNoHenkan"."shikibetsuCode")
     </update>
     
-    <!-- update世帯員所得情報高額一時合併内住所地特例者番号変換処理-->
+     update世帯員所得情報高額一時合併内住所地特例者番号変換処理
     <update id="update高額介護サービス場合">
        UPDATE TmpSetaiHaakuNyuryoku
        SET ("kazeiKubun",
@@ -317,7 +317,7 @@
         )
     </update> 
     
-    <!-- select取得した内容で世帯員所得情報高額一時に生保区分を更新-->
+     select取得した内容で世帯員所得情報高額一時に生保区分を更新
     <select resultOrdered="true" id="select取得した内容で世帯員所得情報高額一時に生保区分を更新" resultMap="resultMap_TmpSetaiHaakuNyuryoku" fetchSize="500">
         SELECT  *
         FROM "TmpSetaiHaakuNyuryoku"
@@ -337,7 +337,7 @@
         OR 生活保護停止期間."jukyuTeishiShuryoYMD" IS NULL)
     </select> 
     
-     <!-- select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新-->
+      select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新
     <select resultOrdered="true" id="select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新" resultMap="resultMap_TmpSetaiHaakuNyuryoku" fetchSize="500">
         SELECT  *
         FROM "TmpSetaiHaakuNyuryoku"
@@ -347,7 +347,7 @@
         AND TmpSetaiHaakuNyuryoku."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者"jukyuHaishiYMD"
     </select> 
     
-    <!-- update世帯員所得情報高額一時合併内住所地特例者番号変換処理-->
+     update世帯員所得情報高額一時合併内住所地特例者番号変換処理
     <update id="update事業高額介護サービス場合">
        UPDATE TmpSetaiJigyoHaakuNyuryoku
        SET ("kazeiKubun",
@@ -373,7 +373,7 @@
         )
     </update> 
     
-    <!-- select取得した内容で世帯員所得情報事業高額一時に生保区分を更新-->
+     select取得した内容で世帯員所得情報事業高額一時に生保区分を更新
     <select resultOrdered="true" id="select取得した内容で世帯員所得情報事業高額一時に生保区分を更新" resultMap="resultMap_TmpSetaiJigyoHaakuNyuryoku" fetchSize="500">
         SELECT  *
         FROM "TmpSetaiJigyoHaakuNyuryoku"
@@ -389,7 +389,7 @@
         AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[>]]>  生活保護停止期間."jukyuTeishiShuryoYMD"
     </select> 
     
-    <!-- select取得した内容で世帯員所得情報事業高額一時に生保区分を更新-->
+     select取得した内容で世帯員所得情報事業高額一時に生保区分を更新
     <select resultOrdered="true" id="select取得した内容で世帯員所得情報事業高額一時に老齢福祉区分を更新" resultMap="resultMap_TmpSetaiJigyoHaakuNyuryoku" fetchSize="500">
         SELECT  *
         FROM "TmpSetaiJigyoHaakuNyuryoku"
@@ -399,28 +399,28 @@
         AND TmpSetaiJigyoHaakuNyuryoku."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者"jukyuHaishiYMD"
     </select> 
     
-    <!-- update世帯員所得情報高額一時生保区分を付加する-->
+     update世帯員所得情報高額一時生保区分を付加する
     <update id="update世帯員所得情報高額一時生保区分を付加する">
        UPDATE "TmpSetaiHaakuNyuryoku"
        SET "shoboKubun" = "1"
     </update>
     
-    <!-- update世帯員所得情報高額一時老齢福祉区分を更新する-->
+     update世帯員所得情報高額一時老齢福祉区分を更新する
     <update id="update世帯員所得情報高額一時老齢福祉区分を更新する">
        UPDATE "TmpSetaiHaakuNyuryoku"
        SET "roreiFukushiKubun" = "1"
     </update>
     
-    <!-- update世帯員所得情報事業高額一時生保区分を付加する-->
+     update世帯員所得情報事業高額一時生保区分を付加する
     <update id="update世帯員所得情報事業高額一時生保区分を付加する">
        UPDATE "TmpSetaiJigyoHaakuNyuryoku"
        SET "shoboKubun" = "1"
     </update>
     
-    <!-- update世帯員所得情報事業高額一時老齢福祉区分を更新する-->
+     update世帯員所得情報事業高額一時老齢福祉区分を更新する
     <update id="update世帯員所得情報事業高額一時老齢福祉区分を更新する">
        UPDATE "TmpSetaiJigyoHaakuNyuryoku"
        SET "roreiFukushiKubun" = "1"
     </update>
     
-    </mapper>
+    </mapper>-->
