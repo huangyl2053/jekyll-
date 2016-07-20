@@ -655,16 +655,16 @@ public class KaigohokenRenrakuhyoPrintService {
 
     private RString get被保険者番号(KaigoHokenRenrakuhyoHold hold) {
         if (hold != null && hold.get被保険者台帳() != null
-                && hold.get被保険者台帳().getHihokenshaNo() != null && !hold.get被保険者台帳().getHihokenshaNo().isEmpty()) {
-            return hold.get被保険者台帳().getHihokenshaNo().value();
+                && hold.get被保険者台帳().get被保険者番号() != null && !hold.get被保険者台帳().get被保険者番号().isEmpty()) {
+            return hold.get被保険者台帳().get被保険者番号().value();
         }
         return RString.EMPTY;
     }
 
     private RString get市町村コード(KaigoHokenRenrakuhyoHold hold) {
         if (hold != null && hold.get被保険者台帳() != null
-                && hold.get被保険者台帳().getShichosonCode() != null && hold.get被保険者台帳().getShichosonCode().isEmpty()) {
-            return hold.get被保険者台帳().getShichosonCode().value();
+                && hold.get被保険者台帳().get市町村コード() != null && hold.get被保険者台帳().get市町村コード().isEmpty()) {
+            return hold.get被保険者台帳().get市町村コード().value();
         }
         return RString.EMPTY;
     }
