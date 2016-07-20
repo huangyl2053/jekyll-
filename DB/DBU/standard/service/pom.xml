@@ -87,5 +87,10 @@
             <artifactId>DbxDefinition</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbPersistence</artifactId>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
