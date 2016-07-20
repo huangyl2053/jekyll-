@@ -56,11 +56,8 @@ public class ImagePanel {
      */
     public ResponseData<ImagePanelDiv> doCheckForDownLoad(ImagePanelDiv div) {
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-//        ImagekanriJoho イメージ情報 = YokaigoninteiimagekanriFinder.createInstance().getImageJoho(new RString("20160000000000010"));
         ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
                 new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
-//        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-//                new FilesystemName(new RString("2015081546300004")), イメージ情報.getイメージ共有ファイルID());
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
         ImagePanelHandler handler = new ImagePanelHandler();
         List<RString> 存在する調査票概況特記ファイル = finder.getSharedFile(handler.get調査票概況特記イメージ());
@@ -83,17 +80,7 @@ public class ImagePanel {
      * @return ResponseData
      */
     public IDownLoadServletResponse downLoad(ImagePanelDiv div, IDownLoadServletResponse response) {
-//        ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-//        ImagekanriJoho イメージ情報 = YokaigoninteiimagekanriFinder.createInstance().getImageJoho(new RString("20160000000000010"));
-//        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-//                new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
-//        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-//                new FilesystemName(new RString("2015081546300004")), イメージ情報.getイメージ共有ファイルID());
-//        YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
-//        ImagePanelHandler handler = new ImagePanelHandler();
-//        List<RString> 存在する調査票特記ファイル = finder.getSharedFile(handler.get調査票特記イメージ());
-//        List<RString> 存在する主治医意見書ファイル = finder.getSharedFile(handler.get主治医意見書イメージ());
-//        List<RString> 存在するその他資料ファイル = finder.getSharedFile(handler.getその他資料イメージ());
+//        TODO 技術点69提出しました　2016/07/20 王暁冬
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath());
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(filePath));
         sfd = SharedFile.defineSharedFile(sfd);
