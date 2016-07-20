@@ -102,7 +102,7 @@ public enum ReportIdDBE {
     DBE230002(
             new ReportId("DBE230002_IkenshoSakuseiIraiIchiranhyo"), new RString("主治医意見書作成依頼一覧")),
     /**
-     * その他資料の帳票ID。
+     * その他資料A3の帳票ID。
      */
     DBE517006(new ReportId("DBE517006_SonotashiryoA3"), new RString("その他資料")),
     /**
@@ -315,7 +315,7 @@ public enum ReportIdDBE {
      */
     DBE701008(new ReportId("DBE701008_ShinsakaiShukeihyo"), new RString("介護認定審査会集計表（申請区分別）")),
     /**
-     * 要介護認定情報提供その他資料情報の帳票ＩＤです。
+     * その他資料A4の帳票ＩＤです。
      */
     DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料")),
     /**

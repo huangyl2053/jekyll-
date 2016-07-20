@@ -84,16 +84,11 @@ public class ShinchokuDataOutputBusiness {
             }
             項番編集(entity, temoTableEntity);
         } else {
-            if (new RString("1").equals(entity.getRemban())) {
-                temoTableEntity = new NinteichosaJohoTempTableEntity();
-                temoTableEntity.setShinseishoKanriNo(nullToEmpty(entity.getShinseishoKanriNo()));
-                temoTableEntity.setKoroshoIfShikibetsuCode(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
-                temoTableEntity.setRemban1(nullToEmpty(entity.getServiceJokyo()));
-
-            }
-            if (temoTableEntity != null) {
-                サービスの状況一時リスト.add(temoTableEntity);
-            }
+            temoTableEntity = new NinteichosaJohoTempTableEntity();
+            temoTableEntity.setShinseishoKanriNo(nullToEmpty(entity.getShinseishoKanriNo()));
+            temoTableEntity.setKoroshoIfShikibetsuCode(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
+            temoTableEntity.setRemban1(nullToEmpty(entity.getServiceJokyo()));
+            サービスの状況一時リスト.add(temoTableEntity);
             map.put(申請書管理番号.toString(), nullToEmpty(entity.getShinseishoKanriNo()));
             map.put(厚労省IF識別コード.toString(), nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
         }
@@ -858,7 +853,7 @@ public class ShinchokuDataOutputBusiness {
             eucEntity.set意見書短期記憶(nullToEmpty(entity.get主治医一時remban16()));
             eucEntity.set意見書認知能力(nullToEmpty(entity.get主治医一時remban17()));
             eucEntity.set意見書伝達能力(nullToEmpty(entity.get主治医一時remban18()));
-            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban18()));
+            eucEntity.set意見書食事行為(nullToEmpty(entity.get主治医一時remban19()));
             eucEntity.set意見書認知症高齢者の日常生活自立度(nullToEmpty(entity.get主治医一時remban15()));
             eucEntity.set短期入所生活介護ショートステイ(nullToEmpty(entity.getサービスremban9()));
             eucEntity.set短期入所療養介護(nullToEmpty(entity.getサービスremban10()));
@@ -907,7 +902,6 @@ public class ShinchokuDataOutputBusiness {
             eucEntity.set小規模多機能型居宅介護(nullToEmpty(entity.getサービスremban15()));
             eucEntity.set地域密着型特定施設入居者生活介護(nullToEmpty(entity.getサービスremban17()));
             eucEntity.set地域密着型介護老人福祉施設入所者生活介護(nullToEmpty(entity.getサービスremban18()));
-            eucEntity.set定期巡回随時対応型訪問介護看護(nullToEmpty(entity.getサービスremban19()));
             eucEntity.set介護予防認知症対応型通所介護(nullToEmpty(entity.getサービスremban14()));
             eucEntity.set介護予防小規模多機能型居宅介護(nullToEmpty(entity.getサービスremban15()));
         }

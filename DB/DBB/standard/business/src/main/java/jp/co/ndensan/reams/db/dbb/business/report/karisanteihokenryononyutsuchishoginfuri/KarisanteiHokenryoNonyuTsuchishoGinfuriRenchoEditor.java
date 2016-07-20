@@ -56,18 +56,16 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor implements IKar
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
      * @param ninshoshaSource 認証者情報
-     * @param 連番 連番
      */
     protected KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            NinshoshaSource ninshoshaSource,
-            int 連番) {
+            NinshoshaSource ninshoshaSource) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.連番 = 連番;
+        this.連番 = 仮算定納入通知書情報.get連番();
         this.納付書共通 = null == 仮算定納入通知書情報.get納付書共通()
                 ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
         this.ninshoshaSource = ninshoshaSource;

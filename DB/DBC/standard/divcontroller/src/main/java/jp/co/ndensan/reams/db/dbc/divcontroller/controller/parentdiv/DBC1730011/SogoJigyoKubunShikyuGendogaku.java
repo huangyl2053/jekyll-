@@ -36,7 +36,7 @@ public class SogoJigyoKubunShikyuGendogaku {
     private static final RString 登録 = new RString("登録モード");
     private static final RString 修正 = new RString("修正モード");
     private static final RString 削除 = new RString("削除モード");
-    private static final int 履歴番号 = 0001;
+    private static final int 履歴番号 = 1;
 
     private SogoJigyoKubunShikyuGendogakuHandler getHandler(SogoJigyoKubunShikyuGendogakuDiv div) {
         return new SogoJigyoKubunShikyuGendogakuHandler(div);
@@ -79,7 +79,7 @@ public class SogoJigyoKubunShikyuGendogaku {
     }
 
     /**
-     * 総合事業種類支給限度額登録一覧DataGrid．「修正」ボタン押下時のイベントメソッドです。
+     * 総合事業区分支給限度額登録一覧DataGrid．「修正」ボタン押下時のイベントメソッドです。
      *
      * @param div SogoJigyoKubunShikyuGendogakuDiv
      * @return ResponseData<SogoJigyoKubunShikyuGendogakuDiv>
@@ -92,7 +92,7 @@ public class SogoJigyoKubunShikyuGendogaku {
     }
 
     /**
-     * 総合事業種類支給限度額登録一覧DataGrid．「削除」ボタン押下時のイベントメソッドです。
+     * 総合事業区分支給限度額登録一覧DataGrid．「削除」ボタン押下時のイベントメソッドです。
      *
      * @param div SogoJigyoKubunShikyuGendogakuDiv
      * @return ResponseData<SogoJigyoKubunShikyuGendogakuDiv>

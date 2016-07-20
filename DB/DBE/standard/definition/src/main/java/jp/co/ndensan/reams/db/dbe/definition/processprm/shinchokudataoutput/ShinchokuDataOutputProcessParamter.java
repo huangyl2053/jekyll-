@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * バッチ設計_DBE491001_日次進捗データ作成ですためのProcess用パラメータクラスです。
@@ -19,6 +20,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
+@Setter
 public class ShinchokuDataOutputProcessParamter implements IBatchProcessParameter {
 
     private final List<ShinseishoKanriNo> shinseishoKanriNoList;

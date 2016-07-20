@@ -50,7 +50,7 @@
                                   DbT5101."logicalDeletedFlag" = FALSE                               
         )
         ORDER BY
-        DbT5207.remban asc    
+        DbT5207."shinseishoKanriNo" asc,DbT5207.remban asc    
 </select>
 <select resultOrdered="true" id="getNinteichosahyoChosa" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
@@ -88,7 +88,7 @@
                                   DbT5101."logicalDeletedFlag" = FALSE                          
         )
         ORDER BY
-        DbT5211.remban asc    
+        DbT5211."shinseishoKanriNo"asc, DbT5211.remban asc    
     </select>
     <select resultOrdered="true" id="get要介護認定主治医意見書意見項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
@@ -126,7 +126,7 @@
                                   DbT5101."logicalDeletedFlag" = FALSE                               
         )
         ORDER BY
-        DbT5304.remban asc
+        DbT5304."shinseishoKanriNo" asc,DbT5304.remban asc
       </select>
       <select resultOrdered="true" id="get前回調査票概況調査サービスの状況" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
@@ -175,7 +175,7 @@
       AND
         DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY
-        DbT5207.remban asc
+        DbT5101."shinseishoKanriNo"asc,  DbT5207.remban asc
       </select>
       <select resultOrdered="true" id="get前回認定調査票基本調査調査項目" resultMap="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinchokudataoutput.ShinchokuDataOutputMybitisParamter" fetchSize="500">
@@ -223,7 +223,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach> AND
         DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY
-        DbT5211.remban asc
+        DbT5101."shinseishoKanriNo" asc, DbT5211.remban asc
       </select>
       <resultMap id="resultMap_ShinchokuDataOutputRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="A_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

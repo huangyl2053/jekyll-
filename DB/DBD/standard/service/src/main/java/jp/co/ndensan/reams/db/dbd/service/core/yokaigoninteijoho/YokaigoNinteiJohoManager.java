@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoD
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.sikakuidocheck.SikakuIdoCheckManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -26,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護認定処理情報の処理します。
  *
- * @reamsid_L DBU-1530-010 lit
+ * @reamsid_L DBD-1530-010 lit
  */
 public class YokaigoNinteiJohoManager {
 
@@ -67,9 +66,9 @@ public class YokaigoNinteiJohoManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link SikakuIdoCheckManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiJohoManager}のインスタンスを返します。
      *
-     * @return SikakuIdoCheckManager
+     * @return YokaigoNinteiJohoManager
      *
      */
     public static YokaigoNinteiJohoManager createInstance() {

@@ -33,8 +33,6 @@ public class ShiharaiHohoHenkoYokokuTsuchishoBuilder implements IShiharaiHohoHen
      */
     @Override
     public ShiharaiHohoHenkoYokokuTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new ShiharaiHohoHenkoYokokuTsuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new ShiharaiHohoHenkoYokokuTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
-
 }

@@ -535,7 +535,6 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 特徴平準化対象者CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象者,
                         編集後住所, 今年度保険料率, 調整金額, 編集備考);
                 csvListWriter.writeLine(bodyList);
-                csvListWriter.close();
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
@@ -543,7 +542,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPathTaishogai = managerTaishogai.getEucOutputDirectry();
         RString eucFilePathTaishogai = Path.combinePath(spoolWorkPathTaishogai, 英数字ファイル名);
-        try (CsvListWriter svListWrite = new CsvListWriter.InstanceBuilder(eucFilePathTaishogai).setNewLine(NewLine.CRLF)
+        try (CsvListWriter csvListWrite = new CsvListWriter.InstanceBuilder(eucFilePathTaishogai).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setEncode(Encode.UTF_8withBOM)
@@ -560,8 +559,8 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象外CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象外,
                         編集後住所, 今年度保険料率, 調整金額, 備考名);
-                svListWrite.writeLine(bodyList);
-                svListWrite.close();
+                csvListWrite.writeLine(bodyList);
+                csvListWrite.close();
             }
             managerTaishogai.spool(SubGyomuCode.DBB介護賦課, eucFilePathTaishogai);
         }
@@ -657,7 +656,11 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         } else {
             bodyList.add(RString.EMPTY);
         }
-        bodyList.add(編集後住所);
+        if (編集後住所 != null) {
+            bodyList.add(編集後住所);
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
         if (宛名の情報 != null) {
             AtenaJusho 住所 = 宛名の情報.getJusho();
             if (住所 != null) {
@@ -780,7 +783,11 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         } else {
             bodyList.add(RString.EMPTY);
         }
-        bodyList.add(編集後住所);
+        if (編集後住所 != null) {
+            bodyList.add(編集後住所);
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
         if (宛名の情報 != null) {
             AtenaJusho 住所 = 宛名の情報.getJusho();
             if (住所 != null) {

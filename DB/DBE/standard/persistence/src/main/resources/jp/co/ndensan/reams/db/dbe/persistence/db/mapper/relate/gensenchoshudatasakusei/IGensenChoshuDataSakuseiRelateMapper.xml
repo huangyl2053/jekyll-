@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--概要：源泉徴収データ作成のマッピング用XMLです。
-@reamsid_L DBE-2000-020 jinjue
-どのマッパーインターフェースと対応するかを指定する-->
+<!--概要：源泉徴収データ作成のマッピング用XMLです。-->
+<!--@reamsid_L DBE-2000-020 jinjue-->
+<!--どのマッパーインターフェースと対応するかを指定する-->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gensenchoshudatasakusei.IGensenChoshuDataSakuseiRelateMapper">
 
     <select id="getデータ情報" resultMap="resultMap_GensenChoshuRelateEntity"

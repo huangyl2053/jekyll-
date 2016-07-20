@@ -99,7 +99,19 @@ public class KogakuShinseiList {
      */
     public ResponseData<KogakuShinseiListDiv> onClick_modify(
             KogakuShinseiListDiv div) {
+        FlexibleYearMonth サービス年月 = FlexibleYearMonth.EMPTY;
+        if (div.getTxtServiceYM().getDomain() != null) {
+            サービス年月 = new FlexibleYearMonth(div.getTxtServiceYM().getDomain().toString());
+        }
+        int 履歴番号 = getHandler(div).get履歴番号();
+        boolean 審査決定フラグ = getHandler(div).is審査決定フラグ();
+        boolean 支給区分フラグ = getHandler(div).is支給区分フラグ();
         ViewStateHolder.put(ViewStateKeys.画面モード, 修正モード);
+        ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getTxtShokisai().getValue());
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
+        ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
+        ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
         return ResponseData.of(div).respond();
     }
 
@@ -111,7 +123,15 @@ public class KogakuShinseiList {
      */
     public ResponseData<KogakuShinseiListDiv> onClick_delete(
             KogakuShinseiListDiv div) {
+        FlexibleYearMonth サービス年月 = FlexibleYearMonth.EMPTY;
+        if (div.getTxtServiceYM().getDomain() != null) {
+            サービス年月 = new FlexibleYearMonth(div.getTxtServiceYM().getDomain().toString());
+        }
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除モード);
+        int 履歴番号 = getHandler(div).get履歴番号();
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
+        ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getTxtShokisai().getValue());
         return ResponseData.of(div).respond();
     }
 

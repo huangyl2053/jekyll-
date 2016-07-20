@@ -250,19 +250,6 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
                     && item.get納付書共通().get通知書番号() != null) {
                 source.detail_tsuchishoNo = item.get納付書共通().get通知書番号().value();
             }
-        } else {
-            source.ryoshushoNendo = HOSHI_4;
-            source.nendoNenbun = HOSHI_4;
-            source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun = HOSHI_4;
-            source.gokeigaku = HOSHI_13;
-            source.detail_tsuchishoNo = HOSHI_16;
-            source.nokigenYmd = HOSHI_11;
-            source.hakkoYmd = HOSHI_11;
-            source.honzei = HOSHI_13;
-            source.ocr1 = HOSHI_22;
-            source.ocr2 = HOSHI_28;
-            source.cvsToriatsukaikigen = HOSHI_16;
         }
 
         source.nokigenTitle = NOKIGEN;
@@ -358,7 +345,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名() != null) {
-            source.kaisanMeisaishoHihokenshaName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
+            source.kaisanMeisaishoSetaiNushiName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯コード() != null) {

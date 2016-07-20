@@ -194,8 +194,10 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (ONE.equals(受託区分)) {
-            if (追加モード.equals(処理モード)) {
-                //TODO
+            if (追加モード.equals(処理モード) && ((高額サービス費詳細内容Entity != null && 高額サービス費詳細内容Entity.
+                    get高額介護サービス費支給審査決定Entity() != null
+                    && ShikyuFushikyuKubun.支給.getコード().equals(高額サービス費詳細内容Entity.
+                            get高額介護サービス費支給審査決定Entity().get支給区分コード())))) {
                 dealKyufutsuika(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, ONE, 給付実績編集用entity);
             } else if (修正モード.equals(処理モード)) {
                 set受託なしと修正モードの給付実績情報(高額サービス費詳細内容Entity, 修正前支給区分,

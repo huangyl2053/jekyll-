@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyuf
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiShotokuKazeiHanteiMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;
@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class SetaiShotokuKazeiHantei {
 
     private final MapperProvider mapperProvider;
+    private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
+    private static final RString メニューID_事業高額介護サービス = new RString("DBCMN41004");
 
     /**
      * コンストラクタです。
@@ -65,7 +67,7 @@ public class SetaiShotokuKazeiHantei {
     @Transaction
     public void getSetaiinHaaku(RString 管理識別区分) {
         requireNonNull(管理識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理識別区分"));
-        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class);
+        ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
         mapper.insert世帯員所得情報高額一時に一括住所地特例該当が1();
         mapper.insert世帯員所得情報高額一時に一括住所地特例該当が1以外(new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分));
         TempSetaiinHaakuNyuryokuEntity tempSetaiEntity = mapper.select世帯員所得情報高額一時に一括();
@@ -87,7 +89,7 @@ public class SetaiShotokuKazeiHantei {
      */
     @Transaction
     public void convertGappeinaiJutokushaShinKyuNo() {
-        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class);
+        ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
         mapper.update世帯員所得情報高額一時合併内住所地特例者番号変換処理();
         mapper.update世帯員所得情報事業高額一時合併内住所地特例者番号変換処理();
     }
@@ -98,7 +100,7 @@ public class SetaiShotokuKazeiHantei {
      */
     @Transaction
     public void getJuminShotokuJoho() {
-        ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class);
+        ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
         mapper.update高額介護サービス場合();
         TmpSetaiHaakuNyuryokuEntity 生保区分entity = mapper.select取得した内容で世帯員所得情報高額一時に生保区分を更新();
         if (生保区分entity != null) {
@@ -117,5 +119,13 @@ public class SetaiShotokuKazeiHantei {
         if (事業老齢福祉区分entity != null) {
             mapper.update世帯員所得情報事業高額一時老齢福祉区分を更新する();
         }
+    }
+
+    private boolean is高額介護サービス(RString メニューID) {
+        return メニューID_高額介護サービス.equals(メニューID);
+    }
+
+    private boolean is事業高額介護サービス(RString メニューID) {
+        return メニューID_事業高額介護サービス.equals(メニューID);
     }
 }

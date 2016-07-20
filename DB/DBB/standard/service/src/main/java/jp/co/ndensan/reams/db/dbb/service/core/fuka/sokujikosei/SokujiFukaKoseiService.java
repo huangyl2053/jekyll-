@@ -457,7 +457,7 @@ public class SokujiFukaKoseiService {
         DbT2001ChoshuHohoEntity 徴収方法の情報 = 介護徴収方法Dac.select(賦課年度, 被保険者番号);
         if (徴収方法の情報 == null) {
             RStringBuilder rsb = new RStringBuilder();
-            rsb.append(MSG_1).append(MSG_2).append(賦課年度).append(MSG_3).append(被保険者番号);
+            rsb.append(MSG_1).append(MSG_2).append(賦課年度).append(MSG_3).append(被保険者番号.getColumnValue());
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
                     .replace(rsb.toString()).evaluate());
         }
@@ -468,7 +468,7 @@ public class SokujiFukaKoseiService {
         DbT1001HihokenshaDaichoEntity 資格の情報 = 被保険者台帳管理Dac.get被保険者証資格証発行情報(被保険者番号);
         if (資格の情報 == null) {
             RStringBuilder rsb = new RStringBuilder();
-            rsb.append(MSG_4).append(MSG_3).append(被保険者番号);
+            rsb.append(MSG_4).append(MSG_3).append(被保険者番号.getColumnValue());
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
                     .replace(rsb.toString()).evaluate());
         }

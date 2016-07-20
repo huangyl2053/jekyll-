@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic;
 /**
  * {@link jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV4001JukyushaDaichoEntity}のマッパーIFです。
  *
- * @reamsid_L DBZ-1530-010 lit
+ * @reamsid_L DBD-1530-010 lit
  */
 public interface IDbV4001JukyushaDaichoMapper {
 
