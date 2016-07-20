@@ -63,7 +63,6 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport
             return;
         }
         int 銀振印字位置Para = 0;
-        int 連番 = 1;
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
@@ -71,23 +70,21 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport
                 throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
             }
             if (銀振印字位置 <= 銀振印字位置Para) {
-                edit(reportSourceWriter, 納入通知書期情報リストEdit, 連番);
+                edit(reportSourceWriter, 納入通知書期情報リストEdit);
                 納入通知書期情報リストEdit.clear();
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                連番++;
             } else {
                 納入通知書期情報リストEdit.add(納入通知書期情報);
             }
             銀振印字位置Para = 銀振印字位置;
         }
-        edit(reportSourceWriter, 納入通知書期情報リストEdit, 連番);
+        edit(reportSourceWriter, 納入通知書期情報リストEdit);
     }
 
     private void edit(ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoSource> reportSourceWriter,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            int 連番) {
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         IKarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor editor = new KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoEditor(
-                仮算定納入通知書情報, 納入通知書期情報リスト, ninshoshaSource, 連番);
+                仮算定納入通知書情報, 納入通知書期情報リスト, ninshoshaSource);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriRenchoBuilder builder
                 = new KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoBuilder(editor);
         reportSourceWriter.writeLine(builder);

@@ -43,17 +43,15 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriEditor implements IKarisante
      *
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
-     * @param 連番 連番
      */
     protected KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            int 連番) {
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.連番 = 連番;
+        this.連番 = 仮算定納入通知書情報.get連番();
     }
 
     @Override

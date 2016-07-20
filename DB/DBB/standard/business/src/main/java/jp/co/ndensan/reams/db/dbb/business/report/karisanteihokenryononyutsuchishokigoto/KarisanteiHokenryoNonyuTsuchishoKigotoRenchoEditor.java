@@ -59,7 +59,6 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
      * インスタンスを生成します。
      *
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
-     * @param 連番 連番
      * @param ninshoshaSource 雛形部品CompNinshosha
      * @param 領収書連番 領収書連番
      * @param 納入通知書期情報 納入通知書期情報
@@ -67,7 +66,6 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     protected KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
-            int 連番,
             NinshoshaSource ninshoshaSource,
             int 領収書連番) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
@@ -79,7 +77,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
                 ? new NonyuTsuchiShoSeigyoJoho() : 仮算定納入通知書制御情報.get納入通知書制御情報();
         this.納入通知書期情報 = 納入通知書期情報;
         this.納付書共通 = null == 仮算定納入通知書情報.get納付書共通() ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
-        this.連番 = 連番;
+        this.連番 = 仮算定納入通知書情報.get連番();
         this.ninshoshaSource = ninshoshaSource;
         this.領収書連番 = new RString(String.valueOf(領収書連番));
     }
