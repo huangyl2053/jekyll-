@@ -9,15 +9,12 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran.Sh
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranFindler;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 審査会委員実績照会の画面処理クラスです
@@ -36,9 +33,6 @@ public class ShisakaiIinJissekiShokai {
      * @return ResponseData<ShisakaiIinJissekiShokaiDiv>
      */
     public ResponseData<ShisakaiIinJissekiShokaiDiv> onLoad(ShisakaiIinJissekiShokaiDiv div) {
-        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
-                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
@@ -61,6 +55,11 @@ public class ShisakaiIinJissekiShokai {
      * @return ResponseData<ShisakaiIinJissekiShokaiDiv>
      */
     public ResponseData<ShisakaiIinJissekiShokaiDiv> onClick_BtnKensaku(ShisakaiIinJissekiShokaiDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForNyuryuku(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         RString 審査会開催日FROM = RString.EMPTY;
         RString 審査会開催日TO = RString.EMPTY;
         if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
@@ -113,7 +112,26 @@ public class ShisakaiIinJissekiShokai {
         return ResponseData.of(paramter).respond();
     }
 
+    /**
+     * ボタンを押下チェック処理。。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShisakaiIinJissekiShokaiDiv> onBefore_Dataoutput(ShisakaiIinJissekiShokaiDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).審査会委員実績一覧データの行選択チェック処理(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
     private ShisakaiIinJissekiShokaiHandler getHandler(ShisakaiIinJissekiShokaiDiv div) {
         return new ShisakaiIinJissekiShokaiHandler(div);
+    }
+
+    private ShisakaiIinJissekiShokaiValidationHandler getValidationHandler(ShisakaiIinJissekiShokaiDiv div) {
+        return new ShisakaiIinJissekiShokaiValidationHandler(div);
     }
 }

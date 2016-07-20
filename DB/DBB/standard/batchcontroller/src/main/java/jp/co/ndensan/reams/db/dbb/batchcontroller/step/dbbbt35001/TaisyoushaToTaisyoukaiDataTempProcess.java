@@ -27,7 +27,7 @@ public class TaisyoushaToTaisyoukaiDataTempProcess extends SimpleBatchProcessBas
     @Override
     protected void process() {
         business.getAtoFukaJohoList();
-        business.editAtoFukaJohoList(processParameter.get調定年度(), processParameter.get調定日時(),
+        business.editAtoFukaJohoList(processParameter.get賦課年度(), processParameter.get調定日時(),
                 processParameter.get増額平準化方法(), processParameter.get減額平準化方法());
     }
 

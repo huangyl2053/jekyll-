@@ -28,6 +28,7 @@ public class HanyoListShotokuJohoEntity {
 
     private FlexibleYear 所得年度;
     private ShikibetsuCode 識別コード;
+    private RString 履歴番号;
     private RString 課税区分減免前;
     private RString 課税区分減免後;
     private Decimal 合計所得金額;

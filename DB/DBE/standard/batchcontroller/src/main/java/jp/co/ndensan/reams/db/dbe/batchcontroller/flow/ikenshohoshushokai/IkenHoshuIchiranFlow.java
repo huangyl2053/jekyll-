@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 /**
  * 意見書作成報酬実績集計表のバッチフロークラスです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-020 chenxiangyu
  */
 public class IkenHoshuIchiranFlow extends BatchFlowBase<IkenHoshuIchiranBatchParameter> {
 

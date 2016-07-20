@@ -18,7 +18,7 @@ import lombok.Setter;
 /**
  * 意見書作成報酬照会の合計額リスト_バッチフロークラスパラメータクラスです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-020 chenxiangyu
  */
 @Setter
 @Getter
@@ -28,6 +28,7 @@ public class IkenHoshuIchiranBatchParameter extends BatchParameterBase {
     private static final String KEY_IRAISHO_SAKUSEI_IRAI_TO = "iraishoSakuseiIraiTo";
     private static final String KEY_IRAISHO_SAKUSEI_IRAI_FROM = "iraishoSakuseiIraiFrom";
     private static final String KEY_JOHO = "keyJoho";
+    private static final long serialVersionUID = 7174093335006943966L;
 
     @BatchParameter(key = KEY_SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
@@ -74,4 +75,5 @@ public class IkenHoshuIchiranBatchParameter extends BatchParameterBase {
                 iraishoSakuseiIraiFrom,
                 keyJoho);
     }
+
 }

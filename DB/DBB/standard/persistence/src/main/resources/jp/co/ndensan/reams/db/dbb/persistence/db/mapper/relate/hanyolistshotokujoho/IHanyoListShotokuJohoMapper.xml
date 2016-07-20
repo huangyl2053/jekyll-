@@ -8,9 +8,11 @@
         <include refid="selectHanyoListShotokuJohoEntity" />
     </select>
     <sql id="selectHanyoListShotokuJohoEntity">
+        select ROW_NUMBER() over(order by D."所得年度")as row ,* from (
         SELECT
         DbV2502."shotokuNendo"                                              AS 所得年度,
 	DbV2502."shikibetsuCode"                                            AS 識別コード,
+        DbV2502."rirekino"                                                  AS 履歴番号,
 	DbV2502."kazeiKubun"                                                AS 課税区分減免前,
 	DbV2502."kazeiKubunGemmenGo"                                        AS 課税区分減免後,
 	DbV2502."gokeiShotokuGaku"                                          AS 合計所得金額,
@@ -86,10 +88,17 @@
                 ON B."fukaNendo" = DbV2502."shotokuNendo"
                 AND B."hihokenshaNo" = DbV1001."hihokenshaNo"
         WHERE
-                DbV2502."shotokuNendo" = #{賦課年度}
-                AND DbV2502."kazeiKubun" IN(#{課税区分減免前s})
+                1=1
+                AND DbV2502."shotokuNendo" = #{賦課年度}
+                AND DbV2502."kazeiKubun" IN 
+                <foreach collection="課税区分減免前s" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
                 <if test="住民税減免前後表示区分 == 1">
-                AND DbV2502."kazeiKubunGemmenGo" IN (#{課税区分減免後s})
+                AND DbV2502."kazeiKubunGemmenGo" IN 
+                <foreach collection="課税区分減免後s" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
                 </if>
                 <if test="抽出期間From != null and !抽出期間From.isEmpty()">
                 AND DbV2502."shoriTimeStamp" <![CDATA[>=]]> #{抽出期間From}
@@ -97,12 +106,15 @@
                 <if test="抽出期間To !=null and !抽出期間To.isEmpty()">
                 AND DbV2502."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間To}
                 </if>
+                ) as D
     </sql>
     
     <resultMap id="resultMapHanyoListShotokuJohoEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoEntity">
+        <id column="row"/>
         <result property="所得年度" column="所得年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="課税区分減免前" column="課税区分減免前" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="課税区分減免後" column="課税区分減免後" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合計所得金額" column="合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

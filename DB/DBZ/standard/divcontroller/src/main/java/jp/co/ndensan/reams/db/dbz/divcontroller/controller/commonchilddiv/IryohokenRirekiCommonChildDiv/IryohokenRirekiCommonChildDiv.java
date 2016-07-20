@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.iryohokenkanyujokyo.IryohokenRirekiCommonChildDivDate;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 共有子Div「医療保険履歴」のイベントを定義した共有子Divです。
@@ -139,8 +141,7 @@ public class IryohokenRirekiCommonChildDiv {
     }
 
     private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
-        RString 医療保険情報_識別コード = requestDiv.get識別コード();
-
+        RString 医療保険情報_識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, RString.class);
         List<dgIryohokenIchiran_Row> 医療保険情報RiReKiNoSortList = requestDiv.getDgIryohokenIchiran().getDataSource();
         Collections.sort(医療保険情報RiReKiNoSortList, new RiReKiNoComparator());
         Decimal riReKiNo = Decimal.ZERO;

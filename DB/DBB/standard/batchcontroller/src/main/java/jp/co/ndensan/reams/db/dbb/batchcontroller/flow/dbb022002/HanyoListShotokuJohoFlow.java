@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb022002;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb022002.HanyoListShotokuJohoNoRenbanProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb022002.HanyoListShotokuJohoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho.HanyoListShotokuJohoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -27,7 +28,11 @@ public class HanyoListShotokuJohoFlow extends BatchFlowBase<HanyoListShotokuJoho
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        return loopBatch(HanyoListShotokuJohoProcess.class)
+        if (getParameter().is連番付加()) {
+            return loopBatch(HanyoListShotokuJohoProcess.class)
+                    .arguments(getParameter().toProcessParameter()).define();
+        }
+        return loopBatch(HanyoListShotokuJohoNoRenbanProcess.class)
                 .arguments(getParameter().toProcessParameter()).define();
     }
 

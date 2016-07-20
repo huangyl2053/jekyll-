@@ -408,6 +408,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
                         bodyList.add(RString.EMPTY);
                     }
                 }
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, 特別徴収_EUCファイル名);
@@ -677,7 +678,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
             介護期別Relate.set介護期別Entity(介護期別Entity);
             介護期別Relate.set調定共通Entity(調定共通EntityList);
             介護期別RelateEntity.add(介護期別Relate);
-            i = i++;
+            i = i + INT_1;
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         return new FukaJoho(fukaJohoRelateEntity);
@@ -813,7 +814,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         if (outputOrder == null || outputOrder.get設定項目リスト() == null) {
             return;
         }
-        int i = 1;
+        int i = INT_1;
         for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
             if (i <= INT_5) {
                 出力順項目List.add(setSortItem.get項目名());
@@ -821,7 +822,16 @@ public class TokuchoKaishiTsuchishoDataHenshu {
                     改ページ項目List.add(setSortItem.get項目名());
                 }
             }
-            i = i + 1;
+            i = i + INT_1;
+        }
+    }
+
+    private void toBodyList(List<RString> bodyList) {
+        for (int i = INT_0; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
         }
     }
 

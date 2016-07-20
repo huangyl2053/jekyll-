@@ -51,9 +51,12 @@
             計算後情報."choteiNendo" = #{調定年度}
             AND 計算後情報."fukaNendo" = #{賦課年度}
             AND 計算後情報."koseiZengoKubun" = '2'
-        AND  計算後情報."tkKibetsuGaku01" <![CDATA[<>]]> 0
+        AND  計算後情報."tkKibetsuGaku01" <![CDATA[<>]]> 0 
+        AND  計算後情報."tkKibetsuGaku01" is not null 
         AND  計算後情報."tkKibetsuGaku02" <![CDATA[<>]]> 0
+        AND  計算後情報."tkKibetsuGaku02" is not null 
         AND  計算後情報."tkKibetsuGaku03" <![CDATA[<>]]> 0
+         AND  計算後情報."tkKibetsuGaku03" is not null 
     </select>
     
     <select resultOrdered="true" id="select前年度賦課情報"
@@ -273,6 +276,7 @@
         SET "hihokenshaKubun" = '0'
         WHERE A."dbT2015KeisangoJoho_choshuHoho4gatsu" IN ('1','2')
         AND A."zennendoTokuchoKibetsuKingaku06" <![CDATA[<>]]> 0
+        AND A."zennendoTokuchoKibetsuKingaku06" is not null
     </update>
     
     <update id="update仮算定一括発行一時_被保険者区分1">
