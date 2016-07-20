@@ -7,6 +7,14 @@ var DBD;
             Events.onClick_btnKensaku = function () {
                 return "onClick_btnKensaku";
             };
+
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
             return Events;
         })();
         TainoInfo.Events = Events;

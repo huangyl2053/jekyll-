@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.tainoinfo.TainoInfo;
 
+import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoHanteiResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /*
@@ -7,5 +8,5 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface ITainoInfoDiv extends ICommonChildDivBaseProperties {
 
-    void initialize();
+    TainoHanteiResult initialize();
 }

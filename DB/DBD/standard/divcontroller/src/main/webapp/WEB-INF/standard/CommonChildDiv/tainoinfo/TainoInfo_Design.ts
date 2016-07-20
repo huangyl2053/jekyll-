@@ -12,6 +12,14 @@ module DBD {
                 return "onClick_btnKensaku";
             }
 
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
+            }
+
         }
 
         export class Controls {

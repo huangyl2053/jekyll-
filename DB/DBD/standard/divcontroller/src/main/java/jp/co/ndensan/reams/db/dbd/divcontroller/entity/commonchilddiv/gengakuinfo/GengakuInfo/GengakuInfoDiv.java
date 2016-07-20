@@ -10,15 +10,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.KyufugakuGengakuInfo;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.KyufugakuGengakuMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoHanteiResult;
+import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoHanteiResultKohen;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.TainoKiSummary;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.TaishoHanteiKubun;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.tainoinfo.TainoInfo.dgTainoJokyo3_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -618,8 +619,9 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
         getTainoGengakuShosaiInfo().setIsOpen(false);
     }
 
-    public void init状態３(TainoHanteiResult 滞納判定結果) {
+    public void init状態３(TainoHanteiResultKohen 滞納判定結果) {
         getTainoNendo().setIsOpen(false);
+        getTainoGengakuShosaiInfo().setIsOpen(true);
         init状態３滞納状態詳細ヘッダエリア(getDgGenGaku().getActiveRow());
         init状態３滞納状態詳細エリア(滞納判定結果.get滞納情報(), 滞納判定結果.get滞納判定基準日());
 
@@ -671,6 +673,8 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
         }
         getDgGenGaku().setDataSource(dataSource);
         getTxtChoShushometsu1().setValue(給付額減額.get徴収権消滅期間());
+        getTxtChoShushometsu2().setValue(給付額減額.get徴収権消滅期間());
+        getTxtChoShushometsu3().setValue(給付額減額.get徴収権消滅期間());
         getTxtNofuZumiKikan().setValue(給付額減額.get納付済期間());
         getTxtGenGakuKikan().setValue(new Decimal(給付額減額.get給付額減額期間()));
     }
@@ -687,34 +691,43 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     private void init状態３滞納状態詳細エリア(List<TainoKiSummary> 滞納情報, FlexibleDate 滞納判定基準日) {
-        RDate 調定年度 = getDgGenGaku().getActiveRow().getTxtChoteiNendo().getValue();
-        if (調定年度 != null) {
-            for (TainoKiSummary summary : 滞納情報) {
-                if (new FlexibleYear(調定年度.toString()).equals(summary.get調定年度())) {
-                    dgTainoShosaiInfo_Row row = new dgTainoShosaiInfo_Row();
-                    if (summary.get調定年度() != null && summary.get調定年度().isValid()) {
-                        row.getTxtFukaNendo().setValue(new RDate(summary.get調定年度().toString()));
-                    }
-                    if (summary.get徴収方法() != null) {
-                        row.getTxtChoshuHoHo().setValue(summary.get徴収方法().get略称());
-                    }
-                    if (summary.get通知書番号() != null) {
-                        row.getTxttsuchishoNo().setValue(summary.get通知書番号().value());
-                    }
-                    row.getTxtKi().setValue(summary.get期());
-                    row.getTxtChoteiGaku().setValue(summary.get調定額());
-                    row.getTxtNokiGen().setValue(summary.get納期限());
-                    row.getTxtShunyuGaku().setValue(summary.get収入額());
-                    row.getTxtMinoGaku().setValue(summary.get滞納額());
-                    row.getTxtKokai().setValue(TaishoHanteiKubun.今回対象.equals(summary.get対象管理区分()) ? new RString("○") : RString.EMPTY);
-                    if (summary.get時効起算日() != null) {
-                        row.getTxtJikoKisanYMD().setValue(new RDate(summary.get時効起算日().toString()));
-                    }
-                    row.getTxtJikoKisanKbn().setValue(summary.get時効起算日区分().get名称());
-                    row.setCellBgColor(getBgColor(summary, 滞納判定基準日));
+        List<dgTainoShosaiInfo_Row> dataSource = new ArrayList<>();
+        FlexibleYear 調定年度 = new FlexibleYear(String.valueOf(getDgGenGaku().getActiveRow().getTxtChoteiNendo().getValue().getYearValue()));
+        List<TainoKiSummary> 滞納情報Array = new ArrayList<>();
+        滞納情報Array.addAll(滞納情報);
+        Collections.sort(滞納情報Array, new Comparator<TainoKiSummary>() {
+            @Override
+            public int compare(TainoKiSummary o1, TainoKiSummary o2) {
+                return o2.get賦課年度().compareTo(o1.get賦課年度());
+            }
+        });
+        for (TainoKiSummary summary : 滞納情報Array) {
+            if (調定年度.equals(summary.get調定年度())) {
+                dgTainoShosaiInfo_Row row = new dgTainoShosaiInfo_Row();
+                if (summary.get賦課年度() != null && summary.get賦課年度().isValid()) {
+                    row.getTxtFukaNendo().setValue(new RDate(summary.get賦課年度().toString()));
                 }
+                if (summary.get徴収方法() != null) {
+                    row.getTxtChoshuHoHo().setValue(summary.get徴収方法().get略称());
+                }
+                if (summary.get通知書番号() != null) {
+                    row.getTxttsuchishoNo().setValue(summary.get通知書番号().value());
+                }
+                row.getTxtKi().setValue(summary.get期());
+                row.getTxtChoteiGaku().setValue(summary.get調定額());
+                row.getTxtNokiGen().setValue(summary.get納期限());
+                row.getTxtShunyuGaku().setValue(summary.get収入額());
+                row.getTxtMinoGaku().setValue(summary.get滞納額());
+                row.getTxtKokai().setValue(TaishoHanteiKubun.今回対象.equals(summary.get対象管理区分()) ? new RString("○") : RString.EMPTY);
+                if (summary.get時効起算日() != null) {
+                    row.getTxtJikoKisanYMD().setValue(new RDate(summary.get時効起算日().toString()));
+                }
+                row.getTxtJikoKisanKbn().setValue(summary.get時効起算日区分().get名称());
+                row.setCellBgColor(getBgColor(summary, 滞納判定基準日));
+                dataSource.add(row);
             }
         }
+        getDgTainoShosaiInfo().setDataSource(dataSource);
     }
 
     private Map<String, DataGridCellBgColor> getBgColor(TainoKiSummary summary, FlexibleDate 滞納判定基準日) {
@@ -732,7 +745,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
             bgColor = DataGridCellBgColor.bgColorLightRed;
         }
         Map<String, DataGridCellBgColor> colorMap = new HashMap<>();
-        Class clazz = dgTainoJokyo3_Row.class;
+        Class clazz = dgTainoShosaiInfo_Row.class;
         for (Field field : clazz.getDeclaredFields()) {
             colorMap.put(field.getName(), bgColor);
         }
