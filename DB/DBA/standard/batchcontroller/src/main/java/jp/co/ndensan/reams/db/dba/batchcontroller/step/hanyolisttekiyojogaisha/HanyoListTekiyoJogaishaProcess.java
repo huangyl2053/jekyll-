@@ -134,8 +134,6 @@ public class HanyoListTekiyoJogaishaProcess extends BatchProcessBase<HanyoListTe
                 key.set地区コード3終了値(new ChikuCode(processParamter.getPsmChiku3_To()));
             }
         }
-        key.set町域コード開始値(ChoikiCode.EMPTY);
-        key.set町域コード開始値(ChoikiCode.EMPTY);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
