@@ -565,9 +565,9 @@ public class TokuchoTaishoshaIchiranHandler {
      */
     public TokuchoDouteiKouhoshaShousaiJoho show特別徴収同定候補者詳細情報(RString 特別徴収開始月, RString 捕捉月) {
         RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        RString 基礎年金番号 = div.getDgTokuchoDoteiKohoshaIchiran().getSelectedItems().get(NUM0).getTxtNenkinKaifukuInfoKisoNenkinNo().getValue();
-        RString 年金コード = div.getDgTokuchoDoteiKohoshaIchiran().getSelectedItems().get(NUM0).getTxtNenkinKaifukuInfoNenkinCode().getValue();
-        RString 識別コードTemp = div.getDgTokuchoDoteiKohoshaIchiran().getSelectedItems().get(NUM0).getTxtShikibetsuCode();
+        RString 基礎年金番号 = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().getTxtNenkinKaifukuInfoKisoNenkinNo().getValue();
+        RString 年金コード = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().getTxtNenkinKaifukuInfoNenkinCode().getValue();
+        RString 識別コードTemp = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().getTxtShikibetsuCode();
         ShikibetsuCode 識別コード = 識別コードTemp == null ? null : new ShikibetsuCode(識別コードTemp);
         RString 開始月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE) && !特別徴収開始月.startsWith(LEFT)) {
