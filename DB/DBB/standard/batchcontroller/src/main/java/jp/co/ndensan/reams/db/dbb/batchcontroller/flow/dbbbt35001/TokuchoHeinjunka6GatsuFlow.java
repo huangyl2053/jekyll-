@@ -105,7 +105,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     }
 
     /**
-     * 平準化対象者と対象外データTEMP作成を行います。
+     * 介護情報の登録を行います。
      *
      * @return バッチコマンド
      */
