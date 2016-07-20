@@ -24,26 +24,4 @@ public final class TokuchoHeijunkaRokuBatchTaishoshaEntity implements Cloneable,
     private DbT2015KeisangoJohoEntity 計算後情報;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
 
-    /**
-     * コンストラクタです。
-     */
-    public TokuchoHeijunkaRokuBatchTaishoshaEntity() {
-        this.特別徴収義務者コード = null;
-        this.計算後情報 = null;
-        this.宛名 = null;
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param 特別徴収義務者コード RString
-     * @param 計算後情報 DbT2015KeisangoJohoEntity
-     * @param 宛名 UaFt200FindShikibetsuTaishoEntity
-     */
-    public TokuchoHeijunkaRokuBatchTaishoshaEntity(RString 特別徴収義務者コード, DbT2015KeisangoJohoEntity 計算後情報,
-            UaFt200FindShikibetsuTaishoEntity 宛名) {
-        this.特別徴収義務者コード = 特別徴収義務者コード;
-        this.計算後情報 = 計算後情報;
-        this.宛名 = 宛名;
-    }
 }
