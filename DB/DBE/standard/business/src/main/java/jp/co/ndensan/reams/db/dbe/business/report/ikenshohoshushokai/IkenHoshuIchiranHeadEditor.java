@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書作成報酬実績集計表のEditorです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-030 chenxiangyu
  */
 public class IkenHoshuIchiranHeadEditor implements IIkenHoshuIchiranEditor {
 

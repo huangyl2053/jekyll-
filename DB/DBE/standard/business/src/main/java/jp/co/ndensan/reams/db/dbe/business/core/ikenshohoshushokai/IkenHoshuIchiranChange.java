@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 主治医意見書作成実績集計表の帳票のパラメータを作成します。
+ * 主治医意見書作の帳票のパラメータを作成します。
  *
- * @reamsid_L DBE-1690-020 dongyabin
+ * @reamsid_L DBE-1930-030 chenxiangyu
  */
 public final class IkenHoshuIchiranChange {
 

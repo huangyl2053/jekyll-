@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 主治医意見書作成報酬の合計データの帳票のパラメータクラスです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-030 chenxiangyu
  */
 @Getter
 @Setter
