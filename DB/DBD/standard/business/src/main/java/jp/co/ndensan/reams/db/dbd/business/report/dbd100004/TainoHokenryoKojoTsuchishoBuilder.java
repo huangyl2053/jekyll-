@@ -33,8 +33,7 @@ public class TainoHokenryoKojoTsuchishoBuilder implements ITainoHokenryoKojoTsuc
      */
     @Override
     public TainoHokenryoKojoTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new TainoHokenryoKojoTsuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new TainoHokenryoKojoTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
 
 }
