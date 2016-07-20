@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShinsakaiKekkaTorokuValidationHandler {
 
     private final ShinsakaiKekkaTorokuDiv div;
-    private static final RString 介護１ = new RString("介護１");
+    private static final RString 介護１ = new RString("介1");
 
     /**
      * コンストラクタです。
@@ -57,7 +57,8 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 有効月数チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ZERO) == 0) {
+        if (div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() == null
+                || div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().compareTo(Decimal.ZERO) == 0) {
             validPairs.add(new ValidationMessageControlPair(
                     new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
         }

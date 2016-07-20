@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 介護保険連絡票_実質負担軽減者用のプロパティです。
  *
- * @reamsid_L DBU-1290-060 wangrenze
+ * @reamsid_L DBA-1290-060 wangrenze
  */
 public class KaigohokenRenrakuhyoJisshitsuFutanProperty extends ReportPropertyBase<KaigohokenRenrakuhyoJisshitsuFutanReportSource> {
 

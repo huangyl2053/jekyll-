@@ -25,4 +25,6 @@ public class TokuchoTaishoshaIchiranSakuseiResult {
     private RString 特別徴収開始月;
     private List<RString> 捕捉月リスト;
     private RString 出力対象;
+    private boolean 確認状況区分;
+
 }

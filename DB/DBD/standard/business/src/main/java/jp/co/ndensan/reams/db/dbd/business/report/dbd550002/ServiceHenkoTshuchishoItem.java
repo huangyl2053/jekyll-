@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd550002;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -31,7 +32,7 @@ public class ServiceHenkoTshuchishoItem {
     private final RString hihokenshaNo8;
     private final RString hihokenshaNo9;
     private final RString hihokenshaNo10;
-    private final RString henkoYMD;
+    private final FlexibleDate henkoYMD;
     private final RString maeService;
     private final RString atoService;
     private final RString riyu;
@@ -165,7 +166,7 @@ public class ServiceHenkoTshuchishoItem {
             RString hihokenshaNo8,
             RString hihokenshaNo9,
             RString hihokenshaNo10,
-            RString henkoYMD,
+            FlexibleDate henkoYMD,
             RString maeService,
             RString atoService,
             RString riyu,

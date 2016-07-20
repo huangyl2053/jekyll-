@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd532001;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -34,11 +35,11 @@ public class YokaigoNinteiKekkaTshuchishoItem {
     private final RString kekkaKosho;
     private final RString kekkaName;
     private final RString kekkaYMDKosho;
-    private final RString kekkaYMD;
+    private final FlexibleDate kekkaYMD;
     private final RString riyu;
     private final RString serviceShurui1;
-    private final RString yukoKaishiYMD;
-    private final RString yukoShuryoYMD;
+    private final FlexibleDate yukoKaishiYMD;
+    private final FlexibleDate yukoShuryoYMD;
     private final RString tsuchibun2;
     private final RString tsuchibun3;
     private final RString tsuchibun4;
@@ -176,11 +177,11 @@ public class YokaigoNinteiKekkaTshuchishoItem {
             RString kekkaKosho,
             RString kekkaName,
             RString kekkaYMDKosho,
-            RString kekkaYMD,
+            FlexibleDate kekkaYMD,
             RString riyu,
             RString serviceShurui1,
-            RString yukoKaishiYMD,
-            RString yukoShuryoYMD,
+            FlexibleDate yukoKaishiYMD,
+            FlexibleDate yukoShuryoYMD,
             RString tsuchibun2,
             RString tsuchibun3,
             RString tsuchibun4,

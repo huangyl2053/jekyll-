@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteiimag
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * イメージ管理情報を取得するクラスです。
@@ -51,6 +52,7 @@ public class YokaigoninteiimagekanriFinder {
      * @param shinseishoKanriNo RString
      * @return イメージ管理情報
      */
+    @Transaction
     public ImagekanriJoho getImageJoho(RString shinseishoKanriNo) {
         IYokaigoninteiimagekanriMapper mapper = mapperProvider.create(IYokaigoninteiimagekanriMapper.class);
         return new ImagekanriJoho(mapper.getImageJoho(shinseishoKanriNo));

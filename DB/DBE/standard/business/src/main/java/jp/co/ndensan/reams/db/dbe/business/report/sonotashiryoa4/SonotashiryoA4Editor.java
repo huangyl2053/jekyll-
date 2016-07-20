@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 事務局用その他資料のEditorです。
+ * その他資料のEditorです。
  *
  * @reamsid_L DBE-0150-080 wangrenze
  */
@@ -37,7 +37,7 @@ public class SonotashiryoA4Editor implements ISonotashiryoA4Editor {
     }
 
     /**
-     * 事務局用その他資料を編集します。
+     * その他資料を編集します。
      *
      * @param source 帳票ソース
      * @return 帳票ソース

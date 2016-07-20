@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshato
  *
  * @reamsid_L DBC-2010-090 jiangzongyue
  */
-public interface ISetaiShotokuKazeiHanteiMapper {
+public interface ISetaiiShotokuKazeiHanteiMapper {
 
     /**
      * creat世帯員所得情報高額一時テーブルメソッドです。

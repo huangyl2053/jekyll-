@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufut
 /**
  * 介護保険連絡票_実質負担軽減者用のEditorです。
  *
- * @reamsid_L DBU-1290-060 wangrenze
+ * @reamsid_L DBA-1290-060 wangrenze
  */
 public class KaigohokenRenrakuhyoJisshitsuFutanEditor implements IKaigohokenRenrakuhyoJisshitsuFutanEditor {
 

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
- * 事務局用その他資料のReportSourceクラスです。
+ * その他資料のReportSourceクラスです。
  *
  * @reamsid_L DBE-0150-080 wangrenze
  */

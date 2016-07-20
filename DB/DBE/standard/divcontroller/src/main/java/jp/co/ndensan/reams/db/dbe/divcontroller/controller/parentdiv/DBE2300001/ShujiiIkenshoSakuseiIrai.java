@@ -523,9 +523,6 @@ public class ShujiiIkenshoSakuseiIrai {
         if (row.getShinseiDay().getValue() != null) {
             iraishoItem.setShinseiYMD(row.getShinseiDay().getValue().toDateString());
         }
-        if (div.getIraiprint().getTxtkigenymd().getValue() != null) {
-            iraishoItem.setTeishutsuKigen(div.getIraiprint().getTxtkigenymd().getValue().toDateString());
-        }
         iraishoItem.setShoriName(row.getIraiKubun());
         iraishoItem.setRemban(new RString("1"));
         ShujiiIraiAtenaJoho atenaJoho = get宛先(row);

@@ -28,10 +28,10 @@ public class TokubetsuChoshuDoteiMiDoteiIchiranFlow extends BatchFlowBase<Tokube
 
     @Override
     protected void defineFlow() {
-        if (ONE.equals(getParameter().get出力対象()) || ZERO.equals(getParameter().get出力対象())) {
+        if (ONE.equals(getParameter().getShuturyokuTaisho()) || ZERO.equals(getParameter().getShuturyokuTaisho())) {
             executeStep(特別徴収同定一覧表);
         }
-        if (TWO.equals(getParameter().get出力対象()) || ZERO.equals(getParameter().get出力対象())) {
+        if (TWO.equals(getParameter().getShuturyokuTaisho()) || ZERO.equals(getParameter().getShuturyokuTaisho())) {
             executeStep(特別徴収未同定一覧表);
         }
     }

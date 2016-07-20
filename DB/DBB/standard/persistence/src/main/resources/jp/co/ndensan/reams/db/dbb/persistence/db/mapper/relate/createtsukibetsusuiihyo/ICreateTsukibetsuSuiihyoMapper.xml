@@ -401,6 +401,9 @@
             SUM(koumokuSyoukeyi."itiGetuNinsu") AS "itiGetuNinsu",
             SUM(koumokuSyoukeyi."niGetuNinsu") AS "niGetuNinsu",
             SUM(koumokuSyoukeyi."sanGetuNinsu") AS "sanGetuNinsu",
+            SUM(koumokuSyoukeyi."gennenSuyijiNinsu") AS "gennenSuyijiNinsu",
+            SUM(koumokuSyoukeyi."kanendoNinsu") AS "kanendoNinsu",
+            SUM(koumokuSyoukeyi."sayisyutuKanpuNinsu") AS "sayisyutuKanpuNinsu",
             SUM(koumokuSyoukeyi."yoGetuKinkaku") AS "yoGetuKinkaku",
             SUM(koumokuSyoukeyi."goGetuKinkaku") AS "goGetuKinkaku",
             SUM(koumokuSyoukeyi."rokuGetuKinkaku") AS "rokuGetuKinkaku",
@@ -599,8 +602,8 @@
                         AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
-            AND (fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -1 AS character(4)))
-                OR fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -2 AS character(4))))
+            AND (fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -1 AS character(4)))
+                OR fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -2 AS character(4))))
             AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
             AND fukaT."rirekiNo" = fuka."rirekiNo"
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"
@@ -683,9 +686,9 @@
                         AND T."choteiNichiji" <![CDATA[<=]]> #{choteiKijunNichiji}
                     GROUP BY T."choteiNendo", T."fukaNendo", T."tsuchishoNo", T."hihokenshaNo") AS fukaT
             ON fukaT."choteiNendo" = fuka."choteiNendo"
-            AND (fukaT."fukaNendo" = '2016'
-                OR fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -1 AS character(4))) 
-                OR fukaT."fukaNendo" = (CAST(CAST(fuka."fukaNendo" AS integer ) -2 AS character(4))))
+            AND (fukaT."fukaNendo" = #{choteiNendo}
+                OR fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -1 AS character(4))) 
+                OR fukaT."fukaNendo" = (CAST(CAST(fuka."choteiNendo" AS integer ) -2 AS character(4))))
             AND fukaT."tsuchishoNo" = fuka."tsuchishoNo"
             AND fukaT."rirekiNo" = fuka."rirekiNo"
             AND fukaT."hihokenshaNo" = fuka."hihokenshaNo"

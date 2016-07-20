@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd532001;
 
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd532001.YokaigoNinteiKekkaTshuchishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定結果通知書ボディEditorです。
@@ -54,11 +58,14 @@ public class YokaigoNinteiKekkaTshuchishoBodyEditor implements IYokaigoNinteiKek
         source.kekkaKosho = item.getKekkaKosho();
         source.kekkaName = item.getKekkaName();
         source.kekkaYMDKosho = item.getKekkaYMDKosho();
-        source.kekkaYMD = item.getKekkaYMD();
+        source.kekkaYMD = item.getKekkaYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         source.riyu = item.getRiyu();
         source.serviceShurui1 = item.getServiceShurui1();
-        source.yukoKaishiYMD = item.getYukoKaishiYMD();
-        source.yukoShuryoYMD = item.getYukoShuryoYMD();
+        source.yukoKaishiYMD = item.getYukoKaishiYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        source.yukoShuryoYMD = item.getYukoShuryoYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         source.tsuchibun2 = item.getTsuchibun2();
         source.tsuchibun3 = item.getTsuchibun3();
         source.tsuchibun4 = item.getTsuchibun4();

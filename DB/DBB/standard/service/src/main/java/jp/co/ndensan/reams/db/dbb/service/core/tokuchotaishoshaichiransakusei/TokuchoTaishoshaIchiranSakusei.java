@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokuchotaishoshaichiransakusei;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiKouhoshaListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiKouhoshaShousaiJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiListJoho;
@@ -16,19 +15,20 @@ import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.T
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiMybatisParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019TokuchoMidoteiJohoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2019TokuchoMidoteiJohoDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshaichiransakusei.ITokuchoTaishoshaIchiranSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NenkinHokenshaHantei;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -111,8 +111,10 @@ public class TokuchoTaishoshaIchiranSakusei {
      * @param 処理日付管理マスタDac DbT7022ShoriDateKanriDac
      * @param mapperProvider MapperProvider
      */
-    public TokuchoTaishoshaIchiranSakusei(DbT2019TokuchoMidoteiJohoDac 特徴未同定情報Dac, DbV2001ChoshuHohoAliveDac 徴収方法NewestDac,
-            DbT2001ChoshuHohoDac 徴収方法Dac, DbT7022ShoriDateKanriDac 処理日付管理マスタDac, MapperProvider mapperProvider) {
+    public TokuchoTaishoshaIchiranSakusei(DbT2019TokuchoMidoteiJohoDac 特徴未同定情報Dac,
+            DbV2001ChoshuHohoAliveDac 徴収方法NewestDac,
+            DbT2001ChoshuHohoDac 徴収方法Dac, DbT7022ShoriDateKanriDac 処理日付管理マスタDac,
+            MapperProvider mapperProvider) {
         this.特徴未同定情報Dac = 特徴未同定情報Dac;
         this.徴収方法NewestDac = 徴収方法NewestDac;
         this.徴収方法Dac = 徴収方法Dac;
@@ -141,27 +143,31 @@ public class TokuchoTaishoshaIchiranSakusei {
         }
         RDate nowDate = RDate.getNowDate();
         RString 処理名 = ShoriName.特徴対象者同定.get名称();
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタDac.selectMaxNendoNaiRenbanByKey(処理名, SubGyomuCode.DBB介護賦課, 調定年度);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理マスタDac.selectMaxNendoNaiRenbanByKey(処理名,
+                SubGyomuCode.DBB介護賦課, 調定年度);
         if (entity == null) {
             return null;
         }
         TokuchoTaishoshaIchiranSakuseiResult result = new TokuchoTaishoshaIchiranSakuseiResult();
         if (年度内連番_0001.equals(entity.getNendoNaiRenban())) {
-            RString 特徴開始月_2月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_2月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_2月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
             result.set捕捉月１(調定年度.toDateString().concat(STR02));
             result.set捕捉月表示内容(捕捉_2月);
             if (STR06.equals(特徴開始月_2月捕捉)) {
                 result.set特別徴収開始月(調定年度.toDateString().concat(STR08));
             }
         } else if (年度内連番_0002.equals(entity.getNendoNaiRenban())) {
-            RString 特徴開始月_4月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_4月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_4月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
             result.set捕捉月１(調定年度.toDateString().concat(STR04));
             result.set捕捉月表示内容(捕捉_4月);
             if (STR10.equals(特徴開始月_4月捕捉)) {
                 result.set特別徴収開始月(調定年度.toDateString().concat(STR10));
             }
         } else if (年度内連番_0003.equals(entity.getNendoNaiRenban())) {
-            RString 特徴開始月_6月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_6月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
             result.set捕捉月１(調定年度.toDateString().concat(STR06));
             result.set捕捉月表示内容(捕捉_6月);
             if (STR12.equals(特徴開始月_6月捕捉)) {
@@ -170,36 +176,40 @@ public class TokuchoTaishoshaIchiranSakusei {
                 result.set捕捉月２(調定年度.toDateString().concat(STR08));
                 result.set捕捉月３(調定年度.toDateString().concat(STR10));
                 result.set捕捉月表示内容(捕捉_6月_8月_10月);
-                result.set特別徴収開始月(調定年度.toDateString().concat(STR04));
+                result.set特別徴収開始月(調定年度.plusYear(NUM1).toDateString().concat(STR04));
             }
         } else if (年度内連番_0004.equals(entity.getNendoNaiRenban())) {
-            RString 特徴開始月_8月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_8月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
             result.set捕捉月１(調定年度.toDateString().concat(STR08));
             result.set捕捉月表示内容(捕捉_8月);
             if (STR02.equals(特徴開始月_8月捕捉)) {
-                result.set特別徴収開始月(調定年度.toDateString().concat(STR02));
+                result.set特別徴収開始月(調定年度.plusYear(NUM1).toDateString().concat(STR02));
             } else if (STR04.equals(特徴開始月_8月捕捉)) {
                 result.set捕捉月１(調定年度.toDateString().concat(STR06));
                 result.set捕捉月２(調定年度.toDateString().concat(STR08));
                 result.set捕捉月３(調定年度.toDateString().concat(STR10));
                 result.set捕捉月表示内容(捕捉_6月_8月_10月);
-                result.set特別徴収開始月(調定年度.toDateString().concat(STR04));
+                result.set特別徴収開始月(調定年度.plusYear(NUM1).toDateString().concat(STR04));
             }
         } else if (年度内連番_0005.equals(entity.getNendoNaiRenban())) {
-            RString 特徴開始月_6月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
-            RString 特徴開始月_10月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_6月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_10月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
             dealWhen年度内連番_0005(result, 調定年度, 特徴開始月_6月捕捉, 特徴開始月_10月捕捉);
         } else if (年度内連番_0006.equals(entity.getNendoNaiRenban())) {
-            RString 特徴開始月_10月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
-            RString 特徴開始月_12月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, nowDate, SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_10月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_10月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
+            RString 特徴開始月_12月捕捉 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_12月捕捉, nowDate,
+                    SubGyomuCode.DBB介護賦課);
             if (STR00.equals(特徴開始月_12月捕捉)) {
                 result.set捕捉月１(調定年度.toDateString().concat(STR12));
                 result.set捕捉月表示内容(捕捉_12月);
-                result.set特別徴収開始月(調定年度.toDateString().concat(STR08));
             } else if (STR04.equals(特徴開始月_10月捕捉)) {
                 result.set捕捉月１(調定年度.toDateString().concat(STR12));
                 result.set捕捉月表示内容(捕捉_12月);
-                result.set特別徴収開始月(調定年度.toDateString().concat(STR06));
+                result.set特別徴収開始月(調定年度.plusYear(NUM1).toDateString().concat(STR06));
             }
         }
         return result;
@@ -215,11 +225,11 @@ public class TokuchoTaishoshaIchiranSakusei {
             result.set捕捉月２(調定年度.toDateString().concat(STR08));
             result.set捕捉月３(調定年度.toDateString().concat(STR10));
             result.set捕捉月表示内容(捕捉_6月_8月_10月);
-            result.set特別徴収開始月(調定年度.toDateString().concat(STR04));
+            result.set特別徴収開始月(調定年度.plusYear(NUM1).toDateString().concat(STR04));
         } else if (STR04.equals(特徴開始月_10月捕捉) && !STR04.equals(特徴開始月_6月捕捉)) {
-            result.set特別徴収開始月(調定年度.toDateString().concat(STR10));
+            result.set捕捉月１(調定年度.toDateString().concat(STR10));
             result.set捕捉月表示内容(捕捉_10月);
-            result.set特別徴収開始月(調定年度.toDateString().concat(STR04));
+            result.set特別徴収開始月(調定年度.plusYear(NUM1).toDateString().concat(STR04));
         }
     }
 
@@ -231,7 +241,8 @@ public class TokuchoTaishoshaIchiranSakusei {
      * @param 捕捉月リスト List<RString>
      * @return List<TokuchoDouteiListJoho>
      */
-    public List<TokuchoDouteiListJoho> getTokuchoTaishoListJoho(FlexibleYear 処理年度, RString 開始月, List<RString> 捕捉月リスト) {
+    public List<TokuchoDouteiListJoho> getTokuchoTaishoListJoho(FlexibleYear 処理年度, RString 開始月,
+            List<RString> 捕捉月リスト) {
         if (処理年度 == null || 捕捉月リスト == null || 捕捉月リスト.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
@@ -349,8 +360,8 @@ public class TokuchoTaishoshaIchiranSakusei {
      * @param 捕捉月 RString
      * @return List<TokuchoDouteiKouhoshaShousaiJoho>
      */
-    public List<TokuchoDouteiKouhoshaShousaiJoho> getTokuchoTaishoKouhosyaDetailJoho(FlexibleYear 処理年度, RString 基礎年金番号,
-            RString 年金コード, RString 開始月, RString 捕捉月, ShikibetsuCode 識別コード) {
+    public List<TokuchoDouteiKouhoshaShousaiJoho> getTokuchoTaishoKouhosyaDetailJoho(FlexibleYear 処理年度,
+            RString 基礎年金番号, RString 年金コード, RString 開始月, RString 捕捉月, ShikibetsuCode 識別コード) {
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
         param.set基礎年金番号(基礎年金番号);
@@ -363,36 +374,38 @@ public class TokuchoTaishoshaIchiranSakusei {
         if (resultEntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        RString ue基礎年金番号;
-        RString ue年金コード;
-        RString ue捕捉月;
-        FlexibleYear ue処理年度;
+        RString 分配集約_基礎年金番号;
+        RString 分配集約_年金コード;
+        RString 分配集約_捕捉月;
+        FlexibleYear 分配集約_処理年度;
         NenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
         List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List = new ArrayList();
         if (開始月_8月.compareTo(開始月) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {
-                    ue処理年度 = entity.getDbt2001entity().getFukaNendo();
-                    ue基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
-                    ue年金コード = entity.getDbt2001entity().getKariNenkinCode();
-                    ue捕捉月 = entity.getDbt2001entity().getKariHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
-                            GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
+                    分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
+                    分配集約_基礎年金番号 = entity.getDbt2001entity().getKariNenkinNo();
+                    分配集約_年金コード = entity.getDbt2001entity().getKariNenkinCode();
+                    分配集約_捕捉月 = entity.getDbt2001entity().getKariHosokuM();
+                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                            分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
                     get年金特徴回付情報value(nenkintokuchokaifujoho, result);
                 }
                 同定候補者詳細情報List.add(result);
             }
-        } else if (開始月_10月.compareTo(開始月) == NUM0 || 開始月_12月.compareTo(開始月) == NUM0 || 開始月_2月.compareTo(開始月) == NUM0) {
+        } else if (開始月_10月.compareTo(開始月) == NUM0 || 開始月_12月.compareTo(開始月) == NUM0
+                || 開始月_2月.compareTo(開始月) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {
-                    ue処理年度 = entity.getDbt2001entity().getFukaNendo();
-                    ue基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
-                    ue年金コード = entity.getDbt2001entity().getHonNenkinCode();
-                    ue捕捉月 = entity.getDbt2001entity().getHonHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
-                            GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
+                    分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
+                    分配集約_基礎年金番号 = entity.getDbt2001entity().getHonNenkinNo();
+                    分配集約_年金コード = entity.getDbt2001entity().getHonNenkinCode();
+                    分配集約_捕捉月 = entity.getDbt2001entity().getHonHosokuM();
+                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                            分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード,
+                            分配集約_捕捉月);
                     get年金特徴回付情報value(nenkintokuchokaifujoho, result);
                 }
                 同定候補者詳細情報List.add(result);
@@ -401,12 +414,12 @@ public class TokuchoTaishoshaIchiranSakusei {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {
-                    ue処理年度 = entity.getDbt2001entity().getFukaNendo();
-                    ue基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
-                    ue年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
-                    ue捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
-                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(
-                            GyomuCode.DB介護保険, ue処理年度, ue基礎年金番号, ue年金コード, ue捕捉月);
+                    分配集約_処理年度 = entity.getDbt2001entity().getFukaNendo();
+                    分配集約_基礎年金番号 = entity.getDbt2001entity().getYokunendoKariNenkinNo();
+                    分配集約_年金コード = entity.getDbt2001entity().getYokunendoKariNenkinCode();
+                    分配集約_捕捉月 = entity.getDbt2001entity().getYokunendoKariHosokuM();
+                    NenkinTokuchoKaifuJoho nenkintokuchokaifujoho = manager.get年金特徴対象者情報(GyomuCode.DB介護保険,
+                            分配集約_処理年度, 分配集約_基礎年金番号, 分配集約_年金コード, 分配集約_捕捉月);
                     get年金特徴回付情報value(nenkintokuchokaifujoho, result);
                 }
                 同定候補者詳細情報List.add(result);
@@ -420,10 +433,12 @@ public class TokuchoTaishoshaIchiranSakusei {
         return 同定候補者詳細情報List;
     }
 
-    private void get年金特徴回付情報value(NenkinTokuchoKaifuJoho nenkintokuchokaifujoho, TokuchoDouteiKouhoshaShousaiJoho result) {
+    private void get年金特徴回付情報value(NenkinTokuchoKaifuJoho nenkintokuchokaifujoho,
+            TokuchoDouteiKouhoshaShousaiJoho result) {
         if (nenkintokuchokaifujoho != null) {
             if (nenkintokuchokaifujoho.getDT特別徴収義務者コード() != null) {
-                result.set登録済年金情報_特別徴収義務者コード(nenkintokuchokaifujoho.getDT特別徴収義務者コード().value().value());
+                result.set登録済年金情報_特別徴収義務者コード(
+                        nenkintokuchokaifujoho.getDT特別徴収義務者コード().value().value());
             }
             result.set登録済年金情報_基礎年金番号(nenkintokuchokaifujoho.get基礎年金番号());
             result.set登録済年金情報_年金コード(nenkintokuchokaifujoho.get年金コード());
@@ -445,7 +460,8 @@ public class TokuchoTaishoshaIchiranSakusei {
      * @param 識別コード RString
      */
     public void kakuninJotaiUpdate(FlexibleYear 処理年度, RString 基礎年金番号, RString 被保険者番号,
-            RString 年金コード, RString 開始月, RString 捕捉月, RString 確認状況区分, ShikibetsuCode 識別コード, RString 特別徴収義務者コード) {
+            RString 年金コード, RString 開始月, RString 捕捉月, RString 確認状況区分, ShikibetsuCode 識別コード,
+            RString 特別徴収義務者コード) {
         DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報Entity = 特徴未同定情報Dac.selectByKey(
                 処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
         特徴未同定情報Entity.setKakuninJokyoKbn(確認状況区分);
@@ -465,7 +481,8 @@ public class TokuchoTaishoshaIchiranSakusei {
             } else {
                 被保険者番号Temp = HihokenshaNo.EMPTY;
             }
-            DbV2001ChoshuHohoEntity 徴収方法NewestEntity = 徴収方法NewestDac.selectChoshuhohonojohoAll(処理年度, 被保険者番号Temp);
+            DbV2001ChoshuHohoEntity 徴収方法NewestEntity = 徴収方法NewestDac.selectChoshuhohonojohoAll(
+                    処理年度, 被保険者番号Temp);
             if (徴収方法NewestEntity == null) {
                 return;
             }
@@ -474,9 +491,11 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setRirekiNo(徴収方法業務概念.get履歴番号() + NUM1);
             RString 徴収方法;
             if (NenkinHokenshaHantei.createInstance().is厚労省(特別徴収義務者コード)) {
-                徴収方法 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_厚生労働省.getコード();
+                徴収方法 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_厚生労働省
+                        .getコード();
             } else {
-                徴収方法 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済.getコード();
+                徴収方法 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済
+                        .getコード();
             }
             if (STR08.compareTo(開始月) == NUM0) {
                 徴収方法entity.setChoshuHoho8gatsu(徴収方法);
@@ -577,7 +596,8 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
             徴収方法entity.setState(EntityDataState.Added);
             徴収方法Dac.save(徴収方法entity);
-            特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
+            特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
+                    処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
             if (特徴未同定情報List == null || 特徴未同定情報List.isEmpty()) {
                 return;
             }
@@ -589,8 +609,9 @@ public class TokuchoTaishoshaIchiranSakusei {
         }
     }
 
-    private void その他候補者データを登録する(RString 開始月, FlexibleYear 処理年度, DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報entity,
-            RString 基礎年金番号, RString 年金コード, RString 捕捉月) {
+    private void その他候補者データを登録する(RString 開始月, FlexibleYear 処理年度,
+            DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報entity, RString 基礎年金番号,
+            RString 年金コード, RString 捕捉月) {
         //qa  965
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
@@ -744,16 +765,18 @@ public class TokuchoTaishoshaIchiranSakusei {
         }
         RDateTime nowDateTime = RDateTime.now();
         TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter param = new TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter();
-        param.set処理年度(new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDateTime.getDate(), SubGyomuCode.DBB介護賦課)));
-        param.set捕捉月リスト(new ArrayList());
+        param.setShoriNendo(new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                nowDateTime.getDate(), SubGyomuCode.DBB介護賦課)));
+        param.setHosokudukiList(new ArrayList());
         if (result.get捕捉月リスト() != null && !result.get捕捉月リスト().isEmpty()) {
             for (RString 捕捉月 : result.get捕捉月リスト()) {
-                param.get捕捉月リスト().add(捕捉月);
+                param.getHosokudukiList().add(捕捉月);
             }
         }
-        param.set特別徴収開始月(result.get特別徴収開始月());
-        param.set出力対象(result.get出力対象());
-        param.set処理日時(new YMDHMS(nowDateTime));
+        param.setTokubetuchoshuKaishiDuki(result.get特別徴収開始月());
+        param.setShuturyokuTaisho(result.get出力対象());
+        param.setShoriNichiji(new YMDHMS(nowDateTime));
+        param.setKakuninJokyoKubun(result.is確認状況区分());
         return param;
     }
 
@@ -765,7 +788,8 @@ public class TokuchoTaishoshaIchiranSakusei {
      * @param 捕捉月リスト List<RString>
      * @return List<TokuchoDouteiKouhoshaShousaiJoho>
      */
-    public List<TokuchoDouteiKouhoshaShousaiJoho> getHihokenshaJoho(FlexibleYear 処理年度, RString 開始月, List<RString> 捕捉月リスト) {
+    public List<TokuchoDouteiKouhoshaShousaiJoho> getHihokenshaJoho(FlexibleYear 処理年度, RString 開始月,
+            List<RString> 捕捉月リスト) {
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
         mapper = mapperProvider.create(ITokuchoTaishoshaIchiranSakuseiMapper.class);
@@ -792,7 +816,8 @@ public class TokuchoTaishoshaIchiranSakusei {
                 }
                 同定候補者詳細情報List.add(result);
             }
-        } else if (開始月_10月.compareTo(開始月) == NUM0 || 開始月_12月.compareTo(開始月) == NUM0 || 開始月_2月.compareTo(開始月) == NUM0) {
+        } else if (開始月_10月.compareTo(開始月) == NUM0 || 開始月_12月.compareTo(開始月) == NUM0
+                || 開始月_2月.compareTo(開始月) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {

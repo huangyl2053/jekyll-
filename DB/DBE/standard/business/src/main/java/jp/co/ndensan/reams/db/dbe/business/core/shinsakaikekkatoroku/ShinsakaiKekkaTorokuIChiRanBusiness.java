@@ -244,6 +244,19 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
     }
 
     /**
+     * 一次判定を取得します。
+     *
+     * @return 一次判定
+     */
+    public RString get一次判定() {
+        Code コード = entity.get要介護認定一次判定結果コード();
+        if (コード != null && !コード.isEmpty()) {
+            return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
      * 状態像を取得します。
      *
      * @return 状態像コ

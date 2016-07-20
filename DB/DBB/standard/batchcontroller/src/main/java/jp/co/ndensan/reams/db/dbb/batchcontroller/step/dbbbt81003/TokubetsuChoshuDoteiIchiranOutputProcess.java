@@ -166,7 +166,7 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
             targets.add(target);
         }
         TokubetsuChoshuDoteiIchiranPrintService printService = new TokubetsuChoshuDoteiIchiranPrintService();
-        printService.print(targets, new ReportManager());
+        printService.print(targets, null, null, new ReportManager(), null);
     }
 
     private void outputCsv(List<TokubetsuChoshuDoteiIchiranEntity> list) {

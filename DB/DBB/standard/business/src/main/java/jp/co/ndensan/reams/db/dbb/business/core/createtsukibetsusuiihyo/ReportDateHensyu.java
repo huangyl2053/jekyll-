@@ -55,10 +55,11 @@ public class ReportDateHensyu {
      * @param 徴収方法 徴収方法
      * @param 保険者名 保険者名
      * @param 保険者番号 保険者番号
+     * @param 表記List List<RString>
      * @return 月別推移表（帳票）のEntity
      */
     public TsukibetsuSuiihyoEntity getTsukibetsuSuiihyoEntity(List<KoumokuGoukey> koumokuGoukeyList,
-            RString 元号, RString 年度, RString 徴収方法, RString 保険者名, RString 保険者番号) {
+            RString 元号, RString 年度, RString 徴収方法, RString 保険者名, RString 保険者番号, List<RString> 表記List) {
         TsukibetsuSuiihyoEntity entity = new TsukibetsuSuiihyoEntity();
         entity.set発行日時(RDate.getNowDateTime());
         entity.set元号(元号);
@@ -187,7 +188,7 @@ public class ReportDateHensyu {
         entity = set13段階_15段階(entity, koumokuGoukeyList);
         entity = set16段階_18段階(entity, koumokuGoukeyList);
         entity = set19段階_合計(entity, koumokuGoukeyList);
-        return entity;
+        return set段階_Title(entity, 表記List);
     }
 
     private TsukibetsuSuiihyoEntity set4段階_6段階(TsukibetsuSuiihyoEntity entity, List<KoumokuGoukey> koumokuGoukeyList) {
@@ -902,10 +903,11 @@ public class ReportDateHensyu {
      * @param 徴収方法 徴収方法
      * @param 保険者名 保険者名
      * @param 保険者番号 保険者番号
+     * @param 表記List List<RString>
      * @return 月別推移表（帳票）のEntity
      */
     public TsukibetsuSuiihyoEntity getGemmen_TsukibetsuSuiihyoEntity(List<GemmenJyoho> gemmenJyohoList,
-            RString 元号, RString 年度, RString 徴収方法, RString 保険者名, RString 保険者番号) {
+            RString 元号, RString 年度, RString 徴収方法, RString 保険者名, RString 保険者番号, List<RString> 表記List) {
         TsukibetsuSuiihyoEntity entity = new TsukibetsuSuiihyoEntity();
         entity.set発行日時(RDate.getNowDateTime());
         entity.set元号(元号);
@@ -974,7 +976,7 @@ public class ReportDateHensyu {
         entity = setGemmen_8段階_12段階(entity, gemmenJyohoList);
         entity = setGemmen_13段階_15段階(entity, gemmenJyohoList);
         entity = setGemmen_16段階_合計(entity, gemmenJyohoList);
-        return entity;
+        return set段階_Title(entity, 表記List);
     }
 
     private TsukibetsuSuiihyoEntity setGemmen_8段階_12段階(TsukibetsuSuiihyoEntity entity, List<GemmenJyoho> gemmenJyohoList) {
@@ -1123,6 +1125,90 @@ public class ReportDateHensyu {
                 entity.set金額_合計_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
                 entity.set金額_合計_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
             }
+        }
+        return entity;
+    }
+
+    private TsukibetsuSuiihyoEntity set段階_Title(TsukibetsuSuiihyoEntity entity, List<RString> 表記List) {
+        if (0 < 表記List.size()) {
+            entity.set人数_1段階_Title(表記List.get(0));
+            entity.set金額_1段階_Title(表記List.get(0));
+        }
+        if (1 < 表記List.size()) {
+            entity.set人数_2段階_Title(表記List.get(1));
+            entity.set金額_2段階_Title(表記List.get(1));
+        }
+        if (2 < 表記List.size()) {
+            entity.set人数_3段階_Title(表記List.get(2));
+            entity.set金額_3段階_Title(表記List.get(2));
+        }
+        if (INT_3 < 表記List.size()) {
+            entity.set人数_4段階_Title(表記List.get(INT_3));
+            entity.set金額_4段階_Title(表記List.get(INT_3));
+        }
+        if (INT_4 < 表記List.size()) {
+            entity.set人数_5段階_Title(表記List.get(INT_4));
+            entity.set金額_5段階_Title(表記List.get(INT_4));
+        }
+        if (INT_5 < 表記List.size()) {
+            entity.set人数_6段階_Title(表記List.get(INT_5));
+            entity.set金額_6段階_Title(表記List.get(INT_5));
+        }
+        if (INT_6 < 表記List.size()) {
+            entity.set人数_7段階_Title(表記List.get(INT_6));
+            entity.set金額_7段階_Title(表記List.get(INT_6));
+        }
+        if (INT_7 < 表記List.size()) {
+            entity.set人数_8段階_Title(表記List.get(INT_7));
+            entity.set金額_8段階_Title(表記List.get(INT_7));
+        }
+        if (INT_8 < 表記List.size()) {
+            entity.set人数_9段階_Title(表記List.get(INT_8));
+            entity.set金額_9段階_Title(表記List.get(INT_8));
+        }
+        if (INT_9 < 表記List.size()) {
+            entity.set人数_10段階_Title(表記List.get(INT_9));
+            entity.set金額_10段階_Title(表記List.get(INT_9));
+        }
+        if (INT_10 < 表記List.size()) {
+            entity.set人数_11段階_Title(表記List.get(INT_10));
+            entity.set金額_11段階_Title(表記List.get(INT_10));
+        }
+        if (INT_11 < 表記List.size()) {
+            entity.set人数_12段階_Title(表記List.get(INT_11));
+            entity.set金額_12段階_Title(表記List.get(INT_11));
+        }
+        if (INT_12 < 表記List.size()) {
+            entity.set人数_13段階_Title(表記List.get(INT_12));
+            entity.set金額_13段階_Title(表記List.get(INT_12));
+        }
+        if (INT_13 < 表記List.size()) {
+            entity.set人数_14段階_Title(表記List.get(INT_13));
+            entity.set金額_14段階_Title(表記List.get(INT_13));
+        }
+        if (INT_14 < 表記List.size()) {
+            entity.set人数_15段階_Title(表記List.get(INT_14));
+            entity.set金額_15段階_Title(表記List.get(INT_14));
+        }
+        return set段階_Title1(entity, 表記List);
+    }
+
+    private TsukibetsuSuiihyoEntity set段階_Title1(TsukibetsuSuiihyoEntity entity, List<RString> 表記List) {
+        if (INT_15 < 表記List.size()) {
+            entity.set人数_16段階_Title(表記List.get(INT_15));
+            entity.set金額_16段階_Title(表記List.get(INT_15));
+        }
+        if (INT_16 < 表記List.size()) {
+            entity.set人数_17段階_Title(表記List.get(INT_16));
+            entity.set金額_17段階_Title(表記List.get(INT_16));
+        }
+        if (INT_17 < 表記List.size()) {
+            entity.set人数_18段階_Title(表記List.get(INT_17));
+            entity.set金額_18段階_Title(表記List.get(INT_17));
+        }
+        if (INT_18 < 表記List.size()) {
+            entity.set人数_19段階_Title(表記List.get(INT_18));
+            entity.set金額_19段階_Title(表記List.get(INT_17));
         }
         return entity;
     }

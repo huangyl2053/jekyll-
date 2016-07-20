@@ -31,7 +31,7 @@ public final class GensenChoshuDataSakuseiChange {
      * 源泉徴収データ作成のcsvのパラメータを作成します。
      *
      * @param entity 源泉徴収データ作成情報
-     * @param paramter システム日付
+     * @param paramter 源泉徴収データ作成のバッチのパラメータ
      * @return 源泉徴収データ作成のcsvのパラメータ
      */
     public static GensenChoshuDataSakuseiCsvEntity createData(GensenChoshuRelateEntity entity, GensenChoshuProcessParameter paramter) {

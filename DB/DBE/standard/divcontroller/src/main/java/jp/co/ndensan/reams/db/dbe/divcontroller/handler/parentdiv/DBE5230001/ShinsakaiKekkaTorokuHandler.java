@@ -191,7 +191,8 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get審査会意見種類コード(),
                     business.get一次判定結果変更理由(),
                     RString.EMPTY,
-                    business.get申請書管理番号()
+                    business.get申請書管理番号(),
+                    business.get一次判定()
             );
             dataSource.add(row);
             メモフラグ = false;
@@ -250,7 +251,7 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getTxtBirthYMD().setValue(new FlexibleDate(row.getSeiNenGaBi()));
         div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().setValue(row.getShinseiKubunShinseiji());
         div.getKobetsuHyojiArea().getTxtShinseiKubunLow().setValue(row.getShinseiKubunLaw());
-        div.getKobetsuHyojiArea().getTxtIchijiHantei().setValue(row.getHanteiKekka());
+        div.getKobetsuHyojiArea().getTxtIchijiHantei().setValue(row.getIchijiHantei());
         div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setValue(row.getNijiHanteiDate().getValue());
         div.getKobetsuHyojiArea().getTxtTokuteiShippei().setValue(row.getTokuteiShippei());
         if (!RString.isNullOrEmpty(row.getJotaizo())) {
@@ -465,12 +466,12 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(div.getKobetsuHyojiArea().getTxtIchijiHantei().getValue())
                 .append(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue())
                 .append(div.getKobetsuHyojiArea().getTxtTokuteiShippei().getValue())
-                .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedKey())
+                .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedValue())
                 .append(div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue().toDateString())
                 .append(div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue().toDateString())
-                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() != null ? div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() : RString.EMPTY)
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue())
                 .append(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue())
