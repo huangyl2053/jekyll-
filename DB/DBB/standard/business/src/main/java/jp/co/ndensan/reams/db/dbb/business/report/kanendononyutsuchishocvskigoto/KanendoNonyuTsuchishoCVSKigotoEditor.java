@@ -358,7 +358,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名() != null) {
-            source.kaisanMeisaishoHihokenshaName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
+            source.kaisanMeisaishoSetaiNushiName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯コード() != null) {
