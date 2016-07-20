@@ -72,10 +72,11 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
      * @param 年度3リスト List<ShiharaiHohoHenkoTaino>
      * @param index int
      */
-    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先,
-            ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
+    public ShiharaiHohoHenkoYokokuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
+            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
             NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, FlexibleYear 最新賦課年度,
-            List<ShiharaiHohoHenkoTaino> 年度1リスト, List<ShiharaiHohoHenkoTaino> 年度2リスト, List<ShiharaiHohoHenkoTaino> 年度3リスト, int index) {
+            List<ShiharaiHohoHenkoTaino> 年度1リスト, List<ShiharaiHohoHenkoTaino> 年度2リスト,
+            List<ShiharaiHohoHenkoTaino> 年度3リスト, int index) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御共通 = 帳票制御共通;
@@ -97,7 +98,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         setCompSofubutsuAtesaki(source);
         setCompNinshosha(source);
         setLayer1(source);
-        アクセスログeditor(source);
+        setAccessLogEditor(source);
         return source;
     }
 
@@ -118,37 +119,33 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         // TODO RSE項目名が設計書と違い
         source.shimei3 = sofubutsuAtesakiSource.shimei1;
         source.shimei4 = sofubutsuAtesakiSource.shimei2;
+        source.katagaki3 = sofubutsuAtesakiSource.katagaki1;
+        source.katagaki4 = sofubutsuAtesakiSource.katagaki2;
+        source.jusho4 = sofubutsuAtesakiSource.jusho1;
+        source.jusho5 = sofubutsuAtesakiSource.jusho2;
+        source.jusho6 = sofubutsuAtesakiSource.jusho3;
 
         source.dainoKubunMei = sofubutsuAtesakiSource.dainoKubunMei;
         source.samabunShimeiText = sofubutsuAtesakiSource.samabunShimeiText;
-
-        // TODO RSE項目名が設計書と違い
         source.kakkoLeft1 = sofubutsuAtesakiSource.kakkoLeft1;
         source.kakkoLeft2 = sofubutsuAtesakiSource.kakkoLeft2;
         source.kakkoRight1 = sofubutsuAtesakiSource.kakkoRight1;
         source.kakkoRight2 = sofubutsuAtesakiSource.kakkoRight2;
         source.samaBun1 = sofubutsuAtesakiSource.samaBun1;
         source.samaBun2 = sofubutsuAtesakiSource.samaBun2;
-
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
+        source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
+        source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
+        source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
+        source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
+        source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
+        source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
+        source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
+        source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
+        source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
+        source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
+        source.shimeiText = sofubutsuAtesakiSource.shimeiText;
 
-        // TODO 以下の項目の設定することが必要でしょうか？
-       /* source.jusho4 = sofubutsuAtesakiSource.jusho4;
-         source.jusho5 = sofubutsuAtesakiSource.jusho5;
-         source.jusho6 = sofubutsuAtesakiSource.jusho6;
-         source.katagaki3 = sofubutsuAtesakiSource.katagaki3;
-         source.katagaki4 = sofubutsuAtesakiSource.katagaki4;
-         source.katagakiSmall1 = sofubutsuAtesakiSource.katagakiSmall1;
-         source.katagakiSmall2 = sofubutsuAtesakiSource.katagakiSmall2;
-         source.meishoFuyo1 = sofubutsuAtesakiSource.meishoFuyo1;
-         source.meishoFuyo2 = sofubutsuAtesakiSource.meishoFuyo2;
-         source.samabunShimei1 = sofubutsuAtesakiSource.samabunShimei1;
-         source.samabunShimei2 = sofubutsuAtesakiSource.samabunShimei2;
-         source.samabunShimeiSmall1 = sofubutsuAtesakiSource.samabunShimeiSmall1;
-         source.samabunShimeiSmall2 = sofubutsuAtesakiSource.samabunShimeiSmall2;
-         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
-         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
-         source.shimeiText = sofubutsuAtesakiSource.shimeiText;*/
     }
 
     private void setCompNinshosha(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
@@ -242,7 +239,7 @@ public class ShiharaiHohoHenkoYokokuTsuchishoEditor implements IShiharaiHohoHenk
         return new EditedKojin(個人情報, 帳票制御共通);
     }
 
-    private void アクセスログeditor(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
+    private void setAccessLogEditor(ShiharaiHohoHenkoYokokuTsuchishoReportSource source) {
         source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
         source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
     }

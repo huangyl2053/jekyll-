@@ -41,27 +41,27 @@ public class ShiharaiHohoHenkoYokokuTsuchishoService {
     /**
      * 帳票を出力
      *
-     * @param 個人情報 個人情報
-     * @param 宛先 宛先
-     * @param 帳票制御共通 帳票制御共通
-     * @param 地方公共団体 地方公共団体
-     * @param 発行日 発行日
-     * @param 文書番号 文書番号
-     * @param 通知書定型文リスト 通知書定型文リスト
-     * @param 帳票分類ID 帳票分類ID
-     * @param 帳票情報 帳票情報
+     * @param 個人情報 IKojin
+     * @param 宛先 IAtesaki
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 地方公共団体 Association
+     * @param 発行日 FlexibleDate
+     * @param 文書番号 RString
+     * @param 通知書定型文リスト List<RString>
+     * @param 帳票分類ID ReportId
+     * @param 帳票情報 ShiharaiHohoHenko
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, ReportId 帳票分類ID,
+    public void print(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
+            FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, ReportId 帳票分類ID,
             ShiharaiHohoHenko 帳票情報, ReportManager reportManager) {
         ShiharaiHohoHenkoYokokuTsuchishoProerty property = new ShiharaiHohoHenkoYokokuTsuchishoProerty();
         try (ReportAssembler<ShiharaiHohoHenkoYokokuTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShiharaiHohoHenkoYokokuTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource 認証者ソースビルダー = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, 発行日,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            ShiharaiHohoHenkoYokokuTsuchishoReport report = ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報, 宛先, 帳票制御共通,
-                    地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報);
+            ShiharaiHohoHenkoYokokuTsuchishoReport report = ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報,
+                    宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報);
             report.writeBy(reportSourceWriter);
         }
     }
