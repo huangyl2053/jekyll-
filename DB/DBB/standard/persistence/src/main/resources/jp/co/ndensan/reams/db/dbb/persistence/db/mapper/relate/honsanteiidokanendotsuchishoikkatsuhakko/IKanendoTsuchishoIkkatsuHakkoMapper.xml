@@ -2888,7 +2888,7 @@
             "fuShunyuGaku13" = B."fuShunyuGaku13",
             "fuShunyuGaku14" = B."fuShunyuGaku14",
             "更正前情報有無区分" = '1'
-        FROM "DbT2015KeisangoJoho" AS B
+        FROM "DbT2015KeisangoJohoTemp" AS B
         WHERE A."dbT2015KeisangoJoho_choteiNendo" = B."choteiNendo"
              AND A."dbT2015KeisangoJoho_fukaNendo" = B."fukaNendo"
              AND A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
