@@ -249,7 +249,7 @@ public class NushiJuminJoho {
                     編集した識別コード = 編集した識別コード.substring(整数_0, 編集した識別コード.length() - 整数_1);
                     if (!hdnFlag.equals(文字列_TWO)) {
                         div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
-                                .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_ONE);
+                                .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_TWO);
                         return ResponseData.of(div).addMessage(DbzWarningMessages.確認.getMessage()
                                 .replace(編集した識別コード.toString())).respond();
                     }

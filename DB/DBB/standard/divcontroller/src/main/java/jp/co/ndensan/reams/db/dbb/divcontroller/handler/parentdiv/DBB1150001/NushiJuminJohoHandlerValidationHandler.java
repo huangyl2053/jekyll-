@@ -54,7 +54,7 @@ public class NushiJuminJohoHandlerValidationHandler {
      */
     public ValidationMessageControlPairs validate住所一致() {
         IValidationMessages messages = new ControlValidator(div)
-                .validate();
+                .validate住所一致();
         return createDictionary住所一致().check(messages);
     }
 
