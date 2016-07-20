@@ -26,19 +26,19 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource implement
     public RString titleNendo;
     @ReportItem(name = "cover_keisanMeisaishoNendo", length = 4, order = 2)
     public RString keisanMeisaishoNendo;
-    @ReportItem(name = "cover_hyojicodeName1", order = 3)
+    @ReportItem(name = "cover_HyojicodeName1", order = 3)
     public RString hyojicodeName1;
-    @ReportItem(name = "cover_hyojicodeName2", order = 4)
+    @ReportItem(name = "cover_HyojicodeName2", order = 4)
     public RString hyojicodeName2;
-    @ReportItem(name = "cover_hyojicodeName3", order = 5)
+    @ReportItem(name = "cover_HyojicodeName3", order = 5)
     public RString hyojicodeName3;
     @ReportItem(name = "cover_listList1_1", length = 1, order = 6)
     public RString listList1_1;
-    @ReportItem(name = "cover_hyojicode1", length = 11, order = 7)
+    @ReportItem(name = "cover_Hyojicode1", length = 11, order = 7)
     public RString hyojicode1;
-    @ReportItem(name = "cover_hyojicode2", length = 9, order = 8)
+    @ReportItem(name = "cover_Hyojicode2", length = 9, order = 8)
     public RString hyojicode2;
-    @ReportItem(name = "cover_hyojicode3", length = 9, order = 9)
+    @ReportItem(name = "cover_Hyojicode3", length = 9, order = 9)
     public RString hyojicode3;
     @ReportItem(name = "cover_keisanMeisaishoKi1", length = 2, order = 10)
     public RString keisanMeisaishoKi1;

@@ -24,6 +24,7 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
     private final KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報;
     private final NofuShoKyotsu 納付書共通;
     private final int 通知書の連番;
+    private final int ページ;
     private static final RString 星12 = new RString("************");
     private static final RString 星20 = new RString("********************");
     private static final RString 星19 = new RString("*******************");
@@ -41,16 +42,17 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
      *
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
-     * @param 通知書の連番 通知書の連番
+     * @param ページ ページ
      */
     protected HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            int 通知書の連番) {
+            int ページ) {
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.納付書共通 = null == 仮算定納入通知書情報.get納付書共通() ? new NofuShoKyotsu() : 仮算定納入通知書情報.get納付書共通();
-        this.通知書の連番 = 通知書の連番;
+        this.通知書の連番 = 仮算定納入通知書情報.get連番();
+        this.ページ = ページ;
     }
 
     @Override
@@ -156,15 +158,19 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
         source.nofushoNofuIn2 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
         source.nofushoKozaCom2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji2 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
+        source.nofozumishoTitleNendo2 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofuzumishoTitleNendoBun2 = RString.EMPTY;
         source.nofuzumishoTitleKi2 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki2 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
-        source.nofuzumishoOCR12 = is納入通知書期情報がある
-                ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT1) : 星19;
-        source.nofuzumishoOCR22 = is納入通知書期情報がある
-                ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT2) : 星20;
-        source.nofuzumishoOCR32 = is納入通知書期情報がある
-                ? null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3) : 星12;
+        if (is納入通知書期情報がある) {
+            source.nofuzumishoOCR12 = null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT1);
+            source.nofuzumishoOCR22 = null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT2);
+            source.nofuzumishoOCR32 = null == 納入通知書期情報.getOcr() ? RString.EMPTY : 納入通知書期情報.getOcr().get(INT3);
+        } else {
+            source.nofuzumishoOCR12 = 星19;
+            source.nofuzumishoOCR22 = 星20;
+            source.nofuzumishoOCR32 = 星12;
+        }
         source.nofuzumishoNofuGaku2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofuzumishoJusho2 = 納付書共通.get住所();
         source.nofuzumishoKatagaki2 = 納付書共通.get方書();
@@ -215,6 +221,7 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofushoKozaCom3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji3 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
+        source.nofozumishoTitleNendo3 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofuzumishoTitleNendoBun3 = RString.EMPTY;
         source.nofuzumishoTitleKi3 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki3 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
@@ -274,6 +281,7 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofushoKozaCom4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji4 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
+        source.nofozumishoTitleNendo4 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofuzumishoTitleNendoBun4 = RString.EMPTY;
         source.nofuzumishoTitleKi4 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofuzumishoTitleTsuki4 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
@@ -302,7 +310,7 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoNashiEditor implements IKari
     }
 
     private RString getページ連番(int 連番) {
-        int ページ連番 = 通知書の連番 * INT4 + 連番;
+        int ページ連番 = ページ * INT4 + 連番;
         return ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())
                 ? new RString(String.valueOf(通知書の連番)).concat("-").concat(String.valueOf(ページ連番))
                 : new RString("1-").concat(String.valueOf(ページ連番));
