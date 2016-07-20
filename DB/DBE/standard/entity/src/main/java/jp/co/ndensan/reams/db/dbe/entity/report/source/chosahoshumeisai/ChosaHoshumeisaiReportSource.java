@@ -80,7 +80,7 @@ public class ChosaHoshumeisaiReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        chosaItakusakiNam,
+        chosaItakusakiName,
         ninteichosainCode
     }
 }
