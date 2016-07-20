@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
- * @reamsid_L DBB-1760-010 quxiaodong
+ * @reamsid_L DBB-0920-010 quxiaodong
  */
 public class KanendoFukaHandler {
 
