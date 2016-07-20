@@ -99,7 +99,7 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
                     || ShoriJotaiKubun.再処理前.getコード().equals(データEntity.get処理状態区分())) {
                 if (NUM_ONE < 履歴情報の件数++) {
                     throw new ApplicationException(DbcErrorMessages.高額判定_処理状態処理前数不正.getMessage()
-                            .toString().concat(データEntity.get処理年月().wareki().toDateString().toString()));
+                            .evaluate().concat(データEntity.get処理年月().wareki().toDateString().toString()));
                 }
             }
         }
@@ -118,8 +118,8 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
                         && データEntity.get処理状態区分().equals(ShoriJotaiKubun.再処理前.getコード()))) {
                     get登録_更新List(データEntity, 登録_更新List, 確認Flag);
                 } else if (!国保連インターフェース管理.get処理状態区分().equals(データEntity.get処理状態区分())) {
-                    throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage()
-                            .toString().concat(データEntity.get処理年月().wareki().toDateString().toString()));
+                    throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage().evaluate()
+                            .concat(データEntity.get処理年月().wareki().toDateString().toString()));
                 }
             } else {
                 entity = データEntity.toEntity();
@@ -137,8 +137,7 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
             boolean 確認Flag) {
         DbT3104KokuhorenInterfaceKanriEntity entity;
         if (確認Flag) {
-            throw new ApplicationException(UrQuestionMessages.処理実行の確認.getMessage()
-                    .toString().concat(データEntity.get処理年月().wareki().toDateString().toString()));
+            throw new ApplicationException(UrQuestionMessages.処理実行の確認.getMessage());
         } else {
             entity = データEntity.toEntity();
             entity.setState(EntityDataState.Modified);
