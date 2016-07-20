@@ -3,7 +3,7 @@
  概要： 調定簿作成のマッピング用XMLです。 
  @reamsid_L DBC-2010-090 jiangzongyue 
 
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiShotokuKazeiHanteiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper">
     
     世帯員所得情報高額一時テーブルを作成する 
     <insert id="creat世帯員所得情報高額一時"> 
