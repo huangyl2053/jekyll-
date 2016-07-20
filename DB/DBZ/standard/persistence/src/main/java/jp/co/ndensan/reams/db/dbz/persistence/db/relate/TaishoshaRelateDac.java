@@ -10,9 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
+//import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.shikibetsuCode;
+//import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAppendType;
 import jp.co.ndensan.reams.uz.uza.util.db.IOrderClause;
@@ -49,6 +54,59 @@ public class TaishoshaRelateDac {
     public int get資格対象者Count(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合) {
         ITableClause table = create資格対象者TableClause(psm, is内部結合);
         return ((条件 != null) ? table.where(条件) : table).getCount();
+    }
+
+    /**
+     * 条件に該当する資格対象者識別コードリストを検索します。
+     *
+     * @param 条件 介護の検索条件
+     * @return 対象者識別コードリスト
+     */
+    @Transaction
+    public ItemList<ShikibetsuCode> get資格対象識別コードリスト(ITrueFalseCriteria 条件) {
+
+        DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
+
+        List<DbV7901ShikakuSearchEntity> list;
+
+         list = accessor
+                .select()
+                .table(DbV7901ShikakuSearch.class).where(条件).toList(DbV7901ShikakuSearchEntity.class);
+        List<ShikibetsuCode> modelList = new ArrayList<>();
+        for (DbV7901ShikakuSearchEntity entity : list) {
+            if (entity.getShikibetsuCode() != null) {
+                modelList.add(entity.getShikibetsuCode());
+            }
+        }
+        return ItemList.of(modelList);
+
+    }
+
+    /**
+     * 条件に該当する賦課対象者識別コードリストを検索します。
+     *
+     * @param 条件 介護の検索条件
+     * @return 対象者識別コードリスト
+     */
+    @Transaction
+    public ItemList<ShikibetsuCode> get賦課対象識別コードリスト(ITrueFalseCriteria 条件) {
+        DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
+
+        List<DbV7902FukaSearchEntity> list;
+            list = accessor
+                    .select()
+                    .table(DbV7902FukaSearch.class).where(条件).toList(DbV7902FukaSearchEntity.class);
+        List<ShikibetsuCode> modelList = new ArrayList<>();
+        for (DbV7902FukaSearchEntity entity : list) {
+            if (entity.getShikibetsuCode() != null) {
+                modelList.add(entity.getShikibetsuCode());
+            }
+        }
+        return ItemList.of(modelList);
+
+//        return ItemList.of(accessor
+//                .selectSpecific(jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.shikibetsuCode)
+//                .table(DbV7902FukaSearch.class).where(条件).toList(ShikibetsuCode.class));
     }
 
     /**

@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -67,7 +69,15 @@ public class TaishoshaFinder {
     public SearchResult<TaishoshaRelateBusiness> get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
-        IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
+        ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
+
+        if (条件 != null && 条件.isEvaluatable()) {
+            IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get資格対象識別コードリスト(介護条件);
+
+            builder.set識別コードリスト(shikibetsuCodeList.toList());
+        }
+
+        IPsmCriteria 宛名psm = getPsmCriteria(builder.build());
         boolean is内部結合 = (介護条件 != null);
         IItemList<TaishoshaRelateEntity> result = dac.select資格対象者(介護条件, 宛名psm, is内部結合, 最大件数);
 
@@ -103,7 +113,14 @@ public class TaishoshaFinder {
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
-        IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
+        ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
+
+        if (条件 != null && 条件.isEvaluatable()) {
+            IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get賦課対象識別コードリスト(介護条件);
+            builder.set識別コードリスト(shikibetsuCodeList.toList());
+        }
+
+        IPsmCriteria 宛名psm = getPsmCriteria(builder.build());
         boolean is内部結合 = (menu.is(FukaSearchMenuGroup.照会系) || menu.is(FukaSearchMenuGroup.更正計算系));
         IItemList<FukaTaishoshaRelateEntity> result = dac.select賦課対象者(介護条件, 宛名psm, is内部結合, 最大件数);
 

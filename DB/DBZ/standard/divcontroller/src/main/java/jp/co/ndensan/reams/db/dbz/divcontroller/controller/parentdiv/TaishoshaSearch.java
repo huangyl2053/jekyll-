@@ -300,10 +300,11 @@ public class TaishoshaSearch {
                     ShikakuSearchItem.住所地特例フラグ, StringOperator.完全一致, JushochitokureishaKubun.住所地特例者.getコード()));
         }
         ISearchCondition 介護条件 = null;
-        for (INewSearchCondition 条件 : 条件List) {
-            介護条件 = (介護条件 == null) ? 条件 : 条件.and(介護条件);
+        if (条件List.size() > 0) {
+            for (INewSearchCondition 条件 : 条件List) {
+                介護条件 = (介護条件 == null) ? 条件 : 条件.and(介護条件);
+            }
         }
-
         return 介護条件;
     }
 
