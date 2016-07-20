@@ -145,6 +145,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
                 where(and((eq(hihokenshaNo, 被保険者番号)),
                                 leq(serviceTeikyoYM, サービス提供年月))).
                 order(by(rirekiNo, Order.DESC)).
+                limit(1).
                 toObject(DbT3055KogakuKyufuTaishoshaGokeiEntity.class);
     }
 
