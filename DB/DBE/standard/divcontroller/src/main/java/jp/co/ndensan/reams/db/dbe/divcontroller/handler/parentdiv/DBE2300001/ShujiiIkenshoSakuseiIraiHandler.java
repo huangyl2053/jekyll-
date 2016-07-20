@@ -96,9 +96,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             if (申請者.getTemp_被保険者氏名() != null) {
                 row.setHihokennshaShimei(申請者.getTemp_被保険者氏名().value());
             }
-            if (申請者.getTemp_性別() != null) {
-                row.setSeibetsu(Seibetsu.toValue(申請者.getTemp_性別().value()).get名称());
-            }
+            row.setSeibetsu(Seibetsu.toValue(申請者.getTemp_性別().value()).get名称());
             if (申請者.getTemp_認定申請日() != null) {
                 row.getShinseiDay().setValue(new RDate(申請者.getTemp_認定申請日().toString()));
             }
@@ -154,6 +152,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setAge(new RString(String.valueOf(申請者.getTemp_年齢())));
             row.setIryoKikanFaxNo(申請者.getTemp_医療機関所FAX());
             row.setShichosonCode(申請者.getTemp_市町村コード() == null ? RString.EMPTY : 申請者.getTemp_市町村コード().value());
+            row.setIryoKikanYubinNo(申請者.getTemp_医療機関郵便番号() == null ? RString.EMPTY : 申請者.getTemp_医療機関郵便番号().value());
+            row.setDaihyoshaName(申請者.getTemp_代表者名());
             申請者一覧.add(row);
         }
         div.getShinseishaIchiran().setIsOpen(true);
