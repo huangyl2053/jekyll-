@@ -208,7 +208,8 @@ public class TokuchoTaishoshaIchiran {
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnBack(TokuchoTaishoshaIchiranDiv div) {
         getHandler(div).同定非同定表示に戻るinitialize();
-        return ResponseData.of(div).setState(DBB2710002StateName.同定非同定表示);
+        return ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond()
+                .of(div).setState(DBB2710002StateName.同定非同定表示);
     }
 
     /**
@@ -308,7 +309,8 @@ public class TokuchoTaishoshaIchiran {
         ViewStateHolder.put(ViewStateKeys.年金コード, 年金コード);
         ViewStateHolder.put(ViewStateKeys.確認状況, 確認状況);
         特別徴収同定候補者一覧initialize(div);
-        return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
+        return ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond()
+                .of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
     }
 
     /**
@@ -383,10 +385,9 @@ public class TokuchoTaishoshaIchiran {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         if (!ResponseHolder.isReRequest() && (!RString.isNullOrEmpty(
-                div.getTxtTorokuZumiKisoNenkinNo().getValue()) //                || !RString.isNullOrEmpty(
-                //                        div.getTxtTorokuZumiNenkinCode().getValue())
-                //                || !RString.isNullOrEmpty(div.getTxtTorokuZumiTokuchoGimusha().getValue())
-                )) {
+                div.getTxtTorokuZumiKisoNenkinNo().getValue()) || !RString.isNullOrEmpty(
+                        div.getTxtTorokuZumiNenkinCode().getValue())
+                || !RString.isNullOrEmpty(div.getTxtTorokuZumiTokuchoGimusha().getValue()))) {
             return ResponseData.of(div).addMessage(
                     DbbWarningMessages.別情報での特徴対象者同定.getMessage()).respond();
         }
@@ -395,7 +396,7 @@ public class TokuchoTaishoshaIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgTokuchoDoteiKohoshaIchiran_Row> 特別徴収同定候補者一覧List
                     = div.getDgTokuchoDoteiKohoshaIchiran().getDataSource();
-            if (特別徴収同定候補者一覧List != null && 0 < 特別徴収同定候補者一覧List.size()) {
+            if (特別徴収同定候補者一覧List != null && NUM1 < 特別徴収同定候補者一覧List.size()) {
                 return ResponseData.of(div).addMessage(
                         DbbWarningMessages.他の候補者を対象外更新.getMessage()).respond();
             } else {
@@ -408,7 +409,7 @@ public class TokuchoTaishoshaIchiran {
                 = div.getDgTokuchoDoteiKohoshaIchiran().getDataSource();
         if (!ResponseHolder.isReRequest() && 特別徴収同定候補者一覧List
                 != null && !特別徴収同定候補者一覧List.isEmpty()
-                && 0 < 特別徴収同定候補者一覧List.size()) {
+                && NUM1 < 特別徴収同定候補者一覧List.size()) {
             return ResponseData.of(div).addMessage(DbbWarningMessages.他の候補者を対象外更新.getMessage()).respond();
         }
         if (new RString(DbbWarningMessages.他の候補者を対象外更新.getMessage().getCode())
@@ -430,7 +431,8 @@ public class TokuchoTaishoshaIchiran {
             RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
             Message 同定Message = DbbInformationMessages.同定処理完了.getMessage();
             getHandler(div).execute確認状態更新(特別徴収開始月, 捕捉月, 同定済み_CODE, 同定Message);
-            return ResponseData.of(div).setState(DBB2710002StateName.完了);
+            return ResponseData.of(div)
+                    .rootTitle(特別徴収対象者一覧確認).respond().of(div).setState(DBB2710002StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
@@ -456,10 +458,10 @@ public class TokuchoTaishoshaIchiran {
             Message 同定対象外Message = DbbInformationMessages.同定対象外確認済処理完了.getMessage();
 
             getHandler(div).execute確認状態更新(特別徴収開始月, 捕捉月, 対象外_CODE, 同定対象外Message);
-            return ResponseData.of(div)
+            return ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().of(div)
                     .setState(DBB2710002StateName.完了);
         } else {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond();
         }
     }
 
