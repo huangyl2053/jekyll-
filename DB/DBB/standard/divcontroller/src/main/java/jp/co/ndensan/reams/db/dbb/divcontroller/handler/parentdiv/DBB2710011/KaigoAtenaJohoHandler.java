@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.Kaig
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.NenkinInfoKensakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.NenkinJohoKensakuDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokuManager;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -134,6 +134,9 @@ public class KaigoAtenaJohoHandler {
         div.getNenkinJohoKensaku().getTxtNenkinMeiSho().setValue(年金名称);
         if (!資格喪失フラグ) {
             RString 捕捉月 = get捕捉月(年度内処理済み連番, 最新介護徴収方法情報データ);
+            if (null == 捕捉月) {
+                捕捉月 = RString.EMPTY;
+            }
             div.setCatchMoon(捕捉月);
             TokuchoStartMonth 特別徴収開始月 = get特別徴収開始月(捕捉月);
             if (特別徴収開始月 != null) {
