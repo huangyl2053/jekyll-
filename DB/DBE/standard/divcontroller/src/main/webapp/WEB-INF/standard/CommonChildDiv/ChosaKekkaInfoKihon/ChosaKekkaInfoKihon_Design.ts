@@ -49,12 +49,12 @@ module DBE {
                 return new UZA.DataGrid(this.convFiledName("dgKihonChosa"));
             }
 
-            public txtNinchishoNichijoSeikatsuJiritsudoCode(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
+            public txtNinchishoNichijoSeikatsuJiritsudoCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
             }
 
-            public txtShogaiNichijoSeikatsuJiritsudoCode(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
+            public txtShogaiNichijoSeikatsuJiritsudoCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
             }
 
             public Button1(): UZA.Button {

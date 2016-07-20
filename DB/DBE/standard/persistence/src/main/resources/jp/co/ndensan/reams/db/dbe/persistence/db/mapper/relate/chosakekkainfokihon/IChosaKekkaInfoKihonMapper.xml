@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査結果情報照会_基本調査のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-3000-270 lizhuoxuan -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosakekkainfokihon.IChosaKekkaInfoKihonMapper">
+    <resultMap id="resultMap_ChosaKekkaInfoKihonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfokihon.ChosaKekkaInfoKihonRelateEntity" autoMapping="true">
+        <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="chosaJisshiBashoMeisho" column="DbT5202_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="DbT5203_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="DbT5203_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="DbT5203_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoKihonList1"
+                resultMap="resultMap_ChosaKekkaInfoKihonRelateEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.ChosaKekkaInfoKihonParameter" fetchSize="500">
+        SELECT 
+        DbT5202."ninteichosaJisshiYMD" as "DbT5202_ninteichosaJisshiYMD"
+        ,DbT5202."chosaJisshiBashoMeisho" as "DbT5202_chosaJisshiBashoMeisho"
+        ,DbT5203."ninchishoNichijoSeikatsuJiritsudoCode" as "DbT5203_ninchishoNichijoSeikatsuJiritsudoCode"
+        ,DbT5203."shogaiNichijoSeikatsuJiritsudoCode" as "DbT5203_shogaiNichijoSeikatsuJiritsudoCode"
+        ,DbT5203."koroshoIfShikibetsuCode" as "DbT5203_koroshoIfShikibetsuCode"
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        INNER JOIN 
+        rgdb."DbT5203NinteichosahyoKihonChosa" as DbT5203
+        ON DbT5203."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5203."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5203."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+    </select>
+    
+    <resultMap id="resultMap_TokiJikouRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfokihon.TokiJikouRelateEntity" autoMapping="true">
+        <result property="remban" column="DbT5211_remban" />
+        <result property="researchItem" column="DbT5211_researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"  />
+        <result property="koroshoIfShikibetsuCode" column="DbT5211_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shinseishoKanriNo" column="DbT5205_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"  />
+        <result property="ninteichosaRirekiNo" column="DbT5205_ninteichosaRirekiNo" />
+        <result property="COUNT" column="count" />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoKihonList2"
+                resultMap="resultMap_TokiJikouRelateEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.ChosaKekkaInfoKihonParameter" fetchSize="500">
+         SELECT 
+        DbT5211."remban" as "DbT5211_remban"
+        ,DbT5211."researchItem" as "DbT5211_researchItem"
+        ,DbT5211."koroshoIfShikibetsuCode" as "DbT5211_koroshoIfShikibetsuCode"
+        ,T1.count
+        FROM
+        rgdb."DbT5211NinteichosahyoChosaItem" as DbT5211
+        INNER JOIN 
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        ON DbT5211."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5211."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5211."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        LEFT JOIN
+        (SELECT 
+        COUNT(1) AS count
+        ,DbT5205."shinseishoKanriNo" as "DbT5205_shinseishoKanriNo"
+        ,DbT5205."ninteichosaRirekiNo" as "DbT5205_ninteichosaRirekiNo"
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" as DbT5205
+        INNER JOIN 
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        ON DbT5205."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5205."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+        GROUP BY "DbT5205_shinseishoKanriNo","DbT5205_ninteichosaRirekiNo") AS T1
+        ON T1."DbT5205_shinseishoKanriNo" = DbT5211."shinseishoKanriNo"
+        AND 
+        T1."DbT5205_ninteichosaRirekiNo" = DbT5211."ninteichosaRirekiNo"
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+    </select>
+</mapper>
