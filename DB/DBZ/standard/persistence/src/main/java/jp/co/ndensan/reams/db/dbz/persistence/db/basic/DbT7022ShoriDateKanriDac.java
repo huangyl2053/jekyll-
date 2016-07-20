@@ -1738,4 +1738,48 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(shoriName, 定数_基準収入額適用申請書発行),
                                 eq(nendo, 年度))).getCount();
     }
+
+    /**
+     * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 処理枝番 RString
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最大年度内連番BY調定年度(FlexibleYear 調定年度, RString 処理枝番) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(shoriName, ShoriName.仮算定異動賦課.get名称()),
+                                eq(shoriEdaban, 処理枝番),
+                                eq(nendo, 調定年度))).
+                groupBy(nendo).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから8月特徴開始情報取得します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_八月特徴開始情報抽出(FlexibleYear 調定年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                // TODO: 設計書に処理名称不正
+                                eq(shoriName, ShoriName.依頼金額計算.get名称()),
+                                eq(nendo, 調定年度),
+                                eq(shoriEdaban, 処理枝番_0001),
+                                eq(nendoNaiRenban, 年度内連番_2))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }
