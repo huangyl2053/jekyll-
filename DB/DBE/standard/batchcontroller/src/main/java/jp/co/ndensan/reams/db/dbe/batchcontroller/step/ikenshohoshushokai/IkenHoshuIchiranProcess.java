@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  * 主治医意見書作成報酬一覧表のプロセス処理の帳票出力のプロセスクラスです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-020 chenxiangyu
  */
 public class IkenHoshuIchiranProcess extends BatchProcessBase<IkenshoHoshuShokaiRelateEntity> {
 
@@ -52,7 +52,7 @@ public class IkenHoshuIchiranProcess extends BatchProcessBase<IkenshoHoshuShokai
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601004.getReportId();
     private static final RString REPORT_NAME = ReportIdDBE.DBE601004.getReportName();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601004"));
-    private static final RString CSV_NAME_EN = new RString("ikenhoshuichiran.csv");
+    private static final RString CSV_NAME_EN = new RString("DBE601004_NinteichosaHoshu.csv");
     private static final RString CSV_NAME_JP = new RString("主治医意見書作成報酬一覧表CSV.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
