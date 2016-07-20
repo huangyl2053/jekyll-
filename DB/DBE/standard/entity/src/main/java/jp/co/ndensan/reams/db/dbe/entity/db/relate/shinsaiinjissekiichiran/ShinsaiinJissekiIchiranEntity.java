@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsaiinjissekiichiran;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -60,13 +62,30 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
         this.所属機関 = relateEntity.get所属機関();
         this.審査会地区 = relateEntity.get審査会地区();
         this.審査会番号 = relateEntity.get審査会番号();
-        this.実施日 = relateEntity.get実施日();
-        this.開始 = relateEntity.get開始();
-        this.終了 = relateEntity.get終了();
-        this.審査員種別 = relateEntity.get審査員種別();
+        this.実施日 = dateFormat(relateEntity.get実施日());
+        this.開始 = set時刻(relateEntity.get開始());
+        this.終了 = set時刻(relateEntity.get終了());
+        this.審査員種別 = ShinsakaiIinHoshukubun.toValue(relateEntity.get報酬区分()).get名称();
         this.出欠 = IsShusseki.toValue(relateEntity.is出欠()).get名称();
         this.実施年月日 = relateEntity.get実施年月日();
         this.連番 = new RString(relateEntity.get連番());
 
+    }
+
+    private static RString set時刻(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        date.insert(2, ":");
+        return date;
+
+    }
+
+    private static RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RDate date_tem = new RDate(date.toString());
+        return date_tem.wareki().toDateString();
     }
 }

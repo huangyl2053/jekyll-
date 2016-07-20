@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 介護認定審査会委員報酬実績集計表のBuidlerです。
  *
- * @reamsid_L DBE-1700-020 wanghuafeng
+ * @reamsid_L DBE-1700-040 wanghuafeng
  */
 class ShinsaiinJissekiIchiranBuidler implements IShinsaiinJissekiIchiranBuidler {
 

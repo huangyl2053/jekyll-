@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 介護認定審査会委員報酬実績集計表のEditorのインタフェスです。
  *
- * @reamsid_L DBE-1700-020 wanghuafeng
+ * @reamsid_L DBE-1700-040 wanghuafeng
  */
 interface IShinsaiinJissekiIchiranEditor extends IReportEditor<ShinsaiinJissekiIchiranReportSource> {
 
