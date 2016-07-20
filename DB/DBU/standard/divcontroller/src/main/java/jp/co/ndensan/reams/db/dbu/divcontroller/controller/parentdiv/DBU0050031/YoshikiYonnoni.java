@@ -57,14 +57,8 @@ public class YoshikiYonnoni {
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final int MONTH_6 = 6;
-    private static final RString 追加をやめる = new RString("btnAddCancel");
-    private static final RString 修正をやめる = new RString("btnModCancel");
-    private static final RString 削除をやめる = new RString("btnDelCancel");
-    private static final RString 削除する = new RString("btnDelUpdate");
-    private static final RString 更新する = new RString("btnModUpdate");
-    private static final RString 追加する = new RString("btnAddUpdate");
+    private static final int INT_4 = 4;
     private static final RString 保存する = new RString("btnSaveCancel");
-    private static final RString 完了する = new RString("btnEnd");
     private static final RString 座標1_1 = new RString("1_1");
     private static final RString 座標1_2 = new RString("1_2");
     private static final RString 座標2_1 = new RString("2_1");
@@ -114,7 +108,7 @@ public class YoshikiYonnoni {
 
         InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-
+        ResponseHolder.getBeforeEvent();
         if (UPDATE.equals(insuranceInf.get処理フラグ())
                 || DELETE.equals(insuranceInf.get処理フラグ())) {
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoDetal(
@@ -133,11 +127,13 @@ public class YoshikiYonnoni {
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setValue(insuranceInf.get市町村名称());
             if (list.isEmpty()) {
                 div.setShoriMode(内部処理モード_修正追加);
+                div.getYoshikiYonnoniMeisai().setDisabled(false);
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
             } else if (UPDATE.equals(insuranceInf.get処理フラグ())) {
                 set詳細データエリア(list.get(0).get詳細データエリア(), div);
+                div.getYoshikiYonnoniMeisai().setDisabled(false);
                 div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
                 div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
                 div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
@@ -151,6 +147,7 @@ public class YoshikiYonnoni {
             } else {
                 set詳細データエリア(list.get(0).get詳細データエリア(), div);
                 this.btnDisabled(div, insuranceInf);
+                div.getYoshikiYonnoniMeisai().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
@@ -160,6 +157,7 @@ public class YoshikiYonnoni {
                 div.setShoriMode(内部処理モード_削除);
             }
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
+            div.getYoshikiYonnoniMeisai().setDisabled(false);
             List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
             if (shichosonList.isEmpty()) {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -174,50 +172,25 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
             }
             if (RDate.getNowDate().getMonthValue() < MONTH_6) {
-                TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 int 報告年度 = RDate.getNowDate().getYearValue() - 2;
-                hokokuYM.setValue(new FlexibleDate(報告年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
-
-                TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
                 int 集計年度 = RDate.getNowDate().getYearValue() - 1;
-                shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
+                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             } else {
-                TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 int 報告年度 = RDate.getNowDate().getYearValue();
-                hokokuYM.setValue(new FlexibleDate(報告年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
-
-                TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
                 int 集計年度 = RDate.getNowDate().getYearValue() - 2;
-                shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
+                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             }
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
             div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
             div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
-            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(false);
-            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setReadOnly(false);
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setReadOnly(true);
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setVisible(false);
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setVisible(false);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
-            if (DBU0050031StateName.追加状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(追加する, true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(追加をやめる, false);
-            }
-            if (DBU0050031StateName.修正状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(修正をやめる, false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(更新する, false);
-            }
-            if (DBU0050031StateName.削除状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(削除する, false);
-            }
-            if (DBU0050031StateName.完了状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
-            }
             div.setShoriMode(内部処理モード_追加);
         }
         return ResponseData.of(div).respond();
@@ -240,9 +213,12 @@ public class YoshikiYonnoni {
                 return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
             }
 
-        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
-                && this.入力項目いずれか空白ではない(div)) {
-            return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)) {
+            if (this.入力項目いずれか空白ではない(div)) {
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_追加);
+            }
         } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_削除);
         }
@@ -301,7 +277,7 @@ public class YoshikiYonnoni {
             }
 
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoList(
-                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().getYear(),
+                    new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
                     new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                     tokeiTaishoKubun);
 
@@ -504,12 +480,12 @@ public class YoshikiYonnoni {
             if (RDate.getNowDate().getMonthValue() >= MONTH_6) {
 
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
+                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             } else {
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
+                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             }
@@ -517,7 +493,7 @@ public class YoshikiYonnoni {
         } else if (!div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().isEmpty()) {
 
             TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-            int 集計年度 = div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().getYearValue() - 2;
+            int 集計年度 = Integer.parseInt(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, INT_4).toString()) - 1;
             shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
             div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
         }
