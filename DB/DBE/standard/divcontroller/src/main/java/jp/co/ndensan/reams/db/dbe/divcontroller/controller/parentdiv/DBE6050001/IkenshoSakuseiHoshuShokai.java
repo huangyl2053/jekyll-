@@ -98,7 +98,7 @@ public class IkenshoSakuseiHoshuShokai {
      * 「CSVを出力する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoHoshuShokaiIchiranBatchParameter>
+     * @return ResponseData<IkenHoshuIchiranBatchParameter>
      */
     public ResponseData<IkenHoshuIchiranBatchParameter> onClick_BtnShutsutyoku(IkenshoSakuseiHoshuShokaiDiv div) {
         IkenHoshuIchiranBatchParameter parameter = getHandler(div).createBatchParam(CSVを出力する);
@@ -109,7 +109,7 @@ public class IkenshoSakuseiHoshuShokai {
      * 「一覧表を発行する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoHoshuShokaiIchiranBatchParameter>
+     * @return ResponseData<IkenHoshuIchiranBatchParameter>
      */
     public ResponseData<IkenHoshuIchiranBatchParameter> onClick_BtnPulish(IkenshoSakuseiHoshuShokaiDiv div) {
         IkenHoshuIchiranBatchParameter parameter = getHandler(div).createBatchParam(一覧表を発行する);

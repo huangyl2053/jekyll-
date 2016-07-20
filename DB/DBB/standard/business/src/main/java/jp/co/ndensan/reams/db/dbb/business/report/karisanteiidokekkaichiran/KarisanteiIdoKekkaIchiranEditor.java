@@ -299,6 +299,27 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         Decimal 仮算定特徴期合計 = nullTOZero(entity.get特徴期別金額01())
                 .add(nullTOZero(entity.get特徴期別金額02()))
                 .add(nullTOZero(entity.get特徴期別金額03()));
+        Decimal 仮算定普徴期合計 = get仮算定普徴期合計(entity);
+        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
+                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
+            return RString.EMPTY;
+        }
+        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
+                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
+            return 特別徴収;
+        }
+        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
+                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
+            return 普通徴収;
+        }
+        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
+                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
+            return 併用徴収;
+        }
+        return RString.EMPTY;
+    }
+
+    private Decimal get仮算定普徴期合計(KeisanjohoAtenaKozaEntity entity) {
         Decimal 仮算定普徴期合計 = new Decimal(0);
         if (月List.contains(NUM_1)) {
             仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額01()));
@@ -343,23 +364,7 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
             仮算定普徴期合計 = 仮算定普徴期合計.add(nullTOZero(entity.get普徴期別金額14()));
         }
 
-        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
-                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
-            return RString.EMPTY;
-        }
-        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
-                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_0) {
-            return 特別徴収;
-        }
-        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_0)
-                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
-            return 普通徴収;
-        }
-        if ((仮算定特徴期合計.compareTo(Decimal.ZERO) == NUM_1)
-                && 仮算定普徴期合計.compareTo(Decimal.ZERO) == NUM_1) {
-            return 併用徴収;
-        }
-        return RString.EMPTY;
+        return 仮算定普徴期合計;
     }
 
     private void 普徴期編集(KarisanteiIdoKekkaIchiranSource source) {

@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 主治医意見書作成報酬一覧表のReportSourceです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-030 chenxiangyu
  */
 public class IkenHoshuIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

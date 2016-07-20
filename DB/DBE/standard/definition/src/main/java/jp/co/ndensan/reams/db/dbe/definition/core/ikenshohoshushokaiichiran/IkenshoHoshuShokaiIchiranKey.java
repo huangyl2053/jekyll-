@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 主治医意見書作成報酬合計額リストのキー情報クラスです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-030 chenxiangyu
  */
 @lombok.Getter
 @lombok.Setter

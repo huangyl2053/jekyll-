@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 主治医意見書作成報酬実績集計表のインターフェースクラスです。
  *
- * @reamsid_L DBE-1930-010 chenxiangyu
+ * @reamsid_L DBE-1930-030 chenxiangyu
  */
 public interface IIkenHoshuIchiranEditor extends IReportEditor<IkenHoshuIchiranReportSource> {
 }
