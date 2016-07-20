@@ -122,11 +122,11 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             }
             row.setShisetsuShin(date.get施設_新());
             if (date.get施設_新().equals(MARO)) {
-                txtZaitakuKeizoku = txtShisetsuShinki.add(Decimal.ONE);
+                txtShisetsuShinki = txtShisetsuShinki.add(Decimal.ONE);
             }
             row.setShisetsuKe(date.get施設_継());
             if (date.get施設_継().equals(MARO)) {
-                txtZaitakuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
+                txtShisetsuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
             }
             txtKotsuhito = txtKotsuhito.add(date.get主治医意見書作成料());
             row.setSakuseiryo(DecimalFormatter.toコンマ区切りRString(new Decimal(date.get主治医意見書作成料()), 0).concat("円"));

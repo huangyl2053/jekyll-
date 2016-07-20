@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護保険連絡票作成のサービスクラスです。
  *
- * @reamsid_L DBU-1290-020 linghuhang
+ * @reamsid_L DBA-1290-020 linghuhang
  */
 public class RenrakuhyoDataCreatorFinder {
 
@@ -67,6 +67,8 @@ public class RenrakuhyoDataCreatorFinder {
     private final DbV4001JukyushaDaichoAliveDac dbv4001Dac;
     private final DbT4014RiyoshaFutangakuGengakuDac dbt4014Dac;
     private final DbT4018KaigoHokenFutanGendogakuNinteiDac dbt4018Dac;
+    private static final RString 被保険者番号メッセージ = new RString("被保険者番号");
+    private static final RString 基準日メッセージ = new RString("基準日");
 
     /**
      * コンストラクタです。
@@ -131,8 +133,8 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public RiyoshaFutangakuBusiness get旧措置情報(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         DbT4014RiyoshaFutangakuGengakuEntity entity = dbt4014Dac.get利用者負担額減額(被保険者番号,
                 基準日,
                 ShiharaiHenkoKanriKubun._２号差止.getコード());
@@ -152,8 +154,8 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public FutangakuGengakuBusiness get負担限度額(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         DbT4018KaigoHokenFutanGendogakuNinteiEntity entity = dbt4018Dac.get利用者負担額減額(被保険者番号,
                 基準日,
                 ShiharaiHenkoKanriKubun._２号差止.getコード());
@@ -172,8 +174,8 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public ShiharaiHohoHenko get支払方法変更(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         DbT4021ShiharaiHohoHenkoEntity entity = dbt4021Dac.get支払方法変更(被保険者番号, 基準日, ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
         if (entity == null) {
             return null;
@@ -191,8 +193,8 @@ public class RenrakuhyoDataCreatorFinder {
     @Transaction
     public KyufuJissekiKihonBuseiness get給付実績基本(HihokenshaNo 被保険者番号,
             FlexibleDate 基準日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         DbT3017KyufujissekiKihonEntity entity = dbt3017Dac.get給付実績基本(被保険者番号, 基準日.getYearMonth());
         if (entity == null) {
             return null;
@@ -210,7 +212,7 @@ public class RenrakuhyoDataCreatorFinder {
     @Transaction
     public Decimal get利用者負担額(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         FutangakuGengakuMybatisParameter parameter = FutangakuGengakuMybatisParameter.createParam_Futangaku(被保険者番号, サービス提供年月);
         IRenrakuhyoDataCreatorMapper mapper = mapperProvider.create(IRenrakuhyoDataCreatorMapper.class);
@@ -226,8 +228,8 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public KogakuKyufuTaishoshaGokei get高額介護サービス費給付対象者合計(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         DbT3055KogakuKyufuTaishoshaGokeiEntity entity = dbt3055Dac.get高額介護サービス費給付対象者合計(被保険者番号, 基準日.getYearMonth());
         if (entity == null) {
             return null;
@@ -261,7 +263,7 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public SearchResult<HokenryoDankai> get保険料段階(FlexibleDate 基準日) {
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         List<DbT2013HokenryoDankaiEntity> 保険料段階情報 = dbt2013Dac.selectDankaiByFukaNendo(基準日.getYear());
         List<HokenryoDankai> hokenryoDankai = new ArrayList<>();
         if (保険料段階情報 == null || 保険料段階情報.isEmpty()) {
@@ -282,8 +284,8 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public Fuka get介護賦課(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
         DbT2002FukaEntity entity = dbt2002Dac.get介護賦課(被保険者番号, 基準日.getYear());
         if (entity == null) {
             return null;
@@ -299,7 +301,7 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public JukyushaDaichoAlive get受給者台帳(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
         DbV4001JukyushaDaichoEntity entity = dbv4001Dac.select受給者台帳情報(被保険者番号);
         if (entity == null) {
             return null;
@@ -315,7 +317,7 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public HihokenshaDaichoAlive get被保険者台帳(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
         DbV1001HihokenshaDaichoEntity 被保険者台帳 = dbv1001Dac.get被保険者台帳(被保険者番号);
         if (被保険者台帳 == null) {
             return null;
@@ -331,7 +333,7 @@ public class RenrakuhyoDataCreatorFinder {
      */
     @Transaction
     public HihokenshaDaichoAlive get被保険者台帳情報(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
         DbV1001HihokenshaDaichoEntity 被保険者台帳 = dbv1001Dac.get被保険者台帳情報(被保険者番号);
         if (被保険者台帳 == null) {
             return null;
