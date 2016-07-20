@@ -42,28 +42,21 @@ public class TokuChoSoufuJohoSakuseiBatch {
 
     private final RString 年度_2016 = new RString("2016");
     private final RString 年度_2015 = new RString("2015");
-    //    2015
-    private final RString 前年度2月 = new RString("02");
-    private final RString 前年度4月 = new RString("04");
-    private final RString 前年度6月 = new RString("06");
-    private final RString 前年度8月 = new RString("08");
-    private final RString 前年度10月 = new RString("10");
-    private final RString 前年度12月 = new RString("12");
-//    2015
-//    2016
-    private final RString 月2 = new RString("02");
-    private final RString 月4 = new RString("04");
-    private final RString 月6 = new RString("06");
-    private final RString 月8 = new RString("08");
-    private final RString 月10 = new RString("10");
-    private final RString 月12 = new RString("12");
-    //    2016
-//    2017
-    private final RString 翌2月 = new RString("02");
-    private final RString 翌4月 = new RString("04");
-    private final RString 翌6月 = new RString("06");
-    //    2017
-
+    private final RString 前年度2月 = new RString("201502");
+    private final RString 前年度4月 = new RString("201504");
+    private final RString 前年度6月 = new RString("201506");
+    private final RString 前年度8月 = new RString("201508");
+    private final RString 前年度10月 = new RString("201510");
+    private final RString 前年度12月 = new RString("201512");
+    private final RString 月2 = new RString("201602");
+    private final RString 月4 = new RString("201604");
+    private final RString 月6 = new RString("201606");
+    private final RString 月8 = new RString("201608");
+    private final RString 月10 = new RString("201610");
+    private final RString 月12 = new RString("201612");
+    private final RString 翌2月 = new RString("201702");
+    private final RString 翌4月 = new RString("201704");
+    private final RString 翌6月 = new RString("201706");
     private static final RString RS0 = new RString("0");
     private static final RString RS1 = new RString("1");
     private static final RString RS2 = new RString("2");
@@ -145,32 +138,33 @@ public class TokuChoSoufuJohoSakuseiBatch {
         if (特徴制度間IF作成.equals(遷移元メニュー)) {
             FlexibleYear 入力処理年度 = null;
             RString 通知内容コード = null;
-            RString 捕捉月 = null;
+            RString 捕捉年月 = null;
             if (月8.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
                 入力処理年度 = new FlexibleYear(年度_2016);
                 通知内容コード = RS30;
-                捕捉月 = 月2;
+                捕捉年月 = 月2;
             } else if (月10.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
                 入力処理年度 = new FlexibleYear(年度_2016);
                 通知内容コード = RS00;
-                捕捉月 = 月4;
+                捕捉年月 = 月4;
             } else if (月12.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
                 入力処理年度 = new FlexibleYear(年度_2016);
                 通知内容コード = RS30;
-                捕捉月 = 月6;
+                捕捉年月 = 月6;
             } else if (翌2月.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
                 入力処理年度 = new FlexibleYear(年度_2016);
                 通知内容コード = RS30;
-                捕捉月 = 月8;
+                捕捉年月 = 月8;
             } else if (翌4月.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
                 入力処理年度 = new FlexibleYear(年度_2016);
                 通知内容コード = RS30;
-                捕捉月 = 月10;
+                捕捉年月 = 月10;
             } else if (翌6月.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
                 入力処理年度 = new FlexibleYear(年度_2016);
                 通知内容コード = RS30;
-                捕捉月 = 月12;
+                捕捉年月 = 月12;
             }
+            RString 捕捉月 = RString.isNullOrEmpty(捕捉年月) ? RString.EMPTY : 捕捉年月.substring(NUM4, NUM6);
             resultList = 年金特徴回付情報_介護継承dac.
                     select特徴回付情報のデータ(GyomuCode.DB介護保険, 通知内容コード, 入力処理年度, 捕捉月);
         } else if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
@@ -214,10 +208,11 @@ public class TokuChoSoufuJohoSakuseiBatch {
     }
 
     private void addToList(List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist, FlexibleYear 処理年度,
-            RString 通知内容コード, RString 捕捉月) {
+            RString 通知内容コード, RString 捕捉年月) {
         UeT0511NenkinTokuchoKaifuJohoEntity entity = new UeT0511NenkinTokuchoKaifuJohoEntity();
         entity.setShoriNendo(処理年度);
         entity.setTsuchiNaiyoCode(通知内容コード);
+        RString 捕捉月 = RString.isNullOrEmpty(捕捉年月) ? RString.EMPTY : 捕捉年月.substring(NUM4, NUM6);
         entity.setHosokuTsuki(捕捉月);
         uet0511entitylist.add(entity);
     }
