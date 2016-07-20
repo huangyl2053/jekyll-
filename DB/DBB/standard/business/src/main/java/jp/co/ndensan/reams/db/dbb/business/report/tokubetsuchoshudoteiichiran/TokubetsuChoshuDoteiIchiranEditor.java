@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshudoteiichiran.TokubetsuChoshuDoteiIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -186,7 +186,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
             source.listList2_3 = RString.EMPTY;
             return;
         }
-        source.listList2_3 = Gender.toValue(seibetsuCode).getName().getFullJapanese();
+        source.listList2_3 = Seibetsu.toValue(seibetsuCode).get名称();
     }
 
     private void setカナ氏名(TokubetsuChoshuDoteiIchiranSource source) {

@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 国保連取込情報
+     */
+    国保連取込情報,
+    /**
      * 対象年月
      */
     対象年月,

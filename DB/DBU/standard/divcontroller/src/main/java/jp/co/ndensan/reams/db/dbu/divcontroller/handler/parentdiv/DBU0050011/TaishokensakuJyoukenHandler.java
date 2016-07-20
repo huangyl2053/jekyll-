@@ -155,7 +155,13 @@ public class TaishokensakuJyoukenHandler {
                 .append(shichoson.get保険者コード().getColumnValue()).append("_").append(shichoson.get保険者区分().getコード()).toRString();
     }
 
-    private LasdecCode get市町村コード(RString 市町村Key) {
+    /**
+     * 市町村コード取得処理です。
+     *
+     * @param 市町村Key 市町村Key
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード(RString 市町村Key) {
         if (市町村Key.split("_").size() < 1) {
             return LasdecCode.EMPTY;
         } else {

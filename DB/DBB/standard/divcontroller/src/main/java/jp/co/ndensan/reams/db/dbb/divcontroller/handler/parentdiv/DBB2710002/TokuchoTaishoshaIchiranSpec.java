@@ -35,7 +35,8 @@ enum TokuchoTaishoshaIchiranSpec implements IPredicate<TokuchoTaishoshaIchiranDi
     特別徴収開始月未指定チック {
                 @Override
                 public boolean apply(TokuchoTaishoshaIchiranDiv div) {
-                    return !RString.isNullOrEmpty(div.getTxtKaishiYM().getValue());
+                    RString kaishiYM = div.getTxtKaishiYM().getValue();
+                    return !(kaishiYM == null || kaishiYM.trim().isEmpty());
                 }
             },
     /**

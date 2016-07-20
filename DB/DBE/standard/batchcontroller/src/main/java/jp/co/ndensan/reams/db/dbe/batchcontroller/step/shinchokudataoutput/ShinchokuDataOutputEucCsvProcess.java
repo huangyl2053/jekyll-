@@ -66,6 +66,8 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
             RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名新, RDate.getNowDate());
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 連携データ送信ファイル名);
         }
+        RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
+        paramter.set概況調査テキス(イメージ区分);
     }
 
     @Override

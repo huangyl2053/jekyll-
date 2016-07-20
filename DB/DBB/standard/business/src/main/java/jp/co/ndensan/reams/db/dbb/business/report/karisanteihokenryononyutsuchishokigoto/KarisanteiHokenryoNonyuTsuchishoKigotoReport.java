@@ -61,13 +61,12 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
             納入通知書期情報リスト = new ArrayList<>();
         }
         int 領収書連番 = 1;
-        int 連番 = 1;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             if (null == 納入通知書期情報.get納付額() || 納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
                 continue;
             }
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor editor
-                    = new KarisanteiHokenryoNonyuTsuchishoKigotoEditor(仮算定納入通知書情報, 納入通知書期情報, 連番);
+                    = new KarisanteiHokenryoNonyuTsuchishoKigotoEditor(仮算定納入通知書情報, 納入通知書期情報);
             NofuShoKyotsu 納付書共通 = 仮算定納入通知書情報.get納付書共通();
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compRyoshushoEditor
                     = new DBBCompRyoshushoEditor(納付書共通, 納入通知書期情報, 領収書連番);
@@ -78,7 +77,6 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compSofubutsuAtesakiEditor
                     = new CompSofubutsuAtesakiEditor(仮算定納入通知書情報);
             領収書連番++;
-            連番++;
             IKarisanteiHokenryoNonyuTsuchishoKigotoBuilder builder
                     = new KarisanteiHokenryoNonyuTsuchishoKigotoBuilder(
                             editor,

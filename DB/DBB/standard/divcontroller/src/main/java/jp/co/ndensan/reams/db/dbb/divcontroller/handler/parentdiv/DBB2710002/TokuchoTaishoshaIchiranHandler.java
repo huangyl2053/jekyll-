@@ -362,7 +362,7 @@ public class TokuchoTaishoshaIchiranHandler {
                 newRow.setTxtFuichiRiyu(DoteiFuitchiRiyu.toValue(result.get(i).get不一致理由()).get不一致理由名());
             }
             if (!RString.isNullOrEmpty(result.get(i).get捕捉月())) {
-                RString 捕捉月 = result.get(i).get捕捉月().replace(KEY0, RString.EMPTY).concat(月);
+                RString 捕捉月 = result.get(i).get捕捉月().concat(月);
                 newRow.getTxtHosokuM().setValue(捕捉月);
             }
             newRow.getTxtKisoNenkinNo().setValue(result.get(i).get年金番号());
