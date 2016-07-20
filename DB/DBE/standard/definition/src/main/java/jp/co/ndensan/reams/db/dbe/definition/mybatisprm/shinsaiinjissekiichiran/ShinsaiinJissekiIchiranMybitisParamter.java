@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisParameter {
+public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisParameter {
 
     private final boolean batchFlag;
     private final boolean 審査会開催日FROMFlag;

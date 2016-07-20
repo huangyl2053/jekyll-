@@ -28,6 +28,7 @@ public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
     private static final String SHINSAKAI_KAISAIBI_FROM = "shinsakaikaisaibiFrom";
     private static final String SHINSAKAI_KAISAIBI_TO = "shinsakaikaisaibiTo";
     private static final String KEY_JOHO = "keyJoho";
+    private static final long serialVersionUID = 8362309102168284770L;
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
@@ -73,4 +74,5 @@ public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
                 shinsakaikaisaibiTo,
                 keyJoho);
     }
+
 }

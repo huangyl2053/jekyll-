@@ -14,7 +14,12 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.Shinsa
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgShisakaiIinJisseki_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -42,6 +47,9 @@ public class ShisakaiIinJissekiShokaiHandler {
      * 画面初期状態の設定です。
      */
     public void set初期状態() {
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
