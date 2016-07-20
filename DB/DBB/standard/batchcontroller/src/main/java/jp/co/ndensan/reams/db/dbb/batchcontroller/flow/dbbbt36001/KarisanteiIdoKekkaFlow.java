@@ -294,8 +294,9 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter() {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
-                getParameter().get調定年度().toDateString(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.SYSTEM_TIME),
+                getParameter().get賦課年度().toDateString(),
+                new RString(getResult(RDateTime.class, new RString(システム日時の取得),
+                                SystemTimeSakuseiKanendoProcess.SYSTEM_TIME).toString()),
                 ShoriName.仮算定異動賦課.get名称(), 帳票分類ID.getColumnValue());
     }
 
