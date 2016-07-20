@@ -198,9 +198,9 @@ public class NinteichosaItakusakiMainHandler {
         row.setChiku(chiku.value());
         row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
         if (jokyoFlag) {
-            row.setJokyoFlag(表示値_有効);
-        } else {
             row.setJokyoFlag(表示値_無効);
+        } else {
+            row.setJokyoFlag(表示値_有効);
         }
         return row;
     }
@@ -317,7 +317,6 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             row.setJokyoFlag(表示値_無効);
         }
-        row.setJokyoFlag(nullToEmpty(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey()));
         int index = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
@@ -367,7 +366,7 @@ public class NinteichosaItakusakiMainHandler {
                 .set割付定員(割付定員)
                 .set割付地区(new ChikuCode(div.getChosaitakusakiJohoInput().getCcdChiku().getCode().value()))
                 .set機関の区分(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedKey())
-                .set廃止フラグ(CODE_有効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey())).build();
+                .set廃止フラグ(CODE_無効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey())).build();
     }
 
     /**
