@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB2710011;
 
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011StateName.特徴対象者登録;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011StateName.結果確認;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011TransitionEventName.再検索する;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011TransitionEventName.検索結果一覧へ;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBB-0670-010 wangjie2
  */
 public class KaigoAtenaJoho {
+
+    private final RString 検索結果一覧へ_FileName = new RString("btnToSearchResult");
 
     /**
      * 特別徴収対象者登録情報を画面初期化処理しました。
@@ -45,7 +47,11 @@ public class KaigoAtenaJoho {
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode(),
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().evaluate());
             FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
-            return getHandler(div).onload(key) ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).setState(特徴対象者登録);
+            Boolean is経由該当者一覧画面 = ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class);
+            if (is経由該当者一覧画面 != null && !is経由該当者一覧画面) {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ_FileName, true);
+            }
+            return getHandler(div).onload(key) ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).respond();
         }
         if (ResponseHolder.getMessageCode().equals(new RString(DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {

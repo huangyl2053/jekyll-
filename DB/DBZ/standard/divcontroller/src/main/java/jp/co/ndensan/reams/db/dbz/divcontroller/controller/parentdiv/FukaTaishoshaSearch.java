@@ -26,8 +26,6 @@ import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ03000
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.search.FukaSearchItem;
@@ -41,7 +39,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
-//import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -199,6 +196,7 @@ public class FukaTaishoshaSearch {
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(newResult));
             set賦課年度(div);
             ViewStateHolder.put(ViewStateKeys.各種通知書作成フラグ, フラグ_1);
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.FALSE);
             // 次画面遷移
             return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
             // 検索結果が２件以上の場合
@@ -218,6 +216,7 @@ public class FukaTaishoshaSearch {
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(newResult));
             div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder()
                     .getTxtMaxNumber().setValue(new Decimal(最大表示件数));
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.TRUE);
             // 画面状態遷移
             return ResponseData.of(div).setState(該当者一覧);
         }
