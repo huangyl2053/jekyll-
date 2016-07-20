@@ -337,6 +337,17 @@ public class ShiharaiHohoHenkoTaino extends
     }
 
     /**
+     * 収入額を返します。
+     *
+     * @param 調定額 Decimal
+     * @param 滞納額 Decimal
+     * @return 収入額
+     */
+    public Decimal get収入額(Decimal 調定額, Decimal 滞納額) {
+        return 調定額.subtract(滞納額);
+    }
+
+    /**
      * 控除額を返します。
      *
      * @return 控除額
