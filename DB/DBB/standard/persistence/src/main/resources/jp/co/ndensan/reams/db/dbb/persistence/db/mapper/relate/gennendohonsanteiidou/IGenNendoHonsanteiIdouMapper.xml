@@ -1809,12 +1809,12 @@
         FROM
             rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         INNER JOIN
-            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+            rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名
         ON 
             "DbT2015KeisangoJoho"."shikibetsuCode" = 宛名."shikibetsuCode"
-        INNER JOIN
+        LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
         ON "DbT2015KeisangoJoho"."shikibetsuCode" = 口座."uaT0310Koza_shikibetsuCode"
         WHERE
@@ -1822,7 +1822,6 @@
         AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
         AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '異動賦課'
         AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
-      ORDER BY
-            ${出力順}
+        ${出力順}
     </select>
 </mapper>
