@@ -15,9 +15,9 @@ public enum DBE5710001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     検索へ戻る("検索へ戻る"),
-    完了("完了"),
     要介護認定イメージ情報出力へ("要介護認定イメージ情報出力へ"),
-    要介護認定イメージ情報削除へ("要介護認定イメージ情報削除へ");
+    要介護認定イメージ情報削除へ("要介護認定イメージ情報削除へ"),
+    完了("完了");
 
     private final RString name;
 
