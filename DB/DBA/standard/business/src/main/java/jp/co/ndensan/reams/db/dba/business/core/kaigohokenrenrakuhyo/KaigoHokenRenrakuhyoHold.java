@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo;
 
+import jp.co.ndensan.reams.db.dbx.business.core.view.HihokenshaDaichoAlive;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.view.JukyushaDaichoAlive;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -57,6 +57,6 @@ public class KaigoHokenRenrakuhyoHold {
     private Decimal 多床室;
     private IKojin 個人;
     private JukyushaDaichoAlive 受給者台帳;
-    private DbV1001HihokenshaDaichoEntity 被保険者台帳;
+    private HihokenshaDaichoAlive 被保険者台帳;
 
 }
