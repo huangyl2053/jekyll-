@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 介護認定処理情報の処理します。
  *
- * @reamsid_L DBU-1530-010 lit
+ * @reamsid_L DBD-1530-010 lit
  */
 public interface IYokaigoNinteiJohoMapper {
 
