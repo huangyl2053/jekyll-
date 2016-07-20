@@ -393,7 +393,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             int 普徴仮算定の最終期 = 月期対応取得_普徴.get期月リスト().filtered仮算定期間().getLast().get期AsInt();
             HihokenshaDaicho 資格情報 = new HihokenshaDaicho(資格喪失情報Entity.get資格喪失Entity());
             int 資格喪失月 = 0;
-            if (資格情報 != null && 資格情報.get資格喪失年月日() != null) {
+            if (資格情報.get資格喪失年月日() != null) {
                 資格喪失月 = 資格情報.get資格喪失年月日().getMonthValue();
             }
             FukaJoho 更正後賦課情報 = new FukaJoho(資格喪失情報Entity.get賦課情報Entity());
@@ -817,19 +817,21 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             }
         }
         List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList = new ArrayList<>();
-        for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity : 更正前EntityList) {
-            for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity : 更正後EntityList) {
+        for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity : 更正後EntityList) {
+            KeisanjohoAtenaKozaKouseizengoEntity entity = new KeisanjohoAtenaKozaKouseizengoEntity();
+            entity.set計算後情報_宛名_口座_更正後Entity(計算後情報_宛名_口座_更正後Entity);
+            for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity : 更正前EntityList) {
                 if (計算後情報_宛名_口座_更正前Entity.get調定年度()
                         .compareTo(計算後情報_宛名_口座_更正後Entity.get調定年度()) == 0
                         && 計算後情報_宛名_口座_更正前Entity.get賦課年度()
                         .compareTo(計算後情報_宛名_口座_更正後Entity.get賦課年度()) == 0
                         && 計算後情報_宛名_口座_更正前Entity.get通知書番号().equals(計算後情報_宛名_口座_更正後Entity.get通知書番号())
                         && 計算後情報_宛名_口座_更正前Entity.get作成処理名().equals(計算後情報_宛名_口座_更正後Entity.get作成処理名())) {
-                    更正前後EntityList.add(
-                            new KeisanjohoAtenaKozaKouseizengoEntity(計算後情報_宛名_口座_更正前Entity, 計算後情報_宛名_口座_更正後Entity));
+                    entity.set計算後情報_宛名_口座_更正前Entity(計算後情報_宛名_口座_更正前Entity);
                     break;
                 }
             }
+            更正前後EntityList.add(entity);
         }
 
         new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, new RString(出力順ID),
@@ -1379,7 +1381,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 老齢福祉の情報リスト.add(entity);
             }
         }
-        if (老齢福祉の情報リスト != null && !老齢福祉の情報リスト.isEmpty()) {
+        if (!老齢福祉の情報リスト.isEmpty()) {
             Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
