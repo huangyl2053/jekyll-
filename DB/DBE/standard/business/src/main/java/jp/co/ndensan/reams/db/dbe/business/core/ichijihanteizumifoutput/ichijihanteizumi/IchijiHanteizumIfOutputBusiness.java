@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.shinchokudataoutput.shickdateoutput;
+package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumifoutput.ichijihanteizumi;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shinchokudataoutput.ShinchokuDataOutputProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijihanteizumifoutput.IchijiHanteizumIfOutputProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ChosaItemJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosahyoServiceJokyoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputEucCsvEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShujiiIkenshoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -27,16 +29,15 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBE-1500-020 wanghui
  */
-public class ShinchokuDataOutputBusiness {
+public class IchijiHanteizumIfOutputBusiness {
 
     private int 項番 = 0;
-    private static final int 桁目_5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private static final RString 厚労省IF識別コード_99A = new RString("99A");
     private static final RString 厚労省IF識別コード_02A = new RString("02A");
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
-    private static final RString 厚労省IF識別コード_09A = new RString("09A");
+    private static final RString 厚労省IF識別コード_09B = new RString("09B");
 
     /**
      *
@@ -235,14 +236,9 @@ public class ShinchokuDataOutputBusiness {
      * @param paramter ShinchokuDataOutputProcessParamter
      * @return List<RString> 出力条件List
      */
-    public List<RString> get出力条件(ShinchokuDataOutputProcessParamter paramter) {
+    public List<RString> get出力条件(IchijiHanteizumIfOutputProcessParamter paramter) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
-        jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("ファイル区分"));
-        jokenBuilder.append(paramter.getFayirukuben());
-        出力条件List.add(jokenBuilder.toRString());
-        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【申請書管理番号リスト】"));
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
@@ -263,12 +259,11 @@ public class ShinchokuDataOutputBusiness {
      * @param entity entity
      * @return NinteiChosaDataOutputEucCsvEntity
      */
-    public ShinchokuDataOutputEucCsvEntity setEucCsvEntity(ShinchokuDataOutputRelateEntity entity) {
-        ShinchokuDataOutputEucCsvEntity eucEntity = new ShinchokuDataOutputEucCsvEntity();
-        項番 = 項番 + 1;
-        RString 連番号 = new RString(Integer.toString(項番));
-        eucEntity.set項番(連番号.padZeroToLeft(桁目_5));
-        eucEntity.setステータス(RString.EMPTY);
+    public IchijiHanteizumIfOutputEucCsvEntity setEucCsvEntity(IchijiHanteizumIfOutputRelateEntity entity) {
+        IchijiHanteizumIfOutputEucCsvEntity eucEntity = new IchijiHanteizumIfOutputEucCsvEntity();
+        RString 連番号 = new RString(Integer.toString(++項番));
+        eucEntity.setシーケンシャル番号(連番号);
+        eucEntity.set機能コード(RString.EMPTY);
         eucEntity.set識別コード(nullToEmpty(entity.getKoroshoIfShikibetsuCode()));
         eucEntity.set保険者番号(nullToEmpty(entity.getShoKisaiHokenshaNo()));
         eucEntity.set被保険者番号(nullToEmpty(entity.getHihokenshaNo()));
@@ -290,8 +285,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set病院施設等の名称(nullToEmpty(entity.getJigyoshaName()));
         eucEntity.set病院施設等の所在地(nullToEmpty(entity.getJigyoshaAddress()));
         eucEntity.set前回の認定審査会結果(nullToEmpty(entity.getZenYokaigoKubunCode()));
-        eucEntity.set前回の認定有効期間開始(nullToEmpty(entity.getZenkaiYukoKikanStart()));
-        eucEntity.set前回の認定有効期間終了(nullToEmpty(entity.getZenkaiYukoKikanEnd()));
+        認定申請区分(entity, eucEntity);
         eucEntity.set主治医医療機関番号(nullToEmpty(entity.getShujiiIryokikanCode()));
         eucEntity.set主治医番号(nullToEmpty(entity.getShujiiCode()));
         eucEntity.set意見書依頼日(nullToEmpty(entity.getIkenshoSakuseiIraiYMD()));
@@ -302,37 +296,37 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set委託区分(nullToEmpty(entity.getChosaItakuKubun()));
         eucEntity.set認定調査員番号(nullToEmpty(entity.getNinteiChosainCode()));
         eucEntity.set認定調査員資格コード(nullToEmpty(entity.getChosainShikaku()));
-        eucEntity.set一次判定日(nullToEmpty(entity.getIchijiHanteiYMD()));
-        eucEntity.set一次判定結果(nullToEmpty(entity.getIchijiHanteiKekkaCode()));
-        eucEntity.set一次判定結果認知症加算(nullToEmpty(entity.getIchijiHanteiKekkaNinchishoKasanCode()));
-        eucEntity.set要介護認定等基準時間(nullToEmpty(entity.getKijunJikan()));
-        eucEntity.set要介護認定等基準時間食事(nullToEmpty(entity.getKijunJikanShokuji()));
-        eucEntity.set要介護認定等基準時間排泄(nullToEmpty(entity.getKijunJikanHaisetsu()));
-        eucEntity.set要介護認定等基準時間移動(nullToEmpty(entity.getKijunJikanIdo()));
-        eucEntity.set要介護認定等基準時間清潔保持(nullToEmpty(entity.getKijunJikanSeiketsuHoji()));
-        eucEntity.set要介護認定等基準時間間接ケア(nullToEmpty(entity.getKijunJikanKansetsuCare()));
-        eucEntity.set要介護認定等基準時間BPSD関連(nullToEmpty(entity.getKijunJikanBPSDKanren()));
-        eucEntity.set要介護認定等基準時間機能訓練(nullToEmpty(entity.getKijunJikanKinoKunren()));
-        eucEntity.set要介護認定等基準時間医療関連(nullToEmpty(entity.getKijunJikanIryoKanren()));
-        eucEntity.set要介護認定等基準時間認知症加算(nullToEmpty(entity.getKijunJikanNinchishoKasan()));
-        eucEntity.set中間評価項目得点第１群(nullToEmpty(entity.getChukanHyokaKomoku1gun()));
-        eucEntity.set中間評価項目得点第２群(nullToEmpty(entity.getChukanHyokaKomoku2gun()));
-        eucEntity.set中間評価項目得点第３群(nullToEmpty(entity.getChukanHyokaKomoku3gun()));
-        eucEntity.set中間評価項目得点第４群(nullToEmpty(entity.getChukanHyokaKomoku4gun()));
-        eucEntity.set中間評価項目得点第５群(nullToEmpty(entity.getChukanHyokaKomoku5gun()));
-        eucEntity.set一次判定警告配列コード(nullToEmpty(entity.getIchijiHnateiKeikokuCode()));
-        eucEntity.set状態の安定性(nullToEmpty(entity.getJotaiAnteiseiCode()));
-        eucEntity.set認知症自立度Ⅱ以上の蓋然性(nullToEmpty(entity.getNinchishoJiritsudoIIijoNoGaizensei()));
-        eucEntity.set認知機能及び状態安定性から推定される給付区分(nullToEmpty(entity.getSuiteiKyufuKubunCode()));
-        eucEntity.set認定審査会資料作成日(nullToEmpty(entity.getShinsakaiShiryoSakuseiYMD()));
-        eucEntity.set認定審査会予定日(nullToEmpty(entity.getShinsakaiKaisaiYoteiYMD()));
-        eucEntity.set合議体番号(nullToEmpty(entity.getGogitaiNo()));
+        eucEntity.set一次判定日(RString.EMPTY);
+        eucEntity.set一次判定結果(RString.EMPTY);
+        eucEntity.set一次判定結果認知症加算(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間食事(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間排泄(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間移動(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間清潔保持(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間間接ケア(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間BPSD関連(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間機能訓練(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間医療関連(RString.EMPTY);
+        eucEntity.set要介護認定等基準時間認知症加算(RString.EMPTY);
+        eucEntity.set中間評価項目得点第１群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第２群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第３群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第４群(RString.EMPTY);
+        eucEntity.set中間評価項目得点第５群(RString.EMPTY);
+        eucEntity.set一次判定警告配列コード(RString.EMPTY);
+        eucEntity.set状態の安定性(RString.EMPTY);
+        eucEntity.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
+        eucEntity.set認知機能及び状態安定性から推定される給付区分(RString.EMPTY);
+        eucEntity.set認定審査会資料作成日(RString.EMPTY);
+        eucEntity.set認定審査会予定日(RString.EMPTY);
+        eucEntity.set合議体番号(RString.EMPTY);
         eucEntity.set審査会資料番号(RString.EMPTY);
-        eucEntity.set二次判定日(nullToEmpty(entity.getNijiHanteiYMD()));
-        eucEntity.set二次判定結果(nullToEmpty(entity.getNijiHanteiYokaigoJotaiKubunCode()));
-        eucEntity.set認定有効期間開始(nullToEmpty(entity.getNijiHanteiNinteiYukoKaishiYMD()));
-        eucEntity.set認定有効期間終了(nullToEmpty(entity.getNijiHanteiNinteiYukoShuryoYMD()));
-        eucEntity.set特定疾病コード(nullToEmpty(entity.getNigoTokuteiShippeiCode()));
+        eucEntity.set二次判定日(RString.EMPTY);
+        eucEntity.set二次判定結果(RString.EMPTY);
+        eucEntity.set認定有効期間開始(RString.EMPTY);
+        eucEntity.set認定有効期間終了(RString.EMPTY);
+        eucEntity.set特定疾病コード(RString.EMPTY);
         eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getZenYokaigoKubunCode()));
         eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
         eucEntity.set現在の状況(nullToEmpty(entity.getRemban()));
@@ -405,7 +399,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set前回結果_通所介護デイサービス(nullToEmpty(entity.get前回サービスremban6()));
         eucEntity.set前回結果_通所リハビリテーション(nullToEmpty(entity.get前回サービスremban7()));
         eucEntity.set前回識別コード(nullToEmpty(entity.get前回koroshoIfShikibetsuCode()));
-        eucEntity.set認定審査会意見等(nullToEmpty(entity.get前回ninteishinsakaiIkenShurui()));
+        eucEntity.set認定審査会意見等(RString.EMPTY);
         eucEntity.setコメント等(nullToEmpty(entity.get前回shinsakaiMemo()));
         認定調査票時テーブル(entity, eucEntity);
         前回認定調査票時テーブル(entity, eucEntity);
@@ -413,7 +407,18 @@ public class ShinchokuDataOutputBusiness {
 
     }
 
-    private void 認定調査票時テーブル(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
+    private void 認定申請区分(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode())
+                && NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode())) {
+            eucEntity.set前回の認定有効期間開始(nullToEmpty(entity.getZenkaiYukoKikanStart()));
+        }
+        if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode())
+                && NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode())) {
+            eucEntity.set前回の認定有効期間終了(nullToEmpty(entity.getZenkaiYukoKikanEnd()));
+        }
+    }
+
+    private void 認定調査票時テーブル(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode()))
@@ -509,7 +514,7 @@ public class ShinchokuDataOutputBusiness {
         set認定調査票(entity, eucEntity);
     }
 
-    private void set認定調査票(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
+    private void set認定調査票(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_06A.equals(entity.getKoroshoIfShikibetsuCode())))) {
@@ -630,7 +635,7 @@ public class ShinchokuDataOutputBusiness {
         }
     }
 
-    private void 前回認定調査票時テーブル(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
+    private void 前回認定調査票時テーブル(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.get前回koroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.get前回koroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode()))
@@ -726,7 +731,7 @@ public class ShinchokuDataOutputBusiness {
         set前回結果(entity, eucEntity);
     }
 
-    private void set前回結果(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
+    private void set前回結果(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.get前回koroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_06A.equals(entity.get前回koroshoIfShikibetsuCode())))) {
@@ -846,7 +851,7 @@ public class ShinchokuDataOutputBusiness {
         }
     }
 
-    private void 予防給付サービス(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
+    private void 予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
@@ -906,10 +911,7 @@ public class ShinchokuDataOutputBusiness {
             eucEntity.set介護予防小規模多機能型居宅介護(nullToEmpty(entity.getサービスremban15()));
         }
         if (entity.getKoroshoIfShikibetsuCode() != null
-                && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
-                || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode()))
-                || (厚労省IF識別コード_06A.equals(entity.getKoroshoIfShikibetsuCode()))
-                || (厚労省IF識別コード_09A.equals(entity.getKoroshoIfShikibetsuCode())))) {
+                && 厚労省IF識別コード_09B.equals(entity.getKoroshoIfShikibetsuCode())) {
             eucEntity.set定期巡回随時対応型訪問介護看護(RString.EMPTY);
             eucEntity.set複合型サービス(RString.EMPTY);
         } else {
@@ -918,7 +920,7 @@ public class ShinchokuDataOutputBusiness {
         }
     }
 
-    private void 前回予防給付サービス(ShinchokuDataOutputRelateEntity entity, ShinchokuDataOutputEucCsvEntity eucEntity) {
+    private void 前回予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())))) {
@@ -964,15 +966,11 @@ public class ShinchokuDataOutputBusiness {
             eucEntity.set前回結果_小規模多機能型居宅介護(nullToEmpty(entity.getサービスremban15()));
             eucEntity.set前回結果_地域密着型特定施設入居者生活介護(nullToEmpty(entity.getサービスremban17()));
             eucEntity.set前回結果_地域密着型介護老人福祉施設入所者生活介護(nullToEmpty(entity.getサービスremban18()));
-            eucEntity.set前回結果_定期巡回随時対応型訪問介護看護(nullToEmpty(entity.getサービスremban19()));
             eucEntity.set前回結果_介護予防認知症対応型通所介護(nullToEmpty(entity.getサービスremban14()));
             eucEntity.set前回結果_介護予防小規模多機能型居宅介護(nullToEmpty(entity.getサービスremban15()));
         }
         if (entity.getKoroshoIfShikibetsuCode() != null
-                && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
-                || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode()))
-                || (厚労省IF識別コード_06A.equals(entity.getKoroshoIfShikibetsuCode()))
-                || (厚労省IF識別コード_09A.equals(entity.getKoroshoIfShikibetsuCode())))) {
+                && 厚労省IF識別コード_09B.equals(entity.getKoroshoIfShikibetsuCode())) {
             eucEntity.set前回結果_定期巡回随時対応型訪問介護看護(RString.EMPTY);
             eucEntity.set前回結果_複合型サービス(RString.EMPTY);
         } else {
