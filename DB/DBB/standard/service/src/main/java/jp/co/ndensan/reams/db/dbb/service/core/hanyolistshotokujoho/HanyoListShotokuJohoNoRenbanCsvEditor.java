@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.hanyolistshotokujoho;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistshotokujoho.HanyoListShotokuJohoProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
@@ -43,11 +43,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * バッチ設計_DBBBT22002_汎用リスト 所得情報CsvEditorのクラス
+ * バッチ設計_DBBBT22002_汎用リスト 所得情報NoRenCsvEditorのクラス
  *
  * @reamsid_L DBB-1901-030 surun
  */
-public class HanyoListShotokuJohoCsvEditor {
+public class HanyoListShotokuJohoNoRenbanCsvEditor {
 
     private static final RString 介護資格取得事由 = new RString("0007");
     private static final RString 介護資格喪失事由 = new RString("0010");
@@ -65,16 +65,14 @@ public class HanyoListShotokuJohoCsvEditor {
      *
      * @param entity HanyoListShotokuJohoEntity
      * @param parameter HanyoListShotokuJohoProcessParameter
-     * @param 連番 Decimal
      * @param 保険料段階リスト HokenryoDankaiList
      * @param 構成市町村マスタlist List<KoseiShichosonMaster>
-     * @return HanyoListShotokuJohoCsvEntity
+     * @return HanyoListShotokuJohoNoRenbanCsvEntity
      */
-    public HanyoListShotokuJohoCsvEntity editor(HanyoListShotokuJohoEntity entity,
-            HanyoListShotokuJohoProcessParameter parameter, Decimal 連番, HokenryoDankaiList 保険料段階リスト,
+    public HanyoListShotokuJohoNoRenbanCsvEntity editor(HanyoListShotokuJohoEntity entity,
+            HanyoListShotokuJohoProcessParameter parameter, HokenryoDankaiList 保険料段階リスト,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
-        HanyoListShotokuJohoCsvEntity csvEntity = new HanyoListShotokuJohoCsvEntity();
-        csvEntity.set連番(numToRString(連番));
+        HanyoListShotokuJohoNoRenbanCsvEntity csvEntity = new HanyoListShotokuJohoNoRenbanCsvEntity();
         editor宛名(csvEntity, entity, parameter);
         editor地区(csvEntity, entity);
         editor前住所(csvEntity, entity, parameter);
@@ -84,7 +82,7 @@ public class HanyoListShotokuJohoCsvEditor {
         return csvEntity;
     }
 
-    private void editor宛名(HanyoListShotokuJohoCsvEntity csvEntity, HanyoListShotokuJohoEntity entity,
+    private void editor宛名(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity, HanyoListShotokuJohoEntity entity,
             HanyoListShotokuJohoProcessParameter parameter) {
         ShikibetsuCode shikibetsuCode = entity.get宛名Entity().getShikibetsuCode();
         if (shikibetsuCode != null) {
@@ -153,7 +151,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
     }
 
-    private void editor地区(HanyoListShotokuJohoCsvEntity csvEntity,
+    private void editor地区(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity,
             HanyoListShotokuJohoEntity entity) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -231,7 +229,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
     }
 
-    private void editor前住所(HanyoListShotokuJohoCsvEntity csvEntity,
+    private void editor前住所(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity,
             HanyoListShotokuJohoEntity entity, HanyoListShotokuJohoProcessParameter parameter) {
 
         IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
@@ -299,7 +297,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
     }
 
-    private void editor宛先(HanyoListShotokuJohoCsvEntity csvEntity,
+    private void editor宛先(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity,
             HanyoListShotokuJohoEntity entity) {
         csvEntity.set市町村コード(isNull(entity.get市町村コード())
                 ? RString.EMPTY : entity.get市町村コード().value());
@@ -381,7 +379,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
     }
 
-    private void editor資格(HanyoListShotokuJohoCsvEntity csvEntity,
+    private void editor資格(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity,
             HanyoListShotokuJohoEntity entity, HanyoListShotokuJohoProcessParameter parameter) {
         csvEntity.set送付先行政区名(isNull(entity.get宛先Entity().getGyoseiku())
                 ? RString.EMPTY : entity.get宛名Entity().getGyoseikuName());
@@ -416,7 +414,7 @@ public class HanyoListShotokuJohoCsvEditor {
 
     }
 
-    private void editor資格Two(HanyoListShotokuJohoCsvEntity csvEntity,
+    private void editor資格Two(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity,
             HanyoListShotokuJohoEntity entity, HanyoListShotokuJohoProcessParameter parameter, HokenryoDankaiList 保険料段階リスト,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
         if (FLAG.equals(entity.get広域内住所地特例フラグ())) {
@@ -452,10 +450,9 @@ public class HanyoListShotokuJohoCsvEditor {
         } else {
             csvEntity.set激変緩和区分(RString.EMPTY);
         }
-
     }
 
-    private void set保険者番号By広住特措置元市町村コード(HanyoListShotokuJohoCsvEntity csvEntity, HanyoListShotokuJohoEntity entity,
+    private void set保険者番号By広住特措置元市町村コード(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity, HanyoListShotokuJohoEntity entity,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
         if (構成市町村マスタlist.size() > 定数_ZERO && entity.get広住特措置元市町村コード() != null) {
             for (int i = 定数_ZERO; i < 構成市町村マスタlist.size(); i++) {
@@ -466,7 +463,7 @@ public class HanyoListShotokuJohoCsvEditor {
         }
     }
 
-    private void set保険者番号By市町村コード(HanyoListShotokuJohoCsvEntity csvEntity, HanyoListShotokuJohoEntity entity,
+    private void set保険者番号By市町村コード(HanyoListShotokuJohoNoRenbanCsvEntity csvEntity, HanyoListShotokuJohoEntity entity,
             List<KoseiShichosonMaster> 構成市町村マスタlist) {
         if (構成市町村マスタlist.size() > 定数_ZERO && entity.get市町村コード() != null) {
             for (int i = 定数_ZERO; i < 構成市町村マスタlist.size(); i++) {

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistshotokujoho.HanyoListShotokuJohoProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.hanyolistshotokujoho.HanyoListShotokuJohoCsvEditor;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoNoRenbanCsvEntity;
+import jp.co.ndensan.reams.db.dbb.service.core.hanyolistshotokujoho.HanyoListShotokuJohoNoRenbanCsvEditor;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -60,11 +60,11 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * バッチ設計_DBBBT22002_汎用リスト 所得情報Processのクラス
+ * バッチ設計_DBBBT22002_汎用リスト 所得情報NoRenbanProcessのクラス
  *
  * @reamsid_L DBB-1901-030 surun
  */
-public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShotokuJohoEntity> {
+public class HanyoListShotokuJohoNoRenbanProcess extends BatchProcessBase<HanyoListShotokuJohoEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "hanyolistshotokujoho.IHanyoListShotokuJohoMapper.getCSVData");
@@ -120,7 +120,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private static final RString 地区3SHOW = new RString("地区3：");
     private static final RString 保険者SHOW = new RString("保険者：");
     private static final int INDEX_ZERO = 0;
-    private HanyoListShotokuJohoCsvEditor csvEditor;
+    private HanyoListShotokuJohoNoRenbanCsvEditor csvEditor;
     private HanyoListShotokuJohoProcessParameter processParameter;
     private List<PersonalData> personalDataList;
     private HokenryoDankaiList 保険料段階リスト;
@@ -129,16 +129,14 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     private FileSpoolManager manager;
     private YMDHMS システム日時;
     private RString eucFilePath;
-    private Decimal 連番;
 
     @BatchWriter
-    private EucCsvWriter<HanyoListShotokuJohoCsvEntity> eucCsvWriter;
+    private EucCsvWriter<HanyoListShotokuJohoNoRenbanCsvEntity> eucCsvWriter;
 
     @Override
     protected void beforeExecute() {
-        連番 = Decimal.ONE;
         システム日時 = YMDHMS.now();
-        csvEditor = new HanyoListShotokuJohoCsvEditor();
+        csvEditor = new HanyoListShotokuJohoNoRenbanCsvEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
@@ -171,8 +169,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
 
     @Override
     protected void process(HanyoListShotokuJohoEntity entity) {
-        eucCsvWriter.writeLine(csvEditor.editor(entity, processParameter, 連番, 保険料段階リスト, 構成市町村マスタlist));
-        連番 = 連番.add(Decimal.ONE);
+        eucCsvWriter.writeLine(csvEditor.editor(entity, processParameter, 保険料段階リスト, 構成市町村マスタlist));
         personalDataList.add(toPersonalData(entity));
     }
 
@@ -185,7 +182,7 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
     @Override
     protected void afterExecute() {
         if ((personalDataList == null || personalDataList.isEmpty()) && processParameter.is項目名付加()) {
-            eucCsvWriter.writeLine(new HanyoListShotokuJohoCsvEntity());
+            eucCsvWriter.writeLine(new HanyoListShotokuJohoNoRenbanCsvEntity());
         }
         eucCsvWriter.close();
         if (personalDataList == null || personalDataList.isEmpty()) {
@@ -366,5 +363,4 @@ public class HanyoListShotokuJohoProcess extends BatchProcessBase<HanyoListShoto
             builder.append(課税取消FALSE);
         }
     }
-
 }
