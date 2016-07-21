@@ -92,8 +92,10 @@ public class TokuchoSeidokanIFSakuseiDBUpdateProcess extends BatchProcessBase<Ue
             対象者情報追加Temp.insert(entity);
         }
         List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> uet0515EntityList = sakuseiBatch.intNenkinTokuChoTaishosyaJoho();
-        for (UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity : uet0515EntityList) {
-            ueT0515Writer.insert(entity);
+        if (uet0515EntityList != null && !uet0515EntityList.isEmpty()) {
+            for (UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity : uet0515EntityList) {
+                ueT0515Writer.insert(entity);
+            }
         }
         updateDB();
     }
