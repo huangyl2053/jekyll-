@@ -13,7 +13,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBB",
      "toLayoutName": "DBB2710002",
-     "toLayoutTitle": "特別徴収対象者一覧作成",
+     "toLayoutTitle": "特別徴収対象者一覧確認",
      "toState": ""
     },
     {
@@ -21,10 +21,38 @@
      "type": "end",
      "layoutSubGyomuCode": "DBB",
      "layoutName": "DBB2710002",
-     "layoutTitle": "特別徴収対象者一覧作成",
+     "layoutTitle": "特別徴収対象者一覧確認",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2710002",
+     "layoutTitle": "特別徴収対象者一覧確認",
+     "eventName": "被保険者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB2710002",
+     "toLayoutTitle": "特別徴収対象者一覧確認",
+     "toState": "特別徴収同定候補者一覧"
     }
    ]
   }
