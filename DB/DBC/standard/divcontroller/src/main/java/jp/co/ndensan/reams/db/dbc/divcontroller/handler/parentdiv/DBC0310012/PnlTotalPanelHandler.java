@@ -451,7 +451,7 @@ public class PnlTotalPanelHandler {
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約申請受付日.toString()).evaluate());
         }
-        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() != null) {
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約申請日.toString()).evaluate());
         }
         if (div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue().isEmpty()) {

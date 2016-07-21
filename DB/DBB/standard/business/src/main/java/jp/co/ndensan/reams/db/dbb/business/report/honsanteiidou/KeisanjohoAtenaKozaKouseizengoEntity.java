@@ -17,19 +17,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.Keisa
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KeisanjohoAtenaKozaKouseizengoEntity {
 
-    private final KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
-    private final KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
-
-    /**
-     * コンストラクタです。
-     *
-     * @param 計算後情報_宛名_口座_更正前Entity KeisangojohoAtenaKozaEntity
-     * @param 計算後情報_宛名_口座_更正後Entity KeisangojohoAtenaKozaEntity
-     */
-    public KeisanjohoAtenaKozaKouseizengoEntity(KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity,
-            KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity) {
-        this.計算後情報_宛名_口座_更正前Entity = 計算後情報_宛名_口座_更正前Entity;
-        this.計算後情報_宛名_口座_更正後Entity = 計算後情報_宛名_口座_更正後Entity;
-    }
+    private KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity;
+    private KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity;
 
 }

@@ -101,7 +101,7 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
         eucCsvEntity.set在宅サービス種類名(entity.get在宅サービス種類名());
         eucCsvEntity.set主訴(entity.get主訴());
-        eucCsvEntity.set家族状況(setYobuinNoFormat(entity.get家族状況()));
+        eucCsvEntity.set家族状況(entity.get家族状況());
         eucCsvEntity.set居住環境(entity.get居住環境());
         eucCsvEntity.set機器_器械(entity.get機器_器械());
         eucCsvEntity.set認定調査特記事項番号(entity.get認定調査特記事項番号());

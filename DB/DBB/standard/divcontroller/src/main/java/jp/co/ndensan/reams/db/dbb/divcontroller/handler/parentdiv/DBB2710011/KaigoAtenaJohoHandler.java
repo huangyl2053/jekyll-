@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.Kaig
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.NenkinInfoKensakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.NenkinJohoKensakuDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokuManager;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -134,13 +134,16 @@ public class KaigoAtenaJohoHandler {
         div.getNenkinJohoKensaku().getTxtNenkinMeiSho().setValue(年金名称);
         if (!資格喪失フラグ) {
             RString 捕捉月 = get捕捉月(年度内処理済み連番, 最新介護徴収方法情報データ);
+            if (null == 捕捉月) {
+                捕捉月 = RString.EMPTY;
+            }
             div.setCatchMoon(捕捉月);
             TokuchoStartMonth 特別徴収開始月 = get特別徴収開始月(捕捉月);
+            if (特別徴収開始月 != null) {
+                div.getTxtKaishiTsuki().setValue(特別徴収開始月.getコード());
+            }
             NenkinTokuchoKaifuJoho 特徴の情報
                     = 特別徴収対象者登録Manager.getTokuchoTaishosha(賦課年度, 捕捉月, 基礎年金番号Old, 年金コードOld);
-            if (特別徴収開始月 != null) {
-                div.getTxtKaishiTsuki().setValue(特別徴収開始月.get名称());
-            }
             set年金情報パネル(特徴の情報);
         }
         return false;
@@ -300,7 +303,20 @@ public class KaigoAtenaJohoHandler {
         NenkinTokuchoKaifuJoho 特徴の情報
                 = 特別徴収対象者登録Manager.getTokuchoTaishosha(賦課年度, div.getCatchMoon(),
                         div.getTxtKisoNenkinNo().getValue(), div.getTxtNenkinCode().getValue());
+        clean年金情報パネル();
         set年金情報パネル(特徴の情報);
+    }
+
+    private void clean年金情報パネル() {
+        div.getTxtKaishiTsuki().clearValue();
+        div.getTxtHosokuTsuki().clearValue();
+        div.getTxtShimeiKana().clearValue();
+        div.getTxtShimeiKanji().clearValue();
+        div.getTxtJushoKana().clearValue();
+        div.getTxtJushoKanji().clearValue();
+        div.getTxtUmareYMD().clearValue();
+        div.getTxtSebetsu().clearValue();
+        div.getTxtTokuchoGimusha().clearValue();
     }
 
     /**
@@ -374,13 +390,9 @@ public class KaigoAtenaJohoHandler {
         if (div.getTokubetsuChoshuGimushaCode() != null) {
             特徴義務者コード = div.getTokubetsuChoshuGimushaCode();
         }
-        int 登録件数 = 特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード, 特徴義務者コード);
+        特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード, 特徴義務者コード);
         RString 氏名 = div.getCcdKaigoAtenaInfo().get氏名漢字();
-        if (登録件数 > 0) {
-            div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード.getColumnValue(), 氏名, true);
-        } else {
-            div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード.getColumnValue(), 氏名, false);
-        }
+        div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード.getColumnValue(), 氏名, true);
     }
 
     /**

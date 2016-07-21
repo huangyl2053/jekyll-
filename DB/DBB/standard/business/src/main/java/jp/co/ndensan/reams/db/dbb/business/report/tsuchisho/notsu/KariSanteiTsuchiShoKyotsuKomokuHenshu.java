@@ -279,12 +279,12 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private void set更正前ByIsNotEmpty(EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, FukaJoho 賦課情報_更正前) {
-        更正前.set更正前介護保険料減免額(賦課情報_更正前.get減免額());
-        更正前.set更正前特徴期別金額01(賦課情報_更正前.get特徴期別金額01());
-        更正前.set更正前特徴期別金額02(賦課情報_更正前.get特徴期別金額02());
-        更正前.set更正前特徴期別金額03(賦課情報_更正前.get特徴期別金額03());
-        更正前.set更正前特徴期別金額合計(賦課情報_更正前.get特徴期別金額01().
-                add(賦課情報_更正前.get特徴期別金額02()).add(賦課情報_更正前.get特徴期別金額03()));
+        更正前.set更正前介護保険料減免額(nullToZero(賦課情報_更正前.get減免額()));
+        更正前.set更正前特徴期別金額01(nullToZero(賦課情報_更正前.get特徴期別金額01()));
+        更正前.set更正前特徴期別金額02(nullToZero(賦課情報_更正前.get特徴期別金額02()));
+        更正前.set更正前特徴期別金額03(nullToZero(賦課情報_更正前.get特徴期別金額03()));
+        更正前.set更正前特徴期別金額合計(nullToZero(賦課情報_更正前.get特徴期別金額01()).
+                add(nullToZero(賦課情報_更正前.get特徴期別金額02())).add(nullToZero(賦課情報_更正前.get特徴期別金額03())));
         更正前.set更正前普徴期別金額合計(get普徴期別金額合計(賦課情報_更正前));
         更正前.set更正前資格取得日(賦課情報_更正前.get資格取得日() == null ? RString.EMPTY
                 : 賦課情報_更正前.get資格取得日().wareki().eraType(EraType.KANJI)
@@ -384,14 +384,14 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private void set更正後ByIsNotEmpty(EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後, FukaJoho 賦課情報_更正後) {
-        更正後.set更正後介護保険料減免額(賦課情報_更正後.get減免額());
-        更正後.set更正後特徴期別金額01(賦課情報_更正後.get特徴期別金額01());
-        更正後.set更正後特徴期別金額02(賦課情報_更正後.get特徴期別金額02());
-        更正後.set更正後特徴期別金額03(賦課情報_更正後.get特徴期別金額03());
-        更正後.set更正後特徴期別金額合計(賦課情報_更正後.get特徴期別金額01()
-                .add(賦課情報_更正後.get特徴期別金額02()).add(賦課情報_更正後.get特徴期別金額03()));
-        更正後.set更正後普徴第１期金額(賦課情報_更正後.get特徴期別金額01());
-        更正後.set更正後普徴第２期金額(賦課情報_更正後.get特徴期別金額02());
+        更正後.set更正後介護保険料減免額(nullToZero(賦課情報_更正後.get減免額()));
+        更正後.set更正後特徴期別金額01(nullToZero(賦課情報_更正後.get特徴期別金額01()));
+        更正後.set更正後特徴期別金額02(nullToZero(賦課情報_更正後.get特徴期別金額02()));
+        更正後.set更正後特徴期別金額03(nullToZero(賦課情報_更正後.get特徴期別金額03()));
+        更正後.set更正後特徴期別金額合計(nullToZero(賦課情報_更正後.get特徴期別金額01())
+                .add(nullToZero(賦課情報_更正後.get特徴期別金額02())).add(nullToZero(賦課情報_更正後.get特徴期別金額03())));
+        更正後.set更正後普徴第１期金額(nullToZero(賦課情報_更正後.get特徴期別金額01()));
+        更正後.set更正後普徴第２期金額(nullToZero(賦課情報_更正後.get特徴期別金額02()));
         更正後.set更正後普徴期別金額合計(get普徴期別金額合計(賦課情報_更正後));
         更正後.set更正後資格取得日(賦課情報_更正後.get資格取得日() == null ? RString.EMPTY : 賦課情報_更正後.get資格取得日().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -562,11 +562,11 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private Decimal get普徴期別金額合計(FukaJoho 賦課情報) {
 
-        return 賦課情報.get普徴期別金額01().add(賦課情報.get普徴期別金額02()).add(賦課情報.get普徴期別金額03())
-                .add(賦課情報.get普徴期別金額04()).add(賦課情報.get普徴期別金額05()).add(賦課情報.get普徴期別金額06())
-                .add(賦課情報.get普徴期別金額07()).add(賦課情報.get普徴期別金額08()).add(賦課情報.get普徴期別金額09())
-                .add(賦課情報.get普徴期別金額09()).add(賦課情報.get普徴期別金額10()).add(賦課情報.get普徴期別金額11())
-                .add(賦課情報.get普徴期別金額12()).add(賦課情報.get普徴期別金額13()).add(賦課情報.get普徴期別金額14());
+        return nullToZero(賦課情報.get普徴期別金額01()).add(nullToZero(賦課情報.get普徴期別金額02())).add(nullToZero(賦課情報.get普徴期別金額03()))
+                .add(nullToZero(賦課情報.get普徴期別金額04())).add(nullToZero(賦課情報.get普徴期別金額05())).add(nullToZero(賦課情報.get普徴期別金額06()))
+                .add(nullToZero(賦課情報.get普徴期別金額07())).add(nullToZero(賦課情報.get普徴期別金額08())).add(nullToZero(賦課情報.get普徴期別金額09()))
+                .add(nullToZero(賦課情報.get普徴期別金額09())).add(nullToZero(賦課情報.get普徴期別金額10())).add(nullToZero(賦課情報.get普徴期別金額11()))
+                .add(nullToZero(賦課情報.get普徴期別金額12())).add(nullToZero(賦課情報.get普徴期別金額13())).add(nullToZero(賦課情報.get普徴期別金額14()));
     }
 
     private List<UniversalPhase> get普徴期別金額リストBy賦課情報(List<NokiJoho> 納期情報リスト, FukaJoho 賦課情報) {
@@ -588,7 +588,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By収入情報(RString メソッド_収入, ShunyuJoho shunyuJoho, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
+            納付済額 = 納付済額.add(get納付額By収入期(メソッド_収入, i, shunyuJoho));
         }
         return 納付済額;
     }
@@ -596,7 +596,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private Decimal get納付額By賦課情報(RString メソッド_賦課, FukaJoho 賦課情報, int start, int end) {
         Decimal 納付済額 = Decimal.ZERO;
         for (int i = start; i <= end; i++) {
-            納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
+            納付済額 = 納付済額.add(get納付額By賦課期(メソッド_賦課, i, 賦課情報));
         }
         return 納付済額;
     }

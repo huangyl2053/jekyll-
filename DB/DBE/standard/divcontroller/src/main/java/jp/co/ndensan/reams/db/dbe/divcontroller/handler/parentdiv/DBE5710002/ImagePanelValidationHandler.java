@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710002.ImagePanelDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,25 +35,42 @@ public class ImagePanelValidationHandler {
     /**
      * 要介護認定イメージ情報出力をチェックします。
      *
+     * @param 存在する調査票概況特記 List<RString>
+     * @param 存在する調査票概況 List<RString>
+     * @param 存在する主治医意見書 List<RString>
+     * @param 存在するその他資料 List<RString>
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs do事前チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs do事前チェック(
+            List<RString> 存在する調査票概況特記,
+            List<RString> 存在する調査票概況,
+            List<RString> 存在する主治医意見書,
+            List<RString> 存在するその他資料) {
         if (div.getChkImage().getSelectedKeys().isEmpty()) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.出力項目を指定));
-        } else {
-            if (div.getChkImage().getSelectedKeys().contains(調査票)) {
-                validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.調査票));
-            }
-            if (div.getChkImage().getSelectedKeys().contains(調査票概況)) {
-                validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.調査票概況));
-            }
-            if (div.getChkImage().getSelectedKeys().contains(主治医意見書)) {
-                validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.主治医意見書));
-            }
-            if (div.getChkImage().getSelectedKeys().contains(その他資料)) {
-                validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.その他資料));
-            }
+            return validationMessages;
+        }
+        return doチェックByイメージ対象(存在する調査票概況特記, 存在する調査票概況, 存在する主治医意見書, 存在するその他資料);
+    }
+
+    private ValidationMessageControlPairs doチェックByイメージ対象(
+            List<RString> 存在する調査票概況特記ファイル,
+            List<RString> 存在する調査票概況ファイル,
+            List<RString> 存在する主治医意見書ファイル,
+            List<RString> 存在するその他資料ファイル) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getChkImage().getSelectedKeys().contains(調査票) && 存在する調査票概況特記ファイル.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.調査票));
+        }
+        if (div.getChkImage().getSelectedKeys().contains(調査票概況) && 存在する調査票概況ファイル.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.調査票概況));
+        }
+        if (div.getChkImage().getSelectedKeys().contains(主治医意見書) && 存在する主治医意見書ファイル.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.主治医意見書));
+        }
+        if (div.getChkImage().getSelectedKeys().contains(その他資料) && 存在するその他資料ファイル.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.その他資料));
         }
         return validationMessages;
     }

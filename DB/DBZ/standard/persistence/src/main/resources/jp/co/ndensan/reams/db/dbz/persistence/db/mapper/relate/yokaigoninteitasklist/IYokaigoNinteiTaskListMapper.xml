@@ -1016,15 +1016,15 @@
             DbT5105."ninteichosaKanryoYMD",
             DbT5105."ikenshoTorokuKanryoYMD",
             DbT5105."maskingKanryoYMD",
-            DbT4115."imageSharedFileId"
+            DbT5115."imageSharedFileId"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT4115Image" DbT4115
-                ON  DbT4115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT5115Image" DbT5115
+                ON  DbT5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -1054,8 +1054,8 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" 
                 ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT4115Image" DbT4115
-                ON  DbT4115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT5115Image" DbT5115
+                ON  DbT5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
                 "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -1349,10 +1349,10 @@
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051                                                                       
                 ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
+            LEFT JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
         WHERE                                                                                
-                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
             AND DbT5105."ninteichosaKanryoYMD" IS NULL
             AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
@@ -1379,10 +1379,10 @@
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051                                                                       
                 ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" 
+            LEFT JOIN  rgdb."DbT5105NinteiKanryoJoho" 
                 ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
         WHERE                                                                                
-                "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NULL
             AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NULL
             AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NULL
             AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NULL

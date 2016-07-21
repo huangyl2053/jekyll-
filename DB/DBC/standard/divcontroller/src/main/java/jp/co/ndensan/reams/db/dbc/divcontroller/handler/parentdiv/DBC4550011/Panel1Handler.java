@@ -169,6 +169,14 @@ public class Panel1Handler {
     }
 
     /**
+     * 編集エリア：ファイル名称、媒体の項目値を破棄します。
+     */
+    public void set入力値破棄() {
+        div.getTextBox1().clearValue();
+        div.getTextBox2().clearValue();
+    }
+
+    /**
      * 業務コンフィグの保存処理です。
      */
     public void config保存() {

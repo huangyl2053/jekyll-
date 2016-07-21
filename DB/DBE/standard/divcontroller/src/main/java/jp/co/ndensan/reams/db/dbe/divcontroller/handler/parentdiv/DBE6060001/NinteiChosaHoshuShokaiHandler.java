@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 認定調査報酬照会のハンドラークラスです。
@@ -67,6 +68,8 @@ public class NinteiChosaHoshuShokaiHandler {
             row.setChosakikanMei(調査一覧.get事業者名称());
             row.setHihokenshaBango(調査一覧.get被保険者番号());
             row.setHokenshaBango(調査一覧.get証記載保険者番号());
+            row.setNinteichosaIraiRirekiNo(new RString(調査一覧.get認定調査依頼履歴番号()));
+            row.setShinseishoKanriNo(調査一覧.get申請書管理番号().getColumnValue());
             if (!調査一覧.get認定調査依頼年月日().isEmpty()) {
                 row.getIraibi().setValue(new RDate(調査一覧.get認定調査依頼年月日().getYearValue(),
                         調査一覧.get認定調査依頼年月日().getMonthValue(),
@@ -88,32 +91,32 @@ public class NinteiChosaHoshuShokaiHandler {
             row.setShinseishaShimei(調査一覧.get被保険者氏名().getColumnValue());
             if (ChosaKubun.新規調査.getコード().equals(調査一覧.get認定調査区分コード().value())
                     && ChosaJisshiBashoCode.自宅内.getコード().equals(調査一覧.get認定調査実施場所コード().value())) {
-                row.setShisetsuSai(項目状態);
+                row.setZaitakuSho(項目状態);
                 在宅_初 = 在宅_初 + 1;
             }
             if (ChosaKubun.再調査.getコード().equals(調査一覧.get認定調査区分コード().value())
                     && ChosaJisshiBashoCode.自宅内.getコード().equals(調査一覧.get認定調査実施場所コード().value())) {
-                row.setShisetsuSho(項目状態);
+                row.setZaitakuSai(項目状態);
                 在宅_再 = 在宅_再 + 1;
             }
             if (ChosaKubun.新規調査.getコード().equals(調査一覧.get認定調査区分コード().value())
                     && !ChosaJisshiBashoCode.自宅内.getコード().equals(調査一覧.get認定調査実施場所コード().value())) {
-                row.setZaitakuSai(項目状態);
+                row.setShisetsuSho(項目状態);
                 施設_初 = 施設_初 + 1;
             }
             if (ChosaKubun.再調査.getコード().equals(調査一覧.get認定調査区分コード().value())
                     && !ChosaJisshiBashoCode.自宅内.getコード().equals(調査一覧.get認定調査実施場所コード().value())) {
-                row.setZaitakuSho(項目状態);
+                row.setShisetsuSai(項目状態);
                 施設_再 = 施設_再 + 1;
             }
-            row.getItakuryo().setValue(new Decimal(調査一覧.get認定調査委託料()));
+            row.setItakuryo(DecimalFormatter.toコンマ区切りRString(new Decimal(調査一覧.get認定調査委託料()), 0).concat("円"));
             委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
             listRow.add(row);
             アクセスログ(調査一覧.get申請書管理番号().getColumnValue());
         }
         div.getDgNinteiChosaHoshu().setDataSource(listRow);
-        div.getTxtZaitakuSaichosa().setValue(new Decimal(在宅_初));
-        div.getTxtZaitakuShokai().setValue(new Decimal(在宅_再));
+        div.getTxtZaitakuSaichosa().setValue(new Decimal(在宅_再));
+        div.getTxtZaitakuShokai().setValue(new Decimal(在宅_初));
         div.getTxtShisetsuShokai().setValue(new Decimal(施設_初));
         div.getTxtShisetsuSaichosa().setValue(new Decimal(施設_再));
         div.getTxtItakuryoGokei().setValue(委託料);

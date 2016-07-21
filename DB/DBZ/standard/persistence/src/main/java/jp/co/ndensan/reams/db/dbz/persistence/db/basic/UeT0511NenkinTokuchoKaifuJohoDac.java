@@ -36,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 年金特徴回付情報（介護継承）のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-022 yangchenbing
  */
 public class UeT0511NenkinTokuchoKaifuJohoDac implements ISaveable<UeT0511NenkinTokuchoKaifuJohoEntity> {
 

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSogoJigyoServiceHiTaishoshaIchiranEditor {
 
     private static final RString SAKUSEI = new RString("作成");
-    private static final RString 定数 = new RString("単");
+    private static final RString 単独合算 = new RString("単");
     private final KogakuSogoJigyoServiceHiTaishoshaIchiranEntity 高額総合事業サービス費対象者一覧表;
     private final YMDHMS システム日時;
     private final Association association;
@@ -157,7 +157,7 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get世帯コード() != null) {
             source.listTaishoshaIchiran_6 = 高額総合事業サービス費対象者一覧表.get世帯コード().getColumnValue();
         }
-        source.listTaishoshaIchiran_7 = 定数;
+        source.listTaishoshaIchiran_7 = 単独合算;
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get利用者負担額() != null) {
             source.listTaishoshaIchiran_8 = new RString(高額総合事業サービス費対象者一覧表.get利用者負担額().toString());
         }

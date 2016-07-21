@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;

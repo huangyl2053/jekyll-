@@ -15,7 +15,9 @@ public enum DBD5020001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    初期表示("初期表示");
+    要介護認定("要介護認定"),
+    却下完了("却下完了"),
+    認定完了("認定完了");
 
     private final RString name;
 

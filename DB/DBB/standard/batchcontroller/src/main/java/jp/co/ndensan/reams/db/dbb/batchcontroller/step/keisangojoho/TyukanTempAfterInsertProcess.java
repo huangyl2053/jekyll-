@@ -40,6 +40,7 @@ public class TyukanTempAfterInsertProcess extends BatchProcessBase<DbT2002FukaEn
     private static final RString システムエラー = new RString("バッチパラメータの調定年度または賦課年度が未設定のため、処理を中止します。"
             + "バッチパラメータに調定年度または賦課年度を設定してください。");
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
+    private static final RString TABLE_計算後情報一時_NAME = new RString("DbT2015KeisangoJohoTemp");
     private KeisangoJohoSakuseiProcessParamter processParamter;
     private KeisangoJohoSakuseiMybitisParamter mybatisParamter;
     /**
@@ -53,6 +54,8 @@ public class TyukanTempAfterInsertProcess extends BatchProcessBase<DbT2002FukaEn
     private OutputParameter<Boolean> outData;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 計算中間Temp;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 計算後情報Temp;
 
     @Override
     protected void initialize() {
@@ -79,6 +82,8 @@ public class TyukanTempAfterInsertProcess extends BatchProcessBase<DbT2002FukaEn
     @Override
     protected void createWriter() {
         計算中間Temp = new BatchEntityCreatedTempTableWriter(TABLE_計算中間_NAME,
+                DbTKeisangoJohoTempTableEntity.class);
+        計算後情報Temp = new BatchEntityCreatedTempTableWriter(TABLE_計算後情報一時_NAME,
                 DbTKeisangoJohoTempTableEntity.class);
     }
 

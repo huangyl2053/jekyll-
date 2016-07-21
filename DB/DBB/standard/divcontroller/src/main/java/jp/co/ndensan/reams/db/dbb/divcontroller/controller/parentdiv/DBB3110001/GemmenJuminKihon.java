@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kaigohokenryogemmen.NendobunFuka
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.DBB3110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.GemmenJuminKihonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3110001.GemmenJuminKihonHandler;
+import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3110001.GemmenJuminKihonValidationHandler;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigohokenryogemmen.KaigoHokenryoGemmen;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -63,12 +65,18 @@ public class GemmenJuminKihon {
     public ResponseData<GemmenJuminKihonDiv> onLoad(GemmenJuminKihonDiv div) {
         GemmenJuminKihonHandler handler = getHandler(div);
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
-        ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
-        HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
-        FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
-        FlexibleYear 調定年度 = 賦課対象者.get調定年度();
-        TsuchishoNo 通知書番号 = 賦課対象者.get通知書番号();
-        LasdecCode 市町村コード = 賦課対象者.get市町村コード();
+//        ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
+//        HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
+//        FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
+//        FlexibleYear 調定年度 = 賦課対象者.get調定年度();
+//        TsuchishoNo 通知書番号 = 賦課対象者.get通知書番号();
+//        LasdecCode 市町村コード = 賦課対象者.get市町村コード();
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        HihokenshaNo 被保険者番号 = new HihokenshaNo("0002");
+        FlexibleYear 賦課年度 = new FlexibleYear("2018");
+        FlexibleYear 調定年度 = new FlexibleYear("2020");
+        TsuchishoNo 通知書番号 = new TsuchishoNo("009");
+        LasdecCode 市町村コード = new LasdecCode("000003");
         Builder builder = new Builder(通知書番号, 賦課年度, 市町村コード, 識別コード);
         KaigoFukaKihonSearchKey searchKey = builder.build();
         handler.loadヘッダパネル(識別コード, 被保険者番号, new FukaNendo(賦課年度), searchKey);
@@ -208,8 +216,24 @@ public class GemmenJuminKihon {
         boolean show発行ボタン = getHandler(div).onClick_btnUpt(年度分賦課減免リスト);
         if (show発行ボタン) {
             ViewStateHolder.put(ViewStateKeys.実行フラグ, 発行ボタンSHOW);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.実行フラグ, 処理_取消);
         }
         return ResponseData.of(div).setState(DBB3110001StateName.更新結果確認);
+    }
+
+    /**
+     * 「発行する」ボタン押下のチックです。
+     *
+     * @param div GemmenJuminKihonDiv
+     * @return 更新結果確認画面
+     */
+    public ResponseData<GemmenJuminKihonDiv> onClick_btnPrtCheck(GemmenJuminKihonDiv div) {
+        ValidationMessageControlPairs pairs = new GemmenJuminKihonValidationHandler(div).未指定のValidate();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        return createResponse(div);
     }
 
     /**

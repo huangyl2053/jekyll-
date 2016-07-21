@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuhoho;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

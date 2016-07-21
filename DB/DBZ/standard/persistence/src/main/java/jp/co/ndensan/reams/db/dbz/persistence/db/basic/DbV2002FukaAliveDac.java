@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.choteiNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002Fuka.choteiNichiji;
@@ -139,7 +140,7 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<DbV2002FukaEntity> select賦課情報(
+    public List<DbT2002FukaEntity> select賦課情報(
             FlexibleYear 調定年度,
             FlexibleYear 賦課年度) throws NullPointerException {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -152,6 +153,6 @@ public class DbV2002FukaAliveDac implements ISaveable<DbV2002FukaEntity> {
                 where(and(
                                 eq(choteiNendo, 調定年度),
                                 eq(fukaNendo, 賦課年度))).
-                toList(DbV2002FukaEntity.class);
+                toList(DbT2002FukaEntity.class);
     }
 }

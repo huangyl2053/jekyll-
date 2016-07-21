@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolistseikatsuhogojukyusha.SeikatsuhogoJukyushaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -175,6 +178,12 @@ public class HanyoListBatchParameter extends BatchParameterBase {
     private RString psmChiku3_To_Name;
 
     /**
+     * コンストラクタです。
+     */
+    public HanyoListBatchParameter() {
+    }
+
+    /**
      * 汎用リスト 生活保護受給者のパラメータを作成します。
      *
      * @return SeikatsuhogoJukyushaProcessParameter
@@ -195,6 +204,169 @@ public class HanyoListBatchParameter extends BatchParameterBase {
                 jukyushaJoho_Nihonjin,
                 jukyushaJoho_Gaikokujin,
                 fujoShurui,
+                psmChushutsu_Kubun,
+                psmChushutsuAge_Start,
+                psmChushutsuAge_End,
+                psmSeinengappiYMD_Start,
+                psmSeinengappiYMD_End,
+                psmAgeKijunni,
+                shichoson_Code,
+                shichoson_Name,
+                psmChiku_Kubun,
+                psmJusho_From,
+                psmJusho_From_Name,
+                psmJusho_To,
+                psmJusho_To_Name,
+                psmGyoseiku_From,
+                psmGyoseiku_From_Name,
+                psmGyoseiku_To,
+                psmGyoseiku_To_Name,
+                psmChiku1_From,
+                psmChiku1_To,
+                psmChiku2_From,
+                psmChiku2_To,
+                psmChiku3_From,
+                psmChiku3_To,
+                psmChiku1_From_Name,
+                psmChiku1_To_Name,
+                psmChiku2_From_Name,
+                psmChiku2_To_Name,
+                psmChiku3_From_Name,
+                psmChiku3_To_Name);
+    }
+
+    /**
+     * 汎用リスト 適用除外者のパラメータを作成します。
+     *
+     * @return HanyoListTekiyoKaishaProcessParameter
+     */
+    public HanyoListTekiyoJogaishaProcessParameter toHanyoListTekiyoKaishaProcessParameter() {
+        return new HanyoListTekiyoJogaishaProcessParameter(
+                chohyoId,
+                shutsuryokujunId,
+                shutsuryokuKomokuId,
+                komokumeiFuka,
+                renbanFuka,
+                hitsukeHenshu,
+                hitsukeChushutsuKubun,
+                kijunYMD,
+                chushutsunichiKubun,
+                chushutsunichiFrom,
+                chushutsunichiTo,
+                jukyushaJoho_Nihonjin,
+                jukyushaJoho_Gaikokujin,
+                kijunYMDkubun,
+                jyuChusyutsuKubun,
+                dekyujyu,
+                kaijyojyu,
+                shisetsuHenkoari,
+                shisetsuHenkonashi,
+                psmChushutsu_Kubun,
+                psmChushutsuAge_Start,
+                psmChushutsuAge_End,
+                psmSeinengappiYMD_Start,
+                psmSeinengappiYMD_End,
+                psmAgeKijunni,
+                shichoson_Code,
+                shichoson_Name,
+                psmChiku_Kubun,
+                psmJusho_From,
+                psmJusho_From_Name,
+                psmJusho_To,
+                psmJusho_To_Name,
+                psmGyoseiku_From,
+                psmGyoseiku_From_Name,
+                psmGyoseiku_To,
+                psmGyoseiku_To_Name,
+                psmChiku1_From,
+                psmChiku1_To,
+                psmChiku2_From,
+                psmChiku2_To,
+                psmChiku3_From,
+                psmChiku3_To,
+                psmChiku1_From_Name,
+                psmChiku1_To_Name,
+                psmChiku2_From_Name,
+                psmChiku2_To_Name,
+                psmChiku3_From_Name,
+                psmChiku3_To_Name);
+    }
+
+    /**
+     * 汎用リスト 他市町村住所地特例者のパラメータを作成します。
+     *
+     * @return HanyoListTaShichosonJushochiTokureishaProcessParameter
+     */
+    public HanyoListTaShichosonJushochiTokureishaProcessParameter toHanyoListTaShichosonJushochiTokureishaProcessParameter() {
+        return new HanyoListTaShichosonJushochiTokureishaProcessParameter(
+                chohyoId,
+                shutsuryokujunId,
+                shutsuryokuKomokuId,
+                komokumeiFuka,
+                renbanFuka,
+                hitsukeHenshu,
+                hitsukeChushutsuKubun,
+                kijunYMD,
+                chushutsunichiKubun,
+                chushutsunichiFrom,
+                chushutsunichiTo,
+                jukyushaJoho_Nihonjin,
+                jukyushaJoho_Gaikokujin,
+                kijunYMDkubun,
+                jyuChusyutsuKubun,
+                dekyujyu,
+                kaijyojyu,
+                shisetsuHenkoari,
+                shisetsuHenkonashi,
+                psmChushutsu_Kubun,
+                psmChushutsuAge_Start,
+                psmChushutsuAge_End,
+                psmSeinengappiYMD_Start,
+                psmSeinengappiYMD_End,
+                psmAgeKijunni,
+                shichoson_Code,
+                shichoson_Name,
+                psmChiku_Kubun,
+                psmJusho_From,
+                psmJusho_From_Name,
+                psmJusho_To,
+                psmJusho_To_Name,
+                psmGyoseiku_From,
+                psmGyoseiku_From_Name,
+                psmGyoseiku_To,
+                psmGyoseiku_To_Name,
+                psmChiku1_From,
+                psmChiku1_To,
+                psmChiku2_From,
+                psmChiku2_To,
+                psmChiku3_From,
+                psmChiku3_To,
+                psmChiku1_From_Name,
+                psmChiku1_To_Name,
+                psmChiku2_From_Name,
+                psmChiku2_To_Name,
+                psmChiku3_From_Name,
+                psmChiku3_To_Name);
+    }
+
+    /**
+     * 汎用リスト 老齢福祉年金受給者のパラメータを作成します。
+     *
+     * @return HanyoListRoreiFukushiNenkinJukyushaProcessParameter
+     */
+    public HanyoListRoreiFukushiNenkinJukyushaProcessParameter toHanyoListRoreiFukushiNenkinJukyushaProcessParameter() {
+        return new HanyoListRoreiFukushiNenkinJukyushaProcessParameter(
+                chohyoId,
+                shutsuryokujunId,
+                shutsuryokuKomokuId,
+                komokumeiFuka,
+                renbanFuka,
+                hitsukeHenshu,
+                hitsukeChushutsuKubun,
+                kijunYMD,
+                chushutsunichiKubun,
+                chushutsunichiFrom,
+                chushutsunichiTo,
                 psmChushutsu_Kubun,
                 psmChushutsuAge_Start,
                 psmChushutsuAge_End,

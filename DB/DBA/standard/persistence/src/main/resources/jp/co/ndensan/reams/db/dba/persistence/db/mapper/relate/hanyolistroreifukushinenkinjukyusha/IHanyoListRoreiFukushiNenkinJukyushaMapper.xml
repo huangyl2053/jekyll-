@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1620-030 yaodongsheng -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolistroreifukushinenkinjukyusha.IHanyoListRoreiFukushiNenkinJukyushaMapper">
+    <resultMap id="resultMap_getRoreiFukushiNenkinJukyusha" 
+               type="jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaRelateEntity" autoMapping="true">
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得事由" column="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格取得届出日" column="shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="喪失事由" column="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失届日" column="shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格区分" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所地特例状態" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広住特措置元市町村コード" column="koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="老齢福祉年金開始日" column="老齢福祉年金受給者_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="老齢福祉年金終了日" column="老齢福祉年金受給者_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="識別コード" column="生保情報_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="業務コード" column="生保情報_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生活保護開始日" column="生保情報_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="生活保護終了日" column="生保情報_jukyuHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="生活保護種別" column="fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険種別" column="iryoHokenShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険番号" column="iryoHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険者名" column="iryoHokenshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険記号番号" column="iryoHokenKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="getRoreiFukushiNenkinJukyusha" resultMap="resultMap_getRoreiFukushiNenkinJukyusha"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaMybatisParameter"
+            fetchSize="500">
+        WITH  生活保護受給者 AS (
+        SELECT                
+         生活保護受給者."shikibetsuCode" AS 識別コード,               
+         生活保護受給者."jukyuKaishiYMD" AS 生保開始日,               
+         生活保護受給者."jukyuHaishiYMD" AS 生保廃止日               
+        FROM                
+         rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者               
+        WHERE                
+         生活保護受給者."gyomuCode"  =  'DB'               
+         AND NOT EXISTS (
+          SELECT 1
+          FROM
+           rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者2
+          WHERE
+               生活保護受給者."shikibetsuCode"  =  生活保護受給者2."shikibetsuCode"
+           AND 生活保護受給者."jukyuKaishiYMD"  =  生活保護受給者2."jukyuKaishiYMD"
+           AND 生活保護受給者."jukyuHaishiYMD" <![CDATA[<]]>  生活保護受給者2."jukyuHaishiYMD"
+         )
+       )
+       SELECT
+             被保険者台帳管理."shichosonCode" AS shichosonCode
+            ,被保険者台帳管理."hihokenshaNo" AS hihokenshaNo
+            ,被保険者台帳管理."shikakuShutokuJiyuCode" AS shikakuShutokuJiyuCode
+            ,被保険者台帳管理."shikakuShutokuYMD" AS shikakuShutokuYMD
+            ,被保険者台帳管理."shikakuShutokuTodokedeYMD" AS shikakuShutokuTodokedeYMD
+            ,被保険者台帳管理."shikakuSoshitsuJiyuCode" AS shikakuSoshitsuJiyuCode
+            ,被保険者台帳管理."shikakuSoshitsuYMD" AS shikakuSoshitsuYMD
+            ,被保険者台帳管理."shikakuSoshitsuTodokedeYMD" AS shikakuSoshitsuTodokedeYMD
+            ,被保険者台帳管理."hihokennshaKubunCode" AS hihokennshaKubunCode
+            ,被保険者台帳管理."jushochiTokureiFlag" AS jushochiTokureiFlag
+            ,被保険者台帳管理."koikinaiJushochiTokureiFlag" AS koikinaiJushochiTokureiFlag
+            ,被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" AS koikinaiTokureiSochimotoShichosonCode
+            ,老齢福祉年金受給者."jukyuKaishiYMD" AS 老齢福祉年金受給者_jukyuKaishiYMD
+            ,老齢福祉年金受給者."jukyuHaishiYMD" AS 老齢福祉年金受給者_jukyuHaishiYMD
+            ,生保情報."shikibetsuCode" AS 生保情報_shikibetsuCode
+            ,生保情報."gyomuCode" AS 生保情報_gyomuCode
+            ,生保情報."jukyuKaishiYMD" AS 生保情報_jukyuKaishiYMD
+            ,生保情報."jukyuHaishiYMD" AS 生保情報_jukyuHaishiYMD
+            ,生活保護扶助種類."fujoShuruiCode" AS fujoShuruiCode
+            ,医療保険加入状況.医療保険種別コード AS iryoHokenShubetsuCode
+            ,医療保険加入状況.医療保険番号 AS iryoHokenshaNo
+            ,医療保険加入状況.医療保険者名称 AS iryoHokenshaMeisho
+            ,医療保険加入状況.医療保険記号番号 AS iryoHokenKigoNo
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />					
+       FROM
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha"  AS  老齢福祉年金受給者
+       LEFT JOIN
+        rgdb."DbV1001HihokenshaDaicho"  AS  被保険者台帳管理
+        ON 被保険者台帳管理."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+       INNER  JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+       INNER  JOIN                    
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+        ON "Atesaki"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+       LEFT  JOIN (                    
+        SELECT                   
+         I."shikibetsuCode" AS 識別コード,
+         I."iryoHokenShubetsuCode" AS 医療保険種別コード,
+         I."iryoHokenshaNo" AS 医療保険番号,
+         I."iryoHokenshaMeisho" AS 医療保険者名称,
+         I."iryoHokenKigoNo" AS 医療保険記号番号
+        FROM                   
+         rgdb."DbT1008IryohokenKanyuJokyo" I                  
+        WHERE                   
+         NOT EXISTS (                  
+          SELECT  1                 
+          FROM                 
+           rgdb."DbT1008IryohokenKanyuJokyo" I2
+          WHERE                 
+           I."shikibetsuCode" = I2."shikibetsuCode"
+          AND I."rirekiNo" <![CDATA[<]]> I2."rirekiNo"                
+         )                  
+        ) AS 医療保険加入状況                   
+        ON 医療保険加入状況.識別コード = 老齢福祉年金受給者."shikibetsuCode"
+       LEFT  JOIN  (                    
+        SELECT                   
+         生保."shikibetsuCode",                  
+         生保."gyomuCode",    
+         生保."jukyuHaishiYMD",                
+         生保."jukyuKaishiYMD" 
+        FROM                   
+         rgur."UrT0508SeikatsuHogoJukyusha"  AS  生保
+        INNER  JOIN  (                   
+         SELECT                  
+          "shikibetsuCode",
+          "gyomuCode",
+          MAX("jukyuKaishiYMD")  AS  受給開始日
+         FROM                  
+          rgur."UrT0508SeikatsuHogoJukyusha"
+         GROUP BY                  
+          "shikibetsuCode","gyomuCode"
+        ) AS  最新生保                   
+         ON 最新生保."shikibetsuCode"  =  生保."shikibetsuCode"
+         AND 最新生保."gyomuCode"  =  生保."gyomuCode"
+         AND 最新生保.受給開始日  =  生保."jukyuKaishiYMD"
+       )  AS  生保情報                    
+        ON 生保情報."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+       LEFT JOIN                    
+        rgur."UrT0526SeikatsuHogoFujoShurui" AS 生活保護扶助種類
+        ON 生活保護扶助種類."shikibetsuCode"  =  生保情報."shikibetsuCode"
+        AND  生活保護扶助種類."gyomuCode"  =  生保情報."gyomuCode"
+        AND 生活保護扶助種類."jukyuKaishiYMD"  =  生保情報."jukyuKaishiYMD"
+        WHERE
+           1 = 1
+            <if test="is直近">
+                AND NOT EXISTS (
+                    SELECT 1
+                    FROM rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者2
+                    WHERE
+                            老齢福祉年金受給者."shikibetsuCode" = 老齢福祉年金受給者2."shikibetsuCode"
+                        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<]]> 老齢福祉年金受給者2."jukyuKaishiYMD"
+                )
+            </if>
+            <if test="is基準日">
+                AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{kijunYMD}
+                AND #{kijunYMD} <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
+            </if>
+            <if test="is範囲">
+                <if test="s老齢開始日">
+                    <if test="has範囲抽出日From">
+                        AND #{chushutsunichiFrom} <![CDATA[<=]]> 老齢福祉年金受給者."jukyuKaishiYMD"
+                    </if>
+                    <if test="has範囲抽出日To">
+                        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> #{chushutsunichiTo}
+                    </if>
+                </if>
+                <if test="is老齢終了日">
+                    <if test="has範囲抽出日From">
+                        AND #{chushutsunichiFrom} <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
+                    </if>
+                    <if test="has範囲抽出日To">
+                        AND 老齢福祉年金受給者."jukyuHaishiYMD" <![CDATA[<=]]> #{chushutsunichiTo}
+                    </if>
+                </if>
+            </if>
+        ORDER BY
+             生保情報_shikibetsuCode
+            ,生保情報_gyomuCode
+            ,生保情報_jukyuKaishiYMD
+    </select>
+</mapper>

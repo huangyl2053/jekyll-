@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB3110001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.KibetsuGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.NendobunFukaGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
@@ -35,6 +34,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.kaigohokenryogemmen.KaigoHokenryo
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.tsuchisho.notsu.ShutsuryokuKiKohoFactory;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKe
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -112,6 +111,10 @@ public class GemmenJuminKihonHandler {
     private static final RString 状況_新規 = new RString("新規申請");
     private static final RString 承認 = new RString("承認する");
     private static final RString 不承認 = new RString("承認しない");
+    private static final RString 出力方法_別々に出力 = new RString("別々に出力");
+    private static final RString 出力方法_全件出力 = new RString("全件出力");
+    private static final RString 出力形式_現金用 = new RString("現金用");
+    private static final RString 出力形式_口座用 = new RString("口座用");
     private static final RString 入力状況_新規申請 = new RString("新規_申請");
     private static final RString 入力状況_新規決定 = new RString("新規_決定");
     private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
@@ -122,11 +125,11 @@ public class GemmenJuminKihonHandler {
     private static final RString 画面モード_取消 = new RString("取消");
     private static final RString 画面モード_訂正 = new RString("訂正");
     private static final RString 減免決定通知書 = new RString("保険料減免決定通知書");
+    private static final RString 賦課台帳 = new RString("賦課台帳（更正決定決議書）");
     private static final RString 減免取消通知書 = new RString("保険料減免取消通知書");
     private static final RString 発行するボタン = new RString("btnPrt");
 //    private static final RString 帳票分類ID_本算定 = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
 //    private static final RString 帳票分類ID_仮算定 = new RString("DBB100039_KaigoHokenHokenryogakuKetteiTsuchishoDaihyo");
-    private static final RString 出力対象チェックMESSAGE = new RString("作成帳票を");
     private static final CodeShubetsu 減免種類_コード種別 = new CodeShubetsu("0004");
 
     /**
@@ -964,6 +967,7 @@ public class GemmenJuminKihonHandler {
         発行パネル.getPritPublish2().setVisible(true);
         発行パネル.getPritPublish3().setVisible(true);
         発行パネル.getPritPublish4().setVisible(true);
+        発行パネル.getPritPublish4().setTitle(賦課台帳);
         発行パネル.getPritPublish1().setTitle(減免決定通知書);
         if ((定値_ゼロ.equals(減免状態区分) && 定値_ゼロ.equals(減免作成区分))
                 || (定値_ゼロ.equals(減免状態区分) && 定値_ミ.equals(減免作成区分))) {
@@ -985,6 +989,8 @@ public class GemmenJuminKihonHandler {
                 氏名R.concat(コロン).concat(氏名),
                 通知書番号R.concat(コロン).concat(通知書番号.getColumnValue()));
         if (発行パネル.getPritPublish3().isVisible()) {
+            発行パネル.getPritPublish3().getRadShutsuryokuHoho().setDataSource(get出力方法());
+            発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().setDataSource(get出力形式());
             発行パネル.getPritPublish3().getRadShutsuryokuHoho().setSelectedIndex(ゼロ_定値);
             発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().setSelectedIndex(ゼロ_定値);
             if (賦課情報List != null && !賦課情報List.isEmpty()) {
@@ -993,6 +999,24 @@ public class GemmenJuminKihonHandler {
             }
         }
         return show発行ボタン;
+    }
+
+    private List<KeyValueDataSource> get出力方法() {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        KeyValueDataSource dataSource1 = new KeyValueDataSource(定値_ゼロ, 出力方法_別々に出力);
+        KeyValueDataSource dataSource2 = new KeyValueDataSource(定値_イチ, 出力方法_全件出力);
+        dataSources.add(dataSource1);
+        dataSources.add(dataSource2);
+        return dataSources;
+    }
+
+    private List<KeyValueDataSource> get出力形式() {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        KeyValueDataSource dataSource1 = new KeyValueDataSource(定値_ゼロ, 出力形式_現金用);
+        KeyValueDataSource dataSource2 = new KeyValueDataSource(定値_イチ, 出力形式_口座用);
+        dataSources.add(dataSource1);
+        dataSources.add(dataSource2);
+        return dataSources;
     }
 
     private List<KeyValueDataSource> get出力期DDL(FlexibleYear 調定年度, FukaJoho 賦課情報) {
@@ -1045,10 +1069,10 @@ public class GemmenJuminKihonHandler {
         boolean is減免決定通知書checked;
         boolean is取消決定通知書checked;
         if (減免決定通知書.equals(発行パネル.getPritPublish1().getTitle())) {
-            is減免決定通知書checked = 発行パネル.getPritPublish1().disabledPublishCheckBox();
+            is減免決定通知書checked = 発行パネル.getPritPublish1().isIsPublish() && 発行パネル.getPritPublish1().isVisible();
             is取消決定通知書checked = false;
         } else {
-            is取消決定通知書checked = 発行パネル.getPritPublish1().disabledPublishCheckBox();
+            is取消決定通知書checked = 発行パネル.getPritPublish1().isIsPublish() && 発行パネル.getPritPublish1().isVisible();
             is減免決定通知書checked = false;
         }
         RDate 発行日_減免 = 発行パネル.getPritPublish1().getComdiv1().getIssueDate();
@@ -1061,12 +1085,9 @@ public class GemmenJuminKihonHandler {
         FlexibleDate 納入_送付日 = 送付日_納入 == null ? null : new FlexibleDate(送付日_納入.toString());
         RString 減免_文書番号 = 発行パネル.getPritPublish1().getBunshoBango1().get文書番号();
 
-        boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().disabledPublishCheckBox();
-        boolean is納入通知書checked = 発行パネル.getPritPublish3().disabledPublishCheckBox();
-        boolean is賦課台帳checked = 発行パネル.getPritPublish4().disabledPublishCheckBox();
-        if (is減免決定通知書checked || is取消決定通知書checked || is変更通知書兼特徴checked || is納入通知書checked || is賦課台帳checked) {
-            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace(出力対象チェックMESSAGE.toString()).evaluate());
-        }
+        boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().isIsPublish() && 発行パネル.getPritPublish2().isVisible();
+        boolean is納入通知書checked = 発行パネル.getPritPublish3().isIsPublish() && 発行パネル.getPritPublish3().isVisible();
+        boolean is賦課台帳checked = 発行パネル.getPritPublish4().isIsPublish() && 発行パネル.getPritPublish4().isVisible();
         通知書発行パラメータ.set減免決定_出力有無(is減免決定通知書checked);
         通知書発行パラメータ.set減免決定_発行日(減免_発行日);
         通知書発行パラメータ.set減免決定_文書番号(減免_文書番号);
@@ -1080,8 +1101,8 @@ public class GemmenJuminKihonHandler {
         通知書発行パラメータ.set納入_発行日(納入_発行日);
         通知書発行パラメータ.set納入_送付日(納入_送付日);
         通知書発行パラメータ.set納入_出力期(発行パネル.getPritPublish3().getDdlShutsuryokuKi().getSelectedKey());
-        通知書発行パラメータ.set納入_出力方法(発行パネル.getPritPublish3().getRadShutsuryokuHoho().getSelectedValue());
-        通知書発行パラメータ.set納入_出力形式(発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().getSelectedValue());
+        通知書発行パラメータ.set納入_出力方法(発行パネル.getPritPublish3().getRadShutsuryokuHoho().getSelectedKey());
+        通知書発行パラメータ.set納入_出力形式(発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().getSelectedKey());
         通知書発行パラメータ.set賦課台帳_出力有無(is賦課台帳checked);
         return KaigoHokenryoGemmen.createInstance().publish(通知書発行パラメータ);
     }

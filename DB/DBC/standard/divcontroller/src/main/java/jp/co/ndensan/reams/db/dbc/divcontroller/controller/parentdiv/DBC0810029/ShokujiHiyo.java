@@ -54,7 +54,7 @@ public class ShokujiHiyo {
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
-        ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getServiceTeikyoYM());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, parameter.getServiceTeikyoYM());
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
@@ -157,7 +157,7 @@ public class ShokujiHiyo {
      * @return ResponseData
      */
     public ResponseData<ShokujiHiyoDiv> onClick_dgList_select(ShokujiHiyoDiv div) {
-        getHandler(div).set食事費用パネル２(ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
+        getHandler(div).set食事費用パネル２(ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class));
         return createResponse(div);
     }
 

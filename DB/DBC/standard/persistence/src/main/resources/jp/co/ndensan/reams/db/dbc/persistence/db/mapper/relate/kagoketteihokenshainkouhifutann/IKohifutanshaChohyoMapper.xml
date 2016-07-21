@@ -33,7 +33,7 @@
             <result property="公費負担額" column="dbWT3061_hokenshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="介護給付費の件数" column="dbWT3060_kaigoKyufuhiKensu" />
             <result property="介護給付費の単位数" column="dbWT3060_kaigoKyufuhiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-            <result property="介護給付費の負担額" column="dbWT3061_hokenshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+            <result property="介護給付費の負担額" column="dbWT3060_kaigoKyufuhiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="高額介護サービス費の件数" column="dbWT3060_kogakuServicehiKensu" />
             <result property="高額介護サービス費の単位数" column="dbWT3060_kogakuServicehiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="高額介護サービス費の負担額" column="dbWT3060_kogakuServicehiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -41,6 +41,7 @@
             <result property="特定入所者介護費等の単位数" column="dbWT3060_tokuteiNyushoshaServicehiTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="特定入所者介護費等の負担額" column="dbWT3060_tokuteiNyushoshaServicehiFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
             <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+            <result property="公費証記載保険者番号" column="dbWT3061_kohiShokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <sql id="allColumns_kohifutanshaChohyo">
@@ -69,7 +70,8 @@
         DbWT3060."tokuteiNyushoshaServicehiKensu" AS dbWT3060_tokuteiNyushoshaServicehiKensu,
         DbWT3060."tokuteiNyushoshaServicehiTanisu" AS dbWT3060_tokuteiNyushoshaServicehiTanisu,
         DbWT3060."tokuteiNyushoshaServicehiFutangaku" AS dbWT3060_tokuteiNyushoshaServicehiFutangaku,
-        DbWT0001."shikibetsuCode" AS dbWT0001_shikibetsuCode
+        DbWT0001."shikibetsuCode" AS dbWT0001_shikibetsuCode,
+        DbWT3061."kohiShokisaiHokenshaNo" AS dbWT3061_kohiShokisaiHokenshaNo
     </sql>
 
 </mapper>

@@ -7,6 +7,7 @@
                    
     <select id="get報酬実績データ情報" resultMap="resultMap_NinteiChosaHoshuShokaiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosahoshushokai.NinteiChosaHoshuShokaiMapperParameter" fetchSize="500" resultOrdered="true">
+         <if test="batchFlag">  WITH t1 as	( </if> 
             SELECT                      T5601."ninteichosaItakusakiCode",													
 					T5910."jigyoshaMeisho",											
 					T5913."ninteiChosainCode",													
@@ -71,6 +72,24 @@
 					T5201."ninteichosaIraiYMD",													
 					T5101."hihokenshaNo"													
 		<if test="件数Flag">  LIMIT #{最大表示件数}	 </if> 
+                <if test="batchFlag">) SELECT A.*, B.*, C.*,D.*,E.*,F.*,H.*
+                                        FROM t1 as A,
+                    (SELECT COUNT(1) AS zaitakusho FROM t1 AS B WHERE B."ninteiChosaKubunCode"<![CDATA[=]]>'0' AND B."chosaJisshiBashoCode"<![CDATA[=]]>'1') as B
+                    ,(SELECT COUNT(1) AS zaitakuzai FROM t1 AS B WHERE B."ninteiChosaKubunCode"<![CDATA[=]]>'1' AND B."chosaJisshiBashoCode"<![CDATA[=]]>'1') as C
+                    ,(SELECT COUNT(1) AS shisetsusho FROM t1 AS B WHERE B."ninteiChosaKubunCode"<![CDATA[=]]>'0' AND B."chosaJisshiBashoCode"<![CDATA[<>]]>'1') as D
+                    ,(SELECT COUNT(1) AS shisetsusai FROM t1 AS B WHERE B."ninteiChosaKubunCode"<![CDATA[=]]>'1' AND B."chosaJisshiBashoCode"<![CDATA[<>]]>'1') as E
+                    ,(SELECT SUM(B."chosaItakuryo") AS itakuryogokei FROM t1 AS B ) as F
+                   ,(SELECT 
+					SUM(
+					CASE 
+					 H.count%25
+					WHEN 0 THEN H.count/25
+					ELSE H.count/25 + 1
+					END) AS count
+					FROM
+					(SELECT COUNT(1) AS count FROM t1 as B group by  B."ninteichosaItakusakiCode") as H)H
+              
+                </if>
     </select>
     <resultMap id="resultMap_NinteiChosaHoshuShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.NinteiChosaHoshuShokaiRelateEntity" autoMapping="true">
         <result property="認定調査委託先コード" column="ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -89,5 +108,12 @@
         <result property="認定調査委託料" column="chosaItakuryo"/>
         <result property="認定調査依頼履歴番号" column="ninteichosaIraiRirekiNo" />
         <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="件数" column="count" />
+        <result property="在宅初回" column="zaitakusho" />
+        <result property="在宅再調査" column="zaitakuzai" />
+        <result property="施設初回" column="shisetsusho" />
+        <result property="施設再調査" column="shisetsusai" />
+        <result property="委託料合計" column="itakuryogokei" />
+        
     </resultMap>
 </mapper>

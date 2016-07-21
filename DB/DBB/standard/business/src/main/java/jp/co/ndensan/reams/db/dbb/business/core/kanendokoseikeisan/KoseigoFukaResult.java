@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendokoseikeisan.KoseigoFukaEntity;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 
 /**
  * 更正後賦課情報取得のクラスです。
@@ -19,18 +20,18 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendokoseikeisan.KoseigoFuk
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoseigoFukaResult implements Serializable {
 
-    private KoseigoFukaEntity entity;
+    private List<FukaJoho> 賦課の情報リスト;
     private ChoshuHoho choshuHoho;
 
     /**
      * コンストラクタです。
      *
-     * @param entity entity
+     * @param 賦課の情報リスト List<FukaJoho>
      * @param choshuHoho choshuHoho
      */
-    public KoseigoFukaResult(KoseigoFukaEntity entity,
+    public KoseigoFukaResult(List<FukaJoho> 賦課の情報リスト,
             ChoshuHoho choshuHoho) {
-        this.entity = entity;
+        this.賦課の情報リスト = 賦課の情報リスト;
         this.choshuHoho = choshuHoho;
     }
 }

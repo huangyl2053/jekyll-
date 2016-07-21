@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBA-1600-030 yaodongsheng -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hanyolisttekiyokaisha.IHanyoListTekiyoJogaishaMapper">
+    <resultMap id="resultMap_getTekiyoKaisha" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaRelateEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得事由" column="資格取得事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格取得日" column="資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格取得届出日" column="資格取得届出日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="喪失事由" column="喪失事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="資格喪失日" column="資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格喪失届日" column="資格喪失届日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="資格区分" column="資格区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所地特例状態" column="住所地特例状態" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広域内住所地特例フラグ" column="広域内住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="広住特措置元市町村コード" column="広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外適用事由" column="適用除外適用事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外適用日" column="適用除外適用日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用除外適用届出日" column="適用除外適用届出日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用除外解除事由" column="適用除外解除事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外解除日" column="適用除外解除日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用除外解除届出日" column="適用除外解除届出日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用除外施設コード" column="適用除外施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外施設名称" column="適用除外施設名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外入所日" column="適用除外入所日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用除外退所日" column="適用除外退所日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="適用除外施設郵便番号" column="適用除外施設郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外施設住所" column="適用除外施設住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="適用除外施設電話番号" column="適用除外施設電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="施設退所通知発行日" column="施設退所通知発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="施設変更通知発行日" column="施設変更通知発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="医療保険種別" column="医療保険種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険番号" column="医療保険番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険者名" column="医療保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療保険記号番号" column="医療保険記号番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="getTekiyoKaisha" resultMap="resultMap_getTekiyoKaisha"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaMybatisParameter"
+            fetchSize="500">
+        WITH  処理対象 AS (
+                SELECT
+                    適用除外者."shikibetsuCode" AS 処理対象_識別コード,
+                    適用除外者."idoYMD" AS 処理対象_異動日,
+                    適用除外者."edaNo" AS 処理対象_枝番
+                FROM
+                    rgdb."DbT1002TekiyoJogaisha" AS 適用除外者
+                        <if test="is直近">
+                        INNER JOIN
+                            rgdb."DbV1002TekiyoJogaisha" AS 適用除外者_直近
+                            ON    適用除外者_直近."shikibetsuCode"  =  適用除外者."shikibetsuCode"
+                        </if>
+                WHERE
+                    1= 1
+                    <if test="is基準日">
+                        <if test="is適用開始日">
+                            AND    適用除外者."tekiyoYMD"  <![CDATA[<=]]>  #{kijunYMD}
+                        </if>
+                        <if test="is適用開始届出日">
+                            AND    適用除外者."tekiyoTodokedeYMD"  <![CDATA[<=]]>  #{kijunYMD}
+                        </if>
+                    </if>
+                    <if test="is範囲">
+                        <if test="is適用日">
+                            <if test="has範囲抽出日From">
+                                AND    #{haniChushutsunichiFrom}  <![CDATA[<=]]>  適用除外者."tekiyoYMD"
+                            </if>
+                            <if test="has範囲抽出日To">
+                                AND    適用除外者."tekiyoYMD"  <![CDATA[<=]]>  #{haniChushutsunichiTo}
+                            </if>
+                        </if>
+                        <if test="is適用届出日">
+                            <if test="has範囲抽出日From">
+                                AND    #{haniChushutsunichiFrom}  <![CDATA[<=]]>  適用除外者."tekiyoTodokedeYMD"
+                            </if>
+                            <if test="has範囲抽出日To">
+                                AND    適用除外者."tekiyoTodokedeYMD"  <![CDATA[<=]]>  #{haniChushutsunichiTo}
+                            </if>
+                        </if>
+                        <if test="is解除日">
+                            <if test="has範囲抽出日From">
+                                AND    #{haniChushutsunichiFrom}  <![CDATA[<=]]>  適用除外者."kaijoYMD"
+                            </if>
+                            <if test="has範囲抽出日To">
+                                AND    適用除外者."kaijoYMD"  <![CDATA[<=]]>  #{haniChushutsunichiTo}
+                            </if>
+                        </if>
+                        <if test="is解除届出日">
+                            <if test="has範囲抽出日From">
+                                AND    #{haniChushutsunichiFrom}  <![CDATA[<=]]>  適用除外者."kaijoTodokedeYMD"
+                            </if>
+                            <if test="has範囲抽出日To">
+                                AND    適用除外者."kaijoTodokedeYMD"  <![CDATA[<=]]>  #{haniChushutsunichiTo}
+                            </if>
+                        </if>
+                    </if>
+                    <if test="is適用除外者のみ">
+                        AND    (適用除外者."kaijoYMD"  IS NULL  OR  適用除外者."kaijoYMD" = '')
+                    </if>
+                    <if test="is適用除外解除者のみ">
+                        AND    (適用除外者."kaijoYMD"  IS NOT NULL  OR  適用除外者."kaijoYMD" <![CDATA[<>]]> '')
+                    </if>
+                    <if test="has適用事由">
+                        AND    適用除外者."tekiyoJogaiTekiyoJiyuCode"  IN
+                        <foreach collection="tekiyoJiyu" item="tekijiyu" open="(" separator="," close=")"> #{tekijiyu} </foreach>
+                    </if>
+                    <if test="has解除事由">
+                        AND    適用除外者."tekiyoJogaikaijokaijoJiyuCode"  IN
+                        <foreach collection="kaijoJiyu" item="kaijiyu" open="(" separator="," close=")"> #{kaijiyu} </foreach>
+                    </if> 
+        ) , 期間重複施設入退所 AS (
+                SELECT
+                    施設入退所."shikibetsuCode",
+                    施設入退所."rirekiNo",
+                    施設入退所."nyushoYMD",
+                    施設入退所."taishoYMD",
+                    施設入退所."nyushoShisetsuCode",
+                    COUNT(施設入退所."nyushoYMD") OVER (PARTITION BY 施設入退所."shikibetsuCode" ) AS 施設入所回数
+                FROM
+                    処理対象  AS  処理対象
+                INNER JOIN
+                    rgdb."DbT1002TekiyoJogaisha" AS 適用除外者
+                    ON    適用除外者."shikibetsuCode"  =  処理対象.処理対象_識別コード
+                    AND    適用除外者."idoYMD"  =  処理対象.処理対象_異動日
+                    AND    適用除外者."edaNo" =  処理対象.処理対象_枝番
+                INNER JOIN
+                    rgdb."DbT1004ShisetsuNyutaisho"  AS  施設入退所
+                    ON    施設入退所."shikibetsuCode"  =  処理対象.処理対象_識別コード
+                    AND    施設入退所."daichoShubetsu"  =  '3'
+                WHERE
+                        (    施設入退所."taishoYMD" IS NULL
+                            OR    施設入退所."taishoYMD"  =  ''
+                            OR    適用除外者."tekiyoYMD"  <![CDATA[<=]]> 施設入退所."taishoYMD"
+                        )
+                    AND
+                        (    適用除外者."kaijoYMD" IS NULL
+                            OR    適用除外者."kaijoYMD" =  ''
+                            OR    施設入退所."nyushoYMD" <![CDATA[<=]]>  適用除外者."kaijoYMD"
+                        )
+        )
+        SELECT
+            被保険者台帳管理."hihokenshaNo" AS 被保険者番号,
+            被保険者台帳管理."shikakuShutokuJiyuCode" AS 資格取得事由,
+            被保険者台帳管理."shikakuShutokuYMD" AS 資格取得日,
+            被保険者台帳管理."shikakuShutokuTodokedeYMD" AS 資格取得届出日,
+            被保険者台帳管理."shikakuSoshitsuJiyuCode" AS 喪失事由,
+            被保険者台帳管理."shikakuSoshitsuYMD" AS 資格喪失日,
+            被保険者台帳管理."shikakuSoshitsuTodokedeYMD" AS 資格喪失届日,
+            被保険者台帳管理."hihokennshaKubunCode" AS 資格区分,
+            被保険者台帳管理."jushochiTokureiFlag" AS 住所地特例状態,
+            被保険者台帳管理."koikinaiJushochiTokureiFlag" AS 広域内住所地特例フラグ,
+            被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" AS 広住特措置元市町村コード,
+            被保険者台帳管理."shichosonCode" AS 市町村コード,
+            適用除外者."tekiyoJogaiTekiyoJiyuCode" AS 適用除外適用事由,
+            適用除外者."tekiyoYMD" AS 適用除外適用日,
+            適用除外者."tekiyoTodokedeYMD" AS 適用除外適用届出日,
+            適用除外者."tekiyoJogaikaijokaijoJiyuCode" AS 適用除外解除事由,
+            適用除外者."kaijoYMD" AS 適用除外解除日,
+            適用除外者."kaijoTodokedeYMD" AS 適用除外解除届出日,
+            入所施設."nyushoShisetsuCode" AS 適用除外施設コード,
+            介護除外住所地特例対象施設."jigyoshaMeisho" AS 適用除外施設名称,
+            入所施設."nyushoYMD" AS 適用除外入所日,
+            入所施設."taishoYMD" AS 適用除外退所日,
+            介護除外住所地特例対象施設."yubinNo" AS 適用除外施設郵便番号,
+            介護除外住所地特例対象施設."jigyoshaJusho" AS 適用除外施設住所,
+            介護除外住所地特例対象施設."telNo" AS 適用除外施設電話番号,
+            適用除外者."taishoTsuchiHakkoYMD" AS 施設退所通知発行日,
+            適用除外者."henkoTsuchiHakkoYMD" AS 施設変更通知発行日,
+            医療保険加入状況."iryoHokenShubetsuCode"AS 医療保険種別,
+            医療保険加入状況."iryoHokenshaNo" AS 医療保険番号,
+            医療保険加入状況."iryoHokenshaMeisho" AS 医療保険者名,
+            医療保険加入状況."iryoHokenKigoNo" AS 医療保険記号番号						
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            処理対象
+        INNER JOIN
+            rgdb."DbT1002TekiyoJogaisha"  AS  適用除外者
+            ON    適用除外者."shikibetsuCode"  =  処理対象.処理対象_識別コード
+            AND    適用除外者."idoYMD"  =  処理対象.処理対象_異動日
+            AND    適用除外者."edaNo"  =  処理対象.処理対象_枝番
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+            ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 処理対象.処理対象_識別コード
+            <if test="is年齢">
+                <if test="has年齢範囲開始">
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                </if>
+                <if test="has年齢範囲終了">
+                    AND  #{生年月日範囲開始} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+                </if>
+            </if>
+            <if test="is生年月日">
+                <if test="has生年月日範囲開始">
+                    AND  #{生年月日範囲開始} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+                </if>
+                <if test="has生年月日範囲終了">
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                </if>
+            </if>
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+            ON "Atesaki"."shikibetsuCode" = 処理対象.処理対象_識別コード
+        INNER JOIN  (
+            SELECT
+                *
+            FROM
+                期間重複施設入退所 AS  施設入退所
+            INNER JOIN  (
+                SELECT
+                    "shikibetsuCode" AS 施設入退所_識別コード,
+                    MAX("rirekiNo") AS 最大履歴番号
+                FROM
+                    期間重複施設入退所
+                GROUP BY
+                    "shikibetsuCode"
+            )  AS  最大履歴
+                ON    最大履歴.施設入退所_識別コード =  施設入退所."shikibetsuCode"
+                AND    最大履歴.最大履歴番号  =  施設入退所."rirekiNo"
+            WHERE
+                1=1
+                <if test="is施設変更なし and !is施設変更あり">
+                    AND    施設入退所.施設入所回数 = 1
+                </if>
+                <if test="!is施設変更なし and is施設変更あり">
+                    AND    2 <![CDATA[<=]]> 施設入退所.施設入所回数
+                </if>
+                <if test="is施設変更なし and is施設変更あり">
+                    AND  (施設入退所.施設入所回数 = 1 or 2 <![CDATA[<=]]> 施設入退所.施設入所回数)
+                </if>
+        )  AS  入所施設
+            ON 入所施設."shikibetsuCode"  =  適用除外者."shikibetsuCode"
+        INNER  JOIN
+            rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu" AS  介護除外住所地特例対象施設
+            ON    介護除外住所地特例対象施設."jigyoshaNo"  =  入所施設."nyushoShisetsuCode"
+        LEFT JOIN
+            rgdb."DbV1001HihokenshaDaicho"  AS  被保険者台帳管理
+            ON    被保険者台帳管理."shikibetsuCode" = 処理対象.処理対象_識別コード
+        LEFT  JOIN (
+            SELECT
+                I."shikibetsuCode",
+                I."iryoHokenShubetsuCode",
+                I."iryoHokenshaNo",
+                I."iryoHokenshaMeisho",
+                I."iryoHokenKigoNo"
+            FROM
+                rgdb."DbT1008IryohokenKanyuJokyo" I
+            WHERE
+                NOT EXISTS (
+                    SELECT  1
+                    FROM
+                        rgdb."DbT1008IryohokenKanyuJokyo" I2
+                    WHERE
+                        I."shikibetsuCode" = I2."shikibetsuCode"
+                    AND    I."rirekiNo" <![CDATA[<]]> I2."rirekiNo"
+                )
+            ) AS 医療保険加入状況
+            ON    医療保険加入状況."shikibetsuCode" = 処理対象.処理対象_識別コード
+    </select>
+</mapper>

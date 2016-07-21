@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -134,7 +135,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
             当期編集(普徴期別金額リスト, source);
         }
         if (更正後.get生保開始日_西暦() != null) {
-            source.listUpper_12 = new FlexibleDate(更正後.get生保開始日_西暦().toString()).wareki().toDateString();
+            source.listUpper_12 = new FlexibleDate(new RDate(更正後.get生保開始日_西暦().toString()).toDateString()).wareki().toDateString();
         }
         source.listUpper_13 = RString.EMPTY;
         if (!RString.isNullOrEmpty(更正後.get生活保護扶助種類())) {

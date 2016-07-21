@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.DbT3058KogakuShikyuShinsaKettei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuKyufuTaishoshaGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuShikyuHanteiKekka;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuShinsei;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KougakuSabisuhiShousaiNaiyouResult {
+public class KougakuSabisuhiShousaiNaiyouResult implements Serializable {
 
     private KogakuShikyuShinsei 高額介護サービス費支給申請Entity;
     private KogakuShikyuHanteiKekka 高額介護サービス費支給判定結果Entity;

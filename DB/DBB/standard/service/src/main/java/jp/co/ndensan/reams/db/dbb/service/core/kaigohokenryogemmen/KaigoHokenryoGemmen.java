@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.kaigohokenryogemmen;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.NendobunFukaGemmenList;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenjoho.GemmenJoho;
@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.db.dbb.business.core.kakushutsuchishosakusei.TyouteiZ
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TsuchiSho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fukajoho.FukaJohoRelateMapperParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.GemmenJohoRelateMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.FukaManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
@@ -326,11 +326,14 @@ public class KaigoHokenryoGemmen {
         FukaJohoRelateMapperParameter 賦課の情報検索条件
                 = FukaJohoRelateMapperParameter.createSelectListParam(調定年度, 賦課年度, 通知書番号);
         List<FukaJoho> 賦課情報 = 賦課情報Manager.get最新の賦課情報(賦課の情報検索条件);
-        if (賦課情報 == null || 賦課情報.size() < 定値_二) {
+        if (賦課情報 == null || 賦課情報.isEmpty()) {
             return null;
+        } else if (賦課情報.size() < 定値_二) {
+            result.set賦課の情報_更正後(賦課情報.get(定値_ゼロ));
+        } else {
+            result.set賦課の情報_更正後(賦課情報.get(定値_ゼロ));
+            result.set賦課の情報_更正前(賦課情報.get(定値_イチ));
         }
-        result.set賦課の情報_更正後(賦課情報.get(定値_ゼロ));
-        result.set賦課の情報_更正前(賦課情報.get(定値_イチ));
         return result;
     }
 

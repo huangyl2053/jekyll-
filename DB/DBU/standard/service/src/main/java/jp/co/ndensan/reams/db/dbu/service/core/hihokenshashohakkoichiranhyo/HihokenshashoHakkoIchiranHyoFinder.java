@@ -306,16 +306,16 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         RString 番地 = RString.EMPTY;
         RString 方書 = RString.EMPTY;
         RString 行政区名 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getJuminJotaiCode().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getJuminJotaiCode() != null && !ikkatsuHakkoRelateEntity.getJuminJotaiCode().isEmpty()) {
             住所 = new RString(ikkatsuHakkoRelateEntity.getJuminJotaiCode().toString());
         }
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getJuminShubetsuCode() != null && !ikkatsuHakkoRelateEntity.getJuminShubetsuCode().isEmpty()) {
             番地 = new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString());
         }
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getKatagaki().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getKatagaki() != null && !ikkatsuHakkoRelateEntity.getKatagaki().isEmpty()) {
             方書 = new RString(ikkatsuHakkoRelateEntity.getKatagaki().toString());
         }
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getJuminShubetsuCode() != null && !ikkatsuHakkoRelateEntity.getJuminShubetsuCode().isEmpty()) {
             行政区名 = new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString());
         }
         if (KannaiKangaiKubunType.管外.code().equals(ikkatsuHakkoRelateEntity.getKannaiKangaiKubun())) {

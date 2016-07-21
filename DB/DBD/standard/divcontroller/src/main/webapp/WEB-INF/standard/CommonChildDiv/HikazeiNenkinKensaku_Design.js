@@ -28,20 +28,20 @@ var DBD;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.TextBox1 = function () {
-                return new UZA.TextBox(this.convFiledName("TextBox1"));
+            Controls.prototype.txtHihokenshano = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshano"));
             };
 
-            Controls.prototype.TextBox2 = function () {
-                return new UZA.TextBox(this.convFiledName("TextBox2"));
+            Controls.prototype.txtTaishom = function () {
+                return new UZA.TextBox(this.convFiledName("txtTaishom"));
             };
 
-            Controls.prototype.DataGrid1 = function () {
-                return new UZA.DataGrid(this.convFiledName("DataGrid1"));
+            Controls.prototype.dgHikazeNenkinKensaku = function () {
+                return new UZA.DataGrid(this.convFiledName("dgHikazeNenkinKensaku"));
             };
 
-            Controls.prototype.Button1 = function () {
-                return new UZA.Button(this.convFiledName("Button1"));
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
             };
             return Controls;
         })();

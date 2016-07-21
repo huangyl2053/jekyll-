@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 画面設計_KogakuServicehiDetail_高額サービス費詳細内容入力共有子Div
@@ -125,11 +126,188 @@ public class KogakuServicehiDetailDivHandler {
                 set事業高額決定情報エリア(result);
             }
         }
+        if (result != null) {
+            div.setKogakuServicehiDetailEntity(DataPassingConverter.serialize(result));
+        }
         div.getCcdKogakuKyufuTaishoList().initialize(メニューID, 照会モード, 被保険者番号, サービス年月, 履歴番号);
         set画面制御(画面モード);
         if (0 == KougakuSabisuhiShousaiNaiyou.createInstance().getTenshutsuNyuuHantei(被保険者番号, サービス年月)) {
             div.getTplShinseisha().getTxtHokenJyaBango().setDisabled(true);
         }
+    }
+
+    /**
+     * 画面初期化データを取得します。
+     *
+     * @return RDate
+     */
+    public KougakuSabisuhiShousaiNaiyouResult get画面初期化データ() {
+        KougakuSabisuhiShousaiNaiyouResult entity = DataPassingConverter.deserialize(
+                div.getKogakuServicehiDetailEntity(), KougakuSabisuhiShousaiNaiyouResult.class);
+        return entity;
+
+    }
+
+    /**
+     * 申請日を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get申請日() {
+        return div.getTxtShinseiYMD().getValue();
+    }
+
+    /**
+     * 申請者区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get申請者区分() {
+        return div.getRdbShinseisyaKubun().getSelectedKey();
+    }
+
+    /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return HokenshaNo
+     */
+    public RString get証記載保険者番号() {
+        return div.getTxtHokenJyaBango().getValue();
+    }
+
+    /**
+     * 国保連再送を取得します。
+     *
+     * @return boolean
+     */
+    public boolean is国保連再送() {
+        return div.getChkKokuhorenSaiso().isAllSelected();
+    }
+
+    /**
+     * 氏名_漢字を取得します。
+     *
+     * @return RString
+     */
+    public RString get氏名_漢字() {
+        return div.getTxtShimeiKanji().getValue();
+    }
+
+    /**
+     * 氏名_カナを取得します。
+     *
+     * @return RString
+     */
+    public RString get氏名_カナ() {
+        return div.getTxtShimeiKana().getValue();
+    }
+
+    /**
+     * 電話番号を取得します。
+     *
+     * @return RString
+     */
+    public RString get電話番号() {
+        return div.getTxtTelNo().getDomain().value();
+    }
+
+    /**
+     * 申請理由を取得します。
+     *
+     * @return RString
+     */
+    public RString get申請理由() {
+        return div.getTxtShinseiRiyu().getValue();
+    }
+
+    /**
+     * 支払金額合計を取得します。
+     *
+     * @return RString
+     */
+    public Decimal get支払金額合計() {
+        return div.getTxtShiharaiTotalAmount().getValue();
+    }
+
+    /**
+     * 受付日を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get受付日() {
+        return div.getTxtUketsukeYMD().getValue();
+    }
+
+    /**
+     * 本人支払額を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get本人支払額() {
+        return div.getTxtHonninShiharaiGaku().getValue();
+    }
+
+    /**
+     * 決定日を取得します。
+     *
+     * @return RDate
+     */
+    public RDate get決定日() {
+        return div.getTxtKetteiYMD().getValue();
+    }
+
+    /**
+     * 支給区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get支給区分() {
+        return div.getRdbShikyuKubun().getSelectedKey();
+    }
+
+    /**
+     * 審査方法区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get審査方法区分() {
+        return div.getRdbShinsaHohoKubun().getSelectedKey();
+    }
+
+    /**
+     * 世帯集約番号を取得します。
+     *
+     * @return RString
+     */
+    public RString get世帯集約番号() {
+        return div.getTxtSetaiSyuyakuBango().getValue();
+    }
+
+    /**
+     * 支給金額を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get支給金額() {
+        return div.getTxtShikyuKingaku().getValue();
+    }
+
+    /**
+     * 高額自動償還を取得します。
+     *
+     * @return RString
+     */
+    public RString get高額自動償還() {
+        return div.getRdbKogakuJidoSyokanTaisyo().getSelectedKey();
+    }
+
+    /**
+     * 支給しない理由を取得します。
+     *
+     * @return RString
+     */
+    public RString get支給しない理由() {
+        return div.getTxtShikyusinaiRiyu().getValue();
     }
 
     private void set画面制御(RString 画面モード) {

@@ -34,10 +34,7 @@
         </if>
         ORDER BY
         rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" DESC
-        <if test="has最大表示件数">
             limit #{最大表示件数}
-        </if>
-    
     </select>
     
 <select resultOrdered="true" id="getdgShinsakaiJisseki" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity"
@@ -90,20 +87,5 @@ parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhosh
         T2."shinsakaiIinHoshuKubun" DESC,
         T2."shinsakaiKaisaiYMD" DESC,
         T2."remban" DESC
-    </select>
-    
-    <select  resultOrdered="true" id="getShinsaHoshugaku" resultMap="ResultMap_ShinsakaiIinHoshuNyuryokuEntity" 
-    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter"
-              fetchSize="500">
-    SELECT 
-        rgdb."DbT5033ShinsakaiIinHoshuTanka"."tanka" AS "tanka"
-    FROM
-        rgdb."DbT5033ShinsakaiIinHoshuTanka"
-    WHERE
-        rgdb."DbT5033ShinsakaiIinHoshuTanka"."kaigoNinteiShinsaIinShubetsu" = #{コード}
-    AND
-        rgdb."DbT5033ShinsakaiIinHoshuTanka"."kaishiYM" <![CDATA[<=]]> #{実施日}
-    AND
-        #{実施日} <![CDATA[<=]]> rgdb."DbT5033ShinsakaiIinHoshuTanka"."shuryoYM"
     </select>
 </mapper>

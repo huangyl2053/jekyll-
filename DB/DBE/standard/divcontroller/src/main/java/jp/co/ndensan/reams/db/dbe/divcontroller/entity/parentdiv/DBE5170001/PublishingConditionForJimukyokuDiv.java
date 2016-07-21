@@ -14,21 +14,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class PublishingConditionForJimukyokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtCopyNumForJimukyoku1")
-    private TextBoxNum txtCopyNumForJimukyoku1;
     @JsonProperty("chkPrintChoyoJimu")
     private CheckBoxList chkPrintChoyoJimu;
     @JsonProperty("spSpace1")
     private Space spSpace1;
     @JsonProperty("chkPrintChohyoShinsakaiJimu")
     private CheckBoxList chkPrintChohyoShinsakaiJimu;
+    @JsonProperty("spSpace3")
+    private Space spSpace3;
+    @JsonProperty("chkPrintChoyoJimu2")
+    private CheckBoxList chkPrintChoyoJimu2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,24 +38,6 @@ public class PublishingConditionForJimukyokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtCopyNumForJimukyoku1
-     * @return txtCopyNumForJimukyoku1
-     */
-    @JsonProperty("txtCopyNumForJimukyoku1")
-    public TextBoxNum getTxtCopyNumForJimukyoku1() {
-        return txtCopyNumForJimukyoku1;
-    }
-
-    /*
-     * settxtCopyNumForJimukyoku1
-     * @param txtCopyNumForJimukyoku1 txtCopyNumForJimukyoku1
-     */
-    @JsonProperty("txtCopyNumForJimukyoku1")
-    public void setTxtCopyNumForJimukyoku1(TextBoxNum txtCopyNumForJimukyoku1) {
-        this.txtCopyNumForJimukyoku1 = txtCopyNumForJimukyoku1;
-    }
-
     /*
      * getchkPrintChoyoJimu
      * @return chkPrintChoyoJimu
@@ -106,6 +90,42 @@ public class PublishingConditionForJimukyokuDiv extends Panel {
     @JsonProperty("chkPrintChohyoShinsakaiJimu")
     public void setChkPrintChohyoShinsakaiJimu(CheckBoxList chkPrintChohyoShinsakaiJimu) {
         this.chkPrintChohyoShinsakaiJimu = chkPrintChohyoShinsakaiJimu;
+    }
+
+    /*
+     * getspSpace3
+     * @return spSpace3
+     */
+    @JsonProperty("spSpace3")
+    public Space getSpSpace3() {
+        return spSpace3;
+    }
+
+    /*
+     * setspSpace3
+     * @param spSpace3 spSpace3
+     */
+    @JsonProperty("spSpace3")
+    public void setSpSpace3(Space spSpace3) {
+        this.spSpace3 = spSpace3;
+    }
+
+    /*
+     * getchkPrintChoyoJimu2
+     * @return chkPrintChoyoJimu2
+     */
+    @JsonProperty("chkPrintChoyoJimu2")
+    public CheckBoxList getChkPrintChoyoJimu2() {
+        return chkPrintChoyoJimu2;
+    }
+
+    /*
+     * setchkPrintChoyoJimu2
+     * @param chkPrintChoyoJimu2 chkPrintChoyoJimu2
+     */
+    @JsonProperty("chkPrintChoyoJimu2")
+    public void setChkPrintChoyoJimu2(CheckBoxList chkPrintChoyoJimu2) {
+        this.chkPrintChoyoJimu2 = chkPrintChoyoJimu2;
     }
 
     // </editor-fold>

@@ -1,15 +1,17 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBB2710002の状態名定義クラスです
+ * DBB2710002の状態名定義クラスです<br/>
  *
- * @author 自動生成
+ * 画面設計_DBBGM81003_1_特徴対象者一覧作成
+ *
+ * @reamsid_L DBB-1860-010 yangchenbing
  */
 public enum DBB2710002StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">

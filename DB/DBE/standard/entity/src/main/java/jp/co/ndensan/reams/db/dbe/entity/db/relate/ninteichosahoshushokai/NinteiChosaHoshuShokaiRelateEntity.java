@@ -37,5 +37,10 @@ public class NinteiChosaHoshuShokaiRelateEntity {
     private int 認定調査委託料;
     private ShinseishoKanriNo 申請書管理番号;
     private int 認定調査依頼履歴番号;
-
+    private int 件数;
+    private int 在宅初回;
+    private int 在宅再調査;
+    private int 施設初回;
+    private int 施設再調査;
+    private int 委託料合計;
 }

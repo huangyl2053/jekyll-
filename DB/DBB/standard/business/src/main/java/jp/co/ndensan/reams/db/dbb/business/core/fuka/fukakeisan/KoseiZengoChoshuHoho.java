@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoseiZengoChoshuHoho {
+public class KoseiZengoChoshuHoho implements Serializable {
 
     private FlexibleYear 賦課年度;
     private HihokenshaNo 被保険者番号;

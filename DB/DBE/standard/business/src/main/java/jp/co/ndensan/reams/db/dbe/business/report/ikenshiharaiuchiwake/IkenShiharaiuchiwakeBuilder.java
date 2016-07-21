@@ -16,14 +16,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class IkenShiharaiuchiwakeBuilder implements IIkenShiharaiuchiwakeBuilder {
 
     private final IIkenShiharaiuchiwakeEditor editor;
+    private final IIkenShiharaiuchiwakeEditor detailEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param editor editor
+     * @param detailEditor detailEditor
      */
-    public IkenShiharaiuchiwakeBuilder(IIkenShiharaiuchiwakeEditor editor) {
+    public IkenShiharaiuchiwakeBuilder(IIkenShiharaiuchiwakeEditor editor, IIkenShiharaiuchiwakeEditor detailEditor) {
         this.editor = editor;
+        this.detailEditor = detailEditor;
     }
 
     /**
@@ -33,7 +36,7 @@ public class IkenShiharaiuchiwakeBuilder implements IIkenShiharaiuchiwakeBuilder
      */
     @Override
     public IkenShiharaiuchiwakeReportSource build() {
-        return ReportEditorJoiner.from(new IkenShiharaiuchiwakeReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new IkenShiharaiuchiwakeReportSource()).join(editor).join(detailEditor).buildSource();
     }
 
 }

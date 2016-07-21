@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ5100001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.HokenshaNinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -34,6 +36,10 @@ public class KaigoNinteiShinseiKensakuHandler {
     private final KaigoNinteiShinseiKensakuDiv div;
 
     private final RString 施設入所_あり = new RString("key0");
+    private static final RString 戻るボタン = new RString("btnCommonModoru");
+    private static final RString 再検索 = new RString("btnResearch");
+    private static final RString 検索 = new RString("btnSearch");
+    private static final RString 検索状態 = new RString("検索状態");
 
     /**
      * コンストラクタです。
@@ -53,11 +59,30 @@ public class KaigoNinteiShinseiKensakuHandler {
     }
 
     /**
-     * 画面の検索処理。
+     * 状態の設定。
      *
+     * @param 受給認定 GyomuBunrui
+     * @param 状態フラグ RString
      */
-    public void kenSaKu() {
-        div.getCcdNinteiShinseishaFinder().initialize();
+    public void setJyoTai(GyomuBunrui 受給認定, RString 状態フラグ) {
+
+        if (GyomuBunrui.介護事務.equals(受給認定)) {
+
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るボタン, true);
+        }
+        if (検索状態.equals(状態フラグ)) {
+
+            div.getKensakuKekka().setDisplayNone(false);
+            div.getCcdNinteiShinseishaFinder().setDisplayNone(true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索, true);
+        } else {
+
+            div.getKensakuKekka().setDisplayNone(true);
+            div.getCcdNinteiShinseishaFinder().setDisplayNone(false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索, false);
+        }
     }
 
     /**

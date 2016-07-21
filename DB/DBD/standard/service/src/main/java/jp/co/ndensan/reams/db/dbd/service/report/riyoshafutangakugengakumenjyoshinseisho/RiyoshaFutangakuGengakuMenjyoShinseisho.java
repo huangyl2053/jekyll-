@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbd.service.report.riyoshafutangakugengakumenjyos
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoProerty;
-import jp.co.ndensan.reams.db.dbd.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800002.RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800002.RiyoshaFutangakuGengakuMenjyoShinseishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd800002.RiyoshaFutangakuGengakuMenjyoShinseishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd800002.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;

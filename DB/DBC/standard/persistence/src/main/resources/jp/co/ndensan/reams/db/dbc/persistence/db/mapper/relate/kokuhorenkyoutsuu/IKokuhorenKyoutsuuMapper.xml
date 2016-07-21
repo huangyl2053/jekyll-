@@ -81,6 +81,20 @@
         #{被保険者氏名},
         #{備考})
     </insert>
+    
+    <!--処理結果リスト一時テーブルに登録する前に一意判断-->
+    <select id="count処理結果ByPK" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity" resultType="int">
+        SELECT COUNT(*) FROM "DbWT0002KokuhorenTorikomiError"
+        WHERE 
+        "errorKubun" = #{エラー区分} AND
+        "shoHokanehshaNo" = #{証記載保険者番号} AND
+        "hihokenshaNo" = #{被保険者番号} AND
+        "key1" = #{キー1} AND
+        "key2" = #{キー2} AND
+        "key3" = #{キー3} AND
+        "key4" = #{キー4} AND
+        "key5" = #{キー5}
+    </select>
 
     <!--処理結果リスト一時テーブルに更新します-->
     <update id="update処理結果リスト一時TBL" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
@@ -304,6 +318,7 @@
         "kanaMeisho" = #{宛名カナ名称},
         "meisho" = #{宛名名称},
         "shimei50onKana" = #{氏名50音カナ},
+        "shikibetsuCode" = #{識別コード},
         "shikakuShutokuYmd" = #{資格取得日},
         "shikakuShutokuJiyuCode" = #{資格取得事由コード},
         "shikakuSoshitsuYmd" = #{資格喪失日},

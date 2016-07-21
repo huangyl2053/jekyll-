@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.tokkitext2a4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a4.TokkiText2A4Entity;
@@ -91,7 +92,7 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
             source.tokkiImg15 = getイメージ03(entity.get特記事項イメージリスト(), 連番_14);
         }
         if (entity.get特記事項番号リスト() != null && !entity.get特記事項番号リスト().isEmpty()) {
-            source.listChosa1_1 = getイメージ01();
+            source.listChosa1_1 = getイメージ02();
         }
         List<RString> 特記事項 = new ArrayList<>();
         RStringBuilder 特記事項builder = new RStringBuilder();
@@ -174,6 +175,19 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
     private RString getイメージ01() {
         if (count < list.size()) {
             return list.get(count);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getイメージ02() {
+        List<RString> result = new ArrayList<>();
+        for (RString rString : list) {
+            if (Collections.frequency(result, rString) < 1) {
+                result.add(rString);
+            }
+        }
+        if (count < result.size()) {
+            return result.get(count);
         }
         return RString.EMPTY;
     }

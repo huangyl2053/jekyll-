@@ -33,20 +33,20 @@ module DBD {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public TextBox1(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("TextBox1"));
+            public txtHihokenshano(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshano"));
             }
 
-            public TextBox2(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("TextBox2"));
+            public txtTaishom(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTaishom"));
             }
 
-            public DataGrid1(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("DataGrid1"));
+            public dgHikazeNenkinKensaku(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgHikazeNenkinKensaku"));
             }
 
-            public Button1(): UZA.Button {
-                return new UZA.Button(this.convFiledName("Button1"));
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
             }
 
         }

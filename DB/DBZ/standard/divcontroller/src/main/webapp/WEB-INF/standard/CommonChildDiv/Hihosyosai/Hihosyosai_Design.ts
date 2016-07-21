@@ -1,9 +1,9 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../jushochitokureirirekilist/JushochiTokureiRirekiList.ts" />
-/// <reference path="./../shikakuhenkorireki/ShikakuHenkoRireki.ts" />
-/// <reference path="./../ShisetsuNyutaishoRirekiKanri.ts" />
+// <reference path="./../jushochitokureirirekilist/JushochiTokureiRirekiList.ts" />
+// <reference path="./../shikakuhenkorireki/ShikakuHenkoRireki.ts" />
+// <reference path="./../ShisetsuNyutaishoRirekiKanri.ts" />
 
 module DBZ {
 
@@ -144,25 +144,25 @@ module DBZ {
                 return new UZA.TabPanel(this.convFiledName("tabPnlJyusyoti"));
             }
 
-            public ccdJyusyotiTokure(): DBZ.JushochiTokureiRirekiList.ModeController {
-                return new DBZ.JushochiTokureiRirekiList.ModeController(this.convFiledName("ccdJyusyotiTokure"));
-            }
+            //public ccdJyusyotiTokure(): DBZ.JushochiTokureiRirekiList.ModeController {
+            //    return new DBZ.JushochiTokureiRirekiList.ModeController(this.convFiledName("ccdJyusyotiTokure"));
+            //}
 
             public tabPnlShikaku(): UZA.TabPanel {
                 return new UZA.TabPanel(this.convFiledName("tabPnlShikaku"));
             }
 
-            public ccdShikakuKanrenIdo(): DBZ.ShikakuHenkoRireki.ModeController {
-                return new DBZ.ShikakuHenkoRireki.ModeController(this.convFiledName("ccdShikakuKanrenIdo"));
-            }
+            //public ccdShikakuKanrenIdo(): DBZ.ShikakuHenkoRireki.ModeController {
+            //    return new DBZ.ShikakuHenkoRireki.ModeController(this.convFiledName("ccdShikakuKanrenIdo"));
+            //}
 
             public tabPnlShisetu(): UZA.TabPanel {
                 return new UZA.TabPanel(this.convFiledName("tabPnlShisetu"));
             }
 
-            public ccdShisetuNyutaisyo(): DBZ.ShisetsuNyutaishoRirekiKanri.ModeController {
-                return new DBZ.ShisetsuNyutaishoRirekiKanri.ModeController(this.convFiledName("ccdShisetuNyutaisyo"));
-            }
+            //public ccdShisetuNyutaisyo(): DBZ.ShisetsuNyutaishoRirekiKanri.ModeController {
+            //    return new DBZ.ShisetsuNyutaishoRirekiKanri.ModeController(this.convFiledName("ccdShisetuNyutaisyo"));
+            //}
 
         }
 

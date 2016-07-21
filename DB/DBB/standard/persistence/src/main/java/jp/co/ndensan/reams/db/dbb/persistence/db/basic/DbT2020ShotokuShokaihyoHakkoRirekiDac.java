@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.rirekiNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRireki;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRireki.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRireki.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRireki.shoriNendo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRirekiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -115,5 +116,30 @@ public class DbT2020ShotokuShokaihyoHakkoRirekiDac implements ISaveable<DbT2020S
                                 eq(shoriNendo, 照会年度),
                                 eq(shikibetsuCode, 識別コード))).order(by(rirekiNo))
                 .limit(1).toObject(DbT2020ShotokuShokaihyoHakkoRirekiEntity.class);
+    }
+
+    /**
+     * selectBySomeKey
+     *
+     * @param 照会年度 FlexibleYear
+     * @param 識別コード ShikibetsuCode
+     * @return DbT2020ShotokuShokaihyoHakkoRirekiEntity
+     * @throws NullPointerException
+     */
+    @Transaction
+    public DbT2020ShotokuShokaihyoHakkoRirekiEntity selectBySomeKey(
+            FlexibleYear 照会年度,
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(照会年度, UrSystemErrorMessages.値がnull.getReplacedMessage("照会年度"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT2020ShotokuShokaihyoHakkoRireki.class).
+                where(and(
+                                eq(shoriNendo, 照会年度),
+                                eq(shikibetsuCode, 識別コード))).
+                toObject(DbT2020ShotokuShokaihyoHakkoRirekiEntity.class);
     }
 }

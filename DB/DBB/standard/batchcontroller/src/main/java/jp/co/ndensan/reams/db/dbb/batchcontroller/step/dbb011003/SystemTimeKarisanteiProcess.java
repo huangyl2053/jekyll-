@@ -24,13 +24,16 @@ public class SystemTimeKarisanteiProcess extends SimpleBatchProcessBase {
 
     static {
         SYSTEM_TIME = new RString("systemTime");
+
     }
     private OutputParameter<YMDHMS> systemTime;
+
     YMDHMS バッチ起動時処理日時_年月日時分秒;
 
     @Override
     protected void beforeExecute() {
         systemTime = new OutputParameter<>();
+
     }
 
     @Override
@@ -42,6 +45,7 @@ public class SystemTimeKarisanteiProcess extends SimpleBatchProcessBase {
     @Override
     protected void afterExecute() {
         systemTime.setValue(バッチ起動時処理日時_年月日時分秒);
+
     }
 
 }

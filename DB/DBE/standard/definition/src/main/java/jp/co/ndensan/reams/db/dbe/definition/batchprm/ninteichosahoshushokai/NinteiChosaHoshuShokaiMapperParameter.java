@@ -51,29 +51,29 @@ public final class NinteiChosaHoshuShokaiMapperParameter implements IMyBatisPara
     /**
      * 報酬実績データ情報のパラメータを生成します。
      *
-     * @param テキストイメージ区分 RString
-     * @param 調査依頼日開始 FlexibleDate
-     * @param 調査依頼日終了 FlexibleDate
-     * @param 最大表示件数 int
-     * @param batchFlag boolean
-     * @param ninteiChosa List<NinteiChosaHoshuShokaiFlowBusiness>
-     * @return NinteiChosaHoshuShokaiMapperParameter
+     * @param テキストイメージ区分 テキストイメージ区分
+     * @param 調査依頼日開始 調査依頼日開始
+     * @param 調査依頼日終了 調査依頼日終了
+     * @param 最大表示件数 最大表示件数
+     * @param batchFlag batchの判断マーク
+     * @param ninteiChosa キーの情報
+     * @return 報酬実績データ情報のパラメータ
      */
     public static NinteiChosaHoshuShokaiMapperParameter createSelectBy情報(RString テキストイメージ区分, FlexibleDate 調査依頼日開始,
             FlexibleDate 調査依頼日終了, int 最大表示件数, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa) {
         return new NinteiChosaHoshuShokaiMapperParameter(テキストイメージ区分, 調査依頼日開始, 調査依頼日終了, true, 最大表示件数,
-                ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), batchFlag, null);
+                ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), batchFlag, ninteiChosa);
     }
 
     /**
-     * 報酬実績データ情報のパラメータを生成します。
+     * 報酬実績データ情報のbatchのＳＱＬパラメータを生成します。
      *
-     * @param テキストイメージ区分 RString
-     * @param 調査依頼日開始 FlexibleDate
-     * @param 調査依頼日終了 FlexibleDate
-     * @param batchFlag boolean
-     * @param ninteiChosa List<NinteiChosaHoshuShokaiFlowBusiness>
-     * @return NinteiChosaHoshuShokaiMapperParameter
+     * @param テキストイメージ区分 テキストイメージ区分
+     * @param 調査依頼日開始 調査依頼日開始
+     * @param 調査依頼日終了 調査依頼日終了
+     * @param batchFlag batchの判断マーク
+     * @param ninteiChosa キーの情報
+     * @return 報酬実績データ情報のパラメータ
      */
     public static NinteiChosaHoshuShokaiMapperParameter createParamter(RString テキストイメージ区分, FlexibleDate 調査依頼日開始,
             FlexibleDate 調査依頼日終了, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa) {

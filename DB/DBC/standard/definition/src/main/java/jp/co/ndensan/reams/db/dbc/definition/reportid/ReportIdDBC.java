@@ -16,6 +16,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 総合事業費過再審査定通知書情報
+     */
+    DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
+    /**
+     * 給付実績更新結果情報一覧表
+     */
+    DBC200054(new ReportId("DBC200054_KyufujissekiKoshinkekkaIchiran"), new RString("給付実績更新結果情報一覧表")),
+    /**
+     * 利用者負担２割対応・利用者負担割合更正
+     */
+    DBC100065(new ReportId("DBC100065_FutanWariaisho"), new RString("利用者負担２割対応・利用者負担割合更正 ")),
+    /**
+     * 高額総合事業サービス費判定エラーリスト
+     */
+    DBC200076(new ReportId("DBC200076_KogakuSogoJigyoServicehiHanteiErrorIchiran"), new RString("高額総合事業サービス費判定エラーリスト ")),
+    /**
+     * 高額介護サービス費判定エラーリスト
+     */
+    DBC200018(new ReportId("DBC200018_KogakuServicehiHanteiErrorIchiran"), new RString("高額介護サービス費判定エラーリスト ")),
+    /**
      * 介護保険受領委任払い取扱事業者登録通知書
      */
     DBC100032(new ReportId("DBC100032_JyuryoItakuAtukaiJigyoshaTorokuTsuchisho"), new RString("介護保険受領委任払い取扱事業者登録通知書 ")),
@@ -78,6 +98,11 @@ public enum ReportIdDBC {
      */
     DBC200016(
             new ReportId("DBC200016_KogakuServicehiTaishoshaIchiran"), new RString("高額介護サービス費対象者一覧表")),
+    /**
+     * 償還払不支給決定者一覧情報 の帳票ＩＤです。
+     */
+    DBC200021(
+            new ReportId("DBC200021_ShokanbaraiShikyuKetteishaIchiran"), new RString("償還払支給決定者一覧表")),
     /**
      * 償還払不支給決定者一覧情報 の帳票ＩＤです。
      */

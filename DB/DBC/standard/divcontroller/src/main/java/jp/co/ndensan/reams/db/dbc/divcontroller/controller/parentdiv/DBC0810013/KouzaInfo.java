@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0810013;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;
@@ -67,7 +67,9 @@ public class KouzaInfo {
         parameter.setHihokenshaNo(支給申請情報.get被保険者番号());
         parameter.setShikyushinseiServiceYM(支給申請情報.getサービス提供年月());
         parameter.setShikyushinseiSeiriNo(支給申請情報.get整理番号());
-        parameter.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
+        if (支給申請情報.get支払方法区分コード() != null && !支給申請情報.get支払方法区分コード().isEmpty()) {
+            parameter.setShiharaiHohoKubun(ShiharaiHohoKubun.toValue(支給申請情報.get支払方法区分コード()));
+        }
         parameter.setKeiyakuNo(支給申請情報.get受領委任契約番号());
         if (支給申請情報.get支払期間開始年月日() != null) {
             parameter.setStartYMD(new RDate(支給申請情報.get支払期間開始年月日().toString()));

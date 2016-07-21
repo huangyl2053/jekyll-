@@ -40,7 +40,6 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
     private static final int LENGTH_11 = 11;
     private static final int LENGTH_12 = 12;
     private static final int LENGTH_13 = 13;
-    private static final int LENGTH_700 = 13;
     private static final RString チェック = new RString("✔");
     private final IkenshokinyuyoshiBusiness business;
 
@@ -218,11 +217,11 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
             source.sonotaHifuUmu = チェック;
         }
         source.sonotaHifuBui = business.getその他皮膚疾患部();
-        if (IkenKomoku10.軽.getコード().equals(business.getその他皮膚疾患部())) {
+        if (IkenKomoku10.軽.getコード().equals(business.getその他皮膚疾程度())) {
             source.sonotaHifuKei = チェック;
-        } else if (IkenKomoku10.中.getコード().equals(business.getその他皮膚疾患部())) {
+        } else if (IkenKomoku10.中.getコード().equals(business.getその他皮膚疾程度())) {
             source.sonotaHifuChu = チェック;
-        } else if (IkenKomoku10.重.getコード().equals(business.getその他皮膚疾患部())) {
+        } else if (IkenKomoku10.重.getコード().equals(business.getその他皮膚疾程度())) {
             source.sonotaHifuJu = チェック;
         }
         if (IkenKomoku11.自立.getコード().equals(business.get屋外歩行())) {
@@ -409,11 +408,11 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
         }
         source.ryuijikoUndo = business.getサービス提供運動留意事項();
         source.ryuijikoSonota = business.getサービス提供その他の留意事項();
-        if (IkenKomoku18.無.getコード().equals(business.getサービス提供運動())) {
+        if (IkenKomoku18.無.getコード().equals(business.get感染症有無())) {
             source.kansenshoNashi = チェック;
-        } else if (IkenKomoku18.有.getコード().equals(business.getサービス提供運動())) {
+        } else if (IkenKomoku18.有.getコード().equals(business.get感染症有無())) {
             source.kansenshoAri = チェック;
-        } else if (IkenKomoku18.不明.getコード().equals(business.getサービス提供運動())) {
+        } else if (IkenKomoku18.不明.getコード().equals(business.get感染症有無())) {
             source.kansenshoFumei = チェック;
         }
         source.kansenshoName = business.get感染症名();

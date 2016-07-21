@@ -53,7 +53,7 @@ public class KagoKetteiKohifutanshaInReport extends
             return;
         }
         for (int index = 0; index < 帳票出力対象データリスト.size(); index++) {
-            boolean 集計Flag;
+            boolean 集計Flag = false;
             if (帳票出力対象データリスト.size() <= (index + 1)) {
                 集計Flag = true;
             } else {
@@ -62,7 +62,6 @@ public class KagoKetteiKohifutanshaInReport extends
                 if (!公費負担者番号.equals(公費負担者番号Next)) {
                     集計Flag = true;
                 }
-                集計Flag = false;
             }
             IKagoKetteiKohifutanshaInEditor headerEditor = new KagoKetteiKohifutanshaInHeaderEditor(
                     帳票出力対象データリスト.get(index), 出力順Map, 処理年月, 作成日時);

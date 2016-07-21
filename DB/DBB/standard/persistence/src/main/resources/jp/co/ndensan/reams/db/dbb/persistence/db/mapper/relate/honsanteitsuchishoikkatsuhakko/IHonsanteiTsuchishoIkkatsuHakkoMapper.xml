@@ -1782,6 +1782,7 @@
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
               AND 年金特徴回付情報."shoriNendo" = #{調定年度}
         WHERE
@@ -2594,6 +2595,7 @@
               ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND 計算後情報."honHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
               AND 年金特徴回付情報."shoriNendo" = #{調定年度}
         WHERE
@@ -2950,6 +2952,7 @@
              AND A."kariNenkinCode" = B."nenkinCode"
              AND A."kariHosokuM" = B."hosokuTsuki"
              AND A."choteiNendo" <![CDATA[<]]> #{最新調定日時}
+             AND B."gyomuCode" = 'DB'
              AND B."tsuchiNaiyoCode" in ('00', '30')
              AND B."shoriNendo" = #{調定年度}
     </update>
@@ -3023,6 +3026,7 @@
              AND A."honNenkinCode" = B."nenkinCode"
              AND A."honHosokuM" = B."hosokuTsuki"
              AND A."choteiNendo" <![CDATA[>=]]> #{最新調定日時}
+             AND B."gyomuCode" = 'DB'
              AND B."tsuchiNaiyoCode" in ('00', '30')
              AND B."shoriNendo" = #{調定年度}
     </update>

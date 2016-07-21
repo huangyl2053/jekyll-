@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
@@ -14,14 +15,14 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 主治医意見書作成依頼情報を管理するクラスです。
  */
 public class ShujiiIkenshoIraiJoho extends
-        ParentModelBase<ShujiiIkenshoIraiJohoIdentifier, DbT5301ShujiiIkenshoIraiJohoEntity, ShujiiIkenshoIraiJoho> implements Serializable {
+        ModelBase<ShujiiIkenshoIraiJohoIdentifier, DbT5301ShujiiIkenshoIraiJohoEntity, ShujiiIkenshoIraiJoho> implements Serializable {
 
     private final DbT5301ShujiiIkenshoIraiJohoEntity entity;
     private final ShujiiIkenshoIraiJohoIdentifier id;
@@ -73,7 +74,6 @@ public class ShujiiIkenshoIraiJoho extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 申請書管理番号を返します。
      *
@@ -288,7 +288,6 @@ public class ShujiiIkenshoIraiJoho extends
      *
      * @return 変更対象処理実施後の{@link ShujiiIkenshoIraiJoho}
      */
-    @Override
     public ShujiiIkenshoIraiJoho modifiedModel() {
         DbT5301ShujiiIkenshoIraiJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -327,7 +326,7 @@ public class ShujiiIkenshoIraiJoho extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -356,5 +355,25 @@ public class ShujiiIkenshoIraiJoho extends
         return new ShujiiIkenshoIraiJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShujiiIkenshoIraiJoho other = (ShujiiIkenshoIraiJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

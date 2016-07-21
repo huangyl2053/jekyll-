@@ -142,7 +142,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        // 内部QA：614　Redmine：＃75422　排他制限の確認
         update認定調査依頼情報(entity);
         itemList.add(setChosaIraishoHeadItem(entity));
     }

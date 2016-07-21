@@ -85,9 +85,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         調定日時 = inputEntity.get調定日時();
         賦課年度 = inputEntity.get賦課年度();
         計算後情報_宛名_口座_更正前Entity = inputEntity.get計算後情報_宛名_口座_更正前Entity();
-        計算後情報_宛名_口座_更正前Entity.set更正前後区分(更正前後区分_更正前);
         計算後情報_宛名_口座_更正後Entity = inputEntity.get計算後情報_宛名_口座_更正後Entity();
-        計算後情報_宛名_口座_更正後Entity.set更正前後区分(更正前後区分_更正後);
         association = inputEntity.getAssociation();
         住所編集 = inputEntity.get住所編集();
 
@@ -115,38 +113,25 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         }
         source.hokenshaName = association.get市町村名();
         if (計算後情報_宛名_口座_更正後Entity != null) {
-            if (計算後情報_宛名_口座_更正後Entity.get被保険者番号() != null) {
-                source.list1_1 = 計算後情報_宛名_口座_更正後Entity.get被保険者番号().value();
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get通知書番号() != null) {
-                source.list1_2 = 計算後情報_宛名_口座_更正後Entity.get通知書番号().value();
-            }
-            if (計算後情報_宛名_口座_更正後Entity.get宛名Entity() != null) {
-                AtenaMeisho 漢字氏名 = 計算後情報_宛名_口座_更正後Entity.get宛名Entity().getKanjiShimei();
-                source.list1_3 = 漢字氏名 == null ? null : 漢字氏名.getColumnValue();
-            }
-            source.list1_4 = 住所編集;
-            if (計算後情報_宛名_口座_更正後Entity.get口座Entity() != null) {
-                kozaJoho(source);
-            }
+            edit項目(source);
             source.list1_6 = 計算後情報_宛名_口座_更正後Entity.get調定事由1();
-            if (計算後情報_宛名_口座_更正前Entity.get調定日時() != null) {
+            if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get調定日時() != null) {
                 source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
             }
-            if (計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額() != null) {
+            if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額() != null) {
                 source.list2_2 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get確定介護保険料_年額(), 0);
             }
-            if (計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額() != null) {
+            if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額() != null) {
                 source.list2_3 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get減免前介護保険料_年額(), 0);
             }
-            if (計算後情報_宛名_口座_更正前Entity.get減免額() != null) {
+            if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get減免額() != null) {
                 source.list2_4 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get減免額(), 0);
             }
             set月別取得段階(計算後情報_宛名_口座_更正前Entity, source);
-            if (計算後情報_宛名_口座_更正前Entity.get口座区分() != null) {
+            if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get口座区分() != null) {
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
                 source.list2_17 = 口座区分.equals(現金_0) ? 現金 : 口座;
             }
@@ -166,6 +151,23 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             edit項目追加6(source);
         }
         return source;
+    }
+
+    private void edit項目(GenNendoHonsanteiIdouSource source) {
+        if (計算後情報_宛名_口座_更正後Entity.get被保険者番号() != null) {
+            source.list1_1 = 計算後情報_宛名_口座_更正後Entity.get被保険者番号().value();
+        }
+        if (計算後情報_宛名_口座_更正後Entity.get通知書番号() != null) {
+            source.list1_2 = 計算後情報_宛名_口座_更正後Entity.get通知書番号().value();
+        }
+        if (計算後情報_宛名_口座_更正後Entity.get宛名Entity() != null) {
+            AtenaMeisho 漢字氏名 = 計算後情報_宛名_口座_更正後Entity.get宛名Entity().getKanjiShimei();
+            source.list1_3 = 漢字氏名 == null ? null : 漢字氏名.getColumnValue();
+        }
+        source.list1_4 = 住所編集;
+        if (計算後情報_宛名_口座_更正後Entity.get口座Entity() != null) {
+            kozaJoho(source);
+        }
     }
 
     /**
@@ -191,6 +193,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             }
             source.list3_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
 
+            if (計算後情報_宛名_口座_更正前Entity == null) {
+                return source;
+            }
             if (計算後情報_宛名_口座_更正前Entity.get特徴期別金額01() != null) {
                 source.list4_1 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01(), 0);
@@ -238,7 +243,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      * @return GenNendoHonsanteiIdouSource
      */
     public GenNendoHonsanteiIdouSource edit項目追加2(GenNendoHonsanteiIdouSource source) {
-        if (計算後情報_宛名_口座_更正後Entity != null) {
+        if (計算後情報_宛名_口座_更正前Entity != null) {
             if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額11() != null && !source.fuchoKi11.isEmpty()) {
                 source.list4_17 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11(), 0);
@@ -422,7 +427,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      * @return GenNendoHonsanteiIdouSource
      */
     public GenNendoHonsanteiIdouSource edit項目追加5(GenNendoHonsanteiIdouSource source) {
-        if (計算後情報_宛名_口座_更正後Entity != null) {
+        if (計算後情報_宛名_口座_更正前Entity != null) {
             if (計算後情報_宛名_口座_更正前Entity.get普徴期別金額04() != null && !source.fuchoKi4.isEmpty()) {
                 source.list4_10 = DecimalFormatter
                         .toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04(), 0);
@@ -496,6 +501,9 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
     }
 
     private void set月別取得段階(KeisanjohoAtenaKozaEntity entity, GenNendoHonsanteiIdouSource item) {
+        if (entity == null) {
+            return;
+        }
         RString 更正前後区分 = entity.get更正前後区分();
         FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
         int 開始月1 = 月割開始年月1.getMonthValue();

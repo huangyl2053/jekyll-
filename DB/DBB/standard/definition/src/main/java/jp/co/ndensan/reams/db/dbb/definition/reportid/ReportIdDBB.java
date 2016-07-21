@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 帳票ＩＤの列挙型です。
  *
- * @reamsid_L DBB-9999-022 xicongwang
+ * @reamsid_L DBB-9999-022 liuyang
  */
 public enum ReportIdDBB {
 
@@ -231,12 +231,12 @@ public enum ReportIdDBB {
     /**
      * 介護保険料額変更兼特別徴収中止通知書【B5横タイプ】
      */
-    DBB100042(new ReportId("DBB100042_KaigoHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
+    DBB100042(new ReportId("DBB100042_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoB5Yoko"),
             new RString("介護保険料額変更兼特別徴収中止通知書【B5横タイプ】")),
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】
      */
-    DBB100043(new ReportId("DBB100043_KaigoHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
+    DBB100043(new ReportId("DBB100043_KaigoHokenHokenryogakuHenkoKenChushiTsuchishoA4Tate"),
             new RString("介護保険料額変更兼特別徴収中止通知書【A4縦タイプ】")),
     /**
      * 介護保険料額変更兼特別徴収中止通知書【A4縦タイプ（連帳）】
@@ -327,6 +327,10 @@ public enum ReportIdDBB {
      */
     DBB100009(new ReportId("DBB100009_TokubetsuChoshuKaishiTsuchishoKariOverlayB5Yoko"), new RString("特別徴収開始通知書（仮算定）【B5横・オーバレイタイプ】")),
     /**
+     * 仮算定異動（一括）結果一覧表の帳票ID
+     */
+    DBB200013(new ReportId("DBB200013_KarisanteiIdoKekkaIchiran"), new RString("仮算定異動（一括）結果一覧表")),
+    /**
      * 調定簿（帳票）
      */
     DBB3001(new ReportId("DBB300001_Choteibo"), new RString("介護保険料　調定簿")),
@@ -375,6 +379,10 @@ public enum ReportIdDBB {
      */
     DBB200001(new ReportId("DBB200001_TokubetsuChoshuKaishiTsuchishoKariHakkoIchiran"), new RString("特別徴収開始通知書 本算定")),
     /**
+     * 特別徴収開始通知書（本算定）発行一覧表の帳票ID
+     */
+    DBB200002(new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran"), new RString("特別徴収仮算定結果一覧表")),
+    /**
      * 特別徴収平準化計算（特別徴収6月分）結果一覧表の帳票ID
      */
     DBB200003(new ReportId("DBB200003_TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiran"), new RString("特別徴収平準化計算（特別徴収6月分）結果一覧表")),
@@ -419,6 +427,14 @@ public enum ReportIdDBB {
      * 所得照会票発行一覧表の帳票ID
      */
     DBB200024(new ReportId("DBB200024_ShotokushokaihyoHakkoIchiran"), new RString("所得照会票発行一覧表")),
+    /**
+     * 介護保険　特別徴収同定一覧表の帳票ID
+     */
+    DBB200031(new ReportId("DBB200031_TokubetsuChoshuDoteiIchiran"), new RString("介護保険　特別徴収同定一覧表")),
+    /**
+     * 介護保険　特別徴収同定一覧表の帳票ID
+     */
+    DBB200032(new ReportId("DBB200032_TokubetsuChoshuMidoteiIchiran"), new RString("介護保険　特別徴収未同定一覧表")),
     /**
      *
      * 本算定異動（過年度）結果一覧表の帳票ID

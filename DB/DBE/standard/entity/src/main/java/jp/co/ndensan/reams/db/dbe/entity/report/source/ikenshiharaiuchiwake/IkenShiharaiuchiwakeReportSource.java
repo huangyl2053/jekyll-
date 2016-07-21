@@ -95,6 +95,26 @@ public class IkenShiharaiuchiwakeReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokenshaNo;
+    @ReportItem(name = "hakkoYMD", length = 11, order = 36)
+    public RString hakkoYMD;
+    @ReportItem(name = "detail_listShiharaiuchiwake_1", length = 3, order = 37)
+    public RString detail_listShiharaiuchiwake_1;
+    @ReportItem(name = "detail_listShiharaiuchiwake_2", length = 10, order = 38)
+    public RString detail_listShiharaiuchiwake_2;
+    @ReportItem(name = "detail_listShiharaiuchiwake_3", length = 30, order = 39)
+    public RString detail_listShiharaiuchiwake_3;
+    @ReportItem(name = "detail_listShiharaiuchiwake_4", length = 30, order = 40)
+    public RString detail_listShiharaiuchiwake_4;
+    @ReportItem(name = "detail_listShiharaiuchiwake_5", length = 7, order = 41)
+    public RString detail_listShiharaiuchiwake_5;
+
+    @ReportItem(name = "layoutBreakItem", length = 10, order = 999)
+    public int layoutBreakItem;
+    public static final RString LAYOUTBREAKITEM;
+
+    static {
+        LAYOUTBREAKITEM = new RString("layoutBreakItem");
+    }
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

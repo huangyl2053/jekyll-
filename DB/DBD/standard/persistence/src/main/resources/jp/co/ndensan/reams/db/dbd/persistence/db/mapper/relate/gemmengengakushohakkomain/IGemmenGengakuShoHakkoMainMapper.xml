@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3540-010 xuyue -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakushohakkomain.IGemmenGengakuShoHakkoMainMapper">
+    <resultMap id="resultMap_RiyoshaFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity" autoMapping="true">
+        <id property="利用者負担額減額Entity.shoKisaiHokenshaNo" column="dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="利用者負担額減額Entity.hihokenshaNo" column="dbT4014RiyoshaFutangakuGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="利用者負担額減額Entity.rirekiNo" column="dbT4014RiyoshaFutangakuGengaku_rirekiNo" />
+        <association property="利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get利用者負担額減免の情報" resultMap="resultMap_RiyoshaFutangakuGengakuEntity" fetchSize="500">
+        SELECT
+        DbT4014RiyoshaFutangakuGengaku.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.noDeleted_DbT4014RiyoshaFutangakuGengaku" />) AS DbT4014RiyoshaFutangakuGengaku
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE
+        DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
+        AND DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_ketteiKubun" IS NOT NULL
+        AND DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_ketteiKubun" != ''
+        ORDER BY DbT4014RiyoshaFutangakuGengaku."dbT4014RiyoshaFutangakuGengaku_rirekiNo" ASC
+    </select>
+
+
+    <resultMap id="resultMap_FutanGendogakuNinteiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity" autoMapping="true">
+        <id property="介護保険負担限度額認定Entity.shoKisaiHokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="介護保険負担限度額認定Entity.hihokenshaNo" column="dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="介護保険負担限度額認定Entity.rirekiNo" column="dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" />
+        <association property="介護保険負担限度額認定Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get負担限度額認定の情報"
+            resultMap="resultMap_FutanGendogakuNinteiEntity"
+            fetchSize="500">
+        SELECT
+        DbT4018KaigoHokenFutanGendogakuNintei.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.noDeleted_DbT4018KaigoHokenFutanGendogakuNintei" />) AS DbT4018KaigoHokenFutanGendogakuNintei
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE
+        DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = #{被保険者番号}
+        AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" IS NOT NULL
+        AND DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" != ''
+        ORDER BY DbT4018KaigoHokenFutanGendogakuNintei."dbT4018KaigoHokenFutanGendogakuNintei_rirekiNo" ASC
+    </select>
+
+    <resultMap id="resultMap_ShafukuRiyoshaFutanKeigenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity" autoMapping="true">
+        <id property="社会福祉法人等利用者負担軽減Entity.shoKisaiHokenshaNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="社会福祉法人等利用者負担軽減Entity.hihokenshaNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="社会福祉法人等利用者負担軽減Entity.rirekiNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" />
+        <association property="社会福祉法人等利用者負担軽減Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.ResultMap_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get社会福祉法人等利用者負担軽減の情報"
+            resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
+            fetchSize="500">
+        SELECT
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.noDeleted_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />) AS DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE
+        DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" = #{被保険者番号}
+        AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_ketteiKubun" IS NOT NULL
+        AND DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_ketteiKubun" != ''
+        ORDER BY DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" ASC
+    </select>
+
+    <resultMap id="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity" autoMapping="true">
+        <id property="訪問介護利用者負担額減額Entity.shoKisaiHokenshaNo" column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="訪問介護利用者負担額減額Entity.hihokenshaNo" column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="訪問介護利用者負担額減額Entity.rirekiNo" column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" />
+        <association property="訪問介護利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.ResultMap_DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get訪問介護利用者負担額減額の情報"
+            resultMap="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
+            fetchSize="500">
+        SELECT
+        DbT4016HomonKaigoRiyoshaFutangakuGengaku.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.noDeleted_DbT4016HomonKaigoRiyoshaFutangakuGengaku" />) AS DbT4016HomonKaigoRiyoshaFutangakuGengaku
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE
+        DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
+        AND DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_ketteiKubun" IS NOT NULL
+        AND DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_ketteiKubun" != ''
+        ORDER BY DbT4016HomonKaigoRiyoshaFutangakuGengaku."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" ASC
+    </select>
+
+    <resultMap id="resultMap_TokubetsuchiikiKasanGemmenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity" autoMapping="true">
+        <id property="特別地域加算減免Entity.shoKisaiHokenshaNo" column="dbT4020TokubetsuchiikiKasanGemmen_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="特別地域加算減免Entity.hihokenshaNo" column="dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="特別地域加算減免Entity.rirekiNo" column="dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" />
+        <association property="特別地域加算減免Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4020TokubetsuchiikiKasanGemmenMapper.ResultMap_DbT4020TokubetsuchiikiKasanGemmenEntity"/>
+        <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="get特別地域加算減免の情報"
+            resultMap="resultMap_TokubetsuchiikiKasanGemmenEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
+            fetchSize="500">
+        SELECT
+        DbT4020TokubetsuchiikiKasanGemmen.*,
+        DbT4010GemmenGengakuShinsei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4020TokubetsuchiikiKasanGemmenMapper.noDeleted_DbT4020TokubetsuchiikiKasanGemmen" />) AS DbT4020TokubetsuchiikiKasanGemmen
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS DbT4010GemmenGengakuShinsei
+        ON DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        WHERE
+        DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = #{被保険者番号}
+        AND DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_ketteiKubun" IS NOT NULL
+        AND DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_ketteiKubun" != ''
+        ORDER BY DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" ASC
+    </select>
+</mapper>

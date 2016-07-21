@@ -54,4 +54,6 @@ public class IkenShiharaiuchiwakeEntity {
     private RString 金額;
     private RString 通知文2;
     private RString 医療機関コード;
+    private int count;
+    private int layoutBreakItem;
 }

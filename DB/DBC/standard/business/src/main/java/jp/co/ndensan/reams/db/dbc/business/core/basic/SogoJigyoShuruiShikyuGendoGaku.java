@@ -19,11 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護予防・日常生活支援総合事業種類支給限度額を管理するクラスです。
+ *
+ * @reamsid_L DBC-3364-010 xuxin
  */
-public class SogoJigyoShuruiShikyuGendoGaku 
-extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier, 
-        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity, 
-        SogoJigyoShuruiShikyuGendoGaku> implements Serializable {
+public class SogoJigyoShuruiShikyuGendoGaku extends
+        ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier, DbT7118SogoJigyoShuruiShikyuGendoGakuEntity, SogoJigyoShuruiShikyuGendoGaku> implements
+        Serializable {
 
     private final DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity;
     private final SogoJigyoShuruiShikyuGendoGakuIdentifier id;
@@ -155,8 +156,7 @@ extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier,
     /**
      * 介護予防・日常生活支援総合事業種類支給限度額の識別子{@link SogoJigyoShuruiShikyuGendoGakuIdentifier}を返します。
      *
-     * @return
-     * 介護予防・日常生活支援総合事業種類支給限度額の識別子{@link SogoJigyoShuruiShikyuGendoGakuIdentifier}
+     * @return 介護予防・日常生活支援総合事業種類支給限度額の識別子{@link SogoJigyoShuruiShikyuGendoGakuIdentifier}
      */
     @Override
     public SogoJigyoShuruiShikyuGendoGakuIdentifier identifier() {
@@ -193,7 +193,7 @@ extends ModelBase<SogoJigyoShuruiShikyuGendoGakuIdentifier,
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -27,6 +28,10 @@ public class KanendoFukaValidationHandler {
     private final RString 納入通知書の発行日 = new RString("納入通知書の発行日");
     private final RString 通知書チェックボックス = new RString("通知書チェックボックス");
     private final RString 対象者 = new RString("対象者");
+    private final RString 口座振替者 = new RString("口座振替者");
+    private final RString 生活保護対象者 = new RString("生活保護対象者");
+    private final RString ページごとに山分け = new RString("ページごとに山分け");
+    private final RString 対象賦課年度 = new RString("対象賦課年度");
 
     /**
      * 初期化
@@ -40,45 +45,110 @@ public class KanendoFukaValidationHandler {
     /**
      * 実行チェック
      *
-     * @return validPairs
+     * @param 決定変更通知書Flag boolean
+     * @param 納入通知書Flag boolean
+     * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 実行チェック() {
+    public ValidationMessageControlPairs check実行(boolean 決定変更通知書Flag,
+            boolean 納入通知書Flag) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (決定変更通知書Flag) {
+            List<RString> 決定チェックボックス = div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                    getChkKetteiTsuchi().getSelectedKeys();
+            List<RString> 変更チェックボックス = div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                    getChkHenkoTsuchi().getSelectedKeys();
+            if ((決定チェックボックス == null || 決定チェックボックス.isEmpty())
+                    && (変更チェックボックス == null || 変更チェックボックス.isEmpty())) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.必須, 通知書チェックボックス.toString())));
+            }
+            if (決定チェックボックス != null && !決定チェックボックス.isEmpty()) {
+                check決定通知書(validPairs);
+            }
+            if (変更チェックボックス != null && !変更チェックボックス.isEmpty()) {
+                check変更通知書(validPairs);
+            }
+        }
+        if (納入通知書Flag) {
+            check納入通知書(validPairs);
+        }
+        if (!div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedKey().
+                equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedKey())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    DbbErrorMessages.賦課処理対象月と通知書出力月の不整合)));
+        }
+
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs check決定通知書(ValidationMessageControlPairs validPairs) {
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtKetteiTsuchiHakkoYMD().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.必須, 決定通知書の発行日.toString())));
         }
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchiTaishoNendo().getSelectedKeys() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getChkKetteiTsuchiTaishoNendo().getSelectedKeys().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 対象賦課年度.toString())));
+        }
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs check変更通知書(ValidationMessageControlPairs validPairs) {
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiHakkoYMD().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.必須, 変更通知書の発行日.toString())));
         }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().getValue() == null) {
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishoFukaNendo().getSelectedKeys() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getChkHenkoTsuchiTaishoFukaNendo().getSelectedKeys().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 納入通知書の発行日.toString())));
+                    UrErrorMessages.必須, 対象賦課年度.toString())));
         }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().getSelectedKeys() == null
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().getSelectedKeys().isEmpty()
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().getSelectedKeys() == null
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().getSelectedKeys() == null
                 || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getChkHenkoTsuchiTaishosha().getSelectedKeys().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                     UrErrorMessages.必須, 対象者.toString())));
         }
-        if (!div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedValue().
-                equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedValue())) {
+        return validPairs;
+    }
+
+    private ValidationMessageControlPairs check納入通知書(ValidationMessageControlPairs validPairs) {
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbbErrorMessages.賦課処理対象月と通知書出力月の不整合)));
+                    UrErrorMessages.必須, 納入通知書の発行日.toString())));
         }
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().getSelectedKeys().isEmpty()
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkKetteiTsuchi().getSelectedKeys() == null
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().getSelectedKeys().isEmpty()
-                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().getSelectedKeys() == null) {
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishoFukaNedno().getSelectedKeys() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getChkNotsuTaishoFukaNedno().getSelectedKeys().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 通知書チェックボックス.toString())));
+                    UrErrorMessages.必須, 対象賦課年度.toString())));
         }
-        if (div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id().isEmpty()) {
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().getSelectedKeys() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getChkNotsuTaishosha().getSelectedKeys().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbbErrorMessages.帳票ID取得不可のため処理不可)));
+                    UrErrorMessages.必須, 対象者.toString())));
+        }
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuKozaShutsuryokuYoshiki().getSelectedKey() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getRadNotsuKozaShutsuryokuYoshiki().getSelectedKey().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 口座振替者.toString())));
+        }
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuSeikatsuHogo().getSelectedKey() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getRadNotsuSeikatsuHogo().getSelectedKey().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, 生活保護対象者.toString())));
+        }
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getRadNotsuYamawake().getSelectedKey() == null
+                || div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getRadNotsuYamawake().getSelectedKey().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, ページごとに山分け.toString())));
         }
         return validPairs;
     }

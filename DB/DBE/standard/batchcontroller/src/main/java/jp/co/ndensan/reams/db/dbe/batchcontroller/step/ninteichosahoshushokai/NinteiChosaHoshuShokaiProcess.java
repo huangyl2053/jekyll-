@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosahoshushokai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshushokai.NinteiChosaHoshuShokaiChange;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahoshuichiran.ChosahoshuichiranReport;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -49,7 +52,8 @@ public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaH
 
     private NinteiChosaHoshuShokaiProcessParameter parameter;
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahoshushokai.INinteiChosaHoshuShokaiRelateMapper.get報酬実績データ情報");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahoshushokai."
+            + "INinteiChosaHoshuShokaiRelateMapper.get報酬実績データ情報");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601006.getReportId();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601006"));
     private static final RString CSV_NAME = new RString("IkenshoJissekiIchiran.csv");
@@ -62,11 +66,10 @@ public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaH
     private RString eucFilePath;
     private RString 導入団体コード;
     private RString 市町村名;
-
-    @Override
-    protected void initialize() {
-    }
-
+    private int count = 0;
+    private RString ninteichosaItakusakiCode = RString.EMPTY;
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(ChosahoshuichiranReportSource.ReportSourceFields.chosaItakusakiNo.name())));
     @BatchWriter
     private BatchReportWriter<ChosahoshuichiranReportSource> batchWrite;
     private ReportSourceWriter<ChosahoshuichiranReportSource> reportSourceWriter;
@@ -74,14 +77,25 @@ public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaH
     private EucCsvWriter<IChosaHoshuShokaiCsvEucEntity> eucCsvWriter;
 
     @Override
+    protected void initialize() {
+    }
+
+    @Override
     protected void process(NinteiChosaHoshuShokaiRelateEntity relateEntity) {
+
         if (CSVを出力する.equals(parameter.get帳票出力区分())) {
             eucCsvWriter.writeLine(NinteiChosaHoshuShokaiChange.createData(relateEntity));
         } else if (集計表を発行する.equals(parameter.get帳票出力区分())) {
-            ChosahoshuichiranReport report = new ChosahoshuichiranReport(NinteiChosaHoshuShokaiChange.createShokaiData(relateEntity, parameter));
+            if (!ninteichosaItakusakiCode.equals(relateEntity.get認定調査委託先コード())) {
+                count = 1;
+            } else {
+                count = count + 1;
+            }
+            ninteichosaItakusakiCode = relateEntity.get認定調査委託先コード();
+            ChosahoshuichiranReport report = new ChosahoshuichiranReport(NinteiChosaHoshuShokaiChange.createShokaiData(relateEntity,
+                    parameter, count, reportSourceWriter.pageCount().value()));
             report.writeBy(reportSourceWriter);
         }
-
     }
 
     @Override
@@ -101,7 +115,9 @@ public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaH
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true).
                 build();
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ChosahoshuichiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -114,16 +130,15 @@ public class NinteiChosaHoshuShokaiProcess extends BatchProcessBase<NinteiChosaH
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 調査依頼日FROM_SB = new RStringBuilder("【調査依頼日（From）】");
-        調査依頼日FROM_SB.append(parameter.get調査依頼日開始());
-        RStringBuilder 調査依頼日To_SB = new RStringBuilder("【調査依頼日（To）】");
-        調査依頼日FROM_SB.append(parameter.get調査依頼日終了());
-        出力条件.add(調査依頼日FROM_SB.toRString());
-        出力条件.add(調査依頼日To_SB.toRString());
+        RStringBuilder 調査依頼日FROM = new RStringBuilder("【調査依頼日（From）】");
+        調査依頼日FROM.append(parameter.get調査依頼日開始());
+        RStringBuilder 調査依頼日To = new RStringBuilder("【調査依頼日（To）】");
+        調査依頼日To.append(parameter.get調査依頼日終了());
+        出力条件.add(調査依頼日FROM.toRString());
+        出力条件.add(調査依頼日To.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE601006.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
-
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }

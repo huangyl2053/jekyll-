@@ -157,4 +157,45 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
 //        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get国保連インターフェース管理(RString 交換情報識別番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外.getコード()))).
+                order(by(DbT3104KokuhorenInterfaceKanri.shoriYM, Order.DESC)).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 国保連インターフェース管理取得返します。
+     *
+     * @param 交換情報識別番号 RString
+     * @param 処理年月 RString FlexibleYearMonth
+     * @return List<DbT3104KokuhorenInterfaceKanriEntity>
+     */
+    @Transaction
+    public List<DbT3104KokuhorenInterfaceKanriEntity> get国保連インターフェース管理_処理年月(
+            RString 交換情報識別番号,
+            FlexibleYearMonth 処理年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                where(and(
+                                eq(kokanShikibetsuNo, 交換情報識別番号),
+                                eq(shoriYM, 処理年月),
+                                eq(sofuTorikomiKubun, SofuTorikomiKubun.それ以外.getコード()))).
+                toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
 }

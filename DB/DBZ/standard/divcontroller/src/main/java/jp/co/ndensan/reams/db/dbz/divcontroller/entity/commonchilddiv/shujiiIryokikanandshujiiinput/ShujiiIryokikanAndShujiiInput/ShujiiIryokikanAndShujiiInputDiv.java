@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIry
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -457,6 +459,15 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     @Override
     public boolean hasShiteii() {
         return this.getChkShiteii().getSelectedKeys().contains(new RString("key0"));
+    }
+
+    @Override
+    public void setShiteii(boolean isChecked) {
+        List<RString> keys = new ArrayList<>();
+        if (isChecked) {
+            keys.add(new RString("key0"));
+        }
+        this.getChkShiteii().setSelectedItemsByKey(keys);
     }
 
     @Override

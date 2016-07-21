@@ -103,7 +103,7 @@ public class DBC4540011Panel1 {
     public ResponseData<DBC4540011Panel1Div> onClick_btnCancle(DBC4540011Panel1Div div) {
 
         getHandler(div).初期登録状態();
-        getHandler(div).選択ボタン押下時();
+        getHandler(div).set入力値破棄();
         return ResponseData.of(div).setState(DBC4540011StateName.初期登録状態);
     }
 

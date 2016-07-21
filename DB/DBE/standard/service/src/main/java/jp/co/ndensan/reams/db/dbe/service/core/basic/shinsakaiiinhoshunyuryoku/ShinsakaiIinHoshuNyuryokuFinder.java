@@ -119,25 +119,19 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
     public boolean delete(Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> models,
             ShinsakaiIinHoshuJissekiJohoIdentifier key) {
         ShinsakaiIinHoshuJissekiJoho 審査会委員情報 = models.get(key);
-        return 1 == dbT5603.delete(審査会委員情報.toEntity());
+        return 1 == dbT5603.deletePhysical(審査会委員情報.toEntity());
     }
 
     /**
-     * 介護認定審査会委員別単価を取得します。
+     * 「保存する」ボタンを押下し、追加処理を続けます。
      *
-     * @param param 審査会委員報酬入力結果情報を特定するためのMyBatis用パラメータクラスです。
-     * @return ShinsakaiIinHoshuNyuryoku{@code list}
+     * @param 審査会委員情報 審査会委員情報審査会委員情報
+     * @return 審査会委員情報
      */
-    public SearchResult<ShinsakaiIinJoho> get介護認定審査会委員別単価(ShinsakaiIinHoshuNyuryokuMapperParameter param) {
-        List<ShinsakaiIinJoho> businessList = new ArrayList<>();
-        IShinsakaiIinHoshuNyuryokuMapper shimapper = mapperProvider.create(IShinsakaiIinHoshuNyuryokuMapper.class);
-        List<ShinsakaiIinHoshuNyuryokuEntity> youKaiEntityList = shimapper.getShinsaHoshugaku(param);
-        if (youKaiEntityList.isEmpty()) {
-            return SearchResult.of(Collections.<ShinsakaiIinJoho>emptyList(), 0, false);
+    public boolean insert(ShinsakaiIinHoshuJissekiJoho 審査会委員情報) {
+        if (審査会委員情報.isAdded()) {
+            return 1 == dbT5603.insert(審査会委員情報.toEntity());
         }
-        for (ShinsakaiIinHoshuNyuryokuEntity entity : youKaiEntityList) {
-            businessList.add(new ShinsakaiIinJoho(entity));
-        }
-        return SearchResult.of(businessList, 0, false);
+        return false;
     }
 }

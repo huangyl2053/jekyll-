@@ -21,7 +21,7 @@ public interface ISetaiShotokuKazeiHanteiMapper {
     /**
      * 世帯員所得情報一時テーブルを作成
      */
-    void createTmpSetaiSude();
+    void createTmpSetaiShotoku();
 
     /**
      * 世帯員所得情報一時が1を作成します

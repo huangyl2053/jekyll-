@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TextMasking.TextMasking;
 
-import jp.co.ndensan.reams.db.dbe.definition.textmasking.param.textmaskingprm.TextMaskingDataModel;
+import jp.co.ndensan.reams.db.dbe.business.core.textmasking.TextMaskingDataModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

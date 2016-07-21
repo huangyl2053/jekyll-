@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa3.Sonotashir
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 事務局用その他資料Builderのインターフェースクラスです。
+ * その他資料Builderのインターフェースクラスです。
  *
  * @reamsid_L DBE-0150-080 wangrenze
  */

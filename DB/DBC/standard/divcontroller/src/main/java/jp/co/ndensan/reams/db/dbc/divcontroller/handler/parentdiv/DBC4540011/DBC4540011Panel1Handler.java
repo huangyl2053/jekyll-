@@ -179,4 +179,13 @@ public class DBC4540011Panel1Handler {
         div.getTextBox3().setValue(row.getDefaultDataName2());
     }
 
+    /**
+     * 編集エリア：ファイル名称、媒体、外部ファイル名の項目値を破棄します。
+     */
+    public void set入力値破棄() {
+        div.getTextBox1().clearValue();
+        div.getTextBox2().clearValue();
+        div.getTextBox3().clearValue();
+    }
+
 }

@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.Vali
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.YoshikiYonnoniDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -36,8 +36,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -51,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiYonnoni {
 
-    private RString 内部処理モード;
     private static final RString UPDATE = new RString("modify");
     private static final RString DELETE = new RString("delete");
     private static final RString ADD = new RString("add");
@@ -60,15 +57,8 @@ public class YoshikiYonnoni {
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final int MONTH_6 = 6;
-    private static final RString 追加をやめる = new RString("btnAddCancel");
-    private static final RString 修正をやめる = new RString("btnModCancel");
-    private static final RString 削除をやめる = new RString("btnDelCancel");
-    private static final RString 削除する = new RString("btnDelUpdate");
-    private static final RString 更新する = new RString("btnModUpdate");
-    private static final RString 追加する = new RString("btnAddUpdate");
+    private static final int INT_4 = 4;
     private static final RString 保存する = new RString("btnSaveCancel");
-    private static final RString 該当一覧へ戻る = new RString("btnBackGaitoIchiran");
-    private static final RString 完了する = new RString("btnEnd");
     private static final RString 座標1_1 = new RString("1_1");
     private static final RString 座標1_2 = new RString("1_2");
     private static final RString 座標2_1 = new RString("2_1");
@@ -106,6 +96,7 @@ public class YoshikiYonnoni {
     private static final RString 座標21_1 = new RString("21_1");
     private static final RString 集計番号_0200 = new RString("0200");
     private static final Code CODE_0200 = new Code("0200");
+    private static final RString 報告月 = new RString("00");
 
     /**
      * 画面初期化処理です。
@@ -115,9 +106,8 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onload(YoshikiYonnoniDiv div) {
 
-        InsuranceInformation insuranceInf = get引き継ぎデータ();
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-
         if (UPDATE.equals(insuranceInf.get処理フラグ())
                 || DELETE.equals(insuranceInf.get処理フラグ())) {
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoDetal(
@@ -126,56 +116,47 @@ public class YoshikiYonnoni {
                     insuranceInf.get統計対象区分(),
                     insuranceInf.get市町村コード(),
                     集計番号_0200);
+            div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisplayNone(true);
+            div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisplayNone(true);
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(
+                    new FlexibleDate(new RDate(insuranceInf.get報告年().getYearValue()).toString()));
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(
+                    new FlexibleDate(new RDate(insuranceInf.get集計対象年().getYearValue()).toString()));
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setValue(insuranceInf.get市町村コード().getColumnValue());
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setValue(insuranceInf.get市町村名称());
             if (list.isEmpty()) {
-                内部処理モード = 内部処理モード_修正追加;
-                TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
-                hokokuYM.setValue(new FlexibleDate(insuranceInf.get報告年().toString()));
-                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
+                div.setShoriMode(内部処理モード_修正追加);
+                div.getYoshikiYonnoniMeisai().setDisabled(false);
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
-                TextBoxCode txtHihokenshabango = new TextBoxCode();
-                TextBox txthihokenshamei = new TextBox();
-                txthihokenshamei.setValue(insuranceInf.get市町村名称());
-                txtHihokenshabango.setValue(insuranceInf.get保険者コード().getColumnValue());
-                div.getYoshikiYonnoniMeisai().setTxtHihokenshaNo(txtHihokenshabango);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
-                div.getYoshikiYonnoniMeisai().setTxtHihokenshaName(txthihokenshamei);
                 div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
+            } else if (UPDATE.equals(insuranceInf.get処理フラグ())) {
+                set詳細データエリア(list.get(0).get詳細データエリア(), div);
+                div.getYoshikiYonnoniMeisai().setDisabled(false);
+                div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
+                div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
+                div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
+                div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
+                div.setShoriMode(内部処理モード_修正);
             } else {
-                if (UPDATE.equals(insuranceInf.get処理フラグ())) {
-                    div.getKanryoMessage().setVisible(false);
-                    div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
-                    div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
-                    div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
-                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
-                    div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, false);
-                    内部処理モード = 内部処理モード_修正;
-                } else {
-                    div.getKanryoMessage().setVisible(false);
-                    this.btnDisabled(div, insuranceInf);
-                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
-                    div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
-                    div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
-                    CommonButtonHolder.setVisibleByCommonButtonFieldName(該当一覧へ戻る, false);
-                    内部処理モード = 内部処理モード_削除;
-                }
+                set詳細データエリア(list.get(0).get詳細データエリア(), div);
+                this.btnDisabled(div, insuranceInf);
+                div.getYoshikiYonnoniMeisai().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setVisible(false);
+                div.getYoshikiYonnoniMeisai().getBtnKakutei().setVisible(false);
+                div.setShoriMode(内部処理モード_削除);
             }
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
+            div.getYoshikiYonnoniMeisai().setDisabled(false);
             List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
             if (shichosonList.isEmpty()) {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -190,52 +171,26 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
             }
             if (RDate.getNowDate().getMonthValue() < MONTH_6) {
-                TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 int 報告年度 = RDate.getNowDate().getYearValue() - 2;
-                hokokuYM.setValue(new FlexibleDate(報告年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
-
-                TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
                 int 集計年度 = RDate.getNowDate().getYearValue() - 1;
-                shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
+                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             } else {
-                TextBoxFlexibleDate hokokuYM = new TextBoxFlexibleDate();
                 int 報告年度 = RDate.getNowDate().getYearValue();
-                hokokuYM.setValue(new FlexibleDate(報告年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtHokokuYM(hokokuYM);
-
-                TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
+                div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
                 int 集計年度 = RDate.getNowDate().getYearValue() - 2;
-                shukeiY.setValue(new FlexibleDate(集計年度, 1, 1));
-                div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
+                div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             }
-            div.getKanryoMessage().setVisible(false);
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
             div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
             div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
-            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(false);
-            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setDisabled(true);
+            div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setReadOnly(false);
+            div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setReadOnly(true);
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setVisible(false);
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setVisible(false);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
-            if (DBU0050031StateName.追加状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(追加する, true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(追加をやめる, false);
-            }
-            if (DBU0050031StateName.修正状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(修正をやめる, false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(更新する, false);
-            }
-            if (DBU0050031StateName.削除状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(削除をやめる, false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(削除する, false);
-            }
-            if (DBU0050031StateName.完了状態.getName().equals(ResponseHolder.getState())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
-            }
-            内部処理モード = 内部処理モード_追加;
+            div.setShoriMode(内部処理モード_追加);
         }
         return ResponseData.of(div).respond();
     }
@@ -248,18 +203,21 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnYoshikiyon(
             YoshikiYonnoniDiv div) {
-        内部処理モード = ResponseHolder.getState();
+        RString 内部処理モード = ResponseHolder.getState();
         if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_修正);
             } else {
-                this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
             }
 
-        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
-                && this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)) {
+            if (this.入力項目いずれか空白ではない(div)) {
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_追加);
+            }
         } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_削除);
         }
@@ -274,18 +232,18 @@ public class YoshikiYonnoni {
      * @return ResponseData<YoshikiYonnoniDiv>
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnYoskiyonosan(YoshikiYonnoniDiv div) {
-        内部処理モード = ResponseHolder.getState();
+        RString 内部処理モード = ResponseHolder.getState();
         if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_修正);
             } else {
 
-                this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
             }
         } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
                 && this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
         } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_削除);
         }
@@ -318,7 +276,7 @@ public class YoshikiYonnoni {
             }
 
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoList(
-                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().getYear(),
+                    new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
                     new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                     tokeiTaishoKubun);
 
@@ -347,7 +305,7 @@ public class YoshikiYonnoni {
     public ResponseData<YoshikiYonnoniDiv> onClick_btnAdd(YoshikiYonnoniDiv div) {
 
         if (this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
@@ -360,7 +318,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnUpdate(YoshikiYonnoniDiv div) {
 
-        if (内部処理モード_修正.equals(内部処理モード)) {
+        if (内部処理モード_修正.equals(div.getShoriMode())) {
 
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア().isEmpty()) {
@@ -368,9 +326,9 @@ public class YoshikiYonnoni {
             } else {
                 this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
             }
-        } else if (内部処理モード_修正追加.equals(内部処理モード)
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 && this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
 
         return ResponseData.of(div).respond();
@@ -395,10 +353,10 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnSave(YoshikiYonnoniDiv div) {
 
-        InsuranceInformation insuranceInf = get引き継ぎデータ();
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
-        if (内部処理モード_追加.equals(内部処理モード)) {
+        if (内部処理モード_追加.equals(div.getShoriMode())) {
             if (!this.入力項目いずれか空白ではない(div)) {
 
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -408,32 +366,31 @@ public class YoshikiYonnoni {
                 this.put詳細データエリア(詳細データエリア, div);
 
                 KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().toString()),
+                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
                         new RString("00"),
-                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText()),
+                        new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText().toString()).toString()).getYear(),
                         new RString("00"),
-                        // TODOset統計対象区分
-                        new RString("統計対象区分"),
+                        insuranceInf.get統計対象区分(),
                         new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                         new Code("09"),
                         CODE_0200,
                         new Code("1"),
-                        内部処理モード,
+                        div.getShoriMode(),
                         Code.EMPTY,
                         Code.EMPTY,
                         詳細データエリア);
 
-                this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
+                return this.regKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
             }
-        } else if (内部処理モード_修正.equals(内部処理モード)) {
+        } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ == null) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
-                this.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データ, manager, div);
+                return this.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データ, manager, div);
             }
 
-        } else if (内部処理モード_修正追加.equals(内部処理モード)) {
+        } else if (内部処理モード_修正追加.equals(div.getShoriMode())) {
             if (!this.入力項目いずれか空白ではない(div)) {
 
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
@@ -444,24 +401,23 @@ public class YoshikiYonnoni {
                 this.put詳細データエリア(詳細データエリア, div);
 
                 KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(
-                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().toString()),
+                        insuranceInf.get報告年(),
                         new RString("00"),
-                        new FlexibleYear(div.getYoshikiYonnoniMeisai().getTxtShukeiYM().getText()),
+                        insuranceInf.get集計対象年(),
                         new RString("00"),
-                        // TODOset統計対象区分
-                        new RString("統計対象区分"),
-                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
+                        insuranceInf.get統計対象区分(),
+                        insuranceInf.get市町村コード(),
                         new Code("09"),
                         CODE_0200,
                         new Code("1"),
-                        内部処理モード,
+                        div.getShoriMode(),
                         Code.EMPTY,
                         Code.EMPTY,
                         詳細データエリア);
 
-                this.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
+                return regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(kaigoHokenJigyoHokokuNenpo, manager, div);
             }
-        } else if (内部処理モード_削除.equals(内部処理モード)) {
+        } else if (内部処理モード_削除.equals(div.getShoriMode())) {
 
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -479,31 +435,12 @@ public class YoshikiYonnoni {
                         insuranceInf.get市町村コード(),
                         insuranceInf.get表番号(),
                         CODE_0200);
+                div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                        new RString(UrInformationMessages.正常終了.getMessage().replace("削除").evaluate()), RString.EMPTY, RString.EMPTY, true);
             }
         }
 
-        div.getKanryoMessage().setVisible(true);
-        div.getYoshikiButtonArea().setVisible(false);
-        div.getYoshikiYonnoniMeisai().setVisible(false);
-
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(追加をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(修正をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(削除をやめる, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存する, false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(完了する, false);
-
-        if (ADD.equals(insuranceInf.get処理フラグ())) {
-            // TODO
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        } else if (UPDATE.equals(insuranceInf.get処理フラグ())) {
-            // TODO
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        } else if (DELETE.equals(insuranceInf.get処理フラグ())) {
-            // TODO
-            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-        }
-
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
     /**
@@ -514,7 +451,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnEnd(YoshikiYonnoniDiv div) {
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.処理完了).respond();
     }
 
     /**
@@ -528,7 +465,7 @@ public class YoshikiYonnoni {
         boolean 空白_前 = this.入力項目いずれか空白ではない_前(div);
         boolean 空白_後 = this.入力項目いずれか空白ではない_後(div);
 
-        return !空白_前 && !空白_後;
+        return 空白_前 || 空白_後;
     }
 
     /**
@@ -542,12 +479,12 @@ public class YoshikiYonnoni {
             if (RDate.getNowDate().getMonthValue() >= MONTH_6) {
 
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
+                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             } else {
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
+                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             }
@@ -555,7 +492,7 @@ public class YoshikiYonnoni {
         } else if (!div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().isEmpty()) {
 
             TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-            int 集計年度 = div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getValue().getYearValue() - 2;
+            int 集計年度 = Integer.parseInt(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, INT_4).toString()) - 1;
             shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
             div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
         }
@@ -570,7 +507,7 @@ public class YoshikiYonnoni {
      * @return KaigoHokenJigyoHokokuNenpo
      */
     public KaigoHokenJigyoHokokuNenpo 修正データの取得(YoshikiYonnoniDiv div) {
-        InsuranceInformation insuranceInf = get引き継ぎデータ();
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
 
         List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoDetal(
@@ -585,6 +522,15 @@ public class YoshikiYonnoni {
 
             this.修正データの取得_１(修正データ, list, i, div);
             this.修正データの取得_２(修正データ, list, i, div);
+            修正データ.set報告年(insuranceInf.get報告年());
+            修正データ.set報告月(報告月);
+            修正データ.set集計対象年(insuranceInf.get集計対象年());
+            修正データ.set集計対象月(報告月);
+            修正データ.set統計対象区分(insuranceInf.get統計対象区分());
+            修正データ.set表番号(new Code("09"));
+            修正データ.set集計番号(CODE_0200);
+            修正データ.set集計単位(new Code("1"));
+            修正データ.set市町村コード(insuranceInf.get市町村コード());
         }
 
         return 修正データ;
@@ -594,11 +540,21 @@ public class YoshikiYonnoni {
      * 引き継ぎデータ取得処理です。
      *
      */
-    private InsuranceInformation get引き継ぎデータ() {
+    private InsuranceInformation get引き継ぎデータ(YoshikiYonnoniDiv div) {
         InsuranceInformation 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKey.様式４の2, InsuranceInformation.class);
+                = ViewStateHolder.get(ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(ADD);
+            if (div.getYoshikiYonnoniMeisai().getDdlShicyoson().isDisplayNone()) {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        LasdecCode.EMPTY,
+                        RString.EMPTY);
+            } else {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey()),
+                        div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedValue());
+            }
         }
         return 引き継ぎデータ;
     }
@@ -634,13 +590,24 @@ public class YoshikiYonnoni {
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             if (DBU0050031TransitionEventName.検索に戻る.equals(events) || DBU0050031TransitionEventName.処理完了.equals(events)) {
                 return ResponseData.of(div).forwardWithEventName(events).respond();
-            } else if (内部処理モード_修正追加.equals(内部処理モード) || RString.isNullOrEmpty(内部処理モード)) {
+            } else if (内部処理モード_修正追加.equals(div.getShoriMode()) || RString.isNullOrEmpty(div.getShoriMode())) {
                 return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード_修正);
             } else {
-                return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード);
+                return ResponseData.of(div).forwardWithEventName(events).parameter(div.getShoriMode());
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean is変更あり(List<KaigoHokenJigyoHokokuNenpo> list, int i, RString 座標, Decimal value) {
+        if (list.get(i).get詳細データエリア().get(座標) == null) {
+            if (value != null) {
+                return true;
+            }
+        } else if (!list.get(i).get詳細データエリア().get(座標).equals(value)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -652,59 +619,60 @@ public class YoshikiYonnoni {
             List<KaigoHokenJigyoHokokuNenpo> list,
             int i,
             YoshikiYonnoniDiv div) {
-        if (!list.get(i).get詳細データエリア().get(座標1_1).equals(div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue())) {
+        if (is変更あり(list, i, 座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標1_2).equals(div.getYoshikiYonnoniMeisai().getTxtsomu().getValue())) {
+        if (is変更あり(list, i, 座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue())) {
             修正データ.get詳細データエリア().put(座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標2_1).equals(div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue())) {
+        if (is変更あり(list, i, 座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標2_2).equals(div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue())) {
+        if (is変更あり(list, i, 座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue())) {
             修正データ.get詳細データエリア().put(座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標3_1).equals(div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue())) {
+        if (is変更あり(list, i, 座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標3_2).equals(div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue())) {
+        if (is変更あり(list, i, 座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue())) {
             修正データ.get詳細データエリア().put(座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標4_1).equals(div.getYoshikiYonnoniMeisai().getTxtjiki().getValue())) {
+        if (is変更あり(list, i, 座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue())) {
             修正データ.get詳細データエリア().put(座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標4_2).equals(div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue())) {
+        if (is変更あり(list, i, 座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue())) {
             修正データ.get詳細データエリア().put(座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標5_1).equals(div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue())) {
+        if (is変更あり(list, i, 座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue())) {
             修正データ.get詳細データエリア().put(座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標5_2).equals(div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue())) {
+        if (is変更あり(list, i, 座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue())) {
             修正データ.get詳細データエリア().put(座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標6_1).equals(div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue())) {
+        if (is変更あり(list, i, 座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue())) {
             修正データ.get詳細データエリア().put(座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標6_2).equals(div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue())) {
+        if (is変更あり(list, i, 座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue())) {
             修正データ.get詳細データエリア().put(座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標7_1).equals(div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue())) {
+        if (is変更あり(list, i, 座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue())) {
             修正データ.get詳細データエリア().put(座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標7_2).equals(div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue())) {
+        if (is変更あり(list, i, 座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue())) {
             修正データ.get詳細データエリア().put(座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標8_1).equals(div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue())) {
+        if (is変更あり(list, i, 座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue())) {
             修正データ.get詳細データエリア().put(座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標8_2).equals(div.getYoshikiYonnoniMeisai().getTxtkosai().getValue())) {
+        if (is変更あり(list, i, 座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue())) {
             修正データ.get詳細データエリア().put(座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標9_1).equals(div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
+        if (is変更あり(list, i, 座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
             修正データ.get詳細データエリア().put(座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標9_2).equals(div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
+        if (is変更あり(list, i, 座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
             修正データ.get詳細データエリア().put(座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue());
+
         }
     }
 
@@ -718,56 +686,57 @@ public class YoshikiYonnoni {
             int i,
             YoshikiYonnoniDiv div) {
 
-        if (!list.get(i).get詳細データエリア().get(座標10_1).equals(div.getYoshikiYonnoniMeisai().getTxtkokko().getValue())) {
+        if (is変更あり(list, i, 座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue())) {
             修正データ.get詳細データエリア().put(座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標10_2).equals(div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue())) {
+        if (is変更あり(list, i, 座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue())) {
             修正データ.get詳細データエリア().put(座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標11_1).equals(div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue())) {
+        if (is変更あり(list, i, 座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue())) {
             修正データ.get詳細データエリア().put(座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標11_2).equals(div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue())) {
+        if (is変更あり(list, i, 座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue())) {
             修正データ.get詳細データエリア().put(座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標12_1).equals(div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue())) {
+        if (is変更あり(list, i, 座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue())) {
             修正データ.get詳細データエリア().put(座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標12_2).equals(div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue())) {
+        if (is変更あり(list, i, 座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue())) {
             修正データ.get詳細データエリア().put(座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標13_1).equals(div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue())) {
+        if (is変更あり(list, i, 座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue())) {
             修正データ.get詳細データエリア().put(座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標13_2).equals(div.getYoshikiYonnoniMeisai().getTxtshohi().getValue())) {
+        if (is変更あり(list, i, 座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue())) {
             修正データ.get詳細データエリア().put(座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標14_1).equals(div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue())) {
+        if (is変更あり(list, i, 座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue())) {
             修正データ.get詳細データエリア().put(座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標15_1).equals(div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue())) {
+        if (is変更あり(list, i, 座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue())) {
             修正データ.get詳細データエリア().put(座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標16_1).equals(div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue())) {
+        if (is変更あり(list, i, 座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue())) {
             修正データ.get詳細データエリア().put(座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標17_1).equals(div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue())) {
+        if (is変更あり(list, i, 座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue())) {
             修正データ.get詳細データエリア().put(座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標18_1).equals(div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue())) {
+        if (is変更あり(list, i, 座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue())) {
             修正データ.get詳細データエリア().put(座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標19_1).equals(div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue())) {
+        if (is変更あり(list, i, 座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue())) {
             修正データ.get詳細データエリア().put(座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標19_2).equals(div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue())) {
+        if (is変更あり(list, i, 座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue())) {
             修正データ.get詳細データエリア().put(座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標20_1).equals(div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
+        if (is変更あり(list, i, 座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
             修正データ.get詳細データエリア().put(座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue());
         }
-        if (!list.get(i).get詳細データエリア().get(座標21_1).equals(div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
+        if (is変更あり(list, i, 座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
             修正データ.get詳細データエリア().put(座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
+
         }
     }
 
@@ -915,7 +884,9 @@ public class YoshikiYonnoni {
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
         }
-        return null;
+        div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
     /**
@@ -940,7 +911,9 @@ public class YoshikiYonnoni {
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
         }
-        return null;
+        div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
     /**
@@ -965,7 +938,9 @@ public class YoshikiYonnoni {
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
         }
-        return null;
+        div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+                new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(div).setState(DBU0050031StateName.完了状態);
     }
 
     /**
@@ -1011,5 +986,50 @@ public class YoshikiYonnoni {
         詳細データエリア.put(座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue());
         詳細データエリア.put(座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue());
         詳細データエリア.put(座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
+    }
+
+    /**
+     * 詳細データエリアの設定。
+     *
+     */
+    private void set詳細データエリア(
+            Map<RString, Decimal> 詳細データエリア,
+            YoshikiYonnoniDiv div) {
+
+        div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().setValue(詳細データエリア.get(座標1_1));
+        div.getYoshikiYonnoniMeisai().getTxtsomu().setValue(詳細データエリア.get(座標1_2));
+        div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().setValue(詳細データエリア.get(座標2_1));
+        div.getYoshikiYonnoniMeisai().getTxtitakusabisu().setValue(詳細データエリア.get(座標2_2));
+        div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().setValue(詳細データエリア.get(座標3_1));
+        div.getYoshikiYonnoniMeisai().getTxtmitchaku().setValue(詳細データエリア.get(座標3_2));
+        div.getYoshikiYonnoniMeisai().getTxtjiki().setValue(詳細データエリア.get(座標4_1));
+        div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().setValue(詳細データエリア.get(座標4_2));
+        div.getYoshikiYonnoniMeisai().getTxtsotashunyu().setValue(詳細データエリア.get(座標5_1));
+        div.getYoshikiYonnoniMeisai().getTxtjigyosota().setValue(詳細データエリア.get(座標5_2));
+        div.getYoshikiYonnoniMeisai().getTxtbuntankin().setValue(詳細データエリア.get(座標6_1));
+        div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().setValue(詳細データエリア.get(座標6_2));
+        div.getYoshikiYonnoniMeisai().getTxtfutankin().setValue(詳細データエリア.get(座標7_1));
+        div.getYoshikiYonnoniMeisai().getTxtkikinsekin().setValue(詳細データエリア.get(座標7_2));
+        div.getYoshikiYonnoniMeisai().getTxtshiyohi().setValue(詳細データエリア.get(座標8_1));
+        div.getYoshikiYonnoniMeisai().getTxtkosai().setValue(詳細データエリア.get(座標8_2));
+        div.getYoshikiYonnoniMeisai().getTxttesuryo().setValue(詳細データエリア.get(座標9_1));
+        div.getYoshikiYonnoniMeisai().getTxtyobih().setValue(詳細データエリア.get(座標9_2));
+        div.getYoshikiYonnoniMeisai().getTxtkokko().setValue(詳細データエリア.get(座標10_1));
+        div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().setValue(詳細データエリア.get(座標10_2));
+        div.getYoshikiYonnoniMeisai().getTxttodofuken().setValue(詳細データエリア.get(座標11_1));
+        div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().setValue(詳細データエリア.get(座標11_2));
+        div.getYoshikiYonnoniMeisai().getTxtzaisannyu().setValue(詳細データエリア.get(座標12_1));
+        div.getYoshikiYonnoniMeisai().getTxtshosonota().setValue(詳細データエリア.get(座標12_2));
+        div.getYoshikiYonnoniMeisai().getTxtkifukin().setValue(詳細データエリア.get(座標13_1));
+        div.getYoshikiYonnoniMeisai().getTxtshohi().setValue(詳細データエリア.get(座標13_2));
+        div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().setValue(詳細データエリア.get(座標14_1));
+        div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().setValue(詳細データエリア.get(座標15_1));
+        div.getYoshikiYonnoniMeisai().getTxtkurikosu().setValue(詳細データエリア.get(座標16_1));
+        div.getYoshikiYonnoniMeisai().getTxtshichoson().setValue(詳細データエリア.get(座標17_1));
+        div.getYoshikiYonnoniMeisai().getTxtshonyu().setValue(詳細データエリア.get(座標18_1));
+        div.getYoshikiYonnoniMeisai().getTxtsainyugokei().setValue(詳細データエリア.get(座標19_1));
+        div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().setValue(詳細データエリア.get(座標19_2));
+        div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().setValue(詳細データエリア.get(座標20_1));
+        div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().setValue(詳細データエリア.get(座標21_1));
     }
 }

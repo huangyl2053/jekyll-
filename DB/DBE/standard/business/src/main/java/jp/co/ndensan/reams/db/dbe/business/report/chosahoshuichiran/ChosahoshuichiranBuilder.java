@@ -35,5 +35,4 @@ public class ChosahoshuichiranBuilder implements IChosahoshuichiranBuilder {
     public ChosahoshuichiranReportSource build() {
         return ReportEditorJoiner.from(new ChosahoshuichiranReportSource()).join(editor).buildSource();
     }
-
 }

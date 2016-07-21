@@ -37,6 +37,7 @@ public class KogakuShinseiListDivHandler {
     private static final RString 登録年月日 = new RString("登録年月日");
     private static final RString 判定送付年月 = new RString("判定送付年月");
     private static final RString 判定取込年月 = new RString("判定取込年月");
+    private static final RString 支給 = new RString("支給");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final int EIGHT = 8;
@@ -213,6 +214,15 @@ public class KogakuShinseiListDivHandler {
         div.getDgShinseiJoho().setDataSource(rowList);
     }
 
+    public int get履歴番号() {
+        int 履歴番号 = 0;
+        dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        if (row != null && row.getData2() != null) {
+            履歴番号 = Integer.parseInt(row.getData2().toString());
+        }
+        return 履歴番号;
+    }
+
     /**
      * set照会モードです。
      */
@@ -224,5 +234,35 @@ public class KogakuShinseiListDivHandler {
         div.getTxtShokisai().setDisplayNone(true);
         div.getBtnShinseiJohoTsuika().setDisplayNone(true);
         div.getBtnTaishosyaJoho().setDisplayNone(true);
+    }
+
+    /**
+     * 審査決定フラグ
+     *
+     * @return boolean
+     */
+    public boolean is審査決定フラグ() {
+        boolean flag = false;
+        dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        if (row != null && (row.getData10() != null && !row.getData10().isEmpty())
+                && (row.getData11() != null && !row.getData11().isEmpty())) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    /**
+     * 支給区分フラグ
+     *
+     * @return boolean
+     */
+    public boolean is支給区分フラグ() {
+        boolean flag = false;
+        dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        if (row != null && (row.getData10() != null && !row.getData10().isEmpty())
+                && (row.getData8() != null && !row.getData8().isEmpty() && 支給.equals(row.getData8()))) {
+            flag = true;
+        }
+        return flag;
     }
 }

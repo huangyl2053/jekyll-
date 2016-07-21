@@ -91,7 +91,6 @@ public class KarisanteiIdoFukaPanelHandler {
     private static final RString 仮算定異動賦課_処理名 = new RString("仮算定異動賦課");
     private static final RString 仮算定異動賦課確定_処理名 = new RString("仮算定異動賦課確定");
     private static final RString 仮算定異動賦課_MENU = new RString("DBBMN36001");
-    private static final RString 仮算定異動賦課通知書作成_MENU = new RString("DBBMN36002");
     private static final RString 普徴仮算定異動方法_項目 = new RString("普徴仮算定異動方法");
     private static final RString 普徴仮算定異動新規資格賦課_項目 = new RString("普徴仮算定異動新規資格賦課");
     private static final RString 普徴仮算定異動新規賦課方法_項目 = new RString("普徴仮算定異動新規賦課方法");
@@ -116,7 +115,6 @@ public class KarisanteiIdoFukaPanelHandler {
     private static final ReportId 特徴開始通知書_仮算定 = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書 = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 納入通知書 = new ReportId("DBB200006_FutsuChoshuKarisanteiKekkaIchiran");
-    private static final ReportId 仮算定異動一括結果一覧表_帳票分類ＩＤ = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
 
     /**
      * コンストラクタです。
@@ -643,6 +641,8 @@ public class KarisanteiIdoFukaPanelHandler {
                 parameter.set帳票グループ(帳票グループコード_1);
             }
             一括発行起動フラグ = false;
+            parameter.set仮算定異動賦課メニューからの場合(
+                    div.getShoriJokyo().getTokuchoHosoku().getRadTokuchoHosokuIraiKingakuKeisan().getSelectedValue());
         } else {
             if (月_6.equals(処理対象)) {
                 parameter.set帳票グループ(帳票グループコード_32);
@@ -681,20 +681,15 @@ public class KarisanteiIdoFukaPanelHandler {
             parameter.set納入_発行日(new RString(納入_発行日.toString()));
         }
         List<RString> 納入_対象者 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho().getChkNotsuTaishosha()
-                .getSelectedKeys();
-        // TODO
+                .getSelectedValues();
         if (納入_対象者 != null && !納入_対象者.isEmpty()) {
             parameter.set納入_対象者(納入_対象者.get(NUM_0));
         }
         parameter.set納入_生活保護対象者(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getRadNotsuSeikatsuHogo().getSelectedKey());
+                .getRadNotsuSeikatsuHogo().getSelectedValue());
         parameter.set納入_ページごとに山分け(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
-                .getRadNotsuYamawake().getSelectedKey());
-        // TODO
-        parameter.set特徴仮算定賦課処理日時(null);
-        parameter.set普徴仮算定賦課処理日時(null);
+                .getRadNotsuYamawake().getSelectedValue());
         parameter.set一括発行起動フラグ(一括発行起動フラグ);
-        // TODO 特徴捕捉対象者の依頼金額計算区分
         return idoFuka.createKariSanteiIdoParameter(parameter);
     }
 

@@ -193,29 +193,39 @@ public class NenpoYoushiki2No8 {
             }
         }
         if (補正フラグ.equals(フラグ_削除)) {
-            List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ
-                    = ViewStateHolder.get(ViewStateKeys.件数データグリッド, Models.class);
-            for (JigyoHokokuTokeiData 件数 : 件数タブデータ) {
-                事業報告集計一覧データリスト.add(件数);
-            }
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ
-                    = ViewStateHolder.get(ViewStateKeys.費用額データグリッド, Models.class);
-            for (JigyoHokokuTokeiData 費用額 : 費用額データ) {
-                事業報告集計一覧データリスト.add(費用額);
-            }
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ
-                    = ViewStateHolder.get(ViewStateKeys.給付額データグリッド, Models.class);
-            for (JigyoHokokuTokeiData 給付額 : 給付額データ) {
-                事業報告集計一覧データリスト.add(給付額);
-            }
-            //JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(事業報告集計一覧データリスト);
+            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(del事業報告集計情報());
             div.getKanryoMsg().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("削除").evaluate()),
                     RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBU0060031StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private List<JigyoHokokuTokeiData> del事業報告集計情報() {
+        List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 件数タブデータ
+                = ViewStateHolder.get(ViewStateKeys.件数データグリッド, Models.class);
+        if (件数タブデータ != null) {
+            for (JigyoHokokuTokeiData 件数 : 件数タブデータ) {
+                事業報告集計一覧データリスト.add(件数);
+            }
+        }
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 費用額データ
+                = ViewStateHolder.get(ViewStateKeys.費用額データグリッド, Models.class);
+        if (費用額データ != null) {
+            for (JigyoHokokuTokeiData 費用額 : 費用額データ) {
+                事業報告集計一覧データリスト.add(費用額);
+            }
+        }
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 給付額データ
+                = ViewStateHolder.get(ViewStateKeys.給付額データグリッド, Models.class);
+        if (給付額データ != null) {
+            for (JigyoHokokuTokeiData 給付額 : 給付額データ) {
+                事業報告集計一覧データリスト.add(給付額);
+            }
+        }
+        return 事業報告集計一覧データリスト;
     }
 
     private boolean get件数タブ(NenpoYoushiki2No8Div div) {

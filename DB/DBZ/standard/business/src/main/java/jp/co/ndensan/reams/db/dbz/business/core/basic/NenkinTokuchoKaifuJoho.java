@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 年金特徴回付情報（介護継承）を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-012 yangchenbing
  */
 public class NenkinTokuchoKaifuJoho extends ParentModelBase<NenkinTokuchoKaifuJohoIdentifier, UeT0511NenkinTokuchoKaifuJohoEntity, NenkinTokuchoKaifuJoho> implements Serializable {
 

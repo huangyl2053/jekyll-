@@ -51,5 +51,6 @@ public class KagoKetteiKohifutanshaChohyoEntity implements Serializable {
     private Decimal 特定入所者介護費等の単位数;
     private Decimal 特定入所者介護費等の負担額;
     private ShikibetsuCode 識別コード;
+    private RString 公費証記載保険者番号;
 
 }

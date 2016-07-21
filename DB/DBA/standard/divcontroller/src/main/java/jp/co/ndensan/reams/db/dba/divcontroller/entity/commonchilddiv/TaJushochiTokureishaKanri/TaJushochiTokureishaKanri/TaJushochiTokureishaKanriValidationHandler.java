@@ -51,6 +51,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
             最新の適用情報 = div.getDgJushochiTokureiRireki().getDataSource().get(0);
         }
+
         if (!状態_削除.equals(div.getStrate())) {
             if (状態_修正.equals(親画面状態)) {
                 if (div.getTxtTekiyobi().getValue() == null) {
@@ -123,10 +124,14 @@ public class TaJushochiTokureishaKanriValidationHandler {
                 if (div.getTxtTekiyobi().getValue() == null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
-                    if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null
-                            && (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
+                    if (最新の適用情報 != null && 最新の適用情報.getKaijoYMD().getValue() != null
+                            && (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
+                }
+                if (div.getTxtNyusyobi().getValue() != null && 最新の適用情報 != null && 最新の適用情報.getTaishoYMD().getValue() != null
+                        && (div.getTxtNyusyobi().getValue().isBefore(最新の適用情報.getTaishoYMD().getValue()))) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                 }
                 if (div.getDdlTekiyoJiyo().getSelectedKey() == null
                         || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
@@ -147,6 +152,9 @@ public class TaJushochiTokureishaKanriValidationHandler {
                         && div.getTxtNyusyobi().getValue() != null) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
                 }
+                if (RString.isNullOrEmpty(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入力施設コード));
+                }
             }
             if (状態_解除.equals(親画面状態)) {
                 if (div.getTxtKaijyobi().getValue() == null) {
@@ -156,10 +164,14 @@ public class TaJushochiTokureishaKanriValidationHandler {
                             || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
                     }
-                    if (最新の適用情報 != null && 最新の適用情報.getKaijoYMD().getValue() != null
-                            && (div.getTxtKaijyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
+                    if (最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null
+                            && (div.getTxtKaijyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
                     }
+                }
+                if (div.getTxtTasyobi().getValue() != null && 最新の適用情報 != null && 最新の適用情報.getNyushoYMD().getValue() != null
+                        && (div.getTxtTasyobi().getValue().isBefore(最新の適用情報.getNyushoYMD().getValue()))) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入力値が不正, div.getTxtKaijyobi()));
                 }
                 if (div.getTxtKaijyobi().getValue() != null && div.getTxtKaijyoTodokedebi().getValue() != null
                         && (div.getTxtKaijyobi().getValue().isBefore(div.getTxtKaijyoTodokedebi().getValue()))) {
@@ -176,6 +188,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
         解除日(UrErrorMessages.必須, "解除日"),
         適用事由(UrErrorMessages.必須, "適用事由"),
         解除事由(UrErrorMessages.必須, "解除事由"),
+        入力施設コード(UrErrorMessages.必須, "入力施設コード"),
         適用日と適用届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "適用届出日", メッセージ適用日.toString()),
         解除日と解除届出日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除届出日", "解除日"),
         適用日と解除日の整合性チェック(DbzErrorMessages.期間が不正_未来日付不可, "解除日", メッセージ適用日.toString()),

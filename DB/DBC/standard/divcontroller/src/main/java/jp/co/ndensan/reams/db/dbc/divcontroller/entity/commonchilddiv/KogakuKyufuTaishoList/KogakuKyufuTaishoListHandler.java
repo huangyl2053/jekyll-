@@ -481,4 +481,148 @@ public class KogakuKyufuTaishoListHandler {
         }
         return !ddgRow.getData7().getValue().equals(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
     }
+
+    /**
+     * 明細合計区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get明細合計区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey();
+    }
+
+    /**
+     * 事業者コードを取得します。
+     *
+     * @return RString
+     */
+    public RString get事業者コード() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue();
+    }
+
+    /**
+     * 事業者名称を取得します。
+     *
+     * @return RString
+     */
+    public RString get事業者名称() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue();
+    }
+
+    /**
+     * サービス種類を取得します。
+     *
+     * @return RString
+     */
+    public RString getサービス種類() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue();
+    }
+
+    /**
+     * サービス種類名称を取得します。
+     *
+     * @return RString
+     */
+    public RString getサービス種類名称() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue();
+    }
+
+    /**
+     * サービス費用合計を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal getサービス費用合計() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue();
+    }
+
+    /**
+     * 利用者負担合計を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get利用者負担合計() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue();
+    }
+
+    /**
+     * 算定基準額を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get算定基準額() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue();
+    }
+
+    /**
+     * 支払済額を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get支払済額() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue();
+    }
+
+    /**
+     * 月遅れ区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get月遅れ区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().getSelectedKey();
+    }
+
+    /**
+     * 世帯所得区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get世帯所得区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey();
+    }
+
+    /**
+     * 本人所得区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get本人所得区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey();
+    }
+
+    /**
+     * 合算区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get合算区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey();
+    }
+
+    /**
+     * 老齢福祉年金を取得します。
+     *
+     * @return RString
+     */
+    public RString get老齢福祉年金() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey();
+    }
+
+    /**
+     * 利用者負担第２段階を取得します。
+     *
+     * @return RString
+     */
+    public RString get利用者負担第２段階() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey();
+    }
+
+    /**
+     * 利用者負担第２段階を取得します。
+     *
+     * @return RString
+     */
+    public RString get激変緩和区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey();
+    }
 }

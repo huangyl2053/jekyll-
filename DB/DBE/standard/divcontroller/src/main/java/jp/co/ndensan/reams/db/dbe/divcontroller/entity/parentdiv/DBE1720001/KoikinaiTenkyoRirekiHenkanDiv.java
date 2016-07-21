@@ -314,16 +314,6 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtHihokenshaNo() {
-        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtHihokenshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBoxNum txtHihokenshaNo) {
-        this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtHihokenshaNo(txtHihokenshaNo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtHihokenshaName() {
         return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtHihokenshaName();
     }
@@ -331,6 +321,16 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     @JsonIgnore
     public void  setTxtHihokenshaName(TextBox txtHihokenshaName) {
         this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtHihokenshaName(txtHihokenshaName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHihokenshaNo() {
+        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtHihokenshaNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
     @JsonIgnore
@@ -364,32 +364,32 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtAge() {
+    public TextBox getTxtAge() {
         return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtAge();
     }
 
     @JsonIgnore
-    public void  setTxtAge(TextBoxNum txtAge) {
+    public void  setTxtAge(TextBox txtAge) {
         this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtAge(txtAge);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTelNo() {
+    public TextBox getTxtTelNo() {
         return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtTelNo();
     }
 
     @JsonIgnore
-    public void  setTxtTelNo(TextBoxNum txtTelNo) {
+    public void  setTxtTelNo(TextBox txtTelNo) {
         this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtTelNo(txtTelNo);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtYubinNo() {
+    public TextBox getTxtYubinNo() {
         return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtYubinNo();
     }
 
     @JsonIgnore
-    public void  setTxtYubinNo(TextBoxNum txtYubinNo) {
+    public void  setTxtYubinNo(TextBox txtYubinNo) {
         this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtYubinNo(txtYubinNo);
     }
 
@@ -474,12 +474,12 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtKaigoNinteiShinsakaiNo() {
+    public TextBox getTxtKaigoNinteiShinsakaiNo() {
         return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtKaigoNinteiShinsakaiNo();
     }
 
     @JsonIgnore
-    public void  setTxtKaigoNinteiShinsakaiNo(TextBoxNum txtKaigoNinteiShinsakaiNo) {
+    public void  setTxtKaigoNinteiShinsakaiNo(TextBox txtKaigoNinteiShinsakaiNo) {
         this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtKaigoNinteiShinsakaiNo(txtKaigoNinteiShinsakaiNo);
     }
 

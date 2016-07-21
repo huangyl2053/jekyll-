@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class NinteiChosaDataOutputHandler {
 
     private final NinteiChosaDataOutputDiv div;
-    private int maxCount;
     private static final RString BTNEXECUTE = new RString("btnExecute");
 
     /**
@@ -54,7 +53,9 @@ public class NinteiChosaDataOutputHandler {
     public void load() {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
         div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("SimpleInputMode"));
-        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 

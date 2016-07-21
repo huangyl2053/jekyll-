@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 主治医意見書（オルカ）の帳票ID。
+     */
+    DBE231102(new ReportId("DBE231102_ikenshokinyuyoshi"), new RString("主治医意見書（オルカ）")),
+    /**
+     * 主治医意見書（オルカ）の帳票ID。
+     */
+    DBE231101(new ReportId("DBE231101_ikenshokinyuyoshi"), new RString("主治医意見書（オルカ）")),
+    /**
      * 認定調査報酬照会の帳票ID。
      */
     DBE601006(new ReportId("DBE601006_chosahoshuichiran"), new RString("認定調査報酬照会")),
@@ -94,7 +102,7 @@ public enum ReportIdDBE {
     DBE230002(
             new ReportId("DBE230002_IkenshoSakuseiIraiIchiranhyo"), new RString("主治医意見書作成依頼一覧")),
     /**
-     * その他資料の帳票ID。
+     * その他資料A3の帳票ID。
      */
     DBE517006(new ReportId("DBE517006_SonotashiryoA3"), new RString("その他資料")),
     /**
@@ -243,9 +251,13 @@ public enum ReportIdDBE {
      */
     DBE701001(new ReportId("DBE701001_ShinsaHanteiJokyo"), new RString("介護認定審査会判定状況表")),
     /**
-     * 要介護認定調査票差異チェック票(両面)の帳票ＩＤです。
+     * 要介護認定調査票差異チェック票(両面左)の帳票ＩＤです。
      */
-    DBE292001_Ryoumen(new ReportId("SaiChekkuhyoRyoumen"), new RString("要介護認定調査票差異チェック票")),
+    DBE292003(new ReportId("DBE292003_SaiChekkuhyoHidari"), new RString("要介護認定調査票差異チェック票(両面左)")),
+    /**
+     * 要介護認定調査票差異チェック票(両面右)の帳票ＩＤです。
+     */
+    DBE292002(new ReportId("DBE292002_SaiChekkuhyoMigi"), new RString("要介護認定調査票差異チェック票(両面右)")),
     /**
      * 介護認定審査会集計表（現在の状況別）の帳票ＩＤです。
      */
@@ -303,7 +315,7 @@ public enum ReportIdDBE {
      */
     DBE701008(new ReportId("DBE701008_ShinsakaiShukeihyo"), new RString("介護認定審査会集計表（申請区分別）")),
     /**
-     * 要介護認定情報提供その他資料情報の帳票ＩＤです。
+     * その他資料A4の帳票ＩＤです。
      */
     DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料")),
     /**
@@ -457,7 +469,31 @@ public enum ReportIdDBE {
     /**
      * 介護認定審査会委員報酬支払通知書の帳票ID。
      */
-    DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書"));
+    DBE621001(new ReportId("DBE621001_iinhoshushiharai"), new RString("介護認定審査会委員報酬支払通知書")),
+    /**
+     * 要介護認定調査票（概況特記）の帳票ID。
+     */
+    DBE221051(new ReportId("DBE221051_GaikyotokkiA4"), new RString("要介護認定調査票（概況特記）")),
+    /**
+     * 帳票出力用認定調査実績集計表の帳票ID。
+     */
+    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表")),
+    /**
+     * 介護認定審査会委員実績集計表の帳票ID。
+     */
+    DBE601003(new ReportId("DBE601003_ShinsaiinJissekiIchiran"), new RString("介護認定審査会委員実績集計表")),
+    /**
+     * 意見書作成報酬照会の帳票ID。
+     */
+    DBE601004(new ReportId("DBE601004_ikenhoshuichiran"), new RString("主治医意見書作成報酬一覧表")),
+    /**
+     * 認定調査依頼履歴一覧表の帳票ID。
+     */
+    DBE220004(new ReportId("DBE220004_ChosairairirekiIchiran"), new RString("認定調査依頼履歴一覧表")),
+    /**
+     * 介護認定審査会委員報酬一覧表の帳票ID。
+     */
+    DBE601005(new ReportId("DBE601005_shinsahoshuichiran"), new RString("介護認定審査会委員報酬一覧表"));
 
     private final ReportId reportId;
 

@@ -388,14 +388,14 @@ public class ShotokuShokaihyotoReportProcess extends SimpleBatchProcessBase {
         result.set市町村名(市町村名);
         List<SetaiInn> 世帯員リスト = new ArrayList<>();
         for (ShotokuShoukaiDataTempEntity entity : 所得照会票リスト) {
-            result.set生年月日(new RString(entity.getSeinengappiYMD().toString()));
+            result.set生年月日(entity.getSeinengappiYMD());
             if (entity.getJuminJotaiCode().equals(転出者)) {
                 result.set転出先住所(entity.getGenjusho());
             } else {
                 result.set転入前住所(entity.getZenjusho());
             }
             result.set氏名(entity.getHihokenshaName().getColumnValue());
-            result.set世帯コード(entity.getSetaiCode().getColumnValue());
+            result.set世帯コード(entity.getSetaiCode());
             result.set前住所(entity.getZenjusho());
             result.set現住所(entity.getGenjusho());
             result.set住民状態コード(entity.getJuminJotaiCode());
@@ -403,11 +403,11 @@ public class ShotokuShokaihyotoReportProcess extends SimpleBatchProcessBase {
             setaiInn.set住民状態コード(entity.getJuminJotaiCode());
             // TODO
             setaiInn.set転出日(null);
-            setaiInn.set転入異動日(new RString(entity.getIdoYMD().toString()));
-            setaiInn.set識別コード(entity.getShikibetsuCode().getColumnValue());
+            setaiInn.set転入異動日(entity.getIdoYMD());
+            setaiInn.set識別コード(entity.getShikibetsuCode());
             setaiInn.setカナ氏名(entity.getAtenaKanaShimei().getColumnValue());
             setaiInn.set氏名(entity.getAtenaShimei().getColumnValue());
-            setaiInn.set生年月日(new RString(entity.getSeinengappiYMD().toString()));
+            setaiInn.set生年月日(entity.getSeinengappiYMD());
             世帯員リスト.add(setaiInn);
             result.set世帯員リスト(世帯員リスト);
         }

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 要介護認定申請情報検索認定パラメータクラス。
  *
- * @reamsid_L DBE-1300-150 houtianpeng
+ * @reamsid_L DBZ-1300-150 houtianpeng
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")

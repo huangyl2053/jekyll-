@@ -44,6 +44,7 @@ public class HonsanteifukaBatchParameter extends BatchParameterBase {
     private static final String KEY_打分け条件情報 = "打分け条件情報";
     private static final String KEY_処理日時 = "処理日時";
     private static final String KEY_一括発行起動フラグ = "一括発行起動フラグ";
+    private static final String KEY_世帯把握起動フラグ = "世帯把握起動フラグ";
 
     @BatchParameter(key = KEY_調定年度, name = "調定年度")
     private FlexibleYear 調定年度;
@@ -79,4 +80,6 @@ public class HonsanteifukaBatchParameter extends BatchParameterBase {
     private RDateTime 処理日時;
     @BatchParameter(key = KEY_一括発行起動フラグ, name = "一括発行起動フラグ")
     private boolean 一括発行起動フラグ;
+    @BatchParameter(key = KEY_世帯把握起動フラグ, name = "世帯把握起動フラグ")
+    private boolean 世帯把握起動フラグ;
 }

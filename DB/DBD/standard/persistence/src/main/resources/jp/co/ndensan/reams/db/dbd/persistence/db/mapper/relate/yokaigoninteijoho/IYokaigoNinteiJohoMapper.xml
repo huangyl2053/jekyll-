@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1530-010 lit -->
+<!-- 概要： 介護認定処理情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho.IYokaigoNinteiJohoMapper">
+    <resultMap id="ResultMap_NowYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+        <association property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.ResultMap_DbT4910NinteichosaItakusakiJohoEntity"/>
+        <association property="主治医医療機関情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.ResultMap_DbT4911ShujiiIryoKikanJohoEntity"/>
+        <association property="主治医情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.ResultMap_DbT4912ShujiiJohoEntity"/>
+        <association property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.ResultMap_DbT4913ChosainJohoEntity"/>
+        <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
+        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap_OldYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+        <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
+    </resultMap>
+    
+    <select id="get今回認定情報" resultMap="ResultMap_NowYokaigoNinteiJohoEntity" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.allColumns_DbT4911ShujiiIryoKikanJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.allColumns_DbT4912ShujiiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.allColumns_DbT4913ChosainJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho"/>
+        FROM
+        rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
+        
+        INNER JOIN
+        rgdb."DbV4001JukyushaDaicho" AS "DbV4001JukyushaDaicho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbV4001JukyushaDaicho"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbV4001JukyushaDaicho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND "DbV4001JukyushaDaicho"."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND "DbV4001JukyushaDaicho"."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        AND "DbV4001JukyushaDaicho"."jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
+        
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS "DbT7051KoseiShichosonMaster"
+        ON "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4911ShujiiIryoKikanJoho" AS "DbT4911ShujiiIryoKikanJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4911ShujiiIryoKikanJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode" = "DbT4911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4912ShujiiJoho" AS "DbT4912ShujiiJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4912ShujiiJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."shujiiCode" = "DbT4912ShujiiJoho"."shujiiCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4910NinteichosaItakusakiJoho" AS "DbT4910NinteichosaItakusakiJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4910NinteichosaItakusakiJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4913ChosainJoho" AS "DbT4913ChosainJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT4913ChosainJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = "DbT4913ChosainJoho"."ninteiChosaItakusakiCode"
+        AND "DbT4101NinteiShinseiJoho"."ninteiChosainCode" = "DbT4913ChosainJoho"."ninteiChosainCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4003YokaigoNinteiInterface" AS "DbT4003YokaigoNinteiInterface"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
+        <if test = "認定広域フラグ">
+            AND "DbT4003YokaigoNinteiInterface"."keshikomiFlag" = '0'
+        </if>
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        
+        WHERE
+        "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
+     </select>
+     
+     <select id="get前回認定情報" resultMap="ResultMap_OldYokaigoNinteiJohoEntity" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho"/>
+        FROM
+        rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJohoNew"
+        
+        INNER JOIN
+        rgdb."DbT4121ShinseiRirekiJoho" AS "DbT4121ShinseiRirekiJoho"
+        ON "DbT4101NinteiShinseiJohoNew"."shinseishoKanriNo" = "DbT4121ShinseiRirekiJoho"."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
+        ON "DbT4121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbV4001JukyushaDaicho" AS "DbV4001JukyushaDaicho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbV4001JukyushaDaicho"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbV4001JukyushaDaicho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND "DbV4001JukyushaDaicho"."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND "DbV4001JukyushaDaicho"."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        AND "DbV4001JukyushaDaicho"."jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
+ 
+        LEFT OUTER JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
+        ON "DbT4101NinteiShinseiJohoNew"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        
+        WHERE
+        "DbT4101NinteiShinseiJohoNew"."shinseishoKanriNo" = #{申請書管理番号}
+     </select>
+ 
+     <select id="getMax履歴番号" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+         SELECT MAX("rirekiNo")
+         FROM
+         rgdb."DbT4001JukyushaDaicho" AS "T4001a"
+         LEFT OUTER JOIN
+         (
+         SELECT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "hihokenshaNo"
+         FROM
+         rgdb."DbT4001JukyushaDaicho"
+         WHERE
+         "DbT4001JukyushaDaicho"."shinseishoKanriNo" = #{申請書管理番号}
+         ) "T4001b"
+         ON "T4001a"."hihokenshaNo" = "T4001b"."hihokenshaNo" 
+     </select>
+     
+
+     <resultMap id="ResultMap_JyukyuYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id property="要介護認定申請情報受給Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="要介護認定申請情報受給Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+        <association property="主治医医療機関情報認定Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+        <association property="主治医情報認定Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
+     </resultMap>
+     <select id="get認定情報受給" resultMap="ResultMap_JyukyuYokaigoNinteiJohoEntity" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho"/>
+        FROM
+        rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
+        
+        INNER JOIN
+        rgdb."DbV4001JukyushaDaicho" AS "DbV4001JukyushaDaicho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbV4001JukyushaDaicho"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbV4001JukyushaDaicho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND "DbV4001JukyushaDaicho"."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND "DbV4001JukyushaDaicho"."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        AND "DbV4001JukyushaDaicho"."jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
+        
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS "DbT7051KoseiShichosonMaster"
+        ON "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" AS "DbT5911ShujiiIryoKikanJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode" = "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT5912ShujiiJoho" AS "DbT5912ShujiiJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5912ShujiiJoho"."shichosonCode"
+        AND "DbT4101NinteiShinseiJoho"."shujiiCode" = "DbT5912ShujiiJoho"."shujiiCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        
+        WHERE
+        "DbV4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
+     </select>
+     
+     <resultMap id="ResultMap_NinteiYokaigoNinteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity" autoMapping="true">
+        <id property="要介護認定申請情報認定Entity.shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="要介護認定申請情報認定Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+        <association property="主治医医療機関情報認定Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+        <association property="主治医情報認定Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
+     </resultMap>
+     
+     <select id="get認定情報認定" resultMap="ResultMap_NinteiYokaigoNinteiJohoEntity" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho"/>
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS "DbT5101NinteiShinseiJoho"
+        
+        INNER JOIN
+        rgdb."DbV4001JukyushaDaicho" AS "DbV4001JukyushaDaicho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbV4001JukyushaDaicho"."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbV4001JukyushaDaicho"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbV4001JukyushaDaicho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND "DbV4001JukyushaDaicho"."rirekiNo" = "DbT4001JukyushaDaicho"."rirekiNo"
+        AND "DbV4001JukyushaDaicho"."edaban" = "DbT4001JukyushaDaicho"."edaban"
+        AND "DbV4001JukyushaDaicho"."jukyuShinseiJiyu" = "DbT4001JukyushaDaicho"."jukyuShinseiJiyu"
+        
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS "DbT7051KoseiShichosonMaster"
+        ON "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" AS "DbT5911ShujiiIryoKikanJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+        AND "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode" = "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT5912ShujiiJoho" AS "DbT5912ShujiiJoho"
+        ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5912ShujiiJoho"."shichosonCode"
+        AND "DbT5101NinteiShinseiJoho"."shujiiCode" = "DbT5912ShujiiJoho"."shujiiCode"
+        
+        LEFT OUTER JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        
+        WHERE
+        "DbV4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
+
+     </select>
+</mapper>

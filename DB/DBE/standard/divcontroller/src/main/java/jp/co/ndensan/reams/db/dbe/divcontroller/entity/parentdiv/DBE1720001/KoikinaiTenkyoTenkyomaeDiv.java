@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +25,10 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     private TextBox txtShokisaiHokenshaNo;
     @JsonProperty("txtShokisaiHokensha")
     private TextBox txtShokisaiHokensha;
-    @JsonProperty("txtHihokenshaNo")
-    private TextBoxNum txtHihokenshaNo;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBox txtHihokenshaNo;
     @JsonProperty("txtJusho")
     private TextBox txtJusho;
     @JsonProperty("txtSex")
@@ -36,11 +36,11 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     @JsonProperty("txtBirthYMD")
     private TextBoxDate txtBirthYMD;
     @JsonProperty("txtAge")
-    private TextBoxNum txtAge;
+    private TextBox txtAge;
     @JsonProperty("txtTelNo")
-    private TextBoxNum txtTelNo;
+    private TextBox txtTelNo;
     @JsonProperty("txtYubinNo")
-    private TextBoxNum txtYubinNo;
+    private TextBox txtYubinNo;
     @JsonProperty("txtNijiHanteiKekka")
     private TextBox txtNijiHanteiKekka;
     @JsonProperty("txtNijiHanteibi")
@@ -58,7 +58,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     @JsonProperty("txtShujiiName")
     private TextBox txtShujiiName;
     @JsonProperty("txtKaigoNinteiShinsakaiNo")
-    private TextBoxNum txtKaigoNinteiShinsakaiNo;
+    private TextBox txtKaigoNinteiShinsakaiNo;
     @JsonProperty("txtKaigoNinteiShinsakaiKaisabi")
     private TextBoxDate txtKaigoNinteiShinsakaiKaisabi;
 
@@ -105,24 +105,6 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     }
 
     /*
-     * gettxtHihokenshaNo
-     * @return txtHihokenshaNo
-     */
-    @JsonProperty("txtHihokenshaNo")
-    public TextBoxNum getTxtHihokenshaNo() {
-        return txtHihokenshaNo;
-    }
-
-    /*
-     * settxtHihokenshaNo
-     * @param txtHihokenshaNo txtHihokenshaNo
-     */
-    @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBoxNum txtHihokenshaNo) {
-        this.txtHihokenshaNo = txtHihokenshaNo;
-    }
-
-    /*
      * gettxtHihokenshaName
      * @return txtHihokenshaName
      */
@@ -138,6 +120,24 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     @JsonProperty("txtHihokenshaName")
     public void setTxtHihokenshaName(TextBox txtHihokenshaName) {
         this.txtHihokenshaName = txtHihokenshaName;
+    }
+
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBox getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     /*
@@ -199,7 +199,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @return txtAge
      */
     @JsonProperty("txtAge")
-    public TextBoxNum getTxtAge() {
+    public TextBox getTxtAge() {
         return txtAge;
     }
 
@@ -208,7 +208,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @param txtAge txtAge
      */
     @JsonProperty("txtAge")
-    public void setTxtAge(TextBoxNum txtAge) {
+    public void setTxtAge(TextBox txtAge) {
         this.txtAge = txtAge;
     }
 
@@ -217,7 +217,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @return txtTelNo
      */
     @JsonProperty("txtTelNo")
-    public TextBoxNum getTxtTelNo() {
+    public TextBox getTxtTelNo() {
         return txtTelNo;
     }
 
@@ -226,7 +226,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @param txtTelNo txtTelNo
      */
     @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBoxNum txtTelNo) {
+    public void setTxtTelNo(TextBox txtTelNo) {
         this.txtTelNo = txtTelNo;
     }
 
@@ -235,7 +235,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @return txtYubinNo
      */
     @JsonProperty("txtYubinNo")
-    public TextBoxNum getTxtYubinNo() {
+    public TextBox getTxtYubinNo() {
         return txtYubinNo;
     }
 
@@ -244,7 +244,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @param txtYubinNo txtYubinNo
      */
     @JsonProperty("txtYubinNo")
-    public void setTxtYubinNo(TextBoxNum txtYubinNo) {
+    public void setTxtYubinNo(TextBox txtYubinNo) {
         this.txtYubinNo = txtYubinNo;
     }
 
@@ -397,7 +397,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @return txtKaigoNinteiShinsakaiNo
      */
     @JsonProperty("txtKaigoNinteiShinsakaiNo")
-    public TextBoxNum getTxtKaigoNinteiShinsakaiNo() {
+    public TextBox getTxtKaigoNinteiShinsakaiNo() {
         return txtKaigoNinteiShinsakaiNo;
     }
 
@@ -406,7 +406,7 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
      * @param txtKaigoNinteiShinsakaiNo txtKaigoNinteiShinsakaiNo
      */
     @JsonProperty("txtKaigoNinteiShinsakaiNo")
-    public void setTxtKaigoNinteiShinsakaiNo(TextBoxNum txtKaigoNinteiShinsakaiNo) {
+    public void setTxtKaigoNinteiShinsakaiNo(TextBox txtKaigoNinteiShinsakaiNo) {
         this.txtKaigoNinteiShinsakaiNo = txtKaigoNinteiShinsakaiNo;
     }
 

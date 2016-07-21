@@ -73,7 +73,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
-                        NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印,
                         reportSourceWriter);
                 CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
                 for (KaigoHokenryogakuHenkoKenChushiTsuchishoJoho joho : entities) {

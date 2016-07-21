@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -268,7 +267,7 @@ public class KojinJokyoShokaiHandler {
         }
         if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算() != null
                 && !kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算().isEmpty()) {
-            一次判定結果認知症加算 = IchijiHanteiKekkaNinchishoKasanCode.
+            一次判定結果認知症加算 = IchijiHanteiKekkaCode09.
                     toValue(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算().value()).get名称();
         }
         if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().equals(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード認知症加算())) {

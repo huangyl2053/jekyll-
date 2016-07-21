@@ -65,7 +65,6 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends NonyuTsuchish
             return;
         }
         int 銀振印字位置Para = 0;
-        int 連番 = 1;
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
@@ -73,16 +72,15 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends NonyuTsuchish
                 throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
             }
             if (銀振印字位置 <= 銀振印字位置Para) {
-                edit(reportSourceWriter, 納入通知書期情報リストEdit, 連番, 処理区分);
+                edit(reportSourceWriter, 納入通知書期情報リストEdit, 処理区分);
                 納入通知書期情報リストEdit.clear();
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                連番++;
             } else {
                 納入通知書期情報リストEdit.add(納入通知書期情報);
             }
             銀振印字位置Para = 銀振印字位置;
         }
-        edit(reportSourceWriter, 納入通知書期情報リストEdit, 連番, 処理区分);
+        edit(reportSourceWriter, 納入通知書期情報リストEdit, 処理区分);
     }
 
     /**
@@ -137,15 +135,15 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends NonyuTsuchish
         仮算定納入通知書情報Report.set算定の基礎(仮算定納入通知書情報.get算定の基礎());
         仮算定納入通知書情報Report.set納付書共通(仮算定納入通知書情報.get納付書共通());
         仮算定納入通知書情報Report.set編集後仮算定通知書共通情報(仮算定納入通知書情報.get編集後仮算定通知書共通情報());
+        仮算定納入通知書情報Report.set連番(仮算定納入通知書情報.get連番());
     }
 
     private void edit(ReportSourceWriter<KarisanteiHokenryoNonyuTsuchishoGinfuriSource> reportSourceWriter,
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
-            int 連番,
             ShoriKubun 処理区分) {
         NofuShoKyotsu 納付書共通 = 仮算定納入通知書情報.get納付書共通();
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor editor
-                = new KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(仮算定納入通知書情報, 納入通知書期情報リスト, 連番);
+                = new KarisanteiHokenryoNonyuTsuchishoGinfuriEditor(仮算定納入通知書情報, 納入通知書期情報リスト);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNinshoshaEditor
                 = new CompNinshoshaEditor(ninshoshaSource);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesakiEditor
@@ -153,7 +151,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends NonyuTsuchish
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compSofubutsuAtesaki2Editor
                 = new CompSofubutsuAtesaki2Editor(仮算定納入通知書情報);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriEditor compNofushoItemEditor
-                = new DBBCompNofushoItemEditor(納付書共通, 納入通知書期情報リスト, 連番, 処理区分);
+                = new DBBCompNofushoItemEditor(納付書共通, 納入通知書期情報リスト, 仮算定納入通知書情報.get連番(), 処理区分);
         IKarisanteiHokenryoNonyuTsuchishoGinfuriBuilder builder
                 = new KarisanteiHokenryoNonyuTsuchishoGinfuriBuilder(
                         editor,
@@ -169,6 +167,9 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriReport extends NonyuTsuchish
             return true;
         }
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+            if (null == 納入通知書期情報.get納付額()) {
+                continue;
+            }
             if (納入通知書期情報.get納付額().compareTo(Decimal.ZERO) > 0) {
                 return false;
             }

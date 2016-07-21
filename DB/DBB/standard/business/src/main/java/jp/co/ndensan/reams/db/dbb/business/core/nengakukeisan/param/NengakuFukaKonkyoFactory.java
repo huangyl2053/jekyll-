@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 年額保険料計算（機能見直し）パラメータ作成のクラスです。
  *
- * @reamsid_L DBB-0940-030 cuilin
+ * @reamsid_L DBB-9040-030 cuilin
  */
 public class NengakuFukaKonkyoFactory {
 

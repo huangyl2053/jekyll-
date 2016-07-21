@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -125,5 +127,49 @@ public class DbT2008ShotokuKanriDac implements ISaveable<DbT2008ShotokuKanriEnti
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 介護所得を全件返します。
+     *
+     * @param 所得年度 FlexibleYear
+     * @param 識別コードList List<ShikibetsuCode>
+     * @return
+     */
+    @Transaction
+    public List<DbT2008ShotokuKanriEntity> selectShikibetsuCode(FlexibleYear 所得年度, List<ShikibetsuCode> 識別コードList) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2008ShotokuKanri.class).
+                where(and(
+                                eq(shotokuNendo, 所得年度),
+                                in(shikibetsuCode, 識別コードList))).
+                toList(DbT2008ShotokuKanriEntity.class);
+    }
+
+    /**
+     * selectBySomeKey
+     *
+     * @param 所得年度 FlexibleYear
+     * @param 識別コード ShikibetsuCode
+     * @return DbT2008ShotokuKanriEntity
+     * @throws NullPointerException
+     */
+    @Transaction
+    public DbT2008ShotokuKanriEntity selectBySomeKey(
+            FlexibleYear 所得年度,
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(rirekiNo)).
+                table(DbT2008ShotokuKanri.class).
+                where(and(
+                                eq(shotokuNendo, 所得年度),
+                                eq(shikibetsuCode, 識別コード))).
+                toObject(DbT2008ShotokuKanriEntity.class);
     }
 }

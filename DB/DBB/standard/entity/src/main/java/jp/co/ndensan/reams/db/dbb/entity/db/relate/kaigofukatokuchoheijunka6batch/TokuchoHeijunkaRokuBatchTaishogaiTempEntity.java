@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6bat
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -108,6 +108,22 @@ public class TokuchoHeijunkaRokuBatchTaishogaiTempEntity implements Cloneable, S
     private RDate urT0705ChoteiKyotsu_nokigenYMD;
     private RDate urT0705ChoteiKyotsu_hoteiNokigenToYMD;
     private boolean urT0705ChoteiKyotsu_fukaShoriJokyo;
+    private RString hokenryoDankaiKarisanntei;
+    private Decimal tokuchoKibetsuChoteigaku1;
+    private Decimal tokuchoKibetsuChoteigaku2;
+    private Decimal tokuchoKibetsuChoteigaku3;
+    private Decimal fuchoKibetsuChoteigaku1;
+    private Decimal fuchoKibetsuChoteigaku2;
+    private Decimal fuchoKibetsuChoteigaku3;
+    private Decimal fuchoKibetsuChoteigaku4;
+    private Decimal fuchoKibetsuChoteigaku5;
+    private Decimal fuchoKibetsuChoteigaku6;
+    private Decimal fuchoKibetsuChoteigaku7;
+    private Decimal fuchoKibetsuChoteigaku8;
+    private Decimal fuchoKibetsuChoteigaku9;
+    private Decimal fuchoKibetsuChoteigaku10;
+    private Decimal fuchoKibetsuChoteigaku11;
+    private Decimal fuchoKibetsuChoteigaku12;
 
     /**
      * コンストラクタです。
@@ -126,8 +142,10 @@ public class TokuchoHeijunkaRokuBatchTaishogaiTempEntity implements Cloneable, S
      *
      * @param 賦課の情報 FukaJohoRelateEntity
      * @param 備考コード RString
+     * @param fukaGakuEntity TokuchoHeijyunkaRokuBatchFukaGakuEntity
      */
-    public TokuchoHeijunkaRokuBatchTaishogaiTempEntity(FukaJohoRelateEntity 賦課の情報, RString 備考コード) {
+    public TokuchoHeijunkaRokuBatchTaishogaiTempEntity(FukaJohoRelateEntity 賦課の情報, RString 備考コード,
+            TokuchoHeijyunkaRokuBatchFukaGakuEntity fukaGakuEntity) {
         requireNonNull(賦課の情報.get介護賦課Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         requireNonNull(賦課の情報.get介護期別RelateEntity(), UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         final DbT2002FukaEntity 介護賦課 = 賦課の情報.get介護賦課Entity();
@@ -203,6 +221,22 @@ public class TokuchoHeijunkaRokuBatchTaishogaiTempEntity implements Cloneable, S
         this.urT0705ChoteiKyotsu_nokigenYMD = 調定共通Entity.getNokigenYMD();
         this.urT0705ChoteiKyotsu_hoteiNokigenToYMD = 調定共通Entity.getHoteiNokigenToYMD();
         this.urT0705ChoteiKyotsu_fukaShoriJokyo = 調定共通Entity.getFukaShoriJokyo();
+        this.hokenryoDankaiKarisanntei = fukaGakuEntity.get保険料段階仮算定時();
+        this.tokuchoKibetsuChoteigaku1 = fukaGakuEntity.get特徴期期別金額01();
+        this.tokuchoKibetsuChoteigaku2 = fukaGakuEntity.get特徴期期別金額02();
+        this.tokuchoKibetsuChoteigaku3 = fukaGakuEntity.get特徴期期別金額03();
+        this.fuchoKibetsuChoteigaku1 = fukaGakuEntity.get普徴期期別金額01();
+        this.fuchoKibetsuChoteigaku2 = fukaGakuEntity.get普徴期期別金額02();
+        this.fuchoKibetsuChoteigaku3 = fukaGakuEntity.get普徴期期別金額03();
+        this.fuchoKibetsuChoteigaku4 = fukaGakuEntity.get普徴期期別金額04();
+        this.fuchoKibetsuChoteigaku5 = fukaGakuEntity.get普徴期期別金額05();
+        this.fuchoKibetsuChoteigaku6 = fukaGakuEntity.get普徴期期別金額06();
+        this.fuchoKibetsuChoteigaku7 = fukaGakuEntity.get普徴期期別金額07();
+        this.fuchoKibetsuChoteigaku8 = fukaGakuEntity.get普徴期期別金額08();
+        this.fuchoKibetsuChoteigaku9 = fukaGakuEntity.get普徴期期別金額09();
+        this.fuchoKibetsuChoteigaku10 = fukaGakuEntity.get普徴期期別金額10();
+        this.fuchoKibetsuChoteigaku11 = fukaGakuEntity.get普徴期期別金額11();
+        this.fuchoKibetsuChoteigaku12 = fukaGakuEntity.get普徴期期別金額12();
         this.備考コード = 備考コード;
     }
 }

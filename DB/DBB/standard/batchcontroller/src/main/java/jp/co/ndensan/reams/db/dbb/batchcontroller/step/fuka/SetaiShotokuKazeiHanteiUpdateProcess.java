@@ -31,7 +31,7 @@ public class SetaiShotokuKazeiHanteiUpdateProcess extends SimpleBatchProcessBase
     protected void beforeExecute() {
         super.beforeExecute();
         mapper = getMapper(ISetaiShotokuKazeiHanteiMapper.class);
-        mapper.createTmpSetaiSude();
+        mapper.createTmpSetaiShotoku();
         List<SetaiHaakuEntity> list = mapper.selectNotNull();
         if (list == null || list.isEmpty()) {
             SetaiHaakuEntity entity = new SetaiHaakuEntity();

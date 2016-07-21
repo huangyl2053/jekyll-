@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -233,5 +235,26 @@ public class ShoriDateKanriManager {
             return null;
         }
         return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 処理日付管理マスタを更新します。
+     *
+     * @param 処理名 RString
+     * @param 年度内連番 RString
+     * @param 年度 FlexibleYear
+     * @param 基準日時 YMDHMS
+     */
+    @Transaction
+    public void update基準日時(RString 処理名, RString 年度内連番, FlexibleYear 年度, YMDHMS 基準日時) {
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage(処理名メッセージ.toString()));
+        requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage(年度内連番メッセージ.toString()));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage(年度メッセージ.toString()));
+        List<DbT7022ShoriDateKanriEntity> entitylist = dac.select基準日時toupdate(処理名, 年度内連番, 年度);
+        for (DbT7022ShoriDateKanriEntity entity : entitylist) {
+            entity.setKijunTimestamp(基準日時);
+            entity.setState(EntityDataState.Modified);
+            dac.save(entity);
+        }
     }
 }

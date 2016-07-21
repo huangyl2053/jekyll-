@@ -21,7 +21,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.noDeleted_DbT2002Fuka" />) AS DbT2002Fuka
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
         ON
         DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2003Kibetsu."dbT2003Kibetsu_choteiNendo" and
         DbT2002Fuka."dbT2002Fuka_fukaNendo" = DbT2003Kibetsu."dbT2003Kibetsu_fukaNendo" and
@@ -37,7 +37,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
         FROM
         rgdb."UrT0705ChoteiKyotsu"
         ) AS UrT0705ChoteiKyotsu
@@ -74,7 +74,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.noDeleted_DbT2002Fuka" />) AS DbT2002Fuka
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
         ON
         DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2003Kibetsu."dbT2003Kibetsu_choteiNendo" and
         DbT2002Fuka."dbT2002Fuka_fukaNendo" = DbT2003Kibetsu."dbT2003Kibetsu_fukaNendo" and
@@ -90,7 +90,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
         FROM
         rgdb."UrT0705ChoteiKyotsu"
         ) AS UrT0705ChoteiKyotsu
@@ -122,8 +122,8 @@
     <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity" autoMapping="true">
         <id property="介護期別Entity.choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="介護期別Entity.ki" column="dbT2003Kibetsu_ki" />
-        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
-        <collection property="調定共通EntityList" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+        <collection property="調定共通EntityList" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
     </resultMap>
     
      <select id="select減免の情報_決定更正後" resultMap="resultMap_GemmenJohoRelateEntity" 
@@ -137,7 +137,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.noDeleted_DbT2002Fuka" />) AS DbT2002Fuka
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
         ON
         DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2003Kibetsu."dbT2003Kibetsu_choteiNendo" and
         DbT2002Fuka."dbT2002Fuka_fukaNendo" = DbT2003Kibetsu."dbT2003Kibetsu_fukaNendo" and
@@ -153,7 +153,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
         FROM
         rgdb."UrT0705ChoteiKyotsu"
         ) AS UrT0705ChoteiKyotsu
@@ -185,7 +185,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.noDeleted_DbT2002Fuka" />) AS DbT2002Fuka
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS DbT2003Kibetsu
         ON
         DbT2002Fuka."dbT2002Fuka_choteiNendo" = DbT2003Kibetsu."dbT2003Kibetsu_choteiNendo" and
         DbT2002Fuka."dbT2002Fuka_fukaNendo" = DbT2003Kibetsu."dbT2003Kibetsu_fukaNendo" and
@@ -201,7 +201,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
         FROM
         rgdb."UrT0705ChoteiKyotsu"
         ) AS UrT0705ChoteiKyotsu

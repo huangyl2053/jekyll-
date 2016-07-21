@@ -10,15 +10,12 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.DbT2002FukaZenn
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.GetFukaJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.InsTsuchishoHakkogoIdoshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.KarisanteiIkkatsuHakkoTempInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrintTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrtTokuchoKaishiTsuchishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.SystemTimeSakuseiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -27,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 仮算定通知書一括発行するクラスです。
+ * 特徴仮算定通知書一括発行するクラスです。
  *
  * @reamsid_L DBB-0790-030 chenaoqi
  */
@@ -38,7 +35,6 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
     private static final String 仮算定一括発行一時テーブル作成 = "karisanteiShutoku";
     private static final String 前年度賦課情報一時テーブル作成 = "fukaZennendoShutoku";
     private static final String 賦課情報取得 = "getFukaJoho";
-    private static final String 通知書一覧表の発行 = "tsuchishoPrint";
     private static final String 特徴開始仮算定通知書発行 = "prtTokuchoKaishiTsuchishoKarisantei";
     private static final String 通知書発行後異動者登録 = "insTsuchishoHakkogoIdosha";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
@@ -59,7 +55,6 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
             executeStep(仮算定一括発行一時テーブル作成);
             executeStep(前年度賦課情報一時テーブル作成);
             executeStep(賦課情報取得);
-            //executeStep(通知書一覧表の発行);
             executeStep(特徴開始仮算定通知書発行);
             executeStep(通知書発行後異動者登録);
         }
@@ -124,18 +119,6 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
     }
 
     /**
-     * 通知書一覧表の発行の発行バッチを呼び出す。
-     *
-     * @return バッチコマンド
-     */
-    @Step(通知書一覧表の発行)
-    protected IBatchFlowCommand tsuchishoPrint() {
-        return simpleBatch(PrintTsuchishoProcess.class)
-                .arguments(createProcessParameter())
-                .define();
-    }
-
-    /**
      * 特徴開始仮算定通知書発行バッチを呼び出す。
      *
      * @return バッチコマンド
@@ -161,9 +144,8 @@ public class TokuchoKarisanteiTsuchishoHakkoFlow extends BatchFlowBase<TokuchoKa
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
-                getParameter().get賦課年度().toDateString(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiProcess.KIJUN_TIME),
-                ShoriName.特徴仮算定賦課.get名称(), 帳票分類ID);
+                getParameter().get調定年度().toDateString(),
+                null, null, 帳票分類ID);
     }
 
     private TokuchoKaishiTsuchishoProcessParameter createProcessParameter() {

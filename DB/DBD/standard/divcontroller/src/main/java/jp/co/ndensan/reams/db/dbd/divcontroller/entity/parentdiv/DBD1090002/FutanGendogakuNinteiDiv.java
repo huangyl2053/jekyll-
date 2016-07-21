@@ -22,8 +22,30 @@ public class FutanGendogakuNinteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("FutanGendogakuNinteiInfo")
-    private FutanGendogakuNinteiInfoDiv FutanGendogakuNinteiInfo;
+    @JsonProperty("txtFutanGendogakuNinteiKetteiKubun")
+    private TextBox txtFutanGendogakuNinteiKetteiKubun;
+    @JsonProperty("txtFutanGendogakuNinteiShinseiRiyu")
+    private TextBox txtFutanGendogakuNinteiShinseiRiyu;
+    @JsonProperty("txtFutanGendogakuNinteiShinseibi")
+    private TextBoxFlexibleDate txtFutanGendogakuNinteiShinseibi;
+    @JsonProperty("FutanGendogakuNinteiKetteibi")
+    private TextBoxFlexibleDate FutanGendogakuNinteiKetteibi;
+    @JsonProperty("txtFutanGendogakuNinteiTekiyobi")
+    private TextBoxFlexibleDate txtFutanGendogakuNinteiTekiyobi;
+    @JsonProperty("txtFutanGendogakuNinteiYukoKigen")
+    private TextBoxFlexibleDate txtFutanGendogakuNinteiYukoKigen;
+    @JsonProperty("txtFutanGendogakuNinteiFutanDankai")
+    private TextBox txtFutanGendogakuNinteiFutanDankai;
+    @JsonProperty("txtFutanGendogakuNinteiKyuSochi")
+    private TextBox txtFutanGendogakuNinteiKyuSochi;
+    @JsonProperty("txtFutanGendogakuNinteiKyokaiso")
+    private TextBox txtFutanGendogakuNinteiKyokaiso;
+    @JsonProperty("FutanGendogakuNinteiGekihenKanwa")
+    private TextBox FutanGendogakuNinteiGekihenKanwa;
+    @JsonProperty("FutanGendogaku")
+    private FutanGendogakuDiv FutanGendogaku;
+    @JsonProperty("txtFutanGendogakuNinteiShoninShinsaiRiyu")
+    private TextBoxMultiLine txtFutanGendogakuNinteiShoninShinsaiRiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,204 +54,282 @@ public class FutanGendogakuNinteiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getFutanGendogakuNinteiInfo
-     * @return FutanGendogakuNinteiInfo
+     * gettxtFutanGendogakuNinteiKetteiKubun
+     * @return txtFutanGendogakuNinteiKetteiKubun
      */
-    @JsonProperty("FutanGendogakuNinteiInfo")
-    public FutanGendogakuNinteiInfoDiv getFutanGendogakuNinteiInfo() {
-        return FutanGendogakuNinteiInfo;
+    @JsonProperty("txtFutanGendogakuNinteiKetteiKubun")
+    public TextBox getTxtFutanGendogakuNinteiKetteiKubun() {
+        return txtFutanGendogakuNinteiKetteiKubun;
     }
 
     /*
-     * setFutanGendogakuNinteiInfo
-     * @param FutanGendogakuNinteiInfo FutanGendogakuNinteiInfo
+     * settxtFutanGendogakuNinteiKetteiKubun
+     * @param txtFutanGendogakuNinteiKetteiKubun txtFutanGendogakuNinteiKetteiKubun
      */
-    @JsonProperty("FutanGendogakuNinteiInfo")
-    public void setFutanGendogakuNinteiInfo(FutanGendogakuNinteiInfoDiv FutanGendogakuNinteiInfo) {
-        this.FutanGendogakuNinteiInfo = FutanGendogakuNinteiInfo;
+    @JsonProperty("txtFutanGendogakuNinteiKetteiKubun")
+    public void setTxtFutanGendogakuNinteiKetteiKubun(TextBox txtFutanGendogakuNinteiKetteiKubun) {
+        this.txtFutanGendogakuNinteiKetteiKubun = txtFutanGendogakuNinteiKetteiKubun;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiShinseiRiyu
+     * @return txtFutanGendogakuNinteiShinseiRiyu
+     */
+    @JsonProperty("txtFutanGendogakuNinteiShinseiRiyu")
+    public TextBox getTxtFutanGendogakuNinteiShinseiRiyu() {
+        return txtFutanGendogakuNinteiShinseiRiyu;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiShinseiRiyu
+     * @param txtFutanGendogakuNinteiShinseiRiyu txtFutanGendogakuNinteiShinseiRiyu
+     */
+    @JsonProperty("txtFutanGendogakuNinteiShinseiRiyu")
+    public void setTxtFutanGendogakuNinteiShinseiRiyu(TextBox txtFutanGendogakuNinteiShinseiRiyu) {
+        this.txtFutanGendogakuNinteiShinseiRiyu = txtFutanGendogakuNinteiShinseiRiyu;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiShinseibi
+     * @return txtFutanGendogakuNinteiShinseibi
+     */
+    @JsonProperty("txtFutanGendogakuNinteiShinseibi")
+    public TextBoxFlexibleDate getTxtFutanGendogakuNinteiShinseibi() {
+        return txtFutanGendogakuNinteiShinseibi;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiShinseibi
+     * @param txtFutanGendogakuNinteiShinseibi txtFutanGendogakuNinteiShinseibi
+     */
+    @JsonProperty("txtFutanGendogakuNinteiShinseibi")
+    public void setTxtFutanGendogakuNinteiShinseibi(TextBoxFlexibleDate txtFutanGendogakuNinteiShinseibi) {
+        this.txtFutanGendogakuNinteiShinseibi = txtFutanGendogakuNinteiShinseibi;
+    }
+
+    /*
+     * getFutanGendogakuNinteiKetteibi
+     * @return FutanGendogakuNinteiKetteibi
+     */
+    @JsonProperty("FutanGendogakuNinteiKetteibi")
+    public TextBoxFlexibleDate getFutanGendogakuNinteiKetteibi() {
+        return FutanGendogakuNinteiKetteibi;
+    }
+
+    /*
+     * setFutanGendogakuNinteiKetteibi
+     * @param FutanGendogakuNinteiKetteibi FutanGendogakuNinteiKetteibi
+     */
+    @JsonProperty("FutanGendogakuNinteiKetteibi")
+    public void setFutanGendogakuNinteiKetteibi(TextBoxFlexibleDate FutanGendogakuNinteiKetteibi) {
+        this.FutanGendogakuNinteiKetteibi = FutanGendogakuNinteiKetteibi;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiTekiyobi
+     * @return txtFutanGendogakuNinteiTekiyobi
+     */
+    @JsonProperty("txtFutanGendogakuNinteiTekiyobi")
+    public TextBoxFlexibleDate getTxtFutanGendogakuNinteiTekiyobi() {
+        return txtFutanGendogakuNinteiTekiyobi;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiTekiyobi
+     * @param txtFutanGendogakuNinteiTekiyobi txtFutanGendogakuNinteiTekiyobi
+     */
+    @JsonProperty("txtFutanGendogakuNinteiTekiyobi")
+    public void setTxtFutanGendogakuNinteiTekiyobi(TextBoxFlexibleDate txtFutanGendogakuNinteiTekiyobi) {
+        this.txtFutanGendogakuNinteiTekiyobi = txtFutanGendogakuNinteiTekiyobi;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiYukoKigen
+     * @return txtFutanGendogakuNinteiYukoKigen
+     */
+    @JsonProperty("txtFutanGendogakuNinteiYukoKigen")
+    public TextBoxFlexibleDate getTxtFutanGendogakuNinteiYukoKigen() {
+        return txtFutanGendogakuNinteiYukoKigen;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiYukoKigen
+     * @param txtFutanGendogakuNinteiYukoKigen txtFutanGendogakuNinteiYukoKigen
+     */
+    @JsonProperty("txtFutanGendogakuNinteiYukoKigen")
+    public void setTxtFutanGendogakuNinteiYukoKigen(TextBoxFlexibleDate txtFutanGendogakuNinteiYukoKigen) {
+        this.txtFutanGendogakuNinteiYukoKigen = txtFutanGendogakuNinteiYukoKigen;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiFutanDankai
+     * @return txtFutanGendogakuNinteiFutanDankai
+     */
+    @JsonProperty("txtFutanGendogakuNinteiFutanDankai")
+    public TextBox getTxtFutanGendogakuNinteiFutanDankai() {
+        return txtFutanGendogakuNinteiFutanDankai;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiFutanDankai
+     * @param txtFutanGendogakuNinteiFutanDankai txtFutanGendogakuNinteiFutanDankai
+     */
+    @JsonProperty("txtFutanGendogakuNinteiFutanDankai")
+    public void setTxtFutanGendogakuNinteiFutanDankai(TextBox txtFutanGendogakuNinteiFutanDankai) {
+        this.txtFutanGendogakuNinteiFutanDankai = txtFutanGendogakuNinteiFutanDankai;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiKyuSochi
+     * @return txtFutanGendogakuNinteiKyuSochi
+     */
+    @JsonProperty("txtFutanGendogakuNinteiKyuSochi")
+    public TextBox getTxtFutanGendogakuNinteiKyuSochi() {
+        return txtFutanGendogakuNinteiKyuSochi;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiKyuSochi
+     * @param txtFutanGendogakuNinteiKyuSochi txtFutanGendogakuNinteiKyuSochi
+     */
+    @JsonProperty("txtFutanGendogakuNinteiKyuSochi")
+    public void setTxtFutanGendogakuNinteiKyuSochi(TextBox txtFutanGendogakuNinteiKyuSochi) {
+        this.txtFutanGendogakuNinteiKyuSochi = txtFutanGendogakuNinteiKyuSochi;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiKyokaiso
+     * @return txtFutanGendogakuNinteiKyokaiso
+     */
+    @JsonProperty("txtFutanGendogakuNinteiKyokaiso")
+    public TextBox getTxtFutanGendogakuNinteiKyokaiso() {
+        return txtFutanGendogakuNinteiKyokaiso;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiKyokaiso
+     * @param txtFutanGendogakuNinteiKyokaiso txtFutanGendogakuNinteiKyokaiso
+     */
+    @JsonProperty("txtFutanGendogakuNinteiKyokaiso")
+    public void setTxtFutanGendogakuNinteiKyokaiso(TextBox txtFutanGendogakuNinteiKyokaiso) {
+        this.txtFutanGendogakuNinteiKyokaiso = txtFutanGendogakuNinteiKyokaiso;
+    }
+
+    /*
+     * getFutanGendogakuNinteiGekihenKanwa
+     * @return FutanGendogakuNinteiGekihenKanwa
+     */
+    @JsonProperty("FutanGendogakuNinteiGekihenKanwa")
+    public TextBox getFutanGendogakuNinteiGekihenKanwa() {
+        return FutanGendogakuNinteiGekihenKanwa;
+    }
+
+    /*
+     * setFutanGendogakuNinteiGekihenKanwa
+     * @param FutanGendogakuNinteiGekihenKanwa FutanGendogakuNinteiGekihenKanwa
+     */
+    @JsonProperty("FutanGendogakuNinteiGekihenKanwa")
+    public void setFutanGendogakuNinteiGekihenKanwa(TextBox FutanGendogakuNinteiGekihenKanwa) {
+        this.FutanGendogakuNinteiGekihenKanwa = FutanGendogakuNinteiGekihenKanwa;
+    }
+
+    /*
+     * getFutanGendogaku
+     * @return FutanGendogaku
+     */
+    @JsonProperty("FutanGendogaku")
+    public FutanGendogakuDiv getFutanGendogaku() {
+        return FutanGendogaku;
+    }
+
+    /*
+     * setFutanGendogaku
+     * @param FutanGendogaku FutanGendogaku
+     */
+    @JsonProperty("FutanGendogaku")
+    public void setFutanGendogaku(FutanGendogakuDiv FutanGendogaku) {
+        this.FutanGendogaku = FutanGendogaku;
+    }
+
+    /*
+     * gettxtFutanGendogakuNinteiShoninShinsaiRiyu
+     * @return txtFutanGendogakuNinteiShoninShinsaiRiyu
+     */
+    @JsonProperty("txtFutanGendogakuNinteiShoninShinsaiRiyu")
+    public TextBoxMultiLine getTxtFutanGendogakuNinteiShoninShinsaiRiyu() {
+        return txtFutanGendogakuNinteiShoninShinsaiRiyu;
+    }
+
+    /*
+     * settxtFutanGendogakuNinteiShoninShinsaiRiyu
+     * @param txtFutanGendogakuNinteiShoninShinsaiRiyu txtFutanGendogakuNinteiShoninShinsaiRiyu
+     */
+    @JsonProperty("txtFutanGendogakuNinteiShoninShinsaiRiyu")
+    public void setTxtFutanGendogakuNinteiShoninShinsaiRiyu(TextBoxMultiLine txtFutanGendogakuNinteiShoninShinsaiRiyu) {
+        this.txtFutanGendogakuNinteiShoninShinsaiRiyu = txtFutanGendogakuNinteiShoninShinsaiRiyu;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtFutanGendogakuNinteiKetteiKubun() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiKetteiKubun();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiKetteiKubun(TextBox txtFutanGendogakuNinteiKetteiKubun) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiKetteiKubun(txtFutanGendogakuNinteiKetteiKubun);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtFutanGendogakuNinteiShinseiRiyu() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiShinseiRiyu();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiShinseiRiyu(TextBox txtFutanGendogakuNinteiShinseiRiyu) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiShinseiRiyu(txtFutanGendogakuNinteiShinseiRiyu);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtFutanGendogakuNinteiShinseibi() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiShinseibi();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiShinseibi(TextBoxFlexibleDate txtFutanGendogakuNinteiShinseibi) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiShinseibi(txtFutanGendogakuNinteiShinseibi);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtFutanGendogakuNinteiFutanDankai() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiFutanDankai();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiFutanDankai(TextBox txtFutanGendogakuNinteiFutanDankai) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiFutanDankai(txtFutanGendogakuNinteiFutanDankai);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtFutanGendogakuNinteiKyuSochi() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiKyuSochi();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiKyuSochi(TextBox txtFutanGendogakuNinteiKyuSochi) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiKyuSochi(txtFutanGendogakuNinteiKyuSochi);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtFutanGendogakuNinteiKyokaiso() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiKyokaiso();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiKyokaiso(TextBox txtFutanGendogakuNinteiKyokaiso) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiKyokaiso(txtFutanGendogakuNinteiKyokaiso);
-    }
-
-    @JsonIgnore
-    public TextBox getFutanGendogakuNinteiGekihenKanwa() {
-        return this.getFutanGendogakuNinteiInfo().getFutanGendogakuNinteiGekihenKanwa();
-    }
-
-    @JsonIgnore
-    public void  setFutanGendogakuNinteiGekihenKanwa(TextBox FutanGendogakuNinteiGekihenKanwa) {
-        this.getFutanGendogakuNinteiInfo().setFutanGendogakuNinteiGekihenKanwa(FutanGendogakuNinteiGekihenKanwa);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getFutanGendogakuNinteiKetteibi() {
-        return this.getFutanGendogakuNinteiInfo().getFutanGendogakuNinteiKetteibi();
-    }
-
-    @JsonIgnore
-    public void  setFutanGendogakuNinteiKetteibi(TextBoxFlexibleDate FutanGendogakuNinteiKetteibi) {
-        this.getFutanGendogakuNinteiInfo().setFutanGendogakuNinteiKetteibi(FutanGendogakuNinteiKetteibi);
-    }
-
-    @JsonIgnore
-    public Label getLblFutanGendogakuNinteiFutanGendogaku() {
-        return this.getFutanGendogakuNinteiInfo().getLblFutanGendogakuNinteiFutanGendogaku();
-    }
-
-    @JsonIgnore
-    public void  setLblFutanGendogakuNinteiFutanGendogaku(Label lblFutanGendogakuNinteiFutanGendogaku) {
-        this.getFutanGendogakuNinteiInfo().setLblFutanGendogakuNinteiFutanGendogaku(lblFutanGendogakuNinteiFutanGendogaku);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtFutanGendogakuNinteiShokuhi() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiShokuhi();
+        return this.getFutanGendogaku().getTxtFutanGendogakuNinteiShokuhi();
     }
 
     @JsonIgnore
     public void  setTxtFutanGendogakuNinteiShokuhi(TextBoxNum txtFutanGendogakuNinteiShokuhi) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiShokuhi(txtFutanGendogakuNinteiShokuhi);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtFutanGendogakuNinteiTekiyobi() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiTekiyobi();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiTekiyobi(TextBoxFlexibleDate txtFutanGendogakuNinteiTekiyobi) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiTekiyobi(txtFutanGendogakuNinteiTekiyobi);
+        this.getFutanGendogaku().setTxtFutanGendogakuNinteiShokuhi(txtFutanGendogakuNinteiShokuhi);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtFutanGendogakuNinteiUnitGataKoshitsu() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiUnitGataKoshitsu();
+        return this.getFutanGendogaku().getTxtFutanGendogakuNinteiUnitGataKoshitsu();
     }
 
     @JsonIgnore
     public void  setTxtFutanGendogakuNinteiUnitGataKoshitsu(TextBoxNum txtFutanGendogakuNinteiUnitGataKoshitsu) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiUnitGataKoshitsu(txtFutanGendogakuNinteiUnitGataKoshitsu);
+        this.getFutanGendogaku().setTxtFutanGendogakuNinteiUnitGataKoshitsu(txtFutanGendogakuNinteiUnitGataKoshitsu);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtFutanGendogakuNinteiUnitGataJunkoshitsu() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiUnitGataJunkoshitsu();
+        return this.getFutanGendogaku().getTxtFutanGendogakuNinteiUnitGataJunkoshitsu();
     }
 
     @JsonIgnore
     public void  setTxtFutanGendogakuNinteiUnitGataJunkoshitsu(TextBoxNum txtFutanGendogakuNinteiUnitGataJunkoshitsu) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiUnitGataJunkoshitsu(txtFutanGendogakuNinteiUnitGataJunkoshitsu);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtFutanGendogakuNinteiYukoKigen() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiYukoKigen();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiYukoKigen(TextBoxFlexibleDate txtFutanGendogakuNinteiYukoKigen) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiYukoKigen(txtFutanGendogakuNinteiYukoKigen);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo(TextBoxNum txtFutanGendogakuNinteiJuraigataKoshitsuTokuyo) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo(txtFutanGendogakuNinteiJuraigataKoshitsuTokuyo);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtFutanGendogakuNinteiJuraigataKoshitsuRoken() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiJuraigataKoshitsuRoken();
-    }
-
-    @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiJuraigataKoshitsuRoken(TextBoxNum txtFutanGendogakuNinteiJuraigataKoshitsuRoken) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiJuraigataKoshitsuRoken(txtFutanGendogakuNinteiJuraigataKoshitsuRoken);
+        this.getFutanGendogaku().setTxtFutanGendogakuNinteiUnitGataJunkoshitsu(txtFutanGendogakuNinteiUnitGataJunkoshitsu);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtFutanGendogakuNinteiTashoshitsu() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiTashoshitsu();
+        return this.getFutanGendogaku().getTxtFutanGendogakuNinteiTashoshitsu();
     }
 
     @JsonIgnore
     public void  setTxtFutanGendogakuNinteiTashoshitsu(TextBoxNum txtFutanGendogakuNinteiTashoshitsu) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiTashoshitsu(txtFutanGendogakuNinteiTashoshitsu);
+        this.getFutanGendogaku().setTxtFutanGendogakuNinteiTashoshitsu(txtFutanGendogakuNinteiTashoshitsu);
     }
 
     @JsonIgnore
-    public TextBoxMultiLine getTxtFutanGendogakuNinteiShoninShinsaiRiyu() {
-        return this.getFutanGendogakuNinteiInfo().getTxtFutanGendogakuNinteiShoninShinsaiRiyu();
+    public TextBoxNum getTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo() {
+        return this.getFutanGendogaku().getTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo();
     }
 
     @JsonIgnore
-    public void  setTxtFutanGendogakuNinteiShoninShinsaiRiyu(TextBoxMultiLine txtFutanGendogakuNinteiShoninShinsaiRiyu) {
-        this.getFutanGendogakuNinteiInfo().setTxtFutanGendogakuNinteiShoninShinsaiRiyu(txtFutanGendogakuNinteiShoninShinsaiRiyu);
+    public void  setTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo(TextBoxNum txtFutanGendogakuNinteiJuraigataKoshitsuTokuyo) {
+        this.getFutanGendogaku().setTxtFutanGendogakuNinteiJuraigataKoshitsuTokuyo(txtFutanGendogakuNinteiJuraigataKoshitsuTokuyo);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtFutanGendogakuNinteiJuraigataKoshitsuRoken() {
+        return this.getFutanGendogaku().getTxtFutanGendogakuNinteiJuraigataKoshitsuRoken();
+    }
+
+    @JsonIgnore
+    public void  setTxtFutanGendogakuNinteiJuraigataKoshitsuRoken(TextBoxNum txtFutanGendogakuNinteiJuraigataKoshitsuRoken) {
+        this.getFutanGendogaku().setTxtFutanGendogakuNinteiJuraigataKoshitsuRoken(txtFutanGendogakuNinteiJuraigataKoshitsuRoken);
     }
 
     // </editor-fold>

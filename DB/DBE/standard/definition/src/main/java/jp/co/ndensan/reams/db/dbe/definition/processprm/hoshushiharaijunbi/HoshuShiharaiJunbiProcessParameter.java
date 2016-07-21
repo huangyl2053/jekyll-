@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HoshuShiharaiJunbiProcessParameter implements IBatchProcessParameter {
 
-    private RDateTime jissekidaterangefrom;
-    private RDateTime jissekidaterangeto;
+    private FlexibleDate jissekidaterangefrom;
+    private FlexibleDate jissekidaterangeto;
     private FlexibleDate furikomishiteiday;
     private List<RString> chkchosa;
     private List<RString> chkshujii;
@@ -39,13 +38,12 @@ public class HoshuShiharaiJunbiProcessParameter implements IBatchProcessParamete
      * @param chkshujii 主治医意見書作成報酬対象
      * @param chkshinsakai 審査会委員報酬対象
      */
-    public HoshuShiharaiJunbiProcessParameter(RDateTime jissekidaterangefrom,
-            RDateTime jissekidaterangeto,
+    public HoshuShiharaiJunbiProcessParameter(FlexibleDate jissekidaterangefrom,
+            FlexibleDate jissekidaterangeto,
             FlexibleDate furikomishiteiday,
             List<RString> chkchosa,
             List<RString> chkshujii,
-            List<RString> chkshinsakai
-    ) {
+            List<RString> chkshinsakai) {
         this.jissekidaterangefrom = jissekidaterangefrom;
         this.jissekidaterangeto = jissekidaterangeto;
         this.furikomishiteiday = furikomishiteiday;

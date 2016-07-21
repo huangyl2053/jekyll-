@@ -6,20 +6,20 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定結果情報を管理するクラスです。
  */
-public class NinteiKekkaJoho extends 
-        ParentModelBase<NinteiKekkaJohoIdentifier, 
-        DbT5102NinteiKekkaJohoEntity, NinteiKekkaJoho> implements Serializable {
+public class NinteiKekkaJoho extends
+        ModelBase<NinteiKekkaJohoIdentifier, DbT5102NinteiKekkaJohoEntity, NinteiKekkaJoho> implements Serializable {
 
     private final DbT5102NinteiKekkaJohoEntity entity;
     private final NinteiKekkaJohoIdentifier id;
@@ -65,7 +65,6 @@ public class NinteiKekkaJoho extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 申請書管理番号を返します。
      *
@@ -96,12 +95,10 @@ public class NinteiKekkaJoho extends
     }
 
     /**
-     * 要介護認定結果情報のみを変更対象とします。<br/>
-     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定結果情報のみを変更対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiKekkaJoho}
      */
-    @Override
     public NinteiKekkaJoho modifiedModel() {
         DbT5102NinteiKekkaJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -112,8 +109,7 @@ public class NinteiKekkaJoho extends
     }
 
     /**
-     * 保持する要介護認定結果情報を削除対象とします。<br/>
-     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定結果情報を削除対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiKekkaJoho}
      */
@@ -141,7 +137,7 @@ public class NinteiKekkaJoho extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -170,5 +166,26 @@ public class NinteiKekkaJoho extends
         return new NinteiKekkaJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NinteiShinseiJoho other = (NinteiShinseiJoho) obj;
+//        if (!Objects.equals(this.id, other.id)) {
+//            return false;
+//        }
+        return true;
+    }
+
 }

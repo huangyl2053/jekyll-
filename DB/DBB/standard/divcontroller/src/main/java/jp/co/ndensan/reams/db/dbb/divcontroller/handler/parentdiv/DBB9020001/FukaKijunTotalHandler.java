@@ -176,9 +176,8 @@ public class FukaKijunTotalHandler {
                     ConfigNameDBB.ランク管理情報_ランク終了年度, now, SubGyomuCode.DBB介護賦課));
             isランク非表示 = 賦課年度.isBefore(ランク開始年度) || ランク終了年度.isBefore(賦課年度);
         }
-        if (isランク非表示) {
-            div.getKonkaiShoriNaiyo().getDdlRank().setDisplayNone(isランク非表示);
-        } else {
+        div.getKonkaiShoriNaiyo().getDdlRank().setDisplayNone(isランク非表示);
+        if (!isランク非表示) {
             ランクDDLのデータ設定(賦課年度);
         }
     }
@@ -699,9 +698,14 @@ public class FukaKijunTotalHandler {
             }
         }
         div.setHdnPatan(パターン);
-        set世帯非課税段階_２段階以外(保険料段階一覧, パターン, Decimal.ZERO);
-        set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階一覧, パターン, Decimal.ZERO);
-        保険料段階Gridの保険料等の設定(保険料段階一覧, 賦課年度, now, false);
+        List<HokenryoDankai> 保険料段階List = new ArrayList<>();
+        for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
+            保険料段階 = 保険料段階.createBuilderForEdit().set保険料率(Decimal.ZERO).build();
+            保険料段階List.add(保険料段階);
+        }
+        set世帯非課税段階_２段階以外(保険料段階List, パターン, Decimal.ZERO);
+        set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階List, パターン, Decimal.ZERO);
+        保険料段階Gridの保険料等の設定(保険料段階List, 賦課年度, now, false);
     }
 
     /**
@@ -736,9 +740,14 @@ public class FukaKijunTotalHandler {
             }
         }
         div.setHdnPatan(パターン);
-        set世帯非課税段階_２段階以外(保険料段階一覧, パターン, Decimal.ZERO);
-        set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階一覧, パターン, Decimal.ZERO);
-        保険料段階Gridの保険料等の設定(保険料段階一覧, 賦課年度, now, false);
+        List<HokenryoDankai> 保険料段階List = new ArrayList<>();
+        for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
+            保険料段階 = 保険料段階.createBuilderForEdit().set保険料率(Decimal.ZERO).build();
+            保険料段階List.add(保険料段階);
+        }
+        set世帯非課税段階_２段階以外(保険料段階List, パターン, Decimal.ZERO);
+        set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階List, パターン, Decimal.ZERO);
+        保険料段階Gridの保険料等の設定(保険料段階List, 賦課年度, now, false);
     }
 
     private void set世帯非課税段階_２段階以外(List<HokenryoDankai> 保険料段階一覧,
@@ -869,19 +878,24 @@ public class FukaKijunTotalHandler {
         RString 世帯非課税の段階表記 = div.getShotokuDankai().getShotokuDankaiTo2014()
                 .getRadDankaiHyokiDankai2Gai().getSelectedKey();
         RString パターン = HokenryoDankaiPattern.パターン無し.getコード();
+        List<HokenryoDankai> 保険料段階List = new ArrayList<>();
+        for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
+            保険料段階 = 保険料段階.createBuilderForEdit().set保険料率(Decimal.ZERO).build();
+            保険料段階List.add(保険料段階);
+        }
         if (平成21年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成23年)) {
             if (STR_ZERO.equals(軽減措置)) {
                 パターン = HokenryoDankaiPattern._2009_パターン1.getコード();
             } else {
                 パターン = HokenryoDankaiPattern._2009_パターン2.getコード();
             }
-            set本人非課税世帯課税段階_平成21年から平成23年まで(保険料段階一覧, パターン, Decimal.ZERO);
+            set本人非課税世帯課税段階_平成21年から平成23年まで(保険料段階List, パターン, Decimal.ZERO);
         } else if (平成24年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成26年)) {
             パターン = getパターン_軽減措置(軽減措置, 世帯非課税の軽減措置, 世帯非課税の段階表記);
-            set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階一覧, パターン, Decimal.ZERO);
+            set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階List, パターン, Decimal.ZERO);
         }
         div.setHdnPatan(パターン);
-        保険料段階Gridの保険料等の設定(保険料段階一覧, 賦課年度, now, false);
+        保険料段階Gridの保険料等の設定(保険料段階List, 賦課年度, now, false);
     }
 
     /**
@@ -898,19 +912,24 @@ public class FukaKijunTotalHandler {
         RString 世帯非課税の段階表記 = div.getShotokuDankai().getShotokuDankaiTo2014()
                 .getRadDankaiHyokiDankai2Gai().getSelectedKey();
         RString パターン = HokenryoDankaiPattern.パターン無し.getコード();
+        List<HokenryoDankai> 保険料段階List = new ArrayList<>();
+        for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
+            保険料段階 = 保険料段階.createBuilderForEdit().set保険料率(Decimal.ZERO).build();
+            保険料段階List.add(保険料段階);
+        }
         if (平成21年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成23年)) {
             if (STR_ZERO.equals(段階表記)) {
                 パターン = HokenryoDankaiPattern._2009_パターン2.getコード();
             } else {
                 パターン = HokenryoDankaiPattern._2009_パターン3.getコード();
             }
-            set本人非課税世帯課税段階_平成21年から平成23年まで(保険料段階一覧, パターン, Decimal.ZERO);
+            set本人非課税世帯課税段階_平成21年から平成23年まで(保険料段階List, パターン, Decimal.ZERO);
         } else if (平成24年.isBeforeOrEquals(賦課年度) && 賦課年度.isBeforeOrEquals(平成26年)) {
             パターン = getパターン_段階表記(段階表記, 世帯非課税の軽減措置, 世帯非課税の段階表記);
-            set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階一覧, パターン, Decimal.ZERO);
+            set本人非課税世帯課税段階_平成24年から平成26年まで(保険料段階List, パターン, Decimal.ZERO);
         }
         div.setHdnPatan(パターン);
-        保険料段階Gridの保険料等の設定(保険料段階一覧, 賦課年度, now, false);
+        保険料段階Gridの保険料等の設定(保険料段階List, 賦課年度, now, false);
     }
 
     private RString getパターン_軽減措置(RString 軽減措置, RString 世帯非課税の軽減措置, RString 世帯非課税の段階表記) {
@@ -1094,12 +1113,14 @@ public class FukaKijunTotalHandler {
         if (STR_ZERO.equals(強制設定_未申告)) {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDataSource(dateSource);
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(true);
-        } else {
-            if (!dataSourceKeyList.isEmpty() && dataSourceKeyList.contains(設定段階_未申告)) {
+        } else if (!dataSourceKeyList.isEmpty()) {
+            if (dataSourceKeyList.contains(設定段階_未申告)) {
                 div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedKey(設定段階_未申告);
             } else {
                 div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setSelectedIndex(NUM_0);
             }
+            div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
+        } else {
             div.getHokenryoRitsuIgaiInfo().getMishinkoku().getDdlMishinkokuKyoseiSettei().setDisabled(false);
         }
         div.getHokenryoRitsuIgaiInfo().getMishinkoku().getRadtMishinkokuKazeiKbn()
@@ -1118,13 +1139,15 @@ public class FukaKijunTotalHandler {
         if (STR_ZERO.equals(強制設定_所得調査中)) {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDataSource(dateSource);
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(true);
-        } else {
-            if (!dataSourceKeyList.isEmpty() && dataSourceKeyList.contains(設定段階_所得調査中)) {
+        } else if (!dataSourceKeyList.isEmpty()) {
+            if (dataSourceKeyList.contains(設定段階_所得調査中)) {
                 div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei()
                         .setSelectedKey(設定段階_所得調査中);
             } else {
                 div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setSelectedIndex(NUM_0);
             }
+            div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
+        } else {
             div.getHokenryoRitsuIgaiInfo().getShotokuChosaChu().getDdlShotokuChosaChuKyoseiSettei().setDisabled(false);
         }
 
@@ -1137,26 +1160,35 @@ public class FukaKijunTotalHandler {
                     now, SubGyomuCode.DBB介護賦課);
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKyoseiSettei()
                     .setSelectedKey(強制設定_課税取消);
-            if (!dataSourceKeyList.isEmpty() && dataSourceKeyList.contains(設定段階_課税取消)) {
-                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
-                        .setSelectedKey(設定段階_課税取消);
-            } else {
-                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setSelectedIndex(NUM_0);
-            }
             div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getRadKazeiTorikeshiKazeiKbn()
                     .setSelectedKey(課税区分の見直し方_課税取消);
-            if (STR_ZERO.equals(強制設定_課税取消)) {
-                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDataSource(dateSource);
-                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(true);
-            } else {
-                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
-            }
+            set課税取消項目表示を制御(強制設定_課税取消, dataSourceKeyList, dateSource, 設定段階_課税取消);
         }
 
         RString 端数 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整単位_通常, now, SubGyomuCode.DBB介護賦課);
         RString 丸め方 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整方法_通常, now, SubGyomuCode.DBB介護賦課);
         div.getHokenryoRitsuIgaiInfo().getNengakuHokenryo().getDdlHasu().setSelectedKey(端数);
         div.getHokenryoRitsuIgaiInfo().getNengakuHokenryo().getDdlMarumeKata().setSelectedKey(丸め方);
+    }
+
+    private void set課税取消項目表示を制御(RString 強制設定_課税取消,
+            List<RString> dataSourceKeyList,
+            List<KeyValueDataSource> dateSource,
+            RString 設定段階_課税取消) {
+        if (STR_ZERO.equals(強制設定_課税取消)) {
+            div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDataSource(dateSource);
+            div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(true);
+        } else if (!dataSourceKeyList.isEmpty()) {
+            if (dataSourceKeyList.contains(設定段階_課税取消)) {
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei()
+                        .setSelectedKey(設定段階_課税取消);
+            } else {
+                div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setSelectedIndex(NUM_0);
+            }
+            div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
+        } else {
+            div.getHokenryoRitsuIgaiInfo().getKazeiTorikeshi().getDdlKazeiTorikeshiKyoseiSettei().setDisabled(false);
+        }
     }
 
     /**

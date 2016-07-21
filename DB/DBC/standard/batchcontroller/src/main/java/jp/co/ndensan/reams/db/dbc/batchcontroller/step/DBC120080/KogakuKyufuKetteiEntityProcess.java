@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120080;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran.KogakuShikyuFushikyuKetteishaIchiranItem;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteishaichiran.KogakuShikyuFushikyuKetteishaIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufuketteiin.KogakuKyufuKetteiInYiLanEntity;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakushikyufushikyuketteishaichiran.KogakuShikyuFushikyuKetteishaIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufukettei.KogakuShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuserviceketteijoho.IKogakuServiceKetteiJohoTorikomiDataHenshuMapper;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakuserviceketteishaichiranhyodata.KogakuServiceKetteishaIchiranhyoData;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -99,11 +100,12 @@ public class KogakuKyufuKetteiEntityProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void afterExecute() {
-        KogakuServiceKetteishaIchiranhyoData sut = new KogakuServiceKetteishaIchiranhyoData();
-        List<KogakuShikyuFushikyuKetteishaIchiranItem> resultList = sut.getKogakuServiceKetteishaIchiranhyoData(決定情報Entity);
+//        KogakuServiceKetteishaIchiranhyoData sut = new KogakuServiceKetteishaIchiranhyoData();
+//        List<KogakuShikyuFushikyuKetteishaIchiranItem> resultList = sut.getKogakuServiceKetteishaIchiranhyoData(決定情報Entity);
 
         KogakuShikyuFushikyuKetteishaIchiranReport report
-                = KogakuShikyuFushikyuKetteishaIchiranReport.createForm(resultList);
+                = new KogakuShikyuFushikyuKetteishaIchiranReport(Collections.EMPTY_LIST, Collections.EMPTY_LIST,
+                        new HashMap<RString, RString>(), RDateTime.now());
         report.writeBy(reportSourceWriter);
     }
 }

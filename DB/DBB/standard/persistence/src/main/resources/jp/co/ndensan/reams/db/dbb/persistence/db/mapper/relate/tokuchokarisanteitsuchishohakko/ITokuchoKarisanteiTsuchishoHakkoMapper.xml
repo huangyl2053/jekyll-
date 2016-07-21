@@ -40,19 +40,23 @@
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
              ON "Nokumi"."CaT0714shikibetsuCode" = 計算後情報."shikibetsuCode"
          INNER JOIN 
-              rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
+              rgue."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
               ON  計算後情報."kariNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
               AND  計算後情報."kariNenkinCode" = 年金特徴回付情報."nenkinCode"
               AND  計算後情報."kariHosokuM" = 年金特徴回付情報."hosokuTsuki"
+              AND 年金特徴回付情報."gyomuCode" = 'DB'
               AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
               AND 年金特徴回付情報."shoriNendo" = #{調定年度minus1}
          WHERE
             計算後情報."choteiNendo" = #{調定年度}
             AND 計算後情報."fukaNendo" = #{賦課年度}
             AND 計算後情報."koseiZengoKubun" = '2'
-        AND  計算後情報."tkKibetsuGaku01" <![CDATA[<>]]> 0
+        AND  計算後情報."tkKibetsuGaku01" <![CDATA[<>]]> 0 
+        AND  計算後情報."tkKibetsuGaku01" is not null 
         AND  計算後情報."tkKibetsuGaku02" <![CDATA[<>]]> 0
+        AND  計算後情報."tkKibetsuGaku02" is not null 
         AND  計算後情報."tkKibetsuGaku03" <![CDATA[<>]]> 0
+         AND  計算後情報."tkKibetsuGaku03" is not null 
     </select>
     
     <select resultOrdered="true" id="select前年度賦課情報"
@@ -95,57 +99,57 @@
    <update id="update仮算定一括発行一時_前年度賦課情報">
         UPDATE "KarisanteiIkkatsuHakkoTemp" AS A
         SET 
-        "dbV2002Fuka_choteiNendo" = B."choteiNendo",
-        "dbV2002Fuka_fukaNendo" = B."fukaNendo",
-        "dbV2002Fuka_tsuchishoNo" = B."tsuchishoNo",
-        "dbV2002Fuka_rirekiNo" = B."rirekiNo",
-        "dbV2002Fuka_hihokenshaNo" = B."hihokenshaNo",
-        "dbV2002Fuka_shikibetsuCode" = B."shikibetsuCode",
-        "dbV2002Fuka_setaiCode" = B."setaiCode",
-        "dbV2002Fuka_setaiInsu" = B."setaiInsu",
-        "dbV2002Fuka_shikakuShutokuYMD" = B."shikakuShutokuYMD",
-        "dbV2002Fuka_shikakuShutokuJiyu" = B."shikakuShutokuJiyu",
-        "dbV2002Fuka_shikakuSoshitsuYMD" = B."shikakuSoshitsuYMD",
-        "dbV2002Fuka_shikakuSoshitsuJiyu" = B."shikakuSoshitsuJiyu",
-        "dbV2002Fuka_seihofujoShurui" = B."seihofujoShurui",
-        "dbV2002Fuka_seihoKaishiYMD" = B."seihoKaishiYMD",
-        "dbV2002Fuka_seihoHaishiYMD" = B."seihoHaishiYMD",
-        "dbV2002Fuka_ronenKaishiYMD" = B."ronenKaishiYMD",
-        "dbV2002Fuka_ronenHaishiYMD" = B."ronenHaishiYMD",
-        "dbV2002Fuka_fukaYMD" = B."fukaYMD",
-        "dbV2002Fuka_kazeiKubun" = B."kazeiKubun",
-        "dbV2002Fuka_setaikazeiKubun" = B."setaikazeiKubun",
-        "dbV2002Fuka_gokeiShotokuGaku" = B."gokeiShotokuGaku",
-        "dbV2002Fuka_nenkinShunyuGaku" = B."nenkinShunyuGaku",
-        "dbV2002Fuka_hokenryoDankai" = B."hokenryoDankai",
-        "dbV2002Fuka_hokenryoDankai1" = B."hokenryoDankai1",
-        "dbV2002Fuka_nengakuHokenryo1" = B."nengakuHokenryo1",
-        "dbV2002Fuka_tsukiwariStartYM1" = B."tsukiwariStartYM1",
-        "dbV2002Fuka_tsukiwariEndYM1" = B."tsukiwariEndYM1",
-        "dbV2002Fuka_hokenryoDankai2" = B."hokenryoDankai2",
-        "dbV2002Fuka_nengakuHokenryo2" = B."nengakuHokenryo2",
-        "dbV2002Fuka_tsukiwariStartYM2" = B."tsukiwariStartYM2",
-        "dbV2002Fuka_tsukiwariEndYM2" = B."tsukiwariEndYM2",
-        "dbV2002Fuka_choteiNichiji" = B."choteiNichiji",
-        "dbV2002Fuka_choteiJiyu1" = B."choteiJiyu1",
-        "dbV2002Fuka_choteiJiyu2" = B."choteiJiyu2",
-        "dbV2002Fuka_choteiJiyu3" = B."choteiJiyu3",
-        "dbV2002Fuka_choteiJiyu4" = B."choteiJiyu4",
-        "dbV2002Fuka_koseiM" = B."koseiM",
-        "dbV2002Fuka_gemmenMaeHokenryo" = B."gemmenMaeHokenryo",
-        "dbV2002Fuka_gemmenGaku" = B."gemmenGaku",
-        "dbV2002Fuka_kakuteiHokenryo" = B."kakuteiHokenryo",
-        "dbV2002Fuka_hokenryoDankaiKarisanntei" = B."hokenryoDankaiKarisanntei",
-        "dbV2002Fuka_choshuHohoRirekiNo" = B."choshuHohoRirekiNo",
-        "dbV2002Fuka_idoKijunNichiji" = B."idoKijunNichiji",
-        "dbV2002Fuka_kozaKubun" = B."kozaKubun",
-        "dbV2002Fuka_kyokaisoKubun" = B."kyokaisoKubun",
-        "dbV2002Fuka_shokkenKubun" = B."shokkenKubun",
-        "dbV2002Fuka_fukaShichosonCode" = B."fukaShichosonCode",
-        "dbV2002Fuka_tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
-        "dbV2002Fuka_fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku"
+        "dbT2002Fuka_choteiNendo" = B."choteiNendo",
+        "dbT2002Fuka_fukaNendo" = B."fukaNendo",
+        "dbT2002Fuka_tsuchishoNo" = B."tsuchishoNo",
+        "dbT2002Fuka_rirekiNo" = B."rirekiNo",
+        "dbT2002Fuka_hihokenshaNo" = B."hihokenshaNo",
+        "dbT2002Fuka_shikibetsuCode" = B."shikibetsuCode",
+        "dbT2002Fuka_setaiCode" = B."setaiCode",
+        "dbT2002Fuka_setaiInsu" = B."setaiInsu",
+        "dbT2002Fuka_shikakuShutokuYMD" = B."shikakuShutokuYMD",
+        "dbT2002Fuka_shikakuShutokuJiyu" = B."shikakuShutokuJiyu",
+        "dbT2002Fuka_shikakuSoshitsuYMD" = B."shikakuSoshitsuYMD",
+        "dbT2002Fuka_shikakuSoshitsuJiyu" = B."shikakuSoshitsuJiyu",
+        "dbT2002Fuka_seihofujoShurui" = B."seihofujoShurui",
+        "dbT2002Fuka_seihoKaishiYMD" = B."seihoKaishiYMD",
+        "dbT2002Fuka_seihoHaishiYMD" = B."seihoHaishiYMD",
+        "dbT2002Fuka_ronenKaishiYMD" = B."ronenKaishiYMD",
+        "dbT2002Fuka_ronenHaishiYMD" = B."ronenHaishiYMD",
+        "dbT2002Fuka_fukaYMD" = B."fukaYMD",
+        "dbT2002Fuka_kazeiKubun" = B."kazeiKubun",
+        "dbT2002Fuka_setaikazeiKubun" = B."setaikazeiKubun",
+        "dbT2002Fuka_gokeiShotokuGaku" = B."gokeiShotokuGaku",
+        "dbT2002Fuka_nenkinShunyuGaku" = B."nenkinShunyuGaku",
+        "dbT2002Fuka_hokenryoDankai" = B."hokenryoDankai",
+        "dbT2002Fuka_hokenryoDankai1" = B."hokenryoDankai1",
+        "dbT2002Fuka_nengakuHokenryo1" = B."nengakuHokenryo1",
+        "dbT2002Fuka_tsukiwariStartYM1" = B."tsukiwariStartYM1",
+        "dbT2002Fuka_tsukiwariEndYM1" = B."tsukiwariEndYM1",
+        "dbT2002Fuka_hokenryoDankai2" = B."hokenryoDankai2",
+        "dbT2002Fuka_nengakuHokenryo2" = B."nengakuHokenryo2",
+        "dbT2002Fuka_tsukiwariStartYM2" = B."tsukiwariStartYM2",
+        "dbT2002Fuka_tsukiwariEndYM2" = B."tsukiwariEndYM2",
+        "dbT2002Fuka_choteiNichiji" = B."choteiNichiji",
+        "dbT2002Fuka_choteiJiyu1" = B."choteiJiyu1",
+        "dbT2002Fuka_choteiJiyu2" = B."choteiJiyu2",
+        "dbT2002Fuka_choteiJiyu3" = B."choteiJiyu3",
+        "dbT2002Fuka_choteiJiyu4" = B."choteiJiyu4",
+        "dbT2002Fuka_koseiM" = B."koseiM",
+        "dbT2002Fuka_gemmenMaeHokenryo" = B."gemmenMaeHokenryo",
+        "dbT2002Fuka_gemmenGaku" = B."gemmenGaku",
+        "dbT2002Fuka_kakuteiHokenryo" = B."kakuteiHokenryo",
+        "dbT2002Fuka_hokenryoDankaiKarisanntei" = B."hokenryoDankaiKarisanntei",
+        "dbT2002Fuka_choshuHohoRirekiNo" = B."choshuHohoRirekiNo",
+        "dbT2002Fuka_idoKijunNichiji" = B."idoKijunNichiji",
+        "dbT2002Fuka_kozaKubun" = B."kozaKubun",
+        "dbT2002Fuka_kyokaisoKubun" = B."kyokaisoKubun",
+        "dbT2002Fuka_shokkenKubun" = B."shokkenKubun",
+        "dbT2002Fuka_fukaShichosonCode" = B."fukaShichosonCode",
+        "dbT2002Fuka_tkSaishutsuKampuGaku" = B."tkSaishutsuKampuGaku",
+        "dbT2002Fuka_fuSaishutsuKampuGaku" = B."fuSaishutsuKampuGaku"
         FROM "DbT2002FukaZennendoTemp" AS B
-        WHERE A."dbT2015KeisangoJoho_tsuchishoNo" = B."tsuchishoNo"
+        WHERE A."dbT2015KeisangoJoho_hihokenshaNo" = B."hihokenshaNo"
     </update>
     
     <update id="update仮算定一括発行一時_特徴調定額">
@@ -168,7 +172,7 @@
         rgdb."UrT0705ChoteiKyotsu"  AS UrT0705ChoteiKyotsu
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
-        前年度賦課."hihokenshaNo" = A."dbV2002Fuka_hihokenshaNo"
+        前年度賦課."hihokenshaNo" = A."dbT2002Fuka_hihokenshaNo"
         ),
         "zennendoTokuchoKibetsuKingaku02" = (
         SELECT
@@ -187,7 +191,7 @@
         rgdb."UrT0705ChoteiKyotsu"  AS UrT0705ChoteiKyotsu
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
-        前年度賦課."hihokenshaNo" = A."dbV2002Fuka_hihokenshaNo"
+        前年度賦課."hihokenshaNo" = A."dbT2002Fuka_hihokenshaNo"
         ),
         "zennendoTokuchoKibetsuKingaku03" = (
         SELECT
@@ -206,7 +210,7 @@
         rgdb."UrT0705ChoteiKyotsu"  AS UrT0705ChoteiKyotsu
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
-        前年度賦課."hihokenshaNo" = A."dbV2002Fuka_hihokenshaNo"
+        前年度賦課."hihokenshaNo" = A."dbT2002Fuka_hihokenshaNo"
         ),
         "zennendoTokuchoKibetsuKingaku04" = (
         SELECT
@@ -225,7 +229,7 @@
         rgdb."UrT0705ChoteiKyotsu"  AS UrT0705ChoteiKyotsu
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
-        前年度賦課."hihokenshaNo" = A."dbV2002Fuka_hihokenshaNo"
+        前年度賦課."hihokenshaNo" = A."dbT2002Fuka_hihokenshaNo"
         ),
         "zennendoTokuchoKibetsuKingaku05" = (
         SELECT
@@ -244,7 +248,7 @@
         rgdb."UrT0705ChoteiKyotsu"  AS UrT0705ChoteiKyotsu
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
-        前年度賦課."hihokenshaNo" = A."dbV2002Fuka_hihokenshaNo"
+        前年度賦課."hihokenshaNo" = A."dbT2002Fuka_hihokenshaNo"
         ),
         "zennendoTokuchoKibetsuKingaku06" = (
         SELECT
@@ -263,7 +267,7 @@
         rgdb."UrT0705ChoteiKyotsu"  AS UrT0705ChoteiKyotsu
         ON UrT0705ChoteiKyotsu."choteiId" = DbT2003Kibetsu."choteiId"
         WHERE
-        前年度賦課."hihokenshaNo" = A."dbV2002Fuka_hihokenshaNo"
+        前年度賦課."hihokenshaNo" = A."dbT2002Fuka_hihokenshaNo"
         )
     </update>
     
@@ -272,6 +276,7 @@
         SET "hihokenshaKubun" = '0'
         WHERE A."dbT2015KeisangoJoho_choshuHoho4gatsu" IN ('1','2')
         AND A."zennendoTokuchoKibetsuKingaku06" <![CDATA[<>]]> 0
+        AND A."zennendoTokuchoKibetsuKingaku06" is not null
     </update>
     
     <update id="update仮算定一括発行一時_被保険者区分1">
@@ -289,6 +294,11 @@
     </update>
     
     <resultMap id="resultMap_出力対象情報の取得" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteitsuchishohakko.TsuchishoDataTempEntity" autoMapping="true">
+        <id column="dbT2015KeisangoJoho_choteiNendo"/>
+        <id column="dbT2015KeisangoJoho_fukaNendo"/>
+        <id column="dbT2015KeisangoJoho_tsuchishoNo"/>
+        <id column="dbT2015KeisangoJoho_koseiZengoKubun"/>
+        <id column="dbT2015KeisangoJoho_sakuseiShoriName"/>
         <result property="被保険者区分" column="hihokenshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="前年度特徴期別金額01" column="zennendoTokuchoKibetsuKingaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="前年度特徴期別金額02" column="zennendoTokuchoKibetsuKingaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -300,11 +310,28 @@
         <association property="前年度賦課情報" resultMap="resultMap_前年度賦課情報"/>
         <association property="宛名" resultMap="resultMap_宛名情報"/>
         <association property="宛先" resultMap="resultMap_宛先情報"/>
-<!--        <association property="納組" resultMap="resultMap_納組情報"/>-->
+        <association property="納組" resultMap="resultMap_納組情報"/>
         <association property="対象者_追加含む情報" resultMap="resultMap_対象者_追加含む情報"/>
     </resultMap>
     
-    <select id="select出力対象データ" resultMap="resultMap_出力対象情報の取得"
+    <resultMap id="resultMap_前年度賦課情報" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity" autoMapping="true">
+        <id property="介護賦課Entity.choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="介護賦課Entity.fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="介護賦課Entity.tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="介護賦課Entity.rirekiNo" column="dbT2002Fuka_rirekiNo" />
+        <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
+        <collection property="介護期別RelateEntity"
+                    resultMap="resultMap_KibetsuEntity"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
+        <id property="介護期別Entity.choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="介護期別Entity.ki" column="dbT2003Kibetsu_ki" />
+        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+        <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="select出力対象データ" resultMap="resultMap_出力対象情報の取得"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoMybatisParameter" fetchSize="500">
         SELECT
             A.*
@@ -591,59 +618,6 @@
         <result property="fuShunyuGaku13" column="fuShunyuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuShunyuGaku14" column="fuShunyuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
-    <resultMap id="resultMap_前年度賦課情報" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
-        <id property="choteiNendo" column="dbV2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="fukaNendo" column="dbV2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbV2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
-        <id property="rirekiNo" column="dbV2002Fuka_rirekiNo" />
-        <result property="hihokenshaNo" column="dbV2002Fuka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="shikibetsuCode" column="dbV2002Fuka_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="setaiCode" column="dbV2002Fuka_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
-        <result property="setaiInsu" column="dbV2002Fuka_setaiInsu" />
-        <result property="shikakuShutokuYMD" column="dbV2002Fuka_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shikakuShutokuJiyu" column="dbV2002Fuka_shikakuShutokuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shikakuSoshitsuYMD" column="dbV2002Fuka_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shikakuSoshitsuJiyu" column="dbV2002Fuka_shikakuSoshitsuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="seihofujoShurui" column="dbV2002Fuka_seihofujoShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="seihoKaishiYMD" column="dbV2002Fuka_seihoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="seihoHaishiYMD" column="dbV2002Fuka_seihoHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ronenKaishiYMD" column="dbV2002Fuka_ronenKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ronenHaishiYMD" column="dbV2002Fuka_ronenHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="fukaYMD" column="dbV2002Fuka_fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="kazeiKubun" column="dbV2002Fuka_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="setaikazeiKubun" column="dbV2002Fuka_setaikazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gokeiShotokuGaku" column="dbV2002Fuka_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="nenkinShunyuGaku" column="dbV2002Fuka_nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="hokenryoDankai" column="dbV2002Fuka_hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hokenryoDankai1" column="dbV2002Fuka_hokenryoDankai1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="nengakuHokenryo1" column="dbV2002Fuka_nengakuHokenryo1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="tsukiwariStartYM1" column="dbV2002Fuka_tsukiwariStartYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="tsukiwariEndYM1" column="dbV2002Fuka_tsukiwariEndYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="hokenryoDankai2" column="dbV2002Fuka_hokenryoDankai2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="nengakuHokenryo2" column="dbV2002Fuka_nengakuHokenryo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="tsukiwariStartYM2" column="dbV2002Fuka_tsukiwariStartYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="tsukiwariEndYM2" column="dbV2002Fuka_tsukiwariEndYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="choteiNichiji" column="dbV2002Fuka_choteiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-        <result property="choteiJiyu1" column="dbV2002Fuka_choteiJiyu1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="choteiJiyu2" column="dbV2002Fuka_choteiJiyu2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="choteiJiyu3" column="dbV2002Fuka_choteiJiyu3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="choteiJiyu4" column="dbV2002Fuka_choteiJiyu4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="koseiM" column="dbV2002Fuka_koseiM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gemmenMaeHokenryo" column="dbV2002Fuka_gemmenMaeHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="gemmenGaku" column="dbV2002Fuka_gemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kakuteiHokenryo" column="dbV2002Fuka_kakuteiHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="hokenryoDankaiKarisanntei" column="dbV2002Fuka_hokenryoDankaiKarisanntei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="choshuHohoRirekiNo" column="dbV2002Fuka_choshuHohoRirekiNo" />
-        <result property="idoKijunNichiji" column="dbV2002Fuka_idoKijunNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-        <result property="kozaKubun" column="dbV2002Fuka_kozaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyokaisoKubun" column="dbV2002Fuka_kyokaisoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shokkenKubun" column="dbV2002Fuka_shokkenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="fukaShichosonCode" column="dbV2002Fuka_fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="tkSaishutsuKampuGaku" column="dbV2002Fuka_tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="fuSaishutsuKampuGaku" column="dbV2002Fuka_fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-    </resultMap>
-
     
     <resultMap id="resultMap_対象者_追加含む情報" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="true">
         <id property="gyomuCode" column="nenkinTokuchoKaifuJoho_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />

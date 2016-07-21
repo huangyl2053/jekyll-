@@ -43,6 +43,7 @@ public class TekiyoJogaiTotal {
 
     private static final LockingKey 前排他ロックキー = new LockingKey("TekiyoJogaiIdoKanri");
     private static final RString 遷移元メニューID_適用 = new RString("DBAMN32001");
+    private static final RString 遷移元メニューID_適用_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString 遷移元メニューID_解除 = new RString("DBAMN32002");
     private static final RString 遷移元メニューID_変更 = new RString("DBAMN32003");
 
@@ -62,7 +63,7 @@ public class TekiyoJogaiTotal {
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotal.TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
-        if (遷移元メニューID_適用.equals(menuId)) {
+        if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_適用_転入転出保留対象者管理.equals(menuId)) {
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.適用状態);
         } else if (遷移元メニューID_解除.equals(menuId)) {
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.解除状態);

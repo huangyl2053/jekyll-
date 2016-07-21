@@ -149,13 +149,12 @@ public final class TaishoshaIchiranDivHandler {
             if (row.getTxtRirekiNo() != null && !row.getTxtRirekiNo().isEmpty()) {
                 entity.set履歴番号(Integer.parseInt(row.getTxtRirekiNo().toString()));
             }
-        } else if (共同処理用受給者異動連絡票変更登録.equals(メニューID)
+        } else if ((共同処理用受給者異動連絡票変更登録.equals(メニューID)
                 || 共同処理用受給者異動_訂正連絡票発行.equals(メニューID)
-                || 共同処理用受給者異動連絡票情報照会.equals(メニューID)) {
-            if (row.getTxtTaishoNengetsu().getValue() != null) {
-                entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
-                        getValue().getYearMonth().toString()));
-            }
+                || 共同処理用受給者異動連絡票情報照会.equals(メニューID))
+                && row.getTxtTaishoNengetsu().getValue() != null) {
+            entity.set対象年月(new FlexibleYearMonth(row.getTxtTaishoNengetsu().
+                    getValue().getYearMonth().toString()));
         }
         return entity;
     }

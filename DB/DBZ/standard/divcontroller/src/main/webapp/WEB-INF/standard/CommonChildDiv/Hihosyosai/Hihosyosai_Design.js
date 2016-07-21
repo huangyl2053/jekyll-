@@ -135,24 +135,12 @@ var DBZ;
                 return new UZA.TabPanel(this.convFiledName("tabPnlJyusyoti"));
             };
 
-            Controls.prototype.ccdJyusyotiTokure = function () {
-                return new DBZ.JushochiTokureiRirekiList.ModeController(this.convFiledName("ccdJyusyotiTokure"));
-            };
-
             Controls.prototype.tabPnlShikaku = function () {
                 return new UZA.TabPanel(this.convFiledName("tabPnlShikaku"));
             };
 
-            Controls.prototype.ccdShikakuKanrenIdo = function () {
-                return new DBZ.ShikakuHenkoRireki.ModeController(this.convFiledName("ccdShikakuKanrenIdo"));
-            };
-
             Controls.prototype.tabPnlShisetu = function () {
                 return new UZA.TabPanel(this.convFiledName("tabPnlShisetu"));
-            };
-
-            Controls.prototype.ccdShisetuNyutaisyo = function () {
-                return new DBZ.ShisetsuNyutaishoRirekiKanri.ModeController(this.convFiledName("ccdShisetuNyutaisyo"));
             };
             return Controls;
         })();

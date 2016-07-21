@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shinsainshiharaimeisaisho;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai.ChosaHoshumeisaiReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsainshiharaimeisaisho.ShinsainShiharaimeisaishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBE-1980-046 suguangjun
  */
-public class ShinsainShiharaimeisaishoProperty extends ReportPropertyBase<ChosaHoshumeisaiReportSource> {
+public class ShinsainShiharaimeisaishoProperty extends ReportPropertyBase<ShinsainShiharaimeisaishoReportSource> {
 
     /**
      * インスタンスを生成します。

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko;
 
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printsercive.FutanGendogakuNinteishoPrintSercive;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.FutanGendogakuNinteishoPrintService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,14 +16,16 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.report.GemmenGengakuNinteishoKetteiTsuchisho;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.futangendogakuninteisho.FutanGendogakuNinteishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.homkaigriysfutggengnintsho.HomKaigRiysFutgGengNintshoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.riysfutggengmenjnintsho.RiysFutgGengMenjNintshoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.ShakaifukuRiyoshaFutanKeigenItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.TokubetsuchiikiKasanGemmenItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.futangendogakuketteitsuchisho.FutanGendogakuKetteiTsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.homkaigriysfutggengkettsuchisho.HomKaigRiysFutgGengKettsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.gemgengnintskettsucskobthakko.riysfutggengmenjnintkettsuchisho.RiysFutgGengkMenjNintKetTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100017.HomKaigRiysFutgGengNinteishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.RiysFutgGengMenjNinteishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100022.TokubchiiKasHomKaigRiysFutGengKakuninshoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100011.HomKaigRiysFutgGengKettTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100009.RiysFutgGengMenjKettTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.AtesakiPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.ShikibetsuTaishoPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -34,12 +36,15 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.homonkaigogengaku.H
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenManager;
-import jp.co.ndensan.reams.db.dbd.service.core.ninteikoshintsuchisho.NinteiKoshinTsuchishoService;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printsercive.FutanGendogakuKetteiTsuchishoPrintSercive;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printsercive.HomKaigRiysFutgGengKettsuchishoPrinSercive;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printsercive.HomKaigRiysFutgGengNintshoPrintSercive;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printsercive.RiysFutgGengMenjNintshoPrintSercive;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printsercive.RiysFutgGengkMenjNintKetTsuchishoPrintSercive;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.FutanGendogakuKetteiTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutGenｍKettTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutgGengKettsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutgGengNintshoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.RiysFutgGengMenjNinteishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.RiysFutgGengMenjKettTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.ShakfukusRiysFutKeigTaisKakuninshoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.TokubChiiKasRiysFutGengKakuninshoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -138,167 +143,175 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
         List<DbT7067ChohyoSeigyoHanyoEntity> dbT7067EntityList = load帳票制御汎用(帳票分類ID);
         Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
         List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプリスト);
+        for (RString 帳票タイプ : 帳票タイプリスト) {
+            if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除等認定証.get名称().equals(帳票タイプ)) {
+                RiyoshaFutangakuGengaku 利用者負担額減額情報 = getRiyoshaFutanGengaku(
+                        被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
+                RiysFutgGengMenjNinteishoItem item = new RiysFutgGengMenjNinteishoItem(
+                        利用者負担額減額情報,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        交付日,
+                        発行日,
+                        帳票分類ID,
+                        ninshosha);
+                RiysFutgGengMenjNinteishoPrintService service = new RiysFutgGengMenjNinteishoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプ)) {
+                RiyoshaFutangakuGengaku 利用者負担額減額情報 = getRiyoshaFutanGengaku(
+                        被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
+                RiysFutgGengMenjKettTsuchishoItem item = new RiysFutgGengMenjKettTsuchishoItem(
+                        利用者負担額減額情報,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        発行日,
+                        文書番号,
+                        通知書定型文List,
+                        帳票分類ID,
+                        ninshosha);
+                RiysFutgGengMenjKettTsuchishoPrintService service = new RiysFutgGengMenjKettTsuchishoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額認定証.get名称().equals(帳票タイプ)) {
+                FutanGendogakuNintei 負担限度額認定 = getFutanGendogaKunintei(被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード(), 履歴番号);
+                FutanGendogakuNinteishoItem item = new FutanGendogakuNinteishoItem(
+                        負担限度額認定,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        交付日,
+                        発行日,
+                        帳票分類ID,
+                        ninshosha);
+                FutanGendogakuNinteishoPrintService service = new FutanGendogakuNinteishoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプ)) {
+                FutanGendogakuNintei 負担限度額認定 = getFutanGendogaKunintei(被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード(), 履歴番号);
+                FutanGendogakuKetteiTsuchishoItem item = new FutanGendogakuKetteiTsuchishoItem(
+                        負担限度額認定,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        発行日,
+                        文書番号,
+                        通知書定型文List,
+                        帳票分類ID,
+                        ninshosha);
+                FutanGendogakuKetteiTsuchishoPrintService service = new FutanGendogakuKetteiTsuchishoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護利用者負担額減額認定証.get名称().equals(帳票タイプ)) {
+                HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額 = getHomonKaigoGengaku(
+                        被保険者番号, GemmenGengakuShurui.訪問介護利用者負担額減額.getコード(), 履歴番号);
+                HomKaigRiysFutgGengNinteishoItem item = new HomKaigRiysFutgGengNinteishoItem(
+                        訪問介護利用者負担額減額,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        交付日,
+                        発行日,
+                        帳票分類ID,
+                        ninshosha);
+                HomKaigRiysFutgGengNintshoPrintService service = new HomKaigRiysFutgGengNintshoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護等利用者負担額減額決定通知書.get名称().equals(帳票タイプ)) {
+                HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額 = getHomonKaigoGengaku(
+                        被保険者番号, GemmenGengakuShurui.訪問介護利用者負担額減額.getコード(), 履歴番号);
+                HomKaigRiysFutgGengKettTsuchishoItem item = new HomKaigRiysFutgGengKettTsuchishoItem(
+                        訪問介護利用者負担額減額,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        発行日,
+                        文書番号,
+                        通知書定型文List,
+                        帳票分類ID,
+                        ninshosha);
+                HomKaigRiysFutgGengKettsuchishoPrintService service = new HomKaigRiysFutgGengKettsuchishoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減対象確認証.get名称().equals(帳票タイプ)) {
 
-        if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除等認定証.get名称().equals(帳票タイプリスト.get(0))) {
-            RiyoshaFutangakuGengaku 利用者負担額減額情報
-                    = getRiyoshaFutanGengaku(被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
-            List<RiysFutgGengMenjNintshoItem> itemList = new ArrayList<>();
-            RiysFutgGengMenjNintshoItem item = new RiysFutgGengMenjNintshoItem(
-                    利用者負担額減額情報,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    交付日,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            RiysFutgGengMenjNintshoPrintSercive service = new RiysFutgGengMenjNintshoPrintSercive();
-            service.print(itemList, reportManager);
-        }
-        if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
-            RiyoshaFutangakuGengaku 利用者負担額減額情報
-                    = getRiyoshaFutanGengaku(被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
-            List<RiysFutgGengkMenjNintKetTsuchishoItem> itemList = new ArrayList<>();
-            RiysFutgGengkMenjNintKetTsuchishoItem item = new RiysFutgGengkMenjNintKetTsuchishoItem(
-                    利用者負担額減額情報,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    発行日,
-                    文書番号,
-                    通知書定型文List,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            RiysFutgGengkMenjNintKetTsuchishoPrintSercive service = new RiysFutgGengkMenjNintKetTsuchishoPrintSercive();
-            service.print(itemList, reportManager);
-        }
-        if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額認定証.get名称().equals(帳票タイプリスト.get(0))) {
-            FutanGendogakuNintei 負担限度額認定 = getFutanGendogaKunintei(被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード(), 履歴番号);
-            List<FutanGendogakuNinteishoItem> itemList = new ArrayList<>();
-            FutanGendogakuNinteishoItem item = new FutanGendogakuNinteishoItem(
-                    負担限度額認定,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    交付日,
-                    発行日,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            FutanGendogakuNinteishoPrintSercive service = new FutanGendogakuNinteishoPrintSercive();
-            service.print(itemList, reportManager);
-        }
-        if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
-            FutanGendogakuNintei 負担限度額認定 = getFutanGendogaKunintei(被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード(), 履歴番号);
-            List<FutanGendogakuKetteiTsuchishoItem> itemList = new ArrayList<>();
-            FutanGendogakuKetteiTsuchishoItem item = new FutanGendogakuKetteiTsuchishoItem(
-                    負担限度額認定,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    発行日,
-                    文書番号,
-                    通知書定型文List,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            FutanGendogakuKetteiTsuchishoPrintSercive service = new FutanGendogakuKetteiTsuchishoPrintSercive();
-            service.print(itemList, reportManager);
-        }
-        if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護利用者負担額減額認定証.get名称().equals(帳票タイプリスト.get(0))) {
-            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額
-                    = getHomonKaigoGengaku(被保険者番号, GemmenGengakuShurui.訪問介護利用者負担額減額.getコード(), 履歴番号);
-            List<HomKaigRiysFutgGengNintshoItem> itemList = new ArrayList<>();
-            HomKaigRiysFutgGengNintshoItem item = new HomKaigRiysFutgGengNintshoItem(
-                    訪問介護利用者負担額減額,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    交付日,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            HomKaigRiysFutgGengNintshoPrintSercive service = new HomKaigRiysFutgGengNintshoPrintSercive();
-            service.print(itemList, reportManager);
-        }
-        if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護等利用者負担額減額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
-            HomonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額
-                    = getHomonKaigoGengaku(被保険者番号, GemmenGengakuShurui.訪問介護利用者負担額減額.getコード(), 履歴番号);
-            List<HomKaigRiysFutgGengKettsuchishoItem> itemList = new ArrayList<>();
-            HomKaigRiysFutgGengKettsuchishoItem item = new HomKaigRiysFutgGengKettsuchishoItem(
-                    訪問介護利用者負担額減額,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    発行日,
-                    文書番号,
-                    通知書定型文List,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            HomKaigRiysFutgGengKettsuchishoPrinSercive service = new HomKaigRiysFutgGengKettsuchishoPrinSercive();
-            service.print(itemList, reportManager);
-        }
-        if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減対象確認証.get名称().equals(帳票タイプリスト.get(0))
-                || GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
-
-            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減
-                    = getShafukuKeigen(被保険者番号, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 履歴番号);
-            List<ShakaifukuRiyoshaFutanKeigenItem> itemList = new ArrayList<>();
-            ShakaifukuRiyoshaFutanKeigenItem item = new ShakaifukuRiyoshaFutanKeigenItem(
-                    社会福祉法人等利用者負担軽減,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    発行日,
-                    文書番号,
-                    通知書定型文List,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
-            //  service.print(itemList, reportManager);
-        }
-
-        if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算に係る訪問介護利用者負担減額確認証.get名称().equals(帳票タイプリスト.get(0))
-                || GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
-            TokubetsuchiikiKasanGemmen 特別地域加算減免
-                    = getTokubetsuChikiKasanGemmen(被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード(), 履歴番号);
-            List<TokubetsuchiikiKasanGemmenItem> itemList = new ArrayList<>();
-            TokubetsuchiikiKasanGemmenItem item = new TokubetsuchiikiKasanGemmenItem(
-                    特別地域加算減免,
-                    ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
-                    AtesakiFactory.createInstance(uaFt250Entity),
-                    new ChohyoSeigyoKyotsu(dbT7065Entity),
-                    dbT7067EntityList,
-                    association,
-                    発行日,
-                    文書番号,
-                    通知書定型文List,
-                    帳票分類ID,
-                    ninshosha);
-            itemList.add(item);
-            NinteiKoshinTsuchishoService service = new NinteiKoshinTsuchishoService();
-            //  service.print(itemList, reportManager);
+                ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減 = getShafukuKeigen(
+                        被保険者番号, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 履歴番号);
+                ShakfukusRiysFutKeigTaisKakuninshoItem item = new ShakfukusRiysFutKeigTaisKakuninshoItem(
+                        社会福祉法人等利用者負担軽減,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        交付日,
+                        発行日,
+                        帳票分類ID,
+                        ninshosha);
+                ShakfukusRiysFutKeigTaisKakuninshoPrintService service = new ShakfukusRiysFutKeigTaisKakuninshoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減決定通知書.get名称().equals(帳票タイプ)) {
+                ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減 = getShafukuKeigen(
+                        被保険者番号, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード(), 履歴番号);
+                ShakFuksHjRiysFutKgTsKtTsuchishoItem item = new ShakFuksHjRiysFutKgTsKtTsuchishoItem(
+                        社会福祉法人等利用者負担軽減,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        発行日,
+                        文書番号,
+                        通知書定型文List,
+                        帳票分類ID,
+                        ninshosha);
+                ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService service = new ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算に係る訪問介護利用者負担減額確認証.get名称().equals(帳票タイプ)) {
+                TokubetsuchiikiKasanGemmen 特別地域加算減免 = getTokubetsuChikiKasanGemmen(
+                        被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード(), 履歴番号);
+                TokubchiiKasHomKaigRiysFutGengKakuninshoItem item = new TokubchiiKasHomKaigRiysFutGengKakuninshoItem(
+                        特別地域加算減免,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        交付日,
+                        発行日,
+                        帳票分類ID,
+                        ninshosha);
+                TokubChiiKasRiysFutGengKakuninshoPrintService service = new TokubChiiKasRiysFutGengKakuninshoPrintService();
+                service.print(item, reportManager);
+            } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプ)) {
+                TokubetsuchiikiKasanGemmen 特別地域加算減免 = getTokubetsuChikiKasanGemmen(
+                        被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード(), 履歴番号);
+                HomKaigRiysFutGenｍKettTsuchishoItem item = new HomKaigRiysFutGenｍKettTsuchishoItem(
+                        特別地域加算減免,
+                        ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
+                        AtesakiFactory.createInstance(uaFt250Entity),
+                        new ChohyoSeigyoKyotsu(dbT7065Entity),
+                        dbT7067EntityList,
+                        association,
+                        交付日,
+                        文書番号,
+                        通知書定型文List,
+                        帳票分類ID,
+                        ninshosha);
+                HomKaigRiysFutGenｍKettTsuchishoPrintService service = new HomKaigRiysFutGenｍKettTsuchishoPrintService();
+                service.print(item, reportManager);
+            }
         }
     }
 
-    // 3.SourceDataCollectionの返却
     /**
      * 発行履歴の登録
      *
@@ -311,7 +324,6 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
         IHakkoRirekiManager manager = HakkoRirekiManagerFactory.createInstance();
         List<ShikibetsuCode> shikibetsuCodeList = new ArrayList<>();
         shikibetsuCodeList.add(識別コード);
-
         manager.insert帳票発行履歴(
                 sourceData,
                 new FlexibleDate(発行日.toDateString()),
@@ -337,7 +349,6 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
             } else if (TeikeibunMojiSize.フォント上大下小.getコード().equals(dbT7065Entity.getTeikeibunMojiSize())) {
                 パターン番号 = パターン番号_４;
             }
-
             Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票分類ID, KamokuCode.EMPTY, パターン番号);
             for (Map.Entry<Integer, RString> entry : 通知文Map.entrySet()) {
                 通知書定型文List.add(entry.getValue());
@@ -459,6 +470,6 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
 
     private Ninshosha get認証者情報(FlexibleDate kaisiYMD) {
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        return ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), kaisiYMD);
+        return ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), kaisiYMD);
     }
 }

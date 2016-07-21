@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistparam.HanyoListParamBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho.HanyoListShotokuJohoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220002.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.NenreiSoCh
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -76,10 +77,10 @@ public class HanyoListParamHandler {
     /**
      * 実行ボタンイベント。
      *
-     * @return HanyoListParamBatchParameter
+     * @return HanyoListShotokuJohoBatchParameter
      */
-    public HanyoListParamBatchParameter onClick_btnExecute() {
-        HanyoListParamBatchParameter parameter = new HanyoListParamBatchParameter();
+    public HanyoListShotokuJohoBatchParameter onClick_btnExecute() {
+        HanyoListShotokuJohoBatchParameter parameter = new HanyoListShotokuJohoBatchParameter();
         if (div.getCcdShutsuryokujun() != null) {
             ReportId 帳票ID = div.getCcdShutsuryokujun().get帳票ID();
             parameter.set帳票ID(帳票ID);
@@ -111,8 +112,8 @@ public class HanyoListParamHandler {
             parameter.set賦課年度(賦課年度);
         }
         if (div.getChushutsuJokenPanel() != null && div.getChushutsuJokenPanel().getTxtChushutsuKikan() != null) {
-            parameter.set抽出期間From(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue());
-            parameter.set抽出期間To(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue());
+            parameter.set抽出期間From(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getFromValue().toDateString()));
+            parameter.set抽出期間To(new YMDHMS(div.getChushutsuJokenPanel().getTxtChushutsuKikan().getToValue().toDateString()));
         }
         課税区分減免前後(parameter);
         宛名抽出条件と出力順と出力項目(parameter);
@@ -122,9 +123,9 @@ public class HanyoListParamHandler {
     /**
      * 課税区分減免前後
      *
-     * @param parameter HanyoListParamBatchParameter
+     * @param parameter HanyoListShotokuJohoBatchParameter
      */
-    private void 課税区分減免前後(HanyoListParamBatchParameter parameter) {
+    private void 課税区分減免前後(HanyoListShotokuJohoBatchParameter parameter) {
         RString code = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         parameter.set住民税減免前後表示区分(code);
@@ -181,9 +182,9 @@ public class HanyoListParamHandler {
     /**
      * 宛名抽出条件と出力順と出力項目
      *
-     * @param parameter HanyoListParamBatchParameter
+     * @param parameter HanyoListShotokuJohoBatchParameter
      */
-    private void 宛名抽出条件と出力順と出力項目(HanyoListParamBatchParameter parameter) {
+    private void 宛名抽出条件と出力順と出力項目(HanyoListShotokuJohoBatchParameter parameter) {
         AtenaSelectBatchParameter 宛名抽出条件 = new AtenaSelectBatchParameter();
         if (div.getChushutsuPanel2() != null && div.getChushutsuPanel2().getCcdAtenaJoken() != null) {
             NenreiSoChushutsuHoho 年齢層抽出方法 = div.getChushutsuPanel2().getCcdAtenaJoken().get年齢層抽出方法();

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * ShoriKakunin のクラスファイル
  *
- * @reamsid_L DBB-1760-010 quxiaodong
+ * @reamsid_L DBB-0920-010 quxiaodong
  */
 public class ShoriKakuninDiv extends Panel {
 

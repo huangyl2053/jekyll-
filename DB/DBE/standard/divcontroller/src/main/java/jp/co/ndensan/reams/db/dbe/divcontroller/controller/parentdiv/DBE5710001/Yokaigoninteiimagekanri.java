@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.DBE5710001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.YokaigoninteiimagekanriDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -53,20 +54,21 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onLoad(YokaigoninteiimagekanriDiv div) {
-//        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo("20160000000000010");
-        RDateTime イメージ共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
         div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
+        div.setHdnShinseishoKanriNo(イメージ管理情報.get申請書管理番号().value());
+        div.setHdnNinteichosaRirekiNo(new RString(イメージ管理情報.get認定調査依頼履歴番号()));
+        div.setHdnGaikyoChosaTextImageKubun(イメージ管理情報.get概況調査テキストイメージ区分());
         init_SetDisabled(div);
         init_SetValue(div, イメージ管理情報);
-        if (イメージ共有ファイルID != null && hasその他資料イメージ(イメージ共有ファイルID)) {
+        if (イメージ管理情報.getイメージ共有ファイルID() != null && hasその他資料イメージ(イメージ管理情報.getイメージ共有ファイルID())) {
             div.getRadSonota().setSelectedIndex(0);
         } else {
             div.getRadSonota().setSelectedIndex(1);
         }
-        if (イメージ共有ファイルID != null) {
+        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), true);
             if ((イメージ管理情報.get認定審査会完了年月日() == null || イメージ管理情報.get認定審査会完了年月日().isEmpty())
                     && (イメージ管理情報.getセンター送信年月日() == null || イメージ管理情報.getセンター送信年月日().isEmpty())) {
@@ -82,9 +84,20 @@ public class Yokaigoninteiimagekanri {
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnGaikyoTokuki(YokaigoninteiimagekanriDiv div) {
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnImageOutput(YokaigoninteiimagekanriDiv div) {
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.要介護認定イメージ情報出力へ).respond();
+    }
+
+    /**
+     * 調査票特記ボタンをクリックします。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnImageDelete(YokaigoninteiimagekanriDiv div) {
+
+        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.要介護認定イメージ情報削除へ).respond();
     }
 
     /**
@@ -105,7 +118,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoGaikyo(YokaigoninteiimagekanriDiv div) {
-
+//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
         return ResponseData.of(div).respond();
     }
 
@@ -116,7 +129,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkensho(YokaigoninteiimagekanriDiv div) {
-
+//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
         return ResponseData.of(div).respond();
     }
 
@@ -127,7 +140,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnSonota(YokaigoninteiimagekanriDiv div) {
-
+//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
         return ResponseData.of(div).respond();
     }
 
@@ -168,6 +181,7 @@ public class Yokaigoninteiimagekanri {
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(その他資料ファイル), イメージ共有ファイルID);
             try {
                 SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
+                return true;
             } catch (SystemException e) {
                 hasImage = false;
             }
@@ -177,17 +191,17 @@ public class Yokaigoninteiimagekanri {
 
     private List<RString> getその他資料ファイル名() {
         List<RString> その他資料ファイル名 = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder(その他資料);
-        getその他資料ファイル名(builder, その他資料ファイル名, その他資料1);
-        getその他資料ファイル名(builder, その他資料ファイル名, その他資料2);
-        getその他資料ファイル名(builder, その他資料ファイル名, その他資料3);
-        getその他資料ファイル名(builder, その他資料ファイル名, その他資料4);
-        getその他資料ファイル名(builder, その他資料ファイル名, その他資料5);
-        getその他資料ファイル名(builder, その他資料ファイル名, その他資料6);
+        getその他資料ファイル名(その他資料ファイル名, その他資料1);
+        getその他資料ファイル名(その他資料ファイル名, その他資料2);
+        getその他資料ファイル名(その他資料ファイル名, その他資料3);
+        getその他資料ファイル名(その他資料ファイル名, その他資料4);
+        getその他資料ファイル名(その他資料ファイル名, その他資料5);
+        getその他資料ファイル名(その他資料ファイル名, その他資料6);
         return その他資料ファイル名;
     }
 
-    private void getその他資料ファイル名(RStringBuilder builder, List<RString> その他資料ファイル名, RString その他資料種別) {
+    private void getその他資料ファイル名(List<RString> その他資料ファイル名, RString その他資料種別) {
+        RStringBuilder builder = new RStringBuilder(その他資料);
         for (int i = 1; i <= その他資料MAX; i++) {
             builder.append(その他資料種別);
             builder.append(i);

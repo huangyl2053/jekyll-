@@ -19,13 +19,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -53,9 +51,6 @@ public class KoikinaiTenkyoRirekiHenkan {
      * @return ResponseData<KoikinaiTenkyoRirekiHenkanDiv>
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onLoad(KoikinaiTenkyoRirekiHenkanDiv div) {
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            throw new PessimisticLockingException();
-        }
         getHandler(div).setOnLoad();
         return ResponseData.of(div).respond();
     }
@@ -113,16 +108,15 @@ public class KoikinaiTenkyoRirekiHenkan {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             updateDbT5101NinteiShinseiJoho(div);
-            前排他キーの解除(SHINSEISHOKANRINO);
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE1720001StateName.完了);
         }
-        前排他キーの解除(SHINSEISHOKANRINO);
         return ResponseData.of(div).respond();
     }
 
@@ -172,16 +166,6 @@ public class KoikinaiTenkyoRirekiHenkan {
         return new KoikinaiTenkyoRirekiValidationHandler(div);
     }
 
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
-    }
-
     private List<KeyValueDataSource> createListFromDbT7051KoseiShichosonMaster() {
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
         return koikinaitenkyofinder.creatListFromDbT7051().records();
@@ -196,12 +180,14 @@ public class KoikinaiTenkyoRirekiHenkan {
                     dataGridList.get(index).getShinseishoKanriNo());
             RString shokisaihokenshaNo = dataGridList.get(index).getShoKisaiHokenshaNo();
             boolean flag = true;
-            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo).isEmpty()) {
+            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo) == null) {
                 flag = false;
             }
             if (状態_更新.equals(state)) {
                 upDateNinteiShinseiJoho(shinseishoKanriNo, shokisaihokenshaNo, false);
-                upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                if (flag) {
+                    upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                }
             }
         }
     }

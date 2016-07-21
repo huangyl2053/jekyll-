@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param;
 
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 保険料段階判定（機能見直し）パラメータ作成のクラスです。
  *
- * @reamsid_L DBB-0940-020 cuilin
+ * @reamsid_L DBB-9040-020 cuilin
  */
 public class SeigyojohoFactory {
 

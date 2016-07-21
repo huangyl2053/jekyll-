@@ -22,7 +22,7 @@ public class ChosahoshuichiranReport extends Report<ChosahoshuichiranReportSourc
     /**
      * インスタンスを生成します。
      *
-     * @param data NinteiChosaHoshuShokaiCsvEntity
+     * @param data 認定調査報酬照会帳票のたEntity
      */
     public ChosahoshuichiranReport(NinteiChosaHoshuShokaiCsvEntity data) {
         this.data = data;

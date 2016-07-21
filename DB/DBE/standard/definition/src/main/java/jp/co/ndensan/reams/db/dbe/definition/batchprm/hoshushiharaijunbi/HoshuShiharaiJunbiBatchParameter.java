@@ -5,7 +5,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.Hoshu
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +28,9 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
     private static final String CHK_SHINSAKAI = "chkshinsakai";
 
     @BatchParameter(key = JISSEKIDATERANGE_FROM, name = "実績期間From")
-    private RDateTime jissekidaterangefrom;
+    private FlexibleDate jissekidaterangefrom;
     @BatchParameter(key = JISSEKIDATERANGE_TO, name = "実績期間To")
-    private RDateTime jissekidaterangeto;
+    private FlexibleDate jissekidaterangeto;
     @BatchParameter(key = FURIKOMI_SHITEIDAY, name = "振込指定日")
     private FlexibleDate furikomishiteiday;
     @BatchParameter(key = CHK_CHOSA, name = "認定調査報酬対象")
@@ -59,13 +58,12 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
      * @param chkshinsakai 審査会委員報酬対象
      */
     public HoshuShiharaiJunbiBatchParameter(
-            RDateTime jissekidaterangefrom,
-            RDateTime jissekidaterangeto,
+            FlexibleDate jissekidaterangefrom,
+            FlexibleDate jissekidaterangeto,
             FlexibleDate furikomishiteiday,
             List<RString> chkchosa,
             List<RString> chkshujii,
-            List<RString> chkshinsakai
-    ) {
+            List<RString> chkshinsakai) {
         this.jissekidaterangefrom = jissekidaterangefrom;
         this.jissekidaterangeto = jissekidaterangeto;
         this.furikomishiteiday = furikomishiteiday;
@@ -85,7 +83,6 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
                 furikomishiteiday,
                 chkchosa,
                 chkshujii,
-                chkshinsakai
-        );
+                chkshinsakai);
     }
 }

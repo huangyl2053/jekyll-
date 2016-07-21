@@ -628,13 +628,13 @@
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
             ON DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS Zen_DbT5101NinteiShinseiJoho
-            ON Zen_DbT5101NinteiShinseiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zen_DbT5101NinteiShinseiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS Zen_DbT5102NinteiKekkaJoho
-            ON Zen_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zen_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS Zen_DbT5121ShinseiRirekiJoho	
-            ON Zen_DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zen_DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS Zenku_DbT5102NinteiKekkaJoho
-            ON Zenku_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=Zen_DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zenku_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=Zen_DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116IchijiHanteiKekkaJoho
             ON DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo"=DbT5102NinteiKekkaJoho."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203NinteichosahyoKihonChosa

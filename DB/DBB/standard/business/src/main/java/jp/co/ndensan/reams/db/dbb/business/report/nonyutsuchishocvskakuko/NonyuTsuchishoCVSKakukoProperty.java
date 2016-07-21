@@ -40,7 +40,14 @@ public class NonyuTsuchishoCVSKakukoProperty extends ReportPropertyBase<NonyuTsu
             Breakers<NonyuTsuchishoCVSKakukoSource> breakers,
             BreakerCatalog<NonyuTsuchishoCVSKakukoSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
+
+
+
+
+
+
 
 
 

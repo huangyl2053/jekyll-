@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jul 11 17:11:17 CST 2016 
+ * Tue Jul 12 20:49:26 CST 2016 
  */
 
 

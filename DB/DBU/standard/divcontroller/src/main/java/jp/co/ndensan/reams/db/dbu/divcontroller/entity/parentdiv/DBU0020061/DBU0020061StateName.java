@@ -34,5 +34,6 @@ public enum DBU0020061StateName implements IStateEnumerations {
     public RString getName() {
         return name;
     }
+
 // </editor-fold>
 }
