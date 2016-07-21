@@ -145,9 +145,9 @@ public class ShinsakauIinHoshuShokaiHandler {
         報酬合計 = new RString(div.getTxtHoshuGokei().toString());
         param.setShinsakaiKaisaiYMD(new RString(div.getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
         param.setShisakaisu(審査回数);
-        param.setShisakaisu(報酬総額);
-        param.setShisakaisu(税額控除);
-        param.setShisakaisu(報酬合計);
+        param.setHosyusogaku(報酬総額);
+        param.setSegakukojyo(税額控除);
+        param.setHosyugoke(報酬合計);
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }
