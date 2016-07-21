@@ -155,6 +155,9 @@ public class TokuchoTaishoshaIchiranHandler {
         return result;
     }
 
+    /**
+     * 同定非同定表示に戻るinitializeのメソッドです。
+     */
     public void 同定非同定表示に戻るinitialize() {
         RDate nowDate = RDate.getNowDate();
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課);

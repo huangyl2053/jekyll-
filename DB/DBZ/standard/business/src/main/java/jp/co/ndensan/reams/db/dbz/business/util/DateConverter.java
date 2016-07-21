@@ -34,11 +34,40 @@ public final class DateConverter {
     private static final int NUM_8 = 8;
     private static final int NUM_6 = 6;
     private static final int NUM_4 = 4;
+    private static final RString 月 = new RString("月");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
+
     private static final RString FULLZERO = new RString("00");
     private static final RString HALFZERO = new RString("#0");
+
+    /**
+     * "1"(月)-->"01" ,"10"(月)-->"10"<br/>
+     *
+     * @param month Integer
+     * @return RString
+     */
+    public static RString formatMonthFull(RString month) {
+        if (RString.isNullOrEmpty(month)) {
+            return RString.EMPTY;
+        }
+        month = month.replace(月, RString.EMPTY);
+        return new RString(new Decimal(month.toString()).toString("00"));
+    }
+
+    /**
+     * 1(月)-->"01" ,10(月)-->"10"<br/>
+     *
+     * @param month Integer
+     * @return RString
+     */
+    public static RString formatMonthFull(Integer month) {
+        if (month == null) {
+            return RString.EMPTY;
+        }
+        return new RString(new Decimal(month).toString("00"));
+    }
 
     /**
      * 引数で指定された日付を和暦年月日（前半角スペース埋め）に編集し返却します。<br />
