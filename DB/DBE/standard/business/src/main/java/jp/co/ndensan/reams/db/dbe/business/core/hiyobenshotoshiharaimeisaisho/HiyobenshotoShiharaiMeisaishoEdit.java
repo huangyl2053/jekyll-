@@ -33,7 +33,7 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
     public HiyobenshotoShiharaimeisaisho getHiyobenshotoShiharaiMeisai(HoshuShiharaiJunbiRelateEntity entity, List<Koza> koza) {
         HiyobenshotoShiharaimeisaisho meisaiJoho = new HiyobenshotoShiharaimeisaisho();
         Decimal 差引支払額 = new Decimal(entity.getHoshu()).subtract(entity.getShinsakaiKojoZeigaku());
-        meisaiJoho.set審査会委員氏名(entity.getChosainShimei());
+        meisaiJoho.set審査会委員氏名(entity.getShinsakaiIinShimei().value());
         meisaiJoho.set報酬(new RString(entity.getHoshu()));
         meisaiJoho.set費用弁償(new RString(entity.getShinsakaiKotsuhi()));
         meisaiJoho.set所得税(new RString(entity.getShinsakaiKojoZeigaku()));
