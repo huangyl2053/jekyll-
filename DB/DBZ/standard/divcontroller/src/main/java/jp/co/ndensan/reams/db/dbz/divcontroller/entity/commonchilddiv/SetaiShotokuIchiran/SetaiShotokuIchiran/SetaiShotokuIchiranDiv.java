@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
  * @author 自動生成
  */
 public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchiranDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -370,7 +370,10 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
 
     @JsonIgnore
     private SetaiShotokuIchiranHandler getHandler() {
-        return new SetaiShotokuIchiranHandler(this);
+        SetaiShotokuIchiranHandler handler = new SetaiShotokuIchiranHandler(this);
+        List<SetaiinShotoku> setaiinShotokuList = handler.get世帯員所得Data(new ShikibetsuCode(this.getTxtShikibetsuCode()), YMDHMS.now());
+        handler.accessLog(setaiinShotokuList);
+        return handler;
     }
 
 }
