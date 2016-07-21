@@ -1,4 +1,4 @@
-
+# directory
 obj/
 bin/
 target/
@@ -8,6 +8,7 @@ build/
 d.ts/
 DB-jp/
 
+# extension
 *.map
 *.dll
 *.class
@@ -18,6 +19,9 @@ DB-jp/
 *.user
 *.iml
 *.log
+*.d.ts
+
+# file
 nb-configuration.xml
 myBatisSettings.properties
-d.ts
+db#db[abcdeuxz]_request\.data
