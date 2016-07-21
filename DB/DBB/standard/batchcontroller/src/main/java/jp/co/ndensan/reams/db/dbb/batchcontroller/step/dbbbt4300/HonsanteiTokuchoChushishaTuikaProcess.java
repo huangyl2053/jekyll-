@@ -21,7 +21,7 @@ public class HonsanteiTokuchoChushishaTuikaProcess extends SimpleBatchProcessBas
 
     @Override
     protected void beforeExecute() {
-        business = new HonnSanteiFuka();
+        business = HonnSanteiFuka.createInstance();
     }
 
     @Override

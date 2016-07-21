@@ -28,7 +28,6 @@ public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKi
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
-    private final int renban;
 
     private static final RString EN = new RString("円");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
@@ -56,15 +55,12 @@ public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKi
      *
      * @param item {@link HonSanteiNonyuTsuchiShoJoho}
      * @param ninshoshaSource NinshoshaSource
-     * @param renban int
      */
     protected NonyuTsuchishoCVSKigotoRenchoEditor(
             HonSanteiNonyuTsuchiShoJoho item,
-            NinshoshaSource ninshoshaSource,
-            int renban) {
+            NinshoshaSource ninshoshaSource) {
         this.item = item;
         this.ninshoshaSource = ninshoshaSource;
-        this.renban = renban;
     }
 
     @Override
@@ -171,7 +167,7 @@ public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKi
         source.keisanMeisaishYen2 = EN;
         source.keisanMeisaishoKomokuTitle2 = TSUGIKI_IKOU;
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            RString thisRenban = new RString(renban).padZeroToLeft(INT_6);
+            RString thisRenban = new RString(item.get連番()).padZeroToLeft(INT_6);
             source.keisanMeisaishoShikibtsuBango = new RString("F-").concat(thisRenban).concat("-2");
             source.notsuShikibtsuBango = new RString("F-").concat(thisRenban).concat("-1");
         }
@@ -243,7 +239,7 @@ public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKi
         source.biko11 = RString.EMPTY;
         source.biko21 = RString.EMPTY;
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            RString thisRenban = new RString(renban).padZeroToLeft(INT_6);
+            RString thisRenban = new RString(item.get連番()).padZeroToLeft(INT_6);
             source.funyuFukanBango1 = new RString("F-").concat(thisRenban).concat("-3");
         }
     }
@@ -332,7 +328,7 @@ public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKi
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名() != null) {
-            source.kaisanMeisaishoHihokenshaName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
+            source.kaisanMeisaishoSetaiNushiName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯コード() != null) {
@@ -375,25 +371,20 @@ public class NonyuTsuchishoCVSKigotoRenchoEditor implements INonyuTsuchishoCVSKi
         if (item.get編集後本算定通知書共通情報().get更正後() != null
                 && item.get編集後本算定通知書共通情報().get更正後().get普徴期別金額リスト() != null) {
             List<UniversalPhase> 普徴期別金額リスト = item.get編集後本算定通知書共通情報().get更正後().get普徴期別金額リスト();
-            UniversalPhase 普徴期別金額１ = null;
-            UniversalPhase 普徴期別金額２ = null;
-            if (item.get出力期リスト() != null
-                    && item.get出力期リスト().get(0) != null
-                    && item.get出力期リスト().get(0).get期() != null) {
-                普徴期別金額１ = 普徴期別金額リスト.get(item.get出力期リスト().get(0).get期AsInt());
-                普徴期別金額２ = 普徴期別金額リスト.get(item.get出力期リスト().get(0).get期AsInt() + 1);
-            }
 
-            if (普徴期別金額１ != null
-                    && 普徴期別金額１.get金額() != null) {
-                source.keisanMeisaishoNofuGaku1
-                        = new RString(普徴期別金額１.get金額().toString());
-            }
-
-            if (普徴期別金額２ != null
-                    && 普徴期別金額２.get金額() != null) {
-                source.keisanMeisaishoNofuGaku2
-                        = new RString(普徴期別金額２.get金額().toString());
+            for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
+                if (item.get出力期リスト() != null
+                        && item.get出力期リスト().get(0) != null
+                        && item.get出力期リスト().get(0).get期AsInt() == 普徴期別金額.get期()) {
+                    source.keisanMeisaishoNofuGaku1
+                            = new RString(普徴期別金額.get金額().toString());
+                }
+                if (item.get出力期リスト() != null
+                        && item.get出力期リスト().get(0) != null
+                        && item.get出力期リスト().get(0).get期AsInt() + 1 == 普徴期別金額.get期()) {
+                    source.keisanMeisaishoNofuGaku2
+                            = new RString(普徴期別金額.get金額().toString());
+                }
             }
         }
     }

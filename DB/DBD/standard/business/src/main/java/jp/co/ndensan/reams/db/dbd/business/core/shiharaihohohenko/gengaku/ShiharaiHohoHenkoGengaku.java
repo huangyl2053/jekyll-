@@ -83,11 +83,11 @@ public class ShiharaiHohoHenkoGengaku
                 entity.get支払方法変更減額Entity().getHihokenshaNo(),
                 entity.get支払方法変更減額Entity().getKanriKubun(),
                 entity.get支払方法変更減額Entity().getRirekiNo());
-        List<ShiharaiHohoHenkoGengakuMeisai> shiharaiHohoHenkoGengakuMeisaiList = new ArrayList<>();
+        List<ShiharaiHohoHenkoGengakuMeisai> gengakuMeisaiList = new ArrayList<>();
         for (DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity niniEntity : entity.get支払方法変更減額明細Entity()) {
-            shiharaiHohoHenkoGengakuMeisaiList.add(new ShiharaiHohoHenkoGengakuMeisai(niniEntity));
+            gengakuMeisaiList.add(new ShiharaiHohoHenkoGengakuMeisai(niniEntity));
         }
-        this.shiharaiHohoHenkoGengakuMeisai = Models.create(shiharaiHohoHenkoGengakuMeisaiList);
+        this.shiharaiHohoHenkoGengakuMeisai = Models.create(gengakuMeisaiList);
     }
 
     // </editor-fold>
@@ -211,7 +211,7 @@ public class ShiharaiHohoHenkoGengaku
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

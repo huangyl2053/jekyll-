@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -67,6 +68,12 @@ public class FukaErrorReportView {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_LINE = new RString("_");
     private static final RString CSV = new RString(".csv");
+    private static final RString DBBWF33004 = new RString("DBBWF33004");
+    private static final RString DBBWF34004 = new RString("DBBWF34004");
+    private static final RString DBBWF36004 = new RString("DBBWF36004");
+    private static final RString DBBWF43004 = new RString("DBBWF43004");
+    private static final RString DBBWF44004 = new RString("DBBWF44004");
+    private static final RString DBBWF45004 = new RString("DBBWF45004");
     private static final int TWO = 2;
 
     /**
@@ -76,8 +83,14 @@ public class FukaErrorReportView {
      * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
-
-        RString batchID = FlowParameterAccessor.get().get(BATCHID_FUKAERROR, RString.class);
+        RString batchID;
+        if (ResponseHolder.getFlowId().equals(DBBWF33004) || ResponseHolder.getFlowId().equals(DBBWF34004)
+                || ResponseHolder.getFlowId().equals(DBBWF36004) || ResponseHolder.getFlowId().equals(DBBWF43004)
+                || ResponseHolder.getFlowId().equals(DBBWF44004) || ResponseHolder.getFlowId().equals(DBBWF45004)) {
+            batchID = FukaErrorListService.createInstance().getFukaBatchID();
+        } else {
+            batchID = FlowParameterAccessor.get().get(BATCHID_FUKAERROR, RString.class);
+        }
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
         List<FukaErrorList> リスト作成日時 = FukaErrorListService.createInstance().getCreationDateTimeList(batchID).records();
         if (!リスト作成日時.isEmpty()) {

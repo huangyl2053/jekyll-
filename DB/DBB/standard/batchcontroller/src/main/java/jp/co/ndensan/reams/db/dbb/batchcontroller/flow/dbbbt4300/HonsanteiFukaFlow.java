@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt4300.KeisanTaishosha
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt4300.SetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt4300.SystemTimeHonsanteiFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt4300.SystemTimeUpdateHonsanteiProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honnsanteifuka.HonsanteiFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
@@ -41,8 +42,9 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
     private static final String 本算定結果一覧表出力 = "spoolHonsanteiKekkaIchiran";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
-    private RString バッチフロー_帳票分類ID;
+    private static final String 世帯員把握フロー = "setaiinBatchFlow";
+    private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
 
     private HonsanteiFukaParameter parameter;
     private HonsanteiFukaProcessParameter processParameter;
@@ -62,10 +64,10 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
         processParameter.set資格基準日(new FlexibleDate(parameter.get資格基準日()));
         executeStep(計算対象者抽出_通知書番号発番);
         executeStep(世帯員把握);
+        executeStep(世帯員把握フロー);
         executeStep(賦課計算);
         for (TyouhyouEntity entity : parameter.get出力帳票一覧()) {
             processParameter.set出力帳票(entity);
-            バッチフロー_帳票分類ID = entity.get帳票分類ID().getColumnValue();
             executeStep(計算後情報作成);
             executeStep(本算定結果一覧表出力);
         }
@@ -114,6 +116,17 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
     }
 
     /**
+     * 世帯員把握バッチを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(世帯員把握フロー)
+    protected IBatchFlowCommand setaiinBatchFlow() {
+        return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
+                new SetaiShotokuKazeiHanteiBatchParameter(RString.EMPTY)).define();
+    }
+
+    /**
      * 賦課計算を行います。
      *
      * @return バッチコマンド
@@ -130,14 +143,14 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
      */
     @Step(計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
-                getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID)).define();
+        return otherBatchFlow(計算後情報作成BATCH_ID, SubGyomuCode.DBB介護賦課,
+                getKeisangoJohoSakuseiBatchParamter(RString.EMPTY)).define();
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
                 getParameter().get賦課年度(),
-                getResult(RString.class, new RString(システム日時の取得), SystemTimeHonsanteiFukaProcess.SYSTEM_TIME),
+                new RString(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeHonsanteiFukaProcess.SYSTEM_TIME).toString()),
                 ShoriName.本算定賦課.get名称(), 帳票分類ID);
     }
 

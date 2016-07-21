@@ -122,11 +122,11 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             }
             row.setShisetsuShin(date.get施設_新());
             if (date.get施設_新().equals(MARO)) {
-                txtZaitakuKeizoku = txtShisetsuShinki.add(Decimal.ONE);
+                txtShisetsuShinki = txtShisetsuShinki.add(Decimal.ONE);
             }
             row.setShisetsuKe(date.get施設_継());
             if (date.get施設_継().equals(MARO)) {
-                txtZaitakuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
+                txtShisetsuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
             }
             txtKotsuhito = txtKotsuhito.add(date.get主治医意見書作成料());
             row.setSakuseiryo(DecimalFormatter.toコンマ区切りRString(new Decimal(date.get主治医意見書作成料()), 0).concat("円"));
@@ -156,7 +156,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
      */
     public IkenHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
         List<IkenshoHoshuShokaiIchiranKey> keyJohoList = new ArrayList<>();
-        for (dgIkenshoSakuseiHoshu_Row row : div.getDgIkenshoSakuseiHoshu().getDataSource()) {
+        for (dgIkenshoSakuseiHoshu_Row row : div.getDgIkenshoSakuseiHoshu().getSelectedItems()) {
             if (row.getSelected()) {
                 IkenshoHoshuShokaiIchiranKey key = new IkenshoHoshuShokaiIchiranKey(
                         row.getIryoKikanCode(),

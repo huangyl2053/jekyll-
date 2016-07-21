@@ -50,8 +50,6 @@ public class ImagePanelHandler {
      */
     public List<RString> get調査票概況特記イメージ() {
         List<RString> 調査票概況特記 = new ArrayList<>();
-        調査票概況特記.add(new RString("2015081546300004"));
-
         調査票概況特記.add(new RString("C0001"));
         調査票概況特記.add(new RString("C0002"));
         調査票概況特記.add(new RString("C0003"));

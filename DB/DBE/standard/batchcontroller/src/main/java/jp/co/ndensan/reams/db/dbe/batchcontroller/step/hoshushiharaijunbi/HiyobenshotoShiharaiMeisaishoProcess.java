@@ -66,6 +66,10 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
     private static int index = 1;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+
+    private HiyobenshotoShiharaimeisaisho meisaisho = new HiyobenshotoShiharaimeisaisho();
 
     @BatchWriter
     private BatchReportWriter<HiyobenshotoShiharaimeisaishoReportSource> batchWrite;
@@ -94,6 +98,8 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
 
     @Override
     protected void afterExecute() {
+        HiyobenshotoShiharaimeisaishoReport report = new HiyobenshotoShiharaimeisaishoReport(meisaisho);
+        report.writeBy(reportSourceWriter);
         バッチ出力条件リストの出力();
     }
 
@@ -101,17 +107,23 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
     protected void process(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         HiyobenshotoShiharaiMeisaishoEdit edit = new HiyobenshotoShiharaiMeisaishoEdit();
-        HiyobenshotoShiharaimeisaisho meisaisho = edit.getHiyobenshotoShiharaiMeisai(entity, getKoza(entity));
-        meisaisho.set対象期間(get対象期間());
-        meisaisho.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
-        HiyobenshotoShiharaimeisaishoReport report = new HiyobenshotoShiharaimeisaishoReport(meisaisho, index);
-        report.writeBy(reportSourceWriter);
+        meisaisho = edit.getHiyobenshotoShiharaiMeisai(meisaisho, entity, getKoza(entity), index, get対象期間(),
+                dateFormat9(processParameter.getFurikomishiteiday()));
+        if (index % INDEX_4 == 0) {
+            HiyobenshotoShiharaimeisaishoReport report = new HiyobenshotoShiharaimeisaishoReport(meisaisho);
+            report.writeBy(reportSourceWriter);
+            meisaisho = new HiyobenshotoShiharaimeisaisho();
+        }
         ++index;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
+        RString hihokenshaNo = RString.EMPTY;
+        if (entity.getHihokenshaNo() != null) {
+            hihokenshaNo = entity.getHihokenshaNo();
+        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.getHihokenshaNo());
+                hihokenshaNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
@@ -144,7 +156,6 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
     }
 
     private RString dateFormat(FlexibleDate date) {
-
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
@@ -189,7 +200,7 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
         RStringBuilder builder = new RStringBuilder();
         builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
         builder.append(new RString("～"));
-        builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
+        builder.append(dateFormat9(processParameter.getJissekidaterangeto()).substring(INDEX_5));
         return builder.toRString();
     }
 }

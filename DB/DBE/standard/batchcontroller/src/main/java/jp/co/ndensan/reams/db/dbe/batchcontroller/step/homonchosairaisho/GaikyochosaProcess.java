@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyogaikyotokki.GaikyotokkiA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -124,10 +124,10 @@ public class GaikyochosaProcess extends BatchProcessBase<HomonChosaIraishoRelate
         バッチ出力条件リストの出力();
     }
 
-    private GaikyotokkiA4Entity setReportEntity(HomonChosaIraishoRelateEntity entity) {
+    private GaikyotokkiA4Business setReportEntity(HomonChosaIraishoRelateEntity entity) {
         List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
-        GaikyotokkiA4Entity reportEntity = new GaikyotokkiA4Entity();
+        GaikyotokkiA4Business reportEntity = new GaikyotokkiA4Business();
         reportEntity.setHokenshaNo1(保険者番号リスト.get(0));
         reportEntity.setHokenshaNo2(保険者番号リスト.get(1));
         reportEntity.setHokenshaNo3(保険者番号リスト.get(2));

@@ -188,7 +188,7 @@ public class ShiharaiHohoHenkoSashitome extends ModelBase<
      *
      * @return 差止通知書再発行フラグ
      */
-    public boolean get差止通知書再発行フラグ() {
+    public boolean is差止通知書再発行フラグ() {
         return entity.getSashitome_TsuchiSaiHakkoFlag();
     }
 
@@ -260,7 +260,7 @@ public class ShiharaiHohoHenkoSashitome extends ModelBase<
      *
      * @return 控除通知書再発行フラグ
      */
-    public boolean get控除通知書再発行フラグ() {
+    public boolean is控除通知書再発行フラグ() {
         return entity.getKojo_TsuchiSaiHakkoFlag();
     }
 
@@ -278,7 +278,7 @@ public class ShiharaiHohoHenkoSashitome extends ModelBase<
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

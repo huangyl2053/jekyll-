@@ -95,6 +95,20 @@ public class IkenshoSakuseiHoshuShokai {
     }
 
     /**
+     * データの必須選択チェックを実施します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<IkenshoSakuseiHoshuShokaiDiv>
+     */
+    public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BatchButton(IkenshoSakuseiHoshuShokaiDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「CSVを出力する」ボタンを押します。
      *
      * @param div 画面情報

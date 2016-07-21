@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgShisakaiIinJisseki_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -40,14 +37,8 @@ public class ShisakaiIinJissekiShokaiValidationHandler {
      * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 審査会委員実績一覧データの行選択チェック処理(ValidationMessageControlPairs pairs) {
-        List<dgShisakaiIinJisseki_Row> rows = new ArrayList<>();
-        for (dgShisakaiIinJisseki_Row row : div.getDgShisakaiIinJisseki().getDataSource()) {
-            if (row.getSelected()) {
-                rows.add(row);
-            }
-        }
-        if (rows.isEmpty()) {
+    public ValidationMessageControlPairs get審査会委員実績一覧データの行選択チェック処理(ValidationMessageControlPairs pairs) {
+        if (div.getDgShisakaiIinJisseki().getSelectedItems().isEmpty()) {
             pairs.add(new ValidationMessageControlPair(ShisakaiIinJissekiMessages.審査会委員実績一覧データの行選択チェック));
             return pairs;
         }

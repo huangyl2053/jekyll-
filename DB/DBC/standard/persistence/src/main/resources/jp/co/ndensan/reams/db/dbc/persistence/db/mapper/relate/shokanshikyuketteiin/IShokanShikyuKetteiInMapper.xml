@@ -507,7 +507,7 @@
         SELECT 
         DbT3053.*,
         一時TBL.*
-        FROM (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) as DbT3053
+        FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) as DbT3053
         INNER JOIN
         (
         SELECT DbWT3036.*,DbWT0001.*
@@ -532,7 +532,7 @@
         <id column="dbT3053ShokanShukei_jigyoshaNo"/>
         <id column="dbT3053ShokanShukei_serviceShuruiCode"/>
         <association property="償還払請求集計Entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity"/>
         <collection property="被保険者判定List"
                      resultMap="resultMap_HihokenshaShokan"/>
     </resultMap>
@@ -729,7 +729,7 @@
     </update>
     
      <select resultOrdered="true" id="select償還払支給判定結果データ" 
-             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity" 
+             resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity" 
              parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshikyuketteiin.ShokanShikyuMyBatisParameter"
              fetchSize="500">
         SELECT 

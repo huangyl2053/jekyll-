@@ -170,15 +170,16 @@ public class YoshikiYonnoni {
                 }
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
             }
-            if (RDate.getNowDate().getMonthValue() < MONTH_6) {
-                int 報告年度 = RDate.getNowDate().getYearValue() - 2;
+            RDate date = RDate.getNowDate();
+            if (date.getMonthValue() < MONTH_6) {
+                int 報告年度 = date.getYearValue() - 1;
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
-                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
+                int 集計年度 = date.getYearValue() - 2;
                 div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             } else {
-                int 報告年度 = RDate.getNowDate().getYearValue();
+                int 報告年度 = date.getYearValue();
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
-                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
+                int 集計年度 = date.getYearValue() - 1;
                 div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             }
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
@@ -241,9 +242,13 @@ public class YoshikiYonnoni {
 
                 return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
             }
-        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)
-                && this.入力項目いずれか空白ではない(div)) {
-            return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)) {
+            if (this.入力項目いずれか空白ではない(div)) {
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_追加);
+            }
         } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_削除);
         }
@@ -475,16 +480,17 @@ public class YoshikiYonnoni {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<YoshikiYonnoniDiv> onBlur_txthokokuYM(YoshikiYonnoniDiv div) {
-        if (RDate.getNowDate().getYear().toDateString().equals(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText())) {
-            if (RDate.getNowDate().getMonthValue() >= MONTH_6) {
+        RDate date = RDate.getNowDate();
+        if (date.getYear().toDateString().equals(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText())) {
+            if (date.getMonthValue() >= MONTH_6) {
 
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
+                int 集計年度 = date.getYearValue() - 1;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             } else {
                 TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
-                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
+                int 集計年度 = date.getYearValue() - 2;
                 shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
                 div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
             }

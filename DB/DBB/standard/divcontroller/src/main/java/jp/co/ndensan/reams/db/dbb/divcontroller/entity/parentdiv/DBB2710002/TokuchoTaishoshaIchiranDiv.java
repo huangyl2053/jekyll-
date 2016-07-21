@@ -8,27 +8,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * TokuchoTaishoshaIchiran のクラスファイル<br/>
- *
- * 画面設計_DBBGM81003_1_特徴対象者一覧作成
- *
- * @reamsid_L DBB-1860-010 yangchenbing
+ * TokuchoTaishoshaIchiran のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class TokuchoTaishoshaIchiranDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -323,7 +315,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKaishiYM(TextBox txtKaishiYM) {
+    public void  setTxtKaishiYM(TextBox txtKaishiYM) {
         this.getTokuchoTaishoshaIchiranSelectJokenPanel().setTxtKaishiYM(txtKaishiYM);
     }
 
@@ -333,7 +325,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
+    public void  setChkShutsuryokuTaisho(CheckBoxList chkShutsuryokuTaisho) {
         this.getShutsuryokuTaishoPanel().setChkShutsuryokuTaisho(chkShutsuryokuTaisho);
     }
 
@@ -343,7 +335,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadhyojiTaisho(RadioButton radhyojiTaisho) {
+    public void  setRadhyojiTaisho(RadioButton radhyojiTaisho) {
         this.getDoteiMiDoteiShisei().setRadhyojiTaisho(radhyojiTaisho);
     }
 
@@ -353,7 +345,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKakuninZumiFukumu(KakuninZumiFukumuDiv KakuninZumiFukumu) {
+    public void  setKakuninZumiFukumu(KakuninZumiFukumuDiv KakuninZumiFukumu) {
         this.getDoteiMiDoteiShisei().setKakuninZumiFukumu(KakuninZumiFukumu);
     }
 
@@ -363,7 +355,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkKakuninZumiFukumu(CheckBoxList chkKakuninZumiFukumu) {
+    public void  setChkKakuninZumiFukumu(CheckBoxList chkKakuninZumiFukumu) {
         this.getDoteiMiDoteiShisei().getKakuninZumiFukumu().setChkKakuninZumiFukumu(chkKakuninZumiFukumu);
     }
 
@@ -373,7 +365,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMaxHyojiKensu(TextBox txtMaxHyojiKensu) {
+    public void  setTxtMaxHyojiKensu(TextBox txtMaxHyojiKensu) {
         this.getDoteiMiDoteiShisei().setTxtMaxHyojiKensu(txtMaxHyojiKensu);
     }
 
@@ -383,7 +375,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgTokubetChoshuTaishoshaIchiran(DataGrid<dgTokubetChoshuTaishoshaIchiran_Row> dgTokubetChoshuTaishoshaIchiran) {
+    public void  setDgTokubetChoshuTaishoshaIchiran(DataGrid<dgTokubetChoshuTaishoshaIchiran_Row> dgTokubetChoshuTaishoshaIchiran) {
         this.getTokuchoDoteiIchiran().setDgTokubetChoshuTaishoshaIchiran(dgTokubetChoshuTaishoshaIchiran);
     }
 
@@ -393,7 +385,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgTokubetChoshuMidoteiIchiran(DataGrid<dgTokubetChoshuMidoteiIchiran_Row> dgTokubetChoshuMidoteiIchiran) {
+    public void  setDgTokubetChoshuMidoteiIchiran(DataGrid<dgTokubetChoshuMidoteiIchiran_Row> dgTokubetChoshuMidoteiIchiran) {
         this.getTokuchoMidoteiIchiran().setDgTokubetChoshuMidoteiIchiran(dgTokubetChoshuMidoteiIchiran);
     }
 
@@ -403,7 +395,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgTokuchoDoteiKohoshaIchiran(DataGrid<dgTokuchoDoteiKohoshaIchiran_Row> dgTokuchoDoteiKohoshaIchiran) {
+    public void  setDgTokuchoDoteiKohoshaIchiran(DataGrid<dgTokuchoDoteiKohoshaIchiran_Row> dgTokuchoDoteiKohoshaIchiran) {
         this.getTokuchoDoteiKohoshaIchiran().setDgTokuchoDoteiKohoshaIchiran(dgTokuchoDoteiKohoshaIchiran);
     }
 
@@ -413,7 +405,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setNenkinTokuchoKaifuInfo(NenkinTokuchoKaifuInfoDiv NenkinTokuchoKaifuInfo) {
+    public void  setNenkinTokuchoKaifuInfo(NenkinTokuchoKaifuInfoDiv NenkinTokuchoKaifuInfo) {
         this.getTokuchoDoteiKohoshaIchiran().setNenkinTokuchoKaifuInfo(NenkinTokuchoKaifuInfo);
     }
 
@@ -423,7 +415,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKisoNenkinNo(TextBox txtKisoNenkinNo) {
+    public void  setTxtKisoNenkinNo(TextBox txtKisoNenkinNo) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtKisoNenkinNo(txtKisoNenkinNo);
     }
 
@@ -433,7 +425,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNenkinCode(TextBox txtNenkinCode) {
+    public void  setTxtNenkinCode(TextBox txtNenkinCode) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtNenkinCode(txtNenkinCode);
     }
 
@@ -443,7 +435,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTokuchoGimusha(TextBox txtTokuchoGimusha) {
+    public void  setTxtTokuchoGimusha(TextBox txtTokuchoGimusha) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtTokuchoGimusha(txtTokuchoGimusha);
     }
 
@@ -453,7 +445,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShimeiKana(TextBox txtShimeiKana) {
+    public void  setTxtShimeiKana(TextBox txtShimeiKana) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtShimeiKana(txtShimeiKana);
     }
 
@@ -463,7 +455,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtUmareYMD(TextBoxDate txtUmareYMD) {
+    public void  setTxtUmareYMD(TextBoxDate txtUmareYMD) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtUmareYMD(txtUmareYMD);
     }
 
@@ -473,7 +465,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShimeiKanji(TextBox txtShimeiKanji) {
+    public void  setTxtShimeiKanji(TextBox txtShimeiKanji) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtShimeiKanji(txtShimeiKanji);
     }
 
@@ -483,7 +475,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSebetsu(TextBox txtSebetsu) {
+    public void  setTxtSebetsu(TextBox txtSebetsu) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtSebetsu(txtSebetsu);
     }
 
@@ -493,7 +485,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJushoKana(TextBox txtJushoKana) {
+    public void  setTxtJushoKana(TextBox txtJushoKana) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtJushoKana(txtJushoKana);
     }
 
@@ -503,7 +495,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJushoKanji(TextBox txtJushoKanji) {
+    public void  setTxtJushoKanji(TextBox txtJushoKanji) {
         this.getTokuchoDoteiKohoshaIchiran().getNenkinTokuchoKaifuInfo().setTxtJushoKanji(txtJushoKanji);
     }
 
@@ -513,7 +505,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setAtenaInfo(AtenaInfoDiv AtenaInfo) {
+    public void  setAtenaInfo(AtenaInfoDiv AtenaInfo) {
         this.getTokuchoDoteiKohoshaShosai().setAtenaInfo(AtenaInfo);
     }
 
@@ -523,7 +515,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShikibetsuCode(TextBox txtShikibetsuCode) {
+    public void  setTxtShikibetsuCode(TextBox txtShikibetsuCode) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtShikibetsuCode(txtShikibetsuCode);
     }
 
@@ -533,7 +525,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
+    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
     }
 
@@ -543,7 +535,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
+    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
     }
 
@@ -553,7 +545,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJuminshu(TextBox txtJuminshu) {
+    public void  setTxtJuminshu(TextBox txtJuminshu) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtJuminshu(txtJuminshu);
     }
 
@@ -563,7 +555,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtAtenaShimeiKanji(TextBox txtAtenaShimeiKanji) {
+    public void  setTxtAtenaShimeiKanji(TextBox txtAtenaShimeiKanji) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaShimeiKanji(txtAtenaShimeiKanji);
     }
 
@@ -573,7 +565,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtAtenaSebetsu(TextBox txtAtenaSebetsu) {
+    public void  setTxtAtenaSebetsu(TextBox txtAtenaSebetsu) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaSebetsu(txtAtenaSebetsu);
     }
 
@@ -583,7 +575,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJutoYMD(TextBoxFlexibleDate txtJutoYMD) {
+    public void  setTxtJutoYMD(TextBoxFlexibleDate txtJutoYMD) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtJutoYMD(txtJutoYMD);
     }
 
@@ -593,7 +585,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtAtenaJushoKana(TextBox txtAtenaJushoKana) {
+    public void  setTxtAtenaJushoKana(TextBox txtAtenaJushoKana) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaJushoKana(txtAtenaJushoKana);
     }
 
@@ -603,7 +595,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShojoYMD(TextBoxFlexibleDate txtShojoYMD) {
+    public void  setTxtShojoYMD(TextBoxFlexibleDate txtShojoYMD) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtShojoYMD(txtShojoYMD);
     }
 
@@ -613,7 +605,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtAtenaJushoKanji(TextBox txtAtenaJushoKanji) {
+    public void  setTxtAtenaJushoKanji(TextBox txtAtenaJushoKanji) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaJushoKanji(txtAtenaJushoKanji);
     }
 
@@ -623,7 +615,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKaigoShikakuInfo(KaigoShikakuInfoDiv KaigoShikakuInfo) {
+    public void  setKaigoShikakuInfo(KaigoShikakuInfoDiv KaigoShikakuInfo) {
         this.getTokuchoDoteiKohoshaShosai().setKaigoShikakuInfo(KaigoShikakuInfo);
     }
 
@@ -633,7 +625,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
         this.getTokuchoDoteiKohoshaShosai().getKaigoShikakuInfo().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
@@ -643,7 +635,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShutokuYMD(TextBoxDate txtShutokuYMD) {
+    public void  setTxtShutokuYMD(TextBoxDate txtShutokuYMD) {
         this.getTokuchoDoteiKohoshaShosai().getKaigoShikakuInfo().setTxtShutokuYMD(txtShutokuYMD);
     }
 
@@ -653,7 +645,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShutokuJiyu(TextBox txtShutokuJiyu) {
+    public void  setTxtShutokuJiyu(TextBox txtShutokuJiyu) {
         this.getTokuchoDoteiKohoshaShosai().getKaigoShikakuInfo().setTxtShutokuJiyu(txtShutokuJiyu);
     }
 
@@ -663,7 +655,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSoshitsuYMD(TextBoxDate txtSoshitsuYMD) {
+    public void  setTxtSoshitsuYMD(TextBoxDate txtSoshitsuYMD) {
         this.getTokuchoDoteiKohoshaShosai().getKaigoShikakuInfo().setTxtSoshitsuYMD(txtSoshitsuYMD);
     }
 
@@ -673,7 +665,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSoshitsuJiyu(TextBox txtSoshitsuJiyu) {
+    public void  setTxtSoshitsuJiyu(TextBox txtSoshitsuJiyu) {
         this.getTokuchoDoteiKohoshaShosai().getKaigoShikakuInfo().setTxtSoshitsuJiyu(txtSoshitsuJiyu);
     }
 
@@ -683,7 +675,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHihokenshaFinder(ButtonDialog btnHihokenshaFinder) {
+    public void  setBtnHihokenshaFinder(ButtonDialog btnHihokenshaFinder) {
         this.getTokuchoDoteiKohoshaShosai().getKaigoShikakuInfo().setBtnHihokenshaFinder(btnHihokenshaFinder);
     }
 
@@ -693,7 +685,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTorokuZumiNenkinInfo(TorokuZumiNenkinInfoDiv TorokuZumiNenkinInfo) {
+    public void  setTorokuZumiNenkinInfo(TorokuZumiNenkinInfoDiv TorokuZumiNenkinInfo) {
         this.getTokuchoDoteiKohoshaShosai().setTorokuZumiNenkinInfo(TorokuZumiNenkinInfo);
     }
 
@@ -703,7 +695,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTorokuZumiKisoNenkinNo(TextBox txtTorokuZumiKisoNenkinNo) {
+    public void  setTxtTorokuZumiKisoNenkinNo(TextBox txtTorokuZumiKisoNenkinNo) {
         this.getTokuchoDoteiKohoshaShosai().getTorokuZumiNenkinInfo().setTxtTorokuZumiKisoNenkinNo(txtTorokuZumiKisoNenkinNo);
     }
 
@@ -713,7 +705,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTorokuZumiNenkinCode(TextBox txtTorokuZumiNenkinCode) {
+    public void  setTxtTorokuZumiNenkinCode(TextBox txtTorokuZumiNenkinCode) {
         this.getTokuchoDoteiKohoshaShosai().getTorokuZumiNenkinInfo().setTxtTorokuZumiNenkinCode(txtTorokuZumiNenkinCode);
     }
 
@@ -723,7 +715,7 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTorokuZumiTokuchoGimusha(TextBox txtTorokuZumiTokuchoGimusha) {
+    public void  setTxtTorokuZumiTokuchoGimusha(TextBox txtTorokuZumiTokuchoGimusha) {
         this.getTokuchoDoteiKohoshaShosai().getTorokuZumiNenkinInfo().setTxtTorokuZumiTokuchoGimusha(txtTorokuZumiTokuchoGimusha);
     }
 

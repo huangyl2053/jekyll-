@@ -26,7 +26,7 @@ public class SystemTimeUpdateHonsanteiProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void beforeExecute() {
-        business = new HonnSanteiFuka();
+        business = HonnSanteiFuka.createInstance();
     }
 
     @Override

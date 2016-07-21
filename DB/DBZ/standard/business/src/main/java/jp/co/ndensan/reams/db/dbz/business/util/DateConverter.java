@@ -34,11 +34,53 @@ public final class DateConverter {
     private static final int NUM_8 = 8;
     private static final int NUM_6 = 6;
     private static final int NUM_4 = 4;
+    private static final RString 月 = new RString("月");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
-    private static final RString FULLZERO = new RString("00");
-    private static final RString HALFZERO = new RString("#0");
+    private static final RString FULLYEAR = new RString("0000");
+    private static final RString FULLMONTH = new RString("00");
+    private static final RString HALFMONTH = new RString("#0");
+
+    /**
+     * 1(年)-->"01" ,10(年)-->"10"<br/>
+     *
+     * @param year Integer
+     * @return RString
+     */
+    public static RString formatYearFull(Integer year) {
+        if (year == null) {
+            return RString.EMPTY;
+        }
+        return new RString(new Decimal(year).toString(FULLYEAR.toString()));
+    }
+
+    /**
+     * "1"(月)-->"01" ,"10"(月)-->"10"<br/>
+     *
+     * @param month Integer
+     * @return RString
+     */
+    public static RString formatMonthFull(RString month) {
+        if (RString.isNullOrEmpty(month)) {
+            return RString.EMPTY;
+        }
+        month = month.replace(月, RString.EMPTY);
+        return new RString(new Decimal(month.toString()).toString(FULLMONTH.toString()));
+    }
+
+    /**
+     * 1(月)-->"01" ,10(月)-->"10"<br/>
+     *
+     * @param month Integer
+     * @return RString
+     */
+    public static RString formatMonthFull(Integer month) {
+        if (month == null) {
+            return RString.EMPTY;
+        }
+        return new RString(new Decimal(month).toString(FULLMONTH.toString()));
+    }
 
     /**
      * 引数で指定された日付を和暦年月日（前半角スペース埋め）に編集し返却します。<br />
@@ -144,11 +186,11 @@ public final class DateConverter {
                 width(Width.HALF).toDateString());
 
         RTime nowTime = RDate.getNowTime();
-        sakuseiYMD.append(new RString(new Decimal(nowTime.getHour()).toString(HALFZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(nowTime.getHour()).toString(HALFMONTH.toString())));
         sakuseiYMD.append(時);
-        sakuseiYMD.append(new RString(new Decimal(nowTime.getMinute()).toString(HALFZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(nowTime.getMinute()).toString(HALFMONTH.toString())));
         sakuseiYMD.append(分);
-        sakuseiYMD.append(new RString(new Decimal(nowTime.getSecond()).toString(HALFZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(nowTime.getSecond()).toString(HALFMONTH.toString())));
         sakuseiYMD.append(秒);
 
         return sakuseiYMD.toRString();
@@ -275,9 +317,9 @@ public final class DateConverter {
                 fillType(FillType.ZERO).
                 width(Width.HALF).toDateString());
 
-        sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(HALFZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(HALFMONTH.toString())));
         sakuseiYMD.append(時);
-        sakuseiYMD.append(new RString(new Decimal(datetime.getMinute()).toString(HALFZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(datetime.getMinute()).toString(HALFMONTH.toString())));
         sakuseiYMD.append(分);
 
         return sakuseiYMD.toRString();
@@ -301,9 +343,9 @@ public final class DateConverter {
                 fillType(FillType.BLANK).
                 width(Width.HALF).toDateString());
         sakuseiYMD.append(RString.FULL_SPACE);
-        sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(FULLZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(FULLMONTH.toString())));
         sakuseiYMD.append(時);
-        sakuseiYMD.append(new RString(new Decimal(datetime.getMinute()).toString(FULLZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(datetime.getMinute()).toString(FULLMONTH.toString())));
         sakuseiYMD.append(分);
         return sakuseiYMD.toRString();
     }
@@ -329,9 +371,9 @@ public final class DateConverter {
                 fillType(FillType.ZERO).
                 width(Width.HALF).toDateString());
         sakuseiYMD.append(RString.FULL_SPACE);
-        sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(FULLZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(FULLMONTH.toString())));
         sakuseiYMD.append(時);
-        sakuseiYMD.append(new RString(new Decimal(datetime.getMinute()).toString(FULLZERO.toString())));
+        sakuseiYMD.append(new RString(new Decimal(datetime.getMinute()).toString(FULLMONTH.toString())));
         sakuseiYMD.append(分);
         return sakuseiYMD.toRString();
     }

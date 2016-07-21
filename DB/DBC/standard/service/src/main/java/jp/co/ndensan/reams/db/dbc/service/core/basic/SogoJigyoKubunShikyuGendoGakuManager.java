@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoKubunShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbc.business.core.sogojigyokubun.SogoJigyoKubunEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7117SogoJigyoKubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7117SogoJigyoKubunShikyuGendoGakuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -23,6 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @reamsid_L DBC-3363-010 xuxin
  */
 public class SogoJigyoKubunShikyuGendoGakuManager {
+
+    private static final RString 要支援1 = new RString("12");
+    private static final RString 要支援2 = new RString("13");
+    private static final RString 二次予防 = new RString("01");
 
     private final DbT7117SogoJigyoKubunShikyuGendoGakuDac dac;
 
@@ -90,17 +95,41 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
     /**
      * 介護予防・日常生活支援総合事業区分支給限度額適用開始日の降順を全件返します。
      *
-     * @return List<SogoJigyoKubunShikyuGendoGaku>
+     * @return List<SogoJigyoKubunEntity>
      */
     @Transaction
-    public List<SogoJigyoKubunShikyuGendoGaku> get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧() {
+    public List<SogoJigyoKubunEntity> get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧() {
 
-        List<SogoJigyoKubunShikyuGendoGaku> businessList = new ArrayList<>();
-        for (DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity : dac.selectAllDesc()) {
-            entity.initializeMd5();
-            businessList.add(new SogoJigyoKubunShikyuGendoGaku(entity));
+        List<SogoJigyoKubunEntity> businessList = new ArrayList<>();
+        List<DbT7117SogoJigyoKubunShikyuGendoGakuEntity> 日常生活支援総合事業区分支給限度額 = dac.selectAllDesc();
+        List<FlexibleYearMonth> 適用開始日List = new ArrayList<>();
+        for (DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity : 日常生活支援総合事業区分支給限度額) {
+            if (!適用開始日List.contains(entity.getTekiyoKaishiYM())) {
+                適用開始日List.add(entity.getTekiyoKaishiYM());
+            }
+        }
+        SogoJigyoKubunShikyuGendoGaku result1;
+        SogoJigyoKubunShikyuGendoGaku result2;
+        SogoJigyoKubunShikyuGendoGaku result3;
+        for (FlexibleYearMonth 適用開始日 : 適用開始日List) {
+            result1 = get日常生活支援総合事業区分支給限度額(日常生活支援総合事業区分支給限度額, 要支援1, 適用開始日);
+            result2 = get日常生活支援総合事業区分支給限度額(日常生活支援総合事業区分支給限度額, 要支援2, 適用開始日);
+            result3 = get日常生活支援総合事業区分支給限度額(日常生活支援総合事業区分支給限度額, 二次予防, 適用開始日);
+            businessList.add(new SogoJigyoKubunEntity(result1, result2, result3));
         }
         return businessList;
+    }
+
+    private SogoJigyoKubunShikyuGendoGaku get日常生活支援総合事業区分支給限度額(
+            List<DbT7117SogoJigyoKubunShikyuGendoGakuEntity> 日常生活支援総合事業区分支給限度額,
+            RString 要介護状態区分,
+            FlexibleYearMonth 適用開始日) {
+        for (DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity : 日常生活支援総合事業区分支給限度額) {
+            if (要介護状態区分.equals(entity.getYoKaigoJotaiKubun()) && 適用開始日.equals(entity.getTekiyoKaishiYM())) {
+                return new SogoJigyoKubunShikyuGendoGaku(entity);
+            }
+        }
+        return null;
     }
 
     /**

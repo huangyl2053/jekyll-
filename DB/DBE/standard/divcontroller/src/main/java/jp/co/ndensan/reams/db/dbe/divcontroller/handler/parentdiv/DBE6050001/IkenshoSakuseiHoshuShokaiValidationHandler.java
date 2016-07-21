@@ -25,7 +25,7 @@ public class IkenshoSakuseiHoshuShokaiValidationHandler {
     /**
      * コンストラクタです。
      *
-     * @param div NinteiChosaHoshuShokaiDiv
+     * @param div IkenshoSakuseiHoshuShokaiDiv
      */
     public IkenshoSakuseiHoshuShokaiValidationHandler(IkenshoSakuseiHoshuShokaiDiv div) {
         this.div = div;
@@ -40,6 +40,19 @@ public class IkenshoSakuseiHoshuShokaiValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getTxtSakuseiIraibi().getFromValue() == null || div.getTxtSakuseiIraibi().getToValue() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目)));
+        }
+        return validPairs;
+    }
+
+    /**
+     * データの必須選択チェックを実施します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateForCheckedDataCount() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getDgIkenshoSakuseiHoshu().getSelectedItems().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象行を選択)));
         }
         return validPairs;
     }

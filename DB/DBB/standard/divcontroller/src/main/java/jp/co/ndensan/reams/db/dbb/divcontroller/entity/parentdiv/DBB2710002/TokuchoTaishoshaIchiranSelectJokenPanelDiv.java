@@ -4,20 +4,16 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * TokuchoTaishoshaIchiranSelectJokenPanel のクラスファイル<br/>
- *
- * 画面設計_DBBGM81003_1_特徴対象者一覧作成
- *
- * @reamsid_L DBB-1860-010 yangchenbing
+ * TokuchoTaishoshaIchiranSelectJokenPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class TokuchoTaishoshaIchiranSelectJokenPanelDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]

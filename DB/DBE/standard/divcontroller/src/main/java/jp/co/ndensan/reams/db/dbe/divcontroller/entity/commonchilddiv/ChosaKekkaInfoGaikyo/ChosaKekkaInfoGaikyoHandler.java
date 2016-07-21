@@ -168,19 +168,19 @@ public class ChosaKekkaInfoGaikyoHandler {
             if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
                 dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg09B.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
-            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
                 dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
-            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
                 dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
-            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
                 dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
-            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
                 dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
-            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
+            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
                 dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番())).get名称());
             }
 

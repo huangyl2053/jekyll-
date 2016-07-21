@@ -62,4 +62,6 @@ public class ShujiiikenshosakuseiiraiRelateEntity {
     private int rirekiNo;
     private int preRirekiNo;
     private boolean shisetsuNyushoFlag;
+    private YubinNo iryoKikanYubinNo;
+    private RString daihyoshaName;
 }

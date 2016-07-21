@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenk
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.shiharaihohohenko.ShiharaiHohoHenkoMapperParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.JukyushaSogoJigyoTaishoshaHantei;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShokanHaraiShikyuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -19,12 +22,12 @@ import org.apache.ibatis.annotations.Param;
 public interface IShiharaiHohoHenkoMapper {
 
     /**
-     * 支払方法変更管理情報の取得
+     * 支払方法変更管理情報を取得します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return 支払方法変更管理情報
+     * @return 支払方法変更管理情報List
      */
-    List<Object> findShiharaiHohoHenko(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<ShiharaiHohoHenkoEntity> findShiharaiHohoHenko(@Param("被保険者番号") HihokenshaNo 被保険者番号);
 
     /**
      * 償還払支給申請情報の取得
@@ -32,7 +35,16 @@ public interface IShiharaiHohoHenkoMapper {
      * @param 被保険者番号 被保険者番号
      * @return 償還払支給申請
      */
-    List<Object> find償還払支給申請(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<ShokanHaraiShikyuEntity> find償還払支給申請(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+
+    /**
+     * 受給者or事業対象者の判定結果を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 基準日 基準日
+     * @return 判定結果
+     */
+    JukyushaSogoJigyoTaishoshaHantei get受給者or事業対象者の判定(@Param("被保険者番号") HihokenshaNo 被保険者番号, @Param("基準日") FlexibleDate 基準日);
 
     /**
      * 支払方法変更情報をキー検索で１件取得します。

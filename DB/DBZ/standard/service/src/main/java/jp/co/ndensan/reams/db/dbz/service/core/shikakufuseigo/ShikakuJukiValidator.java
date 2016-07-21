@@ -172,10 +172,9 @@ public class ShikakuJukiValidator {
         }
         FuseigoRiyu 不整合理由 = null;
         if (JukiIdoJiyu.転入.get異動事由コード().equals(個人情報.get登録事由().get異動事由コード())
-                && TatokureiTekiyoJiyu.他特例適用.getコード().equals(他特の情報.get他市町村住所地特例適用事由コード())) {
-            if (他特の情報.get適用年月日().compareTo(個人情報.get登録異動年月日()) != 0) {
-                不整合理由 = FuseigoRiyu.他住所地特例適用日_転入者;
-            }
+                && TatokureiTekiyoJiyu.他特例適用.getコード().equals(他特の情報.get他市町村住所地特例適用事由コード())
+                && 他特の情報.get適用年月日().compareTo(個人情報.get登録異動年月日()) != 0) {
+            不整合理由 = FuseigoRiyu.他住所地特例適用日_転入者;
         }
         if (JukiIdoJiyu.職権消除.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())
                 || JukiIdoJiyu.死亡.get異動事由コード().equals(個人情報.get消除事由().get異動事由コード())

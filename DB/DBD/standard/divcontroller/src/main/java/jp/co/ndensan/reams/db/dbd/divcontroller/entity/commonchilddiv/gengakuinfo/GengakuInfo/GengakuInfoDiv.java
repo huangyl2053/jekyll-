@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.gengakuin
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,14 +28,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -42,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -206,7 +206,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtHanteiKijunYMD(TextBoxDate txtHanteiKijunYMD) {
+    public void  setTxtHanteiKijunYMD(TextBoxDate txtHanteiKijunYMD) {
         this.getTainoNendo().setTxtHanteiKijunYMD(txtHanteiKijunYMD);
     }
 
@@ -216,7 +216,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setBtnKensaku(Button btnKensaku) {
+    public void  setBtnKensaku(Button btnKensaku) {
         this.getTainoNendo().setBtnKensaku(btnKensaku);
     }
 
@@ -226,7 +226,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setDgGenGaku(DataGrid<dgGenGaku_Row> dgGenGaku) {
+    public void  setDgGenGaku(DataGrid<dgGenGaku_Row> dgGenGaku) {
         this.getTainoNendo().setDgGenGaku(dgGenGaku);
     }
 
@@ -236,7 +236,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setGenGakuKeisan(GenGakuKeisanDiv GenGakuKeisan) {
+    public void  setGenGakuKeisan(GenGakuKeisanDiv GenGakuKeisan) {
         this.getTainoNendo().setGenGakuKeisan(GenGakuKeisan);
     }
 
@@ -246,7 +246,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setChoshuKenKeimetsuKikan1(ChoshuKenKeimetsuKikan1Div ChoshuKenKeimetsuKikan1) {
+    public void  setChoshuKenKeimetsuKikan1(ChoshuKenKeimetsuKikan1Div ChoshuKenKeimetsuKikan1) {
         this.getTainoNendo().getGenGakuKeisan().setChoshuKenKeimetsuKikan1(ChoshuKenKeimetsuKikan1);
     }
 
@@ -256,7 +256,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblChoShushometsu1(Label lblChoShushometsu1) {
+    public void  setLblChoShushometsu1(Label lblChoShushometsu1) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan1().setLblChoShushometsu1(lblChoShushometsu1);
     }
 
@@ -266,7 +266,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtChoShushometsu1(TextBoxNum txtChoShushometsu1) {
+    public void  setTxtChoShushometsu1(TextBoxNum txtChoShushometsu1) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan1().setTxtChoShushometsu1(txtChoShushometsu1);
     }
 
@@ -276,7 +276,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setKakesan(KakesanDiv Kakesan) {
+    public void  setKakesan(KakesanDiv Kakesan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan1().setKakesan(Kakesan);
     }
 
@@ -286,7 +286,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblKakesan(Label lblKakesan) {
+    public void  setLblKakesan(Label lblKakesan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan1().getKakesan().setLblKakesan(lblKakesan);
     }
 
@@ -296,7 +296,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setChoshuKenKeimetsuKikan2(ChoshuKenKeimetsuKikan2Div ChoshuKenKeimetsuKikan2) {
+    public void  setChoshuKenKeimetsuKikan2(ChoshuKenKeimetsuKikan2Div ChoshuKenKeimetsuKikan2) {
         this.getTainoNendo().getGenGakuKeisan().setChoshuKenKeimetsuKikan2(ChoshuKenKeimetsuKikan2);
     }
 
@@ -306,7 +306,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3Div ChoshuKenKeimetsuKikan3) {
+    public void  setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3Div ChoshuKenKeimetsuKikan3) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().setChoshuKenKeimetsuKikan3(ChoshuKenKeimetsuKikan3);
     }
 
@@ -316,7 +316,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblChoShushometsu2(Label lblChoShushometsu2) {
+    public void  setLblChoShushometsu2(Label lblChoShushometsu2) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan3().setLblChoShushometsu2(lblChoShushometsu2);
     }
 
@@ -326,7 +326,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtChoShushometsu2(TextBoxNum txtChoShushometsu2) {
+    public void  setTxtChoShushometsu2(TextBoxNum txtChoShushometsu2) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan3().setTxtChoShushometsu2(txtChoShushometsu2);
     }
 
@@ -336,7 +336,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblLine(Label lblLine) {
+    public void  setLblLine(Label lblLine) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan3().setLblLine(lblLine);
     }
 
@@ -346,7 +346,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4Div ChoshuKenKeimetsuKikan4) {
+    public void  setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4Div ChoshuKenKeimetsuKikan4) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().setChoshuKenKeimetsuKikan4(ChoshuKenKeimetsuKikan4);
     }
 
@@ -356,7 +356,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblChoShushometsu3(Label lblChoShushometsu3) {
+    public void  setLblChoShushometsu3(Label lblChoShushometsu3) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan4().setLblChoShushometsu3(lblChoShushometsu3);
     }
 
@@ -366,7 +366,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtChoShushometsu3(TextBoxNum txtChoShushometsu3) {
+    public void  setTxtChoShushometsu3(TextBoxNum txtChoShushometsu3) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getChoshuKenKeimetsuKikan4().setTxtChoShushometsu3(txtChoShushometsu3);
     }
 
@@ -376,7 +376,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setKasan(KasanDiv Kasan) {
+    public void  setKasan(KasanDiv Kasan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().setKasan(Kasan);
     }
 
@@ -386,7 +386,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblKasan(Label lblKasan) {
+    public void  setLblKasan(Label lblKasan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getKasan().setLblKasan(lblKasan);
     }
 
@@ -396,7 +396,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setNofuZumiKikan(NofuZumiKikanDiv NofuZumiKikan) {
+    public void  setNofuZumiKikan(NofuZumiKikanDiv NofuZumiKikan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().setNofuZumiKikan(NofuZumiKikan);
     }
 
@@ -406,7 +406,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblNofuZumiKikan(Label lblNofuZumiKikan) {
+    public void  setLblNofuZumiKikan(Label lblNofuZumiKikan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getNofuZumiKikan().setLblNofuZumiKikan(lblNofuZumiKikan);
     }
 
@@ -416,7 +416,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtNofuZumiKikan(TextBoxNum txtNofuZumiKikan) {
+    public void  setTxtNofuZumiKikan(TextBoxNum txtNofuZumiKikan) {
         this.getTainoNendo().getGenGakuKeisan().getChoshuKenKeimetsuKikan2().getNofuZumiKikan().setTxtNofuZumiKikan(txtNofuZumiKikan);
     }
 
@@ -426,7 +426,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setGnegakuKikan(GnegakuKikanDiv GnegakuKikan) {
+    public void  setGnegakuKikan(GnegakuKikanDiv GnegakuKikan) {
         this.getTainoNendo().getGenGakuKeisan().setGnegakuKikan(GnegakuKikan);
     }
 
@@ -436,7 +436,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblKeisanShiki(Label lblKeisanShiki) {
+    public void  setLblKeisanShiki(Label lblKeisanShiki) {
         this.getTainoNendo().getGenGakuKeisan().getGnegakuKikan().setLblKeisanShiki(lblKeisanShiki);
     }
 
@@ -446,7 +446,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setGenGakuKikan2(GenGakuKikan2Div GenGakuKikan2) {
+    public void  setGenGakuKikan2(GenGakuKikan2Div GenGakuKikan2) {
         this.getTainoNendo().getGenGakuKeisan().getGnegakuKikan().setGenGakuKikan2(GenGakuKikan2);
     }
 
@@ -456,7 +456,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setLblGenGakuKikan(Label lblGenGakuKikan) {
+    public void  setLblGenGakuKikan(Label lblGenGakuKikan) {
         this.getTainoNendo().getGenGakuKeisan().getGnegakuKikan().getGenGakuKikan2().setLblGenGakuKikan(lblGenGakuKikan);
     }
 
@@ -466,7 +466,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtGenGakuKikan(TextBoxNum txtGenGakuKikan) {
+    public void  setTxtGenGakuKikan(TextBoxNum txtGenGakuKikan) {
         this.getTainoNendo().getGenGakuKeisan().getGnegakuKikan().getGenGakuKikan2().setTxtGenGakuKikan(txtGenGakuKikan);
     }
 
@@ -476,7 +476,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setChkHyojiKirikae(CheckBoxList chkHyojiKirikae) {
+    public void  setChkHyojiKirikae(CheckBoxList chkHyojiKirikae) {
         this.getTainoGengakuShosaiInfo().setChkHyojiKirikae(chkHyojiKirikae);
     }
 
@@ -486,7 +486,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTxtNendo(TextBoxDate txtNendo) {
+    public void  setTxtNendo(TextBoxDate txtNendo) {
         this.getTainoGengakuShosaiInfo().setTxtNendo(txtNendo);
     }
 
@@ -496,7 +496,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setDgTainoShosaiInfo(DataGrid<dgTainoShosaiInfo_Row> dgTainoShosaiInfo) {
+    public void  setDgTainoShosaiInfo(DataGrid<dgTainoShosaiInfo_Row> dgTainoShosaiInfo) {
         this.getTainoGengakuShosaiInfo().setDgTainoShosaiInfo(dgTainoShosaiInfo);
     }
 
@@ -506,7 +506,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setTblComment(tblCommentDiv tblComment) {
+    public void  setTblComment(tblCommentDiv tblComment) {
         this.getTainoGengakuShosaiInfo().setTblComment(tblComment);
     }
 
@@ -591,7 +591,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setModoru(ModoruDiv Modoru) {
+    public void  setModoru(ModoruDiv Modoru) {
         this.getTainoGengakuShosaiInfo().setModoru(Modoru);
     }
 
@@ -601,7 +601,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public void setBtnModoru(Button btnModoru) {
+    public void  setBtnModoru(Button btnModoru) {
         this.getTainoGengakuShosaiInfo().getModoru().setBtnModoru(btnModoru);
     }
 
@@ -732,17 +732,10 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
 
     private Map<String, DataGridCellBgColor> getBgColor(TainoKiSummary summary, FlexibleDate 滞納判定基準日) {
         DataGridCellBgColor bgColor = DataGridCellBgColor.bgColorNormal;
-        if (MinoKannoKubun.未納あり.equals(summary.get未納完納区分())) {
-            if (JikoKubun.時効未到来.equals(summary.get時効区分())) {
-                bgColor = DataGridCellBgColor.bgColorYellow;
-            } else if (JikoKubun.時効到来.equals(summary.get時効区分())) {
-                bgColor = DataGridCellBgColor.bgColorRed;
-            }
-        } else if (MinoKannoKubun.過納.equals(summary.get未納完納区分())) {
-            bgColor = DataGridCellBgColor.bgColorGreen;
-        }
         if (滞納判定基準日 != null && summary.get納期限() != null && summary.get納期限().isBefore(new RDate(滞納判定基準日.toString()).minusYear(十年))) {
             bgColor = DataGridCellBgColor.bgColorLightRed;
+        } else {
+            bgColor = getcolor(summary);
         }
         Map<String, DataGridCellBgColor> colorMap = new HashMap<>();
         Class clazz = dgTainoShosaiInfo_Row.class;
@@ -750,5 +743,18 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
             colorMap.put(field.getName(), bgColor);
         }
         return colorMap;
+    }
+
+    private DataGridCellBgColor getcolor(TainoKiSummary summary) {
+        if (MinoKannoKubun.未納あり.equals(summary.get未納完納区分())) {
+            if (JikoKubun.時効未到来.equals(summary.get時効区分())) {
+                return DataGridCellBgColor.bgColorYellow;
+            } else if (JikoKubun.時効到来.equals(summary.get時効区分())) {
+                return DataGridCellBgColor.bgColorRed;
+            }
+        } else if (MinoKannoKubun.過納.equals(summary.get未納完納区分())) {
+            return DataGridCellBgColor.bgColorGreen;
+        }
+        return DataGridCellBgColor.bgColorNormal;
     }
 }
