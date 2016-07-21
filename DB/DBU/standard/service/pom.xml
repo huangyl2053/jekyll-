@@ -29,6 +29,10 @@
             <groupId>jp.co.ndensan.reams.db.dbd</groupId>
             <artifactId>DbdService</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdPersistence</artifactId>
+        </dependency>
         <!-- DBU -->
         <dependency>
             <groupId>${project.groupId}</groupId>
