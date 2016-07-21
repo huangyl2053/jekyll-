@@ -24,8 +24,6 @@ public class IkenshoSakuseiIraiValidationHandler {
     private final IkenshoSakuseiIraiDiv div;
     private static final RString 主治医医療機関 = new RString("主治医医療機関");
     private static final RString 主治医 = new RString("主治医");
-    private static final RString 主治医意見書作成依頼日 = new RString("主治医意見書作成依頼日");
-    private static final RString 依頼情報未指定 = new RString("依頼情報未指定ため、依頼書の印刷");
     private static final RString 発行書類 = new RString("発行書類を");
     private static final RString 受診予定開始日 = new RString("受診予定開始日を");
     private static final RString 受診予定終了日 = new RString("受診予定終了日を");
@@ -95,7 +93,7 @@ public class IkenshoSakuseiIraiValidationHandler {
                                 UrErrorMessages.未指定, 受診予定終了日.toString()), div.getTxtJyushinKikan()));
             }
             if (div.getTxtJyushinKikan().getFromValue() != null
-                    && div.getTxtJyushinKikan().getToValue() == null
+                    && div.getTxtJyushinKikan().getToValue() != null
                     && div.getTxtJyushinKikan().getToValue().isBefore(div.getTxtJyushinKikan().getFromValue())) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
