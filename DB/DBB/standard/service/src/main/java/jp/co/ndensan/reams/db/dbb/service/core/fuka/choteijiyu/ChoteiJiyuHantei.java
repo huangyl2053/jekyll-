@@ -82,7 +82,7 @@ public class ChoteiJiyuHantei {
                             is徴収方法更正あり);
                 }
             }
-            if (param.get現年度() != null && 更正後賦課の情報.get現年度() != null) {
+            if (更正後賦課の情報.get現年度() != null) {
                 更正後賦課の情報.set現年度(set現年度調定事由(調定事由, param.get現年度(), 更正後賦課の情報.get現年度()));
             }
             if (更正後賦課の情報.get過年度() != null) {
@@ -140,9 +140,9 @@ public class ChoteiJiyuHantei {
                 || is金額変更(更正前.get公的年金収入額(), 更正後.get公的年金収入額())) {
             調定事由.add(ChoteiJiyuCode.所得更正による更正.getコード());
         }
-        if (is金額減少あり(更正前.get減免額(), 更正後.get減免額())) {
+        if (is金額減少あり(更正後.get減免額(), 更正前.get減免額())) {
             調定事由.add(ChoteiJiyuCode.減免決定による更正.getコード());
-        } else if (is金額減少あり(更正後.get減免額(), 更正前.get減免額())) {
+        } else if (is金額減少あり(更正前.get減免額(), 更正後.get減免額())) {
             調定事由.add(ChoteiJiyuCode.減免取消による更正.getコード());
         }
         if (ShokkenKubun.該当.getコード().equals(更正後.get職権区分())) {
@@ -206,7 +206,7 @@ public class ChoteiJiyuHantei {
         }
         if (is金額変更(更正前.get合計所得金額(), 更正後.get合計所得金額())
                 || is金額変更(更正前.get公的年金収入額(), 更正後.get公的年金収入額())) {
-            調定事由.add(ChoteiJiyuCode.所得更正による更正.getコード());
+            調定事由.add(ChoteiJiyuCode.所得更正による異動.getコード());
         }
         if (isRString変更(更正前.get口座区分(), 更正後.get口座区分())) {
             調定事由.add(ChoteiJiyuCode.口座情報変更.getコード());
@@ -270,6 +270,9 @@ public class ChoteiJiyuHantei {
     private FukaJoho set現年度調定事由(List<RString> 調定事由, FukaJoho 更正前, FukaJoho 賦課情報) {
         FukaJohoBuilder builder = 賦課情報.createBuilderForEdit();
         if (調定事由.isEmpty()) {
+            if (更正前 == null) {
+                return 賦課情報;
+            }
             if (更正前.get調定事由1() != null) {
                 builder.set調定事由1(更正前.get調定事由1());
             }
@@ -322,24 +325,22 @@ public class ChoteiJiyuHantei {
     }
 
     private boolean isFlexibleDate変更(FlexibleDate 更正前, FlexibleDate 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = FlexibleDate.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = FlexibleDate.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 
     private boolean isRString変更(RString 更正前, RString 更正後) {
-        if (更正後 != null && !更正後.isEmpty()
-                && !更正後.equals(更正前)) {
-            return true;
-        } else if ((更正後 == null || 更正後.isEmpty())
-                && 更正前 != null && !更正前.isEmpty()) {
-            return true;
+        if (更正前 == null) {
+            更正前 = RString.EMPTY;
         }
-        return false;
+        if (更正後 == null) {
+            更正後 = RString.EMPTY;
+        }
+        return !更正後.equals(更正前);
     }
 }
