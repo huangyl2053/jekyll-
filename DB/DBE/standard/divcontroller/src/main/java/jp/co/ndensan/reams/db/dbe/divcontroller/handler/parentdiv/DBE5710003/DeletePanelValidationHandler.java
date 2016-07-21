@@ -98,7 +98,7 @@ public class DeletePanelValidationHandler {
      */
     public ValidationMessageControlPairs 認定調査委託料支払年月日チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.調査票特記存在しない));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.調査票削除不可));
         return validationMessages;
     }
 
