@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business.report.dbd100005;
+package jp.co.ndensan.reams.db.dbd.business.report.dbd100006;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengaku;
-import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.meisai.ShiharaiHohoHenkoGengakuMeisai;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100005.KyufugakuGengakuTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100004.ShokanHaraiShukkeJyoho;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100006.SashitomeYokokuTsuchishoNigoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
@@ -20,15 +19,13 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
+ * 差止予告通知書（２号被保険者用）Editorです。
  *
- * 給付額減額通知書
- *
- * @reamsid_L DBD-3640-060 b_liuyang2
+ * @reamsid_L DBD-3640-070 b_liuyang2
  */
-public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchishoEditor {
+public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuchishoNigoEditor {
 
     private static final int NOCOUNT_1 = 1;
     private static final int NOCOUNT_2 = 2;
@@ -49,7 +46,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private final int index;
+    private List<ShokanHaraiShukkeJyoho> 償還払計情報リスト;
 
     /**
      * インスタンスを生成します。
@@ -62,12 +59,11 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
      * @param 通知書定型文リスト List<RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
-     * @param index int
-     *
+     * @param 償還払計情報リスト List<ShokanHaraiShukkeJyoho>
      */
-    public KyufugakuGengakuTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
-            NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, int index) {
+    public SashitomeYokokuTsuchishoNigoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
+            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
+            ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払計情報リスト) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御共通 = 帳票制御共通;
@@ -76,25 +72,21 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         this.通知書定型文リスト = 通知書定型文リスト;
         this.認証者ソースビルダー = 認証者ソースビルダー;
         this.帳票情報 = 帳票情報;
-        this.index = index;
-
+        this.償還払計情報リスト = 償還払計情報リスト;
     }
 
     @Override
-    public KyufugakuGengakuTsuchishoReportSource edit(KyufugakuGengakuTsuchishoReportSource source) {
+    public SashitomeYokokuTsuchishoNigoReportSource edit(SashitomeYokokuTsuchishoNigoReportSource source) {
 
         setCompSofubutsuAtesaki(source);
         setCompNinshosha(source);
         setLayer1(source);
-        setKyufugakuGengaku(source);
-        setLayerFontLarge(source);
-        setLayerFontKonzai(source);
-        setLayerFontKonzai2(source);
+        setHokenryoTainoJyokyo(source);
         setAccessLogEditor(source);
         return source;
     }
 
-    private void setCompSofubutsuAtesaki(KyufugakuGengakuTsuchishoReportSource source) {
+    private void setCompSofubutsuAtesaki(SashitomeYokokuTsuchishoNigoReportSource source) {
         EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(this.宛先, this.地方公共団体, this.帳票制御共通);
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
@@ -102,6 +94,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         } catch (Exception e) {
             sofubutsuAtesakiSource = new SofubutsuAtesakiSource();
         }
+
         source.yubinNo = sofubutsuAtesakiSource.yubinNo;
         source.gyoseiku1 = sofubutsuAtesakiSource.gyoseiku;
         source.jushoText = sofubutsuAtesakiSource.jushoText;
@@ -136,9 +129,10 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.shimeiSmall1 = sofubutsuAtesakiSource.shimeiSmall1;
         source.shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
         source.shimeiText = sofubutsuAtesakiSource.shimeiText;
+
     }
 
-    private void setCompNinshosha(KyufugakuGengakuTsuchishoReportSource source) {
+    private void setCompNinshosha(SashitomeYokokuTsuchishoNigoReportSource source) {
         source.denshiKoin = 認証者ソースビルダー.denshiKoin;
         source.hakkoYMD = 認証者ソースビルダー.hakkoYMD;
         source.ninshoshaYakushokuMei = 認証者ソースビルダー.ninshoshaYakushokuMei;
@@ -150,7 +144,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.koinShoryaku = 認証者ソースビルダー.koinShoryaku;
     }
 
-    private void setLayer1(KyufugakuGengakuTsuchishoReportSource source) {
+    private void setLayer1(SashitomeYokokuTsuchishoNigoReportSource source) {
         source.bunshoNo = this.文書番号;
         EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
@@ -165,73 +159,46 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         source.hihokenshaNo8 = 被保険者番号.substring(NOCOUNT_7, NOCOUNT_8);
         source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
         source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
-
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
-            source.tsuchibun = 通知書定型文リスト.get(0);
+            source.tsuchibun1 = 通知書定型文リスト.get(0);
         }
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("1")) {
-            source.renrakusakiHoka = 通知書定型文リスト.get(1);
-        } else {
-            source.renrakusakiHoka = RString.EMPTY;
+        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
+            source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
+        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 3) {
+            source.tsuchibun3 = 通知書定型文リスト.get(2);
+        }
+
     }
 
-    private void setKyufugakuGengaku(KyufugakuGengakuTsuchishoReportSource source) {
-        ShiharaiHohoHenkoGengaku 支払方法変更情報 = this.帳票情報.getShiharaiHohoHenkoGengakuList().get(0);
-        ShiharaiHohoHenkoGengakuMeisai 支払方法変更減額明細 = 支払方法変更情報.getShiharaiHohoHenkoGengakuMeisaiList().get(index);
-        if (null != this.帳票情報.getShiharaiHohoHenkoGengakuList()) {
-            //TODO   支払方法変更減額明細が設計書と違い
-//            source.gengakuKikan = 支払方法変更情報.get確定減額期間開始年月日().wareki().toDateString().concat("~").
-//                    concat(支払方法変更情報.get確定減額期間終了年月日().wareki().toDateString());
-            source.listTainoJokyo_1 = 支払方法変更減額明細.get対象年度().toDateString();
-            source.listTainoJokyo_2 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get未納_時効消滅減額(), 0);
-            source.listTainoJokyo_3 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get納付額(), 0);
-            source.listTainoJokyo_4 = DecimalFormatter.toコンマ区切りRString(支払方法変更減額明細.get年賦課額(), 0);
-        }
-        source.santeiKonkyoKikan1 = new RString("徴収権消滅期間：（未納・時効消滅額／年賦課額）＋（未納・時効消滅額／年賦課額）＋・・");
-//        source.shometsuKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-        source.santeiKonkyoKikan2 = new RString("納付済期間：（納付額／年賦課額）＋（納付額／年賦課額）＋・・・・・・・・・・・・・・");
-//        source.sumiKikan = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
-        source.calGengakuKikan = new RString("給付額減額期間＝徴収権消滅期間*徴収権消滅期間/(徴収権消滅期間＋納付済期間)/2*12");
-//        source.shometsuKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.shometsuKikanb = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.shometsuKikanc = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get徴収権消滅期間(), 0);
-//        source.sumiKikana = DecimalFormatter.toコンマ区切りRString(支払方法変更情報.get納付済期間(), 0);
-    }
+    private void setHokenryoTainoJyokyo(SashitomeYokokuTsuchishoNigoReportSource source) {
+        source.nendoTitle1 = new RString("");
+        source.nendoTitle2 = new RString("");
+        source.nendoTitle3 = new RString("");
+        source.listTainoJokyo_1 = new RString("");
+        source.listTainoJokyo_2 = new RString("");
+        source.listTainoJokyo_3 = new RString("");
+        source.listTainoJokyo_4 = new RString("");
+        source.listTainoJokyo_5 = new RString("");
+        source.listTainoJokyo_6 = new RString("");
+        source.listTainoJokyo_7 = new RString("");
+        source.listTainoJokyo_8 = new RString("");
+        source.listTainoJokyo_9 = new RString("");
+        source.hokenGokei1 = new RString("");
+        source.entaiGokei1 = new RString("");
+        source.hokenGokei2 = new RString("");
+        source.entaiGokei2 = new RString("");
+        source.hokenGokei3 = new RString("");
+        source.entaiGokei3 = new RString("");
+        source.hanteiYMD = new RString("");
 
-    private void setLayerFontLarge(KyufugakuGengakuTsuchishoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("2")) {
-            source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
-        } else {
-            source.renrakusakiHokaLarge = RString.EMPTY;
-        }
-    }
-
-    private void setLayerFontKonzai(KyufugakuGengakuTsuchishoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("3")) {
-            source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
-            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
-        } else {
-            source.renrakusakiHokaJodanSmall = RString.EMPTY;
-            source.renrakusakiHokaGedanLarge = RString.EMPTY;
-        }
-    }
-
-    private void setLayerFontKonzai2(KyufugakuGengakuTsuchishoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("4")) {
-            source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
-            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
-        } else {
-            source.renrakusakiHokaJodanLarge = RString.EMPTY;
-            source.renrakusakiHokaGedanSmall = RString.EMPTY;
-        }
     }
 
     private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通) {
         return new EditedKojin(個人情報, 帳票制御共通);
     }
 
-    private void setAccessLogEditor(KyufugakuGengakuTsuchishoReportSource source) {
+    private void setAccessLogEditor(SashitomeYokokuTsuchishoNigoReportSource source) {
         source.shikibetsuCode = this.個人情報.get識別コード().getColumnValue();
         source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
 
