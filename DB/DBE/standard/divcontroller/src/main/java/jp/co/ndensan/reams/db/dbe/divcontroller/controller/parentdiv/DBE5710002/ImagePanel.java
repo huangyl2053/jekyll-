@@ -54,7 +54,7 @@ public class ImagePanel {
      * @param div 要介護認定イメージ情報出力画面
      * @return ResponseData
      */
-    public ResponseData<ImagePanelDiv> doCheckForDownLoad(ImagePanelDiv div) {
+    public ResponseData<ImagePanelDiv> onclick_btnDownLoadCheck(ImagePanelDiv div) {
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
                 new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
@@ -79,7 +79,7 @@ public class ImagePanel {
      * @param response IDownLoadServletResponse
      * @return ResponseData
      */
-    public IDownLoadServletResponse downLoad(ImagePanelDiv div, IDownLoadServletResponse response) {
+    public IDownLoadServletResponse onclick_btnDownLoad(ImagePanelDiv div, IDownLoadServletResponse response) {
 //        TODO 技術点69提出しました　2016/07/20 王暁冬
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath());
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(filePath));

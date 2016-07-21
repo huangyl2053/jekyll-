@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0810013;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;

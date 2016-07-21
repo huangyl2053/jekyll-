@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolisttashichosonjushochitokureisha;
 
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -55,5 +54,4 @@ public class HanyoListTaShichosonJushochiTokureishaRelateEntity {
     private RString 医療保険者名;
     private RString 医療保険記号番号;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
-    private UaFt250FindAtesakiEntity atesakiEntity;
 }

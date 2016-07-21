@@ -40,7 +40,6 @@
         <result property="医療保険者名" column="医療保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="医療保険記号番号" column="医療保険記号番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="getTaShichoson" resultMap="resultMap_getTaShichoson"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaMybatisParameter"
@@ -181,7 +180,6 @@
             医療保険加入状況."iryoHokenshaMeisho" AS 医療保険者名,
             医療保険加入状況."iryoHokenKigoNo" AS 医療保険記号番号						
             ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
         FROM
             処理対象
         INNER JOIN

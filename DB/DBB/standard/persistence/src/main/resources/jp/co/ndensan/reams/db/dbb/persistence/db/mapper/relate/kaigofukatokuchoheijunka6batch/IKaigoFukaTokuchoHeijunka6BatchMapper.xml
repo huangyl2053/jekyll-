@@ -574,7 +574,6 @@
             AND 計算後情報."fukaNendo" = #{賦課年度}
             AND (計算後情報."koseiZengoKubun" = '2' OR 計算後情報."koseiZengoKubun" = '1')
             AND 計算後情報."sakuseiShoriName" = '特徴平準化計算_6月分'
-            AND 計算後情報."choteiNichiji" = #{調定日時}
             AND 年金特徴回付情報."tsuchiNaiyoCode" in ('00', '30')
             AND 年金特徴回付情報."shoriNendo" = #{調定前年度}
         ${出力順}

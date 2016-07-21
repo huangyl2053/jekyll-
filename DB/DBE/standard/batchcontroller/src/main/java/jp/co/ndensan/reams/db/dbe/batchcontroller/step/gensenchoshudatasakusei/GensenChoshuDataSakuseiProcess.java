@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  */
 public class GensenChoshuDataSakuseiProcess extends BatchProcessBase<GensenChoshuRelateEntity> {
-// TODO 「ファイルを操作する時に、下記の異常がFWで自動チェックする」　QA：1413
 
     private GensenChoshuProcessParameter parameter;
     private static final RString MYBATIS_SELECT_ID = new RString(

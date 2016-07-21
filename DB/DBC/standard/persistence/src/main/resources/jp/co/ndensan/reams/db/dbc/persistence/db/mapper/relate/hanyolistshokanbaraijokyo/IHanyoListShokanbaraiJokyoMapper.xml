@@ -70,19 +70,19 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) As DbT3034
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) As DbT3034
         LEFT OUTER JOIN 
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3035ShokanJutakuKaishuJizenShinseiMapper.noDeleted_DbT3035ShokanJutakuKaishuJizenShinsei" />) As DbT3035
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_jizenServiceTeikyoYM" = DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_jizenSeiriNo" = DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_seiriNo"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" />) As DbT3036
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" />) As DbT3036
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3036."dbT3036ShokanHanteiKekka_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3036."dbT3036ShokanHanteiKekka_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3036."dbT3036ShokanHanteiKekka_seiriNo"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) As DbT3038
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) As DbT3038
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3038."dbT3038ShokanKihon_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3038."dbT3038ShokanKihon_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3038."dbT3038ShokanKihon_seiriNo"
@@ -303,11 +303,11 @@
         <result property="みなし要介護区分コード" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="直近異動事由コード" column="直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <association property="支給申請Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
         <association property="支給住宅Entity" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3035ShokanJutakuKaishuJizenShinseiMapper.ResultMap_DbT3035ShokanJutakuKaishuJizenShinseiEntity"/>
         <association property="判定結果情報Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
         <association property="福祉用具Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.ResultMap_DbT3048ShokanFukushiYoguHanbaihiEntity"/>
         <association property="請求住宅Entity"
@@ -319,6 +319,6 @@
         <association property="宛先Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <collection property="請求基本List"
-                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
     </resultMap>  
 </mapper>

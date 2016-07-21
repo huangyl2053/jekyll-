@@ -54,7 +54,7 @@ public enum ReportIdDBD {
     /**
      * 利用者負担額減額_免除等認定証の帳票ＩＤです。
      */
-    DBD100015(new ReportId("DBD100015_RiyoshaFatangakuGengakuMenjoNinteisho"), new RString("利用者負担額減額_免除等認定証")),
+    DBD100015(new ReportId("DBD100015_RiyoshaFutangakuGengakuMenjoNinteisho"), new RString("利用者負担額減額_免除等認定証")),
     /**
      * 負担限度額認定証の帳票ＩＤです。
      */

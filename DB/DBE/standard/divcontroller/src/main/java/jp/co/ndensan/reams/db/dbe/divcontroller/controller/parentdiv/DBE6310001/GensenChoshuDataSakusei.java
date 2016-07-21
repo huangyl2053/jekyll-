@@ -32,7 +32,7 @@ public class GensenChoshuDataSakusei {
     }
 
     /**
-     * 「CSVを出力する」ボタン押下場合、"1"を設定します。
+     * 「CSVを出力する」ボタン押下場合、画面の処理です。
      *
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
@@ -46,7 +46,7 @@ public class GensenChoshuDataSakusei {
     }
 
     /**
-     * バッチパラメータの設定します。
+     * バッチパラメータを設定します。
      *
      * @param div NinteiChosaHoshuShokaiDiv
      * @return ResponseData<NinteiChosaHoshuShokaiFlowParameter>

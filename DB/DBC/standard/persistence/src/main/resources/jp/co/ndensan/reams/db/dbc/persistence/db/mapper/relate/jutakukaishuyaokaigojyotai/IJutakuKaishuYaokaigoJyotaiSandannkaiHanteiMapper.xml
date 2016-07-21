@@ -6,7 +6,7 @@
         <include refid="selectYokaigoJotaiKubunCode" />
     </select>
 
-    <select resultOrdered="true" id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity">
+    <select resultOrdered="true" id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity">
         <include refid="selectShokanShinsei" />
     </select>
 

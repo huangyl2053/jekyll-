@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
@@ -53,7 +51,7 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
 
     /**
-     * 特徴平準化結果対象者一覧表
+     * 特徴平準化結果対象者一覧表を生成するメソッドです。
      *
      * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijunkaRokuBatchTaishoshaIchiran>
      * @param 出力順ID long
@@ -80,7 +78,7 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
     }
 
     /**
-     * 特徴平準化結果対象者一覧表
+     * 特徴平準化結果対象外一覧表を生成するメソッドです。
      *
      * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijunkaRokuBatchTaishogaiIchiran>
      * @param 出力順ID long
@@ -133,28 +131,6 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
         }
     }
 
-    /**
-     * printメソッド
-     *
-     * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijunkaRokuBatchTaishoshaIchiran>
-     * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijunkaRokuBatchTaishogaiIchiran>
-     * @param 出力順ID Long
-     * @param 調定日時 YMDHMS
-     * @param 賦課年度 FlexibleYear
-     * @return SourceDataCollection
-     */
-    public SourceDataCollection print(List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
-            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Long 出力順ID, YMDHMS 調定日時,
-            FlexibleYear 賦課年度) {
-        TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty();
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        return new Printer<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource>().spool(property,
-                new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(特徴平準化結果対象者一覧表リスト,
-                        特徴平準化結果対象外一覧表リスト, 調定日時, 賦課年度, association, 並び順));
-    }
-
     private PersonalData toPersonalDataTaishosha(TokuchoHeijyunkaTaishoshaEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 entity.get被保険者番号().value());
@@ -165,18 +141,6 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 entity.get被保険者番号().value());
         return PersonalData.of(entity.get識別コード(), expandedInfo);
-    }
-
-    private List<RString> get出力順(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
-        List<RString> 並び順List = new ArrayList<>();
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                並び順List.add(item.get項目名());
-            }
-        }
-        return 並び順List;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

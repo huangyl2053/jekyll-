@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBD-5520-030 mawy -->
+ @reamsid_L DBD-5520-030 mawy 
 
-<!-- どのマッパーインターフェースと対応するかを指定する -->
+ どのマッパーインターフェースと対応するかを指定する 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyorisutokokikoreisha.IHanyoRisutoKokiKoreishaMapper">
      <resultMap id="resultMap_HanyoRisutoKokiKoreishaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutokokikoreisha.HanyoRisutoKokiKoreishaEntity" autoMapping="true">
         <result property="被保険者台帳管理_被保険者番号 "column="被保険者台帳管理_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -676,4 +676,4 @@
             </if>
             ORDER BY #{syutsuryokujun}
     </select>
-</mapper>
+</mapper>-->

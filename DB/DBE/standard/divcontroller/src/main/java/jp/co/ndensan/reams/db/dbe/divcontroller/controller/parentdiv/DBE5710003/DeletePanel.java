@@ -62,6 +62,19 @@ public class DeletePanel {
      */
     public ResponseData<DeletePanelDiv> onClick_btnDelete(DeletePanelDiv div) {
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+        List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
+        ValidationMessageControlPairs controlPairs = getValidationHandler(div).入力チェック_btnDelete();
+        if (controlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        確認メッセージ出力区分 = RString.EMPTY;
+        descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
+                イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
+                イメージ管理情報.getイメージ共有ファイルID());
+        ValidationMessageControlPairs イメージ削除チェック = イメージ削除チェック(div, 選択したイメージ対象, descriptor);
+        if (イメージ削除チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -70,20 +83,6 @@ public class DeletePanel {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
-            ValidationMessageControlPairs controlPairs = getValidationHandler(div).入力チェック_btnDelete();
-            if (controlPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(controlPairs).respond();
-            }
-            確認メッセージ出力区分 = RString.EMPTY;
-            descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
-                    イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
-                    イメージ管理情報.getイメージ共有ファイルID());
-            ValidationMessageControlPairs イメージ削除チェック = イメージ削除チェック(div, 選択したイメージ対象, descriptor);
-            if (イメージ削除チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
-            }
-
             if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
                 SharedFile.deleteFileInEntry(descriptor, イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号()).toString());
                 updateOrDelete(div);
@@ -92,7 +91,7 @@ public class DeletePanel {
         }
         if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+                    UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())

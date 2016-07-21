@@ -74,6 +74,8 @@ public class HanyoListTekiyoJogaishaProcessParameter implements IBatchProcessPar
     private RString psmChiku3_To_Name;
 
     /**
+     * コンストラクタです。
+     *
      * @param chohyoId 帳票ID
      * @param shutsuryokujunId 出力順ID
      * @param shutsuryokuKomokuId 出力項目ID

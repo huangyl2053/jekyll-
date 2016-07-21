@@ -60,14 +60,14 @@
         dbt3036.*,
         dbt3053.*
         FROM
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" /> dbt3034
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" /> dbt3034
         INNER JOIN
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" /> dbt3036
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" /> dbt3036
         ON
         dbt3034."dbT3034ShokanShinsei_hiHokenshaNo" = dbt3036."dbT3036ShokanHanteiKekka_hiHokenshaNo"
         AND dbt3036."dbT3036ShokanHanteiKekka_shikyuHushikyuKetteiKubun" = '1'
         INNER JOIN
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" /> dbt3053
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" /> dbt3053
         ON dbt3053."dbT3053ShokanShukei_hiHokenshaNo" = dbt3034."dbT3034ShokanShinsei_hiHokenshaNo"
         LEFT JOIN(
         SELECT
