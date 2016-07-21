@@ -42,6 +42,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString DBAMN22005_医療保険未加入により喪失 = new RString("DBAMN22005");
     private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006");
     private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007");
+    private static final RString DBAMN61002_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString FIRSTREQUEST以外 = new RString("2");
     private static final Integer FIRSTINDEX = Integer.valueOf("0");
     private static final RString 修正 = new RString("修正");
@@ -200,6 +201,8 @@ public class ShikakuSoshitsuIdoTotalHandler {
                     .getDdlShikakuShutokuJiyu().setSelectedKey(ShikakuSoshitsuJiyu.その他.getコード());
             div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDisabled(false);
             return;
+        } else if (DBAMN61002_転入転出保留対象者管理.equals(menuID)) {
+            keyValueList.add(new KeyValueDataSource(ShikakuSoshitsuJiyu.転出.getコード(), ShikakuSoshitsuJiyu.転出.get名称()));
         }
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDataSource(keyValueList);
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(1);
