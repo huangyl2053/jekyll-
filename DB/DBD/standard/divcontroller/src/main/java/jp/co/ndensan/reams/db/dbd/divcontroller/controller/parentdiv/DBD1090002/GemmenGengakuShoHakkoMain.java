@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasa
 import jp.co.ndensan.reams.db.dbd.business.report.GemmenGengakuNinteishoKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.HakkoRirekiKoyuJohoDBD100018;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.HakkoRirekiKoyuJohoDBD100020;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.DBD1090002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.GemmenGengakuShoHakkoMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1090002.dgChohyoSentaku_Row;
@@ -29,12 +30,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -147,9 +147,9 @@ public class GemmenGengakuShoHakkoMain {
             getHandler(div).特別地域加算減免を選択する場合の設定(list, 被保険者番号);
             ViewStateHolder.put(GemmenGengakuShoHakkoEnum.特別地域加算減免List, list);
             ViewStateHolder.put(GemmenGengakuShoHakkoEnum.減免減額種類, GemmenGengakuShurui.特別地域加算減免.get名称());
-        } else {
+        } else if (!ResponseHolder.isReRequest()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), true);
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("減免減額認定証・決定通知書の情報"));
+            return ResponseData.of(div).addMessage(DbdInformationMessages.減免減額_発行可能通知書_認定証なし.getMessage()).respond();
         }
 
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
