@@ -26,7 +26,7 @@ public enum ReportIdDBC {
     /**
      * 利用者負担２割対応・利用者負担割合更正
      */
-    DBC100065(new ReportId("DBC100065_FutanWariaisho"), new RString("利用者負担２割対応・利用者負担割合更正 ")),
+    DBC100065(new ReportId("DBC100065_FutanWariaiSho"), new RString("利用者負担２割対応・利用者負担割合更正 ")),
     /**
      * 高額総合事業サービス費判定エラーリスト
      */
