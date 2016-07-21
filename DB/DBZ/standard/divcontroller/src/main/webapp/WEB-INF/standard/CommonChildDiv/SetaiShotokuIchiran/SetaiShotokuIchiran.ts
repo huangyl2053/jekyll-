@@ -31,7 +31,8 @@ module DBZ
                     this.controls.btnRirekiClose().displayNone = true;
                     this.controls.dgSetaiShotoku().displayNone = false;
                     this.controls.dgSetaiShotoku().gridSetting.isMultiSelectable = true;
-                    
+                    this.controls.btnNarabeteHyoji().displayNone = false;
+                    this.controls.btnNarabeteHyojiKogaku().displayNone = true;
                 }
 
                 public ShotokuShokai(): void {
@@ -47,6 +48,7 @@ module DBZ
                     this.controls.dgShotokuRireki().displayNone = true;
                     this.controls.dgSetaiShotoku().displayNone = false;
                     this.controls.btnRirekiClose().displayNone = true;
+                    this.controls.btnNarabeteHyojiKogaku().displayNone = true;
                 }
 
                 public ShotokuRirekiShokai(): void {
@@ -62,6 +64,7 @@ module DBZ
                     this.controls.dgShotokuRireki().disabled = false;
                     this.controls.btnRirekiClose().disabled = false;
                     this.controls.btnRirekiClose().displayNone = false;
+                    this.controls.btnNarabeteHyojiKogaku().displayNone = true;
                 }
 
                 public KogakuKaigoServicehi(): void {
@@ -71,6 +74,8 @@ module DBZ
                     this.controls.dgSetaiShotoku().displayNone = false;
                     this.controls.dgSetaiShotoku().gridSetting.isMultiSelectable = true;
                     this.controls.btnRirekiClose().displayNone = true;
+                    this.controls.btnNarabeteHyoji().displayNone = true;
+                    this.controls.btnNarabeteHyojiKogaku().displayNone = false;
                 }
             }
         }
