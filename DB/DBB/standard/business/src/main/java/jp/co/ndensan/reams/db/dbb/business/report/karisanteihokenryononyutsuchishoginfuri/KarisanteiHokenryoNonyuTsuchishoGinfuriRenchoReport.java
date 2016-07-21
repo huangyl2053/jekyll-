@@ -116,6 +116,7 @@ public class KarisanteiHokenryoNonyuTsuchishoGinfuriRenchoReport
         仮算定納入通知書情報Report.set算定の基礎(仮算定納入通知書情報.get算定の基礎());
         仮算定納入通知書情報Report.set納付書共通(仮算定納入通知書情報.get納付書共通());
         仮算定納入通知書情報Report.set編集後仮算定通知書共通情報(仮算定納入通知書情報.get編集後仮算定通知書共通情報());
+        仮算定納入通知書情報Report.set連番(仮算定納入通知書情報.get連番());
     }
 
     /**
