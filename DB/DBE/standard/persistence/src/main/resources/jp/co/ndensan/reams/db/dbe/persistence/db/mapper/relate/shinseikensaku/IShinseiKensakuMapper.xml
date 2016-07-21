@@ -176,9 +176,6 @@
                 rgdb."DbT5300GeninShikkan" DbT5300GeninShikkan
                 ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5300GeninShikkan."shinseishoKanriNo"
         </if>
-        LEFT JOIN
-            rgdb."DbT5300GeninShikkan" DbT5300GeninShikkan
-            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5300GeninShikkan."shinseishoKanriNo"
         <if test="useNinteiKanryoJoho">
             LEFT JOIN
                 rgdb."DbT5105NinteiKanryoJoho" DbT5105NinteiKanryoJoho
