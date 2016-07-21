@@ -170,15 +170,16 @@ public class YoshikiYonnoni {
                 }
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
             }
-            if (RDate.getNowDate().getMonthValue() < MONTH_6) {
-                int 報告年度 = RDate.getNowDate().getYearValue() - 2;
+            RDate date = RDate.getNowDate();
+            if (date.getMonthValue() < MONTH_6) {
+                int 報告年度 = date.getYearValue() - 1;
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
-                int 集計年度 = RDate.getNowDate().getYearValue() - 1;
+                int 集計年度 = date.getYearValue() - 2;
                 div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             } else {
-                int 報告年度 = RDate.getNowDate().getYearValue();
+                int 報告年度 = date.getYearValue();
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setValue(new FlexibleDate(報告年度, 1, 1));
-                int 集計年度 = RDate.getNowDate().getYearValue() - 2;
+                int 集計年度 = date.getYearValue() - 1;
                 div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(new FlexibleDate(集計年度, 1, 1));
             }
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(false);
