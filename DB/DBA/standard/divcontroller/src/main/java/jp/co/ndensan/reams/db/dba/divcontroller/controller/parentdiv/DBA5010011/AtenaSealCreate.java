@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA5010011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.atenasealcreate.AtenaSealCreateBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA5010011.AtenaSealCreateDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA5010011.AtenaSealCreateHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA5010011.AtenaSealCreateValidatisonHandler;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -27,7 +30,8 @@ public class AtenaSealCreate {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<AtenaSealCreateDiv> onLoad(AtenaSealCreateDiv div) {
-        getHandler(div).onLoad();
+        List<KoseiShichoson> koseiShichosonList = KoikiShichosonJohoFinder.createInstance().getKoseiShichosonList().records();
+        getHandler(div).onLoad(koseiShichosonList);
         return ResponseData.of(div).respond();
     }
 
@@ -49,7 +53,7 @@ public class AtenaSealCreate {
      * @return バリデーション結果
      */
     public ResponseData<AtenaSealCreateDiv> onclick_Check(AtenaSealCreateDiv div) {
-        ValidationMessageControlPairs validPairs = getValidatison(div).必須入力チェック();
+        ValidationMessageControlPairs validPairs = getValidatison(div).抽出期間チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
