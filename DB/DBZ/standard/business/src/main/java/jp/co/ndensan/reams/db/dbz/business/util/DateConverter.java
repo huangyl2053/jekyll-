@@ -62,10 +62,11 @@ public final class DateConverter {
      * @return RString
      */
     public static RString formatMonthFull(RString month) {
-        if (RString.isNullOrEmpty(month)) {
+        if (RString.isNullOrEmpty(month) || month.trim().isEmpty()
+                || month.trim().replace(月, RString.EMPTY).trim().isEmpty()) {
             return RString.EMPTY;
         }
-        month = month.replace(月, RString.EMPTY);
+        month = month.trim().replace(月, RString.EMPTY).trim();
         return new RString(new Decimal(month.toString()).toString(FULLMONTH.toString()));
     }
 

@@ -600,8 +600,10 @@ public class TokuchoTaishoshaIchiranHandler {
      * @param 確認状況区分 RString
      * @param 処理状態Message Message
      */
-    public void execute確認状態更新(RString 特別徴収開始月, RString 捕捉月, RString 確認状況区分, Message 処理状態Message) {
-        RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+    public void execute確認状態更新(RString 特別徴収開始月, RString 捕捉月,
+            RString 確認状況区分, Message 処理状態Message) {
+        RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         RString 基礎年金番号 = div.getTxtKisoNenkinNo().getValue();
         RString 被保険者番号 = div.getTxtHihokenshaNo().getValue();
         RString 年金コード = div.getTxtNenkinCode().getValue();
@@ -609,8 +611,9 @@ public class TokuchoTaishoshaIchiranHandler {
         RString 特別徴収義務者コード = div.getHiddenTokubetsuChoshuGimushaCode();
         RString 氏名 = div.getTxtAtenaShimeiKanji().getValue();
         RString 開始月 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE) && !特別徴収開始月.startsWith(LEFT)) {
-            開始月 = 特別徴収開始月.split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6);
+        if (!RString.isNullOrEmpty(特別徴収開始月)
+                && !特別徴収開始月.startsWith(RString.FULL_SPACE) && !特別徴収開始月.startsWith(LEFT)) {
+            開始月 = 特別徴収開始月.split(RString.FULL_SPACE.toString()).get(NUM0).trim().substring(NUM4, NUM6).trim();
         }
         RString message_TOP = TOPINFO;
         if (!RString.isNullOrEmpty(被保険者番号)) {
