@@ -307,7 +307,6 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         source.detail_entaikin3 = RString.EMPTY;
         source.detail_biko13 = RString.EMPTY;
         source.detail_biko23 = RString.EMPTY;
-        source.detail_funyuFukanBango3 = RString.EMPTY;
 
         return source;
     }
