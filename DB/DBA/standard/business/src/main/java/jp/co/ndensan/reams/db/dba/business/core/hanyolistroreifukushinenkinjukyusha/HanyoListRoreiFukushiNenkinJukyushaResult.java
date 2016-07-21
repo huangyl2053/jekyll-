@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.core.hanyolistroreifukushinenkinjuky
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.seiho.HaniChushutsubiKubun;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.rorei.HaniChushutsubiKubun;
 import jp.co.ndensan.reams.db.dba.definition.processprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.euc.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaCsvEntity;
@@ -249,7 +249,9 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
         renbanEucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
         renbanEucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
         renbanEucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
-        renbanEucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
+        if (!RString.isNullOrEmpty(entity.get資格区分())) {
+            renbanEucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
+        }
         if (フラグ.equals(entity.get住所地特例状態())) {
             renbanEucCsvEntity.set住所地特例状態(住所地特例);
         } else {

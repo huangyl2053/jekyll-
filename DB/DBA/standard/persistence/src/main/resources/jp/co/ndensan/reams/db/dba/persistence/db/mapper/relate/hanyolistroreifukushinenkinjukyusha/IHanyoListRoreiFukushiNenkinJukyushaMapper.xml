@@ -154,7 +154,7 @@
                 AND #{kijunYMD} <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
             </if>
             <if test="is範囲">
-                <if test="s老齢開始日">
+                <if test="is老齢開始日">
                     <if test="has範囲抽出日From">
                         AND #{chushutsunichiFrom} <![CDATA[<=]]> 老齢福祉年金受給者."jukyuKaishiYMD"
                     </if>
