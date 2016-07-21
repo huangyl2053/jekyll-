@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 /**
  * 汎用リスト_老齢福祉年金受給者のビジネスです。
  *
- * @reamsid_L DBA-1580-030 xuyannan
+ * @reamsid_L DBA-1620-030 yaodongsheng
  */
 public class HanyoListRoreiFukushiNenkinJukyushaResult {
 
