@@ -21,7 +21,7 @@ public class KaigoJyouhouJyourikuProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void beforeExecute() {
-        business = new KaigoFukaTokuchoHeijunka6Batch();
+        business = KaigoFukaTokuchoHeijunka6Batch.createInstance();
     }
 
     @Override

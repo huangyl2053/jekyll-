@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -19,43 +18,45 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 主治医意見書作成依頼(手動)一覧のクラスです。
+ * 主治医意見書作成依頼(手動)一覧_介護保険指定医依頼兼主治医意見書提出意見書のクラスです。
  *
  * @reamsid_L DBE-1590-030 zuotao
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IkenshoirairirekiichiranShudouEntity {
+public class ShujiiIkenshoTeishutsuIraishoEntity {
 
     private ShinseishoKanriNo shinseishoKanriNo;
-    private RString ikenshoIraiRirekiNo;
-    private RString ikenshoIraiKubun;
-    private Code ishiKubunCode;
-    private FlexibleDate ikenshoSakuseiIraiYMD;
-    private RString shujiiCode;
-    private RString shujiiName;
-    private RString shujiiIryokikanCode;
-    private RString iryoKikanMeisho;
-    private Code koroshoIfShikibetsuCode;
-    private FlexibleDate ninteiShinseiYMD;
-    private LasdecCode shichosonCode;
-
     private RString shoKisaiHokenshaNo;
-    private RString hihokenshaNo;
     private AtenaKanaMeisho hihokenshaKana;
     private AtenaMeisho hihokenshaName;
+    private RString hihokenshaNo;
+    private RString age;
+    private AtenaJusho jusho;
+    private AtenaJusho iryoKikanJusho;
     private FlexibleDate seinengappiYMD;
     private Code seibetsu;
     private YubinNo yubinNo;
-    private AtenaJusho jusho;
-    private Code ninteiShinseiShinseijiKubunCode;
-    private FlexibleDate ikenshoSakuseiKigenYMD;
-    private YubinNo iryoKikanYubinNo;
-    private AtenaJusho iryoKikanJusho;
-    private RString daihyoshaName;
-
-    private FlexibleDate iraishoShutsuryokuYMD;
-    private RString shichosonMeisho;
+    private FlexibleDate ninteiShinseiYMD;
     private TelNo telNo;
+    private TelNo iryoKikanTelNo;
+    private RString shujiiIryokikanCode;
+    private RString shujiiCode;
+    private TelNo iryoKikanFaxNo;
+    private YubinNo iryoKikanYubinNo;
+    private RString iryoKikanMeisho;
+    private RString daihyoshaName;
+    private RString ikenshoIraiKubun;
+    private FlexibleDate ikenshoSakuseiKigenYMD;
+    private RString zaitakuShisetsuKubun;
+    private FlexibleDate ikenshoSakuseiIraiYMD;
+    private Code ninteiShinseiShinseijiKubunCode;
+    private Code ikenshoSakuseiKaisuKubun;
+    private FlexibleDate ikenshoKinyuYMD;
+    private FlexibleDate ikenshoReadYMD;
+    private RString shujiiName;
+    private RString hokenshaName;
+    private int ikenshoBettoShinryohi;
+    private FlexibleDate hoshuShiharaiYMD;
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki1_5_3;
+package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki153;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
