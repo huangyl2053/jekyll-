@@ -793,7 +793,7 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setMeishoFuyo(ChohyoAtesakiKeisho.toValue(
                 DbBusinessConfig.get(ConfigNameDBE.介護保険診断命令書_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
         item.setCustomerBarCode(ReportUtil.getCustomerBarCode(row.getIryoKikanYubinNo(), row.getIryoukikanShozaichi()));
-        item.setHihokenshaName1(row.getHihokennshaShimei());
+        item.setHihokenshaName1(row.getShujii());
         item.setSonota(row.getHihokenshaNo());
         return item;
     }
