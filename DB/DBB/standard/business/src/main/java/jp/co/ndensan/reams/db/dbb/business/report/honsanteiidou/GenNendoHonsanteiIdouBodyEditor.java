@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.gennendohonsanteiidou.GenNendoHonsanteiIdouSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -114,7 +118,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
         source.hokenshaName = association.get市町村名();
         if (計算後情報_宛名_口座_更正後Entity != null) {
             edit項目(source);
-            source.list1_6 = 計算後情報_宛名_口座_更正後Entity.get調定事由1();
+            source.list1_6 = get調定事由略称(計算後情報_宛名_口座_更正後Entity.get調定事由1());
             if (計算後情報_宛名_口座_更正前Entity != null && 計算後情報_宛名_口座_更正前Entity.get調定日時() != null) {
                 source.list2_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
             }
@@ -135,7 +139,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 RString 口座区分 = 計算後情報_宛名_口座_更正前Entity.get口座区分();
                 source.list2_17 = 口座区分.equals(現金_0) ? 現金 : 口座;
             }
-            source.list2_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
+            source.list2_18 = get調定事由略称(計算後情報_宛名_口座_更正後Entity.get調定事由2());
             if (計算後情報_宛名_口座_更正後Entity.get調定日時() != null) {
                 source.list3_1 = 計算後情報_宛名_口座_更正後Entity.get調定日時().getDate().wareki().toDateString();
             }
@@ -191,7 +195,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                 RString 口座区分 = 計算後情報_宛名_口座_更正後Entity.get口座区分();
                 source.list3_17 = 口座区分.equals(口座_1) ? 口座 : 現金;
             }
-            source.list3_18 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
+            source.list3_18 = get調定事由略称(計算後情報_宛名_口座_更正後Entity.get調定事由3());
 
             if (計算後情報_宛名_口座_更正前Entity == null) {
                 return source;
@@ -308,7 +312,7 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
      */
     public GenNendoHonsanteiIdouSource edit項目追加3(GenNendoHonsanteiIdouSource source) {
         if (計算後情報_宛名_口座_更正後Entity != null) {
-            source.list4_22 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
+            source.list4_22 = get調定事由略称(計算後情報_宛名_口座_更正後Entity.get調定事由4());
 
             if (計算後情報_宛名_口座_更正後Entity.get特徴期別金額01() != null) {
                 source.list5_1 = DecimalFormatter
@@ -696,6 +700,14 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
                     .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
                     .concat(koza.get口座名義人漢字().toString());
         }
+    }
+
+    private RString get調定事由略称(RString 調定事由) {
+
+        if (RString.isNullOrEmpty(調定事由)) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.調定事由.getコード(), new Code(調定事由));
     }
 
     private Decimal nullTOZero(Decimal 特徴普徴期別金額) {

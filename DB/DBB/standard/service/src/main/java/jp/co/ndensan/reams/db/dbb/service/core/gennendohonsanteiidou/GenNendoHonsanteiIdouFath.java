@@ -36,9 +36,9 @@ import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.report.honsanteiidou.GenNendoHonsanteiIdouPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
@@ -103,6 +103,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -178,6 +179,7 @@ public class GenNendoHonsanteiIdouFath {
     private static final RString タイトル_調定年月日_更正前 = new RString("調定年月日（更正前）");
     private static final RString タイトル_確定保険料額_更正前 = new RString("確定保険料額（更正前）");
     private static final RString タイトル_計算上保険料額_更正前 = new RString("計算上保険料額（更正前）");
+    private static final RString タイトル_計算上保険料額_更正後 = new RString("計算上保険料額（更正後）");
     private static final RString タイトル_減免額_更正前 = new RString("減免額（更正前）");
     private static final RString タイトル_月別所得段階4月_更正前 = new RString("月別所得段階4月（更正前）");
     private static final RString タイトル_月別所得段階5月_更正前 = new RString("月別所得段階5月（更正前）");
@@ -254,6 +256,7 @@ public class GenNendoHonsanteiIdouFath {
     private static final RString タイトル_普徴額14期_更正後 = new RString("普徴額14期（更正後）");
     private static final RString タイトル_徴収方法_更正後 = new RString("徴収方法（更正後）");
     private static final RString タイトル_調定事由5_更正後 = new RString("調定事由５（更正後）");
+    private static final RString 定数_0 = new RString("0");
 
     /**
      * コンストラクタです
@@ -507,7 +510,7 @@ public class GenNendoHonsanteiIdouFath {
                 老齢福祉の情報リスト.add(entity);
             }
         }
-        if (老齢福祉の情報リスト != null && !老齢福祉の情報リスト.isEmpty()) {
+        if (!老齢福祉の情報リスト.isEmpty()) {
             Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
@@ -632,7 +635,8 @@ public class GenNendoHonsanteiIdouFath {
 
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(賦課年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
-        Kitsuki 最終法定納期 = 期月リスト.get最終法定納期();
+        KitsukiList 本算定期間 = 期月リスト.filtered本算定期間();
+        ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
@@ -663,11 +667,10 @@ public class GenNendoHonsanteiIdouFath {
                 }
 
                 IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(更正後Entity.get宛名Entity());
-                ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
                 RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, 地方公共団体);
                 bodyList.add(編集後住所);
-                if (区分_管内.equals(更正後Entity.get宛名Entity().getKannaiKangaiKubun())) {
-                    bodyList.add(更正後Entity.get宛名Entity().getJusho().getColumnValue());
+                if (区分_管内.equals(更正後Entity.get宛名Entity().getKannaiKangaiKubun()) && 宛名情報.get住所() != null) {
+                    bodyList.add(宛名情報.get住所().get住所());
                 } else if (区分_管外.equals(更正後Entity.get宛名Entity().getKannaiKangaiKubun())) {
                     bodyList.add(編集後住所);
                 } else {
@@ -681,26 +684,32 @@ public class GenNendoHonsanteiIdouFath {
                 }
                 RString 口座情報 = get口座情報(更正後Entity);
                 bodyList.add(口座情報);
-                bodyList.add(更正後Entity.get調定事由1());
+                bodyList.add(get調定事由略称(更正後Entity.get調定事由1()));
 
-                RString 調定年月日_更正前 = 更正前Entity.get調定日時().getRDateTime().getDate().seireki()
-                        .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
-                bodyList.add(調定年月日_更正前);
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get確定介護保険料_年額()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get減免前介護保険料_年額()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get減免額()), 0));
+                if (更正前Entity == null || 更正前Entity.get調定日時() == null) {
+                    bodyList.add(RString.EMPTY);
+                    bodyList.add(RString.EMPTY);
+                    bodyList.add(RString.EMPTY);
+                    bodyList.add(RString.EMPTY);
+                } else {
+                    bodyList.add(更正前Entity.get調定日時().getRDateTime().getDate().seireki()
+                            .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
+                    bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get確定介護保険料_年額()), 0));
+                    bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get減免前介護保険料_年額()), 0));
+                    bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get減免額()), 0));
+                }
 
                 List<RString> 更正前_月別所得段階リスト = new ArrayList<>();
                 set月別取得段階(更正前Entity, 更正前_月別所得段階リスト);
                 bodyList.addAll(更正前_月別所得段階リスト);
-                if (KozaKubun.現金納付.getコード().equals(更正前Entity.get口座区分())) {
+                if (更正前Entity != null && KozaKubun.現金納付.getコード().equals(更正前Entity.get口座区分())) {
                     bodyList.add(定値_現金);
-                } else if (KozaKubun.口座振替.getコード().equals(更正前Entity.get口座区分())) {
+                } else if (更正前Entity != null && KozaKubun.口座振替.getコード().equals(更正前Entity.get口座区分())) {
                     bodyList.add(定値_口座);
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
-                bodyList.add(更正後Entity.get調定事由2());
+                bodyList.add(get調定事由略称(更正後Entity.get調定事由2()));
 
                 RString 調定年月日_更正後 = 更正後Entity.get調定日時().getRDateTime().getDate().seireki()
                         .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
@@ -719,57 +728,95 @@ public class GenNendoHonsanteiIdouFath {
                     bodyList.add(RString.EMPTY);
                 }
 
-                bodyList.add(更正後Entity.get調定事由3());
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額01()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額02()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額03()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額04()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額05()), 0));
-                bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額06()), 0));
-                bodyList.add(随時期月判断(INT_1, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額01()));
-                bodyList.add(随時期月判断(INT_2, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額02()));
-                bodyList.add(随時期月判断(INT_3, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額03()));
-                bodyList.add(随時期月判断(INT_4, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額04()));
-                bodyList.add(随時期月判断(INT_5, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額05()));
-                bodyList.add(随時期月判断(INT_6, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額06()));
-                bodyList.add(随時期月判断(INT_7, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額07()));
-                bodyList.add(随時期月判断(INT_8, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額08()));
-                bodyList.add(随時期月判断(INT_9, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額09()));
-                bodyList.add(随時期月判断(INT_10, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額10()));
-                bodyList.add(随時期月判断(INT_11, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額11()));
-                bodyList.add(随時期月判断(INT_12, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額12()));
-                bodyList.add(随時期月判断(INT_13, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額13()));
-                bodyList.add(随時期月判断(INT_14, 期月リスト, 最終法定納期, 更正前Entity.get普徴期別金額14()));
+                bodyList.add(get調定事由略称(更正後Entity.get調定事由3()));
 
-                bodyList.add(set徴収方法(更正前Entity));
-                bodyList.add(更正後Entity.get調定事由4());
+                set更正前期別金額(本算定期間, 更正前Entity, bodyList);
+
+                bodyList.add(get調定事由略称(更正後Entity.get調定事由4()));
                 bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正後Entity.get特徴期別金額01()), 0));
                 bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正後Entity.get特徴期別金額02()), 0));
                 bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正後Entity.get特徴期別金額03()), 0));
                 bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正後Entity.get特徴期別金額04()), 0));
                 bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正後Entity.get特徴期別金額05()), 0));
                 bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正後Entity.get特徴期別金額06()), 0));
-                bodyList.add(随時期月判断(INT_1, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額01()));
-                bodyList.add(随時期月判断(INT_2, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額02()));
-                bodyList.add(随時期月判断(INT_3, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額03()));
-                bodyList.add(随時期月判断(INT_4, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額04()));
-                bodyList.add(随時期月判断(INT_5, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額05()));
-                bodyList.add(随時期月判断(INT_6, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額06()));
-                bodyList.add(随時期月判断(INT_7, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額07()));
-                bodyList.add(随時期月判断(INT_8, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額08()));
-                bodyList.add(随時期月判断(INT_9, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額09()));
-                bodyList.add(随時期月判断(INT_10, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額10()));
-                bodyList.add(随時期月判断(INT_11, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額11()));
-                bodyList.add(随時期月判断(INT_12, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額12()));
-                bodyList.add(随時期月判断(INT_13, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額13()));
-                bodyList.add(随時期月判断(INT_14, 期月リスト, 最終法定納期, 更正後Entity.get普徴期別金額14()));
-                bodyList.add(set徴収方法(更正後Entity));
+                bodyList.add(随時期月判断(INT_1, 本算定期間, 更正後Entity.get普徴期別金額01()));
+                bodyList.add(随時期月判断(INT_2, 本算定期間, 更正後Entity.get普徴期別金額02()));
+                bodyList.add(随時期月判断(INT_3, 本算定期間, 更正後Entity.get普徴期別金額03()));
+                bodyList.add(随時期月判断(INT_4, 本算定期間, 更正後Entity.get普徴期別金額04()));
+                bodyList.add(随時期月判断(INT_5, 本算定期間, 更正後Entity.get普徴期別金額05()));
+                bodyList.add(随時期月判断(INT_6, 本算定期間, 更正後Entity.get普徴期別金額06()));
+                bodyList.add(随時期月判断(INT_7, 本算定期間, 更正後Entity.get普徴期別金額07()));
+                bodyList.add(随時期月判断(INT_8, 本算定期間, 更正後Entity.get普徴期別金額08()));
+                bodyList.add(随時期月判断(INT_9, 本算定期間, 更正後Entity.get普徴期別金額09()));
+                bodyList.add(随時期月判断(INT_10, 本算定期間, 更正後Entity.get普徴期別金額10()));
+                bodyList.add(随時期月判断(INT_11, 本算定期間, 更正後Entity.get普徴期別金額11()));
+                bodyList.add(随時期月判断(INT_12, 本算定期間, 更正後Entity.get普徴期別金額12()));
+                bodyList.add(随時期月判断(INT_13, 本算定期間, 更正後Entity.get普徴期別金額13()));
+                bodyList.add(随時期月判断(INT_14, 本算定期間, 更正後Entity.get普徴期別金額14()));
+                bodyList.add(set徴収方法(本算定期間, 更正後Entity));
                 bodyList.add(RString.EMPTY);
                 toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
+    }
+
+    private void set更正前期別金額(KitsukiList 本算定期間, KeisanjohoAtenaKozaEntity 更正前Entity,
+            List<RString> bodyList) {
+        if (更正前Entity == null) {
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+        } else {
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額01()), 0));
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額02()), 0));
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額03()), 0));
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額04()), 0));
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額05()), 0));
+            bodyList.add(DecimalFormatter.toコンマ区切りRString(nullTOZero(更正前Entity.get特徴期別金額06()), 0));
+            bodyList.add(随時期月判断(INT_1, 本算定期間, 更正前Entity.get普徴期別金額01()));
+            bodyList.add(随時期月判断(INT_2, 本算定期間, 更正前Entity.get普徴期別金額02()));
+            bodyList.add(随時期月判断(INT_3, 本算定期間, 更正前Entity.get普徴期別金額03()));
+            bodyList.add(随時期月判断(INT_4, 本算定期間, 更正前Entity.get普徴期別金額04()));
+            bodyList.add(随時期月判断(INT_5, 本算定期間, 更正前Entity.get普徴期別金額05()));
+            bodyList.add(随時期月判断(INT_6, 本算定期間, 更正前Entity.get普徴期別金額06()));
+            bodyList.add(随時期月判断(INT_7, 本算定期間, 更正前Entity.get普徴期別金額07()));
+            bodyList.add(随時期月判断(INT_8, 本算定期間, 更正前Entity.get普徴期別金額08()));
+            bodyList.add(随時期月判断(INT_9, 本算定期間, 更正前Entity.get普徴期別金額09()));
+            bodyList.add(随時期月判断(INT_10, 本算定期間, 更正前Entity.get普徴期別金額10()));
+            bodyList.add(随時期月判断(INT_11, 本算定期間, 更正前Entity.get普徴期別金額11()));
+            bodyList.add(随時期月判断(INT_12, 本算定期間, 更正前Entity.get普徴期別金額12()));
+            bodyList.add(随時期月判断(INT_13, 本算定期間, 更正前Entity.get普徴期別金額13()));
+            bodyList.add(随時期月判断(INT_14, 本算定期間, 更正前Entity.get普徴期別金額14()));
+            bodyList.add(set徴収方法(本算定期間, 更正前Entity));
+        }
+    }
+
+    private RString get調定事由略称(RString 調定事由) {
+
+        if (RString.isNullOrEmpty(調定事由)) {
+            return RString.EMPTY;
+        }
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, DBBCodeShubetsu.調定事由.getコード(), new Code(調定事由));
     }
 
     private RString get口座情報(KeisanjohoAtenaKozaEntity 更正後Entity) {
@@ -825,7 +872,6 @@ public class GenNendoHonsanteiIdouFath {
         headList.add(タイトル_計算上保険料額_更正前);
         headList.add(タイトル_減免額_更正前);
         headList.add(タイトル_月別所得段階4月_更正前);
-        headList.add(タイトル_月別所得段階4月_更正前);
         headList.add(タイトル_月別所得段階5月_更正前);
         headList.add(タイトル_月別所得段階6月_更正前);
         headList.add(タイトル_月別所得段階7月_更正前);
@@ -841,8 +887,8 @@ public class GenNendoHonsanteiIdouFath {
         headList.add(タイトル_調定事由2_更正後);
         headList.add(タイトル_調定年月日_更正後);
         headList.add(タイトル_確定保険料額_更正後);
+        headList.add(タイトル_計算上保険料額_更正後);
         headList.add(タイトル_減免額_更正後);
-        headList.add(タイトル_月別所得段階4月_更正後);
         headList.add(タイトル_月別所得段階4月_更正後);
         headList.add(タイトル_月別所得段階5月_更正後);
         headList.add(タイトル_月別所得段階6月_更正後);
@@ -904,15 +950,9 @@ public class GenNendoHonsanteiIdouFath {
         return headList;
     }
 
-    private RString 随時期月判断(int 期, KitsukiList 期月リスト, Kitsuki 最終法定納期, Decimal 期別金額) {
-        // TODO
-        if (!期月リスト.filtered本算定期間().get期の月(期).isEmpty()) {
+    private RString 随時期月判断(int 期, KitsukiList 本算定期間, Decimal 期別金額) {
+        if (!本算定期間.get期の月(期).isEmpty()) {
             return DecimalFormatter.toコンマ区切りRString(nullTOZero(期別金額), 0);
-        }
-        for (Kitsuki kitsuki : 期月リスト.get期の月(期)) {
-            if (kitsuki.get月().getコード().compareTo(最終法定納期.get月().getコード()) > 0) {
-                return DecimalFormatter.toコンマ区切りRString(nullTOZero(期別金額), 0);
-            }
         }
         return RString.EMPTY;
     }
@@ -1078,12 +1118,30 @@ public class GenNendoHonsanteiIdouFath {
 
     private void set月別取得段階(KeisanjohoAtenaKozaEntity entity,
             List<RString> 月別所得段階リスト) {
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        月別所得段階リスト.add(RString.EMPTY);
+        if (entity == null) {
+            return;
+        }
         FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
         FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
         RString 保険料算定段階1 = entity.get保険料算定段階1();
-        int 開始月1 = 月割開始年月1.getMonthValue();
-        int 終了月1 = 月割終了年月1.getMonthValue();
-        set月別取得段階(開始月1, 終了月1, 保険料算定段階1, 月別所得段階リスト);
+        if (月割開始年月1 != null && 月割開始年月1.isEmpty() && 月割終了年月1 != null && 月割終了年月1.isEmpty()
+                && !RString.isNullOrEmpty(保険料算定段階1)) {
+            int 開始月1 = 月割開始年月1.getMonthValue();
+            int 終了月1 = 月割終了年月1.getMonthValue();
+            set月別取得段階(開始月1, 終了月1, 保険料算定段階1, 月別所得段階リスト);
+        }
 
         FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
         FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
@@ -1096,29 +1154,17 @@ public class GenNendoHonsanteiIdouFath {
         }
         int 開始月2 = 月割開始年月2.getMonthValue();
         int 終了月2 = 月割終了年月2.getMonthValue();
-        List<RString> 月別所得段階リスト2 = new ArrayList<>();
-        set月別取得段階(開始月2, 終了月2, 保険料算定段階2, 月別所得段階リスト2);
-        boolean isFirst = true;
-        for (int i = 0; i < 月別所得段階リスト.size(); i++) {
-            if (isFirst) {
-                if (!月別所得段階リスト.get(i).isEmpty()) {
-                    isFirst = false;
-                }
-            } else {
-                if (月別所得段階リスト.get(i).isEmpty()) {
-                    月別所得段階リスト.set(i, 月別所得段階リスト2.get(i));
-                }
-            }
-        }
+        set月別取得段階(開始月2, 終了月2, 保険料算定段階2, 月別所得段階リスト);
     }
 
     private void set月別取得段階(int 開始月, int 終了月,
             RString 保険料算定段階, List<RString> 月別所得段階リスト) {
-        for (int i = 0; i < INT_12; i++) {
-            月別所得段階リスト.add(RString.EMPTY);
+        保険料算定段階 = 保険料算定段階.substringReturnAsPossible(0, INT_2);
+        if (保険料算定段階.length() == INT_2 && 保険料算定段階.startsWith(定数_0)) {
+            保険料算定段階 = 保険料算定段階.substringReturnAsPossible(INT_1, INT_2);
         }
-        for (int i = 開始月; i <= (開始月 > 終了月 ? (終了月 + INT_12) : 終了月); i++) {
-            int currentMonth = (i - 1) % INT_12 + 1;
+        for (int i = 開始月; i <= (終了月 < 開始月 ? (終了月 + INT_12) : 終了月); i++) {
+            int currentMonth = i % INT_12;
             set保険料算定段階(currentMonth, 保険料算定段階, 月別所得段階リスト);
         }
     }
@@ -1150,7 +1196,7 @@ public class GenNendoHonsanteiIdouFath {
             case INT_11:
                 月別所得段階リスト.set(INT_7, 保険料算定段階);
                 break;
-            case INT_12:
+            case 0:
                 月別所得段階リスト.set(INT_8, 保険料算定段階);
                 break;
             case INT_1:
@@ -1167,27 +1213,24 @@ public class GenNendoHonsanteiIdouFath {
         }
     }
 
-    private RString set徴収方法(KeisanjohoAtenaKozaEntity 計算後情報Entity) {
-        Decimal 本算定特徴期合計 = nullTOZero(計算後情報Entity.get特徴期別金額01())
-                .add(nullTOZero(計算後情報Entity.get特徴期別金額02()))
-                .add(nullTOZero(計算後情報Entity.get特徴期別金額03()))
-                .add(nullTOZero(計算後情報Entity.get特徴期別金額04()))
+    private RString set徴収方法(KitsukiList 本算定期間, KeisanjohoAtenaKozaEntity 計算後情報Entity) {
+        Decimal 本算定特徴期合計 = nullTOZero(計算後情報Entity.get特徴期別金額04())
                 .add(nullTOZero(計算後情報Entity.get特徴期別金額05()))
                 .add(nullTOZero(計算後情報Entity.get特徴期別金額06()));
-        Decimal 本算定普徴期合計 = nullTOZero(計算後情報Entity.get普徴期別金額01())
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額02()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額03()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額04()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額05()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額06()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額07()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額08()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額09()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額10()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額11()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額12()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額13()))
-                .add(nullTOZero(計算後情報Entity.get普徴期別金額14()));
+        Decimal 本算定普徴期合計 = get普徴期別金額(INT_1, 本算定期間, 計算後情報Entity.get普徴期別金額01())
+                .add(get普徴期別金額(INT_2, 本算定期間, 計算後情報Entity.get普徴期別金額02()))
+                .add(get普徴期別金額(INT_3, 本算定期間, 計算後情報Entity.get普徴期別金額03()))
+                .add(get普徴期別金額(INT_4, 本算定期間, 計算後情報Entity.get普徴期別金額04()))
+                .add(get普徴期別金額(INT_5, 本算定期間, 計算後情報Entity.get普徴期別金額05()))
+                .add(get普徴期別金額(INT_6, 本算定期間, 計算後情報Entity.get普徴期別金額06()))
+                .add(get普徴期別金額(INT_7, 本算定期間, 計算後情報Entity.get普徴期別金額07()))
+                .add(get普徴期別金額(INT_8, 本算定期間, 計算後情報Entity.get普徴期別金額08()))
+                .add(get普徴期別金額(INT_9, 本算定期間, 計算後情報Entity.get普徴期別金額09()))
+                .add(get普徴期別金額(INT_10, 本算定期間, 計算後情報Entity.get普徴期別金額10()))
+                .add(get普徴期別金額(INT_11, 本算定期間, 計算後情報Entity.get普徴期別金額11()))
+                .add(get普徴期別金額(INT_12, 本算定期間, 計算後情報Entity.get普徴期別金額12()))
+                .add(get普徴期別金額(INT_13, 本算定期間, 計算後情報Entity.get普徴期別金額13()))
+                .add(get普徴期別金額(INT_14, 本算定期間, 計算後情報Entity.get普徴期別金額14()));
         if (本算定特徴期合計.compareTo(Decimal.ZERO) == 0
                 && 本算定普徴期合計.compareTo(Decimal.ZERO) == 0) {
             return RString.EMPTY;
@@ -1200,6 +1243,13 @@ public class GenNendoHonsanteiIdouFath {
         } else {
             return 定値_併用徴収;
         }
+    }
+
+    private Decimal get普徴期別金額(int 期, KitsukiList 本算定期間, Decimal 期別金額) {
+        if (!本算定期間.get期の月(期).isEmpty()) {
+            return nullTOZero(期別金額);
+        }
+        return Decimal.ZERO;
     }
 
     private void toBodyList(List<RString> bodyList) {
