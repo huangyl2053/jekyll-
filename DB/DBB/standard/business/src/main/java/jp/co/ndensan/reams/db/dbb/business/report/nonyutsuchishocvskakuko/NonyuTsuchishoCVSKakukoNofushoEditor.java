@@ -87,19 +87,19 @@ public class NonyuTsuchishoCVSKakukoNofushoEditor implements INonyuTsuchishoCVSK
         }
 
         if (map.containsKey(2)
-                || map.containsKey(INT_5)
-                || map.containsKey(INT_8)) {
+                || map.containsKey(INT_3)
+                || map.containsKey(INT_4)) {
             source.detail_pageCount1 = new RString(item.get連番()).concat("-4");
             source.detail_pageCount2 = new RString(item.get連番()).concat("-5");
             source.detail_pageCount3 = new RString(item.get連番()).concat("-6");
-        } else if (map.containsKey(INT_3)
+        } else if (map.containsKey(INT_5)
                 || map.containsKey(INT_6)
-                || map.containsKey(INT_9)) {
+                || map.containsKey(INT_7)) {
             source.detail_pageCount1 = new RString(item.get連番()).concat("-7");
             source.detail_pageCount2 = new RString(item.get連番()).concat("-8");
             source.detail_pageCount3 = new RString(item.get連番()).concat("-9");
-        } else if (map.containsKey(INT_4)
-                || map.containsKey(INT_7)
+        } else if (map.containsKey(INT_8)
+                || map.containsKey(INT_9)
                 || map.containsKey(INT_10)) {
             source.detail_pageCount1 = new RString(item.get連番()).concat("-10");
             source.detail_pageCount2 = new RString(item.get連番()).concat("-11");
