@@ -62,7 +62,7 @@ public enum ReportIdDBD {
     /**
      * 社会福祉法人等利用者負担軽減対象確認証の帳票ＩＤです。
      */
-    DBD100018(new ReportId("BD100018_ShafukuRiyoshaFutanKeigenTaishoKakuninsho"), new RString("社会福祉法人等利用者負担軽減対象確認証")),
+    DBD100018(new ReportId("DBD100018_ShafukuRiyoshaFutanKeigenTaishoKakuninsho"), new RString("社会福祉法人等利用者負担軽減対象確認証")),
     /**
      * 訪問介護利用者負担額減額認定証の帳票ＩＤです。
      */
