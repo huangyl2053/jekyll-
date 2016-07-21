@@ -633,6 +633,7 @@ public class GenNendoHonsanteiIdouFath {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(賦課年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
         Kitsuki 最終法定納期 = 期月リスト.get最終法定納期();
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -663,7 +664,7 @@ public class GenNendoHonsanteiIdouFath {
 
                 IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(更正後Entity.get宛名Entity());
                 ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-                RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
+                RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, 地方公共団体);
                 bodyList.add(編集後住所);
                 if (区分_管内.equals(更正後Entity.get宛名Entity().getKannaiKangaiKubun())) {
                     bodyList.add(更正後Entity.get宛名Entity().getJusho().getColumnValue());
@@ -678,7 +679,7 @@ public class GenNendoHonsanteiIdouFath {
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
-                RString 口座情報 = get口座情報(更正前Entity, 更正後Entity);
+                RString 口座情報 = get口座情報(更正後Entity);
                 bodyList.add(口座情報);
                 bodyList.add(更正後Entity.get調定事由1());
 
@@ -771,81 +772,32 @@ public class GenNendoHonsanteiIdouFath {
         }
     }
 
-    private RString get口座情報(KeisanjohoAtenaKozaEntity 更正前Entity, KeisanjohoAtenaKozaEntity 更正後Entity) {
-        IKoza 口座_更正前 = new Koza(更正前Entity.get口座Entity());
+    private RString get口座情報(KeisanjohoAtenaKozaEntity 更正後Entity) {
+        if (更正後Entity == null) {
+            return RString.EMPTY;
+        }
         IKoza 口座_更正後 = new Koza(更正後Entity.get口座Entity());
-        if (口座_更正前.get金融機関コード() != null) {
-            if (ゆうちょ銀行.equals(口座_更正前.get金融機関コード().value().substring(0, INT_4))
-                    && 口座_更正前.get金融機関コード().value().length() >= INT_4) {
-                return ゆうちょ銀行の口座(口座_更正後);
-            } else {
-                return ゆうちょ銀行以外の口座(口座_更正後);
-            }
+        RString 金融機関コード = 口座_更正後.get金融機関コード().value();
+        RString 通帳記号 = 口座_更正後.getEdited通帳記号();
+        RString 通帳番号 = 口座_更正後.getEdited通帳番号();
+        RString 口座名義人漢字 = 口座_更正後.get口座名義人漢字().value();
+        RString 支店コード = 口座_更正後.get支店コード().value();
+        RString 口座番号 = 口座_更正後.get口座番号();
+        RString 口座種別 = 口座_更正後.get預金種別().get預金種別略称();
+        if (ゆうちょ銀行.equals(金融機関コード.substringReturnAsPossible(0, INT_4))) {
+            return 金融機関コード.substringReturnAsPossible(0, INT_4).concat(RString.HALF_SPACE)
+                    .concat(通帳記号.substringReturnAsPossible(0, INT_5))
+                    .concat(HYPHEN)
+                    .concat(通帳番号.substringReturnAsPossible(0, INT_8))
+                    .concat(RString.HALF_SPACE)
+                    .concat(口座名義人漢字);
+        } else {
+            return 金融機関コード.substringReturnAsPossible(0, INT_4).concat(HYPHEN)
+                    .concat(支店コード.substringReturnAsPossible(0, INT_3)).concat(RString.HALF_SPACE)
+                    .concat(口座種別.substringReturnAsPossible(0, INT_2)).concat(HYPHEN)
+                    .concat(口座番号.substringReturnAsPossible(0, INT_7)).concat(RString.HALF_SPACE)
+                    .concat(口座名義人漢字);
         }
-        return RString.EMPTY;
-    }
-
-    private RString ゆうちょ銀行の口座(IKoza 口座) {
-        RString 金融機関コード;
-        RString 通帳記号;
-        RString 通帳番号;
-        if (口座.get通帳記号() != null && 口座.get通帳番号() != null && 口座.get口座名義人漢字() != null) {
-            if (口座.get金融機関コード().getColumnValue().length() >= INT_4) {
-                金融機関コード = 口座.get金融機関コード().getColumnValue().substring(0, INT_4);
-            } else {
-                金融機関コード = 口座.get金融機関コード().getColumnValue();
-            }
-            if (口座.getEdited通帳記号().length() >= INT_5) {
-                通帳記号 = 口座.getEdited通帳記号().substring(0, INT_5);
-            } else {
-                通帳記号 = 口座.getEdited通帳記号();
-            }
-            if (口座.getEdited通帳番号().length() >= INT_8) {
-                通帳番号 = 口座.getEdited通帳番号().substring(0, INT_8);
-            } else {
-                通帳番号 = 口座.getEdited通帳番号();
-            }
-            return 金融機関コード.concat(RString.FULL_SPACE)
-                    .concat(通帳記号)
-                    .concat(HYPHEN).concat(通帳番号)
-                    .concat(RString.FULL_SPACE).concat(口座.get口座名義人漢字().toString());
-        }
-        return RString.EMPTY;
-    }
-
-    private RString ゆうちょ銀行以外の口座(IKoza 口座) {
-        RString 金融機関コード;
-        RString 預金種別略称;
-        RString 支店コード;
-        RString 口座番号;
-        if (口座.get支店コード() != null && 口座.get口座番号() != null && 口座.get口座名義人漢字() != null) {
-            if (口座.get金融機関コード().value().length() >= INT_4) {
-                金融機関コード = 口座.get金融機関コード().getColumnValue().substring(0, INT_4);
-            } else {
-                金融機関コード = 口座.get金融機関コード().getColumnValue();
-            }
-            if (口座.get支店コード().value().length() >= INT_5) {
-                支店コード = 口座.get支店コード().getColumnValue().substring(0, INT_5);
-            } else {
-                支店コード = 口座.get支店コード().getColumnValue();
-            }
-            if (口座.get預金種別().get預金種別略称().length() >= INT_2) {
-                預金種別略称 = 口座.get預金種別().get預金種別略称().substring(0, INT_2);
-            } else {
-                預金種別略称 = 口座.get預金種別().get預金種別略称();
-            }
-            if (口座.get口座番号().length() >= INT_7) {
-                口座番号 = 口座.get口座番号().substring(0, INT_7);
-            } else {
-                口座番号 = 口座.get口座番号();
-            }
-            return 金融機関コード.concat(HYPHEN)
-                    .concat(支店コード).concat(RString.FULL_SPACE)
-                    .concat(預金種別略称)
-                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
-                    .concat(口座.get口座名義人漢字().toString());
-        }
-        return RString.EMPTY;
     }
 
     private Decimal nullTOZero(Decimal 金額) {
