@@ -20,6 +20,7 @@ public interface INinteiShinseishaKihonInfoDiv extends ICommonChildDivBaseProper
     /**
      * 被保険者番号を取得します。
      *
+     * @return 被保険者番号
      */
     RString get被保険者番号();
 }
