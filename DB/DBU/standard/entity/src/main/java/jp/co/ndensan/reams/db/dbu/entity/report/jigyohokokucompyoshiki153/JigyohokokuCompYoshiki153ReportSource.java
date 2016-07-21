@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki1_5_3;
+package jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki153;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki1_5_3;
+package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki153;
 
-import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki1_5_3.JigyohokokuCompYoshiki153ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki153.JigyohokokuCompYoshiki153ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
