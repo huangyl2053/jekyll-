@@ -26,5 +26,6 @@ public class TokiJikouRelateEntity {
     private RString researchItem;
     private ShinseishoKanriNo shinseishoKanriNo;
     private int ninteichosaRirekiNo;
-    private int COUNT;
+    private RString ninteichosaTokkijikoNo;
+    private RString tokkiJiko;
 }

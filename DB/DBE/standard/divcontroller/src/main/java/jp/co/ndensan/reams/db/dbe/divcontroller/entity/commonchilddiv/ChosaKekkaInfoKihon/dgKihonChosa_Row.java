@@ -3,13 +3,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekk
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 19 20:29:38 CST 2016 
+ * Thu Jul 21 19:03:02 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -22,36 +22,41 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgKihonChosa_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
-    private Button btnTokkiJiko;
+    private ButtonDialog btnTokkiJiko;
     private RString kihonResearchItemCode;
     private RString kihonResearchItemName;
     private RString kaitou;
+    private RString ninteichosaTokkijikoNo;
 
     public dgKihonChosa_Row() {
         super();
-        this.btnTokkiJiko = new Button();
+        this.btnTokkiJiko = new ButtonDialog();
         this.kihonResearchItemCode = RString.EMPTY;
         this.kihonResearchItemName = RString.EMPTY;
         this.kaitou = RString.EMPTY;
+        this.ninteichosaTokkijikoNo = RString.EMPTY;
         this.setOriginalData("btnTokkiJiko", btnTokkiJiko);
         this.setOriginalData("kihonResearchItemCode", kihonResearchItemCode);
         this.setOriginalData("kihonResearchItemName", kihonResearchItemName);
         this.setOriginalData("kaitou", kaitou);
+        this.setOriginalData("ninteichosaTokkijikoNo", ninteichosaTokkijikoNo);
     }
 
-    public dgKihonChosa_Row(Button btnTokkiJiko, RString kihonResearchItemCode, RString kihonResearchItemName, RString kaitou) {
+    public dgKihonChosa_Row(ButtonDialog btnTokkiJiko, RString kihonResearchItemCode, RString kihonResearchItemName, RString kaitou, RString ninteichosaTokkijikoNo) {
         super();
         this.setOriginalData("btnTokkiJiko", btnTokkiJiko);
         this.setOriginalData("kihonResearchItemCode", kihonResearchItemCode);
         this.setOriginalData("kihonResearchItemName", kihonResearchItemName);
         this.setOriginalData("kaitou", kaitou);
+        this.setOriginalData("ninteichosaTokkijikoNo", ninteichosaTokkijikoNo);
         this.btnTokkiJiko = btnTokkiJiko;
         this.kihonResearchItemCode = kihonResearchItemCode;
         this.kihonResearchItemName = kihonResearchItemName;
         this.kaitou = kaitou;
+        this.ninteichosaTokkijikoNo = ninteichosaTokkijikoNo;
     }
 
-    public Button getBtnTokkiJiko() {
+    public ButtonDialog getBtnTokkiJiko() {
         return btnTokkiJiko;
     }
 
@@ -67,7 +72,11 @@ public class dgKihonChosa_Row extends DataRow {
         return kaitou;
     }
 
-    public void setBtnTokkiJiko(Button btnTokkiJiko) {
+    public RString getNinteichosaTokkijikoNo() {
+        return ninteichosaTokkijikoNo;
+    }
+
+    public void setBtnTokkiJiko(ButtonDialog btnTokkiJiko) {
         this.setOriginalData("btnTokkiJiko", btnTokkiJiko);
         this.btnTokkiJiko = btnTokkiJiko;
     }
@@ -85,6 +94,11 @@ public class dgKihonChosa_Row extends DataRow {
     public void setKaitou(RString kaitou) {
         this.setOriginalData("kaitou", kaitou);
         this.kaitou = kaitou;
+    }
+
+    public void setNinteichosaTokkijikoNo(RString ninteichosaTokkijikoNo) {
+        this.setOriginalData("ninteichosaTokkijikoNo", ninteichosaTokkijikoNo);
+        this.ninteichosaTokkijikoNo = ninteichosaTokkijikoNo;
     }
 
     // </editor-fold>

@@ -32,10 +32,6 @@ public class ChosaKekkaInfoGaikyo {
      * @return ResponseData<SinsaSeikyusyoPanelDiv>
      */
     public ResponseData<ChosaKekkaInfoGaikyoDiv> onLoad(ChosaKekkaInfoGaikyoDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new RString("20160000000000010"));
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, new RString("1"));
-        ViewStateHolder.put(ViewStateKeys.概況調査テキスト_イメージ区分, new RString("1"));
-
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
         RString 概況調査テキスト_イメージ区分 = ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class);

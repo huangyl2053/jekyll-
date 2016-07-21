@@ -1,12 +1,16 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBE {
 
      export module ChosaKekkaInfoKihon {
 
         export class Events {
+
+            public static onClick_Moderu(): string {
+                return "onClick_Moderu";
+            }
 
         }
 
