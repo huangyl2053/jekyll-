@@ -16,7 +16,10 @@ public enum DBB8120001TransitionEventName implements IContainerEvents {
 
     通知書作成("通知書作成"),
     完了("完了"),
-    賦課エラー修正完了("賦課エラー修正完了");
+    賦課エラー修正完了("賦課エラー修正完了"),
+    前画面に戻る("前画面に戻る"),
+    再検索する("再検索する"),
+    検索結果一覧に戻る("検索結果一覧に戻る");
 
     private final RString name;
 
