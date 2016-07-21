@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,18 +16,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DeletePanelHandler {
 
-    private final DeletePanelDiv div;
     private static final RString 確認メッセージ出力要 = new RString("1");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
     private static final RString イメージファイルが存在区分_原本とマスキングが両方存在 = new RString("2");
+    private static final RString イメージファイル原本名 = new RString("_BAK");
 
     /**
      * コンストラクタです。
      *
-     * @param div 要介護認定イメージ情報削除Div
      */
-    public DeletePanelHandler(DeletePanelDiv div) {
-        this.div = div;
+    public DeletePanelHandler() {
     }
 
     /**
@@ -59,14 +56,12 @@ public class DeletePanelHandler {
         if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
             if (存在したイメージファイル名.contains(new RString("C0007"))
                     && 存在したイメージファイル名.contains(new RString("C0007_BAK"))) {
-                イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
-                return イメージファイルが存在区分;
+                return イメージファイルが存在区分_原本とマスキングが両方存在;
             }
             for (RString ファイル名 : get調査票特記イメージ_原本あり()) {
                 if (存在したイメージファイル名.contains(ファイル名)
-                        && 存在したイメージファイル名.contains(ファイル名.concat("_BAK"))) {
-                    イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
-                    return イメージファイルが存在区分;
+                        && 存在したイメージファイル名.contains(ファイル名.concat(イメージファイル原本名))) {
+                    return イメージファイルが存在区分_原本とマスキングが両方存在;
                 }
             }
         }
@@ -80,10 +75,7 @@ public class DeletePanelHandler {
      * @return 調査票概況のイメージファイルが存在しない：true、存在する：false
      */
     public boolean is調査票概況のイメージファイルが存在しない(List<RString> 存在したイメージファイル名) {
-        if (!存在したイメージファイル名.contains(new RString("G0001"))) {
-            return true;
-        }
-        return false;
+        return !存在したイメージファイル名.contains(new RString("G0001"));
     }
 
     /**
@@ -112,22 +104,20 @@ public class DeletePanelHandler {
         if (主治医意見書イメージファイルが存在しない == (主治医意見書イメージ_白黒.size() + 主治医意見書イメージ_OCR.size())) {
             イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
         }
-        if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-            if ((存在したイメージファイル名.contains(new RString("E0001"))
-                    && 存在したイメージファイル名.contains(new RString("E0001_BAK")))
-                    || (存在したイメージファイル名.contains(new RString("E0002"))
-                    && 存在したイメージファイル名.contains(new RString("E0002_BAK")))
-                    || (存在したイメージファイル名.contains(new RString("D1005"))
-                    && 存在したイメージファイル名.contains(new RString("D1005_BAK")))
-                    || (存在したイメージファイル名.contains(new RString("D1008"))
-                    && 存在したイメージファイル名.contains(new RString("D1008_BAK")))
-                    || (存在したイメージファイル名.contains(new RString("D1026"))
-                    && 存在したイメージファイル名.contains(new RString("D1026_BAK")))
-                    || (存在したイメージファイル名.contains(new RString("D1027"))
-                    && 存在したイメージファイル名.contains(new RString("D1027_BAK")))) {
-                イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
-                return イメージファイルが存在区分;
-            }
+        if (!確認メッセージ出力要.equals(確認メッセージ出力区分)
+                && (存在したイメージファイル名.contains(new RString("E0001"))
+                && 存在したイメージファイル名.contains(new RString("E0001_BAK")))
+                || (存在したイメージファイル名.contains(new RString("E0002"))
+                && 存在したイメージファイル名.contains(new RString("E0002_BAK")))
+                || (存在したイメージファイル名.contains(new RString("D1005"))
+                && 存在したイメージファイル名.contains(new RString("D1005_BAK")))
+                || (存在したイメージファイル名.contains(new RString("D1008"))
+                && 存在したイメージファイル名.contains(new RString("D1008_BAK")))
+                || (存在したイメージファイル名.contains(new RString("D1026"))
+                && 存在したイメージファイル名.contains(new RString("D1026_BAK")))
+                || (存在したイメージファイル名.contains(new RString("D1027"))
+                && 存在したイメージファイル名.contains(new RString("D1027_BAK")))) {
+            return イメージファイルが存在区分_原本とマスキングが両方存在;
         }
         return イメージファイルが存在区分;
     }
@@ -155,9 +145,8 @@ public class DeletePanelHandler {
         if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
             for (RString ファイル名 : getその他資料イメージ_原本あり()) {
                 if (存在したイメージファイル名.contains(ファイル名)
-                        && 存在したイメージファイル名.contains(ファイル名.concat("_BAK"))) {
-                    イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
-                    return イメージファイルが存在区分;
+                        && 存在したイメージファイル名.contains(ファイル名.concat(イメージファイル原本名))) {
+                    return イメージファイルが存在区分_原本とマスキングが両方存在;
                 }
             }
         }
@@ -182,7 +171,7 @@ public class DeletePanelHandler {
         for (RString 連番範囲 : get調査票特記連番範囲イメージ()) {
             for (RString 特記範囲 : get調査票特記範囲イメージ()) {
                 調査票特記.add(特記範囲.concat("-").concat(連番範囲));
-                調査票特記.add(特記範囲.concat("-").concat(連番範囲).concat("_BAK"));
+                調査票特記.add(特記範囲.concat("-").concat(連番範囲).concat(イメージファイル原本名));
             }
         }
         get調査票特記資料イメージ(調査票特記);
@@ -362,7 +351,7 @@ public class DeletePanelHandler {
         for (RString 表示順範囲 : getその他資料表示順範囲イメージ()) {
             for (RString その他資料範囲 : getその他資料範囲イメージ()) {
                 その他資料.add(その他資料範囲.concat(表示順範囲));
-                その他資料.add(その他資料範囲.concat(表示順範囲).concat("_BAK"));
+                その他資料.add(その他資料範囲.concat(表示順範囲).concat(イメージファイル原本名));
             }
         }
         return その他資料;
