@@ -77,7 +77,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<HanyouRisutoSyuturyokuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.selectAllデータ");
+            + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllデータ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC701003"));
     private static final ReportId EUC_ID = new ReportId("DBC701003");
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
