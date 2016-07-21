@@ -35,8 +35,8 @@ public class PntNonyuTsuchishoProcess extends SimpleBatchProcessBase {
         try {
             service.pntNonyuTsuchisho(processParameter.get調定年度(), processParameter.get納入_対象賦課年度(),
                     processParameter.get帳票作成日時(), processParameter.get納入_発行日(), processParameter.get納入_出力期(),
-                    processParameter.get納入_対象者(), processParameter.get納入_生保護対象者先頭出力(),
-                    processParameter.get納入_口座振替様式(), processParameter.get納入_ページごとに山分け(),
+                    processParameter.get納入_対象者(), processParameter.get納入_口座振替様式(),
+                    processParameter.get納入_生保護対象者先頭出力(), processParameter.get納入_ページごとに山分け(),
                     出力帳票.get出力順ID(), new ReportId(出力帳票.get帳票ID()), processParameter.is一括発行起動フラグ());
         } catch (InvocationTargetException ex) {
             Logger.getLogger(PrtKetteiTsuchishoProcess.class.getName()).log(Level.SEVERE, null, ex);

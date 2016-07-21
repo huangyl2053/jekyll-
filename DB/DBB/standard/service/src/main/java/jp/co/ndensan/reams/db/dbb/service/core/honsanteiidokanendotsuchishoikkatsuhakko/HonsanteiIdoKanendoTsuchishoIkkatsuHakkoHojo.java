@@ -127,6 +127,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     private static final RString 定値_半角ハイフン = new RString("-");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString 定値_ほし = new RString("＊");
+    private static final RString 定値区分_0 = new RString("0");
 
     private final DbT2017TsuchishoHakkogoIdoshaDac 通知書発行後異動者Dac;
 
@@ -499,7 +500,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
                 }
                 bodyList.add(isNull(編集後本算定通知書共通情報.get今後納付すべき額())
                         ? RString.EMPTY : new RString(編集後本算定通知書共通情報.get今後納付すべき額().toString()));
-                set次期以降(編集後本算定通知書共通情報, 出力期, bodyList);
+                bodyList.add(定値区分_0);
                 bodyList.add(tutishoKyoutuKoumokuHenshuu(編集後本算定通知書共通情報));
                 toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
@@ -530,7 +531,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
             return null;
         }
         ShunyuJoho 収入情報 = new ShunyuJoho();
-        収入情報.set調定年度(計算後情報_更正後.getFukaNendo());
+        収入情報.set調定年度(計算後情報_更正後.getChoteiNendo());
         収入情報.set賦課年度(計算後情報_更正後.getFukaNendo());
         収入情報.set通知書番号(計算後情報_更正後.getTsuchishoNo());
         収入情報.set普徴収入額01(計算後情報_更正後.getFuShunyuGaku01());
@@ -793,23 +794,6 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
             }
             if (!区分) {
                 bodyList.add(RString.EMPTY);
-            }
-        }
-    }
-
-    private void set次期以降(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報, RString 出力期, List<RString> bodyList) {
-
-        if (isNull(編集後本算定通知書共通情報.get更正後()) || isNull(編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト())
-                || 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト().isEmpty()) {
-            bodyList.add(RString.EMPTY);
-        } else {
-            List<UniversalPhase> 普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
-            for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
-                if (Integer.parseInt(出力期.toString()) == 普徴期別金額.get期() + INT_1) {
-                    bodyList.add(isNull(普徴期別金額.get金額()) ? RString.EMPTY
-                            : DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0));
-                    break;
-                }
             }
         }
     }

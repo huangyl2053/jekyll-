@@ -832,6 +832,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             }
         }
         出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
