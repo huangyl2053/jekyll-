@@ -18,22 +18,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class HiyobenshotoShiharaimeisaishoReport extends Report<HiyobenshotoShiharaimeisaishoReportSource> {
 
     private final HiyobenshotoShiharaimeisaisho data;
-    private final int index;
 
     /**
      * インスタンスを生成します。
      *
      * @param data 申請に関する帳票発行のdataList
-     * @param index int
      */
-    public HiyobenshotoShiharaimeisaishoReport(HiyobenshotoShiharaimeisaisho data, int index) {
+    public HiyobenshotoShiharaimeisaishoReport(HiyobenshotoShiharaimeisaisho data) {
         this.data = data;
-        this.index = index;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<HiyobenshotoShiharaimeisaishoReportSource> reportSourceWriter) {
-        IHiyobenshotoShiharaimeisaishoEditor editor = new HiyobenshotoShiharaimeisaishoEditor(data, index);
+        IHiyobenshotoShiharaimeisaishoEditor editor = new HiyobenshotoShiharaimeisaishoEditor(data);
         IHiyobenshotoShiharaimeisaishoBuilder builder = new HiyobenshotoShiharaimeisaishoBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

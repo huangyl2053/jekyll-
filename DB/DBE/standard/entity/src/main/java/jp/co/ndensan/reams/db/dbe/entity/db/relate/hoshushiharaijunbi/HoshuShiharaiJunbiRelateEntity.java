@@ -55,7 +55,7 @@ public class HoshuShiharaiJunbiRelateEntity implements Serializable {
     private FlexibleDate ikenshoJuryoYMD;
     private FlexibleDate ikenshoReadYMD;
     private RString shinsakaiIinCode;
-    private RString T5911_daihyoshaName;
+    private RString t5911_daihyoshaName;
     private RString ninteiChosainNo;
     private RString sonotaKikanCode;
     private RString kikanMeisho;
@@ -65,7 +65,7 @@ public class HoshuShiharaiJunbiRelateEntity implements Serializable {
     private int shinsakaiKojoZeigaku;
     private RString x5595_shinsakaiIinCode;
     private FlexibleDate shinsakaiKaisaiYMD;
-    private int Hoshu;
+    private int hoshu;
     private int shinsakaiHoshuGokei;
 
 }

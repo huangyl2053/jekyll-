@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.IsGinkoFurikomiShutsuryoku;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -26,6 +27,7 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
     private final boolean 基準日フラグ;
     private final CodeShubetsu コード種別;
     private final FlexibleDate 有効期間;
+    private final boolean 銀行振込出力フラグ;
 
     /**
      * コンストラクタです。
@@ -40,6 +42,7 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
      * @param 基準日フラグ 基準日フラグ
      * @param コード種別 コード種別
      * @param 有効期間 有効期間
+     * @param 銀行振込出力フラグ 銀行振込出力フラグ
      */
     protected HoshuShiharaiJunbiMybatisParameter(FlexibleDate 実績期間From,
             FlexibleDate 実績期間To,
@@ -50,7 +53,8 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
             RString 報酬基準日,
             boolean 基準日フラグ,
             CodeShubetsu コード種別,
-            FlexibleDate 有効期間) {
+            FlexibleDate 有効期間,
+            boolean 銀行振込出力フラグ) {
         this.実績期間From = 実績期間From;
         this.実績期間To = 実績期間To;
         this.振込指定日 = 振込指定日;
@@ -61,6 +65,7 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
         this.基準日フラグ = 基準日フラグ;
         this.コード種別 = コード種別;
         this.有効期間 = 有効期間;
+        this.銀行振込出力フラグ = 銀行振込出力フラグ;
     }
 
     /**
@@ -94,6 +99,7 @@ public final class HoshuShiharaiJunbiMybatisParameter implements IMyBatisParamet
                 主治医意見書報酬基準日,
                 基準日フラグ,
                 DBECodeShubetsu.消費税率.getコード(),
-                FlexibleDate.getNowDate());
+                FlexibleDate.getNowDate(),
+                IsGinkoFurikomiShutsuryoku.出力未.is出力済());
     }
 }
