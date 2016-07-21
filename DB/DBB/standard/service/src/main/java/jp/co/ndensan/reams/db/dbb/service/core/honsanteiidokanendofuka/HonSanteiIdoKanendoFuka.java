@@ -6,12 +6,16 @@
 package jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendofuka;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KeisangoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.ChoteiJiyuParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.FukaJohoList;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.fukakeisan.FukaKokyoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.HokenryoDankaiHantei;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
@@ -21,6 +25,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyojohoFactory;
+import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofuka.FukaJohoToChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.NengakuHokenryo;
@@ -30,12 +36,16 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaK
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
+import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranProperty.DBB200009ShutsuryokujunEnum;
+import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KeisangojohoAtenaKozaKouseizengoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.CalculateFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KeisangojohoToKozaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -43,14 +53,26 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.Calcu
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.HonsanteiShotokuTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.IdoTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.ShotokuIdoTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.TsukibetsuRankuTmpEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendofuka.IHonSanteiIdoKanendoFukaMapper;
+import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
+import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranPrintService;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -66,64 +88,38 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import static jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.CustomerBarcodeShiyoUmu.使用しない;
 import static jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.CustomerBarcodeShiyoUmu.使用する;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV2502KaigoShotokuAliveDac;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
-import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.KeisangoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.ChoteiJiyuParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.FukaJohoList;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofuka.FukaJohoToChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.kanendokoseikeisan.KoseigoFukaResult;
-import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranProperty.DBB200009ShutsuryokujunEnum;
-import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KeisangojohoAtenaKozaKouseizengoEntity;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KeisangojohoToKozaParameter;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.KeisangojohoToKozaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.KeisangojohoAtenaKozaEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
-import jp.co.ndensan.reams.db.dbb.service.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranPrintService;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoChushutsuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTaishoIdoSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0310KozaEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
+import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -142,7 +138,10 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -165,6 +164,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -1413,15 +1413,14 @@ public class HonSanteiIdoKanendoFuka {
      * @param 調定年度 FlexibleYear
      * @param 調定日時 FlexibleYear
      * @param 出力順ID Long
-     * @param 帳票名称 RString
      * @param 抽出開始日時 YMDHMS
      * @param 抽出終了日時 YMDHMS
      */
     public void spoolKanendoIdoKekkaIchiran(FlexibleYear 調定年度,
-            YMDHMS 調定日時, Long 出力順ID, RString 帳票名称, YMDHMS 抽出開始日時, YMDHMS 抽出終了日時) {
+            YMDHMS 調定日時, Long 出力順ID, YMDHMS 抽出開始日時, YMDHMS 抽出終了日時) {
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, 出力順ID);
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
-        // TODO 出力順を追加ではない。
+
         RString 出力順 = MyBatisOrderByClauseCreator.create(DBB200009ShutsuryokujunEnum.class, outputOrder);
         KozaSearchKeyBuilder kozabuilder = new KozaSearchKeyBuilder();
         kozabuilder.set業務コード(GyomuCode.DB介護保険);
@@ -1472,7 +1471,7 @@ public class HonSanteiIdoKanendoFuka {
         SourceDataCollection sourceDataCollection
                 = new KanendoIdouKekkaIchiranPrintService().printTaitsu(更正前後EntityList, new RString(出力順ID), 調定日時);
         RString 出力ページ数 = sourceDataCollection == null ? 定値_ゼロ : new RString(sourceDataCollection.iterator().next().getPageCount());
-        load出力条件リスト(調定年度, 抽出開始日時, 抽出終了日時, outputOrder, 帳票名称, 出力ページ数);
+        load出力条件リスト(調定年度, 抽出開始日時, 抽出終了日時, outputOrder, 帳票名, 出力ページ数);
     }
 
     private void load出力条件リスト(FlexibleYear 調定年度,
@@ -1485,12 +1484,12 @@ public class HonSanteiIdoKanendoFuka {
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定値_抽出開始日時).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(抽出開始日時.getDate().wareki().toDateString()).concat(RString.FULL_SPACE)
-                .concat(抽出開始日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分)));
+                .concat(抽出開始日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定値_抽出終了日時).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(抽出終了日時.getDate().wareki().toDateString()).concat(RString.FULL_SPACE)
-                .concat(抽出終了日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分)));
+                .concat(抽出終了日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定値_帳票名称).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(帳票名称));
@@ -1561,7 +1560,8 @@ public class HonSanteiIdoKanendoFuka {
                 RString 住所 = get住所(計算後情報_宛名_口座Entity);
 
                 List<RString> bodyList = new ArrayList<>();
-                UaT0310KozaEntity 口座Entity = 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity();
+                UaT0310KozaEntity 口座Entity = 計算後情報_宛名_口座Entity.get口座Entity() == null
+                        ? null : 計算後情報_宛名_口座Entity.get口座Entity().getUaT0310KozaEntity();
                 RString 作成年月日 = 調定日時.getRDateTime().getDate().seireki()
                         .separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
                 RString 作成日時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
@@ -1575,14 +1575,14 @@ public class HonSanteiIdoKanendoFuka {
                     bodyList.add(氏名.getColumnValue());
                 }
                 bodyList.add(住所);
-                KinyuKikanCode 金融機関コード = 口座Entity.getKinyuKikanCode();
+                KinyuKikanCode 金融機関コード = 口座Entity == null ? null : 口座Entity.getKinyuKikanCode();
                 if (金融機関コード != null && !金融機関コード.isEmpty()) {
                     bodyList.add(金融機関コード.getColumnValue());
                 } else {
                     bodyList.add(空);
                 }
                 bodyList.add(口座種類);
-                bodyList.add(口座Entity.getKozaNo());
+                bodyList.add(口座Entity == null ? null : 口座Entity.getKozaNo());
                 bodyList.add(計算後情報_宛名_口座Entity.get調定年度().toDateString());
                 bodyList.add(計算後情報_宛名_口座Entity.get賦課年度().toDateString());
                 bodyList.add(formatDecimal(計算後情報_宛名_口座Entity.get確定介護保険料_年額()));
@@ -1602,13 +1602,14 @@ public class HonSanteiIdoKanendoFuka {
                 bodyList.add(get表記(月別所得段階リスト.get(ジュウイチ_定値)));
                 bodyList.add(formatDecimal(計算後情報_宛名_口座Entity.get特徴歳出還付額()));
                 bodyList.add(formatDecimal(計算後情報_宛名_口座Entity.get普徴歳出還付額()));
-                List<KinyuKikanEntity> 金融機関EntityList = 計算後情報_宛名_口座Entity.get口座Entity().getKinyuKikanEntity();
+                List<KinyuKikanEntity> 金融機関EntityList = 計算後情報_宛名_口座Entity.get口座Entity() == null
+                        ? null : 計算後情報_宛名_口座Entity.get口座Entity().getKinyuKikanEntity();
                 if (金融機関EntityList != null && !金融機関EntityList.isEmpty() && 金融機関EntityList.get(ゼロ_定値).get金融機関Entity() != null) {
                     bodyList.add(金融機関EntityList.get(ゼロ_定値).get金融機関Entity().getName());
                 } else {
                     bodyList.add(空);
                 }
-                AtenaKanaMeisho 口座名義人 = 口座Entity.getKozaMeiginin();
+                AtenaKanaMeisho 口座名義人 = 口座Entity == null ? null : 口座Entity.getKozaMeiginin();
                 if (口座名義人 != null && !口座名義人.isEmpty()) {
                     bodyList.add(口座名義人.getColumnValue());
                 } else {
@@ -1625,9 +1626,19 @@ public class HonSanteiIdoKanendoFuka {
                     bodyList.add(formatDecimal(普徴期別金額));
                 }
                 bodyList.add(計算後情報_宛名_口座Entity.get調定事由1());
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             csvListWriter.close();
+        }
+    }
+
+    private void toBodyList(List<RString> bodyList) {
+        for (int i = ゼロ_定値; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
         }
     }
 
@@ -1716,46 +1727,46 @@ public class HonSanteiIdoKanendoFuka {
             int 期 = 期月.get期AsInt();
             switch (期) {
                 case イチ_定値:
-                    普徴額List.set(ゼロ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額01());
+                    普徴額List.set(ゼロ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額01());
                     break;
                 case 二_定値:
-                    普徴額List.set(イチ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額02());
+                    普徴額List.set(イチ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額02());
                     break;
                 case ミ_定値:
-                    普徴額List.set(二_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額03());
+                    普徴額List.set(二_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額03());
                     break;
                 case ヨ_定値:
-                    普徴額List.set(ミ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額04());
+                    普徴額List.set(ミ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額04());
                     break;
                 case ゴ_定値:
-                    普徴額List.set(ヨ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額05());
+                    普徴額List.set(ヨ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額05());
                     break;
                 case ロク_定値:
-                    普徴額List.set(ゴ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額06());
+                    普徴額List.set(ゴ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額06());
                     break;
                 case ナナ_定値:
-                    普徴額List.set(ロク_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額07());
+                    普徴額List.set(ロク_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額07());
                     break;
                 case ハチ_定値:
-                    普徴額List.set(ナナ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額08());
+                    普徴額List.set(ナナ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額08());
                     break;
                 case キュウ_定値:
-                    普徴額List.set(ハチ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額09());
+                    普徴額List.set(ハチ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額09());
                     break;
                 case ジュウ_定値:
-                    普徴額List.set(キュウ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額10());
+                    普徴額List.set(キュウ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額10());
                     break;
                 case ジュウイチ_定値:
-                    普徴額List.set(ジュウ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額11());
+                    普徴額List.set(ジュウ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額11());
                     break;
                 case ジュウ二_定値:
-                    普徴額List.set(ジュウイチ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額12());
+                    普徴額List.set(ジュウイチ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額12());
                     break;
                 case ジュウミ_定値:
-                    普徴額List.set(ジュウ二_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額13());
+                    普徴額List.set(ジュウ二_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額13());
                     break;
                 case ジュウヨ_定値:
-                    普徴額List.set(ジュウミ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴収入額14());
+                    普徴額List.set(ジュウミ_定値, 計算後情報_宛名_口座_更正前Entity.get普徴期別金額14());
                     break;
                 default:
                     break;
@@ -1772,6 +1783,9 @@ public class HonSanteiIdoKanendoFuka {
 
     private RString get口座種類(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity) {
         KozaRelateEntity releteEntity = 計算後情報_宛名_口座_更正前Entity.get口座Entity();
+        if (releteEntity == null) {
+            return 空;
+        }
         IKoza koza = new Koza(releteEntity);
         RString 口座種類 = koza.get預金種別().get預金種別略称();
         if (口座種類 != null && イチ_定値 < 口座種類.length()) {
