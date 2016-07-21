@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyotokki;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyogaikyotokki.GaikyotokkiA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
+import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -17,15 +17,15 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class GaikyotokkiA4Report extends Report<GaikyotokkiA4ReportSource> {
 
-    private final GaikyotokkiA4Entity entity;
+    private final GaikyotokkiA4Business business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity 要介護認定調査票（概況特記）のentity
+     * @param business 要介護認定調査票（概況特記）のbusiness
      */
-    public GaikyotokkiA4Report(GaikyotokkiA4Entity entity) {
-        this.entity = entity;
+    public GaikyotokkiA4Report(GaikyotokkiA4Business business) {
+        this.business = business;
     }
 
     /**
@@ -35,7 +35,7 @@ public class GaikyotokkiA4Report extends Report<GaikyotokkiA4ReportSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<GaikyotokkiA4ReportSource> reportSourceWriter) {
-        IGaikyotokkiA4Editor editor = new GaikyotokkiA4EditorImpl(entity);
+        IGaikyotokkiA4Editor editor = new GaikyotokkiA4EditorImpl(business);
         IGaikyotokkiA4Builder builder = new GaikyotokkiA4BuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }

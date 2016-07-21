@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyogaikyotokki;
+package jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyogaikyotokki;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GaikyotokkiA4Entity {
+public class GaikyotokkiA4Business {
 
     private RString hokenshaNo1;
     private RString hokenshaNo2;
