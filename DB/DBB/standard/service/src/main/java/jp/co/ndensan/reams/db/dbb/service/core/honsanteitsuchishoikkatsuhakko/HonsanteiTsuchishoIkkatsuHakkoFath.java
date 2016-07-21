@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoTempResult;
@@ -24,7 +22,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -34,8 +31,11 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoId
 import jp.co.ndensan.reams.db.dbb.service.report.hokenryononyutsuchishokigoto.HokenryoNonyuTsuchishoKigotoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.nonyutsuchishocvskigoto.NonyuTsuchishoCVSKigotoPrintService;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
@@ -866,7 +866,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
             return null;
         }
         ShunyuJoho 収入情報 = new ShunyuJoho();
-        収入情報.set調定年度(計算後情報_更正後.getFukaNendo());
+        収入情報.set調定年度(計算後情報_更正後.getChoteiNendo());
         収入情報.set賦課年度(計算後情報_更正後.getFukaNendo());
         収入情報.set通知書番号(計算後情報_更正後.getTsuchishoNo());
         収入情報.set普徴収入額01(計算後情報_更正後.getFuShunyuGaku01());
