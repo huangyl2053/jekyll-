@@ -33,6 +33,6 @@ public class KaigohokenRenrakuhyoJisshitsuFutanBuilder implements IKaigohokenRen
      */
     @Override
     public KaigohokenRenrakuhyoJisshitsuFutanReportSource build() {
-        return ReportEditorJoiner.from(new jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource()).join(editor).buildSource();
+        return ReportEditorJoiner.from(new KaigohokenRenrakuhyoJisshitsuFutanReportSource()).join(editor).buildSource();
     }
 }
