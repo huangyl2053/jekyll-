@@ -96,7 +96,16 @@ public class HanyoListParamHandler {
      * @param モード 画面のモード
      */
     public void onChange_日付抽出区分(RString モード) {
-        RString 抽出区分 = div.getRadTekiyoJogaishaChushutsu().getSelectedKey();
+        RString 抽出区分 = RString.EMPTY;
+        if (モード2.equals(モード)) {
+            抽出区分 = div.getRadTekiyoJogaishaChushutsu().getSelectedKey();
+        } else if (モード3.equals(モード)) {
+            抽出区分 = div.getRadTaShichosonJushotiTokureishaChushutsu().getSelectedKey();
+        } else if (モード4.equals(モード)) {
+            抽出区分 = div.getRadRoreiFukushiNenkinJukyushaChushutsu().getSelectedKey();
+        } else if (モード5.equals(モード)) {
+            抽出区分 = div.getRadSeikatuhogoJukyushaChushutsu().getSelectedKey();
+        }
         if (HizukeChushutsuKubun.直近.getコード().equals(抽出区分)) {
             set基準日Disable(モード);
             set範囲Disable(モード);
