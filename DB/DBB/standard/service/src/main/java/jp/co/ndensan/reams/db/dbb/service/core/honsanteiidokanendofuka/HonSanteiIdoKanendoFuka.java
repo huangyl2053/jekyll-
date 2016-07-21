@@ -277,10 +277,7 @@ public class HonSanteiIdoKanendoFuka {
     private final MapperProvider mapperProvider;
     private final DbT2010FukaErrorListDac 賦課エラーDac;
     private final DbT2002FukaDac 賦課Dac;
-    private final DbT2003KibetsuDac 期別Dac;
-    private final UrT0705ChoteiKyotsuDac 調定共通Dac;
     private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
-    private final DbT2001ChoshuHohoDac 徴収方法Dac;
     private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
 
     /**
@@ -289,11 +286,8 @@ public class HonSanteiIdoKanendoFuka {
     public HonSanteiIdoKanendoFuka() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.賦課エラーDac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
-        this.期別Dac = InstanceProvider.create(DbT2003KibetsuDac.class);
-        this.調定共通Dac = InstanceProvider.create(UrT0705ChoteiKyotsuDac.class);
         this.賦課Dac = InstanceProvider.create(DbT2002FukaDac.class);
         this.宛名識別異動分Dac = InstanceProvider.create(UaFt001FindIdoFunctionDac.class);
-        this.徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
         this.帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
     }
 
@@ -322,10 +316,7 @@ public class HonSanteiIdoKanendoFuka {
         this.mapperProvider = mapperProvider;
         this.賦課エラーDac = 賦課エラーDac;
         this.賦課Dac = 賦課Dac;
-        this.期別Dac = 期別Dac;
-        this.調定共通Dac = 調定共通Dac;
         this.宛名識別異動分Dac = 宛名識別異動分Dac;
-        this.徴収方法Dac = 徴収方法Dac;
         this.帳票制御共通Dac = 帳票制御共通Dac;
     }
 
