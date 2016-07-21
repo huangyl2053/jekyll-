@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  * @reamsid_L DBE-9999-011 sunhaidi
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteiShinseiJohoMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;

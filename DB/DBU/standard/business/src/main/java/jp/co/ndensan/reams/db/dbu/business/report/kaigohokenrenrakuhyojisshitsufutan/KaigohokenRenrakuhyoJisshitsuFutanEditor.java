@@ -26,7 +26,7 @@ public class KaigohokenRenrakuhyoJisshitsuFutanEditor implements IKaigohokenRenr
     }
 
     @Override
-    public KaigohokenRenrakuhyoJisshitsuFutanReportSource edit(jp.co.ndensan.reams.db.dbu.entity.report.kaigohokenrenrakuhyojisshitsufutan.KaigohokenRenrakuhyoJisshitsuFutanReportSource source) {
+    public KaigohokenRenrakuhyoJisshitsuFutanReportSource edit(KaigohokenRenrakuhyoJisshitsuFutanReportSource source) {
 
         source.sakuseiDate = jisshitsufutan.get作成年月日();
         source.hihokenshaNo = jisshitsufutan.get被保険者番号();

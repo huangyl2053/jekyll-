@@ -171,7 +171,7 @@ public class ShinsakauIinHoshuShokaiFindler {
      *
      * @param 出席状況 原出席状況
      */
-    public void get出席回数(RString 出席状況) {
+    private void get出席回数(RString 出席状況) {
         if (ShinsakauIinHoshuShokaiFindler.長.equals(出席状況)
                 || ShinsakauIinHoshuShokaiFindler.副.equals(出席状況)
                 || ShinsakauIinHoshuShokaiFindler.出.equals(出席状況)) {
@@ -185,7 +185,7 @@ public class ShinsakauIinHoshuShokaiFindler {
      * @param 出席状況 原出席状況
      * @return set出席状況
      */
-    public RString set出席状況(RString 出席状況) {
+    private RString set出席状況(RString 出席状況) {
 
         if (ShinsakauIinHoshuShokaiFindler.長.equals(出席状況)) {
             出席状況 = ShinsakauIinHoshuShokaiFindler.長_対応;

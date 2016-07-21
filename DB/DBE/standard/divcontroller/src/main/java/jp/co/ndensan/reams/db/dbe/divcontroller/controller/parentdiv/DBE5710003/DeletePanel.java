@@ -108,8 +108,8 @@ public class DeletePanel {
         return ResponseData.of(div).respond();
     }
 
-    private DeletePanelHandler getHandler(DeletePanelDiv div) {
-        return new DeletePanelHandler(div);
+    private DeletePanelHandler getHandler() {
+        return new DeletePanelHandler();
     }
 
     private DeletePanelValidationHandler getValidationHandler(DeletePanelDiv div) {
@@ -145,7 +145,7 @@ public class DeletePanel {
                     return controlPairs;
                 }
             } else if (KEY_その他資料.equals(key)) {
-                RString イメージファイルが存在区分 = getHandler(div).getその他資料のイメージファイルが存在区分(
+                RString イメージファイルが存在区分 = getHandler().getその他資料のイメージファイルが存在区分(
                         存在したイメージファイル名, 確認メッセージ出力区分);
                 if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
                     確認メッセージ出力区分 = RString.EMPTY;
@@ -162,7 +162,7 @@ public class DeletePanel {
     private ValidationMessageControlPairs 調査票特記チェック(DeletePanelDiv div, List<RString> 存在したイメージファイル名,
             RString 認定調査委託先コード, RString 認定調査員コード, RString 申請書管理番号,
             Integer 認定調査依頼履歴番号) {
-        RString イメージファイルが存在区分 = getHandler(div).get調査票特記のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
+        RString イメージファイルが存在区分 = getHandler().get調査票特記のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
         if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
             確認メッセージ出力区分 = RString.EMPTY;
             return getValidationHandler(div).調査票特記イメージファイル存在チェック();
@@ -182,7 +182,7 @@ public class DeletePanel {
     private ValidationMessageControlPairs 調査票概況チェック(DeletePanelDiv div, List<RString> 存在したイメージファイル名,
             RString 認定調査委託先コード, RString 認定調査員コード, RString 申請書管理番号, Integer 認定調査依頼履歴番号) {
 
-        if (getHandler(div).is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
+        if (getHandler().is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
             return getValidationHandler(div).調査票概況イメージファイル存在チェック();
         } else {
             FlexibleDate 認定調査委託料支払年月日 = YokaigoninteiimagesakujoManager.createInstance().getChosaItakuryoShiharaiYMD(
@@ -196,7 +196,7 @@ public class DeletePanel {
 
     private ValidationMessageControlPairs 主治医意見書チェック(DeletePanelDiv div, List<RString> 存在したイメージファイル名,
             RString 主治医医療機関コード, RString 主治医コード, RString 申請書管理番号, Integer 主治医意見書作成依頼履歴番号) {
-        RString イメージファイルが存在区分 = getHandler(div).get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
+        RString イメージファイルが存在区分 = getHandler().get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
         if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
             確認メッセージ出力区分 = RString.EMPTY;
             return getValidationHandler(div).主治医意見書イメージファイル存在チェック();
