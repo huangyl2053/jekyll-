@@ -156,7 +156,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
      */
     public IkenHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
         List<IkenshoHoshuShokaiIchiranKey> keyJohoList = new ArrayList<>();
-        for (dgIkenshoSakuseiHoshu_Row row : div.getDgIkenshoSakuseiHoshu().getDataSource()) {
+        for (dgIkenshoSakuseiHoshu_Row row : div.getDgIkenshoSakuseiHoshu().getSelectedItems()) {
             if (row.getSelected()) {
                 IkenshoHoshuShokaiIchiranKey key = new IkenshoHoshuShokaiIchiranKey(
                         row.getIryoKikanCode(),

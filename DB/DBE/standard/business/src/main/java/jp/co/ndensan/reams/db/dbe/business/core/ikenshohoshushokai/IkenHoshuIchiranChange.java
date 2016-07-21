@@ -60,7 +60,7 @@ public final class IkenHoshuIchiranChange {
                 entity.get施設_継(),
                 DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書作成料()), 0).concat("円"),
                 DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書別途診療費()), 0).concat("円"),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書作成料()), 0).concat("円"));
+                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書報酬()), 0).concat("円"));
         RStringBuilder 抽出期間 = new RStringBuilder();
         抽出期間.append(parameter.get作成依頼日期間開始().wareki().toDateString());
         抽出期間.append("～");
