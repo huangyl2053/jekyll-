@@ -220,7 +220,7 @@
         <association property="支払方法変更Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4021ShiharaiHohoHenkoMapper.ResultMap_DbT4021ShiharaiHohoHenkoEntity"/>
         <collection property="支払方法変更滞納Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity"/>
         <collection property="支払方法変更差止Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4024ShiharaiHohoHenkoSashitomeMapper.ResultMap_DbT4024ShiharaiHohoHenkoSashitomeEntity"/>
-        <collection property="介護期別Entity" resultMap=" ryjhftr"/>
+        <collection property="介護期別Entity" resultMap="resultMap_IShiharaiHohoHenkoGengakuEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_IShiharaiHohoHenkoGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShiharaiHohoHenkoGengakuEntity" autoMapping="true">
