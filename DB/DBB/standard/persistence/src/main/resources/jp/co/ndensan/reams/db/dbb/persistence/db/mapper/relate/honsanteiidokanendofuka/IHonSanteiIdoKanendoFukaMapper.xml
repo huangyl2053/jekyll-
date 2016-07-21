@@ -289,7 +289,7 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM
         rgdb."DbV2002Fuka" AS "DbT2002Fuka"
         INNER JOIN
@@ -349,7 +349,7 @@
         SELECT 
         A.*,
         "DbT2003Kibetsu".*,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
         月別ランク.*,
         <include refid="allColumns_TmpSetaiShotoku" />,
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho" />,
