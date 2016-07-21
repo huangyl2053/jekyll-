@@ -40,7 +40,8 @@ public class NonyuTsuchishoCVSMultiProperty extends ReportPropertyBase<NonyuTsuc
             Breakers<NonyuTsuchishoCVSMultiSource> breakers,
             BreakerCatalog<NonyuTsuchishoCVSMultiSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
 
 
 
