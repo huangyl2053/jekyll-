@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.Shinsa
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,9 +34,9 @@ public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
     @BatchParameter(key = SHINSAKAI_KAISAIBI_FROM, name = "審査会開催日FROM")
-    private RString shinsakaikaisaibiFrom;
+    private FlexibleDate shinsakaikaisaibiFrom;
     @BatchParameter(key = SHINSAKAI_KAISAIBI_TO, name = "審査会開催日To")
-    private RString shinsakaikaisaibiTo;
+    private FlexibleDate shinsakaikaisaibiTo;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<ShinsaiinJissekiIchiranKey> keyJoho;
 
@@ -54,8 +55,8 @@ public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
      * @param keyJoho キー情報Entityリスト
      */
     public ShinsaiinJissekiIchiranBatchParameter(RString syohyoSyuturyoku,
-            RString shinsakaikaisaibiFrom,
-            RString shinsakaikaisaibiTo,
+            FlexibleDate shinsakaikaisaibiFrom,
+            FlexibleDate shinsakaikaisaibiTo,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.shinsakaikaisaibiFrom = shinsakaikaisaibiFrom;

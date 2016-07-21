@@ -87,7 +87,7 @@ public class ChosahoshuseikyuEdit {
         shuseikyu.set作成件数合計(decimalToRString(作成件数合計));
         Decimal 小計 = 新規在宅計.add(新規施設計).add(更新在宅計).add(更新施設計);
         shuseikyu.set小計(decimalToRString(小計));
-        Decimal 消費税額 = 小計.multiply(new Decimal(消費税率.toString())).subtract(小計);
+        Decimal 消費税額 = 小計.multiply(rstringToDecimal(消費税率)).subtract(小計);
         shuseikyu.set消費税額(decimalToRString(消費税額));
         shuseikyu.set合計金額(decimalToRString(小計.add(消費税額)));
         shuseikyu.set請求金額(shuseikyu.get合計金額());
@@ -144,5 +144,12 @@ public class ChosahoshuseikyuEdit {
             return 0;
         }
         return Integer.valueOf(date.toString());
+    }
+
+    private Decimal rstringToDecimal(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return Decimal.ZERO;
+        }
+        return new Decimal(date.toString());
     }
 }

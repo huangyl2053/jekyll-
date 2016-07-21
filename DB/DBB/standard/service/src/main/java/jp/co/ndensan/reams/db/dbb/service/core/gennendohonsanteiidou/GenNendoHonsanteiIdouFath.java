@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo4Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TokuchoIraikin4gatsuKaishiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
@@ -64,6 +65,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubun
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -130,6 +132,7 @@ public class GenNendoHonsanteiIdouFath {
     private static final int INT_13 = 13;
     private static final int INT_14 = 14;
     private static final int DAY = 31;
+    private static final RString 定数_ページ数 = new RString("0");
     private static final RString ゼロ_0000 = new RString("0000");
     private static final ReportId 帳票ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
     private final ReportId 帳票分類Id = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
@@ -142,12 +145,17 @@ public class GenNendoHonsanteiIdouFath {
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
+    private static final RString 定数_出力条件 = new RString("出力条件");
+    private static final RString 定数_出力順 = new RString("出力順");
     private static final RString 定値_賦課年度 = new RString("賦課年度");
     private static final RString 定値_調定年度 = new RString("調定年度");
     private static final RString 年度 = new RString("年度");
     private static final RString CSV出力有無_有り = new RString("有り");
+    private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSVファイル名_一覧表 = new RString("本算定異動（現年度）結果一覧表");
+    private static final RString CSVファイル名_なし = new RString("-");
     private static final RString ゆうちょ銀行 = new RString("9900");
+    private static final RString SIGN = new RString(" ＞ ");
     private static final RString HYPHEN = new RString("-");
     private static final RString 定値_現金 = new RString("現金");
     private static final RString 定値_口座 = new RString("口座");
@@ -529,10 +537,37 @@ public class GenNendoHonsanteiIdouFath {
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             Long 出力順ID) {
+
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBB介護賦課, 帳票ID, 出力順ID);
         RString 出力順 = MyBatisOrderByClauseCreator.create(GenNendoHonsanteiIdouProperty.DBB200015HonsanteiIdouKekkaIchiranEnum.class, outputOrder);
+
+        List<RString> 出力条件リスト = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(定数_出力条件);
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append((FORMAT_LEFT).concat(定値_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(調定年度.wareki().eraType(EraType.KANJI).toDateString()).concat(年度));
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append((FORMAT_LEFT).concat(定値_賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(賦課年度.wareki().eraType(EraType.KANJI).toDateString()).concat(年度));
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
+        if (outputOrder != null) {
+            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+            for (ISetSortItem iSetSortItem : iSetSortItemList) {
+                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
+                    builder.append(iSetSortItem.get項目名());
+                } else {
+                    builder.append(iSetSortItem.get項目名()).append(SIGN);
+                }
+            }
+        }
+        出力条件リスト.add(builder.toRString());
 
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.set業務コード(GyomuCode.DB介護保険);
@@ -546,6 +581,10 @@ public class GenNendoHonsanteiIdouFath {
                 .createParam(調定年度, 賦課年度, 調定日時, 出力順, kozaBuilder.build(), list);
 
         List<HonsanteiIdoKekkaEntity> 本算定計算後賦課情報リスト = mapper.get本算定異動情報(param);
+        if (本算定計算後賦課情報リスト == null || 本算定計算後賦課情報リスト.isEmpty()) {
+            loadバッチ出力条件リスト(出力条件リスト, 定数_ページ数, CSV出力有無_なし, CSVファイル名_なし, ReportIdDBB.DBB200015.getReportName());
+            return;
+        }
 
         List<KeisanjohoAtenaKozaEntity> 計算後情報_宛名_口座_更正前EntityList = new ArrayList<>();
         List<KeisanjohoAtenaKozaEntity> 計算後情報_宛名_口座_更正後EntityList = new ArrayList<>();
@@ -560,33 +599,26 @@ public class GenNendoHonsanteiIdouFath {
             }
         }
         List<KeisanjohoAtenaKozaKouseizengoEntity> 計算後情報_宛名_口座EntityList = new ArrayList<>();
-        for (KeisanjohoAtenaKozaEntity 更正前Entity : 計算後情報_宛名_口座_更正前EntityList) {
-            for (KeisanjohoAtenaKozaEntity 更正後Entity : 計算後情報_宛名_口座_更正後EntityList) {
+        for (KeisanjohoAtenaKozaEntity 更正後Entity : 計算後情報_宛名_口座_更正後EntityList) {
+            KeisanjohoAtenaKozaKouseizengoEntity entity = new KeisanjohoAtenaKozaKouseizengoEntity();
+            entity.set計算後情報_宛名_口座_更正後Entity(更正後Entity);
+            for (KeisanjohoAtenaKozaEntity 更正前Entity : 計算後情報_宛名_口座_更正前EntityList) {
                 if (更正前Entity.get調定年度().equals(更正後Entity.get調定年度())
                         && 更正前Entity.get賦課年度().equals(更正後Entity.get賦課年度())
                         && 更正前Entity.get通知書番号().equals(更正後Entity.get通知書番号())) {
-                    計算後情報_宛名_口座EntityList.add(new KeisanjohoAtenaKozaKouseizengoEntity(更正前Entity, 更正後Entity));
+                    entity.set計算後情報_宛名_口座_更正前Entity(更正前Entity);
                     break;
                 }
             }
+            計算後情報_宛名_口座EntityList.add(entity);
         }
         SourceDataCollection sourceDataCollection
                 = new GenNendoHonsanteiIdouPrintService().printTaitsu(計算後情報_宛名_口座EntityList, 出力順ID, 調定日時, 賦課年度);
 
         publish本算定異動結果一覧表_本算定異動(賦課年度, 調定日時, 計算後情報_宛名_口座EntityList);
 
-        List<RString> 出力条件リスト = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(定値_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(調定年度.wareki().eraType(EraType.KANJI).toDateString()).concat(年度));
-        出力条件リスト.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(定値_賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(賦課年度.wareki().eraType(EraType.KANJI).toDateString()).concat(年度));
-
-        出力条件リスト.add(builder.toRString());
         RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
-        loadバッチ出力条件リスト(出力条件リスト, 出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
+        loadバッチ出力条件リスト(出力条件リスト, 出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表, ReportIdDBB.DBB200015.getReportName());
     }
 
     private void publish本算定異動結果一覧表_本算定異動(FlexibleYear 賦課年度, YMDHMS 調定日時,
@@ -601,6 +633,7 @@ public class GenNendoHonsanteiIdouFath {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(賦課年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
         Kitsuki 最終法定納期 = 期月リスト.get最終法定納期();
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -631,7 +664,7 @@ public class GenNendoHonsanteiIdouFath {
 
                 IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(更正後Entity.get宛名Entity());
                 ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-                RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
+                RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, 地方公共団体);
                 bodyList.add(編集後住所);
                 if (区分_管内.equals(更正後Entity.get宛名Entity().getKannaiKangaiKubun())) {
                     bodyList.add(更正後Entity.get宛名Entity().getJusho().getColumnValue());
@@ -646,7 +679,7 @@ public class GenNendoHonsanteiIdouFath {
                 } else {
                     bodyList.add(RString.EMPTY);
                 }
-                RString 口座情報 = get口座情報(更正前Entity, 更正後Entity);
+                RString 口座情報 = get口座情報(更正後Entity);
                 bodyList.add(口座情報);
                 bodyList.add(更正後Entity.get調定事由1());
 
@@ -739,81 +772,32 @@ public class GenNendoHonsanteiIdouFath {
         }
     }
 
-    private RString get口座情報(KeisanjohoAtenaKozaEntity 更正前Entity, KeisanjohoAtenaKozaEntity 更正後Entity) {
-        IKoza 口座_更正前 = new Koza(更正前Entity.get口座Entity());
+    private RString get口座情報(KeisanjohoAtenaKozaEntity 更正後Entity) {
+        if (更正後Entity == null) {
+            return RString.EMPTY;
+        }
         IKoza 口座_更正後 = new Koza(更正後Entity.get口座Entity());
-        if (口座_更正前.get金融機関コード() != null) {
-            if (ゆうちょ銀行.equals(口座_更正前.get金融機関コード().value().substring(0, INT_4))
-                    && 口座_更正前.get金融機関コード().value().length() >= INT_4) {
-                return ゆうちょ銀行の口座(口座_更正後);
-            } else {
-                return ゆうちょ銀行以外の口座(口座_更正後);
-            }
+        RString 金融機関コード = 口座_更正後.get金融機関コード().value();
+        RString 通帳記号 = 口座_更正後.getEdited通帳記号();
+        RString 通帳番号 = 口座_更正後.getEdited通帳番号();
+        RString 口座名義人漢字 = 口座_更正後.get口座名義人漢字().value();
+        RString 支店コード = 口座_更正後.get支店コード().value();
+        RString 口座番号 = 口座_更正後.get口座番号();
+        RString 口座種別 = 口座_更正後.get預金種別().get預金種別略称();
+        if (ゆうちょ銀行.equals(金融機関コード.substringReturnAsPossible(0, INT_4))) {
+            return 金融機関コード.substringReturnAsPossible(0, INT_4).concat(RString.HALF_SPACE)
+                    .concat(通帳記号.substringReturnAsPossible(0, INT_5))
+                    .concat(HYPHEN)
+                    .concat(通帳番号.substringReturnAsPossible(0, INT_8))
+                    .concat(RString.HALF_SPACE)
+                    .concat(口座名義人漢字);
+        } else {
+            return 金融機関コード.substringReturnAsPossible(0, INT_4).concat(HYPHEN)
+                    .concat(支店コード.substringReturnAsPossible(0, INT_3)).concat(RString.HALF_SPACE)
+                    .concat(口座種別.substringReturnAsPossible(0, INT_2)).concat(HYPHEN)
+                    .concat(口座番号.substringReturnAsPossible(0, INT_7)).concat(RString.HALF_SPACE)
+                    .concat(口座名義人漢字);
         }
-        return RString.EMPTY;
-    }
-
-    private RString ゆうちょ銀行の口座(IKoza 口座) {
-        RString 金融機関コード;
-        RString 通帳記号;
-        RString 通帳番号;
-        if (口座.get通帳記号() != null && 口座.get通帳番号() != null && 口座.get口座名義人漢字() != null) {
-            if (口座.get金融機関コード().getColumnValue().length() >= INT_4) {
-                金融機関コード = 口座.get金融機関コード().getColumnValue().substring(0, INT_4);
-            } else {
-                金融機関コード = 口座.get金融機関コード().getColumnValue();
-            }
-            if (口座.getEdited通帳記号().length() >= INT_5) {
-                通帳記号 = 口座.getEdited通帳記号().substring(0, INT_5);
-            } else {
-                通帳記号 = 口座.getEdited通帳記号();
-            }
-            if (口座.getEdited通帳番号().length() >= INT_8) {
-                通帳番号 = 口座.getEdited通帳番号().substring(0, INT_8);
-            } else {
-                通帳番号 = 口座.getEdited通帳番号();
-            }
-            return 金融機関コード.concat(RString.FULL_SPACE)
-                    .concat(通帳記号)
-                    .concat(HYPHEN).concat(通帳番号)
-                    .concat(RString.FULL_SPACE).concat(口座.get口座名義人漢字().toString());
-        }
-        return RString.EMPTY;
-    }
-
-    private RString ゆうちょ銀行以外の口座(IKoza 口座) {
-        RString 金融機関コード;
-        RString 預金種別略称;
-        RString 支店コード;
-        RString 口座番号;
-        if (口座.get支店コード() != null && 口座.get口座番号() != null && 口座.get口座名義人漢字() != null) {
-            if (口座.get金融機関コード().value().length() >= INT_4) {
-                金融機関コード = 口座.get金融機関コード().getColumnValue().substring(0, INT_4);
-            } else {
-                金融機関コード = 口座.get金融機関コード().getColumnValue();
-            }
-            if (口座.get支店コード().value().length() >= INT_5) {
-                支店コード = 口座.get支店コード().getColumnValue().substring(0, INT_5);
-            } else {
-                支店コード = 口座.get支店コード().getColumnValue();
-            }
-            if (口座.get預金種別().get預金種別略称().length() >= INT_2) {
-                預金種別略称 = 口座.get預金種別().get預金種別略称().substring(0, INT_2);
-            } else {
-                預金種別略称 = 口座.get預金種別().get預金種別略称();
-            }
-            if (口座.get口座番号().length() >= INT_7) {
-                口座番号 = 口座.get口座番号().substring(0, INT_7);
-            } else {
-                口座番号 = 口座.get口座番号();
-            }
-            return 金融機関コード.concat(HYPHEN)
-                    .concat(支店コード).concat(RString.FULL_SPACE)
-                    .concat(預金種別略称)
-                    .concat(HYPHEN).concat(口座番号).concat(RString.FULL_SPACE)
-                    .concat(口座.get口座名義人漢字().toString());
-        }
-        return RString.EMPTY;
     }
 
     private Decimal nullTOZero(Decimal 金額) {
@@ -934,7 +918,7 @@ public class GenNendoHonsanteiIdouFath {
     }
 
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト, RString 出力ページ数,
-            RString csv出力有無, RString 帳票名) {
+            RString csv出力有無, RString csvファイル名, RString 帳票名) {
 
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         RString 導入団体コード = association.getLasdecCode_().value();
@@ -948,7 +932,7 @@ public class GenNendoHonsanteiIdouFath {
                 帳票名,
                 出力ページ数,
                 csv出力有無,
-                EUCファイル名,
+                csvファイル名,
                 出力条件リスト);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();

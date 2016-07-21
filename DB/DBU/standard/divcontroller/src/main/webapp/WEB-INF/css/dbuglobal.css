@@ -1,0 +1,12 @@
+.DBUFontcolor_red .UzTextBox {
+    color: red;
+}
+.DBUFontcolor_green .UzTextBox {
+    color: green;
+}
+.DBUFontcolor_black .UzTextBox {
+    color: black;
+}
+.DBUFontcolor_yellow .UzTextBox {
+    background-color: yellow;
+}

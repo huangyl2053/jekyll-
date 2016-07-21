@@ -122,11 +122,11 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             }
             row.setShisetsuShin(date.get施設_新());
             if (date.get施設_新().equals(MARO)) {
-                txtZaitakuKeizoku = txtShisetsuShinki.add(Decimal.ONE);
+                txtShisetsuShinki = txtShisetsuShinki.add(Decimal.ONE);
             }
             row.setShisetsuKe(date.get施設_継());
             if (date.get施設_継().equals(MARO)) {
-                txtZaitakuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
+                txtShisetsuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
             }
             txtKotsuhito = txtKotsuhito.add(date.get主治医意見書作成料());
             row.setSakuseiryo(DecimalFormatter.toコンマ区切りRString(new Decimal(date.get主治医意見書作成料()), 0).concat("円"));
@@ -149,7 +149,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
     }
 
     /**
-     * バッチパラメータの作成する。
+     * バッチパラメータの作成します。
      *
      * @param 帳票出力区分 帳票出力区分
      * @return 意見書作成報酬照会の合計額リスト_バッチフロークラスパラメータ
@@ -189,7 +189,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
     }
 
     /**
-     * 作成依頼日をクリアする。
+     * 作成依頼日をクリアします。
      */
     public void clear作成依頼日() {
         div.getTxtSakuseiIraibi().clearFromValue();

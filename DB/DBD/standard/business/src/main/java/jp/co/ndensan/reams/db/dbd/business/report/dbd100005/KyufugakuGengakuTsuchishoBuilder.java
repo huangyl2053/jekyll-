@@ -33,8 +33,7 @@ public class KyufugakuGengakuTsuchishoBuilder implements IKyufugakuGengakuTsuchi
      */
     @Override
     public KyufugakuGengakuTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new KyufugakuGengakuTsuchishoReportSource())
-                .join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new KyufugakuGengakuTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
 
 }

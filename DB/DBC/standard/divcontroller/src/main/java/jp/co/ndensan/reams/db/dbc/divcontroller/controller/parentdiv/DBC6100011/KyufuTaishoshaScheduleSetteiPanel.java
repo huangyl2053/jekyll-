@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC6100011.Kyu
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC6100011.KyufuTaishoshaScheduleSetteiPanelValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaScheduleSettei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-2010-010 wangkanglei
  */
 public class KyufuTaishoshaScheduleSetteiPanel {
+
+    private static final RString 出力文言 = new RString("登録");
 
     /**
      * 画面初期化です。
@@ -111,20 +113,16 @@ public class KyufuTaishoshaScheduleSetteiPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            try {
-                getHandler(div).save処理(スケジュール履歴情報List, true);
-            } catch (ApplicationException e) {
-                throw new ApplicationException(e.getMessage());
-            }
+            getHandler(div).save処理(スケジュール履歴情報List, true);
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(出力文言.toString()).evaluate()));
             return ResponseData.of(div).setState(DBC6100011StateName.完了メッセージ);
         } else if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            try {
-                getHandler(div).save処理(スケジュール履歴情報List, false);
-            } catch (ApplicationException e) {
-                throw new ApplicationException(e.getMessage());
-            }
+            getHandler(div).save処理(スケジュール履歴情報List, false);
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(出力文言.toString()).evaluate()));
             return ResponseData.of(div).setState(DBC6100011StateName.完了メッセージ);
         } else {
             return ResponseData.of(div).respond();

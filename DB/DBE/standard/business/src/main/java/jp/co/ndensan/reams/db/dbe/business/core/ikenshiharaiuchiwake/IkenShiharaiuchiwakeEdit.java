@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,11 +53,13 @@ public class IkenShiharaiuchiwakeEdit {
         seikyuEntity.set公印省略(認証者.koinShoryaku);
         seikyuEntity.set通知文1(通知文.get(1));
         seikyuEntity.set通知文2(通知文.get(2));
-        seikyuEntity.set口座種別(口座情報.get預金種別().get預金種別名称());
-        seikyuEntity.set口座番号(口座情報.get口座番号());
-        seikyuEntity.set金融機関(口座情報.getCombined金融機関名and支店名());
-        seikyuEntity.set口座名義人(口座情報.get口座名義人().value());
-        seikyuEntity.set支店(口座情報.get支店().get支店名称());
+        if (口座情報 != null) {
+            seikyuEntity.set口座種別(口座情報.get預金種別().get預金種別名称());
+            seikyuEntity.set口座番号(口座情報.get口座番号());
+            seikyuEntity.set金融機関(口座情報.getCombined金融機関名and支店名());
+            seikyuEntity.set口座名義人(口座情報.get口座名義人().value());
+            seikyuEntity.set支店(口座情報.get支店().get支店名称());
+        }
         seikyuEntity.set郵便番号(entity.getYubinNo().value());
         seikyuEntity.set住所(entity.getJusho());
         seikyuEntity.set医療機関(entity.getIryoKikanMeisho());
@@ -72,10 +73,7 @@ public class IkenShiharaiuchiwakeEdit {
         seikyuEntity.set被保険者番号(entity.getHihokenshaNo());
         seikyuEntity.set被保険者氏名(entity.getHihokenshaName().value());
         seikyuEntity.set住所(entity.getJusho());
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(entity.getIkenshoSakuseiryo());
-        builder.append("円");
-        seikyuEntity.set金額(builder.toRString());
+        seikyuEntity.set金額(new RString(entity.getIkenshoSakuseiryo()));
         return seikyuEntity;
     }
 }

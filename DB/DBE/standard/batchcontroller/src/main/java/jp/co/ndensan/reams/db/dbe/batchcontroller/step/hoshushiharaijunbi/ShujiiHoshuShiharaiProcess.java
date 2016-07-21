@@ -109,8 +109,12 @@ public class ShujiiHoshuShiharaiProcess extends BatchProcessBase<HoshuShiharaiJu
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
+        RString hihokenshaNo = RString.EMPTY;
+        if (entity.getHihokenshaNo() != null) {
+            hihokenshaNo = entity.getHihokenshaNo();
+        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.getHihokenshaNo());
+                hihokenshaNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 

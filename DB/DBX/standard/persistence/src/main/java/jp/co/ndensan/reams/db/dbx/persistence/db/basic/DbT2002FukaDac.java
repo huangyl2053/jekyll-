@@ -262,4 +262,23 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 介護賦課を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 賦課年度 FlexibleYear
+     * @return DbT2002FukaEntity
+     */
+    @Transaction
+    public DbT2002FukaEntity get介護賦課(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_KEY.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_KEY.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(eq(hihokenshaNo, 被保険者番号), leq(fukaNendo, 賦課年度))).
+                order(by(DbT2002Fuka.rirekiNo, Order.DESC)).
+                limit(1).toObject(DbT2002FukaEntity.class);
+    }
 }

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.HoshuShiharaiJunbiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai.ChosaHoshumeisaiReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinseimonitor.ShinseiMonitorReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -60,7 +59,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi."
             + "IHoshuShiharaiJunbiMapper.get認定調査報酬支払明細書");
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(ChosaHoshumeisaiReportSource.ReportSourceFields.chosaItakusakiNam.name()),
+            .unmodifiableList(Arrays.asList(new RString(ChosaHoshumeisaiReportSource.ReportSourceFields.chosaItakusakiName.name()),
                             new RString(ChosaHoshumeisaiReportSource.ReportSourceFields.ninteichosainCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
@@ -99,7 +98,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<ShinseiMonitorReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .addBreak(new BreakerCatalog<ChosaHoshumeisaiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
@@ -139,8 +138,12 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
+        RString hihokenshaNo = RString.EMPTY;
+        if (entity.getHihokenshaNo() != null) {
+            hihokenshaNo = entity.getHihokenshaNo();
+        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.getHihokenshaNo());
+                hihokenshaNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 

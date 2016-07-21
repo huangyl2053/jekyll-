@@ -1093,6 +1093,16 @@ public class YokaigoNinteiJoho implements Serializable {
     }
 
     /**
+     * 介護認定審査会資料作成年月日を返します。
+     *
+     * @return 介護認定審査会資料作成年月日
+     */
+    public FlexibleDate get介護認定審査会資料作成年月日() {
+        return null == 要介護認定結果情報Entity
+                ? FlexibleDate.EMPTY : 要介護認定結果情報Entity.getShinsakaiShiryoSakuseiYMD();
+    }
+
+    /**
      * 介護認定処理情報MD5値変更かどうか。
      *
      * @return 変更かどうか boolean

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoHoshuShokaiRelateEntity {
 
     private RString 市町村コード;

@@ -82,7 +82,7 @@
         dbt2003."choshuHouhou" = '2'
         ) shunojoho
         ON
-        ???."hihokenshaNo" = shunojoho.hihokenshaNo
+        dbt4021."hihokenshaNo" = shunojoho.hihokenshaNo
         LEFT JOIN(
         SELECT
         tmpcat0701."shunoId",

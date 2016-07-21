@@ -59,10 +59,12 @@ public class ShujiiHoshuShiharaiEdit {
         seikyuEntity.set公印省略(認証者.koinShoryaku);
         seikyuEntity.set通知文1(通知文.get(1));
         seikyuEntity.set通知文2(通知文.get(2));
-        seikyuEntity.set種別(口座情報.get預金種別().get預金種別名称());
-        seikyuEntity.set番号(口座情報.get口座番号());
-        seikyuEntity.set金融機関(口座情報.getCombined金融機関名and支店名());
-        seikyuEntity.set名議人(口座情報.get口座名義人().value());
+        if (口座情報 != null) {
+            seikyuEntity.set種別(口座情報.get預金種別().get預金種別名称());
+            seikyuEntity.set番号(口座情報.get口座番号());
+            seikyuEntity.set金融機関(口座情報.getCombined金融機関名and支店名());
+            seikyuEntity.set名議人(口座情報.get口座名義人().value());
+        }
         seikyuEntity.set郵便番号(entity.getYubinNo());
         seikyuEntity.set住所(entity.getJusho());
         seikyuEntity.set医療機関(entity.getIryoKikanMeisho());
@@ -70,10 +72,7 @@ public class ShujiiHoshuShiharaiEdit {
         seikyuEntity.set名称付与(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬支払通知書_宛先敬称, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         seikyuEntity.setバーコード(ChosaHoshuShiharaiEdit.getバーコード(entity));
-        Decimal 税率 = Decimal.ZERO;
-        if (消費税率 != null) {
-            税率 = new Decimal(消費税率.toString());
-        }
+        Decimal 税率 = rstringToDecimal(消費税率);
         Decimal 単価税込 = entity.getTanka().multiply(税率);
         if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
             index = 1;

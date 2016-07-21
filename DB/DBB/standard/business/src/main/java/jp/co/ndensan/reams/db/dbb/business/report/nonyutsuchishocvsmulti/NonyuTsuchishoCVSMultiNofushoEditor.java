@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -61,11 +62,49 @@ public class NonyuTsuchishoCVSMultiNofushoEditor implements INonyuTsuchishoCVSMu
 
     private NonyuTsuchishoCVSMultiSource editSource(NonyuTsuchishoCVSMultiSource source) {
 
+        this.editレイヤ１(source);
+
         this.edit納付書1(source);
 
         this.edit納付書2(source);
 
         this.edit納付書3(source);
+
+        return source;
+    }
+
+    private NonyuTsuchishoCVSMultiSource editレイヤ１(NonyuTsuchishoCVSMultiSource source) {
+
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_notsuRenban1 = new RString(item.get連番()).padZeroToLeft(INT_6);
+            source.detail_notsuRenban2 = new RString(item.get連番()).padZeroToLeft(INT_6);
+            source.detail_notsuRenban3 = new RString(item.get連番()).padZeroToLeft(INT_6);
+            source.detail_renban = new RString(item.get連番());
+        }
+
+        if (item.get編集後本算定通知書共通情報() != null) {
+            source.detail_hokenshaName = item.get編集後本算定通知書共通情報().get保険者名();
+        }
+
+        if (map.containsKey(2)
+                || map.containsKey(INT_5)
+                || map.containsKey(INT_8)) {
+            source.detail_pageCount1 = new RString(item.get連番()).concat("-4");
+            source.detail_pageCount2 = new RString(item.get連番()).concat("-5");
+            source.detail_pageCount3 = new RString(item.get連番()).concat("-6");
+        } else if (map.containsKey(INT_3)
+                || map.containsKey(INT_6)
+                || map.containsKey(INT_9)) {
+            source.detail_pageCount1 = new RString(item.get連番()).concat("-7");
+            source.detail_pageCount2 = new RString(item.get連番()).concat("-8");
+            source.detail_pageCount3 = new RString(item.get連番()).concat("-9");
+        } else if (map.containsKey(INT_4)
+                || map.containsKey(INT_7)
+                || map.containsKey(INT_10)) {
+            source.detail_pageCount1 = new RString(item.get連番()).concat("-10");
+            source.detail_pageCount2 = new RString(item.get連番()).concat("-11");
+            source.detail_pageCount3 = new RString(item.get連番()).concat("-12");
+        }
 
         return source;
     }

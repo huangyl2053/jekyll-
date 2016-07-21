@@ -148,7 +148,7 @@ public class SogoJigyoKubunShikyuGendoGaku
     }
 
     /**
-     * 保持する介護予防・日常生活支援総合事業区分支給限度額を削除対象とします。<br/> null null null null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link
+     * 保持する介護予防・日常生活支援総合事業区分支給限度額を削除対象とします。<br/> null null null null null null null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link
      * EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link SogoJigyoKubunShikyuGendoGaku}
@@ -163,6 +163,30 @@ public class SogoJigyoKubunShikyuGendoGaku
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new SogoJigyoKubunShikyuGendoGaku(deletedEntity, id);
+    }
+
+    /**
+     * 保持する介護予防・日常生活支援総合事業区分支給限度額を登録対象とします。<br/> null null null null null null null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link
+     * EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link SogoJigyoKubunShikyuGendoGaku}
+     */
+    public SogoJigyoKubunShikyuGendoGaku added() {
+        DbT7117SogoJigyoKubunShikyuGendoGakuEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new SogoJigyoKubunShikyuGendoGaku(addedEntity, id);
+    }
+
+    /**
+     * 保持する介護予防・日常生活支援総合事業区分支給限度額を修正対象とします。<br/> null null null null null null null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link
+     * EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link SogoJigyoKubunShikyuGendoGaku}
+     */
+    public SogoJigyoKubunShikyuGendoGaku modified() {
+        DbT7117SogoJigyoKubunShikyuGendoGakuEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new SogoJigyoKubunShikyuGendoGaku(modifiedEntity, id);
     }
 
     /**

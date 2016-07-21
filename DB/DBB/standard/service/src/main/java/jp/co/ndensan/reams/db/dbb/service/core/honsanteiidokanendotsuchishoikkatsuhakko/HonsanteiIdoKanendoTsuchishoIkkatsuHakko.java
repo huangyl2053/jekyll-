@@ -340,12 +340,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             }
             編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
         }
-        new KaigoHokenryogakuPrintService().printタイプ(
-                編集後本算定通知書共通情報List, 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), reportManager, 帳票名);
-        sourceDataCollection = reportManager.publish();
-        publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 決定_EUC_ENTITY_ID, 決定_EUCファイル名);
         new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
                 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), 定値_タイトル);
+        sourceDataCollection = reportManager.publish();
+        publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 決定_EUC_ENTITY_ID, 決定_EUCファイル名);
         RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_決定一覧表, 帳票名);
     }
@@ -1027,7 +1025,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
 //                ShutsuryokuHoshiki.別々に出力.getコード().equals(出力方式)) {
 //            最終期 = 出力期AsInt;
 //        }
-        KitsukiList 期月リスト = 期月リスト_普徴.subListBy期(出力期AsInt, 出力期AsInt);
+        KitsukiList 期月リスト = 期月リスト_普徴.filtered本算定期間().subListBy期(出力期AsInt, 出力期AsInt);
         List<Kitsuki> 期月List = 期月リスト.toList();
         List<NokiJoho> 普徴納期情報リスト = new ArrayList<>();
         for (Kitsuki 期月 : 期月List) {

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +25,9 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
 
     private final boolean batchFlag;
     private final boolean 審査会開催日FROMFlag;
-    private final RString 審査会開催日FROM;
+    private final FlexibleDate 審査会開催日FROM;
     private final boolean 審査会開催日TOFlag;
-    private final RString 審査会開催日TO;
+    private final FlexibleDate 審査会開催日TO;
     private final boolean 件数Flag;
     private final int 件数;
     private final boolean gamenFlag;
@@ -34,9 +35,9 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
 
     private ShinsaiinJissekiIchiranMybitisParamter(boolean batchFlag,
             boolean 審査会開催日FROMFlag,
-            RString 審査会開催日FROM,
+            FlexibleDate 審査会開催日FROM,
             boolean 審査会開催日TOFlag,
-            RString 審査会開催日TO,
+            FlexibleDate 審査会開催日TO,
             boolean 件数Flag,
             int 件数,
             boolean gamenFlag,
@@ -62,13 +63,13 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
      * @return 審査会委員実績データの取得パラメータ
      */
     public static ShinsaiinJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
-            RString 審査会開催日FROM,
-            RString 審査会開催日TO,
+            FlexibleDate 審査会開催日FROM,
+            FlexibleDate 審査会開催日TO,
             RString 最大表示件数) {
         return new ShinsaiinJissekiIchiranMybitisParamter(batchFlag,
-                !RString.isNullOrEmpty(審査会開催日FROM),
+                !審査会開催日FROM.isEmpty(),
                 審査会開催日FROM,
-                !RString.isNullOrEmpty(審査会開催日TO),
+                !審査会開催日TO.isEmpty(),
                 審査会開催日TO,
                 !RString.isNullOrEmpty(最大表示件数),
                 Integer.parseInt(最大表示件数.toString()),
@@ -86,13 +87,13 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
      * @return 介護認定審査会委員報酬集計表データの取得パラメータ
      */
     public static ShinsaiinJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
-            RString 審査会開催日FROM,
-            RString 審査会開催日TO,
+            FlexibleDate 審査会開催日FROM,
+            FlexibleDate 審査会開催日TO,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         return new ShinsaiinJissekiIchiranMybitisParamter(batchFlag,
-                !RString.isNullOrEmpty(審査会開催日FROM),
+                !審査会開催日FROM.isEmpty(),
                 審査会開催日FROM,
-                !RString.isNullOrEmpty(審査会開催日TO),
+                !審査会開催日TO.isEmpty(),
                 審査会開催日TO,
                 false,
                 0,

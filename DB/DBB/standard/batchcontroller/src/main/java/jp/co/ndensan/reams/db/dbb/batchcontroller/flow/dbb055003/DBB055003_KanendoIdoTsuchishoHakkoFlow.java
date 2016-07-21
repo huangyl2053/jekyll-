@@ -337,7 +337,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
             return new IdoFukaJohoFlgTrueProcessParameter(getParameter().get調定年度(), 回目２);
         }
         if (回目３.equals(回目)) {
-            return new IdoFukaJohoFlgTrueProcessParameter(getParameter().get調定年度().minusYear(1), 回目３);
+            return new IdoFukaJohoFlgTrueProcessParameter(getParameter().get調定年度(), 回目３);
         }
         return null;
     }

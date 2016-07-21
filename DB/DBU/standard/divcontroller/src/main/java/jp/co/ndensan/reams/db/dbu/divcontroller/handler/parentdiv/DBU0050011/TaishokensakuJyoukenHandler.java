@@ -44,6 +44,7 @@ public class TaishokensakuJyoukenHandler {
     private static final RString DELETE = new RString("delete");
     private static final RString 入力済 = new RString("入力済");
     private static final RString 入力未 = new RString("入力未");
+    private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT6 = 6;
     private static final Code CODE0100 = new Code("0100");
@@ -170,7 +171,7 @@ public class TaishokensakuJyoukenHandler {
     }
 
     private TokeiTaishoKubun get保険者区分(RString 市町村Key) {
-        if (市町村Key.split("_").size() < 2) {
+        if (市町村Key.split("_").size() < INT3) {
             return TokeiTaishoKubun.空;
         } else {
             return TokeiTaishoKubun.toValue(市町村Key.split("_").get(2));

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -47,7 +48,8 @@ public class ShisakaiIinJissekiShokaiHandler {
      * 画面初期状態の設定です。
      */
     public void set初期状態() {
-        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, false);
@@ -112,7 +114,7 @@ public class ShisakaiIinJissekiShokaiHandler {
     public ShinsaiinJissekiIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
         ShinsaiinJissekiIchiranBatchParameter param = new ShinsaiinJissekiIchiranBatchParameter();
         List<ShinsaiinJissekiIchiranKey> keyJoho = new ArrayList<>();
-        for (dgShisakaiIinJisseki_Row row : div.getDgShisakaiIinJisseki().getDataSource()) {
+        for (dgShisakaiIinJisseki_Row row : div.getDgShisakaiIinJisseki().getSelectedItems()) {
             if (row.getSelected()) {
                 ShinsaiinJissekiIchiranKey key = new ShinsaiinJissekiIchiranKey();
                 key.setShinsakaiIinCode(row.getCode());
@@ -123,17 +125,43 @@ public class ShisakaiIinJissekiShokaiHandler {
             }
         }
         param.setKeyJoho(keyJoho);
-        RString 審査会開催日FROM = RString.EMPTY;
-        RString 審査会開催日TO = RString.EMPTY;
+        FlexibleDate 審査会開催日FROM = FlexibleDate.EMPTY;
+        FlexibleDate 審査会開催日TO = FlexibleDate.EMPTY;
         if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
-            審査会開催日FROM = div.getTxtShinsakaiKaisaibi().getFromValue().toDateString();
+            審査会開催日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
         }
         if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
-            審査会開催日TO = div.getTxtShinsakaiKaisaibi().getToValue().toDateString();
+            審査会開催日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
         }
         param.setShinsakaikaisaibiFrom(審査会開催日FROM);
         param.setShinsakaikaisaibiTo(審査会開催日TO);
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
+    }
+
+    /**
+     * 審査会開催日をセート。
+     *
+     * @param 審査会開催日FROM 審査会開催日FROM
+     * @param 審査会開催日TO 審査会開催日TO
+     */
+    public void set審査会開催日(FlexibleDate 審査会開催日FROM, FlexibleDate 審査会開催日TO) {
+        if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
+            審査会開催日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
+        }
+        if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
+            審査会開催日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
+        }
+
+    }
+
+    /**
+     * CommonButtonHolderをセート
+     */
+    public void setCommonButton() {
+        if (div.getDgShisakaiIinJisseki().getDataSource().isEmpty()) {
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+        }
     }
 }

@@ -76,6 +76,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -165,6 +166,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString SIGN = new RString(" ＞ ");
+    private static final RString 処理枝番 = new RString("0001");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -391,7 +393,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             int 普徴仮算定の最終期 = 月期対応取得_普徴.get期月リスト().filtered仮算定期間().getLast().get期AsInt();
             HihokenshaDaicho 資格情報 = new HihokenshaDaicho(資格喪失情報Entity.get資格喪失Entity());
             int 資格喪失月 = 0;
-            if (資格情報 != null && 資格情報.get資格喪失年月日() != null) {
+            if (資格情報.get資格喪失年月日() != null) {
                 資格喪失月 = 資格情報.get資格喪失年月日().getMonthValue();
             }
             FukaJoho 更正後賦課情報 = new FukaJoho(資格喪失情報Entity.get賦課情報Entity());
@@ -815,19 +817,21 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             }
         }
         List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList = new ArrayList<>();
-        for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity : 更正前EntityList) {
-            for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity : 更正後EntityList) {
+        for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正後Entity : 更正後EntityList) {
+            KeisanjohoAtenaKozaKouseizengoEntity entity = new KeisanjohoAtenaKozaKouseizengoEntity();
+            entity.set計算後情報_宛名_口座_更正後Entity(計算後情報_宛名_口座_更正後Entity);
+            for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity : 更正前EntityList) {
                 if (計算後情報_宛名_口座_更正前Entity.get調定年度()
                         .compareTo(計算後情報_宛名_口座_更正後Entity.get調定年度()) == 0
                         && 計算後情報_宛名_口座_更正前Entity.get賦課年度()
                         .compareTo(計算後情報_宛名_口座_更正後Entity.get賦課年度()) == 0
                         && 計算後情報_宛名_口座_更正前Entity.get通知書番号().equals(計算後情報_宛名_口座_更正後Entity.get通知書番号())
                         && 計算後情報_宛名_口座_更正前Entity.get作成処理名().equals(計算後情報_宛名_口座_更正後Entity.get作成処理名())) {
-                    更正前後EntityList.add(
-                            new KeisanjohoAtenaKozaKouseizengoEntity(計算後情報_宛名_口座_更正前Entity, 計算後情報_宛名_口座_更正後Entity));
+                    entity.set計算後情報_宛名_口座_更正前Entity(計算後情報_宛名_口座_更正前Entity);
                     break;
                 }
             }
+            更正前後EntityList.add(entity);
         }
 
         new KarisanteiIdoKekkaIchiranPrintService().print仮算定異動一括結果一覧表(更正前後EntityList, new RString(出力順ID),
@@ -1377,7 +1381,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 老齢福祉の情報リスト.add(entity);
             }
         }
-        if (老齢福祉の情報リスト != null && !老齢福祉の情報リスト.isEmpty()) {
+        if (!老齢福祉の情報リスト.isEmpty()) {
             Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
@@ -1425,5 +1429,61 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         }
         inputEntity.set業務コンフィグ情報(業務コンフィグ情報);
         return 保険系業務共通.getTokuchoKarisanteiKibetsuGaku(inputEntity);
+    }
+
+    /**
+     * 異動賦課計算
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 基準年月日 FlexibleDate
+     * @param 抽出開始日時 RDateTime
+     * @param 抽出終了日時 RDateTime
+     */
+    public void 異動賦課計算(FlexibleYear 調定年度, RDateTime 基準年月日, RDateTime 抽出開始日時, RDateTime 抽出終了日時) {
+        RString 最大年度内連番;
+        DbT7022ShoriDateKanriEntity dbT7022Entity = new DbT7022ShoriDateKanriEntity();
+        DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番BY調定年度(調定年度, 処理枝番);
+        if (entity != null) {
+            最大年度内連番 = get最大年度内連番(entity.getNendoNaiRenban());
+        } else {
+            最大年度内連番 = 処理枝番;
+        }
+        dbT7022Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        dbT7022Entity.setShichosonCode(地方公共団体.getLasdecCode_());
+        dbT7022Entity.setShoriName(ShoriName.仮算定異動賦課.get名称());
+        dbT7022Entity.setShoriEdaban(処理枝番);
+        dbT7022Entity.setNendo(調定年度);
+        dbT7022Entity.setNendoNaiRenban(最大年度内連番);
+        dbT7022Entity.setKijunYMD(new FlexibleDate(基準年月日.getDate().toString()));
+        dbT7022Entity.setKijunTimestamp(new YMDHMS(基準年月日));
+        dbT7022Entity.setTaishoKaishiTimestamp(new YMDHMS(抽出開始日時));
+        dbT7022Entity.setTaishoShuryoTimestamp(new YMDHMS(抽出終了日時));
+        処理日付管理Dac.save(dbT7022Entity);
+    }
+
+    private RString get最大年度内連番(RString 年度内連番) {
+        RString 連番 = new RString(String.valueOf(Integer.parseInt(年度内連番.toString()) + 1));
+        int length = NUM_4 - 連番.length();
+        for (int i = 0; i < length; i++) {
+            連番 = RSTRING_0.concat(連番);
+        }
+        return 連番;
+    }
+
+    /**
+     * 八月特徴開始
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 基準日時 YMDHMS
+     */
+    public void 八月特徴開始(FlexibleYear 調定年度, YMDHMS 基準日時) {
+        DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select処理日付管理マスタ_八月特徴開始情報抽出(調定年度);
+        if (entity != null) {
+            entity.setKijunTimestamp(基準日時);
+            処理日付管理Dac.save(entity);
+        }
     }
 }

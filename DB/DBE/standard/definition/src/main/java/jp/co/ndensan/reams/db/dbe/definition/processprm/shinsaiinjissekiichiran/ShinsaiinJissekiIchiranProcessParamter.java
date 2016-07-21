@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProcessParameter {
 
     private final RString 帳票出力区分;
-    private final RString 審査会開催日FROM;
-    private final RString 審査会開催日TO;
+    private final FlexibleDate 審査会開催日FROM;
+    private final FlexibleDate 審査会開催日TO;
     private final List<ShinsaiinJissekiIchiranKey> keyJoho;
 
     /**
@@ -35,8 +36,8 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
      * @param keyJoho キー情報Entityリスト
      */
     public ShinsaiinJissekiIchiranProcessParamter(RString 帳票出力区分,
-            RString 審査会開催日FROM,
-            RString 審査会開催日TO,
+            FlexibleDate 審査会開催日FROM,
+            FlexibleDate 審査会開催日TO,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         this.帳票出力区分 = 帳票出力区分;
         this.審査会開催日FROM = 審査会開催日FROM;

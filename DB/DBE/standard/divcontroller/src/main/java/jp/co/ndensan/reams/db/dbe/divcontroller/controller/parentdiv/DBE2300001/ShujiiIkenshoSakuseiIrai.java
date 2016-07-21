@@ -705,8 +705,9 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         item.setHihokenshaName(row.getHihokennshaShimei());
         item.setSeikyuIryokikanTel(row.getIryoKikanTelNo());
-        item.setSeikyuIryokikanJusho(row.getJusho());
-        item.setSeikyuIryokikanYubinNo(getEditedYubinNo(row.getYubinNo()));
+        item.setSeikyuIryokikanJusho(row.getIryoukikanShozaichi());
+        item.setSeikyuIryokikanYubinNo(getEditedYubinNo(row.getIryoKikanYubinNo()));
+        item.setSeikyuIryokikanDaihyoName(row.getDaihyoshaName());
         if (row.getBirthYMD().getValue() != null && !FlexibleDate.EMPTY.equals(row.getBirthYMD().getValue())) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());

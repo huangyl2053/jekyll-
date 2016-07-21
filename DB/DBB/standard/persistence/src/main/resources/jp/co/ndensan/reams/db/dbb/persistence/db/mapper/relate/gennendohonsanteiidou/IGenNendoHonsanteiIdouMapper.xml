@@ -1804,16 +1804,16 @@
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.HonsanteiIdoKekkaParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2015KeisangoJohoMapper.allColumns_DbT2015KeisangoJoho" />,
-            宛名.*,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
             口座.*
         FROM
             rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         INNER JOIN
             rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS 宛名
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
         ON 
-            "DbT2015KeisangoJoho"."shikibetsuCode" = 宛名."shikibetsuCode"
+            "DbT2015KeisangoJoho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         LEFT JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS 口座
         ON "DbT2015KeisangoJoho"."shikibetsuCode" = 口座."uaT0310Koza_shikibetsuCode"

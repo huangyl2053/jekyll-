@@ -24,9 +24,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -54,9 +51,6 @@ public class KoikinaiTenkyoRirekiHenkan {
      * @return ResponseData<KoikinaiTenkyoRirekiHenkanDiv>
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onLoad(KoikinaiTenkyoRirekiHenkanDiv div) {
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            throw new PessimisticLockingException();
-        }
         getHandler(div).setOnLoad();
         return ResponseData.of(div).respond();
     }
@@ -121,7 +115,6 @@ public class KoikinaiTenkyoRirekiHenkan {
             updateDbT5101NinteiShinseiJoho(div);
             div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
-            前排他キーの解除(SHINSEISHOKANRINO);
             return ResponseData.of(div).setState(DBE1720001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -171,16 +164,6 @@ public class KoikinaiTenkyoRirekiHenkan {
 
     private KoikinaiTenkyoRirekiValidationHandler getValidationHandler(KoikinaiTenkyoRirekiHenkanDiv div) {
         return new KoikinaiTenkyoRirekiValidationHandler(div);
-    }
-
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 
     private List<KeyValueDataSource> createListFromDbT7051KoseiShichosonMaster() {

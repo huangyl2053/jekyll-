@@ -594,7 +594,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     private static final RString 過年度分 = new RString("過年度分");
 
     @Override
-    public void initialize() {
+    public TainoHanteiResult initialize() {
         if (is管理区分と滞納判定区分と履歴番号ある()) {
             TainoHanteiResult 滞納判定結果 = TainoJokyoFinder.createInstance().find支払方法変更滞納(
                     new HihokenshaNo(hihokenshaNo), ShiharaiHenkoKanriKubun.toValue(kanriKubun), Integer.parseInt(rirekiNo.toString()),
@@ -619,16 +619,22 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
                 }
             }
             init照会モード(滞納判定結果, 賦課年度, 期月リスト, 保険料額, 滞納額);
+            return 滞納判定結果;
         } else {
             init滞納判定モードの状態1();
+            return new TainoHanteiResult();
         }
+
     }
 
-    public void kensaku() {
+    public TainoHanteiResult kensaku() {
         FlexibleYear 賦課年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         FlexibleYear 三年前の賦課年度 = 賦課年度.minusYear(3);
         TainoHanteiResult 滞納判定結果 = TainoJokyoFinder.createInstance().research滞納情報(
                 new HihokenshaNo(hihokenshaNo), new FlexibleDate(txtHanteiKijunYMD.getValue().toString()));
+        if (滞納判定結果.get滞納情報().isEmpty()) {
+            return 滞納判定結果;
+        }
         KitsukiList 期月リスト = new FuchoKiUtil().get期月リスト();
         Decimal 保険料額 = Decimal.ZERO;
         Decimal 滞納額 = Decimal.ZERO;
@@ -641,11 +647,13 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
             }
         }
         init滞納判定モードの状態2(滞納判定結果, 賦課年度, 期月リスト, 保険料額, 滞納額);
+        return 滞納判定結果;
     }
 
     private void init照会モード(TainoHanteiResult 滞納判定結果, FlexibleYear 賦課年度, KitsukiList 期月リスト, Decimal 保険料額, Decimal 滞納額) {
         txtHanteiKijunYMD.setDisabled(true);
         btnKensaku.setDisabled(true);
+        btnKakutei.setDisplayNone(true);
         if (滞納判定結果.get滞納判定基準日() != null) {
             txtHanteiKijunYMD.setValue(new RDate(滞納判定結果.get滞納判定基準日().toString()));
         }
@@ -653,6 +661,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     }
 
     private void init滞納判定モードの状態1() {
+        btnKakutei.setDisplayNone(false);
         txtHanteiKijunYMD.setValue(RDate.getNowDate());
     }
 
@@ -660,6 +669,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
             Decimal 滞納額) {
         txtHanteiKijunYMD.setDisabled(false);
         btnKensaku.setDisabled(false);
+        btnKakutei.setDisplayNone(false);
         init滞納情報エリア(滞納判定結果, 賦課年度, 期月リスト, 保険料額, 滞納額);
     }
 
@@ -743,7 +753,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
         TextBoxDate 納期限 = new TextBoxDate();
         TextBoxNum 滞納 = new TextBoxNum();
         TextBoxFlexibleDate 時効起算日 = new TextBoxFlexibleDate();
-        row.setKi(期月.get期());
+        row.setKi(期月.get期().concat("期"));
         row.setTsuki(期月.get月().get名称());
         for (TainoKiSummary summary : 滞納情報List) {
             if (期月.get期().equals(summary.get期()) && !summary.is過年度()) {
@@ -773,7 +783,12 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
         Decimal 滞納合計 = Decimal.ZERO;
         FlexibleYear 調定年度 = FlexibleYear.MAX;
         for (TainoKiSummary summary : 滞納情報List) {
+            boolean isFirst = true;
             if (summary.is過年度()) {
+                if (isFirst) {
+                    row.setCellBgColor(getBgColor(summary));
+                    isFirst = false;
+                }
                 保険料合計 = 保険料合計.add(summary.get調定額());
                 滞納合計 = 滞納合計.add(summary.get滞納額());
                 if (summary.get調定年度().isBefore(調定年度)) {
@@ -801,7 +816,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
         TextBoxDate 納期限 = new TextBoxDate();
         TextBoxNum 滞納 = new TextBoxNum();
         TextBoxFlexibleDate 時効起算日 = new TextBoxFlexibleDate();
-        row.setKi(期月.get期());
+        row.setKi(期月.get期().concat("期"));
         row.setTsuki(期月.get月().get名称());
         for (TainoKiSummary summary : 滞納情報List) {
             if (期月.get期().equals(summary.get期()) && !summary.is過年度()) {
@@ -832,7 +847,12 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
         Decimal 滞納合計 = Decimal.ZERO;
         FlexibleYear 調定年度 = FlexibleYear.MAX;
         for (TainoKiSummary summary : 滞納情報List) {
+            boolean isFirst = true;
             if (summary.is過年度()) {
+                if (isFirst) {
+                    row.setCellBgColor(getBgColor(summary));
+                    isFirst = false;
+                }
                 保険料合計 = 保険料合計.add(summary.get調定額());
                 滞納合計 = 滞納合計.add(summary.get滞納額());
                 if (summary.get調定年度().isBefore(調定年度)) {
@@ -860,7 +880,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
         TextBoxDate 納期限 = new TextBoxDate();
         TextBoxNum 滞納 = new TextBoxNum();
         TextBoxFlexibleDate 時効起算日 = new TextBoxFlexibleDate();
-        row.setKi(期月.get期());
+        row.setKi(期月.get期().concat("期"));
         row.setTsuki(期月.get月().get名称());
         for (TainoKiSummary summary : 滞納情報List) {
             if (期月.get期().equals(summary.get期()) && !summary.is過年度()) {
@@ -890,7 +910,12 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
         Decimal 滞納合計 = Decimal.ZERO;
         FlexibleYear 調定年度 = FlexibleYear.MAX;
         for (TainoKiSummary summary : 滞納情報List) {
+            boolean isFirst = true;
             if (summary.is過年度()) {
+                if (isFirst) {
+                    row.setCellBgColor(getBgColor(summary));
+                    isFirst = false;
+                }
                 保険料合計 = 保険料合計.add(summary.get調定額());
                 滞納合計 = 滞納合計.add(summary.get滞納額());
                 if (summary.get調定年度().isBefore(調定年度)) {

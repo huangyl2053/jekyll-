@@ -123,8 +123,8 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     }
 
     private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
-        return !before.getJigyoshaMeisho().equals(current.getJigyoshaMeisho())
-                || !before.getNinteichosainCode().equals(current.getNinteichosainCode());
+        return !before.getShujiiIryoKikanCode().equals(current.getShujiiIryoKikanCode());
+
     }
 
     @Override
@@ -135,15 +135,19 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
         業務固有キー.add(entity.getShujiiIryoKikanCode());
         IkenShiharaiuchiwakeEntity shumeisaiEntity = edit.getIkenShiharaiuchiwakeEntity(entity, 消費税率, get認証者(),
                 ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
-        editIkenShiharaiuchiwakeEntity(shumeisaiEntity, entity);
+        shumeisaiEntity = editIkenShiharaiuchiwakeEntity(shumeisaiEntity, entity);
         IkenShiharaiuchiwakeReport report = new IkenShiharaiuchiwakeReport(shumeisaiEntity);
         report.writeBy(reportSourceWriter);
         index_tmp++;
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
+        RString hihokenshaNo = RString.EMPTY;
+        if (entity.getHihokenshaNo() != null) {
+            hihokenshaNo = entity.getHihokenshaNo();
+        }
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.getHihokenshaNo());
+                hihokenshaNo);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
@@ -207,9 +211,10 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
             shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
         }
         合計金額 = 合計金額.add(rstringToDecimal(chiwakeEntity.get金額()));
-        chiwakeEntity.set合計金額(decimalToRString(合計金額));
+        chiwakeEntity.set合計金額(get合計(decimalToRString(合計金額), "円"));
+        chiwakeEntity.set金額(get合計(chiwakeEntity.get金額(), "円"));
         chiwakeEntity.set対象期間(get対象期間());
-        chiwakeEntity.set件数(intToRString(index_tmp));
+        chiwakeEntity.set件数(get合計(intToRString(index_tmp), "件"));
         chiwakeEntity.set明細番号(intToRString(index_tmp));
         chiwakeEntity.set振込予定日(dateFormat9(processParameter.getFurikomishiteiday()));
         return chiwakeEntity;
@@ -238,5 +243,12 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
                 REPORT_ID,
                 FlexibleDate.getNowDate(),
                 reportSourceWriter);
+    }
+
+    private RString get合計(RString date, String str) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(date);
+        builder.append(str);
+        return builder.toRString();
     }
 }

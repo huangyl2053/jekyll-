@@ -106,7 +106,7 @@ public class HanyoListTaShichosonJushochiTokureishaProcess extends BatchProcessB
                 key.set町域コード開始値(new ChoikiCode(processParamter.getPsmGyoseiku_From()));
             }
             if (!RString.isNullOrEmpty(processParamter.getPsmGyoseiku_To())) {
-                key.set町域コード開始値(new ChoikiCode(processParamter.getPsmGyoseiku_To()));
+                key.set町域コード終了値(new ChoikiCode(processParamter.getPsmGyoseiku_To()));
             }
         } else if (Chiku.行政区.getコード().equals(processParamter.getPsmChiku_Kubun())) {
             if (!RString.isNullOrEmpty(processParamter.getPsmGyoseiku_From())) {
@@ -135,8 +135,6 @@ public class HanyoListTaShichosonJushochiTokureishaProcess extends BatchProcessB
                 key.set地区コード3終了値(new ChikuCode(processParamter.getPsmChiku3_To()));
             }
         }
-        key.set町域コード開始値(ChoikiCode.EMPTY);
-        key.set町域コード開始値(ChoikiCode.EMPTY);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(

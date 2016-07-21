@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsaiinjissekiichiran;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranReport;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -48,13 +50,12 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class ShinsaiinJissekiIchiranProcess extends BatchProcessBase<ShinsaiinJissekiIchiranRelateEntity> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsaiinjissekiichiran.IShinsaiinJissekiIchiranMapper.get介護認定審査会委員報酬集計表");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate."
+            + "shinsaiinjissekiichiran.IShinsaiinJissekiIchiranMapper.get介護認定審査会委員報酬集計表");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601003.getReportId();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601003"));
     private static final RString CSV_NAME = new RString("ShinsaiinJissekiIchiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 集計表を発行する = new RString("2");
@@ -92,7 +93,7 @@ public class ShinsaiinJissekiIchiranProcess extends BatchProcessBase<ShinsaiinJi
         eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setEnclosure(new RString(File.separator))
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true).
                 build();
@@ -123,10 +124,19 @@ public class ShinsaiinJissekiIchiranProcess extends BatchProcessBase<ShinsaiinJi
     }
 
     private void バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 出力件数 = new RString(eucCsvWriterJunitoJugo.getCount());
+        List<RString> 出力件数_list = new ArrayList<>();
+        RString 出力件数_substr = RString.EMPTY;
+        for (int i = 0; i < 出力件数.length(); i++) {
+            if (i + 3 > 出力件数.length()) {
+                出力件数_substr = 出力件数.substring(i, 出力件数.length());
+            }
+            出力件数_list.add(出力件数_substr);
+        }
+        RStringBuilder 出力件数_SB = new RStringBuilder();
+        for (int i = 0; i < 出力件数_list.size(); i++) {
+            出力件数_SB.append(出力件数_list.get(i)).append(",");
+        }
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
         審査会開催日FROM_SB.append(paramter.get審査会開催日FROM());
@@ -135,31 +145,34 @@ public class ShinsaiinJissekiIchiranProcess extends BatchProcessBase<ShinsaiinJi
         出力条件.add(審査会開催日FROM_SB.toRString());
         出力条件.add(審査会開催日To_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("主治医意見書作成実績集計CSV"), 導入団体コード, 市町村名, ジョブ番号,
-                CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
+                new RString("介護認定審査会委員実績集計CSV"), 導入団体コード, 市町村名, new RString(JobContextHolder.getJobId()),
+                CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数_SB.toRString(), 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private void 帳票バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 帳票名 = ReportIdDBE.DBE601003.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
-        審査会開催日FROM_SB.append(paramter.get審査会開催日FROM());
+        審査会開催日FROM_SB.append(dateFormat(paramter.get審査会開催日FROM()));
         RStringBuilder 審査会開催日To_SB = new RStringBuilder("【審査会開催日（To）】");
         審査会開催日To_SB.append(paramter.get審査会開催日TO());
         出力条件.add(審査会開催日FROM_SB.toRString());
         出力条件.add(審査会開催日To_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE601003.getReportId().value(), 導入団体コード, 市町村名, new RString(JobContextHolder.getJobId()),
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
 
+    private static RString dateFormat(FlexibleDate date) {
+        if (date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().toDateString();
+    }
 }

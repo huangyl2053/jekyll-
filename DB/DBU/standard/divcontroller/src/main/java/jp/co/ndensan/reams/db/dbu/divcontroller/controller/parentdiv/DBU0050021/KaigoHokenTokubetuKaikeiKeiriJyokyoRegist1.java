@@ -105,7 +105,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             return handler.is画面詳細エリア入力有(handler.get画面入力データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
-        return ResponseData.of(div).respond();
+        return null;
     }
 
     /**
@@ -323,7 +323,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             } else {
                 引き継ぎデータ = new InsuranceInformation(
                         ADD,
-                        new LasdecCode(div.getDdlShicyoson().getSelectedKey()),
+                        getHandler(div).get市町村コード(div.getDdlShicyoson().getSelectedKey()),
                         div.getDdlShicyoson().getSelectedValue());
             }
         }

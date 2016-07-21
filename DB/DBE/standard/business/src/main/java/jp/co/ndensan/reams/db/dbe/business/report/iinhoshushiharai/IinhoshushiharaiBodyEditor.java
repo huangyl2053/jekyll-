@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinhoshushiharai;
 
 import jp.co.ndensan.reams.db.dbe.business.core.iinhoshushiharai.IinhoshushiharaiBody;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinhoshushiharai.IinhoshushiharaiReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬支払通知書のEditorです。
@@ -32,8 +35,15 @@ public class IinhoshushiharaiBodyEditor implements IIinhoshushiharaiBodyEditor {
     }
 
     private IinhoshushiharaiReportSource editSource(IinhoshushiharaiReportSource source) {
-        source.listHoshuhi_1 = item.getListHoshuhi_1();
-        source.listGokei_1 = item.getListGokei_1();
+        source.listHoshuhi_1 = kinngakuFormat(item.getListHoshuhi_1());
+        source.listGokei_1 = kinngakuFormat(item.getListGokei_1());
         return source;
+    }
+
+    private RString kinngakuFormat(RString data) {
+        if (data == null || data.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(data.toString()), 0);
     }
 }

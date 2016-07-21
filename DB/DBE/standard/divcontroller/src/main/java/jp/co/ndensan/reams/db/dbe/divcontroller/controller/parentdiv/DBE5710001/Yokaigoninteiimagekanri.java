@@ -55,7 +55,6 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onLoad(YokaigoninteiimagekanriDiv div) {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-//        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo("20160000000000010");
         ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
         div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
@@ -119,7 +118,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoGaikyo(YokaigoninteiimagekanriDiv div) {
-
+//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
         return ResponseData.of(div).respond();
     }
 
@@ -130,7 +129,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkensho(YokaigoninteiimagekanriDiv div) {
-
+//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
         return ResponseData.of(div).respond();
     }
 
@@ -141,7 +140,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnSonota(YokaigoninteiimagekanriDiv div) {
-
+//　TODO ダイアログ「画面ImageDisplayイメージ情報表示」を実装しない、2016/07/20　王暁冬
         return ResponseData.of(div).respond();
     }
 

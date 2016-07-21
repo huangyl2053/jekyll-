@@ -108,7 +108,6 @@ public class YoshikiYonnoni {
 
         InsuranceInformation insuranceInf = get引き継ぎデータ(div);
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-        ResponseHolder.getBeforeEvent();
         if (UPDATE.equals(insuranceInf.get処理フラグ())
                 || DELETE.equals(insuranceInf.get処理フラグ())) {
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoDetal(
@@ -306,7 +305,7 @@ public class YoshikiYonnoni {
     public ResponseData<YoshikiYonnoniDiv> onClick_btnAdd(YoshikiYonnoniDiv div) {
 
         if (this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
@@ -329,7 +328,7 @@ public class YoshikiYonnoni {
             }
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 && this.入力項目いずれか空白ではない(div)) {
-            this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
+            return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
 
         return ResponseData.of(div).respond();

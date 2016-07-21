@@ -81,7 +81,7 @@ public class ChosaHoshuShiharaiEdit {
                 SubGyomuCode.DBE認定支援));
         shiharaientity.set帳票タイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査報酬支払通知書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
-        Decimal 単価税込 = entity.getTanka().multiply(rstringToDecimal(消費税率));
+        Decimal 単価税込 = nullOrZero(entity.getTanka()).multiply(rstringToDecimal(消費税率));
         その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo());
         if (!ninteichosaItakusakiCode.equals(entity.getNinteichosaItakusakiCode())) {
             if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
@@ -187,6 +187,13 @@ public class ChosaHoshuShiharaiEdit {
             return Decimal.ZERO;
         }
         return new Decimal(date.toString());
+    }
+
+    private Decimal nullOrZero(Decimal data) {
+        if (data == null) {
+            return Decimal.ZERO;
+        }
+        return data;
     }
 
     /**
