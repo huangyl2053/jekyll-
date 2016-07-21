@@ -35,5 +35,9 @@
             <artifactId>DbxEntity</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdEntity</artifactId>
+        </dependency>
     </dependencies>
 </project>
