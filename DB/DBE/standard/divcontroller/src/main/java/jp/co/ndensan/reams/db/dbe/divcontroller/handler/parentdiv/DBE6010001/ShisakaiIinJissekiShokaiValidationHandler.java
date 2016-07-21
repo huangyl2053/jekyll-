@@ -37,7 +37,7 @@ public class ShisakaiIinJissekiShokaiValidationHandler {
      * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 審査会委員実績一覧データの行選択チェック処理(ValidationMessageControlPairs pairs) {
+    public ValidationMessageControlPairs get審査会委員実績一覧データの行選択チェック処理(ValidationMessageControlPairs pairs) {
         if (div.getDgShisakaiIinJisseki().getSelectedItems().isEmpty()) {
             pairs.add(new ValidationMessageControlPair(ShisakaiIinJissekiMessages.審査会委員実績一覧データの行選択チェック));
             return pairs;

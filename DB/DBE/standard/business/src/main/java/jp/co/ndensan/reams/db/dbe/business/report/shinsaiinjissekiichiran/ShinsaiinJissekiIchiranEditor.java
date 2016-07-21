@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査会委員報酬実績集計表のEditorです。
@@ -78,16 +80,15 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         return printTimeStampSb.toRString();
     }
 
-    private static RString set時刻(RString date) {
+    private RString set時刻(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        date.insert(2, ":");
-        return date;
-
+        RTime datetime = new RTime(date);
+        return datetime.toFormattedTimeString(DisplayTimeFormat.HH_mm);
     }
 
-    private static RString dateFormat(RString date) {
+    private RString dateFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }

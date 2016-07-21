@@ -117,7 +117,8 @@ public class ShinsakaiIinHoshuNyuryoku {
                                 null, null, null, false, false)).records();
         ValidationMessageControlPairs validPairs実績一覧データ空チェック = getValidatison(div).validateFor実績一覧データ空チェック(shinsakaiIinHoshuNyuryoku);
         if (validPairs実績一覧データ空チェック.iterator().hasNext()) {
-            div.getShinsakaiIin().setIsOpen(false);
+            div.getShinsakaiIin().getDgShinsakaiIin().getDataSource().clear();
+            div.getShinsakaiJisseki().setVisible(false);
             return ResponseData.of(div).addValidationMessages(validPairs実績一覧データ空チェック).respond();
         }
         getHandler(div).edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);
@@ -134,6 +135,7 @@ public class ShinsakaiIinHoshuNyuryoku {
         boolean hasFromDate = false;
         boolean hasToDate = false;
         boolean isNULL = false;
+        div.getShinsakaiJisseki().setVisible(true);
         List<ShinsakaiIinHoshuJissekiJoho> shinasa = shinasamanager.get介護認定審査会委員報酬実績情報一覧().records();
         Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> chikuNinteiChosain = Models.create(shinasa);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, chikuNinteiChosain);
@@ -314,6 +316,16 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onChange_JissekiNengappi(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).edit実施日();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「完了する」ボタンを押下する。
+     *
+     * @param div ShinsakaiIinHoshuNyuryokuDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> btnComplete(ShinsakaiIinHoshuNyuryokuDiv div) {
         return ResponseData.of(div).respond();
     }
 

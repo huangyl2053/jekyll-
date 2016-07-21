@@ -31,7 +31,6 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<CsvKenHok
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getCsvKenHokokuShiryoSakuseiHeader");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE701001"));
-    private static final RString ファイル名 = new RString("県報告資料ファイル.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 非該当 = new RString("01");
@@ -62,7 +61,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<CsvKenHok
         mapper = getMapper(IHokokuShiryoSakuSeiMapper.class);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilename = Path.combinePath(spoolWorkPath, ファイル名);
+        eucFilename = Path.combinePath(spoolWorkPath, paramter.getShutsuryokuFairu());
         eucCsvWriterKenHokokuShiryo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)

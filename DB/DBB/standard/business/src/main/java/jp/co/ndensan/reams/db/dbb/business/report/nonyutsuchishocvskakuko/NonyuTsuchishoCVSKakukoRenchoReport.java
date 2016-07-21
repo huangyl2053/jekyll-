@@ -73,7 +73,7 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends NonyuTsuchisho<NonyuTsu
         }
 
         INonyuTsuchishoCVSKakukoRenchoCoverEditor renchoCoverEditor
-                = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource, 1);
+                = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSKakukoRenchoCoverBuilder builder
                 = new NonyuTsuchishoCVSKakukoRenchoCoverBuilder(renchoCoverEditor);
         reportSourceWriter.writeLine(builder);
@@ -147,7 +147,7 @@ public class NonyuTsuchishoCVSKakukoRenchoReport extends NonyuTsuchisho<NonyuTsu
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
             INonyuTsuchishoCVSKakukoRenchoCoverEditor renchoCoverEditor
-                    = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource, 1);
+                    = new NonyuTsuchishoCVSKakukoRenchoCoverEditor(item, ninshoshaSource);
             INonyuTsuchishoCVSKakukoRenchoCoverBuilder builder
                     = new NonyuTsuchishoCVSKakukoRenchoCoverBuilder(renchoCoverEditor);
             reportSourceWriter.writeLine(builder);

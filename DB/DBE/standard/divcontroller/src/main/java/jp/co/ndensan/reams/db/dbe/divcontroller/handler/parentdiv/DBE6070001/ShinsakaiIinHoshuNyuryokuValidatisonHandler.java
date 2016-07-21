@@ -68,7 +68,8 @@ public class ShinsakaiIinHoshuNyuryokuValidatisonHandler {
     public ValidationMessageControlPairs validateFor実績一覧データ空チェック(List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (shinsakaiIinHoshuNyuryoku.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(ShinsakaiIinHoshuNyuryokuValidatisonHandler.RRVMessages.Validate審査会実績一覧未表示));
+            validPairs.add(new ValidationMessageControlPair(ShinsakaiIinHoshuNyuryokuValidatisonHandler.RRVMessages.Validate審査会実績一覧未表示,
+                    div.getDgShinsakaiIin()));
         }
         return validPairs;
     }

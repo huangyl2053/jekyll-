@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820012;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012StateName.削除モード;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012StateName.登録修正モード;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012TransitionEventName;

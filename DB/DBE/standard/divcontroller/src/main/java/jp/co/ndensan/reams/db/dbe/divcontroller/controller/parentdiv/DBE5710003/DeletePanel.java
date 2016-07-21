@@ -62,6 +62,20 @@ public class DeletePanel {
      */
     public ResponseData<DeletePanelDiv> onClick_btnDelete(DeletePanelDiv div) {
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+        List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
+        ValidationMessageControlPairs controlPairs = getValidationHandler(div).入力チェック_btnDelete();
+        if (controlPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        確認メッセージ出力区分 = RString.EMPTY;
+        descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
+                イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
+                イメージ管理情報.getイメージ共有ファイルID());
+        List<RString> 存在したイメージファイル名 = YokaigoninteiimagesakujoManager.createInstance().get存在したイメージファイル名(descriptor);
+        ValidationMessageControlPairs イメージ削除チェック = イメージ削除チェック(div, 選択したイメージ対象, 存在したイメージファイル名);
+        if (イメージ削除チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -70,36 +84,26 @@ public class DeletePanel {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
-            ValidationMessageControlPairs controlPairs = getValidationHandler(div).入力チェック_btnDelete();
-            if (controlPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(controlPairs).respond();
-            }
-            確認メッセージ出力区分 = RString.EMPTY;
-            descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
-                    イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
-                    イメージ管理情報.getイメージ共有ファイルID());
-            ValidationMessageControlPairs イメージ削除チェック = イメージ削除チェック(div, 選択したイメージ対象, descriptor);
-            if (イメージ削除チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
-            }
-
             if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
                 SharedFile.deleteFileInEntry(descriptor, イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号()).toString());
                 updateOrDelete(div);
-                return ResponseData.of(div).addMessage(UrInformationMessages.処理完了.getMessage()).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
+            } else {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                        UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
         }
         if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().evaluate());
+                    UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             SharedFile.deleteFileInEntry(descriptor, イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号()).toString());
             updateOrDelete(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.処理完了.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -113,7 +117,7 @@ public class DeletePanel {
     }
 
     private ValidationMessageControlPairs イメージ削除チェック(DeletePanelDiv div, List<RString> 選択したイメージ対象,
-            ReadOnlySharedFileEntryDescriptor descriptor) {
+            List<RString> 存在したイメージファイル名) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         RString 認定調査委託先コード = イメージ管理情報.get認定調査委託先コード().value();
@@ -122,19 +126,19 @@ public class DeletePanel {
         int 認定調査依頼履歴番号 = イメージ管理情報.get認定調査依頼履歴番号();
         for (RString key : 選択したイメージ対象) {
             if (KEY_調査票特記.equals(key)) {
-                ValidationMessageControlPairs controlPairs = 調査票特記チェック(div, descriptor,
+                ValidationMessageControlPairs controlPairs = 調査票特記チェック(div, 存在したイメージファイル名,
                         認定調査委託先コード, 認定調査員コード, 申請書管理番号, 認定調査依頼履歴番号);
                 if (controlPairs.iterator().hasNext()) {
                     return controlPairs;
                 }
             } else if (KEY_調査票概況.equals(key)) {
-                ValidationMessageControlPairs controlPairs = 調査票概況チェック(div, descriptor,
+                ValidationMessageControlPairs controlPairs = 調査票概況チェック(div, 存在したイメージファイル名,
                         認定調査委託先コード, 認定調査員コード, 申請書管理番号, 認定調査依頼履歴番号);
                 if (controlPairs.iterator().hasNext()) {
                     return controlPairs;
                 }
             } else if (KEY_主治医意見書.equals(key)) {
-                ValidationMessageControlPairs controlPairs = 主治医意見書チェック(div, descriptor,
+                ValidationMessageControlPairs controlPairs = 主治医意見書チェック(div, 存在したイメージファイル名,
                         イメージ管理情報.get主治医医療機関コード(), イメージ管理情報.get主治医コード(),
                         申請書管理番号, イメージ管理情報.get主治医意見書作成依頼履歴番号());
                 if (controlPairs.iterator().hasNext()) {
@@ -142,7 +146,7 @@ public class DeletePanel {
                 }
             } else if (KEY_その他資料.equals(key)) {
                 RString イメージファイルが存在区分 = getHandler(div).getその他資料のイメージファイルが存在区分(
-                        descriptor, 確認メッセージ出力区分);
+                        存在したイメージファイル名, 確認メッセージ出力区分);
                 if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
                     確認メッセージ出力区分 = RString.EMPTY;
                     return getValidationHandler(div).その他資料イメージファイル存在チェック();
@@ -155,10 +159,10 @@ public class DeletePanel {
         return validationMessages;
     }
 
-    private ValidationMessageControlPairs 調査票特記チェック(DeletePanelDiv div, ReadOnlySharedFileEntryDescriptor descriptor,
+    private ValidationMessageControlPairs 調査票特記チェック(DeletePanelDiv div, List<RString> 存在したイメージファイル名,
             RString 認定調査委託先コード, RString 認定調査員コード, RString 申請書管理番号,
             Integer 認定調査依頼履歴番号) {
-        RString イメージファイルが存在区分 = getHandler(div).get調査票特記のイメージファイルが存在区分(descriptor, 確認メッセージ出力区分);
+        RString イメージファイルが存在区分 = getHandler(div).get調査票特記のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
         if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
             確認メッセージ出力区分 = RString.EMPTY;
             return getValidationHandler(div).調査票特記イメージファイル存在チェック();
@@ -175,10 +179,10 @@ public class DeletePanel {
         return new ValidationMessageControlPairs();
     }
 
-    private ValidationMessageControlPairs 調査票概況チェック(DeletePanelDiv div, ReadOnlySharedFileEntryDescriptor descriptor,
+    private ValidationMessageControlPairs 調査票概況チェック(DeletePanelDiv div, List<RString> 存在したイメージファイル名,
             RString 認定調査委託先コード, RString 認定調査員コード, RString 申請書管理番号, Integer 認定調査依頼履歴番号) {
 
-        if (getHandler(div).is調査票概況のイメージファイルが存在しない(descriptor)) {
+        if (getHandler(div).is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
             return getValidationHandler(div).調査票概況イメージファイル存在チェック();
         } else {
             FlexibleDate 認定調査委託料支払年月日 = YokaigoninteiimagesakujoManager.createInstance().getChosaItakuryoShiharaiYMD(
@@ -190,9 +194,9 @@ public class DeletePanel {
         return new ValidationMessageControlPairs();
     }
 
-    private ValidationMessageControlPairs 主治医意見書チェック(DeletePanelDiv div, ReadOnlySharedFileEntryDescriptor descriptor,
+    private ValidationMessageControlPairs 主治医意見書チェック(DeletePanelDiv div, List<RString> 存在したイメージファイル名,
             RString 主治医医療機関コード, RString 主治医コード, RString 申請書管理番号, Integer 主治医意見書作成依頼履歴番号) {
-        RString イメージファイルが存在区分 = getHandler(div).get主治医意見書のイメージファイルが存在区分(descriptor, 確認メッセージ出力区分);
+        RString イメージファイルが存在区分 = getHandler(div).get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
         if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
             確認メッセージ出力区分 = RString.EMPTY;
             return getValidationHandler(div).主治医意見書イメージファイル存在チェック();

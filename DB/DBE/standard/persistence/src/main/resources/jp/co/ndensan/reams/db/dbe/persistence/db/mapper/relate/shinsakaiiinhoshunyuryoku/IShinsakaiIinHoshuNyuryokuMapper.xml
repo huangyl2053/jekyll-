@@ -77,10 +77,10 @@ parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhosh
     WHERE
         T2."shinsakaiIinCode" = #{コード}
     <if test="hasFromDate">
-        AND #{fromDate} <![CDATA[<=]]> T3.shinsakaiKaisaiYMD
+        AND #{fromDate} <![CDATA[<=]]> T3."shinsakaiKaisaiYMD"
     </if>
     <if test="hasToDate">
-        AND T3.shinsakaiKaisaiYMD <![CDATA[<=]]> #{toDate}
+        AND T3."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{toDate}
     </if>
     ORDER BY
         T2."shinsakaiIinCode" DESC,

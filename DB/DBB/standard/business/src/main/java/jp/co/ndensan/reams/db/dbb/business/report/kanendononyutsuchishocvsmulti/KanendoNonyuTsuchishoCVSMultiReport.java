@@ -41,7 +41,7 @@ public class KanendoNonyuTsuchishoCVSMultiReport extends NonyuTsuchisho<KanendoN
     @Override
     public void writeBy(ReportSourceWriter<KanendoNonyuTsuchishoCVSMultiSource> reportSourceWriter) {
 
-        IKanendoNonyuTsuchishoCVSMultiEditor coverEditor = new KanendoNonyuTsuchishoCVSMultiEditor(item, ninshoshaSource, 1);
+        IKanendoNonyuTsuchishoCVSMultiEditor coverEditor = new KanendoNonyuTsuchishoCVSMultiEditor(item, ninshoshaSource);
         IKanendoNonyuTsuchishoCVSMultiBuilder builder = new KanendoNonyuTsuchishoCVSMultiBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
     }

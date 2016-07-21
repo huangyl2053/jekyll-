@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter;
@@ -19,6 +20,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -95,7 +99,27 @@ public class YokaigoninteiimagesakujoManager {
             int 認定調査依頼履歴番号) {
         DbT5601NinteiChosaHoshuJissekiJohoEntity dbT5601Entity = dbT5601Dac.selectByKey(
                 認定調査委託先コード, 認定調査員コード, 申請書管理番号, 認定調査依頼履歴番号);
-        return dbT5601Entity.getChosaItakuryoShiharaiYMD();
+        if (dbT5601Entity != null) {
+            return dbT5601Entity.getChosaItakuryoShiharaiYMD();
+        } else {
+            return FlexibleDate.EMPTY;
+        }
+    }
+
+    /**
+     * 存在したイメージファイル名を取得します。
+     *
+     * @param descriptor 共有ファイル
+     * @return 存在したイメージファイル名
+     */
+    @Transaction
+    public List<RString> get存在したイメージファイル名(ReadOnlySharedFileEntryDescriptor descriptor) {
+        List<RString> 存在したイメージファイル名 = new ArrayList<>();
+        List<SharedFileEntryInfoEntity> sharedFileEntryInfoEntity = SharedFile.getEntryInfo(descriptor);
+        for (SharedFileEntryInfoEntity info : sharedFileEntryInfoEntity) {
+            存在したイメージファイル名.add(info.getFileEntryEntity().getLocalFileName());
+        }
+        return 存在したイメージファイル名;
     }
 
     /**
@@ -112,7 +136,11 @@ public class YokaigoninteiimagesakujoManager {
             int 主治医意見書作成依頼履歴番号) {
         DbT5602ShujiiIkenshoHoshuJissekiJohoEntity dbT5602Entity = dbT5602Dac.selectByKey(
                 主治医医療機関コード, 主治医コード, 申請書管理番号, 主治医意見書作成依頼履歴番号);
-        return dbT5602Entity.getHoshuShiharaiYMD();
+        if (dbT5602Entity != null) {
+            return dbT5602Entity.getHoshuShiharaiYMD();
+        } else {
+            return FlexibleDate.EMPTY;
+        }
     }
 
     /**

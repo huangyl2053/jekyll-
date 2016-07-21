@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE7010001;
 
-import java.io.File;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE7010001.HokokuShiryoSakuSeiParameterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,7 +40,6 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
         check_ChushutsuJoken(message);
         check_txtTaishoGappi(message);
         check_ChkCsvShutsuryoku(message);
-        check_ChkCsvShutsuryokuFile(message);
         return message;
     }
 
@@ -90,16 +88,6 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
         if (!div.getChkCsvShutsuryoku().getSelectedKeys().isEmpty()
                 && RString.isNullOrEmpty(div.getTxtShuturyokuSaki().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.必須項目_追加メッセージあり_出力ファイル));
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs check_ChkCsvShutsuryokuFile(ValidationMessageControlPairs validationMessages) {
-
-        if (!div.getChkCsvShutsuryoku().getSelectedKeys().isEmpty()
-                && !RString.isNullOrEmpty(div.getTxtShuturyokuSaki().getValue())
-                && !new File(div.getTxtShuturyokuSaki().getValue().toString()).exists()) {
-            validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.指定ファイルが存在しない));
         }
         return validationMessages;
     }

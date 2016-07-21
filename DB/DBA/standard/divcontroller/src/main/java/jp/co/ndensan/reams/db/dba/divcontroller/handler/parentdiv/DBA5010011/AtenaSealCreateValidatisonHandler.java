@@ -38,7 +38,7 @@ public class AtenaSealCreateValidatisonHandler {
      *
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 必須入力チェック() {
+    public ValidationMessageControlPairs 抽出期間チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         抽出期間チェック(validPairs);
         return validPairs;
@@ -47,8 +47,10 @@ public class AtenaSealCreateValidatisonHandler {
     private ValidationMessageControlPairs 抽出期間チェック(ValidationMessageControlPairs validPairs) {
         FlexibleDate fromDate = div.getCyushutsuJoken().getTxtShikakuTokusoFrom().getValue();
         FlexibleDate toDate = div.getCyushutsuJoken().getTxtShikakuTokusoTo().getValue();
-        if (!fromDate.isEmpty() && !toDate.isEmpty() && !fromDate.isBefore(toDate)) {
-            validPairs.add(new ValidationMessageControlPair(AtenaSealCreateValidatisonHandler.RRVMessages.Validate終了日が開始日以前));
+        if (!fromDate.isEmpty() && !toDate.isEmpty() && !fromDate.isBeforeOrEquals(toDate)) {
+            validPairs.add(new ValidationMessageControlPair(AtenaSealCreateValidatisonHandler.RRVMessages.Validate終了日が開始日以前,
+                    div.getCyushutsuJoken().getTxtShikakuTokusoFrom(),
+                    div.getCyushutsuJoken().getTxtShikakuTokusoTo()));
         }
         return validPairs;
     }

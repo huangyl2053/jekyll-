@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class CsvKenHokokuShiryoSakuseiProcessParameter implements IBatchProcessParameter {
 
+    private RString shutsuryokuFairu;
     private boolean isEmptyHokensyaNo;
     private RString hokensyaNo;
     private RString hihokenshaKubun;
@@ -39,6 +40,7 @@ public class CsvKenHokokuShiryoSakuseiProcessParameter implements IBatchProcessP
     /**
      * コンストラクタです。
      *
+     * @param shutsuryokuFairu CSVファイル名
      * @param isEmptyHokensyaNo 空保険者番号
      * @param hokensyaNo 保険者番号
      * @param hihokenshaKubun 被保険者区分
@@ -56,6 +58,7 @@ public class CsvKenHokokuShiryoSakuseiProcessParameter implements IBatchProcessP
      * @param isHorei 申請区分(法令)
      */
     public CsvKenHokokuShiryoSakuseiProcessParameter(
+            RString shutsuryokuFairu,
             boolean isEmptyHokensyaNo,
             RString hokensyaNo,
             RString hihokenshaKubun,
@@ -71,6 +74,7 @@ public class CsvKenHokokuShiryoSakuseiProcessParameter implements IBatchProcessP
             RString taishoGeppiTo,
             boolean isShinseiji,
             boolean isHorei) {
+        this.shutsuryokuFairu = shutsuryokuFairu;
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
         this.hihokenshaKubun = hihokenshaKubun;

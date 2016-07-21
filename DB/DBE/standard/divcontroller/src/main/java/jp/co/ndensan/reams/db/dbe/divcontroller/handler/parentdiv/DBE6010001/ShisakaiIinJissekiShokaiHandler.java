@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -93,9 +95,9 @@ public class ShisakaiIinJissekiShokaiHandler {
                     data.get所属機関(),
                     data.get審査会地区(),
                     data.get審査会番号(),
-                    data.get実施日(),
-                    data.get開始(),
-                    data.get終了(),
+                    dateFormat(data.get実施日()),
+                    set時刻(data.get開始()),
+                    set時刻(data.get終了()),
                     ShinsakaiIinHoshukubun.toValue(data.get報酬区分()).get名称(),
                     IsShusseki.toValue(data.is出欠()).get名称(),
                     data.get実施年月日(),
@@ -163,5 +165,21 @@ public class ShisakaiIinJissekiShokaiHandler {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
         }
+    }
+
+    private RString set時刻(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RTime datetime = new RTime(date);
+        return datetime.toFormattedTimeString(DisplayTimeFormat.HH_mm);
+    }
+
+    private RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RDate date_tem = new RDate(date.toString());
+        return date_tem.wareki().toDateString();
     }
 }

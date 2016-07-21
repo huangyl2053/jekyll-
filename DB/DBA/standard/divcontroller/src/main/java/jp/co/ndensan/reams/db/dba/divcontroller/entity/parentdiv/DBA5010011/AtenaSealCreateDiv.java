@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaSealP
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaSealPositionInput.IAtenaSealPositionInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -32,6 +33,14 @@ public class AtenaSealCreateDiv extends Panel {
     private AtenaSealPositionInputDiv ccdAtenaSealPosition;
     @JsonProperty("ccdShutsuryokuJun")
     private ChohyoShutsuryokujunDiv ccdShutsuryokuJun;
+    @JsonProperty("hidden_shikakuShutoku")
+    private RString hidden_shikakuShutoku;
+    @JsonProperty("hidden_nenreiTotatsu")
+    private RString hidden_nenreiTotatsu;
+    @JsonProperty("hidden_jutokuNomi")
+    private RString hidden_jutokuNomi;
+    @JsonProperty("hidden_jukyuNinteiShinseityuIgai")
+    private RString hidden_jukyuNinteiShinseityuIgai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -91,6 +100,78 @@ public class AtenaSealCreateDiv extends Panel {
     @JsonProperty("ccdShutsuryokuJun")
     public IChohyoShutsuryokujunDiv getCcdShutsuryokuJun() {
         return ccdShutsuryokuJun;
+    }
+
+    /*
+     * gethidden_shikakuShutoku
+     * @return hidden_shikakuShutoku
+     */
+    @JsonProperty("hidden_shikakuShutoku")
+    public RString getHidden_shikakuShutoku() {
+        return hidden_shikakuShutoku;
+    }
+
+    /*
+     * sethidden_shikakuShutoku
+     * @param hidden_shikakuShutoku hidden_shikakuShutoku
+     */
+    @JsonProperty("hidden_shikakuShutoku")
+    public void setHidden_shikakuShutoku(RString hidden_shikakuShutoku) {
+        this.hidden_shikakuShutoku = hidden_shikakuShutoku;
+    }
+
+    /*
+     * gethidden_nenreiTotatsu
+     * @return hidden_nenreiTotatsu
+     */
+    @JsonProperty("hidden_nenreiTotatsu")
+    public RString getHidden_nenreiTotatsu() {
+        return hidden_nenreiTotatsu;
+    }
+
+    /*
+     * sethidden_nenreiTotatsu
+     * @param hidden_nenreiTotatsu hidden_nenreiTotatsu
+     */
+    @JsonProperty("hidden_nenreiTotatsu")
+    public void setHidden_nenreiTotatsu(RString hidden_nenreiTotatsu) {
+        this.hidden_nenreiTotatsu = hidden_nenreiTotatsu;
+    }
+
+    /*
+     * gethidden_jutokuNomi
+     * @return hidden_jutokuNomi
+     */
+    @JsonProperty("hidden_jutokuNomi")
+    public RString getHidden_jutokuNomi() {
+        return hidden_jutokuNomi;
+    }
+
+    /*
+     * sethidden_jutokuNomi
+     * @param hidden_jutokuNomi hidden_jutokuNomi
+     */
+    @JsonProperty("hidden_jutokuNomi")
+    public void setHidden_jutokuNomi(RString hidden_jutokuNomi) {
+        this.hidden_jutokuNomi = hidden_jutokuNomi;
+    }
+
+    /*
+     * gethidden_jukyuNinteiShinseityuIgai
+     * @return hidden_jukyuNinteiShinseityuIgai
+     */
+    @JsonProperty("hidden_jukyuNinteiShinseityuIgai")
+    public RString getHidden_jukyuNinteiShinseityuIgai() {
+        return hidden_jukyuNinteiShinseityuIgai;
+    }
+
+    /*
+     * sethidden_jukyuNinteiShinseityuIgai
+     * @param hidden_jukyuNinteiShinseityuIgai hidden_jukyuNinteiShinseityuIgai
+     */
+    @JsonProperty("hidden_jukyuNinteiShinseityuIgai")
+    public void setHidden_jukyuNinteiShinseityuIgai(RString hidden_jukyuNinteiShinseityuIgai) {
+        this.hidden_jukyuNinteiShinseityuIgai = hidden_jukyuNinteiShinseityuIgai;
     }
 
     // </editor-fold>

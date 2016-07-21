@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -362,6 +363,7 @@ public class TokuchoTaishoshaIchiranSakusei {
      */
     public List<TokuchoDouteiKouhoshaShousaiJoho> getTokuchoTaishoKouhosyaDetailJoho(FlexibleYear 処理年度,
             RString 基礎年金番号, RString 年金コード, RString 開始月, RString 捕捉月, ShikibetsuCode 識別コード) {
+        RString 開始月数 = DateConverter.formatMonthFull(開始月);
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
         param.set基礎年金番号(基礎年金番号);
@@ -380,7 +382,7 @@ public class TokuchoTaishoshaIchiranSakusei {
         FlexibleYear 分配集約_処理年度;
         NenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
         List<TokuchoDouteiKouhoshaShousaiJoho> 同定候補者詳細情報List = new ArrayList();
-        if (開始月_8月.compareTo(開始月) == NUM0) {
+        if (開始月_8月.compareTo(開始月数) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {
@@ -394,8 +396,8 @@ public class TokuchoTaishoshaIchiranSakusei {
                 }
                 同定候補者詳細情報List.add(result);
             }
-        } else if (開始月_10月.compareTo(開始月) == NUM0 || 開始月_12月.compareTo(開始月) == NUM0
-                || 開始月_2月.compareTo(開始月) == NUM0) {
+        } else if (開始月_10月.compareTo(開始月数) == NUM0 || 開始月_12月.compareTo(開始月数) == NUM0
+                || 開始月_2月.compareTo(開始月数) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {
@@ -410,7 +412,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 }
                 同定候補者詳細情報List.add(result);
             }
-        } else if (開始月_翌4月.compareTo(開始月) == NUM0 || 開始月_翌6月.compareTo(開始月) == NUM0) {
+        } else if (開始月_翌4月.compareTo(開始月数) == NUM0 || 開始月_翌6月.compareTo(開始月数) == NUM0) {
             for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
                 TokuchoDouteiKouhoshaShousaiJoho result = new TokuchoDouteiKouhoshaShousaiJoho(entity);
                 if (entity.getDbt2001entity() != null) {
@@ -462,12 +464,14 @@ public class TokuchoTaishoshaIchiranSakusei {
     public void kakuninJotaiUpdate(FlexibleYear 処理年度, RString 基礎年金番号, RString 被保険者番号,
             RString 年金コード, RString 開始月, RString 捕捉月, RString 確認状況区分, ShikibetsuCode 識別コード,
             RString 特別徴収義務者コード) {
+        RString 開始月数 = DateConverter.formatMonthFull(開始月);
         DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報Entity = 特徴未同定情報Dac.selectByKey(
                 処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
         特徴未同定情報Entity.setKakuninJokyoKbn(確認状況区分);
         特徴未同定情報Entity.setState(EntityDataState.Modified);
         特徴未同定情報Dac.save(特徴未同定情報Entity);
         if (確認状況区分_同定済み.compareTo(確認状況区分) == NUM0) {
+//            TODO 式样变更
             List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
                     処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
             for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
@@ -497,13 +501,13 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法 = jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho.特別徴収_地共済
                         .getコード();
             }
-            if (STR08.compareTo(開始月) == NUM0) {
+            if (STR08.compareTo(開始月数) == NUM0) {
                 徴収方法entity.setChoshuHoho8gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho9gatsu(徴収方法);
                 徴収方法entity.setKariNenkinNo(基礎年金番号);
                 徴収方法entity.setKariNenkinCode(年金コード);
                 徴収方法entity.setKariHosokuM(捕捉月);
-            } else if (STR10.compareTo(開始月) == NUM0) {
+            } else if (STR10.compareTo(開始月数) == NUM0) {
                 徴収方法entity.setChoshuHoho10gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho11gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho12gatsu(徴収方法);
@@ -519,7 +523,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonNenkinNo(基礎年金番号);
                 徴収方法entity.setHonNenkinCode(年金コード);
                 徴収方法entity.setHonHosokuM(捕捉月);
-            } else if (STR12.compareTo(開始月) == NUM0) {
+            } else if (STR12.compareTo(開始月数) == NUM0) {
                 徴収方法entity.setChoshuHoho12gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho1gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho2gatsu(徴収方法);
@@ -533,7 +537,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonNenkinNo(基礎年金番号);
                 徴収方法entity.setHonNenkinCode(年金コード);
                 徴収方法entity.setHonHosokuM(捕捉月);
-            } else if (STR02.compareTo(開始月) == NUM0) {
+            } else if (STR02.compareTo(開始月数) == NUM0) {
                 徴収方法entity.setChoshuHoho2gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho3gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku4gatsu(徴収方法);
@@ -545,7 +549,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonNenkinNo(基礎年金番号);
                 徴収方法entity.setHonNenkinCode(年金コード);
                 徴収方法entity.setHonHosokuM(捕捉月);
-            } else if (STR04.compareTo(開始月) == NUM0) {
+            } else if (STR04.compareTo(開始月数) == NUM0) {
                 徴収方法entity.setChoshuHoho4gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho5gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho6gatsu(徴収方法);
@@ -567,7 +571,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setYokunendoKariNenkinNo(基礎年金番号);
                 徴収方法entity.setYokunendoKariNenkinCode(年金コード);
                 徴収方法entity.setYokunendoKariHosokuM(捕捉月);
-            } else if (STR06.compareTo(開始月) == NUM0) {
+            } else if (STR06.compareTo(開始月数) == NUM0) {
                 徴収方法entity.setChoshuHoho6gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho7gatsu(徴収方法);
                 徴収方法entity.setChoshuHoho8gatsu(徴収方法);
@@ -596,6 +600,7 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
             徴収方法entity.setState(EntityDataState.Added);
             徴収方法Dac.save(徴収方法entity);
+//            List<DbT2019TokuchoMidoteiJohoEntity>
             特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
                     処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
             if (特徴未同定情報List == null || 特徴未同定情報List.isEmpty()) {
@@ -603,13 +608,13 @@ public class TokuchoTaishoshaIchiranSakusei {
             }
             for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
                 if (確認状況区分_同定済み.compareTo(entity.getKakuninJokyoKbn()) == NUM0) {
-                    その他候補者データを登録する(開始月, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
+                    その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
                 }
             }
         }
     }
 
-    private void その他候補者データを登録する(RString 開始月, FlexibleYear 処理年度,
+    private void その他候補者データを登録する(RString 開始月数, FlexibleYear 処理年度,
             DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報entity, RString 基礎年金番号,
             RString 年金コード, RString 捕捉月) {
         //qa  965
@@ -621,7 +626,7 @@ public class TokuchoTaishoshaIchiranSakusei {
         param.set識別コード(特徴未同定情報entity.getShikibetsuCode());
         mapper = mapperProvider.create(ITokuchoTaishoshaIchiranSakuseiMapper.class);
         List<DbT2001ChoshuHohoEntity> 徴収方法entityList = mapper.select最新介護徴収方法情報取得(param);
-        if (STR08.compareTo(開始月) == NUM0) {
+        if (STR08.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
                 徴収方法entity.setChoshuHoho8gatsu(set徴収方法(徴収方法entity.getChoshuHoho8gatsu()));
                 徴収方法entity.setChoshuHoho9gatsu(set徴収方法(徴収方法entity.getChoshuHoho9gatsu()));
@@ -630,7 +635,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setKariHosokuM(捕捉月);
                 save徴収方法entity(徴収方法entity);
             }
-        } else if (STR10.compareTo(開始月) == NUM0) {
+        } else if (STR10.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
                 徴収方法entity.setChoshuHoho10gatsu(set徴収方法(徴収方法entity.getChoshuHoho10gatsu()));
                 徴収方法entity.setChoshuHoho11gatsu(set徴収方法(徴収方法entity.getChoshuHoho11gatsu()));
@@ -649,7 +654,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonHosokuM(捕捉月);
                 save徴収方法entity(徴収方法entity);
             }
-        } else if (STR12.compareTo(開始月) == NUM0) {
+        } else if (STR12.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
                 徴収方法entity.setChoshuHoho12gatsu(set徴収方法(徴収方法entity.getChoshuHoho12gatsu()));
                 徴収方法entity.setChoshuHoho1gatsu(set徴収方法(徴収方法entity.getChoshuHoho1gatsu()));
@@ -666,7 +671,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonHosokuM(捕捉月);
                 save徴収方法entity(徴収方法entity);
             }
-        } else if (STR02.compareTo(開始月) == NUM0) {
+        } else if (STR02.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
                 徴収方法entity.setChoshuHoho2gatsu(set徴収方法(徴収方法entity.getChoshuHoho2gatsu()));
                 徴収方法entity.setChoshuHoho3gatsu(set徴収方法(徴収方法entity.getChoshuHoho3gatsu()));
@@ -681,7 +686,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonHosokuM(捕捉月);
                 save徴収方法entity(徴収方法entity);
             }
-        } else if (STR04.compareTo(開始月) == NUM0) {
+        } else if (STR04.compareTo(開始月数) == NUM0) {
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
                 徴収方法entity.setChoshuHoho4gatsu(set徴収方法(徴収方法entity.getChoshuHoho4gatsu()));
                 徴収方法entity.setChoshuHoho5gatsu(set徴収方法(徴収方法entity.getChoshuHoho5gatsu()));
@@ -706,7 +711,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setYokunendoKariHosokuM(捕捉月);
                 save徴収方法entity(徴収方法entity);
             }
-        } else if (STR06.compareTo(開始月) == NUM0) {
+        } else if (STR06.compareTo(開始月数) == NUM0) {
             徴収方法entityList = mapper.select最新介護徴収方法情報取得(param);
             for (DbT2001ChoshuHohoEntity 徴収方法entity : 徴収方法entityList) {
                 徴収方法entity.setChoshuHoho6gatsu(set徴収方法(徴収方法entity.getChoshuHoho6gatsu()));

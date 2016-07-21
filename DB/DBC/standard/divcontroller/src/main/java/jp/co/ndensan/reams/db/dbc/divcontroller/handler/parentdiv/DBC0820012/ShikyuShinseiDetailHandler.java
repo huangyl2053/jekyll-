@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.KyufujissekiKihonResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;

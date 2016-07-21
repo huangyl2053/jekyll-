@@ -120,6 +120,9 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final RString タイトル_対象者一覧表 = new RString("介護保険　特徴仮算定平準化対象者一覧表");
     private static final RString タイトル_対象外一覧表 = new RString("介護保険　特徴仮算定平準化対象外一覧表");
     private static final RString 英数字ファイル名 = new RString("TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranData.csv");
+    private static final RString CSVファイル = new RString(".csv");
+    private static final RString ファイル名_対象者一覧表 = new RString("介護保険特徴仮算定平準化対象者一覧表_");
+    private static final RString ファイル名_対象外一覧表 = new RString("介護保険特徴仮算定平準化対象外一覧表_");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200003"));
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final int 仮算定期間_期1 = 1;
@@ -297,6 +300,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         Heijunka heijunka = new Heijunka();
         HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
         RDate effectiveDate = new RDate(賦課年度.toDateString().toString());
+        // QA990
         for (TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity : taishoshaTempEntityList) {
 //            HeijunkaInput heijunkaInput = new HeijunkaInput();
 //            平準化入力設定(保険料段階取得, 賦課年度, entity, heijunkaInput, 平準化計算方法_増額, 平準化計算方法_減額, effectiveDate);
@@ -474,7 +478,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         }
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService printService = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService();
         HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
-        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
+        ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId());
         List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> taishoshaList = new ArrayList<>();
         for (TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者 : 特徴平準化結果対象者一覧表リスト) {
             Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, 特徴平準化結果対象者.get保険料段階仮算定時());
@@ -516,7 +520,8 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
+        RString eucFilePath = Path.combinePath(spoolWorkPath,
+                ファイル名_対象者一覧表.concat(調定日時.toDateString()).concat(CSVファイル));
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -534,6 +539,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象者CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象者,
                         編集後住所, 今年度保険料率, 調整金額, 編集備考);
+                toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
@@ -541,7 +547,8 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         FileSpoolManager managerTaishogai = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPathTaishogai = managerTaishogai.getEucOutputDirectry();
-        RString eucFilePathTaishogai = Path.combinePath(spoolWorkPathTaishogai, 英数字ファイル名);
+        RString eucFilePathTaishogai = Path.combinePath(spoolWorkPathTaishogai,
+                ファイル名_対象外一覧表.concat(調定日時.toDateString()).concat(CSVファイル));
         try (CsvListWriter csvListWrite = new CsvListWriter.InstanceBuilder(eucFilePathTaishogai).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -559,6 +566,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象外CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象外,
                         編集後住所, 今年度保険料率, 調整金額, 備考名);
+                toBodyList(bodyList);
                 csvListWrite.writeLine(bodyList);
                 csvListWrite.close();
             }
@@ -638,7 +646,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             TokuchoHeijyunkaTaishogaiEntity 特徴平準化結果対象外, RString 編集後住所, Decimal 今年度保険料率,
             int 調整金額, RString 編集備考) {
         bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-        bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
+        bodyList.add(調定日時.toDateString());
         bodyList.add(タイトル_対象外一覧表);
         bodyList.add(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
         bodyList.add(特徴平準化結果対象外.get通知書番号().value());
@@ -723,7 +731,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         if (仮徴収年金コード != null && (NUM_3 <= 仮徴収年金コード.length())) {
             bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                    new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate()));
+                    new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate()));
         }
         特徴期期別金額設定(特徴平準化結果対象外, bodyList);
     }
@@ -765,7 +773,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, RString 編集後住所, Decimal 今年度保険料率,
             int 調整金額, RString 編集備考) {
         bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-        bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
+        bodyList.add(調定日時.toDateString());
         bodyList.add(タイトル_対象者一覧表);
         bodyList.add(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
         bodyList.add(特徴平準化結果対象者.get通知書番号().value());
@@ -845,7 +853,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         if (仮徴収年金コード != null && (NUM_3 <= 仮徴収年金コード.length())) {
             bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                    new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate()));
+                    new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate()));
         }
         特徴期期別金額設定(特徴平準化結果対象者, bodyList);
     }
@@ -1324,6 +1332,15 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             entity.setKijunTimestamp(システム日時);
             entity.setState(EntityDataState.Modified);
             処理日付管理Dac.save(entity);
+        }
+    }
+
+    private void toBodyList(List<RString> bodyList) {
+        for (int i = NUM_0; i < bodyList.size(); i++) {
+            if (bodyList.get(i) == null) {
+                bodyList.remove(bodyList.get(i));
+                bodyList.add(i, RString.EMPTY);
+            }
         }
     }
 }

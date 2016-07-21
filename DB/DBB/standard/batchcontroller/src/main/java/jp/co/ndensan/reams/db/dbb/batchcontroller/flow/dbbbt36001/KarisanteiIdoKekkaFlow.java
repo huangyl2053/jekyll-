@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt36001;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055003.SystemTimeSakuseiKanendoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaKozaIdoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuShutokuProcess;
@@ -16,12 +17,10 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.SpoolKariSante
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoKaishishaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoTeishishaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TsuchishoBangoHatubanProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidokekka.KarisanteiIdoKekkaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -44,9 +42,9 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
 
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
+    private static final RString RSTELEVEN = new RString("11");
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
-    private static final ReportId 帳票分類ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
@@ -74,7 +72,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
         executeStep(システム日時の取得);
         createKarisanteiIdoKekkaProcessParameter();
         parameter.set調定日時(getResult(RDateTime.class,
-                new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.SYSTEM_TIME));
+                new RString(システム日時の取得), SystemTimeKarisanteiProcess.SYSTEM_TIME));
         executeStep(資格異動者抽出);
         executeStep(特別徴収開始者抽出);
         executeStep(特別徴収停止者抽出);
@@ -82,8 +80,11 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
         if (RSTONE.equals(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動新規資格賦課,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
             executeStep(通知書番号発番);
-            executeStep(世帯員把握);
-            executeStep(世帯員把握バッチ);
+            if (RSTELEVEN.equals(DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動新規賦課方法,
+                    RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
+                executeStep(世帯員把握);
+                executeStep(世帯員把握バッチ);
+            }
         }
         if (RSTZERO.equals(getParameter().get依頼金額計算区分())) {
             executeStep(賦課計算_資格喪失);
@@ -113,7 +114,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
      */
     @Step(システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
-        return simpleBatch(SystemTimeShutokuProcess.class).arguments(createFukaJohoShutokuParameter()).define();
+        return simpleBatch(SystemTimeKarisanteiProcess.class).define();
     }
 
     /**
@@ -297,13 +298,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
                 getParameter().get賦課年度().toDateString(),
                 new RString(getResult(RDateTime.class, new RString(システム日時の取得),
                                 SystemTimeSakuseiKanendoProcess.SYSTEM_TIME).toString()),
-                ShoriName.仮算定異動賦課.get名称(), 帳票分類ID.getColumnValue());
-    }
-
-    private FukaJohoShutokuProcessParameter createFukaJohoShutokuParameter() {
-        FukaJohoShutokuProcessParameter fukaJohoShutokuparameter = new FukaJohoShutokuProcessParameter();
-        fukaJohoShutokuparameter.set調定年度(getParameter().get調定年度());
-        return fukaJohoShutokuparameter;
+                ShoriName.仮算定異動賦課.get名称(), RString.EMPTY);
     }
 
     private void createKarisanteiIdoKekkaProcessParameter() {

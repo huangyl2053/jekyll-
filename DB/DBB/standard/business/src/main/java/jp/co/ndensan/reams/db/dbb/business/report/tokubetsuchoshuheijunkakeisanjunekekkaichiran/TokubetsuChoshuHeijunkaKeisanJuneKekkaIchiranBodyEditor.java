@@ -133,7 +133,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (仮徴収年金コード != null && (NUM_3 <= 仮徴収年金コード.length())) {
             source.listLower_5 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                    new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate());
+                    new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate());
         }
         特徴期期別金額設定(item, source);
     }
@@ -235,7 +235,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (仮徴収年金コード != null && (NUM_3 <= 仮徴収年金コード.length())) {
             source.listLower_5 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                    new Code(仮徴収年金コード.substring(NUM_0, NUM_2)), FlexibleDate.getNowDate());
+                    new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate());
         }
         特徴期期別金額設定(item, source);
     }

@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -72,16 +74,15 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
 
     }
 
-    private static RString set時刻(RString date) {
+    private RString set時刻(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        date.insert(2, ":");
-        return date;
-
+        RTime datetime = new RTime(date);
+        return datetime.toFormattedTimeString(DisplayTimeFormat.HH_mm);
     }
 
-    private static RString dateFormat(RString date) {
+    private RString dateFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }

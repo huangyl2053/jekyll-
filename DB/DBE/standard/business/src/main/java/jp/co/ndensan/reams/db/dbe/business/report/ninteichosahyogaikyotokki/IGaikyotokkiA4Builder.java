@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyotokki;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
