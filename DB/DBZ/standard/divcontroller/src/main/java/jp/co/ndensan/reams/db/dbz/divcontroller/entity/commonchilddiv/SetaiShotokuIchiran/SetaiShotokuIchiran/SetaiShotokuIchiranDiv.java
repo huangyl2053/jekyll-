@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
  * @author 自動生成
  */
 public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchiranDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -60,6 +60,8 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     private Label lblSetaiIchiranMsg;
     @JsonProperty("btnNarabeteHyoji")
     private Button btnNarabeteHyoji;
+    @JsonProperty("btnNarabeteHyojiKogaku")
+    private Button btnNarabeteHyojiKogaku;
     @JsonProperty("dgSetaiShotoku")
     private DataGrid<dgSetaiShotoku_Row> dgSetaiShotoku;
     @JsonProperty("dgShotokuRireki")
@@ -219,6 +221,24 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     @JsonProperty("btnNarabeteHyoji")
     public void setBtnNarabeteHyoji(Button btnNarabeteHyoji) {
         this.btnNarabeteHyoji = btnNarabeteHyoji;
+    }
+
+    /*
+     * getbtnNarabeteHyojiKogaku
+     * @return btnNarabeteHyojiKogaku
+     */
+    @JsonProperty("btnNarabeteHyojiKogaku")
+    public Button getBtnNarabeteHyojiKogaku() {
+        return btnNarabeteHyojiKogaku;
+    }
+
+    /*
+     * setbtnNarabeteHyojiKogaku
+     * @param btnNarabeteHyojiKogaku btnNarabeteHyojiKogaku
+     */
+    @JsonProperty("btnNarabeteHyojiKogaku")
+    public void setBtnNarabeteHyojiKogaku(Button btnNarabeteHyojiKogaku) {
+        this.btnNarabeteHyojiKogaku = btnNarabeteHyojiKogaku;
     }
 
     /*

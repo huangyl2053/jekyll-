@@ -79,6 +79,10 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnNarabeteHyoji"));
             };
 
+            Controls.prototype.btnNarabeteHyojiKogaku = function () {
+                return new UZA.Button(this.convFiledName("btnNarabeteHyojiKogaku"));
+            };
+
             Controls.prototype.dgSetaiShotoku = function () {
                 return new UZA.DataGrid(this.convFiledName("dgSetaiShotoku"));
             };
