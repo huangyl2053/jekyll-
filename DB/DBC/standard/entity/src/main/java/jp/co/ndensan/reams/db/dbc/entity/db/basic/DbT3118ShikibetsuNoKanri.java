@@ -271,7 +271,7 @@ public enum DbT3118ShikibetsuNoKanri implements IColumnDefinition {
      * 特定疾患施設療養設定区分
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
      */
-    shoteiShikkanSetteiKubun(1, 0),
+    tokuteiShikkanSetteiKubun(1, 0),
     /**
      * 明細住所地特例設定区分
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
