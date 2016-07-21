@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlTotalSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.dgKeyakusya_Row;
@@ -52,6 +53,8 @@ public class PnlTotalSearch {
     private static final RString 契約者選択 = new RString("契約者選択");
     private static final RString 対象者検索 = new RString("対象者検索");
     private static final RString 事業者検索 = new RString("事業者検索");
+    private static final RString 照会タイトル = new RString("受領委任契約申請照会");
+    private static final RString 修正タイトル = new RString("受領委任契約申請登録・修正");
 
     /**
      * コンストラクタです。
@@ -70,14 +73,15 @@ public class PnlTotalSearch {
      */
     public ResponseData<PnlTotalSearchDiv> onLoad(PnlTotalSearchDiv div) {
         RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
-        if (画面モード == null || 画面モード.isEmpty()) {
+        RString モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+        if (モード == null || モード.isEmpty()) {
             if (修正モード.equals(ResponseHolder.getState())) {
                 ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
             } else if (照会モード.equals(ResponseHolder.getState())) {
                 ViewStateHolder.put(ViewStateKeys.画面モード, 参照);
             }
         }
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         getHandler(div).set初期化状態(表示モード, ViewStateHolder.get(ViewStateKeys.画面モード, RString.class));
         if (表示モード == null || 表示モード.isEmpty()) {
             div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
@@ -122,7 +126,11 @@ public class PnlTotalSearch {
             div.getPnlSearch().getTxtMaxCount().setValue(最大取得件数);
             return set契約者一覧(div, shokanResultList, 最大取得件数);
         }
-        return ResponseData.of(div).respond();
+        if (参照.equals(画面モード)) {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310011StateName.照会モード).data).rootTitle(照会タイトル).respond();
+        } else {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310011StateName.修正モード).data).rootTitle(修正タイトル).respond();
+        }
     }
 
     /**
@@ -356,6 +364,7 @@ public class PnlTotalSearch {
      */
     private ResponseData<PnlTotalSearchDiv> set契約者一覧(PnlTotalSearchDiv div,
             List<ShokanJuryoininKeiyakushaResult> shokanResultList, Decimal maxCount) {
+        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(getHandler(div).createDropDownList());
         if (shokanResultList != null && shokanResultList.size() > maxCount.intValue()) {
             if (!ResponseHolder.isReRequest()) {
@@ -372,6 +381,10 @@ public class PnlTotalSearch {
         } else {
             getHandler(div).initializeGrid(shokanResultList, maxCount);
         }
-        return ResponseData.of(div).respond();
+        if (参照.equals(画面モード)) {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310011StateName.照会モード).data).rootTitle(照会タイトル).respond();
+        } else {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310011StateName.修正モード).data).rootTitle(修正タイトル).respond();
+        }
     }
 }
