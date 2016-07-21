@@ -701,7 +701,6 @@ public class NinteiChosaIraiHandler {
     public List<ChosaIraishoHeadItem> create認定調査依頼書印刷用パラメータ() {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
-        int 宛名連番 = 1;
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             RString 誕生日明治 = HOUSI;

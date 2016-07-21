@@ -68,6 +68,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR.rse");
     private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR.rse");
     private static final RString DBE231002 = new RString("DBE231002_ikenshokinyuyoshi.rse");
+    private static final RString 排他キー = new RString("ShinseishoKanriNo");
 
     /**
      * 共通子DIVを初期化します。
@@ -76,8 +77,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onLoad(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
-        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
+        if (!RealInitialLocker.tryGetLock(new LockingKey(排他キー))) {
             throw new PessimisticLockingException();
         }
 
@@ -137,13 +137,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             }
             if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-                RealInitialLocker.release(排他キー);
+                RealInitialLocker.release(new LockingKey(排他キー));
                 return ResponseData.of(div).dialogOKClose();
             }
         } else {
-            LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-            RealInitialLocker.release(排他キー);
+            RealInitialLocker.release(new LockingKey(排他キー));
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -183,8 +181,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             response.data = reportManager.publish();
         }
         updateData(div);
-        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        RealInitialLocker.release(排他キー);
+        RealInitialLocker.release(new LockingKey(排他キー));
         return response;
     }
 
