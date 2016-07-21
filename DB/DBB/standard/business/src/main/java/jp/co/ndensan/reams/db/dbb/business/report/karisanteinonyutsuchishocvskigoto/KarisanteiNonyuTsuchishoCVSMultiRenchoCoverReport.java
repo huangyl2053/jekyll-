@@ -59,16 +59,14 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
         if (null == 納入通知書期情報リスト) {
             納入通知書期情報リスト = new ArrayList<>();
         }
-        int 連番 = 1;
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             if (null == 納入通知書期情報.get納付額() || 納入通知書期情報.get納付額().compareTo(Decimal.ZERO) <= 0) {
                 continue;
             }
             IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor editor
-                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(仮算定納入通知書情報, 納入通知書期情報, ninshoshaSource, 連番);
+                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(仮算定納入通知書情報, 納入通知書期情報, ninshoshaSource);
             IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder builder = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder(editor);
             reportSourceWriter.writeLine(builder);
-            連番++;
         }
     }
 
@@ -106,6 +104,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
         仮算定納入通知書情報Report.set算定の基礎(仮算定納入通知書情報.get算定の基礎());
         仮算定納入通知書情報Report.set納付書共通(仮算定納入通知書情報.get納付書共通());
         仮算定納入通知書情報Report.set編集後仮算定通知書共通情報(仮算定納入通知書情報.get編集後仮算定通知書共通情報());
+        仮算定納入通知書情報Report.set連番(仮算定納入通知書情報.get連番());
     }
 
 }
