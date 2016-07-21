@@ -135,34 +135,35 @@ public class TokuChoSoufuJohoSakuseiBatch {
         if (特徴開始月 == null || 処理年度 == null) {
             return new ArrayList();
         }
+        int 特徴開始年数 = 特徴開始月.getYearValue();
         RString 特徴開始月数 = DateConverter.formatMonthFull(特徴開始月.getMonthValue());
         List<UeT0511NenkinTokuchoKaifuJohoEntity> resultList = null;
         if (特徴制度間IF作成.equals(遷移元メニュー)) {
             FlexibleYear 入力処理年度 = null;
             RString 通知内容コード = null;
             RString 捕捉年月 = RString.EMPTY;
-            if (月8.equals(特徴開始月数) && 年度_2016.equals(処理年度.toDateString())) {
-                入力処理年度 = new FlexibleYear(年度_2016);
+            if (月8.equals(特徴開始月数)) {
+                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
                 通知内容コード = RS30;
                 捕捉年月 = 月2;
-            } else if (月10.equals(特徴開始月数) && 年度_2016.equals(処理年度.toDateString())) {
-                入力処理年度 = new FlexibleYear(年度_2016);
+            } else if (月10.equals(特徴開始月数)) {
+                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
                 通知内容コード = RS00;
                 捕捉年月 = 月4;
-            } else if (月12.equals(特徴開始月数) && 年度_2016.equals(処理年度.toDateString())) {
-                入力処理年度 = new FlexibleYear(年度_2016);
+            } else if (月12.equals(特徴開始月数)) {
+                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
                 通知内容コード = RS30;
                 捕捉年月 = 月6;
-            } else if (月2.equals(特徴開始月数) && 年度_2016.equals(処理年度.toDateString())) {
-                入力処理年度 = new FlexibleYear(年度_2016);
+            } else if (月2.equals(特徴開始月数)) {
+                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
                 通知内容コード = RS30;
                 捕捉年月 = 月8;
-            } else if (月4.equals(特徴開始月数) && 年度_2016.equals(処理年度.toDateString())) {
-                入力処理年度 = new FlexibleYear(年度_2016);
+            } else if (月4.equals(特徴開始月数)) {
+                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
                 通知内容コード = RS30;
                 捕捉年月 = 月10;
-            } else if (月6.equals(特徴開始月数) && 年度_2016.equals(処理年度.toDateString())) {
-                入力処理年度 = new FlexibleYear(年度_2016);
+            } else if (月6.equals(特徴開始月数)) {
+                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
                 通知内容コード = RS30;
                 捕捉年月 = 月12;
             }
@@ -170,41 +171,42 @@ public class TokuChoSoufuJohoSakuseiBatch {
             resultList = 年金特徴回付情報_介護継承dac.
                     select特徴回付情報のデータ(GyomuCode.DB介護保険, 通知内容コード, 入力処理年度, 捕捉月);
         } else if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-            List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist = get抽出するデータ(特徴開始月, 処理年度);
+            List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist = get抽出するデータ(特徴開始月数, 処理年度);
             resultList = 年金特徴回付情報_介護継承dac.select全件特徴回付情報のデータ(GyomuCode.DB介護保険, uet0511entitylist);
         }
         return resultList;
     }
 
-    private List<UeT0511NenkinTokuchoKaifuJohoEntity> get抽出するデータ(RDate 特徴開始月, FlexibleYear 処理年度) {
+    private List<UeT0511NenkinTokuchoKaifuJohoEntity> get抽出するデータ(RString 特徴開始月数, FlexibleYear 処理年度) {
+        FlexibleYear 処理前年度 = 処理年度.minusYear(NUM1);
         List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist = new ArrayList();
-        if (月4.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2015.equals(処理年度.toDateString())) {
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度12月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度8月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度6月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS00, 前年度4月);
-        } else if (月6.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2015.equals(処理年度.toDateString())) {
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度12月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度10月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度8月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度6月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS00, 前年度4月);
-        } else if (月8.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            addToList(uet0511entitylist, new FlexibleYear(年度_2016), RS00, 前年度2月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度12月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度10月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度8月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度6月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS00, 前年度4月);
-        } else if (月10.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            addToList(uet0511entitylist, new FlexibleYear(年度_2016), RS00, 前年度4月);
-        } else if (月12.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            addToList(uet0511entitylist, new FlexibleYear(年度_2016), RS30, 前年度6月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2016), RS00, 前年度4月);
-        } else if (翌2月.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度8月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS30, 前年度6月);
-            addToList(uet0511entitylist, new FlexibleYear(年度_2015), RS00, 前年度4月);
+        if (月4.equals(特徴開始月数)) {
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月10));
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月8));
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
+            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+        } else if (月6.equals(特徴開始月数)) {
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月12));
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月10));
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月8));
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
+            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+        } else if (月8.equals(特徴開始月数)) {
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月2));
+            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月12));
+            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月10));
+            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月8));
+            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月6));
+            addToList(uet0511entitylist, 処理前年度, RS00, 処理前年度.toDateString().concat(月4));
+        } else if (月10.equals(特徴開始月数)) {
+            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+        } else if (月12.equals(特徴開始月数)) {
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
+            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+        } else if (月2.equals(特徴開始月数)) {
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月8));
+            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
+            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
         }
         return uet0511entitylist;
     }
