@@ -16,12 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsaHoshuIchiranChange {
 
-    /**
-     * インスタンスを生成します。
-     */
-    public ShinsaHoshuIchiranChange() {
-    }
-
     private static final RString 欠 = new RString("欠");
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
@@ -107,17 +101,17 @@ public class ShinsaHoshuIchiranChange {
     public RString set出席状況(RString 出席状況) {
 
         if (ShinsaHoshuIchiranChange.長.equals(出席状況)) {
-            出席状況 = ShinsaHoshuIchiranChange.長_対応;
+            return ShinsaHoshuIchiranChange.長_対応;
         }
         if (ShinsaHoshuIchiranChange.副.equals(出席状況)) {
-            出席状況 = ShinsaHoshuIchiranChange.副_対応;
+            return ShinsaHoshuIchiranChange.副_対応;
         }
         if (ShinsaHoshuIchiranChange.出.equals(出席状況)) {
-            出席状況 = ShinsaHoshuIchiranChange.出_対応;
+            return ShinsaHoshuIchiranChange.出_対応;
         }
         if (ShinsaHoshuIchiranChange.欠.equals(出席状況)) {
-            出席状況 = ShinsaHoshuIchiranChange.欠_対応;
+            return ShinsaHoshuIchiranChange.欠_対応;
         }
-        return 出席状況;
+        return RString.EMPTY;
     }
 }
