@@ -37,7 +37,7 @@
         <result property="ikenshoJuryoYMD" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoReadYMD" column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="T5911_daihyoshaName" column="T5911_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="t5911_daihyoshaName" column="T5911_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosainNo" column="ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sonotaKikanCode" column="sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kikanMeisho" column="kikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,7 +47,7 @@
         <result property="shinsakaiKojoZeigaku" column="shinsakaiKojoZeigaku"/>
         <result property="x5595_shinsakaiIinCode" column="x5595_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiKaisaiYMD" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="Hoshu" column="Hoshu"/>
+        <result property="hoshu" column="Hoshu"/>
         <result property="shinsakaiHoshuGokei" column="shinsakaiHoshuGokei"/>
     </resultMap>
     
@@ -81,12 +81,12 @@
                 INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
                 AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
-                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[>=]]> T5031."kaishiYM"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
                 AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
         WHERE 
-                T5601."chosaItakuryoShiharaiYMD" <![CDATA[>=]]> #{実績期間From}
+                #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
-                AND T5601."isGinkoFurikomiShutsuryoku" = FALSE
+                AND T5601."isGinkoFurikomiShutsuryoku" = #{銀行振込出力フラグ}
         ORDER BY
                 T5601."ninteichosaItakusakiCode"
     </select>
@@ -122,12 +122,12 @@
                 LEFT JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
                 AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
-                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[>=]]> T5031."kaishiYM"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
                 AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
         WHERE
-                T5601."chosaItakuryoShiharaiYMD" <![CDATA[>=]]> #{実績期間From}
+                #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
-                AND T5601."isGinkoFurikomiShutsuryoku" = FALSE
+                AND T5601."isGinkoFurikomiShutsuryoku" = #{銀行振込出力フラグ}
         ORDER BY
                 T5601."ninteichosaItakusakiCode" 
     </select>
@@ -167,9 +167,9 @@
                 ON  T5913."shichosonCode" = T5910."shichosonCode"
                 AND  T5913."ninteiChosaItakusakiCode" = T5910."ninteichosaItakusakiCode"
         WHERE  
-                T5601."chosaItakuryoShiharaiYMD" <![CDATA[>=]]> #{実績期間From}
+                #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
                 AND  T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
-                AND  T5601."isGinkoFurikomiShutsuryoku" = FALSE
+                AND  T5601."isGinkoFurikomiShutsuryoku" = #{銀行振込出力フラグ}
         ORDER BY  
                 T5601."ninteichosaItakusakiCode",
                 T5913."ninteiChosainCode",
@@ -200,7 +200,7 @@
                 ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
                 AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
                 <if test="!基準日フラグ">  
-                 AND  T5302."ikenshoReadYMD" <![CDATA[>=]]> #{実績期間From}
+                 AND #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
                 INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
@@ -212,17 +212,17 @@
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
                 AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
                 <if test="基準日フラグ">
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[>=]]> T5032."kaishiYM"
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                 AND T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM"
                 </if>
                 <if test="!基準日フラグ">
-                 AND  T5302."ikenshoReadYMD" <![CDATA[>=]]> T5032."kaishiYM"
-                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                 AND T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD" 
+                 AND T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM"
                 </if>
         WHERE  
-                T5602."ginkoFurikomiShutsuryokuFlag" = FALSE
+                T5602."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
                 <if test="基準日フラグ">
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[>=]]> #{実績期間From}
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
                  AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
         ORDER BY
@@ -252,7 +252,7 @@
                 ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
                 AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
                 <if test="!基準日フラグ">
-                 AND  T5302."ikenshoReadYMD" <![CDATA[>=]]> #{実績期間From} 
+                 AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To} 
                 </if>
                 INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
@@ -264,17 +264,17 @@
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
                 AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
                 <if test="基準日フラグ">
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[>=]]> T5032."kaishiYM" 
+                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD" 
                  AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM" 
                 </if>
                 <if test="!基準日フラグ">
-                 AND  T5302."ikenshoReadYMD" <![CDATA[>=]]> T5032."kaishiYM" 
+                 AND  T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM" 
                 </if>
         WHERE  
-                T5602."ginkoFurikomiShutsuryokuFlag"  = FALSE
+                T5602."ginkoFurikomiShutsuryokuFlag"  = #{銀行振込出力フラグ}
                 <if test="基準日フラグ">
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[>=]]> #{実績期間From} 
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
                  AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
         ORDER BY  
@@ -313,16 +313,16 @@
                 ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
                 AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
                 <if test="!基準日フラグ">
-                 AND  T5302."ikenshoReadYMD" <![CDATA[>=]]> #{実績期間From}
+                 AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
                 INNER JOIN rgdb."DbT5912ShujiiJoho" AS T5912
                 ON  T5912."shichosonCode" = T5911."shichosonCode"
                 AND  T5912."shujiiIryokikanCode" = T5911."shujiiIryokikanCode"
         WHERE  
-                T5602."ginkoFurikomiShutsuryokuFlag"  = FALSE
+                T5602."ginkoFurikomiShutsuryokuFlag"  = #{銀行振込出力フラグ}
                 <if test="基準日フラグ">
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[>=]]> #{実績期間From}
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
                  AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
         ORDER BY  
@@ -359,13 +359,13 @@
                 ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
                 AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
                 <if test="!基準日フラグ">
-                 AND  T5302."ikenshoReadYMD" <![CDATA[>=]]> #{実績期間From}
+                 AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
         WHERE  
-                T5602."ginkoFurikomiShutsuryokuFlag" = FALSE
+                T5602."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
                 <if test="基準日フラグ">
-                 AND  T5602."ikenshoJuryoYMD" <![CDATA[>=]]> #{実績期間From}
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
                  AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
         ORDER BY  
@@ -449,9 +449,9 @@
               FROM
                 rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
               WHERE
-                T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From} 
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
                 AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To} 
-                AND T5603."ginkoFurikomiShutsuryokuFlag" = FALSE 
+                AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
               GROUP BY
                 T5603."shinsakaiIinCode"
             ) X5603 
@@ -467,17 +467,17 @@
               FROM
                 rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
               WHERE
-                T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From} 
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
                 AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To} 
-                AND T5603."ginkoFurikomiShutsuryokuFlag" = FALSE 
+                AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
               GROUP BY
                 T5603."shinsakaiIinCode"
             ) Y5603 
               ON Y5603."shinsakaiIinCode" = T5603."shinsakaiIinCode" 
           WHERE
-            T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From} 
+            #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
             AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To} 
-            AND T5603."ginkoFurikomiShutsuryokuFlag" = FALSE 
+            AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
           ORDER BY
             T5603."shinsakaiIinCode"
     </select>
@@ -506,9 +506,9 @@
              SELECT  T5603."shinsakaiIinCode",
                COUNT(T5603."shinsakaiIinCode") AS count
              FROM  rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
-             WHERE  T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From}
+             WHERE #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD" 
              AND  T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}          
-             AND  T5603."ginkoFurikomiShutsuryokuFlag" = FALSE 
+             AND  T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ} 
              GROUP BY  T5603."shinsakaiIinCode"  
             ) X5603  
            ON  X5603."shinsakaiIinCode" = T5603."shinsakaiIinCode"  
@@ -520,7 +520,7 @@
              FROM  rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
              WHERE  T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From}
              AND  T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}
-             AND  T5603."ginkoFurikomiShutsuryokuFlag" = FALSE
+             AND  T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
              GROUP BY  T5603."shinsakaiIinCode"           
             ) Y5603  
            ON  Y5603."shinsakaiIinCode" = T5603."shinsakaiIinCode"  
@@ -557,9 +557,9 @@
            ON  X5595."shoKisaiHokenshaNo" = T5914."shoKisaiHokenshaNo"  
            AND  X5595."sonotaKikanCode" = T5914."sonotaKikanCode"  
         WHERE  
-           T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From} 
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
            AND  T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}
-           AND  T5603."ginkoFurikomiShutsuryokuFlag" = FALSE       
+           AND  T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}       
         ORDER BY  
             T5603."shinsakaiIinCode"
     </select>
@@ -603,9 +603,9 @@
                 OR T5101."shoriJotaiKubun" = '3'    	
                 AND T5101."logicalDeletedFlag" = False       
             WHERE 
-                T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From}       
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"     
                 AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}          
-                AND T5603."ginkoFurikomiShutsuryokuFlag" = FALSE   	
+                AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}   	
              ORDER BY 
                 T5603."shinsakaiIinCode",         
                 T5101."hihokenshaNo" 
