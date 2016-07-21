@@ -35,6 +35,7 @@ public class JigyohokokuCompYoshiki153Builder implements IJigyohokokuCompYoshiki
      *
      * @return {@link JigyohokokuCompYoshiki153ReportSource}
      */
+    @Override
     public JigyohokokuCompYoshiki153ReportSource build() {
         return ReportEditorJoiner.from(new JigyohokokuCompYoshiki153ReportSource()).join(editor).join(bodyEditor).buildSource();
     }

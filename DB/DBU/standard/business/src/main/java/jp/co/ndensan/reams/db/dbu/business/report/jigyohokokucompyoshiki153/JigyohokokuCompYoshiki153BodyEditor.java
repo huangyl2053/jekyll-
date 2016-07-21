@@ -20,7 +20,7 @@ public class JigyohokokuCompYoshiki153BodyEditor implements IJigyohokokuCompYosh
     /**
      * インスタンスを生成します。
      *
-     * @param change JigyohokokuCompYoshiki153Variables
+     * @param change JigyohokokuCompYoshiki153Change
      */
     protected JigyohokokuCompYoshiki153BodyEditor(JigyohokokuCompYoshiki153Change change) {
         this.change = change;
