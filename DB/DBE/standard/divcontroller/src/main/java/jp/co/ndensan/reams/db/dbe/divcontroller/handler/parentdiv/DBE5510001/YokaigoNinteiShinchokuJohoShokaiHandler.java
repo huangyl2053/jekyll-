@@ -135,16 +135,23 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      *
      * @param serchResult 要介護認定進捗状況照会情報
      */
-    public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> serchResult) {
+    public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> searchResult) {
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
-        if (serchResult.records().isEmpty()) {
+        if (searchResult.records().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        for (YokaigoNinteiShinchokuJoho joho : serchResult.records()) {
+        for (YokaigoNinteiShinchokuJoho joho : searchResult.records()) {
             dg_row.add(setRow(joho));
         }
         div.getDgShinseiJoho().setDataSource(dg_row);
+        div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大取得件数());
+        div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+    }
+
+    private int get最大取得件数() {
+        RString value = div.getTxtMaximumDisplayNumber().getValue();
+        return value == null || value.isEmpty() ? -1 : Integer.parseInt(value.toString());
     }
 
     /**

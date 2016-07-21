@@ -45,8 +45,32 @@
 
     <select resultOrdered="true" id="get申請者一覧内容"
             resultMap="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter"
+            fetchSize="500">
         SELECT
+            <include refid="selectShinseiIchiran"/>
+        FROM
+            <include refid="tablesWithParameter"/>
+        ORDER BY
+            DbT7051."shichosonMeisho",
+            DbT5101."hihokenshaNo",
+            DbT5101."ninteiShinseiYMD"
+        <if test="maximumDisplayNumberFlag">
+            LIMIT #{maximumDisplayNumber}
+        </if>
+    </select>
+
+    <select id="count申請者" resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter"
+            fetchSize="500">
+        SELECT
+            count(1)
+        FROM
+            <include refid="tablesWithParameter"/>
+    </select>
+
+    <sql id="selectShinseiIchiran">
+    <!-- SELECT -->
         DbT7051."shichosonMeisho",
         DbT5101."hihokenshaNo",
         DbT5101."hihokenshaName",
@@ -85,191 +109,195 @@
         DbT5101."seinengappiYMD",
         DbT5101."age",
         DbT5101."shinseishoKanriNo"
-        FROM
+    </sql>
+
+    <sql id="tablesWithParameter">
+    <!-- FROM -->
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102
-        ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
-        ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
-        ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND (DbT5502."hanteiKekkaCode"='01' OR DbT5502."hanteiKekkaCode" IS NULL)
+            ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            AND (DbT5502."hanteiKekkaCode"='01' OR DbT5502."hanteiKekkaCode" IS NULL)
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511
-        ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+            ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5591GogitaiJoho" AS DbT5591
-        ON DbT5511."gogitaiNo" = DbT5591."gogitaiNo"
+            ON DbT5511."gogitaiNo" = DbT5591."gogitaiNo"
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
-        ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+            ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+            ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116
-        ON DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            ON DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
-        ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
-        ON DbT5911."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
-        AND DbT5911."shichosonCode" = DbT7051."shichosonCode"
+            ON DbT5911."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
+            AND DbT5911."shichosonCode" = DbT7051."shichosonCode"
         INNER JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
-        ON DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
-        AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
-        AND DbT5912."shichosonCode" = DbT7051."shichosonCode"
+            ON DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
+            AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
+            AND DbT5912."shichosonCode" = DbT7051."shichosonCode"
         INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
-        ON DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
+            ON DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+            AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
         INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
-        ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-        AND DbT5913."shichosonCode" = DbT7051."shichosonCode"
+            ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+            AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+            AND DbT5913."shichosonCode" = DbT7051."shichosonCode"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
-        ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX("ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho" WHERE "shinseishoKanriNo" = DbT5101."shinseishoKanriNo")
+            ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            AND DbT5201."ninteichosaIraiRirekiNo" = (
+                SELECT MAX("ninteichosaIraiRirekiNo")
+                FROM rgdb."DbT5201NinteichosaIraiJoho"
+                WHERE "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            )
         INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
-        ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5301."ikenshoIraiRirekiNo" = (SELECT MAX("ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" WHERE "shinseishoKanriNo" = DbT5101."shinseishoKanriNo")
+            ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            AND DbT5301."ikenshoIraiRirekiNo" = (
+                SELECT MAX("ikenshoIraiRirekiNo")
+                FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
+                WHERE "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            )
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT4202
-        ON DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            ON DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
-        ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+            ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         LEFT JOIN (
-        SELECT DISTINCT "shinseishoKanriNo" ,
-        '●' AS  tokki
-        from rgdb."DbT5205NinteichosahyoTokkijiko"
-        ) TB ON TB."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                SELECT DISTINCT "shinseishoKanriNo" ,
+                '●' AS  tokki
+                from rgdb."DbT5205NinteichosahyoTokkijiko"
+            ) TB ON TB."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
-        DbT5101."logicalDeletedFlag" = False
-        AND DbT5101."shoriJotaiKubun"   IN (#{tuujou}, #{ennki})
-        <if test="shichosonCodeFlag">
-            AND DbT7051."shichosonCode" = #{shichosonCode}
-        </if>
-        <!-- TODO 董亜彬 支所情報の取得　QA：88 -->
-        <if test="radKensakuHohoKey0">
-            <if test="hihokenshaNoFlag">
-                AND DbT5101."hihokenshaNo" = #{hihokenshaNo}
+            DbT5101."logicalDeletedFlag" = False
+            AND DbT5101."shoriJotaiKubun"   IN (#{tuujou}, #{ennki})
+            <if test="shichosonCodeFlag">
+                AND DbT7051."shichosonCode" = #{shichosonCode}
             </if>
-            <if test="shikibetsuCodeFlag">
-                AND DbT5101."shikibetsuCode" = #{shikibetsuCode}
+            <!-- TODO 董亜彬 支所情報の取得　QA：88 -->
+            <if test="radKensakuHohoKey0">
+                <if test="hihokenshaNoFlag">
+                    AND DbT5101."hihokenshaNo" = #{hihokenshaNo}
+                </if>
+                <if test="shikibetsuCodeFlag">
+                    AND DbT5101."shikibetsuCode" = #{shikibetsuCode}
+                </if>
+                <choose>
+                    <when test="searchesShimeiByKana">
+                        <if test="matchTypekey1">
+                            AND DbT5101."hihokenshaKana" LIKE #{shimei}||'%'
+                        </if>
+                        <if test="matchTypekey2">
+                            AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}
+                        </if>
+                        <if test="matchTypekey3">
+                            AND DbT5101."hihokenshaKana" = #{shimei}
+                        </if>
+                        <if test="matchTypekey4">
+                            AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}||'%'
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test="matchTypekey1">
+                            AND DbT5101."hihokenshaName" LIKE #{shimei}||'%'
+                        </if>
+                        <if test="matchTypekey2">
+                            AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}
+                        </if>
+                        <if test="matchTypekey3">
+                            AND DbT5101."hihokenshaName" = #{shimei}
+                        </if>
+                        <if test="matchTypekey4">
+                            AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}||'%'
+                        </if>
+                    </otherwise>
+                </choose>
             </if>
-            <choose>
-                <when test="searchesShimeiByKana">
-                    <if test="matchTypekey1">
-                        AND DbT5101."hihokenshaKana" LIKE #{shimei}||'%'
-                    </if>
-                    <if test="matchTypekey2">
-                        AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}
-                    </if>
-                    <if test="matchTypekey3">
-                        AND DbT5101."hihokenshaKana" = #{shimei}
-                    </if>
-                    <if test="matchTypekey4">
-                        AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}||'%'
-                    </if>
-                </when>
-                <otherwise>
-                    <if test="matchTypekey1">
-                        AND DbT5101."hihokenshaName" LIKE #{shimei}||'%'
-                    </if>
-                    <if test="matchTypekey2">
-                        AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}
-                    </if>
-                    <if test="matchTypekey3">
-                        AND DbT5101."hihokenshaName" = #{shimei}
-                    </if>
-                    <if test="matchTypekey4">
-                        AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}||'%'
-                    </if>
-                </otherwise>
-            </choose>
-        </if>
-        <if test="radKensakuHohoKey1">
-            <if test="hizukeHaniKey0">
-                AND DbT5101."ninteiShinseiYMD"
-                BETWEEN #{shiteiHizukeForm}
-                AND #{shiteiHizukeTo}
+            <if test="radKensakuHohoKey1">
+                <if test="hizukeHaniKey0">
+                    AND DbT5101."ninteiShinseiYMD"
+                    BETWEEN #{shiteiHizukeForm}
+                    AND #{shiteiHizukeTo}
+                </if>
+                <if test="hizukeHaniKey1">
+                    AND DbT5201."ninteichosaIraiYMD"
+                    BETWEEN #{shiteiHizukeForm}
+                    AND #{shiteiHizukeTo}
+                </if>
+                <if test="hizukeHaniKey2">
+                    AND DbT5301."ikenshoSakuseiIraiYMD"
+                    BETWEEN #{shiteiHizukeForm}
+                    AND #{shiteiHizukeTo}
+                </if>
+                <if test="ninteiChosaIraiKey0">
+                    AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+                </if>
+                <if test="ninteiChosaIraiKey1">
+                    AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
+                </if>
+                <if test="ninteiChosaJisshiKey0">
+                    AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+                </if>
+                <if test="ninteiChosaJisshiKey1">
+                    AND DbT5105."ninteichosaKanryoYMD" IS NULL
+                </if>
+                <if test="ninteiChosaTokkiKey0">
+                    AND TB."shinseishoKanriNo" IS NOT NULL
+                </if>
+                <if test="ninteiChosaTokkiKey1">
+                    AND TB."shinseishoKanriNo" IS NULL
+                </if>
+                <if test="shujiiIkenshoKey0">
+                    AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+                </if>
+                <if test="shujiiIkenshoKey1">
+                    AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
+                </if>
+                <if test="shujiiIkenshoJuryoKey0">
+                    AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+                </if>
+                <if test="shujiiIkenshoJuryoKey1">
+                    AND DbT5105."ikenshoTorokuKanryoYMD" IS NULL
+                </if>
+                <if test="ichijiHanteiKanryoKey0">
+                    AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+                </if>
+                <if test="ichijiHanteiKanryoKey1">
+                    AND DbT5105."ichijiHanteiKanryoYMD" IS NULL
+                </if>
+                <if test="maskingKanryoKey0">
+                    AND DbT5105."maskingKanryoYMD" IS NOT NULL
+                </if>
+                <if test="maskingKanryoKey1">
+                    AND DbT5105."maskingKanryoYMD" IS NULL
+                </if>
+                <if test="shinsakaiWaritsukeKey0">
+                    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+                </if>
+                <if test="shinsakaiWaritsukeKey1">
+                    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+                </if>
+                <if test="shinsakaiJisshiKey0">
+                    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                </if>
+                <if test="shinsakaiJisshiKey1">
+                    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+                </if>
             </if>
-            <if test="hizukeHaniKey1">
-                AND DbT5201."ninteichosaIraiYMD"
-                BETWEEN #{shiteiHizukeForm}
-                AND #{shiteiHizukeTo}
+            <if test="kensakuOptionKey0">
+                AND DbT5102."shinseishoKanriNo" IS NULL
             </if>
-            <if test="hizukeHaniKey2">
-                AND DbT5301."ikenshoSakuseiIraiYMD"
-                BETWEEN #{shiteiHizukeForm}
-                AND #{shiteiHizukeTo}
+            <if test="kensakuOptionKey1">
+                AND DbT5121."shinseishoKanriNo" IS NULL
             </if>
-            <if test="ninteiChosaIraiKey0">
-                AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            <if test="kensakuOptionKey2">
+                AND DbT5101."torisageKubunCode" = #{torisageKubunCode}
             </if>
-            <if test="ninteiChosaIraiKey1">
-                AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
-            </if>
-            <if test="ninteiChosaJisshiKey0">
-                AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-            </if>
-            <if test="ninteiChosaJisshiKey1">
-                AND DbT5105."ninteichosaKanryoYMD" IS NULL
-            </if>
-            <if test="ninteiChosaTokkiKey0">
-                AND TB."shinseishoKanriNo" IS NOT NULL
-            </if>
-            <if test="ninteiChosaTokkiKey1">
-                AND TB."shinseishoKanriNo" IS NULL
-            </if>
-            <if test="shujiiIkenshoKey0">
-                AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            </if>
-            <if test="shujiiIkenshoKey1">
-                AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
-            </if>
-            <if test="shujiiIkenshoJuryoKey0">
-                AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-            </if>
-            <if test="shujiiIkenshoJuryoKey1">
-                AND DbT5105."ikenshoTorokuKanryoYMD" IS NULL
-            </if>
-            <if test="ichijiHanteiKanryoKey0">
-                AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-            </if>
-            <if test="ichijiHanteiKanryoKey1">
-                AND DbT5105."ichijiHanteiKanryoYMD" IS NULL
-            </if>
-            <if test="maskingKanryoKey0">
-                AND DbT5105."maskingKanryoYMD" IS NOT NULL
-            </if>
-            <if test="maskingKanryoKey1">
-                AND DbT5105."maskingKanryoYMD" IS NULL
-            </if>
-            <if test="shinsakaiWaritsukeKey0">
-                AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            </if>
-            <if test="shinsakaiWaritsukeKey1">
-                AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-            </if>
-            <if test="shinsakaiJisshiKey0">
-                AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            </if>
-            <if test="shinsakaiJisshiKey1">
-                AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-            </if>
-        </if>
-        <if test="kensakuOptionKey0">
-            AND DbT5102."shinseishoKanriNo" IS NULL
-        </if>
-        <if test="kensakuOptionKey1">
-            AND DbT5121."shinseishoKanriNo" IS NULL
-        </if>
-        <if test="kensakuOptionKey2">
-            AND DbT5101."torisageKubunCode" = #{torisageKubunCode}
-        </if>
-        AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
-        AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
-        ORDER BY
-        DbT7051."shichosonMeisho",
-        DbT5101."hihokenshaNo",
-        DbT5101."ninteiShinseiYMD"
-        <if test="maximumDisplayNumberFlag">
-            limit #{maximumDisplayNumber}
-        </if>
-    </select>
+            AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
+            AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
+    </sql>
 
 </mapper>

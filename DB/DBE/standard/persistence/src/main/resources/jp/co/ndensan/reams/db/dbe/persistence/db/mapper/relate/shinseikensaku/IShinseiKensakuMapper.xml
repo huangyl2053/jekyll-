@@ -54,8 +54,6 @@
             <include refid="tablesWithParameter"/>
     </select>
 
-
-
     <sql id="selectShinseiJoho">
     <!-- SELECT -->
         DbT5101NinteiShinseiJoho."shinseishoKanriNo",
