@@ -298,6 +298,7 @@ public class FukaTaishoshaSearch {
             div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(対象者));
         }
         ViewStateHolder.put(ViewStateKeys.各種通知書作成フラグ, フラグ_1);
+        ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.FALSE);
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
@@ -315,6 +316,11 @@ public class FukaTaishoshaSearch {
         // ViewState_個人確定キーの保存
         put対象者Key(create対象者Key(div));
         ViewStateHolder.put(ViewStateKeys.各種通知書作成フラグ, フラグ_2);
+        if (該当者一覧.getName().equals(ResponseHolder.getState())) {
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.TRUE);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.is経由該当者一覧画面, Boolean.FALSE);
+        }
         // 次画面遷移
         return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
