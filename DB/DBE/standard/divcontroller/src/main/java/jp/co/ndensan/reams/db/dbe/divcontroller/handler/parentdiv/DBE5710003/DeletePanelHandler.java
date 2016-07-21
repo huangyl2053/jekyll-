@@ -8,11 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,29 +34,22 @@ public class DeletePanelHandler {
     /**
      * 「削除」ボタンを押下する場合、調査票特記のイメージファイル存在チェックを実行します。
      *
-     * @param descriptor 共有ファイル
+     * @param 存在したイメージファイル名 存在したイメージファイル名
      * @param 確認メッセージ出力区分 確認メッセージ出力区分
      * @return イメージファイルが存在区分
      */
-    public RString get調査票特記のイメージファイルが存在区分(ReadOnlySharedFileEntryDescriptor descriptor, RString 確認メッセージ出力区分) {
+    public RString get調査票特記のイメージファイルが存在区分(List<RString> 存在したイメージファイル名, RString 確認メッセージ出力区分) {
         RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> 調査票概況特記イメージ = get調査票概況特記イメージ();
         List<RString> 調査票特記イメージ = get調査票特記イメージ();
-        List<RString> 存在したイメージファイル = new ArrayList<>();
         int 調査票特記イメージファイルが存在しない = 0;
         for (RString ファイル名 : 調査票概況特記イメージ) {
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), ファイル名))).toRString();
-                存在したイメージファイル.add(ファイル名);
-            } catch (ApplicationException e) {
+            if (!存在したイメージファイル名.contains(ファイル名)) {
                 調査票特記イメージファイルが存在しない++;
             }
         }
         for (RString ファイル名 : 調査票特記イメージ) {
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), ファイル名))).toRString();
-                存在したイメージファイル.add(ファイル名);
-            } catch (ApplicationException e) {
+            if (!存在したイメージファイル名.contains(ファイル名)) {
                 調査票特記イメージファイルが存在しない++;
             }
         }
@@ -69,14 +57,14 @@ public class DeletePanelHandler {
             イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
         }
         if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-            if (存在したイメージファイル.contains(new RString("C0007"))
-                    && 存在したイメージファイル.contains(new RString("C0007_BAK"))) {
+            if (存在したイメージファイル名.contains(new RString("C0007"))
+                    && 存在したイメージファイル名.contains(new RString("C0007_BAK"))) {
                 イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
                 return イメージファイルが存在区分;
             }
             for (RString ファイル名 : get調査票特記イメージ_原本あり()) {
-                if (存在したイメージファイル.contains(ファイル名)
-                        && 存在したイメージファイル.contains(ファイル名.concat("_BAK"))) {
+                if (存在したイメージファイル名.contains(ファイル名)
+                        && 存在したイメージファイル名.contains(ファイル名.concat("_BAK"))) {
                     イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
                     return イメージファイルが存在区分;
                 }
@@ -88,13 +76,11 @@ public class DeletePanelHandler {
     /**
      * 「削除」ボタンを押下する場合、調査票概況のイメージファイル存在チェックを実行します。
      *
-     * @param descriptor 共有ファイル
+     * @param 存在したイメージファイル名 存在したイメージファイル名
      * @return 調査票概況のイメージファイルが存在しない：true、存在する：false
      */
-    public boolean is調査票概況のイメージファイルが存在しない(ReadOnlySharedFileEntryDescriptor descriptor) {
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), new RString("G0001")))).toRString();
-        } catch (ApplicationException e) {
+    public boolean is調査票概況のイメージファイルが存在しない(List<RString> 存在したイメージファイル名) {
+        if (!存在したイメージファイル名.contains(new RString("G0001"))) {
             return true;
         }
         return false;
@@ -103,30 +89,23 @@ public class DeletePanelHandler {
     /**
      * 「削除」ボタンを押下する場合、主治医意見書のイメージファイル存在チェックを実行します。
      *
-     * @param descriptor 共有ファイル
+     * @param 存在したイメージファイル名 存在したイメージファイル名
      * @param 確認メッセージ出力区分 確認メッセージ出力区分
      * @return イメージファイルが存在区分
      */
-    public RString get主治医意見書のイメージファイルが存在区分(ReadOnlySharedFileEntryDescriptor descriptor,
+    public RString get主治医意見書のイメージファイルが存在区分(List<RString> 存在したイメージファイル名,
             RString 確認メッセージ出力区分) {
         RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> 主治医意見書イメージ_白黒 = get主治医意見書イメージ_白黒();
         List<RString> 主治医意見書イメージ_OCR = get主治医意見書イメージ_OCR();
-        List<RString> 存在したイメージファイル = new ArrayList<>();
         int 主治医意見書イメージファイルが存在しない = 0;
         for (RString ファイル名 : 主治医意見書イメージ_白黒) {
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), ファイル名))).toRString();
-                存在したイメージファイル.add(ファイル名);
-            } catch (ApplicationException e) {
+            if (!存在したイメージファイル名.contains(ファイル名)) {
                 主治医意見書イメージファイルが存在しない++;
             }
         }
         for (RString ファイル名 : 主治医意見書イメージ_OCR) {
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), ファイル名))).toRString();
-                存在したイメージファイル.add(ファイル名);
-            } catch (ApplicationException e) {
+            if (!存在したイメージファイル名.contains(ファイル名)) {
                 主治医意見書イメージファイルが存在しない++;
             }
         }
@@ -134,18 +113,18 @@ public class DeletePanelHandler {
             イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
         }
         if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-            if ((存在したイメージファイル.contains(new RString("E0001"))
-                    && 存在したイメージファイル.contains(new RString("E0001_BAK")))
-                    || (存在したイメージファイル.contains(new RString("E0002"))
-                    && 存在したイメージファイル.contains(new RString("E0002_BAK")))
-                    || (存在したイメージファイル.contains(new RString("D1005"))
-                    && 存在したイメージファイル.contains(new RString("D1005_BAK")))
-                    || (存在したイメージファイル.contains(new RString("D1008"))
-                    && 存在したイメージファイル.contains(new RString("D1008_BAK")))
-                    || (存在したイメージファイル.contains(new RString("D1026"))
-                    && 存在したイメージファイル.contains(new RString("D1026_BAK")))
-                    || (存在したイメージファイル.contains(new RString("D1027"))
-                    && 存在したイメージファイル.contains(new RString("D1027_BAK")))) {
+            if ((存在したイメージファイル名.contains(new RString("E0001"))
+                    && 存在したイメージファイル名.contains(new RString("E0001_BAK")))
+                    || (存在したイメージファイル名.contains(new RString("E0002"))
+                    && 存在したイメージファイル名.contains(new RString("E0002_BAK")))
+                    || (存在したイメージファイル名.contains(new RString("D1005"))
+                    && 存在したイメージファイル名.contains(new RString("D1005_BAK")))
+                    || (存在したイメージファイル名.contains(new RString("D1008"))
+                    && 存在したイメージファイル名.contains(new RString("D1008_BAK")))
+                    || (存在したイメージファイル名.contains(new RString("D1026"))
+                    && 存在したイメージファイル名.contains(new RString("D1026_BAK")))
+                    || (存在したイメージファイル名.contains(new RString("D1027"))
+                    && 存在したイメージファイル名.contains(new RString("D1027_BAK")))) {
                 イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
                 return イメージファイルが存在区分;
             }
@@ -156,21 +135,17 @@ public class DeletePanelHandler {
     /**
      * 「削除」ボタンを押下する場合、その他資料のイメージファイル存在チェックを実行します。
      *
-     * @param descriptor 共有ファイル
+     * @param 存在したイメージファイル名 存在したイメージファイル名
      * @param 確認メッセージ出力区分 確認メッセージ出力区分
      * @return イメージファイルが存在区分
      */
-    public RString getその他資料のイメージファイルが存在区分(ReadOnlySharedFileEntryDescriptor descriptor,
+    public RString getその他資料のイメージファイルが存在区分(List<RString> 存在したイメージファイル名,
             RString 確認メッセージ出力区分) {
         RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> その他資料イメージ = getその他資料イメージ();
-        List<RString> 存在したイメージファイル = new ArrayList<>();
         int その他資料イメージファイルが存在しない = 0;
         for (RString ファイル名 : その他資料イメージ) {
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), ファイル名))).toRString();
-                存在したイメージファイル.add(ファイル名);
-            } catch (ApplicationException e) {
+            if (!存在したイメージファイル名.contains(ファイル名)) {
                 その他資料イメージファイルが存在しない++;
             }
         }
@@ -179,8 +154,8 @@ public class DeletePanelHandler {
         }
         if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
             for (RString ファイル名 : getその他資料イメージ_原本あり()) {
-                if (存在したイメージファイル.contains(ファイル名)
-                        && 存在したイメージファイル.contains(ファイル名.concat("_BAK"))) {
+                if (存在したイメージファイル名.contains(ファイル名)
+                        && 存在したイメージファイル名.contains(ファイル名.concat("_BAK"))) {
                     イメージファイルが存在区分 = イメージファイルが存在区分_原本とマスキングが両方存在;
                     return イメージファイルが存在区分;
                 }
