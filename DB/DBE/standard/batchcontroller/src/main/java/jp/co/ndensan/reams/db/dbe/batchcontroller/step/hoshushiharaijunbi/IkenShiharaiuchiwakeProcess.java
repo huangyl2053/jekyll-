@@ -65,7 +65,6 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(new RString(IkenShiharaiuchiwakeReportSource.ReportSourceFields.iryokikanCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
     private Decimal 合計金額 = Decimal.ZERO;
@@ -152,11 +151,7 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     }
 
     private void バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JOBNO_NAME);
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
+        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
         RString 帳票名 = ReportIdDBE.DBE622004.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
