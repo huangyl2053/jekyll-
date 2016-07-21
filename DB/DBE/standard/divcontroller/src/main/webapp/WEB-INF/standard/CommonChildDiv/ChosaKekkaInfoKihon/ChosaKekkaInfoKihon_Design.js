@@ -4,6 +4,9 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_Moderu = function () {
+                return "onClick_Moderu";
+            };
             return Events;
         })();
         ChosaKekkaInfoKihon.Events = Events;
