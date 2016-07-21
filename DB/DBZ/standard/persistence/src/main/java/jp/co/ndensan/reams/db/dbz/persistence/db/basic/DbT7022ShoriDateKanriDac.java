@@ -1782,4 +1782,23 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendoNaiRenban, 年度内連番_2))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
     }
+
+    /**
+     * 処理日付管理マスタテーブルから処理名取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 処理名 List<RString>
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity get処理名(FlexibleYear 年度, List<RString> 処理名) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(nendo, 年度),
+                                in(shoriName, 処理名))).
+                order(by(kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }
