@@ -160,7 +160,7 @@ public class ShujiiIryokikanAndShujiiInput {
         if (!RString.isNullOrEmpty(div.getHdnShujiiRenrakuJiko())) {
             shinseiCodeModel.set連絡事項(div.getHdnShujiiRenrakuJiko());
         }
-        shinseiCodeModel.set表示モード(new RString("InputMode"));
+        shinseiCodeModel.set表示モード(NinteiShinseiCodeModel.HyojiMode.InputMode);
         ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
 
         return ResponseData.of(div).respond();

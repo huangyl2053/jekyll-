@@ -213,7 +213,7 @@ public class ShinseiKensakuHandler {
             parameter.setZenkaiYukoKikanStartTo(設定有効開始日To);
             parameter.setUseZenkaiYukoKikanStartTo(true);
         }
-        RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
+        RString 原因疾患 = finderDiv.getCcdGeninShikkan().getCode().value();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
             parameter.setUseGeninShikkanCode(true);

@@ -346,7 +346,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             useZenkaiNinteiShinseiJoho = true;
         }
         parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
-        RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
+        RString 原因疾患 = finderDiv.getCcdGeninShikkan().getCode().value();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
             parameter.setUseGeninShikkanCode(true);

@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,12 +23,8 @@ public class SonotaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtGeninShikkanCode")
-    private TextBoxCode txtGeninShikkanCode;
-    @JsonProperty("btnGeninShikkanGuide")
-    private ButtonDialog btnGeninShikkanGuide;
-    @JsonProperty("txtGeninShikkanName")
-    private TextBox txtGeninShikkanName;
+    @JsonProperty("ccdGeninShikkan")
+    private CodeInputDiv ccdGeninShikkan;
     @JsonProperty("txtShinseiKeikaNissu")
     private TextBoxNumRange txtShinseiKeikaNissu;
 
@@ -37,57 +35,12 @@ public class SonotaJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtGeninShikkanCode
-     * @return txtGeninShikkanCode
+     * getccdGeninShikkan
+     * @return ccdGeninShikkan
      */
-    @JsonProperty("txtGeninShikkanCode")
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return txtGeninShikkanCode;
-    }
-
-    /*
-     * settxtGeninShikkanCode
-     * @param txtGeninShikkanCode txtGeninShikkanCode
-     */
-    @JsonProperty("txtGeninShikkanCode")
-    public void setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.txtGeninShikkanCode = txtGeninShikkanCode;
-    }
-
-    /*
-     * getbtnGeninShikkanGuide
-     * @return btnGeninShikkanGuide
-     */
-    @JsonProperty("btnGeninShikkanGuide")
-    public ButtonDialog getBtnGeninShikkanGuide() {
-        return btnGeninShikkanGuide;
-    }
-
-    /*
-     * setbtnGeninShikkanGuide
-     * @param btnGeninShikkanGuide btnGeninShikkanGuide
-     */
-    @JsonProperty("btnGeninShikkanGuide")
-    public void setBtnGeninShikkanGuide(ButtonDialog btnGeninShikkanGuide) {
-        this.btnGeninShikkanGuide = btnGeninShikkanGuide;
-    }
-
-    /*
-     * gettxtGeninShikkanName
-     * @return txtGeninShikkanName
-     */
-    @JsonProperty("txtGeninShikkanName")
-    public TextBox getTxtGeninShikkanName() {
-        return txtGeninShikkanName;
-    }
-
-    /*
-     * settxtGeninShikkanName
-     * @param txtGeninShikkanName txtGeninShikkanName
-     */
-    @JsonProperty("txtGeninShikkanName")
-    public void setTxtGeninShikkanName(TextBox txtGeninShikkanName) {
-        this.txtGeninShikkanName = txtGeninShikkanName;
+    @JsonProperty("ccdGeninShikkan")
+    public ICodeInputDiv getCcdGeninShikkan() {
+        return ccdGeninShikkan;
     }
 
     /*

@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -923,33 +925,8 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return this.getSonotaJoho().getTxtGeninShikkanCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.getSonotaJoho().setTxtGeninShikkanCode(txtGeninShikkanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnGeninShikkanGuide() {
-        return this.getSonotaJoho().getBtnGeninShikkanGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnGeninShikkanGuide(ButtonDialog btnGeninShikkanGuide) {
-        this.getSonotaJoho().setBtnGeninShikkanGuide(btnGeninShikkanGuide);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtGeninShikkanName() {
-        return this.getSonotaJoho().getTxtGeninShikkanName();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanName(TextBox txtGeninShikkanName) {
-        this.getSonotaJoho().setTxtGeninShikkanName(txtGeninShikkanName);
+    public ICodeInputDiv getCcdGeninShikkan() {
+        return this.getSonotaJoho().getCcdGeninShikkan();
     }
 
     @JsonIgnore

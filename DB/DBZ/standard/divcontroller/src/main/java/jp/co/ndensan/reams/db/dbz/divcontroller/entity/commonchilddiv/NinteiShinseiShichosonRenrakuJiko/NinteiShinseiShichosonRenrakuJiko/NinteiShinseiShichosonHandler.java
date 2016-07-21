@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class NinteiShinseiShichosonHandler {
 
-    private static final RString InputMode = new RString("InputMode");
-    private static final RString ShokaiMode = new RString("ShokaiMode");
     private final NinteiShinseiShichosonRenrakuJikoDiv div;
 
     /**
@@ -37,12 +35,12 @@ public class NinteiShinseiShichosonHandler {
      */
     public void initialize(NinteiShinseiCodeModel shinseiCodeModel) {
         div.getTxtRenrakujiko().clearValue();
-        if (InputMode.equals(shinseiCodeModel.get表示モード())) {
+        if (NinteiShinseiCodeModel.HyojiMode.InputMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
             div.getBtnModoru().setDisabled(false);
             div.getBtnToroku().setDisabled(false);
             div.getTxtRenrakujiko().setDisabled(false);
-        } else if (ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
+        } else if (NinteiShinseiCodeModel.HyojiMode.ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
             div.getBtnModoru().setDisabled(false);
             div.getBtnToroku().setDisabled(true);

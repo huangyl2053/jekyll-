@@ -495,18 +495,6 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             };
 
-            Controls.prototype.txtGeninShikkanCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
-            };
-
-            Controls.prototype.btnGeninShikkanGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnGeninShikkanGuide"));
-            };
-
-            Controls.prototype.txtGeninShikkanName = function () {
-                return new UZA.TextBox(this.convFiledName("txtGeninShikkanName"));
-            };
-
             Controls.prototype.txtShinseiKeikaNissu = function () {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));
             };
