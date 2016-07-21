@@ -810,3 +810,5 @@ dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectByModifyButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectBySelectButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onClick_btnSearchMishinsa
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad
+dbc/db/dbc/PanelAll/onLoad
+dbc/db/dbc/PanelAll/onClick_Batch
