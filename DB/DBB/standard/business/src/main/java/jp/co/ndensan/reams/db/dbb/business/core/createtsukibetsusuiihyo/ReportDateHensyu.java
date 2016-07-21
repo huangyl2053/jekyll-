@@ -946,54 +946,54 @@ public class ReportDateHensyu {
         if (listLength > i && 第一段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_1段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_1段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_1段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_1段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_1段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_1段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_1段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_1段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第二段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_2段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_2段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_2段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_2段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_2段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_2段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_2段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_2段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第三段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_3段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_3段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_3段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_3段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_3段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_3段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_3段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_3段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第四段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_4段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_4段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_4段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_4段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_4段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_4段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_4段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_4段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第五段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_5段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_5段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_5段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_5段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_5段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_5段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_5段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_5段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第六段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_6段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_6段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_6段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_6段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_6段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_6段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_6段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_6段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
@@ -1008,54 +1008,54 @@ public class ReportDateHensyu {
         if (listLength > i && 第七段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_7段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_7段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_7段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_7段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_7段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_7段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_7段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_7段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第八段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_8段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_8段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_8段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_8段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_8段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_8段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_8段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_8段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第九段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_9段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_9段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_9段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_9段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_9段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_9段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_9段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_9段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第十段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_10段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_10段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_10段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_10段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_10段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_10段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_10段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_10段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第十一段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_11段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_11段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_11段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_11段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_11段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_11段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_11段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_11段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
         if (listLength > i && 第十二段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_12段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_12段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_12段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_12段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_12段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_12段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_12段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_12段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
             i = i + 1;
         }
@@ -1067,25 +1067,25 @@ public class ReportDateHensyu {
         if (listLength > i && 第十三段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_13段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_13段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_13段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_13段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_13段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_13段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_13段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_13段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         if (listLength > i && 第十四段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_14段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_14段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_14段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_14段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_14段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_14段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_14段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_14段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         if (listLength > i && 第十五段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_15段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_15段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_15段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_15段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_15段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_15段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_15段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_15段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         return entity;
@@ -1096,50 +1096,50 @@ public class ReportDateHensyu {
         if (listLength > i && 第十六段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_16段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_16段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_16段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_16段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_16段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_16段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_16段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_16段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         if (listLength > i && 第十七段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_17段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_17段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_17段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_17段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_17段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_17段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_17段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_17段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         if (listLength > i && 第十八段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_18段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_18段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_18段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_18段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_18段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_18段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_18段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_18段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         if (listLength > i && 第十九段階.equals(gemmenJyohoList.get(i).getHokenryoDankai())) {
             entity.set人数_19段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
             entity.set人数_19段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHokenryoDankaiKanendoNinsu()));
-            entity.set人数_19段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
+            entity.set人数_19段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
             entity.set金額_19段階_Title(gemmenJyohoList.get(i).getHokenryoDankai());
-            entity.set金額_19段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoNinsuGoukeyi()));
+            entity.set金額_19段階_過年度(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemmenGaku()));
             entity.set金額_19段階_合計(getNinsuuOrKinkaku(gemmenJyohoList.get(i).getHoDankaiKanendoGemenGakuGoukei()));
         }
         for (GemmenJyoho gemmenJyoho : gemmenJyohoList) {
             if (不明.equals(gemmenJyoho.getHokenryoDankai())) {
                 entity.set人数_20段階_Title(gemmenJyoho.getHokenryoDankai());
                 entity.set人数_20段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHokenryoDankaiKanendoNinsu()));
-                entity.set人数_20段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
+                entity.set人数_20段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
                 entity.set金額_20段階_Title(gemmenJyoho.getHokenryoDankai());
-                entity.set金額_20段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
+                entity.set金額_20段階_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
                 entity.set金額_20段階_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
             }
             if (合計.equals(gemmenJyoho.getHokenryoDankai())) {
                 entity.set人数_合計_Title(gemmenJyoho.getHokenryoDankai());
                 entity.set人数_合計_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHokenryoDankaiKanendoNinsu()));
-                entity.set人数_合計_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
+                entity.set人数_合計_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
                 entity.set金額_合計_Title(gemmenJyoho.getHokenryoDankai());
-                entity.set金額_合計_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoNinsuGoukeyi()));
+                entity.set金額_合計_過年度(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemmenGaku()));
                 entity.set金額_合計_合計(getNinsuuOrKinkaku(gemmenJyoho.getHoDankaiKanendoGemenGakuGoukei()));
             }
         }
