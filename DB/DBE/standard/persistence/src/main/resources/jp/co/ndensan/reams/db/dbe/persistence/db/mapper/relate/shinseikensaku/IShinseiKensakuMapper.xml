@@ -31,39 +31,66 @@
         <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" />
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
+
     <select resultOrdered="true" id="selectShinseiJoho" resultMap="ResultMap_ShinseiKensakuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
             fetchSize="500">
         SELECT
-            DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-           ,DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-           ,DbT5101NinteiShinseiJoho."hihokenshaNo"
-           ,DbT5101NinteiShinseiJoho."ninteiShinseiYMD"
-           ,DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode"
-           ,DbT5101NinteiShinseiJoho."seinengappiYMD"
-           ,DbT5101NinteiShinseiJoho."age"
-           ,DbT5101NinteiShinseiJoho."seibetsu"
-           ,DbT5101NinteiShinseiJoho."hihokenshaName"
-           ,DbT5101NinteiShinseiJoho."hihokenshaKana"
-           ,DbT5101NinteiShinseiJoho."yubinNo"
-           ,DbT5101NinteiShinseiJoho."jusho"
-           ,DbT5101NinteiShinseiJoho."telNo"
-           ,DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode"
-           ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart"
-           ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd"
-           ,zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode"
-           ,zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan"
-           ,DbT7051KoseiShichosonMaster."shichosonMeisho"
-           ,DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"
-           ,DbT5913ChosainJoho."chosainShimei"
-           ,DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
-           ,DbT5912ShujiiJoho."shujiiName"
-            <if test="useShujiiIkenshoIraiJoho">
-                ,DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
-            </if>
-            ,DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+            <include refid="selectShinseiJoho"/>
         FROM
-            rgdb."DbT5101NinteiShinseiJoho"  DbT5101NinteiShinseiJoho
+            <include refid="tablesWithParameter"/>
+        ORDER BY
+            DbT5101NinteiShinseiJoho."hihokenshaKana",
+            DbT5101NinteiShinseiJoho."ninteiShinseiYMD"
+        LIMIT #{limitCount}
+    </select>
+
+    <select id="countShinseiJoho" resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
+            fetchSize="500">
+        SELECT
+            count(1)
+        FROM
+            <include refid="tablesWithParameter"/>
+    </select>
+
+
+
+    <sql id="selectShinseiJoho">
+    <!-- SELECT -->
+        DbT5101NinteiShinseiJoho."shinseishoKanriNo",
+        DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
+        DbT5101NinteiShinseiJoho."hihokenshaNo",
+        DbT5101NinteiShinseiJoho."ninteiShinseiYMD",
+        DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode",
+        DbT5101NinteiShinseiJoho."seinengappiYMD",
+        DbT5101NinteiShinseiJoho."age",
+        DbT5101NinteiShinseiJoho."seibetsu",
+        DbT5101NinteiShinseiJoho."hihokenshaName",
+        DbT5101NinteiShinseiJoho."hihokenshaKana",
+        DbT5101NinteiShinseiJoho."yubinNo",
+        DbT5101NinteiShinseiJoho."jusho",
+        DbT5101NinteiShinseiJoho."telNo",
+        DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode",
+        DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart",
+        DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd",
+        zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode",
+        zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan",
+        DbT7051KoseiShichosonMaster."shichosonMeisho",
+        DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho",
+        DbT5913ChosainJoho."chosainShimei",
+        DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
+        DbT5912ShujiiJoho."shujiiName",
+        <if test="useShujiiIkenshoIraiJoho">
+            DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
+        </if>
+        DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+    <!-- FROM -->
+    </sql>
+
+    <sql id="tablesWithParameter">
+    <!-- FROM -->
+        rgdb."DbT5101NinteiShinseiJoho"  DbT5101NinteiShinseiJoho
         <if test="useNinteichosahyoGaikyoChosa">
            LEFT JOIN
             rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202NinteichosahyoGaikyoChosa
@@ -567,10 +594,6 @@
                     </if>
                 </if>
             </where>
-        ORDER BY
-            DbT5101NinteiShinseiJoho."hihokenshaKana",
-            DbT5101NinteiShinseiJoho."ninteiShinseiYMD"
-        LIMIT #{limitCount}
-    </select>
+    </sql>
 
 </mapper>

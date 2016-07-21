@@ -23,4 +23,12 @@ public interface IShinseiKensakuMapper {
      * @return 認定申請情報
      */
     List<ShinseiKensakuRelateEntity> selectShinseiJoho(ShinseiKensakuMapperParameter parameter);
+
+    /**
+     * 指定条件による認定申請情報の該当件数を返します。
+     *
+     * @param parameter パラメータ
+     * @return 認定申請情報の件数
+     */
+    int countShinseiJoho(ShinseiKensakuMapperParameter parameter);
 }

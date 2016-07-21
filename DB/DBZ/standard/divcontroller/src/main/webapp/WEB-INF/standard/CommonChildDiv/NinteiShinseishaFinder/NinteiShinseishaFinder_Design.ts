@@ -9,10 +9,6 @@ module DBZ {
 
         export class Events {
 
-            public static onBlur_txtShinseishaName(): string {
-                return "onBlur_txtShinseishaName";
-            }
-
             public static onClick_ShosaiJoken(): string {
                 return "onClick_ShosaiJoken";
             }

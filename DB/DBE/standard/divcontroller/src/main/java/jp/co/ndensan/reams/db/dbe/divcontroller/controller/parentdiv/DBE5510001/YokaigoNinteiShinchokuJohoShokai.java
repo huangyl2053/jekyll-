@@ -81,9 +81,9 @@ public class YokaigoNinteiShinchokuJohoShokai {
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnKensaku(YokaigoNinteiShinchokuJohoShokaiDiv div) {
 
-        SearchResult<YokaigoNinteiShinchokuJoho> serchResult = YokaigoNinteiShinchokuJohoShokaiFinder
+        SearchResult<YokaigoNinteiShinchokuJoho> searchResult = YokaigoNinteiShinchokuJohoShokaiFinder
                 .createInstance().selectItirannJoho(get検索パラメータ(div));
-        getHandler(div).btnKensaku(serchResult);
+        getHandler(div).btnKensaku(searchResult);
         return ResponseData.of(div).respond();
     }
 

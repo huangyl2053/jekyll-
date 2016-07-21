@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.RStrings;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import lombok.Getter;
 
 /**
@@ -40,7 +42,7 @@ public final class YokaigoNinteiParamter {
     private final RString shikibetsuCode;
     private final boolean shikibetsuCodeFlag;
     private final RString shimei;
-    private final boolean shimeiFlag;
+    private final boolean searchesShimeiByKana;
     private final boolean hizukeHaniKey0;
     private final boolean hizukeHaniKey1;
     private final boolean hizukeHaniKey2;
@@ -89,7 +91,7 @@ public final class YokaigoNinteiParamter {
      * @param shikibetsuCode 識別コード
      * @param shikibetsuCodeFlag 識別コードFlag
      * @param shimei 氏名
-     * @param shimeiFlag 氏名Flag
+     * @param searchesShimeiByKanaFlag 氏名カナ検索Flag
      * @param hizukeHaniKey0 申請日
      * @param hizukeHaniKey1 認定調査依頼日
      * @param hizukeHaniKey2 主治医意見書作成依頼日
@@ -133,7 +135,7 @@ public final class YokaigoNinteiParamter {
             RString shikibetsuCode,
             boolean shikibetsuCodeFlag,
             RString shimei,
-            boolean shimeiFlag,
+            boolean searchesShimeiByKana,
             boolean hizukeHaniKey0,
             boolean hizukeHaniKey1,
             boolean hizukeHaniKey2,
@@ -178,7 +180,7 @@ public final class YokaigoNinteiParamter {
         this.shikibetsuCode = shikibetsuCode;
         this.shikibetsuCodeFlag = shikibetsuCodeFlag;
         this.shimei = shimei;
-        this.shimeiFlag = shimeiFlag;
+        this.searchesShimeiByKana = searchesShimeiByKana;
         this.hizukeHaniKey0 = hizukeHaniKey0;
         this.hizukeHaniKey1 = hizukeHaniKey1;
         this.hizukeHaniKey2 = hizukeHaniKey2;
@@ -268,6 +270,8 @@ public final class YokaigoNinteiParamter {
         } else if (DATE_SOURCE_KEY3.equals(matchType)) {
             matchTypekay3 = true;
         }
+        RString shimeiForKensaku = RString.isNullOrEmpty(shimei) ? RString.EMPTY
+                                   : RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(shimei);
         return new YokaigoNinteiParamter(matchTypekay0,
                 matchTypekay1,
                 matchTypekay2,
@@ -282,8 +286,8 @@ public final class YokaigoNinteiParamter {
                 !hihokenshaNo.isEmpty(),
                 shikibetsuCode,
                 !shikibetsuCode.isEmpty(),
-                shimei,
-                !shimei.isEmpty(),
+                shimeiForKensaku,
+                RStringUtil.is半角カナOnly(shimeiForKensaku),
                 DATE_SOURCE_KEY1.equals(hizukeHani),
                 DATE_SOURCE_KEY2.equals(hizukeHani),
                 DATE_SOURCE_KEY3.equals(hizukeHani),

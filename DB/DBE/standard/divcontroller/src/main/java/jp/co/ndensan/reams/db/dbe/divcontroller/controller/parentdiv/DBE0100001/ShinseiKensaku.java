@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -58,8 +59,8 @@ public class ShinseiKensaku {
         } else if (MENUID_DBEMN11003.equals(menuID)) {
             return ResponseData.of(div).setState(DBE0100001StateName.個人照会);
         } else if (MENUID_DBEMN14001.equals(menuID)
-                || MENUID_DBEMN32002.equals(menuID)
-                || MENUID_DBEMN31005.equals(menuID)) {
+                   || MENUID_DBEMN32002.equals(menuID)
+                   || MENUID_DBEMN31005.equals(menuID)) {
             return ResponseData.of(div).setState(DBE0100001StateName.情報提供);
         }
         return ResponseData.of(div).respond();
@@ -88,22 +89,22 @@ public class ShinseiKensaku {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        List<ShinseiKensakuBusiness> list = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter());
-        ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(list));
-        if (!list.isEmpty()) {
-            getHandler(div).setShinseiJohoIchiran(list);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
-            div.getBtnClear().setDisabled(true);
-            div.getTxtMaxDisp().setDisabled(true);
-            div.getBtnKensaku().setDisabled(true);
-            div.getBtnModoru().setDisabled(false);
-            IUrControlData controlData = UrControlDataFactory.createInstance();
-            RString menuID = controlData.getMenuID();
-            if (MENUID_DBEMN11001.equals(menuID)) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
-            }
+        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter());
+        ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
+        if (searchResult.records().isEmpty()) {
+            return ResponseData.of(div).respond();
         }
-
+        getHandler(div).setShinseiJohoIchiran(searchResult);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
+        div.getBtnClear().setDisabled(true);
+        div.getTxtMaxDisp().setDisabled(true);
+        div.getBtnKensaku().setDisabled(true);
+        div.getBtnModoru().setDisabled(false);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
+        if (MENUID_DBEMN11001.equals(menuID)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
+        }
         return ResponseData.of(div).respond();
     }
 

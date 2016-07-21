@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryo
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -160,18 +159,6 @@ public class NinteiShinseishaFinder {
         if (!RString.isNullOrEmpty(txtHihokenshaNumber)) {
             div.getTxtHihokenshaNumber().setValue(txtHihokenshaNumber.padZeroToLeft(SIZE));
         }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 被保険者氏名に平仮名のみが入力されている場合、カタカナへ変換します。
-     * 漢字を含む場合、この変換は行いません。
-     *
-     * @param div NinteiShinseishaFinderDiv
-     * @return ResponseData
-     */
-    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtShinseishaName(NinteiShinseishaFinderDiv div) {
-        getHandler(div).convert被保険者氏名ToカタカタIfNotContains漢字();
         return ResponseData.of(div).respond();
     }
 

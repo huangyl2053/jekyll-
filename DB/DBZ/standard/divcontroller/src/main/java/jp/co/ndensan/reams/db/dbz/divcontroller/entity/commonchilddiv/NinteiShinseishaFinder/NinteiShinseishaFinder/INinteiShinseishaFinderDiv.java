@@ -15,7 +15,7 @@ public interface INinteiShinseishaFinderDiv extends ICommonChildDivBasePropertie
     void initialize();
 
     /**
-     * 検索条件DIVを取得します。被保険者氏名のonBlurイベントは反映済みとして返却します。
+     * 検索条件DIVを取得します。
      *
      * @return NinteiShinseishaFinderDiv
      */

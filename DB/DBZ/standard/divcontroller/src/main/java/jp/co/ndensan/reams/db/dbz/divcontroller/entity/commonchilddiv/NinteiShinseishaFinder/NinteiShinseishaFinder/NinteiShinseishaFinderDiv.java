@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -1743,7 +1743,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
      */
     @Override
     public NinteiShinseishaFinderDiv getNinteiShinseishaFinderDiv() {
-        getHandler(this).convert被保険者氏名ToカタカタIfNotContains漢字();
         return this;
     }
 

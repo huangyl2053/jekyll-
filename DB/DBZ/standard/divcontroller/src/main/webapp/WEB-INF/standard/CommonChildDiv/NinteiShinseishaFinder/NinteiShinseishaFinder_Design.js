@@ -4,10 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlur_txtShinseishaName = function () {
-                return "onBlur_txtShinseishaName";
-            };
-
             Events.onClick_ShosaiJoken = function () {
                 return "onClick_ShosaiJoken";
             };

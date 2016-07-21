@@ -150,18 +150,36 @@
             <if test="shikibetsuCodeFlag">
                 AND DbT5101."shikibetsuCode" = #{shikibetsuCode}
             </if>
-            <if test="matchTypekey1">
-                AND DbT5101."hihokenshaName" LIKE #{shimei}||'%'
-            </if>
-            <if test="matchTypekey2">
-                AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}
-            </if>
-            <if test="matchTypekey3">
-                AND DbT5101."hihokenshaName" = #{shimei}
-            </if>
-            <if test="matchTypekey4">
-                AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}||'%'
-            </if>
+            <choose>
+                <when test="searchesShimeiByKana">
+                    <if test="matchTypekey1">
+                        AND DbT5101."hihokenshaKana" LIKE #{shimei}||'%'
+                    </if>
+                    <if test="matchTypekey2">
+                        AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}
+                    </if>
+                    <if test="matchTypekey3">
+                        AND DbT5101."hihokenshaKana" = #{shimei}
+                    </if>
+                    <if test="matchTypekey4">
+                        AND DbT5101."hihokenshaKana" LIKE '%'||#{shimei}||'%'
+                    </if>
+                </when>
+                <otherwise>
+                    <if test="matchTypekey1">
+                        AND DbT5101."hihokenshaName" LIKE #{shimei}||'%'
+                    </if>
+                    <if test="matchTypekey2">
+                        AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}
+                    </if>
+                    <if test="matchTypekey3">
+                        AND DbT5101."hihokenshaName" = #{shimei}
+                    </if>
+                    <if test="matchTypekey4">
+                        AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}||'%'
+                    </if>
+                </otherwise>
+            </choose>
         </if>
         <if test="radKensakuHohoKey1">
             <if test="hizukeHaniKey0">

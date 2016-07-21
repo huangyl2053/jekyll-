@@ -27,10 +27,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 要介護認定申請検索のハンドラークラスです。
@@ -73,7 +73,7 @@ public class ShinseiKensakuHandler {
      */
     public ShinseiKensakuMapperParameter createParameter() {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
-        parameter.setLimitCount(Integer.parseInt(div.getTxtMaxDisp().getValue().toString()));
+        parameter.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
         editShosaiJokenForParameter(finderDiv, parameter);
         editNinteiChosaForParameter(finderDiv, parameter);
@@ -83,6 +83,10 @@ public class ShinseiKensakuHandler {
         editNowPhaseForParameter(finderDiv, parameter);
         editChkForParameter(finderDiv, parameter);
         return parameter;
+    }
+
+    private int get最大表示件数() {
+        return Integer.parseInt(div.getTxtMaxDisp().getValue().toString());
     }
 
     private void editShinsakaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
@@ -642,9 +646,9 @@ public class ShinseiKensakuHandler {
      *
      * @param list 検索結果
      */
-    public void setShinseiJohoIchiran(List<ShinseiKensakuBusiness> list) {
+    public void setShinseiJohoIchiran(SearchResult<ShinseiKensakuBusiness> searchResult) {
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
-        for (ShinseiKensakuBusiness business : list) {
+        for (ShinseiKensakuBusiness business : searchResult.records()) {
             dgShinseiJoho_Row row = new dgShinseiJoho_Row();
             row.setHokensha(nullToEmpty(business.get市町村名称()));
             row.setHihokenshaNo(nullToEmpty(business.get被保険者番号()));
@@ -695,7 +699,9 @@ public class ShinseiKensakuHandler {
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
             dataSource.add(row);
         }
-        div.getShinseiJohoIchiran().getDgShinseiJoho().setDataSource(dataSource);
+        div.getDgShinseiJoho().setDataSource(dataSource);
+        div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大表示件数());
+        div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
     }
 
     private RString nullToEmpty(RString obj) {

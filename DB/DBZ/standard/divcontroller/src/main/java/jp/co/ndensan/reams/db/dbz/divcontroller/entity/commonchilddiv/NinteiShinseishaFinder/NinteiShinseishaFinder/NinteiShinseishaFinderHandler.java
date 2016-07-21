@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
@@ -27,7 +29,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -54,12 +56,12 @@ public class NinteiShinseishaFinderHandler {
      * 条件検索画面初期化処理です。
      */
     public void initialize() {
-
         div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護認定);
         // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         List<KeyValueDataSource> ddlShichosonCode = new ArrayList<>();
         ddlShichosonCode.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         div.getDdlShichosonCode().setDataSource(ddlShichosonCode);
+        div.getDdlShichosonCode().setDisplayNone(true); // 暫定対応
         List<KeyValueDataSource> ddlShinseijiShinseiKubun = new ArrayList<>();
         ddlShinseijiShinseiKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
@@ -429,24 +431,16 @@ public class NinteiShinseishaFinderHandler {
         div.getChkChosaIrai().setSelectedItemsByKey(keys);
         div.getChkShinsakaiToroku().setSelectedItemsByKey(keys);
         div.getChkIkenshoIrai().setSelectedItemsByKey(keys);
-        div.getChkNijiHantei().setSelectedItemsByKey(keys);
+        div.getChkNijiHantei().setSelectedItemsByKey(getKeySelectingLastOnly(div.getChkNijiHantei()));
         div.getChkChosaNyushu().setSelectedItemsByKey(keys);
         div.getChkTsuchiShori().setSelectedItemsByKey(keys);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(keys);
         div.getChkGetsureiShori().setSelectedItemsByKey(keys);
     }
 
-    /**
-     * 被保険者氏名に平仮名のみが入力されている場合、すべてをカタカナへ変換します。
-     * 漢字を含む場合、この変換は行いません。
-     */
-    public void convert被保険者氏名ToカタカタIfNotContains漢字() {
-        RString txtShinseishaName = div.getTxtHihokenshaName().getValue();
-        if (!RString.isNullOrEmpty(txtShinseishaName)) {
-            txtShinseishaName = RStringUtil.convertひらがなtoカタカナ(txtShinseishaName);
-            if (RStringUtil.isカタカナOnly(txtShinseishaName)) {
-                div.getTxtHihokenshaName().setValue(txtShinseishaName);
-            }
-        }
+    private List<RString> getKeySelectingLastOnly(CheckBoxList cbl) {
+        List<KeyValueDataSource> list = cbl.getDataSource();
+        return list.isEmpty() ? Collections.<RString>emptyList()
+               : Arrays.asList(list.get(list.size() - 1).getKey());
     }
 }

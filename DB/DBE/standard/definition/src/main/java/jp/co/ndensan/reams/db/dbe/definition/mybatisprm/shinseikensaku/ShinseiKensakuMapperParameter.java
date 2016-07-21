@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.util.RStrings;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -284,8 +285,33 @@ public class ShinseiKensakuMapperParameter {
      * @param hihokenshaName 検索に用いる被保険者氏名
      */
     public void set被保険者名(RString hihokenshaName) {
-        this.hihokenshaName = hihokenshaName == null ? RString.EMPTY : hihokenshaName;
-        this.useHihokenshaKana = RStringUtil.isカタカナOnly(this.hihokenshaName);
+        if (RString.isNullOrEmpty(hihokenshaName)) {
+            this.hihokenshaName = RString.EMPTY;
+            this.useHihokenshaKana = false;
+            this.useHihokenshaName = false;
+            return;
+        }
+        RString converted = RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(hihokenshaName);
+        this.hihokenshaName = converted;
+        this.useHihokenshaKana = RStringUtil.is半角カナOnly(converted);
         this.useHihokenshaName = !this.useHihokenshaKana;
+    }
+
+    /**
+     * 被保険者名カナ検索の有無を返却します。
+     *
+     * @return 被保険者名カナ検索の有無
+     */
+    boolean usesHihokenshaKana() {
+        return this.useHihokenshaKana;
+    }
+
+    /**
+     * 被保険者名漢字・平仮名検索の有無を返却します。
+     *
+     * @return 被保険者名漢字・平仮名検索の有無
+     */
+    boolean usesHihokenshaName() {
+        return this.useHihokenshaName;
     }
 }
