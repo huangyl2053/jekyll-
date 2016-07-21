@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.report.ninteichosahyogaikyotokki;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Property;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Report;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyogaikyotokki.GaikyotokkiA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
@@ -22,11 +22,11 @@ public class GaikyotokkiA4PrintService {
     /**
      * 要介護認定調査票（概況特記）を印刷します。
      *
-     * @param entity 要介護認定調査票（概況特記）パラメータクラス。
+     * @param business 要介護認定調査票（概況特記）パラメータクラス。
      * @return {@link GaikyotokkiA4Report}
      */
-    public SourceDataCollection print(GaikyotokkiA4Entity entity) {
+    public SourceDataCollection print(GaikyotokkiA4Business business) {
         GaikyotokkiA4Property property = new GaikyotokkiA4Property();
-        return new Printer<GaikyotokkiA4ReportSource>().spool(property, new GaikyotokkiA4Report(entity));
+        return new Printer<GaikyotokkiA4ReportSource>().spool(property, new GaikyotokkiA4Report(business));
     }
 }

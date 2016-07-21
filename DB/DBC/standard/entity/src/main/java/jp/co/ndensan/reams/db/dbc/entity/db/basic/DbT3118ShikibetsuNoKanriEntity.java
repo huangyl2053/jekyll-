@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 識別番号管理テーブルのエンティティクラスです。
@@ -86,7 +86,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
     private RString tokuteinyushoshaSetteiKubun;
     private RString shakaifukushiKeigenSetteiKubun;
     private RString careManagementSetteiKubun;
-    private RString shoteiShikkanSetteiKubun;
+    private RString tokuteiShikkanSetteiKubun;
     private RString meisaiJushochitokureiSetteiKubun;
     private RString shukeiSetteiKubun;
     private int hyoujiJun;
@@ -1195,8 +1195,8 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * @return 特定疾患施設療養設定区分
      */
     @CheckForNull
-    public RString getShoteiShikkanSetteiKubun() {
-        return shoteiShikkanSetteiKubun;
+    public RString getTokuteiShikkanSetteiKubun() {
+        return tokuteiShikkanSetteiKubun;
     }
 
     /**
@@ -1204,10 +1204,10 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * <br/>
      * <br/>0：設定不可、1：設定可（必須）、2：設定可（任意）
      *
-     * @param shoteiShikkanSetteiKubun 特定疾患施設療養設定区分
+     * @param tokuteiShikkanSetteiKubun 特定疾患施設療養設定区分
      */
-    public void setShoteiShikkanSetteiKubun(RString shoteiShikkanSetteiKubun) {
-        this.shoteiShikkanSetteiKubun = shoteiShikkanSetteiKubun;
+    public void setTokuteiShikkanSetteiKubun(RString tokuteiShikkanSetteiKubun) {
+        this.tokuteiShikkanSetteiKubun = tokuteiShikkanSetteiKubun;
     }
 
     /**
@@ -1302,7 +1302,8 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      * このエンティティの主キーが他の{@literal DbT3118ShikibetsuNoKanriEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3118ShikibetsuNoKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3118ShikibetsuNoKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3118ShikibetsuNoKanriEntity other) {
@@ -1375,7 +1376,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
         this.tokuteinyushoshaSetteiKubun = entity.tokuteinyushoshaSetteiKubun;
         this.shakaifukushiKeigenSetteiKubun = entity.shakaifukushiKeigenSetteiKubun;
         this.careManagementSetteiKubun = entity.careManagementSetteiKubun;
-        this.shoteiShikkanSetteiKubun = entity.shoteiShikkanSetteiKubun;
+        this.tokuteiShikkanSetteiKubun = entity.tokuteiShikkanSetteiKubun;
         this.meisaiJushochitokureiSetteiKubun = entity.meisaiJushochitokureiSetteiKubun;
         this.shukeiSetteiKubun = entity.shukeiSetteiKubun;
         this.hyoujiJun = entity.hyoujiJun;
@@ -1389,7 +1390,7 @@ public class DbT3118ShikibetsuNoKanriEntity extends DbTableEntityBase<DbT3118Shi
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuNo, tekiyoKaishiYM, tekiyoShuryoYM, meisho, ryakusho, meisho2, shikibetsuNoKubon, kyufujissekiKubun, kyufuBunruiKubun, sentakuKanoShuruiCode01, sentakuKanoShuruiCode02, sentakuKanoShuruiCode03, sentakuKanoShuruiCode04, sentakuKanoShuruiCode05, sentakuKanoShuruiCode06, sentakuKanoShuruiCode07, sentakuKanoShuruiCode08, sentakuKanoShuruiCode09, sentakuKanoShuruiCode10, sentakuKanoShuruiCode11, sentakuKanoShuruiCode12, sentakuKanoShuruiCode13, sentakuKanoShuruiCode14, sentakuKanoShuruiCode15, sentakuKanoShuruiCode16, sentakuKanoShuruiCode17, sentakuKanoShuruiCode18, sentakuKanoShuruiCode19, sentakuKanoShuruiCode20, shafukuSentakuKanoShuruiCode01, shafukuSentakuKanoShuruiCode02, shafukuSentakuKanoShuruiCode03, shafukuSentakuKanoShuruiCode04, shafukuSentakuKanoShuruiCode05, shafukuSentakuKanoShuruiCode06, shafukuSentakuKanoShuruiCode07, shafukuSentakuKanoShuruiCode08, shafukuSentakuKanoShuruiCode09, shafukuSentakuKanoShuruiCode10, kihonSetteiKubun, meisaiSetteiKubun, kinkyuShisetsuRyoyoSetteiKubun, tokuteiShinryoSetteiKubun, shokujiHiyosetteiKubun, kyotakuKeikakuSetteiKubun, fukushoyouguKonyuSetteiKubun, jutakukaishuSetteiKubun, kogakuKaigoSetteiKubun, tokuteishinryoTokubetsuryoyoSetteiKubun, tokuteinyushoshaSetteiKubun, shakaifukushiKeigenSetteiKubun, careManagementSetteiKubun, shoteiShikkanSetteiKubun, meisaiJushochitokureiSetteiKubun, shukeiSetteiKubun, hyoujiJun, kagoMoshitateYoshikiNo);
+        return super.toMd5(shikibetsuNo, tekiyoKaishiYM, tekiyoShuryoYM, meisho, ryakusho, meisho2, shikibetsuNoKubon, kyufujissekiKubun, kyufuBunruiKubun, sentakuKanoShuruiCode01, sentakuKanoShuruiCode02, sentakuKanoShuruiCode03, sentakuKanoShuruiCode04, sentakuKanoShuruiCode05, sentakuKanoShuruiCode06, sentakuKanoShuruiCode07, sentakuKanoShuruiCode08, sentakuKanoShuruiCode09, sentakuKanoShuruiCode10, sentakuKanoShuruiCode11, sentakuKanoShuruiCode12, sentakuKanoShuruiCode13, sentakuKanoShuruiCode14, sentakuKanoShuruiCode15, sentakuKanoShuruiCode16, sentakuKanoShuruiCode17, sentakuKanoShuruiCode18, sentakuKanoShuruiCode19, sentakuKanoShuruiCode20, shafukuSentakuKanoShuruiCode01, shafukuSentakuKanoShuruiCode02, shafukuSentakuKanoShuruiCode03, shafukuSentakuKanoShuruiCode04, shafukuSentakuKanoShuruiCode05, shafukuSentakuKanoShuruiCode06, shafukuSentakuKanoShuruiCode07, shafukuSentakuKanoShuruiCode08, shafukuSentakuKanoShuruiCode09, shafukuSentakuKanoShuruiCode10, kihonSetteiKubun, meisaiSetteiKubun, kinkyuShisetsuRyoyoSetteiKubun, tokuteiShinryoSetteiKubun, shokujiHiyosetteiKubun, kyotakuKeikakuSetteiKubun, fukushoyouguKonyuSetteiKubun, jutakukaishuSetteiKubun, kogakuKaigoSetteiKubun, tokuteishinryoTokubetsuryoyoSetteiKubun, tokuteinyushoshaSetteiKubun, shakaifukushiKeigenSetteiKubun, careManagementSetteiKubun, tokuteiShikkanSetteiKubun, meisaiJushochitokureiSetteiKubun, shukeiSetteiKubun, hyoujiJun, kagoMoshitateYoshikiNo);
     }
 
 // </editor-fold>

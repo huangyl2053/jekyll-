@@ -1625,12 +1625,25 @@ public class HonSanteiIdoKanendoFuka {
                 for (Decimal 普徴期別金額 : 普徴額リスト) {
                     bodyList.add(formatDecimal(普徴期別金額));
                 }
-                bodyList.add(計算後情報_宛名_口座Entity.get調定事由1());
+                bodyList.add(get調定事由(計算後情報_宛名_口座Entity));
                 toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
             csvListWriter.close();
         }
+    }
+
+    private RString get調定事由(KeisangojohoAtenaKozaEntity entity) {
+        RStringBuilder 調定事由builder = new RStringBuilder();
+        RString 調定事由1 = entity.get調定事由1();
+        RString 調定事由2 = entity.get調定事由2();
+        RString 調定事由3 = entity.get調定事由3();
+        RString 調定事由4 = entity.get調定事由4();
+        調定事由builder.append(調定事由1 == null ? 空 : 調定事由1);
+        調定事由builder.append(調定事由2 == null || 調定事由2.isEmpty() ? 空 : RString.HALF_SPACE.concat(調定事由2));
+        調定事由builder.append(調定事由3 == null || 調定事由3.isEmpty() ? 空 : RString.HALF_SPACE.concat(調定事由3));
+        調定事由builder.append(調定事由4 == null || 調定事由4.isEmpty() ? 空 : RString.HALF_SPACE.concat(調定事由4));
+        return 調定事由builder.toRString().trimStart();
     }
 
     private void toBodyList(List<RString> bodyList) {

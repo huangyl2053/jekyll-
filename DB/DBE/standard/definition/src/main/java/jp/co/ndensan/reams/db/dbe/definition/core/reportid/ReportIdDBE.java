@@ -487,6 +487,10 @@ public enum ReportIdDBE {
      */
     DBE601004(new ReportId("DBE601004_ikenhoshuichiran"), new RString("主治医意見書作成報酬一覧表")),
     /**
+     * 認定調査依頼履歴一覧表の帳票ID。
+     */
+    DBE220004(new ReportId("DBE220004_ChosairairirekiIchiran"), new RString("認定調査依頼履歴一覧表")),
+    /**
      * 介護認定審査会委員報酬一覧表の帳票ID。
      */
     DBE601005(new ReportId("DBE601005_shinsahoshuichiran"), new RString("介護認定審査会委員報酬一覧表"));

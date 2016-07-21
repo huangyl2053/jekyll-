@@ -112,7 +112,7 @@ public class ShisakaiIinJissekiShokai {
      */
     public ResponseData<ShisakaiIinJissekiShokaiDiv> onBefore_Dataoutput(ShisakaiIinJissekiShokaiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).審査会委員実績一覧データの行選択チェック処理(validationMessages);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).get審査会委員実績一覧データの行選択チェック処理(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

@@ -1445,7 +1445,8 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番BY調定年度(調定年度, 処理枝番);
         if (entity != null) {
-            最大年度内連番 = get最大年度内連番(entity.getNendoNaiRenban());
+            最大年度内連番 = new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1))
+                    .padZeroToLeft(NUM_4);
         } else {
             最大年度内連番 = 処理枝番;
         }
@@ -1461,15 +1462,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         dbT7022Entity.setTaishoKaishiTimestamp(new YMDHMS(抽出開始日時));
         dbT7022Entity.setTaishoShuryoTimestamp(new YMDHMS(抽出終了日時));
         処理日付管理Dac.save(dbT7022Entity);
-    }
-
-    private RString get最大年度内連番(RString 年度内連番) {
-        RString 連番 = new RString(String.valueOf(Integer.parseInt(年度内連番.toString()) + 1));
-        int length = NUM_4 - 連番.length();
-        for (int i = 0; i < length; i++) {
-            連番 = RSTRING_0.concat(連番);
-        }
-        return 連番;
     }
 
     /**

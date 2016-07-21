@@ -270,6 +270,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverReport
         new仮算定納入通知書情報.set編集後仮算定通知書共通情報(仮算定納入通知書情報.get編集後仮算定通知書共通情報());
         new仮算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new仮算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new仮算定納入通知書情報.set連番(仮算定納入通知書情報.get連番());
         return new仮算定納入通知書情報;
     }
 }

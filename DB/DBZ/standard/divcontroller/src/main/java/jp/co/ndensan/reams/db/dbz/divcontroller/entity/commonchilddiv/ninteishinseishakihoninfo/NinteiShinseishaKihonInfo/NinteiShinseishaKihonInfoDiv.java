@@ -5,11 +5,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishi
  * 不正な動作の原因になります。
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoHandler;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -293,5 +294,15 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @Override
     public void initialize(ShinseishoKanriNo 申請書管理番号) {
         getHandler().initialize(申請書管理番号);
+    }
+
+    /**
+     * 被保険者番号を取得します。
+     *
+     * @return 被保険者番号 被保険者番号
+     */
+    @Override
+    public RString get被保険者番号() {
+        return this.getTxtHihokenshaNo().getValue();
     }
 }

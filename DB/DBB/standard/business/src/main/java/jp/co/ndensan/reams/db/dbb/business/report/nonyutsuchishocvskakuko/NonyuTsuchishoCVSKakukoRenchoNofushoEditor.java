@@ -250,7 +250,7 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         } else if (map.containsKey(INT_9)) {
             納入通知書期情報 = map.get(INT_9);
             if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-                source.detail_funyuFukanBango2
+                source.detail_funyuFukanBango3
                         = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-11"));
             }
         }
