@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * 汎用リスト_生活保護受給者のビジネスです。
+ * 汎用リスト_適用除外者のビジネスです。
  *
  * @reamsid_L DBA-1600-030 yaodongsheng
  */
@@ -75,7 +75,7 @@ public class HanyoListTekiyoJogaishaResult {
      * EucCsvEntityの設定メッソドです。
      *
      * @param processParameter processParameter
-     * @param entity 生活保護受給者Entity
+     * @param entity 適用除外者Entity
      * @param koseiShichosonJoho 構成市町村マスタ
      * @param association 地方公共団体管理
      * @return HanyoListTekiyoJogaishaRenbanCsvEntity
@@ -200,7 +200,7 @@ public class HanyoListTekiyoJogaishaResult {
      * RenbanEucCsvEntityの設定メッソドです。
      *
      * @param processParameter processParameter
-     * @param entity 生活保護受給者Entity
+     * @param entity 適用除外者Entity
      * @param koseiShichosonJoho 構成市町村マスタ
      * @param i index
      * @param association 地方公共団体管理
