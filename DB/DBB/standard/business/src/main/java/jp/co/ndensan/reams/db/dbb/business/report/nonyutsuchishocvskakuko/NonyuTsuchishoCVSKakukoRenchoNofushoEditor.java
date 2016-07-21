@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvskakuko;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvskakuko.NonyuTsuchishoCVSKakukoRenchoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -84,8 +85,16 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
         if (map.containsKey(INT_3)) {
             納入通知書期情報 = map.get(INT_3);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango1
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-5"));
+            }
         } else if (map.containsKey(INT_7)) {
             納入通知書期情報 = map.get(INT_7);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango1
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-9"));
+            }
         }
 
         if (納入通知書期情報 != null) {
@@ -140,7 +149,6 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         source.detail_entaikin1 = RString.EMPTY;
         source.detail_biko11 = RString.EMPTY;
         source.detail_biko21 = RString.EMPTY;
-        source.detail_funyuFukanBango1 = RString.EMPTY;
 
         return source;
     }
@@ -156,8 +164,16 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
         if (map.containsKey(INT_4)) {
             納入通知書期情報 = map.get(INT_4);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango2
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-6"));
+            }
         } else if (map.containsKey(INT_8)) {
             納入通知書期情報 = map.get(INT_8);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango2
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-10"));
+            }
         }
 
         if (納入通知書期情報 != null) {
@@ -212,7 +228,6 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         source.detail_entaikin2 = RString.EMPTY;
         source.detail_biko12 = RString.EMPTY;
         source.detail_biko22 = RString.EMPTY;
-        source.detail_funyuFukanBango2 = RString.EMPTY;
 
         return source;
     }
@@ -228,8 +243,16 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
         if (map.containsKey(INT_5)) {
             納入通知書期情報 = map.get(INT_5);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango3
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-7"));
+            }
         } else if (map.containsKey(INT_9)) {
             納入通知書期情報 = map.get(INT_9);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango2
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-11"));
+            }
         }
 
         if (納入通知書期情報 != null) {
@@ -300,8 +323,16 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
         if (map.containsKey(INT_6)) {
             納入通知書期情報 = map.get(INT_6);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango4
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-8"));
+            }
         } else if (map.containsKey(INT_10)) {
             納入通知書期情報 = map.get(INT_10);
+            if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+                source.detail_funyuFukanBango4
+                        = new RString("F").concat(new RString(item.get連番()).padZeroToLeft(INT_6)).concat(new RString("-12"));
+            }
         }
 
         if (納入通知書期情報 != null) {
@@ -356,7 +387,6 @@ public class NonyuTsuchishoCVSKakukoRenchoNofushoEditor implements INonyuTsuchis
         source.detail_entaikin4 = RString.EMPTY;
         source.detail_biko14 = RString.EMPTY;
         source.detail_biko24 = RString.EMPTY;
-        source.detail_funyuFukanBango4 = RString.EMPTY;
 
         return source;
     }

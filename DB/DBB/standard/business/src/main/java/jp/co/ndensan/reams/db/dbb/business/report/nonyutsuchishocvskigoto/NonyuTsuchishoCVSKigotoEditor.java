@@ -29,7 +29,6 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
-    private final int renban;
 
     private static final RString EN = new RString("円");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
@@ -39,13 +38,6 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
     private static final RString BANK_NAME_TITLE = new RString("金融機関");
     private static final RString KOZA_MEIGININ_TITLE = new RString("名義人");
     private static final RString HANKAKU_X = new RString("X");
-    private static final RString HOSHI_2 = new RString("**");
-    private static final RString HOSHI_4 = new RString("****");
-    private static final RString HOSHI_11 = new RString("***********");
-    private static final RString HOSHI_13 = new RString("*************");
-    private static final RString HOSHI_16 = new RString("****************");
-    private static final RString HOSHI_22 = new RString("**********************");
-    private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int リストサイズ１ = 1;
 
@@ -57,15 +49,12 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
      *
      * @param item {@link HonSanteiNonyuTsuchiShoJoho}
      * @param ninshoshaSource NinshoshaSource
-     * @param renban int
      */
     protected NonyuTsuchishoCVSKigotoEditor(
             HonSanteiNonyuTsuchiShoJoho item,
-            NinshoshaSource ninshoshaSource,
-            int renban) {
+            NinshoshaSource ninshoshaSource) {
         this.item = item;
         this.ninshoshaSource = ninshoshaSource;
-        this.renban = renban;
     }
 
     @Override
@@ -88,17 +77,17 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
             source.hokenshaName = new RString(item.get編集後本算定通知書共通情報().get保険者名().toString());
         }
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban2 = new RString(renban).padZeroToLeft(INT_6);
+            source.notsuRenban2 = new RString(item.get連番()).padZeroToLeft(INT_6);
         }
-        source.pageCount2 = new RString(renban).concat("-2");
+        source.pageCount2 = new RString(item.get連番()).concat("-2");
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.renban = new RString(renban);
+            source.renban = new RString(item.get連番());
         }
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban3 = new RString(renban).padZeroToLeft(INT_6);
+            source.notsuRenban3 = new RString(item.get連番()).padZeroToLeft(INT_6);
         }
-        source.pageCount3 = new RString(renban).concat("-3");
+        source.pageCount3 = new RString(item.get連番()).concat("-3");
 
         this.edit納付書(source);
 
@@ -148,14 +137,14 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
         }
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.nitsuRenban = NotsuReportEditorUtil.get納通連番(renban);
+            source.nitsuRenban = NotsuReportEditorUtil.get納通連番(item.get連番());
         }
         this.納入通知書期情報設定(source);
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban1 = new RString(renban).padZeroToLeft(INT_6);
+            source.notsuRenban1 = new RString(item.get連番()).padZeroToLeft(INT_6);
         }
-        source.pageCount1 = new RString(renban).concat(new RString("-1"));
+        source.pageCount1 = new RString(item.get連番()).concat(new RString("-1"));
 
         return source;
     }
@@ -245,19 +234,6 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
                     && item.get納付書共通().get通知書番号() != null) {
                 source.detail_tsuchishoNo = item.get納付書共通().get通知書番号().value();
             }
-        } else {
-            source.ryoshushoNendo = HOSHI_4;
-            source.nendoNenbun = HOSHI_4;
-            source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun = HOSHI_4;
-            source.gokeigaku = HOSHI_13;
-            source.detail_tsuchishoNo = HOSHI_16;
-            source.nokigenYmd = HOSHI_11;
-            source.hakkoYmd = HOSHI_11;
-            source.honzei = HOSHI_13;
-            source.ocr1 = HOSHI_22;
-            source.ocr2 = HOSHI_28;
-            source.cvsToriatsukaikigen = HOSHI_16;
         }
 
         source.nokigenTitle = NOKIGEN;
@@ -353,7 +329,7 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名() != null) {
-            source.kaisanMeisaishoHihokenshaName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
+            source.kaisanMeisaishoSetaiNushiName = item.get編集後本算定通知書共通情報().get編集後個人().get世帯主名().value();
         }
         if (item.get編集後本算定通知書共通情報().get編集後個人() != null
                 && item.get編集後本算定通知書共通情報().get編集後個人().get世帯コード() != null) {
@@ -396,25 +372,20 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
         if (item.get編集後本算定通知書共通情報().get更正後() != null
                 && item.get編集後本算定通知書共通情報().get更正後().get普徴期別金額リスト() != null) {
             List<UniversalPhase> 普徴期別金額リスト = item.get編集後本算定通知書共通情報().get更正後().get普徴期別金額リスト();
-            UniversalPhase 普徴期別金額１ = null;
-            UniversalPhase 普徴期別金額２ = null;
-            if (item.get出力期リスト() != null
-                    && item.get出力期リスト().get(0) != null
-                    && item.get出力期リスト().get(0).get期() != null) {
-                普徴期別金額１ = 普徴期別金額リスト.get(item.get出力期リスト().get(0).get期AsInt());
-                普徴期別金額２ = 普徴期別金額リスト.get(item.get出力期リスト().get(0).get期AsInt() + 1);
-            }
 
-            if (普徴期別金額１ != null
-                    && 普徴期別金額１.get金額() != null) {
-                source.keisanMeisaishoNofuGaku1
-                        = new RString(普徴期別金額１.get金額().toString());
-            }
-
-            if (普徴期別金額２ != null
-                    && 普徴期別金額２.get金額() != null) {
-                source.keisanMeisaishoNofuGaku2
-                        = new RString(普徴期別金額２.get金額().toString());
+            for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
+                if (item.get出力期リスト() != null
+                        && item.get出力期リスト().get(0) != null
+                        && item.get出力期リスト().get(0).get期AsInt() == 普徴期別金額.get期()) {
+                    source.keisanMeisaishoNofuGaku1
+                            = new RString(普徴期別金額.get金額().toString());
+                }
+                if (item.get出力期リスト() != null
+                        && item.get出力期リスト().get(0) != null
+                        && item.get出力期リスト().get(0).get期AsInt() + 1 == 普徴期別金額.get期()) {
+                    source.keisanMeisaishoNofuGaku2
+                            = new RString(普徴期別金額.get金額().toString());
+                }
             }
         }
     }
