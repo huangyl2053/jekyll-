@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- @reamsid_L DBC-3092-020 sunhui -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper">
 
     <select id="selectAllデータ"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoMybatisParameter"
@@ -558,7 +558,7 @@
         AND DbT4001."serviceTeikyoYM" = DbT3109."serviceTeikyoYM"
         AND DbT4001."rirekino" = DbT3109."rirekino"
         LEFT OUTER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.kozaSearchResult" />) AS koza
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.kozaSearchResult" />) AS koza
         ON DbT3110."dbT3110JigyoKogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',

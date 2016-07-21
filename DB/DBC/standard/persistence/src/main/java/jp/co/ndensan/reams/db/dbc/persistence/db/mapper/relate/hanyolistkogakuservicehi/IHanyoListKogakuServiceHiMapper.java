@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyourisutosyuturyoku;
+package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkogakuservicehi;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoMybatisParameter;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyourisutosyuturyoku.Hanyou
  *
  * @reamsid_L DBC-3092-020 sunhui
  */
-public interface IHanyouRisutoSyuturyokuMapper {
+public interface IHanyoListKogakuServiceHiMapper {
 
     /**
      * データの取得
