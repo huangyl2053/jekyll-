@@ -64,16 +64,14 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private List<ShinsaHoshuIchiranRelateEntity> list;
     private FileSpoolManager manager;
     private RString eucFilePath;
-    private RString 導入団体コード;
-    private RString 市町村名;
     private int 出席回数;
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
-    private static final RStringBuilder SHUSEKINITI = new RStringBuilder("出席日");
+    private static final RString SHUSEKINITI = new RString("出席日");
     private static final RString GATSU = new RString("月）");
     private static final int YON = 4;
-    private Decimal 総合計_審査回数;
+    private int 総合計_審査回数;
     private Decimal 総合計_報酬総額;
     private Decimal 総合計_税控除額;
     private Decimal 総合計_報酬合計;
@@ -87,7 +85,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
 
     @Override
     protected void initialize() {
-        総合計_審査回数 = Decimal.ZERO;
+        総合計_審査回数 = 0;
         総合計_報酬総額 = Decimal.ZERO;
         総合計_税控除額 = Decimal.ZERO;
         総合計_報酬合計 = Decimal.ZERO;
@@ -97,9 +95,6 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        導入団体コード = 導入団体クラス.getLasdecCode_().value();
-        市町村名 = 導入団体クラス.get市町村名();
         mapper = getMapper(IShinsaHoshuIchiranMapper.class);
         list = new ArrayList<>();
         list = mapper.get出席状況(paramter.get審査会開催年月());
@@ -131,14 +126,10 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
 
     @Override
     protected void process(ShinsaHoshuIchiranRelateEntity relateEntity) {
-
         for (ShinsaHoshuIchiranRelateEntity entity : list) {
-
             if (relateEntity.get合議体番号() == (entity.get合議体番号())
                     && relateEntity.get介護認定審査会委員コード().equals(entity.get介護認定審査会委員コード())) {
-
                 出席回数 = 0;
-
                 relateEntity.set介護認定審査会委員氏名(entity.get介護認定審査会委員氏名());
                 relateEntity.set出席状況_1日(entity.get出席状況_1日());
                 this.get出席回数(entity.get出席状況_1日());
@@ -204,7 +195,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 this.get出席回数(entity.get出席状況_31日());
                 relateEntity.set出席回数(出席回数);
                 relateEntity.set審査会開催年月(set出席日(entity.get審査会開催年月()));
-                総合計_審査回数 = 総合計_審査回数.add(出席回数);
+                総合計_審査回数 = 総合計_審査回数 + 出席回数;
                 総合計_報酬総額 = 総合計_報酬総額.add(relateEntity.get報酬総額());
                 総合計_税控除額 = 総合計_税控除額.add(relateEntity.get税額控除());
                 総合計_報酬合計 = 総合計_報酬合計.add(relateEntity.get報酬合計());
@@ -229,52 +220,48 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 null, null, null, null, null,
                 null, null, null, null, null,
                 null, null, null, null, null,
-                null, null, null, new RString(総合計_審査回数.toString()), new RString(総合計_報酬総額.toString()),
+                null, null, null, new RString(総合計_審査回数), new RString(総合計_報酬総額.toString()),
                 new RString(総合計_税控除額.toString()), new RString(総合計_報酬合計.toString()));
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
             eucCsvWriterJunitoJugo.writeLine(総合計);
             eucCsvWriterJunitoJugo.close();
         }
         manager.spool(eucFilePath);
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            バッチ出力条件リストの出力();
+            バッチ出力条件リストの出力(導入団体クラス);
         } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
             ShinsaHoshuIchiranReport report = new ShinsaHoshuIchiranReport(総合計);
             report.writeBy(reportSourceWriter);
-            帳票バッチ出力条件リストの出力();
+            帳票バッチ出力条件リストの出力(導入団体クラス);
         }
     }
 
-    private void バッチ出力条件リストの出力() {
+    private void バッチ出力条件リストの出力(Association 導入団体クラス) {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 出力件数 = new RString(eucCsvWriterJunitoJugo.getCount());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催年月 = new RStringBuilder("審査会開催年月");
         審査会開催年月.append(dateFormat(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("介護認定審査会委員報酬一覧表CSV"), 導入団体コード, 市町村名, ジョブ番号,
-                CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
+                new RString("介護認定審査会委員報酬一覧表CSV"),
+                導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), ジョブ番号_Tmp.toRString(),
+                CSV_NAME, EUC_ENTITY_ID.toRString(), new RString(eucCsvWriterJunitoJugo.getCount()), 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private void 帳票バッチ出力条件リストの出力() {
+    private void 帳票バッチ出力条件リストの出力(Association 導入団体クラス) {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601005.getReportName();
-        RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
-        RString csv出力有無 = なし;
-        RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催年月 = new RStringBuilder("審査会開催年月");
         審査会開催年月.append(dateFormat(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601005.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
-                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
+                ReportIdDBE.DBE601005.getReportId().value(),
+                導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), ジョブ番号_Tmp.toRString(),
+                ReportIdDBE.DBE601005.getReportName(), new RString(reportSourceWriter.pageCount().value()), なし, なし, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
@@ -294,8 +281,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        RDate date_tem = new RDate(date.toString());
-        return date_tem.wareki().toDateString();
+        return new RDate(date.toString()).wareki().toDateString();
     }
 
     /**
@@ -309,8 +295,10 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        SHUSEKINITI.append(date.substring(YON));
-        SHUSEKINITI.append(GATSU);
-        return SHUSEKINITI.toRString();
+        RStringBuilder 出席日 = new RStringBuilder();
+        出席日.append(SHUSEKINITI);
+        出席日.append(date.substring(YON));
+        出席日.append(GATSU);
+        return 出席日.toRString();
     }
 }

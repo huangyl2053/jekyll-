@@ -22,9 +22,7 @@ public class ShinsaHoshuIchiranFlow extends BatchFlowBase<ShinsaHoshuIchiranBatc
 
     @Override
     protected void defineFlow() {
-        if (!getParameter().getShinsakaiKaisaiYMD().isEmpty()) {
-            executeStep(SHINSA_HOSHU_ICHIRAN);
-        }
+        executeStep(SHINSA_HOSHU_ICHIRAN);
     }
 
     /**
