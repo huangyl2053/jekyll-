@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc020010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc020090;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.ConvertGappeinaiJutokushaShinKyuNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.GetJuminShotokuJohoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.GetSetaiinHaakuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010.SetaiinHaakuNyuryokuTempCreatProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.ConvertGappeinaiJutokushaShinKyuNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.GetJuminShotokuJohoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.GetSetaiinHaakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.SetaiinHaakuNyuryokuTempCreatProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * 世帯員把握のバッチフロークラスです。
  *
- * @reamsid_L DBC-2010-040 huzongcheng
+ * @reamsid_L DBC-2010-050 tianshuai
  */
-public class SetaiinHaakuNyuryokuFlow extends BatchFlowBase<SetaiinHaakuNyuryokuBatchParameter> {
+public class KogakuKaigoServicehiSetaiinHaakuFlow extends BatchFlowBase<SetaiinHaakuNyuryokuBatchParameter> {
 
     private static final String CREAT_PROCESS = "creatTmpProcess";
     private static final String 世帯員住民の把握 = "getSetaiinHaaku";
