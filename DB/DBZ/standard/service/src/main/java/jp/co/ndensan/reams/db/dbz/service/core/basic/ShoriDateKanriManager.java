@@ -257,4 +257,19 @@ public class ShoriDateKanriManager {
             dac.save(entity);
         }
     }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get抽出期間() {
+
+        DbT7022ShoriDateKanriEntity entity = dac.select抽出期間();
+        if (entity == null) {
+            return null;
+        }
+        return new ShoriDateKanri(entity);
+    }
 }
