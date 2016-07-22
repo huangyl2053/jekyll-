@@ -91,7 +91,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
             source.listUpper_4 = 編集後個人.get編集後住所();
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
             if (行政区コード != null) {
@@ -194,7 +194,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
             source.listUpper_4 = 編集後個人.get編集後住所();
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
             if (行政区コード != null) {
