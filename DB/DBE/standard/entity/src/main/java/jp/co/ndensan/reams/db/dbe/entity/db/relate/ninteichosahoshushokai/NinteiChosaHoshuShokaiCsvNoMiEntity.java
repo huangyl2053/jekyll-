@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
