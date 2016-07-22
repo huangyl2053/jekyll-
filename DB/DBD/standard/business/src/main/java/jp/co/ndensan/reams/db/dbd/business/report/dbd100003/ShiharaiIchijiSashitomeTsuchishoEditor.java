@@ -166,7 +166,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
     }
 
     private void setLayer1(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
-        EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
+        EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通, this.地方公共団体);
         RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
         source.bunshoNo = this.文書番号;
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
@@ -276,8 +276,8 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
         source.hihokenshaNo = this.帳票情報.get被保険者番号().getColumnValue();
     }
 
-    private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(個人情報, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(個人情報, 帳票制御共通, 地方公共団体);
     }
 
     private Decimal get滞納額合計() {
