@@ -682,7 +682,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             throw new ApplicationException(UrErrorMessages.必須.getMessage());
         } else {
             報告年度の確定処理(報告年度, 市町村コード, 保険者区分, 報告年度Box, insuranceInfEntity);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, false);
         }
     }
 
