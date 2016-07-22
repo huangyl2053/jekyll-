@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 世帯員把握（バッチ）のパラメータです。
@@ -19,13 +20,15 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 public class SetaiinHaakuNyuryokuProcessParameter implements IBatchProcessParameter {
 
     private SetaiinHaakuKanriShikibetsuKubun 管理識別区分;
+    private RString メニューID;
 
     /**
      * コンストラクタ
      *
      * @param 管理識別区分 管理識別区分
      */
-    public SetaiinHaakuNyuryokuProcessParameter(SetaiinHaakuKanriShikibetsuKubun 管理識別区分) {
+    public SetaiinHaakuNyuryokuProcessParameter(SetaiinHaakuKanriShikibetsuKubun 管理識別区分, RString メニューID) {
         this.管理識別区分 = 管理識別区分;
+        this.メニューID = メニューID;
     }
 }

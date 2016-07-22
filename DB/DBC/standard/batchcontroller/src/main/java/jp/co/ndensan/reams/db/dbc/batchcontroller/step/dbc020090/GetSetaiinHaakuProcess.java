@@ -23,7 +23,7 @@ public class GetSetaiinHaakuProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         manager = SetaiShotokuKazeiHantei.createInstance();
-        manager.getSetaiinHaaku(processParameter.get管理識別区分().getコード());
+        manager.getSetaiinHaaku(processParameter.get管理識別区分().getコード(), processParameter.getメニューID());
     }
 
     @Override

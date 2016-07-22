@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
@@ -16,12 +17,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 public class ConvertGappeinaiJutokushaShinKyuNoProcess extends SimpleBatchProcessBase {
 
     private SetaiShotokuKazeiHantei manager;
+    private SetaiinHaakuNyuryokuProcessParameter processParameter;
 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
         manager = SetaiShotokuKazeiHantei.createInstance();
-        manager.convertGappeinaiJutokushaShinKyuNo();
+        manager.convertGappeinaiJutokushaShinKyuNo(processParameter.getメニューID());
     }
 
     @Override
