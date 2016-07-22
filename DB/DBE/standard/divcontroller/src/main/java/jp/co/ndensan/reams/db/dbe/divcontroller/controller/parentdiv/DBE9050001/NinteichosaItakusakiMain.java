@@ -340,7 +340,7 @@ public class NinteichosaItakusakiMain {
         ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, models);
         div.getSonotaKikanichiran().setDisplayNone(false);
         getHandler(div).setSonotaKikanichiran(イベント状態);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9050001StateName.一覧);
     }
 
     /**
