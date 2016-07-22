@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbz.service.core.jushotitokurei;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.jushotitokure.JushotiTokureiBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -70,14 +72,23 @@ public class JushotiTokureiFinder {
 
     private SearchResult<JushotiTokureiBusiness> get住所地特例リスト(List<DbT1001HihokenshaDaichoEntity> 住所地特例List) {
         List<JushotiTokureiBusiness> jushotiTokureiList = new ArrayList<>();
+        Set<FlexibleDate> 住特適用日s = new HashSet<>();
+        Set<FlexibleDate> 住特解除日s = new HashSet<>();
         for (DbT1001HihokenshaDaichoEntity entity : 住所地特例List) {
             FlexibleDate 住所地特例解除日 = entity.getJushochitokureiKaijoYMD();
-            if (住所地特例解除日 != null && !住所地特例解除日.isEmpty()) {
+            if (住所地特例解除日 != null && !住所地特例解除日.isEmpty() && !住特解除日s.contains(住所地特例解除日)) {
                 entity.setJushochitokureiTekiyoYMD(FlexibleDate.EMPTY);
                 entity.setJushochitokureiTekiyoTodokedeYMD(FlexibleDate.EMPTY);
                 entity.setJushochitokureiTekiyoJiyuCode(RString.EMPTY);
+                jushotiTokureiList.add(new JushotiTokureiBusiness(entity));
+                住特解除日s.add(住所地特例解除日);
+                continue;
             }
-            jushotiTokureiList.add(new JushotiTokureiBusiness(entity));
+            FlexibleDate 住所地特例適用日 = entity.getJushochitokureiTekiyoYMD();
+            if (住所地特例適用日 != null && !住特適用日s.contains(住所地特例適用日)) {
+                jushotiTokureiList.add(new JushotiTokureiBusiness(entity));
+                住特適用日s.add(住所地特例適用日);
+            }
         }
         return SearchResult.of(jushotiTokureiList, 0, false);
     }
