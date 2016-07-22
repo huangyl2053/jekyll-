@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090;
 
+import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
@@ -13,15 +14,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
  *
  * @reamsid_L DBC-2010-050 tianshuai
  */
-public class ConvertGappeinaiJutokushaShinKyuNoProcess extends SimpleBatchProcessBase {
+public class GetJuminShotokuJohoProcess extends SimpleBatchProcessBase {
 
     private SetaiShotokuKazeiHantei manager;
+    private SetaiinHaakuNyuryokuProcessParameter processParameter;
 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
         manager = SetaiShotokuKazeiHantei.createInstance();
-        manager.convertGappeinaiJutokushaShinKyuNo();
+        manager.getJuminShotokuJoho(processParameter.getメニューID());
     }
 
     @Override

@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosaItakusakiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.ChosaItakusakiAndChosainListDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.NinteichosaIraiByHandDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.dgChosaItakusakiList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
@@ -72,27 +72,26 @@ public class NinteichosaIraiByHand {
     //<editor-fold defaultstate="collapsed" desc="ChosaItakusakiAndChosainList">
     private static final class ChosaItakusakiAndChosainList {
 
-        private final ChosaItakusakiAndChosainListDiv div;
+        private final IChosaItakusakiAndChosainInputDiv div;
 
         ChosaItakusakiAndChosainList(NinteichosaIraiByHandDiv div) {
-            this.div = div.getTblChosaIraiWaritsuke().getChosaItakusakiAndChosainList();
+            this.div = div.getCcdItakusakiAndChosainInput();
         }
 
         private void onLoad() {
-            _init_dgChosaItakusakiList();
-            _init_comChosainListAll();
+//            _init_dgChosaItakusakiList();
+//            _init_comChosainListAll();
         }
 
-        private void _init_dgChosaItakusakiList() {
-            div.getWaritsukesakiChosaItakusakiList().getDgChosaItakusakiList().setDataSource(
-                    new DemoData().get調査委託先一覧());
-        }
-
-        private void _init_comChosainListAll() {
-            div.getShozokuChosainList().getComChosainListAll().getDgShozokuChosainList().setDataSource(
-                    new DemoData().get所属調査員一覧());
-        }
-
+//        private void _init_dgChosaItakusakiList() {
+//            div.getWaritsukesakiChosaItakusakiList().getDgChosaItakusakiList().setDataSource(
+//                    new DemoData().get調査委託先一覧());
+//        }
+//
+//        private void _init_comChosainListAll() {
+//            div.getShozokuChosainList().getComChosainListAll().getDgShozokuChosainList().setDataSource(
+//                    new DemoData().get所属調査員一覧());
+//        }
     }
     //</editor-fold>
 
@@ -123,7 +122,7 @@ public class NinteichosaIraiByHand {
             private final RequestContentsDiv panel;
 
             RequestContents(NinteichosaIraiByHandDiv div) {
-                this.panel = div.getTblChosaIraiWaritsuke().getRequestContents();
+                this.panel = null;
             }
             private static final int NUM_OF_A_WEEK = 7;
 
@@ -157,8 +156,8 @@ public class NinteichosaIraiByHand {
             }
 
             private void _init_comNinteichosaIraiListGod() {
-                panel.getComNinteichosaIraiListGod().getDgNinteichosaIraiListForByHand().setDataSource(
-                        new DemoData().get依頼者一覧());
+//                panel.getComNinteichosaIraiListGod().getDgNinteichosaIraiListForByHand().setDataSource(
+//                        new DemoData().get依頼者一覧());
             }
 
             enum Column {
@@ -209,31 +208,31 @@ public class NinteichosaIraiByHand {
             }
 
             void _setGridSetting_WariatezumiList() {
-                DataGridSetting setting
-                        = panel.getTblChosaIraiWaritsuke().getComWaritukezumiList()
-                        .getDgNinteichosaIraiListForByHand().getGridSetting();
-                _hideColumn(setting, Column.chosaItakusakiNo2TA);
-                _hideColumn(setting, Column.chosaItakusakiName2TA);
-                _hideColumn(setting, Column.chosainNo2TA);
-                _hideColumn(setting, Column.chosainName2TA);
+//                DataGridSetting setting
+//                        = panel.getTblChosaIraiWaritsuke().getComWaritukezumiList()
+//                        .getDgNinteichosaIraiListForByHand().getGridSetting();
+//                _hideColumn(setting, Column.chosaItakusakiNo2TA);
+//                _hideColumn(setting, Column.chosaItakusakiName2TA);
+//                _hideColumn(setting, Column.chosainNo2TA);
+//                _hideColumn(setting, Column.chosainName2TA);
             }
 
             void _setGridSetting_MiwarituskeList() {
-                DataGridSetting setting
-                        = panel.getTblChosaIraiWaritsuke().
-                        getComMiwarituskeList().getDgNinteichosaIraiListForByHand().getGridSetting();
-                _hideColumn(setting, Column.chosaJokyo);
-                _hideColumn(setting, Column.btnToShowDetail);
-                _hideColumn(setting, Column.chosaIraiKubun);
-                _hideColumn(setting, Column.chosaIraiDate);
-                _hideColumn(setting, Column.chosaKigenDate);
-                _hideColumn(setting, Column.iraishoHakkoDate);
-                _hideColumn(setting, Column.chosaItakusakiNo);
-                _hideColumn(setting, Column.chosaItakusakiName);
-                _hideColumn(setting, Column.chosainNo);
-                _hideColumn(setting, Column.chosainName);
-                _hideColumn(setting, Column.tokusokuDate);
-                _hideColumn(setting, Column.tokusokuCount);
+//                DataGridSetting setting
+//                        = panel.getTblChosaIraiWaritsuke().
+//                        getComMiwarituskeList().getDgNinteichosaIraiListForByHand().getGridSetting();
+//                _hideColumn(setting, Column.chosaJokyo);
+//                _hideColumn(setting, Column.btnToShowDetail);
+//                _hideColumn(setting, Column.chosaIraiKubun);
+//                _hideColumn(setting, Column.chosaIraiDate);
+//                _hideColumn(setting, Column.chosaKigenDate);
+//                _hideColumn(setting, Column.iraishoHakkoDate);
+//                _hideColumn(setting, Column.chosaItakusakiNo);
+//                _hideColumn(setting, Column.chosaItakusakiName);
+//                _hideColumn(setting, Column.chosainNo);
+//                _hideColumn(setting, Column.chosainName);
+//                _hideColumn(setting, Column.tokusokuDate);
+//                _hideColumn(setting, Column.tokusokuCount);
             }
 
             private void _hideColumn(DataGridSetting setting, Column item) {

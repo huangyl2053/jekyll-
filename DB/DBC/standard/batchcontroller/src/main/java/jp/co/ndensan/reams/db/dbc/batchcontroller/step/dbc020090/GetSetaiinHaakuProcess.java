@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHantei;
@@ -23,7 +23,7 @@ public class GetSetaiinHaakuProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         manager = SetaiShotokuKazeiHantei.createInstance();
-        manager.getSetaiinHaaku(processParameter.get管理識別区分().getコード());
+        manager.getSetaiinHaaku(processParameter.get管理識別区分().getコード(), processParameter.getメニューID());
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity;
@@ -57,6 +58,13 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
      * @return TempSetaiinHaakuNyuryokuEntity
      */
     TempSetaiinHaakuNyuryokuEntity select世帯員所得情報高額一時に一括();
+
+    /**
+     * select世帯員所得情報高額一時に一括テーブルメソッドです。
+     *
+     * @return TempSetaiinHaakuNyuryokuEntity
+     */
+    TempSetaiinHaakuNyuryokuEntity select世帯員所得情報事業高額一時に一括();
 
     /**
      * update世帯員所得情報高額一時合併内住所地特例者番号変換処理メソッドです。
@@ -125,4 +133,39 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
      * update世帯員所得情報事業高額一時老齢福祉区分を更新するメソッドです。
      */
     void update世帯員所得情報事業高額一時老齢福祉区分を更新する();
+
+    /**
+     * insert世帯員所得情報高額一時に一括テーブルメソッドです。
+     *
+     * @param list TmpSetaiHaakuNyuryokuEntity
+     */
+    void insert世帯員所得情報高額一時に一括(List<TmpSetaiHaakuNyuryokuEntity> list);
+
+    /**
+     * insert世帯員所得情報高額一時に一括テーブルメソッドです。
+     *
+     * @param list List<TmpSetaiJigyoHaakuNyuryokuEntity>
+     */
+    void insert世帯員所得情報事業高額一時に一括(List<TmpSetaiJigyoHaakuNyuryokuEntity> list);
+
+    //for test
+    /**
+     * creat世帯員把握入力高額一時テーブルメソッドです。
+     */
+    void creat世帯員把握入力高額一時();
+
+    /**
+     * creat世帯員把握入力事業高額一時テーブルメソッドです。
+     */
+    void creat世帯員把握入力事業高額一時();
+
+    /**
+     * insert世帯員把握入力高額一時テーブルメソッドです。
+     */
+    void insert世帯員把握入力高額一時();
+
+    /**
+     * insert世帯員把握入力事業高額一時テーブルメソッドです。
+     */
+    void insert世帯員把握入力事業高額一時();
 }

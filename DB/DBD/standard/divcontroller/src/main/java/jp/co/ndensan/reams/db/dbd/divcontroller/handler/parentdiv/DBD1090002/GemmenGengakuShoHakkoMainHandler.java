@@ -424,7 +424,7 @@ public class GemmenGengakuShoHakkoMainHandler {
     /**
      * 訪問介護利用者負担額減額エリアの設定処理です。
      *
-     * @param homonKaigoRiyoshaFutangakuGengaku 訪問介護利用者負担額減額情報
+     * @param homonKaigoRiyoshaFutangaku 訪問介護利用者負担額減額情報
      */
     public void set訪問介護利用者負担額減額エリア(HomonKaigoRiyoshaFutangakuGengaku homonKaigoRiyoshaFutangaku) {
         div.setHiddenRirekiNo(new RString(homonKaigoRiyoshaFutangaku.get履歴番号()));

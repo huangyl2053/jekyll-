@@ -232,6 +232,11 @@ public class KyufuTaishoshaScheduleSetteiPanelHandler {
             rowList.get(NUM_0).getDdlShoriJokyo().setDataSource(get最新処理年月入力エリアDropDownList());
             rowList.get(NUM_0).getDdlShoriJokyo().setSelectedKey(div.getDdlShoriJokyo().getSelectedKey());
         }
+        int index = NUM_0;
+        for (dgScheduleList_Row dgRow : rowList) {
+            dgRow.setId(index);
+            index = index + NUM_1;
+        }
         set最新処理年月入力エリア状態(true);
         div.setHdnFlag(STR_ONE);
     }
