@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 事務局用介護認定審査対象者一覧表A4のReportです。
+ * 介護認定審査対象者一覧表A4のReportです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-260 lishengli
  */
 public class ShinsakaishiryoA4Report extends Report<ShinsakaishiryoA4ReportSource> {
 
@@ -22,14 +22,14 @@ public class ShinsakaishiryoA4Report extends Report<ShinsakaishiryoA4ReportSourc
     /**
      * インスタンスを生成します。
      *
-     * @param business 事務局用介護認定審査対象者一覧表
+     * @param business 介護認定審査対象者一覧表
      */
     public ShinsakaishiryoA4Report(JimuShinsakaishiryoBusiness business) {
         this.business = business;
     }
 
     /**
-     * @param reportSourceWriter 事務局用介護認定審査対象者一覧表Sourceクラス
+     * @param reportSourceWriter 介護認定審査対象者一覧表A4Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaishiryoA4ReportSource> reportSourceWriter) {
