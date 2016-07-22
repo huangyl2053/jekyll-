@@ -185,7 +185,9 @@ public class NinteichosaItakusakiMainHandler {
         row.setSonotaKikanCode(sonotaKikanCode);
         row.setKikanMeisho(nullToEmpty(kikanMeisho));
         row.setKikanKana(nullToEmpty(kikanKana));
-        row.setYubinNo(editYubinNoToIchiran(yubinNo.value()));
+        if (yubinNo != null) {
+            row.setYubinNo(editYubinNoToIchiran(yubinNo.value()));
+        }
         row.setJusho(nullToEmpty(jusho));
         row.setJushoKana(nullToEmpty(jushoKana));
         row.setTelNo(telNo.value());

@@ -52,8 +52,8 @@ public class TokuchoTaishoshaIchiran {
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
-    private static final RString 特別徴収対象者一覧作成 = new RString("特別徴収対象者一覧作成");
     private static final RString 特別徴収対象者一覧確認 = new RString("特別徴収対象者一覧確認");
+    private static final RString STATE特別徴収対象者一覧確認 = new RString("1");
 
     /**
      * 画面のonLoadイベント
@@ -68,16 +68,14 @@ public class TokuchoTaishoshaIchiran {
             return 特別徴収同定一覧initialize(div);
         } else if (DBB2710002StateName.特別徴収同定候補者一覧.getName().equals(ResponseHolder.getState())) {
             特別徴収同定候補者一覧initialize(div);
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.特別徴収同定候補者一覧);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
         } else if (DBB2710002StateName.特別徴収対象者一覧作成.getName().equals(ResponseHolder.getState())) {
             TokuchoTaishoshaIchiranSakuseiResult result = getHandler(div).特別徴収対象者一覧作成initialize();
             if (result != null) {
                 ViewStateHolder.put(ViewStateKeys.特別徴収開始月, result.get特別徴収開始月());
                 ViewStateHolder.put(ViewStateKeys.捕捉月リスト, (Serializable) result.get捕捉月リスト());
             }
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧作成).respond().data)
-                    .setState(DBB2710002StateName.特別徴収対象者一覧作成);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収対象者一覧作成);
         } else if (DBB2710002StateName.特別徴収未同定一覧.getName().equals(ResponseHolder.getState())) {
             return 特別徴収未同定一覧initialize(div);
         }
@@ -91,13 +89,11 @@ public class TokuchoTaishoshaIchiran {
         List<TokuchoDouteiListJoho> result同定
                 = getHandler(div).特別徴収同定一覧initialize1(特別徴収開始月, 捕捉月リスト);
         if (result同定 == null || result同定.isEmpty()) {
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.特別徴収同定一覧);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定一覧);
         }
         if (result同定.size() <= Integer.parseInt(最大表示件数.toString())) {
             getHandler(div).特別徴収同定一覧initialize2(result同定, result同定.size());
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.特別徴収同定一覧);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定一覧);
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbzInformationMessages.最大表示件数超過.getMessage()).respond();
@@ -107,8 +103,7 @@ public class TokuchoTaishoshaIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).特別徴収同定一覧initialize2(result同定, Integer.parseInt(最大表示件数.toString()));
         }
-        return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                .setState(DBB2710002StateName.特別徴収同定一覧);
+        return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定一覧);
     }
 
     private ResponseData<TokuchoTaishoshaIchiranDiv> 特別徴収未同定一覧initialize(TokuchoTaishoshaIchiranDiv div) {
@@ -119,13 +114,11 @@ public class TokuchoTaishoshaIchiran {
         List<TokuchoMiDouteiListJoho> 未同定一覧情報List = getHandler(div).特別徴収未同定一覧initialize1(
                 特別徴収開始月, 確認済を含む, 捕捉月リスト);
         if (未同定一覧情報List == null || 未同定一覧情報List.isEmpty()) {
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.特別徴収未同定一覧);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収未同定一覧);
         }
         if (未同定一覧情報List.size() <= Integer.parseInt(最大表示件数.toString())) {
             getHandler(div).特別徴収未同定一覧initialize2(未同定一覧情報List, 未同定一覧情報List.size());
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.特別徴収未同定一覧);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収未同定一覧);
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbzInformationMessages.最大表示件数超過.getMessage()).respond();
@@ -135,18 +128,17 @@ public class TokuchoTaishoshaIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).特別徴収未同定一覧initialize2(未同定一覧情報List, Integer.parseInt(最大表示件数.toString()));
         }
-        return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                .setState(DBB2710002StateName.特別徴収未同定一覧);
+        return ResponseData.of(div).setState(DBB2710002StateName.特別徴収未同定一覧);
     }
 
     private ResponseData<TokuchoTaishoshaIchiranDiv> 同定非同定表示initialize(TokuchoTaishoshaIchiranDiv div) {
+        div.setHiddenPageState(STATE特別徴収対象者一覧確認);
         TokuchoTaishoshaIchiranSakuseiResult result = getHandler(div).同定非同定表示initialize();
         if (result != null) {
             ViewStateHolder.put(ViewStateKeys.特別徴収開始月, result.get特別徴収開始月());
             ViewStateHolder.put(ViewStateKeys.捕捉月リスト, (Serializable) result.get捕捉月リスト());
         }
-        return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                .setState(DBB2710002StateName.同定非同定表示);
+        return ResponseData.of(div).setState(DBB2710002StateName.同定非同定表示);
     }
 
     private void 特別徴収同定候補者一覧initialize(TokuchoTaishoshaIchiranDiv div) {
@@ -206,8 +198,7 @@ public class TokuchoTaishoshaIchiran {
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnBack(TokuchoTaishoshaIchiranDiv div) {
         getHandler(div).同定非同定表示に戻るinitialize();
-        return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                .setState(DBB2710002StateName.同定非同定表示);
+        return ResponseData.of(div).setState(DBB2710002StateName.同定非同定表示);
     }
 
     /**
@@ -307,8 +298,7 @@ public class TokuchoTaishoshaIchiran {
         ViewStateHolder.put(ViewStateKeys.年金コード, 年金コード);
         ViewStateHolder.put(ViewStateKeys.確認状況, 確認状況);
         特別徴収同定候補者一覧initialize(div);
-        return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                .setState(DBB2710002StateName.特別徴収同定候補者一覧);
+        return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
     }
 
     /**
@@ -429,8 +419,7 @@ public class TokuchoTaishoshaIchiran {
             RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
             Message 同定Message = DbbInformationMessages.同定処理完了.getMessage();
             getHandler(div).execute確認状態更新(特別徴収開始月, 捕捉月, 同定済み_CODE, 同定Message);
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.完了);
+            return ResponseData.of(div).setState(DBB2710002StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
@@ -456,10 +445,9 @@ public class TokuchoTaishoshaIchiran {
             Message 同定対象外Message = DbbInformationMessages.同定対象外確認済処理完了.getMessage();
 
             getHandler(div).execute確認状態更新(特別徴収開始月, 捕捉月, 対象外_CODE, 同定対象外Message);
-            return ResponseData.of(ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond().data)
-                    .setState(DBB2710002StateName.完了);
+            return ResponseData.of(div).setState(DBB2710002StateName.完了);
         } else {
-            return ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond();
+            return ResponseData.of(div).respond();
         }
     }
 
@@ -474,7 +462,7 @@ public class TokuchoTaishoshaIchiran {
         if (!RString.isNullOrEmpty(div.getHiddenState()) && 状態なし.compareTo(div.getHiddenState()) != NUM0) {
             getHandler(div).stateTransition_CommonBtn();
         }
-        return ResponseData.of(div).respond();
+        return getHandler(div).stateTransition_RootTitle();
     }
 
     private TokuchoTaishoshaIchiranHandler getHandler(TokuchoTaishoshaIchiranDiv div) {

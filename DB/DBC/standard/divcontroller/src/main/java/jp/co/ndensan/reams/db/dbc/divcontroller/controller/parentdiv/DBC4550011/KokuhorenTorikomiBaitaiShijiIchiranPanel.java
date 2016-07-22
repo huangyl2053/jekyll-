@@ -37,13 +37,13 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
      * @param div 国保連取込媒体管理DIV
      * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onLoad(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onLoad(
+            KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
             throw new PessimisticLockingException();
         }
-
         getHandler(div).初期登録状態();
         getHandler(div).initialize();
         return ResponseData.of(div).setState(DBC4550011StateName.初期登録状態);
@@ -55,7 +55,8 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
      * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
      * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSave(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSave(
+            KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -73,7 +74,8 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
      * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
      * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSelect(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSelect(
+            KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         getHandler(div).選択状態();
         getHandler(div).選択ボタン押下時();
@@ -86,7 +88,8 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
      * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
      * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnComplete(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnComplete(
+            KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         return ResponseData.of(div).forwardWithEventName(DBC4550011TransitionEventName.処理完了).respond();
     }
@@ -97,7 +100,8 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
      * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
      * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSetting(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSetting(
+            KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         getHandler(div).set入力内容反映();
         getHandler(div).初期登録状態();
@@ -110,7 +114,8 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
      * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
      * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnCancle(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnCancle(
+            KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         getHandler(div).set入力値破棄();
         getHandler(div).初期登録状態();

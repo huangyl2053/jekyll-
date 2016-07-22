@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 /**
  * dgKokuhorenTorikomiBaitaiShijiIchiran_Row のクラスファイル
  *
- * @author 自動生成
  * @reamsid_L DBC-3361-010 xuxin
  */
 public class dgKokuhorenTorikomiBaitaiShijiIchiran_Row extends DataRow {

@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -45,8 +44,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
 
     private Association 導入団体クラス;
     private TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter parameter;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("TokubetsuChoshuMidoteiIchiran"));
-    private final ReportId reportId = new ReportId("DBB200032_TokubetsuChoshuMidoteiIchiran");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200032"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
@@ -77,6 +75,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
 
     @Override
     protected void beforeExecute() {
+        pageSize = ONE;
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);

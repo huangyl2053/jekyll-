@@ -30,10 +30,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -51,7 +53,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
     private static final RString UPDATE = new RString("modify");
     private static final RString DELETE = new RString("delete");
     private static final RString ADD = new RString("add");
-
+    private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private final YoshikiYonnosanDiv div;
     private static final RString 内部処理モード_修正新規 = new RString("修正新規");
     private static final RString 内部処理モード_修正 = new RString("修正");
@@ -230,6 +232,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisabled(false);
         div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
         set詳細データエリア入力可否(状態1);
     }
 
@@ -269,7 +272,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         }
         div.getYoshikiYonnosanMeisai().getTxtHokokuYM().setValue(new RDate(insuranceInfEntity.get報告年().getYearValue()));
         div.getYoshikiYonnosanMeisai().getTxtShukeiYM().setValue(new RDate(insuranceInfEntity.get集計対象年().getYearValue()));
-        div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setValue(insuranceInfEntity.get市町村コード().getColumnValue());
+        div.getYoshikiYonnosanMeisai().getTxtHihokenshaNo().setValue(insuranceInfEntity.get保険者コード().getColumnValue());
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setValue(insuranceInfEntity.get市町村名称());
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisplayNone(true);
@@ -289,13 +292,21 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             div.setGamenMode(処理 ? 画面表示_修正 : 画面表示_削除);
         }
         if (DBU0050041StateName.削除状態.getName().equals(ResponseHolder.getState())) {
-            if (new RString("入力未").equals(insuranceInfEntity.get様式４入力状況())) {
-                div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(true);
-            }
-            div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
-            if (new RString("入力未").equals(insuranceInfEntity.get様式４の３入力状況())) {
-                div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(true);
-            }
+            btnDisabled(insuranceInfEntity);
+        }
+    }
+
+    /**
+     * BtnYoshikiyonとBtnYoskiyonosanはDisabledになります。
+     *
+     */
+    private void btnDisabled(InsuranceInformation insuranceInf) {
+        if (new RString("入力未").equals(insuranceInf.get様式４入力状況())) {
+            div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(true);
+        }
+        div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
+        if (new RString("入力未").equals(insuranceInf.get様式４の２入力状況())) {
+            div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(true);
         }
     }
 
@@ -637,9 +648,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         TextBoxDate 集計年度Box = div.getYoshikiYonnosanMeisai().getTxtShukeiYM();
         RDate 報告年度 = 報告年度Box.getValue();
         RString 報告年度String = 報告年度Box.getText();
-        int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
-        if (!(null == 報告年度)) {
-            set集計年度(報告年度Year, 集計年度Box);
+        if (RDate.canConvert(報告年度String)) {
+            int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
+            if (!(null == 報告年度)) {
+                set集計年度(報告年度Year, 集計年度Box);
+            }
         }
     }
 
@@ -657,31 +670,36 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
 
     /**
      * 「報告年度を確定する」ボタンを押下すること処理です。
+     *
+     * @param insuranceInfEntity insuranceInfEntity
      */
-    public void onClick_btnConfirm() {
-        KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
-                = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-        List<Shichoson> 市町村Lst = 介護保険特別会計経理状況登録Manager.getShichosonCodeNameList();
-        int choice = div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedIndex();
-        Shichoson 市町村 = 市町村Lst.get(choice);
-        TokeiTaishoKubun 保険者区分 = 市町村.get保険者区分();
-        LasdecCode 市町村コード = 市町村.get市町村コード();
+    public void onClick_btnConfirm(InsuranceInformation insuranceInfEntity) {
+        LasdecCode 市町村コード = get市町村コード(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
+        TokeiTaishoKubun 保険者区分 = get保険者区分(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
         TextBoxDate 報告年度Box = div.getYoshikiYonnosanMeisai().getTxtHokokuYM();
         RDate 報告年度 = 報告年度Box.getValue();
         if (null == 報告年度) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage());
         } else {
-            報告年度の確定処理(報告年度, 市町村コード, 保険者区分, 報告年度Box);
+            報告年度の確定処理(報告年度, 市町村コード, 保険者区分, 報告年度Box, insuranceInfEntity);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, false);
         }
     }
 
-    private void 報告年度の確定処理(RDate 報告年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分, TextBoxDate 報告年度Box) {
+    private void 報告年度の確定処理(RDate 報告年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分, TextBoxDate 報告年度Box,
+            InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-        List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
-                = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(
-                        new FlexibleYear(報告年度.getYear().toString()), 市町村コード, 保険者区分);
-        if (!一覧データLst.isEmpty() && 一覧データLst.get(0) != null && !一覧データLst.get(0).get詳細データエリア().isEmpty()) {
+        FlexibleYear 報告年 = new FlexibleYear(insuranceInfEntity.get報告年().toString());
+        RString 集計対象年 = new RString(insuranceInfEntity.get集計対象年().toString());
+        RString 統計対象区分 = insuranceInfEntity.get統計対象区分();
+        List<KaigoHokenJigyoHokokuNenpo> 前年度以前データs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0301.getColumnValue());
+        List<KaigoHokenJigyoHokokuNenpo> 今年度データs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0302.getColumnValue());
+        List<KaigoHokenJigyoHokokuNenpo> 実質的な収支についてデータs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0303.getColumnValue());
+        if (前年度以前データs.isEmpty() && 今年度データs.isEmpty() && 実質的な収支についてデータs.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
         } else {
             報告年度Box.setReadOnly(true);
@@ -771,10 +789,38 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (Shichoson shichoson : 市町村Lst) {
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(shichoson.get市町村コード().getColumnValue(), shichoson.get市町村名称());
+            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(create市町村Key(shichoson), shichoson.get市町村名称());
             dataSource.add(keyValueDataSource);
         }
         return dataSource;
+    }
+
+    private RString create市町村Key(Shichoson shichoson) {
+        return new RStringBuilder().append(shichoson.get市町村コード().getColumnValue()).append("_")
+                .append(shichoson.get保険者コード().getColumnValue()).append("_").append(shichoson.get保険者区分().getコード()).toRString();
+    }
+
+    /**
+     * 市町村コード取得処理です。
+     *
+     * @param 市町村Key 市町村Key
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード(RString 市町村Key) {
+        if (市町村Key.split("_").size() < 1) {
+            return LasdecCode.EMPTY;
+        } else {
+            System.out.println(市町村Key.split("_").get(0).toString());
+            return new LasdecCode(市町村Key.split("_").get(0));
+        }
+    }
+
+    private TokeiTaishoKubun get保険者区分(RString 市町村Key) {
+        if (市町村Key.split("_").size() < INT3) {
+            return TokeiTaishoKubun.空;
+        } else {
+            return TokeiTaishoKubun.toValue(市町村Key.split("_").get(2));
+        }
     }
 
 }

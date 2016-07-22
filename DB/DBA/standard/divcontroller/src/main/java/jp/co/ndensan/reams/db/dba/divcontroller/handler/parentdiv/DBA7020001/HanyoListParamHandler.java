@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.tekiyojogaisha.JiyuChushutsuKubun;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListSeikatsuhogoJukyushaBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttashichosonjushochitokureisha.HanyoListTaShichosonJushochiTokureishaBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisttekiyojogaisha.HanyoListTekiyoJogaishaBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.common.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
@@ -106,16 +109,7 @@ public class HanyoListParamHandler {
         } else if (モード5.equals(モード)) {
             抽出区分 = div.getRadSeikatuhogoJukyushaChushutsu().getSelectedKey();
         }
-        if (HizukeChushutsuKubun.直近.getコード().equals(抽出区分)) {
-            set基準日Disable(モード);
-            set範囲Disable(モード);
-        } else if (HizukeChushutsuKubun.基準日.getコード().equals(抽出区分)) {
-            set範囲Disable(モード);
-            set基準日unDisable(モード);
-        } else if (HizukeChushutsuKubun.範囲.getコード().equals(抽出区分)) {
-            set範囲unDisable(モード);
-            set基準日Disable(モード);
-        }
+        set日付抽出区分(抽出区分, モード);
     }
 
     /**
@@ -123,16 +117,7 @@ public class HanyoListParamHandler {
      */
     public void onChange_適用除外者事由抽出区分() {
         RString 事由抽出区分 = div.getRadTekiyoJogaisha().getSelectedKey();
-        if (JiyuChushutsuKubun.適用除外者のみ.getコード().equals(事由抽出区分)) {
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(true);
-        } else if (JiyuChushutsuKubun.適用除外解除者のみ.getコード().equals(事由抽出区分)) {
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(true);
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
-        } else if (JiyuChushutsuKubun.両方.getコード().equals(事由抽出区分)) {
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
-            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
-        }
+        set適用除外者事由抽出区分(事由抽出区分);
     }
 
     /**
@@ -140,26 +125,17 @@ public class HanyoListParamHandler {
      */
     public void onChange_他市町村住所地特例者事由抽出区分() {
         RString 事由抽出区分 = div.getRadTaShichosonJushotiTokureisha().getSelectedKey();
-        if (他特例適用者のみ.equals(事由抽出区分)) {
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(true);
-        } else if (他特例解除者のみ.equals(事由抽出区分)) {
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(true);
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(false);
-        } else if (両方.equals(事由抽出区分)) {
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
-            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(false);
-        }
+        set他市町村住所地特例者事由抽出区分(事由抽出区分);
+
     }
 
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @param モード 画面モード
-     * @return parameter HanyoListBatchParameter
+     * @return parameter HanyoListSeikatsuhogoJukyushaBatchParameter
      */
-    public HanyoListBatchParameter onClick_btnKogakuParamSave(RString モード) {
-        HanyoListBatchParameter parameter = new HanyoListBatchParameter();
+    public HanyoListSeikatsuhogoJukyushaBatchParameter onClick_btnSeikatsuKogakuParamSave() {
+        HanyoListSeikatsuhogoJukyushaBatchParameter parameter = new HanyoListSeikatsuhogoJukyushaBatchParameter();
         parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
         parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
         parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
@@ -179,17 +155,105 @@ public class HanyoListParamHandler {
         parameter.setKomokumeiFuka(is項目名付加);
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
-        抽出条件保存(モード, parameter);
+        生活抽出条件保存(parameter);
         return parameter;
     }
 
     /**
      * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
      *
-     * @param モード 画面モード
+     * @return parameter HanyoListRoreiFukushiNenkinJukyushaBatchParameter
      */
-    public void onClick_btnKogakuParamRestore(RString モード) {
-        BatchParameterMap restoreBatchParameterMap = div.getBtnParamRestore().getRestoreBatchParameterMap();
+    public HanyoListRoreiFukushiNenkinJukyushaBatchParameter onClick_btnRoreiKogakuParamSave() {
+        HanyoListRoreiFukushiNenkinJukyushaBatchParameter parameter = new HanyoListRoreiFukushiNenkinJukyushaBatchParameter();
+        parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
+        parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
+        parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
+        boolean is項目名付加 = false;
+        boolean is連番付加 = false;
+        boolean is日付編集 = false;
+        List<RString> 編集方法List = div.getChkCsvHenshuHoho().getSelectedKeys();
+        for (RString 編集方法 : 編集方法List) {
+            if (CSVSettings.項目名付加.getコード().equals(編集方法)) {
+                is項目名付加 = true;
+            } else if (CSVSettings.連番付加.getコード().equals(編集方法)) {
+                is連番付加 = true;
+            } else if (CSVSettings.日付スラッシュ編集.getコード().equals(編集方法)) {
+                is日付編集 = true;
+            }
+        }
+        parameter.setKomokumeiFuka(is項目名付加);
+        parameter.setRenbanFuka(is連番付加);
+        parameter.setHitsukeHenshu(is日付編集);
+        老齢抽出条件保存(parameter);
+        return parameter;
+    }
+
+    /**
+     * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
+     *
+     * @return parameter HanyoListTaShichosonJushochiTokureishaBatchParameter
+     */
+    public HanyoListTaShichosonJushochiTokureishaBatchParameter onClick_btnTashichoKogakuParamSave() {
+        HanyoListTaShichosonJushochiTokureishaBatchParameter parameter = new HanyoListTaShichosonJushochiTokureishaBatchParameter();
+        parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
+        parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
+        parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
+        boolean is項目名付加 = false;
+        boolean is連番付加 = false;
+        boolean is日付編集 = false;
+        List<RString> 編集方法List = div.getChkCsvHenshuHoho().getSelectedKeys();
+        for (RString 編集方法 : 編集方法List) {
+            if (CSVSettings.項目名付加.getコード().equals(編集方法)) {
+                is項目名付加 = true;
+            } else if (CSVSettings.連番付加.getコード().equals(編集方法)) {
+                is連番付加 = true;
+            } else if (CSVSettings.日付スラッシュ編集.getコード().equals(編集方法)) {
+                is日付編集 = true;
+            }
+        }
+        parameter.setKomokumeiFuka(is項目名付加);
+        parameter.setRenbanFuka(is連番付加);
+        parameter.setHitsukeHenshu(is日付編集);
+        他市町村抽出条件保存(parameter);
+        return parameter;
+    }
+
+    /**
+     * 条件を保存するボタンを押下する場合、画面項目の設定値をバッチパラメータに設定、更新する。
+     *
+     * @return parameter HanyoListTekiyoJogaishaBatchParameter
+     */
+    public HanyoListTekiyoJogaishaBatchParameter onClick_btnTekiyoKogakuParamSave() {
+        HanyoListTekiyoJogaishaBatchParameter parameter = new HanyoListTekiyoJogaishaBatchParameter();
+        parameter.setChohyoId(div.getCcdShutsuryokujun().get帳票ID().value());
+        parameter.setShutsuryokujunId(div.getCcdShutsuryokujun().get出力順ID());
+        parameter.setShutsuryokuKomokuId(div.getCcdShutsuryokuKomoku().get出力項目ID());
+        boolean is項目名付加 = false;
+        boolean is連番付加 = false;
+        boolean is日付編集 = false;
+        List<RString> 編集方法List = div.getChkCsvHenshuHoho().getSelectedKeys();
+        for (RString 編集方法 : 編集方法List) {
+            if (CSVSettings.項目名付加.getコード().equals(編集方法)) {
+                is項目名付加 = true;
+            } else if (CSVSettings.連番付加.getコード().equals(編集方法)) {
+                is連番付加 = true;
+            } else if (CSVSettings.日付スラッシュ編集.getコード().equals(編集方法)) {
+                is日付編集 = true;
+            }
+        }
+        parameter.setKomokumeiFuka(is項目名付加);
+        parameter.setRenbanFuka(is連番付加);
+        parameter.setHitsukeHenshu(is日付編集);
+        適用抽出条件保存(parameter);
+        return parameter;
+    }
+
+    /**
+     * 条件を復元するボタンを押下する場合、適用除外者の条件を復元。
+     */
+    public void onClick_btnTekiyoKogakuParamRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnTekiyoJogaishaParamRestore().getRestoreBatchParameterMap();
         List<RString> 編集方法 = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
         if (is項目名付加) {
@@ -204,15 +268,77 @@ public class HanyoListParamHandler {
             編集方法.add(日付);
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
-        if (モード.equals(モード2)) {
-            適用除外者Restore(restoreBatchParameterMap);
-        } else if (モード.equals(モード3)) {
-            他市町村住所地特例者Restore(restoreBatchParameterMap);
-        } else if (モード.equals(モード4)) {
-            老齢福祉年金受給者Restore(restoreBatchParameterMap);
-        } else if (モード.equals(モード5)) {
-            生活保護受給者Restore(restoreBatchParameterMap);
+        適用除外者Restore(restoreBatchParameterMap);
+        宛名抽出条件復元(restoreBatchParameterMap);
+    }
+
+    /**
+     * 条件を復元するボタンを押下する場合、他市町村住所地特例者の条件を復元。
+     */
+    public void onClick_btnTaShichosonKogakuParamRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnTaShichosonJushochiTokureishaParamRestore().getRestoreBatchParameterMap();
+        List<RString> 編集方法 = new ArrayList<>();
+        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
+        if (is項目名付加) {
+            編集方法.add(項目名);
         }
+        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
+        if (is連番付加) {
+            編集方法.add(連番);
+        }
+        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("hitsukeHenshu"));
+        if (is日付編集) {
+            編集方法.add(日付);
+        }
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
+        他市町村住所地特例者Restore(restoreBatchParameterMap);
+        宛名抽出条件復元(restoreBatchParameterMap);
+    }
+
+    /**
+     * 条件を復元するボタンを押下する場合、老齢福祉年金受給者の条件を復元。
+     */
+    public void onClick_btnRoreiKogakuParamRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnRoreiFukushiNenkinJukyushaParamRestore().getRestoreBatchParameterMap();
+        List<RString> 編集方法 = new ArrayList<>();
+        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
+        if (is項目名付加) {
+            編集方法.add(項目名);
+        }
+        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
+        if (is連番付加) {
+            編集方法.add(連番);
+        }
+        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("hitsukeHenshu"));
+        if (is日付編集) {
+            編集方法.add(日付);
+        }
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
+        老齢福祉年金受給者Restore(restoreBatchParameterMap);
+        宛名抽出条件復元(restoreBatchParameterMap);
+    }
+
+    /**
+     * 条件を復元するボタンを押下する場合、生活保護受給者の条件を復元。
+     *
+     */
+    public void onClick_btnSeikatsuKogakuParamRestore() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnSeikatsuhogoJukyushaParamRestore().getRestoreBatchParameterMap();
+        List<RString> 編集方法 = new ArrayList<>();
+        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("komokumeiFuka"));
+        if (is項目名付加) {
+            編集方法.add(項目名);
+        }
+        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("renbanFuka"));
+        if (is連番付加) {
+            編集方法.add(連番);
+        }
+        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("hitsukeHenshu"));
+        if (is日付編集) {
+            編集方法.add(日付);
+        }
+        div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
+        生活保護受給者Restore(restoreBatchParameterMap);
         宛名抽出条件復元(restoreBatchParameterMap);
     }
 
@@ -276,16 +402,8 @@ public class HanyoListParamHandler {
         }
     }
 
-    private void 抽出条件保存(RString モード, HanyoListBatchParameter parameter) {
-        if (モード.equals(モード2)) {
-            適用除外者保存(parameter);
-        } else if (モード.equals(モード3)) {
-            他市町村住所地特例者保存(parameter);
-        } else if (モード.equals(モード4)) {
-            老齢福祉年金受給者保存(parameter);
-        } else if (モード.equals(モード5)) {
-            生活保護受給者保存(parameter);
-        }
+    private void 生活抽出条件保存(HanyoListSeikatsuhogoJukyushaBatchParameter parameter) {
+        生活保護受給者保存(parameter);
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
@@ -295,10 +413,6 @@ public class HanyoListParamHandler {
         }
         parameter.setShichoson_Code(市町村コード);
         parameter.setShichoson_Name(市町村名称);
-        宛名抽出条件保存(parameter);
-    }
-
-    private void 宛名抽出条件保存(HanyoListBatchParameter parameter) {
         AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
         parameter.setPsmChushutsu_Kubun(宛名抽出条件.getAgeSelectKijun().getコード());
         parameter.setPsmChushutsuAge_Start(宛名抽出条件.getNenreiRange().getFrom());
@@ -329,7 +443,130 @@ public class HanyoListParamHandler {
         parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
     }
 
-    private void 適用除外者保存(HanyoListBatchParameter parameter) {
+    private void 老齢抽出条件保存(HanyoListRoreiFukushiNenkinJukyushaBatchParameter parameter) {
+        老齢福祉年金受給者保存(parameter);
+        RString 市町村コード = RString.EMPTY;
+        RString 市町村名称 = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        }
+        parameter.setShichoson_Code(市町村コード);
+        parameter.setShichoson_Name(市町村名称);
+        AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
+        parameter.setPsmChushutsu_Kubun(宛名抽出条件.getAgeSelectKijun().getコード());
+        parameter.setPsmChushutsuAge_Start(宛名抽出条件.getNenreiRange().getFrom());
+        parameter.setPsmChushutsuAge_End(宛名抽出条件.getNenreiRange().getTo());
+        parameter.setPsmSeinengappiYMD_Start(宛名抽出条件.getSeinengappiRange().getFrom());
+        parameter.setPsmSeinengappiYMD_End(宛名抽出条件.getSeinengappiRange().getTo());
+        parameter.setPsmAgeKijunni(宛名抽出条件.getNenreiKijunbi());
+        parameter.setPsmChiku_Kubun(宛名抽出条件.getChiku_Kubun().getコード());
+        parameter.setPsmJusho_From(宛名抽出条件.getJusho_From());
+        parameter.setPsmJusho_From_Name(宛名抽出条件.getJusho_FromMesho());
+        parameter.setPsmJusho_To(宛名抽出条件.getJusho_To());
+        parameter.setPsmJusho_To_Name(宛名抽出条件.getJusho_ToMesho());
+        parameter.setPsmGyoseiku_From(宛名抽出条件.getGyoseiku_From());
+        parameter.setPsmGyoseiku_From_Name(宛名抽出条件.getGyoseiku_FromMesho());
+        parameter.setPsmGyoseiku_To(宛名抽出条件.getGyoseiku_To());
+        parameter.setPsmGyoseiku_To_Name(宛名抽出条件.getGyoseiku_ToMesho());
+        parameter.setPsmChiku1_From(宛名抽出条件.getChiku1_From());
+        parameter.setPsmChiku1_To(宛名抽出条件.getChiku1_To());
+        parameter.setPsmChiku2_From(宛名抽出条件.getChiku2_From());
+        parameter.setPsmChiku2_To(宛名抽出条件.getChiku2_To());
+        parameter.setPsmChiku3_From(宛名抽出条件.getChiku3_From());
+        parameter.setPsmChiku3_To(宛名抽出条件.getChiku3_To());
+        parameter.setPsmChiku1_From_Name(宛名抽出条件.getChiku1_FromMesho());
+        parameter.setPsmChiku1_To_Name(宛名抽出条件.getChiku1_ToMesho());
+        parameter.setPsmChiku2_From_Name(宛名抽出条件.getChiku2_FromMesho());
+        parameter.setPsmChiku2_To_Name(宛名抽出条件.getChiku2_ToMesho());
+        parameter.setPsmChiku3_From_Name(宛名抽出条件.getChiku3_FromMesho());
+        parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
+    }
+
+    private void 他市町村抽出条件保存(HanyoListTaShichosonJushochiTokureishaBatchParameter parameter) {
+        他市町村住所地特例者保存(parameter);
+        RString 市町村コード = RString.EMPTY;
+        RString 市町村名称 = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        }
+        parameter.setShichoson_Code(市町村コード);
+        parameter.setShichoson_Name(市町村名称);
+        AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
+        parameter.setPsmChushutsu_Kubun(宛名抽出条件.getAgeSelectKijun().getコード());
+        parameter.setPsmChushutsuAge_Start(宛名抽出条件.getNenreiRange().getFrom());
+        parameter.setPsmChushutsuAge_End(宛名抽出条件.getNenreiRange().getTo());
+        parameter.setPsmSeinengappiYMD_Start(宛名抽出条件.getSeinengappiRange().getFrom());
+        parameter.setPsmSeinengappiYMD_End(宛名抽出条件.getSeinengappiRange().getTo());
+        parameter.setPsmAgeKijunni(宛名抽出条件.getNenreiKijunbi());
+        parameter.setPsmChiku_Kubun(宛名抽出条件.getChiku_Kubun().getコード());
+        parameter.setPsmJusho_From(宛名抽出条件.getJusho_From());
+        parameter.setPsmJusho_From_Name(宛名抽出条件.getJusho_FromMesho());
+        parameter.setPsmJusho_To(宛名抽出条件.getJusho_To());
+        parameter.setPsmJusho_To_Name(宛名抽出条件.getJusho_ToMesho());
+        parameter.setPsmGyoseiku_From(宛名抽出条件.getGyoseiku_From());
+        parameter.setPsmGyoseiku_From_Name(宛名抽出条件.getGyoseiku_FromMesho());
+        parameter.setPsmGyoseiku_To(宛名抽出条件.getGyoseiku_To());
+        parameter.setPsmGyoseiku_To_Name(宛名抽出条件.getGyoseiku_ToMesho());
+        parameter.setPsmChiku1_From(宛名抽出条件.getChiku1_From());
+        parameter.setPsmChiku1_To(宛名抽出条件.getChiku1_To());
+        parameter.setPsmChiku2_From(宛名抽出条件.getChiku2_From());
+        parameter.setPsmChiku2_To(宛名抽出条件.getChiku2_To());
+        parameter.setPsmChiku3_From(宛名抽出条件.getChiku3_From());
+        parameter.setPsmChiku3_To(宛名抽出条件.getChiku3_To());
+        parameter.setPsmChiku1_From_Name(宛名抽出条件.getChiku1_FromMesho());
+        parameter.setPsmChiku1_To_Name(宛名抽出条件.getChiku1_ToMesho());
+        parameter.setPsmChiku2_From_Name(宛名抽出条件.getChiku2_FromMesho());
+        parameter.setPsmChiku2_To_Name(宛名抽出条件.getChiku2_ToMesho());
+        parameter.setPsmChiku3_From_Name(宛名抽出条件.getChiku3_FromMesho());
+        parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
+    }
+
+    private void 適用抽出条件保存(HanyoListTekiyoJogaishaBatchParameter parameter) {
+        適用除外者保存(parameter);
+        RString 市町村コード = RString.EMPTY;
+        RString 市町村名称 = RString.EMPTY;
+        if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
+                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+            市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
+            市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
+        }
+        parameter.setShichoson_Code(市町村コード);
+        parameter.setShichoson_Name(市町村名称);
+        AtenaSelectBatchParameter 宛名抽出条件 = div.getCcdHanyoListAtenaSelect().get宛名抽出条件();
+        parameter.setPsmChushutsu_Kubun(宛名抽出条件.getAgeSelectKijun().getコード());
+        parameter.setPsmChushutsuAge_Start(宛名抽出条件.getNenreiRange().getFrom());
+        parameter.setPsmChushutsuAge_End(宛名抽出条件.getNenreiRange().getTo());
+        parameter.setPsmSeinengappiYMD_Start(宛名抽出条件.getSeinengappiRange().getFrom());
+        parameter.setPsmSeinengappiYMD_End(宛名抽出条件.getSeinengappiRange().getTo());
+        parameter.setPsmAgeKijunni(宛名抽出条件.getNenreiKijunbi());
+        parameter.setPsmChiku_Kubun(宛名抽出条件.getChiku_Kubun().getコード());
+        parameter.setPsmJusho_From(宛名抽出条件.getJusho_From());
+        parameter.setPsmJusho_From_Name(宛名抽出条件.getJusho_FromMesho());
+        parameter.setPsmJusho_To(宛名抽出条件.getJusho_To());
+        parameter.setPsmJusho_To_Name(宛名抽出条件.getJusho_ToMesho());
+        parameter.setPsmGyoseiku_From(宛名抽出条件.getGyoseiku_From());
+        parameter.setPsmGyoseiku_From_Name(宛名抽出条件.getGyoseiku_FromMesho());
+        parameter.setPsmGyoseiku_To(宛名抽出条件.getGyoseiku_To());
+        parameter.setPsmGyoseiku_To_Name(宛名抽出条件.getGyoseiku_ToMesho());
+        parameter.setPsmChiku1_From(宛名抽出条件.getChiku1_From());
+        parameter.setPsmChiku1_To(宛名抽出条件.getChiku1_To());
+        parameter.setPsmChiku2_From(宛名抽出条件.getChiku2_From());
+        parameter.setPsmChiku2_To(宛名抽出条件.getChiku2_To());
+        parameter.setPsmChiku3_From(宛名抽出条件.getChiku3_From());
+        parameter.setPsmChiku3_To(宛名抽出条件.getChiku3_To());
+        parameter.setPsmChiku1_From_Name(宛名抽出条件.getChiku1_FromMesho());
+        parameter.setPsmChiku1_To_Name(宛名抽出条件.getChiku1_ToMesho());
+        parameter.setPsmChiku2_From_Name(宛名抽出条件.getChiku2_FromMesho());
+        parameter.setPsmChiku2_To_Name(宛名抽出条件.getChiku2_ToMesho());
+        parameter.setPsmChiku3_From_Name(宛名抽出条件.getChiku3_FromMesho());
+        parameter.setPsmChiku3_To_Name(宛名抽出条件.getChiku3_ToMesho());
+    }
+
+    private void 適用除外者保存(HanyoListTekiyoJogaishaBatchParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadTekiyoJogaishaChushutsu().getSelectedKey());
         parameter.setKijunYMDkubun(div.getRadTekiyoJogaishaTekiyoKijyun().getSelectedKey());
         if (div.getTexTekiyoJogaishaKijyunDate().getValue() != null) {
@@ -369,7 +606,7 @@ public class HanyoListParamHandler {
         parameter.setShisetsuHenkonashi(施設変更なし区分);
     }
 
-    private void 他市町村住所地特例者保存(HanyoListBatchParameter parameter) {
+    private void 他市町村住所地特例者保存(HanyoListTaShichosonJushochiTokureishaBatchParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadTaShichosonJushotiTokureishaChushutsu().getSelectedKey());
         parameter.setKijunYMDkubun(div.getRadTaShichosonJushotiTokureishaTekiyoKijyun().getSelectedKey());
         if (div.getTexTaShichosonJushotiTokureishaKijyunDate().getValue() != null) {
@@ -409,7 +646,7 @@ public class HanyoListParamHandler {
         parameter.setShisetsuHenkonashi(施設変更なし区分);
     }
 
-    private void 老齢福祉年金受給者保存(HanyoListBatchParameter parameter) {
+    private void 老齢福祉年金受給者保存(HanyoListRoreiFukushiNenkinJukyushaBatchParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadRoreiFukushiNenkinJukyushaChushutsu().getSelectedKey());
         if (div.getTexRoreiFukushiNenkinJukyushaKijyunDate().getValue() != null) {
             parameter.setKijunYMD(div.getTexRoreiFukushiNenkinJukyushaKijyunDate().getValue().toDateString());
@@ -423,7 +660,7 @@ public class HanyoListParamHandler {
         }
     }
 
-    private void 生活保護受給者保存(HanyoListBatchParameter parameter) {
+    private void 生活保護受給者保存(HanyoListSeikatsuhogoJukyushaBatchParameter parameter) {
         parameter.setHitsukeChushutsuKubun(div.getRadSeikatuhogoJukyushaChushutsu().getSelectedKey());
         if (div.getTexSeikatuhogoKijunDate().getValue() != null) {
             parameter.setKijunYMD(div.getTexSeikatuhogoKijunDate().getValue().toDateString());
@@ -450,8 +687,9 @@ public class HanyoListParamHandler {
     }
 
     private void 適用除外者Restore(BatchParameterMap restoreBatchParameterMap) {
-        div.getRadTekiyoJogaishaChushutsu().setSelectedKey(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun")));
+        RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
+        set日付抽出区分(抽出区分, モード2);
+        div.getRadTekiyoJogaishaChushutsu().setSelectedKey(抽出区分);
         div.getRadTekiyoJogaishaTekiyoKijyun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMDkubun")));
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
@@ -476,9 +714,19 @@ public class HanyoListParamHandler {
             selectKey.add(外国人);
         }
         div.getChkTekiyoJogaishaJoho().setSelectedItemsByKey(selectKey);
-        div.getRadTekiyoJogaisha().setSelectedKey(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jyuChusyutsuKubun")));
-        div.getChkTekiyoJogaishaTekiyoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("dekyujyu")));
-        div.getChkTekiyoJogaishaKaijoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("kaijyojyu")));
+        RString 事由抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("jyuChusyutsuKubun"));
+        div.getRadTekiyoJogaisha().setSelectedKey(事由抽出区分);
+        set適用除外者事由抽出区分(事由抽出区分);
+        List<RString> dekyujyuItem = new ArrayList<>();
+        for (Object dekyujyu : restoreBatchParameterMap.getParameterValue(List.class, new RString("dekyujyu"))) {
+            dekyujyuItem.add(new RString(dekyujyu.toString()));
+        }
+        div.getChkTekiyoJogaishaTekiyoJiyu().setSelectedItemsByKey(dekyujyuItem);
+        List<RString> kaijyojyuItem = new ArrayList<>();
+        for (Object kaijyojyu : restoreBatchParameterMap.getParameterValue(List.class, new RString("kaijyojyu"))) {
+            kaijyojyuItem.add(new RString(kaijyojyu.toString()));
+        }
+        div.getChkTekiyoJogaishaKaijoJiyu().setSelectedItemsByKey(kaijyojyuItem);
         List<RString> 施設変更 = new ArrayList<>();
         if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("shisetsuHenkoari"))) {
             施設変更.add(施設変更あり);
@@ -490,8 +738,9 @@ public class HanyoListParamHandler {
     }
 
     private void 他市町村住所地特例者Restore(BatchParameterMap restoreBatchParameterMap) {
-        div.getRadTaShichosonJushotiTokureishaChushutsu().setSelectedKey(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun")));
+        RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
+        set日付抽出区分(抽出区分, モード3);
+        div.getRadTaShichosonJushotiTokureishaChushutsu().setSelectedKey(抽出区分);
         div.getRadTaShichosonJushotiTokureishaTekiyoKijyun().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMDkubun")));
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
@@ -516,9 +765,19 @@ public class HanyoListParamHandler {
             selectKey.add(外国人);
         }
         div.getChkTaShichosonJushotiTokureishaJoho().setSelectedItemsByKey(selectKey);
-        div.getRadTaShichosonJushotiTokureisha().setSelectedKey(restoreBatchParameterMap.getParameterValue(RString.class, new RString("jyuChusyutsuKubun")));
-        div.getChkTaShichosonJushotiTokureishaTekiyoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("dekyujyu")));
-        div.getChkTaShichosonJushotiTokureishaKaijoJiyu().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("kaijyojyu")));
+        RString 事由抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("jyuChusyutsuKubun"));
+        div.getRadTaShichosonJushotiTokureisha().setSelectedKey(事由抽出区分);
+        set他市町村住所地特例者事由抽出区分(事由抽出区分);
+        List<RString> dekyujyuItem = new ArrayList<>();
+        for (Object dekyujyu : restoreBatchParameterMap.getParameterValue(List.class, new RString("dekyujyu"))) {
+            dekyujyuItem.add(new RString(dekyujyu.toString()));
+        }
+        div.getChkTaShichosonJushotiTokureishaTekiyoJiyu().setSelectedItemsByKey(dekyujyuItem);
+        List<RString> kaijyojyuItem = new ArrayList<>();
+        for (Object kaijyojyu : restoreBatchParameterMap.getParameterValue(List.class, new RString("kaijyojyu"))) {
+            kaijyojyuItem.add(new RString(kaijyojyu.toString()));
+        }
+        div.getChkTaShichosonJushotiTokureishaKaijoJiyu().setSelectedItemsByKey(kaijyojyuItem);
         List<RString> 施設変更 = new ArrayList<>();
         if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("shisetsuHenkoari"))) {
             施設変更.add(施設変更あり);
@@ -530,8 +789,9 @@ public class HanyoListParamHandler {
     }
 
     private void 老齢福祉年金受給者Restore(BatchParameterMap restoreBatchParameterMap) {
-        div.getRadRoreiFukushiNenkinJukyushaChushutsu().setSelectedKey(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun")));
+        RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
+        set日付抽出区分(抽出区分, モード4);
+        div.getRadRoreiFukushiNenkinJukyushaChushutsu().setSelectedKey(抽出区分);
         RString 日付抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         if (!RString.isNullOrEmpty(日付抽出区分)) {
             div.getTexRoreiFukushiNenkinJukyushaKijyunDate().setValue(new RDate(日付抽出区分.toString()));
@@ -549,8 +809,9 @@ public class HanyoListParamHandler {
     }
 
     private void 生活保護受給者Restore(BatchParameterMap restoreBatchParameterMap) {
-        div.getRadSeikatuhogoJukyushaChushutsu().setSelectedKey(
-                restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun")));
+        RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
+        set日付抽出区分(抽出区分, モード5);
+        div.getRadSeikatuhogoJukyushaChushutsu().setSelectedKey(抽出区分);
         RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
         if (!RString.isNullOrEmpty(基準年月日)) {
             div.getTexSeikatuhogoKijunDate().setValue(new RDate(基準年月日.toString()));
@@ -573,7 +834,50 @@ public class HanyoListParamHandler {
             selectKey.add(外国人);
         }
         div.getChkSeikatsuHogoJukyushaJoho().setSelectedItemsByKey(selectKey);
-        div.getChkSeikatsuHogo().setSelectedItemsByKey(restoreBatchParameterMap.getParameterValue(List.class, new RString("fujoShurui")));
+        List<RString> fujoShuruiItem = new ArrayList<>();
+        for (Object fujoShurui : restoreBatchParameterMap.getParameterValue(List.class, new RString("fujoShurui"))) {
+            fujoShuruiItem.add(new RString(fujoShurui.toString()));
+        }
+        div.getChkSeikatsuHogo().setSelectedItemsByKey(fujoShuruiItem);
+    }
+
+    private void set日付抽出区分(RString 抽出区分, RString モード) {
+        if (HizukeChushutsuKubun.直近.getコード().equals(抽出区分)) {
+            set基準日Disable(モード);
+            set範囲Disable(モード);
+        } else if (HizukeChushutsuKubun.基準日.getコード().equals(抽出区分)) {
+            set範囲Disable(モード);
+            set基準日unDisable(モード);
+        } else if (HizukeChushutsuKubun.範囲.getコード().equals(抽出区分)) {
+            set範囲unDisable(モード);
+            set基準日Disable(モード);
+        }
+    }
+
+    private void set適用除外者事由抽出区分(RString 事由抽出区分) {
+        if (JiyuChushutsuKubun.適用除外者のみ.getコード().equals(事由抽出区分)) {
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(true);
+        } else if (JiyuChushutsuKubun.適用除外解除者のみ.getコード().equals(事由抽出区分)) {
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(true);
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
+        } else if (JiyuChushutsuKubun.両方.getコード().equals(事由抽出区分)) {
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaTekiyoJiyu().setDisabled(false);
+            div.getTekiyoJogaishaJoken().getChkTekiyoJogaishaKaijoJiyu().setDisabled(false);
+        }
+    }
+
+    private void set他市町村住所地特例者事由抽出区分(RString 事由抽出区分) {
+        if (他特例適用者のみ.equals(事由抽出区分)) {
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(true);
+        } else if (他特例解除者のみ.equals(事由抽出区分)) {
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(true);
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(false);
+        } else if (両方.equals(事由抽出区分)) {
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaTekiyoJiyu().setDisabled(false);
+            div.getTaShichosonJushotiTokureishaJoken().getChkTaShichosonJushotiTokureishaKaijoJiyu().setDisabled(false);
+        }
     }
 
     private void 宛名抽出条件復元(BatchParameterMap restoreBatchParameterMap) {

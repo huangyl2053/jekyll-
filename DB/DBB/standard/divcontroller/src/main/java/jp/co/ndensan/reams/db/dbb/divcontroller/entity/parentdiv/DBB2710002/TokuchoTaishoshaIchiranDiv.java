@@ -56,6 +56,8 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     private RString hiddenConfirmState;
     @JsonProperty("hiddenFukaNendo")
     private RString hiddenFukaNendo;
+    @JsonProperty("hiddenPageState")
+    private RString hiddenPageState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -304,6 +306,24 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     @JsonProperty("hiddenFukaNendo")
     public void setHiddenFukaNendo(RString hiddenFukaNendo) {
         this.hiddenFukaNendo = hiddenFukaNendo;
+    }
+
+    /*
+     * gethiddenPageState
+     * @return hiddenPageState
+     */
+    @JsonProperty("hiddenPageState")
+    public RString getHiddenPageState() {
+        return hiddenPageState;
+    }
+
+    /*
+     * sethiddenPageState
+     * @param hiddenPageState hiddenPageState
+     */
+    @JsonProperty("hiddenPageState")
+    public void setHiddenPageState(RString hiddenPageState) {
+        this.hiddenPageState = hiddenPageState;
     }
 
     /*

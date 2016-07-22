@@ -26,6 +26,7 @@ public class GokeiEntity {
     private RString 診断検査費用;
     private RString 合計;
     private int 番号;
+    private boolean 出力条件 = false;
 
     /**
      * コンストラクタです。

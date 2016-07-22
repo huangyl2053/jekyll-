@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
@@ -52,7 +53,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
                 }
             }
         }
-        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
+        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通(), item.get地方公共団体());
         source.hihokenshaNameKana = 編集後個人.get名称().getKana().getColumnValue();
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         source.hihokenshaNo = item.get帳票情報() == null ? RString.EMPTY : item.get帳票情報().get被保険者番号().getColumnValue();
@@ -68,7 +69,7 @@ public class NinteiKoshinTsuchishoLayer1Editor implements INinteiKoshinTsuchisho
         return source;
     }
 
-    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(kojin, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(kojin, 帳票制御共通, 地方公共団体);
     }
 }

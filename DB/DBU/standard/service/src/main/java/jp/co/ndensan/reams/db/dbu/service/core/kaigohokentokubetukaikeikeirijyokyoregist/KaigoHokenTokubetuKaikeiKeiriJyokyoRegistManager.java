@@ -559,7 +559,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 統計対象区分, 市町村コード, 表番号, 集計番号list);
         for (DbT7021JigyoHokokuTokeiDataEntity entity : entitys) {
             entity.setState(EntityDataState.Deleted);
-            削除件数 = 削除件数 + dbT7021JigyoHokokuTokeiDataDac.save(entity);
+            削除件数 = 削除件数 + dbT7021JigyoHokokuTokeiDataDac.delete(entity);
         }
         return 削除件数;
     }

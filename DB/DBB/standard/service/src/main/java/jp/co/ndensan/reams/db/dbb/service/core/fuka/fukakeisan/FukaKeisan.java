@@ -390,7 +390,7 @@ public class FukaKeisan {
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日 != null && 受給開始日.isEmpty()) {
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
                 if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                     return true;
                 } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
@@ -417,7 +417,7 @@ public class FukaKeisan {
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日 != null && 受給開始日.isEmpty()) {
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
                 if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                     return true;
                 } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
@@ -447,7 +447,7 @@ public class FukaKeisan {
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日 != null && 受給開始日.isEmpty()) {
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
                 if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
                     return true;
                 } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {

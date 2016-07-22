@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -55,6 +56,7 @@ public class YoshikiYonnoni {
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
+    private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private static final int MONTH_6 = 6;
     private static final int INT_4 = 4;
     private static final RString 座標1_1 = new RString("1_1");
@@ -120,7 +122,7 @@ public class YoshikiYonnoni {
                     new FlexibleDate(new RDate(insuranceInf.get報告年().getYearValue()).toString()));
             div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setValue(
                     new FlexibleDate(new RDate(insuranceInf.get集計対象年().getYearValue()).toString()));
-            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setValue(insuranceInf.get市町村コード().getColumnValue());
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setValue(insuranceInf.get保険者コード().getColumnValue());
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setValue(insuranceInf.get市町村名称());
             if (list.isEmpty()) {
                 div.setShoriMode(内部処理モード_修正追加);
@@ -154,7 +156,7 @@ public class YoshikiYonnoni {
                 div.setShoriMode(内部処理モード_削除);
             }
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
-            div.getYoshikiYonnoniMeisai().setDisabled(true);
+            div.getYoshikiYonnoniMeisai().getTplTokukaikeijokyo().setDisabled(true);
             List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
             if (shichosonList.isEmpty()) {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -190,6 +192,7 @@ public class YoshikiYonnoni {
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisplayNone(true);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
             div.setShoriMode(内部処理モード_追加);
         }
         return ResponseData.of(div).respond();
@@ -280,7 +283,9 @@ public class YoshikiYonnoni {
             }
 
             List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoList(
-                    new FlexibleDate(new RDate(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().toString()).toString()).getYear(),
+                    new FlexibleDate(new RDate(
+                                    div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, INT_4).concat("0101").toString())
+                            .toString()).getYear(),
                     new LasdecCode(div.getYoshikiYonnoniMeisai().getDdlShicyoson().getSelectedKey().toString()),
                     tokeiTaishoKubun);
 
@@ -288,10 +293,10 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(true);
-                div.getYoshikiYonnoniMeisai().setDisabled(false);
-
+                div.getYoshikiYonnoniMeisai().getTplTokukaikeijokyo().setDisabled(false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, false);
             } else {
-                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
+                throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
 
             }
 
@@ -322,9 +327,7 @@ public class YoshikiYonnoni {
     public ResponseData<YoshikiYonnoniDiv> onClick_btnUpdate(YoshikiYonnoniDiv div) {
 
         if (内部処理モード_修正.equals(div.getShoriMode())) {
-
-            KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
-            if (修正データ.get詳細データエリア().isEmpty()) {
+            if (!is編集あり(div)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
             } else {
                 this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
@@ -387,7 +390,7 @@ public class YoshikiYonnoni {
             }
         } else if (内部処理モード_修正.equals(div.getShoriMode())) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
-            if (修正データ == null) {
+            if (!is編集あり(div)) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
                 return this.updKaigoHokenTokubetuKaikeiKeiriJyokyo(修正データ, manager, div);
@@ -588,8 +591,7 @@ public class YoshikiYonnoni {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             if (DBU0050031TransitionEventName.検索に戻る.equals(events) || DBU0050031TransitionEventName.処理完了.equals(events)) {
@@ -742,6 +744,148 @@ public class YoshikiYonnoni {
             修正データ.get詳細データエリア().put(座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
 
         }
+    }
+
+    private boolean is編集あり(YoshikiYonnoniDiv div) {
+        InsuranceInformation insuranceInf = get引き継ぎデータ(div);
+        KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager manager = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
+
+        List<KaigoHokenJigyoHokokuNenpo> list = manager.getJigyoHokokuNenpoDetal(
+                new FlexibleYear(insuranceInf.get報告年().toString()),
+                new RString(insuranceInf.get集計対象年().toString()),
+                insuranceInf.get統計対象区分(),
+                insuranceInf.get市町村コード(),
+                集計番号_0200);
+        for (int i = 0; i < list.size(); i++) {
+            if (is編集あり_１(list, i, div) || is編集あり_２(list, i, div)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean is編集あり_１(
+            List<KaigoHokenJigyoHokokuNenpo> list,
+            int i,
+            YoshikiYonnoniDiv div) {
+        if (is変更あり(list, i, 座標1_1, div.getYoshikiYonnoniMeisai().getTxtkaigoshunyu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標1_2, div.getYoshikiYonnoniMeisai().getTxtsomu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標2_1, div.getYoshikiYonnoniMeisai().getTxtyoboshunyu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標2_2, div.getYoshikiYonnoniMeisai().getTxtitakusabisu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標3_1, div.getYoshikiYonnoniMeisai().getTxttokuteinyushoshunyu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標3_2, div.getYoshikiYonnoniMeisai().getTxtmitchaku().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標4_1, div.getYoshikiYonnoniMeisai().getTxtjiki().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標4_2, div.getYoshikiYonnoniMeisai().getTxtitakugaigoshien().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標5_1, div.getYoshikiYonnoniMeisai().getTxtsotashunyu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標5_2, div.getYoshikiYonnoniMeisai().getTxtjigyosota().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標6_1, div.getYoshikiYonnoniMeisai().getTxtbuntankin().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標6_2, div.getYoshikiYonnoniMeisai().getTxtshisetsuseibi().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標7_1, div.getYoshikiYonnoniMeisai().getTxtfutankin().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標7_2, div.getYoshikiYonnoniMeisai().getTxtkikinsekin().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標8_1, div.getYoshikiYonnoniMeisai().getTxtshiyohi().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標8_2, div.getYoshikiYonnoniMeisai().getTxtkosai().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 修正データ２の取得する。
+     *
+     */
+    private boolean is編集あり_２(
+            List<KaigoHokenJigyoHokokuNenpo> list,
+            int i,
+            YoshikiYonnoniDiv div) {
+
+        if (is変更あり(list, i, 座標10_1, div.getYoshikiYonnoniMeisai().getTxtkokko().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標10_2, div.getYoshikiYonnoniMeisai().getTxtshoshishutsu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標11_1, div.getYoshikiYonnoniMeisai().getTxttodofuken().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標11_2, div.getYoshikiYonnoniMeisai().getTxthokenkanjokuridasu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標12_1, div.getYoshikiYonnoniMeisai().getTxtzaisannyu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標12_2, div.getYoshikiYonnoniMeisai().getTxtshosonota().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標13_1, div.getYoshikiYonnoniMeisai().getTxtkifukin().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標13_2, div.getYoshikiYonnoniMeisai().getTxtshohi().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標14_1, div.getYoshikiYonnoniMeisai().getTxthokenkanjokirijigyo().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標15_1, div.getYoshikiYonnoniMeisai().getTxtchiikishienyobo().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標16_1, div.getYoshikiYonnoniMeisai().getTxtkurikosu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標17_1, div.getYoshikiYonnoniMeisai().getTxtshichoson().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標18_1, div.getYoshikiYonnoniMeisai().getTxtshonyu().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標19_1, div.getYoshikiYonnoniMeisai().getTxtsainyugokei().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標19_2, div.getYoshikiYonnoniMeisai().getTxtsaishutsugokei().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
+            return true;
+        }
+        if (is変更あり(list, i, 座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
+            return true;
+        }
+        return false;
     }
 
     /**

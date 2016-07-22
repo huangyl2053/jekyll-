@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 介護保険特別会計経理状況登録_様式４ハンドラクラスです。
@@ -54,6 +55,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
     private final RString 画面表示_修正 = new RString("修正");
     private final RString 画面表示_削除 = new RString("削除");
     private final RString 画面表示_追加 = new RString("追加");
+    private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private static final int INT3 = 3;
     private static final int INT31 = 31;
     private static final int INT4 = 4;
@@ -327,15 +329,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
      */
     public void onClick_btnConfirm(InsuranceInformation insuranceInf) {
         TextBoxFlexibleDate 報告年度Box = div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM();
-        LasdecCode 市町村コード = insuranceInf.get市町村コード();
-        TokeiTaishoKubun 保険者区分 = TokeiTaishoKubun.空;
-        List<Shichoson> 市町村Lst = get市町村Lst();
-        for (Shichoson shichoson : 市町村Lst) {
-            if (shichoson.get市町村コード().equals(市町村コード)) {
-                保険者区分 = shichoson.get保険者区分();
-                break;
-            }
-        }
+        LasdecCode 市町村コード = get市町村コード(div.getDdlShicyoson().getSelectedKey());
+        TokeiTaishoKubun 保険者区分 = get保険者区分(div.getDdlShicyoson().getSelectedKey());
         報告年度の確定処理(報告年度Box, 市町村コード, 保険者区分);
     }
 
@@ -352,6 +347,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             報告年度Box.setReadOnly(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(true);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, false);
             詳細データエリ表示(null, 状態1_確定);
         }
     }

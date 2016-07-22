@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
+ * DBB2310001_TokuchoSeidokanIFSakuseiFlowのクラスです。
  *
- * @author lizhiyang
+ * @reamsid_L DBB-1830-040 liuyang
  */
 public class DBB2310001_TokuchoSeidokanIFSakuseiFlow extends BatchFlowBase<TokuchoSeidokanIFSakuseiBatchParameter> {
 

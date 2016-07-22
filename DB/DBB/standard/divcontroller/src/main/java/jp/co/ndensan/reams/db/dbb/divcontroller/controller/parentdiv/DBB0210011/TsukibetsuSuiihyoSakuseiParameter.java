@@ -58,6 +58,15 @@ public class TsukibetsuSuiihyoSakuseiParameter {
             div.getTxtUmareSt().setDisabled(true);
             div.getTxtUmareEd().setDisabled(true);
         }
+        if (div.getRadNenrei().getSelectedKey() != null && !div.getRadNenrei().getSelectedKey().isEmpty()) {
+            div.getTxtNenreiSt().setDisabled(false);
+            div.getTxtNenreiEd().setDisabled(false);
+            div.getTxtNenreiKijunYMD().setDisabled(false);
+        } else {
+            div.getTxtNenreiSt().setDisabled(true);
+            div.getTxtNenreiEd().setDisabled(true);
+            div.getTxtNenreiKijunYMD().setDisabled(true);
+        }
         return ResponseData.of(div).respond();
     }
 

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.service.core.kyotakuservicekeikakuinfo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateParameter;
@@ -18,12 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定申請連絡先のクラスです。
- * 
- * @reamsid_L DBE-3000-170  suguangjun 
+ *
+ * @reamsid_L DBE-3000-170 suguangjun
  */
 public class KyotakuServiceKeikakuInfoFinder {
 
-     private final MapperProvider mapperProvider;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタ。
@@ -59,12 +60,15 @@ public class KyotakuServiceKeikakuInfoFinder {
      */
     @Transaction
     public SearchResult<KyotakuServiceKeikaku> getKyotakuServiceKeikaku(KyotakuServiceKeikakuInfoRelateParameter parameter) {
-        List<KyotakuServiceKeikaku> serviceKeikakuList = new ArrayList<>();
         IKyotakuServiceKeikakuInfoMapper keikakuInfoMapper = mapperProvider.create(IKyotakuServiceKeikakuInfoMapper.class);
-        KyotakuServiceKeikakuInfoRelateEntity entity = keikakuInfoMapper.getKyotakuServiceKeikaku(parameter);
-        if (entity != null) {
-            serviceKeikakuList.add(new KyotakuServiceKeikaku(entity));
+        List<KyotakuServiceKeikakuInfoRelateEntity> entityList = keikakuInfoMapper.getKyotakuServiceKeikaku(parameter);
+        if (entityList.isEmpty()) {
+            return SearchResult.of(Collections.<KyotakuServiceKeikaku>emptyList(), 0, false);
         }
-        return SearchResult.of(serviceKeikakuList, 0, false);
+        List<KyotakuServiceKeikaku> 計画情報 = new ArrayList<>();
+        for (KyotakuServiceKeikakuInfoRelateEntity entity : entityList) {
+            計画情報.add(new KyotakuServiceKeikaku(entity));
+        }
+        return SearchResult.of(計画情報, 0, false);
     }
 }

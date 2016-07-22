@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-0980-420 zhangrui
  */
 public class KohifutanshaReadCsvFileProcess extends SimpleBatchProcessBase {
-    //パラメータ名
+
     /**
      * returnEntity
      */
