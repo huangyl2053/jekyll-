@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * TokuchoSeidokanIFSakuseiDBUpdateProcessのクラスです。
  *
+ * @reamsid_L DBB-1830-040 liuyang
  */
 public class TokuchoSeidokanIFSakuseiDBUpdateProcess extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
 
