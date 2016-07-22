@@ -124,6 +124,7 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         builder.set業務コード(GyomuCode.DB介護保険);
+        builder.set基準日(FlexibleDate.getNowDate());
         IKozaSearchKey searchKey = builder.build();
         parameter.setSearchkey(searchKey);
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
