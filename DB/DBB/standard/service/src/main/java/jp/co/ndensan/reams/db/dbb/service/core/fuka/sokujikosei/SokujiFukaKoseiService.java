@@ -108,6 +108,7 @@ public class SokujiFukaKoseiService {
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
     private static final RString 汎用キー_通知書番号 = new RString("通知書番号");
+    private static final RString ゼロ_0000 = new RString("0000");
 
     /**
      * コンストラクタです
@@ -202,7 +203,8 @@ public class SokujiFukaKoseiService {
             FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                     RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
             CountedItem saiban = Saiban.get(SubGyomuCode.DBB介護賦課, 汎用キー_通知書番号, FlexibleDate.getNowDate().getNendo());
-            FukaJoho fukaJoho = new FukaJoho(調定年度, 賦課年度, new TsuchishoNo(saiban.nextString().trim()), 0);
+            TsuchishoNo 通知書番号 = create通知書番号(被保険者番号.getColumnValue(), saiban.nextString().trim());
+            FukaJoho fukaJoho = new FukaJoho(調定年度, 賦課年度, 通知書番号, 0);
             賦課の情報 = get根拠反映後賦課の情報(fukaJoho, 資格の情報, 賦課年度);
             FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
             builder.set調定事由1(ChoteiJiyuCode.仮徴収額の変更.getコード())
@@ -238,6 +240,14 @@ public class SokujiFukaKoseiService {
         result.set更正前後賦課のリスト(更正前後賦課のリスト);
         result.set更正前後徴収方法(更正前後徴収方法);
         return result;
+    }
+
+    private TsuchishoNo create通知書番号(RString 被保険者番号, RString 枝番号) {
+        RStringBuilder rst = new RStringBuilder();
+        rst.append(ゼロ_0000);
+        rst.append(被保険者番号);
+        rst.append(枝番号.padZeroToLeft(INT_2));
+        return new TsuchishoNo(rst.toRString());
     }
 
     private KoseiShoriResult get本算定の更正(SokujiFukaKoseiParameter param) {
