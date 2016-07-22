@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class CopyToLocalProcess extends SimpleBatchProcessBase {
 
-    //パラメータ名
     /**
      * filePath
      */
