@@ -23,7 +23,7 @@
             <result property="事業者番号" column="dbWT3064_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
             <result property="事業者名" column="dbWT3064_jigyoshoMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="公費受給者番号" column="dbWT3064_kohiJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-            <result property="公費受給者名" column="dbWT0001_orgHihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+            <result property="公費受給者名" column="dbWT0001_meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="公費証記載保険者番号" column="dbWT3064_kohiShokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
             <result property="被保険者番号" column="dbWT0001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
             <result property="サービス提供年月" column="dbWT3064_serviceTeikyoYm" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -70,7 +70,7 @@
         DbWT3064."jigyoshoNo" AS dbWT3064_jigyoshoNo,
         DbWT3064."jigyoshoMei" AS dbWT3064_jigyoshoMei,
         DbWT3064."kohiJukyushaNo" AS dbWT3064_kohiJukyushaNo,
-        DbWT0001."orgHihokenshaShimei" AS dbWT0001_orgHihokenshaShimei,
+        DbWT0001."meisho" AS dbWT0001_meisho,
         DbWT3064."kohiShokisaiHokenshaNo" AS dbWT3064_kohiShokisaiHokenshaNo,
         DbWT0001."hihokenshaNo" AS dbWT0001_hihokenshaNo,
         DbWT3064."serviceTeikyoYm" AS dbWT3064_serviceTeikyoYm,
