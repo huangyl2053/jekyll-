@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjun
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -39,8 +38,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor {
 
-    private final List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト;
-    private final List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト;
+    private final TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表;
+    private final TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -56,10 +55,10 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private final Association association;
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
-            List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
-            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト, Association association) {
-        this.特徴平準化結果対象者一覧表リスト = 特徴平準化結果対象者一覧表リスト;
-        this.特徴平準化結果対象外一覧表リスト = 特徴平準化結果対象外一覧表リスト;
+            TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表,
+            TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表, Association association) {
+        this.特徴平準化結果対象者一覧表 = 特徴平準化結果対象者一覧表;
+        this.特徴平準化結果対象外一覧表 = 特徴平準化結果対象外一覧表;
         this.association = association;
     }
 
@@ -68,17 +67,17 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
-        for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者 : 特徴平準化結果対象者一覧表リスト) {
-            対象者項目編集(特徴平準化結果対象者, source, 帳票制御共通);
+        if (特徴平準化結果対象者一覧表 != null) {
+            対象者項目編集(特徴平準化結果対象者一覧表, source, 帳票制御共通, association);
         }
-        for (TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外 : 特徴平準化結果対象外一覧表リスト) {
-            対象外項目編集(特徴平準化結果対象外, source, 帳票制御共通);
+        if (特徴平準化結果対象外一覧表 != null) {
+            対象外項目編集(特徴平準化結果対象外一覧表, source, 帳票制御共通, association);
         }
         return source;
     }
 
     private void 対象者項目編集(TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者,
-            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通) {
+            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
         RString 編集備考 = 備考名を転換(item.get備考コード());
         TsuchishoNo 通知書番号 = item.get通知書番号();
@@ -91,8 +90,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
-            source.listUpper_4 = 編集後個人.get編集後住所();
+            source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
             if (行政区コード != null) {
                 source.listUpper_3 = 行政区コード.value();
@@ -181,7 +179,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     }
 
     private void 対象外項目編集(TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外,
-            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通) {
+            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象外.get特徴平準化結果対象外();
         RString 編集備考 = 備考名を転換(item.get備考コード());
         TsuchishoNo 通知書番号 = item.get通知書番号();
@@ -194,8 +192,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
-            source.listUpper_4 = 編集後個人.get編集後住所();
+            source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
             if (行政区コード != null) {
                 source.listUpper_3 = 行政区コード.value();
