@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.flow.hanyolistroreifukushinen
 
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaProcess;
 import jp.co.ndensan.reams.db.dba.batchcontroller.step.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaRenbanProcess;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistseikatsuhogojukyusha.HanyoListBatchParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolistroreifukushinenkinjukyusha.HanyoListRoreiFukushiNenkinJukyushaBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBA-1620-030 yaodongsheng
  */
-public class HanyoListRoreiFukushiNenkinJukyushaFlow extends BatchFlowBase<HanyoListBatchParameter> {
+public class HanyoListRoreiFukushiNenkinJukyushaFlow extends BatchFlowBase<HanyoListRoreiFukushiNenkinJukyushaBatchParameter> {
 
     private static final String CSV_PROCESS = "csvProcess";
     private static final String RENBAN_CSV_PROCESS = "renbanCsvProcess";

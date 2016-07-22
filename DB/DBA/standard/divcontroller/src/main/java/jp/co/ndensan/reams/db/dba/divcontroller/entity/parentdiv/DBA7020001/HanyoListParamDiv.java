@@ -29,8 +29,14 @@ public class HanyoListParamDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JokenFukugenHozon")
-    private JokenFukugenHozonDiv JokenFukugenHozon;
+    @JsonProperty("TekiyoJogaishaJokenFukugenHozon")
+    private TekiyoJogaishaJokenFukugenHozonDiv TekiyoJogaishaJokenFukugenHozon;
+    @JsonProperty("TaShichosonJushotiTokureishaJokenFukugenHozon")
+    private TaShichosonJushotiTokureishaJokenFukugenHozonDiv TaShichosonJushotiTokureishaJokenFukugenHozon;
+    @JsonProperty("RoreiFukushiNenkinJukyushaJokenFukugenHozon")
+    private RoreiFukushiNenkinJukyushaJokenFukugenHozonDiv RoreiFukushiNenkinJukyushaJokenFukugenHozon;
+    @JsonProperty("SeikatuhogoJukyushaJokenFukugenHozon")
+    private SeikatuhogoJukyushaJokenFukugenHozonDiv SeikatuhogoJukyushaJokenFukugenHozon;
     @JsonProperty("TekiyoJogaishaJoken")
     private TekiyoJogaishaJokenDiv TekiyoJogaishaJoken;
     @JsonProperty("TaShichosonJushotiTokureishaJoken")
@@ -43,10 +49,10 @@ public class HanyoListParamDiv extends PanelBatchParameter {
     private ChushutsuPanel2Div ChushutsuPanel2;
     @JsonProperty("CsvHenshuHoho")
     private CsvHenshuHohoDiv CsvHenshuHoho;
-    @JsonProperty("ccdShutsuryokuKomoku")
-    private ChohyoShutsuryokuKomokuDiv ccdShutsuryokuKomoku;
     @JsonProperty("ccdShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdShutsuryokujun;
+    @JsonProperty("ccdShutsuryokuKomoku")
+    private ChohyoShutsuryokuKomokuDiv ccdShutsuryokuKomoku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,21 +61,75 @@ public class HanyoListParamDiv extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getJokenFukugenHozon
-     * @return JokenFukugenHozon
+     * getTekiyoJogaishaJokenFukugenHozon
+     * @return TekiyoJogaishaJokenFukugenHozon
      */
-    @JsonProperty("JokenFukugenHozon")
-    public JokenFukugenHozonDiv getJokenFukugenHozon() {
-        return JokenFukugenHozon;
+    @JsonProperty("TekiyoJogaishaJokenFukugenHozon")
+    public TekiyoJogaishaJokenFukugenHozonDiv getTekiyoJogaishaJokenFukugenHozon() {
+        return TekiyoJogaishaJokenFukugenHozon;
     }
 
     /*
-     * setJokenFukugenHozon
-     * @param JokenFukugenHozon JokenFukugenHozon
+     * setTekiyoJogaishaJokenFukugenHozon
+     * @param TekiyoJogaishaJokenFukugenHozon TekiyoJogaishaJokenFukugenHozon
      */
-    @JsonProperty("JokenFukugenHozon")
-    public void setJokenFukugenHozon(JokenFukugenHozonDiv JokenFukugenHozon) {
-        this.JokenFukugenHozon = JokenFukugenHozon;
+    @JsonProperty("TekiyoJogaishaJokenFukugenHozon")
+    public void setTekiyoJogaishaJokenFukugenHozon(TekiyoJogaishaJokenFukugenHozonDiv TekiyoJogaishaJokenFukugenHozon) {
+        this.TekiyoJogaishaJokenFukugenHozon = TekiyoJogaishaJokenFukugenHozon;
+    }
+
+    /*
+     * getTaShichosonJushotiTokureishaJokenFukugenHozon
+     * @return TaShichosonJushotiTokureishaJokenFukugenHozon
+     */
+    @JsonProperty("TaShichosonJushotiTokureishaJokenFukugenHozon")
+    public TaShichosonJushotiTokureishaJokenFukugenHozonDiv getTaShichosonJushotiTokureishaJokenFukugenHozon() {
+        return TaShichosonJushotiTokureishaJokenFukugenHozon;
+    }
+
+    /*
+     * setTaShichosonJushotiTokureishaJokenFukugenHozon
+     * @param TaShichosonJushotiTokureishaJokenFukugenHozon TaShichosonJushotiTokureishaJokenFukugenHozon
+     */
+    @JsonProperty("TaShichosonJushotiTokureishaJokenFukugenHozon")
+    public void setTaShichosonJushotiTokureishaJokenFukugenHozon(TaShichosonJushotiTokureishaJokenFukugenHozonDiv TaShichosonJushotiTokureishaJokenFukugenHozon) {
+        this.TaShichosonJushotiTokureishaJokenFukugenHozon = TaShichosonJushotiTokureishaJokenFukugenHozon;
+    }
+
+    /*
+     * getRoreiFukushiNenkinJukyushaJokenFukugenHozon
+     * @return RoreiFukushiNenkinJukyushaJokenFukugenHozon
+     */
+    @JsonProperty("RoreiFukushiNenkinJukyushaJokenFukugenHozon")
+    public RoreiFukushiNenkinJukyushaJokenFukugenHozonDiv getRoreiFukushiNenkinJukyushaJokenFukugenHozon() {
+        return RoreiFukushiNenkinJukyushaJokenFukugenHozon;
+    }
+
+    /*
+     * setRoreiFukushiNenkinJukyushaJokenFukugenHozon
+     * @param RoreiFukushiNenkinJukyushaJokenFukugenHozon RoreiFukushiNenkinJukyushaJokenFukugenHozon
+     */
+    @JsonProperty("RoreiFukushiNenkinJukyushaJokenFukugenHozon")
+    public void setRoreiFukushiNenkinJukyushaJokenFukugenHozon(RoreiFukushiNenkinJukyushaJokenFukugenHozonDiv RoreiFukushiNenkinJukyushaJokenFukugenHozon) {
+        this.RoreiFukushiNenkinJukyushaJokenFukugenHozon = RoreiFukushiNenkinJukyushaJokenFukugenHozon;
+    }
+
+    /*
+     * getSeikatuhogoJukyushaJokenFukugenHozon
+     * @return SeikatuhogoJukyushaJokenFukugenHozon
+     */
+    @JsonProperty("SeikatuhogoJukyushaJokenFukugenHozon")
+    public SeikatuhogoJukyushaJokenFukugenHozonDiv getSeikatuhogoJukyushaJokenFukugenHozon() {
+        return SeikatuhogoJukyushaJokenFukugenHozon;
+    }
+
+    /*
+     * setSeikatuhogoJukyushaJokenFukugenHozon
+     * @param SeikatuhogoJukyushaJokenFukugenHozon SeikatuhogoJukyushaJokenFukugenHozon
+     */
+    @JsonProperty("SeikatuhogoJukyushaJokenFukugenHozon")
+    public void setSeikatuhogoJukyushaJokenFukugenHozon(SeikatuhogoJukyushaJokenFukugenHozonDiv SeikatuhogoJukyushaJokenFukugenHozon) {
+        this.SeikatuhogoJukyushaJokenFukugenHozon = SeikatuhogoJukyushaJokenFukugenHozon;
     }
 
     /*
@@ -181,15 +241,6 @@ public class HanyoListParamDiv extends PanelBatchParameter {
     }
 
     /*
-     * getccdShutsuryokuKomoku
-     * @return ccdShutsuryokuKomoku
-     */
-    @JsonProperty("ccdShutsuryokuKomoku")
-    public IChohyoShutsuryokuKomokuDiv getCcdShutsuryokuKomoku() {
-        return ccdShutsuryokuKomoku;
-    }
-
-    /*
      * getccdShutsuryokujun
      * @return ccdShutsuryokujun
      */
@@ -199,26 +250,95 @@ public class HanyoListParamDiv extends PanelBatchParameter {
     }
 
     /*
+     * getccdShutsuryokuKomoku
+     * @return ccdShutsuryokuKomoku
+     */
+    @JsonProperty("ccdShutsuryokuKomoku")
+    public IChohyoShutsuryokuKomokuDiv getCcdShutsuryokuKomoku() {
+        return ccdShutsuryokuKomoku;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ButtonBatchParameterSave getBtnParamSave() {
-        return this.getJokenFukugenHozon().getBtnParamSave();
+    public ButtonBatchParameterSave getBtnTekiyoJogaishaParamSave() {
+        return this.getTekiyoJogaishaJokenFukugenHozon().getBtnTekiyoJogaishaParamSave();
     }
 
     @JsonIgnore
-    public void  setBtnParamSave(ButtonBatchParameterSave btnParamSave) {
-        this.getJokenFukugenHozon().setBtnParamSave(btnParamSave);
+    public void  setBtnTekiyoJogaishaParamSave(ButtonBatchParameterSave btnTekiyoJogaishaParamSave) {
+        this.getTekiyoJogaishaJokenFukugenHozon().setBtnTekiyoJogaishaParamSave(btnTekiyoJogaishaParamSave);
     }
 
     @JsonIgnore
-    public ButtonBatchParameterRestore getBtnParamRestore() {
-        return this.getJokenFukugenHozon().getBtnParamRestore();
+    public ButtonBatchParameterRestore getBtnTekiyoJogaishaParamRestore() {
+        return this.getTekiyoJogaishaJokenFukugenHozon().getBtnTekiyoJogaishaParamRestore();
     }
 
     @JsonIgnore
-    public void  setBtnParamRestore(ButtonBatchParameterRestore btnParamRestore) {
-        this.getJokenFukugenHozon().setBtnParamRestore(btnParamRestore);
+    public void  setBtnTekiyoJogaishaParamRestore(ButtonBatchParameterRestore btnTekiyoJogaishaParamRestore) {
+        this.getTekiyoJogaishaJokenFukugenHozon().setBtnTekiyoJogaishaParamRestore(btnTekiyoJogaishaParamRestore);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnTaShichosonJushochiTokureishaParamSave() {
+        return this.getTaShichosonJushotiTokureishaJokenFukugenHozon().getBtnTaShichosonJushochiTokureishaParamSave();
+    }
+
+    @JsonIgnore
+    public void  setBtnTaShichosonJushochiTokureishaParamSave(ButtonBatchParameterSave btnTaShichosonJushochiTokureishaParamSave) {
+        this.getTaShichosonJushotiTokureishaJokenFukugenHozon().setBtnTaShichosonJushochiTokureishaParamSave(btnTaShichosonJushochiTokureishaParamSave);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnTaShichosonJushochiTokureishaParamRestore() {
+        return this.getTaShichosonJushotiTokureishaJokenFukugenHozon().getBtnTaShichosonJushochiTokureishaParamRestore();
+    }
+
+    @JsonIgnore
+    public void  setBtnTaShichosonJushochiTokureishaParamRestore(ButtonBatchParameterRestore btnTaShichosonJushochiTokureishaParamRestore) {
+        this.getTaShichosonJushotiTokureishaJokenFukugenHozon().setBtnTaShichosonJushochiTokureishaParamRestore(btnTaShichosonJushochiTokureishaParamRestore);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnRoreiFukushiNenkinJukyushaParamSave() {
+        return this.getRoreiFukushiNenkinJukyushaJokenFukugenHozon().getBtnRoreiFukushiNenkinJukyushaParamSave();
+    }
+
+    @JsonIgnore
+    public void  setBtnRoreiFukushiNenkinJukyushaParamSave(ButtonBatchParameterSave btnRoreiFukushiNenkinJukyushaParamSave) {
+        this.getRoreiFukushiNenkinJukyushaJokenFukugenHozon().setBtnRoreiFukushiNenkinJukyushaParamSave(btnRoreiFukushiNenkinJukyushaParamSave);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnRoreiFukushiNenkinJukyushaParamRestore() {
+        return this.getRoreiFukushiNenkinJukyushaJokenFukugenHozon().getBtnRoreiFukushiNenkinJukyushaParamRestore();
+    }
+
+    @JsonIgnore
+    public void  setBtnRoreiFukushiNenkinJukyushaParamRestore(ButtonBatchParameterRestore btnRoreiFukushiNenkinJukyushaParamRestore) {
+        this.getRoreiFukushiNenkinJukyushaJokenFukugenHozon().setBtnRoreiFukushiNenkinJukyushaParamRestore(btnRoreiFukushiNenkinJukyushaParamRestore);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterSave getBtnSeikatsuhogoJukyushaParamSave() {
+        return this.getSeikatuhogoJukyushaJokenFukugenHozon().getBtnSeikatsuhogoJukyushaParamSave();
+    }
+
+    @JsonIgnore
+    public void  setBtnSeikatsuhogoJukyushaParamSave(ButtonBatchParameterSave btnSeikatsuhogoJukyushaParamSave) {
+        this.getSeikatuhogoJukyushaJokenFukugenHozon().setBtnSeikatsuhogoJukyushaParamSave(btnSeikatsuhogoJukyushaParamSave);
+    }
+
+    @JsonIgnore
+    public ButtonBatchParameterRestore getBtnSeikatsuhogoJukyushaParamRestore() {
+        return this.getSeikatuhogoJukyushaJokenFukugenHozon().getBtnSeikatsuhogoJukyushaParamRestore();
+    }
+
+    @JsonIgnore
+    public void  setBtnSeikatsuhogoJukyushaParamRestore(ButtonBatchParameterRestore btnSeikatsuhogoJukyushaParamRestore) {
+        this.getSeikatuhogoJukyushaJokenFukugenHozon().setBtnSeikatsuhogoJukyushaParamRestore(btnSeikatsuhogoJukyushaParamRestore);
     }
 
     @JsonIgnore
