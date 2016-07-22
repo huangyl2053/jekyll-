@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0100001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuInfoBusiness;
@@ -91,10 +92,9 @@ public class ShinseiKensaku {
         }
         SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter());
         ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
-        if (searchResult.records().isEmpty()) {
-            return ResponseData.of(div).respond();
+        if (!searchResult.records().isEmpty()) {
+            getHandler(div).setShinseiJohoIchiran(searchResult);
         }
-        getHandler(div).setShinseiJohoIchiran(searchResult);
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
         div.getTxtMaxDisp().setDisabled(true);
@@ -156,8 +156,7 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_btnModoru(ShinseiKensakuDiv div) {
-        List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
-        div.getDgShinseiJoho().setDataSource(dataSource);
+        div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
         div.getBtnClear().setDisabled(false);
         div.getTxtMaxDisp().setDisabled(false);
         div.getBtnKensaku().setDisabled(false);

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.Yok
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzNotificationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -77,13 +78,15 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * 「検索する」ボタン押下します。
      *
      * @param div 画面情報
-     * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
+     * @return {@code ResponseData}
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnKensaku(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-
         SearchResult<YokaigoNinteiShinchokuJoho> searchResult = YokaigoNinteiShinchokuJohoShokaiFinder
                 .createInstance().selectItirannJoho(get検索パラメータ(div));
         getHandler(div).btnKensaku(searchResult);
+        if (searchResult.records().isEmpty()) {
+            return ResponseData.of(div).addMessage(DbzNotificationMessage.該当データなし.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

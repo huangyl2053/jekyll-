@@ -139,7 +139,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
         if (searchResult.records().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return;
         }
         for (YokaigoNinteiShinchokuJoho joho : searchResult.records()) {
             dg_row.add(setRow(joho));

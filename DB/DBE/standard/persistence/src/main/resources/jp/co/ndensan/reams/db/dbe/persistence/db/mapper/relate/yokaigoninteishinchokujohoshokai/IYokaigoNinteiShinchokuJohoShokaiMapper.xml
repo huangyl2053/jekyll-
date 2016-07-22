@@ -217,21 +217,32 @@
                 </choose>
             </if>
             <if test="radKensakuHohoKey1">
-                <if test="hizukeHaniKey0">
-                    AND DbT5101."ninteiShinseiYMD"
-                    BETWEEN #{shiteiHizukeForm}
-                    AND #{shiteiHizukeTo}
-                </if>
-                <if test="hizukeHaniKey1">
-                    AND DbT5201."ninteichosaIraiYMD"
-                    BETWEEN #{shiteiHizukeForm}
-                    AND #{shiteiHizukeTo}
-                </if>
-                <if test="hizukeHaniKey2">
-                    AND DbT5301."ikenshoSakuseiIraiYMD"
-                    BETWEEN #{shiteiHizukeForm}
-                    AND #{shiteiHizukeTo}
-                </if>
+                <choose>
+                    <when test="hizukeHaniKey0">
+                        <if test="!shiteiHizukeForm.isEmpty()">
+                           AND DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{shiteiHizukeForm}
+                        </if>
+                        <if test="!shiteiHizukeTo.isEmpty()">
+                           AND DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{shiteiHizukeTo}
+                        </if>
+                    </when>
+                    <when test="hizukeHaniKey1">
+                        <if test="!shiteiHizukeForm.isEmpty()">
+                           AND DbT5201."ninteichosaIraiYMD" <![CDATA[>=]]> #{shiteiHizukeForm}
+                        </if>
+                        <if test="!shiteiHizukeTo.isEmpty()">
+                           AND DbT5201."ninteichosaIraiYMD" <![CDATA[<=]]> #{shiteiHizukeTo}
+                        </if>
+                    </when>
+                    <when test="hizukeHaniKey2">
+                        <if test="!shiteiHizukeForm.isEmpty()">
+                           AND DbT5301."ikenshoSakuseiIraiYMD" <![CDATA[>=]]> #{shiteiHizukeForm}
+                        </if>
+                        <if test="!shiteiHizukeTo.isEmpty()">
+                           AND DbT5301."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{shiteiHizukeTo}
+                        </if>                        
+                    </when>
+                </choose>
                 <if test="ninteiChosaIraiKey0">
                     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
                 </if>
