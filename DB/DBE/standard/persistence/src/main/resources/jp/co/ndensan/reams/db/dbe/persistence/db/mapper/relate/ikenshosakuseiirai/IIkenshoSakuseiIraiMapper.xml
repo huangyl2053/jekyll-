@@ -254,6 +254,7 @@
     <select resultOrdered="true" id="get介護保険指定医依頼兼主治医意見書提出意見書" resultMap="resultMap_介護保険指定医依頼兼主治医意見書提出意見書"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
+        DISTINCT
         DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         ,DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         ,DbT5101NinteiShinseiJoho."hihokenshaKana"
@@ -325,12 +326,20 @@
         LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202NinteichosahyoGaikyoChosa
         ON
         DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo"=MaxRirekiNo."TempRirekiNo"
+        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = (
+        SELECT MAX(B."ninteichosaRirekiNo")
+        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS B
+        WHERE
+        B."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo")
 
         LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302ShujiiIkenshoJoho
         ON
         DbT5302ShujiiIkenshoJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo"=MaxRirekiNo."TempRirekiNo"
+        AND DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo" = (
+        SELECT MAX(B."ikenshoIraiRirekiNo")
+        FROM rgdb."DbT5302ShujiiIkenshoJoho" AS B
+        WHERE
+        B."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo")
 
         LEFT JOIN  rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho
         ON
