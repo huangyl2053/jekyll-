@@ -261,10 +261,9 @@ public class JimuGaikyouTokkiBusiness {
     }
 
     private RString get概況特記テキスト(int index) {
-        if (概況特記一覧表情報 != null && !概況特記一覧表情報.isEmpty()) {
-            if (概況特記一覧表情報.size() % 件数 == index) {
-                return get項目(index);
-            }
+        if (概況特記一覧表情報 != null && !概況特記一覧表情報.isEmpty()
+                && 概況特記一覧表情報.size() % 件数 == index) {
+            return get項目(index);
         }
         return RString.EMPTY;
     }
@@ -285,10 +284,9 @@ public class JimuGaikyouTokkiBusiness {
     }
 
     private RString get概況特記イメージ(int index) {
-        if (概況特記イメージ情報 != null && !概況特記イメージ情報.isEmpty()) {
-            if (概況特記イメージ情報.size() % 件数 == index) {
-                return getイメージ(index);
-            }
+        if (概況特記イメージ情報 != null && !概況特記イメージ情報.isEmpty()
+                && 概況特記イメージ情報.size() % 件数 == index) {
+            return getイメージ(index);
         }
         return RString.EMPTY;
     }

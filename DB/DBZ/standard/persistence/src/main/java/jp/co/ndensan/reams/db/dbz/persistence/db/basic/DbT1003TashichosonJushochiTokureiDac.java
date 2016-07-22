@@ -56,7 +56,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
             ShikibetsuCode 識別コード,
             FlexibleDate 異動日,
             RString 枝番) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -138,7 +138,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
      */
     @Transaction
     public DbT1003TashichosonJushochiTokureiEntity selectMaxByKey(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -187,7 +187,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
     public List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例(
             ShikibetsuCode 識別コード,
             FlexibleDate 年齢到達日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
         requireNonNull(年齢到達日, UrSystemErrorMessages.値がnull.getReplacedMessage("年齢到達日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

@@ -37,7 +37,7 @@ public class RenrakuhyoDataCreatorValidationHandler {
         if (被保険者台帳情報 == null) {
             validPairs.add(new ValidationMessageControlPair(IdocheckMessages.対象者チェック));
         } else {
-            if (被保険者台帳情報.get資格喪失年月日() == null || 被保険者台帳情報.get資格喪失年月日().isEmpty()) {
+            if (被保険者台帳情報.get資格喪失年月日() != null && !被保険者台帳情報.get資格喪失年月日().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(IdocheckMessages.対象者チェック));
             }
         }

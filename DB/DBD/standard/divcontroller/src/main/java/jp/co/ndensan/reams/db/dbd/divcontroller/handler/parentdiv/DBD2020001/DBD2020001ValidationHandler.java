@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 支払方法変更滞納者把握リストハンドラクラスです。
+ *
+ * @reamsid_L DBD-3650-010 x_lilh
  */
 public class DBD2020001ValidationHandler {
 

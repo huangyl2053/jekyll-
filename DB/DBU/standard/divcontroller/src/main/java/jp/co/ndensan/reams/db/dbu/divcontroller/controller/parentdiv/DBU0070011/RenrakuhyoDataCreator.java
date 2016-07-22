@@ -57,7 +57,7 @@ public class RenrakuhyoDataCreator {
         boolean is非該当 = false;
         RiyoshaFutangakuBusiness 旧措置情報 = finder.get旧措置情報(被保険者番号, 基準日);
         if (旧措置情報 != null) {
-            if (!旧措置情報.is旧措置情報() || (旧措置情報.is旧措置情報() && 給付率 < (旧措置情報.get給付率().getColumnValue().intValue()))) {
+            if (!旧措置情報.is旧措置情報() || (旧措置情報.is旧措置情報() && (旧措置情報.get給付率().getColumnValue().intValue()) < 給付率)) {
                 is非該当 = true;
             }
             if (旧措置情報.is旧措置情報() && 給付率 <= (旧措置情報.get給付率().getColumnValue().intValue())) {
@@ -73,8 +73,9 @@ public class RenrakuhyoDataCreator {
                 算定基準額 = 高額介護サービス費.get算定基準額();
             }
         }
+
         getHandler(div).onLoad(資格対象者キー, finder.get支払方法変更(被保険者番号, 基準日),
-                finder.get利用者負担額(被保険者番号, 基準日.getYearMonth()),
+                finder.get利用者負担額(被保険者番号, finder.get給付実績基本(被保険者番号, 基準日).getサービス提供年月()),
                 finder.get負担限度額(被保険者番号, 基準日), finder.get保険料段階(基準日).records(),
                 算定基準額, is非該当, finder.get介護賦課(被保険者番号, 基準日));
         if (is非該当) {
