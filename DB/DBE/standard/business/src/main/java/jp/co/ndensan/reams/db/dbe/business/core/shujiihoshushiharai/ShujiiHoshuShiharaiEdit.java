@@ -116,7 +116,7 @@ public class ShujiiHoshuShiharaiEdit {
         seikyuEntity.set施設新規合計(decimalToRString(更新在宅計));
         seikyuEntity.set施設継続合計(decimalToRString(更新施設計));
         Decimal 合計 = 新規在宅計.add(新規施設計).add(更新在宅計).add(更新施設計);
-        Decimal 合計金額 = 合計.multiply(rstringToDecimal(seikyuEntity.get検診料等の金額()));
+        Decimal 合計金額 = 合計.add(rstringToDecimal(seikyuEntity.get検診料等の金額()));
         seikyuEntity.set合計金額(decimalToRString(合計金額));
         return seikyuEntity;
     }
