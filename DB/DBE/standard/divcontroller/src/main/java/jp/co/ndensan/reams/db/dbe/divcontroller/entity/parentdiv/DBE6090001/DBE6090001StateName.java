@@ -19,7 +19,8 @@ public enum DBE6090001StateName implements IStateEnumerations {
     調査員一覧("調査員一覧"),
     調査実績一覧("調査実績一覧"),
     調査実績明細("調査実績明細"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    調査実績一覧状態("調査実績一覧状態");
 
     private final RString name;
 

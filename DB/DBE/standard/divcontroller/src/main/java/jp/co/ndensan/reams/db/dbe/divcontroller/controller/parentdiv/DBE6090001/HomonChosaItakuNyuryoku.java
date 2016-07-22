@@ -111,6 +111,10 @@ public class HomonChosaItakuNyuryoku {
         Models<NinteiChosaHoshuJissekiJohoIdentifier, NinteiChosaHoshuJissekiJoho> joho = Models.create(報酬実績情報);
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成報酬実績情報, joho);
         div.setHdt認定調査委託先コード(div.getDgChosain().getClickedItem().getNintechosaItakusakiCode());
+        if (!div.getDgShinsakaiIin().getDataSource().isEmpty()) {
+
+            return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧状態);
+        }
         return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧);
     }
 
@@ -205,7 +209,7 @@ public class HomonChosaItakuNyuryoku {
                             div.getTxtItakusakiCode().getValue(),
                             div.getTxtChousaInCode().getValue(),
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                            Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()));
+                            Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString().replace(",", "")));
                     manager.saveOrDelete(models, key);
                 }
             }
