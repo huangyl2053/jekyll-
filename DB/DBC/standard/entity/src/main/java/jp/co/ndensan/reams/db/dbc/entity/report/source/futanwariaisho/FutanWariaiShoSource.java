@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC100065_負担割合証Source
@@ -20,6 +21,7 @@ public class FutanWariaiShoSource implements IReportSource {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     @ReportItem(name = "kofuYmd", length = 20, order = 1)
     public RString kofuYmd;
+    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "hihokenshaNo", length = 25, order = 2)
     public RString hihokenshaNo;
