@@ -13,11 +13,11 @@ public enum HaniChushutsubiKubun {
     /**
      * コード:1 名称:生保開始日 略称:定義なし
      */
-    生保開始日("1", "生保開始日"),
+    老齢開始日("1", "老齢開始日"),
     /**
      * コード:2 名称:生保終了日 略称:定義なし
      */
-    生保終了日("2", "生保終了日");
+    老齢終了日("2", "老齢終了日");
 
     private final RString code;
     private final RString fullName;

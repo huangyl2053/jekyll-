@@ -11,26 +11,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 媒体区分を表す列挙型です。
  *
- * @reamsid_L DBC-3361-010 xuxin
+ * @reamsid_L DBC-9999-023 wangchao
  */
 public enum Baitai {
 
     /**
      * コード:1 名称:1:伝送 略称:定義なし
      */
-    伝送("1", "1:伝送"),
+    伝送("1", "伝送"),
     /**
      * コード:2 名称:2:ＭＯ 略称:定義なし
      */
-    ＭＯ("2", "2:ＭＯ"),
+    ＭＯ("2", "ＭＯ"),
     /**
      * コード:4 名称:4:ＦＤ 略称:定義なし
      */
-    ＦＤ("4", "4:ＦＤ"),
+    ＦＤ("4", "ＦＤ"),
     /**
      * コード:5 名称:5:帳票 略称:定義なし
      */
-    帳票("5", "5:帳票");
+    帳票("5", "帳票");
 
     private final RString code;
     private final RString fullName;
