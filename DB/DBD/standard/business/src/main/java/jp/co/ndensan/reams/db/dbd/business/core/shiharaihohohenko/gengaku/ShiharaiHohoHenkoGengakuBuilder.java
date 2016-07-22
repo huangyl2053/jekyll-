@@ -161,7 +161,7 @@ public class ShiharaiHohoHenkoGengakuBuilder {
 
     private boolean hasSameIdentifier(ShiharaiHohoHenkoGengakuMeisaiIdentifier 支払方法変更減額明細情報識別子) {
         return (id.get被保険者番号().equals(支払方法変更減額明細情報識別子.get被保険者番号())
-                && id.get管理区分() == 支払方法変更減額明細情報識別子.get管理区分()
+                && id.get管理区分().equals(支払方法変更減額明細情報識別子.get管理区分())
                 && id.get履歴番号() == 支払方法変更減額明細情報識別子.get履歴番号());
     }
 

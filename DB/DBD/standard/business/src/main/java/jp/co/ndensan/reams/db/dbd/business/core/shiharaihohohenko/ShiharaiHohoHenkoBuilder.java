@@ -472,7 +472,7 @@ public class ShiharaiHohoHenkoBuilder {
 
     private boolean hasSameSashitomeIdentifier(ShiharaiHohoHenkoSashitomeIdentifier 支払方法変更差止情報識別子) {
         return (id.get被保険者番号().equals(支払方法変更差止情報識別子.get被保険者番号())
-                && id.get管理区分() == 支払方法変更差止情報識別子.get管理区分()
+                && id.get管理区分().equals(支払方法変更差止情報識別子.get管理区分())
                 && id.get履歴番号() == 支払方法変更差止情報識別子.get履歴番号());
     }
 
@@ -496,7 +496,7 @@ public class ShiharaiHohoHenkoBuilder {
 
     private boolean hasSameGengakuIdentifier(ShiharaiHohoHenkoGengakuIdentifier 支払方法変更減額情報識別子) {
         return (id.get被保険者番号().equals(支払方法変更減額情報識別子.get被保険者番号())
-                && id.get管理区分() == 支払方法変更減額情報識別子.get管理区分()
+                && id.get管理区分().equals(支払方法変更減額情報識別子.get管理区分())
                 && id.get履歴番号() == 支払方法変更減額情報識別子.get履歴番号());
     }
 
