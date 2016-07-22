@@ -34,9 +34,10 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
     }
 
     /**
+     * 介護認定審査対象者一覧表のEditです。
      *
-     * @param source 事務局用介護認定審査対象者一覧表のReportSourceクラス
-     * @return ShinsakaishiryoA3ReportSource 事務局用介護認定審査対象者一覧表のReportSourceクラス
+     * @param source 介護認定審査対象者一覧表のReportSourceクラス
+     * @return ShinsakaishiryoA3ReportSource 介護認定審査対象者一覧表のReportSourceクラス
      */
     @Override
     public ShinsakaishiryoA3ReportSource edit(ShinsakaishiryoA3ReportSource source) {
@@ -80,9 +81,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listYukokikan1_1 = RString.EMPTY;
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (business.get申請書管理番号() == null) {
-            source.shinseishoKanriNo = null;
-        } else {
+        if (business.get申請書管理番号() != null || !RString.isNullOrEmpty(business.get申請書管理番号().getColumnValue())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
         }
         return source;
