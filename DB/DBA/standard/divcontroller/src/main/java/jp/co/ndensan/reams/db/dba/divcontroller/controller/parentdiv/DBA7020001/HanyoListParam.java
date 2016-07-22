@@ -41,7 +41,6 @@ public class HanyoListParam {
      */
     public ResponseData<HanyoListParamDiv> onLoad(HanyoListParamDiv div) {
         RString モード = ResponseHolder.getState();
-        モード = モード3;
         ViewStateHolder.put(ViewStateKeys.モード, モード);
         getHandler(div).onLoad(モード);
         if (モード2.equals(モード)) {
