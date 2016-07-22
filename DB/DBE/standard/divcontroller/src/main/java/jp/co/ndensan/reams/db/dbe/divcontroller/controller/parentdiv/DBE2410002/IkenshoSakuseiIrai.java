@@ -181,6 +181,10 @@ public class IkenshoSakuseiIrai {
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
+        update主治医意見書作成依頼情報(div);
+        NinteiShinseiJoho 要介護認定申請情報 = IkenshoSakuseiIraiManager.createInstance().get要介護認定申請情報(
+                ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
         return response;
     }
 
@@ -192,7 +196,6 @@ public class IkenshoSakuseiIrai {
      */
     public ResponseData<IkenshoSakuseiIraiDiv> onClick_btnHakkouKanryo(IkenshoSakuseiIraiDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            update主治医意見書作成依頼情報(div);
             RString 主治医意見書作成依頼履歴番号 = div.getIkenshoIraiRirekiNo();
             if (RString.isNullOrEmpty(主治医意見書作成依頼履歴番号)) {
                 主治医意見書作成依頼履歴番号 = RString.EMPTY;
@@ -304,10 +307,6 @@ public class IkenshoSakuseiIrai {
             SyujiyikenshosakuseyiraihakouReportJoho 主治医意見書作成依頼発行一覧表List = createHandler(div).
                     create主治医意見書作成依頼発行一覧表(依頼書manager.get主治医意見書作成依頼発行一覧表(申請書管理番号).records());
             意見書PrintService.print主治医意見書作成依頼発行一覧表(主治医意見書作成依頼発行一覧表List, reportManager);
-        }
-        if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0)) {
-            List<ShujiiIkenshoSakuseiIraishoItem> 意見書作成依頼書List = createHandler(div).create意見書作成依頼書(意見書作成依頼書情報);
-            意見書PrintService.print主治医意見書作成依頼情報(意見書作成依頼書List, reportManager);
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0)) {
             call主治医意見書記入用紙(div, printService);

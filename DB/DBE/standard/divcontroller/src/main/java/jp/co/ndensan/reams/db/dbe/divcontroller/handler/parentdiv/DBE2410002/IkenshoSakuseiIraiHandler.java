@@ -441,9 +441,9 @@ public class IkenshoSakuseiIraiHandler {
         if (意見書作成依頼書情報.get被保険者氏名カナ() != null) {
             item.setHihokenshaNameKana(意見書作成依頼書情報.get被保険者氏名カナ().value());
         }
-        if (Seibetsu.男.get名称().equals(意見書作成依頼書情報.get性別().value())) {
+        if (Seibetsu.男.getコード().equals(意見書作成依頼書情報.get性別().value())) {
             item.setSeibetsuWoman(星);
-        } else if (Seibetsu.女.get名称().equals(意見書作成依頼書情報.get性別().value())) {
+        } else if (Seibetsu.女.getコード().equals(意見書作成依頼書情報.get性別().value())) {
             item.setSeibetsuMan(星);
         }
         if (意見書作成依頼書情報.get被保険者氏名() != null) {
@@ -723,9 +723,9 @@ public class IkenshoSakuseiIraiHandler {
             }
             item.setHihokenshaName(business.get被保険者氏名().value());
 
-            if (Seibetsu.男.get名称().equals(business.get性別().value())) {
+            if (Seibetsu.男.getコード().equals(business.get性別().value())) {
                 item.setSeibetsuWoman(星);
-            } else if (Seibetsu.女.get名称().equals(business.get性別().value())) {
+            } else if (Seibetsu.女.getコード().equals(business.get性別().value())) {
                 item.setSeibetsuMan(星);
             }
             FlexibleDate birthYMD = business.get生年月日();

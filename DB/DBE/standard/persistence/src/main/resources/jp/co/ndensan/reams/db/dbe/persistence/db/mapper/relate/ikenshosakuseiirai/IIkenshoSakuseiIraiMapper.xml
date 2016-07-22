@@ -90,9 +90,9 @@
 
     <resultMap id="resultMap_主治医意見書依頼該当者履歴一覧" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiIchiranEntity" autoMapping="true">
         <result property="chokkinKubun" column="chokkinKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hihokenshaKana" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -138,10 +138,40 @@
     <select resultOrdered="true" id="get要介護認定申請情報" resultMap="resultMap_NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
-        T5101.*,
-        T5301.*
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
         FROM
-        <include refid="selectJoken主治医意見書作成依頼" />
+        rgdb."DbT5101NinteiShinseiJoho" AS "DbT5101NinteiShinseiJoho"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        ON T7051."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        LEFT JOIN
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS "DbT5301ShujiiIkenshoIraiJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo"
+        AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
+        AND
+        NOT EXISTS (
+        SELECT 'X'
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
+        WHERE
+        "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = B1."shinseishoKanriNo"
+        AND B1."logicalDeletedFlag" = False
+        AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo")
+        LEFT JOIN
+        rgdb."DbT5912ShujiiJoho" AS T5912
+        ON T5912."shichosonCode" = T7051."shichosonCode"
+        AND T5912."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+        AND T5912."shujiiCode" = "DbT5101NinteiShinseiJoho"."shujiiCode"
+        AND T5912."jokyoFlag" = True
+        LEFT JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+        ON T5911."shichosonCode" = T7051."shichosonCode"
+        AND T5911."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+        AND T5911."jokyoFlag" = True
+        WHERE
+        "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = False
     </select>
     <sql id="selectJoken主治医意見書作成依頼">
         rgdb."DbT5101NinteiShinseiJoho" AS T5101
@@ -327,7 +357,9 @@
         FROM
         (
         SELECT
-        CAST ('直近' AS TEXT) AS "chokkinKubun"
+        1 AS "index"
+        ,T5101."ninteiShinseiYMD"
+        ,CAST ('直近' AS TEXT) AS "chokkinKubun"
         ,T5101."hihokenshaNo"
         ,T5101."hihokenshaKana"
         ,T5101."hihokenshaName"
@@ -376,7 +408,9 @@
         *
         FROM(
         SELECT
-        CAST ('' AS TEXT) AS "chokkinKubun"
+        2 AS "index"
+        ,T5101."ninteiShinseiYMD"
+        ,CAST ('' AS TEXT) AS "chokkinKubun"
         ,CAST ('' AS TEXT)  AS "hihokenshaNo"
         ,CAST ('' AS TEXT)  AS "hihokenshaKana"
         ,CAST ('' AS TEXT)  AS "hihokenshaName"
@@ -424,6 +458,7 @@
         WHERE
         T5101."logicalDeletedFlag"=FALSE
         ORDER BY  T5101."ninteiShinseiYMD" DESC) AS T
+        ORDER BY "index","ninteiShinseiYMD"
     </select>
 
 </mapper>
