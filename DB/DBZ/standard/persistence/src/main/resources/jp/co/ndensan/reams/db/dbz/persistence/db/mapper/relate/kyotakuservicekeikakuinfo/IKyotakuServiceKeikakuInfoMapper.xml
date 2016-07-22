@@ -19,34 +19,54 @@
     <select resultOrdered="true" id="getKyotakuServiceKeikaku" resultMap="result_KyotakuServiceKeikakuRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikakuinfo.KyotakuServiceKeikakuInfoRelateParameter" fetchSize="500">
         SELECT
-        A."hihokenshaNo" AS "A_hihokenshaNo",                           
-        A."taishoYM" AS "A_taishoYM",             
-        A."rirekiNo" AS "A_rirekiNo",               
-        A."tekiyoKaishiYMD" AS "A_tekiyoKaishiYMD",               
-        A."tekiyoShuryoYMD" AS "A_tekiyoShuryoYMD",               
-        A."sakuseiKubunCode"  AS "A_sakuseiKubunCode",             
-        A."keikakuJigyoshaNo" AS "A_keikakuJigyoshaNo",               
-        A."itakusakiJigyoshaNo" AS "A_itakusakiJigyoshaNo",               
-        B."jigyoshaName" AS "B_jigyoshaName"                
-        FROM                 
-        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS A                
-        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS B                 
-        ON  B."jigyoshaNo" = (
-        SELECT 
-        coalesce(DbT3006Kyotaku."itakusakiJigyoshaNo",DbT3006Kyotaku."keikakuJigyoshaNo")
-        FROM 
-        rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS DbT3006Kyotaku
-        )                               
-        AND B."yukoKaishiYMD"= (SELECT 
-        MAX(DbT7060Kaigo."yukoKaishiYMD")
-        FROM rgdb."DbT7060KaigoJigyosha" AS DbT7060Kaigo )
-        WHERE A."taishoYM" = #{taishoYM}            
-        AND  A."hihokenshaNo" = #{hihokenshaNo}             
-        AND  A."rirekiNo" = (SELECT
-        MAX(dbT3006Kyotaku."rirekiNo")
-        FROM rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS dbT3006Kyotaku
-        WHERE dbT3006Kyotaku."hihokenshaNo" = #{hihokenshaNo}
-        AND dbT3006Kyotaku."taishoYM" = #{taishoYM}
-        )               
+            A."hihokenshaNo" AS "A_hihokenshaNo"
+            , A."taishoYM" AS "A_taishoYM"
+            , A."rirekiNo" AS "A_rirekiNo"
+            , A."tekiyoKaishiYMD" AS "A_tekiyoKaishiYMD"
+            , A."tekiyoShuryoYMD" AS "A_tekiyoShuryoYMD"
+            , A."sakuseiKubunCode" AS "A_sakuseiKubunCode"
+            , A."keikakuJigyoshaNo" AS "A_keikakuJigyoshaNo"
+            , A."itakusakiJigyoshaNo" AS "A_itakusakiJigyoshaNo"
+            , B."jigyoshaName" AS "B_jigyoshaName" 
+          FROM
+            rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS A 
+            LEFT JOIN ( 
+              SELECT
+                A."hihokenshaNo" AS "A_hihokenshaNo"
+                , A."taishoYM" AS "A_taishoYM"
+                , A."rirekiNo" AS "A_rirekiNo"
+                , case 
+                  when A."itakusakiJigyoshaNo" IS NULL 
+                  then A."keikakuJigyoshaNo" 
+                  else A."itakusakiJigyoshaNo" 
+                  end AS "jigyoshaNo" 
+              FROM
+                rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS A
+            ) AS C 
+              ON A."hihokenshaNo" = C."A_hihokenshaNo" 
+              AND A."taishoYM" = C."A_taishoYM" 
+              AND A."rirekiNo" = C."A_rirekiNo" 
+            LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS B 
+              ON B."jigyoshaNo" = C."jigyoshaNo" 
+              AND B."yukoKaishiYMD" IN ( 
+                SELECT
+                  MAX(DbT7060Kaigo."yukoKaishiYMD") 
+                FROM
+                  rgdb."DbT7060KaigoJigyosha" AS DbT7060Kaigo 
+                GROUP BY
+                  DbT7060Kaigo."jigyoshaNo"
+              ) 
+          WHERE
+            A."taishoYM" = #{taishoYM} 
+            AND A."hihokenshaNo" = #{hihokenshaNo} 
+            AND A."rirekiNo" = ( 
+              SELECT
+                MAX(dbT3006Kyotaku."rirekiNo") 
+              FROM
+                rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS dbT3006Kyotaku 
+              WHERE
+                dbT3006Kyotaku."hihokenshaNo" = #{hihokenshaNo} 
+                AND dbT3006Kyotaku."taishoYM" = #{taishoYM}
+            )             
     </select>
 </mapper>
