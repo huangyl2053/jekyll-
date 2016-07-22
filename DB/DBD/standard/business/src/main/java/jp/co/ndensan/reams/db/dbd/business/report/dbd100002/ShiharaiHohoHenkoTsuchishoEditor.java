@@ -166,7 +166,7 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
 
     private void setLayer1(ShiharaiHohoHenkoTsuchishoReportSource source) {
         source.bunshoNo = this.文書番号;
-        EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
+        EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通, this.地方公共団体);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
         source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
@@ -273,8 +273,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         return 保険料合計;
     }
 
-    private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(個人情報, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(個人情報, 帳票制御共通, 地方公共団体);
     }
 
     private void setAccessLogEditor(ShiharaiHohoHenkoTsuchishoReportSource source) {

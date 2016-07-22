@@ -32,7 +32,7 @@ public class ShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listShinsei1_2;
     @ReportItem(name = "listShinsei1_3", length = 10, order = 8)
     public RString listShinsei1_3;
-    @ReportItem(name = "listShinsei1_4", length = 20, order = 9)
+    @ReportItem(name = "listShinsei1_4", length = 30, order = 9)
     public RString listShinsei1_4;
     @ReportItem(name = "listShinsei1_5", length = 1, order = 10)
     public RString listShinsei1_5;
@@ -42,7 +42,7 @@ public class ShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listShinsei1_7;
     @ReportItem(name = "listShinsei1_8", length = 4, order = 13)
     public RString listShinsei1_8;
-    @ReportItem(name = "listShinsei1_9", length = 5, order = 14)
+    @ReportItem(name = "listShinsei1_9", length = 7, order = 14)
     public RString listShinsei1_9;
     @ReportItem(name = "listShinsei1_10", length = 3, order = 15)
     public RString listShinsei1_10;
@@ -54,7 +54,7 @@ public class ShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listShinsei2_2;
     @ReportItem(name = "listShinsei2_3", length = 10, order = 19)
     public RString listShinsei2_3;
-    @ReportItem(name = "listShinsei2_4", length = 20, order = 20)
+    @ReportItem(name = "listShinsei2_4", length = 30, order = 20)
     public RString listShinsei2_4;
     @ReportItem(name = "listShinsei2_5", length = 1, order = 21)
     public RString listShinsei2_5;
@@ -64,7 +64,7 @@ public class ShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listShinsei2_7;
     @ReportItem(name = "listShinsei2_8", length = 4, order = 24)
     public RString listShinsei2_8;
-    @ReportItem(name = "listShinsei2_9", length = 5, order = 25)
+    @ReportItem(name = "listShinsei2_9", length = 7, order = 25)
     public RString listShinsei2_9;
     @ReportItem(name = "listShinsei2_10", length = 3, order = 26)
     public RString listShinsei2_10;

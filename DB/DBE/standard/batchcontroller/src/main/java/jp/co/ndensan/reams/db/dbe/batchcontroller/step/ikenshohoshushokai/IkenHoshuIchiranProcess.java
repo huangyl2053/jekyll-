@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshohoshushokai;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshushokai.IkenHoshuIchiranChange;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshohoshushokai.IkenHoshuIchiranReport;
@@ -36,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -59,6 +62,8 @@ public class IkenHoshuIchiranProcess extends BatchProcessBase<IkenshoHoshuShokai
     private static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 集計表を発行する = new RString("2");
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(IkenHoshuIchiranReportSource.ReportSourceFields.iryokikanNo.name())));
     private int count = 0;
     private RString 医療機関番号 = RString.EMPTY;
     private IkenHoshuIchiranProcessParameter paramter;
@@ -99,7 +104,9 @@ public class IkenHoshuIchiranProcess extends BatchProcessBase<IkenshoHoshuShokai
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true).
                 build();
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<IkenHoshuIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 

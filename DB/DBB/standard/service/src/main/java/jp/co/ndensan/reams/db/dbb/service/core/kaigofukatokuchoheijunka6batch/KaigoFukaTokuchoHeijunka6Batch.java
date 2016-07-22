@@ -534,7 +534,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 int 調整金額 = 調整金額取得(今年度保険料率, 賦課年度);
                 RString 編集備考 = 備考名を転換(特徴平準化結果対象者.get備考コード());
                 IKojin iKojin = ShikibetsuTaishoFactory.createKojin(特徴平準化結果対象者.get宛名の情報());
-                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
                 RString 編集後住所 = 編集後個人.get編集後住所();
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象者CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象者,
@@ -561,7 +561,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 int 調整金額 = 調整金額取得(今年度保険料率, 賦課年度);
                 RString 備考名 = 備考名を転換(特徴平準化結果対象外.get備考コード());
                 IKojin iKojin = ShikibetsuTaishoFactory.createKojin(特徴平準化結果対象外.get宛名の情報());
-                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
                 RString 編集後住所 = 編集後個人.get編集後住所();
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象外CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象外,

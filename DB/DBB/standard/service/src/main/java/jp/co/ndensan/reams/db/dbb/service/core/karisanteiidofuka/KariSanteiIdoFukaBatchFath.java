@@ -532,7 +532,7 @@ public class KariSanteiIdoFukaBatchFath {
                 && 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
             entity.set住所(編集後個人.get編集後住所());
             entity.set町域管内管外住所(編集後個人.get町域());
             entity.set番地(編集後個人.get番地().value());
