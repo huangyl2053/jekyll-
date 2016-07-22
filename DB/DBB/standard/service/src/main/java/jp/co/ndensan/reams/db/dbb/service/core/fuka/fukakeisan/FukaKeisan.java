@@ -215,18 +215,18 @@ public class FukaKeisan {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
                 if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
-                    return 1;
+                    return -1;
                 }
-                return -1;
+                return 1;
             }
         });
         Collections.sort(年度分賦課リスト, new Comparator<NendobunFukaList>() {
             @Override
             public int compare(NendobunFukaList o1, NendobunFukaList o2) {
                 if (o1.get賦課期日().isBefore(o2.get賦課期日())) {
-                    return 1;
+                    return -1;
                 }
-                return -1;
+                return 1;
             }
         });
 
@@ -258,13 +258,7 @@ public class FukaKeisan {
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
                 int flag = 0;
                 if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())) {
-                    flag = 1;
-                }
-                if (flag == 0) {
                     if (o2.get異動日().isBefore(o1.get異動日())) {
-                        flag = 1;
-                    }
-                    if (flag == 0) {
                         flag = o2.get枝番().compareTo(o1.get枝番());
                     }
                 }
@@ -285,19 +279,18 @@ public class FukaKeisan {
         FlexibleDate 本年度資格喪失日 = new FlexibleDate(賦課年度.getYearValue(), Month.MAY.getValue(), INT_1);
         for (HihokenshaDaicho 資格の情報 : tmpList) {
             FlexibleDate 第1号資格取得日 = 資格の情報.get第1号資格取得年月日();
-            if (資格の情報.get第1号資格取得年月日() == null || 資格の情報.get第1号資格取得年月日().isEmpty()) {
-                第1号資格取得日 = FlexibleDate.MIN;
-            }
             FlexibleDate 資格喪失日 = 資格の情報.get資格喪失年月日();
-            if (資格の情報.get資格喪失年月日() == null || 資格の情報.get資格喪失年月日().isEmpty()) {
+            if (資格喪失日 == null || 資格喪失日.isEmpty()) {
                 資格喪失日 = FlexibleDate.MAX;
             }
-            if (第1号資格取得日.isBeforeOrEquals(本年度開始日) && 本年度終了日.isBeforeOrEquals(資格喪失日)) {
-                有効な資格の情報リスト.add(資格の情報);
-            } else if (本年度開始日.isBefore(第1号資格取得日) && 第1号資格取得日.isBefore(本年度終了日)) {
-                有効な資格の情報リスト.add(資格の情報);
-            } else if (本年度資格喪失日.isBeforeOrEquals(資格喪失日) && 資格喪失日.isBefore(本年度終了日)) {
-                有効な資格の情報リスト.add(資格の情報);
+            if (第1号資格取得日 != null && !第1号資格取得日.isEmpty()) {
+                if (第1号資格取得日.isBeforeOrEquals(本年度開始日) && 本年度終了日.isBeforeOrEquals(資格喪失日)) {
+                    有効な資格の情報リスト.add(資格の情報);
+                } else if (本年度開始日.isBefore(第1号資格取得日) && 第1号資格取得日.isBeforeOrEquals(本年度終了日)) {
+                    有効な資格の情報リスト.add(資格の情報);
+                } else if (本年度資格喪失日.isBeforeOrEquals(資格喪失日) && 資格喪失日.isBeforeOrEquals(本年度終了日)) {
+                    有効な資格の情報リスト.add(資格の情報);
+                }
             }
         }
 
@@ -394,16 +387,17 @@ public class FukaKeisan {
         for (SeikatsuHogoJukyusha entity : 生保の情報リスト) {
             FlexibleDate 受給開始日 = entity.get受給開始日();
             FlexibleDate 受給廃止日 = entity.get受給廃止日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                return true;
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                return true;
+            if (受給開始日 != null && 受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    return true;
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    return true;
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -420,16 +414,17 @@ public class FukaKeisan {
         for (RoreiFukushiNenkinJukyusha entity : 老福の情報のリスト) {
             FlexibleDate 受給開始日 = entity.get受給開始年月日();
             FlexibleDate 受給廃止日 = entity.get受給終了年月日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                return true;
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                return true;
+            if (受給開始日 != null && 受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    return true;
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    return true;
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -449,16 +444,17 @@ public class FukaKeisan {
         for (KyokaisoGaitosha entity : 境界層の情報のリスト) {
             FlexibleDate 受給開始日 = entity.get適用開始年月日();
             FlexibleDate 受給廃止日 = entity.get適用終了年月日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                return true;
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                return true;
+            if (受給開始日 != null && 受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    return true;
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    return true;
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -1023,16 +1019,17 @@ public class FukaKeisan {
         for (SeikatsuHogoJukyusha entity : 生保情報のリスト) {
             FlexibleDate 受給開始日 = entity.get受給開始日();
             FlexibleDate 受給廃止日 = entity.get受給廃止日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                生活保護の情報のリスト.add(entity);
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                生活保護の情報のリスト.add(entity);
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
+                if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    生活保護の情報のリスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    生活保護の情報のリスト.add(entity);
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    生活保護の情報のリスト.add(entity);
+                }
             }
         }
         if (!生活保護の情報のリスト.isEmpty()) {
@@ -1040,9 +1037,9 @@ public class FukaKeisan {
                 @Override
                 public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
                     if (o2.get受給開始日().isBefore(o1.get受給開始日())) {
-                        return 1;
+                        return -1;
                     }
-                    return -1;
+                    return 1;
                 }
             });
             // TODO QAのNo.950(Redmine#91760)
@@ -1078,16 +1075,17 @@ public class FukaKeisan {
         for (RoreiFukushiNenkinJukyusha entity : 老福の情報リスト) {
             FlexibleDate 受給開始日 = entity.get受給開始年月日();
             FlexibleDate 受給廃止日 = entity.get受給終了年月日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                老齢福祉の情報リスト.add(entity);
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                老齢福祉の情報リスト.add(entity);
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    老齢福祉の情報リスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    老齢福祉の情報リスト.add(entity);
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    老齢福祉の情報リスト.add(entity);
+                }
             }
         }
         if (老齢福祉の情報リスト != null && !老齢福祉の情報リスト.isEmpty()) {
@@ -1095,9 +1093,9 @@ public class FukaKeisan {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
                     if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
-                        return 1;
+                        return -1;
                     }
-                    return -1;
+                    return 1;
                 }
             });
             builder.set老年開始日(老齢福祉の情報リスト.get(0).get受給開始年月日());
@@ -1123,10 +1121,14 @@ public class FukaKeisan {
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                境界層の情報のリスト.add(entity);
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                境界層の情報のリスト.add(entity);
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    境界層の情報のリスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    境界層の情報のリスト.add(entity);
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    境界層の情報のリスト.add(entity);
+                }
             }
         }
         if (境界層の情報のリスト != null && !境界層の情報のリスト.isEmpty()) {
