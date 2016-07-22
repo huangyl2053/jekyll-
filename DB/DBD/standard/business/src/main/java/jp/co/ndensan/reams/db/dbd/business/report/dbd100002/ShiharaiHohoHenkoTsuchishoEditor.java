@@ -180,10 +180,11 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
         source.hihokenshaNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
         source.hihokenshaNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
 
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun = 通知書定型文リスト.get(0);
         }
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("1")) {
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("1")) {
             source.renrakusakiHoka = 通知書定型文リスト.get(1);
         } else {
             source.renrakusakiHoka = RString.EMPTY;
@@ -226,7 +227,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
     }
 
     private void setLayerFontLarge(ShiharaiHohoHenkoTsuchishoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("2")) {
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("2")) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
@@ -234,7 +236,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
     }
 
     private void setLayerFontKonzai(ShiharaiHohoHenkoTsuchishoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("3")) {
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("3")) {
             source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
             source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
         } else {
@@ -244,7 +247,8 @@ public class ShiharaiHohoHenkoTsuchishoEditor implements IShiharaiHohoHenkoTsuch
     }
 
     private void setLayerFontKonzai2(ShiharaiHohoHenkoTsuchishoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("4")) {
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("4")) {
             source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
             source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
         } else {

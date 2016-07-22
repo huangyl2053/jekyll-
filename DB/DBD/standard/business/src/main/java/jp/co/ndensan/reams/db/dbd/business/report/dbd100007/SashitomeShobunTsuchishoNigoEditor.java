@@ -159,10 +159,11 @@ public class SashitomeShobunTsuchishoNigoEditor implements ISashitomeShobunTsuch
         source.hihoNo9 = 被保険者番号.substring(NOCOUNT_8, NOCOUNT_9);
         source.hihoNo10 = 被保険者番号.substring(NOCOUNT_9, NOCOUNT_10);
 
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun = 通知書定型文リスト.get(0);
         }
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("1")) {
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("1")) {
             source.renrakusakiHoka = 通知書定型文リスト.get(1);
         } else {
             source.renrakusakiHoka = RString.EMPTY;
@@ -170,30 +171,31 @@ public class SashitomeShobunTsuchishoNigoEditor implements ISashitomeShobunTsuch
     }
 
     private void setHokenryoTainoJyokyo(SashitomeShobunTsuchishoNigoReportSource source) {
-        source.nendoTitle1 = new RString("");
-        source.nendoTitle2 = new RString("");
-        source.nendoTitle3 = new RString("");
-        source.listTainoJokyo_1 = new RString("");
-        source.listTainoJokyo_2 = new RString("");
-        source.listTainoJokyo_3 = new RString("");
-        source.listTainoJokyo_4 = new RString("");
-        source.listTainoJokyo_5 = new RString("");
-        source.listTainoJokyo_6 = new RString("");
-        source.listTainoJokyo_7 = new RString("");
-        source.listTainoJokyo_8 = new RString("");
-        source.listTainoJokyo_9 = new RString("");
-        source.hokenGokei1 = new RString("");
-        source.entaiGokei1 = new RString("");
-        source.hokenGokei2 = new RString("");
-        source.entaiGokei2 = new RString("");
-        source.hokenGokei3 = new RString("");
-        source.entaiGokei3 = new RString("");
-        source.hanteiYMD = new RString("");
+        source.nendoTitle1 = RString.EMPTY;
+        source.nendoTitle2 = RString.EMPTY;
+        source.nendoTitle3 = RString.EMPTY;
+        source.listTainoJokyo_1 = RString.EMPTY;
+        source.listTainoJokyo_2 = RString.EMPTY;
+        source.listTainoJokyo_3 = RString.EMPTY;
+        source.listTainoJokyo_4 = RString.EMPTY;
+        source.listTainoJokyo_5 = RString.EMPTY;
+        source.listTainoJokyo_6 = RString.EMPTY;
+        source.listTainoJokyo_7 = RString.EMPTY;
+        source.listTainoJokyo_8 = RString.EMPTY;
+        source.listTainoJokyo_9 = RString.EMPTY;
+        source.hokenGokei1 = RString.EMPTY;
+        source.entaiGokei1 = RString.EMPTY;
+        source.hokenGokei2 = RString.EMPTY;
+        source.entaiGokei2 = RString.EMPTY;
+        source.hokenGokei3 = RString.EMPTY;
+        source.entaiGokei3 = RString.EMPTY;
+        source.hanteiYMD = RString.EMPTY;
 
     }
 
     private void setLayerFontLarge(SashitomeShobunTsuchishoNigoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("2")) {
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("2")) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
@@ -201,7 +203,8 @@ public class SashitomeShobunTsuchishoNigoEditor implements ISashitomeShobunTsuch
     }
 
     private void setLayerFontKonzai(SashitomeShobunTsuchishoNigoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("3")) {
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("3")) {
             source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
             source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
         } else {
@@ -211,7 +214,8 @@ public class SashitomeShobunTsuchishoNigoEditor implements ISashitomeShobunTsuch
     }
 
     private void setLayerFontKonzai2(SashitomeShobunTsuchishoNigoReportSource source) {
-        if (null != 通知書定型文リスト && this.帳票制御共通.get定型文文字サイズ() == new RString("4")) {
+        RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
+        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("4")) {
             source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
             source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
         } else {
