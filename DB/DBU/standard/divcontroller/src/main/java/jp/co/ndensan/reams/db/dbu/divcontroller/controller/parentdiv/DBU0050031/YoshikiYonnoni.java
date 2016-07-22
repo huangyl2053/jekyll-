@@ -154,7 +154,7 @@ public class YoshikiYonnoni {
                 div.setShoriMode(内部処理モード_削除);
             }
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
-            div.getYoshikiYonnoniMeisai().setDisabled(false);
+            div.getYoshikiYonnoniMeisai().setDisabled(true);
             List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
             if (shichosonList.isEmpty()) {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -288,7 +288,7 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(true);
-                div.getYoshikiYonnoniMeisai().setDisabled(true);
+                div.getYoshikiYonnoniMeisai().setDisabled(false);
 
             } else {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
