@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
@@ -128,7 +129,7 @@ public class FukaErrorListService {
      * @return 賦課エラーの情報リスト
      */
     @Transaction
-    public RString getFukaBatchID() {
+    public ShoriDateKanri getFukaBatchID() {
         FlexibleYear 年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
         List<RString> 処理名 = new ArrayList<>();
         処理名.add(特徴仮算定賦課);
@@ -140,28 +141,8 @@ public class FukaErrorListService {
         処理名.add(過年度賦課);
         DbT7022ShoriDateKanriEntity entity = 処理日付管理dac.get処理名(年度, 処理名);
         if (entity != null) {
-            if (特徴仮算定賦課.equals(entity.getShoriName())) {
-                return new RString("DBB011001_TokuchoKarisanteiFuka");
-            }
-            if (普徴仮算定賦課.equals(entity.getShoriName())) {
-                return new RString("DBB014001_FuchoKarisanteiFuka");
-            }
-            if (仮算定異動賦課.equals(entity.getShoriName())) {
-                return new RString("DBB015001_KarisanteiIdoFuka");
-            }
-            if (特徴平準化計算_8月分.equals(entity.getShoriName())) {
-                return new RString("DBB013001_TokuchoHeinjunka8Gatsu");
-            }
-            if (本算定賦課.equals(entity.getShoriName())) {
-                return new RString("DBB031001_HonsanteiFuka");
-            }
-            if (異動賦課.equals(entity.getShoriName())) {
-                return new RString("DBB051001_GennendoIdoFuka");
-            }
-            if (過年度賦課.equals(entity.getShoriName())) {
-                return new RString("DBB055001_KanendoIdoFuka");
-            }
+            return new ShoriDateKanri(entity);
         }
-        return RString.EMPTY;
+        return null;
     }
 }

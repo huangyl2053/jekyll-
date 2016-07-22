@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.Fuk
 import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;
@@ -74,6 +75,13 @@ public class FukaErrorReportView {
     private static final RString DBBWF43004 = new RString("DBBWF43004");
     private static final RString DBBWF44004 = new RString("DBBWF44004");
     private static final RString DBBWF45004 = new RString("DBBWF45004");
+    private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
+    private static final RString 普徴仮算定賦課 = new RString("普徴仮算定賦課");
+    private static final RString 仮算定異動賦課 = new RString("仮算定異動賦課");
+    private static final RString 特徴平準化計算_8月分 = new RString("特徴平準化計算_8月分");
+    private static final RString 本算定賦課 = new RString("本算定賦課");
+    private static final RString 異動賦課 = new RString("異動賦課");
+    private static final RString 過年度賦課 = new RString("過年度賦課");
     private static final int TWO = 2;
 
     /**
@@ -83,13 +91,19 @@ public class FukaErrorReportView {
      * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
-        RString batchID;
+        RString batchID = RString.EMPTY;
+        RDateTime 基準日時 = RDateTime.MIN;
         if (ResponseHolder.getFlowId().equals(DBBWF33004) || ResponseHolder.getFlowId().equals(DBBWF34004)
                 || ResponseHolder.getFlowId().equals(DBBWF36004) || ResponseHolder.getFlowId().equals(DBBWF43004)
                 || ResponseHolder.getFlowId().equals(DBBWF44004) || ResponseHolder.getFlowId().equals(DBBWF45004)) {
-            batchID = FukaErrorListService.createInstance().getFukaBatchID();
+            ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID();
+            if (shori != null) {
+                batchID = getバッチID変換(shori);
+                基準日時 = shori.get基準日時().getRDateTime();
+            }
         } else {
             batchID = FlowParameterAccessor.get().get(BATCHID_FUKAERROR, RString.class);
+            基準日時 = FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME, RDateTime.class);
         }
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
         List<FukaErrorList> リスト作成日時 = FukaErrorListService.createInstance().getCreationDateTimeList(batchID).records();
@@ -100,7 +114,7 @@ public class FukaErrorReportView {
                     .setInternalReportId(REPORTID_FUKAERROR)
                     .setInternalReportCreationDateTime(最新リスト作成日時)
                     .setBatchId(batchID)
-                    .setBatchStartingDateTime(FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME, RDateTime.class))
+                    .setBatchStartingDateTime(基準日時)
                     .build();
             IInternalReportCommon fukaError = InternalReportServiceFactory.getInternalReportComponentsProvider().
                     createInternalReportCommonForReport(fukaErrorBaseData);
@@ -262,5 +276,30 @@ public class FukaErrorReportView {
         builder.append("-").append(minute.padZeroToLeft(TWO))
                 .append("-").append(second.padZeroToLeft(TWO));
         return builder.toRString();
+    }
+
+    private RString getバッチID変換(ShoriDateKanri shori) {
+        if (特徴仮算定賦課.equals(shori.get処理名())) {
+            return new RString("DBB011001_TokuchoKarisanteiFuka");
+        }
+        if (普徴仮算定賦課.equals(shori.get処理名())) {
+            return new RString("DBB014001_FuchoKarisanteiFuka");
+        }
+        if (仮算定異動賦課.equals(shori.get処理名())) {
+            return new RString("DBB015001_KarisanteiIdoFuka");
+        }
+        if (特徴平準化計算_8月分.equals(shori.get処理名())) {
+            return new RString("DBB013001_TokuchoHeinjunka8Gatsu");
+        }
+        if (本算定賦課.equals(shori.get処理名())) {
+            return new RString("DBB031001_HonsanteiFuka");
+        }
+        if (異動賦課.equals(shori.get処理名())) {
+            return new RString("DBB051001_GennendoIdoFuka");
+        }
+        if (過年度賦課.equals(shori.get処理名())) {
+            return new RString("DBB055001_KanendoIdoFuka");
+        }
+        return RString.EMPTY;
     }
 }
