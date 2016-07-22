@@ -8,25 +8,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績高額介護サービス費を管理するクラスです。
  */
 public class KyufujissekiKogakuKaigoServicehi
-extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, 
-        DbT3028KyufujissekiKogakuKaigoServicehiEntity, 
-        KyufujissekiKogakuKaigoServicehi> implements Serializable {
+        extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, DbT3028KyufujissekiKogakuKaigoServicehiEntity, KyufujissekiKogakuKaigoServicehi> implements Serializable {
 
     private final DbT3028KyufujissekiKogakuKaigoServicehiEntity entity;
     private final KyufujissekiKogakuKaigoServicehiIdentifier id;
@@ -90,8 +88,7 @@ extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier,
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}より{@link KyufujissekiKogakuKaigoServicehi}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}
+     * @param entity DBより取得した{@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}
      */
     public KyufujissekiKogakuKaigoServicehi(DbT3028KyufujissekiKogakuKaigoServicehiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績高額介護サービス費"));
@@ -396,8 +393,7 @@ extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier,
     /**
      * 給付実績高額介護サービス費の識別子{@link KyufujissekiKogakuKaigoServicehiIdentifier}を返します。
      *
-     * @return
-     * 給付実績高額介護サービス費の識別子{@link KyufujissekiKogakuKaigoServicehiIdentifier}
+     * @return 給付実績高額介護サービス費の識別子{@link KyufujissekiKogakuKaigoServicehiIdentifier}
      */
     @Override
     public KyufujissekiKogakuKaigoServicehiIdentifier identifier() {
@@ -420,6 +416,18 @@ extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier,
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KyufujissekiKogakuKaigoServicehi(deletedEntity, id);
+    }
+
+    /**
+     * add ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KyufujissekiKogakuKaigoServicehi added() {
+        DbT3028KyufujissekiKogakuKaigoServicehiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KyufujissekiKogakuKaigoServicehi(addedEntity, id);
     }
 
     /**

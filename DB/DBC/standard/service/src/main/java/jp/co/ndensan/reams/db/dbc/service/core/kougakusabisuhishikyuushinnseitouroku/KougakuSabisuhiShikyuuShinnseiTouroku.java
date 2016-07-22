@@ -229,7 +229,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     public void dealKyufutsuika(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号, int 履歴番号, RString 給付実績情報作成区分コード,
             KyufujissekiKogakuKaigoServicehi 給付実績編集用entity) {
-        RString 通し番号 = Saiban.get(SubGyomuCode.DBB介護賦課,
+        RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
                 実績管理番号, FlexibleDate.getNowDate().getNendo()).nextString();
         if (通し番号 == null) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(最新番号.toString()));

@@ -8,23 +8,25 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費支給申請を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-040 quxiaodong
  */
 public class KogakuShikyuShinsei extends
         ModelBase<KogakuShikyuShinseiIdentifier, DbT3056KogakuShikyuShinseiEntity, KogakuShikyuShinsei>
@@ -327,6 +329,30 @@ public class KogakuShikyuShinsei extends
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KogakuShikyuShinsei(deletedEntity, id);
+    }
+
+    /**
+     * 修正ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuShikyuShinsei modified() {
+        DbT3056KogakuShikyuShinseiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new KogakuShikyuShinsei(modifiedEntity, id);
+    }
+
+    /**
+     * add ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuShikyuShinsei added() {
+        DbT3056KogakuShikyuShinseiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuShikyuShinsei(addedEntity, id);
     }
 
     /**
