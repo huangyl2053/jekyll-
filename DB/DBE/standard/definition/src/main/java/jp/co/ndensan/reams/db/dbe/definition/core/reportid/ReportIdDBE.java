@@ -405,11 +405,11 @@ public enum ReportIdDBE {
     /**
      * 特記事項の帳票ＩＤです。
      */
-    DBE091003(new ReportId("DBE091003_NinteiChosaTokkiImage"), new RString("特記事項")),
+    DBE091003(new ReportId("DBE091003_NinteiChosaTokkiImage"), new RString("主治医意見書TSOLタイプ表")),
     /**
      * 特記事項の帳票ＩＤです。
      */
-    DBE517131(new ReportId("DBE517131_TokkiText1A4"), new RString("特記事項")),
+    DBE517131(new ReportId("DBE517131_TokkiText1A4"), new RString("事務局用特記事項")),
     /**
      * 特記事項の帳票ＩＤです。
      */
@@ -417,7 +417,7 @@ public enum ReportIdDBE {
     /**
      * 特記事項の帳票ＩＤです。
      */
-    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("特記事項")),
+    DBE517134(new ReportId("DBE517134_TokkiText2A4"), new RString("事務特記事項")),
     /**
      * 主治医意見書作成報酬支払通知書の帳票ＩＤです。
      */
