@@ -21,7 +21,10 @@ public class JigyohokokuCompYoshiki153Variables {
 
     private RString 処理日時;
     private RString 集計区分;
+    private RString 年報月報区分;
+    private RString 集計範囲;
     private RString 給付実績区分コード;
+    private RString 給付区分;
     private RString 集計期間FROM;
     private RString 集計期間TO;
     private RString 集計年月;

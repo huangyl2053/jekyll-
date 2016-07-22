@@ -37,7 +37,8 @@ public class JigyohokokuCompYoshiki153Editor implements IJigyohokokuCompYoshiki1
     private JigyohokokuCompYoshiki153ReportSource editSource(JigyohokokuCompYoshiki153ReportSource source) {
         HokenshaJohoConfig hokenshaJohoConfig = new HokenshaJohoConfig();
         source.printTimeStamp = variables.get処理日時();
-        source.shukeiKubun = set集計範囲(variables.get集計区分());
+        source.shukeiKubun = variables.get集計区分();
+        source.shuukeiHani = set集計範囲(variables.get集計範囲());
         source.shuukeiHani = variables.get集計期間FROM();
         source.shuukeiHani = variables.get集計期間TO();
         source.shuukeiHani = variables.get集計年月();
