@@ -75,6 +75,7 @@ public class HihokenshashoChohyoFinder {
     private static final RString 居宅支援事業者適用切れ_表示有無 = new RString("居宅支援事業者適用切れ_表示有無");
     private static final RString 居宅支援事業者履歴_表示方法 = new RString("居宅支援事業者履歴_表示方法");
     private static final RString 該当データはありません = new RString("該当データはありません");
+    private static final RString 事業対象者 = new RString("事業対象者");
     private static final ReportId 帳票分類ID = new ReportId("DBA100001_Hihokenshasho");
     private static final RString 全角スペース = new RString("　");
     private static final RString 半角スペース = new RString(" ");
@@ -244,7 +245,11 @@ public class HihokenshashoChohyoFinder {
     }
 
     private void set期間年月日(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter hihoken) {
-        business.set要介護認定区分(hihoken.get要介護認定状態区分コード());
+        if (文字_1.equals(hihoken.get対象区分())) {
+            business.set要介護認定区分(hihoken.get要介護認定状態区分コード());
+        } else {
+            business.set要介護認定区分(事業対象者);
+        }
         business.set認定年月日(hihoken.get認定年月日() == null ? RString.EMPTY : hihoken.get認定年月日()
                 .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString());
@@ -260,7 +265,7 @@ public class HihokenshashoChohyoFinder {
         business.set訪問期間終了年月日(hihoken.get支給限度有効終了年月日() == null ? RString.EMPTY : hihoken
                 .get支給限度有効終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.setサービス(new RString(hihoken.get支給限度単位数().toString()));
+        business.setサービス(hihoken.get支給限度単位数() == null ? RString.EMPTY : new RString(hihoken.get支給限度単位数().toString()));
     }
 
     private void set住所(HihokenshashoChoBusiness business, SofusakiJohoEntity sofusa, HonninJohoEntity honni) {

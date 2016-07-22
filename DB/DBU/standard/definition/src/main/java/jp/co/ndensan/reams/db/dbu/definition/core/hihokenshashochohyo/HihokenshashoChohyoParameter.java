@@ -33,6 +33,7 @@ public class HihokenshashoChohyoParameter {
     private RDate 支給限度有効開始年月日;
     private RDate 支給限度有効終了年月日;
     private Decimal 支給限度単位数;
+    private RString 対象区分;
     private List<ShiteiServiceParameter> 指定サービス種類;
     private RString 介護認定審査会意見;
     private List<JushochitokureiTekiParameter> 適用年月日;

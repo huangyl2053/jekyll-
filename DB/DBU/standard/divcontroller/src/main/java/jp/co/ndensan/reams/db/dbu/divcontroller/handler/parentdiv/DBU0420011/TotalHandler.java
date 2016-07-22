@@ -47,6 +47,9 @@ public class TotalHandler {
     private static final RString MENUID_DBUMN12001 = new RString("DBUMN12001");
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
     private static final RString MENUID_DBUMN12003 = new RString("DBUMN12003");
+    private static final RString 事業対象者 = new RString("事業対象者");
+    private static final RString 文字_1 = new RString("1");
+    private static final RString 文字_2 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -132,6 +135,11 @@ public class TotalHandler {
         HihokenshashoChohyoParameter para = new HihokenshashoChohyoParameter();
         para.set被保険者番号(被保険者番号.getColumnValue());
         para.set識別コード(識別コード);
+        if (事業対象者.equals(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtYokaigodo().getValue())) {
+            para.set対象区分(文字_2);
+        } else {
+            para.set対象区分(文字_1);
+        }
         para.set交付日(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtKofuDate().getValue());
         para.set保険者(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getTxtHokensha().getValue());
         para.set要介護認定状態区分コード(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getNinteiInfo().getTxtYokaigodo().getValue());
