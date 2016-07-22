@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.ikenshohoshuseikyu;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshuseikyu.IkenshoHoshuSeikyuBodyEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshohoshuseikyu.IkenshoHoshuSeikyuReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBE621004_主治医意見書作成報酬請求書のIkenshoHoshuSeikyuBodyEditorです。
@@ -28,10 +31,17 @@ public class IkenshoHoshuSeikyuBodyEditor implements IIkenshoHoshuSeikyuBodyEdit
 
     @Override
     public IkenshoHoshuSeikyuReportSource edit(IkenshoHoshuSeikyuReportSource source) {
-        source.listGokei_1 = bodyItem.getListGokei_1();
-        source.listGokei_2 = bodyItem.getListGokei_2();
-        source.listGokei_3 = bodyItem.getListGokei_3();
+        source.listGokei_1 = kinngakuFormat(bodyItem.getListGokei_1());
+        source.listGokei_2 = kinngakuFormat(bodyItem.getListGokei_2());
+        source.listGokei_3 = kinngakuFormat(bodyItem.getListGokei_3());
         return source;
+    }
+
+    private RString kinngakuFormat(RString data) {
+        if (data == null || data.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(data.toString()), 0);
     }
 
 }

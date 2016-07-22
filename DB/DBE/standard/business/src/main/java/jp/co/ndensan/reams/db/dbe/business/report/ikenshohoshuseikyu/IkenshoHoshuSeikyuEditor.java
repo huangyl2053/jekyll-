@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBE621004_主治医意見書作成報酬請求書のIkenshoHoshuSeikyuEditorです。
@@ -44,12 +46,19 @@ public class IkenshoHoshuSeikyuEditor implements IIkenshoHoshuSeikyuEditor {
                 LASDEC_CODE, ConfigNameDBE.主治医意見書作成報酬請求書.get名称());
         source.tsuchibun1 = item.get通知文1();
         source.taishoKikan = item.get対象期間();
-        source.gokeiKingaku2 = item.get請求金額();
-        source.sakuseiKensuKei = item.get作成件数合計();
-        source.shokeiKingaku = item.get小計();
-        source.shohizei = item.get消費税額();
-        source.gokeiKingaku1 = item.get合計金額();
+        source.gokeiKingaku2 = kinngakuFormat(item.get請求金額());
+        source.sakuseiKensuKei = kinngakuFormat(item.get作成件数合計());
+        source.shokeiKingaku = kinngakuFormat(item.get小計());
+        source.shohizei = (item.get消費税額());
+        source.gokeiKingaku1 = kinngakuFormat(item.get合計金額());
         source.tsuchibun2 = item.get通知文2();
         return source;
+    }
+
+    private RString kinngakuFormat(RString data) {
+        if (data == null || data.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(data.toString()), 0);
     }
 }
