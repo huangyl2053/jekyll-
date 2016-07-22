@@ -49,18 +49,17 @@ public class ShokanKetteiTsuchiShoSealerOutputProcess extends BatchProcessBase<S
     }
 
     @Override
-    protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100004.getReportId().value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
-    }
-
-    @Override
     protected void process(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
         帳票データリスト.add(new ShokanKetteiTsuchiShoShiharai(entity));
     }
 
     @Override
     protected void afterExecute() {
+        if (帳票データリスト.isEmpty()) {
+            return;
+        }
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100004.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
         ShokanBaraiShikyuKetteiTsuchishoSealerType1 ichiranhyo = new ShokanBaraiShikyuKetteiTsuchishoSealerType1();
         TensoData data
                 = ichiranhyo.createChoHyoData(帳票データリスト, batchPram, reportSourceWriter);

@@ -29,14 +29,11 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKub
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
 import jp.co.ndensan.reams.ur.urz.definition.report.ReportId;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -224,19 +221,19 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         List<Decimal> ページ数 = new ArrayList<>();
         ページ数.add(Decimal.ONE);
         // TODO 出力順関連
-        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
-                get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
-                        Long.parseLong(batchPram.getSyutujunId().toString()));
+//        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
+//                get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
+//                        Long.parseLong(batchPram.getSyutujunId().toString()));
         List<RString> 出力順項目 = new ArrayList<>();
         List<RString> 改ページ項目 = new ArrayList<>();
-        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
-            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
-                出力順項目.add(sortItem.get項目ID());
-                if (sortItem.is改頁項目()) {
-                    改ページ項目.add(sortItem.get項目ID());
-                }
-            }
-        }
+//        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
+//            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
+//                出力順項目.add(sortItem.get項目ID());
+//                if (sortItem.is改頁項目()) {
+//                    改ページ項目.add(sortItem.get項目ID());
+//                }
+//            }
+//        }
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBC介護給付,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
