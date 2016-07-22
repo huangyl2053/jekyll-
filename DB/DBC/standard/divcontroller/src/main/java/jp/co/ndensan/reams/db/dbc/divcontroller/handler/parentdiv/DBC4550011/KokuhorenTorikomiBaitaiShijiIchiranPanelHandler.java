@@ -92,35 +92,64 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanelHandler {
     private void init一覧Grid() {
         List<dgKokuhorenTorikomiBaitaiShijiIchiran_Row> dataSource = new ArrayList<>();
         RDate 適用基準日 = RDate.getNowDate();
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_過誤決定Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_過誤決定Ｆ_媒体区分, 過誤決定Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_過誤決定公費Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_過誤決定公費Ｆ_媒体区分, 過誤決定公費Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_給付管理Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_給付管理Ｆ_媒体区分, 給付管理Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_給付実績Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_給付実績Ｆ_媒体区分, 給付実績Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_給付実績結果Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_給付実績結果Ｆ_媒体区分, 給付実績結果Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_共同更新Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_共同更新Ｆ_媒体区分, 共同更新Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_共同受給Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_共同受給Ｆ_媒体区分, 共同受給Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_公費一覧Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_公費一覧Ｆ_媒体区分, 公費一覧Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_高額決定者Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_高額決定者Ｆ_媒体区分, 高額決定者Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_高額対象者Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_高額対象者Ｆ_媒体区分, 高額対象者Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_再審決定Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_再審決定Ｆ_媒体区分, 再審決定Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_再審決定公費Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_再審決定公費Ｆ_媒体区分, 再審決定公費Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_受給更新Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_受給更新Ｆ_媒体区分, 受給更新Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_受給台帳Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_受給台帳Ｆ_媒体区分, 受給台帳Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_受給突合結果Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_受給突合結果Ｆ_媒体区分, 受給突合結果Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_償還支給Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_償還支給Ｆ_媒体区分, 償還支給Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_償還不支給Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_償還不支給Ｆ_媒体区分, 償還不支給Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_審査請求Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_審査請求Ｆ_媒体区分, 審査請求Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_請求通知Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_請求通知Ｆ_媒体区分, 請求通知Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_請求通知公費Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_請求通知公費Ｆ_媒体区分, 請求通知公費Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_自己負担確認Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_自己負担確認Ｆ_媒体区分, 自己負担確認Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_自己負担証明Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_自己負担証明Ｆ_媒体区分, 自己負担証明Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_支給計算結果Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_支給計算結果Ｆ_媒体区分, 支給計算結果Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_合算支給通知Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_合算支給通知Ｆ_媒体区分, 合算支給通知Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_合算支給一覧Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_合算支給一覧Ｆ_媒体区分, 合算支給一覧Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_合算給付実績Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_合算給付実績Ｆ_媒体区分, 合算給付実績Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_過誤決定総合Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_過誤決定総合Ｆ_媒体区分, 過誤決定総合Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_請求通知総合Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_請求通知総合Ｆ_媒体区分, 請求通知総合Ｆ, 適用基準日));
-        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_審査請求総合Ｆ_ファイル名称, ConfigNameDBC.国保連取込媒体_審査請求総合Ｆ_媒体区分, 審査請求総合Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_過誤決定Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_過誤決定Ｆ_媒体区分, 過誤決定Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_過誤決定公費Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_過誤決定公費Ｆ_媒体区分, 過誤決定公費Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_給付管理Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_給付管理Ｆ_媒体区分, 給付管理Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_給付実績Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_給付実績Ｆ_媒体区分, 給付実績Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_給付実績結果Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_給付実績結果Ｆ_媒体区分, 給付実績結果Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_共同更新Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_共同更新Ｆ_媒体区分, 共同更新Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_共同受給Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_共同受給Ｆ_媒体区分, 共同受給Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_公費一覧Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_公費一覧Ｆ_媒体区分, 公費一覧Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_高額決定者Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_高額決定者Ｆ_媒体区分, 高額決定者Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_高額対象者Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_高額対象者Ｆ_媒体区分, 高額対象者Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_再審決定Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_再審決定Ｆ_媒体区分, 再審決定Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_再審決定公費Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_再審決定公費Ｆ_媒体区分, 再審決定公費Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_受給更新Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_受給更新Ｆ_媒体区分, 受給更新Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_受給台帳Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_受給台帳Ｆ_媒体区分, 受給台帳Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_受給突合結果Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_受給突合結果Ｆ_媒体区分, 受給突合結果Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_償還支給Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_償還支給Ｆ_媒体区分, 償還支給Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_償還不支給Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_償還不支給Ｆ_媒体区分, 償還不支給Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_審査請求Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_審査請求Ｆ_媒体区分, 審査請求Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_請求通知Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_請求通知Ｆ_媒体区分, 請求通知Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_請求通知公費Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_請求通知公費Ｆ_媒体区分, 請求通知公費Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_自己負担確認Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_自己負担確認Ｆ_媒体区分, 自己負担確認Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_自己負担証明Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_自己負担証明Ｆ_媒体区分, 自己負担証明Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_支給計算結果Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_支給計算結果Ｆ_媒体区分, 支給計算結果Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_合算支給通知Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_合算支給通知Ｆ_媒体区分, 合算支給通知Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_合算支給一覧Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_合算支給一覧Ｆ_媒体区分, 合算支給一覧Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_合算給付実績Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_合算給付実績Ｆ_媒体区分, 合算給付実績Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_過誤決定総合Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_過誤決定総合Ｆ_媒体区分, 過誤決定総合Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_請求通知総合Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_請求通知総合Ｆ_媒体区分, 請求通知総合Ｆ, 適用基準日));
+        dataSource.add(setRow値(ConfigNameDBC.国保連取込媒体_審査請求総合Ｆ_ファイル名称,
+                ConfigNameDBC.国保連取込媒体_審査請求総合Ｆ_媒体区分, 審査請求総合Ｆ, 適用基準日));
         div.getDgKokuhorenTorikomiBaitaiShijiIchiran().setDataSource(dataSource);
     }
 
@@ -217,7 +246,8 @@ public class KokuhorenTorikomiBaitaiShijiIchiranPanelHandler {
             if (RowState.Modified.equals(row.getRowState())) {
                 保存のconfig名 = row.getDefaultDataName2().concat(媒体);
                 保存のconfig値 = get媒体コード(row.getDefaultDataName1());
-                BusinessConfig.update(SubGyomuCode.DBC介護給付, ConfigNameDBC.valueOf(保存のconfig名.toString()), 保存のconfig値, 変更理由, RString.EMPTY, 運用日);
+                BusinessConfig.update(SubGyomuCode.DBC介護給付, ConfigNameDBC.valueOf(保存のconfig名.toString()),
+                        保存のconfig値, 変更理由, RString.EMPTY, 運用日);
             }
         }
     }

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 /**
  * KokuhorenTorikomiBaitaiShijiIchiranPanel のクラスファイル
  *
- * @author 自動生成
  * @reamsid_L DBC-3361-010 xuxin
  */
 public class KokuhorenTorikomiBaitaiShijiIchiranPanelDiv extends Panel {
