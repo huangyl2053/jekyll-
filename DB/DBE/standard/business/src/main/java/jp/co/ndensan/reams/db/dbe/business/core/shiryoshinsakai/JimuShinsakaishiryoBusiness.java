@@ -111,7 +111,10 @@ public class JimuShinsakaishiryoBusiness {
      * @return 審査員一覧
      */
     public RString get審査員一覧() {
-        return shinsakaiIinJohoList.get(no).getShinsakaiIinShimei().getColumnValue();
+        if (no < shinsakaiIinJohoList.size()) {
+            return shinsakaiIinJohoList.get(no).getShinsakaiIinShimei().getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -156,6 +159,9 @@ public class JimuShinsakaishiryoBusiness {
      * @return 氏名
      */
     public RString get氏名() {
+        if (johoEntity.getHihokenshaName() == null || johoEntity.getHihokenshaName().isEmpty()) {
+            return RString.EMPTY;
+        }
         return johoEntity.getHihokenshaName().getColumnValue();
     }
 
@@ -257,6 +263,15 @@ public class JimuShinsakaishiryoBusiness {
         前回期間.append(期間);
         前回期間.append(new RString("ヵ月"));
         return 前回期間.toRString();
+    }
+
+    /**
+     * 前回期間_下を取得します。
+     *
+     * @return 前回期間_下
+     */
+    public RString get前回期間_下() {
+        return new RString("H02.01.01～H03.01.01");
     }
 
     private RString get要介護状態区分(Code 状態区分コード) {
