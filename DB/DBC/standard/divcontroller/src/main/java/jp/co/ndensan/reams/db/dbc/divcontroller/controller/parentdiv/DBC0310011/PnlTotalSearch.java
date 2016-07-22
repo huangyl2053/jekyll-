@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0310011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011StateName;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -353,6 +355,15 @@ public class PnlTotalSearch {
         ViewStateHolder.put(ViewStateKeys.最大件数, div.getPnlSearch().getTxtMaxCount().getValue());
         ViewStateHolder.put(ViewStateKeys.表示モード, 契約者選択);
         ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
+        ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
+        ShokanJuryoininKeiyakusha shokanData = finder.getShokanJuryoininKeiyakusha(
+                new HihokenshaNo(pnlTotalSearchParameter.get被保番号()),
+                pnlTotalSearchParameter.get契約申請日(),
+                pnlTotalSearchParameter.get契約事業者番号(),
+                pnlTotalSearchParameter.get契約サービス種類());
+        if (shokanData == null) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
     }
 
     /**
