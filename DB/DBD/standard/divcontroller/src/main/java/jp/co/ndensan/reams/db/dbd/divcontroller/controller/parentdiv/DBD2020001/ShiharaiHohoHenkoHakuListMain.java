@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 支払方法変更滞納者把握リストクラスです．
@@ -30,6 +31,12 @@ public class ShiharaiHohoHenkoHakuListMain {
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onLoad(ShiharaiHohoHenkoHakuListMainDiv div) {
+        div.getTxtTainoKikanHihokenshaAll().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoKikanJukyushaAll().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoKikanNinteiShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoKikanNinteiYMD().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoKikanShokanShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoKikanShokanKettei().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         return ResponseData.of(div).respond();
     }
 
@@ -212,6 +219,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanHihokenshaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanHihokenshaAll().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoNengetsuHihokenshaAll().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanHihokenshaAll().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -223,6 +231,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanJukyushaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanJukyushaAll().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoNengetsuJukyushaAll().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanJukyushaAll().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -234,6 +243,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanNinteiShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanNinteiShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoNengetsuNinteiShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiShinseisha().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -245,6 +255,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanNinteiYMD(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanNinteiYMD().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoNengetsuNinteiYMD().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiYMD().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -256,6 +267,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanShokanShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanShokanShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoNengetsuShokanShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanShinseisha().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -267,6 +279,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanShokanKettei(ShiharaiHohoHenkoHakuListMainDiv div) {
         div.getTxtTainoKikanShokanKettei().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+        div.getTxtTainoNengetsuShokanKettei().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanKettei().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -278,6 +291,27 @@ public class ShiharaiHohoHenkoHakuListMain {
      */
     public ResponseData<ShiharaiHohoHenkoHaakuIchiranBatchParameter> onClick_btnBatchExecute(ShiharaiHohoHenkoHakuListMainDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+    }
+
+    /**
+     * 実行するボタンを押下のチェック処理します。
+     *
+     * @param div ShiharaiHohoHenkoHakuListMainDiv のクラスファイル
+     * @return ResponseData
+     */
+    public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_btnCheck(ShiharaiHohoHenkoHakuListMainDiv div) {
+        ValidationMessageControlPairs validPairs = getHandler(div).バッチ実行前チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+
+        return createResponse(div);
+    }
+
+    private ResponseData<ShiharaiHohoHenkoHakuListMainDiv> createResponse(ShiharaiHohoHenkoHakuListMainDiv div) {
+        ResponseData<ShiharaiHohoHenkoHakuListMainDiv> response = new ResponseData<>();
+        response.data = div;
+        return response;
     }
 
     private int get支払方法変更_支払方法変更期限() {

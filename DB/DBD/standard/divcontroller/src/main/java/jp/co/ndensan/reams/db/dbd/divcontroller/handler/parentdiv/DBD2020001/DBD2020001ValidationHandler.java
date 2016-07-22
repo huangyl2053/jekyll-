@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -22,6 +24,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * 支払方法変更滞納者把握リストハンドラクラスです。
  */
 public class DBD2020001ValidationHandler {
+
+    private static final RString 年 = new RString("年");
+    private static final RString 月 = new RString("月");
+    private static final int 月数_12 = 12;
+    private static final int MIN = 0;
 
     private final ShiharaiHohoHenkoHakuListMainDiv div;
 
@@ -35,13 +42,21 @@ public class DBD2020001ValidationHandler {
     }
 
     /**
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs バッチ実行前チェック() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        return バッチ実行前関連チェック(pairs, div);
+    }
+
+    /**
      * 実行パラメターを設定します．
      *
      * @return　バッチパラメター
      */
     public ShiharaiHohoHenkoHaakuIchiranBatchParameter setBatchParameter() {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        バッチ実行前関連チェック(pairs, div);
+
         ShiharaiHohoHenkoHaakuIchiran shiharaiHohoHenkoHaakuIchiran = new ShiharaiHohoHenkoHaakuIchiran(div);
         return shiharaiHohoHenkoHaakuIchiran.createShiharaiHohoHenkoHaakuIchiranParameter();
     }
@@ -85,4 +100,21 @@ public class DBD2020001ValidationHandler {
         }
     }
 
+    public RString get支払方法変更期限に対する年月(Decimal month) {
+        int monthValue = month.intValue();
+        int 年数 = (int) monthValue / 月数_12;
+        int 月数 = monthValue % 月数_12;
+
+        StringBuilder builder = new StringBuilder();
+
+        if (MIN != 年数) {
+            builder.append(年数);
+            builder.append(年);
+        }
+        if (MIN != 月数) {
+            builder.append(月数);
+            builder.append(月);
+        }
+        return new RString(builder.toString());
+    }
 }
