@@ -39,8 +39,11 @@ public class YokaigoninteiimageShutsuryokuFinder {
     public List<RString> getSharedFile(List<RString> fileName) {
         List<RString> 存在するファイル = new ArrayList<>();
         for (SharedFileEntryInfoEntity entity : sharedFile) {
+            if (entity.getFilesEntity() == null) {
+                continue;
+            }
             for (RString name : fileName) {
-                if (name.equals(entity.getFileEntryEntity().getSharedFileName())) {
+                if (name.equals(entity.getFilesEntity().getPathname())) {
                     存在するファイル.add(name);
                 }
             }
