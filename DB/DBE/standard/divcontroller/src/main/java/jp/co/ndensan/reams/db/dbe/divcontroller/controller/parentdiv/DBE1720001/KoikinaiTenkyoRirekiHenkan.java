@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class KoikinaiTenkyoRirekiHenkan {
 
     private static final RString TRUE = new RString("True");
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
     private static final RString 状態_更新 = new RString("更新");
 
     /**
