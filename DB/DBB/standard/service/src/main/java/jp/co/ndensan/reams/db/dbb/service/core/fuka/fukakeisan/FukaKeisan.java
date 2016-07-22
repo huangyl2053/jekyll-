@@ -516,7 +516,7 @@ public class FukaKeisan {
         List<HihokenshaDaicho> 資格 = new ArrayList<>();
         資格.add(param.get資格の情報());
         HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
-        List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格, param.get年度分賦課リスト_更正前().get賦課年度());
+        List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格, param.get賦課年度());
 
         NengakuFukaKonkyo 年額賦課根拠 = get年額賦課根拠(賦課基準日, param.get資格の情報().get第1号資格取得年月日(),
                 param.get資格の情報().get資格喪失年月日(), 月別保険料段階, 月別ランク情報);
@@ -564,7 +564,6 @@ public class FukaKeisan {
 
         賦課根拠パラメータ.set賦課の情報_設定前(新しい賦課の情報);
         FukaJoho 賦課の情報 = reflect賦課根拠(賦課根拠パラメータ);
-        FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
 
         NendobunFukaList 調定計算用年度分賦課リスト = new NendobunFukaList();
         調定計算用年度分賦課リスト.set賦課年度(賦課の情報.get賦課年度());
@@ -588,10 +587,32 @@ public class FukaKeisan {
         調定計算パラメータ.set年度分賦課リスト_更正前(調定計算用年度分賦課リスト);
         KoseiShorikoaResult 調定計算 = do調定計算(調定計算パラメータ);
 
+        NendobunFukaList 出力用年度分賦課リスト = 調定計算.get年度分賦課リスト_更正後();
+        賦課の情報 = 調定計算.get年度分賦課リスト_更正後().get現年度();
+        出力用年度分賦課リスト.set現年度(edite賦課の情報(出力用年度分賦課リスト.get現年度(), param, 調定計算));
+        出力用年度分賦課リスト.set過年度1(edite賦課の情報(出力用年度分賦課リスト.get過年度1(), param, 調定計算));
+        出力用年度分賦課リスト.set過年度2(edite賦課の情報(出力用年度分賦課リスト.get過年度2(), param, 調定計算));
+        出力用年度分賦課リスト.set過年度3(edite賦課の情報(出力用年度分賦課リスト.get過年度3(), param, 調定計算));
+        出力用年度分賦課リスト.set過年度4(edite賦課の情報(出力用年度分賦課リスト.get過年度4(), param, 調定計算));
+        出力用年度分賦課リスト.set過年度5(edite賦課の情報(出力用年度分賦課リスト.get過年度5(), param, 調定計算));
+        出力用年度分賦課リスト.set最新賦課の情報(edite賦課の情報(出力用年度分賦課リスト.get最新賦課の情報(), param, 調定計算));
+
+        KoseiShorikoaResult result = new KoseiShorikoaResult();
+        result.set徴収方法の情報_更正後(調定計算.get徴収方法の情報_更正後());
+        result.set年度分賦課リスト_更正後(出力用年度分賦課リスト);
+        result.set資格の情報(調定計算.get資格の情報());
+        return result;
+    }
+
+    private FukaJoho edite賦課の情報(FukaJoho 賦課の情報, KoseiShorikoaParameter param, KoseiShorikoaResult 調定計算) {
+        if (賦課の情報 == null) {
+            return null;
+        }
+        FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         builder.set調定日時(param.get調定日時())
                 .set異動基準日時(param.get調定日時())
                 .set徴収方法履歴番号(調定計算.get徴収方法の情報_更正後().get履歴番号());
-        if (!is普徴期別金額あり(調定計算.get年度分賦課リスト_更正後().get現年度())) {
+        if (!is普徴期別金額あり(賦課の情報)) {
             builder.set口座区分(KozaKubun.現金納付.getコード());
         } else {
             if (!param.get口座のリスト().isEmpty()) {
@@ -602,12 +623,7 @@ public class FukaKeisan {
         }
         builder.set職権区分(ShokkenKubun.非該当.getコード());
         賦課の情報 = builder.build();
-
-        KoseiShorikoaResult result = new KoseiShorikoaResult();
-        result.set徴収方法の情報_更正後(調定計算.get徴収方法の情報_更正後());
-        result.get年度分賦課リスト_更正後().set最新賦課の情報(賦課の情報);
-        result.set資格の情報(調定計算.get資格の情報());
-        return result;
+        return 賦課の情報;
     }
 
     private TsuchishoNo create通知書番号(RString 被保険者番号, RString 枝番号) {
