@@ -31,7 +31,7 @@ public enum KyufuTaishoshaScheduleSetteiPanelSpec implements IPredicate<KyufuTai
         public static boolean is開始年月と終了年月の前後順チェック(KyufuTaishoshaScheduleSetteiPanelDiv div) {
             FlexibleYearMonth 開始年月 = div.getTxtShinsaNengetsuFrom().getDomain();
             FlexibleYearMonth 終了年月 = div.getTxtShinsaNengetsuTo().getDomain();
-            return 開始年月.isBefore(終了年月);
+            return 開始年月.isBeforeOrEquals(終了年月);
         }
     }
 }

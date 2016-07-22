@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -30,10 +31,12 @@ public class KyufuTaishoshaScheduleSetteiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
     @JsonProperty("KyufuTaishoshaScheduleSettei")
     private KyufuTaishoshaScheduleSetteiDiv KyufuTaishoshaScheduleSettei;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
+    @JsonProperty("hdnFlag")
+    private RString hdnFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,15 +44,6 @@ public class KyufuTaishoshaScheduleSetteiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
-     */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
-    }
-
     /*
      * getKyufuTaishoshaScheduleSettei
      * @return KyufuTaishoshaScheduleSettei
@@ -66,6 +60,33 @@ public class KyufuTaishoshaScheduleSetteiPanelDiv extends Panel {
     @JsonProperty("KyufuTaishoshaScheduleSettei")
     public void setKyufuTaishoshaScheduleSettei(KyufuTaishoshaScheduleSetteiDiv KyufuTaishoshaScheduleSettei) {
         this.KyufuTaishoshaScheduleSettei = KyufuTaishoshaScheduleSettei;
+    }
+
+    /*
+     * getccdKaigoKanryoMessage
+     * @return ccdKaigoKanryoMessage
+     */
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
+    }
+
+    /*
+     * gethdnFlag
+     * @return hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public RString getHdnFlag() {
+        return hdnFlag;
+    }
+
+    /*
+     * sethdnFlag
+     * @param hdnFlag hdnFlag
+     */
+    @JsonProperty("hdnFlag")
+    public void setHdnFlag(RString hdnFlag) {
+        this.hdnFlag = hdnFlag;
     }
 
     /*
