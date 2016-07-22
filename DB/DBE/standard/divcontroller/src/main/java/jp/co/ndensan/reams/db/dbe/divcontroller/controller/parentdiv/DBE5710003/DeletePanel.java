@@ -119,6 +119,11 @@ public class DeletePanel {
     private ValidationMessageControlPairs イメージ削除チェック(DeletePanelDiv div, List<RString> 選択したイメージ対象,
             List<RString> 存在したイメージファイル名) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs イメージファイル存在チェック = getValidationHandler(div).
+                イメージファイル存在チェック(存在したイメージファイル名);
+        if (イメージファイル存在チェック.iterator().hasNext()) {
+            return イメージファイル存在チェック;
+        }
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         RString 認定調査委託先コード = イメージ管理情報.get認定調査委託先コード().value();
         RString 認定調査員コード = イメージ管理情報.get認定調査員コード();
