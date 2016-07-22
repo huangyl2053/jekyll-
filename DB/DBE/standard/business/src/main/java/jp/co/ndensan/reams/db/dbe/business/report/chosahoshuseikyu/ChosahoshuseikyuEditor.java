@@ -41,11 +41,11 @@ public class ChosahoshuseikyuEditor implements IChosahoshuseikyuEditor {
         source.title = item.getタイトル();
         source.tsuchibun1 = item.get通知文1();
         source.taishoKikan = item.get対象期間();
-        source.gokeiKingaku1 = nullOrZero(item.get請求金額());
+        source.gokeiKingaku1 = nullOrZero(item.get合計金額());
         source.sakuseiKensuKei = nullOrZero(item.get作成件数合計());
         source.shokeiKingaku = nullOrZero(item.get小計());
         source.shohizei = nullOrZero(item.get消費税額());
-        source.gokeiKingaku2 = nullOrZero(item.get合計金額());
+        source.gokeiKingaku2 = nullOrZero(item.get請求金額());
         source.tsuchibun2 = item.get通知文2();
         return source;
     }

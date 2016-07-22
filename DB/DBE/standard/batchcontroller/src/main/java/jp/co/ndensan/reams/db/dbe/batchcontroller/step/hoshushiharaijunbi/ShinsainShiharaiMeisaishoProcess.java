@@ -85,19 +85,6 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
 
     @Override
     protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity entity) {
-        if (hasBrek(getBefore(), entity)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-            ShinsainShiharaiMeisaishoEdit edit = new ShinsainShiharaiMeisaishoEdit();
-            ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity);
-            shinsainshi = getShinsainShiharaimeisaisho(shinsainshi, entity);
-            ShinsainShiharaimeisaishoReport report = new ShinsainShiharaimeisaishoReport(shinsainshi);
-            report.writeBy(reportSourceWriter);
-            ++index;
-        }
-    }
-
-    private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
-        return !before.getShinsakaiIinCode().equals(current.getShinsakaiIinCode());
     }
 
     @Override

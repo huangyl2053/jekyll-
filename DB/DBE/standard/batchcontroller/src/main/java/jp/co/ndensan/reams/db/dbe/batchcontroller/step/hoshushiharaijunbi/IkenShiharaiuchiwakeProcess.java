@@ -107,23 +107,6 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
 
     @Override
     protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            IkenShiharaiuchiwakeEdit edit = new IkenShiharaiuchiwakeEdit();
-            List<RString> 業務固有キー = new ArrayList<>();
-            業務固有キー.add(current.getShujiiIryoKikanCode());
-            IkenShiharaiuchiwakeEntity shumeisaiEntity = edit.getIkenShiharaiuchiwakeEntity(current, 消費税率, get認証者(),
-                    ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
-            editIkenShiharaiuchiwakeEntity(shumeisaiEntity, current);
-            IkenShiharaiuchiwakeReport report = new IkenShiharaiuchiwakeReport(shumeisaiEntity);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
-    }
-
-    private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
-        return !before.getShujiiIryoKikanCode().equals(current.getShujiiIryoKikanCode());
-
     }
 
     @Override

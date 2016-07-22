@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 認定調査報酬支払明細書のEditorです。
@@ -52,17 +54,24 @@ public class ChosaHoshumeisaiEditor implements IChosaHoshumeisaiEditor {
         source.listChosaSakusei_8 = item.get継続申請在宅();
         source.listChosaSakusei_9 = item.get継続申請施設();
         source.listChosaSakusei_10 = item.get調査票作成料();
-        source.listGokeikensu_1 = item.get合計件数新規在宅();
-        source.listGokeikensu_2 = item.get合計件数新規施設();
-        source.listGokeikensu_3 = item.get合計件数継続在宅();
-        source.listGokeikensu_4 = item.get合計件数継続施設();
-        source.gokeiKingaku = item.get合計金額();
-        source.shouhiZei = item.get消費税();
-        source.gokeiSeikyuKingaku = item.get合計請求額();
+        source.listGokeikensu_1 = kinngakuFormat(item.get合計件数新規在宅());
+        source.listGokeikensu_2 = kinngakuFormat(item.get合計件数新規施設());
+        source.listGokeikensu_3 = kinngakuFormat(item.get合計件数継続在宅());
+        source.listGokeikensu_4 = kinngakuFormat(item.get合計件数継続施設());
+        source.gokeiKingaku = kinngakuFormat(item.get合計金額());
+        source.shouhiZei = kinngakuFormat(item.get消費税());
+        source.gokeiSeikyuKingaku = kinngakuFormat(item.get合計請求額());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get被保険者番号() != null) {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
         }
         return source;
+    }
+
+    private RString kinngakuFormat(RString date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(date.toString()), 0);
     }
 }

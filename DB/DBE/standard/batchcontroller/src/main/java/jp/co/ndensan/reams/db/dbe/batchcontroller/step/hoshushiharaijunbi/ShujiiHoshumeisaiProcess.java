@@ -108,20 +108,6 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
 
     @Override
     protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            ShujiiHoshumeisaiEdit edit = new ShujiiHoshumeisaiEdit();
-            ShujiiHoshumeisaiEntity shumeisaiEntity = edit.getShujiiHoshumeisaiEntity(current);
-            shumeisaiEntity = editShujiiHoshumeisaiEntity(shumeisaiEntity, current);
-            ShujiiHoshumeisaiReport report = new ShujiiHoshumeisaiReport(shumeisaiEntity);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
-    }
-
-    private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
-        return !before.getIryoKikanMeisho().equals(current.getIryoKikanMeisho())
-                || !before.getShujiiCode().equals(current.getShujiiCode());
     }
 
     @Override
