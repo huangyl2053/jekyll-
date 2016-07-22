@@ -96,7 +96,8 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
         for (KokuhorenInterfaceKanri データEntity : データ登録リスト) {
             if (ShoriJotaiKubun.処理前.getコード().equals(データEntity.get処理状態区分())
                     || ShoriJotaiKubun.再処理前.getコード().equals(データEntity.get処理状態区分())) {
-                if (NUM_ONE < 履歴情報の件数++) {
+                履歴情報の件数 = 履歴情報の件数 + NUM_ONE;
+                if (NUM_ONE < 履歴情報の件数) {
                     throw new ApplicationException(DbcErrorMessages.高額判定_処理状態処理前数不正.getMessage()
                             .evaluate().concat(データEntity.get処理年月().wareki().toDateString().toString()));
                 }
