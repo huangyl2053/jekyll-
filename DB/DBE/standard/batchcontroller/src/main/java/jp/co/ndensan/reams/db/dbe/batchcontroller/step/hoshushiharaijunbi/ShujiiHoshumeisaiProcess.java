@@ -77,7 +77,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;
-    private int index_tmp = 0;
+    private int index_tmp = 1;
 
     @Override
     protected void beforeExecute() {
