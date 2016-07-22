@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
@@ -26,8 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 期割額Divの操作を行うクラスです。
- *
- * @author N8156 宮本 康
  */
 public class KiwarigakuHandler {
 
@@ -91,7 +88,8 @@ public class KiwarigakuHandler {
         }
     }
 
-    private static RString toX期表記(Kitsuki 期月) {
+    //暫定対応 - Kitsukiにバグがあり、get表記().asX期() が利用できない。
+    private static RString asX期(Kitsuki 期月) {
         int 期 = 期月.get期AsInt();
         return 期 == 0 ? RString.EMPTY
                : new RStringBuilder().append(期).append(SUFFIX_期).toRString();
@@ -100,46 +98,46 @@ public class KiwarigakuHandler {
     private static void set普徴期ラベルPer(Kitsuki 期月, KiwarigakuDiv div) {
         switch (期月.get月()) {
             case _4月:
-                div.getLblFuchoKi1().setText(toX期表記(期月));
+                div.getLblFuchoKi1().setText(asX期(期月));
                 return;
             case _5月:
-                div.getLblFuchoKi2().setText(toX期表記(期月));
+                div.getLblFuchoKi2().setText(asX期(期月));
                 return;
             case _6月:
-                div.getLblFuchoKi3().setText(toX期表記(期月));
+                div.getLblFuchoKi3().setText(asX期(期月));
                 return;
             case _7月:
-                div.getLblFuchoKi4().setText(toX期表記(期月));
+                div.getLblFuchoKi4().setText(asX期(期月));
                 return;
             case _8月:
-                div.getLblFuchoKi5().setText(toX期表記(期月));
+                div.getLblFuchoKi5().setText(asX期(期月));
                 return;
             case _9月:
-                div.getLblFuchoKi6().setText(toX期表記(期月));
+                div.getLblFuchoKi6().setText(asX期(期月));
                 return;
             case _10月:
-                div.getLblFuchoKi7().setText(toX期表記(期月));
+                div.getLblFuchoKi7().setText(asX期(期月));
                 return;
             case _11月:
-                div.getLblFuchoKi8().setText(toX期表記(期月));
+                div.getLblFuchoKi8().setText(asX期(期月));
                 return;
             case _12月:
-                div.getLblFuchoKi9().setText(toX期表記(期月));
+                div.getLblFuchoKi9().setText(asX期(期月));
                 return;
             case _1月:
-                div.getLblFuchoKi10().setText(toX期表記(期月));
+                div.getLblFuchoKi10().setText(asX期(期月));
                 return;
             case _2月:
-                div.getLblFuchoKi11().setText(toX期表記(期月));
+                div.getLblFuchoKi11().setText(asX期(期月));
                 return;
             case _3月:
-                div.getLblFuchoKi12().setText(toX期表記(期月));
+                div.getLblFuchoKi12().setText(asX期(期月));
                 return;
             case 翌年度4月:
-                div.getLblFuchoKi13().setText(toX期表記(期月));
+                div.getLblFuchoKi13().setText(asX期(期月));
                 return;
             case 翌年度5月:
-                div.getLblFuchoKi14().setText(toX期表記(期月));
+                div.getLblFuchoKi14().setText(asX期(期月));
             default:
         }
     }
@@ -174,15 +172,19 @@ public class KiwarigakuHandler {
 
     private static void setKiwarigaku(KiwarigakuDiv div, Kiwarigaku 期割額, KitsukiList 普徴期リスト) {
         for (KiwarigakuMeisai 明細 : 期割額.get期割額明細()) {
-            set(div, 明細, 普徴期リスト);
+            set期割額(div, 明細, 普徴期リスト);
         }
+        div.getLblTokuKibetsuGakuGokei().setVisible(!期割額.is特徴期別額合計0円());
         div.getLblTokuKibetsuGakuGokei().setText(期割額.get特徴期別額合計表記());
+        div.getLblTokuNofuGakuGokei().setVisible(!期割額.is特徴期別額合計0円() || !期割額.is特徴納付額合計0円());
         div.getLblTokuNofuGakuGokei().setText(期割額.get特徴納付額合計表記());
+        div.getLblFuchoKibetsuGakuGokei().setVisible(!期割額.is普徴期別額合計0円());
         div.getLblFuchoKibetsuGakuGokei().setText(期割額.get普徴期別額合計表記());
-        div.getLblFuchoNofuGakuGokei().setText(期割額.get特徴納付額合計表記());
+        div.getLblFuchoNofuGakuGokei().setVisible(!期割額.is普徴期別額合計0円() || !期割額.is普徴納付額合計0円());
+        div.getLblFuchoNofuGakuGokei().setText(期割額.get普徴納付額合計表記());
     }
 
-    private static void set(KiwarigakuDiv div, KiwarigakuMeisai 期割額明細, KitsukiList 普徴期月リスト) {
+    private static void set期割額(KiwarigakuDiv div, KiwarigakuMeisai 期割額明細, KitsukiList 普徴期月リスト) {
         switch (期割額明細.get徴収方法()) {
             case 特別徴収:
                 set特別徴収(div, 期割額明細);

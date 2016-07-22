@@ -72,6 +72,23 @@ public class Kiwarigaku {
         return composedカンマ編集OrEmpty(特徴期別額合計);
     }
 
+    private static RString composedカンマ編集OrEmpty(Decimal value) {
+        return value == null ? RString.EMPTY : new RString(value.toString("#,##0"));
+    }
+
+    /**
+     * 特徴期別額合計が0円の場合、{@code ture}を返します。
+     *
+     * @return 特徴期別額合計が0円の場合、{@code ture}.以外の場合、{@code false}.
+     */
+    public boolean is特徴期別額合計0円() {
+        return isNullOrZERO(特徴期別額合計);
+    }
+
+    private static boolean isNullOrZERO(Decimal value) {
+        return value == null || Decimal.ZERO.equals(value);
+    }
+
     /**
      * 特徴納付額合計を返します。
      *
@@ -88,6 +105,15 @@ public class Kiwarigaku {
      */
     public RString get特徴納付額合計表記() {
         return composedカンマ編集OrEmpty(特徴納付額合計);
+    }
+
+    /**
+     * 特徴納付額合計が0円の場合、{@code ture}を返します。
+     *
+     * @return 特徴納付額合計が0円の場合、{@code ture}.以外の場合、{@code false}.
+     */
+    public boolean is特徴納付額合計0円() {
+        return isNullOrZERO(特徴納付額合計);
     }
 
     /**
@@ -109,6 +135,15 @@ public class Kiwarigaku {
     }
 
     /**
+     * 普徴期別額合計が0円の場合、{@code ture}を返します。
+     *
+     * @return 普徴期別額合計が0円の場合、{@code ture}.以外の場合、{@code false}.
+     */
+    public boolean is普徴期別額合計0円() {
+        return isNullOrZERO(普徴期別額合計);
+    }
+
+    /**
      * 普徴納付額合計を返します。
      *
      * @return 普徴納付額合計
@@ -126,7 +161,13 @@ public class Kiwarigaku {
         return composedカンマ編集OrEmpty(普徴納付額合計);
     }
 
-    private static RString composedカンマ編集OrEmpty(Decimal value) {
-        return value == null ? RString.EMPTY : new RString(value.toString("#,##0"));
+    /**
+     * 普徴納付額合計が0円の場合、{@code ture}を返します。
+     *
+     * @return 普徴納付額合計が0円の場合、{@code ture}.以外の場合、{@code false}.
+     */
+    public boolean is普徴納付額合計0円() {
+        return isNullOrZERO(特徴納付額合計);
     }
+
 }
