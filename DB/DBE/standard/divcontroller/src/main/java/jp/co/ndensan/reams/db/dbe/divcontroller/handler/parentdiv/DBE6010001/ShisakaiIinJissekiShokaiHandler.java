@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran.Sh
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgShisakaiIinJisseki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -142,19 +143,22 @@ public class ShisakaiIinJissekiShokaiHandler {
     }
 
     /**
-     * 審査会開催日をセート。
+     * MybatisParametaをセート。
      *
-     * @param 審査会開催日FROM 審査会開催日FROM
-     * @param 審査会開催日TO 審査会開催日TO
+     * @return ShinsaiinJissekiIchiranMybitisParamter
      */
-    public void set審査会開催日(FlexibleDate 審査会開催日FROM, FlexibleDate 審査会開催日TO) {
+    public ShinsaiinJissekiIchiranMybitisParamter setMybatisParameta() {
+        FlexibleDate 審査会開催日FROM = FlexibleDate.EMPTY;
+        FlexibleDate 審査会開催日TO = FlexibleDate.EMPTY;
         if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
             審査会開催日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
         }
         if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
             審査会開催日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
         }
-
+        ShinsaiinJissekiIchiranMybitisParamter paramter = ShinsaiinJissekiIchiranMybitisParamter.createParamter(false,
+                審査会開催日FROM, 審査会開催日TO, new RString(div.getTxtMaxKensu().getValue().toString()));
+        return paramter;
     }
 
     /**
