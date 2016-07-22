@@ -1771,7 +1771,7 @@ public enum ViewStateKeys {
     /**
      * is経由該当者一覧画面
      */
-    is経由該当者一覧画面
+    is経由該当者一覧画面,
     /**
      * 認定調査
      */
