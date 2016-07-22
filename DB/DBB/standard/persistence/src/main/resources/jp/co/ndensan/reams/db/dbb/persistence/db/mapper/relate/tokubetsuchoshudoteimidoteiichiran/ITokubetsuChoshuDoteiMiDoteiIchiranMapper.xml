@@ -18,7 +18,7 @@
             "UeT0511NenkinTokuchoKaifuJoho"."dtSeibetsu" as "dtSeibetsu",
             "UeT0511NenkinTokuchoKaifuJoho"."dtKanaJusho" as "dtKanaJusho",
             "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuGimushaCode" as "dtTokubetsuChoshuGimushaCode",
-            "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiJusho" as "dtKanjiJusho",
+            "UeT0511NenkinTokuchoKaifuJoho"."dtKanaShimei" as "dtKanaShimei",
             "UeT0511NenkinTokuchoKaifuJoho"."dtYubinNo" as "dtYubinNo",
             "shikibetsuCode"."setaiCode" as "setaiCode",
             "shikibetsuCode"."gyoseikuCode" as "gyoseikuCode",

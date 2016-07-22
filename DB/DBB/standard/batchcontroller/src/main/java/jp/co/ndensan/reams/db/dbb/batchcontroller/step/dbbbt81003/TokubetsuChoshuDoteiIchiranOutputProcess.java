@@ -156,8 +156,8 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
                     new RDate(entity.getBirthDay().toString()),
                     entity.getJuminShubetsuCode(),
                     entity.getSeibetsu().value().get性別名称(),
+                    entity.getKanaMeisho().getColumnValue(),
                     entity.getKanaShimei(),
-                    RString.EMPTY,
                     entity.getKanjiShimei(),
                     entity.getYubinNo(),
                     entity.getKanjiJusho()
