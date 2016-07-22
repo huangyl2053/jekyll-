@@ -66,9 +66,6 @@ public class NinteiChosaIraiShudouHandler {
     private static final RString 文字列3 = new RString("3");
     private static final RString 文字列4 = new RString("4");
     private static final RString 文字列5 = new RString("5");
-    private static final RString DATE_時 = new RString("時");
-    private static final RString DATE_分 = new RString("分");
-    private static final RString DATE_秒 = new RString("秒");
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
@@ -78,10 +75,6 @@ public class NinteiChosaIraiShudouHandler {
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
     private static final int INDEX_11 = 11;
-    private static final RString IKENSHOSAKUSEIRYO_11 = new RString("11");
-    private static final RString IKENSHOSAKUSEIRYO_12 = new RString("12");
-    private static final RString IKENSHOSAKUSEIRYO_21 = new RString("21");
-    private static final RString IKENSHOSAKUSEIRYO_22 = new RString("22");
     private static final RString YOKAIGOJOTAIKUBUN01 = new RString("01");
     private static final RString YOKAIGOJOTAIKUBUN12 = new RString("12");
     private static final RString YOKAIGOJOTAIKUBUN13 = new RString("13");
