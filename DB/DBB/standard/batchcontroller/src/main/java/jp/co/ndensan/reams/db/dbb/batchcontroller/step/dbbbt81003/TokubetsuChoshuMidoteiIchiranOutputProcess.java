@@ -75,6 +75,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
 
     @Override
     protected void beforeExecute() {
+        pageSize = ONE;
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
