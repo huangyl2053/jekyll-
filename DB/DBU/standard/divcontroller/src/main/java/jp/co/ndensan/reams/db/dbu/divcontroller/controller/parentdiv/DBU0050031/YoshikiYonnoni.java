@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -55,6 +56,7 @@ public class YoshikiYonnoni {
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
+    private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private static final int MONTH_6 = 6;
     private static final int INT_4 = 4;
     private static final RString 座標1_1 = new RString("1_1");
@@ -154,7 +156,7 @@ public class YoshikiYonnoni {
                 div.setShoriMode(内部処理モード_削除);
             }
         } else if (ADD.equals(insuranceInf.get処理フラグ())) {
-            div.getYoshikiYonnoniMeisai().setDisabled(true);
+            div.getYoshikiYonnoniMeisai().getTplTokukaikeijokyo().setDisabled(true);
             List<Shichoson> shichosonList = manager.getShichosonCodeNameList();
             if (shichosonList.isEmpty()) {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -190,6 +192,7 @@ public class YoshikiYonnoni {
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisplayNone(true);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
             div.setShoriMode(内部処理モード_追加);
         }
         return ResponseData.of(div).respond();
@@ -290,8 +293,8 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(true);
-                div.getYoshikiYonnoniMeisai().setDisabled(false);
-
+                div.getYoshikiYonnoniMeisai().getTplTokukaikeijokyo().setDisabled(false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, false);
             } else {
                 throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
 

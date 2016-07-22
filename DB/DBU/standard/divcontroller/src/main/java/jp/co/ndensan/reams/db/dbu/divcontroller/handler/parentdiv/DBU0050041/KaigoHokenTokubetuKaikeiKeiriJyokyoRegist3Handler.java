@@ -648,9 +648,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         TextBoxDate 集計年度Box = div.getYoshikiYonnosanMeisai().getTxtShukeiYM();
         RDate 報告年度 = 報告年度Box.getValue();
         RString 報告年度String = 報告年度Box.getText();
-        int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
-        if (!(null == 報告年度)) {
-            set集計年度(報告年度Year, 集計年度Box);
+        if (RDate.canConvert(報告年度String)) {
+            int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
+            if (!(null == 報告年度)) {
+                set集計年度(報告年度Year, 集計年度Box);
+            }
         }
     }
 
@@ -668,8 +670,10 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
 
     /**
      * 「報告年度を確定する」ボタンを押下すること処理です。
+     *
+     * @param insuranceInfEntity insuranceInfEntity
      */
-    public void onClick_btnConfirm() {
+    public void onClick_btnConfirm(InsuranceInformation insuranceInfEntity) {
         LasdecCode 市町村コード = get市町村コード(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
         TokeiTaishoKubun 保険者区分 = get保険者区分(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
         TextBoxDate 報告年度Box = div.getYoshikiYonnosanMeisai().getTxtHokokuYM();
@@ -677,18 +681,25 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         if (null == 報告年度) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage());
         } else {
-            報告年度の確定処理(報告年度, 市町村コード, 保険者区分, 報告年度Box);
+            報告年度の確定処理(報告年度, 市町村コード, 保険者区分, 報告年度Box, insuranceInfEntity);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
         }
     }
 
-    private void 報告年度の確定処理(RDate 報告年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分, TextBoxDate 報告年度Box) {
+    private void 報告年度の確定処理(RDate 報告年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分, TextBoxDate 報告年度Box,
+            InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
-        List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
-                = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(
-                        new FlexibleYear(報告年度.getYear().toString()), 市町村コード, 保険者区分);
-        if (!一覧データLst.isEmpty() && 一覧データLst.get(0) != null && !一覧データLst.get(0).get詳細データエリア().isEmpty()) {
+        FlexibleYear 報告年 = new FlexibleYear(insuranceInfEntity.get報告年().toString());
+        RString 集計対象年 = new RString(insuranceInfEntity.get集計対象年().toString());
+        RString 統計対象区分 = insuranceInfEntity.get統計対象区分();
+        List<KaigoHokenJigyoHokokuNenpo> 前年度以前データs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0301.getColumnValue());
+        List<KaigoHokenJigyoHokokuNenpo> 今年度データs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0302.getColumnValue());
+        List<KaigoHokenJigyoHokokuNenpo> 実質的な収支についてデータs = 介護保険特別会計経理状況登録Manager
+                .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0303.getColumnValue());
+        if (前年度以前データs.isEmpty() && 今年度データs.isEmpty() && 実質的な収支についてデータs.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
         } else {
             報告年度Box.setReadOnly(true);
