@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmu
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiRenchoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】納付書のEditorです。
+ * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】（連帳）納付書のEditorです。
  *
  * @reamsid_L DBB-9110-050 huangh
  */
@@ -21,13 +22,14 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
     private final KariSanteiNonyuTsuchiShoJoho item;
     private final Map<Integer, NonyuTsuchiShoKiJoho> map;
 
-    private static final RString NOKIGEN = new RString("納期限");
+    private static final RString NOKIGEN = new RString("本状の納期限");
     private static final RString HANKAKU_X = new RString("X");
     private static final RString HOSHI_2 = new RString("**");
     private static final RString HOSHI_4 = new RString("****");
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int INT_3 = 3;
@@ -60,19 +62,27 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
     }
 
     private KarisanteiNonyuTsuchishoCVSMultiRenchoSource editSource(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
+        int pageCount1 = 0;
+        for (int key : map.keySet()) {
+            if (key >= INT_3 && key <= INT_6) {
+                pageCount1 = INT_5;
+            } else if (key >= INT_7 && key <= INT_10) {
+                pageCount1 = INT_9;
+            }
+        }
 
-        this.edit納付書1(source);
+        this.edit納付書1(source, pageCount1);
 
-        this.edit納付書2(source);
+        this.edit納付書2(source, pageCount1);
 
-        this.edit納付書3(source);
+        this.edit納付書3(source, pageCount1);
 
-        this.edit納付書4(source);
+        this.edit納付書4(source, pageCount1);
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
             source.detail_kamokumei1 = item.get納付書共通().get科目名称();
@@ -89,7 +99,6 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango1 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango1 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango1 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun1 = 納入通知書期情報.get納付区分();
@@ -127,7 +136,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
             source.detail_nokigenYmd1 = HOSHI_11;
             source.detail_hakkoYmd1 = HOSHI_11;
             source.detail_honzei1 = HOSHI_13;
-            source.detail_ocr11 = HOSHI_28;
+            source.detail_ocr11 = HOSHI_22;
             source.detail_ocr21 = HOSHI_28;
             source.detail_cvsToriatsukaikigen1 = HOSHI_16;
         }
@@ -138,12 +147,17 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         source.detail_entaikin1 = RString.EMPTY;
         source.detail_biko11 = RString.EMPTY;
         source.detail_biko21 = RString.EMPTY;
-        source.detail_funyuFukanBango1 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango1
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1));
+        } else {
+            source.detail_funyuFukanBango1 = new RString("F").concat("-").concat(new RString(pageCount1));
+        }
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
             source.detail_kamokumei2 = item.get納付書共通().get科目名称();
@@ -160,7 +174,6 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango2 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango2 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango2 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun2 = 納入通知書期情報.get納付区分();
@@ -198,7 +211,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
             source.detail_nokigenYmd2 = HOSHI_11;
             source.detail_hakkoYmd2 = HOSHI_11;
             source.detail_honzei2 = HOSHI_13;
-            source.detail_ocr12 = HOSHI_28;
+            source.detail_ocr12 = HOSHI_22;
             source.detail_ocr22 = HOSHI_28;
             source.detail_cvsToriatsukaikigen2 = HOSHI_16;
         }
@@ -209,12 +222,18 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         source.detail_entaikin2 = RString.EMPTY;
         source.detail_biko12 = RString.EMPTY;
         source.detail_biko22 = RString.EMPTY;
-        source.detail_funyuFukanBango2 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango2
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1 + 1));
+        } else {
+            source.detail_funyuFukanBango2
+                    = new RString("F").concat("-").concat(new RString(pageCount1 + 1));
+        }
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
             source.detail_kamokumei3 = item.get納付書共通().get科目名称();
@@ -231,7 +250,6 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango3 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango3 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango3 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun3 = 納入通知書期情報.get納付区分();
@@ -269,7 +287,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
             source.detail_nokigenYmd3 = HOSHI_11;
             source.detail_hakkoYmd3 = HOSHI_11;
             source.detail_honzei3 = HOSHI_13;
-            source.detail_ocr13 = HOSHI_28;
+            source.detail_ocr13 = HOSHI_22;
             source.detail_ocr23 = HOSHI_28;
             source.detail_cvsToriatsukaikigen3 = HOSHI_16;
         }
@@ -280,12 +298,18 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         source.detail_entaikin3 = RString.EMPTY;
         source.detail_biko13 = RString.EMPTY;
         source.detail_biko23 = RString.EMPTY;
-        source.detail_funyuFukanBango3 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango3
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1 + 2));
+        } else {
+            source.detail_funyuFukanBango3
+                    = new RString("F").concat("-").concat(new RString(pageCount1 + 2));
+        }
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書4(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書4(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
             source.detail_kamokumei4 = item.get納付書共通().get科目名称();
@@ -302,7 +326,6 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango4 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango4 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango4 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun4 = 納入通知書期情報.get納付区分();
@@ -340,7 +363,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
             source.detail_nokigenYmd4 = HOSHI_11;
             source.detail_hakkoYmd4 = HOSHI_11;
             source.detail_honzei4 = HOSHI_13;
-            source.detail_ocr14 = HOSHI_28;
+            source.detail_ocr14 = HOSHI_22;
             source.detail_ocr24 = HOSHI_28;
             source.detail_cvsToriatsukaikigen4 = HOSHI_16;
         }
@@ -351,7 +374,12 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         source.detail_entaikin4 = RString.EMPTY;
         source.detail_biko14 = RString.EMPTY;
         source.detail_biko24 = RString.EMPTY;
-        source.detail_funyuFukanBango4 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango4
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1 + INT_3));
+        } else {
+            source.detail_funyuFukanBango4 = new RString("F").concat("-").concat(new RString(pageCount1 + INT_3));
+        }
 
         return source;
     }

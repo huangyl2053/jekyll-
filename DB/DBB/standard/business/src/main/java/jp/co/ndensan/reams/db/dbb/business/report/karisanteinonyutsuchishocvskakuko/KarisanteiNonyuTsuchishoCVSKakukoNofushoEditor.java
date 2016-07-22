@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvska
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,13 +22,14 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
     private final KariSanteiNonyuTsuchiShoJoho item;
     private final Map<Integer, NonyuTsuchiShoKiJoho> map;
 
-    private static final RString NOKIGEN = new RString("納期限");
+    private static final RString NOKIGEN = new RString("本状の納期限");
     private static final RString HANKAKU_X = new RString("X");
     private static final RString HOSHI_2 = new RString("**");
     private static final RString HOSHI_4 = new RString("****");
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
@@ -60,13 +62,44 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
 
     private KarisanteiNonyuTsuchishoCVSKakukoSource editSource(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
-        this.edit納付書1(source);
+        editレイヤ１(source);
 
-        this.edit納付書2(source);
+        edit納付書1(source);
 
-        this.edit納付書3(source);
+        edit納付書2(source);
+
+        edit納付書3(source);
 
         return source;
+    }
+
+    private void editレイヤ１(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
+        int pageCount1 = 0;
+        for (int key : map.keySet()) {
+            if (key >= 2 && key <= INT_4) {
+                pageCount1 = INT_4;
+            } else if (key >= INT_5 && key <= INT_7) {
+                pageCount1 = INT_7;
+            } else if (key >= INT_8 && key <= INT_10) {
+                pageCount1 = INT_10;
+            }
+        }
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_notsuRenban1 = new RString(item.get連番()).padLeft("0", INT_6);
+            source.detail_notsuRenban2 = new RString(item.get連番()).padLeft("0", INT_6);
+            source.detail_notsuRenban3 = new RString(item.get連番()).padLeft("0", INT_6);
+            source.detail_renban = new RString(item.get連番());
+            source.detail_pageCount1 = new RString(item.get連番()).concat("-").concat(new RString(pageCount1));
+            source.detail_pageCount2 = new RString(item.get連番()).concat("-").concat(new RString(pageCount1 + 1));
+            source.detail_pageCount3 = new RString(item.get連番()).concat("-").concat(new RString(pageCount1 + 2));
+        } else {
+            source.detail_pageCount1 = new RString(1).concat("-").concat(new RString(pageCount1));
+            source.detail_pageCount2 = new RString(1).concat("-").concat(new RString(pageCount1 + 1));
+            source.detail_pageCount3 = new RString(1).concat("-").concat(new RString(pageCount1 + 2));
+        }
+        if (item.get編集後仮算定通知書共通情報() != null) {
+            source.detail_hokenshaName = item.get編集後仮算定通知書共通情報().get保険者名();
+        }
     }
 
     private KarisanteiNonyuTsuchishoCVSKakukoSource edit納付書1(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
@@ -124,7 +157,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
             source.detail_nokigenYmd1 = HOSHI_11;
             source.detail_hakkoYmd1 = HOSHI_11;
             source.detail_honzei1 = HOSHI_13;
-            source.detail_ocr11 = HOSHI_28;
+            source.detail_ocr11 = HOSHI_22;
             source.detail_ocr21 = HOSHI_28;
             source.detail_cvsToriatsukaikigen1 = HOSHI_16;
         }
@@ -159,7 +192,6 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango2 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango2 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango2 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun2 = 納入通知書期情報.get納付区分();
@@ -197,7 +229,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
             source.detail_nokigenYmd2 = HOSHI_11;
             source.detail_hakkoYmd2 = HOSHI_11;
             source.detail_honzei2 = HOSHI_13;
-            source.detail_ocr12 = HOSHI_28;
+            source.detail_ocr12 = HOSHI_22;
             source.detail_ocr22 = HOSHI_28;
             source.detail_cvsToriatsukaikigen2 = HOSHI_16;
         }
@@ -232,7 +264,6 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
 
         if (納入通知書期情報 != null) {
             source.detail_shunoKikanBango3 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
             source.detail_nofuBango3 = 納入通知書期情報.get納付番号();
             source.detail_kakuninBango3 = 納入通知書期情報.get確認番号();
             source.detail_nofuKubun3 = 納入通知書期情報.get納付区分();
@@ -270,7 +301,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoNofushoEditor implements IKarisant
             source.detail_nokigenYmd3 = HOSHI_11;
             source.detail_hakkoYmd3 = HOSHI_11;
             source.detail_honzei3 = HOSHI_13;
-            source.detail_ocr13 = HOSHI_28;
+            source.detail_ocr13 = HOSHI_22;
             source.detail_ocr23 = HOSHI_28;
             source.detail_cvsToriatsukaikigen3 = HOSHI_16;
         }
