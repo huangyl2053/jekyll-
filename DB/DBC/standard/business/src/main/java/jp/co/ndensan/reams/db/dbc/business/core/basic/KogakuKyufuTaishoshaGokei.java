@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費給付対象者合計を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-040 quxiaodong
  */
 public class KogakuKyufuTaishoshaGokei
         extends ModelBase<KogakuKyufuTaishoshaGokeiIdentifier, DbT3055KogakuKyufuTaishoshaGokeiEntity, KogakuKyufuTaishoshaGokei>
@@ -252,6 +254,30 @@ public class KogakuKyufuTaishoshaGokei
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KogakuKyufuTaishoshaGokei(deletedEntity, id);
+    }
+
+    /**
+     * 修正KogakuKyufuTaishoshaGokei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuKyufuTaishoshaGokei modified() {
+        DbT3055KogakuKyufuTaishoshaGokeiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new KogakuKyufuTaishoshaGokei(modifiedEntity, id);
+    }
+
+    /**
+     * add KogakuKyufuTaishoshaGokei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuKyufuTaishoshaGokei added() {
+        DbT3055KogakuKyufuTaishoshaGokeiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuKyufuTaishoshaGokei(addedEntity, id);
     }
 
     /**

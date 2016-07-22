@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費支給判定結果を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-040 quxiaodong
  */
 public class KogakuShikyuHanteiKekka
         extends ModelBase<KogakuShikyuHanteiKekkaIdentifier, DbT3057KogakuShikyuHanteiKekkaEntity, KogakuShikyuHanteiKekka>
@@ -269,6 +271,30 @@ public class KogakuShikyuHanteiKekka
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KogakuShikyuHanteiKekka(deletedEntity, id);
+    }
+
+    /**
+     * 修正KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuShikyuHanteiKekka modified() {
+        DbT3057KogakuShikyuHanteiKekkaEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new KogakuShikyuHanteiKekka(modifiedEntity, id);
+    }
+
+    /**
+     * add KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuShikyuHanteiKekka added() {
+        DbT3057KogakuShikyuHanteiKekkaEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuShikyuHanteiKekka(addedEntity, id);
     }
 
     /**
