@@ -29,6 +29,9 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2017TsuchishoHakkogoId
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteitsuchishoikkatsuhakko.HonsanteiTsuchishoIkkatsuHakkoFath;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendohokenryononyutsuchishoginfuri.KanendoHokenryoNonyuTsuchishoGinfuriPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishobookfurikae.KanendoNonyuTsuchishoBookFuriKaePrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvskigoto.KanendoNonyuTsuchishoCVSKigotoPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.kanendononyutsuchishocvsmulti.KanendoNonyuTsuchishoCVSMultiPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
@@ -521,6 +524,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
             new KanendoHokenryoNonyuTsuchishoGinfuriPrintService().print(本算定納入通知書情報, reportManager);
         } else if (ReportIdDBB.DBB100071.getReportId().equals(帳票ID) || ReportIdDBB.DBB100072.getReportId().equals(帳票ID)) {
             new KanendoNonyuTsuchishoBookFuriKaePrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100073.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoCVSKakukoPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100075.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoCVSMultiPrintService().print(本算定納入通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100076.getReportId().equals(帳票ID)) {
+            new KanendoNonyuTsuchishoCVSKigotoPrintService().print(本算定納入通知書情報, reportManager);
         }
     }
 
