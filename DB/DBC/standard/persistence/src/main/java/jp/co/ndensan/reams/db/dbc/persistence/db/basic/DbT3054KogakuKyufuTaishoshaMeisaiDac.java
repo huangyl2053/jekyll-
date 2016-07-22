@@ -89,6 +89,30 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiDac implements ISaveable<DbT3054Ko
     }
 
     /**
+     * 主キーで高額介護サービス費給付対象者明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @return DbT3054KogakuKyufuTaishoshaMeisaiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> selectAllByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3054KogakuKyufuTaishoshaMeisai.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月))).
+                toList(DbT3054KogakuKyufuTaishoshaMeisaiEntity.class);
+    }
+
+    /**
      * DbT3054KogakuKyufuTaishoshaMeisaiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

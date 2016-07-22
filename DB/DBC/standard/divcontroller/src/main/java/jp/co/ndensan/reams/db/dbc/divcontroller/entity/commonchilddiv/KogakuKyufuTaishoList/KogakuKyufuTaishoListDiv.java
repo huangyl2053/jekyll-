@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -480,6 +481,16 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
             FlexibleYearMonth サービス提供年月, int 履歴番号) {
         KogakuKyufuTaishoListHandler.of(this).画面初期化(メニューID, 画面モード, 被保険者番号, サービス提供年月, 履歴番号);
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
+    }
+
+    /**
+     * 給付対象一覧を取得します。
+     *
+     * @return List<dgTaishoshaIchiran_Row>
+     */
+    @Override
+    public List<dgTaishoshaIchiran_Row> get給付対象一覧() {
+        return KogakuKyufuTaishoListHandler.of(this).get給付対象一覧();
     }
 
     /**

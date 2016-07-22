@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +25,13 @@ public interface IKogakuKyufuTaishoListDiv extends ICommonChildDivBaseProperties
      */
     public void initialize(RString メニューID, RString 画面モード,
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号);
+
+    /**
+     * 給付対象一覧を取得します。
+     *
+     * @return List<dgTaishoshaIchiran_Row>
+     */
+    public List<dgTaishoshaIchiran_Row> get給付対象一覧();
 
     /**
      * 明細合計区分を取得します。

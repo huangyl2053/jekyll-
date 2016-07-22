@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyu
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.JigyouKogakuKyuufuTaishouResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntityResult;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -88,10 +89,10 @@ public class KogakuKyufuTaishoListHandler {
             set高額給付対象一覧(高額給付対象一覧);
         } else if ((総合事業高額サービス費支給申請書登録.equals(メニューID)
                 || 総合事業高額介護サービス費照会.equals(メニューID))) {
-            List<KogakuKyuufuTaishouListEntityResult> 事業高額給付対象一覧
+            List<JigyouKogakuKyuufuTaishouResult> 事業高額給付対象一覧
                     = KogakuKyuufuTaishouList.createInstance().
                     getJigyouKogakuKyuufuTaishouList(被保険者番号, サービス提供年月);
-            set高額給付対象一覧(事業高額給付対象一覧);
+            set事業高額高額給付対象一覧(事業高額給付対象一覧);
         }
         if (照会モード.equals(画面モード)) {
             set照会モード();
@@ -109,49 +110,63 @@ public class KogakuKyufuTaishoListHandler {
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         for (KogakuKyuufuTaishouListEntityResult koEntity : koTaList) {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
-            if (koEntity.getEntity().get事業者番号() != null && ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData1(koEntity.getEntity().get事業者番号().value());
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData2(koEntity.getEntity().get事業者名());
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData3(koEntity.getEntity().getサービス種類());
-            } else {
+            if (ONE_RS.equals(koEntity.get明細合計区分())) {
+                row.setData1(koEntity.get給付対象者明細entity().get事業者番号().value());
+                row.setData2(koEntity.get事業者名());
+                row.setData3(koEntity.getサービス種類());
+                row.getData4().setValue(koEntity.get給付対象者明細entity().getサービス費用合計額());
+                row.getData5().setValue(koEntity.get給付対象者明細entity().get利用者負担額());
+                row.setData9(koEntity.get給付対象者明細entity().get高額給付根拠());
+                row.setData10(ONE_RS);
+                row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
+            } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
                 row.setData3(合計);
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().getサービス費用合計額() != null) {
-                row.getData4().setValue(koEntity.getEntity().getサービス費用合計額());
-            } else if (TWO_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().getサービス費用合計額合計() != null) {
-                row.getData4().setValue(koEntity.getEntity().getサービス費用合計額合計());
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().get利用者負担額() != null) {
-                row.getData5().setValue(koEntity.getEntity().get利用者負担額());
-            } else if (TWO_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().get利用者負担額合計() != null) {
-                row.getData5().setValue(koEntity.getEntity().get利用者負担額合計());
-            }
-            if (koEntity.getEntity().get算定基準額() != null) {
-                row.getData6().setValue(koEntity.getEntity().get算定基準額());
-            }
-            if (koEntity.getEntity().get支払済金額合計() != null) {
-                row.getData7().setValue(koEntity.getEntity().get支払済金額合計());
-            }
-            if (koEntity.getEntity().get高額支給額() != null) {
-                row.getData8().setValue(koEntity.getEntity().get高額支給額());
-            }
-            row.setData9(koEntity.getEntity().get高額給付根拠());
-            row.setData10(koEntity.getEntity().get明細合計区分());
-            if (koEntity.getEntity().getサービス種類コード() != null
-                    && ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData11(koEntity.getEntity().getサービス種類コード().value());
+                row.getData4().setValue(koEntity.get給付対象者合計entity().getサービス費用合計額合計());
+                row.getData5().setValue(koEntity.get給付対象者合計entity().get利用者負担額合計());
+                row.getData6().setValue(koEntity.get給付対象者合計entity().get算定基準額());
+                row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
+                row.getData8().setValue(koEntity.get給付対象者合計entity().get高額支給額());
+                row.setData10(TWO_RS);
             }
             rowList.add(row);
         }
         div.getDgTaishoshaIchiran().setDataSource(rowList);
+    }
+
+    /**
+     * 高額給付対象一覧情報を抽出する
+     *
+     * @param koTaList List<KogakuKyuufuTaishouListEntityResult>
+     */
+    public void set事業高額高額給付対象一覧(List<JigyouKogakuKyuufuTaishouResult> koTaList) {
+        List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
+        for (JigyouKogakuKyuufuTaishouResult koEntity : koTaList) {
+            dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
+            if (ONE_RS.equals(koEntity.get明細合計区分())) {
+                row.setData1(koEntity.get給付対象者明細entity().get事業者番号().value());
+                row.setData2(koEntity.get事業者名());
+                row.setData3(koEntity.getサービス種類());
+                row.getData4().setValue(koEntity.get給付対象者明細entity().getサービス費用合計額());
+                row.getData5().setValue(koEntity.get給付対象者明細entity().get利用者負担額());
+                row.setData9(koEntity.get給付対象者明細entity().get事業高額給付根拠());
+                row.setData10(ONE_RS);
+                row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
+            } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
+                row.setData3(合計);
+                row.getData4().setValue(koEntity.get給付対象者合計entity().getサービス費用合計額合計());
+                row.getData5().setValue(koEntity.get給付対象者合計entity().get利用者負担額合計());
+                row.getData6().setValue(koEntity.get給付対象者合計entity().get算定基準額());
+                row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
+                row.getData8().setValue(koEntity.get給付対象者合計entity().get事業高額支給額());
+                row.setData10(TWO_RS);
+            }
+            rowList.add(row);
+        }
+        div.getDgTaishoshaIchiran().setDataSource(rowList);
+    }
+
+    public List<dgTaishoshaIchiran_Row> get給付対象一覧() {
+        return div.getDgTaishoshaIchiran().getDataSource();
     }
 
     /**
@@ -180,6 +195,18 @@ public class KogakuKyufuTaishoListHandler {
         }
         if (row.getData9() != null && !row.getData9().isEmpty()) {
             set高額判定根拠(サービス提供年月, row.getData9());
+        }
+        if (ONE_RS.equals(row.getData10())) {
+            div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().setDisabled(true);
+        } else if (TWO_RS.equals(row.getData10())) {
+            div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbGassan().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().setDisabled(true);
+            div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().setDisabled(true);
         }
         div.getRowId().setValue(new Decimal(row.getId()));
     }

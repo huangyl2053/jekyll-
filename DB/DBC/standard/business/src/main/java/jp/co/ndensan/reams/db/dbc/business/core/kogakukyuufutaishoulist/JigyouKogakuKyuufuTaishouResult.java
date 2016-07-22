@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist;
 
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaGokei;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuKyufuTaishoshaGokei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuKyufuTaishoshaMeisai;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,11 +17,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuKyuufuTaishouListEntityResult {
+public class JigyouKogakuKyuufuTaishouResult {
 
-    private KogakuKyufuTaishoshaMeisai 給付対象者明細entity;
-    private KogakuKyufuTaishoshaGokei 給付対象者合計entity;
+    private JigyoKogakuKyufuTaishoshaMeisai 給付対象者明細entity;
+    private JigyoKogakuKyufuTaishoshaGokei 給付対象者合計entity;
     private RString 明細合計区分;
     private RString 事業者名;
     private RString サービス種類;
+
 }
