@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 介護保険特別会計経理状況登録_様式４ハンドラクラスです。
@@ -166,6 +168,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setDisabled(false);
             div.getHihokenshabango().getYoshikiyonMeisai().getDdlShicyoson().setSelectedIndex(0);
             div.getHihokenshabango().getYoshikiyonMeisai().getBtnHoukokuNenKT().setDisabled(false);
+            if (DBU0050021StateName.add.getName().equals(ResponseHolder.getState())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+            }
             div.setShoriMode(内部処理モード_追加);
             div.setGamenMode(画面表示_追加);
             詳細データエリ表示(null, 状態1);
@@ -708,7 +713,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler {
         if (市町村Key.split("_").size() < 1) {
             return LasdecCode.EMPTY;
         } else {
-            System.out.println(市町村Key.split("_").get(0).toString());
             return new LasdecCode(市町村Key.split("_").get(0));
         }
     }

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -46,6 +47,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_削除 = new RString("削除");
     private static final RString 内部処理モード_追加 = new RString("追加");
+    private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private static final RString ADD = new RString("add");
 
     /**
@@ -57,6 +59,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
         handler.onload(get引き継ぎデータ(div));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 介護保険特別会計経理状況登録_様式４を画面初期化処理しました。
+     *
+     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div 介護保険特別会計経理状況登録_様式４情報Div}
+     * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
+     */
+    public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onStateTransition(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
+        if (DBU0050021StateName.add.getName().equals(ResponseHolder.getState()) && ADD.equals(get引き継ぎデータ(div).get処理フラグ())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+        }
         return ResponseData.of(div).respond();
     }
 
