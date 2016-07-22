@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5）のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-5）_新様式 のReportSourceクラスです。
  *
- * @reamsid_L DBU-5550-050 dangjingjing
+ * @reamsid_L DBU-5540-060 dangjingjing
  */
 public class JigyohokokuCompYoshiki153Editor implements IJigyohokokuCompYoshiki153Editor {
 
@@ -37,7 +37,7 @@ public class JigyohokokuCompYoshiki153Editor implements IJigyohokokuCompYoshiki1
     private JigyohokokuCompYoshiki153ReportSource editSource(JigyohokokuCompYoshiki153ReportSource source) {
         HokenshaJohoConfig hokenshaJohoConfig = new HokenshaJohoConfig();
         source.printTimeStamp = variables.get処理日時();
-        source.shukeiKubun = set集計範囲(variables.get年報月報区分());
+        source.shukeiKubun = set集計範囲(variables.get集計区分());
         source.shuukeiHani = variables.get集計期間FROM();
         source.shuukeiHani = variables.get集計期間TO();
         source.shuukeiHani = variables.get集計年月();
