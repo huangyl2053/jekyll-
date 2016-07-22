@@ -117,6 +117,9 @@ public class FutangakuGengakuBusiness {
      * @return 旧措置者区分
      */
     public RString get旧措置者区分() {
+        if (RString.isNullOrEmpty(entity.getKyusochishaKubun())) {
+            return new RString("0");
+        }
         return entity.getKyusochishaKubun();
     }
 

@@ -49,7 +49,7 @@ public class RenrakuhyoDataCreatorHandler {
     private static final RString 食事の負担限度日額 = new RString("key0");
     private static final RString 段階区分 = new RString("0");
     private static final int INT_3 = 3;
-    private static final int INT_0 = 0;
+    private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final RString 黄色 = new RString("DBUFontcolor_yellow");
     private final RenrakuhyoDataCreatorDiv div;
@@ -625,7 +625,7 @@ public class RenrakuhyoDataCreatorHandler {
     private RString 保険料段階の編集(RString 段階区分) {
         RStringBuilder builder = new RStringBuilder();
         if (!RString.isNullOrEmpty(段階区分)) {
-            return builder.append("第").append(段階区分.padZeroToLeft(INT_3).substring(INT_0, INT_2)).append("段階").toRString();
+            return builder.append("第").append(段階区分.padZeroToLeft(INT_3).substring(INT_1, INT_2)).append("段階").toRString();
         }
         return RString.EMPTY;
     }
