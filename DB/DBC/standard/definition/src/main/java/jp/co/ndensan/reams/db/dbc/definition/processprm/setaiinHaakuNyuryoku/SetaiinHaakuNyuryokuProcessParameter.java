@@ -26,6 +26,7 @@ public class SetaiinHaakuNyuryokuProcessParameter implements IBatchProcessParame
      * コンストラクタ
      *
      * @param 管理識別区分 管理識別区分
+     * @param メニューID メニューID
      */
     public SetaiinHaakuNyuryokuProcessParameter(SetaiinHaakuKanriShikibetsuKubun 管理識別区分, RString メニューID) {
         this.管理識別区分 = 管理識別区分;
