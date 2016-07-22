@@ -454,7 +454,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(rirekiNo, 0))).
+                                eq(rirekiNo, new RString(0)))).
                 order(by(jukyuShinseiYMD, Order.DESC)).
                 limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
