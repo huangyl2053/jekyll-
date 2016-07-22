@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 期割額を保持するクラスです。
@@ -49,7 +51,7 @@ public class Kiwarigaku {
      * @return 期割額明細
      */
     public List<KiwarigakuMeisai> get期割額明細() {
-        return 期割額明細;
+        return new ArrayList<>(期割額明細);
     }
 
     /**
@@ -62,12 +64,30 @@ public class Kiwarigaku {
     }
 
     /**
+     * 特徴期別額合計を返します。
+     *
+     * @return 特徴期別額合計
+     */
+    public RString get特徴期別額合計表記() {
+        return composedカンマ編集OrEmpty(特徴期別額合計);
+    }
+
+    /**
      * 特徴納付額合計を返します。
      *
      * @return 特徴納付額合計
      */
     public Decimal get特徴納付額合計() {
         return 特徴納付額合計;
+    }
+
+    /**
+     * 特徴納付額合計を返します。
+     *
+     * @return 特徴納付額合計
+     */
+    public RString get特徴納付額合計表記() {
+        return composedカンマ編集OrEmpty(特徴納付額合計);
     }
 
     /**
@@ -80,11 +100,33 @@ public class Kiwarigaku {
     }
 
     /**
+     * 普徴期別額合計を返します。
+     *
+     * @return 普徴期別額合計
+     */
+    public RString get普徴期別額合計表記() {
+        return composedカンマ編集OrEmpty(普徴期別額合計);
+    }
+
+    /**
      * 普徴納付額合計を返します。
      *
      * @return 普徴納付額合計
      */
     public Decimal get普徴納付額合計() {
         return 普徴納付額合計;
+    }
+
+    /**
+     * 普徴納付額合計を返します。
+     *
+     * @return 普徴納付額合計
+     */
+    public RString get普徴納付額合計表記() {
+        return composedカンマ編集OrEmpty(普徴納付額合計);
+    }
+
+    private static RString composedカンマ編集OrEmpty(Decimal value) {
+        return value == null ? RString.EMPTY : new RString(value.toString("#,##0"));
     }
 }

@@ -5,14 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
@@ -22,8 +23,6 @@ import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 
 /**
  * 期割額Divの操作を行うクラスです。
@@ -32,28 +31,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
  */
 public class KiwarigakuHandler {
 
-    private final KiwarigakuDiv div;
-    private final KiwarigakuManager manager;
-
-    private enum TableItem {
-
-        月, 特徴期, 特徴期別額, 特徴納付額, 普徴期, 普徴期別額, 普徴納付額;
-    };
-
-    private Map<RString, Label> 期割額テーブル = new HashMap<>();
-    private static final int TABLE_SIZE = 15;
-
-    private static final RString SUFFIX_月 = new RString("月");
     private static final RString SUFFIX_期 = new RString("期");
-
     private static final int 追加期1 = 13;
     private static final int 追加期2 = 14;
 
+    private final KiwarigakuDiv div;
+    private final KiwarigakuManager manager;
     private final FukaKeisanConfig 賦課計算Config;
-    private final HizukeConfig 日付Config;
-    private final FuchoConfig 普徴Config;
-    private final TokuchoConfig 特徴Config;
-    private final KanendoConfig 過年度Config;
 
     /**
      * コンストラクタです。
@@ -64,11 +48,6 @@ public class KiwarigakuHandler {
         this.div = div;
         this.manager = new KiwarigakuManager();
         this.賦課計算Config = new FukaKeisanConfig();
-        this.日付Config = new HizukeConfig();
-        this.普徴Config = new FuchoConfig();
-        this.特徴Config = new TokuchoConfig();
-        this.過年度Config = new KanendoConfig();
-        this.期割額テーブル = Collections.unmodifiableMap(createTableMap());
     }
 
     /**
@@ -87,11 +66,6 @@ public class KiwarigakuHandler {
         this.div = div;
         this.manager = manager;
         this.賦課計算Config = 賦課計算Config;
-        this.日付Config = 日付Config;
-        this.普徴Config = 普徴Config;
-        this.特徴Config = 特徴Config;
-        this.過年度Config = 過年度Config;
-        this.期割額テーブル = Collections.unmodifiableMap(createTableMap());
     }
 
     /**
@@ -103,27 +77,71 @@ public class KiwarigakuHandler {
      * @param 履歴番号 履歴番号
      */
     public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号) {
-        List<RString> 月列 = 日付Config.get月別テーブル();
-        List<RString> 特徴期列 = 特徴Config.get月の期();
-        List<RString> 普徴期列 = (調定年度.equals(賦課年度)) ? 普徴Config.get月の期() : 過年度Config.get月の期();
-
-        setDisplayMode(賦課年度, 普徴期列.size());
-
-        setTableData(TableItem.月, 月列, SUFFIX_月);
-        setTableData(TableItem.特徴期, 特徴期列, SUFFIX_期);
-        setTableData(TableItem.普徴期, 普徴期列, SUFFIX_期);
-
-        setKiwarigaku(manager.load期割額(調定年度, 賦課年度, 通知書番号, 履歴番号).get(), createIndexMap(特徴期列), createIndexMap(普徴期列));
+        KitsukiList 普徴期リスト = Objects.equals(調定年度, 賦課年度)
+                             ? new FuchoKiUtil(調定年度).get期月リスト()
+                             : new KanendoKiUtil(調定年度).get期月リスト();
+        set普徴期ラベルs(this.div, 普徴期リスト);
+        setDisplayMode(賦課年度, 普徴期リスト.getLast().get期AsInt());
+        setKiwarigaku(this.div, manager.load期割額(調定年度, 賦課年度, 通知書番号, 履歴番号).get(), 普徴期リスト);
     }
 
-    private Map<RString, Integer> createIndexMap(List<RString> data) {
-        Map<RString, Integer> map = new HashMap<>();
-        for (int index = 0; index < data.size(); index++) {
-            if (map.get(data.get(index)) == null) {
-                map.put(data.get(index), index);
-            }
+    private static void set普徴期ラベルs(KiwarigakuDiv div, KitsukiList 普徴期リスト) {
+        for (Kitsuki kitsuki : 普徴期リスト.toList()) {
+            set普徴期ラベルPer(kitsuki, div);
         }
-        return map;
+    }
+
+    private static RString toX期表記(Kitsuki 期月) {
+        int 期 = 期月.get期AsInt();
+        return 期 == 0 ? RString.EMPTY
+               : new RStringBuilder().append(期).append(SUFFIX_期).toRString();
+    }
+
+    private static void set普徴期ラベルPer(Kitsuki 期月, KiwarigakuDiv div) {
+        switch (期月.get月()) {
+            case _4月:
+                div.getLblFuchoKi1().setText(toX期表記(期月));
+                return;
+            case _5月:
+                div.getLblFuchoKi2().setText(toX期表記(期月));
+                return;
+            case _6月:
+                div.getLblFuchoKi3().setText(toX期表記(期月));
+                return;
+            case _7月:
+                div.getLblFuchoKi4().setText(toX期表記(期月));
+                return;
+            case _8月:
+                div.getLblFuchoKi5().setText(toX期表記(期月));
+                return;
+            case _9月:
+                div.getLblFuchoKi6().setText(toX期表記(期月));
+                return;
+            case _10月:
+                div.getLblFuchoKi7().setText(toX期表記(期月));
+                return;
+            case _11月:
+                div.getLblFuchoKi8().setText(toX期表記(期月));
+                return;
+            case _12月:
+                div.getLblFuchoKi9().setText(toX期表記(期月));
+                return;
+            case _1月:
+                div.getLblFuchoKi10().setText(toX期表記(期月));
+                return;
+            case _2月:
+                div.getLblFuchoKi11().setText(toX期表記(期月));
+                return;
+            case _3月:
+                div.getLblFuchoKi12().setText(toX期表記(期月));
+                return;
+            case 翌年度4月:
+                div.getLblFuchoKi13().setText(toX期表記(期月));
+                return;
+            case 翌年度5月:
+                div.getLblFuchoKi14().setText(toX期表記(期月));
+            default:
+        }
     }
 
     private void setDisplayMode(FlexibleYear 賦課年度, int 普徴期数) {
@@ -154,183 +172,114 @@ public class KiwarigakuHandler {
         div.getLblTokuchoKiGokei().setVisible(!is月列表示);
     }
 
-    private void setTableData(TableItem itemNo, List<RString> dataList, RString suffix) {
-        for (int index = 0; index < dataList.size(); index++) {
-            RString data = dataList.get(index);
-            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
-            label.setText((data != null) ? new RStringBuilder(data).append(suffix).toRString() : RString.EMPTY);
-        }
-    }
-
-    private void setTableData(TableItem itemNo, Decimal[] dataList) {
-        for (int index = 0; index < dataList.length; index++) {
-            Decimal data = dataList[index];
-            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
-            label.setText((data != null) ? new RString(data.toString("#,##0")) : RString.EMPTY);
-        }
-    }
-
-    private void setKiwarigaku(Kiwarigaku 期割額, Map<RString, Integer> 特徴期IndexMap, Map<RString, Integer> 普徴期IndexMap) {
-
-        Decimal[] 特徴期別額列 = new Decimal[TABLE_SIZE];
-        Decimal[] 特徴納付額列 = new Decimal[TABLE_SIZE];
-        Decimal[] 普徴期別額列 = new Decimal[TABLE_SIZE];
-        Decimal[] 普徴納付額列 = new Decimal[TABLE_SIZE];
-        int 合計Index = TABLE_SIZE - 1;
-
+    private static void setKiwarigaku(KiwarigakuDiv div, Kiwarigaku 期割額, KitsukiList 普徴期リスト) {
         for (KiwarigakuMeisai 明細 : 期割額.get期割額明細()) {
-
-            ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.toValue(明細.get期別調定共通().get介護期別モデル().get徴収方法());
-            RString 期 = new RString(String.format("%1$02d", 明細.get期別調定共通().get介護期別モデル().get期()));
-            Decimal 調定額 = 明細.get期別調定共通().get調定共通モデル().get調定額();
-            Decimal 収入額 = 明細.get収入額();
-
-            if (徴収方法 == ChoshuHohoKibetsu.特別徴収) {
-                Integer 特徴期Index = 特徴期IndexMap.get(期);
-                if (特徴期Index != null && 0 <= 特徴期Index && 特徴期Index < 合計Index) {
-                    特徴期別額列[特徴期Index] = 調定額;
-                    特徴納付額列[特徴期Index] = 収入額;
-                }
-            } else if (徴収方法 == ChoshuHohoKibetsu.普通徴収) {
-                Integer 普徴期Index = 普徴期IndexMap.get(期);
-                if (普徴期Index != null && 0 <= 普徴期Index && 普徴期Index < 合計Index) {
-                    普徴期別額列[普徴期Index] = 調定額;
-                    普徴納付額列[普徴期Index] = 収入額;
-                }
-            }
+            set(div, 明細, 普徴期リスト);
         }
-
-        特徴期別額列[合計Index] = 期割額.get特徴期別額合計();
-        特徴納付額列[合計Index] = 期割額.get特徴納付額合計();
-        普徴期別額列[合計Index] = 期割額.get普徴期別額合計();
-        普徴納付額列[合計Index] = 期割額.get普徴納付額合計();
-
-        setTableData(TableItem.特徴期別額, 特徴期別額列);
-        setTableData(TableItem.特徴納付額, 特徴納付額列);
-        setTableData(TableItem.普徴期別額, 普徴期別額列);
-        setTableData(TableItem.普徴納付額, 普徴納付額列);
+        div.getLblTokuKibetsuGakuGokei().setText(期割額.get特徴期別額合計表記());
+        div.getLblTokuNofuGakuGokei().setText(期割額.get特徴納付額合計表記());
+        div.getLblFuchoKibetsuGakuGokei().setText(期割額.get普徴期別額合計表記());
+        div.getLblFuchoNofuGakuGokei().setText(期割額.get特徴納付額合計表記());
     }
 
-    private Map<RString, Label> createTableMap() {
-
-        Map<RString, Label> map = new HashMap<>();
-
-        map.put(getTableKey(TableItem.月, 0), div.getLblTsuki1());
-        map.put(getTableKey(TableItem.月, 1), div.getLblTsuki2());
-        map.put(getTableKey(TableItem.月, 2), div.getLblTsuki3());
-        map.put(getTableKey(TableItem.月, 3), div.getLblTsuki4());
-        map.put(getTableKey(TableItem.月, 4), div.getLblTsuki5());
-        map.put(getTableKey(TableItem.月, 5), div.getLblTsuki6());
-        map.put(getTableKey(TableItem.月, 6), div.getLblTsuki7());
-        map.put(getTableKey(TableItem.月, 7), div.getLblTsuki8());
-        map.put(getTableKey(TableItem.月, 8), div.getLblTsuki9());
-        map.put(getTableKey(TableItem.月, 9), div.getLblTsuki10());
-        map.put(getTableKey(TableItem.月, 10), div.getLblTsuki11());
-        map.put(getTableKey(TableItem.月, 11), div.getLblTsuki12());
-        map.put(getTableKey(TableItem.月, 12), div.getLblTsuki13());
-        map.put(getTableKey(TableItem.月, 13), div.getLblTsuki14());
-        map.put(getTableKey(TableItem.月, 14), div.getLblTsukiGokei());
-
-        map.put(getTableKey(TableItem.特徴期, 0), div.getLblTokuchoKi1());
-        map.put(getTableKey(TableItem.特徴期, 1), div.getLblTokuchoKi2());
-        map.put(getTableKey(TableItem.特徴期, 2), div.getLblTokuchoKi3());
-        map.put(getTableKey(TableItem.特徴期, 3), div.getLblTokuchoKi4());
-        map.put(getTableKey(TableItem.特徴期, 4), div.getLblTokuchoKi5());
-        map.put(getTableKey(TableItem.特徴期, 5), div.getLblTokuchoKi6());
-        map.put(getTableKey(TableItem.特徴期, 6), div.getLblTokuchoKi7());
-        map.put(getTableKey(TableItem.特徴期, 7), div.getLblTokuchoKi8());
-        map.put(getTableKey(TableItem.特徴期, 8), div.getLblTokuchoKi9());
-        map.put(getTableKey(TableItem.特徴期, 9), div.getLblTokuchoKi10());
-        map.put(getTableKey(TableItem.特徴期, 10), div.getLblTokuchoKi11());
-        map.put(getTableKey(TableItem.特徴期, 11), div.getLblTokuchoKi12());
-        map.put(getTableKey(TableItem.特徴期, 12), div.getLblTokuchoKi13());
-        map.put(getTableKey(TableItem.特徴期, 13), div.getLblTokuchoKi14());
-        map.put(getTableKey(TableItem.特徴期, 14), div.getLblTokuchoKiGokei());
-
-        map.put(getTableKey(TableItem.特徴期別額, 0), div.getLblTokuKibetsuGaku1());
-        map.put(getTableKey(TableItem.特徴期別額, 1), div.getLblTokuKibetsuGaku2());
-        map.put(getTableKey(TableItem.特徴期別額, 2), div.getLblTokuKibetsuGaku3());
-        map.put(getTableKey(TableItem.特徴期別額, 3), div.getLblTokuKibetsuGaku4());
-        map.put(getTableKey(TableItem.特徴期別額, 4), div.getLblTokuKibetsuGaku5());
-        map.put(getTableKey(TableItem.特徴期別額, 5), div.getLblTokuKibetsuGaku6());
-        map.put(getTableKey(TableItem.特徴期別額, 6), div.getLblTokuKibetsuGaku7());
-        map.put(getTableKey(TableItem.特徴期別額, 7), div.getLblTokuKibetsuGaku8());
-        map.put(getTableKey(TableItem.特徴期別額, 8), div.getLblTokuKibetsuGaku9());
-        map.put(getTableKey(TableItem.特徴期別額, 9), div.getLblTokuKibetsuGaku10());
-        map.put(getTableKey(TableItem.特徴期別額, 10), div.getLblTokuKibetsuGaku11());
-        map.put(getTableKey(TableItem.特徴期別額, 11), div.getLblTokuKibetsuGaku12());
-        map.put(getTableKey(TableItem.特徴期別額, 12), div.getLblTokuKibetsuGaku13());
-        map.put(getTableKey(TableItem.特徴期別額, 13), div.getLblTokuKibetsuGaku14());
-        map.put(getTableKey(TableItem.特徴期別額, 14), div.getLblTokuKibetsuGakuGokei());
-
-        map.put(getTableKey(TableItem.特徴納付額, 0), div.getLblTokuNofuGaku1());
-        map.put(getTableKey(TableItem.特徴納付額, 1), div.getLblTokuNofuGaku2());
-        map.put(getTableKey(TableItem.特徴納付額, 2), div.getLblTokuNofuGaku3());
-        map.put(getTableKey(TableItem.特徴納付額, 3), div.getLblTokuNofuGaku4());
-        map.put(getTableKey(TableItem.特徴納付額, 4), div.getLblTokuNofuGaku5());
-        map.put(getTableKey(TableItem.特徴納付額, 5), div.getLblTokuNofuGaku6());
-        map.put(getTableKey(TableItem.特徴納付額, 6), div.getLblTokuNofuGaku7());
-        map.put(getTableKey(TableItem.特徴納付額, 7), div.getLblTokuNofuGaku8());
-        map.put(getTableKey(TableItem.特徴納付額, 8), div.getLblTokuNofuGaku9());
-        map.put(getTableKey(TableItem.特徴納付額, 9), div.getLblTokuNofuGaku10());
-        map.put(getTableKey(TableItem.特徴納付額, 10), div.getLblTokuNofuGaku11());
-        map.put(getTableKey(TableItem.特徴納付額, 11), div.getLblTokuNofuGaku12());
-        map.put(getTableKey(TableItem.特徴納付額, 12), div.getLblTokuNofuGaku13());
-        map.put(getTableKey(TableItem.特徴納付額, 13), div.getLblTokuNofuGaku14());
-        map.put(getTableKey(TableItem.特徴納付額, 14), div.getLblTokuNofuGakuGokei());
-
-        map.put(getTableKey(TableItem.普徴期, 0), div.getLblTokuNofuGaku1());
-        map.put(getTableKey(TableItem.普徴期, 1), div.getLblTokuNofuGaku2());
-        map.put(getTableKey(TableItem.普徴期, 2), div.getLblTokuNofuGaku3());
-        map.put(getTableKey(TableItem.普徴期, 3), div.getLblTokuNofuGaku4());
-        map.put(getTableKey(TableItem.普徴期, 4), div.getLblTokuNofuGaku5());
-        map.put(getTableKey(TableItem.普徴期, 5), div.getLblTokuNofuGaku6());
-        map.put(getTableKey(TableItem.普徴期, 6), div.getLblTokuNofuGaku7());
-        map.put(getTableKey(TableItem.普徴期, 7), div.getLblTokuNofuGaku8());
-        map.put(getTableKey(TableItem.普徴期, 8), div.getLblTokuNofuGaku9());
-        map.put(getTableKey(TableItem.普徴期, 9), div.getLblTokuNofuGaku10());
-        map.put(getTableKey(TableItem.普徴期, 10), div.getLblTokuNofuGaku11());
-        map.put(getTableKey(TableItem.普徴期, 11), div.getLblTokuNofuGaku12());
-        map.put(getTableKey(TableItem.普徴期, 12), div.getLblTokuNofuGaku13());
-        map.put(getTableKey(TableItem.普徴期, 13), div.getLblTokuNofuGaku14());
-        map.put(getTableKey(TableItem.普徴期, 14), div.getLblTokuNofuGakuGokei());
-
-        map.put(getTableKey(TableItem.普徴期別額, 0), div.getLblFuchoKibetsuGaku1());
-        map.put(getTableKey(TableItem.普徴期別額, 1), div.getLblFuchoKibetsuGaku2());
-        map.put(getTableKey(TableItem.普徴期別額, 2), div.getLblFuchoKibetsuGaku3());
-        map.put(getTableKey(TableItem.普徴期別額, 3), div.getLblFuchoKibetsuGaku4());
-        map.put(getTableKey(TableItem.普徴期別額, 4), div.getLblFuchoKibetsuGaku5());
-        map.put(getTableKey(TableItem.普徴期別額, 5), div.getLblFuchoKibetsuGaku6());
-        map.put(getTableKey(TableItem.普徴期別額, 6), div.getLblFuchoKibetsuGaku7());
-        map.put(getTableKey(TableItem.普徴期別額, 7), div.getLblFuchoKibetsuGaku8());
-        map.put(getTableKey(TableItem.普徴期別額, 8), div.getLblFuchoKibetsuGaku9());
-        map.put(getTableKey(TableItem.普徴期別額, 9), div.getLblFuchoKibetsuGaku10());
-        map.put(getTableKey(TableItem.普徴期別額, 10), div.getLblFuchoKibetsuGaku11());
-        map.put(getTableKey(TableItem.普徴期別額, 11), div.getLblFuchoKibetsuGaku12());
-        map.put(getTableKey(TableItem.普徴期別額, 12), div.getLblFuchoKibetsuGaku13());
-        map.put(getTableKey(TableItem.普徴期別額, 13), div.getLblFuchoKibetsuGaku14());
-        map.put(getTableKey(TableItem.普徴期別額, 14), div.getLblFuchoKibetsuGakuGokei());
-
-        map.put(getTableKey(TableItem.普徴納付額, 0), div.getLblFuchoNofuGaku1());
-        map.put(getTableKey(TableItem.普徴納付額, 1), div.getLblFuchoNofuGaku2());
-        map.put(getTableKey(TableItem.普徴納付額, 2), div.getLblFuchoNofuGaku3());
-        map.put(getTableKey(TableItem.普徴納付額, 3), div.getLblFuchoNofuGaku4());
-        map.put(getTableKey(TableItem.普徴納付額, 4), div.getLblFuchoNofuGaku5());
-        map.put(getTableKey(TableItem.普徴納付額, 5), div.getLblFuchoNofuGaku6());
-        map.put(getTableKey(TableItem.普徴納付額, 6), div.getLblFuchoNofuGaku7());
-        map.put(getTableKey(TableItem.普徴納付額, 7), div.getLblFuchoNofuGaku8());
-        map.put(getTableKey(TableItem.普徴納付額, 8), div.getLblFuchoNofuGaku9());
-        map.put(getTableKey(TableItem.普徴納付額, 9), div.getLblFuchoNofuGaku10());
-        map.put(getTableKey(TableItem.普徴納付額, 10), div.getLblFuchoNofuGaku11());
-        map.put(getTableKey(TableItem.普徴納付額, 11), div.getLblFuchoNofuGaku12());
-        map.put(getTableKey(TableItem.普徴納付額, 12), div.getLblFuchoNofuGaku13());
-        map.put(getTableKey(TableItem.普徴納付額, 13), div.getLblFuchoNofuGaku14());
-        map.put(getTableKey(TableItem.普徴納付額, 14), div.getLblFuchoNofuGakuGokei());
-
-        return map;
+    private static void set(KiwarigakuDiv div, KiwarigakuMeisai 期割額明細, KitsukiList 普徴期月リスト) {
+        switch (期割額明細.get徴収方法()) {
+            case 特別徴収:
+                set特別徴収(div, 期割額明細);
+                return;
+            case 普通徴収:
+                set普通徴収(div, 期割額明細, 普徴期月リスト);
+        }
     }
 
-    private RString getTableKey(TableItem item, Integer rowNo) {
-        return new RStringBuilder(item.toString()).append(rowNo.toString()).toRString();
+    private static void set特別徴収(KiwarigakuDiv div, KiwarigakuMeisai 期割額明細) {
+        switch (期割額明細.get期()) {
+            case 1:
+                div.getLblTokuKibetsuGaku1().setText(期割額明細.get調定額表記());
+                div.getLblTokuNofuGaku1().setText(期割額明細.get収入額表記());
+                return;
+            case 2:
+                div.getLblTokuKibetsuGaku3().setText(期割額明細.get調定額表記());
+                div.getLblTokuNofuGaku3().setText(期割額明細.get収入額表記());
+                return;
+            case 3:
+                div.getLblTokuKibetsuGaku5().setText(期割額明細.get調定額表記());
+                div.getLblTokuNofuGaku5().setText(期割額明細.get収入額表記());
+                return;
+            case 4:
+                div.getLblTokuKibetsuGaku7().setText(期割額明細.get調定額表記());
+                div.getLblTokuNofuGaku7().setText(期割額明細.get収入額表記());
+                return;
+            case 5:
+                div.getLblTokuKibetsuGaku9().setText(期割額明細.get調定額表記());
+                div.getLblTokuNofuGaku9().setText(期割額明細.get収入額表記());
+                return;
+            case 6:
+                div.getLblTokuKibetsuGaku11().setText(期割額明細.get調定額表記());
+                div.getLblTokuNofuGaku11().setText(期割額明細.get収入額表記());
+            default:
+        }
+    }
+
+    private static void set普通徴収(KiwarigakuDiv div, KiwarigakuMeisai 期割額明細, KitsukiList 普徴期月リスト) {
+        Kitsuki kitsuki = 普徴期月リスト.get期の最初月(期割額明細.get期());
+        switch (kitsuki.get月()) {
+            case _4月:
+                div.getLblFuchoKibetsuGaku1().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku1().setText(期割額明細.get収入額表記());
+                return;
+            case _5月:
+                div.getLblFuchoKibetsuGaku2().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku2().setText(期割額明細.get収入額表記());
+                return;
+            case _6月:
+                div.getLblFuchoKibetsuGaku3().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku3().setText(期割額明細.get収入額表記());
+                return;
+            case _7月:
+                div.getLblFuchoKibetsuGaku4().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku4().setText(期割額明細.get収入額表記());
+                return;
+            case _8月:
+                div.getLblFuchoKibetsuGaku5().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku5().setText(期割額明細.get収入額表記());
+                return;
+            case _9月:
+                div.getLblFuchoKibetsuGaku6().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku6().setText(期割額明細.get収入額表記());
+                return;
+            case _10月:
+                div.getLblFuchoKibetsuGaku7().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku7().setText(期割額明細.get収入額表記());
+                return;
+            case _11月:
+                div.getLblFuchoKibetsuGaku8().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku8().setText(期割額明細.get収入額表記());
+                return;
+            case _12月:
+                div.getLblFuchoKibetsuGaku9().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku9().setText(期割額明細.get収入額表記());
+                return;
+            case _1月:
+                div.getLblFuchoKibetsuGaku10().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku10().setText(期割額明細.get収入額表記());
+                return;
+            case _2月:
+                div.getLblFuchoKibetsuGaku11().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku11().setText(期割額明細.get収入額表記());
+                return;
+            case _3月:
+                div.getLblFuchoKibetsuGaku12().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku12().setText(期割額明細.get収入額表記());
+                return;
+            case 翌年度4月:
+                div.getLblFuchoKibetsuGaku13().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku13().setText(期割額明細.get収入額表記());
+                return;
+            case 翌年度5月:
+                div.getLblFuchoKibetsuGaku14().setText(期割額明細.get調定額表記());
+                div.getLblFuchoNofuGaku14().setText(期割額明細.get収入額表記());
+            default:
+        }
     }
 }
