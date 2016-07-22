@@ -9,13 +9,17 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
+ * TokuchoSeidokanIFSakuseiDBUpdateProcessParameterのクラスです。
  *
- * @author lizhiyang
+ * @reamsid_L DBB-1830-040 liuyang
  */
-@lombok.Setter
-@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
+@Setter
 public class TokuchoSeidokanIFSakuseiDBUpdateProcessParameter implements IBatchProcessParameter {
 
     private FlexibleYear 処理年度;

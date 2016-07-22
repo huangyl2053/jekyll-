@@ -791,7 +791,7 @@ public class TokuchoTaishoshaIchiranSakusei {
         if (RString.isNullOrEmpty(特別徴収開始月全文字)) {
             return RString.EMPTY;
         }
-        return 特別徴収開始月全文字.substring(NUM4, NUM6);
+        return DateConverter.formatMonthFull(特別徴収開始月全文字.substring(NUM4, NUM6).trim());
     }
 
     /**

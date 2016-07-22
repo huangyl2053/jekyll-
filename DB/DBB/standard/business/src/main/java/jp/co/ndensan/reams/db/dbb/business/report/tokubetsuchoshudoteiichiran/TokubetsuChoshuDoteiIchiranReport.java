@@ -66,6 +66,7 @@ public class TokubetsuChoshuDoteiIchiranReport extends
      * @param 出力順項目リスト 出力順項目リスト
      * @param 改頁項目リスト 改頁項目リスト
      * @param association Association
+     * @param 特徴開始月 特徴開始年月
      * @return TokubetsuChoshuDoteiIchiranReport
      */
     public static TokubetsuChoshuDoteiIchiranReport createForm(

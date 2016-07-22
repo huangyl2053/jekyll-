@@ -41,8 +41,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class TokuChoSoufuJohoSakuseiBatch {
 
-    private final RString 年度_2016 = new RString("2016");
-    private final RString 年度_2015 = new RString("2015");
     private final RString 月2 = new RString("02");
     private final RString 月4 = new RString("04");
     private final RString 月6 = new RString("06");

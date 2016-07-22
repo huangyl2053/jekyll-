@@ -26,18 +26,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuChoSoufuJohoSakuseiResult {
+public final class TokuChoSoufuJohoSakuseiResult {
 
     private NenkinTokuchoKaifuJoho 対象者の情報;
     private ChoshuHoho 徴収方法の情報;
     private HihokenshaDaicho 資格の情報;
     private FukaJoho 賦課の情報;
 
-    /**
-     * コンストラクタです。
-     *
-     */
-    public TokuChoSoufuJohoSakuseiResult() {
+    private TokuChoSoufuJohoSakuseiResult() {
     }
 
     private TokuChoSoufuJohoSakuseiResult(TokuChoSoufuJohoSakuseiEntity resultentity) {
@@ -88,7 +84,7 @@ public class TokuChoSoufuJohoSakuseiResult {
     public static List<TokuChoSoufuJohoSakuseiResult> getTokuChoSoufuJohoSakuseiResultList(List<TokuChoSoufuJohoSakuseiEntity> resultentitylist) {
         List<TokuChoSoufuJohoSakuseiResult> list = new ArrayList();
         for (TokuChoSoufuJohoSakuseiEntity resultentity : resultentitylist) {
-            list.add(TokuChoSoufuJohoSakuseiResult.getTokuChoSoufuJohoSakuseiResult(resultentity));
+            list.add(new TokuChoSoufuJohoSakuseiResult(resultentity));
         }
         return list;
     }
