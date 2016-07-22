@@ -59,7 +59,7 @@ public class KogakuKaigoServicehiSetaiinHaakuFlow extends BatchFlowBase<SetaiinH
      */
     @Step(世帯員住民の把握)
     protected IBatchFlowCommand getSetaiinHaaku() {
-        processParameter = new SetaiinHaakuNyuryokuProcessParameter(parameter.get管理識別区分());
+        processParameter = new SetaiinHaakuNyuryokuProcessParameter(parameter.get管理識別区分(), parameter.getメニューID());
         return simpleBatch(GetSetaiinHaakuProcess.class).arguments(processParameter).define();
     }
 
@@ -70,7 +70,8 @@ public class KogakuKaigoServicehiSetaiinHaakuFlow extends BatchFlowBase<SetaiinH
      */
     @Step(合併内住特者番号変換処理)
     protected IBatchFlowCommand convertGappeinaiJutokushaShinKyuNo() {
-        return simpleBatch(ConvertGappeinaiJutokushaShinKyuNoProcess.class).define();
+        processParameter = new SetaiinHaakuNyuryokuProcessParameter(parameter.get管理識別区分(), parameter.getメニューID());
+        return simpleBatch(ConvertGappeinaiJutokushaShinKyuNoProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -80,6 +81,7 @@ public class KogakuKaigoServicehiSetaiinHaakuFlow extends BatchFlowBase<SetaiinH
      */
     @Step(各住民の所得情報の取得)
     protected IBatchFlowCommand getJuminShotokuJoho() {
-        return simpleBatch(GetJuminShotokuJohoProcess.class).define();
+        processParameter = new SetaiinHaakuNyuryokuProcessParameter(parameter.get管理識別区分(), parameter.getメニューID());
+        return simpleBatch(GetJuminShotokuJohoProcess.class).arguments(processParameter).define();
     }
 }
