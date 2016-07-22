@@ -385,20 +385,6 @@
         <if test="isHorei">
             AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
-        GROUP BY
-        C."shichosonCode"
-        ,C."shichosonMeisho"
-        ,A."shoKisaiHokenshaNo"
-        ,A."hihokenshaKubunCode"
-        ,A."age"
-        ,B."nijiHanteiYokaigoJotaiKubunCode"
-        ,B."nijiHanteiYMD"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
         ORDER BY
         C."shichosonCode"
         ,A."shoKisaiHokenshaNo"
