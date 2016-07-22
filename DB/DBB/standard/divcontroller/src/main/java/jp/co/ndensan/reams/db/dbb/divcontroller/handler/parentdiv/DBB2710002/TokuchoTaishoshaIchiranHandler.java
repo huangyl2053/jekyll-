@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -91,6 +92,9 @@ public class TokuchoTaishoshaIchiranHandler {
     private static final int NUM1 = 1;
     private static final int NUM4 = 4;
     private static final int NUM6 = 6;
+    private static final RString 特別徴収対象者一覧作成 = new RString("特別徴収対象者一覧作成");
+    private static final RString 特別徴収対象者一覧確認 = new RString("特別徴収対象者一覧確認");
+    private static final RString STATE特別徴収対象者一覧作成 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -108,6 +112,7 @@ public class TokuchoTaishoshaIchiranHandler {
      * @return TokuchoTaishoshaIchiranSakuseiResult
      */
     public TokuchoTaishoshaIchiranSakuseiResult 特別徴収対象者一覧作成initialize() {
+        div.setHiddenPageState(STATE特別徴収対象者一覧作成);
         RDate nowDate = RDate.getNowDate();
         RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, nowDate, SubGyomuCode.DBB介護賦課);
         TokuchoTaishoshaIchiranSakuseiResult result = tokudoutei.getKonkaiShoriJoho(new FlexibleYear(調定年度));
@@ -398,8 +403,8 @@ public class TokuchoTaishoshaIchiranHandler {
      * @param 年金コード RString
      * @param 特徴開始月 RString
      */
-    public void 特別徴収同定候補者一覧initialize(RString 年度, RString 捕捉月, RString 基礎年金番号, RString 年金コード,
-            RString 特徴開始月) {
+    public void 特別徴収同定候補者一覧initialize(RString 年度, RString 捕捉月,
+            RString 基礎年金番号, RString 年金コード, RString 特徴開始月) {
         if (!RString.isNullOrEmpty(特徴開始月) && !特徴開始月
                 .startsWith(RString.FULL_SPACE) && !特徴開始月.startsWith(LEFT)) {
             特徴開始月 = 特徴開始月.split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6);
@@ -510,21 +515,24 @@ public class TokuchoTaishoshaIchiranHandler {
             div.getTxtShutokuYMD().setValue(new RDate(result.get被保険者台帳_資格取得年月日().toString()));
         }
         if (result.get被保険者台帳_資格取得事由() != null) {
-            div.getTxtShutokuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格取得事由コード種別),
+            div.getTxtShutokuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
+                    new CodeShubetsu(介護資格取得事由コード種別),
                     new Code(result.get被保険者台帳_資格取得事由())));
         }
         if (!RString.isNullOrEmpty(result.get被保険者台帳_資格喪失年月日())) {
             div.getTxtSoshitsuYMD().setValue(new RDate(result.get被保険者台帳_資格喪失年月日().toString()));
         }
         if (result.get被保険者台帳_資格喪失事由() != null) {
-            div.getTxtSoshitsuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格喪失事由コード種別),
+            div.getTxtSoshitsuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
+                    new CodeShubetsu(介護資格喪失事由コード種別),
                     new Code(result.get被保険者台帳_資格喪失事由())));
         }
         div.getTxtTorokuZumiKisoNenkinNo().setValue(result.get登録済年金情報_基礎年金番号());
         div.getTxtTorokuZumiNenkinCode().setValue(result.get登録済年金情報_年金コード());
         if (result.get登録済年金情報_特別徴収義務者コード() != null) {
             div.getTxtTorokuZumiTokuchoGimusha().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    new CodeShubetsu(特別徴収義務者コード種別), new Code(result.get登録済年金情報_特別徴収義務者コード())));
+                    new CodeShubetsu(特別徴収義務者コード種別),
+                    new Code(result.get登録済年金情報_特別徴収義務者コード())));
         }
     }
 
@@ -566,14 +574,21 @@ public class TokuchoTaishoshaIchiranHandler {
      * @param 捕捉月 RString
      * @return TokuchoDouteiKouhoshaShousaiJoho
      */
-    public TokuchoDouteiKouhoshaShousaiJoho show特別徴収同定候補者詳細情報(RString 特別徴収開始月, RString 捕捉月) {
-        RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
-        RString 基礎年金番号 = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().getTxtNenkinKaifukuInfoKisoNenkinNo().getValue();
-        RString 年金コード = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().getTxtNenkinKaifukuInfoNenkinCode().getValue();
-        RString 識別コードTemp = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().getTxtShikibetsuCode();
-        ShikibetsuCode 識別コード = 識別コードTemp == null ? null : new ShikibetsuCode(識別コードTemp);
+    public TokuchoDouteiKouhoshaShousaiJoho show特別徴収同定候補者詳細情報(
+            RString 特別徴収開始月, RString 捕捉月) {
+        RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 基礎年金番号 = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().
+                getTxtNenkinKaifukuInfoKisoNenkinNo().getValue();
+        RString 年金コード = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().
+                getTxtNenkinKaifukuInfoNenkinCode().getValue();
+        RString 識別コードTemp = div.getDgTokuchoDoteiKohoshaIchiran().
+                getClickedItem().getTxtShikibetsuCode();
+        ShikibetsuCode 識別コード = 識別コードTemp == null ? null
+                : new ShikibetsuCode(識別コードTemp);
         RString 開始月 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE) && !特別徴収開始月.startsWith(LEFT)) {
+        if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE)
+                && !特別徴収開始月.startsWith(LEFT)) {
             開始月 = 特別徴収開始月.split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6);
         }
         List<TokuchoDouteiKouhoshaShousaiJoho> result_詳細 = tokudoutei.getTokuchoTaishoKouhosyaDetailJoho(
@@ -623,9 +638,10 @@ public class TokuchoTaishoshaIchiranHandler {
         if (!RString.isNullOrEmpty(氏名)) {
             message_BOTTOM = BOTTOMINFO.concat(氏名);
         }
-        tokudoutei.kakuninJotaiUpdate(new FlexibleYear(処理年度), 基礎年金番号, 被保険者番号, 年金コード, 開始月, 捕捉月,
-                確認状況区分, new ShikibetsuCode(識別コード), 特別徴収義務者コード);
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(処理状態Message.evaluate()), message_TOP, message_BOTTOM);
+        tokudoutei.kakuninJotaiUpdate(new FlexibleYear(処理年度), 基礎年金番号, 被保険者番号, 年金コード, 開始月,
+                捕捉月, 確認状況区分, new ShikibetsuCode(識別コード), 特別徴収義務者コード);
+        div.getCcdKaigoKanryoMessage()
+                .setSuccessMessage(new RString(処理状態Message.evaluate()), message_TOP, message_BOTTOM);
     }
 
     /**
@@ -654,7 +670,8 @@ public class TokuchoTaishoshaIchiranHandler {
      * @param 捕捉月リスト List<RString>
      * @return TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter
      */
-    public TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter getBatchParameter(RString 特別徴収開始月, List<RString> 捕捉月リスト) {
+    public TokubetsuChoshuDoteiMiDoteiIchiranBatchParameter
+            getBatchParameter(RString 特別徴収開始月, List<RString> 捕捉月リスト) {
         TokuchoTaishoshaIchiranSakuseiResult result = new TokuchoTaishoshaIchiranSakuseiResult();
         result.set捕捉月リスト(捕捉月リスト == null ? new ArrayList() : 捕捉月リスト);
         result.set特別徴収開始月(特別徴収開始月);
@@ -702,6 +719,19 @@ public class TokuchoTaishoshaIchiranHandler {
     }
 
     /**
+     * RootTitleを設定する。
+     *
+     * @return ResponseData<TokuchoTaishoshaIchiranDiv>
+     */
+    public ResponseData<TokuchoTaishoshaIchiranDiv> stateTransition_RootTitle() {
+        RString pageState = div.getHiddenPageState();
+        if (STATE特別徴収対象者一覧作成.equals(pageState)) {
+            return ResponseData.of(div).rootTitle(特別徴収対象者一覧作成).respond();
+        }
+        return ResponseData.of(div).rootTitle(特別徴収対象者一覧確認).respond();
+    }
+
+    /**
      * 初期化状態（「特別徴収同定候補者一覧」に一行のみ該当する場合）
      *
      */
@@ -709,8 +739,10 @@ public class TokuchoTaishoshaIchiranHandler {
         RString 不一致理由 = div.getHiddenReasonCode();
         RString 確認状況 = div.getHiddenConfirmState();
         div.getBtnHihokenshaFinder().setDisabled(false);
-        if (一致理由_01.compareTo(不一致理由) == NUM0 || 一致理由_06.compareTo(不一致理由) == NUM0 || 一致理由_05.compareTo(不一致理由) == NUM0
-                || 一致理由_10.compareTo(不一致理由) == NUM0 || 一致理由_09.compareTo(不一致理由) == NUM0 || 一致理由_02.compareTo(不一致理由) == NUM0
+        if (一致理由_01.compareTo(不一致理由) == NUM0 || 一致理由_06.compareTo(不一致理由) == NUM0
+                || 一致理由_05.compareTo(不一致理由) == NUM0
+                || 一致理由_10.compareTo(不一致理由) == NUM0 || 一致理由_09.compareTo(不一致理由) == NUM0
+                || 一致理由_02.compareTo(不一致理由) == NUM0
                 || 一致理由_03.compareTo(不一致理由) == NUM0 || 一致理由_04.compareTo(不一致理由) == NUM0) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN同定する, false);
             if (未同定_NAME.compareTo(確認状況) == NUM0) {
