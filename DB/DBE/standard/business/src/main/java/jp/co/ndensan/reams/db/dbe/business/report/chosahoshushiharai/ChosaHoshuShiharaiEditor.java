@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBE621003_認定調査報酬支払通知書のChosaHoshuShiharaiEditorです。
@@ -55,7 +56,7 @@ public class ChosaHoshuShiharaiEditor implements IChosaHoshuShiharaiEditor {
                 LASDEC_CODE, ConfigNameDBE.認定調査報酬支払通知書.get名称());
         source.tsuchibun1 = item.get通知文1();
         source.taishoKikan = item.get対象期間();
-        source.gokei = item.get合計金額();
+        source.gokei = nullOrZero(item.get合計金額());
         source.furikomiyoteiYMD = item.get振込予定日();
         source.shubetsu = item.get種別();
         source.bango = item.get番号();
@@ -65,4 +66,10 @@ public class ChosaHoshuShiharaiEditor implements IChosaHoshuShiharaiEditor {
         return source;
     }
 
+    private RString nullOrZero(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return new RString("0");
+        }
+        return date;
+    }
 }

@@ -172,25 +172,25 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
     }
 
     private void setHokenryoTainoJyokyo(SashitomeYokokuTsuchishoNigoReportSource source) {
-        source.nendoTitle1 = new RString("");
-        source.nendoTitle2 = new RString("");
-        source.nendoTitle3 = new RString("");
-        source.listTainoJokyo_1 = new RString("");
-        source.listTainoJokyo_2 = new RString("");
-        source.listTainoJokyo_3 = new RString("");
-        source.listTainoJokyo_4 = new RString("");
-        source.listTainoJokyo_5 = new RString("");
-        source.listTainoJokyo_6 = new RString("");
-        source.listTainoJokyo_7 = new RString("");
-        source.listTainoJokyo_8 = new RString("");
-        source.listTainoJokyo_9 = new RString("");
-        source.hokenGokei1 = new RString("");
-        source.entaiGokei1 = new RString("");
-        source.hokenGokei2 = new RString("");
-        source.entaiGokei2 = new RString("");
-        source.hokenGokei3 = new RString("");
-        source.entaiGokei3 = new RString("");
-        source.hanteiYMD = new RString("");
+        source.nendoTitle1 = RString.EMPTY;
+        source.nendoTitle2 = RString.EMPTY;
+        source.nendoTitle3 = RString.EMPTY;
+        source.listTainoJokyo_1 = RString.EMPTY;
+        source.listTainoJokyo_2 = RString.EMPTY;
+        source.listTainoJokyo_3 = RString.EMPTY;
+        source.listTainoJokyo_4 = RString.EMPTY;
+        source.listTainoJokyo_5 = RString.EMPTY;
+        source.listTainoJokyo_6 = RString.EMPTY;
+        source.listTainoJokyo_7 = RString.EMPTY;
+        source.listTainoJokyo_8 = RString.EMPTY;
+        source.listTainoJokyo_9 = RString.EMPTY;
+        source.hokenGokei1 = RString.EMPTY;
+        source.entaiGokei1 = RString.EMPTY;
+        source.hokenGokei2 = RString.EMPTY;
+        source.entaiGokei2 = RString.EMPTY;
+        source.hokenGokei3 = RString.EMPTY;
+        source.entaiGokei3 = RString.EMPTY;
+        source.hanteiYMD = RString.EMPTY;
 
     }
 

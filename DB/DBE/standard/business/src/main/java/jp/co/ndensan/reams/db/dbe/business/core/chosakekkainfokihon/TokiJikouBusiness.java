@@ -65,20 +65,29 @@ public class TokiJikouBusiness {
     }
 
     /**
+     * 認定調査特記事項番号を返します。
+     *
+     * @return 認定調査特記事項番号
+     */
+    public RString get認定調査特記事項番号() {
+        return jikouRelateEntity.getNinteichosaTokkijikoNo();
+    }
+
+    /**
+     * 特記事項を返します。
+     *
+     * @return 特記事項
+     */
+    public RString get特記事項() {
+        return jikouRelateEntity.getTokkiJiko();
+    }
+
+    /**
      * 厚労省IF識別コードを返します。
      *
      * @return 厚労省IF識別コード
      */
     public Code get厚労省IF識別コード() {
         return jikouRelateEntity.getKoroshoIfShikibetsuCode();
-    }
-
-    /**
-     * 件数を返します。
-     *
-     * @return 件数
-     */
-    public int get件数() {
-        return jikouRelateEntity.getCOUNT();
     }
 }

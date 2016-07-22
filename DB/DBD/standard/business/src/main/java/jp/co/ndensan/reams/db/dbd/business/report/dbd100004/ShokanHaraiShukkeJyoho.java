@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還払集計情報のクラス
  *
- * @author b_liuyang2
+ * @reamsid_L DBD-3640-050 b_liuyang2
  */
 @lombok.Getter
 @lombok.Setter

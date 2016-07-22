@@ -238,29 +238,25 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     }
 
     private void バッチ出力条件リストの出力(Association 導入団体クラス) {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催年月 = new RStringBuilder("審査会開催年月");
         審査会開催年月.append(dateFormat(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("介護認定審査会委員報酬一覧表CSV"),
-                導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), ジョブ番号_Tmp.toRString(),
+                導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), new RString(JobContextHolder.getJobId()),
                 CSV_NAME, EUC_ENTITY_ID.toRString(), new RString(eucCsvWriterJunitoJugo.getCount()), 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
     private void 帳票バッチ出力条件リストの出力(Association 導入団体クラス) {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催年月 = new RStringBuilder("審査会開催年月");
         審査会開催年月.append(dateFormat(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE601005.getReportId().value(),
-                導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), ジョブ番号_Tmp.toRString(),
+                導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), new RString(JobContextHolder.getJobId()),
                 ReportIdDBE.DBE601005.getReportName(), new RString(reportSourceWriter.pageCount().value()), なし, なし, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();

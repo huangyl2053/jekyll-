@@ -27,10 +27,10 @@ public class ShinsakauIinHoshuShokaiHandler {
     private static final RString CSVを出力する = new RString("btnShutsutyoku");
     private static final RString 条件に戻る = new RString("btnBackToKensaku");
     private final ShinsakauIinHoshuShokaiDiv div;
-    private Decimal 総合計_審査回数 = new Decimal(0);
-    private Decimal 総合計_報酬総額 = new Decimal(0);
-    private Decimal 総合計_税控除額 = new Decimal(0);
-    private Decimal 総合計_報酬合計 = new Decimal(0);
+    private Decimal 総合計_審査回数 = Decimal.ZERO;
+    private Decimal 総合計_報酬総額 = Decimal.ZERO;
+    private Decimal 総合計_税控除額 = Decimal.ZERO;
+    private Decimal 総合計_報酬合計 = Decimal.ZERO;
 
     /**
      * コンストラクタです。
@@ -135,19 +135,11 @@ public class ShinsakauIinHoshuShokaiHandler {
      */
     public ShinsaHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
         ShinsaHoshuIchiranBatchParameter param = new ShinsaHoshuIchiranBatchParameter();
-        RString 審査回数;
-        RString 報酬総額;
-        RString 税額控除;
-        RString 報酬合計;
-        審査回数 = new RString(div.getTxtShinsaKaisu().toString());
-        報酬総額 = new RString(div.getTxtHoshuSogaku().toString());
-        税額控除 = new RString(div.getTxtZeiKojoGaku().toString());
-        報酬合計 = new RString(div.getTxtHoshuGokei().toString());
         param.setShinsakaiKaisaiYMD(new RString(div.getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
-        param.setShisakaisu(審査回数);
-        param.setHosyusogaku(報酬総額);
-        param.setSegakukojyo(税額控除);
-        param.setHosyugoke(報酬合計);
+        param.setShisakaisu(new RString(div.getTxtShinsaKaisu().toString()));
+        param.setHosyusogaku(new RString(div.getTxtHoshuSogaku().toString()));
+        param.setSegakukojyo(new RString(div.getTxtZeiKojoGaku().toString()));
+        param.setHosyugoke(new RString(div.getTxtHoshuGokei().toString()));
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

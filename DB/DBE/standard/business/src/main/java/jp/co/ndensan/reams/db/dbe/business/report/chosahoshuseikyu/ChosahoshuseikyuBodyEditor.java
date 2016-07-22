@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosahoshuseikyu;
 
 import jp.co.ndensan.reams.db.dbe.business.core.chosahoshuseikyu.ChosahoshuseikyuBody;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshuseikyu.ChosahoshuseikyuReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査報酬請求書のEditorです。
@@ -32,9 +33,16 @@ public class ChosahoshuseikyuBodyEditor implements IChosahoshuseikyuBodyEditor {
     }
 
     private ChosahoshuseikyuReportSource editSource(ChosahoshuseikyuReportSource source) {
-        source.listGokei_1 = item.getListGokei_1();
-        source.listGokei_2 = item.getListGokei_2();
-        source.listGokei_3 = item.getListGokei_3();
+        source.listGokei_1 = nullOrZero(item.getListGokei_1());
+        source.listGokei_2 = nullOrZero(item.getListGokei_2());
+        source.listGokei_3 = nullOrZero(item.getListGokei_3());
         return source;
+    }
+
+    private RString nullOrZero(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return new RString("0");
+        }
+        return date;
     }
 }

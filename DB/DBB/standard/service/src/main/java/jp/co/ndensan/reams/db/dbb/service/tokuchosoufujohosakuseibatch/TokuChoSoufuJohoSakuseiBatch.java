@@ -43,21 +43,12 @@ public class TokuChoSoufuJohoSakuseiBatch {
 
     private final RString 年度_2016 = new RString("2016");
     private final RString 年度_2015 = new RString("2015");
-    private final RString 前年度2月 = new RString("201502");
-    private final RString 前年度4月 = new RString("201504");
-    private final RString 前年度6月 = new RString("201506");
-    private final RString 前年度8月 = new RString("201508");
-    private final RString 前年度10月 = new RString("201510");
-    private final RString 前年度12月 = new RString("201512");
     private final RString 月2 = new RString("02");
     private final RString 月4 = new RString("04");
     private final RString 月6 = new RString("06");
     private final RString 月8 = new RString("08");
     private final RString 月10 = new RString("10");
     private final RString 月12 = new RString("12");
-    private final RString 翌2月 = new RString("201702");
-    private final RString 翌4月 = new RString("201704");
-    private final RString 翌6月 = new RString("201706");
     private static final RString RS0 = new RString("0");
     private static final RString RS1 = new RString("1");
     private static final RString RS2 = new RString("2");
@@ -141,33 +132,32 @@ public class TokuChoSoufuJohoSakuseiBatch {
         if (特徴制度間IF作成.equals(遷移元メニュー)) {
             FlexibleYear 入力処理年度 = null;
             RString 通知内容コード = null;
-            RString 捕捉年月 = RString.EMPTY;
+            RString 捕捉月 = RString.EMPTY;
             if (月8.equals(特徴開始月数)) {
                 入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
                 通知内容コード = RS30;
-                捕捉年月 = 月2;
+                捕捉月 = 月2;
             } else if (月10.equals(特徴開始月数)) {
                 入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
                 通知内容コード = RS00;
-                捕捉年月 = 月4;
+                捕捉月 = 月4;
             } else if (月12.equals(特徴開始月数)) {
                 入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
                 通知内容コード = RS30;
-                捕捉年月 = 月6;
+                捕捉月 = 月6;
             } else if (月2.equals(特徴開始月数)) {
                 入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
                 通知内容コード = RS30;
-                捕捉年月 = 月8;
+                捕捉月 = 月8;
             } else if (月4.equals(特徴開始月数)) {
                 入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
                 通知内容コード = RS30;
-                捕捉年月 = 月10;
+                捕捉月 = 月10;
             } else if (月6.equals(特徴開始月数)) {
                 入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
                 通知内容コード = RS30;
-                捕捉年月 = 月12;
+                捕捉月 = 月12;
             }
-            RString 捕捉月 = RString.isNullOrEmpty(捕捉年月) ? null : 捕捉年月.substring(NUM4, NUM6);
             resultList = 年金特徴回付情報_介護継承dac.
                     select特徴回付情報のデータ(GyomuCode.DB介護保険, 通知内容コード, 入力処理年度, 捕捉月);
         } else if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
@@ -473,36 +463,40 @@ public class TokuChoSoufuJohoSakuseiBatch {
      * @return 基準日時 YMDHMS
      */
     public YMDHMS chkTokuchoIraikinKeisan(RDate 特徴開始月, FlexibleYear 処理年度) {
-        FlexibleYear 入力処理年度 = null;
+        if (処理年度 == null || 特徴開始月 == null) {
+            return null;
+        }
+        FlexibleYear 年度 = null;
         RString 年度内年番 = null;
         RString 処理名 = null;
-        if (月6.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2015.equals(処理年度.toDateString())) {
-            入力処理年度 = new FlexibleYear(年度_2016);
+        RString 特徴開始月数 = DateConverter.formatMonthFull(特徴開始月.getMonthValue());
+        if (月6.equals(特徴開始月数)) {
+            年度 = 処理年度.plusYear(NUM1);
             年度内年番 = RS0001;
             処理名 = 依頼金額計算;
-        } else if (月8.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            入力処理年度 = new FlexibleYear(年度_2016);
+        } else if (月8.equals(特徴開始月数)) {
+            年度 = 処理年度;
             年度内年番 = RS0002;
             処理名 = 依頼金額計算;
-        } else if (月10.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            入力処理年度 = new FlexibleYear(年度_2016);
+        } else if (月10.equals(特徴開始月数)) {
+            年度 = 処理年度;
             年度内年番 = RS0001;
             処理名 = 本算定賦課;
-        } else if (月12.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            入力処理年度 = new FlexibleYear(年度_2016);
+        } else if (月12.equals(特徴開始月数)) {
+            年度 = 処理年度;
             年度内年番 = RS0004;
             処理名 = 依頼金額計算;
-        } else if (翌2月.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            入力処理年度 = new FlexibleYear(年度_2016);
+        } else if (月2.equals(特徴開始月数)) {
+            年度 = 処理年度;
             年度内年番 = RS0005;
             処理名 = 依頼金額計算;
-        } else if (翌2月.equals(特徴開始月.getYearMonth().toDateString()) && 年度_2016.equals(処理年度.toDateString())) {
-            入力処理年度 = new FlexibleYear(年度_2016);
+        } else if (月2.equals(特徴開始月数)) {
+            年度 = 処理年度;
             年度内年番 = RS0006;
             処理名 = 依頼金額計算;
         }
         DbT7022ShoriDateKanriEntity shoridatekanrientity = 処理日付管理マスタdac.selectBySomeKeysLimits(
-                SubGyomuCode.DBB介護賦課, 処理名, RS0001, 入力処理年度, 年度内年番);
+                SubGyomuCode.DBB介護賦課, 処理名, RS0001, 年度, 年度内年番);
         if (shoridatekanrientity == null) {
             return null;
         } else {

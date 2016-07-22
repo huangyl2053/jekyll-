@@ -62,7 +62,6 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
             .unmodifiableList(Arrays.asList(new RString(ChosaHoshumeisaiReportSource.ReportSourceFields.chosaItakusakiName.name()),
                             new RString(ChosaHoshumeisaiReportSource.ReportSourceFields.ninteichosainCode.name())));
     private HoshuShiharaiJunbiProcessParameter processParameter;
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
     private Decimal 合計件数新規在宅 = Decimal.ZERO;
@@ -148,11 +147,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     }
 
     private void バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JOBNO_NAME);
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
+        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
         RString 帳票名 = ReportIdDBE.DBE622002.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;

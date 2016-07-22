@@ -24,12 +24,15 @@ import lombok.Setter;
 public class HanteiKekkaJohoShuturyokuBatchParameter extends BatchParameterBase {
 
     private static final String KEY_HAKKOUTYOUHYOU = "hakkouTyouhyou";
+    private static final String KEY_KAISAIBANGOULIST = "kaisaiBangouList";
     private static final String KEY_KAISAIBANGOU = "kaisaiBangou";
 
     @BatchParameter(key = KEY_HAKKOUTYOUHYOU, name = "発行帳票")
     private RString hakkouTyouhyou;
+    @BatchParameter(key = KEY_KAISAIBANGOULIST, name = "開催番号")
+    private List<RString> kaisaiBangouList;
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
-    private List<RString> kaisaiBangou;
+    private RString kaisaiBangou;
 
     /**
      * バーチのパラメータを作成します。
@@ -39,6 +42,7 @@ public class HanteiKekkaJohoShuturyokuBatchParameter extends BatchParameterBase 
     public HanteiKekkaJohoShuturyokuProcessParameter toHanteiKekkaJohoShuturyokuProcessParameter() {
         return new HanteiKekkaJohoShuturyokuProcessParameter(
                 hakkouTyouhyou,
+                kaisaiBangouList,
                 kaisaiBangou);
     }
 }

@@ -12,10 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.Chos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoKihon.ChosaKekkaInfoKihonDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoKihon.ChosaKekkaInfoKihonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfokihon.ChosaKekkaInfoKihonFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査結果情報照会_基本調査取得処理。
@@ -31,8 +29,8 @@ public class ChosaKekkaInfoKihon {
      * @return ResponseData<ChosaKekkaInfoKihonDiv>
      */
     public ResponseData<ChosaKekkaInfoKihonDiv> onLoad(ChosaKekkaInfoKihonDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
+        RString 申請書管理番号 = div.getShinseishoKanriNo();
+        int 認定調査依頼履歴番号 = Integer.parseInt(String.valueOf(div.getNinteichosaRirekiNo()));
         ChosaKekkaInfoKihonParameter gaikyoParameter = ChosaKekkaInfoKihonParameter.
                 createGamenParam(申請書管理番号, 認定調査依頼履歴番号);
         List<ChosaKekkaInfoKihonBusiness> infoKihonList
@@ -50,6 +48,16 @@ public class ChosaKekkaInfoKihon {
      * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
      */
     public ResponseData<ChosaKekkaInfoKihonDiv> onClick_Moderu(ChosaKekkaInfoKihonDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項ボタンを押下します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
+     */
+    public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnTokkiJiko(ChosaKekkaInfoKihonDiv div) {
         return ResponseData.of(div).respond();
     }
 

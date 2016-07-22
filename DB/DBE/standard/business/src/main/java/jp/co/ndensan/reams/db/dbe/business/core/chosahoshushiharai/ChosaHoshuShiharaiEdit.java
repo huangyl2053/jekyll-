@@ -33,13 +33,12 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaHoshuShiharaiEdit {
 
-    private int 在宅新規件数 = 1;
-    private int 在宅再調査件数 = 1;
-    private int 施設新規件数 = 1;
-    private int 施設再調査件数 = 1;
-    private int その他の件数 = 1;
+    private int 在宅新規件数;
+    private int 在宅再調査件数;
+    private int 施設新規件数;
+    private int 施設再調査件数;
+    private int その他の件数;
     private Decimal その他の金額 = Decimal.ZERO;
-
     private RString ninteichosaItakusakiCode = RString.EMPTY;
 
     /**
@@ -134,10 +133,7 @@ public class ChosaHoshuShiharaiEdit {
 
     private ChosaHoshuShiharaiEntity getChosaHoshuShihaEntity(HoshuShiharaiJunbiRelateEntity entity,
             ChosaHoshuShiharaiEntity shiharaientity, Decimal 単価税込, RString 消費税率) {
-        int その他金額 = 0;
-        if (消費税率 != null) {
-            その他金額 = entity.getChosaItakuryo() * Integer.valueOf(消費税率.toString());
-        }
+        その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo());
         if (ninteichosaItakusakiCode.equals(entity.getNinteichosaItakusakiCode())) {
             if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
@@ -165,7 +161,7 @@ public class ChosaHoshuShiharaiEdit {
                 shiharaientity.set施設再調査単価税込(decimalToRString(単価税込));
             } else {
                 その他の件数 = その他の件数 + 1;
-                その他の金額 = その他の金額.add(その他金額);
+                その他の金額 = その他の金額.add(その他の金額);
             }
         }
         return shiharaientity;

@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5）のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-5）_新様式 のReportSourceクラスです。
  *
- * @reamsid_L DBU-5550-050 dangjingjing
+ * @reamsid_L DBU-5540-060 dangjingjing
  */
 public class JigyohokokuCompYoshiki153Report extends Report<JigyohokokuCompYoshiki153ReportSource> {
 

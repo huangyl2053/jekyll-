@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki153.Jig
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki153.JigyohokokuCompYoshiki153ReportSource;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5）のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-5）_新様式 のReportSourceクラスです。
  *
- * @reamsid_L DBU-5550-050 dangjingjing
+ * @reamsid_L DBU-5540-060 dangjingjing
  */
 public class JigyohokokuCompYoshiki153BodyEditor implements IJigyohokokuCompYoshiki153Editor {
 
