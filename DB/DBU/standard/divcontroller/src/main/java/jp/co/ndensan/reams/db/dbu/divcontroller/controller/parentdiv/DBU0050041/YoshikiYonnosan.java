@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -141,7 +142,7 @@ public class YoshikiYonnosan {
                     handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return 内部処理モード_修正.equals(内部処理モード)
+            return getHandler(div).is修正データ有(handler.get修正データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
@@ -245,15 +246,15 @@ public class YoshikiYonnosan {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnosanDiv> onClick_btnSave(YoshikiYonnosanDiv div) {
-        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            responseData = throwException_btnSave(div);
+            return throwException_btnSave(div);
+        } else if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
+            return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
         }
-        if (responseData != null) {
-            return responseData;
-        }
-        getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
-        return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<YoshikiYonnosanDiv> throwException_btnSave(YoshikiYonnosanDiv div) {
