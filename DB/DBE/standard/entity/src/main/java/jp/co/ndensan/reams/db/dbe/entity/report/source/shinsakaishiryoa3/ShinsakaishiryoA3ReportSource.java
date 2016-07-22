@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
- * 事務局用介護認定審査対象者一覧表A3のReportSourceです。
+ * 介護認定審査対象者一覧表A3のReportSourceです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-230 lishengli
  */
 public class ShinsakaishiryoA3ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

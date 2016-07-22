@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 事務局用介護認定審査対象者一覧表A4のEditorクラスです。
+ * 介護認定審査対象者一覧表A4のEditorクラスです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-260 lishengli
  */
 public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
 
@@ -34,7 +34,7 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
 
     /**
      *
-     * @param source 事務局用介護認定審査対象者一覧表のReportSourceクラス
+     * @param source 介護認定審査対象者一覧表のReportSourceクラス
      * @return ShinsakaishiryoA4ReportSource 事務局用介護認定審査対象者一覧表のReportSourceクラス
      */
     @Override

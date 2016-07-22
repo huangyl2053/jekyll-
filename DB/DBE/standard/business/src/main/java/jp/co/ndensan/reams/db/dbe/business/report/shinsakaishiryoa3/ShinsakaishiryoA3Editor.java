@@ -20,13 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 事務局用介護認定審査対象者一覧表A3のEditorクラスです。
+ * 介護認定審査対象者一覧表A3のEditorクラスです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-230 lishengli
  */
 public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
 
     private static final int INT_4 = 4;
+    private static final int INT_25 = 25;
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -55,7 +56,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
         source.listShinsainName_1 = business.get審査員一覧();
         source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(business.get審査対象者数());
         int no = business.getNo();
-        if (no % 2 == 0) {
+        if (INT_25 <= no) {
             source.listShinsei2_1 = business.get審査会審査順();
             source.listShinsei2_2 = business.get保険者();
             source.listShinsei2_3 = business.get被保険者();
@@ -65,7 +66,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listShinsei2_7 = business.get前回二次();
             source.listShinsei2_8 = business.get前回期間();
             source.listShinsei2_9 = business.get一次判定();
-            source.listShinsei2_10 = business.get二次判定();
+            source.listShinsei2_10 = RString.EMPTY;
             source.listShinsei2_11 = RString.EMPTY;
             source.listZenkaiｙukokikan2_1 = get二時判定認定有効年月日();
             source.listYukokikan2_1 = RString.EMPTY;
@@ -79,7 +80,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listShinsei1_7 = business.get前回二次();
             source.listShinsei1_8 = business.get前回期間();
             source.listShinsei1_9 = business.get一次判定();
-            source.listShinsei1_10 = business.get二次判定();
+            source.listShinsei1_10 = RString.EMPTY;
             source.listShinsei1_11 = RString.EMPTY;
             source.listZenkaiｙukokikan1_1 = get二時判定認定有効年月日();
             source.listYukokikan1_1 = RString.EMPTY;
