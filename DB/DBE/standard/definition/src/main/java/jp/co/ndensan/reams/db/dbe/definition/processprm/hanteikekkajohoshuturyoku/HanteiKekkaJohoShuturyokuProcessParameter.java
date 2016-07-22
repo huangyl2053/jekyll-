@@ -23,7 +23,8 @@ import lombok.Setter;
 public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessParameter {
 
     private RString hakkouTyouhyou;
-    private List<RString> kaisaiBangou;
+    private List<RString> kaisaiBangouList;
+    private RString kaisaiBangou;
     private List<RString> shoriJotaiKubun;
     private RString shoKisaiHokenshaNo;
 
@@ -31,12 +32,15 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
      * コンストラクタです。
      *
      * @param hakkouTyouhyou 発行帳票
+     * @param kaisaiBangouList 開催番号List
      * @param kaisaiBangou 開催番号
      */
     public HanteiKekkaJohoShuturyokuProcessParameter(
             RString hakkouTyouhyou,
-            List<RString> kaisaiBangou) {
+            List<RString> kaisaiBangouList,
+            RString kaisaiBangou) {
         this.hakkouTyouhyou = hakkouTyouhyou;
+        this.kaisaiBangouList = kaisaiBangouList;
         this.kaisaiBangou = kaisaiBangou;
     }
 
@@ -48,6 +52,7 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
     public HanteiKekkaJohoShuturyokuMybatisParameter toHanteiKekkaJohoShuturyokuMybatisParameter() {
         return HanteiKekkaJohoShuturyokuMybatisParameter.creatParameter(
                 hakkouTyouhyou,
+                kaisaiBangouList,
                 kaisaiBangou,
                 shoriJotaiKubun,
                 shoKisaiHokenshaNo);
