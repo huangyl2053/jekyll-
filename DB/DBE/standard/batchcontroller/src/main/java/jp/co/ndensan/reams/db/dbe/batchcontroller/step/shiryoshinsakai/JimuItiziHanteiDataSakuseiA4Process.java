@@ -142,7 +142,6 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
 
     private void outputJokenhyoFactory() {
         RString id = ReportIdDBE.DBE517181.getReportId().getColumnValue();
-        RString idName = ReportIdDBE.DBE517181.getReportName();
         RString 総ページ数 = new RString(batchWriteA4.getPageCount());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(

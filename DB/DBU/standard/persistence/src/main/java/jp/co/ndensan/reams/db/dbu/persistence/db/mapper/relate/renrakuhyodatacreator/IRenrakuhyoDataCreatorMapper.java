@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.renrakuhyodatacreator;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.renrakuhyodatacreator.FutangakuGengakuMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -21,6 +22,6 @@ public interface IRenrakuhyoDataCreatorMapper {
      * @param parameter FutangakuGengakuMybatisParameter
      * @return RiyoshaFutangakuRelateEntity
      */
-    Decimal get利用者負担額(FutangakuGengakuMybatisParameter parameter);
+    List<Decimal> get利用者負担額(FutangakuGengakuMybatisParameter parameter);
 
 }

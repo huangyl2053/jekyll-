@@ -191,7 +191,7 @@ public class ShiharaiHohoHenko extends
      *
      * @return 予告通知書再発行フラグ
      */
-    public boolean get予告通知書再発行フラグ() {
+    public boolean is予告通知書再発行フラグ() {
         return entity.getYokoku_TsuchiSaiHakkoFlag();
     }
 
@@ -263,7 +263,7 @@ public class ShiharaiHohoHenko extends
      *
      * @return 償還払化通知書再発行フラグ
      */
-    public boolean get償還払化通知書再発行フラグ() {
+    public boolean is償還払化通知書再発行フラグ() {
         return entity.getShokan_TsuchiSaiHakkoFlag();
     }
 
@@ -281,7 +281,7 @@ public class ShiharaiHohoHenko extends
      *
      * @return 差止対象フラグ
      */
-    public boolean get差止対象フラグ() {
+    public boolean is差止対象フラグ() {
         return entity.getSashitome_Flag();
     }
 
@@ -326,7 +326,7 @@ public class ShiharaiHohoHenko extends
      *
      * @return 減額通知書再発行フラグ
      */
-    public boolean get減額通知書再発行フラグ() {
+    public boolean is減額通知書再発行フラグ() {
         return entity.getGemmen_TsuchiSaiHakkoFlag();
     }
 
@@ -398,7 +398,7 @@ public class ShiharaiHohoHenko extends
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

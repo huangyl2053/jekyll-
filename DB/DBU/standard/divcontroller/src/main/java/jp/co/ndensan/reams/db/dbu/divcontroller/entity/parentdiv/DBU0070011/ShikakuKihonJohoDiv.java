@@ -24,10 +24,10 @@ public class ShikakuKihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +36,21 @@ public class ShikakuKihonJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
-    }
-
-    /*
      * getccdKaigoShikakuKihon
      * @return ccdKaigoShikakuKihon
      */
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
     }
 
     // </editor-fold>

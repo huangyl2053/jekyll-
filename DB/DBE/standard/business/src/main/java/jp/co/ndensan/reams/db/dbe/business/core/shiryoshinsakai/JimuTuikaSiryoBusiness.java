@@ -97,7 +97,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 被保険者氏名
      */
     public RString get被保険者氏名() {
-        if (entity.getHihokenshaName() != null || !entity.getHihokenshaName().isEmpty()) {
+        if (entity.getHihokenshaName() != null && !entity.getHihokenshaName().isEmpty()) {
             return entity.getHihokenshaName().value();
         }
         return RString.EMPTY;

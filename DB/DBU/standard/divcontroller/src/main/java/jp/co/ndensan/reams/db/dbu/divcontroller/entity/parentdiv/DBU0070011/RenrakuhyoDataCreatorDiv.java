@@ -139,13 +139,13 @@ public class RenrakuhyoDataCreatorDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getShikakuKihonJoho().getCcdKaigoShikakuKihon();
     }
 
     @JsonIgnore
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return this.getShikakuKihonJoho().getCcdKaigoShikakuKihon();
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
     }
 
     @JsonIgnore

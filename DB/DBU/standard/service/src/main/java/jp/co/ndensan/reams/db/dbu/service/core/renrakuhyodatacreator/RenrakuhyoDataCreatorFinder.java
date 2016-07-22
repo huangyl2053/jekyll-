@@ -176,7 +176,7 @@ public class RenrakuhyoDataCreatorFinder {
     public ShiharaiHohoHenko get支払方法変更(HihokenshaNo 被保険者番号, FlexibleDate 基準日) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号メッセージ.toString()));
         requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(基準日メッセージ.toString()));
-        DbT4021ShiharaiHohoHenkoEntity entity = dbt4021Dac.get支払方法変更(被保険者番号, 基準日, ShiharaiHenkoKanriKubun._１号償還払い化.getコード());
+        DbT4021ShiharaiHohoHenkoEntity entity = dbt4021Dac.get支払方法変更(被保険者番号, 基準日, ShiharaiHenkoKanriKubun._１号給付額減額.getコード());
         if (entity == null) {
             return null;
         }
@@ -216,7 +216,15 @@ public class RenrakuhyoDataCreatorFinder {
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         FutangakuGengakuMybatisParameter parameter = FutangakuGengakuMybatisParameter.createParam_Futangaku(被保険者番号, サービス提供年月);
         IRenrakuhyoDataCreatorMapper mapper = mapperProvider.create(IRenrakuhyoDataCreatorMapper.class);
-        return mapper.get利用者負担額(parameter);
+        Decimal 利用者負担額 = new Decimal(0);
+        for (int i = 0; i < mapper.get利用者負担額(parameter).size(); i++) {
+            if (mapper.get利用者負担額(parameter).get(i) != null) {
+                利用者負担額 = 利用者負担額.add(mapper.get利用者負担額(parameter).get(i));
+            } else {
+                利用者負担額 = 利用者負担額.add(new Decimal(0));
+            }
+        }
+        return 利用者負担額;
     }
 
     /**
