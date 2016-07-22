@@ -83,13 +83,14 @@ public class RenrakuhyoDataCreatorHandler {
             List<HokenryoDankai> 保険料段階情報,
             Decimal 算定基準額,
             boolean is非該当,
-            Fuka 介護賦課) {
+            Fuka 介護賦課,
+            FlexibleDate 基準日) {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者キー.get識別コード());
         div.getCcdKaigoShikakuKihon().initialize(資格対象者キー.get識別コード());
         if (is非該当) {
-            set非該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当);
+            set非該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当, 基準日);
         } else {
-            set該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当);
+            set該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当, 基準日);
         }
     }
 
@@ -160,14 +161,13 @@ public class RenrakuhyoDataCreatorHandler {
         return 帳票の項目;
     }
 
-    private void set非該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額, List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当) {
+    private void set非該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額,
+            List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当, FlexibleDate 基準日) {
         TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度 = new TokuteiNyushoshaFutanGendoNichigakuGetter();
         Decimal 利用者負担金額 = new Decimal(0);
         if (利用者負担額 != null) {
             利用者負担金額 = 利用者負担額;
         }
-        FlexibleDate 基準日 = FlexibleDate.getNowDate();
-
         div.getTxtRenrakuhyoSakuseiDate().setValue(基準日);
         if (is給付額減額の記載有無(支払方法変更)) {
             div.getRadKyuhugakuGengakuUmu().setSelectedKey(給付額減額記載_有);
@@ -241,14 +241,13 @@ public class RenrakuhyoDataCreatorHandler {
         set非該当高額介護サービス費額(算定基準額);
     }
 
-    private void set該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額, List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当) {
+    private void set該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額,
+            List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当, FlexibleDate 基準日) {
         TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度 = new TokuteiNyushoshaFutanGendoNichigakuGetter();
         Decimal 利用者負担金額 = new Decimal(0);
         if (利用者負担額 != null) {
             利用者負担金額 = 利用者負担額;
         }
-        FlexibleDate 基準日 = FlexibleDate.getNowDate();
-
         div.getTxtRenrakuhyoSakuseiDateGaitosha().setValue(基準日);
         if (is給付額減額の記載有無(支払方法変更)) {
             div.getRadKyuhugakuGengakuUmuGaitosha().setSelectedKey(給付額減額記載_有);
@@ -379,12 +378,30 @@ public class RenrakuhyoDataCreatorHandler {
             div.getDgKaigoHokenryoGaitosha().setDataSource(gaitoshaRowList);
         }
         if (介護賦課 != null) {
-            for (dgKaigoHokenryo_Row row : rowList) {
-                if (介護賦課.get保険料段階().equals(row.getDankaiKubun())) {
-                    row.setSelected(Boolean.TRUE);
-                    div.setDankaiKubunSelected(row.getDankaiKubun());
-                    div.setKaigoHokenryoSelected(new RString("selected"));
-                }
+            if (is非該当) {
+                set非該当保険料段階選択(介護賦課, rowList);
+            } else {
+                set該当保険料段階選択(介護賦課, gaitoshaRowList);
+            }
+        }
+    }
+
+    private void set非該当保険料段階選択(Fuka 介護賦課, List<dgKaigoHokenryo_Row> rowList) {
+        for (dgKaigoHokenryo_Row row : rowList) {
+            if (介護賦課.get保険料段階().equals(row.getDankaiKubun())) {
+                row.setSelected(Boolean.TRUE);
+                div.setDankaiKubunSelected(row.getDankaiKubun());
+                div.setKaigoHokenryoSelected(new RString("selected"));
+            }
+        }
+    }
+
+    private void set該当保険料段階選択(Fuka 介護賦課, List<dgKaigoHokenryoGaitosha_Row> gaitoshaRowList) {
+        for (dgKaigoHokenryoGaitosha_Row row : gaitoshaRowList) {
+            if (介護賦課.get保険料段階().equals(row.getDankaiKubun())) {
+                row.setSelected(Boolean.TRUE);
+                div.setDankaiKubunSelected(row.getDankaiKubun());
+                div.setKaigoHokenryoSelected(new RString("selected"));
             }
         }
     }

@@ -77,7 +77,7 @@ public class RenrakuhyoDataCreator {
         getHandler(div).onLoad(資格対象者キー, finder.get支払方法変更(被保険者番号, 基準日),
                 finder.get利用者負担額(被保険者番号, finder.get給付実績基本(被保険者番号, 基準日).getサービス提供年月()),
                 finder.get負担限度額(被保険者番号, 基準日), finder.get保険料段階(基準日).records(),
-                算定基準額, is非該当, finder.get介護賦課(被保険者番号, 基準日));
+                算定基準額, is非該当, finder.get介護賦課(被保険者番号, 基準日), 基準日);
         if (is非該当) {
             return ResponseData.of(div).setState(DBU0070011StateName.Higaito);
         } else {
@@ -100,7 +100,7 @@ public class RenrakuhyoDataCreator {
         boolean is非該当 = false;
         RiyoshaFutangakuBusiness 旧措置情報 = finder.get旧措置情報(被保険者番号, 基準日);
         if (旧措置情報 != null) {
-            if (!旧措置情報.is旧措置情報() || (旧措置情報.is旧措置情報() && 給付率 < (旧措置情報.get給付率().getColumnValue().intValue()))) {
+            if (!旧措置情報.is旧措置情報() || (旧措置情報.is旧措置情報() && (旧措置情報.get給付率().getColumnValue().intValue()) < 給付率)) {
                 is非該当 = true;
             }
             if (旧措置情報.is旧措置情報() && 給付率 <= (旧措置情報.get給付率().getColumnValue().intValue())) {
@@ -108,9 +108,11 @@ public class RenrakuhyoDataCreator {
             }
         }
         if (is非該当) {
-            return ResponseData.of(new KaigohokenRenrakuhyoPrintService().print(getHandler(div).set帳票の項目(finder.get負担限度額(被保険者番号, 基準日), is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号)))).respond();
+            return ResponseData.of(new KaigohokenRenrakuhyoPrintService().print(getHandler(div).set帳票の項目(finder.get負担限度額(被保険者番号, 基準日),
+                    is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号)))).respond();
         } else {
-            return ResponseData.of(new KaigohokenRenrakuhyoJisshitsuFutanPrintService().print(getHandler(div).set帳票の項目(finder.get負担限度額(被保険者番号, 基準日), is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号)))).respond();
+            return ResponseData.of(new KaigohokenRenrakuhyoJisshitsuFutanPrintService().print(getHandler(div).set帳票の項目(finder.get負担限度額(被保険者番号, 基準日),
+                    is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号)))).respond();
         }
     }
 
