@@ -61,7 +61,7 @@ public class HanteiKekkaJohoShutsuryoku {
     public ResponseData<HanteiKekkaJohoShuturyokuBatchParameter> onClick_btnAction(HanteiKekkaJohoShutsuryokuDiv div) {
         HanteiKekkaJohoShuturyokuBatchParameter parameter = new HanteiKekkaJohoShuturyokuBatchParameter();
         parameter.setHakkouTyouhyou(発行帳票);
-        parameter.setKaisaiBangou(div.getCcdIShinsakaiIchiranList().get開催番号List());
+        parameter.setKaisaiBangouList(div.getCcdIShinsakaiIchiranList().get開催番号List());
         return ResponseData.of(parameter).respond();
     }
 
