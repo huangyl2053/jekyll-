@@ -30,7 +30,7 @@ public class ShinsakaishiryoA3Report extends Report<ShinsakaishiryoA3ReportSourc
 
     /**
      *
-     * @param reportSourceWriter 事務局用介護認定審査対象者一覧表A3Sourceクラス
+     * @param reportSourceWriter 介護認定審査対象者一覧表A3Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaishiryoA3ReportSource> reportSourceWriter) {
