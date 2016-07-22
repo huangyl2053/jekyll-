@@ -109,10 +109,10 @@ public class RenrakuhyoDataCreator {
         }
         if (is非該当) {
             return ResponseData.of(new KaigohokenRenrakuhyoPrintService().print(getHandler(div).set帳票の項目(finder.get負担限度額(被保険者番号, 基準日),
-                    is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号)))).respond();
+                    is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号), 基準日))).respond();
         } else {
             return ResponseData.of(new KaigohokenRenrakuhyoJisshitsuFutanPrintService().print(getHandler(div).set帳票の項目(finder.get負担限度額(被保険者番号, 基準日),
-                    is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号)))).respond();
+                    is非該当, finder.get受給者台帳(被保険者番号), finder.get被保険者台帳(被保険者番号), 基準日))).respond();
         }
     }
 

@@ -74,6 +74,7 @@ public class RenrakuhyoDataCreatorHandler {
      * @param 算定基準額 算定基準額
      * @param is非該当 is非該当
      * @param 介護賦課 介護賦課
+     * @param 基準日 基準日
      */
     public void onLoad(
             TaishoshaKey 資格対象者キー,
@@ -101,9 +102,11 @@ public class RenrakuhyoDataCreatorHandler {
      * @param is非該当 is非該当
      * @param 受給者台帳 受給者台帳
      * @param 被保険者台帳 被保険者台帳
+     * @param 基準日 基準日
      * @return KaigoHokenRenrakuhyoHold
      */
-    public KaigoHokenRenrakuhyoHold set帳票の項目(FutangakuGengakuBusiness 負担限度額, boolean is非該当, JukyushaDaichoAlive 受給者台帳, HihokenshaDaichoAlive 被保険者台帳) {
+    public KaigoHokenRenrakuhyoHold set帳票の項目(FutangakuGengakuBusiness 負担限度額, boolean is非該当,
+            JukyushaDaichoAlive 受給者台帳, HihokenshaDaichoAlive 被保険者台帳, FlexibleDate 基準日) {
         KaigoHokenRenrakuhyoHold 帳票の項目 = new KaigoHokenRenrakuhyoHold();
         KyufuGengakuKisai 給付減額 = new KyufuGengakuKisai();
         KyojuhiFutanGendogakuKisai 居住費の負担限度額 = new KyojuhiFutanGendogakuKisai();
@@ -114,7 +117,7 @@ public class RenrakuhyoDataCreatorHandler {
         IShikibetsuTaisho taisho = div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近();
         IKojin kojin = taisho.to個人();
         帳票の項目.set個人(kojin);
-        帳票の項目.set連絡票作成日(FlexibleDate.getNowDate());
+        帳票の項目.set連絡票作成日(基準日);
         if (負担限度額 == null) {
             居住費の負担限度額.set居住費の記載あり(false);
             食費の_特定_負担限度額.set食費の記載あり(false);
