@@ -1827,5 +1827,13 @@ public enum ViewStateKeys {
     /**
      * 変更前処理状況
      */
-    変更前処理状況;
+    変更前処理状況,
+    /**
+     * 利用年月
+     */
+    利用年月,
+    /**
+     * 給付計画自己作成EntityList
+     */
+    給付計画自己作成EntityList;
 }
