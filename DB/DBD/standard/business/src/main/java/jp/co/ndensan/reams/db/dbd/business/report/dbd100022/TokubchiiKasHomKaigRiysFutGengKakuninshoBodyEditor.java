@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -69,7 +70,7 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
         source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
         source.kakuninNo = item.get特別地域加算減免().get確認番号();
 
-        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
+        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通(), item.get地方公共団体());
         source.jusho = 編集後個人.get編集後住所();
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
@@ -148,7 +149,7 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
         return source;
     }
 
-    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(kojin, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(kojin, 帳票制御共通, 地方公共団体);
     }
 }
