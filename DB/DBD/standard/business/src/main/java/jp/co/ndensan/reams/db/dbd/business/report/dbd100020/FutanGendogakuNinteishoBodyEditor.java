@@ -70,7 +70,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     private FutanGendogakuNinteishoReportSource bodyEdit(FutanGendogakuNinteishoReportSource source) {
         source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
         source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_6, INDEX_6);
+        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
         source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
         source.hihokenshaNo = item.get負担限度額認定().get被保険者番号().getColumnValue();
 
@@ -81,15 +81,15 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
 
         RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
-            if (new RString("明治").equals(元号)) {
+            if (new RString("明").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
                 source.birthGengoTaisho = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("大正").equals(元号)) {
+            } else if (new RString("大").equals(元号)) {
                 source.birthGengoTaisho = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("昭和").equals(元号)) {
+            } else if (new RString("昭").equals(元号)) {
                 source.birthGengoShowa = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
@@ -146,7 +146,6 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         }
 
         source.shikibetsuCode = item.getIKojin().get識別コード().getColumnValue();
-        source.hihokenshaNo = item.get負担限度額認定().get被保険者番号().getColumnValue();
 
         return source;
     }
