@@ -7,10 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4550011
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4550011.DBC4550011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4550011.DBC4550011TransitionEventName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4550011.Panel1Div;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4550011.Panel1Handler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4550011.KokuhorenTorikomiBaitaiShijiIchiranPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4550011.KokuhorenTorikomiBaitaiShijiIchiranPanelHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
@@ -19,19 +23,26 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  *
  * @reamsid_L DBC-3361-010 xuxin
  */
-public class Panel1 {
+public class KokuhorenTorikomiBaitaiShijiIchiranPanel {
 
-    private Panel1Handler getHandler(Panel1Div div) {
-        return new Panel1Handler(div);
+    private static final RString 前排他キー = new RString("DBCKokuhorenTorikomiBaitaiKanr");
+
+    private KokuhorenTorikomiBaitaiShijiIchiranPanelHandler getHandler(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+        return new KokuhorenTorikomiBaitaiShijiIchiranPanelHandler(div);
     }
 
     /**
      * 国保連取込媒体管理作成画面初期化を処理します。
      *
      * @param div 国保連取込媒体管理DIV
-     * @return ResponseData<Panel1Div>
+     * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<Panel1Div> onLoad(Panel1Div div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onLoad(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
+
+        LockingKey key = new LockingKey(前排他キー);
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        }
 
         getHandler(div).初期登録状態();
         getHandler(div).initialize();
@@ -41,10 +52,10 @@ public class Panel1 {
     /**
      * 「保存する」ボタン押下時のイベントメソッドです。
      *
-     * @param div Panel1Div
-     * @return ResponseData<Panel1Div>
+     * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
+     * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<Panel1Div> onClick_btnSave(Panel1Div div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSave(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -57,23 +68,12 @@ public class Panel1 {
     }
 
     /**
-     * 「戻る」ボタン押下時のイベントメソッドです。
-     *
-     * @param div Panel1Div
-     * @return ResponseData<Panel1Div>
-     */
-    public ResponseData<Panel1Div> onClick_btnBack(Panel1Div div) {
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「選択」ボタン押下時のイベントメソッドです。
      *
-     * @param div Panel1Div
-     * @return ResponseData<Panel1Div>
+     * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
+     * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<Panel1Div> onClick_btnSelect(Panel1Div div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSelect(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         getHandler(div).選択状態();
         getHandler(div).選択ボタン押下時();
@@ -83,10 +83,10 @@ public class Panel1 {
     /**
      * 「完了する」ボタン押下時のイベントメソッドです。
      *
-     * @param div Panel1Div
-     * @return ResponseData<Panel1Div>
+     * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
+     * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<Panel1Div> onClick_btnComplete(Panel1Div div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnComplete(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
         return ResponseData.of(div).forwardWithEventName(DBC4550011TransitionEventName.処理完了).respond();
     }
@@ -94,11 +94,12 @@ public class Panel1 {
     /**
      * 「実行」ボタン押下時のイベントメソッドです。
      *
-     * @param div Panel1Div
-     * @return ResponseData<Panel1Div>
+     * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
+     * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<Panel1Div> onClick_btnSetting(Panel1Div div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnSetting(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
+        getHandler(div).set入力内容反映();
         getHandler(div).初期登録状態();
         return ResponseData.of(div).setState(DBC4550011StateName.初期登録状態);
     }
@@ -106,13 +107,13 @@ public class Panel1 {
     /**
      * 「取消」ボタン押下時のイベントメソッドです。
      *
-     * @param div Panel1Div
-     * @return ResponseData<Panel1Div>
+     * @param div KokuhorenTorikomiBaitaiShijiIchiranPanelDiv
+     * @return ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv>
      */
-    public ResponseData<Panel1Div> onClick_btnCancle(Panel1Div div) {
+    public ResponseData<KokuhorenTorikomiBaitaiShijiIchiranPanelDiv> onClick_btnCancle(KokuhorenTorikomiBaitaiShijiIchiranPanelDiv div) {
 
-        getHandler(div).初期登録状態();
         getHandler(div).set入力値破棄();
+        getHandler(div).初期登録状態();
         return ResponseData.of(div).setState(DBC4550011StateName.初期登録状態);
     }
 
