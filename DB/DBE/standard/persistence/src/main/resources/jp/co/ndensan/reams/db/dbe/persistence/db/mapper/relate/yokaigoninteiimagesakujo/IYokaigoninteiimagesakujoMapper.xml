@@ -92,7 +92,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
         DELETE FROM rgdb."DbT5305IkenshoImageJoho" 
               WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
-                AND "iraiRirekiNo" = #{ninteichosaRirekiNo}
+                AND "iraiRirekiNo" = #{ikenshoIraiRirekiNo}
             <if test="hasMaskDataKubun">
                 AND "maskDataKubun" = #{maskDataKubun}
             </if>
@@ -102,20 +102,20 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
         DELETE FROM rgdb."DbT5302ShujiiIkenshoJoho" 
               WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
-                AND "iraiRirekiNo" = #{ninteichosaRirekiNo}
+                AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
     </delete>
     
     <delete id="deleteDbT5303PhysicalBy" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
         DELETE FROM rgdb."DbT5303ShujiiIkenshoKinyuItem" 
               WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
-                AND "iraiRirekiNo" = #{ninteichosaRirekiNo}
+                AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
     </delete>
     
     <delete id="deleteDbT5304PhysicalBy" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
         DELETE FROM rgdb."DbT5304ShujiiIkenshoIkenItem" 
               WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
-                AND "iraiRirekiNo" = #{ninteichosaRirekiNo}
+                AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
     </delete>
 </mapper>
