@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬支払明細書のEditorです。
@@ -46,17 +48,24 @@ public class ShinsainShiharaimeisaishoEditor implements IShinsainShiharaimeisais
         source.listChosaSakusei_3 = item.get被保険者氏名();
         source.listChosaSakusei_4 = item.get生年月日();
         source.listChosaSakusei_5 = item.get査会開催年月日();
-        source.listChosaSakusei_6 = item.get報酬総額();
-        source.listChosaSakusei_7 = item.get費用弁償();
-        source.listChosaSakusei_8 = item.get税額控除();
-        source.listChosaSakusei_9 = item.get報酬合計();
-        source.gokeiKingaku = item.get合計金額();
-        source.shouhiZei = item.get消費税();
-        source.gokeiSeikyuKingaku = item.get合計請求額();
+        source.listChosaSakusei_6 = kinngakuFormat(item.get報酬総額());
+        source.listChosaSakusei_7 = kinngakuFormat(item.get費用弁償());
+        source.listChosaSakusei_8 = kinngakuFormat(item.get税額控除());
+        source.listChosaSakusei_9 = kinngakuFormat(item.get報酬合計());
+        source.gokeiKingaku = kinngakuFormat(item.get合計金額());
+        source.shouhiZei = kinngakuFormat(item.get消費税());
+        source.gokeiSeikyuKingaku = kinngakuFormat(item.get合計請求額());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get被保険者番号() != null) {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
         }
         return source;
+    }
+
+    private RString kinngakuFormat(RString data) {
+        if (data == null || data.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(data.toString()), 0);
     }
 }

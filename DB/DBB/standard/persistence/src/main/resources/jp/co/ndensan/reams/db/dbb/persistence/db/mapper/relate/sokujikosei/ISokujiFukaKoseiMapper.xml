@@ -29,6 +29,11 @@
         "DbT2002Fuka"."choteiNendo" = #{fukaNendo}
         AND "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
         AND "DbT2002Fuka"."tsuchishoNo" = #{tsuchishoNo}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
     
     <!--2.1　賦課の情報の取得--> 
@@ -56,6 +61,11 @@
         AND "DbT2002Fuka"."hihokenshaNo" = #{hihokenshaNo}
         AND #{fukaNendo} <![CDATA[<=]]> "DbT2002Fuka"."choteiNendo"
         AND "DbT2002Fuka"."choteiNendo" <![CDATA[<=]]> #{choteiNendo}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
     
     <resultMap id="resultMap_SeikatsuHogoJukyushaRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity" autoMapping="true">
@@ -144,6 +154,10 @@
         AND UrT0508SeikatsuHogoJukyusha."jukyuKaishiYMD" = UrT0528SeikatsuHogoTeishikikan."jukyuKaishiYMD"
         WHERE
             UrT0508SeikatsuHogoJukyusha."shikibetsuCode" = #{shikibetsuCode}
+        ORDER BY
+            UrT0508SeikatsuHogoJukyusha."shikibetsuCode",
+            UrT0508SeikatsuHogoJukyusha."gyomuCode",
+            UrT0508SeikatsuHogoJukyusha."jukyuKaishiYMD"
     </select>
     
      <!--境界層の情報の取得します。--> 
@@ -169,6 +183,10 @@
         DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" = DbT1007KyokaisoHokenryoDankai."dbT1007KyokaisoHokenryoDankai_linkNo"
         WHERE
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo" = #{hihokenshaNo}
+        ORDER BY
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo"
      </select>
      
      <!-- 1．賦課の情報の取得 -->
@@ -194,5 +212,10 @@
         WHERE
         "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
         AND "DbT2002Fuka"."hihokenshaNo" = #{hihokenshaNo}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
 </mapper>
