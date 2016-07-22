@@ -232,7 +232,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         div.getYoshikiYonnosanMeisai().getTxtHihokenshaName().setDisplayNone(true);
         div.getYoshikiYonnosanMeisai().getDdlShicyoson().setDisabled(false);
         div.getYoshikiYonnosanMeisai().getBtnKakutei().setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+        if (DBU0050041StateName.追加状態.getName().equals(ResponseHolder.getState())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+        }
         set詳細データエリア入力可否(状態1);
     }
 
@@ -304,9 +306,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         if (new RString("入力未").equals(insuranceInf.get様式４入力状況())) {
             div.getYoshikiButtonArea().getBtnYoshikiyon().setDisabled(true);
         }
-        div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
+        div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(true);
         if (new RString("入力未").equals(insuranceInf.get様式４の２入力状況())) {
-            div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(true);
+            div.getYoshikiButtonArea().getBtnYoshikiyonnoni().setDisabled(true);
         }
     }
 
@@ -699,7 +701,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
                 .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0302.getColumnValue());
         List<KaigoHokenJigyoHokokuNenpo> 実質的な収支についてデータs = 介護保険特別会計経理状況登録Manager
                 .getJigyoHokokuNenpoDetal(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号_0303.getColumnValue());
-        if (前年度以前データs.isEmpty() && 今年度データs.isEmpty() && 実質的な収支についてデータs.isEmpty()) {
+        if (!前年度以前データs.isEmpty() || !今年度データs.isEmpty() || !実質的な収支についてデータs.isEmpty()) {
             throw new ApplicationException(DbaErrorMessages.該当報告年度の集計データは既に存在.getMessage());
         } else {
             報告年度Box.setReadOnly(true);
@@ -810,7 +812,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
         if (市町村Key.split("_").size() < 1) {
             return LasdecCode.EMPTY;
         } else {
-            System.out.println(市町村Key.split("_").get(0).toString());
             return new LasdecCode(市町村Key.split("_").get(0));
         }
     }

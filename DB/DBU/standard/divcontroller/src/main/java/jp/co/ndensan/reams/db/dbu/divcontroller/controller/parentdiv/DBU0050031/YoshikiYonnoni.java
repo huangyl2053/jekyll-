@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken.ViewStateKey;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.ValidationHandler;
@@ -192,8 +194,23 @@ public class YoshikiYonnoni {
             div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisplayNone(true);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+            if (DBU0050021StateName.add.getName().equals(ResponseHolder.getState())) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
+            }
             div.setShoriMode(内部処理モード_追加);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 介護保険特別会計経理状況登録_様式４を画面初期化処理しました。
+     *
+     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div 介護保険特別会計経理状況登録_様式４情報Div}
+     * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
+     */
+    public ResponseData<YoshikiYonnoniDiv> onStateTransition(YoshikiYonnoniDiv div) {
+        if (DBU0050021StateName.add.getName().equals(ResponseHolder.getState()) && ADD.equals(get引き継ぎデータ(div).get処理フラグ())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
         }
         return ResponseData.of(div).respond();
     }
