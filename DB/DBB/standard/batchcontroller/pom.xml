@@ -57,7 +57,10 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>

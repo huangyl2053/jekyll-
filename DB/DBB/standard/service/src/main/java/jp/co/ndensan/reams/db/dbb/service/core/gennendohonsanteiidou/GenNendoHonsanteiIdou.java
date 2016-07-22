@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.HosokushaIraiKingaku;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.CalculateFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -95,10 +96,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
@@ -107,6 +111,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTai
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -140,6 +146,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private final DbT2002FukaDac 賦課Dac;
     private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
     private final DbT2001ChoshuHohoDac 徴収方法Dac;
+    private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final RString KEY_CHOTEINENDOYMD = new RString("choteiNendoYMD");
     private static final RString KEY_FUKANENDO = new RString("fukaNendo");
     private static final int INT_1 = 1;
@@ -1486,6 +1493,63 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 HasuChoseiTaisho.toValue(端数調整対象),
                 ランク別制御情報);
         return 年額制御情報;
+    }
+
+    /**
+     * 処理日付管理テーブル更新
+     *
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 年度 FlexibleYear
+     * @param 年度内連番 RString
+     * @param システム日時 YMDHMS
+     */
+    public void update処理日付管理(RString 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番, YMDHMS システム日時) {
+        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課,
+                処理名, 処理枝番, 年度, 年度内連番);
+        if (entityList != null) {
+            update処理日付管理(entityList, システム日時);
+        }
+    }
+
+    /**
+     * 処理日付管理テーブル登録
+     *
+     * @param processParameter バッチパラメータ
+     * @param システム日時 システム日時
+     * @param 年度内連番 年度内連番
+     * @param 処理枝番 処理枝番
+     */
+    public void insert処理日付管理(GennendoIdoFukaProcessParameter processParameter, YMDHMS システム日時, RString 処理枝番, RString 年度内連番) {
+        RString 年度連番;
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select異動賦課最大年度内連番(processParameter.get賦課年度());
+        if (entity != null) {
+            年度連番 = new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1));
+        } else {
+            年度連番 = 年度内連番;
+        }
+        DbT7022ShoriDateKanriEntity newEntity = new DbT7022ShoriDateKanriEntity();
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        newEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+        newEntity.setShichosonCode(導入団体クラス.getLasdecCode_());
+        newEntity.setShoriName(ShoriName.異動賦課.get名称());
+        newEntity.setShoriEdaban(処理枝番);
+        newEntity.setNendo(processParameter.get調定年度());
+        newEntity.setNendoNaiRenban(年度連番);
+        newEntity.setKijunYMD(new FlexibleDate(processParameter.get調定日時().getDate().toString()));
+        newEntity.setKijunTimestamp(システム日時);
+        newEntity.setTaishoKaishiTimestamp(new YMDHMS(processParameter.get抽出開始日時()));
+        newEntity.setTaishoShuryoTimestamp(new YMDHMS(processParameter.get抽出終了日時()));
+        newEntity.setState(EntityDataState.Added);
+        処理日付管理Dac.save(newEntity);
+    }
+
+    private void update処理日付管理(List<DbT7022ShoriDateKanriEntity> entityList, YMDHMS システム日時) {
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.setKijunTimestamp(システム日時);
+            entity.setState(EntityDataState.Modified);
+            処理日付管理Dac.save(entity);
+        }
     }
 
 }
