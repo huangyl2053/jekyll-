@@ -91,6 +91,8 @@ public class TokuchoTaishoshaIchiranSakusei {
     private static final RString 開始月_翌6月 = new RString("06");
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
+    private static final int NUM4 = 4;
+    private static final int NUM6 = 6;
 
     /**
      * コンストラクタです。
@@ -778,11 +780,18 @@ public class TokuchoTaishoshaIchiranSakusei {
                 param.getHosokudukiList().add(捕捉月);
             }
         }
-        param.setTokubetuchoshuKaishiDuki(result.get特別徴収開始月());
+        param.setTokubetuchoshuKaishiDuki(format特別徴収開始月(result.get特別徴収開始月()));
         param.setShuturyokuTaisho(result.get出力対象());
         param.setShoriNichiji(new YMDHMS(nowDateTime));
         param.setKakuninJokyoKubun(result.is確認状況区分());
         return param;
+    }
+
+    private RString format特別徴収開始月(RString 特別徴収開始月全文字) {
+        if (RString.isNullOrEmpty(特別徴収開始月全文字)) {
+            return RString.EMPTY;
+        }
+        return 特別徴収開始月全文字.substring(NUM4, NUM6);
     }
 
     /**
