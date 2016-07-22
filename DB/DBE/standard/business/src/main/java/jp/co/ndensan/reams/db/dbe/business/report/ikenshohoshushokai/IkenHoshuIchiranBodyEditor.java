@@ -54,13 +54,15 @@ public class IkenHoshuIchiranBodyEditor implements IIkenHoshuIchiranEditor {
         source.listIkenshosakuseiryo_15 = item.get作成料();
         source.listIkenshosakuseiryo_16 = item.get診断検査費用();
         source.listIkenshosakuseiryo_17 = item.get合計();
-        source.listGokei_1 = new RString(報酬合計.get在新());
-        source.listGokei_2 = new RString(報酬合計.get在継());
-        source.listGokei_3 = new RString(報酬合計.get施新());
-        source.listGokei_4 = new RString(報酬合計.get施継());
-        source.listGokei_5 = 報酬合計.get作成料();
-        source.listGokei_6 = 報酬合計.get診断検査費用();
-        source.listGokei_7 = 報酬合計.get合計();
+        if (報酬合計.is出力条件()) {
+            source.listGokei_1 = new RString(報酬合計.get在新());
+            source.listGokei_2 = new RString(報酬合計.get在継());
+            source.listGokei_3 = new RString(報酬合計.get施新());
+            source.listGokei_4 = new RString(報酬合計.get施継());
+            source.listGokei_5 = 報酬合計.get作成料();
+            source.listGokei_6 = 報酬合計.get診断検査費用();
+            source.listGokei_7 = 報酬合計.get合計();
+        }
         return source;
     }
 }
