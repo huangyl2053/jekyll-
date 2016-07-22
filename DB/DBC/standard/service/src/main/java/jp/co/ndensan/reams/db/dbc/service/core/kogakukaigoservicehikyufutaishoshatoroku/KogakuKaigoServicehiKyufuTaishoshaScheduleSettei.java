@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -104,22 +103,17 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
             }
         }
         DbT3104KokuhorenInterfaceKanriEntity entity;
+        int 件数カウント = NUM_ZERO;
         for (KokuhorenInterfaceKanri データEntity : データ登録リスト) {
             KokuhorenInterfaceKanri 国保連インターフェース管理 = get国保連インターフェース管理(
                     スケジュール履歴情報List, データEntity);
             if (国保連インターフェース管理 != null) {
                 if (get処理状態区分の比較(国保連インターフェース管理, データEntity)) {
+                    件数カウント = 件数カウント + 1;
+                } else {
                     entity = データEntity.toEntity();
                     entity.setState(EntityDataState.Modified);
                     登録_更新List.add(entity);
-                } else if ((国保連インターフェース管理.get処理状態区分().equals(ShoriJotaiKubun.終了.getコード())
-                        && データEntity.get処理状態区分().equals(ShoriJotaiKubun.処理前.getコード()))
-                        || (国保連インターフェース管理.get処理状態区分().equals(ShoriJotaiKubun.起動.getコード())
-                        && データEntity.get処理状態区分().equals(ShoriJotaiKubun.再処理前.getコード()))) {
-                    get登録_更新List(データEntity, 登録_更新List, 確認Flag);
-                } else if (!国保連インターフェース管理.get処理状態区分().equals(データEntity.get処理状態区分())) {
-                    throw new ApplicationException(DbcErrorMessages.設定不能状態への変更.getMessage().evaluate()
-                            .concat(データEntity.get処理年月().wareki().toDateString().toString()));
                 }
             } else {
                 entity = データEntity.toEntity();
@@ -127,21 +121,11 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
                 登録_更新List.add(entity);
             }
         }
+        if (1 < 件数カウント) {
+            throw new ApplicationException(DbcErrorMessages.高額介護スケジュール変更複数不可.getMessage());
+        }
         for (DbT3104KokuhorenInterfaceKanriEntity saveEntity : 登録_更新List) {
             dbT3104Dac.save(saveEntity);
-        }
-    }
-
-    private void get登録_更新List(KokuhorenInterfaceKanri データEntity,
-            List<DbT3104KokuhorenInterfaceKanriEntity> 登録_更新List,
-            boolean 確認Flag) {
-        DbT3104KokuhorenInterfaceKanriEntity entity;
-        if (確認Flag) {
-            throw new ApplicationException(UrQuestionMessages.処理実行の確認.getMessage());
-        } else {
-            entity = データEntity.toEntity();
-            entity.setState(EntityDataState.Modified);
-            登録_更新List.add(entity);
         }
     }
 
