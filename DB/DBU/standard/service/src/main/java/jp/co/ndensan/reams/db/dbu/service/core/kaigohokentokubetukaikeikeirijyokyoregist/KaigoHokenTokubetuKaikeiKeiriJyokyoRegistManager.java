@@ -554,20 +554,12 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
     public int deleteJigyoHokokuNenpoData(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分,
             LasdecCode 市町村コード, Code 表番号, List<Code> 集計番号list) {
         int 削除件数 = 0;
-        Iterator<Code> it = 集計番号list.iterator();
         DbT7021JigyoHokokuTokeiDataDac dbT7021JigyoHokokuTokeiDataDac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
-        while (it.hasNext()) {
-            DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = new DbT7021JigyoHokokuTokeiDataEntity();
-            dbT7021Entity.setHokokuYSeireki(報告年);
-            dbT7021Entity.setHokokuM(new RString("00"));
-            dbT7021Entity.setShukeiTaishoYSeireki(集計対象年);
-            dbT7021Entity.setShukeiTaishoM(new RString("00"));
-            dbT7021Entity.setToukeiTaishoKubun(統計対象区分);
-            dbT7021Entity.setShichosonCode(市町村コード);
-            dbT7021Entity.setHyoNo(表番号);
-            dbT7021Entity.setShukeiNo(it.next());
-            dbT7021Entity.setState(EntityDataState.Deleted);
-            削除件数 = 削除件数 + dbT7021JigyoHokokuTokeiDataDac.save(dbT7021Entity);
+        List<DbT7021JigyoHokokuTokeiDataEntity> entitys = dbT7021JigyoHokokuTokeiDataDac.select事業報告年報集計データ(報告年, 集計対象年,
+                統計対象区分, 市町村コード, 表番号, 集計番号list);
+        for (DbT7021JigyoHokokuTokeiDataEntity entity : entitys) {
+            entity.setState(EntityDataState.Deleted);
+            削除件数 = 削除件数 + dbT7021JigyoHokokuTokeiDataDac.save(entity);
         }
         return 削除件数;
     }

@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -58,7 +57,6 @@ public class YoshikiYonnoni {
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final int MONTH_6 = 6;
     private static final int INT_4 = 4;
-    private static final RString 保存する = new RString("btnSaveCancel");
     private static final RString 座標1_1 = new RString("1_1");
     private static final RString 座標1_2 = new RString("1_2");
     private static final RString 座標2_1 = new RString("2_1");
@@ -169,6 +167,7 @@ public class YoshikiYonnoni {
                     市町村list.add(keyValueDataSource);
                 }
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDataSource(市町村list);
+                div.getYoshikiYonnoniMeisai().getDdlShicyoson().setSelectedIndex(0);
             }
             RDate date = RDate.getNowDate();
             if (date.getMonthValue() < MONTH_6) {
@@ -187,8 +186,8 @@ public class YoshikiYonnoni {
             div.getYoshikiButtonArea().getBtnYoskiyonosan().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getTxtHokokuYM().setReadOnly(false);
             div.getYoshikiYonnoniMeisai().getTxtShukeiYM().setReadOnly(true);
-            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setVisible(false);
-            div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setVisible(false);
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaNo().setDisplayNone(true);
+            div.getYoshikiYonnoniMeisai().getTxtHihokenshaName().setDisplayNone(true);
             div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(false);
             div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(false);
             div.setShoriMode(内部処理モード_追加);
@@ -290,7 +289,6 @@ public class YoshikiYonnoni {
                 div.getYoshikiYonnoniMeisai().getDdlShicyoson().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().getBtnKakutei().setDisabled(true);
                 div.getYoshikiYonnoniMeisai().setDisabled(true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
 
             } else {
                 throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -336,7 +334,7 @@ public class YoshikiYonnoni {
             return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
     /**
@@ -499,7 +497,7 @@ public class YoshikiYonnoni {
 
             TextBoxFlexibleDate shukeiY = new TextBoxFlexibleDate();
             int 集計年度 = Integer.parseInt(div.getYoshikiYonnoniMeisai().getTxtHokokuYM().getText().substring(0, INT_4).toString()) - 1;
-            shukeiY.setValue(new FlexibleDate(String.valueOf(集計年度)));
+            shukeiY.setValue(new FlexibleDate(new StringBuilder(String.valueOf(集計年度)).append("0101").toString()));
             div.getYoshikiYonnoniMeisai().setTxtShukeiYM(shukeiY);
         }
 
@@ -889,6 +887,8 @@ public class YoshikiYonnoni {
             List<KaigoHokenJigyoHokokuNenpo> list = new ArrayList<>();
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.regKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
+        } else {
+            return ResponseData.of(div).respond();
         }
         div.getKanryoMessage().getCcdKanryoMessage().setMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().replace("登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -916,6 +916,8 @@ public class YoshikiYonnoni {
             List<KaigoHokenJigyoHokokuNenpo> list = new ArrayList<>();
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
+        } else {
+            return ResponseData.of(div).respond();
         }
         div.getKanryoMessage().getCcdKanryoMessage().setMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -943,6 +945,8 @@ public class YoshikiYonnoni {
             List<KaigoHokenJigyoHokokuNenpo> list = new ArrayList<>();
             list.add(kaigoHokenJigyoHokokuNenpo);
             manager.updKaigoHokenTokubetuKaikeiKeiriJyokyo(list);
+        } else {
+            return ResponseData.of(div).respond();
         }
         div.getKanryoMessage().getCcdKanryoMessage().setMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().replace("更新").evaluate()), RString.EMPTY, RString.EMPTY, true);
