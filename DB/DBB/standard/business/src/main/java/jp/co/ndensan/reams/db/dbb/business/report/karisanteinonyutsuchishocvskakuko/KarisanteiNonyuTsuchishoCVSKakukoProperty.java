@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KarisanteiNonyuTsuchishoCVSKakukoProperty extends ReportPropertyBase<KarisanteiNonyuTsuchishoCVSKakukoSource> {
 
-    private static final List<RString> LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    private static final List<RString> LAYOUT_BREAK_KEYS
+            = Collections.unmodifiableList(Arrays.asList(KarisanteiNonyuTsuchishoCVSKakukoSource.LAYOUTBREAKITEM));
 
     /**
      * インスタンスを生成します。
@@ -39,7 +40,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoProperty extends ReportPropertyBas
             Breakers<KarisanteiNonyuTsuchishoCVSKakukoSource> breakers,
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSKakukoSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
+
+
 
 
 

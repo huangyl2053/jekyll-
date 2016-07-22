@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUti
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
@@ -34,7 +35,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
     private static final RString EN = new RString("円");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
     private static final RString SAISYUUKI_HOKENRYO_GAKU = new RString("最終期保険料額");
-    private static final RString NOKIGEN = new RString("納期限");
+    private static final RString NOKIGEN = new RString("本状の納期限");
     private static final RString BANK_CODE_TITLE = new RString("金融機関コード");
     private static final RString KOZA_SHURUI_TITLE = new RString("種別");
     private static final RString BANK_NAME_TITLE = new RString("金融機関");
@@ -45,6 +46,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int リストサイズ１ = 1;
@@ -60,15 +62,13 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
      *
      * @param item {@link KariSanteiNonyuTsuchiShoJoho}
      * @param ninshoshaSource NinshoshaSource
-     * @param renban int
      */
     protected KarisanteiNonyuTsuchishoCVSKakukoCoverEditor(
             KariSanteiNonyuTsuchiShoJoho item,
-            NinshoshaSource ninshoshaSource,
-            int renban) {
+            NinshoshaSource ninshoshaSource) {
         this.item = item;
         this.ninshoshaSource = ninshoshaSource;
-        this.renban = renban;
+        this.renban = item.get連番();
     }
 
     @Override
@@ -81,6 +81,22 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
     private KarisanteiNonyuTsuchishoCVSKakukoSource editSource(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
 
         this.edit宛先(source);
+
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.notsuRenban2 = new RString(renban).padZeroToLeft(INT_6);
+        }
+        source.pageCount2 = new RString(renban + "-2");
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.renban = new RString(renban);
+        }
+
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.notsuRenban3 = new RString(renban).padZeroToLeft(INT_6);
+        }
+        source.pageCount3 = new RString(renban + "-3");
+        if (item.get編集後仮算定通知書共通情報().get保険者名() != null) {
+            source.hokenshaName = new RString(item.get編集後仮算定通知書共通情報().get保険者名().toString());
+        }
 
         if (item.get仮算定納入通知書制御情報() != null
                 && item.get仮算定納入通知書制御情報().get納入通知書制御情報() != null
@@ -116,7 +132,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
                 source.setaiCode = 編集後仮算定通知書共通情報.get編集後個人().get世帯コード().value();
             }
             if (編集後仮算定通知書共通情報.get通知書番号() != null) {
-                source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().value();
+                source.cover_tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().value();
             }
             if (編集後仮算定通知書共通情報.get編集後口座() != null) {
                 source.bankCodeTitle = 編集後仮算定通知書共通情報.get編集後口座().isPresent() ? BANK_CODE_TITLE : RString.EMPTY;
@@ -137,7 +153,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
         this.納入通知書期情報設定(source);
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban1 = new RString(renban);
+            source.notsuRenban1 = new RString(renban).padLeft("0", INT_6);
         }
         source.pageCount1 = new RString(renban + "-1");
 
@@ -162,24 +178,11 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
             }
             this.前年度情報相関設定(source);
 
-            if (item.get編集後仮算定通知書共通情報().get普徴収入情報リスト() != null
-                    && item.get編集後仮算定通知書共通情報().get普徴収入情報リスト().get(1) != null
-                    && item.get編集後仮算定通知書共通情報().get普徴収入情報リスト().get(1).get収入額() != null) {
-                source.keisanMeisaishoKiNofuGaku2
-                        = new RString(item.get編集後仮算定通知書共通情報().get普徴収入情報リスト().get(1).get収入額().toString());
-            }
             source.keisanMeisaishoKisu = new RString(String.valueOf(item.get編集後仮算定通知書共通情報().get普徴期数()));
             if (item.get編集後仮算定通知書共通情報().get更正後() != null
                     && item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額合計() != null) {
-                source.keisanMeisaishoHokenryoGakuGokei = new RString(item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額合計().toString());
-            }
-            if (item.get編集後仮算定通知書共通情報().get保険者名() != null) {
-                source.hokenshaName = new RString(item.get編集後仮算定通知書共通情報().get保険者名().toString());
-            }
-            if (item.get編集後仮算定通知書共通情報().get普徴収入情報リスト() != null
-                    && item.get編集後仮算定通知書共通情報().get普徴収入情報リスト().get(0) != null
-                    && item.get編集後仮算定通知書共通情報().get普徴収入情報リスト().get(0).get収入額() != null) {
-                source.keisanMeisaishoKiNofuGaku1 = new RString(item.get編集後仮算定通知書共通情報().get普徴収入情報リスト().get(0).get収入額().toString());
+                source.keisanMeisaishoHokenryoGakuGokei
+                        = new RString(item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額合計().toString());
             }
         }
 
@@ -188,6 +191,8 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
         if (item.get出力期リスト() != null
                 && item.get出力期リスト().get(0) != null) {
             source.keisanMeisaishoKiTitle1 = new RString("第" + item.get出力期リスト().get(0).get期() + "期");
+            source.keisanMeisaishoKiNofuGaku1 = get普徴期別金額(item.get出力期リスト().get(0).get期AsInt());
+            source.keisanMeisaishoKiNofuGaku2 = get普徴期別金額(item.get出力期リスト().get(0).get期AsInt() + 1);
         } else {
             source.keisanMeisaishoKiTitle1 = new RString("第　期");
         }
@@ -198,19 +203,19 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
         source.keisanMeisaishoKomokuTitle4 = SAISYUUKI_HOKENRYO_GAKU;
         source.keisanMeisaishoYen3 = EN;
 
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban2 = new RString(renban).padZeroToLeft(INT_6);
-        }
-        source.pageCount2 = new RString(renban + "-2");
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.renban = new RString(renban).padZeroToLeft(INT_6);
-        }
-
-        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
-            source.notsuRenban3 = new RString(renban).padZeroToLeft(INT_6);
-        }
-        source.pageCount3 = new RString(renban + "-3");
         return source;
+    }
+
+    private RString get普徴期別金額(int 期) {
+        if (item.get編集後仮算定通知書共通情報() != null && item.get編集後仮算定通知書共通情報().get更正後() != null
+                && item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額リスト() != null) {
+            for (UniversalPhase 普徴期別金額 : item.get編集後仮算定通知書共通情報().get更正後().get更正後普徴期別金額リスト()) {
+                if (普徴期別金額.get期() == 期) {
+                    return null == 普徴期別金額.get金額() ? RString.EMPTY : new RString(普徴期別金額.get金額().toString());
+                }
+            }
+        }
+        return RString.EMPTY;
     }
 
     private void edit納付書(KarisanteiNonyuTsuchishoCVSKakukoSource source) {
@@ -230,7 +235,6 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
 
         if (印字位置1の納付書 != null) {
             source.shunoKikanBango = 印字位置1の納付書.get収納機関番号表示用();
-            //TODO
             source.nofuBango = 印字位置1の納付書.get納付番号();
             source.kakuninBango = 印字位置1の納付書.get確認番号();
             source.nofuKubun = 印字位置1の納付書.get納付区分();
@@ -267,7 +271,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
             source.nokigenYmd = HOSHI_11;
             source.hakkoYmd = HOSHI_11;
             source.honzei = HOSHI_13;
-            source.ocr1 = HOSHI_28;
+            source.ocr1 = HOSHI_22;
             source.ocr2 = HOSHI_28;
             source.cvsToriatsukaikigen = HOSHI_16;
         }
@@ -413,11 +417,11 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
             source.keisanMeisaishoShotokuDankai = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料段階();
             source.keisanMeisaishoNendo2 = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度();
             source.keisanMeisaishoKingaku1 = new RString(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度保険料率().toString());
-            source.kaisanMeisaishoTokuchoGokeiGaku = new RString(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額01()
-                    .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額02())
-                    .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額03())
-                    .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額04())
-                    .add(item.get編集後仮算定通知書共通情報().get前年度情報().get前年度特徴期別金額05()).toString());
+            if (item.get編集後仮算定通知書共通情報().get更正後() != null
+                    && item.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額合計() != null) {
+                source.kaisanMeisaishoTokuchoGokeiGaku
+                        = new RString(item.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額合計().toString());
+            }
 
             source.keisanMeisaishoNendo3 = item.get編集後仮算定通知書共通情報().get前年度情報().get前年度賦課年度();
             if (item.get編集後仮算定通知書共通情報().get前年度情報().get前年度確定介護保険料_年額() != null) {

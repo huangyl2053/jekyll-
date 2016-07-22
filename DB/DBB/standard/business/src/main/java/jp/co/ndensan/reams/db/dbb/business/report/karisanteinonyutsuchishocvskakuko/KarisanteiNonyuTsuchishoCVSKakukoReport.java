@@ -73,11 +73,13 @@ public class KarisanteiNonyuTsuchishoCVSKakukoReport extends NonyuTsuchisho<Kari
             return;
         }
 
-        IKarisanteiNonyuTsuchishoCVSKakukoCoverEditor coverEditor
-                = new KarisanteiNonyuTsuchishoCVSKakukoCoverEditor(item, ninshoshaSource, 1);
-        IKarisanteiNonyuTsuchishoCVSKakukoCoverBuilder builder
-                = new KarisanteiNonyuTsuchishoCVSKakukoCoverBuilder(coverEditor);
-        reportSourceWriter.writeLine(builder);
+        if (HenshuHaniKubun.全てのレイアウト.equals(item.get編集範囲区分())) {
+            IKarisanteiNonyuTsuchishoCVSKakukoCoverEditor coverEditor
+                    = new KarisanteiNonyuTsuchishoCVSKakukoCoverEditor(item, ninshoshaSource);
+            IKarisanteiNonyuTsuchishoCVSKakukoCoverBuilder builder
+                    = new KarisanteiNonyuTsuchishoCVSKakukoCoverBuilder(coverEditor);
+            reportSourceWriter.writeLine(builder);
+        }
 
         Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map1 = new HashMap<>();
         Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map2 = new HashMap<>();
@@ -159,7 +161,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoReport extends NonyuTsuchisho<Kari
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
             IKarisanteiNonyuTsuchishoCVSKakukoCoverEditor coverEditor
-                    = new KarisanteiNonyuTsuchishoCVSKakukoCoverEditor(item, ninshoshaSource, 1);
+                    = new KarisanteiNonyuTsuchishoCVSKakukoCoverEditor(item, ninshoshaSource);
             IKarisanteiNonyuTsuchishoCVSKakukoCoverBuilder builder
                     = new KarisanteiNonyuTsuchishoCVSKakukoCoverBuilder(coverEditor);
             reportSourceWriter.writeLine(builder);
@@ -240,6 +242,7 @@ public class KarisanteiNonyuTsuchishoCVSKakukoReport extends NonyuTsuchisho<Kari
         new仮算定納入通知書情報.set編集後仮算定通知書共通情報(item.get編集後仮算定通知書共通情報());
         new仮算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new仮算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new仮算定納入通知書情報.set連番(item.get連番());
         return new仮算定納入通知書情報;
     }
 }

@@ -40,7 +40,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoProperty extends ReportProper
             Breakers<KarisanteiNonyuTsuchishoCVSMultiRenchoSource> breakers,
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSMultiRenchoSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
 
 
 
