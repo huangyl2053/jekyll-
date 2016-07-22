@@ -55,6 +55,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601005"));
     private static final RString CSV_NAME = new RString("Shinsahoshuichiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 一覧表を発行する = new RString("2");
@@ -68,7 +69,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
-    private static final RString SHUSEKINITI = new RString("出席日");
+    private static final RString SHUSEKINITI = new RString("（出席日");
     private static final RString GATSU = new RString("月）");
     private static final int YON = 4;
     private int 総合計_審査回数;
@@ -77,11 +78,10 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private Decimal 総合計_報酬合計;
 
     @BatchWriter
+    private EucCsvWriter<IShinsaHoshuIchiranEntityCsvEucEntity> eucCsvWriterJunitoJugo;
+    @BatchWriter
     private BatchReportWriter<ShinsaHoshuIchiranReportSource> batchWrite;
     private ReportSourceWriter<ShinsaHoshuIchiranReportSource> reportSourceWriter;
-
-    @BatchWriter
-    private EucCsvWriter<IShinsaHoshuIchiranEntityCsvEucEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void initialize() {
@@ -110,18 +110,15 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
-        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                    setEncode(Encode.UTF_8withBOM)
-                    .setDelimiter(EUC_WRITER_DELIMITER)
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(true).
-                    build();
-        }
-        if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
-            batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE601005.getReportId().value()).create();
-            reportSourceWriter = new ReportSourceWriter<>(batchWrite);
-        }
+        eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+                setEncode(Encode.UTF_8withBOM)
+                .setDelimiter(EUC_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true).
+                build();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE601005.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
     @Override
@@ -262,11 +259,6 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         printer.print();
     }
 
-    /**
-     * 出席回数の取得
-     *
-     * @param 出席状況
-     */
     private void get出席回数(RString 出席状況) {
         if (ShinsaHoshuIchiranProcess.長.equals(出席状況) || ShinsaHoshuIchiranProcess.副.equals(出席状況) || ShinsaHoshuIchiranProcess.出.equals(出席状況)) {
             出席回数++;
@@ -280,12 +272,6 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         return new RDate(date.toString()).wareki().toDateString();
     }
 
-    /**
-     * 出席日のフォーマット
-     *
-     * @param date 出席の時間
-     * @return 出席日
-     */
     private static RString set出席日(RString date) {
 
         if (RString.isNullOrEmpty(date)) {

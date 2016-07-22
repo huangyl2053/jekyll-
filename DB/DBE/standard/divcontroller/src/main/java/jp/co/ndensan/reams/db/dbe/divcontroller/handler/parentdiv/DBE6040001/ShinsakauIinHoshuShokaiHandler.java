@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran.ShinsaHoshuIc
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsahoshuichiran.ShinsaHoshuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.dgShinsakaiIinHoshu_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -50,6 +51,8 @@ public class ShinsakauIinHoshuShokaiHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
         div.getShinsakaiIinHoshu().setDisplayNone(true);
         div.getShinsakaiKaisaibi().setDisplayNone(false);
+        div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().setPlaceHolder(
+                RDate.getNowDate().getYearMonth().wareki().toDateString());
     }
 
     /**

@@ -59,4 +59,7 @@ public class ShinsaHoshuIchiranRelateEntity {
     private Decimal 報酬総額;
     private Decimal 税額控除;
     private Decimal 報酬合計;
+    private Decimal 総合計_報酬総額;
+    private Decimal 総合計_税控除額;
+    private Decimal 総合計_報酬合計;
 }
