@@ -181,7 +181,7 @@ public class NinteiKekkaJoho extends
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final NinteiShinseiJoho other = (NinteiShinseiJoho) obj;
+//        final NinteiShinseiJoho other = (NinteiShinseiJoho) obj;
 //        if (!Objects.equals(this.id, other.id)) {
 //            return false;
 //        }
