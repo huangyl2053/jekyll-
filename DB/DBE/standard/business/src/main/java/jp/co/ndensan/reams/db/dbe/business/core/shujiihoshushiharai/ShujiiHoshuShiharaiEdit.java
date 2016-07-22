@@ -72,6 +72,7 @@ public class ShujiiHoshuShiharaiEdit {
         seikyuEntity.set名称付与(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬支払通知書_宛先敬称, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         seikyuEntity.setバーコード(ChosaHoshuShiharaiEdit.getバーコード(entity));
+        seikyuEntity.setその他(entity.getShujiiIryoKikanCode());
         Decimal 税率 = rstringToDecimal(消費税率);
         Decimal 単価税込 = entity.getTanka().multiply(税率);
         if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
