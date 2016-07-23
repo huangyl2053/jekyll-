@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.Shinsak
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
@@ -47,9 +46,9 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
     private ShinsakaishiryoA3ReportSource editItem(ShinsakaishiryoA3ReportSource source) {
         source.shinsakaiNo = get審査会番号(business.get審査会番号());
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
-        source.gogitaiNo = RStringUtil.convert半角to全角(business.get合議体番号());
+        source.gogitaiNo = business.get合議体番号();
         source.listShinsainName_1 = business.get審査員一覧();
-        source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(business.get審査対象者数());
+        source.shinsaTaishoshaCount = business.get審査対象者数();
         int no = business.getNo();
         if (INT_25 < no) {
             source.listShinsei2_1 = business.get審査会審査順();
