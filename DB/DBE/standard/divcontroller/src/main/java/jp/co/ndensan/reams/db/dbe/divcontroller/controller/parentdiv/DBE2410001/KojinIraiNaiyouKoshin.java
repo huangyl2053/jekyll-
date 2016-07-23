@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.kojinirainaiyoukoshin.KojinIraiNa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -35,7 +34,7 @@ public class KojinIraiNaiyouKoshin {
         KojinIraiNaiyouBusiness 前回調査情報 = KojinIraiNaiyouKoshinFinder.createInstance().getZennkaiChousa(申請書管理番号);
         KojinIraiNaiyouBusiness 前回主治医情報 = KojinIraiNaiyouKoshinFinder.createInstance().getZennkaiSyuji(申請書管理番号);
         getHandler(div).onLoad(申請書管理番号, 今回調査情報, 今回主治医情報, 前回調査情報, 前回主治医情報);
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, RString.class);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号.value());
         return ResponseData.of(div).respond();
     }
 
