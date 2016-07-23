@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬一覧表の帳票のパラメータを作成します。
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsaHoshuIchiranChange {
 
+    private static final int ZERO = 0;
     private static final RString 欠 = new RString("欠");
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
@@ -88,9 +90,11 @@ public class ShinsaHoshuIchiranChange {
                     審査会委員.get出席状況_26日(), 審査会委員.get出席状況_27日(),
                     審査会委員.get出席状況_28日(), 審査会委員.get出席状況_29日(),
                     審査会委員.get出席状況_30日(), 審査会委員.get出席状況_31日(),
-                    new RString(entity.get出席回数()), new RString(entity.get報酬総額().toString()),
-                    new RString(entity.getその他費用().toString()),
-                    new RString(entity.get税額控除().toString()), new RString(entity.get報酬合計().toString()),
+                    new RString(entity.get出席回数()),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.getその他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get税額控除(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬合計(), ZERO),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else {
             委員報酬一覧表 = new ShinsaHoshuIchiranEntity(
@@ -111,11 +115,15 @@ public class ShinsaHoshuIchiranChange {
                     審査会委員.get出席状況_26日(), 審査会委員.get出席状況_27日(),
                     審査会委員.get出席状況_28日(), 審査会委員.get出席状況_29日(),
                     審査会委員.get出席状況_30日(), 審査会委員.get出席状況_31日(),
-                    new RString(entity.get出席回数()), new RString(entity.get報酬総額().toString()),
-                    new RString(entity.getその他費用().toString()), new RString(entity.get税額控除().toString()),
-                    new RString(entity.get報酬合計().toString()), RString.EMPTY,
-                    new RString(entity.get総合計_報酬総額().toString()), new RString(entity.get総合計_その他費用().toString()),
-                    new RString(entity.get総合計_税控除額().toString()), new RString(entity.get総合計_報酬合計().toString())
+                    new RString(entity.get出席回数()),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.getその他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get税額控除(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬合計(), ZERO), RString.EMPTY,
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_その他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_税控除額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_報酬合計(), ZERO)
             );
         }
 

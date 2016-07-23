@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬一覧表のプロセス処理の帳票出力のプロセスクラスです。
@@ -229,9 +230,11 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                     null, null, null, null, null,
                     null, null, null, null, null,
                     null, null, null, null, null,
-                    null, null, null, null, new RString(総合計_審査回数), new RString(総合計_報酬総額.toString()),
-                    new RString(総合計_その他費用.toString()),
-                    new RString(総合計_税控除額.toString()), new RString(総合計_報酬合計.toString()));
+                    null, null, null, null, new RString(総合計_審査回数),
+                    DecimalFormatter.toコンマ区切りRString(総合計_報酬総額, ZERO),
+                    DecimalFormatter.toコンマ区切りRString(総合計_その他費用, ZERO),
+                    DecimalFormatter.toコンマ区切りRString(総合計_税控除額, ZERO),
+                    DecimalFormatter.toコンマ区切りRString(総合計_報酬合計, ZERO));
             eucCsvWriterJunitoJugo.writeLine(総合計);
             eucCsvWriterJunitoJugo.close();
         }
