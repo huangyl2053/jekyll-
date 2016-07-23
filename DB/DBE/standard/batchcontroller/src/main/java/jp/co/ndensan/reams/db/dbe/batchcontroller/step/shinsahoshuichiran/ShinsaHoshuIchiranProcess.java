@@ -204,7 +204,6 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                     総合計_税控除額 = relateEntity.get税額控除();
                     総合計_報酬合計 = relateEntity.get総合計_報酬合計();
                 }
-                初期化フラグ = 初期化フラグ + 1;
                 if (CSVを出力する.equals(paramter.get帳票出力区分())) {
                     eucCsvWriterJunitoJugo.writeLine(change.createData(relateEntity, paramter.get帳票出力区分()));
                 } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
@@ -214,6 +213,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 if (初期化フラグ == NIJYU) {
                     return;
                 }
+                初期化フラグ = 初期化フラグ + 1;
             }
         }
     }
