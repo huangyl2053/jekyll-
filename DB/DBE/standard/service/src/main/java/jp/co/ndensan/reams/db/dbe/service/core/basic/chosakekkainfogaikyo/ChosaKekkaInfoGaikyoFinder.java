@@ -57,8 +57,8 @@ public class ChosaKekkaInfoGaikyoFinder {
     /**
      * 認定調査結果情報照会を取得します。
      *
-     * @param 認定調査結果情報照会検索条件 ChosaKekkaInfoGaikyoParameter
-     * @return SearchResult<ChosaKekkaInfoGaikyoBusiness> 認定調査結果情報照会
+     * @param 認定調査結果情報照会検索条件 認定調査結果情報照会検索条件
+     * @return 認定調査結果情報照会情報
      */
     @Transaction
     public SearchResult<ChosaKekkaInfoGaikyoBusiness> getChosaKekkaInfoGaikyo(ChosaKekkaInfoGaikyoParameter 認定調査結果情報照会検索条件) {
@@ -74,8 +74,8 @@ public class ChosaKekkaInfoGaikyoFinder {
     /**
      * 認定調査結果情報照会を取得します。
      *
-     * @param 認定調査結果情報照会検索条件 ChosaKekkaInfoGaikyoParameter
-     * @return SearchResult<NinteichosahyoServiceJokyo> 認定調査結果情報照会
+     * @param 認定調査結果情報照会検索条件 認定調査結果情報照会検索条件
+     * @return 認定調査結果情報照会情報
      */
     @Transaction
     public SearchResult<RembanServiceJokyoBusiness> getRembanServiceJokyo(ChosaKekkaInfoGaikyoParameter 認定調査結果情報照会検索条件) {
@@ -88,27 +88,11 @@ public class ChosaKekkaInfoGaikyoFinder {
         return SearchResult.of(businessList, 0, false);
     }
 
-//    /**
-//     * 認定調査結果情報照会を取得します。
-//     *
-//     * @param 認定調査結果情報照会検索条件 ChosaKekkaInfoGaikyoParameter
-//     * @return SearchResult<NinteichosahyoServiceJokyoFlag> 認定調査結果情報照会
-//     */
-//    @Transaction
-//    public SearchResult<NinteichosahyoServiceJokyoFlag> get5208NinteichosahyoService(ChosaKekkaInfoGaikyoParameter 認定調査結果情報照会検索条件) {
-//        List<NinteichosahyoServiceJokyoFlag> businessList = new ArrayList<>();
-//        IChosaKekkaInfoGaikyoMapper mapper = mapperProvider.create(IChosaKekkaInfoGaikyoMapper.class);
-//        List<DbT5208NinteichosahyoServiceJokyoFlagEntity> ninteiEntity = mapper.getChosaKekkaInfoGaikyoList3(認定調査結果情報照会検索条件);
-//        for (DbT5208NinteichosahyoServiceJokyoFlagEntity relateEntity : ninteiEntity) {
-//            businessList.add(new NinteichosahyoServiceJokyoFlag(relateEntity));
-//        }
-//        return SearchResult.of(businessList, 0, false);
-//    }
     /**
      * 認定調査結果情報照会を取得します。
      *
-     * @param 認定調査結果情報照会検索条件 ChosaKekkaInfoGaikyoParameter
-     * @return SearchResult<NinteichosahyoShisetsuRiyo> 認定調査結果情報照会
+     * @param 認定調査結果情報照会検索条件 認定調査結果情報照会検索条件
+     * @return 認定調査結果情報照会情報
      */
     @Transaction
     public SearchResult<NinteichosahyoShisetsuRiyo> get5210NinteichosahyoShisetsu(ChosaKekkaInfoGaikyoParameter 認定調査結果情報照会検索条件) {

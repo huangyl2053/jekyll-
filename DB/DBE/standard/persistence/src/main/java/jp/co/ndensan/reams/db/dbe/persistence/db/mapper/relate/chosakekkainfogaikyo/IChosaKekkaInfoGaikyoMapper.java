@@ -22,7 +22,7 @@ public interface IChosaKekkaInfoGaikyoMapper {
      * 認定調査結果情報照会_概況調査のリストを取得します。
      *
      * @param 認定調査票_概況調査検索条件 認定調査票_概況調査検索条件
-     * @return ChosaKekkaInfoGaikyoRelateEntity
+     * @return List<ChosaKekkaInfoGaikyoRelateEntity>
      */
     List<ChosaKekkaInfoGaikyoRelateEntity> getChosaKekkaInfoGaikyoList1(ChosaKekkaInfoGaikyoParameter 認定調査票_概況調査検索条件);
 
@@ -30,7 +30,7 @@ public interface IChosaKekkaInfoGaikyoMapper {
      * 認定調査結果情報照会_概況調査のリストを取得します。
      *
      * @param 認定調査票_サービスの状況検索条件 認定調査票_サービスの状況検索条件
-     * @return RembanServiceJokyoRelateEntity
+     * @return List<RembanServiceJokyoRelateEntity>
      */
     List<RembanServiceJokyoRelateEntity> getChosaKekkaInfoGaikyoList2(ChosaKekkaInfoGaikyoParameter 認定調査票_サービスの状況検索条件);
 
@@ -38,7 +38,7 @@ public interface IChosaKekkaInfoGaikyoMapper {
      * 認定調査結果情報照会_概況調査のリストを取得します。
      *
      * @param 認定調査票_施設利用検索条件 認定調査票_施設利用検索条件
-     * @return DbT5210NinteichosahyoShisetsuRiyoEntity
+     * @return List<DbT5210NinteichosahyoShisetsuRiyoEntity>
      */
     List<DbT5210NinteichosahyoShisetsuRiyoEntity> getChosaKekkaInfoGaikyoList3(ChosaKekkaInfoGaikyoParameter 認定調査票_施設利用検索条件);
 }
