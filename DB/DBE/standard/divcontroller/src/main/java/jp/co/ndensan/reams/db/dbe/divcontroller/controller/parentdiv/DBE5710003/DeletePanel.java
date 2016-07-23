@@ -61,6 +61,10 @@ public class DeletePanel {
      * @return ResponseData
      */
     public ResponseData<DeletePanelDiv> onClick_btnDelete(DeletePanelDiv div) {
+        if (new RString(UrInformationMessages.削除終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
         ValidationMessageControlPairs controlPairs = getValidationHandler(div).入力チェック_btnDelete();
@@ -85,7 +89,7 @@ public class DeletePanel {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-                SharedFile.deleteFileInEntry(descriptor, イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号()).toString());
+                SharedFile.deleteEntry(descriptor);
                 updateOrDelete(div);
                 return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
             } else {
@@ -94,14 +98,9 @@ public class DeletePanel {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            SharedFile.deleteFileInEntry(descriptor, イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号()).toString());
+            SharedFile.deleteEntry(descriptor);
             updateOrDelete(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
         }
