@@ -604,7 +604,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
     public ShinsakaiIinHoshuJissekiJohoBuilder onClick_Update(Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> models,
             dgShinsakaiJisseki_Row row) {
         div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().getValue().intValue();
-        ShinsakaiIinHoshuJissekiJohoIdentifier key = getKey();
+        ShinsakaiIinHoshuJissekiJohoIdentifier key = getKey(row);
         ShinsakaiIinHoshuJissekiJoho shinasa = models.get(key);
         ShinsakaiIinHoshuJissekiJohoBuilder build = shinasa.createBuilderForEdit();
         build.set介護認定審査会報酬税率(Integer.valueOf(row.getZeiritsu().toString()));
@@ -625,21 +625,22 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
     /**
      * Keyの取得する。
      *
+     * @param row dgShinsakaiJisseki_Row
      * @return ShinsakaiIinHoshuJissekiJohoIdentifier
      */
-    public ShinsakaiIinHoshuJissekiJohoIdentifier getKey() {
+    public ShinsakaiIinHoshuJissekiJohoIdentifier getKey(dgShinsakaiJisseki_Row row) {
         RString kuBun = RString.EMPTY;
         RString 審査会委員報酬区分 = div.getShinsakaiJisseki().getTxtShisakaiIinCode().getValue();
-        if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
+        if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(row.getKubun())) {
             kuBun = ShinsakaiIinHoshukubun.審査報酬.getコード();
-        } else if (ShinsakaiIinHoshukubun.その他報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
+        } else if (ShinsakaiIinHoshukubun.その他報酬.get名称().equals(row.getKubun())) {
             kuBun = ShinsakaiIinHoshukubun.その他報酬.getコード();
         }
         ShinsakaiIinHoshuJissekiJohoIdentifier key = new ShinsakaiIinHoshuJissekiJohoIdentifier(
                 審査会委員報酬区分,
                 new Code(kuBun.toString()),
-                toFlexibleDate(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()),
-                Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getRemban().toString()));
+                toFlexibleDate(row.getJisshiNengappi()),
+                Integer.valueOf(row.getRemban().toString()));
         return key;
     }
 
@@ -647,39 +648,28 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
      * 追加の場合下、値を得到する。
      *
      * @param row 審査会委員一覧情報
+     * @param maxRemBan maxRemBan
      * @return ShinsakaiIinHoshuJissekiJohoBuilder
      */
-    public ShinsakaiIinHoshuJissekiJohoBuilder getValues(dgShinsakaiJisseki_Row row) {
-        RString kuBun = RString.EMPTY;
-        int remBan;
-        if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
-            kuBun = ShinsakaiIinHoshukubun.審査報酬.getコード();
-        } else if (ShinsakaiIinHoshukubun.その他報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
-            kuBun = ShinsakaiIinHoshukubun.その他報酬.getコード();
-        }
-        if (div.getDgShinsakaiJisseki().getSelectedItems().get(0).getRemban().isNullOrEmpty()) {
-            remBan = 1;
-        } else {
-            remBan = Integer.valueOf(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getRemban().toString());
-            remBan = remBan + 1;
-        }
+    public ShinsakaiIinHoshuJissekiJohoBuilder getValues(dgShinsakaiJisseki_Row row, int maxRemBan) {
+        RString kuBun = getKubun(row);
         ShinsakaiIinHoshuJissekiJoho shinsakaiIinHoshuJissekiJoho = new ShinsakaiIinHoshuJissekiJoho(
                 div.getShinsakaiJisseki().getTxtShisakaiIinCode().getValue(),
                 new Code(kuBun.toString()),
-                toFlexibleDate(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getJisshiNengappi()),
-                remBan
+                toFlexibleDate(row.getJisshiNengappi()),
+                maxRemBan
         );
         ShinsakaiIinHoshuJissekiJohoBuilder build = shinsakaiIinHoshuJissekiJoho.createBuilderForEdit();
-        build.set介護認定審査会開催番号(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsakaiKaisaiBango());
-        build.set介護認定審査会報酬税率(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu()).intValue());
-        build.set介護認定審査報酬(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShinsaHoshukaku()).intValue());
-        build.set介護認定審査その他報酬(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getSonotaHoshukaku()).intValue());
-        build.set介護認定審査交通費等(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKotsuhito()).intValue());
-        build.set介護認定審査控除税額(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKojozeigaku()).intValue());
-        build.set介護認定審査報酬合計(toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeibikigoShiharaigaku()).intValue());
+        build.set介護認定審査会開催番号(row.getShinsakaiKaisaiBango());
+        build.set介護認定審査会報酬税率(toDecimal(row.getZeiritsu()).intValue());
+        build.set介護認定審査報酬(toDecimal(row.getShinsaHoshukaku()).intValue());
+        build.set介護認定審査その他報酬(toDecimal(row.getSonotaHoshukaku()).intValue());
+        build.set介護認定審査交通費等(toDecimal(row.getKotsuhito()).intValue());
+        build.set介護認定審査控除税額(toDecimal(row.getKojozeigaku()).intValue());
+        build.set介護認定審査報酬合計(toDecimal(row.getZeibikigoShiharaigaku()).intValue());
         build.set介護認定審査報酬支払年月日(FlexibleDate.EMPTY);
-        build.set介護認定審査報酬支払メモ(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getShiharaiMemo());
-        if (振込_出力済.equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getFurikomi())) {
+        build.set介護認定審査報酬支払メモ(row.getShiharaiMemo());
+        if (振込_出力済.equals(row.getFurikomi())) {
             build.set銀行振込出力フラグ(true);
         } else {
             build.set銀行振込出力フラグ(false);
@@ -706,6 +696,22 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(税率);
         div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().getValue();
         div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(実施日Flag);
+    }
+
+    /**
+     * 区分の取得です。
+     *
+     * @param row dgShinsakaiJisseki_Row
+     * @return 区分
+     */
+    public RString getKubun(dgShinsakaiJisseki_Row row) {
+        RString kuBun = RString.EMPTY;
+        if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(row.getKubun())) {
+            kuBun = ShinsakaiIinHoshukubun.審査報酬.getコード();
+        } else if (ShinsakaiIinHoshukubun.その他報酬.get名称().equals(row.getKubun())) {
+            kuBun = ShinsakaiIinHoshukubun.その他報酬.getコード();
+        }
+        return kuBun;
     }
 
     private RString dateFormat(RString obj) {
