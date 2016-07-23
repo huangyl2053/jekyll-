@@ -292,7 +292,7 @@ public class NinteiChosaIraiShudou {
         }
 
         if (!div.getChkRirekiIchiran().getSelectedKeys().isEmpty()) {
-            NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy被保険者番号(new RString(""));
+            NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy被保険者番号(div.getCcdNinteiShinseishaKihonInfo().get被保険者番号());
             List<NinnteiChousairaiShudouBusiness> 認定調査依頼該当者履歴一覧 = finder.get認定調査依頼該当者履歴一覧(parameter).records();
             if (!認定調査依頼該当者履歴一覧.isEmpty()) {
                 printService.print認定調査依頼該当者履歴一覧(
@@ -305,7 +305,7 @@ public class NinteiChosaIraiShudou {
         RDate date = RDate.getNowDate();
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         List<NinnteiChousairaiShudouBusiness> businessList = NinnteiChousairaiShudouFinder.createInstance()
-                .get認定調査票_概況調査(NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号)).records();
+                .get認定調査票差異チェック票(NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号)).records();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             printService.print要介護認定調査票差異チェック票_片面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ(businessList));
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
@@ -528,26 +528,28 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnPrint_after(NinteiChosaIraiShudouDiv div) {
-
-        if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, CONFIGVALUE1);
-        } else {
-            ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, RString.EMPTY);
+        if (!ResponseHolder.isReRequest()) {
+            if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
+                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, CONFIGVALUE1);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, RString.EMPTY);
+            }
+            if (div.getChkGaikyoChosa().getSelectedKeys().isEmpty()
+                    && div.getChkKihonChosa().getSelectedKeys().isEmpty()
+                    && div.getChkTokukiJiko().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoTokuki().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoChosaOCR().getSelectedKeys().isEmpty()
+                    && div.getChkKihonChosaOCR().getSelectedKeys().isEmpty()
+                    && div.getChkTokukiJikoOCR().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoTokukiOCR().getSelectedKeys().isEmpty()
+                    && div.getChkFuriYoshi().getSelectedKeys().isEmpty()) {
+                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, RString.EMPTY);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
+            }
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
         }
-        if (div.getChkGaikyoChosa().getSelectedKeys().isEmpty()
-                && div.getChkKihonChosa().getSelectedKeys().isEmpty()
-                && div.getChkTokukiJiko().getSelectedKeys().isEmpty()
-                && div.getChkGaikyoTokuki().getSelectedKeys().isEmpty()
-                && div.getChkGaikyoChosaOCR().getSelectedKeys().isEmpty()
-                && div.getChkKihonChosaOCR().getSelectedKeys().isEmpty()
-                && div.getChkTokukiJikoOCR().getSelectedKeys().isEmpty()
-                && div.getChkGaikyoTokukiOCR().getSelectedKeys().isEmpty()
-                && div.getChkFuriYoshi().getSelectedKeys().isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, RString.EMPTY);
-        } else {
-            ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
-        }
-        return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
