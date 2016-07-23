@@ -32,6 +32,20 @@
     },
     {
      "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0070011",
+     "layoutTitle": "介護保険連絡票作成",
+     "eventName": "再検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBU",
      "layoutName": "DBU0070011",
