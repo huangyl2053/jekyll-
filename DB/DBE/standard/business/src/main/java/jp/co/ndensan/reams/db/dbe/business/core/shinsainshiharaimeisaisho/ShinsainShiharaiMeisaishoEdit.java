@@ -48,8 +48,8 @@ public class ShinsainShiharaiMeisaishoEdit {
         meisaisho.set帳票印刷日時(dateFormat142());
         meisaisho.set被保険者番号(entity.getHihokenshaNo());
         meisaisho.set被保険者氏名(entity.getHihokenshaName().value());
-        meisaisho.set生年月日(dateFormat9(entity.getSeinengappiYMD()));
-        meisaisho.set査会開催年月日(dateFormat9(entity.getShinsakaiKaisaiYMD()));
+        meisaisho.set生年月日(dateFormat(entity.getSeinengappiYMD()));
+        meisaisho.set査会開催年月日(dateFormat(entity.getShinsakaiKaisaiYMD()));
         meisaisho.set報酬総額(new RString(entity.getHoshu()));
         meisaisho.set費用弁償(new RString(entity.getShinsakaiKotsuhi()));
         meisaisho.set税額控除(new RString(entity.getShinsakaiKojoZeigaku()));
@@ -57,12 +57,11 @@ public class ShinsainShiharaiMeisaishoEdit {
         return meisaisho;
     }
 
-    private RString dateFormat9(FlexibleDate date) {
+    private RString dateFormat(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        return date.wareki().toDateString();
     }
 
     private RString dateFormat142() {

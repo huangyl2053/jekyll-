@@ -70,6 +70,8 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
     private Decimal 合計件数継続在宅 = Decimal.ZERO;
     private Decimal 合計件数継続施設 = Decimal.ZERO;
     private Decimal 合計金額 = Decimal.ZERO;
+    private RString iryokikanName = RString.EMPTY;
+    private RString shujiiCode = RString.EMPTY;
 
     @BatchWriter
     private BatchReportWriter<ShujiiHoshumeisaiReportSource> batchWrite;
@@ -78,6 +80,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
     private RString 市町村名;
     private RString 消費税率;
     private int index_tmp = 1;
+    private static final int INDEX_25 = 1;
 
     @Override
     protected void beforeExecute() {
@@ -181,22 +184,33 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
 
     private ShujiiHoshumeisaiEntity editShujiiHoshumeisaiEntity(ShujiiHoshumeisaiEntity shumeisaiEntity,
             HoshuShiharaiJunbiRelateEntity current) {
+        if (!iryokikanName.equals(current.getIryoKikanMeisho()) || !shujiiCode.equals(current.getShujiiCode())
+                || index_tmp % INDEX_25 == 1) {
+            合計金額 = Decimal.ZERO;
+            index_tmp = 1;
+            合計件数新規在宅 = Decimal.ZERO;
+            合計件数新規施設 = Decimal.ZERO;
+            合計件数継続在宅 = Decimal.ZERO;
+            合計件数継続施設 = Decimal.ZERO;
+            iryokikanName = current.getIryoKikanMeisho();
+            shujiiCode = current.getShujiiCode();
+        }
         合計件数新規在宅 = 合計件数新規在宅.add(rstringToDecimal(shumeisaiEntity.get新規在宅件数()));
         合計件数新規施設 = 合計件数新規施設.add(rstringToDecimal(shumeisaiEntity.get新規施設件数()));
         合計件数継続在宅 = 合計件数継続在宅.add(rstringToDecimal(shumeisaiEntity.get継続在宅件数()));
         合計件数継続施設 = 合計件数継続施設.add(rstringToDecimal(shumeisaiEntity.get継続施設件数()));
-        shumeisaiEntity.set新規在宅件数(decimalToRString(合計件数新規在宅));
-        shumeisaiEntity.set新規施設件数(decimalToRString(合計件数新規施設));
-        shumeisaiEntity.set継続在宅件数(decimalToRString(合計件数継続在宅));
-        shumeisaiEntity.set継続施設件数(decimalToRString(合計件数継続施設));
+        shumeisaiEntity.set新規在宅件数(decimalToRString(合計件数新規在宅.roundUpTo(0)));
+        shumeisaiEntity.set新規施設件数(decimalToRString(合計件数新規施設.roundUpTo(0)));
+        shumeisaiEntity.set継続在宅件数(decimalToRString(合計件数継続在宅.roundUpTo(0)));
+        shumeisaiEntity.set継続施設件数(decimalToRString(合計件数継続施設.roundUpTo(0)));
         合計金額 = 合計金額.add(rstringToDecimal(shumeisaiEntity.get合計金額()));
-        shumeisaiEntity.set合計金額(decimalToRString(合計金額));
+        shumeisaiEntity.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
         Decimal 消費税 = 合計金額.multiply(rstringToDecimal(消費税率)).subtract(合計金額);
         shumeisaiEntity.set対象期間(get対象期間());
         shumeisaiEntity.set明細番号(intToRString(index_tmp));
         shumeisaiEntity.set生年月日(dateFormat9(current.getSeinengappiYMD()));
-        shumeisaiEntity.set消費税(decimalToRString(消費税));
-        shumeisaiEntity.set合計請求額(decimalToRString(合計金額.add(消費税)));
+        shumeisaiEntity.set消費税(decimalToRString(消費税.roundUpTo(0)));
+        shumeisaiEntity.set合計請求額(decimalToRString(合計金額.add(消費税).roundUpTo(0)));
         return shumeisaiEntity;
     }
 

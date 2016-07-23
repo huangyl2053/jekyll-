@@ -51,7 +51,7 @@ public class IinhoshushiharaiReportSource implements IReportSource {
     @ReportItem(name = "tsuchibun1", order = 19)
     public RString tsuchibun1;
     @ReportItem(name = "IshiName", length = 30, order = 20)
-    public RString IshiName;
+    public RString ishiName;
     @ReportItem(name = "listHoshuhi_1", length = 8, order = 21)
     public RString listHoshuhi_1;
     @ReportItem(name = "listGokei_1", length = 8, order = 22)

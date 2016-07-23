@@ -77,14 +77,14 @@ public class ChosahoshuseikyuEdit {
         Decimal 新規施設計 = 単価.multiply(rstringToInt(shuseikyu.get新規施設件数()));
         Decimal 更新在宅計 = 単価.multiply(rstringToInt(shuseikyu.get更新在宅件数()));
         Decimal 更新施設計 = 単価.multiply(rstringToInt(shuseikyu.get更新施設件数()));
-        shuseikyu.set新規在宅計(decimalToRString(新規在宅計));
-        shuseikyu.set新規施設計(decimalToRString(新規施設計));
-        shuseikyu.set更新在宅計(decimalToRString(更新在宅計));
-        shuseikyu.set更新施設計(decimalToRString(更新施設計));
+        shuseikyu.set新規在宅計(decimalToRString(新規在宅計.roundUpTo(0)));
+        shuseikyu.set新規施設計(decimalToRString(新規施設計.roundUpTo(0)));
+        shuseikyu.set更新在宅計(decimalToRString(更新在宅計.roundUpTo(0)));
+        shuseikyu.set更新施設計(decimalToRString(更新施設計.roundUpTo(0)));
         Decimal 作成件数合計 = Decimal.ZERO;
         作成件数合計 = 作成件数合計.add(rstringToInt(shuseikyu.get新規在宅件数())).add(rstringToInt(shuseikyu.get新規施設件数()))
                 .add(rstringToInt(shuseikyu.get更新在宅件数())).add(rstringToInt(shuseikyu.get更新施設件数()));
-        shuseikyu.set作成件数合計(decimalToRString(作成件数合計));
+        shuseikyu.set作成件数合計(decimalToRString(作成件数合計.roundUpTo(0)));
         Decimal 小計 = 新規在宅計.add(新規施設計).add(更新在宅計).add(更新施設計);
         shuseikyu.set小計(decimalToRString(小計.roundUpTo(0)));
         Decimal 消費税額 = 小計.multiply(rstringToDecimal(消費税率)).subtract(小計);

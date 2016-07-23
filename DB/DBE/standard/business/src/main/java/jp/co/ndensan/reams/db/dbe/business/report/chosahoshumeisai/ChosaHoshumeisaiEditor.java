@@ -61,6 +61,7 @@ public class ChosaHoshumeisaiEditor implements IChosaHoshumeisaiEditor {
         source.gokeiKingaku = kinngakuFormat(item.get合計金額());
         source.shouhiZei = kinngakuFormat(item.get消費税());
         source.gokeiSeikyuKingaku = kinngakuFormat(item.get合計請求額());
+        source.ninteichosainCode = item.get調査員コード();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get被保険者番号() != null) {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
