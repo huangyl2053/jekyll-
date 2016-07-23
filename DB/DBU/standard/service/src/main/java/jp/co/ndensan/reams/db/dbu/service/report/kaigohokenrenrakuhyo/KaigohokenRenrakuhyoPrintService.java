@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.Hokenryo;
 import jp.co.ndensan.reams.db.dba.business.core.kaigohokenrenrakuhyo.KaigoHokenRenrakuhyoHold;
-import jp.co.ndensan.reams.db.dba.definition.core.riyoshafutandankai.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dba.service.core.kaigojushoeditor.KaigoJushoEditor;
+import jp.co.ndensan.reams.db.dbc.definition.core.riyoshafutandankai.RiyoshaFutanDankai;
 import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyo;
 import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoProerty;
 import jp.co.ndensan.reams.db.dbu.business.report.kaigohokenrenrakuhyo.KaigohokenRenrakuhyoReport;
@@ -550,19 +550,19 @@ public class KaigohokenRenrakuhyoPrintService {
     }
 
     private boolean is第1段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第１段階.getコード().equals(get利用者負担段階(利用者負担段階));
+        return RiyoshaFutanDankai.第1段階.getコード().equals(get利用者負担段階(利用者負担段階));
     }
 
     private boolean is第2段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第２段階.getコード().equals(get利用者負担段階(利用者負担段階));
+        return RiyoshaFutanDankai.第2段階.getコード().equals(get利用者負担段階(利用者負担段階));
     }
 
     private boolean is第3段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第３段階.getコード().equals(get利用者負担段階(利用者負担段階));
+        return RiyoshaFutanDankai.第3段階.getコード().equals(get利用者負担段階(利用者負担段階));
     }
 
     private boolean is課税層第3段階(Code 利用者負担段階) {
-        return RiyoshaFutanDankai.第４段階.getコード().equals(get利用者負担段階(利用者負担段階));
+        return RiyoshaFutanDankai.課税層第3段階.getコード().equals(get利用者負担段階(利用者負担段階));
     }
 
     private RString get利用者負担段階(Code 利用者負担段階) {
