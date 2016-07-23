@@ -279,7 +279,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         RString 通知書定型文 = ReportUtil.get通知文(SubGyomuCode.DBB介護賦課,
                 介護保険料額決定通知書_帳票分類ID, KamokuCode.EMPTY, 定型文文字サイズ, INT_1, システム日付);
-        List<RString> 出力条件リスト = 出力条件リスト取得(発行日, 文書番号, 出力順ID, 賦課年度リスト);
+        List<RString> 出力条件リスト = 決定出力条件リスト取得(発行日, 文書番号, 出力順ID, 賦課年度リスト);
         RString 帳票名 = get帳票名_介護保険料額決定通知書(帳票ID.getColumnValue());
         if (entityList == null || entityList.isEmpty() || entityList.get(0).get計算後情報_更正後() == null) {
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値区分_0, CSV出力有無_なし, CSVファイル名, 帳票名);
@@ -391,7 +391,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         IKanendoTsuchishoIkkatsuHakkoMapper mapper = mapperProvider.create(IKanendoTsuchishoIkkatsuHakkoMapper.class);
         List<HonsanteiTsuchishoTempEntity> entityList = mapper.select異動賦課情報一時変更(parameter);
         ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(介護保険料額決定通知書_帳票分類ID);
-        List<RString> 出力条件リスト = 出力条件リスト取得(発行日, 文書番号, 出力順ID, 賦課年度リスト);
+        List<RString> 出力条件リスト = 変更出力条件リスト取得(発行日, 文書番号, 出力順ID, 賦課年度リスト, 変更通知書出力対象区分);
         RString 帳票名 = get帳票名_介護保険料額決定通知書(帳票ID.getColumnValue());
         if (entityList == null || entityList.isEmpty() || entityList.get(0).get計算後情報_更正後() == null) {
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値区分_0, CSV出力有無_なし, CSVファイル名, 帳票名);
@@ -814,7 +814,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         return new ChohyoSeigyoKyotsu(entity);
     }
 
-    private List<RString> 出力条件リスト取得(RDate 発行日, RString 文書番号, RString 出力順ID, List<FlexibleYear> 賦課年度リスト) {
+    private List<RString> 決定出力条件リスト取得(RDate 発行日, RString 文書番号, RString 出力順ID, List<FlexibleYear> 賦課年度リスト) {
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(定数_出力条件);
@@ -834,6 +834,51 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(文書番号));
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
+        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder
+                = fider.get出力順(SubGyomuCode.DBB介護賦課, 介護保険料額決定通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        if (outputOrder != null) {
+            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+            for (ISetSortItem iSetSortItem : iSetSortItemList) {
+                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
+                    builder.append(iSetSortItem.get項目名());
+                } else {
+                    builder.append(iSetSortItem.get項目名()).append(SIGN);
+                }
+            }
+        }
+        出力条件リスト.add(builder.toRString());
+        return 出力条件リスト;
+    }
+
+    private List<RString> 変更出力条件リスト取得(RDate 発行日, RString 文書番号,
+            RString 出力順ID, List<FlexibleYear> 賦課年度リスト, RString 変更通知書出力対象区分) {
+        List<RString> 出力条件リスト = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(定数_出力条件);
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(FORMAT_LEFT.concat(定数_対象賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
+        for (int i = 0; i < 賦課年度リスト.size(); i++) {
+            if (i == 賦課年度リスト.size() - 1) {
+                builder.append(getWarekiYear(賦課年度リスト.get(i)));
+            } else {
+                builder.append(getWarekiYear(賦課年度リスト.get(i))).append(RString.FULL_SPACE);
+            }
+        }
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(FORMAT_LEFT.concat(定数_発行日).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(発行日.wareki().toDateString()));
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(文書番号));
+        出力条件リスト.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(FORMAT_LEFT.concat(定数_対象者).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+                .concat(NotsuKozaShutsuryokuTaisho.toValue(変更通知書出力対象区分).get名称()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));

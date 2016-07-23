@@ -67,6 +67,7 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -356,6 +357,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
             dbt2017entity.setKeisanTimestamp(get調定日時(計算後情報_更正後.getChoteiNichiji()));
             dbt2017entity.setGaitoRemban(連番);
             dbt2017entity.setIdoAriFlag(false);
+            dbt2017entity.setState(EntityDataState.Added);
             通知書発行後異動者Dac.save(dbt2017entity);
             連番 = 連番 + INT_1;
         }
