@@ -171,7 +171,7 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private void set転出先住所(ShotokuShokaihyoYokoSource source) {
         if (所得照会票.get転出先住所() != null) {
-            if (所得照会票.get転出先住所().length() <= INT_33) {
+            if (所得照会票.get転出先住所().length() <= INT_50) {
                 source.hihokenshaJusho = 所得照会票.get転出先住所();
             } else {
                 source.hihokenshaJusho = 所得照会票.get転出先住所().substring(INT_0, INT_50);
@@ -284,17 +284,13 @@ public class ShotokuShokaihyoYokoEditor implements IShotokuShokaihyoYokoEditor {
 
     private RString 生年月日のフォーマット(RDate 生年月日) {
         RString 住民種別コード = 所得照会票.get住民種別コード();
-        if (RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)
-                || is日本人(所得照会票.get世帯員リスト())) {
-            if (set生年月日(生年月日)) {
-                return 生年月日.wareki().toDateString();
-            }
+        if ((RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)
+                || is日本人(所得照会票.get世帯員リスト())) && set生年月日(生年月日)) {
+            return 生年月日.wareki().toDateString();
         }
-        if (RSTRING_2.equals(住民種別コード) || RSTRING_4.equals(住民種別コード)
-                || is外国人(所得照会票.get世帯員リスト())) {
-            if (set生年月日TWO(生年月日)) {
-                return 生年月日.seireki().toDateString();
-            }
+        if ((RSTRING_2.equals(住民種別コード) || RSTRING_4.equals(住民種別コード)
+                || is外国人(所得照会票.get世帯員リスト())) && set生年月日TWO(生年月日)) {
+            return 生年月日.seireki().toDateString();
         }
         return RString.EMPTY;
     }

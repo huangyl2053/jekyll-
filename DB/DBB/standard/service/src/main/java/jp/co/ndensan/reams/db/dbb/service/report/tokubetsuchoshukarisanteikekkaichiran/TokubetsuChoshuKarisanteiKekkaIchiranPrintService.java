@@ -20,9 +20,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntit
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -122,10 +124,17 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPrintService {
                 Decimal 前年度保険料 = 保険料段階.get保険料率();
                 前年度保険料リスト.add(前年度保険料);
             }
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association association = finder.getAssociation();
+            RString 市町村コード = RString.EMPTY;
+            RString 市町村名称 = association.get市町村名();
+            if (association.get地方公共団体コード() != null) {
+                市町村コード = association.get地方公共団体コード().value();
+            }
             ReportSourceWriter<TokubetsuChoshuKarisanteiKekkaIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new TokubetsuChoshuKarisanteiKekkaIchiranReport(特徴仮算定計算後賦課情報EntityList, 調定年度, 調定日時, 並び順List,
-                    改頁List, 住所編集リスト, 前年度保険料リスト).writeBy(reportSourceWriter);
+            new TokubetsuChoshuKarisanteiKekkaIchiranReport(市町村コード, 市町村名称, 特徴仮算定計算後賦課情報EntityList, 調定年度, 調定日時,
+                    並び順List, 改頁List, 住所編集リスト, 前年度保険料リスト).writeBy(reportSourceWriter);
         }
     }
 

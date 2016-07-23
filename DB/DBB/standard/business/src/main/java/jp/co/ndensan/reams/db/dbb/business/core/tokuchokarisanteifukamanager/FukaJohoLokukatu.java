@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FukaJohoLokukatu {
 
     private Decimal choteigaku;
+    private RString hokenryoDankai;
     private FlexibleDate seihoKaishiYMD;
     private FlexibleDate seihoHaishiYMD;
     private FlexibleDate ronenKaishiYMD;
@@ -42,6 +43,7 @@ public class FukaJohoLokukatu {
      * FukaJohoLokukatu
      *
      * @param choteigaku Decimal
+     * @param hokenryoDankai RString
      * @param seihoKaishiYMD FlexibleDate
      * @param seihoHaishiYMD FlexibleDate
      * @param ronenKaishiYMD FlexibleDate
@@ -57,6 +59,7 @@ public class FukaJohoLokukatu {
      */
     public FukaJohoLokukatu(
             Decimal choteigaku,
+            RString hokenryoDankai,
             FlexibleDate seihoKaishiYMD,
             FlexibleDate seihoHaishiYMD,
             FlexibleDate ronenKaishiYMD,
@@ -70,6 +73,7 @@ public class FukaJohoLokukatu {
             List<SeikatsuHogoJukyusha> 生保の情報List_6月開始,
             List<RoreiFukushiNenkinJukyusha> 老齢の情報List_6月開始) {
         this.choteigaku = choteigaku;
+        this.hokenryoDankai = hokenryoDankai;
         this.seihoKaishiYMD = seihoKaishiYMD;
         this.seihoHaishiYMD = seihoHaishiYMD;
         this.ronenKaishiYMD = ronenKaishiYMD;

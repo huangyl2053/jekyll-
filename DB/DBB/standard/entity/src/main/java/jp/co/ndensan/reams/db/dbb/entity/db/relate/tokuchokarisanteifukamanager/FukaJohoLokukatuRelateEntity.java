@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FukaJohoLokukatuRelateEntity {
 
     private Decimal choteigaku;
+    private RString hokenryoDankai;
     private FlexibleDate seihoKaishiYMD;
     private FlexibleDate seihoHaishiYMD;
     private FlexibleDate ronenKaishiYMD;
