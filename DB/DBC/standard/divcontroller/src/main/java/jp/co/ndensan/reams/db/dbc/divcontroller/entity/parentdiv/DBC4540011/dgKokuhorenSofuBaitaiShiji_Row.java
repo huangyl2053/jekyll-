@@ -3,22 +3,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4540011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jul 06 17:37:20 CST 2016 
+ * Fri Jul 22 19:43:13 CST 2016
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * DataGrid1_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgKokuhorenSofuBaitaiShiji_Row のクラスファイル
+ *
+ * @reamsid_L DBC-3362-010 xuxin
  */
-
-public class DataGrid1_Row extends DataRow {
+public class dgKokuhorenSofuBaitaiShiji_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString defaultDataName0;
@@ -26,7 +22,7 @@ public class DataGrid1_Row extends DataRow {
     private RString defaultDataName2;
     private RString defaultDataName3;
 
-    public DataGrid1_Row() {
+    public dgKokuhorenSofuBaitaiShiji_Row() {
         super();
         this.defaultDataName0 = RString.EMPTY;
         this.defaultDataName1 = RString.EMPTY;
@@ -38,7 +34,7 @@ public class DataGrid1_Row extends DataRow {
         this.setOriginalData("defaultDataName3", defaultDataName3);
     }
 
-    public DataGrid1_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3) {
+    public dgKokuhorenSofuBaitaiShiji_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3) {
         super();
         this.setOriginalData("defaultDataName0", defaultDataName0);
         this.setOriginalData("defaultDataName1", defaultDataName1);
