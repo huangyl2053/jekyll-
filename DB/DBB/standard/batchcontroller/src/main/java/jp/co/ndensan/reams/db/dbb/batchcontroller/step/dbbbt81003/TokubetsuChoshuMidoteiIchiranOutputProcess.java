@@ -51,7 +51,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
     private FileSpoolManager manager;
     private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString reportName = new RString("特別徴収未同定一覧表");
-    private final RString csvファイル名 = new RString("TokubetsuChoshuDoteiIchiran.csv");
+    private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
     private RString pageSize;
 
