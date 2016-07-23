@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryo
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -26,8 +27,8 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
     private final boolean is部分一致;
     private final Decimal 最大表示件数;
     private final RString コード;
-    private final RDate fromDate;
-    private final RDate toDate;
+    private final RYearMonth fromDate;
+    private final RYearMonth toDate;
     private final RDate 実施日;
     private final boolean hasFromDate;
     private final boolean hasToDate;
@@ -56,8 +57,8 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
             boolean is部分一致,
             Decimal 最大表示件数,
             RString コード,
-            RDate fromDate,
-            RDate toDate,
+            RYearMonth fromDate,
+            RYearMonth toDate,
             RDate 実施日,
             boolean hasFromDate,
             boolean hasToDate) {
@@ -100,8 +101,8 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
             boolean is部分一致,
             Decimal 最大表示件数,
             RString コード,
-            RDate fromDate,
-            RDate toDate,
+            RYearMonth fromDate,
+            RYearMonth toDate,
             RDate 実施日,
             boolean hasFromDate,
             boolean hasToDate) {

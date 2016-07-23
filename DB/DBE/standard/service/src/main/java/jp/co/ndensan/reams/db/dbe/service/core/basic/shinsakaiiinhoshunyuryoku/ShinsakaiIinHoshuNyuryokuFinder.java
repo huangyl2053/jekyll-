@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 審査会委員報酬入力を管理するクラスです。
@@ -102,6 +103,7 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
      * @param 審査会委員情報 {@link ShinsakaiIinHoshuJissekiJoho}を更新します。
      * @return 更新/更新件数 の件数を返します。
      */
+    @Transaction
     public int update(ShinsakaiIinHoshuJissekiJoho 審査会委員情報) {
         if (!審査会委員情報.hasChanged()) {
             return 0;

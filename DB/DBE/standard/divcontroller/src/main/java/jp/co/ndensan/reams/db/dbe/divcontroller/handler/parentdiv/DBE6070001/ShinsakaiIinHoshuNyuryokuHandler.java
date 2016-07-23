@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -102,7 +101,7 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         RString 廃止フラグ;
         List<dgShinsakaiIin_Row> rowList = new ArrayList();
         for (ShinsakaiIinJoho shinsakaiIinJoho : shinsakaiIinHoshuNyuryoku) {
-            if (shinsakaiIinJoho.get廃止フラグ()) {
+            if (shinsakaiIinJoho.is廃止フラグ()) {
                 廃止フラグ = IsHaishi.廃止.get名称();
             } else {
                 廃止フラグ = IsHaishi.有効.get名称();
@@ -131,33 +130,40 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         RString 振込;
         RString 区分;
         RString 合議体長区分;
+        RString 実施日;
         div.getShinsakaiJisseki().getTxtShisakaiIinCode().setValue(div.getDgShinsakaiIin().getSelectedItems().get(0).getCode());
         div.getShinsakaiJisseki().getTxtShisakaiIinName().setValue(div.getDgShinsakaiIin().getSelectedItems().get(0).getChosainShimei());
         List<dgShinsakaiJisseki_Row> rowList = new ArrayList();
         if (isNULL) {
-            dgShinsakaiJisseki_Row row = new dgShinsakaiJisseki_Row(
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-            rowList.add(row);
-            row.setDeleteButtonState(DataGridButtonState.Disabled);
-            div.getDgShinsakaiJisseki().setDataSource(rowList);
+            div.getShinsakaiJisseki().setDisplayNone(false);
+            div.getDgShinsakaiJisseki().setVisible(false);
+            div.getShinsakaiJissekiMeisai().setVisible(false);
         } else {
+            div.getShinsakaiJisseki().setDisplayNone(false);
+            div.getDgShinsakaiJisseki().setVisible(true);
+            div.getShinsakaiJissekiMeisai().setVisible(true);
             for (ShinsakaiIinJoho shinsakaiIinJoho : shinsakaiIinHoshuNyuryoku) {
-                if (shinsakaiIinJoho.get出欠()) {
+                if (shinsakaiIinJoho.get実施日() == null) {
+                    実施日 = RString.EMPTY;
+                } else {
+                    実施日 = dateFormat(new RString(shinsakaiIinJoho.get実施日().toString()));
+                }
+                if (shinsakaiIinJoho.get区分() == null) {
+                    区分 = RString.EMPTY;
+                } else if (ShinsakaiIinHoshukubun.審査報酬.getコード().equals(shinsakaiIinJoho.get区分().value())) {
+                    区分 = ShinsakaiIinHoshukubun.審査報酬.get名称();
+                } else {
+                    区分 = ShinsakaiIinHoshukubun.その他報酬.get名称();
+                }
+                if (shinsakaiIinJoho.is出欠()) {
                     出欠 = IsShusseki.出席.get名称();
                 } else {
                     出欠 = IsShusseki.欠席.get名称();
                 }
-                if (shinsakaiIinJoho.get振込()) {
+                if (shinsakaiIinJoho.is振込()) {
                     振込 = IsGinkoFurikomiShutsuryoku.出力済.get名称();
                 } else {
                     振込 = IsGinkoFurikomiShutsuryoku.出力未.get名称();
-                }
-                if (ShinsakaiIinHoshukubun.審査報酬.getコード().equals(shinsakaiIinJoho.get区分().value())) {
-                    区分 = ShinsakaiIinHoshukubun.審査報酬.get名称();
-                } else {
-                    区分 = ShinsakaiIinHoshukubun.その他報酬.get名称();
                 }
                 if (GogitaichoKubunCode.通常.getコード().equals(shinsakaiIinJoho.get合議体長区分().getKey())) {
                     合議体長区分 = GogitaichoKubunCode.通常.get名称();
@@ -168,9 +174,9 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
                 }
                 dgShinsakaiJisseki_Row row = new dgShinsakaiJisseki_Row(
                         RString.EMPTY,
-                        dateFormat(new RString(shinsakaiIinJoho.get実施日().toString())),
+                        実施日,
                         区分,
-                        shinsakaiIinJoho.get審査会開催番号(),
+                        shinsakaiIinJoho.get開催結果開催番号(),
                         new RString(String.valueOf(shinsakaiIinJoho.get合議体番号())),
                         合議体長区分,
                         出欠,
@@ -188,7 +194,13 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
                         shinsakaiIinJoho.get開催結果開催番号()
                 );
                 rowList.add(row);
-                row.setDeleteButtonState(DataGridButtonState.Enabled);
+                if (shinsakaiIinJoho.get連番() == 0) {
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    row.setSelectButtonState(DataGridButtonState.Enabled);
+                } else {
+                    row.setDeleteButtonState(DataGridButtonState.Enabled);
+                    row.setSelectButtonState(DataGridButtonState.Enabled);
+                }
             }
             div.getDgShinsakaiJisseki().setDataSource(rowList);
         }
@@ -273,6 +285,10 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
      *
      */
     public void set追加() {
+        boolean is新追加 = false;
+        if (div.getHiddenColumnState().isNullOrEmpty()) {
+            is新追加 = true;
+        }
         div.setHiddenColumnState(状態_追加);
         div.getShinsakaiJissekiMeisai().getRadHoshuKubun().setDisabled(false);
         if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKubun())) {
@@ -330,8 +346,10 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
             div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(false);
             div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setDisabled(false);
         }
-        div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(
-                toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu()));
+        if (!is新追加) {
+            div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(
+                    toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getZeiritsu()));
+        }
         div.getShinsakaiJissekiMeisai().getTxtKotsuhito().setValue(
                 toDecimal(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKotsuhito()));
         div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setDisabled(true);
@@ -431,13 +449,13 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         Decimal 報酬税率_その他報酬 = to_Decimal(div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().getValue());
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
             Decimal 報酬税率_控除税額 = (報酬税率_審査報酬額.add(報酬税率_交通費等)).multiply(報酬税率_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(報酬税率_控除税額.roundDownTo(0));
-            Decimal 報酬税率_税引後支払額 = (報酬税率_審査報酬額.add(報酬税率_交通費等)).subtract(報酬税率_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(報酬税率_控除税額.roundUpTo(0));
+            Decimal 報酬税率_税引後支払額 = (報酬税率_審査報酬額.add(報酬税率_交通費等)).subtract(報酬税率_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(報酬税率_税引後支払額);
         } else {
             Decimal 報酬税率_控除税額 = (報酬税率_その他報酬.add(報酬税率_交通費等)).multiply(報酬税率_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(報酬税率_控除税額.roundDownTo(0));
-            Decimal 報酬税率_税引後支払額 = (報酬税率_その他報酬.add(報酬税率_交通費等)).subtract(報酬税率_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(報酬税率_控除税額.roundUpTo(0));
+            Decimal 報酬税率_税引後支払額 = (報酬税率_その他報酬.add(報酬税率_交通費等)).subtract(報酬税率_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(報酬税率_税引後支払額);
         }
     }
@@ -453,13 +471,13 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         Decimal 審査報酬額_その他報酬 = to_Decimal(div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().getValue());
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
             Decimal 審査報酬額_控除税額 = (審査報酬額_審査報酬額.add(審査報酬額_交通費等)).multiply(審査報酬額_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(審査報酬額_控除税額.roundDownTo(0));
-            Decimal 審査報酬額_税引後支払額 = (審査報酬額_審査報酬額.add(審査報酬額_交通費等)).subtract(審査報酬額_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(審査報酬額_控除税額.roundUpTo(0));
+            Decimal 審査報酬額_税引後支払額 = (審査報酬額_審査報酬額.add(審査報酬額_交通費等)).subtract(審査報酬額_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(審査報酬額_税引後支払額);
         } else {
             Decimal 審査報酬額_控除税額 = (審査報酬額_その他報酬.add(審査報酬額_交通費等)).multiply(審査報酬額_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(審査報酬額_控除税額.roundDownTo(0));
-            Decimal 審査報酬額_税引後支払額 = (審査報酬額_その他報酬.add(審査報酬額_交通費等)).subtract(審査報酬額_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(審査報酬額_控除税額.roundUpTo(0));
+            Decimal 審査報酬額_税引後支払額 = (審査報酬額_その他報酬.add(審査報酬額_交通費等)).subtract(審査報酬額_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(審査報酬額_税引後支払額);
         }
     }
@@ -475,13 +493,13 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         Decimal その他報酬_その他報酬 = to_Decimal(div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().getValue());
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
             Decimal その他報酬_控除税額 = (その他報酬_審査報酬額.add(その他報酬_交通費等)).multiply(その他報酬_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(その他報酬_控除税額.roundDownTo(0));
-            Decimal その他報酬_税引後支払額 = (その他報酬_審査報酬額.add(その他報酬_交通費等)).subtract(その他報酬_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(その他報酬_控除税額.roundUpTo(0));
+            Decimal その他報酬_税引後支払額 = (その他報酬_審査報酬額.add(その他報酬_交通費等)).subtract(その他報酬_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(その他報酬_税引後支払額);
         } else {
             Decimal その他報酬_控除税額 = (その他報酬_その他報酬.add(その他報酬_交通費等)).multiply(その他報酬_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(その他報酬_控除税額.roundDownTo(0));
-            Decimal その他報酬_税引後支払額 = (その他報酬_その他報酬.add(その他報酬_交通費等)).subtract(その他報酬_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(その他報酬_控除税額.roundUpTo(0));
+            Decimal その他報酬_税引後支払額 = (その他報酬_その他報酬.add(その他報酬_交通費等)).subtract(その他報酬_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(その他報酬_税引後支払額);
         }
     }
@@ -497,13 +515,13 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         Decimal 交通費等_その他報酬 = to_Decimal(div.getShinsakaiJissekiMeisai().getTxtSonotaHoshu().getValue());
         if (SHINCHAKAI.equals(div.getShinsakaiJissekiMeisai().getRadHoshuKubun().getSelectedValue())) {
             Decimal 交通費等_控除税額 = (交通費等_審査報酬額.add(交通費等_交通費等)).multiply(交通費等_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(交通費等_控除税額.roundDownTo(0));
-            Decimal 交通費等_税引後支払額 = (交通費等_審査報酬額.add(交通費等_交通費等)).subtract(交通費等_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(交通費等_控除税額.roundUpTo(0));
+            Decimal 交通費等_税引後支払額 = (交通費等_審査報酬額.add(交通費等_交通費等)).subtract(交通費等_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(交通費等_税引後支払額);
         } else {
             Decimal 交通費等_控除税額 = (交通費等_その他報酬.add(交通費等_交通費等)).multiply(交通費等_報酬税率).divide(HYAKU);
-            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(交通費等_控除税額.roundDownTo(0));
-            Decimal 交通費等_税引後支払額 = (交通費等_その他報酬.add(交通費等_交通費等)).subtract(交通費等_控除税額.roundDownTo(0));
+            div.getShinsakaiJissekiMeisai().getTxtKojozeikaku().setValue(交通費等_控除税額.roundUpTo(0));
+            Decimal 交通費等_税引後支払額 = (交通費等_その他報酬.add(交通費等_交通費等)).subtract(交通費等_控除税額.roundUpTo(0));
             div.getShinsakaiJissekiMeisai().getTxtZeibikigoShiharaigaku().setValue(交通費等_税引後支払額);
         }
     }
@@ -601,7 +619,6 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         } else if (振込_出力未.equals(row.getFurikomi())) {
             build.set銀行振込出力フラグ(false);
         }
-        shinasa.toEntity().setState(EntityDataState.Modified);
         return build;
     }
 
@@ -678,16 +695,16 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         boolean 実施日Flag = false;
         Decimal 税率;
         List<UzT0007CodeEntity> entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.控除税率.getコード(), FlexibleDate.getNowDate());
-        if (entity.get(0).getコード名称().isNullOrEmpty()) {
+        if (entity == null || entity.isEmpty() || entity.get(0).getコード名称().isNullOrEmpty()) {
             税率 = new Decimal(ZIEO);
         } else {
             税率 = new Decimal(entity.get(0).getコード名称().toString());
+            for (UzT0007CodeEntity tity : entity) {
+                実施日Flag = div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().getValue().isBeforeOrEquals(tity.get有効開始年月日());
+            }
         }
         div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setValue(税率);
         div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().getValue();
-        for (UzT0007CodeEntity tity : entity) {
-            実施日Flag = div.getShinsakaiJissekiMeisai().getTxtJissekiNengappi().getValue().isBeforeOrEquals(tity.get有効開始年月日());
-        }
         div.getShinsakaiJissekiMeisai().getTxtHoshuZeiritsu().setDisabled(実施日Flag);
     }
 
