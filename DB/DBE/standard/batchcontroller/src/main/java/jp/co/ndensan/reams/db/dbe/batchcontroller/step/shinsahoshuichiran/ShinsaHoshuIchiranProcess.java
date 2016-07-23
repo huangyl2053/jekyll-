@@ -72,8 +72,10 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final RString SHUSEKINITI = new RString("（出席日");
     private static final RString GATSU = new RString("月）");
     private static final int YON = 4;
+    private int 初期化フラグ = 0;
     private int 総合計_審査回数;
     private Decimal 総合計_報酬総額;
+    private Decimal 総合計_その他費用;
     private Decimal 総合計_税控除額;
     private Decimal 総合計_報酬合計;
 
@@ -87,6 +89,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     protected void initialize() {
         総合計_審査回数 = 0;
         総合計_報酬総額 = Decimal.ZERO;
+        総合計_その他費用 = Decimal.ZERO;
         総合計_税控除額 = Decimal.ZERO;
         総合計_報酬合計 = Decimal.ZERO;
         change = new ShinsaHoshuIchiranChange();
@@ -193,33 +196,40 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 relateEntity.set出席回数(出席回数);
                 relateEntity.set審査会開催年月(set出席日(entity.get審査会開催年月()));
                 総合計_審査回数 = 総合計_審査回数 + 出席回数;
-                総合計_報酬総額 = 総合計_報酬総額.add(relateEntity.get報酬総額());
-                総合計_税控除額 = 総合計_税控除額.add(relateEntity.get税額控除());
-                総合計_報酬合計 = 総合計_報酬合計.add(relateEntity.get報酬合計());
-                break;
+                if (初期化フラグ == 0) {
+                    総合計_報酬総額 = relateEntity.get総合計_報酬総額();
+                    総合計_その他費用 = relateEntity.getその他費用();
+                    総合計_税控除額 = relateEntity.get税額控除();
+                    総合計_報酬合計 = relateEntity.get総合計_報酬合計();
+                }
+                初期化フラグ = 初期化フラグ++;
+                if (CSVを出力する.equals(paramter.get帳票出力区分())) {
+                    eucCsvWriterJunitoJugo.writeLine(change.createData(relateEntity, paramter.get帳票出力区分()));
+                } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
+                    ShinsaHoshuIchiranReport report = new ShinsaHoshuIchiranReport(change.createData(relateEntity, paramter.get帳票出力区分()));
+                    report.writeBy(reportSourceWriter);
+                }
+                if (初期化フラグ == 20) {
+                    return;
+                }
             }
-        }
-        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            eucCsvWriterJunitoJugo.writeLine(change.createSyohyoData(relateEntity));
-        } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
-            ShinsaHoshuIchiranReport report = new ShinsaHoshuIchiranReport(change.createSyohyoData(relateEntity));
-            report.writeBy(reportSourceWriter);
         }
     }
 
     @Override
     protected void afterExecute() {
-        ShinsaHoshuIchiranEntity 総合計 = new ShinsaHoshuIchiranEntity(
-                null, null, set出席日(paramter.get審査会開催年月()), null, null,
-                null, null, null, null, null,
-                null, null, null, null, null,
-                null, null, null, null, null,
-                null, null, null, null, null,
-                null, null, null, null, null,
-                null, null, null, null, null,
-                null, null, null, new RString(総合計_審査回数), new RString(総合計_報酬総額.toString()),
-                new RString(総合計_税控除額.toString()), new RString(総合計_報酬合計.toString()));
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
+            ShinsaHoshuIchiranEntity 総合計 = new ShinsaHoshuIchiranEntity(
+                    null, null, set出席日(paramter.get審査会開催年月()), null, null,
+                    null, null, null, null, null,
+                    null, null, null, null, null,
+                    null, null, null, null, null,
+                    null, null, null, null, null,
+                    null, null, null, null, null,
+                    null, null, null, null, null,
+                    null, null, null, null, new RString(総合計_審査回数), new RString(総合計_報酬総額.toString()),
+                    new RString(総合計_その他費用.toString()),
+                    new RString(総合計_税控除額.toString()), new RString(総合計_報酬合計.toString()));
             eucCsvWriterJunitoJugo.writeLine(総合計);
             eucCsvWriterJunitoJugo.close();
         }
@@ -228,8 +238,6 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
             バッチ出力条件リストの出力(導入団体クラス);
         } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
-            ShinsaHoshuIchiranReport report = new ShinsaHoshuIchiranReport(総合計);
-            report.writeBy(reportSourceWriter);
             帳票バッチ出力条件リストの出力(導入団体クラス);
         }
     }

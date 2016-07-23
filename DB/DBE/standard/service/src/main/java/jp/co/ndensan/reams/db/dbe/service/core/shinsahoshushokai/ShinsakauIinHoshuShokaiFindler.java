@@ -93,6 +93,7 @@ public class ShinsakauIinHoshuShokaiFindler {
                     審査会委員報酬照会.set介護認定審査会委員氏名(出席状況.get介護認定審査会委員氏名());
                     審査会委員報酬照会.set審査会開催年月(出席状況.get審査会開催年月());
                     審査会委員報酬照会.set報酬合計(合計額.get報酬合計());
+                    審査会委員報酬照会.setその他費用(合計額.getその他費用());
                     審査会委員報酬照会.set報酬総額(合計額.get報酬総額());
                     審査会委員報酬照会.set税額控除(合計額.get税額控除());
                     審査会委員報酬照会.set出席状況_1日(set出席状況(出席状況.get出席状況_1日()));
@@ -158,7 +159,10 @@ public class ShinsakauIinHoshuShokaiFindler {
                     審査会委員報酬照会.set出席状況_31日(set出席状況(出席状況.get出席状況_31日()));
                     this.get出席回数(出席状況.get出席状況_31日());
                     審査会委員報酬照会.set出席回数(出席回数);
-
+                    審査会委員報酬照会.set総合計_報酬合計(合計額.get総合計_報酬合計());
+                    審査会委員報酬照会.set総合計_その他費用(合計額.get総合計_その他費用());
+                    審査会委員報酬照会.set総合計_報酬総額(合計額.get総合計_報酬総額());
+                    審査会委員報酬照会.set総合計_税控除額(合計額.get総合計_税控除額());
                     審査会委員報酬照会List.add(new ShinsaHoshuIchiran(審査会委員報酬照会));
                     審査会委員報酬照会 = new ShinsaHoshuIchiranRelateEntity();
                 }

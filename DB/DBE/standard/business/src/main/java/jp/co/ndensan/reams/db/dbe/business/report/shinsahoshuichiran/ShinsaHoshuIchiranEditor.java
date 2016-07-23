@@ -117,11 +117,11 @@ public class ShinsaHoshuIchiranEditor implements IShinsaHoshuIchiranEditor {
         source.listShukketsu_31 = item.get出欠_31();
         source.listHiyo_1 = item.get出席回数();
         source.listHiyo_2 = item.get報酬総額();
-        source.listHiyo_3 = RString.EMPTY;
+        source.listHiyo_3 = item.getその他費用();
         source.listHiyo_4 = item.get税額控除();
         source.listHiyo_5 = item.get報酬合計();
         source.listGokei_1 = item.get報酬総額_合計();
-        source.listGokei_2 = RString.EMPTY;
+        source.listGokei_2 = item.getその他費用_合計();
         source.listGokei_3 = item.get税額控除_合計();
         source.listGokei_4 = item.get報酬合計_合計();
         return source;

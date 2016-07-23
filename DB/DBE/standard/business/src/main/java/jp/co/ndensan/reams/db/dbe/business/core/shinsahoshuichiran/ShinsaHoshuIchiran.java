@@ -352,6 +352,15 @@ public class ShinsaHoshuIchiran {
     }
 
     /**
+     * その他費用を取得します。
+     *
+     * @return その他費用
+     */
+    public Decimal getその他費用() {
+        return entity.getその他費用();
+    }
+
+    /**
      * 税額控除を取得します。
      *
      * @return 税額控除
@@ -367,5 +376,41 @@ public class ShinsaHoshuIchiran {
      */
     public Decimal get報酬合計() {
         return entity.get報酬合計();
+    }
+
+    /**
+     * 総合計_報酬総額を取得します。
+     *
+     * @return 総合計_報酬総額
+     */
+    public Decimal get総合計_報酬総額() {
+        return entity.get総合計_報酬総額();
+    }
+
+    /**
+     * 総合計_その他費用を取得します。
+     *
+     * @return 総合計_その他費用
+     */
+    public Decimal get総合計_その他費用() {
+        return entity.get総合計_その他費用();
+    }
+
+    /**
+     * 総合計_税控除額を取得します。
+     *
+     * @return 総合計_税控除額
+     */
+    public Decimal get総合計_税控除額() {
+        return entity.get総合計_税控除額();
+    }
+
+    /**
+     * 総合計_報酬合計を取得します。
+     *
+     * @return 総合計_報酬合計
+     */
+    public Decimal get総合計_報酬合計() {
+        return entity.get総合計_報酬合計();
     }
 }
