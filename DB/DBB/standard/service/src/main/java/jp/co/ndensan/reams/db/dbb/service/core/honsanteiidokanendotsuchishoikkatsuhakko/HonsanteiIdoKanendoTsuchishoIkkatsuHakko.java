@@ -340,7 +340,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
                 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), 定値_タイトル);
         sourceDataCollection = reportManager.publish();
         publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 決定_EUC_ENTITY_ID, 決定_EUCファイル名);
-        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
+        RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
+                ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_決定一覧表, 帳票名);
     }
 
@@ -452,7 +453,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 変更_EUC_ENTITY_ID, 変更_EUCファイル名);
         new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
                 帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), 定値_タイトル);
-        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
+        RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
+                ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_変更一覧表, 帳票名);
     }
 
@@ -635,7 +637,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         publish納入通知書発行一覧表(帳票作成日時.getRDateTime(), 調定年度, 賦課年度リスト, 出力期, 編集後本算定通知書共通情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
         new NonyuTsuchIchiranPrintService().printSingle(編集後本算定通知書共通情報List, 帳票作成日時.getRDateTime(),
                 出力期AsInt, Long.parseLong(出力順ID.toString()));
-        RString 出力ページ数 = isNull(sourceDataCollection) ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
+        RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
+                ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, 納入_EUCファイル名, 帳票名);
     }
 
@@ -654,12 +657,12 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             RString 納入通知書対象者, RString 生活保護者先頭出力区分, RString 出力順ID, ReportId 帳票ID) {
         RString 出力順 = get出力順(納入通知書本算定_帳票分類ID, 出力順ID);
         RStringBuilder orderByClause = new RStringBuilder(ソート);
-        if (定値区分_0.equals(生活保護者先頭出力区分)) {
+        if (定値区分_1.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(定値_生活保護区分).concat(FORMAT).concat(RString.HALF_SPACE)
                     .concat(ソート順_降順).concat(カンマ)
                     .concat(RString.HALF_SPACE).concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
-        } else if (定値区分_1.equals(生活保護者先頭出力区分)) {
+        } else if (定値区分_0.equals(生活保護者先頭出力区分)) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
         }

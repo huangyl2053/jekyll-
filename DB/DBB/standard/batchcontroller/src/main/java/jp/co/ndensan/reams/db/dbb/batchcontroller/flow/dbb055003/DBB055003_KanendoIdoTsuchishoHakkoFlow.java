@@ -47,10 +47,10 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
     private static final String 計算後情報作成_THREE = "keisangoJohoSakuseiThree";
     private static final String 異動賦課情報一時テーブルクリア = "deleteIdoFukaJohoTempProcess";
     private static final String CREAT_PROCESS = "creatTmpProcess";
-    private static final String INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS = "insIdoFukaJohoTsuchishoFlgTrueOneProcess";
-    private static final String INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS = "insIdoFukaJohoTsuchishoFlgTrueTwoProcess";
-    private static final String INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS = "insIdoFukaJohoTsuchishoFlgTrueThreeProcess";
-    private static final String INSERT_IDOFUKAJOHOFLGFALSE_PROCESS = "insIdoFukaJohoTsuchishoFlgFalseProcess";
+    private static final String INSERT_FLGTRUE_ONEPROCESS = "insIdoFukaJohoTsuchishoFlgTrueOneProcess";
+    private static final String INSERT_FLGTRUE_TWOPROCESS = "insIdoFukaJohoTsuchishoFlgTrueTwoProcess";
+    private static final String INSERT_FLGTRUE_THREEPROCESS = "insIdoFukaJohoTsuchishoFlgTrueThreeProcess";
+    private static final String INSERT_FLGFALSE_PROCESS = "insIdoFukaJohoTsuchishoFlgFalseProcess";
     private static final String PRINT_KETTEITSUCHISHO_PROCESS = "prtKetteiTsuchishoProcess";
     private static final String INSERT_KETTEITSUCHISHO_PROCESS = "insTsuchishoHakkogoIdoshaKetteiProcess";
     private static final String PRINT_HENKOTSUCHISHO_PROCESS = "prtHenkoTsuchishoProcess";
@@ -94,13 +94,13 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                 executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
                     executeStep(計算後情報作成_ONE);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS);
+                    executeStep(INSERT_FLGTRUE_ONEPROCESS);
                     executeStep(計算後情報作成_TWO);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS);
+                    executeStep(INSERT_FLGTRUE_TWOPROCESS);
                     executeStep(計算後情報作成_THREE);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS);
+                    executeStep(INSERT_FLGTRUE_THREEPROCESS);
                 }
-                executeStep(INSERT_IDOFUKAJOHOFLGFALSE_PROCESS);
+                executeStep(INSERT_FLGFALSE_PROCESS);
 
                 executeStep(PRINT_KETTEITSUCHISHO_PROCESS);
                 executeStep(INSERT_KETTEITSUCHISHO_PROCESS);
@@ -111,13 +111,13 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                 executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
                     executeStep(計算後情報作成_ONE);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS);
+                    executeStep(INSERT_FLGTRUE_ONEPROCESS);
                     executeStep(計算後情報作成_TWO);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS);
+                    executeStep(INSERT_FLGTRUE_TWOPROCESS);
                     executeStep(計算後情報作成_THREE);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS);
+                    executeStep(INSERT_FLGTRUE_THREEPROCESS);
                 }
-                executeStep(INSERT_IDOFUKAJOHOFLGFALSE_PROCESS);
+                executeStep(INSERT_FLGFALSE_PROCESS);
                 executeStep(PRINT_HENKOTSUCHISHO_PROCESS);
                 executeStep(INSERT_HENKOTSUCHISHO_PROCESS);
             } else if (納入通知書本算定_帳票分類ID.equals(出力帳票.get帳票分類ID())) {
@@ -125,13 +125,13 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
                 executeStep(異動賦課情報一時テーブルクリア);
                 if (parameter.is一括発行起動フラグ()) {
                     executeStep(計算後情報作成_ONE);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS);
+                    executeStep(INSERT_FLGTRUE_ONEPROCESS);
                     executeStep(計算後情報作成_TWO);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS);
+                    executeStep(INSERT_FLGTRUE_TWOPROCESS);
                     executeStep(計算後情報作成_THREE);
-                    executeStep(INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS);
+                    executeStep(INSERT_FLGTRUE_THREEPROCESS);
                 }
-                executeStep(INSERT_IDOFUKAJOHOFLGFALSE_PROCESS);
+                executeStep(INSERT_FLGFALSE_PROCESS);
                 executeStep(PRINT_NONYUTSUCHISHO_PROCESS);
                 executeStep(INSERT_NONYUTSUCHISHO_PROCESS);
             }
@@ -179,7 +179,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
      *
      * @return 帳票出力パラメータ
      */
-    @Step(INSERT_IDOFUKAJOHOFLGTRUE_ONEPROCESS)
+    @Step(INSERT_FLGTRUE_ONEPROCESS)
     protected IBatchFlowCommand insIdoFukaJohoTsuchishoFlgTrueOneProcess() {
         return simpleBatch(IdoFukaJohoFlgTrueProcess.class).arguments(getIdoFukaJohoFlgTrueProcessParameter(回目１)).define();
     }
@@ -189,7 +189,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
      *
      * @return 帳票出力パラメータ
      */
-    @Step(INSERT_IDOFUKAJOHOFLGTRUE_TWOPROCESS)
+    @Step(INSERT_FLGTRUE_TWOPROCESS)
     protected IBatchFlowCommand insIdoFukaJohoTsuchishoFlgTrueTwoProcess() {
         return simpleBatch(IdoFukaJohoFlgTrueProcess.class).arguments(getIdoFukaJohoFlgTrueProcessParameter(回目２)).define();
     }
@@ -199,7 +199,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
      *
      * @return 帳票出力パラメータ
      */
-    @Step(INSERT_IDOFUKAJOHOFLGTRUE_THREEPROCESS)
+    @Step(INSERT_FLGTRUE_THREEPROCESS)
     protected IBatchFlowCommand insIdoFukaJohoTsuchishoFlgTrueThreeProcess() {
         return simpleBatch(IdoFukaJohoFlgTrueProcess.class).arguments(getIdoFukaJohoFlgTrueProcessParameter(回目３)).define();
     }
@@ -209,7 +209,7 @@ public class DBB055003_KanendoIdoTsuchishoHakkoFlow extends BatchFlowBase<HonSan
      *
      * @return 帳票出力パラメータ
      */
-    @Step(INSERT_IDOFUKAJOHOFLGFALSE_PROCESS)
+    @Step(INSERT_FLGFALSE_PROCESS)
     protected IBatchFlowCommand insIdoFukaJohoTsuchishoFlgFalseProcess() {
         return simpleBatch(IdoFukaJohoFlgFalseProcess.class).arguments(processParameter).define();
     }

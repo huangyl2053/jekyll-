@@ -33,6 +33,19 @@ public class IdoFukaJohoParameter extends KozaSearchParameter
     private final RString 科目コード;
     private final RString 判定フラグ;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 調定年度前１年 FlexibleYear
+     * @param 調定年度前２年 FlexibleYear
+     * @param 調定日時 YMDHMS
+     * @param 処理日 RString
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
+     * @param 科目コード RString
+     * @param 判定フラグ RString
+     */
     public IdoFukaJohoParameter(
             FlexibleYear 調定年度,
             FlexibleYear 調定年度前１年,
