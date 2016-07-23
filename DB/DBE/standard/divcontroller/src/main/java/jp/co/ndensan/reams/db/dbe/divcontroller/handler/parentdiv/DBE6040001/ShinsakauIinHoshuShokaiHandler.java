@@ -136,10 +136,6 @@ public class ShinsakauIinHoshuShokaiHandler {
     public ShinsaHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
         ShinsaHoshuIchiranBatchParameter param = new ShinsaHoshuIchiranBatchParameter();
         param.setShinsakaiKaisaiYMD(new RString(div.getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
-        param.setShisakaisu(new RString(div.getTxtShinsaKaisu().toString()));
-        param.setHosyusogaku(new RString(div.getTxtHoshuSogaku().toString()));
-        param.setSegakukojyo(new RString(div.getTxtZeiKojoGaku().toString()));
-        param.setHosyugoke(new RString(div.getTxtHoshuGokei().toString()));
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }
