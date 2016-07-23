@@ -57,6 +57,7 @@ public class ShiharaiHohoHenkoService {
         List<ShiharaiHohoHenkoEntity> entityList = mapper.findShiharaiHohoHenko(被保険者番号);
         if (entityList != null && !entityList.isEmpty()) {
             for (ShiharaiHohoHenkoEntity entity : entityList) {
+                entity.initializeMd5ToEntities();
                 支払方法変更管理情報List.add(new ShiharaiHohoHenko(entity));
             }
         }

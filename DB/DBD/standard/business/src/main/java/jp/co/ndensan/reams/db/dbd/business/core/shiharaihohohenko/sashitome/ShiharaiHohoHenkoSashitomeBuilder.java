@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link ShiharaiHohoHenkoSashitome}の編集を行うビルダークラスです。
@@ -37,6 +38,18 @@ public class ShiharaiHohoHenkoSashitomeBuilder {
     ) {
         this.entity = entity.clone();
         this.id = id;
+    }
+
+    /**
+     * EntityDataStateを設定します
+     *
+     * @param state EntityDataState
+     * @return {@link ShiharaiHohoHenkoSashitomeBuilder}
+     */
+    public ShiharaiHohoHenkoSashitomeBuilder setState(EntityDataState state) {
+        requireNonNull(state, UrSystemErrorMessages.値がnull.getReplacedMessage("EntityDataState"));
+        entity.setState(state);
+        return this;
     }
 
     /**
