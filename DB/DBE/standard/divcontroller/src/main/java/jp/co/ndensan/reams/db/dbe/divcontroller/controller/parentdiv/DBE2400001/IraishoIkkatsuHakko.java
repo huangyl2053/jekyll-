@@ -246,8 +246,8 @@ public class IraishoIkkatsuHakko {
             }
         }
         List<GridParameter> ninteiChosaIraiList = new ArrayList<>();
-        GridParameter gridParameter = new GridParameter();
         for (dgNinteiChosaIraiTaishoIchiran_Row row : div.getDgNinteiChosaIraiTaishoIchiran().getSelectedItems()) {
+            GridParameter gridParameter = new GridParameter();
             gridParameter.setNinteichosaItakusakiCode(row.getNinteiChosaitakusaki());
             gridParameter.setNinteiChosainCode(row.getNinteiChosainNo());
             gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
@@ -311,8 +311,8 @@ public class IraishoIkkatsuHakko {
             }
         }
         List<GridParameter> shujiiIkenshoSakuseiIraiList = new ArrayList<>();
-        GridParameter gridParameter = new GridParameter();
         for (dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row : div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems()) {
+            GridParameter gridParameter = new GridParameter();
             gridParameter.setShujiiIryoKikanCode(row.getShujiiIryoKikanCode());
             gridParameter.setIshiNo(row.getIshiNo());
             gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
