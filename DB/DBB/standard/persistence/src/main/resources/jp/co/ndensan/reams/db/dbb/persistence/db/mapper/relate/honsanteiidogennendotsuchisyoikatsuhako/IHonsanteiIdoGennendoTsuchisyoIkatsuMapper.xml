@@ -4194,7 +4194,7 @@
         <association property="賦課の情報_更正後" resultMap="resultMap_FukaInfo"/>
         <association property="徴収方法" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="今年度賦課情報" resultMap="resultMap_FukaInfobefore"/>
-        <association property="対象者_追加含む_情報_更正前" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
+        <association property="対象者_追加含む_情報" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先" resultMap="ResultMap_AtesakiEntity"/>
         <association property="納組" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt703FindNokumiFunctionMapper.nokumiResult"/>
