@@ -226,8 +226,10 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
      * 意見書報酬の計算です。
      */
     public void onChange_Kuben() {
-        div.getShinseiJohoMeisai().getTxtIkenshoHoshu().setValue(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue()
-                .add(div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue()));
+        if (div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue() != null) {
+            div.getShinseiJohoMeisai().getTxtIkenshoHoshu().setValue(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue()
+                    .add(div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue()));
+        }
     }
 
     /**
@@ -319,9 +321,9 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
                 Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
         ShujiiIkenshoHoshuJissekiJoho joho = models.get(key);
         ShujiiIkenshoHoshuJissekiJohoBuilder builder = joho.createBuilderForEdit();
-        builder.set主治医意見書作成料(Integer.parseInt(row.getIkenshoSakuseiryo().toString()));
-        builder.set主治医意見書別途診療費(Integer.parseInt(row.getIkenshoBettoShinryohi().toString()));
-        builder.set主治医意見書報酬(Integer.parseInt(row.getIkenshoHoshu().toString()));
+        builder.set主治医意見書作成料(toDecimal(row.getIkenshoSakuseiryo()).intValue());
+        builder.set主治医意見書別途診療費(toDecimal(row.getIkenshoBettoShinryohi()).intValue());
+        builder.set主治医意見書報酬(toDecimal(row.getIkenshoHoshu()).intValue());
         builder.set主治医意見書報酬支払メモ(row.getShiharaiMemo());
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);
