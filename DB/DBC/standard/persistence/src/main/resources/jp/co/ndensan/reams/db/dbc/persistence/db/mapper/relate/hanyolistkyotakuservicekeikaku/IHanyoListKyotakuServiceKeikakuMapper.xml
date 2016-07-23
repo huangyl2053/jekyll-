@@ -79,15 +79,15 @@
         DbT3006."itakusakiJigyoshaNo"					AS dbT3006委託先事業者番号,
         DbT7060_Itaku."jigyoshaName"					AS dbT7060_Itaku事業者名称,
         DbT7060_Itaku."jigyoshaNameKana"                                AS DbT7060_Itaku事業者カナ名称,
-        DbV4001."jukyuShinseiJiyu"						AS dbV4001受給申請事由,
-        DbV4001."jukyuShinseiYMD"						AS dbV4001受給申請年月日,
-        DbV4001."yokaigoJotaiKubunCode"					AS dbV4001要介護認定状態区分コード,
-        DbV4001."ninteiYukoKikanKaishiYMD"					AS dbV4001認定有効期間開始日,
-        DbV4001."ninteiYukoKikanShuryoYMD"					AS dbV4001認定有効期間終了日,
-        DbV4001."ninteiYMD"							AS dbV4001受給認定日,
-        DbV4001."kyuSochishaFlag"						AS dbV4001旧措置フラグ,
-        DbT4001."minashiCode"						AS dbT4001みなし要介護区分コード,
-        DbV4001."chokkinIdoJiyuCode"					AS dbV4001直近異動事由コード,
+        DbV4001."受給申請事由"						AS dbV4001受給申請事由,
+        DbV4001."受給申請年月日"						AS dbV4001受給申請年月日,
+        DbV4001."要介護認定状態区分コード"					AS dbV4001要介護認定状態区分コード,
+        DbV4001."認定有効期間開始日"					AS dbV4001認定有効期間開始日,
+        DbV4001."認定有効期間終了日"					AS dbV4001認定有効期間終了日,
+        DbV4001."受給認定日"							AS dbV4001受給認定日,
+        DbV4001."旧措置フラグ"						AS dbV4001旧措置フラグ,
+        DbV4001."みなし要介護区分コード"						AS dbT4001みなし要介護区分コード,
+        DbV4001."直近異動事由コード"					AS dbV4001直近異動事由コード,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         FROM	rgdb."DbT3005KyotakuKeikakuTodokede"                                            AS DbT3005
@@ -160,7 +160,7 @@
                     SELECT
                     DbT3005_all."hihokenshaNo" as 被保険者番号,
                     DbT3005_all."taishoYM" as 対象年月,
-                    DbT3005_all."rarekiNo" as 履歴番号,
+                    DbT3005_all."rirekiNo" as 履歴番号,
                     DbT4001."jukyuShinseiJiyu" as 受給申請事由,
                     DbT4001."jukyuShinseiYMD" as 受給申請年月日,
                     DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
@@ -170,38 +170,32 @@
                     DbT4001."kyuSochishaFlag" as 旧措置フラグ,
                     DbT4001."minashiCode" as みなし要介護区分コード,
                     DbT4001."chokkinIdoYMD" as 直近異動事由コード,
-                    ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" OVER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                    ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
                     FROM
-                    rgdb.DbT3005KyotakuKeikakuTodokede As DbT3005_all
+                    rgdb."DbT3005KyotakuKeikakuTodokede" As DbT3005_all
                     INNER JOIN
-                    rgdb.DbT4001JukyushaDaicho As DbT4001
-                    ON DbT4001.hihokenshaNo = DbT3005_all.hihokenshaNo
-                    AND DbT4001.logicalDeletedFlag = false
+                    rgdb."DbT4001JukyushaDaicho" As DbT4001
+                    ON DbT4001."hihokenshaNo" = DbT3005_all."hihokenshaNo"
+                    AND DbT4001."logicalDeletedFlag" = false
                     AND DbT4001."yukoMukoKubun" = '1'
                     <choose>
                         <when test="抽出区分 == 2 and 基準年月日 != null and !基準年月日.isEmpty()">
-                            AND DbT4001.ninteiYukoKikanKaishiYMD <![CDATA[<=]]> #{基準年月日}
-                            AND #{基準年月日} <![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD
+                            AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日}
+                            AND #{基準年月日} <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
                         </when>
                         <otherwise>
-                            AND DbT4001.ninteiYukoKikanKaishiYMD <![CDATA[<=]]> DbT3005_all.todokedeYMD
-                            AND DbT3005_all.todokedeYMD <![CDATA[<=]]> DbT4001.ninteiYukoKikanShuryoYMD	
+                            AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT3005_all."todokedeYMD"
+                            AND DbT3005_all."todokedeYMD" <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"	
                         </otherwise>
                     </choose>
                 ) AS DbT4001_corresponding
                 WHERE
                 DbT4001_corresponding.番号 = 1
             )As DbV4001
-            ON DbV4001.hihokenshaNo = DbT3005.hihokenshaNo
-            AND DbV4001.taishoYM = DbT3005.taishoYM
-            AND DbV4001.rirekiNo = DbT3005.rirekiNo
+            ON DbV4001.被保険者番号 = DbT3005."hihokenshaNo"
+            AND DbV4001.対象年月 = DbT3005."taishoYM"
+            AND DbV4001.履歴番号 = DbT3005."rirekiNo"
         </if>
-        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho"                                     AS DbT4001
-        ON  DbT4001."shichosonCode" = DbV4001."shichosonCode"
-        AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
-        AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
-        AND DbT4001."edaban" = DbV4001."edaban"
-        AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
         INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode"=DbV1001."shikibetsuCode"
         LEFT JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
@@ -274,7 +268,7 @@
                 FROM
                 rgdb. "DbT3005KyotakuKeikakuTodokede"
                 GROUP BY
-                "hihokenshaNo"
+                "hihokenshaNo" , "taishoYM"
                 ) AS A
                 ON A. "hihokenshaNo" = B. "hihokenshaNo"
                 AND A. "max1" = (
@@ -302,7 +296,7 @@
                 "tekiyoKaishiYMD" <![CDATA[<=]]> #{基準年月日}
                 AND "tekiyoShuryoYMD" <![CDATA[>=]]> #{基準年月日}
                 GROUP BY
-                "hihokenshaNo"
+                "hihokenshaNo" ,"taishoYM"
                 ) AS E
                 ON E. "hihokenshaNo" = F. "hihokenshaNo"
                 AND E. "max2" = (F. "taishoYM" || F. "rirekiNo") ))
@@ -410,4 +404,49 @@
         <association property="宛先Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
+    
+    <select id="getKijunYMDData"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuKijunYMDParameter"
+            resultType="int"
+             fetchSize="500" resultOrdered="true">
+        <include refid="selectKijunYMDData" />
+    </select>
+    
+    <sql id="selectKijunYMDData">
+        select 
+            count(*)
+            from 
+                (
+                    SELECT
+                        B. "hihokenshaNo",
+                        B. "taishoYM",
+                        B. "rirekiNo"
+                    FROM
+                        rgdb. "DbT3005KyotakuKeikakuTodokede" AS B
+                    INNER JOIN (
+                        SELECT
+                            "hihokenshaNo"
+                            ,MAX ("taishoYM" || "rirekiNo") AS "max1"
+                        FROM
+                            rgdb. "DbT3005KyotakuKeikakuTodokede"
+                        GROUP BY
+                            "hihokenshaNo" , "taishoYM"
+                    ) AS A
+                    ON A. "hihokenshaNo" = B. "hihokenshaNo"
+                    AND A. "max1" = (B. "taishoYM" || B. "rirekiNo") 
+                ) DbT3005
+
+            LEFT OUTER JOIN 
+                rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS DbT3006
+            ON  DbT3005."hihokenshaNo" = DbT3006."hihokenshaNo"
+            AND DbT3005."taishoYM" = DbT3006."taishoYM"
+            AND DbT3005."rirekiNo" = DbT3006."rirekiNo"
+        
+            where 1=1
+                AND DbT3005."hihokenshaNo" = #{被保険者番号}
+                AND DbT3005."taishoYM" <![CDATA[>]]> #{対象年月}
+                AND DbT3005."taishoYM" <![CDATA[<=]]> #{基準年月日}
+                                
+    </sql>
+    
 </mapper>

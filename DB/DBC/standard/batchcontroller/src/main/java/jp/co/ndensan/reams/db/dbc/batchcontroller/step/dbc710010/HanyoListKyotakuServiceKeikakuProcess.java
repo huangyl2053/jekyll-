@@ -9,14 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyotaku.SakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuKijunYMDParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkyotakuservicekeikaku.IHanyoListKyotakuServiceKeikakuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -35,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -56,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト 居宅サービス計画Processクラスです。
@@ -93,6 +98,8 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
     private RString eucFilePath;
     private Decimal 連番;
     private FlexibleDate システム日付;
+    private final MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
+    private IHanyoListKyotakuServiceKeikakuMapper mapper;
 
     @BatchWriter
     private EucCsvWriter<HanyoListKyotakuServiceKeikakuCsvEntity> eucCsvWriter;
@@ -112,8 +119,12 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
         builder.setデータ取得区分(DataShutokuKubun.直近レコード);
+        List<ShikibetsuCode> list = new ArrayList<>();
+        builder.set識別コードリスト(list);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         parameter.set宛名検索条件(searchKey);
+//        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        mapper = mapperProvider.create(IHanyoListKyotakuServiceKeikakuMapper.class);
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParameter());
     }
 
@@ -132,10 +143,22 @@ public class HanyoListKyotakuServiceKeikakuProcess extends BatchProcessBase<Hany
 
     @Override
     protected void process(HanyoListKyotakuServiceKeikakuEntity entity) {
-        eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter, 連番));
-        連番 = 連番.add(Decimal.ONE);
-        personalDataList.add(toPersonalData(entity));
 
+        if (parameter.get抽出区分().compareTo("2") == 0 && parameter.get基準年月日() != null && !parameter.get基準年月日().isEmpty()) {
+            HanyoListKyotakuServiceKeikakuKijunYMDParameter param
+                    = new HanyoListKyotakuServiceKeikakuKijunYMDParameter(entity.getDbT3005被保険者番号(), entity.getDbT3005対象年月(), parameter.get基準年月日());
+            int kijunYMDDate = mapper.getKijunYMDData(param);
+            if (kijunYMDDate == 0) {
+                eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter, 連番));
+                連番 = 連番.add(Decimal.ONE);
+                personalDataList.add(toPersonalData(entity));
+            }
+        } else {
+            eucCsvWriter.writeLine(csvEntityEditor.editor(entity, parameter, 連番));
+            連番 = 連番.add(Decimal.ONE);
+            personalDataList.add(toPersonalData(entity));
+        }
+    
     }
 
     private PersonalData toPersonalData(HanyoListKyotakuServiceKeikakuEntity entity) {

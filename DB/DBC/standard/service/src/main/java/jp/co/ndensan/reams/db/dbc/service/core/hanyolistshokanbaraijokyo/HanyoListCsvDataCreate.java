@@ -501,7 +501,13 @@ public class HanyoListCsvDataCreate {
         csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity));
         csvEntity.set受給申請事由(codeToRString(entity.get受給申請事由()));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日(), parameter));
-        csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, codeToRString(entity.get要介護認定状態区分コード())).getName());
+
+        if (entity.get要介護認定状態区分コード() == null || entity.get要介護認定状態区分コード().isEmpty()) {
+            csvEntity.set受給要介護度(RString.EMPTY);
+        } else {
+            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, codeToRString(entity.get要介護認定状態区分コード())).getName());
+        }
+        
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.get受給認定日(), parameter));
