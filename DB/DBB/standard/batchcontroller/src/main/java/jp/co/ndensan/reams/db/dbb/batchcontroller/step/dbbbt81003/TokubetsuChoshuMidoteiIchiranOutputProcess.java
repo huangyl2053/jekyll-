@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -170,7 +169,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
             targets.add(target);
         }
         TokubetsuChoshuMidoteiIchiranPrintService printService = new TokubetsuChoshuMidoteiIchiranPrintService();
-        printService.print(targets, null, null, new ReportManager(), null);
+        printService.printChohyo(targets, null, null, null);
     }
 
     private void outputCsv(List<TokubetsuChoshuMidoteiIchiranEntity> list) {
