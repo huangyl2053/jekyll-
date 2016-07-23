@@ -178,10 +178,10 @@ public class HanyoListRoreiFukushiNenkinJukyushaMybatisParameter implements IMyB
         if (HizukeChushutsuKubun.範囲.getコード().equals(日付抽出区分)) {
             isHaniFlag = true;
         }
-        if (HaniChushutsubiKubun.生保開始日.getコード().equals(範囲抽出日区分)) {
+        if (HaniChushutsubiKubun.老齢開始日.getコード().equals(範囲抽出日区分)) {
             isKaishiYMDFlag = true;
         }
-        if (HaniChushutsubiKubun.生保終了日.getコード().equals(範囲抽出日区分)) {
+        if (HaniChushutsubiKubun.老齢終了日.getコード().equals(範囲抽出日区分)) {
             isShuryoYMDFlag = true;
         }
         if (!RString.isNullOrEmpty(範囲抽出日From)) {

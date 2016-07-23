@@ -792,9 +792,9 @@ public class HanyoListParamHandler {
         RString 抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         set日付抽出区分(抽出区分, モード4);
         div.getRadRoreiFukushiNenkinJukyushaChushutsu().setSelectedKey(抽出区分);
-        RString 日付抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
-        if (!RString.isNullOrEmpty(日付抽出区分)) {
-            div.getTexRoreiFukushiNenkinJukyushaKijyunDate().setValue(new RDate(日付抽出区分.toString()));
+        RString 基準年月日 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunYMD"));
+        if (!RString.isNullOrEmpty(基準年月日)) {
+            div.getTexRoreiFukushiNenkinJukyushaKijyunDate().setValue(new RDate(基準年月日.toString()));
         }
         div.getRadRoreiFukushiNenkinJukyushaHani().setSelectedKey(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("chushutsunichiKubun")));
