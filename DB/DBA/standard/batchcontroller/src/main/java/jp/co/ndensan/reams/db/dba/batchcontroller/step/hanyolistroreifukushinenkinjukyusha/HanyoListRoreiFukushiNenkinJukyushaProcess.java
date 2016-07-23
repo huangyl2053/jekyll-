@@ -189,10 +189,80 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcess extends BatchProcessBase
         eucCsvWriter.writeLine(new HanyoListRoreiFukushiNenkinJukyushaResult().
                 setEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, association, 生活保護種別builder));
         personalDataList.add(toPersonalData(lastEntity));
+        if (eucCsvWriter.getCount() == 0) {
+            eucCsvWriter.writeLine(setBlank());
+        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力();
+    }
+
+    private HanyoListRoreiFukushiNenkinJukyushaCsvEntity setBlank() {
+        HanyoListRoreiFukushiNenkinJukyushaCsvEntity entity = new HanyoListRoreiFukushiNenkinJukyushaCsvEntity();
+        entity.set識別コード(RString.EMPTY);
+        entity.set住民種別(RString.EMPTY);
+        entity.set氏名(RString.EMPTY);
+        entity.set氏名カナ(RString.EMPTY);
+        entity.set生年月日(RString.EMPTY);
+        entity.set年齢(RString.EMPTY);
+        entity.set性別(RString.EMPTY);
+        entity.set続柄コード(RString.EMPTY);
+        entity.set世帯コード(RString.EMPTY);
+        entity.set世帯主名(RString.EMPTY);
+        entity.set住所コード(RString.EMPTY);
+        entity.set郵便番号(RString.EMPTY);
+        entity.set住所番地方書(RString.EMPTY);
+        entity.set住所(RString.EMPTY);
+        entity.set番地(RString.EMPTY);
+        entity.set方書(RString.EMPTY);
+        entity.set行政区コード(RString.EMPTY);
+        entity.set行政区名(RString.EMPTY);
+        entity.set地区１(RString.EMPTY);
+        entity.set地区２(RString.EMPTY);
+        entity.set地区３(RString.EMPTY);
+        entity.set連絡先１(RString.EMPTY);
+        entity.set連絡先２(RString.EMPTY);
+        entity.set登録異動日(RString.EMPTY);
+        entity.set登録事由(RString.EMPTY);
+        entity.set登録届出日(RString.EMPTY);
+        entity.set住定異動日(RString.EMPTY);
+        entity.set住定事由(RString.EMPTY);
+        entity.set住定届出日(RString.EMPTY);
+        entity.set消除異動日(RString.EMPTY);
+        entity.set消除事由(RString.EMPTY);
+        entity.set消除届出日(RString.EMPTY);
+        entity.set転出入理由(RString.EMPTY);
+        entity.set前住所郵便番号(RString.EMPTY);
+        entity.set前住所番地方書(RString.EMPTY);
+        entity.set前住所(RString.EMPTY);
+        entity.set前住所番地(RString.EMPTY);
+        entity.set前住所方書(RString.EMPTY);
+        entity.set市町村コード(RString.EMPTY);
+        entity.set市町村名(RString.EMPTY);
+        entity.set保険者コード(RString.EMPTY);
+        entity.set保険者名(RString.EMPTY);
+        entity.set空白(RString.EMPTY);
+        entity.set被保険者番号(RString.EMPTY);
+        entity.set資格取得事由(RString.EMPTY);
+        entity.set資格取得日(RString.EMPTY);
+        entity.set資格取得届出日(RString.EMPTY);
+        entity.set喪失事由(RString.EMPTY);
+        entity.set資格喪失日(RString.EMPTY);
+        entity.set資格喪失届日(RString.EMPTY);
+        entity.set資格区分(RString.EMPTY);
+        entity.set住所地特例状態(RString.EMPTY);
+        entity.set資格証記載保険者番号(RString.EMPTY);
+        entity.set老齢福祉年金開始日(RString.EMPTY);
+        entity.set老齢福祉年金終了日(RString.EMPTY);
+        entity.set生活保護開始日(RString.EMPTY);
+        entity.set生活保護終了日(RString.EMPTY);
+        entity.set生活保護種別(RString.EMPTY);
+        entity.set医療保険種別(RString.EMPTY);
+        entity.set医療保険番号(RString.EMPTY);
+        entity.set医療保険者名(RString.EMPTY);
+        entity.set医療保険記号番号(RString.EMPTY);
+        return entity;
     }
 
     private void バッチ出力条件リストの出力() {
