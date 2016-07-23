@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuJissekiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuJissekiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinhoshunyuryoku.ShinsakaiIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshohoshujissekijoho.ShujiiIkenshoHoshuJissekiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5603ShinsakaiIinHoshuJissekiJohoDac;
@@ -97,16 +98,14 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
     }
 
     /**
-     * 「保存する」ボタンを押下し、更新処理を続けます。
+     * MAX連番を取得します。
      *
-     * @param 審査会委員情報 {@link ShinsakaiIinHoshuJissekiJoho}を更新します。
-     * @return 更新/更新件数 の件数を返します。
+     * @param param 審査会委員報酬入力結果情報を特定するためのMyBatis用パラメータクラスです。
+     * @return ShinsakaiIinHoshuNyuryoku{@code list}
      */
-    public int update(ShinsakaiIinHoshuJissekiJoho 審査会委員情報) {
-        if (!審査会委員情報.hasChanged()) {
-            return 0;
-        }
-        return dbT5603.update(審査会委員情報.toEntity());
+    public int getMAX連番(ShinsakaiIinHoshuNyuryokuMapperParameter param) {
+        IShinsakaiIinHoshuNyuryokuMapper shimapper = mapperProvider.create(IShinsakaiIinHoshuNyuryokuMapper.class);
+        return shimapper.getremban(param);
     }
 
     /**
@@ -123,15 +122,15 @@ public class ShinsakaiIinHoshuNyuryokuFinder {
     }
 
     /**
-     * 「保存する」ボタンを押下し、追加処理を続けます。
+     * 審査会委員情報{@link ShujiiIkenshoHoshuJissekiJoho}を登録/更新します。
      *
-     * @param 審査会委員情報 審査会委員情報審査会委員情報
-     * @return 審査会委員情報
+     * @param 審査会委員情報 {@link ShinsakaiIinHoshuJissekiJoho}
+     * @return 登録/登録件数 更新/更新件数 の件数を返します。
      */
-    public boolean insert(ShinsakaiIinHoshuJissekiJoho 審査会委員情報) {
-        if (審査会委員情報.isAdded()) {
-            return 1 == dbT5603.insert(審査会委員情報.toEntity());
+    public int insertOrUpdate(ShinsakaiIinHoshuJissekiJoho 審査会委員情報) {
+        if (!審査会委員情報.hasChanged()) {
+            return 0;
         }
-        return false;
+        return dbT5603.save(審査会委員情報.toEntity());
     }
 }

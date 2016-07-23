@@ -27,6 +27,8 @@ public class ShinsakaiIinHoshuDiv extends Panel {
     private TextBoxNum txtShinsaKaisu;
     @JsonProperty("txtHoshuSogaku")
     private TextBoxNum txtHoshuSogaku;
+    @JsonProperty("txtSonotaHiyo")
+    private TextBoxNum txtSonotaHiyo;
     @JsonProperty("txtZeiKojoGaku")
     private TextBoxNum txtZeiKojoGaku;
     @JsonProperty("txtHoshuGokei")
@@ -90,6 +92,24 @@ public class ShinsakaiIinHoshuDiv extends Panel {
     @JsonProperty("txtHoshuSogaku")
     public void setTxtHoshuSogaku(TextBoxNum txtHoshuSogaku) {
         this.txtHoshuSogaku = txtHoshuSogaku;
+    }
+
+    /*
+     * gettxtSonotaHiyo
+     * @return txtSonotaHiyo
+     */
+    @JsonProperty("txtSonotaHiyo")
+    public TextBoxNum getTxtSonotaHiyo() {
+        return txtSonotaHiyo;
+    }
+
+    /*
+     * settxtSonotaHiyo
+     * @param txtSonotaHiyo txtSonotaHiyo
+     */
+    @JsonProperty("txtSonotaHiyo")
+    public void setTxtSonotaHiyo(TextBoxNum txtSonotaHiyo) {
+        this.txtSonotaHiyo = txtSonotaHiyo;
     }
 
     /*

@@ -43,49 +43,63 @@ parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhosh
     SELECT
         T1."gogitaiNo" AS "gogitaiNo",
         T1."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo",
-        T2."remban" AS "remban",
-        T2."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD",
-        T2."shinsakaiIinHoshuKubun" AS "shinsakaiIinHoshuKubun",
-        T2."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo_jissai",
-        T2."shinsakaiHoshu" AS "shinsakaiHoshu",
-        T2."shinsakaiSonotaHoshu" AS "shinsakaiSonotaHoshu",
-        T2."shinsakaiHoshuGokei" AS "shinsakaiHoshuGokei",
-        T2."shinsakaiHoshuZeiritsu" AS "shinsakaiHoshuZeiritsu",
-        T2."shinsakaiKotsuhi" AS "shinsakaiKotsuhi",
-        T2."shinsakaiKojoZeigaku" AS "shinsakaiKojoZeigaku",
-        T2."hoshuShiharaiMemo" AS "hoshuShiharaiMemo",
-        T2."ginkoFurikomiShutsuryokuFlag" AS "ginkoFurikomiShutsuryokuFlag",
-        T3."shussekiFlag" AS "shussekiFlag",
-        T3."shussekiTime" AS "shussekiTime",
-        T3."taisekiTime" AS "taisekiTime",
-        T4."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+        T4."remban" AS "remban",
+        T4."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD",
+        T4."shinsakaiIinHoshuKubun" AS "shinsakaiIinHoshuKubun",
+        T4."shinsakaiHoshu" AS "shinsakaiHoshu",
+        T4."shinsakaiSonotaHoshu" AS "shinsakaiSonotaHoshu",
+        T4."shinsakaiHoshuGokei" AS "shinsakaiHoshuGokei",
+        T4."shinsakaiHoshuZeiritsu" AS "shinsakaiHoshuZeiritsu",
+        T4."shinsakaiKotsuhi" AS "shinsakaiKotsuhi",
+        T4."shinsakaiKojoZeigaku" AS "shinsakaiKojoZeigaku",
+        T4."hoshuShiharaiMemo" AS "hoshuShiharaiMemo",
+        T4."ginkoFurikomiShutsuryokuFlag" AS "ginkoFurikomiShutsuryokuFlag",
+        T2."shussekiFlag" AS "shussekiFlag",
+        T2."shussekiTime" AS "shussekiTime",
+        T2."taisekiTime" AS "taisekiTime",
+        T3."gogitaichoKubunCode" AS "gogitaichoKubunCode"
     FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T1
     LEFT JOIN
-        rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T2
-    ON T2."shinsakaiKaisaiNo" = T1."shinsakaiKaisaiNo"
+        rgdb."DbT5503ShinsakaiWariateIinJoho" AS T2
+    ON T1."shinsakaiKaisaiNo" = T2."shinsakaiKaisaiNo"
     INNER JOIN
-        rgdb."DbT5503ShinsakaiWariateIinJoho" AS T3
-    ON T2."shinsakaiIinCode" = T3."shinsakaiIinCode"
-    AND T2."shinsakaiKaisaiNo" = T3."shinsakaiKaisaiNo"
-    INNER JOIN
-        rgdb."DbT5593GogitaiWariateIinJoho" AS T4
-    ON T2."shinsakaiIinCode" = T4."shinsakaiIinCode"
-    AND T1."gogitaiNo" = T4."gogitaiNo"
-    AND T4."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> T3."shinsakaiKaisaiYMD"
-    AND T3."shinsakaiKaisaiYMD"  <![CDATA[<=]]> T4."gogitaiYukoKikanShuryoYMD"
+        rgdb."DbT5593GogitaiWariateIinJoho" AS T3
+    ON T1."gogitaiNo" = T3."gogitaiNo"
+    AND T2."shinsakaiIinCode"  = T3."shinsakaiIinCode"
+    AND T3."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>t1."shinsakaiKaisaiYMD"
+    AND T1."shinsakaiKaisaiYMD"<![CDATA[<=]]>T3."gogitaiYukoKikanShuryoYMD"
+    LEFT JOIN         
+        rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T4
+    ON  T2."shinsakaiKaisaiNo" = T4."shinsakaiKaisaiNo"
+    AND T2."shinsakaiIinCode" = t4."shinsakaiIinCode"
     WHERE
         T2."shinsakaiIinCode" = #{コード}
     <if test="hasFromDate">
-        AND #{fromDate} <![CDATA[<=]]> T3."shinsakaiKaisaiYMD"
+        AND #{fromDate} <![CDATA[<=]]> substring(T2."shinsakaiKaisaiYMD",1,6)
     </if>
     <if test="hasToDate">
-        AND T3."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{toDate}
+        AND substring(T2."shinsakaiKaisaiYMD",1,6) <![CDATA[<=]]> #{toDate}
     </if>
-    ORDER BY
-        T2."shinsakaiIinCode" DESC,
-        T2."shinsakaiIinHoshuKubun" DESC,
-        T2."shinsakaiKaisaiYMD" DESC,
-        T2."remban" DESC
+    ORDER BY  
+        T4."shinsakaiIinCode" DESC,       
+        T4."shinsakaiIinHoshuKubun" DESC,         
+        T4."shinsakaiKaisaiYMD" DESC,         
+        T4."remban" DESC
+    </select>
+    
+    <select resultOrdered="true" id="getremban" resultType="int"
+parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
+        fetchSize="500">
+        SELECT 
+        coalesce(MAX("remban"), 0)+1
+        FROM 
+            rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" 
+        WHERE 
+            "shinsakaiKaisaiYMD" = #{実施日}
+        AND 
+            "shinsakaiIinCode"=#{コード}
+        AND 
+            "shinsakaiIinHoshuKubun" =#{kuBun}
     </select>
 </mapper>

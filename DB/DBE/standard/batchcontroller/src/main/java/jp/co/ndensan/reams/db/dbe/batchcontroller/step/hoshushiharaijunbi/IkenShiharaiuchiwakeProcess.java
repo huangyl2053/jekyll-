@@ -77,6 +77,7 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     private RString 市町村名;
     private RString 消費税率;
     private int index_tmp = 1;
+    private static final int INDEX_50 = 1;
 
     @Override
     protected void beforeExecute() {
@@ -107,23 +108,6 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
 
     @Override
     protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            IkenShiharaiuchiwakeEdit edit = new IkenShiharaiuchiwakeEdit();
-            List<RString> 業務固有キー = new ArrayList<>();
-            業務固有キー.add(current.getShujiiIryoKikanCode());
-            IkenShiharaiuchiwakeEntity shumeisaiEntity = edit.getIkenShiharaiuchiwakeEntity(current, 消費税率, get認証者(),
-                    ChosaHoshuShiharaiProcess.get通知文(), ChosaHoshuShiharaiProcess.get口座情報(new KamokuCode("002"), 業務固有キー));
-            editIkenShiharaiuchiwakeEntity(shumeisaiEntity, current);
-            IkenShiharaiuchiwakeReport report = new IkenShiharaiuchiwakeReport(shumeisaiEntity);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
-    }
-
-    private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
-        return !before.getShujiiIryoKikanCode().equals(current.getShujiiIryoKikanCode());
-
     }
 
     @Override
@@ -200,13 +184,13 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
 
     private IkenShiharaiuchiwakeEntity editIkenShiharaiuchiwakeEntity(IkenShiharaiuchiwakeEntity chiwakeEntity,
             HoshuShiharaiJunbiRelateEntity entity) {
-        if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
+        if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode()) || index_tmp % INDEX_50 == 1) {
             合計金額 = Decimal.ZERO;
             index_tmp = 1;
             shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
         }
         合計金額 = 合計金額.add(rstringToDecimal(chiwakeEntity.get金額()));
-        chiwakeEntity.set合計金額(get合計(decimalToRString(合計金額), "円"));
+        chiwakeEntity.set合計金額(get合計(decimalToRString(合計金額.roundUpTo(0)), "円"));
         chiwakeEntity.set金額(get合計(chiwakeEntity.get金額(), "円"));
         chiwakeEntity.set対象期間(get対象期間());
         chiwakeEntity.set件数(get合計(intToRString(index_tmp), "件"));

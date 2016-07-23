@@ -35,7 +35,6 @@ public class ShinsakaiIinHoshuNyuryokuEntity {
     private int remban;
     private FlexibleDate shinsakaiKaisaiYMD;
     private Code shinsakaiIinHoshuKubun;
-    private RString shinsakaiKaisaiNo_jissai;
     private int shinsakaiHoshu;
     private int shinsakaiSonotaHoshu;
     private int shinsakaiHoshuGokei;

@@ -50,7 +50,7 @@ public class IinhoshushiharaiEditor implements IIinhoshushiharaiEditor {
         source.sonota = item.getその他();
         source.title = item.getタイトル();
         source.tsuchibun1 = item.get通知文1();
-        source.IshiName = item.get審査会委員氏名();
+        source.ishiName = item.get審査会委員氏名();
         source.furikomiyoteiYMD = item.get振込予定日();
         source.shubetsu = item.get種別();
         source.bango = item.get番号();

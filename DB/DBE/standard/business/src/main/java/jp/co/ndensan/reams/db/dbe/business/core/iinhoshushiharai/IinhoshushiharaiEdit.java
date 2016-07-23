@@ -40,7 +40,7 @@ public class IinhoshushiharaiEdit {
      */
     public Iinhoshushiharai getIinhoshushiharai(HoshuShiharaiJunbiRelateEntity entity, NinshoshaSource 認証者, Map<Integer, RString> 通知文,
             Koza 口座情報) {
-        Decimal 差引支給額 = new Decimal(entity.getHoshu()).subtract(entity.getShinsakaiKojoZeigaku());
+        Decimal 差引支給額 = new Decimal(entity.getHoshu()).subtract(entity.getShinsakaiKojoZeigaku()).roundUpTo(0);
         Iinhoshushiharai iinhoshushiharai = new Iinhoshushiharai();
         iinhoshushiharai.set電子公印(認証者.denshiKoin);
         iinhoshushiharai.set発行日(認証者.hakkoYMD);

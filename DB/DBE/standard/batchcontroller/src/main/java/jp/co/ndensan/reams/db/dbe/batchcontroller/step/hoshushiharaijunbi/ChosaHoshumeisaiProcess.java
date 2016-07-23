@@ -78,7 +78,8 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;
-    private int index_tmp = 0;
+    private int index_tmp = 1;
+    private static final int INDEX_25 = 25;
 
     @Override
     protected void beforeExecute() {
@@ -109,20 +110,6 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
 
     @Override
     protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            ChosaHoshumeisaiEdit edit = new ChosaHoshumeisaiEdit();
-            ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(current);
-            chosaHoshumeisai = getChosaHoshumeisai(chosaHoshumeisai, current);
-            ChosaHoshumeisaiReport report = new ChosaHoshumeisaiReport(chosaHoshumeisai);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
-    }
-
-    private boolean hasBrek(HoshuShiharaiJunbiRelateEntity before, HoshuShiharaiJunbiRelateEntity current) {
-        return !before.getJigyoshaMeisho().equals(current.getJigyoshaMeisho())
-                || !before.getNinteichosainCode().equals(current.getNinteichosainCode());
     }
 
     @Override
@@ -186,6 +173,13 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
     }
 
+    private RString dateFormat1(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().toDateString();
+    }
+
     private RString get対象期間() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(dateFormat9(processParameter.getJissekidaterangefrom()));
@@ -195,7 +189,8 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     }
 
     private ChosaHoshumeisai getChosaHoshumeisai(ChosaHoshumeisai chosaHoshumeisai, HoshuShiharaiJunbiRelateEntity entity) {
-        if (!chosaItakusakiNam.equals(entity.getJigyoshaMeisho()) || !ninteichosainCode.equals(entity.getNinteichosainCode())) {
+        if (!chosaItakusakiNam.equals(entity.getJigyoshaMeisho()) || !ninteichosainCode.equals(entity.getNinteichosainCode())
+                || index_tmp % INDEX_25 == 1) {
             合計金額 = Decimal.ZERO;
             index_tmp = 1;
             合計件数新規在宅 = Decimal.ZERO;
@@ -214,13 +209,14 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         chosaHoshumeisai.set合計件数継続在宅(decimalToRString(合計件数継続在宅));
         chosaHoshumeisai.set合計件数継続施設(decimalToRString(合計件数継続施設));
         合計金額 = 合計金額.add(rstringToDecimal(chosaHoshumeisai.get合計金額()));
-        chosaHoshumeisai.set合計金額(decimalToRString(合計金額));
+        chosaHoshumeisai.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
         Decimal 消費税 = 合計金額.multiply(rstringToDecimal(消費税率)).subtract(合計金額);
         chosaHoshumeisai.set対象期間(get対象期間());
-        chosaHoshumeisai.set生年月日(dateFormat9(entity.getSeinengappiYMD()));
-        chosaHoshumeisai.set明細番号(new RString(String.valueOf(index_tmp)));
-        chosaHoshumeisai.set消費税(decimalToRString(消費税));
-        chosaHoshumeisai.set合計請求額(decimalToRString(消費税.add(合計金額)));
+        chosaHoshumeisai.set生年月日(dateFormat1(entity.getSeinengappiYMD()));
+        chosaHoshumeisai.set調査票提出日(dateFormat1(entity.getNinteichosaJisshiYMD()));
+        chosaHoshumeisai.set明細番号(new RString(index_tmp));
+        chosaHoshumeisai.set消費税(decimalToRString(消費税.roundUpTo(0)));
+        chosaHoshumeisai.set合計請求額(decimalToRString(消費税.add(合計金額).roundUpTo(0)));
         return chosaHoshumeisai;
     }
 

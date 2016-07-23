@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1150001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ShotokuKanri;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoResult;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.SetaiInn;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.ShikibetsuTaishoEntity;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoToiawasesakiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.setai.SetaiinFinder;
@@ -715,12 +715,14 @@ public final class NushiJuminJohoHandler {
         所得照会票.set前住所(所得照会票発行対象世帯員.get前住所());
         所得照会票.set現住所(所得照会票発行対象世帯員.get現住所());
         所得照会票.set住民状態コード(所得照会票発行対象世帯員.get識別対象().to個人().get住民状態().コード());
+        所得照会票.set住民種別コード(所得照会票発行対象世帯員.get識別対象().get住民種別().getCode());
         List<SetaiInn> 世帯員リスト = new ArrayList<>();
         for (dgShotokuShokaiHyoHakko_Row row : rowList) {
             int rowId = row.getId();
             ShotokushokaihyoTaishoSetaiin 所得照会票発行対象世帯員_row = 所得照会票発行対象世帯員リスト.get(rowId);
             SetaiInn 世帯員 = new SetaiInn();
             世帯員.set住民状態コード(所得照会票発行対象世帯員_row.get識別対象().to個人().get住民状態().コード());
+            世帯員.set住民種別コード(所得照会票発行対象世帯員_row.get識別対象().get住民種別().getCode());
             if (文字列_THREE.equals(所得照会票発行対象世帯員_row.get識別対象().to個人().get住民状態().コード())
                     && get転出確定異動年月日(所得照会票発行対象世帯員_row.get識別対象()) != null) {
                 世帯員.set転出日(get転出確定異動年月日(所得照会票発行対象世帯員_row.get識別対象()));
@@ -886,7 +888,7 @@ public final class NushiJuminJohoHandler {
      *
      * @return List<DbT2008ShotokuKanriEntity>
      */
-    public List<DbT2008ShotokuKanriEntity> get識別コード() {
+    public List<ShotokuKanri> get識別コード() {
         FlexibleYear 所得年度 = new FlexibleYear(div.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().getSelectedKey());
         List<ShikibetsuCode> 識別コードList = new ArrayList<>();
         List<dgShotokuShokaiHyoHakko_Row> 世帯員一覧 = div.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().getSelectedItems();
@@ -894,7 +896,7 @@ public final class NushiJuminJohoHandler {
             ShikibetsuCode 識別コード = new ShikibetsuCode(row.getTxtShikibetsuCode());
             識別コードList.add(識別コード);
         }
-        List<DbT2008ShotokuKanriEntity> entityList = NushiJuminJohoService.createInstance().get識別コード(所得年度, 識別コードList);
+        List<ShotokuKanri> entityList = NushiJuminJohoService.createInstance().get識別コード(所得年度, 識別コードList);
         return entityList;
     }
 

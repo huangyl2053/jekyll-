@@ -54,6 +54,7 @@ public class ShinsainShiharaimeisaishoEditor implements IShinsainShiharaimeisais
         source.listChosaSakusei_9 = kinngakuFormat(item.get報酬合計());
         source.gokeiKingaku = kinngakuFormat(item.get合計金額());
         source.shouhiZei = kinngakuFormat(item.get消費税());
+        source.shinsakaiIinCode = item.get審査委員コード();
         source.gokeiSeikyuKingaku = kinngakuFormat(item.get合計請求額());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get被保険者番号() != null) {

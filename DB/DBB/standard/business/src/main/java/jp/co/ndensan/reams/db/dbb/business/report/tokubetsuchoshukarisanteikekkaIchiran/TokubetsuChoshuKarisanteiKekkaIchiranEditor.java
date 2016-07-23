@@ -8,9 +8,6 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukarisanteikekk
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranSource;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -37,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuChoshuKarisanteiKekkaIchiranEditor {
 
     private final TokuchoKariKeisangoFukaEntity 特徴仮算定計算後賦課情報Entity;
+    private final RString 市町村コード;
+    private final RString 市町村名称;
     private final FlexibleYear 調定年度;
     private final YMDHMS 調定日時;
     private final List<RString> 並び順List;
@@ -68,6 +67,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     /**
      * コンストラクタです
      *
+     * @param 市町村コード RString
+     * @param 市町村名称 RString
      * @param 特徴仮算定計算後賦課情報Entity TokuchoKariKeisangoFukaEntity
      * @param 調定年度 FlexibleYear
      * @param 調定日時 YMDHMS
@@ -78,6 +79,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
      * @param 前年度保険料 RString
      */
     public TokubetsuChoshuKarisanteiKekkaIchiranEditor(
+            RString 市町村コード,
+            RString 市町村名称,
             TokuchoKariKeisangoFukaEntity 特徴仮算定計算後賦課情報Entity,
             FlexibleYear 調定年度,
             YMDHMS 調定日時,
@@ -86,6 +89,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
             int 連番,
             RString 住所編集,
             Decimal 前年度保険料) {
+        this.市町村コード = 市町村コード;
+        this.市町村名称 = 市町村名称;
         this.特徴仮算定計算後賦課情報Entity = 特徴仮算定計算後賦課情報Entity;
         this.調定年度 = 調定年度;
         this.調定日時 = 調定日時;
@@ -104,12 +109,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時).concat(RString.HALF_SPACE).concat(作成);
         source.nendo = 調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .fillType(FillType.BLANK).toDateString();
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association association = finder.getAssociation();
-        if (association.get地方公共団体コード() != null) {
-            source.hokenshaNo = association.get地方公共団体コード().value();
-        }
-        source.hokenshaName = association.get市町村名();
+        source.hokenshaNo = 市町村コード;
+        source.hokenshaName = 市町村名称;
         source.shutsuryokujun1 = 並び順List.size() > NUM_0 ? 並び順List.get(NUM_0) : RString.EMPTY;
         source.shutsuryokujun2 = 並び順List.size() > NUM_1 ? 並び順List.get(NUM_1) : RString.EMPTY;
         source.shutsuryokujun3 = 並び順List.size() > NUM_2 ? 並び順List.get(NUM_2) : RString.EMPTY;
@@ -135,7 +136,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         set生年月日(住民種別コード, 生年月日, source);
         RString 性別 = 特徴仮算定計算後賦課情報Entity.get宛名().getSeibetsuCode();
         set性別(性別, source);
-        if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isNullOrEmpty()) {
+        if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() == null || 特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
             set開始月(source);
         }
         RString 前年度所得段階 = 特徴仮算定計算後賦課情報Entity.get前年度保険料段階().substring(NUM_0, NUM_2).trimStart(CHAR_0);
@@ -174,7 +175,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         }
     }
 
-    private void set生年月日(RString 住民種別コード, FlexibleDate 生年月日, TokubetsuChoshuKarisanteiKekkaIchiranSource source) throws IllegalStateException {
+    private void set生年月日(RString 住民種別コード, FlexibleDate 生年月日, TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
         if ((RSTRING_1.equals(住民種別コード) || RSTRING_3.equals(住民種別コード)) && 生年月日 != null) {
             source.listUpper_5 = 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -193,7 +194,12 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     }
 
     private void set特別徴収対象年金(TokubetsuChoshuKarisanteiKekkaIchiranSource source) throws NullPointerException, IllegalArgumentException {
-        if (特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード() != null) {
+        if (特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード() != null && 特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード().length() <= NUM_3) {
+            Code 仮徴収_年金コード = new Code(特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード());
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), 仮徴収_年金コード);
+            source.listLower_5 = 特別徴収対象年金;
+        }
+        if (特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード() != null && 特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード().length() > NUM_3) {
             Code 仮徴収_年金コード = new Code(特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード().substring(NUM_0, NUM_3));
             RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), 仮徴収_年金コード);
             source.listLower_5 = 特別徴収対象年金;
@@ -203,7 +209,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     private void set特別徴収停止事由(TokubetsuChoshuKarisanteiKekkaIchiranSource source) throws IllegalArgumentException, NullPointerException {
         if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() != null) {
             Code 特別徴収停止事由コード = new Code(特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().toString());
-            RString 備考２ = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, new CodeShubetsu("0008"), 特別徴収停止事由コード);
+            RString 備考２ = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, new CodeShubetsu("0008"), 特別徴収停止事由コード);
             source.listLower_5 = 備考２;
         }
     }
@@ -212,10 +218,12 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         Decimal 特徴期期別金額01 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額01();
         Decimal 特徴期期別金額02 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額02();
         Decimal 特徴期期別金額03 = 特徴仮算定計算後賦課情報Entity.get特徴期期別金額03();
-        if (!Decimal.ZERO.equals(特徴期期別金額01) && !Decimal.ZERO.equals(特徴期期別金額02) && !Decimal.ZERO.equals(特徴期期別金額03)) {
+        if (特徴期期別金額01.compareTo(Decimal.ZERO) > NUM_0 && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0
+                && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
             source.listUpper_7 = 継続;
         }
-        if (Decimal.ZERO.equals(特徴期期別金額01) && !Decimal.ZERO.equals(特徴期期別金額02) && !Decimal.ZERO.equals(特徴期期別金額03)) {
+        if (Decimal.ZERO.equals(特徴期期別金額01) && 特徴期期別金額02.compareTo(Decimal.ZERO) > NUM_0
+                && 特徴期期別金額03.compareTo(Decimal.ZERO) > NUM_0) {
             source.listUpper_7 = SIX月;
         }
 

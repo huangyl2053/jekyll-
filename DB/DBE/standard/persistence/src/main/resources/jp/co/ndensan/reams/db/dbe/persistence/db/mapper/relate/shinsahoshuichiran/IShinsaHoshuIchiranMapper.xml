@@ -46,10 +46,13 @@
     <select id="get合計額"
             resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsahoshuichiran.ShinsaHoshuIchiranMybitisParamter" fetchSize="500" resultOrdered="true">
+        WITH G AS 
+        (
         SELECT
                 X.合議体番号,
                 X.介護認定審査会委員コード,
-                SUM(X.報酬総額) AS 報酬総額,
+                SUM(X.報酬総額)+SUM(X.報酬) AS 報酬総額,
+                SUM(X.その他費用) AS その他費用,
                 SUM(X.税額控除)+SUM(X.税額) AS 税額控除,
                 SUM(X.報酬合計)+SUM(X.合計) AS 報酬合計
         FROM(
@@ -57,6 +60,7 @@
 			Z.合議体番号,
 			Z.介護認定審査会委員コード,
 			Z.報酬総額,
+                        Z.その他費用,
 			Z.税額控除,
 			Z.報酬合計,
 			Z.報酬,
@@ -66,6 +70,7 @@
 		(SELECT A.合議体番号,
                        A.介護認定審査会委員コード,
                        B.報酬総額,
+                       B.その他費用,
                        B.税額控除,
                        B.報酬合計,
                        CASE 
@@ -109,8 +114,8 @@
                                 T5603."shinsakaiIinCode" AS 介護認定審査会委員コード,
                                 T5511."shinsakaiKaisaiYMD" AS 介護認定審査会開催年月日,
                                 (SUM(T5603."shinsakaiHoshu") + 
-                                  SUM(T5603."shinsakaiSonotaHoshu") +
-                                  SUM(T5603."shinsakaiKotsuhi")) AS 報酬総額,
+                                  SUM(T5603."shinsakaiSonotaHoshu")) AS 報酬総額,
+                                  SUM(T5603."shinsakaiKotsuhi") AS その他費用,
                                  SUM(T5603."shinsakaiKojoZeigaku") AS 税額控除,
                                  SUM(T5603."shinsakaiHoshuGokei") AS 報酬合計
                                  FROM rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
@@ -139,6 +144,13 @@
                 AND         A.介護認定審査会開催年月日 <![CDATA[<=]]> C."yukoShuryoYMD"
                 )AS Z)AS X
         GROUP BY   合議体番号,介護認定審査会委員コード
+        )
+        SELECT G.* , 
+        (SELECT SUM(G.報酬総額) FROM G) AS 総合計_報酬総額,
+        (SELECT SUM(G.その他費用) FROM G) AS 総合計_その他費用,
+        (SELECT SUM(G.税額控除) FROM G) AS 総合計_税控除額,
+        (SELECT SUM(G.報酬合計) FROM G) AS 総合計_報酬合計 
+        FROM G
     </select>
     
     <select id="get出席状況"

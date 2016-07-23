@@ -173,7 +173,7 @@ public class TempKyufujissekiTyukannEntity extends DbTableEntityBase<TempKyufuji
     private Decimal kohi3DekidakaSeikyugaku;
     private Decimal kohi3DekidakaIryohiRiyoshaFutangaku;
 
-    private RString KyufuJissekiShakaiFukushiHojinKeiUmu;
+    private RString kyufuJissekiShakaiFukushiHojinKeiUmu;
     private Decimal goKeigengoRiyoshaFutangaku;
 
     private RString dataKubun;

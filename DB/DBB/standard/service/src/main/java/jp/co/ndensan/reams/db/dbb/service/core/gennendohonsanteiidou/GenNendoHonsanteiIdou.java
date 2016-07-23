@@ -163,7 +163,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
     private static final int INT_14 = 14;
-    private static final int DAY = 31;
     private static final RString ゼロ_0000 = new RString("0000");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString バッチID = new RString("DBBBT44001");
@@ -307,7 +306,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             mapper.insertTmpIdo(idoEntity);
         }
 
-        List<ShotokuEntity> shotokuEntityList = mapper.get所得異動データ();
+        List<ShotokuEntity> shotokuEntityList = mapper.get所得異動データ(param);
         mapper.createTmpShotoku();
         for (ShotokuEntity shotokuEntity : shotokuEntityList) {
             mapper.insertTmpShotoku(shotokuEntity);
@@ -409,17 +408,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         for (FukaJohoRelateEntity entity : fukaJohoList) {
             賦課の情報.add(new FukaJoho(entity));
         }
-        Collections.sort(資格の情報, new Comparator<HihokenshaDaicho>() {
-            @Override
-            public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
-                    return 1;
-                }
-                return -1;
-            }
-        });
 
         mapper.createTmpHonsantei();
+        mapper.createTmpTsukibetsuRanku();
         dbの処理(資格の情報, 賦課の情報, param);
         for (FukaJoho fukaEntity : 賦課の情報) {
             boolean flg = true;
@@ -439,7 +430,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         Collections.sort(資格の情報, new Comparator<HihokenshaDaicho>() {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
+                if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())) {
                     return 1;
                 }
                 return -1;
@@ -487,6 +478,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (HihokenshaDaicho daicho : 資格の情報) {
                 HonsanteiEntity entity = new HonsanteiEntity();
                 set資格の情報Entity(daicho, entity, param);
+                entity.setChoteiNendo(param.get調定年度());
                 entity.setFukaNendo(param.get賦課年度());
                 entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), 1));
                 mapper.insertTmpHonsantei(entity);
@@ -494,6 +486,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else if (資格の情報.size() == INT_1) {
             HonsanteiEntity entity = new HonsanteiEntity();
             set資格の情報Entity(資格の情報.get(0), entity, param);
+            entity.setChoteiNendo(賦課の情報.get調定年度());
             entity.setFukaNendo(賦課の情報.get賦課年度());
             entity.setTsuchishoNo(賦課の情報.get通知書番号());
             mapper.insertTmpHonsantei(entity);
@@ -503,6 +496,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 count = count + INT_1;
                 HonsanteiEntity entity = new HonsanteiEntity();
                 set資格の情報Entity(daicho, entity, param);
+                entity.setChoteiNendo(param.get調定年度());
                 entity.setFukaNendo(param.get賦課年度());
                 entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), count));
                 mapper.insertTmpHonsantei(entity);
@@ -663,8 +657,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(param.get賦課年度());
         SeigyoJoho 月別保険料制御情報 = get月別保険料制御情報(保険料段階List);
-
         NengakuSeigyoJoho 年額制御情報 = get年額制御情報();
+
         for (CalculateFukaEntity 賦課計算の情報 : 賦課計算の情報リスト) {
             HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
             HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
@@ -829,11 +823,14 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 
         FukaKeisan fukaKeisan = FukaKeisan.createInstance();
         FukaJoho 賦課の情報_更正後 = fukaKeisan.reflect賦課根拠(fukaKokyoBatchParameter);
+        if (賦課の情報_更正後 == null) {
+            return;
+        }
         ChoshuHoho 徴収方法の情報 = new ChoshuHoho(賦課計算の情報.get徴収方法の情報());
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
                 && isDecimal変更(賦課の情報_更正後.get減免前介護保険料_年額(), 年額保険料)
-                || (賦課計算の情報.get徴収方法の情報().getTokuchoTeishiJiyuCode() != null
-                && !賦課計算の情報.get徴収方法の情報().getTokuchoTeishiJiyuCode().isEmpty()))) {
+                || (徴収方法の情報.get特別徴収停止事由コード() != null
+                && !徴収方法の情報.get特別徴収停止事由コード().isEmpty()))) {
             CaluculateChoteiResult 調定計算 = caluculateChotei(param.get算定月(), param.get調定日時(), 賦課の情報_更正後,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), new HihokenshaDaicho(賦課計算の情報.get資格の情報()),
                     年額保険料);
@@ -847,7 +844,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else if (ShokkenKubun.非該当.getコード().equals(賦課の情報_更正後.get職権区分())
                 && (賦課の情報_更正後.get減免額() == null || Decimal.ZERO.equals(賦課の情報_更正後.get減免額()))) {
             FukaJohoBuilder builder = 賦課の情報_更正後.createBuilderForEdit();
-            if (is変化有り(賦課の情報_設定前, 賦課の情報_更正後)) {
+            if (!is変化有り(賦課の情報_設定前, 賦課の情報_更正後)) {
                 return;
             }
             builder.set履歴番号(賦課の情報_設定前.get履歴番号() + INT_1);
@@ -1233,7 +1230,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         for (int i = 0; i < INT_14; i++) {
             普徴期別金額.add(Decimal.TEN);
         }
-        RString 特徴停止事由コード = new RString("01");
+        RString 特徴停止事由コード = RString.EMPTY;
+        // TODO END
 
         FukaJoho 賦課の情報 = 賦課の情報_更正前;
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
@@ -1248,7 +1246,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         賦課の情報 = new FukaJoho(fukaJohoRelateEntity);
-        ChoshuHoho 出力用徴収方法の情報 = 徴収方法の情報_更正前;
+        ChoshuHoho 出力用徴収方法の情報 = new ChoshuHoho(徴収方法の情報_更正前.toEntity());
         if (!Tsuki._3月.getコード().equals(算定月)) {
             Decimal 更正前の特別徴収額 = Decimal.ZERO;
             if (賦課の情報_更正前.get特徴期別金額01() != null) {
@@ -1273,7 +1271,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (Decimal decimal : 特徴期別金額) {
                 更正後の特別徴収額.add(decimal);
             }
-            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) < 0
+            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0
                     || (特徴停止事由コード != null && !特徴停止事由コード.isEmpty())) {
                 ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
                 builder.set特別徴収停止事由コード(特徴停止事由コード)
@@ -1476,7 +1474,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 nowDate, SubGyomuCode.DBB介護賦課);
         RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
                 nowDate, SubGyomuCode.DBB介護賦課);
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<RString, RankBetsuKijunKingaku>();
+        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
 
         // TODO QAのNo.957　「ランク別制御情報」の設定方法がない。
 //        RankBetsuKijunKingaku gaku = new RankBetsuKijunKingaku();

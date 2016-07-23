@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5603ShinsakaiIinHoshuJissekiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -22,10 +23,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBE-9999-011 zhengsongling
  */
 public class ShinsakaiIinHoshuJissekiJoho extends
-        ParentModelBase<ShinsakaiIinHoshuJissekiJohoIdentifier, DbT5603ShinsakaiIinHoshuJissekiJohoEntity, ShinsakaiIinHoshuJissekiJoho>
+        ModelBase<ShinsakaiIinHoshuJissekiJohoIdentifier, DbT5603ShinsakaiIinHoshuJissekiJohoEntity, ShinsakaiIinHoshuJissekiJoho>
         implements Serializable {
 
-//TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT5603ShinsakaiIinHoshuJissekiJohoEntity entity;
     private final ShinsakaiIinHoshuJissekiJohoIdentifier id;
 
@@ -88,7 +88,6 @@ public class ShinsakaiIinHoshuJissekiJoho extends
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 介護認定審査会委員コードを返します。
      *
@@ -211,8 +210,8 @@ public class ShinsakaiIinHoshuJissekiJoho extends
      *
      * @return 銀行振込出力フラグ
      */
-    public boolean get銀行振込出力フラグ() {
-        return entity.getGinkoFurikomiShutsuryokuFlag();
+    public boolean is銀行振込出力フラグ() {
+        return entity.isGinkoFurikomiShutsuryokuFlag();
     }
 
     /**
@@ -240,7 +239,6 @@ public class ShinsakaiIinHoshuJissekiJoho extends
      *
      * @return 変更対象処理実施後の{@link ShinsakaiIinHoshuJissekiJoho}
      */
-    @Override
     public ShinsakaiIinHoshuJissekiJoho modifiedModel() {
         DbT5603ShinsakaiIinHoshuJissekiJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
@@ -307,5 +305,26 @@ public class ShinsakaiIinHoshuJissekiJoho extends
     public boolean hasChanged() {
         return hasChangedEntity();
     }
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShinsakaiIinHoshuJissekiJoho other = (ShinsakaiIinHoshuJissekiJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

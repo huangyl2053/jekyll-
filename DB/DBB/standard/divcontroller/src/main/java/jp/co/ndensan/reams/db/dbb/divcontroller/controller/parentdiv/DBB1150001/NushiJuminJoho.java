@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1150001
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ShotokuKanri;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoResult;
 import jp.co.ndensan.reams.db.dbb.business.core.shotokushokaihyo.ShotokushokaihyoTaishoSetaiin;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001.DBB1150001StateName;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
@@ -230,37 +230,38 @@ public class NushiJuminJoho {
                 .getSofusakiNyuryokuPanel().getTextNO1().getValue();
         RString flag = div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                 .getSofusakiNyuryokuPanel().getTextNo().getValue();
-        if (文字列_TWO.equals(flag)) {
-            if (!ResponseHolder.isReRequest() && !hdnFlag.equals(文字列_ONE) && !hdnFlag.equals(文字列_TWO)) {
+        if (!文字列_TWO.equals(flag)) {
+            return ResponseData.of(div).respond();
+        }
+        if (!ResponseHolder.isReRequest() && !hdnFlag.equals(文字列_ONE) && !hdnFlag.equals(文字列_TWO)) {
+            div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
+                    .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_ONE);
+            return ResponseData.of(div)
+                    .addMessage(DbzWarningMessages.確認.getMessage().replace(引数.toString())).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<ShotokuKanri> entityList = getHandler(div).get識別コード();
+            if (entityList == null || entityList.isEmpty()) {
+                return ResponseData.of(div).respond();
+            }
+            RString 編集した識別コード = RString.EMPTY;
+            for (ShotokuKanri entity : entityList) {
+                編集した識別コード = 編集した識別コード.concat(entity.getEntity().getShikibetsuCode().value()).concat(区切);
+            }
+            編集した識別コード = 編集した識別コード.substring(整数_0, 編集した識別コード.length() - 整数_1);
+            if (!hdnFlag.equals(文字列_TWO)) {
                 div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
-                        .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_ONE);
-                return ResponseData.of(div)
-                        .addMessage(DbzWarningMessages.確認.getMessage().replace(引数.toString())).respond();
+                        .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_TWO);
+                return ResponseData.of(div).addMessage(DbzWarningMessages.確認.getMessage()
+                        .replace(編集した識別コード.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                List<DbT2008ShotokuKanriEntity> entityList = getHandler(div).get識別コード();
-                if (entityList == null || entityList.isEmpty()) {
-                    return ResponseData.of(div).respond();
-                } else {
-                    RString 編集した識別コード = RString.EMPTY;
-                    for (DbT2008ShotokuKanriEntity entity : entityList) {
-                        編集した識別コード = 編集した識別コード.concat(entity.getShikibetsuCode().value()).concat(区切);
-                    }
-                    編集した識別コード = 編集した識別コード.substring(整数_0, 編集した識別コード.length() - 整数_1);
-                    if (!hdnFlag.equals(文字列_TWO)) {
-                        div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
-                                .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_TWO);
-                        return ResponseData.of(div).addMessage(DbzWarningMessages.確認.getMessage()
-                                .replace(編集した識別コード.toString())).respond();
-                    }
-                    if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                        List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト
-                                = ViewStateHolder.get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
-                        getHandler(div).db出力(所得照会票発行対象世帯員リスト);
-                        return ResponseData.of(div).respond();
-                    }
-                }
+                List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト
+                        = ViewStateHolder.get(ViewStateKeys.所得照会票発行対象世帯員, List.class);
+                getHandler(div).db出力(所得照会票発行対象世帯員リスト);
+                return ResponseData.of(div).respond();
             }
+
         }
         return ResponseData.of(div).respond();
     }

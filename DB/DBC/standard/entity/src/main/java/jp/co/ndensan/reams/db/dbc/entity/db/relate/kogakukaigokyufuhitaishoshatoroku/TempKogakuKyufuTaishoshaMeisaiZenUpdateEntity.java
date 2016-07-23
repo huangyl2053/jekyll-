@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity extends DbTableEntityBase<TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity> implements IDbAccessable {
+public class TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity extends
+        DbTableEntityBase<TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     private HihokenshaNo hihokenshaNo;

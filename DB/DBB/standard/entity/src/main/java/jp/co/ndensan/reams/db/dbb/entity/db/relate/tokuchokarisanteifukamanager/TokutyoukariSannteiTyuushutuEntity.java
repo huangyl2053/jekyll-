@@ -60,6 +60,7 @@ public class TokutyoukariSannteiTyuushutuEntity implements Serializable {
     private RString tokuchoTeishiJiyuCode;
     private TsuchishoNo tsuchishoNo;
     private Decimal choteigaku;
+    private RString hokenryoDankai;
     private FlexibleDate seihoKaishiYMD;
     private FlexibleDate seihoHaishiYMD;
     private FlexibleDate ronenKaishiYMD;

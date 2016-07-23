@@ -20,10 +20,13 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakaiiinhoshunyuryoku.S
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -47,6 +50,7 @@ public class ShinsakaiIinHoshuNyuryoku {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString ROOTTITLE = new RString("審査会委員報酬入力の保存処理が完了しました。");
+    private static final RString 連番_追加 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -63,7 +67,8 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onLoad(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).onLoad();
-        return ResponseData.of(div).setState(DBE6070001StateName.検索);
+        ボタン制御_戻る_保存する();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -84,6 +89,10 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Check(ShinsakaiIinHoshuNyuryokuDiv div) {
+        div.getShinsakaiJisseki().setDisplayNone(true);
+        div.getShinsakaiJissekiMeisai().setDisplayNone(true);
+        ボタン制御_戻る_保存する();
+        div.getShinsakaiIin().setDisplayNone(false);
         ValidationMessageControlPairs validPairs = getValidatison(div).必須入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -114,7 +123,7 @@ public class ShinsakaiIinHoshuNyuryoku {
         List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
                 .createInstance().get審査会委員一覧(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
                                 介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, null,
-                                null, null, null, false, false)).records();
+                                null, null, null, false, false, null)).records();
         ValidationMessageControlPairs validPairs実績一覧データ空チェック = getValidatison(div).validateFor実績一覧データ空チェック(shinsakaiIinHoshuNyuryoku);
         if (validPairs実績一覧データ空チェック.iterator().hasNext()) {
             div.getShinsakaiIin().getDgShinsakaiIin().getDataSource().clear();
@@ -122,7 +131,7 @@ public class ShinsakaiIinHoshuNyuryoku {
             return ResponseData.of(div).addValidationMessages(validPairs実績一覧データ空チェック).respond();
         }
         getHandler(div).edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会委員一覧);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -135,28 +144,36 @@ public class ShinsakaiIinHoshuNyuryoku {
         boolean hasFromDate = false;
         boolean hasToDate = false;
         boolean isNULL = false;
+        RYearMonth fromDate = null;
+        RYearMonth toDate = null;
         div.getShinsakaiJisseki().setVisible(true);
+        div.getShinsakaiJissekiMeisai().setVisible(false);
         List<ShinsakaiIinHoshuJissekiJoho> shinasa = shinasamanager.get介護認定審査会委員報酬実績情報一覧().records();
         Models<ShinsakaiIinHoshuJissekiJohoIdentifier, ShinsakaiIinHoshuJissekiJoho> chikuNinteiChosain = Models.create(shinasa);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, chikuNinteiChosain);
         RString コード = div.getDgShinsakaiIin().getSelectedItems().get(0).getCode();
-        RDate fromDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getFromValue();
-        if (fromDate != null) {
+        if (div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getFromValue() != null) {
             hasFromDate = true;
+            fromDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getFromValue().getYearMonth();
         }
-        RDate toDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getToValue();
-        if (toDate != null) {
+        if (div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getToValue() != null) {
             hasToDate = true;
+            toDate = div.getShinsakaiIinKensakuJoken().getTxtKensakuNendo().getToValue().getYearMonth();
         }
+        div.getShinsakaiJisseki().setDisplayNone(false);
         List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
                 .createInstance().get審査会実績(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
                                 null, false, false, false, false, null, コード,
-                                fromDate, toDate, null, hasFromDate, hasToDate)).records();
+                                fromDate, toDate, null, hasFromDate, hasToDate, null)).records();
         if (shinsakaiIinHoshuNyuryoku == null || shinsakaiIinHoshuNyuryoku.isEmpty()) {
+            ボタン制御_戻る_保存する();
             isNULL = true;
+        } else {
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHozonsuru"), true);
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnModoru"), true);
         }
         getHandler(div).set審査会実績(shinsakaiIinHoshuNyuryoku, isNULL);
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績一覧);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -167,12 +184,14 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Modify(ShinsakaiIinHoshuNyuryokuDiv div) {
         //TODO 審査報酬額が空白の場合、テーブル「介護認定審査委員報酬単価」より取得した単価未実装。
-        if (div.getDgShinsakaiJisseki().getSelectedItems().get(0).getKekkaKaisaiBango().isNullOrEmpty()) {
+        div.getShinsakaiJissekiMeisai().setDisplayNone(false);
+        div.getShinsakaiJissekiMeisai().setVisible(true);
+        if (連番_追加.equals(div.getDgShinsakaiJisseki().getSelectedItems().get(0).getRemban())) {
             getHandler(div).set追加();
         } else {
             getHandler(div).set修正();
         }
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -182,8 +201,10 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Delete(ShinsakaiIinHoshuNyuryokuDiv div) {
+        div.getShinsakaiJissekiMeisai().setDisplayNone(false);
+        div.getShinsakaiJissekiMeisai().setVisible(true);
         getHandler(div).get削除();
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -194,7 +215,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_HoshuZeiritsu(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set報酬税率();
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -205,7 +226,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_ShinsaHoshugaku(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set審査報酬額();
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -216,7 +237,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_SonotaHoshu(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).setその他報酬();
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -227,7 +248,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onBlur_Kotsuhito(ShinsakaiIinHoshuNyuryokuDiv div) {
         getHandler(div).set交通費等();
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績明細);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -237,8 +258,9 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_btnToroku(ShinsakaiIinHoshuNyuryokuDiv div) {
+        div.getShinsakaiJissekiMeisai().setDisplayNone(true);
         getHandler(div).set登録する();
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会実績一覧);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -252,7 +274,8 @@ public class ShinsakaiIinHoshuNyuryoku {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).setState(DBE6070001StateName.審査会実績一覧);
+            div.getShinsakaiJissekiMeisai().setDisplayNone(true);
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -264,7 +287,9 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_btnModoru(ShinsakaiIinHoshuNyuryokuDiv div) {
-        return ResponseData.of(div).setState(DBE6070001StateName.審査会委員一覧);
+        div.getShinsakaiJissekiMeisai().setDisplayNone(true);
+        div.getShinsakaiJisseki().setDisplayNone(true);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -274,6 +299,7 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_btnHozonsuru(ShinsakaiIinHoshuNyuryokuDiv div) {
+        div.getShinsakaiJissekiMeisai().setDisplayNone(true);
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -283,12 +309,19 @@ public class ShinsakaiIinHoshuNyuryoku {
             List<dgShinsakaiJisseki_Row> listEntity = div.getDgShinsakaiJisseki().getDataSource();
             for (dgShinsakaiJisseki_Row row : listEntity) {
                 if (状態_修正.equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().update(getHandler(div).onClick_Update(models, row).build());
+                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().insertOrUpdate(getHandler(div).onClick_Update(models, row).build().modifiedModel());
                 } else if (状態_削除.equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuJissekiJohoIdentifier key = getHandler(div).getKey();
+                    ShinsakaiIinHoshuJissekiJohoIdentifier key = getHandler(div).getKey(row);
                     ShinsakaiIinHoshuNyuryokuFinder.createInstance().delete(models, key);
                 } else if (状態_追加.equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().insert(getHandler(div).getValues(row).build());
+                    RString コード = div.getShinsakaiJisseki().getTxtShisakaiIinCode().getValue();
+                    RString kuBun = getHandler(div).getKubun(row);
+                    FlexibleDate 実施日 = toFlexibleDate(row.getJisshiNengappi());
+                    int mazRenban = ShinsakaiIinHoshuNyuryokuFinder.
+                            createInstance().getMAX連番(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
+                                            null, false, false, false, false, null, コード,
+                                            null, null, 実施日, false, false, kuBun));
+                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().insertOrUpdate(getHandler(div).getValues(row, mazRenban).build());
                 }
             }
             div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
@@ -335,5 +368,17 @@ public class ShinsakaiIinHoshuNyuryoku {
 
     private ShinsakaiIinHoshuNyuryokuValidatisonHandler getValidatison(ShinsakaiIinHoshuNyuryokuDiv div) {
         return new ShinsakaiIinHoshuNyuryokuValidatisonHandler(div);
+    }
+
+    private void ボタン制御_戻る_保存する() {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHozonsuru"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnModoru"), false);
+    }
+
+    private FlexibleDate toFlexibleDate(RString obj) {
+        if (obj == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return new FlexibleDate(new RDate(obj.toString()).toDateString());
     }
 }

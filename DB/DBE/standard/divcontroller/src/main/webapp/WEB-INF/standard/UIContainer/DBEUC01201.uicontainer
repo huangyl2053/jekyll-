@@ -37,7 +37,7 @@
      "layoutName": "DBE0120001",
      "layoutTitle": "審査会個人別状況照会",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",

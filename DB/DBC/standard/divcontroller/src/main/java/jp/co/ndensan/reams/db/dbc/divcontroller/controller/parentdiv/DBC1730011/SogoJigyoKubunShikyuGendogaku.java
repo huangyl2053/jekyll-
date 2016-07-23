@@ -36,7 +36,7 @@ public class SogoJigyoKubunShikyuGendogaku {
     private static final RString 登録 = new RString("登録モード");
     private static final RString 修正 = new RString("修正モード");
     private static final RString 削除 = new RString("削除モード");
-    private static final RString 前排他キー = new RString("削除モード");
+    private static final RString 前排他キー = new RString("DbT7117SogoJigyoKubunShikyuGendoGaku");
 
     private SogoJigyoKubunShikyuGendogakuHandler getHandler(SogoJigyoKubunShikyuGendogakuDiv div) {
         return new SogoJigyoKubunShikyuGendogakuHandler(div);
@@ -66,7 +66,6 @@ public class SogoJigyoKubunShikyuGendogaku {
         } else {
             getHandler(div).initialize(businessList);
         }
-
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
 

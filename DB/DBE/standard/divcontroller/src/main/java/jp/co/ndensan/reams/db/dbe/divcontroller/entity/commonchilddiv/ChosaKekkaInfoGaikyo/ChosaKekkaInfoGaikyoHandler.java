@@ -56,7 +56,7 @@ public class ChosaKekkaInfoGaikyoHandler {
     /**
      * コンストラクタです。
      *
-     * @param gaikyoDiv ChosaKekkaInfoGaikyoDiv
+     * @param gaikyoDiv 認定調査結果情報照会_概況調査
      */
     public ChosaKekkaInfoGaikyoHandler(ChosaKekkaInfoGaikyoDiv gaikyoDiv) {
         this.gaikyoDiv = gaikyoDiv;
@@ -65,9 +65,9 @@ public class ChosaKekkaInfoGaikyoHandler {
     /**
      * onLoad処理です。
      *
-     * @param chosaKekkaInfoGaikyoList ChosaKekkaInfoGaikyoBusiness
-     * @param serviceJokyos RembanServiceJokyoRelateEntity
-     * @param shisetsuRiyos NinteichosahyoShisetsuRiyo
+     * @param chosaKekkaInfoGaikyoList 認定調査結果情報照会_概況調査クラス
+     * @param serviceJokyos 認定調査結果情報照会_概況調査クラス
+     * @param shisetsuRiyos 認定調査結果情報照会_概況調査クラス
      */
     public void onLoad(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList, List<RembanServiceJokyoBusiness> serviceJokyos,
             List<NinteichosahyoShisetsuRiyo> shisetsuRiyos) {

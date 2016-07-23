@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -51,7 +50,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
     private FileSpoolManager manager;
     private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString reportName = new RString("特別徴収未同定一覧表");
-    private final RString csvファイル名 = new RString("TokubetsuChoshuDoteiIchiran.csv");
+    private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
     private RString pageSize;
 
@@ -170,7 +169,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
             targets.add(target);
         }
         TokubetsuChoshuMidoteiIchiranPrintService printService = new TokubetsuChoshuMidoteiIchiranPrintService();
-        printService.print(targets, null, null, new ReportManager(), null);
+        printService.printChohyo(targets, null, null, null);
     }
 
     private void outputCsv(List<TokubetsuChoshuMidoteiIchiranEntity> list) {
