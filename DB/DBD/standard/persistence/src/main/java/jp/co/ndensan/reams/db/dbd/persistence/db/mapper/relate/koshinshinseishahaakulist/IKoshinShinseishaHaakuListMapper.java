@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinshinseishahaakulist;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5110001.KoshinShinseishaHaakuListMyBatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5110001.PreviousInformationEntity;
 
@@ -21,6 +22,6 @@ public interface IKoshinShinseishaHaakuListMapper {
      * @param parameter パラメータ
      * @return 前回の情報
      */
-    PreviousInformationEntity get前回の情報(KoshinShinseishaHaakuListMyBatisParameter parameter);
+    List<PreviousInformationEntity> get前回の情報(KoshinShinseishaHaakuListMyBatisParameter parameter);
 
 }
