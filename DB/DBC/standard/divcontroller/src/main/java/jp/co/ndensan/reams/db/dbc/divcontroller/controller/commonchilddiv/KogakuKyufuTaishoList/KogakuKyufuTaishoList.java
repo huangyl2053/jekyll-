@@ -159,6 +159,7 @@ public class KogakuKyufuTaishoList {
     public ResponseData<KogakuKyufuTaishoListDiv> onClick_btnkakutei(
             KogakuKyufuTaishoListDiv div) {
         RString モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (!削除.equals(モード)) {
             validPairs = getCheckHandler(div).確定チェック();
@@ -188,7 +189,7 @@ public class KogakuKyufuTaishoList {
                 || new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).modifyRow(row, モード);
+            getHandler(div).modifyRow(row, モード, サービス提供年月);
         }
         return createResponse(div);
     }

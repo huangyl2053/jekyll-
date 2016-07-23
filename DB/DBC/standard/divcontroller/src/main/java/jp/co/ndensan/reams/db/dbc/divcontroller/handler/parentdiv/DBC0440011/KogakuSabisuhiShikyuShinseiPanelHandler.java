@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishikyuushinnseito
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuKyufuTaishoListParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuServicehiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -44,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
@@ -66,6 +64,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private static final RString THREE = new RString("3");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final Decimal NUMBER_0 = new Decimal(0);
     private static final NyuryokuShikibetsuNo 定値_識別番号 = new NyuryokuShikibetsuNo("3411");
     private static final KokanShikibetsuNo 定値_交換情報識別番号 = new KokanShikibetsuNo("1131");
     private static final int NUM_0 = 0;
@@ -190,33 +189,48 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             mapList.put(shokanMeisaiResult.get明細合計区分(), shokanMeisaiResult);
         }
         for (dgTaishoshaIchiran_Row row : rowList) {
-            KogakuKyuufuTaishouListEntityResult entity = mapList.get(row.getData10());
-            if (row.getData10().equals(ONE)) {
-                KogakuKyufuTaishoshaMeisai 給付対象者明細entity = entity.get給付対象者明細entity();
-                給付対象者明細entity = buid給付対象者明細entity(給付対象者明細entity, row, 被保険者番号, サービス提供年月);
-                result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
-                entityList.add(result);
-            } else if (row.getData10().equals(TWO)) {
-                KogakuKyufuTaishoshaGokei 給付対象者合計entity = entity.get給付対象者合計entity();
-                給付対象者合計entity = buid給付対象者合計entity(給付対象者合計entity, row, 被保険者番号, サービス提供年月);
-                result.set高額介護サービス費支給対象者合計Entity(給付対象者合計entity);
-                entityList.add(result);
+            if (追加.equals(row.getData0())) {
+                if (row.getData10().equals(ONE)) {
+                    int 履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
+                            被保険者番号.value(), サービス提供年月.getNendo()).nextString().toString());
+                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity = new KogakuKyufuTaishoshaMeisai(
+                            被保険者番号, サービス提供年月,
+                            new JigyoshaNo(row.getData1()), new ServiceShuruiCode(row.getData11()), 履歴番号);
+                    給付対象者明細entity = buid給付対象者明細entity(
+                            給付対象者明細entity, row);
+                    result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
+                    entityList.add(result);
+                } else if (row.getData10().equals(TWO)) {
+                    int 履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
+                            被保険者番号.value(), サービス提供年月.getNendo()).nextString().toString());
+                    KogakuKyufuTaishoshaGokei 給付対象者合計entity = new KogakuKyufuTaishoshaGokei(
+                            被保険者番号, サービス提供年月, new Decimal(履歴番号));
+                    給付対象者合計entity = buid給付対象者合計entity(
+                            給付対象者合計entity, row);
+                    result.set高額介護サービス費支給対象者合計Entity(給付対象者合計entity);
+                    entityList.add(result);
+                }
+            } else {
+                KogakuKyuufuTaishouListEntityResult entity = mapList.get(row.getData10());
+                if (row.getData10().equals(ONE)) {
+                    KogakuKyufuTaishoshaMeisai 給付対象者明細entity = entity.get給付対象者明細entity();
+                    給付対象者明細entity = buid給付対象者明細entity(給付対象者明細entity, row);
+                    result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
+                    entityList.add(result);
+                } else if (row.getData10().equals(TWO)) {
+                    KogakuKyufuTaishoshaGokei 給付対象者合計entity = entity.get給付対象者合計entity();
+                    給付対象者合計entity = buid給付対象者合計entity(給付対象者合計entity, row);
+                    result.set高額介護サービス費支給対象者合計Entity(給付対象者合計entity);
+                    entityList.add(result);
+                }
             }
         }
         KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().isTaisyoshaJohoShori(entityList, メニューID);
-
     }
 
     private KogakuKyufuTaishoshaMeisai buid給付対象者明細entity(
-            KogakuKyufuTaishoshaMeisai entity, dgTaishoshaIchiran_Row row, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月) {
+            KogakuKyufuTaishoshaMeisai entity, dgTaishoshaIchiran_Row row) {
         entity = cleanKogakuKyufuTaishoshaMeisai(entity);
-        if (追加.equals(row.getData0())) {
-            int 履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
-                    被保険者番号.value(), サービス提供年月.getNendo()).nextString().toString());
-            entity = new KogakuKyufuTaishoshaMeisai(被保険者番号, サービス提供年月,
-                    new JigyoshaNo(row.getData1()), new ServiceShuruiCode(row.getData1()), 履歴番号);
-        }
         entity = entity.createBuilderForEdit().setサービス費用合計額(row.getData4().getValue()).build();
         entity = entity.createBuilderForEdit().set利用者負担額(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set高額給付根拠(row.getData9()).build();
@@ -231,14 +245,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     }
 
     private KogakuKyufuTaishoshaGokei buid給付対象者合計entity(
-            KogakuKyufuTaishoshaGokei entity, dgTaishoshaIchiran_Row row, HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月) {
+            KogakuKyufuTaishoshaGokei entity, dgTaishoshaIchiran_Row row) {
         entity = cleanKogakuKyufuTaishoshaGokei(entity);
-        if (追加.equals(row.getData0())) {
-            int 履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
-                    被保険者番号.value(), サービス提供年月.getNendo()).nextString().toString());
-            entity = new KogakuKyufuTaishoshaGokei(被保険者番号, サービス提供年月, new Decimal(履歴番号));
-        }
         entity = entity.createBuilderForEdit().setサービス費用合計額合計(row.getData4().getValue()).build();
         entity = entity.createBuilderForEdit().set利用者負担額合計(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set算定基準額(row.getData6().getValue()).build();
@@ -255,18 +263,17 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     }
 
     private KogakuKyufuTaishoshaMeisai cleanKogakuKyufuTaishoshaMeisai(KogakuKyufuTaishoshaMeisai entity) {
-        entity = entity.createBuilderForEdit().setサービス費用合計額(null).build();
-        entity = entity.createBuilderForEdit().set利用者負担額(null).build();
-        entity = entity.createBuilderForEdit().set高額給付根拠(null).build();
+        entity = entity.createBuilderForEdit().setサービス費用合計額(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set利用者負担額(NUMBER_0).build();
         return entity;
     }
 
     private KogakuKyufuTaishoshaGokei cleanKogakuKyufuTaishoshaGokei(KogakuKyufuTaishoshaGokei entity) {
-        entity = entity.createBuilderForEdit().setサービス費用合計額合計(null).build();
-        entity = entity.createBuilderForEdit().set利用者負担額合計(null).build();
-        entity = entity.createBuilderForEdit().set算定基準額(null).build();
-        entity = entity.createBuilderForEdit().set支払済金額合計(null).build();
-        entity = entity.createBuilderForEdit().set高額支給額(null).build();
+        entity = entity.createBuilderForEdit().setサービス費用合計額合計(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set利用者負担額合計(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set算定基準額(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set支払済金額合計(NUMBER_0).build();
+        entity = entity.createBuilderForEdit().set高額支給額(NUMBER_0).build();
         return entity;
     }
 
@@ -426,9 +433,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     private KogakuShikyuHanteiKekka clearKogakuShikyuHanteiKekka(KogakuShikyuHanteiKekka entity) {
         entity = entity.createBuilderForEdit()
                 .set決定年月日(null)
-                .set本人支払額(null)
+                .set本人支払額(NUMBER_0)
                 .set支給区分コード(null)
-                .set支給金額(null)
+                .set支給金額(NUMBER_0)
                 .set不支給理由(null)
                 .set審査方法区分(null)
                 .set再送付フラグ(false).build();
@@ -465,9 +472,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
      */
     public boolean is対象者情報登録内容変更状態() {
         for (dgTaishoshaIchiran_Row ddgList : div.getCcdKogakuKyufuTaishoList().get給付対象一覧()) {
-            if (RowState.Modified.equals(ddgList.getRowState())
-                    || RowState.Added.equals(ddgList.getRowState())
-                    || RowState.Deleted.equals(ddgList.getRowState())) {
+            if (修正.equals(ddgList.getData0())
+                    || 追加.equals(ddgList.getData0())
+                    || 削除.equals(ddgList.getData0())) {
                 return true;
             }
         }
@@ -535,58 +542,6 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         return parameter;
     }
 
-    /**
-     * 支給申請登録に戻る時状態で判定する
-     *
-     * @return KogakuKyufuTaishoListParameter
-     */
-    public KogakuKyufuTaishoListParameter set対象者情報登録画面データ() {
-        KogakuKyufuTaishoListParameter parameter = new KogakuKyufuTaishoListParameter();
-        parameter.set明細合計区分(div.getCcdKogakuKyufuTaishoList().get明細合計区分());
-        parameter.set事業者コード(div.getCcdKogakuKyufuTaishoList().get事業者コード());
-        parameter.set事業者名称(div.getCcdKogakuKyufuTaishoList().get事業者名称());
-        parameter.setサービス種類(div.getCcdKogakuKyufuTaishoList().getサービス種類());
-        parameter.setサービス種類名称(div.getCcdKogakuKyufuTaishoList().getサービス種類名称());
-        parameter.setサービス費用合計(div.getCcdKogakuKyufuTaishoList().getサービス費用合計());
-        parameter.set利用者負担合計(div.getCcdKogakuKyufuTaishoList().get利用者負担合計());
-        parameter.set算定基準額(div.getCcdKogakuKyufuTaishoList().get算定基準額());
-        parameter.set支払済額(div.getCcdKogakuKyufuTaishoList().get支払済額());
-        parameter.set月遅れ区分(div.getCcdKogakuKyufuTaishoList().get月遅れ区分());
-        parameter.set世帯所得区分(div.getCcdKogakuKyufuTaishoList().get世帯所得区分());
-        parameter.set本人所得区分(div.getCcdKogakuKyufuTaishoList().get本人所得区分());
-        parameter.set合算区分(div.getCcdKogakuKyufuTaishoList().get合算区分());
-        parameter.set利用者負担第２段階(div.getCcdKogakuKyufuTaishoList().get利用者負担第２段階());
-        parameter.set激変緩和区分(div.getCcdKogakuKyufuTaishoList().get激変緩和区分());
-        return parameter;
-    }
-    //    /**
-//     * 申請情報登録内容変更状態
-//     *
-//     * @param parameter YoguKonyuhiShikyuShinseiPnlTotalParameter
-//     * @return is申請情報登録内容変更状態
-//     */
-//    public boolean is対象者情報登録内容変更状態(KogakuKyufuTaishoListParameter parameter) {
-//        return is対象者情報登録(parameter);
-//    }
-
-//    private boolean is対象者情報登録(KogakuKyufuTaishoListParameter parameter) {
-//        return is比較変更(parameter.get明細合計区分(), div.getCcdKogakuKyufuTaishoList().get明細合計区分())
-//                || is比較変更(parameter.get事業者コード(), div.getCcdKogakuKyufuTaishoList().get事業者コード())
-//                || is比較変更(parameter.get事業者名称(), div.getCcdKogakuKyufuTaishoList().get事業者名称())
-//                || is比較変更(parameter.getサービス種類(), div.getCcdKogakuKyufuTaishoList().getサービス種類())
-//                || is比較変更(parameter.getサービス種類名称(), div.getCcdKogakuKyufuTaishoList().getサービス種類名称())
-//                || is比較変更数字(parameter.getサービス費用合計(), div.getCcdKogakuKyufuTaishoList().getサービス費用合計())
-//                || is比較変更数字(parameter.get利用者負担合計(), div.getCcdKogakuKyufuTaishoList().get利用者負担合計())
-//                || is比較変更数字(parameter.get算定基準額(), div.getCcdKogakuKyufuTaishoList().get算定基準額())
-//                || is比較変更数字(parameter.get支払済額(), div.getCcdKogakuKyufuTaishoList().get支払済額())
-//                || is比較変更(parameter.get月遅れ区分(), div.getCcdKogakuKyufuTaishoList().get月遅れ区分())
-//                || is比較変更(parameter.get世帯所得区分(), div.getCcdKogakuKyufuTaishoList().get世帯所得区分())
-//                || is比較変更(parameter.get本人所得区分(), div.getCcdKogakuKyufuTaishoList().get本人所得区分())
-//                || is比較変更(parameter.get合算区分(), div.getCcdKogakuKyufuTaishoList().get合算区分())
-//                || is比較変更(parameter.get老齢福祉年金(), div.getCcdKogakuKyufuTaishoList().get老齢福祉年金())
-//                || is比較変更(parameter.get利用者負担第２段階(), div.getCcdKogakuKyufuTaishoList().get利用者負担第２段階())
-//                || is比較変更(parameter.get激変緩和区分(), div.getCcdKogakuKyufuTaishoList().get激変緩和区分());
-//    }
     private boolean is申請情報登録(KogakuServicehiDetailParameter parameter) {
         return is比較変更年月日(parameter.get申請日(),
                 div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get申請日())
