@@ -7,16 +7,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1730011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
 
 /**
- * SogoJigyoKubunShikyuGendogaku のクラスファイル 
- * 
- * @author 自動生成
+ * SogoJigyoKubunShikyuGendogaku のクラスファイル
+ *
+ * @reamsid_L DBC-3363-010 xuxin
  */
 public class SogoJigyoKubunShikyuGendogakuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -100,7 +105,7 @@ public class SogoJigyoKubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoKaishiYM(TextBoxYearMonth txtTekiyoKaishiYM) {
+    public void setTxtTekiyoKaishiYM(TextBoxYearMonth txtTekiyoKaishiYM) {
         this.getKubunShikyuGendogakuShosai().setTxtTekiyoKaishiYM(txtTekiyoKaishiYM);
     }
 
@@ -110,7 +115,7 @@ public class SogoJigyoKubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoShuryoYM(TextBoxYearMonth txtTekiyoShuryoYM) {
+    public void setTxtTekiyoShuryoYM(TextBoxYearMonth txtTekiyoShuryoYM) {
         this.getKubunShikyuGendogakuShosai().setTxtTekiyoShuryoYM(txtTekiyoShuryoYM);
     }
 
@@ -120,7 +125,7 @@ public class SogoJigyoKubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLinShosai(HorizontalLine linShosai) {
+    public void setLinShosai(HorizontalLine linShosai) {
         this.getKubunShikyuGendogakuShosai().setLinShosai(linShosai);
     }
 
@@ -130,7 +135,7 @@ public class SogoJigyoKubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblMessage2(Label lblMessage2) {
+    public void setLblMessage2(Label lblMessage2) {
         this.getKubunShikyuGendogakuShosai().setLblMessage2(lblMessage2);
     }
 
@@ -140,7 +145,7 @@ public class SogoJigyoKubunShikyuGendogakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblGendogaku(tblGendogakuDiv tblGendogaku) {
+    public void setTblGendogaku(tblGendogakuDiv tblGendogaku) {
         this.getKubunShikyuGendogakuShosai().setTblGendogaku(tblGendogaku);
     }
 
