@@ -34,20 +34,34 @@ public class YokaigoninteiimageShutsuryokuFinder {
      * 存在するイメージファイル名を取得します。
      *
      * @param fileName List<RString>
+     * @param sharedFiles List<RString>
      * @return List<RString>
      */
-    public List<RString> getSharedFile(List<RString> fileName) {
+    public List<RString> get存在したイメージファイル(List<RString> fileName, List<RString> sharedFiles) {
         List<RString> 存在するファイル = new ArrayList<>();
-        for (SharedFileEntryInfoEntity entity : sharedFile) {
-            if (entity.getFilesEntity() == null) {
-                continue;
-            }
+        for (RString file : sharedFiles) {
             for (RString name : fileName) {
-                if (name.equals(entity.getFilesEntity().getPathname())) {
+                if (name.equals(file)) {
                     存在するファイル.add(name);
                 }
             }
         }
         return 存在するファイル;
+    }
+
+    /**
+     * 存在したイメージファイル名を取得します。
+     *
+     * @return 存在したイメージファイル名
+     */
+    public List<RString> getSharedFile() {
+        List<RString> 存在したイメージファイル名 = new ArrayList<>();
+        for (SharedFileEntryInfoEntity info : sharedFile) {
+            if (info.getFilesEntity() == null) {
+                continue;
+            }
+            存在したイメージファイル名.add(info.getFilesEntity().getPathname());
+        }
+        return 存在したイメージファイル名;
     }
 }
