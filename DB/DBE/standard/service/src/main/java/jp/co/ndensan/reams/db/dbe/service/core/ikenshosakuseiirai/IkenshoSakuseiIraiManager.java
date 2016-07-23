@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.Shuj
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshosakuseiirai.IIkenshoSakuseiIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteishinseijoho.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5301ShujiiIkenshoIraiJohoDac;
@@ -119,7 +120,9 @@ public class IkenshoSakuseiIraiManager {
         if (主治医意見書作成依頼情報.getState() != EntityDataState.Modified) {
             主治医意見書作成依頼情報.setState(EntityDataState.Added);
             主治医意見書作成依頼情報Dac.save(主治医意見書作成依頼情報);
-            要介護認定申請情報Dac.save(要介護認定申請情報.toEntity());
+            DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
+            entity.setState(EntityDataState.Modified);
+            return 1 == 要介護認定申請情報Dac.save(entity);
         }
         return 要介護認定申請情報Manager.save(要介護認定申請情報);
     }
