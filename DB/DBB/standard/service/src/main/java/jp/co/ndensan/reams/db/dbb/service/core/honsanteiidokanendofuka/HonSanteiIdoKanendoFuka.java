@@ -126,6 +126,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
@@ -150,6 +151,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -1328,7 +1330,11 @@ public class HonSanteiIdoKanendoFuka {
      */
     public FukaJohoToChoshuHoho caluculateChotei(List<FukaJoho> 賦課情報リスト,
             ChoshuHoho 徴収方法情報, FlexibleYear 調定年度, YMDHMS 調定日時) {
-        // TODO ビジネス設計_DBBBZ00002_過年度更正計算 を実装完了しない。
+        // TODO ビジネス設計_DBBBZ00002_過年度更正計算 を実装完了しない。使用しないのパラメータ。
+        調定年度 = new FlexibleYear(調定日時.getYear().toString());
+        if (調定年度 == null) {
+            throw new ApplicationException(UrErrorMessages.入力値が不正.getMessage());
+        }
         KoseigoFukaResult 調定計算Result = new KoseigoFukaResult(賦課情報リスト, 徴収方法情報);
         FukaJoho 入力_現年度 = get賦課情報_現年度(賦課情報リスト);
         List<FukaJoho> 調定計算_賦課リスト = 調定計算Result.get賦課の情報リスト();
@@ -1337,10 +1343,10 @@ public class HonSanteiIdoKanendoFuka {
         Decimal 更正前_年額 = get減免前介護保険料_年額(入力_現年度);
         ChoteiJiyuParameter parameter = new ChoteiJiyuParameter();
         FukaJohoList 更正後賦課 = new FukaJohoList();
+        List<FukaJohoList> 更正後賦課List = new ArrayList<>();
         更正後賦課.set現年度(更正後_現年度);
-        List<FukaJohoList> 更正後賦課リスト = new ArrayList<>();
+        parameter.set更正前徴収方法(徴収方法情報);
         parameter.set更正後徴収方法(調定計算Result.getChoshuHoho());
-        parameter.set更正後賦課リスト(更正後賦課リスト);
         parameter.set現年度(入力_現年度);
         FukaJoho 更正後_過年度 = get賦課情報_過年度(調定計算_賦課リスト);
         FukaJoho 更正前_過年度 = null;
@@ -1352,21 +1358,20 @@ public class HonSanteiIdoKanendoFuka {
             }
         }
         if ((更正後_年額 == null && 更正前_年額 != null && Decimal.ZERO.compareTo(更正前_年額) < ゼロ_定値)
-                || (更正前_年額 != null && 更正後_年額 != null && 更正前_年額.compareTo(更正後_年額) < ゼロ_定値)) {
-            調定計算_賦課リスト.remove(更正後_現年度);
+                || (更正前_年額 != null && 更正後_年額 != null && 更正後_年額.compareTo(更正前_年額) < ゼロ_定値)) {
             更正後賦課.set過年度(更正後_過年度);
-            更正後賦課リスト.add(更正後賦課);
+            更正後賦課List.add(更正後賦課);
+            parameter.set更正後賦課リスト(更正後賦課List);
             parameter.set過年度(更正前_過年度);
-            parameter.set更正前徴収方法(徴収方法情報);
         } else {
-            更正後賦課リスト.add(更正後賦課);
-            parameter.set更正後賦課リスト(更正後賦課リスト);
+            更正後賦課List.add(更正後賦課);
+            parameter.set更正後賦課リスト(更正後賦課List);
         }
+
         List<FukaJohoList> 調定事由 = ChoteiJiyuHantei.createInstance().set調定事由(parameter);
         FukaJohoToChoshuHoho 更正result = new FukaJohoToChoshuHoho();
         更正result.set徴収方法の情報(調定計算Result.getChoshuHoho());
         List<FukaJoho> 賦課情報 = new ArrayList<>();
-
         for (FukaJohoList entity : 調定事由) {
             賦課情報.add(entity.get現年度());
             賦課情報.add(entity.get過年度());
@@ -1410,14 +1415,14 @@ public class HonSanteiIdoKanendoFuka {
     /**
      * 計算後情報から本算定異動（過年度）結果一覧表を、帳票とＣＳＶファイルで作成する。
      *
-     * @param 調定年度 FlexibleYear
-     * @param 調定日時 FlexibleYear
-     * @param 出力順ID Long
-     * @param 抽出開始日時 YMDHMS
-     * @param 抽出終了日時 YMDHMS
+     * @param parameter KanendoFukaParameter
      */
-    public void spoolKanendoIdoKekkaIchiran(FlexibleYear 調定年度,
-            YMDHMS 調定日時, Long 出力順ID, YMDHMS 抽出開始日時, YMDHMS 抽出終了日時) {
+    public void spoolKanendoIdoKekkaIchiran(KanendoFukaParameter parameter) {
+        FlexibleYear 調定年度 = parameter.get調定年度();
+        YMDHMS 調定日時 = parameter.getシステム日時();
+        Long 出力順ID = parameter.get出力順ID();
+        YMDHMS 抽出開始日時 = new YMDHMS(parameter.get抽出開始日時().toString());
+        YMDHMS 抽出終了日時 = new YMDHMS(parameter.get抽出終了日時().toString());
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, 出力順ID);
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
 

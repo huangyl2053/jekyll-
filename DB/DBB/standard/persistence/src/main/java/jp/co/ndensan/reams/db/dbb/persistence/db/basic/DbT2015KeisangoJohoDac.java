@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJoho;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJoho.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJoho.choteiNichiji;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJoho.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJoho.koseiZengoKubun;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJoho.sakuseiShoriName;
@@ -16,12 +17,14 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -30,6 +33,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 計算後情報のデータアクセスクラスです。
  */
 public class DbT2015KeisangoJohoDac implements ISaveable<DbT2015KeisangoJohoEntity> {
+
+    private static final RString RSTRING_イチ = new RString("1");
+    private static final RString RSTRING_ニ = new RString("2");
+    private static final int INT_イチ = 1;
+    private static final int INT_ニ = 2;
 
     @InjectSession
     private SqlSession session;
@@ -69,6 +77,56 @@ public class DbT2015KeisangoJohoDac implements ISaveable<DbT2015KeisangoJohoEnti
                                 eq(koseiZengoKubun, 更正前後区分),
                                 eq(sakuseiShoriName, 作成処理名))).
                 toObject(DbT2015KeisangoJohoEntity.class);
+    }
+
+    /**
+     * 計算後情報を取得します。
+     *
+     * @param 調定年度 調定年度
+     * @param 日付関連_年度サイクル 日付関連_年度サイクル
+     * @param 調定日時 調定日時
+     * @param 作成処理名 作成処理名
+     * @return DbT2015KeisangoJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2015KeisangoJohoEntity> select計算後情報(
+            FlexibleYear 調定年度,
+            RString 日付関連_年度サイクル,
+            YMDHMS 調定日時,
+            RString 作成処理名) throws NullPointerException {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(日付関連_年度サイクル, UrSystemErrorMessages.値がnull.getReplacedMessage("日付関連_年度サイクル"));
+        requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
+        requireNonNull(作成処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("作成処理名"));
+
+        FlexibleYear 調定年度minus1 = 調定年度.minusYear(INT_イチ);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        if (RSTRING_イチ.equals(日付関連_年度サイクル)) {
+            return accessor.select().
+                    table(DbT2015KeisangoJoho.class).
+                    where(and(
+                                    eq(choteiNendo, 調定年度),
+                                    eq(fukaNendo, 調定年度minus1),
+                                    eq(choteiNichiji, 調定日時),
+                                    eq(sakuseiShoriName, 作成処理名))).
+                    toList(DbT2015KeisangoJohoEntity.class);
+        } else if (RSTRING_ニ.equals(日付関連_年度サイクル)) {
+            FlexibleYear 調定年度minus2 = 調定年度.minusYear(INT_ニ);
+            return accessor.select().
+                    table(DbT2015KeisangoJoho.class).
+                    where(and(
+                                    eq(choteiNendo, 調定年度),
+                                    or(
+                                            eq(fukaNendo, 調定年度minus2),
+                                            eq(fukaNendo, 調定年度minus1)
+                                    ),
+                                    eq(choteiNichiji, 調定日時),
+                                    eq(sakuseiShoriName, 作成処理名))).
+                    toList(DbT2015KeisangoJohoEntity.class);
+        }
+        return null;
+
     }
 
     /**
