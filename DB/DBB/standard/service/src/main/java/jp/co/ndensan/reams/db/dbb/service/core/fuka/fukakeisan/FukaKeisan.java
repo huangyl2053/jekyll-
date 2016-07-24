@@ -257,10 +257,9 @@ public class FukaKeisan {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
                 int flag = 0;
-                if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())) {
-                    if (o2.get異動日().isBefore(o1.get異動日())) {
-                        flag = o2.get枝番().compareTo(o1.get枝番());
-                    }
+                if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())
+                        && o2.get異動日().isBefore(o1.get異動日())) {
+                    flag = o2.get枝番().compareTo(o1.get枝番());
                 }
                 return flag;
             }
@@ -588,7 +587,6 @@ public class FukaKeisan {
         KoseiShorikoaResult 調定計算 = do調定計算(調定計算パラメータ);
 
         NendobunFukaList 出力用年度分賦課リスト = 調定計算.get年度分賦課リスト_更正後();
-        賦課の情報 = 調定計算.get年度分賦課リスト_更正後().get現年度();
         出力用年度分賦課リスト.set現年度(edite賦課の情報(出力用年度分賦課リスト.get現年度(), param, 調定計算));
         出力用年度分賦課リスト.set過年度1(edite賦課の情報(出力用年度分賦課リスト.get過年度1(), param, 調定計算));
         出力用年度分賦課リスト.set過年度2(edite賦課の情報(出力用年度分賦課リスト.get過年度2(), param, 調定計算));
@@ -1028,7 +1026,7 @@ public class FukaKeisan {
 
     private void set生活保護(FukaJohoBuilder builder, List<SeikatsuHogoJukyusha> 生保情報のリスト,
             FlexibleDate 本年度開始日, FlexibleDate 本年度終了日) {
-        if (生保情報のリスト == null) {
+        if (生保情報のリスト == null || 生保情報のリスト.isEmpty()) {
             return;
         }
         List<SeikatsuHogoJukyusha> 生活保護の情報のリスト = new ArrayList<>();
@@ -1071,10 +1069,10 @@ public class FukaKeisan {
     }
 
     private RString get生活保護扶助種類(List<SeikatsuHogoFujoShurui> 扶助種類リスト) {
-        List<RString> 扶助種類 = new ArrayList<>();
         if (扶助種類リスト == null || 扶助種類リスト.isEmpty()) {
             return RString.EMPTY;
         }
+        List<RString> 扶助種類 = new ArrayList<>();
         for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
             扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
         }
@@ -1084,7 +1082,7 @@ public class FukaKeisan {
 
     private void set老齢福祉年金(FukaJohoBuilder builder, List<RoreiFukushiNenkinJukyusha> 老福の情報リスト,
             FlexibleDate 本年度開始日, FlexibleDate 本年度終了日) {
-        if (老福の情報リスト == null) {
+        if (老福の情報リスト == null || 老福の情報リスト.isEmpty()) {
             return;
         }
         List<RoreiFukushiNenkinJukyusha> 老齢福祉の情報リスト = new ArrayList<>();
@@ -1104,7 +1102,7 @@ public class FukaKeisan {
                 }
             }
         }
-        if (老齢福祉の情報リスト != null && !老齢福祉の情報リスト.isEmpty()) {
+        if (!老齢福祉の情報リスト.isEmpty()) {
             Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
@@ -1124,16 +1122,13 @@ public class FukaKeisan {
 
     private void set境界層(FukaJohoBuilder builder, List<KyokaisoGaitosha> 境界層の情報リスト,
             FlexibleDate 本年度開始日, FlexibleDate 本年度終了日) {
-        if (境界層の情報リスト == null) {
+        if (境界層の情報リスト == null || 境界層の情報リスト.isEmpty()) {
             return;
         }
         List<KyokaisoGaitosha> 境界層の情報のリスト = new ArrayList<>();
         for (KyokaisoGaitosha entity : 境界層の情報リスト) {
             FlexibleDate 受給開始日 = entity.get適用開始年月日();
             FlexibleDate 受給廃止日 = entity.get適用終了年月日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
@@ -1147,7 +1142,7 @@ public class FukaKeisan {
                 }
             }
         }
-        if (境界層の情報のリスト != null && !境界層の情報のリスト.isEmpty()) {
+        if (!境界層の情報のリスト.isEmpty()) {
             builder.set境界層区分(KyokaisoKubun.該当.getコード());
         } else {
             builder.set境界層区分(KyokaisoKubun.非該当.getコード());
@@ -1257,66 +1252,77 @@ public class FukaKeisan {
         dankaiList.add(月別保険料段階.get保険料段階01月());
         dankaiList.add(月別保険料段階.get保険料段階02月());
         dankaiList.add(月別保険料段階.get保険料段階03月());
-        List<RString> 月 = new ArrayList<>();
+
+        RString 保険料算定段階1 = RString.EMPTY;
+        RString 保険料算定段階2 = RString.EMPTY;
+        List<RString> 年月 = new ArrayList<>();
         for (int i = INT_4; i <= INT_12; i++) {
             RStringBuilder rst = new RStringBuilder();
             rst.append(賦課年度).append(new RString(i).padZeroToLeft(INT_2));
-            月.add(rst.toRString());
+            年月.add(rst.toRString());
         }
         for (int i = INT_1; i <= INT_3; i++) {
             RStringBuilder rst = new RStringBuilder();
             rst.append(賦課年度.plusYear(INT_1)).append(new RString(i).padZeroToLeft(INT_2));
-            月.add(rst.toRString());
+            年月.add(rst.toRString());
         }
+
         int count = 0;
         for (int i = 0; i < dankaiList.size(); i++) {
             count = count + INT_1;
-            if (dankaiList.get(i).get段階区分() != null && !dankaiList.get(i).get段階区分().isEmpty()) {
+            if (!RString.isNullOrEmpty(dankaiList.get(i).get段階区分())) {
+                保険料算定段階1 = dankaiList.get(i).get段階区分();
                 builder.set保険料算定段階1(dankaiList.get(i).get段階区分());
                 builder.set算定年額保険料1(dankaiList.get(i).get保険料率());
-                builder.set月割開始年月1(new FlexibleYearMonth(月.get(i)));
+                builder.set月割開始年月1(new FlexibleYearMonth(年月.get(i)));
                 break;
             }
         }
         if (count == dankaiList.size()) {
-            builder.set月割終了年月1(new FlexibleYearMonth(月.get(count - INT_1)));
+            if (!RString.isNullOrEmpty(dankaiList.get(count - INT_1).get段階区分())) {
+                builder.set月割終了年月1(new FlexibleYearMonth(年月.get(count - INT_1)));
+            }
             return;
         }
-        int count2 = 0;
         for (int i = count; i < dankaiList.size(); i++) {
-            count2 = count2 + INT_1;
-            if (!dankaiList.get(count).get段階区分().equals(dankaiList.get(i).get段階区分())) {
-                builder.set月割終了年月1(new FlexibleYearMonth(月.get(i)));
+            if (!dankaiList.get(count - INT_1).get段階区分().equals(dankaiList.get(i).get段階区分())) {
+                builder.set月割終了年月1(new FlexibleYearMonth(年月.get(i - INT_1)));
                 break;
             }
+            count = count + INT_1;
         }
-
-        if (count2 == dankaiList.size()) {
+        if (count == dankaiList.size()) {
+            builder.set月割終了年月1(new FlexibleYearMonth(年月.get(count - INT_1)));
             return;
         }
-        int count3 = 0;
-        for (int i = count2; i < dankaiList.size(); i++) {
-            count3 = count3 + INT_1;
-            if (dankaiList.get(count2).get段階区分() != null && !dankaiList.get(i).get段階区分().isEmpty()) {
+        for (int i = count; i < dankaiList.size(); i++) {
+            count = count + INT_1;
+            if (!RString.isNullOrEmpty(dankaiList.get(i).get段階区分())) {
+                保険料算定段階2 = dankaiList.get(i).get段階区分();
                 builder.set保険料算定段階2(dankaiList.get(i).get段階区分());
                 builder.set算定年額保険料2(dankaiList.get(i).get保険料率());
-                builder.set月割開始年月2(new FlexibleYearMonth(月.get(i)));
+                builder.set月割開始年月2(new FlexibleYearMonth(年月.get(i)));
                 break;
             }
         }
-        if (count3 == dankaiList.size()) {
-            builder.set月割終了年月2(new FlexibleYearMonth(月.get(count3 - INT_1)));
+        if (count == dankaiList.size()) {
             return;
         }
-        for (int i = count3; i < dankaiList.size(); i++) {
-            count3 = count3 + INT_1;
-            if (!dankaiList.get(i).get段階区分().equals(dankaiList.get(i).get段階区分())) {
-                builder.set月割終了年月2(new FlexibleYearMonth(月.get(i)));
+        for (int i = count; i < dankaiList.size(); i++) {
+            if (!dankaiList.get(count - INT_1).get段階区分().equals(dankaiList.get(i).get段階区分())) {
+                builder.set月割終了年月2(new FlexibleYearMonth(年月.get(i - INT_1)));
                 break;
             }
+            count = count + INT_1;
         }
-        if (count3 == dankaiList.size()) {
-            builder.set月割終了年月2(new FlexibleYearMonth(月.get(count3 - INT_1)));
+        if (count == dankaiList.size()) {
+            builder.set月割終了年月2(new FlexibleYearMonth(年月.get(count - INT_1)));
+        }
+
+        if (!保険料算定段階2.isEmpty()) {
+            builder.set保険料段階(保険料算定段階2);
+        } else {
+            builder.set保険料段階(保険料算定段階1);
         }
     }
 
@@ -1366,7 +1372,7 @@ public class FukaKeisan {
         List<FukaJohoList> 更正後賦課リスト = new ArrayList<>();
         FukaJohoList johoList = new FukaJohoList();
         johoList.set現年度(現年度);
-        if (現年度.get減免前介護保険料_年額().compareTo(param.get年額保険料()) < 0) {
+        if (現年度 != null && 現年度.get減免前介護保険料_年額().compareTo(param.get年額保険料()) < 0) {
             choteiJiyuParameter.set過年度(get過年度(param.get年度分賦課リスト_更正前(), 調定年度));
             johoList.set過年度(過年度);
         }
@@ -1427,7 +1433,7 @@ public class FukaKeisan {
 
         FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
         ChoshuHoho 出力用徴収方法の情報 = param.get徴収方法の情報_更正前();
-        if (!Tsuki._3月.getコード().equals(param.get調定日時().getMonthValue())) {
+        if (Integer.parseInt(Tsuki._3月.getコード().toString()) != param.get調定日時().getMonthValue()) {
             Decimal 更正前の特別徴収額 = Decimal.ZERO;
             if (更正前.get特徴期別金額01() != null) {
                 更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額01());
@@ -1573,35 +1579,28 @@ public class FukaKeisan {
     }
 
     private FukaJoho get過年度(NendobunFukaList 年度分賦課リスト, FlexibleYear 調定年度) {
-        if (年度分賦課リスト.get現年度() != null) {
-            if (調定年度.equals(年度分賦課リスト.get現年度().get調定年度())) {
-                return 年度分賦課リスト.get現年度();
-            }
+        if (年度分賦課リスト.get現年度() != null
+                && 調定年度.equals(年度分賦課リスト.get現年度().get調定年度())) {
+            return 年度分賦課リスト.get現年度();
         }
-        if (年度分賦課リスト.get過年度1() != null) {
-            if (調定年度.equals(年度分賦課リスト.get過年度1().get調定年度())) {
-                return 年度分賦課リスト.get過年度1();
-            }
+        if (年度分賦課リスト.get過年度1() != null
+                && 調定年度.equals(年度分賦課リスト.get過年度1().get調定年度())) {
+            return 年度分賦課リスト.get過年度1();
         }
-        if (年度分賦課リスト.get過年度2() != null) {
-            if (調定年度.equals(年度分賦課リスト.get過年度2().get調定年度())) {
-                return 年度分賦課リスト.get過年度2();
-            }
+        if (年度分賦課リスト.get過年度2() != null
+                && 調定年度.equals(年度分賦課リスト.get過年度2().get調定年度())) {
+            return 年度分賦課リスト.get過年度2();
         }
-        if (年度分賦課リスト.get過年度3() != null) {
-            if (調定年度.equals(年度分賦課リスト.get過年度3().get調定年度())) {
-                return 年度分賦課リスト.get過年度3();
-            }
+        if (年度分賦課リスト.get過年度3() != null
+                && 調定年度.equals(年度分賦課リスト.get過年度3().get調定年度())) {
+            return 年度分賦課リスト.get過年度3();
         }
-        if (年度分賦課リスト.get過年度4() != null) {
-            if (調定年度.equals(年度分賦課リスト.get過年度4().get調定年度())) {
-                return 年度分賦課リスト.get過年度4();
-            }
+        if (年度分賦課リスト.get過年度4() != null
+                && 調定年度.equals(年度分賦課リスト.get過年度4().get調定年度())) {
+            return 年度分賦課リスト.get過年度4();
         }
-        if (年度分賦課リスト.get過年度5() != null) {
-            if (調定年度.equals(年度分賦課リスト.get過年度5().get調定年度())) {
-                return 年度分賦課リスト.get過年度5();
-            }
+        if (年度分賦課リスト.get過年度5() != null && 調定年度.equals(年度分賦課リスト.get過年度5().get調定年度())) {
+            return 年度分賦課リスト.get過年度5();
         }
         return null;
     }
@@ -1756,7 +1755,7 @@ public class FukaKeisan {
                 nowDate, SubGyomuCode.DBB介護賦課);
         RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
                 nowDate, SubGyomuCode.DBB介護賦課);
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<RString, RankBetsuKijunKingaku>();
+        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
 
         // TODO QAのNo.957　「ランク別制御情報」の設定方法がない。
 //        RankBetsuKijunKingaku gaku = new RankBetsuKijunKingaku();
