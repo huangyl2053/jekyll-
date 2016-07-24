@@ -42,7 +42,7 @@ public class DBC4530011Panel1ValidationHandler {
     public ValidationMessageControlPairs validate() {
         IValidationMessages messages = new ControlValidator(div).validate();
         return new ValidationDictionaryBuilder()
-                .add(DBC4530011Panel1ValidationMessage.全角桁数超過64位, div.getTextBoxMultiLine1())
+                .add(DBC4530011Panel1ValidationMessage.全角桁数超過64位, div.getTxtShiharaiBasho())
                 .build().check(messages);
     }
 
