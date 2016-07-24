@@ -19,6 +19,7 @@ public class TokuchoIraikinProcess extends SimpleBatchProcessBase {
 
     private GenNendoHonsanteiIdou business;
     private GennendoIdoFukaProcessParameter processParameter;
+    private final int ONE = 1;
 
     @Override
     protected void beforeExecute() {
@@ -27,7 +28,7 @@ public class TokuchoIraikinProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        business.calculateTokuchoIraikin4gatsuKaishi(processParameter.get調定年度(), new YMDHMS(processParameter.get調定日時()));
+        business.calculateTokuchoIraikin4gatsuKaishi(processParameter.get調定年度().plusYear(ONE), new YMDHMS(processParameter.get調定日時()));
     }
 
 }

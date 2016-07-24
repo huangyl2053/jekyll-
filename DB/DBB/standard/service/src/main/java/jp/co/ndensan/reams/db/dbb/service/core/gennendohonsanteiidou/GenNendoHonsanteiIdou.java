@@ -170,6 +170,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final RString 使用する = new RString("1");
     private static final RString 使用しない = new RString("0");
     private static final Code 用途区分コード = new Code("0");
+    private static final RString STRING = new RString("000");
 
     /**
      * コンストラクタです
@@ -1522,7 +1523,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         RString 年度連番;
         DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select異動賦課最大年度内連番(processParameter.get賦課年度());
         if (entity != null) {
-            年度連番 = new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1));
+            年度連番 = STRING.concat(new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1)));
         } else {
             年度連番 = 年度内連番;
         }
