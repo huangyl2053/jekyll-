@@ -584,7 +584,8 @@ public class IkenshoSakuseiIraiHandler {
      */
     public SyujiyikenshosakuseyiraihakouReportJoho create主治医意見書作成依頼発行一覧表(List<IkenshoirairirekiichiranShudou> 主治医意見書作成依頼発行一覧表情報) {
 
-        SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(RString.EMPTY, RString.EMPTY, new RString("1"));
+        SyujiyikenshosakuseyiraihakouHeadItem headItem
+                = new SyujiyikenshosakuseyiraihakouHeadItem(fomartDate12(div.getTxtSakuseiIraiD().getValue()), RString.EMPTY, new RString("1"));
         List<SyujiyikenshosakuseyiraihakouBodyItem> bodyItemList = new ArrayList<>();
         for (IkenshoirairirekiichiranShudou shudou : 主治医意見書作成依頼発行一覧表情報) {
             RString 被保険者氏名 = RString.EMPTY;
@@ -766,6 +767,14 @@ public class IkenshoSakuseiIraiHandler {
 
     private RString fomartDate12(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString fomartDate12(RDate date) {
+        if (date == null) {
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI).
