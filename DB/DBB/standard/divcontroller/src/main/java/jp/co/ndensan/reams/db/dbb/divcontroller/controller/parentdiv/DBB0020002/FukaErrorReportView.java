@@ -71,12 +71,13 @@ public class FukaErrorReportView {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_LINE = new RString("_");
     private static final RString CSV = new RString(".csv");
-    private static final RString DBBWF33004 = new RString("DBBWF33004");
-    private static final RString DBBWF34004 = new RString("DBBWF34004");
-    private static final RString DBBWF36004 = new RString("DBBWF36004");
-    private static final RString DBBWF43004 = new RString("DBBWF43004");
-    private static final RString DBBWF44004 = new RString("DBBWF44004");
-    private static final RString DBBWF45004 = new RString("DBBWF45004");
+    private static final RString DBBMN33004 = new RString("DBBMN33004");
+    private static final RString DBBMN34004 = new RString("DBBMN34004");
+    private static final RString DBBMN36004 = new RString("DBBMN36004");
+    private static final RString DBBMN35006 = new RString("DBBMN35006");
+    private static final RString DBBMN43004 = new RString("DBBMN43004");
+    private static final RString DBBMN44004 = new RString("DBBMN44004");
+    private static final RString DBBMN45004 = new RString("DBBMN45004");
     private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
     private static final RString 普徴仮算定賦課 = new RString("普徴仮算定賦課");
     private static final RString 仮算定異動賦課 = new RString("仮算定異動賦課");
@@ -95,10 +96,9 @@ public class FukaErrorReportView {
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
         RString batchID = RString.EMPTY;
         RDateTime 基準日時 = RDateTime.MIN;
-        if (ResponseHolder.getFlowId().equals(DBBWF33004) || ResponseHolder.getFlowId().equals(DBBWF34004)
-                || ResponseHolder.getFlowId().equals(DBBWF36004) || ResponseHolder.getFlowId().equals(DBBWF43004)
-                || ResponseHolder.getFlowId().equals(DBBWF44004) || ResponseHolder.getFlowId().equals(DBBWF45004)) {
-            ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID();
+        RString menuId = getMenuId();
+        if (!RString.isNullOrEmpty(menuId)) {
+            ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID(menuId);
             if (shori != null) {
                 batchID = getバッチID変換(shori);
                 基準日時 = shori.get基準日時().getRDateTime();
@@ -309,6 +309,31 @@ public class FukaErrorReportView {
         }
         if (過年度賦課.equals(shori.get処理名())) {
             return new RString("DBB055001_KanendoIdoFuka");
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getMenuId() {
+        if (ResponseHolder.getMenuID().equals(DBBMN33004)) {
+            return 特徴仮算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN34004)) {
+            return 普徴仮算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN36004)) {
+            return 仮算定異動賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN35006)) {
+            return 特徴平準化計算_8月分;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN43004)) {
+            return 本算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN44004)) {
+            return 異動賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN45004)) {
+            return 過年度賦課;
         }
         return RString.EMPTY;
     }
