@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.AtesakiPSMMybatisPa
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.ShikibetsuTaishoPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4024ShiharaiHohoHenkoSashitomeDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaiHenkoTsuchiHakko.ShiharaiHenkoTsuchiHakkoMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IAtesakiPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IShikibetsuTaishoPSMMybatisMapper;
@@ -79,12 +81,16 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     private final int パターン番号_３ = 3;
     private final int パターン番号_４ = 4;
     private final MapperProvider mapperProvider;
+    private final DbT4021ShiharaiHohoHenkoDac dac4021;
+    private final DbT4024ShiharaiHohoHenkoSashitomeDac dac4024;
 
     /**
      * コンストラクタです。
      */
     public ShiharaiHohoHenkoTsuchishoHakkoService() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac4021 = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
+        this.dac4024 = InstanceProvider.create(DbT4024ShiharaiHohoHenkoSashitomeDac.class);
     }
 
     /**
@@ -213,8 +219,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         ShiharaiHohoHenkoYokokuTsuchishoService service = new ShiharaiHohoHenkoYokokuTsuchishoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
-        shiharaiHenkoTsuchiHakkoMapper.updateYokokuTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
+        dac4021.updateYokokuTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
                 帳票情報.get管理区分(), 帳票情報.get履歴番号(), 予告通知書発行年月日);
     }
 
@@ -225,8 +230,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         ShiharaiHohoHenkoTsuchishoService service = new ShiharaiHohoHenkoTsuchishoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 償還払化通知書発行年月日, 償還払化文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
-        shiharaiHenkoTsuchiHakkoMapper.updateShokanTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
+        dac4021.updateShokanTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
                 帳票情報.get管理区分(), 帳票情報.get履歴番号(), 償還払化通知書発行年月日);
     }
 
@@ -237,9 +241,8 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         ShiharaiIchijiSashitomeTsuchishoService service = new ShiharaiIchijiSashitomeTsuchishoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, null, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
         for (ShiharaiHohoHenkoSashitome entity : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
-            shiharaiHenkoTsuchiHakkoMapper.updateSashitomeTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
+            dac4024.updateSashitomeTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
                     entity.get管理区分(), entity.get履歴番号(), entity.get情報分類区分(), entity.get連番(), 差止通知書発行年月日);
         }
     }
@@ -253,9 +256,8 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         TainoHokenryoKojoTsuchishoService service = new TainoHokenryoKojoTsuchishoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity),
                 地方公共団体, 控除通知書発行年月日, 控除文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, shokanKihonJihoEntiyList, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
         for (ShiharaiHohoHenkoSashitome entity : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
-            shiharaiHenkoTsuchiHakkoMapper.updateKojoTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
+            dac4024.updateKojoTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
                     entity.get管理区分(), entity.get履歴番号(), entity.get情報分類区分(), entity.get連番(), 控除通知書発行年月日);
         }
     }
@@ -267,8 +269,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         KyufugakuGengakuTsuchishoService service = new KyufugakuGengakuTsuchishoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity),
                 地方公共団体, 減額通知書発行年月日, 減額文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
-        shiharaiHenkoTsuchiHakkoMapper.updateGemmen_TsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
+        dac4021.updateGemmen_TsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
                 帳票情報.get管理区分(), 帳票情報.get履歴番号(), 減額通知書発行年月日);
     }
 
@@ -279,8 +280,7 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         SashitomeYokokuTsuchishoNigoService service = new SashitomeYokokuTsuchishoNigoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 予告通知書発行年月日, 予告文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, null, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
-        shiharaiHenkoTsuchiHakkoMapper.updateYokokuTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
+        dac4021.updateYokokuTsuchiHakkoYMD(帳票情報.get証記載保険者番号(), 帳票情報.get被保険者番号(),
                 帳票情報.get管理区分(), 帳票情報.get履歴番号(), 予告通知書発行年月日);
     }
 
@@ -291,9 +291,8 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
         SashitomeShobunTsuchishoNigoService service = new SashitomeShobunTsuchishoNigoService();
         service.print(ShikibetsuTaishoFactory.createKojin(宛名情報), AtesakiFactory.createInstance(宛先情報), new ChohyoSeigyoKyotsu(dbT7065Entity), 地方公共団体,
                 差止通知書発行年月日, 差止文書番号, 通知書定型文List, 帳票分類ID, 帳票情報, reportManager);
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
         for (ShiharaiHohoHenkoSashitome entity : 帳票情報.getShiharaiHohoHenkoSashitomeList()) {
-            shiharaiHenkoTsuchiHakkoMapper.updateSashitomeTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
+            dac4024.updateSashitomeTsuchiHakkoYMD(entity.get証記載保険者番号(), entity.get被保険者番号(),
                     entity.get管理区分(), entity.get履歴番号(), entity.get情報分類区分(),
                     entity.get連番(), 差止通知書発行年月日);
         }

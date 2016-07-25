@@ -5,50 +5,6 @@
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaiHenkoTsuchiHakko.ShiharaiHenkoTsuchiHakkoMapper">
-    <update id="updateYokokuTsuchiHakkoYMD">
-        update rgdb."DbT4021ShiharaiHohoHenko"
-           set "yokoku_TsuchiHakkoYMD" = #{yokokuTsuchiHakkoYMD}
-         where "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-           and "hihokenshaNo" =#{hihokenshaNo}
-           and "kanriKubun" =#{kanriKubun}
-           and "rirekiNo" =#{rirekiNo}
-    </update>
-     <update id="updateShokanTsuchiHakkoYMD">
-        update rgdb."DbT4021ShiharaiHohoHenko"
-           set "shokan_TsuchiHakkoYMD" = #{shokanTsuchiHakkoYMD}
-         where "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-           and "hihokenshaNo" =#{hihokenshaNo}
-           and "kanriKubun" =#{kanriKubun}
-           and "rirekiNo" =#{rirekiNo}
-    </update>
-     <update id="updateGemmen_TsuchiHakkoYMD">
-        update rgdb."DbT4021ShiharaiHohoHenko"
-           set "gemmen_TsuchiHakkoYMD" = #{gemmenTsuchiHakkoYMD}
-         where "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-           and "hihokenshaNo" =#{hihokenshaNo}
-           and "kanriKubun" =#{kanriKubun}
-           and "rirekiNo" =#{rirekiNo}
-    </update>
-     <update id="updateSashitomeTsuchiHakkoYMD">
-        update rgdb."DbT4024ShiharaiHohoHenkoSashitome"
-           set "sashitome_TsuchiHakkoYMD" = #{sashitomeTsuchiHakkoYMD}
-         where "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-           and "hihokenshaNo" =#{hihokenshaNo}
-           and "kanriKubun" =#{kanriKubun}
-           and "rirekiNo" =#{rirekiNo}
-           and "johoBunruiKubun" =#{johoBunruiKubun}
-           and "renNo" =#{renNo}
-    </update>
-     <update id="updateKojoTsuchiHakkoYMD">
-        update rgdb."DbT4024ShiharaiHohoHenkoSashitome"
-           set "kojo_TsuchiHakkoYMD" = #{KojoTsuchiHakkoYMD}
-         where "shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-           and "hihokenshaNo" =#{hihokenshaNo}
-           and "kanriKubun" =#{kanriKubun}
-           and "rirekiNo" =#{rirekiNo}
-           and "johoBunruiKubun" =#{johoBunruiKubun}
-           and "renNo" =#{renNo}
-    </update>
      <select id="selectShokanKihon" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy">
         SELECT
          ShokanKihonJiho."hiHokenshaNo",
