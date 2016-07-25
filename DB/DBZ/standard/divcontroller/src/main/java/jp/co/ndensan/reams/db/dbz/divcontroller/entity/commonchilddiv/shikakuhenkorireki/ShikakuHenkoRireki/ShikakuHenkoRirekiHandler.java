@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -413,8 +415,17 @@ public class ShikakuHenkoRirekiHandler {
         List<HihokenshaDaicho> hihokenshaDaichoList = manager.get最新被保険者台帳(被保険者番号);
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = Models.create(hihokenshaDaichoList);
         List<dgHenko_Row> rows = new ArrayList<>();
-        for (SikakuKanrenIdo sikakuKanrenIdo : kanrenIdos) {
-            rows.add(getDgHenko_RowFromSikakuKanrenIdo(sikakuKanrenIdo, 識別コード));
+        Set<RString> keys = new HashSet<>();
+        for (SikakuKanrenIdo shikakuKanrenIdo : kanrenIdos) {
+            RString key = new RStringBuilder()
+                    .append(shikakuKanrenIdo.get資格変更年月日().toString())
+                    .append(shikakuKanrenIdo.get住所地特例適用事由コード()).toRString();
+            if (keys.contains(key)) {
+                continue;
+            } else {
+                keys.add(key);
+            }
+            rows.add(getDgHenko_RowFromSikakuKanrenIdo(shikakuKanrenIdo, 識別コード));
         }
         ViewStateHolder.put(ViewStateKeys.被保険者台帳情報, result);
         return rows;

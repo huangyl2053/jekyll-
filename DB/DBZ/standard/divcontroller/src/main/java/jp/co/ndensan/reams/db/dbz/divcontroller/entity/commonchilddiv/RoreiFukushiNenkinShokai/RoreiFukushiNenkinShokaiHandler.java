@@ -55,7 +55,7 @@ public class RoreiFukushiNenkinShokaiHandler {
         for (RoreiFukushiNenkinJukyusha busiRoreiFukushiNenkin : 一覧情報) {
             datagridRireki_Row row = new datagridRireki_Row();
             row.getStartDate().setValue(new RDate(busiRoreiFukushiNenkin.get受給開始年月日().toString()));
-            if (busiRoreiFukushiNenkin.get受給終了年月日() != null) {
+            if (busiRoreiFukushiNenkin.get受給終了年月日() != null && busiRoreiFukushiNenkin.get受給終了年月日().isValid()) {
                 row.getEndDate().setValue(new RDate(busiRoreiFukushiNenkin.get受給終了年月日().toString()));
             }
             rowList.add(row);
@@ -212,10 +212,10 @@ public class RoreiFukushiNenkinShokaiHandler {
             row.setJotai(eventJotai);
             div.getDatagridRireki().getDataSource().add(row);
         } else if (状態_削除.equals(eventJotai)
-                && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
+                   && !状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
             row.setJotai(eventJotai);
         } else if (状態_削除.equals(eventJotai)
-                && 状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
+                   && 状態_追加.equals(div.getDatagridRireki().getActiveRow().getJotai())) {
             div.getDatagridRireki().getDataSource().remove(index);
         } else {
             row.setJotai(eventJotai);
