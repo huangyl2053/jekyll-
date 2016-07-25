@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100015;
 
-import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100015.RiysFutgGengMenjNinteishoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -19,8 +19,10 @@ public class RiysFutgGengMenjNinteishoProerty extends ReportPropertyBase<RiysFut
 
     /**
      * コンストラクタです。
+     *
+     * @param reportId ReportId
      */
-    public RiysFutgGengMenjNinteishoProerty() {
-        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100015.getReportId());
+    public RiysFutgGengMenjNinteishoProerty(ReportId reportId) {
+        super(SubGyomuCode.DBD介護受給, reportId);
     }
 }

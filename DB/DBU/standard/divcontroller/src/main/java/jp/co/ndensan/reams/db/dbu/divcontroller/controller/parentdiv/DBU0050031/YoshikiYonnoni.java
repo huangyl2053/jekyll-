@@ -223,8 +223,8 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnYoshikiyon(
             YoshikiYonnoniDiv div) {
-        RString 内部処理モード = ResponseHolder.getState();
-        if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
+        RString 内部処理モード = div.getShoriMode();
+        if (内部処理モード_修正.equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_修正);
@@ -232,13 +232,19 @@ public class YoshikiYonnoni {
                 return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
             }
 
-        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)) {
+        } else if (内部処理モード_修正追加.equals(内部処理モード)) {
+            if (this.入力項目いずれか空白ではない(div)) {
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_修正);
+            }
+        } else if (内部処理モード_追加.equals(内部処理モード)) {
             if (this.入力項目いずれか空白ではない(div)) {
                 return this.messageAndGoto(DBU0050031TransitionEventName.様式４, div);
             } else {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_追加);
             }
-        } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
+        } else if (内部処理モード_削除.equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).parameter(内部処理モード_削除);
         }
 
@@ -252,8 +258,8 @@ public class YoshikiYonnoni {
      * @return ResponseData<YoshikiYonnoniDiv>
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnYoskiyonosan(YoshikiYonnoniDiv div) {
-        RString 内部処理モード = ResponseHolder.getState();
-        if (DBU0050031StateName.修正状態.getName().equals(内部処理モード)) {
+        RString 内部処理モード = div.getShoriMode();
+        if (内部処理モード_修正.equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpo 修正データ = this.修正データの取得(div);
             if (修正データ.get詳細データエリア() == null || 修正データ.get詳細データエリア().isEmpty()) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_修正);
@@ -261,14 +267,21 @@ public class YoshikiYonnoni {
 
                 return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
             }
-        } else if (DBU0050031StateName.追加状態.getName().equals(内部処理モード)) {
+        } else if (内部処理モード_修正追加.equals(内部処理モード)) {
+            if (this.入力項目いずれか空白ではない(div)) {
+                return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
+
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_修正);
+            }
+        } else if (内部処理モード_追加.equals(内部処理モード)) {
             if (this.入力項目いずれか空白ではない(div)) {
                 return this.messageAndGoto(DBU0050031TransitionEventName.様式４の３, div);
 
             } else {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_追加);
             }
-        } else if (DBU0050031StateName.削除状態.getName().equals(内部処理モード)) {
+        } else if (内部処理モード_削除.equals(内部処理モード)) {
             return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４の３).parameter(内部処理モード_削除);
         }
         return ResponseData.of(div).respond();

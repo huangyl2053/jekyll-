@@ -17,6 +17,7 @@ public class HomKaigRiysFutgGengNinteishoReportSource implements IReportSource {
     @ReportPerson(id = "001")
     public RString shikibetsuCode;
     @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 31)
     public RString hihokenshaNo;
     @ReportItem(name = "kofuGengo", length = 2, order = 1)
     public RString kofuGengo;

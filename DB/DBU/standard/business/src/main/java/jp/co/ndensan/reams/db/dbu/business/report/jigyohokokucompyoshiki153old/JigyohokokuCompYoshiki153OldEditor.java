@@ -72,6 +72,7 @@ public class JigyohokokuCompYoshiki153OldEditor implements IJigyohokokuCompYoshi
         RStringBuilder 集計範囲_SB = new RStringBuilder();
         集計範囲_SB.append(new RString("("));
         FlexibleYear 集計範囲_年度 = new FlexibleYear(集計範囲.substring(0, 年度));
+        集計範囲_SB.append(new RString("年度"));
         FlexibleYearMonth 集計範囲_M = new FlexibleYearMonth(集計範囲);
         集計範囲_SB.append(集計範囲_年度.wareki().eraType(EraType.KANJI).getYear());
         集計範囲_SB.append(集計範囲_M.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonth());
