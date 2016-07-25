@@ -8,17 +8,17 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票_概況調査_サービスの状況フラグを管理するクラスです。
  */
 public class NinteichosahyoServiceJokyoFlag extends
-        ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag>
+        ModelBase<NinteichosahyoServiceJokyoFlagIdentifier, DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag>
         implements Serializable {
 
     private final DbT5208NinteichosahyoServiceJokyoFlagEntity entity;
@@ -127,7 +127,8 @@ public class NinteichosahyoServiceJokyoFlag extends
     /**
      * 認定調査票_概況調査_サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}を返します。
      *
-     * @return 認定調査票_概況調査_サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}
+     * @return
+     * 認定調査票_概況調査_サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}
      */
     @Override
     public NinteichosahyoServiceJokyoFlagIdentifier identifier() {
@@ -135,11 +136,11 @@ public class NinteichosahyoServiceJokyoFlag extends
     }
 
     /**
-     * 認定調査票_概況調査_サービスの状況フラグのみを変更対象とします。<br/> {@link DbT5208NinteichosahyoServiceJokyoFlagEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票_概況調査_サービスの状況フラグのみを変更対象とします。<br/>
+     * {@link DbT5208NinteichosahyoServiceJokyoFlagEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoServiceJokyoFlag}
      */
-    @Override
     public NinteichosahyoServiceJokyoFlag modifiedModel() {
         DbT5208NinteichosahyoServiceJokyoFlagEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {

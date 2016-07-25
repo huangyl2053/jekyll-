@@ -70,8 +70,9 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
-    private static final RString SHUSEKINITI = new RString("（出席日");
-    private static final RString GATSU = new RString("月）");
+    private static final RString SHUSEKINITI = new RString("出席日（");
+    private static final RString GATSU = new RString("月");
+    private static final RString KAKO = new RString("）");
     private static final int ZERO = 0;
     private static final int YON = 4;
     private static final int NIJYU = 20;
@@ -197,7 +198,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 relateEntity.set出席状況_31日(entity.get出席状況_31日());
                 this.get出席回数(entity.get出席状況_31日());
                 relateEntity.set出席回数(出席回数);
-                relateEntity.set審査会開催年月(set出席日(entity.get審査会開催年月()));
+                relateEntity.set審査会開催年月(set出席日(entity.get審査会開催年月(), paramter.get帳票出力区分()));
                 総合計_審査回数 = 総合計_審査回数 + 出席回数;
                 if (初期化フラグ == ZERO) {
                     総合計_報酬総額 = relateEntity.get総合計_報酬総額();
@@ -211,7 +212,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                     ShinsaHoshuIchiranReport report = new ShinsaHoshuIchiranReport(change.createData(relateEntity, paramter.get帳票出力区分()));
                     report.writeBy(reportSourceWriter);
                 }
-                if (初期化フラグ == NIJYU) {
+                if (初期化フラグ == NIJYU && CSVを出力する.equals(paramter.get帳票出力区分())) {
                     return;
                 }
                 初期化フラグ = 初期化フラグ + 1;
@@ -285,15 +286,26 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         return new RDate(date.toString()).wareki().toDateString();
     }
 
-    private static RString set出席日(RString date) {
+    private static RString set出席日(RString date, RString 帳票出力区分) {
 
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        RStringBuilder 出席日 = new RStringBuilder();
-        出席日.append(SHUSEKINITI);
-        出席日.append(date.substring(YON));
-        出席日.append(GATSU);
-        return 出席日.toRString();
+        if (CSVを出力する.equals(帳票出力区分)) {
+            RStringBuilder 出席日 = new RStringBuilder();
+            出席日.append(date.substring(YON));
+            出席日.append(GATSU);
+            return 出席日.toRString();
+        }
+        if (一覧表を発行する.equals(帳票出力区分)) {
+            RStringBuilder 出席日 = new RStringBuilder();
+            出席日.append(SHUSEKINITI);
+            出席日.append(date.substring(YON));
+            出席日.append(GATSU);
+            出席日.append(KAKO);
+            return 出席日.toRString();
+        } else {
+            return RString.EMPTY;
+        }
     }
 }

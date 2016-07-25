@@ -42,9 +42,9 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
     private final int 連番;
     private final NinshoshaSource ninshoshaSource;
     private static final int INT6 = 6;
-    private static final RString 分 = new RString("分");
-    private static final RString 円 = new RString("円");
-    private static final RString 金額_0 = new RString("0");
+    private final RString 分 = new RString("分");
+    private final RString 円 = new RString("円");
+    private final RString 金額_0 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -110,10 +110,14 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
         EditedKojin 編集後個人 = 編集後本算定通知書共通情報.get編集後個人();
         EditedKoza 編集後口座 = 編集後本算定通知書共通情報.get編集後口座();
         edit編集後個人And編集後口座(source, 編集後個人, 編集後口座);
-        source.keisanMeisaishoKi1 = 納入通知書期情報リスト.get(0).get期表記();
-        source.keisanMeisaishoTsuki1 = 納入通知書期情報リスト.get(0).get月表記();
-        source.keisanMeisaishoNokigenKaishi1 = 納入通知書期情報リスト.get(0).get納期開始日表記();
-        source.keisanMeisaishoNokigenShuryo1 = 納入通知書期情報リスト.get(0).get納期終了日表記();
+        if (!納入通知書期情報リスト.isEmpty()
+                && 納入通知書期情報リスト.get(0) != null) {
+            source.keisanMeisaishoKi1 = 納入通知書期情報リスト.get(0).get期表記();
+            source.keisanMeisaishoTsuki1 = 納入通知書期情報リスト.get(0).get月表記();
+            source.keisanMeisaishoNokigenKaishi1 = 納入通知書期情報リスト.get(0).get納期開始日表記();
+            source.keisanMeisaishoNokigenShuryo1 = 納入通知書期情報リスト.get(0).get納期終了日表記();
+        }
+
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = 編集後本算定通知書共通情報.get更正後();
         if (更正後 != null) {
             source.keisanMeisaishoTsukiSu = 半角to全角(更正後.get月数_ケ月());
@@ -150,7 +154,9 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
         source.cover_pagerenban2 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-2")) : new RString("1-2");
         source.nokibetsuMeisaishoNendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
         source.nokibetsuMeisaishoNendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat(分);
-        source.nokibetsuMeisaishoTsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
+        if (編集後本算定通知書共通情報.get通知書番号() != null) {
+            source.nokibetsuMeisaishoTsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
+        }
         source.nokibetsuMeisaishoTokuchoNofuGaku1 = 金額_0;
         source.nokibetsuMeisaishoTokuchoNofuZumiGaku1 = 金額_0;
         source.nokibetsuMeisaishoTokuchoSaGaku1 = 金額_0;
@@ -163,16 +169,20 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
         source.nokibetsuMeisaishoTokuchoNofuGaku4 = 金額_0;
         source.nokibetsuMeisaishoTokuchoNofuZumiGaku4 = 金額_0;
         source.nokibetsuMeisaishoTokuchoSaGaku4 = 金額_0;
-        if (納入通知書期情報リスト.get(0).get期表記() != null) {
-            source.nokibetsuMeisaishoKi1 = new RString("第").concat(納入通知書期情報リスト.get(0).get期表記()).concat(new RString("期"));
+        if (!納入通知書期情報リスト.isEmpty()
+                && 納入通知書期情報リスト.get(0) != null) {
+            if (納入通知書期情報リスト.get(0).get期表記() != null) {
+                source.nokibetsuMeisaishoKi1 = new RString("第").concat(納入通知書期情報リスト.get(0).get期表記()).concat(new RString("期"));
+            }
+            source.nokibetsuMeisaishoFuchoNofuGaku1 = 納入通知書期情報リスト.get(0).get調定額表記();
+            source.nokibetsuMeisaishoFuchoNofuZumiGaku1 = 納入通知書期情報リスト.get(0).get収入額表記();
+            source.nokibetsuMeisaishoFuchoSaGaku1 = 納入通知書期情報リスト.get(0).get差額表記();
+            source.nokibetsuMeisaishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
+            source.nokibetsuMeisaishoFuchoNofuGaku11 = source.nokibetsuMeisaishoFuchoNofuGaku1;
+            source.nokibetsuMeisaishoFuchoNofuZumiGaku11 = source.nokibetsuMeisaishoFuchoNofuZumiGaku1;
+            source.nokibetsuMeisaishoFuchoSaGaku11 = source.nokibetsuMeisaishoFuchoSaGaku1;
         }
-        source.nokibetsuMeisaishoFuchoNofuGaku1 = 納入通知書期情報リスト.get(0).get調定額表記();
-        source.nokibetsuMeisaishoFuchoNofuZumiGaku1 = 納入通知書期情報リスト.get(0).get収入額表記();
-        source.nokibetsuMeisaishoFuchoSaGaku1 = 納入通知書期情報リスト.get(0).get差額表記();
-        source.nokibetsuMeisaishoNokigen1 = 納入通知書期情報リスト.get(0).get納期限表記();
-        source.nokibetsuMeisaishoFuchoNofuGaku11 = source.nokibetsuMeisaishoFuchoNofuGaku1;
-        source.nokibetsuMeisaishoFuchoNofuZumiGaku11 = source.nokibetsuMeisaishoFuchoNofuZumiGaku1;
-        source.nokibetsuMeisaishoFuchoSaGaku11 = source.nokibetsuMeisaishoFuchoSaGaku1;
+
         if (編集後本算定通知書共通情報.get識別コード() != null) {
             source.kozaIraishoLeftShikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
             source.kozaIraishoRightShikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
@@ -199,14 +209,22 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
 
     private void edit編集後個人And編集後口座(KanendoNonyuTsuchishoBookFuriKaeAriSource source, EditedKojin 編集後個人, EditedKoza 編集後口座) {
         if (編集後個人 != null) {
-            source.setaiCode = 編集後個人.get世帯コード().value();
-            source.kaisanMeisaishoHihokenshaName = 編集後個人.get名称().getName().value();
-            source.keisanMeisaishoSetaiCode = 編集後個人.get世帯コード().value();
-            source.kaisanMeisaishoSetaiNushiName = 編集後個人.get世帯主名().value();
-            source.kozaIraishoLeftHihokenshaName = 編集後個人.get名称().getName().value();
-            source.kozaIraishoRightHihokenshaName = 編集後個人.get名称().getName().value();
-            source.nokibetsuMeisaishoSetaiCode = 編集後個人.get世帯コード().value();
-            source.nokibetsuMeisaishoHohokenshaName = 編集後個人.get名称().getName().value();
+            if (編集後個人.get世帯コード() != null) {
+                source.setaiCode = 編集後個人.get世帯コード().value();
+                source.keisanMeisaishoSetaiCode = 編集後個人.get世帯コード().value();
+                source.nokibetsuMeisaishoSetaiCode = 編集後個人.get世帯コード().value();
+            }
+            if (編集後個人.get名称() != null
+                    && 編集後個人.get名称().getName() != null) {
+                source.kaisanMeisaishoHihokenshaName = 編集後個人.get名称().getName().value();
+                source.kozaIraishoLeftHihokenshaName = 編集後個人.get名称().getName().value();
+                source.kozaIraishoRightHihokenshaName = 編集後個人.get名称().getName().value();
+                source.nokibetsuMeisaishoHohokenshaName = 編集後個人.get名称().getName().value();
+            }
+            if (編集後個人.get世帯主名() != null) {
+                source.kaisanMeisaishoSetaiNushiName = 編集後個人.get世帯主名().value();
+            }
+
             source.kozaIraishoLeftJusho = 編集後個人.get編集後住所();
             source.kozaIraishoRightJusho = 編集後個人.get編集後住所();
         }

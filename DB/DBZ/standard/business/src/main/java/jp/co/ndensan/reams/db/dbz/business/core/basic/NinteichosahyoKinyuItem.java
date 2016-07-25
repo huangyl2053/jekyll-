@@ -8,19 +8,19 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査票_概況調査_記入項目を管理するクラスです。
  */
 public class NinteichosahyoKinyuItem extends
-        ParentModelBase<NinteichosahyoKinyuItemIdentifier, DbT5209NinteichosahyoKinyuItemEntity, NinteichosahyoKinyuItem> implements Serializable {
+        ModelBase<NinteichosahyoKinyuItemIdentifier, DbT5209NinteichosahyoKinyuItemEntity, NinteichosahyoKinyuItem> implements Serializable {
 
     private final DbT5209NinteichosahyoKinyuItemEntity entity;
     private final NinteichosahyoKinyuItemIdentifier id;
@@ -145,11 +145,11 @@ public class NinteichosahyoKinyuItem extends
     }
 
     /**
-     * 認定調査票_概況調査_記入項目のみを変更対象とします。<br/> {@link DbT5209NinteichosahyoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票_概況調査_記入項目のみを変更対象とします。<br/>
+     * {@link DbT5209NinteichosahyoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoKinyuItem}
      */
-    @Override
     public NinteichosahyoKinyuItem modifiedModel() {
         DbT5209NinteichosahyoKinyuItemEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -160,7 +160,8 @@ public class NinteichosahyoKinyuItem extends
     }
 
     /**
-     * 保持する認定調査票_概況調査_記入項目を削除対象とします。<br/> {@link DbT5209NinteichosahyoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票_概況調査_記入項目を削除対象とします。<br/>
+     * {@link DbT5209NinteichosahyoKinyuItemEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosahyoKinyuItem}
      */

@@ -164,7 +164,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
     private void edit納付書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 通知書の連番,
             ReportSourceWriter<KanendoNonyuTsuchishoBookFuriKaeAriSource> writer) {
         IKanendoNonyuTsuchishoBookFuriKaeAriEditor editor
-                = new KanendoNonyuTsuchishoBookFuriKaeAriNofushoEditor(本算定納入通知書情報, 納入通知書期情報リストEdit, 通知書の連番);
+                = new KanendoNonyuTsuchishoBookFuriKaeAriNofushoEditor(本算定納入通知書情報, 納入通知書期情報リストEdit);
         IKanendoNonyuTsuchishoBookFuriKaeAriBuilder builder
                 = new KanendoNonyuTsuchishoBookFuriKaeAriBuilder(editor);
         writer.writeLine(builder);
@@ -205,34 +205,39 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
                 if ((1 == ブック開始位置 || ブック開始位置 > INT_5)) {
                     throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
                 }
-                if (ブック開始位置 == INT_2) {
-                    detail設定数 = INT_1;
-                } else if (ブック開始位置 == INT_3) {
-                    detail設定数 = INT_2;
-                    set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_1);
-                } else if (ブック開始位置 == INT_4) {
-                    detail設定数 = INT_3;
-                    set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_2);
-                } else if (ブック開始位置 == INT_5) {
-                    detail設定数 = INT_4;
-                    set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_3);
+                switch (ブック開始位置) {
+                    case INT_2:
+                        detail設定数 = INT_1;
+                        break;
+                    case INT_3:
+                        detail設定数 = INT_2;
+                        set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_1);
+                        break;
+                    case INT_4:
+                        detail設定数 = INT_3;
+                        set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_2);
+                        break;
+                    case INT_5:
+                        detail設定数 = INT_4;
+                        set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_3);
+                        break;
+                    default:
+                        break;
                 }
                 納入通知書期情報リストDetail.add(納入通知書期情報);
                 isBegin = true;
+            } else if (detail設定数 >= INT_4) {
+                本算定納入通知書情報Detail
+                        = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
+                reportDetail = KanendoNonyuTsuchishoBookFuriKaeAriReport
+                        .createFrom(本算定納入通知書情報Detail, ninshoshaSource);
+                nonyuTsuchishoList.add(reportDetail);
+                納入通知書期情報リストDetail = new ArrayList<>();
+                納入通知書期情報リストDetail.add(納入通知書期情報);
+                detail設定数 = INT_1;
             } else {
-                if (detail設定数 >= INT_4) {
-                    本算定納入通知書情報Detail
-                            = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
-                    reportDetail = KanendoNonyuTsuchishoBookFuriKaeAriReport
-                            .createFrom(本算定納入通知書情報Detail, ninshoshaSource);
-                    nonyuTsuchishoList.add(reportDetail);
-                    納入通知書期情報リストDetail = new ArrayList<>();
-                    納入通知書期情報リストDetail.add(納入通知書期情報);
-                    detail設定数 = INT_1;
-                } else {
-                    納入通知書期情報リストDetail.add(納入通知書期情報);
-                    detail設定数++;
-                }
+                納入通知書期情報リストDetail.add(納入通知書期情報);
+                detail設定数++;
             }
         }
         本算定納入通知書情報Detail
@@ -258,6 +263,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
         new本算定納入通知書情報.set編集後本算定通知書共通情報(本算定納入通知書情報.get編集後本算定通知書共通情報());
         new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(本算定納入通知書情報.get連番());
         return new本算定納入通知書情報;
     }
 

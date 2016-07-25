@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
 
+    private static final int 一時間 = 60;
     private final ShinsakaiGijirokuEntity item;
     private ShinsakaiKaisaiKekkaJohoEntity 審査会情報;
     private ShinsakaiKekkaJohoRelateEntity 審査会審査結果等;
@@ -52,7 +53,11 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
         printTimeStamp.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        source.nendo = 審査会情報.getShinsakaiKaisaiYMD().getNendo().toDateString();
+        RStringBuilder nendoBuilder = new RStringBuilder();
+        nendoBuilder.append(審査会情報.getShinsakaiKaisaiYMD().getNendo().
+                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
+        nendoBuilder.append("年度");
+        source.nendo = nendoBuilder.toRString();
         source.title = new RString("介護認定審査会議事録");
         source.printTimeStamp = printTimeStamp.toRString();
         RStringBuilder builder = new RStringBuilder();
@@ -70,9 +75,10 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
         source.kaisaiTime = temp.toRString();
         source.kaisaiKaijo = 審査会情報.getShinsakaiKaisaiBashoName();
         RStringBuilder date = new RStringBuilder();
-        date.append(new RTime(審査会情報.getShinsakaiShuryoTime()).minutesDuration(new RTime(審査会情報.getShinsakaiKaishiTime())));
+        long 時間 = new RTime(審査会情報.getShinsakaiKaishiTime()).minutesDuration(new RTime(審査会情報.getShinsakaiShuryoTime()));
+        date.append(時間 / 一時間);
         date.append("時間");
-        date.append(date);
+        date.append(時間 % 一時間);
         date.append("分");
         source.shinsakaiKaisaiTime = date.toRString();
         source.kensu = new RString(審査会審査結果等.get判定件数());

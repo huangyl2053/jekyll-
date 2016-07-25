@@ -85,15 +85,18 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
             source.notsuRenban2 = new RString(renban).padZeroToLeft(INT_6);
         }
-        source.pageCount2 = new RString(renban + "-2");
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
             source.renban = new RString(renban);
         }
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
             source.notsuRenban3 = new RString(renban).padZeroToLeft(INT_6);
+            source.pageCount3 = new RString(renban).concat("-3");
+            source.pageCount2 = new RString(renban).concat("-2");
+        } else {
+            source.pageCount3 = new RString(1).concat("-3");
+            source.pageCount2 = new RString(1).concat("-2");
         }
-        source.pageCount3 = new RString(renban + "-3");
         if (item.get編集後仮算定通知書共通情報().get保険者名() != null) {
             source.hokenshaName = new RString(item.get編集後仮算定通知書共通情報().get保険者名().toString());
         }
@@ -154,8 +157,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
 
         if (ShoriKubun.バッチ.equals(item.get処理区分())) {
             source.notsuRenban1 = new RString(renban).padLeft("0", INT_6);
+            source.pageCount1 = new RString(renban).concat("-1");
+        } else {
+            source.pageCount1 = new RString(1).concat("-1");
         }
-        source.pageCount1 = new RString(renban + "-1");
 
         return source;
     }
@@ -246,8 +251,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoCoverEditor implements IKarisantei
             source.gokeigaku = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd = 印字位置1の納付書.get納期限表記();
             source.honzei = 印字位置1の納付書.get納付額表記();
-            source.ocr1 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr1 = 印字位置1の納付書.getOcr().get(1);
+                source.ocr2 = 印字位置1の納付書.getOcr().get(2);
+            }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
