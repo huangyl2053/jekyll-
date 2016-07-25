@@ -310,6 +310,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeNashiReport extends NonyuTsuchisho<
             new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         }
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(本算定納入通知書情報.get連番());
         return new本算定納入通知書情報;
     }
 
