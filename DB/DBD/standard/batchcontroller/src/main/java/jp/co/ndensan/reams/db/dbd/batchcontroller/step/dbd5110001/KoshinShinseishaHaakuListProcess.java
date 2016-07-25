@@ -87,7 +87,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
         mapper = getMapper(IKoshinShinseishaHaakuListMapper.class);
         personalDataList = new ArrayList<>();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        spoolWorkPath = manager.getEucOutputDirectry();
+        spoolWorkPath = Path.getTmpDirectoryPath();
         eucFilename = Path.combinePath(spoolWorkPath, new RString("更新未申請者把握リスト.csv"));
         eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
