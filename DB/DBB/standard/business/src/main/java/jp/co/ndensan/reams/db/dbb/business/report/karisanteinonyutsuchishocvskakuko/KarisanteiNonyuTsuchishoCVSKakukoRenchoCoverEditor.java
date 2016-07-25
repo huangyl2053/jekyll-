@@ -232,8 +232,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoCoverEditor implements IKari
             source.gokeigaku1 = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd1 = 印字位置1の納付書.get納期限表記();
             source.honzei1 = 印字位置1の納付書.get納付額表記();
-            source.ocr11 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr11 = 印字位置1の納付書.getOcr().get(1);
+                source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            }
 
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen1 = 印字位置1の納付書.getコンビニ支払期限().toDateString();
@@ -305,8 +307,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoCoverEditor implements IKari
             source.gokeigaku2 = 印字位置2の納付書.get納付額表記();
             source.nokigenYmd2 = 印字位置2の納付書.get納期限表記();
             source.honzei2 = 印字位置2の納付書.get納付額表記();
-            source.ocr12 = 印字位置2の納付書.getOcr().get(1);
-            source.ocr22 = 印字位置2の納付書.getOcr().get(2);
+            if (印字位置2の納付書.getOcr() != null) {
+                source.ocr12 = 印字位置2の納付書.getOcr().get(1);
+                source.ocr22 = 印字位置2の納付書.getOcr().get(2);
+            }
 
             if (印字位置2の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen2 = 印字位置2の納付書.getコンビニ支払期限().toDateString();
