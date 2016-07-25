@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class YokaigoNinteiJisshiJokyohyoEntity {
 
-    private RString 市町村コードブレイク;
     private RString 市町村名;
     private RString 市町村番号;
     private FlexibleYear 対象年度;
