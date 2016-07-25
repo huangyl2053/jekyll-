@@ -8,13 +8,14 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA4Report;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1a4.Shujiiikensho1A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiWariateJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho1A4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoItem;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -44,12 +45,12 @@ public class IinIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiW
     private static final RString SELECT_WARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getShinsakaiWariateJoho");
     private static final List<RString> PAGE_BREAK_KEYS_A4 = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShujiiikenshoA4ReportSource.ReportSourceFields.hokenshaNo.name())));
+            new RString(Shujiiikensho1A4ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     @BatchWriter
-    private BatchReportWriter<ShujiiikenshoA4ReportSource> batchWriteA4;
-    private ReportSourceWriter<ShujiiikenshoA4ReportSource> reportSourceWriterA4;
+    private BatchReportWriter<Shujiiikensho1A4ReportSource> batchWriteA4;
+    private ReportSourceWriter<Shujiiikensho1A4ReportSource> reportSourceWriterA4;
     private ShujiiikenshoItem item;
     private static final RString ファイルID_E0001 = new RString("E0001.png");
     private static final RString ファイルID_E0001_BAK = new RString("E0001_BAK.png");
@@ -73,14 +74,15 @@ public class IinIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<ShinsakaiW
         set項目(entity);
         item.set主治医意見書イメージ一頁目(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001));
         item.set主治医意見書イメージ二頁目(共有ファイル2を引き出す(entity.getImageSharedFileId(), ファイルID_E0002));
-        ShujiiikenshoA4Report reportA4 = ShujiiikenshoA4Report.createFrom(item);
+        JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
+        Shujiiikensho1A4Report reportA4 = Shujiiikensho1A4Report.createFrom(business);
         reportA4.writeBy(reportSourceWriterA4);
     }
 
     @Override
     protected void createWriter() {
         batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517152.getReportId().value())
-                .addBreak(new BreakerCatalog<ShujiiikenshoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
+                .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }
