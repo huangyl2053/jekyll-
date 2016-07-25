@@ -328,6 +328,19 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
     }
 
     /**
+     * 「保険料算定段階2」が存在すれば「保険料算定段階2」、しなければ「保険料算定段階1」を返します。
+     *
+     * @return 「保険料算定段階2」が存在すれば「保険料算定段階2」、しなければ「保険料算定段階1」
+     */
+    public RString get保険料算定段階() {
+        if (!RString.isNullOrEmpty(get保険料算定段階2())) {
+            return get保険料算定段階2();
+        } else {
+            return get保険料算定段階1();
+        }
+    }
+
+    /**
      * 保険料算定段階1を返します。
      *
      * @return 保険料算定段階1
