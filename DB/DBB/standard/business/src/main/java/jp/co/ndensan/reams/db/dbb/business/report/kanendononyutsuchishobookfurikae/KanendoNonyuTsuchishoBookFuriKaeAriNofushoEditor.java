@@ -28,6 +28,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriNofushoEditor implements IKanend
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
+    private final int ページ;
     private final RString 星_2 = new RString("**");
     private final RString 星_6 = new RString("******");
     private final RString 星_9 = new RString("*********");
@@ -42,11 +43,15 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriNofushoEditor implements IKanend
      *
      * @param 本算定納入通知書情報 本算定納入通知書情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
+     * @param ページ ページ
      */
     public KanendoNonyuTsuchishoBookFuriKaeAriNofushoEditor(
-            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
+            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報,
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
+            int ページ) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
+        this.ページ = ページ;
     }
 
     @Override
@@ -419,7 +424,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriNofushoEditor implements IKanend
     }
 
     private RString get連番(int 印字位置) {
-        return new RString(本算定納入通知書情報.get連番() * INT_4 + 印字位置 - INT_1);
+        return new RString(ページ * INT_4 + 印字位置 - INT_1);
     }
 
     private RString get印字文字列(int 行目, Map<Integer, RString> ocr) {

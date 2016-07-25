@@ -39,7 +39,6 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final HonSanteiNonyuTsuchiShoSeigyoJoho 本算定納入通知書制御情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
-    private final int 連番;
     private final NinshoshaSource ninshoshaSource;
     private static final int INT6 = 6;
     private final RString 分 = new RString("分");
@@ -50,12 +49,10 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
      * コンストラクタです。
      *
      * @param 本算定納入通知書情報 本算定納入通知書情報
-     * @param 連番 連番
      * @param ninshoshaSource ninshoshaSource
      */
     protected KanendoNonyuTsuchishoBookFuriKaeAriEditor(
             HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報,
-            int 連番,
             NinshoshaSource ninshoshaSource) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.編集後本算定通知書共通情報 = null == 本算定納入通知書情報.get編集後本算定通知書共通情報()
@@ -64,7 +61,6 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
                 ? new HonSanteiNonyuTsuchiShoSeigyoJoho() : 本算定納入通知書情報.get本算定納入通知書制御情報();
         this.納入通知書期情報リスト = null == 本算定納入通知書情報.get納入通知書期情報リスト()
                 ? new ArrayList<NonyuTsuchiShoKiJoho>() : 本算定納入通知書情報.get納入通知書期情報リスト();
-        this.連番 = 連番;
         this.ninshoshaSource = ninshoshaSource;
     }
 
@@ -150,8 +146,8 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
         source.yen3 = 円;
         source.yen4 = 円;
         source.keisanmeisaishoNendo2 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
-        source.cover_pagerenban1 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-1")) : new RString("1-1");
-        source.cover_pagerenban2 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-2")) : new RString("1-2");
+        source.cover_pagerenban1 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-1")) : new RString("1-1");
+        source.cover_pagerenban2 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-2")) : new RString("1-2");
         source.nokibetsuMeisaishoNendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
         source.nokibetsuMeisaishoNendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat(分);
         if (編集後本算定通知書共通情報.get通知書番号() != null) {
@@ -187,10 +183,10 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriEditor implements IKanendoNonyuT
             source.kozaIraishoLeftShikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
             source.kozaIraishoRightShikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         }
-        source.renban = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
+        source.renban = isバッチ ? new RString(本算定納入通知書情報.get連番()).padLeft("0", INT6) : RString.EMPTY;
         source.hokenshaName = 編集後本算定通知書共通情報.get保険者名();
-        source.cover_pagerenban3 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-3")) : new RString("1-3");
-        source.cover_pagerenban4 = isバッチ ? new RString(String.valueOf(連番)).concat(new RString("-4")) : new RString("1-4");
+        source.cover_pagerenban3 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-3")) : new RString("1-3");
+        source.cover_pagerenban4 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-4")) : new RString("1-4");
     }
 
     private RString decimalFormatter_toコンマ区切りRString(Decimal 額, int count) {

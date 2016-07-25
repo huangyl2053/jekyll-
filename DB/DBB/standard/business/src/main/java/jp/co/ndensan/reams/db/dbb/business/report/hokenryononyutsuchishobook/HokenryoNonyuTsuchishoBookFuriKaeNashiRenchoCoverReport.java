@@ -87,7 +87,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
             ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource> writer) {
 
         if (HenshuHaniKubun.Detailのみ.equals(本算定納入通知書情報.get編集範囲区分())) {
-            edit納付書(納入通知書期情報リスト, writer);
+            edit納付書(納入通知書期情報リスト, 1, writer);
             return;
         }
         if (本算定納入通知書情報.get本算定納入通知書制御情報() != null
@@ -106,6 +106,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
     private void edit納入通知書期情報(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource> writer) {
 
+        int ページ = INT1;
         HenshuHaniKubun 編集範囲区分 = 本算定納入通知書情報.get編集範囲区分();
         if (HenshuHaniKubun.Coverのみ.equals(編集範囲区分) || HenshuHaniKubun.全てのレイアウト.equals(編集範囲区分)) {
             edit通知書(納入通知書期情報リスト, writer);
@@ -138,8 +139,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
                 } else {
                     set納入通知書期情報リストEdit(納入通知書期情報リストEdit, INT3);
                     納入通知書期情報リストEdit.add(納入通知書期情報);
-                    edit納付書(納入通知書期情報リストEdit, writer);
-
+                    edit納付書(納入通知書期情報リストEdit, ページ, writer);
+                    ページ++;
                     納入通知書期情報リストEdit = new ArrayList<>();
                     is納入通知書期情報リスト設定中 = true;
                 }
@@ -169,8 +170,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
                 }
             } else if (納入通知書期情報リストの設定数 == INT3) {
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                edit納付書(納入通知書期情報リストEdit, writer);
-
+                edit納付書(納入通知書期情報リストEdit, ページ, writer);
+                ページ++;
                 納入通知書期情報リストEdit = new ArrayList<>();
                 納入通知書期情報リストの設定数 = 0;
             } else {
@@ -178,7 +179,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
                 納入通知書期情報リストの設定数++;
             }
         }
-        edit納付書(納入通知書期情報リストEdit, writer);
+        edit納付書(納入通知書期情報リストEdit, ページ, writer);
     }
 
     private void set納入通知書期情報リストEdit(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 納入通知書期情報リストの設定数) {
@@ -200,14 +201,14 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
         writer.writeLine(builder);
     }
 
-    private void edit納付書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit,
+    private void edit納付書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int ページ,
             ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource> writer) {
         if (納入通知書期情報リストEdit.isEmpty()) {
             return;
         }
         IHokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverEditor editor
                 = new HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor(
-                        本算定納入通知書情報, 納入通知書期情報リストEdit);
+                        本算定納入通知書情報, 納入通知書期情報リストEdit, ページ);
         IHokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverBuilder builder
                 = new HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverBuilder(editor);
         writer.writeLine(builder);
