@@ -75,7 +75,7 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
         source.kaisaiTime = temp.toRString();
         source.kaisaiKaijo = 審査会情報.getShinsakaiKaisaiBashoName();
         RStringBuilder date = new RStringBuilder();
-        long 時間 = new RTime(審査会情報.getShinsakaiShuryoTime()).minutesDuration(new RTime(審査会情報.getShinsakaiKaishiTime()));
+        long 時間 = new RTime(審査会情報.getShinsakaiKaishiTime()).minutesDuration(new RTime(審査会情報.getShinsakaiShuryoTime()));
         date.append(時間 / 一時間);
         date.append("時間");
         date.append(時間 % 一時間);
