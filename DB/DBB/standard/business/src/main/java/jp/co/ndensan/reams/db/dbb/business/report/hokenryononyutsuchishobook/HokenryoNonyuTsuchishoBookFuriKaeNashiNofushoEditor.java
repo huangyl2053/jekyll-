@@ -33,7 +33,9 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor implements IHok
     private final RString 星_9 = new RString("*********");
     private final RString 星_10 = new RString("**********");
     private final RString 星_11 = new RString("***********");
+    private final RString 星_12 = new RString("************");
     private final RString 星_19 = new RString("*******************");
+    private final RString 星_20 = new RString("********************");
 
     /**
      * コンストラクタです。
@@ -76,8 +78,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor implements IHok
             source.ryoshushoTitleTsuki4 = 星_2;
             source.nofushoTitleTsuki4 = 星_2;
             source.nofuzumishoOCR14 = 星_19;
-            source.nofuzumishoOCR24 = 星_19;
-            source.nofuzumishoOCR34 = 星_19;
+            source.nofuzumishoOCR24 = 星_20;
+            source.nofuzumishoOCR34 = 星_12;
             source.nofuzumishoNokigen4 = 星_11;
             source.ryoshushoHokenryoGaku4 = 星_10;
             source.nofushoHokenryoGaku4 = 星_10;
@@ -169,8 +171,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor implements IHok
             source.ryoshushoTitleTsuki3 = 星_2;
             source.nofushoTitleTsuki3 = 星_2;
             source.nofuzumishoOCR13 = 星_19;
-            source.nofuzumishoOCR23 = 星_19;
-            source.nofuzumishoOCR33 = 星_19;
+            source.nofuzumishoOCR23 = 星_20;
+            source.nofuzumishoOCR33 = 星_12;
             source.nofuzumishoNokigen3 = 星_11;
             source.ryoshushoHokenryoGaku3 = 星_10;
             source.nofushoHokenryoGaku3 = 星_10;
@@ -258,8 +260,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor implements IHok
             source.ryoshushoTitleTsuki2 = 星_2;
             source.nofushoTitleTsuki2 = 星_2;
             source.nofuzumishoOCR12 = 星_19;
-            source.nofuzumishoOCR22 = 星_19;
-            source.nofuzumishoOCR32 = 星_19;
+            source.nofuzumishoOCR22 = 星_20;
+            source.nofuzumishoOCR32 = 星_12;
             source.nofuzumishoNokigen2 = 星_11;
             source.ryoshushoHokenryoGaku2 = 星_10;
             source.nofushoHokenryoGaku2 = 星_10;
@@ -347,8 +349,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor implements IHok
             source.ryoshushoTitleTsuki1 = 星_2;
             source.nofushoTitleTsuki1 = 星_2;
             source.nofuzumishoOCR11 = 星_19;
-            source.nofuzumishoOCR21 = 星_19;
-            source.nofuzumishoOCR31 = 星_19;
+            source.nofuzumishoOCR21 = 星_20;
+            source.nofuzumishoOCR31 = 星_12;
             source.nofuzumishoNokigen1 = 星_11;
             source.ryoshushoHokenryoGaku1 = 星_10;
             source.nofushoHokenryoGaku1 = 星_10;
