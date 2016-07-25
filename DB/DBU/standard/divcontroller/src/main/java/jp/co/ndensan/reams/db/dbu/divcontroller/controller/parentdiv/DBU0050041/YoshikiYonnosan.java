@@ -83,7 +83,7 @@ public class YoshikiYonnosan {
         if (responseData != null) {
             return responseData;
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if (!ResponseHolder.isReRequest() || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             RString state = ResponseHolder.getState();
@@ -135,15 +135,19 @@ public class YoshikiYonnosan {
         if (responseData != null) {
             return responseData;
         }
-        RString state = ResponseHolder.getState();
-        if (DBU0050031StateName.追加状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_追加);
-        }
-        if (DBU0050031StateName.修正状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_修正);
-        }
-        if (DBU0050031StateName.削除状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_削除);
+        if (!ResponseHolder.isReRequest() || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            RString state = ResponseHolder.getState();
+            if (DBU0050031StateName.追加状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_追加);
+            }
+            if (DBU0050031StateName.修正状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_修正);
+            }
+            if (DBU0050031StateName.削除状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_削除);
+            }
         }
         return ResponseData.of(div).respond();
     }
