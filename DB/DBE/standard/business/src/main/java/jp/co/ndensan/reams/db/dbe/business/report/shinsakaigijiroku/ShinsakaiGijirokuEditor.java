@@ -52,8 +52,11 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
         printTimeStamp.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        source.nendo = 審査会情報.getShinsakaiKaisaiYMD().getNendo().
-                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+        RStringBuilder nendoBuilder = new RStringBuilder();
+        nendoBuilder.append(審査会情報.getShinsakaiKaisaiYMD().getNendo().
+                wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString());
+        nendoBuilder.append("年度");
+        source.nendo = nendoBuilder.toRString();
         source.title = new RString("介護認定審査会議事録");
         source.printTimeStamp = printTimeStamp.toRString();
         RStringBuilder builder = new RStringBuilder();
