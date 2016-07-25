@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Setter
 @lombok.Getter
-public class JigyoHokokuRenkei2_4or2_6EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
+public class JigyoHokokuRenkei24or26EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
 
     @CsvField(order = 10, name = "先頭項目")
     private RString 先頭項目;

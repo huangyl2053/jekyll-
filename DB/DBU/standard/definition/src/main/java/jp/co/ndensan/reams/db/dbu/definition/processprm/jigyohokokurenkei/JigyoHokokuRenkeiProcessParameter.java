@@ -23,6 +23,7 @@ import lombok.Setter;
 @Setter
 public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter {
 
+    private static final int 桁数_４ = 4;
     private RString 過去集計年月;
     private RString 一般状況1_10集計年月;
     private RString 一般状況11_14現物分_集計年月;
@@ -121,38 +122,38 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
         RString 過去集計年月_年 = RString.EMPTY;
         RString 過去集計年月_月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(過去集計年月)) {
-            過去集計年月_年 = 過去集計年月.substring(0, 4);
-            過去集計年月_月 = 過去集計年月.substring(4);
+            過去集計年月_年 = 過去集計年月.substring(0, 桁数_４);
+            過去集計年月_月 = 過去集計年月.substring(桁数_４);
         }
         RString 一般状況1_10集計年月_年 = RString.EMPTY;
         RString 一般状況1_10集計年月_月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(一般状況1_10集計年月)) {
-            一般状況1_10集計年月_年 = 一般状況1_10集計年月.substring(0, 4);
-            一般状況1_10集計年月_月 = 一般状況1_10集計年月.substring(4);
+            一般状況1_10集計年月_年 = 一般状況1_10集計年月.substring(0, 桁数_４);
+            一般状況1_10集計年月_月 = 一般状況1_10集計年月.substring(桁数_４);
         }
         RString 一般状況11_14現物分_集計年月_年 = RString.EMPTY;
         RString 一般状況11_14現物分_集計年月_月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(一般状況11_14現物分_集計年月)) {
-            一般状況11_14現物分_集計年月_年 = 一般状況11_14現物分_集計年月.substring(0, 4);
-            一般状況11_14現物分_集計年月_月 = 一般状況11_14現物分_集計年月.substring(4);
+            一般状況11_14現物分_集計年月_年 = 一般状況11_14現物分_集計年月.substring(0, 桁数_４);
+            一般状況11_14現物分_集計年月_月 = 一般状況11_14現物分_集計年月.substring(桁数_４);
         }
         RString 一般状況11_14償還分_集計年月_年 = RString.EMPTY;
         RString 一般状況11_14償還分_集計年月_月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(一般状況11_14償還分_集計年月)) {
-            一般状況11_14償還分_集計年月_年 = 一般状況11_14償還分_集計年月.substring(0, 4);
-            一般状況11_14償還分_集計年月_月 = 一般状況11_14償還分_集計年月.substring(4);
+            一般状況11_14償還分_集計年月_年 = 一般状況11_14償還分_集計年月.substring(0, 桁数_４);
+            一般状況11_14償還分_集計年月_月 = 一般状況11_14償還分_集計年月.substring(桁数_４);
         }
         RString 保険給付決定状況現物分_集計年月_年 = RString.EMPTY;
         RString 保険給付決定状況現物分_集計年月_月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(保険給付決定状況現物分_集計年月)) {
-            保険給付決定状況現物分_集計年月_年 = 保険給付決定状況現物分_集計年月.substring(0, 4);
-            保険給付決定状況現物分_集計年月_月 = 保険給付決定状況現物分_集計年月.substring(4);
+            保険給付決定状況現物分_集計年月_年 = 保険給付決定状況現物分_集計年月.substring(0, 桁数_４);
+            保険給付決定状況現物分_集計年月_月 = 保険給付決定状況現物分_集計年月.substring(桁数_４);
         }
         RString 保険給付決定状況償還分_集計年月_年 = RString.EMPTY;
         RString 保険給付決定状況償還分_集計年月_月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(保険給付決定状況償還分_集計年月)) {
-            保険給付決定状況償還分_集計年月_年 = 保険給付決定状況償還分_集計年月.substring(0, 4);
-            保険給付決定状況償還分_集計年月_月 = 保険給付決定状況償還分_集計年月.substring(4);
+            保険給付決定状況償還分_集計年月_年 = 保険給付決定状況償還分_集計年月.substring(0, 桁数_４);
+            保険給付決定状況償還分_集計年月_月 = 保険給付決定状況償還分_集計年月.substring(桁数_４);
         }
         RString 統計対象区分 = RString.EMPTY;
         if (is旧保険者分 || is構成市町村分) {
@@ -162,8 +163,7 @@ public class JigyoHokokuRenkeiProcessParameter implements IBatchProcessParameter
         }
         RString 表番号 = RString.EMPTY;
         if (is旧保険者分) {
-            //統計対象区分 = new RString("11");
-            表番号 = new RString("06");
+            表番号 = new RString("11");
         } else {
             表番号 = new RString("01");
         }

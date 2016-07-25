@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class JigyoHokokuRenkei11_14Record4EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
+public class JigyoHokokuRenkei11or14Record1EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
 
     @CsvField(order = 1, name = "交換情報識別番号")
     private final RString 交換情報識別番号;
@@ -131,96 +131,6 @@ public class JigyoHokokuRenkei11_14Record4EucCsvEntity implements IJigyoHokokuRe
     private final RString d054;
     @CsvField(order = 57, name = "D055")
     private final RString d055;
-    @CsvField(order = 58, name = "D056")
-    private final RString d056;
-    @CsvField(order = 59, name = "D057")
-    private final RString d057;
-    @CsvField(order = 60, name = "D058")
-    private final RString d058;
-    @CsvField(order = 61, name = "D059")
-    private final RString d059;
-    @CsvField(order = 62, name = "D060")
-    private final RString d060;
-    @CsvField(order = 63, name = "D061")
-    private final RString d061;
-    @CsvField(order = 64, name = "D062")
-    private final RString d062;
-    @CsvField(order = 65, name = "D063")
-    private final RString d063;
-    @CsvField(order = 66, name = "D064")
-    private final RString d064;
-    @CsvField(order = 67, name = "D065")
-    private final RString d065;
-    @CsvField(order = 68, name = "D066")
-    private final RString d066;
-    @CsvField(order = 69, name = "D067")
-    private final RString d067;
-    @CsvField(order = 70, name = "D068")
-    private final RString d068;
-    @CsvField(order = 71, name = "D069")
-    private final RString d069;
-    @CsvField(order = 72, name = "D070")
-    private final RString d070;
-    @CsvField(order = 73, name = "D071")
-    private final RString d071;
-    @CsvField(order = 74, name = "D072")
-    private final RString d072;
-    @CsvField(order = 75, name = "D073")
-    private final RString d073;
-    @CsvField(order = 76, name = "D074")
-    private final RString d074;
-    @CsvField(order = 77, name = "D075")
-    private final RString d075;
-    @CsvField(order = 78, name = "D076")
-    private final RString d076;
-    @CsvField(order = 79, name = "D077")
-    private final RString d077;
-    @CsvField(order = 80, name = "D078")
-    private final RString d078;
-    @CsvField(order = 81, name = "D079")
-    private final RString d079;
-    @CsvField(order = 82, name = "D080")
-    private final RString d080;
-    @CsvField(order = 83, name = "D081")
-    private final RString d081;
-    @CsvField(order = 84, name = "D082")
-    private final RString d082;
-    @CsvField(order = 85, name = "D083")
-    private final RString d083;
-    @CsvField(order = 86, name = "D084")
-    private final RString d084;
-    @CsvField(order = 87, name = "D085")
-    private final RString d085;
-    @CsvField(order = 88, name = "D086")
-    private final RString d086;
-    @CsvField(order = 89, name = "D087")
-    private final RString d087;
-    @CsvField(order = 90, name = "D088")
-    private final RString d088;
-    @CsvField(order = 91, name = "D089")
-    private final RString d089;
-    @CsvField(order = 92, name = "D090")
-    private final RString d090;
-    @CsvField(order = 93, name = "D091")
-    private final RString d091;
-    @CsvField(order = 94, name = "D092")
-    private final RString d092;
-    @CsvField(order = 95, name = "D093")
-    private final RString d093;
-    @CsvField(order = 96, name = "D094")
-    private final RString d094;
-    @CsvField(order = 97, name = "D095")
-    private final RString d095;
-    @CsvField(order = 98, name = "D096")
-    private final RString d096;
-    @CsvField(order = 99, name = "D097")
-    private final RString d097;
-    @CsvField(order = 100, name = "D098")
-    private final RString d098;
-    @CsvField(order = 101, name = "D099")
-    private final RString d099;
-    @CsvField(order = 102, name = "D100")
-    private final RString d100;
 
     /**
      * コンストラクタ
@@ -282,54 +192,8 @@ public class JigyoHokokuRenkei11_14Record4EucCsvEntity implements IJigyoHokokuRe
      * @param d053 RString
      * @param d054 RString
      * @param d055 RString
-     * @param d056 RString
-     * @param d057 RString
-     * @param d058 RString
-     * @param d059 RString
-     * @param d060 RString
-     * @param d061 RString
-     * @param d062 RString
-     * @param d063 RString
-     * @param d064 RString
-     * @param d065 RString
-     * @param d066 RString
-     * @param d067 RString
-     * @param d068 RString
-     * @param d069 RString
-     * @param d070 RString
-     * @param d071 RString
-     * @param d072 RString
-     * @param d073 RString
-     * @param d074 RString
-     * @param d075 RString
-     * @param d076 RString
-     * @param d077 RString
-     * @param d078 RString
-     * @param d079 RString
-     * @param d080 RString
-     * @param d081 RString
-     * @param d082 RString
-     * @param d083 RString
-     * @param d084 RString
-     * @param d085 RString
-     * @param d086 RString
-     * @param d087 RString
-     * @param d088 RString
-     * @param d089 RString
-     * @param d090 RString
-     * @param d091 RString
-     * @param d092 RString
-     * @param d093 RString
-     * @param d094 RString
-     * @param d095 RString
-     * @param d096 RString
-     * @param d097 RString
-     * @param d098 RString
-     * @param d099 RString
-     * @param d100 RString
-     *
      */
-    public JigyoHokokuRenkei11_14Record4EucCsvEntity(
+    public JigyoHokokuRenkei11or14Record1EucCsvEntity(
             RString 交換情報識別番号,
             RString レコード種別番号,
             RString d001,
@@ -386,52 +250,7 @@ public class JigyoHokokuRenkei11_14Record4EucCsvEntity implements IJigyoHokokuRe
             RString d052,
             RString d053,
             RString d054,
-            RString d055,
-            RString d056,
-            RString d057,
-            RString d058,
-            RString d059,
-            RString d060,
-            RString d061,
-            RString d062,
-            RString d063,
-            RString d064,
-            RString d065,
-            RString d066,
-            RString d067,
-            RString d068,
-            RString d069,
-            RString d070,
-            RString d071,
-            RString d072,
-            RString d073,
-            RString d074,
-            RString d075,
-            RString d076,
-            RString d077,
-            RString d078,
-            RString d079,
-            RString d080,
-            RString d081,
-            RString d082,
-            RString d083,
-            RString d084,
-            RString d085,
-            RString d086,
-            RString d087,
-            RString d088,
-            RString d089,
-            RString d090,
-            RString d091,
-            RString d092,
-            RString d093,
-            RString d094,
-            RString d095,
-            RString d096,
-            RString d097,
-            RString d098,
-            RString d099,
-            RString d100
+            RString d055
     ) {
         this.交換情報識別番号 = 交換情報識別番号;
         this.レコード種別番号 = レコード種別番号;
@@ -490,50 +309,5 @@ public class JigyoHokokuRenkei11_14Record4EucCsvEntity implements IJigyoHokokuRe
         this.d053 = d053;
         this.d054 = d054;
         this.d055 = d055;
-        this.d056 = d056;
-        this.d057 = d057;
-        this.d058 = d058;
-        this.d059 = d059;
-        this.d060 = d060;
-        this.d061 = d061;
-        this.d062 = d062;
-        this.d063 = d063;
-        this.d064 = d064;
-        this.d065 = d065;
-        this.d066 = d066;
-        this.d067 = d067;
-        this.d068 = d068;
-        this.d069 = d069;
-        this.d070 = d070;
-        this.d071 = d071;
-        this.d072 = d072;
-        this.d073 = d073;
-        this.d074 = d074;
-        this.d075 = d075;
-        this.d076 = d076;
-        this.d077 = d077;
-        this.d078 = d078;
-        this.d079 = d079;
-        this.d080 = d080;
-        this.d081 = d081;
-        this.d082 = d082;
-        this.d083 = d083;
-        this.d084 = d084;
-        this.d085 = d085;
-        this.d086 = d086;
-        this.d087 = d087;
-        this.d088 = d088;
-        this.d089 = d089;
-        this.d090 = d090;
-        this.d091 = d091;
-        this.d092 = d092;
-        this.d093 = d093;
-        this.d094 = d094;
-        this.d095 = d095;
-        this.d096 = d096;
-        this.d097 = d097;
-        this.d098 = d098;
-        this.d099 = d099;
-        this.d100 = d100;
     }
 }

@@ -29,20 +29,20 @@ public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
     private static final String 償還分_集計年月11_14 = "一般状況11_14償還分_集計年月";
     private static final String 現物分_集計年月 = "保険給付決定状況現物分_集計年月";
     private static final String 償還分_集計年月 = "保険給付決定状況償還分_集計年月";
-    private static final String is出力_1_10 = "is出力_一般状況1_10";
-    private static final String is出力_11_14現物分 = "is出力_一般状況11_14現物分";
-    private static final String is出力_11_14償還分_審査年月 = "is出力_一般状況11_14償還分_審査年月";
-    private static final String is出力_11_14償還分_決定年月 = "is出力_一般状況11_14償還分_決定年月";
-    private static final String is出力_11_14合算_審査年月 = "is出力_一般状況11_14合算_審査年月";
-    private static final String is出力_11_14合算_決定年月 = "is出力_一般状況11_14合算_決定年月";
-    private static final String is出力_現物分 = "is出力_保険給付決定状況現物分";
-    private static final String is出力_償還分_審査年月 = "is出力_保険給付決定状況償還分_審査年月";
-    private static final String is出力_償還分_決定年月 = "is出力_保険給付決定状況償還分_決定年月";
-    private static final String is出力_合算_審査年月 = "is出力_保険給付決定状況合算_審査年月";
-    private static final String is出力_合算_決定年月 = "is出力_保険給付決定状況合算_決定年月";
+    private static final String IS出力_1_10 = "is出力_一般状況1_10";
+    private static final String IS出力_11_14現物分 = "is出力_一般状況11_14現物分";
+    private static final String IS出力_11_14償還分_審査年月 = "is出力_一般状況11_14償還分_審査年月";
+    private static final String IS出力_11_14償還分_決定年月 = "is出力_一般状況11_14償還分_決定年月";
+    private static final String IS出力_11_14合算_審査年月 = "is出力_一般状況11_14合算_審査年月";
+    private static final String IS出力_11_14合算_決定年月 = "is出力_一般状況11_14合算_決定年月";
+    private static final String IS出力_現物分 = "is出力_保険給付決定状況現物分";
+    private static final String IS出力_償還分_審査年月 = "is出力_保険給付決定状況償還分_審査年月";
+    private static final String IS出力_償還分_決定年月 = "is出力_保険給付決定状況償還分_決定年月";
+    private static final String IS出力_合算_審査年月 = "is出力_保険給付決定状況合算_審査年月";
+    private static final String IS出力_合算_決定年月 = "is出力_保険給付決定状況合算_決定年月";
     private static final String 市町村コードリストキー = "市町村コードリスト";
-    private static final String is旧保険者分キー = "is旧保険者分";
-    private static final String is構成市町村分キー = "is構成市町村分";
+    private static final String IS旧保険者分キー = "is旧保険者分";
+    private static final String IS構成市町村分キー = "is構成市町村分";
 
     @BatchParameter(key = 過去集計年月キー, name = "過去集計年月")
     private RString 過去集計年月;
@@ -56,33 +56,33 @@ public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
     private RString 保険給付決定状況現物分_集計年月;
     @BatchParameter(key = 償還分_集計年月, name = "保険給付決定状況償還分_集計年月")
     private RString 保険給付決定状況償還分_集計年月;
-    @BatchParameter(key = is出力_1_10, name = "is出力_一般状況1_10")
+    @BatchParameter(key = IS出力_1_10, name = "is出力_一般状況1_10")
     private boolean is出力_一般状況1_10;
-    @BatchParameter(key = is出力_11_14現物分, name = "is出力_一般状況11_14現物分")
+    @BatchParameter(key = IS出力_11_14現物分, name = "is出力_一般状況11_14現物分")
     private boolean is出力_一般状況11_14現物分;
-    @BatchParameter(key = is出力_11_14償還分_審査年月, name = "is出力_一般状況11_14償還分_審査年月")
+    @BatchParameter(key = IS出力_11_14償還分_審査年月, name = "is出力_一般状況11_14償還分_審査年月")
     private boolean is出力_一般状況11_14償還分_審査年月;
-    @BatchParameter(key = is出力_11_14償還分_決定年月, name = "is出力_一般状況11_14償還分_決定年月")
+    @BatchParameter(key = IS出力_11_14償還分_決定年月, name = "is出力_一般状況11_14償還分_決定年月")
     private boolean is出力_一般状況11_14償還分_決定年月;
-    @BatchParameter(key = is出力_11_14合算_審査年月, name = "is出力_一般状況11_14合算_審査年月")
+    @BatchParameter(key = IS出力_11_14合算_審査年月, name = "is出力_一般状況11_14合算_審査年月")
     private boolean is出力_一般状況11_14合算_審査年月;
-    @BatchParameter(key = is出力_11_14合算_決定年月, name = "is出力_一般状況11_14合算_決定年月")
+    @BatchParameter(key = IS出力_11_14合算_決定年月, name = "is出力_一般状況11_14合算_決定年月")
     private boolean is出力_一般状況11_14合算_決定年月;
-    @BatchParameter(key = is出力_現物分, name = "is出力_保険給付決定状況現物分")
+    @BatchParameter(key = IS出力_現物分, name = "is出力_保険給付決定状況現物分")
     private boolean is出力_保険給付決定状況現物分;
-    @BatchParameter(key = is出力_償還分_審査年月, name = "is出力_保険給付決定状況償還分_審査年月")
+    @BatchParameter(key = IS出力_償還分_審査年月, name = "is出力_保険給付決定状況償還分_審査年月")
     private boolean is出力_保険給付決定状況償還分_審査年月;
-    @BatchParameter(key = is出力_償還分_決定年月, name = "is出力_保険給付決定状況償還分_決定年月")
+    @BatchParameter(key = IS出力_償還分_決定年月, name = "is出力_保険給付決定状況償還分_決定年月")
     private boolean is出力_保険給付決定状況償還分_決定年月;
-    @BatchParameter(key = is出力_合算_審査年月, name = "is出力_保険給付決定状況合算_審査年月")
+    @BatchParameter(key = IS出力_合算_審査年月, name = "is出力_保険給付決定状況合算_審査年月")
     private boolean is出力_保険給付決定状況合算_審査年月;
-    @BatchParameter(key = is出力_合算_決定年月, name = "is出力_保険給付決定状況合算_決定年月")
+    @BatchParameter(key = IS出力_合算_決定年月, name = "is出力_保険給付決定状況合算_決定年月")
     private boolean is出力_保険給付決定状況合算_決定年月;
     @BatchParameter(key = 市町村コードリストキー, name = "市町村コードリスト")
     private List<RString> 市町村コードリスト;
-    @BatchParameter(key = is旧保険者分キー, name = "is旧保険者分")
+    @BatchParameter(key = IS旧保険者分キー, name = "is旧保険者分")
     private boolean is旧保険者分;
-    @BatchParameter(key = is構成市町村分キー, name = "is構成市町村分")
+    @BatchParameter(key = IS構成市町村分キー, name = "is構成市町村分")
     private boolean is構成市町村分;
 
     /**
