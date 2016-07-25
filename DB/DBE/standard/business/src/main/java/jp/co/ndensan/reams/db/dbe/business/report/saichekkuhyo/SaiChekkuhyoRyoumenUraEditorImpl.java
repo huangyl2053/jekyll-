@@ -159,6 +159,7 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenUra
             default:
                 editOtherSource(source, i);
         }
+        source.layout = Layouts.必須;
         return source;
     }
 
@@ -206,7 +207,6 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenUra
             default:
                 break;
         }
-        source.layout = Layouts.必須;
         return source;
     }
 
