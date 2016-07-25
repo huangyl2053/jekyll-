@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV7902FukaSearchAliveDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -61,6 +62,25 @@ public class FukaSearchAliveManager {
                 調定年度,
                 賦課年度,
                 通知書番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new FukaSearchAlive(entity);
+    }
+
+    /**
+     * 識別コードを指定し、賦課年度が最大の賦課Aliveを1件取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return FukaSearchAlive
+     */
+    @Transaction
+    public FukaSearchAlive get賦課年度最大賦課Alive(
+            ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbV7902FukaSearchEntity entity = dac.selectBy識別コードOrderBy賦課年度(識別コード);
         if (entity == null) {
             return null;
         }

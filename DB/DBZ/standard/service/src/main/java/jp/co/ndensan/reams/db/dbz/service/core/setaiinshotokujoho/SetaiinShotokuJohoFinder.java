@@ -103,7 +103,7 @@ public class SetaiinShotokuJohoFinder {
         //TODO 給付実績より同月サービス情報を取得部分は未実装
         for (SetaiinJoho 世帯員 : 世帯員リスト) {
             HihokenshaDaicho 被保険者台帳 = 被保険者台帳Manager.find最新被保険者台帳(世帯員.get識別対象().get識別コード());
-            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(世帯員.get識別対象().get識別コード(), 所得年度, 所得基準年月日);
+            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得AliveFromMapper(所得年度, 所得基準年月日, 世帯員.get識別対象().to個人().get識別コード());
             世帯員所得情報リスト.add(new SetaiinShotoku(
                     世帯員.get識別対象().get識別コード(),
                     被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
@@ -163,7 +163,7 @@ public class SetaiinShotokuJohoFinder {
                 continue;
             }
             HihokenshaDaicho 被保険者台帳 = 被保険者台帳Manager.find最新被保険者台帳(世帯員所得.get識別対象().get識別コード());
-            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得Alive(世帯員所得.get識別対象().to個人().get識別コード(), 所得年度, 所得基準年月日);
+            KaigoShotokuAlive 介護所得 = 介護所得Manager.get介護所得AliveFromMapper(所得年度, 所得基準年月日, 世帯員所得.get識別対象().to個人().get識別コード());
             世帯員所得情報リスト.add(new SetaiinShotoku(
                     世帯員所得.get識別対象().to個人().get識別コード(),
                     被保険者台帳 != null ? 被保険者台帳.get被保険者番号() : new HihokenshaNo(RString.EMPTY),
