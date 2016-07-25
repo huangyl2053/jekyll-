@@ -13,16 +13,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBE-0080-060 xuyannan
  */
-public class SaiChekkuhyoRyoumenUraBuilderImpl implements ISaiChekkuhyoRyoumenUraBuilder {
+public class SaiChekkuhyoRyoumenUraBuilderImpl implements ISaiChekkuhyoRyoumenBuilder {
 
-    private final ISaiChekkuhyoRyoumenUraEditor editor;
+    private final ISaiChekkuhyoRyoumenEditor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link ISaiChekkuhyoRyoumenUraEditor}
+     * @param editor {@link ISaiChekkuhyoRyoumenEditor}
      */
-    public SaiChekkuhyoRyoumenUraBuilderImpl(ISaiChekkuhyoRyoumenUraEditor editor) {
+    public SaiChekkuhyoRyoumenUraBuilderImpl(ISaiChekkuhyoRyoumenEditor editor) {
         this.editor = editor;
     }
 
