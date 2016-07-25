@@ -6,6 +6,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -16,11 +17,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 標準負担額減免テーブルのエンティティクラスです。
- *
- * @reamsid_L DBC-9999-012 xicongwang
  */
 public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT4012HyojunFutangakuGemmenEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4012HyojunFutangakuGemmen");
@@ -33,6 +32,12 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    private FlexibleDate shinseiYMD;
+    private FlexibleDate ketteiYMD;
+    private FlexibleDate tekiyoKaishiYMD;
+    private FlexibleDate tekiyoShuryoYMD;
+    private RString ketteiKubun;
+    private RString hiShoninRiyu;
     @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
@@ -90,6 +95,120 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
     }
 
     /**
+     * shinseiYMDのgetメソッドです。
+     *
+     * @return shinseiYMD
+     */
+    @CheckForNull
+    public FlexibleDate getShinseiYMD() {
+        return shinseiYMD;
+    }
+
+    /**
+     * shinseiYMDのsetメソッドです。
+     *
+     * @param shinseiYMD shinseiYMD
+     */
+    public void setShinseiYMD(FlexibleDate shinseiYMD) {
+        this.shinseiYMD = shinseiYMD;
+    }
+
+    /**
+     * ketteiYMDのgetメソッドです。
+     *
+     * @return ketteiYMD
+     */
+    @CheckForNull
+    public FlexibleDate getKetteiYMD() {
+        return ketteiYMD;
+    }
+
+    /**
+     * ketteiYMDのsetメソッドです。
+     *
+     * @param ketteiYMD ketteiYMD
+     */
+    public void setKetteiYMD(FlexibleDate ketteiYMD) {
+        this.ketteiYMD = ketteiYMD;
+    }
+
+    /**
+     * tekiyoKaishiYMDのgetメソッドです。
+     *
+     * @return tekiyoKaishiYMD
+     */
+    @CheckForNull
+    public FlexibleDate getTekiyoKaishiYMD() {
+        return tekiyoKaishiYMD;
+    }
+
+    /**
+     * tekiyoKaishiYMDのsetメソッドです。
+     *
+     * @param tekiyoKaishiYMD tekiyoKaishiYMD
+     */
+    public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
+        this.tekiyoKaishiYMD = tekiyoKaishiYMD;
+    }
+
+    /**
+     * tekiyoShuryoYMDのgetメソッドです。
+     *
+     * @return tekiyoShuryoYMD
+     */
+    @CheckForNull
+    public FlexibleDate getTekiyoShuryoYMD() {
+        return tekiyoShuryoYMD;
+    }
+
+    /**
+     * tekiyoShuryoYMDのsetメソッドです。
+     *
+     * @param tekiyoShuryoYMD tekiyoShuryoYMD
+     */
+    public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
+        this.tekiyoShuryoYMD = tekiyoShuryoYMD;
+    }
+
+    /**
+     * ketteiKubunのgetメソッドです。
+     *
+     * @return ketteiKubun
+     */
+    @CheckForNull
+    public RString getKetteiKubun() {
+        return ketteiKubun;
+    }
+
+    /**
+     * ketteiKubunのsetメソッドです。
+     *
+     * @param ketteiKubun ketteiKubun
+     */
+    public void setKetteiKubun(RString ketteiKubun) {
+        this.ketteiKubun = ketteiKubun;
+    }
+
+    /**
+     * hiShoninRiyuのgetメソッドです。
+     *
+     * @return hiShoninRiyu
+     */
+    @CheckForNull
+    public RString getHiShoninRiyu() {
+        return hiShoninRiyu;
+    }
+
+    /**
+     * hiShoninRiyuのsetメソッドです。
+     *
+     * @param hiShoninRiyu hiShoninRiyu
+     */
+    public void setHiShoninRiyu(RString hiShoninRiyu) {
+        this.hiShoninRiyu = hiShoninRiyu;
+    }
+
+    /**
      * 証記載保険者番号のgetメソッドです。
      *
      * @return 証記載保険者番号
@@ -127,6 +246,8 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
 
     /**
      * 履歴番号のgetメソッドです。
+     * <br/>
+     * <br/>新規履歴：0, 以降の申請・決定：最大履歴番号+1
      *
      * @return 履歴番号
      */
@@ -136,6 +257,8 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
 
     /**
      * 履歴番号のsetメソッドです。
+     * <br/>
+     * <br/>新規履歴：0, 以降の申請・決定：最大履歴番号+1
      *
      * @param rirekiNo 履歴番号
      */
@@ -165,9 +288,13 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
     /**
      * 減額区分のgetメソッドです。
      * <br/>
-     * <br/>市町村民税非課税
-     * <br/>老齢福祉年金受給
-     * <br/>その他
+     * <br/>DBDEnum.減額区分
+     *
+     * <br/>・市町村民税非課税
+     *
+     * <br/>・老齢福祉年金受給
+     *
+     * <br/>・その他
      *
      * @return 減額区分
      */
@@ -179,9 +306,13 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
     /**
      * 減額区分のsetメソッドです。
      * <br/>
-     * <br/>市町村民税非課税
-     * <br/>老齢福祉年金受給
-     * <br/>その他
+     * <br/>DBDEnum.減額区分
+     *
+     * <br/>・市町村民税非課税
+     *
+     * <br/>・老齢福祉年金受給
+     *
+     * <br/>・その他
      *
      * @param gengakuKubun 減額区分
      */
@@ -211,7 +342,10 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
     /**
      * 標準負担区分のgetメソッドです。
      * <br/>
+     * <br/>DBDEnum.標準負担区分
+     *
      * <br/>1:標準負担
+     *
      * <br/>2:特定標準負担
      *
      * @return 標準負担区分
@@ -224,7 +358,10 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
     /**
      * 標準負担区分のsetメソッドです。
      * <br/>
+     * <br/>DBDEnum.標準負担区分
+     *
      * <br/>1:標準負担
+     *
      * <br/>2:特定標準負担
      *
      * @param hyojunFutanKubun 標準負担区分
@@ -237,8 +374,7 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
      * このエンティティの主キーが他の{@literal DbT4012HyojunFutangakuGemmenEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4012HyojunFutangakuGemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4012HyojunFutangakuGemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4012HyojunFutangakuGemmenEntity other) {
@@ -262,6 +398,12 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
      */
     @Override
     public void shallowCopy(DbT4012HyojunFutangakuGemmenEntity entity) {
+        this.shinseiYMD = entity.shinseiYMD;
+        this.ketteiYMD = entity.ketteiYMD;
+        this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
+        this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
+        this.ketteiKubun = entity.ketteiKubun;
+        this.hiShoninRiyu = entity.hiShoninRiyu;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
@@ -278,7 +420,7 @@ public class DbT4012HyojunFutangakuGemmenEntity extends DbTableEntityBase<DbT401
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, shinseiJiyu, gengakuKubun, gengakugoKingaku, hyojunFutanKubun);
+        return super.toMd5(shinseiYMD, ketteiYMD, tekiyoKaishiYMD, tekiyoShuryoYMD, ketteiKubun, hiShoninRiyu, shoKisaiHokenshaNo, hihokenshaNo, rirekiNo, shinseiJiyu, gengakuKubun, gengakugoKingaku, hyojunFutanKubun);
     }
 
 // </editor-fold>
