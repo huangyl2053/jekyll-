@@ -46,7 +46,8 @@ public class SogoJigyoKubunShikyuGendogakuValidationHandler {
         IValidationMessages messages = new ControlValidator(div).validate();
         return new ValidationDictionaryBuilder()
                 .add(SogoJigyoKubunShikyuGendogakuValidationMessage.各必須入力項目未入力, get必須項目未入力ViewControl())
-                .add(SogoJigyoKubunShikyuGendogakuValidationMessage.適用期間重複入力, get期間入力重複ViewControl())
+                .add(SogoJigyoKubunShikyuGendogakuValidationMessage.適用期間重複入力, div.getTxtTekiyoKaishiYM())
+                .add(SogoJigyoKubunShikyuGendogakuValidationMessage.適用期間大小関係不正, div.getTxtTekiyoShuryoYM())
                 .build().check(messages);
     }
 
@@ -64,15 +65,6 @@ public class SogoJigyoKubunShikyuGendogakuValidationHandler {
         if (div.getTxtNijiYobo().getText().isNullOrEmpty()) {
             viewControls.add(div.getTxtNijiYobo());
         }
-        return viewControls;
-    }
-
-    private List<ViewControl> get期間入力重複ViewControl() {
-        List<ViewControl> viewControls = new ArrayList();
-        if (!div.getTxtTekiyoKaishiYM().isReadOnly()) {
-            viewControls.add(div.getTxtTekiyoKaishiYM());
-        }
-        viewControls.add(div.getTxtTekiyoShuryoYM());
         return viewControls;
     }
 
@@ -101,6 +93,8 @@ public class SogoJigyoKubunShikyuGendogakuValidationHandler {
                     .thenAdd(SogoJigyoKubunShikyuGendogakuValidationMessage.各必須入力項目未入力)
                     .ifNot(SogoJigyoKubunShikyuGendogakuSpec.適用期間重複入力の場合)
                     .thenAdd(SogoJigyoKubunShikyuGendogakuValidationMessage.適用期間重複入力)
+                    .ifNot(SogoJigyoKubunShikyuGendogakuSpec.適用期間大小関係不正の場合)
+                    .thenAdd(SogoJigyoKubunShikyuGendogakuValidationMessage.適用期間大小関係不正)
                     .messages());
             return messages;
         }
@@ -109,7 +103,8 @@ public class SogoJigyoKubunShikyuGendogakuValidationHandler {
     private static enum SogoJigyoKubunShikyuGendogakuValidationMessage implements IValidationMessage {
 
         各必須入力項目未入力(UrErrorMessages.必須, "*が付いてる各項目"),
-        適用期間重複入力(UrErrorMessages.期間が重複);
+        適用期間重複入力(UrErrorMessages.期間が重複),
+        適用期間大小関係不正(UrErrorMessages.期間が不正_追加メッセージあり１, "適用終了", "適用開始");
 
         private final Message message;
 

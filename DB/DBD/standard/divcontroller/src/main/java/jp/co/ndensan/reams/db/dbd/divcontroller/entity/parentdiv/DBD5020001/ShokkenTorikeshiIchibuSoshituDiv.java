@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * ShokkenTorikeshiIchibuSoshitu のクラスファイル
@@ -56,6 +57,24 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     private RString hdnKonkaiRirekiNo;
     @JsonProperty("hdnKekkaCommonDivMode")
     private RString hdnKekkaCommonDivMode;
+    @JsonProperty("hdnRenrakusakiJoho")
+    private RString hdnRenrakusakiJoho;
+    @JsonProperty("hdnRenrakusakiReadOnly")
+    private RString hdnRenrakusakiReadOnly;
+    @JsonProperty("hdnZenkaiRenrakusakiJoho")
+    private RString hdnZenkaiRenrakusakiJoho;
+    @JsonProperty("NinteiShinseiCodeModel")
+    private RString NinteiShinseiCodeModel;
+    @JsonProperty("hdnShikibetsuCode")
+    private RString hdnShikibetsuCode;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnHihokenshaNo")
+    private RString hdnHihokenshaNo;
+    @JsonProperty("hdnRenrakuJiko")
+    private RString hdnRenrakuJiko;
+    @JsonProperty("hdnKekkaShosaiJohoOutModel")
+    private RString hdnKekkaShosaiJohoOutModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -235,6 +254,168 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     /*
+     * gethdnRenrakusakiJoho
+     * @return hdnRenrakusakiJoho
+     */
+    @JsonProperty("hdnRenrakusakiJoho")
+    public RString getHdnRenrakusakiJoho() {
+        return hdnRenrakusakiJoho;
+    }
+
+    /*
+     * sethdnRenrakusakiJoho
+     * @param hdnRenrakusakiJoho hdnRenrakusakiJoho
+     */
+    @JsonProperty("hdnRenrakusakiJoho")
+    public void setHdnRenrakusakiJoho(RString hdnRenrakusakiJoho) {
+        this.hdnRenrakusakiJoho = hdnRenrakusakiJoho;
+    }
+
+    /*
+     * gethdnRenrakusakiReadOnly
+     * @return hdnRenrakusakiReadOnly
+     */
+    @JsonProperty("hdnRenrakusakiReadOnly")
+    public RString getHdnRenrakusakiReadOnly() {
+        return hdnRenrakusakiReadOnly;
+    }
+
+    /*
+     * sethdnRenrakusakiReadOnly
+     * @param hdnRenrakusakiReadOnly hdnRenrakusakiReadOnly
+     */
+    @JsonProperty("hdnRenrakusakiReadOnly")
+    public void setHdnRenrakusakiReadOnly(RString hdnRenrakusakiReadOnly) {
+        this.hdnRenrakusakiReadOnly = hdnRenrakusakiReadOnly;
+    }
+
+    /*
+     * gethdnZenkaiRenrakusakiJoho
+     * @return hdnZenkaiRenrakusakiJoho
+     */
+    @JsonProperty("hdnZenkaiRenrakusakiJoho")
+    public RString getHdnZenkaiRenrakusakiJoho() {
+        return hdnZenkaiRenrakusakiJoho;
+    }
+
+    /*
+     * sethdnZenkaiRenrakusakiJoho
+     * @param hdnZenkaiRenrakusakiJoho hdnZenkaiRenrakusakiJoho
+     */
+    @JsonProperty("hdnZenkaiRenrakusakiJoho")
+    public void setHdnZenkaiRenrakusakiJoho(RString hdnZenkaiRenrakusakiJoho) {
+        this.hdnZenkaiRenrakusakiJoho = hdnZenkaiRenrakusakiJoho;
+    }
+
+    /*
+     * getNinteiShinseiCodeModel
+     * @return NinteiShinseiCodeModel
+     */
+    @JsonProperty("NinteiShinseiCodeModel")
+    public RString getNinteiShinseiCodeModel() {
+        return NinteiShinseiCodeModel;
+    }
+
+    /*
+     * setNinteiShinseiCodeModel
+     * @param NinteiShinseiCodeModel NinteiShinseiCodeModel
+     */
+    @JsonProperty("NinteiShinseiCodeModel")
+    public void setNinteiShinseiCodeModel(RString NinteiShinseiCodeModel) {
+        this.NinteiShinseiCodeModel = NinteiShinseiCodeModel;
+    }
+
+    /*
+     * gethdnShikibetsuCode
+     * @return hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public RString getHdnShikibetsuCode() {
+        return hdnShikibetsuCode;
+    }
+
+    /*
+     * sethdnShikibetsuCode
+     * @param hdnShikibetsuCode hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
+    }
+
+    /*
+     * gethdnHihokenshaNo
+     * @return hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public RString getHdnHihokenshaNo() {
+        return hdnHihokenshaNo;
+    }
+
+    /*
+     * sethdnHihokenshaNo
+     * @param hdnHihokenshaNo hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
+        this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * gethdnRenrakuJiko
+     * @return hdnRenrakuJiko
+     */
+    @JsonProperty("hdnRenrakuJiko")
+    public RString getHdnRenrakuJiko() {
+        return hdnRenrakuJiko;
+    }
+
+    /*
+     * sethdnRenrakuJiko
+     * @param hdnRenrakuJiko hdnRenrakuJiko
+     */
+    @JsonProperty("hdnRenrakuJiko")
+    public void setHdnRenrakuJiko(RString hdnRenrakuJiko) {
+        this.hdnRenrakuJiko = hdnRenrakuJiko;
+    }
+
+    /*
+     * gethdnKekkaShosaiJohoOutModel
+     * @return hdnKekkaShosaiJohoOutModel
+     */
+    @JsonProperty("hdnKekkaShosaiJohoOutModel")
+    public RString getHdnKekkaShosaiJohoOutModel() {
+        return hdnKekkaShosaiJohoOutModel;
+    }
+
+    /*
+     * sethdnKekkaShosaiJohoOutModel
+     * @param hdnKekkaShosaiJohoOutModel hdnKekkaShosaiJohoOutModel
+     */
+    @JsonProperty("hdnKekkaShosaiJohoOutModel")
+    public void setHdnKekkaShosaiJohoOutModel(RString hdnKekkaShosaiJohoOutModel) {
+        this.hdnKekkaShosaiJohoOutModel = hdnKekkaShosaiJohoOutModel;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -403,17 +584,17 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoKaishibiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiZenkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtYukoKaishibiZenkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoShuryobiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiZenkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtYukoShuryobiZenkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteibiZenkai() {
+    public TextBoxFlexibleDate getTxtNinteibiZenkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtNinteibiZenkai();
     }
 
@@ -443,17 +624,17 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoKaishibiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiKonkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtYukoKaishibiKonkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoShuryobiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiKonkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtYukoShuryobiKonkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteibiKonkai() {
+    public TextBoxFlexibleDate getTxtNinteibiKonkai() {
         return this.getShokkenTorikeshiIchibuSoshituMain().getTblRireki().getTxtNinteibiKonkai();
     }
 
@@ -473,13 +654,13 @@ public class ShokkenTorikeshiIchibuSoshituDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
-        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiAtenaInfo();
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
+        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiShinseiKihonJohoInput();
     }
 
     @JsonIgnore
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
-        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiShinseiKihonJohoInput();
+    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
+        return this.getShokkenTorikeshiIchibuSoshituMain().getCcdKaigoNinteiAtenaInfo();
     }
 
     @JsonIgnore

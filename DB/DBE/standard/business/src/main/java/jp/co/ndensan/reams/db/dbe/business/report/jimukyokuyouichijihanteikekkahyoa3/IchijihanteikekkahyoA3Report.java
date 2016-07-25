@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3ReportSource> {
 
     private static final RString テキスト = new RString("1");
+    private static final RString イメージ = new RString("2");
     private static final int LENGTH_30 = 30;
     private final IchijihanteikekkahyoA3Entity entity;
 
@@ -41,16 +42,16 @@ public class IchijihanteikekkahyoA3Report extends Report<IchijihanteikekkahyoA3R
      */
     @Override
     public void writeBy(ReportSourceWriter<IchijihanteikekkahyoA3ReportSource> reportSourceWriter) {
+        List<RString> 特記事項List = new ArrayList<>();
+        if (テキスト.equals(entity.get特記事項テキスト_イメージ区分())) {
+            特記事項List = getlistChosa1();
+        } else if (イメージ.equals(entity.get特記事項テキスト_イメージ区分())) {
+            特記事項List = getlistChosa();
+        }
         for (int i = 0; i < LENGTH_30; i++) {
-            if (テキスト.equals(entity.get特記事項テキスト_イメージ区分())) {
-                IIchijihanteikekkahyoA3Editor headerEditor = new IchijihanteikekkahyoA3Editor(entity, getlistChosa1(), i);
-                IIchijihanteikekkahyoA3Builder builder = new IchijihanteikekkahyoA3Builder(headerEditor);
-                reportSourceWriter.writeLine(builder);
-            } else {
-                IIchijihanteikekkahyoA3Editor headerEditor = new IchijihanteikekkahyoA3Editor(entity, getlistChosa(), i);
-                IIchijihanteikekkahyoA3Builder builder = new IchijihanteikekkahyoA3Builder(headerEditor);
-                reportSourceWriter.writeLine(builder);
-            }
+            IIchijihanteikekkahyoA3Editor headerEditor = new IchijihanteikekkahyoA3Editor(entity, 特記事項List, i);
+            IIchijihanteikekkahyoA3Builder builder = new IchijihanteikekkahyoA3Builder(headerEditor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 

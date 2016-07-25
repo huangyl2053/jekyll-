@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -78,6 +79,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @throws ApplicationException ⑥　広域、市町村識別ID＝「00以外」の場合（DBAE00026：広域構成市町村からの補正処理は行えません。）
      *
      */
+    @Transaction
     public List<Shichoson> getShichosonCodeNameList() {
         ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード;
@@ -212,6 +214,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param 市町村コード 市町村コード
      * @return 市町村Entiy
      */
+    @Transaction
     public Shichoson getHokenshaJoho(LasdecCode 市町村コード) {
         List<Shichoson> shichosonlist = getShichosonCodeNameList();
         Iterator<Shichoson> shichoson = shichosonlist.iterator();
@@ -232,6 +235,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param 保険者区分 保険者区分
      * @return 事業報告集計一覧データリスト
      */
+    @Transaction
     public List<KaigoHokenJigyoHokokuNenpo> getJigyoHokokuNenpoList(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
 
         List<KaigoHokenJigyoHokokuNenpo> kaigoHokenJigyoHokokuNenpoList = new ArrayList<>();
@@ -279,6 +283,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param 集計番号 集計番号
      * @return 事業報告集計一覧データEntityリスト
      */
+    @Transaction
     public List<KaigoHokenJigyoHokokuNenpo> getJigyoHokokuNenpoDetal(FlexibleYear 報告年, RString 集計対象年, RString 統計対象区分,
             LasdecCode 市町村コード, RString 集計番号) {
 
@@ -361,6 +366,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenJigyoHokokuNenpoList 事業報告集計一覧データリスト
      * @return 新規件数
      */
+    @Transaction
     public int regKaigoHokenTokubetuKaikeiKeiriJyokyo(List<KaigoHokenJigyoHokokuNenpo> kaigoHokenJigyoHokokuNenpoList) {
 
         int 新規件数 = insertJigyoHokokuNenpoData(kaigoHokenJigyoHokokuNenpoList);
@@ -388,6 +394,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenJigyoHokokuNenpoList 事業報告集計一覧データEntityリスト
      * @return 処理件数
      */
+    @Transaction
     public int regUpdKaigoHokenTokubetuKaikeiKeiriJyokyo(List<KaigoHokenJigyoHokokuNenpo> kaigoHokenJigyoHokokuNenpoList) {
 
         int 処理件数 = insertJigyoHokokuNenpoData(kaigoHokenJigyoHokokuNenpoList);
@@ -416,6 +423,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenJigyoHokokuNenpoList 事業報告集計一覧データEntityリスト
      * @return 更新件数
      */
+    @Transaction
     public int updKaigoHokenTokubetuKaikeiKeiriJyokyo(List<KaigoHokenJigyoHokokuNenpo> kaigoHokenJigyoHokokuNenpoList) {
 
         int 更新件数 = updateJigyoHokokuNenpoData(kaigoHokenJigyoHokokuNenpoList);
@@ -448,6 +456,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param 集計番号 集計番号
      * @return 削除件数
      */
+    @Transaction
     public int delKaigoHokenTokubetuKaikeiKeiriJyokyo(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分,
             LasdecCode 市町村コード, Code 表番号, Code 集計番号) {
         DbT7021JigyoHokokuTokeiDataDac dbT7021dac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
@@ -482,6 +491,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenJigyoHokokuNenpoList 事業報告集計一覧データリスト
      * @return 新規件数
      */
+    @Transaction
     public int insertJigyoHokokuNenpoData(List<KaigoHokenJigyoHokokuNenpo> kaigoHokenJigyoHokokuNenpoList) {
         DbT7021JigyoHokokuTokeiDataDac dbT7021Dac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
         int count = 0;
@@ -518,6 +528,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenJigyoHokokuNenpoList 事業報告集計一覧データリスト
      * @return 更新件数
      */
+    @Transaction
     public int updateJigyoHokokuNenpoData(List<KaigoHokenJigyoHokokuNenpo> kaigoHokenJigyoHokokuNenpoList) {
         DbT7021JigyoHokokuTokeiDataDac jigyoHokokuTokeiDataDac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
         int 更新件数 = 0;
@@ -551,6 +562,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param 集計番号list 集計番号list
      * @return 削除件数
      */
+    @Transaction
     public int deleteJigyoHokokuNenpoData(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分,
             LasdecCode 市町村コード, Code 表番号, List<Code> 集計番号list) {
         int 削除件数 = 0;
@@ -559,7 +571,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 統計対象区分, 市町村コード, 表番号, 集計番号list);
         for (DbT7021JigyoHokokuTokeiDataEntity entity : entitys) {
             entity.setState(EntityDataState.Deleted);
-            削除件数 = 削除件数 + dbT7021JigyoHokokuTokeiDataDac.save(entity);
+            削除件数 = 削除件数 + dbT7021JigyoHokokuTokeiDataDac.delete(entity);
         }
         return 削除件数;
     }
@@ -570,6 +582,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenShoriDateKanriEntity 処理日付管理マスタEntity
      * @return 新規件数
      */
+    @Transaction
     public int insertShoriDateKanri(KaigoHokenShoriDateKanri kaigoHokenShoriDateKanriEntity) {
 
         DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = new DbT7022ShoriDateKanriEntity();
@@ -595,6 +608,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenShoriDateKanriEntity 処理日付管理マスタEntity
      * @return 新規件数
      */
+    @Transaction
     public int updateShoriDateKanri(KaigoHokenShoriDateKanri kaigoHokenShoriDateKanriEntity) {
         DbT7022ShoriDateKanriDac horiDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = horiDateKanriDac.selectByKey(kaigoHokenShoriDateKanriEntity.getサブ業務コード(),

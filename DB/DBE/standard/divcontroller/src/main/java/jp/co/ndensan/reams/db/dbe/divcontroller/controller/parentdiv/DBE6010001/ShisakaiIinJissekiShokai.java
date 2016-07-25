@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranFindler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -60,11 +59,7 @@ public class ShisakaiIinJissekiShokai {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        FlexibleDate 審査会開催日FROM = FlexibleDate.EMPTY;
-        FlexibleDate 審査会開催日TO = FlexibleDate.EMPTY;
-        getHandler(div).set審査会開催日(審査会開催日FROM, 審査会開催日TO);
-        ShinsaiinJissekiIchiranMybitisParamter paramter = ShinsaiinJissekiIchiranMybitisParamter.createParamter(false,
-                審査会開催日FROM, 審査会開催日TO, new RString(div.getTxtMaxKensu().getValue().toString()));
+        ShinsaiinJissekiIchiranMybitisParamter paramter = getHandler(div).setMybatisParameta();
         getHandler(div).onClick_BtnKensaku(ShinsaiinJissekiIchiranFindler.createInstance().get介護認定審査会委員報酬集計表(paramter).records());
         getHandler(div).set一覧状態();
         getHandler(div).setCommonButton();
@@ -105,7 +100,7 @@ public class ShisakaiIinJissekiShokai {
     }
 
     /**
-     * ボタンを押下チェック処理。。
+     * ボタンを押下チェック処理。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ

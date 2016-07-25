@@ -5,21 +5,26 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5020001;
 
+import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.DBD5020001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.DBD5020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituGamenJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituHandler.GamenJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoOutModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -53,15 +58,15 @@ public class ShokkenTorikeshiIchibuSoshitu {
 
         ShokkenTorikeshiIchibuSoshituHandler handler = getHandler(div);
 
-        GamenJoho 画面更新用情報 = handler.onLoad(申請書管理番号, 被保険者番号);
+        ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = handler.onLoad(申請書管理番号, 被保険者番号);
+        ViewStateHolder.put(要介護認定処理画面キー.画面更新用情報, 画面更新用情報);
 
         ValidationMessageControlPairs pairs = getValidationHandler(div).validate履歴番号();
         if (pairs.iterator().hasNext()) {
             div.setHdnKekkaCommonDivMode(new RString(KekkaShosaiJohoDiv.ShoriType.ShokaiMode.toString()));
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-
-        ViewStateHolder.put(要介護認定処理画面キー.画面更新用情報, 画面更新用情報);
 
         return ResponseData.of(div).setState(DBD5020001StateName.要介護認定);
     }
@@ -73,9 +78,11 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnRenrakusaki(ShokkenTorikeshiIchibuSoshituDiv div) {
-        // TODO. 仕様書に記述しない。
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
+
+        // TODO. 仕様書に記述の引数が申請書管理番号だけです。
+        div.setHdnRenrakusakiJoho(RString.EMPTY);
+        div.setHdnRenrakusakiReadOnly(RString.EMPTY);
+        div.setHdnZenkaiRenrakusakiJoho(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -119,9 +126,11 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(ShokkenTorikeshiIchibuSoshituDiv div) {
-        // TODO. 仕様書に記述しない。
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
+
+        NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
+        model.set表示モード(new RString("InputMode"));
+        model.set連絡事項(div.getHdnRenrakuJiko());
+        div.setNinteiShinseiCodeModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 
@@ -132,6 +141,8 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onOkClose_btnShichosonRenrakuJiko(ShokkenTorikeshiIchibuSoshituDiv div) {
+        NinteiShinseiCodeModel model = DataPassingConverter.deserialize(div.getNinteiShinseiCodeModel(), NinteiShinseiCodeModel.class);
+        div.setHdnRenrakuJiko(model.get連絡事項());
         return ResponseData.of(div).respond();
     }
 
@@ -142,9 +153,14 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnZenkaiNinteichi(ShokkenTorikeshiIchibuSoshituDiv div) {
-        // TODO. DBZ.KekkaShosaiJohoについて、実装しない。
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
+
+        ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
+        YokaigoNinteiJoho 前回情報 = 画面更新用情報.get前回情報();
+        if (null == 前回情報) {
+            return ResponseData.of(div).respond();
+        }
+
+        div.setHdnZenkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(前回情報, false)));
         return ResponseData.of(div).respond();
     }
 
@@ -165,9 +181,13 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnKonkaiNinteichi(ShokkenTorikeshiIchibuSoshituDiv div) {
-        // TODO. DBZ.KekkaShosaiJohoについて、実装しない。
-//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        getHandler(div).onBeforeOpenDialog_btnDispGemmenJoho(taishoshaKey);
+        ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
+        YokaigoNinteiJoho 今回情報 = 画面更新用情報.get今回情報();
+        if (null == 今回情報) {
+            return ResponseData.of(div).respond();
+        }
+
+        div.setHdnKonkaiSerializedBusiness(DataPassingConverter.serialize(getHandler(div).getKekkaShosaiJohoModel(今回情報, true)));
         return ResponseData.of(div).respond();
     }
 
@@ -178,9 +198,11 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onOkClose_btnKonkaiNinteichi(ShokkenTorikeshiIchibuSoshituDiv div) {
-        // TODO. DBZ.KekkaShosaiJohoについて、実装しない。
-//        JigyoshaMode jigyoshaMode = DataPassingConverter.deserialize(div.
-//                getJigyoshaMode(), JigyoshaMode.class);
+
+        KekkaShosaiJohoOutModel model = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
+
+        getHandler(div).setKonkaiNinteichiAreaAfterOkClose(model);
+
         return ResponseData.of(div).respond();
     }
 
@@ -212,13 +234,19 @@ public class ShokkenTorikeshiIchibuSoshitu {
         }
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            GamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, GamenJoho.class);
+            ShokkenTorikeshiIchibuSoshituGamenJoho 画面更新用情報 = ViewStateHolder.get(要介護認定処理画面キー.画面更新用情報, ShokkenTorikeshiIchibuSoshituGamenJoho.class);
             getHandler(div).save(画面更新用情報);
+        } else {
+            return ResponseData.of(div).respond();
         }
 
         if (div.getTitle().contains("却下")) {
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("却下処理が正常に終了しました。"));
+            div.setTitle(new RString("要介護認定却下完了"));
             return ResponseData.of(div).setState(DBD5020001StateName.却下完了);
         } else {
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("更新処理が正常に終了しました。"));
+            div.setTitle(new RString("要介護認定完了"));
             return ResponseData.of(div).setState(DBD5020001StateName.認定完了);
         }
 

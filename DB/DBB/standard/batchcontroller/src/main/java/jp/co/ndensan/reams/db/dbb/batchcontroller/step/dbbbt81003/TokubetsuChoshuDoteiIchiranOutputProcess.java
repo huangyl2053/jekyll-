@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -42,12 +40,12 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcessBase {
 
     private TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter parameter;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("TokubetsuChoshuDoteiIchiran"));
-    private final ReportId reportId = new ReportId("DBB200031_TokubetsuChoshuDoteiIchiran");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200031"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
+    private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString reportName = new RString("特別徴収同定一覧表");
     private final RString csvファイル名 = new RString("TokubetsuChoshuDoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
@@ -101,7 +99,7 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
         eucCsvWriter.close();
         manager.spool(eucFilePath);
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                reportId.value(),
+                rseId,
                 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
@@ -157,8 +155,8 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
                     new RDate(entity.getBirthDay().toString()),
                     entity.getJuminShubetsuCode(),
                     entity.getSeibetsu().value().get性別名称(),
+                    entity.getKanaMeisho().getColumnValue(),
                     entity.getKanaShimei(),
-                    RString.EMPTY,
                     entity.getKanjiShimei(),
                     entity.getYubinNo(),
                     entity.getKanjiJusho()
@@ -166,7 +164,7 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
             targets.add(target);
         }
         TokubetsuChoshuDoteiIchiranPrintService printService = new TokubetsuChoshuDoteiIchiranPrintService();
-        printService.print(targets, null, null, new ReportManager(), null);
+        printService.printChohyo(targets, null, null, null);
     }
 
     private void outputCsv(List<TokubetsuChoshuDoteiIchiranEntity> list) {
@@ -180,8 +178,8 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
                     entity.getGyoseikuCode().getColumnValue(),
                     entity.getBirthDay(),
                     entity.getSeibetsu().value().get性別名称(),
+                    entity.getKanaMeisho().getColumnValue(),
                     entity.getKanaShimei(),
-                    RString.EMPTY,
                     entity.getKanjiShimei(),
                     entity.getYubinNo(),
                     entity.getKanjiJusho()

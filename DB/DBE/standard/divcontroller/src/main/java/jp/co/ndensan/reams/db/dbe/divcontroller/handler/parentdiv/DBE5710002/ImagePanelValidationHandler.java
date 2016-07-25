@@ -42,6 +42,7 @@ public class ImagePanelValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs do事前チェック(
+            List<RString> 存在するファイル,
             List<RString> 存在する調査票概況特記,
             List<RString> 存在する調査票概況,
             List<RString> 存在する主治医意見書,
@@ -51,15 +52,20 @@ public class ImagePanelValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.出力項目を指定));
             return validationMessages;
         }
-        return doチェックByイメージ対象(存在する調査票概況特記, 存在する調査票概況, 存在する主治医意見書, 存在するその他資料);
+        return doチェックByイメージ対象(存在するファイル, 存在する調査票概況特記, 存在する調査票概況, 存在する主治医意見書, 存在するその他資料);
     }
 
     private ValidationMessageControlPairs doチェックByイメージ対象(
+            List<RString> 存在するファイル,
             List<RString> 存在する調査票概況特記ファイル,
             List<RString> 存在する調査票概況ファイル,
             List<RString> 存在する主治医意見書ファイル,
             List<RString> 存在するその他資料ファイル) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (存在するファイル.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.存在しない));
+            return validationMessages;
+        }
         if (div.getChkImage().getSelectedKeys().contains(調査票) && 存在する調査票概況特記ファイル.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(ImageValidationMessage.調査票));
         }
@@ -77,6 +83,7 @@ public class ImagePanelValidationHandler {
 
     private enum ImageValidationMessage implements IValidationMessage {
 
+        存在しない(UrErrorMessages.存在しない, "イメージファイル"),
         調査票(UrErrorMessages.存在しない, "調査票(概況+調査票特記)のイメージファイル"),
         調査票概況(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
         主治医意見書(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),

@@ -169,6 +169,7 @@ public class KyufuTaishoshaScheduleSetteiPanel {
             KyufuTaishoshaScheduleSetteiPanelDiv div) {
         Map<Integer, RString> map = ViewStateHolder.get(ViewStateKeys.変更前処理状況, Map.class);
         getHandler(div).to処理状況変更チェック(map);
+        ViewStateHolder.put(ViewStateKeys.変更前処理状況, (Serializable) getHandler(div).get変更前処理状況());
         return ResponseData.of(div).respond();
     }
 

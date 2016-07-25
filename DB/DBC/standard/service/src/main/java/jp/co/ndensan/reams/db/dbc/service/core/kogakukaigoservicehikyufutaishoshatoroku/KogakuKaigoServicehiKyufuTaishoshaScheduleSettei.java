@@ -50,12 +50,12 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
     /**
      * スケジュール履歴情報取得のメソッドです。
      *
-     * @param メニューID RString
+     * @param 交換情報識別番号 RString
      * @return スケジュール履歴情報List List<KokuhorenInterfaceKanri>
      */
-    public List<KokuhorenInterfaceKanri> sukijyuruRirekiJyoho(RString メニューID) {
+    public List<KokuhorenInterfaceKanri> sukijyuruRirekiJyoho(RString 交換情報識別番号) {
         List<KokuhorenInterfaceKanri> スケジュール履歴情報List = new ArrayList<>();
-        List<DbT3104KokuhorenInterfaceKanriEntity> dbT3104List = dbT3104Dac.get国保連インターフェース管理(メニューID);
+        List<DbT3104KokuhorenInterfaceKanriEntity> dbT3104List = dbT3104Dac.get国保連インターフェース管理(交換情報識別番号);
         if (dbT3104List != null && !dbT3104List.isEmpty()) {
             for (DbT3104KokuhorenInterfaceKanriEntity dbt3104Entity : dbT3104List) {
                 スケジュール履歴情報List.add(new KokuhorenInterfaceKanri(dbt3104Entity));
@@ -96,7 +96,8 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
         for (KokuhorenInterfaceKanri データEntity : データ登録リスト) {
             if (ShoriJotaiKubun.処理前.getコード().equals(データEntity.get処理状態区分())
                     || ShoriJotaiKubun.再処理前.getコード().equals(データEntity.get処理状態区分())) {
-                if (NUM_ONE < 履歴情報の件数++) {
+                履歴情報の件数 = 履歴情報の件数 + NUM_ONE;
+                if (NUM_ONE < 履歴情報の件数) {
                     throw new ApplicationException(DbcErrorMessages.高額判定_処理状態処理前数不正.getMessage()
                             .evaluate().concat(データEntity.get処理年月().wareki().toDateString().toString()));
                 }

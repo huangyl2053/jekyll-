@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku;
 
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -26,11 +27,12 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
     private final boolean is部分一致;
     private final Decimal 最大表示件数;
     private final RString コード;
-    private final RDate fromDate;
-    private final RDate toDate;
-    private final RDate 実施日;
+    private final RYearMonth fromDate;
+    private final RYearMonth toDate;
+    private final FlexibleDate 実施日;
     private final boolean hasFromDate;
     private final boolean hasToDate;
+    private final RString kuBun;
 
     /**
      * コンストラクタです。
@@ -56,11 +58,12 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
             boolean is部分一致,
             Decimal 最大表示件数,
             RString コード,
-            RDate fromDate,
-            RDate toDate,
-            RDate 実施日,
+            RYearMonth fromDate,
+            RYearMonth toDate,
+            FlexibleDate 実施日,
             boolean hasFromDate,
-            boolean hasToDate) {
+            boolean hasToDate,
+            RString kuBun) {
         this.介護認定審査会委員氏名 = 介護認定審査会委員氏名;
         this.is前方一致 = is前方一致;
         this.is後方一致 = is後方一致;
@@ -73,6 +76,7 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
         this.実施日 = 実施日;
         this.hasFromDate = hasFromDate;
         this.hasToDate = hasToDate;
+        this.kuBun = kuBun;
     }
 
     /**
@@ -90,6 +94,7 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
      * @param 実施日 実施日
      * @param hasFromDate hasFromDate
      * @param hasToDate hasToDate
+     * @param kuBun kuBun
      * @return ShinsakaiIinHoshuNyuryokuMapperParameter 審査会委員報酬入力結果情報を特定するためのMyBatis用パラメータクラスです
      */
     public static ShinsakaiIinHoshuNyuryokuMapperParameter createSelectListParam(
@@ -100,11 +105,12 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
             boolean is部分一致,
             Decimal 最大表示件数,
             RString コード,
-            RDate fromDate,
-            RDate toDate,
-            RDate 実施日,
+            RYearMonth fromDate,
+            RYearMonth toDate,
+            FlexibleDate 実施日,
             boolean hasFromDate,
-            boolean hasToDate) {
+            boolean hasToDate,
+            RString kuBun) {
         return new ShinsakaiIinHoshuNyuryokuMapperParameter(
                 介護認定審査会委員氏名,
                 is前方一致,
@@ -117,7 +123,8 @@ public final class ShinsakaiIinHoshuNyuryokuMapperParameter {
                 toDate,
                 実施日,
                 hasFromDate,
-                hasToDate);
+                hasToDate,
+                kuBun);
     }
 
 }

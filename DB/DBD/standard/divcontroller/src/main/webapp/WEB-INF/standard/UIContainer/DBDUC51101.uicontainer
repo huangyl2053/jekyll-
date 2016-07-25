@@ -11,7 +11,7 @@
      "id": "1",
      "type": "start",
      "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5110001",
      "toLayoutTitle": "更新未申請者把握リスト発行",
      "toState": "初期表示"
@@ -19,7 +19,7 @@
     {
      "id": "2",
      "type": "end",
-     "layoutSubGyomuCode": "DBE",
+     "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD5110001",
      "layoutTitle": "更新未申請者把握リスト発行",
      "eventName": "処理完了",

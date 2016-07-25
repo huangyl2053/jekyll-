@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -28,11 +27,11 @@ public class NinteiChosaHoshuShokaiCsvNoMiEntity implements IChosaHoshuShokaiCsv
     @CsvField(order = 4, name = "調査員_氏名")
     private final RString 調査員_氏名;
     @CsvField(order = 5, name = "調査機関コード")
-    private final RDate 依頼日;
+    private final RString 依頼日;
     @CsvField(order = 6, name = "依頼日")
-    private final RDate 調査日;
+    private final RString 調査日;
     @CsvField(order = 7, name = "入手日")
-    private final RDate 入手日;
+    private final RString 入手日;
     @CsvField(order = 8, name = "調査_再")
     private final RString 調査_再;
     @CsvField(order = 9, name = "保険者")
@@ -55,25 +54,25 @@ public class NinteiChosaHoshuShokaiCsvNoMiEntity implements IChosaHoshuShokaiCsv
     /**
      * コンストラクタです。
      *
-     * @param 調査機関コード RString
-     * @param 調査機関名 RString
-     * @param 調査員_コード RString
-     * @param 調査員_氏名 RString
-     * @param 依頼日 RDate
-     * @param 調査日 RDate
-     * @param 入手日 RDate
-     * @param 調査_再 RString
-     * @param 保険者 RString
-     * @param 申請者_被保険者番号 RString
-     * @param 申請者_氏名 RString
-     * @param 在宅_初 RString
-     * @param 在宅_再 RString
-     * @param 施設_初 RString
-     * @param 施設_再 RString
-     * @param 委託料 RString
+     * @param 調査機関コード 調査機関コード
+     * @param 調査機関名 調査機関名
+     * @param 調査員_コード 調査員_コード
+     * @param 調査員_氏名 調査員_氏名
+     * @param 依頼日 依頼日
+     * @param 調査日 調査日
+     * @param 入手日 入手日
+     * @param 調査_再 調査_再
+     * @param 保険者 保険者
+     * @param 申請者_被保険者番号 申請者_被保険者番号
+     * @param 申請者_氏名 申請者_氏名
+     * @param 在宅_初 在宅_初
+     * @param 在宅_再 在宅_再
+     * @param 施設_初 施設_初
+     * @param 施設_再 施設_再
+     * @param 委託料 委託料
      */
     public NinteiChosaHoshuShokaiCsvNoMiEntity(RString 調査機関コード, RString 調査機関名, RString 調査員_コード, RString 調査員_氏名,
-            RDate 依頼日, RDate 調査日, RDate 入手日, RString 調査_再, RString 保険者, RString 申請者_被保険者番号, RString 申請者_氏名,
+            RString 依頼日, RString 調査日, RString 入手日, RString 調査_再, RString 保険者, RString 申請者_被保険者番号, RString 申請者_氏名,
             RString 在宅_初, RString 在宅_再, RString 施設_初, RString 施設_再, RString 委託料) {
         this.調査機関コード = 調査機関コード;
         this.調査機関名 = 調査機関名;

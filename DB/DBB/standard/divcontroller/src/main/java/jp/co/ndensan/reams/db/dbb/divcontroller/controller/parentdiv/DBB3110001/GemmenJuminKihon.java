@@ -65,18 +65,12 @@ public class GemmenJuminKihon {
     public ResponseData<GemmenJuminKihonDiv> onLoad(GemmenJuminKihonDiv div) {
         GemmenJuminKihonHandler handler = getHandler(div);
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
-//        ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
-//        HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
-//        FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
-//        FlexibleYear 調定年度 = 賦課対象者.get調定年度();
-//        TsuchishoNo 通知書番号 = 賦課対象者.get通知書番号();
-//        LasdecCode 市町村コード = 賦課対象者.get市町村コード();
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-        HihokenshaNo 被保険者番号 = new HihokenshaNo("0002");
-        FlexibleYear 賦課年度 = new FlexibleYear("2018");
-        FlexibleYear 調定年度 = new FlexibleYear("2020");
-        TsuchishoNo 通知書番号 = new TsuchishoNo("009");
-        LasdecCode 市町村コード = new LasdecCode("000003");
+        ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
+        HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
+        FlexibleYear 賦課年度 = 賦課対象者.get賦課年度();
+        FlexibleYear 調定年度 = 賦課対象者.get調定年度();
+        TsuchishoNo 通知書番号 = 賦課対象者.get通知書番号();
+        LasdecCode 市町村コード = 賦課対象者.get市町村コード();
         Builder builder = new Builder(通知書番号, 賦課年度, 市町村コード, 識別コード);
         KaigoFukaKihonSearchKey searchKey = builder.build();
         handler.loadヘッダパネル(識別コード, 被保険者番号, new FukaNendo(賦課年度), searchKey);

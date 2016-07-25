@@ -147,13 +147,13 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         EditedKariSanteiFukaDaichoJoho 編集後仮算定賦課台帳情報 = new EditedKariSanteiFukaDaichoJoho();
         EditedKojin 代納人個人 = null;
         if (賦課台帳情報.get代納人情報_更正後() != null) {
-            代納人個人 = new EditedKojin(賦課台帳情報.get代納人情報_更正後().to個人(), 賦課台帳情報.get帳票制御共通());
+            代納人個人 = new EditedKojin(賦課台帳情報.get代納人情報_更正後().to個人(), 賦課台帳情報.get帳票制御共通(), null);
         }
         FukaAtena 賦課の情報_更正後 = 賦課台帳情報.get賦課の情報_更正後();
         FukaAtena 賦課の情報_更正前 = 賦課台帳情報.get賦課の情報_更正前();
         EditedKojin 本人個人 = null;
         if (賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正後.get宛名() != null) {
-            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通());
+            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通(), null);
         }
 
         List<RString> 変更事由リスト = create変更事由リスト(賦課の情報_更正後, 賦課の情報_更正前);
@@ -232,12 +232,12 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         EditedHonSanteiFukaDaichoJoho 編集後本算定賦課台帳情報 = new EditedHonSanteiFukaDaichoJoho();
         EditedKojin 代納人個人 = null;
         if (賦課台帳情報.get代納人情報_更正後() != null) {
-            代納人個人 = new EditedKojin(賦課台帳情報.get代納人情報_更正後().to個人(), 賦課台帳情報.get帳票制御共通());
+            代納人個人 = new EditedKojin(賦課台帳情報.get代納人情報_更正後().to個人(), 賦課台帳情報.get帳票制御共通(), null);
         }
 
         EditedKojin 本人個人 = null;
         if (賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正後.get宛名() != null) {
-            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通());
+            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通(), null);
         }
 
         List<RString> 変更事由リスト = create変更事由リスト(賦課の情報_更正後, 賦課の情報_更正前);
@@ -310,11 +310,11 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         FukaAtena 賦課の情報_更正前 = 賦課台帳情報.get賦課の情報_更正前();
         EditedKojin 本人個人 = null;
         if (賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正後.get宛名() != null) {
-            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通());
+            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通(), null);
         }
         EditedKojin 本人個人_更正前 = null;
         if (賦課の情報_更正前 != null && 賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正前.get宛名() != null) {
-            本人個人_更正前 = new EditedKojin(賦課の情報_更正前.get宛名(), 賦課台帳情報.get帳票制御共通());
+            本人個人_更正前 = new EditedKojin(賦課の情報_更正前.get宛名(), 賦課台帳情報.get帳票制御共通(), null);
         }
 
         HyojiCodes 表示コード情報 = get表示コード情報(賦課台帳情報);
@@ -597,11 +597,11 @@ public class FukaDaichoDataHenshu extends FukaDaichoDataHenshuFath {
         FukaAtena 賦課の情報_更正前 = 賦課台帳情報.get賦課の情報_更正前();
         EditedKojin 本人個人 = null;
         if (賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正後.get宛名() != null) {
-            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通());
+            本人個人 = new EditedKojin(賦課の情報_更正後.get宛名(), 賦課台帳情報.get帳票制御共通(), null);
         }
         EditedKojin 本人個人_更正前 = null;
         if (賦課の情報_更正前 != null && 賦課台帳情報.get帳票制御共通() != null && 賦課の情報_更正前.get宛名() != null) {
-            本人個人_更正前 = new EditedKojin(賦課の情報_更正前.get宛名(), 賦課台帳情報.get帳票制御共通());
+            本人個人_更正前 = new EditedKojin(賦課の情報_更正前.get宛名(), 賦課台帳情報.get帳票制御共通(), null);
         }
 
         HyojiCodes 表示コード情報 = get表示コード情報(賦課台帳情報);

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMas
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
@@ -27,14 +28,18 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.FujoShuruiCodeValue;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -97,6 +102,50 @@ public class HanyoListSeikatsuhogoJukyushaRenbanProcess extends BatchProcessBase
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        List<JuminShubetsu> 住民種別 = new ArrayList<>();
+        if (processParamter.isJukyushaJoho_Nihonjin()) {
+            住民種別.add(JuminShubetsu.日本人);
+            住民種別.add(JuminShubetsu.住登外個人_日本人);
+        }
+        if (processParamter.isJukyushaJoho_Gaikokujin()) {
+            住民種別.add(JuminShubetsu.外国人);
+            住民種別.add(JuminShubetsu.住登外個人_外国人);
+        }
+        key.set住民種別(住民種別);
+        if (Chiku.住所.getコード().equals(processParamter.getPsmChiku_Kubun())) {
+            if (!RString.isNullOrEmpty(processParamter.getPsmGyoseiku_From())) {
+                key.set町域コード開始値(new ChoikiCode(processParamter.getPsmGyoseiku_From()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmGyoseiku_To())) {
+                key.set町域コード開始値(new ChoikiCode(processParamter.getPsmGyoseiku_To()));
+            }
+        } else if (Chiku.行政区.getコード().equals(processParamter.getPsmChiku_Kubun())) {
+            if (!RString.isNullOrEmpty(processParamter.getPsmGyoseiku_From())) {
+                key.set行政区コード開始値(new GyoseikuCode(processParamter.getPsmGyoseiku_From()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmGyoseiku_To())) {
+                key.set行政区コード終了値(new GyoseikuCode(processParamter.getPsmGyoseiku_To()));
+            }
+        } else if (Chiku.地区.getコード().equals(processParamter.getPsmChiku_Kubun())) {
+            if (!RString.isNullOrEmpty(processParamter.getPsmChiku1_From())) {
+                key.set地区コード1開始値(new ChikuCode(processParamter.getPsmChiku1_From()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmChiku1_To())) {
+                key.set地区コード1終了値(new ChikuCode(processParamter.getPsmChiku1_To()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmChiku2_From())) {
+                key.set地区コード2開始値(new ChikuCode(processParamter.getPsmChiku2_From()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmChiku2_To())) {
+                key.set地区コード2終了値(new ChikuCode(processParamter.getPsmChiku2_To()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmChiku3_From())) {
+                key.set地区コード3開始値(new ChikuCode(processParamter.getPsmChiku3_From()));
+            }
+            if (!RString.isNullOrEmpty(processParamter.getPsmChiku3_To())) {
+                key.set地区コード3終了値(new ChikuCode(processParamter.getPsmChiku3_To()));
+            }
+        }
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
@@ -146,7 +195,7 @@ public class HanyoListSeikatsuhogoJukyushaRenbanProcess extends BatchProcessBase
     @Override
     protected void afterExecute() {
         eucCsvWriter.writeLine(new HanyoListSeikatsuhogoJukyushaResult().
-                setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, i, association, 生活保護種別builder));
+                setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, ++i, association, 生活保護種別builder));
         personalDataList.add(toPersonalData(lastEntity));
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
@@ -168,8 +217,12 @@ public class HanyoListSeikatsuhogoJukyushaRenbanProcess extends BatchProcessBase
     }
 
     private PersonalData toPersonalData(SeikatsuhogoJukyushaRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.get被保険者番号());
-        return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
+        if (RString.isNullOrEmpty(entity.get被保険者番号())) {
+            return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode());
+        } else {
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                    entity.get被保険者番号());
+            return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
+        }
     }
 }

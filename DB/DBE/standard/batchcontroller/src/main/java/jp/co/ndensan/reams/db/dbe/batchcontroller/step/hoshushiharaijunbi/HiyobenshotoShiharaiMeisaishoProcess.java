@@ -67,7 +67,6 @@ public class HiyobenshotoShiharaiMeisaishoProcess extends BatchProcessBase<Hoshu
     private static int index = 1;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
-
     private HiyobenshotoShiharaimeisaisho meisaisho = new HiyobenshotoShiharaimeisaisho();
 
     @BatchWriter

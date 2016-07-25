@@ -15,14 +15,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -44,7 +41,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     private final static int INDEX_5 = 5;
     private final static int INDEX_6 = 6;
     private final static int INDEX_7 = 7;
+    private final static int INDEX_8 = 8;
     private final static int INDEX_9 = 9;
+    private final static int INDEX_10 = 10;
     private final FutanGendogakuNinteishoItem item;
 
     /**
@@ -70,26 +69,26 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     private FutanGendogakuNinteishoReportSource bodyEdit(FutanGendogakuNinteishoReportSource source) {
         source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
         source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_6, INDEX_6);
+        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
         source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
         source.hihokenshaNo = item.get負担限度額認定().get被保険者番号().getColumnValue();
 
-        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
+        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通(), item.get地方公共団体());
         source.jusho = 編集後個人.get編集後住所();
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
 
         RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
-            if (new RString("明治").equals(元号)) {
+            if (new RString("明").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
                 source.birthGengoTaisho = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("大正").equals(元号)) {
+            } else if (new RString("大").equals(元号)) {
                 source.birthGengoTaisho = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("昭和").equals(元号)) {
+            } else if (new RString("昭").equals(元号)) {
                 source.birthGengoShowa = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
@@ -101,11 +100,10 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
-            RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_3);
-            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
-            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
+            RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().seireki().toDateString();
+            source.birthYYYY = 生年月日.substring(INDEX_0, INDEX_4);
+            source.birthMM = 生年月日.substring(INDEX_5, INDEX_7);
+            source.birthDD = 生年月日.substring(INDEX_8, INDEX_10);
         }
         if (Gender.MALE.equals(item.getIKojin().get性別())) {
             source.man = RString.EMPTY;
@@ -127,12 +125,12 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         setKyojuhiName(source, item);
         setFutanGaku(source, item);
 
-        source.hokenshaNo1 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
-        source.hokenshaNo2 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
-        source.hokenshaNo3 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
-        source.hokenshaNo4 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
-        source.hokenshaNo5 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
-        source.hokenshaNo6 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
+        source.hokenshaNo1 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
+        source.hokenshaNo2 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
+        source.hokenshaNo3 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
+        source.hokenshaNo4 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
+        source.hokenshaNo5 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
+        source.hokenshaNo6 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100020.保険者名表示.name()).equals(entity.getKomokuName())
@@ -146,7 +144,6 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         }
 
         source.shikibetsuCode = item.getIKojin().get識別コード().getColumnValue();
-        source.hihokenshaNo = item.get負担限度額認定().get被保険者番号().getColumnValue();
 
         return source;
     }
@@ -171,7 +168,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     }
 
     private void setFutanGaku(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
-        if (item.get負担限度額認定().get食費負担限度額() != Decimal.ZERO && (item.get負担限度額認定().get食費負担限度額() != null)) {
+        if (!Decimal.ZERO.equals(item.get負担限度額認定().get食費負担限度額()) && (item.get負担限度額認定().get食費負担限度額() != null)) {
             source.shokujiGendoGaku = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get食費負担限度額(), 0);
             source.en1 = 金額単位;
 
@@ -184,7 +181,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.en1 = RString.EMPTY;
         }
 
-        if (item.get負担限度額認定().getユニット型個室() != Decimal.ZERO && (item.get負担限度額認定().getユニット型個室() != null)) {
+        if (!Decimal.ZERO.equals(item.get負担限度額認定().getユニット型個室()) && (item.get負担限度額認定().getユニット型個室() != null)) {
             source.kyojuhiGendoGaku1 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().getユニット型個室(), 0);
             source.en2 = 金額単位;
         } else {
@@ -197,7 +194,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.en2 = RString.EMPTY;
         }
 
-        if (item.get負担限度額認定().getユニット型準個室() != Decimal.ZERO && (item.get負担限度額認定().getユニット型準個室() != null)) {
+        if (!Decimal.ZERO.equals(item.get負担限度額認定().getユニット型準個室()) && (item.get負担限度額認定().getユニット型準個室() != null)) {
             source.kyojuhiGendoGaku2 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().getユニット型準個室(), 0);
             source.en3 = 金額単位;
         } else {
@@ -210,7 +207,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.en3 = RString.EMPTY;
         }
 
-        if (item.get負担限度額認定().get従来型個室_特養等() != Decimal.ZERO && (item.get負担限度額認定().get従来型個室_特養等() != null)) {
+        if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_特養等()) && (item.get負担限度額認定().get従来型個室_特養等() != null)) {
             source.kyojuhiGendoGaku3 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_特養等(), 0);
             source.en4 = 金額単位;
         } else {
@@ -225,7 +222,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
 
         if (KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
                 || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
-            if (item.get負担限度額認定().get多床室() != Decimal.ZERO && (item.get負担限度額認定().get多床室() != null)) {
+            if (!Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
                 source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get多床室(), 0);
                 source.en5 = 金額単位;
             } else {
@@ -238,7 +235,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
                 source.en5 = RString.EMPTY;
             }
         } else {
-            if (item.get負担限度額認定().get従来型個室_老健_療養等() != Decimal.ZERO && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
+            if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_老健_療養等()) && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
                 source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_老健_療養等(), 0);
                 source.en5 = 金額単位;
             } else {
@@ -255,7 +252,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.kyojuhiGendoGaku5 = RString.EMPTY;
             source.en6 = RString.EMPTY;
         } else {
-            if (item.get負担限度額認定().get多床室() != Decimal.ZERO && (item.get負担限度額認定().get多床室() != null)) {
+            if (!Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
                 source.kyojuhiGendoGaku5 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get多床室(), 0);
                 source.en6 = 金額単位;
             } else {
@@ -269,7 +266,7 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         }
     }
 
-    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(kojin, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(kojin, 帳票制御共通, 地方公共団体);
     }
 }

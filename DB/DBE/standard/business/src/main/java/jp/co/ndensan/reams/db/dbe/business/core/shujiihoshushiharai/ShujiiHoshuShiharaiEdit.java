@@ -72,8 +72,9 @@ public class ShujiiHoshuShiharaiEdit {
         seikyuEntity.set名称付与(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成報酬支払通知書_宛先敬称, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         seikyuEntity.setバーコード(ChosaHoshuShiharaiEdit.getバーコード(entity));
+        seikyuEntity.setその他(entity.getShujiiIryoKikanCode());
         Decimal 税率 = rstringToDecimal(消費税率);
-        Decimal 単価税込 = entity.getTanka().multiply(税率);
+        Decimal 単価税込 = entity.getTanka().multiply(税率).roundUpTo(0);
         if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
             index = 1;
             if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
@@ -102,7 +103,7 @@ public class ShujiiHoshuShiharaiEdit {
             }
             seikyuEntity.set検診料等の件数(intToRString(index));
             seikyuEntity.set検診料等の単価税込(RString.EMPTY);
-            Decimal 検診料等の金額 = new Decimal(entity.getIkenshoBettoShinryohi()).multiply(税率);
+            Decimal 検診料等の金額 = new Decimal(entity.getIkenshoBettoShinryohi()).multiply(税率).roundUpTo(0);
             seikyuEntity.set検診料等の金額(new RString(検診料等の金額.toString()));
         }
         getIkenshoHoshuSeikyuEntity(entity, seikyuEntity, 単価税込);
@@ -111,13 +112,13 @@ public class ShujiiHoshuShiharaiEdit {
         Decimal 新規施設計 = rstringToDecimal(seikyuEntity.get在宅継続件数()).multiply(単価税込);
         Decimal 更新在宅計 = rstringToDecimal(seikyuEntity.get施設新規件数()).multiply(単価税込);
         Decimal 更新施設計 = rstringToDecimal(seikyuEntity.get施設継続件数()).multiply(単価税込);
-        seikyuEntity.set在宅新規合計(decimalToRString(新規在宅計));
-        seikyuEntity.set在宅継続合計(decimalToRString(新規施設計));
-        seikyuEntity.set施設新規合計(decimalToRString(更新在宅計));
-        seikyuEntity.set施設継続合計(decimalToRString(更新施設計));
+        seikyuEntity.set在宅新規合計(decimalToRString(新規在宅計.roundUpTo(0)));
+        seikyuEntity.set在宅継続合計(decimalToRString(新規施設計.roundUpTo(0)));
+        seikyuEntity.set施設新規合計(decimalToRString(更新在宅計.roundUpTo(0)));
+        seikyuEntity.set施設継続合計(decimalToRString(更新施設計.roundUpTo(0)));
         Decimal 合計 = 新規在宅計.add(新規施設計).add(更新在宅計).add(更新施設計);
-        Decimal 合計金額 = 合計.multiply(rstringToDecimal(seikyuEntity.get検診料等の金額()));
-        seikyuEntity.set合計金額(decimalToRString(合計金額));
+        Decimal 合計金額 = 合計.add(rstringToDecimal(seikyuEntity.get検診料等の金額()));
+        seikyuEntity.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
         return seikyuEntity;
     }
 

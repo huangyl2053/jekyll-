@@ -1,7 +1,7 @@
-/// <reference path='ShuruiGendoInfoCommonChildDiv_Design.ts' />
+/// <reference path='ShuruiGendoInfo_Design.ts' />
 module DBC
 {
-    export module ShuruiGendoInfoCommonChildDiv
+    export module ShuruiGendoInfo
     {
         export class ModeController {
             private controls: Controls;
@@ -28,7 +28,7 @@ module DBC
 
 module DBC
 {
-    export module ShuruiGendoInfoCommonChildDiv
+    export module ShuruiGendoInfo
     {
         export class PublicProperties {
             private controls: Controls;

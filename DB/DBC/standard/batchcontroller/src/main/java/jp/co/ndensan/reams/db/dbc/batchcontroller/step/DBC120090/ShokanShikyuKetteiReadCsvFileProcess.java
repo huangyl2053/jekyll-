@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokanShikyuKetteiReadCsvFileProcess extends SimpleBatchProcessBase {
 
-    //パラメータ名
     /**
      * returnEntity
      */

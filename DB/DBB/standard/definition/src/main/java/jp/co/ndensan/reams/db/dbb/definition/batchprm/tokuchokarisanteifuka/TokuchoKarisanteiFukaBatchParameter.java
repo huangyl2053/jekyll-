@@ -71,7 +71,7 @@ public class TokuchoKarisanteiFukaBatchParameter extends BatchParameterBase {
     /**
      * processのパラメータを生成します。
      *
-     * @param システム日時
+     * @param システム日時 YMDHMS
      * @return processパラメータ
      */
     public CreateFukaJohoKeizokuProcessParameter toCreateFukaJohoKeizokuProcessParameter(YMDHMS システム日時) {
@@ -106,7 +106,7 @@ public class TokuchoKarisanteiFukaBatchParameter extends BatchParameterBase {
      * @return processパラメータ
      */
     public KeisangoJohoSakuseiBatchParamter toKeisangoJohoSakuseiBatchParamter(YMDHMS システム日時) {
-        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(), 賦課年度.toDateString(), システム日時.toDateString(),
+        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(), 賦課年度.toDateString(), new RString(システム日時.toString()),
                 ShoriName.特徴仮算定賦課.get名称(), RString.EMPTY);
     }
 

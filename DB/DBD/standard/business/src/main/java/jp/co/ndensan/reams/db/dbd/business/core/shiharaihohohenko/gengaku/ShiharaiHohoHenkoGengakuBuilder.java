@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link ShiharaiHohoHenkoGengaku}の編集を行うビルダークラスです。
@@ -43,6 +44,18 @@ public class ShiharaiHohoHenkoGengakuBuilder {
         this.id = id;
         this.shiharaiHohoHenkoGengakuMeisai = shiharaiHohoHenkoGengakuMeisai.clone();
 
+    }
+
+    /**
+     * EntityDataStateを設定します
+     *
+     * @param state EntityDataState
+     * @return {@link ShiharaiHohoHenkoGengakuBuilder}
+     */
+    public ShiharaiHohoHenkoGengakuBuilder setState(EntityDataState state) {
+        requireNonNull(state, UrSystemErrorMessages.値がnull.getReplacedMessage("EntityDataState"));
+        entity.setState(state);
+        return this;
     }
 
     /**
@@ -161,7 +174,7 @@ public class ShiharaiHohoHenkoGengakuBuilder {
 
     private boolean hasSameIdentifier(ShiharaiHohoHenkoGengakuMeisaiIdentifier 支払方法変更減額明細情報識別子) {
         return (id.get被保険者番号().equals(支払方法変更減額明細情報識別子.get被保険者番号())
-                && id.get管理区分() == 支払方法変更減額明細情報識別子.get管理区分()
+                && id.get管理区分().equals(支払方法変更減額明細情報識別子.get管理区分())
                 && id.get履歴番号() == 支払方法変更減額明細情報識別子.get履歴番号());
     }
 

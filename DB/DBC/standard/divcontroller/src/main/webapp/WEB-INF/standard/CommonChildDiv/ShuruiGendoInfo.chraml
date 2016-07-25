@@ -1,37 +1,42 @@
-<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ShuruiGendoInfoCommonChildDiv&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBC.ShuruiGendoInfoCommonChildDiv"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="ShuruiGendoInfoCommonChildDiv" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShuruiGendoInfoCommonChildDiv&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShuruiGendoInfoCommonChildDiv&quot;,&quot;title&quot;:&quot;種類限度額照会&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShuruiGendoInfoCommonChildDiv&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShuruiGendoInfoCommonChildDiv_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">種類限度額照会</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShuruiGendoInfoCommonChildDiv_panel_body_area"><div title="" class="UzDataGrid JSControl FloatLeft controlMargin-M Width-L marginLeft-XS marginRight-XS Height-S UzCompositeChild" id="dgGendoInfo" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgGendoInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;L&quot;,&quot;selectControlID&quot;:&quot;dgGendoInfo&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;サービス種類&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;サービス種類&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;サービス種類&quot;},{&quot;columnName&quot;:&quot;限度額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;限度額&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;限度額&quot;},{&quot;columnName&quot;:&quot;合計単位数&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;合計単位数&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;合計単位数&quot;},{&quot;columnName&quot;:&quot;限度超過単位数&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;限度超過単位数&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;限度超過単位数&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgGendoInfo_grid_table" role="" style="width: 779px; height: 176px; position: relative;"></div><div id="dgGendoInfo_footer" style="width: 779px; height: 25px;"></div></div><button class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="Button1" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;Button1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div>              <script class="RamlConvert" type="text/javascript">
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ShuruiGendoInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBC.ShuruiGendoInfo"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="ShuruiGendoInfo" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShuruiGendoInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShuruiGendoInfo&quot;,&quot;title&quot;:&quot;種類限度額照会&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShuruiGendoInfo&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShuruiGendoInfo/onLoad&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnClose&quot;,&quot;requestUrl&quot;:&quot;dbc/db/dbc/ShuruiGendoInfo/onClick_btnClose&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShuruiGendoInfo_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">種類限度額照会</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShuruiGendoInfo_panel_body_area"><div title="" class="UzDataGrid JSControl FloatLeft controlMargin-M Width-L marginLeft-XS marginRight-XS Height-S UzCompositeChild" id="dgGendoInfo" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgGendoInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;L&quot;,&quot;selectControlID&quot;:&quot;dgGendoInfo&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;サービス種類&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;サービス種類&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;サービス種類&quot;},{&quot;columnName&quot;:&quot;限度額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;限度額&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;限度額&quot;},{&quot;columnName&quot;:&quot;合計単位数&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;合計単位数&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;合計単位数&quot;},{&quot;columnName&quot;:&quot;限度超過単位数&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;限度超過単位数&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;isKeyItem&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;限度超過単位数&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;isErrorAndWarningColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgGendoInfo_grid_table" role="" style="width: 779px; height: 176px; position: relative;"></div><div id="dgGendoInfo_footer" style="width: 779px; height: 25px;"></div></div><button class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div>              
+     
+   <script class="RamlConvert" type="text/javascript">
 var DBC= DBC? DBC: {};
-DBC['SHURUIGENDOINFOCOMMONCHILDDIV'] = {};
-DBC['SHURUIGENDOINFOCOMMONCHILDDIV'].ShuruiGendoInfoCommonChildDivRequest = function(parentFieldName){ 
-var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShuruiGendoInfoCommonChildDiv').getProperty();parameter0.dgGendoInfo = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgGendoInfo').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();parameter0.Button1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_Button1').getProperty();paramArray.push(parameter0);
+DBC['SHURUIGENDOINFO'] = {};
+DBC['SHURUIGENDOINFO'].ShuruiGendoInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShuruiGendoInfo').getProperty();parameter0.dgGendoInfo = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgGendoInfo').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
 return paramArray;
  };
 </script><script>var DBC;
 (function (DBC) {
-    (function (ShuruiGendoInfoCommonChildDiv) {
+    (function (ShuruiGendoInfo) {
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
             return Events;
         })();
-        ShuruiGendoInfoCommonChildDiv.Events = Events;
+        ShuruiGendoInfo.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "ShuruiGendoInfoCommonChildDiv";
+                return "ShuruiGendoInfo";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBC.ShuruiGendoInfoCommonChildDiv.Controls.myType();
+                return this._myName + "_" + DBC.ShuruiGendoInfo.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBC.ShuruiGendoInfoCommonChildDiv.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBC.ShuruiGendoInfo.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.ShuruiGendoInfoCommonChildDiv = function () {
+            Controls.prototype.ShuruiGendoInfo = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
@@ -42,45 +47,41 @@ return paramArray;
             Controls.prototype.btnClose = function () {
                 return new UZA.Button(this.convFiledName("btnClose"));
             };
-
-            Controls.prototype.Button1 = function () {
-                return new UZA.Button(this.convFiledName("Button1"));
-            };
             return Controls;
         })();
-        ShuruiGendoInfoCommonChildDiv.Controls = Controls;
-    })(DBC.ShuruiGendoInfoCommonChildDiv || (DBC.ShuruiGendoInfoCommonChildDiv = {}));
-    var ShuruiGendoInfoCommonChildDiv = DBC.ShuruiGendoInfoCommonChildDiv;
+        ShuruiGendoInfo.Controls = Controls;
+    })(DBC.ShuruiGendoInfo || (DBC.ShuruiGendoInfo = {}));
+    var ShuruiGendoInfo = DBC.ShuruiGendoInfo;
 })(DBC || (DBC = {}));
 var DBC;
 (function (DBC) {
-    (function (ShuruiGendoInfoCommonChildDiv) {
+    (function (ShuruiGendoInfo) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new ShuruiGendoInfoCommonChildDiv.Controls(fieldName);
+                this.controls = new ShuruiGendoInfo.Controls(fieldName);
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
 
             ModeController.prototype.PublicProperties = function () {
-                return new ShuruiGendoInfoCommonChildDiv.PublicProperties(this.fieldName);
+                return new ShuruiGendoInfo.PublicProperties(this.fieldName);
             };
             return ModeController;
         })();
-        ShuruiGendoInfoCommonChildDiv.ModeController = ModeController;
-    })(DBC.ShuruiGendoInfoCommonChildDiv || (DBC.ShuruiGendoInfoCommonChildDiv = {}));
-    var ShuruiGendoInfoCommonChildDiv = DBC.ShuruiGendoInfoCommonChildDiv;
+        ShuruiGendoInfo.ModeController = ModeController;
+    })(DBC.ShuruiGendoInfo || (DBC.ShuruiGendoInfo = {}));
+    var ShuruiGendoInfo = DBC.ShuruiGendoInfo;
 })(DBC || (DBC = {}));
 
 var DBC;
 (function (DBC) {
-    (function (ShuruiGendoInfoCommonChildDiv) {
+    (function (ShuruiGendoInfo) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new ShuruiGendoInfoCommonChildDiv.Controls(fieldName);
+                this.controls = new ShuruiGendoInfo.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -89,8 +90,8 @@ var DBC;
             };
             return PublicProperties;
         })();
-        ShuruiGendoInfoCommonChildDiv.PublicProperties = PublicProperties;
-    })(DBC.ShuruiGendoInfoCommonChildDiv || (DBC.ShuruiGendoInfoCommonChildDiv = {}));
-    var ShuruiGendoInfoCommonChildDiv = DBC.ShuruiGendoInfoCommonChildDiv;
+        ShuruiGendoInfo.PublicProperties = PublicProperties;
+    })(DBC.ShuruiGendoInfo || (DBC.ShuruiGendoInfo = {}));
+    var ShuruiGendoInfo = DBC.ShuruiGendoInfo;
 })(DBC || (DBC = {}));
 </script></div>

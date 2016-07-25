@@ -5,14 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0440011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.DBC0440011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.DBC0440011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0440011.KogakuSabisuhiShikyuShinseiPanelValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuKyufuTaishoListParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuServicehiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -105,7 +106,6 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         ViewStateHolder.put(ViewStateKeys.画面モード, 追加モード);
         KogakuServicehiDetailParameter 画面データ = getHandler(div).set申請情報登録画面データ();
         ViewStateHolder.put(ViewStateKeys.詳細データ, 画面データ);
-        //TODO
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 
@@ -186,8 +186,6 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         getHandler(div).initialize高額介護サービス給付対象明細(
                 メニューID, 明細編集モード, 被保険者番号, サービス年月, 1);
         ViewStateHolder.put(ViewStateKeys.画面モード, 明細編集モード);
-        KogakuKyufuTaishoListParameter 画面データ = getHandler(div).set対象者情報登録画面データ();
-        ViewStateHolder.put(ViewStateKeys.明細データ, 画面データ);
         return ResponseData.of(div).setState(DBC0440011StateName.対象者情報登録);
     }
 
@@ -243,7 +241,53 @@ public class KogakuSabisuhiShikyuShinseiPanel {
      */
     public ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> onClick_btnUpd(
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
-        //TODO
+        boolean flag = getHandler(div).is対象者情報登録内容変更状態();
+        if (flag) {
+            RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+            return save対象者情報(div, 画面モード);
+        } else {
+            return notChanges(div);
+        }
+    }
+
+    private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> save対象者情報(
+            KogakuSabisuhiShikyuShinseiPanelDiv div, RString 画面モード) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
+        if (!削除モード.equals(画面モード)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list
+                        = ViewStateHolder.get(ViewStateKeys.高額給付対象一覧, List.class);
+                getHandler(div).save対象者情報(被保険者番号, サービス年月, メニューID, 高額給付対象一覧list);
+                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+            } else {
+                return ResponseData.of(div).respond();
+            }
+        } else if (削除モード.equals(画面モード)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
+                        UrQuestionMessages.削除の確認.getMessage().evaluate());
+                List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧list
+                        = ViewStateHolder.get(ViewStateKeys.高額給付対象一覧, List.class);
+                getHandler(div).save対象者情報(被保険者番号, サービス年月, メニューID, 高額給付対象一覧list);
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
+            } else {
+                return ResponseData.of(div).respond();
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -256,7 +300,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         KougakuSabisuhiShousaiNaiyouResult result = ViewStateHolder.get(ViewStateKeys.一覧データ,
                 KougakuSabisuhiShousaiNaiyouResult.class);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
-        if (修正モード.equals(画面モード)) {
+        if (!削除モード.equals(画面モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -271,8 +315,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             } else {
                 return ResponseData.of(div).respond();
             }
-        }
-        if (削除モード.equals(画面モード)) {
+        } else if (削除モード.equals(画面モード)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                         UrQuestionMessages.削除の確認.getMessage().evaluate());

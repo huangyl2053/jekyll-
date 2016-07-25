@@ -232,7 +232,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(本算定通知書情報.get賦課の情報_更正後().get宛名().toEntity());
-        EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通());
+        EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通(), null);
 
         edit表示コード(本算定通知書情報, shoKyotsu);
         EditedAtesaki editedAtesaki = EditedAtesakiBuilder.create編集後宛先(

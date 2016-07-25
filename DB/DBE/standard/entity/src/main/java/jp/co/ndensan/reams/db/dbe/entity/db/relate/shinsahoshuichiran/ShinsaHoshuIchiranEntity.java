@@ -26,83 +26,87 @@ public class ShinsaHoshuIchiranEntity implements IShinsaHoshuIchiranEntityCsvEuc
     private final RString 審査員氏名;
     @CsvField(order = 3, name = "対象年月")
     private final RString 出席日;
-    @CsvField(order = 4, name = "1日の出席状況")
+    @CsvField(order = 4, name = "1")
     private final RString 出欠_1;
-    @CsvField(order = 5, name = "2日の出席状況")
+    @CsvField(order = 5, name = "2")
     private final RString 出欠_2;
-    @CsvField(order = 6, name = "3日の出席状況")
+    @CsvField(order = 6, name = "3")
     private final RString 出欠_3;
-    @CsvField(order = 7, name = "4日の出席状況")
+    @CsvField(order = 7, name = "4")
     private final RString 出欠_4;
-    @CsvField(order = 8, name = "5日の出席状況")
+    @CsvField(order = 8, name = "5")
     private final RString 出欠_5;
-    @CsvField(order = 9, name = "6日の出席状況")
+    @CsvField(order = 9, name = "6")
     private final RString 出欠_6;
-    @CsvField(order = 10, name = "7日の出席状況")
+    @CsvField(order = 10, name = "7")
     private final RString 出欠_7;
-    @CsvField(order = 11, name = "8日の出席状況")
+    @CsvField(order = 11, name = "8")
     private final RString 出欠_8;
-    @CsvField(order = 12, name = "9日の出席状況")
+    @CsvField(order = 12, name = "9")
     private final RString 出欠_9;
-    @CsvField(order = 13, name = "10日の出席状況")
+    @CsvField(order = 13, name = "10")
     private final RString 出欠_10;
-    @CsvField(order = 14, name = "11日の出席状況")
+    @CsvField(order = 14, name = "11")
     private final RString 出欠_11;
-    @CsvField(order = 15, name = "12日の出席状況")
+    @CsvField(order = 15, name = "12")
     private final RString 出欠_12;
-    @CsvField(order = 16, name = "13日の出席状況")
+    @CsvField(order = 16, name = "13")
     private final RString 出欠_13;
-    @CsvField(order = 17, name = "14日の出席状況")
+    @CsvField(order = 17, name = "14")
     private final RString 出欠_14;
-    @CsvField(order = 18, name = "15日の出席状況")
+    @CsvField(order = 18, name = "15")
     private final RString 出欠_15;
-    @CsvField(order = 19, name = "16日の出席状況")
+    @CsvField(order = 19, name = "16")
     private final RString 出欠_16;
-    @CsvField(order = 20, name = "17日の出席状況")
+    @CsvField(order = 20, name = "17")
     private final RString 出欠_17;
-    @CsvField(order = 21, name = "18日の出席状況")
+    @CsvField(order = 21, name = "18")
     private final RString 出欠_18;
-    @CsvField(order = 22, name = "19日の出席状況")
+    @CsvField(order = 22, name = "19")
     private final RString 出欠_19;
-    @CsvField(order = 23, name = "20日の出席状況")
+    @CsvField(order = 23, name = "20")
     private final RString 出欠_20;
-    @CsvField(order = 24, name = "21日の出席状況")
+    @CsvField(order = 24, name = "21")
     private final RString 出欠_21;
-    @CsvField(order = 25, name = "22日の出席状況")
+    @CsvField(order = 25, name = "22")
     private final RString 出欠_22;
-    @CsvField(order = 26, name = "23日の出席状況")
+    @CsvField(order = 26, name = "23")
     private final RString 出欠_23;
-    @CsvField(order = 27, name = "24日の出席状況")
+    @CsvField(order = 27, name = "24")
     private final RString 出欠_24;
-    @CsvField(order = 28, name = "25日の出席状況")
+    @CsvField(order = 28, name = "25")
     private final RString 出欠_25;
-    @CsvField(order = 29, name = "26日の出席状況")
+    @CsvField(order = 29, name = "26")
     private final RString 出欠_26;
-    @CsvField(order = 30, name = "27日の出席状況")
+    @CsvField(order = 30, name = "27")
     private final RString 出欠_27;
-    @CsvField(order = 31, name = "28日の出席状況")
+    @CsvField(order = 31, name = "28")
     private final RString 出欠_28;
-    @CsvField(order = 32, name = "29日の出席状況")
+    @CsvField(order = 32, name = "29")
     private final RString 出欠_29;
-    @CsvField(order = 33, name = "30日の出席状況")
+    @CsvField(order = 33, name = "30")
     private final RString 出欠_30;
-    @CsvField(order = 34, name = "31日の出席状況")
+    @CsvField(order = 34, name = "31")
     private final RString 出欠_31;
     @CsvField(order = 35, name = "出席回数")
     private final RString 出席回数;
     @CsvField(order = 36, name = "報酬総額")
     private final RString 報酬総額;
-    @CsvField(order = 37, name = "税額控除")
+    @CsvField(order = 37, name = "その他費用")
+    private final RString その他費用;
+    @CsvField(order = 38, name = "税額控除")
     private final RString 税額控除;
-    @CsvField(order = 38, name = "報酬合計")
+    @CsvField(order = 39, name = "報酬合計")
     private final RString 報酬合計;
-    @CsvField(order = 39, name = "審査回数_合計")
+    @CsvField(order = 40, name = "審査回数")
     private final RString 審査回数_合計;
-    @CsvField(order = 40, name = "報酬総額_合計")
+    @CsvField(order = 41, name = "報酬総額")
     private final RString 報酬総額_合計;
-    @CsvField(order = 41, name = "税額控除_合計")
+    @CsvField(order = 42, name = "その他費用")
+    private final RString その他費用_合計;
+    @CsvField(order = 43, name = "税額控除")
     private final RString 税額控除_合計;
-    @CsvField(order = 42, name = "報酬合計_合計")
+    @CsvField(order = 44, name = "報酬合計")
     private final RString 報酬合計_合計;
 
     /**
@@ -144,10 +148,12 @@ public class ShinsaHoshuIchiranEntity implements IShinsaHoshuIchiranEntityCsvEuc
      * @param 出欠_31 31日の出席状況
      * @param 出席回数 出席回数
      * @param 報酬総額 報酬総額
+     * @param その他費用 その他費用
      * @param 税額控除 税額控除
      * @param 報酬合計 報酬合計
      * @param 審査回数_合計 審査回数_合計
      * @param 報酬総額_合計 報酬総額_合計
+     * @param その他費用_合計 その他費用_合計
      * @param 税額控除_合計 税額控除_合計
      * @param 報酬合計_合計 報酬合計_合計
      */
@@ -188,10 +194,12 @@ public class ShinsaHoshuIchiranEntity implements IShinsaHoshuIchiranEntityCsvEuc
             RString 出欠_31,
             RString 出席回数,
             RString 報酬総額,
+            RString その他費用,
             RString 税額控除,
             RString 報酬合計,
             RString 審査回数_合計,
             RString 報酬総額_合計,
+            RString その他費用_合計,
             RString 税額控除_合計,
             RString 報酬合計_合計) {
         this.合議体No = 合議体No;
@@ -230,10 +238,12 @@ public class ShinsaHoshuIchiranEntity implements IShinsaHoshuIchiranEntityCsvEuc
         this.出欠_31 = 出欠_31;
         this.出席回数 = 出席回数;
         this.報酬総額 = 報酬総額;
+        this.その他費用 = その他費用;
         this.税額控除 = 税額控除;
         this.報酬合計 = 報酬合計;
         this.審査回数_合計 = 審査回数_合計;
         this.報酬総額_合計 = 報酬総額_合計;
+        this.その他費用_合計 = その他費用_合計;
         this.税額控除_合計 = 税額控除_合計;
         this.報酬合計_合計 = 報酬合計_合計;
     }

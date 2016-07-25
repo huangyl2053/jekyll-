@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -87,7 +89,8 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             this.未同定年金情報_年金コード = resultEntity.getDbt2019entity().getNenkinCode();
         }
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
-            Code code = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            TokubetsuChoshuGimushaCode gimushaCode = resultEntity.getUet0511entity().getDtTokubetsuChoshuGimushaCode();
+            Code code = gimushaCode == null ? null : gimushaCode.value();
             if (code != null) {
                 this.未同定年金情報_特別徴収義務者コード = code.value();
             }
@@ -96,7 +99,8 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             this.未同定年金情報_住所カナ = resultEntity.getUet0511entity().getDtKanaJusho();
             this.未同定年金情報_住所漢字 = resultEntity.getUet0511entity().getDtKanjiJusho();
             this.未同定年金情報_生年月日 = resultEntity.getUet0511entity().getDtBirthDay();
-            this.未同定年金情報_性別 = resultEntity.getUet0511entity().getDtSeibetsu();
+            SeibetsuCodeNenkinTokucho seibetsu = resultEntity.getUet0511entity().getDtSeibetsu();
+            this.未同定年金情報_性別 = seibetsu == null ? RString.EMPTY : seibetsu.value().get性別コード();
             this.未同定年金情報_連番 = new RString(resultEntity.getUet0511entity().getRenban());
             if (resultEntity.getUet0511entity().getShoriNendo() != null) {
                 this.未同定年金情報_処理年度 = resultEntity.getUet0511entity().getShoriNendo().toDateString();

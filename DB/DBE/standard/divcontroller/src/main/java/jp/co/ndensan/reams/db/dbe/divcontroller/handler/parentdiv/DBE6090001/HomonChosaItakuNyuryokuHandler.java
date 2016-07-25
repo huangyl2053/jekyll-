@@ -56,6 +56,8 @@ public class HomonChosaItakuNyuryokuHandler {
     private static final RString 無効 = new RString("無効");
     private static final RString コンマ = new RString(",");
     private static final int 年月 = 6;
+    private static final RString 共通ボタン = new RString("btnHozonsuru");
+    private static final RString 戻るボタン = new RString("btnModoru");
 
     /**
      * コンストラクタです。
@@ -153,9 +155,9 @@ public class HomonChosaItakuNyuryokuHandler {
                     row.setDeleteButtonState(DataGridButtonState.Disabled);
                 }
                 dgChosainList.add(row);
-                div.getDgShinsakaiIin().setDataSource(dgChosainList);
             }
         }
+        div.getDgShinsakaiIin().setDataSource(dgChosainList);
     }
 
     /**
@@ -244,7 +246,7 @@ public class HomonChosaItakuNyuryokuHandler {
             }
             row.setColumnState(状態_更新);
         } else if (状態_追加.equals(div.getHdt状態())) {
-            row.setNinteiChosaItakuryo(new RString(div.getTxtNinteiChosaItakuryo().getValue().toString()));
+            row.setNinteiChosaItakuryo(DecimalFormatter.toコンマ区切りRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));
             row.setShiharaiMemo(div.getTxtShiharaiMemo().getValue());
             if (銀行振込_出力済.equals(div.getRadGinkoFurikomi().getSelectedKey())) {
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());
@@ -279,7 +281,7 @@ public class HomonChosaItakuNyuryokuHandler {
         builder.set認定調査依頼履歴番号(Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set認定調査員コード(div.getTxtChousaInCode().getValue());
         builder.set認定調査委託先コード(div.getTxtItakusakiCode().getValue());
-        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString()));
+        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString().replace(",", "")));
         builder.set認定調査委託料支払メモ(row.getShiharaiMemo());
         builder.set認定調査委託料支払年月日(FlexibleDate.EMPTY);
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
@@ -307,7 +309,7 @@ public class HomonChosaItakuNyuryokuHandler {
                 Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()));
         NinteiChosaHoshuJissekiJoho joho = models.get(key);
         NinteiChosaHoshuJissekiJohoBuilder builder = joho.createBuilderForEdit();
-        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString()));
+        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString().replace(",", "")));
         builder.set認定調査委託料支払メモ(row.getShiharaiMemo());
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);

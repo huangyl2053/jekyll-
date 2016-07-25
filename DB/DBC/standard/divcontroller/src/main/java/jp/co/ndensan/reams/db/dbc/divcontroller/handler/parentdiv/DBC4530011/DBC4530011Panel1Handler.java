@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class DBC4530011Panel1Handler {
 
-    private final DBC4530011Panel1Div div;
-
     private static final RString 更新 = new RString("を使用して更新");
+
+    private final DBC4530011Panel1Div div;
 
     /**
      * コンストラクタです。
@@ -38,7 +38,7 @@ public class DBC4530011Panel1Handler {
      * 画面ロード時の動作です。
      */
     public void initialize() {
-        div.getTextBoxMultiLine1().setValue(getConfig値(ConfigNameDBC.高額合算自己負担額補正_支払場所));
+        div.getTxtShiharaiBasho().setValue(getConfig値(ConfigNameDBC.高額合算自己負担額補正_支払場所));
     }
 
     private RString getConfig値(Enum key) {
@@ -50,10 +50,11 @@ public class DBC4530011Panel1Handler {
      */
     public void config保存() {
 
-        RString config値 = div.getTextBoxMultiLine1().getValue();
+        RString config値 = div.getTxtShiharaiBasho().getValue();
         RString 変更理由 = ResponseHolder.getMenuID().concat(更新);
         RDate 運用日 = RDate.getNowDate();
-        BusinessConfig.update(SubGyomuCode.DBC介護給付, ConfigNameDBC.高額合算自己負担額補正_支払場所, config値, 変更理由, RString.EMPTY, 運用日);
+        BusinessConfig.update(SubGyomuCode.DBC介護給付, ConfigNameDBC.高額合算自己負担額補正_支払場所,
+                config値, 変更理由, RString.EMPTY, 運用日);
     }
 
 }

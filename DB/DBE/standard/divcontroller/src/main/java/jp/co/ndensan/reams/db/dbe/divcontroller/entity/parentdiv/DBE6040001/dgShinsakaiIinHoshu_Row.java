@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jul 13 15:05:10 CST 2016 
+ * Sat Jul 23 13:18:10 CST 2016 
  */
 
 
@@ -56,6 +56,7 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
     private RString shussekijokyo31;
     private RString shussekiKaisu;
     private RString sogaku;
+    private RString sonotaHiyo;
     private RString zeiKojoGaku;
     private RString sashihikiHoshu;
 
@@ -96,6 +97,7 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.shussekijokyo31 = RString.EMPTY;
         this.shussekiKaisu = RString.EMPTY;
         this.sogaku = RString.EMPTY;
+        this.sonotaHiyo = RString.EMPTY;
         this.zeiKojoGaku = RString.EMPTY;
         this.sashihikiHoshu = RString.EMPTY;
         this.setOriginalData("gogitaiBango", gogitaiBango);
@@ -133,11 +135,12 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.setOriginalData("shussekijokyo31", shussekijokyo31);
         this.setOriginalData("shussekiKaisu", shussekiKaisu);
         this.setOriginalData("sogaku", sogaku);
+        this.setOriginalData("sonotaHiyo", sonotaHiyo);
         this.setOriginalData("zeiKojoGaku", zeiKojoGaku);
         this.setOriginalData("sashihikiHoshu", sashihikiHoshu);
     }
 
-    public dgShinsakaiIinHoshu_Row(RString gogitaiBango, RString shinsaIinMei, RString shussekijokyo1, RString shussekijokyo2, RString shussekijokyo3, RString shussekijokyo4, RString shussekijokyo5, RString shussekijokyo6, RString shussekijokyo7, RString shussekijokyo8, RString shussekijokyo9, RString shussekijokyo10, RString shussekijokyo11, RString shussekijokyo12, RString shussekijokyo13, RString shussekijokyo14, RString shussekijokyo15, RString shussekijokyo16, RString shussekijokyo17, RString shussekijokyo18, RString shussekijokyo19, RString shussekijokyo20, RString shussekijokyo21, RString shussekijokyo22, RString shussekijokyo23, RString shussekijokyo24, RString shussekijokyo25, RString shussekijokyo26, RString shussekijokyo27, RString shussekijokyo28, RString shussekijokyo29, RString shussekijokyo30, RString shussekijokyo31, RString shussekiKaisu, RString sogaku, RString zeiKojoGaku, RString sashihikiHoshu) {
+    public dgShinsakaiIinHoshu_Row(RString gogitaiBango, RString shinsaIinMei, RString shussekijokyo1, RString shussekijokyo2, RString shussekijokyo3, RString shussekijokyo4, RString shussekijokyo5, RString shussekijokyo6, RString shussekijokyo7, RString shussekijokyo8, RString shussekijokyo9, RString shussekijokyo10, RString shussekijokyo11, RString shussekijokyo12, RString shussekijokyo13, RString shussekijokyo14, RString shussekijokyo15, RString shussekijokyo16, RString shussekijokyo17, RString shussekijokyo18, RString shussekijokyo19, RString shussekijokyo20, RString shussekijokyo21, RString shussekijokyo22, RString shussekijokyo23, RString shussekijokyo24, RString shussekijokyo25, RString shussekijokyo26, RString shussekijokyo27, RString shussekijokyo28, RString shussekijokyo29, RString shussekijokyo30, RString shussekijokyo31, RString shussekiKaisu, RString sogaku, RString sonotaHiyo, RString zeiKojoGaku, RString sashihikiHoshu) {
         super();
         this.setOriginalData("gogitaiBango", gogitaiBango);
         this.setOriginalData("shinsaIinMei", shinsaIinMei);
@@ -174,6 +177,7 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.setOriginalData("shussekijokyo31", shussekijokyo31);
         this.setOriginalData("shussekiKaisu", shussekiKaisu);
         this.setOriginalData("sogaku", sogaku);
+        this.setOriginalData("sonotaHiyo", sonotaHiyo);
         this.setOriginalData("zeiKojoGaku", zeiKojoGaku);
         this.setOriginalData("sashihikiHoshu", sashihikiHoshu);
         this.gogitaiBango = gogitaiBango;
@@ -211,6 +215,7 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.shussekijokyo31 = shussekijokyo31;
         this.shussekiKaisu = shussekiKaisu;
         this.sogaku = sogaku;
+        this.sonotaHiyo = sonotaHiyo;
         this.zeiKojoGaku = zeiKojoGaku;
         this.sashihikiHoshu = sashihikiHoshu;
     }
@@ -353,6 +358,10 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
 
     public RString getSogaku() {
         return sogaku;
+    }
+
+    public RString getSonotaHiyo() {
+        return sonotaHiyo;
     }
 
     public RString getZeiKojoGaku() {
@@ -536,6 +545,11 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
     public void setSogaku(RString sogaku) {
         this.setOriginalData("sogaku", sogaku);
         this.sogaku = sogaku;
+    }
+
+    public void setSonotaHiyo(RString sonotaHiyo) {
+        this.setOriginalData("sonotaHiyo", sonotaHiyo);
+        this.sonotaHiyo = sonotaHiyo;
     }
 
     public void setZeiKojoGaku(RString zeiKojoGaku) {

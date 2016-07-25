@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiike
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 委員用主治医意見書A3のインターフェースクラスです。
+ * 主治医意見書A3のインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-140 lishengli
+ * @reamsid_L DBE-0150-240 lishengli
  */
 interface IShujiiikenshoA3Editor extends IReportEditor<ShujiiikenshoA3ReportSource> {
 

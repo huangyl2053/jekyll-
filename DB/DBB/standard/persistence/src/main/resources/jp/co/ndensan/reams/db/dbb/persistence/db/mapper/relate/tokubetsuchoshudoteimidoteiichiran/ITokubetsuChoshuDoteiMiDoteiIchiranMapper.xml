@@ -16,9 +16,9 @@
             "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" as "nenkinCode",
             "UeT0511NenkinTokuchoKaifuJoho"."dtBirthDay" as "dtBirthDay",
             "UeT0511NenkinTokuchoKaifuJoho"."dtSeibetsu" as "dtSeibetsu",
-            "UeT0511NenkinTokuchoKaifuJoho"."dtKanaJusho" as "dtKanaJusho",
-            "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuGimushaCode" as "dtTokubetsuChoshuGimushaCode",
             "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiJusho" as "dtKanjiJusho",
+            "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuGimushaCode" as "dtTokubetsuChoshuGimushaCode",
+            "UeT0511NenkinTokuchoKaifuJoho"."dtKanaShimei" as "dtKanaShimei",
             "UeT0511NenkinTokuchoKaifuJoho"."dtYubinNo" as "dtYubinNo",
             "shikibetsuCode"."setaiCode" as "setaiCode",
             "shikibetsuCode"."gyoseikuCode" as "gyoseikuCode",
@@ -30,17 +30,17 @@
                 rgdb."DbV2001ChoshuHoho" as "DbT2001ChoshuHoho"
             ON 
                 "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = "DbT2001ChoshuHoho"."fukaNendo"  
-                <if test="kaishuTsuki == 8">
+                <if test="kaishuTsuki.toString() == '08'">
                  and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."kariNenkinNo"
                  and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."kariNenkinCode"
                  and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."kariHosokuM"   
                 </if>
-                <if test="kaishuTsuki == 10 or kaishuTsuki == 12 or kaishuTsuki == 2">
+                <if test="kaishuTsuki.toString() == '10'  or kaishuTsuki.toString() == '12' or kaishuTsuki.toString() == '02'">
                  and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."honNenkinNo"
                  and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."honNenkinCode"           
                  and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."honHosokuM" 
                 </if>
-                <if test="kaishuTsuki == 4 or kaishuTsuki == 6">
+                <if test="kaishuTsuki.toString() == '04' or kaishuTsuki.toString() == '06'">
                  and "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" = "DbT2001ChoshuHoho"."yokunendoKariNenkinNo"
                  and "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" = "DbT2001ChoshuHoho"."yokunendoKariNenkinCode" 
                  and "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = "DbT2001ChoshuHoho"."yokunendoKariHosokuM" 

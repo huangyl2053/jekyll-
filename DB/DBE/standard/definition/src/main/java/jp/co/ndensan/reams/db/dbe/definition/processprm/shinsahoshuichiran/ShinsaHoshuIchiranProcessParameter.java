@@ -21,33 +21,17 @@ public final class ShinsaHoshuIchiranProcessParameter implements IBatchProcessPa
 
     private final RString 帳票出力区分;
     private final RString 審査会開催年月;
-    private final RString 審査回数;
-    private final RString 報酬総額;
-    private final RString 税額控除;
-    private final RString 報酬合計;
 
     /**
      * コンストラクタです。
      *
      * @param 帳票出力区分 帳票出力区分
      * @param 審査会開催年月 審査会開催年月
-     * @param 審査回数 審査回数
-     * @param 報酬総額 報酬総額
-     * @param 税額控除 税額控除
-     * @param 報酬合計 報酬合計
      */
     public ShinsaHoshuIchiranProcessParameter(RString 帳票出力区分,
-            RString 審査会開催年月,
-            RString 審査回数,
-            RString 報酬総額,
-            RString 税額控除,
-            RString 報酬合計) {
+            RString 審査会開催年月) {
         this.帳票出力区分 = 帳票出力区分;
         this.審査会開催年月 = 審査会開催年月;
-        this.審査回数 = 審査回数;
-        this.報酬総額 = 報酬総額;
-        this.税額控除 = 税額控除;
-        this.報酬合計 = 報酬合計;
     }
 
     /**

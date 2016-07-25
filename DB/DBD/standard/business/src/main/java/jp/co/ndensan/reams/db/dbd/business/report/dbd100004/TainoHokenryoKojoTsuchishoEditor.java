@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100004;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100004.TainoHokenryoKojoTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -48,7 +49,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private final List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト;
+    private final List<ShokanKihonJihoEntiy> 償還払集計情報リスト;
     private final int index;
 
     /**
@@ -67,7 +68,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
      */
     public TainoHokenryoKojoTsuchishoEditor(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
-            ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト, int index) {
+            ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト, int index) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御共通 = 帳票制御共通;
@@ -151,7 +152,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
 
     private void setLayer1(TainoHokenryoKojoTsuchishoReportSource source) {
         source.bunshoNo = this.文書番号;
-        EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通);
+        EditedKojin 編集後個人 = getEditedKojin(this.個人情報, this.帳票制御共通, this.地方公共団体);
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         RString 被保険者番号 = this.帳票情報.get被保険者番号().getColumnValue();
         source.hihokenshaNo1 = 被保険者番号.substring(0, NOCOUNT_1);
@@ -181,10 +182,10 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
             source.renrakusakiHoka = RString.EMPTY;
         }
         if (null != 償還払集計情報リスト && 償還払集計情報リスト.size() > index) {
-            ShokanHaraiShukkeJyoho 償還払集計情報 = this.償還払集計情報リスト.get(index);
+            ShokanKihonJihoEntiy 償還払集計情報 = this.償還払集計情報リスト.get(index);
             source.listKyufuhiNaiyo_1 = 償還払集計情報.getサービス提供年月().wareki().toDateString();
             source.listKyufuhiNaiyo_2 = 償還払集計情報.getサービス種類コード();
-            source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(償還払集計情報.get支払金額(), 0);
+            source.listKyufuhiNaiyo_3 = DecimalFormatter.toコンマ区切りRString(new Decimal(償還払集計情報.get支払金額()), 0);
             source.kyufugakuGokei = DecimalFormatter.toコンマ区切りRString(get給付額合計(), 0);
         }
         ShiharaiHohoHenkoTaino 支払方法変更滞納 = this.帳票情報.getShiharaiHohoHenkoTainoList().get(index);
@@ -201,7 +202,7 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
 
     private Decimal get給付額合計() {
         Decimal 給付額合計 = Decimal.ZERO;
-        for (ShokanHaraiShukkeJyoho 償還払集計情報 : 償還払集計情報リスト) {
+        for (ShokanKihonJihoEntiy 償還払集計情報 : 償還払集計情報リスト) {
             給付額合計 = 給付額合計.add(償還払集計情報.get支払金額());
         }
         return 給付額合計;
@@ -246,8 +247,8 @@ public class TainoHokenryoKojoTsuchishoEditor implements ITainoHokenryoKojoTsuch
         }
     }
 
-    private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(個人情報, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin 個人情報, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(個人情報, 帳票制御共通, 地方公共団体);
     }
 
     private void setAccessLogEditor(TainoHokenryoKojoTsuchishoReportSource source) {

@@ -74,6 +74,22 @@
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
             ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = dbV1001."shikibetsuCode"
+             <if test="is年齢">
+                <if test="has年齢範囲開始">
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                </if>
+                <if test="has年齢範囲終了">
+                    AND  #{生年月日範囲開始} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+                </if>
+            </if>
+            <if test="is生年月日">
+                <if test="has生年月日範囲開始">
+                    AND  #{生年月日範囲開始} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+                </if>
+                <if test="has生年月日範囲終了">
+                    AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日範囲終了}
+                </if>
+            </if>
         INNER JOIN
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
             ON "Atesaki"."shikibetsuCode" = dbV1001."shikibetsuCode"

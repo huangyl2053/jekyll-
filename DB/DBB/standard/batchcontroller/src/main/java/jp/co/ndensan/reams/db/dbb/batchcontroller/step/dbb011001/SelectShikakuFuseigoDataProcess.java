@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.SelectShikakuFuseigoDataProcessParameter;
-import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifuka.TokuchoKariSanteiFukaManager;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifuka.TokuchoKariSanteiFukaManagerBatch;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
  */
 public class SelectShikakuFuseigoDataProcess extends SimpleBatchProcessBase {
 
-    private TokuchoKariSanteiFukaManager manager;
+    private TokuchoKariSanteiFukaManagerBatch manager;
     private SelectShikakuFuseigoDataProcessParameter parameter;
 
     @Override
     protected void beforeExecute() {
-        manager = TokuchoKariSanteiFukaManager.createInstance();
+        manager = TokuchoKariSanteiFukaManagerBatch.createInstance();
     }
 
     @Override

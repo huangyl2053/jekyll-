@@ -74,6 +74,7 @@ public class RenrakuhyoDataCreatorHandler {
      * @param 算定基準額 算定基準額
      * @param is非該当 is非該当
      * @param 介護賦課 介護賦課
+     * @param 基準日 基準日
      */
     public void onLoad(
             TaishoshaKey 資格対象者キー,
@@ -83,13 +84,14 @@ public class RenrakuhyoDataCreatorHandler {
             List<HokenryoDankai> 保険料段階情報,
             Decimal 算定基準額,
             boolean is非該当,
-            Fuka 介護賦課) {
+            Fuka 介護賦課,
+            FlexibleDate 基準日) {
         div.getCcdKaigoAtenaInfo().initialize(資格対象者キー.get識別コード());
         div.getCcdKaigoShikakuKihon().initialize(資格対象者キー.get識別コード());
         if (is非該当) {
-            set非該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当);
+            set非該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当, 基準日);
         } else {
-            set該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当);
+            set該当の項目設定(支払方法変更, 利用者負担額, 負担限度額, 保険料段階情報, 算定基準額, 介護賦課, is非該当, 基準日);
         }
     }
 
@@ -100,9 +102,11 @@ public class RenrakuhyoDataCreatorHandler {
      * @param is非該当 is非該当
      * @param 受給者台帳 受給者台帳
      * @param 被保険者台帳 被保険者台帳
+     * @param 基準日 基準日
      * @return KaigoHokenRenrakuhyoHold
      */
-    public KaigoHokenRenrakuhyoHold set帳票の項目(FutangakuGengakuBusiness 負担限度額, boolean is非該当, JukyushaDaichoAlive 受給者台帳, HihokenshaDaichoAlive 被保険者台帳) {
+    public KaigoHokenRenrakuhyoHold set帳票の項目(FutangakuGengakuBusiness 負担限度額, boolean is非該当,
+            JukyushaDaichoAlive 受給者台帳, HihokenshaDaichoAlive 被保険者台帳, FlexibleDate 基準日) {
         KaigoHokenRenrakuhyoHold 帳票の項目 = new KaigoHokenRenrakuhyoHold();
         KyufuGengakuKisai 給付減額 = new KyufuGengakuKisai();
         KyojuhiFutanGendogakuKisai 居住費の負担限度額 = new KyojuhiFutanGendogakuKisai();
@@ -113,18 +117,18 @@ public class RenrakuhyoDataCreatorHandler {
         IShikibetsuTaisho taisho = div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getAtenaShokaiSimpleData().getShikibetsuTaishoHisory().get直近();
         IKojin kojin = taisho.to個人();
         帳票の項目.set個人(kojin);
-        帳票の項目.set連絡票作成日(FlexibleDate.getNowDate());
+        帳票の項目.set連絡票作成日(基準日);
         if (負担限度額 == null) {
             居住費の負担限度額.set居住費の記載あり(false);
             食費の_特定_負担限度額.set食費の記載あり(false);
             帳票の項目.set旧措置者区分(new Code(new RString("0")));
-            帳票の項目.set利用者負担段階Code(new Code(RiyoshaFutanDankai.第1段階.getコード()));
+            帳票の項目.set利用者負担段階(new Code(RiyoshaFutanDankai.第1段階.getコード()));
             食費の_特定_負担限度額.set対象者食費負担限度額(Decimal.ZERO);
         } else {
             食費の_特定_負担限度額.set食費の記載あり(true);
             居住費の負担限度額.set居住費の記載あり(true);
             帳票の項目.set旧措置者区分(new Code(負担限度額.get旧措置者区分()));
-            帳票の項目.set利用者負担段階Code(new Code(負担限度額.get利用者負担段階()));
+            帳票の項目.set利用者負担段階(new Code(負担限度額.get利用者負担段階()));
             食費の_特定_負担限度額.set対象者食費負担限度額(負担限度額.get食費負担限度額());
         }
 
@@ -134,13 +138,24 @@ public class RenrakuhyoDataCreatorHandler {
             介護保険料.set介護保険料の記載あり(true);
             介護保険料.set対象者保険料段階区分(div.getDankaiKubunSelected());
         }
-        for (dgKaigoHokenryo_Row row : div.getDgKaigoHokenryo().getDataSource()) {
-            Hokenryo hokenryo = new Hokenryo();
-            hokenryo.set段階区分(row.getDankaiKubun());
-            hokenryo.set特例表記(row.getTokureiHyoki());
-            hokenryo.set保険料額(row.getHokenryo().getValue());
-            hokenryo.set保険料段階(row.getDankai());
-            保険料段階一覧.add(hokenryo);
+        if (is非該当) {
+            for (dgKaigoHokenryo_Row row : div.getDgKaigoHokenryo().getDataSource()) {
+                Hokenryo hokenryo = new Hokenryo();
+                hokenryo.set段階区分(row.getDankaiKubun());
+                hokenryo.set特例表記(row.getTokureiHyoki());
+                hokenryo.set保険料額(row.getHokenryo().getValue());
+                hokenryo.set保険料段階(row.getDankai());
+                保険料段階一覧.add(hokenryo);
+            }
+        } else {
+            for (dgKaigoHokenryoGaitosha_Row row : div.getDgKaigoHokenryoGaitosha().getDataSource()) {
+                Hokenryo hokenryo = new Hokenryo();
+                hokenryo.set段階区分(row.getDankaiKubun());
+                hokenryo.set特例表記(row.getTokureiHyoki());
+                hokenryo.set保険料額(row.getHokenryo().getValue());
+                hokenryo.set保険料段階(row.getDankai());
+                保険料段階一覧.add(hokenryo);
+            }
         }
         介護保険料.set保険料段階一覧(保険料段階一覧);
         帳票の項目.set給付減額などの記載(給付減額);
@@ -160,14 +175,13 @@ public class RenrakuhyoDataCreatorHandler {
         return 帳票の項目;
     }
 
-    private void set非該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額, List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当) {
+    private void set非該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額,
+            List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当, FlexibleDate 基準日) {
         TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度 = new TokuteiNyushoshaFutanGendoNichigakuGetter();
         Decimal 利用者負担金額 = new Decimal(0);
         if (利用者負担額 != null) {
             利用者負担金額 = 利用者負担額;
         }
-        FlexibleDate 基準日 = FlexibleDate.getNowDate();
-
         div.getTxtRenrakuhyoSakuseiDate().setValue(基準日);
         if (is給付額減額の記載有無(支払方法変更)) {
             div.getRadKyuhugakuGengakuUmu().setSelectedKey(給付額減額記載_有);
@@ -241,14 +255,13 @@ public class RenrakuhyoDataCreatorHandler {
         set非該当高額介護サービス費額(算定基準額);
     }
 
-    private void set該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額, List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当) {
+    private void set該当の項目設定(ShiharaiHohoHenko 支払方法変更, Decimal 利用者負担額, FutangakuGengakuBusiness 負担限度額,
+            List<HokenryoDankai> 保険料段階情報, Decimal 算定基準額, Fuka 介護賦課, boolean is非該当, FlexibleDate 基準日) {
         TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度 = new TokuteiNyushoshaFutanGendoNichigakuGetter();
         Decimal 利用者負担金額 = new Decimal(0);
         if (利用者負担額 != null) {
             利用者負担金額 = 利用者負担額;
         }
-        FlexibleDate 基準日 = FlexibleDate.getNowDate();
-
         div.getTxtRenrakuhyoSakuseiDateGaitosha().setValue(基準日);
         if (is給付額減額の記載有無(支払方法変更)) {
             div.getRadKyuhugakuGengakuUmuGaitosha().setSelectedKey(給付額減額記載_有);
@@ -287,7 +300,7 @@ public class RenrakuhyoDataCreatorHandler {
             div.getTxtKijunHiyogakuTashoshitsuGaitosha().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get多床室_基準費用額(基準日))));
             div.getTxtKijunHiyogakuTokuyoGaitosha().setValue(set金額フォマート(toDecimal(特定入所者負担限度.get従個特養_基準費用額(基準日))));
             set該当黄色(利用者負担段階, 特定入所者負担限度, 基準日, 負担限度額);
-            set該当食事の負担限度(基準日, 旧措置者区分, 特定入所者負担限度);
+            set該当食事の負担限度(基準日, 特定入所者負担限度);
             if (食費負担限度額 != null) {
                 利用者負担金額 = 食費負担限度額;
             }
@@ -379,12 +392,30 @@ public class RenrakuhyoDataCreatorHandler {
             div.getDgKaigoHokenryoGaitosha().setDataSource(gaitoshaRowList);
         }
         if (介護賦課 != null) {
-            for (dgKaigoHokenryo_Row row : rowList) {
-                if (介護賦課.get保険料段階().equals(row.getDankaiKubun())) {
-                    row.setSelected(Boolean.TRUE);
-                    div.setDankaiKubunSelected(row.getDankaiKubun());
-                    div.setKaigoHokenryoSelected(new RString("selected"));
-                }
+            if (is非該当) {
+                set非該当保険料段階選択(介護賦課, rowList);
+            } else {
+                set該当保険料段階選択(介護賦課, gaitoshaRowList);
+            }
+        }
+    }
+
+    private void set非該当保険料段階選択(Fuka 介護賦課, List<dgKaigoHokenryo_Row> rowList) {
+        for (dgKaigoHokenryo_Row row : rowList) {
+            if (介護賦課.get保険料段階().equals(row.getDankaiKubun())) {
+                row.setSelected(Boolean.TRUE);
+                div.setDankaiKubunSelected(row.getDankaiKubun());
+                div.setKaigoHokenryoSelected(new RString("selected"));
+            }
+        }
+    }
+
+    private void set該当保険料段階選択(Fuka 介護賦課, List<dgKaigoHokenryoGaitosha_Row> gaitoshaRowList) {
+        for (dgKaigoHokenryoGaitosha_Row row : gaitoshaRowList) {
+            if (介護賦課.get保険料段階().equals(row.getDankaiKubun())) {
+                row.setSelected(Boolean.TRUE);
+                div.setDankaiKubunSelected(row.getDankaiKubun());
+                div.setKaigoHokenryoSelected(new RString("selected"));
             }
         }
     }
@@ -433,7 +464,7 @@ public class RenrakuhyoDataCreatorHandler {
         }
     }
 
-    private void set該当食事の負担限度(FlexibleDate 基準日, Code 旧措置者区分, TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度) {
+    private void set該当食事の負担限度(FlexibleDate 基準日, TokuteiNyushoshaFutanGendoNichigakuGetter 特定入所者負担限度) {
         List<KeyValueDataSource> 負担限度日額 = new ArrayList<>();
         RString 負担限度金額_食費１ = 金額転換(特定入所者負担限度.get旧措軽減食費１(基準日).split(","));
         RString 負担限度金額_食費２ = 金額転換(特定入所者負担限度.get旧措軽減食費２(基準日).split(","));

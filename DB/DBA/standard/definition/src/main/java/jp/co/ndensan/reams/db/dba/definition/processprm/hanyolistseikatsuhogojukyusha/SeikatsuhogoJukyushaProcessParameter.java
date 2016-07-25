@@ -220,6 +220,12 @@ public class SeikatsuhogoJukyushaProcessParameter implements IBatchProcessParame
                 chushutsunichiTo,
                 fujoShurui,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                psmChushutsuAge_Start,
+                psmChushutsuAge_End,
+                psmSeinengappiYMD_Start,
+                psmSeinengappiYMD_End,
+                psmAgeKijunni,
+                psmChushutsu_Kubun);
     }
 }

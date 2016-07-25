@@ -48,6 +48,20 @@ public class DeletePanelValidationHandler {
     }
 
     /**
+     * 「削除」ボタンを押下する場合、イメージファイル存在チェックを実行します。
+     *
+     * @param 存在したイメージファイル名 存在したイメージファイル名
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs イメージファイル存在チェック(List<RString> 存在したイメージファイル名) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (存在したイメージファイル名 == null || 存在したイメージファイル名.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.存在しない));
+        }
+        return validationMessages;
+    }
+
+    /**
      * 「削除」ボタンを押下する場合、調査票(概況+調査票特記)のイメージファイル存在チェックを実行します。
      *
      * @return ValidationMessageControlPairs
@@ -115,6 +129,7 @@ public class DeletePanelValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
+        存在しない(UrErrorMessages.存在しない, "イメージファイル"),
         調査票特記存在しない(UrErrorMessages.存在しない, "調査票(概況+調査票特記)のイメージファイル"),
         調査票概況存在しない(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
         主治医意見書存在しない(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),

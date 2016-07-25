@@ -39,7 +39,7 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
      */
     public HiyobenshotoShiharaimeisaisho getHiyobenshotoShiharaiMeisai(HiyobenshotoShiharaimeisaisho meisaisho,
             HoshuShiharaiJunbiRelateEntity entity, List<Koza> koza, int index, RString 対象期間, RString 振込予定日) {
-        Decimal 差引支払額 = new Decimal(entity.getHoshu()).subtract(entity.getShinsakaiKojoZeigaku());
+        Decimal 差引支払額 = new Decimal(entity.getHoshu()).subtract(entity.getShinsakaiKojoZeigaku()).roundUpTo(0);
         if (index % INDEX_4 == 1) {
             if (entity.getShinsakaiIinShimei() != null) {
                 meisaisho.set審査会委員氏名1(entity.getShinsakaiIinShimei().value());
@@ -48,7 +48,7 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set費用弁償1(new RString(entity.getShinsakaiKotsuhi()));
             meisaisho.set所得税1(new RString(entity.getShinsakaiKojoZeigaku()));
             meisaisho.set差引支払額1(decimalToRString(差引支払額));
-            meisaisho.set小計1(decimalToRString(差引支払額.add(entity.getHoshu())));
+            meisaisho.set小計1(decimalToRString(差引支払額.add(entity.getHoshu()).roundUpTo(0)));
             meisaisho.set審査会出席回数1(new RString(entity.getX5603_count()));
             meisaisho.set市町村名称1(entity.getShichosonMeisho());
             meisaisho.set対象期間1(対象期間);
@@ -67,7 +67,7 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set費用弁償2(new RString(entity.getShinsakaiKotsuhi()));
             meisaisho.set所得税2(new RString(entity.getShinsakaiKojoZeigaku()));
             meisaisho.set差引支払額2(decimalToRString(差引支払額));
-            meisaisho.set小計2(decimalToRString(差引支払額.add(entity.getHoshu())));
+            meisaisho.set小計2(decimalToRString(差引支払額.add(entity.getHoshu()).roundUpTo(0)));
             meisaisho.set審査会出席回数2(new RString(entity.getX5603_count()));
             meisaisho.set市町村名称2(entity.getShichosonMeisho());
             meisaisho.set対象期間2(対象期間);
@@ -86,7 +86,7 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set費用弁償3(new RString(entity.getShinsakaiKotsuhi()));
             meisaisho.set所得税3(new RString(entity.getShinsakaiKojoZeigaku()));
             meisaisho.set差引支払額3(decimalToRString(差引支払額));
-            meisaisho.set小計3(decimalToRString(差引支払額.add(entity.getHoshu())));
+            meisaisho.set小計3(decimalToRString(差引支払額.add(entity.getHoshu()).roundUpTo(0)));
             meisaisho.set審査会出席回数3(new RString(entity.getX5603_count()));
             meisaisho.set市町村名称3(entity.getShichosonMeisho());
             meisaisho.set対象期間3(対象期間);
@@ -105,7 +105,7 @@ public class HiyobenshotoShiharaiMeisaishoEdit {
             meisaisho.set費用弁償4(new RString(entity.getShinsakaiKotsuhi()));
             meisaisho.set所得税4(new RString(entity.getShinsakaiKojoZeigaku()));
             meisaisho.set差引支払額4(decimalToRString(差引支払額));
-            meisaisho.set小計4(decimalToRString(差引支払額.add(entity.getHoshu())));
+            meisaisho.set小計4(decimalToRString(差引支払額.add(entity.getHoshu()).roundUpTo(0)));
             meisaisho.set審査会出席回数4(new RString(entity.getX5603_count()));
             meisaisho.set市町村名称4(entity.getShichosonMeisho());
             meisaisho.set対象期間4(対象期間);

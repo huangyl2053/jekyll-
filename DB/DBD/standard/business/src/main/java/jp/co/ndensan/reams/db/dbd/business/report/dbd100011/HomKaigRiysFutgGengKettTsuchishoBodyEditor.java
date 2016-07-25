@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -41,8 +42,8 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
     private final static int INDEX_9 = 9;
     private final static int INDEX_10 = 10;
     private final static int INDEX_11 = 11;
+    private final static int INDEX_13 = 13;
     private final static int INDEX_14 = 14;
-    private final static int INDEX_15 = 15;
 
     private final HomKaigRiysFutgGengKettTsuchishoItem item;
 
@@ -73,7 +74,7 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.title2 = RString.EMPTY;
         set通知書定型文(source, INDEX_1, item, 通知文);
 
-        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通());
+        EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通(), item.get地方公共団体());
         source.hihokenshaName = 編集後個人.get名称().getName().getColumnValue();
         source.hihokenshaNo1 = item.get訪問介護利用者負担額減額().get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
         source.hihokenshaNo2 = item.get訪問介護利用者負担額減額().get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
@@ -183,28 +184,28 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         Class reportSource = source.getClass();
         for (int i = 0; i <= 通知書定型文List.size(); i++) {
             try {
-                if (index == INDEX_2) {
+                if (index == INDEX_1) {
                     reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_1))).set(source, 通知書定型文List.get(i));
                     if (i == INDEX_1) {
                         break;
                     }
-                } else if (index == INDEX_3 && (通知文).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_2))).set(source, 通知書定型文List.get(i + INDEX_2));
-                } else if ((通知文Large).equals(taisyou)) {
+                } else if (index == INDEX_2 && (通知文).equals(taisyou)) {
                     reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
-                } else if (index == INDEX_3 && (通知文混在).equals(taisyou)) {
+                } else if (index == INDEX_2 && (通知文Large).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
+                } else if (index == INDEX_2 && (通知文混在).equals(taisyou)) {
                     reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
                     if (i == INDEX_11) {
                         break;
                     }
-                } else if (index == INDEX_4 && (通知文混在).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_15))).set(source, 通知書定型文List.get(i + INDEX_14));
-                } else if (index == INDEX_3 && (通知文混在２).equals(taisyou)) {
+                } else if (index == INDEX_3 && (通知文混在).equals(taisyou)) {
+                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_14))).set(source, 通知書定型文List.get(i + INDEX_13));
+                } else if (index == INDEX_2 && (通知文混在２).equals(taisyou)) {
                     reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
                     if (i == INDEX_6) {
                         break;
                     }
-                } else if (index == INDEX_4 && (通知文混在２).equals(taisyou)) {
+                } else if (index == INDEX_3 && (通知文混在２).equals(taisyou)) {
                     reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_10))).set(source, 通知書定型文List.get(i + INDEX_9));
                 }
             } catch (IllegalAccessException | NoSuchFieldException ex) {
@@ -265,7 +266,7 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
         source.customerBarCode = sofubutsuAtesakiSource.customerBarCode;
     }
 
-    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new EditedKojin(kojin, 帳票制御共通);
+    private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
+        return new EditedKojin(kojin, 帳票制御共通, 地方公共団体);
     }
 }

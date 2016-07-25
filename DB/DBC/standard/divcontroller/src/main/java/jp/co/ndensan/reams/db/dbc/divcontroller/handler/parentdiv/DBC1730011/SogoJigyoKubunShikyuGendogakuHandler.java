@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1730011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoKubunShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoKubunShikyuGendoGakuBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyokubun.SogoJigyoKubunEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1730011.SogoJigyoKubunShikyuGendogakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1730011.dgShikyuGendogaku_Row;
@@ -25,14 +24,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
  */
 public class SogoJigyoKubunShikyuGendogakuHandler {
 
-    private final SogoJigyoKubunShikyuGendogakuDiv div;
-
-    private static final int 履歴番号 = 1;
     private static final RString 要支援1 = new RString("12");
     private static final RString 要支援2 = new RString("13");
     private static final RString 二次予防 = new RString("01");
     private static final RString 登録 = new RString("登録モード");
     private static final RString 修正 = new RString("修正モード");
+
+    private static final int 履歴番号 = 1;
+
+    private final SogoJigyoKubunShikyuGendogakuDiv div;
 
     /**
      * コンストラクタです。
@@ -62,9 +62,11 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
             } else {
                 entity = result.get二次予防();
             }
-            row.getTekiyoKaishi().setValue(new RDate(entity.get適用開始年月().getYearValue(), entity.get適用開始年月().getMonthValue(), 1));
+            row.getTekiyoKaishi().setValue(new RDate(entity.get適用開始年月().getYearValue(),
+                    entity.get適用開始年月().getMonthValue(), 1));
             if (entity.get適用終了年月() != null) {
-                row.getTekiyoShuryo().setValue(new RDate(entity.get適用終了年月().getYearValue(), entity.get適用終了年月().getMonthValue(), 1));
+                row.getTekiyoShuryo().setValue(new RDate(entity.get適用終了年月().getYearValue(),
+                        entity.get適用終了年月().getMonthValue(), 1));
             }
             if (result.get要支援1() != null) {
                 row.getYoShien1().setValue(result.get要支援1().get支給限度単位数());
@@ -89,6 +91,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
         setBtn非活性();
         set詳細可入力();
         clear詳細内容();
+        div.getTxtTekiyoShuryoYM().setReadOnly(true);
     }
 
     /**
@@ -143,6 +146,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
         set詳細可入力();
         set選択行内容表示();
         div.getTxtTekiyoKaishiYM().setReadOnly(true);
+        div.getTxtTekiyoShuryoYM().setReadOnly(true);
     }
 
     /**
@@ -181,36 +185,6 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
         }
     }
 
-    private SogoJigyoKubunShikyuGendoGaku get総合事業区分要支援1情報() {
-        SogoJigyoKubunShikyuGendoGaku result = new SogoJigyoKubunShikyuGendoGaku(要支援1, new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString()), 履歴番号);
-        SogoJigyoKubunShikyuGendoGakuBuilder builder = result.createBuilderForEdit();
-        if (div.getTxtTekiyoShuryoYM().getDomain() != null) {
-            builder.set適用終了年月(new FlexibleYearMonth(div.getTxtTekiyoShuryoYM().getDomain().toDateString()));
-        }
-        builder.set支給限度単位数(div.getTxtYoShien1().getValue());
-        return builder.build();
-    }
-
-    private SogoJigyoKubunShikyuGendoGaku get総合事業区分要支援2情報() {
-        SogoJigyoKubunShikyuGendoGaku result = new SogoJigyoKubunShikyuGendoGaku(要支援2, new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString()), 履歴番号);
-        SogoJigyoKubunShikyuGendoGakuBuilder builder = result.createBuilderForEdit();
-        if (div.getTxtTekiyoShuryoYM().getDomain() != null) {
-            builder.set適用終了年月(new FlexibleYearMonth(div.getTxtTekiyoShuryoYM().getDomain().toDateString()));
-        }
-        builder.set支給限度単位数(div.getTxtYoShien2().getValue());
-        return builder.build();
-    }
-
-    private SogoJigyoKubunShikyuGendoGaku get総合事業区分二次予防情報() {
-        SogoJigyoKubunShikyuGendoGaku result = new SogoJigyoKubunShikyuGendoGaku(二次予防, new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString()), 履歴番号);
-        SogoJigyoKubunShikyuGendoGakuBuilder builder = result.createBuilderForEdit();
-        if (div.getTxtTekiyoShuryoYM().getDomain() != null) {
-            builder.set適用終了年月(new FlexibleYearMonth(div.getTxtTekiyoShuryoYM().getDomain().toDateString()));
-        }
-        builder.set支給限度単位数(div.getTxtNijiYobo().getValue());
-        return builder.build();
-    }
-
     /**
      * DBへの保存処理です。
      *
@@ -218,12 +192,44 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
      * @param 保存モード RString
      * @param manager SogoJigyoKubunShikyuGendoGakuManager
      */
-    public void save(List<SogoJigyoKubunEntity> 総合事業区分情報, RString 保存モード, SogoJigyoKubunShikyuGendoGakuManager manager) {
+    public void save(List<SogoJigyoKubunEntity> 総合事業区分情報, RString 保存モード,
+            SogoJigyoKubunShikyuGendoGakuManager manager) {
 
         if (登録.equals(保存モード)) {
-            manager.save介護予防_日常生活支援総合事業区分支給限度額(get総合事業区分要支援1情報());
-            manager.save介護予防_日常生活支援総合事業区分支給限度額(get総合事業区分要支援2情報());
-            manager.save介護予防_日常生活支援総合事業区分支給限度額(get総合事業区分二次予防情報());
+            SogoJigyoKubunEntity entityFirst = 総合事業区分情報.get(0);
+            SogoJigyoKubunEntity entityLast = 総合事業区分情報.get(総合事業区分情報.size() - 1);
+            FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString());
+            SogoJigyoKubunShikyuGendoGaku 要支援1Entity = new SogoJigyoKubunShikyuGendoGaku(要支援1, 適用開始年月, 履歴番号);
+            SogoJigyoKubunShikyuGendoGaku 要支援2Entity = new SogoJigyoKubunShikyuGendoGaku(要支援2, 適用開始年月, 履歴番号);
+            SogoJigyoKubunShikyuGendoGaku 二次予防Entity = new SogoJigyoKubunShikyuGendoGaku(二次予防, 適用開始年月, 履歴番号);
+            if (!適用開始年月.isBeforeOrEquals(entityFirst.get要支援1().get適用開始年月())) {
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue()).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue()).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue()).build();
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援1Entity.added());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援2Entity.added());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(二次予防Entity.added());
+                要支援1Entity = entityFirst.get要支援1();
+                要支援2Entity = entityFirst.get要支援2();
+                二次予防Entity = entityFirst.get二次予防();
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援1Entity.modified());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援2Entity.modified());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(二次予防Entity.modified());
+            }
+            if (適用開始年月.isBefore(entityLast.get要支援1().get適用開始年月())) {
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue())
+                        .set適用終了年月(entityLast.get要支援1().get適用開始年月().minusMonth(1)).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue())
+                        .set適用終了年月(entityLast.get要支援1().get適用開始年月().minusMonth(1)).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue())
+                        .set適用終了年月(entityLast.get要支援1().get適用開始年月().minusMonth(1)).build();
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援1Entity.added());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援2Entity.added());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(二次予防Entity.added());
+            }
         } else {
             SogoJigyoKubunEntity sogoJigyoKubunEntity = null;
             FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString());
@@ -257,7 +263,9 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
     }
 
     private void modify情報(SogoJigyoKubunShikyuGendoGakuManager manager, SogoJigyoKubunShikyuGendoGaku 要支援1Entity,
-            SogoJigyoKubunShikyuGendoGaku 要支援2Entity, SogoJigyoKubunShikyuGendoGaku 二次予防Entity, FlexibleYearMonth 適用開始年月) {
+            SogoJigyoKubunShikyuGendoGaku 要支援2Entity, SogoJigyoKubunShikyuGendoGaku 二次予防Entity,
+            FlexibleYearMonth 適用開始年月) {
+
         if (要支援1Entity == null) {
             要支援1Entity = new SogoJigyoKubunShikyuGendoGaku(要支援1, 適用開始年月, 履歴番号);
             if (div.getTxtTekiyoShuryoYM().getDomain() != null) {

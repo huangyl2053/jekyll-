@@ -6,10 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.service.tokuchosoufujohosakuseibatch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiResult;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshaichiransakusei.IUeT0511Mapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -17,13 +21,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UeT0511NenkinTokuchoKaifuJohoDac;
+import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
+import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -37,12 +40,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 徴収方法更新のクラスです。
  *
- * @reamsid_L DBB-9070-010 huangyanan
+ * @reamsid_L DBB-1830-050 liuyang
  */
 public class TokuChoSoufuJohoSakuseiBatch {
 
-    private final RString 年度_2016 = new RString("2016");
-    private final RString 年度_2015 = new RString("2015");
     private final RString 月2 = new RString("02");
     private final RString 月4 = new RString("04");
     private final RString 月6 = new RString("06");
@@ -91,8 +92,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private final FlexibleYear 年度 = new FlexibleYear("0000");
     private final MapperProvider mapperProvider;
     private final DbT7022ShoriDateKanriDac 処理日付管理マスタdac;
-    private final UeT0511NenkinTokuchoKaifuJohoDac 年金特徴回付情報_介護継承dac;
     private final ITokuChoSoufuJohoSakuseiMapper mapper;
+    private final IUeT0511Mapper uet0511Mapper;
 
     /**
      * コンストラクタです。
@@ -100,8 +101,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     TokuChoSoufuJohoSakuseiBatch() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         処理日付管理マスタdac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
-        年金特徴回付情報_介護継承dac = InstanceProvider.create(UeT0511NenkinTokuchoKaifuJohoDac.class);
         mapper = mapperProvider.create(ITokuChoSoufuJohoSakuseiMapper.class);
+        uet0511Mapper = mapperProvider.create(IUeT0511Mapper.class);
     }
 
     /**
@@ -122,90 +123,75 @@ public class TokuChoSoufuJohoSakuseiBatch {
      * @param 遷移元メニュー RString
      * @return List<UeT0511NenkinTokuchoKaifuJohoEntity>
      */
-    public List<UeT0511NenkinTokuchoKaifuJohoEntity> selectNenkinTokuChoKaifuJoho(FlexibleYear 処理年度, RDate 特徴開始月, RString 遷移元メニュー) {
+    public List<UeT0511NenkinTokuchoKaifuJohoEntity> selectNenkinTokuChoKaifuJoho(
+            FlexibleYear 処理年度, RDate 特徴開始月, RString 遷移元メニュー) {
         if (特徴開始月 == null || 処理年度 == null) {
             return new ArrayList();
         }
+        TokuchoSeidokanIFSakuseiMyBatisParameter param = new TokuchoSeidokanIFSakuseiMyBatisParameter(処理年度);
         int 特徴開始年数 = 特徴開始月.getYearValue();
         RString 特徴開始月数 = DateConverter.formatMonthFull(特徴開始月.getMonthValue());
         List<UeT0511NenkinTokuchoKaifuJohoEntity> resultList = null;
-        if (特徴制度間IF作成.equals(遷移元メニュー)) {
-            FlexibleYear 入力処理年度 = null;
-            RString 通知内容コード = null;
-            RString 捕捉月 = RString.EMPTY;
-            if (月8.equals(特徴開始月数)) {
-                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
-                通知内容コード = RS30;
-                捕捉月 = 月2;
-            } else if (月10.equals(特徴開始月数)) {
-                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
-                通知内容コード = RS00;
-                捕捉月 = 月4;
-            } else if (月12.equals(特徴開始月数)) {
-                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
-                通知内容コード = RS30;
-                捕捉月 = 月6;
-            } else if (月2.equals(特徴開始月数)) {
-                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
-                通知内容コード = RS30;
-                捕捉月 = 月8;
-            } else if (月4.equals(特徴開始月数)) {
-                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
-                通知内容コード = RS30;
-                捕捉月 = 月10;
-            } else if (月6.equals(特徴開始月数)) {
-                入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
-                通知内容コード = RS30;
-                捕捉月 = 月12;
-            }
-            resultList = 年金特徴回付情報_介護継承dac.
-                    select特徴回付情報のデータ(GyomuCode.DB介護保険, 通知内容コード, 入力処理年度, 捕捉月);
-        } else if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
-            List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist = get抽出するデータ(特徴開始月数, 処理年度);
-            resultList = 年金特徴回付情報_介護継承dac.select全件特徴回付情報のデータ(GyomuCode.DB介護保険, uet0511entitylist);
-        }
-        return resultList;
-    }
+        List<jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> results = null;
 
-    private List<UeT0511NenkinTokuchoKaifuJohoEntity> get抽出するデータ(RString 特徴開始月数, FlexibleYear 処理年度) {
-        FlexibleYear 処理前年度 = 処理年度.minusYear(NUM1);
-        List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist = new ArrayList();
-        if (月4.equals(特徴開始月数)) {
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月10));
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月8));
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
-            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
-        } else if (月6.equals(特徴開始月数)) {
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月12));
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月10));
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月8));
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
-            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
-        } else if (月8.equals(特徴開始月数)) {
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月2));
-            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月12));
-            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月10));
-            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月8));
-            addToList(uet0511entitylist, 処理前年度, RS30, 処理前年度.toDateString().concat(月6));
-            addToList(uet0511entitylist, 処理前年度, RS00, 処理前年度.toDateString().concat(月4));
+        FlexibleYear 入力処理年度 = null;
+        RString 通知内容コード = null;
+        RString 捕捉月 = RString.EMPTY;
+        if (月8.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                results = uet0511Mapper.selectAug(param);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS30;
+            捕捉月 = 月2;
         } else if (月10.equals(特徴開始月数)) {
-            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                results = uet0511Mapper.selectOct(param);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS00;
+            捕捉月 = 月4;
         } else if (月12.equals(特徴開始月数)) {
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
-            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                results = uet0511Mapper.selectDec(param);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS30;
+            捕捉月 = 月6;
         } else if (月2.equals(特徴開始月数)) {
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月8));
-            addToList(uet0511entitylist, 処理年度, RS30, 処理年度.toDateString().concat(月6));
-            addToList(uet0511entitylist, 処理年度, RS00, 処理年度.toDateString().concat(月4));
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                results = uet0511Mapper.selectFeb(param);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月8;
+        } else if (月4.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                results = uet0511Mapper.selectApr(param);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月10;
+        } else if (月6.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                results = uet0511Mapper.selectJun(param);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月12;
         }
-        return uet0511entitylist;
+        if (特徴制度間IF作成.equals(遷移元メニュー)) {
+            results = uet0511Mapper.select(new TokuchoSeidokanIFSakuseiMyBatisParameter(
+                    入力処理年度, 通知内容コード, 捕捉月));
+        }
+        return results;
     }
 
     private void addToList(List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist, FlexibleYear 処理年度,
             RString 通知内容コード, RString 捕捉年月) {
         UeT0511NenkinTokuchoKaifuJohoEntity entity = new UeT0511NenkinTokuchoKaifuJohoEntity();
         entity.setShoriNendo(処理年度);
-        entity.setTsuchiNaiyoCode(通知内容コード);
+        entity.setTsuchiNaiyoCode(new TsuchiNaiyoCode(通知内容コード));
         RString 捕捉月 = RString.isNullOrEmpty(捕捉年月) ? RString.EMPTY : 捕捉年月.substring(NUM4, NUM6);
         entity.setHosokuTsuki(捕捉月);
         uet0511entitylist.add(entity);
@@ -262,6 +248,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
         List<TokuChoSoufuJohoSakuseiResult> resultlist = TokuChoSoufuJohoSakuseiResult.getTokuChoSoufuJohoSakuseiResultList(resultentitylist);
         int 連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度).next();
         int シーケンス = NUM1;
+        Map<RString, Integer> シーケンスMap = new HashMap<>();
         for (TokuChoSoufuJohoSakuseiResult entity : resultlist) {
             UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity = new UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity();
             tokuchotempentity.setRenban(連番);
@@ -272,13 +259,16 @@ public class TokuChoSoufuJohoSakuseiBatch {
             if (基礎年金番号 == null || 年金コード == null) {
                 tokuchotempentity.setSeq(シーケンス);
                 シーケンス = NUM1;
-            } else if (Integer.parseInt(年金コード.toString()) < Integer.parseInt(基礎年金番号.toString())
-                    && Integer.parseInt(基礎年金番号.toString()) < 連番) {
-                tokuchotempentity.setSeq(シーケンス);
-                シーケンス = シーケンス + NUM1;
             } else {
+                RString key = new RString(連番).concat(基礎年金番号).concat(年金コード);
+                if (シーケンスMap.containsKey(key)) {
+                    シーケンス = シーケンスMap.get(key);
+                    シーケンスMap.put(key, シーケンス + NUM1);
+                } else {
+                    シーケンスMap.put(key, NUM1);
+                    シーケンス = NUM1;
+                }
                 tokuchotempentity.setSeq(シーケンス);
-                シーケンス = NUM1;
             }
             tokuchotempentity.setShoriTimestamp(処理日時);
             tokuchotempentity.setDtCityCode(entity.get対象者の情報().getDT市町村コード());
@@ -490,7 +480,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
             年度 = 処理年度;
             年度内年番 = RS0005;
             処理名 = 依頼金額計算;
-        } else if (月2.equals(特徴開始月数)) {
+        } else if (月4.equals(特徴開始月数)) {
             年度 = 処理年度;
             年度内年番 = RS0006;
             処理名 = 依頼金額計算;

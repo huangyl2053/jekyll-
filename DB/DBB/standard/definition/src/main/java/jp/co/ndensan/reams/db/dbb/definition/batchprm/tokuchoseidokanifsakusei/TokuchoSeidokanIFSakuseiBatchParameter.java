@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,6 +26,7 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
     private FlexibleYear 処理年度;
     private RDate 特別徴収開始年月;
     private RString 遷移元メニュー;
+    private final RDateTime システム日時;
 
     /**
      * コンストラクタです。
@@ -37,12 +39,14 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
         this.処理年度 = 処理年度;
         this.特別徴収開始年月 = 特別徴収開始年月;
         this.遷移元メニュー = 遷移元メニュー;
+        システム日時 = RDateTime.now();
     }
 
     /**
      * コンストラクタです。
      */
     public TokuchoSeidokanIFSakuseiBatchParameter() {
+        システム日時 = RDateTime.now();
     }
 
     /**
@@ -50,7 +54,9 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
      *
      * @return TokuchoSeidokanIFSakuseiDBUpdateProcessParameter
      */
-    public TokuchoSeidokanIFSakuseiDBUpdateProcessParameter toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter() {
-        return new TokuchoSeidokanIFSakuseiDBUpdateProcessParameter(処理年度, 特別徴収開始年月, 遷移元メニュー);
+    public TokuchoSeidokanIFSakuseiDBUpdateProcessParameter
+            toTokuchoSeidokanIFSakuseiDBUpdateProcessParameter() {
+        return new TokuchoSeidokanIFSakuseiDBUpdateProcessParameter(
+                処理年度, 特別徴収開始年月, 遷移元メニュー, システム日時);
     }
 }

@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.HosokushaIraiKingaku;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.CalculateFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter;
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
@@ -95,10 +96,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
@@ -107,6 +111,8 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.idoruiseki.ShikibetsuTai
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt001FindIdoFunctionDac;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -140,6 +146,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private final DbT2002FukaDac 賦課Dac;
     private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
     private final DbT2001ChoshuHohoDac 徴収方法Dac;
+    private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     private static final RString KEY_CHOTEINENDOYMD = new RString("choteiNendoYMD");
     private static final RString KEY_FUKANENDO = new RString("fukaNendo");
     private static final int INT_1 = 1;
@@ -156,7 +163,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final int INT_12 = 12;
     private static final int INT_13 = 13;
     private static final int INT_14 = 14;
-    private static final int DAY = 31;
     private static final RString ゼロ_0000 = new RString("0000");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
     private static final RString バッチID = new RString("DBBBT44001");
@@ -164,6 +170,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final RString 使用する = new RString("1");
     private static final RString 使用しない = new RString("0");
     private static final Code 用途区分コード = new Code("0");
+    private static final RString STRING = new RString("000");
 
     /**
      * コンストラクタです
@@ -300,7 +307,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             mapper.insertTmpIdo(idoEntity);
         }
 
-        List<ShotokuEntity> shotokuEntityList = mapper.get所得異動データ();
+        List<ShotokuEntity> shotokuEntityList = mapper.get所得異動データ(param);
         mapper.createTmpShotoku();
         for (ShotokuEntity shotokuEntity : shotokuEntityList) {
             mapper.insertTmpShotoku(shotokuEntity);
@@ -402,17 +409,9 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         for (FukaJohoRelateEntity entity : fukaJohoList) {
             賦課の情報.add(new FukaJoho(entity));
         }
-        Collections.sort(資格の情報, new Comparator<HihokenshaDaicho>() {
-            @Override
-            public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
-                    return 1;
-                }
-                return -1;
-            }
-        });
 
         mapper.createTmpHonsantei();
+        mapper.createTmpTsukibetsuRanku();
         dbの処理(資格の情報, 賦課の情報, param);
         for (FukaJoho fukaEntity : 賦課の情報) {
             boolean flg = true;
@@ -432,7 +431,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         Collections.sort(資格の情報, new Comparator<HihokenshaDaicho>() {
             @Override
             public int compare(HihokenshaDaicho o1, HihokenshaDaicho o2) {
-                if (o1.get第1号資格取得年月日().isBefore(o2.get第1号資格取得年月日())) {
+                if (o2.get第1号資格取得年月日().isBefore(o1.get第1号資格取得年月日())) {
                     return 1;
                 }
                 return -1;
@@ -480,6 +479,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (HihokenshaDaicho daicho : 資格の情報) {
                 HonsanteiEntity entity = new HonsanteiEntity();
                 set資格の情報Entity(daicho, entity, param);
+                entity.setChoteiNendo(param.get調定年度());
                 entity.setFukaNendo(param.get賦課年度());
                 entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), 1));
                 mapper.insertTmpHonsantei(entity);
@@ -487,6 +487,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else if (資格の情報.size() == INT_1) {
             HonsanteiEntity entity = new HonsanteiEntity();
             set資格の情報Entity(資格の情報.get(0), entity, param);
+            entity.setChoteiNendo(賦課の情報.get調定年度());
             entity.setFukaNendo(賦課の情報.get賦課年度());
             entity.setTsuchishoNo(賦課の情報.get通知書番号());
             mapper.insertTmpHonsantei(entity);
@@ -496,6 +497,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 count = count + INT_1;
                 HonsanteiEntity entity = new HonsanteiEntity();
                 set資格の情報Entity(daicho, entity, param);
+                entity.setChoteiNendo(param.get調定年度());
                 entity.setFukaNendo(param.get賦課年度());
                 entity.setTsuchishoNo(create通知書番号(daicho.get被保険者番号().getColumnValue(), count));
                 mapper.insertTmpHonsantei(entity);
@@ -656,8 +658,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(param.get賦課年度());
         SeigyoJoho 月別保険料制御情報 = get月別保険料制御情報(保険料段階List);
-
         NengakuSeigyoJoho 年額制御情報 = get年額制御情報();
+
         for (CalculateFukaEntity 賦課計算の情報 : 賦課計算の情報リスト) {
             HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
             HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
@@ -822,11 +824,14 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 
         FukaKeisan fukaKeisan = FukaKeisan.createInstance();
         FukaJoho 賦課の情報_更正後 = fukaKeisan.reflect賦課根拠(fukaKokyoBatchParameter);
+        if (賦課の情報_更正後 == null) {
+            return;
+        }
         ChoshuHoho 徴収方法の情報 = new ChoshuHoho(賦課計算の情報.get徴収方法の情報());
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
                 && isDecimal変更(賦課の情報_更正後.get減免前介護保険料_年額(), 年額保険料)
-                || (賦課計算の情報.get徴収方法の情報().getTokuchoTeishiJiyuCode() != null
-                && !賦課計算の情報.get徴収方法の情報().getTokuchoTeishiJiyuCode().isEmpty()))) {
+                || (徴収方法の情報.get特別徴収停止事由コード() != null
+                && !徴収方法の情報.get特別徴収停止事由コード().isEmpty()))) {
             CaluculateChoteiResult 調定計算 = caluculateChotei(param.get算定月(), param.get調定日時(), 賦課の情報_更正後,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), new HihokenshaDaicho(賦課計算の情報.get資格の情報()),
                     年額保険料);
@@ -840,7 +845,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         } else if (ShokkenKubun.非該当.getコード().equals(賦課の情報_更正後.get職権区分())
                 && (賦課の情報_更正後.get減免額() == null || Decimal.ZERO.equals(賦課の情報_更正後.get減免額()))) {
             FukaJohoBuilder builder = 賦課の情報_更正後.createBuilderForEdit();
-            if (is変化有り(賦課の情報_設定前, 賦課の情報_更正後)) {
+            if (!is変化有り(賦課の情報_設定前, 賦課の情報_更正後)) {
                 return;
             }
             builder.set履歴番号(賦課の情報_設定前.get履歴番号() + INT_1);
@@ -1226,7 +1231,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         for (int i = 0; i < INT_14; i++) {
             普徴期別金額.add(Decimal.TEN);
         }
-        RString 特徴停止事由コード = new RString("01");
+        RString 特徴停止事由コード = RString.EMPTY;
+        // TODO END
 
         FukaJoho 賦課の情報 = 賦課の情報_更正前;
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
@@ -1241,7 +1247,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
         賦課の情報 = new FukaJoho(fukaJohoRelateEntity);
-        ChoshuHoho 出力用徴収方法の情報 = 徴収方法の情報_更正前;
+        ChoshuHoho 出力用徴収方法の情報 = new ChoshuHoho(徴収方法の情報_更正前.toEntity());
         if (!Tsuki._3月.getコード().equals(算定月)) {
             Decimal 更正前の特別徴収額 = Decimal.ZERO;
             if (賦課の情報_更正前.get特徴期別金額01() != null) {
@@ -1266,7 +1272,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (Decimal decimal : 特徴期別金額) {
                 更正後の特別徴収額.add(decimal);
             }
-            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) < 0
+            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0
                     || (特徴停止事由コード != null && !特徴停止事由コード.isEmpty())) {
                 ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
                 builder.set特別徴収停止事由コード(特徴停止事由コード)
@@ -1469,7 +1475,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 nowDate, SubGyomuCode.DBB介護賦課);
         RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
                 nowDate, SubGyomuCode.DBB介護賦課);
-        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<RString, RankBetsuKijunKingaku>();
+        Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
 
         // TODO QAのNo.957　「ランク別制御情報」の設定方法がない。
 //        RankBetsuKijunKingaku gaku = new RankBetsuKijunKingaku();
@@ -1486,6 +1492,63 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 HasuChoseiTaisho.toValue(端数調整対象),
                 ランク別制御情報);
         return 年額制御情報;
+    }
+
+    /**
+     * 処理日付管理テーブル更新
+     *
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param 年度 FlexibleYear
+     * @param 年度内連番 RString
+     * @param システム日時 YMDHMS
+     */
+    public void update処理日付管理(RString 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番, YMDHMS システム日時) {
+        List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課,
+                処理名, 処理枝番, 年度, 年度内連番);
+        if (entityList != null) {
+            update処理日付管理(entityList, システム日時);
+        }
+    }
+
+    /**
+     * 処理日付管理テーブル登録
+     *
+     * @param processParameter バッチパラメータ
+     * @param システム日時 システム日時
+     * @param 年度内連番 年度内連番
+     * @param 処理枝番 処理枝番
+     */
+    public void insert処理日付管理(GennendoIdoFukaProcessParameter processParameter, YMDHMS システム日時, RString 処理枝番, RString 年度内連番) {
+        RString 年度連番;
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select異動賦課最大年度内連番(processParameter.get賦課年度());
+        if (entity != null) {
+            年度連番 = STRING.concat(new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1)));
+        } else {
+            年度連番 = 年度内連番;
+        }
+        DbT7022ShoriDateKanriEntity newEntity = new DbT7022ShoriDateKanriEntity();
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        newEntity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+        newEntity.setShichosonCode(導入団体クラス.getLasdecCode_());
+        newEntity.setShoriName(ShoriName.異動賦課.get名称());
+        newEntity.setShoriEdaban(処理枝番);
+        newEntity.setNendo(processParameter.get調定年度());
+        newEntity.setNendoNaiRenban(年度連番);
+        newEntity.setKijunYMD(new FlexibleDate(processParameter.get調定日時().getDate().toString()));
+        newEntity.setKijunTimestamp(システム日時);
+        newEntity.setTaishoKaishiTimestamp(new YMDHMS(processParameter.get抽出開始日時()));
+        newEntity.setTaishoShuryoTimestamp(new YMDHMS(processParameter.get抽出終了日時()));
+        newEntity.setState(EntityDataState.Added);
+        処理日付管理Dac.save(newEntity);
+    }
+
+    private void update処理日付管理(List<DbT7022ShoriDateKanriEntity> entityList, YMDHMS システム日時) {
+        for (DbT7022ShoriDateKanriEntity entity : entityList) {
+            entity.setKijunTimestamp(システム日時);
+            entity.setState(EntityDataState.Modified);
+            処理日付管理Dac.save(entity);
+        }
     }
 
 }

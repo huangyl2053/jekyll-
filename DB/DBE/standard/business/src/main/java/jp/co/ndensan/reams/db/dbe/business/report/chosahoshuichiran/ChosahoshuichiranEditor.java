@@ -59,14 +59,14 @@ public class ChosahoshuichiranEditor implements IChosahoshuichiranEditor {
             source.listGokei_2 = new RString(item.get在宅_再合計());
             source.listGokei_3 = new RString(item.get施設_初合計());
             source.listGokei_4 = new RString(item.get施設_再合計());
-            source.listGokei_5 = new RString(item.get認定調査委託料());
+            source.listGokei_5 = new RString(item.get認定調査委託料()).concat("円");
         }
         source.listchosasakuseiryo_1 = new RString(Integer.toString(item.get番号()));
         source.listchosasakuseiryo_2 = item.get調査員_コード();
         source.listchosasakuseiryo_3 = item.get調査員_氏名();
-        source.listchosasakuseiryo_4 = item.get依頼日().toDateString();
-        source.listchosasakuseiryo_5 = item.get調査日().toDateString();
-        source.listchosasakuseiryo_6 = item.get入手日().toDateString();
+        source.listchosasakuseiryo_4 = item.get依頼日().wareki().toDateString();
+        source.listchosasakuseiryo_5 = item.get調査日().wareki().toDateString();
+        source.listchosasakuseiryo_6 = item.get入手日().wareki().toDateString();
         source.listchosasakuseiryo_7 = item.get調査_再();
         source.listchosasakuseiryo_8 = item.get保険者();
         source.listchosasakuseiryo_9 = item.get申請者_被保険者番号();
@@ -78,8 +78,8 @@ public class ChosahoshuichiranEditor implements IChosahoshuichiranEditor {
         source.listchosasakuseiryo_15 = item.get委託料();
         source.chosaItakusakiNo = item.get調査機関コード();
         source.chosaItakusakiName = item.get調査機関名();
-        source.chushutsuKikan = new RStringBuilder(item.get調査依頼日開始()).append("-").append(item.get調査依頼日終了()).toRString();
-        source.printTimeStamp = get作成年月日時();
+        source.chushutsuKikan = new RStringBuilder(item.get調査依頼日開始()).append("～").append(item.get調査依頼日終了()).toRString();
+        source.printTimeStamp = new RStringBuilder(get作成年月日時()).append(RString.HALF_SPACE).append("作成").toRString();
         return source;
     }
 

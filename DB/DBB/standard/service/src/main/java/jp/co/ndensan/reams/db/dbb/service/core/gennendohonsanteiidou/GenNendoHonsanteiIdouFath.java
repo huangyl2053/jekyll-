@@ -294,7 +294,7 @@ public class GenNendoHonsanteiIdouFath {
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
         kozaBuilder.set業務コード(GyomuCode.DB介護保険);
         kozaBuilder.set用途区分(new KozaYotoKubunCodeValue(用途区分コード));
-        kozaBuilder.set基準日(new FlexibleDate(調定日時.getDate().toString()));
+        kozaBuilder.set基準日(FlexibleDate.getNowDate());
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
 
@@ -303,8 +303,11 @@ public class GenNendoHonsanteiIdouFath {
 
         List<TokuchoIraikin4gatsuKaishiEntity> 特徴依頼金情報リスト = mapper.get特徴依頼金情報(param);
 
+        if (特徴依頼金情報リスト == null || 特徴依頼金情報リスト.isEmpty()) {
+            return;
+        }
         RString 特徴年額基準年度 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_4月開始,
-                NendoUtil.toNendoStartDate(param.get調定年度()), SubGyomuCode.DBB介護賦課);
+                NendoUtil.toNendoStartDate(調定年度), SubGyomuCode.DBB介護賦課);
         for (TokuchoIraikin4gatsuKaishiEntity 特徴依頼金情報 : 特徴依頼金情報リスト) {
             HihokenshaDaicho 資格の情報 = new HihokenshaDaicho(特徴依頼金情報.get資格の情報());
             ChoshuHoho 徴収方法の情報 = new ChoshuHoho(特徴依頼金情報.get徴収方法の情報());
@@ -316,13 +319,13 @@ public class GenNendoHonsanteiIdouFath {
             for (DbT7006RoreiFukushiNenkinJukyushaEntity entity : 特徴依頼金情報.get老齢の情報()) {
                 老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
             }
-            FukaJoho 賦課の情報 = editFukaJohoKyotsu(param.get調定年度(), 資格の情報, 徴収方法の情報,
-                    生保の情報, 老齢の情報, 特徴依頼金情報.getZenNendoHokenryoDankai(), param.get調定日時());
+            FukaJoho 賦課の情報 = editFukaJohoKyotsu(調定年度, 資格の情報, 徴収方法の情報,
+                    生保の情報, 老齢の情報, 特徴依頼金情報.getZenNendoHokenryoDankai(), 調定日時);
 
             Decimal 保険料率 = Decimal.ZERO;
             if (TokuchoNengakuKijunNendo4Gatsu.当年度.getコード().equals(特徴年額基準年度)) {
                 HokenryoDankaiList 前年度の保険料段階リスト
-                        = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(param.get調定年度());
+                        = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(調定年度);
                 保険料率 = 前年度の保険料段階リスト.getBy段階区分(特徴依頼金情報.getZenNendoHokenryoDankai()).get保険料率();
             }
             // TODO QAのNo.933(Redmine#91256) URD（保険系業務共通）特徴仮算定期割クラスの呼び出し
@@ -334,10 +337,6 @@ public class GenNendoHonsanteiIdouFath {
             特徴期別金額.add(Decimal.ZERO);
             特徴期別金額.add(Decimal.ZERO);
             特徴期別金額.add(Decimal.ZERO);
-            List<Decimal> 普徴期別金額 = new ArrayList<>();
-            for (int i = 0; i < INT_14; i++) {
-                普徴期別金額.add(Decimal.ZERO);
-            }
 
             FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
             fukaJohoRelateEntity.set介護賦課Entity(賦課の情報.toEntity());
@@ -346,7 +345,7 @@ public class GenNendoHonsanteiIdouFath {
                 if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
                     set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
                 } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
-                    set普徴期別金額(kibetsu, 普徴期別金額, 介護期別RelateEntity);
+                    set期別金額(kibetsu, Decimal.ZERO, 介護期別RelateEntity);
                 }
             }
             fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
@@ -418,7 +417,7 @@ public class GenNendoHonsanteiIdouFath {
         }
 
         builder.set調定日時(調定日時)
-                .set調定事由1(ChoteiJiyuCode.捕捉により特徴開始.get名称())
+                .set調定事由1(ChoteiJiyuCode.捕捉により特徴開始.getコード())
                 .set調定事由2(RString.EMPTY)
                 .set調定事由3(RString.EMPTY)
                 .set調定事由4(RString.EMPTY)
@@ -447,26 +446,27 @@ public class GenNendoHonsanteiIdouFath {
         for (SeikatsuHogoJukyusha entity : 生保情報のリスト) {
             FlexibleDate 受給開始日 = entity.get受給開始日();
             FlexibleDate 受給廃止日 = entity.get受給廃止日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                生活保護の情報のリスト.add(entity);
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                生活保護の情報のリスト.add(entity);
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    生活保護の情報のリスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    生活保護の情報のリスト.add(entity);
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    生活保護の情報のリスト.add(entity);
+                }
             }
         }
         if (!生活保護の情報のリスト.isEmpty()) {
             Collections.sort(生活保護の情報のリスト, new Comparator<SeikatsuHogoJukyusha>() {
                 @Override
                 public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
-                    if (o2.get受給開始日().isBefore(o1.get受給開始日())) {
-                        return 1;
+                    if (o2.get受給開始日().isBeforeOrEquals(o1.get受給開始日())) {
+                        return -1;
                     }
-                    return -1;
+                    return 1;
                 }
             });
             // TODO QAのNo.950(Redmine#91760)
@@ -486,7 +486,12 @@ public class GenNendoHonsanteiIdouFath {
             return RString.EMPTY;
         }
         for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
-            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
+            if (shurui.get扶助種類コード() != null) {
+                扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
+            }
+        }
+        if (扶助種類.isEmpty()) {
+            return RString.EMPTY;
         }
         Collections.sort(扶助種類);
         return 扶助種類.get(0);
@@ -498,16 +503,17 @@ public class GenNendoHonsanteiIdouFath {
         for (RoreiFukushiNenkinJukyusha entity : 老福の情報リスト) {
             FlexibleDate 受給開始日 = entity.get受給開始年月日();
             FlexibleDate 受給廃止日 = entity.get受給終了年月日();
-            if (受給開始日 == null || 受給開始日.isEmpty()) {
-                受給開始日 = FlexibleDate.MIN;
-            }
             if (受給廃止日 == null || 受給廃止日.isEmpty()) {
                 受給廃止日 = FlexibleDate.MAX;
             }
-            if (受給開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
-                老齢福祉の情報リスト.add(entity);
-            } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
-                老齢福祉の情報リスト.add(entity);
+            if (受給開始日 != null && !受給開始日.isEmpty()) {
+                if (受給開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給開始日)) {
+                    老齢福祉の情報リスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    老齢福祉の情報リスト.add(entity);
+                } else if (受給開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    老齢福祉の情報リスト.add(entity);
+                }
             }
         }
         if (!老齢福祉の情報リスト.isEmpty()) {
@@ -515,9 +521,9 @@ public class GenNendoHonsanteiIdouFath {
                 @Override
                 public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
                     if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
-                        return 1;
+                        return -1;
                     }
-                    return -1;
+                    return 1;
                 }
             });
             builder.set老年開始日(老齢福祉の情報リスト.get(0).get受給開始年月日());
@@ -563,7 +569,7 @@ public class GenNendoHonsanteiIdouFath {
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
-                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
+                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - INT_1)) {
                     builder.append(iSetSortItem.get項目名());
                 } else {
                     builder.append(iSetSortItem.get項目名()).append(SIGN);
@@ -1280,54 +1286,6 @@ public class GenNendoHonsanteiIdouFath {
                 break;
             case INT_6:
                 set期別金額(kibetsu, 特徴期別金額.get(INT_5), 介護期別RelateEntity);
-                break;
-            default:
-        }
-    }
-
-    private void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
-        switch (kibetsu.get期()) {
-            case INT_1:
-                set期別金額(kibetsu, 普徴期別金額.get(0), 介護期別RelateEntity);
-                break;
-            case INT_2:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_1), 介護期別RelateEntity);
-                break;
-            case INT_3:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_2), 介護期別RelateEntity);
-                break;
-            case INT_4:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_3), 介護期別RelateEntity);
-                break;
-            case INT_5:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_4), 介護期別RelateEntity);
-                break;
-            case INT_6:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_5), 介護期別RelateEntity);
-                break;
-            case INT_7:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_6), 介護期別RelateEntity);
-                break;
-            case INT_8:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_7), 介護期別RelateEntity);
-                break;
-            case INT_9:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_8), 介護期別RelateEntity);
-                break;
-            case INT_10:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_9), 介護期別RelateEntity);
-                break;
-            case INT_11:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_10), 介護期別RelateEntity);
-                break;
-            case INT_12:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_11), 介護期別RelateEntity);
-                break;
-            case INT_13:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_12), 介護期別RelateEntity);
-                break;
-            case INT_14:
-                set期別金額(kibetsu, 普徴期別金額.get(INT_13), 介護期別RelateEntity);
                 break;
             default:
         }

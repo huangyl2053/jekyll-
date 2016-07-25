@@ -146,12 +146,13 @@ public interface IGenNendoHonsanteiIdouMapper {
      */
     void insertTmpShotoku(ShotokuEntity entity);
 
-    // TODO
     /**
+     * 所得異動データを取得します。
      *
-     * @return
+     * @param param IdoParameter
+     * @return List<ShotokuEntity>
      */
-    List<ShotokuEntity> get所得異動データ();
+    List<ShotokuEntity> get所得異動データ(IdoParameter param);
 
     /**
      * 所得異動一時テーブルを作成します。

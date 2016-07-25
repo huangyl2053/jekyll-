@@ -40,11 +40,12 @@ public enum DBC4530011Panel1Spec implements IPredicate<DBC4530011Panel1Div> {
          */
         public static boolean is全角桁数超過64位(DBC4530011Panel1Div div) {
 
-            if (!RString.isNullOrEmpty(div.getTextBoxMultiLine1().getValue())) {
-                return !(div.getTextBoxMultiLine1().getValue().length() > 桁数MAX);
+            if (!RString.isNullOrEmpty(div.getTxtShiharaiBasho().getValue())) {
+                return !(div.getTxtShiharaiBasho().getValue().length() > 桁数MAX);
             }
             return Boolean.TRUE;
         }
+
     }
 
 }

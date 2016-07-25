@@ -38,7 +38,6 @@ public class DBC4530011Panel1 {
      * @return ResponseData<DBC4530011Panel1Div>
      */
     public ResponseData<DBC4530011Panel1Div> onLoad(DBC4530011Panel1Div div) {
-
         getHandler(div).initialize();
         return ResponseData.of(div).setState(DBC4530011StateName.初期登録状態);
     }
@@ -73,7 +72,7 @@ public class DBC4530011Panel1 {
      * @return ResponseData<DBC4530011Panel1Div>
      */
     public ResponseData<DBC4530011Panel1Div> onClick_btnBack(DBC4530011Panel1Div div) {
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC4530011TransitionEventName.処理完了).respond();
     }
 
     /**

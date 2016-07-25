@@ -102,7 +102,7 @@ public class ShinsakaiIinJoho implements Serializable {
      * @return 廃止フラグ
      *
      */
-    public boolean get廃止フラグ() {
+    public boolean is廃止フラグ() {
         return entity.isHaishiFlag();
     }
 
@@ -124,16 +124,6 @@ public class ShinsakaiIinJoho implements Serializable {
      */
     public Code get区分() {
         return entity.getShinsakaiIinHoshuKubun();
-    }
-
-    /**
-     * 介護認定審査会開催番号を返します。
-     *
-     * @return 介護認定審査会開催番号
-     *
-     */
-    public RString get審査会開催番号() {
-        return entity.getShinsakaiKaisaiNo_jissai();
     }
 
     /**
@@ -162,7 +152,7 @@ public class ShinsakaiIinJoho implements Serializable {
      * @return 委員出席
      *
      */
-    public boolean get出欠() {
+    public boolean is出欠() {
         return entity.isShussekiFlag();
     }
 
@@ -262,7 +252,7 @@ public class ShinsakaiIinJoho implements Serializable {
      * @return 銀行振込出力フラグ
      *
      */
-    public boolean get振込() {
+    public boolean is振込() {
         return entity.isGinkoFurikomiShutsuryokuFlag();
     }
 

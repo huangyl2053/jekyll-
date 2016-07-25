@@ -90,8 +90,10 @@ public final class IkenHoshuIchiranChange {
                     DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get診断検査費用_合計()), 0).concat("円"),
                     DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計()), 0).concat("円"),
                     番号);
+            data.set出力条件(true);
         } else {
             data = new GokeiEntity();
+            data.set番号(番号);
         }
         return data;
     }

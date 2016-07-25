@@ -179,7 +179,24 @@ public class TokushoTaishioIchiranEntity {
      * @param yubinNo 郵便番号
      * @param jusho 住所
      */
-    public TokushoTaishioIchiranEntity(RString hihokenshaNo, RString karichoshuKisoNenkinNo, RString honchoshuKisoNenkinNo, RString yokunendoKarichoshuKisoNenkinNo, RString karichoshuNenkinCode, RString honchoshuKisonenkinCode, RString yokunendoKariChoshuKisonenkinCode, ShikibetsuCode shikibetuCode, RString setaiCode, RString gyoseikuCode, RDate umareYMD, RString juminShubetsuCode, RString seibetsuCode, RString kanashimeiJodan, RString kanashimeiKadan, RString kanjiShimei, RString yubinNo, RString jusho) {
+    public TokushoTaishioIchiranEntity(RString hihokenshaNo,
+            RString karichoshuKisoNenkinNo,
+            RString honchoshuKisoNenkinNo,
+            RString yokunendoKarichoshuKisoNenkinNo,
+            RString karichoshuNenkinCode,
+            RString honchoshuKisonenkinCode,
+            RString yokunendoKariChoshuKisonenkinCode,
+            ShikibetsuCode shikibetuCode,
+            RString setaiCode,
+            RString gyoseikuCode,
+            RDate umareYMD,
+            RString juminShubetsuCode,
+            RString seibetsuCode,
+            RString kanashimeiJodan,
+            RString kanashimeiKadan,
+            RString kanjiShimei,
+            RString yubinNo,
+            RString jusho) {
         this.hihokenshaNo = hihokenshaNo;
         this.karichoshuKisoNenkinNo = karichoshuKisoNenkinNo;
         this.honchoshuKisoNenkinNo = honchoshuKisoNenkinNo;

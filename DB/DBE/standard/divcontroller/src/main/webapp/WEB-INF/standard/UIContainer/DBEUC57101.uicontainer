@@ -53,24 +53,9 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 2,
-   "name": "要介護認定イメージ情報出力",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
     },
     {
-     "id": "2",
+     "id": "5",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5710001",
@@ -84,7 +69,7 @@
      "toState": "初期状態"
     },
     {
-     "id": "3",
+     "id": "6",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5710002",
@@ -98,7 +83,7 @@
      "toState": "初期状態"
     },
     {
-     "id": "4",
+     "id": "7",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5710002",
@@ -106,24 +91,9 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 3,
-   "name": "要介護認定イメージ情報削除",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5710001",
-     "toLayoutTitle": "要介護認定イメージ情報管理",
-     "toState": "初期状態"
     },
     {
-     "id": "2",
+     "id": "8",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5710001",
@@ -137,7 +107,7 @@
      "toState": "初期状態"
     },
     {
-     "id": "3",
+     "id": "9",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5710003",
@@ -151,7 +121,7 @@
      "toState": "初期状態"
     },
     {
-     "id": "4",
+     "id": "10",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5710003",

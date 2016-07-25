@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -64,11 +65,11 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             List<PersonalData> taishoshaPersonalDataList = new ArrayList<>();
-            AccessLogUUID taishoshaAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishoshaPersonalDataList);
             for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者 : 特徴平準化結果対象者一覧表リスト) {
                 TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
                 taishoshaPersonalDataList.add(toPersonalDataTaishosha(item));
             }
+            AccessLogUUID taishoshaAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishoshaPersonalDataList);
             print(特徴平準化結果対象者一覧表リスト, new ArrayList<TokuchoHeijunkaRokuBatchTaishogaiIchiran>(),
                     出力順ID, 調定日時, 賦課年度, reportManager);
             collection = reportManager.publish(taishoshaAccessLog);
@@ -91,11 +92,11 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             List<PersonalData> taishogaiPersonalDataList = new ArrayList<>();
-            AccessLogUUID taishogaiAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishogaiPersonalDataList);
             for (TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象者 : 特徴平準化結果対象外一覧表リスト) {
                 TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象者.get特徴平準化結果対象外();
                 taishogaiPersonalDataList.add(toPersonalDataTaishogai(item));
             }
+            AccessLogUUID taishogaiAccessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, taishogaiPersonalDataList);
             print(new ArrayList<TokuchoHeijunkaRokuBatchTaishoshaIchiran>(), 特徴平準化結果対象外一覧表リスト,
                     出力順ID, 調定日時, 賦課年度, reportManager);
             collection = reportManager.publish(taishogaiAccessLog);
@@ -134,13 +135,13 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
     private PersonalData toPersonalDataTaishosha(TokuchoHeijyunkaTaishoshaEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 entity.get被保険者番号().value());
-        return PersonalData.of(entity.get識別コード(), expandedInfo);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private PersonalData toPersonalDataTaishogai(TokuchoHeijyunkaTaishogaiEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(コード_ログコード), 定数_被保険者番号,
                 entity.get被保険者番号().value());
-        return PersonalData.of(entity.get識別コード(), expandedInfo);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

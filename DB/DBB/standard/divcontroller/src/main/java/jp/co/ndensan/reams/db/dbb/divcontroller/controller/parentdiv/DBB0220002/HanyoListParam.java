@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0220002
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolistshotokujoho.HanyoListShotokuJohoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0220002.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002.HanyoListParamHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0220002.HanyoListParamValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 画面設計_DBBGM22002_汎用リスト 所得情報のクラス
@@ -38,10 +36,6 @@ public class HanyoListParam {
      */
     public ResponseData<HanyoListShotokuJohoBatchParameter> onClick_btnExecute(HanyoListParamDiv div) {
         HanyoListShotokuJohoBatchParameter parameter = getHandler(div).onClick_btnExecute();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAction();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(parameter).addValidationMessages(validPairs).respond();
-        }
         return ResponseData.of(parameter).respond();
     }
 
@@ -49,7 +43,4 @@ public class HanyoListParam {
         return new HanyoListParamHandler(div);
     }
 
-    private HanyoListParamValidationHandler getValidationHandler(HanyoListParamDiv div) {
-        return new HanyoListParamValidationHandler(div);
-    }
 }

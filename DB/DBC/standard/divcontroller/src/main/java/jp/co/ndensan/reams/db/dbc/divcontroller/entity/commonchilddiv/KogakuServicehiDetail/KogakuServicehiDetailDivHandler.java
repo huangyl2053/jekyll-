@@ -100,7 +100,7 @@ public class KogakuServicehiDetailDivHandler {
             if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                 div.getTplShinseisha().getTxtHokenJyaBango().setValue(証記載保険者番号.value());
             }
-            set高額口座情報エリア(追加モード, 識別コード, null);
+//            set高額口座情報エリア(追加モード, 識別コード, null);
         } else if (修正モード.equals(画面モード) || 送付済モード.equals(画面モード)
                 || 削除モード.equals(画面モード) || 照会モード.equals(画面モード)) {
             result = KougakuSabisuhiShousaiNaiyou.createInstance().
@@ -109,7 +109,7 @@ public class KogakuServicehiDetailDivHandler {
             if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
                 set高額申請情報エリア(result);
                 set高額判定結果情報エリア(result);
-                set高額口座情報エリア(画面モード, 識別コード, result);
+//                set高額口座情報エリア(画面モード, 識別コード, result);
             } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)
                     || 総合事業高額介護サービス費照会.equals(メニューID)) {
                 set事業高額申請情報エリア(result);
@@ -120,7 +120,7 @@ public class KogakuServicehiDetailDivHandler {
         }
         if (照会モード.equals(画面モード)) {
             if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
-                set高額決定情報エリア(result);
+//                set高額決定情報エリア(result);
             } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)
                     || 総合事業高額介護サービス費照会.equals(メニューID)) {
                 set事業高額決定情報エリア(result);
@@ -374,12 +374,11 @@ public class KogakuServicehiDetailDivHandler {
                     result.get高額介護サービス費支給申請Entity().get申請理由());
 
         }
-        if (result != null && result.get高額介護サービス費支給判定結果Entity() != null) {
-            if (result.get高額介護サービス費支給判定結果Entity().is再送付フラグ()) {
-                List<RString> list = new ArrayList();
-                list.add(KEY0);
-                div.getTplShinseisha().getChkKokuhorenSaiso().setSelectedItemsByKey(list);
-            }
+        if (result != null && result.get高額介護サービス費支給判定結果Entity() != null
+                && result.get高額介護サービス費支給判定結果Entity().is再送付フラグ()) {
+            List<RString> list = new ArrayList();
+            list.add(KEY0);
+            div.getTplShinseisha().getChkKokuhorenSaiso().setSelectedItemsByKey(list);
         }
         if (result != null && result.get高額介護サービス費支給対象者合計Entity() != null) {
             div.getTplShinseisha().getTxtShiharaiTotalAmount().
@@ -422,12 +421,11 @@ public class KogakuServicehiDetailDivHandler {
                     result.get事業高額介護サービス費支給申請Entity().get申請理由());
 
         }
-        if (result != null && result.get事業高額介護サービス費支給判定結果Entity() != null) {
-            if (result.get事業高額介護サービス費支給判定結果Entity().is再送付フラグ()) {
-                List<RString> list = new ArrayList();
-                list.add(KEY0);
-                div.getTplShinseisha().getChkKokuhorenSaiso().setSelectedItemsByKey(list);
-            }
+        if (result != null && result.get事業高額介護サービス費支給判定結果Entity() != null
+                && result.get事業高額介護サービス費支給判定結果Entity().is再送付フラグ()) {
+            List<RString> list = new ArrayList();
+            list.add(KEY0);
+            div.getTplShinseisha().getChkKokuhorenSaiso().setSelectedItemsByKey(list);
         }
         if (result != null && result.get事業高額介護サービス費支給対象者合計Entity() != null) {
             div.getTplShinseisha().getTxtShiharaiTotalAmount().
@@ -439,12 +437,11 @@ public class KogakuServicehiDetailDivHandler {
     }
 
     private void set高額判定結果情報エリア(KougakuSabisuhiShousaiNaiyouResult result) {
-        if (result != null && result.get高額介護サービス費支給申請Entity() != null) {
-            if (result.get高額介護サービス費支給申請Entity().get受付年月日() != null
-                    && !result.get高額介護サービス費支給申請Entity().get受付年月日().isEmpty()) {
-                div.getTxtUketsukeYMD().setValue(new RDate(
-                        result.get高額介護サービス費支給申請Entity().get受付年月日().toString()));
-            }
+        if (result != null && result.get高額介護サービス費支給申請Entity() != null
+                && result.get高額介護サービス費支給申請Entity().get受付年月日() != null
+                && !result.get高額介護サービス費支給申請Entity().get受付年月日().isEmpty()) {
+            div.getTxtUketsukeYMD().setValue(new RDate(
+                    result.get高額介護サービス費支給申請Entity().get受付年月日().toString()));
         }
         if (result != null && result.get高額介護サービス費支給判定結果Entity() != null) {
             if (result.get高額介護サービス費支給判定結果Entity().get決定年月日() != null
@@ -479,12 +476,11 @@ public class KogakuServicehiDetailDivHandler {
     }
 
     private void set事業高額判定結果情報エリア(KougakuSabisuhiShousaiNaiyouResult result) {
-        if (result != null && result.get事業高額介護サービス費支給申請Entity() != null) {
-            if (result.get事業高額介護サービス費支給申請Entity().get受付年月日() != null
-                    && !result.get事業高額介護サービス費支給申請Entity().get受付年月日().isEmpty()) {
-                div.getTxtUketsukeYMD().setValue(new RDate(
-                        result.get事業高額介護サービス費支給申請Entity().get受付年月日().toString()));
-            }
+        if (result != null && result.get事業高額介護サービス費支給申請Entity() != null
+                && result.get事業高額介護サービス費支給申請Entity().get受付年月日() != null
+                && !result.get事業高額介護サービス費支給申請Entity().get受付年月日().isEmpty()) {
+            div.getTxtUketsukeYMD().setValue(new RDate(
+                    result.get事業高額介護サービス費支給申請Entity().get受付年月日().toString()));
         }
         if (result != null && result.get事業高額介護サービス費支給判定結果Entity() != null) {
             if (result.get事業高額介護サービス費支給判定結果Entity().get決定年月日() != null
@@ -587,13 +583,12 @@ public class KogakuServicehiDetailDivHandler {
                                 get判定結果送付年月().toString()));
             }
         }
-        if (result != null && result.get高額介護サービス費支給対象者合計Entity() != null) {
-            if (result.get高額介護サービス費支給対象者合計Entity().get対象者受取年月() != null
-                    && !result.get高額介護サービス費支給対象者合計Entity().get対象者受取年月().isEmpty()) {
-                div.getKokuhorenSoufuJohoPanel().getTxtTaisyoUketoriYM().setValue(
-                        new RDate(result.get高額介護サービス費支給対象者合計Entity().
-                                get対象者受取年月().toString()));
-            }
+        if (result != null && result.get高額介護サービス費支給対象者合計Entity() != null
+                && result.get高額介護サービス費支給対象者合計Entity().get対象者受取年月() != null
+                && !result.get高額介護サービス費支給対象者合計Entity().get対象者受取年月().isEmpty()) {
+            div.getKokuhorenSoufuJohoPanel().getTxtTaisyoUketoriYM().setValue(
+                    new RDate(result.get高額介護サービス費支給対象者合計Entity().
+                            get対象者受取年月().toString()));
         }
     }
 
@@ -636,13 +631,12 @@ public class KogakuServicehiDetailDivHandler {
                                 get判定結果送付年月().toString()));
             }
         }
-        if (result != null && result.get事業高額介護サービス費支給対象者合計Entity() != null) {
-            if (result.get事業高額介護サービス費支給対象者合計Entity().get対象者受取年月() != null
-                    && !result.get事業高額介護サービス費支給対象者合計Entity().get対象者受取年月().isEmpty()) {
-                div.getKokuhorenSoufuJohoPanel().getTxtTaisyoUketoriYM().setValue(
-                        new RDate(result.get事業高額介護サービス費支給対象者合計Entity().
-                                get対象者受取年月().toString()));
-            }
+        if (result != null && result.get事業高額介護サービス費支給対象者合計Entity() != null
+                && result.get事業高額介護サービス費支給対象者合計Entity().get対象者受取年月() != null
+                && !result.get事業高額介護サービス費支給対象者合計Entity().get対象者受取年月().isEmpty()) {
+            div.getKokuhorenSoufuJohoPanel().getTxtTaisyoUketoriYM().setValue(
+                    new RDate(result.get事業高額介護サービス費支給対象者合計Entity().
+                            get対象者受取年月().toString()));
         }
     }
 

@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -88,6 +88,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -149,9 +150,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
+    private static final RString 定数_出力条件 = new RString("出力条件");
+    private static final RString 定数_出力順 = new RString("出力順");
     private static final RString 出力条件_左括弧 = new RString("【");
     private static final RString 出力条件_右括弧 = new RString("】");
-    private static final RString パラメータ名_ジョブ番号 = new RString("ジョブ番号");
     private static final RString パラメータ名_調定年度 = new RString("調定年度");
     private static final RString パラメータ名_賦課年度 = new RString("賦課年度");
     private static final RString 年度 = new RString("年度");
@@ -521,7 +523,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath,
-                ファイル名_対象者一覧表.concat(調定日時.toDateString()).concat(CSVファイル));
+                ファイル名_対象者一覧表.concat(調定日時.toString()).concat(CSVファイル));
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -534,8 +536,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 int 調整金額 = 調整金額取得(今年度保険料率, 賦課年度);
                 RString 編集備考 = 備考名を転換(特徴平準化結果対象者.get備考コード());
                 IKojin iKojin = ShikibetsuTaishoFactory.createKojin(特徴平準化結果対象者.get宛名の情報());
-                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
-                RString 編集後住所 = 編集後個人.get編集後住所();
+                RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体クラス);
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象者CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象者,
                         編集後住所, 今年度保険料率, 調整金額, 編集備考);
@@ -548,7 +549,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPathTaishogai = managerTaishogai.getEucOutputDirectry();
         RString eucFilePathTaishogai = Path.combinePath(spoolWorkPathTaishogai,
-                ファイル名_対象外一覧表.concat(調定日時.toDateString()).concat(CSVファイル));
+                ファイル名_対象外一覧表.concat(調定日時.toString()).concat(CSVファイル));
         try (CsvListWriter csvListWrite = new CsvListWriter.InstanceBuilder(eucFilePathTaishogai).setNewLine(NewLine.CRLF)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -561,8 +562,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 int 調整金額 = 調整金額取得(今年度保険料率, 賦課年度);
                 RString 備考名 = 備考名を転換(特徴平準化結果対象外.get備考コード());
                 IKojin iKojin = ShikibetsuTaishoFactory.createKojin(特徴平準化結果対象外.get宛名の情報());
-                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
-                RString 編集後住所 = 編集後個人.get編集後住所();
+                RString 編集後住所 = JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体クラス);
                 List<RString> bodyList = new ArrayList<>();
                 特徴平準化対象外CSV項目編集(bodyList, 調定日時, 賦課年度, 特徴平準化結果対象外,
                         編集後住所, 今年度保険料率, 調整金額, 備考名);
@@ -591,47 +591,33 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         return 出力順;
     }
 
-    private void set出力順_改頁(IOutputOrder outputOrder, List<RString> 出力順項目List) {
-
-        if (outputOrder == null || outputOrder.get設定項目リスト() == null) {
-            return;
-        }
-        int i = 1;
-        for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-            if (i <= NUM_5) {
-                出力順項目List.add(setSortItem.get項目名());
-            }
-            i = i + 1;
-        }
-    }
-
     private void バッチ出力条件リストの出力(FlexibleYear 調定年度, FlexibleYear 賦課年度,
             LasdecCode 市町村コード, RString 市町村名, RString ページ数, Long 出力順ID) {
         List<RString> 出力条件リスト = new ArrayList<>();
+        出力条件リスト.add(定数_出力条件);
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_調定年度).concat(出力条件_右括弧).concat(
                 調定年度.wareki().toDateString()).concat(年度));
         出力条件リスト.add(出力条件_左括弧.concat(パラメータ名_賦課年度).concat(出力条件_右括弧).concat(
                 賦課年度.wareki().toDateString()).concat(年度));
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId(), 出力順ID);
-        List<RString> 出力順項目List = new ArrayList<>();
-        set出力順_改頁(outputOrder, 出力順項目List);
-        RString 特徴仮算定平準化一覧表 = RString.EMPTY;
-        if (!出力順項目List.isEmpty()) {
-            for (int i = 0; i < 出力順項目List.size(); i++) {
-                特徴仮算定平準化一覧表 = 特徴仮算定平準化一覧表.concat(出力順項目List.get(i)).concat(SIGN_GT);
+        RStringBuilder builder = new RStringBuilder(出力条件_左括弧.concat(定数_出力順).concat(出力条件_右括弧).concat(RString.FULL_SPACE));
+        if (outputOrder != null) {
+            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+            for (ISetSortItem iSetSortItem : iSetSortItemList) {
+                if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
+                    builder.append(iSetSortItem.get項目名());
+                } else {
+                    builder.append(iSetSortItem.get項目名()).append(SIGN_GT);
+                }
             }
         }
-        if (!RString.isNullOrEmpty(特徴仮算定平準化一覧表)) {
-            出力条件リスト.add(特徴仮算定平準化一覧表.substring(0, 特徴仮算定平準化一覧表.length() - 1));
-        } else {
-            出力条件リスト.add(RString.EMPTY);
-        }
+        出力条件リスト.add(builder.toRString());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 ReportIdDBB.DBB200003.getReportId().value(),
                 市町村コード.value(),
                 市町村名,
-                出力条件_左括弧.concat(パラメータ名_ジョブ番号).concat(出力条件_右括弧).concat(String.valueOf(JobContextHolder.getJobId())),
+                RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBB.DBB200003.getReportName(),
                 ページ数,
                 CSV出力有無_有り,
@@ -646,7 +632,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             TokuchoHeijyunkaTaishogaiEntity 特徴平準化結果対象外, RString 編集後住所, Decimal 今年度保険料率,
             int 調整金額, RString 編集備考) {
         bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-        bodyList.add(調定日時.toDateString());
+        bodyList.add(new RString(調定日時.toString()));
         bodyList.add(タイトル_対象外一覧表);
         bodyList.add(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
         bodyList.add(特徴平準化結果対象外.get通知書番号().value());
@@ -773,7 +759,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             TokuchoHeijyunkaTaishoshaEntity 特徴平準化結果対象者, RString 編集後住所, Decimal 今年度保険料率,
             int 調整金額, RString 編集備考) {
         bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-        bodyList.add(調定日時.toDateString());
+        bodyList.add(new RString(調定日時.toString()));
         bodyList.add(タイトル_対象者一覧表);
         bodyList.add(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString());
         bodyList.add(特徴平準化結果対象者.get通知書番号().value());

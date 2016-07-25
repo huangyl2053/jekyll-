@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -38,4 +39,11 @@ public interface IKaigoNinteiAtenaInfoDiv extends ICommonChildDivBaseProperties 
      * @param shikibetsuCode ShikibetsuCode
      */
     void setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo shinseishoKanriNo, ShikibetsuCode shikibetsuCode);
+
+    /**
+     * 介護認定宛名情報Div。
+     *
+     * @param business KaigoNinteiAtenaInfoBusiness
+     */
+    void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business);
 }

@@ -57,6 +57,11 @@ public class ShinsaHoshuIchiranRelateEntity {
     private RString 出席状況_31日;
     private int 出席回数;
     private Decimal 報酬総額;
+    private Decimal その他費用;
     private Decimal 税額控除;
     private Decimal 報酬合計;
+    private Decimal 総合計_報酬総額;
+    private Decimal 総合計_その他費用;
+    private Decimal 総合計_税控除額;
+    private Decimal 総合計_報酬合計;
 }

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * ShokkenTorikeshiIchibuSoshituMain のクラスファイル
@@ -61,10 +62,10 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     private tblRirekiDiv tblRireki;
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("ccdKaigoNinteiShinseiKihonJohoInput")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihonJohoInput;
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("ccdShinseiTodokedesha")
     private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
 
@@ -282,21 +283,21 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiAtenaInfo
-     * @return ccdKaigoNinteiAtenaInfo
-     */
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
-        return ccdKaigoNinteiAtenaInfo;
-    }
-
-    /*
      * getccdKaigoNinteiShinseiKihonJohoInput
      * @return ccdKaigoNinteiShinseiKihonJohoInput
      */
     @JsonProperty("ccdKaigoNinteiShinseiKihonJohoInput")
     public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihonJohoInput() {
         return ccdKaigoNinteiShinseiKihonJohoInput;
+    }
+
+    /*
+     * getccdKaigoNinteiAtenaInfo
+     * @return ccdKaigoNinteiAtenaInfo
+     */
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
+        return ccdKaigoNinteiAtenaInfo;
     }
 
     /*
@@ -367,17 +368,17 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoKaishibiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiZenkai() {
         return this.getTblRireki().getTxtYukoKaishibiZenkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoShuryobiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiZenkai() {
         return this.getTblRireki().getTxtYukoShuryobiZenkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteibiZenkai() {
+    public TextBoxFlexibleDate getTxtNinteibiZenkai() {
         return this.getTblRireki().getTxtNinteibiZenkai();
     }
 
@@ -407,17 +408,17 @@ public class ShokkenTorikeshiIchibuSoshituMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoKaishibiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiKonkai() {
         return this.getTblRireki().getTxtYukoKaishibiKonkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoShuryobiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiKonkai() {
         return this.getTblRireki().getTxtYukoShuryobiKonkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteibiKonkai() {
+    public TextBoxFlexibleDate getTxtNinteibiKonkai() {
         return this.getTblRireki().getTxtNinteibiKonkai();
     }
 

@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReport;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReportJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -209,9 +210,9 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
      */
     public void print主治医意見書作成依頼発行一覧表(SyujiyikenshosakuseyiraihakouReportJoho 主治医意見書作成依頼発行一覧表情報, ReportManager reportManager) {
         List<SyujiyikenshosakuseyiraihakouReport> list = new ArrayList<>();
-        IkenshokinyuyoshiProperty property = new IkenshokinyuyoshiProperty();
+        SyujiyikenshosakuseyiraihakouProperty property = new SyujiyikenshosakuseyiraihakouProperty();
         list.add(SyujiyikenshosakuseyiraihakouReport.createFrom(主治医意見書作成依頼発行一覧表情報.getHeadItem(), 主治医意見書作成依頼発行一覧表情報.getBodyItemList()));
-        try (ReportAssembler<IkenshokinyuyoshiReportSource> assembler = createAssembler(property, reportManager)) {
+        try (ReportAssembler<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
             for (SyujiyikenshosakuseyiraihakouReport report : list) {
                 ReportSourceWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);

@@ -122,17 +122,17 @@ public class tblRirekiDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoKaishibiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiZenkai() {
         return this.celTableCell15.getTxtYukoKaishibiZenkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoShuryobiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiZenkai() {
         return this.celTableCell16.getTxtYukoShuryobiZenkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteibiZenkai() {
+    public TextBoxFlexibleDate getTxtNinteibiZenkai() {
         return this.celTableCell17.getTxtNinteibiZenkai();
     }
 
@@ -162,17 +162,17 @@ public class tblRirekiDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoKaishibiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiKonkai() {
         return this.celTableCell20.getTxtYukoKaishibiKonkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtYukoShuryobiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiKonkai() {
         return this.celTableCell21.getTxtYukoShuryobiKonkai();
     }
 
     @JsonIgnore
-    public TextBox getTxtNinteibiKonkai() {
+    public TextBoxFlexibleDate getTxtNinteibiKonkai() {
         return this.celTableCell22.getTxtNinteibiKonkai();
     }
 
@@ -924,14 +924,14 @@ class celTableCell6AttblRireki extends TableCell {
 class celTableCell15AttblRireki extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtYukoKaishibiZenkai")
-    private TextBox txtYukoKaishibiZenkai;
+    private TextBoxFlexibleDate txtYukoKaishibiZenkai;
 
     /*
      * gettxtYukoKaishibiZenkai
      * @return txtYukoKaishibiZenkai
      */
     @JsonProperty("txtYukoKaishibiZenkai")
-    public TextBox getTxtYukoKaishibiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiZenkai() {
         return txtYukoKaishibiZenkai;
     }
 
@@ -940,7 +940,7 @@ class celTableCell15AttblRireki extends TableCell {
      * @param txtYukoKaishibiZenkai txtYukoKaishibiZenkai
      */
     @JsonProperty("txtYukoKaishibiZenkai")
-    public void setTxtYukoKaishibiZenkai(TextBox txtYukoKaishibiZenkai) {
+    public void setTxtYukoKaishibiZenkai(TextBoxFlexibleDate txtYukoKaishibiZenkai) {
         this.txtYukoKaishibiZenkai = txtYukoKaishibiZenkai;
     }
 
@@ -954,14 +954,14 @@ class celTableCell15AttblRireki extends TableCell {
 class celTableCell16AttblRireki extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtYukoShuryobiZenkai")
-    private TextBox txtYukoShuryobiZenkai;
+    private TextBoxFlexibleDate txtYukoShuryobiZenkai;
 
     /*
      * gettxtYukoShuryobiZenkai
      * @return txtYukoShuryobiZenkai
      */
     @JsonProperty("txtYukoShuryobiZenkai")
-    public TextBox getTxtYukoShuryobiZenkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiZenkai() {
         return txtYukoShuryobiZenkai;
     }
 
@@ -970,7 +970,7 @@ class celTableCell16AttblRireki extends TableCell {
      * @param txtYukoShuryobiZenkai txtYukoShuryobiZenkai
      */
     @JsonProperty("txtYukoShuryobiZenkai")
-    public void setTxtYukoShuryobiZenkai(TextBox txtYukoShuryobiZenkai) {
+    public void setTxtYukoShuryobiZenkai(TextBoxFlexibleDate txtYukoShuryobiZenkai) {
         this.txtYukoShuryobiZenkai = txtYukoShuryobiZenkai;
     }
 
@@ -984,14 +984,14 @@ class celTableCell16AttblRireki extends TableCell {
 class celTableCell17AttblRireki extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtNinteibiZenkai")
-    private TextBox txtNinteibiZenkai;
+    private TextBoxFlexibleDate txtNinteibiZenkai;
 
     /*
      * gettxtNinteibiZenkai
      * @return txtNinteibiZenkai
      */
     @JsonProperty("txtNinteibiZenkai")
-    public TextBox getTxtNinteibiZenkai() {
+    public TextBoxFlexibleDate getTxtNinteibiZenkai() {
         return txtNinteibiZenkai;
     }
 
@@ -1000,7 +1000,7 @@ class celTableCell17AttblRireki extends TableCell {
      * @param txtNinteibiZenkai txtNinteibiZenkai
      */
     @JsonProperty("txtNinteibiZenkai")
-    public void setTxtNinteibiZenkai(TextBox txtNinteibiZenkai) {
+    public void setTxtNinteibiZenkai(TextBoxFlexibleDate txtNinteibiZenkai) {
         this.txtNinteibiZenkai = txtNinteibiZenkai;
     }
 
@@ -1164,14 +1164,14 @@ class celTableCell9AttblRireki extends TableCell {
 class celTableCell20AttblRireki extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtYukoKaishibiKonkai")
-    private TextBox txtYukoKaishibiKonkai;
+    private TextBoxFlexibleDate txtYukoKaishibiKonkai;
 
     /*
      * gettxtYukoKaishibiKonkai
      * @return txtYukoKaishibiKonkai
      */
     @JsonProperty("txtYukoKaishibiKonkai")
-    public TextBox getTxtYukoKaishibiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoKaishibiKonkai() {
         return txtYukoKaishibiKonkai;
     }
 
@@ -1180,7 +1180,7 @@ class celTableCell20AttblRireki extends TableCell {
      * @param txtYukoKaishibiKonkai txtYukoKaishibiKonkai
      */
     @JsonProperty("txtYukoKaishibiKonkai")
-    public void setTxtYukoKaishibiKonkai(TextBox txtYukoKaishibiKonkai) {
+    public void setTxtYukoKaishibiKonkai(TextBoxFlexibleDate txtYukoKaishibiKonkai) {
         this.txtYukoKaishibiKonkai = txtYukoKaishibiKonkai;
     }
 
@@ -1194,14 +1194,14 @@ class celTableCell20AttblRireki extends TableCell {
 class celTableCell21AttblRireki extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtYukoShuryobiKonkai")
-    private TextBox txtYukoShuryobiKonkai;
+    private TextBoxFlexibleDate txtYukoShuryobiKonkai;
 
     /*
      * gettxtYukoShuryobiKonkai
      * @return txtYukoShuryobiKonkai
      */
     @JsonProperty("txtYukoShuryobiKonkai")
-    public TextBox getTxtYukoShuryobiKonkai() {
+    public TextBoxFlexibleDate getTxtYukoShuryobiKonkai() {
         return txtYukoShuryobiKonkai;
     }
 
@@ -1210,7 +1210,7 @@ class celTableCell21AttblRireki extends TableCell {
      * @param txtYukoShuryobiKonkai txtYukoShuryobiKonkai
      */
     @JsonProperty("txtYukoShuryobiKonkai")
-    public void setTxtYukoShuryobiKonkai(TextBox txtYukoShuryobiKonkai) {
+    public void setTxtYukoShuryobiKonkai(TextBoxFlexibleDate txtYukoShuryobiKonkai) {
         this.txtYukoShuryobiKonkai = txtYukoShuryobiKonkai;
     }
 
@@ -1224,14 +1224,14 @@ class celTableCell21AttblRireki extends TableCell {
 class celTableCell22AttblRireki extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtNinteibiKonkai")
-    private TextBox txtNinteibiKonkai;
+    private TextBoxFlexibleDate txtNinteibiKonkai;
 
     /*
      * gettxtNinteibiKonkai
      * @return txtNinteibiKonkai
      */
     @JsonProperty("txtNinteibiKonkai")
-    public TextBox getTxtNinteibiKonkai() {
+    public TextBoxFlexibleDate getTxtNinteibiKonkai() {
         return txtNinteibiKonkai;
     }
 
@@ -1240,7 +1240,7 @@ class celTableCell22AttblRireki extends TableCell {
      * @param txtNinteibiKonkai txtNinteibiKonkai
      */
     @JsonProperty("txtNinteibiKonkai")
-    public void setTxtNinteibiKonkai(TextBox txtNinteibiKonkai) {
+    public void setTxtNinteibiKonkai(TextBoxFlexibleDate txtNinteibiKonkai) {
         this.txtNinteibiKonkai = txtNinteibiKonkai;
     }
 

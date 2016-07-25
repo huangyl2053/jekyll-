@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class KarisanteiIdoKekkaIchiranPrintService {
 
-    private final ReportId REPORTID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
+    private static final ReportId ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
 
     /**
      * printメソッド(単一帳票出力用)
@@ -60,20 +60,31 @@ public class KarisanteiIdoKekkaIchiranPrintService {
         SourceDataCollection collection;
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
-        List<RString> 出力順項目リスト = get出力順(Long.valueOf(出力順ID.toString()));
+        List<RString> 出力順項目リスト = new ArrayList<>();
+        List<RString> 改頁項目リスト = new ArrayList<>();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), Long.valueOf(出力順ID.toString()));
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                if (item.is改頁項目()) {
+                    改頁項目リスト.add(item.get項目名());
+                }
+                出力順項目リスト.add(item.get項目名());
+            }
+        }
 
         List<RString> 住所編集リスト = new ArrayList<>();
         for (KeisanjohoAtenaKozaKouseizengoEntity entity : 更正前後EntityList) {
             if (entity.get計算後情報_宛名_口座_更正前Entity() != null && entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
                 IKojin iKojin = ShikibetsuTaishoFactory.createKojin(entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
-                ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, REPORTID);
-                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+                ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ID);
+                EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
                 住所編集リスト.add(編集後個人.get編集後住所());
             }
         }
 
         try (ReportManager reportManager = new ReportManager()) {
-            print(更正前後EntityList, 調定日時, 賦課年度, association, 住所編集リスト, 出力順項目リスト, 出力順項目リスト, reportManager);
+            print(更正前後EntityList, 調定日時, 賦課年度, association, 住所編集リスト, 出力順項目リスト, 改頁項目リスト, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -112,17 +123,5 @@ public class KarisanteiIdoKekkaIchiranPrintService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
-    }
-
-    private List<RString> get出力順(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId(), 出力順ID);
-        List<RString> 並び順List = new ArrayList<>();
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                並び順List.add(item.get項目名());
-            }
-        }
-        return 並び順List;
     }
 }

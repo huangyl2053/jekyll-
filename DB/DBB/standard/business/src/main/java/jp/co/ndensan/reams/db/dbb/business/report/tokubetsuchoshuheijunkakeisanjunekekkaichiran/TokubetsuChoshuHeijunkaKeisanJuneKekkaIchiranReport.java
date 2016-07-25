@@ -84,11 +84,21 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
         }
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor headerEditor
                 = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時, 賦課年度, title, outputOrder);
-        ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
-                = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(特徴平準化結果対象者一覧表リスト,
-                        特徴平準化結果対象外一覧表リスト, association);
-        ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
-                headerEditor, bodyEditor);
-        writer.writeLine(builder);
+        for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 対象者 : 特徴平準化結果対象者一覧表リスト) {
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
+                    = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(対象者,
+                            null, association);
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
+                    headerEditor, bodyEditor);
+            writer.writeLine(builder);
+        }
+        for (TokuchoHeijunkaRokuBatchTaishogaiIchiran 対象外 : 特徴平準化結果対象外一覧表リスト) {
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
+                    = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(null,
+                            対象外, association);
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
+                    headerEditor, bodyEditor);
+            writer.writeLine(builder);
+        }
     }
 }

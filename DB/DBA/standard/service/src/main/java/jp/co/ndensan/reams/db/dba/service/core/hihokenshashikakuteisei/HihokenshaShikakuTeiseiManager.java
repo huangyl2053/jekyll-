@@ -607,7 +607,8 @@ public class HihokenshaShikakuTeiseiManager {
     public void deleteHihokenshaShikakuTeisei(HihokenshaNo 被保険者番号, FlexibleDate 取得日) {
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = dac.selectByHihokenshaNo(被保険者番号, 取得日);
         for (DbT1001HihokenshaDaichoEntity entity : dbT1001List) {
-            entity.setState(EntityDataState.Deleted);
+            entity.setLogicalDeletedFlag(true);
+            entity.setState(EntityDataState.Modified);
             dac.save(entity);
         }
     }

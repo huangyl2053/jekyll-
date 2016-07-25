@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbe.entity.report.shinsaiinjissekiichiran;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 特記事項Sourceクラスです。
+ *
+ * @reamsid_L DBE-1700-020 wanghuafeng
+ */
 public class ShinsaiinJissekiIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

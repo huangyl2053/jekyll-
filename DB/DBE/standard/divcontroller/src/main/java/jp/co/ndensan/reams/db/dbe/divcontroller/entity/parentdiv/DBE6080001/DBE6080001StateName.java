@@ -19,7 +19,8 @@ public enum DBE6080001StateName implements IStateEnumerations {
     主治医状態("主治医状態"),
     実績一覧状態("実績一覧状態"),
     実績明細状態("実績明細状態"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    実績一覧ボタンなし状態("実績一覧ボタンなし状態");
 
     private final RString name;
 

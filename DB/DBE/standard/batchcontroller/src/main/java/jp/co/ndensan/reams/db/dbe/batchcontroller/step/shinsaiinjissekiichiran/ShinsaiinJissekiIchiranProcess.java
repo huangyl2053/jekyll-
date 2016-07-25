@@ -39,9 +39,11 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬実績集計表のプロセス処理の帳票出力のプロセスクラスです。
@@ -124,19 +126,9 @@ public class ShinsaiinJissekiIchiranProcess extends BatchProcessBase<ShinsaiinJi
     }
 
     private void バッチ出力条件リストの出力() {
-        RString 出力件数 = new RString(eucCsvWriterJunitoJugo.getCount());
-        List<RString> 出力件数_list = new ArrayList<>();
-        RString 出力件数_substr = RString.EMPTY;
-        for (int i = 0; i < 出力件数.length(); i++) {
-            if (i + 3 > 出力件数.length()) {
-                出力件数_substr = 出力件数.substring(i, 出力件数.length());
-            }
-            出力件数_list.add(出力件数_substr);
-        }
-        RStringBuilder 出力件数_SB = new RStringBuilder();
-        for (int i = 0; i < 出力件数_list.size(); i++) {
-            出力件数_SB.append(出力件数_list.get(i)).append(",");
-        }
+        Decimal 出力件数 = new Decimal(eucCsvWriterJunitoJugo.getCount());
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
         審査会開催日FROM_SB.append(paramter.get審査会開催日FROM());
@@ -146,7 +138,7 @@ public class ShinsaiinJissekiIchiranProcess extends BatchProcessBase<ShinsaiinJi
         出力条件.add(審査会開催日To_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("介護認定審査会委員実績集計CSV"), 導入団体コード, 市町村名, new RString(JobContextHolder.getJobId()),
-                CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数_SB.toRString(), 出力条件);
+                CSV_NAME, EUC_ENTITY_ID.toRString(), builder.toRString(), 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 

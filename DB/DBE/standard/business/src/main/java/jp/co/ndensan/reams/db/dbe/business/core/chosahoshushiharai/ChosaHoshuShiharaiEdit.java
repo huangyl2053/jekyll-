@@ -80,7 +80,7 @@ public class ChosaHoshuShiharaiEdit {
                 SubGyomuCode.DBE認定支援));
         shiharaientity.set帳票タイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査報酬支払通知書, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
-        Decimal 単価税込 = nullOrZero(entity.getTanka()).multiply(rstringToDecimal(消費税率));
+        Decimal 単価税込 = nullOrZero(entity.getTanka()).multiply(rstringToDecimal(消費税率)).roundUpTo(0);
         その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo());
         if (!ninteichosaItakusakiCode.equals(entity.getNinteichosaItakusakiCode())) {
             if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
@@ -118,22 +118,22 @@ public class ChosaHoshuShiharaiEdit {
         Decimal 在宅再調査合計 = 単価税込.multiply(在宅再調査件数);
         Decimal 施設新規合計 = 単価税込.multiply(施設新規件数);
         Decimal 施設再調査合計 = 単価税込.multiply(施設再調査件数);
-        shiharaientity.set在宅新規合計(decimalToRString(在宅新規合計));
-        shiharaientity.set在宅再調査合計(decimalToRString(在宅再調査合計));
-        shiharaientity.set施設新規合計(decimalToRString(施設新規合計));
-        shiharaientity.set施設再調査合計(decimalToRString(施設再調査合計));
+        shiharaientity.set在宅新規合計(decimalToRString(在宅新規合計.roundUpTo(0)));
+        shiharaientity.set在宅再調査合計(decimalToRString(在宅再調査合計.roundUpTo(0)));
+        shiharaientity.set施設新規合計(decimalToRString(施設新規合計.roundUpTo(0)));
+        shiharaientity.set施設再調査合計(decimalToRString(施設再調査合計.roundUpTo(0)));
         shiharaientity.setその他の設定件数(intToRString(その他の件数));
         shiharaientity.setその他の単価税込(RString.EMPTY);
-        shiharaientity.setその他の金額合計(decimalToRString(その他の金額));
+        shiharaientity.setその他の金額合計(decimalToRString(その他の金額.roundUpTo(0)));
         Decimal 合計金額 = 在宅新規合計.add(在宅再調査合計).add(施設新規合計).add(施設再調査合計).add(その他の金額);
-        shiharaientity.set合計金額(decimalToRString(合計金額));
+        shiharaientity.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
         shiharaientity.setバーコード(getバーコード(entity));
         return shiharaientity;
     }
 
     private ChosaHoshuShiharaiEntity getChosaHoshuShihaEntity(HoshuShiharaiJunbiRelateEntity entity,
             ChosaHoshuShiharaiEntity shiharaientity, Decimal 単価税込, RString 消費税率) {
-        その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo());
+        その他の金額 = rstringToDecimal(消費税率).multiply(entity.getChosaItakuryo()).roundUpTo(0);
         if (ninteichosaItakusakiCode.equals(entity.getNinteichosaItakusakiCode())) {
             if (entity.getNinteiChosaKubunCode() != null && entity.getChosaJisshiBashoCode() != null
                     && ChosaKubun.新規調査.getコード().equals(entity.getNinteiChosaKubunCode().value())
@@ -161,7 +161,7 @@ public class ChosaHoshuShiharaiEdit {
                 shiharaientity.set施設再調査単価税込(decimalToRString(単価税込));
             } else {
                 その他の件数 = その他の件数 + 1;
-                その他の金額 = その他の金額.add(その他の金額);
+                その他の金額 = その他の金額.add(その他の金額).roundUpTo(0);
             }
         }
         return shiharaientity;

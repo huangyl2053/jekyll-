@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran.ShinsaHoshuIc
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsahoshuichiran.ShinsaHoshuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.dgShinsakaiIinHoshu_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -26,11 +27,9 @@ public class ShinsakauIinHoshuShokaiHandler {
     private static final RString 一覧表を発行する = new RString("btnPulish");
     private static final RString CSVを出力する = new RString("btnShutsutyoku");
     private static final RString 条件に戻る = new RString("btnBackToKensaku");
+    private static final int ZERO = 0;
     private final ShinsakauIinHoshuShokaiDiv div;
     private Decimal 総合計_審査回数 = Decimal.ZERO;
-    private Decimal 総合計_報酬総額 = Decimal.ZERO;
-    private Decimal 総合計_税控除額 = Decimal.ZERO;
-    private Decimal 総合計_報酬合計 = Decimal.ZERO;
 
     /**
      * コンストラクタです。
@@ -50,6 +49,8 @@ public class ShinsakauIinHoshuShokaiHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
         div.getShinsakaiIinHoshu().setDisplayNone(true);
         div.getShinsakaiKaisaibi().setDisplayNone(false);
+        div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().setPlaceHolder(
+                RDate.getNowDate().getYearMonth().wareki().toDateString());
     }
 
     /**
@@ -75,9 +76,6 @@ public class ShinsakauIinHoshuShokaiHandler {
         for (ShinsaHoshuIchiran data : ihinsaHoshuIchiranList) {
 
             総合計_審査回数 = 総合計_審査回数.add(data.get出席回数());
-            総合計_報酬総額 = 総合計_報酬総額.add(data.get報酬総額());
-            総合計_税控除額 = 総合計_税控除額.add(data.get税額控除());
-            総合計_報酬合計 = 総合計_報酬合計.add(data.get報酬合計());
 
             dgShinsakaiIinHoshu_Row row = new dgShinsakaiIinHoshu_Row(new RString(data.get合議体番号()),
                     data.get介護認定審査会委員氏名(),
@@ -113,18 +111,20 @@ public class ShinsakauIinHoshuShokaiHandler {
                     data.get出席状況_30日(),
                     data.get出席状況_31日(),
                     new RString(data.get出席回数()),
-                    DecimalFormatter.toコンマ区切りRString(data.get報酬総額(), 0),
-                    DecimalFormatter.toコンマ区切りRString(data.get税額控除(), 0),
-                    DecimalFormatter.toコンマ区切りRString(data.get報酬合計(), 0)
+                    DecimalFormatter.toコンマ区切りRString(data.get報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(data.getその他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(data.get税額控除(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(data.get報酬合計(), ZERO)
             );
             rowList.add(row);
         }
         div.getShinsakaiIinHoshu().setDisplayNone(false);
         div.getDgShinsakaiIinHoshu().setDataSource(rowList);
         div.getTxtShinsaKaisu().setValue(総合計_審査回数);
-        div.getTxtHoshuSogaku().setValue(総合計_報酬総額);
-        div.getTxtZeiKojoGaku().setValue(総合計_税控除額);
-        div.getTxtHoshuGokei().setValue(総合計_報酬合計);
+        div.getTxtHoshuSogaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬総額());
+        div.getTxtSonotaHiyo().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_その他費用());
+        div.getTxtZeiKojoGaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_税控除額());
+        div.getTxtHoshuGokei().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬合計());
     }
 
     /**
@@ -136,10 +136,6 @@ public class ShinsakauIinHoshuShokaiHandler {
     public ShinsaHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
         ShinsaHoshuIchiranBatchParameter param = new ShinsaHoshuIchiranBatchParameter();
         param.setShinsakaiKaisaiYMD(new RString(div.getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
-        param.setShisakaisu(new RString(div.getTxtShinsaKaisu().toString()));
-        param.setHosyusogaku(new RString(div.getTxtHoshuSogaku().toString()));
-        param.setSegakukojyo(new RString(div.getTxtZeiKojoGaku().toString()));
-        param.setHosyugoke(new RString(div.getTxtHoshuGokei().toString()));
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

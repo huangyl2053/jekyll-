@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -45,15 +43,14 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
 
     private Association 導入団体クラス;
     private TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter parameter;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("TokubetsuChoshuMidoteiIchiran"));
-    private final ReportId reportId = new ReportId("DBB200032_TokubetsuChoshuMidoteiIchiran");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBB200032"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
     private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString reportName = new RString("特別徴収未同定一覧表");
-    private final RString csvファイル名 = new RString("TokubetsuChoshuDoteiIchiran.csv");
+    private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
     private RString pageSize;
 
@@ -77,6 +74,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
 
     @Override
     protected void beforeExecute() {
+        pageSize = ONE;
         導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
@@ -171,7 +169,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
             targets.add(target);
         }
         TokubetsuChoshuMidoteiIchiranPrintService printService = new TokubetsuChoshuMidoteiIchiranPrintService();
-        printService.print(targets, null, null, new ReportManager(), null);
+        printService.printChohyo(targets, null, null, null);
     }
 
     private void outputCsv(List<TokubetsuChoshuMidoteiIchiranEntity> list) {

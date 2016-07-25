@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.RiysFutgGengMenjNinteishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.RiysFutgGengMenjNinteishoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.RiysFutgGengMenjNinteishoReport;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100015.RiysFutgGengMenjNinteishoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -38,7 +40,11 @@ public class RiysFutgGengMenjNinteishoPrintService {
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(RiysFutgGengMenjNinteishoItem target, ReportManager reportManager) {
-        RiysFutgGengMenjNinteishoProerty property = new RiysFutgGengMenjNinteishoProerty();
+        ReportId reportId = ReportIdDBD.DBD100015.getReportId();
+        if (target.get利用者負担額減額情報().is旧措置者有無()) {
+            reportId = ReportIdDBD.DBD100016.getReportId();
+        }
+        RiysFutgGengMenjNinteishoProerty property = new RiysFutgGengMenjNinteishoProerty(reportId);
         try (ReportAssembler<RiysFutgGengMenjNinteishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<RiysFutgGengMenjNinteishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),

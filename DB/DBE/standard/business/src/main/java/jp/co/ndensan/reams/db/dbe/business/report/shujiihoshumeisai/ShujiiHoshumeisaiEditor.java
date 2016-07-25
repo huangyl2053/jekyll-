@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBE622001_主治医意見書作成報酬支払明細書のShujiiHoshumeisaiEditorです。
@@ -63,14 +65,14 @@ public class ShujiiHoshumeisaiEditor implements IShujiiHoshumeisaiEditor {
         source.listIkenshosakuseiryo_7 = item.get新規施設();
         source.listIkenshosakuseiryo_8 = item.get継続在宅();
         source.listIkenshosakuseiryo_9 = item.get継続施設();
-        source.listIkenshosakuseiryo_10 = item.get意見書作成料();
-        source.listGokeikensu_1 = item.get新規在宅件数();
-        source.listGokeikensu_2 = item.get新規施設件数();
-        source.listGokeikensu_3 = item.get継続在宅件数();
-        source.listGokeikensu_4 = item.get継続施設件数();
-        source.gokeiKingaku = item.get合計金額();
-        source.shouhiZei = item.get消費税();
-        source.gokeiSeikyuKingaku = item.get合計請求額();
+        source.listIkenshosakuseiryo_10 = kinngakuFormat(item.get意見書作成料());
+        source.listGokeikensu_1 = kinngakuFormat(item.get新規在宅件数());
+        source.listGokeikensu_2 = kinngakuFormat(item.get新規施設件数());
+        source.listGokeikensu_3 = kinngakuFormat(item.get継続在宅件数());
+        source.listGokeikensu_4 = kinngakuFormat(item.get継続施設件数());
+        source.gokeiKingaku = kinngakuFormat(item.get合計金額());
+        source.shouhiZei = kinngakuFormat(item.get消費税());
+        source.gokeiSeikyuKingaku = kinngakuFormat(item.get合計請求額());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         return edit2(source);
     }
@@ -80,5 +82,12 @@ public class ShujiiHoshumeisaiEditor implements IShujiiHoshumeisaiEditor {
             source.hihokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.get被保険者番号());
         }
         return source;
+    }
+
+    private RString kinngakuFormat(RString data) {
+        if (data == null || data.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(data.toString()), 0);
     }
 }
