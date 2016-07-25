@@ -262,7 +262,7 @@ public class JimuGaikyouTokkiBusiness {
 
     private RString get概況特記テキスト(int index) {
         if (概況特記一覧表情報 != null && !概況特記一覧表情報.isEmpty()
-                && 概況特記一覧表情報.size() % 件数 == index) {
+                && index <= 概況特記一覧表情報.size() % 件数) {
             return get項目(index);
         }
         return RString.EMPTY;
@@ -271,10 +271,12 @@ public class JimuGaikyouTokkiBusiness {
     private RString get項目(int index) {
         RStringBuilder builder = new RStringBuilder();
         GaikyoTokkiEntity 概況特記一覧;
-        if (INT_0 == index) {
+        if (INT_0 == index && INT_9 < 概況特記一覧表情報.size()) {
             概況特記一覧 = 概況特記一覧表情報.get(INT_9);
-        } else {
+        } else if (INT_0 != index) {
             概況特記一覧 = 概況特記一覧表情報.get(index - 1);
+        } else {
+            概況特記一覧 = new GaikyoTokkiEntity();
         }
         return builder.append(概況特記一覧.getDbt5206_shuso())
                 .append(概況特記一覧.getDbt5206_kazokuJokyo())
