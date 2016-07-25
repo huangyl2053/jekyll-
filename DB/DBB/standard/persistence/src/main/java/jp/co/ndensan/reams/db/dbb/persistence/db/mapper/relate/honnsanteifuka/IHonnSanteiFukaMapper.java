@@ -53,6 +53,13 @@ public interface IHonnSanteiFukaMapper {
     void insert月別ランクTemp(KuBunnGaTsurakuTempEntity entity);
 
     /**
+     * select月別ランクTemp
+     *
+     * @return List<KuBunnGaTsurakuTempEntity>
+     */
+    List<KuBunnGaTsurakuTempEntity> select月別ランクTemp();
+
+    /**
      * 本算定抽出TempのCreate
      */
     void creat本算定抽出Temp();
@@ -63,6 +70,13 @@ public interface IHonnSanteiFukaMapper {
      * @return List<SetaiHaakuShuturyokuEntity>
      */
     List<SetaiHaakuShuturyokuEntity> select世帯員把握();
+
+    /**
+     * 本算定抽出Tempの検索
+     *
+     * @return List<SetaiHaakuShuturyokuEntity>
+     */
+    List<SetaiHaakuShuturyokuEntity> select世帯員把握入力テーブル();
 
     /**
      * DB出力(世帯員把握入力テーブル)
@@ -87,6 +101,13 @@ public interface IHonnSanteiFukaMapper {
      * @param entity HonSanJonTyuShutuTempEntity
      */
     void insert本算定抽出Temp(HonSanJonTyuShutuTempEntity entity);
+
+    /**
+     * select本算定抽出
+     *
+     * @return List<HonSanJonTyuShutuTempEntity>
+     */
+    List<HonSanJonTyuShutuTempEntity> select本算定抽出();
 
     /**
      * get賦課計算情報
