@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -105,13 +104,15 @@ public class KaigoNinteiShinseiKensaku {
      * @return ResponseData<KaigoNinteiShinseiKensakuDiv>
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnKensaku(KaigoNinteiShinseiKensakuDiv div) {
-        介護認定申請情報の検索(div);
-        ValidationMessageControlPairs validationMessage = getValidatisonHandler(div).データ空のチェック();
-        if (validationMessage.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
-        }
-        getHandler(div).setJyoTai(get受給と認定の判定(), 検索状態);
-        return ResponseData.of(div).respond();
+        // TODO. for test
+//        介護認定申請情報の検索(div);
+//        ValidationMessageControlPairs validationMessage = getValidatisonHandler(div).データ空のチェック();
+//        if (validationMessage.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+//        }
+//        getHandler(div).setJyoTai(get受給と認定の判定(), 検索状態);
+//        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBZ5100001TransitionEventName.検索結果選択).respond();
     }
 
     /**
