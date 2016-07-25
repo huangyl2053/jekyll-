@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -46,6 +48,7 @@ public class ShiharaiHohoKanriListMainHandler {
     public void onLoad() {
         onLoad登録者の選択情報();
         onChange_radTorokusha();
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200007.getReportId());
     }
 
     /**
