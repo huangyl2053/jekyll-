@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInfomations;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv.DisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.dgSetaiShotoku_Row;
@@ -48,9 +49,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -418,7 +416,7 @@ public class SetaiShotokuIchiranHandler {
      * @param 世帯員所得情報リスト 世帯員所得情報リスト
      */
     public void accessLog(List<? extends SetaiinShotoku> 世帯員所得情報リスト) {
-        List<PersonalData> personalData = new ArrayList();
+        List<PersonalData> personalData = new ArrayList<>();
         for (SetaiinShotoku setaiin : 世帯員所得情報リスト) {
             if (setaiin.get識別コード().isEmpty()) {
                 continue;
@@ -587,7 +585,7 @@ public class SetaiShotokuIchiranHandler {
     }
 
     private void 日付関連_所得年度コンフィグによる制御(FlexibleYear 所得年度) {
-        List<KeyValueDataSource> kazeiNendoList = new ArrayList();
+        List<KeyValueDataSource> kazeiNendoList = new ArrayList<>();
         FlexibleYear 基準年度 = new FlexibleYear("2000");
         int index = 0;
         RString selectedIndex = new RString("key0");
@@ -613,8 +611,11 @@ public class SetaiShotokuIchiranHandler {
 
     public ValidationMessageControlPairs validate比較対象() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (div.getDgSetaiShotoku().getSelectedItems().size() == 2) {
-            pairs.add(new ValidationMessageControlPair(DbzErrorMessages.世帯所得照会_比較対象_2件以外, div.getBtnNarabeteHyoji()));
+        if (div.getDgSetaiShotoku().getSelectedItems().size() != 2) {
+            pairs.add(new ValidationMessageControlPair(
+                    DbzErrorMessages.世帯所得照会_比較対象_2件以外,
+                    div.getDgSetaiShotoku()
+            ));
         }
         return pairs;
     }

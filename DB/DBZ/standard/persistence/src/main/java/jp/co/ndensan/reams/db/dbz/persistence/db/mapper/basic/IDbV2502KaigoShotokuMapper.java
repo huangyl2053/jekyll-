@@ -6,10 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper}のマッパーIFです。
@@ -27,5 +29,8 @@ public interface IDbV2502KaigoShotokuMapper {
      * @param shikibetsuCodeList 識別コードList。指定した識別コードのみ検索対象とする。
      * @return {@link DbV2002FukaEntity}のList
      */
-    List<DbV2502KaigoShotokuEntity> getShotokuJohoList(FlexibleYear shiteiNendo, YMDHMS shiteiShoriYMDHMS, List<ShikibetsuCode> shikibetsuCodeList);
+    List<DbV2502KaigoShotokuEntity> getShotokuJohoList(
+            @Param(value = "shiteiNendo") FlexibleYear shiteiNendo,
+            @Param(value = "shiteiShoriYMDHMS") YMDHMS shiteiShoriYMDHMS,
+            @Param(value = "shikibetsuCodeList") List<ShikibetsuCode> shikibetsuCodeList);
 }

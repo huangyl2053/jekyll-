@@ -20,7 +20,7 @@
         "DbV2502"."yusenKubun" as "DbV2502_yusenKubun",
         "DbV2502"."shoriTimeStamp" as "DbV2502_shoriTimeStamp",
         "DbV2502"."motoRirekiNo" as "DbV2502_motoRirekiNo",
-        "DbV2502"."torokuGyomu as "DbV2502_torokuGyomu"
+        "DbV2502"."torokuGyomu" as "DbV2502_torokuGyomu"
     </sql>
 
     <!--テーブルDbV2002Fukaの項目をDbV2002FukaEntityの項目にマッピングします。-->
@@ -41,10 +41,19 @@
         <result property="torokuGyomu" column="DbV2502_torokuGyomu" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
     </resultMap>
 
-    <select resultOrdered="true" id="getShotokuJohoList" resultMap="ResultMap_DbV2502KaigoShotokuEntity">
+    <select resultOrdered="true" id="getShotokuJohoList"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.basic.KaigoShotokuMapperParameter"
+            resultMap="ResultMap_DbV2502KaigoShotokuEntity">
         SELECT
-        <include refid="allColumns_DbV2502" />
-        FROM rgdb."DbFt252KaigoShotoku"('#{shiteiNendo}','#{shiteiShoriYMDHMS}','#{shikibetsuCodeList}') as "DbV2502"
-        ORDER BY DbV2502_shotokuNendo ASC, DbV2502_shikibetsuCode ASC, DbV2502_rirekino ASC
+            <include refid="allColumns_DbV2502" />
+        FROM rgdb."DbFt252KaigoShotoku"(
+            #{shiteiNendo},
+            #{shiteiShoriYMDHMS},
+            <foreach item="shikibetsuCode" index="index" collection="shikibetsuCodeList"
+                     open="'{ " separator="," close="}'">
+                ${shikibetsuCode}
+            </foreach>
+        ) as "DbV2502"
+        ORDER BY "DbV2502_shotokuNendo" ASC, "DbV2502_shikibetsuCode" ASC, "DbV2502_rirekino" ASC
     </select>
 </mapper>
