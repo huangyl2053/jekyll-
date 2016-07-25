@@ -63,6 +63,7 @@
     <select resultOrdered="true" id="get訪問調査依頼書" resultMap="resultMap_getHomonChosaIraisho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter" fetchSize="500">
         SELECT
+        DISTINCT
             DbT5101."shinseishoKanriNo"
             , DbT5101."hihokenshaNo"
             , DbT5101."hihokenshaKana"
@@ -99,6 +100,8 @@
             , DbT5150."renrakusakiShimei"
             , DbT5150."renrakusakiTuzukigara" 
             , DbT5150."renrakusakiJusho"
+            , DbT5101."ninteiChosaItakusakiCode"
+            , DbT5101."ninteiChosainCode"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
         INNER JOIN 

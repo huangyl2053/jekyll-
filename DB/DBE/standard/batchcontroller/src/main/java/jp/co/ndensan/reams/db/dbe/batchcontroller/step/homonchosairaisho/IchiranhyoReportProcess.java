@@ -120,6 +120,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     @Override
     protected void keyBreakProcess(HomonChosaIraishoRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
+            連番 = 1;
             ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoBodyItemList);
             report.writeBy(ichiranhyoReportSourceWriter);
             ichiranhyoBodyItemList = new ArrayList<>();
