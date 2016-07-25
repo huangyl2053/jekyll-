@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.definition.core.fuka;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 課税区分を表す列挙型です。
@@ -64,12 +65,36 @@ public enum KazeiKubun {
      * @return {@code code} に対応する課税区分
      */
     public static KazeiKubun toValue(RString code) {
+        KazeiKubun kazeiKubun = toValueOrNull(code);
+        if (kazeiKubun != null) {
+            return kazeiKubun;
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(
+                new RStringBuilder().append("指定されたコード:")
+                .append(code == null ? "null" : code.isEmpty() ? "''" : code)
+                .append(" は、課税区分").toString()
+        ));
+    }
 
+    private static KazeiKubun toValueOrNull(RString code) {
         for (KazeiKubun kazeiKubun : KazeiKubun.values()) {
             if (kazeiKubun.code.equals(code)) {
                 return kazeiKubun;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("課税区分"));
+        return null;
+    }
+
+    /**
+     * 課税区分のコードと一致する項目を検索し、一致する物があった場合、その名称を返却します。
+     * 以外は、第2引数を返却します。
+     *
+     * @param code コード
+     * @param defaultValue コードに該当する項目が見つからなかった場合に返却される値(デフォルト値)
+     * @return
+     */
+    public static RString to名称OrDefault(RString code, RString defaultValue) {
+        KazeiKubun kazeiKubun = toValueOrNull(code);
+        return kazeiKubun == null ? defaultValue : kazeiKubun.get名称();
     }
 }

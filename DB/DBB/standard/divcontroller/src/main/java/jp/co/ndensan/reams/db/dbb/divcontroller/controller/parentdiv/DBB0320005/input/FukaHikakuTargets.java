@@ -10,6 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
+import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.調定年度;
+import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.賦課年度;
+import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.通知書番号;
+import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.履歴番号;
+import static jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey.Items.被保険者番号;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
@@ -35,53 +40,30 @@ public class FukaHikakuTargets {
     }
 
     private static Optional<Fuka> findFukaBy(FukaManager manager, FukaShokaiKey key) {
-        return Optional.ofNullable(manager.get介護賦課(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
+        if (key.hasAll(調定年度, 賦課年度, 通知書番号, 履歴番号)) {
+            return Optional.ofNullable(manager.get介護賦課(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
+        }
+        if (key.hasAll(賦課年度, 被保険者番号)) {
+            return Optional.ofNullable(manager.get賦課年度最新賦課From被保険者番号(key.get賦課年度(), key.get被保険者番号()));
+        }
+        return Optional.empty();
     }
 
-    //   private static Optional<Fuka> findFukaBy任意比較(FukaManager manager, FukaShokaiKey key) {
-//        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get被保険者番号(), key.get更正日時().getRDateTime());
-//        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号());
-//    }
     private static List<Fuka> find比較対象s(FukaHikakuInput fukaHikakuInput) {
         FukaManager manager = new FukaManager();
 
-        Optional<Fuka> fuka1;
-//        switch (fukaHikakuInput.getMode()) {
-//            case 対象指定:
-//                fuka1 = findFukaBy任意比較(manager, fukaHikakuInput.getFukaShokaiKey(0));
-//                break;
-//            default:
-        fuka1 = findFukaBy(manager, fukaHikakuInput.getFukaShokaiKey(0));
-//                break;
-//        }
-
+        Optional<Fuka> fuka1 = findFukaBy(manager, fukaHikakuInput.getFukaShokaiKey(0));
         if (!fuka1.isPresent()) {
             return Collections.emptyList();
         }
+
         List<Fuka> list = new ArrayList<>();
         list.add(fuka1.get());
-//        switch (fukaHikakuInput.getMode()) {
-//            case 前年度最終:
-//                Optional<Fuka> before = manager
-//                        .find前年度賦課履歴(fuka1.get().get賦課年度(), fuka1.get().get被保険者番号())
-//                        .getグループ化賦課履歴()
-//                        .findFirst();
-//                if (before.isPresent()) {
-//                    list.add(before.get());
-//                }
-//                break;
-//            case 対象指定:
-//                Optional<Fuka> fuka2 = findFukaBy任意比較(manager, fukaHikakuInput.getFukaShokaiKey(1));
-//                if (fuka2.isPresent()) {
-//                    list.add(fuka2.get());
-//                }
-//                break;
-//            default:
-        Optional<Fuka> fuka3 = findFukaBy(manager, fukaHikakuInput.getFukaShokaiKey(1));
-        if (fuka3.isPresent()) {
-            list.add(fuka3.get());
+
+        Optional<Fuka> fuka2 = findFukaBy(manager, fukaHikakuInput.getFukaShokaiKey(1));
+        if (fuka2.isPresent()) {
+            list.add(fuka2.get());
         }
-//        }
         return list;
     }
 

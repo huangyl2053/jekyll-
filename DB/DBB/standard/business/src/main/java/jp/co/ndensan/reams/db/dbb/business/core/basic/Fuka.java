@@ -274,12 +274,30 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
     }
 
     /**
+     * 課税区分の名称を返します。
+     *
+     * @return 課税区分の名称
+     */
+    public RString get課税区分名称() {
+        return KazeiKubun.to名称OrDefault(entity.getKazeiKubun(), RString.EMPTY);
+    }
+
+    /**
      * 世帯課税区分を返します。
      *
      * @return 世帯課税区分
      */
     public KazeiKubun get世帯課税区分() {
         return KazeiKubun.toValue(entity.getSetaikazeiKubun());
+    }
+
+    /**
+     * 世帯課税区分の名称を返します。
+     *
+     * @return 世帯課税区分の名称
+     */
+    public RString get世帯課税区分名称() {
+        return KazeiKubun.to名称OrDefault(entity.getSetaikazeiKubun(), RString.EMPTY);
     }
 
     /**
