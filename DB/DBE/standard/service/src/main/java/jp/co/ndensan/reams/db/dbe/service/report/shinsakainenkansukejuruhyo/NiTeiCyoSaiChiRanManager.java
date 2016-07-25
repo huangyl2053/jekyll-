@@ -69,6 +69,9 @@ public class NiTeiCyoSaiChiRanManager {
     private final DbT5208NinteichosahyoServiceJokyoFlagDac dbT5208Dac;
     private final DbT5209NinteichosahyoKinyuItemDac dbT5209Dac;
     private final DbT5210NinteichosahyoShisetsuRiyoDac dbT5210Dac;
+    private final RString 申請書管理番号_Message = new RString("申請書管理番号");
+    private final RString 認定調査依頼履歴番号_Message = new RString("認定調査依頼履歴番号");
+    private final RString 概況調査テキストイメージ区分_Message = new RString("概況調査テキストイメージ区分");
 
     /**
      * コンストラクタ。
@@ -159,8 +162,8 @@ public class NiTeiCyoSaiChiRanManager {
             return SearchResult.of(Collections.<NinteichosahyoGaikyoChosaRelateBusiness>emptyList(), 0, false);
         }
         List<NinteichosahyoGaikyoChosaRelateBusiness> businessList = new ArrayList<>();
-        for (NinteichosahyoGaikyoChosaRelateEntity ninteichosahyoGaikyoChosaRelateEntity : entityList) {
-            businessList.add(new NinteichosahyoGaikyoChosaRelateBusiness(ninteichosahyoGaikyoChosaRelateEntity));
+        for (NinteichosahyoGaikyoChosaRelateEntity chosaRelateEntity : entityList) {
+            businessList.add(new NinteichosahyoGaikyoChosaRelateBusiness(chosaRelateEntity));
         }
         return SearchResult.of(businessList, 0, false);
     }
@@ -180,9 +183,9 @@ public class NiTeiCyoSaiChiRanManager {
             RString 概況調査テキストイメージ区分,
             NinteichosahyoGaikyoChosa 概況調査) {
 
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
-        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage(概況調査テキストイメージ区分_Message.toString()));
         DbT5202NinteichosahyoGaikyoChosaEntity entity = dbT5202Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
         if (!概況調査.hasChanged()) {
             return false;
@@ -210,9 +213,9 @@ public class NiTeiCyoSaiChiRanManager {
             RString 概況調査テキストイメージ区分,
             GaikyoTokki 概況特記) {
 
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
-        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage(概況調査テキストイメージ区分_Message.toString()));
         DbT5206GaikyoTokkiEntity entity = dbT5206Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
         if (!概況特記.hasChanged()) {
             return false;
@@ -246,8 +249,8 @@ public class NiTeiCyoSaiChiRanManager {
             Code 原本マスク区分,
             NinteichosahyoTokkijiko 特記情報) {
 
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(認定調査特記事項番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項番号"));
         requireNonNull(認定調査特記事項連番, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項連番"));
         requireNonNull(特記事項テキスト_イメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項テキスト_イメージ区分"));
@@ -277,7 +280,7 @@ public class NiTeiCyoSaiChiRanManager {
             int 要介護認定調査履歴番号,
             NinteichosahyoKihonChosa 基本調査) {
 
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(要介護認定調査履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査履歴番号"));
 
         DbT5203NinteichosahyoKihonChosaEntity entity = dbT5203Dac.selectByKey(申請書管理番号, 要介護認定調査履歴番号);
@@ -306,7 +309,7 @@ public class NiTeiCyoSaiChiRanManager {
             int 要介護認定調査履歴番号,
             int 連番,
             NinteichosahyoChosaItem 調査項目) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(要介護認定調査履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査履歴番号"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
@@ -336,8 +339,8 @@ public class NiTeiCyoSaiChiRanManager {
             int 認定調査依頼履歴番号,
             int 連番,
             NinteichosahyoServiceJokyo サービスの状況) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         DbT5207NinteichosahyoServiceJokyoEntity entity = dbT5207Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
 
@@ -366,8 +369,8 @@ public class NiTeiCyoSaiChiRanManager {
             int 認定調査依頼履歴番号,
             int 連番,
             NinteichosahyoServiceJokyoFlag サービスの状況フラグ) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbT5208NinteichosahyoServiceJokyoFlagEntity entity = dbT5208Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
@@ -397,8 +400,8 @@ public class NiTeiCyoSaiChiRanManager {
             int 認定調査依頼履歴番号,
             int 連番,
             NinteichosahyoKinyuItem 記入項目) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         DbT5209NinteichosahyoKinyuItemEntity entity = dbT5209Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
 
@@ -427,8 +430,8 @@ public class NiTeiCyoSaiChiRanManager {
             int 認定調査依頼履歴番号,
             int 連番,
             NinteichosahyoShisetsuRiyo 施設利用) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         DbT5210NinteichosahyoShisetsuRiyoEntity entity = dbT5210Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
 
