@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3;
+package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho2a4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA3ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho2A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 主治医意見書A3のEditorです。
+ * 主治医意見書A4のEditorです。
  *
- * @reamsid_L DBE-0150-240 lishengli
+ * @reamsid_L DBE-0150-390 lishengli
  */
-public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
+public class Shujiiikensho2A4Editor implements IShujiiikensho2A4Editor {
 
     private static final int INT_4 = 4;
     private final JimuShinsakaiWariateJohoBusiness business;
@@ -29,16 +29,16 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
      */
-    protected ShujiiikenshoA3Editor(JimuShinsakaiWariateJohoBusiness business) {
+    protected Shujiiikensho2A4Editor(JimuShinsakaiWariateJohoBusiness business) {
         this.business = business;
     }
 
     @Override
-    public ShujiiikenshoA3ReportSource edit(ShujiiikenshoA3ReportSource source) {
+    public Shujiiikensho2A4ReportSource edit(Shujiiikensho2A4ReportSource source) {
         return editSource(source);
     }
 
-    private ShujiiikenshoA3ReportSource editSource(ShujiiikenshoA3ReportSource source) {
+    private Shujiiikensho2A4ReportSource editSource(Shujiiikensho2A4ReportSource source) {
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();
@@ -58,8 +58,7 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
         source.shinsaYY = get年(business.get今回認定審査年月日());
         source.shinsaMM = get月(business.get今回認定審査年月日());
         source.shinsaDD = get日(business.get今回認定審査年月日());
-        source.imgIkensho1 = business.get左の主治医意見書イメージ();
-        source.imgIkensho2 = business.get右の主治医意見書イメージ();
+        source.imgIkensho2 = business.get主治医意見書イメージ２();
         return source;
     }
 
