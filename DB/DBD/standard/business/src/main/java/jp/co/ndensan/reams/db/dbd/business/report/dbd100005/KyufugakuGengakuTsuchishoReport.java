@@ -69,7 +69,8 @@ public final class KyufugakuGengakuTsuchishoReport extends Report<KyufugakuGenga
     @Override
     public void writeBy(ReportSourceWriter<KyufugakuGengakuTsuchishoReportSource> writer) {
         for (int index1 = 0; index1 < this.帳票情報.getShiharaiHohoHenkoGengakuList().size(); index1++) {
-            for (int index = 0; index < this.帳票情報.getShiharaiHohoHenkoGengakuList().get(index1).getShiharaiHohoHenkoGengakuMeisaiList().size(); index++) {
+            for (int index = 0; index < this.帳票情報.getShiharaiHohoHenkoGengakuList().get(index1).
+                    getShiharaiHohoHenkoGengakuMeisaiList().size(); index++) {
                 IKyufugakuGengakuTsuchishoEditor bodyEditor = new KyufugakuGengakuTsuchishoEditor(個人情報, 宛先, 帳票制御共通,
                         地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報, index);
                 IKyufugakuGengakuTsuchishoBuilder builder = new KyufugakuGengakuTsuchishoBuilder(bodyEditor);

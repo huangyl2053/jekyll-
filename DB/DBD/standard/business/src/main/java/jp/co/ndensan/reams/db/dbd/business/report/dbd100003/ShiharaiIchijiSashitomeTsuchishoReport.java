@@ -85,7 +85,7 @@ public final class ShiharaiIchijiSashitomeTsuchishoReport extends Report<Shihara
     public void writeBy(ReportSourceWriter<ShiharaiIchijiSashitomeTsuchishoReportSource> writer) {
         FlexibleYear 最新賦課年度 = get最新賦課年度();
         get年度リスト(最新賦課年度);
-        for (int index = 0; index < 年度1リスト.size() || index < 年度2リスト.size() || index < 年度3リスト.size(); index++) {
+        for (int index = 0; index < 年度1リスト.size() && index < 年度2リスト.size() && index < 年度3リスト.size(); index++) {
             IShiharaiIchijiSashitomeTsuchishoEditor bodyEditor = new ShiharaiIchijiSashitomeTsuchishoEditor(個人情報,
                     宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報,
                     償還払集計情報リスト, 最新賦課年度, 年度1リスト, 年度2リスト, 年度3リスト, index);
