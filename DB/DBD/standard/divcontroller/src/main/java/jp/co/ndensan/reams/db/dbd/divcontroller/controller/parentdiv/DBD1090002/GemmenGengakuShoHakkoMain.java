@@ -414,8 +414,15 @@ public class GemmenGengakuShoHakkoMain {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
 
-        RDate 交付日 = new RDate(div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().toString());
-        RDate 発行日 = new RDate(div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().toString());
+        RDate 交付日 = null;
+        if (!div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().isEmpty()) {
+            交付日 = new RDate(div.getTsuchishoSakuseiKobetsu().getNinteiShoKobetsu().getTxtKetteiTsuchiHakkoYMD().getValue().toString());
+        }
+        RDate 発行日 = null;
+        if (!div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().isEmpty()) {
+            発行日 = new RDate(div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().getValue().toString());
+        }
+
         RString 減免減額種類 = RString.EMPTY;
         List<RString> 帳票タイプリスト = new ArrayList<>();
         HashMap<Code, RString> hashMap = new HashMap();
