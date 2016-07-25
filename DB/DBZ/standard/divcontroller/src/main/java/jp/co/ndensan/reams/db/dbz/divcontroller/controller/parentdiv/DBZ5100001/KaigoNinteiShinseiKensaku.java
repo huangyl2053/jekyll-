@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -50,6 +51,7 @@ public class KaigoNinteiShinseiKensaku {
     private final RString 職権記載 = new RString("DBDUC51216");
     private final RString 職権取消全喪失 = new RString("DBDUC51217");
     private final RString 受給者転入 = new RString("DBDUC51205");
+    private final RString 要介護認定申請認定_新規更新 = new RString("DBDUC50201");
 
     private final RString 検索状態 = new RString("検索状態");
 
@@ -104,15 +106,13 @@ public class KaigoNinteiShinseiKensaku {
      * @return ResponseData<KaigoNinteiShinseiKensakuDiv>
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnKensaku(KaigoNinteiShinseiKensakuDiv div) {
-        // TODO. for test
-//        介護認定申請情報の検索(div);
-//        ValidationMessageControlPairs validationMessage = getValidatisonHandler(div).データ空のチェック();
-//        if (validationMessage.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
-//        }
-//        getHandler(div).setJyoTai(get受給と認定の判定(), 検索状態);
-//        return ResponseData.of(div).respond();
-        return ResponseData.of(div).forwardWithEventName(DBZ5100001TransitionEventName.検索結果選択).respond();
+        介護認定申請情報の検索(div);
+        ValidationMessageControlPairs validationMessage = getValidatisonHandler(div).データ空のチェック();
+        if (validationMessage.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+        }
+        getHandler(div).setJyoTai(get受給と認定の判定(), 検索状態);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -180,18 +180,24 @@ public class KaigoNinteiShinseiKensaku {
                 || 要介護認定申請取下_区分変更.equals(uiContainerId)
                 || 要介護認定申請取下_サービス種類変更.equals(uiContainerId)
                 || 要介護認定申請延期.equals(uiContainerId)
-                || 要介護認定申請却下.equals(uiContainerId)
+                || get受給の判定(uiContainerId)) {
+
+            return GyomuBunrui.介護事務;
+        }
+        return null;
+    }
+
+    private boolean get受給の判定(RString uiContainerId) {
+
+        return 要介護認定申請却下.equals(uiContainerId)
                 || 要介護認定申請受付新規.equals(uiContainerId)
                 || 要介護認定申請受付更新.equals(uiContainerId)
                 || 要介護認定申請受付区分変更.equals(uiContainerId)
                 || 要介護認定申請受付サービス種類変更.equals(uiContainerId)
                 || 職権記載.equals(uiContainerId)
                 || 職権取消全喪失.equals(uiContainerId)
-                || 受給者転入.equals(uiContainerId)) {
-
-            return GyomuBunrui.介護事務;
-        }
-        return null;
+                || 受給者転入.equals(uiContainerId)
+                || 要介護認定申請認定_新規更新.equals(uiContainerId);
     }
 
     private KaigoNinteiShinseiKensakuHandler getHandler(KaigoNinteiShinseiKensakuDiv div) {
