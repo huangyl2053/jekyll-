@@ -72,6 +72,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final RString 副 = new RString("副");
     private static final RString GATSU = new RString("月");
     private static final int ZERO = 0;
+    private static final long ITI = 1;
     private static final int YON = 4;
     private static final int LOKU = 6;
     private static final int NIJYU = 20;
@@ -255,7 +256,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("介護認定審査会委員報酬一覧表CSV"),
                 導入団体クラス.getLasdecCode_().value(), 導入団体クラス.get市町村名(), new RString(JobContextHolder.getJobId()),
-                CSV_NAME, EUC_ENTITY_ID.toRString(), new RString(eucCsvWriterJunitoJugo.getCount()), 出力条件);
+                CSV_NAME, EUC_ENTITY_ID.toRString(), new RString(eucCsvWriterJunitoJugo.getCount() - ITI), 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
