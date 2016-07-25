@@ -23,8 +23,8 @@ public class ShinsaHoshuIchiranChange {
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
     private static final RString 欠_対応 = new RString("×");
-    private static final RString 長_対応 = new RString("○");
-    private static final RString 出_対応 = new RString("◎");
+    private static final RString 長_対応 = new RString("◎");
+    private static final RString 出_対応 = new RString("○");
     private static final RString 副_対応 = new RString("-");
     private static final RString CSVを出力する = new RString("1");
 
