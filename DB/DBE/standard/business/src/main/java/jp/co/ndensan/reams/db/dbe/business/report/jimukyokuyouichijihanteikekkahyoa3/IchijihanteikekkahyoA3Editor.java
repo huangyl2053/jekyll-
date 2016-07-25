@@ -262,7 +262,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText = item.get特記事項_tokkiText();
             } else if (短冊.equals(item.get特記パターン())) {
-                source = set特記事項連番_名称(source);
+                source = set特記事項テキスト連番_名称(source);
                 source.tokkiText1 = item.get特記事項_tokkiText1();
                 source.tokkiText2 = item.get特記事項_tokkiText2();
                 source.tokkiText3 = item.get特記事項_tokkiText3();
@@ -281,9 +281,9 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             }
         } else if (イメージ.equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiText = item.get特記事項_tokkiImg();
+                source.tokkiImg = item.get特記事項_tokkiImg();
             } else if (短冊.equals(item.get特記パターン())) {
-                source = set特記事項連番_名称(source);
+                source = set特記事項イメージ連番_名称(source);
                 source.tokkiImg1 = item.get特記事項_tokkiImg1();
                 source.tokkiImg2 = item.get特記事項_tokkiImg2();
                 source.tokkiImg3 = item.get特記事項_tokkiImg3();
@@ -304,9 +304,16 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         return source;
     }
 
-    private IchijihanteikekkahyoA3ReportSource set特記事項連番_名称(IchijihanteikekkahyoA3ReportSource source) {
+    private IchijihanteikekkahyoA3ReportSource set特記事項イメージ連番_名称(IchijihanteikekkahyoA3ReportSource source) {
         if (index < 特記事項List.size()) {
             source.listChosa_1 = 特記事項List.get(index);
+        }
+        return source;
+    }
+
+    private IchijihanteikekkahyoA3ReportSource set特記事項テキスト連番_名称(IchijihanteikekkahyoA3ReportSource source) {
+        if (index < 特記事項List.size()) {
+            source.listChosa1_1 = 特記事項List.get(index);
         }
         return source;
     }
