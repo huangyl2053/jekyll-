@@ -113,7 +113,7 @@ public class ShinsakaiKekkaTorokuManager {
         IShinsakaiKekkaTorokuMapper mapper = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class);
         List<ShinsakaiKekkaTorokuIChiRanRelateEntity> entityList = mapper
                 .get審査会委員一覧検索(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (entityList.isEmpty()) {
+        if (null == entityList.get(0) || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShinsakaiKekkaTorokuIChiRanBusiness>emptyList(), 0, false);
         }
         List<ShinsakaiKekkaTorokuIChiRanBusiness> ichiRanBusinessList = new ArrayList();
@@ -135,7 +135,7 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5502ShinsakaiWariateJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get介護認定審査会割当情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (entityList.isEmpty()) {
+        if (null == entityList.get(0) || entityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         for (DbT5502ShinsakaiWariateJohoEntity entity : entityList) {
@@ -157,7 +157,7 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5101NinteiShinseiJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get要介護認定申請情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (entityList.isEmpty()) {
+        if (null == entityList.get(0) || entityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
@@ -179,7 +179,7 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5102NinteiKekkaJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get要介護認定結果情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (entityList.isEmpty()) {
+        if (null == entityList.get(0) || entityList.isEmpty()) {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         for (DbT5102NinteiKekkaJohoEntity entity : entityList) {

@@ -260,7 +260,9 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
         }
-        div.getKobetsuHyojiArea().getDdlNijiHantei().setSelectedValue(row.getKonkaiNijiHantei());
+        if (!RString.isNullOrEmpty(row.getKonkaiNijiHantei())) {
+            div.getKobetsuHyojiArea().getDdlNijiHantei().setSelectedValue(row.getKonkaiNijiHantei());
+        }
         FlexibleDate ninteiKikanKaishi = row.getNinteiKikanKaishi().getValue();
         if (ninteiKikanKaishi != null && !ninteiKikanKaishi.isEmpty()) {
             div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setValue(new RDate(row.getNinteiKikanKaishi().getValue().toString()));
