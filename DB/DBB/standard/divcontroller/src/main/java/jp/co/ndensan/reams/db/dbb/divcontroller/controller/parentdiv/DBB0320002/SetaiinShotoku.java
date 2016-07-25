@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -69,23 +71,25 @@ public class SetaiinShotoku {
      * @param div 世帯員所得Div
      * @return レスポンスデータ
      */
-    public ResponseData<SetaiinShotokuDiv> onClick_Hikaku(SetaiinShotokuDiv div) {
+    public ResponseData<SetaiinShotokuDiv> onClick_Hikaku(final SetaiinShotokuDiv div) {
+        ValidationMessageControlPairs result = div.getCcdSetaiShotokuIchiran().validate比較対象();
+        if (result.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(result).respond();
+        }
+
         List<jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku> list = div.getCcdSetaiShotokuIchiran().get世帯員所得Selected();
         FukaShokaiKey orgKey = ViewStateHolder.get(ViewStateKeys.賦課照会キー, FukaShokaiKey.class);
-        if (!list.isEmpty() && list.size() >= 2) {
-            FukaShokaiKey key1 = new FukaShokaiKey(
-                    FlexibleYear.EMPTY, orgKey.get賦課年度(), TsuchishoNo.EMPTY, -1,
-                    list.get(0).get被保険者番号(), FlexibleDate.EMPTY, RString.EMPTY, null,
-                    null, false, false, new AtenaMeisho(list.get(0).get氏名())
-            );
-            FukaShokaiKey key2 = new FukaShokaiKey(
-                    FlexibleYear.EMPTY, orgKey.get賦課年度(), TsuchishoNo.EMPTY, -1,
-                    list.get(1).get被保険者番号(), FlexibleDate.EMPTY, RString.EMPTY, null,
-                    null, false, false, new AtenaMeisho(list.get(1).get氏名())
-            );
-
-            ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor任意対象比較(key1, key2));
-        }
+        FukaShokaiKey key1 = new FukaShokaiKey(
+                FlexibleYear.EMPTY, orgKey.get賦課年度(), TsuchishoNo.EMPTY, -1,
+                list.get(0).get被保険者番号(), FlexibleDate.EMPTY, RString.EMPTY, null,
+                null, false, false, new AtenaMeisho(list.get(0).get氏名())
+        );
+        FukaShokaiKey key2 = new FukaShokaiKey(
+                FlexibleYear.EMPTY, orgKey.get賦課年度(), TsuchishoNo.EMPTY, -1,
+                list.get(1).get被保険者番号(), FlexibleDate.EMPTY, RString.EMPTY, null,
+                null, false, false, new AtenaMeisho(list.get(1).get氏名())
+        );
+        ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor任意対象比較(key1, key2));
 
         return ResponseData.of(div).forwardWithEventName(比較).respond();
     }

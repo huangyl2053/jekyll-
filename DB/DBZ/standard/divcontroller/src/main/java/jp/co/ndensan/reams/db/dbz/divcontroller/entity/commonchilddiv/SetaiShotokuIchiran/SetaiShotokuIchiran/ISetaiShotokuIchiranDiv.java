@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 世帯所得一覧Divのインターフェースです。
@@ -31,4 +32,11 @@ public interface ISetaiShotokuIchiranDiv extends ICommonChildDivBaseProperties {
      * @return
      */
     List<SetaiinShotoku> get世帯員所得Selected();
+
+    /**
+     * 比較時のバリデーションを行い結果を返却します。
+     *
+     * @return バリデーションの結果
+     */
+    ValidationMessageControlPairs validate比較対象();
 }
