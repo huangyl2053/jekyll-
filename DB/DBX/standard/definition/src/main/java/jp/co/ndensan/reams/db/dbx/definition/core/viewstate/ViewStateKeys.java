@@ -1835,5 +1835,9 @@ public enum ViewStateKeys {
     /**
      * 給付計画自己作成EntityList
      */
-    給付計画自己作成EntityList;
+    給付計画自己作成EntityList,
+    /**
+     * イメージ取込み
+     */
+    イメージ取込み;
 }
