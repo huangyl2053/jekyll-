@@ -62,8 +62,9 @@ public class ShiharaiIchijiSashitomeTsuchishoService {
             ReportSourceWriter<ShiharaiIchijiSashitomeTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assember);
             NinshoshaSource 認証者ソースビルダー = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, 発行日,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            ShiharaiIchijiSashitomeTsuchishoReport Report = ShiharaiIchijiSashitomeTsuchishoReport.creatReport(個人情報,
+            ShiharaiIchijiSashitomeTsuchishoReport report = ShiharaiIchijiSashitomeTsuchishoReport.creatReport(個人情報,
                     宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報, 償還払集計情報リスト);
+            report.writeBy(reportSourceWriter);
         }
     }
 
