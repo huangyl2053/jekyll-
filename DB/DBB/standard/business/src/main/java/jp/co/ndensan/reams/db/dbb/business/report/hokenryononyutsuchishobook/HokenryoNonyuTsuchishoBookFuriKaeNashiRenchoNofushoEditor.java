@@ -23,7 +23,6 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
 
     private final HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報;
     private final List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト;
-    private final int 連番;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
@@ -40,14 +39,13 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
      * コンストラクタです。
      *
      * @param 本算定納入通知書情報 本算定納入通知書情報
-     * @param 連番 連番
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
      */
     public HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor(
-            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト, int 連番) {
+            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報,
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.連番 = 連番;
     }
 
     @Override
@@ -143,7 +141,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
         source.nofuzumishoKatagaki4 = 納付書共通.get方書();
         source.nofuzumishoshichosonName4 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
-            source.pagerenban4 = new RString(連番).concat("-").concat(get連番(INT_5));
+            source.pagerenban4 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_5));
         } else {
             source.pagerenban4 = new RString("1").concat("-").concat(get連番(INT_5));
         }
@@ -232,7 +230,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
         source.nofuzumishoKatagaki3 = 納付書共通.get方書();
         source.nofuzumishoshichosonName3 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
-            source.pagerenban3 = new RString(連番).concat("-").concat(get連番(INT_4));
+            source.pagerenban3 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_4));
         } else {
             source.pagerenban3 = new RString("1").concat("-").concat(get連番(INT_4));
         }
@@ -321,7 +319,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
         source.nofuzumishoKatagaki2 = 納付書共通.get方書();
         source.nofuzumishoshichosonName2 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
-            source.pagerenban2 = new RString(連番).concat("-").concat(get連番(INT_3));
+            source.pagerenban2 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_3));
         } else {
             source.pagerenban2 = new RString("1").concat("-").concat(get連番(INT_3));
         }
@@ -409,14 +407,14 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoNofushoEditor implement
         source.nofuzumishoKatagaki1 = 納付書共通.get方書();
         source.nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
-            source.pagerenban1 = new RString(連番).concat("-").concat(get連番(INT_2));
+            source.pagerenban1 = new RString(本算定納入通知書情報.get連番()).concat("-").concat(get連番(INT_2));
         } else {
             source.pagerenban1 = new RString("1").concat("-").concat(get連番(INT_2));
         }
     }
 
     private RString get連番(int 印字位置) {
-        return new RString(連番 * INT_4 + 印字位置 - INT_1);
+        return new RString(本算定納入通知書情報.get連番() * INT_4 + 印字位置 - INT_1);
     }
 
     private RString get印字文字列(int 行目, Map<Integer, RString> ocr) {
