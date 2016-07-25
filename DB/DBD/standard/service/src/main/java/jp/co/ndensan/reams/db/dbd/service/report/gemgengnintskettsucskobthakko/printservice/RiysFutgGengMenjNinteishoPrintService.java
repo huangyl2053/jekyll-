@@ -38,7 +38,7 @@ public class RiysFutgGengMenjNinteishoPrintService {
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(RiysFutgGengMenjNinteishoItem target, ReportManager reportManager) {
-        RiysFutgGengMenjNinteishoProerty property = new RiysFutgGengMenjNinteishoProerty();
+        RiysFutgGengMenjNinteishoProerty property = new RiysFutgGengMenjNinteishoProerty(target.get利用者負担額減額情報().is旧措置者有無());
         try (ReportAssembler<RiysFutgGengMenjNinteishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<RiysFutgGengMenjNinteishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),

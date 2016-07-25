@@ -18,12 +18,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -45,7 +41,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     private final static int INDEX_5 = 5;
     private final static int INDEX_6 = 6;
     private final static int INDEX_7 = 7;
+    private final static int INDEX_8 = 8;
     private final static int INDEX_9 = 9;
+    private final static int INDEX_10 = 10;
     private final FutanGendogakuNinteishoItem item;
 
     /**
@@ -102,11 +100,10 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
-            RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_3);
-            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
-            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
+            RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().seireki().toDateString();
+            source.birthYYYY = 生年月日.substring(INDEX_0, INDEX_4);
+            source.birthMM = 生年月日.substring(INDEX_5, INDEX_7);
+            source.birthDD = 生年月日.substring(INDEX_8, INDEX_10);
         }
         if (Gender.MALE.equals(item.getIKojin().get性別())) {
             source.man = RString.EMPTY;
@@ -128,12 +125,12 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         setKyojuhiName(source, item);
         setFutanGaku(source, item);
 
-        source.hokenshaNo1 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
-        source.hokenshaNo2 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
-        source.hokenshaNo3 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
-        source.hokenshaNo4 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
-        source.hokenshaNo5 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
-        source.hokenshaNo6 = item.get負担限度額認定().get被保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
+        source.hokenshaNo1 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
+        source.hokenshaNo2 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_1, INDEX_2);
+        source.hokenshaNo3 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_2, INDEX_3);
+        source.hokenshaNo4 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_3, INDEX_4);
+        source.hokenshaNo5 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_4, INDEX_5);
+        source.hokenshaNo6 = item.get負担限度額認定().get証記載保険者番号().getColumnValue().substring(INDEX_5, INDEX_6);
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100020.保険者名表示.name()).equals(entity.getKomokuName())
