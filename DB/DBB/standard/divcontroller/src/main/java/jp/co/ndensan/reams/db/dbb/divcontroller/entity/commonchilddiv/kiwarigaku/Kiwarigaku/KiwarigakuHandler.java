@@ -77,10 +77,94 @@ public class KiwarigakuHandler {
         KitsukiList 普徴期リスト = Objects.equals(調定年度, 賦課年度)
                              ? new FuchoKiUtil(調定年度).get期月リスト()
                              : new KanendoKiUtil(調定年度).get期月リスト();
+        clear期別And調定And収入(this.div);
         set普徴期ラベルs(this.div, 普徴期リスト);
         setDisplayMode(賦課年度, 普徴期リスト.getLast().get期AsInt());
         setKiwarigaku(this.div, manager.load期割額(調定年度, 賦課年度, 通知書番号, 履歴番号).get(), 普徴期リスト);
     }
+
+    private static void clear期別And調定And収入(KiwarigakuDiv div) {
+        clear普徴期別(div);
+        clear普徴調定And収入(div);
+        clear特徴調定And収入(div);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="clear普徴期別()">
+    private static void clear普徴期別(KiwarigakuDiv div) {
+        div.getLblFuchoKi1().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi2().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi3().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi4().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi5().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi6().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi7().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi8().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi9().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi10().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi11().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi12().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi13().setText(RString.FULL_SPACE);
+        div.getLblFuchoKi14().setText(RString.FULL_SPACE);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="clear特徴調定And収入()">
+    private static void clear特徴調定And収入(KiwarigakuDiv div) {
+        div.getLblTokuKibetsuGaku1().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGaku1().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGaku3().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGaku3().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGaku5().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGaku5().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGaku7().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGaku7().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGaku9().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGaku9().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGaku11().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGaku11().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGakuGokei().setText(RString.FULL_SPACE);
+        div.getLblTokuKibetsuGakuGokei().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGakuGokei().setText(RString.FULL_SPACE);
+        div.getLblTokuNofuGakuGokei().setText(RString.FULL_SPACE);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="clear普徴調定And収入()">
+    private static void clear普徴調定And収入(KiwarigakuDiv div) {
+        div.getLblFuchoKibetsuGaku1().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku1().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku2().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku2().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku3().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku3().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku4().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku4().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku5().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku5().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku6().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku6().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku7().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku7().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku8().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku8().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku9().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku9().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku10().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku10().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku11().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku11().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku12().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku12().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku13().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku13().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGaku14().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGaku14().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGakuGokei().setText(RString.FULL_SPACE);
+        div.getLblFuchoKibetsuGakuGokei().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGakuGokei().setText(RString.FULL_SPACE);
+        div.getLblFuchoNofuGakuGokei().setText(RString.FULL_SPACE);
+    }
+    //</editor-fold>
 
     private static void set普徴期ラベルs(KiwarigakuDiv div, KitsukiList 普徴期リスト) {
         for (Kitsuki kitsuki : 普徴期リスト.toList()) {
