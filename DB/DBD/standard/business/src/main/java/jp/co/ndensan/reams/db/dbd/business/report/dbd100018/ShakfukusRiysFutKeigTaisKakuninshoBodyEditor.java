@@ -66,6 +66,7 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
         source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
         source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
         source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
+        source.kakuninNo = item.get社会福祉法人等利用者負担軽減().get確認番号();
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通(), item.get地方公共団体());
         source.jusho = 編集後個人.get編集後住所();
