@@ -97,7 +97,6 @@ public class HanyoListRoreiFukushiNenkinJukyushaRenbanProcess extends BatchProce
         oldBuilder = new RStringBuilder();
         生活保護種別builder = new RStringBuilder();
         i = 0;
-        lastEntity = new HanyoListRoreiFukushiNenkinJukyushaRelateEntity();
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
