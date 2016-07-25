@@ -70,11 +70,10 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
-    private static final RString SHUSEKINITI = new RString("出席日（");
     private static final RString GATSU = new RString("月");
-    private static final RString KAKO = new RString("）");
     private static final int ZERO = 0;
     private static final int YON = 4;
+    private static final int LOKU = 6;
     private static final int NIJYU = 20;
     private int 初期化フラグ = 0;
     private int 総合計_審査回数;
@@ -198,7 +197,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 relateEntity.set出席状況_31日(entity.get出席状況_31日());
                 this.get出席回数(entity.get出席状況_31日());
                 relateEntity.set出席回数(出席回数);
-                relateEntity.set審査会開催年月(set出席日(entity.get審査会開催年月(), paramter.get帳票出力区分()));
+                relateEntity.set審査会開催年月(set出席日(paramter.get審査会開催年月(), paramter.get帳票出力区分()));
                 総合計_審査回数 = 総合計_審査回数 + 出席回数;
                 if (初期化フラグ == ZERO) {
                     総合計_報酬総額 = relateEntity.get総合計_報酬総額();
@@ -250,7 +249,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
 
     private void バッチ出力条件リストの出力(Association 導入団体クラス) {
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 審査会開催年月 = new RStringBuilder("審査会開催年月");
+        RStringBuilder 審査会開催年月 = new RStringBuilder("【対象年月】");
         審査会開催年月.append(dateFormat(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
@@ -262,7 +261,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
 
     private void 帳票バッチ出力条件リストの出力(Association 導入団体クラス) {
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 審査会開催年月 = new RStringBuilder("審査会開催年月");
+        RStringBuilder 審査会開催年月 = new RStringBuilder("【対象年月】");
         審査会開催年月.append(dateFormat(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
@@ -283,7 +282,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        return new RDate(date.toString()).wareki().toDateString();
+        return new RDate(date.toString()).wareki().toDateString().substring(ZERO, LOKU);
     }
 
     private static RString set出席日(RString date, RString 帳票出力区分) {
@@ -292,17 +291,12 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
             return RString.EMPTY;
         }
         if (CSVを出力する.equals(帳票出力区分)) {
-            RStringBuilder 出席日 = new RStringBuilder();
-            出席日.append(date.substring(YON));
-            出席日.append(GATSU);
-            return 出席日.toRString();
+            return dateFormat(date);
         }
         if (一覧表を発行する.equals(帳票出力区分)) {
             RStringBuilder 出席日 = new RStringBuilder();
-            出席日.append(SHUSEKINITI);
             出席日.append(date.substring(YON));
             出席日.append(GATSU);
-            出席日.append(KAKO);
             return 出席日.toRString();
         } else {
             return RString.EMPTY;
