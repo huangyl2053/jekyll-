@@ -32,10 +32,6 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     private final RString 金額単位 = new RString("円");
     private final RString 決定区分_承認 = new RString("○");
     private final RString ハイフン = new RString("-");
-    private final RString 通知文 = new RString("tsuchibun");
-    private final RString 通知文Large = new RString("tsuchibunLarge");
-    private final RString 通知文混在 = new RString("tsuchibunMix");
-    private final RString 通知文混在２ = new RString("tsuchibunMixtwo");
     private final RString 負担名_居住費負担限度額多床室 = new RString("居住費負担限度額多床室");
     private final RString 負担名_食費負担限度額 = new RString("食費負担限度額");
     private final RString 負担名_居住費負担限度額ユニット型個室 = new RString("居住費負担限度額ユニット型個室");
@@ -55,8 +51,16 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     private final static int INDEX_9 = 9;
     private final static int INDEX_10 = 10;
     private final static int INDEX_11 = 11;
+    private final static int INDEX_12 = 12;
+    private final static int INDEX_13 = 13;
     private final static int INDEX_14 = 14;
     private final static int INDEX_15 = 15;
+    private final static int INDEX_16 = 16;
+    private final static int INDEX_17 = 17;
+    private final static int INDEX_18 = 18;
+    private final static int INDEX_19 = 19;
+    private final static int INDEX_20 = 20;
+    private final static int INDEX_21 = 21;
     private final FutanGendogakuKetteiTsuchishoItem item;
 
     /**
@@ -139,17 +143,16 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
             承認しない(source, item);
         }
 
-        if (TeikeibunMojiSize.フォント大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-            set通知書定型文(source, INDEX_3, item, 通知文Large);
-
-        }
-        if (TeikeibunMojiSize.フォント上小下大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-            set通知書定型文(source, INDEX_3, item, 通知文混在);
-            set通知書定型文(source, INDEX_4, item, 通知文混在);
-        }
-        if (TeikeibunMojiSize.フォント上大下小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-            set通知書定型文(source, INDEX_3, item, 通知文混在２);
-            set通知書定型文(source, INDEX_4, item, 通知文混在２);
+        if (TeikeibunMojiSize.フォント小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他(source);
+        } else if (TeikeibunMojiSize.フォント大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他Large(source);
+        } else if (TeikeibunMojiSize.フォント上小下大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他上段Small(source);
+            set連絡先他下段Large(source);
+        } else if (TeikeibunMojiSize.フォント上大下小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他上段Large(source);
+            set連絡先他下段Small(source);
         }
 
         setCompNinshosha(source, item);
@@ -176,7 +179,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
                 }
             }
 
-            set通知書定型文(source, INDEX_2, item, 通知文);
+            set通知文2(source);
         } else {
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100013.帳票タイトル_上段.name()).equals(entity.getKomokuName())) {
@@ -190,43 +193,131 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
                     break;
                 }
             }
-            set通知書定型文(source, INDEX_1, item, 通知文);
+            set通知文1(source);
         }
     }
 
-    private void set通知書定型文(FutanGendogakuKetteiTsuchishoReportSource source, int index, FutanGendogakuKetteiTsuchishoItem item,
-            RString taisyou) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(index).split(折り返す符号.toString());
-        Class reportSource = source.getClass();
-        for (int i = 0; i <= 通知書定型文List.size(); i++) {
-            try {
-                if (index == INDEX_2) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_1))).set(source, 通知書定型文List.get(i));
-                    if (i == INDEX_1) {
-                        break;
-                    }
-                } else if (index == INDEX_3 && (通知文).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_2))).set(source, 通知書定型文List.get(i + INDEX_2));
-                } else if ((通知文Large).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
-                } else if (index == INDEX_3 && (通知文混在).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
-                    if (i == INDEX_11) {
-                        break;
-                    }
-                } else if (index == INDEX_4 && (通知文混在).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_15))).set(source, 通知書定型文List.get(i + INDEX_14));
-                } else if (index == INDEX_3 && (通知文混在２).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_3))).set(source, 通知書定型文List.get(i + INDEX_2));
-                    if (i == INDEX_6) {
-                        break;
-                    }
-                } else if (index == INDEX_4 && (通知文混在２).equals(taisyou)) {
-                    reportSource.getDeclaredField(taisyou.toString().concat(String.valueOf(i + INDEX_10))).set(source, 通知書定型文List.get(i + INDEX_9));
-                }
-            } catch (IllegalAccessException | NoSuchFieldException ex) {
-                break;
-            }
+    private void set通知文1(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(0).split(折り返す符号.toString());
+        source.tsuchibun1 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibun2 = getLenStr(INDEX_1, 通知書定型文List);
+    }
+
+    private void set通知文2(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
+        source.tsuchibun1 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibun2 = getLenStr(INDEX_1, 通知書定型文List);
+    }
+
+    private void set連絡先他(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
+        source.tsuchibun3 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibun4 = getLenStr(INDEX_1, 通知書定型文List);
+        source.tsuchibun5 = getLenStr(INDEX_2, 通知書定型文List);
+        source.tsuchibun6 = getLenStr(INDEX_3, 通知書定型文List);
+        source.tsuchibun7 = getLenStr(INDEX_4, 通知書定型文List);
+        source.tsuchibun8 = getLenStr(INDEX_5, 通知書定型文List);
+        source.tsuchibun9 = getLenStr(INDEX_6, 通知書定型文List);
+        source.tsuchibun10 = getLenStr(INDEX_7, 通知書定型文List);
+        source.tsuchibun11 = getLenStr(INDEX_8, 通知書定型文List);
+        source.tsuchibun12 = getLenStr(INDEX_9, 通知書定型文List);
+        source.tsuchibun13 = getLenStr(INDEX_10, 通知書定型文List);
+        source.tsuchibun14 = getLenStr(INDEX_11, 通知書定型文List);
+        source.tsuchibun15 = getLenStr(INDEX_12, 通知書定型文List);
+        source.tsuchibun16 = getLenStr(INDEX_13, 通知書定型文List);
+        source.tsuchibun17 = getLenStr(INDEX_14, 通知書定型文List);
+        source.tsuchibun18 = getLenStr(INDEX_15, 通知書定型文List);
+        source.tsuchibun19 = getLenStr(INDEX_16, 通知書定型文List);
+        source.tsuchibun20 = getLenStr(INDEX_17, 通知書定型文List);
+        source.tsuchibun21 = getLenStr(INDEX_18, 通知書定型文List);
+        source.tsuchibun22 = getLenStr(INDEX_19, 通知書定型文List);
+        source.tsuchibun23 = getLenStr(INDEX_20, 通知書定型文List);
+        source.tsuchibun24 = getLenStr(INDEX_21, 通知書定型文List);
+    }
+
+    private void set連絡先他Large(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
+        source.tsuchibunLarge3 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibunLarge4 = getLenStr(INDEX_1, 通知書定型文List);
+        source.tsuchibunLarge5 = getLenStr(INDEX_2, 通知書定型文List);
+        source.tsuchibunLarge6 = getLenStr(INDEX_3, 通知書定型文List);
+        source.tsuchibunLarge7 = getLenStr(INDEX_4, 通知書定型文List);
+        source.tsuchibunLarge8 = getLenStr(INDEX_5, 通知書定型文List);
+        source.tsuchibunLarge9 = getLenStr(INDEX_6, 通知書定型文List);
+        source.tsuchibunLarge10 = getLenStr(INDEX_7, 通知書定型文List);
+        source.tsuchibunLarge11 = getLenStr(INDEX_8, 通知書定型文List);
+        source.tsuchibunLarge12 = getLenStr(INDEX_9, 通知書定型文List);
+        source.tsuchibunLarge13 = getLenStr(INDEX_10, 通知書定型文List);
+        source.tsuchibunLarge14 = getLenStr(INDEX_11, 通知書定型文List);
+        source.tsuchibunLarge15 = getLenStr(INDEX_12, 通知書定型文List);
+        source.tsuchibunLarge16 = getLenStr(INDEX_13, 通知書定型文List);
+        source.tsuchibunLarge17 = getLenStr(INDEX_14, 通知書定型文List);
+        source.tsuchibunLarge18 = getLenStr(INDEX_15, 通知書定型文List);
+        source.tsuchibunLarge19 = getLenStr(INDEX_16, 通知書定型文List);
+    }
+
+    private void set連絡先他上段Small(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
+        source.tsuchibunMix3 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibunMix4 = getLenStr(INDEX_1, 通知書定型文List);
+        source.tsuchibunMix5 = getLenStr(INDEX_2, 通知書定型文List);
+        source.tsuchibunMix6 = getLenStr(INDEX_3, 通知書定型文List);
+        source.tsuchibunMix7 = getLenStr(INDEX_4, 通知書定型文List);
+        source.tsuchibunMix8 = getLenStr(INDEX_5, 通知書定型文List);
+        source.tsuchibunMix9 = getLenStr(INDEX_6, 通知書定型文List);
+        source.tsuchibunMix10 = getLenStr(INDEX_7, 通知書定型文List);
+        source.tsuchibunMix11 = getLenStr(INDEX_8, 通知書定型文List);
+        source.tsuchibunMix12 = getLenStr(INDEX_9, 通知書定型文List);
+        source.tsuchibunMix13 = getLenStr(INDEX_10, 通知書定型文List);
+        source.tsuchibunMix14 = getLenStr(INDEX_11, 通知書定型文List);
+
+    }
+
+    private void set連絡先他下段Large(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        source.tsuchibunMix15 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibunMix16 = getLenStr(INDEX_1, 通知書定型文List);
+        source.tsuchibunMix17 = getLenStr(INDEX_2, 通知書定型文List);
+        source.tsuchibunMix18 = getLenStr(INDEX_3, 通知書定型文List);
+        source.tsuchibunMix19 = getLenStr(INDEX_4, 通知書定型文List);
+        source.tsuchibunMix20 = getLenStr(INDEX_5, 通知書定型文List);
+        source.tsuchibunMix21 = getLenStr(INDEX_6, 通知書定型文List);
+
+    }
+
+    private void set連絡先他上段Large(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
+        source.tsuchibunMixtwo3 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibunMixtwo4 = getLenStr(INDEX_1, 通知書定型文List);
+        source.tsuchibunMixtwo5 = getLenStr(INDEX_2, 通知書定型文List);
+        source.tsuchibunMixtwo6 = getLenStr(INDEX_3, 通知書定型文List);
+        source.tsuchibunMixtwo7 = getLenStr(INDEX_4, 通知書定型文List);
+        source.tsuchibunMixtwo8 = getLenStr(INDEX_5, 通知書定型文List);
+        source.tsuchibunMixtwo9 = getLenStr(INDEX_6, 通知書定型文List);
+
+    }
+
+    private void set連絡先他下段Small(FutanGendogakuKetteiTsuchishoReportSource source) {
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        source.tsuchibunMixtwo10 = getLenStr(INDEX_0, 通知書定型文List);
+        source.tsuchibunMixtwo11 = getLenStr(INDEX_1, 通知書定型文List);
+        source.tsuchibunMixtwo12 = getLenStr(INDEX_2, 通知書定型文List);
+        source.tsuchibunMixtwo13 = getLenStr(INDEX_3, 通知書定型文List);
+        source.tsuchibunMixtwo14 = getLenStr(INDEX_4, 通知書定型文List);
+        source.tsuchibunMixtwo15 = getLenStr(INDEX_5, 通知書定型文List);
+        source.tsuchibunMixtwo16 = getLenStr(INDEX_6, 通知書定型文List);
+        source.tsuchibunMixtwo17 = getLenStr(INDEX_7, 通知書定型文List);
+        source.tsuchibunMixtwo18 = getLenStr(INDEX_8, 通知書定型文List);
+        source.tsuchibunMixtwo19 = getLenStr(INDEX_9, 通知書定型文List);
+        source.tsuchibunMixtwo20 = getLenStr(INDEX_10, 通知書定型文List);
+        source.tsuchibunMixtwo21 = getLenStr(INDEX_11, 通知書定型文List);
+    }
+
+    private RString getLenStr(int i, List<RString> 通知書定型文List) {
+        if (通知書定型文List.size() >= i + 1) {
+            return 通知書定型文List.get(i);
+        } else {
+            return RString.EMPTY;
         }
     }
 
