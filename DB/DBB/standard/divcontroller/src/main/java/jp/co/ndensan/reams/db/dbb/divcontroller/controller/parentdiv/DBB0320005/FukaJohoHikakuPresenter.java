@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonS
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei2Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.KariSantei1Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.KariSantei2Div;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -88,19 +92,9 @@ public final class FukaJohoHikakuPresenter {
 //            decorateBothIfDifferentString(div1.getTxtHokenryoRitsuKari1(), div2.getTxtHokenryoRitsuKari2());
 //            decorateBothIfDifferentNum(div1.getTxtNengakuHokenryoKari1(), div2.getTxtNengakuHokenryoKari2());
             /* 暫定保険料額 */
-            decorateBothIfDifferentNum(div1.getTxtZanteiKeisanjoHokenryoKari1(), div2.getTxtZanteiKeisanjoHokenryoKari2());
+            decorateBothIfDifferentNum(div1.getTxtKariSanteiHokenryoGakuKari1(), div2.getTxtKariSanteiHokenryoGakuKari2());
             decorateBothIfDifferentNum(div1.getTxtGemmenGakuKari1(), div2.getTxtGemmenGakuKari2());
-            decorateBothIfDifferentNum(div1.getTxtZanteiGoukeiGakuKari1(), div2.getTxtZanteiGoukeiGakuKari2());
-        }
-
-        protected void decorateDifferentValues(HonSantei1Div div1, KariSantei1Div div2) {
-            /* 賦課基準 */
-            decorateBothIfDifferentRDate(div1.getTxtShikakuShutokuYMDHon1(), div2.getTxtShikakuShutokuYMDKari1());
-            decorateBothIfDifferentRDate(div1.getTxtShikakusoshitsuYMDHon1(), div2.getTxtShikakuSoshitsuYMDKari1());
-            /* 保険料額 */
-            decorateBothIfDifferentNum(div1.getTxtKeisanHokenryogakuHon1(), div2.getTxtZanteiKeisanjoHokenryoKari1());
-            decorateBothIfDifferentNum(div1.getTxtGemmenGakuHon1(), div2.getTxtGemmenGakuKari1());
-            decorateBothIfDifferentNum(div1.getTxtKakuteiHokenryoHon1(), div2.getTxtZanteiGoukeiGakuKari1());
+            decorateBothIfDifferentNum(div1.getTxtGemmenGoKariSanteiHokenryoGakuKari1(), div2.getTxtGemmenGoKariSanteiHokenryoGakuKari2());
         }
 
         protected void decorateDifferentValues(KariSantei1Div div1, HonSantei2Div div2) {
@@ -108,9 +102,9 @@ public final class FukaJohoHikakuPresenter {
             decorateBothIfDifferentRDate(div1.getTxtShikakuShutokuYMDKari1(), div2.getTxtShikakuShutokuYMDHon2());
             decorateBothIfDifferentRDate(div1.getTxtShikakuSoshitsuYMDKari1(), div2.getTxtShikakuSoshitsuYMDHon2());
             /* 保険料額 */
-            decorateBothIfDifferentNum(div1.getTxtZanteiKeisanjoHokenryoKari1(), div2.getTxtKeisanHokenryogakuHon2());
+            decorateBothIfDifferentNum(div1.getTxtKariSanteiHokenryoGakuKari1(), div2.getTxtKeisanHokenryogakuHon2());
             decorateBothIfDifferentNum(div1.getTxtGemmenGakuKari1(), div2.getTxtGemmenGakuHon2());
-            decorateBothIfDifferentNum(div1.getTxtZanteiGoukeiGakuKari1(), div2.getTxtKakuteiHokenryoHon2());
+            decorateBothIfDifferentNum(div1.getTxtGemmenGoKariSanteiHokenryoGakuKari1(), div2.getTxtKakuteiHokenryoHon2());
         }
 
         protected void decorateDifferentValues(HonSantei1Div div1, KariSantei2Div div2) {
@@ -118,9 +112,9 @@ public final class FukaJohoHikakuPresenter {
             decorateBothIfDifferentRDate(div1.getTxtShikakuShutokuYMDHon1(), div2.getTxtShikakuShutokuYMDKari2());
             decorateBothIfDifferentRDate(div1.getTxtShikakusoshitsuYMDHon1(), div2.getTxtShikakuSoshitsuYMDKari2());
             /* 保険料額 */
-            decorateBothIfDifferentNum(div1.getTxtKeisanHokenryogakuHon1(), div2.getTxtZanteiKeisanjoHokenryoKari2());
+            decorateBothIfDifferentNum(div1.getTxtKeisanHokenryogakuHon1(), div2.getTxtKariSanteiHokenryoGakuKari2());
             decorateBothIfDifferentNum(div1.getTxtGemmenGakuHon1(), div2.getTxtGemmenGakuKari2());
-            decorateBothIfDifferentNum(div1.getTxtKakuteiHokenryoHon1(), div2.getTxtZanteiGoukeiGakuKari2());
+            decorateBothIfDifferentNum(div1.getTxtKakuteiHokenryoHon1(), div2.getTxtGemmenGoKariSanteiHokenryoGakuKari2());
         }
 
         protected void decorateDifferentValues(HonSantei1Div div1, HonSantei2Div div2) {
@@ -142,7 +136,7 @@ public final class FukaJohoHikakuPresenter {
 
         protected void clearKariSantei1(final KariSantei1Div div) {
             div.getTxtShimeiKari1().clearValue();
-            div.getTxtHokenryoRitsuKari1().clearValue();
+            div.getTxtZenNendoHokenryoRitsuKari1().clearValue();
             div.getTxtChoteiJiyuKari11().clearValue();
             div.getTxtChoteiJiyuKari12().clearValue();
             div.getTxtChoteiJiyuKari13().clearValue();
@@ -151,14 +145,14 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtGemmenGakuKari1().clearValue();
             div.getTxtKoseiYMKari1().clearValue();
             div.getTxtKoseiYMDKari1().clearValue();
-            div.getTxtHokenryoDankaiKari1().clearValue();
+            div.getTxtZenNendoHokenryoDankaiKari1().clearValue();
             div.getTxtShikakuShutokuYMDKari1().clearValue();
             div.getTxtShikakuSoshitsuYMDKari1().clearValue();
-            div.getTxtZanteiGoukeiGakuKari1().clearValue();
-            div.getTxtZanteiKeisanjoHokenryoKari1().clearValue();
+            div.getTxtKariSanteiHokenryoGakuKari1().clearValue();
+            div.getTxtGemmenGoKariSanteiHokenryoGakuKari1().clearValue();
             div.getTxtTsuchiNoKari1().clearValue();
             div.getTxtChoteiNendoKari1().clearDomain();
-            div.getTxtNengakuHokenryoKari1().clearValue();
+            div.getTxtZenNendoNengakuHokenryoKari1().clearValue();
         }
 
         protected void setKariSantei1(final KariSantei1Div div, Fuka model) {
@@ -185,17 +179,38 @@ public final class FukaJohoHikakuPresenter {
                 div.getTxtChoteiJiyuKari14().setValue(model.get調定事由4().getRyakusho());
             }
             div.getTxtKoseiYMKari1().setValue(model.get更正月());
-            div.getTxtZanteiKeisanjoHokenryoKari1().setValue(model.get減免前介護保険料_年額());
-            div.getTxtGemmenGakuKari1().setValue(model.get減免額());
-            div.getTxtNengakuHokenryoKari1().setValue(model.get確定介護保険料_年額());
-            div.getTxtZanteiGoukeiGakuKari1().setValue(model.get確定介護保険料_年額());
 
-            div.getKibetsugakuKari1().getCcdKiwarigakuKari1().
+            set仮算定保険料額ToKariSantei1(div, model);
+            set前年度情報ToKariSantei1(div, model);
+        }
+
+        private static void set仮算定保険料額ToKariSantei1(final KariSantei1Div div, Fuka model) {
+            div.getTxtGemmenGakuKari1().setValue(model.get減免額());
+            Optional<Kiwarigaku> 期割額 = div.getKibetsugakuKari1().getCcdKiwarigakuKari1().
                     load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), new Decimal(model.get履歴番号()));
-            Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+            if (!期割額.isPresent()) {
+                return;
+            }
+            Decimal 減免後年額 = 期割額.get().get年額OrZERO();
+            div.getTxtGemmenGoKariSanteiHokenryoGakuKari1().setValue(減免後年額);
+            div.getTxtKariSanteiHokenryoGakuKari1().setValue(減免後年額.add(zeroOr(model.get減免額())));
+        }
+
+        private static Decimal zeroOr(Decimal value) {
+            return value == null ? Decimal.ZERO : value;
+        }
+
+        private static void set前年度情報ToKariSantei1(final KariSantei1Div div, Fuka model) {
+            FlexibleYear 前年度 = model.get賦課年度().minusYear(1);
+            Fuka 前年度賦課 = new FukaManager().get賦課年度最新賦課From被保険者番号(前年度, model.get被保険者番号());
+            if (前年度賦課 == null) {
+                return;
+            }
+            div.getTxtZenNendoNengakuHokenryoKari1().setValue(前年度賦課.get確定介護保険料_年額());
+            Optional<HokenryoDankai> 前年度保険料段階 = new HokenryoDankaiManager().get保険料段階(前年度, 前年度賦課.get保険料段階());
             if (前年度保険料段階.isPresent()) {
-                div.getTxtHokenryoDankaiKari1().setValue(HokenryoDankaiUtil.edit表示用保険料段階(前年度保険料段階.get()));
-                div.getTxtHokenryoRitsuKari1().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));
+                div.getTxtZenNendoHokenryoDankaiKari1().setValue(HokenryoDankaiUtil.edit表示用保険料段階(前年度保険料段階.get()));
+                div.getTxtZenNendoHokenryoRitsuKari1().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));
             }
         }
 
@@ -205,19 +220,19 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtGemmenGakuKari2().clearValue();
             div.getTxtFukaNendoKari2().clearDomain();
             div.getTxtKoseiYMDKari2().clearValue();
-            div.getTxtZanteiKeisanjoHokenryoKari2().clearValue();
+            div.getTxtKariSanteiHokenryoGakuKari2().clearValue();
             div.getTxtTsuchiNoKari2().clearValue();
-            div.getTxtHokenryoRitsuKari2().clearValue();
+            div.getTxtZenNendoHokenryoRitsuKari2().clearValue();
             div.getTxtChoteiJiyuKari22().clearValue();
             div.getTxtShimeiKari2().clearValue();
-            div.getTxtNengakuHokenryoKari2().clearValue();
+            div.getTxtZenNendoNengakuHokenryoKari2().clearValue();
             div.getTxtChoteiNendoKari2().clearDomain();
             div.getTxtChoteiJiyuKari21().clearValue();
-            div.getTxtZanteiGoukeiGakuKari2().clearValue();
+            div.getTxtGemmenGoKariSanteiHokenryoGakuKari2().clearValue();
             div.getTxtShikakuShutokuYMDKari2().clearValue();
             div.getTxtChoteiJiyuKari24().clearValue();
             div.getTxtKoseiYMKari2().clearValue();
-            div.getTxtHokenryoDankaiKari2().clearValue();
+            div.getTxtZenNendoHokenryoDankaiKari2().clearValue();
         }
 
         protected void setKariSantei2(final KariSantei2Div div, Fuka model) {
@@ -244,17 +259,35 @@ public final class FukaJohoHikakuPresenter {
                 div.getTxtChoteiJiyuKari24().setValue(model.get調定事由4().getRyakusho());
             }
             div.getTxtKoseiYMKari2().setValue(model.get更正月());
-            div.getTxtZanteiKeisanjoHokenryoKari2().setValue(model.get減免前介護保険料_年額());
-            div.getTxtGemmenGakuKari2().setValue(model.get減免額());
-            div.getTxtNengakuHokenryoKari2().setValue(model.get確定介護保険料_年額());
-            div.getTxtZanteiGoukeiGakuKari2().setValue(model.get確定介護保険料_年額());
 
-            div.getKibetsugakuKari2().getCcdKiwarigakuKari2().
+            set仮算定保険料額ToKariSantei2(div, model);
+            set前年度情報ToKariSantei2(div, model);
+        }
+
+        private static void set仮算定保険料額ToKariSantei2(final KariSantei2Div div, Fuka model) {
+            div.getTxtGemmenGakuKari2().setValue(model.get減免額());
+
+            Optional<Kiwarigaku> 期割額 = div.getKibetsugakuKari2().getCcdKiwarigakuKari2().
                     load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), new Decimal(model.get履歴番号()));
-            Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+            if (!期割額.isPresent()) {
+                return;
+            }
+            Decimal 減免後年額 = 期割額.get().get年額OrZERO();
+            div.getTxtGemmenGoKariSanteiHokenryoGakuKari2().setValue(減免後年額);
+            div.getTxtKariSanteiHokenryoGakuKari2().setValue(減免後年額.add(zeroOr(model.get減免額())));
+        }
+
+        private static void set前年度情報ToKariSantei2(final KariSantei2Div div, Fuka model) {
+            FlexibleYear 前年度 = model.get賦課年度().minusYear(1);
+            Fuka 前年度賦課 = new FukaManager().get賦課年度最新賦課From被保険者番号(前年度, model.get被保険者番号());
+            if (前年度賦課 == null) {
+                return;
+            }
+            div.getTxtZenNendoNengakuHokenryoKari2().setValue(前年度賦課.get確定介護保険料_年額());
+            Optional<HokenryoDankai> 前年度保険料段階 = new HokenryoDankaiManager().get保険料段階(前年度, 前年度賦課.get保険料段階());
             if (前年度保険料段階.isPresent()) {
-                div.getTxtHokenryoDankaiKari2().setValue(HokenryoDankaiUtil.edit表示用保険料段階(前年度保険料段階.get()));
-                div.getTxtHokenryoRitsuKari2().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));
+                div.getTxtZenNendoHokenryoDankaiKari2().setValue(HokenryoDankaiUtil.edit表示用保険料段階(前年度保険料段階.get()));
+                div.getTxtZenNendoHokenryoRitsuKari2().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));
             }
         }
 
@@ -293,8 +326,8 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtSetaiinSuHon1().setValue(new RString(String.valueOf(model.get世帯員数())));
             div.getTxtShikakuShutokuYMDHon1().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakusoshitsuYMDHon1().setValue(toRDate(model.get資格喪失日()));
-            div.getTxtHonninKazeiHon1().setValue(model.get課税区分().get名称());
-            div.getTxtSetaiKazeiHon1().setValue(model.get世帯課税区分().get名称());
+            div.getTxtHonninKazeiHon1().setValue(model.get課税区分名称());
+            div.getTxtSetaiKazeiHon1().setValue(model.get世帯課税区分名称());
             div.getTxtGoukeiShotokuHon1().setValue(model.get合計所得金額());
             div.getTxtNenkinShunyuHon1().setValue(model.get公的年金収入額());
             div.getTxtKoseiYMDHon1().setValue(model.get調定日時().getDate().wareki().toDateString());
@@ -358,8 +391,8 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtSetaiinSuHon2().setValue(new RString(String.valueOf(model.get世帯員数())));
             div.getTxtShikakuShutokuYMDHon2().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakuSoshitsuYMDHon2().setValue(toRDate(model.get資格喪失日()));
-            div.getTxtHonninKazeiHon2().setValue(model.get課税区分().get名称());
-            div.getTxtSetaiKazeiHon2().setValue(model.get世帯課税区分().get名称());
+            div.getTxtHonninKazeiHon2().setValue(model.get課税区分名称());
+            div.getTxtSetaiKazeiHon2().setValue(model.get世帯課税区分名称());
             div.getTxtGoukeiShotokuHon2().setValue(model.get合計所得金額());
             div.getTxtNenkinShunyuHon2().setValue(model.get公的年金収入額());
             div.getTxtKoseiYMDHon2().setValue(model.get調定日時().getDate().wareki().toDateString());
@@ -475,7 +508,7 @@ public final class FukaJohoHikakuPresenter {
         protected void setComparingValues(FukaJohoHikakuDiv div, FukaHikakuTargets targets) {
             this.setHonSantei1(div.getHonSantei1(), targets.get(0));
             this.setKariSantei1(div.getKariSantei1(), targets.get(1));
-            this.decorateDifferentValues(div.getHonSantei1(), div.getKariSantei1());
+            this.decorateDifferentValues(div.getHonSantei1(), div.getKariSantei2());
         }
     }
 

@@ -55,6 +55,20 @@ public class Kiwarigaku {
     }
 
     /**
+     * 期別額(調定額)の合計を返却します。
+     * {@code null}は返却しません。代わりに{@link Decimal#ZERO}を返します。
+     *
+     * @return 調定額の合計
+     */
+    public Decimal get年額OrZERO() {
+        return zeroOr(this.特徴期別額合計).add(zeroOr(this.普徴期別額合計));
+    }
+
+    private static Decimal zeroOr(Decimal value) {
+        return value == null ? Decimal.ZERO : value;
+    }
+
+    /**
      * 特徴期別額合計を返します。
      *
      * @return 特徴期別額合計

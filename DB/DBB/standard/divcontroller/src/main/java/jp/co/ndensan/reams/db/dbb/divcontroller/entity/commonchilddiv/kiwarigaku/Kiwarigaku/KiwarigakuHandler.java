@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -72,15 +73,20 @@ public class KiwarigakuHandler {
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
+     * @return 取得した期割額
      */
-    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号) {
+    public Optional<Kiwarigaku> load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号) {
         KitsukiList 普徴期リスト = Objects.equals(調定年度, 賦課年度)
                              ? new FuchoKiUtil(調定年度).get期月リスト()
                              : new KanendoKiUtil(調定年度).get期月リスト();
         clear期別And調定And収入(this.div);
         set普徴期ラベルs(this.div, 普徴期リスト);
         setDisplayMode(賦課年度, 普徴期リスト.getLast().get期AsInt());
-        setKiwarigaku(this.div, manager.load期割額(調定年度, 賦課年度, 通知書番号, 履歴番号).get(), 普徴期リスト);
+        Optional<Kiwarigaku> 期割額 = manager.load期割額(調定年度, 賦課年度, 通知書番号, 履歴番号);
+        if (期割額.isPresent()) {
+            setKiwarigaku(this.div, 期割額.get(), 普徴期リスト);
+        }
+        return 期割額;
     }
 
     private static void clear期別And調定And収入(KiwarigakuDiv div) {
