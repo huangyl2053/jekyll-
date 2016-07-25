@@ -75,6 +75,7 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<NinteiChosaIraiShudouDiv>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onLoad(NinteiChosaIraiShudouDiv div) {
+        
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         if (!RealInitialLocker.tryGetLock(get排他キー())) {
             throw new PessimisticLockingException();
@@ -87,9 +88,11 @@ public class NinteiChosaIraiShudou {
         List<NinteiShinseiJoho> 更新用認定調査依頼List = finder.get更新用認定調査依頼情報(parameter).records();
         getHandler(div).onLoad(認定調査依頼List);
         ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
-        ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 認定調査依頼List.get(0).get厚労省IF識別コード());
-        ViewStateHolder.put(ViewStateKeys.認定申請年月日, 認定調査依頼List.get(0).get認定申請年月日());
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, 認定調査依頼List.get(0).get認定調査依頼履歴番号());
+        if (!認定調査依頼List.isEmpty()) {
+            ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 認定調査依頼List.get(0).get厚労省IF識別コード());
+            ViewStateHolder.put(ViewStateKeys.認定申請年月日, 認定調査依頼List.get(0).get認定申請年月日());
+            ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, 認定調査依頼List.get(0).get認定調査依頼履歴番号());
+        }
         return ResponseData.of(div).respond();
     }
 
