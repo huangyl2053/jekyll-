@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @reamsid_L DBE-3000-200 liangbc
  */
 public class NinteichosahyoTokkijiko extends
-        ParentModelBase<NinteichosahyoTokkijikoIdentifier, DbT5205NinteichosahyoTokkijikoEntity, NinteichosahyoTokkijiko> implements Serializable {
+        ModelBase<NinteichosahyoTokkijikoIdentifier, DbT5205NinteichosahyoTokkijikoEntity, NinteichosahyoTokkijiko> implements Serializable {
 
     private static final long serialVersionUID = -4038342742033810215L;
     private final DbT5205NinteichosahyoTokkijikoEntity entity;
@@ -189,7 +189,6 @@ public class NinteichosahyoTokkijiko extends
      *
      * @return 変更対象処理実施後の{@link NinteichosahyoTokkijiko}
      */
-    @Override
     public NinteichosahyoTokkijiko modifiedModel() {
         DbT5205NinteichosahyoTokkijikoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
