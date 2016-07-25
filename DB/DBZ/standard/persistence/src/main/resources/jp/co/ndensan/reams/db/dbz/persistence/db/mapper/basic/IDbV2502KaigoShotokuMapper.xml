@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbV2002Fukaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+<!-- @reamsid_L DBB-9060-010 duanzhanli -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbV2502KaigoShotokuMapper">
+
+    <sql id="allColumns_DbV2502">
+        "DbV2502"."shotokuNendo" as "DbV2502_shotokuNendo",
+        "DbV2502"."shikibetsuCode" as "DbV2502_shikibetsuCode",
+        "DbV2502"."rirekino" as "DbV2502_rirekino",
+        "DbV2502"."kazeiKubun" as "DbV2502_kazeiKubun",
+        "DbV2502"."kazeiKubunGemmenGo" as "DbV2502_kazeiKubunGemmenGo",
+        "DbV2502"."gokeiShotokuGaku" as "DbV2502_gokeiShotokuGaku",
+        "DbV2502"."nenkiniShunyuGaku" as "DbV2502_nenkiniShunyuGaku",
+        "DbV2502"."nenkiniShotokuGaku" as "DbV2502_nenkiniShotokuGaku",
+        "DbV2502"."kazeiShotokuGaku" as "DbV2502_kazeiShotokuGaku",
+        "DbV2502"."gekihenKanwaKubun" as "DbV2502_gekihenKanwaKubun",
+        "DbV2502"."yusenKubun" as "DbV2502_yusenKubun",
+        "DbV2502"."shoriTimeStamp" as "DbV2502_shoriTimeStamp",
+        "DbV2502"."motoRirekiNo" as "DbV2502_motoRirekiNo",
+        "DbV2502"."torokuGyomu as "DbV2502_torokuGyomu"
+    </sql>
+
+    <!--テーブルDbV2002Fukaの項目をDbV2002FukaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbV2502KaigoShotokuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity" autoMapping="true">
+        <result property="shotokuNendo" column="DbV2502_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shikibetsuCode" column="DbV2502_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="rirekino" column="DbV2502_rirekino" typeHandler="org.apache.ibatis.type.LongTypeHandler"/>
+        <result property="kazeiKubun" column="DbV2502_kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="DbV2502_kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="DbV2502_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="DbV2502_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="DbV2502_nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="DbV2502_kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="DbV2502_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenKubun" column="DbV2502_yusenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriTimeStamp" column="DbV2502_shoriTimeStamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="motoRirekiNo" column="DbV2502_motoRirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="torokuGyomu" column="DbV2502_torokuGyomu" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="getShotokuJohoList" resultMap="ResultMap_DbV2502KaigoShotokuEntity">
+        SELECT
+        <include refid="allColumns_DbV2502" />
+        FROM rgdb."DbFt252KaigoShotoku"('#{shiteiNendo}','#{shiteiShoriYMDHMS}','#{shikibetsuCodeList}') as "DbV2502"
+        ORDER BY DbV2502_shotokuNendo ASC, DbV2502_shikibetsuCode ASC, DbV2502_rirekino ASC
+    </select>
+</mapper>
