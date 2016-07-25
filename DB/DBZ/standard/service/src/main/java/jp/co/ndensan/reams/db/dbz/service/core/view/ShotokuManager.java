@@ -148,7 +148,7 @@ public class ShotokuManager {
         list.add(識別コード);
         List<KaigoShotokuAlive> result = get介護所得AlivesFromMapper(所得年度, 所得基準年月日, list);
 
-        if (result.size() > 0) {
+        if (!result.isEmpty()) {
             return result.get(0);
         }
         return null;

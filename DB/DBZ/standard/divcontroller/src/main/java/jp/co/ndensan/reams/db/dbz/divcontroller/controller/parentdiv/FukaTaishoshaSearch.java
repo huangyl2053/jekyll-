@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.DbV7902FukaSearchBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.taishoshasearch.FukaTaishoshaRelateBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.view.FukaSearchAlive;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.search.FukaSearchItem;
 import jp.co.ndensan.reams.db.dbz.service.core.util.SearchResult;
+import jp.co.ndensan.reams.db.dbz.service.core.view.FukaSearchAliveManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createKojin;
 import static jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory.createShikibetsuTaisho;
@@ -286,7 +288,9 @@ public class FukaTaishoshaSearch {
         IShikibetsuTaishoSearchKey 検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         TaishoshaFinder finder = new TaishoshaFinder();
-        SearchResult<FukaTaishoshaRelateBusiness> 対象者 = finder.get賦課対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+
+        SearchResult<FukaTaishoshaRelateBusiness> 対象者 = finder.get賦課対象者(get最新年度条件(識別コード),
+                get介護除外条件(div.getSearchCondition().getCcdSearchCondition(), FukaSearchMenu.賦課照会), 検索キー, 最近処理者検索数);
         if (!対象者.records().isEmpty()) {
             for (FukaTaishoshaRelateBusiness entity : 対象者.records()) {
 
@@ -387,6 +391,15 @@ public class FukaTaishoshaSearch {
         }
 
         return 介護条件;
+    }
+
+    private ISearchCondition get最新年度条件(ShikibetsuCode 識別コード) {
+        FukaSearchAlive 賦課データ = new FukaSearchAliveManager().get賦課年度最大賦課Alive(識別コード);
+        if (賦課データ != null) {
+            return SearchConditionFactory.condition(
+                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, 賦課データ.get賦課年度());
+        }
+        return 条件無;
     }
 
     private ISearchCondition get介護除外条件(HihokenshaFinderDiv div, FukaSearchMenu menu) {

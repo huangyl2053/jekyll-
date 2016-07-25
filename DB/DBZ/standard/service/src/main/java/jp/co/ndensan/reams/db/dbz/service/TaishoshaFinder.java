@@ -71,7 +71,7 @@ public class TaishoshaFinder {
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
 
-        if (条件 != null && 条件.isEvaluatable()) {
+        if (条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
             IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get資格対象識別コードリスト(介護条件);
 
             builder.set識別コードリスト(shikibetsuCodeList.toList());
@@ -107,7 +107,8 @@ public class TaishoshaFinder {
      * @return 賦課対象者
      */
     @Transaction
-    public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+    public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件,
+            IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
@@ -115,7 +116,7 @@ public class TaishoshaFinder {
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
 
-        if (条件 != null && 条件.isEvaluatable()) {
+        if (条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
             IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get賦課対象識別コードリスト(介護条件);
             builder.set識別コードリスト(shikibetsuCodeList.toList());
         }

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
