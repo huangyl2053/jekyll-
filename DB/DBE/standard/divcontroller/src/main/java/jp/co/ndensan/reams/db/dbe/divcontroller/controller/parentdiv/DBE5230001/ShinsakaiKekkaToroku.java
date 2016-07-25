@@ -107,6 +107,10 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onClick_SelectButton(ShinsakaiKekkaTorokuDiv div) {
+        if (div.getKobetsuHyojiArea().getBtnToroku().isDisabled()) {
+            getHandler(div).setKobetsuHyojiArea();
+            return ResponseData.of(div).respond();
+        }
         if (HASDATA.equals(div.getKobetsuHyojiArea().getHasData()) && getHandler(div).hasChange()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
