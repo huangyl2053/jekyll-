@@ -169,8 +169,8 @@
                     DbT4001."ninteiYMD" as 受給認定日,
                     DbT4001."kyuSochishaFlag" as 旧措置フラグ,
                     DbT4001."minashiCode" as みなし要介護区分コード,
-                    DbT4001."chokkinIdoYMD" as 直近異動事由コード,
-                    ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                    DbT4001."chokkinIdoYMD" as 直近異動事由コード
+                    <!-- ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号 -->
                     FROM
                     rgdb."DbT3005KyotakuKeikakuTodokede" As DbT3005_all
                     INNER JOIN
@@ -182,15 +182,38 @@
                         <when test="抽出区分 == 2 and 基準年月日 != null and !基準年月日.isEmpty()">
                             AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日}
                             AND #{基準年月日} <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+                            
+                            AND DbT4001."ninteiYukoKikanKaishiYMD"  = (
+                                SELECT MAX(DbT4001_2."ninteiYukoKikanKaishiYMD") FROM rgdb."DbT3005KyotakuKeikakuTodokede" As DbT3005_all_2
+                                INNER JOIN
+                                    rgdb."DbT4001JukyushaDaicho" As DbT4001_2
+                                ON DbT4001_2."hihokenshaNo" = DbT3005_all."hihokenshaNo"
+                                AND DbT4001_2."hihokenshaNo" = DbT3005_all_2."hihokenshaNo"
+                                AND DbT4001_2."logicalDeletedFlag" = false
+                                AND DbT4001_2."yukoMukoKubun" = '1'
+                                AND DbT4001_2."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準年月日}
+                                AND #{基準年月日} <![CDATA[<=]]> DbT4001_2."ninteiYukoKikanShuryoYMD"
+                                    )
                         </when>
                         <otherwise>
                             AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT3005_all."todokedeYMD"
-                            AND DbT3005_all."todokedeYMD" <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"	
+                            AND DbT3005_all."todokedeYMD" <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+                            AND DbT4001."ninteiYukoKikanKaishiYMD"  = (
+                                SELECT MAX(DbT4001_2."ninteiYukoKikanKaishiYMD") FROM rgdb."DbT3005KyotakuKeikakuTodokede" As DbT3005_all_2
+                                INNER JOIN
+                                    rgdb."DbT4001JukyushaDaicho" As DbT4001_2
+                                ON DbT4001_2."hihokenshaNo" = DbT3005_all."hihokenshaNo"
+                                AND DbT4001_2."hihokenshaNo" = DbT3005_all_2."hihokenshaNo"
+                                AND DbT4001_2."logicalDeletedFlag" = false
+                                AND DbT4001_2."yukoMukoKubun" = '1'
+                                AND DbT4001_2."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT3005_all_2."todokedeYMD"
+                                AND DbT3005_all_2."todokedeYMD" <![CDATA[<=]]> DbT4001_2."ninteiYukoKikanShuryoYMD"
+                                    )
                         </otherwise>
                     </choose>
                 ) AS DbT4001_corresponding
-                WHERE
-                DbT4001_corresponding.番号 = 1
+                <!-- WHERE
+                 DbT4001_corresponding.番号 = 1 -->
             )As DbV4001
             ON DbV4001.被保険者番号 = DbT3005."hihokenshaNo"
             AND DbV4001.対象年月 = DbT3005."taishoYM"
@@ -445,7 +468,7 @@
             where 1=1
                 AND DbT3005."hihokenshaNo" = #{被保険者番号}
                 AND DbT3005."taishoYM" <![CDATA[>]]> #{対象年月}
-                AND DbT3005."taishoYM" <![CDATA[<=]]> #{基準年月日}
+                AND DbT3005."taishoYM" || '01' <![CDATA[<=]]> #{基準年月日}
                                 
     </sql>
     
