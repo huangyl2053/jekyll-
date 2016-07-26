@@ -95,6 +95,7 @@ public class ShinsakaiIinHoshuNyuryoku {
         div.getShinsakaiIin().setDisplayNone(false);
         ValidationMessageControlPairs validPairs = getValidatison(div).必須入力チェック();
         if (validPairs.iterator().hasNext()) {
+            div.getShinsakaiIin().setVisible(false);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         Decimal 最大表示件数;
@@ -130,6 +131,7 @@ public class ShinsakaiIinHoshuNyuryoku {
             div.getShinsakaiJisseki().setVisible(false);
             return ResponseData.of(div).addValidationMessages(validPairs実績一覧データ空チェック).respond();
         }
+        div.getShinsakaiIin().setVisible(true);
         getHandler(div).edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);
         return ResponseData.of(div).respond();
     }
