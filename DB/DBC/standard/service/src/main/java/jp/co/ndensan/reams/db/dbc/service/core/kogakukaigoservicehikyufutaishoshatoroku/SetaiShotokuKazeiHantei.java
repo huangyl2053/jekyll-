@@ -10,6 +10,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinJigyoHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper;
@@ -76,68 +77,86 @@ public class SetaiShotokuKazeiHantei {
         mapper.insert世帯員把握入力高額一時();
         mapper.creat世帯員把握入力事業高額一時();
         mapper.insert世帯員把握入力事業高額一時();
+        mapper.insert世帯員把握入力高額一時test1();
+        mapper.insert世帯員把握入力事業高額一時test();
         mapper.creat世帯員所得情報高額一時();
         mapper.creat世帯員所得情報事業高額一時();
         if (is高額介護サービス(メニューID)) {
             mapper.insert世帯員所得情報高額一時に一括住所地特例該当が1();
             mapper.insert世帯員所得情報高額一時に一括住所地特例該当が1以外(new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分));
             TempSetaiinHaakuNyuryokuEntity tempSetaiEntity = mapper.select世帯員所得情報高額一時に一括();
-            ISetaiFinder 世帯Finder = ShikibetsuTaishoService.getSetaiFinder();
-            ISetai 世帯 = 世帯Finder.findBy識別コード(GyomuCode.DB介護保険, tempSetaiEntity.getShikibetsuCode(), tempSetaiEntity.getKijunYMD());
-            List<TmpSetaiHaakuNyuryokuEntity> list = new ArrayList();
-            TmpSetaiHaakuNyuryokuEntity entity = new TmpSetaiHaakuNyuryokuEntity();
-            IKojins 世帯員リスト = 世帯.get世帯員リスト();
-            for (IKojin 世帯員 : 世帯員リスト) {
-                entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
-                entity.setShikibetsuCode(世帯員.get識別コード());
-                if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
-                    entity.setHonninKubun(new RString("1"));
-                    entity.setHonninKazeiKubun(new RString("1"));
-                } else {
-                    entity.setHonninKubun(new RString("2"));
-                    entity.setSetaiKazeiKubun(new RString("1"));
-                    entity.setSetaiinHihokenshaNo(tempSetaiEntity.getHihokenshaNo().value());
-                }
-                entity.setKijunYMD(tempSetaiEntity.getKijunYMD());
-                entity.setShotokuNendo(tempSetaiEntity.getShotokuNendo());
-                entity.setSetaiCode(世帯.getSetaiCode().value());
-                list.add(entity);
+            if (tempSetaiEntity != null) {
+                List<TmpSetaiHaakuNyuryokuEntity> list = get世帯員所得情報高額一時のデータ(tempSetaiEntity);
+                mapper.insert世帯員所得情報高額一時に一括(list);
             }
-            mapper.insert世帯員所得情報高額一時に一括(list);
 
         }
 
         if (is事業高額介護サービス(メニューID)) {
             mapper.insert世帯員所得情報事業高額一時に一括住所地特例該当が1();
             mapper.insert世帯員所得情報事業高額一時に一括住所地特例該当が1以外(new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分));
-            TempSetaiinHaakuNyuryokuEntity tempSetaiEntity = mapper.select世帯員所得情報事業高額一時に一括();
-            ISetaiFinder 世帯Finder = ShikibetsuTaishoService.getSetaiFinder();
-            ISetai 世帯 = 世帯Finder.findBy識別コード(GyomuCode.DB介護保険, tempSetaiEntity.getShikibetsuCode(), tempSetaiEntity.getKijunYMD());
-            List<TmpSetaiJigyoHaakuNyuryokuEntity> list = new ArrayList();
-            TmpSetaiJigyoHaakuNyuryokuEntity entity = new TmpSetaiJigyoHaakuNyuryokuEntity();
-            IKojins 世帯員リスト = 世帯.get世帯員リスト();
-            for (IKojin 世帯員 : 世帯員リスト) {
-                entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
-                entity.setShikibetsuCode(世帯員.get識別コード());
-                if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
-                    entity.setHonninKubun(new RString("1"));
-                    entity.setHonninKazeiKubun(new RString("1"));
-                } else {
-                    entity.setHonninKubun(new RString("2"));
-                    entity.setSetaiKazeiKubun(new RString("1"));
-                    entity.setSetaiinHihokenshaNo(tempSetaiEntity.getHihokenshaNo().value());
-                }
-                entity.setKijunYMD(tempSetaiEntity.getKijunYMD());
-                entity.setShotokuNendo(tempSetaiEntity.getShotokuNendo());
-                entity.setSetaiCode(世帯.getSetaiCode().value());
-                list.add(entity);
+            TempSetaiinJigyoHaakuNyuryokuEntity tempSetaiEntity = mapper.select世帯員所得情報事業高額一時に一括();
+            if (tempSetaiEntity != null) {
+                List<TmpSetaiJigyoHaakuNyuryokuEntity> list = get世帯員所得情報事業高額一時のデータ(tempSetaiEntity);
+                mapper.insert世帯員所得情報事業高額一時に一括(list);
             }
-            mapper.insert世帯員所得情報事業高額一時に一括(list);
         }
     }
 
+    private List<TmpSetaiHaakuNyuryokuEntity> get世帯員所得情報高額一時のデータ(TempSetaiinHaakuNyuryokuEntity tempSetaiEntity) {
+        ISetaiFinder 世帯Finder = ShikibetsuTaishoService.getSetaiFinder();
+        ISetai 世帯 = 世帯Finder.findBy識別コード(GyomuCode.DB介護保険, tempSetaiEntity.getShikibetsuCode(), tempSetaiEntity.getKijunYMD());
+        List<TmpSetaiHaakuNyuryokuEntity> list = new ArrayList();
+        TmpSetaiHaakuNyuryokuEntity entity = new TmpSetaiHaakuNyuryokuEntity();
+        IKojins 世帯員リスト = 世帯.get世帯員リスト();
+        for (IKojin 世帯員 : 世帯員リスト) {
+            entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
+            entity.setShikibetsuCode(世帯員.get識別コード());
+            if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
+                entity.setHonninKubun(new RString("1"));
+                entity.setHonninKazeiKubun(new RString("1"));
+            } else {
+                entity.setHonninKubun(new RString("2"));
+                entity.setSetaiKazeiKubun(new RString("1"));
+                entity.setSetaiinHihokenshaNo(tempSetaiEntity.getHihokenshaNo().value());
+            }
+            entity.setKijunYMD(tempSetaiEntity.getKijunYMD());
+            entity.setShotokuNendo(tempSetaiEntity.getShotokuNendo());
+            entity.setSetaiCode(世帯.getSetaiCode().value());
+            list.add(entity);
+            return list;
+        }
+        return null;
+    }
+
+    private List<TmpSetaiJigyoHaakuNyuryokuEntity> get世帯員所得情報事業高額一時のデータ(TempSetaiinJigyoHaakuNyuryokuEntity tempSetaiEntity) {
+        ISetaiFinder 世帯Finder = ShikibetsuTaishoService.getSetaiFinder();
+        ISetai 世帯 = 世帯Finder.findBy識別コード(GyomuCode.DB介護保険, tempSetaiEntity.getShikibetsuCode(), tempSetaiEntity.getKijunYMD());
+        List<TmpSetaiJigyoHaakuNyuryokuEntity> list = new ArrayList();
+        TmpSetaiJigyoHaakuNyuryokuEntity entity = new TmpSetaiJigyoHaakuNyuryokuEntity();
+        IKojins 世帯員リスト = 世帯.get世帯員リスト();
+        for (IKojin 世帯員 : 世帯員リスト) {
+            entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
+            entity.setShikibetsuCode(世帯員.get識別コード());
+            if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
+                entity.setHonninKubun(new RString("1"));
+                entity.setHonninKazeiKubun(new RString("1"));
+            } else {
+                entity.setHonninKubun(new RString("2"));
+                entity.setSetaiKazeiKubun(new RString("1"));
+                entity.setSetaiinHihokenshaNo(tempSetaiEntity.getHihokenshaNo().value());
+            }
+            entity.setKijunYMD(tempSetaiEntity.getKijunYMD());
+            entity.setShotokuNendo(tempSetaiEntity.getShotokuNendo());
+            entity.setSetaiCode(世帯.getSetaiCode().value());
+            list.add(entity);
+            return list;
+        }
+        return null;
+    }
+
     /**
-     * 世帯員把握入力高額一時の中で「住所地特例該当」が「１」のデータを取得します。
+     * 合併内住特者番号変換処理取得します。
      *
      * @param メニューID RString
      */
@@ -160,25 +179,26 @@ public class SetaiShotokuKazeiHantei {
     @Transaction
     public void getJuminShotokuJoho(RString メニューID) {
         ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
+        mapper.insertFortestJuminShotokuJoho();
         if (is高額介護サービス(メニューID)) {
             mapper.update高額介護サービス場合();
-            TmpSetaiHaakuNyuryokuEntity 生保区分entity = mapper.select取得した内容で世帯員所得情報高額一時に生保区分を更新();
-            if (生保区分entity != null) {
+            int 生保区分count = mapper.select取得した内容で世帯員所得情報高額一時に生保区分を更新();
+            if (生保区分count != 0) {
                 mapper.update世帯員所得情報高額一時生保区分を付加する();
             }
-            TmpSetaiHaakuNyuryokuEntity 老齢福祉区分entity = mapper.select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新();
-            if (老齢福祉区分entity != null) {
+            int 老齢福祉区分count = mapper.select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新();
+            if (老齢福祉区分count != 0) {
                 mapper.update世帯員所得情報高額一時老齢福祉区分を更新する();
             }
         }
         if (is事業高額介護サービス(メニューID)) {
             mapper.update事業高額介護サービス場合();
-            TmpSetaiJigyoHaakuNyuryokuEntity 事業生保区分entity = mapper.select取得した内容で世帯員所得情報事業高額一時に生保区分を更新();
-            if (事業生保区分entity != null) {
+            int 事業生保区分count = mapper.select取得した内容で世帯員所得情報事業高額一時に生保区分を更新();
+            if (事業生保区分count != 0) {
                 mapper.update世帯員所得情報事業高額一時生保区分を付加する();
             }
-            TmpSetaiJigyoHaakuNyuryokuEntity 事業老齢福祉区分entity = mapper.select取得した内容で世帯員所得情報事業高額一時に老齢福祉区分を更新();
-            if (事業老齢福祉区分entity != null) {
+            int 事業老齢福祉区分count = mapper.select取得した内容で世帯員所得情報事業高額一時に老齢福祉区分を更新();
+            if (事業老齢福祉区分count != 0) {
                 mapper.update世帯員所得情報事業高額一時老齢福祉区分を更新する();
             }
         }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservi
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinJigyoHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity;
 
@@ -62,9 +63,9 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
     /**
      * select世帯員所得情報高額一時に一括テーブルメソッドです。
      *
-     * @return TempSetaiinHaakuNyuryokuEntity
+     * @return TempSetaiinJigyoHaakuNyuryokuEntity
      */
-    TempSetaiinHaakuNyuryokuEntity select世帯員所得情報事業高額一時に一括();
+    TempSetaiinJigyoHaakuNyuryokuEntity select世帯員所得情報事業高額一時に一括();
 
     /**
      * update世帯員所得情報高額一時合併内住所地特例者番号変換処理メソッドです。
@@ -91,28 +92,28 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
      *
      * @return TmpSetaiHaakuNyuryokuEntity
      */
-    TmpSetaiHaakuNyuryokuEntity select取得した内容で世帯員所得情報高額一時に生保区分を更新();
+    int select取得した内容で世帯員所得情報高額一時に生保区分を更新();
 
     /**
      * select取得した内容で世帯員所得情報高額一時に生保区分を更新メソッドです。
      *
-     * @return TmpSetaiHaakuNyuryokuEntity
+     * @return int
      */
-    TmpSetaiHaakuNyuryokuEntity select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新();
+    int select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新();
 
     /**
      * select取得した内容で世帯員所得情報高額一時に生保区分を更新メソッドです。
      *
-     * @return TmpSetaiHaakuNyuryokuEntity
+     * @return int
      */
-    TmpSetaiJigyoHaakuNyuryokuEntity select取得した内容で世帯員所得情報事業高額一時に生保区分を更新();
+    int select取得した内容で世帯員所得情報事業高額一時に生保区分を更新();
 
     /**
      * select取得した内容で世帯員所得情報高額一時に生保区分を更新メソッドです。
      *
-     * @return TmpSetaiHaakuNyuryokuEntity
+     * @return int
      */
-    TmpSetaiJigyoHaakuNyuryokuEntity select取得した内容で世帯員所得情報事業高額一時に老齢福祉区分を更新();
+    int select取得した内容で世帯員所得情報事業高額一時に老齢福祉区分を更新();
 
     /**
      * update世帯員所得情報高額一時生保区分を付加するメソッドです。
@@ -168,4 +169,19 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
      * insert世帯員把握入力事業高額一時テーブルメソッドです。
      */
     void insert世帯員把握入力事業高額一時();
+
+    /**
+     * insert世帯員把握入力事業高額一時テーブルメソッドです。
+     */
+    void insert世帯員把握入力高額一時test1();
+
+    /**
+     * insert世帯員把握入力事業高額一時テーブルメソッドです。
+     */
+    void insert世帯員把握入力事業高額一時test();
+
+    /**
+     * insert世帯員把握入力事業高額一時テーブルメソッドです。
+     */
+    void insertFortestJuminShotokuJoho();
 }
