@@ -209,7 +209,11 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 判定結果
      */
     public RString get判定結果() {
-        return HanteiKekkaCode.toValue(entity.get判定結果コード().value()).get名称();
+        Code コード = entity.get判定結果コード();
+        if (コード != null && !コード.isEmpty()) {
+            return HanteiKekkaCode.toValue(entity.get判定結果コード().value()).get名称();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -218,7 +222,11 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 判定結果コード
      */
     public RString get判定結果コード() {
-        return entity.get判定結果コード().value();
+        Code コード = entity.get判定結果コード();
+        if (コード != null && !コード.isEmpty()) {
+            return entity.get判定結果コード().value();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -334,7 +342,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public RString get審査会意見種類() {
         RString 審査会意見種類 = entity.get審査会意見種類();
-        if (審査会意見種類 != null && !審査会意見種類.isEmpty()) {
+        if (!RString.isNullOrEmpty(審査会意見種類)) {
             return NinteiShinsakaiIkenShurui.toValue(entity.get審査会意見種類()).get名称();
         }
         return RString.EMPTY;
@@ -347,7 +355,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public RString get審査会意見種類コード() {
         RString 審査会意見種類 = entity.get審査会意見種類();
-        if (審査会意見種類 != null && !審査会意見種類.isEmpty()) {
+        if (RString.isNullOrEmpty(審査会意見種類)) {
             return entity.get審査会意見種類();
         }
         return RString.EMPTY;
