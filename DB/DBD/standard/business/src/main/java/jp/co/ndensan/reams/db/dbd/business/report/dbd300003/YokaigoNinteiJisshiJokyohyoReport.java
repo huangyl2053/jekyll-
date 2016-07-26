@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd300003;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.YokaigoNinteiJisshiJokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300003.YokaigoNinteiJisshiJokyohyoReportSource;
@@ -29,7 +30,7 @@ public final class YokaigoNinteiJisshiJokyohyoReport extends Report<YokaigoNinte
     private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist2;
     private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist3;
     private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist4;
-    private final YokaigoNinteiJisshiJokyohyoEntity 実施状況Entity = null;
+    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリスト = new ArrayList();
 
     /**
      * インスタンスを生成します。
@@ -78,7 +79,7 @@ public final class YokaigoNinteiJisshiJokyohyoReport extends Report<YokaigoNinte
         for (int index = 0; index < 実施状況Entityリストlist1.size() && index < 実施状況Entityリストlist2.size()
                 && index < 実施状況Entityリストlist3.size() && index < 実施状況Entityリストlist4.size(); index++) {
             IYokaigoNinteiJisshiJokyohyoEditor bodyEditor = new YokaigoNinteiJisshiJokyohyoEditor(基準日, 年齢, 地区,
-                    集計単位, 実施状況Entity, 実施状況Entityリストlist1, 実施状況Entityリストlist2,
+                    集計単位, 実施状況Entityリスト, 実施状況Entityリストlist1, 実施状況Entityリストlist2,
                     実施状況Entityリストlist3, 実施状況Entityリストlist4, index);
             IYokaigoNinteiJisshiJokyohyoBuilder builder = new YokaigoNinteiJisshiJokyohyoBuilder(bodyEditor);
             writer.writeLine(builder);

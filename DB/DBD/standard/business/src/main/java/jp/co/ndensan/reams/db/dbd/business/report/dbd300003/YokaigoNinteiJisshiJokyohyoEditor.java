@@ -33,7 +33,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
     private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist2;
     private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist3;
     private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist4;
-    private final YokaigoNinteiJisshiJokyohyoEntity 実施状況Entity;
+    private final List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリスト;
     private final int index;
 
     /**
@@ -43,7 +43,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
      * @param 年齢 RString
      * @param 地区 RString
      * @param 集計単位 Code
-     * @param 実施状況Entity YokaigoNinteiJisshiJokyohyoEntity
+     * @param 実施状況Entityリスト List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param 実施状況Entityリストlist1 List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param 実施状況Entityリストlist2 List<YokaigoNinteiJisshiJokyohyoEntity>
      * @param 実施状況Entityリストlist3 List<YokaigoNinteiJisshiJokyohyoEntity>
@@ -51,7 +51,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
      * @param index int
      */
     public YokaigoNinteiJisshiJokyohyoEditor(FlexibleDate 基準日, RString 年齢, RString 地区,
-            Code 集計単位, YokaigoNinteiJisshiJokyohyoEntity 実施状況Entity,
+            Code 集計単位, List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリスト,
             List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist1,
             List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist2,
             List<YokaigoNinteiJisshiJokyohyoEntity> 実施状況Entityリストlist3,
@@ -60,7 +60,7 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         this.年齢 = 年齢;
         this.地区 = 地区;
         this.集計単位 = 集計単位;
-        this.実施状況Entity = 実施状況Entity;
+        this.実施状況Entityリスト = 実施状況Entityリスト;
         this.実施状況Entityリストlist1 = 実施状況Entityリストlist1;
         this.実施状況Entityリストlist2 = 実施状況Entityリストlist2;
         this.実施状況Entityリストlist3 = 実施状況Entityリストlist3;
@@ -82,10 +82,10 @@ public class YokaigoNinteiJisshiJokyohyoEditor implements IYokaigoNinteiJisshiJo
         source.printTimeStamp = get印刷日時();
         source.label48 = new RString("介護保険");
         source.label18 = new RString("要介護認定実施状況表");
-        source.shichosonName = 実施状況Entity.get市町村名();
-        source.hokenshaNo = 実施状況Entity.get市町村番号();
-        source.hokenshaName = 実施状況Entity.get市町村名();
-        source.nendo = 実施状況Entity.get対象年度().toDateString();
+        source.shichosonName = 実施状況Entityリスト.get(index).get市町村名();
+        source.hokenshaNo = 実施状況Entityリスト.get(index).get市町村番号();
+        source.hokenshaName = 実施状況Entityリスト.get(index).get市町村名();
+        source.nendo = 実施状況Entityリスト.get(index).get対象年度().toDateString();
 
         YokaigoNinteiJisshiJokyohyoEntity list1 = 実施状況Entityリストlist1.get(index);
         if (null != list1) {

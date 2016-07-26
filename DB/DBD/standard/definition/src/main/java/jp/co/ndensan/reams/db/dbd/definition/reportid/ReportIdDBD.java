@@ -136,6 +136,10 @@ public enum ReportIdDBD {
      */
     DBD300003(new ReportId("DBD300003_YokaigoNinteiJisshiJokyohyo"), new RString("要介護認定実施状況表（統計表）")),
     /**
+     * 要介護認定月別受給者数状況表（統計表）の帳票ＩＤです。
+     */
+    DBD300004(new ReportId("DBD300004_YokaigoNinteiTsukibetsuJukyushaSuJokyohyo"), new RString("要介護認定月別受給者数状況表（統計表）")),
+    /**
      * 要介護度変更通知書の帳票ＩＤです。
      */
     DBD550003(new ReportId("DBD550003_YokaigodoHenkoTshuchisho"), new RString("要介護度変更通知書")),
