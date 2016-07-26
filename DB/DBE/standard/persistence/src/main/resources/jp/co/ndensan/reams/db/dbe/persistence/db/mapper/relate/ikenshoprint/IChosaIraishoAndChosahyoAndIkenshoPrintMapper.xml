@@ -501,7 +501,10 @@
                               AND C."ninteichosaRirekiNo" <![CDATA[<]]>  C1."ninteichosaRirekiNo"
 
                  )
-                 AND C."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
+                 AND C."koroshoIfShikibetsuCode" = 
+                  (SELECT "koroshoIfShikibetsuCode" 
+                           FROM rgdb."DbT5101NinteiShinseiJoho" 
+                         WHERE "shinseishoKanriNo" = B."zenkaiShinseishoKanriNo")
                  INNER JOIN 
                   rgdb."DbT5116IchijiHanteiKekkaJoho" AS D
                   ON C."shinseishoKanriNo" = D."shinseishoKanriNo"
