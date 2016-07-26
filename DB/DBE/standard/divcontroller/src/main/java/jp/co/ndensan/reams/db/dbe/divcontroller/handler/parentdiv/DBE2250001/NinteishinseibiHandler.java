@@ -113,6 +113,10 @@ public class NinteishinseibiHandler {
         div.getTxtiraibi().setDisplayNone(true);
         div.getBtnKensakuClear().setDisplayNone(true);
         div.getNinteiIchiran().setDisplayNone(true);
+        div.getBtnKensaku().setDisplayNone(true);
+        div.getTxtMaxKensu().setDisplayNone(true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取込, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
     }
 
     /**
