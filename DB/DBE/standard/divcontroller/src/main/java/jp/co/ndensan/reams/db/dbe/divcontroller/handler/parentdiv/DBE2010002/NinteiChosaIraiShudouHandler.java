@@ -112,9 +112,9 @@ public class NinteiChosaIraiShudouHandler {
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShinseishoKanriNo(認定調査依頼.get申請書管理番号());
             div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(認定調査依頼.get申請書管理番号()));
             if (!RString.isNullOrEmpty(認定調査依頼.get認定調査依頼履歴番号())) {
-                div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(false);
-            } else {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(true);
+            } else {
+                div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(false);
             }
             RString 認定調査依頼年月日 = 認定調査依頼.get認定調査依頼年月日();
             if (!RString.isNullOrEmpty(認定調査依頼年月日)) {
@@ -232,7 +232,7 @@ public class NinteiChosaIraiShudouHandler {
             div.getTxtKigenymd().setValue(RDate.getNowDate());
         } else {
             div.getTxtKigenymd().clearValue();
-            div.getTxtKigenymd().setReadOnly(false);
+            div.getTxtKigenymd().setReadOnly(true);
         }
     }
 
