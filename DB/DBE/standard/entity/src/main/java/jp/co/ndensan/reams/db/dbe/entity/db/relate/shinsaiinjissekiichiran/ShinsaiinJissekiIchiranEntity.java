@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsaiinjissekiichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,10 +45,6 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
     private final RString 審査員種別;
     @CsvField(order = 10, name = "出欠")
     private final RString 出欠;
-    @CsvField(order = 11, name = "実施年月日")
-    private final RString 実施年月日;
-    @CsvField(order = 12, name = "連番")
-    private final RString 連番;
 
     /**
      * コンストラクタです。
@@ -64,10 +60,8 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
         this.実施日 = dateFormat(relateEntity.get実施日());
         this.開始 = set時刻(relateEntity.get開始());
         this.終了 = set時刻(relateEntity.get終了());
-        this.審査員種別 = ShinsakaiIinHoshukubun.toValue(relateEntity.get報酬区分()).get名称();
+        this.審査員種別 = KaigoninteiShinsakaiGichoKubunCode.toValue(relateEntity.get審査員種別()).get名称();
         this.出欠 = IsShusseki.toValue(relateEntity.is出欠()).get名称();
-        this.実施年月日 = relateEntity.get実施年月日();
-        this.連番 = new RString(relateEntity.get連番());
 
     }
 

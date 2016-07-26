@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsaiinjissekiichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -57,7 +57,7 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         source.listShinsainJissekiIchiran_6 = dateFormat(item.get実施日());
         source.listShinsainJissekiIchiran_7 = set時刻(item.get開始());
         source.listShinsainJissekiIchiran_8 = set時刻(item.get終了());
-        source.listShinsainJissekiIchiran_9 = ShinsakaiIinHoshukubun.toValue(item.get報酬区分()).get名称();
+        source.listShinsainJissekiIchiran_9 = KaigoninteiShinsakaiGichoKubunCode.toValue(item.get審査員種別()).get名称();
         source.listShinsainJissekiIchiran_10 = IsShusseki.toValue(item.is出欠()).get名称();
         return source;
     }

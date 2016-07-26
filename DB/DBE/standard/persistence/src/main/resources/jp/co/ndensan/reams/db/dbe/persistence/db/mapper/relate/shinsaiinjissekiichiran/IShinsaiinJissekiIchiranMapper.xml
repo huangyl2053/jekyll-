@@ -16,6 +16,7 @@
         <result property="終了" column="終了" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="実施年月日" column="実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="連番" column="連番"/>
+        <result property="審査員種別" column="審査員種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get介護認定審査会委員報酬集計表"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter"
@@ -42,6 +43,7 @@
           , T5503."shussekiFlag" AS 出欠
           , T5603."shinsakaiKaisaiYMD" AS 実施年月日
           , T5603."remban" AS 連番
+          , T5503."kaigoninteiShinsakaiGichoKubunCode" AS 審査員種別
         FROM
           rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
           INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS T5594 

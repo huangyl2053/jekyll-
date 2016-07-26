@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran.Sh
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgShisakaiIinJisseki_Row;
@@ -92,14 +93,14 @@ public class ShisakaiIinJissekiShokaiHandler {
         for (ShinsaiinJissekiIchiran data : shinsaiinjissekiichiranList) {
             dgShisakaiIinJisseki_Row row = new dgShisakaiIinJisseki_Row(data.getコード(),
                     data.get氏名(),
-                    data.get報酬区分(),
+                    ShinsakaiIinHoshukubun.toValue(data.get報酬区分()).get名称(),
                     data.get所属機関(),
                     data.get審査会地区(),
                     data.get審査会番号(),
                     dateFormat(data.get実施日()),
                     set時刻(data.get開始()),
                     set時刻(data.get終了()),
-                    ShinsakaiIinHoshukubun.toValue(data.get報酬区分()).get名称(),
+                    KaigoninteiShinsakaiGichoKubunCode.toValue(data.get審査員種別()).get名称(),
                     IsShusseki.toValue(data.is出欠()).get名称(),
                     data.get実施年月日(),
                     new RString(Integer.toString(data.get連番())));
