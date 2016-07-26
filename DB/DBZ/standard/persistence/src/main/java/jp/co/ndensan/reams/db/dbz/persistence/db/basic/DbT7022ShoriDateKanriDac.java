@@ -372,7 +372,27 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * 基準年月日を取得します。
+     * 抽出調定日時を取得します。
+     *
+     * @param サブ業務コード subGyomuCode
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectSubGyomuCode(SubGyomuCode サブ業務コード) throws NullPointerException {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage(サブ業務コードメッセージ.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(eq(subGyomuCode, サブ業務コード)).
+                order(by(DbT7022ShoriDateKanri.nendo, Order.DESC),
+                        by(DbT7022ShoriDateKanri.nendoNaiRenban, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * selectSubGyomuCode 基準年月日を取得します。
      *
      * @param 処理名 shoriName
      * @param 年度 nendo

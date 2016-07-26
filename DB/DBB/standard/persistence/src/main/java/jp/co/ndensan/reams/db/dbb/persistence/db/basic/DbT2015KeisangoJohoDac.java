@@ -144,6 +144,33 @@ public class DbT2015KeisangoJohoDac implements ISaveable<DbT2015KeisangoJohoEnti
     }
 
     /**
+     * 処理名の過年度賦課のレコードを返します。
+     *
+     * @param 作成処理名 RString
+     * @return List<DbT2015KeisangoJohoEntity>
+     */
+    public List<DbT2015KeisangoJohoEntity> selectBy処理名(RString 作成処理名) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2015KeisangoJoho.class).
+                where(eq(作成処理名, sakuseiShoriName)).
+                toList(DbT2015KeisangoJohoEntity.class);
+    }
+
+    /**
+     * DbT2015KeisangoJohoEntityを削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT2015KeisangoJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("計算後情報エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * DbT2015KeisangoJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb055001;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.CalculateFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.CollectSetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.CreateTsuchishoBangoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.DeleteKeisangoJohoTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.InsShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SelectKanendoIdoDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SpoolKanendoIdoKekkaIchiranProcess;
@@ -36,6 +37,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKane
     private static final String 通知書番号発番 = "createTsuchishoBango";
     private static final String 世帯員把握 = "collectSetaiin";
     private static final String 賦課計算 = "caluculateFuka";
+    private static final String 過年度賦課_計算後情報を削除 = "deleteDbT2015KeisangoJohoTemp";
     private static final String 計算後情報作成_イチ = "kiisagoJyohouSakuseiIchi";
     private static final String 計算後情報作成_二 = "kiisagoJyohouSakuseiNi";
     private static final String 結果一覧表出力 = "spoolKanendoIdoKekkaIchiran";
@@ -57,11 +59,13 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKane
         executeStep(通知書番号発番);
         executeStep(世帯員把握);
         executeStep(賦課計算);
+        executeStep(過年度賦課_計算後情報を削除);
         executeStep(計算後情報作成_イチ);
         if (二_定値.equals(processParameter.get日付関連_年度サイクル())) {
             executeStep(計算後情報作成_二);
         }
         executeStep(結果一覧表出力);
+        executeStep(処理日付管理テーブル登録);
     }
 
     /**
@@ -102,6 +106,16 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKane
     @Step(賦課計算)
     protected IBatchFlowCommand calculateFuka() {
         return simpleBatch(CalculateFukaProcess.class).define();
+    }
+
+    /**
+     * 過年度賦課_計算後情報を削除です。
+     *
+     * @return バッチコマンド
+     */
+    @Step(過年度賦課_計算後情報を削除)
+    protected IBatchFlowCommand deleteKeisangoJohoTemp() {
+        return simpleBatch(DeleteKeisangoJohoTempProcess.class).define();
     }
 
     /**
