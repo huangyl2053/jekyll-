@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
@@ -21,10 +22,17 @@ public interface IYokaigoNinteiJohoMapper {
      * 今回認定情報の取得します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 認定広域フラグ 認定広域フラグ
      * @return 今回認定情報 List<YokaigoNinteiJohoEntity>
      */
-    List<YokaigoNinteiJohoEntity> get今回認定情報(@Param("申請書管理番号") RString 申請書管理番号, @Param("認定広域フラグ") boolean 認定広域フラグ);
+    List<YokaigoNinteiJohoEntity> get今回認定情報WITHOUT結果情報(@Param("申請書管理番号") RString 申請書管理番号);
+
+    /**
+     * 今回認定情報の取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 今回認定情報 List<YokaigoNinteiJohoEntity>
+     */
+    List<YokaigoNinteiJohoEntity> get今回認定情報WITH結果情報(@Param("申請書管理番号") RString 申請書管理番号);
 
     /**
      * 前回認定情報の取得します。
@@ -57,4 +65,13 @@ public interface IYokaigoNinteiJohoMapper {
      * @return 認定情報認定 List<YokaigoNinteiJohoEntity>
      */
     List<YokaigoNinteiJohoEntity> get認定情報認定(@Param("被保険者番号") RString 被保険者番号);
+
+    /**
+     * 要介護認定インターフェース情報を更新します。
+     *
+     * @param entity
+     * @return 更新かどうか。
+     */
+    boolean updDbt4003YokaigoNinteiInterface(DbT4003YokaigoNinteiInterfaceEntity entity);
+
 }

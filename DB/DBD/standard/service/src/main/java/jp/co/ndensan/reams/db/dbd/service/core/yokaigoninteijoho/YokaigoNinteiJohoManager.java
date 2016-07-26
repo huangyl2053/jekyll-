@@ -85,7 +85,9 @@ public class YokaigoNinteiJohoManager {
      */
     public YokaigoNinteiJoho get今回認定情報(RString 申請書管理番号, boolean 認定広域フラグ) {
         IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
-        List<YokaigoNinteiJohoEntity> entities = mapper.get今回認定情報(申請書管理番号, 認定広域フラグ);
+        List<YokaigoNinteiJohoEntity> entities = 認定広域フラグ
+                ? mapper.get今回認定情報WITHOUT結果情報(申請書管理番号)
+                : mapper.get今回認定情報WITH結果情報(申請書管理番号);
         if (null != entities && !entities.isEmpty()) {
             YokaigoNinteiJohoEntity entity = entities.get(0);
             entity.initializeMd5ToEntitiesWithoutJukyusha();
@@ -119,6 +121,7 @@ public class YokaigoNinteiJohoManager {
      */
     @Transaction
     public void save(YokaigoNinteiJoho 今回情報, boolean 削除フラグ) {
+        IYokaigoNinteiJohoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoMapper.class);
         if (null != 今回情報 && 今回情報.hasChanged今回認定情報()) {
             要介護認定申請情報受給Dac.save(今回情報.get要介護認定申請情報受給Entity());
             if (削除フラグ) {
@@ -131,7 +134,7 @@ public class YokaigoNinteiJohoManager {
                 要介護認定結果情報Dac.save(今回情報.get要介護認定結果情報Entity());
             }
             if (今回情報.has要介護認定インターフェース情報()) {
-                要介護認定インターフェース情報Dac.save(今回情報.get要介護認定インターフェース情報Entity());
+                mapper.updDbt4003YokaigoNinteiInterface(今回情報.get要介護認定インターフェース情報Entity());
             }
         }
     }
