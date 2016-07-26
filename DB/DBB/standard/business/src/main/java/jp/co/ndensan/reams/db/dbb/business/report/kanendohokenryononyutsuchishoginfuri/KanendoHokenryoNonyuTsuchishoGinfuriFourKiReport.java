@@ -59,7 +59,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport extends NonyuTsuch
             return;
         }
         int 銀振印字位置Para = 0;
-        int 連番 = 1;
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
@@ -67,22 +66,21 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport extends NonyuTsuch
                 throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
             }
             if (銀振印字位置 <= 銀振印字位置Para) {
-                edit(writer, 納入通知書期情報リストEdit, 連番);
+                edit(writer, 納入通知書期情報リストEdit);
                 納入通知書期情報リストEdit.clear();
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                連番++;
             } else {
                 納入通知書期情報リストEdit.add(納入通知書期情報);
             }
             銀振印字位置Para = 銀振印字位置;
         }
-        edit(writer, 納入通知書期情報リストEdit, 連番);
+        edit(writer, 納入通知書期情報リストEdit);
     }
 
     private void edit(ReportSourceWriter<KanendoHokenryoNonyuTsuchishoGinfuriFourKiSource> writer,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 連番) {
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit) {
         IKanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor editor
-                = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor(本算定納入通知書情報, ninshoshaSource, 納入通知書期情報リストEdit, 連番);
+                = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor(本算定納入通知書情報, ninshoshaSource, 納入通知書期情報リストEdit);
         IKanendoHokenryoNonyuTsuchishoGinfuriFourKiBuilder builder = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiBuilder(editor);
         writer.writeLine(builder);
     }
@@ -133,6 +131,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport extends NonyuTsuch
         本算定納入通知書情報Report.set現年度_過年度区分(本算定納入通知書情報.get現年度_過年度区分());
         本算定納入通知書情報Report.set納付書共通(本算定納入通知書情報.get納付書共通());
         本算定納入通知書情報Report.set編集後本算定通知書共通情報(本算定納入通知書情報.get編集後本算定通知書共通情報());
+        本算定納入通知書情報Report.set連番(本算定納入通知書情報.get連番());
     }
 
 }

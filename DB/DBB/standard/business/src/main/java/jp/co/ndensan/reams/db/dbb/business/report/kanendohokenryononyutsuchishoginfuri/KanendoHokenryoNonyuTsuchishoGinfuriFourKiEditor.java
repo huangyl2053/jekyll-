@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendohokenryononyutsuchisho
 
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
@@ -61,14 +62,13 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
      * @param 本算定納入通知書情報 本算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      * @param 納入通知書期情報リスト 納入通知書期情報リスト
-     * @param 連番 連番
      */
     public KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報,
-            NinshoshaSource ninshoshaSource, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト, int 連番) {
+            NinshoshaSource ninshoshaSource, List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
         this.納入通知書期情報リスト = 納入通知書期情報リスト;
-        this.連番 = 連番;
+        this.連番 = 本算定納入通知書情報.get連番();
     }
 
     @Override
@@ -261,8 +261,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
         }
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
             source.mRenban = new RString(連番).padLeft("0", INT_6);
-        } else {
-            source.mRenban = new RString(連番);
         }
         source.nofushoShichosonMei14 = 納付書共通.get納付書市町村名();
         source.nofushoShichosonMei13 = 納付書共通.get納付書市町村名();
@@ -445,8 +443,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
         editレイヤ１_納入通知書期情報(source, 納入通知書期情報印字位置1, 納入通知書期情報印字位置2, 納入通知書期情報印字位置3, 納入通知書期情報印字位置4);
         if (ShoriKubun.バッチ.equals(本算定納入通知書情報.get処理区分())) {
             source.renban = new RString(連番).padLeft("0", INT_6);
-        } else {
-            source.renban = new RString(連番);
         }
 
     }
@@ -540,10 +536,10 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
     private void edit通知開始終了期(KanendoHokenryoNonyuTsuchishoGinfuriFourKiSource source) {
         List<Kitsuki> 出力期リスト = 本算定納入通知書情報.get出力期リスト();
         if (出力期リスト != null && !出力期リスト.isEmpty()) {
-            int 最小の期 = 0;
+            int 最小の期 = 出力期リスト.get(0).get期AsInt();
             int 最大の期 = 出力期リスト.get(0).get期AsInt();
             for (Kitsuki 出力期 : 出力期リスト) {
-                if (出力期.get期AsInt() > 最小の期) {
+                if (出力期.get期AsInt() < 最小の期) {
                     最小の期 = 出力期.get期AsInt();
                 }
                 if (出力期.get期AsInt() > 最大の期) {
@@ -581,8 +577,8 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
         if (編集後本算定通知書共通情報.get調定年度_年度なし() != null) {
             source.titleKanendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
             source.ryoshushoKanendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
-            source.titleKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat("分");
-            source.ryoshushoKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり()).concat("分");
+            source.titleKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり().concat("分"));
+            source.ryoshushoKanendoBun = 半角to全角(編集後本算定通知書共通情報.get賦課年度_年度あり().concat("分"));
         }
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
         if (表示コード != null) {
@@ -599,8 +595,8 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
         source.nendoKa = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = 編集後本算定通知書共通情報.get更正後();
         if (更正後 != null) {
-            source.hokenryoGaku = decimalToRString(更正後.get確定保険料_年額());
-            source.santeiKisoCalHokenryoGaku = decimalToRString(更正後.get確定保険料_年額());
+            source.hokenryoGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get確定保険料_年額());
+            source.santeiKisoCalHokenryoGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get確定保険料_年額());
             source.santeiKisoKikanKaishi = 更正後.get期間_自();
             source.santeiKisoKiaknShuryo = 更正後.get期間_至();
             if (更正後.get月数_ケ月() != null) {
@@ -609,25 +605,29 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
             if (更正後.get保険料段階() != null) {
                 source.santeiKisoShotokuDankai = 半角to全角(更正後.get保険料段階());
             }
-            source.santeiKisoHokenryoRitsu = decimalToRString(更正後.get保険料率());
-            source.santeiKisoGenmenGaku = decimalToRString(更正後.get減免額());
-            source.santeiKisoTokuchoNofuSubekiGaku = decimalToRString(更正後.get特別徴収額合計());
-            source.santeiKisoFuchoNofuSubekiGaku = decimalToRString(更正後.get普通徴収額合計());
+            source.santeiKisoHokenryoRitsu = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get保険料率());
+            source.santeiKisoGenmenGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get減免額());
+            source.santeiKisoTokuchoNofuSubekiGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get特別徴収額合計());
+            source.santeiKisoFuchoNofuSubekiGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get普通徴収額合計());
         }
         HonSanteiNonyuTsuchiShoSeigyoJoho 本算定納入通知書制御情報 = 本算定納入通知書情報.get本算定納入通知書制御情報();
         if (本算定納入通知書制御情報 != null && 本算定納入通知書制御情報.get納入通知書制御情報() != null) {
             if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(本算定納入通知書制御情報.get納入通知書制御情報().get納付額算出方法())) {
-                source.santeiKisoNofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む());
-                source.santeiKisoKongoNofuSubekiGaku = decimalToRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に());
+                source.santeiKisoNofuzumiGaku
+                        = NotsuReportEditorUtil.get共通ポリシー金額1(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む());
+                source.santeiKisoKongoNofuSubekiGaku
+                        = NotsuReportEditorUtil.get共通ポリシー金額1(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に());
             } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(本算定納入通知書制御情報.get納入通知書制御情報().get納付額算出方法())) {
-                source.santeiKisoNofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get普徴既に納付すべき額());
-                source.santeiKisoKongoNofuSubekiGaku = decimalToRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
+                source.santeiKisoNofuzumiGaku
+                        = NotsuReportEditorUtil.get共通ポリシー金額1(編集後本算定通知書共通情報.get普徴既に納付すべき額());
+                source.santeiKisoKongoNofuSubekiGaku
+                        = NotsuReportEditorUtil.get共通ポリシー金額1(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
             }
         }
         if (出力期リストの一番目 != null && 更正後 != null) {
             List<UniversalPhase> 普徴期別金額リスト = 更正後.get普徴期別金額リスト();
             source.santeiKisoTokiHokenryoGaku1
-                    = decimalToRString(get金額From普徴期別金額リスト(普徴期別金額リスト, 出力期リストの一番目.get期AsInt()));
+                    = NotsuReportEditorUtil.get共通ポリシー金額1(get金額From普徴期別金額リスト(普徴期別金額リスト, 出力期リストの一番目.get期AsInt()));
         }
         EditedKojin 編集後個人 = 編集後本算定通知書共通情報.get編集後個人();
         EditedKoza 編集後口座 = 編集後本算定通知書共通情報.get編集後口座();
@@ -661,13 +661,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFourKiEditor implements IKanend
             }
         }
         return null;
-    }
-
-    private RString decimalToRString(Decimal 額) {
-        if (null == 額) {
-            return RString.EMPTY;
-        }
-        return new RString(額.toString());
     }
 
 }
