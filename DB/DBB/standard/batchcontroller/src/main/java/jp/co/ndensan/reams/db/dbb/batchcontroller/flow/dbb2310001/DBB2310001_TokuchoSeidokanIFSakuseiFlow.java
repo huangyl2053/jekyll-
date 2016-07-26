@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * DBB2310001_TokuchoSeidokanIFSakuseiFlowのクラスです。
@@ -27,7 +28,7 @@ public class DBB2310001_TokuchoSeidokanIFSakuseiFlow
     @Override
     protected void defineFlow() {
         getParameter().setシステム日時(RDateTime.now());
-//        getParameter().set遷移元メニュー(ResponseHolder.getMenuID());
+        getParameter().set遷移元メニュー(ResponseHolder.getMenuID());
         executeStep(年金特徴回付情報の抽出);
         executeStep(介護特別徴収情報取込履歴追加);
         executeStep(介護保険年金特徴対象者情報追加用データ作成);
