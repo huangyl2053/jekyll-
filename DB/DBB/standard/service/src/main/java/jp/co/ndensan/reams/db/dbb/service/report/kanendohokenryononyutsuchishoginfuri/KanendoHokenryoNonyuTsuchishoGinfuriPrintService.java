@@ -110,7 +110,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource>> reportList
-                        = KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport.createFrom(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -130,7 +130,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<KanendoHokenryoNonyuTsuchishoGinfuriFourKiSource>> reportList
-                        = KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport.createFrom(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -149,7 +149,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
                     new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport report
-                    = KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport.createFrom(本算定納入通知書情報, ninshoshaSource);
+                    = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -164,7 +164,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
                     new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport report
-                    = KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport.createFrom(本算定納入通知書情報, ninshoshaSource);
+                    = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -180,7 +180,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport report
-                        = KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport.createFrom(本算定納入通知書情報, ninshoshaSource);
+                        = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -198,7 +198,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport report
-                        = KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport.createFrom(本算定納入通知書情報, ninshoshaSource);
+                        = new KanendoHokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();

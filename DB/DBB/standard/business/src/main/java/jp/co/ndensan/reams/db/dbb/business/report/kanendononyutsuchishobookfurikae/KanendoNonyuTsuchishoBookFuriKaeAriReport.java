@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼あり）通知書
@@ -43,22 +42,10 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
      * @param 本算定納入通知書情報 本算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      */
-    protected KanendoNonyuTsuchishoBookFuriKaeAriReport(
+    public KanendoNonyuTsuchishoBookFuriKaeAriReport(
             HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-    }
-
-    /**
-     *
-     * @param 本算定納入通知書情報 本算定納入通知書情報
-     * @param ninshoshaSource 認証者情報
-     * @return NonyuTsuchishoBookFuriKaeAriCoverReport
-     * @throws NullPointerException 引数が{@code null}の時
-     */
-    public static KanendoNonyuTsuchishoBookFuriKaeAriReport createFrom(
-            @NonNull HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
-        return new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
@@ -189,7 +176,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Cover = getNew本算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リスト);
         KanendoNonyuTsuchishoBookFuriKaeAriReport reportCover
-                = KanendoNonyuTsuchishoBookFuriKaeAriReport.createFrom(本算定納入通知書情報Cover, ninshoshaSource);
+                = new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報Cover, ninshoshaSource);
         nonyuTsuchishoList.add(reportCover);
         if (null == 納入通知書期情報リスト || 納入通知書期情報リスト.isEmpty()) {
             return nonyuTsuchishoList;
@@ -229,8 +216,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
             } else if (detail設定数 >= INT_4) {
                 本算定納入通知書情報Detail
                         = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
-                reportDetail = KanendoNonyuTsuchishoBookFuriKaeAriReport
-                        .createFrom(本算定納入通知書情報Detail, ninshoshaSource);
+                reportDetail = new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報Detail, ninshoshaSource);
                 nonyuTsuchishoList.add(reportDetail);
                 納入通知書期情報リストDetail = new ArrayList<>();
                 納入通知書期情報リストDetail.add(納入通知書期情報);
@@ -242,8 +228,7 @@ public class KanendoNonyuTsuchishoBookFuriKaeAriReport extends NonyuTsuchisho<Ka
         }
         本算定納入通知書情報Detail
                 = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
-        reportDetail = KanendoNonyuTsuchishoBookFuriKaeAriReport
-                .createFrom(本算定納入通知書情報Detail, ninshoshaSource);
+        reportDetail = new KanendoNonyuTsuchishoBookFuriKaeAriReport(本算定納入通知書情報Detail, ninshoshaSource);
         nonyuTsuchishoList.add(reportDetail);
         return nonyuTsuchishoList;
     }

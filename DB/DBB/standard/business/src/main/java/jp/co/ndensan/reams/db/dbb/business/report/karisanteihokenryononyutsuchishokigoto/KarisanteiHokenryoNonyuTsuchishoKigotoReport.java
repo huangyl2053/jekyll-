@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchisho
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  *
@@ -36,22 +35,10 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      */
-    protected KarisanteiHokenryoNonyuTsuchishoKigotoReport(
+    public KarisanteiHokenryoNonyuTsuchishoKigotoReport(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-    }
-
-    /**
-     *
-     * @param 仮算定納入通知書情報 仮算定納入通知書情報
-     * @param ninshoshaSource 認証者情報
-     * @return KarisanteiHokenryoNonyuTsuchishoKigotoReport
-     * @throws NullPointerException 引数が{@code null}の時
-     */
-    public static KarisanteiHokenryoNonyuTsuchishoKigotoReport createFrom(
-            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
-        return new KarisanteiHokenryoNonyuTsuchishoKigotoReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
@@ -107,8 +94,8 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport
             納入通知書期情報リストReport.add(納入通知書期情報);
             仮算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
             仮算定納入通知書情報Report.set編集範囲区分(HenshuHaniKubun.全てのレイアウト);
-            KarisanteiHokenryoNonyuTsuchishoKigotoReport report = KarisanteiHokenryoNonyuTsuchishoKigotoReport
-                    .createFrom(仮算定納入通知書情報Report, ninshoshaSource);
+            KarisanteiHokenryoNonyuTsuchishoKigotoReport report
+                    = new KarisanteiHokenryoNonyuTsuchishoKigotoReport(仮算定納入通知書情報Report, ninshoshaSource);
             reportLst.add(report);
         }
         return reportLst;

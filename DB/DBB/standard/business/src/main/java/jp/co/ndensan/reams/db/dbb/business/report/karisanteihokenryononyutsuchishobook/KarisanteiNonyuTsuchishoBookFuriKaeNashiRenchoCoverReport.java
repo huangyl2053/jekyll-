@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  *
@@ -45,22 +44,10 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      */
-    protected KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(
+    public KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-    }
-
-    /**
-     *
-     * @param 仮算定納入通知書情報 仮算定納入通知書情報
-     * @param ninshoshaSource 認証者情報
-     * @return KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
-     * @throws NullPointerException 引数が{@code null}の時
-     */
-    public static KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport createFrom(
-            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
-        return new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
@@ -214,7 +201,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 仮算定納入通知書情報.get納入通知書期情報リスト();
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報Cover = getNew仮算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リスト, true);
         KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport reportCover
-                = KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport.createFrom(仮算定納入通知書情報Cover, ninshoshaSource);
+                = new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(仮算定納入通知書情報Cover, ninshoshaSource);
         nonyuTsuchishoList.add(reportCover);
         if (仮算定納入通知書情報.get仮算定納入通知書制御情報() != null
                 && 仮算定納入通知書情報.get編集後仮算定通知書共通情報() != null
@@ -273,26 +260,22 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
                     納入通知書期情報リストDetail.add(納入通知書期情報);
                     isBegin = true;
                 }
+            } else if (detail設定数 >= INT4) {
+                仮算定納入通知書情報Detail
+                        = getNew仮算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail, false);
+                reportDetail = new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(仮算定納入通知書情報Detail, ninshoshaSource);
+                nonyuTsuchishoList.add(reportDetail);
+                納入通知書期情報リストDetail = new ArrayList<>();
+                納入通知書期情報リストDetail.add(納入通知書期情報);
+                detail設定数 = INT1;
             } else {
-                if (detail設定数 >= INT4) {
-                    仮算定納入通知書情報Detail
-                            = getNew仮算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail, false);
-                    reportDetail = KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
-                            .createFrom(仮算定納入通知書情報Detail, ninshoshaSource);
-                    nonyuTsuchishoList.add(reportDetail);
-                    納入通知書期情報リストDetail = new ArrayList<>();
-                    納入通知書期情報リストDetail.add(納入通知書期情報);
-                    detail設定数 = INT1;
-                } else {
-                    納入通知書期情報リストDetail.add(納入通知書期情報);
-                    detail設定数++;
-                }
+                納入通知書期情報リストDetail.add(納入通知書期情報);
+                detail設定数++;
             }
         }
         仮算定納入通知書情報Detail
                 = getNew仮算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail, false);
-        reportDetail = KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
-                .createFrom(仮算定納入通知書情報Detail, ninshoshaSource);
+        reportDetail = new KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(仮算定納入通知書情報Detail, ninshoshaSource);
         nonyuTsuchishoList.add(reportDetail);
         return nonyuTsuchishoList;
     }

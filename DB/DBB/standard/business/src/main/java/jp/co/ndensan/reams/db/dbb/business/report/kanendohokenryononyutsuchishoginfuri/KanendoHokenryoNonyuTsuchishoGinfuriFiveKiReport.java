@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_5期
@@ -36,21 +35,9 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
      * @param 本算定納入通知書情報 本算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      */
-    protected KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+    public KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-    }
-
-    /**
-     *
-     * @param 本算定納入通知書情報 本算定納入通知書情報
-     * @param ninshoshaSource 認証者情報
-     * @return HokenryoNonyuTsuchishoGinfuriFiveKiReport
-     * @throws NullPointerException 引数が{@code null}の時
-     */
-    public static KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport createFrom(
-            @NonNull HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
-        return new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
@@ -131,8 +118,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
         本算定納入通知書情報Report.set編集範囲区分(HenshuHaniKubun.全てのレイアウト);
         本算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
         KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport report
-                = KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport
-                .createFrom(本算定納入通知書情報Report, ninshoshaSource);
+                = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報Report, ninshoshaSource);
         return report;
     }
 

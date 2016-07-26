@@ -56,7 +56,7 @@ public class KanendoHokenryoNonyuTsuchishoKigotoPrintService {
                         KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 KanendoHokenryoNonyuTsuchishoKigotoReport report
-                        = KanendoHokenryoNonyuTsuchishoKigotoReport.createFrom(本算定納入通知書情報, ninshoshaSource);
+                        = new KanendoHokenryoNonyuTsuchishoKigotoReport(本算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -82,7 +82,7 @@ public class KanendoHokenryoNonyuTsuchishoKigotoPrintService {
                     KenmeiFuyoKubunType.付与なし,
                     reportSourceWriter);
             KanendoHokenryoNonyuTsuchishoKigotoReport report
-                    = KanendoHokenryoNonyuTsuchishoKigotoReport.createFrom(本算定納入通知書情報, ninshoshaSource);
+                    = new KanendoHokenryoNonyuTsuchishoKigotoReport(本算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -106,7 +106,7 @@ public class KanendoHokenryoNonyuTsuchishoKigotoPrintService {
                         KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 List<NonyuTsuchisho<KanendoHokenryoNonyuTsuchishoKigotoSource>> reportList
-                        = KanendoHokenryoNonyuTsuchishoKigotoReport.createFrom(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new KanendoHokenryoNonyuTsuchishoKigotoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }

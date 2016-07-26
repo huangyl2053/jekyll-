@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskigot
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 保険料納入通知書（仮算定）【コンビニ期毎タイプ】連帳 KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
@@ -34,23 +33,11 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      */
-    protected KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport(
+    public KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             NinshoshaSource ninshoshaSource) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-    }
-
-    /**
-     *
-     * @param 仮算定納入通知書情報 仮算定納入通知書情報
-     * @param ninshoshaSource 認証者情報
-     * @return KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
-     * @throws NullPointerException 引数が{@code null}の時
-     */
-    public static KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport createFrom(
-            @NonNull KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, NinshoshaSource ninshoshaSource) {
-        return new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport(仮算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
@@ -85,7 +72,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport
             仮算定納入通知書情報Report.set編集範囲区分(HenshuHaniKubun.全てのレイアウト);
             仮算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
             KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport report
-                    = KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport.createFrom(仮算定納入通知書情報Report, ninshoshaSource);
+                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverReport(仮算定納入通知書情報Report, ninshoshaSource);
             reportLst.add(report);
         }
         return reportLst;

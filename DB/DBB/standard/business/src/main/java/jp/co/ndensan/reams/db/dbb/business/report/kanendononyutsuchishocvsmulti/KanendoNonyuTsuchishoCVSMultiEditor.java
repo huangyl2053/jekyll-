@@ -45,7 +45,7 @@ public class KanendoNonyuTsuchishoCVSMultiEditor implements IKanendoNonyuTsuchis
     private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
-    private static final int リストサイズ１ = 1;
+    private final int リストサイズ１ = 1;
 
     private static final int INT_2 = 2;
     private static final int INT_6 = 6;

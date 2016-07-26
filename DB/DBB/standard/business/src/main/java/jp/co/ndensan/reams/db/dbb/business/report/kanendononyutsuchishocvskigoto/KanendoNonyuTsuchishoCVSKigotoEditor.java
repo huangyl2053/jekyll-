@@ -38,7 +38,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
     private static final RString KOZA_MEIGININ_TITLE = new RString("名義人");
     private static final RString HANKAKU_X = new RString("X");
 
-    private static final int リストサイズ１ = 1;
+    private final int リストサイズ１ = 1;
 
     private static final int INT_2 = 2;
     private static final int INT_6 = 6;
