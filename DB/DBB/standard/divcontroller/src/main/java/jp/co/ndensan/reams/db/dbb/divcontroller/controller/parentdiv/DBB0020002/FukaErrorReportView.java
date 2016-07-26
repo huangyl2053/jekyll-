@@ -27,8 +27,10 @@ import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalRep
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.internalreportoutput.InternalReportServiceFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -49,7 +51,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -86,6 +93,9 @@ public class FukaErrorReportView {
     private static final RString 異動賦課 = new RString("異動賦課");
     private static final RString 過年度賦課 = new RString("過年度賦課");
     private static final int TWO = 2;
+    private static final RString 個人番号_利用有無名称 = new RString("個人番号利用有無");
+    private static final RString 法人番号_利用有無名称 = new RString("法人番号利用有無");
+    private static final RString 無し = new RString("無し");
 
     /**
      * 画面初期化処理です。
@@ -125,6 +135,11 @@ public class FukaErrorReportView {
             kihonDiv.setKihonDataAndCreationDateTime(fukaError);
             createHandler(div).initialize(賦課エラー情報);
             ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
+            List<PersonalData> personalDataList = new ArrayList<>();
+            for (FukaErrorList errorList : 賦課エラー情報) {
+                personalDataList.add(toPersonalData(errorList.get識別コード()));
+            }
+            AccessLogger.log(AccessLogType.照会, personalDataList);
         } else {
             createHandler(div).initialize(new ArrayList<FukaErrorList>());
         }
@@ -165,14 +180,17 @@ public class FukaErrorReportView {
         fileName.append(CSV_WRITER_LINE).append(timeString);
         fileName.append(CSV);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), fileName.toRString());
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<FukaErrorListCsvItem> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
             for (FukaErrorListCsvItem item : reportItem) {
+                personalDataList.add(toPersonalData(new ShikibetsuCode(item.get識別コード())));
                 csvWriter.writeLine(item);
             }
             csvWriter.close();
         }
+        AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName.toRString()));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
@@ -336,5 +354,11 @@ public class FukaErrorReportView {
             return 過年度賦課;
         }
         return RString.EMPTY;
+    }
+
+    private PersonalData toPersonalData(ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo1 = new ExpandedInformation(new Code("0001"), 個人番号_利用有無名称, 無し);
+        ExpandedInformation expandedInfo2 = new ExpandedInformation(new Code("0002"), 法人番号_利用有無名称, 無し);
+        return PersonalData.of(識別コード, expandedInfo1, expandedInfo2);
     }
 }
