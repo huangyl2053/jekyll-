@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1830-040 liuyang
  */
-public class NenkinTokuChoKaifuJohoSelectProcess extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
+public class NenkinTokuChoKaifuJohoSelectProcess extends BatchProcessBase<
+        jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
             + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeleted");
@@ -31,13 +32,13 @@ public class NenkinTokuChoKaifuJohoSelectProcess extends BatchProcessBase<UeT051
     BatchEntityCreatedTempTableWriter 特徴回付情報Temp;
 
     @Override
-    protected void process(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
+    protected void process(jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entity) {
     }
 
     @Override
     protected void createWriter() {
         特徴回付情報Temp = new BatchEntityCreatedTempTableWriter(T_特徴回付情報TMP,
-                UeT0511NenkinTokuchoKaifuJohoEntity.class);
+                jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity.class);
     }
 
     @Override
@@ -45,8 +46,13 @@ public class NenkinTokuChoKaifuJohoSelectProcess extends BatchProcessBase<UeT051
         TokuChoSoufuJohoSakuseiBatch sakuseiBatch = TokuChoSoufuJohoSakuseiBatch.createInstance();
         List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511Entitys = sakuseiBatch.selectNenkinTokuChoKaifuJoho(
                 parameter.get処理年度(), parameter.get特別徴収開始年月(), parameter.get遷移元メニュー());
+        if (uet0511Entitys == null || uet0511Entitys.isEmpty()) {
+            return;
+        }
         for (UeT0511NenkinTokuchoKaifuJohoEntity entity : uet0511Entitys) {
-            特徴回付情報Temp.insert(entity);
+            jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity dbzEntity
+                    = sakuseiBatch.entityCopy(entity);
+            特徴回付情報Temp.insert(dbzEntity);
         }
     }
 

@@ -21,12 +21,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.ue.uex.definition.core.RenkeiShubetsu;
+import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuSeidoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.TsuchiNaiyoCodeType;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -131,7 +135,6 @@ public class TokuChoSoufuJohoSakuseiBatch {
         TokuchoSeidokanIFSakuseiMyBatisParameter param = new TokuchoSeidokanIFSakuseiMyBatisParameter(処理年度);
         int 特徴開始年数 = 特徴開始月.getYearValue();
         RString 特徴開始月数 = DateConverter.formatMonthFull(特徴開始月.getMonthValue());
-        List<UeT0511NenkinTokuchoKaifuJohoEntity> resultList = null;
         List<jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> results = null;
 
         FlexibleYear 入力処理年度 = null;
@@ -185,16 +188,6 @@ public class TokuChoSoufuJohoSakuseiBatch {
                     入力処理年度, 通知内容コード, 捕捉月));
         }
         return results;
-    }
-
-    private void addToList(List<UeT0511NenkinTokuchoKaifuJohoEntity> uet0511entitylist, FlexibleYear 処理年度,
-            RString 通知内容コード, RString 捕捉年月) {
-        UeT0511NenkinTokuchoKaifuJohoEntity entity = new UeT0511NenkinTokuchoKaifuJohoEntity();
-        entity.setShoriNendo(処理年度);
-        entity.setTsuchiNaiyoCode(new TsuchiNaiyoCode(通知内容コード));
-        RString 捕捉月 = RString.isNullOrEmpty(捕捉年月) ? RString.EMPTY : 捕捉年月.substring(NUM4, NUM6);
-        entity.setHosokuTsuki(捕捉月);
-        uet0511entitylist.add(entity);
     }
 
     /**
@@ -442,7 +435,14 @@ public class TokuChoSoufuJohoSakuseiBatch {
      * @return List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity>
      */
     public List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> intNenkinTokuChoTaishosyaJoho() {
-        return mapper.selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll();
+        List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> dbzEntitis = new ArrayList<>();
+        for (jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity
+                : mapper.selectUeT0515KaigohokenNenkinTokuchoTaishoshaJoho550tempAll()) {
+            if (entity != null) {
+                dbzEntitis.add(entityCopy(entity));
+            }
+        }
+        return dbzEntitis;
     }
 
     /**
@@ -493,4 +493,141 @@ public class TokuChoSoufuJohoSakuseiBatch {
             return shoridatekanrientity.getKijunTimestamp();
         }
     }
+
+    /**
+     * Entity転換のメソドです。
+     *
+     * @param entity
+     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return
+     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     */
+    public jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entityCopy(
+            UeT0511NenkinTokuchoKaifuJohoEntity entity) {
+        jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity dbzEntity
+                = new jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity();
+        if (entity == null) {
+            return dbzEntity;
+        }
+        dbzEntity.setGyomuCode(entity.getGyomuCode());
+        dbzEntity.setShoriNendo(entity.getShoriNendo());
+        TsuchiNaiyoCode tsuchiNaiyoCode = entity.getTsuchiNaiyoCode();
+        dbzEntity.setTsuchiNaiyoCode(tsuchiNaiyoCode == null ? RString.EMPTY
+                : tsuchiNaiyoCode.value().get通知内容コード());
+        dbzEntity.setShoriTaishoYM(entity.getShoriTaishoYM());
+        dbzEntity.setKisoNenkinNo(entity.getKisoNenkinNo());
+        dbzEntity.setNenkinCode(entity.getNenkinCode());
+        dbzEntity.setKoseiCityCode(entity.getKoseiCityCode());
+        dbzEntity.setRenban(entity.getRenban());
+        dbzEntity.setShoriTimestamp(entity.getShoriTimestamp());
+        RenkeiShubetsu renkeiShubetsu = entity.getRenkeiShubetsu();
+        dbzEntity.setRenkeiShubetsu(renkeiShubetsu == null ? RString.EMPTY : renkeiShubetsu.value().code());
+        dbzEntity.setHosokuTsuki(entity.getHosokuTsuki());
+        dbzEntity.setTenbikiTsuki(entity.getTenbikiTsuki());
+        dbzEntity.setDtCityCode(entity.getDtCityCode());
+        TokubetsuChoshuGimushaCode tokubetsuChoshuGimushaCode = entity.getDtTokubetsuChoshuGimushaCode();
+        dbzEntity.setDtTokubetsuChoshuGimushaCode(tokubetsuChoshuGimushaCode == null ? null
+                : tokubetsuChoshuGimushaCode.value());
+        tsuchiNaiyoCode = entity.getDtTsuchiNaiyoCode();
+        dbzEntity.setDtTsuchiNaiyoCode(tsuchiNaiyoCode == null ? RString.EMPTY
+                : tsuchiNaiyoCode.value().get通知内容コード());
+        dbzEntity.setDtBaitaiCode(entity.getDtBaitaiCode());
+        TokubetsuChoshuSeidoCode tokubetsuChoshuSeidoCode = entity.getDtTokubetsuChoshuSeidoCode();
+        dbzEntity.setDtTokubetsuChoshuSeidoCode(tokubetsuChoshuSeidoCode == null ? RString.EMPTY
+                : tokubetsuChoshuSeidoCode.value().getコード());
+        dbzEntity.setDtSakuseiYMD(entity.getDtSakuseiYMD());
+        dbzEntity.setDtKisoNenkinNo(entity.getDtKisoNenkinNo());
+        dbzEntity.setDtNenkinCode(entity.getDtNenkinCode());
+        dbzEntity.setDtYobi1(entity.getDtYobi1());
+        dbzEntity.setDtBirthDay(entity.getDtBirthDay());
+        SeibetsuCodeNenkinTokucho seibetsuCodeNenkinTokucho = entity.getDtSeibetsu();
+        dbzEntity.setDtSeibetsu(seibetsuCodeNenkinTokucho == null ? RString.EMPTY
+                : seibetsuCodeNenkinTokucho.value().get性別コード());
+        dbzEntity.setDtKanaShimei(entity.getDtKanaShimei());
+        dbzEntity.setDtShiftCode1(entity.getDtShiftCode1());
+        dbzEntity.setDtKanjiShimei(entity.getDtKanjiShimei());
+        dbzEntity.setDtShiftCode2(entity.getDtShiftCode2());
+        dbzEntity.setDtYubinNo(entity.getDtYubinNo());
+        dbzEntity.setDtKanaJusho(entity.getDtKanaJusho());
+        dbzEntity.setDtShiftCode3(entity.getDtShiftCode3());
+        dbzEntity.setDtKanjiJusho(entity.getDtKanjiJusho());
+        dbzEntity.setDtShiftCode4(entity.getDtShiftCode4());
+        dbzEntity.setDtKakushuKubun(entity.getDtKakushuKubun());
+        dbzEntity.setDtShoriKekka(entity.getDtShoriKekka());
+        dbzEntity.setDtKokiIkanCode(entity.getDtKokiIkanCode());
+        dbzEntity.setDtKakushuYMD(entity.getDtKakushuYMD());
+        dbzEntity.setDtKakushuKingaku1(entity.getDtKakushuKingaku1());
+        dbzEntity.setDtKakushuKingaku2(entity.getDtKakushuKingaku2());
+        dbzEntity.setDtKakushuKingaku3(entity.getDtKakushuKingaku3());
+        dbzEntity.setDtYobi2(entity.getDtYobi2());
+        dbzEntity.setDtKyosaiNenkinshoshoKigoNo(entity.getDtKyosaiNenkinshoshoKigoNo());
+        dbzEntity.setShikibetsuCode(entity.getShikibetsuCode());
+        dbzEntity.setHihokenshaNo(entity.getHihokenshaNo());
+        dbzEntity.setKokuhoSetaiCode(entity.getKokuhoSetaiCode());
+        dbzEntity.setDtKakushuKingaku4(entity.getDtKakushuKingaku4());
+        dbzEntity.setDtKakushuKingaku5(entity.getDtKakushuKingaku5());
+        dbzEntity.setDtKakushuKingaku6(entity.getDtKakushuKingaku6());
+        dbzEntity.setDtKakushuKingaku7(entity.getDtKakushuKingaku7());
+        dbzEntity.setDtKakushuKingaku8(entity.getDtKakushuKingaku8());
+        dbzEntity.setDtTeishiYM(entity.getDtTeishiYM());
+        dbzEntity.setDtYobi4Juminzei(entity.getDtYobi4Juminzei());
+        dbzEntity.setDtKojinNo(entity.getDtKojinNo());
+        dbzEntity.setKokuhoYoteiSoshitsuKubun(entity.getKokuhoYoteiSoshitsuKubun());
+        return dbzEntity;
+    }
+
+    public UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entityCopy(
+            jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity) {
+        UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity dbzEntity
+                = new UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity();
+        if (entity == null) {
+            return dbzEntity;
+        }
+        dbzEntity.setRenban(entity.getRenban());
+        dbzEntity.setKisoNenkinNo(entity.getKisoNenkinNo());
+        dbzEntity.setNenkinCode(entity.getNenkinCode());
+        dbzEntity.setSeq(entity.getSeq());
+        dbzEntity.setShoriTimestamp(entity.getShoriTimestamp());
+        dbzEntity.setDtCityCode(entity.getDtCityCode());
+        dbzEntity.setDtTokubetsuChoshuGimushaCode(entity.getDtTokubetsuChoshuGimushaCode());
+        dbzEntity.setDtTsuchiNaiyoCode(entity.getDtTsuchiNaiyoCode());
+        dbzEntity.setDtBaitaiCode(entity.getDtBaitaiCode());
+        dbzEntity.setDtTokubetsuChoshuSeidoCode(entity.getDtTokubetsuChoshuSeidoCode());
+        dbzEntity.setDtSakuseiYMD(entity.getDtSakuseiYMD());
+        dbzEntity.setDtKisoNenkinNo(entity.getDtKisoNenkinNo());
+        dbzEntity.setDtNenkinCode(entity.getDtNenkinCode());
+        dbzEntity.setDtYobi1(entity.getDtYobi1());
+        dbzEntity.setDtBirthDay(entity.getDtBirthDay());
+        dbzEntity.setDtSeibetsu(entity.getDtSeibetsu());
+        dbzEntity.setDtKanaShimei(entity.getDtKanaShimei());
+        dbzEntity.setDtShiftCode1(entity.getDtShiftCode1());
+        dbzEntity.setDtKanjiShimei(entity.getDtKanjiShimei());
+        dbzEntity.setDtShiftCode2(entity.getDtShiftCode2());
+        dbzEntity.setDtYubinNo(entity.getDtYubinNo());
+        dbzEntity.setDtKanaJusho(entity.getDtKanaJusho());
+        dbzEntity.setDtShiftCode3(entity.getDtShiftCode3());
+        dbzEntity.setDtKanjiJusho(entity.getDtKanjiJusho());
+        dbzEntity.setDtShiftCode4(entity.getDtShiftCode4());
+        dbzEntity.setDtKakushuKubun(entity.getDtKakushuKubun());
+        dbzEntity.setDtShoriKekka(entity.getDtShoriKekka());
+        dbzEntity.setDtKokiIkanCode(entity.getDtKokiIkanCode());
+        dbzEntity.setDtKakushuYMD(entity.getDtKakushuYMD());
+        dbzEntity.setDtKakushuKingaku1(entity.getDtKakushuKingaku1());
+        dbzEntity.setDtKakushuKingaku2(entity.getDtKakushuKingaku2());
+        dbzEntity.setDtKakushuKingaku3(entity.getDtKakushuKingaku3());
+        dbzEntity.setDtYobi2(entity.getDtYobi2());
+        dbzEntity.setDtKyosaiNenkinshoshoKigoNo(entity.getDtKyosaiNenkinshoshoKigoNo());
+        dbzEntity.setKaigohokenHihokenshaNo(entity.getKaigohokenHihokenshaNo());
+        dbzEntity.setKojinCodeKubun(entity.getKojinCodeKubun());
+        dbzEntity.setKojinCode(entity.getKojinCode());
+        dbzEntity.setKaigohokenJushochitokureiKubun(entity.getKaigohokenJushochitokureiKubun());
+        dbzEntity.setHosokuYMD(entity.getHosokuYMD());
+        dbzEntity.setTaikiFlag(entity.getTaikiFlag());
+        dbzEntity.setYobi(entity.getYobi());
+        dbzEntity.setHosokuYMD(entity.getHosokuYMD());
+        dbzEntity.setTaikiFlag(entity.getTaikiFlag());
+        dbzEntity.setYobi(entity.getYobi());
+        return dbzEntity;
+    }
+
 }

@@ -188,9 +188,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
                 AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" =#{tsuchiNaiyoCode}
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" =#{hosokuTsuki}
@@ -202,9 +200,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND
             (
@@ -234,9 +230,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND
             (
@@ -271,9 +265,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
             AND(
                 "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
                 AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
@@ -317,9 +309,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
                 AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
@@ -331,9 +321,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
            AND(                
                   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
@@ -352,9 +340,7 @@
         FROM
         <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
         <where>
-            <if test="gyomuCode">
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
-            </if>
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND(                
                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'

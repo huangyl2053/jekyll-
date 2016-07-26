@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiDBUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -21,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1830-040 liuyang
  */
-public class ShoriDateKanriUpdateProcess extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
+public class ShoriDateKanriUpdateProcess extends BatchProcessBase<
+        jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
 
     private static final int NUM2 = 2;
     private static final int NUM4 = 4;
@@ -52,7 +52,8 @@ public class ShoriDateKanriUpdateProcess extends BatchProcessBase<UeT0511NenkinT
     }
 
     @Override
-    protected void process(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
+    protected void process(
+            jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entity) {
     }
 
     @Override

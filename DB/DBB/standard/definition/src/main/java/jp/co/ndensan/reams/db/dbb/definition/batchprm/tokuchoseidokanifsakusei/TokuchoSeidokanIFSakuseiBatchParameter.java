@@ -26,7 +26,7 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
     private FlexibleYear 処理年度;
     private RDate 特別徴収開始年月;
     private RString 遷移元メニュー;
-    private final RDateTime システム日時;
+    private RDateTime システム日時;
 
     /**
      * コンストラクタです。
@@ -39,14 +39,12 @@ public class TokuchoSeidokanIFSakuseiBatchParameter extends BatchParameterBase {
         this.処理年度 = 処理年度;
         this.特別徴収開始年月 = 特別徴収開始年月;
         this.遷移元メニュー = 遷移元メニュー;
-        システム日時 = RDateTime.now();
     }
 
     /**
      * コンストラクタです。
      */
     public TokuchoSeidokanIFSakuseiBatchParameter() {
-        システム日時 = RDateTime.now();
     }
 
     /**

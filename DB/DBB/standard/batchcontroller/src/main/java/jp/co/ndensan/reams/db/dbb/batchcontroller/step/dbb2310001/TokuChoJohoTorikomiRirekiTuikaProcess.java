@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiDBUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.tokuchosoufujohosakuseibatch.TokuChoSoufuJohoSakuseiBatch;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT1704KaigoTokuchoTorikomiRirekiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -22,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1830-040 liuyang
  */
-public class TokuChoJohoTorikomiRirekiTuikaProcess extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
+public class TokuChoJohoTorikomiRirekiTuikaProcess extends BatchProcessBase<
+        jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
             + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeleted");
@@ -39,18 +39,22 @@ public class TokuChoJohoTorikomiRirekiTuikaProcess extends BatchProcessBase<UeT0
     }
 
     @Override
+    protected void createWriter() {
+        ueT1704Writer = new BatchPermanentTableWriter(UeT1704KaigoTokuchoTorikomiRirekiEntity.class);
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(PATH);
     }
 
     @Override
-    protected void process(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
+    protected void process(jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entity) {
     }
 
     @Override
     protected void afterExecute() {
         TokuChoSoufuJohoSakuseiBatch sakuseiBatch = TokuChoSoufuJohoSakuseiBatch.createInstance();
-
         UeT1704KaigoTokuchoTorikomiRirekiEntity uet1704Entity = sakuseiBatch.intTokuChoJohoTorikomiRireki(
                 parameter.get処理年度(), parameter.get特別徴収開始年月(), parameter.get遷移元メニュー(), システム日時);
         ueT1704Writer.insert(uet1704Entity);

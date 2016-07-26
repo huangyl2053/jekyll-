@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb2310001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.service.tokuchosoufujohosakuseibatch.TokuChoSoufuJohoSakuseiBatch;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
-import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -21,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1830-040 liuyang
  */
-public class NenkinTokuChoTaishosyaJohoInsertProcess extends BatchProcessBase<UeT0511NenkinTokuchoKaifuJohoEntity> {
+public class NenkinTokuChoTaishosyaJohoInsertProcess extends BatchProcessBase<
+        jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity> {
 
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic."
             + "IUeT0511NenkinTokuchoKaifuJohoMapper.selectAllNoDeleted");
@@ -35,7 +35,12 @@ public class NenkinTokuChoTaishosyaJohoInsertProcess extends BatchProcessBase<Ue
     }
 
     @Override
-    protected void process(UeT0511NenkinTokuchoKaifuJohoEntity entity) {
+    protected void createWriter() {
+        ueT0515Writer = new BatchPermanentTableWriter(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity.class);
+    }
+
+    @Override
+    protected void process(jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entity) {
     }
 
     @Override
