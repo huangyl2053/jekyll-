@@ -100,4 +100,16 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource implements IRep
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * ReportSourceFields
+     */
+    public enum ReportSourceFields {
+
+        listLower_3,
+        listUpper_3,
+        listLower_2,
+        listUpper_2,
+        listLower_1
+    }
 }

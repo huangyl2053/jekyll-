@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource.ReportSourceFields;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -58,36 +59,50 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
         }
 
         if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            改頁１ = list.get(0).get項目名();
+            改頁１ = get帳票物理名(list.get(0).get項目ID());
         }
         if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            改頁２ = list.get(INDEX_1).get項目名();
+            改頁２ = get帳票物理名(list.get(INDEX_1).get項目ID());
         }
         if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
-            改頁３ = list.get(INDEX_2).get項目名();
+            改頁３ = get帳票物理名(list.get(INDEX_2).get項目ID());
         }
         if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
-            改頁４ = list.get(INDEX_3).get項目名();
+            改頁４ = get帳票物理名(list.get(INDEX_3).get項目ID());
         }
         if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
-            改頁５ = list.get(INDEX_4).get項目名();
+            改頁５ = get帳票物理名(list.get(INDEX_4).get項目ID());
         }
 
-//        if (!改頁１.isEmpty()) {
-//            pageBreakKeys.add(改頁１);
-//        }
-//        if (!改頁２.isEmpty()) {
-//            pageBreakKeys.add(改頁２);
-//        }
-//        if (!改頁３.isEmpty()) {
-//            pageBreakKeys.add(改頁３);
-//        }
-//        if (!改頁４.isEmpty()) {
-//            pageBreakKeys.add(改頁４);
-//        }
-//        if (!改頁５.isEmpty()) {
-//            pageBreakKeys.add(改頁５);
-//        }
+        if (!改頁１.isEmpty()) {
+            pageBreakKeys.add(改頁１);
+        }
+        if (!改頁２.isEmpty()) {
+            pageBreakKeys.add(改頁２);
+        }
+        if (!改頁３.isEmpty()) {
+            pageBreakKeys.add(改頁３);
+        }
+        if (!改頁４.isEmpty()) {
+            pageBreakKeys.add(改頁４);
+        }
+        if (!改頁５.isEmpty()) {
+            pageBreakKeys.add(改頁５);
+        }
+    }
+
+    private RString get帳票物理名(RString 項目ID) {
+        RString 帳票物理名 = new RString(ReportSourceFields.listLower_3.name());
+        if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.listUpper_3.name());
+        } else if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.世帯コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.listLower_2.name());
+        } else if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.listUpper_2.name());
+        } else if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.被保険者番号.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString(ReportSourceFields.listLower_1.name());
+        }
+        return 帳票物理名;
     }
 
     /**
@@ -102,8 +117,6 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
             Breakers<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> breakers,
             BreakerCatalog<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
-
-
 
             pageBreakKeys) {
             @Override
