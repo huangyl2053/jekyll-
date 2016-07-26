@@ -337,7 +337,7 @@ public class ShinsakaiKekkaToroku {
                 = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
         NinteiKekkaJohoIdentifier identifier = new NinteiKekkaJohoIdentifier(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         NinteiKekkaJoho ninteiKekka = ninteiKekkaJoho.get(identifier);
-        if (HASDATA.equals(row.getUpDateFlag())) {
+        if (ninteiKekka != null && HASDATA.equals(row.getUpDateFlag())) {
             NinteiKekkaJohoBuilder ninteiKekkaBuilder = ninteiKekka.createBuilderForEdit();
             ninteiKekkaBuilder.set二次判定年月日(row.getNijiHanteiDate().getValue());
             ninteiKekka = ninteiKekkaBuilder.build();
