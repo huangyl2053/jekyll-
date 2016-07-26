@@ -15,18 +15,19 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
- * 世帯員把握入力高額一時テーブルのエンティティクラスです。
+ * 世帯員把握入力事業高額一時テーブルのエンティティクラスです。
  *
- * @reamsid_L DBC-2010-040 huzongcheng
+ * @reamsid_L DBC-2010-040 jiangzongyue
  */
 @lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TempSetaiinHaakuNyuryokuEntity
-        extends DbTableEntityBase<TempSetaiinHaakuNyuryokuEntity> implements IDbAccessable {
+public class TempSetaiinJigyoHaakuNyuryokuEntity
+        extends DbTableEntityBase<TempSetaiinJigyoHaakuNyuryokuEntity> implements IDbAccessable {
 
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
+    private ShikibetsuCode setaiInshikibetsuCode;
     private FlexibleDate kijunYMD;
     private FlexibleYear shotokuNendo;
     private LasdecCode shichosonCode;
