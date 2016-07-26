@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka;
 
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShuturyokuTyoutuke {
+public class ShuturyokuTyoutuke extends BatchParameterBase {
 
     private ReportId 帳票ID;
     private RString 帳票名;
