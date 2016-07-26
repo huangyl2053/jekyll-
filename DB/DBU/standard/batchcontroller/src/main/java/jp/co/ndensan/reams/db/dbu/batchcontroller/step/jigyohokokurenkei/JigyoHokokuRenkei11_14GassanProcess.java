@@ -84,7 +84,7 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
                     + "get事業報告統計合算分決定年月情報の取得");
         }
         csvFileName = new RString("DUJRENF05_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
         record1Entity = new JigyoHokokuRenkei11or14Entity();
         record2Entity = new JigyoHokokuRenkei11or14Entity();
         record3Entity = new JigyoHokokuRenkei11or14Entity();
@@ -109,7 +109,7 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(true).
+                .hasHeader(false).
                 build();
     }
 
@@ -118,7 +118,7 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         eucCsvWriter.writeLine(
                 new JigyoHokokuRenkeiHeadEucCsvEntity(
                         RString.EMPTY,
-                        new RString("Ti"),
+                        new RString("H1"),
                         new RString(processParameter.get過去集計年月() + "01"),
                         RDate.getNowDate().toDateString(),
                         new RString("国民健康保険団体連合会"),
