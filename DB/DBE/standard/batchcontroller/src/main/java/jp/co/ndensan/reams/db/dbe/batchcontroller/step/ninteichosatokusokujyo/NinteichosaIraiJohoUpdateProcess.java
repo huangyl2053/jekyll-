@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosatokusokujyo;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosatokusokujyo.NinteichosaIraiJohoUpdateProcessParameter;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査依頼情報テーブルの更新処理のクラスです。
@@ -22,11 +23,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class NinteichosaIraiJohoUpdateProcess extends BatchProcessBase<DbT5201NinteichosaIraiJohoEntity> {
 
     private NinteichosaIraiJohoUpdateProcessParameter processParameter;
-    private NinteiChosaTokusokujoHakkoManager manager;
-
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo."
                     + "INinteichosaTokusokujyoRelateMapper.select認定調査依頼情報BY申請書管理番号");
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT5201NinteichosaIraiJohoEntity> dbT5201TableWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -34,14 +35,17 @@ public class NinteichosaIraiJohoUpdateProcess extends BatchProcessBase<DbT5201Ni
     }
 
     @Override
-    protected void beforeExecute() {
-        manager = NinteiChosaTokusokujoHakkoManager.createInstance();
+    protected void createWriter() {
+        dbT5201TableWriter = new BatchPermanentTableWriter<>(DbT5201NinteichosaIraiJohoEntity.class);
     }
 
     @Override
-    @Transaction
     protected void process(DbT5201NinteichosaIraiJohoEntity entity) {
-        manager.update認定調査依頼情報(entity, processParameter);
+        entity.setNinteichosaTokusokuYMD(new FlexibleDate(processParameter.getTemp_督促日()));
+        entity.setNinteichosaTokusokuMemo(processParameter.getTemp_督促メモ());
+        entity.setNinteichosaTokusokuHoho(processParameter.getTemp_督促方法());
+        entity.setNinteichosaIraiKaisu(entity.getNinteichosaIraiKaisu() + 1);
+        dbT5201TableWriter.update(entity);
     }
 
 }
