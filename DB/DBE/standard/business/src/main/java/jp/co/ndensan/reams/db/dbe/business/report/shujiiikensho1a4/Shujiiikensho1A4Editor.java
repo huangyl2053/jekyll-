@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1a4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.Shujiiikensho1A4ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書A4のEditorです。
@@ -39,9 +42,6 @@ public class Shujiiikensho1A4Editor implements IShujiiikensho1A4Editor {
     }
 
     private Shujiiikensho1A4ReportSource editSource(Shujiiikensho1A4ReportSource source) {
-        source.hokenshaNo = business.get保険者番号();
-        source.hihokenshaNo = business.get被保険者番号();
-        source.hihokenshaName = business.get名前();
         source.shinseiGengo = get元号(business.get今回認定申請年月日());
         source.shinseiYY = get年(business.get今回認定申請年月日());
         source.shinseiMM = get月(business.get今回認定申請年月日());
@@ -59,6 +59,19 @@ public class Shujiiikensho1A4Editor implements IShujiiikensho1A4Editor {
         source.shinsaMM = get月(business.get今回認定審査年月日());
         source.shinsaDD = get日(business.get今回認定審査年月日());
         source.imgIkensho1 = business.get主治医意見書イメージ１();
+        if (business.is事務局()) {
+            source.hokenshaNo = business.get保険者番号();
+            source.hihokenshaNo = business.get被保険者番号();
+            source.hihokenshaName = business.get名前();
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
+                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
+            }
+        } else {
+            source.hokenshaNo = RString.EMPTY;
+            source.hihokenshaNo = RString.EMPTY;
+            source.hihokenshaName = RString.EMPTY;
+        }
         return source;
     }
 

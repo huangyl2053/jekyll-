@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 特記事項（2枚目以降）A3版の帳票ID。
+     */
+    DBE517034(new ReportId("DBE517034_TokkiText2A3"), new RString("特記事項（2枚目以降）A3版")),
+    /**
      * 主治医意見書（オルカ）の帳票ID。
      */
     DBE231102(new ReportId("DBE231102_ikenshokinyuyoshi"), new RString("主治医意見書（オルカ）")),
@@ -50,7 +54,7 @@ public enum ReportIdDBE {
     /**
      * 委員用主治医意見書A4の帳票ID。
      */
-    DBE517152(new ReportId("DBE517151_Shujiiikensho1A4"), new RString("委員用主治医意見書A4")),
+    DBE517152(new ReportId("DBE517152_Shujiiikensho2A4"), new RString("委員用主治医意見書A4")),
     /**
      * 事務局用予備判定記入表の帳票ID。
      */

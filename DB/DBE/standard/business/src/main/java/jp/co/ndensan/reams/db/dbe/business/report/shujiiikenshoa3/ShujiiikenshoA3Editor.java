@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA3ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書A3のEditorです。
@@ -60,6 +63,12 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
         source.shinsaDD = get日(business.get今回認定審査年月日());
         source.imgIkensho1 = business.get左の主治医意見書イメージ();
         source.imgIkensho2 = business.get右の主治医意見書イメージ();
+        if (business.is事務局()) {
+            source.shikibetuCode = ShikibetsuCode.EMPTY;
+            if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
+                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
+            }
+        }
         return source;
     }
 
