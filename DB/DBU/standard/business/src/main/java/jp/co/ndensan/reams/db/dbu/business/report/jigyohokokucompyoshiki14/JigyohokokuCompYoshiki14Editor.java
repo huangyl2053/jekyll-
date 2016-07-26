@@ -55,6 +55,18 @@ public class JigyohokokuCompYoshiki14Editor implements IJigyohokokuCompYoshiki14
         source.hyo1ShinseishaKensu4 = data.get地域密着型介護老人福祉施設入居者生活介護の申請件数();
         source.hyo1ShinseishaKensu5 = data.getその他の申請件数();
         source.hyo1ShinseishaKensu6 = data.get合計の申請件数();
+        source.list_1 = change.getList_1();
+        source.list_2 = change.getList_2();
+        source.list_3 = change.getList_3();
+        source.list_4 = change.getList_4();
+        source.list_5 = change.getList_5();
+        source.list_6 = change.getList_6();
+        source.list_7 = change.getList_7();
+        source.list_8 = change.getList_8();
+        source.list_9 = change.getList_9();
+        source.list_10 = change.getList_10();
+        source.list_11 = change.getList_11();
+        source.list_12 = change.getList_12();
         return source;
     }
 
