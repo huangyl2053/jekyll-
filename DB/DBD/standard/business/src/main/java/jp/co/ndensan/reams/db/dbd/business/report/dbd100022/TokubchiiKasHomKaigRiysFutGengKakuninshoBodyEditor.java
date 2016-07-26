@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100022;
 
 import jp.co.ndensan.reams.db.dbd.business.report.hanyo.HokenshaNameOutput;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100022.TokubChiiKasRiysFutGengKakuninshoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -124,7 +125,8 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
 
         source.genmenRitsu = RString.EMPTY;
         source.genmenNaiyo1 = RString.EMPTY;
-        source.gengakuRitsu = new RString(item.get特別地域加算減免().get減額率().getColumnValue().toString());
+        source.gengakuRitsu = new RString(item.get特別地域加算減免().get減額率().getColumnValue().toString()).concat(
+                "/").concat(DbBusinessConfig.get(ConfigNameDBD.特別地域加算減免減額率_分母, RDate.getNowDate(), SubGyomuCode.DBD介護受給));
         source.genmenNaiyo2 = RString.EMPTY;
 
         source.hokenshaNo1 = item.get特別地域加算減免().get証記載保険者番号().getColumnValue().substring(INDEX_0, INDEX_1);
