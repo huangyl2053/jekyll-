@@ -144,14 +144,20 @@ public class KaigoAtenaJohoHandler {
             }
             NenkinTokuchoKaifuJoho 特徴の情報
                     = 特別徴収対象者登録Manager.getTokuchoTaishosha(賦課年度, 捕捉月, 基礎年金番号Old, 年金コードOld);
-            set年金情報パネル(特徴の情報);
+            set年金情報パネル(特徴の情報, true);
         }
         return false;
     }
 
-    private void set年金情報パネル(NenkinTokuchoKaifuJoho 特徴の情報) {
+    private void set年金情報パネル(NenkinTokuchoKaifuJoho 特徴の情報, boolean is初期化) {
         if (null == 特徴の情報) {
             return;
+        }
+        if (!is初期化) {
+            TokuchoStartMonth 特別徴収開始月 = get特別徴収開始月(特徴の情報.get捕捉月());
+            if (特別徴収開始月 != null) {
+                div.getTxtKaishiTsuki().setValue(特別徴収開始月.getコード());
+            }
         }
         div.getTxtHosokuTsuki().setValue(特徴の情報.get捕捉月());
         div.getTxtShimeiKana().setValue(特徴の情報.getDTカナ氏名());
@@ -304,7 +310,7 @@ public class KaigoAtenaJohoHandler {
                 = 特別徴収対象者登録Manager.getTokuchoTaishosha(賦課年度, div.getCatchMoon(),
                         div.getTxtKisoNenkinNo().getValue(), div.getTxtNenkinCode().getValue());
         clean年金情報パネル();
-        set年金情報パネル(特徴の情報);
+        set年金情報パネル(特徴の情報, false);
     }
 
     private void clean年金情報パネル() {
