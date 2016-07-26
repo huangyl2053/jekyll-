@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-1830-050 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchotaishoshaichiransakusei.IUeT0511Mapper">
+
+    <resultMap id="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity">
+        <id property="gyomuCode" column="ueT0511NenkinTokuchoKaifuJoho_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />
+        <id property="shoriNendo" column="ueT0511NenkinTokuchoKaifuJoho_shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <id property="tsuchiNaiyoCode" column="ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TsuchiNaiyoCodeTypeHandler" />
+        <id property="shoriTaishoYM" column="ueT0511NenkinTokuchoKaifuJoho_shoriTaishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <id property="kisoNenkinNo" column="ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="nenkinCode" column="ueT0511NenkinTokuchoKaifuJoho_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="koseiCityCode" column="ueT0511NenkinTokuchoKaifuJoho_koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="renban" column="ueT0511NenkinTokuchoKaifuJoho_renban" />
+        <result property="shoriTimestamp" column="ueT0511NenkinTokuchoKaifuJoho_shoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="renkeiShubetsu" column="ueT0511NenkinTokuchoKaifuJoho_renkeiShubetsu" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.RenkeiShubetsuTypeHandler" />
+        <result property="hosokuTsuki" column="ueT0511NenkinTokuchoKaifuJoho_hosokuTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tenbikiTsuki" column="ueT0511NenkinTokuchoKaifuJoho_tenbikiTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shikibetsuCode" column="ueT0511NenkinTokuchoKaifuJoho_ShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="hihokenshaNo" column="ueT0511NenkinTokuchoKaifuJoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kokuhoSetaiCode" column="ueT0511NenkinTokuchoKaifuJoho_kokuhoSetaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
+        <result property="dtCityCode" column="ueT0511NenkinTokuchoKaifuJoho_dtCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtTokubetsuChoshuGimushaCode" column="ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TokubetsuChoshuGimushaCodeTypeHandler" />
+        <result property="dtTsuchiNaiyoCode" column="ueT0511NenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TsuchiNaiyoCodeTypeHandler" />
+        <result property="dtBaitaiCode" column="ueT0511NenkinTokuchoKaifuJoho_dtBaitaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtTokubetsuChoshuSeidoCode" column="ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TokubetsuChoshuSeidoCodeTypeHandler" />
+        <result property="dtSakuseiYMD" column="ueT0511NenkinTokuchoKaifuJoho_dtSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKisoNenkinNo" column="ueT0511NenkinTokuchoKaifuJoho_dtKisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtNenkinCode" column="ueT0511NenkinTokuchoKaifuJoho_dtNenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYobi1" column="ueT0511NenkinTokuchoKaifuJoho_dtYobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtBirthDay" column="ueT0511NenkinTokuchoKaifuJoho_dtBirthDay" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtSeibetsu" column="ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.SeibetsuCodeNenkinTokuchoTypeHandler" />
+        <result property="dtKanaShimei" column="ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode1" column="ueT0511NenkinTokuchoKaifuJoho_dtShiftCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKanjiShimei" column="ueT0511NenkinTokuchoKaifuJoho_dtKanjiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode2" column="ueT0511NenkinTokuchoKaifuJoho_dtShiftCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYubinNo" column="ueT0511NenkinTokuchoKaifuJoho_dtYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKanaJusho" column="ueT0511NenkinTokuchoKaifuJoho_dtKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode3" column="ueT0511NenkinTokuchoKaifuJoho_dtShiftCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKanjiJusho" column="ueT0511NenkinTokuchoKaifuJoho_dtKanjiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode4" column="ueT0511NenkinTokuchoKaifuJoho_dtShiftCode4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKubun" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShoriKekka" column="ueT0511NenkinTokuchoKaifuJoho_dtShoriKekka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKokiIkanCode" column="ueT0511NenkinTokuchoKaifuJoho_dtKokiIkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuYMD" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku1" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku2" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku3" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYobi2" column="ueT0511NenkinTokuchoKaifuJoho_dtYobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKyosaiNenkinshoshoKigoNo" column="ueT0511NenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku4" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku5" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku6" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku7" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku8" column="ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtTeishiYM" column="ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYobi4Juminzei" column="ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKojinNo" column="ueT0511NenkinTokuchoKaifuJoho_dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <sql id="table_UeT0511NenkinTokuchoKaifuJoho">
+        rgue."UeT0511NenkinTokuchoKaifuJoho"
+    </sql>
+
+    <sql id="table_UeV0511NenkinTokuchoKaifuJoho">
+        rgue."UeV0511NenkinTokuchoKaifuJoho"
+    </sql>
+
+    <sql id="table_UeV0511NenkinTokuchoKaifuJohoLatest">
+        rgue."UeV0511NenkinTokuchoKaifuJohoLatest"
+    </sql>
+
+    <sql id="as_UeT0511NenkinTokuchoKaifuJoho">
+        "UeT0511NenkinTokuchoKaifuJoho"
+    </sql>
+
+    <sql id="allColumn_UeT0511NenkinTokuchoKaifuJoho">
+        "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" AS "ueT0511NenkinTokuchoKaifuJoho_gyomuCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" AS "ueT0511NenkinTokuchoKaifuJoho_shoriNendo",
+        "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" AS "ueT0511NenkinTokuchoKaifuJoho_tsuchiNaiyoCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM" AS "ueT0511NenkinTokuchoKaifuJoho_shoriTaishoYM",
+        "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo" AS "ueT0511NenkinTokuchoKaifuJoho_kisoNenkinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode" AS "ueT0511NenkinTokuchoKaifuJoho_nenkinCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode" AS "ueT0511NenkinTokuchoKaifuJoho_koseiCityCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."renban" AS "ueT0511NenkinTokuchoKaifuJoho_renban",
+        "UeT0511NenkinTokuchoKaifuJoho"."shoriTimestamp" AS "ueT0511NenkinTokuchoKaifuJoho_shoriTimestamp",
+        "UeT0511NenkinTokuchoKaifuJoho"."renkeiShubetsu" AS "ueT0511NenkinTokuchoKaifuJoho_renkeiShubetsu",
+        "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" AS "ueT0511NenkinTokuchoKaifuJoho_hosokuTsuki",
+        "UeT0511NenkinTokuchoKaifuJoho"."tenbikiTsuki" AS "ueT0511NenkinTokuchoKaifuJoho_tenbikiTsuki",
+        "UeT0511NenkinTokuchoKaifuJoho"."shikibetsuCode" AS "ueT0511NenkinTokuchoKaifuJoho_ShikibetsuCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."hihokenshaNo" AS "ueT0511NenkinTokuchoKaifuJoho_hihokenshaNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoSetaiCode" AS "ueT0511NenkinTokuchoKaifuJoho_kokuhoSetaiCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtCityCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtCityCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuGimushaCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuGimushaCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTsuchiNaiyoCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtTsuchiNaiyoCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtBaitaiCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtBaitaiCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuSeidoCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtTokubetsuChoshuSeidoCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtSakuseiYMD" AS "ueT0511NenkinTokuchoKaifuJoho_dtSakuseiYMD",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKisoNenkinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKisoNenkinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtNenkinCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtNenkinCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYobi1" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi1",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtBirthDay" AS "ueT0511NenkinTokuchoKaifuJoho_dtBirthDay",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtSeibetsu" AS "ueT0511NenkinTokuchoKaifuJoho_dtSeibetsu",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanaShimei" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanaShimei",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode1" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode1",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiShimei" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanjiShimei",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode2" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode2",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYubinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtYubinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanaJusho" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanaJusho",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode3" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode3",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiJusho" AS "ueT0511NenkinTokuchoKaifuJoho_dtKanjiJusho",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode4" AS "ueT0511NenkinTokuchoKaifuJoho_dtShiftCode4",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKubun" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKubun",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShoriKekka" AS "ueT0511NenkinTokuchoKaifuJoho_dtShoriKekka",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKokiIkanCode" AS "ueT0511NenkinTokuchoKaifuJoho_dtKokiIkanCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuYMD" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuYMD",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku1" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku1",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku2" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku2",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku3" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku3",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYobi2" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi2",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKyosaiNenkinshoshoKigoNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKyosaiNenkinshoshoKigoNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku4" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku4",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku5" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku5",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku6" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku6",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku7" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku7",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8" AS "ueT0511NenkinTokuchoKaifuJoho_dtKakushuKingaku8",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM" AS "ueT0511NenkinTokuchoKaifuJoho_dtTeishiYM",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei" AS "ueT0511NenkinTokuchoKaifuJoho_dtYobi4Juminzei",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo" AS "ueT0511NenkinTokuchoKaifuJoho_dtKojinNo"
+    </sql>
+    <sql id="allColumn">
+        "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo",
+        "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."shoriTaishoYM",
+        "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."koseiCityCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."renban",
+        "UeT0511NenkinTokuchoKaifuJoho"."shoriTimestamp",
+        "UeT0511NenkinTokuchoKaifuJoho"."renkeiShubetsu",
+        "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki",
+        "UeT0511NenkinTokuchoKaifuJoho"."tenbikiTsuki",
+        "UeT0511NenkinTokuchoKaifuJoho"."shikibetsuCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."hihokenshaNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."kokuhoSetaiCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtCityCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuGimushaCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTsuchiNaiyoCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtBaitaiCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTokubetsuChoshuSeidoCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtSakuseiYMD",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKisoNenkinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtNenkinCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYobi1",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtBirthDay",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtSeibetsu",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanaShimei",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode1",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiShimei",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode2",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYubinNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanaJusho",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode3",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKanjiJusho",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShiftCode4",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKubun",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtShoriKekka",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKokiIkanCode",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuYMD",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku1",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku2",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku3",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYobi2",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKyosaiNenkinshoshoKigoNo",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku4",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku5",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku6",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku7",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKakushuKingaku8",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtTeishiYM",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtYobi4Juminzei",
+        "UeT0511NenkinTokuchoKaifuJoho"."dtKojinNo"
+    </sql>
+    <select resultOrdered="true" id="select" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+                AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" =#{tsuchiNaiyoCode}
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" =#{hosokuTsuki}
+        </where>
+    </select>
+    <select resultOrdered="true" id="selectApr" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND
+            (
+                "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            )
+        </where>
+    </select>
+<select resultOrdered="true" id="selectJun" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            )
+        </where>
+    </select>
+    <select resultOrdered="true" id="selectAug" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+            AND(
+                "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+                AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '02'
+            )   
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" ='30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            )
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
+            )
+        </where>
+    </select>
+    <select resultOrdered="true" id="selectOct" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+                AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+        </where>
+    </select>
+    <select resultOrdered="true" id="selectDec" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+           AND(                
+                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            )   
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            )
+        </where>
+    </select>
+    <select resultOrdered="true" id="selectFeb" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+        SELECT
+        <include refid="allColumn_UeT0511NenkinTokuchoKaifuJoho" />
+        FROM
+        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        <where>
+            <if test="gyomuCode">
+                "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+            </if>
+                AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
+            AND(                
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
+            )   
+            OR
+            (                
+                "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
+            )   
+            OR
+            (
+                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
+                AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
+            )
+        </where>
+    </select>    
+</mapper>

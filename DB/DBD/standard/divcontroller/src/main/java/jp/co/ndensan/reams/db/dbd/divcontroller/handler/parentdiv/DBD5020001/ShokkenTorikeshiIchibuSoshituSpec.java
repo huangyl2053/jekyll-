@@ -36,7 +36,7 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
     認定日が未入力チェック {
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
-                    RString 今回認定日 = div.getTxtNinteibiKonkai().getValue();
+                    FlexibleDate 今回認定日 = div.getTxtNinteibiKonkai().getValue();
                     return null != 今回認定日 && !今回認定日.isEmpty();
                 }
             },
@@ -66,7 +66,7 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
     有効開始日が未入力チェック {
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
-                    RString 今回有効開始日 = div.getTxtYukoKaishibiKonkai().getValue();
+                    FlexibleDate 今回有効開始日 = div.getTxtYukoKaishibiKonkai().getValue();
                     return null != 今回有効開始日 && !今回有効開始日.isEmpty();
                 }
             },
@@ -76,7 +76,7 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
     有効終了日が未入力チェック {
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
-                    RString 今回有効終了日 = div.getTxtYukoShuryobiKonkai().getValue();
+                    FlexibleDate 今回有効終了日 = div.getTxtYukoShuryobiKonkai().getValue();
                     return null != 今回有効終了日 && !今回有効終了日.isEmpty();
                 }
             },
@@ -86,11 +86,14 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
     有効開始日と有効終了日の関連チェック {
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
-                    RString 今回有効開始日 = div.getTxtYukoKaishibiKonkai().getValue();
-                    RString 今回有効終了日 = div.getTxtYukoShuryobiKonkai().getValue();
+                    FlexibleDate 今回有効開始日 = div.getTxtYukoKaishibiKonkai().getValue();
+                    FlexibleDate 今回有効終了日 = div.getTxtYukoShuryobiKonkai().getValue();
+                    if (null == 今回有効終了日 || 今回有効終了日.isEmpty()) {
+                        return true;
+                    }
 
-                    if (null != 今回有効開始日 && !今回有効開始日.isEmpty() && null != 今回有効終了日 && !今回有効終了日.isEmpty()) {
-                        return new FlexibleDate(今回有効開始日).isBeforeOrEquals(new FlexibleDate(今回有効終了日));
+                    if (null != 今回有効開始日 && !今回有効開始日.isEmpty()) {
+                        return 今回有効開始日.isBeforeOrEquals(今回有効終了日);
                     }
                     return false;
                 }
@@ -101,11 +104,15 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
     前回有効終了日と今回有効開始日の関連チェック {
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
-                    RString 今回有効開始日 = div.getTxtYukoKaishibiKonkai().getValue();
-                    RString 前回有効終了日 = div.getTxtYukoShuryobiZenkai().getValue();
+                    FlexibleDate 今回有効開始日 = div.getTxtYukoKaishibiKonkai().getValue();
+                    FlexibleDate 前回有効終了日 = div.getTxtYukoShuryobiZenkai().getValue();
 
-                    if (null != 今回有効開始日 && !今回有効開始日.isEmpty() && null != 前回有効終了日 && !前回有効終了日.isEmpty()) {
-                        return new FlexibleDate(今回有効開始日).isBeforeOrEquals(new FlexibleDate(前回有効終了日));
+                    if (null == 前回有効終了日 || 前回有効終了日.isEmpty()) {
+                        return true;
+                    }
+
+                    if (null != 今回有効開始日 && !今回有効開始日.isEmpty()) {
+                        return 前回有効終了日.isBeforeOrEquals(今回有効開始日);
                     }
                     return false;
                 }
@@ -116,7 +123,6 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
     新予防給付適用の60日前のみなし更新チェック {
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
-                    // TODO. みなし更新 について、わからない。
                     return true;
                 }
             },
@@ -127,11 +133,7 @@ public enum ShokkenTorikeshiIchibuSoshituSpec implements IPredicate<ShokkenTorik
                 @Override
                 public boolean apply(ShokkenTorikeshiIchibuSoshituDiv div) {
                     RString 今回履歴番号 = div.getHdnKonkaiRirekiNo();
-                    RString 前回履歴番号 = div.getHdnZenkaiRirekiNo();
-                    return null != 今回履歴番号
-                    && null != 前回履歴番号
-                    && 今回履歴番号.equals(new RString("0000"))
-                    && 前回履歴番号.equals(new RString("0000"));
+                    return null != 今回履歴番号 && 今回履歴番号.equals(new RString("0000"));
                 }
             };
 }

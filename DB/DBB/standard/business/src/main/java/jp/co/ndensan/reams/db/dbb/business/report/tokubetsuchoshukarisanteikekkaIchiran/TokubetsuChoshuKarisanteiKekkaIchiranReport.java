@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokubetsuChoshuKarisanteiKekkaIchiranReport extends Report<TokubetsuChoshuKarisanteiKekkaIchiranSource> {
 
+    private final RString 市町村コード;
+    private final RString 市町村名称;
     private final List<TokuchoKariKeisangoFukaEntity> 特徴仮算定計算後賦課情報EntityList;
     private final FlexibleYear 調定年度;
     private final YMDHMS 調定日時;
@@ -32,6 +34,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranReport extends Report<Tokubets
 
     /**
      *
+     * @param 市町村名称 RString
+     * @param 市町村コード RString
      * @param 特徴仮算定計算後賦課情報EntityList List<TokuchoKariKeisangoFukaEntity>
      * @param 調定年度 FlexibleYear
      * @param 調定日時 YMDHMS
@@ -41,6 +45,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranReport extends Report<Tokubets
      * @param 前年度保険料リスト List<RString>
      */
     public TokubetsuChoshuKarisanteiKekkaIchiranReport(
+            RString 市町村名称,
+            RString 市町村コード,
             List<TokuchoKariKeisangoFukaEntity> 特徴仮算定計算後賦課情報EntityList,
             FlexibleYear 調定年度,
             YMDHMS 調定日時,
@@ -48,6 +54,8 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranReport extends Report<Tokubets
             List<RString> 改頁List,
             List<RString> 住所編集リスト,
             List<Decimal> 前年度保険料リスト) {
+        this.市町村名称 = 市町村名称;
+        this.市町村コード = 市町村コード;
         this.特徴仮算定計算後賦課情報EntityList = 特徴仮算定計算後賦課情報EntityList;
         this.調定年度 = 調定年度;
         this.調定日時 = 調定日時;
@@ -66,7 +74,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranReport extends Report<Tokubets
             index++;
             int 連番 = index;
             TokubetsuChoshuKarisanteiKekkaIchiranEditor editor = new TokubetsuChoshuKarisanteiKekkaIchiranEditor(
-                    entity, 調定年度, 調定日時, 並び順List, 改頁List, 連番, 住所編集, 前年度保険料);
+                    市町村コード, 市町村名称, entity, 調定年度, 調定日時, 並び順List, 改頁List, 連番, 住所編集, 前年度保険料);
             TokubetsuChoshuKarisanteiKekkaIchiranBuilder builder
                     = new TokubetsuChoshuKarisanteiKekkaIchiranBuilder(editor);
             writer.writeLine(builder);

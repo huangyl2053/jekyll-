@@ -111,8 +111,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoNofushoEditor implements IKa
             source.detail_gokeigaku1 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd1 = 納入通知書期情報.get納期限表記();
             source.detail_honzei1 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr11 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr21 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr11 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr21 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen1 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -186,8 +188,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoNofushoEditor implements IKa
             source.detail_gokeigaku2 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd2 = 納入通知書期情報.get納期限表記();
             source.detail_honzei2 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr12 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr22 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr12 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr22 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen2 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -262,8 +266,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoNofushoEditor implements IKa
             source.detail_gokeigaku3 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd3 = 納入通知書期情報.get納期限表記();
             source.detail_honzei3 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen3 = 納入通知書期情報.getコンビニ支払期限().toDateString();
@@ -338,8 +344,10 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoNofushoEditor implements IKa
             source.detail_gokeigaku4 = 納入通知書期情報.get納付額表記();
             source.detail_nokigenYmd4 = 納入通知書期情報.get納期限表記();
             source.detail_honzei4 = 納入通知書期情報.get納付額表記();
-            source.detail_ocr14 = 納入通知書期情報.getOcr().get(1);
-            source.detail_ocr24 = 納入通知書期情報.getOcr().get(2);
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr14 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr24 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
                 source.detail_cvsToriatsukaikigen4 = 納入通知書期情報.getコンビニ支払期限().toDateString();

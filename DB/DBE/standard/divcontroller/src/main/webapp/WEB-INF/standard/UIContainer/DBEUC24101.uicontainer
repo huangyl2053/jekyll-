@@ -113,7 +113,7 @@
      "layoutName": "DBE2410001",
      "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
      "eventName": "検索へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",

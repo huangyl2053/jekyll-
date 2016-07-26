@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -42,6 +43,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -87,9 +92,11 @@ public class NinteiChosaIraiShudou {
         List<NinteiShinseiJoho> 更新用認定調査依頼List = finder.get更新用認定調査依頼情報(parameter).records();
         getHandler(div).onLoad(認定調査依頼List);
         ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
-        ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 認定調査依頼List.get(0).get厚労省IF識別コード());
-        ViewStateHolder.put(ViewStateKeys.認定申請年月日, 認定調査依頼List.get(0).get認定申請年月日());
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, 認定調査依頼List.get(0).get認定調査依頼履歴番号());
+        if (!認定調査依頼List.isEmpty()) {
+            ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 認定調査依頼List.get(0).get厚労省IF識別コード());
+            ViewStateHolder.put(ViewStateKeys.認定申請年月日, 認定調査依頼List.get(0).get認定申請年月日());
+            ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, 認定調査依頼List.get(0).get認定調査依頼履歴番号());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -231,6 +238,8 @@ public class NinteiChosaIraiShudou {
      */
     public ResponseData<SourceDataCollection> onClick_btnPrint(NinteiChosaIraiShudouDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
@@ -292,7 +301,7 @@ public class NinteiChosaIraiShudou {
         }
 
         if (!div.getChkRirekiIchiran().getSelectedKeys().isEmpty()) {
-            NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy被保険者番号(new RString(""));
+            NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy被保険者番号(div.getCcdNinteiShinseishaKihonInfo().get被保険者番号());
             List<NinnteiChousairaiShudouBusiness> 認定調査依頼該当者履歴一覧 = finder.get認定調査依頼該当者履歴一覧(parameter).records();
             if (!認定調査依頼該当者履歴一覧.isEmpty()) {
                 printService.print認定調査依頼該当者履歴一覧(
@@ -305,7 +314,7 @@ public class NinteiChosaIraiShudou {
         RDate date = RDate.getNowDate();
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         List<NinnteiChousairaiShudouBusiness> businessList = NinnteiChousairaiShudouFinder.createInstance()
-                .get認定調査票_概況調査(NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号)).records();
+                .get認定調査票差異チェック票(NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号)).records();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             printService.print要介護認定調査票差異チェック票_片面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ(businessList));
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
@@ -528,26 +537,33 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnPrint_after(NinteiChosaIraiShudouDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
+                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, CONFIGVALUE1);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, RString.EMPTY);
+            }
+            if (div.getChkGaikyoChosa().getSelectedKeys().isEmpty()
+                    && div.getChkKihonChosa().getSelectedKeys().isEmpty()
+                    && div.getChkTokukiJiko().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoTokuki().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoChosaOCR().getSelectedKeys().isEmpty()
+                    && div.getChkKihonChosaOCR().getSelectedKeys().isEmpty()
+                    && div.getChkTokukiJikoOCR().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoTokukiOCR().getSelectedKeys().isEmpty()
+                    && div.getChkFuriYoshi().getSelectedKeys().isEmpty()) {
+                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, RString.EMPTY);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
+            }
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
 
-        if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, CONFIGVALUE1);
-        } else {
-            ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, RString.EMPTY);
-        }
-        if (div.getChkGaikyoChosa().getSelectedKeys().isEmpty()
-                && div.getChkKihonChosa().getSelectedKeys().isEmpty()
-                && div.getChkTokukiJiko().getSelectedKeys().isEmpty()
-                && div.getChkGaikyoTokuki().getSelectedKeys().isEmpty()
-                && div.getChkGaikyoChosaOCR().getSelectedKeys().isEmpty()
-                && div.getChkKihonChosaOCR().getSelectedKeys().isEmpty()
-                && div.getChkTokukiJikoOCR().getSelectedKeys().isEmpty()
-                && div.getChkGaikyoTokukiOCR().getSelectedKeys().isEmpty()
-                && div.getChkFuriYoshi().getSelectedKeys().isEmpty()) {
-            ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, RString.EMPTY);
-        } else {
-            ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
-        }
-        return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
+    private PersonalData toPersonalData(RString shinsei) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"), shinsei);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

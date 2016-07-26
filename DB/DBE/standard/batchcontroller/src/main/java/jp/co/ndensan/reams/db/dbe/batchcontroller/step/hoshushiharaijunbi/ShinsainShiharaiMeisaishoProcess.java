@@ -69,6 +69,7 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
     private BatchReportWriter<ShinsainShiharaimeisaishoReportSource> batchWrite;
     private ReportSourceWriter<ShinsainShiharaimeisaishoReportSource> reportSourceWriter;
     private int index = 1;
+    private static final int INDEX_25 = 25;
     private Decimal 合計金額;
     private RString 導入団体コード;
     private RString 市町村名;
@@ -189,17 +190,18 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
     }
 
     private ShinsainShiharaimeisaisho getShinsainShiharaimeisaisho(ShinsainShiharaimeisaisho shinsainshi, HoshuShiharaiJunbiRelateEntity entity) {
-        if (!shinsakaiIinCode.equals(entity.getShinsakaiIinCode())) {
+        if (!shinsakaiIinCode.equals(entity.getShinsakaiIinCode()) || index % INDEX_25 == 1) {
+            index = 1;
             合計金額 = Decimal.ZERO;
             shinsakaiIinCode = entity.getShinsakaiIinCode();
         }
         shinsainshi.set対象期間(get対象期間());
         shinsainshi.set明細番号(new RString(index));
-        合計金額 = 合計金額.add(rstringToDecimal(shinsainshi.get報酬合計()));
+        合計金額 = 合計金額.add(rstringToDecimal(shinsainshi.get報酬合計()).roundUpTo(0));
         Decimal 消費税 = (合計金額.multiply(rstringToDecimal(消費税率))).subtract(合計金額);
-        shinsainshi.set合計金額(decimalToRString(合計金額));
-        shinsainshi.set消費税(decimalToRString(消費税));
-        shinsainshi.set合計請求額(decimalToRString(合計金額.add(消費税)));
+        shinsainshi.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
+        shinsainshi.set消費税(decimalToRString(消費税.roundUpTo(0)));
+        shinsainshi.set合計請求額(decimalToRString(合計金額.add(消費税).roundUpTo(0)));
         return shinsainshi;
     }
 }

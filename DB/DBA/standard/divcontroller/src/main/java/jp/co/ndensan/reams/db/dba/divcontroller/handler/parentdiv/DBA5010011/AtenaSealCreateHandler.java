@@ -49,12 +49,12 @@ public class AtenaSealCreateHandler {
     private static final RString SUBETE = new RString("all");
     private static final FlexibleDate 開始日 = new FlexibleDate("00000000");
     private static final FlexibleDate 終了日 = new FlexibleDate("99999999");
-    private static final RString NIHONJIN1GO = new RString("nihonjin1go");
-    private static final RString NIHONJIN2GO = new RString("nihonjin2go");
-    private static final RString GAIKOKUJIN1GO = new RString("gaikokujin1go");
-    private static final RString GAIKOKUJIN2GO = new RString("gaikokujin2go");
-    private static final RString ALL1GO = new RString("all1go");
-    private static final RString ALL2GO = new RString("all2go");
+    private static final RString 資格区分_KEY_NIHONJIN1GO = new RString("nihonjin1go");
+    private static final RString 資格区分_KEY_NIHONJIN2GO = new RString("nihonjin2go");
+    private static final RString 資格区分_KEY_GAIKOKUJIN1GO = new RString("gaikokujin1go");
+    private static final RString 資格区分_KEY_GAIKOKUJIN2GO = new RString("gaikokujin2go");
+    private static final RString 資格区分_KEY_ALL1GO = new RString("all1go");
+    private static final RString 資格区分_KEY_ALL2GO = new RString("all2go");
 
     /**
      * コンストラクタです。
@@ -79,10 +79,12 @@ public class AtenaSealCreateHandler {
 
     private void set市町村指定ドロップダウンリスト(List<KoseiShichoson> koseiShichosonList) {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (DonyuKeitaiCode.事務広域.getCode().equals(get形態コード(shichosonSecurityJoho))
-                || DonyuKeitaiCode.事務構成市町村.getCode().equals(get形態コード(shichosonSecurityJoho))) {
+        RString 形態コード = shichosonSecurityJoho.get導入形態コード().value();
+        RString 市町村識別ID = shichosonSecurityJoho.get市町村情報().get市町村識別ID();
+        if (DonyuKeitaiCode.事務広域.getCode().equals(形態コード)
+                || DonyuKeitaiCode.事務構成市町村.getCode().equals(形態コード)) {
             div.getCyushutsuJoken().getDdlZensisyouson().getDataSource().clear();
-            if (市町村識別ID_00.equals(shichosonSecurityJoho.get市町村情報().get市町村識別ID())) {
+            if (市町村識別ID_00.equals(市町村識別ID)) {
                 List<KeyValueDataSource> list市町村指定 = new ArrayList<>();
                 KeyValueDataSource dataSource = new KeyValueDataSource();
                 dataSource.setKey(全市町村_KEY);
@@ -90,7 +92,7 @@ public class AtenaSealCreateHandler {
                 list市町村指定.add(dataSource);
                 div.getCyushutsuJoken().getDdlZensisyouson().setDataSource(list市町村指定);
                 div.getCyushutsuJoken().getDdlZensisyouson().setDisabled(false);
-            } else if (!市町村識別ID_00.equals(shichosonSecurityJoho.get市町村情報().get市町村識別ID())) {
+            } else if (!市町村識別ID_00.equals(市町村識別ID)) {
                 List<KeyValueDataSource> list市町村指定 = new ArrayList<>();
                 for (KoseiShichoson shichosonList : koseiShichosonList) {
                     KeyValueDataSource dataSource = new KeyValueDataSource();
@@ -101,7 +103,7 @@ public class AtenaSealCreateHandler {
                 div.getCyushutsuJoken().getDdlZensisyouson().setDataSource(list市町村指定);
                 div.getCyushutsuJoken().getDdlZensisyouson().setDisabled(true);
             }
-        } else if (DonyuKeitaiCode.事務単一.getCode().equals(get形態コード(shichosonSecurityJoho))) {
+        } else if (DonyuKeitaiCode.事務単一.getCode().equals(形態コード)) {
             div.getCyushutsuJoken().getDdlZensisyouson().setVisible(false);
         }
     }
@@ -266,17 +268,17 @@ public class AtenaSealCreateHandler {
 
     private RString getCode(RString selectedKey) {
         RString code;
-        if (NIHONJIN1GO.equals(selectedKey)) {
+        if (資格区分_KEY_NIHONJIN1GO.equals(selectedKey)) {
             code = 資格区分_1号日本人;
-        } else if (NIHONJIN2GO.equals(selectedKey)) {
+        } else if (資格区分_KEY_NIHONJIN2GO.equals(selectedKey)) {
             code = 資格区分_2号日本人;
-        } else if (GAIKOKUJIN1GO.equals(selectedKey)) {
+        } else if (資格区分_KEY_GAIKOKUJIN1GO.equals(selectedKey)) {
             code = 資格区分_1号外国人;
-        } else if (GAIKOKUJIN2GO.equals(selectedKey)) {
+        } else if (資格区分_KEY_GAIKOKUJIN2GO.equals(selectedKey)) {
             code = 資格区分_2号外国人;
-        } else if (ALL1GO.equals(selectedKey)) {
+        } else if (資格区分_KEY_ALL1GO.equals(selectedKey)) {
             code = 資格区分_1号全て;
-        } else if (ALL2GO.equals(selectedKey)) {
+        } else if (資格区分_KEY_ALL2GO.equals(selectedKey)) {
             code = 資格区分_2号全て;
         } else {
             code = 資格区分_全て;
@@ -424,7 +426,4 @@ public class AtenaSealCreateHandler {
         div.getCyushutsuJoken().getChkTaishosha().setSelectedItemsByKey(key);
     }
 
-    private RString get形態コード(ShichosonSecurityJoho shichosonSecurityJoho) {
-        return shichosonSecurityJoho.get導入形態コード().value();
-    }
 }

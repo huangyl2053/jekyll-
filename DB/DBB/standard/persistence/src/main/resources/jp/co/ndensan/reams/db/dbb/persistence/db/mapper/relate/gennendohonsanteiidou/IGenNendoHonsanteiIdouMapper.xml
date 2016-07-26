@@ -420,7 +420,7 @@
     <!-- 介護所得からから異動データを取得する -->
     <select resultOrdered="true" id="get所得異動データ" resultMap="resultMap_ShotokuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
         SELECT
-            A."shikibetsuCode"
+           DISTINCT A."shikibetsuCode"
         FROM 
             rgdb."DbV2502KaigoShotoku" AS A
         WHERE
@@ -455,10 +455,11 @@
         SELECT
         DISTINCT B."shikibetsuCode"
         FROM
-            rgdb."DbT1001HihokenshaDaicho" AS A,
+            rgdb."DbT1001HihokenshaDaicho" AS A
+        INNER JOIN
             rgdb."DbV2502KaigoShotoku" AS B
-        WHERE
-          A."shikibetsuCode" = B."shikibetsuCode"
+        ON  
+            A."shikibetsuCode" = B."shikibetsuCode"
     </select>
     
     <!-- 所得異動の取得に本人の情報の削除 -->
@@ -479,7 +480,7 @@
     <!-- 所得異動の取得に本人以外の異動情報の判断 -->
     <select resultOrdered="true" id="get所得異動_本人以外の異動情報" resultMap="resultMap_IdoEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-            B."hihokenshaNo"
+           DISTINCT B."hihokenshaNo"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS B
         INNER JOIN
@@ -525,7 +526,7 @@
     <select resultOrdered="true" id="get資格の異動" resultMap="resultMap_IdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
         SELECT
-            A."hihokenshaNo"
+            DISTINCT A."hihokenshaNo"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN 
@@ -545,7 +546,7 @@
     <select resultOrdered="true" id="get生保の異動" resultMap="resultMap_IdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
         SELECT
-            A."hihokenshaNo"
+            DISTINCT A."hihokenshaNo"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
@@ -558,18 +559,12 @@
             rgur."UrT0508SeikatsuHogoJukyusha" AS B
         ON
             A."shikibetsuCode" = B."shikibetsuCode"
-        LEFT JOIN
+        INNER JOIN
             rgur."UrT0526SeikatsuHogoFujoShurui" AS C
         ON
             B."shikibetsuCode" = C."shikibetsuCode"
         AND B."gyomuCode" = C."gyomuCode"
         AND B."jukyuKaishiYMD" = C."jukyuKaishiYMD"
-        LEFT JOIN
-            rgur."UrT0528SeikatsuHogoTeishikikan" AS D
-        ON
-            B."shikibetsuCode" = D."shikibetsuCode"
-        AND B."gyomuCode" = D."gyomuCode"
-        AND B."jukyuKaishiYMD" = D."jukyuKaishiYMD"
         WHERE
             A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
@@ -584,7 +579,7 @@
     <select resultOrdered="true" id="get老齢の異動" resultMap="resultMap_IdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
         SELECT
-            A."hihokenshaNo"
+            DISTINCT A."hihokenshaNo"
         FROM
             rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
@@ -600,15 +595,15 @@
         WHERE
             A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
-        AND A."idoYMD"  <![CDATA[<]]> B."jukyuKaishiYMD"
-        AND (B."jukyuHaishiYMD" IS NULL OR B."jukyuHaishiYMD" = '' OR B."jukyuHaishiYMD" <![CDATA[<]]> A."idoYMD")
+        AND A."idoYMD"  <![CDATA[>]]> B."jukyuKaishiYMD"
+        AND (B."jukyuHaishiYMD" IS NULL OR B."jukyuHaishiYMD" = '' OR B."jukyuHaishiYMD" <![CDATA[>]]> A."idoYMD")
     </select>
     
     <!-- 境界層の異動の取得 -->
     <select resultOrdered="true" id="get境界層の異動" resultMap="resultMap_IdoEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.IdoParameter" fetchSize="500">
         SELECT
-            A."hihokenshaNo"
+           DISTINCT A."hihokenshaNo"
         FROM
             rgdb."DbT1006KyokaisoGaitosha" AS A
         LEFT JOIN
@@ -617,12 +612,6 @@
             A."hihokenshaNo" = B."hihokenshaNo"
         AND A."rirekiNo" = B."rirekiNo"
         AND A."linkNo" = B."linkNo"
-        LEFT JOIN
-            rgdb."DbT1013KyokaisoSochiShinsei" AS C
-        ON
-            A."hihokenshaNo" = C."hihokenshaNo"
-        AND A."rirekiNo" = C."rirekiNo"
-        AND A."linkNo" = C."linkNo"
         WHERE
             A."lastUpdateTimestamp" <![CDATA[>=]]> #{抽出開始日時}
         AND A."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出終了日時}
@@ -930,7 +919,6 @@
             口座."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE
             (COALESCE(A."fuchoKibetsuGaku1",0)
-                +COALESCE(A."fuchoKibetsuGaku1", 0) 
                 +COALESCE(A."fuchoKibetsuGaku2", 0) 
                 +COALESCE(A."fuchoKibetsuGaku3", 0) 
                 +COALESCE(A."fuchoKibetsuGaku4", 0) 
@@ -967,7 +955,6 @@
                 口座."uaT0310Koza_shikibetsuCode" = B."shikibetsuCode"
             )
         AND (COALESCE(A."fuchoKibetsuGaku1",0)
-                +COALESCE(A."fuchoKibetsuGaku1", 0) 
                 +COALESCE(A."fuchoKibetsuGaku2", 0) 
                 +COALESCE(A."fuchoKibetsuGaku3", 0) 
                 +COALESCE(A."fuchoKibetsuGaku4", 0) 
@@ -1112,6 +1099,11 @@
         WHERE
             "DbT2002Fuka"."choteiNendo" = #{調定年度}
         AND "DbT2002Fuka"."fukaNendo" = #{賦課年度}
+        ORDER BY
+            "DbT2002Fuka"."choteiNendo",
+            "DbT2002Fuka"."fukaNendo",
+            "DbT2002Fuka"."tsuchishoNo",
+            "DbT2002Fuka"."rirekiNo"
     </select>
     
     <!-- 月別ランク一時テーブルを作成します。 -->
@@ -1689,6 +1681,13 @@
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "TmpHonsantei"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+        ORDER BY
+            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
+            "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
+            "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
+            DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" 
     </select>
     
     <sql id="allColumns_DbT1001HihokenshaDaicho">
@@ -1744,9 +1743,11 @@
     </resultMap>
     
      <!--特徴依頼金計算の情報を取得します。--> 
-    <select resultOrdered="true" id="get特徴依頼金情報" resultMap="resultMap_TokuchoIraikin4gatsuKaishiEntity" 
+     <select resultOrdered="true" id="get特徴依頼金情報" resultMap="resultMap_TokuchoIraikin4gatsuKaishiEntity" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TokuchoIraikin4gatsuKaishiParameter" fetchSize="500" >
         SELECT
+            "TmpTokuKarisantei"."fukaNendo",
+            "TmpTokuKarisantei"."hihokenshaNo",
             "TmpTokuKarisantei"."zenNendoHokenryoDankai",
             "TmpTokuKarisantei"."zenNendoGokeiShotokuGaku",
             "TmpTokuKarisantei"."zenNendoNenkinShunyuGaku",
@@ -1786,6 +1787,12 @@
         LEFT JOIN 
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+        ORDER BY
+            "TmpTokuKarisantei"."fukaNendo",
+            "TmpTokuKarisantei"."hihokenshaNo",
+            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
+            "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
+            "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD"
     </select>
     
     <resultMap id="resultMap_HonsanteiIdoKekkaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.HonsanteiIdoKekkaEntity" autoMapping="true">

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.nushijuminjoho;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ShotokuKanri;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.ShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nushijuminjoho.NushiJuminJohoParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2020ShotokuShokaihyoHakkoRirekiEntity;
@@ -87,8 +89,16 @@ public class NushiJuminJohoService {
      * @param 識別コードList List
      * @return List
      */
-    public List<DbT2008ShotokuKanriEntity> get識別コード(FlexibleYear 所得年度, List<ShikibetsuCode> 識別コードList) {
-        return dbt2008dac.selectShikibetsuCode(所得年度, 識別コードList);
+    public List<ShotokuKanri> get識別コード(FlexibleYear 所得年度, List<ShikibetsuCode> 識別コードList) {
+        List<DbT2008ShotokuKanriEntity> entityList = dbt2008dac.selectShikibetsuCode(所得年度, 識別コードList);
+        List<ShotokuKanri> 介護所得管理List = new ArrayList<>();
+        if (entityList != null) {
+            for (DbT2008ShotokuKanriEntity entity : entityList) {
+                ShotokuKanri 介護所得管理 = new ShotokuKanri(entity);
+                介護所得管理List.add(介護所得管理);
+            }
+        }
+        return 介護所得管理List;
     }
 
     /**

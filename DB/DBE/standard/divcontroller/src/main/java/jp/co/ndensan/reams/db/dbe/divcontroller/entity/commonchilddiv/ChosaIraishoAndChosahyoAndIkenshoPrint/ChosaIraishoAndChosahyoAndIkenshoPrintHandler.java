@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoI
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -657,7 +658,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get連絡先電話番号(),
                         business.get連絡先携帯番号(),
                         business.get連絡先氏名(),
-                        business.get連絡先続柄(),
+                        !RString.isNullOrEmpty(business.get連絡先続柄())
+                        ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
                         RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,

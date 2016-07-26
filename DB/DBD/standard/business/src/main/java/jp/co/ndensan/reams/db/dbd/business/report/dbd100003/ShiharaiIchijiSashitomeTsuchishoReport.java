@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100004.ShokanHaraiShukkeJyoho;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100003.ShiharaiIchijiSashitomeTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -36,7 +36,7 @@ public final class ShiharaiIchijiSashitomeTsuchishoReport extends Report<Shihara
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private final List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト;
+    private final List<ShokanKihonJihoEntiy> 償還払集計情報リスト;
     private final List<ShiharaiHohoHenkoTaino> 年度1リスト = new ArrayList<>();
     private final List<ShiharaiHohoHenkoTaino> 年度2リスト = new ArrayList<>();
     private final List<ShiharaiHohoHenkoTaino> 年度3リスト = new ArrayList<>();
@@ -57,14 +57,14 @@ public final class ShiharaiIchijiSashitomeTsuchishoReport extends Report<Shihara
      */
     public static ShiharaiIchijiSashitomeTsuchishoReport creatReport(IKojin 個人情報, IAtesaki 宛先,
             ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト,
-            NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト) {
+            NinshoshaSource 認証者ソースビルダー, ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト) {
         return new ShiharaiIchijiSashitomeTsuchishoReport(個人情報, 宛先, 帳票制御共通, 地方公共団体, 文書番号,
                 通知書定型文リスト, 認証者ソースビルダー, 帳票情報, 償還払集計情報リスト);
     }
 
     private ShiharaiIchijiSashitomeTsuchishoReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
-            ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト) {
+            ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御共通 = 帳票制御共通;
@@ -85,7 +85,7 @@ public final class ShiharaiIchijiSashitomeTsuchishoReport extends Report<Shihara
     public void writeBy(ReportSourceWriter<ShiharaiIchijiSashitomeTsuchishoReportSource> writer) {
         FlexibleYear 最新賦課年度 = get最新賦課年度();
         get年度リスト(最新賦課年度);
-        for (int index = 0; index < 年度1リスト.size() || index < 年度2リスト.size() || index < 年度3リスト.size(); index++) {
+        for (int index = 0; index < 年度1リスト.size() && index < 年度2リスト.size() && index < 年度3リスト.size(); index++) {
             IShiharaiIchijiSashitomeTsuchishoEditor bodyEditor = new ShiharaiIchijiSashitomeTsuchishoEditor(個人情報,
                     宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報,
                     償還払集計情報リスト, 最新賦課年度, 年度1リスト, 年度2リスト, 年度3リスト, index);

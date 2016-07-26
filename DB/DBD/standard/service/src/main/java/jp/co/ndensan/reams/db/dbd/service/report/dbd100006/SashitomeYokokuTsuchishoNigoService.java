@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.dbd100006;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100004.ShokanHaraiShukkeJyoho;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100006.SashitomeYokokuTsuchishoNigoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100006.SashitomeYokokuTsuchishoNigoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100006.SashitomeYokokuTsuchishoNigoReportSource;
@@ -56,7 +56,7 @@ public class SashitomeYokokuTsuchishoNigoService {
      */
     public void print(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
             FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, ReportId 帳票分類ID,
-            ShiharaiHohoHenko 帳票情報, List<ShokanHaraiShukkeJyoho> 償還払集計情報リスト, ReportManager reportManager) {
+            ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト, ReportManager reportManager) {
         SashitomeYokokuTsuchishoNigoProerty property = new SashitomeYokokuTsuchishoNigoProerty();
         try (ReportAssembler<SashitomeYokokuTsuchishoNigoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<SashitomeYokokuTsuchishoNigoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);

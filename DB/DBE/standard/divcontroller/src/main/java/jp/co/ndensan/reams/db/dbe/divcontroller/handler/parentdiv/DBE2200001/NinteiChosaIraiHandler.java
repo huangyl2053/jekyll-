@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -902,7 +903,8 @@ public class NinteiChosaIraiHandler {
                     row.getRenrakusakiTelNo(),
                     row.getRenrakusakiKeitaiTelNo(),
                     row.getRenrakusakiShimei(),
-                    row.getRenrakusakiTuzukigara(),
+                    !RString.isNullOrEmpty(row.getRenrakusakiTuzukigara())
+                    ? RensakusakiTsuzukigara.toValue(row.getRenrakusakiTuzukigara()).get名称() : RString.EMPTY,
                     RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                     !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                     !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,

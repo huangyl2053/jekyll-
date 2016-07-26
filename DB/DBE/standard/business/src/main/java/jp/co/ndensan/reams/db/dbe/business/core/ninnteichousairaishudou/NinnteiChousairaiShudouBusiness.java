@@ -449,4 +449,5 @@ public class NinnteiChousairaiShudouBusiness {
     public RString get認定申請区分_申請時_コード() {
         return entity.getNinteiShinseiShinseijiKubunCd();
     }
+
 }

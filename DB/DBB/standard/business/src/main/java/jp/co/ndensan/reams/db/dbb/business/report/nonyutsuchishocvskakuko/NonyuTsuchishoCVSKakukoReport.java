@@ -239,6 +239,7 @@ public class NonyuTsuchishoCVSKakukoReport extends NonyuTsuchisho<NonyuTsuchisho
         new本算定納入通知書情報.set編集後本算定通知書共通情報(item.get編集後本算定通知書共通情報());
         new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(item.get連番());
         return new本算定納入通知書情報;
     }
 }

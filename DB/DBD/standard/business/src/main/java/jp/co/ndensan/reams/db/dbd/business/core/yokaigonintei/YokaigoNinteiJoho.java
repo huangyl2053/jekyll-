@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -46,6 +47,7 @@ public class YokaigoNinteiJoho implements Serializable {
     private final DbT4913ChosainJohoEntity 調査員情報Entity;
     private DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private final DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity;
+    private DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity;
 
     /**
      * コンストラクタです。<br/>
@@ -62,6 +64,7 @@ public class YokaigoNinteiJoho implements Serializable {
      * @param 調査員情報Entity DbT4913ChosainJohoEntity
      * @param 要介護認定結果情報Entity DbT4102NinteiKekkaJohoEntity
      * @param 要介護認定インターフェース情報Entity DbT4003YokaigoNinteiInterfaceEntity
+     * @param 登録用受給者台帳Entity DbT4001JukyushaDaichoEntity
      */
     public YokaigoNinteiJoho(
             DbT5101NinteiShinseiJohoEntity 要介護認定申請情報認定Entity,
@@ -74,7 +77,8 @@ public class YokaigoNinteiJoho implements Serializable {
             DbT4912ShujiiJohoEntity 主治医情報受給Entity,
             DbT4913ChosainJohoEntity 調査員情報Entity,
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity,
-            DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity
+            DbT4003YokaigoNinteiInterfaceEntity 要介護認定インターフェース情報Entity,
+            DbT4001JukyushaDaichoEntity 登録用受給者台帳Entity
     ) {
 
         this.要介護認定申請情報認定Entity = 要介護認定申請情報認定Entity;
@@ -88,6 +92,7 @@ public class YokaigoNinteiJoho implements Serializable {
         this.調査員情報Entity = 調査員情報Entity;
         this.要介護認定結果情報Entity = 要介護認定結果情報Entity;
         this.要介護認定インターフェース情報Entity = 要介護認定インターフェース情報Entity;
+        this.登録用受給者台帳Entity = 登録用受給者台帳Entity;
     }
 
     /**
@@ -108,6 +113,7 @@ public class YokaigoNinteiJoho implements Serializable {
         this.調査員情報Entity = 介護認定処理情報.get調査員情報Entity();
         this.要介護認定結果情報Entity = 介護認定処理情報.get要介護認定結果情報Entity();
         this.要介護認定インターフェース情報Entity = 介護認定処理情報.get要介護認定インターフェース情報Entity();
+        this.登録用受給者台帳Entity = new DbT4001JukyushaDaichoEntity();
     }
 
     /**
@@ -117,6 +123,24 @@ public class YokaigoNinteiJoho implements Serializable {
      */
     public RString get申請書管理番号認定() {
         return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShinseishoKanriNo().value();
+    }
+
+    /**
+     * 識別コード認定を返します。
+     *
+     * @return 識別コード認定
+     */
+    public ShikibetsuCode get識別コード認定() {
+        return null == 要介護認定申請情報認定Entity ? ShikibetsuCode.EMPTY : 要介護認定申請情報認定Entity.getShikibetsuCode();
+    }
+
+    /**
+     * 市町村連絡事項認定を返します。
+     *
+     * @return 市町村連絡事項認定
+     */
+    public RString get市町村連絡事項認定() {
+        return null == 要介護認定申請情報認定Entity ? RString.EMPTY : 要介護認定申請情報認定Entity.getShichosonRenrakuJiko();
     }
 
     /**
@@ -306,6 +330,24 @@ public class YokaigoNinteiJoho implements Serializable {
      */
     public RString get申請書管理番号受給() {
         return null == 要介護認定申請情報受給Entity ? RString.EMPTY : 要介護認定申請情報受給Entity.getShinseishoKanriNo().value();
+    }
+
+    /**
+     * 識別コード受給を返します。
+     *
+     * @return 識別コード受給
+     */
+    public ShikibetsuCode get識別コード受給() {
+        return null == 要介護認定申請情報受給Entity ? ShikibetsuCode.EMPTY : 要介護認定申請情報受給Entity.getShikibetsuCode();
+    }
+
+    /**
+     * 市町村連絡事項受給を返します。
+     *
+     * @return 市町村連絡事項受給
+     */
+    public RString get市町村連絡事項受給() {
+        return null == 要介護認定申請情報受給Entity ? RString.EMPTY : 要介護認定申請情報受給Entity.getShichosonRenrakuJiko();
     }
 
     /**
@@ -612,6 +654,15 @@ public class YokaigoNinteiJoho implements Serializable {
      */
     public FlexibleDate get認定年月日() {
         return null == 受給者台帳Entity ? FlexibleDate.EMPTY : 受給者台帳Entity.getNinteiYMD();
+    }
+
+    /**
+     * 識別コード受給者台帳を返します。
+     *
+     * @return 識別コード受給者台帳
+     */
+    public ShikibetsuCode get識別コード受給者台帳() {
+        return null == 受給者台帳Entity ? ShikibetsuCode.EMPTY : 受給者台帳Entity.getShikibetsuCode();
     }
 
     /**
@@ -1162,12 +1213,67 @@ public class YokaigoNinteiJoho implements Serializable {
     }
 
     /**
+     * 受給者台帳があるかどうか。
+     *
+     * @return 受給者台帳があるかどうか
+     */
+    public boolean has受給者台帳() {
+        return null != this.受給者台帳Entity
+                && null != this.受給者台帳Entity.getShichosonCode()
+                && null != this.受給者台帳Entity.getHihokenshaNo()
+                && null != this.受給者台帳Entity.getRirekiNo()
+                && null != this.受給者台帳Entity.getEdaban()
+                && null != this.受給者台帳Entity.getJukyuShinseiJiyu();
+    }
+
+    /**
+     * 要介護認定申請情報受給があるかどうか。
+     *
+     * @return 要介護認定申請情報受給があるかどうか
+     */
+    public boolean has要介護認定申請情報受給() {
+        return null != this.要介護認定申請情報受給Entity
+                && null != this.要介護認定申請情報受給Entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 要介護認定申請情報認定があるかどうか。
+     *
+     * @return 要介護認定申請情報認定があるかどうか
+     */
+    public boolean has要介護認定申請情報認定() {
+        return null != this.要介護認定申請情報認定Entity
+                && null != this.要介護認定申請情報認定Entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 要介護認定結果情報があるかどうか。
+     *
+     * @return 要介護認定結果情報があるかどうか
+     */
+    public boolean has要介護認定結果情報() {
+        return null != this.要介護認定結果情報Entity
+                && null != this.要介護認定結果情報Entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 要介護認定インターフェース情報があるかどうか。
+     *
+     * @return 要介護認定インターフェース情報があるかどうか
+     */
+    public boolean has要介護認定インターフェース情報() {
+        return null != this.要介護認定インターフェース情報Entity
+                && null != this.要介護認定インターフェース情報Entity.getShinseishoKanriNo();
+    }
+
+    /**
      * このクラスの編集を行うBuilderを取得します。<br/>
      * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
      *
      * @return Builder YokaigoNinteiJohoBuilder
      */
     public YokaigoNinteiJohoBuilder createBuilderForEdit() {
+        受給者台帳Entity.initializeMd5();
         return new YokaigoNinteiJohoBuilder(
                 要介護認定申請情報認定Entity,
                 主治医医療機関情報認定Entity,
@@ -1179,7 +1285,8 @@ public class YokaigoNinteiJoho implements Serializable {
                 主治医情報受給Entity,
                 調査員情報Entity,
                 要介護認定結果情報Entity,
-                要介護認定インターフェース情報Entity);
+                要介護認定インターフェース情報Entity,
+                登録用受給者台帳Entity);
     }
 
     /**
@@ -1190,7 +1297,6 @@ public class YokaigoNinteiJoho implements Serializable {
      */
     public YokaigoNinteiJohoBuilder createNewKekkaEntityBuilderForEdit() {
         要介護認定結果情報Entity = new DbT4102NinteiKekkaJohoEntity();
-        要介護認定結果情報Entity.initializeMd5();
         要介護認定結果情報Entity.setState(EntityDataState.Added);
         return new YokaigoNinteiJohoBuilder(
                 要介護認定申請情報認定Entity,
@@ -1203,6 +1309,33 @@ public class YokaigoNinteiJoho implements Serializable {
                 主治医情報受給Entity,
                 調査員情報Entity,
                 要介護認定結果情報Entity,
-                要介護認定インターフェース情報Entity);
+                要介護認定インターフェース情報Entity,
+                登録用受給者台帳Entity);
+    }
+
+    /**
+     * このクラスの編集を行うBuilderを取得します。<br/>
+     * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
+     *
+     * @return Builder YokaigoNinteiJohoBuilder
+     */
+    public YokaigoNinteiJohoBuilder createNewJukyushaEntityBuilderForEdit() {
+        登録用受給者台帳Entity = 受給者台帳Entity.clone();
+        登録用受給者台帳Entity.setState(EntityDataState.Added);
+        受給者台帳Entity.initializeMd5();
+        受給者台帳Entity.setState(EntityDataState.Deleted);
+        return new YokaigoNinteiJohoBuilder(
+                要介護認定申請情報認定Entity,
+                主治医医療機関情報認定Entity,
+                主治医情報認定Entity,
+                要介護認定申請情報受給Entity,
+                受給者台帳Entity,
+                認定調査委託先情報Entity,
+                主治医医療機関情報受給Entity,
+                主治医情報受給Entity,
+                調査員情報Entity,
+                要介護認定結果情報Entity,
+                要介護認定インターフェース情報Entity,
+                登録用受給者台帳Entity);
     }
 }

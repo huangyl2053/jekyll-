@@ -36,13 +36,6 @@ public class FukaErrorListService {
 
     private final DbT2010FukaErrorListDac 賦課エラー一覧dac;
     private final DbT7022ShoriDateKanriDac 処理日付管理dac;
-    private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
-    private static final RString 普徴仮算定賦課 = new RString("普徴仮算定賦課");
-    private static final RString 仮算定異動賦課 = new RString("仮算定異動賦課");
-    private static final RString 特徴平準化計算_8月分 = new RString("特徴平準化計算_8月分");
-    private static final RString 本算定賦課 = new RString("本算定賦課");
-    private static final RString 異動賦課 = new RString("異動賦課");
-    private static final RString 過年度賦課 = new RString("過年度賦課");
 
     /**
      * コンストラクタです。
@@ -126,20 +119,13 @@ public class FukaErrorListService {
     /**
      * 賦課エラーデータの状況を「処理済み」として更新します。
      *
+     * @param menuId メニューID
      * @return 賦課エラーの情報リスト
      */
     @Transaction
-    public ShoriDateKanri getFukaBatchID() {
+    public ShoriDateKanri getFukaBatchID(RString menuId) {
         FlexibleYear 年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課));
-        List<RString> 処理名 = new ArrayList<>();
-        処理名.add(特徴仮算定賦課);
-        処理名.add(普徴仮算定賦課);
-        処理名.add(仮算定異動賦課);
-        処理名.add(特徴平準化計算_8月分);
-        処理名.add(本算定賦課);
-        処理名.add(異動賦課);
-        処理名.add(過年度賦課);
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理dac.get処理名(年度, 処理名);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理dac.get処理名(年度, menuId);
         if (entity != null) {
             return new ShoriDateKanri(entity);
         }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬一覧表の帳票のパラメータを作成します。
@@ -16,24 +17,28 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsaHoshuIchiranChange {
 
+    private static final int ZERO = 0;
     private static final RString 欠 = new RString("欠");
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
     private static final RString 欠_対応 = new RString("×");
-    private static final RString 長_対応 = new RString("○");
-    private static final RString 出_対応 = new RString("◎");
+    private static final RString 長_対応 = new RString("◎");
+    private static final RString 出_対応 = new RString("○");
     private static final RString 副_対応 = new RString("-");
+    private static final RString CSVを出力する = new RString("1");
 
     /**
      * 審査会委員の作成
      *
      * @param entity ShinsaHoshuIchiranRelateEntity
+     * @param 帳票出力区分 帳票出力区分
      * @return ShinsaHoshuIchiranEntity
      */
-    public ShinsaHoshuIchiranEntity createSyohyoData(ShinsaHoshuIchiranRelateEntity entity) {
+    public ShinsaHoshuIchiranEntity createData(ShinsaHoshuIchiranRelateEntity entity, RString 帳票出力区分) {
 
         ShinsaHoshuIchiranRelateEntity 審査会委員 = new ShinsaHoshuIchiranRelateEntity();
+        ShinsaHoshuIchiranEntity 委員報酬一覧表;
 
         審査会委員.set出席状況_1日(set出席状況(entity.get出席状況_1日()));
         審査会委員.set出席状況_2日(set出席状況(entity.get出席状況_2日()));
@@ -66,28 +71,61 @@ public class ShinsaHoshuIchiranChange {
         審査会委員.set出席状況_29日(set出席状況(entity.get出席状況_29日()));
         審査会委員.set出席状況_30日(set出席状況(entity.get出席状況_30日()));
         審査会委員.set出席状況_31日(set出席状況(entity.get出席状況_31日()));
-
-        ShinsaHoshuIchiranEntity 委員報酬一覧表 = new ShinsaHoshuIchiranEntity(
-                new RString(entity.get合議体番号()), entity.get介護認定審査会委員氏名(),
-                entity.get審査会開催年月(), 審査会委員.get出席状況_1日(),
-                審査会委員.get出席状況_2日(), 審査会委員.get出席状況_3日(),
-                審査会委員.get出席状況_4日(), 審査会委員.get出席状況_5日(),
-                審査会委員.get出席状況_6日(), 審査会委員.get出席状況_7日(),
-                審査会委員.get出席状況_8日(), 審査会委員.get出席状況_9日(),
-                審査会委員.get出席状況_10日(), 審査会委員.get出席状況_11日(),
-                審査会委員.get出席状況_12日(), 審査会委員.get出席状況_13日(),
-                審査会委員.get出席状況_14日(), 審査会委員.get出席状況_15日(),
-                審査会委員.get出席状況_16日(), 審査会委員.get出席状況_17日(),
-                審査会委員.get出席状況_18日(), 審査会委員.get出席状況_19日(),
-                審査会委員.get出席状況_20日(), 審査会委員.get出席状況_21日(),
-                審査会委員.get出席状況_22日(), 審査会委員.get出席状況_23日(),
-                審査会委員.get出席状況_24日(), 審査会委員.get出席状況_25日(),
-                審査会委員.get出席状況_26日(), 審査会委員.get出席状況_27日(),
-                審査会委員.get出席状況_28日(), 審査会委員.get出席状況_29日(),
-                審査会委員.get出席状況_30日(), 審査会委員.get出席状況_31日(),
-                new RString(entity.get出席回数()), new RString(entity.get報酬総額().toString()),
-                new RString(entity.get税額控除().toString()), new RString(entity.get報酬合計().toString()),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        if (CSVを出力する.equals(帳票出力区分)) {
+            委員報酬一覧表 = new ShinsaHoshuIchiranEntity(
+                    new RString(entity.get合議体番号()), entity.get介護認定審査会委員氏名(),
+                    entity.get審査会開催年月(), 審査会委員.get出席状況_1日(),
+                    審査会委員.get出席状況_2日(), 審査会委員.get出席状況_3日(),
+                    審査会委員.get出席状況_4日(), 審査会委員.get出席状況_5日(),
+                    審査会委員.get出席状況_6日(), 審査会委員.get出席状況_7日(),
+                    審査会委員.get出席状況_8日(), 審査会委員.get出席状況_9日(),
+                    審査会委員.get出席状況_10日(), 審査会委員.get出席状況_11日(),
+                    審査会委員.get出席状況_12日(), 審査会委員.get出席状況_13日(),
+                    審査会委員.get出席状況_14日(), 審査会委員.get出席状況_15日(),
+                    審査会委員.get出席状況_16日(), 審査会委員.get出席状況_17日(),
+                    審査会委員.get出席状況_18日(), 審査会委員.get出席状況_19日(),
+                    審査会委員.get出席状況_20日(), 審査会委員.get出席状況_21日(),
+                    審査会委員.get出席状況_22日(), 審査会委員.get出席状況_23日(),
+                    審査会委員.get出席状況_24日(), 審査会委員.get出席状況_25日(),
+                    審査会委員.get出席状況_26日(), 審査会委員.get出席状況_27日(),
+                    審査会委員.get出席状況_28日(), 審査会委員.get出席状況_29日(),
+                    審査会委員.get出席状況_30日(), 審査会委員.get出席状況_31日(),
+                    new RString(entity.get出席回数()),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.getその他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get税額控除(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬合計(), ZERO),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        } else {
+            委員報酬一覧表 = new ShinsaHoshuIchiranEntity(
+                    new RString(entity.get合議体番号()), entity.get介護認定審査会委員氏名(),
+                    entity.get審査会開催年月(), 審査会委員.get出席状況_1日(),
+                    審査会委員.get出席状況_2日(), 審査会委員.get出席状況_3日(),
+                    審査会委員.get出席状況_4日(), 審査会委員.get出席状況_5日(),
+                    審査会委員.get出席状況_6日(), 審査会委員.get出席状況_7日(),
+                    審査会委員.get出席状況_8日(), 審査会委員.get出席状況_9日(),
+                    審査会委員.get出席状況_10日(), 審査会委員.get出席状況_11日(),
+                    審査会委員.get出席状況_12日(), 審査会委員.get出席状況_13日(),
+                    審査会委員.get出席状況_14日(), 審査会委員.get出席状況_15日(),
+                    審査会委員.get出席状況_16日(), 審査会委員.get出席状況_17日(),
+                    審査会委員.get出席状況_18日(), 審査会委員.get出席状況_19日(),
+                    審査会委員.get出席状況_20日(), 審査会委員.get出席状況_21日(),
+                    審査会委員.get出席状況_22日(), 審査会委員.get出席状況_23日(),
+                    審査会委員.get出席状況_24日(), 審査会委員.get出席状況_25日(),
+                    審査会委員.get出席状況_26日(), 審査会委員.get出席状況_27日(),
+                    審査会委員.get出席状況_28日(), 審査会委員.get出席状況_29日(),
+                    審査会委員.get出席状況_30日(), 審査会委員.get出席状況_31日(),
+                    new RString(entity.get出席回数()),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.getその他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get税額控除(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get報酬合計(), ZERO), RString.EMPTY,
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_報酬総額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_その他費用(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_税控除額(), ZERO),
+                    DecimalFormatter.toコンマ区切りRString(entity.get総合計_報酬合計(), ZERO)
+            );
+        }
 
         return 委員報酬一覧表;
     }

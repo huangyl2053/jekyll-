@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakaiiinhoshunyuryoku.S
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -121,7 +123,7 @@ public class ShinsakaiIinHoshuNyuryoku {
         List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
                 .createInstance().get審査会委員一覧(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
                                 介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, null,
-                                null, null, null, false, false)).records();
+                                null, null, null, false, false, null)).records();
         ValidationMessageControlPairs validPairs実績一覧データ空チェック = getValidatison(div).validateFor実績一覧データ空チェック(shinsakaiIinHoshuNyuryoku);
         if (validPairs実績一覧データ空チェック.iterator().hasNext()) {
             div.getShinsakaiIin().getDgShinsakaiIin().getDataSource().clear();
@@ -162,7 +164,7 @@ public class ShinsakaiIinHoshuNyuryoku {
         List<ShinsakaiIinJoho> shinsakaiIinHoshuNyuryoku = ShinsakaiIinHoshuNyuryokuFinder
                 .createInstance().get審査会実績(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
                                 null, false, false, false, false, null, コード,
-                                fromDate, toDate, null, hasFromDate, hasToDate)).records();
+                                fromDate, toDate, null, hasFromDate, hasToDate, null)).records();
         if (shinsakaiIinHoshuNyuryoku == null || shinsakaiIinHoshuNyuryoku.isEmpty()) {
             ボタン制御_戻る_保存する();
             isNULL = true;
@@ -307,12 +309,19 @@ public class ShinsakaiIinHoshuNyuryoku {
             List<dgShinsakaiJisseki_Row> listEntity = div.getDgShinsakaiJisseki().getDataSource();
             for (dgShinsakaiJisseki_Row row : listEntity) {
                 if (状態_修正.equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().update(getHandler(div).onClick_Update(models, row).build().modifiedModel());
+                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().insertOrUpdate(getHandler(div).onClick_Update(models, row).build().modifiedModel());
                 } else if (状態_削除.equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuJissekiJohoIdentifier key = getHandler(div).getKey();
+                    ShinsakaiIinHoshuJissekiJohoIdentifier key = getHandler(div).getKey(row);
                     ShinsakaiIinHoshuNyuryokuFinder.createInstance().delete(models, key);
                 } else if (状態_追加.equals(row.getColumnState())) {
-                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().insert(getHandler(div).getValues(row).build());
+                    RString コード = div.getShinsakaiJisseki().getTxtShisakaiIinCode().getValue();
+                    RString kuBun = getHandler(div).getKubun(row);
+                    FlexibleDate 実施日 = toFlexibleDate(row.getJisshiNengappi());
+                    int mazRenban = ShinsakaiIinHoshuNyuryokuFinder.
+                            createInstance().getMAX連番(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
+                                            null, false, false, false, false, null, コード,
+                                            null, null, 実施日, false, false, kuBun));
+                    ShinsakaiIinHoshuNyuryokuFinder.createInstance().insertOrUpdate(getHandler(div).getValues(row, mazRenban).build());
                 }
             }
             div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
@@ -364,5 +373,12 @@ public class ShinsakaiIinHoshuNyuryoku {
     private void ボタン制御_戻る_保存する() {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHozonsuru"), false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnModoru"), false);
+    }
+
+    private FlexibleDate toFlexibleDate(RString obj) {
+        if (obj == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return new FlexibleDate(new RDate(obj.toString()).toDateString());
     }
 }

@@ -88,7 +88,7 @@ public class YokaigoNinteiJohoManager {
         List<YokaigoNinteiJohoEntity> entities = mapper.get今回認定情報(申請書管理番号, 認定広域フラグ);
         if (null != entities && !entities.isEmpty()) {
             YokaigoNinteiJohoEntity entity = entities.get(0);
-            entity.initializeMd5ToEntities();
+            entity.initializeMd5ToEntitiesWithoutJukyusha();
             return new YokaigoNinteiJoho(entity);
         }
         return null;
@@ -114,20 +114,23 @@ public class YokaigoNinteiJohoManager {
     /**
      * 前回認定情報の取得します。
      *
-     * @param 前回情報 YokaigoNinteiJoho
      * @param 今回情報 YokaigoNinteiJoho
+     * @param 削除フラグ boolean
      */
     @Transaction
-    public void save(YokaigoNinteiJoho 前回情報, YokaigoNinteiJoho 今回情報) {
-
-        if (null != 前回情報 && 前回情報.hasChanged前回認定情報()) {
-            受給者台帳Dac.save(前回情報.get受給者台帳Entity());
-        }
+    public void save(YokaigoNinteiJoho 今回情報, boolean 削除フラグ) {
         if (null != 今回情報 && 今回情報.hasChanged今回認定情報()) {
             要介護認定申請情報受給Dac.save(今回情報.get要介護認定申請情報受給Entity());
-            受給者台帳Dac.save(今回情報.get受給者台帳Entity());
-            要介護認定結果情報Dac.save(今回情報.get要介護認定結果情報Entity());
-            if (null != 今回情報.get要介護認定インターフェース情報Entity()) {
+            if (削除フラグ) {
+                受給者台帳Dac.save(今回情報.get受給者台帳Entity());
+                受給者台帳Dac.save(今回情報.get登録用受給者台帳Entity());
+            } else {
+                受給者台帳Dac.save(今回情報.get受給者台帳Entity());
+            }
+            if (今回情報.has要介護認定結果情報()) {
+                要介護認定結果情報Dac.save(今回情報.get要介護認定結果情報Entity());
+            }
+            if (今回情報.has要介護認定インターフェース情報()) {
                 要介護認定インターフェース情報Dac.save(今回情報.get要介護認定インターフェース情報Entity());
             }
         }

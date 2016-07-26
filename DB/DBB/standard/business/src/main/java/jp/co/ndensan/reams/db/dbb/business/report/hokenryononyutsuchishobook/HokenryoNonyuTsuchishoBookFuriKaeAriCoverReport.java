@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishobook.HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -38,19 +39,26 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
-    private static final int INT_7 = 7;
-    private static final int INT_10 = 10;
+    private final RString 当初出力_中期開始期;
+    private final RString 当初出力_後期開始期;
 
     /**
      * コンストラクタです。
      *
      * @param 本算定納入通知書情報 本算定納入通知書情報
      * @param ninshoshaSource 認証者情報
+     * @param 当初出力_中期開始期 RString
+     * @param 当初出力_後期開始期 RString
      */
     public HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(
-            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+            HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報,
+            NinshoshaSource ninshoshaSource,
+            RString 当初出力_中期開始期,
+            RString 当初出力_後期開始期) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
+        this.当初出力_中期開始期 = 当初出力_中期開始期;
+        this.当初出力_後期開始期 = 当初出力_後期開始期;
     }
 
     @Override
@@ -75,10 +83,9 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
 
     private void edit前中後期(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             ReportSourceWriter<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource> writer) {
-
         HenshuHaniKubun 編集範囲区分 = 本算定納入通知書情報.get編集範囲区分();
         if (HenshuHaniKubun.Detailのみ.equals(編集範囲区分)) {
-            edit納付書(納入通知書期情報リスト, INT_1, writer);
+            edit納付書(納入通知書期情報リスト, 1, writer);
             return;
         }
         if (本算定納入通知書情報.get本算定納入通知書制御情報() != null
@@ -96,9 +103,10 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
 
     private void edit納入通知書期情報(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト, HenshuHaniKubun 編集範囲区分,
             ReportSourceWriter<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource> writer) {
-        int 通知書の連番 = INT_1;
+
+        int ページ = INT_1;
         if (HenshuHaniKubun.Coverのみ.equals(編集範囲区分) || HenshuHaniKubun.全てのレイアウト.equals(編集範囲区分)) {
-            edit通知書(納入通知書期情報リスト, 通知書の連番, writer);
+            edit通知書(納入通知書期情報リスト, writer);
         }
         if (!HenshuHaniKubun.Detailのみ.equals(編集範囲区分) && !HenshuHaniKubun.全てのレイアウト.equals(編集範囲区分)) {
             return;
@@ -115,8 +123,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
             if (!is納入通知書期情報リスト設定中 && ブック開始位置 == INT_5) {
                 set納入通知書期情報リストEdit(納入通知書期情報リストEdit, INT_3);
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                edit納付書(納入通知書期情報リストEdit, 通知書の連番, writer);
-                通知書の連番++;
+                edit納付書(納入通知書期情報リストEdit, ページ, writer);
+                ページ++;
                 納入通知書期情報リストEdit = new ArrayList<>();
                 is納入通知書期情報リスト設定中 = true;
             } else if (!is納入通知書期情報リスト設定中) {
@@ -139,8 +147,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
                 is納入通知書期情報リスト設定中 = true;
             } else if (納入通知書期情報リストの設定数 == INT_3) {
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                edit納付書(納入通知書期情報リストEdit, 通知書の連番, writer);
-                通知書の連番++;
+                edit納付書(納入通知書期情報リストEdit, ページ, writer);
+                ページ++;
                 納入通知書期情報リストEdit = new ArrayList<>();
                 納入通知書期情報リストの設定数 = 0;
             } else {
@@ -148,17 +156,17 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
                 納入通知書期情報リストの設定数++;
             }
         }
-        edit納付書(納入通知書期情報リストEdit, 通知書の連番, writer);
+        edit納付書(納入通知書期情報リストEdit, ページ, writer);
     }
 
-    private void edit通知書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 通知書の連番,
+    private void edit通知書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit,
             ReportSourceWriter<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource> writer) {
         if (納入通知書期情報リストEdit.isEmpty()) {
             return;
         }
         IHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor editor
                 = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor(
-                        本算定納入通知書情報, 通知書の連番, ninshoshaSource);
+                        本算定納入通知書情報, ninshoshaSource);
         IHokenryoNonyuTsuchishoBookFuriKaeAriCoverBuilder builder
                 = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverBuilder(editor);
         writer.writeLine(builder);
@@ -170,10 +178,10 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
         }
     }
 
-    private void edit納付書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 通知書の連番,
+    private void edit納付書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int ページ,
             ReportSourceWriter<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource> writer) {
         IHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor editor
-                = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverNofushoEditor(本算定納入通知書情報, 納入通知書期情報リストEdit, 通知書の連番);
+                = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverNofushoEditor(本算定納入通知書情報, 納入通知書期情報リストEdit, ページ);
         IHokenryoNonyuTsuchishoBookFuriKaeAriCoverBuilder builder
                 = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverBuilder(editor);
         writer.writeLine(builder);
@@ -198,7 +206,8 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Cover = getNew本算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リスト);
         HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport reportCover
-                = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(本算定納入通知書情報Cover, ninshoshaSource);
+                = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(
+                        本算定納入通知書情報Cover, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
         nonyuTsuchishoList.add(reportCover);
         if (null == 納入通知書期情報リスト || 納入通知書期情報リスト.isEmpty()) {
             return nonyuTsuchishoList;
@@ -237,38 +246,46 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
                 if ((1 == ブック開始位置 || ブック開始位置 > INT_5)) {
                     throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
                 }
-                if (ブック開始位置 == INT_2) {
-                    detail設定数 = INT_1;
-                } else if (ブック開始位置 == INT_3) {
-                    detail設定数 = INT_2;
-                    set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_1);
-                } else if (ブック開始位置 == INT_4) {
-                    detail設定数 = INT_3;
-                    set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_2);
-                } else if (ブック開始位置 == INT_5) {
-                    detail設定数 = INT_4;
-                    set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_3);
+                switch (ブック開始位置) {
+                    case INT_2:
+                        detail設定数 = INT_1;
+                        break;
+                    case INT_3:
+                        detail設定数 = INT_2;
+                        set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_1);
+                        break;
+                    case INT_4:
+                        detail設定数 = INT_3;
+                        set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_2);
+                        break;
+                    case INT_5:
+                        detail設定数 = INT_4;
+                        set納入通知書期情報リストEdit(納入通知書期情報リストDetail, INT_3);
+                        break;
+                    default:
+                        break;
                 }
+
                 納入通知書期情報リストDetail.add(納入通知書期情報);
                 isBegin = true;
+            } else if (detail設定数 >= INT_4) {
+                本算定納入通知書情報Detail
+                        = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
+                reportDetail = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(
+                        本算定納入通知書情報Detail, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
+                nonyuTsuchishoList.add(reportDetail);
+                納入通知書期情報リストDetail = new ArrayList<>();
+                納入通知書期情報リストDetail.add(納入通知書期情報);
+                detail設定数 = INT_1;
             } else {
-                if (detail設定数 >= INT_4) {
-                    本算定納入通知書情報Detail
-                            = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
-                    reportDetail = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(本算定納入通知書情報Detail, ninshoshaSource);
-                    nonyuTsuchishoList.add(reportDetail);
-                    納入通知書期情報リストDetail = new ArrayList<>();
-                    納入通知書期情報リストDetail.add(納入通知書期情報);
-                    detail設定数 = INT_1;
-                } else {
-                    納入通知書期情報リストDetail.add(納入通知書期情報);
-                    detail設定数++;
-                }
+                納入通知書期情報リストDetail.add(納入通知書期情報);
+                detail設定数++;
             }
         }
         本算定納入通知書情報Detail
                 = getNew本算定納入通知書情報(HenshuHaniKubun.Detailのみ, 納入通知書期情報リストDetail);
-        reportDetail = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(本算定納入通知書情報Detail, ninshoshaSource);
+        reportDetail = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(
+                本算定納入通知書情報Detail, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
         nonyuTsuchishoList.add(reportDetail);
     }
 
@@ -287,50 +304,32 @@ public class HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport extends NonyuTsuchi
         new本算定納入通知書情報.set編集後本算定通知書共通情報(本算定納入通知書情報.get編集後本算定通知書共通情報());
         new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(本算定納入通知書情報.get連番());
         return new本算定納入通知書情報;
     }
 
     private void edit前中後期リスト(
             List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト) {
 
-        int 中期開始期 = INT_7;
-        int 後期開始期 = INT_10;
-
+        int 中期開始期 = Integer.parseInt(当初出力_中期開始期.toString());
+        int 後期開始期 = Integer.parseInt(当初出力_後期開始期.toString());
         if (中期開始期 != 0 && 後期開始期 != 0) {
-            int 前期 = 0;
-            for (int i = 納入通知書期情報リスト.get(0).get期(); i <= 中期開始期 - 1; i++) {
-                納入通知書期情報リスト前期.add(納入通知書期情報リスト.get(前期));
-                前期++;
-            }
-            if (納入通知書期情報リスト.get(納入通知書期情報リスト.size() - 1).get期() < 中期開始期) {
-                return;
-            }
-            int 中期 = 前期;
-            for (int i = 中期開始期; i <= 後期開始期 - 1; i++) {
-                納入通知書期情報リスト中期.add(納入通知書期情報リスト.get(中期));
-                中期++;
-            }
-            if (納入通知書期情報リスト.get(納入通知書期情報リスト.size() - 1).get期() < 後期開始期) {
-                return;
-            }
-            int 後期 = 中期;
-            for (int i = 後期開始期; i <= 納入通知書期情報リスト.get(納入通知書期情報リスト.size() - 1).get期(); i++) {
-                納入通知書期情報リスト後期.add(納入通知書期情報リスト.get(後期));
-                後期++;
+            for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+                if (納入通知書期情報.get期() < 中期開始期) {
+                    納入通知書期情報リスト前期.add(納入通知書期情報);
+                } else if (納入通知書期情報.get期() >= 中期開始期 && 納入通知書期情報.get期() < 後期開始期) {
+                    納入通知書期情報リスト中期.add(納入通知書期情報);
+                } else {
+                    納入通知書期情報リスト後期.add(納入通知書期情報);
+                }
             }
         } else if (中期開始期 == 0 && 後期開始期 != 0) {
-            int 前期 = 0;
-            for (int i = 納入通知書期情報リスト.get(0).get期(); i <= 後期開始期 - 1; i++) {
-                納入通知書期情報リスト前期.add(納入通知書期情報リスト.get(前期));
-                前期++;
-            }
-            if (納入通知書期情報リスト.get(納入通知書期情報リスト.size() - 1).get期() < 後期開始期) {
-                return;
-            }
-            int 後期 = 前期;
-            for (int i = 後期開始期; i <= 納入通知書期情報リスト.get(納入通知書期情報リスト.size() - 1).get期(); i++) {
-                納入通知書期情報リスト後期.add(納入通知書期情報リスト.get(後期));
-                後期++;
+            for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
+                if (納入通知書期情報.get期() < 後期開始期) {
+                    納入通知書期情報リスト前期.add(納入通知書期情報);
+                } else {
+                    納入通知書期情報リスト後期.add(納入通知書期情報);
+                }
             }
         } else if (中期開始期 == 0 && 後期開始期 == 0) {
             納入通知書期情報リスト前期.addAll(納入通知書期情報リスト);

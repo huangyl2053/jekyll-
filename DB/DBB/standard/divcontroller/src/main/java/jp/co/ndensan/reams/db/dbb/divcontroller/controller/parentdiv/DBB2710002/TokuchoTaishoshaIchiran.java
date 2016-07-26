@@ -52,7 +52,6 @@ public class TokuchoTaishoshaIchiran {
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
-    private static final RString 特別徴収対象者一覧確認 = new RString("特別徴収対象者一覧確認");
     private static final RString STATE特別徴収対象者一覧確認 = new RString("1");
 
     /**

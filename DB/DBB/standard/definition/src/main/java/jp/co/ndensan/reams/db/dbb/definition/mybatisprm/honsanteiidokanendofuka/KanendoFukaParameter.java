@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,8 +22,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KanendoFukaParameter implements IMyBatisParameter {
 
     private FlexibleYear 調定年度;
+    private Long 出力順ID;
     private RDateTime 抽出開始日時;
     private RDateTime 抽出終了日時;
+    private YMDHMS システム日時;
+    private RString 日付関連_年度サイクル;
 
     private FlexibleYear 調定年度minus1;
     private FlexibleYear 調定年度minus2;

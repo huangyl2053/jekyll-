@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class HonsanteiKekkaIcihiranProperty extends ReportPropertyBase<HonsanteiKekkaIcihiranReportSource> {
 
-//    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString(
-//            HonsanteiKekkaIcihiranReportSource.ReportSourceFields.listUpper_1.name())));
     private final List<RString> pageBreakKeys;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
@@ -100,6 +98,7 @@ public class HonsanteiKekkaIcihiranProperty extends ReportPropertyBase<Honsantei
             Breakers<HonsanteiKekkaIcihiranReportSource> breakers,
             BreakerCatalog<HonsanteiKekkaIcihiranReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
 

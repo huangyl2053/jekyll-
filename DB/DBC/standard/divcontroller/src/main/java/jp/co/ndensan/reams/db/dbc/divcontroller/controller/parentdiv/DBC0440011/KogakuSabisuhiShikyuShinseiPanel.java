@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -77,10 +78,11 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
             throw new ApplicationException(
                     DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));
-        } else {
-            div.getCommonPanel().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         }
-        getHandler(div).is前排他キーのセット(被保険者番号);
+        if (!getHandler(div).is前排他キーのセット(被保険者番号)) {
+            throw new PessimisticLockingException();
+        }
+        div.getCommonPanel().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         if (識別コード != null && !識別コード.isEmpty()) {
             div.getCommonPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         }
@@ -89,7 +91,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 申請情報タブ、口座情報タブ、判定結果情報タブの初期化の初期化「追加モード」
+     * 申請情報タブ、口座情報タブ、判定結果情報タブの初期化の初期化「追加モード」です。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -110,7 +112,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 申請情報タブ、口座情報タブ、判定結果情報タブの初期化の初期化「修正モード」
+     * 申請情報タブ、口座情報タブ、判定結果情報タブの初期化の初期化「修正モード」です。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -153,7 +155,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 申請情報タブ、口座情報タブ、判定結果情報タブの初期化の初期化「削除モード」
+     * 申請情報タブ、口座情報タブ、判定結果情報タブの初期化の初期化「削除モード」です。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -173,7 +175,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 「対象者情報を追加する」ボタン
+     * 「対象者情報を追加する」ボタンです。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -210,7 +212,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 申請情報「保存する」ボタン
+     * 申請情報「保存する」ボタンです。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -234,7 +236,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 対象者情報「保存する」ボタン
+     * 対象者情報「保存する」ボタンです。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -335,7 +337,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 該当者一覧画面に戻る
+     * 該当者一覧画面に戻るです。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -346,7 +348,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 「取消する」ボタン
+     * 「取消する」ボタンです。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData
@@ -381,7 +383,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
     }
 
     /**
-     * 「支給申請登録に戻る」ボタン
+     * 「支給申請登録に戻る」ボタンです。
      *
      * @param div KogakuSabisuhiShikyuShinseiPanelDiv
      * @return ResponseData

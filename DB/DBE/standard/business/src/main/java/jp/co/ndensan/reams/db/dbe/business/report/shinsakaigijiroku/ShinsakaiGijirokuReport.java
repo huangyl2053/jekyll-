@@ -79,16 +79,12 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                     bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(委員情報リスト.get(i));
                     bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
                 }
-            } else if (i == INDEX_2) {
-                if (INDEX_1 < 調査員情報リスト.size()) {
-                    bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(調査員情報リスト.get(INDEX_1));
-                    bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
-                }
-            } else if (i == INDEX_3) {
-                if (INDEX_1 < その他情報リスト.size()) {
-                    bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(その他情報リスト.get(INDEX_1));
-                    bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
-                }
+            } else if (i == INDEX_2 && INDEX_1 < 調査員情報リスト.size()) {
+                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(調査員情報リスト.get(INDEX_1));
+                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
+            } else if (i == INDEX_3 && INDEX_1 < その他情報リスト.size()) {
+                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(その他情報リスト.get(INDEX_1));
+                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
             }
             ShinsakaiGijirokuBuilder builder = new ShinsakaiGijirokuBuilder(editor, bodyEditor1, bodyEditor2, bodyEditor3, bodyEditor4, bodyEditor5);
             reportSourceWriter.writeLine(builder);

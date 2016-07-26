@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.gennendohonsanteiidou.Genn
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -155,7 +156,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<GennendoIdoFukaParameter>
     @Step(世帯員把握フロー)
     protected IBatchFlowCommand setaiinBatchFlow() {
         return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
-                new SetaiShotokuKazeiHanteiBatchParameter(RString.EMPTY)).define();
+                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**

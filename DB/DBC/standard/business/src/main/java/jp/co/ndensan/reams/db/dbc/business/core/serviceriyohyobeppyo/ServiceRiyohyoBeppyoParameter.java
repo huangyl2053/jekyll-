@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.serviceriyohyobeppyo;
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGendo;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KyufuJikoSakuseiEntityResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.ServiceTypeTotal;
 import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.TankiRiyoNissuResult;
@@ -27,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 public class ServiceRiyohyoBeppyoParameter {
 
     private Map<JigyoshaNo, List<KyufuJikoSakuseiEntityResult>> 帳票情報マップ;
-    private KubunGendo 合計情報;
+    private KyufuJikoSakuseiEntityResult 合計情報;
     private TeikyohyoBeppyoEntityResult 帳票ヘッダー;
     private FlexibleDate 作成日時;
     private FlexibleYearMonth 利用年月;

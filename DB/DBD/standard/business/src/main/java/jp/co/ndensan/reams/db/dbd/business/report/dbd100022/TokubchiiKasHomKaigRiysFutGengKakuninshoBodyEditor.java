@@ -16,12 +16,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 特別地域加算に係る訪問介護利用者負担減額確認証ボディEditorです。
@@ -39,7 +35,9 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
     private final static int INDEX_5 = 5;
     private final static int INDEX_6 = 6;
     private final static int INDEX_7 = 7;
+    private final static int INDEX_8 = 8;
     private final static int INDEX_9 = 9;
+    private final static int INDEX_10 = 10;
     private final TokubchiiKasHomKaigRiysFutGengKakuninshoItem item;
 
     /**
@@ -77,18 +75,22 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
 
         RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
         if (item.getIKojin().is日本人()) {
-            if (new RString("明治").equals(元号)) {
+            if (new RString("明").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
                 source.birthGengoTaisho = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("大正").equals(元号)) {
+            } else if (new RString("大").equals(元号)) {
                 source.birthGengoTaisho = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("昭和").equals(元号)) {
+            } else if (new RString("昭").equals(元号)) {
                 source.birthGengoShowa = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
+            } else {
+                source.birthGengoMeiji = ホシ;
+                source.birthGengoTaisho = ホシ;
+                source.birthGengoShowa = ホシ;
             }
             source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
             source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
@@ -97,11 +99,10 @@ public class TokubchiiKasHomKaigRiysFutGengKakuninshoBodyEditor implements IToku
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
             source.birthGengoShowa = ホシ;
-            RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                    FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            source.birthYYYY = 生年月日.substring(INDEX_1, INDEX_4);
-            source.birthMM = 生年月日.substring(INDEX_4, INDEX_6);
-            source.birthDD = 生年月日.substring(INDEX_7, INDEX_9);
+            RString 生年月日 = item.getIKojin().get生年月日().toFlexibleDate().seireki().toDateString();
+            source.birthYYYY = 生年月日.substring(INDEX_0, INDEX_4);
+            source.birthMM = 生年月日.substring(INDEX_5, INDEX_7);
+            source.birthDD = 生年月日.substring(INDEX_8, INDEX_10);
         }
 
         if (Gender.MALE.equals(item.getIKojin().get性別())) {

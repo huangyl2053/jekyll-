@@ -202,40 +202,34 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             source.listFuseigo5_2 = item.get不整合リスト５().get(index).get特記事項有無();
         }
         if (index < item.get第１群リスト().size()) {
-            source.listIchigun_1 = item.get第１群リスト().get(index).get前回結果();
+            source.listIchigun_1 = item.get第１群リスト().get(index).get調査結果();
             source.listIchigun_2 = item.get第１群リスト().get(index).get段階改善フラグ();
             source.listIchigun_3 = item.get第１群リスト().get(index).get段階改善値();
-            source.listIchigun_4 = item.get第１群リスト().get(index).get調査結果();
+            source.listIchigun_4 = item.get第１群リスト().get(index).get前回結果();
         }
         if (index < item.get第２群リスト().size()) {
-            source.listNigun_1 = item.get第２群リスト().get(index).get前回結果();
+            source.listNigun_1 = item.get第２群リスト().get(index).get調査結果();
             source.listNigun_2 = item.get第２群リスト().get(index).get段階改善フラグ();
             source.listNigun_3 = item.get第２群リスト().get(index).get段階改善値();
-            source.listNigun_4 = item.get第２群リスト().get(index).get調査結果();
+            source.listNigun_4 = item.get第２群リスト().get(index).get前回結果();
         }
         if (index < item.get第３群リスト().size()) {
-            source.listSangun_1 = item.get第３群リスト().get(index).get前回結果();
+            source.listSangun_1 = item.get第３群リスト().get(index).get調査結果();
             source.listSangun_2 = item.get第３群リスト().get(index).get段階改善フラグ();
             source.listSangun_3 = item.get第３群リスト().get(index).get段階改善値();
-            source.listSangun_4 = item.get第３群リスト().get(index).get調査結果();
+            source.listSangun_4 = item.get第３群リスト().get(index).get前回結果();
         }
         if (index < item.get第４群リスト().size()) {
-            source.listYongun_1 = item.get第４群リスト().get(index).get前回結果();
+            source.listYongun_1 = item.get第４群リスト().get(index).get調査結果();
             source.listYongun_2 = item.get第４群リスト().get(index).get段階改善フラグ();
             source.listYongun_3 = item.get第４群リスト().get(index).get段階改善値();
-            source.listYongun_4 = item.get第４群リスト().get(index).get調査結果();
+            source.listYongun_4 = item.get第４群リスト().get(index).get前回結果();
         }
         if (index < item.get第５群リスト().size()) {
-            source.listGogun_1 = item.get第５群リスト().get(index).get前回結果();
+            source.listGogun_1 = item.get第５群リスト().get(index).get調査結果();
             source.listGogun_2 = item.get第５群リスト().get(index).get段階改善フラグ();
             source.listGogun_3 = item.get第５群リスト().get(index).get段階改善値();
-            source.listGogun_4 = item.get第５群リスト().get(index).get調査結果();
-        }
-        if (index < item.get第５群リスト().size()) {
-            source.listGogun_1 = item.get第５群リスト().get(index).get前回結果();
-            source.listGogun_2 = item.get第５群リスト().get(index).get段階改善フラグ();
-            source.listGogun_3 = item.get第５群リスト().get(index).get段階改善値();
-            source.listGogun_4 = item.get第５群リスト().get(index).get調査結果();
+            source.listGogun_4 = item.get第５群リスト().get(index).get前回結果();
         }
         if (index < item.get特別な医療リスト１().size()) {
             source.listtokubetsunaIryo1_1 = item.get特別な医療リスト１().get(index).get調査結果();
@@ -268,7 +262,7 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText = item.get特記事項_tokkiText();
             } else if (短冊.equals(item.get特記パターン())) {
-                source = set特記事項連番_名称(source);
+                source = set特記事項テキスト連番_名称(source);
                 source.tokkiText1 = item.get特記事項_tokkiText1();
                 source.tokkiText2 = item.get特記事項_tokkiText2();
                 source.tokkiText3 = item.get特記事項_tokkiText3();
@@ -287,9 +281,9 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
             }
         } else if (イメージ.equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiText = item.get特記事項_tokkiImg();
+                source.tokkiImg = item.get特記事項_tokkiImg();
             } else if (短冊.equals(item.get特記パターン())) {
-                source = set特記事項連番_名称(source);
+                source = set特記事項イメージ連番_名称(source);
                 source.tokkiImg1 = item.get特記事項_tokkiImg1();
                 source.tokkiImg2 = item.get特記事項_tokkiImg2();
                 source.tokkiImg3 = item.get特記事項_tokkiImg3();
@@ -310,9 +304,16 @@ public class IchijihanteikekkahyoA3Editor implements IIchijihanteikekkahyoA3Edit
         return source;
     }
 
-    private IchijihanteikekkahyoA3ReportSource set特記事項連番_名称(IchijihanteikekkahyoA3ReportSource source) {
+    private IchijihanteikekkahyoA3ReportSource set特記事項イメージ連番_名称(IchijihanteikekkahyoA3ReportSource source) {
         if (index < 特記事項List.size()) {
             source.listChosa_1 = 特記事項List.get(index);
+        }
+        return source;
+    }
+
+    private IchijihanteikekkahyoA3ReportSource set特記事項テキスト連番_名称(IchijihanteikekkahyoA3ReportSource source) {
+        if (index < 特記事項List.size()) {
+            source.listChosa1_1 = 特記事項List.get(index);
         }
         return source;
     }

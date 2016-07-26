@@ -280,7 +280,7 @@ public class TokuchoTaishoshaIchiranHandler {
         RString 開始月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE)
                 && !特別徴収開始月.startsWith(LEFT)) {
-            開始月 = 特別徴収開始月.substringEmptyOnError(NUM4, NUM6);
+            開始月 = DateConverter.formatMonthFull(特別徴収開始月.substringEmptyOnError(NUM4, NUM6));
         }
         return tokudoutei.getTokuchoTaishoListJoho(new FlexibleYear(処理年度), 開始月, 捕捉月リスト);
     }
@@ -340,7 +340,7 @@ public class TokuchoTaishoshaIchiranHandler {
         RString 開始月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月
                 .startsWith(RString.FULL_SPACE) && !特別徴収開始月.startsWith(LEFT)) {
-            開始月 = 特別徴収開始月.substringEmptyOnError(NUM4, NUM6);
+            開始月 = DateConverter.formatMonthFull(特別徴収開始月.substringEmptyOnError(NUM4, NUM6));
         }
         return tokudoutei.getTokuchoMiTaishoListJoho(new FlexibleYear(処理年度), 開始月, 捕捉月リスト, 確認済を含む);
     }
@@ -407,7 +407,7 @@ public class TokuchoTaishoshaIchiranHandler {
             RString 基礎年金番号, RString 年金コード, RString 特徴開始月) {
         if (!RString.isNullOrEmpty(特徴開始月) && !特徴開始月
                 .startsWith(RString.FULL_SPACE) && !特徴開始月.startsWith(LEFT)) {
-            特徴開始月 = 特徴開始月.split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6);
+            特徴開始月 = DateConverter.formatMonthFull(特徴開始月.split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6));
         }
         FlexibleYear 処理年度 = new FlexibleYear(年度);
         List<TokuchoDouteiKouhoshaListJoho> result_一覧 = tokudoutei.getTokuchoTaishoKouhosyaListJoho(

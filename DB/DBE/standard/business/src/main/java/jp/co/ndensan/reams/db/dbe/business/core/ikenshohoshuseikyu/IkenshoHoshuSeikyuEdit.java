@@ -51,7 +51,7 @@ public class IkenshoHoshuSeikyuEdit {
                 SubGyomuCode.DBE認定支援));
         seikyuEntity.set通知文1(通知文.get(1));
         seikyuEntity.set通知文2(通知文.get(2));
-        Decimal 単価 = entity.getTanka();
+        Decimal 単価 = entity.getTanka().roundUpTo(0);
         if (!shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
             index = 1;
             if (entity.getIkenshoSakuseiKaisuKubun() != null && entity.getZaitakuShisetsuKubun() != null
@@ -85,19 +85,19 @@ public class IkenshoHoshuSeikyuEdit {
         Decimal 新規施設計 = 単価.multiply(rstringToInt(seikyuEntity.get新規施設件数()));
         Decimal 更新在宅計 = 単価.multiply(rstringToInt(seikyuEntity.get更新在宅件数()));
         Decimal 更新施設計 = 単価.multiply(rstringToInt(seikyuEntity.get更新施設件数()));
-        seikyuEntity.set新規在宅計(decimalToRString(新規在宅計));
-        seikyuEntity.set新規施設計(decimalToRString(新規施設計));
-        seikyuEntity.set更新在宅計(decimalToRString(更新在宅計));
-        seikyuEntity.set更新施設計(decimalToRString(更新施設計));
+        seikyuEntity.set新規在宅計(decimalToRString(新規在宅計.roundUpTo(0)));
+        seikyuEntity.set新規施設計(decimalToRString(新規施設計.roundUpTo(0)));
+        seikyuEntity.set更新在宅計(decimalToRString(更新在宅計.roundUpTo(0)));
+        seikyuEntity.set更新施設計(decimalToRString(更新施設計.roundUpTo(0)));
         Decimal 作成件数合計 = Decimal.ZERO;
         作成件数合計 = 作成件数合計.add(rstringToInt(seikyuEntity.get新規在宅件数())).add(rstringToInt(seikyuEntity.get新規施設件数()))
                 .add(rstringToInt(seikyuEntity.get更新在宅件数())).add(rstringToInt(seikyuEntity.get更新施設件数()));
         seikyuEntity.set作成件数合計(decimalToRString(作成件数合計));
         Decimal 小計 = 新規在宅計.add(新規施設計).add(更新在宅計).add(更新施設計);
-        seikyuEntity.set小計(decimalToRString(小計));
+        seikyuEntity.set小計(decimalToRString(小計.roundUpTo(0)));
         Decimal 消費税額 = 小計.multiply(rstringToDecimal(消費税率)).subtract(小計);
-        seikyuEntity.set消費税額(decimalToRString(消費税額));
-        seikyuEntity.set合計金額(decimalToRString(小計.add(消費税額)));
+        seikyuEntity.set消費税額(decimalToRString(消費税額.roundUpTo(0)));
+        seikyuEntity.set合計金額(decimalToRString(小計.add(消費税額).roundUpTo(0)));
         seikyuEntity.set請求金額(seikyuEntity.get合計金額());
         return seikyuEntity;
     }

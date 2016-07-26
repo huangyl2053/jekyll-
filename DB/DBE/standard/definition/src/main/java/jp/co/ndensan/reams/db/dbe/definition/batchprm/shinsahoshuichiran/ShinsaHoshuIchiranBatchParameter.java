@@ -24,23 +24,11 @@ public class ShinsaHoshuIchiranBatchParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String SHINSAKAI_KAISAI_YMD = "shinsakaiKaisaiYMD";
-    private static final String SHISAKAISU = "shisakaisu";
-    private static final String HOSYUSOGAKU = "hosyusogaku";
-    private static final String SEGAKUKOJYO = "segakukojyo";
-    private static final String HOSYUGOKE = "hosyugoke";
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
     @BatchParameter(key = SHINSAKAI_KAISAI_YMD, name = "出席日")
     private RString shinsakaiKaisaiYMD;
-    @BatchParameter(key = SHISAKAISU, name = "審査回数")
-    private RString shisakaisu;
-    @BatchParameter(key = HOSYUSOGAKU, name = "報酬総額")
-    private RString hosyusogaku;
-    @BatchParameter(key = SEGAKUKOJYO, name = "税額控除")
-    private RString segakukojyo;
-    @BatchParameter(key = HOSYUGOKE, name = "報酬合計")
-    private RString hosyugoke;
 
     /**
      * コンストラクタです。
@@ -53,20 +41,11 @@ public class ShinsaHoshuIchiranBatchParameter extends BatchParameterBase {
      *
      * @param syohyoSyuturyoku 帳票出力区分
      * @param shinsakaiKaisaiYMD 審査会開催年月
-     * @param shisakaisu 審査回数
-     * @param hosyusogaku 報酬総額
-     * @param segakukojyo 税額控除
-     * @param hosyugoke 報酬合計
      */
     public ShinsaHoshuIchiranBatchParameter(RString syohyoSyuturyoku,
-            RString shinsakaiKaisaiYMD, RString shisakaisu, RString hosyusogaku,
-            RString segakukojyo, RString hosyugoke) {
+            RString shinsakaiKaisaiYMD) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
-        this.shisakaisu = shisakaisu;
-        this.hosyusogaku = hosyusogaku;
-        this.segakukojyo = segakukojyo;
-        this.hosyugoke = hosyugoke;
     }
 
     /**
@@ -76,6 +55,6 @@ public class ShinsaHoshuIchiranBatchParameter extends BatchParameterBase {
      */
     public ShinsaHoshuIchiranProcessParameter toProcessParamter() {
         return new ShinsaHoshuIchiranProcessParameter(syohyoSyuturyoku,
-                shinsakaiKaisaiYMD, shisakaisu, hosyusogaku, segakukojyo, hosyugoke);
+                shinsakaiKaisaiYMD);
     }
 }

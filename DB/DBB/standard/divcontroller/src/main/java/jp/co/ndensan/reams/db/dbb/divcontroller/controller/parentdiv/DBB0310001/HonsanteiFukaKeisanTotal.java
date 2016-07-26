@@ -31,8 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HonsanteiFukaKeisanTotal {
 
-    private static final RString 本算定賦課メニュー = new RString("DBBWF43001");
-    private static final RString 本算定通知書作成メニュー = new RString("DBBWF43002");
+    private static final RString 本算定賦課メニュー = new RString("DBBMN43001");
+    private static final RString 本算定通知書作成メニュー = new RString("DBBMN43002");
     private static final RString 本算定賦課_帳票グループコード = new RString("DBB0310001");
     private static final RString 本算定通知書作成_帳票グループコード = new RString("DBB0310003");
     private static final RString 遷移元区分_0 = new RString("0");

@@ -100,7 +100,7 @@
                            WHERE F."jigyoshaNo" = F1."jigyoshaNo"
                                  AND F."yukoKaishiYMD" <![CDATA[<]]> F1."yukoKaishiYMD"
                           )
-        WHERE B."shoKisaiHokenshaNo" = (
+        WHERE B."shinseishoKanriNo" = (
                                         SELECT D."zenkaiShinseishoKanriNo"
                                         FROM rgdb."DbT4121ShinseiRirekiJoho" AS D
                                         WHERE D."shinseishoKanriNo" = #{申請書管理番号}

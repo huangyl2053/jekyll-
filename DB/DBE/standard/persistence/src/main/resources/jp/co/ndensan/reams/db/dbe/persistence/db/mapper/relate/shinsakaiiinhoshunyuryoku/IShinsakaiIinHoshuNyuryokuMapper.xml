@@ -87,4 +87,19 @@ parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhosh
         T4."shinsakaiKaisaiYMD" DESC,         
         T4."remban" DESC
     </select>
+    
+    <select resultOrdered="true" id="getremban" resultType="int"
+parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuMapperParameter" 
+        fetchSize="500">
+        SELECT 
+        coalesce(MAX("remban"), 0)+1
+        FROM 
+            rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" 
+        WHERE 
+            "shinsakaiKaisaiYMD" = #{実施日}
+        AND 
+            "shinsakaiIinCode"=#{コード}
+        AND 
+            "shinsakaiIinHoshuKubun" =#{kuBun}
+    </select>
 </mapper>

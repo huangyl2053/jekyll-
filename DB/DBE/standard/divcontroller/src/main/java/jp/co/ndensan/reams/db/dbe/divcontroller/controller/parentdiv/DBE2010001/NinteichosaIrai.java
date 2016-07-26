@@ -69,6 +69,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -104,7 +105,8 @@ public class NinteichosaIrai {
     private static final RString CSVファイル名_認定調査依頼一覧 = new RString("NinteichosaIraiIchiranJoho.csv");
     private static final RString CSVファイル名_調査結果入力用データ = new RString("ChosaKekkaNyuryokuMobile");
     private static final RString CSVファイル名_調査結果入力用調査員データ = new RString("ChosainInfoMobile");
-    private static final RString CSVフォルダ = new RString("ChosaKekkaNyuryokuMobile");
+    private static final RString CSVフォルダ名 = new RString("ChosaKekkaNyuryokuMobile");
+    private static final RString 書庫化ファイル名 = new RString("ChosaKekkaNyuryokuMobile.zip");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
@@ -233,7 +235,7 @@ public class NinteichosaIrai {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnChosadataOutput(NinteichosaIraiDiv requestDiv, IDownLoadServletResponse response) {
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVフォルダ);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVフォルダ名);
         for (dgNinteiTaskList_Row row : requestDiv.getCcdTaskList().getCheckbox()) {
             SearchResult<NinteichosaIraiBusiness> 調査入力用データ = NinteichosaIraiManager.createInstance().select調査結果入力用データ(
                     row.getShinseishoKanriNo());
@@ -305,7 +307,14 @@ public class NinteichosaIrai {
                 }
             }
         }
-        return SharedFileDirectAccessDownload.download(filePath, response);
+        RString zipPath = getZipファイルパス();
+        ZipUtil.createFromFolder(zipPath, filePath);
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(書庫化ファイル名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(zipPath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(
+                new SharedFileDirectAccessDescriptor(entry, 書庫化ファイル名), response);
     }
 
     /**
@@ -1036,6 +1045,10 @@ public class NinteichosaIrai {
 
     private RString getファイル名(RString ファイル名, RString 調査員コード) {
         return ファイル名.concat("_").concat(調査員コード).concat(".csv");
+    }
+
+    private RString getZipファイルパス() {
+        return Path.combinePath(Path.getTmpDirectoryPath(), 書庫化ファイル名);
     }
 
     private ChosainInfoMobileCsvEntity getChosainInfoCsvData(NinteichosaIraiChosainBusiness 調査結果入力用調査員データ) {

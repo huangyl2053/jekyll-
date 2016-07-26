@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalRep
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.internalreportoutput.InternalReportServiceFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -69,12 +71,13 @@ public class FukaErrorReportView {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_LINE = new RString("_");
     private static final RString CSV = new RString(".csv");
-    private static final RString DBBWF33004 = new RString("DBBWF33004");
-    private static final RString DBBWF34004 = new RString("DBBWF34004");
-    private static final RString DBBWF36004 = new RString("DBBWF36004");
-    private static final RString DBBWF43004 = new RString("DBBWF43004");
-    private static final RString DBBWF44004 = new RString("DBBWF44004");
-    private static final RString DBBWF45004 = new RString("DBBWF45004");
+    private static final RString DBBMN33004 = new RString("DBBMN33004");
+    private static final RString DBBMN34004 = new RString("DBBMN34004");
+    private static final RString DBBMN36004 = new RString("DBBMN36004");
+    private static final RString DBBMN35006 = new RString("DBBMN35006");
+    private static final RString DBBMN43004 = new RString("DBBMN43004");
+    private static final RString DBBMN44004 = new RString("DBBMN44004");
+    private static final RString DBBMN45004 = new RString("DBBMN45004");
     private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
     private static final RString 普徴仮算定賦課 = new RString("普徴仮算定賦課");
     private static final RString 仮算定異動賦課 = new RString("仮算定異動賦課");
@@ -93,10 +96,9 @@ public class FukaErrorReportView {
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
         RString batchID = RString.EMPTY;
         RDateTime 基準日時 = RDateTime.MIN;
-        if (ResponseHolder.getFlowId().equals(DBBWF33004) || ResponseHolder.getFlowId().equals(DBBWF34004)
-                || ResponseHolder.getFlowId().equals(DBBWF36004) || ResponseHolder.getFlowId().equals(DBBWF43004)
-                || ResponseHolder.getFlowId().equals(DBBWF44004) || ResponseHolder.getFlowId().equals(DBBWF45004)) {
-            ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID();
+        RString menuId = getMenuId();
+        if (!RString.isNullOrEmpty(menuId)) {
+            ShoriDateKanri shori = FukaErrorListService.createInstance().getFukaBatchID(menuId);
             if (shori != null) {
                 batchID = getバッチID変換(shori);
                 基準日時 = shori.get基準日時().getRDateTime();
@@ -139,6 +141,7 @@ public class FukaErrorReportView {
         List<FukaErrorList> 賦課エラー情報 = FukaErrorListService.createInstance().
                 getFukaErrorList(div.getCcdFukaErrorCommon().getSelectedListCreationDateTime()).records();
         createHandler(div).initialize(賦課エラー情報);
+        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
         return ResponseData.of(div).respond();
     }
 
@@ -205,6 +208,8 @@ public class FukaErrorReportView {
 
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
+            ViewStateHolder.put(ViewStateKeys.資格対象者,
+                    new TaishoshaKey(fukaErrorList.get被保険者番号(), fukaErrorList.get識別コード(), SetaiCode.EMPTY));
             return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.資格不整合修正).
                     parameter(DBB0020002TransitionEventName.資格不整合修正.getName());
         } else {
@@ -218,7 +223,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。
+     * 即時賦課更正処理へ遷移するボタンをクリックした際に実行されるイベントです。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -228,6 +233,8 @@ public class FukaErrorReportView {
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
 
+            ViewStateHolder.put(ViewStateKeys.資格対象者,
+                    new TaishoshaKey(fukaErrorList.get被保険者番号(), fukaErrorList.get識別コード(), SetaiCode.EMPTY));
             return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.即時賦課更正).
                     parameter(DBB0020002TransitionEventName.即時賦課更正.getName());
         } else {
@@ -251,7 +258,10 @@ public class FukaErrorReportView {
         FukaErrorList errorList = ViewStateHolder.get(ViewStateKeys.賦課エラー情報, FukaErrorList.class);
         FukaErrorListService service = FukaErrorListService.createInstance();
         service.saveAs処理済み(errorList);
-        createHandler(div).initialize(service.getFukaErrorList(errorList.get内部帳票作成日時()).records());
+        List<FukaErrorList> 賦課エラー情報
+                = FukaErrorListService.createInstance().getFukaErrorList(errorList.get内部帳票作成日時()).records();
+        createHandler(div).initialize(賦課エラー情報);
+        ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));
         return ResponseData.of(div).respond();
     }
 
@@ -299,6 +309,31 @@ public class FukaErrorReportView {
         }
         if (過年度賦課.equals(shori.get処理名())) {
             return new RString("DBB055001_KanendoIdoFuka");
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getMenuId() {
+        if (ResponseHolder.getMenuID().equals(DBBMN33004)) {
+            return 特徴仮算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN34004)) {
+            return 普徴仮算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN36004)) {
+            return 仮算定異動賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN35006)) {
+            return 特徴平準化計算_8月分;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN43004)) {
+            return 本算定賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN44004)) {
+            return 異動賦課;
+        }
+        if (ResponseHolder.getMenuID().equals(DBBMN45004)) {
+            return 過年度賦課;
         }
         return RString.EMPTY;
     }

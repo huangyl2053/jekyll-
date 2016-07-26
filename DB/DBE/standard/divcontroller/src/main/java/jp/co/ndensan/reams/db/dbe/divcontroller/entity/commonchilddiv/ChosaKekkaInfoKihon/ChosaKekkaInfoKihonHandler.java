@@ -81,14 +81,16 @@ public class ChosaKekkaInfoKihonHandler {
      * 利用施設一覧を取得します。
      */
     private void setDataSourcre1(List<ChosaKekkaInfoKihonBusiness> chosaKekkaInfoGaikyoList) {
-        if (chosaKekkaInfoGaikyoList.get(0).get認定調査実施年月日() != null) {
-            kihonDiv.getTxtNinteichosaJisshiYMD().setValue(new RDate(chosaKekkaInfoGaikyoList.get(0).get認定調査実施年月日().toString()));
+        if (chosaKekkaInfoGaikyoList != null && !chosaKekkaInfoGaikyoList.isEmpty()) {
+            if (chosaKekkaInfoGaikyoList.get(0).get認定調査実施年月日() != null) {
+                kihonDiv.getTxtNinteichosaJisshiYMD().setValue(new RDate(chosaKekkaInfoGaikyoList.get(0).get認定調査実施年月日().toString()));
+            }
+            kihonDiv.getTxtChosaJisshiBashoMeisho().setValue(chosaKekkaInfoGaikyoList.get(0).get認定調査実施場所名称());
+            kihonDiv.getKihonChosaPanel().getTxtNinchishoNichijoSeikatsuJiritsudoCode().setValue(NinchishoNichijoSeikatsuJiritsudoCode.
+                    toValue(new RString(chosaKekkaInfoGaikyoList.get(0).get認定調査_認知症高齢者の日常生活自立度コード().toString())).get名称());
+            kihonDiv.getKihonChosaPanel().getTxtShogaiNichijoSeikatsuJiritsudoCode().setValue(ShogaiNichijoSeikatsuJiritsudoCode.
+                    toValue(new RString(chosaKekkaInfoGaikyoList.get(0).get認定調査_障害高齢者の日常生活自立度コード().toString())).get名称());
         }
-        kihonDiv.getTxtChosaJisshiBashoMeisho().setValue(chosaKekkaInfoGaikyoList.get(0).get認定調査実施場所名称());
-        kihonDiv.getKihonChosaPanel().getTxtNinchishoNichijoSeikatsuJiritsudoCode().setValue(NinchishoNichijoSeikatsuJiritsudoCode.
-                toValue(new RString(chosaKekkaInfoGaikyoList.get(0).get認定調査_認知症高齢者の日常生活自立度コード().toString())).get名称());
-        kihonDiv.getKihonChosaPanel().getTxtShogaiNichijoSeikatsuJiritsudoCode().setValue(ShogaiNichijoSeikatsuJiritsudoCode.
-                toValue(new RString(chosaKekkaInfoGaikyoList.get(0).get認定調査_障害高齢者の日常生活自立度コード().toString())).get名称());
     }
 
     /**

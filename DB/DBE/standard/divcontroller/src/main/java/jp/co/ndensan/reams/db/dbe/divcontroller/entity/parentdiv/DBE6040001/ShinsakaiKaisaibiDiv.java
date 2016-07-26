@@ -21,10 +21,10 @@ public class ShinsakaiKaisaibiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShinsakaiKaisaiYM")
-    private TextBoxDate txtShinsakaiKaisaiYM;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
+    @JsonProperty("txtShinsakaiKaisaiYM")
+    private TextBoxDate txtShinsakaiKaisaiYM;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,6 @@ public class ShinsakaiKaisaibiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtShinsakaiKaisaiYM
-     * @return txtShinsakaiKaisaiYM
-     */
-    @JsonProperty("txtShinsakaiKaisaiYM")
-    public TextBoxDate getTxtShinsakaiKaisaiYM() {
-        return txtShinsakaiKaisaiYM;
-    }
-
-    /*
-     * settxtShinsakaiKaisaiYM
-     * @param txtShinsakaiKaisaiYM txtShinsakaiKaisaiYM
-     */
-    @JsonProperty("txtShinsakaiKaisaiYM")
-    public void setTxtShinsakaiKaisaiYM(TextBoxDate txtShinsakaiKaisaiYM) {
-        this.txtShinsakaiKaisaiYM = txtShinsakaiKaisaiYM;
-    }
-
     /*
      * getbtnKensaku
      * @return btnKensaku
@@ -66,6 +48,24 @@ public class ShinsakaiKaisaibiDiv extends Panel {
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
         this.btnKensaku = btnKensaku;
+    }
+
+    /*
+     * gettxtShinsakaiKaisaiYM
+     * @return txtShinsakaiKaisaiYM
+     */
+    @JsonProperty("txtShinsakaiKaisaiYM")
+    public TextBoxDate getTxtShinsakaiKaisaiYM() {
+        return txtShinsakaiKaisaiYM;
+    }
+
+    /*
+     * settxtShinsakaiKaisaiYM
+     * @param txtShinsakaiKaisaiYM txtShinsakaiKaisaiYM
+     */
+    @JsonProperty("txtShinsakaiKaisaiYM")
+    public void setTxtShinsakaiKaisaiYM(TextBoxDate txtShinsakaiKaisaiYM) {
+        this.txtShinsakaiKaisaiYM = txtShinsakaiKaisaiYM;
     }
 
     // </editor-fold>

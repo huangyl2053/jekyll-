@@ -150,4 +150,5 @@ public interface ITokuchoKariSanteiFukaMapper {
      * @return 特徴仮算定計算後賦課情報Entity (特徴停止)
      */
     List<TokuchoKarisanteiKekkaIchiranTeisiEntity> select特徴仮算定計算後賦課情報_特徴停止(Map<String, Object> parameter);
+
 }

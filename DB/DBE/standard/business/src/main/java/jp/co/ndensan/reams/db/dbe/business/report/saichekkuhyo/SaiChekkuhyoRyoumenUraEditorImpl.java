@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0080-060 xuyannan
  */
-public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenUraEditor {
+public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenEditor {
 
     private static final int 一回目 = 1;
     private static final int 二回目 = 2;
@@ -159,6 +159,7 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenUra
             default:
                 editOtherSource(source, i);
         }
+        source.layout = Layouts.必須;
         return source;
     }
 
@@ -206,7 +207,6 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenUra
             default:
                 break;
         }
-        source.layout = Layouts.必須;
         return source;
     }
 
