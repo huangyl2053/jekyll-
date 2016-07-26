@@ -80,7 +80,7 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<NinteiChosaIraiShudouDiv>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onLoad(NinteiChosaIraiShudouDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new RString("20203790000000002"));
+       
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         if (!RealInitialLocker.tryGetLock(get排他キー())) {
             throw new PessimisticLockingException();
