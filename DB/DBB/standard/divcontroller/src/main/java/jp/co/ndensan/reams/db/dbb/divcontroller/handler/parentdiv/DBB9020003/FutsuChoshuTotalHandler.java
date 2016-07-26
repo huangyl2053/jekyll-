@@ -977,10 +977,8 @@ public final class FutsuChoshuTotalHandler {
     }
 
     private void update(RString value, Enum key, RString 理由) {
-        if (!value.equals(DbBusinessConfig.get(key, システム日時, SubGyomuCode.DBB介護賦課))) {
-            BusinessConfig.update(SubGyomuCode.DBB介護賦課, key, value, 理由,
-                    RString.EMPTY, システム日時);
-        }
+        BusinessConfig.update(SubGyomuCode.DBB介護賦課, key, value, 理由,
+                RString.EMPTY, システム日時);
     }
 
     private List<Enum> create過年度期情報_口座対象者プリント条件() {
