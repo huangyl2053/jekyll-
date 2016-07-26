@@ -540,13 +540,13 @@ public class ShujiiIkenshoSakuseiIrai {
         if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
-            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+            if (new RString("明").equals(birthYMD.wareki().getEra())) {
                 iraishoItem.setBirthGengoShowa(星);
                 iraishoItem.setBirthGengoTaisho(星);
-            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("大").equals(birthYMD.wareki().getEra())) {
                 iraishoItem.setBirthGengoMeiji(星);
                 iraishoItem.setBirthGengoShowa(星);
-            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
                 iraishoItem.setBirthGengoTaisho(星);
                 iraishoItem.setBirthGengoMeiji(星);
             }
@@ -621,16 +621,16 @@ public class ShujiiIkenshoSakuseiIrai {
         business.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
-            business.setBirthYY(birthYMD.getYear().toDateString());
-            business.setBirthMM(new RString(String.valueOf(birthYMD.getMonthValue())));
-            business.setBirthDD(new RString(String.valueOf(birthYMD.getDayValue())));
-            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+            business.setBirthYY(birthYMD.wareki().getYear().substring(数字_1));
+            business.setBirthMM(birthYMD.wareki().getMonth());
+            business.setBirthDD(birthYMD.wareki().getDay());
+            if (new RString("明").equals(birthYMD.wareki().getEra())) {
                 business.setBirthGengoShowa(星);
                 business.setBirthGengoTaisho(星);
-            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("大").equals(birthYMD.wareki().getEra())) {
                 business.setBirthGengoMeiji(星);
                 business.setBirthGengoShowa(星);
-            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
                 business.setBirthGengoTaisho(星);
                 business.setBirthGengoMeiji(星);
             }
@@ -822,13 +822,13 @@ public class ShujiiIkenshoSakuseiIrai {
         if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
-            if (new RString("明").equals(birthYMD.getYear().wareki().getEra())) {
+            if (new RString("明").equals(birthYMD.wareki().getEra())) {
                 item.setBirthGengoShowa(星);
                 item.setBirthGengoTaisho(星);
-            } else if (new RString("大").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("大").equals(birthYMD.wareki().getEra())) {
                 item.setBirthGengoMeiji(星);
                 item.setBirthGengoShowa(星);
-            } else if (new RString("昭").equals(birthYMD.getYear().wareki().getEra())) {
+            } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
                 item.setBirthGengoTaisho(星);
                 item.setBirthGengoMeiji(星);
             }
