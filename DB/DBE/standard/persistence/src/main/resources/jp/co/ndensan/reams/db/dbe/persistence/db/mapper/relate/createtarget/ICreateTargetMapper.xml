@@ -113,7 +113,7 @@
         <result property="前回の認定有効期間終了"   column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医医療機関番号"   column="A_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医番号"   column="A_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="意見書依頼日"   column="D_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="意見書依頼日"   column="D_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="意見書入手日"   column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査依頼日"  column="G_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査実施日"  column="H_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -218,7 +218,7 @@
            , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
            , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
            , A."shujiiCode"                             AS "A_shujiiCode"
-           , D."ikenshoIraiRirekiNo"                    AS "D_ikenshoIraiRirekiNo"
+           , D."ikenshoSakuseiIraiYMD"                  AS "D_ikenshoSakuseiIraiYMD"
            , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
            , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
            , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
@@ -411,8 +411,7 @@
                 AND P001."shisetsuRiyoFlag" = TRUE 
                 AND P001."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode" 
               ORDER BY
-                P001."remban" 
-              LIMIT(1)
+                P001."remban"
             ) AS PO1 
               ON A."shinseishoKanriNo" = PO1."PO1_shinseishoKanriNo" 
             LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS R 
@@ -495,8 +494,7 @@
                     AND A2."logicalDeletedFlag" = FALSE
                 ) 
               ORDER BY
-                P003."remban" 
-              LIMIT(1)
+                P003."remban"
             ) AS P02 
               ON A."shinseishoKanriNo" = P02."P02_shinseishoKanriNo" 
             LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS Z 
@@ -531,8 +529,7 @@
               WHERE
                 A."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
               ORDER BY
-                A."shinseishoKanriNo" 
-              LIMIT(1)
+                A."shinseishoKanriNo"
             ) AS A2 
               ON A."shinseishoKanriNo" = A2."A2_shinseishoKanriNo" 
           WHERE

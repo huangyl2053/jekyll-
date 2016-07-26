@@ -333,17 +333,17 @@ public class CreateTarget {
     private CreateTargetCsvEntity get主治医意見書(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().get識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())) {
-            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番15));
-            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番16));
-            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番17));
-            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番18));
-            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番14));
+            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番2));
+            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番3));
+            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番4));
+            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番5));
+            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番1));
         } else {
-            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番14));
-            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番15));
-            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番16));
-            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番68));
-            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番13));
+            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番1));
+            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番2));
+            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番3));
+            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番6));
+            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番0));
         }
         return data;
     }
