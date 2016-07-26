@@ -51,6 +51,7 @@
         <result property="nijiHanteiYMD" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="remban" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="researchItem" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter" fetchSize="500">
@@ -67,6 +68,7 @@
                    ,T5201."ninteichosaKigenYMD"
                    ,T5101."koroshoIfShikibetsuCode"
                    ,T5101."ninteiShinseiYMD"
+                   ,T7051."shichosonCode"
                FROM rgdb."DbT5101NinteiShinseiJoho"  T5101
                    INNER JOIN rgdb."DbT7051KoseiShichosonMaster"  T7051
                         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
@@ -181,7 +183,9 @@
      </select>
     <select resultOrdered="true" id="select認定調査依頼該当者履歴一覧" resultMap="resultMap_select認定調査依頼情報"
            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter" fetchSize="500">
-                (SELECT
+             
+           SELECT * FROM (
+               (SELECT
                   '直近' AS chokkinKubun
                   , T5101."hihokenshaNo" AS hihokenshaNo
                   , T5101."hihokenshaKana" AS hihokenshaKana
@@ -191,7 +195,8 @@
                   , T5913."chosainShimei" AS chosainShimei
                   , T5201."ninteichosaIraiYMD" AS ninteichosaIraiYMD
                   , T5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCd 
-                FROM
+                  , T5101."ninteiShinseiYMD"        
+               FROM
                   rgdb."DbT5101NinteiShinseiJoho" T5101 
                   INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
                     ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
@@ -220,8 +225,6 @@
                 WHERE
                   T5101."hihokenshaNo" = #{被保険者番号} 
                   AND T5101."logicalDeletedFlag" = FALSE 
-                ORDER BY
-                  T5101."ninteiShinseiYMD" DESC 
                 LIMIT
                   1
               ) 
@@ -236,7 +239,8 @@
                   , T5913."chosainShimei" AS chosainShimei
                   , T5201."ninteichosaIraiYMD" AS ninteichosaIraiYMD
                   , T5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCd 
-                FROM
+                  , T5101."ninteiShinseiYMD"
+               FROM
                   rgdb."DbT5101NinteiShinseiJoho" T5101 
                   INNER JOIN ( 
                     SELECT
@@ -275,9 +279,10 @@
                     AND T5913."jokyoFlag" = True 
                 WHERE
                   T5101."logicalDeletedFlag" = FALSE 
-                ORDER BY
-                  T5101."ninteiShinseiYMD" DESC
-              ) 
+              ) ) temp   
+              ORDER BY
+                  temp.chokkinKubun DESC
+                  ,temp."ninteiShinseiYMD" DESC
         
     </select>
     <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
@@ -373,7 +378,7 @@
                  LEFT JOIN 
                  rgdb."DbT5121ShinseiRirekiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-                 LEFT JOIN 
+                 INNER JOIN 
                   rgdb."DbT5203NinteichosahyoKihonChosa" AS C
                   ON B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
                   AND NOT EXISTS (

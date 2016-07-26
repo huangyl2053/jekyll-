@@ -107,6 +107,9 @@ public class NinteiChosaIraiShudouHandler {
     public void onLoad(List<NinnteiChousairaiShudouBusiness> 認定調査依頼List) {
         if (!認定調査依頼List.isEmpty()) {
             NinnteiChousairaiShudouBusiness 認定調査依頼 = 認定調査依頼List.get(0);
+            div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().initialize(new RString("SimpleInputMode"));
+            div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShichosonCode(認定調査依頼.get市町村コード());
+            div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShinseishoKanriNo(認定調査依頼.get申請書管理番号());
             div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(認定調査依頼.get申請書管理番号()));
             if (!RString.isNullOrEmpty(認定調査依頼.get認定調査依頼履歴番号())) {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(false);

@@ -62,4 +62,5 @@ public class NinnteiChousairaiShudouEntity {
     private RString researchItem;
     private RString chokkinKubun;
     private RString ninteiShinseiShinseijiKubunCd;
+    private RString shichosonCode;
 }

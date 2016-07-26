@@ -490,7 +490,7 @@
                  LEFT JOIN 
                  rgdb."DbT5121ShinseiRirekiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-                 LEFT JOIN 
+                 INNER JOIN 
                   rgdb."DbT5203NinteichosahyoKihonChosa" AS C
                   ON B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
                   AND NOT EXISTS (

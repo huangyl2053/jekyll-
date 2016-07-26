@@ -40,10 +40,10 @@ public class NinteiChosaIraiShudouValidationHandler {
     public ValidationMessageControlPairs checkForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (RString.isNullOrEmpty(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getChosaItakusakiCode())) {
+        if (RString.isNullOrEmpty(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new CheckMessages(UrErrorMessages.必須, "委託先")));
         }
-        if (RString.isNullOrEmpty(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getChosain())) {
+        if (RString.isNullOrEmpty(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new CheckMessages(UrErrorMessages.必須, "調査員")));
         }
         return validPairs;
