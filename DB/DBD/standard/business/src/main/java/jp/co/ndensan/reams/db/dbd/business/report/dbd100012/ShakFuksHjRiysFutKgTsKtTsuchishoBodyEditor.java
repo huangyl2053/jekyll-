@@ -141,13 +141,14 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             source.kakuninNo8 = RString.EMPTY;
             source.kakuninNo9 = RString.EMPTY;
             source.kakuninNo10 = RString.EMPTY;
-
             source.shoninNg = 決定区分_承認;
-            source.riyu1 = item.get社会福祉法人等利用者負担軽減().get非承認理由();
-            // source.riyu2 = RString.EMPTY;
-            // source.riyu3 = RString.EMPTY;
-            // source.riyu4 = RString.EMPTY;
-            // source.riyu5 = RString.EMPTY;
+
+            List<RString> 非承認理由 = item.get社会福祉法人等利用者負担軽減().get非承認理由().split(折り返す符号.toString());
+            source.riyu1 = get非承認理由List(INDEX_0, 非承認理由);
+            source.riyu2 = get非承認理由List(INDEX_1, 非承認理由);
+            source.riyu3 = get非承認理由List(INDEX_2, 非承認理由);
+            source.riyu4 = get非承認理由List(INDEX_3, 非承認理由);
+            source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
 
             if (TeikeibunMojiSize.フォント小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
                 set連絡先他(source);
@@ -167,6 +168,14 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             source.hihokenshaNo = item.get社会福祉法人等利用者負担軽減().get被保険者番号().getColumnValue();
         }
         return source;
+    }
+
+    private RString get非承認理由List(int i, List<RString> 非承認理由) {
+        if (非承認理由.size() >= i + 1) {
+            return 非承認理由.get(i);
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private void set通知文(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {

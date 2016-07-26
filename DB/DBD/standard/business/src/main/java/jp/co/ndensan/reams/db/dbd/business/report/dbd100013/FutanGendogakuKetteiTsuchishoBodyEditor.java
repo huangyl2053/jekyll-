@@ -407,13 +407,18 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         source.futanEn6 = RString.EMPTY;
         source.shoninsinai = 決定区分_承認;
         List<RString> 非承認理由 = item.get負担限度額認定().get非承認理由().split(折り返す符号.toString());
-        Class reportSource = FutanGendogakuKetteiTsuchishoReportSource.class;
-        for (int i = 0; i <= 非承認理由.size(); i++) {
-            try {
-                reportSource.getDeclaredField("riyu".concat(String.valueOf(i + 1))).set(非承認理由.get(i), RString.class);
-            } catch (IllegalAccessException | NoSuchFieldException ex) {
-                break;
-            }
+        source.riyu1 = get非承認理由List(INDEX_0, 非承認理由);
+        source.riyu2 = get非承認理由List(INDEX_1, 非承認理由);
+        source.riyu3 = get非承認理由List(INDEX_2, 非承認理由);
+        source.riyu4 = get非承認理由List(INDEX_3, 非承認理由);
+        source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
+    }
+
+    private RString get非承認理由List(int i, List<RString> 非承認理由) {
+        if (非承認理由.size() >= i + 1) {
+            return 非承認理由.get(i);
+        } else {
+            return RString.EMPTY;
         }
     }
 

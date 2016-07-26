@@ -112,11 +112,13 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
             source.yukoYMD = RString.EMPTY;
             source.ninteiKekka3 = RString.EMPTY;
             source.shoninShinai = マル;
-            source.riyu1 = item.get利用者負担額減額情報().get非承認理由();
-            // source.riyu2 = RString.EMPTY;
-            // source.riyu3 = RString.EMPTY;
-            // source.riyu4 = RString.EMPTY;
-            // source.riyu5 = RString.EMPTY;
+            List<RString> 非承認理由 = item.get利用者負担額減額情報().get非承認理由().split(折り返す符号.toString());
+            source.riyu1 = get非承認理由List(INDEX_0, 非承認理由);
+            source.riyu2 = get非承認理由List(INDEX_1, 非承認理由);
+            source.riyu3 = get非承認理由List(INDEX_2, 非承認理由);
+            source.riyu4 = get非承認理由List(INDEX_3, 非承認理由);
+            source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
+
         }
 
         source.ninteiKekka2 = RString.EMPTY;
@@ -144,6 +146,14 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
         source.shikibetsuCode = item.getIKojin().get識別コード().getColumnValue();
         source.hihokenshaNo = item.get利用者負担額減額情報().get被保険者番号().getColumnValue();
         return source;
+    }
+
+    private RString get非承認理由List(int i, List<RString> 非承認理由) {
+        if (非承認理由.size() >= i + 1) {
+            return 非承認理由.get(i);
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private RiysFutgGengMenjKettTsuchishoReportSource setTitle(RiysFutgGengMenjKettTsuchishoReportSource source,
