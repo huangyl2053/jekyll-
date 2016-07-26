@@ -120,7 +120,7 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
             source.nofushoKanendobun = 半角to全角(納付書共通.get賦課年度表記()).concat("分");
             source.ryoshushoKanendobun = 半角to全角(納付書共通.get賦課年度表記()).concat("分");
             source.nofushoSofusakiName = 納付書共通.get納付者氏名();
-            if (納付書共通.get被代納人氏名() != null) {
+            if (納付書共通.get被代納人氏名() != null && !納付書共通.get被代納人氏名().isEmpty()) {
                 source.nofushoKakko1 = new RString("(");
                 source.nofushoKakko3 = 納付書共通.get被代納人敬称().concat(")");
                 source.ryoshushoKakko1 = new RString("(");
