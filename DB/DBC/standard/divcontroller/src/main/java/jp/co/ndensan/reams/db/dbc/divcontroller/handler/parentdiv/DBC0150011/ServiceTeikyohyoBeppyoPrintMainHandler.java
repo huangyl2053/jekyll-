@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0150011;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.jigosakuseimeisaitouroku.KubunGendo;
 import jp.co.ndensan.reams.db.dbc.business.core.serviceriyohyobeppyo.ServiceRiyohyoBeppyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0150011.ServiceTeikyohyoBeppyoPrintMainDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.teikyohyobeppyo.TeikyohyoBeppyoManager;
@@ -81,9 +80,9 @@ public class ServiceTeikyohyoBeppyoPrintMainHandler {
 
         param.set作成日時(new FlexibleDate(map.get(KEY_作成年月日).toString()));
         param.set利用年月(自己作成計画年月);
-        TeikyohyoBeppyoManager manager = TeikyohyoBeppyoManager.createInstance();
-        KubunGendo 合計情報 = manager.get合計Entity(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
-        param.set合計情報(合計情報);
+//        TeikyohyoBeppyoManager manager = TeikyohyoBeppyoManager.createInstance();
+//        KubunGendo 合計情報 = manager.get合計Entity(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月);
+//        param.set合計情報(合計情報);
         param.set帳票ヘッダー(TeikyohyoBeppyoManager.createInstance().get被保険者情報(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
         param.set帳票情報マップ(TeikyohyoBeppyoManager.createInstance().get事業者別マップ(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));
         param.set短期入所情報(TeikyohyoBeppyoManager.createInstance().get短期入所利用日数(被保険者番号, 対象年月, 履歴番号, 自己作成計画年月));

@@ -18,6 +18,10 @@ public enum ReportIdDBC {
     /**
      * 総合事業費過再審査定通知書情報
      */
+    DBC100057(new ReportId("DBC100057_ServiceRiyohyoBeppyo"), new RString("介護保険サービス利用票（兼居宅サービス計画）・別表 ")),
+    /**
+     * 総合事業費過再審査定通知書情報
+     */
     DBC200080(new ReportId("DBC200080_KyufujissekiKoshinkekkaIchiran"), new RString("総合事業費過再審査定通知書情報")),
     /**
      * 給付実績更新結果情報一覧表
