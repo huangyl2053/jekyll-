@@ -84,7 +84,7 @@ public class SaiketukekaTorokuPanel {
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnCancel(SaiketukekaTorokuPanelDiv div) {
 
-        if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
+        if ((更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
             RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
                     ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
             if (getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値(), 修正前の値)) {
@@ -137,7 +137,7 @@ public class SaiketukekaTorokuPanel {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
 
-        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
 
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             getValidationHandler().validateFor弁明書作成日の必須入力(pairs, div);
