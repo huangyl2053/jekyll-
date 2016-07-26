@@ -124,14 +124,13 @@ public class KyufuTaishoshaScheduleSetteiPanel {
         List<KokuhorenInterfaceKanri> スケジュール履歴情報List
                 = ViewStateHolder.get(ViewStateKeys.スケジュール履歴情報, List.class);
         getHandler(div).to起動中チェック();
-        RString 保存の確認Flag = new RString(UrQuestionMessages.保存の確認.getMessage().getCode());
         RString 交換情報識別番号 = null;
         if (高額介護_メニューID.equals(ResponseHolder.getMenuID())) {
             交換情報識別番号 = 高額介護場合;
         } else if (総合事業高額介護_メニューID.equals(ResponseHolder.getMenuID())) {
             交換情報識別番号 = 総合事業高額介護場合;
         }
-        if (!保存の確認Flag.equals(ResponseHolder.getMessageCode())) {
+        if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
