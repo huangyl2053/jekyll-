@@ -53,10 +53,6 @@ public class ShokkenTorikeshiIchibuSoshitu {
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onLoad(ShokkenTorikeshiIchibuSoshituDiv div) {
 
-        // TODO. for test
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new RString("15226420150600013"));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new RString("1546200010"));
-
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
 
