@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshudoteiichiran.TokushoTaishioIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokubetsuChoshuDoteiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokubetsuchoshudoteimidoteiichiransakusei.TokubetsuChoshuDoteiMiDoteiIchiranSakusei;
@@ -46,7 +47,6 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
     private RString eucFilePath;
     private FileSpoolManager manager;
     private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
-    private final RString reportName = new RString("特別徴収同定一覧表");
     private final RString csvファイル名 = new RString("TokubetsuChoshuDoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
     private final RString 処理年度 = new RString("【処理年度】");
@@ -104,7 +104,7 @@ public class TokubetsuChoshuDoteiIchiranOutputProcess extends SimpleBatchProcess
                 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                reportName,
+                ReportIdDBB.DBB200031.getReportName(),
                 pageSize,
                 csvOutFlag,
                 csvファイル名,

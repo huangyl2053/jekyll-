@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshumidoteiichiran.TokushoTaishioIchiranMidoteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuDoteiMiDoteiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.TokubetsuChoshuMidoteiIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshudoteimidoteiichiran.TokubetsuChoshuMidoteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NenkinHokenshaHantei;
@@ -49,7 +50,6 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
     private RString eucFilePath;
     private FileSpoolManager manager;
     private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
-    private final RString reportName = new RString("特別徴収未同定一覧表");
     private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
     private RString pageSize;
@@ -111,7 +111,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
                 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                reportName,
+                ReportIdDBB.DBB200032.getReportName(),
                 pageSize,
                 csvOutFlag,
                 csvファイル名,
