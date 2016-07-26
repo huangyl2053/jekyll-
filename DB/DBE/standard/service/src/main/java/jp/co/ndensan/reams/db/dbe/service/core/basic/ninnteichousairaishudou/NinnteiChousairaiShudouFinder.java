@@ -56,13 +56,13 @@ public class NinnteiChousairaiShudouFinder {
     /**
      * 認定調査依頼情報を取得します。
      *
-     * @param parametere 認定調査依頼情報パラメータ
+     * @param parameter 認定調査依頼情報パラメータ
      * @return SearchResult<NinnteiChousairaiShudouBusiness> 認定調査依頼情報
      */
     @Transaction
-    public SearchResult<NinnteiChousairaiShudouBusiness> get認定調査依頼情報(NinnteiChousairaiShudouParameter parametere) {
+    public SearchResult<NinnteiChousairaiShudouBusiness> get認定調査依頼情報(NinnteiChousairaiShudouParameter parameter) {
         INinnteiChousairaiShudouMapper mapper = mapperProvider.create(INinnteiChousairaiShudouMapper.class);
-        NinnteiChousairaiShudouEntity entity = mapper.select認定調査依頼情報(parametere);
+        NinnteiChousairaiShudouEntity entity = mapper.select認定調査依頼情報(parameter);
         if (entity == null) {
             return SearchResult.of(Collections.<NinnteiChousairaiShudouBusiness>emptyList(), 0, false);
         }
@@ -74,13 +74,13 @@ public class NinnteiChousairaiShudouFinder {
     /**
      * 更新用認定調査依頼情報を取得します。
      *
-     * @param parametere 認定調査依頼情報パラメータ
+     * @param parameter 認定調査依頼情報パラメータ
      * @return SearchResult<NinteiShinseiJoho> 認定調査依頼情報
      */
     @Transaction
-    public SearchResult<NinteiShinseiJoho> get更新用認定調査依頼情報(NinnteiChousairaiShudouParameter parametere) {
+    public SearchResult<NinteiShinseiJoho> get更新用認定調査依頼情報(NinnteiChousairaiShudouParameter parameter) {
         INinnteiChousairaiShudouMapper mapper = mapperProvider.create(INinnteiChousairaiShudouMapper.class);
-        NinteiShinseiJohoRelateEntity entity = mapper.select更新用認定調査依頼情報(parametere);
+        NinteiShinseiJohoRelateEntity entity = mapper.select更新用認定調査依頼情報(parameter);
         if (entity == null) {
             return SearchResult.of(Collections.<NinnteiChousairaiShudouBusiness>emptyList(), 0, false);
         }
