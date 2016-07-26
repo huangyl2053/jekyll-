@@ -75,7 +75,7 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
     @Override
     protected void initialize() {
         csvFileName = new RString("DUJRENF06_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
         record1Entity = new JigyoHokokuRenkei11or14Entity();
         record2Entity = new JigyoHokokuRenkei11or14Entity();
         record3Entity = new JigyoHokokuRenkei11or14Entity();
