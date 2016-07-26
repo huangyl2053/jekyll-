@@ -271,8 +271,8 @@ public class HanyoListParamHandler {
      */
     private void set初期項目内容() {
         List<RString> items = new ArrayList<>();
-        items.add(new RString("1"));
-        items.add(new RString("3"));
+        items.add(定数1);
+        items.add(定数3);
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(items);
         RString code = DbBusinessConfig.get(ConfigNameDBB.所得引出_住民税減免前後表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
