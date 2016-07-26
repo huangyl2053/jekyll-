@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -51,7 +52,6 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
 
     private static final RString 高額サービス費支給申請書登録 = new RString("DBCMN42001");
     private static final RString 総合事業高額サービス費支給申請書登録 = new RString("DBCMN42002");
-    private static final RString 実績管理番号 = new RString("実績管理番号");
     private static final RString 最新番号 = new RString("最新番号");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
@@ -91,7 +91,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     /**
      * 初期化メソッドです。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KogakuKyuufuTaishouList}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KougakuSabisuhiShikyuuShinnseiTouroku}のインスタンス
      */
     public static KougakuSabisuhiShikyuuShinnseiTouroku createInstance() {
         return InstanceProvider.create(KougakuSabisuhiShikyuuShinnseiTouroku.class);
@@ -128,23 +128,38 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     public boolean is更新処理(KougakuSabisuhiShikyuuShinnseiTourokuEntity 画面DIV, RString メニューID) {
         if (高額サービス費支給申請書登録.equals(メニューID)) {
             if (画面DIV.get高額介護サービス費支給申請Entity() != null
+                    && EntityDataState.Deleted.equals(
+                            画面DIV.get高額介護サービス費支給申請Entity().toEntity().getState())) {
+                upd高額介護支給申請(画面DIV.get高額介護サービス費支給申請Entity());
+            } else if (画面DIV.get高額介護サービス費支給申請Entity() != null
                     && 画面DIV.get高額介護サービス費支給申請Entity().get申請年月日() != null
                     && !画面DIV.get高額介護サービス費支給申請Entity().get申請年月日().isEmpty()) {
                 upd高額介護支給申請(画面DIV.get高額介護サービス費支給申請Entity());
             }
             if (画面DIV.get高額介護サービス費支給判定結果Entity() != null
+                    && EntityDataState.Deleted.equals(
+                            画面DIV.get高額介護サービス費支給判定結果Entity().toEntity().getState())) {
+                upd高額介護支給判定結果(画面DIV.get高額介護サービス費支給判定結果Entity());
+            } else if (画面DIV.get高額介護サービス費支給判定結果Entity() != null
                     && 画面DIV.get高額介護サービス費支給判定結果Entity().get決定年月日() != null
                     && !画面DIV.get高額介護サービス費支給判定結果Entity().get決定年月日().isEmpty()) {
                 upd高額介護支給判定結果(画面DIV.get高額介護サービス費支給判定結果Entity());
             }
-
         } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
             if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
+                    && EntityDataState.Deleted.equals(
+                            画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
+                upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
+            } else if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
                     && 画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日() != null
                     && !画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日().isEmpty()) {
                 upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
             }
-            if (画面DIV.get事業高額介護サービス費支給判定結果Entity() != null
+            if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
+                    && EntityDataState.Deleted.equals(
+                            画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
+                upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
+            } else if (画面DIV.get事業高額介護サービス費支給判定結果Entity() != null
                     && 画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日() != null
                     && !画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日().isEmpty()) {
                 upd事業高額介護支給判定結果(画面DIV.get事業高額介護サービス費支給判定結果Entity());
@@ -230,28 +245,37 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
             HokenshaNo 証記載保険者番号, int 履歴番号, RString 給付実績情報作成区分コード,
             KyufujissekiKogakuKaigoServicehi 給付実績編集用entity) {
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付,
-                実績管理番号, FlexibleDate.getNowDate().getNendo()).nextString();
+                SaibanHanyokeyName.実績管理番号.get名称(), FlexibleDate.getNowDate().getNendo()).nextString();
         if (通し番号 == null) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace(最新番号.toString()));
         } else {
-            給付実績編集用entity.createBuilderForEdit().set通し番号(通し番号).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().set通し番号(通し番号).build();
         }
         if (サービス提供年月.isBeforeOrEquals(平成15年3月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号1).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号1).build();
         } else if (平成15年4月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBefore(平成17年10月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号2).build();
-        } else if (平成17年10月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBefore(平成18年4月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号3).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号2).build();
+        } else if (平成17年10月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成18年4月)) {
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号3).build();
         } else if (平成18年4月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBefore(平成20年4月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号4).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号4).build();
         } else if (平成20年4月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBefore(平成21年4月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号5).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号5).build();
         } else if (平成21年4月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBefore(平成24年4月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号6).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号6).build();
         } else if (平成24年4月.isBeforeOrEquals(サービス提供年月) && サービス提供年月.isBefore(平成27年4月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号7).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号7).build();
         } else if (平成27年4月.isBeforeOrEquals(サービス提供年月)) {
-            給付実績編集用entity.createBuilderForEdit().set交換情報識別番号(定値_交換情報識別番号8).build();
+            給付実績編集用entity = 給付実績編集用entity.createBuilderForEdit().
+                    set交換情報識別番号(定値_交換情報識別番号8).build();
         }
         if (!EntityDataState.Unchanged.equals(給付実績編集用entity.toEntity().getState())) {
             給付実績高額介護サービス費Dac.save(給付実績編集用entity.toEntity());
