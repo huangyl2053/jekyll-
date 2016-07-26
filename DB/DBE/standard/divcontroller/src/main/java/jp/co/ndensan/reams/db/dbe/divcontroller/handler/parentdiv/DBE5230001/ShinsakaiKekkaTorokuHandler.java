@@ -302,7 +302,6 @@ public class ShinsakaiKekkaTorokuHandler {
         }
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
-        div.getKobetsuHyojiArea().setHasData(new RString("1"));
         div.setHdnHasChanged(getSelectItem());
     }
 
@@ -315,7 +314,7 @@ public class ShinsakaiKekkaTorokuHandler {
         if (二次判定日.getValue() != null) {
             div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().setNijiHanteiDate(二次判定日);
         } else {
-            div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().setNijiHanteiDate(null);
+            div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getNijiHanteiDate().setValue(FlexibleDate.EMPTY);
         }
         RString 特定疾病 = div.getKobetsuHyojiArea().getTxtTokuteiShippei().getValue();
         if (!RString.isNullOrEmpty(特定疾病)) {
@@ -355,7 +354,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getNinteiKikanKaishi().setValue(
                     new FlexibleDate(認定期間開始日.toDateString()));
         } else {
-            div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().setNinteiKikanKaishi(null);
+            div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getNinteiKikanKaishi().setValue(FlexibleDate.EMPTY);
         }
         RDate 認定期間終了日 = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
         if (認定期間終了日 != null) {
@@ -435,6 +434,14 @@ public class ShinsakaiKekkaTorokuHandler {
     private RString getSelectItem() {
         dgTaishoshaIchiran_Row row = div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem();
         RStringBuilder rsb = new RStringBuilder();
+        RString ninteiKikanKaishi = RString.EMPTY;
+        RString ninteiKikanShuryo = RString.EMPTY;
+        if (row.getNinteiKikanKaishi() != null) {
+            ninteiKikanKaishi = new RString(row.getNinteiKikanKaishi().getValue().toString());
+        }
+        if (row.getNinteiKikanKaishi() != null) {
+            ninteiKikanShuryo = new RString(row.getNinteiKikanShuryo().getValue().toString());
+        }
         rsb.append(row.getShinsakaiJunjo())
                 .append(row.getSeiNenGaBi())
                 .append(row.getShinseiKubunShinseiji())
@@ -445,8 +452,8 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(row.getJotaizo())
                 .append(row.getHanteiKekkaCode())
                 .append(row.getKonkaiNijiHanteiCode())
-                .append(row.getNinteiKikanKaishi().getValue().toString())
-                .append(row.getNinteiKikanShuryo().getValue().toString())
+                .append(ninteiKikanKaishi)
+                .append(ninteiKikanShuryo)
                 .append(row.getNinteiKikanTukisu().toString())
                 .append(row.getHidMemo())
                 .append(row.getHidIkenCode())
@@ -457,6 +464,16 @@ public class ShinsakaiKekkaTorokuHandler {
 
     private RString getInputItem() {
         RStringBuilder rsb = new RStringBuilder();
+        TextBoxDate kikanFrom = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom();
+        TextBoxDate kikanTo = div.getKobetsuHyojiArea().getTxtNinteiKikanTo();
+        RString ninteiKikanKaishi = RString.EMPTY;
+        RString ninteiKikanShuryo = RString.EMPTY;
+        if (kikanFrom != null) {
+            ninteiKikanKaishi = kikanFrom.getValue().toDateString();
+        }
+        if (kikanTo != null) {
+            ninteiKikanShuryo = kikanTo.getValue().toDateString();
+        }
         rsb.append(div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().getValue())
                 .append(div.getKobetsuHyojiArea().getTxtBirthYMD().getValue())
                 .append(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
@@ -467,8 +484,8 @@ public class ShinsakaiKekkaTorokuHandler {
                 .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedValue())
                 .append(div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey())
                 .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
-                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue().toDateString())
-                .append(div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue().toDateString())
+                .append(ninteiKikanKaishi)
+                .append(ninteiKikanShuryo)
                 .append(div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() != null ? div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue() : RString.EMPTY)
                 .append(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue())
                 .append(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey())
@@ -576,9 +593,11 @@ public class ShinsakaiKekkaTorokuHandler {
                         new Decimal(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
             }
             FlexibleDate shinseiDay = div.getKobetsuHyojiArea().getTxtShinseiDay().getValue();
-            div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setValue(new RDate(shinseiDay.toString()));
-            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(
-                    div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().intValue()).toString()));
+            if (shinseiDay != null && !shinseiDay.isEmpty()) {
+                div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setValue(new RDate(shinseiDay.toString()));
+                div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(
+                        div.getKobetsuHyojiArea().getTxtNinteiKikanMonth().getValue().intValue()).toString()));
+            }
         }
     }
 

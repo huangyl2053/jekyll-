@@ -135,12 +135,18 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5502ShinsakaiWariateJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get介護認定審査会割当情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (null == entityList.get(0) || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
-        }
+        int count = 0;
         for (DbT5502ShinsakaiWariateJohoEntity entity : entityList) {
-            entity.initializeMd5();
-            resultList.add(new ShinsakaiWariateJoho(entity));
+            if (null == entity || entityList.isEmpty()) {
+                count = count + 1;
+                continue;
+            } else {
+                entity.initializeMd5();
+                resultList.add(new ShinsakaiWariateJoho(entity));
+            }
+        }
+        if (entityList.size() == count) {
+            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         return SearchResult.of(resultList, 0, false);
     }
@@ -157,12 +163,18 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5101NinteiShinseiJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get要介護認定申請情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (null == entityList.get(0) || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
-        }
+        int count = 0;
         for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
-            entity.initializeMd5();
-            resultList.add(new NinteiShinseiJoho(entity));
+            if (null == entity || entityList.isEmpty()) {
+                count = count + 1;
+                continue;
+            } else {
+                entity.initializeMd5();
+                resultList.add(new NinteiShinseiJoho(entity));
+            }
+        }
+        if (entityList.size() == count) {
+            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         return SearchResult.of(resultList, 0, false);
     }
@@ -179,12 +191,18 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5102NinteiKekkaJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get要介護認定結果情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (null == entityList.get(0) || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
-        }
+        int count = 0;
         for (DbT5102NinteiKekkaJohoEntity entity : entityList) {
-            entity.initializeMd5();
-            resultList.add(new NinteiKekkaJoho(entity));
+            if (null == entity || entityList.isEmpty()) {
+                count = count + 1;
+                continue;
+            } else {
+                entity.initializeMd5();
+                resultList.add(new NinteiKekkaJoho(entity));
+            }
+        }
+        if (entityList.size() == count) {
+            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         return SearchResult.of(resultList, 0, false);
     }
@@ -201,12 +219,18 @@ public class ShinsakaiKekkaTorokuManager {
         List<DbT5105NinteiKanryoJohoEntity> entityList
                 = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class)
                 .get要介護認定完了情報(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (entityList.isEmpty()) {
-            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
-        }
+        int count = 0;
         for (DbT5105NinteiKanryoJohoEntity entity : entityList) {
-            entity.initializeMd5();
-            resultList.add(new NinteiKanryoJoho(entity));
+            if (null == entity || entityList.isEmpty()) {
+                count = count + 1;
+                continue;
+            } else {
+                entity.initializeMd5();
+                resultList.add(new NinteiKanryoJoho(entity));
+            }
+        }
+        if (entityList.size() == count) {
+            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         return SearchResult.of(resultList, 0, false);
     }
