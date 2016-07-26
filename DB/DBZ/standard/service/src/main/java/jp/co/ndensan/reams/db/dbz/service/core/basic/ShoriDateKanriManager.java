@@ -192,6 +192,24 @@ public class ShoriDateKanriManager {
     /**
      * 処理日付管理マスタを返します。
      *
+     * @param サブ業務コード SubGyomuCode
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get抽出サブ業務コード(SubGyomuCode サブ業務コード) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+
+        DbT7022ShoriDateKanriEntity entity = dac.selectSubGyomuCode(サブ業務コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
      * @param 処理名 ShoriName
      * @param 年度 Nendo
      * @return ShoriDateKanri
