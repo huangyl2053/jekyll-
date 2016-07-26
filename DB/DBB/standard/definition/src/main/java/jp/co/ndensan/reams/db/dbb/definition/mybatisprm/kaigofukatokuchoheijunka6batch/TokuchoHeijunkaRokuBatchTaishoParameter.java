@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TokuchoHeijunkaRokuBatchTaishoParameter implements Cloneable, Serializable {
+public final class TokuchoHeijunkaRokuBatchTaishoParameter implements Serializable {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;

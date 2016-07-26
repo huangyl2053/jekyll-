@@ -5,15 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 特別徴収平準化計算（特別徴収6月分）結果一覧表帳票クラスです。
@@ -24,12 +30,64 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
 
     private static final ReportId ID = ReportIdDBB.DBB200003.getReportId();
     private static final RString ENCLOSURE = new RString("\"");
+    private final List<RString> pageBreakKeys;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
 
     /**
      * コンストラクタです。
+     *
+     * @param outputOrder IOutputOrder
      */
-    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty() {
+    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty(IOutputOrder outputOrder) {
         super(SubGyomuCode.DBB介護賦課, ID);
+        pageBreakKeys = new ArrayList<>();
+
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
+
+        List<ISetSortItem> list = outputOrder.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+
+        if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
+            改頁１ = list.get(0).get項目名();
+        }
+        if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
+            改頁２ = list.get(INDEX_1).get項目名();
+        }
+        if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
+            改頁３ = list.get(INDEX_2).get項目名();
+        }
+        if (list.size() > INDEX_3 && list.get(INDEX_3).is改頁項目()) {
+            改頁４ = list.get(INDEX_3).get項目名();
+        }
+        if (list.size() > INDEX_4 && list.get(INDEX_4).is改頁項目()) {
+            改頁５ = list.get(INDEX_4).get項目名();
+        }
+
+//        if (!改頁１.isEmpty()) {
+//            pageBreakKeys.add(改頁１);
+//        }
+//        if (!改頁２.isEmpty()) {
+//            pageBreakKeys.add(改頁２);
+//        }
+//        if (!改頁３.isEmpty()) {
+//            pageBreakKeys.add(改頁３);
+//        }
+//        if (!改頁４.isEmpty()) {
+//            pageBreakKeys.add(改頁４);
+//        }
+//        if (!改頁５.isEmpty()) {
+//            pageBreakKeys.add(改頁５);
+//        }
     }
 
     /**
@@ -40,10 +98,25 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
      * @return Breaker
      */
     @Override
-    protected Breakers<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> defineBreakers(
+    public Breakers<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> defineBreakers(
             Breakers<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> breakers,
             BreakerCatalog<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> catalog) {
-        return super.defineBreakers(breakers, catalog);
+        return breakers.add(catalog.new SimplePageBreaker(
+
+
+
+            pageBreakKeys) {
+            @Override
+            public ReportLineRecord<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> occuredBreak(
+                    ReportLineRecord<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> currentRecord,
+                    ReportLineRecord<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+                    return currentRecord;
+                }
+                return currentRecord;
+            }
+        }).fixed();
     }
 
     /**
@@ -54,11 +127,11 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
         /**
          * 町域コード
          */
-        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("choikiCode").concat(ENCLOSURE))),
+        町域コード(new RString("0002"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_choikiCode").concat(ENCLOSURE))),
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("gyoseikuCode").concat(ENCLOSURE))),
+        行政区コード(new RString("0004"), new RString(""), ENCLOSURE.concat(new RString("ShikibetsuTaisho_gyoseikuCode").concat(ENCLOSURE))),
         /**
          * 世帯コード
          */

@@ -164,10 +164,14 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final RString 備考コード_結果0円以下 = new RString("3");
     private static final RString 備考コード_対象外減額 = new RString("4");
     private static final RString 備考コード_対象外増額 = new RString("5");
-    private static final RString 年金特徴回付情報_テーブル = new RString("年金特徴回付情報.");
-    private static final RString 世帯コード = new RString("\"setaiCode\"");
+    private static final RString 計算後情報_テーブル = new RString("計算後情報.");
+    private static final RString 対象外データテンプ_テーブル = new RString("対象外データTemp.");
     private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
+    private static final RString 世帯コード = new RString("\"setaiCode\"");
+    private static final RString 賦課_識別コード = new RString("\"dbT2002Fuka_shikibetsuCode\"");
+    private static final RString 賦課_被保険者番号 = new RString("\"dbT2002Fuka_hihokenshaNo\"");
+    private static final RString 賦課_世帯コード = new RString("\"dbT2002Fuka_setaiCode\"");
     private final MapperProvider mapperProvider;
     private final DbT2002FukaDac dbT2002FukaDac;
     private final DbT2003KibetsuDac dbT2003KibetsuDac;
@@ -463,9 +467,9 @@ public class KaigoFukaTokuchoHeijunka6Batch {
             出力順 = MyBatisOrderByClauseCreator.create(
                     TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty.DBB200003_HeijunkaKeisanJuneKekkaIchiran.class, outputOrder);
         }
-        出力順 = 出力順再設定(出力順);
+        RString 対象者出力順 = 出力順設定(出力順);
         TokuchoHeijunkaRokuBatchTaishoParameter parameter = new TokuchoHeijunkaRokuBatchTaishoParameter(
-                調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 出力順);
+                調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 対象者出力順);
         List<TokuchoHeijunkaRokuBatchTaishoshaEntity> 対象者データリスト = mapper.get対象者データ(parameter);
         List<TokuchoHeijyunkaTaishoshaEntity> 特徴平準化結果対象者一覧表リスト = new ArrayList<>();
         if (対象者データリスト != null && !対象者データリスト.isEmpty()) {
@@ -494,7 +498,10 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         if (!taishoshaList.isEmpty()) {
             taishoshaSourceData = printService.printTaishosha(taishoshaList, 出力順ID, 調定日時, 賦課年度);
         }
-        List<TokuchoHeijunkaRokuBatchTaishogaiEntity> 対象外データリスト = mapper.get対象外データ(parameter);
+        RString 対象外出力順 = 出力順再設定(出力順);
+        TokuchoHeijunkaRokuBatchTaishoParameter 対象外param = new TokuchoHeijunkaRokuBatchTaishoParameter(
+                調定年度, 賦課年度, 調定日時, 調定年度.minusYear(NUM_1), 対象外出力順);
+        List<TokuchoHeijunkaRokuBatchTaishogaiEntity> 対象外データリスト = mapper.get対象外データ(対象外param);
         List<TokuchoHeijyunkaTaishogaiEntity> 特徴平準化結果対象外一覧表リスト = new ArrayList<>();
         for (TokuchoHeijunkaRokuBatchTaishogaiEntity 対象外データ : 対象外データリスト) {
             FukaJohoRelateEntity 対象外データTemp = 対象外データ.get対象外データTemp();
@@ -578,15 +585,28 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         バッチ出力条件リストの出力(調定年度, 賦課年度, 市町村コード, 市町村名, 出力ページ数, 出力順ID);
     }
 
-    private RString 出力順再設定(RString 出力順) {
+    private RString 出力順設定(RString 出力順) {
         if (出力順.contains(世帯コード)) {
-            出力順 = 出力順.replace(世帯コード, 年金特徴回付情報_テーブル.concat(世帯コード));
+            出力順 = 出力順.replace(世帯コード, 計算後情報_テーブル.concat(世帯コード));
         }
         if (出力順.contains(識別コード)) {
-            出力順 = 出力順.replace(識別コード, 年金特徴回付情報_テーブル.concat(識別コード));
+            出力順 = 出力順.replace(識別コード, 計算後情報_テーブル.concat(識別コード));
         }
         if (出力順.contains(被保険者番号)) {
-            出力順 = 出力順.replace(被保険者番号, 年金特徴回付情報_テーブル.concat(被保険者番号));
+            出力順 = 出力順.replace(被保険者番号, 計算後情報_テーブル.concat(被保険者番号));
+        }
+        return 出力順;
+    }
+
+    private RString 出力順再設定(RString 出力順) {
+        if (出力順.contains(世帯コード)) {
+            出力順 = 出力順.replace(世帯コード, 対象外データテンプ_テーブル.concat(賦課_世帯コード));
+        }
+        if (出力順.contains(識別コード)) {
+            出力順 = 出力順.replace(識別コード, 対象外データテンプ_テーブル.concat(賦課_識別コード));
+        }
+        if (出力順.contains(被保険者番号)) {
+            出力順 = 出力順.replace(被保険者番号, 対象外データテンプ_テーブル.concat(賦課_被保険者番号));
         }
         return 出力順;
     }

@@ -17,25 +17,8 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRel
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TokuchoHeijunkaRokuBatchFukaJohoResult implements Cloneable, Serializable {
+public final class TokuchoHeijunkaRokuBatchFukaJohoResult implements Serializable {
 
     private FukaJohoRelateEntity 賦課の情報;
     private TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果;
-
-    /**
-     * コンストラクタです。
-     */
-    public TokuchoHeijunkaRokuBatchFukaJohoResult() {
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param 賦課の情報 FukaJohoRelateEntity
-     * @param 平準化計算結果 TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity
-     */
-    public TokuchoHeijunkaRokuBatchFukaJohoResult(FukaJohoRelateEntity 賦課の情報, TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果) {
-        this.賦課の情報 = 賦課の情報;
-        this.平準化計算結果 = 平準化計算結果;
-    }
 }
