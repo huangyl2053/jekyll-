@@ -19,6 +19,7 @@ public final class ChosaKekkaInfoGaikyoParameter {
     private final RString shinseishoKanriNo;
     private final int ninteichosaRirekiNo;
     private final RString gaikyoChosaTextImageKubun;
+    private final RString gaikyoTokkiTextImageKubun;
 
     /**
      * コンストラクタです。
@@ -26,15 +27,18 @@ public final class ChosaKekkaInfoGaikyoParameter {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 概況調査テキスト_イメージ区分 概況調査テキスト_イメージ区分
+     * @param 概況特記テキスト_イメージ区分 概況特記テキスト_イメージ区分
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private ChosaKekkaInfoGaikyoParameter(
             RString shinseishoKanriNo,
             int ninteichosaRirekiNo,
-            RString gaikyoChosaTextImageKubun) {
+            RString gaikyoChosaTextImageKubun,
+            RString gaikyoTokkiTextImageKubun) {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
         this.gaikyoChosaTextImageKubun = gaikyoChosaTextImageKubun;
+        this.gaikyoTokkiTextImageKubun = gaikyoTokkiTextImageKubun;
     }
 
     /**
@@ -43,12 +47,14 @@ public final class ChosaKekkaInfoGaikyoParameter {
      * @param shinseishoKanriNo 申請書管理番号
      * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      * @param gaikyoChosaTextImageKubun 概況調査テキスト_イメージ区分
+     * @param gaikyoTokkiTextImageKubun 概況特記テキスト_イメージ区分
      * @return 画面で入力した設定パラメータ
      */
     public static ChosaKekkaInfoGaikyoParameter createGamenParam(
             RString shinseishoKanriNo,
             int ninteichosaRirekiNo,
-            RString gaikyoChosaTextImageKubun) {
-        return new ChosaKekkaInfoGaikyoParameter(shinseishoKanriNo, ninteichosaRirekiNo, gaikyoChosaTextImageKubun);
+            RString gaikyoChosaTextImageKubun,
+            RString gaikyoTokkiTextImageKubun) {
+        return new ChosaKekkaInfoGaikyoParameter(shinseishoKanriNo, ninteichosaRirekiNo, gaikyoChosaTextImageKubun, gaikyoTokkiTextImageKubun);
     }
 }

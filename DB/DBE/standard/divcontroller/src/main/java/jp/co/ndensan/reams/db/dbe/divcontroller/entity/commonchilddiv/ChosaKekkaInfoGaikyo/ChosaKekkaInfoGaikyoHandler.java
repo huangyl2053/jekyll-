@@ -20,21 +20,18 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.Ga
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk99A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg02A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg06A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg99A;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyoukSgJg;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査結果情報照会_概況調査の取得するクラスです。
@@ -68,9 +65,10 @@ public class ChosaKekkaInfoGaikyoHandler {
      * @param chosaKekkaInfoGaikyoList 認定調査結果情報照会_概況調査クラス
      * @param serviceJokyos 認定調査結果情報照会_概況調査クラス
      * @param shisetsuRiyos 認定調査結果情報照会_概況調査クラス
+     * @param path イメージ共有ファイルID
      */
     public void onLoad(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList, List<RembanServiceJokyoBusiness> serviceJokyos,
-            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos) {
+            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos, RString path) {
         gaikyoDiv.getTxtNinteichosaJisshiYMD().setDisabled(true);
         gaikyoDiv.getTxtChosaJisshiBashoMeisho().setDisabled(true);
         gaikyoDiv.getTokkiPanel().setDisabled(true);
@@ -83,17 +81,17 @@ public class ChosaKekkaInfoGaikyoHandler {
         gaikyoDiv.getTxtRiyoShisetsuShimei().setDisabled(true);
         gaikyoDiv.getTxtRiyoShisetsuJusho().setDisabled(true);
         gaikyoDiv.getTxtTelNo().setDisabled(true);
-        if (ONE.equals(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class))) {
+        if (ONE.equals(gaikyoDiv.getGaikyoTokkiTextImageKubun())) {
             gaikyoDiv.getGaikyoTokkiTextPanel().setDisabled(true);
             gaikyoDiv.getGaikyoTokkiTextPanel().setVisible(true);
-            gaikyoDiv.getGaikyoTokkiImagePanel().setDisabled(true);
             gaikyoDiv.getGaikyoTokkiImagePanel().setVisible(false);
         }
-        if (TWO.equals(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class))) {
+        if (TWO.equals(gaikyoDiv.getGaikyoTokkiTextImageKubun())) {
             gaikyoDiv.getGaikyoTokkiImagePanel().setDisabled(true);
             gaikyoDiv.getGaikyoTokkiImagePanel().setVisible(true);
             gaikyoDiv.getGaikyoTokkiTextPanel().setDisabled(true);
             gaikyoDiv.getGaikyoTokkiTextPanel().setVisible(false);
+            gaikyoDiv.getGaikyoTokkiImagePanel().getGaikyoChosaImage().setSrc(path);
         }
         gaikyoDiv.getBtnBack().setDisabled(false);
         setDataSourcre1(shisetsuRiyos);
@@ -136,58 +134,161 @@ public class ChosaKekkaInfoGaikyoHandler {
      */
     private List<dgServiceJokyo_Row> setDataSourcre2(List<RembanServiceJokyoBusiness> serviceJokyos) {
         List<dgServiceJokyo_Row> grdSinsaSeiList = new ArrayList<>();
-        for (RembanServiceJokyoBusiness serviceJokyo : serviceJokyos) {
-            dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
-            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(ONE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg02A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg06A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg09A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg99A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(TWO)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyoukFlg09B.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_02.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_06.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (A_99.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
-            if (B_09.equals(serviceJokyo.get厚労省IF識別コード().value()) && serviceJokyo.getEnum区分().equals(NINE)) {
-                dgJigyoshaItiran.setServiceName1(GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番())).get名称());
-            }
+        int count = 0;
+        if (getkubun(0, serviceJokyos).equals(ONE)) {
+            count = 15;
+        }
+        if (getkubun(0, serviceJokyos).equals(TWO)) {
+            count = 20;
+        }
 
-            grdSinsaSeiList.add(dgJigyoshaItiran);
+        for (int i = 0; i < count; i++) {
+            dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
+            if (A_02.equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                grdSinsaSeiList.add(dgJigyoshaItiran);
+            }
+            if (A_06.equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                grdSinsaSeiList.add(dgJigyoshaItiran);
+            }
+            if (A_09.equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                grdSinsaSeiList.add(dgJigyoshaItiran);
+            }
+            if (A_99.equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                grdSinsaSeiList.add(dgJigyoshaItiran);
+            }
+            if (B_09.equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                grdSinsaSeiList.add(dgJigyoshaItiran);
+            }
         }
         gaikyoDiv.getServiceJokyoPanel().getDgServiceJokyo().setDataSource(grdSinsaSeiList);
         return grdSinsaSeiList;
+    }
+
+    private RString getName(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
+        if (連番 < serviceJokyos.size()) {
+            if ((TWO).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                return GaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            }
+            if (A_02.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            }
+            if (A_06.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            }
+            if (A_09.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            }
+            if (A_99.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            }
+            if (B_09.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())
+                    && (ONE).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                return GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getkubun(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
+        if (連番 < serviceJokyos.size()) {
+            return serviceJokyos.get(連番).getEnum区分();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getTan1(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
+        if (連番 < serviceJokyos.size()) {
+            if ((TWO).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                return GaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+            }
+            if (A_02.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+            }
+            if (A_06.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+            }
+            if (A_09.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+            }
+            if (A_99.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+            }
+            if (B_09.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getTan2(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
+        if (連番 < serviceJokyos.size()) {
+            if ((TWO).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                return GaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+            }
+            if (A_02.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+            }
+            if (A_06.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+            }
+            if (A_09.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+            }
+            if (A_99.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+            }
+            if (B_09.equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
+                return GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getFlag(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
+        if (連番 < serviceJokyos.size()) {
+            return new RString(serviceJokyos.get(連番).getサービスの状況フラグ());
+        }
+        return RString.EMPTY;
     }
 
     private void setDataSourcre3(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList) {

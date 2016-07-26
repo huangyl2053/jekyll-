@@ -60,7 +60,7 @@
         AND 
         DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
         AND 
-        DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun"
+        DbT5206."gaikyoTokkiTextImageKubun" = #{gaikyoTokkiTextImageKubun} 
         WHERE
             DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
             AND 
@@ -153,4 +153,19 @@
             AND 
             DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
     </select>
+    
+    <resultMap id="resultMap_DbT5115ImageEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity" autoMapping="true">
+        <result property="imageSharedFileId" column="DbT5115_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"  />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList4"
+                resultMap="resultMap_DbT5115ImageEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter" fetchSize="500">
+        SELECT 
+        DbT5115."imageSharedFileId" as "DbT5115_imageSharedFileId"
+        FROM
+        rgdb."DbT5115Image" as DbT5115
+        WHERE
+            DbT5115."shinseishoKanriNo" = #{shinseishoKanriNo} 
+    </select>
+    
 </mapper>

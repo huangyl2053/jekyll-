@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.Cho
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.RembanServiceJokyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosakekkainfogaikyo.IChosaKekkaInfoGaikyoMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -103,5 +105,18 @@ public class ChosaKekkaInfoGaikyoFinder {
             businessList.add(new NinteichosahyoShisetsuRiyo(relateEntity));
         }
         return SearchResult.of(businessList, 0, false);
+    }
+
+    /**
+     * イメージ共有ファイルIDを取得します。
+     *
+     * @param イメージ共有ファイルID検索条件 イメージ共有ファイルID検索条件
+     * @return イメージ共有ファイルID検索条件
+     */
+    @Transaction
+    public Image DbT5115Image(ChosaKekkaInfoGaikyoParameter イメージ共有ファイルID検索条件) {
+        IChosaKekkaInfoGaikyoMapper mapper = mapperProvider.create(IChosaKekkaInfoGaikyoMapper.class);
+        DbT5115ImageEntity ninteiEntity = mapper.getChosaKekkaInfoGaikyoList4(イメージ共有ファイルID検索条件);
+        return new Image(ninteiEntity);
     }
 }

@@ -4,15 +4,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @author 自動生成
  */
 public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGaikyoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -66,6 +67,8 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private RString ninteichosaRirekiNo;
     @JsonProperty("gaikyoChosaTextImageKubun")
     private RString gaikyoChosaTextImageKubun;
+    @JsonProperty("gaikyoTokkiTextImageKubun")
+    private RString gaikyoTokkiTextImageKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -397,11 +400,29 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
         this.gaikyoChosaTextImageKubun = gaikyoChosaTextImageKubun;
     }
 
+    /*
+     * getgaikyoTokkiTextImageKubun
+     * @return gaikyoTokkiTextImageKubun
+     */
+    @JsonProperty("gaikyoTokkiTextImageKubun")
+    public RString getGaikyoTokkiTextImageKubun() {
+        return gaikyoTokkiTextImageKubun;
+    }
+
+    /*
+     * setgaikyoTokkiTextImageKubun
+     * @param gaikyoTokkiTextImageKubun gaikyoTokkiTextImageKubun
+     */
+    @JsonProperty("gaikyoTokkiTextImageKubun")
+    public void setGaikyoTokkiTextImageKubun(RString gaikyoTokkiTextImageKubun) {
+        this.gaikyoTokkiTextImageKubun = gaikyoTokkiTextImageKubun;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void onLoad(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList, List<RembanServiceJokyoBusiness> serviceJokyos,
-            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos) {
-        new ChosaKekkaInfoGaikyoHandler(this).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos);
+            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos, RString path) {
+        new ChosaKekkaInfoGaikyoHandler(this).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, path);
     }
 }

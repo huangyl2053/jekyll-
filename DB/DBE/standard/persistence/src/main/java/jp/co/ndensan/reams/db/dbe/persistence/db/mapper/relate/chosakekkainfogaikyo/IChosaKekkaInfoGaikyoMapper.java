@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.RembanServiceJokyoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 
 /**
@@ -41,4 +42,12 @@ public interface IChosaKekkaInfoGaikyoMapper {
      * @return List<DbT5210NinteichosahyoShisetsuRiyoEntity>
      */
     List<DbT5210NinteichosahyoShisetsuRiyoEntity> getChosaKekkaInfoGaikyoList3(ChosaKekkaInfoGaikyoParameter 認定調査票_施設利用検索条件);
+
+    /**
+     * イメージ共有ファイルIDを取得します。
+     *
+     * @param イメージ共有ファイルID検索条件 イメージ共有ファイルID検索条件
+     * @return DbT5115ImageEntity
+     */
+    DbT5115ImageEntity getChosaKekkaInfoGaikyoList4(ChosaKekkaInfoGaikyoParameter イメージ共有ファイルID検索条件);
 }
