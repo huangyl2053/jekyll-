@@ -629,8 +629,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
                     ? new Code(YukoMukoKubun.無効.getコード())
                     : new Code(YukoMukoKubun.有効.getコード()));
             builder.set登録用受給者台帳データ区分(new Code(Datakubun.通常_認定.getコード()));
-            // TODO.結果詳細情報ダイアログで入力された旧措置フラグ
-//         builder.set登録用受給者台帳旧措置者フラグ(div.getCcdKaigoNinteiShinseiKihonJohoInput().setKyuSochisha(null));
+            builder.set登録用受給者台帳旧措置者フラグ(div.getCcdKaigoNinteiShinseiKihonJohoInput()
+                    .getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().getSelectedKeys().contains(new RString("key0")));
         } else {
             builder.set登録用受給者台帳直近異動事由コード(new Code(ChokkinIdoJiyuCode.受給申請却下.getコード()));
             builder.set登録用受給者台帳有効無効区分(new Code(YukoMukoKubun.無効.getコード()));
