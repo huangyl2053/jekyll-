@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.dgChosaItakusakiList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
@@ -72,10 +71,10 @@ public class NinteichosaIraiByHand {
     //<editor-fold defaultstate="collapsed" desc="ChosaItakusakiAndChosainList">
     private static final class ChosaItakusakiAndChosainList {
 
-        private final IChosaItakusakiAndChosainInputDiv div;
+       // private IChosaItakusakiAndChosainInputDiv div;
 
         ChosaItakusakiAndChosainList(NinteichosaIraiByHandDiv div) {
-            this.div = div.getCcdItakusakiAndChosainInput();
+            //this.div = div.getCcdItakusakiAndChosainInput();
         }
 
         private void onLoad() {
