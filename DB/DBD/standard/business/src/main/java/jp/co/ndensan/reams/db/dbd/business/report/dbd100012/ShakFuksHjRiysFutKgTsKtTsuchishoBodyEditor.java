@@ -170,13 +170,13 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     }
 
     private void set通知文(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(0).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
         source.tsuchibun1 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibun2 = getLenStr(INDEX_1, 通知書定型文List);
     }
 
     private void set連絡先他(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibun3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibun4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibun5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -202,7 +202,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     }
 
     private void set連絡先他Large(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibunLarge3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunLarge4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunLarge5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -224,7 +224,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     }
 
     private void set連絡先他上段Small(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibunMix3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMix5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -242,7 +242,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     }
 
     private void set連絡先他下段Large(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
         source.tsuchibunMix16 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix17 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMix18 = getLenStr(INDEX_2, 通知書定型文List);
@@ -253,7 +253,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     }
 
     private void set連絡先他上段Large(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibunMixtwo3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMixtwo5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -265,7 +265,7 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
     }
 
     private void set連絡先他下段Small(ShakFuksHojRiysFutKeigTsKetTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
         source.tsuchibunMixtwo10 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo11 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMixtwo12 = getLenStr(INDEX_2, 通知書定型文List);
