@@ -174,11 +174,102 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
      * @param 概況調査テキストイメージ区分 RString
+     * @param 認定調査特記事項番号 RString
+     * @param 認定調査特記事項連番 int
+     * @param 特記事項テキスト_イメージ区分 RString
+     * @param 原本マスク区分 Code
+     * @param 概況調査 NinteichosahyoGaikyoChosaBuilder
+     * @param 特記情報 NinteichosahyoTokkijiko
+     * @param 概況特記 NinteichosahyoGaikyoChosa
+     * @param 基本調査 NinteichosahyoKihonChosa
+     * @param 要介護認定調査履歴番号 int
+     * @param 連番 int
+     * @param 調査項目 NinteichosahyoChosaItem
+     * @param サービスの状況 NinteichosahyoServiceJokyo
+     * @param サービスの状況フラグ NinteichosahyoServiceJokyoFlag
+     * @param 記入項目 NinteichosahyoKinyuItem
+     * @param 施設利用 NinteichosahyoShisetsuRiyo
+     */
+    @Transaction
+    public void 認定調査一覧更新処理(ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            RString 概況調査テキストイメージ区分,
+            RString 認定調査特記事項番号,
+            int 認定調査特記事項連番,
+            RString 特記事項テキスト_イメージ区分,
+            Code 原本マスク区分,
+            NinteichosahyoTokkijiko 特記情報,
+            NinteichosahyoGaikyoChosa 概況調査,
+            GaikyoTokki 概況特記,
+            NinteichosahyoKihonChosa 基本調査,
+            int 要介護認定調査履歴番号,
+            int 連番,
+            NinteichosahyoChosaItem 調査項目,
+            NinteichosahyoServiceJokyo サービスの状況,
+            NinteichosahyoServiceJokyoFlag サービスの状況フラグ,
+            NinteichosahyoKinyuItem 記入項目,
+            NinteichosahyoShisetsuRiyo 施設利用
+    ) {
+        認定調査票概況調査(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                概況調査テキストイメージ区分,
+                概況調査);
+        認定調査票概況特記(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                概況調査テキストイメージ区分,
+                概況特記);
+        認定調査票特記情報(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                認定調査特記事項番号,
+                認定調査特記事項連番,
+                特記事項テキスト_イメージ区分,
+                原本マスク区分,
+                特記情報);
+        認定調査票基本調査(
+                申請書管理番号,
+                要介護認定調査履歴番号,
+                基本調査);
+        基本調査調査項目(
+                申請書管理番号,
+                要介護認定調査履歴番号,
+                連番,
+                調査項目);
+        認定調査票概況調査サービスの状況(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                連番,
+                サービスの状況);
+        認定調査票概況調査サービスの状況フラグ(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                連番,
+                サービスの状況フラグ);
+        認定調査票概況調査記入項目(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                連番,
+                記入項目);
+        認定調査票概況調査施設利用(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                連番,
+                施設利用);
+
+    }
+
+    /**
+     * 認定調査票（概況調査）に登録する。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 認定調査依頼履歴番号 int
+     * @param 概況調査テキストイメージ区分 RString
      * @param 概況調査 NinteichosahyoGaikyoChosaBuilder
      * @return 認定調査票概況調査のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票概況調査(ShinseishoKanriNo 申請書管理番号,
+    private boolean 認定調査票概況調査(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 概況調査テキストイメージ区分,
             NinteichosahyoGaikyoChosa 概況調査) {
@@ -207,8 +298,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 概況特記 GaikyoTokki
      * @return 認定調査票（概況特記）のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票概況特記(ShinseishoKanriNo 申請書管理番号,
+    private boolean 認定調査票概況特記(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 概況調査テキストイメージ区分,
             GaikyoTokki 概況特記) {
@@ -239,8 +329,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 特記情報 NinteichosahyoTokkijiko
      * @return 認定調査票（概況特記）のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票特記情報(
+    private boolean 認定調査票特記情報(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 認定調査特記事項番号,
@@ -274,8 +363,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 基本調査 NinteichosahyoKihonChosa
      * @return 認定調査票（基本調査）のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票基本調査(
+    private boolean 認定調査票基本調査(
             ShinseishoKanriNo 申請書管理番号,
             int 要介護認定調査履歴番号,
             NinteichosahyoKihonChosa 基本調査) {
@@ -303,8 +391,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 調査項目 NinteichosahyoChosaItem
      * @return （基本調査）調査項目のCOUNT
      */
-    @Transaction
-    public boolean 基本調査調査項目(
+    private boolean 基本調査調査項目(
             ShinseishoKanriNo 申請書管理番号,
             int 要介護認定調査履歴番号,
             int 連番,
@@ -333,8 +420,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param サービスの状況 NinteichosahyoServiceJokyo
      * @return 認定調査票（概況調査）サービスの状況のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票概況調査サービスの状況(
+    private boolean 認定調査票概況調査サービスの状況(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             int 連番,
@@ -363,8 +449,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param サービスの状況フラグ NinteichosahyoServiceJokyoFlag
      * @return 認定調査票（概況調査）サービスの状況のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票概況調査サービスの状況フラグ(
+    private boolean 認定調査票概況調査サービスの状況フラグ(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             int 連番,
@@ -394,8 +479,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 記入項目 NinteichosahyoKinyuItem
      * @return 認定調査票（概況調査）記入項目のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票概況調査記入項目(
+    private boolean 認定調査票概況調査記入項目(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             int 連番,
@@ -424,8 +508,7 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 施設利用 NinteichosahyoShisetsuRiyo
      * @return 認定調査票（概況調査）記入項目のCOUNT
      */
-    @Transaction
-    public boolean 認定調査票概況調査施設利用(
+    private boolean 認定調査票概況調査施設利用(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             int 連番,

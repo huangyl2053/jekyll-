@@ -192,11 +192,11 @@ public class Ninteishinseibi {
     public ResponseData<NinteishinseibiDiv> btn_toRiKoMi(NinteishinseibiDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
@@ -280,15 +280,34 @@ public class Ninteishinseibi {
 
                 if (!RString.isNullOrEmpty(row.getJyoutai())) {
 
-                    認定調査票_概況調査の登録処理(row, 概況調査Models, div);
-                    認定調査票_概況特記の登録処理(row, 概況特記Models, div);
-                    認定調査票_特記情報の登録処理(row, 特記情報Models, div);
-                    認定調査票_基本調査の登録処理(row, 基本調査Models, div);
-                    認定調査票_基本調査調査項目の登録処理(row, 調査項目Models, div);
-                    認定調査票_概況調査サービスの状況の登録処理(row, サービスの状況Models, div);
-                    認定調査票_概況調査サービスの状況フラグの登録処理(row, サービスの状況フラグModels, div);
-                    認定調査票_概況調査記入項目の登録処理(row, 記入項目Models, div);
-                    認定調査票_概況調査施設利用の登録処理(row, 認定調査票概況調査施設利用Models, div);
+                    NinteichosahyoGaikyoChosa gaikyoChosa = 認定調査票_概況調査の登録処理(row, 概況調査Models, div);
+                    GaikyoTokki gaikyoTokki = 認定調査票_概況特記の登録処理(row, 概況特記Models, div);
+                    NinteichosahyoTokkijiko yoTokkijiko = 認定調査票_特記情報の登録処理(row, 特記情報Models, div);
+                    NinteichosahyoKihonChosa kihonChosa = 認定調査票_基本調査の登録処理(row, 基本調査Models, div);
+                    NinteichosahyoChosaItem chosaItem = 認定調査票_基本調査調査項目の登録処理(row, 調査項目Models, div);
+                    NinteichosahyoServiceJokyo serviceJokyo = 認定調査票_概況調査サービスの状況の登録処理(row, サービスの状況Models, div);
+                    NinteichosahyoServiceJokyoFlag serviceJokyoFlag = 認定調査票_概況調査サービスの状況フラグの登録処理(row, サービスの状況フラグModels, div);
+                    NinteichosahyoKinyuItem kinyuItem = 認定調査票_概況調査記入項目の登録処理(row, 記入項目Models, div);
+                    NinteichosahyoShisetsuRiyo shisetsuRiyo = 認定調査票_概況調査施設利用の登録処理(row, 認定調査票概況調査施設利用Models, div);
+                    manager.認定調査一覧更新処理(
+                            new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                            Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
+                            TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード(),
+                            row.getNinteichosaTokkijikoNo(),
+                            Integer.valueOf(row.getNinteichosaTokkijikoRemban().toString()),
+                            TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード(),
+                            new Code(GenponMaskKubun.valueOf(row.getGenponMaskKubun().toString()).getコード()),
+                            yoTokkijiko,
+                            gaikyoChosa,
+                            gaikyoTokki,
+                            kihonChosa,
+                            Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
+                            Integer.valueOf(row.getRemban().toString()),
+                            chosaItem,
+                            serviceJokyo,
+                            serviceJokyoFlag,
+                            kinyuItem,
+                            shisetsuRiyo);
                 }
             }
             RealInitialLocker.release(前排他ロックキー);
@@ -299,7 +318,8 @@ public class Ninteishinseibi {
         return ResponseData.of(div).respond();
     }
 
-    private void 認定調査票_概況調査の登録処理(dgNinteiChosaData_Row row, Models<NinteichosahyoGaikyoChosaIdentifier, NinteichosahyoGaikyoChosa> 概況調査Models, NinteishinseibiDiv div) {
+    private NinteichosahyoGaikyoChosa 認定調査票_概況調査の登録処理(dgNinteiChosaData_Row row,
+            Models<NinteichosahyoGaikyoChosaIdentifier, NinteichosahyoGaikyoChosa> 概況調査Models, NinteishinseibiDiv div) {
 
         NinteichosahyoGaikyoChosaIdentifier key = new NinteichosahyoGaikyoChosaIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
@@ -314,12 +334,11 @@ public class Ninteishinseibi {
                     TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード());
         }
         NinteichosahyoGaikyoChosaBuilder gaikyoChosaBuilder = getHandler(div).認定調査票概況調査の編集(row, ninteichosahyoGaikyoChosa);
-        manager.認定調査票概況調査(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード(), gaikyoChosaBuilder.build());
+        return gaikyoChosaBuilder.build();
     }
 
-    private void 認定調査票_特記情報の登録処理(dgNinteiChosaData_Row row, Models<NinteichosahyoTokkijikoIdentifier, NinteichosahyoTokkijiko> 特記情報Models, NinteishinseibiDiv div) {
+    private NinteichosahyoTokkijiko 認定調査票_特記情報の登録処理(dgNinteiChosaData_Row row,
+            Models<NinteichosahyoTokkijikoIdentifier, NinteichosahyoTokkijiko> 特記情報Models, NinteishinseibiDiv div) {
 
         NinteichosahyoTokkijikoIdentifier key = new NinteichosahyoTokkijikoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
@@ -339,15 +358,10 @@ public class Ninteishinseibi {
                     new Code(GenponMaskKubun.valueOf(row.getGenponMaskKubun().toString()).getコード()));
         }
         NinteichosahyoTokkijikoBuilder ninteichosahyoTokkijikoBuilder = getHandler(div).認定調査票特記情報の編集(row, ninteichosahyoTokkijiko);
-        manager.認定調査票特記情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                row.getNinteichosaTokkijikoNo(),
-                Integer.valueOf(row.getNinteichosaTokkijikoRemban().toString()),
-                TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード(),
-                new Code(GenponMaskKubun.valueOf(row.getGenponMaskKubun().toString()).getコード()), ninteichosahyoTokkijikoBuilder.build());
+        return ninteichosahyoTokkijikoBuilder.build();
     }
 
-    private void 認定調査票_概況特記の登録処理(dgNinteiChosaData_Row row, Models<GaikyoTokkiIdentifier, GaikyoTokki> 概況特記Models, NinteishinseibiDiv div) {
+    private GaikyoTokki 認定調査票_概況特記の登録処理(dgNinteiChosaData_Row row, Models<GaikyoTokkiIdentifier, GaikyoTokki> 概況特記Models, NinteishinseibiDiv div) {
 
         GaikyoTokkiIdentifier key = new GaikyoTokkiIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
@@ -361,13 +375,10 @@ public class Ninteishinseibi {
                     TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード());
         }
         GaikyoTokkiBuilder gaikyoTokkiBuilder = getHandler(div).認定調査票概況特記の編集(row, gaikyoTokki);
-        manager.認定調査票概況特記(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                TokkijikoTextImageKubun.valueOf(row.getGaikyoTokkiTextImageKubun().toString()).getコード(),
-                gaikyoTokkiBuilder.build());
+        return gaikyoTokkiBuilder.build();
     }
 
-    private void 認定調査票_基本調査の登録処理(dgNinteiChosaData_Row row,
+    private NinteichosahyoKihonChosa 認定調査票_基本調査の登録処理(dgNinteiChosaData_Row row,
             Models<NinteichosahyoKihonChosaIdentifier, NinteichosahyoKihonChosa> 基本調査Models, NinteishinseibiDiv div) {
 
         NinteichosahyoKihonChosaIdentifier key = new NinteichosahyoKihonChosaIdentifier(
@@ -380,11 +391,10 @@ public class Ninteishinseibi {
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         }
         NinteichosahyoKihonChosaBuilder kihonChosaBuilder = getHandler(div).認定調査票基本調査の編集(row, ninteichosahyoKihonChosa);
-        manager.認定調査票基本調査(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()), kihonChosaBuilder.build());
+        return kihonChosaBuilder.build();
     }
 
-    private void 認定調査票_基本調査調査項目の登録処理(dgNinteiChosaData_Row row,
+    private NinteichosahyoChosaItem 認定調査票_基本調査調査項目の登録処理(dgNinteiChosaData_Row row,
             Models<NinteichosahyoChosaItemIdentifier, NinteichosahyoChosaItem> 調査項目Models, NinteishinseibiDiv div) {
 
         NinteichosahyoChosaItemIdentifier key = new NinteichosahyoChosaItemIdentifier(
@@ -401,12 +411,10 @@ public class Ninteishinseibi {
         }
         NinteichosahyoChosaItemBuilder ninteichosahyoChosaItemBuilder = getHandler(div).
                 認定調査票基本調査調査項目の編集(row, ninteichosahyoChosaItem);
-        manager.基本調査調査項目(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()), ninteichosahyoChosaItemBuilder.build());
+        return ninteichosahyoChosaItemBuilder.build();
     }
 
-    private void 認定調査票_概況調査サービスの状況の登録処理(dgNinteiChosaData_Row row,
+    private NinteichosahyoServiceJokyo 認定調査票_概況調査サービスの状況の登録処理(dgNinteiChosaData_Row row,
             Models<NinteichosahyoServiceJokyoIdentifier, NinteichosahyoServiceJokyo> サービスの状況Models, NinteishinseibiDiv div) {
 
         NinteichosahyoServiceJokyoIdentifier key = new NinteichosahyoServiceJokyoIdentifier(
@@ -422,12 +430,10 @@ public class Ninteishinseibi {
                     Integer.valueOf(row.getRemban().toString()));
         }
         NinteichosahyoServiceJokyoBuilder serviceJokyoBuilder = getHandler(div).認定調査票概況調査サービスの状況の編集(row, ninteichosahyoServiceJokyo);
-        manager.認定調査票概況調査サービスの状況(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()), serviceJokyoBuilder.build());
+        return serviceJokyoBuilder.build();
     }
 
-    private void 認定調査票_概況調査サービスの状況フラグの登録処理(dgNinteiChosaData_Row row,
+    private NinteichosahyoServiceJokyoFlag 認定調査票_概況調査サービスの状況フラグの登録処理(dgNinteiChosaData_Row row,
             Models<NinteichosahyoServiceJokyoFlagIdentifier, NinteichosahyoServiceJokyoFlag> サービスの状況フラグModels, NinteishinseibiDiv div) {
 
         NinteichosahyoServiceJokyoFlagIdentifier key = new NinteichosahyoServiceJokyoFlagIdentifier(
@@ -444,12 +450,10 @@ public class Ninteishinseibi {
         }
         NinteichosahyoServiceJokyoFlagBuilder serviceJokyoFlagBuilder = getHandler(div).
                 認定調査票概況調査サービスの状況フラグの編集(row, ninteichosahyoServiceJokyoFlag);
-        manager.認定調査票概況調査サービスの状況フラグ(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()), serviceJokyoFlagBuilder.build());
+        return serviceJokyoFlagBuilder.build();
     }
 
-    private void 認定調査票_概況調査記入項目の登録処理(dgNinteiChosaData_Row row,
+    private NinteichosahyoKinyuItem 認定調査票_概況調査記入項目の登録処理(dgNinteiChosaData_Row row,
             Models<NinteichosahyoKinyuItemIdentifier, NinteichosahyoKinyuItem> 記入項目Models, NinteishinseibiDiv div) {
 
         NinteichosahyoKinyuItemIdentifier key = new NinteichosahyoKinyuItemIdentifier(
@@ -465,12 +469,10 @@ public class Ninteishinseibi {
         }
         NinteichosahyoKinyuItemBuilder ninteichosahyoKinyuItemBuilder = getHandler(div).
                 認定調査票概況調査記入項目の編集(row, ninteichosahyoKinyuItem);
-        manager.認定調査票概況調査記入項目(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()), ninteichosahyoKinyuItemBuilder.build());
+        return ninteichosahyoKinyuItemBuilder.build();
     }
 
-    private void 認定調査票_概況調査施設利用の登録処理(dgNinteiChosaData_Row row,
+    private NinteichosahyoShisetsuRiyo 認定調査票_概況調査施設利用の登録処理(dgNinteiChosaData_Row row,
             Models<NinteichosahyoShisetsuRiyoIdentifier, NinteichosahyoShisetsuRiyo> 施設利用Models, NinteishinseibiDiv div) {
 
         NinteichosahyoShisetsuRiyoIdentifier key = new NinteichosahyoShisetsuRiyoIdentifier(
@@ -487,9 +489,7 @@ public class Ninteishinseibi {
         }
         NinteichosahyoShisetsuRiyoBuilder shisetsuRiyoBuilder = getHandler(div).
                 認定調査票概況調査施設利用の編集(row, ninteichosahyoShisetsuRiyo);
-        manager.認定調査票概況調査施設利用(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()),
-                Integer.valueOf(row.getRemban().toString()), shisetsuRiyoBuilder.build());
+        return shisetsuRiyoBuilder.build();
     }
 
     private List<ChosaKekkaNyuryokuCsvEntity> データ取込() {
