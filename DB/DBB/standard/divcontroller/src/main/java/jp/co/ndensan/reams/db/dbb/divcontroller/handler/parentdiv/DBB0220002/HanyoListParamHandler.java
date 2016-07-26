@@ -136,19 +136,20 @@ public class HanyoListParamHandler {
             List<RString> list課税区分減免前 = div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedValues();
             Iterator<RString> it減免前 = list課税区分減免前.iterator();
             while (it減免前.hasNext()) {
-                if (課税.equals(it減免前.next())) {
+                RString 減免前 = it減免前.next();
+                if (課税.equals(減免前)) {
                     listコード課税区分減免前.add(定数1);
                 }
-                if (非課税.equals(it減免前.next())) {
+                if (非課税.equals(減免前)) {
                     listコード課税区分減免前.add(定数2);
                 }
-                if (未申告.equals(it減免前.next())) {
+                if (未申告.equals(減免前)) {
                     listコード課税区分減免前.add(定数3);
                 }
-                if (所得調査中.equals(it減免前.next())) {
+                if (所得調査中.equals(減免前)) {
                     listコード課税区分減免前.add(定数4);
                 }
-                if (課税取消.equals(it減免前.next())) {
+                if (課税取消.equals(減免前)) {
                     listコード課税区分減免前.add(定数5);
                 }
             }
@@ -160,19 +161,20 @@ public class HanyoListParamHandler {
             List<RString> list課税区分減免後 = div.getChushutsuJokenPanel().getChkKazeiKubunGenmenMae().getSelectedValues();
             Iterator<RString> it減免後 = list課税区分減免後.iterator();
             while (it減免後.hasNext()) {
-                if (課税.equals(it減免後.next())) {
+                RString 減免後 = it減免後.next();
+                if (課税.equals(減免後)) {
                     listコード課税区分減免後.add(定数1);
                 }
-                if (非課税.equals(it減免後.next())) {
+                if (非課税.equals(減免後)) {
                     listコード課税区分減免後.add(定数2);
                 }
-                if (未申告.equals(it減免後.next())) {
+                if (未申告.equals(減免後)) {
                     listコード課税区分減免後.add(定数3);
                 }
-                if (所得調査中.equals(it減免後.next())) {
+                if (所得調査中.equals(減免後)) {
                     listコード課税区分減免後.add(定数4);
                 }
-                if (課税取消.equals(it減免後.next())) {
+                if (課税取消.equals(減免後)) {
                     listコード課税区分減免後.add(定数5);
                 }
             }
@@ -262,7 +264,6 @@ public class HanyoListParamHandler {
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setDisabled(false);
             div.getChushutsuJokenPanel().getChkKazeiKubunGenmenGo().setLabelLText(定数課税区分減免後);
         }
-
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("Execute"), false);
     }
 
