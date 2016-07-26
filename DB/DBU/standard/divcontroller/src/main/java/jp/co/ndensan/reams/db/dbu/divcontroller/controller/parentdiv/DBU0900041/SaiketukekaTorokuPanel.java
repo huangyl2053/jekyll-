@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SaiketukekaTorokuPanel {
 
-    private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 更新 = new RString("更新");
 
@@ -52,7 +51,7 @@ public class SaiketukekaTorokuPanel {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
 
-        if (修正.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
+        if (更新.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
 
             RString 修正前の値 = createHandlerOf(requestDiv).修正_初期化の編集(識別コード, 被保険者番号, 審査請求届出日);
             ViewStateHolder.put(Dbu900041Keys.修正前の値, 修正前の値);
