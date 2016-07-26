@@ -70,7 +70,7 @@ public class CreateTargetHandler {
      * 個人依頼内容更新のクリア処理します。
      *
      */
-    public void btn_Clear() {
+    public void onClick_btnClear() {
         div.getRdoShinseiNintei().setSelectedKey(キー_0);
         div.getTxtShinseiYMD().setDisabled(false);
         div.getTxtShinseiYMD().clearFromValue();
@@ -89,7 +89,7 @@ public class CreateTargetHandler {
      * 申請日認定日処理します。
      *
      */
-    public void btn_Change() {
+    public void onChange_btnChange() {
         if (キー_0.equals(div.getRdoShinseiNintei().getSelectedKey())) {
             div.getTxtShinseiYMD().setDisabled(false);
             div.getNinteiYMD().setDisabled(true);
@@ -108,7 +108,7 @@ public class CreateTargetHandler {
      *
      * @param business 対象者一覧情報
      */
-    public void btn_Kensaku(List<CreateTargetBusiness> business) {
+    public void onClick_btnKensaku(List<CreateTargetBusiness> business) {
         List<dgCreateTargetSummary_Row> rowList = new ArrayList<>();
         for (CreateTargetBusiness list : business) {
             dgCreateTargetSummary_Row row = new dgCreateTargetSummary_Row();

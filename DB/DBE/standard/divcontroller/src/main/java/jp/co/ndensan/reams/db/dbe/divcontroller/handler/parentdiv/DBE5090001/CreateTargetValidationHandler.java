@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5090001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.CreateTargetDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.dgCreateTargetSummary_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -77,7 +78,7 @@ public class CreateTargetValidationHandler {
      * @param shinsei 対象者一覧情報
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 未選択チェック(List<RString> shinsei) {
+    public ValidationMessageControlPairs 未選択チェック(List<dgCreateTargetSummary_Row> shinsei) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (shinsei == null || shinsei.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(

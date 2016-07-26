@@ -174,8 +174,8 @@ public class CreateTarget {
      * @param div CreateTargetDiv
      * @return ResponseData<CreateTargetDiv>
      */
-    public ResponseData<CreateTargetDiv> btn_Clear(CreateTargetDiv div) {
-        getHandler(div).btn_Clear();
+    public ResponseData<CreateTargetDiv> onClick_btnClear(CreateTargetDiv div) {
+        getHandler(div).onClick_btnClear();
         return ResponseData.of(div).setState(DBE5090001StateName.初期状態);
     }
 
@@ -185,8 +185,8 @@ public class CreateTarget {
      * @param div CreateTargetDiv
      * @return ResponseData<CreateTargetDiv>
      */
-    public ResponseData<CreateTargetDiv> btn_Change(CreateTargetDiv div) {
-        getHandler(div).btn_Change();
+    public ResponseData<CreateTargetDiv> onChange_btnChange(CreateTargetDiv div) {
+        getHandler(div).onChange_btnChange();
         return ResponseData.of(div).setState(DBE5090001StateName.初期状態);
     }
 
@@ -196,15 +196,9 @@ public class CreateTarget {
      * @param div CreateTargetDiv
      * @return ResponseData<CreateTargetDiv>
      */
-    public ResponseData<CreateTargetDiv> btn_DetaSyutsuRyoku(CreateTargetDiv div) {
-        List<dgCreateTargetSummary_Row> rowList = div.getDgCreateTargetSummary().getDataSource();
-        List<RString> shinsei = new ArrayList();
-        for (dgCreateTargetSummary_Row row : rowList) {
-            if (row.getSelected()) {
-                shinsei.add(row.getShinseishokanrino());
-            }
-        }
-        ValidationMessageControlPairs validPair = getValidationHandler(div).未選択チェック(shinsei);
+    public ResponseData<CreateTargetDiv> onBefore_DetaSyutsuRyoku(CreateTargetDiv div) {
+        List<dgCreateTargetSummary_Row> rowList = div.getDgCreateTargetSummary().getSelectedItems();
+        ValidationMessageControlPairs validPair = getValidationHandler(div).未選択チェック(rowList);
         if (validPair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPair).respond();
         }
@@ -217,7 +211,7 @@ public class CreateTarget {
      * @param div CreateTargetDiv
      * @return ResponseData<CreateTargetDiv>
      */
-    public ResponseData<CreateTargetDiv> btn_Kensaku(CreateTargetDiv div) {
+    public ResponseData<CreateTargetDiv> onClick_btnKensaku(CreateTargetDiv div) {
         ValidationMessageControlPairs validPair = getValidationHandler(div).入力チェック();
         if (validPair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPair).respond();
@@ -243,13 +237,13 @@ public class CreateTarget {
             認定_終了日 = new FlexibleDate(div.getNinteiYMD().getToValue().toDateString());
         }
         CreateTargetMapperParameter param = CreateTargetMapperParameter.createParam(データ出力, 申請_開始日, 申請_終了日,
-                認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()), false, false, false, false, false);
+                認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
         List<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param).records();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).データチェック(business);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).btn_Kensaku(business);
+        getHandler(div).onClick_btnKensaku(business);
         return ResponseData.of(div).setState(DBE5090001StateName.検索結果);
     }
 

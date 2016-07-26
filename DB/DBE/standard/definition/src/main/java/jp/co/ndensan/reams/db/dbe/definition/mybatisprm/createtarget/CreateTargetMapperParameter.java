@@ -64,38 +64,13 @@ public final class CreateTargetMapperParameter {
      * @param 認定日_開始 認定日_開始
      * @param 認定日_終了 認定日_終了
      * @param 件数 件数
-     * @param detaFlg データ出力Flg
-     * @param shinnseiKaishi 申請日_開始Flg
-     * @param shinnseiShuuryou 申請日_終了Flg
-     * @param ninnteiKaishi 認定日_開始Flg
-     * @param ninnteiShuuryou 認定日_終了Flg
      * @return センター送信データパラメータ
      */
     public static CreateTargetMapperParameter createParam(RString データ出力, FlexibleDate 申請日_開始, FlexibleDate 申請日_終了,
-            FlexibleDate 認定日_開始, FlexibleDate 認定日_終了, int 件数, boolean detaFlg, boolean shinnseiKaishi,
-            boolean shinnseiShuuryou, boolean ninnteiKaishi, boolean ninnteiShuuryou) {
-        detaFlg = false;
-        shinnseiKaishi = false;
-        shinnseiShuuryou = false;
-        ninnteiKaishi = false;
-        ninnteiShuuryou = false;
-        if (データ選択.equals(データ出力)) {
-            detaFlg = true;
-        }
-        if (申請日_開始 != null && !申請日_開始.isEmpty()) {
-            shinnseiKaishi = true;
-        }
-        if (申請日_終了 != null && !申請日_終了.isEmpty()) {
-            shinnseiShuuryou = true;
-        }
-        if (認定日_開始 != null && !認定日_開始.isEmpty()) {
-            ninnteiKaishi = true;
-        }
-        if (認定日_終了 != null && !認定日_終了.isEmpty()) {
-            ninnteiShuuryou = true;
-        }
+            FlexibleDate 認定日_開始, FlexibleDate 認定日_終了, int 件数) {
         return new CreateTargetMapperParameter(データ出力, null, 申請日_開始, 申請日_終了, 認定日_開始, 認定日_終了, 件数,
-                detaFlg, shinnseiKaishi, shinnseiShuuryou, ninnteiKaishi, ninnteiShuuryou);
+                データ選択.equals(データ出力), 申請日_開始 != null && !申請日_開始.isEmpty(), 申請日_終了 != null && !申請日_終了.isEmpty(),
+                認定日_開始 != null && !認定日_開始.isEmpty(), 認定日_終了 != null && !認定日_終了.isEmpty());
     }
 
     /**
