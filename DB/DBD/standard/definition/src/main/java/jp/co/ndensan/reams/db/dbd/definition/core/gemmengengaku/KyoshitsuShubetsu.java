@@ -11,34 +11,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KyoshitsuShubetsu {
 
     /**
-     * コード:1 名称:ユニット型個室 略称:ユニット型個室
+     * コード:1 名称:ユニット型個室 略称:無
      */
-    ユニット型個室("1", "ユニット型個室", "ユニット型個室"),
+    ユニット型個室("1", "ユニット型個室"),
     /**
-     * コード:2 名称:ユニット型準個室 略称:ユニット型準個室
+     * コード:2 名称:ユニット型準個室 略称:無
      */
-    ユニット型準個室("2", "ユニット型準個室", "ユニット型準個室"),
+    ユニット型準個室("2", "ユニット型準個室"),
     /**
-     * コード:3 名称:従来型個室 略称:従来型個室
+     * コード:3 名称:従来型個室 略称:無
      */
-    従来型個室("3", "従来型個室", "従来型個室"),
+    従来型個室("3", "従来型個室"),
     /**
-     * コード: 名称:多床室 略称:多床室
+     * コード: 名称:多床室 略称:無
      */
-    多床室("4", "多床室", "多床室"),
+    多床室("4", "多床室"),
     /**
-     * コード: 名称:従来型個室_老健 略称:従来型個室（老健・療養等）
+     * コード: 名称:従来型個室（老健・療養等） 略称:無
      */
-    従来型個室_老健_療養等("5", "従来型個室_老健", "従来型個室（老健・療養等）");
+    従来型個室_老健_療養等("5", "従来型個室（老健・療養等）");
 
     private final RString code;
     private final RString fullName;
-    private final RString shortName;
 
-    private KyoshitsuShubetsu(String code, String fullname, String shortName) {
+    private KyoshitsuShubetsu(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
-        this.shortName = new RString(shortName);
     }
 
     /**
@@ -57,15 +55,6 @@ public enum KyoshitsuShubetsu {
      */
     public RString get名称() {
         return fullName;
-    }
-
-    /**
-     * 居室種別の略称を返します。
-     *
-     * @return 居室種別の略称
-     */
-    public RString get略称() {
-        return shortName;
     }
 
     /**
