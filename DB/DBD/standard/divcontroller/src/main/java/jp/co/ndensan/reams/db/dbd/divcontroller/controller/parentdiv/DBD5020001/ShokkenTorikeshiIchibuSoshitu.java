@@ -134,7 +134,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
         model.set表示モード(new RString("InputMode"));
         model.set連絡事項(div.getHdnRenrakuJiko());
-        div.setNinteiShinseiCodeModel(DataPassingConverter.serialize(model));
+        ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();
     }
 
@@ -145,7 +145,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onOkClose_btnShichosonRenrakuJiko(ShokkenTorikeshiIchibuSoshituDiv div) {
-        NinteiShinseiCodeModel model = DataPassingConverter.deserialize(div.getNinteiShinseiCodeModel(), NinteiShinseiCodeModel.class);
+        NinteiShinseiCodeModel model = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
         div.setHdnRenrakuJiko(model.get連絡事項());
         return ResponseData.of(div).respond();
     }

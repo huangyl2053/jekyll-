@@ -136,8 +136,9 @@ public class ShinsakaiIinHoshuNyuryokuHandler {
         List<dgShinsakaiJisseki_Row> rowList = new ArrayList();
         if (isNULL) {
             div.getShinsakaiJisseki().setDisplayNone(false);
-            div.getDgShinsakaiJisseki().setVisible(false);
+            div.getDgShinsakaiJisseki().setVisible(true);
             div.getShinsakaiJissekiMeisai().setVisible(false);
+            div.getDgShinsakaiJisseki().setDataSource(rowList);
         } else {
             div.getShinsakaiJisseki().setDisplayNone(false);
             div.getDgShinsakaiJisseki().setVisible(true);

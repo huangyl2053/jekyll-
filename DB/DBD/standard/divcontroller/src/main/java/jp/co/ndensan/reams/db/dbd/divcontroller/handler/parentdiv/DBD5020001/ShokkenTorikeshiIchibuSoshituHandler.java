@@ -569,7 +569,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
 
     private YokaigoNinteiJoho edit受給者台帳(YokaigoNinteiJoho 認定情報, Code 導入形態コード, KekkaShosaiJohoOutModel model) {
         if (!is履歴番号更新要()) {
-            YokaigoNinteiJohoBuilder builder = 認定情報.createBuilderForEdit();
+            YokaigoNinteiJohoBuilder builder = 認定情報.createOldJukyushaEntityBuilderForEdit();
             builder.set受給者台帳直近フラグ(false);
             builder.set受給者台帳直近異動年月日(FlexibleDate.getNowDate());
             return builder.build();

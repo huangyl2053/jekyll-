@@ -60,7 +60,7 @@ parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinhosh
         T3."gogitaichoKubunCode" AS "gogitaichoKubunCode"
     FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T1
-    LEFT JOIN
+    INNER JOIN
         rgdb."DbT5503ShinsakaiWariateIinJoho" AS T2
     ON T1."shinsakaiKaisaiNo" = T2."shinsakaiKaisaiNo"
     INNER JOIN
