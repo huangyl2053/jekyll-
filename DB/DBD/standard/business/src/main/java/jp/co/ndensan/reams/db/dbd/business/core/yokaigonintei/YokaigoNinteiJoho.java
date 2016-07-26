@@ -1273,6 +1273,28 @@ public class YokaigoNinteiJoho implements Serializable {
      * @return Builder YokaigoNinteiJohoBuilder
      */
     public YokaigoNinteiJohoBuilder createBuilderForEdit() {
+        return new YokaigoNinteiJohoBuilder(
+                要介護認定申請情報認定Entity,
+                主治医医療機関情報認定Entity,
+                主治医情報認定Entity,
+                要介護認定申請情報受給Entity,
+                受給者台帳Entity,
+                認定調査委託先情報Entity,
+                主治医医療機関情報受給Entity,
+                主治医情報受給Entity,
+                調査員情報Entity,
+                要介護認定結果情報Entity,
+                要介護認定インターフェース情報Entity,
+                登録用受給者台帳Entity);
+    }
+
+    /**
+     * このクラスの編集を行うBuilderを取得します。<br/>
+     * 編集後のインスタンスを取得する場合は{@link YokaigoNinteiJoho.createBuilderForEdit#build()}を使用してください。
+     *
+     * @return Builder YokaigoNinteiJohoBuilder
+     */
+    public YokaigoNinteiJohoBuilder createOldJukyushaEntityBuilderForEdit() {
         受給者台帳Entity.initializeMd5();
         return new YokaigoNinteiJohoBuilder(
                 要介護認定申請情報認定Entity,
