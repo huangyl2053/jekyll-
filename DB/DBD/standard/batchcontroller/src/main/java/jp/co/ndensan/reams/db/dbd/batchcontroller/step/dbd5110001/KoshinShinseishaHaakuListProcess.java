@@ -119,10 +119,16 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     protected void process(UpdateNotApplicantEntity 更新未申請者把握情報) {
         List<PreviousInformationEntity> 前回の情報List
                 = mapper.get前回の情報(new KoshinShinseishaHaakuListMyBatisParameter(更新未申請者把握情報.get申請書管理番号()));
-        for (PreviousInformationEntity 前回の情報 : 前回の情報List) {
-            KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, 前回の情報);
+        if (前回の情報List.isEmpty()) {
+            KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, null);
             連番++;
             eucCsvWriterJunitoJugo.writeLine(csvEntity);
+        } else {
+            for (PreviousInformationEntity 前回の情報 : 前回の情報List) {
+                KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, 前回の情報);
+                連番++;
+                eucCsvWriterJunitoJugo.writeLine(csvEntity);
+            }
         }
         ExpandedInformation expandedInformations
                 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 更新未申請者把握情報.get申請書管理番号());
