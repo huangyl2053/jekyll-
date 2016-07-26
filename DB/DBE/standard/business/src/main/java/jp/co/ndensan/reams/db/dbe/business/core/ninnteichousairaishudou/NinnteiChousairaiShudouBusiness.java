@@ -118,15 +118,6 @@ public class NinnteiChousairaiShudouBusiness {
     }
 
     /**
-     * ninteichosaKigenYMDを取得します。
-     *
-     * @return ninteichosaKigenYMD
-     */
-    public RString getninteichosaKigenYMD() {
-        return entity.getKoroshoIfShikibetsuCode();
-    }
-
-    /**
      * 認定申請年月日を取得します。
      *
      * @return 認定申請年月日
