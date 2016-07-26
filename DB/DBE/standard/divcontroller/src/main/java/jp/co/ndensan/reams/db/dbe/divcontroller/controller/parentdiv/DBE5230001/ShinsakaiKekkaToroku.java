@@ -111,7 +111,7 @@ public class ShinsakaiKekkaToroku {
             getHandler(div).setKobetsuHyojiArea();
             return ResponseData.of(div).respond();
         }
-        if (HASDATA.equals(div.getKobetsuHyojiArea().getHasData()) && getHandler(div).hasChange()) {
+        if (HASDATA.equals(div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem().getUpDateFlag()) && getHandler(div).hasChange()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());

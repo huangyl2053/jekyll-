@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -42,8 +43,14 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 設定期間Fromと設定期間Toの前後順(ValidationMessageControlPairs validPairs) {
-        if (div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue()
-                .isBefore(div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue())) {
+        RDate 設定期間From = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
+        RDate 設定期間To = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue();
+        if ((設定期間From == null && 設定期間To == null)
+                || (設定期間From != null && 設定期間To == null)
+                || (設定期間From == null && 設定期間To != null)) {
+            return validPairs;
+        }
+        if (設定期間From.isBefore(設定期間To)) {
             validPairs.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(
                     UrErrorMessages.期間が不正_追加メッセージあり２, "設定期間From", "設定期間To")));
         }
