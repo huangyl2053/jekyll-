@@ -563,7 +563,7 @@ public class YokaigoNinteiTaskListHandler {
                 row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
             }
             row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
-            row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null
+            row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
             row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());
             row.setKonkaiShujii(business.get今回主治医() == null ? RString.EMPTY : business.get今回主治医());
@@ -572,7 +572,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
-            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
+            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null || business.get主治医意見書作成督促方法().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
