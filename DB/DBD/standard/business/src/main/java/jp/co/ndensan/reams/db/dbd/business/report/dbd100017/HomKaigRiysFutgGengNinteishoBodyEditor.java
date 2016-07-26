@@ -102,6 +102,10 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
                 source.birthGengoShowa = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
+            } else {
+                source.birthGengoMeiji = ホシ;
+                source.birthGengoTaisho = ホシ;
+                source.birthGengoShowa = ホシ;
             }
             source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
             source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
