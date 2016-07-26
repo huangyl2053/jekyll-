@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.tokkitext2a3;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a3.TokkiText2A3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.tokkitext2a3.TokkiText2A3ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class TokkiText2A3Editor implements ITokkiText2A3Editor {
 
-    private static final RString テキスト = new RString("1");
-    private static final RString イメージ = new RString("2");
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
     private final TokkiText2A3Entity item;
@@ -69,7 +68,7 @@ public class TokkiText2A3Editor implements ITokkiText2A3Editor {
         source.shinsaYY = item.get今回認定審査年();
         source.shinsaMM = item.get今回認定審査月();
         source.shinsaDD = item.get今回認定審査日();
-        if (テキスト.equals(item.get特記事項テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText1 = item.getTokkiText1();
                 source.tokkiText2 = item.getTokkiText2();
@@ -110,7 +109,7 @@ public class TokkiText2A3Editor implements ITokkiText2A3Editor {
                 source.tokkiText35 = item.getTokkiText35();
                 source.tokkiText36 = item.getTokkiText36();
             }
-        } else if (イメージ.equals(item.get特記事項テキスト_イメージ区分())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiImg1 = item.getTokkiImg1();
                 source.tokkiImg2 = item.getTokkiImg2();

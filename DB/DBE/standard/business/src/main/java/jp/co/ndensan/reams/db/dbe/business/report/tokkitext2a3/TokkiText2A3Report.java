@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext2a3.TokkiText2A3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa3.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.report.tokkitext2a3.TokkiText2A3ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -21,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class TokkiText2A3Report extends Report<TokkiText2A3ReportSource> {
 
-    private static final RString テキスト = new RString("1");
-    private static final RString イメージ = new RString("2");
     private static final int LENGTH_34 = 34;
     private final TokkiText2A3Entity entity;
 
@@ -44,10 +43,10 @@ public class TokkiText2A3Report extends Report<TokkiText2A3ReportSource> {
     public void writeBy(ReportSourceWriter<TokkiText2A3ReportSource> reportSourceWriter) {
         List<RString> 特記事項List1 = new ArrayList<>();
         List<RString> 特記事項List2 = new ArrayList<>();
-        if (テキスト.equals(entity.get特記事項テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get特記事項テキスト_イメージ区分())) {
             特記事項List1 = getlistChosa2();
             特記事項List2 = getlistChosa3();
-        } else if (イメージ.equals(entity.get特記事項テキスト_イメージ区分())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get特記事項テキスト_イメージ区分())) {
             特記事項List1 = getlistChosa();
             特記事項List2 = getlistChosa1();
         }
