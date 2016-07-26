@@ -48,6 +48,15 @@ public class JimuSonotashiryoBusiness {
     }
 
     /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+        return RString.EMPTY;
+    }
+
+    /**
      * 保険者番号を取得します。
      *
      * @return 保険者番号

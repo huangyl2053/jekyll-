@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryoa4.Sonotashir
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * その他資料Builderのインターフェースクラスです。
+ * その他資料（A4版）Builderのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-270 wangrenze
  */
 public interface ISonotashiryoA4Builder extends IReportBuilder<SonotashiryoA4ReportSource> {
 }
