@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class JigyoHokokuRenkei11_14Record2or3EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
+public class JigyoHokokuRenkei11or14Record2or3EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
 
     @CsvField(order = 1, name = "交換情報識別番号")
     private final RString 交換情報識別番号;
@@ -127,7 +127,7 @@ public class JigyoHokokuRenkei11_14Record2or3EucCsvEntity implements IJigyoHokok
      * @param d032 RString
      * @param d033 RString
      */
-    public JigyoHokokuRenkei11_14Record2or3EucCsvEntity(
+    public JigyoHokokuRenkei11or14Record2or3EucCsvEntity(
             RString 交換情報識別番号,
             RString レコード種別番号,
             RString d001,

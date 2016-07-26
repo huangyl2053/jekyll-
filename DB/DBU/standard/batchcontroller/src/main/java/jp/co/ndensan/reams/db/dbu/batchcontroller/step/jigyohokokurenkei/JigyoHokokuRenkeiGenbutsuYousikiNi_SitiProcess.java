@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.IJigyoHokokuRenkeiEucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei2_7EucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei27EucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiFooterEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiHeadEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -122,18 +122,18 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_SitiProcess extends BatchProcess
 
     private void get様式２の７のCSV出力() {
         eucCsvWriter.writeLine(setヘッダレコード());
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T1"), 件数_T1, 給付費_T1));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T2"), 件数_T2, 給付費_T2));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T3"), 件数_T3, 給付費_T3));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T4"), 件数_T4, 給付費_T4));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T5"), 件数_T5, 給付費_T5));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T6"), 件数_T6, 給付費_T6));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T7"), 件数_T7, 給付費_T7));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T8"), 件数_T8, 給付費_T8));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T9"), 件数_T9, 給付費_T9));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T10"), 件数_T10, 給付費_T10));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T11"), 件数_T11, 給付費_T11));
-        eucCsvWriter.writeLine(new JigyoHokokuRenkei2_7EucCsvEntity(RString.EMPTY, new RString("T12"), 件数_T12, 給付費_T12));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T1"), 件数_T1, 給付費_T1));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T2"), 件数_T2, 給付費_T2));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T3"), 件数_T3, 給付費_T3));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T4"), 件数_T4, 給付費_T4));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T5"), 件数_T5, 給付費_T5));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T6"), 件数_T6, 給付費_T6));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T7"), 件数_T7, 給付費_T7));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T8"), 件数_T8, 給付費_T8));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T9"), 件数_T9, 給付費_T9));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T10"), 件数_T10, 給付費_T10));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T11"), 件数_T11, 給付費_T11));
+        eucCsvWriter.writeLine(new JigyoHokokuRenkei27EucCsvEntity(RString.EMPTY, new RString("T12"), 件数_T12, 給付費_T12));
         eucCsvWriter.writeLine(set終了レコード());
     }
 

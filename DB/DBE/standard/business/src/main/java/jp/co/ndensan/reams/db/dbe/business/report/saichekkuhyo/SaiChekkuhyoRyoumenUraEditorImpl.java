@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0080-060 xuyannan
  */
-public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenUraEditor {
+public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenEditor {
 
     private static final int 一回目 = 1;
     private static final int 二回目 = 2;

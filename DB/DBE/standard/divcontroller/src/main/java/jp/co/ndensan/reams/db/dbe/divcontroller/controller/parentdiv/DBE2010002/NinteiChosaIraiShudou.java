@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -42,6 +43,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -75,7 +80,6 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<NinteiChosaIraiShudouDiv>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onLoad(NinteiChosaIraiShudouDiv div) {
-        
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         if (!RealInitialLocker.tryGetLock(get排他キー())) {
             throw new PessimisticLockingException();
@@ -234,6 +238,8 @@ public class NinteiChosaIraiShudou {
      */
     public ResponseData<SourceDataCollection> onClick_btnPrint(NinteiChosaIraiShudouDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
@@ -553,6 +559,11 @@ public class NinteiChosaIraiShudou {
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理は")).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private PersonalData toPersonalData(RString shinsei) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"), shinsei);
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

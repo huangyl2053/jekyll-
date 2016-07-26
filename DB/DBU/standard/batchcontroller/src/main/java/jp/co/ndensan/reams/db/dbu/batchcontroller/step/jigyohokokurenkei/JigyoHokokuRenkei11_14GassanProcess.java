@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokurenkei.JigyoHokokuRenkei11_14Entity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokurenkei.JigyoHokokuRenkei11or14Entity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.IJigyoHokokuRenkeiEucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11_14Record1EucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11_14Record2or3EucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11_14Record4EucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11or14Record1EucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11or14Record2or3EucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11or14Record4EucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiFooterEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiHeadEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -66,10 +66,10 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
     private RString csvFileName;
     private RDate 基準日;
     private JigyoHokokuRenkeiProcessParameter processParameter;
-    private JigyoHokokuRenkei11_14Entity record1Entity;
-    private JigyoHokokuRenkei11_14Entity record2Entity;
-    private JigyoHokokuRenkei11_14Entity record3Entity;
-    private JigyoHokokuRenkei11_14Entity record4Entity;
+    private JigyoHokokuRenkei11or14Entity record1Entity;
+    private JigyoHokokuRenkei11or14Entity record2Entity;
+    private JigyoHokokuRenkei11or14Entity record3Entity;
+    private JigyoHokokuRenkei11or14Entity record4Entity;
 
     @Override
     protected void initialize() {
@@ -85,10 +85,10 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         }
         csvFileName = new RString("DUJRENF05_" + processParameter.get過去集計年月()
                 + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
-        record1Entity = new JigyoHokokuRenkei11_14Entity();
-        record2Entity = new JigyoHokokuRenkei11_14Entity();
-        record3Entity = new JigyoHokokuRenkei11_14Entity();
-        record4Entity = new JigyoHokokuRenkei11_14Entity();
+        record1Entity = new JigyoHokokuRenkei11or14Entity();
+        record2Entity = new JigyoHokokuRenkei11or14Entity();
+        record3Entity = new JigyoHokokuRenkei11or14Entity();
+        record4Entity = new JigyoHokokuRenkei11or14Entity();
     }
 
     @BatchWriter
@@ -154,7 +154,7 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
 
     private void get様式１の６レコード１のCSV出力() {
         eucCsvWriter.writeLine(
-                new JigyoHokokuRenkei11_14Record1EucCsvEntity(
+                new JigyoHokokuRenkei11or14Record1EucCsvEntity(
                         RString.EMPTY,
                         new RString("T1"),
                         record1Entity.getD001(),
@@ -218,7 +218,7 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
 
     private void get様式１の６レコード２OR３のCSV出力(RString レコード種別番号) {
         eucCsvWriter.writeLine(
-                new JigyoHokokuRenkei11_14Record2or3EucCsvEntity(
+                new JigyoHokokuRenkei11or14Record2or3EucCsvEntity(
                         RString.EMPTY,
                         レコード種別番号,
                         record1Entity.getD001(),
@@ -260,7 +260,7 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
 
     private void get様式１の６レコード４のCSV出力() {
         eucCsvWriter.writeLine(
-                new JigyoHokokuRenkei11_14Record4EucCsvEntity(
+                new JigyoHokokuRenkei11or14Record4EucCsvEntity(
                         RString.EMPTY,
                         new RString("T4"),
                         record1Entity.getD001(),
@@ -367,9 +367,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         );
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード１の項目編集(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード１の項目編集(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity record1Entity) {
+            JigyoHokokuRenkei11or14Entity record1Entity) {
         if (集計番号_1100.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 record1Entity.setD001(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -408,9 +408,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード１の項目編集2(entity, record1Entity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード１の項目編集2(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード１の項目編集2(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity record1Entity) {
+            JigyoHokokuRenkei11or14Entity record1Entity) {
         if (集計番号_1100.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 record1Entity.setD012(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -449,9 +449,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード１の項目編集3(entity, record1Entity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード１の項目編集3(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード１の項目編集3(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity record1Entity) {
+            JigyoHokokuRenkei11or14Entity record1Entity) {
         if (集計番号_1100.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 record1Entity.setD023(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -490,9 +490,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード１の項目編集4(entity, record1Entity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード１の項目編集4(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード１の項目編集4(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity record1Entity) {
+            JigyoHokokuRenkei11or14Entity record1Entity) {
         if (集計番号_1100.equals(entity.getShukeiNo().getColumnValue()) && 番号_4.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 record1Entity.setD034(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -531,9 +531,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード１の項目編集5(entity, record1Entity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード１の項目編集5(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード１の項目編集5(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity record1Entity) {
+            JigyoHokokuRenkei11or14Entity record1Entity) {
         if (集計番号_1100.equals(entity.getShukeiNo().getColumnValue()) && 番号_5.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 record1Entity.setD045(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -572,9 +572,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return record1Entity;
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード2or3の項目編集(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード2or3の項目編集(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity,
+            JigyoHokokuRenkei11or14Entity recordEntity,
             RString 集計番号) {
         if (集計番号.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
@@ -614,9 +614,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード2or3の項目編集2(entity, recordEntity, 集計番号);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード2or3の項目編集2(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード2or3の項目編集2(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity,
+            JigyoHokokuRenkei11or14Entity recordEntity,
             RString 集計番号) {
         if (集計番号.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
@@ -656,9 +656,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード2or3の項目編集3(entity, recordEntity, 集計番号);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード2or3の項目編集3(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード2or3の項目編集3(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity,
+            JigyoHokokuRenkei11or14Entity recordEntity,
             RString 集計番号) {
         if (集計番号.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
@@ -698,9 +698,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return recordEntity;
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1391.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD001(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -736,9 +736,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集2(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集2(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集2(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1391.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD011(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -774,9 +774,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集3(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集3(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集3(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1391.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD021(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -812,9 +812,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集4(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集4(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集4(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1392.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD031(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -850,9 +850,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集5(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集5(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集5(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1392.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD041(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -888,9 +888,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集6(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集6(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集6(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1392.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD051(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -926,9 +926,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集7(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集7(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集7(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1393.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD061(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -964,9 +964,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集8(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集8(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集8(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1393.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD071(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -1002,9 +1002,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集9(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集9(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集9(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1393.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD081(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -1040,9 +1040,9 @@ public class JigyoHokokuRenkei11_14GassanProcess extends BatchProcessBase<DbT702
         return get様式１の６レコード4の項目編集10(entity, recordEntity);
     }
 
-    private JigyoHokokuRenkei11_14Entity get様式１の６レコード4の項目編集10(
+    private JigyoHokokuRenkei11or14Entity get様式１の６レコード4の項目編集10(
             DbT7021JigyoHokokuTokeiDataEntity entity,
-            JigyoHokokuRenkei11_14Entity recordEntity) {
+            JigyoHokokuRenkei11or14Entity recordEntity) {
         if (集計番号_1393.equals(entity.getShukeiNo().getColumnValue()) && 番号_4.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 recordEntity.setD091(new RString(entity.getShukeiKekkaAtai().toString()));

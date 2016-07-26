@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Setter
 @lombok.Getter
-public class JigyoHokokuRenkei11_14Entity {
+public class JigyoHokokuRenkei11or14Entity {
 
     private RString d001;
     private RString d002;

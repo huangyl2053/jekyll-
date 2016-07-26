@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class JigyoHokokuRenkei2_7EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
+public class JigyoHokokuRenkei27EucCsvEntity implements IJigyoHokokuRenkeiEucCsvEntity {
 
     @CsvField(order = 10, name = "交換情報識別番号")
     private final RString 交換情報識別番号;
@@ -35,7 +35,7 @@ public class JigyoHokokuRenkei2_7EucCsvEntity implements IJigyoHokokuRenkeiEucCs
      * @param 件数 int
      * @param 給付費 Decimal
      */
-    public JigyoHokokuRenkei2_7EucCsvEntity(
+    public JigyoHokokuRenkei27EucCsvEntity(
             RString 交換情報識別番号,
             RString レコード種別番号,
             int 件数,

@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -75,7 +76,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
             Association association,
             RStringBuilder 生活保護種別builder) {
         HanyoListRoreiFukushiNenkinJukyushaCsvEntity eucCsvEntity = new HanyoListRoreiFukushiNenkinJukyushaCsvEntity();
-        if (entity.get識別コード() != null) {
+        if (entity != null) {
             if (entity.getPsmEntity() != null) {
                 IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
                 eucCsvEntity.set識別コード(kojin.get識別コード().value());
@@ -122,52 +123,52 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
                 eucCsvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().value());
                 eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
             }
-        }
-        eucCsvEntity.set市町村名(association.get市町村名());
-        eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
-        eucCsvEntity.set保険者名(association.getShichosonName_());
-        eucCsvEntity.set空白(RString.EMPTY);
-        eucCsvEntity.set市町村コード(entity.get市町村コード());
-        eucCsvEntity.set被保険者番号(entity.get被保険者番号());
-        eucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
-        eucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
-        eucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
-        eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
-        eucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
-        eucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
-        if (!RString.isNullOrEmpty(entity.get資格区分())) {
-            eucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
-        }
-        if (フラグ.equals(entity.get住所地特例状態())) {
-            eucCsvEntity.set住所地特例状態(住所地特例);
-        } else {
-            eucCsvEntity.set住所地特例状態(RString.EMPTY);
-        }
-        RString lasdecCode;
-        if (フラグ.equals(entity.get広域内住所地特例フラグ())) {
-            lasdecCode = entity.get広住特措置元市町村コード();
-        } else {
-            lasdecCode = entity.get市町村コード();
-        }
-        for (KoseiShichosonMaster master : koseiShichosonJoho) {
-            if (master.get市町村コード().value().equals(lasdecCode)) {
-                eucCsvEntity.set資格証記載保険者番号(master.get証記載保険者番号().value());
-                break;
-            } else {
-                eucCsvEntity.set資格証記載保険者番号(RString.EMPTY);
+            eucCsvEntity.set市町村名(association.get市町村名());
+            eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
+            eucCsvEntity.set保険者名(association.getShichosonName_());
+            eucCsvEntity.set空白(RString.EMPTY);
+            eucCsvEntity.set市町村コード(entity.get市町村コード());
+            eucCsvEntity.set被保険者番号(entity.get被保険者番号());
+            eucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
+            eucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
+            eucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
+            eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
+            eucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
+            eucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
+            if (!RString.isNullOrEmpty(entity.get資格区分())) {
+                eucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
             }
+            if (フラグ.equals(entity.get住所地特例状態())) {
+                eucCsvEntity.set住所地特例状態(住所地特例);
+            } else {
+                eucCsvEntity.set住所地特例状態(RString.EMPTY);
+            }
+            RString lasdecCode;
+            if (フラグ.equals(entity.get広域内住所地特例フラグ())) {
+                lasdecCode = entity.get広住特措置元市町村コード();
+            } else {
+                lasdecCode = entity.get市町村コード();
+            }
+            for (KoseiShichosonMaster master : koseiShichosonJoho) {
+                if (master.get市町村コード().value().equals(lasdecCode)) {
+                    eucCsvEntity.set資格証記載保険者番号(master.get証記載保険者番号().value());
+                    break;
+                } else {
+                    eucCsvEntity.set資格証記載保険者番号(RString.EMPTY);
+                }
+            }
+            eucCsvEntity.set老齢福祉年金開始日(set年月日(processParamter, entity.get老齢福祉年金開始日()));
+            eucCsvEntity.set老齢福祉年金終了日(set年月日(processParamter, entity.get老齢福祉年金終了日()));
+            eucCsvEntity.set生活保護開始日(set年月日(processParamter, entity.get生活保護開始日()));
+            eucCsvEntity.set生活保護終了日(set年月日(processParamter, entity.get生活保護終了日()));
+            if (生活保護種別builder.length() != 0) {
+                eucCsvEntity.set生活保護種別(生活保護種別builder.toRString().remove(生活保護種別builder.length() - 1));
+            }
+            eucCsvEntity.set医療保険種別(getCodeNameByCode(DBACodeShubetsu.医療保険種類.getコード(), entity.get医療保険種別()));
+            eucCsvEntity.set医療保険番号(entity.get医療保険番号());
+            eucCsvEntity.set医療保険者名(entity.get医療保険者名());
+            eucCsvEntity.set医療保険記号番号(entity.get医療保険記号番号());
         }
-        eucCsvEntity.set老齢福祉年金開始日(set年月日(processParamter, entity.get老齢福祉年金開始日()));
-        eucCsvEntity.set老齢福祉年金終了日(set年月日(processParamter, entity.get老齢福祉年金終了日()));
-        eucCsvEntity.set生活保護開始日(set年月日(processParamter, entity.get生活保護開始日()));
-        eucCsvEntity.set生活保護終了日(set年月日(processParamter, entity.get生活保護終了日()));
-        if (生活保護種別builder.length() != 0) {
-            eucCsvEntity.set生活保護種別(生活保護種別builder.toRString().remove(生活保護種別builder.length() - 1));
-        }
-        eucCsvEntity.set医療保険種別(getCodeNameByCode(DBACodeShubetsu.医療保険種類.getコード(), entity.get医療保険種別()));
-        eucCsvEntity.set医療保険番号(entity.get医療保険番号());
-        eucCsvEntity.set医療保険者名(entity.get医療保険者名());
-        eucCsvEntity.set医療保険記号番号(entity.get医療保険記号番号());
         return eucCsvEntity;
     }
 
@@ -190,7 +191,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
             Association association,
             RStringBuilder 生活保護種別builder) {
         HanyoListRoreiFukushiNenkinJukyushaRenbanCsvEntity renbanEucCsvEntity = new HanyoListRoreiFukushiNenkinJukyushaRenbanCsvEntity();
-        if (entity.get識別コード() != null) {
+        if (entity != null) {
             renbanEucCsvEntity.set連番(new RString(String.valueOf(i)));
             if (entity.getPsmEntity() != null) {
                 IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
@@ -326,22 +327,32 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
         if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(processParamter.getPsmChushutsu_Kubun())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(年齢);
-            jokenBuilder.append(processParamter.getPsmChushutsuAge_Start());
+            Decimal ageStart = processParamter.getPsmChushutsuAge_Start();
+            if (ageStart == null) {
+                jokenBuilder.append(RString.EMPTY);
+            } else {
+                jokenBuilder.append(ageStart);
+            }
             jokenBuilder.append(歳);
             jokenBuilder.append(カラ);
-            jokenBuilder.append(processParamter.getPsmChushutsuAge_End());
+            Decimal ageEnd = processParamter.getPsmChushutsuAge_End();
+            if (ageEnd == null) {
+                jokenBuilder.append(RString.EMPTY);
+            } else {
+                jokenBuilder.append(ageEnd);
+            }
             jokenBuilder.append(歳);
             jokenBuilder.append(年齢基準日);
-            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmAgeKijunni().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmAgeKijunni()));
             jokenBuilder.append(右パーレン);
             出力条件List.add(jokenBuilder.toRString());
         }
         if (NenreiSoChushutsuHoho.生年月日範囲.getコード().equals(processParamter.getPsmChushutsu_Kubun())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(生年月日);
-            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_Start().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_Start()));
             jokenBuilder.append(カラ);
-            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_End().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_End()));
             出力条件List.add(jokenBuilder.toRString());
         }
         if (!Chiku.全て.getコード().equals(processParamter.getPsmChiku_Kubun())) {
@@ -399,6 +410,14 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
             出力条件List.add(jokenBuilder.toRString());
         }
         return 出力条件List;
+    }
+
+    private RString set出力条件表の日付(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date.toDateString()).wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString set出力条件表の日付(RString date) {

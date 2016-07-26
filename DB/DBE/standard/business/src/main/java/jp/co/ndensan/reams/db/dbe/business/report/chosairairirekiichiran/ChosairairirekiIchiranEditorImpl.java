@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.report.chosairairirekiichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.chosairairirekiichiran.ChosairairirekiIchiranReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -52,6 +55,8 @@ public class ChosairairirekiIchiranEditorImpl implements IChosairairirekiIchiran
         source.listShinseiKubun_1 = business.get申請区分();
         source.listHihokenshaName_1 = business.get氏名();
         source.listChosainName_1 = business.get調査員名();
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hishokenshaNo = new ExpandedInformation(new Code(business.get被保険者番号()), new RString("003"), new RString("被保険者番号"));
         return source;
     }
 

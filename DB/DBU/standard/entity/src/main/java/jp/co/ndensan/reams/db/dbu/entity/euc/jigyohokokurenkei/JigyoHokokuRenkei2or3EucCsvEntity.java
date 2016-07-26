@@ -23,208 +23,208 @@ public class JigyoHokokuRenkei2or3EucCsvEntity {
     private final RString 月;
     @CsvField(order = 3, name = "保険者番号")
     private final RString 保険者番号;
-    @CsvField(order = 10, name = "D001")
-    private final RString D001;
-    @CsvField(order = 20, name = "D002")
-    private final RString D002;
-    @CsvField(order = 30, name = "D003")
-    private final RString D003;
-    @CsvField(order = 40, name = "D004")
-    private final RString D004;
-    @CsvField(order = 50, name = "D005")
-    private final RString D005;
-    @CsvField(order = 60, name = "D006")
-    private final RString D006;
-    @CsvField(order = 70, name = "D007")
-    private final RString D007;
-    @CsvField(order = 80, name = "D008")
-    private final RString D008;
-    @CsvField(order = 90, name = "D009")
-    private final RString D009;
-    @CsvField(order = 100, name = "D010")
-    private final RString D010;
-    @CsvField(order = 110, name = "D011")
-    private final RString D011;
-    @CsvField(order = 120, name = "D012")
-    private final RString D012;
-    @CsvField(order = 130, name = "D013")
-    private final RString D013;
-    @CsvField(order = 140, name = "D014")
-    private final RString D014;
-    @CsvField(order = 150, name = "D015")
-    private final RString D015;
-    @CsvField(order = 160, name = "D016")
-    private final RString D016;
-    @CsvField(order = 170, name = "D017")
-    private final RString D017;
-    @CsvField(order = 180, name = "D018")
-    private final RString D018;
-    @CsvField(order = 190, name = "D019")
-    private final RString D019;
-    @CsvField(order = 200, name = "D020")
-    private final RString D020;
-    @CsvField(order = 210, name = "D021")
-    private final RString D021;
-    @CsvField(order = 220, name = "D022")
-    private final RString D022;
-    @CsvField(order = 230, name = "D023")
-    private final RString D023;
-    @CsvField(order = 240, name = "D024")
-    private final RString D024;
-    @CsvField(order = 250, name = "D025")
-    private final RString D025;
-    @CsvField(order = 260, name = "D026")
-    private final RString D026;
-    @CsvField(order = 270, name = "D027")
-    private final RString D027;
-    @CsvField(order = 280, name = "D028")
-    private final RString D028;
-    @CsvField(order = 290, name = "D029")
-    private final RString D029;
-    @CsvField(order = 300, name = "D030")
-    private final RString D030;
-    @CsvField(order = 310, name = "D031")
-    private final RString D031;
-    @CsvField(order = 320, name = "D032")
-    private final RString D032;
-    @CsvField(order = 330, name = "D033")
-    private final RString D033;
-    @CsvField(order = 340, name = "D034")
-    private final RString D034;
-    @CsvField(order = 350, name = "D035")
-    private final RString D035;
-    @CsvField(order = 360, name = "D036")
-    private final RString D036;
-    @CsvField(order = 370, name = "D037")
-    private final RString D037;
-    @CsvField(order = 380, name = "D038")
-    private final RString D038;
-    @CsvField(order = 390, name = "D039")
-    private final RString D039;
-    @CsvField(order = 400, name = "D040")
-    private final RString D040;
-    @CsvField(order = 410, name = "D041")
-    private final RString D041;
-    @CsvField(order = 420, name = "D042")
-    private final RString D042;
-    @CsvField(order = 430, name = "D043")
-    private final RString D043;
-    @CsvField(order = 440, name = "D044")
-    private final RString D044;
-    @CsvField(order = 450, name = "D045")
-    private final RString D045;
-    @CsvField(order = 460, name = "D046")
-    private final RString D046;
-    @CsvField(order = 470, name = "D047")
-    private final RString D047;
-    @CsvField(order = 480, name = "D048")
-    private final RString D048;
-    @CsvField(order = 490, name = "D049")
-    private final RString D049;
-    @CsvField(order = 500, name = "D050")
-    private final RString D050;
-    @CsvField(order = 510, name = "D051")
-    private final RString D051;
-    @CsvField(order = 520, name = "D052")
-    private final RString D052;
-    @CsvField(order = 530, name = "D053")
-    private final RString D053;
-    @CsvField(order = 540, name = "D054")
-    private final RString D054;
-    @CsvField(order = 550, name = "D055")
-    private final RString D055;
-    @CsvField(order = 560, name = "D056")
-    private final RString D056;
-    @CsvField(order = 570, name = "D057")
-    private final RString D057;
-    @CsvField(order = 580, name = "D058")
-    private final RString D058;
-    @CsvField(order = 590, name = "D059")
-    private final RString D059;
-    @CsvField(order = 600, name = "D060")
-    private final RString D060;
-    @CsvField(order = 610, name = "D061")
-    private final RString D061;
-    @CsvField(order = 620, name = "D062")
-    private final RString D062;
-    @CsvField(order = 630, name = "D063")
-    private final RString D063;
-    @CsvField(order = 640, name = "D064")
-    private final RString D064;
-    @CsvField(order = 650, name = "D065")
-    private final RString D065;
-    @CsvField(order = 660, name = "D066")
-    private final RString D066;
-    @CsvField(order = 670, name = "D067")
-    private final RString D067;
-    @CsvField(order = 680, name = "D068")
-    private final RString D068;
-    @CsvField(order = 690, name = "D069")
-    private final RString D069;
-    @CsvField(order = 700, name = "D070")
-    private final RString D070;
-    @CsvField(order = 710, name = "D071")
-    private final RString D071;
-    @CsvField(order = 720, name = "D072")
-    private final RString D072;
-    @CsvField(order = 730, name = "D073")
-    private final RString D073;
-    @CsvField(order = 740, name = "D074")
-    private final RString D074;
-    @CsvField(order = 750, name = "D075")
-    private final RString D075;
-    @CsvField(order = 760, name = "D076")
-    private final RString D076;
-    @CsvField(order = 770, name = "D077")
-    private final RString D077;
-    @CsvField(order = 780, name = "D078")
-    private final RString D078;
-    @CsvField(order = 790, name = "D079")
-    private final RString D079;
-    @CsvField(order = 800, name = "D080")
-    private final RString D080;
-    @CsvField(order = 810, name = "D081")
-    private final RString D081;
-    @CsvField(order = 820, name = "D082")
-    private final RString D082;
-    @CsvField(order = 830, name = "D083")
-    private final RString D083;
-    @CsvField(order = 840, name = "D084")
-    private final RString D084;
-    @CsvField(order = 850, name = "D085")
-    private final RString D085;
-    @CsvField(order = 860, name = "D086")
-    private final RString D086;
-    @CsvField(order = 870, name = "D087")
-    private final RString D087;
-    @CsvField(order = 880, name = "D088")
-    private final RString D088;
-    @CsvField(order = 890, name = "D089")
-    private final RString D089;
-    @CsvField(order = 900, name = "D090")
-    private final RString D090;
-    @CsvField(order = 910, name = "D091")
-    private final RString D091;
-    @CsvField(order = 920, name = "D092")
-    private final RString D092;
-    @CsvField(order = 930, name = "D093")
-    private final RString D093;
-    @CsvField(order = 940, name = "D094")
-    private final RString D094;
-    @CsvField(order = 950, name = "D095")
-    private final RString D095;
-    @CsvField(order = 960, name = "D096")
-    private final RString D096;
-    @CsvField(order = 970, name = "D097")
-    private final RString D097;
-    @CsvField(order = 980, name = "D098")
-    private final RString D098;
-    @CsvField(order = 990, name = "D099")
-    private final RString D099;
-    @CsvField(order = 1000, name = "D100")
-    private final RString D100;
-    @CsvField(order = 1010, name = "D101")
-    private final RString D101;
+    @CsvField(order = 10, name = "d001")
+    private final RString d001;
+    @CsvField(order = 20, name = "d002")
+    private final RString d002;
+    @CsvField(order = 30, name = "d003")
+    private final RString d003;
+    @CsvField(order = 40, name = "d004")
+    private final RString d004;
+    @CsvField(order = 50, name = "d005")
+    private final RString d005;
+    @CsvField(order = 60, name = "d006")
+    private final RString d006;
+    @CsvField(order = 70, name = "d007")
+    private final RString d007;
+    @CsvField(order = 80, name = "d008")
+    private final RString d008;
+    @CsvField(order = 90, name = "d009")
+    private final RString d009;
+    @CsvField(order = 100, name = "d010")
+    private final RString d010;
+    @CsvField(order = 110, name = "d011")
+    private final RString d011;
+    @CsvField(order = 120, name = "d012")
+    private final RString d012;
+    @CsvField(order = 130, name = "d013")
+    private final RString d013;
+    @CsvField(order = 140, name = "d014")
+    private final RString d014;
+    @CsvField(order = 150, name = "d015")
+    private final RString d015;
+    @CsvField(order = 160, name = "d016")
+    private final RString d016;
+    @CsvField(order = 170, name = "d017")
+    private final RString d017;
+    @CsvField(order = 180, name = "d018")
+    private final RString d018;
+    @CsvField(order = 190, name = "d019")
+    private final RString d019;
+    @CsvField(order = 200, name = "d020")
+    private final RString d020;
+    @CsvField(order = 210, name = "d021")
+    private final RString d021;
+    @CsvField(order = 220, name = "d022")
+    private final RString d022;
+    @CsvField(order = 230, name = "d023")
+    private final RString d023;
+    @CsvField(order = 240, name = "d024")
+    private final RString d024;
+    @CsvField(order = 250, name = "d025")
+    private final RString d025;
+    @CsvField(order = 260, name = "d026")
+    private final RString d026;
+    @CsvField(order = 270, name = "d027")
+    private final RString d027;
+    @CsvField(order = 280, name = "d028")
+    private final RString d028;
+    @CsvField(order = 290, name = "d029")
+    private final RString d029;
+    @CsvField(order = 300, name = "d030")
+    private final RString d030;
+    @CsvField(order = 310, name = "d031")
+    private final RString d031;
+    @CsvField(order = 320, name = "d032")
+    private final RString d032;
+    @CsvField(order = 330, name = "d033")
+    private final RString d033;
+    @CsvField(order = 340, name = "d034")
+    private final RString d034;
+    @CsvField(order = 350, name = "d035")
+    private final RString d035;
+    @CsvField(order = 360, name = "d036")
+    private final RString d036;
+    @CsvField(order = 370, name = "d037")
+    private final RString d037;
+    @CsvField(order = 380, name = "d038")
+    private final RString d038;
+    @CsvField(order = 390, name = "d039")
+    private final RString d039;
+    @CsvField(order = 400, name = "d040")
+    private final RString d040;
+    @CsvField(order = 410, name = "d041")
+    private final RString d041;
+    @CsvField(order = 420, name = "d042")
+    private final RString d042;
+    @CsvField(order = 430, name = "d043")
+    private final RString d043;
+    @CsvField(order = 440, name = "d044")
+    private final RString d044;
+    @CsvField(order = 450, name = "d045")
+    private final RString d045;
+    @CsvField(order = 460, name = "d046")
+    private final RString d046;
+    @CsvField(order = 470, name = "d047")
+    private final RString d047;
+    @CsvField(order = 480, name = "d048")
+    private final RString d048;
+    @CsvField(order = 490, name = "d049")
+    private final RString d049;
+    @CsvField(order = 500, name = "d050")
+    private final RString d050;
+    @CsvField(order = 510, name = "d051")
+    private final RString d051;
+    @CsvField(order = 520, name = "d052")
+    private final RString d052;
+    @CsvField(order = 530, name = "d053")
+    private final RString d053;
+    @CsvField(order = 540, name = "d054")
+    private final RString d054;
+    @CsvField(order = 550, name = "d055")
+    private final RString d055;
+    @CsvField(order = 560, name = "d056")
+    private final RString d056;
+    @CsvField(order = 570, name = "d057")
+    private final RString d057;
+    @CsvField(order = 580, name = "d058")
+    private final RString d058;
+    @CsvField(order = 590, name = "d059")
+    private final RString d059;
+    @CsvField(order = 600, name = "d060")
+    private final RString d060;
+    @CsvField(order = 610, name = "d061")
+    private final RString d061;
+    @CsvField(order = 620, name = "d062")
+    private final RString d062;
+    @CsvField(order = 630, name = "d063")
+    private final RString d063;
+    @CsvField(order = 640, name = "d064")
+    private final RString d064;
+    @CsvField(order = 650, name = "d065")
+    private final RString d065;
+    @CsvField(order = 660, name = "d066")
+    private final RString d066;
+    @CsvField(order = 670, name = "d067")
+    private final RString d067;
+    @CsvField(order = 680, name = "d068")
+    private final RString d068;
+    @CsvField(order = 690, name = "d069")
+    private final RString d069;
+    @CsvField(order = 700, name = "d070")
+    private final RString d070;
+    @CsvField(order = 710, name = "d071")
+    private final RString d071;
+    @CsvField(order = 720, name = "d072")
+    private final RString d072;
+    @CsvField(order = 730, name = "d073")
+    private final RString d073;
+    @CsvField(order = 740, name = "d074")
+    private final RString d074;
+    @CsvField(order = 750, name = "d075")
+    private final RString d075;
+    @CsvField(order = 760, name = "d076")
+    private final RString d076;
+    @CsvField(order = 770, name = "d077")
+    private final RString d077;
+    @CsvField(order = 780, name = "d078")
+    private final RString d078;
+    @CsvField(order = 790, name = "d079")
+    private final RString d079;
+    @CsvField(order = 800, name = "d080")
+    private final RString d080;
+    @CsvField(order = 810, name = "d081")
+    private final RString d081;
+    @CsvField(order = 820, name = "d082")
+    private final RString d082;
+    @CsvField(order = 830, name = "d083")
+    private final RString d083;
+    @CsvField(order = 840, name = "d084")
+    private final RString d084;
+    @CsvField(order = 850, name = "d085")
+    private final RString d085;
+    @CsvField(order = 860, name = "d086")
+    private final RString d086;
+    @CsvField(order = 870, name = "d087")
+    private final RString d087;
+    @CsvField(order = 880, name = "d088")
+    private final RString d088;
+    @CsvField(order = 890, name = "d089")
+    private final RString d089;
+    @CsvField(order = 900, name = "d090")
+    private final RString d090;
+    @CsvField(order = 910, name = "d091")
+    private final RString d091;
+    @CsvField(order = 920, name = "d092")
+    private final RString d092;
+    @CsvField(order = 930, name = "d093")
+    private final RString d093;
+    @CsvField(order = 940, name = "d094")
+    private final RString d094;
+    @CsvField(order = 950, name = "d095")
+    private final RString d095;
+    @CsvField(order = 960, name = "d096")
+    private final RString d096;
+    @CsvField(order = 970, name = "d097")
+    private final RString d097;
+    @CsvField(order = 980, name = "d098")
+    private final RString d098;
+    @CsvField(order = 990, name = "d099")
+    private final RString d099;
+    @CsvField(order = 1000, name = "d100")
+    private final RString d100;
+    @CsvField(order = 1010, name = "d101")
+    private final RString d101;
 
     /**
      * コンストラクタ
@@ -232,317 +232,317 @@ public class JigyoHokokuRenkei2or3EucCsvEntity {
      * @param 和暦年 RString
      * @param 月 RString
      * @param 保険者番号 RString
-     * @param D001 RString
-     * @param D002 RString
-     * @param D003 RString
-     * @param D004 RString
-     * @param D005 RString
-     * @param D006 RString
-     * @param D007 RString
-     * @param D008 RString
-     * @param D009 RString
-     * @param D010 RString
-     * @param D011 RString
-     * @param D012 RString
-     * @param D013 RString
-     * @param D014 RString
-     * @param D015 RString
-     * @param D016 RString
-     * @param D017 RString
-     * @param D018 RString
-     * @param D019 RString
-     * @param D020 RString
-     * @param D021 RString
-     * @param D022 RString
-     * @param D023 RString
-     * @param D024 RString
-     * @param D025 RString
-     * @param D026 RString
-     * @param D027 RString
-     * @param D028 RString
-     * @param D029 RString
-     * @param D030 RString
-     * @param D031 RString
-     * @param D032 RString
-     * @param D033 RString
-     * @param D034 RString
-     * @param D035 RString
-     * @param D036 RString
-     * @param D037 RString
-     * @param D038 RString
-     * @param D039 RString
-     * @param D040 RString
-     * @param D041 RString
-     * @param D042 RString
-     * @param D043 RString
-     * @param D044 RString
-     * @param D045 RString
-     * @param D046 RString
-     * @param D047 RString
-     * @param D048 RString
-     * @param D049 RString
-     * @param D050 RString
-     * @param D051 RString
-     * @param D052 RString
-     * @param D053 RString
-     * @param D054 RString
-     * @param D055 RString
-     * @param D056 RString
-     * @param D057 RString
-     * @param D058 RString
-     * @param D059 RString
-     * @param D060 RString
-     * @param D061 RString
-     * @param D062 RString
-     * @param D063 RString
-     * @param D064 RString
-     * @param D065 RString
-     * @param D066 RString
-     * @param D067 RString
-     * @param D068 RString
-     * @param D069 RString
-     * @param D070 RString
-     * @param D071 RString
-     * @param D072 RString
-     * @param D073 RString
-     * @param D074 RString
-     * @param D075 RString
-     * @param D076 RString
-     * @param D077 RString
-     * @param D078 RString
-     * @param D079 RString
-     * @param D080 RString
-     * @param D081 RString
-     * @param D082 RString
-     * @param D083 RString
-     * @param D084 RString
-     * @param D085 RString
-     * @param D086 RString
-     * @param D087 RString
-     * @param D088 RString
-     * @param D089 RString
-     * @param D090 RString
-     * @param D091 RString
-     * @param D092 RString
-     * @param D093 RString
-     * @param D094 RString
-     * @param D095 RString
-     * @param D096 RString
-     * @param D097 RString
-     * @param D098 RString
-     * @param D099 RString
-     * @param D100 RString
-     * @param D101 RString
+     * @param d001 RString
+     * @param d002 RString
+     * @param d003 RString
+     * @param d004 RString
+     * @param d005 RString
+     * @param d006 RString
+     * @param d007 RString
+     * @param d008 RString
+     * @param d009 RString
+     * @param d010 RString
+     * @param d011 RString
+     * @param d012 RString
+     * @param d013 RString
+     * @param d014 RString
+     * @param d015 RString
+     * @param d016 RString
+     * @param d017 RString
+     * @param d018 RString
+     * @param d019 RString
+     * @param d020 RString
+     * @param d021 RString
+     * @param d022 RString
+     * @param d023 RString
+     * @param d024 RString
+     * @param d025 RString
+     * @param d026 RString
+     * @param d027 RString
+     * @param d028 RString
+     * @param d029 RString
+     * @param d030 RString
+     * @param d031 RString
+     * @param d032 RString
+     * @param d033 RString
+     * @param d034 RString
+     * @param d035 RString
+     * @param d036 RString
+     * @param d037 RString
+     * @param d038 RString
+     * @param d039 RString
+     * @param d040 RString
+     * @param d041 RString
+     * @param d042 RString
+     * @param d043 RString
+     * @param d044 RString
+     * @param d045 RString
+     * @param d046 RString
+     * @param d047 RString
+     * @param d048 RString
+     * @param d049 RString
+     * @param d050 RString
+     * @param d051 RString
+     * @param d052 RString
+     * @param d053 RString
+     * @param d054 RString
+     * @param d055 RString
+     * @param d056 RString
+     * @param d057 RString
+     * @param d058 RString
+     * @param d059 RString
+     * @param d060 RString
+     * @param d061 RString
+     * @param d062 RString
+     * @param d063 RString
+     * @param d064 RString
+     * @param d065 RString
+     * @param d066 RString
+     * @param d067 RString
+     * @param d068 RString
+     * @param d069 RString
+     * @param d070 RString
+     * @param d071 RString
+     * @param d072 RString
+     * @param d073 RString
+     * @param d074 RString
+     * @param d075 RString
+     * @param d076 RString
+     * @param d077 RString
+     * @param d078 RString
+     * @param d079 RString
+     * @param d080 RString
+     * @param d081 RString
+     * @param d082 RString
+     * @param d083 RString
+     * @param d084 RString
+     * @param d085 RString
+     * @param d086 RString
+     * @param d087 RString
+     * @param d088 RString
+     * @param d089 RString
+     * @param d090 RString
+     * @param d091 RString
+     * @param d092 RString
+     * @param d093 RString
+     * @param d094 RString
+     * @param d095 RString
+     * @param d096 RString
+     * @param d097 RString
+     * @param d098 RString
+     * @param d099 RString
+     * @param d100 RString
+     * @param d101 RString
      */
     public JigyoHokokuRenkei2or3EucCsvEntity(
             RString 和暦年,
             RString 月,
             RString 保険者番号,
-            RString D001,
-            RString D002,
-            RString D003,
-            RString D004,
-            RString D005,
-            RString D006,
-            RString D007,
-            RString D008,
-            RString D009,
-            RString D010,
-            RString D011,
-            RString D012,
-            RString D013,
-            RString D014,
-            RString D015,
-            RString D016,
-            RString D017,
-            RString D018,
-            RString D019,
-            RString D020,
-            RString D021,
-            RString D022,
-            RString D023,
-            RString D024,
-            RString D025,
-            RString D026,
-            RString D027,
-            RString D028,
-            RString D029,
-            RString D030,
-            RString D031,
-            RString D032,
-            RString D033,
-            RString D034,
-            RString D035,
-            RString D036,
-            RString D037,
-            RString D038,
-            RString D039,
-            RString D040,
-            RString D041,
-            RString D042,
-            RString D043,
-            RString D044,
-            RString D045,
-            RString D046,
-            RString D047,
-            RString D048,
-            RString D049,
-            RString D050,
-            RString D051,
-            RString D052,
-            RString D053,
-            RString D054,
-            RString D055,
-            RString D056,
-            RString D057,
-            RString D058,
-            RString D059,
-            RString D060,
-            RString D061,
-            RString D062,
-            RString D063,
-            RString D064,
-            RString D065,
-            RString D066,
-            RString D067,
-            RString D068,
-            RString D069,
-            RString D070,
-            RString D071,
-            RString D072,
-            RString D073,
-            RString D074,
-            RString D075,
-            RString D076,
-            RString D077,
-            RString D078,
-            RString D079,
-            RString D080,
-            RString D081,
-            RString D082,
-            RString D083,
-            RString D084,
-            RString D085,
-            RString D086,
-            RString D087,
-            RString D088,
-            RString D089,
-            RString D090,
-            RString D091,
-            RString D092,
-            RString D093,
-            RString D094,
-            RString D095,
-            RString D096,
-            RString D097,
-            RString D098,
-            RString D099,
-            RString D100,
-            RString D101
+            RString d001,
+            RString d002,
+            RString d003,
+            RString d004,
+            RString d005,
+            RString d006,
+            RString d007,
+            RString d008,
+            RString d009,
+            RString d010,
+            RString d011,
+            RString d012,
+            RString d013,
+            RString d014,
+            RString d015,
+            RString d016,
+            RString d017,
+            RString d018,
+            RString d019,
+            RString d020,
+            RString d021,
+            RString d022,
+            RString d023,
+            RString d024,
+            RString d025,
+            RString d026,
+            RString d027,
+            RString d028,
+            RString d029,
+            RString d030,
+            RString d031,
+            RString d032,
+            RString d033,
+            RString d034,
+            RString d035,
+            RString d036,
+            RString d037,
+            RString d038,
+            RString d039,
+            RString d040,
+            RString d041,
+            RString d042,
+            RString d043,
+            RString d044,
+            RString d045,
+            RString d046,
+            RString d047,
+            RString d048,
+            RString d049,
+            RString d050,
+            RString d051,
+            RString d052,
+            RString d053,
+            RString d054,
+            RString d055,
+            RString d056,
+            RString d057,
+            RString d058,
+            RString d059,
+            RString d060,
+            RString d061,
+            RString d062,
+            RString d063,
+            RString d064,
+            RString d065,
+            RString d066,
+            RString d067,
+            RString d068,
+            RString d069,
+            RString d070,
+            RString d071,
+            RString d072,
+            RString d073,
+            RString d074,
+            RString d075,
+            RString d076,
+            RString d077,
+            RString d078,
+            RString d079,
+            RString d080,
+            RString d081,
+            RString d082,
+            RString d083,
+            RString d084,
+            RString d085,
+            RString d086,
+            RString d087,
+            RString d088,
+            RString d089,
+            RString d090,
+            RString d091,
+            RString d092,
+            RString d093,
+            RString d094,
+            RString d095,
+            RString d096,
+            RString d097,
+            RString d098,
+            RString d099,
+            RString d100,
+            RString d101
     ) {
         this.和暦年 = 和暦年;
         this.月 = 月;
         this.保険者番号 = 保険者番号;
-        this.D001 = D001;
-        this.D002 = D002;
-        this.D003 = D003;
-        this.D004 = D004;
-        this.D005 = D005;
-        this.D006 = D006;
-        this.D007 = D007;
-        this.D008 = D008;
-        this.D009 = D009;
-        this.D010 = D010;
-        this.D011 = D011;
-        this.D012 = D012;
-        this.D013 = D013;
-        this.D014 = D014;
-        this.D015 = D015;
-        this.D016 = D016;
-        this.D017 = D017;
-        this.D018 = D018;
-        this.D019 = D019;
-        this.D020 = D020;
-        this.D021 = D021;
-        this.D022 = D022;
-        this.D023 = D023;
-        this.D024 = D024;
-        this.D025 = D025;
-        this.D026 = D026;
-        this.D027 = D027;
-        this.D028 = D028;
-        this.D029 = D029;
-        this.D030 = D030;
-        this.D031 = D031;
-        this.D032 = D032;
-        this.D033 = D033;
-        this.D034 = D034;
-        this.D035 = D035;
-        this.D036 = D036;
-        this.D037 = D037;
-        this.D038 = D038;
-        this.D039 = D039;
-        this.D040 = D040;
-        this.D041 = D041;
-        this.D042 = D042;
-        this.D043 = D043;
-        this.D044 = D044;
-        this.D045 = D045;
-        this.D046 = D046;
-        this.D047 = D047;
-        this.D048 = D048;
-        this.D049 = D049;
-        this.D050 = D050;
-        this.D051 = D051;
-        this.D052 = D052;
-        this.D053 = D053;
-        this.D054 = D054;
-        this.D055 = D055;
-        this.D056 = D056;
-        this.D057 = D057;
-        this.D058 = D058;
-        this.D059 = D059;
-        this.D060 = D060;
-        this.D061 = D061;
-        this.D062 = D062;
-        this.D063 = D063;
-        this.D064 = D064;
-        this.D065 = D065;
-        this.D066 = D066;
-        this.D067 = D067;
-        this.D068 = D068;
-        this.D069 = D069;
-        this.D070 = D070;
-        this.D071 = D071;
-        this.D072 = D072;
-        this.D073 = D073;
-        this.D074 = D074;
-        this.D075 = D075;
-        this.D076 = D076;
-        this.D077 = D077;
-        this.D078 = D078;
-        this.D079 = D079;
-        this.D080 = D080;
-        this.D081 = D081;
-        this.D082 = D082;
-        this.D083 = D083;
-        this.D084 = D084;
-        this.D085 = D085;
-        this.D086 = D086;
-        this.D087 = D087;
-        this.D088 = D088;
-        this.D089 = D089;
-        this.D090 = D090;
-        this.D091 = D091;
-        this.D092 = D092;
-        this.D093 = D093;
-        this.D094 = D094;
-        this.D095 = D095;
-        this.D096 = D096;
-        this.D097 = D097;
-        this.D098 = D098;
-        this.D099 = D099;
-        this.D100 = D100;
-        this.D101 = D101;
+        this.d001 = d001;
+        this.d002 = d002;
+        this.d003 = d003;
+        this.d004 = d004;
+        this.d005 = d005;
+        this.d006 = d006;
+        this.d007 = d007;
+        this.d008 = d008;
+        this.d009 = d009;
+        this.d010 = d010;
+        this.d011 = d011;
+        this.d012 = d012;
+        this.d013 = d013;
+        this.d014 = d014;
+        this.d015 = d015;
+        this.d016 = d016;
+        this.d017 = d017;
+        this.d018 = d018;
+        this.d019 = d019;
+        this.d020 = d020;
+        this.d021 = d021;
+        this.d022 = d022;
+        this.d023 = d023;
+        this.d024 = d024;
+        this.d025 = d025;
+        this.d026 = d026;
+        this.d027 = d027;
+        this.d028 = d028;
+        this.d029 = d029;
+        this.d030 = d030;
+        this.d031 = d031;
+        this.d032 = d032;
+        this.d033 = d033;
+        this.d034 = d034;
+        this.d035 = d035;
+        this.d036 = d036;
+        this.d037 = d037;
+        this.d038 = d038;
+        this.d039 = d039;
+        this.d040 = d040;
+        this.d041 = d041;
+        this.d042 = d042;
+        this.d043 = d043;
+        this.d044 = d044;
+        this.d045 = d045;
+        this.d046 = d046;
+        this.d047 = d047;
+        this.d048 = d048;
+        this.d049 = d049;
+        this.d050 = d050;
+        this.d051 = d051;
+        this.d052 = d052;
+        this.d053 = d053;
+        this.d054 = d054;
+        this.d055 = d055;
+        this.d056 = d056;
+        this.d057 = d057;
+        this.d058 = d058;
+        this.d059 = d059;
+        this.d060 = d060;
+        this.d061 = d061;
+        this.d062 = d062;
+        this.d063 = d063;
+        this.d064 = d064;
+        this.d065 = d065;
+        this.d066 = d066;
+        this.d067 = d067;
+        this.d068 = d068;
+        this.d069 = d069;
+        this.d070 = d070;
+        this.d071 = d071;
+        this.d072 = d072;
+        this.d073 = d073;
+        this.d074 = d074;
+        this.d075 = d075;
+        this.d076 = d076;
+        this.d077 = d077;
+        this.d078 = d078;
+        this.d079 = d079;
+        this.d080 = d080;
+        this.d081 = d081;
+        this.d082 = d082;
+        this.d083 = d083;
+        this.d084 = d084;
+        this.d085 = d085;
+        this.d086 = d086;
+        this.d087 = d087;
+        this.d088 = d088;
+        this.d089 = d089;
+        this.d090 = d090;
+        this.d091 = d091;
+        this.d092 = d092;
+        this.d093 = d093;
+        this.d094 = d094;
+        this.d095 = d095;
+        this.d096 = d096;
+        this.d097 = d097;
+        this.d098 = d098;
+        this.d099 = d099;
+        this.d100 = d100;
+        this.d101 = d101;
     }
 }
