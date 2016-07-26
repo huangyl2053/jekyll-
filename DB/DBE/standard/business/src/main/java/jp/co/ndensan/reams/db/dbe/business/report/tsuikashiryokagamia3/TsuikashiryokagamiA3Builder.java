@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia3.Tsui
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 追加資料鑑Builderクラスです。
+ * 追加資料鑑（A3版）Builderクラスです。
  *
- * @reamsid_L DBE-0150-180 wangrenze
+ * @reamsid_L DBE-0150-410 wangrenze
  */
 public class TsuikashiryokagamiA3Builder implements ITsuikashiryokagamiA3Builder {
 

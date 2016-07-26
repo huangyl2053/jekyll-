@@ -254,6 +254,70 @@ public class JimuTuikaSiryoBusiness {
     }
 
     /**
+     * 有効期間を取得します。
+     *
+     * @return 期間
+     */
+    public RString get有効期間() {
+        return RString.EMPTY;
+    }
+
+    /**
+     * 有効期間_上を取得します。
+     *
+     * @return 期間
+     */
+    public RString get有効期間_上() {
+        return RString.EMPTY;
+    }
+
+    /**
+     * 有効期間_下を取得します。
+     *
+     * @return 期間
+     */
+    public RString get有効期間_下() {
+        return RString.EMPTY;
+    }
+
+    /**
+     * 前回期間_上を取得します。
+     *
+     * @return 前回期間
+     */
+    public RString get前回期間_上() {
+        return new RString(entity.getYukoKikan());
+    }
+
+    /**
+     * 前回期間_下を取得します。
+     *
+     * @return 前回期間
+     */
+    public RString get前回期間_下() {
+        return new RString(entity.getYukoKikan());
+    }
+
+    /**
+     * 審査員一覧を取得します。
+     *
+     * @return 審査員一覧
+     */
+    public RString get審査員一覧() {
+
+        return RString.EMPTY;
+    }
+
+    /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+        return RString.EMPTY;
+    }
+
+    /**
      * 審査員1を取得します。
      *
      * @return 審査員1

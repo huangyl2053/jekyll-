@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 追加資料鑑のReportです。
+ * 追加資料鑑（A4版）のReportです。
  *
- * @reamsid_L DBE-0150-180 wangrenze
+ * @reamsid_L DBE-0150-420 wangrenze
  */
 public class TsuikashiryokagamiA4Report extends Report<TsuikashiryokagamiA4ReportSource> {
 
