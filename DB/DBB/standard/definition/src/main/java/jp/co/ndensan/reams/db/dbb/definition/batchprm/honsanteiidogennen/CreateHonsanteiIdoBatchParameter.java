@@ -25,6 +25,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
 
+    private static final long serialVersionUID = 1L;
     private static final String KEY_CHOTEINENDO = "choteiNendo";
     private static final String KEY_賦課年度 = "賦課年度";
     private static final String KEY_処理対象 = "処理対象";
