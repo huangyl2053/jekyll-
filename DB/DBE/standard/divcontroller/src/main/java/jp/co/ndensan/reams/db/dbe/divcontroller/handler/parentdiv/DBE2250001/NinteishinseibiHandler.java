@@ -190,7 +190,7 @@ public class NinteishinseibiHandler {
         row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
         row.setRemban(new RString(String.valueOf(business.get調査項目連番())));
         row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード().value());
-        row.setShisetsuRiyoFlag(new RString(String.valueOf(business.get施設利用フラグ())));
+        row.setShisetsuRiyoFlag(new RString(String.valueOf(business.is施設利用フラグ())));
         row.setServiceJokyoKinyu(business.getサービスの状況記入());
         row.setServiceJokyo(new RString(String.valueOf(business.getサービスの状況())));
         row.setResearchItem(business.get調査項目());
@@ -253,7 +253,7 @@ public class NinteishinseibiHandler {
         if (business.get認定調査特記事項受領年月日() != null) {
             row.setTokkijikoJuryoYMD(business.get認定調査特記事項受領年月日().wareki().toDateString());
         }
-        row.setServiceJokyoFlag(new RString(String.valueOf(business.getサービスの状況フラグ())));
+        row.setServiceJokyoFlag(new RString(String.valueOf(business.isサービスの状況フラグ())));
     }
 
     /**

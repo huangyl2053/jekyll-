@@ -413,7 +413,7 @@ public class NiTeiCyoSaiChiRanBusiness implements Serializable {
      *
      * @return 施設利用フラグ
      */
-    public boolean get施設利用フラグ() {
+    public boolean is施設利用フラグ() {
         return entity.isShisetsuRiyoFlag();
     }
 
@@ -467,7 +467,7 @@ public class NiTeiCyoSaiChiRanBusiness implements Serializable {
      *
      * @return サービスの状況フラグ
      */
-    public boolean getサービスの状況フラグ() {
+    public boolean isサービスの状況フラグ() {
         return entity.isServiceJokyoFlag();
     }
 
