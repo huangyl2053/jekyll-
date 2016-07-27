@@ -10,10 +10,9 @@
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">
-        <!--SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM-->
-        <!--(--> 
+        SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM
+        ( 
         SELECT
-        1 as row,
         1 as 区分,
         DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" as 被保険者番号key,
         DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM" as サービス提供年月key,
@@ -227,7 +226,7 @@
         AND	DbT4001."サービス提供年月" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
         AND	DbT4001."履歴番号" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_rirekiNo"
         LEFT OUTER JOIN
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.tokuteiKozaSearch" />) AS koza
         ON DbT3056."dbT3056KogakuShikyuShinsei_kozaID" = koza."uaT0310Koza_kozaId"
         INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
@@ -729,7 +728,7 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}-->
         <!--</if>-->
-        <!--) as A-->
+        ) as A
     </sql>
 
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"
@@ -906,4 +905,96 @@
             </if>
         </where>
     </sql>
+    
+    
+    <sql id="tokuteiKozaSearch">
+        SELECT
+        koza.*,
+        kinyuKikan.*,
+        yokinShubetsu.*,
+        shiten.*,
+        shunoKanri."shunoKensu"
+        FROM (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0310KozaMapper.noDeleted_UaT0310Koza"/>
+        ) AS koza
+        INNER JOIN
+        (SELECT "gyomubetsuPrimaryKey", "kamokuCode" FROM rgua."UaT0100GyomubetsuPrimaryKey"
+        <where>
+            <if test="koza_kamokuCode.size() != 0">
+                "kamokuCode" IN
+                <foreach item="kamoku_item" index="index" collection="koza_kamokuCode" open="(" separator="," close=")">
+                    #{kamoku_item}
+                </foreach>
+            </if>
+            <if test="usesKoza_gyomuCode">
+                AND "gyomuCode"=#{koza_gyomuCode}
+            </if>
+            <if test="usesKoza_subGyomuCode">
+                AND "subGyomuCode"=#{koza_subGyomuCode}
+            </if>
+            <if test="usesKoza_gyomubetsuPrimaryKey">
+                AND "gyomubetsuPrimaryKey"=#{koza_gyomubetsuPrimaryKey}
+            </if>
+        </where>
+        ) AS pkey
+        ON koza."uaT0310Koza_gyomubetsuPrimaryKey"=pkey."gyomubetsuPrimaryKey"
+        INNER JOIN (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0302KinyuKikanMapper.noDeleted_UaT0302KinyuKikan"/>
+        ) AS kinyuKikan
+        ON koza."uaT0310Koza_kinyuKikanCode"=kinyuKikan."uaT0302KinyuKikan_kinyuKikanCode"
+        <if test="usesKoza_kijunYMD">
+            AND kinyuKikan."uaT0302KinyuKikan_kaishiYMD" <![CDATA[<=]]> #{koza_kijunYMD}
+            AND kinyuKikan."uaT0302KinyuKikan_shuryoYMD" <![CDATA[>=]]> #{koza_kijunYMD}
+        </if>
+        LEFT JOIN (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0301YokinShubetsuPatternMapper.noDeleted_UaT0301YokinShubetsuPattern"/>
+        ) AS yokinShubetsu
+        ON kinyukikan."uaT0302KinyuKikan_yokinShubetsuPatternCode" = yokinShubetsu."uaT0301YokinShubetsuPattern_yokinShubetsuPatternCode"
+        AND koza."uaT0310Koza_yokinShubetsu" = yokinShubetsu."uaT0301YokinShubetsuPattern_yokinShubetsuCode"
+        LEFT JOIN (
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaT0303KinyuKikanShitenMapper.noDeleted_UaT0303KinyuKikanShiten"/>
+        ) AS shiten
+        ON koza."uaT0310Koza_kinyuKikanCode" = shiten."uaT0303KinyuKikanShiten_kinyuKikanCode"
+        AND koza."uaT0310Koza_kinyuKikanShitenCode" = shiten."uaT0303KinyuKikanShiten_kinyuKikanShitenCode"
+        <if test="usesKoza_kijunYMD">
+            AND shiten."uaT0303KinyuKikanShiten_kaishiYMD" <![CDATA[<=]]> #{koza_kijunYMD}
+            AND shiten."uaT0303KinyuKikanShiten_shuryoYMD" <![CDATA[>=]]> #{koza_kijunYMD}
+        </if>
+        LEFT JOIN
+        (SELECT
+        COUNT(*) AS "shunoKensu",
+        "shikibetsuCode",
+        "kamokuCode",
+        "choteiNendo"
+        FROM rshare."UrT0700ShunoKanri"
+        GROUP BY "shikibetsuCode", "kamokuCode", "choteiNendo"
+        ) AS shunoKanri
+        ON koza."uaT0310Koza_shikibetsuCode"=shunoKanri."shikibetsuCode"
+        AND pkey."kamokuCode"=shunoKanri."kamokuCode"
+        AND shunoKanri."choteiNendo"=#{koza_genNendo}
+
+        <where>
+            <if test="usesKoza_kijunYMD">
+                koza."uaT0310Koza_kaishiYMD" <![CDATA[<=]]> #{koza_kijunYMD}
+                AND koza."uaT0310Koza_shuryoYMD" <![CDATA[>=]]> #{koza_kijunYMD}
+            </if>
+            <if test="usesKoza_kozaId">
+                AND koza."uaT0310Koza_kozaId"=#{koza_kozaId}
+            </if>
+            <if test="usesKoza_shikibetsuCode">
+                AND koza."uaT0310Koza_shikibetsuCode"=#{koza_shikibetsuCode}
+            </if>
+            <if test="usesKoza_gyomuKoyuKey">
+                AND koza."uaT0310Koza_gyomuKoyuKey" IN
+                <foreach item="koyuKey_item" index="index" collection="koza_gyomuKoyuKey" open="(" separator="," close=")">
+                    #{koyuKey_item}
+                </foreach>
+            </if>
+            <if test="usesKoza_yotoKubun">
+                AND koza."uaT0310Koza_yotoKubun"=#{koza_yotoKubun}
+            </if>
+        </where>
+        ORDER BY pkey."kamokuCode" ASC, koza."uaT0310Koza_yotoKubun" ASC, koza."uaT0310Koza_kaishiYMD" DESC, koza."uaT0310Koza_torokuRenban" DESC
+    </sql>
+    
 </mapper>

@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -114,13 +112,13 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     private RString preBreakKey;
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvNoEntityEditor dataNoCreate;
-    private HanyouRisutoSyuturyokuEntity preEntity;
+//    private HanyouRisutoSyuturyokuEntity preEntity;
     private RString eucFilePath;
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private Decimal 連番;
-    private List<KinyuKikanEntity> lstKinyuKikanEntity;
+//    private List<KinyuKikanEntity> lstKinyuKikanEntity;
     private FlexibleDate システム日付;
 
     @BatchWriter
@@ -129,11 +127,11 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
-        preBreakKey = RString.EMPTY;
+//        preBreakKey = RString.EMPTY;
         システム日付 = FlexibleDate.getNowDate();
         dataNoCreate = new HanyoListKogakuKaigoEucCsvNoEntityEditor(システム日付);
         personalDataList = new ArrayList<>();
-        lstKinyuKikanEntity = new ArrayList<>();
+//        lstKinyuKikanEntity = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
     }
 
@@ -144,6 +142,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         builder.set業務コード(GyomuCode.DB介護保険);
+        builder.set基準日(FlexibleDate.getNowDate());
         IKozaSearchKey searchKey = builder.build();
         parameter.setSearchkey(searchKey);
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
@@ -171,82 +170,17 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
 
     @Override
     protected void process(HanyouRisutoSyuturyokuEntity entity) {
+        eucNoCsvWriter.writeLine(dataNoCreate.edit(entity, parameter, 連番));
+        連番 = 連番.add(Decimal.ONE);
+        personalDataList.add(toPersonalData(entity));
 
-        RString tmp区分;
-        if (entity.get区分() == 1) {
-            tmp区分 = 区分_1;
-        } else {
-            tmp区分 = 区分_2;
-        }
-
-        RString nowBreakKey = tmp区分.concat(SPLIT)
-                .concat(entity.get被保険者番号key().value()).concat(SPLIT)
-                .concat(new RString(entity.getサービス提供年月key().toString())).concat(SPLIT)
-                .concat(entity.get履歴番号key().toString());
-        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
-            preBreakKey = nowBreakKey;
-            if (entity.get口座情報() != null && entity.get口座情報() != null) {
-                lstKinyuKikanEntity.addAll(entity.get口座情報().getKinyuKikanEntity());
-            }
-            preEntity = entity;
-            return;
-        }
-        if (!preBreakKey.equals(nowBreakKey)) {
-            List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
-
-            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-                lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
-            }
-            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-                if (kinyuKikanEntity.get預金種別パターンEntity() != null
-                        && preEntity.get口座情報() != null && preEntity.get口座情報().getKinyuKikanEntity() != null) {
-                    kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
-                    preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
-                }
-            }
-            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番));
-            連番 = 連番.add(Decimal.ONE);
-            personalDataList.add(toPersonalData(preEntity));
-            lstKinyuKikanEntity.clear();
-            if (entity.get口座情報() != null && entity.get口座情報() != null) {
-                lstKinyuKikanEntity.addAll(entity.get口座情報().getKinyuKikanEntity());
-            }
-        }
-        preBreakKey = nowBreakKey;
-        preEntity = entity;
     }
 
     @Override
     protected void afterExecute() {
-
-        if (preEntity == null && parameter.isTomokumeFuka()) {
-            eucNoCsvWriter.writeLine(new HanyouRisutoSyuturyokuEucCsvNoEntity());
-        }
-        List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
-
-        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-            lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
-        }
-        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
-            if (kinyuKikanEntity.get預金種別パターンEntity() != null
-                    && preEntity.get口座情報() != null && preEntity.get口座情報().getKinyuKikanEntity() != null) {
-                kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
-                preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
-            }
-        }
-        if (preEntity != null) {
-            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番));
-            連番 = 連番.add(Decimal.ONE);
-            personalDataList.add(toPersonalData(preEntity));
-        }
         eucNoCsvWriter.close();
-
-        if (personalDataList == null || personalDataList.isEmpty()) {
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
-        } else {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
-        }
+        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         バッチ出力条件リストの出力();
     }
 

@@ -113,7 +113,7 @@
         (SELECT A."yukoKaishiYMD" FROM
         (SELECT "jigyoshaNo", MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
         FROM rgdb."DbT7060KaigoJigyosha"
-        WHERE "jigyoshaNo" = DbT3006."keikakuJigyoshaNo"
+        WHERE "jigyoshaNo" = DbT3006."itakusakiJigyoshaNo"
         GROUP BY "jigyoshaNo") AS A)
         LEFT OUTER JOIN rgdb."DbV1001HihokenshaDaicho"                                   AS DbV1001
         ON DbT3005."hihokenshaNo" = DbV1001."hihokenshaNo"
