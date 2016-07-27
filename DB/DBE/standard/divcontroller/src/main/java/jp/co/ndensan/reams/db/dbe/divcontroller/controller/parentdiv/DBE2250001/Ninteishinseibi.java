@@ -311,7 +311,7 @@ public class Ninteishinseibi {
                 }
             }
             RealInitialLocker.release(前排他ロックキー);
-            // TODO 完了遷移
+            // TODO QA1413完了遷移
             div.getCcdKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
         }
