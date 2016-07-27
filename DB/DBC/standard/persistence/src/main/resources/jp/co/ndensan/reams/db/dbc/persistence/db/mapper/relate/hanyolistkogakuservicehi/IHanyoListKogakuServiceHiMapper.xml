@@ -121,74 +121,26 @@
         AND "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" = a."serviceTeikyoYM"
         AND "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"     <![CDATA[<]]> a."rirekiNo"))
         As  DbT3055
-        
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.noDeleted_DbT3056KogakuShikyuShinsei" />) As DbT3056
         ON DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
         AND DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo" = (select MAX("rirekiNo") from
         rgdb."DbT3056KogakuShikyuShinsei" where  "hihokenshaNo"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
-        AND "serviceTeikyoYM"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
-        )
-<if test="serviceYmFrom != null and !serviceYmFrom.isEmpty()">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{serviceYmFrom}
-</if>
-<if test="serviceYmTo != null and !serviceYmTo.isEmpty()">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[<=]]>#{serviceYmTo}
-</if>
-<if test="shisehiFrom != null and !shisehiFrom.isEmpty()">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[>=]]>#{shisehiFrom}
-</if>
-<if test="shisehiTo != null and !shisehiTo.isEmpty()">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[<=]]>#{shisehiTo}
-</if>
-<if test="shoriJokyo == 1">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD" = ''
-</if>
-<if test="shiharaiSaki == 1">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" = '2'
-</if>
-
-<if test="shiharaiSaki == 2">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" = '1'
-</if>
-
-        LEFT OUTER JOIN
+        AND "serviceTeikyoYM"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM")
+        <choose>
+            <when test="(hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()) or (hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty())">
+                INNER JOIN
+            </when>
+            <otherwise>
+                LEFT OUTER JOIN
+            </otherwise>
+        </choose>
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.noDeleted_DbT3057KogakuShikyuHanteiKekka" />) As DbT3057
         ON DbT3057."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
         AND DbT3057."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
         AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo"
-        AND DbT3057."dbT3057KogakuShikyuHanteiKekka_rirekiNo" = DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo" 
-<if test="hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[>=]]>#{hokemonoKeteihiFrom}
-</if>
-<if test="shinsaHoho != 0 and shinsaHoho != null and !shinsaHoho.isEmpty()">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" = #{shinsaHoho}
-</if>
-<if test="hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty()">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[<=]]>#{hokemonoKeteihiTo}
-</if>
-<if test="kokuhoreSofuYMFrom != null and !kokuhoreSofuYMFrom.isEmpty()">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[>=]]>#{kokuhoreSofuYMFrom}
-</if>
-<if test="kokuhoreSofuYMTo != null and !kokuhoreSofuYMTo.isEmpty()">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[<=]]>#{kokuhoreSofuYMTo}
-</if>
-<if test="shoriJokyo == 3">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" = ''
-    AND(#{国保連IFなし区分} = '2'
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM" = '')
-    OR #{国保連IFなし区分} = '1'
-</if>
-<if test="shoriJokyo == 6">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" <![CDATA[<>]]> ''
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" = ''
-</if>
-<if test="shoriJokyo == 7">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]> ''
-</if>
-
+        AND DbT3057."dbT3057KogakuShikyuHanteiKekka_rirekiNo" = DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo"
         LEFT OUTER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.noDeleted_DbT3058KogakuShikyuShinsaKettei" />) As DbT3058
         ON DbT3058."dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
@@ -198,18 +150,6 @@
         rgdb."DbT3058KogakuShikyuShinsaKettei" where  "hihokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
         AND "serviceTeikyoYM"=DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
         AND "shoKisaiHokenshaNo"=DbT3056."dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo")
-<if test="kokuhoreKeteiymFrom != null and !kokuhoreKeteiymFrom.isEmpty()">
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[>=]]>#{kokuhoreKeteiymFrom}
-</if>
-<if test="kokuhoreKeteiymTo != null and !kokuhoreKeteiymTo.isEmpty()">
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[<=]]>#{kokuhoreKeteiymTo}
-</if>
-<if test="keteijohoUketoriymFrom != null and !keteijohoUketoriymFrom.isEmpty()">
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[>=]]>#{keteijohoUketoriymFrom}
-</if>
-<if test="keteijohoUketoriymTo != null and !keteijohoUketoriymTo.isEmpty()">
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[<=]]>#{keteijohoUketoriymTo}
-</if>
         LEFT OUTER JOIN
         (SELECT
         "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"             AS "dbT3054KogakuKyufuTaishoshaMeisai_hihokenshaNo"
@@ -298,98 +238,157 @@
         ON "Atesaki"."shikibetsuCode"=DbV1001."shikibetsuCode"
 
         Where 1 = 1
-        
-<if test="taishosha == 1 and santeiKijun != 0">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceHiyoGokeiGakuGokei" <![CDATA[<>]]> 0
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_riyoshaFutanGakuGokei" <![CDATA[<>]]> 0
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" <![CDATA[<>]]> 0
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_shiharaiSumiKingakuGokei" <![CDATA[<>]]> 0
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" <![CDATA[<>]]> 0
-</if>
-<if test="santeiKijun != 0 and santeiKijun != null and !santeiKijun.isEmpty()">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijunParameter}
-</if>
-<if test="shinseiKubun == 1">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" <![CDATA[<>]]> '1'
-</if>
-<if test="shinseiKubun == 2">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" = '1'
-</if>
+        <if test="serviceYmFrom != null and !serviceYmFrom.isEmpty()">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[>=]]>#{serviceYmFrom}
+        </if>
+        <if test="serviceYmTo != null and !serviceYmTo.isEmpty()">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"<![CDATA[<=]]>#{serviceYmTo}
+        </if>
+        <if test="shinsaHoho != 0 and shinsaHoho != null and !shinsaHoho.isEmpty()">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shinsaHohoKubun" = #{shinsaHoho}
+        </if>
+        <if test="taishosha == 1 and santeiKijun != 0">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceHiyoGokeiGakuGokei" <![CDATA[<>]]> 0
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_riyoshaFutanGakuGokei" <![CDATA[<>]]> 0
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" <![CDATA[<>]]> 0
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_shiharaiSumiKingakuGokei" <![CDATA[<>]]> 0
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" <![CDATA[<>]]> 0
+        </if>
+        <if test="santeiKijun != 0 and santeiKijun != null and !santeiKijun.isEmpty()">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_santeiKijunGaku" = #{santeiKijunParameter}
+        </if>
+        <if test="shisehiFrom != null and !shisehiFrom.isEmpty()">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[>=]]>#{shisehiFrom}
+        </if>
+        <if test="shisehiTo != null and !shisehiTo.isEmpty()">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD"<![CDATA[<=]]>#{shisehiTo}
+        </if>
+        <if test="hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[>=]]>#{hokemonoKeteihiFrom}
+        </if>
+        <if test="hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty()">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD"<![CDATA[<=]]>#{hokemonoKeteihiTo}
+        </if>
+        <if test="kokuhoreKeteiymFrom != null and !kokuhoreKeteiymFrom.isEmpty()">
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[>=]]>#{kokuhoreKeteiymFrom}
+        </if>
+        <if test="kokuhoreKeteiymTo != null and !kokuhoreKeteiymTo.isEmpty()">
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteiYM"<![CDATA[<=]]>#{kokuhoreKeteiymTo}
+        </if>
+        <if test="kokuhoreSofuYMFrom != null and !kokuhoreSofuYMFrom.isEmpty()">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[>=]]>#{kokuhoreSofuYMFrom}
+        </if>
+        <if test="kokuhoreSofuYMTo != null and !kokuhoreSofuYMTo.isEmpty()">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM"<![CDATA[<=]]>#{kokuhoreSofuYMTo}
+        </if>
+        <if test="keteijohoUketoriymFrom != null and !keteijohoUketoriymFrom.isEmpty()">
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[>=]]>#{keteijohoUketoriymFrom}
+        </if>
+        <if test="keteijohoUketoriymTo != null and !keteijohoUketoriymTo.isEmpty()">
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[<=]]>#{keteijohoUketoriymTo}
+        </if>
+        <if test="shinseiKubun == 1">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" <![CDATA[<>]]> '1'
+        </if>
+        <if test="shinseiKubun == 2">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" = '1'
+        </if>
+        <if test="shoriJokyo == 2">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD" <![CDATA[<>]]> ''
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" = ''
+        </if>
+        <if test="shoriJokyo == 3">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" = ''
+            AND(#{国保連IFなし区分} = '2'
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM" = '')
+            OR #{国保連IFなし区分} = '1'
+        </if>
+        <if test="shoriJokyo == 4">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM" <![CDATA[<>]]> ''
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" = ''
+            AND #{国保連IFなし区分} = '2'
+        </if>
+        <if test="shoriJokyo == 5">
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<>]]> ''
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" = ''
+            AND #{国保連IFなし区分} = '2'
+        </if>
+        <if test="shoriJokyo == 6">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" <![CDATA[<>]]> ''
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" = ''
+        </if>
+        <if test="shoriJokyo == 7">
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_furikomiMeisaishoSakuseiYMD" <![CDATA[<>]]> ''
+        </if>
+        <if test="shoriJokyo == 1">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD" = ''
+        </if>
+        <if test="kokuhorenFuicchi == 1">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> ''
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" <![CDATA[<>]]> DbT3057."dbT3057KogakuShikyuHanteiKekka_shikyuKingaku"
+        </if>
+        <if test="kokuhorenFuicchi == 2">
+            AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<>]]> ''
+            AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shikyuKingaku" <![CDATA[<>]]> DbT3058."dbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku"
+        </if>
+        <if test="taishosha == 1">
+            AND (DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
+            OR DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '')
+        </if>
+        <if test="taishosha == 2">
+            AND Not(DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
+            OR DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '')
+        </if>
+        <if test="taishoshaUketoriymFrom == null and taishoshaUketoriymTo != null">
+            AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
+            )
+            OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
+            )
+        </if>
+        <if test="taishoshaUketoriymFrom != null and taishoshaUketoriymTo == null">
+            AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999'
+            )
+            OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999')
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
+            )
+        </if>
+        <if test="taishoshaUketoriymFrom != null and taishoshaUketoriymTo != null">
+            AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
+            )
+            OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
+            )
+        </if>
+        <if test="taishoshaUketoriymFrom != null">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
+        </if>
+        <if test="taishoshaUketoriymTo != null">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
+        </if>
 
-<if test="taishosha == 1">
-    AND (DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
-    OR DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '')
-</if>
-<if test="taishosha == 2">
-    AND Not(DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
-    OR DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '')
-</if>
-<if test="taishoshaUketoriymFrom == null and taishoshaUketoriymTo != null">
-    AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
-    )
-    OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> '000000'
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
-    )
-</if>
-<if test="taishoshaUketoriymFrom != null and taishoshaUketoriymTo == null">
-    AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999'
-    )
-    OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> '999999')
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
-    )
-</if>
-<if test="taishoshaUketoriymFrom != null and taishoshaUketoriymTo != null">
-    AND ((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
-    )
-    OR((DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo})
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_kogakuTaishoGaiFlag" = false
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> '' )
-    )
-</if>
-<if test="taishoshaUketoriymFrom != null">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[>=]]> #{taishoshaUketoriymFrom}
-</if>
-<if test="taishoshaUketoriymTo != null">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM"<![CDATA[<=]]> #{taishoshaUketoriymTo}
-</if>
+        <if test="shiharaiSaki == 1">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" = '2'
+        </if>
 
-<if test="shoriJokyo == 2">
-    AND DbT3056."dbT3056KogakuShikyuShinsei_shinseiYMD" <![CDATA[<>]]> ''
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" = ''
-</if>
-
-<if test="shoriJokyo == 4">
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_hanteiKekkaSofuYM" <![CDATA[<>]]> ''
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" = ''
-    AND #{国保連IFなし区分} = '2'
-</if>
-<if test="shoriJokyo == 5">
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<>]]> ''
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiTsuchishoSakuseiYMD" = ''
-    AND #{国保連IFなし区分} = '2'
-</if>
-<if test="kokuhorenFuicchi == 1">
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_tashoshaUketoriYM" <![CDATA[<>]]> ''
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM" <![CDATA[<>]]> ''
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_ketteiYMD" <![CDATA[<>]]> ''
-    AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_KogakuShikyuGaku" <![CDATA[<>]]> DbT3057."dbT3057KogakuShikyuHanteiKekka_shikyuKingaku"
-</if>
-<if test="kokuhorenFuicchi == 2">
-    AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" <![CDATA[<>]]> ''
-    AND DbT3057."dbT3057KogakuShikyuHanteiKekka_shikyuKingaku" <![CDATA[<>]]> DbT3058."dbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku"
-</if>
-
-<if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
-    AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
-</if>
+        <if test="shiharaiSaki == 2">
+            AND DbT3056."dbT3056KogakuShikyuShinsei_shiharaiHohoKubunCode" = '1'
+        </if>
+        <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
+            AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
+        </if>
         
 <!--        UNION ALL
         SELECT
