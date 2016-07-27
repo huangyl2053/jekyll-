@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHe
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengaku;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.ShiharaiHohoHenkoGengakuBuilder;
-import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.gengaku.meisai.ShiharaiHohoHenkoGengakuMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
@@ -28,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -284,22 +282,6 @@ public class ShiharaiHohoHenkoKanri {
         return ResponseData.of(div).forwardWithEventName(DBD2010001TransitionEventName.検索結果一覧へ).respond();
     }
 
-    /**
-     * 「終了する」ボタン押下時の入力チェックです。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShiharaiHohoHenkoKanriDiv> onShuryo_validate(ShiharaiHohoHenkoKanriDiv div) {
-        // TODO QA 93013
-        for (dgShiharaiHohoHenkoRireki_Row row : div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getDataSource()) {
-            if (!row.getJotai().isNullOrEmpty()) {
-                return ResponseData.of(div).addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("登録・修正した内容")).respond();
-            }
-        }
-        return ResponseData.of(div).respond();
-    }
-
     private ShiharaiHohoHenko setDeleteState(ShiharaiHohoHenko deleteData) {
         deleteData = deleteData.createBuilderForEdit().set論理削除フラグ(true).build();
         ShiharaiHohoHenkoBuilder 支払方法変更Builder = deleteData.createBuilderForEdit();
@@ -322,12 +304,6 @@ public class ShiharaiHohoHenkoKanri {
         List<ShiharaiHohoHenkoGengaku> 減額List = deleteData.getShiharaiHohoHenkoGengakuList();
         for (ShiharaiHohoHenkoGengaku 減額 : 減額List) {
             ShiharaiHohoHenkoGengakuBuilder 減額build = 減額.createBuilderForEdit();
-            List<ShiharaiHohoHenkoGengakuMeisai> 減額明細List = 減額.getShiharaiHohoHenkoGengakuMeisaiList();
-            for (ShiharaiHohoHenkoGengakuMeisai 減額明細 : 減額明細List) {
-                // TODO QA 93013
-                減額明細 = 減額明細.createBuilderForEdit().setState(EntityDataState.Deleted).build();
-                減額build.setShiharaiHohoHenkoGengakuMeisai(減額明細);
-            }
             減額build.set論理削除フラグ(true);
             減額 = 減額build.setState(EntityDataState.Modified).build();
             支払方法変更Builder.setShiharaiHohoHenkoGengaku(減額);
