@@ -36,6 +36,8 @@ public class SetaiShotokuKazeiHantei {
     private final MapperProvider mapperProvider;
     private static final RString メニューID_高額介護サービス = new RString("DBCMN41002");
     private static final RString メニューID_事業高額介護サービス = new RString("DBCMN41004");
+    private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
 
     /**
      * コンストラクタです。
@@ -113,15 +115,16 @@ public class SetaiShotokuKazeiHantei {
             entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
             entity.setShikibetsuCode(世帯員.get識別コード());
             if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
-                entity.setHonninKubun(new RString("1"));
-                entity.setHonninKazeiKubun(new RString("1"));
+                entity.setHonninKubun(ONE);
+                entity.setHonninKazeiKubun(ONE);
             } else {
-                entity.setHonninKubun(new RString("2"));
-                entity.setSetaiKazeiKubun(new RString("1"));
+                entity.setHonninKubun(TWO);
+                entity.setSetaiKazeiKubun(ONE);
                 entity.setSetaiinHihokenshaNo(tempSetaiEntity.getHihokenshaNo().value());
             }
             entity.setKijunYMD(tempSetaiEntity.getKijunYMD());
             entity.setShotokuNendo(tempSetaiEntity.getShotokuNendo());
+            entity.setJushochiTokureiFlag(tempSetaiEntity.getJushochiTokureiFlag());
             entity.setSetaiCode(世帯.getSetaiCode().value());
             list.add(entity);
             return list;
@@ -139,15 +142,16 @@ public class SetaiShotokuKazeiHantei {
             entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
             entity.setShikibetsuCode(世帯員.get識別コード());
             if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
-                entity.setHonninKubun(new RString("1"));
-                entity.setHonninKazeiKubun(new RString("1"));
+                entity.setHonninKubun(ONE);
+                entity.setHonninKazeiKubun(ONE);
             } else {
-                entity.setHonninKubun(new RString("2"));
-                entity.setSetaiKazeiKubun(new RString("1"));
+                entity.setHonninKubun(TWO);
+                entity.setSetaiKazeiKubun(ONE);
                 entity.setSetaiinHihokenshaNo(tempSetaiEntity.getHihokenshaNo().value());
             }
             entity.setKijunYMD(tempSetaiEntity.getKijunYMD());
             entity.setShotokuNendo(tempSetaiEntity.getShotokuNendo());
+            entity.setJushochiTokureiFlag(tempSetaiEntity.getJushochiTokureiFlag());
             entity.setSetaiCode(世帯.getSetaiCode().value());
             list.add(entity);
             return list;
