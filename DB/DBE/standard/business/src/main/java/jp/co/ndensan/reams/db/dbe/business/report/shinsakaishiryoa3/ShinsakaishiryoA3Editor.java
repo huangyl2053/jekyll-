@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
 
+    private static final int INT_2 = 2;
     private static final int INT_4 = 4;
     private static final int INT_25 = 25;
     private final JimuShinsakaishiryoBusiness business;
@@ -51,7 +52,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
         source.shinsaTaishoshaCount = business.get審査対象者数();
         int no = business.getNo();
         if (INT_25 < no) {
-            source.listShinsei2_1 = business.get審査会審査順();
+            source.listShinsei2_1 = business.get審査会審査順().padZeroToLeft(INT_2);
             source.listShinsei2_2 = business.get保険者();
             source.listShinsei2_3 = business.get被保険者();
             source.listShinsei2_4 = business.get氏名();
@@ -65,7 +66,7 @@ public class ShinsakaishiryoA3Editor implements IShinsakaishiryoA3Editor {
             source.listZenkaiｙukokikan2_1 = business.get前回期間_下();
             source.listYukokikan2_1 = RString.EMPTY;
         } else {
-            source.listShinsei1_1 = business.get審査会審査順();
+            source.listShinsei1_1 = business.get審査会審査順().padZeroToLeft(INT_2);
             source.listShinsei1_2 = business.get保険者();
             source.listShinsei1_3 = business.get被保険者();
             source.listShinsei1_4 = business.get氏名();
