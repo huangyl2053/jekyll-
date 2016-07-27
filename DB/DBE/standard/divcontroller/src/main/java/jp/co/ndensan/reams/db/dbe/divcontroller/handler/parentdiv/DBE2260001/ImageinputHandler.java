@@ -72,8 +72,7 @@ public class ImageinputHandler {
      * @return CSVData
      */
     public List<TorokuData> onClick_Ikensho() {
-        List<TorokuData> dataList = getCSVファイル();
-        return dataList;
+        return getCSVファイル();
     }
 
     /**
