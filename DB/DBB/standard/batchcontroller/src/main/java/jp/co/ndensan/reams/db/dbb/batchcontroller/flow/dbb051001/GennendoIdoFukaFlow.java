@@ -63,6 +63,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<GennendoIdoFukaParameter>
         }
         executeStep(システム日時の取得);
         YMDHMS システム日時 = getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME);
+        processParameter = new GennendoIdoFukaProcessParameter();
         processParameter.set賦課年度(new FlexibleYear(parameter.get賦課年度()));
         processParameter.set処理対象(parameter.get処理対象());
         executeStep(特別徴収開始者抽出);
