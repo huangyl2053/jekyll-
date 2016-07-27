@@ -28,8 +28,8 @@ public class ShuruiGendoInfo {
      */
     public ResponseData<ShuruiGendoInfoDiv> onLoad(ShuruiGendoInfoDiv div) {
         FlexibleYearMonth riyoYM = ViewStateHolder.get(ViewStateKeys.利用年月, FlexibleYearMonth.class);
-        List kyufukeikaKuJikoSakuseiEntityList = ViewStateHolder.get(ViewStateKeys.給付計画自己作成EntityList, List.class);
-        getHandler(div).init(riyoYM, kyufukeikaKuJikoSakuseiEntityList);
+        List 給付計画自己作成List = ViewStateHolder.get(ViewStateKeys.給付計画自己作成EntityList, List.class);
+        getHandler(div).init(riyoYM, 給付計画自己作成List);
         return ResponseData.of(div).respond();
     }
 

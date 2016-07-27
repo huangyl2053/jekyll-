@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class ShuruiGendoInfoHandler {
 
     private final ShuruiGendoInfoDiv div;
-    private final int NUM_0 = 0;
+    private static final int NUM_0 = 0;
 
     /**
      * コンストラクタです。
