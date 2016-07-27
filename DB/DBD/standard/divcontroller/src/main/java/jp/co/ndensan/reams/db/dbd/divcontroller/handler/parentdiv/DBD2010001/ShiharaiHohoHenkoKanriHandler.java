@@ -312,8 +312,10 @@ public class ShiharaiHohoHenkoKanriHandler {
         row.setHdnHihokenshaNo(data.get被保険者番号().getColumnValue());
         row.setHdnKanriKubun(data.get管理区分());
         row.setHdnRirekiNo(new RString(data.get履歴番号()));
-        row.setTorokuJokyo(data.get登録区分().isNullOrEmpty() ? RString.EMPTY : ShiharaiHenkoTorokuKubun.toValue(data.get登録区分()).get名称());
-        row.setShuryoJokyo(data.get終了区分().isNullOrEmpty() ? RString.EMPTY : ShiharaiHenkoShuryoKubun.toValue(data.get終了区分()).get名称());
+        row.setTorokuJokyo(data.get登録区分() == null || data.get登録区分().isEmpty()
+                ? RString.EMPTY : ShiharaiHenkoTorokuKubun.toValue(data.get登録区分()).get名称());
+        row.setShuryoJokyo(data.get終了区分() == null || data.get終了区分().isEmpty()
+                ? RString.EMPTY : ShiharaiHenkoShuryoKubun.toValue(data.get終了区分()).get名称());
         row.getTxtTekiyoKiashiYMD().setValue(data.get適用開始年月日());
         row.getTxtTekiyoShuryoYMD().setValue(data.get適用終了年月日());
         if (data.get予告通知書発行年月日() == null || data.get予告通知書発行年月日().isEmpty()) {
@@ -362,7 +364,7 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が2の時ボタン群の設定(ShiharaiHohoHenko data) {
-        if (!data.get終了区分().isNullOrEmpty()) {
+        if (data.get終了区分() != null && !data.get終了区分().isEmpty()) {
             return;
         }
         if (data.get差止対象決定年月日() != null && !data.get差止対象決定年月日().isEmpty()) {
@@ -393,7 +395,7 @@ public class ShiharaiHohoHenkoKanriHandler {
     }
 
     private void 管理区分が1の時ボタン群の設定(ShiharaiHohoHenko data) {
-        if (!data.get終了区分().isNullOrEmpty()) {
+        if (data.get終了区分() != null && !data.get終了区分().isEmpty()) {
             return;
         }
         if (data.get差止対象決定年月日() != null && !data.get差止対象決定年月日().isEmpty()) {

@@ -235,7 +235,7 @@ public class ShiharaiHohoHenkoKanri {
     public ResponseData<ShiharaiHohoHenkoKanriDiv> onClick_btnUpdate(ShiharaiHohoHenkoKanriDiv div) {
         boolean is変更あり = false;
         for (dgShiharaiHohoHenkoRireki_Row row : div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().getDataSource()) {
-            if (!row.getJotai().isNullOrEmpty()) {
+            if (row.getJotai() != null && !row.getJotai().isEmpty()) {
                 is変更あり = true;
             }
         }
