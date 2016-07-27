@@ -37,6 +37,7 @@ public class CalculateFukaParameter extends KozaSearchParameter implements IMyBa
     private final FlexibleYear 調定年度minus2;
     private final RString 年度サイクル;
 
+    private final FlexibleYear 賦課年度;
     private final boolean hasValidKamoku;
 
     /**
@@ -55,5 +56,6 @@ public class CalculateFukaParameter extends KozaSearchParameter implements IMyBa
         this.調定年度minus1 = 調定年度.minusYear(INT_1);
         this.調定年度minus2 = 調定年度.minusYear(INT_2);
         this.年度サイクル = DbBusinessConfig.get(ConfigNameDBB.日付関連_年度サイクル, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        this.賦課年度 = FlexibleYear.EMPTY;
     }
 }
