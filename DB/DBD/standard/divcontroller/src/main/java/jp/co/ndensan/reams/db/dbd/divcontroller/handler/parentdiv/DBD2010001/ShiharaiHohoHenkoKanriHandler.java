@@ -375,8 +375,8 @@ public class ShiharaiHohoHenkoKanriHandler {
         } else {
             div.getShiharaiHohoHenkoKanriMain().getBtnIchigoYokokushaToroku1().setDisabled(false);
             if (data.get予告登録年月日() != null && !data.get予告登録年月日().isEmpty()) {
-                div.getShiharaiHohoHenkoKanriMain().getBtnKyufuIchijiSashitomeToroku().setDisabled(false);
                 div.getShiharaiHohoHenkoKanriMain().getBtnIchigoBemmeishoJuri().setDisabled(false);
+                div.getShiharaiHohoHenkoKanriMain().getBtnShokanBaraikaToroku().setDisabled(false);
             }
         }
     }
