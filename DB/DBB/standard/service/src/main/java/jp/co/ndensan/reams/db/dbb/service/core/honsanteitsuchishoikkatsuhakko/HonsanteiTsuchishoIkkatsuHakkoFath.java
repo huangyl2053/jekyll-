@@ -725,7 +725,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
             RString 山分け区分, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
             Association 地方公共団体, IOutputOrder outputOrder, Decimal 通知書ページ数) {
 
-        if (!帳票制御共通情報.getDaikoPrintUmu()) {
+        if (帳票制御共通情報 == null || !帳票制御共通情報.getDaikoPrintUmu()) {
             return;
         }
 

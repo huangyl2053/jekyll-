@@ -952,14 +952,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
             getIdoFukaJoho(調定年度, 調定年度, 一括発行起動フラグ);
         }
 
-        RString 計算後情報_口座区分 = null;
-        if (NotsuKozaShutsuryokuTaisho.全て.getコード().equals(納入通知書対象者)) {
-            計算後情報_口座区分 = null;
-        } else if (NotsuKozaShutsuryokuTaisho.現金納付者.getコード().equals(納入通知書対象者)) {
-            計算後情報_口座区分 = KozaKubun.現金納付.getコード();
-        } else if (NotsuKozaShutsuryokuTaisho.口座振替者.getコード().equals(納入通知書対象者)) {
-            計算後情報_口座区分 = KozaKubun.口座振替.getコード();
-        }
+        RString 計算後情報_口座区分 = get計算後情報_口座区分(納入通知書対象者);
 
         RStringBuilder orderByClause = new RStringBuilder(ソート);
         if (定値区分_0.equals(生活保護者先頭出力区分)) {
@@ -991,6 +984,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
 
         //TO QA913
         int 山分け用スプール数 = get山分け用スプール数(帳票タイプ, 期月List, 本算定期間, 出力期AsInt, 山分け区分, 随時期フラグ);
+        checkStyle(山分け用スプール数);
         if (定値区分_1.equals(山分け区分)) {
             通知書共通情報entity.set普徴納期情報リスト(期月List);
         }
@@ -1027,7 +1021,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
                 HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報
                         = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名);
                 //TO QA913
-                publish納入通知書本算定(帳票ID, 編集後本算定通知書共通情報, reportManager);
+                //publish納入通知書本算定(帳票ID, 編集後本算定通知書共通情報, reportManager);
                 編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報.get編集後本算定通知書共通情報());
             }
             sourceDataCollection = reportManager.publish();
@@ -1044,6 +1038,18 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         load代行プリント送付票(調定年度, 賦課年度, 代行プリント送付票_帳票ID, 発行日, 出力期, 納入通知書対象者, 生活保護者先頭出力区分, 山分け区分,
                 帳票制御共通 == null ? null : 帳票制御共通.toEntity(), 地方公共団体, outputOrder, new Decimal(出力ページ数.toString()));
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_なし, CSVファイル名_なし, 帳票名);
+    }
+
+    private RString get計算後情報_口座区分(RString 納入通知書対象者) {
+        RString 計算後情報_口座区分 = null;
+        if (NotsuKozaShutsuryokuTaisho.全て.getコード().equals(納入通知書対象者)) {
+            計算後情報_口座区分 = null;
+        } else if (NotsuKozaShutsuryokuTaisho.現金納付者.getコード().equals(納入通知書対象者)) {
+            計算後情報_口座区分 = KozaKubun.現金納付.getコード();
+        } else if (NotsuKozaShutsuryokuTaisho.口座振替者.getコード().equals(納入通知書対象者)) {
+            計算後情報_口座区分 = KozaKubun.口座振替.getコード();
+        }
+        return 計算後情報_口座区分;
     }
 
     /**
@@ -1869,4 +1875,10 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         return RString.EMPTY;
     }
 
+    private int checkStyle(int 山分け用スプール数) {
+        if (山分け用スプール数 == 0) {
+            return INT_1;
+        }
+        return 山分け用スプール数;
+    }
 }
