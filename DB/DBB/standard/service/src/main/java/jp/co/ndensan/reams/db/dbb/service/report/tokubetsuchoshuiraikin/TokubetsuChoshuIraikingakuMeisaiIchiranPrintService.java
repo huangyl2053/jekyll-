@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariTokuchoKaishiTsuchisyoJoho;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
 
+    private static final ReportId 特別徴収開始通知書仮算定_帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -75,9 +76,11 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranPrintService {
      */
     public void printFukusu(List<KariTokuchoKaishiTsuchisyoJoho> 通知書情報List,
             RString 出力順ID, RYear 調定年度, YMDHMS 帳票作成日時, ReportManager reportManager) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB100003.getReportId(),
-                        Long.valueOf(出力順ID.toString()));
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書仮算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         TokubetsuChoshuIraikingakuMeisaiIchiranProperty property = new TokubetsuChoshuIraikingakuMeisaiIchiranProperty(並び順);
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
         Association association = associationFinder.getAssociation();

@@ -371,7 +371,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
 
         publish特別徴収開始通知書発行一覧表(result.get調定年度(), result.get帳票作成日時().getRDateTime(), 編集後仮算定通知書共通情報List);
         new TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranPrintService()
-                .printSingle(編集後仮算定通知書共通情報List, Long.parseLong(result.get出力順ID().toString()),
+                .printSingle(編集後仮算定通知書共通情報List, result.get出力順ID(),
                         result.get調定年度(), result.get帳票作成日時());
         new TokubetsuChoshuIraikingakuMeisaiIchiranPrintService().printTaitsu(仮算定特徴開始通知書情報List,
                 result.get出力順ID(), new RYear(result.get調定年度().toDateString()), result.get帳票作成日時());
