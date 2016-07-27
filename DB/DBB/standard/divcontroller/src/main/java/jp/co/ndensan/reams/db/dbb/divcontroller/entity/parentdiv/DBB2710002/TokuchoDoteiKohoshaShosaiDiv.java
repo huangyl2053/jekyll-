@@ -103,36 +103,6 @@ public class TokuchoDoteiKohoshaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtAtenaShimeiKana() {
-        return this.getAtenaInfo().getTxtAtenaShimeiKana();
-    }
-
-    @JsonIgnore
-    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
-        this.getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtAtenaUmareYMD() {
-        return this.getAtenaInfo().getTxtAtenaUmareYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
-        this.getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJuminshu() {
-        return this.getAtenaInfo().getTxtJuminshu();
-    }
-
-    @JsonIgnore
-    public void  setTxtJuminshu(TextBox txtJuminshu) {
-        this.getAtenaInfo().setTxtJuminshu(txtJuminshu);
-    }
-
-    @JsonIgnore
     public TextBox getTxtAtenaShimeiKanji() {
         return this.getAtenaInfo().getTxtAtenaShimeiKanji();
     }
@@ -193,6 +163,36 @@ public class TokuchoDoteiKohoshaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtAtenaShimeiKana() {
+        return this.getAtenaInfo().getTxtAtenaShimeiKana();
+    }
+
+    @JsonIgnore
+    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
+        this.getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtAtenaUmareYMD() {
+        return this.getAtenaInfo().getTxtAtenaUmareYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
+        this.getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJuminshu() {
+        return this.getAtenaInfo().getTxtJuminshu();
+    }
+
+    @JsonIgnore
+    public void  setTxtJuminshu(TextBox txtJuminshu) {
+        this.getAtenaInfo().setTxtJuminshu(txtJuminshu);
+    }
+
+    @JsonIgnore
     public TextBox getTxtHihokenshaNo() {
         return this.getKaigoShikakuInfo().getTxtHihokenshaNo();
     }
@@ -243,12 +243,12 @@ public class TokuchoDoteiKohoshaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnHihokenshaFinder() {
+    public Button getBtnHihokenshaFinder() {
         return this.getKaigoShikakuInfo().getBtnHihokenshaFinder();
     }
 
     @JsonIgnore
-    public void  setBtnHihokenshaFinder(ButtonDialog btnHihokenshaFinder) {
+    public void  setBtnHihokenshaFinder(Button btnHihokenshaFinder) {
         this.getKaigoShikakuInfo().setBtnHihokenshaFinder(btnHihokenshaFinder);
     }
 

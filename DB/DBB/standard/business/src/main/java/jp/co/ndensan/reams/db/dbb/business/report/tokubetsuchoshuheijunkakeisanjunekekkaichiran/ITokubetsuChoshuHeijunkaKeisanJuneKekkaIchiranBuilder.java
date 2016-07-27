@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  *
  * @reamsid_L DBB-0810-030 yebangqiang
  */
-interface ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder extends IReportBuilder<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> {
+interface ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder extends IReportBuilder<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> {
 
 }

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBB-0810-030 yebangqiang
  */
-public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource implements IReportSource {
+public class TokuChoHeijunkaKeisanJuneKekkaIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
@@ -102,9 +102,9 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource implements IRep
 // </editor-fold>
 
     /**
-     * ReportSourceFields
+     * KaiPage
      */
-    public enum ReportSourceFields {
+    public enum KaiPage {
 
         listLower_3,
         listUpper_3,

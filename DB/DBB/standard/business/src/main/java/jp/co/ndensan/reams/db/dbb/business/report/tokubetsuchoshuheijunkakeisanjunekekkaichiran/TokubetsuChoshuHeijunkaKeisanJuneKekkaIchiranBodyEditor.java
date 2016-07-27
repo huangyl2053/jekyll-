@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -63,7 +63,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     }
 
     @Override
-    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource edit(TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+    public TokuChoHeijunkaKeisanJuneKekkaIchiranSource edit(TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId());
@@ -77,7 +77,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     }
 
     private void 対象者項目編集(TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者,
-            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            TokuChoHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishoshaEntity item = 特徴平準化結果対象者.get特徴平準化結果対象者();
         RString 編集備考 = 備考名を転換(item.get備考コード());
         TsuchishoNo 通知書番号 = item.get通知書番号();
@@ -136,7 +136,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         特徴期期別金額設定(item, source);
     }
 
-    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishoshaEntity item, TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishoshaEntity item, TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         if (item.get特徴期期別金額01() != null) {
             source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
         }
@@ -157,7 +157,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         }
     }
 
-    private void 変更前特徴額設定(TokuchoHeijyunkaTaishoshaEntity item, TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+    private void 変更前特徴額設定(TokuchoHeijyunkaTaishoshaEntity item, TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         if (item.get変更前特徴額_１期() != null) {
             source.listUpper_6 = DecimalFormatter.toコンマ区切りRString(item.get変更前特徴額_１期(), 0);
         }
@@ -179,7 +179,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     }
 
     private void 対象外項目編集(TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外,
-            TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
+            TokuChoHeijunkaKeisanJuneKekkaIchiranSource source, ChohyoSeigyoKyotsu 帳票制御共通, Association association) {
         TokuchoHeijyunkaTaishogaiEntity item = 特徴平準化結果対象外.get特徴平準化結果対象外();
         RString 編集備考 = 備考名を転換(item.get備考コード());
         TsuchishoNo 通知書番号 = item.get通知書番号();
@@ -237,7 +237,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         特徴期期別金額設定(item, source);
     }
 
-    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishogaiEntity item, TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+    private void 特徴期期別金額設定(TokuchoHeijyunkaTaishogaiEntity item, TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         if (item.get特徴期期別金額01() != null) {
             source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
         }
