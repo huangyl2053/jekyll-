@@ -122,69 +122,46 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
     private void initialize(ShikibetsuCode 識別コード, RString 被保険者番号, YokaigoNinteiJoho 認定情報, boolean is受給) {
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         if (is受給) {
-            div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(new ShinseishoKanriNo(認定情報.get申請書管理番号受給()), 識別コード);
+            div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(
+                    new ShinseishoKanriNo(認定情報.get申請書管理番号受給()), 識別コード);
         } else {
-            div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(new ShinseishoKanriNo(認定情報.get申請書管理番号認定()), 識別コード);
+            div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(
+                    new ShinseishoKanriNo(認定情報.get申請書管理番号認定()), 識別コード);
         }
 
         // TODO. 共通部品　DBZ.KaigoNinteiShikakuInfoのinitializeについて、被保険者番号がだけですか。
-//        div.getCcdKaigoNinteiShikakuInfo().initialize(association.get地方公共団体コード().value(), 識別コード.value(), RString.EMPTY, 被保険者番号);
+//        div.getCcdKaigoNinteiShikakuInfo().initialize(association.get地方公共団体コード().value(), 識別コード.value(),
+//        RString.EMPTY, 被保険者番号);
         IKaigoNinteiShinseiKihonJohoInputDiv 介護認定申請基本情報入力Div = div.getCcdKaigoNinteiShinseiKihon();
         介護認定申請基本情報入力Div.initialize();
-        try {
-            介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(認定情報.get受給申請事由()));
-        } catch (IllegalArgumentException e) {
-        }
+        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(認定情報.get受給申請事由()));
         介護認定申請基本情報入力Div.setTxtShinseiJokyo(認定情報.get申請状況区分());
-        介護認定申請基本情報入力Div.setKyuSochisha(認定情報.get旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
+        介護認定申請基本情報入力Div.setKyuSochisha(認定情報.get旧措置者フラグ()
+                ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         介護認定申請基本情報入力Div.setChkShikakuShutokuMae(認定情報.get資格取得前申請フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         if (is受給) {
             介護認定申請基本情報入力Div.setRadShinseishoKubun(認定情報.get要支援申請の区分受給());
             介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(認定情報.get認定申請年月日受給()));
-            try {
-                介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode
-                        .toValue(convertCodeToRString(認定情報.get認定申請区分法令コード受給())));
-            } catch (IllegalArgumentException e) {
-            }
-            try {
-                介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
-                        NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(認定情報.get認定申請区分申請時コード受給())));
-            } catch (IllegalArgumentException e) {
-            }
+            介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode
+                    .toValue(convertCodeToRString(認定情報.get認定申請区分法令コード受給())));
+            介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
+                    NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(認定情報.get認定申請区分申請時コード受給())));
             介護認定申請基本情報入力Div.setShisho(new ShishoCode(認定情報.get支所コード受給()));
-            try {
-                介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード受給()));
-            } catch (IllegalArgumentException e) {
-            }
-            try {
-                介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(認定情報.get二号特定疾病コード受給())));
-            } catch (IllegalArgumentException e) {
-            }
+            介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード受給()));
+            介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(認定情報.get二号特定疾病コード受給())));
             介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(認定情報.get認定申請理由受給());
             介護認定申請基本情報入力Div.setServiceSakujoTeikeibun(認定情報.get申請サービス削除の理由受給());
         } else {
             介護認定申請基本情報入力Div.setRadShinseishoKubun(認定情報.get要支援申請の区分認定());
             介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(認定情報.get認定申請年月日認定()));
-            try {
-                介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode
-                        .toValue(convertCodeToRString(認定情報.get認定申請区分法令コード認定())));
-            } catch (IllegalArgumentException e) {
-            }
-            try {
-                介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
-                        NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(認定情報.get認定申請区分申請時コード認定())));
-            } catch (IllegalArgumentException e) {
-            }
+            介護認定申請基本情報入力Div.setShinseiKubunHorei(NinteiShinseiHoreiCode
+                    .toValue(convertCodeToRString(認定情報.get認定申請区分法令コード認定())));
+            介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
+                    NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(認定情報.get認定申請区分申請時コード認定())));
             介護認定申請基本情報入力Div.setShisho(new ShishoCode(認定情報.get支所コード認定()));
-            try {
-                介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード認定()));
-            } catch (IllegalArgumentException e) {
-            }
-            try {
-                介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(認定情報.get二号特定疾病コード認定())));
-            } catch (IllegalArgumentException e) {
-            }
+            介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(認定情報.get被保険者区分コード認定()));
+            介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(認定情報.get二号特定疾病コード認定())));
             介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(認定情報.get認定申請理由認定());
             介護認定申請基本情報入力Div.setServiceSakujoTeikeibun(認定情報.get申請サービス削除の理由認定());
         }

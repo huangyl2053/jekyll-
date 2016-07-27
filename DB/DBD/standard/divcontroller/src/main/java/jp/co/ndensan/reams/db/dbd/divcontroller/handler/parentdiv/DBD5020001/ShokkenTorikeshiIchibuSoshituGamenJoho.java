@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokkenTorikeshiIchibuSoshituGamenJoho implements Serializable {
 
     private YokaigoNinteiJoho 今回情報;

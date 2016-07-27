@@ -87,27 +87,27 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         /**
          * 要介護認定
          */
-        要介護認定("要介護認定"),
+        要介護認定(new RString("要介護認定")),
         /**
          * 要介護認定　新規認定
          */
-        要介護認定新規認定("要介護認定　新規認定"),
+        要介護認定新規認定(new RString("要介護認定　新規認定")),
         /**
          * 要介護認定　新規却下
          */
-        要介護認定新規却下("要介護認定　新規却下"),
+        要介護認定新規却下(new RString("要介護認定　新規却下")),
         /**
          * 要介護認定　更新認定
          */
-        要介護認定更新認定("要介護認定　更新認定"),
+        要介護認定更新認定(new RString("要介護認定　更新認定")),
         /**
          * 要介護認定　更新却下
          */
-        要介護認定更新却下("要介護認定　更新却下");
+        要介護認定更新却下(new RString("要介護認定　更新却下"));
 
-        private final String title;
+        private final RString title;
 
-        画面タイトル(String title) {
+        画面タイトル(RString title) {
             this.title = title;
         }
 
@@ -117,7 +117,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
          * @return タイトル
          */
         public RString getTitle() {
-            return new RString(title);
+            return title;
         }
     }
 
@@ -223,6 +223,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
      * 「今回認定値」ダイアログ或は「前回認定値」ダイアログOPENボタン押した後のメソッドです。
      *
      * @param 認定情報 YokaigoNinteiJoho
+     * @param is今回 boolean
      * @return KekkaShosaiJohoModel
      */
     public KekkaShosaiJohoModel getKekkaShosaiJohoModel(YokaigoNinteiJoho 認定情報, boolean is今回) {
@@ -256,27 +257,28 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
      * @param model KekkaShosaiJohoOutModel
      */
     public void setKonkaiNinteichiAreaAfterOkClose(KekkaShosaiJohoOutModel model) {
-        if (null != model) {
-            NinteiInputNaiyo 認定内容 = model.get認定内容();
-            div.setHdnYokaigodoCodeKonkai(認定内容.get要介護度コード());
-            div.getTxtYokaigodoKonkai().setValue(認定内容.get要介護度名称());
-            div.getTxtYukoKaishibiKonkai().setValue(認定内容.get有効開始年月日());
-            div.getTxtYukoShuryobiKonkai().setValue(認定内容.get有効終了年月日());
-            div.getTxtNinteibiKonkai().setValue(認定内容.get認定年月日());
-            RString サービス種類Str = RString.EMPTY;
-            List<KekkaShosaiJohoServiceShuri> サービス類リスト = model.getサービス類リスト();
-            if (null != サービス類リスト && サービス類リスト.size() > 0) {
-                for (int i = 0; i < サービス類リスト.size(); i++) {
-                    if (i == 0) {
-                        サービス種類Str = サービス類リスト.get(i).getServiceShuriCode();
-                    } else {
-                        サービス種類Str = サービス種類Str.concat(連絡符号).concat(サービス類リスト.get(i).getServiceShuriCode());
-                    }
+        if (null == model) {
+            return;
+        }
+        NinteiInputNaiyo 認定内容 = model.get認定内容();
+        div.setHdnYokaigodoCodeKonkai(認定内容.get要介護度コード());
+        div.getTxtYokaigodoKonkai().setValue(認定内容.get要介護度名称());
+        div.getTxtYukoKaishibiKonkai().setValue(認定内容.get有効開始年月日());
+        div.getTxtYukoShuryobiKonkai().setValue(認定内容.get有効終了年月日());
+        div.getTxtNinteibiKonkai().setValue(認定内容.get認定年月日());
+        RString サービス種類Str = RString.EMPTY;
+        List<KekkaShosaiJohoServiceShuri> サービス類リスト = model.getサービス類リスト();
+        if (null != サービス類リスト && サービス類リスト.size() > 0) {
+            for (int i = 0; i < サービス類リスト.size(); i++) {
+                if (i == 0) {
+                    サービス種類Str = サービス類リスト.get(i).getServiceShuriCode();
+                } else {
+                    サービス種類Str = サービス種類Str.concat(連絡符号).concat(サービス類リスト.get(i).getServiceShuriCode());
                 }
             }
-            div.getTxtServiceShuruiKonkai().setValue(サービス種類Str);
-            div.getTxtShinsakaiIkenKonkai().setValue(認定内容.get審査会意見());
         }
+        div.getTxtServiceShuruiKonkai().setValue(サービス種類Str);
+        div.getTxtShinsakaiIkenKonkai().setValue(認定内容.get審査会意見());
     }
 
     private void ヘッダ初期化() {
@@ -304,34 +306,19 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         介護認定申請基本情報入力Div.initialize();
         介護認定申請基本情報入力Div.setRadShinseishoKubun(今回情報.get要支援申請の区分受給());
         介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(今回情報.get認定申請年月日受給()));
-        try {
-            介護認定申請基本情報入力Div.setShinseiKubunHorei(
-                    NinteiShinseiHoreiCode.toValue(convertCodeToRString(今回情報.get認定申請区分法令コード受給())));
-        } catch (IllegalArgumentException e) {
-        }
-        try {
-            介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
-                    NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(今回情報.get認定申請区分申請時コード受給())));
-        } catch (IllegalArgumentException e) {
-        }
-        try {
-            介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(今回情報.get被保険者区分コード受給()));
-        } catch (IllegalArgumentException e) {
-        }
-        try {
-            介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(今回情報.get二号特定疾病コード受給())));
-        } catch (IllegalArgumentException e) {
-        }
+        介護認定申請基本情報入力Div.setShinseiKubunHorei(
+                NinteiShinseiHoreiCode.toValue(convertCodeToRString(今回情報.get認定申請区分法令コード受給())));
+
+        介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
+                NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(今回情報.get認定申請区分申請時コード受給())));
+
+        介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(今回情報.get被保険者区分コード受給()));
+
+        介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(今回情報.get二号特定疾病コード受給())));
         介護認定申請基本情報入力Div.setShisho(new ShishoCode(今回情報.get支所コード受給()));
         介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(今回情報.get認定申請理由受給());
-        try {
-            介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(今回情報.get受給申請事由()));
-        } catch (IllegalArgumentException e) {
-        }
-        try {
-            介護認定申請基本情報入力Div.setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(今回情報.get申請状況区分()).get名称());
-        } catch (IllegalArgumentException e) {
-        }
+        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(今回情報.get受給申請事由()));
+        介護認定申請基本情報入力Div.setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(今回情報.get申請状況区分()).get名称());
         介護認定申請基本情報入力Div.setKyuSochisha(今回情報.get旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         介護認定申請基本情報入力Div.setChkShikakuShutokuMae(今回情報.get資格取得前申請フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
@@ -735,11 +722,11 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     }
 
     private RString getMax履歴番号(RString 申請書管理番号) {
-        RString Max履歴番号 = YokaigoNinteiJohoManager.createInstance().getMax履歴番号(申請書管理番号);
-        if (null == Max履歴番号 || Max履歴番号.isEmpty()) {
+        RString 最大履歴番号 = YokaigoNinteiJohoManager.createInstance().getMax履歴番号(申請書管理番号);
+        if (null == 最大履歴番号 || 最大履歴番号.isEmpty()) {
             return new RString("0001");
         }
-        return new RString(String.format("%04d", Integer.parseInt(Max履歴番号.toString()) + 1));
+        return new RString(String.format("%04d", Integer.parseInt(最大履歴番号.toString()) + 1));
     }
 
     private int get有効期間月数(FlexibleDate 開始年月日, FlexibleDate 終了年月日) {
