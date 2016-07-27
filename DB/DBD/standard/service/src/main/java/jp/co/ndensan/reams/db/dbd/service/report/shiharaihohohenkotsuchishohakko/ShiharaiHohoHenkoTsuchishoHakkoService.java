@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenk
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.AtesakiPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.ShikibetsuTaishoPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokanKihonJiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4024ShiharaiHohoHenkoSashitomeDac;
-import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaiHenkoTsuchiHakko.ShiharaiHenkoTsuchiHakkoMapper;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihenkotsuchihakko.IShiharaiHenkoTsuchiHakkoMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IAtesakiPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.util.IShikibetsuTaishoPSMMybatisMapper;
 import jp.co.ndensan.reams.db.dbd.service.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoService;
@@ -106,12 +106,12 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     /**
      * 選択した支払方法変更管理各種通知書発行
      *
-     * @param 帳票タイプリスト LIST<帳票タイプ>
-     * @param 帳票情報
-     * @param 発行日リスト
-     * @param 文書番号リスト
+     * @param 帳票タイプリスト LIST<RString>
+     * @param 帳票情報 ShiharaiHohoHenko
+     * @param 発行日リスト HakouichiList
+     * @param 文書番号リスト BunsyubanngaouList
      * @param reportManager 帳票発行処理の制御機能
-     * @param 識別コード
+     * @param 識別コード ShikibetsuCode
      */
     public void pntShiharaiHohoHenkoKanriKakusyu(List<RString> 帳票タイプリスト, ShiharaiHohoHenko 帳票情報, HakouichiList 発行日リスト,
             BunsyubanngaouList 文書番号リスト, ShikibetsuCode 識別コード, ReportManager reportManager) {
@@ -199,15 +199,15 @@ public class ShiharaiHohoHenkoTsuchishoHakkoService {
     /**
      * 償還払請求情報の取得します。
      *
-     * @param 被保険者番号
-     * @param 管理区分
-     * @param 履歴番号
-     * @param 情報分類区分
+     * @param 被保険者番号 被保険者番号
+     * @param 管理区分 管理区分
+     * @param 履歴番号 履歴番号
+     * @param 情報分類区分 情報分類区分
      * @return List<帳票制御汎用>
      */
     public List<ShokanKihonJihoEntiy> selectShokanKihon(HihokenshaNo 被保険者番号, RString 管理区分, int 履歴番号, RString 情報分類区分) {
         List<ShokanKihonJihoEntiy> resultList;
-        ShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(ShiharaiHenkoTsuchiHakkoMapper.class);
+        IShiharaiHenkoTsuchiHakkoMapper shiharaiHenkoTsuchiHakkoMapper = this.mapperProvider.create(IShiharaiHenkoTsuchiHakkoMapper.class);
         resultList = shiharaiHenkoTsuchiHakkoMapper.selectShokanKihon(被保険者番号, 管理区分, 履歴番号, 情報分類区分);
         return resultList;
     }

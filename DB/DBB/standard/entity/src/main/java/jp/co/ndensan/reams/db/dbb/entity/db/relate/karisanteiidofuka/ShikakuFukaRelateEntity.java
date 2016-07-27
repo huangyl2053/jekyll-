@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 
 /**
  * 資格の情報と賦課の情報RelateEntity
@@ -19,5 +19,5 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 public class ShikakuFukaRelateEntity {
 
     private List<ShikakuShutokuTempEntity> 資格情報List;
-    private List<DbT2002FukaEntity> 賦課情報List;
+    private List<FukaJohoRelateEntity> 賦課情報List;
 }

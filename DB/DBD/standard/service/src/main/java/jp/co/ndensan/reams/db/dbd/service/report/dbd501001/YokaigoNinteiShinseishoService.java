@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.dbd501001;
 
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501001.YokaigoNinteiShinseishoProperty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501001.YokaigoNinteiShinseishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteishinseishohakko.ShinseiShoEntity;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd501001.YokaigoNinteiShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

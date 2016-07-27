@@ -51,7 +51,6 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranSource implements IReport
     public RString kaipage5;
     @ReportItem(name = "listHanteiError_1", length = 4, order = 16)
     public RString listHanteiError_1;
-    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listHanteiError_2", length = 10, order = 17)
     public RString listHanteiError_2;
@@ -65,6 +64,9 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranSource implements IReport
     public RString listHanteiError_6;
     @ReportItem(name = "listHanteiError_7", length = 60, order = 22)
     public RString listHanteiError_7;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 60, order = 23)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -98,6 +100,7 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranSource implements IReport
         listHanteiError_4,
         listHanteiError_5,
         listHanteiError_6,
-        listHanteiError_7
+        listHanteiError_7,
+        shikibetsuCode
     }
 }

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisan
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource.ReportSourceFields;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource.KaiPage;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  *
  * @reamsid_L DBB-0810-030 yebangqiang
  */
-public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends ReportPropertyBase<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> {
+public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends ReportPropertyBase<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> {
 
     private static final ReportId ID = ReportIdDBB.DBB200003.getReportId();
     private static final RString ENCLOSURE = new RString("\"");
@@ -92,15 +92,15 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
     }
 
     private RString get帳票物理名(RString 項目ID) {
-        RString 帳票物理名 = new RString(ReportSourceFields.listLower_3.name());
+        RString 帳票物理名 = new RString(KaiPage.listLower_3.name());
         if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.行政区コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listUpper_3.name());
+            帳票物理名 = new RString(KaiPage.listUpper_3.name());
         } else if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.世帯コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listLower_2.name());
+            帳票物理名 = new RString(KaiPage.listLower_2.name());
         } else if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.識別コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listUpper_2.name());
+            帳票物理名 = new RString(KaiPage.listUpper_2.name());
         } else if (DBB200003_HeijunkaKeisanJuneKekkaIchiran.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listLower_1.name());
+            帳票物理名 = new RString(KaiPage.listLower_1.name());
         }
         return 帳票物理名;
     }
@@ -113,16 +113,16 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty extends Repor
      * @return Breaker
      */
     @Override
-    public Breakers<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> defineBreakers(
-            Breakers<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> breakers,
-            BreakerCatalog<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> catalog) {
+    public Breakers<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> defineBreakers(
+            Breakers<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> breakers,
+            BreakerCatalog<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
             pageBreakKeys) {
             @Override
-            public ReportLineRecord<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> occuredBreak(
-                    ReportLineRecord<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> currentRecord,
-                    ReportLineRecord<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> nextRecord,
+            public ReportLineRecord<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> occuredBreak(
+                    ReportLineRecord<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> currentRecord,
+                    ReportLineRecord<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
                 if (nextRecord == ReportLineRecord.LAST_RECORD) {
                     return currentRecord;

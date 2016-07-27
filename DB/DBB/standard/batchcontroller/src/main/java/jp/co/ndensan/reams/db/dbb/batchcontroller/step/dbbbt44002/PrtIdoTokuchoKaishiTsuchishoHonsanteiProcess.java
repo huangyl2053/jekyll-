@@ -73,6 +73,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchProcessBase {
 
     private static final ReportId 特別徴収開始通知書本算定_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
+    private static final RString 定数_賦課年度 = new RString("賦課年度");
+    private static final RString 定数_通知書番号 = new RString("通知書番号");
+    private static final RString 定数_被保険者氏名 = new RString("被保険者氏名");
+    private static final RString 定数_被保険者番号 = new RString("hihokenshaName");
     private static final RString RSTRING_1 = new RString("1");
     private Association 地方公共団体;
     private HonsanteiIdoProcessParameter processParameter;
@@ -331,8 +335,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目1 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_NENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_NENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoB5Source.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -357,7 +361,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
         target1("hihokenshaName2", "被保険者氏名2", CheckShubetsu.文字切れ),
         target2("setainushiName1", "世帯主名1", CheckShubetsu.文字切れ),
-        target3("hokenshaName", "被保険者氏名", CheckShubetsu.文字切れ);
+        target3("hokenshaName", 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ);
 
         private final RString itemName;
         private final RString printName;
@@ -387,8 +391,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目2 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_NENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_TSUCHISHONO1, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_NENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoB5RenchoSource.ITEM_TSUCHISHONO1, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -442,8 +446,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目3 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_NENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_NENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoSealerSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -466,7 +470,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum チェック項目3 implements ICheckTarget {
 
-        target1("hihokenshaName", "被保険者氏名", CheckShubetsu.文字切れ),
+        target1(定数_被保険者番号.toString(), 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ),
         target2("hihokenshaJusho", "被保険者住所", CheckShubetsu.文字切れ),
         target3("setainushiName", "世帯主名", CheckShubetsu.文字切れ);
 
@@ -498,8 +502,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目4 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_NENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_NENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoSealerRenchoSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -522,7 +526,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum チェック項目4 implements ICheckTarget {
 
-        target1("hihokenshaName", "被保険者氏名", CheckShubetsu.文字切れ),
+        target1(定数_被保険者番号.toString(), 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ),
         target2("hihokenshaJusho", "被保険者住所", CheckShubetsu.文字切れ),
         target3("setainushiName", "世帯主名", CheckShubetsu.文字切れ);
 
@@ -554,8 +558,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目5 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_NENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_NENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoB52Source.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -578,8 +582,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum チェック項目5 implements ICheckTarget {
 
-        target1("hihokenshaName", "被保険者氏名", CheckShubetsu.文字切れ),
-        target2("hokenshaName", "被保険者氏名", CheckShubetsu.文字切れ);
+        target1(定数_被保険者番号.toString(), 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ),
+        target2("hokenshaName", 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ);
 
         private final RString itemName;
         private final RString printName;
@@ -609,8 +613,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目6 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_NENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_NENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -633,7 +637,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum チェック項目6 implements ICheckTarget {
 
-        target1("hihokenshaName", "被保険者氏名", CheckShubetsu.文字切れ);
+        target1(定数_被保険者番号.toString(), 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ);
 
         private final RString itemName;
         private final RString printName;
@@ -663,8 +667,8 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum 特定項目7 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource.ITEM_TITLENENDO, "賦課年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource.ITEM_TITLENENDO, 定数_賦課年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoB52RenchoSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -687,7 +691,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
 
     private enum チェック項目7 implements ICheckTarget {
 
-        target1("hihokenshaName", "被保険者氏名", CheckShubetsu.文字切れ),
+        target1(定数_被保険者番号.toString(), 定数_被保険者氏名.toString(), CheckShubetsu.文字切れ),
         target2("setainushiName", "世帯主名", CheckShubetsu.文字切れ),
         target3("hihokenshaJusho", "被保険者住所", CheckShubetsu.文字切れ);
 

@@ -20,10 +20,15 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  */
 public class ShiharaiHenkoTsuchiHakkoHandler {
 
+    /**
+     * 支払方法変更の情報の取得。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return ArrayList<ShiharaiHohoHenko>　shiharaiHohoHenkoList
+     */
     public ArrayList<ShiharaiHohoHenko> get支払方法変更の情報(HihokenshaNo 被保険者番号) {
         ShiharaiHohoHenkoService service = ShiharaiHohoHenkoService.createIntance();
-        ArrayList<ShiharaiHohoHenko> shiharaiHohoHenkoList = service.find支払方法変更(被保険者番号);
-        return shiharaiHohoHenkoList;
+        return service.find支払方法変更(被保険者番号);
     }
 
     /**

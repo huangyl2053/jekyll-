@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisan
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -24,7 +24,7 @@ import lombok.NonNull;
  *
  * @reamsid_L DBB-0810-030 yebangqiang
  */
-public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> {
+public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> {
 
     private final List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト;
     private final List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト;
@@ -77,7 +77,7 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> writer) {
+    public void writeBy(ReportSourceWriter<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> writer) {
         RString title = タイトル_特徴平準化対象外一覧表;
         if (特徴平準化結果対象外一覧表リスト.isEmpty()) {
             title = タイトル_特徴平準化対象者一覧表;

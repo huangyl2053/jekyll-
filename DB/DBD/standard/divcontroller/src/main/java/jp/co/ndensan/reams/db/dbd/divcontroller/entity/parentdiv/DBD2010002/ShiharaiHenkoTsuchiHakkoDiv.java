@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -44,6 +45,8 @@ public class ShiharaiHenkoTsuchiHakkoDiv extends Panel {
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
+    @JsonProperty("Key_Index")
+    private RString Key_Index;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -175,6 +178,24 @@ public class ShiharaiHenkoTsuchiHakkoDiv extends Panel {
     @JsonProperty("ccdAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return ccdAtenaInfo;
+    }
+
+    /*
+     * getKey_Index
+     * @return Key_Index
+     */
+    @JsonProperty("Key_Index")
+    public RString getKey_Index() {
+        return Key_Index;
+    }
+
+    /*
+     * setKey_Index
+     * @param Key_Index Key_Index
+     */
+    @JsonProperty("Key_Index")
+    public void setKey_Index(RString Key_Index) {
+        this.Key_Index = Key_Index;
     }
 
     /*

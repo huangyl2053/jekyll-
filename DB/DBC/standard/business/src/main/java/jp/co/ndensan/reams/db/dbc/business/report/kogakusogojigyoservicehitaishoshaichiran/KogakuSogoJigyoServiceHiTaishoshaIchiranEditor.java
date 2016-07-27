@@ -95,7 +95,9 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranEditor implements IKogakuSo
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get被保険者番号() != null) {
             source.listTaishoshaIchiran_2 = 高額総合事業サービス費対象者一覧表.get被保険者番号().getColumnValue();
         }
-        //TODO 識別コード QA(#948)
+        if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.get識別コード() != null) {
+            source.shikibetsuCode = 高額総合事業サービス費対象者一覧表.get識別コード().getColumnValue();
+        }
         if (高額総合事業サービス費対象者一覧表 != null && 高額総合事業サービス費対象者一覧表.getサービス提供年月() != null) {
             source.listTaishoshaIchiran_3 = 高額総合事業サービス費対象者一覧表.getサービス提供年月().toDateString();
         }
