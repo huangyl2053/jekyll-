@@ -52,6 +52,13 @@ public final class ShiharaiHohoKanriListMapperParameter implements IMyBatisParam
         this.出力順 = 出力順;
     }
 
+    /**
+     * 支払方法変更管理リスト作成用MyBatisパラメータを作成します。
+     *
+     * @param processParameter CreateTaishoshaJohoTempTableProcessParameter
+     * @param 出力順 RString
+     * @return
+     */
     public static ShiharaiHohoKanriListMapperParameter createParameter(CreateTaishoshaJohoTempTableProcessParameter processParameter, RString 出力順) {
         int 変更期限 = Integer.parseInt(
                 DbBusinessConfig.get(ConfigNameDBD.支払方法変更_支払方法変更期限, RDate.getNowDate(), SubGyomuCode.DBD介護受給).toString());

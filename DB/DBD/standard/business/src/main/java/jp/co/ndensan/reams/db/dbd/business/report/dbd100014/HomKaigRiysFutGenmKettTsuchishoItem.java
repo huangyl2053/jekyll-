@@ -26,7 +26,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HomKaigRiysFutGenｍKettTsuchishoItem {
+public class HomKaigRiysFutGenmKettTsuchishoItem {
 
     private final TokubetsuchiikiKasanGemmen 特別地域加算減免;
     private final IKojin iKojin;
@@ -56,7 +56,7 @@ public class HomKaigRiysFutGenｍKettTsuchishoItem {
      * @param 帳票分類ID 帳票分類ID
      * @param 認証者 認証者
      */
-    public HomKaigRiysFutGenｍKettTsuchishoItem(TokubetsuchiikiKasanGemmen 特別地域加算減免, IKojin iKojin, IAtesaki iAtesaki,
+    public HomKaigRiysFutGenmKettTsuchishoItem(TokubetsuchiikiKasanGemmen 特別地域加算減免, IKojin iKojin, IAtesaki iAtesaki,
             ChohyoSeigyoKyotsu 帳票制御共通, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用List, Association 地方公共団体, RDate 発行日,
             RString 文書番号, List<RString> 通知書定型文List, ReportId 帳票分類ID, Ninshosha 認証者) {
         this.特別地域加算減免 = 特別地域加算減免;

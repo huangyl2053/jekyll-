@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice;
 
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoProerty;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReport;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public class HomKaigRiysFutGenｍKettTsuchishoPrintService {
+public class HomKaigRiysFutGenmKettTsuchishoPrintService {
 
     /**
      * 帳票を出力
@@ -37,15 +37,15 @@ public class HomKaigRiysFutGenｍKettTsuchishoPrintService {
      * @param target パラメータ
      * @param reportManager 帳票発行処理の制御機能
      */
-    public void print(HomKaigRiysFutGenｍKettTsuchishoItem target, ReportManager reportManager) {
-        HomKaigRiysFutGenｍKettTsuchishoProerty property = new HomKaigRiysFutGenｍKettTsuchishoProerty();
+    public void print(HomKaigRiysFutGenmKettTsuchishoItem target, ReportManager reportManager) {
+        HomKaigRiysFutGenmKettTsuchishoProerty property = new HomKaigRiysFutGenmKettTsuchishoProerty();
         try (ReportAssembler<HomKaigRiysFutGenｍKettTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<HomKaigRiysFutGenｍKettTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),
                     new FlexibleDate(target.get発行日().toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             target.setNinshoshaSource(ninshoshaSource);
-            HomKaigRiysFutGenｍKettTsuchishoReport report = HomKaigRiysFutGenｍKettTsuchishoReport.createReport(target);
+            HomKaigRiysFutGenmKettTsuchishoReport report = HomKaigRiysFutGenmKettTsuchishoReport.createReport(target);
             report.writeBy(reportSourceWriter);
         }
     }

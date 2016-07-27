@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public class HomKaigRiysFutGenｍKettTsuchishoProerty extends ReportPropertyBase<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
+public class HomKaigRiysFutGenmKettTsuchishoProerty extends ReportPropertyBase<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
 
     /**
      * コンストラクタです。
      */
-    public HomKaigRiysFutGenｍKettTsuchishoProerty() {
+    public HomKaigRiysFutGenmKettTsuchishoProerty() {
         super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100014.getReportId());
     }
 }

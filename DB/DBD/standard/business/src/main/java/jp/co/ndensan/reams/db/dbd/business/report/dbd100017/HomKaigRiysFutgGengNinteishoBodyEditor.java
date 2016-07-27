@@ -27,17 +27,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgGengNinteishoEditor {
 
     private final RString ホシ = new RString("＊");
-    private final static int INDEX_0 = 0;
-    private final static int INDEX_1 = 1;
-    private final static int INDEX_2 = 2;
-    private final static int INDEX_3 = 3;
-    private final static int INDEX_4 = 4;
-    private final static int INDEX_5 = 5;
-    private final static int INDEX_6 = 6;
-    private final static int INDEX_7 = 7;
-    private final static int INDEX_8 = 8;
-    private final static int INDEX_9 = 9;
-    private final static int INDEX_10 = 10;
+    private final int INDEX_0 = 0;
+    private final int INDEX_1 = 1;
+    private final int INDEX_2 = 2;
+    private final int INDEX_3 = 3;
+    private final int INDEX_4 = 4;
+    private final int INDEX_5 = 5;
+    private final int INDEX_6 = 6;
+    private final int INDEX_7 = 7;
+    private final int INDEX_8 = 8;
+    private final int INDEX_9 = 9;
+    private final int INDEX_10 = 10;
     private final HomKaigRiysFutgGengNinteishoItem item;
 
     /**

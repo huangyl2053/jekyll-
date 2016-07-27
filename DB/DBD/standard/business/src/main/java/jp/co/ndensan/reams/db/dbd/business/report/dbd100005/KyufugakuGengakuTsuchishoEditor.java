@@ -170,7 +170,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
         if (null != 通知書定型文リスト && !通知書定型文リスト.isEmpty()) {
             source.tsuchibun = 通知書定型文リスト.get(0);
         }
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("1")) {
+        if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
             source.renrakusakiHoka = 通知書定型文リスト.get(1);
         } else {
             source.renrakusakiHoka = RString.EMPTY;
@@ -202,7 +202,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
 
     private void setLayerFontLarge(KyufugakuGengakuTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("2")) {
+        if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(1);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
@@ -211,7 +211,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
 
     private void setLayerFontKonzai(KyufugakuGengakuTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("3")) {
+        if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
             source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(1);
             source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(2);
         } else {
@@ -222,7 +222,7 @@ public class KyufugakuGengakuTsuchishoEditor implements IKyufugakuGengakuTsuchis
 
     private void setLayerFontKonzai2(KyufugakuGengakuTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("4")) {
+        if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
             source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(1);
             source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(2);
         } else {

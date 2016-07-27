@@ -15,9 +15,9 @@ import lombok.NonNull;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public class HomKaigRiysFutGenｍKettTsuchishoReport extends Report<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
+public final class HomKaigRiysFutGenmKettTsuchishoReport extends Report<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
 
-    private final HomKaigRiysFutGenｍKettTsuchishoItem bodyItem;
+    private final HomKaigRiysFutGenmKettTsuchishoItem bodyItem;
 
     /**
      * インスタンスを生成します。
@@ -25,18 +25,18 @@ public class HomKaigRiysFutGenｍKettTsuchishoReport extends Report<HomKaigRiysF
      * @param bodyItem 特別地域加算減免・訪問介護利用者負担減額決定通知書
      * @return 特別地域加算減免・訪問介護利用者負担減額決定通知書
      */
-    public static HomKaigRiysFutGenｍKettTsuchishoReport createReport(@NonNull HomKaigRiysFutGenｍKettTsuchishoItem bodyItem) {
-        return new HomKaigRiysFutGenｍKettTsuchishoReport(bodyItem);
+    public static HomKaigRiysFutGenmKettTsuchishoReport createReport(@NonNull HomKaigRiysFutGenmKettTsuchishoItem bodyItem) {
+        return new HomKaigRiysFutGenmKettTsuchishoReport(bodyItem);
     }
 
-    private HomKaigRiysFutGenｍKettTsuchishoReport(HomKaigRiysFutGenｍKettTsuchishoItem bodyItem) {
+    private HomKaigRiysFutGenmKettTsuchishoReport(HomKaigRiysFutGenmKettTsuchishoItem bodyItem) {
         this.bodyItem = bodyItem;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<HomKaigRiysFutGenｍKettTsuchishoReportSource> writer) {
-        IHomKaigRiysFutGenｍKettTsuchishoEditor bodyEditor = new HomKaigRiysFutGenｍKettTsuchishoBodyEditor(bodyItem);
-        IHomKaigRiysFutGenｍKettTsuchishoBuider builder = new HomKaigRiysFutGenｍKettTsuchishoBuilderImpl(bodyEditor);
+        IHomKaigRiysFutGenmKettTsuchishoEditor bodyEditor = new HomKaigRiysFutGenmKettTsuchishoBodyEditor(bodyItem);
+        IHomKaigRiysFutGenmKettTsuchishoBuider builder = new HomKaigRiysFutGenmKettTsuchishoBuilderImpl(bodyEditor);
         writer.writeLine(builder);
     }
 }

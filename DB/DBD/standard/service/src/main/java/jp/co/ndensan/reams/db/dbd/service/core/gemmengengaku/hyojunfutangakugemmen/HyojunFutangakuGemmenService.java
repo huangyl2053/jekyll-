@@ -21,6 +21,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HyojunFutangakuGemmenService {
 
+    /**
+     * コンストラクタです。
+     *
+     * @return InstanceProvider
+     */
     public static HyojunFutangakuGemmenService createIntance() {
         return InstanceProvider.create(HyojunFutangakuGemmenService.class);
     }

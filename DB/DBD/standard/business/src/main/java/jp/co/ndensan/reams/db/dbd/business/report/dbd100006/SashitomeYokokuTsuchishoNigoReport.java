@@ -58,6 +58,19 @@ public final class SashitomeYokokuTsuchishoNigoReport extends Report<SashitomeYo
                 認証者ソースビルダー, 帳票情報, 償還払集計情報リスト);
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param 個人情報
+     * @param 宛先
+     * @param 帳票制御共通
+     * @param 地方公共団体
+     * @param 文書番号
+     * @param 通知書定型文リスト
+     * @param 認証者ソースビルダー
+     * @param 帳票情報
+     * @return 差止予告通知書（２号被保険者用）
+     */
     public static SashitomeYokokuTsuchishoNigoReport createReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
             ShiharaiHohoHenko 帳票情報) {

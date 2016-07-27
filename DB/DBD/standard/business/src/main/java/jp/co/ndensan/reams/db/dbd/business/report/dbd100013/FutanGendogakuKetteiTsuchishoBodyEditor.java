@@ -39,28 +39,28 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     private final RString 負担名_居住費負担限度額従来型個室 = new RString("居住費負担限度額従来型個室");
     private final RString 負担名_居住費負担限度額従来型個室_特養等 = new RString("居住費負担限度額従来型個室（特養等）");
     private final RString 負担名_居住費負担限度額従来型個室_老健_療養等 = new RString("居住費負担限度額従来型個室（老健・療養等）");
-    private final static int INDEX_0 = 0;
-    private final static int INDEX_1 = 1;
-    private final static int INDEX_2 = 2;
-    private final static int INDEX_3 = 3;
-    private final static int INDEX_4 = 4;
-    private final static int INDEX_5 = 5;
-    private final static int INDEX_6 = 6;
-    private final static int INDEX_7 = 7;
-    private final static int INDEX_8 = 8;
-    private final static int INDEX_9 = 9;
-    private final static int INDEX_10 = 10;
-    private final static int INDEX_11 = 11;
-    private final static int INDEX_12 = 12;
-    private final static int INDEX_13 = 13;
-    private final static int INDEX_14 = 14;
-    private final static int INDEX_15 = 15;
-    private final static int INDEX_16 = 16;
-    private final static int INDEX_17 = 17;
-    private final static int INDEX_18 = 18;
-    private final static int INDEX_19 = 19;
-    private final static int INDEX_20 = 20;
-    private final static int INDEX_21 = 21;
+    private final int INDEX_0 = 0;
+    private final int INDEX_1 = 1;
+    private final int INDEX_2 = 2;
+    private final int INDEX_3 = 3;
+    private final int INDEX_4 = 4;
+    private final int INDEX_5 = 5;
+    private final int INDEX_6 = 6;
+    private final int INDEX_7 = 7;
+    private final int INDEX_8 = 8;
+    private final int INDEX_9 = 9;
+    private final int INDEX_10 = 10;
+    private final int INDEX_11 = 11;
+    private final int INDEX_12 = 12;
+    private final int INDEX_13 = 13;
+    private final int INDEX_14 = 14;
+    private final int INDEX_15 = 15;
+    private final int INDEX_16 = 16;
+    private final int INDEX_17 = 17;
+    private final int INDEX_18 = 18;
+    private final int INDEX_19 = 19;
+    private final int INDEX_20 = 20;
+    private final int INDEX_21 = 21;
     private final FutanGendogakuKetteiTsuchishoItem item;
 
     /**
@@ -210,7 +210,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void set連絡先他(FutanGendogakuKetteiTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibun3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibun4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibun5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -236,7 +236,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void set連絡先他Large(FutanGendogakuKetteiTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunLarge3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunLarge4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunLarge5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -257,7 +257,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void set連絡先他上段Small(FutanGendogakuKetteiTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunMix3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMix5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -274,7 +274,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void set連絡先他下段Large(FutanGendogakuKetteiTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(4).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_4).split(折り返す符号.toString());
         source.tsuchibunMix15 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix16 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMix17 = getLenStr(INDEX_2, 通知書定型文List);
@@ -286,7 +286,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void set連絡先他上段Large(FutanGendogakuKetteiTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunMixtwo3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo4 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMixtwo5 = getLenStr(INDEX_2, 通知書定型文List);
@@ -298,7 +298,7 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void set連絡先他下段Small(FutanGendogakuKetteiTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(4).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_4).split(折り返す符号.toString());
         source.tsuchibunMixtwo10 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo11 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMixtwo12 = getLenStr(INDEX_2, 通知書定型文List);

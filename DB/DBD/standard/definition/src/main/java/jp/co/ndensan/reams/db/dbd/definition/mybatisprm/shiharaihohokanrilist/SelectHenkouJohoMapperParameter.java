@@ -19,7 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class SelectHenkouJohoMapperParameter implements IMyBatisParameter {
+public final class SelectHenkouJohoMapperParameter implements IMyBatisParameter {
 
     private final FlexibleDate 基準日;
 
@@ -27,6 +27,12 @@ public class SelectHenkouJohoMapperParameter implements IMyBatisParameter {
         this.基準日 = 基準日;
     }
 
+    /**
+     * 支払方法変更管理リスト作成用MyBatisパラメータを作成します。
+     *
+     * @param processParameter PublishReportProcessParameter
+     * @return
+     */
     public static SelectHenkouJohoMapperParameter createParameter(PublishReportProcessParameter processParameter) {
         return new SelectHenkouJohoMapperParameter(processParameter.get基準日());
     }

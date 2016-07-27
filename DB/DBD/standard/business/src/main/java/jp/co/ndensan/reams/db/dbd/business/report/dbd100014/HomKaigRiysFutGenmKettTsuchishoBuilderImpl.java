@@ -13,16 +13,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public class HomKaigRiysFutGenｍKettTsuchishoBuilderImpl implements IHomKaigRiysFutGenｍKettTsuchishoBuider {
+public class HomKaigRiysFutGenmKettTsuchishoBuilderImpl implements IHomKaigRiysFutGenmKettTsuchishoBuider {
 
-    private final IHomKaigRiysFutGenｍKettTsuchishoEditor bodyEditor;
+    private final IHomKaigRiysFutGenmKettTsuchishoEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param bodyEditor {@link IHomKaigRiysFutGenｍKettTsuchishoEditor}
+     * @param bodyEditor {@link IHomKaigRiysFutGenmKettTsuchishoEditor}
      */
-    HomKaigRiysFutGenｍKettTsuchishoBuilderImpl(IHomKaigRiysFutGenｍKettTsuchishoEditor bodyEditor) {
+    HomKaigRiysFutGenmKettTsuchishoBuilderImpl(IHomKaigRiysFutGenmKettTsuchishoEditor bodyEditor) {
         this.bodyEditor = bodyEditor;
     }
 

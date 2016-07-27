@@ -50,12 +50,12 @@ public enum ShiharaiHohoHenkoHaakuIchiranOrderKey implements IReportItems {
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
-    private final RString MyBatis項目名;
+    private final RString 項目名;
 
-    private ShiharaiHohoHenkoHaakuIchiranOrderKey(String 項目ID, String フォームフィールド名, String MyBatis項目名) {
+    private ShiharaiHohoHenkoHaakuIchiranOrderKey(String 項目ID, String フォームフィールド名, String 項目名) {
         this.項目ID = new RString(項目ID);
         this.フォームフィールド名 = new RString(フォームフィールド名);
-        this.MyBatis項目名 = new RString(MyBatis項目名);
+        this.項目名 = new RString(項目名);
     }
 
     @Override
@@ -70,6 +70,6 @@ public enum ShiharaiHohoHenkoHaakuIchiranOrderKey implements IReportItems {
 
     @Override
     public RString getMyBatis項目名() {
-        return MyBatis項目名;
+        return 項目名;
     }
 }

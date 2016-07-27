@@ -34,7 +34,7 @@ public class TainoHanteiResultKohen implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param 滞納判定期間
+     * @param 滞納判定期間 TainoHanteiResult
      */
     public TainoHanteiResultKohen(TainoHanteiResult 滞納判定期間) {
         this.滞納判定基準日 = 滞納判定期間.get滞納判定基準日();

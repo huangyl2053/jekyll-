@@ -49,6 +49,7 @@ public class FutanGendogakuNinteishoItem {
      * @param 帳票制御汎用List 帳票制御汎用List
      * @param 地方公共団体 地方公共団体
      * @param 交付日 交付日
+     * @param 発行日 発行日
      * @param 帳票分類ID 帳票分類ID
      * @param 認証者 認証者
      */
