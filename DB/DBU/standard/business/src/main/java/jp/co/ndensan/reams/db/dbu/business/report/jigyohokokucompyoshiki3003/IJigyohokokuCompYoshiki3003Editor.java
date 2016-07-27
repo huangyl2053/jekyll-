@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki3003.Jigyo
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-3） のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-3） のインターフェースクラスです。
  *
  * @reamsid_L DBU-5530-060 dangjingjing
  */
