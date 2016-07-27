@@ -12,6 +12,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyushaSogoJigyoTaishoshaHantei {
 
     private boolean is受給者;
