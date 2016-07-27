@@ -84,7 +84,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
-    private static final int INT_6 = 6;
+//    private static final int INT_6 = 6;
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_14 = 14;

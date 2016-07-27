@@ -162,7 +162,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     private static final RString 定数_ページごとに山分け = new RString("ページごとに山分け");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
-    private static final RString 帳票タイプ_銀振型5 = new RString("銀振型5期タイプ");
+//    private static final RString 帳票タイプ_銀振型5 = new RString("銀振型5期タイプ");
 
     private final MapperProvider mapperProvider;
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
