@@ -39,6 +39,7 @@
                     AND "DbT2015KeisangoJoho"."choteiNendo" = #{調定年度}
                     AND "DbT2015KeisangoJoho"."fukaNendo" = #{賦課年度}
                     AND "DbT2015KeisangoJoho"."sakuseiShoriName" = '仮算定異動賦課'
+                    AND "DbT2015KeisangoJoho"."choteiNichiji" = #{調定日時}
     </select>
     
     <sql id="allColumns_DbT2015KeisangoJoho">

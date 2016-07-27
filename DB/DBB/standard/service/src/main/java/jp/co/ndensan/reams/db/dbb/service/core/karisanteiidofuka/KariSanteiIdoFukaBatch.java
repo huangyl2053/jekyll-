@@ -114,6 +114,9 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
@@ -165,6 +168,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString 定数_出力順 = new RString("出力順");
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
+    private static final RString 年度 = new RString("年度");
     private static final RString SIGN = new RString(" ＞ ");
     private static final RString 処理枝番 = new RString("0001");
     private static final int NUM_1 = 1;
@@ -858,11 +862,13 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(調定年度.wareki().toDateString()));
+                .concat(調定年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
+                        .fillType(FillType.BLANK).toDateString().concat(年度)));
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_賦課年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
-                .concat(賦課年度.wareki().toDateString()));
+                .concat(賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN)
+                        .fillType(FillType.BLANK).toDateString().concat(年度)));
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));

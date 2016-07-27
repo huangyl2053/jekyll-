@@ -48,6 +48,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -83,6 +86,9 @@ public class KariSanteiIdoFukaBatchFath {
     private static final RString 併用徴収 = new RString("併用徴収");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
+    private static final RString 西暦 = new RString("西暦");
+    private static final RString LEFTBRACKET = new RString("（");
+    private static final RString RIGHTBRACKET = new RString("）");
     private static final RString 特別徴収停止事由コード_T1 = new RString("T1");
     private static final RString 特別徴収停止事由コード_T2 = new RString("T2");
     private static final RString 特別徴収停止事由コード_T4 = new RString("T4");
@@ -522,7 +528,7 @@ public class KariSanteiIdoFukaBatchFath {
         KarisanteiIdoKekkaIchiranCSVEntity entity = new KarisanteiIdoKekkaIchiranCSVEntity();
         entity.set作成年月日(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
         entity.set作成時刻(調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-        entity.set賦課年度(賦課年度.seireki().toDateString());
+        entity.set賦課年度(西暦.concat(LEFTBRACKET).concat(賦課年度.seireki().toDateString()).concat(RIGHTBRACKET));
         entity.set通知書番号(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get通知書番号().value());
         AtenaMeisho atenaMeisho = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity().getKanjiShimei();
         if (atenaMeisho != null) {
@@ -532,7 +538,9 @@ public class KariSanteiIdoFukaBatchFath {
                 && 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association association = finder.getAssociation();
+            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
             entity.set住所(編集後個人.get編集後住所());
             entity.set町域管内管外住所(編集後個人.get町域());
             entity.set番地(編集後個人.get番地().value());
