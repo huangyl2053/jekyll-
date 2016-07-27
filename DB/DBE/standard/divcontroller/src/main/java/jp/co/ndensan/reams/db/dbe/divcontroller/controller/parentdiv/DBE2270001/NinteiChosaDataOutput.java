@@ -80,6 +80,17 @@ public class NinteiChosaDataOutput {
     }
 
     /**
+     * HokenshaListの設定onChangeメッソドです。
+     *
+     * @param div コントロールdiv
+     * @return ResponseData<NinteiChosaDataOutputDiv>
+     */
+    public ResponseData<NinteiChosaDataOutputDiv> onChange_Hokensha(NinteiChosaDataOutputDiv div) {
+        getHandler(div).setHdnShichosonCode();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * バッチ呼び出すメッソドです。
      *
      * @param div コントロールdiv

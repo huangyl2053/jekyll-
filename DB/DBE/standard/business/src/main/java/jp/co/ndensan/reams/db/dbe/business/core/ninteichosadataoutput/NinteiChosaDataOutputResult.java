@@ -191,6 +191,9 @@ public class NinteiChosaDataOutputResult {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【認定調査員コード】"));
         jokenBuilder.append(processParamter.getNinteiChosainCode());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("【市町村コード】"));
+        jokenBuilder.append(processParamter.getShichosonCode());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【申請書管理番号リスト】"));

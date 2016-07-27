@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.dgNinteiChosaData_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -52,6 +53,7 @@ public class NinteiChosaDataOutputHandler {
      */
     public void load() {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("SimpleInputMode"));
         div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
@@ -68,7 +70,8 @@ public class NinteiChosaDataOutputHandler {
         return NinteiChosaDataOutputMybitisParameter.createSelectByKeyParam(
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
-                div.getTxtMaxCount().getValue());
+                div.getTxtMaxCount().getValue(),
+                div.getCcdHokensha().getSelectedItem().get市町村コード().value());
     }
 
     /**
@@ -77,6 +80,14 @@ public class NinteiChosaDataOutputHandler {
     public void clear検索条件() {
         div.getCcdChosaltakusakiAndChosainInput().clear();
         div.getNinteiKensakuJyoken().getTxtMaxCount().clearValue();
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+    }
+
+    /**
+     * 検索条件クリアの設定メッソドです。
+     */
+    public void setHdnShichosonCode() {
+        div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
     }
 
     /**
@@ -94,6 +105,7 @@ public class NinteiChosaDataOutputHandler {
             shinseishoKanriNoList.add(row.getShinseishoKanriNo());
         }
         batchParamter.setShinseishoKanriNoList(shinseishoKanriNoList);
+        batchParamter.setShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
         return batchParamter;
     }
 

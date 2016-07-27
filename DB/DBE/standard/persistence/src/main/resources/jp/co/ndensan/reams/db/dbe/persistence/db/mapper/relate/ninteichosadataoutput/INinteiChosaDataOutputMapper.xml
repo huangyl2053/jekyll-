@@ -71,6 +71,9 @@
          <if test= "isNinteiChosainCode">
             AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
         </if>
+        <if test= "!isShichoson">
+            AND DbT7051."shichosonCode" = #{shichosonCode}
+        </if>
       ORDER BY
         DbT5101."hihokenshaKana"
         , DbT5101."ninteiShinseiYMD"
@@ -309,6 +312,9 @@
    <if test= "!isShinseishoKanriNo">
        AND DbT5201."shinseishoKanriNo" IN #{shinseishoKanriNo}
    </if>
+   <if test= "!isShichoson">
+       AND DbT7051."shichosonCode" = #{shichosonCode}
+    </if>
     ORDER BY
        状況連番,
        状況フラグ連番,
