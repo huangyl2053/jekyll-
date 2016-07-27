@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.kaigofukatokuchoheijunka6batch.IKaigoFukaTokuchoHeijunka6BatchMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
-import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService;
+import jp.co.ndensan.reams.db.dbb.service.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -52,10 +52,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaish
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.GyomuConfigJohoClass;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.Heijunka;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.HeijunkaInput;
-import jp.co.ndensan.reams.ur.urd.business.core.heijunka.HeijunkaOutput;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -159,11 +155,11 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     private static final RString 年度 = new RString("年度");
     private static final RString CSV出力有無_有り = new RString("有り");
     private static final RString SIGN_GT = new RString("＞");
-    private static final RString 平準化対象外理由区分_最小値未満 = new RString("1");
-    private static final RString 平準化対象外理由区分_計算方法より = new RString("2");
-    private static final RString 備考コード_結果0円以下 = new RString("3");
-    private static final RString 備考コード_対象外減額 = new RString("4");
-    private static final RString 備考コード_対象外増額 = new RString("5");
+//    private static final RString 平準化対象外理由区分_最小値未満 = new RString("1");
+//    private static final RString 平準化対象外理由区分_計算方法より = new RString("2");
+//    private static final RString 備考コード_結果0円以下 = new RString("3");
+//    private static final RString 備考コード_対象外減額 = new RString("4");
+//    private static final RString 備考コード_対象外増額 = new RString("5");
     private static final RString 計算後情報_テーブル = new RString("計算後情報.");
     private static final RString 対象外データテンプ_テーブル = new RString("対象外データTemp.");
     private static final RString 識別コード = new RString("\"shikibetsuCode\"");
@@ -301,13 +297,13 @@ public class KaigoFukaTokuchoHeijunka6Batch {
      */
     public void editAtoFukaJohoList(FlexibleYear 賦課年度, YMDHMS 調定日時, RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
-        List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
+//        List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
         mapper.create平準化計算結果Temp();
-        Heijunka heijunka = new Heijunka();
-        HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
-        RDate effectiveDate = new RDate(賦課年度.toDateString().toString());
+//        Heijunka heijunka = new Heijunka();
+//        HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
+//        RDate effectiveDate = new RDate(賦課年度.toDateString().toString());
         // QA990
-        for (TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity : taishoshaTempEntityList) {
+//        for (TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity : taishoshaTempEntityList) {
 //            HeijunkaInput heijunkaInput = new HeijunkaInput();
 //            平準化入力設定(保険料段階取得, 賦課年度, entity, heijunkaInput, 平準化計算方法_増額, 平準化計算方法_減額, effectiveDate);
 //            HeijunkaOutput 平準化結果 = heijunka.calculateHeijunka(heijunkaInput);
@@ -320,115 +316,110 @@ public class KaigoFukaTokuchoHeijunka6Batch {
 //                entity.set備考コード(get備考コード(平準化結果));
 //                mapper.insert対象外データTemp(entity);
 //            }
-        }
+//        }
     }
 
-    private void 平準化入力設定(HokenryoDankaiManager 保険料段階取得, FlexibleYear 賦課年度,
-            TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity, HeijunkaInput heijunkaInput,
-            RString 平準化計算方法_増額, RString 平準化計算方法_減額, RDate effectiveDate) {
-        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, entity.getHokenryoDankaiKarisanntei());
-        heijunkaInput.set年保険料額(今年度保険料率取得(保険料段階));
-        List<Decimal> 特徴期別額リスト = new ArrayList<>();
-        特徴期別額リスト.add(entity.getTokuchoKibetsuChoteigaku1());
-        特徴期別額リスト.add(entity.getTokuchoKibetsuChoteigaku2());
-        特徴期別額リスト.add(entity.getTokuchoKibetsuChoteigaku3());
-        heijunkaInput.set特徴期別額(特徴期別額リスト);
-        heijunkaInput.set平準化開始期idx(NUM_1);
-        heijunkaInput.set八月特徴開始者(NUM_0);
-        GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
-        業務コンフィグ情報.set特徴定期数(Integer.parseInt(
-                コンフィグ値取得(ConfigNameDBB.特徴期情報_設定納期数, effectiveDate).toString()));
-        業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(
-                コンフィグ値取得(ConfigNameDBB.特徴期情報_仮算定期数, effectiveDate).toString()));
-        業務コンフィグ情報.set平準化計算方法増額分(Integer.parseInt(平準化計算方法_増額.toString()));
-        業務コンフィグ情報.set平準化計算方法減額分(Integer.parseInt(平準化計算方法_減額.toString()));
-        業務コンフィグ情報.set端数区分特徴期別額(Integer.parseInt(
-                コンフィグ値取得(ConfigNameDBB.特別徴収_期別端数, effectiveDate).toString()));
-        業務コンフィグ情報.set基準となる差額幅(Decimal.ZERO);
-        業務コンフィグ情報.set基準となる差額率(Decimal.ZERO);
-        業務コンフィグ情報.set平準化対象期別額最小値(Decimal.ONE);
-        List<jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu> 期別リスト = new ArrayList<>();
-        期別リスト作成(effectiveDate, 期別リスト);
-        業務コンフィグ情報.set期別クラス(期別リスト);
-        heijunkaInput.set業務コンフィグ情報(業務コンフィグ情報);
-    }
-
-    private void 期別リスト作成(RDate effectiveDate, List<jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu> 期別リスト) throws NumberFormatException {
-        jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu 期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
-        int 月の期1 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期1, effectiveDate).toString());
-        int 月の期2 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期2, effectiveDate).toString());
-        int 月の期3 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期3, effectiveDate).toString());
-        int 月の期4 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期4, effectiveDate).toString());
-        int 月処理区分1 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分1, effectiveDate));
-        int 月処理区分2 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分2, effectiveDate));
-        int 月処理区分3 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分3, effectiveDate));
-        int 月処理区分4 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分4, effectiveDate));
-        期別.set特徴期(月の期1);
-        期別.set特徴期区分(月処理区分1);
-        期別リスト.add(期別);
-        期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
-        期別.set特徴期(月の期2);
-        期別.set特徴期区分(月処理区分2);
-        期別リスト.add(期別);
-        期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
-        期別.set特徴期(月の期3);
-        期別.set特徴期区分(月処理区分3);
-        期別リスト.add(期別);
-        期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
-        期別.set特徴期(月の期4);
-        期別.set特徴期区分(月処理区分4);
-        期別リスト.add(期別);
-    }
-
-    private RString コンフィグ値取得(Enum key, RDate effectiveDate) {
-        return DbBusinessConfig.get(key, effectiveDate, SubGyomuCode.DBB介護賦課);
-    }
-
-    private int 一行目のレコード変換(RString 特徴期情報_月処理区分) {
-        int 月処理区分 = NUM_0;
-        int i = Integer.parseInt(特徴期情報_月処理区分.toString());
-        switch (i) {
-            case NUM_0:
-                break;
-            case NUM_1:
-                月処理区分 = NUM_1;
-                break;
-            case NUM_2:
-                月処理区分 = NUM_2;
-                break;
-            case NUM_3:
-                break;
-            case NUM_4:
-                月処理区分 = NUM_3;
-                break;
-            case NUM_5:
-                月処理区分 = NUM_4;
-                break;
-            default:
-                break;
-        }
-        return 月処理区分;
-    }
-
-    private RString get備考コード(HeijunkaOutput 平準化結果) {
-        RString 平準化対象外理由区分 = 平準化結果.get平準化対象外理由区分();
-        RString 備考コード = RString.EMPTY;
-        List<Decimal> 変更後特徴期別額 = 平準化結果.get変更後特徴期別額();
-        final Decimal 変更後特徴期別額ひとつ = 変更後特徴期別額.get(NUM_0);
-        final Decimal 変更後特徴期別額ふたつ = 変更後特徴期別額.get(NUM_1);
-        if (平準化対象外理由区分_最小値未満.equals(平準化対象外理由区分)) {
-            備考コード = 備考コード_結果0円以下;
-        } else if (変更後特徴期別額ひとつ != null && 変更後特徴期別額ふたつ != null) {
-            final boolean is平準化対象外理由区分計算方法より = 平準化対象外理由区分_計算方法より.equals(平準化対象外理由区分);
-            if (is平準化対象外理由区分計算方法より && 変更後特徴期別額ふたつ.compareTo(変更後特徴期別額ひとつ) < 0) {
-                備考コード = 備考コード_対象外減額;
-            } else if (is平準化対象外理由区分計算方法より && 変更後特徴期別額ひとつ.compareTo(変更後特徴期別額ふたつ) < 0) {
-                備考コード = 備考コード_対象外増額;
-            }
-        }
-        return 備考コード;
-    }
-
+//    private void 平準化入力設定(HokenryoDankaiManager 保険料段階取得, FlexibleYear 賦課年度,
+//            TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity, HeijunkaInput heijunkaInput,
+//            RString 平準化計算方法_増額, RString 平準化計算方法_減額, RDate effectiveDate) {
+//        Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, entity.getHokenryoDankaiKarisanntei());
+//        heijunkaInput.set年保険料額(今年度保険料率取得(保険料段階));
+//        List<Decimal> 特徴期別額リスト = new ArrayList<>();
+//        特徴期別額リスト.add(entity.getTokuchoKibetsuChoteigaku1());
+//        特徴期別額リスト.add(entity.getTokuchoKibetsuChoteigaku2());
+//        特徴期別額リスト.add(entity.getTokuchoKibetsuChoteigaku3());
+//        heijunkaInput.set特徴期別額(特徴期別額リスト);
+//        heijunkaInput.set平準化開始期idx(NUM_1);
+//        heijunkaInput.set八月特徴開始者(NUM_0);
+//        GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
+//        業務コンフィグ情報.set特徴定期数(Integer.parseInt(
+//                コンフィグ値取得(ConfigNameDBB.特徴期情報_設定納期数, effectiveDate).toString()));
+//        業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(
+//                コンフィグ値取得(ConfigNameDBB.特徴期情報_仮算定期数, effectiveDate).toString()));
+//        業務コンフィグ情報.set平準化計算方法増額分(Integer.parseInt(平準化計算方法_増額.toString()));
+//        業務コンフィグ情報.set平準化計算方法減額分(Integer.parseInt(平準化計算方法_減額.toString()));
+//        業務コンフィグ情報.set端数区分特徴期別額(Integer.parseInt(
+//                コンフィグ値取得(ConfigNameDBB.特別徴収_期別端数, effectiveDate).toString()));
+//        業務コンフィグ情報.set基準となる差額幅(Decimal.ZERO);
+//        業務コンフィグ情報.set基準となる差額率(Decimal.ZERO);
+//        業務コンフィグ情報.set平準化対象期別額最小値(Decimal.ONE);
+//        List<jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu> 期別リスト = new ArrayList<>();
+//        期別リスト作成(effectiveDate, 期別リスト);
+//        業務コンフィグ情報.set期別クラス(期別リスト);
+//        heijunkaInput.set業務コンフィグ情報(業務コンフィグ情報);
+//    }
+//    private void 期別リスト作成(RDate effectiveDate, List<jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu> 期別リスト) throws NumberFormatException {
+//        jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu 期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
+//        int 月の期1 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期1, effectiveDate).toString());
+//        int 月の期2 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期2, effectiveDate).toString());
+//        int 月の期3 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期3, effectiveDate).toString());
+//        int 月の期4 = Integer.parseInt(コンフィグ値取得(ConfigNameDBB.特徴期情報_月の期4, effectiveDate).toString());
+//        int 月処理区分1 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分1, effectiveDate));
+//        int 月処理区分2 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分2, effectiveDate));
+//        int 月処理区分3 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分3, effectiveDate));
+//        int 月処理区分4 = 一行目のレコード変換(コンフィグ値取得(ConfigNameDBB.特徴期情報_月処理区分4, effectiveDate));
+//        期別.set特徴期(月の期1);
+//        期別.set特徴期区分(月処理区分1);
+//        期別リスト.add(期別);
+//        期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
+//        期別.set特徴期(月の期2);
+//        期別.set特徴期区分(月処理区分2);
+//        期別リスト.add(期別);
+//        期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
+//        期別.set特徴期(月の期3);
+//        期別.set特徴期区分(月処理区分3);
+//        期別リスト.add(期別);
+//        期別 = new jp.co.ndensan.reams.ur.urd.business.core.heijunka.Kibetsu();
+//        期別.set特徴期(月の期4);
+//        期別.set特徴期区分(月処理区分4);
+//        期別リスト.add(期別);
+//    }
+//    private RString コンフィグ値取得(Enum key, RDate effectiveDate) {
+//        return DbBusinessConfig.get(key, effectiveDate, SubGyomuCode.DBB介護賦課);
+//    }
+//    private int 一行目のレコード変換(RString 特徴期情報_月処理区分) {
+//        int 月処理区分 = NUM_0;
+//        int i = Integer.parseInt(特徴期情報_月処理区分.toString());
+//        switch (i) {
+//            case NUM_0:
+//                break;
+//            case NUM_1:
+//                月処理区分 = NUM_1;
+//                break;
+//            case NUM_2:
+//                月処理区分 = NUM_2;
+//                break;
+//            case NUM_3:
+//                break;
+//            case NUM_4:
+//                月処理区分 = NUM_3;
+//                break;
+//            case NUM_5:
+//                月処理区分 = NUM_4;
+//                break;
+//            default:
+//                break;
+//        }
+//        return 月処理区分;
+//    }
+//    private RString get備考コード(HeijunkaOutput 平準化結果) {
+//        RString 平準化対象外理由区分 = 平準化結果.get平準化対象外理由区分();
+//        RString 備考コード = RString.EMPTY;
+//        List<Decimal> 変更後特徴期別額 = 平準化結果.get変更後特徴期別額();
+//        final Decimal 変更後特徴期別額ひとつ = 変更後特徴期別額.get(NUM_0);
+//        final Decimal 変更後特徴期別額ふたつ = 変更後特徴期別額.get(NUM_1);
+//        if (平準化対象外理由区分_最小値未満.equals(平準化対象外理由区分)) {
+//            備考コード = 備考コード_結果0円以下;
+//        } else if (変更後特徴期別額ひとつ != null && 変更後特徴期別額ふたつ != null) {
+//            final boolean is平準化対象外理由区分計算方法より = 平準化対象外理由区分_計算方法より.equals(平準化対象外理由区分);
+//            if (is平準化対象外理由区分計算方法より && 変更後特徴期別額ふたつ.compareTo(変更後特徴期別額ひとつ) < 0) {
+//                備考コード = 備考コード_対象外減額;
+//            } else if (is平準化対象外理由区分計算方法より && 変更後特徴期別額ひとつ.compareTo(変更後特徴期別額ふたつ) < 0) {
+//                備考コード = 備考コード_対象外増額;
+//            }
+//        }
+//        return 備考コード;
+//    }
     /**
      * 平準化計算後の結果より、介護賦課テーブルを挿入するメソッドです。
      *
@@ -482,7 +473,7 @@ public class KaigoFukaTokuchoHeijunka6Batch {
                 }
             }
         }
-        TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService printService = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService();
+        TokuChoHeijunkaKeisanJuneKekkaIchiranPrintService printService = new TokuChoHeijunkaKeisanJuneKekkaIchiranPrintService();
         HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
         ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId());
         List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> taishoshaList = new ArrayList<>();

@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBB-0810-030 yebangqiang
  */
-public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranPrintService {
+public class TokuChoHeijunkaKeisanJuneKekkaIchiranPrintService {
 
     private static final ReportId 帳票分類ID = new ReportId("DBB200003_TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiran");
     private final RString コード_ログコード = new RString("0003");
