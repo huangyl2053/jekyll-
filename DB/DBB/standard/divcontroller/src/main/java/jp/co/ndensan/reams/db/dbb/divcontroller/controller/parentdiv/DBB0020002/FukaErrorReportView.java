@@ -28,23 +28,16 @@ import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalRep
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.internalreportoutput.InternalReportServiceFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -179,23 +173,24 @@ public class FukaErrorReportView {
         fileName.append(CSV_WRITER_LINE).append(dateString);
         fileName.append(CSV_WRITER_LINE).append(timeString);
         fileName.append(CSV);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), fileName.toRString());
-        List<PersonalData> personalDataList = new ArrayList<>();
-        try (CsvWriter<FukaErrorListCsvItem> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                new EucEntityId(internalReport.get内部帳票Id()), UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        RString eucFilePath = Path.combinePath(spoolWorkPath, fileName.toRString());
+        try (EucCsvWriter writer = new EucCsvWriter.InstanceBuilder(eucFilePath, new EucEntityId(internalReport.get内部帳票Id()))
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEncode(Encode.SJIS)
+                .setEnclosure(RString.EMPTY)
+                .hasHeader(false)
+                .build()) {
             for (FukaErrorListCsvItem item : reportItem) {
-                personalDataList.add(toPersonalData(new ShikibetsuCode(item.get識別コード())));
-                csvWriter.writeLine(item);
+                writer.writeLine(item);
             }
-            csvWriter.close();
         }
-        AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName.toRString()));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, fileName.toRString()), response);
+        manager.spool(eucFilePath);
+        return EucDownload.directAccessDownload(
+                SubGyomuCode.DBB介護賦課, manager.getSharedFileName(), manager.getSharedFileId(), response);
+
     }
 
     /**
