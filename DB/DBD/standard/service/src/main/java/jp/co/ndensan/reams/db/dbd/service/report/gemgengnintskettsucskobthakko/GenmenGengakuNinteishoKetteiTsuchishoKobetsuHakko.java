@@ -138,12 +138,12 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
         UaFt200FindShikibetsuTaishoEntity uaFt200Entity = get宛名情報(識別コード);
         UaFt250FindAtesakiEntity uaFt250Entity = get宛先情報(識別コード);
 
-        ReportId 帳票分類ID = get帳票分類ID(帳票タイプリスト);
-        DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
-        List<DbT7067ChohyoSeigyoHanyoEntity> dbT7067EntityList = load帳票制御汎用(帳票分類ID);
-        Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
-        List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプリスト);
         for (RString 帳票タイプ : 帳票タイプリスト) {
+            ReportId 帳票分類ID = get帳票分類ID(帳票タイプ);
+            DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = load帳票制御共通(帳票分類ID);
+            List<DbT7067ChohyoSeigyoHanyoEntity> dbT7067EntityList = load帳票制御汎用(帳票分類ID);
+            Ninshosha ninshosha = get認証者情報(new FlexibleDate(発行日.toDateString()));
+            List<RString> 通知書定型文List = get通知書定型文List(帳票分類ID, dbT7065Entity, 帳票タイプリスト);
             if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除等認定証.get名称().equals(帳票タイプ)) {
                 RiyoshaFutangakuGengaku 利用者負担額減額情報 = getRiyoshaFutanGengaku(
                         被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
@@ -357,35 +357,35 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
         return 通知書定型文List;
     }
 
-    private ReportId get帳票分類ID(List<RString> 帳票タイプリスト) {
-        if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
+    private ReportId get帳票分類ID(RString 帳票タイプ) {
+        if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100009.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除等認定証.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除等認定証.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100015.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100013.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額認定証.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.負担限度額認定証.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100020.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減決定通知書.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100012.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減対象確認証.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減対象確認証.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100018.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護等利用者負担額減額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護等利用者負担額減額決定通知書.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100011.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護利用者負担額減額認定証.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.訪問介護利用者負担額減額認定証.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100017.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100014.getReportId();
 
-        } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算に係る訪問介護利用者負担減額確認証.get名称().equals(帳票タイプリスト.get(0))) {
+        } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算に係る訪問介護利用者負担減額確認証.get名称().equals(帳票タイプ)) {
             return ReportIdDBD.DBD100022.getReportId();
         }
         return null;

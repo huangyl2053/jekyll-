@@ -47,7 +47,7 @@ public class ShakfukusRiysFutKeigTaisKakuninshoPrintService {
             if (HokenshaNameOutput.印字する.getコード().equals(entity.getKomokuValue())) {
                 reportId = ReportIdDBD.DBD100019.getReportId();
             } else {
-                reportId = ReportIdDBD.DBD100018.getReportId()
+                reportId = ReportIdDBD.DBD100018.getReportId();
             }
         }
         ShakfukusRiysFutKeigTaisKakuninshoProerty property = new ShakfukusRiysFutKeigTaisKakuninshoProerty(reportId);
