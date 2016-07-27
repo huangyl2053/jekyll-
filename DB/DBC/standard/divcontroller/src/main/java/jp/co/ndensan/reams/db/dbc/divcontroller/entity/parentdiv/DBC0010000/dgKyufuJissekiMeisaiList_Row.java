@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 26 13:06:38 JST 2014 
+ * Wed Jul 27 09:34:55 JST 2016 
  */
 
 
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 
 public class dgKyufuJissekiMeisaiList_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
 
     private RString txtServiceGroup1;
     private RString txtServiceGroup2;
@@ -78,6 +79,33 @@ public class dgKyufuJissekiMeisaiList_Row extends DataRow {
         this.txtYM11 = RString.EMPTY;
         this.btnYM12 = new Button();
         this.txtYM12 = RString.EMPTY;
+        this.setOriginalData("txtServiceGroup1", txtServiceGroup1);
+        this.setOriginalData("txtServiceGroup2", txtServiceGroup2);
+        this.setOriginalData("txtServiceShurui", txtServiceShurui);
+        this.setOriginalData("btnYM1", btnYM1);
+        this.setOriginalData("txtYM1", txtYM1);
+        this.setOriginalData("btnYM2", btnYM2);
+        this.setOriginalData("txtYM2", txtYM2);
+        this.setOriginalData("btnYM3", btnYM3);
+        this.setOriginalData("txtYM3", txtYM3);
+        this.setOriginalData("btnYM4", btnYM4);
+        this.setOriginalData("txtYM4", txtYM4);
+        this.setOriginalData("btnYM5", btnYM5);
+        this.setOriginalData("txtYM5", txtYM5);
+        this.setOriginalData("btnYM6", btnYM6);
+        this.setOriginalData("txtYM6", txtYM6);
+        this.setOriginalData("btnYM7", btnYM7);
+        this.setOriginalData("txtYM7", txtYM7);
+        this.setOriginalData("btnYM8", btnYM8);
+        this.setOriginalData("txtYM8", txtYM8);
+        this.setOriginalData("btnYM9", btnYM9);
+        this.setOriginalData("txtYM9", txtYM9);
+        this.setOriginalData("btnYM10", btnYM10);
+        this.setOriginalData("txtYM10", txtYM10);
+        this.setOriginalData("btnYM11", btnYM11);
+        this.setOriginalData("txtYM11", txtYM11);
+        this.setOriginalData("btnYM12", btnYM12);
+        this.setOriginalData("txtYM12", txtYM12);
     }
 
     public dgKyufuJissekiMeisaiList_Row(RString txtServiceGroup1, RString txtServiceGroup2, RString txtServiceShurui, Button btnYM1, RString txtYM1, Button btnYM2, RString txtYM2, Button btnYM3, RString txtYM3, Button btnYM4, RString txtYM4, Button btnYM5, RString txtYM5, Button btnYM6, RString txtYM6, Button btnYM7, RString txtYM7, Button btnYM8, RString txtYM8, Button btnYM9, RString txtYM9, Button btnYM10, RString txtYM10, Button btnYM11, RString txtYM11, Button btnYM12, RString txtYM12) {
@@ -381,4 +409,5 @@ public class dgKyufuJissekiMeisaiList_Row extends DataRow {
         this.txtYM12 = txtYM12;
     }
 
+    // </editor-fold>
 }
