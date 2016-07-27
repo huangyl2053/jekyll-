@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohak
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -21,14 +20,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class NinteiChosaTokusokujoHakkoManager {
 
     private final MapperProvider mapperProvider;
-    private DbT5201NinteichosaIraiJohoDac dac;
 
     /**
      * コンストラクタです。
      */
     NinteiChosaTokusokujoHakkoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.dac = InstanceProvider.create(DbT5201NinteichosaIraiJohoDac.class);
     }
 
     /**
