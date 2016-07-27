@@ -214,7 +214,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
      * @param 帳票ID ReportId
      */
     public void insTsuchishoHakkogoIdosha(RString 出力対象区分, YMDHMS 帳票作成日時,
-            Long 出力順ID, ReportId 帳票ID) {
+            RString 出力順ID, ReportId 帳票ID) {
         List<TsuchishoDataTempEntity> 出力対象List = get出力対象データ(出力対象区分, 出力順ID);
         if (出力対象List == null || 出力対象List.isEmpty()) {
             return;
@@ -246,14 +246,14 @@ public class TokuchoKaishiTsuchishoDataHenshu {
      * @param 調定年度 FlexibleYear
      * @param 発行日 FlexibleDate
      * @param 帳票作成日時 YMDHMS
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 出力対象 RString
      * @return PrtTokuchoKaishiTsuchishoKarisanteiResult 特徴開始通知書(仮算定）の発行用引数
      */
     public PrtTokuchoKaishiTsuchishoKarisanteiResult prtTokuchoKaishiTsuchishoKarisantei(
             FlexibleYear 調定年度,
-            FlexibleDate 発行日, YMDHMS 帳票作成日時, Long 出力順ID, ReportId 帳票ID, RString 出力対象) {
+            FlexibleDate 発行日, YMDHMS 帳票作成日時, RString 出力順ID, ReportId 帳票ID, RString 出力対象) {
         PrtTokuchoKaishiTsuchishoKarisanteiResult prtResult = new PrtTokuchoKaishiTsuchishoKarisanteiResult();
         List<TsuchishoDataTempEntity> 出力対象List = get出力対象データ(出力対象, 出力順ID);
         List<RString> 出力条件リスト = get出力条件リスト(発行日, 出力対象, 出力順ID);
@@ -438,7 +438,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
 
     private void load代行プリント送付票(FlexibleDate 発行日, RString 出力対象区分,
             ChohyoSeigyoKyotsu 帳票制御共通情報,
-            Association 地方公共団体, Long 出力順ID, Decimal ページ数) {
+            Association 地方公共団体, RString 出力順ID, Decimal ページ数) {
 
         if (!帳票制御共通情報.is代行プリント有無()) {
             return;
@@ -473,14 +473,16 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         daikoPrint.print();
     }
 
-    private List<TsuchishoDataTempEntity> get出力対象データ(RString 出力対象区分, Long 出力順ID) {
+    private List<TsuchishoDataTempEntity> get出力対象データ(RString 出力対象区分, RString 出力順ID) {
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
         TokuchoKaishiTsuchishoMybatisParameter parameter = new TokuchoKaishiTsuchishoMybatisParameter();
-        if (outputOrder != null) {
-            RString 出力順 = MyBatisOrderByClauseCreator.create(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.class,
-                    outputOrder);
-            parameter.set出力順(出力順);
+        if (出力順ID != null && !出力順ID.isEmpty()) {
+            IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, Long.valueOf(出力順ID.toString()));
+            if (outputOrder != null) {
+                RString 出力順 = MyBatisOrderByClauseCreator.create(KaishiTsuchishoKariHakkoIchiranProperty.BreakerFieldsEnum.class,
+                        outputOrder);
+                parameter.set出力順(出力順);
+            }
         }
         parameter.set出力対象(get出力対象(出力対象区分));
         ITokuchoKarisanteiTsuchishoHakkoMapper mapper = provider.create(ITokuchoKarisanteiTsuchishoHakkoMapper.class);
@@ -770,7 +772,7 @@ public class TokuchoKaishiTsuchishoDataHenshu {
     }
 
     private List<RString> get出力条件リスト(FlexibleDate 発行日, RString 出力対象区分,
-            Long 出力順ID) {
+            RString 出力順ID) {
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(定数_出力条件);
@@ -785,8 +787,10 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         builder = new RStringBuilder();
         builder.append(定数_出力順.concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
+        IOutputOrder outputOrder = null;
+        if (出力順ID != null && !出力順ID.isEmpty()) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, Long.valueOf(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -808,9 +812,9 @@ public class TokuchoKaishiTsuchishoDataHenshu {
         return 項目;
     }
 
-    private void set出力順_改頁(Long 出力順ID, List<RString> 出力順項目List, List<RString> 改ページ項目List) {
+    private void set出力順_改頁(RString 出力順ID, List<RString> 出力順項目List, List<RString> 改ページ項目List) {
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
+        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, Long.valueOf(出力順ID.toString()));
         if (outputOrder == null || outputOrder.get設定項目リスト() == null) {
             return;
         }
