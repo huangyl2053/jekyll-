@@ -226,7 +226,13 @@ public class TokubetsuChoshuMidoteiIchiranEditor implements ITokubetsuChoshuMido
         if (RString.isNullOrEmpty(不一致理由コード)) {
             return;
         }
-        source.listList1_9 = DoteiFuitchiRiyu.toValue(不一致理由コード).get不一致理由名();
+        for (DoteiFuitchiRiyu type : DoteiFuitchiRiyu.values()) {
+            if (type.getコード().equals(不一致理由コード)) {
+                source.listList1_9 = type.get不一致理由名();
+                return;
+            }
+        }
+        source.listList1_9 = RString.EMPTY;
     }
 
     private void set出力順(TokubetsuChoshuMidoteiIchiranSource source) {
