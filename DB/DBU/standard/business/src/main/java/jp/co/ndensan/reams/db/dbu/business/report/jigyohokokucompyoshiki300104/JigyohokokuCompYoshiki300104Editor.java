@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki300103;
+package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki300104;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki300103.JigyohokokuCompYoshiki300103Data;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki300103.JigyohokokuCompYoshiki300103ReportSource;
@@ -18,11 +18,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 介護事業状況報告年報（様式1-2）のEditorです。
+ * 介護事業状況報告年報（様式1-3）のEditorです。
  *
- * @reamsid_L DBU-5600-120 lishengli
+ * @reamsid_L DBU-5600-130 lishengli
  */
-public class JigyohokokuCompYoshiki300103Editor implements IJigyohokokuCompYoshiki300103Editor {
+public class JigyohokokuCompYoshiki300104Editor implements IJigyohokokuCompYoshiki300104Editor {
 
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
@@ -36,7 +36,7 @@ public class JigyohokokuCompYoshiki300103Editor implements IJigyohokokuCompYoshi
      *
      * @param item JigyohokokuCompYoshiki300103Data
      */
-    protected JigyohokokuCompYoshiki300103Editor(JigyohokokuCompYoshiki300103Data item) {
+    protected JigyohokokuCompYoshiki300104Editor(JigyohokokuCompYoshiki300103Data item) {
         this.item = item;
     }
 
