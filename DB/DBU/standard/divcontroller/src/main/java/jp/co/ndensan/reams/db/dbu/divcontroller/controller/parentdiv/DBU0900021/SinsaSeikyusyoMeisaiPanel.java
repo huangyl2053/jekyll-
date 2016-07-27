@@ -158,8 +158,11 @@ public class SinsaSeikyusyoMeisaiPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-                FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                        ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class), new FlexibleDate(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
+                ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+                HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
+                FufukuMoshitate fufukuMoshitate = new FufukuMoshitate(識別コード,
+                        被保険者番号,
+                        new FlexibleDate(div.getMeisaiPanel().getTxtdateTodokedebi().getValue() == null
                                 ? RString.EMPTY : div.getMeisaiPanel().getTxtdateTodokedebi().getValue().toDateString()));
                 登録処理(createHandlerOf(div).審査請求書登録の編集(fufukuMoshitate));
                 div.getCcdKanryoMessage().setSuccessMessage(
@@ -211,9 +214,11 @@ public class SinsaSeikyusyoMeisaiPanel {
 
     private boolean 重複チェック(SinsaSeikyusyoMeisaiPanelDiv div) {
 
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         return SinsaSeikyusyoTorokuManager.createInstance().
-                checkSinsaSeikyuTodokede(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                        ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                checkSinsaSeikyuTodokede(識別コード,
+                        被保険者番号,
                         ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class) == null
                         ? new FlexibleDate(RString.EMPTY) : ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class),
                         ViewStateHolder.get(ViewStateKeys.状態, RString.class),
@@ -238,9 +243,11 @@ public class SinsaSeikyusyoMeisaiPanel {
 
     private FufukuMoshitate 資格系基本情報の取得() {
 
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         return SinsaSeikyusyoTorokuManager.createInstance().
-                getSinsaSeikyusyoMeisaiJoho(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                        ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                getSinsaSeikyusyoMeisaiJoho(識別コード,
+                        被保険者番号,
                         ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class));
     }
 

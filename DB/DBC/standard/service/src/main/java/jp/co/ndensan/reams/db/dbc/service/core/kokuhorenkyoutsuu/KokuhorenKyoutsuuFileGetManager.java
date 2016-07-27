@@ -92,6 +92,10 @@ public class KokuhorenKyoutsuuFileGetManager {
                 throw new BatchInterruptedException(ex.getMessage());
             }
         }
+        if (null == fileNameList || fileNameList.isEmpty()) {
+            throw new BatchInterruptedException(DbcErrorMessages.取込対象ファイルが存在しない.getMessage()
+                    .replace(PREFIX.concat(交換情報識別番号).toString()).toString());
+        }
         result.setEntityList(fileEntryList);
         result.setFileNameList(fileNameList);
         return result;

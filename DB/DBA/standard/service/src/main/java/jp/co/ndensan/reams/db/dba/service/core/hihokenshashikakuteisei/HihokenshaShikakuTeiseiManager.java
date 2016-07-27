@@ -439,6 +439,9 @@ public class HihokenshaShikakuTeiseiManager {
         dbt1001Entity.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
         dbt1001Entity.setShikakuHenkoYMD(entity.getShikakuHenkoYMD());
         dbt1001Entity.setShikakuHenkoTodokedeYMD(entity.getShikakuHenkoTodokedeYMD());
+        dbt1001Entity.setShikakuSoshitsuJiyuCode(RString.EMPTY);
+        dbt1001Entity.setShikakuSoshitsuYMD(FlexibleDate.EMPTY);
+        dbt1001Entity.setShikakuSoshitsuTodokedeYMD(FlexibleDate.EMPTY);
         if (ShikakuHenkoJiyu.広域内転居.getコード().equals(entity.getShikakuHenkoJiyuCode())) {
             dbt1001Entity.setShichosonCode(市町村コード);
             dbt1001Entity.setShikibetsuCode(識別コード);
@@ -583,7 +586,8 @@ public class HihokenshaShikakuTeiseiManager {
                 }
             } else {
                 for (DbT1001HihokenshaDaichoEntity entity : dbT1001List) {
-                    entity.setState(EntityDataState.Deleted);
+                    entity.setLogicalDeletedFlag(true);
+                    entity.setState(EntityDataState.Modified);
                     dac.save(entity);
                 }
                 for (HihokenshaDaicho hihokenshaDaicho : 資格訂正登録リスト) {

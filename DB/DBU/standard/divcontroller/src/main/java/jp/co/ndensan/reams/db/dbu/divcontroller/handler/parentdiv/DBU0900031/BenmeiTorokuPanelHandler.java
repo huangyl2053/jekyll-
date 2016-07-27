@@ -13,15 +13,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 弁明登録マスタ画面のハンドラクラスです。
  *
- * @reamsid_L DBU-1080-020  lijia
- * 
+ * @reamsid_L DBU-1080-020 lijia
+ *
  */
 public class BenmeiTorokuPanelHandler {
 
     private final BenmeiTorokuPanelDiv panelDiv;
     private static final RString 状態_登録 = new RString("登録");
-    private static final RString 状態_更新 = new RString("更新");
-    private static final RString 状態_削除 = new RString("削除");
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -39,9 +39,9 @@ public class BenmeiTorokuPanelHandler {
      * @param viewState 表示状態
      */
     public void initialize(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, RString viewState) {
-        if (viewState.equals(状態_更新)) {
+        if (viewState.equals(修正)) {
             if (benmeiTorokuMeisaiJoho != null) {
-                panelDiv.setProcessState(状態_更新);
+                panelDiv.setProcessState(修正);
                 get画面初期の更新モードの表示制御();
                 get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
             } else {
@@ -53,8 +53,8 @@ public class BenmeiTorokuPanelHandler {
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setValue(RString.EMPTY);
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().clearValue();
             }
-        } else if (viewState.equals(状態_削除)) {
-            panelDiv.setProcessState(状態_削除);
+        } else if (viewState.equals(削除)) {
+            panelDiv.setProcessState(削除);
             get画面初期の削除モードの表示制御();
             get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
         }
