@@ -54,7 +54,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KanendoFukaHandler {
 
     private final KanendoFukaDiv div;
-    private static final RString 定値_日時 = new RString("23:59:59");
+    private static final RString コンマ = new RString(".");
     private static final RString 日時 = new RString("235959");
     private static final RString ZERO_RS = new RString("0");
     private static final RString ONE_RS = new RString("1");
@@ -150,7 +150,8 @@ public class KanendoFukaHandler {
                 concat(RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         int 前月末の日 = RDate.getNowDate().minusMonth(1).getLastDay();
         RString 前月まで = RDate.getNowDate().getYearMonth().minusMonth(1).wareki().
-                toDateString().concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(定値_日時);
+                toDateString().concat(コンマ).concat(String.valueOf(前月末の日)).concat(RString.HALF_SPACE).concat(
+                        RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RString 当日を含む = RDate.getNowDate().wareki().
                 toDateString().concat(RString.HALF_SPACE).concat(
                         RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
@@ -208,7 +209,7 @@ public class KanendoFukaHandler {
                 RString 年月日 = shdaList.get(0).get基準日時().getRDateTime().getDate().wareki().toDateString();
                 RString 時刻 = shdaList.get(0).get基準日時().getRDateTime().getTime().
                         toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-                RString 基準日時 = 年月日.concat(時刻);
+                RString 基準日時 = 年月日.concat(RString.HALF_SPACE).concat(時刻);
                 row.getTxtJokyo().setValue(済);
                 row.getTxtShoriNichiji().setValue(基準日時);
             }
