@@ -146,7 +146,15 @@ public enum ReportIdDBD {
     /**
      * 要介護認定却下通知書の帳票ＩＤです。
      */
-    DBD550001(new ReportId("DBD550001_YokaigoNinteiKyakkaTshuchisho"), new RString("要介護認定却下通知書"));
+    DBD550001(new ReportId("DBD550001_YokaigoNinteiKyakkaTshuchisho"), new RString("要介護認定却下通知書")),
+    /**
+     * 要介護認定申請書の帳票ＩＤです。
+     */
+    DBD501001(new ReportId("DBD501001_YokaigoNinteiShinseisho"), new RString("要介護認定申請書")),
+    /**
+     * 要介護認定区分変更申請書の帳票ＩＤです。
+     */
+    DBD501002(new ReportId("DBD501002_yokaigoNinteikbnHenkoShinseisho"), new RString("要介護認定区分変更申請書"));
 
     private final ReportId reportId;
     private final RString reportName;
