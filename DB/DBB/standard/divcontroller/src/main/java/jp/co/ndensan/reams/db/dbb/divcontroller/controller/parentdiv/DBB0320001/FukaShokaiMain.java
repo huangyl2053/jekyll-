@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
 
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaShokaiMainDiv;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 賦課照会メインパネル
@@ -19,8 +22,14 @@ public class FukaShokaiMain {
      * @return レスポンス
      */
     public ResponseData<FukaShokaiMainDiv> onLoad(FukaShokaiMainDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         FukaShokaiMainHandler handler = new FukaShokaiMainHandler(div);
-        DBB0320001StateName state = handler.initialize();
+        DBB0320001StateName state = handler.initializeWithFirstState();
+        if (state == DBB0320001StateName.Default) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         return ResponseData.of(div).setState(state);
     }
 
@@ -62,5 +71,26 @@ public class FukaShokaiMain {
         FukaShokaiMainHandler handler = new FukaShokaiMainHandler(div);
         handler.compareWith前履歴();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link FukaShokaiMainDiv}
+     * @return レスポンス
+     */
+    public ResponseData<FukaShokaiMainDiv> onClick_btnZenkairesultHyoji(FukaShokaiMainDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<FukaShokaiMainDiv> clearViewStateKeys(FukaShokaiMainDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link FukaShokaiMainDiv}
+     * @return レスポンス
+     */
+    public ResponseData<FukaShokaiMainDiv> onClick_btnResearch(FukaShokaiMainDiv div) {
+        return clearViewStateKeys(div);
     }
 }

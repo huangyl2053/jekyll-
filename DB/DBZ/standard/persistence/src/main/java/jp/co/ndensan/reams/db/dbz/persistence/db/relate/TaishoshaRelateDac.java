@@ -7,19 +7,27 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.fukaNendo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
 //import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearch.shikibetsuCode;
 //import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAppendType;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.IOrderClause;
 import jp.co.ndensan.reams.uz.uza.util.db.IOrderable;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
@@ -28,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.using;
@@ -69,7 +78,7 @@ public class TaishoshaRelateDac {
 
         List<DbV7901ShikakuSearchEntity> list;
 
-         list = accessor
+        list = accessor
                 .select()
                 .table(DbV7901ShikakuSearch.class).where(条件).toList(DbV7901ShikakuSearchEntity.class);
         List<ShikibetsuCode> modelList = new ArrayList<>();
@@ -93,9 +102,9 @@ public class TaishoshaRelateDac {
         DbAccessorForAppendType accessor = new DbAccessorForAppendType(session);
 
         List<DbV7902FukaSearchEntity> list;
-            list = accessor
-                    .select()
-                    .table(DbV7902FukaSearch.class).where(条件).toList(DbV7902FukaSearchEntity.class);
+        list = accessor
+                .select()
+                .table(DbV7902FukaSearch.class).where(条件).toList(DbV7902FukaSearchEntity.class);
         List<ShikibetsuCode> modelList = new ArrayList<>();
         for (DbV7902FukaSearchEntity entity : list) {
             if (entity.getShikibetsuCode() != null) {
@@ -191,5 +200,27 @@ public class TaishoshaRelateDac {
             modelList.add(entity);
         }
         return ItemList.of(modelList);
+    }
+
+    /**
+     * 指定の識別コードの個人について、最大の賦課年度を検索して返します。
+     * 存在しない場合は、{@link FlexibleYear#EMPTY}を返します。
+     *
+     * @param 識別コード 識別コード
+     * @return 賦課年度 もしくは {@link FlexibleYear#EMPTY}
+     * @throws NullPointerException 引数が{@code null}の場合
+     */
+    public FlexibleYear selectMax賦課年度Of(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        DbT2002FukaEntity entity = accessor.select().
+                table(DbT2002Fuka.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(new OrderBy(fukaNendo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT2002FukaEntity.class);
+        return entity == null ? FlexibleYear.EMPTY : entity.getFukaNendo();
     }
 }

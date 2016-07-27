@@ -290,7 +290,8 @@ public final class FukaShokaiController {
                 SERIAL_NUMBER1, fuka.get賦課年度(), SERIAL_NUMBER1));
 
         if (!modeloid.isPresent()) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+//            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+            return SanteiState.仮算定;
         }
 
         RDateTime 基準日時;

@@ -45,21 +45,26 @@ public class FukaShokaiMainHandler {
     }
 
     /**
-     * 初期化します。
+     * 初期化します。また、初期化時の状態を返却します。
      *
      * @return 初期化時の状態を返却します。
      */
-    public DBB0320001StateName initialize() {
+    public DBB0320001StateName initializeWithFirstState() {
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        if (taishoshaKey == null
+            || taishoshaKey.is識別コードNullOrEmpty()
+            || taishoshaKey.is被保険者番号NullOrEmpty()) {
+            return DBB0320001StateName.Default;
+        }
+
         initializeHeader(this.div.getDBB0320001KihonJoho(), taishoshaKey);
         if (!taishoshaKey.get賦課年度().isValid()) {
             div.getCcdFukaRirekiAll().load(taishoshaKey.get被保険者番号());
             return DBB0320001StateName.賦課履歴;
-        } else {
-            new FukakonkyoAndKiwariPresenter(this.div.getFukaShokaiControl(), this.div.getFukakonkyoAndKiwari())
-                    .set賦課(taishoshaKey);
-            return DBB0320001StateName.賦課根拠期割;
         }
+        new FukakonkyoAndKiwariPresenter(this.div.getFukaShokaiControl(), this.div.getFukakonkyoAndKiwari())
+                .set賦課(taishoshaKey);
+        return DBB0320001StateName.賦課根拠期割;
     }
 
     private static void initializeHeader(DBB0320001KihonJohoDiv div, FukaTaishoshaKey key) {
@@ -76,13 +81,11 @@ public class FukaShokaiMainHandler {
      * 全賦課履歴を表示します。
      */
     public void show全賦課履歴() {
-        if (!div.getCcdFukaRirekiAll().hasLoaded()) {
-            FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-            this.div.getCcdFukaRirekiAll().load(taishoshaKey.get被保険者番号());
-        } else {
-//            FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-//            div.getCcdFukaRirekiAll().reload(key.get通知書番号());
+        if (div.getCcdFukaRirekiAll().hasLoaded()) {
+            return;
         }
+        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        this.div.getCcdFukaRirekiAll().load(taishoshaKey.get被保険者番号());
     }
 
     /**
@@ -121,9 +124,9 @@ public class FukaShokaiMainHandler {
         ViewStateHolder.put(ViewStateKeys.賦課照会キー, atoRireki);
 
         final FukaManager manager = new FukaManager();
-        FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(
-                manager.get介護賦課For任意対象比較(atoFuka.get調定年度(), atoFuka.get賦課年度(), atoFuka.get通知書番号(), atoFuka.get履歴番号()).get(),
-                new AtenaMeisho(div.getCcdKaigoAtenaInfo().get氏名漢字()));
+        Optional<Fuka> maeFuka = manager.get介護賦課For任意対象比較(atoFuka.get調定年度(), atoFuka.get賦課年度(), atoFuka.get通知書番号(), atoFuka.get履歴番号());
+        FukaShokaiKey maeRireki = maeFuka.isPresent() ? ViewStateKeyCreator.createFukaShokaiKey(
+                maeFuka.get(), new AtenaMeisho(div.getCcdKaigoAtenaInfo().get氏名漢字())) : FukaShokaiKey.EMPTY;
         ViewStateHolder.put(ViewStateKeys.賦課比較キー, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
     }
 }

@@ -291,7 +291,7 @@ public class FukaTaishoshaSearch {
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         TaishoshaFinder finder = new TaishoshaFinder();
 
-        SearchResult<FukaTaishoshaRelateBusiness> 対象者 = finder.get賦課対象者(get最新年度条件(識別コード),
+        SearchResult<FukaTaishoshaRelateBusiness> 対象者 = finder.get賦課対象者(get最新年度条件(finder, 識別コード),
                 get介護除外条件(div.getSearchCondition().getCcdSearchCondition(), FukaSearchMenu.賦課照会), 検索キー, 最近処理者検索数);
         if (!対象者.records().isEmpty()) {
             for (FukaTaishoshaRelateBusiness entity : 対象者.records()) {
@@ -418,11 +418,11 @@ public class FukaTaishoshaSearch {
         return list;
     }
 
-    private ISearchCondition get最新年度条件(ShikibetsuCode 識別コード) {
-        FukaSearchAlive 賦課データ = new FukaSearchAliveManager().get賦課年度最大賦課Alive(識別コード);
-        if (賦課データ != null) {
+    private ISearchCondition get最新年度条件(TaishoshaFinder finder, ShikibetsuCode 識別コード) {
+        FlexibleYear 賦課年度 = finder.findMax賦課年度Of(識別コード);
+        if (!賦課年度.isEmpty()) {
             return SearchConditionFactory.condition(
-                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, 賦課データ.get賦課年度());
+                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, 賦課年度);
         }
         return 条件無;
     }

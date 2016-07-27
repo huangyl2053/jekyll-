@@ -63,12 +63,30 @@ public class FukaTaishoshaKey implements Serializable {
     }
 
     /**
+     * 被保険者番号が{@code null}もしくは空の場合、{@code true}を返します。
+     *
+     * @return 被保険者番号が{@code null}もしくは空の場合、{@code true}.
+     */
+    public boolean is被保険者番号NullOrEmpty() {
+        return 被保険者番号 == null || 被保険者番号.value() == null || 被保険者番号.isEmpty();
+    }
+
+    /**
      * 識別コードを返します。
      *
      * @return 識別コード
      */
     public ShikibetsuCode get識別コード() {
         return 識別コード;
+    }
+
+    /**
+     * 識別コードが{@code null}もしくは空の場合、{@code true}を返します。
+     *
+     * @return 識別コードが{@code null}もしくは空の場合、{@code true}.
+     */
+    public boolean is識別コードNullOrEmpty() {
+        return 識別コード == null || 識別コード.isEmpty();
     }
 
     /**

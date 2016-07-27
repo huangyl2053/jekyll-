@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -144,12 +145,23 @@ public class TaishoshaFinder {
 
     private ITrueFalseCriteria getCriteria(ISearchCondition 条件, ISearchCondition 除外条件) {
         return (条件 != null && 除外条件 != null) ? and(条件.makeSearchCondition(), not(除外条件.makeSearchCondition()))
-                : (条件 != null) ? 条件.makeSearchCondition()
-                : (除外条件 != null) ? not(除外条件.makeSearchCondition())
-                : null;
+               : (条件 != null) ? 条件.makeSearchCondition()
+                 : (除外条件 != null) ? not(除外条件.makeSearchCondition())
+                   : null;
     }
 
     private IPsmCriteria getPsmCriteria(IShikibetsuTaishoSearchKey 条件) {
         return Restrictions.PSM(new UaFt200FindShikibetsuTaishoFunction(条件.getPSMSearchKey()));
+    }
+
+    /**
+     * 指定の識別コードに該当する最大の賦課年度を取得して返します。
+     * 存在しない場合は、{@link FlexibleYear#EMPTY}を返します。
+     *
+     * @param 識別コード 識別コード
+     * @return 指定の識別コードに該当する最大の賦課年度.もしくは{@link FlexibleYear#EMPTY}.
+     */
+    public FlexibleYear findMax賦課年度Of(ShikibetsuCode 識別コード) {
+        return this.dac.selectMax賦課年度Of(識別コード);
     }
 }
