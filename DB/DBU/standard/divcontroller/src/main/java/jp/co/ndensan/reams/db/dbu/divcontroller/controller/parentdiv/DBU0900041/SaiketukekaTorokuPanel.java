@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToro
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -35,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class SaiketukekaTorokuPanel {
 
     private static final RString 削除 = new RString("削除");
-    private static final RString 更新 = new RString("更新");
+    private static final RString 修正 = new RString("修正");
 
     /**
      * 裁決結果登録_登録の初期化。(オンロード)<br/>
@@ -44,15 +45,11 @@ public class SaiketukekaTorokuPanel {
      * @return ResponseData<SaiketukekaTorokuPanelDiv>
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onLoad(SaiketukekaTorokuPanelDiv requestDiv) {
-
         ResponseData<SaiketukekaTorokuPanelDiv> responseData = new ResponseData<>();
-
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
-
-        if (更新.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
-
+        if (修正.toString().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class).toString())) {
             RString 修正前の値 = createHandlerOf(requestDiv).修正_初期化の編集(識別コード, 被保険者番号, 審査請求届出日);
             ViewStateHolder.put(Dbu900041Keys.修正前の値, 修正前の値);
             return ResponseData.of(requestDiv).setState(DBU0900041StateName.修正状態);
@@ -83,8 +80,7 @@ public class SaiketukekaTorokuPanel {
      * @return ResponseData<SaiketukekaTorokuPanelDiv>
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnCancel(SaiketukekaTorokuPanelDiv div) {
-
-        if ((更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
+        if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
             RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
                     ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
             if (getValidationHandler().修正_変更有無チェック(createHandlerOf(div).get修正後の値(), 修正前の値)) {
@@ -132,13 +128,10 @@ public class SaiketukekaTorokuPanel {
      * @return ResponseData<SaiketukekaTorokuPanelDiv>
      */
     public ResponseData<SaiketukekaTorokuPanelDiv> onClick_btnUpdate(SaiketukekaTorokuPanelDiv div) {
-
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
-
-        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-
+        if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             getValidationHandler().validateFor弁明書作成日の必須入力(pairs, div);
             if (pairs.iterator().hasNext()) {
@@ -176,11 +169,9 @@ public class SaiketukekaTorokuPanel {
     }
 
     private ResponseData<SaiketukekaTorokuPanelDiv> 変更あり_修正処理(SaiketukekaTorokuPanelDiv div) {
-
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
-
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -189,7 +180,7 @@ public class SaiketukekaTorokuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             修正処理(div, 識別コード, 被保険者番号, 審査請求届出日);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(更新.toString())).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(修正.toString())).respond();
         }
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -212,17 +203,14 @@ public class SaiketukekaTorokuPanel {
     }
 
     private void 削除処理(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
-
         SaiketukekaToroku saiketukekaToroku = new SaiketukekaToroku();
         saiketukekaToroku.delSaiketukekaMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日);
     }
 
     private void 修正処理(SaiketukekaTorokuPanelDiv div, ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
-
         RString 裁決結果 = div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().getValue();
         RString 裁決理由 = div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().getValue();
         FlexibleDate 弁明書作成日 = new FlexibleDate(div.getSaiketukekaMeisaiPanel().getTxtDateBenmeisyoSakuseibi().getValue().toDateString());
-
         SaiketukekaToroku saiketukekaToroku = new SaiketukekaToroku();
         saiketukekaToroku.updSaiketukekaMeisaiJoho(識別コード, 被保険者番号, 審査請求届出日, 裁決結果, 裁決理由, 弁明書作成日);
     }
