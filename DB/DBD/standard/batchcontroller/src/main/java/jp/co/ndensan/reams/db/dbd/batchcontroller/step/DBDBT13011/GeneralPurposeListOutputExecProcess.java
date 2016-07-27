@@ -1016,14 +1016,13 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     }
 
     private void set出力条件表_地区選択(AtenaSelectBatchParameter atenaSelectBatchParameter, List<RString> list) {
-        if (atenaSelectBatchParameter.getChiku_Kubun() != null) {
-            if (全て.equals(atenaSelectBatchParameter.getChiku_Kubun().get名称())) {
-                list.add(出力条件表_住所.concat(edit地区選択(atenaSelectBatchParameter.getJusho_From(), atenaSelectBatchParameter.getJusho_To())));
-                list.add(出力条件表_行政区.concat(edit地区選択(atenaSelectBatchParameter.getGyoseiku_From(), atenaSelectBatchParameter.getGyoseiku_To())));
-                list.add(出力条件表_地区１.concat(edit地区選択(atenaSelectBatchParameter.getChiku1_From(), atenaSelectBatchParameter.getChiku1_To())));
-                list.add(出力条件表_地区２.concat(edit地区選択(atenaSelectBatchParameter.getChiku2_From(), atenaSelectBatchParameter.getChiku2_To())));
-                list.add(出力条件表_地区３.concat(edit地区選択(atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_To())));
-            }
+        if (atenaSelectBatchParameter.getChiku_Kubun() != null && 全て.equals(atenaSelectBatchParameter.getChiku_Kubun().get名称())) {
+
+            list.add(出力条件表_住所.concat(edit地区選択(atenaSelectBatchParameter.getJusho_From(), atenaSelectBatchParameter.getJusho_To())));
+            list.add(出力条件表_行政区.concat(edit地区選択(atenaSelectBatchParameter.getGyoseiku_From(), atenaSelectBatchParameter.getGyoseiku_To())));
+            list.add(出力条件表_地区１.concat(edit地区選択(atenaSelectBatchParameter.getChiku1_From(), atenaSelectBatchParameter.getChiku1_To())));
+            list.add(出力条件表_地区２.concat(edit地区選択(atenaSelectBatchParameter.getChiku2_From(), atenaSelectBatchParameter.getChiku2_To())));
+            list.add(出力条件表_地区３.concat(edit地区選択(atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_To())));
         }
     }
 

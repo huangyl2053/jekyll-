@@ -27,7 +27,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 画面初期化
      *
-     * @param div　ShiharaiHohoHenkoHakuListMainDiv
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onLoad(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -51,7 +51,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 被保険者選択を選択押下処理
      *
-     * @param div　ShiharaiHohoHenkoHakuListMainDiv
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_radHihokenshaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -115,8 +115,8 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給者全員を選択の処理
      *
-     * @param div　ShiharaiHohoHenkoHakuListMainDiv
-     * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkJukyushaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
 
@@ -135,7 +135,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      * 受給認定申請中者を選択の処理
      *
      * @param div ShiharaiHohoHenkoHakuListMainDiv
-     * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkNinteiShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
 
@@ -154,7 +154,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      * 受給認定日抽出を選択の処理
      *
      * @param div ShiharaiHohoHenkoHakuListMainDiv
-     * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkNinteiYMD(ShiharaiHohoHenkoHakuListMainDiv div) {
 
@@ -179,7 +179,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      * 受給申請中者を選択の処理
      *
      * @param div ShiharaiHohoHenkoHakuListMainDiv
-     * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkShokanShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
 
@@ -198,7 +198,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      * 受給支給決定日抽出を選択の処理
      *
      * @param div ShiharaiHohoHenkoHakuListMainDiv
-     * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkShokanKetteiYMD(ShiharaiHohoHenkoHakuListMainDiv div) {
 
@@ -289,7 +289,7 @@ public class ShiharaiHohoHenkoHakuListMain {
      * 実行ボタン押下、チェックとバッチパラメターを設定
      *
      * @param div ShiharaiHohoHenkoHakuListMainDiv
-     * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHaakuIchiranBatchParameter> onClick_btnBatchExecute(ShiharaiHohoHenkoHakuListMainDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
