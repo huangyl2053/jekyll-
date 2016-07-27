@@ -34,9 +34,11 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -417,22 +419,22 @@ public class HanyoListTekiyoJogaishaResult {
         if (NenreiSoChushutsuHoho.年齢範囲.getコード().equals(processParameter.getPsmChushutsu_Kubun())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(年齢);
-            jokenBuilder.append(processParameter.getPsmChushutsuAge_Start());
+            setAge(processParameter.getPsmChushutsuAge_Start(), jokenBuilder);
             jokenBuilder.append(歳);
             jokenBuilder.append(カラ);
-            jokenBuilder.append(processParameter.getPsmChushutsuAge_End());
+            setAge(processParameter.getPsmChushutsuAge_End(), jokenBuilder);
             jokenBuilder.append(歳);
             jokenBuilder.append(年齢基準日);
-            jokenBuilder.append(set出力条件表の日付(processParameter.getPsmAgeKijunni().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParameter.getPsmAgeKijunni()));
             jokenBuilder.append(右パーレン);
             出力条件List.add(jokenBuilder.toRString());
         }
         if (NenreiSoChushutsuHoho.生年月日範囲.getコード().equals(processParameter.getPsmChushutsu_Kubun())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(生年月日);
-            jokenBuilder.append(set出力条件表の日付(processParameter.getPsmSeinengappiYMD_Start().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParameter.getPsmSeinengappiYMD_Start()));
             jokenBuilder.append(カラ);
-            jokenBuilder.append(set出力条件表の日付(processParameter.getPsmSeinengappiYMD_End().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParameter.getPsmSeinengappiYMD_End()));
             出力条件List.add(jokenBuilder.toRString());
         }
         set地区(processParameter, 出力条件List);
@@ -445,6 +447,14 @@ public class HanyoListTekiyoJogaishaResult {
             出力条件List.add(jokenBuilder.toRString());
         }
         return 出力条件List;
+    }
+
+    private void setAge(Decimal age, RStringBuilder jokenBuilder) {
+        if (age == null) {
+            jokenBuilder.append(RString.EMPTY);
+        } else {
+            jokenBuilder.append(age);
+        }
     }
 
     private void set地区(HanyoListTekiyoJogaishaProcessParameter processParameter, List<RString> 出力条件List) {
@@ -494,6 +504,14 @@ public class HanyoListTekiyoJogaishaResult {
             }
             出力条件List.add(jokenBuilder.toRString());
         }
+    }
+
+    private RString set出力条件表の日付(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date.toDateString()).wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString set出力条件表の日付(RString date) {

@@ -155,7 +155,7 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             eucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
             eucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
             eucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
-            eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
+            eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失事由()));
             eucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
             eucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
             eucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
@@ -284,7 +284,7 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             renbanEucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
             renbanEucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
             renbanEucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
-            renbanEucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
+            renbanEucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失事由()));
             renbanEucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
             renbanEucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
             renbanEucCsvEntity.set資格区分(HihokenshaKubunCode.toValue(entity.get資格区分()).get名称());
@@ -391,16 +391,16 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             jokenBuilder.append(processParamter.getPsmChushutsuAge_End());
             jokenBuilder.append(歳);
             jokenBuilder.append(年齢基準日);
-            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmAgeKijunni().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmAgeKijunni()));
             jokenBuilder.append(右パーレン);
             出力条件List.add(jokenBuilder.toRString());
         }
         if (NenreiSoChushutsuHoho.生年月日範囲.getコード().equals(processParamter.getPsmChushutsu_Kubun())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(生年月日);
-            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_Start().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_Start()));
             jokenBuilder.append(カラ);
-            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_End().toDateString()));
+            jokenBuilder.append(set出力条件表の日付(processParamter.getPsmSeinengappiYMD_End()));
             出力条件List.add(jokenBuilder.toRString());
         }
         if (!Chiku.全て.getコード().equals(processParamter.getPsmChiku_Kubun())) {
@@ -458,6 +458,14 @@ public class HanyoListSeikatsuhogoJukyushaResult {
             出力条件List.add(jokenBuilder.toRString());
         }
         return 出力条件List;
+    }
+
+    private RString set出力条件表の日付(RDate date) {
+        if (date == null) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date.toDateString()).wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private RString set出力条件表の日付(RString date) {
