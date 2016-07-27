@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.tokkitexta4;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiText1A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitexta4.TokkiText1A4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -26,14 +27,13 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class TokkiText1A4Editor implements ITokkiText1A4Editor {
 
-    private static final RString テキスト区分 = new RString("1");
-    private static final RString イメージ区分 = new RString("2");
+    private static final RString テキスト区分 = TokkijikoTextImageKubun.テキスト.getコード();
+    private static final RString イメージ区分 = TokkijikoTextImageKubun.イメージ.getコード();
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
     private final TokkiText1A4Entity item;
     private final int index;
     private final List<RString> 特記事項List;
-    private static final RString フラグ = new RString("1");
 
     /**
      * インスタンスを生成します。
@@ -54,7 +54,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     }
 
     private TokkiText1A4ReportSource editSource(TokkiText1A4ReportSource source) {
-        if (!RString.isNullOrEmpty(item.get委員用その他資料フラグ()) && フラグ.equals(item.get委員用その他資料フラグ())) {
+        if (item.is委員用()) {
             source.hokenshaNo = RString.EMPTY;
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
@@ -86,7 +86,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
 
         if (テキスト区分.equals(item.get概況特記テキスト_イメージ区分())) {
-            source.gaikyotokkiImg = item.get概況調査の特記事項テキスト();
+            source.gaikyotokkiText = item.get概況調査の特記事項テキスト();
         }
 
         if (イメージ区分.equals(item.get概況特記テキスト_イメージ区分())) {
@@ -114,7 +114,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             source.tokkiText15 = item.getTokkiText15();
         }
         if (イメージ区分.equals(item.get特記事項テキスト_イメージ区分()) && 全面.equals(item.get特記パターン())) {
-            source.tokkiText = item.getTokkiImg();
+            source.tokkiImg = item.getTokkiImg();
         }
 
         if (イメージ区分.equals(item.get特記事項テキスト_イメージ区分()) && 短冊.equals(item.get特記パターン())) {
