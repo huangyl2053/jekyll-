@@ -46,7 +46,6 @@ public class ShiharaiHohoHenkoGengakuMeisaiManager {
     @Transaction
     public int save(ShiharaiHohoHenkoGengakuMeisai 支払方法変更減額明細) {
         requireNonNull(支払方法変更減額明細, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更減額明細"));
-        int saveCount = dac.save(支払方法変更減額明細.toEntity());
-        return saveCount;
+        return dac.save(支払方法変更減額明細.toEntity());
     }
 }
