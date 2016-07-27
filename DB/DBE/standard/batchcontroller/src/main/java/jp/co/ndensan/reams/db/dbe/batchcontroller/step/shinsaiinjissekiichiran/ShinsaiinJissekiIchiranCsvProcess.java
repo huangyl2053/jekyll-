@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsaiinjissekiichiran;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranProcessParamter;
@@ -46,6 +45,7 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
             + "shinsaiinjissekiichiran.IShinsaiinJissekiIchiranMapper.get介護認定審査会委員報酬集計表");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601003"));
     private static final RString CSV_NAME = new RString("ShinsaiinJissekiIchiran.csv");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private ShinsaiinJissekiIchiranProcessParamter paramter;
     private FileSpoolManager manager;
@@ -77,7 +77,7 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
         eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(new RString(File.separator))
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true).
                 build();
