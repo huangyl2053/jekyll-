@@ -40,7 +40,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || !div.getTxtBemmeiUketsukeYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtBemmeiUketsukeYMD().getValue().isEmpty();
                 }
             },
     弁明内容決定日入力チェック {
@@ -52,7 +52,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || !div.getTxtBemmeiNaiyoKetteiYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtBemmeiNaiyoKetteiYMD().getValue().isEmpty();
                 }
             },
     適用期間終了入力チェック {
@@ -76,7 +76,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || !div.getTxtShinseiUketsukeYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiUketsukeYMD().getValue().isEmpty();
                 }
             },
     申請日入力チェック {
@@ -88,7 +88,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || !div.getTxtShinseiYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiYMD().getValue().isEmpty();
                 }
             },
     申請内容決定日入力チェック {
@@ -100,7 +100,7 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                  */
                 @Override
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
-                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(new RString("申請不要")) || !div.getTxtShinseiNaiyoKetteiYMD().getValue().isEmpty();
+                    return div.getDdlBemmeiShinsaKekka().getSelectedValue().equals(getValue_申請不要()) || !div.getTxtShinseiNaiyoKetteiYMD().getValue().isEmpty();
                 }
             },
     弁明審査結果選択チェック {
@@ -162,6 +162,10 @@ public enum ShokanBaraiKa1GoDivSpec implements IPredicate<ShokanBaraiKa1GoDiv> {
                 public boolean apply(ShokanBaraiKa1GoDiv div) {
                     return !div.getDdlShuryoJokyo().getSelectedValue().isEmpty();
                 }
-            },
+            };
+
+    private static RString getValue_申請不要() {
+        return new RString("申請不要");
+    }
 
 }

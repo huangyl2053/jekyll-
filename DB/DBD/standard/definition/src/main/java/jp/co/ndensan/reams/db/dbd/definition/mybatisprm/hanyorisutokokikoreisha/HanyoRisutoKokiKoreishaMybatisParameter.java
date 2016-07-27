@@ -30,6 +30,9 @@ import lombok.Setter;
 @Setter
 public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParameter {
 
+    private static final int 年の月数 = 12;
+    private static final int 月の日数 = 31;
+
     private RString cyusyutsuhohokubun;
     private RString cyusyutsukomokukubun;
     private FlexibleDate kizyunnichi;
@@ -223,7 +226,7 @@ public class HanyoRisutoKokiKoreishaMybatisParameter implements IMyBatisParamete
 
     private FlexibleDate get逆算した生年月日From(Decimal 年齢範囲From) {
         FlexibleYear year = FlexibleDate.getNowDate().getYear().minusYear(年齢範囲From.intValue());
-        return new FlexibleDate(year.getYearValue(), 12, 31);
+        return new FlexibleDate(year.getYearValue(), 年の月数, 月の日数);
     }
 
     private FlexibleDate get逆算した生年月日To(Decimal 年齢範囲To) {
