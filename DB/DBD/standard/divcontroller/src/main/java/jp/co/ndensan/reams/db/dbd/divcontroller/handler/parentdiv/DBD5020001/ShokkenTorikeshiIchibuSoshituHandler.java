@@ -454,13 +454,13 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(認定申請区分申請時コード)) {
             if (TorisageKubunCode.認定申請有効.getコード().equals(取下区分コード)) {
                 タイトル = 画面タイトル.要介護認定新規認定.getTitle();
-            } else if (TorisageKubunCode.区分変更却下.getコード().equals(取下区分コード)) {
+            } else if (TorisageKubunCode.却下.getコード().equals(取下区分コード)) {
                 タイトル = 画面タイトル.要介護認定新規却下.getTitle();
             }
         } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(認定申請区分申請時コード)) {
             if (TorisageKubunCode.認定申請有効.getコード().equals(取下区分コード)) {
                 タイトル = 画面タイトル.要介護認定更新認定.getTitle();
-            } else if (TorisageKubunCode.区分変更却下.getコード().equals(取下区分コード)) {
+            } else if (TorisageKubunCode.却下.getコード().equals(取下区分コード)) {
                 タイトル = 画面タイトル.要介護認定更新却下.getTitle();
             }
         }
@@ -647,7 +647,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     private YokaigoNinteiJoho edit要介護認定申請情報(YokaigoNinteiJoho 認定情報, KekkaShosaiJohoOutModel model) {
         YokaigoNinteiJohoBuilder builder = 認定情報.createBuilderForEdit();
         if (div.getTitle().contains("却下")) {
-            builder.set要介護認定申請情報受給取下区分コード(new Code(TorisageKubunCode.区分変更却下.getコード()));
+            builder.set要介護認定申請情報受給取下区分コード(new Code(TorisageKubunCode.却下.getコード()));
             builder.set要介護認定申請情報受給却下年月日(div.getTxtNinteibiKonkai().getValue());
             if (null != model) {
                 builder.set要介護認定申請情報受給却下理由(model.get理由());
@@ -669,6 +669,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             builder.set要介護認定結果情報二次判定年月日(div.getTxtNinteibiKonkai().getValue());
             if (is審査依頼日更新(認定情報, 導入形態コード)) {
                 builder.set要介護認定結果情報介護認定審査会資料作成年月日(認定情報.get審査会資料作成年月日());
+                builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code());
+                builder.set要介護認定結果情報二次判定認定有効期間(new Integer(0));
             }
             if (!div.getTitle().contains("却下")) {
                 builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code(div.getHdnYokaigodoCodeKonkai()));
