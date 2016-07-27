@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5） のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-5） のPropertyです。
  *
  * @reamsid_L DBU-5550-050 dangjingjing
  */
