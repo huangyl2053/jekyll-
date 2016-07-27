@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinhaakunyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 

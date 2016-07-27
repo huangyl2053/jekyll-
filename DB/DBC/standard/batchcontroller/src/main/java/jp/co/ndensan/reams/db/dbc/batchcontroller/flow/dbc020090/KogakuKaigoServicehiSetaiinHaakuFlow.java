@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.GetJuminShotoku
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.GetSetaiinHaakuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020090.SetaiinHaakuNyuryokuTempCreatProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinHaakuNyuryoku.SetaiinHaakuNyuryokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.setaiinhaakunyuryoku.SetaiinHaakuNyuryokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
