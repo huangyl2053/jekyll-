@@ -190,7 +190,7 @@ public class FukaErrorReportView {
             }
             csvWriter.close();
         }
-        AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(fileName.toRString()));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
