@@ -213,6 +213,7 @@ public class Imageinput {
             joho = joho.createBuilderForEdit().set意見書_発症年月日2(data.get発症年月日2()).build();
             joho = joho.createBuilderForEdit().set意見書_発症年月日3(data.get発症年月日3()).build();
             joho = joho.createBuilderForEdit().set意見書_症状としての安定性(data.get症状の安定性()).build();
+            joho = joho.modifiedModel();
         } else {
             joho = new ShujiiIkenshoJoho(new ShinseishoKanriNo(row.getShinseishoKanriNo()), data.getT5301_主治医意見書作成依頼履歴番号());
             if (!RString.isNullOrEmpty(data.getT5101_厚労省IF識別コード())) {
