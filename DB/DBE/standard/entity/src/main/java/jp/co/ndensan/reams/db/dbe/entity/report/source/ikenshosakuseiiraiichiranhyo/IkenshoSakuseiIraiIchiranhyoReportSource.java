@@ -69,6 +69,8 @@ public class IkenshoSakuseiIraiIchiranhyoReportSource implements IReportSource {
     public RString listIchiranhyo_9;
     @ReportItem(name = "tsuchibun1", order = 25)
     public RString tsuchibun1;
+    @ReportItem(name = "shujiiIryokikanCode", order = 26)
+    public RString shujiiIryokikanCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -81,6 +83,6 @@ public class IkenshoSakuseiIraiIchiranhyoReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        kikanNameText,
+        shujiiIryokikanCode
     }
 }
