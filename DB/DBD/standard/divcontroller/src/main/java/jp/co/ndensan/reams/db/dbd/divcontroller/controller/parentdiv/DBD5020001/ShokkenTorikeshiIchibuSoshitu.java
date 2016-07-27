@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5020001;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiJoho;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.DBD5020001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5020001.DBD5020001TransitionEventName;
@@ -17,8 +14,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.Sho
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5020001.ShokkenTorikeshiIchibuSoshituValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kekkashosaijoho.KekkaShosaiJohoOutModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KekkaShosaiJoho.KekkaShosaiJoho.KekkaShosaiJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -84,10 +81,11 @@ public class ShokkenTorikeshiIchibuSoshitu {
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnRenrakusaki(ShokkenTorikeshiIchibuSoshituDiv div) {
 
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        List<RenrakusakiJoho> 連絡先リスト = YokaigoNinteiJohoManager.createInstance().get連絡先情報(申請書管理番号);
-        div.setHdnRenrakusakiJoho(DataPassingConverter.serialize((Serializable) 連絡先リスト));
+        NinteiShinseiBusinessCollection renrakusakiJoho = new NinteiShinseiBusinessCollection();
+        renrakusakiJoho.setDbdBusiness(YokaigoNinteiJohoManager.createInstance().get連絡先情報(申請書管理番号));
+        div.setHdnRenrakusakiJoho(DataPassingConverter.serialize(renrakusakiJoho));
         div.setHdnRenrakusakiReadOnly(new RString("1"));
-        div.setHdnZenkaiRenrakusakiJoho(DataPassingConverter.serialize(new ArrayList<RenrakusakiJoho>()));
+        div.setHdnZenkaiRenrakusakiJoho(DataPassingConverter.serialize(new NinteiShinseiBusinessCollection()));
         return ResponseData.of(div).respond();
     }
 
