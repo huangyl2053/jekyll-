@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuKetteiTsuchishoEditor {
 
-    private final RString 折り返す符号 = new RString("\r\n");
+    private final RString 折り返す符号 = new RString("\n");
     private final RString 金額単位 = new RString("円");
     private final RString 決定区分_承認 = new RString("○");
     private final RString ハイフン = new RString("-");

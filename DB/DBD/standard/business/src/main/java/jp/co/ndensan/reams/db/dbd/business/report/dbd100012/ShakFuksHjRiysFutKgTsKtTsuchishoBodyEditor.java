@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRiysFutKgTsKtTsuchishoEditor {
 
-    private final RString 折り返す符号 = new RString("\r\n");
+    private final RString 折り返す符号 = new RString("\n");
     private final RString 決定区分_承認 = new RString("○");
     private final static int INDEX_0 = 0;
     private final static int INDEX_1 = 1;
@@ -149,24 +149,23 @@ public class ShakFuksHjRiysFutKgTsKtTsuchishoBodyEditor implements IShakFuksHjRi
             source.riyu3 = get非承認理由List(INDEX_2, 非承認理由);
             source.riyu4 = get非承認理由List(INDEX_3, 非承認理由);
             source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
-
-            if (TeikeibunMojiSize.フォント小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-                set連絡先他(source);
-            } else if (TeikeibunMojiSize.フォント大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-                set連絡先他Large(source);
-            } else if (TeikeibunMojiSize.フォント上小下大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-                set連絡先他上段Small(source);
-                set連絡先他下段Large(source);
-            } else if (TeikeibunMojiSize.フォント上大下小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
-                set連絡先他上段Large(source);
-                set連絡先他下段Small(source);
-            }
-            setCompNinshosha(source, item);
-            setCompSofubutsuAtesaki(source, item);
-
-            source.shikibetsuCode = item.getIKojin().get識別コード().getColumnValue();
-            source.hihokenshaNo = item.get社会福祉法人等利用者負担軽減().get被保険者番号().getColumnValue();
         }
+        if (TeikeibunMojiSize.フォント小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他(source);
+        } else if (TeikeibunMojiSize.フォント大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他Large(source);
+        } else if (TeikeibunMojiSize.フォント上小下大.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他上段Small(source);
+            set連絡先他下段Large(source);
+        } else if (TeikeibunMojiSize.フォント上大下小.getコード().equals(item.get帳票制御共通().get定型文文字サイズ())) {
+            set連絡先他上段Large(source);
+            set連絡先他下段Small(source);
+        }
+        setCompNinshosha(source, item);
+        setCompSofubutsuAtesaki(source, item);
+
+        source.shikibetsuCode = item.getIKojin().get識別コード().getColumnValue();
+        source.hihokenshaNo = item.get社会福祉法人等利用者負担軽減().get被保険者番号().getColumnValue();
         return source;
     }
 

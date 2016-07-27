@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMenjKettTsuchishoEditor {
 
-    private final RString 折り返す符号 = new RString("\r\n");
+    private final RString 折り返す符号 = new RString("\n");
     private final RString マル = new RString("○");
     private final static int INDEX_0 = 0;
     private final static int INDEX_1 = 1;

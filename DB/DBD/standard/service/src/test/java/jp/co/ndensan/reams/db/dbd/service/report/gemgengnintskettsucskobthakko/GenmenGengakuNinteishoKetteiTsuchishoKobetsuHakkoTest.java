@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -15,8 +15,9 @@ import static org.junit.Assert.*;
  */
 public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakkoTest {
 
-    public GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakkoTest() {
-    }
+    private final RString 折り返す符号 = new RString("\r\n");
+    private final RString 通知書定型文 = new RString("　先に申請のありました、食費・居住費に係る負担限度額、利用者負担額減額・免除認定については\n"
+            + "下記のとおり決定しましたので通知します。");
 
     /**
      * Test of createInstance method, of class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.
@@ -24,24 +25,9 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakkoTest {
     @Test
     public void testCreateInstance() {
         System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
-        RString AA = new RString("平02.01.01");
-        RString BB = new RString("平02年01月01日");
-        RString A1 = AA.substring(0, 1);
-        RString A2 = AA.substring(1, 3);
-        RString A3 = AA.substring(4, 6);
-        RString A4 = AA.substring(7, 9);
-        System.out.println("A1:" + A1);
-        System.out.println("A2:" + A2);
-        System.out.println("A3:" + A3);
-        System.out.println("A4:" + A4);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        RString B1 = BB.substring(1, 3);
-        RString B2 = BB.substring(4, 6);
-        RString B3 = BB.substring(7, 9);
-        System.out.println("B1:" + B1);
-        System.out.println("B2:" + B2);
-        System.out.println("B3:" + B3);
+        List<RString> 通知書定型文List = 通知書定型文.split(折り返す符号.toString());
+        System.out.println(通知書定型文List.get(0));
+        System.out.println(通知書定型文List.get(1));
         // TODO review the generated test code and remove the default call to fail.
     }
-
 }
