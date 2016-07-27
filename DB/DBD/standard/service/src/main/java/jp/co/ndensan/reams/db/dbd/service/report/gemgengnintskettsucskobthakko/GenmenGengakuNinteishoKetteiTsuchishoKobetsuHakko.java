@@ -301,7 +301,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                         new ChohyoSeigyoKyotsu(dbT7065Entity),
                         dbT7067EntityList,
                         association,
-                        交付日,
+                        発行日,
                         文書番号,
                         通知書定型文List,
                         帳票分類ID,
