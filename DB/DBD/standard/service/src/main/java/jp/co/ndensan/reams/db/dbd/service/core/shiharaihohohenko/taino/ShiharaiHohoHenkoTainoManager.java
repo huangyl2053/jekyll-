@@ -46,7 +46,6 @@ public class ShiharaiHohoHenkoTainoManager {
     @Transaction
     public int save(ShiharaiHohoHenkoTaino 支払方法変更滞納) {
         requireNonNull(支払方法変更滞納, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更滞納"));
-        int saveCount = dac.save(支払方法変更滞納.toEntity());
-        return saveCount;
+        return dac.save(支払方法変更滞納.toEntity());
     }
 }

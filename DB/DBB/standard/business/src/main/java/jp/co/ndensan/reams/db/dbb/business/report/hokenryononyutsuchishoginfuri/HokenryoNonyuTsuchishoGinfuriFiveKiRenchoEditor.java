@@ -781,11 +781,4 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiRenchoEditor implements IHokenry
         return null;
     }
 
-    private RString decimalToRString(Decimal 額) {
-        if (null == 額) {
-            return RString.EMPTY;
-        }
-        return new RString(額.toString());
-    }
-
 }

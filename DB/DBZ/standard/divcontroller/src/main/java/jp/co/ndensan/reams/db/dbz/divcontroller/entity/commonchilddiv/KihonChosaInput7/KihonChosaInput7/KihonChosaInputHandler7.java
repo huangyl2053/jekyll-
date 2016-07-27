@@ -164,10 +164,8 @@ public class KihonChosaInputHandler7 {
     private void onLoad第七群自立度(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
         List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
-        List<RString> 障害高齢者特記事項番号 = new ArrayList<>();
         List<RString> 認知症高齢者の日常生活自立度Keys = new ArrayList<>();
         List<RString> 前回認知症高齢者の日常生活自立度Keys = new ArrayList<>();
-        List<RString> 認知症高齢者特記事項番号 = new ArrayList<>();
         KihonChosaInput 障害高齢者認定調査基本情報 = 認定調査基本情報リスト.get(0);
         KihonChosaInput 認知症高齢者認定調査基本情報 = 認定調査基本情報リスト.get(1);
         div.getBtnShogaiKoreisha().setDisabled(!障害高齢者認定調査基本情報.is特記事項有無());
