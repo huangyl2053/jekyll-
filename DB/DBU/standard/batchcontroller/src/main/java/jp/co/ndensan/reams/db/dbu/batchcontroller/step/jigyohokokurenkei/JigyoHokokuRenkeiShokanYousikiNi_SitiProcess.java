@@ -24,8 +24,11 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -149,8 +152,8 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
         return new JigyoHokokuRenkeiHeadEucCsvEntity(
                 RString.EMPTY,
                 H1,
-                new RString(processParameter.get過去集計年月() + "01"),
-                RDate.getNowDate().toDateString(),
+                dateFomart(new RString(processParameter.get過去集計年月() + "01")),
+                dateFomart(RDate.getNowDate().toDateString()),
                 国民健康保険団体連合会,
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBE認定支援)
@@ -267,5 +270,13 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
                 給付費_T12 = 給付費_T12.add(entity.getShukeiKekkaAtai());
             }
         }
+    }
+
+    private RString dateFomart(RString 年月日) {
+        if (年月日 == null || 年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        FlexibleDate flexibleDate = new FlexibleDate(年月日);
+        return flexibleDate.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 }
