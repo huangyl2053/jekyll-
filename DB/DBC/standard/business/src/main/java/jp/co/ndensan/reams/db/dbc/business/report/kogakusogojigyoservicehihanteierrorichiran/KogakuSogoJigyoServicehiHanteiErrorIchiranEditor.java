@@ -102,7 +102,12 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranEditor
             set出力順And改ページ(source);
             source.listHanteiError_1 = new RString(連番);
             source.listHanteiError_2 = entity.get被保険者番号();
-            source.listHanteiError_3 = new RString(entity.getサービス提供年月().toString());
+            if (entity.get識別コード() != null) {
+                source.shikibetsuCode = entity.get識別コード().getColumnValue();
+            }
+            if (entity.getサービス提供年月() != null) {
+                source.listHanteiError_3 = new RString(entity.getサービス提供年月().toString());
+            }
             source.listHanteiError_4 = entity.get被保険者名();
             //TODO エラーコードより、.エラーコード内容を出力する (QA#989)
             source.listHanteiError_5 = entity.getエラーコード();

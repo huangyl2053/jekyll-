@@ -51,7 +51,6 @@ public class KogakuServicehiTaishoshaIchiranSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "listTaishosha_1", length = 4, order = 16)
     public RString listTaishosha_1;
-    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listTaishosha_2", length = 10, order = 17)
     public RString listTaishosha_2;
@@ -79,6 +78,9 @@ public class KogakuServicehiTaishoshaIchiranSource implements IReportSource {
     public RString listTaishosha_13;
     @ReportItem(name = "listTaishosha_14", length = 46, order = 29)
     public RString listTaishosha_14;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 46, order = 30)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -119,6 +121,7 @@ public class KogakuServicehiTaishoshaIchiranSource implements IReportSource {
         listTaishosha_11,
         listTaishosha_12,
         listTaishosha_13,
-        listTaishosha_14
+        listTaishosha_14,
+        shikibetsuCode
     }
 }
