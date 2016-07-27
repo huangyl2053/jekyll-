@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.tokkia4;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.Tokkijiko2A4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.TokkiText2A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 事務局用特記事項Builderのインターフェースクラスです。
+ * 特記事項2枚目以降（A4版）Builderのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-060 wangrenze
+ * @reamsid_L DBE-0150-350 wangrenze
  */
-interface ITokkijiko2A4Builder extends IReportBuilder<Tokkijiko2A4ReportSource> {
+interface ITokkiText2A4Builder extends IReportBuilder<TokkiText2A4ReportSource> {
 
 }
