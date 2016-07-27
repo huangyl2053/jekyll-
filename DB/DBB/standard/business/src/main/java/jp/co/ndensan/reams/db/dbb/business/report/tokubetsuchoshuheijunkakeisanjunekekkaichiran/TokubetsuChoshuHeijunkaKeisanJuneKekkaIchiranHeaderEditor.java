@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisan
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -46,7 +46,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor implements IToku
     }
 
     @Override
-    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource edit(TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource source) {
+    public TokuChoHeijunkaKeisanJuneKekkaIchiranSource edit(TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         RString 帳票作成年月日 = 調定日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 帳票作成時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
@@ -57,7 +57,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor implements IToku
         return source;
     }
 
-    private void setHeader(TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource item) {
+    private void setHeader(TokuChoHeijunkaKeisanJuneKekkaIchiranSource item) {
 
         RString 改頁１ = RString.EMPTY;
         RString 改頁２ = RString.EMPTY;

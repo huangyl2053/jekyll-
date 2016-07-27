@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -33,11 +33,11 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder implements ITokubetsu
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource}
+     * @return {@link TokuChoHeijunkaKeisanJuneKekkaIchiranSource}
      */
     @Override
-    public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource build() {
-        return ReportEditorJoiner.from(new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource()).join(headerEditor).join(bodyEditor).buildSource();
+    public TokuChoHeijunkaKeisanJuneKekkaIchiranSource build() {
+        return ReportEditorJoiner.from(new TokuChoHeijunkaKeisanJuneKekkaIchiranSource()).join(headerEditor).join(bodyEditor).buildSource();
     }
 
 }
