@@ -146,26 +146,30 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
                 upd高額介護支給判定結果(画面DIV.get高額介護サービス費支給判定結果Entity());
             }
         } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
-            if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
-                    && EntityDataState.Deleted.equals(
-                            画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
-                upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
-            } else if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
-                    && 画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日() != null
-                    && !画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日().isEmpty()) {
-                upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
-            }
-            if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
-                    && EntityDataState.Deleted.equals(
-                            画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
-                upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
-            } else if (画面DIV.get事業高額介護サービス費支給判定結果Entity() != null
-                    && 画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日() != null
-                    && !画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日().isEmpty()) {
-                upd事業高額介護支給判定結果(画面DIV.get事業高額介護サービス費支給判定結果Entity());
-            }
+            upd事業高額支給申請書登録(画面DIV);
         }
         return true;
+    }
+
+    private void upd事業高額支給申請書登録(KougakuSabisuhiShikyuuShinnseiTourokuEntity 画面DIV) {
+        if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
+                && EntityDataState.Deleted.equals(
+                        画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
+            upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
+        } else if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
+                && 画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日() != null
+                && !画面DIV.get事業高額介護サービス費支給申請Entity().get申請年月日().isEmpty()) {
+            upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
+        }
+        if (画面DIV.get事業高額介護サービス費支給申請Entity() != null
+                && EntityDataState.Deleted.equals(
+                        画面DIV.get事業高額介護サービス費支給申請Entity().toEntity().getState())) {
+            upd事業高額介護支給申請(画面DIV.get事業高額介護サービス費支給申請Entity());
+        } else if (画面DIV.get事業高額介護サービス費支給判定結果Entity() != null
+                && 画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日() != null
+                && !画面DIV.get事業高額介護サービス費支給判定結果Entity().get決定年月日().isEmpty()) {
+            upd事業高額介護支給判定結果(画面DIV.get事業高額介護サービス費支給判定結果Entity());
+        }
     }
 
     /**
@@ -178,14 +182,12 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     @Transaction
     public boolean isTaisyoshaJohoShori(List<KougakuSabisuhiShikyuuShinnseiTourokuResult> 対象者情報list,
             RString メニューID) {
-        if (高額サービス費支給申請書登録.equals(メニューID)) {
-            if (対象者情報list != null && !対象者情報list.isEmpty()) {
-                upd高額対象者情報処理(対象者情報list);
-            }
-        } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)) {
-            if (対象者情報list != null && !対象者情報list.isEmpty()) {
-                upd事業高額対象者情報処理(対象者情報list);
-            }
+        if (高額サービス費支給申請書登録.equals(メニューID)
+                && 対象者情報list != null && !対象者情報list.isEmpty()) {
+            upd高額対象者情報処理(対象者情報list);
+        } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)
+                && 対象者情報list != null && !対象者情報list.isEmpty()) {
+            upd事業高額対象者情報処理(対象者情報list);
         }
         return true;
     }

@@ -62,7 +62,6 @@ public class TsuchishoJoho534 {
      * @return ResponseData
      */
     public ResponseData<KogakuKyufuKetteiInBatchParameter> onClick_btnExcute(TsuchishoJoho534Div div) {
-        KogakuKyufuKetteiInBatchParameter parameter = setBatchParameter(div);
         return ResponseData.of(new KogakuKyufuKetteiInBatchParameter()).respond();
     }
 

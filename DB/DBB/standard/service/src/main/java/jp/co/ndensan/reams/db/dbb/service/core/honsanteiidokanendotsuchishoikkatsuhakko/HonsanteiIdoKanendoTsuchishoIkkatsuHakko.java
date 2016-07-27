@@ -131,6 +131,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     private static final RString 定数_文書番号 = new RString("文書番号");
     private static final RString 定数_出力期 = new RString("出力期");
     private static final RString 定数_対象者 = new RString("対象者");
+    private static final RString 定数_出力対象 = new RString("出力対象");
     private static final RString 定数_口座振替者 = new RString("口座振替者　今回出力様式");
     private static final RString SIGN = new RString(" ＞ ");
     private static final RString CSV出力有無_なし = new RString("なし");
@@ -882,7 +883,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         builder.append(FORMAT_LEFT.concat(定数_文書番号).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE).concat(文書番号));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(FORMAT_LEFT.concat(定数_対象者).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+        builder.append(FORMAT_LEFT.concat(定数_出力対象).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(NotsuKozaShutsuryokuTaisho.toValue(変更通知書出力対象区分).get名称()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
@@ -1111,10 +1112,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         builder = new RStringBuilder();
         if (定値区分_0.equals(生活保護者先頭出力区分)) {
             builder.append(FORMAT_LEFT.concat(定数_生活保護対象者をまとめて先頭に出力).concat(FORMAT_RIGHT)
-                    .concat(RString.FULL_SPACE).concat(定値_する));
+                    .concat(RString.FULL_SPACE).concat(定値_しない));
         } else if (定値区分_1.equals(生活保護者先頭出力区分)) {
             builder.append(FORMAT_LEFT.concat(定数_生活保護対象者をまとめて先頭に出力).concat(FORMAT_RIGHT)
-                    .concat(RString.FULL_SPACE).concat(定値_しない));
+                    .concat(RString.FULL_SPACE).concat(定値_する));
         }
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
