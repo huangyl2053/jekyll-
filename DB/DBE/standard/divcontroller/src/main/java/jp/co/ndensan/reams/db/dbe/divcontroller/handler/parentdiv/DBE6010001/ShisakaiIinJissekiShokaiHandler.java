@@ -122,7 +122,11 @@ public class ShisakaiIinJissekiShokaiHandler {
             if (row.getSelected()) {
                 ShinsaiinJissekiIchiranKey key = new ShinsaiinJissekiIchiranKey();
                 key.setShinsakaiIinCode(row.getCode());
-                key.setShinsakaiIinHoshuKubun(row.getHoshuKubun());
+                if (ShinsakaiIinHoshukubun.その他報酬.get名称().equals(row.getHoshuKubun())) {
+                    key.setShinsakaiIinHoshuKubun(ShinsakaiIinHoshukubun.その他報酬.getコード());
+                } else if (ShinsakaiIinHoshukubun.審査報酬.get名称().equals(row.getHoshuKubun())) {
+                    key.setShinsakaiIinHoshuKubun(ShinsakaiIinHoshukubun.審査報酬.getコード());
+                }
                 key.setShinsakaiKaisaiYMD(row.getShinsakaiKaisaiYMD());
                 key.setRemban(Integer.parseInt(row.getRemban().toString()));
                 keyJoho.add(key);
