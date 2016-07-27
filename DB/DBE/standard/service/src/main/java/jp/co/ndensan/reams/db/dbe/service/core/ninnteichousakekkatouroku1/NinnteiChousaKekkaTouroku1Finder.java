@@ -67,7 +67,7 @@ public class NinnteiChousaKekkaTouroku1Finder {
                 temp_申請書管理番号, RString.EMPTY));
 
         TempData data = new TempData();
-        if (entityList != null && entityList.size() > 0) {
+        if (entityList != null && !entityList.isEmpty()) {
             TempDataEntity entity = entityList.get(0);
             data.setTemp_厚労省IF識別コード(entity.getTemp_厚労省IF識別コード());
             data.setTemp_認定調査依頼区分コード(entity.getTemp_認定調査依頼区分コード());

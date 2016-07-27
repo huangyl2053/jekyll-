@@ -127,6 +127,14 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
             source.woman = RString.EMPTY;
         }
 
+        source.tekiyoGengo = item.get訪問介護利用者負担額減額().get適用開始年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.tekiyoYYYY = item.get訪問介護利用者負担額減額().get適用開始年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.tekiyoMM = item.get訪問介護利用者負担額減額().get適用開始年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.tekiyoDD = item.get訪問介護利用者負担額減額().get適用開始年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
+        source.yukoGengo = item.get訪問介護利用者負担額減額().get適用終了年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        source.yukoYYYY = item.get訪問介護利用者負担額減額().get適用終了年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
+        source.yukoMM = item.get訪問介護利用者負担額減額().get適用終了年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
+        source.yukoDD = item.get訪問介護利用者負担額減額().get適用終了年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
         source.kyufuRitsu = new RString(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString());
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
