@@ -71,4 +71,33 @@ public class KogakuSogoJigyoServicehiHanteiErrorIchiranSource implements IReport
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * KogakuSogoJigyoServicehiHanteiErrorIchiranSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        shinsaYMKaishi,
+        shinsaYMShuryo,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listHanteiError_1,
+        listHanteiError_2,
+        listHanteiError_3,
+        listHanteiError_4,
+        listHanteiError_5,
+        listHanteiError_6,
+        listHanteiError_7
+    }
 }
