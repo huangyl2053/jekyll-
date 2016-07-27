@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.processprm.DBD2020001;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd2020001;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,25 +44,25 @@ public class ShiharaiHohoHenkoHaakuIchiranProcessParameter implements IBatchProc
     /**
      * パラメターを返却します．
      *
-     * @param kijunYMD　基準日
-     * @param hihokenshaAll　被保険者選択
-     * @param tainoKikanHihokenshaAll　被保険者全員の滞納期間
-     * @param jukyushaAll　受給者全員
-     * @param tainoKikanJukyushaAll　受給者全員の滞納期間
-     * @param ninteiShinseisha　受給認定申請中者
-     * @param tainoKikanNinteiShinseisha　受給認定申請中者の滞納期間
-     * @param ninteiYMD　受給認定日抽出
-     * @param tainoKikanNinteiYMD　受給認定日抽出の滞納期間
-     * @param ninteiDateFrom　受給認定日抽出の開始
-     * @param ninteiYMDTo　受給認定日抽出の終了
-     * @param shokanShinseisha　受給申請中者
-     * @param tainoKikanShokanShinseisha　受給申請中者の滞納期間
-     * @param shokanKetteiYMD　受給支給決定日抽出
-     * @param tainoKikanShokanKettei　受給支給決定日抽出の滞納期間
-     * @param shokanKetteiYMDFrom　受給支給決定日抽出の開始
-     * @param shokanKetteiYMDTo　受給支給決定日抽出の終了
-     * @param tab　改頁出力順ID
-     * @param reportId　帳票ID
+     * @param kijunYMD 基準日
+     * @param hihokenshaAll 被保険者選択
+     * @param tainoKikanHihokenshaAll 被保険者全員の滞納期間
+     * @param jukyushaAll 受給者全員
+     * @param tainoKikanJukyushaAll 受給者全員の滞納期間
+     * @param ninteiShinseisha 受給認定申請中者
+     * @param tainoKikanNinteiShinseisha 受給認定申請中者の滞納期間
+     * @param ninteiYMD 受給認定日抽出
+     * @param tainoKikanNinteiYMD 受給認定日抽出の滞納期間
+     * @param ninteiDateFrom 受給認定日抽出の開始
+     * @param ninteiYMDTo 受給認定日抽出の終了
+     * @param shokanShinseisha 受給申請中者
+     * @param tainoKikanShokanShinseisha 受給申請中者の滞納期間
+     * @param shokanKetteiYMD 受給支給決定日抽出
+     * @param tainoKikanShokanKettei 受給支給決定日抽出の滞納期間
+     * @param shokanKetteiYMDFrom 受給支給決定日抽出の開始
+     * @param shokanKetteiYMDTo 受給支給決定日抽出の終了
+     * @param tab 改頁出力順ID
+     * @param reportId 帳票ID
      */
     public ShiharaiHohoHenkoHaakuIchiranProcessParameter(FlexibleDate kijunYMD,
             Long hihokenshaAll,

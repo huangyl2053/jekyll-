@@ -80,7 +80,7 @@ public class DBD2020001ValidationHandler {
         messages2.add(ValidateChain.validateStart(div).ifNot(ShiharaiHohoHenkoHakuListMainDivSpec.償還支給決定日抽出期間が不正チェック)
                 .thenAdd(NoInputMessages.期間が不正).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NoInputMessages.期間が不正, div.getTxtNinteiYMDTo()).build().check(messages2));
+                NoInputMessages.期間が不正, div.getTxtShokanKetteiYMDTo()).build().check(messages2));
         return pairs;
 
     }

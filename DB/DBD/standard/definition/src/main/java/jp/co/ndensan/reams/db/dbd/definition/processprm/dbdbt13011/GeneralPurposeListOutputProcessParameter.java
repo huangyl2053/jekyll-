@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.processprm.DBDBT13011;
+package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011;
 
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBDBT13011.GeneralPurposeListOutputMybatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011.GeneralPurposeListOutputMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -85,7 +85,7 @@ public class GeneralPurposeListOutputProcessParameter implements IBatchProcessPa
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
-     * @return　ＳＱＬ使用されたパラメター情報
+     * @return ＳＱＬ使用されたパラメター情報
      */
     public GeneralPurposeListOutputMybatisParameter toGeneralPurposeListOutputMybatisParameter(RString psmShikibetsuTaisho, RString psmAtesaki) {
 

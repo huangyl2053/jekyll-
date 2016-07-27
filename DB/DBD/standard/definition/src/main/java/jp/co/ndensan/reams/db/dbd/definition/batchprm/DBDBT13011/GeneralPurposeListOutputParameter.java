@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT13011;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBDBT13011.GeneralPurposeListOutputProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -98,7 +98,7 @@ public class GeneralPurposeListOutputParameter extends BatchParameterBase {
      * @param 宛名抽出条件 宛名抽出条件
      * @param 出力順 出力順
      * @param 出力項目 出力項目
-     * @return　バッチProcessパラメター情報
+     * @return バッチProcessパラメター情報
      */
     public GeneralPurposeListOutputProcessParameter toGeneralPurposeListOutputProcessParameter(RString 抽出方法区分,
             RString 抽出項目区分,

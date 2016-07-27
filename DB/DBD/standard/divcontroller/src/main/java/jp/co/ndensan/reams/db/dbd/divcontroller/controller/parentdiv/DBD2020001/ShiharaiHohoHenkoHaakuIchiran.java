@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class ShiharaiHohoHenkoHaakuIchiran {
 
     private final ShiharaiHohoHenkoHakuListMainDiv div;
-    private static final String SELECTED_VALUE = "0";
-    private static final String UN_SELECTED_VALUE = "1";
-    private static final String REPORTID = "DBD200006_ShiharaiHohoHenkoHaakuIchiran";
+    private static final RString SELECTED_VALUE = new RString("0");
+    private static final RString UN_SELECTED_VALUE = new RString("1");
+    private static final RString REPORTID = new RString("DBD200006_ShiharaiHohoHenkoHaakuIchiran");
 
     /**
      * コンストラクタです。
@@ -41,9 +41,9 @@ public class ShiharaiHohoHenkoHaakuIchiran {
         ShiharaiHohoHenkoHaakuIchiranBatchParameter parameter = new ShiharaiHohoHenkoHaakuIchiranBatchParameter();
         parameter.setKijunYMD(div.getChushutsuJoken().getTxtKijunYMD().getValue());
         if (!div.getRadHihokenshaAll().getSelectedKey().isNullOrEmpty()) {
-            parameter.setHihokenshaAll(Long.parseLong(SELECTED_VALUE));
+            parameter.setHihokenshaAll(Long.parseLong(SELECTED_VALUE.toString()));
         } else {
-            parameter.setHihokenshaAll(Long.parseLong(UN_SELECTED_VALUE));
+            parameter.setHihokenshaAll(Long.parseLong(UN_SELECTED_VALUE.toString()));
         }
         parameter.setTainoKikanHihokenshaAll(get滞納期間(div.getTxtTainoKikanHihokenshaAll().getValue()));
         parameter.setJukyushaAll(isCheckedValue(div.getChkJukyushaAll().getSelectedValues()));
@@ -65,20 +65,20 @@ public class ShiharaiHohoHenkoHaakuIchiran {
         parameter.setShokanKetteiYMDFrom(div.getTxtShokanKetteiYMDFrom().getValue());
         parameter.setShokanKetteiYMDTo(div.getTxtShokanKetteiYMDTo().getValue());
         parameter.setTab(div.getCcdChohyoShutsuryokujun().get出力順ID());
-        parameter.setReportId(new RString(REPORTID));
+        parameter.setReportId(REPORTID);
         return parameter;
     }
 
     private Long isCheckedValue(List<RString> isSelectedList) {
         if (isSelectedList != null && !isSelectedList.isEmpty()) {
-            return Long.parseLong(SELECTED_VALUE);
+            return Long.parseLong(SELECTED_VALUE.toString());
         }
-        return Long.parseLong(UN_SELECTED_VALUE);
+        return Long.parseLong(UN_SELECTED_VALUE.toString());
     }
 
     private Long get滞納期間(Decimal value) {
         if (value == null) {
-            return Long.parseLong(SELECTED_VALUE);
+            return Long.parseLong(SELECTED_VALUE.toString());
         }
         return value.longValue();
     }

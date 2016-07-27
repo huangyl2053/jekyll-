@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.DBDBT13011;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011;
 
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 汎用リスト　施設入退所RelateEntityクラスです。
+ *
+ * @reamsid_L DBD-1570-030 x_lilh
  */
 @lombok.Getter
 @lombok.Setter

@@ -27,7 +27,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 画面初期化
      *
-     * @param div　画面Div
+     * @param div　ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onLoad(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -37,13 +37,21 @@ public class ShiharaiHohoHenkoHakuListMain {
         div.getTxtTainoKikanNinteiYMD().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoKikanShokanShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoKikanShokanKettei().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
+
+        div.getTxtTainoNengetsuHihokenshaAll().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanHihokenshaAll().getValue()));
+        div.getTxtTainoNengetsuJukyushaAll().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanJukyushaAll().getValue()));
+        div.getTxtTainoNengetsuNinteiShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiShinseisha().getValue()));
+        div.getTxtTainoNengetsuNinteiYMD().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiYMD().getValue()));
+        div.getTxtTainoNengetsuShokanShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanShinseisha().getValue()));
+        div.getTxtTainoNengetsuShokanKettei().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanKettei().getValue()));
+
         return ResponseData.of(div).respond();
     }
 
     /**
      * 被保険者選択を選択押下処理
      *
-     * @param div　画面Div
+     * @param div　ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_radHihokenshaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -76,7 +84,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 被保険者全員と被保険者全員以外変更処理
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_radHihokenshaIgaiAll(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -107,7 +115,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給者全員を選択の処理
      *
-     * @param div　画面Div
+     * @param div　ShiharaiHohoHenkoHakuListMainDiv
      * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkJukyushaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -126,7 +134,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給認定申請中者を選択の処理
      *
-     * @param div　画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkNinteiShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -145,7 +153,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給認定日抽出を選択の処理
      *
-     * @param div　画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkNinteiYMD(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -170,7 +178,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給申請中者を選択の処理
      *
-     * @param div　画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkShokanShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -189,7 +197,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給支給決定日抽出を選択の処理
      *
-     * @param div　画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_chkShokanKetteiYMD(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -214,11 +222,10 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 被保険者全員の滞納期間からフォーカスアウト
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanHihokenshaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getTxtTainoKikanHihokenshaAll().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoNengetsuHihokenshaAll().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanHihokenshaAll().getValue()));
         return ResponseData.of(div).respond();
     }
@@ -226,11 +233,10 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給者全員の滞納期間からフォーカスアウト
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanJukyushaAll(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getTxtTainoKikanJukyushaAll().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoNengetsuJukyushaAll().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanJukyushaAll().getValue()));
         return ResponseData.of(div).respond();
     }
@@ -238,11 +244,10 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給認定申請中者の滞納期間からフォーカスアウト
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanNinteiShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getTxtTainoKikanNinteiShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoNengetsuNinteiShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiShinseisha().getValue()));
         return ResponseData.of(div).respond();
     }
@@ -250,11 +255,10 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給認定日抽出の滞納期間からフォーカスアウト
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanNinteiYMD(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getTxtTainoKikanNinteiYMD().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoNengetsuNinteiYMD().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanNinteiYMD().getValue()));
         return ResponseData.of(div).respond();
     }
@@ -262,11 +266,10 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給申請中者の滞納期間からフォーカスアウト
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanShokanShinseisha(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getTxtTainoKikanShokanShinseisha().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoNengetsuShokanShinseisha().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanShinseisha().getValue()));
         return ResponseData.of(div).respond();
     }
@@ -274,11 +277,10 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 受給支給決定日抽出の滞納期間からフォーカスアウト
      *
-     * @param div 画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> focusout_txtTainoKikanShokanKettei(ShiharaiHohoHenkoHakuListMainDiv div) {
-        div.getTxtTainoKikanShokanKettei().setValue(Decimal.valueOf(get支払方法変更_支払方法変更期限()));
         div.getTxtTainoNengetsuShokanKettei().setValue(getHandler(div).get支払方法変更期限に対する年月(div.getTxtTainoKikanShokanKettei().getValue()));
         return ResponseData.of(div).respond();
     }
@@ -286,7 +288,7 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 実行ボタン押下、チェックとバッチパラメターを設定
      *
-     * @param div　画面Div
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
      * @return　ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHaakuIchiranBatchParameter> onClick_btnBatchExecute(ShiharaiHohoHenkoHakuListMainDiv div) {
@@ -296,8 +298,8 @@ public class ShiharaiHohoHenkoHakuListMain {
     /**
      * 実行するボタンを押下のチェック処理します。
      *
-     * @param div ShiharaiHohoHenkoHakuListMainDiv のクラスファイル
-     * @return ResponseData
+     * @param div ShiharaiHohoHenkoHakuListMainDiv
+     * @return ResponseData<ShiharaiHohoHenkoHakuListMainDiv>
      */
     public ResponseData<ShiharaiHohoHenkoHakuListMainDiv> onClick_btnCheck(ShiharaiHohoHenkoHakuListMainDiv div) {
         ValidationMessageControlPairs validPairs = getHandler(div).バッチ実行前チェック();

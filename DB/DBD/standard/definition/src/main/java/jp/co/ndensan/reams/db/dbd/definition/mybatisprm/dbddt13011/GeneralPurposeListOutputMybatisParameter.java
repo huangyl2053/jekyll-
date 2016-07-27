@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBDBT13011;
+package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011;
 
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
@@ -171,6 +171,14 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
 
     private void set宛名抽出区分について(AtenaSelectBatchParameter 宛名抽出条件) {
 
+        set年齢範囲について(宛名抽出条件);
+        set生年月日範囲について(宛名抽出条件);
+        set市町村コードについて(宛名抽出条件);
+        set地区選択区分について(宛名抽出条件);
+    }
+
+    private void set年齢範囲について(AtenaSelectBatchParameter 宛名抽出条件) {
+
         if (NenreiSoChushutsuHoho.年齢範囲.equals(宛名抽出条件.getAgeSelectKijun())) {
             is宛名抽出区分_年齢 = true;
 
@@ -185,7 +193,9 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
 
             }
         }
+    }
 
+    private void set生年月日範囲について(AtenaSelectBatchParameter 宛名抽出条件) {
         if (NenreiSoChushutsuHoho.生年月日範囲.equals(宛名抽出条件.getAgeSelectKijun())) {
             is宛名抽出区分_生年月日 = true;
             Range<RDate> seinengappiRange = 宛名抽出条件.getSeinengappiRange();
@@ -197,12 +207,16 @@ public class GeneralPurposeListOutputMybatisParameter implements IMyBatisParamet
                 is宛名抽出区分_生年月日To = true;
             }
         }
+    }
 
+    private void set市町村コードについて(AtenaSelectBatchParameter 宛名抽出条件) {
         if (new RString("すべて").equals(宛名抽出条件.getShichoson_Code().getColumnValue())) {
             is宛名抽出条件_市町村コード_非全部 = true;
             shichosonCode = 宛名抽出条件.getShichoson_Code().getColumnValue();
         }
+    }
 
+    private void set地区選択区分について(AtenaSelectBatchParameter 宛名抽出条件) {
         Chiku 地区選択区分 = 宛名抽出条件.getChiku_Kubun();
         if (!Chiku.全て.equals(地区選択区分)) {
             if (!宛名抽出条件.getJusho_From().isNullOrEmpty()) {

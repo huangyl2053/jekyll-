@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDBT13011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.DBDBT13011.GeneralPurposeListOutputProcessParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBDBT13011.GeneralPurposeListOutputEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBDBT13011.GeneralPurposeListOutputEucCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.DBDBT13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -74,6 +75,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * バッチ設計_DBDBT13011_汎用リスト出力(施設入退所)事前準備_process処理クラスです。
+ *
+ * @reamsid_L DBD-1570-030 x_lilh
  */
 public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<GeneralPurposeListOutputEntity> {
 
@@ -227,7 +230,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-//        eucFileOutputJohoFactory();
+        eucFileOutputJohoFactory();
 //        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
 //        manager.spool(eucFilePath, log);
     }
@@ -271,7 +274,7 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                 EUC_ENTITY_ID.toRString(),
                 new RString(String.valueOf(eucCsvWriter.getCount())),
                 get出力条件表());
-        //EucFileOutputJokenhyoFactory.createInstance(item).print();
+        EucFileOutputJokenhyoFactory.createInstance(item).print();
     }
 
     private void setEucCsvEntity(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
@@ -279,6 +282,43 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         if (processParamter.is連番付加()) {
             eucCsvEntity.set連番(new RString(String.valueOf(++i)));
         }
+        set宛名情報について(eucCsvEntity, entity);
+        set宛先情報について(eucCsvEntity, entity);
+        set被保険者台帳管理について(eucCsvEntity, entity);
+        set医療保険加入状況について(eucCsvEntity, entity);
+        set受給者台帳(eucCsvEntity, entity);
+        set今回申請届出について(eucCsvEntity, entity);
+        set申請届出事業者について(eucCsvEntity, entity);
+        set今回申請について(eucCsvEntity, entity);
+        set今回調査委託先について(eucCsvEntity, entity);
+        set今回調査員について(eucCsvEntity, entity);
+        set今回主治医医療機関について(eucCsvEntity, entity);
+        set今回主治医について(eucCsvEntity, entity);
+        set今回調査依頼について(eucCsvEntity, entity);
+        set今回計画情報について(eucCsvEntity, entity);
+        set今回完了情報について(eucCsvEntity, entity);
+        set今回意見書作成依頼について(eucCsvEntity, entity);
+        set今回意見書情報について(eucCsvEntity, entity);
+        set今回一次判定結果について(eucCsvEntity, entity);
+        set今回結果情報について(eucCsvEntity, entity);
+        set初回受給情報について(eucCsvEntity, entity);
+        set初回申請について(eucCsvEntity, entity);
+        set前回受給情報について(eucCsvEntity, entity);
+        set前回申請について(eucCsvEntity, entity);
+        set前々回受給情報について(eucCsvEntity, entity);
+        set今回調査結果_基本について(eucCsvEntity, entity);
+        set介護保険施設入退所について(eucCsvEntity, entity);
+        set居宅届出について(eucCsvEntity, entity);
+        set事業者作成について(eucCsvEntity, entity);
+        set計画事業者について(eucCsvEntity, entity);
+        set計画事業者代表者について(eucCsvEntity, entity);
+        set自己作成について(eucCsvEntity, entity);
+        set指定事業者について(eucCsvEntity, entity);
+        set除外他特適用施設について(eucCsvEntity, entity);
+    }
+
+    private void set宛名情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //宛名 を IKojin
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
@@ -332,7 +372,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set保険者名(new RString("TODO"));
             eucCsvEntity.set空白(RString.EMPTY);
         }
+    }
 
+    private void set宛先情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //宛先 を IAtesaki
         if (entity.getAtesakiEntity() != null) {
             IAtesaki atesaki = AtesakiFactory.createInstance(entity.getAtesakiEntity());
@@ -350,7 +393,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set送付先行政区名(atesaki.get宛先行政区().get名称());
             eucCsvEntity.set被保険者番号(new RString("TODO"));
         }
+    }
 
+    private void set被保険者台帳管理について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //被保険者台帳管理
         eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
         eucCsvEntity.set資格取得事由(getコードマスタ(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(),
@@ -370,19 +416,26 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set資格_証記載保険者番号(保険者リスト.get(new LasdecCode(entity.get被保険者台帳管理_市町村コード()))
                     .get証記載保険者番号().getColumnValue());
         }
+    }
 
+    private void set医療保険加入状況について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //医療保険加入状況
         eucCsvEntity.set医療保険種別(getコードマスタ(DBACodeShubetsu.医療保険種類.getコード(),
                 new Code(entity.get医療保険加入状況_医療保険種別コード())));
         eucCsvEntity.set医療保険番号(entity.get医療保険加入状況_医療保険番号());
         eucCsvEntity.set医療保険者名(entity.get医療保険加入状況_医療保険者名称());
         eucCsvEntity.set医療保険記号番号(entity.get医療保険加入状況_医療保険記号番号());
+    }
 
+    private void set受給者台帳(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //受給者台帳
         eucCsvEntity.set特定疾病(entity.get受給者台帳_2号特定疾病コード());
         eucCsvEntity.set受給申請事由(edit受給申請事由(entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         eucCsvEntity.set申請理由(entity.get受給者台帳_申請理由());
-        eucCsvEntity.set申請関係者(entity.get受給者台帳_本人との関係());//TODO
+        //TODO
+        eucCsvEntity.set申請関係者(entity.get受給者台帳_本人との関係());
         eucCsvEntity.set本人関係(entity.get受給者台帳_本人との関係());
         eucCsvEntity.set受給申請日(edit年月日_yyyymmdd(entity.get受給者台帳_受給申請年月日()));
         eucCsvEntity.set審査回答日(edit年月日_yyyymmdd(entity.get受給者台帳_認定年月日()));
@@ -423,6 +476,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set資格取得前申請区分(edit資格取得前申請区分(entity.is受給者台帳_資格取得前申請フラグ()));
         eucCsvEntity.set一次判定結果_重み(RString.EMPTY);
 
+    }
+
+    private void set今回申請届出について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回申請届出
         eucCsvEntity.set申請氏名(entity.get今回申請届出_申請届出者氏名());
         eucCsvEntity.set申請氏名カナ(entity.get今回申請届出_申請届出者氏名カナ());
@@ -431,11 +488,17 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set申請住所(entity.get今回申請届出_申請届出者住所());
         eucCsvEntity.set申請連絡先(entity.get今回申請届出_申請届出者電話番号());
         eucCsvEntity.set申請事業コード(entity.get今回申請届出_申請届出代行事業者番号());
+    }
 
+    private void set申請届出事業者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //申請届出事業者
         eucCsvEntity.set申請代行事業者名(entity.get申請届出事業者_事業者名称());
         eucCsvEntity.set申請代行事業者名カナ(entity.get申請届出事業者_事業者名称カナ());
+    }
 
+    private void set今回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回申請
         eucCsvEntity.set調査委託先コード(entity.get今回申請_認定調査委託先コード());
         eucCsvEntity.set調査員コード(entity.get今回申請_認定調査員コード());
@@ -454,6 +517,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 //                entity.get今回一次判定結果_要介護認定一次判定結果コード()));
 //        eucCsvEntity.set要介護度(edit要介護度(KoroshoInterfaceShikibetsuCode.toValue(entity.get今回申請_厚労省IF識別コード()),
 //                entity.get受給者台帳_要介護認定状態区分コード()));
+    }
+
+    private void set今回調査委託先について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回調査委託先
         eucCsvEntity.set委託先名(entity.get今回調査委託先_事業者名称());
         eucCsvEntity.set委託先名カナ(entity.get今回調査委託先_事業者名称カナ());
@@ -471,6 +538,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set訪問調査先住所(entity.get今回調査委託先_住所());
         eucCsvEntity.set訪問調査先名称(entity.get今回調査委託先_事業者名称());
         eucCsvEntity.set訪問調査先電話番号(entity.get今回調査委託先_電話番号());
+    }
+
+    private void set今回調査員について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
 
         //今回調査員
         eucCsvEntity.set調査員氏名(entity.get今回調査員_調査員氏名());
@@ -486,6 +557,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         } else {
             eucCsvEntity.set調査員状況(FALSE);
         }
+    }
+
+    private void set今回主治医医療機関について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
 
         //今回主治医医療機関
         eucCsvEntity.set医療機関名称(entity.get今回主治医医療機関_医療機関名称());
@@ -496,6 +571,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set医療機関住所(entity.get今回主治医医療機関_住所());
         eucCsvEntity.set医療機関連絡先(entity.get今回主治医医療機関_電話番号());
         eucCsvEntity.set医療機関状況(edit状況(entity.is今回主治医医療機関_状況フラグ()));
+    }
+
+    private void set今回主治医について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
 
         //今回主治医
         eucCsvEntity.set主治医名(entity.get今回主治医_主治医氏名());
@@ -503,31 +582,56 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set主治医性別(entity.get今回主治医_性別());
         eucCsvEntity.set主治医所属(entity.get今回主治医_診療科名称());
         eucCsvEntity.set主治医状況(edit状況(entity.is今回主治医_状況フラグ()));
+    }
 
+    private void set今回調査依頼について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回調査依頼
         eucCsvEntity.set調査委託日(edit年月日_yyyymmdd(entity.get今回調査依頼_認定調査依頼年月日()));
+    }
 
+    private void set今回計画情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回計画情報
         eucCsvEntity.set調査予定日(edit年月日_yyyymmdd(entity.get今回計画情報_認定調査予定年月日()));
         eucCsvEntity.set意見予定日(edit年月日_yyyymmdd(entity.get今回計画情報_主治医意見書登録予定年月日()));
         eucCsvEntity.set審査予定日(edit年月日_yyyymmdd(entity.get今回計画情報_認定審査会予定年月日()));
 
+    }
+
+    private void set今回完了情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回完了情報
         eucCsvEntity.set調査終了日(edit年月日_yyyymmdd(entity.get今回完了情報_認定調査完了年月日()));
+    }
 
+    private void set今回意見書作成依頼について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回意見書作成依頼
         eucCsvEntity.set意見依頼日(edit年月日_yyyymmdd(entity.get今回意見書作成依頼_主治医意見書作成依頼年月日()));
+    }
 
+    private void set今回意見書情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回意見書情報
         eucCsvEntity.set意見取寄日(edit年月日_yyyymmdd(entity.get今回意見書情報_主治医意見書受領年月日()));
+    }
 
+    private void set今回一次判定結果について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回一次判定結果
         eucCsvEntity.set一次判定日(edit年月日_yyyymmdd(entity.get今回一次判定結果_要介護認定一次判定年月日()));
+    }
 
+    private void set今回結果情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回結果情報
         eucCsvEntity.set資料作成日(edit年月日_yyyymmdd(entity.get今回結果情報_介護認定審査会資料作成年月日()));
         eucCsvEntity.set審査会意見(entity.get今回結果情報_介護認定審査会意見());
+    }
 
+    private void set初回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //初回受給情報
         eucCsvEntity.set初回申請日(edit年月日_yyyymmdd(entity.get初回受給情報_受給申請年月日()));
         eucCsvEntity.set初回認定日(edit年月日_yyyymmdd(entity.get初回受給情報_認定年月日()));
@@ -540,10 +644,16 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set初回みなし更新(entity.get初回受給情報_みなし要介護区分コード());
         eucCsvEntity.set初回当初認定有効開始日(edit年月日_yyyymmdd(entity.get初回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set初回当初認定有効終了日(edit年月日_yyyymmdd(entity.get初回受給情報_当初認定有効終了年月日()));
+    }
 
+    private void set初回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //初回申請
         eucCsvEntity.set初回支援申請事由(edit支援申請事由(new Code(entity.get初回申請_要支援者認定申請区分())));
+    }
 
+    private void set前回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //前回受給情報
         eucCsvEntity.set前回申請日(edit年月日_yyyymmdd(entity.get前回受給情報_受給申請年月日()));
         eucCsvEntity.set前回認定日(edit年月日_yyyymmdd(entity.get前回受給情報_認定年月日()));
@@ -556,10 +666,16 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set前回みなし更新(entity.get前回受給情報_みなし要介護区分コード());
         eucCsvEntity.set前回当初認定有効開始日(edit年月日_yyyymmdd(entity.get前回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前回当初認定有効終了日(edit年月日_yyyymmdd(entity.get前回受給情報_当初認定有効終了年月日()));
+    }
 
+    private void set前回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //前回申請
         // eucCsvEntity.set前回支援申請事由(edit支援申請事由(new Code(entity.get前回申請_要支援者認定申請区分())));
-        // 前々回申請
+    }
+
+    private void set前々回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //前々回受給情報
         eucCsvEntity.set前々回申請日(edit年月日_yyyymmdd(entity.get前々回受給情報_受給申請年月日()));
         eucCsvEntity.set前々回認定日(edit年月日_yyyymmdd(entity.get前々回受給情報_認定年月日()));
@@ -573,11 +689,17 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         eucCsvEntity.set前々回当初認定有効開始日(edit年月日_yyyymmdd(entity.get前々回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前々回当初認定有効終了日(edit年月日_yyyymmdd(entity.get前々回受給情報_当初認定有効終了年月日()));
         eucCsvEntity.set前々回支援申請事由(edit支援申請区分(entity.get前々回受給情報_要支援者認定申請区分()));
+    }
 
+    private void set今回調査結果_基本について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //今回調査結果_基本
         eucCsvEntity.set障害高齢者自立度(edit障害高齢者自立度(entity.get今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード()));
         eucCsvEntity.set認知症高齢者自立度(edit認知症高齢者自立度(entity.get今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード()));
+    }
 
+    private void set介護保険施設入退所について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //介護保険施設入退所
         eucCsvEntity.set指定事業者コード(entity.get施設入所_入所施設コード());
         eucCsvEntity.set施設入所日(edit年月日_yyyymmdd(entity.get施設入所_入所年月日()));
@@ -585,6 +707,48 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
         //この項目は実装外
         eucCsvEntity.set転出先保険者番号(RString.EMPTY);
 
+    }
+
+    private void set居宅届出について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
+        //居宅届出
+        eucCsvEntity.set届出区分(edit届出区分(entity.get居宅届出_届出区分()));
+        eucCsvEntity.set計画届出日(edit年月日_yyyymmdd(entity.get居宅届出_届出年月日()));
+    }
+
+    private void set事業者作成について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
+        //事業者作成
+        eucCsvEntity.set居宅計画作成区分(edit居宅計画作成区分(entity.get事業者作成_作成区分コード()));
+        eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
+        eucCsvEntity.set計画適用開始日(edit年月日_yyyymmdd(entity.get事業者作成_適用開始年月日()));
+        eucCsvEntity.set計画適用終了日(edit年月日_yyyymmdd(entity.get事業者作成_適用終了年月日()));
+    }
+
+    private void set計画事業者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
+        //計画事業者
+        eucCsvEntity.set計画事業者名(entity.get計画事業者_事業者名称());
+        eucCsvEntity.set計画事業者カナ(entity.get計画事業者_事業者名称カナ());
+    }
+
+    private void set計画事業者代表者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
+        //計画事業者代表者
+        eucCsvEntity.set計画管理者名(entity.get計画事業者代表者_代表者名());
+        eucCsvEntity.set計画管理者カナ(entity.get計画事業者代表者_代表者名カナ());
+    }
+
+    private void set自己作成について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
+        //自己作成
+        eucCsvEntity.set計画作成日(edit年月日_yyyymmdd(entity.get自己作成_計画作成年月日()));
+        eucCsvEntity.set計画変更日(edit年月日_yyyymmdd(entity.get自己作成_計画変更年月日()));
+        eucCsvEntity.set変更理由(entity.get自己作成_計画変更事由());
+    }
+
+    private void set指定事業者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //指定事業者
         if (is入所施設種類_11(entity.get施設入所_入所施設種類())) {
             eucCsvEntity.set指定事業者代表者名(entity.get指定事業者代表者_代表者名());
@@ -604,7 +768,10 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set指定事業者実施地域(entity.get指定事業者_サービス実施地域());
 
         }
+    }
 
+    private void set除外他特適用施設について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
+            GeneralPurposeListOutputEntity entity) {
         //除外他特適用施設
         if (is入所施設種類_12_21(entity.get施設入所_入所施設種類())) {
             eucCsvEntity.set指定事業者名(entity.get除外他特適用施設_事業者名称());
@@ -622,30 +789,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             eucCsvEntity.set指定事業者取消日(edit年月日_yyyymmdd(entity.get除外他特適用施設_有効終了年月日()));
             eucCsvEntity.set指定事業者実施地域(RString.EMPTY);
         }
-
-        //居宅届出
-        eucCsvEntity.set届出区分(edit届出区分(entity.get居宅届出_届出区分()));
-        eucCsvEntity.set計画届出日(edit年月日_yyyymmdd(entity.get居宅届出_届出年月日()));
-
-        //事業者作成
-        eucCsvEntity.set居宅計画作成区分(edit居宅計画作成区分(entity.get事業者作成_作成区分コード()));
-        eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
-        eucCsvEntity.set計画適用開始日(edit年月日_yyyymmdd(entity.get事業者作成_適用開始年月日()));
-        eucCsvEntity.set計画適用終了日(edit年月日_yyyymmdd(entity.get事業者作成_適用終了年月日()));
-
-        //計画事業者
-        eucCsvEntity.set計画事業者名(entity.get計画事業者_事業者名称());
-        eucCsvEntity.set計画事業者カナ(entity.get計画事業者_事業者名称カナ());
-
-        //計画事業者代表者
-        eucCsvEntity.set計画管理者名(entity.get計画事業者代表者_代表者名());
-        eucCsvEntity.set計画管理者カナ(entity.get計画事業者代表者_代表者名カナ());
-
-        //自己作成
-        eucCsvEntity.set計画作成日(edit年月日_yyyymmdd(entity.get自己作成_計画作成年月日()));
-        eucCsvEntity.set計画変更日(edit年月日_yyyymmdd(entity.get自己作成_計画変更年月日()));
-        eucCsvEntity.set変更理由(entity.get自己作成_計画変更事由());
-
     }
 
     private RString edit年月日_yyyymmdd(FlexibleDate date) {
@@ -785,6 +928,15 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             list.add(出力条件表_喪失区分.concat(processParamter.get喪失区分()));
         }
 
+        set出力条件表_年齢(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
+        set出力条件表_生年月日(atenaSelectBatchParameter, nenreiSoChushutsuHoho, list);
+        set出力条件表_地区選択(atenaSelectBatchParameter, list);
+        return list;
+    }
+
+    private void set出力条件表_年齢(AtenaSelectBatchParameter atenaSelectBatchParameter,
+            NenreiSoChushutsuHoho nenreiSoChushutsuHoho,
+            List<RString> list) {
         if (年齢.equals(nenreiSoChushutsuHoho.get名称())) {
             Range<Decimal> ageRange = atenaSelectBatchParameter.getNenreiRange();
             Decimal startAge = ageRange.getFrom();
@@ -831,7 +983,11 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(出力条件表_右丸括弧));
             }
         }
+    }
 
+    private void set出力条件表_生年月日(AtenaSelectBatchParameter atenaSelectBatchParameter,
+            NenreiSoChushutsuHoho nenreiSoChushutsuHoho,
+            List<RString> list) {
         if (生年月日.equals(nenreiSoChushutsuHoho.get名称())) {
             Range<RDate> seinengappiRange = atenaSelectBatchParameter.getSeinengappiRange();
             RDate startSeinengappiRange = seinengappiRange.getFrom();
@@ -857,7 +1013,9 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                         .concat(endSeinengappiRange.toDateString()));
             }
         }
-        //
+    }
+
+    private void set出力条件表_地区選択(AtenaSelectBatchParameter atenaSelectBatchParameter, List<RString> list) {
         if (atenaSelectBatchParameter.getChiku_Kubun() != null) {
             if (全て.equals(atenaSelectBatchParameter.getChiku_Kubun().get名称())) {
                 list.add(出力条件表_住所.concat(edit地区選択(atenaSelectBatchParameter.getJusho_From(), atenaSelectBatchParameter.getJusho_To())));
@@ -867,7 +1025,6 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
                 list.add(出力条件表_地区３.concat(edit地区選択(atenaSelectBatchParameter.getChiku3_From(), atenaSelectBatchParameter.getChiku3_To())));
             }
         }
-        return list;
     }
 
     private RString edit地区選択(RString from, RString to) {
