@@ -51,7 +51,6 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoFlow extends BatchFlowBase<Iraish
 
     @Override
     protected void defineFlow() {
-        executeStep(SHUJIIIKENSHOSEIKYUICHIRAN);
         if (getParameter().isIkenshoSakuseiirai()) {
             executeStep(IKENSHOSAKUSEIIRAIICHIRANHYO);
         }
