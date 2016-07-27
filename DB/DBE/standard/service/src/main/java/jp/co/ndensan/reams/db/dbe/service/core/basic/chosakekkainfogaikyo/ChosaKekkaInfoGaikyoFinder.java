@@ -114,7 +114,7 @@ public class ChosaKekkaInfoGaikyoFinder {
      * @return イメージ共有ファイルID検索条件
      */
     @Transaction
-    public Image DbT5115Image(ChosaKekkaInfoGaikyoParameter イメージ共有ファイルID検索条件) {
+    public Image get5115Image(ChosaKekkaInfoGaikyoParameter イメージ共有ファイルID検索条件) {
         IChosaKekkaInfoGaikyoMapper mapper = mapperProvider.create(IChosaKekkaInfoGaikyoMapper.class);
         DbT5115ImageEntity ninteiEntity = mapper.getChosaKekkaInfoGaikyoList4(イメージ共有ファイルID検索条件);
         return new Image(ninteiEntity);

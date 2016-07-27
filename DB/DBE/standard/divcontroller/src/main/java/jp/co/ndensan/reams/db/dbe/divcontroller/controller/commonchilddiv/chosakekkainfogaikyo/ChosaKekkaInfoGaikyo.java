@@ -51,7 +51,7 @@ public class ChosaKekkaInfoGaikyo {
                 = ChosaKekkaInfoGaikyoFinder.createInstance().getRembanServiceJokyo(gaikyoParameter).records();
         List<NinteichosahyoShisetsuRiyo> shisetsuRiyos
                 = ChosaKekkaInfoGaikyoFinder.createInstance().get5210NinteichosahyoShisetsu(gaikyoParameter).records();
-        Image image = ChosaKekkaInfoGaikyoFinder.createInstance().DbT5115Image(gaikyoParameter);
+        Image image = ChosaKekkaInfoGaikyoFinder.createInstance().get5115Image(gaikyoParameter);
         RString path = 共有ファイルを引き出す(image);
         getHandler(div).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, path);
         return createResponse(div);

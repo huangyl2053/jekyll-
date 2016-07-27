@@ -328,7 +328,10 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(今回情報.get受給申請事由()));
         } catch (IllegalArgumentException e) {
         }
-        介護認定申請基本情報入力Div.setTxtShinseiJokyo(今回情報.get申請状況区分());
+        try {
+            介護認定申請基本情報入力Div.setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(今回情報.get申請状況区分()).get名称());
+        } catch (IllegalArgumentException e) {
+        }
         介護認定申請基本情報入力Div.setKyuSochisha(今回情報.get旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         介護認定申請基本情報入力Div.setChkShikakuShutokuMae(今回情報.get資格取得前申請フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());

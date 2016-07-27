@@ -5,24 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.tokkia4;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.Tokkijiko2A4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkia4.TokkiText2A4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 事務局用特記事項のBuilderクラスです。
+ * 特記事項2枚目以降（A4版）のBuilderクラスです。
  *
- * @reamsid_L DBE-0150-060 wangrenze
+ * @reamsid_L DBE-0150-350 wangrenze
  */
-class Tokkijiko2A4Builder implements ITokkijiko2A4Builder {
+class TokkiText2A4Builder implements ITokkiText2A4Builder {
 
-    private final ITokkijiko2A4Editor editor;
+    private final ITokkiText2A4Editor editor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param editor {@link ITokkijiko2A4Editor}
+     * @param editor {@link ITokkiText2A4Editor}
      */
-    public Tokkijiko2A4Builder(ITokkijiko2A4Editor editor) {
+    public TokkiText2A4Builder(ITokkiText2A4Editor editor) {
         this.editor = editor;
     }
 
@@ -32,8 +32,8 @@ class Tokkijiko2A4Builder implements ITokkijiko2A4Builder {
      * @return {@link TokkiText1A4ReportSource}
      */
     @Override
-    public Tokkijiko2A4ReportSource build() {
-        return ReportEditorJoiner.from(new Tokkijiko2A4ReportSource()).join(editor).buildSource();
+    public TokkiText2A4ReportSource build() {
+        return ReportEditorJoiner.from(new TokkiText2A4ReportSource()).join(editor).buildSource();
     }
 
 }

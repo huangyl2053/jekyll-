@@ -29,7 +29,7 @@ public class TokkiText1A4Entity {
     private RString 概況特記テキスト_イメージ区分;
     private RString 概況調査の特記事項テキスト;
     private RString 概況調査の特記事項イメージ;
-    private RString 委員用その他資料フラグ;
+    private boolean is委員用;
     private RString tokkiImg1;
     private RString tokkiImg2;
     private RString tokkiImg3;
