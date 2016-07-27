@@ -48,12 +48,12 @@ public class TokubetsuChoshuKaishiPrintService {
      *
      * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
      * @param 賦課年度 FlexibleYear
-     * @param 出力順ID long
+     * @param 出力順ID RString
      * @param 帳票作成日時 RDateTime
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度,
-            long 出力順ID, RDateTime 帳票作成日時) {
+            RString 出力順ID, RDateTime 帳票作成日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print(編集後本算定通知書共通情報, 賦課年度, 出力順ID, 帳票作成日時, reportManager);
@@ -67,14 +67,17 @@ public class TokubetsuChoshuKaishiPrintService {
      *
      * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
      * @param 賦課年度 FlexibleYear
-     * @param 出力順ID long
+     * @param 出力順ID RString
      * @param 帳票作成日時 RDateTime
      * @param reportManager ReportManager
      */
-    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度, long 出力順ID,
+    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度, RString 出力順ID,
             RDateTime 帳票作成日時, ReportManager reportManager) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書本算定_帳票分類ID, 出力順ID);
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書本算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         TokubetsuChoshuKaishiProperty property = new TokubetsuChoshuKaishiProperty(並び順);
         try (ReportAssembler<TokubetsuChoshuKaishiSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter

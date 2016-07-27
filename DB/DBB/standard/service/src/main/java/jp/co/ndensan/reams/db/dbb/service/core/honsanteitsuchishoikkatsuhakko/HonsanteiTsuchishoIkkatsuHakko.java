@@ -398,7 +398,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
 
         publish特別徴収開始通知書発行一覧表(result.get調定年度(), result.get帳票作成日時(), 編集後本算定通知書共通情報List);
         new TokubetsuChoshuKaishiPrintService().printSingle(編集後本算定通知書共通情報List,
-                result.get調定年度(), Long.parseLong(result.get出力順ID().toString()), result.get帳票作成日時());
+                result.get調定年度(), result.get出力順ID(), result.get帳票作成日時());
         loadバッチ出力条件リスト(result.get出力条件リスト(), result.get帳票ID(), new RString(総ページ数),
                 CSV出力有無_あり, CSVファイル名_一覧表, result.get帳票名());
     }
