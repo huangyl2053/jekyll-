@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5）_新様式のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-5）_新様式のEditorです。
  *
  * @reamsid_L DBU-5540-050 dangjingjing
  */
