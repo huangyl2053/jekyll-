@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055KogakuKyufuTaishoshaGokeiEntity> {
 
     private static final RString 被保険者番号_MSG = new RString("被保険者番号");
+    private static final RString サービス提供年月_MSG = new RString("サービス提供年月");
     @InjectSession
     private SqlSession session;
 
@@ -55,7 +56,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
             FlexibleYearMonth サービス提供年月,
             Decimal 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_MSG.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_MSG.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -82,7 +83,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_MSG.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -140,7 +141,8 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
      * @param 被保険者番号 被保険者番号
      * @return DbT3055KogakuKyufuTaishoshaGokeiEntity
      */
-    public List<DbT3055KogakuKyufuTaishoshaGokeiEntity> get高額介護サービス費給付対象者合計の最新データ(HihokenshaNo 被保険者番号) {
+    public List<DbT3055KogakuKyufuTaishoshaGokeiEntity> get高額介護サービス費給付対象者合計の最新データ(
+            HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_MSG.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -159,9 +161,10 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
      * @return List<DbT3055KogakuKyufuTaishoshaGokeiEntity>
      */
     @Transaction
-    public DbT3055KogakuKyufuTaishoshaGokeiEntity get高額介護サービス費給付対象者合計(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+    public DbT3055KogakuKyufuTaishoshaGokeiEntity get高額介護サービス費給付対象者合計(
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_MSG.toString()));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_MSG.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -181,8 +184,9 @@ public class DbT3055KogakuKyufuTaishoshaGokeiDac implements ISaveable<DbT3055Kog
      * @return List<DbT3055KogakuKyufuTaishoshaGokeiEntity>
      */
     @Transaction
-    public DbT3055KogakuKyufuTaishoshaGokeiEntity get高額介護サービス費給付対象者合計(FlexibleYearMonth サービス提供年月, RString 世帯集約番号) {
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+    public DbT3055KogakuKyufuTaishoshaGokeiEntity get高額介護サービス費給付対象者合計(
+            FlexibleYearMonth サービス提供年月, RString 世帯集約番号) {
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(サービス提供年月_MSG.toString()));
         requireNonNull(世帯集約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯集約番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
