@@ -323,4 +323,5 @@ public class TorokuData implements Serializable {
     private RString t5301_主治医医療機関コード;
     private RString t5301_主治医コード;
     private int t5301_主治医意見書作成依頼履歴番号;
+    private boolean t5101_施設入所の有無;
 }
