@@ -30,4 +30,18 @@ public class KarisanteiIdoKekkaBatchParameter extends BatchParameterBase {
     private RDateTime 普徴仮算定賦課処理日時;
     private RString 依頼金額計算区分;
 
+    private RString 帳票グループ;
+    private RString 普徴仮算定異動方法;
+    private RString 特徴_発行日;
+    private RString 仮算定額変更_発行日;
+    private RString 文書番号;
+    private RString 納入_出力期;
+    private RString 納入_出力方式;
+    private RString 納入_発行日;
+    private RString 納入_対象者;
+    private RString 納入_生活保護対象者;
+    private RString 納入_ページごとに山分け;
+    private RString 特徴仮算定賦課処理日時;
+    private boolean 一括発行起動フラグ;
+
 }

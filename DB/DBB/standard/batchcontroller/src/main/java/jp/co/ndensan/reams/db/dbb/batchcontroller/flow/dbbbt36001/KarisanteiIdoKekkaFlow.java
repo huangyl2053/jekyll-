@@ -1,5 +1,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt36001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaKozaIdoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuSoshitsuProcess;
@@ -17,7 +19,10 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoKaishis
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoTeishishaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TsuchishoBangoHatubanProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidokekka.KarisanteiIdoKekkaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidokekka.KarisanteiIdoKekkaResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -27,6 +32,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -44,6 +50,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final RString RSTELEVEN = new RString("11");
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString 仮算定異動通知書一括発行BATCHID = new RString("KarisanteiIdoTsuchishoIkkatsuHakkoFlow");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
@@ -63,6 +70,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final String 仮算定異動一括結果一覧表出力 = "spoolKariSanteiIdoKekkaIchiran";
     private static final String 異動賦課計算 = "idoFukaKeisan";
     private static final String 八月特徴開始 = "hatiGatuTokuchoKaishi";
+    private static final String 仮算定異動通知書一括発行 = "karisanteiIdoTsuchishoIkkatsuHakko";
 
     private KarisanteiIdoKekkaProcessParameter parameter;
 
@@ -103,6 +111,10 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
         executeStep(異動賦課計算);
         if (RSTONE.equals(依頼金計算処理区分)) {
             executeStep(八月特徴開始);
+        }
+
+        if (getParameter().is一括発行起動フラグ()) {
+            executeStep(仮算定異動通知書一括発行);
         }
     }
 
@@ -286,6 +298,48 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     @Step(八月特徴開始)
     protected IBatchFlowCommand hatiGatuTokuchoKaishi() {
         return simpleBatch(HatiGatuTokuchoKaishiProcess.class).arguments(parameter).define();
+    }
+
+    /**
+     * 仮算定異動通知書一括発行を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(仮算定異動通知書一括発行)
+    protected IBatchFlowCommand karisanteiIdoTsuchishoIkkatsuHakko() {
+        return otherBatchFlow(仮算定異動通知書一括発行BATCHID, SubGyomuCode.DBB介護賦課,
+                getKarisanteiIdoTsuchishoIkkatsuHakkoBatchParamter()).define();
+    }
+
+    private KarisanteiIdoFukaParameter getKarisanteiIdoTsuchishoIkkatsuHakkoBatchParamter() {
+        KarisanteiIdoFukaParameter param = new KarisanteiIdoFukaParameter();
+        param.set調定年度(getParameter().get調定年度().toDateString());
+        param.set賦課年度(getParameter().get賦課年度().toDateString());
+        param.set処理対象月(getParameter().get処理対象月());
+        param.set普徴仮算定異動方法(getParameter().get普徴仮算定異動方法());
+        param.set抽出開始日時(new RString(getParameter().get抽出開始日時().toString()));
+        param.set抽出終了日時(new RString(getParameter().get抽出終了日時().toString()));
+        param.set帳票グループ(getParameter().get帳票グループ());
+        List<TyouhyouEntity> 出力帳票一覧List = new ArrayList<>();
+        for (KarisanteiIdoKekkaResult result : getParameter().get出力帳票List()) {
+            出力帳票一覧List.add(new TyouhyouEntity(result.get帳票分類ID(), new ReportId(result.get帳票ID()), result.get出力順ID()));
+        }
+        param.set出力帳票一覧List(出力帳票一覧List);
+        param.set特徴_発行日(getParameter().get特徴_発行日());
+        param.set仮算定額変更_発行日(getParameter().get仮算定額変更_発行日());
+        param.set文書番号(getParameter().get文書番号());
+        param.set納入_出力期(getParameter().get納入_出力期());
+        param.set納入_出力方式(getParameter().get納入_出力方式());
+        param.set納入_発行日(getParameter().get納入_発行日());
+        param.set納入_対象者(getParameter().get納入_対象者());
+        param.set納入_生活保護対象者(getParameter().get納入_生活保護対象者());
+        param.set納入_ページごとに山分け(getParameter().get納入_ページごとに山分け());
+        param.set特徴仮算定賦課処理日時(getParameter().get特徴仮算定賦課処理日時());
+        param.set普徴仮算定賦課処理日時(new RString(getParameter().get普徴仮算定賦課処理日時().toString()));
+        param.set一括発行起動フラグ(getParameter().is一括発行起動フラグ());
+        param.set特徴捕捉対象者の依頼金額計算区分(getParameter().get依頼金額計算区分());
+
+        return param;
     }
 
     private SetaiShotokuKazeiHanteiBatchParameter getSetaiShotokuKazeiHanteiBatchParameter() {
