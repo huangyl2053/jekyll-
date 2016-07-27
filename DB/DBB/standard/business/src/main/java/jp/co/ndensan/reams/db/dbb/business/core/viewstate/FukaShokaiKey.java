@@ -24,7 +24,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n3317 塚田萌
  */
-public class FukaShokaiKey implements Serializable {
+public final class FukaShokaiKey implements Serializable {
+
+    public static final FukaShokaiKey EMPTY;
+
+    static {
+        EMPTY = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY, -1,
+                HihokenshaNo.EMPTY, FlexibleDate.MAX, RString.EMPTY, new YMDHMS("99991231235959"),
+                null, false, false, AtenaMeisho.EMPTY
+        );
+    }
 
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
@@ -189,6 +198,9 @@ public class FukaShokaiKey implements Serializable {
      * @return 指定の要素が全て存在する場合、{@code true}.以外、{@code false}
      */
     public boolean hasAll(Items e1, Items... any) {
+        if (this == EMPTY) {
+            return false;
+        }
         List<Items> items = new ArrayList<>();
         items.add(e1);
         items.addAll(Arrays.asList(any));

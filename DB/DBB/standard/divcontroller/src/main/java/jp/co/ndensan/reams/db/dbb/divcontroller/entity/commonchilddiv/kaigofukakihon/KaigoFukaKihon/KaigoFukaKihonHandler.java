@@ -69,7 +69,7 @@ public class KaigoFukaKihonHandler {
     public void load(KaigoFukaKihonSearchKey searchKey) {
         div.setMode(照会モード);
         if (searchKey.get賦課年度() == null || searchKey.get通知書番号() == null
-                || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
+            || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
             div.getBtnHihoRireki().setDisabled(true);
         } else {
             div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());

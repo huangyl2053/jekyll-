@@ -202,15 +202,19 @@ public class HihokenshaFinderHandler {
 
         int 開始年度 = 0;
         int 終了年度 = 0;
+        int firstIndex = 0;
         if (menu.is(FukaSearchMenuGroup.更正計算系)) {
             開始年度 = 調定年度;
             終了年度 = 遡及年度;
+            firstIndex = 0;
         } else if (menu.is(FukaSearchMenuGroup.所得照会系)) {
             開始年度 = 所得年度;
             終了年度 = 当初年度;
+            firstIndex = 0;
         } else if (menu.is(FukaSearchMenuGroup.照会系)) {
             開始年度 = 調定年度;
             終了年度 = 当初年度;
+            firstIndex = 1;
             ddlSourceList.add(new KeyValueDataSource(new RString("9999"), new RString("全年度")));
         }
         for (int i = 開始年度; i >= 終了年度; i--) {
@@ -218,6 +222,8 @@ public class HihokenshaFinderHandler {
             ddlSourceList.add(source);
         }
         div.getKaigoFinder().getDdlFukaNendo().setDataSource(ddlSourceList);
+        int size = ddlSourceList.size();
+        div.getKaigoFinder().getDdlFukaNendo().setSelectedIndex(firstIndex <= size - 1 ? firstIndex : 0);
     }
 
     /**
