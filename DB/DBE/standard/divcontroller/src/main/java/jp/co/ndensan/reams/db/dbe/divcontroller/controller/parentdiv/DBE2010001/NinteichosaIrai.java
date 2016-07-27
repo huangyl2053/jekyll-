@@ -352,8 +352,7 @@ public class NinteichosaIrai {
             if (vallidation.iterator().hasNext()) {
                 return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
             }
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                    new ShinseishoKanriNo(requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo()));
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
         }
