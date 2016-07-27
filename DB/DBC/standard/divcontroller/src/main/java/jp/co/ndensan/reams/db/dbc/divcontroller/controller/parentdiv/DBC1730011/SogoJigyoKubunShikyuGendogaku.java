@@ -146,7 +146,13 @@ public class SogoJigyoKubunShikyuGendogaku {
             List<SogoJigyoKubunEntity> 総合事業区分情報 = ViewStateHolder.get(ViewStateKeys.総合事業区分情報, List.class);
             SogoJigyoKubunShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoKubunShikyuGendoGakuManager.class);
             getHandler(div).save(総合事業区分情報, 保存モード, manager);
-            onLoad(div);
+            List<SogoJigyoKubunEntity> businessList = manager.get介護予防_日常生活支援総合事業区分支給限度額_適用開始日の降順一覧();
+            ViewStateHolder.put(ViewStateKeys.総合事業区分情報, (Serializable) businessList);
+            if (businessList.isEmpty()) {
+                div.getDgShikyuGendogaku().init();
+            } else {
+                getHandler(div).initialize(businessList);
+            }
         }
         return ResponseData.of(div).setState(DBC1730011StateName.初期表示);
     }
