@@ -56,8 +56,6 @@ public class HomonChosaItakuNyuryokuHandler {
     private static final RString 無効 = new RString("無効");
     private static final RString コンマ = new RString(",");
     private static final int 年月 = 6;
-    private static final RString 共通ボタン = new RString("btnHozonsuru");
-    private static final RString 戻るボタン = new RString("btnModoru");
 
     /**
      * コンストラクタです。
