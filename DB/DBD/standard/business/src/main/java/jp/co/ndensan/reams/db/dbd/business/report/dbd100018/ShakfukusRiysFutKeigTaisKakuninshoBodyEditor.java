@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,14 +31,11 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
 
     private final RString ホシ = new RString("＊");
     private final int INDEX_0 = 0;
-    private final int INDEX_1 = 1;
-    private final int INDEX_3 = 3;
+    private final int INDEX_2 = 2;
     private final int INDEX_4 = 4;
     private final int INDEX_5 = 5;
-    private final int INDEX_6 = 6;
     private final int INDEX_7 = 7;
     private final int INDEX_8 = 8;
-    private final int INDEX_9 = 9;
     private final int INDEX_10 = 10;
     private final RString 軽減率_100 = new RString("100");
 
@@ -62,10 +62,10 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
     }
 
     private ShakfukusRiysFutKeigTaisKakuninshoReportSource bodyEdit(ShakfukusRiysFutKeigTaisKakuninshoReportSource source) {
-        source.kofuGengo = item.get交付日().wareki().toDateString().substring(INDEX_0, INDEX_1);
-        source.kofuYYYY = item.get交付日().wareki().toDateString().substring(INDEX_1, INDEX_3);
-        source.kofuMM = item.get交付日().wareki().toDateString().substring(INDEX_4, INDEX_6);
-        source.kofuDD = item.get交付日().wareki().toDateString().substring(INDEX_7, INDEX_9);
+        source.kofuGengo = setWareki(item.get交付日()).substring(INDEX_0, INDEX_2);
+        source.kofuYYYY = setWareki(item.get交付日()).substring(INDEX_2, INDEX_4);
+        source.kofuMM = setWareki(item.get交付日()).substring(INDEX_5, INDEX_7);
+        source.kofuDD = setWareki(item.get交付日()).substring(INDEX_8, INDEX_10);
         source.kakuninNo = item.get社会福祉法人等利用者負担軽減().get確認番号();
 
         EditedKojin 編集後個人 = getEditedKojin(item.getIKojin(), item.get帳票制御共通(), item.get地方公共団体());
@@ -73,17 +73,17 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
         source.hihokenshaNameKana = new RString(編集後個人.get名称().getKana().toString());
         source.hihokenshaName = new RString(編集後個人.get名称().getName().toString());
 
-        RString 元号 = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_0, INDEX_1);
+        RString 元号 = setWareki(item.getIKojin().get生年月日().toFlexibleDate().toRDate()).substring(INDEX_0, INDEX_2);
         if (item.getIKojin().is日本人()) {
-            if (new RString("明").equals(元号)) {
+            if (new RString("明治").equals(元号)) {
                 source.birthGengoMeiji = RString.EMPTY;
                 source.birthGengoTaisho = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("大").equals(元号)) {
+            } else if (new RString("大正").equals(元号)) {
                 source.birthGengoTaisho = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoShowa = ホシ;
-            } else if (new RString("昭").equals(元号)) {
+            } else if (new RString("昭和").equals(元号)) {
                 source.birthGengoShowa = RString.EMPTY;
                 source.birthGengoMeiji = ホシ;
                 source.birthGengoTaisho = ホシ;
@@ -92,9 +92,9 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
                 source.birthGengoTaisho = ホシ;
                 source.birthGengoShowa = ホシ;
             }
-            source.birthYYYY = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_1, INDEX_3);
-            source.birthMM = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_4, INDEX_6);
-            source.birthDD = item.getIKojin().get生年月日().toFlexibleDate().wareki().toDateString().substring(INDEX_7, INDEX_9);
+            source.birthYYYY = setWareki(item.getIKojin().get生年月日().toFlexibleDate().toRDate()).substring(INDEX_2, INDEX_4);
+            source.birthMM = setWareki(item.getIKojin().get生年月日().toFlexibleDate().toRDate()).substring(INDEX_5, INDEX_7);
+            source.birthDD = setWareki(item.getIKojin().get生年月日().toFlexibleDate().toRDate()).substring(INDEX_8, INDEX_10);
         } else {
             source.birthGengoMeiji = ホシ;
             source.birthGengoTaisho = ホシ;
@@ -113,14 +113,14 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
             source.woman = RString.EMPTY;
         }
 
-        source.tekiyoGengo = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
-        source.tekiyoYYYY = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
-        source.tekiyoMM = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
-        source.tekiyoDD = item.get社会福祉法人等利用者負担軽減().get適用開始年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
-        source.yukoGengo = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(INDEX_0, INDEX_1);
-        source.yukoYYYY = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(INDEX_1, INDEX_3);
-        source.yukoMM = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(INDEX_4, INDEX_6);
-        source.yukoDD = item.get社会福祉法人等利用者負担軽減().get適用終了年月日().wareki().toDateString().substring(INDEX_7, INDEX_9);
+        source.tekiyoGengo = setWareki(item.get社会福祉法人等利用者負担軽減().get適用開始年月日().toRDate()).substring(INDEX_0, INDEX_2);
+        source.tekiyoYYYY = setWareki(item.get社会福祉法人等利用者負担軽減().get適用開始年月日().toRDate()).substring(INDEX_2, INDEX_4);
+        source.tekiyoMM = setWareki(item.get社会福祉法人等利用者負担軽減().get適用開始年月日().toRDate()).substring(INDEX_5, INDEX_7);
+        source.tekiyoDD = setWareki(item.get社会福祉法人等利用者負担軽減().get適用開始年月日().toRDate()).substring(INDEX_8, INDEX_10);
+        source.yukoGengo = setWareki(item.get社会福祉法人等利用者負担軽減().get適用終了年月日().toRDate()).substring(INDEX_0, INDEX_2);
+        source.yukoYYYY = setWareki(item.get社会福祉法人等利用者負担軽減().get適用終了年月日().toRDate()).substring(INDEX_2, INDEX_4);
+        source.yukoMM = setWareki(item.get社会福祉法人等利用者負担軽減().get適用終了年月日().toRDate()).substring(INDEX_5, INDEX_7);
+        source.yukoDD = setWareki(item.get社会福祉法人等利用者負担軽減().get適用終了年月日().toRDate()).substring(INDEX_8, INDEX_10);
 
         source.keigenRitsu1 = RString.EMPTY;
         source.keigenRitsu2 = RString.EMPTY;
@@ -214,5 +214,9 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
 
     private static EditedKojin getEditedKojin(IKojin kojin, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体) {
         return new EditedKojin(kojin, 帳票制御共通, 地方公共団体);
+    }
+
+    private RString setWareki(RDate 日付) {
+        return 日付.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
     }
 }

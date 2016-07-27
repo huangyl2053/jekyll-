@@ -11,17 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteiidou.KeisanjohoAtenaKozaKouseizengoEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanIdoHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.KarisanteiIdoKekkaIchiranCSVEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuShutokuTempEntity;
@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -48,6 +49,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -72,7 +76,6 @@ public class KariSanteiIdoFukaBatchFath {
 
     private static final RString RSTRING_0 = new RString("0");
     private static final RString RSTRING_1 = new RString("1");
-    private static final RString RSTRING_2 = new RString("2");
     private static final RString 定数_普徴方法 = new RString("get普徴期別金額");
     private static final RString ZERO = new RString("0000");
     private static final RString MONTHDATE = new RString("0401");
@@ -83,10 +86,9 @@ public class KariSanteiIdoFukaBatchFath {
     private static final RString 併用徴収 = new RString("併用徴収");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
-    private static final RString 特別徴収停止事由コード_T1 = new RString("T1");
-    private static final RString 特別徴収停止事由コード_T2 = new RString("T2");
-    private static final RString 特別徴収停止事由コード_T4 = new RString("T4");
-    private static final RString 特別徴収停止事由コード_T6 = new RString("T6");
+    private static final RString 西暦 = new RString("西暦");
+    private static final RString LEFTBRACKET = new RString("（");
+    private static final RString RIGHTBRACKET = new RString("）");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -104,13 +106,15 @@ public class KariSanteiIdoFukaBatchFath {
      *
      * @param 資格喪失月 int
      * @param 賦課の情報_設定後 FukaJoho
+     * @param kibetsu Kibetsu
+     * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set特徴期別金額(int 資格喪失月, FukaJoho 賦課の情報_設定後) {
+    public void set特徴期別金額(int 資格喪失月, FukaJoho 賦課の情報_設定後, Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity) {
         Decimal 特徴期別金額01 = 賦課の情報_設定後.get特徴期別金額01() != null ? 賦課の情報_設定後.get特徴期別金額01() : Decimal.ZERO;
         Decimal 特徴期別金額02 = 賦課の情報_設定後.get特徴期別金額02() != null ? 賦課の情報_設定後.get特徴期別金額02() : Decimal.ZERO;
         Decimal 特徴期別金額03 = 賦課の情報_設定後.get特徴期別金額03() != null ? 賦課の情報_設定後.get特徴期別金額03() : Decimal.ZERO;
         Decimal 特徴期別金額合計 = 特徴期別金額01.add(特徴期別金額02).add(特徴期別金額03);
-        if (0 == 特徴期別金額合計.doubleValue()) {
+        if (Decimal.ZERO.compareTo(特徴期別金額合計) == 0) {
             return;
         }
         TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
@@ -118,40 +122,47 @@ public class KariSanteiIdoFukaBatchFath {
         Kitsuki 期 = 月期対応取得_特徴.get期月リスト().get月の期(月);
         if (資格喪失月 % 2 == 0 && ShikakuSoshitsuJiyu.死亡.getコード().equals(賦課の情報_設定後.get資格喪失事由())) {
             if (賦課の情報_設定後.get資格喪失日().getDayValue() < NUM_15) {
-                set特徴金額(期.get期AsInt(), 賦課の情報_設定後);
+                set特徴金額(期.get期AsInt(), kibetsu, 介護期別RelateEntity);
             } else {
                 int 資格喪失月の属する翌期 = 期.get期AsInt() + 1;
-                set特徴金額(資格喪失月の属する翌期, 賦課の情報_設定後);
+                set特徴金額(資格喪失月の属する翌期, kibetsu, 介護期別RelateEntity);
             }
         } else if (資格喪失月 % 2 == 0 && !ShikakuSoshitsuJiyu.死亡.getコード().equals(賦課の情報_設定後.get資格喪失事由())) {
             int 資格喪失月の属する翌期 = 期.get期AsInt() + 1;
-            set特徴金額(資格喪失月の属する翌期, 賦課の情報_設定後);
+            set特徴金額(資格喪失月の属する翌期, kibetsu, 介護期別RelateEntity);
         } else if (資格喪失月 % 2 == 1) {
             int 資格喪失月の属する翌期 = 期.get期AsInt() + 1;
-            set特徴金額(資格喪失月の属する翌期, 賦課の情報_設定後);
+            set特徴金額(資格喪失月の属する翌期, kibetsu, 介護期別RelateEntity);
         }
-
     }
 
     /**
      * set特徴金額
      *
      * @param 期 int
-     * @param 賦課の情報_設定後 FukaJoho
+     * @param kibetsu Kibetsu
+     * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set特徴金額(int 期, FukaJoho 賦課の情報_設定後) {
+    public void set特徴金額(int 期, Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity) {
         switch (期) {
             case NUM_1:
-                set期別金額(賦課の情報_設定後, NUM_1, ChoshuHohoKibetsu.特別徴収.getコード());
-                set期別金額(賦課の情報_設定後, NUM_2, ChoshuHohoKibetsu.特別徴収.getコード());
-                set期別金額(賦課の情報_設定後, NUM_3, ChoshuHohoKibetsu.特別徴収.getコード());
+                for (int i = NUM_1; i <= NUM_3; i++) {
+                    if (i == kibetsu.get期() && ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
+                        set期別金額(kibetsu, 介護期別RelateEntity);
+                    }
+                }
                 break;
             case NUM_2:
-                set期別金額(賦課の情報_設定後, NUM_2, ChoshuHohoKibetsu.特別徴収.getコード());
-                set期別金額(賦課の情報_設定後, NUM_3, ChoshuHohoKibetsu.特別徴収.getコード());
+                for (int i = NUM_2; i <= NUM_3; i++) {
+                    if (i == kibetsu.get期() && ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
+                        set期別金額(kibetsu, 介護期別RelateEntity);
+                    }
+                }
                 break;
             case NUM_3:
-                set期別金額(賦課の情報_設定後, NUM_3, ChoshuHohoKibetsu.特別徴収.getコード());
+                if (NUM_3 == kibetsu.get期() && ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
+                    set期別金額(kibetsu, 介護期別RelateEntity);
+                }
                 break;
             default:
                 break;
@@ -164,8 +175,10 @@ public class KariSanteiIdoFukaBatchFath {
      * @param 賦課の情報_設定後 FukaJoho
      * @param 普徴仮算定の最終期 int
      * @param 資格喪失月 int
+     * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set普徴期別金額(FukaJoho 賦課の情報_設定後, int 普徴仮算定の最終期, int 資格喪失月) {
+    public void set普徴期別金額(FukaJoho 賦課の情報_設定後, int 普徴仮算定の最終期, int 資格喪失月,
+            List<KibetsuEntity> 介護期別RelateEntity) {
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報_設定後, NUM_1, 普徴仮算定の最終期);
         if (Decimal.ZERO.equals(普徴期別金額合計)) {
             return;
@@ -173,19 +186,24 @@ public class KariSanteiIdoFukaBatchFath {
         RString 仮算定異動方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動方法,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
-        if (RSTRING_1.equals(仮算定異動方法)) {
-            if (資格喪失月 == NUM_4) {
-                Tsuki 月 = Tsuki.toValue(new RString(NUM_4).padZeroToLeft(2));
-                Kitsuki 期 = 月期対応取得_普徴.get期月リスト().get月の期(月);
-                for (int i = 期.get期AsInt(); i < 普徴仮算定の最終期 + 1; i++) {
-                    set期別金額(賦課の情報_設定後, 期.get期AsInt(), ChoshuHohoKibetsu.普通徴収.getコード());
-                }
+        if (ZanteiKeisanIdoHoho._4月喪失のみ0円にする.getコード().equals(仮算定異動方法) && 資格喪失月 == NUM_4) {
+            for (int i = 1; i < 普徴仮算定の最終期 + 1; i++) {
+                set普徴(賦課の情報_設定後, i, 介護期別RelateEntity);
             }
-        } else if (RSTRING_2.equals(仮算定異動方法)) {
+        } else if (ZanteiKeisanIdoHoho.喪失月以降0円にする.getコード().equals(仮算定異動方法)) {
             Tsuki 月 = Tsuki.toValue(new RString(資格喪失月).padZeroToLeft(2));
             Kitsuki 期 = 月期対応取得_普徴.get期月リスト().get月の期(月);
             for (int i = 期.get期AsInt(); i < 普徴仮算定の最終期 + 1; i++) {
-                set期別金額(賦課の情報_設定後, 期.get期AsInt(), ChoshuHohoKibetsu.普通徴収.getコード());
+                set普徴(賦課の情報_設定後, i, 介護期別RelateEntity);
+            }
+        }
+    }
+
+    private void set普徴(FukaJoho 賦課の情報_設定後, int index, List<KibetsuEntity> 介護期別RelateEntity) {
+        for (Kibetsu kibetsu : 賦課の情報_設定後.getKibetsuList()) {
+            if (index == kibetsu.get期() && ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
+                set期別金額(kibetsu, 介護期別RelateEntity);
+                break;
             }
         }
     }
@@ -193,76 +211,69 @@ public class KariSanteiIdoFukaBatchFath {
     /**
      * set期別金額
      *
-     * @param 賦課の情報_設定後 FukaJoho
-     * @param 期 int
-     * @param 徴収方法 RString
+     * @param kibetsu Kibetsu
+     * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set期別金額(FukaJoho 賦課の情報_設定後, int 期, RString 徴収方法) {
-        List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
-            if (kibetsu.get期() == 期 && 徴収方法.equals(kibetsu.get徴収方法())) {
-                List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
-                for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
-                    if (choteiKyotsu.get調定ID().equals(kibetsu.get調定ID().longValue())) {
-                        ChoteiKyotsuBuilder builder = choteiKyotsu.createBuilderForEdit();
-                        builder.set調定額(Decimal.ZERO).build();
-                        break;
-                    }
-                }
-                break;
-            }
+    public void set期別金額(Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity) {
+        if (kibetsu.getChoteiKyotsuList() != null && !kibetsu.getChoteiKyotsuList().isEmpty()) {
+            KibetsuEntity relateEntity = new KibetsuEntity();
+            relateEntity.set介護期別Entity(kibetsu.toEntity());
+            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
+            entity.setChoteigaku(Decimal.ZERO);
+            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
+            entityList.add(entity);
+            relateEntity.set調定共通Entity(entityList);
+            介護期別RelateEntity.add(relateEntity);
+        }
+    }
+
+    /**
+     * set期別金額
+     *
+     * @param kibetsu Kibetsu
+     * @param 介護期別RelateEntity List<KibetsuEntity>
+     * @param 期 int
+     * @param 金額 Decimal
+     */
+    public void set期別金額_8月特徴開始(Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity,
+            int 期, Decimal 金額) {
+        if (kibetsu.get期() == 期 && kibetsu.getChoteiKyotsuList() != null
+                && !kibetsu.getChoteiKyotsuList().isEmpty()) {
+            KibetsuEntity relateEntity = new KibetsuEntity();
+            relateEntity.set介護期別Entity(kibetsu.toEntity());
+            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
+            entity.setChoteigaku(金額);
+            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
+            entityList.add(entity);
+            relateEntity.set調定共通Entity(entityList);
+            介護期別RelateEntity.add(relateEntity);
         }
     }
 
     /**
      * 調定計算 set期別金額
      *
-     * @param 賦課の情報_設定後 FukaJoho
      * @param 期 int
      * @param 徴収方法 RString
      * @param 普徴期別金額リスト List<Decimal>
+     * @param kibetsu Kibetsu
      * @param index int
+     * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set期別金額_調定計算(FukaJoho 賦課の情報_設定後, int 期, RString 徴収方法,
-            List<Decimal> 普徴期別金額リスト, int index) {
-        List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
-            if (kibetsu.get期() == 期 && 徴収方法.equals(kibetsu.get徴収方法())) {
-                List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
-                for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
-                    if (choteiKyotsu.get調定ID().equals(kibetsu.get調定ID().longValue())) {
-                        ChoteiKyotsuBuilder builder = choteiKyotsu.createBuilderForEdit();
-                        builder.set調定額(普徴期別金額リスト.get(index)).build();
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-    }
-
-    /**
-     * set期別金額
-     *
-     * @param 賦課の情報_設定後 FukaJoho
-     * @param 期 int
-     * @param 徴収方法 RString
-     * @param 特徴期別金額 Decimal
-     */
-    public void set期別金額_8月特徴開始(FukaJoho 賦課の情報_設定後, int 期, RString 徴収方法, Decimal 特徴期別金額) {
-        List<Kibetsu> kibetsuList = 賦課の情報_設定後.getKibetsuList();
-        for (Kibetsu kibetsu : kibetsuList) {
-            if (kibetsu.get期() == 期 && 徴収方法.equals(kibetsu.get徴収方法())) {
-                List<ChoteiKyotsu> choteiKyotsuList = kibetsu.getChoteiKyotsuList();
-                for (ChoteiKyotsu choteiKyotsu : choteiKyotsuList) {
-                    if (choteiKyotsu.get調定ID().equals(kibetsu.get調定ID().longValue())) {
-                        ChoteiKyotsuBuilder builder = choteiKyotsu.createBuilderForEdit();
-                        builder.set調定額(特徴期別金額).build();
-                        break;
-                    }
-                }
-                break;
-            }
+    public void set期別金額_調定計算(int 期, RString 徴収方法,
+            List<Decimal> 普徴期別金額リスト, int index,
+            Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity) {
+        if (期 == kibetsu.get期() && 徴収方法.equals(kibetsu.get徴収方法())
+                && kibetsu.getChoteiKyotsuList() != null
+                && !kibetsu.getChoteiKyotsuList().isEmpty()) {
+            KibetsuEntity relateEntity = new KibetsuEntity();
+            relateEntity.set介護期別Entity(kibetsu.toEntity());
+            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
+            entity.setChoteigaku(普徴期別金額リスト.get(index));
+            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
+            entityList.add(entity);
+            relateEntity.set調定共通Entity(entityList);
+            介護期別RelateEntity.add(relateEntity);
         }
     }
 
@@ -279,55 +290,114 @@ public class KariSanteiIdoFukaBatchFath {
         RString 調定事由2 = RString.EMPTY;
         RString 調定事由3 = RString.EMPTY;
         RString 調定事由4 = RString.EMPTY;
-        if (特別徴収停止事由コード_T1.equals(徴収方法情報.get特別徴収停止事由コード())
-                || 特別徴収停止事由コード_T2.equals(徴収方法情報.get特別徴収停止事由コード())
-                || 特別徴収停止事由コード_T4.equals(徴収方法情報.get特別徴収停止事由コード())
-                || 特別徴収停止事由コード_T6.equals(徴収方法情報.get特別徴収停止事由コード())) {
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        boolean flag4 = false;
+        if (ChoteiJiyuCode.年金保険者からの通知.getコード().equals(徴収方法情報.get特別徴収停止事由コード())
+                || ChoteiJiyuCode.保険料額の減額変更.getコード().equals(徴収方法情報.get特別徴収停止事由コード())
+                || ChoteiJiyuCode.徴収方法修正.getコード().equals(徴収方法情報.get特別徴収停止事由コード())
+                || ChoteiJiyuCode.資格喪失特徴中止.getコード().equals(徴収方法情報.get特別徴収停止事由コード())) {
             調定事由1 = 徴収方法情報.get特別徴収停止事由コード();
-            調定事由2 = 徴収方法情報.get特別徴収停止事由コード();
-            調定事由3 = 徴収方法情報.get特別徴収停止事由コード();
-            調定事由4 = 徴収方法情報.get特別徴収停止事由コード();
-        } else if ((設定前賦課情報.get調定事由1() == null)
-                && (設定前賦課情報.get調定事由2() == null)
-                && (設定前賦課情報.get調定事由3() == null)
-                && (設定前賦課情報.get調定事由4() == null)) {
-            調定事由1 = ChoteiJiyuCode.その他資格異動.getコード();
-            調定事由2 = ChoteiJiyuCode.その他資格異動.getコード();
-            調定事由3 = ChoteiJiyuCode.その他資格異動.getコード();
-            調定事由4 = ChoteiJiyuCode.その他資格異動.getコード();
-        } else if (!設定前賦課情報.get資格取得日().equals(当初賦課情報.get資格取得日())
+            flag1 = true;
+        }
+        if (設定前賦課情報.get調定事由1().isNullOrEmpty()
+                && 設定前賦課情報.get調定事由2().isNullOrEmpty()
+                && 設定前賦課情報.get調定事由3().isNullOrEmpty()
+                && 設定前賦課情報.get調定事由4().isNullOrEmpty()) {
+            if (!flag1) {
+                調定事由1 = ChoteiJiyuCode.その他資格異動.getコード();
+                flag1 = true;
+            } else {
+                調定事由2 = ChoteiJiyuCode.その他資格異動.getコード();
+                flag2 = true;
+            }
+        }
+        if (!設定前賦課情報.get資格取得日().equals(当初賦課情報.get資格取得日())
                 || !設定前賦課情報.get資格取得事由().equals(当初賦課情報.get資格取得事由())
                 || !設定前賦課情報.get資格喪失日().equals(当初賦課情報.get資格喪失日())
                 || !設定前賦課情報.get資格喪失事由().equals(当初賦課情報.get資格喪失事由())) {
-            調定事由1 = ChoteiJiyuCode.資格異動による更正.getコード();
-            調定事由2 = ChoteiJiyuCode.資格異動による更正.getコード();
-            調定事由3 = ChoteiJiyuCode.資格異動による更正.getコード();
-            調定事由4 = ChoteiJiyuCode.資格異動による更正.getコード();
-        } else if (!設定前賦課情報.get老年開始日().equals(当初賦課情報.get老年開始日())
-                || !設定前賦課情報.get老年廃止日().equals(当初賦課情報.get老年廃止日())) {
-            調定事由1 = ChoteiJiyuCode.老齢年金による更正.getコード();
-            調定事由2 = ChoteiJiyuCode.老齢年金による更正.getコード();
-            調定事由3 = ChoteiJiyuCode.老齢年金による更正.getコード();
-            調定事由4 = ChoteiJiyuCode.老齢年金による更正.getコード();
-        } else if (!設定前賦課情報.get生保開始日().equals(当初賦課情報.get生保開始日())
-                || !設定前賦課情報.get生保廃止日().equals(当初賦課情報.get生保廃止日())) {
-            調定事由1 = ChoteiJiyuCode.生活保護による更正.getコード();
-            調定事由2 = ChoteiJiyuCode.生活保護による更正.getコード();
-            調定事由3 = ChoteiJiyuCode.生活保護による更正.getコード();
-            調定事由4 = ChoteiJiyuCode.生活保護による更正.getコード();
-        } else if (!設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
-            調定事由1 = ChoteiJiyuCode.減免決定による更正.getコード();
-            調定事由2 = ChoteiJiyuCode.減免決定による更正.getコード();
-            調定事由3 = ChoteiJiyuCode.減免決定による更正.getコード();
-            調定事由4 = ChoteiJiyuCode.減免決定による更正.getコード();
+            if (!flag1) {
+                調定事由1 = ChoteiJiyuCode.資格異動による更正.getコード();
+                flag1 = true;
+            } else if (!flag2) {
+                調定事由2 = ChoteiJiyuCode.資格異動による更正.getコード();
+                flag2 = true;
+            } else {
+                調定事由3 = ChoteiJiyuCode.資格異動による更正.getコード();
+                flag3 = true;
+            }
         }
-
+        List<RString> list = new ArrayList<>();
+        list.add(調定事由1);
+        list.add(調定事由2);
+        list.add(調定事由3);
+        list.add(調定事由4);
+        list = set調定事由(当初賦課情報, 設定前賦課情報, list,
+                flag1, flag2, flag3, flag4);
         FukaJohoBuilder builder = 設定前賦課情報.createBuilderForEdit();
-        builder.set調定事由1(調定事由1);
-        builder.set調定事由2(調定事由2);
-        builder.set調定事由3(調定事由3);
-        builder.set調定事由4(調定事由4);
+        builder.set調定事由1(list.get(NUM_0));
+        builder.set調定事由2(list.get(NUM_1));
+        builder.set調定事由3(list.get(NUM_2));
+        builder.set調定事由4(list.get(NUM_3));
         return builder.build();
+    }
+
+    private List<RString> set調定事由(FukaJoho 当初賦課情報, FukaJoho 設定前賦課情報,
+            List<RString> list,
+            boolean flag1,
+            boolean flag2,
+            boolean flag3,
+            boolean flag4) {
+        if (!設定前賦課情報.get老年開始日().equals(当初賦課情報.get老年開始日())
+                || !設定前賦課情報.get老年廃止日().equals(当初賦課情報.get老年廃止日())) {
+            if (!flag1) {
+                list.set(NUM_0, ChoteiJiyuCode.老齢年金による更正.getコード());
+                flag1 = true;
+            } else if (!flag2) {
+                list.set(NUM_1, ChoteiJiyuCode.老齢年金による更正.getコード());
+                flag2 = true;
+            } else if (!flag3) {
+                list.set(NUM_2, ChoteiJiyuCode.老齢年金による更正.getコード());
+                flag3 = true;
+            } else if (!flag4) {
+                list.set(NUM_3, ChoteiJiyuCode.老齢年金による更正.getコード());
+                flag4 = true;
+            }
+        }
+        if (!設定前賦課情報.get生保開始日().equals(当初賦課情報.get生保開始日())
+                || !設定前賦課情報.get生保廃止日().equals(当初賦課情報.get生保廃止日())) {
+            if (!flag1) {
+                list.set(NUM_0, ChoteiJiyuCode.生活保護による更正.getコード());
+                flag1 = true;
+            } else if (!flag2) {
+                list.set(NUM_1, ChoteiJiyuCode.生活保護による更正.getコード());
+                flag2 = true;
+            } else if (!flag3) {
+                list.set(NUM_2, ChoteiJiyuCode.生活保護による更正.getコード());
+                flag3 = true;
+            } else if (!flag4) {
+                list.set(NUM_3, ChoteiJiyuCode.生活保護による更正.getコード());
+                flag4 = true;
+            }
+
+        }
+        if (!設定前賦課情報.get減免額().equals(当初賦課情報.get減免額())) {
+            if (!flag1) {
+                list.set(NUM_0, ChoteiJiyuCode.減免決定による更正.getコード());
+                flag1 = true;
+            } else if (!flag2) {
+                list.set(NUM_1, ChoteiJiyuCode.減免決定による更正.getコード());
+                flag2 = true;
+            } else if (!flag3) {
+                list.set(NUM_2, ChoteiJiyuCode.減免決定による更正.getコード());
+                flag3 = true;
+            } else if (!flag4) {
+                list.set(NUM_3, ChoteiJiyuCode.減免決定による更正.getコード());
+                flag4 = true;
+            }
+        }
+        return list;
     }
 
     /**
@@ -404,11 +474,11 @@ public class KariSanteiIdoFukaBatchFath {
 
         Decimal 普徴期別金額合計 = get普徴期別金額合計(賦課の情報_設定後, NUM_1, NUM_14);
 
-        if (0 < 普徴期別金額合計.doubleValue() && resultEntity.get口座Entity() != null) {
+        if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && resultEntity.get口座Entity() != null) {
             return KozaKubun.口座振替.getコード();
-        } else if (0 < 普徴期別金額合計.doubleValue() && resultEntity.get口座Entity() == null) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == -1 && resultEntity.get口座Entity() == null) {
             return KozaKubun.現金納付.getコード();
-        } else if (普徴期別金額合計.doubleValue() == 0) {
+        } else if (Decimal.ZERO.compareTo(普徴期別金額合計) == 0) {
             return KozaKubun.現金納付.getコード();
         }
         return RString.EMPTY;
@@ -469,11 +539,11 @@ public class KariSanteiIdoFukaBatchFath {
      * @return 賦課市町村コード
      */
     public LasdecCode get賦課市町村コード(HihokenshaDaicho 資格喪失情報) {
-        if (資格喪失情報.get旧市町村コード() != null) {
+        if (資格喪失情報.get旧市町村コード() != null && !資格喪失情報.get旧市町村コード().isEmpty()) {
             return 資格喪失情報.get旧市町村コード();
-        } else if (資格喪失情報.get広住特措置元市町村コード() != null) {
+        } else if (資格喪失情報.get広住特措置元市町村コード() != null && !資格喪失情報.get広住特措置元市町村コード().isEmpty()) {
             return 資格喪失情報.get広住特措置元市町村コード();
-        } else if (資格喪失情報.get市町村コード() != null) {
+        } else if (資格喪失情報.get市町村コード() != null && !資格喪失情報.get市町村コード().isEmpty()) {
             return 資格喪失情報.get市町村コード();
         }
         return null;
@@ -522,7 +592,7 @@ public class KariSanteiIdoFukaBatchFath {
         KarisanteiIdoKekkaIchiranCSVEntity entity = new KarisanteiIdoKekkaIchiranCSVEntity();
         entity.set作成年月日(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
         entity.set作成時刻(調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-        entity.set賦課年度(賦課年度.seireki().toDateString());
+        entity.set賦課年度(西暦.concat(LEFTBRACKET).concat(賦課年度.seireki().toDateString()).concat(RIGHTBRACKET));
         entity.set通知書番号(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get通知書番号().value());
         AtenaMeisho atenaMeisho = 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity().getKanjiShimei();
         if (atenaMeisho != null) {
@@ -532,7 +602,9 @@ public class KariSanteiIdoFukaBatchFath {
                 && 更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity() != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(更正前後Entity.get計算後情報_宛名_口座_更正前Entity().get宛名Entity());
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200013.getReportId());
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
+            IAssociationFinder finder = AssociationFinderFactory.createInstance();
+            Association association = finder.getAssociation();
+            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, association);
             entity.set住所(編集後個人.get編集後住所());
             entity.set町域管内管外住所(編集後個人.get町域());
             entity.set番地(編集後個人.get番地().value());

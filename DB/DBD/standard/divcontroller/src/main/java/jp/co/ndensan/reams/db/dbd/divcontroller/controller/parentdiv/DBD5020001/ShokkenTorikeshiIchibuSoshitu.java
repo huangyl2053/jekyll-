@@ -216,7 +216,16 @@ public class ShokkenTorikeshiIchibuSoshitu {
      * @return ResponseData<ShokkenTorikeshiIchibuSoshituDiv>
      */
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onClick_btnBack(ShokkenTorikeshiIchibuSoshituDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBD5020001TransitionEventName.一覧へ戻る).respond();
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBD5020001TransitionEventName.一覧へ戻る).respond();
+        }
+
+        return ResponseData.of(div).respond();
     }
 
     /**

@@ -27,6 +27,8 @@ public class JigyohokokuCompYoshiki300103Editor implements IJigyohokokuCompYoshi
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 月報 = new RString("1");
+    private static final RString 年報 = new RString("2");
     private final JigyohokokuCompYoshiki300103Data item;
 
     /**
@@ -58,7 +60,11 @@ public class JigyohokokuCompYoshiki300103Editor implements IJigyohokokuCompYoshi
         printTimeStampSb.append(DATE_秒);
         source.printTimeStamp = printTimeStampSb.toRString();
         source.yoshiki = item.get様式();
-        source.shukeiKubun = item.get年報月報区分();
+        if (月報.equals(item.get年報月報区分())) {
+            source.shukeiKubun = new RString("月報");
+        } else if (年報.equals(item.get年報月報区分())) {
+            source.shukeiKubun = new RString("年報");
+        }
         source.shuukeiHani = get集計範囲();
         source.hokenshaNo = item.get保険者番号();
         source.hokenshaName = item.get保険者名();

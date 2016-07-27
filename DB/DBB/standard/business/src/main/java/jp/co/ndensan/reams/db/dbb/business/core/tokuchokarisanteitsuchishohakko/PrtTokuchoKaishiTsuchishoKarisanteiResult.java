@@ -27,7 +27,7 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiResult {
     private List<TsuchishoDataTempResult> 特徴開始通知書ResultList;
     private FlexibleYear 調定年度;
     private YMDHMS 帳票作成日時;
-    private Long 出力順ID;
+    private RString 出力順ID;
     private FlexibleDate 発行日;
     private List<RString> 出力条件リスト;
     private ReportId 帳票ID;

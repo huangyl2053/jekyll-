@@ -98,7 +98,7 @@ public class TokubetsuChoshuMidoteiIchiranOutputProcess extends SimpleBatchProce
         outputTyouhyou(list);
         if (!list.isEmpty()) {
             pageSize = new RString(String.valueOf(
-                    Math.ceil(list.size() % NUM_EIGHTEEN == 0 ? (list.size() / NUM_EIGHTEEN) : (list.size() / NUM_EIGHTEEN) + 1)));
+                    list.size() % NUM_EIGHTEEN == 0 ? (list.size() / NUM_EIGHTEEN) : (list.size() / NUM_EIGHTEEN) + 1));
         }
     }
 

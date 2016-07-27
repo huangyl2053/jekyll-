@@ -51,6 +51,8 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     private RString rirekiNo;
     @JsonProperty("tainoHanteiKekka")
     private RString tainoHanteiKekka;
+    @JsonProperty("shinkiKubun")
+    private RString shinkiKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -308,6 +310,24 @@ public class ShokanBaraiKa1GoDiv extends Panel implements IShokanBaraiKa1GoDiv {
     @JsonProperty("tainoHanteiKekka")
     public void setTainoHanteiKekka(RString tainoHanteiKekka) {
         this.tainoHanteiKekka = tainoHanteiKekka;
+    }
+
+    /*
+     * getshinkiKubun
+     * @return shinkiKubun
+     */
+    @JsonProperty("shinkiKubun")
+    public RString getShinkiKubun() {
+        return shinkiKubun;
+    }
+
+    /*
+     * setshinkiKubun
+     * @param shinkiKubun shinkiKubun
+     */
+    @JsonProperty("shinkiKubun")
+    public void setShinkiKubun(RString shinkiKubun) {
+        this.shinkiKubun = shinkiKubun;
     }
 
     /*

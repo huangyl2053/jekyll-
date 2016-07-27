@@ -37,13 +37,11 @@ public class ShokanBaraiKa1GoValidationHandler {
      *
      * @param pairs バリデーションコントロール
      * @param div ShokanBaraiKa1GoDiv
-     * @param shinkiKubun 新規区分
      * @param shiharaiHohoHenko 支払方法変更管理業務概念
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div,
-            RString shinkiKubun, ShiharaiHohoHenko shiharaiHohoHenko) {
-        if (shinkiKubun.equals(新規登録)) {
+    public ValidationMessageControlPairs validateFor滞納状況情報(ValidationMessageControlPairs pairs, ShokanBaraiKa1GoDiv div, ShiharaiHohoHenko shiharaiHohoHenko) {
+        if (div.getShinkiKubun().equals(新規登録)) {
             if ((div.getKey_Button().equals(_１号予告者登録) || div.getKey_Button().equals(償還払い化登録))
                     && div.getTainoHanteiKekka().isEmpty()) {
                 pairs.add(new ValidationMessageControlPair(ShokanBaraiKa1GoMessages.支払方法変更_要滞納状況確定));

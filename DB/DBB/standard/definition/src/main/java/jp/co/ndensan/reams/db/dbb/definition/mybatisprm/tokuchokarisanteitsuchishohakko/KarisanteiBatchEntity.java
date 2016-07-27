@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko;
 
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,9 +20,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KarisanteiBatchEntity {
+public class KarisanteiBatchEntity extends TokuchoKaishiTsuchishoBatchParameter {
 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
-    private Long 出力順ID;
+    private RString 出力順ID;
 }

@@ -24,8 +24,11 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -69,82 +72,83 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
     private static final RString 集計番号_0206 = new RString("0206");
     private static final RString ア_件数 = new RString("ア　件数");
     private static final RString イ_件数 = new RString("イ　給付費");
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 食費_介護療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_滞在費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 居住_療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 総計Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_滞在費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 給付費_総計Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_滞在費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_総計Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_滞在費Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_介護老人福祉施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_介護老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_介護療養型医療施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_地域密着型介護老人福祉Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_短期入所生活介護Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_老人保健施設Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_療養型医療施設等Entity;
-    private JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_総計Entity;
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 食費_介護療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_滞在費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 居住_療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_食費_介護療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_滞在費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_居住_療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 給付費_総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_食費_介護療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_滞在費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_居住_療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_食費_介護療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_滞在費Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_介護老人福祉施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_介護老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_介護療養型医療施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_地域密着型介護老人福祉Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_短期入所生活介護Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private RString csvFileName;
     private RDate 基準日;
     private JigyoHokokuRenkeiProcessParameter processParameter;
+    private final JigyoHokokuRenkei24or26EucCsvEntity eucCsvEntity = new JigyoHokokuRenkei24or26EucCsvEntity();
 
     @Override
     protected void initialize() {
         csvFileName = new RString("DUJRENF12_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
     }
 
     @BatchWriter
@@ -186,7 +190,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
 
     private void get様式２の５_様式２の６のCSV出力() {
         eucCsvWriter.writeLine(setヘッダレコード(ア_件数, イ_件数));
-        eucCsvWriter.writeLine(null);
+        eucCsvWriter.writeLine(eucCsvEntity);
         eucCsvWriter.writeLine(食費Entity);
         eucCsvWriter.writeLine(食費_介護老人福祉施設Entity);
         eucCsvWriter.writeLine(食費_介護老人保健施設Entity);
@@ -204,7 +208,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
         eucCsvWriter.writeLine(居住_老人保健施設Entity);
         eucCsvWriter.writeLine(居住_療養型医療施設等Entity);
         eucCsvWriter.writeLine(総計Entity);
-        eucCsvWriter.writeLine(null);
+        eucCsvWriter.writeLine(eucCsvEntity);
         eucCsvWriter.writeLine(給付費_食費Entity);
         eucCsvWriter.writeLine(給付費_食費_介護老人福祉施設Entity);
         eucCsvWriter.writeLine(給付費_食費_介護老人保健施設Entity);
@@ -223,7 +227,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
         eucCsvWriter.writeLine(給付費_居住_療養型医療施設等Entity);
         eucCsvWriter.writeLine(給付費_総計Entity);
         eucCsvWriter.writeLine(setヘッダレコード(ア_件数, イ_件数));
-        eucCsvWriter.writeLine(null);
+        eucCsvWriter.writeLine(eucCsvEntity);
         eucCsvWriter.writeLine(第２号_食費Entity);
         eucCsvWriter.writeLine(第２号_食費_介護老人福祉施設Entity);
         eucCsvWriter.writeLine(第２号_食費_介護老人保健施設Entity);
@@ -241,7 +245,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
         eucCsvWriter.writeLine(第２号_居住_老人保健施設Entity);
         eucCsvWriter.writeLine(第２号_居住_療養型医療施設等Entity);
         eucCsvWriter.writeLine(第２号_総計Entity);
-        eucCsvWriter.writeLine(null);
+        eucCsvWriter.writeLine(eucCsvEntity);
         eucCsvWriter.writeLine(第２号_給付費_食費Entity);
         eucCsvWriter.writeLine(第２号_給付費_食費_介護老人福祉施設Entity);
         eucCsvWriter.writeLine(第２号_給付費_食費_介護老人保健施設Entity);
@@ -268,8 +272,8 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
                 先頭項目_給付費,
                 RString.EMPTY,
                 H1,
-                new RString(processParameter.get過去集計年月() + "01"),
-                RDate.getNowDate().toDateString(),
+                dateFomart(new RString(processParameter.get過去集計年月() + "01")),
+                dateFomart(RDate.getNowDate().toDateString()),
                 国民健康保険団体連合会,
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBE認定支援)
@@ -406,5 +410,13 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
                 eucCsvEntity.set計(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
+    }
+
+    private RString dateFomart(RString 年月日) {
+        if (年月日 == null || 年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        FlexibleDate flexibleDate = new FlexibleDate(年月日);
+        return flexibleDate.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 }

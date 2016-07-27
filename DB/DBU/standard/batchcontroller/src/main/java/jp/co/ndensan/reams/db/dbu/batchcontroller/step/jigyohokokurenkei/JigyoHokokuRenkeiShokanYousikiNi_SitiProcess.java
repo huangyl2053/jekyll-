@@ -24,8 +24,11 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -49,29 +52,29 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
     private static final RString 番号_2 = new RString("2");
     private static final RString 番号_3 = new RString("3");
     private int 件数_T1;
-    private Decimal 給付費_T1;
+    private Decimal 給付費_T1 = Decimal.ZERO;
     private int 件数_T2;
-    private Decimal 給付費_T2;
+    private Decimal 給付費_T2 = Decimal.ZERO;
     private int 件数_T3;
-    private Decimal 給付費_T3;
+    private Decimal 給付費_T3 = Decimal.ZERO;
     private int 件数_T4;
-    private Decimal 給付費_T4;
+    private Decimal 給付費_T4 = Decimal.ZERO;
     private int 件数_T5;
-    private Decimal 給付費_T5;
+    private Decimal 給付費_T5 = Decimal.ZERO;
     private int 件数_T6;
-    private Decimal 給付費_T6;
+    private Decimal 給付費_T6 = Decimal.ZERO;
     private int 件数_T7;
-    private Decimal 給付費_T7;
+    private Decimal 給付費_T7 = Decimal.ZERO;
     private int 件数_T8;
-    private Decimal 給付費_T8;
+    private Decimal 給付費_T8 = Decimal.ZERO;
     private int 件数_T9;
-    private Decimal 給付費_T9;
+    private Decimal 給付費_T9 = Decimal.ZERO;
     private int 件数_T10;
-    private Decimal 給付費_T10;
+    private Decimal 給付費_T10 = Decimal.ZERO;
     private int 件数_T11;
-    private Decimal 給付費_T11;
+    private Decimal 給付費_T11 = Decimal.ZERO;
     private int 件数_T12;
-    private Decimal 給付費_T12;
+    private Decimal 給付費_T12 = Decimal.ZERO;
     private RString csvFileName;
     private RDate 基準日;
     private JigyoHokokuRenkeiProcessParameter processParameter;
@@ -89,7 +92,7 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
                     + "get保険給付決定状況償還分決定年月情報の取得");
         }
         csvFileName = new RString("DUJRENF16_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
     }
 
     @BatchWriter
@@ -149,8 +152,8 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
         return new JigyoHokokuRenkeiHeadEucCsvEntity(
                 RString.EMPTY,
                 H1,
-                new RString(processParameter.get過去集計年月() + "01"),
-                RDate.getNowDate().toDateString(),
+                dateFomart(new RString(processParameter.get過去集計年月() + "01")),
+                dateFomart(RDate.getNowDate().toDateString()),
                 国民健康保険団体連合会,
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, 基準日, SubGyomuCode.DBE認定支援)
@@ -267,5 +270,13 @@ public class JigyoHokokuRenkeiShokanYousikiNi_SitiProcess extends BatchProcessBa
                 給付費_T12 = 給付費_T12.add(entity.getShukeiKekkaAtai());
             }
         }
+    }
+
+    private RString dateFomart(RString 年月日) {
+        if (年月日 == null || 年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        FlexibleDate flexibleDate = new FlexibleDate(年月日);
+        return flexibleDate.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 }

@@ -44,6 +44,7 @@ public class DBD2020001ValidationHandler {
     }
 
     /**
+     * バッチ実行前チェックを行う
      *
      * @return バリデーション結果
      */
@@ -55,7 +56,7 @@ public class DBD2020001ValidationHandler {
     /**
      * 実行パラメターを設定します．
      *
-     * @return　バッチパラメター
+     * @return バッチパラメター
      */
     public ShiharaiHohoHenkoHaakuIchiranBatchParameter setBatchParameter() {
 
@@ -102,6 +103,12 @@ public class DBD2020001ValidationHandler {
         }
     }
 
+    /**
+     * 対応する年月を取得します．
+     *
+     * @param month 月数
+     * @return 対応する年月
+     */
     public RString get支払方法変更期限に対する年月(Decimal month) {
         int monthValue = month.intValue();
         int 年数 = (int) monthValue / 月数_12;

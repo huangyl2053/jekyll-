@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuk
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuShutokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TokubetuTyoushuuKaisiTempEntity;
@@ -66,9 +66,9 @@ public interface IKariSanteiIdoFukaBatchMapper {
     /**
      * 特別徴収開始Temp取得します
      *
-     * @return TokubetuTyoushuuKaisiTempEntity
+     * @return List<TokubetuTyoushuuKaisiTempEntity>
      */
-    TokubetuTyoushuuKaisiTempEntity select特別徴収開始Temp();
+    List<TokubetuTyoushuuKaisiTempEntity> select特別徴収開始Temp();
 
     /**
      * 特徴仮算定抽出Temp一時テーブルを作成します
@@ -133,12 +133,19 @@ public interface IKariSanteiIdoFukaBatchMapper {
     void insert現金の異動(KariSanteiIdoFukaMybatisParameter parameter);
 
     /**
-     * select資格賦課情報
+     * select資格情報
+     *
+     * @return 資格情報
+     */
+    List<ShikakuShutokuTempEntity> select資格情報();
+
+    /**
+     * select賦課情報
      *
      * @param parameter KariSanteiIdoFukaMybatisParameter
-     * @return 資格賦課情報
+     * @return 賦課情報
      */
-    List<ShikakuFukaRelateEntity> select資格賦課情報(KariSanteiIdoFukaMybatisParameter parameter);
+    List<FukaJohoRelateEntity> select賦課情報(KariSanteiIdoFukaMybatisParameter parameter);
 
     /**
      * update資格取得Temp

@@ -64,10 +64,9 @@ public class KogakuKaigoServicehiKyufuTaishoshaToroku {
     public KokuhorenInterfaceKanri getSinsaYM(RString 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(PARAMETER.toString()));
         List<DbT3104KokuhorenInterfaceKanriEntity> list = dbT3104KokuhorenKanriDac.selectSinsaYM(交換情報識別番号);
-        if (list != null && list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             throw new ApplicationException(DbcErrorMessages.処理状態処理前未設定.getMessage());
-        }
-        if (2 <= list.size()) {
+        } else if (2 <= list.size()) {
             throw new ApplicationException(DbcErrorMessages.高額判定_処理状態処理前数不正.getMessage());
         }
         return new KokuhorenInterfaceKanri(list.get(0));
