@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd501002;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteishinseishohakko.ShinseiShoEntity;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd5130001.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd501002.YokaigoNinteikbnHenkoShinseishoReportSource;
 
 /**
@@ -38,20 +38,20 @@ public class YokaigoNinteikbnHenkoShinseishoBodyEditor implements IYokaigoNintei
     }
 
     private YokaigoNinteikbnHenkoShinseishoReportSource bodyEdit(YokaigoNinteikbnHenkoShinseishoReportSource source) {
-        source.ninshoshaYakushokuMei = entity.getNinshoshaYakushokuMei();
-        source.birthYMD = entity.getBirthYMD();
-        source.hihokenJusho = entity.getHihokenJusho();
-        source.hihokenshaName = entity.getHihokenshaName();
-        source.hihokenshaNameKana = entity.getHihokenshaNameKana();
-        source.hihokenshaNo = entity.getHihokenshaNo();
-        source.hihokenshaTelNo = entity.getHihokenshaTelNo();
-        source.hihokenshaYubinNo = entity.getHihokenshaYubinNo();
-        source.seibetsu = entity.getSeibetsu();
-        source.yokaigoKbn = entity.getYokaigoKbn();
-        source.yokoKikanEDYMD = entity.getYokoKikanEDYMD();
-        source.yokoKikanSTYMD = entity.getYokoKikanSTYMD();
-        source.yoshienKbn = entity.getYoshienKbn();
-        source.tsuchiBun = entity.getTsuchiBun();
+        source.ninshoshaYakushokuMei = entity.get市町村名称();
+        source.birthYMD = entity.get生年月日();
+        source.hihokenJusho = entity.get住所();
+        source.hihokenshaName = entity.get被保険者名称();
+        source.hihokenshaNameKana = entity.get被保険者名称カナ();
+        source.hihokenshaNo = entity.get被保険者番号();
+        source.hihokenshaTelNo = entity.get電話番号();
+        source.hihokenshaYubinNo = entity.get郵便番号();
+        source.seibetsu = entity.get性別();
+        source.yokaigoKbn = entity.get要介護状態区分();
+        source.yokoKikanEDYMD = entity.get有効期間開始年月日();
+        source.yokoKikanSTYMD = entity.get有効期間終了年月日();
+        source.yoshienKbn = entity.get要支援状態区分();
+        source.tsuchiBun = entity.get通知文();
 
         return source;
 

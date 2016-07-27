@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd501001;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteishinseishohakko.ShinseiShoEntity;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd5130001.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd501001.YokaigoNinteiShinseishoReportSource;
 
 /**
@@ -38,45 +38,45 @@ public class YokaigoNinteiShinseishoBodyEditor implements IYokaigoNinteiShinseis
     }
 
     private YokaigoNinteiShinseishoReportSource bodyEdit(YokaigoNinteiShinseishoReportSource source) {
+        // TODO     RSE項目名が設計書と違い
 //        source.cityName = entity.getCityName();
-        // TODO:
-        source.hihokenshaNo1 = entity.getHihokenshaNo1();
-        source.hihokenshaNo2 = entity.getHihokenshaNo2();
-        source.hihokenshaNo3 = entity.getHihokenshaNo3();
-        source.hihokenshaNo4 = entity.getHihokenshaNo4();
-        source.hihokenshaNo5 = entity.getHihokenshaNo5();
-        source.hihokenshaNo6 = entity.getHihokenshaNo6();
-        source.hihokenshaNo7 = entity.getHihokenshaNo7();
-        source.hihokenshaNo8 = entity.getHihokenshaNo8();
-        source.hihokenshaNo9 = entity.getHihokenshaNo9();
-        source.hihokenshaNo10 = entity.getHihokenshaNo10();
-        source.birthGengoMeiji = entity.getBirthGengoMeiji();
-        source.birthGengoTaisho = entity.getBirthGengoTaisho();
-        source.birthGengoShowa = entity.getBirthGengoShowa();
-        source.hihokenshaNameKana = entity.getHihokenshaNameKana();
-        source.birthYYYY = entity.getBirthYYYY();
-        source.umareYy = entity.getUmareYy();
-        source.birthMM = entity.getBirthMM();
-        source.birthDD = entity.getBirthDD();
-        source.hihokenshaName = entity.getHihokenshaName();
-        source.seibetsuMan = entity.getSeibetsuMan();
-        source.seibetsuWoman = entity.getSeibetsuWoman();
-        source.telNo = entity.getTelNo();
-        source.yubinNo = entity.getYubinNo();
-        source.jusho = entity.getJusho();
-        source.yokaigoJotaiKubun1 = entity.getYokaigoJotaiKubun1();
-        source.yokaigoJotaiKubun2 = entity.getYokaigoJotaiKubun2();
-        source.yokaigoJotaiKubun3 = entity.getYokaigoJotaiKubun3();
-        source.yokaigoJotaiKubun4 = entity.getYokaigoJotaiKubun4();
-        source.yokaigoJotaiKubun5 = entity.getYokaigoJotaiKubun5();
-        source.yoshienJotaiKubun1 = entity.getYoshienJotaiKubun1();
-        source.yoshienJotaiKubun2 = entity.getYoshienJotaiKubun2();
-        source.yukoKaishiYYYY = entity.getYukoKaishiYYYY();
-        source.yukoKaishiMM = entity.getYukoKaishiMM();
-        source.yukoKaishiDD = entity.getYukoKaishiDD();
-        source.yukoShuryoYYYY = entity.getYukoShuryoYYYY();
-        source.yukoShuryoMM = entity.getYukoShuryoMM();
-        source.yukoShuryoDD = entity.getYukoShuryoDD();
+        source.hihokenshaNo1 = entity.get被保険者番号第1桁();
+        source.hihokenshaNo2 = entity.get被保険者番号第2桁();
+        source.hihokenshaNo3 = entity.get被保険者番号第3桁();
+        source.hihokenshaNo4 = entity.get被保険者番号第4桁();
+        source.hihokenshaNo5 = entity.get被保険者番号第5桁();
+        source.hihokenshaNo6 = entity.get被保険者番号第6桁();
+        source.hihokenshaNo7 = entity.get被保険者番号第7桁();
+        source.hihokenshaNo8 = entity.get被保険者番号第8桁();
+        source.hihokenshaNo9 = entity.get被保険者番号第9桁();
+        source.hihokenshaNo10 = entity.get被保険者番号第10桁();
+        source.birthGengoMeiji = entity.get出生元号明治();
+        source.birthGengoTaisho = entity.get出生元号大正();
+        source.birthGengoShowa = entity.get出生元号昭和();
+        source.hihokenshaNameKana = entity.get被保険者名称カナ();
+        source.birthYYYY = entity.get出生年YYYY();
+        source.umareYy = entity.get生まれYY();
+        source.birthMM = entity.get出生月MM();
+        source.birthDD = entity.get出生日DD();
+        source.hihokenshaName = entity.get被保険者名称();
+        source.seibetsuMan = entity.get性別男();
+        source.seibetsuWoman = entity.get性別女();
+        source.telNo = entity.get電話番号();
+        source.yubinNo = entity.get郵便番号();
+        source.jusho = entity.get住所();
+        source.yokaigoJotaiKubun1 = entity.get要介護状態区分1();
+        source.yokaigoJotaiKubun2 = entity.get要介護状態区分2();
+        source.yokaigoJotaiKubun3 = entity.get要介護状態区分3();
+        source.yokaigoJotaiKubun4 = entity.get要介護状態区分4();
+        source.yokaigoJotaiKubun5 = entity.get要介護状態区分5();
+        source.yoshienJotaiKubun1 = entity.get要支援状態区分1();
+        source.yoshienJotaiKubun2 = entity.get要支援状態区分2();
+        source.yukoKaishiYYYY = entity.get有効開始年YYYY();
+        source.yukoKaishiMM = entity.get有効開始月MM();
+        source.yukoKaishiDD = entity.get有効開始日DD();
+        source.yukoShuryoYYYY = entity.get有効終了年YYYY();
+        source.yukoShuryoMM = entity.get有効終了月MM();
+        source.yukoShuryoDD = entity.get有効終了日DD();
 
         return source;
 
