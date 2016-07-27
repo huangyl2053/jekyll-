@@ -630,7 +630,7 @@ public class JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess extends BatchProc
                     + "get保険給付決定状況償還分決定年月情報の取得");
         }
         csvFileName = new RString("DUJRENF10_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
     }
 
     @BatchWriter

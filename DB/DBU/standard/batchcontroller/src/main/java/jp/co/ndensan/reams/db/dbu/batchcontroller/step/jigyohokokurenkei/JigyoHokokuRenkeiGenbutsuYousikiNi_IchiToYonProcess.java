@@ -622,7 +622,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_IchiToYonProcess extends BatchPr
     @Override
     protected void initialize() {
         csvFileName = new RString("DUJRENF09_" + processParameter.get過去集計年月()
-                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
     }
 
     @BatchWriter
