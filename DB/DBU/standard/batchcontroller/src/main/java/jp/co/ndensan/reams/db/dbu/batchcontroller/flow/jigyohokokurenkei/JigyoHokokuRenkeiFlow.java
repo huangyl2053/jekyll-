@@ -77,14 +77,14 @@ public class JigyoHokokuRenkeiFlow extends BatchFlowBase<JigyoHokokuRenkeiBatchP
         }
 
         if (getParameter().is出力_保険給付決定状況現物分()) {
-            executeStep(SHOKANYOUSIKINI_GOPROCESS);
-            executeStep(SHOKANYOUSIKINI_ICHIPROCESS);
+            executeStep(GENBUTSUYOUSIKINI_GOPROCESS);
+            executeStep(GENBUTSUYOUSIKINI_ICHIPROCESS);
             executeStep(GENBUTSUYOUSIKINI_SITIPROCESS);
         }
 
         if (getParameter().is出力_保険給付決定状況合算_審査年月() || getParameter().is出力_保険給付決定状況合算_決定年月()) {
-            executeStep(SHOKANYOUSIKINI_GOPROCESS);
-            executeStep(SHOKANYOUSIKINI_ICHIPROCESS);
+            executeStep(GASSANYOUSIKINI_GOPROCESS);
+            executeStep(GASSANYOUSIKINI_ICHIPROCESS);
             executeStep(GASSANYOUSIKINI_SITIPROCESS);
         }
     }
