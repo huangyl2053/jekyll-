@@ -35,6 +35,7 @@ public class ImagePanelValidationHandler {
     /**
      * 要介護認定イメージ情報出力をチェックします。
      *
+     * @param 存在するファイル List<RString>
      * @param 存在する調査票概況特記 List<RString>
      * @param 存在する調査票概況 List<RString>
      * @param 存在する主治医意見書 List<RString>
