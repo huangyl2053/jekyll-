@@ -41,6 +41,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
     private static final int NOCOUNT_8 = 8;
     private static final int NOCOUNT_9 = 9;
     private static final int NOCOUNT_10 = 10;
+    private static final int NOCOUNT_13 = 13;
 
     private final IKojin 個人情報;
     private final IAtesaki 宛先;
@@ -188,18 +189,18 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
         if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
             source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("1")) {
+        if (null != 通知書定型文リスト && new RString("1").equals(定型文文字サイズ)) {
             source.renrakusakiHoka = 通知書定型文リスト.get(2);
         } else {
             source.renrakusakiHoka = RString.EMPTY;
         }
         RString サービス種類コード = RString.EMPTY;
-        for (int i = 0; i < 13 || i < 償還払集計情報リスト.size(); i++) {
+        for (int i = 0; i < NOCOUNT_13 || i < 償還払集計情報リスト.size(); i++) {
             サービス種類コード = サービス種類コード.concat(償還払集計情報リスト.get(i).getサービス種類コード()).
                     concat(new RString(","));
         }
         source.serviceName = サービス種類コード;
-        source.hoka = 償還払集計情報リスト.size() <= 13 ? RString.EMPTY : new RString("他");
+        source.hoka = 償還払集計情報リスト.size() <= NOCOUNT_13 ? RString.EMPTY : new RString("他");
         source.kyufuGaku = DecimalFormatter.toコンマ区切りRString(get支払金額合計(), 0);
 
     }
@@ -242,7 +243,7 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
 
     private void setLayerFontLarge(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("2")) {
+        if (null != 通知書定型文リスト && new RString("2").equals(定型文文字サイズ)) {
             source.renrakusakiHokaLarge = 通知書定型文リスト.get(2);
         } else {
             source.renrakusakiHokaLarge = RString.EMPTY;
@@ -251,9 +252,9 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
 
     private void setLayerFontKonzai(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("3")) {
+        if (null != 通知書定型文リスト && new RString("3").equals(定型文文字サイズ)) {
             source.renrakusakiHokaJodanSmall = 通知書定型文リスト.get(2);
-            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(3);
+            source.renrakusakiHokaGedanLarge = 通知書定型文リスト.get(NOCOUNT_3);
         } else {
             source.renrakusakiHokaJodanSmall = RString.EMPTY;
             source.renrakusakiHokaGedanLarge = RString.EMPTY;
@@ -262,9 +263,9 @@ public class ShiharaiIchijiSashitomeTsuchishoEditor implements IShiharaiIchijiSa
 
     private void setLayerFontKonzai2(ShiharaiIchijiSashitomeTsuchishoReportSource source) {
         RString 定型文文字サイズ = this.帳票制御共通.get定型文文字サイズ();
-        if (null != 通知書定型文リスト && 定型文文字サイズ == new RString("4")) {
+        if (null != 通知書定型文リスト && new RString("4").equals(定型文文字サイズ)) {
             source.renrakusakiHokaJodanLarge = 通知書定型文リスト.get(2);
-            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(3);
+            source.renrakusakiHokaGedanSmall = 通知書定型文リスト.get(NOCOUNT_3);
         } else {
             source.renrakusakiHokaJodanLarge = RString.EMPTY;
             source.renrakusakiHokaGedanSmall = RString.EMPTY;

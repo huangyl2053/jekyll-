@@ -15,7 +15,7 @@ import lombok.NonNull;
  *
  * @reamsid_L DBD-3540-120 wangchao
  */
-public class TokubchiiKasHomKaigRiysFutGengKakuninshoReport extends Report<TokubChiiKasRiysFutGengKakuninshoReportSource> {
+public final class TokubchiiKasHomKaigRiysFutGengKakuninshoReport extends Report<TokubChiiKasRiysFutGengKakuninshoReportSource> {
 
     private final TokubchiiKasHomKaigRiysFutGengKakuninshoItem bodyItem;
 

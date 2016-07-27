@@ -58,6 +58,11 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         return source;
     }
 
+    /**
+     * YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSourceを設定
+     *
+     * @param source
+     */
     public void setYokaigoNinteiTsukibetsuJukyushaSuJokyohyo(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource source) {
         source.kijunbi = this.基準日.wareki().toDateString();
         source.nenrei = this.年齢;
@@ -99,7 +104,6 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        RString 印刷日時 = 年月日.concat(時分秒);
-        return 印刷日時;
+        return 年月日.concat(時分秒);
     }
 }

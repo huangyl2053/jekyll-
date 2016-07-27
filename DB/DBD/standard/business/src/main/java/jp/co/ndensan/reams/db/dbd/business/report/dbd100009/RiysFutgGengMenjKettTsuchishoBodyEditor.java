@@ -27,28 +27,28 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
 
     private final RString 折り返す符号 = new RString("\n");
     private final RString マル = new RString("○");
-    private final static int INDEX_0 = 0;
-    private final static int INDEX_1 = 1;
-    private final static int INDEX_2 = 2;
-    private final static int INDEX_3 = 3;
-    private final static int INDEX_4 = 4;
-    private final static int INDEX_5 = 5;
-    private final static int INDEX_6 = 6;
-    private final static int INDEX_7 = 7;
-    private final static int INDEX_8 = 8;
-    private final static int INDEX_9 = 9;
-    private final static int INDEX_10 = 10;
-    private final static int INDEX_11 = 11;
-    private final static int INDEX_12 = 12;
-    private final static int INDEX_13 = 13;
-    private final static int INDEX_14 = 14;
-    private final static int INDEX_15 = 15;
-    private final static int INDEX_16 = 16;
-    private final static int INDEX_17 = 17;
-    private final static int INDEX_18 = 18;
-    private final static int INDEX_19 = 19;
-    private final static int INDEX_20 = 20;
-    private final static int INDEX_21 = 21;
+    private final int INDEX_0 = 0;
+    private final int INDEX_1 = 1;
+    private final int INDEX_2 = 2;
+    private final int INDEX_3 = 3;
+    private final int INDEX_4 = 4;
+    private final int INDEX_5 = 5;
+    private final int INDEX_6 = 6;
+    private final int INDEX_7 = 7;
+    private final int INDEX_8 = 8;
+    private final int INDEX_9 = 9;
+    private final int INDEX_10 = 10;
+    private final int INDEX_11 = 11;
+    private final int INDEX_12 = 12;
+    private final int INDEX_13 = 13;
+    private final int INDEX_14 = 14;
+    private final int INDEX_15 = 15;
+    private final int INDEX_16 = 16;
+    private final int INDEX_17 = 17;
+    private final int INDEX_18 = 18;
+    private final int INDEX_19 = 19;
+    private final int INDEX_20 = 20;
+    private final int INDEX_21 = 21;
 
     private final RiysFutgGengMenjKettTsuchishoItem item;
 
@@ -263,7 +263,7 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
     }
 
     private void set連絡先他下段Large(RiysFutgGengMenjKettTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunMix16 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix17 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMix18 = getLenStr(INDEX_2, 通知書定型文List);
@@ -286,7 +286,7 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
     }
 
     private void set連絡先他下段Small(RiysFutgGengMenjKettTsuchishoReportSource source) {
-        List<RString> 通知書定型文List = item.get通知書定型文List().get(3).split(折り返す符号.toString());
+        List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunMixtwo10 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo11 = getLenStr(INDEX_1, 通知書定型文List);
         source.tsuchibunMixtwo12 = getLenStr(INDEX_2, 通知書定型文List);

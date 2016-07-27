@@ -603,6 +603,7 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setListIchiranhyo_9(get主治医意見書作成期限年月日(div, row));
         item.setTsuchibun1(ReportUtil.get通知文(
                 SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230002.getReportId(), KamokuCode.EMPTY, 数字_1).get(数字_1));
+        item.setShujiiIryokikanCode(row.getShujiiIryoKikanCode());
         return item;
     }
 

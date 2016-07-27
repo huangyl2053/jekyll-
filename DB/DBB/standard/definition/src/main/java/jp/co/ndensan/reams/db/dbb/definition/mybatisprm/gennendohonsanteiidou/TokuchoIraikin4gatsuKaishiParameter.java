@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoIraikin4gatsuKaishiParameter extends KozaSearchParameter
+public final class TokuchoIraikin4gatsuKaishiParameter extends KozaSearchParameter
         implements IMyBatisParameter {
 
     private final FlexibleYear 調定年度;

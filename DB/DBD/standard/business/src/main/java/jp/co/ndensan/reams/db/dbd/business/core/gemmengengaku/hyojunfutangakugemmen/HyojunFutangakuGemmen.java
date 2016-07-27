@@ -22,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 標準負担額減免を管理するクラスです。
  */
-public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmenIdentifier, DbT4012HyojunFutangakuGemmenEntity, HyojunFutangakuGemmen> implements Serializable {
+public class HyojunFutangakuGemmen extends ParentModelBase<
+        HyojunFutangakuGemmenIdentifier, DbT4012HyojunFutangakuGemmenEntity, HyojunFutangakuGemmen> implements Serializable {
 
 //TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final DbT4012HyojunFutangakuGemmenEntity entity;
@@ -146,7 +147,7 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
      *
      * @return 論理削除行であればtrue
      */
-    public boolean get論理削除行であればtrue() {
+    public boolean is論理削除行であればtrue() {
         return entity.getIsDeleted();
     }
 
@@ -204,11 +205,17 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
         return entity.getGengakugoKingaku();
     }
 
+    /**
+     * 減額後金額RStringを返します。
+     *
+     * @return 減額後金額
+     */
     public RString get減額後金額RString() {
-        if (entity.getGengakugoKingaku() == null) {
+        if (entity.getGengakugoKingaku() != null) {
+            return new RString(entity.getGengakugoKingaku().toString());
+        } else {
             return RString.EMPTY;
         }
-        return new RString(entity.getGengakugoKingaku().toString());
     }
 
     /**
@@ -229,6 +236,11 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
         return entity.getShinseiYMD();
     }
 
+    /**
+     * 申請年月日RStringを返します。
+     *
+     * @return 申請年月日
+     */
     public RString get申請年月日RString() {
         if (entity.getShinseiYMD() == null || entity.getShinseiYMD().isEmpty()) {
             return RString.EMPTY;
@@ -254,6 +266,11 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
         return entity.getKetteiYMD();
     }
 
+    /**
+     * 決定年月日TextBoxを返します。
+     *
+     * @return 決定年月日
+     */
     public TextBoxFlexibleDate get決定年月日TextBox() {
         TextBoxFlexibleDate textBoxFlexibleDate = new TextBoxFlexibleDate();
         if (entity.getKetteiYMD().isEmpty()) {
@@ -272,6 +289,11 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
         return entity.getTekiyoKaishiYMD();
     }
 
+    /**
+     * 適用開始年月日TextBoxを返します。
+     *
+     * @return 適用開始年月日
+     */
     public TextBoxFlexibleDate get適用開始年月日TextBox() {
         TextBoxFlexibleDate textBoxFlexibleDate = new TextBoxFlexibleDate();
         if (entity.getTekiyoKaishiYMD().isEmpty()) {
@@ -290,9 +312,14 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
         return entity.getTekiyoShuryoYMD();
     }
 
+    /**
+     * 適用終了年月日TextBoxを返します。
+     *
+     * @return 適用終了年月日
+     */
     public TextBoxFlexibleDate get適用終了年月日TextBox() {
         TextBoxFlexibleDate textBoxFlexibleDate = new TextBoxFlexibleDate();
-        if (entity.getTekiyoShuryoYMD().isEmpty()) {
+        if (entity.getTekiyoShuryoYMD() == null || entity.getTekiyoShuryoYMD().isEmpty()) {
             return null;
         }
         textBoxFlexibleDate.setValue(entity.getTekiyoShuryoYMD());
@@ -329,8 +356,7 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
     }
 
     /**
-     * 標準負担額減免のみを変更対象とします。<br/>
-     * {@link DbT4012HyojunFutangakuGemmenEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 標準負担額減免のみを変更対象とします。<br/> {@link DbT4012HyojunFutangakuGemmenEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link HyojunFutangakuGemmen}
      */
@@ -345,8 +371,7 @@ public class HyojunFutangakuGemmen extends ParentModelBase<HyojunFutangakuGemmen
     }
 
     /**
-     * 保持する標準負担額減免を削除対象とします。<br/>
-     * {@link DbT4012HyojunFutangakuGemmenEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する標準負担額減免を削除対象とします。<br/> {@link DbT4012HyojunFutangakuGemmenEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link HyojunFutangakuGemmen}
      */

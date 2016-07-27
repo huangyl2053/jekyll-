@@ -60,6 +60,7 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
         source.listIchiranhyo_7 = item.getListIchiranhyo_7();
         source.listIchiranhyo_8 = item.getListIchiranhyo_8();
         source.listIchiranhyo_9 = item.getListIchiranhyo_9();
+        source.shujiiIryokikanCode = item.getShujiiIryokikanCode();
         return source;
     }
 }

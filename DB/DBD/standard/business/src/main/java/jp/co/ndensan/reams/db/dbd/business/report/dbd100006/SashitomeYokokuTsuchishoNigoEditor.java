@@ -46,7 +46,7 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private List<ShokanKihonJihoEntiy> 償還払計情報リスト;
+    private final List<ShokanKihonJihoEntiy> 償還払計情報リスト;
 
     /**
      * インスタンスを生成します。
@@ -165,7 +165,7 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
         if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 2) {
             source.tsuchibun2 = 通知書定型文リスト.get(1);
         }
-        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= 3) {
+        if (null != 通知書定型文リスト && 通知書定型文リスト.size() >= NOCOUNT_3) {
             source.tsuchibun3 = 通知書定型文リスト.get(2);
         }
 

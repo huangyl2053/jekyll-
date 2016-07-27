@@ -45,11 +45,11 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
         int index = ZERO;
         RString keyBreak = RString.EMPTY;
         for (IkenshoSakuseiIraiIchiranhyoItem item : bodyItemList) {
-            if (!keyBreak.equals(item.getKikanNameText())) {
+            if (!keyBreak.equals(item.getShujiiIryokikanCode())) {
                 index = ZERO;
             }
             index++;
-            keyBreak = item.getKikanNameText();
+            keyBreak = item.getShujiiIryokikanCode();
             IkenshoSakuseiIraiIchiranhyoEditor bodyEditor = new IkenshoSakuseiIraiIchiranhyoBodyEditor(item, index);
             IkenshoSakuseiIraiIchiranhyoBuilder builder = new IkenshoSakuseiIraiBuilderItem(bodyEditor);
             reportSourceWriter.writeLine(builder);

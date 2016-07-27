@@ -21,10 +21,10 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShiharaiHohoHenkoKanriIchiranItem {
 
-    RDateTime 作成日時;
-    HokenshaNo 保険者番号;
-    RString 保険者名称;
-    IOutputOrder 出力順;
-    ShiharaiHohoHenkoEntity 支払方法変更リストEntity;
+    private RDateTime 作成日時;
+    private HokenshaNo 保険者番号;
+    private RString 保険者名称;
+    private IOutputOrder 出力順;
+    private ShiharaiHohoHenkoEntity 支払方法変更リストEntity;
 
 }

@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKettei
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100011.HomKaigRiysFutgGengKettTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100009.RiysFutgGengMenjKettTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.AtesakiPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.ShikibetsuTaishoPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenManager;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.FutanGendogakuKetteiTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutGenｍKettTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutGenmKettTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutgGengKettsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutgGengNintshoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.RiysFutgGengMenjNinteishoPrintService;
@@ -294,7 +294,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
             } else if (GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプ)) {
                 TokubetsuchiikiKasanGemmen 特別地域加算減免 = getTokubetsuChikiKasanGemmen(
                         被保険者番号, GemmenGengakuShurui.特別地域加算減免.getコード(), 履歴番号);
-                HomKaigRiysFutGenｍKettTsuchishoItem item = new HomKaigRiysFutGenｍKettTsuchishoItem(
+                HomKaigRiysFutGenmKettTsuchishoItem item = new HomKaigRiysFutGenmKettTsuchishoItem(
                         特別地域加算減免,
                         ShikibetsuTaishoFactory.createKojin(uaFt200Entity),
                         AtesakiFactory.createInstance(uaFt250Entity),
@@ -306,7 +306,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
                         通知書定型文List,
                         帳票分類ID,
                         ninshosha);
-                HomKaigRiysFutGenｍKettTsuchishoPrintService service = new HomKaigRiysFutGenｍKettTsuchishoPrintService();
+                HomKaigRiysFutGenmKettTsuchishoPrintService service = new HomKaigRiysFutGenmKettTsuchishoPrintService();
                 service.print(item, reportManager);
             }
         }
