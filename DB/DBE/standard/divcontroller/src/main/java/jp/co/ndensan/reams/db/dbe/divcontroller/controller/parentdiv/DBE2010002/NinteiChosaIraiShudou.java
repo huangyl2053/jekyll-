@@ -285,7 +285,7 @@ public class NinteiChosaIraiShudou {
 
             if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
                 ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
-                        .set認定調査依頼年月日(発行日).build();
+                        .set依頼書出力年月日(発行日).build();
             }
             if (!(div.getChkGaikyoChosa().getSelectedKeys().isEmpty()
                     && div.getChkKihonChosa().getSelectedKeys().isEmpty()
