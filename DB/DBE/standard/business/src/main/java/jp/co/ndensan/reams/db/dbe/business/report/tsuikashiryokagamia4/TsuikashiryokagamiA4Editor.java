@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class TsuikashiryokagamiA4Editor implements ITsuikashiryokagamiA4Editor {
 
     private final JimuTuikaSiryoBusiness business;
+    private static final int INT_2 = 2;
 
     /**
      * インスタンスを生成します。
@@ -38,7 +39,7 @@ public class TsuikashiryokagamiA4Editor implements ITsuikashiryokagamiA4Editor {
         source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
         source.gogitaiNo = business.get合議体番号();
         source.shinsakaiTsuikasha = business.get追加審査対象者数();
-        source.listShinsei_1 = business.get審査会審査順();
+        source.listShinsei_1 = business.get審査会審査順().padZeroToLeft(INT_2);
         source.listShinsei_2 = business.get保険者();
         source.listShinsei_3 = business.get被保険者番号();
         source.listShinsei_4 = business.get被保険者氏名();
@@ -49,8 +50,8 @@ public class TsuikashiryokagamiA4Editor implements ITsuikashiryokagamiA4Editor {
         source.listShinsei_9 = business.get一次判定();
         source.listShinsei_10 = business.get警告();
         source.listShinsei_11 = business.get基準時間();
-        source.listShinsei_12 = business.get審査結果();
-        source.listShinsei_13 = business.get有効期間();
+        source.listShinsei_12 = RString.EMPTY;
+        source.listShinsei_13 = RString.EMPTY;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),

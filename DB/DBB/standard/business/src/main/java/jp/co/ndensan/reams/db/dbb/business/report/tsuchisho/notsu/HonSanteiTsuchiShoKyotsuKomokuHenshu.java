@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HyojiCodeResearcher;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.KoseiTsukiHantei;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -232,7 +232,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private void edit編集後本算定通知書共通情報(HonSanteiTsuchiShoKyotsu 本算定通知書情報, EditedHonSanteiTsuchiShoKyotsu shoKyotsu) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(本算定通知書情報.get賦課の情報_更正後().get宛名().toEntity());
-        EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通(), null);
+        EditedKojin editedKojin = new EditedKojin(kojin, 本算定通知書情報.get帳票制御共通(), 本算定通知書情報.get地方公共団体());
 
         edit表示コード(本算定通知書情報, shoKyotsu);
         EditedAtesaki editedAtesaki = EditedAtesakiBuilder.create編集後宛先(
@@ -301,7 +301,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                 宛名.get行政区画().getChiku1().getコード().value(),
                 宛名.get行政区画().getChiku2().getコード().value(),
                 宛名.get行政区画().getChiku3().getコード().value(),
-                本算定通知書情報.get納組情報().getNokumi().getNokumiCode());
+                null == 本算定通知書情報.get納組情報() ? new RString("01") : 本算定通知書情報.get納組情報().getNokumi().getNokumiCode());
         shoKyotsu.set表示コード(表示コード);
     }
 

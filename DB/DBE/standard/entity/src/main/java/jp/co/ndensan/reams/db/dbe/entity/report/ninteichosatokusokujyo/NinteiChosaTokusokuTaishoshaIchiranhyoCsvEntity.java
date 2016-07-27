@@ -65,6 +65,9 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     @CsvField(order = 16, name = "事業者電話番号")
     private RString kikanTel;
 
+    /**
+     * コンストラクタです。
+     */
     public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity() {
     }
 
@@ -116,7 +119,13 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         this.kikanTel = kikanTel;
     }
 
-    public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
+    /**
+     * CSVデータを作成します
+     *
+     * @param entity 認定調査督促対象者一覧表の取得のEntity
+     * @return CSVデータ
+     */
+    public static NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
         NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity csvEntity = new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity();
         csvEntity.cityCode = entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue();
         csvEntity.cityName = entity.getTemp_市町村名称();
@@ -125,10 +134,10 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         csvEntity.hihokenshaNo = entity.getTemp_被保険者番号();
         csvEntity.hihokenshaKanaName = entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue();
         csvEntity.hihokenshaName = entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue();
-        csvEntity.shinseiYMD = entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        csvEntity.tokusokujoHakkoYMD = entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        csvEntity.shinseiYMD = entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().wareki().
+                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        csvEntity.tokusokujoHakkoYMD = entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().wareki().
+                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         csvEntity.jigyoshaCode = entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue();
         csvEntity.kikanName = entity.getTemp_事業者名称() == null ? RString.EMPTY : entity.getTemp_事業者名称();
         csvEntity.chosainShime = entity.getTemp_調査員氏名();
@@ -136,24 +145,5 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         csvEntity.kikanTel = entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue();
         return csvEntity;
 
-//        return new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
-//                entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue(),
-//                entity.getTemp_市町村名称(),
-//                new RString(String.valueOf(entity.get行番号())),
-//                entity.getTemp_保険者名称(),
-//                entity.getTemp_被保険者番号(),
-//                entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
-//                entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
-//                entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().
-//                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-//                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
-//                entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
-//                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-//                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
-//                entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue(),
-//                entity.getTemp_事業者名称() == null ? RString.EMPTY : entity.getTemp_事業者名称(),
-//                entity.getTemp_調査員氏名(),
-//                entity.getTemp_事業者住所(),
-//                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue());
     }
 }

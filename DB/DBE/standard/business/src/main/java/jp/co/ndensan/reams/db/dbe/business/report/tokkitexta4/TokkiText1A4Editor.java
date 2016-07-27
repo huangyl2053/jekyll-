@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class TokkiText1A4Editor implements ITokkiText1A4Editor {
 
-    private static final RString テキスト区分 = TokkijikoTextImageKubun.テキスト.getコード();
-    private static final RString イメージ区分 = TokkijikoTextImageKubun.イメージ.getコード();
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
     private final TokkiText1A4Entity item;
@@ -85,17 +83,19 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         source.shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
 
-        if (テキスト区分.equals(item.get概況特記テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get概況特記テキスト_イメージ区分())) {
             source.gaikyotokkiText = item.get概況調査の特記事項テキスト();
         }
 
-        if (イメージ区分.equals(item.get概況特記テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get概況特記テキスト_イメージ区分())) {
             source.gaikyotokkiImg = item.get概況調査の特記事項イメージ();
         }
-        if (テキスト区分.equals(item.get特記事項テキスト_イメージ区分()) && 全面.equals(item.get特記パターン())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 全面.equals(item.get特記パターン())) {
             source.tokkiText = item.getTokkiText();
         }
-        if (テキスト区分.equals(item.get特記事項テキスト_イメージ区分()) && 短冊.equals(item.get特記パターン())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 短冊.equals(item.get特記パターン())) {
             editSource1(source);
             source.tokkiText1 = item.getTokkiText1();
             source.tokkiText2 = item.getTokkiText2();
@@ -113,11 +113,13 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             source.tokkiText14 = item.getTokkiText14();
             source.tokkiText15 = item.getTokkiText15();
         }
-        if (イメージ区分.equals(item.get特記事項テキスト_イメージ区分()) && 全面.equals(item.get特記パターン())) {
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 全面.equals(item.get特記パターン())) {
             source.tokkiImg = item.getTokkiImg();
         }
 
-        if (イメージ区分.equals(item.get特記事項テキスト_イメージ区分()) && 短冊.equals(item.get特記パターン())) {
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 短冊.equals(item.get特記パターン())) {
             editSource2(source);
             source.tokkiImg1 = item.getTokkiImg1();
             source.tokkiImg2 = item.getTokkiImg2();

@@ -1080,7 +1080,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get住所(),
                     生年月日,
                     Seibetsu.toValue(business.get性別()).get名称(),
-                    提出期限);
+                    提出期限,
+                    business.get主治医医療機関コード());
             itemList.add(item);
         }
         return itemList;

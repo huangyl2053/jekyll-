@@ -10,13 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class NonyuTsuchIchiranPrintService {
 
+    private static final ReportId 納入通知書_帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_3 = 3;
@@ -50,11 +51,11 @@ public class NonyuTsuchIchiranPrintService {
      * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
      * @param 帳票作成日時 RDateTime
      * @param 出力期 int
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List,
-            RDateTime 帳票作成日時, int 出力期, Long 出力順ID) {
+            RDateTime 帳票作成日時, int 出力期, RString 出力順ID) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             printタイプ(編集後本算定通知書共通情報List, 帳票作成日時, 出力期, 出力順ID, reportManager);
@@ -69,11 +70,11 @@ public class NonyuTsuchIchiranPrintService {
      * @param 編集後本算定通知書共通情報List List<EditedHonSanteiTsuchiShoKyotsu>
      * @param 帳票作成日時 RDateTime
      * @param 出力期 int
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param reportManager ReportManager
      */
     public void printタイプ(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List, RDateTime 帳票作成日時,
-            int 出力期, Long 出力順ID, ReportManager reportManager) {
+            int 出力期, RString 出力順ID, ReportManager reportManager) {
         NonyuTsuchIchiranProperty property = new NonyuTsuchIchiranProperty();
         try (ReportAssembler<NonyuTsuchIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<NonyuTsuchIchiranSource> reportSourceWriter
@@ -92,9 +93,12 @@ public class NonyuTsuchIchiranPrintService {
         }
     }
 
-    private List<RString> get出力順(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200010.getReportId(), 出力順ID);
+    private List<RString> get出力順(RString 出力順ID) {
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 納入通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         List<RString> 並び順List = new ArrayList<>();
         int i = 0;
         if (並び順 != null) {

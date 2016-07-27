@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class TokkiText2A4Editor implements ITokkiText2A4Editor {
 
     private final TokkiText2A4Entity item;
-    private static final RString テキスト = TokkijikoTextImageKubun.テキスト.getコード();
-    private static final RString イメージ = TokkijikoTextImageKubun.イメージ.getコード();
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
     private final int index;
@@ -106,15 +104,15 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
         source.two_shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
         source.two_shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
 
-        if (テキスト.equals(item.get概況特記テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get概況特記テキスト_イメージ区分())) {
             source.gaikyotokkiText = item.get概況調査の特記事項テキスト();
         }
 
-        if (イメージ.equals(item.get概況特記テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get概況特記テキスト_イメージ区分())) {
             source.gaikyotokkiImg = item.get概況調査の特記事項イメージ();
         }
 
-        if (テキスト.equals(item.get特記事項テキスト_イメージ区分())) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText = item.get特記事項Text();
             } else if (短冊.equals(item.get特記パターン())) {
@@ -135,7 +133,7 @@ public class TokkiText2A4Editor implements ITokkiText2A4Editor {
                 source.tokkiText14 = item.get特記Text14();
                 source.tokkiText15 = item.get特記Text15();
             }
-        } else if (イメージ.equals(item.get特記事項テキスト_イメージ区分())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiImg = item.get特記事項Img();
             } else if (短冊.equals(item.get特記パターン())) {

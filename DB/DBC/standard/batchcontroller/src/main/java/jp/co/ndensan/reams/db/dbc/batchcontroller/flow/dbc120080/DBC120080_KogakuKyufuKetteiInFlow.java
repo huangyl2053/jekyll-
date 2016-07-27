@@ -84,7 +84,9 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
                 executeStep(処理結果リスト作成);
             }
         } finally {
-            executeStep(取込済ファイル削除);
+            if (null != returnEntity) {
+                executeStep(取込済ファイル削除);
+            }
         }
 
     }

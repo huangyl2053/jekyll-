@@ -38,19 +38,19 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class KariNonyuTsuchishoHakkoIchiranPrintService {
 
-    private static final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private static final ReportId 納入通知書仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
 
     /**
      * 保険料納入通知書（仮算定）発行一覧表(単一帳票出力用)
      *
      * @param 仮算定納入通知書情報EntityList List<KariSanteiNonyuTsuchiShoJoho>
-     * @param 出力順ID long
+     * @param 出力順ID RString
      * @param 帳票作成日時 YMDHMS
      * @param 出力期 int
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(List<KariSanteiNonyuTsuchiShoJoho> 仮算定納入通知書情報EntityList,
-            long 出力順ID, YMDHMS 帳票作成日時, int 出力期) {
+            RString 出力順ID, YMDHMS 帳票作成日時, int 出力期) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print(仮算定納入通知書情報EntityList, 出力順ID, 帳票作成日時, 出力期, reportManager);
@@ -64,12 +64,12 @@ public class KariNonyuTsuchishoHakkoIchiranPrintService {
      * printメソッド
      *
      * @param entityList List<KariSanteiNonyuTsuchiShoJoho>
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param 帳票作成日時 YMDHMS
      * @param 出力期 int
      * @param reportManager ReportManager
      */
-    public void print(List<KariSanteiNonyuTsuchiShoJoho> entityList, Long 出力順ID, YMDHMS 帳票作成日時,
+    public void print(List<KariSanteiNonyuTsuchiShoJoho> entityList, RString 出力順ID, YMDHMS 帳票作成日時,
             int 出力期, ReportManager reportManager) {
         KariNonyuTsuchishoHakkoIchiranProperty property = new KariNonyuTsuchishoHakkoIchiranProperty();
         List<RString> 並び順List = get出力順(出力順ID);
@@ -87,12 +87,12 @@ public class KariNonyuTsuchishoHakkoIchiranPrintService {
      * printメソッド
      *
      * @param entityList List<KariSanteiNonyuTsuchiShoJoho>
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param 帳票作成日時 YMDHMS
      * @param 出力期 int
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(List<KariSanteiNonyuTsuchiShoJoho> entityList, Long 出力順ID, YMDHMS 帳票作成日時,
+    public SourceDataCollection print(List<KariSanteiNonyuTsuchiShoJoho> entityList, RString 出力順ID, YMDHMS 帳票作成日時,
             int 出力期) {
         KariNonyuTsuchishoHakkoIchiranProperty property = new KariNonyuTsuchishoHakkoIchiranProperty();
         List<RString> 並び順List = get出力順(出力順ID);
@@ -101,9 +101,12 @@ public class KariNonyuTsuchishoHakkoIchiranPrintService {
                 new KariNonyuTsuchishoHakkoIchiranReport(entityList, 並び順List, 帳票作成日時, 出力期, association));
     }
 
-    private List<RString> get出力順(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
+    private List<RString> get出力順(RString 出力順ID) {
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 納入通知書仮算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         List<RString> 並び順List = new ArrayList<>();
         if (並び順 != null) {
             for (ISetSortItem item : 並び順.get設定項目リスト()) {

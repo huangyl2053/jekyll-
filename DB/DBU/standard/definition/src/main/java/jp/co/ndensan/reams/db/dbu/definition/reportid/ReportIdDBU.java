@@ -67,6 +67,10 @@ public enum ReportIdDBU {
      */
     DBU300008(new ReportId("DBU300008_JigyohokokuGeppoYoshikiBesshi"), new RString("介護事業状況報告月報・一般状況（別紙）")),
     /**
+     * 介護事業状況報告月報・一般状況（様式1）の帳票ＩＤです。
+     */
+    DBU300001(new ReportId("DBU300001_JigyohokokuGeppoYoshiki1"), new RString("介護事業状況報告月報・一般状況（様式1）")),
+    /**
      * 介護保険　広域内転居結果一覧表の帳票ＩＤです。
      */
     DBU300002(new ReportId("DBU300002_JigyohokokuCompYoshiki1_2"), new RString("介護保険　広域内転居結果一覧表"));

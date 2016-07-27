@@ -101,7 +101,7 @@ public class HomKaigRiysFutgGengKettTsuchishoBodyEditor implements IHomKaigRiysF
             source.ninteiKekka1 = new RString("（承認内容）");
             source.shoninSuru = 決定区分_承認;
             source.ninteiKekka2 = new RString(
-                    "　　　給付率".concat(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString().concat("　/　100")));
+                    "　　　給付率　　".concat(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString().concat("　/　100")));
             source.yukoYMD = item.get訪問介護利用者負担額減額().get適用終了年月日().wareki().toDateString();
 
             source.futanshaNo1 = item.get訪問介護利用者負担額減額().get公費負担者番号().substring(INDEX_0, INDEX_1);
