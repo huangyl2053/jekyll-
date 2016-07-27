@@ -107,8 +107,7 @@ public class HihokenshaDaichoKoshin {
      * @return 処理日付管理マスタ
      */
     public DbT7022ShoriDateKanriEntity selectバッチ内で抽出条件() {
-        DbT7022ShoriDateKanriEntity entity = db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
-        return entity;
+        return db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
     }
 
     /**
