@@ -38,7 +38,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
     private static final RString KOZA_MEIGININ_TITLE = new RString("名義人");
     private static final RString HANKAKU_X = new RString("X");
 
-    private final int リストサイズ１ = 1;
+    private static final int LIST_SIZE1 = 1;
 
     private static final int INT_2 = 2;
     private static final int INT_6 = 6;
@@ -317,7 +317,7 @@ public class KanendoNonyuTsuchishoCVSKigotoEditor implements IKanendoNonyuTsuchi
             return;
         }
 
-        if (納入通知書期情報リスト.size() >= リストサイズ１) {
+        if (納入通知書期情報リスト.size() >= LIST_SIZE1) {
             source.ki1 = 納入通知書期情報リスト.get(0).get期表記().padLeft(RString.HALF_SPACE, INT_2);
             source.tsuki1 = 納入通知書期情報リスト.get(0).get月表記().padLeft(RString.HALF_SPACE, INT_2);
             source.nofuGaku1 = 納入通知書期情報リスト.get(0).get納付額表記();
