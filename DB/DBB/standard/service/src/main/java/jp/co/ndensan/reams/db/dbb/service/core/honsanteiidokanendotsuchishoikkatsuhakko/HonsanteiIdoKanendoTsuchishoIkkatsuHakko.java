@@ -180,7 +180,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakko createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakko.class);
@@ -257,7 +258,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課情報が取得できない場合、Exception
      */
     public void pntKetteiTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -374,7 +376,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課情報が取得できない場合、Exception
      */
     public void pntHenkoTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 変更通知書出力対象区分, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -544,7 +547,8 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException
+     * 賦課情報が取得できない場合、Exception
      */
     public void pntNonyuTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 出力期, RString 納入通知書対象者, RString 口座振替分出力様式, RString 生活保護者先頭出力区分,
@@ -788,7 +792,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             return RString.EMPTY;
         }
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder == null) {
             return RString.EMPTY;
         }
@@ -834,8 +841,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 介護保険料額決定通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 介護保険料額決定通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -879,8 +888,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 介護保険料額決定通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 介護保険料額決定通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
