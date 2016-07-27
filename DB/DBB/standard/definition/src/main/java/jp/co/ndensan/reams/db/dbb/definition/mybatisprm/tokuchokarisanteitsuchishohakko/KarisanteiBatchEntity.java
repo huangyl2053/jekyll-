@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,5 +23,5 @@ public class KarisanteiBatchEntity {
 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
-    private Long 出力順ID;
+    private RString 出力順ID;
 }
