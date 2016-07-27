@@ -36,8 +36,8 @@ public class TokuchoKarisanteiFukaBatchParameter extends BatchParameterBase {
     private static final String KEY_調定年度 = "調定年度";
     private static final String KEY_賦課年度 = "賦課年度";
     private static final String KEY_出力帳票一覧 = "出力帳票一覧";
-    private static final String KEY_flag = "flag";
-    private static final String KEY_parameter = "parameter";
+    private static final String KEY_FLAG = "flag";
+    private static final String KEY_PARAMETER = "parameter";
 
     @BatchParameter(key = KEY_調定年度, name = "調定年度")
     private FlexibleYear 調定年度;
@@ -45,9 +45,9 @@ public class TokuchoKarisanteiFukaBatchParameter extends BatchParameterBase {
     private FlexibleYear 賦課年度;
     @BatchParameter(key = KEY_出力帳票一覧, name = "出力帳票一覧")
     private List<ShuturyokuTyoutuke> 出力帳票一覧;
-    @BatchParameter(key = KEY_flag, name = "flag")
+    @BatchParameter(key = KEY_FLAG, name = "flag")
     private boolean flag;
-    @BatchParameter(key = KEY_parameter, name = "parameter")
+    @BatchParameter(key = KEY_PARAMETER, name = "parameter")
     private TokuchoKaishiTsuchishoBatchParameter parameter;
 
     /**

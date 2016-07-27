@@ -124,7 +124,7 @@ public class DbT2020ShotokuShokaihyoHakkoRirekiDac implements ISaveable<DbT2020S
      * @param 照会年度 FlexibleYear
      * @param 識別コード ShikibetsuCode
      * @return DbT2020ShotokuShokaihyoHakkoRirekiEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT2020ShotokuShokaihyoHakkoRirekiEntity selectBySomeKey(

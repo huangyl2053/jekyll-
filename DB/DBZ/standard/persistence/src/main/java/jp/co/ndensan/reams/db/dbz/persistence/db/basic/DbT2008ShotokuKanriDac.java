@@ -134,7 +134,7 @@ public class DbT2008ShotokuKanriDac implements ISaveable<DbT2008ShotokuKanriEnti
      *
      * @param 所得年度 FlexibleYear
      * @param 識別コードList List<ShikibetsuCode>
-     * @return
+     * @return List<DbT2008ShotokuKanriEntity>
      */
     @Transaction
     public List<DbT2008ShotokuKanriEntity> selectShikibetsuCode(FlexibleYear 所得年度, List<ShikibetsuCode> 識別コードList) {
@@ -154,7 +154,7 @@ public class DbT2008ShotokuKanriDac implements ISaveable<DbT2008ShotokuKanriEnti
      * @param 所得年度 FlexibleYear
      * @param 識別コード ShikibetsuCode
      * @return DbT2008ShotokuKanriEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT2008ShotokuKanriEntity selectBySomeKey(
