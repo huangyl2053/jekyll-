@@ -162,7 +162,7 @@ public class HonsanteiFukaKeisanTotalHandler {
                 活性区分 = true;
             } else {
                 row.setTxtJokyo(状況_済);
-                if (shoriDateKanri.toEntity().getKijunTimestamp() != null || !shoriDateKanri.toEntity().getKijunTimestamp().isEmpty()) {
+                if (shoriDateKanri.toEntity().getKijunTimestamp() != null && !shoriDateKanri.toEntity().getKijunTimestamp().isEmpty()) {
                     row.setTxtShoriNichiji(shoriDateKanri.toEntity().getKijunTimestamp().getDate().wareki().toDateString()
                             .concat(RString.HALF_SPACE).concat(shoriDateKanri.toEntity().getKijunTimestamp().getRDateTime()
                                     .getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
