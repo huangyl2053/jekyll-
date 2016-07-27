@@ -576,6 +576,15 @@ public class YokaigoNinteiJoho implements Serializable {
     }
 
     /**
+     * 被保険者番号認定を返します。
+     *
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+        return null == 受給者台帳Entity ? RString.EMPTY : 受給者台帳Entity.getHihokenshaNo().value();
+    }
+
+    /**
      * 受給申請事由を返します。
      *
      * @return 受給申請事由
