@@ -70,8 +70,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProcessBase {
 
-    private static final ReportId 特別徴収開始通知書仮算定_帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
+    private static final ReportId 帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final RString RSTRING_1 = new RString("1");
+    private static final RString 定数_調定年度 = new RString("調定年度");
+    private static final RString 定数_通知書番号 = new RString("通知書番号");
     private Association 地方公共団体;
     private TokuchoKaishiTsuchishoDataHenshu manager;
     private TokuchoKaishiTsuchishoProcessParameter processParameter;
@@ -106,13 +108,14 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             return;
         }
         KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報 = new KariTokuchoKaishiTsuchisyoJoho();
-        KariSanteiTsuchiShoKyotsuKomokuHenshu 仮算定通知書共通情報作成 = InstanceProvider.create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
+        KariSanteiTsuchiShoKyotsuKomokuHenshu 仮算定通知書共通情報作成 = InstanceProvider
+                .create(KariSanteiTsuchiShoKyotsuKomokuHenshu.class);
         List<EditedKariSanteiTsuchiShoKyotsu> 編集後仮算定通知書共通情報List = new ArrayList<>();
         int 総ページ数 = 0;
         for (TsuchishoDataTempResult tempResult : result.get特徴開始通知書ResultList()) {
             KariSanteiTsuchiShoKyotsu 仮算定通知書情報 = new KariSanteiTsuchiShoKyotsu();
             仮算定通知書情報.set発行日(processParameter.get発行日());
-            仮算定通知書情報.set帳票分類ID(特別徴収開始通知書仮算定_帳票分類ID);
+            仮算定通知書情報.set帳票分類ID(帳票分類ID);
             仮算定通知書情報.set帳票ID(result.get帳票ID());
             仮算定通知書情報.set処理区分(ShoriKubun.バッチ);
             仮算定通知書情報.set地方公共団体(地方公共団体);
@@ -123,14 +126,16 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             仮算定通知書情報.set徴収方法情報_更正後(tempResult.get徴収方法情報());
             仮算定通知書情報.set対象者_追加含む_情報_更正後(tempResult.get対象者_追加含む_情報());
             仮算定通知書情報.set帳票制御共通(result.get帳票制御共通());
-            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定通知書共通情報作成.create仮算定通知書共通情報(仮算定通知書情報);
+            EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定通知書共通情報作成
+                    .create仮算定通知書共通情報(仮算定通知書情報);
             編集後仮算定通知書共通情報List.add(編集後仮算定通知書共通情報);
             仮算定特徴開始通知書情報.set発行日(processParameter.get発行日());
             仮算定特徴開始通知書情報.set編集後仮算定通知書共通情報(編集後仮算定通知書共通情報);
-            仮算定特徴開始通知書情報.set帳票分類ID(特別徴収開始通知書仮算定_帳票分類ID);
+            仮算定特徴開始通知書情報.set帳票分類ID(帳票分類ID);
             仮算定特徴開始通知書情報.set帳票ID(result.get帳票ID());
             仮算定特徴開始通知書情報.set宛先情報(tempResult.get宛先情報());
-            総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧Entity, 仮算定特徴開始通知書情報, result, 仮算定通知書情報);
+            総ページ数 = 総ページ数 + publish特徴開始通知書(出力帳票一覧Entity,
+                    仮算定特徴開始通知書情報, result, 仮算定通知書情報);
         }
         manager.printTsuchisho(result, 総ページ数, 編集後仮算定通知書共通情報List);
     }
@@ -160,8 +165,9 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
                 地方公共団体.getLasdecCode_(), 地方公共団体.get市町村名());
         if (ReportIdDBB.DBB100003.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目1.class,
-                    PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目1.class);
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目1.class,
+                            PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目1.class);
             dbb100003reportWriter = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariB5Source.class)
                     .checkListInfo(info)
@@ -183,8 +189,9 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             return dbb100003ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100004.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目2.class,
-                    PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目2.class);
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目2.class,
+                            PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目2.class);
             dbb100004reportWriter = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.class)
                     .checkListInfo(info)
@@ -206,8 +213,9 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             return dbb100004ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100005.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目3.class,
-                    PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目3.class);
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目3.class,
+                            PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目3.class);
             dbb100005reportWriter = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariSealerSource.class)
                     .checkListInfo(info)
@@ -229,8 +237,9 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             return dbb100005ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100006.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目4.class,
-                    PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目4.class);
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目4.class,
+                            PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目4.class);
             dbb100006reportWriter = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.class)
                     .checkListInfo(info)
@@ -251,17 +260,21 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             dbb100006reportWriter.close();
             return dbb100006ReportSourceWriter.pageCount().value();
         }
-        return publish特徴開始通知書_その他(出力帳票一覧Entity, 仮算定特徴開始通知書情報, result, 仮算定通知書情報, 編集後宛先,
+        return publish特徴開始通知書_その他(出力帳票一覧Entity, 仮算定特徴開始通知書情報, result,
+                仮算定通知書情報, 編集後宛先,
                 認証者, is公印に掛ける, is公印を省略, info);
     }
 
-    private int publish特徴開始通知書_その他(KarisanteiBatchEntity 出力帳票一覧Entity, KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
-            PrtTokuchoKaishiTsuchishoKarisanteiResult result, KariSanteiTsuchiShoKyotsu 仮算定通知書情報, EditedAtesaki 編集後宛先,
-            Ninshosha 認証者, boolean is公印に掛ける, boolean is公印を省略, ICheckListInfo info) {
+    private int publish特徴開始通知書_その他(KarisanteiBatchEntity 出力帳票一覧Entity,
+            KariTokuchoKaishiTsuchisyoJoho 仮算定特徴開始通知書情報,
+            PrtTokuchoKaishiTsuchishoKarisanteiResult result, KariSanteiTsuchiShoKyotsu 仮算定通知書情報,
+            EditedAtesaki 編集後宛先, Ninshosha 認証者, boolean is公印に掛ける,
+            boolean is公印を省略, ICheckListInfo info) {
         if (ReportIdDBB.DBB100008.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目5.class,
-                    PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目5.class);
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目5.class,
+                            PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目5.class);
             dbb100008reportWriter = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.class)
                     .checkListInfo(info)
@@ -286,8 +299,9 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
             return dbb100008ReportSourceWriter.pageCount().value();
         } else if (ReportIdDBB.DBB100009.getReportId().equals(出力帳票一覧Entity.get帳票ID())) {
 
-            CheckListLineItemSet pairs = CheckListLineItemSet.of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目6.class,
-                    PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目6.class);
+            CheckListLineItemSet pairs = CheckListLineItemSet.
+                    of(PrtTokuchoKaishiTsuchishoKarisanteiProcess.特定項目6.class,
+                            PrtTokuchoKaishiTsuchishoKarisanteiProcess.チェック項目6.class);
             dbb100009reportWriter = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.class)
                     .checkListInfo(info)
@@ -303,11 +317,12 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
                     is公印に掛ける,
                     is公印を省略,
                     KenmeiFuyoKubunType.付与なし).buildSource();
-            IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
-                    SubGyomuCode.DBB介護賦課, 仮算定通知書情報.get帳票分類ID());
+            IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator
+                    .create(SubGyomuCode.DBB介護賦課, 仮算定通知書情報.get帳票分類ID());
             CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
             new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoReport(編集後宛先, sourceBuilder, toiawasesakiSource,
-                    仮算定特徴開始通知書情報, result.get通知書定型文1(), result.get通知書定型文2()).writeBy(dbb100009ReportSourceWriter);
+                    仮算定特徴開始通知書情報, result.get通知書定型文1(), result.get通知書定型文2())
+                    .writeBy(dbb100009ReportSourceWriter);
             dbb100009reportWriter.close();
             return dbb100009ReportSourceWriter.pageCount().value();
         }
@@ -322,8 +337,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目1 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_NENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_NENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -376,8 +391,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目2 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_NENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_NENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -430,8 +445,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目3 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_NENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_NENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -486,8 +501,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目4 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_NENDO2, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_NENDO2, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -542,8 +557,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目5 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TITLENENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TITLENENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -597,8 +612,8 @@ public class PrtTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProce
 
     private enum 特定項目6 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_NENDO1, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_NENDO1, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
