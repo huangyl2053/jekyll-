@@ -607,7 +607,8 @@ public class IraishoIkkatsuHakkoBusiness {
                 entity.get住所(),
                 get和暦(entity.get生年月日()),
                 Seibetsu.toValue(entity.get性別()).get名称(),
-                get提出期限());
+                get提出期限(),
+                entity.get主治医医療機関コード());
     }
 
     private RString get提出期限() {
