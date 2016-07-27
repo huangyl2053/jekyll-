@@ -353,11 +353,11 @@ public class TokuChoSoufuJohoSakuseiBatch {
         if (処理日時 != null) {
             tokuchotempentity.setDtKakushuYMD(処理日時.getDate().toDateString());
         }
-        setEntityValueContinue(tokuchotempentity, entity, 処理年度, 特徴開始月, 処理日時, 徴収方法n月);
+        setEntityValueContinue(tokuchotempentity, entity, 処理年度, 特徴開始月, 徴収方法n月);
     }
 
     private void setEntityValueContinue(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
-            TokuChoSoufuJohoSakuseiResult entity, FlexibleYear 処理年度, RDate 特徴開始月, RDateTime 処理日時, RString 徴収方法n月) {
+            TokuChoSoufuJohoSakuseiResult entity, FlexibleYear 処理年度, RDate 特徴開始月, RString 徴収方法n月) {
         if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
             tokuchotempentity.setDtKakushuKubun(RS01);
         } else if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && entity.get資格の情報().get資格喪失事由コード() == null
@@ -575,6 +575,14 @@ public class TokuChoSoufuJohoSakuseiBatch {
         return dbzEntity;
     }
 
+    /**
+     * Entity転換のメソドです。
+     *
+     * @param entity
+     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return
+     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     */
     public UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entityCopy(
             jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity) {
         UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity dbzEntity

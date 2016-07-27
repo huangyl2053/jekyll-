@@ -32,7 +32,7 @@ public class KaigoShikakuInfoDiv extends Panel {
     @JsonProperty("txtSoshitsuJiyu")
     private TextBox txtSoshitsuJiyu;
     @JsonProperty("btnHihokenshaFinder")
-    private ButtonDialog btnHihokenshaFinder;
+    private Button btnHihokenshaFinder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -135,7 +135,7 @@ public class KaigoShikakuInfoDiv extends Panel {
      * @return btnHihokenshaFinder
      */
     @JsonProperty("btnHihokenshaFinder")
-    public ButtonDialog getBtnHihokenshaFinder() {
+    public Button getBtnHihokenshaFinder() {
         return btnHihokenshaFinder;
     }
 
@@ -144,7 +144,7 @@ public class KaigoShikakuInfoDiv extends Panel {
      * @param btnHihokenshaFinder btnHihokenshaFinder
      */
     @JsonProperty("btnHihokenshaFinder")
-    public void setBtnHihokenshaFinder(ButtonDialog btnHihokenshaFinder) {
+    public void setBtnHihokenshaFinder(Button btnHihokenshaFinder) {
         this.btnHihokenshaFinder = btnHihokenshaFinder;
     }
 

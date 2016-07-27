@@ -473,14 +473,6 @@ public class TokuchoTaishoshaIchiranSakusei {
         特徴未同定情報Entity.setState(EntityDataState.Modified);
         特徴未同定情報Dac.save(特徴未同定情報Entity);
         if (確認状況区分_同定済み.compareTo(確認状況区分) == NUM0) {
-//            TODO 式样变更
-            List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
-                    処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
-            for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
-                entity.setKakuninJokyoKbn(確認状況区分_対象外);
-                entity.setState(EntityDataState.Modified);
-                特徴未同定情報Dac.save(entity);
-            }
             HihokenshaNo 被保険者番号Temp;
             if (!RString.isNullOrEmpty(被保険者番号)) {
                 被保険者番号Temp = new HihokenshaNo(被保険者番号);
@@ -602,8 +594,7 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
             徴収方法entity.setState(EntityDataState.Added);
             徴収方法Dac.save(徴収方法entity);
-//            List<DbT2019TokuchoMidoteiJohoEntity>
-            特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
+            List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
                     処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
             if (特徴未同定情報List == null || 特徴未同定情報List.isEmpty()) {
                 return;
@@ -613,13 +604,19 @@ public class TokuchoTaishoshaIchiranSakusei {
                     その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
                 }
             }
+            特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
+                    処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
+            for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
+                entity.setKakuninJokyoKbn(確認状況区分_対象外);
+                entity.setState(EntityDataState.Modified);
+                特徴未同定情報Dac.save(entity);
+            }
         }
     }
 
     private void その他候補者データを登録する(RString 開始月数, FlexibleYear 処理年度,
             DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報entity, RString 基礎年金番号,
             RString 年金コード, RString 捕捉月) {
-        //qa  965
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
         param.set基礎年金番号(基礎年金番号);
