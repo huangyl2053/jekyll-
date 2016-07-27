@@ -82,13 +82,6 @@ public class ShiharaiHohoHenkoHaakuIchiranBatchParameter extends BatchParameterB
     @BatchParameter(key = REPORTID, name = "帳票ID")
     private RString reportId;
 
-    private int isChecked(boolean cheked) {
-        if (cheked) {
-            return 1;
-        }
-        return 0;
-    }
-
     /**
      * バッチパラメターを取得します．
      *
