@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5） のReportSourceクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-5） のReportです。
  *
  * @reamsid_L DBU-5530-080 dangjingjing
  */
