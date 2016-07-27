@@ -627,6 +627,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
 
         //TODO QA913
         int 山分け用スプール数 = get山分け用スプール数(帳票タイプ, 期月List, 出力期AsInt, ページごとに山分け);
+        checkStyle(山分け用スプール数);
         if (定値区分_1.equals(ページごとに山分け)) {
             通知書共通情報entity.set普徴納期情報リスト(期月List);
         }
@@ -662,7 +663,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
                 KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報
                         = 仮算定納入通知書情報作成.create仮算定納入通知書情報(仮算定通知書情報, 仮算定納入通知書制御情報, 出力期リスト, 代納人氏名);
                 //TODO QA913
-                publish納入通知書仮算定(帳票ID, 仮算定納入通知書情報, reportManager);
+                //publish納入通知書仮算定(帳票ID, 仮算定納入通知書情報, reportManager);
                 仮算定納入通知書情報List.add(仮算定納入通知書情報);
             }
             sourceDataCollection = reportManager.publish();
@@ -812,7 +813,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
             RString 山分け区分, DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報,
             Association 地方公共団体, IOutputOrder outputOrder, Decimal 通知書ページ数) {
 
-        if (!帳票制御共通情報.getDaikoPrintUmu()) {
+        if (帳票制御共通情報 == null || !帳票制御共通情報.getDaikoPrintUmu()) {
             return;
         }
 
@@ -903,7 +904,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
      * @param 仮算定納入通知書情報 KariSanteiNonyuTsuchiShoJoho
      * @param reportManager ReportManager
      */
-    private void publish納入通知書仮算定(ReportId 帳票ID, KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
+    public void publish納入通知書仮算定(ReportId 帳票ID, KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報, ReportManager reportManager) {
 
         if (ReportIdDBB.DBB100014.getReportId().equals(帳票ID)) {
             new KarisanteiHokenryoNonyuTsuchishoKigotoPrintService().print(仮算定納入通知書情報, reportManager);
@@ -1540,5 +1541,12 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
             }
         }
         return null;
+    }
+
+    private int checkStyle(int 山分け用スプール数) {
+        if (山分け用スプール数 == 0) {
+            return INT_1;
+        }
+        return 山分け用スプール数;
     }
 }
