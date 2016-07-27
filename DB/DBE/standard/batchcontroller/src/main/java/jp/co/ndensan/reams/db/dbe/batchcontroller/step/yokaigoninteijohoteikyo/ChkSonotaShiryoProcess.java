@@ -61,7 +61,6 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
     private static final RString フラグ = new RString("1");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
     private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
     private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
@@ -219,7 +218,7 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
                         ReportIdDBE.DBE517016.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
-                        ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                        new RString(JobContextHolder.getJobId()),
                         ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517016.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,

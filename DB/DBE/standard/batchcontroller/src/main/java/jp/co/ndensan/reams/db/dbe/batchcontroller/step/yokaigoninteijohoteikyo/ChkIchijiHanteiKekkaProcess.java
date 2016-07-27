@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
@@ -103,7 +104,6 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final RString 識別コード99A = new RString("99A");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
     private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
     private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
@@ -589,10 +589,10 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応1リスト.add(get名称12(dbt5211Entity, 連番56));
             社会生活への適応1リスト.add(get名称12(dbt5211Entity, 連番57));
-            社会生活への適応1リスト.add(get名称12(dbt5211Entity, 連番58));
-            社会生活への適応1リスト.add(get名称12(dbt5211Entity, 連番59));
-            社会生活への適応1リスト.add(get名称12(dbt5211Entity, 連番60));
-            社会生活への適応1リスト.add(get名称12(dbt5211Entity, 連番61));
+            社会生活への適応1リスト.add(get名称17(dbt5211Entity, 連番58));
+            社会生活への適応1リスト.add(get名称16(dbt5211Entity, 連番59));
+            社会生活への適応1リスト.add(get名称10(dbt5211Entity, 連番60));
+            社会生活への適応1リスト.add(get名称10(dbt5211Entity, 連番61));
         }
         if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応1リスト.add(get名称22(dbt5211Entity, 連番34));
@@ -1641,8 +1641,10 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 : ServiceKubunCode.toValue(entity.getサービス区分コード()).get名称());
         ichijiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         List<RString> 高齢者自立度リスト = new ArrayList<>();
-        高齢者自立度リスト.add(entity.get障害高齢者自立度());
-        高齢者自立度リスト.add(entity.get認知症高齢者自立度());
+        高齢者自立度リスト.add(RString.isNullOrEmpty(entity.get障害高齢者自立度()) ? RString.EMPTY
+                : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get障害高齢者自立度()).get名称());
+        高齢者自立度リスト.add(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症高齢者自立度()).get名称());
         ichijiEntity.set高齢者自立度リスト(高齢者自立度リスト);
         return ichijiEntity;
     }
@@ -1950,7 +1952,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                         ReportIdDBE.DBE517181.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
-                        ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                        new RString(JobContextHolder.getJobId()),
                         ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517181.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,
