@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity;
 
@@ -20,6 +19,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdo
 public class SedaiShuuyakuBangoKanrenEntity {
 
     private DbWT0001HihokenshaTempEntity 被保険者;
-    private List<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> 高額送付リスト;
+    private DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付;
 
 }

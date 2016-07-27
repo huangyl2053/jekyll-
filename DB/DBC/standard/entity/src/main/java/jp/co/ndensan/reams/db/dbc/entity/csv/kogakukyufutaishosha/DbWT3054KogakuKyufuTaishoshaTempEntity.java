@@ -25,6 +25,29 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT3054KogakuKyufuTaishoshaTempEntity {
 
+    /**
+     * コンストラクタです。
+     */
+    public DbWT3054KogakuKyufuTaishoshaTempEntity() {
+        this.連番 = 0;
+        this.レコード番号 = 0;
+        this.帳票レコード種別 = RString.EMPTY;
+        this.証記載保険者名 = RString.EMPTY;
+        this.国保連合会名 = RString.EMPTY;
+        this.no = RString.EMPTY;
+        this.事業所名 = RString.EMPTY;
+        this.サービス種類名 = RString.EMPTY;
+        this.サービス費用合計額 = Decimal.ZERO;
+        this.利用者負担額 = Decimal.ZERO;
+        this.備考 = RString.EMPTY;
+        this.サービス費用合計額合計 = Decimal.ZERO;
+        this.利用者負担額合計 = Decimal.ZERO;
+        this.算定基準額 = Decimal.ZERO;
+        this.支払済金額合計 = Decimal.ZERO;
+        this.高額支給額 = Decimal.ZERO;
+        this.再処理不可フラグ = false;
+    }
+
     private int 連番;
     private int レコード番号;
     private RString 帳票レコード種別;

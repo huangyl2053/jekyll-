@@ -78,7 +78,8 @@
         "shikakuSoshitsuYmd" rshare."UDD015YMD",
         "shikakuSoshitsuJiyuCode" character varying(2),
         "setaiShuyakuNo" character varying(40),
-        "shikibetsuCode" rshare."UDD001ShikibetsuCode"
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        CONSTRAINT "DbWT0001_pkey" PRIMARY KEY ("meisaiRenban")
         )
     </insert>
     

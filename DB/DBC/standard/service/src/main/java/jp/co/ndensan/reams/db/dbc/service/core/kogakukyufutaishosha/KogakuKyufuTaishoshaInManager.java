@@ -215,6 +215,7 @@ public class KogakuKyufuTaishoshaInManager {
             証記載保険者番号 = new ShoKisaiHokenshaNo(ヘッダー.get証記載保険者番号());
         }
         集計Entity.set証記載保険者番号(証記載保険者番号);
+        集計Entity.set証記載保険者名(ヘッダー.get保険者名());
         FlexibleDate 作成年月日 = FlexibleDate.EMPTY;
         if (!RString.isNullOrEmpty(ヘッダー.get作成年月日())) {
             作成年月日 = new FlexibleDate(ヘッダー.get作成年月日());
@@ -245,6 +246,7 @@ public class KogakuKyufuTaishoshaInManager {
             証記載保険者番号 = new ShoKisaiHokenshaNo(ヘッダー.get証記載保険者番号());
         }
         明細Entity.set証記載保険者番号(証記載保険者番号);
+        明細Entity.set証記載保険者名(ヘッダー.get保険者名());
         FlexibleDate 作成年月日 = FlexibleDate.EMPTY;
         if (!RString.isNullOrEmpty(ヘッダー.get作成年月日())) {
             作成年月日 = new FlexibleDate(ヘッダー.get作成年月日());

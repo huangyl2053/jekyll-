@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -130,8 +131,8 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
                     entity.set作成日時(new RString(年月日.concat(時刻.toString()).toString()));
                     isFirst = false;
                 }
-                entity.set証記載保険者番号(data.get証記載保険者番号().getColumnValue());
-                entity.set被保険者番号(data.get被保険者番号().getColumnValue());
+                entity.set証記載保険者番号(getColumnValue(data.get証記載保険者番号()));
+                entity.set被保険者番号(getColumnValue(data.get被保険者番号()));
                 entity.set被保険者カナ氏名(data.get被保険者カナ氏名());
                 entity.set被保険者氏名(data.get被保険者氏名());
                 entity.setキー1(data.getキー1());
@@ -196,6 +197,13 @@ public class KokuhorenKyoutsuuSyoriKekkaListSakuseiManager {
 
     private RString getNotNull(RString rstring) {
         return RString.isNullOrEmpty(rstring) ? RString.EMPTY : rstring;
+    }
+
+    private RString getColumnValue(IDbColumnMappable column) {
+        if (null == column) {
+            return RString.EMPTY;
+        }
+        return column.getColumnValue();
     }
 
 }

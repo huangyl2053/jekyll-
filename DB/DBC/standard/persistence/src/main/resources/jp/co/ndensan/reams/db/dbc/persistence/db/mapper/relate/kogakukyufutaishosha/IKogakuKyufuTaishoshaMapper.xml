@@ -138,8 +138,10 @@
     
     <select id="select世帯集約番号関連リスト" 
         resultMap="resultMap_SedaiShuuyakuBangoKanrenEntity" resultOrdered="true">
+        SELECT A.* FROM (
         SELECT <include refid="allColumns_DbWT0001Hihokensha" />,
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.allColumns_DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" />
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.allColumns_DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" />,
+        row_number() OVER (PARTITION BY DbWT0001."meisaiRenban" ORDER BY "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD" DESC) AS rrkno
         FROM "DbWT0001Hihokensha" AS DbWT0001
         LEFT JOIN "rgdb"."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
         ON DbWT0001."henkanHihokenshaNo" = "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."hiHokenshaNo"
@@ -147,8 +149,8 @@
           AND DbWT0001."henkanHihokenshaNo" != ''
           AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD"<![CDATA[<=]]> DbWT0001."serviceTeikyoYmd"
           AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."logicalDeletedFlag"= false
-        ORDER BY "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD" DESC ,
-                 "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."rirekiNo" DESC
+                   ) AS A
+                   WHERE A.rrkno = 1
     </select>
     
     <!-- 世帯集約番号の登録 -->
@@ -247,6 +249,9 @@
     </select>
     
     <resultMap id="resultMap_SaishoriFukaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.SaishoriFukaEntity" autoMapping="true">
+        <id column="dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" />
+        <id column="dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM" />
+        <id column="dbT3055KogakuKyufuTaishoshaGokei_rirekiNo" />
         <association property="合計" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
         <association property="被保険者" resultMap="resultMap_DbV1001HihokenshaDaichoEntity"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
@@ -317,8 +322,10 @@
     </resultMap>
     
     <resultMap id="resultMap_SedaiShuuyakuBangoKanrenEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.SedaiShuuyakuBangoKanrenEntity" autoMapping="true">
+        <id column="dbWT0001HihokenshaTemp_meisaiRenban" />
+        <id column="dbWT0001HihokenshaTemp_henkanHihokenshaNo" />
         <association property="被保険者" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper.resultMap_DbWT0001HihokenshaTempEntity"/>
-        <collection property="高額送付リスト" ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity"/>
+        <association property="高額送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_RirikiNoKanrenEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.RirikiNoKanrenEntity" autoMapping="true">

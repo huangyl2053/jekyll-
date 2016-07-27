@@ -51,17 +51,13 @@ public class KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess extends BatchPro
     @Override
     protected void process(SedaiShuuyakuBangoKanrenEntity t) {
         DbWT0001HihokenshaTempEntity 被保険者 = t.get被保険者();
-        List<DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity> 高額送付リスト = t.get高額送付リスト();
-        if (null != 高額送付リスト && !高額送付リスト.isEmpty()) {
-            for (DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付 : 高額送付リスト) {
-                if (高額送付.getIdoYMD().isBeforeOrEquals(被保険者.getサービス提供年月末日())) {
-                    被保険者.set世帯集約番号(高額送付.getSetaiShuyakuNo().getColumnValue());
-                    世帯集約番号修正被保険者リスト.add(被保険者);
-                    return;
-                }
-            }
-            世帯集約番号登録エラー被保険者リスト.add(被保険者);
+        DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付 = t.get高額送付();
+        if (高額送付.getIdoYMD().isBeforeOrEquals(被保険者.getサービス提供年月末日())) {
+            被保険者.set世帯集約番号(高額送付.getSetaiShuyakuNo().getColumnValue());
+            世帯集約番号修正被保険者リスト.add(被保険者);
+            return;
         }
+        世帯集約番号登録エラー被保険者リスト.add(被保険者);
     }
 
     @Override

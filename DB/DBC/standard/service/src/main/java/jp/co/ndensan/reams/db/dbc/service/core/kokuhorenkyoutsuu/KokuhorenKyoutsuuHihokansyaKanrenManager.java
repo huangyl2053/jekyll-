@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -104,7 +105,7 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         }
         if (!hokenshaNoSet.isEmpty()) {
             for (ShoKisaiHokenshaNo shoHokenshaNo : hokenshaNoSet) {
-                HokenshaNo hokenshaNo = new HokenshaNo(shoHokenshaNo.getColumnValue());
+                HokenshaNo hokenshaNo = new HokenshaNo(getColumnValue(shoHokenshaNo));
                 GappeiJyohoSpecificParameter parameter
                         = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(LasdecCode.EMPTY, hokenshaNo);
                 SearchResult<GappeiCityJyoho> gcJohoResult
@@ -146,16 +147,16 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         DbWT0001HihokenshaTempEntity saveEntity = entity.getHihokensha();
         saveEntity.set管内管外区分(識別対象.get住所().get管内管外().toRString());
         saveEntity.set郵便番号(識別対象.get住所().get郵便番号().getYubinNo());
-        saveEntity.set町域コード(識別対象.get住所().get町域コード().getColumnValue());
-        saveEntity.set行政区コード(識別対象.get行政区画().getGyoseiku().getコード().getColumnValue());
+        saveEntity.set町域コード(getColumnValue(識別対象.get住所().get町域コード()));
+        saveEntity.set行政区コード(getColumnValue(識別対象.get行政区画().getGyoseiku().getコード()));
         saveEntity.set行政区名(識別対象.get行政区画().getGyoseiku().get名称());
         saveEntity.set住所(識別対象.get住所().get住所());
-        saveEntity.set番地(識別対象.get住所().get番地().getBanchi().getColumnValue());
-        saveEntity.set方書(識別対象.get住所().get方書().getColumnValue());
-        saveEntity.set宛名カナ名称(識別対象.get名称().getKana().getColumnValue());
-        saveEntity.set宛名名称(識別対象.get名称().getName().getColumnValue());
-        saveEntity.set氏名50音カナ(RStringUtil.convertTo清音化(識別対象.get名称().getKana().getColumnValue()));
-        saveEntity.set識別コード(識別対象.get識別コード().getColumnValue());
+        saveEntity.set番地(getColumnValue(識別対象.get住所().get番地().getBanchi()));
+        saveEntity.set方書(getColumnValue(識別対象.get住所().get方書()));
+        saveEntity.set宛名カナ名称(getColumnValue(識別対象.get名称().getKana()));
+        saveEntity.set宛名名称(getColumnValue(識別対象.get名称().getName()));
+        saveEntity.set氏名50音カナ(RStringUtil.convertTo清音化(getColumnValue(識別対象.get名称().getKana())));
+        saveEntity.set識別コード(getColumnValue(識別対象.get識別コード()));
         saveEntity.set市町村コード(daicho.getShichosonCode());
         saveEntity.set資格取得日(daicho.getShikakuShutokuYMD());
         saveEntity.set資格取得事由コード(daicho.getShikakuShutokuJiyuCode());
@@ -219,6 +220,13 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
             return false;
         }
         return true;
+    }
+
+    private RString getColumnValue(IDbColumnMappable column) {
+        if (null == column) {
+            return RString.EMPTY;
+        }
+        return column.getColumnValue();
     }
 
 }
