@@ -150,12 +150,11 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
      * 画面初期化処理です。
      *
      * @param 申請書管理番号 RString
-     * @param 被保険者番号 RString
      *
      * @return 画面更新用情報
      */
-    public ShokkenTorikeshiIchibuSoshituGamenJoho onLoad(RString 申請書管理番号, RString 被保険者番号) {
-        if (null == 申請書管理番号 || 申請書管理番号.isEmpty() || null == 被保険者番号 || 被保険者番号.isEmpty()) {
+    public ShokkenTorikeshiIchibuSoshituGamenJoho onLoad(RString 申請書管理番号) {
+        if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
             return null;
         }
 
@@ -166,7 +165,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         YokaigoNinteiJoho 今回情報 = get今回情報(市町村セキュリティ情報.get導入形態コード(), 申請書管理番号);
         YokaigoNinteiJoho 前回情報 = get前回情報(申請書管理番号);
 
-        setHdnArea(今回情報, 申請書管理番号, 被保険者番号);
+        setHdnArea(今回情報, 申請書管理番号);
 
         ヘッダ初期化();
         認定申請情報初期化(今回情報, 市町村セキュリティ情報.get導入形態コード());
@@ -182,8 +181,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         return 画面更新用情報;
     }
 
-    private void setHdnArea(YokaigoNinteiJoho 今回情報, RString 申請書管理番号, RString 被保険者番号) {
-        div.setHdnHihokenshaNo(被保険者番号);
+    private void setHdnArea(YokaigoNinteiJoho 今回情報, RString 申請書管理番号) {
+        div.setHdnHihokenshaNo(今回情報.get被保険者番号());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         if (null != 今回情報) {
             div.setHdnShikibetsuCode(null != 今回情報.get識別コード受給者台帳() ? 今回情報.get識別コード受給者台帳().value() : RString.EMPTY);
