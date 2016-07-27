@@ -187,7 +187,9 @@ public class HanyoListRoreiFukushiNenkinJukyushaProcess extends BatchProcessBase
     protected void afterExecute() {
         eucCsvWriter.writeLine(new HanyoListRoreiFukushiNenkinJukyushaResult().
                 setEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, association, 生活保護種別builder));
-        personalDataList.add(toPersonalData(lastEntity));
+        if (lastEntity != null) {
+            personalDataList.add(toPersonalData(lastEntity));
+        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);

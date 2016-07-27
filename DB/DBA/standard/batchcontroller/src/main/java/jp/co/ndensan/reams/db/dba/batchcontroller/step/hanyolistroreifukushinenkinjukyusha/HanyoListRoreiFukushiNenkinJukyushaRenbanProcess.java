@@ -189,7 +189,10 @@ public class HanyoListRoreiFukushiNenkinJukyushaRenbanProcess extends BatchProce
     protected void afterExecute() {
         eucCsvWriter.writeLine(new HanyoListRoreiFukushiNenkinJukyushaResult().
                 setRenbanEucCsvEntity(processParamter, lastEntity, koseiShichosonJoho, ++i, association, 生活保護種別builder));
-        personalDataList.add(toPersonalData(lastEntity));
+        if (lastEntity != null) {
+            personalDataList.add(toPersonalData(lastEntity));
+        }
+
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         manager.spool(eucFilePath, log);

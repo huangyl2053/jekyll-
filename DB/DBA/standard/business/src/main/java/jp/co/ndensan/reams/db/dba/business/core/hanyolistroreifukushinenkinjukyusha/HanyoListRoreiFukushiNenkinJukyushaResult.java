@@ -132,7 +132,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
             eucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
             eucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
             eucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
-            eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
+            eucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失事由()));
             eucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
             eucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
             if (!RString.isNullOrEmpty(entity.get資格区分())) {
@@ -248,7 +248,7 @@ public class HanyoListRoreiFukushiNenkinJukyushaResult {
             renbanEucCsvEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get資格取得事由()));
             renbanEucCsvEntity.set資格取得日(set年月日(processParamter, entity.get資格取得日()));
             renbanEucCsvEntity.set資格取得届出日(set年月日(processParamter, entity.get資格取得届出日()));
-            renbanEucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getコード(), entity.get喪失事由()));
+            renbanEucCsvEntity.set喪失事由(getCodeNameByCode(DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(), entity.get喪失事由()));
             renbanEucCsvEntity.set資格喪失日(set年月日(processParamter, entity.get資格喪失日()));
             renbanEucCsvEntity.set資格喪失届日(set年月日(processParamter, entity.get資格喪失届日()));
             if (!RString.isNullOrEmpty(entity.get資格区分())) {
