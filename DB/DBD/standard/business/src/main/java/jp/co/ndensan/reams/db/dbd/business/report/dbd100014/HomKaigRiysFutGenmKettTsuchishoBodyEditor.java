@@ -138,7 +138,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
             source.riyu5 = get非承認理由List(INDEX_4, 非承認理由);
 
         }
-        source.iken2 = RString.EMPTY;
+        source.iken2 = new RString("　　　　減額率　　　").concat(item.get特別地域加算減免().get減額率().getColumnValue().toString());
         source.iken3 = RString.EMPTY;
         source.iken4 = RString.EMPTY;
         source.iken5 = RString.EMPTY;
