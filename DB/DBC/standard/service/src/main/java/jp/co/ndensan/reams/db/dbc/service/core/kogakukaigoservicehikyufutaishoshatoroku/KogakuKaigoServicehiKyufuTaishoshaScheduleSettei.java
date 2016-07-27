@@ -111,7 +111,6 @@ public class KogakuKaigoServicehiKyufuTaishoshaScheduleSettei {
             if (国保連インターフェース管理 != null) {
                 if (get処理状態区分の比較(国保連インターフェース管理, データEntity)) {
                     件数カウント = 件数カウント + 1;
-                } else {
                     entity = データEntity.toEntity();
                     entity.setState(EntityDataState.Modified);
                     登録_更新List.add(entity);
