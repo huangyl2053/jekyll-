@@ -1815,7 +1815,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
-                                // TODO: 設計書に処理名称不正
+                                // TODO 設計書に処理名称不正
                                 eq(shoriName, ShoriName.依頼金額計算.get名称()),
                                 eq(nendo, 調定年度),
                                 eq(shoriEdaban, 処理枝番_0001),

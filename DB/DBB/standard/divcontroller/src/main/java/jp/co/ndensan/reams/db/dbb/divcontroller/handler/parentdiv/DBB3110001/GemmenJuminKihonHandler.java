@@ -964,7 +964,11 @@ public class GemmenJuminKihonHandler {
         RString 減免作成区分 = 減免の情報.get減免作成区分();
         PrintInfoDiv 発行パネル = div.getGemmenPrintinfo().getPrintInfo();
         発行パネル.getPritPublish1().setVisible(true);
+        発行パネル.getPritPublish1().getComdiv1().initialize(true, null, false, true, null, false);
+        発行パネル.getPritPublish1().getComdiv1().setSendDateDisable(true);
         発行パネル.getPritPublish2().setVisible(true);
+        発行パネル.getPritPublish2().getComdiv2().initialize(true, null, false, true, null, false);
+        発行パネル.getPritPublish2().getComdiv2().setSendDateDisable(true);
         発行パネル.getPritPublish3().setVisible(true);
         発行パネル.getPritPublish4().setVisible(true);
         発行パネル.getPritPublish4().setTitle(賦課台帳);
@@ -989,6 +993,8 @@ public class GemmenJuminKihonHandler {
                 氏名R.concat(コロン).concat(氏名),
                 通知書番号R.concat(コロン).concat(通知書番号.getColumnValue()));
         if (発行パネル.getPritPublish3().isVisible()) {
+            発行パネル.getPritPublish3().getComdiv3().initialize(true, null, false, true, null, false);
+            発行パネル.getPritPublish3().getComdiv3().setSendDateDisable(true);
             発行パネル.getPritPublish3().getRadShutsuryokuHoho().setDataSource(get出力方法());
             発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().setDataSource(get出力形式());
             発行パネル.getPritPublish3().getRadShutsuryokuHoho().setSelectedIndex(ゼロ_定値);
@@ -1104,6 +1110,8 @@ public class GemmenJuminKihonHandler {
         通知書発行パラメータ.set納入_出力方法(発行パネル.getPritPublish3().getRadShutsuryokuHoho().getSelectedKey());
         通知書発行パラメータ.set納入_出力形式(発行パネル.getPritPublish3().getRadShutsuryokuKeishiki().getSelectedKey());
         通知書発行パラメータ.set賦課台帳_出力有無(is賦課台帳checked);
+        // TODO 「イベント定義」シート、「発行する」ボタン押下後は(初期化状態の)画面に戻ると追記。
+        onClick_btnUpt(年度分賦課減免リスト);
         return KaigoHokenryoGemmen.createInstance().publish(通知書発行パラメータ);
     }
 

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbb.service.core.gemmen.gemmen.GemmenManager;
 import jp.co.ndensan.reams.db.dbb.service.core.gemmen.kibetsu.KibetsuManager;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -32,6 +33,8 @@ public class GemmenJohoManager {
     private final DbT2002FukaDac 介護賦課Dac;
     private final KibetsuManager 介護期別Manager;
     private final GemmenManager 介護賦課減免Manager;
+
+    private static final RString 減免の情報検索条件MESSAGE = new RString("減免の情報検索条件");
 
     /**
      * コンストラクタです。
@@ -81,7 +84,7 @@ public class GemmenJohoManager {
      */
     @Transaction
     public GemmenJoho get減免の情報(GemmenJohoRelateMapperParameter 減免の情報検索条件) {
-        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(減免の情報検索条件MESSAGE.toString()));
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
         GemmenJohoRelateEntity relateEntity = mapper.select減免の情報ByKey(減免の情報検索条件);
@@ -100,7 +103,7 @@ public class GemmenJohoManager {
      */
     @Transaction
     public GemmenJoho get最新の減免情報(GemmenJohoRelateMapperParameter 減免の情報検索条件) {
-        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(減免の情報検索条件MESSAGE.toString()));
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
         GemmenJohoRelateEntity relateEntity = mapper.select最新の減免情報ByKey(減免の情報検索条件);
@@ -119,7 +122,7 @@ public class GemmenJohoManager {
      */
     @Transaction
     public GemmenJoho get減免の情報_決定更正後(GemmenJohoRelateSonotaMapperParameter 減免の情報検索条件) {
-        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(減免の情報検索条件MESSAGE.toString()));
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
         GemmenJohoRelateEntity relateEntity = mapper.select減免の情報_決定更正後(減免の情報検索条件);
@@ -138,7 +141,7 @@ public class GemmenJohoManager {
      */
     @Transaction
     public GemmenJoho get減免の情報_取消更正後(GemmenJohoRelateSonotaMapperParameter 減免の情報検索条件) {
-        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("減免の情報検索条件"));
+        requireNonNull(減免の情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage(減免の情報検索条件MESSAGE.toString()));
         IGemmenJohoRelateMapper mapper = mapperProvider.create(IGemmenJohoRelateMapper.class);
 
         GemmenJohoRelateEntity relateEntity = mapper.select減免の情報_取消更正後(減免の情報検索条件);
