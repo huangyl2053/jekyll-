@@ -39,6 +39,7 @@
             resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity" fetchSize="500">
         SELECT
           T5101."shoKisaiHokenshaNo" AS t5101_証記載保険者番号
+          , T5101."shisetsuNyushoFlag" AS t5101_施設入所の有無
           , T5101."hihokenshaNo" AS t5101_被保険者番号
           , T5101."hihokenshaName" AS t5101_被保険者氏名
           , T5101."ninteiShinseiYMD" AS t5101_認定申請年月日

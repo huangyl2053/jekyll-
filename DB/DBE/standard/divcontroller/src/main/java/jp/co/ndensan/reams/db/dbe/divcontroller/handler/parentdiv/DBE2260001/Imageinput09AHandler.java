@@ -38,7 +38,7 @@ public class Imageinput09AHandler {
     public ShujiiIkenshoJoho set09A項目(ShujiiIkenshoJoho joho, dgshinseishaichiran_Row row, TorokuData data) {
         List<ShujiiIkenshoKinyuItem> itemList = joho.getShujiiIkenshoKinyuItemList();
         List<ShujiiIkenshoIkenItem> 意見項目List = joho.getShujiiIkenshoIkenItemList();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(data.getT5101_厚労省IF識別コード())) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(data.getT5101_厚労省IF識別コード())) {
             for (ShujiiIkenshoKinyuItem item : itemList) {
                 joho = set09A記入項目1(joho, row, data, item);
                 joho = set09A記入項目2(joho, row, data, item);
@@ -311,7 +311,7 @@ public class Imageinput09AHandler {
         } else {
             ShujiiIkenshoKinyuItem なしデータ = new ShujiiIkenshoKinyuItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKinyuMapping09A.介護サービスの留意事項_摂食.getコード()));
-            なしデータ = なしデータ.createBuilderForEdit().set記入項目(data.getその他()).build();
+            なしデータ = なしデータ.createBuilderForEdit().set記入項目(data.get摂食()).build();
             if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
                 なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
             }
@@ -692,18 +692,6 @@ public class Imageinput09AHandler {
             ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.火の不始末.getコード()));
             なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get火の不始末()).build();
-            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
-                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
-            }
-            joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(なしデータ).build();
-        }
-        if (IkenshoKomokuMapping09A.過去6カ月の体重の変化.getコード().equals(new RString(item.get連番()))) {
-            item.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
-            // joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(item).build();
-        } else {
-            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.過去6カ月の体重の変化.getコード()));
-            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
             if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
                 なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
             }
@@ -1795,6 +1783,18 @@ public class Imageinput09AHandler {
             ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.生活機能の維持_改善の見通し.getコード()));
             なしデータ = なしデータ.createBuilderForEdit().set意見項目(空白).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (IkenshoKomokuMapping09A.過去6カ月の体重の変化.getコード().equals(new RString(item.get連番()))) {
+            item.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
+            // joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(item).build();
+        } else {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping09A.過去6カ月の体重の変化.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
             if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
                 なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
             }

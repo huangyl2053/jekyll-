@@ -21,6 +21,7 @@ public class ImageinputRelateEntity {
     private RString t5101_被保険者番号;
     private RString t5101_被保険者氏名;
     private RString t5101_認定申請年月日;
+    private boolean t5101_施設入所の有無;
     private RString t7051_市町村名称;
     private RString t5101_申請書管理番号;
     private RString t5115_イメージ共有ファイルID;

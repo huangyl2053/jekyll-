@@ -697,18 +697,6 @@ public class Imageinput06AHandler {
             }
             joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(なしデータ).build();
         }
-        if (IkenshoKomokuMapping06A.過去6カ月の体重の変化.getコード().equals(new RString(item.get連番()))) {
-            item.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
-            // joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(item).build();
-        } else {
-            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping06A.過去6カ月の体重の変化.getコード()));
-            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
-            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
-                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
-            }
-            joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(なしデータ).build();
-        }
         return joho;
     }
 
@@ -1770,6 +1758,18 @@ public class Imageinput06AHandler {
             ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                     data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping06A.生活機能の維持_改善の見通し.getコード()));
             なしデータ = なしデータ.createBuilderForEdit().set意見項目(空白).build();
+            if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
+                なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
+            }
+            joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(なしデータ).build();
+        }
+        if (IkenshoKomokuMapping06A.過去6カ月の体重の変化.getコード().equals(new RString(item.get連番()))) {
+            item.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
+            // joho = joho.createBuilderForEdit().setShujiiIkenshoIkenItem(item).build();
+        } else {
+            ShujiiIkenshoIkenItem なしデータ = new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+                    data.getT5301_主治医意見書作成依頼履歴番号(), rStringToInt(IkenshoKomokuMapping06A.過去6カ月の体重の変化.getコード()));
+            なしデータ = なしデータ.createBuilderForEdit().set意見項目(data.get過去6ヶ月の体重の変化()).build();
             if (isNotEmpty(data.getT5101_厚労省IF識別コード())) {
                 なしデータ = なしデータ.createBuilderForEdit().set厚労省IF識別コード(new Code(data.getT5101_厚労省IF識別コード())).build();
             }

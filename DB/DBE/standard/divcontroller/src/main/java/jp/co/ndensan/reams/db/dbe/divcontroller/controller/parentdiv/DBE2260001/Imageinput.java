@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.DBE2260001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.ImageinputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuDataCollection;
@@ -21,14 +22,21 @@ import jp.co.ndensan.reams.db.dbe.service.core.ikensho.shujiiikenshojoho.ShujiiI
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -39,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class Imageinput {
 
+    private static final RString 初期状態_メニューから = new RString("DBEMN32003");
     private static final RString チェックOK = new RString("OK");
     private static final RString チェックNG = new RString("NG");
     private static final int CSV項目数 = 140;
@@ -50,8 +59,14 @@ public class Imageinput {
      * @return ResponseData<ImageinputDiv>
      */
     public ResponseData<ImageinputDiv> onLoad(ImageinputDiv div) {
-        getHandler(div).onLoad();
-        return ResponseData.of(div).respond();
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
+        if (初期状態_メニューから.equals(menuID)) {
+            return ResponseData.of(div).setState(DBE2260001StateName.初期状態_メニューから);
+        } else {
+            return ResponseData.of(div).setState(DBE2260001StateName.初期状態_完了処理から);
+        }
+
     }
 
     /**
@@ -73,23 +88,33 @@ public class Imageinput {
      */
     public ResponseData<ImageinputDiv> onClick_BtnSave(ImageinputDiv div) {
         boolean 選択Flag = false;
-        for (dgshinseishaichiran_Row row : div.getDgshinseishaichiran().getDataSource()) {
-            if (row.getSelected()) {
-                選択Flag = true;
-                if (チェックNG.equals(row.getOkNg())) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            for (dgshinseishaichiran_Row row : div.getDgshinseishaichiran().getDataSource()) {
+                if (row.getSelected()) {
+                    選択Flag = true;
+                }
+                if (row.getSelected() && チェックNG.equals(row.getOkNg())) {
                     ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
                     validationMessages.add(getValidationHandler().check一覧対象未選択());
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
             }
+            if (!選択Flag) {
+                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+                validationMessages.add(getValidationHandler().check対象を選択());
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            db更新(div);
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        if (!選択Flag) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(getValidationHandler().check対象を選択());
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-        db更新(div);
-        return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+        return ResponseData.of(div).respond();
     }
 
     private void csvCheck処理(List<TorokuData> dataList, ImageinputDiv div) {
@@ -105,7 +130,6 @@ public class Imageinput {
             if (csvData.get項目数() != CSV項目数) {
                 csvData.setOK_NG(チェックNG);
             } else {
-
                 if (!当該被保険者の申請データが存在するかどうかチェック(service, param)) {
                     csvData.setOK_NG(チェックNG);
                 } else {
@@ -189,8 +213,52 @@ public class Imageinput {
             joho = joho.createBuilderForEdit().set意見書_発症年月日2(data.get発症年月日2()).build();
             joho = joho.createBuilderForEdit().set意見書_発症年月日3(data.get発症年月日3()).build();
             joho = joho.createBuilderForEdit().set意見書_症状としての安定性(data.get症状の安定性()).build();
-            joho = getHandler(div).set項目(joho, row, data);
+        } else {
+            joho = new ShujiiIkenshoJoho(new ShinseishoKanriNo(row.getShinseishoKanriNo()), data.getT5301_主治医意見書作成依頼履歴番号());
+            if (!RString.isNullOrEmpty(data.getT5101_厚労省IF識別コード())) {
+                joho = joho.createBuilderForEdit().set厚労省IF識別コード(data.getT5101_厚労省IF識別コード()).build();
+            }
+            joho = joho.createBuilderForEdit().set主治医意見書依頼区分(data.getT5301_主治医意見書依頼区分()).build();
+            joho = joho.createBuilderForEdit().set主治医医療機関コード(data.getT5301_主治医医療機関コード()).build();
+            joho = joho.createBuilderForEdit().set主治医コード(data.getT5301_主治医コード()).build();
+            joho = joho.createBuilderForEdit().set主治医意見書受領年月日(FlexibleDate.getNowDate()).build();
+            if (isNotEmpty(data.get記入日())) {
+                joho = joho.createBuilderForEdit().set主治医意見書記入年月日(new FlexibleDate(data.get記入日())).build();
+            }
+            if (isNotEmpty(data.get意見書作成回数())) {
+                joho = joho.createBuilderForEdit().set意見書作成回数区分(new Code(data.get意見書作成回数())).build();
+            }
+            if (data.isT5101_施設入所の有無()) {
+                joho = joho.createBuilderForEdit().set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード())).build();
+            } else {
+                joho = joho.createBuilderForEdit().set在宅_施設区分(new Code(ZaitakuShisetsuKubun.施設.getコード())).build();
+            }
+
+            joho = joho.createBuilderForEdit().set意見書同意フラグ(rStringToBeelan(data.get同意の有無())).build();
+            if (isNotEmpty(data.get最終診察日())) {
+                joho = joho.createBuilderForEdit().set最終診療日(new FlexibleDate(data.get最終診察日())).build();
+            }
+            joho = joho.createBuilderForEdit().set他科受診の有無(rStringToBeelan(data.get他科受信の有無())).build();
+            joho = joho.createBuilderForEdit().set内科受診の有無(rStringToBeelan(data.get内科())).build();
+            joho = joho.createBuilderForEdit().set精神科受診の有無(rStringToBeelan(data.get精神科())).build();
+            joho = joho.createBuilderForEdit().set外科受診の有無(rStringToBeelan(data.get外科())).build();
+            joho = joho.createBuilderForEdit().set整形外科受診の有無(rStringToBeelan(data.get整形外科())).build();
+            joho = joho.createBuilderForEdit().set脳神経外科の有無(rStringToBeelan(data.get脳神経外科())).build();
+            joho = joho.createBuilderForEdit().set皮膚科受診の有無(rStringToBeelan(data.get皮膚科())).build();
+            joho = joho.createBuilderForEdit().set泌尿器科受診の有無(rStringToBeelan(data.get泌尿器科())).build();
+            joho = joho.createBuilderForEdit().set婦人科受診の有無(rStringToBeelan(data.get婦人科())).build();
+            joho = joho.createBuilderForEdit().set耳鼻咽喉科受診の有無(rStringToBeelan(data.get耳鼻咽喉科())).build();
+            joho = joho.createBuilderForEdit().setリハビリテーション科受診の有無(rStringToBeelan(data.getリハビリテーション科())).build();
+            joho = joho.createBuilderForEdit().set歯科受診の有無(rStringToBeelan(data.get歯科())).build();
+            joho = joho.createBuilderForEdit().set眼科の有無(rStringToBeelan(data.get眼科())).build();
+            joho = joho.createBuilderForEdit().setその他受診科の有無(rStringToBeelan(data.getその他())).build();
+            joho = joho.createBuilderForEdit().set意見書_発症年月日1(data.get発症年月日1()).build();
+            joho = joho.createBuilderForEdit().set意見書_発症年月日2(data.get発症年月日2()).build();
+            joho = joho.createBuilderForEdit().set意見書_発症年月日3(data.get発症年月日3()).build();
+            joho = joho.createBuilderForEdit().set意見書_症状としての安定性(data.get症状の安定性()).build();
+            joho = joho.createBuilderForEdit().set認定審査会後の二次判定結果の連絡確認フラグ(rStringToBeelan(data.get主治医への結果連絡())).build();
         }
+        joho = getHandler(div).set項目(joho, row, data);
         manager.save(joho);
     }
 

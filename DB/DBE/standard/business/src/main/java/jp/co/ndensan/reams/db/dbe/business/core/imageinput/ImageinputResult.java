@@ -64,6 +64,15 @@ public class ImageinputResult {
     }
 
     /**
+     * getT5101_施設入所の有無を取得します。
+     *
+     * @return getT5101_施設入所の有無
+     */
+    public boolean isT5101_施設入所の有無() {
+        return entity.isT5101_施設入所の有無();
+    }
+
+    /**
      * T7051_市町村名称を取得します。
      *
      * @return T7051_市町村名称

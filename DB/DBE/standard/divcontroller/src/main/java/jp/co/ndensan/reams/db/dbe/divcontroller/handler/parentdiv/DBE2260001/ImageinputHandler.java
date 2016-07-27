@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshokinyuitem.ShujiiIkenshoKinyuItem;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.ChosaInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.ImageinputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.dgshinseishaichiran_Row;
@@ -23,8 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -40,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * イメージ取込み（規定・規定外）のコントローラクラスです。
@@ -49,14 +45,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class ImageinputHandler {
 
-    private static final RString 初期状態_メニューから = new RString("DBEMN32003");
-    private static final RString 完了処理に戻る = new RString("btnBack");
     private static final RString 証記載保険者番号 = new RString("123456");
     private static final RString 被保険者番号 = new RString("7890");
-    private static final RDateTime イメージ共有ファイルID = RDateTime.now();
     private static final RString 空白 = RString.EMPTY;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString ファイル名 = new RString("OCRIKEN.CSV");
+    private static final int 年 = 2016;
+    private static final int 月 = 07;
+    private static final int 日 = 25;
+    private static final int 時 = 12;
 
     private final ImageinputDiv div;
 
@@ -67,19 +64,6 @@ public class ImageinputHandler {
      */
     public ImageinputHandler(ImageinputDiv div) {
         this.div = div;
-    }
-
-    /**
-     * 画面の初期化します。
-     */
-    public void onLoad() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
-        if (初期状態_メニューから.equals(menuID)) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(完了処理に戻る, false);
-        } else {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(完了処理に戻る, true);
-        }
     }
 
     /**
@@ -130,6 +114,7 @@ public class ImageinputHandler {
                     伝達能力,
                     食事行為,
                     data.getT5101_証記載保険者番号());
+            連番++;
             rowList.add(row);
         }
         div.getDgshinseishaichiran().setDataSource(rowList);
@@ -198,18 +183,20 @@ public class ImageinputHandler {
     }
 
     private List<TorokuData> getCSVファイル() {
+        RDateTime イメージ共有ファイルID = RDateTime.of(年, 月, 日, 時, 時, 時);
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
                 new FilesystemName(証記載保険者番号.concat(被保険者番号)), イメージ共有ファイルID);
-        SharedFile.copyToLocal(ro_sfed, new FilesystemPath(Path.combinePath(Path.getUserHomePath(), ファイル名))).toRString();
-        RString filePath = Path.combinePath(Path.getUserHomePath(), ファイル名);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, ChosaInputCsvEntity.class)
+        SharedFile.copyToLocal(ro_sfed, new FilesystemPath(imagePath));
+        RString csvReaderPath = Path.combinePath(imagePath, ファイル名);
+        CsvReader csvReader = new CsvReader.InstanceBuilder(csvReaderPath, TorokuData.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();
-        return readCsvFile(csvReader);
+        return readCsvFile(csvReader, csvReaderPath);
     }
 
-    private List<TorokuData> readCsvFile(CsvReader csvReader) {
-        CsvListReader read = new CsvListReader.InstanceBuilder(Path.combinePath(Path.getUserHomePath())).build();
+    private List<TorokuData> readCsvFile(CsvReader csvReader, RString csvReaderPath) {
+        CsvListReader read = new CsvListReader.InstanceBuilder(csvReaderPath).build();
         List<TorokuData> csvEntityList = new ArrayList<>();
         while (true) {
             TorokuData entity = (TorokuData) csvReader.readLine();
@@ -221,6 +208,7 @@ public class ImageinputHandler {
             }
         }
         csvReader.close();
+        read.close();
         return csvEntityList;
     }
 
