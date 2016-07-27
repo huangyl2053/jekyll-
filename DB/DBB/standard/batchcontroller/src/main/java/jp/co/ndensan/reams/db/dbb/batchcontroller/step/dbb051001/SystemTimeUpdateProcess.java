@@ -26,10 +26,6 @@ public class SystemTimeUpdateProcess extends SimpleBatchProcessBase {
     private final RString 枝番0004 = new RString("0004");
     private final RString 枝番0005 = new RString("0005");
     private final RString 枝番0006 = new RString("0006");
-    private final RString 一 = new RString("1");
-    private final RString 二 = new RString("2");
-    private final RString 三 = new RString("3");
-    private final RString 四 = new RString("4");
 
     @Override
     protected void beforeExecute() {
