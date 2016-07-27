@@ -10,8 +10,10 @@
         <include refid="selectHanyouRisutoSyuturyokuEntity" />
     </select>
     <sql id="selectHanyouRisutoSyuturyokuEntity">
-        SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM
-        ( SELECT
+        <!--SELECT ROW_NUMBER() over(order by A."区分" , A."被保険者番号key" , A."サービス提供年月key" , A."履歴番号key")as row ,* FROM-->
+        <!--(--> 
+        SELECT
+        1 as row,
         1 as 区分,
         DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo" as 被保険者番号key,
         DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM" as サービス提供年月key,
@@ -126,7 +128,14 @@
         AND DbT3056."dbT3056KogakuShikyuShinsei_rirekiNo" = (select MAX("rirekiNo") from
         rgdb."DbT3056KogakuShikyuShinsei" where  "hihokenshaNo"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND "serviceTeikyoYM"=DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM")
-        LEFT OUTER JOIN
+        <choose>
+            <when test="(hokemonoKeteihiFrom != null and !hokemonoKeteihiFrom.isEmpty()) or (hokemonoKeteihiTo != null and !hokemonoKeteihiTo.isEmpty())">
+                INNER JOIN
+            </when>
+            <otherwise>
+                LEFT OUTER JOIN
+            </otherwise>
+        </choose>
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.noDeleted_DbT3057KogakuShikyuHanteiKekka" />) As DbT3057
         ON DbT3057."dbT3057KogakuShikyuHanteiKekka_hihokenshaNo" = DbT3056."dbT3056KogakuShikyuShinsei_hihokenshaNo"
         AND DbT3057."dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" = DbT3056."dbT3056KogakuShikyuShinsei_serviceTeikyoYM"
@@ -199,8 +208,8 @@
                         DbT4001."ninteiYMD" as 受給認定日,
                         DbT4001."kyuSochishaFlag" as 旧措置フラグ,
                         DbT4001."minashiCode" as みなし要介護区分コード,
-                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
-                        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード
+                        <!--ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号-->
                         FROM
                                 rgdb."DbT3055KogakuKyufuTaishoshaGokei" As DbT3055_all
                         INNER JOIN
@@ -211,8 +220,8 @@
                                 AND	DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3055_all."serviceTeikyoYM" || '31')
                                 AND	(DbT3055_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
                 ) AS DbT4001_corresponding
-                WHERE
-                        DbT4001_corresponding.番号 = 1
+<!--                WHERE
+                        DbT4001_corresponding.番号 = 1-->
         ) As DbT4001
         ON	DbT4001."被保険者番号" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_hihokenshaNo"
         AND	DbT4001."サービス提供年月" = DbT3055."dbT3055KogakuKyufuTaishoshaGokei_serviceTeikyoYM"
@@ -380,7 +389,8 @@
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
             AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
         </if>
-        UNION ALL
+        
+<!--        UNION ALL
         SELECT
         2 as 区分,
         DbT3109."dbT3109JigyoKogakuKyufuTaishoshaGokei_hihokenshaNo" as 被保険者番号key,
@@ -717,8 +727,9 @@
             AND DbT3110."dbT3110JigyoKogakuShikyuShinsei_shiharaiHohoKubunCode" = '1'
         </if>
         <if test="kiyuKikanCode != null and !kiyuKikanCode.isEmpty()">
-            AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}
-        </if>) as A
+            AND koza."uaT0310Koza_kinyuKikanCode" = #{kiyuKikanCode}-->
+        <!--</if>-->
+        <!--) as A-->
     </sql>
 
     <resultMap id="resultMap_HanyouRisutoSyuturyokuEntity" autoMapping="true"

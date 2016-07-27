@@ -70,8 +70,6 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki().width;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DisplayType.prototype.shutoku = function () {
@@ -88,8 +86,6 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki().width;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DisplayType.prototype.soshitsu = function () {
@@ -106,8 +102,6 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki().width;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
                 DisplayType.prototype.teiseitoroku = function () {
                     this.controls.dgShikakuShutokuRireki().readOnly = false;
@@ -123,8 +117,6 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki().width;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
                 return DisplayType;
             })();
@@ -173,8 +165,6 @@ var DBZ;
                     gridSetting.columns[16].visible = false;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 HokenshaJohoDisplayMode.prototype.TanitsuGappeiAri = function () {
@@ -186,8 +176,6 @@ var DBZ;
                     gridSetting.columns[16].visible = false;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 HokenshaJohoDisplayMode.prototype.KoikiGappeiNashi = function () {
@@ -199,8 +187,6 @@ var DBZ;
                     gridSetting.columns[16].visible = true;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 HokenshaJohoDisplayMode.prototype.KoikiGappeiAri = function () {
@@ -212,8 +198,6 @@ var DBZ;
                     gridSetting.columns[16].visible = true;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
                 return HokenshaJohoDisplayMode;
             })();
@@ -225,38 +209,26 @@ var DBZ;
                 }
                 DataGridWidth.prototype.Size1 = function () {
                     this.controls.dgShikakuShutokuRireki().width = 1220;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size2 = function () {
                     this.controls.dgShikakuShutokuRireki().width = 1080;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size3 = function () {
                     this.controls.dgShikakuShutokuRireki().width = 1060;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size4 = function () {
                     this.controls.dgShikakuShutokuRireki().width = 960;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size5 = function () {
                     this.controls.dgShikakuShutokuRireki().width = 940;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridWidth.prototype.Size6 = function () {
                     this.controls.dgShikakuShutokuRireki().width = 940;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
                 return DataGridWidth;
             })();
@@ -268,14 +240,10 @@ var DBZ;
                 }
                 DataGridHeight.prototype.SizeDefault = function () {
                     this.controls.dgShikakuShutokuRireki().height = 217;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
                 DataGridHeight.prototype.Size300 = function () {
                     this.controls.dgShikakuShutokuRireki().height = 300;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
                 return DataGridHeight;
             })();

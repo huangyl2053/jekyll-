@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.Han
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvNoRenbanDataCreate;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -90,12 +92,15 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
     private static final RString すべて = new RString("すべて");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private RString preBreakKey;
     private HanyoListShokanbaraiJokyoProcessParameter parameter;
     private HanyoListCsvNoRenbanDataCreate dataCreate;
     private RString eucFilePath;
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
+    private HanyoListShokanbaraiJokyoEntity preEntity;
+    private List<KinyuKikanEntity> lstKinyuKikanEntity;
     private FlexibleDate システム日付;
 //    private RString preBreakKey;
 //    private HanyoListShokanbaraiJokyoEntity preEntity;
@@ -108,13 +113,13 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
 
     @Override
     protected void beforeExecute() {
-//        preBreakKey = RString.EMPTY;
+        preBreakKey = RString.EMPTY;
         システム日付 = FlexibleDate.getNowDate();
         dataCreate = new HanyoListCsvNoRenbanDataCreate(システム日付);
         personalDataList = new ArrayList<>();
 //        mapFlag = new HashMap<>();
 //        lstDbt3038List = new ArrayList<>();
-//        lstKinyuKikanEntity = new ArrayList<>();
+        lstKinyuKikanEntity = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
     }
@@ -149,16 +154,88 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter));
-        personalDataList.add(toPersonalData(entity));
+
+        RString nowBreakKey = entity.get被保険者番号().value()
+                .concat(entity.get請求基本List().get(0).getServiceTeikyoYM().toDateString())
+                .concat(entity.get請求基本List().get(0).getSeiriNo())
+                .concat(entity.get請求基本List().get(0).getJigyoshaNo().value())
+                .concat(entity.get請求基本List().get(0).getYoshikiNo())
+                .concat(entity.get請求基本List().get(0).getMeisaiNo());
+//                new RString(entity.get口座情報Entity().getUaT0310KozaEntity().getKozaId());
+
+        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
+            preBreakKey = nowBreakKey;
+            if (entity.get口座情報Entity() != null && entity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+            }
+            preEntity = entity;
+            return;
+        }
+        if (!preBreakKey.equals(nowBreakKey)) {
+            List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
+
+            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+                lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
+            }
+            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+                if (kinyuKikanEntity.get預金種別パターンEntity() != null
+                        && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                    kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
+                    preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
+                }
+            }
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter));
+//            連番 = 連番.add(Decimal.ONE);
+            personalDataList.add(toPersonalData(preEntity));
+            lstKinyuKikanEntity.clear();
+            if (entity.get口座情報Entity() != null && entity.get口座情報Entity() != null) {
+                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+            }
+        }
+        preBreakKey = nowBreakKey;
+        preEntity = entity;
+
+//        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter));
+//        personalDataList.add(toPersonalData(entity));
     }
 
     @Override
     protected void afterExecute() {
+
+        if (preEntity == null && parameter.is項目名付加()) {
+            eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoNoRenbanCSVEntity());
+        }
+        List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
+
+        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+            lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
+        }
+        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+            if (kinyuKikanEntity.get預金種別パターンEntity() != null
+                    && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
+                preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
+            }
+        }
+        if (preEntity != null) {
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter));
+//            連番 = 連番.add(Decimal.ONE);
+            personalDataList.add(toPersonalData(preEntity));
+        }
         eucCsvWriter.close();
-        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+
+        if (personalDataList == null || personalDataList.isEmpty()) {
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        } else {
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        }
         バッチ出力条件リストの出力();
+
+//        eucCsvWriter.close();
+//        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+//        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+//        バッチ出力条件リストの出力();
     }
 
     /*

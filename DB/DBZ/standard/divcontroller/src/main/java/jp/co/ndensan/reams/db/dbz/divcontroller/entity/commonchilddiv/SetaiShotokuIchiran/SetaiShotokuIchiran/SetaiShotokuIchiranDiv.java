@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShot
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -39,8 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @author 自動生成
  */
 public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchiranDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -357,7 +355,7 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -372,11 +370,11 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     // </editor-fold>

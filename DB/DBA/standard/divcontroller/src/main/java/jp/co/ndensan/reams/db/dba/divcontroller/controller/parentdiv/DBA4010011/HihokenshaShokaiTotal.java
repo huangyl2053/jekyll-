@@ -69,9 +69,7 @@ public class HihokenshaShokaiTotal {
         }
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(shikibetsuCode);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(shikibetsuCode);
-        HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-        div.setHihokenshaRirekiFlag(LOAD済み);
+
         return ResponseData.of(div).respond();
     }
 
@@ -161,41 +159,96 @@ public class HihokenshaShokaiTotal {
     }
 
     /**
-     * タブ変更を処理します。
+     * 被保険者履歴の初期化を、タブを開いた最初のタイミングで行います。
      *
      * @param div 被保険者照会DIV
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
-    public ResponseData<HihokenshaShokaiTotalDiv> onChange_tabHihokenshaShokai(HihokenshaShokaiTotalDiv div) {
+    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplHihokenshaRireki(HihokenshaShokaiTotalDiv div) {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())
-            && RString.isNullOrEmpty(div.getHihokenshaRirekiFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-            div.setHihokenshaRirekiFlag(LOAD済み);
-        } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                   && RString.isNullOrEmpty(div.getSetaiShokaiFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdSeitaiIchiran().initialize(shikibetsuCode, FlexibleDate.getNowDate(),
-                    FlexibleDate.getNowDate().getNendo(), YMDHMS.now());
-            div.setSetaiShokaiFlag(LOAD済み);
-        } else if (医療保険.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                   && RString.isNullOrEmpty(div.getIryoHokenFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().initialize(照会, shikibetsuCode.value());
-            div.setIryoHokenFlag(LOAD済み);
-        } else if (老福年金.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                   && RString.isNullOrEmpty(div.getRofukuNenkinFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().initialize(shikibetsuCode, hihokenshaNo);
-            div.setRofukuNenkinFlag(LOAD済み);
-        } else if (施設入退所.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                   && RString.isNullOrEmpty(div.getShisetsuNyutaishoFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoRireki().initialize(shikibetsuCode, new RString("1"));
-            div.setShisetsuNyutaishoFlag(LOAD済み);
-        } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                   && RString.isNullOrEmpty(div.getShoKofuKaishuFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
-            div.setShoKofuKaishuFlag(LOAD済み);
-        }
+
+        div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
+        div.setHihokenshaRirekiFlag(LOAD済み);
         return ResponseData.of(div).respond();
     }
+
+    /**
+     * 世帯照会情報の初期化を、タブを開いた最初のタイミングで行います。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplSetaiShokai(HihokenshaShokaiTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+
+        div.getHihokenshaShokaiPanel().getCcdSeitaiIchiran().initialize(shikibetsuCode, FlexibleDate.getNowDate(),
+                FlexibleDate.getNowDate().getNendo(), YMDHMS.now());
+        div.setSetaiShokaiFlag(LOAD済み);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 医療保険履歴の初期化を、タブを開いた最初のタイミングで行います。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplIryoHoken(HihokenshaShokaiTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+
+        div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().initialize(照会, shikibetsuCode.value());
+        div.setIryoHokenFlag(LOAD済み);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 老齢福祉年金履歴の初期化を、タブを開いた最初のタイミングで行います。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplRofukuNenkin(HihokenshaShokaiTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+
+        div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().initialize(shikibetsuCode, hihokenshaNo);
+        div.setRofukuNenkinFlag(LOAD済み);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 施設入退所履歴の初期化を、タブを開いた最初のタイミングで行います。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplShisetsuNyutaisho(HihokenshaShokaiTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+
+        div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoRireki().initialize(shikibetsuCode, new RString("1"));
+        div.setShisetsuNyutaishoFlag(LOAD済み);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 証交付回収履歴の初期化を、タブを開いた最初のタイミングで行います。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<HihokenshaShokaiTotalDiv> onFirstActive_tplShoKofuKaishu(HihokenshaShokaiTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+
+        div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
+        div.setShoKofuKaishuFlag(LOAD済み);
+        return ResponseData.of(div).respond();
+    }
+
 }

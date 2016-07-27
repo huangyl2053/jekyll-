@@ -87,7 +87,7 @@ module DBZ
                         
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                     }
 
                     public shutoku(): void {
@@ -105,7 +105,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                     }
 
                     public soshitsu(): void {
@@ -123,7 +123,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                     }
                     public teiseitoroku(): void {
                         this.controls.dgShikakuShutokuRireki().readOnly = false;
@@ -140,7 +140,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                     }
 
                 }
@@ -196,7 +196,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
@@ -210,7 +210,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
@@ -224,7 +224,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
@@ -238,7 +238,7 @@ module DBZ
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
                 
@@ -254,42 +254,42 @@ module DBZ
                     public Size1(): void {
                         this.controls.dgShikakuShutokuRireki().width = 1220;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
                     public Size2(): void {
                         this.controls.dgShikakuShutokuRireki().width = 1080;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
                     public Size3(): void {
                         this.controls.dgShikakuShutokuRireki().width = 1060;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
                     public Size4(): void {
                         this.controls.dgShikakuShutokuRireki().width = 960;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
                     public Size5(): void {
                         this.controls.dgShikakuShutokuRireki().width = 940;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
                     public Size6(): void {
                         this.controls.dgShikakuShutokuRireki().width = 940;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
                 }
@@ -304,14 +304,14 @@ module DBZ
                     public SizeDefault(): void {
                         this.controls.dgShikakuShutokuRireki().height = 217;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
                     public Size300(): void {
                         this.controls.dgShikakuShutokuRireki().height = 300;
 
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                        //this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 

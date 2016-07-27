@@ -103,6 +103,8 @@
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN rgdb."DbV1004HihokenshaShisetsuNyutaisho" As DbV1004
         ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"
+        AND DbV1004."nyushoYMD" <![CDATA[<=]]> (DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" || '01')
+        AND (DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" || '01') <![CDATA[<=]]> "taishoYMD"
         LEFT OUTER JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu" As DbV1005
         ON DbV1004."nyushoShisetsuShurui" = DbV1005."jigyoshaShubetsu"
         AND DbV1004."nyushoShisetsuCode" = DbV1005."jigyoshaNo"
@@ -128,8 +130,8 @@
                         DbT4001."ninteiYMD" as 受給認定日,
                         DbT4001."kyuSochishaFlag" as 旧措置フラグ,
                         DbT4001."minashiCode" as みなし要介護区分コード,
-                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード,
-                        ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号
+                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード
+                        <!-- ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号 -->
                         FROM
                                 rgdb."DbT3034ShokanShinsei" As DbT3034_all
                         INNER JOIN
@@ -139,9 +141,23 @@
                                 AND DbT4001."yukoMukoKubun" = '1'
                                 AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3034_all."serviceTeikyoYM" || '31')
                                 AND (DbT3034_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+                                AND DbT4001."ninteiYukoKikanKaishiYMD"  = (
+                                               
+                                SELECT MAX(DbT4001_2."ninteiYukoKikanKaishiYMD") FROM rgdb."DbT3034ShokanShinsei" As DbT3034_all_2
+                                INNER JOIN
+                                rgdb."DbT4001JukyushaDaicho" As DbT4001_2
+                                ON DbT4001_2."hihokenshaNo" = DbT3034_all."hiHokenshaNo"
+                                AND DbT4001_2."hihokenshaNo" = DbT3034_all_2."hiHokenshaNo"
+                                AND DbT4001_2."logicalDeletedFlag" = false
+                                AND DbT4001_2."yukoMukoKubun" = '1'
+                                        AND DbT4001_2."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3034_all_2."serviceTeikyoYM" || '31')
+                                        AND (DbT3034_all_2."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001_2."ninteiYukoKikanShuryoYMD"
+                                        )
+                                        
+                                
                 ) AS DbT4001_corresponding
-                WHERE
-                     DbT4001_corresponding.番号 = 1
+                <!-- WHERE
+                     DbT4001_corresponding.番号 = 1 -->
         ) As DbT4001
         ON DbT4001."被保険者番号" = DbT3034."dbT3034ShokanShinsei_hiHokenshaNo"
         AND DbT4001."サービス提供年月" = DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM"
