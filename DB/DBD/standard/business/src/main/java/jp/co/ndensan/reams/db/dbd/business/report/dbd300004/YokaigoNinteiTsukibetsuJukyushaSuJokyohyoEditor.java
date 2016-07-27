@@ -61,7 +61,7 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
     /**
      * YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSourceを設定
      *
-     * @param source
+     * @param source YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource
      */
     public void setYokaigoNinteiTsukibetsuJukyushaSuJokyohyo(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource source) {
         source.kijunbi = this.基準日.wareki().toDateString();

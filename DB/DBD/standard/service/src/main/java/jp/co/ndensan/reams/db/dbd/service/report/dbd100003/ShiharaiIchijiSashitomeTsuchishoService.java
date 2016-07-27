@@ -57,8 +57,8 @@ public class ShiharaiIchijiSashitomeTsuchishoService {
     public void print(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
             FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, ReportId 帳票分類ID,
             ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト, ReportManager reportManager) {
-        ShiharaiIchijiSashitomeTsuchishoProerty Proerty = new ShiharaiIchijiSashitomeTsuchishoProerty();
-        try (ReportAssembler<ShiharaiIchijiSashitomeTsuchishoReportSource> assember = createAssembler(Proerty, reportManager)) {
+        ShiharaiIchijiSashitomeTsuchishoProerty proerty = new ShiharaiIchijiSashitomeTsuchishoProerty();
+        try (ReportAssembler<ShiharaiIchijiSashitomeTsuchishoReportSource> assember = createAssembler(proerty, reportManager)) {
             ReportSourceWriter<ShiharaiIchijiSashitomeTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assember);
             NinshoshaSource 認証者ソースビルダー = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, 発行日,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
