@@ -4,7 +4,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
 
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaiHenkoTsuchiHakko.ShiharaiHenkoTsuchiHakkoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihenkotsuchihakko.IShiharaiHenkoTsuchiHakkoMapper">
      <select id="selectShokanKihon" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy">
         SELECT
          ShokanKihonJiho."hiHokenshaNo",

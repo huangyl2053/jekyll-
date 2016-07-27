@@ -141,13 +141,13 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
     /**
      * 支払方法変更差止を更新。
      *
-     * @param shoKisaiHokenshaNo 証記載保険者番号
-     * @param hihokenshaNo 被保険者番号
-     * @param kanriKubun 管理区分
-     * @param rirekiNo 履歴番号
-     * @param johoBunruiKubun 情報分類区分
-     * @param renNo 連番
-     * @param sashitomeTsuchiHakkoYMD　差止通知書発行年月日
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param johoBunruiKubun johoBunruiKubun
+     * @param renNo renNo
+     * @param sashitomeTsuchiHakkoYMD sashitomeTsuchiHakkoYMD
      */
     @Transaction
     public void updateSashitomeTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
@@ -166,13 +166,13 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
      * @param rirekiNo 履歴番号
      * @param johoBunruiKubun 情報分類区分
      * @param renNo 連番
-     * @param KojoTsuchiHakkoYMD　控除通知書発行年月日
+     * @param kojoTsuchiHakkoYMD kojoTsuchiHakkoYMD
      */
     @Transaction
     public void updateKojoTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
-            int rirekiNo, RString johoBunruiKubun, int renNo, FlexibleDate KojoTsuchiHakkoYMD) {
+            int rirekiNo, RString johoBunruiKubun, int renNo, FlexibleDate kojoTsuchiHakkoYMD) {
         DbT4024ShiharaiHohoHenkoSashitomeEntity entity = selectByKey(shoKisaiHokenshaNo, hihokenshaNo, kanriKubun, rirekiNo, johoBunruiKubun, renNo);
-        entity.setKojo_TsuchiHakkoYMD(KojoTsuchiHakkoYMD);
+        entity.setKojo_TsuchiHakkoYMD(kojoTsuchiHakkoYMD);
         save(entity);
     }
 }

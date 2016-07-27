@@ -46,8 +46,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShiharaiHenkoTsuchiHakko {
 
-    private static int index;
-
+    /**
+     * 初期表示です。
+     *
+     *
+     * @param div ShiharaiHenkoTsuchiHakkoDiv
+     * @return レスポンスデータ
+     */
     public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> onLoad(ShiharaiHenkoTsuchiHakkoDiv div) {
         ViewStateHolder.put(ViewStateKeys.資格対象者, new TaishoshaKey(new HihokenshaNo("1000000001"), new ShikibetsuCode("900000000000001"), new SetaiCode("22")));
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -84,10 +89,11 @@ public class ShiharaiHenkoTsuchiHakko {
      *
      *
      * @param div ShiharaiHenkoTsuchiHakkoDiv
-     * @return
+     * @return レスポンスデータ
      */
     public ResponseData<ShiharaiHenkoTsuchiHakkoDiv> selectedItem(ShiharaiHenkoTsuchiHakkoDiv div) {
-        index = Integer.parseInt(div.getDgShiharaiHohoHenkoRireki().getClickedItem().getTxtKubunIndex().toString());
+        int index = Integer.parseInt(div.getDgShiharaiHohoHenkoRireki().getClickedItem().getTxtKubunIndex().toString());
+        div.setKey_Index(div.getDgShiharaiHohoHenkoRireki().getClickedItem().getTxtKubunIndex());
         ShiharaiHohoHenko 取得された支払方法変更管理情報 = get帳票情報(index);
         if (!(取得された支払方法変更管理情報.get予告登録年月日() == null || 取得された支払方法変更管理情報.get予告登録年月日().isEmpty())) {
             div.getYokokuTsuchisho().setDisplayNone(false);
@@ -195,7 +201,7 @@ public class ShiharaiHenkoTsuchiHakko {
         List<RString> 帳票タイプリスト = new ArrayList<>();
         BunsyubanngaouList 文書番号リスト = new BunsyubanngaouList();
         HakouichiList 発行日リスト = new HakouichiList();
-        ShiharaiHohoHenko 帳票情報 = get帳票情報(index);
+        ShiharaiHohoHenko 帳票情報 = get帳票情報(Integer.parseInt(div.getKey_Index().toString()));
         if (div.getYokokuTsuchisho().isIsPublish()) {
             文書番号リスト.set予告文書番号(div.getYokokuTsuchisho().getCcdYokokuTsuchishoBunshoNo().get文書番号());
             発行日リスト.set予告通知書発行年月日(div.getYokokuTsuchisho().getTxtYokokuTsuchishoHakkoDate().getValue());
