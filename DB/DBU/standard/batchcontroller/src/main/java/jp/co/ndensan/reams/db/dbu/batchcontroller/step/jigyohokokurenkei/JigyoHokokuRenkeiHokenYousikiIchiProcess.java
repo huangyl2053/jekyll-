@@ -57,7 +57,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
         csvFileName = new RString("DUJRENF01_"
                 + processParameter.get過去集計年月()
                 + "_"
-                + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援));
+                + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援) + ".csv");
     }
 
     @BatchWriter
