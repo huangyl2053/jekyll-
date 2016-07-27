@@ -1,27 +1,27 @@
 ﻿{
- "uiContainerName": "DBCUC00710",
+ "uiContainerName": "DBCUC00810",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
   {
    "id": 1,
-   "name": "過誤申立決定情報照会",
+   "name": "再審査決定情報照会",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0071011",
-     "toLayoutTitle": "過誤決定取込情報照会",
-     "toState": "過誤決定取込情報照会"
+     "toLayoutName": "DBC0081011",
+     "toLayoutTitle": "再審査決定情報照会",
+     "toState": "初期状態"
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0071011",
-     "layoutTitle": "過誤決定取込情報照会",
+     "layoutName": "DBC0081011",
+     "layoutTitle": "再審査決定情報照会",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
