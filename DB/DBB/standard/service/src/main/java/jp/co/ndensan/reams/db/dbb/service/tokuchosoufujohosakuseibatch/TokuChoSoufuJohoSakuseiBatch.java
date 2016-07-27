@@ -85,6 +85,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private static final int NUM11 = 11;
     private static final int NUM12 = 12;
     private static final int NUM15 = 15;
+    private static final RString LINE = new RString("|");
+
     private static final RString STR5 = new RString("5");
     private static final RString 特徴制度間IF全件作成 = new RString("特徴制度間IF全件作成");
     private static final RString 特徴制度間IF作成 = new RString("特徴制度間IF作成");
@@ -249,20 +251,17 @@ public class TokuChoSoufuJohoSakuseiBatch {
             tokuchotempentity.setKisoNenkinNo(基礎年金番号);
             RString 年金コード = entity.get対象者の情報().get年金コード();
             tokuchotempentity.setNenkinCode(年金コード);
-            if (基礎年金番号 == null || 年金コード == null) {
-                tokuchotempentity.setSeq(シーケンス);
-                シーケンス = NUM1;
+            基礎年金番号 = RString.isNullOrEmpty(基礎年金番号) ? RString.EMPTY : 基礎年金番号;
+            年金コード = RString.isNullOrEmpty(年金コード) ? RString.EMPTY : 年金コード;
+            RString key = new RString(連番).concat(LINE).concat(基礎年金番号).concat(LINE).concat(年金コード);
+            if (シーケンスMap.containsKey(key)) {
+                シーケンス = シーケンスMap.get(key) + 1;
+                シーケンスMap.put(key, シーケンス);
             } else {
-                RString key = new RString(連番).concat(基礎年金番号).concat(年金コード);
-                if (シーケンスMap.containsKey(key)) {
-                    シーケンス = シーケンスMap.get(key);
-                    シーケンスMap.put(key, シーケンス + NUM1);
-                } else {
-                    シーケンスMap.put(key, NUM1);
-                    シーケンス = NUM1;
-                }
-                tokuchotempentity.setSeq(シーケンス);
+                シーケンスMap.put(key, NUM1);
+                シーケンス = NUM1;
             }
+            tokuchotempentity.setSeq(シーケンス);
             tokuchotempentity.setShoriTimestamp(処理日時);
             tokuchotempentity.setDtCityCode(entity.get対象者の情報().getDT市町村コード());
             if (entity.get対象者の情報().getDT特別徴収義務者コード() != null) {
