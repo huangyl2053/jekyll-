@@ -120,7 +120,7 @@ public class KogakuServicehiDetailDivHandler {
         }
         if (照会モード.equals(画面モード)) {
             if (高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID)) {
-//                set高額決定情報エリア(result);
+                set高額決定情報エリア(result);
             } else if (総合事業高額サービス費支給申請書登録.equals(メニューID)
                     || 総合事業高額介護サービス費照会.equals(メニューID)) {
                 set事業高額決定情報エリア(result);
