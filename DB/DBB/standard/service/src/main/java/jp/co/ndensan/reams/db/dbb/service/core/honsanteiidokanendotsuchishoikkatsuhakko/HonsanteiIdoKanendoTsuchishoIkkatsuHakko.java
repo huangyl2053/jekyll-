@@ -180,8 +180,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
     /**
      * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link HonsanteiIdoKanendoTsuchishoIkkatsuHakko}のインスタンス
      */
     public static HonsanteiIdoKanendoTsuchishoIkkatsuHakko createInstance() {
         return InstanceProvider.create(HonsanteiIdoKanendoTsuchishoIkkatsuHakko.class);
@@ -258,8 +257,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void pntKetteiTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -337,7 +335,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報);
         }
         new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
-                帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), 定値_タイトル);
+                帳票作成日時.getRDateTime(), 出力順ID, 定値_タイトル);
         sourceDataCollection = reportManager.publish();
         publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 決定_EUC_ENTITY_ID, 決定_EUCファイル名);
         RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
@@ -376,8 +374,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void pntHenkoTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 変更通知書出力対象区分, RString 文書番号, RString 出力順ID, ReportId 帳票ID, boolean 一括発行起動フラグ) throws InvocationTargetException {
@@ -452,7 +449,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         }
         publish決定変更通知書発行一覧表(帳票作成日時.getRDateTime(), 編集後本算定通知書共通情報List, 変更_EUC_ENTITY_ID, 変更_EUCファイル名);
         new KaigoHokenryogakuPrintService().printSingle(編集後本算定通知書共通情報List,
-                帳票作成日時.getRDateTime(), Long.parseLong(出力順ID.toString()), 定値_タイトル);
+                帳票作成日時.getRDateTime(), 出力順ID, 定値_タイトル);
         RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
                 ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_変更一覧表, 帳票名);
@@ -547,8 +544,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
      * @param 出力順ID RString
      * @param 帳票ID ReportId
      * @param 一括発行起動フラグ boolean
-     * @throws java.lang.reflect.InvocationTargetException
-     * 賦課情報が取得できない場合、Exception
+     * @throws java.lang.reflect.InvocationTargetException 賦課情報が取得できない場合、Exception
      */
     public void pntNonyuTsuchisho(FlexibleYear 調定年度, List<FlexibleYear> 賦課年度リスト, YMDHMS 帳票作成日時,
             RDate 発行日, RString 出力期, RString 納入通知書対象者, RString 口座振替分出力様式, RString 生活保護者先頭出力区分,
@@ -636,7 +632,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         }
         publish納入通知書発行一覧表(帳票作成日時.getRDateTime(), 調定年度, 賦課年度リスト, 出力期, 編集後本算定通知書共通情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
         new NonyuTsuchIchiranPrintService().printSingle(編集後本算定通知書共通情報List, 帳票作成日時.getRDateTime(),
-                出力期AsInt, Long.parseLong(出力順ID.toString()));
+                出力期AsInt, 出力順ID);
         RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
                 ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, 納入_EUCファイル名, 帳票名);

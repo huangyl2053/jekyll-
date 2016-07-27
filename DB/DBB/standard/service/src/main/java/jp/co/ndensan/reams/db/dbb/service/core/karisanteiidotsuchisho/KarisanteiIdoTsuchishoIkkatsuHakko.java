@@ -300,8 +300,10 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書仮算定帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書仮算定帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -428,8 +430,10 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         builder = new RStringBuilder();
         builder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder outputOrder
-                = fider.get出力順(SubGyomuCode.DBB介護賦課, 仮算定額変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        IOutputOrder outputOrder = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 仮算定額変更通知書_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
         if (outputOrder != null) {
             List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
@@ -665,8 +669,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         }
         publish納入通知書仮算定発行一覧表(帳票作成日時.getRDateTime(), 賦課年度, 出力期,
                 仮算定納入通知書情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
-        new KariNonyuTsuchishoHakkoIchiranPrintService()
-                .print(仮算定納入通知書情報List, Long.parseLong(出力順ID.toString()), 帳票作成日時, 出力期AsInt);
+        new KariNonyuTsuchishoHakkoIchiranPrintService().print(仮算定納入通知書情報List, 出力順ID, 帳票作成日時, 出力期AsInt);
         RString 出力ページ数 = !sourceDataCollection.iterator().hasNext()
                 ? 定値区分_0 : new RString(sourceDataCollection.iterator().next().getPageCount());
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -1034,7 +1037,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
             return RString.EMPTY;
         }
         RString 出力順 = RString.EMPTY;
-        //TODO Enum
+        //TODO QA971
         if (特別徴収開始通知書仮算定帳票分類ID.equals(帳票分類ID)) {
             //TODO 仕様変更
             出力順 = RString.EMPTY;
