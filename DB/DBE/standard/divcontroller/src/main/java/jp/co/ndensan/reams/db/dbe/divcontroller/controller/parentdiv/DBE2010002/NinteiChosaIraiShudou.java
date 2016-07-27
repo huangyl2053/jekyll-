@@ -258,10 +258,49 @@ public class NinteiChosaIraiShudou {
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
+            updateData(div);
         }
 
         RealInitialLocker.release(get排他キー());
         return response;
+    }
+
+    private void updateData(NinteiChosaIraiShudouDiv div) {
+        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 認定調査依頼情報List = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, Models.class);
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class);
+
+        NinteiShinseiJohoIdentifier ninteiShinseiJohoIdentifier = new NinteiShinseiJohoIdentifier(new ShinseishoKanriNo(申請書管理番号));
+        NinteiShinseiJoho 要介護認定申請情報 = 認定調査依頼情報List.get(ninteiShinseiJohoIdentifier);
+        RString モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        if (修正モード.equals(モード)) {
+            FlexibleDate 発行日 = FlexibleDate.EMPTY;
+            if (div.getTxtHokkoymd().getValue() != null) {
+                発行日 = new FlexibleDate(div.getTxtHokkoymd().getValue().toDateString());
+            }
+            NinteichosaIraiJohoIdentifier ninteichosaIraiJohoIdentifier = new NinteichosaIraiJohoIdentifier(
+                    new ShinseishoKanriNo(申請書管理番号),
+                    Integer.parseInt(認定調査依頼履歴番号.toString()));
+            NinteichosaIraiJoho ninteichosaIraiJoho = 要介護認定申請情報.getNinteichosaIraiJoho(ninteichosaIraiJohoIdentifier);
+
+            if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
+                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
+                        .set認定調査依頼年月日(発行日).build();
+            }
+            if (!(div.getChkGaikyoChosa().getSelectedKeys().isEmpty()
+                    && div.getChkKihonChosa().getSelectedKeys().isEmpty()
+                    && div.getChkTokukiJiko().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoTokuki().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoChosaOCR().getSelectedKeys().isEmpty()
+                    && div.getChkKihonChosaOCR().getSelectedKeys().isEmpty()
+                    && div.getChkTokukiJikoOCR().getSelectedKeys().isEmpty()
+                    && div.getChkGaikyoTokukiOCR().getSelectedKeys().isEmpty()
+                    && div.getChkFuriYoshi().getSelectedKeys().isEmpty())) {
+                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
+                        .set調査票等出力年月日(発行日).build();
+            }
+            NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho.modifiedModel());
+        }
     }
 
     private void printData(NinteiChosaIraiShudouDiv div, ReportManager reportManager) {
