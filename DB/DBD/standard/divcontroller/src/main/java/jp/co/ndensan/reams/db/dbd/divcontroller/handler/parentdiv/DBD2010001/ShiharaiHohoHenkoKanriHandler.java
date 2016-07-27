@@ -301,7 +301,7 @@ public class ShiharaiHohoHenkoKanriHandler {
      */
     public void 画面項目の制御() {
         ボタン群の非活性();
-        div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().init();
+        div.getShiharaiHohoHenkoKanriMain().getDgShiharaiHohoHenkoRireki().setSelectedItems(Collections.<dgShiharaiHohoHenkoRireki_Row>emptyList());
         div.getShiharaiHohoHenkoKanriMain().getBtnIchigoYokokushaToroku1().setDisabled(false);
         div.getShiharaiHohoHenkoKanriMain().getBtnKyufugakuGengakuToroku().setDisabled(false);
         div.getShiharaiHohoHenkoKanriMain().getBtnNigoYokokushaToroku().setDisabled(false);
