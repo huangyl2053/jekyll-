@@ -313,12 +313,11 @@ public class HonsanteiFukaKeisanTotalHandler {
      * 帳票作成個別情報を設定するメソッドです。
      *
      * @param 期 int
-     * @param 調定期 RString
      * @param 算定期 RString
      * @param 遷移元区分 RString
      * @param 調定年度 FlexibleYear
      */
-    public void set帳票作成個別情報(int 期, RString 調定期, RString 算定期, RString 遷移元区分, FlexibleYear 調定年度) {
+    public void set帳票作成個別情報(int 期, RString 算定期, RString 遷移元区分, FlexibleYear 調定年度) {
 
         div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getCcdBunshoBangoKetteiTsuchi().get文書番号();
         Honsanteifuka honsanteifuka = Honsanteifuka.createInstance();
@@ -338,7 +337,7 @@ public class HonsanteiFukaKeisanTotalHandler {
         div.getHonsanteiChohyoHakko2().getHonTsuchiKobetsuJoho().getTxtNotsuHakkoYMD2()
                 .setValue(new RDate(普徴納期.get通知書発行日().wareki().toDateString().toString()));
         set出力方法(調定年度);
-        set出力期(調定期, 算定期, 調定年度);
+        set出力期(算定期, 調定年度);
     }
 
     private void set出力方法(FlexibleYear 調定年度) {
@@ -357,8 +356,8 @@ public class HonsanteiFukaKeisanTotalHandler {
         }
     }
 
-    private void set出力期(RString 調定期, RString 算定期, FlexibleYear 調定年度) {
-        List<BatchTyouhyouResult> 帳票IDList = get通知書帳票ID(調定期, 調定年度);
+    private void set出力期(RString 算定期, FlexibleYear 調定年度) {
+        List<BatchTyouhyouResult> 帳票IDList = get通知書帳票ID(算定期, 調定年度);
         boolean 期毎タイプフラグ = false;
         if (帳票IDList != null && !帳票IDList.isEmpty()) {
             for (BatchTyouhyouResult 帳票ID : 帳票IDList) {

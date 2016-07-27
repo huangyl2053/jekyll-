@@ -63,7 +63,6 @@ public class HonsanteiFukaKeisanTotal {
         RString 算定期 = 更正月.get期();
         ViewStateHolder.put(ViewStateKeys.算定期, 算定期);
         int 期 = 更正月.get期AsInt();
-        RString 調定期 = 更正月.get表記().asX期括弧X月();
         getKanendoFukaKakuteiHandler(div).set調定期(更正月);
         RDate システム日付 = RDate.getNowDate();
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD().setValue(システム日付);
@@ -75,7 +74,7 @@ public class HonsanteiFukaKeisanTotal {
         } else if (遷移元区分_1.equals(遷移元区分)) {
             div.getHonsanteiChohyoHakko2().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 本算定通知書作成_帳票グループコード);
         }
-        getKanendoFukaKakuteiHandler(div).set帳票作成個別情報(期, 調定期, 算定期, 遷移元区分, new FlexibleYear(年度));
+        getKanendoFukaKakuteiHandler(div).set帳票作成個別情報(期, 算定期, 遷移元区分, new FlexibleYear(年度));
 
         return ResponseData.of(div).respond();
     }
