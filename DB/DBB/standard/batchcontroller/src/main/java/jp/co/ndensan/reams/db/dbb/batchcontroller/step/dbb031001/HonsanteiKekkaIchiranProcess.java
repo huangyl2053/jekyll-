@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
-import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.HonnSanteiFuka;
+import jp.co.ndensan.reams.db.dbb.service.core.honnsanteifuka.HonnSanteiFukaFath;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
  */
 public class HonsanteiKekkaIchiranProcess extends SimpleBatchProcessBase {
 
-    private HonnSanteiFuka business;
+    private HonnSanteiFukaFath business;
     private HonsanteiFukaProcessParameter processParameter;
 
     @Override
     protected void beforeExecute() {
-        business = HonnSanteiFuka.createInstance();
+        business = HonnSanteiFukaFath.createInstance();
     }
 
     @Override
