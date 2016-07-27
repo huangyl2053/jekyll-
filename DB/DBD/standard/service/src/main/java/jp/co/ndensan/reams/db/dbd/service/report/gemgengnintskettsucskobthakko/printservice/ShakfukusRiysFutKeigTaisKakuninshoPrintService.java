@@ -8,11 +8,15 @@ package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.hanyo.HokenshaNameOutput;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -38,7 +42,15 @@ public class ShakfukusRiysFutKeigTaisKakuninshoPrintService {
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(ShakfukusRiysFutKeigTaisKakuninshoItem target, ReportManager reportManager) {
-        ShakfukusRiysFutKeigTaisKakuninshoProerty property = new ShakfukusRiysFutKeigTaisKakuninshoProerty();
+        ReportId reportId = null;
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : target.get帳票制御汎用List()) {
+            if (HokenshaNameOutput.印字する.getコード().equals(entity.getKomokuValue())) {
+                reportId = ReportIdDBD.DBD100019.getReportId();
+            } else {
+                reportId = ReportIdDBD.DBD100018.getReportId()
+            }
+        }
+        ShakfukusRiysFutKeigTaisKakuninshoProerty property = new ShakfukusRiysFutKeigTaisKakuninshoProerty(reportId);
         try (ReportAssembler<ShakfukusRiysFutKeigTaisKakuninshoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShakfukusRiysFutKeigTaisKakuninshoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),

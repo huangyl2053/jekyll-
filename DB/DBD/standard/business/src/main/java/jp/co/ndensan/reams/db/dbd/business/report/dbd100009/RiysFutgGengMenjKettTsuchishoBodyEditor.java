@@ -98,7 +98,7 @@ public class RiysFutgGengMenjKettTsuchishoBodyEditor implements IRiysFutgGengMen
             source.shoninSuru = マル;
             source.yukoYMD = item.get利用者負担額減額情報().get適用終了年月日().wareki().toDateString();
             source.ninteiKekka3
-                    = new RString("　　　給付率".concat(item.get利用者負担額減額情報().get給付率().getColumnValue().toString().concat("　/　100")));
+                    = new RString("　　　給付率　　".concat(item.get利用者負担額減額情報().get給付率().getColumnValue().toString().concat("　/　100")));
             source.shoninShinai = RString.EMPTY;
             source.riyu1 = RString.EMPTY;
             source.riyu2 = RString.EMPTY;
