@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  *
  * @reamsid_L DBD-1430-030 b_zhengs
  */
-public class YokaigoNinteiKekkaTshuchishoService {
+public class YokaigoNinteiKekkaTshuchishoPrintService {
 
     /**
      * 帳票を出力
