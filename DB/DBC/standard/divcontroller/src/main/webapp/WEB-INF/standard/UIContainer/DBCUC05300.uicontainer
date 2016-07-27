@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBCUC05200",
+ "uiContainerName": "DBCUC05300",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
   {
    "id": 1,
-   "name": "国保資格情報登録",
+   "name": "後期資格情報登録",
    "transitionList": [
     {
      "id": "1",
@@ -26,16 +26,16 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0520011",
-     "toLayoutTitle": "国保資格情報登録",
+     "toLayoutName": "DBC0530011",
+     "toLayoutTitle": "後期資格情報登録",
      "toState": "初期状態"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0520011",
-     "layoutTitle": "国保資格情報登録",
+     "layoutName": "DBC0530011",
+     "layoutTitle": "後期資格情報登録",
      "eventName": "対象者検索へ戻る",
      "destroy": false,
      "condition": "",
@@ -48,8 +48,8 @@
      "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0520011",
-     "layoutTitle": "国保資格情報登録",
+     "layoutName": "DBC0530011",
+     "layoutTitle": "後期資格情報登録",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
