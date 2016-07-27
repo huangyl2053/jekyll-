@@ -92,7 +92,7 @@ public class KaigoHokenShotokuJohoIchiranSource implements IReportSource {
     /**
      * KaigoHokenShotokuJohoIchiranSourceFields
      */
-    public enum KaigoHokenShotokuJohoIchiranSourceFields {
+    public enum KaigoHoken {
 
         printTimeStamp,
         cityCode,

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource.KaigoHokenShotokuJohoIchiranSourceFields;
+import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource.KaigoHoken;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -103,6 +103,7 @@ public class KaigoHokenShotokuJohoIchiranProperty extends ReportPropertyBase<Kai
 
 
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KaigoHokenShotokuJohoIchiranSource> occuredBreak(
@@ -122,11 +123,11 @@ public class KaigoHokenShotokuJohoIchiranProperty extends ReportPropertyBase<Kai
         RString 帳票物理名 = RString.EMPTY;
 
         if (DBB200008ShutsuryokujunEnum.識別コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KaigoHokenShotokuJohoIchiranSourceFields.listIchiranhyoUpper_2.name());
+            帳票物理名 = new RString(KaigoHoken.listIchiranhyoUpper_2.name());
         } else if (DBB200008ShutsuryokujunEnum.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KaigoHokenShotokuJohoIchiranSourceFields.listIchiranhyoLower_1.name());
+            帳票物理名 = new RString(KaigoHoken.listIchiranhyoLower_1.name());
         } else if (DBB200008ShutsuryokujunEnum.氏名５０音カナ.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(KaigoHokenShotokuJohoIchiranSourceFields.listIchiranhyoUpper_3.name());
+            帳票物理名 = new RString(KaigoHoken.listIchiranhyoUpper_3.name());
         }
 
         return 帳票物理名;
