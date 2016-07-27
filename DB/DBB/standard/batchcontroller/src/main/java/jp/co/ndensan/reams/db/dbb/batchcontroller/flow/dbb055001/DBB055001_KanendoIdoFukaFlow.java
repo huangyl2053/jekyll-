@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.DeleteKeisangoJ
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.InsShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SelectKanendoIdoDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SpoolKanendoIdoKekkaIchiranProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.kanendoidofuka.KanendoIdoFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -28,14 +30,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0910-010 gongliang
  */
-public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKanendoFukaBatchParameter> {
+public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFukaBatchParameter> {
 
-    private HonSanteiIdoKanendoFukaBatchParameter parameter;
+    private HonSanteiIdoFukaBatchParameter parameter;
     private KanendoIdoFukaProcessParameter processParameter;
 
     private static final String 賦課根拠異動抽出 = "selectKanendoIdoData";
     private static final String 通知書番号発番 = "createTsuchishoBango";
     private static final String 世帯員把握 = "collectSetaiin";
+    private static final String 世帯員把握バッチフロー = "callSetaiShotokuKazeiHanteiBatch";
     private static final String 賦課計算 = "caluculateFuka";
     private static final String 過年度賦課_計算後情報を削除 = "deleteDbT2015KeisangoJohoTemp";
     private static final String 計算後情報作成_イチ = "kiisagoJyohouSakuseiIchi";
@@ -46,6 +49,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKane
     private static final int 定値_イチ = 1;
     private static final int 定値_二 = 2;
     private static final RString 二_定値 = new RString("2");
+    private static final RString SETAISHOTOKUKAZEIHANTEIFLOW_FLOWID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
 
     @Override
@@ -58,6 +62,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKane
         executeStep(賦課根拠異動抽出);
         executeStep(通知書番号発番);
         executeStep(世帯員把握);
+        executeStep(世帯員把握バッチフロー);
         executeStep(賦課計算);
         executeStep(過年度賦課_計算後情報を削除);
         executeStep(計算後情報作成_イチ);
@@ -96,6 +101,21 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoKane
     @Step(世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
         return simpleBatch(CollectSetaiinProcess.class).define();
+    }
+
+    /**
+     * 世帯員把握バッチフローメソッドです。
+     *
+     * @return バッチコマンド
+     */
+    @Step(世帯員把握バッチフロー)
+    protected IBatchFlowCommand call_SetaiShotokuKazeiHanteiFlow() {
+        return otherBatchFlow(SETAISHOTOKUKAZEIHANTEIFLOW_FLOWID, SubGyomuCode.DBB介護賦課,
+                getSetaiShotokuKazeiHanteiBatchParameter()).define();
+    }
+
+    private SetaiShotokuKazeiHanteiBatchParameter getSetaiShotokuKazeiHanteiBatchParameter() {
+        return new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード());
     }
 
     /**
