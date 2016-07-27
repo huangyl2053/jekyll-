@@ -16,7 +16,8 @@ public enum DBB0320001StateName implements IStateEnumerations {
 
     NoChange(""),
     賦課履歴("賦課履歴"),
-    賦課根拠期割("賦課根拠期割");
+    賦課根拠期割("賦課根拠期割"),
+    Default("default");
 
     private final RString name;
 

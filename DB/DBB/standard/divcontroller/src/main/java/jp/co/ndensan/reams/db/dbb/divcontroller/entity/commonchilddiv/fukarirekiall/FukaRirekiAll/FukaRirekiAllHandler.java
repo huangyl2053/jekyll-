@@ -134,11 +134,23 @@ public class FukaRirekiAllHandler {
     }
 
     /**
+     * 賦課履歴を取得して保持している場合は{@code true}を返します。
+     *
+     * @return 賦課履歴を取得して保持している場合は{@code true}.
+     */
+    public boolean hasLoaded() {
+        return PanelSessionAccessor.containsKey(div, SESSION_NAME);
+    }
+
+    /**
      * 選択されている行の賦課履歴を返します。行が選択されていない場合は全賦課履歴を返します。
      *
      * @return 賦課履歴
      */
     public FukaRireki get賦課履歴() {
+        if (!hasLoaded()) {
+            return FukaRireki.EMPTY;
+        }
         FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).toList());
         List<dgFukaRirekiAll_Row> rowList = div.getDgFukaRirekiAll().getSelectedItems();
         if (rowList.isEmpty()) {
@@ -187,8 +199,8 @@ public class FukaRirekiAllHandler {
         List<dgFukaRirekiAll_Row> selectedItem = new ArrayList<>();
         for (dgFukaRirekiAll_Row row : div.getDgFukaRirekiAll().getDataSource()) {
             if (row.getChoteiNendoHidden().equals(調定年度.value().toDateString())
-                    && row.getFukaNendoHidden().equals(賦課年度.value().toDateString())
-                    && row.getTsuchishoNo().equals(通知書番号.value())) {
+                && row.getFukaNendoHidden().equals(賦課年度.value().toDateString())
+                && row.getTsuchishoNo().equals(通知書番号.value())) {
                 selectedItem.add(row);
             }
         }

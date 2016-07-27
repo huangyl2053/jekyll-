@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBB",
      "toLayoutName": "DBB0320001",
      "toLayoutTitle": "介護保険料賦課照会",
-     "toState": "賦課履歴"
+     "toState": "default"
     },
     {
      "id": "3",

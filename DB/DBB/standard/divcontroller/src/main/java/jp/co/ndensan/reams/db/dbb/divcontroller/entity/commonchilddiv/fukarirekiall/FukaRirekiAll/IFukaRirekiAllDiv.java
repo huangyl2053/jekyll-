@@ -65,4 +65,10 @@ public interface IFukaRirekiAllDiv extends ICommonChildDivBaseProperties {
      */
     FukaRireki get賦課履歴();
 
+    /**
+     * 賦課履歴を取得して保持している場合は{@code true}を返します。
+     *
+     * @return 賦課履歴を取得して保持している場合は{@code true}.
+     */
+    boolean hasLoaded();
 }

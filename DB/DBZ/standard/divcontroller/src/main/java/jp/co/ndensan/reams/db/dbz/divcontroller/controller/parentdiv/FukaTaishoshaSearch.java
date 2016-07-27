@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
@@ -68,8 +69,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  * 対象者検索のコントローラークラスです。（賦課系）
- *
- * @author N8156 宮本 康
  */
 public class FukaTaishoshaSearch {
 
@@ -78,6 +77,7 @@ public class FukaTaishoshaSearch {
     private static final int 最大取得件数 = new GaitoshaKensakuConfig().get最大取得件数();
     private static final RString フラグ_1 = new RString("1");
     private static final RString フラグ_2 = new RString("2");
+    private static final RString 前ZERO4桁 = new RString("0000");
 
     /**
      * 「初期化」時の処理です。
@@ -139,6 +139,7 @@ public class FukaTaishoshaSearch {
         div.getSearchCondition().getCcdSearchCondition().getCcdAtenaFinder().clear();
         div.getSearchCondition().getCcdSearchCondition().getKaigoFinder().clear();
         div.getSearchCondition().getCcdSearchCondition().getButtonsForHihokenshaFinder().getTxtMaxNumber().setValue(new Decimal(最大取得件数));
+        div.getSearchCondition().getCcdSearchCondition().set賦課年度ドロップダウン();
         return ResponseDatas.newResponseData(div);
     }
 
@@ -159,9 +160,9 @@ public class FukaTaishoshaSearch {
         // 検索条件未指定チェック
         HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
-                && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
-                && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
-                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+                           && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
+                           && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
+                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
         boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
         if (検索条件Flag && !宛名条件修正Flag) {
@@ -228,7 +229,7 @@ public class FukaTaishoshaSearch {
     private IItemList<FukaTaishoshaRelateBusiness> editList(
             SearchResult<FukaTaishoshaRelateBusiness> result,
             boolean is全年度) {
-        IItemList<FukaTaishoshaRelateBusiness> list = ItemList.empty();
+        List<FukaTaishoshaRelateBusiness> list = new ArrayList<>();
         if (is全年度) {
             RString 被保険者番号 = RString.EMPTY;
             for (FukaTaishoshaRelateBusiness entity : result.records().toList()) {
@@ -237,7 +238,8 @@ public class FukaTaishoshaSearch {
                     被保険者番号_絞り込み前 = entity.get賦課検索エンティティ().getHihokenshaNo().value();
                 }
                 if (!被保険者番号.equals(被保険者番号_絞り込み前)) {
-                    list = list.added(entity);
+                    entity.get賦課検索エンティティ().setFukaNendo(FlexibleYear.EMPTY);
+                    list.add(entity);
                     被保険者番号 = 被保険者番号_絞り込み前;
                 }
             }
@@ -259,15 +261,15 @@ public class FukaTaishoshaSearch {
                     通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
                 }
                 if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
-                        && 通知書番号.equals(通知書番号_絞り込み前))) {
-                    list = list.added(entity);
+                      && 通知書番号.equals(通知書番号_絞り込み前))) {
+                    list.add(entity);
                     被保険者番号 = 被保険者番号_絞り込み前;
                     賦課年度 = 賦課年度_絞り込み前;
                     通知書番号 = 通知書番号_絞り込み前;
                 }
             }
         }
-        return list;
+        return ItemList.of(list);
     }
 
     /**
@@ -370,27 +372,50 @@ public class FukaTaishoshaSearch {
 
         List<INewSearchCondition> 条件List = new ArrayList<>();
 
-        if (div.get被保険者番号() != null && !div.get被保険者番号().isEmpty()) {
+        RString 被保険者番号 = div.get被保険者番号();
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             INewSearchCondition 被保険者番号条件 = SearchConditionFactory.condition(
-                    FukaSearchItem.賦課マスタ_被保険者番号, StringOperator.完全一致, div.get被保険者番号());
+                    FukaSearchItem.賦課マスタ_被保険者番号, StringOperator.完全一致, 被保険者番号);
             条件List.add(被保険者番号条件);
         }
-        if (div.get通知書番号() != null && !div.get通知書番号().isEmpty()) {
-            INewSearchCondition 通知書番号条件 = SearchConditionFactory.condition(
-                    FukaSearchItem.通知書番号, StringOperator.完全一致, div.get通知書番号());
-            条件List.add(通知書番号条件);
-        }
-        if (!div.get賦課年度().isMaxOrMin()) {
+
+        /* 16/7/27 7月運用テスト機能 レスポンス対応 */
+        条件List.addAll(createSearchConditionsFor通知書番号(div));
+        /* -------------------------------------- */
+
+        FlexibleYear 賦課年度 = div.get賦課年度();
+        if (!賦課年度.isMaxOrMin()) {
             INewSearchCondition 賦課年度条件 = SearchConditionFactory.condition(
-                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, div.get賦課年度());
+                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, 賦課年度);
             条件List.add(賦課年度条件);
         }
+
         ISearchCondition 介護条件 = null;
         for (INewSearchCondition 条件 : 条件List) {
             介護条件 = (介護条件 == null) ? 条件 : 条件.and(介護条件);
         }
 
         return 介護条件;
+    }
+
+    private static List<INewSearchCondition> createSearchConditionsFor通知書番号(HihokenshaFinderDiv div) {
+        List<INewSearchCondition> list = new ArrayList<>();
+        RString 通知書番号 = div.get通知書番号();
+        if (通知書番号 != null && !通知書番号.isEmpty()) {
+            list.add(SearchConditionFactory.condition(
+                    FukaSearchItem.通知書番号, StringOperator.完全一致, div.get通知書番号())
+            );
+            return list;
+        }
+
+        RString 被保険者番号 = div.get被保険者番号();
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            list.add(SearchConditionFactory.condition(
+                    FukaSearchItem.通知書番号, StringOperator.前方一致,
+                    new RStringBuilder().append(前ZERO4桁).append(div.get被保険者番号()).toRString())
+            );
+        }
+        return list;
     }
 
     private ISearchCondition get最新年度条件(ShikibetsuCode 識別コード) {
@@ -415,10 +440,12 @@ public class FukaTaishoshaSearch {
             条件List.add(SearchConditionFactory.condition(
                     FukaSearchItem.被保険者台帳_被保険者番号, StringOperator.完全一致, RString.EMPTY, judge));
         }
-        if (menu.is(FukaSearchMenuGroup.照会系)) {
-            条件List.add(SearchConditionFactory.condition(
-                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY, judge));
-        }
+        /* 16/7/27 7月運用テスト機能 レスポンス対応 */
+//        if (menu.is(FukaSearchMenuGroup.照会系)) {
+//            条件List.add(SearchConditionFactory.condition(
+//                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY, judge));
+//        }
+        /* -------------------------------------- */
         if (menu.is(FukaSearchMenuGroup.更正計算系)) {
             条件List.add(SearchConditionFactory.condition(
                     FukaSearchItem.賦課マスタ_被保険者番号, StringOperator.完全一致, RString.EMPTY, judge));
@@ -434,29 +461,27 @@ public class FukaTaishoshaSearch {
     private FukaTaishoshaKey create対象者Key(FukaTaishoshaSearchDiv div) {
         dgFukaGaitoshaList_Row row = div.getGaitoshaList().getDgFukaGaitoshaList().getClickedItem();
         return new FukaTaishoshaKey(
-                row.getTxtHihoNo() != null ? new HihokenshaNo(row.getTxtHihoNo()) : new HihokenshaNo(RString.EMPTY),
-                row.getTxtShikbetsuCode() != null ? new ShikibetsuCode(row.getTxtShikbetsuCode()) : new ShikibetsuCode(RString.EMPTY),
-                row.getTxtSetaiCode() != null ? new SetaiCode(row.getTxtSetaiCode()) : new SetaiCode(RString.EMPTY),
-                row.getTxtShichosonCode() != null ? new LasdecCode(row.getTxtShichosonCode()) : new LasdecCode(RString.EMPTY),
-                row.getTxtFukaNendo() != null ? new FlexibleYear(row.getTxtFukaNendo()) : new FlexibleYear(RString.EMPTY),
-                row.getTxtTsuchiNo() != null ? new TsuchishoNo(row.getTxtTsuchiNo()) : new TsuchishoNo(RString.EMPTY),
-                row.getTxtChoteiNendo() != null ? new FlexibleYear(row.getTxtChoteiNendo()) : new FlexibleYear(RString.EMPTY));
-
+                row.getTxtHihoNo() != null ? new HihokenshaNo(row.getTxtHihoNo()) : HihokenshaNo.EMPTY,
+                row.getTxtShikbetsuCode() != null ? new ShikibetsuCode(row.getTxtShikbetsuCode()) : ShikibetsuCode.EMPTY,
+                row.getTxtSetaiCode() != null ? new SetaiCode(row.getTxtSetaiCode()) : SetaiCode.EMPTY,
+                row.getTxtShichosonCode() != null ? new LasdecCode(row.getTxtShichosonCode()) : LasdecCode.EMPTY,
+                row.getTxtFukaNendo() != null ? new FlexibleYear(row.getTxtFukaNendo()) : FlexibleYear.EMPTY,
+                row.getTxtTsuchiNo() != null ? new TsuchishoNo(row.getTxtTsuchiNo()) : TsuchishoNo.EMPTY,
+                row.getTxtChoteiNendo() != null ? new FlexibleYear(row.getTxtChoteiNendo()) : FlexibleYear.EMPTY);
     }
 
     private FukaTaishoshaKey create対象者Key(FukaTaishoshaRelateBusiness entity) {
         DbV7902FukaSearchBusiness 賦課検索 = new DbV7902FukaSearchBusiness(entity.get賦課検索エンティティ());
-//        UaFt200FindShikibetsuTaishoEntity 住基個人住登外 = entity.get住基個人住登外エンティティ();
         IKojin 個人 = createKojin(entity.get住基個人住登外エンティティ());
         IShikibetsuTaisho 識別対象 = createShikibetsuTaisho(entity.get住基個人住登外エンティティ());
         return new FukaTaishoshaKey(
-                賦課検索.getHihokenshaNo() != null ? 賦課検索.getHihokenshaNo() : new HihokenshaNo(RString.EMPTY),
-                賦課検索.getShikibetsuCode() != null ? 賦課検索.getShikibetsuCode() : new ShikibetsuCode(RString.EMPTY),
-                個人.get世帯コード() != null ? 個人.get世帯コード() : new SetaiCode(RString.EMPTY),
-                識別対象.get現全国地方公共団体コード() != null ? new LasdecCode(識別対象.get現全国地方公共団体コード().value()) : new LasdecCode(RString.EMPTY),
-                賦課検索.getFukaNendo() != null ? 賦課検索.getFukaNendo() : new FlexibleYear(RString.EMPTY),
-                賦課検索.getTsuchishoNo() != null ? 賦課検索.getTsuchishoNo() : new TsuchishoNo(RString.EMPTY),
-                賦課検索.getChoteiNendo() != null ? 賦課検索.getChoteiNendo() : new FlexibleYear(RString.EMPTY)
+                賦課検索.getHihokenshaNo() != null ? 賦課検索.getHihokenshaNo() : HihokenshaNo.EMPTY,
+                賦課検索.getShikibetsuCode() != null ? 賦課検索.getShikibetsuCode() : ShikibetsuCode.EMPTY,
+                個人.get世帯コード() != null ? 個人.get世帯コード() : SetaiCode.EMPTY,
+                識別対象.get現全国地方公共団体コード() != null ? new LasdecCode(識別対象.get現全国地方公共団体コード().value()) : LasdecCode.EMPTY,
+                賦課検索.getFukaNendo() != null ? 賦課検索.getFukaNendo() : FlexibleYear.EMPTY,
+                賦課検索.getTsuchishoNo() != null ? 賦課検索.getTsuchishoNo() : TsuchishoNo.EMPTY,
+                賦課検索.getChoteiNendo() != null ? 賦課検索.getChoteiNendo() : FlexibleYear.EMPTY
         );
     }
 
@@ -495,8 +520,8 @@ public class FukaTaishoshaSearch {
                     個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
                     個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                     識別対象.get住所() != null ? ((識別対象.get住所().get住所() != null && 識別対象.get住所().get番地() != null)
-                    ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
-                    : 識別対象.get住所().get住所()) : RString.EMPTY,
+                                            ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
+                                            : 識別対象.get住所().get住所()) : RString.EMPTY,
                     識別対象.get識別コード() != null ? 識別対象.get識別コード().value() : RString.EMPTY,
                     個人.get世帯コード() != null ? 個人.get世帯コード().value() : RString.EMPTY));
         }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320001.old;
 
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;

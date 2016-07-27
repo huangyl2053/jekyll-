@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 対象者を特定するキー情報です。（賦課系）
- *
- * @author N8156 宮本 康
+ * <p/>
+ * 検索画面で対象者を特定した際に作成されます。
  */
 public class FukaTaishoshaKey implements Serializable {
 
