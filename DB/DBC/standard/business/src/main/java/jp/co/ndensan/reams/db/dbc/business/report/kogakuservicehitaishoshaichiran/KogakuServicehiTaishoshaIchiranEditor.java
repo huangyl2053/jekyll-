@@ -96,7 +96,9 @@ public class KogakuServicehiTaishoshaIchiranEditor implements IKogakuServicehiTa
         if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.get被保険者番号() != null) {
             source.listTaishosha_2 = 高額介護サービス費対象者一覧表.get被保険者番号().getColumnValue();
         }
-        //TODO 識別コード 常に非表示 QA(#948)
+        if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.get識別コード() != null) {
+            source.shikibetsuCode = 高額介護サービス費対象者一覧表.get識別コード().getColumnValue();
+        }
         if (高額介護サービス費対象者一覧表 != null && 高額介護サービス費対象者一覧表.getサービス提供年月() != null) {
             source.listTaishosha_3 = 高額介護サービス費対象者一覧表.getサービス提供年月().toDateString();
         }

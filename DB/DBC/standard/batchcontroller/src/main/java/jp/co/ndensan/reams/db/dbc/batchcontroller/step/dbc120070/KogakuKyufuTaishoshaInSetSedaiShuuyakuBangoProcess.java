@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 高額介護サービス費給付対象者取込のCSVファイル読取
@@ -53,7 +54,7 @@ public class KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess extends BatchPro
         DbWT0001HihokenshaTempEntity 被保険者 = t.get被保険者();
         DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 高額送付 = t.get高額送付();
         if (高額送付.getIdoYMD().isBeforeOrEquals(被保険者.getサービス提供年月末日())) {
-            被保険者.set世帯集約番号(高額送付.getSetaiShuyakuNo().getColumnValue());
+            被保険者.set世帯集約番号(getColumnValue(高額送付.getSetaiShuyakuNo()));
             世帯集約番号修正被保険者リスト.add(被保険者);
             return;
         }
@@ -81,6 +82,13 @@ public class KogakuKyufuTaishoshaInSetSedaiShuuyakuBangoProcess extends BatchPro
                 kekkaMapper.insert処理結果リスト一時TBL(処理結果);
             }
         }
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null == entity) {
+            return RString.EMPTY;
+        }
+        return entity.getColumnValue();
     }
 
 }

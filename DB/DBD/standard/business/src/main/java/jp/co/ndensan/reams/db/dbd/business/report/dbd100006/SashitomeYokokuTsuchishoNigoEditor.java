@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100006;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100006.SashitomeYokokuTsuchishoNigoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -46,7 +46,7 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private final List<ShokanKihonJihoEntiy> 償還払計情報リスト;
+    //private final List<ShokanKihonJihoEntiy> 償還払計情報リスト;
 
     /**
      * インスタンスを生成します。
@@ -72,7 +72,7 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
         this.通知書定型文リスト = 通知書定型文リスト;
         this.認証者ソースビルダー = 認証者ソースビルダー;
         this.帳票情報 = 帳票情報;
-        this.償還払計情報リスト = 償還払計情報リスト;
+        //  this.償還払計情報リスト = 償還払計情報リスト;
     }
 
     @Override

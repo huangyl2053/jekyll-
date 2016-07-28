@@ -45,19 +45,19 @@ public class RinjiCreatTableProcess extends BatchProcessBase<RString> {
     }
 
     @BatchWriter
-    BatchEntityCreatedTempTableWriter tempTableWriter_ShotokuShoukaiKouhoshaTemp;
-    BatchEntityCreatedTempTableWriter tempTableWriter_ShotokuShoukaiDataTemp;
-    BatchEntityCreatedTempTableWriter tempTableWriter_JukyuusyaTemp;
+    BatchEntityCreatedTempTableWriter shotokuShoukaiKouhoshaTemp;
+    BatchEntityCreatedTempTableWriter shotokuShoukaiDataTemp;
+    BatchEntityCreatedTempTableWriter jukyuusyaTemp;
 
     @Override
     protected void createWriter() {
-        tempTableWriter_ShotokuShoukaiKouhoshaTemp
+        shotokuShoukaiKouhoshaTemp
                 = new BatchEntityCreatedTempTableWriter(SHOTOKUSHOUKAIKOUHOSHATEMP,
                         ShotokuShoukaiKouhoshaTempEntity.class);
-        tempTableWriter_ShotokuShoukaiDataTemp
+        shotokuShoukaiDataTemp
                 = new BatchEntityCreatedTempTableWriter(SHOTOKUSHOUKAIDATATEMP,
                         ShotokuShoukaiDataTempEntity.class);
-        tempTableWriter_JukyuusyaTemp
+        jukyuusyaTemp
                 = new BatchEntityCreatedTempTableWriter(TABLE_NAME_JUKYUUSYATEMPENTITY,
                         JukyuusyaTempEntity.class);
     }

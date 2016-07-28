@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public class HomKaigRiysFutGenｍKettTsuchishoReportSource implements IReportSource {
+public class HomKaigRiysFutGenmKettTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportPerson(id = "001")

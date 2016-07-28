@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batc
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishogaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -121,8 +121,8 @@ public class TokuChoHeijunkaKeisanJuneKekkaIchiranPrintService {
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類ID, 出力順ID);
         TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty property = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty(並び順);
-        try (ReportAssembler<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranSource> reportSourceWriter
+        try (ReportAssembler<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport report = TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport.createForm(

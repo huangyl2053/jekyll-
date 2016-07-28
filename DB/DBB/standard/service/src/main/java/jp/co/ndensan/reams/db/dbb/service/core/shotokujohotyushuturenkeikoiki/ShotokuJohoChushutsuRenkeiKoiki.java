@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShoriHizukeKanriMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -89,7 +89,7 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     public List<ShichosonJohoResult> getShichosonJoho(List<KoikiZenShichosonJoho> koikiZenShichosonJohoList,
             RString 遷移区分, FlexibleYear 年度) {
         List<ShichosonJohoResult> shichosonJohoResultList = new ArrayList<>();
-        List<ShichosonJohoEntity> shichosonJohoList = new ArrayList<>();
+        List<ShichosonJoho> shichosonJohoList = new ArrayList<>();
         ShoriHizukeKanriMaster kanriMasterEntity;
         for (KoikiZenShichosonJoho entity : koikiZenShichosonJohoList) {
             DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity;
@@ -122,7 +122,7 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
                     kanriMasterEntity.set処理区分(可);
                 }
             }
-            ShichosonJohoEntity shichosonJohoEntity = new ShichosonJohoEntity();
+            ShichosonJoho shichosonJohoEntity = new ShichosonJoho();
             shichosonJohoEntity.set市町村コード(entity.get市町村コード());
             shichosonJohoEntity.set市町村名(entity.get市町村名称());
             shichosonJohoEntity.set処理状態(kanriMasterEntity.get処理状態());
@@ -131,7 +131,7 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             shichosonJohoEntity.set処理区分(kanriMasterEntity.get処理区分());
             shichosonJohoList.add(shichosonJohoEntity);
         }
-        for (ShichosonJohoEntity resultEntity : shichosonJohoList) {
+        for (ShichosonJoho resultEntity : shichosonJohoList) {
             shichosonJohoResultList.add(new ShichosonJohoResult(resultEntity));
         }
         return shichosonJohoResultList;

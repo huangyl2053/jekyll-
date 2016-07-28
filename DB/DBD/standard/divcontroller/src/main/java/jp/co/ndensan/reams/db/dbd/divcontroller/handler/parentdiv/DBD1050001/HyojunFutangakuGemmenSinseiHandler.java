@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.hyojunfutangakugem
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050001.dgShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.hyojunfutangakugemmen.HyojunFutangakuGemmenService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 標準負担額減免申請ハンドラクラスです。
@@ -39,13 +42,17 @@ public class HyojunFutangakuGemmenSinseiHandler {
         ArrayList<dgShinseiIchiran_Row> 最初申請一覧情報 = new ArrayList<>();
         for (HyojunFutangakuGemmen dbT4012HyojunFutangakuGemmen : 標準負担額減免情報データ) {
             dgShinseiIchiran_Row hyojunFutangakuGemmen = new dgShinseiIchiran_Row();
-            hyojunFutangakuGemmen.setTxtShinseiYMD(dbT4012HyojunFutangakuGemmen.get申請年月日RString());
+            hyojunFutangakuGemmen.setTxtShinseiYMD(new RString(dbT4012HyojunFutangakuGemmen.get申請年月日().toString()));
             hyojunFutangakuGemmen.setTxtShinseiRiyu(dbT4012HyojunFutangakuGemmen.get申請事由());
-            hyojunFutangakuGemmen.setTxtKetteiYMD(dbT4012HyojunFutangakuGemmen.get決定年月日TextBox());
+            TextBoxFlexibleDate 決定年月日 = new TextBoxFlexibleDate();
+            決定年月日.setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get決定年月日().toString()));
+            hyojunFutangakuGemmen.setTxtKetteiYMD(決定年月日);
             hyojunFutangakuGemmen.setTxtKetteiKubun(dbT4012HyojunFutangakuGemmen.get決定区分());
-            hyojunFutangakuGemmen.setTxtHyojunFutangaku(dbT4012HyojunFutangakuGemmen.get減額後金額RString());
+            hyojunFutangakuGemmen.setTxtHyojunFutangaku(new RString(dbT4012HyojunFutangakuGemmen.get減額後金額().toString()));
             hyojunFutangakuGemmen.setTxtGengakuKubun(dbT4012HyojunFutangakuGemmen.get減額区分());
-            hyojunFutangakuGemmen.setTxtTekiyoYMD(dbT4012HyojunFutangakuGemmen.get適用終了年月日TextBox());
+            TextBoxFlexibleDate 適用終了年月日 = new TextBoxFlexibleDate();
+            適用終了年月日.setValue(new FlexibleDate(dbT4012HyojunFutangakuGemmen.get適用終了年月日().toString()));
+            hyojunFutangakuGemmen.setTxtTekiyoYMD(適用終了年月日);
             hyojunFutangakuGemmen.setTxtShoninShinaiRiyu(dbT4012HyojunFutangakuGemmen.get非承認理由());
 
             最初申請一覧情報.add(hyojunFutangakuGemmen);

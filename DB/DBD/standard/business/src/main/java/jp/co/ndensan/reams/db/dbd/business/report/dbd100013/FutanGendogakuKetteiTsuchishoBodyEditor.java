@@ -39,28 +39,28 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     private final RString 負担名_居住費負担限度額従来型個室 = new RString("居住費負担限度額従来型個室");
     private final RString 負担名_居住費負担限度額従来型個室_特養等 = new RString("居住費負担限度額従来型個室（特養等）");
     private final RString 負担名_居住費負担限度額従来型個室_老健_療養等 = new RString("居住費負担限度額従来型個室（老健・療養等）");
-    private final int INDEX_0 = 0;
-    private final int INDEX_1 = 1;
-    private final int INDEX_2 = 2;
-    private final int INDEX_3 = 3;
-    private final int INDEX_4 = 4;
-    private final int INDEX_5 = 5;
-    private final int INDEX_6 = 6;
-    private final int INDEX_7 = 7;
-    private final int INDEX_8 = 8;
-    private final int INDEX_9 = 9;
-    private final int INDEX_10 = 10;
-    private final int INDEX_11 = 11;
-    private final int INDEX_12 = 12;
-    private final int INDEX_13 = 13;
-    private final int INDEX_14 = 14;
-    private final int INDEX_15 = 15;
-    private final int INDEX_16 = 16;
-    private final int INDEX_17 = 17;
-    private final int INDEX_18 = 18;
-    private final int INDEX_19 = 19;
-    private final int INDEX_20 = 20;
-    private final int INDEX_21 = 21;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
+    private static final int INDEX_14 = 14;
+    private static final int INDEX_15 = 15;
+    private static final int INDEX_16 = 16;
+    private static final int INDEX_17 = 17;
+    private static final int INDEX_18 = 18;
+    private static final int INDEX_19 = 19;
+    private static final int INDEX_20 = 20;
+    private static final int INDEX_21 = 21;
     private final FutanGendogakuKetteiTsuchishoItem item;
 
     /**
@@ -322,6 +322,15 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
     }
 
     private void setFutanGaku(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
+        setFutanGaku1(source, item);
+        setFutanGaku2(source, item);
+        setFutanGaku3(source, item);
+        setFutanGaku4(source, item);
+        setFutanGaku5(source, item);
+        setFutanGaku6(source, item);
+    }
+
+    private void setFutanGaku1(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().get食費負担限度額()) && (item.get負担限度額認定().get食費負担限度額() != null)) {
             source.futanGaku1 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get食費負担限度額(), 0);
         } else if (item.get負担限度額認定().is境界層該当者区分()) {
@@ -329,7 +338,9 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         } else {
             source.futanGaku1 = RString.EMPTY;
         }
+    }
 
+    private void setFutanGaku2(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().getユニット型個室()) && (item.get負担限度額認定().getユニット型個室() != null)) {
             source.futanGaku2 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().getユニット型個室(), 0);
         } else if (item.get負担限度額認定().is境界層該当者区分()
@@ -338,7 +349,9 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         } else {
             source.futanGaku2 = RString.EMPTY;
         }
+    }
 
+    private void setFutanGaku3(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().getユニット型準個室()) && (item.get負担限度額認定().getユニット型準個室() != null)) {
             source.futanGaku3 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().getユニット型準個室(), 0);
         } else if (item.get負担限度額認定().is境界層該当者区分()
@@ -347,7 +360,9 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         } else {
             source.futanGaku3 = RString.EMPTY;
         }
+    }
 
+    private void setFutanGaku4(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_特養等()) && (item.get負担限度額認定().get従来型個室_特養等() != null)) {
             source.futanGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_特養等(), 0);
         } else if (item.get負担限度額認定().is境界層該当者区分()
@@ -356,19 +371,25 @@ public class FutanGendogakuKetteiTsuchishoBodyEditor implements IFutanGendogakuK
         } else {
             source.futanGaku4 = RString.EMPTY;
         }
+    }
 
-        if (!Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
+    private void setFutanGaku5(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
+        if ((KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
+                || KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分()))
+                && !Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
             source.futanGaku5 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get多床室(), 0);
         } else if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_老健_療養等())
                 && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
-            source.futanGaku5 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get多床室(), 0);
+            source.futanGaku5 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_老健_療養等(), 0);
         } else if (item.get負担限度額認定().is境界層該当者区分()
                 || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
             source.futanGaku5 = ハイフン;
         } else {
             source.futanGaku5 = RString.EMPTY;
         }
+    }
 
+    private void setFutanGaku6(FutanGendogakuKetteiTsuchishoReportSource source, FutanGendogakuKetteiTsuchishoItem item) {
         if (KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
                 || KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
             source.futanGaku6 = RString.EMPTY;

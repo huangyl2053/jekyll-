@@ -27,7 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBZ-9999-012 yangchenbing
  */
-public class NenkinTokuchoKaifuJoho extends ParentModelBase<NenkinTokuchoKaifuJohoIdentifier, UeT0511NenkinTokuchoKaifuJohoEntity, NenkinTokuchoKaifuJoho> implements Serializable {
+public class NenkinTokuchoKaifuJoho extends ParentModelBase<NenkinTokuchoKaifuJohoIdentifier, UeT0511NenkinTokuchoKaifuJohoEntity,
+        NenkinTokuchoKaifuJoho> implements Serializable {
 
 //TODO NetBeansの機能を使って必ずequalsとhashCodeを追加してください。
     private final UeT0511NenkinTokuchoKaifuJohoEntity entity;
@@ -673,10 +674,7 @@ public class NenkinTokuchoKaifuJoho extends ParentModelBase<NenkinTokuchoKaifuJo
         if (!Objects.equals(this.entity, other.entity)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     private static final class _SerializationProxy implements Serializable {

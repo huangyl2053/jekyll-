@@ -1,10 +1,14 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbd.entity.report.dbd300004;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 要介護認定月別受給者数状況表（統計表）ReportSourceです。
+ *
+ * @reamsid_L DBD-1771-034 b_liuyang2
+ */
 public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

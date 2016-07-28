@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -39,8 +39,8 @@ public class HomKaigRiysFutGenmKettTsuchishoPrintService {
      */
     public void print(HomKaigRiysFutGenmKettTsuchishoItem target, ReportManager reportManager) {
         HomKaigRiysFutGenmKettTsuchishoProerty property = new HomKaigRiysFutGenmKettTsuchishoProerty();
-        try (ReportAssembler<HomKaigRiysFutGenｍKettTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<HomKaigRiysFutGenｍKettTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+        try (ReportAssembler<HomKaigRiysFutGenmKettTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<HomKaigRiysFutGenmKettTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),
                     new FlexibleDate(target.get発行日().toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);

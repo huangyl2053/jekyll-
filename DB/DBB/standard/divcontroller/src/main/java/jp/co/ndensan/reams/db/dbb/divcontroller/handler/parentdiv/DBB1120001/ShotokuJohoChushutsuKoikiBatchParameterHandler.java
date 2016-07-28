@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki.ShotokuJohoChushutsuRenkeiKoiki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -177,8 +177,8 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
         ShotokuJohoTyushutuRenkeiKoikiParameter batchparam = new ShotokuJohoTyushutuRenkeiKoikiParameter();
         batchparam.set処理年度(new FlexibleYear(div.getTxtShoriNendoKoiki().getValue().getYear().toDateString()));
         batchparam.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
-        List<ShichosonJohoEntity> list = new ArrayList<>();
-        ShichosonJohoEntity entity = new ShichosonJohoEntity();
+        List<ShichosonJoho> list = new ArrayList<>();
+        ShichosonJoho entity = new ShichosonJoho();
         for (int i = 0; i < div.getDgShichosonIchiran().getClickedRowId(); i++) {
             entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
             entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());

@@ -11,7 +11,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.HokenryoDankaiHantei;
@@ -55,20 +54,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
 import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
 import jp.co.ndensan.reams.ur.urd.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwariInput;
@@ -77,20 +71,14 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -98,30 +86,17 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * ビジネス設計_DBBBZ33001_1_特徴仮算定賦課（バッチ）
@@ -132,7 +107,6 @@ public class TokuchoKariSanteiFukaManagerBatch {
 
     private final MapperProvider mProvider;
     private final DbT2010FukaErrorListDac 賦課エラー一覧Dac;
-    private final DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac;
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac;
 
     private static final RString キー_調定年度 = new RString("choteiNendo");
@@ -154,25 +128,13 @@ public class TokuchoKariSanteiFukaManagerBatch {
     private static final RString バッチID = new RString("DBBBT33001");
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
-    private static final char 文字列_0 = '0';
     private static final RString 文字列_04 = new RString("04");
     private static final RString 文字列_01 = new RString("01");
     private static final RString 文字列_03 = new RString("03");
     private static final RString 文字列_31 = new RString("31");
     private static final RString 文字列_0000 = new RString("0000");
-    private static final Code コード_08 = new Code("08");
-    private static final CodeShubetsu コード_0008 = new CodeShubetsu("0008");
-    private static final CodeShubetsu コード_0046 = new CodeShubetsu("0046");
-    private static final CodeShubetsu コード_0047 = new CodeShubetsu("0047");
     private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
     private static final ReportId 帳票ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200002");
-    private static final RString EUCファイル名 = new RString("TokubetsuChoshuKarisanteiKekkaIchiranData.csv");
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString 継続 = new RString("継続");
-    private static final RString 開始月_6月 = new RString("6月");
-    private static final RString 特徴停止 = new RString("特徴停止");
     private static final RString FORMAT_LEFT = new RString("【");
     private static final RString FORMAT_RIGHT = new RString("】");
     private static final RString FORMAT_MIN = new RString("<");
@@ -193,7 +155,6 @@ public class TokuchoKariSanteiFukaManagerBatch {
     TokuchoKariSanteiFukaManagerBatch() {
         mProvider = InstanceProvider.create(MapperProvider.class);
         賦課エラー一覧Dac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
-        帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
         処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
@@ -207,7 +168,6 @@ public class TokuchoKariSanteiFukaManagerBatch {
             DbT7022ShoriDateKanriDac 処理日付管理Dac) {
         this.mProvider = mProvider;
         this.賦課エラー一覧Dac = 賦課エラー一覧Dac;
-        this.帳票制御共通Dac = 帳票制御共通Dac;
         this.処理日付管理Dac = 処理日付管理Dac;
     }
 
@@ -1462,37 +1422,35 @@ public class TokuchoKariSanteiFukaManagerBatch {
                 IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                         .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収仮算定結果一覧表_帳票分類ID, Long.parseLong(出力順ID.toString()));
                 List<RString> 並び順List = new ArrayList<>();
-                List<SortOrder> 昇降順List = new ArrayList<>();
                 for (int i = 整数_0; i < 整数_5; i++) {
                     if (i < 並び順.get設定項目リスト().size()) {
                         並び順List.add(並び順.get設定項目リスト().get(i).get項目名());
-                        昇降順List.add(並び順.get設定項目リスト().get(i).get昇降順());
                     } else {
                         break;
                     }
                 }
                 int flag = 整数_0;
                 if (並び順List.size() > 整数_0) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_0), 昇降順List.get(整数_0));
+                    flag = getソート(o1, o2, 並び順List.get(整数_0));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_1) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_1), 昇降順List.get(整数_0));
+                    flag = getソート(o1, o2, 並び順List.get(整数_1));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_2) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_2), 昇降順List.get(整数_0));
+                    flag = getソート(o1, o2, 並び順List.get(整数_2));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_3) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_3), 昇降順List.get(整数_0));
+                    flag = getソート(o1, o2, 並び順List.get(整数_3));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_4) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_4), 昇降順List.get(整数_0));
+                    flag = getソート(o1, o2, 並び順List.get(整数_4));
                 }
                 return flag;
             }
         });
         SourceDataCollection sourceDataCollection = new TokubetsuChoshuKarisanteiKekkaIchiranPrintService().printSingle(
                 特徴仮算定計算後賦課情報EntityList, Long.parseLong(出力順ID.toString()), 調定年度, 調定日時);
-        publish特別徴収開始通知書発行一覧表(特徴仮算定計算後賦課情報EntityList, 調定日時);
+        TokuchoKariSanteiFukaManager.createInstance().publish特別徴収開始通知書発行一覧表(特徴仮算定計算後賦課情報EntityList, 調定日時);
         RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
         loadバッチ出力条件リスト(調定年度, 賦課年度, Long.parseLong(出力順ID.toString()), 出力ページ数);
     }
@@ -1759,75 +1717,45 @@ public class TokuchoKariSanteiFukaManagerBatch {
         entity.set特別徴収義務者コード(特徴仮算定結果情報.get特別徴収業務者コード());
     }
 
-    private int getソート(TokuchoKariKeisangoFukaEntity o1, TokuchoKariKeisangoFukaEntity o2, RString 項目名, SortOrder 昇降順) {
+    private int getソート(TokuchoKariKeisangoFukaEntity o1, TokuchoKariKeisangoFukaEntity o2, RString 項目名) {
         if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.郵便番号.getフォームフィールド名().equals(項目名)) {
             YubinNo 郵便番号2 = o2.get宛名().getYubinNo();
             YubinNo 郵便番号1 = o1.get宛名().getYubinNo();
-            if (郵便番号2 != null && 郵便番号1 != null && SortOrder.DESCENDING.equals(昇降順)) {
+            if (郵便番号2 != null && 郵便番号1 != null) {
                 return 郵便番号2.compareTo(郵便番号1);
-            }
-            if (郵便番号2 != null && 郵便番号1 != null && SortOrder.ASCENDING.equals(昇降順)) {
-                return 郵便番号1.compareTo(郵便番号2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.町域コード.getフォームフィールド名().equals(項目名)) {
             ChoikiCode 町域コード2 = o2.get宛名().getChoikiCode();
             ChoikiCode 町域コード1 = o1.get宛名().getChoikiCode();
-            if (町域コード2 != null && 町域コード1 != null && SortOrder.DESCENDING.equals(昇降順)) {
+            if (町域コード2 != null && 町域コード1 != null) {
                 return 町域コード2.compareTo(町域コード1);
-            }
-            if (町域コード2 != null && 町域コード1 != null && SortOrder.ASCENDING.equals(昇降順)) {
-                return 町域コード1.compareTo(町域コード2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.行政区コード.getフォームフィールド名().equals(項目名)) {
             GyoseikuCode 行政区コード2 = o2.get宛名().getGyoseikuCode();
             GyoseikuCode 行政区コード1 = o1.get宛名().getGyoseikuCode();
-            if (行政区コード2 != null && 行政区コード1 != null && SortOrder.DESCENDING.equals(昇降順)) {
+            if (行政区コード2 != null && 行政区コード1 != null) {
                 return 行政区コード2.compareTo(行政区コード1);
             }
-            if (行政区コード2 != null && 行政区コード1 != null && SortOrder.ASCENDING.equals(昇降順)) {
-                return 行政区コード1.compareTo(行政区コード2);
-            }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.世帯コード.getフォームフィールド名().equals(項目名)) {
-            if (SortOrder.DESCENDING.equals(昇降順)) {
-                return o2.get世帯コード().compareTo(o1.get世帯コード());
-            } else {
-                return o1.get世帯コード().compareTo(o2.get世帯コード());
-            }
+            return o2.get世帯コード().compareTo(o1.get世帯コード());
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.識別コード.getフォームフィールド名().equals(項目名)) {
-            if (SortOrder.DESCENDING.equals(昇降順)) {
-                return o2.get識別コード().compareTo(o1.get識別コード());
-            } else {
-                return o1.get識別コード().compareTo(o2.get識別コード());
-            }
+            return o2.get識別コード().compareTo(o1.get識別コード());
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.生年月日.getフォームフィールド名().equals(項目名)) {
             FlexibleDate 生年月日2 = o2.get宛名().getSeinengappiYMD();
             FlexibleDate 生年月日1 = o1.get宛名().getSeinengappiYMD();
-            if (生年月日2 != null && 生年月日1 != null && SortOrder.DESCENDING.equals(昇降順)) {
+            if (生年月日2 != null && 生年月日1 != null) {
                 return 生年月日2.compareTo(生年月日1);
-            }
-            if (生年月日2 != null && 生年月日1 != null && SortOrder.ASCENDING.equals(昇降順)) {
-                return 生年月日1.compareTo(生年月日2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.性別.getフォームフィールド名().equals(項目名)) {
             RString 性別2 = o2.get宛名().getSeibetsuCode();
             RString 性別1 = o1.get宛名().getSeibetsuCode();
-            if (性別2 != null && 性別1 != null && SortOrder.DESCENDING.equals(昇降順)) {
+            if (性別2 != null && 性別1 != null) {
                 return 性別2.compareTo(性別1);
             }
-            if (性別2 != null && 性別1 != null && SortOrder.ASCENDING.equals(昇降順)) {
-                return 性別1.compareTo(性別2);
-            }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.通知書番号.getフォームフィールド名().equals(項目名)) {
-            if (SortOrder.DESCENDING.equals(昇降順)) {
-                return o2.get通知書番号().compareTo(o1.get通知書番号());
-            } else {
-                return o1.get通知書番号().compareTo(o2.get通知書番号());
-            }
+            return o2.get通知書番号().compareTo(o1.get通知書番号());
         }
-        if (SortOrder.DESCENDING.equals(昇降順)) {
-            return o2.get被保険者番号().compareTo(o1.get被保険者番号());
-        }
-        return o1.get被保険者番号().compareTo(o2.get被保険者番号());
+        return o2.get被保険者番号().compareTo(o1.get被保険者番号());
     }
 
     private void loadバッチ出力条件リスト(FlexibleYear 調定年度, FlexibleYear 賦課年度, long 出力順ID, RString 出力ページ数) {
@@ -1899,204 +1827,6 @@ public class TokuchoKariSanteiFukaManagerBatch {
         }
         RString 出力順 = MyBatisOrderByClauseCreator.create(TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.class, outputOrder);
         return 出力順;
-    }
-
-    private void publish特別徴収開始通知書発行一覧表(List<TokuchoKariKeisangoFukaEntity> 特徴仮算定計算後賦課情報EntityList,
-            YMDHMS 調定日時) {
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, EUCファイル名);
-        try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(false)
-                .build()) {
-            int i = 整数_1;
-            for (TokuchoKariKeisangoFukaEntity entity : 特徴仮算定計算後賦課情報EntityList) {
-                List<RString> bodyList = new ArrayList<>();
-                bodyList.add(new RString(String.valueOf(i)));
-                if (調定日時 == null || 調定日時.isEmpty()) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(調定日時.getDate().seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString());
-                    bodyList.add(調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss));
-                }
-                if (isNull(entity.get宛名())) {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(get郵便番号(entity.get宛名().getYubinNo()));
-                    IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-                    ChohyoSeigyoKyotsu 帳票制御共通情報 = load帳票制御共通(特別徴収仮算定結果一覧表_帳票分類ID);
-                    RString 住所編集 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報,
-                            AssociationFinderFactory.createInstance().getAssociation());
-                    bodyList.add(住所編集);
-                    bodyList.add(get住所(entity.get宛名().getJusho()));
-                    bodyList.add(get番地(entity.get宛名().getBanchi()));
-                    bodyList.add(get行政区コード(entity.get宛名().getGyoseikuCode()));
-                    bodyList.add(entity.get宛名().getGyoseikuName());
-                    bodyList.add(get生年月日(entity.get宛名().getSeinengappiYMD()));
-                    bodyList.add(宛名情報.get性別().getCommonName());
-                }
-                RString 特別徴収停止事由コード = entity.get特別徴収停止事由コード();
-                Decimal 特徴期期別金額01 = entity.get特徴期期別金額01();
-                Decimal 特徴期期別金額02 = entity.get特徴期期別金額02();
-                Decimal 特徴期期別金額03 = entity.get特徴期期別金額03();
-                bodyList.add(get開始月(特別徴収停止事由コード, 特徴期期別金額01, 特徴期期別金額02, 特徴期期別金額03));
-                RString 前年度保険料段階 = entity.get前年度保険料段階();
-                HokenryoDankaiList 保険料段階リスト = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-                bodyList.add(保険料段階リスト.getBy段階区分(前年度保険料段階).get表記());
-                RString 前年度保険料 = DecimalFormatter.toコンマ区切りRString(保険料段階リスト.getBy段階区分(前年度保険料段階).get保険料率(), 整数_0);
-                bodyList.add(前年度保険料);
-                bodyList.add(get通知書番号(entity.get通知書番号()));
-                bodyList.add(get世帯コード(entity.get世帯コード()));
-                bodyList.add(get漢字氏名(entity.get宛名().getKanjiShimei()));
-                bodyList.add(get特別徴収業務者コード(entity.get特別徴収義務者コード()));
-                if (entity.get特別徴収義務者コード() != null) {
-                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード_0047, entity.get特別徴収義務者コード()));
-                } else {
-                    bodyList.add(RString.EMPTY);
-                }
-                bodyList.add(entity.get仮徴収_年金コード());
-                RString 特別徴収対象年金コード = RString.EMPTY;
-                if (entity.get仮徴収_年金コード() != null && !entity.get仮徴収_年金コード().isEmpty()) {
-                    特別徴収対象年金コード = entity.get仮徴収_年金コード().substring(整数_0, 整数_3);
-                }
-                if (特別徴収対象年金コード != null) {
-                    bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, コード_0046, new Code(特別徴収対象年金コード)));
-                } else {
-                    bodyList.add(RString.EMPTY);
-                }
-                if (entity.get特別徴収停止事由コード() == null || entity.get特別徴収停止事由コード().isEmpty()) {
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額01(), 整数_0));
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額02(), 整数_0));
-                    bodyList.add(DecimalFormatter.toコンマ区切りRString(entity.get特徴期期別金額03(), 整数_0));
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                } else {
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(RString.EMPTY);
-                    bodyList.add(特徴停止);
-                    if (entity.get特別徴収停止事由コード() != null) {
-                        bodyList.add(CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課, コード_0008, new Code(entity.get特別徴収停止事由コード())));
-                    } else {
-                        bodyList.add(RString.EMPTY);
-                    }
-                }
-                for (int j = 整数_0; j < bodyList.size(); j++) {
-                    if (bodyList.get(j) == null) {
-                        bodyList.remove(bodyList.get(j));
-                        bodyList.add(j, RString.EMPTY);
-                    }
-                }
-                i++;
-                csvListWriter.writeLine(bodyList);
-            }
-            csvListWriter.close();
-            manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
-        }
-    }
-
-    private boolean isNull(Object 項目) {
-        return 項目 == null;
-    }
-
-    private ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類Id) throws NullPointerException {
-        requireNonNull(帳票分類Id, UrSystemErrorMessages.値がnull.getReplacedMessage(帳票分類Id.toString()));
-
-        DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類Id);
-        if (entity == null) {
-            return null;
-        }
-        return new ChohyoSeigyoKyotsu(entity);
-    }
-
-    private RString get郵便番号(YubinNo 郵便番号) {
-        if (郵便番号 == null) {
-            return RString.EMPTY;
-        }
-        return 郵便番号.value();
-    }
-
-    private RString get住所(AtenaJusho 住所) {
-        if (住所 == null) {
-            return RString.EMPTY;
-        }
-        return 住所.value();
-    }
-
-    private RString get番地(AtenaBanchi 番地) {
-        if (番地 == null) {
-            return RString.EMPTY;
-        }
-        return 番地.value();
-    }
-
-    private RString get行政区コード(GyoseikuCode 行政区コード) {
-        if (行政区コード == null) {
-            return RString.EMPTY;
-        }
-        return 行政区コード.value();
-    }
-
-    private RString get生年月日(FlexibleDate 生年月日) {
-        if (生年月日 == null) {
-            return RString.EMPTY;
-        }
-        return new RString(生年月日.toString());
-    }
-
-    private RString get開始月(RString 特別徴収停止事由コード,
-            Decimal 特徴期期別金額01,
-            Decimal 特徴期期別金額02,
-            Decimal 特徴期期別金額03) {
-        if (特別徴収停止事由コード == null || 特別徴収停止事由コード.isEmpty()) {
-            if (特徴期期別金額01.intValue() > 整数_0 && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
-                return 継続;
-            }
-            if (特徴期期別金額01.equals(Decimal.ZERO) && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
-                return 開始月_6月;
-            }
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get通知書番号(TsuchishoNo 通知書番号) {
-        if (通知書番号 == null) {
-            return RString.EMPTY;
-        }
-        return 通知書番号.value();
-    }
-
-    private RString get世帯コード(SetaiCode 世帯コード) {
-        if (世帯コード == null) {
-            return RString.EMPTY;
-        }
-        return 世帯コード.value();
-    }
-
-    private RString get漢字氏名(AtenaMeisho 漢字氏名) {
-        if (漢字氏名 == null) {
-            return RString.EMPTY;
-        }
-        return 漢字氏名.value();
-    }
-
-    private RString get特別徴収業務者コード(Code 特別徴収業務者コード) {
-        if (特別徴収業務者コード == null) {
-            return RString.EMPTY;
-        }
-        return 特別徴収業務者コード.value();
     }
 
     /**

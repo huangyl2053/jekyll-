@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100006;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100006.SashitomeYokokuTsuchishoNigoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -61,14 +61,14 @@ public final class SashitomeYokokuTsuchishoNigoReport extends Report<SashitomeYo
     /**
      * インスタンスを生成します。
      *
-     * @param 個人情報
-     * @param 宛先
-     * @param 帳票制御共通
-     * @param 地方公共団体
-     * @param 文書番号
-     * @param 通知書定型文リスト
-     * @param 認証者ソースビルダー
-     * @param 帳票情報
+     * @param 個人情報 個人情報
+     * @param 宛先 宛先
+     * @param 帳票制御共通 帳票制御共通
+     * @param 地方公共団体 地方公共団体
+     * @param 文書番号 文書番号
+     * @param 通知書定型文リスト 通知書定型文リスト
+     * @param 認証者ソースビルダー 認証者ソースビルダー
+     * @param 帳票情報 帳票情報
      * @return 差止予告通知書（２号被保険者用）
      */
     public static SashitomeYokokuTsuchishoNigoReport createReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,

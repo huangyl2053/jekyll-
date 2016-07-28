@@ -663,7 +663,7 @@
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode" = A."shikibetsuCode"
         WHERE 
-            coalesce(B."fuChouKibetsuKingaku1",0) + coalesce(B."fuChouKibetsuKingaku2",0)+ coalesce(B."fuChouKibetsuKingaku3",0)+ coalesce(B."fuChouKibetsuKingaku4",0) > 0
+            coalesce(A."fuChouKibetsuKingaku1",0) + coalesce(A."fuChouKibetsuKingaku2",0)+ coalesce(A."fuChouKibetsuKingaku3",0)+ coalesce(A."fuChouKibetsuKingaku4",0) > 0
             ) AS B
     </insert>
     
@@ -728,8 +728,8 @@
             "shikakuShutoku_tsuchishoNo" = #{通知書番号},
             "shikakuShutoku_fukaYMD" = #{賦課期日}
         WHERE 資格."shikakuShutoku_hihokenshaNo" = #{被保険者番号}
-          WHERE 資格."shikakuShutoku_idoYMD" = #{異動日}
-          WHERE 資格."shikakuShutoku_edaNo" = #{枝番}
+          AND 資格."shikakuShutoku_idoYMD" = #{異動日}
+          AND 資格."shikakuShutoku_edaNo" = #{枝番}
      </update>
      
      <select  id="select資格取得情報" 
@@ -947,7 +947,7 @@
                    <include refid="allColumns_UrT0528SeikatsuHogoTeishikikan" />,
                    徴収方法.*,
                    老齢情報.*,
-                   世帯員所得情報.*
+                   世帯員所得情報.*,
                    DbT1006KyokaisoGaitosha.*,
                    DbT1013KyokaisoSochiShinsei.*,
                    DbT1007KyokaisoHokenryoDankai.*,

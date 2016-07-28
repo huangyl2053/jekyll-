@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt44002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukaatena.FukaAtena;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennendotsuchisyoikatsuhako.HonsanteiIdoGennendoTsuchisyoIkatsuHakoResult;
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerSource;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidogennendotsuchisyoikatsuhako.HonsanteiIdoGennendoTsuchisyoIkatsuHako;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
@@ -79,6 +79,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchProcessBase {
 
     private static final ReportId 特別徴収開始通知書仮算定帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
+    private static final RString 定数_調定年度 = new RString("調定年度");
+    private static final RString 定数_通知書番号 = new RString("通知書番号");
     private static final RString RSTRING_1 = new RString("1");
     private Association 地方公共団体;
     private HonsanteiIdoProcessParameter processParameter;
@@ -333,8 +335,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
 
     private enum 特定項目1 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_NENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_NENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariB5Source.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -388,8 +390,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
 
     private enum 特定項目2 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_NENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_NENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -443,8 +445,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
 
     private enum 特定項目3 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_NENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_NENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariSealerSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -499,8 +501,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
 
     private enum 特定項目4 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_NENDO2, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_NENDO2, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -555,8 +557,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
 
     private enum 特定項目5 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TITLENENDO, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TSUCHISHONO, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TITLENENDO, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateSource.ITEM_TSUCHISHONO, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;
@@ -610,8 +612,8 @@ public class PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess extends SimpleBatchPr
 
     private enum 特定項目6 implements ISpecificKey {
 
-        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_NENDO1, "調定年度"),
-        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_TSUCHISHONO2, "通知書番号");
+        key1(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_NENDO1, 定数_調定年度.toString()),
+        key2(TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoSource.ITEM_TSUCHISHONO2, 定数_通知書番号.toString());
 
         private final RString itemName;
         private final RString printName;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.taino.ShiharaiHohoHenkoTaino;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.ShokanKihonJiho.ShokanKihonJihoEntiy;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100003.ShiharaiIchijiSashitomeTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -52,7 +52,7 @@ public final class ShiharaiIchijiSashitomeTsuchishoReport extends Report<Shihara
      * @param 通知書定型文リスト List<RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
-     * @param 償還払集計情報リスト List<ShokanHaraiShukkeJyoho>
+     * @param 償還払集計情報リスト List<ShokanKihonJihoEntiy>
      * @return 支払一時差止通知書
      */
     public static ShiharaiIchijiSashitomeTsuchishoReport creatReport(IKojin 個人情報, IAtesaki 宛先,

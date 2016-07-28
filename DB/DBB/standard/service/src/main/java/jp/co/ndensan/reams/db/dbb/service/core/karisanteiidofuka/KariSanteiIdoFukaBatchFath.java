@@ -89,6 +89,7 @@ public class KariSanteiIdoFukaBatchFath {
     private static final RString 西暦 = new RString("西暦");
     private static final RString LEFTBRACKET = new RString("（");
     private static final RString RIGHTBRACKET = new RString("）");
+    private static final int 負数_1 = -1;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -120,17 +121,14 @@ public class KariSanteiIdoFukaBatchFath {
         TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
         Tsuki 月 = Tsuki.toValue(new RString(資格喪失月).padZeroToLeft(2));
         Kitsuki 期 = 月期対応取得_特徴.get期月リスト().get月の期(月);
-        if (資格喪失月 % 2 == 0 && ShikakuSoshitsuJiyu.死亡.getコード().equals(賦課の情報_設定後.get資格喪失事由())) {
+        if (資格喪失月 % 2 == NUM_0 && ShikakuSoshitsuJiyu.死亡.getコード().equals(賦課の情報_設定後.get資格喪失事由())) {
             if (賦課の情報_設定後.get資格喪失日().getDayValue() < NUM_15) {
                 set特徴金額(期.get期AsInt(), kibetsu, 介護期別RelateEntity);
             } else {
                 int 資格喪失月の属する翌期 = 期.get期AsInt() + 1;
                 set特徴金額(資格喪失月の属する翌期, kibetsu, 介護期別RelateEntity);
             }
-        } else if (資格喪失月 % 2 == 0 && !ShikakuSoshitsuJiyu.死亡.getコード().equals(賦課の情報_設定後.get資格喪失事由())) {
-            int 資格喪失月の属する翌期 = 期.get期AsInt() + 1;
-            set特徴金額(資格喪失月の属する翌期, kibetsu, 介護期別RelateEntity);
-        } else if (資格喪失月 % 2 == 1) {
+        } else {
             int 資格喪失月の属する翌期 = 期.get期AsInt() + 1;
             set特徴金額(資格喪失月の属する翌期, kibetsu, 介護期別RelateEntity);
         }

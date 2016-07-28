@@ -30,16 +30,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class RiysFutgGengMenjNinteishoBodyEditor implements IRiysFutgGengMenjNinteishoEditor {
 
     private final RString ホシ = new RString("＊");
-    private final int INDEX_0 = 0;
-    private final int INDEX_1 = 1;
-    private final int INDEX_2 = 2;
-    private final int INDEX_3 = 3;
-    private final int INDEX_4 = 4;
-    private final int INDEX_5 = 5;
-    private final int INDEX_6 = 6;
-    private final int INDEX_7 = 7;
-    private final int INDEX_8 = 8;
-    private final int INDEX_10 = 10;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_10 = 10;
+
     private final RiysFutgGengMenjNinteishoItem item;
 
     /**

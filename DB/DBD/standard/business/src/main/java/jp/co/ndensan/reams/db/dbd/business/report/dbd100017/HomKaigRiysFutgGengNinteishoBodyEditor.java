@@ -30,16 +30,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgGengNinteishoEditor {
 
     private final RString ホシ = new RString("＊");
-    private final int INDEX_0 = 0;
-    private final int INDEX_1 = 1;
-    private final int INDEX_2 = 2;
-    private final int INDEX_3 = 3;
-    private final int INDEX_4 = 4;
-    private final int INDEX_5 = 5;
-    private final int INDEX_6 = 6;
-    private final int INDEX_7 = 7;
-    private final int INDEX_8 = 8;
-    private final int INDEX_10 = 10;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_10 = 10;
     private final HomKaigRiysFutgGengNinteishoItem item;
 
     /**
@@ -137,7 +137,7 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
         source.yukoYYYY = setWareki(item.get訪問介護利用者負担額減額().get適用終了年月日().toRDate()).substring(INDEX_2, INDEX_4);
         source.yukoMM = setWareki(item.get訪問介護利用者負担額減額().get適用終了年月日().toRDate()).substring(INDEX_5, INDEX_7);
         source.yukoDD = setWareki(item.get訪問介護利用者負担額減額().get適用終了年月日().toRDate()).substring(INDEX_8, INDEX_10);
-        source.kyufuRitsu = new RString(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString());
+        source.kyufuRitsu = new RString(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString().concat("　/　100"));
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100017.保険者名表示.name()).equals(entity.getKomokuName())

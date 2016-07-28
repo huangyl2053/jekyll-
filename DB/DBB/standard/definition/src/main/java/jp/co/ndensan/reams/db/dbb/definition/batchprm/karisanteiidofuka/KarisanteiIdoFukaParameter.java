@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KarisanteiIdoFukaParameter extends BatchParameterBase {
 
+    private static final long serialVersionUID = 1L;
     private static final String KEY_調定年度 = "調定年度";
     private static final String KEY_賦課年度 = "賦課年度";
     private static final String KEY_処理対象月 = "処理対象月";

@@ -30,13 +30,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusRiysFutKeigTaisKakuninshoEditor {
 
     private final RString ホシ = new RString("＊");
-    private final int INDEX_0 = 0;
-    private final int INDEX_2 = 2;
-    private final int INDEX_4 = 4;
-    private final int INDEX_5 = 5;
-    private final int INDEX_7 = 7;
-    private final int INDEX_8 = 8;
-    private final int INDEX_10 = 10;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_10 = 10;
     private final RString 軽減率_100 = new RString("100");
 
     private final ShakfukusRiysFutKeigTaisKakuninshoItem item;
@@ -181,34 +181,38 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
                 source.keigenRitsu = 減額割合;
             }
             source.genmenNaiyo = RString.EMPTY;
-            if (item.get社会福祉法人等利用者負担軽減().is居宅サービス限定()) {
-                for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
-                    if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項１.name()).equals(entity.getKomokuName())) {
-                        source.genmenNaiyo1 = entity.getKomokuValue();
-                        break;
-                    }
-                }
-            } else if (item.get社会福祉法人等利用者負担軽減().is旧措置者ユニット型個室のみ()) {
-                for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
-                    if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項３_１.name()).equals(entity.getKomokuName())) {
-                        source.genmenNaiyo1 = entity.getKomokuValue();
-                        break;
-                    }
-                }
-            } else {
-                source.genmenNaiyo1 = RString.EMPTY;
-            }
+            setgenmenNaiyo(source, item);
+        }
+    }
 
-            if (item.get社会福祉法人等利用者負担軽減().is居住費_食費のみ()) {
-                for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
-                    if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項２.name()).equals(entity.getKomokuName())) {
-                        source.genmenNaiyo2 = entity.getKomokuValue();
-                        break;
-                    }
+    private void setgenmenNaiyo(ShakfukusRiysFutKeigTaisKakuninshoReportSource source, ShakfukusRiysFutKeigTaisKakuninshoItem item) {
+        if (item.get社会福祉法人等利用者負担軽減().is居宅サービス限定()) {
+            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項１.name()).equals(entity.getKomokuName())) {
+                    source.genmenNaiyo1 = entity.getKomokuValue();
+                    break;
                 }
-            } else {
-                source.genmenNaiyo2 = RString.EMPTY;
             }
+        } else if (item.get社会福祉法人等利用者負担軽減().is旧措置者ユニット型個室のみ()) {
+            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項３_１.name()).equals(entity.getKomokuName())) {
+                    source.genmenNaiyo1 = entity.getKomokuValue();
+                    break;
+                }
+            }
+        } else {
+            source.genmenNaiyo1 = RString.EMPTY;
+        }
+
+        if (item.get社会福祉法人等利用者負担軽減().is居住費_食費のみ()) {
+            for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
+                if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項２.name()).equals(entity.getKomokuName())) {
+                    source.genmenNaiyo2 = entity.getKomokuValue();
+                    break;
+                }
+            }
+        } else {
+            source.genmenNaiyo2 = RString.EMPTY;
         }
     }
 

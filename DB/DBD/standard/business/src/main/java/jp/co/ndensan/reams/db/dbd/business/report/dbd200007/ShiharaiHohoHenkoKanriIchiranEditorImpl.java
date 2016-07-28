@@ -216,66 +216,66 @@ public class ShiharaiHohoHenkoKanriIchiranEditorImpl implements IShiharaiHohoHen
     private ShiharaiHohoHenkoKanriIchiranReportSource edit上部の滞納者対策情報(ShiharaiHohoHenkoKanriIchiranReportSource source) {
         switch (count) {
             case 行数1:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_1行目適用開始日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get適用開始日_1行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数2:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_2行目適用終了日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get適用終了日_2行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数3:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_3行目終了受付日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get終了受付日_3行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数4:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_4行目予告発行日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get予告発行日_4行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数5:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_5行目弁明期限().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get弁明期限_5行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数6:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_6行目弁明受付日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get弁明受付日_6行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数7:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_7行目償還発行日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get償還発行日_7行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数8:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_8行目償還証期限().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                source.listUpper6_1 = 支払方法変更リストEntity.get償還証期限_8行目().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数9:
-                source.listUpper6_1 = new RString(支払方法変更リストEntity.get_9行目差止中件数());
+                source.listUpper6_1 = new RString(支払方法変更リストEntity.get差止中件数_9行目());
                 break;
             case 行数10:
-                source.listUpper6_1 = new RString(KingakuFormatter.create(支払方法変更リストEntity.get_10行目差止中金額())
+                source.listUpper6_1 = new RString(KingakuFormatter.create(支払方法変更リストEntity.get差止中金額_10行目())
                         .format(KingakuUnit.円).setCommaSeparated().toString());
                 break;
             case 行数11:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_11行目差止納付期日().wareki().eraType(EraType.KANJI_RYAKU)
+                source.listUpper6_1 = 支払方法変更リストEntity.get差止納付期日_11行目().wareki().eraType(EraType.KANJI_RYAKU)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数12:
-                source.listUpper6_1 = new RString(支払方法変更リストEntity.get_12行目控除件数());
+                source.listUpper6_1 = new RString(支払方法変更リストEntity.get控除件数_12行目());
                 break;
             case 行数13:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_13行目控除証期限().wareki().eraType(EraType.KANJI_RYAKU)
+                source.listUpper6_1 = 支払方法変更リストEntity.get控除証期限_13行目().wareki().eraType(EraType.KANJI_RYAKU)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 break;
             case 行数14:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_14行目();
+                source.listUpper6_1 = 支払方法変更リストEntity.get行14();
                 break;
             case 行数15:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_15行目();
+                source.listUpper6_1 = 支払方法変更リストEntity.get行15();
                 break;
             case 行数16:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_16行目();
+                source.listUpper6_1 = 支払方法変更リストEntity.get行16();
                 break;
             case 行数17:
-                source.listUpper6_1 = 支払方法変更リストEntity.get_17行目();
+                source.listUpper6_1 = 支払方法変更リストEntity.get行17();
                 break;
             default:
                 break;

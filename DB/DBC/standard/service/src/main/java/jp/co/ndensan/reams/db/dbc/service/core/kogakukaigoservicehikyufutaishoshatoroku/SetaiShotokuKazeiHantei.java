@@ -38,6 +38,7 @@ public class SetaiShotokuKazeiHantei {
     private static final RString メニューID_事業高額介護サービス = new RString("DBCMN41004");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
+    private static final RString 管理区分 = new RString("管理識別区分");
 
     /**
      * コンストラクタです。
@@ -72,9 +73,9 @@ public class SetaiShotokuKazeiHantei {
      */
     @Transaction
     public void getSetaiinHaaku(RString 管理識別区分, RString メニューID) {
-        requireNonNull(管理識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理識別区分"));
+        requireNonNull(管理識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage(管理区分.toString()));
         ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
-        //to do
+        //TODO
         mapper.creat世帯員把握入力高額一時();
         mapper.insert世帯員把握入力高額一時();
         mapper.creat世帯員把握入力事業高額一時();
@@ -127,9 +128,8 @@ public class SetaiShotokuKazeiHantei {
             entity.setJushochiTokureiFlag(tempSetaiEntity.getJushochiTokureiFlag());
             entity.setSetaiCode(世帯.getSetaiCode().value());
             list.add(entity);
-            return list;
         }
-        return null;
+        return list;
     }
 
     private List<TmpSetaiJigyoHaakuNyuryokuEntity> get世帯員所得情報事業高額一時のデータ(TempSetaiinJigyoHaakuNyuryokuEntity tempSetaiEntity) {
@@ -154,9 +154,8 @@ public class SetaiShotokuKazeiHantei {
             entity.setJushochiTokureiFlag(tempSetaiEntity.getJushochiTokureiFlag());
             entity.setSetaiCode(世帯.getSetaiCode().value());
             list.add(entity);
-            return list;
         }
-        return null;
+        return list;
     }
 
     /**

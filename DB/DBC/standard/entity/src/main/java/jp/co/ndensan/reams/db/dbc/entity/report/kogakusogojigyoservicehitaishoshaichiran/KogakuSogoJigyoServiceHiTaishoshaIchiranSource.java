@@ -51,7 +51,6 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranSource implements IReportSo
     public RString kaipage5;
     @ReportItem(name = "listTaishoshaIchiran_1", length = 4, order = 16)
     public RString listTaishoshaIchiran_1;
-    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listTaishoshaIchiran_2", length = 10, order = 17)
     public RString listTaishoshaIchiran_2;
@@ -73,6 +72,9 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranSource implements IReportSo
     public RString listTaishoshaIchiran_10;
     @ReportItem(name = "listTaishoshaIchiran_11", length = 85, order = 26)
     public RString listTaishoshaIchiran_11;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 85, order = 27)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -110,6 +112,7 @@ public class KogakuSogoJigyoServiceHiTaishoshaIchiranSource implements IReportSo
         listTaishoshaIchiran_8,
         listTaishoshaIchiran_9,
         listTaishoshaIchiran_10,
-        listTaishoshaIchiran_11
+        listTaishoshaIchiran_11,
+        shikibetsuCode
     }
 }

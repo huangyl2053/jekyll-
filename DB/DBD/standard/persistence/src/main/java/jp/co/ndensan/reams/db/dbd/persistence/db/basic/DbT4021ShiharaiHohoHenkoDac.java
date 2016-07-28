@@ -70,11 +70,11 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     /**
      * 支払方法変更の更新。
      *
-     * @param shoKisaiHokenshaNo　証記載保険者番号
-     * @param hihokenshaNo 被保険者番号
-     * @param kanriKubun 管理区分
-     * @param rirekiNo　履歴番号
-     * @param yokokuTsuchiHakkoYMD　予告通知書発行年月日
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param yokokuTsuchiHakkoYMD yokokuTsuchiHakkoYMD
      */
     @Transaction
     public void updateYokokuTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
@@ -87,11 +87,11 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     /**
      * 支払方法変更の更新。
      *
-     * @param shoKisaiHokenshaNo　証記載保険者番号
-     * @param hihokenshaNo 被保険者番号
-     * @param kanriKubun 管理区分
-     * @param rirekiNo　履歴番号
-     * @param shokanTsuchiHakkoYMD　償還払化通知書発行年月日
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo kanriKubun
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param shokanTsuchiHakkoYMD shokanTsuchiHakkoYMD
      */
     @Transaction
     public void updateShokanTsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
@@ -105,11 +105,11 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     /**
      * 支払方法変更の更新。
      *
-     * @param shoKisaiHokenshaNo　証記載保険者番号
-     * @param hihokenshaNo 被保険者番号
-     * @param kanriKubun 管理区分
-     * @param rirekiNo　履歴番号
-     * @param gemmenTsuchiHakkoYMD　減額通知書発行年月日
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     * @param kanriKubun kanriKubun
+     * @param rirekiNo rirekiNo
+     * @param gemmenTsuchiHakkoYMD gemmenTsuchiHakkoYMD
      */
     @Transaction
     public void updateGemmen_TsuchiHakkoYMD(ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo, RString kanriKubun,
@@ -128,6 +128,9 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     @Transaction
     @Override
     public int save(DbT4021ShiharaiHohoHenkoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法変更エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

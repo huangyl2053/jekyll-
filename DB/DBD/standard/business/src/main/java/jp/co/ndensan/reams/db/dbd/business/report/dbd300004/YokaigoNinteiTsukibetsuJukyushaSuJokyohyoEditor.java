@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd300004;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.YokaigoNinteiTsukibetsuJukyushaSuJokyohyo.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitsukibetsujukyushasujokyohyo.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -61,7 +61,7 @@ public class YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEditor implements IYokaigo
     /**
      * YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSourceを設定
      *
-     * @param source
+     * @param source YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource
      */
     public void setYokaigoNinteiTsukibetsuJukyushaSuJokyohyo(YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource source) {
         source.kijunbi = this.基準日.wareki().toDateString();

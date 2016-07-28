@@ -69,7 +69,7 @@ public interface IYokaigoNinteiJohoMapper {
     /**
      * 要介護認定インターフェース情報を更新します。
      *
-     * @param entity
+     * @param entity DbT4003YokaigoNinteiInterfaceEntity
      * @return 更新かどうか。
      */
     boolean updDbt4003YokaigoNinteiInterface(DbT4003YokaigoNinteiInterfaceEntity entity);

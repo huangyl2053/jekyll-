@@ -22,9 +22,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績高額介護サービス費を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-070 quxiaodong
  */
 public class KyufujissekiKogakuKaigoServicehi
-        extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, DbT3028KyufujissekiKogakuKaigoServicehiEntity, KyufujissekiKogakuKaigoServicehi> implements Serializable {
+        extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, DbT3028KyufujissekiKogakuKaigoServicehiEntity, KyufujissekiKogakuKaigoServicehi>
+        implements Serializable {
 
     private final DbT3028KyufujissekiKogakuKaigoServicehiEntity entity;
     private final KyufujissekiKogakuKaigoServicehiIdentifier id;

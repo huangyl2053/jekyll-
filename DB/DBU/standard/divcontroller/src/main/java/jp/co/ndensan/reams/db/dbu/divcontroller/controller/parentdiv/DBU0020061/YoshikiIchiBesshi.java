@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiIchiBesshi {
 
-    private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
     private static final RString MSG_1 = new RString("当月末現在の世帯数");
     private static final RString MSG_2 = new RString("前月末世帯数から増減した世帯数の計算結果");
