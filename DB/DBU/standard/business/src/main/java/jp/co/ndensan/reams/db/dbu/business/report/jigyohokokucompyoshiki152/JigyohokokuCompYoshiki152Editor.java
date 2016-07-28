@@ -39,9 +39,6 @@ public class JigyohokokuCompYoshiki152Editor implements IJigyohokokuCompYoshiki1
         source.printTimeStamp = data.get処理日時();
         source.shukeiKubun = data.get集計区分();
         source.shuukeiHani = set集計範囲(data.get集計範囲());
-        source.shuukeiHani = data.get集計期間FROM();
-        source.shuukeiHani = data.get集計期間TO();
-        source.shuukeiHani = data.get集計年月();
         if (hokenshaJohoConfig.get保険者番号() != null) {
             source.hokenshaNo = hokenshaJohoConfig.get保険者番号().value();
         }
