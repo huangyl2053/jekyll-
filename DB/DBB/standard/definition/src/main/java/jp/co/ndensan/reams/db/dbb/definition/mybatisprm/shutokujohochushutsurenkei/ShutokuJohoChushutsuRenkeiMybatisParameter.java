@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,7 +27,7 @@ public class ShutokuJohoChushutsuRenkeiMybatisParameter implements IMyBatisParam
     private final long shutsuryokujunID;
     private final ReportId chohyoID;
     private final RString sharefilesname;
-    private final RDateTime sharefilesID;
+    private final RString sharefilesID;
     private final RString shorikubun;
     private final YMDHMS shorinichiji;
 
@@ -46,7 +45,7 @@ public class ShutokuJohoChushutsuRenkeiMybatisParameter implements IMyBatisParam
      */
     public ShutokuJohoChushutsuRenkeiMybatisParameter(FlexibleYear shorinendo,
             List<ShichosonJohoShutoku> shichosonJohoList, long shutsuryokujunID, ReportId chohyoID,
-            RString sharefilesname, RDateTime sharefilesID, RString shorikubun, YMDHMS shorinichiji) {
+            RString sharefilesname, RString sharefilesID, RString shorikubun, YMDHMS shorinichiji) {
         this.shorinendo = shorinendo;
         this.shichosonJohoList = shichosonJohoList;
         this.shutsuryokujunID = shutsuryokujunID;
