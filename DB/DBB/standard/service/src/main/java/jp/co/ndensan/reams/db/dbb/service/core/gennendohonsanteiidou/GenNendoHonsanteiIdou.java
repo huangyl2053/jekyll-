@@ -56,7 +56,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.CozaIdo
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.FukaJouhouEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.HonsanteiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.IdoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.IdoTriggerEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShotokuIdoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.ShukiEntity;
@@ -1432,40 +1431,5 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             entity.setState(EntityDataState.Modified);
             処理日付管理Dac.save(entity);
         }
-    }
-
-    /**
-     * テスト用メソッド
-     */
-    public
-            void testCreateTBL() {
-        IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class
-        );
-//        mapper.createTmpTsukibetsuRanku();
-//        TsukibetsuRankuEntity rankuEntity = new TsukibetsuRankuEntity();
-//        rankuEntity.setHihokenshaNo(new HihokenshaNo("1234567890"));
-//        mapper.insertTmpTsukibetsuRanku(rankuEntity);
-//        TsukibetsuRankuEntity rankuEntity1 = new TsukibetsuRankuEntity();
-//        rankuEntity1.setHihokenshaNo(new HihokenshaNo("1000000000"));
-//        mapper.insertTmpTsukibetsuRanku(rankuEntity1);
-        // ---------------------------テスト用-----------------------------------
-        mapper.createTmpIdoTrigger();
-        IdoTriggerEntity iDoentity = new IdoTriggerEntity();
-
-        iDoentity.setHihokenshaNo(
-                new HihokenshaNo("1234567890"));
-        IdoTriggerEntity entity1 = new IdoTriggerEntity();
-
-        entity1.setHihokenshaNo(
-                new HihokenshaNo("1000000000"));
-        mapper.insertTmpIdoTrigger(iDoentity);
-
-        mapper.insertTmpIdoTrigger(entity1);
-        // ---------------------------テスト用-----------------------------------
-
-        getTsuchishoNo(
-                new FlexibleYear("2016"), new FlexibleYear("2017"), RDateTime.MIN, RDateTime.MAX);
-        collectSetaiin();
-
     }
 }
