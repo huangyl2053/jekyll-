@@ -992,7 +992,7 @@ public class FukaKeisan {
 
         set境界層(builder, param.get境界層の情報のリスト(), 本年度開始日, 本年度終了日);
 
-        set新しい賦課の情報(builder, param, 賦課の情報);
+        set新しい賦課の情報(builder, param);
         賦課の情報 = builder.build();
         return 賦課の情報;
     }
@@ -1019,7 +1019,7 @@ public class FukaKeisan {
 
         set境界層(builder, param.get境界層の情報のリスト(), 本年度開始日, 本年度終了日);
 
-        set新しい賦課の情報_バッチ(builder, param, 賦課の情報);
+        set新しい賦課の情報_バッチ(builder, param);
         賦課の情報 = builder.build();
         return 賦課の情報;
     }
@@ -1149,7 +1149,7 @@ public class FukaKeisan {
         }
     }
 
-    private void set新しい賦課の情報(FukaJohoBuilder builder, FukaKokyoParameter param, FukaJoho 賦課の情報) {
+    private void set新しい賦課の情報(FukaJohoBuilder builder, FukaKokyoParameter param) {
         builder.set識別コード(param.get資格の情報().get識別コード());
         builder.set資格取得日(param.get資格の情報().get第1号資格取得年月日());
         builder.set資格取得事由(param.get資格の情報().get資格取得事由コード());
@@ -1198,7 +1198,7 @@ public class FukaKeisan {
         builder.set職権区分(ShokkenKubun.非該当.getコード());
     }
 
-    private void set新しい賦課の情報_バッチ(FukaJohoBuilder builder, FukaKokyoBatchParameter param, FukaJoho 賦課の情報) {
+    private void set新しい賦課の情報_バッチ(FukaJohoBuilder builder, FukaKokyoBatchParameter param) {
         builder.set識別コード(param.get資格の情報().get識別コード())
                 .set資格取得日(param.get資格の情報().get第1号資格取得年月日())
                 .set資格取得事由(param.get資格の情報().get資格取得事由コード())

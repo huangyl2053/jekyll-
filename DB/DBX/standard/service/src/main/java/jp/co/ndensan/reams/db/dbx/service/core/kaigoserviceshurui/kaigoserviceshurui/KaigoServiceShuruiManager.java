@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshuru
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -29,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護サービス種類を管理するクラスです。
  *
- * @reamsid_L DBA-0070-020 chengsanyuan
+ * @reamsid_L DBC-3364-010 xuxin
  */
 public class KaigoServiceShuruiManager {
 
@@ -164,4 +165,21 @@ public class KaigoServiceShuruiManager {
         }
         return SearchResult.of(介護サービス種類List, 0, false);
     }
+
+    /**
+     * サービス種類DDLのDataSourceを返します。
+     *
+     * @return List<KeyValueDataSource>
+     */
+    @Transaction
+    public List<KeyValueDataSource> getサービス種類DDLのDataSource() {
+
+        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.getサービス種類コードと名称();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
+            dataSource.add(new KeyValueDataSource(entity.getServiceShuruiCd().value(), entity.getServiceShuruiMeisho()));
+        }
+        return dataSource;
+    }
+
 }
