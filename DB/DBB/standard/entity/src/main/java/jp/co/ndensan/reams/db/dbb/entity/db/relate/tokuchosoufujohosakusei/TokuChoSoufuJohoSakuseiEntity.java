@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * バッチ出力帳票一覧Entityクラスです。
+ *
+ * @reamsid_L DBB-1860-030 liuyang
  */
 @lombok.Getter
 @lombok.Setter
