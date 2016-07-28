@@ -182,6 +182,30 @@ public class SogoJigyoShuruiShikyuGendoGaku extends
     }
 
     /**
+     * 保持する介護予防・日常生活支援総合事業種類支給限度額を登録対象とします。<br/>
+     * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link SogoJigyoShuruiShikyuGendoGaku}
+     */
+    public SogoJigyoShuruiShikyuGendoGaku added() {
+        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new SogoJigyoShuruiShikyuGendoGaku(addedEntity, id);
+    }
+
+    /**
+     * 保持する介護予防・日常生活支援総合事業種類支給限度額を修正対象とします。<br/>
+     * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link SogoJigyoShuruiShikyuGendoGaku}
+     */
+    public SogoJigyoShuruiShikyuGendoGaku modified() {
+        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new SogoJigyoShuruiShikyuGendoGaku(modifiedEntity, id);
+    }
+
+    /**
      * {@link SogoJigyoShuruiShikyuGendoGaku}のシリアライズ形式を提供します。
      *
      * @return {@link SogoJigyoShuruiShikyuGendoGaku}のシリアライズ形式
