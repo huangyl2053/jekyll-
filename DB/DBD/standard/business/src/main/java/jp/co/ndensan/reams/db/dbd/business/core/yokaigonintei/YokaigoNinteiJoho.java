@@ -301,7 +301,7 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 指定医フラグ認定
      */
-    public boolean get指定医フラグ認定() {
+    public boolean is指定医フラグ認定() {
         return null == 要介護認定申請情報認定Entity ? false : 要介護認定申請情報認定Entity.getShiteiiFlag();
     }
 
@@ -508,7 +508,7 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 指定医フラグ受給
      */
-    public boolean get指定医フラグ受給() {
+    public boolean is指定医フラグ受給() {
         return null == 要介護認定申請情報受給Entity ? false : 要介護認定申請情報受給Entity.getShiteiiFlag();
     }
 
@@ -589,8 +589,8 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 受給申請事由
      */
-    public RString get受給申請事由() {
-        return null == 受給者台帳Entity ? RString.EMPTY : 受給者台帳Entity.getShinseiRiyu();
+    public Code get受給申請事由() {
+        return null == 受給者台帳Entity ? Code.EMPTY : 受給者台帳Entity.getJukyuShinseiJiyu();
     }
 
     /**
@@ -607,7 +607,7 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 旧措置者フラグ
      */
-    public boolean get旧措置者フラグ() {
+    public boolean is旧措置者フラグ() {
         return null == 受給者台帳Entity ? false : 受給者台帳Entity.getKyuSochishaFlag();
     }
 
@@ -616,7 +616,7 @@ public class YokaigoNinteiJoho implements Serializable {
      *
      * @return 資格取得前申請フラグ
      */
-    public boolean get資格取得前申請フラグ() {
+    public boolean is資格取得前申請フラグ() {
         return null == 受給者台帳Entity ? false : 受給者台帳Entity.getShikakuShutokuMaeShinseiFlag();
     }
 

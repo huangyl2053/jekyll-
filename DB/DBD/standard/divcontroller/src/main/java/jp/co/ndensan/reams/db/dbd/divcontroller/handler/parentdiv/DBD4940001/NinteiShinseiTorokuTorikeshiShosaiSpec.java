@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4940001.NinteiShinseiTorokuTorikeshiShosaiDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  *
@@ -45,20 +43,21 @@ public enum NinteiShinseiTorokuTorikeshiShosaiSpec implements IPredicate<NinteiS
     更新チェック {
                 @Override
                 public boolean apply(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
-                    RString 介護事務 = div.getHdnKaigoJimuCode();
-                    RString 介護認定 = div.getHdnKaigoNinteiCode();
-                    RString menuId = ResponseHolder.getMenuID();
-                    // TODO. menuID
-                    if ((DonyuKeitaiCode.事務単一.getCode().equals(介護事務) && DonyuKeitaiCode.認定単一.getCode().equals(介護認定))
-                    || (DonyuKeitaiCode.事務単一.getCode().equals(介護事務) && 介護認定.isEmpty())
-                    || (DonyuKeitaiCode.事務広域.getCode().equals(介護事務) && DonyuKeitaiCode.認定広域.getCode().equals(介護認定))) {
-//                        return menuId.equals(認定メニュー);
-                        return true;
-                    } else if (介護事務.isEmpty() && DonyuKeitaiCode.認定広域.getCode().equals(介護認定)) {
-                        // return menuId.equals(受給メニュー);
-                        return true;
-                    }
-                    return false;
+//                    RString 介護事務 = div.getHdnKaigoJimuCode();
+//                    RString 介護認定 = div.getHdnKaigoNinteiCode();
+//                    RString menuId = ResponseHolder.getMenuID();
+//                    // TODO. menuID
+//                    if ((DonyuKeitaiCode.事務単一.getCode().equals(介護事務) && DonyuKeitaiCode.認定単一.getCode().equals(介護認定))
+//                    || (DonyuKeitaiCode.事務単一.getCode().equals(介護事務) && 介護認定.isEmpty())
+//                    || (DonyuKeitaiCode.事務広域.getCode().equals(介護事務) && DonyuKeitaiCode.認定広域.getCode().equals(介護認定))) {
+////                        return menuId.equals(認定メニュー);
+//                        return true;
+//                    } else if (介護事務.isEmpty() && DonyuKeitaiCode.認定広域.getCode().equals(介護認定)) {
+//                        // return menuId.equals(受給メニュー);
+//                        return true;
+//                    }
+//                    return false;
+                    return true;
                 }
             };
 }

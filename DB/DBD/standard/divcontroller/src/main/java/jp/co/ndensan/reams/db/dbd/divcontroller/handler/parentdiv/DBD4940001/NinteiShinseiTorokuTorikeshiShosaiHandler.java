@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  *
@@ -73,7 +72,9 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
      */
     public YokaigoNinteiJoho onLoad(ShikibetsuCode 識別コード, RString 被保険者番号) {
         // TODO. 受給メニューから起動された場合
-        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
+//        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
+        // for test
+        boolean is受給 = true;
 
         YokaigoNinteiJoho 認定情報 = get認定情報(被保険者番号, is受給);
         if (null == 認定情報) {
@@ -96,7 +97,9 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
      */
     public void save(YokaigoNinteiJoho 認定情報) {
         // TODO. is受給の判断わからない。
-        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
+//        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
+        // for test
+        boolean is受給 = true;
 
         if (is受給) {
             認定情報 = edit受給者台帳(認定情報);
@@ -134,11 +137,11 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 //        RString.EMPTY, 被保険者番号);
         IKaigoNinteiShinseiKihonJohoInputDiv 介護認定申請基本情報入力Div = div.getCcdKaigoNinteiShinseiKihon();
         介護認定申請基本情報入力Div.initialize();
-        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(認定情報.get受給申請事由()));
+        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(convertCodeToRString(認定情報.get受給申請事由())));
         介護認定申請基本情報入力Div.setTxtShinseiJokyo(認定情報.get申請状況区分());
-        介護認定申請基本情報入力Div.setKyuSochisha(認定情報.get旧措置者フラグ()
+        介護認定申請基本情報入力Div.setKyuSochisha(認定情報.is旧措置者フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
-        介護認定申請基本情報入力Div.setChkShikakuShutokuMae(認定情報.get資格取得前申請フラグ()
+        介護認定申請基本情報入力Div.setChkShikakuShutokuMae(認定情報.is資格取得前申請フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
         if (is受給) {
             介護認定申請基本情報入力Div.setRadShinseishoKubun(認定情報.get要支援申請の区分受給());
@@ -181,7 +184,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
                     認定情報.get医療機関名称受給(),
                     認定情報.get主治医コード受給(),
                     認定情報.get主治医氏名受給());
-            主治医Div.setShiteii(認定情報.get指定医フラグ受給());
+            主治医Div.setShiteii(認定情報.is指定医フラグ受給());
 
         } else {
             主治医Div.initialize(
@@ -192,7 +195,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
                     認定情報.get医療機関名称認定(),
                     認定情報.get主治医コード認定(),
                     認定情報.get主治医氏名認定());
-            主治医Div.setShiteii(認定情報.get指定医フラグ認定());
+            主治医Div.setShiteii(認定情報.is指定医フラグ認定());
         }
 
         INinteiInputDiv 認定Div = div.getCcdNinteiInput();
@@ -217,17 +220,17 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 
         前回結果情報Div.setMode_ShokaiButtonType(ZenkaiNinteiKekkaJohoDiv.ShokaiButtonType.ShokaiButtonNoneMode);
         // TODO. 項目設定がない。
-        if (is受給) {
+//        if (is受給) {
 //            前回結果情報Div.set(convertCodeToRString(認定情報.get前回要介護状態区分コード受給()));
 //            前回結果情報Div.set認定年月日(認定情報.get前回認定年月日受給());
 //            前回結果情報Div.set有効開始年月日(認定情報.get前回認定有効期間開始受給());
 //            前回結果情報Div.set有効終了年月日(認定情報.get前回認定有効期間終了受給());
-        } else {
+//        } else {
 //            前回結果情報Div.set要介護度コード(convertCodeToRString(認定情報.get前回要介護状態区分コード認定()));
 //            前回結果情報Div.set認定年月日(認定情報.get前回認定年月日認定());
 //            前回結果情報Div.set有効開始年月日(認定情報.get前回認定有効期間開始認定());
 //            前回結果情報Div.set有効終了年月日(認定情報.get前回認定有効期間終了認定());
-        }
+//        }
 
         IShinseiSonotaJohoInputDiv 申請その他情報Div = div.getCcdSonotaJoho();
 
