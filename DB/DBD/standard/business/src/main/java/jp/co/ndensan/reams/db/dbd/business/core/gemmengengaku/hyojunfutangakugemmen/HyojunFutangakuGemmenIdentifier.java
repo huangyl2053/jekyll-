@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 標準負担額減免の識別子です。
+ *
+ * @reamsid_L DBD-9999-023 wangchao
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value

@@ -4,6 +4,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 要介護認定実施状況表（統計表）ReportSourceです。
+ *
+ * @reamsid_L DBD-1771-030 b_liuyang2
+ */
 public class YokaigoNinteiJisshiJokyohyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link HyojunFutangakuGemmen}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public class HyojunFutangakuGemmenBuilder {
 

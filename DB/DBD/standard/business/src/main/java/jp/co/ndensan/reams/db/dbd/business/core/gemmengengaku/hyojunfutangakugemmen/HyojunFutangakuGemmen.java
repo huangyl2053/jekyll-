@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 標準負担額減免を管理するクラスです。
+ *
+ * @reamsid_L DBD-9999-023 wangchao
  */
 public class HyojunFutangakuGemmen extends ParentModelBase<
         HyojunFutangakuGemmenIdentifier, DbT4012HyojunFutangakuGemmenEntity, HyojunFutangakuGemmen> implements Serializable {

@@ -1,4 +1,3 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbd.entity.report.dbd200007;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;

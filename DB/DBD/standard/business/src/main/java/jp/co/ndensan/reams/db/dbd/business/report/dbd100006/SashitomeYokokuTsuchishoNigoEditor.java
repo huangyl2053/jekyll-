@@ -46,7 +46,7 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private final List<ShokanKihonJihoEntiy> 償還払計情報リスト;
+    //private final List<ShokanKihonJihoEntiy> 償還払計情報リスト;
 
     /**
      * インスタンスを生成します。
@@ -72,7 +72,7 @@ public class SashitomeYokokuTsuchishoNigoEditor implements ISashitomeYokokuTsuch
         this.通知書定型文リスト = 通知書定型文リスト;
         this.認証者ソースビルダー = 認証者ソースビルダー;
         this.帳票情報 = 帳票情報;
-        this.償還払計情報リスト = 償還払計情報リスト;
+        //  this.償還払計情報リスト = 償還払計情報リスト;
     }
 
     @Override

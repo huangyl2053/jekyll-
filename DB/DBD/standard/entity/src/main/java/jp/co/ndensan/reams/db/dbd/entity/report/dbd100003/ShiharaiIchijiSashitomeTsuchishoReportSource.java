@@ -6,6 +6,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
+/**
+ * 支払一時差止通知書ReportSourceです。
+ *
+ * @reamsid_L DBD-3640-100 b_liuyang2
+ */
 public class ShiharaiIchijiSashitomeTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
