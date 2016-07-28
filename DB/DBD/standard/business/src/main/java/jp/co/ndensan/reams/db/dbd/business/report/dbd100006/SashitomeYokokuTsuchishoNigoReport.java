@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100006;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100006.SashitomeYokokuTsuchishoNigoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -34,7 +32,6 @@ public final class SashitomeYokokuTsuchishoNigoReport extends Report<SashitomeYo
     private final List<RString> 通知書定型文リスト;
     private final NinshoshaSource 認証者ソースビルダー;
     private final ShiharaiHohoHenko 帳票情報;
-    private List<ShokanKihonJihoEntiy> 償還払集計情報リスト;
 
     /**
      * インスタンスを生成します。
@@ -47,41 +44,19 @@ public final class SashitomeYokokuTsuchishoNigoReport extends Report<SashitomeYo
      * @param 通知書定型文リスト List<RString>
      * @param 認証者ソースビルダー NinshoshaSource
      * @param 帳票情報 ShiharaiHohoHenko
-     * @param 償還払集計情報リスト List<ShokanHaraiShukkeJyoho>
      *
-     * @return 差止予告通知書（２号被保険者用）
-     */
-    public static SashitomeYokokuTsuchishoNigoReport createReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
-            Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
-            ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト) {
-        return new SashitomeYokokuTsuchishoNigoReport(個人情報, 宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト,
-                認証者ソースビルダー, 帳票情報, 償還払集計情報リスト);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param 個人情報 個人情報
-     * @param 宛先 宛先
-     * @param 帳票制御共通 帳票制御共通
-     * @param 地方公共団体 地方公共団体
-     * @param 文書番号 文書番号
-     * @param 通知書定型文リスト 通知書定型文リスト
-     * @param 認証者ソースビルダー 認証者ソースビルダー
-     * @param 帳票情報 帳票情報
      * @return 差止予告通知書（２号被保険者用）
      */
     public static SashitomeYokokuTsuchishoNigoReport createReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
             ShiharaiHohoHenko 帳票情報) {
         return new SashitomeYokokuTsuchishoNigoReport(個人情報, 宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト,
-                認証者ソースビルダー, 帳票情報, new ArrayList<ShokanKihonJihoEntiy>());
-
+                認証者ソースビルダー, 帳票情報);
     }
 
     private SashitomeYokokuTsuchishoNigoReport(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通,
             Association 地方公共団体, RString 文書番号, List<RString> 通知書定型文リスト, NinshoshaSource 認証者ソースビルダー,
-            ShiharaiHohoHenko 帳票情報, List<ShokanKihonJihoEntiy> 償還払集計情報リスト) {
+            ShiharaiHohoHenko 帳票情報) {
         this.個人情報 = 個人情報;
         this.宛先 = 宛先;
         this.帳票制御共通 = 帳票制御共通;
@@ -90,7 +65,6 @@ public final class SashitomeYokokuTsuchishoNigoReport extends Report<SashitomeYo
         this.通知書定型文リスト = 通知書定型文リスト;
         this.認証者ソースビルダー = 認証者ソースビルダー;
         this.帳票情報 = 帳票情報;
-        this.償還払集計情報リスト = 償還払集計情報リスト;
     }
 
     /**
@@ -101,7 +75,7 @@ public final class SashitomeYokokuTsuchishoNigoReport extends Report<SashitomeYo
     @Override
     public void writeBy(ReportSourceWriter<SashitomeYokokuTsuchishoNigoReportSource> writer) {
         ISashitomeYokokuTsuchishoNigoEditor bodyEditor = new SashitomeYokokuTsuchishoNigoEditor(個人情報, 宛先,
-                帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報, 償還払集計情報リスト);
+                帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報);
         ISashitomeYokokuTsuchishoNigoBuilder builder = new SashitomeYokokuTsuchishoNigoBuilder(bodyEditor);
         writer.writeLine(builder);
     }
