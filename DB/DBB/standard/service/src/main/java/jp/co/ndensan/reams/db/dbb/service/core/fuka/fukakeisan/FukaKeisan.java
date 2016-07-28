@@ -1169,6 +1169,8 @@ public class FukaKeisan {
                 }
             }
             builder.set世帯員数(param.get世帯員所得情報List().size());
+        } else {
+            builder.set課税区分(null).set合計所得金額(null).set公的年金収入額(null);
         }
 
         if (param.get賦課根拠パラメータ() != null) {
@@ -1177,14 +1179,18 @@ public class FukaKeisan {
             } else {
                 builder.set世帯課税区分(KazeiKubun.非課税.getコード());
             }
+        } else {
+            builder.set世帯課税区分(null);
         }
 
-        set保険料情報(builder, param.get賦課年度(), param.get月別保険料段階(), 賦課の情報);
+        set保険料情報(builder, param.get賦課年度(), param.get月別保険料段階());
 
         if (param.get年額保険料() != null) {
             builder.set減免前介護保険料_年額(param.get年額保険料());
             builder.set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
                     ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
+        } else {
+            builder.set減免前介護保険料_年額(null).set確定介護保険料_年額(null);
         }
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         Tsuki 更正月 = hantei.find更正月(param.get調定日時().getDate()).get月();
@@ -1193,25 +1199,27 @@ public class FukaKeisan {
     }
 
     private void set新しい賦課の情報_バッチ(FukaJohoBuilder builder, FukaKokyoBatchParameter param, FukaJoho 賦課の情報) {
-        builder.set識別コード(param.get資格の情報().get識別コード());
-        builder.set資格取得日(param.get資格の情報().get第1号資格取得年月日());
-        builder.set資格取得事由(param.get資格の情報().get資格取得事由コード());
-        builder.set資格喪失日(param.get資格の情報().get資格喪失年月日());
-        builder.set資格喪失事由(param.get資格の情報().get資格喪失事由コード());
+        builder.set識別コード(param.get資格の情報().get識別コード())
+                .set資格取得日(param.get資格の情報().get第1号資格取得年月日())
+                .set資格取得事由(param.get資格の情報().get資格取得事由コード())
+                .set資格喪失日(param.get資格の情報().get資格喪失年月日())
+                .set資格喪失事由(param.get資格の情報().get資格喪失事由コード());
 
         FlexibleDate 賦課期日 = findOut賦課基準日(param.get賦課の情報_設定前().get賦課年度(), param.get資格の情報());
         builder.set賦課期日(賦課期日);
         if (param.get世帯員所得情報List() != null) {
             for (SetaiShotokuEntity 世帯員 : param.get世帯員所得情報List()) {
                 if (HonninKubun.本人.getCode().equals(世帯員.getHonninKubun())) {
-                    builder.set世帯コード(世帯員.getSetaiCode());
-                    builder.set課税区分(世帯員.getKazeiKubun());
-                    builder.set合計所得金額(世帯員.getGokeiShotokuGaku());
-                    builder.set公的年金収入額(世帯員.getNenkiniShunyuGaku());
+                    builder.set世帯コード(世帯員.getSetaiCode())
+                            .set課税区分(世帯員.getKazeiKubun())
+                            .set合計所得金額(世帯員.getGokeiShotokuGaku())
+                            .set公的年金収入額(世帯員.getNenkiniShunyuGaku());
                     break;
                 }
             }
             builder.set世帯員数(param.get世帯員所得情報List().size());
+        } else {
+            builder.set課税区分(null).set合計所得金額(null).set公的年金収入額(null);
         }
         if (param.get賦課根拠パラメータ() != null) {
             if (param.get賦課根拠パラメータ().is世帯課税(param.get賦課根拠パラメータ().getSetaiinKazeiKubunList())) {
@@ -1219,14 +1227,18 @@ public class FukaKeisan {
             } else {
                 builder.set世帯課税区分(KazeiKubun.非課税.getコード());
             }
+        } else {
+            builder.set世帯課税区分(null);
         }
 
-        set保険料情報(builder, param.get賦課年度(), param.get月別保険料段階(), 賦課の情報);
+        set保険料情報(builder, param.get賦課年度(), param.get月別保険料段階());
 
         if (param.get年額保険料() != null) {
-            builder.set減免前介護保険料_年額(param.get年額保険料());
-            builder.set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
-                    ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
+            builder.set減免前介護保険料_年額(param.get年額保険料())
+                    .set確定介護保険料_年額(param.get年額保険料().subtract(param.get賦課の情報_設定前().get減免額() == null
+                                    ? Decimal.ZERO : param.get賦課の情報_設定前().get減免額()));
+        } else {
+            builder.set減免前介護保険料_年額(null).set確定介護保険料_年額(null);
         }
         KoseiTsukiHantei hantei = InstanceProvider.create(KoseiTsukiHantei.class);
         Tsuki 更正月 = hantei.find更正月(param.get調定日時().getDate()).get月();
@@ -1234,9 +1246,11 @@ public class FukaKeisan {
         builder.set職権区分(ShokkenKubun.非該当.getコード());
     }
 
-    private void set保険料情報(FukaJohoBuilder builder, FlexibleYear 賦課年度,
-            TsukibetsuHokenryoDankai 月別保険料段階, FukaJoho 賦課の情報) {
+    private void set保険料情報(FukaJohoBuilder builder, FlexibleYear 賦課年度, TsukibetsuHokenryoDankai 月別保険料段階) {
         if (月別保険料段階 == null) {
+            builder.set保険料算定段階1(null).set算定年額保険料1(null).set月割開始年月1(null).set月割終了年月1(null)
+                    .set保険料算定段階2(null).set算定年額保険料2(null).set月割開始年月2(null).set月割終了年月2(null)
+                    .set保険料段階(null);
             return;
         }
         List<HokenryoDankai> dankaiList = new ArrayList<>();
@@ -1272,14 +1286,18 @@ public class FukaKeisan {
             count = count + INT_1;
             if (!RString.isNullOrEmpty(dankaiList.get(i).get段階区分())) {
                 保険料算定段階1 = dankaiList.get(i).get段階区分();
-                builder.set保険料算定段階1(dankaiList.get(i).get段階区分());
-                builder.set算定年額保険料1(dankaiList.get(i).get保険料率());
-                builder.set月割開始年月1(new FlexibleYearMonth(年月.get(i)));
+                builder.set保険料算定段階1(dankaiList.get(i).get段階区分())
+                        .set算定年額保険料1(dankaiList.get(i).get保険料率())
+                        .set月割開始年月1(new FlexibleYearMonth(年月.get(i)));
                 break;
             }
         }
-        if (count == dankaiList.size() && !RString.isNullOrEmpty(dankaiList.get(count - INT_1).get段階区分())) {
-            builder.set月割終了年月1(new FlexibleYearMonth(年月.get(count - INT_1)));
+        if (count == dankaiList.size()) {
+            if (!RString.isNullOrEmpty(dankaiList.get(count - INT_1).get段階区分())) {
+                builder.set月割終了年月1(new FlexibleYearMonth(年月.get(count - INT_1)));
+            } else {
+                builder.set保険料算定段階1(null).set算定年額保険料1(null).set月割開始年月1(null).set月割終了年月1(null);
+            }
         }
         for (int i = count; i < dankaiList.size(); i++) {
             if (!dankaiList.get(count - INT_1).get段階区分().equals(dankaiList.get(i).get段階区分())) {
@@ -1295,9 +1313,9 @@ public class FukaKeisan {
             count = count + INT_1;
             if (!RString.isNullOrEmpty(dankaiList.get(i).get段階区分())) {
                 保険料算定段階2 = dankaiList.get(i).get段階区分();
-                builder.set保険料算定段階2(dankaiList.get(i).get段階区分());
-                builder.set算定年額保険料2(dankaiList.get(i).get保険料率());
-                builder.set月割開始年月2(new FlexibleYearMonth(年月.get(i)));
+                builder.set保険料算定段階2(dankaiList.get(i).get段階区分())
+                        .set算定年額保険料2(dankaiList.get(i).get保険料率())
+                        .set月割開始年月2(new FlexibleYearMonth(年月.get(i)));
                 break;
             }
         }
@@ -1311,11 +1329,11 @@ public class FukaKeisan {
         if (count == dankaiList.size()) {
             builder.set月割終了年月2(new FlexibleYearMonth(年月.get(count - INT_1)));
         }
-
         if (!保険料算定段階2.isEmpty()) {
             builder.set保険料段階(保険料算定段階2);
-        } else if (RString.isNullOrEmpty(賦課の情報.get保険料算定段階2())) {
-            builder.set保険料段階(保険料算定段階1);
+        } else {
+            builder.set保険料段階(保険料算定段階1)
+                    .set保険料算定段階2(null).set算定年額保険料2(null).set月割開始年月2(null).set月割終了年月2(null);
         }
     }
 
