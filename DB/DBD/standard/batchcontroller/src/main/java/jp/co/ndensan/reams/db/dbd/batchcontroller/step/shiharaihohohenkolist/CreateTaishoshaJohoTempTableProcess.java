@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.shiharaihohohenkolist;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.outputorderkey.ShiharaiHohoHenkoHaakuIchiranOrderKey;
+import jp.co.ndensan.reams.db.dbd.business.core.outputorderkey.ShiharaiHohoHenkoHaakuIchiranOrderKey;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.shiharaihohokanrilist.ShiharaiHohoKanriListMapperParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.shiharaihohohenkolist.CreateTaishoshaJohoTempTableProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.TaishoshaJohoTempTableEntity;

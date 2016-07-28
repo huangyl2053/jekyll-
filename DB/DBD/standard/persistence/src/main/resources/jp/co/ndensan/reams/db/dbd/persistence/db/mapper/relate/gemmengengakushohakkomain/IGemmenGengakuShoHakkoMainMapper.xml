@@ -11,7 +11,9 @@
         <association property="利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
-    <select resultOrdered="true" id="get利用者負担額減免の情報" resultMap="resultMap_RiyoshaFutangakuGengakuEntity" fetchSize="500">
+    <select resultOrdered="true" id="get利用者負担額減免の情報" 
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="resultMap_RiyoshaFutangakuGengakuEntity" fetchSize="500">
         SELECT
         DbT4014RiyoshaFutangakuGengaku.*,
         DbT4010GemmenGengakuShinsei.*
@@ -38,8 +40,8 @@
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get負担限度額認定の情報"
-            resultMap="resultMap_FutanGendogakuNinteiEntity"
-            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="resultMap_FutanGendogakuNinteiEntity" fetchSize="500">
         SELECT
         DbT4018KaigoHokenFutanGendogakuNintei.*,
         DbT4010GemmenGengakuShinsei.*
@@ -65,9 +67,8 @@
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get社会福祉法人等利用者負担軽減の情報"
-            resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
-            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity" fetchSize="500">
         SELECT
         DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen.*,
         DbT4010GemmenGengakuShinsei.*
@@ -93,9 +94,8 @@
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get訪問介護利用者負担額減額の情報"
-            resultMap="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
-            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" fetchSize="500">
         SELECT
         DbT4016HomonKaigoRiyoshaFutangakuGengaku.*,
         DbT4010GemmenGengakuShinsei.*
@@ -121,9 +121,8 @@
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get特別地域加算減免の情報"
-            resultMap="resultMap_TokubetsuchiikiKasanGemmenEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
-            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="resultMap_TokubetsuchiikiKasanGemmenEntity" fetchSize="500">
         SELECT
         DbT4020TokubetsuchiikiKasanGemmen.*,
         DbT4010GemmenGengakuShinsei.*

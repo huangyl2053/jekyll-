@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangen
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 減免減額認定証・決定通知書個別発行のマッパーインタフェースです。
@@ -27,7 +26,7 @@ public interface IGemmenGengakuShoHakkoMainMapper {
      * @param 被保険者番号 被保険者番号
      * @return 利用者負担額減免の情報
      */
-    List<RiyoshaFutangakuGengakuEntity> get利用者負担額減免の情報(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<RiyoshaFutangakuGengakuEntity> get利用者負担額減免の情報(HihokenshaNo 被保険者番号);
 
     /**
      * 負担限度額認定の情報を取得します。
@@ -35,7 +34,7 @@ public interface IGemmenGengakuShoHakkoMainMapper {
      * @param 被保険者番号 被保険者番号
      * @return 負担限度額認定の情報
      */
-    List<FutanGendogakuNinteiEntity> get負担限度額認定の情報(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<FutanGendogakuNinteiEntity> get負担限度額認定の情報(HihokenshaNo 被保険者番号);
 
     /**
      * 社会福祉法人等利用者負担軽減の情報を取得します。
@@ -43,7 +42,7 @@ public interface IGemmenGengakuShoHakkoMainMapper {
      * @param 被保険者番号 被保険者番号
      * @return 社会福祉法人等利用者負担軽減の情報
      */
-    List<ShafukuRiyoshaFutanKeigenEntity> get社会福祉法人等利用者負担軽減の情報(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<ShafukuRiyoshaFutanKeigenEntity> get社会福祉法人等利用者負担軽減の情報(HihokenshaNo 被保険者番号);
 
     /**
      * 訪問介護利用者負担額減額の情報を取得します。
@@ -51,7 +50,7 @@ public interface IGemmenGengakuShoHakkoMainMapper {
      * @param 被保険者番号 被保険者番号
      * @return 訪問介護利用者負担額減額の情報
      */
-    List<HomonKaigoRiyoshaFutangakuGengakuEntity> get訪問介護利用者負担額減額の情報(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<HomonKaigoRiyoshaFutangakuGengakuEntity> get訪問介護利用者負担額減額の情報(HihokenshaNo 被保険者番号);
 
     /**
      * 特別地域加算減免の情報を取得します。
@@ -59,6 +58,6 @@ public interface IGemmenGengakuShoHakkoMainMapper {
      * @param 被保険者番号 被保険者番号
      * @return 特別地域加算減免の情報
      */
-    List<TokubetsuchiikiKasanGemmenEntity> get特別地域加算減免の情報(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<TokubetsuchiikiKasanGemmenEntity> get特別地域加算減免の情報(HihokenshaNo 被保険者番号);
 
 }
