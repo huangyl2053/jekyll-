@@ -15,12 +15,14 @@
         , 0 AS niTeiJokyo
         , F."shichosonMeisho"
         , A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
@@ -54,41 +56,49 @@
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+            </when>
+            <otherwise>
+                AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            </otherwise>
+        </choose>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
         ,A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ORDER BY
         F."shichosonCode"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>)
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>)
         UNION ALL
         (SELECT F."shichosonCode"
         , 1 AS niTeiJokyo
         , F."shichosonMeisho"
         , A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
@@ -128,41 +138,49 @@
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+            </when>
+            <otherwise>
+                AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            </otherwise>
+        </choose>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
         ,A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ORDER BY
         F."shichosonCode"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>)
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>)
         UNION ALL
         (SELECT F."shichosonCode"
         , 2 AS niTeiJokyo
         , F."shichosonMeisho"
         , A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
@@ -198,41 +216,49 @@
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+            </when>
+            <otherwise>
+                AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            </otherwise>
+        </choose>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
         ,A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ORDER BY
         F."shichosonCode"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>)
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>)
         UNION ALL
         (SELECT F."shichosonCode"
         , 3 AS niTeiJokyo
         , F."shichosonMeisho"
         , A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
@@ -268,38 +294,46 @@
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+            </when>
+            <otherwise>
+                AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            </otherwise>
+        </choose>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
         ,A."shoKisaiHokenshaNo"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
         ORDER BY
         F."shichosonCode"
-        <if test="isShinseiji">
-            ,A."ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            ,A."ninteiShinseiHoreiKubunCode"
-        </if>)) jisshiJokyoTokei
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                ,A."ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                ,A."ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>)) jisshiJokyoTokei
         ORDER BY "shichosonCode"
         , niTeiJokyo
-        <if test="isShinseiji">
-            , "ninteiShinseiShinseijiKubunCode"
-        </if>
-        <if test="isHorei">
-            , "ninteiShinseiHoreiKubunCode"
-        </if>
+        <choose>
+            <when test="isHorei and !isShinseiji">
+                , "ninteiShinseiHoreiKubunCode"
+            </when>
+            <otherwise>
+                , "ninteiShinseiShinseijiKubunCode"
+            </otherwise>
+        </choose>
     </select>
 
     <select resultOrdered="true" id="getGogitaiNo"
@@ -2491,7 +2525,7 @@
             </when>
         </choose>
         <choose>
-            <when test="isHorei">
+            <when test="isHorei and !isShinseiji">
                 AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
             </when>
             <otherwise>
