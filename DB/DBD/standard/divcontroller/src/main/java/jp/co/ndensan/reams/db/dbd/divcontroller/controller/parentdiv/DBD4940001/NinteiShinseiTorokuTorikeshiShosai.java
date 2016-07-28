@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4940001.Nin
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -52,9 +51,11 @@ public class NinteiShinseiTorokuTorikeshiShosai {
      */
     public ResponseData<NinteiShinseiTorokuTorikeshiShosaiDiv> onLoad(NinteiShinseiTorokuTorikeshiShosaiDiv div) {
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        // TODO. for test
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new RString("2190000001"));
+
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-        YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(識別コード, 被保険者番号);
+        YokaigoNinteiJoho 画面更新用情報 = getHandler(div).onLoad(被保険者番号);
         ViewStateHolder.put(要介護認定取消画面キー.画面更新用情報, 画面更新用情報);
         return ResponseData.of(div).respond();
     }

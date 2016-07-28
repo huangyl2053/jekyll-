@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KenHokokuShiryoSakuseiCSVEntity {
 
-    @CsvField(order = 0, name = "")
+    @CsvField(order = 0, name = " ")
     private final RString タイトル;
     @CsvField(order = 10, name = "非該当")
     private final RString 非該当;

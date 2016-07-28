@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko;
 
 import static java.util.Objects.requireNonNull;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenko.ShokanHaraiShikyuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -32,6 +34,7 @@ public class ShokanHaraiShikyu {
     private final DbT3034ShokanShinseiEntity 償還払支給申請Entity;
     private final DbT3036ShokanHanteiKekkaEntity 償還払支給判定結果Entity;
     private final DbT3053ShokanShukeiEntity 償還払請求集計Entity;
+    private final DbT4024ShiharaiHohoHenkoSashitomeEntity 支払方法変更差止Entity;
 
     /**
      * コンストラクタです。
@@ -54,6 +57,11 @@ public class ShokanHaraiShikyu {
             this.償還払請求集計Entity = shokanHaraiShikyuEntity.get償還払請求集計Entity();
         } else {
             this.償還払請求集計Entity = new DbT3053ShokanShukeiEntity();
+        }
+        if (shokanHaraiShikyuEntity.get支払方法変更差止Entity() != null) {
+            this.支払方法変更差止Entity = shokanHaraiShikyuEntity.get支払方法変更差止Entity();
+        } else {
+            this.支払方法変更差止Entity = new DbT4024ShiharaiHohoHenkoSashitomeEntity();
         }
     }
 
@@ -914,6 +922,214 @@ public class ShokanHaraiShikyu {
      */
     public RString get償還払請求集計_KounyuKaishuRireki() {
         return 償還払請求集計Entity.getKounyuKaishuRireki();
+    }
+
+    /**
+     * 証記載保険者番号のgetメソッドです。
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get支払方法変更差止_ShoKisaiHokenshaNo() {
+        return 支払方法変更差止Entity.getShoKisaiHokenshaNo();
+    }
+
+    /**
+     * 被保険者番号のgetメソッドです。
+     *
+     * @return 被保険者番号
+     */
+    public HihokenshaNo get支払方法変更差止_HihokenshaNo() {
+        return 支払方法変更差止Entity.getHihokenshaNo();
+    }
+
+    /**
+     * 管理区分のgetメソッドです。
+     * <br/>
+     * <br/>1：２号差止
+     *
+     * <br/>2：１号償還払い化
+     *
+     * <br/>3：１号給付額減額
+     *
+     * @return 管理区分
+     */
+    public RString get支払方法変更差止_KanriKubun() {
+        return 支払方法変更差止Entity.getKanriKubun();
+    }
+
+    /**
+     * 履歴番号のgetメソッドです。
+     *
+     * @return 履歴番号
+     */
+    public int get支払方法変更差止_RirekiNo() {
+        return 支払方法変更差止Entity.getRirekiNo();
+    }
+
+    /**
+     * 情報分類区分のgetメソッドです。
+     * <br/>
+     * <br/>1：差止情報、2：保険料控除情報
+     *
+     * @return 情報分類区分
+     */
+    public RString get支払方法変更差止_JohoBunruiKubun() {
+        return 支払方法変更差止Entity.getJohoBunruiKubun();
+    }
+
+    /**
+     * 連番のgetメソッドです。
+     *
+     * @return 連番
+     */
+    public int get支払方法変更差止_RenNo() {
+        return 支払方法変更差止Entity.getRenNo();
+    }
+
+    /**
+     * 差止控除状態区分のgetメソッドです。
+     * <br/>
+     * <br/>01：登録,99：解除
+     *
+     * @return 差止控除状態区分
+     */
+    @CheckForNull
+    public RString get支払方法変更差止_SashitomeKojoJotaiKubun() {
+        return 支払方法変更差止Entity.getSashitomeKojoJotaiKubun();
+    }
+
+    /**
+     * 差止決定年月日のgetメソッドです。
+     *
+     * @return 差止決定年月日
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Sashitome_KetteiYMD() {
+        return 支払方法変更差止Entity.getSashitome_KetteiYMD();
+    }
+
+    /**
+     * 差止通知書発行年月日のgetメソッドです。
+     *
+     * @return 差止通知書発行年月日
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Sashitome_TsuchiHakkoYMD() {
+        return 支払方法変更差止Entity.getSashitome_TsuchiHakkoYMD();
+    }
+
+    /**
+     * 差止通知書再発行フラグのgetメソッドです。
+     * <br/>
+     * <br/>1：再発行対象,0：再発行対象外
+     *
+     * @return 差止通知書再発行フラグ
+     */
+    @CheckForNull
+    public boolean get支払方法変更差止_Sashitome_TsuchiSaiHakkoFlag() {
+        return 支払方法変更差止Entity.getSashitome_TsuchiSaiHakkoFlag();
+    }
+
+    /**
+     * 差止控除番号のgetメソッドです。
+     *
+     * @return 差止控除番号
+     */
+    @CheckForNull
+    public RString get支払方法変更差止_SashitomeKojoNo() {
+        return 支払方法変更差止Entity.getSashitomeKojoNo();
+    }
+
+    /**
+     * 差止納付期限のgetメソッドです。
+     *
+     * @return 差止納付期限
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Sashitome_NofuYMD() {
+        return 支払方法変更差止Entity.getSashitome_NofuYMD();
+    }
+
+    /**
+     * 差止解除年月日のgetメソッドです。
+     *
+     * @return 差止解除年月日
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Sashitome_KaijoYMD() {
+        return 支払方法変更差止Entity.getSashitome_KaijoYMD();
+    }
+
+    /**
+     * 差止サービス提供年月のgetメソッドです。
+     *
+     * @return 差止サービス提供年月
+     */
+    @CheckForNull
+    public FlexibleYearMonth get支払方法変更差止_Sashitome_ServiceTeikyoYM() {
+        return 支払方法変更差止Entity.getSashitome_ServiceTeikyoYM();
+    }
+
+    /**
+     * 差止償還整理番号のgetメソッドです。
+     *
+     * @return 差止償還整理番号
+     */
+    @CheckForNull
+    public RString get支払方法変更差止_Sashitome_ShokanSeiriNo() {
+        return 支払方法変更差止Entity.getSashitome_ShokanSeiriNo();
+    }
+
+    /**
+     * 控除決定年月日のgetメソッドです。
+     *
+     * @return 控除決定年月日
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Kojo_KetteiYMD() {
+        return 支払方法変更差止Entity.getKojo_KetteiYMD();
+    }
+
+    /**
+     * 控除通知書発行年月日のgetメソッドです。
+     *
+     * @return 控除通知書発行年月日
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Kojo_TsuchiHakkoYMD() {
+        return 支払方法変更差止Entity.getKojo_TsuchiHakkoYMD();
+    }
+
+    /**
+     * 控除通知書再発行フラグのgetメソッドです。
+     * <br/>
+     * <br/>1：再発行対象,0：再発行対象外
+     *
+     * @return 控除通知書再発行フラグ
+     */
+    @CheckForNull
+    public boolean get支払方法変更差止_Kojo_TsuchiSaiHakkoFlag() {
+        return 支払方法変更差止Entity.getKojo_TsuchiSaiHakkoFlag();
+    }
+
+    /**
+     * 控除被保険者証提出期限のgetメソッドです。
+     *
+     * @return 控除被保険者証提出期限
+     */
+    @CheckForNull
+    public FlexibleDate get支払方法変更差止_Kojo_ShoTeishutsuYMD() {
+        return 支払方法変更差止Entity.getKojo_ShoTeishutsuYMD();
+    }
+
+    /**
+     * 論理削除フラグのgetメソッドです。
+     *
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean get支払方法変更差止_LogicalDeletedFlag() {
+        return 支払方法変更差止Entity.getLogicalDeletedFlag();
     }
 
 }

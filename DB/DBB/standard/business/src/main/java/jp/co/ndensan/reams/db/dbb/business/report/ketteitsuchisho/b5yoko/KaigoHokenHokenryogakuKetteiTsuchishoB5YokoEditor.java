@@ -75,14 +75,14 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.fukaNendo = 編集後本算定通知書共通情報.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .fillType(FillType.BLANK).toDateString();
         reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
-        reportSource.genmenMae = edit金額(更正前.get減免額());
+
         reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
-        reportSource.hokenGakuMae = edit金額(更正前.get確定保険料_年額());
+
         reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
-        reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
+
         reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
-        reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
+
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
         reportSource.hyojicode1 = 表示コード.get表示コード１();
         reportSource.hyojicode2 = 表示コード.get表示コード２();
@@ -107,18 +107,29 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
-        reportSource.shotokuKbnMae = 更正前.get保険料段階();
+
         reportSource.shutokuYmdAto = 更正後.get期間_自();
-        reportSource.shutokuYmdMae = 更正前.get期間_自();
+
         reportSource.soshitsuYmdAto = 更正後.get期間_至();
-        reportSource.soshitsuYmdMae = 更正前.get期間_至();
+
         set転入者通知文(reportSource, 編集後本算定通知書共通情報);
         set通知文1と通知区分(reportSource, 編集後本算定通知書共通情報);
         reportSource.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
 
         reportSource.tsukisuAto = 更正後.get月数_ケ月();
-        reportSource.tsukisuMae = 更正前.get月数_ケ月();
+
         reportSource.zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get増減額(), 0);
+
+        if (更正前 != null) {
+            reportSource.genmenMae = edit金額(更正前.get減免額());
+            reportSource.hokenGakuMae = edit金額(更正前.get確定保険料_年額());
+            reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
+            reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
+            reportSource.shotokuKbnMae = 更正前.get保険料段階();
+            reportSource.shutokuYmdMae = 更正前.get期間_自();
+            reportSource.soshitsuYmdMae = 更正前.get期間_至();
+            reportSource.tsukisuMae = 更正前.get月数_ケ月();
+        }
         return reportSource;
     }
 
@@ -134,7 +145,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
     }
 
     private RString edit金額(Decimal 金額) {
-        if (Decimal.ZERO.compareTo(金額) == 0) {
+        if (金額 == null || Decimal.ZERO.compareTo(金額) == 0) {
             return RString.HALF_SPACE;
         } else {
             return DecimalFormatter.toコンマ区切りRString(金額, 0);
