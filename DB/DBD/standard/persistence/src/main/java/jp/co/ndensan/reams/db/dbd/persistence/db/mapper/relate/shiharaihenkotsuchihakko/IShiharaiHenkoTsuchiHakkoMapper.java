@@ -14,6 +14,8 @@ import org.apache.ibatis.annotations.Param;
 /**
  *
  * 支払方法変更管理のMapperクラスです。
+ *
+ * @reamsid_L DBD-3640-010 panxiaobo
  */
 public interface IShiharaiHenkoTsuchiHakkoMapper {
 
