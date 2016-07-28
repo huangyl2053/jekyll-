@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,6 +102,12 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         Decimal 特徴今後納付すべき額;
         Decimal 既に納付すべき額;
         Decimal 今後納付すべき額;
+        if (本算定通知書情報.get普徴納期情報リスト() == null) {
+            本算定通知書情報.set普徴納期情報リスト(Collections.EMPTY_LIST);
+        }
+        if (本算定通知書情報.get特徴納期情報リスト() == null) {
+            本算定通知書情報.set特徴納期情報リスト(Collections.EMPTY_LIST);
+        }
         if (GennenKanen.現年度.equals(現年度_過年度区分)) {
             List<NokiJoho> 普徴納期情報リスト = 本算定通知書情報.get普徴納期情報リスト();
             int 普徴_最初期 = 0;
@@ -116,7 +123,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
                     普徴_納付済期 = nokiJoho.get納期().get期別();
                 }
             }
-
             普徴納付済額_未到来期含まない = get普徴納付済額(本算定通知書情報.get収入情報(), 普徴_最初期, 普徴_納付済期);
             普徴納付済額_未到来期含む = get普徴納付済額(本算定通知書情報.get収入情報(), 普徴_最初期, 普徴_最大期);
             List<NokiJoho> 特徴納期情報リスト = 本算定通知書情報.get特徴納期情報リスト();
@@ -139,7 +145,6 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
             納付済額_未到来期含む = 普徴納付済額_未到来期含む.add(特徴納付済額_未到来期含む);
             納付済額_未到来期含まない = 普徴納付済額_未到来期含まない.add(特徴納付済額_未到来期含まない);
             未到来期の納付済額 = 納付済額_未到来期含む.subtract(納付済額_未到来期含まない);
-
             RString 普徴現在期 = new KoseiTsukiHantei().find更正月(本算定通知書情報.get発行日()).get期();
             if (本算定通知書情報.get賦課の情報_更正前() != null) {
                 FukaJoho 賦課情報 = 本算定通知書情報.get賦課の情報_更正前().get賦課情報();

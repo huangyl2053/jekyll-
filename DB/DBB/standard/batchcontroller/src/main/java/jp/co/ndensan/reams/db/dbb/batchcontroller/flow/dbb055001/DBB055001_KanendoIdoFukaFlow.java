@@ -49,7 +49,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     private static final int 定値_イチ = 1;
     private static final int 定値_二 = 2;
     private static final RString 二_定値 = new RString("2");
-    private static final RString SETAISHOTOKUKAZEIHANTEIFLOW_FLOWID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString SETAISHOTOKUKAZEIHANTEI_FLOW = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
 
     @Override
@@ -110,7 +110,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
      */
     @Step(世帯員把握バッチフロー)
     protected IBatchFlowCommand callSetaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(SETAISHOTOKUKAZEIHANTEIFLOW_FLOWID, SubGyomuCode.DBB介護賦課,
+        return otherBatchFlow(SETAISHOTOKUKAZEIHANTEI_FLOW, SubGyomuCode.DBB介護賦課,
                 getSetaiShotokuKazeiHanteiBatchParameter()).define();
     }
 
@@ -125,7 +125,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
      */
     @Step(賦課計算)
     protected IBatchFlowCommand calculateFuka() {
-        return simpleBatch(CalculateFukaProcess.class).define();
+        return simpleBatch(CalculateFukaProcess.class).arguments(processParameter).define();
     }
 
     /**

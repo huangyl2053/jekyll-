@@ -100,7 +100,7 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             source.shutsuryokujun5 = 並び順の５件目;
             set出力順And改ページ(source);
             int i = 1;
-            source.listUpper_1 = new RString(i++);
+            source.listUpper_1 = new RString(i);
             source.listUpper_2 = entityList.get(0).get入力識別番号();
             source.listUpper_3 = entityList.get(0).get入力識別名称_上段();
             source.listUpper_4 = entityList.get(0).get作成区分コード();
