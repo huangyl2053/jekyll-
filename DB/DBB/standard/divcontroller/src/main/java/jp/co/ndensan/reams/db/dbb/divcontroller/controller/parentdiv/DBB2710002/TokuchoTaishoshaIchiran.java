@@ -47,6 +47,7 @@ public class TokuchoTaishoshaIchiran {
 
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
+    private static final RString KEY2 = new RString("2");
     private static final RString 同定済み_CODE = new RString("1");
     private static final RString 対象外_CODE = new RString("2");
     private static final RString 月_RS = new RString("月");
@@ -55,7 +56,7 @@ public class TokuchoTaishoshaIchiran {
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
     private static final RString STATE特別徴収対象者一覧確認 = new RString("1");
-    private static final RString UCID = new RString("DBBUC27102");
+//    private static final RString UCID = new RString("DBBUC27102");
 
     /**
      * 画面のonLoadイベント
@@ -150,10 +151,6 @@ public class TokuchoTaishoshaIchiran {
         RString 年金コード = ViewStateHolder.get(ViewStateKeys.年金コード, RString.class);
         RString 特徴開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
         getHandler(div).特別徴収同定候補者一覧initialize(処理年度, 捕捉月, 基礎年金番号, 年金コード, 特徴開始月);
-        RString containerId = ResponseHolder.getUIContainerId();
-        if (!UCID.equals(containerId)) {
-            return;
-        }
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null) {
             return;
@@ -356,6 +353,7 @@ public class TokuchoTaishoshaIchiran {
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);
         }
+        div.setHiddenPageState(KEY2);
         return ResponseData.of(div).forwardWithEventName(DBB2710002TransitionEventName.被保険者検索).respond();
     }
 
@@ -460,6 +458,11 @@ public class TokuchoTaishoshaIchiran {
     public ResponseData<TokuchoTaishoshaIchiranDiv> onStateTransition_CommonBtn(TokuchoTaishoshaIchiranDiv div) {
         if (!RString.isNullOrEmpty(div.getHiddenState()) && 状態なし.compareTo(div.getHiddenState()) != NUM0) {
             getHandler(div).stateTransition_CommonBtn();
+        }
+        if (KEY2.equals(div.getHiddenPageState())) {
+            特別徴収同定候補者一覧initialize(div);
+            div.setHiddenPageState(KEY1);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
         }
         return getHandler(div).stateTransition_RootTitle();
     }
