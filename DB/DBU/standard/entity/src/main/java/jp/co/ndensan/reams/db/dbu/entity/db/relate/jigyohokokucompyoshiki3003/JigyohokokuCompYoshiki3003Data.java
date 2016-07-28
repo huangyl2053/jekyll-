@@ -36,112 +36,96 @@ public class JigyohokokuCompYoshiki3003Data {
     private RString 右下表3のタイトル;
     private RString 左下表2のタイトル2;
     private RString 特定負担限度額の申請件数;
-
     private RString 介護老人福祉施設_食費_1;
     private RString 介護老人福祉施設_食費_2;
     private RString 介護老人福祉施設_食費_3;
     private RString 介護老人福祉施設_食費_4;
     private RString 介護老人福祉施設_食費_5;
     private RString 介護老人福祉施設_食費_6;
-
     private RString 介護老人福祉施設_居住費_1;
     private RString 介護老人福祉施設_居住費_2;
     private RString 介護老人福祉施設_居住費_3;
     private RString 介護老人福祉施設_居住費_4;
     private RString 介護老人福祉施設_居住費_5;
     private RString 介護老人福祉施設_居住費_6;
-
     private RString 介護老人保健施設_食費_1;
     private RString 介護老人保健施設_食費_2;
     private RString 介護老人保健施設_食費_3;
     private RString 介護老人保健施設_食費_4;
     private RString 介護老人保健施設_食費_5;
     private RString 介護老人保健施設_食費_6;
-
     private RString 介護老人保健施設_居住費_1;
     private RString 介護老人保健施設_居住費_2;
     private RString 介護老人保健施設_居住費_3;
     private RString 介護老人保健施設_居住費_4;
     private RString 介護老人保健施設_居住費_5;
     private RString 介護老人保健施設_居住費_6;
-
     private RString 介護療養型医療施設_食費_1;
     private RString 介護療養型医療施設_食費_2;
     private RString 介護療養型医療施設_食費_3;
     private RString 介護療養型医療施設_食費_4;
     private RString 介護療養型医療施設_食費_5;
     private RString 介護療養型医療施設_食費_6;
-
     private RString 介護療養型医療施設_居住費_1;
     private RString 介護療養型医療施設_居住費_2;
     private RString 介護療養型医療施設_居住費_3;
     private RString 介護療養型医療施設_居住費_4;
     private RString 介護療養型医療施設_居住費_5;
     private RString 介護療養型医療施設_居住費_6;
-
     private RString 地域密着型介護老人福祉施設入居者生活介護_食費_1;
     private RString 地域密着型介護老人福祉施設入居者生活介護_食費_2;
     private RString 地域密着型介護老人福祉施設入居者生活介護_食費_3;
     private RString 地域密着型介護老人福祉施設入居者生活介護_食費_4;
     private RString 地域密着型介護老人福祉施設入居者生活介護_食費_5;
     private RString 地域密着型介護老人福祉施設入居者生活介護_食費_6;
-
     private RString 地域密着型介護老人福祉施設入居者生活介護_居住費_1;
     private RString 地域密着型介護老人福祉施設入居者生活介護_居住費_2;
     private RString 地域密着型介護老人福祉施設入居者生活介護_居住費_3;
     private RString 地域密着型介護老人福祉施設入居者生活介護_居住費_4;
     private RString 地域密着型介護老人福祉施設入居者生活介護_居住費_5;
     private RString 地域密着型介護老人福祉施設入居者生活介護_居住費_6;
-
     private RString その他_食費_1;
     private RString その他_食費_2;
     private RString その他_食費_3;
     private RString その他_食費_4;
     private RString その他_食費_5;
     private RString その他_食費_6;
-
     private RString その他_居住費_1;
     private RString その他_居住費_2;
     private RString その他_居住費_3;
     private RString その他_居住費_4;
     private RString その他_居住費_5;
     private RString その他_居住費_6;
-
     private RString 合計_食費_1;
     private RString 合計_食費_2;
     private RString 合計_食費_3;
     private RString 合計_食費_4;
     private RString 合計_食費_5;
     private RString 合計_食費_6;
-
     private RString 合計_居住費_1;
     private RString 合計_居住費_2;
     private RString 合計_居住費_3;
     private RString 合計_居住費_4;
     private RString 合計_居住費_5;
     private RString 合計_居住費_6;
-
     private RString 利用者負担減額免除認定表の利用者負担_1;
     private RString 利用者負担減額免除認定表の利用者負担_2;
     private RString 利用者負担減額免除認定表の利用者負担_3;
     private RString 利用者負担減額免除認定表の利用者負担_4;
     private RString 利用者負担減額免除認定表の利用者負担_5;
     private RString 利用者負担減額免除認定表の利用者負担_6;
-
     private RString 減額減免認定表の特定負担限度額_食費_1;
     private RString 減額減免認定表の特定負担限度額_食費_2;
     private RString 減額減免認定表の特定負担限度額_食費_3;
     private RString 減額減免認定表の特定負担限度額_食費_4;
     private RString 減額減免認定表の特定負担限度額_食費_5;
     private RString 減額減免認定表の特定負担限度額_食費_6;
-
     private RString 減額減免認定表の特定負担限度額_居住費_1;
     private RString 減額減免認定表の特定負担限度額_居住費_2;
     private RString 減額減免認定表の特定負担限度額_居住費_3;
     private RString 減額減免認定表の特定負担限度額_居住費_4;
     private RString 減額減免認定表の特定負担限度額_居住費_5;
     private RString 減額減免認定表の特定負担限度額_居住費_6;
-
     private RString 減額免除認定表の利用者負担_1;
     private RString 減額免除認定表の利用者負担_2;
     private RString 減額免除認定表の利用者負担_3;
