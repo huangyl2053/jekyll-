@@ -87,7 +87,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -142,7 +141,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private final MapperProvider mapperProvider;
     private final DbV2001ChoshuHohoAliveDac 徴収方法NewestDac;
     private final DbT2010FukaErrorListDac 賦課エラーDac;
-    private final DbT2002FukaDac 賦課Dac;
     private final UaFt001FindIdoFunctionDac 宛名識別異動分Dac;
     private final DbT2001ChoshuHohoDac 徴収方法Dac;
     private final DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -150,17 +148,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     private static final RString KEY_FUKANENDO = new RString("fukaNendo");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
     private static final int INT_4 = 4;
-    private static final int INT_5 = 5;
     private static final int INT_6 = 6;
-    private static final int INT_7 = 7;
-    private static final int INT_8 = 8;
-    private static final int INT_9 = 9;
-    private static final int INT_10 = 10;
-    private static final int INT_11 = 11;
-    private static final int INT_12 = 12;
-    private static final int INT_13 = 13;
     private static final int INT_14 = 14;
     private static final RString ゼロ_0000 = new RString("0000");
     private static final RString 内部帳票ID = new RString("DBB400001_FukaErrorIchitan");
@@ -177,7 +166,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.徴収方法NewestDac = InstanceProvider.create(DbV2001ChoshuHohoAliveDac.class);
         this.賦課エラーDac = InstanceProvider.create(DbT2010FukaErrorListDac.class);
-        this.賦課Dac = InstanceProvider.create(DbT2002FukaDac.class);
         this.宛名識別異動分Dac = InstanceProvider.create(UaFt001FindIdoFunctionDac.class);
         this.徴収方法Dac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
     }
@@ -188,20 +176,17 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
      * @param mapperProvider mapperProvider
      * @param 徴収方法NewestDac 徴収方法NewestDac
      * @param 賦課エラーDac DbT2010FukaErrorListDac
-     * @param 賦課Dac DbT2002FukaDac
      * @param 宛名識別異動分Dac UaFt001FindIdoFunctionDac
      * @param 徴収方法Dac DbT2001ChoshuHohoDac
      */
     GenNendoHonsanteiIdou(MapperProvider mapperProvider,
             DbV2001ChoshuHohoAliveDac 徴収方法NewestDac,
             DbT2010FukaErrorListDac 賦課エラーDac,
-            DbT2002FukaDac 賦課Dac,
             UaFt001FindIdoFunctionDac 宛名識別異動分Dac,
             DbT2001ChoshuHohoDac 徴収方法Dac) {
         this.mapperProvider = mapperProvider;
         this.徴収方法NewestDac = 徴収方法NewestDac;
         this.賦課エラーDac = 賦課エラーDac;
-        this.賦課Dac = 賦課Dac;
         this.宛名識別異動分Dac = 宛名識別異動分Dac;
         this.徴収方法Dac = 徴収方法Dac;
     }
