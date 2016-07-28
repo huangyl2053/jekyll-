@@ -130,6 +130,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
     private static final RString 定値_しない = new RString("しない");
     private static final RString CSVファイル名_特徴一覧表 = new RString("特別徴収開始通知書（仮算定）発行一覧表");
     private static final RString CSVファイル名_変更一覧表 = new RString("仮算定額変更通知書発行一覧表");
+    private static final RString CSVファイル名_納入一覧表 = new RString("保険料納入通知書（仮算定）発行一覧表");
     private static final ReportId 特別徴収開始通知書仮算定帳票分類ID = new ReportId("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private static final ReportId 仮算定額変更通知書_帳票分類ID = new ReportId("DBB100010_KarisanteiHenkoTsuchishoDaihyo");
     private static final ReportId 納入通知書仮算定_帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
@@ -677,7 +678,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakko extends KarisanteiIdoTsuchishoIk
         IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課, 納入通知書仮算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
         load代行プリント送付票(調定年度, 賦課年度, 代行プリント送付票_帳票ID, 発行日, 出力期, 対象者区分, 生活保護対象者, ページごとに山分け,
                 帳票制御共通 == null ? null : 帳票制御共通.toEntity(), 地方公共団体, outputOrder, new Decimal(出力ページ数.toString()));
-        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_なし, CSVファイル名_なし, 帳票名);
+        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_納入一覧表, 帳票名);
 
     }
 
