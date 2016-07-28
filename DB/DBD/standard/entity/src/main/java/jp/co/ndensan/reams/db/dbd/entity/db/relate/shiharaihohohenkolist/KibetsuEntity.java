@@ -15,12 +15,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
+ * 支払方法変更管理リストのEntityです。
  *
- * @author liangbc
+ * @reamsid_L DBD-3630-050 liangbc
  */
 public class KibetsuEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
+    /**
+     * DbT2003Kibetsu
+     */
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2003Kibetsu");
 

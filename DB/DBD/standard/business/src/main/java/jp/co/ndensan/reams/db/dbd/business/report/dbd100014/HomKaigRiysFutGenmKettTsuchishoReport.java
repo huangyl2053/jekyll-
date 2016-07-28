@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100014;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -15,7 +15,7 @@ import lombok.NonNull;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public final class HomKaigRiysFutGenmKettTsuchishoReport extends Report<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
+public final class HomKaigRiysFutGenmKettTsuchishoReport extends Report<HomKaigRiysFutGenmKettTsuchishoReportSource> {
 
     private final HomKaigRiysFutGenmKettTsuchishoItem bodyItem;
 
@@ -34,7 +34,7 @@ public final class HomKaigRiysFutGenmKettTsuchishoReport extends Report<HomKaigR
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<HomKaigRiysFutGenｍKettTsuchishoReportSource> writer) {
+    public void writeBy(ReportSourceWriter<HomKaigRiysFutGenmKettTsuchishoReportSource> writer) {
         IHomKaigRiysFutGenmKettTsuchishoEditor bodyEditor = new HomKaigRiysFutGenmKettTsuchishoBodyEditor(bodyItem);
         IHomKaigRiysFutGenmKettTsuchishoBuider builder = new HomKaigRiysFutGenmKettTsuchishoBuilderImpl(bodyEditor);
         writer.writeLine(builder);

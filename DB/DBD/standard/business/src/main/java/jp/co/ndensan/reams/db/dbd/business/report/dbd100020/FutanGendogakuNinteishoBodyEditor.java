@@ -174,6 +174,15 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
     }
 
     private void setFutanGaku(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
+        setshokujiGendoGaku(source, item);
+        setshokujiGendoGaku1(source, item);
+        setshokujiGendoGaku2(source, item);
+        setshokujiGendoGaku3(source, item);
+        setshokujiGendoGaku4(source, item);
+        setshokujiGendoGaku5(source, item);
+    }
+
+    private void setshokujiGendoGaku(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().get食費負担限度額()) && (item.get負担限度額認定().get食費負担限度額() != null)) {
             source.shokujiGendoGaku = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get食費負担限度額(), 0);
             source.en1 = 金額単位;
@@ -186,7 +195,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             }
             source.en1 = RString.EMPTY;
         }
+    }
 
+    private void setshokujiGendoGaku1(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().getユニット型個室()) && (item.get負担限度額認定().getユニット型個室() != null)) {
             source.kyojuhiGendoGaku1 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().getユニット型個室(), 0);
             source.en2 = 金額単位;
@@ -199,7 +210,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             }
             source.en2 = RString.EMPTY;
         }
+    }
 
+    private void setshokujiGendoGaku2(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().getユニット型準個室()) && (item.get負担限度額認定().getユニット型準個室() != null)) {
             source.kyojuhiGendoGaku2 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().getユニット型準個室(), 0);
             source.en3 = 金額単位;
@@ -212,7 +225,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             }
             source.en3 = RString.EMPTY;
         }
+    }
 
+    private void setshokujiGendoGaku3(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
         if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_特養等()) && (item.get負担限度額認定().get従来型個室_特養等() != null)) {
             source.kyojuhiGendoGaku3 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_特養等(), 0);
             source.en4 = 金額単位;
@@ -225,7 +240,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
             }
             source.en4 = RString.EMPTY;
         }
+    }
 
+    private void setshokujiGendoGaku4(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
         if (KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
                 || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
             if (!Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
@@ -241,7 +258,8 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
                 source.en5 = RString.EMPTY;
             }
         } else {
-            if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_老健_療養等()) && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
+            if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_老健_療養等())
+                    && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
                 source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_老健_療養等(), 0);
                 source.en5 = 金額単位;
             } else {
@@ -253,6 +271,9 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
                 source.en5 = RString.EMPTY;
             }
         }
+    }
+
+    private void setshokujiGendoGaku5(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
         if (KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
                 || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
             source.kyojuhiGendoGaku5 = RString.EMPTY;

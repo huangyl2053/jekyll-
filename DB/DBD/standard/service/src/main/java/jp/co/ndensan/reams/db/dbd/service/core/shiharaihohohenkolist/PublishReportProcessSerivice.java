@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenkolist;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.HenkouJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShiharaiHohoHenkoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShunoJohoTempTableEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd100014;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
@@ -66,11 +66,11 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
      * @return 特別地域加算減免・訪問介護利用者負担減額決定通知書Source
      */
     @Override
-    public HomKaigRiysFutGenｍKettTsuchishoReportSource edit(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    public HomKaigRiysFutGenmKettTsuchishoReportSource edit(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         return bodyEdit(source);
     }
 
-    private HomKaigRiysFutGenｍKettTsuchishoReportSource bodyEdit(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private HomKaigRiysFutGenmKettTsuchishoReportSource bodyEdit(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         source.bunshoNo = item.get文書番号();
 
         source.title1 = new RString("特別地域加算に係る訪問介護利用者負担減額決定通知書");
@@ -173,13 +173,13 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         }
     }
 
-    private void set通知文(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set通知文(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(1).split(折り返す符号.toString());
         source.tsuchibun1 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibun2 = getLenStr(INDEX_1, 通知書定型文List);
     }
 
-    private void set連絡先他(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set連絡先他(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibun3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibun4 = getLenStr(INDEX_1, 通知書定型文List);
@@ -205,7 +205,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         source.tsuchibun24 = getLenStr(INDEX_21, 通知書定型文List);
     }
 
-    private void set連絡先他Large(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set連絡先他Large(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibunLarge3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunLarge4 = getLenStr(INDEX_1, 通知書定型文List);
@@ -227,7 +227,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         source.tsuchibunLarge20 = getLenStr(INDEX_17, 通知書定型文List);
     }
 
-    private void set連絡先他上段Small(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set連絡先他上段Small(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibunMix3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix4 = getLenStr(INDEX_1, 通知書定型文List);
@@ -245,7 +245,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
 
     }
 
-    private void set連絡先他下段Large(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set連絡先他下段Large(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunMix16 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMix17 = getLenStr(INDEX_1, 通知書定型文List);
@@ -256,7 +256,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         source.tsuchibunMix22 = getLenStr(INDEX_6, 通知書定型文List);
     }
 
-    private void set連絡先他上段Large(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set連絡先他上段Large(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(2).split(折り返す符号.toString());
         source.tsuchibunMixtwo3 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo4 = getLenStr(INDEX_1, 通知書定型文List);
@@ -268,7 +268,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
 
     }
 
-    private void set連絡先他下段Small(HomKaigRiysFutGenｍKettTsuchishoReportSource source) {
+    private void set連絡先他下段Small(HomKaigRiysFutGenmKettTsuchishoReportSource source) {
         List<RString> 通知書定型文List = item.get通知書定型文List().get(INDEX_3).split(折り返す符号.toString());
         source.tsuchibunMixtwo10 = getLenStr(INDEX_0, 通知書定型文List);
         source.tsuchibunMixtwo11 = getLenStr(INDEX_1, 通知書定型文List);
@@ -293,7 +293,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         }
     }
 
-    private void setCompNinshosha(HomKaigRiysFutGenｍKettTsuchishoReportSource source, HomKaigRiysFutGenmKettTsuchishoItem item) {
+    private void setCompNinshosha(HomKaigRiysFutGenmKettTsuchishoReportSource source, HomKaigRiysFutGenmKettTsuchishoItem item) {
         source.denshiKoin = item.getNinshoshaSource().denshiKoin;
         source.hakkoYMD = item.getNinshoshaSource().hakkoYMD;
         source.ninshoshaYakushokuMei1 = item.getNinshoshaSource().ninshoshaYakushokuMei1;
@@ -304,7 +304,7 @@ public class HomKaigRiysFutGenmKettTsuchishoBodyEditor implements IHomKaigRiysFu
         source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;
     }
 
-    private void setCompSofubutsuAtesaki(HomKaigRiysFutGenｍKettTsuchishoReportSource source, HomKaigRiysFutGenmKettTsuchishoItem item) {
+    private void setCompSofubutsuAtesaki(HomKaigRiysFutGenmKettTsuchishoReportSource source, HomKaigRiysFutGenmKettTsuchishoItem item) {
         SofubutsuAtesakiSource sofubutsuAtesakiSource;
         try {
             sofubutsuAtesakiSource = JushoHenshu.create編集後宛先(

@@ -137,7 +137,7 @@ public class HomKaigRiysFutgGengNinteishoBodyEditor implements IHomKaigRiysFutgG
         source.yukoYYYY = setWareki(item.get訪問介護利用者負担額減額().get適用終了年月日().toRDate()).substring(INDEX_2, INDEX_4);
         source.yukoMM = setWareki(item.get訪問介護利用者負担額減額().get適用終了年月日().toRDate()).substring(INDEX_5, INDEX_7);
         source.yukoDD = setWareki(item.get訪問介護利用者負担額減額().get適用終了年月日().toRDate()).substring(INDEX_8, INDEX_10);
-        source.kyufuRitsu = new RString(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString());
+        source.kyufuRitsu = new RString(item.get訪問介護利用者負担額減額().get給付率().getColumnValue().toString().concat("　/　100"));
 
         for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
             if (new RString(ChohyoSeigyoHanyoKeysDBD100017.保険者名表示.name()).equals(entity.getKomokuName())
