@@ -710,12 +710,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         } else if (YokaigoInterfaceShurui.富士通２.getコード().equals(要介護ＩＦ種類)) {
             return false;
         } else if (YokaigoInterfaceShurui.ＦＮＳ.getコード().equals(要介護ＩＦ種類)) {
-            if (null != 認定情報.get審査会依頼年月日()
-                    && !認定情報.get審査会依頼年月日().isEmpty()
-                    && null != 認定情報.get審査会資料作成年月日()
-                    && !認定情報.get審査会資料作成年月日().isEmpty()) {
-                return true;
-            }
+            return null != 認定情報.get審査会依頼年月日() && !認定情報.get審査会依頼年月日().isEmpty()
+                    && null != 認定情報.get審査会資料作成年月日() && !認定情報.get審査会資料作成年月日().isEmpty();
         }
 
         return false;
