@@ -543,7 +543,7 @@ public class HonsanteiIdoHandler {
             paramter.set納入_発行日(new FlexibleDate(納入_発行日.toString()));
         }
         paramter.set納入_出力方法(div.getTxtNotsuShutsuryokuKi().getValue());
-        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedValue());
+        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedKey());
         paramter.set納入_生活保護対象者(div.getRadNotsuSeikatsuHogo().getSelectedValue());
         paramter.set納入_ページごとに山分け(div.getRadNotsuYamawake().getSelectedValue());
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {

@@ -531,7 +531,11 @@ public class KariSanteiIdoFuka {
         result.set帳票グループ(parameter.get帳票グループ());
         List<TyouhyouEntity> list = new ArrayList<>();
         for (TyouhyouEntity entity : parameter.get出力帳票一覧List()) {
-            list.add(entity);
+            TyouhyouResult tyouhyouResult = getChohyoID(new FlexibleYear(parameter.get調定年度()), entity.get帳票分類ID(),
+                    parameter.get算定期(), entity.get出力順ID());
+            if (tyouhyouResult != null) {
+                list.add(tyouhyouResult.getEntity());
+            }
         }
         result.set出力帳票一覧List(list);
         result.set特徴_発行日(parameter.get特徴_発行日());
