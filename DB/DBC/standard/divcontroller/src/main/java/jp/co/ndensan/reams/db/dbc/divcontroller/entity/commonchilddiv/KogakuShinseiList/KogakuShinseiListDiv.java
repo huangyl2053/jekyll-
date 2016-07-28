@@ -342,4 +342,24 @@ public class KogakuShinseiListDiv extends Panel implements IKogakuShinseiListDiv
         ViewStateHolder.put(ViewStateKeys.導入形態コード, 導入形態コード);
         ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
     }
+
+    /**
+     * 審査決定フラグ
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is審査決定フラグ() {
+        return KogakuShinseiListDivHandler.of(this).is審査決定フラグ();
+    }
+
+    /**
+     * 支給区分フラグ
+     *
+     * @return boolean
+     */
+    @Override
+    public boolean is支給区分フラグ() {
+        return KogakuShinseiListDivHandler.of(this).is支給区分フラグ();
+    }
 }
