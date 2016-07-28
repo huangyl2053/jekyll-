@@ -32,6 +32,5 @@ public class CaluculateFukaShikakuShutokuProcess extends SimpleBatchProcessBase 
 
     @Override
     protected void afterExecute() {
-
     }
 }

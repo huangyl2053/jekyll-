@@ -36,4 +36,11 @@ public class KarisanteiIdoKekkaResult {
         this.帳票ID = 帳票ID;
         this.出力順ID = 出力順ID;
     }
+
+    /**
+     * コンストラクタです。
+     */
+    public KarisanteiIdoKekkaResult() {
+
+    }
 }

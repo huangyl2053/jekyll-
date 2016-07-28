@@ -26,12 +26,12 @@ public class CaluculateFukaShikakuSoshitsuProcess extends SimpleBatchProcessBase
     @Override
     protected void process() {
         KariSanteiIdoFukaBatch manager = KariSanteiIdoFukaBatch.createInstance();
-        manager.caluculateFukaShikakuSoshitsu(processParameter.get調定年度(), processParameter.get賦課年度(),
+        manager.caluculateFukaShikakuSoshitsu(
+                processParameter.get調定年度(), processParameter.get賦課年度(),
                 new YMDHMS(processParameter.get調定日時()), processParameter.get処理対象月());
     }
 
     @Override
     protected void afterExecute() {
-
     }
 }

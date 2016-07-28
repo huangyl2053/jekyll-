@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt36001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaKozaIdoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuSoshitsuProcess;
@@ -50,7 +51,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final RString RSTELEVEN = new RString("11");
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
-    private static final RString 仮算定異動通知書一括発行BATCHID = new RString("KarisanteiIdoTsuchishoIkkatsuHakkoFlow");
+    private static final RString 仮算定異動通知書一括発行BATCHID = new RString("DBB015003_KarisanteiIdoTsuchishoHakko");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("choteiToroku");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
@@ -64,6 +66,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final String 賦課計算_特別徴収停止 = "caluculateFukaTokuchoTeishi";
     private static final String 賦課計算_資格取得 = "caluculateFukaShikakuShutoku";
     private static final String 賦課計算_口座異動のみ反映 = "caluculateFukaKozaIdo";
+    private static final String 賦課の情報登録フロー = "callChoteiToroku";
     private static final String 依頼金額計算区分 = "getIraikinKeisanShoriKubun";
     private static final String 依頼金額計算_8月特徴開始 = "caluculateIraiKinTokucho8gatuKaishi";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
@@ -95,9 +98,16 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
         }
         if (RSTZERO.equals(getParameter().get依頼金額計算区分())) {
             executeStep(賦課計算_資格喪失);
+            executeStep(賦課の情報登録フロー);
+
             executeStep(賦課計算_特別徴収停止);
+            executeStep(賦課の情報登録フロー);
+
             executeStep(賦課計算_資格取得);
+            executeStep(賦課の情報登録フロー);
+
             executeStep(賦課計算_口座異動のみ反映);
+            executeStep(賦課の情報登録フロー);
         }
 
         executeStep(依頼金額計算区分);
@@ -237,6 +247,20 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     @Step(賦課計算_口座異動のみ反映)
     protected IBatchFlowCommand caluculateFukaKozaIdo() {
         return simpleBatch(CaluculateFukaKozaIdoProcess.class).arguments(parameter).define();
+    }
+
+    /**
+     * 賦課の情報登録フローを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(賦課の情報登録フロー)
+    protected IBatchFlowCommand choteiToroku() {
+        ChoteiTorokuParameter param = new ChoteiTorokuParameter();
+        param.setSchema(new RString("rgdb"));
+        param.setChoteiIdAutoNumbering(true);
+        param.setShunoIdAutoNumbering(true);
+        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課, param).define();
     }
 
     /**
