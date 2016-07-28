@@ -41,7 +41,7 @@ public class SinsaSeikyusyoJohoHandler {
      * onLoad処理です。
      *
      * @param sinsaSeikyusyoJohoList 審査請求書登録明細情報
-     * @param 画面モード　画面モード
+     * @param 画面モード 画面モード
      */
     public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList, RString 画面モード) {
         if (照会.equals(画面モード)) {
