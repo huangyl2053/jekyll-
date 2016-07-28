@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1731011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.SogojigyoShuruiShikyuGendogakuDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link SogojigyoShuruiShikyuGendogakuDiv}の仕様クラスです。 <br>
@@ -49,8 +48,6 @@ public enum SogojigyoShuruiShikyuGendogakuSpec implements IPredicate<SogojigyoSh
      * {@link SogojigyoShuruiShikyuGendogakuSpec}における判定ロジックのHelperクラスです。
      */
     private static class SpecHelper {
-
-        private static final RString 登録 = new RString("登録モード");
 
         /**
          * *が各項目が未入力の場合、エラーとします。

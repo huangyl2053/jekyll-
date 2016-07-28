@@ -71,6 +71,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.reportoutputorder.SortOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -1422,28 +1423,30 @@ public class TokuchoKariSanteiFukaManagerBatch {
                 IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
                         .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収仮算定結果一覧表_帳票分類ID, Long.parseLong(出力順ID.toString()));
                 List<RString> 並び順List = new ArrayList<>();
+                List<SortOrder> 昇降順List = new ArrayList<>();
                 for (int i = 整数_0; i < 整数_5; i++) {
                     if (i < 並び順.get設定項目リスト().size()) {
                         並び順List.add(並び順.get設定項目リスト().get(i).get項目名());
+                        昇降順List.add(並び順.get設定項目リスト().get(i).get昇降順());
                     } else {
                         break;
                     }
                 }
                 int flag = 整数_0;
                 if (並び順List.size() > 整数_0) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_0));
+                    flag = getソート(o1, o2, 並び順List.get(整数_0), 昇降順List.get(整数_0));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_1) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_1));
+                    flag = getソート(o1, o2, 並び順List.get(整数_1), 昇降順List.get(整数_1));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_2) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_2));
+                    flag = getソート(o1, o2, 並び順List.get(整数_2), 昇降順List.get(整数_2));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_3) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_3));
+                    flag = getソート(o1, o2, 並び順List.get(整数_3), 昇降順List.get(整数_3));
                 }
                 if (整数_0 == flag && 並び順List.size() > 整数_4) {
-                    flag = getソート(o1, o2, 並び順List.get(整数_4));
+                    flag = getソート(o1, o2, 並び順List.get(整数_4), 昇降順List.get(整数_4));
                 }
                 return flag;
             }
@@ -1717,45 +1720,99 @@ public class TokuchoKariSanteiFukaManagerBatch {
         entity.set特別徴収義務者コード(特徴仮算定結果情報.get特別徴収業務者コード());
     }
 
-    private int getソート(TokuchoKariKeisangoFukaEntity o1, TokuchoKariKeisangoFukaEntity o2, RString 項目名) {
+    private int getソート(TokuchoKariKeisangoFukaEntity o1, TokuchoKariKeisangoFukaEntity o2, RString 項目名, SortOrder 昇降順) {
         if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.郵便番号.getフォームフィールド名().equals(項目名)) {
             YubinNo 郵便番号2 = o2.get宛名().getYubinNo();
             YubinNo 郵便番号1 = o1.get宛名().getYubinNo();
-            if (郵便番号2 != null && 郵便番号1 != null) {
-                return 郵便番号2.compareTo(郵便番号1);
+            if (isNull郵便番号(郵便番号2, 郵便番号1)) {
+                return 昇降順_郵便番号(昇降順, 郵便番号1, 郵便番号2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.町域コード.getフォームフィールド名().equals(項目名)) {
             ChoikiCode 町域コード2 = o2.get宛名().getChoikiCode();
             ChoikiCode 町域コード1 = o1.get宛名().getChoikiCode();
             if (町域コード2 != null && 町域コード1 != null) {
-                return 町域コード2.compareTo(町域コード1);
+                return 昇降順_町域コード(昇降順, 町域コード1, 町域コード2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.行政区コード.getフォームフィールド名().equals(項目名)) {
             GyoseikuCode 行政区コード2 = o2.get宛名().getGyoseikuCode();
             GyoseikuCode 行政区コード1 = o1.get宛名().getGyoseikuCode();
             if (行政区コード2 != null && 行政区コード1 != null) {
-                return 行政区コード2.compareTo(行政区コード1);
+                return 昇降順_行政区コード(昇降順, 行政区コード1, 行政区コード2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.世帯コード.getフォームフィールド名().equals(項目名)) {
-            return o2.get世帯コード().compareTo(o1.get世帯コード());
+            return 昇降順_世帯コード(昇降順, o1, o2);
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.識別コード.getフォームフィールド名().equals(項目名)) {
-            return o2.get識別コード().compareTo(o1.get識別コード());
+            return 昇降順_識別コード(昇降順, o1, o2);
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.生年月日.getフォームフィールド名().equals(項目名)) {
             FlexibleDate 生年月日2 = o2.get宛名().getSeinengappiYMD();
             FlexibleDate 生年月日1 = o1.get宛名().getSeinengappiYMD();
             if (生年月日2 != null && 生年月日1 != null) {
-                return 生年月日2.compareTo(生年月日1);
+                return 昇降順_生年月日(昇降順, 生年月日1, 生年月日2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.性別.getフォームフィールド名().equals(項目名)) {
             RString 性別2 = o2.get宛名().getSeibetsuCode();
             RString 性別1 = o1.get宛名().getSeibetsuCode();
             if (性別2 != null && 性別1 != null) {
-                return 性別2.compareTo(性別1);
+                return 昇降順_性別(昇降順, 性別1, 性別2);
             }
-        } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.通知書番号.getフォームフィールド名().equals(項目名)) {
-            return o2.get通知書番号().compareTo(o1.get通知書番号());
+        } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.通知書番号.getフォームフィールド名().equals(項目名)
+                && SortOrder.ASCENDING.equals(昇降順)) {
+            return o1.get通知書番号().compareTo(o2.get通知書番号());
         }
-        return o2.get被保険者番号().compareTo(o1.get被保険者番号());
+        return o2.get通知書番号().compareTo(o1.get通知書番号());
+    }
+
+    private boolean isNull郵便番号(YubinNo 郵便番号2, YubinNo 郵便番号1) {
+        return 郵便番号2 != null && 郵便番号1 != null;
+    }
+
+    private int 昇降順_性別(SortOrder 昇降順, RString 性別1, RString 性別2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return 性別1.compareTo(性別2);
+        }
+        return 性別2.compareTo(性別1);
+    }
+
+    private int 昇降順_生年月日(SortOrder 昇降順, FlexibleDate 生年月日1, FlexibleDate 生年月日2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return 生年月日1.compareTo(生年月日2);
+        }
+        return 生年月日2.compareTo(生年月日1);
+    }
+
+    private int 昇降順_識別コード(SortOrder 昇降順, TokuchoKariKeisangoFukaEntity o1, TokuchoKariKeisangoFukaEntity o2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return o1.get識別コード().compareTo(o2.get識別コード());
+        }
+        return o2.get識別コード().compareTo(o1.get識別コード());
+    }
+
+    private int 昇降順_世帯コード(SortOrder 昇降順, TokuchoKariKeisangoFukaEntity o1, TokuchoKariKeisangoFukaEntity o2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return o1.get世帯コード().compareTo(o2.get世帯コード());
+        }
+        return o2.get世帯コード().compareTo(o1.get世帯コード());
+    }
+
+    private int 昇降順_行政区コード(SortOrder 昇降順, GyoseikuCode 行政区コード1, GyoseikuCode 行政区コード2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return 行政区コード1.compareTo(行政区コード2);
+        }
+        return 行政区コード2.compareTo(行政区コード1);
+    }
+
+    private int 昇降順_町域コード(SortOrder 昇降順, ChoikiCode 町域コード1, ChoikiCode 町域コード2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return 町域コード1.compareTo(町域コード2);
+        }
+        return 町域コード2.compareTo(町域コード1);
+    }
+
+    private int 昇降順_郵便番号(SortOrder 昇降順, YubinNo 郵便番号1, YubinNo 郵便番号2) {
+        if (SortOrder.ASCENDING.equals(昇降順)) {
+            return 郵便番号1.compareTo(郵便番号2);
+        }
+        return 郵便番号2.compareTo(郵便番号1);
     }
 
     private void loadバッチ出力条件リスト(FlexibleYear 調定年度, FlexibleYear 賦課年度, long 出力順ID, RString 出力ページ数) {

@@ -23,14 +23,12 @@ public class JigyohokokuGeppoYoshiki1Change {
     private final RString list1_2;
     private final RString list1_3;
     private final RString list1_4;
-
     private final RString list2Upper_1;
     private final RString list2Upper_2;
     private final RString list2Upper_3;
     private final RString list2Upper_4;
     private final RString list2Upper_5;
     private final RString list2Upper_6;
-
     private final RString list2Lower_1;
     private final RString list2Lower_2;
     private final RString list2Lower_3;
@@ -78,14 +76,12 @@ public class JigyohokokuGeppoYoshiki1Change {
         this.list1_2 = list1_2;
         this.list1_3 = list1_3;
         this.list1_4 = list1_4;
-
         this.list2Lower_1 = list2Lower_1;
         this.list2Lower_2 = list2Lower_2;
         this.list2Lower_3 = list2Lower_3;
         this.list2Lower_4 = list2Lower_4;
         this.list2Lower_5 = list2Lower_5;
         this.list2Lower_6 = list2Lower_6;
-
         this.list2Upper_1 = list2Upper_1;
         this.list2Upper_2 = list2Upper_2;
         this.list2Upper_3 = list2Upper_3;

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000015;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000015.DBCMNK4001PanelAllDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -21,17 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class DBCMNK4001PanelAllValidationHandler {
 
-    private final DBCMNK4001PanelAllDiv div;
     private static final RString 今回抽出期間 = new RString("今回抽出期間");
-
-    /**
-     * コンストラクタです。
-     *
-     * @param div 更正対象給付実績一覧Div
-     */
-    public DBCMNK4001PanelAllValidationHandler(DBCMNK4001PanelAllDiv div) {
-        this.div = div;
-    }
 
     /**
      * 大小関係が不正のバリデーションチェックです。

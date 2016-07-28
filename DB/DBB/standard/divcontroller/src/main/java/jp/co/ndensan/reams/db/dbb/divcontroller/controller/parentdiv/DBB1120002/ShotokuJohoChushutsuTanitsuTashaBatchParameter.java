@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120002;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoBatchresultTanituParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -34,6 +34,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
 
     private static final RString 処理待ち = new RString("処理待ち");
     private static final RString ファイル付箋 = new RString("ShotokuJohoChushutsuTanitsuTasha");
+    private static final RString COMMON_BUTTON_FIELD_NAME_当初 = new RString("btnBatchRegisterDousyo");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterTanitsuTasha");
     private static final ReportId 帳票ID = new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran");
     private static final RString BBKAIGO = new RString("BBKAIGO");
@@ -56,10 +57,14 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
             年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
                     SubGyomuCode.DBB介護賦課);
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(new RDate(年度.toString()));
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
         } else if (所得情報抽出_連携異動.equals(メニューID)) {
             年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                     SubGyomuCode.DBB介護賦課);
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtShoriNendoTanitsuTasha().setValue(new RDate(年度.toString()));
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
         }
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
         handler.initCheck(currentTime);
@@ -68,7 +73,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setDisabled(true);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getToriKomiTaisho().getUplUpload().setDisabled(false);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getToriKomiTaisho().getBtnUpload().setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
         div.getShotokuJohoChushutsuTanitsuTashaPanel().getCcdChohyoShutsuryokujunTanitsuTasha()
                 .load(SubGyomuCode.DBB介護賦課, 帳票ID);
         return createResponse(div);
@@ -102,8 +106,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
         }
         if (div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().getValue().equals(処理待ち)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, false);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
         }
         div.setHiddenResult(filename);
         return ResponseData.of(div).respond();
@@ -131,10 +137,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
      * @return ResponseData<ShotokuJohoBatchresultTanituParameter>
      */
-    public ResponseData<ShotokuJohoBatchresultTanituParameter> onclick_batchRegister(
+    public ResponseData<ShutokuJohoChushutsuRenkeiBatchParameter> onclick_batchRegister(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
         ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
-        ShotokuJohoBatchresultTanituParameter parameter = handler.getBatchParamter();
+        ShutokuJohoChushutsuRenkeiBatchParameter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 

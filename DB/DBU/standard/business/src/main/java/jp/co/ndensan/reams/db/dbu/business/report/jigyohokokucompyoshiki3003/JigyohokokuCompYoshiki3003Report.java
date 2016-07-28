@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 介護事業状況報告月報・一般状況（様式1-3） のReportです。
  *
- * @reamsid_L DBU-5550-050 dangjingjing
+ * @reamsid_L DBU-5530-060 dangjingjing
  */
 public class JigyohokokuCompYoshiki3003Report extends Report<JigyohokokuCompYoshiki3003ReportSource> {
 
@@ -59,7 +59,6 @@ public class JigyohokokuCompYoshiki3003Report extends Report<JigyohokokuCompYosh
                 data.get減額減免認定表の特定負担限度額_食費_1(),
                 data.get減額減免認定表の特定負担限度額_居住費_1(),
                 data.get減額免除認定表の利用者負担_1()));
-
         changes.add(new JigyohokokuCompYoshiki3003Change(data.get介護老人福祉施設_食費_2(),
                 data.get介護老人福祉施設_居住費_2(),
                 data.get介護老人保健施設_食費_2(),
@@ -76,7 +75,6 @@ public class JigyohokokuCompYoshiki3003Report extends Report<JigyohokokuCompYosh
                 data.get減額減免認定表の特定負担限度額_食費_2(),
                 data.get減額減免認定表の特定負担限度額_居住費_2(),
                 data.get減額免除認定表の利用者負担_2()));
-
         changes.add(new JigyohokokuCompYoshiki3003Change(data.get介護老人福祉施設_食費_3(),
                 data.get介護老人福祉施設_居住費_3(),
                 data.get介護老人保健施設_食費_3(),
@@ -93,7 +91,6 @@ public class JigyohokokuCompYoshiki3003Report extends Report<JigyohokokuCompYosh
                 data.get減額減免認定表の特定負担限度額_食費_3(),
                 data.get減額減免認定表の特定負担限度額_居住費_3(),
                 data.get減額免除認定表の利用者負担_3()));
-
         changes.add(new JigyohokokuCompYoshiki3003Change(data.get介護老人福祉施設_食費_4(),
                 data.get介護老人福祉施設_居住費_4(),
                 data.get介護老人保健施設_食費_4(),
@@ -110,7 +107,6 @@ public class JigyohokokuCompYoshiki3003Report extends Report<JigyohokokuCompYosh
                 data.get減額減免認定表の特定負担限度額_食費_4(),
                 data.get減額減免認定表の特定負担限度額_居住費_4(),
                 data.get減額免除認定表の利用者負担_4()));
-
         changes.add(new JigyohokokuCompYoshiki3003Change(data.get介護老人福祉施設_食費_5(),
                 data.get介護老人福祉施設_居住費_5(),
                 data.get介護老人保健施設_食費_5(),
@@ -127,7 +123,6 @@ public class JigyohokokuCompYoshiki3003Report extends Report<JigyohokokuCompYosh
                 data.get減額減免認定表の特定負担限度額_食費_5(),
                 data.get減額減免認定表の特定負担限度額_居住費_5(),
                 data.get減額免除認定表の利用者負担_5()));
-
         changes.add(new JigyohokokuCompYoshiki3003Change(data.get介護老人福祉施設_食費_6(),
                 data.get介護老人福祉施設_居住費_6(),
                 data.get介護老人保健施設_食費_6(),

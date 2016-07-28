@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,7 +29,7 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
     private long shutsuryokujunID;
     private ReportId chohyoID;
     private RString sharefilesname;
-    private RDateTime sharefilesID;
+    private RString sharefilesID;
     private RString shorikubun;
     private YMDHMS shorinichiji;
 
@@ -48,7 +47,7 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
      */
     public ShutokuJohoShuchutsuRenkeiProcessParameter(FlexibleYear shorinendo,
             List<ShichosonJohoShutoku> shichosonJohoList, long shutsuryokujunID, ReportId chohyoID,
-            RString sharefilesname, RDateTime sharefilesID, RString shorikubun, YMDHMS shorinichiji) {
+            RString sharefilesname, RString sharefilesID, RString shorikubun, YMDHMS shorinichiji) {
         this.shorinendo = shorinendo;
         this.shichosonJohoList = shichosonJohoList;
         this.shutsuryokujunID = shutsuryokujunID;

@@ -32,6 +32,5 @@ public class CaluculateFukaTokuchoTeishiProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void afterExecute() {
-
     }
 }

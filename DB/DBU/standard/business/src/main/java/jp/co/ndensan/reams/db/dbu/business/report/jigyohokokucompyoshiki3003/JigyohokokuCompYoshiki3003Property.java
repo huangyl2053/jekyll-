@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * 介護事業状況報告月報・一般状況（様式1-3） のPropertyです。
  *
- * @reamsid_L DBU-5550-050 dangjingjing
+ * @reamsid_L DBU-5530-060 dangjingjing
  */
 public class JigyohokokuCompYoshiki3003Property extends ReportPropertyBase<JigyohokokuCompYoshiki3003ReportSource> {
 

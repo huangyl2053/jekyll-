@@ -124,9 +124,7 @@ public class ShikakuHenkoRirekiHandler {
             }
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
-            div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
-            div.getBtnHenkoKakutei().setVisible(true);
-            div.getBtnHenkoTorikeshi().setVisible(true);
+            div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
         }
         div.setInputMode(ViewExecutionStatus.Add.getValue());
     }
