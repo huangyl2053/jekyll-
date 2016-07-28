@@ -1638,10 +1638,10 @@ public final class ChkIchijiHanteiKekkaBusiness {
             認知機能4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番40).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番40));
         }
         if (識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
-            set認知機能差分99A(調査項目, dbt5211Entity);
+            return set認知機能差分99A(調査項目, dbt5211Entity);
         }
         if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
-            set認知機能差分02A(調査項目, dbt5211Entity);
+            return set認知機能差分02A(調査項目, dbt5211Entity);
         }
         return 認知機能4リスト;
     }
