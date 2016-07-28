@@ -11,8 +11,7 @@
         <association property="利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4014RiyoshaFutangakuGengakuMapper.ResultMap_DbT4014RiyoshaFutangakuGengakuEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>
-    <select resultOrdered="true" id="get利用者負担額減免の情報"
-            resultMap="resultMap_RiyoshaFutangakuGengakuEntity" fetchSize="500">
+    <select resultOrdered="true" id="get利用者負担額減免の情報" resultMap="resultMap_RiyoshaFutangakuGengakuEntity" fetchSize="500">
         SELECT
         DbT4014RiyoshaFutangakuGengaku.*,
         DbT4010GemmenGengakuShinsei.*
