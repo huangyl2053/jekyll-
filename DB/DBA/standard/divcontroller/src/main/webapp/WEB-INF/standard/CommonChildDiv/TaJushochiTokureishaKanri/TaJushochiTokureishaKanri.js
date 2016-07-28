@@ -45,7 +45,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -80,7 +79,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報入力";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -115,7 +113,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報入力";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -149,7 +146,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報入力";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -184,7 +180,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().displayNone = true;
                 };
