@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ue.uex.definition.core.DoteiFuitchiRiyu;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokuchoType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
@@ -49,8 +52,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class TokuchoTaishoshaIchiranHandler {
 
-    private final TokuchoTaishoshaIchiranDiv div;
-    private final TokuchoTaishoshaIchiranSakusei tokudoutei;
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
@@ -95,6 +96,8 @@ public class TokuchoTaishoshaIchiranHandler {
     private static final RString 特別徴収対象者一覧作成 = new RString("特別徴収対象者一覧作成");
     private static final RString 特別徴収対象者一覧確認 = new RString("特別徴収対象者一覧確認");
     private static final RString STATE特別徴収対象者一覧作成 = new RString("0");
+    private final TokuchoTaishoshaIchiranDiv div;
+    private final TokuchoTaishoshaIchiranSakusei tokudoutei;
 
     /**
      * コンストラクタです。
@@ -534,6 +537,39 @@ public class TokuchoTaishoshaIchiranHandler {
                     new CodeShubetsu(特別徴収義務者コード種別),
                     new Code(result.get登録済年金情報_特別徴収義務者コード())));
         }
+    }
+
+    /**
+     * 対象者検索戻る値の処理のメソドです。
+     *
+     * @param taishoshaKey TaishoshaKey
+     */
+    public void 対象者検索戻る値の処理(TaishoshaKey taishoshaKey) {
+        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
+        HihokenshaDaicho hihokenshaDaicho
+                = manager.find被保険者台帳(taishoshaKey.get被保険者番号(), FlexibleDate.getNowDate());
+        if (hihokenshaDaicho == null) {
+            div.getTxtHihokenshaNo().clearValue();
+            div.getTxtShutokuYMD().clearValue();
+            div.getTxtShutokuJiyu().clearValue();
+            div.getTxtSoshitsuYMD().clearValue();
+            div.getTxtSoshitsuJiyu().clearValue();
+        } else {
+            div.getTxtHihokenshaNo().setValue(hihokenshaDaicho.get被保険者番号().value());
+            div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(hihokenshaDaicho.get資格取得年月日()));
+            div.getTxtShutokuJiyu().setValue(hihokenshaDaicho.get資格取得事由コード());
+            div.getTxtSoshitsuYMD().setValue(DateConverter.flexibleDateToRDate(hihokenshaDaicho.get資格喪失年月日()));
+            div.getTxtSoshitsuJiyu().setValue(hihokenshaDaicho.get資格喪失事由コード());
+        }
+        RString 処理年度
+                = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
+        List<TokuchoDouteiKouhoshaShousaiJoho> result_詳細
+                = tokudoutei.getHihokenshaJoho(new FlexibleYear(処理年度), 特別徴収開始月);
+        if (result_詳細 != null && !result_詳細.isEmpty()) {
+            set特別徴収同定候補者詳細情報(result_詳細.get(NUM0));
+        }
+        ViewStateHolder.put(ViewStateKeys.資格対象者, null);
     }
 
     private void clean特別徴収同定候補者詳細情報() {
