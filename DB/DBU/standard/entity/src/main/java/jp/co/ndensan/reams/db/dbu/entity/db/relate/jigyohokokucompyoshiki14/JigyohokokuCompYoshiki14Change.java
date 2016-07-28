@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5） の一覧項目定義クラスです。
+ * 介護事業状況報告月報・一般状況（様式1-4） の一覧項目定義クラスです。
  *
  * @reamsid_L DBU-5530-070 dangjingjing
  */
