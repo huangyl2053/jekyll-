@@ -57,7 +57,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_1(),
                 data.get要介護認定者数_計_1(),
                 data.get要介護認定者数_合計_1()));
-
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_2(),
                 data.get食費居住費の特例減額措置_第2号被保険者_2(),
                 data.get食費居住費の特例減額措置_合計_2(),
@@ -72,7 +71,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_2(),
                 data.get要介護認定者数_計_2(),
                 data.get要介護認定者数_合計_2()));
-
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_3(),
                 data.get食費居住費の特例減額措置_第2号被保険者_3(),
                 data.get食費居住費の特例減額措置_合計_3(),
@@ -87,7 +85,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_3(),
                 data.get要介護認定者数_計_3(),
                 data.get要介護認定者数_合計_3()));
-
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_4(),
                 data.get食費居住費の特例減額措置_第2号被保険者_4(),
                 data.get食費居住費の特例減額措置_合計_4(),
@@ -102,7 +99,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_4(),
                 data.get要介護認定者数_計_4(),
                 data.get要介護認定者数_合計_4()));
-
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_5(),
                 data.get食費居住費の特例減額措置_第2号被保険者_5(),
                 data.get食費居住費の特例減額措置_合計_5(),
@@ -117,7 +113,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_5(),
                 data.get要介護認定者数_計_5(),
                 data.get要介護認定者数_合計_5()));
-
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_6(),
                 data.get食費居住費の特例減額措置_第2号被保険者_6(),
                 data.get食費居住費の特例減額措置_合計_6(),
@@ -132,7 +127,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_6(),
                 data.get要介護認定者数_計_6(),
                 data.get要介護認定者数_合計_6()));
-
         list.add(new JigyohokokuCompYoshiki151Change(data.get食費居住費の特例減額措置_第1号被保険者_7(),
                 data.get食費居住費の特例減額措置_第2号被保険者_7(),
                 data.get食費居住費の特例減額措置_合計_7(),
@@ -147,7 +141,6 @@ public class JigyohokokuCompYoshiki151Report extends Report<JigyohokokuCompYoshi
                 data.get要介護認定者数_要介護5_7(),
                 data.get要介護認定者数_計_7(),
                 data.get要介護認定者数_合計_7()));
-
         return list;
     }
 }
