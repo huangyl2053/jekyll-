@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuk
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.karisanteiidofuka.KariSanteiIdoFukaMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuFukaResultEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.ShikakuShutokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.karisanteiidofuka.TokubetuTyoushuuKaisiTempEntity;
@@ -31,6 +32,18 @@ public interface IKariSanteiIdoFukaBatchMapper {
      * 世帯員把握Temp一時テーブルを作成します
      */
     void create世帯員把握Temp();
+
+    /**
+     * 賦課の情報一時テーブルを作成します
+     */
+    void create賦課の情報一時テーブル();
+
+    /**
+     * insert賦課の情報一時テーブル
+     *
+     * @param entity DbT2002FukaJohoTempTableEntity
+     */
+    void insert賦課の情報一時テーブル(DbT2002FukaJohoTempTableEntity entity);
 
     /**
      * insert資格喪失Temp一時テーブル
