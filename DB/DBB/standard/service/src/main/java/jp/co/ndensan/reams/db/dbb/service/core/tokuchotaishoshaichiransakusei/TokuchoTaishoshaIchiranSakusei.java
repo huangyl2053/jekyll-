@@ -796,11 +796,9 @@ public class TokuchoTaishoshaIchiranSakusei {
      *
      * @param 処理年度 FlexibleYear
      * @param 開始月 RString
-     * @param 捕捉月リスト List<RString>
      * @return List<TokuchoDouteiKouhoshaShousaiJoho>
      */
-    public List<TokuchoDouteiKouhoshaShousaiJoho> getHihokenshaJoho(FlexibleYear 処理年度, RString 開始月,
-            List<RString> 捕捉月リスト) {
+    public List<TokuchoDouteiKouhoshaShousaiJoho> getHihokenshaJoho(FlexibleYear 処理年度, RString 開始月) {
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
         param.set処理年度(処理年度);
         mapper = mapperProvider.create(ITokuchoTaishoshaIchiranSakuseiMapper.class);
