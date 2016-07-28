@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBD-1570-030 x_lilh -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalPurposeListOutput.IGeneralPurposeListOutputMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput.IGeneralPurposeListOutputMapper">
     <resultMap id="resultMap_GeneralPurposeListOutputEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBDBT13011.GeneralPurposeListOutputEntity" autoMapping="true">
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_被保険者番号" column="被保険者台帳管理_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
