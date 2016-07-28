@@ -6,14 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000015;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000015.DBCMNK4001PanelAllDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
@@ -40,8 +36,8 @@ public class DBCMNK4001PanelAllHandler {
      */
     public void initialize() {
         // div.getTxtKonkaiShuryoDate().setReadOnly(true);
-        RString 処理済年度 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        /*RString 処理済年度 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度,
+         RDate.getNowDate(), SubGyomuCode.DBC介護給付);*/
         YMDHMS 前回抽出期間開始 = null;
         YMDHMS 前回抽出期間終了 = null;
         YMDHMS 今回抽出期間開始 = null;
