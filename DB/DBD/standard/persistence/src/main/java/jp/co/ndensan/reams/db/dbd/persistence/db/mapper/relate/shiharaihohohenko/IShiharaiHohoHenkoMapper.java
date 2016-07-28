@@ -27,7 +27,7 @@ public interface IShiharaiHohoHenkoMapper {
      * @param 被保険者番号 被保険者番号
      * @return 支払方法変更管理情報List
      */
-    List<ShiharaiHohoHenkoEntity> findShiharaiHohoHenko(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<ShiharaiHohoHenkoEntity> findShiharaiHohoHenko(HihokenshaNo 被保険者番号);
 
     /**
      * 償還払支給申請情報の取得
@@ -35,7 +35,7 @@ public interface IShiharaiHohoHenkoMapper {
      * @param 被保険者番号 被保険者番号
      * @return 償還払支給申請
      */
-    List<ShokanHaraiShikyuEntity> find償還払支給申請(@Param("被保険者番号") HihokenshaNo 被保険者番号);
+    List<ShokanHaraiShikyuEntity> find償還払支給申請(HihokenshaNo 被保険者番号);
 
     /**
      * 受給者or事業対象者の判定結果を取得します。
