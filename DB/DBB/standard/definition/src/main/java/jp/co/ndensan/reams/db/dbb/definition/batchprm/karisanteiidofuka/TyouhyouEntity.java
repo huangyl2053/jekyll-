@@ -25,7 +25,13 @@ public class TyouhyouEntity implements Serializable {
     private RString 出力順ID;
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     */
+    public TyouhyouEntity() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 出力順ID ReportId
      * @param 帳票ID RString
