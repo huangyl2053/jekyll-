@@ -191,14 +191,16 @@ public class NinteichosaItakusakiMainHandler {
         row.setJusho(nullToEmpty(jusho));
         row.setJushoKana(nullToEmpty(jushoKana));
         row.setTelNo(telNo.value());
-        if (chosaItakuKubun != null) {
+        if (!RString.isNullOrEmpty(chosaItakuKubun)) {
             row.setChosaItakuKubun(nullToEmpty(ChosaItakuKubunCode.toValue(chosaItakuKubun).get名称()));
         }
         TextBoxNum num = new TextBoxNum();
         num.setValue(new Decimal(waritsukeTeiin));
         row.setWaritsukeTeiin(num);
         row.setChiku(chiku.value());
-        row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
+        if (!RString.isNullOrEmpty(kikanKubun)) {
+            row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
+        }
         if (jokyoFlag) {
             row.setJokyoFlag(表示値_無効);
         } else {
