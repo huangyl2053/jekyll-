@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 要介護認定申請情報のマッピング用XMLです。 -->
-
+<!-- @reamsid_L DBE-1500-020 wanghui -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinchokudataoutput.IShinchokuDataOutputMapper">
 <resultMap id="resultMap_NinteiChosaHoshuJissekiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.NinteichosahyoServiceJokyoRelateEntity" autoMapping="true">
