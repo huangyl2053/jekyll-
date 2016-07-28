@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class SinsaSeikyusyoJohoHandler {
 
     private final SinsaSeikyusyoPanelDiv sinsadiv;
-    private static final RString 照会 = new RString("照会");
-    private static final RString 修正 = new RString("修正");
     private static final RString 共通ボタン = new RString("Element2");
 
     /**
@@ -41,22 +39,13 @@ public class SinsaSeikyusyoJohoHandler {
      * onLoad処理です。
      *
      * @param sinsaSeikyusyoJohoList 審査請求書登録明細情報
-     * @param 画面モード 画面モード
      */
-    public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList, RString 画面モード) {
-        if (照会.equals(画面モード)) {
-            sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
+    public void onLoad(List<FufukuMoshitate> sinsaSeikyusyoJohoList) {
+        sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
+        if (UrControlDataFactory.createInstance().getMenuID().equals(new RString("DBUMN71001"))) {
+            sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(true);
+        } else {
             sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(false);
-            sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowModifyButtonColumn(false);
-            sinsadiv.getGrdSinsaSeikyusyoJoho().getGridSetting().setIsShowDeleteButtonColumn(false);
-        }
-        if (修正.equals(画面モード)) {
-            sinsadiv.getGrdSinsaSeikyusyoJoho().setDataSource(setDataSourcre(sinsaSeikyusyoJohoList));
-            if (UrControlDataFactory.createInstance().getMenuID().equals(new RString("DBUMN71001"))) {
-                sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(true);
-            } else {
-                sinsadiv.getSinsaSeikyusyoJohoPane1().getBtnTuika().setVisible(false);
-            }
         }
         if (UrControlDataFactory.createInstance().getMenuID().equals(new RString("DBUMN71002"))) {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, true);

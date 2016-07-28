@@ -48,7 +48,7 @@ public class SinsaSeikyusyoPanel {
                 = SinsaSeikyusyoJohoFinder.createInstance().getSinsaSeikyusyoJohoList(
                         shikibetsuCode,
                         hihokenshaNo).records();
-        getHandler(div).onLoad(sinsaSeikyusyoJohoList, ViewStateHolder.get(ViewStateKeys.状態, RString.class));
+        getHandler(div).onLoad(sinsaSeikyusyoJohoList);
         return createResponse(div);
     }
 

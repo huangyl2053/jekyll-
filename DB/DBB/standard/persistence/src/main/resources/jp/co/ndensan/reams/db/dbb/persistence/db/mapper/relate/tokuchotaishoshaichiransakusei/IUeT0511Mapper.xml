@@ -202,7 +202,7 @@
         <where>
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-            AND
+            AND(
             (
                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '10'
@@ -221,7 +221,7 @@
             (
                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
-            )
+            ))
         </where>
     </select>
 <select resultOrdered="true" id="selectJun" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
@@ -232,7 +232,7 @@
         <where>
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-            AND
+            AND(
             (
                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '12'
@@ -256,7 +256,7 @@
             (
                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
-            )
+            ))
         </where>
     </select>
     <select resultOrdered="true" id="selectAug" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
@@ -323,7 +323,7 @@
         <where>
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
-           AND(                
+           AND((                
                   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '06'
             )   
@@ -331,7 +331,7 @@
             (
                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
-            )
+            ))
         </where>
     </select>
     <select resultOrdered="true" id="selectFeb" resultMap="resultMap_UeT0511NenkinTokuchoKaifuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
@@ -343,7 +343,8 @@
                 "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
             AND(                
-                 "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
+            (
+                "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '30'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '08'
             )   
             OR
@@ -355,7 +356,7 @@
             (
                  "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
-            )
+            ))
         </where>
     </select>    
 </mapper>

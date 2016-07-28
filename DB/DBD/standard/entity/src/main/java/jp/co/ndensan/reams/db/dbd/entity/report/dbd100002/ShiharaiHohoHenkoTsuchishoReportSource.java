@@ -173,6 +173,12 @@ public class ShiharaiHohoHenkoTsuchishoReportSource implements IReportSource {
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 77)
     public RString koinShoryaku;
+
+// </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="User Customize Area">
+    //追加コードは以下（「User Customize Area」内）に記述してください。
+    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
+    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "renrakusakiHokaJodanLarge", order = 78)
     public RString renrakusakiHokaJodanLarge;
     @ReportItem(name = "renrakusakiHokaGedanSmall", order = 79)
@@ -181,10 +187,5 @@ public class ShiharaiHohoHenkoTsuchishoReportSource implements IReportSource {
     public RString shikibetsuCode;
     @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
     public RString hihokenshaNo;
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    //追加コードは以下（「User Customize Area」内）に記述してください。
-    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
-    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
 }

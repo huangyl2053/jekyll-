@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.To
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gennendohonsanteiidou.TsuchishoNoCreateParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.CalculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.CozaIdoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gennendohonsanteiidou.FukaJouhouEntity;
@@ -374,6 +375,18 @@ public interface IGenNendoHonsanteiIdouMapper {
      * @return List<CalculateFukaEntity>
      */
     List<CalculateFukaEntity> get賦課計算の情報(CalculateFukaParameter param);
+
+    /**
+     * 賦課情報一時テーブルを作成します。
+     */
+    void createDbT2002FukaJohoTemp();
+
+    /**
+     * 賦課情報一時テーブルを登録します。
+     *
+     * @param entity DbT2002FukaJohoTempTableEntity
+     */
+    void insert賦課の情報一時テーブル(DbT2002FukaJohoTempTableEntity entity);
 
     /**
      * 特徴依頼金計算の情報を取得します。

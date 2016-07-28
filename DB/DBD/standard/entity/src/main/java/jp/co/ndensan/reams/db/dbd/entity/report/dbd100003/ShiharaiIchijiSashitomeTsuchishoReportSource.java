@@ -6,6 +6,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
+/**
+ * 支払一時差止通知書ReportSourceです。
+ *
+ * @reamsid_L DBD-3640-100 b_liuyang2
+ */
 public class ShiharaiIchijiSashitomeTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -169,6 +174,12 @@ public class ShiharaiIchijiSashitomeTsuchishoReportSource implements IReportSour
     public RString ninshoshaShimeiKakeru;
     @ReportItem(name = "koinShoryaku", length = 15, order = 80)
     public RString koinShoryaku;
+
+// </editor-fold>
+// <editor-fold defaultstate="collapsed" desc="User Customize Area">
+    //追加コードは以下（「User Customize Area」内）に記述してください。
+    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
+    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "renrakusakiHokaLarge", order = 81)
     public RString renrakusakiHokaLarge;
     @ReportItem(name = "renrakusakiHokaJodanSmall", order = 82)
@@ -179,10 +190,5 @@ public class ShiharaiIchijiSashitomeTsuchishoReportSource implements IReportSour
     public RString shikibetsuCode;
     @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
     public RString hihokenshaNo;
-// </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    //追加コードは以下（「User Customize Area」内）に記述してください。
-    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
-    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
 }

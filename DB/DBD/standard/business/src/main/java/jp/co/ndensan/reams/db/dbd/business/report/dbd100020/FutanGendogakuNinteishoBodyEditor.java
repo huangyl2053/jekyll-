@@ -178,7 +178,12 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         setshokujiGendoGaku1(source, item);
         setshokujiGendoGaku2(source, item);
         setshokujiGendoGaku3(source, item);
-        setshokujiGendoGaku4(source, item);
+        if (KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
+                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
+            setshokujiGendoGaku4_1(source, item);
+        } else {
+            setshokujiGendoGaku4_2(source, item);
+        }
         setshokujiGendoGaku5(source, item);
     }
 
@@ -242,34 +247,33 @@ public class FutanGendogakuNinteishoBodyEditor implements IFutanGendogakuNinteis
         }
     }
 
-    private void setshokujiGendoGaku4(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
-        if (KyuSochishaKubun.旧措置者.getコード().equals(item.get負担限度額認定().get旧措置者区分())
-                || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
-            if (!Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
-                source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get多床室(), 0);
-                source.en5 = 金額単位;
-            } else {
-                if (item.get負担限度額認定().is境界層該当者区分()
-                        || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
-                    source.kyojuhiGendoGaku4 = ハイフン;
-                } else {
-                    source.kyojuhiGendoGaku4 = RString.EMPTY;
-                }
-                source.en5 = RString.EMPTY;
-            }
+    private void setshokujiGendoGaku4_1(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
+        if (!Decimal.ZERO.equals(item.get負担限度額認定().get多床室()) && (item.get負担限度額認定().get多床室() != null)) {
+            source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get多床室(), 0);
+            source.en5 = 金額単位;
         } else {
-            if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_老健_療養等())
-                    && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
-                source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_老健_療養等(), 0);
-                source.en5 = 金額単位;
+            if (item.get負担限度額認定().is境界層該当者区分()
+                    || KyuSochishaKubun.旧措置者実質的負担軽減者.getコード().equals(item.get負担限度額認定().get旧措置者区分())) {
+                source.kyojuhiGendoGaku4 = ハイフン;
             } else {
-                if (item.get負担限度額認定().is境界層該当者区分()) {
-                    source.kyojuhiGendoGaku4 = ハイフン;
-                } else {
-                    source.kyojuhiGendoGaku4 = RString.EMPTY;
-                }
-                source.en5 = RString.EMPTY;
+                source.kyojuhiGendoGaku4 = RString.EMPTY;
             }
+            source.en5 = RString.EMPTY;
+        }
+    }
+
+    private void setshokujiGendoGaku4_2(FutanGendogakuNinteishoReportSource source, FutanGendogakuNinteishoItem item) {
+        if (!Decimal.ZERO.equals(item.get負担限度額認定().get従来型個室_老健_療養等())
+                && (item.get負担限度額認定().get従来型個室_老健_療養等() != null)) {
+            source.kyojuhiGendoGaku4 = DecimalFormatter.toコンマ区切りRString(item.get負担限度額認定().get従来型個室_老健_療養等(), 0);
+            source.en5 = 金額単位;
+        } else {
+            if (item.get負担限度額認定().is境界層該当者区分()) {
+                source.kyojuhiGendoGaku4 = ハイフン;
+            } else {
+                source.kyojuhiGendoGaku4 = RString.EMPTY;
+            }
+            source.en5 = RString.EMPTY;
         }
     }
 

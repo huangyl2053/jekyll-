@@ -9,13 +9,21 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJoho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJoho.logicalDeletedFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJoho.ninteiShinseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJoho.shinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJoho.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -30,6 +38,7 @@ public class DbT4101NinteiShinseiJohoDac implements IModifiable<INinteiShinseiJo
 
     @InjectSession
     private SqlSession session;
+    private static final RString SHINSEISHOKANRINO = new RString("申請書管理番号");
 
     /**
      * 主キーで要介護認定申請情報を取得します。
@@ -40,7 +49,7 @@ public class DbT4101NinteiShinseiJohoDac implements IModifiable<INinteiShinseiJo
      */
     @Transaction
     public Optional<DbT4101NinteiShinseiJohoEntity> selectByKey(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(SHINSEISHOKANRINO.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -49,6 +58,45 @@ public class DbT4101NinteiShinseiJohoDac implements IModifiable<INinteiShinseiJo
                 where(
                         eq(shinseishoKanriNo, 申請書管理番号)).
                 toObject(DbT4101NinteiShinseiJohoEntity.class));
+    }
+
+    /**
+     * 主キーで要介護認定申請情報を取得します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return DbT4101NinteiShinseiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4101NinteiShinseiJohoEntity selectByZenkaiShinseishoKanriNo(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(SHINSEISHOKANRINO.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4101NinteiShinseiJoho.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
+                toObject(DbT4101NinteiShinseiJohoEntity.class);
+    }
+
+    /**
+     * 保険者番号と被保番号で要介護認定申請情報を取得します。
+     *
+     * @param 保険者番号 保険者番号
+     * @param 被保番号 被保番号
+     * @return DbT4101NinteiShinseiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4101NinteiShinseiJohoEntity selectByShokiAndHiho(RString 保険者番号, RString 被保番号) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4101NinteiShinseiJoho.class).
+                where(and(
+                                eq(shoKisaiHokenshaNo, 保険者番号),
+                                eq(hihokenshaNo, 被保番号),
+                                eq(logicalDeletedFlag, false))).order(by(ninteiShinseiYMD, Order.DESC)).limit(1).
+                toObject(DbT4101NinteiShinseiJohoEntity.class);
     }
 
     /**

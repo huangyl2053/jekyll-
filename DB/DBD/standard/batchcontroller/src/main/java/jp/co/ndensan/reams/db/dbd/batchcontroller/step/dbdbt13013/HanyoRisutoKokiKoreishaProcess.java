@@ -936,7 +936,6 @@ public class HanyoRisutoKokiKoreishaProcess extends BatchProcessBase<HanyoRisuto
         Association 地方公共団体 = finder.getAssociation(processParamter.getAtenacyusyutsujyoken().getShichoson_Code());
         builder.append(地方公共団体.get市町村名());
         出力条件.add(builder.toRString());
-        builder = new RStringBuilder();
         //TODO QA確認を待ち
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 new RString("DBD701012"),

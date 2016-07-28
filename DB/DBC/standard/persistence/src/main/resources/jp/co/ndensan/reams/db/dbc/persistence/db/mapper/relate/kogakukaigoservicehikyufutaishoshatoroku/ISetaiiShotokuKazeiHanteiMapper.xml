@@ -4,154 +4,6 @@
 <!-- @reamsid_L DBC-2010-090 jiangzongyue -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper">
-    <!-- for test -->
-     <insert id="creat世帯員把握入力高額一時"> 
-        CREATE TEMP TABLE "TempSetaiinHaakuNyuryoku"
-        ( "hihokenshaNo" character varying(10),
-          "shotokuNendo" rshare."UDD012YSeireki",
-          "shikibetsuCode" rshare."UDD001ShikibetsuCode", 
-          "kijunYMD" rshare."UDD015YMD",
-          "jushochiTokureiFlag" character varying(1)
-        )
-    </insert>
-    
-     <!-- for test -->
-     <insert id="creat世帯員把握入力事業高額一時"> 
-        CREATE TEMP TABLE "TempSetaiinHaakuNyuryokuJigyo"
-        ( "hihokenshaNo" character varying(10),
-          "shotokuNendo" rshare."UDD012YSeireki",
-          "setaiInshikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "shikibetsuCode" rshare."UDD001ShikibetsuCode", 
-          "kijunYMD" rshare."UDD015YMD",
-          "jushochiTokureiFlag" character varying(1)
-        )
-    </insert>
-    
-    <!-- for test -->
-    <insert id="insert世帯員把握入力高額一時">
-        INSERT INTO "TempSetaiinHaakuNyuryoku"
-        (
-           "hihokenshaNo",
-           "shotokuNendo",
-           "shikibetsuCode",
-           "kijunYMD",
-           "jushochiTokureiFlag"
-        )
-        VALUES(
-            '0000000014',
-            '2015',
-            '000000000005005',
-            '20150908',
-            '1'
-        ) 
-    </insert>
-    
-    <!-- for test -->
-    <insert id="insert世帯員把握入力高額一時test1">
-        INSERT INTO "TempSetaiinHaakuNyuryoku"
-        (
-           "hihokenshaNo",
-           "shotokuNendo",
-           "shikibetsuCode",
-           "kijunYMD",
-           "jushochiTokureiFlag"
-        )
-        VALUES(
-            '0000000013',
-            '2015',
-            '000000000005005',
-            '20150908',
-            '0'
-        ) 
-    </insert>
-    
-    <!-- for test -->
-    <insert id="insert世帯員把握入力事業高額一時">
-       INSERT INTO "TempSetaiinHaakuNyuryokuJigyo"
-        (
-           "hihokenshaNo",
-           "shotokuNendo",
-           "setaiInshikibetsuCode",
-           "shikibetsuCode",
-           "kijunYMD",
-           "jushochiTokureiFlag"
-        )
-        VALUES(
-            '0000000014',
-            '2015',
-            '000000001111111',
-            '000000000005005',
-            '20150908',
-            '1'
-        ) 
-    </insert>
-    
-    <!-- for test -->
-    <insert id="insert世帯員把握入力事業高額一時test">
-       INSERT INTO "TempSetaiinHaakuNyuryokuJigyo"
-        (
-           "hihokenshaNo",
-           "shotokuNendo",
-           "setaiInshikibetsuCode",
-           "shikibetsuCode",
-           "kijunYMD",
-           "jushochiTokureiFlag"
-        )
-        VALUES(
-            '0000000013',
-            '2015',
-            '000000001111111',
-            '000000000005005',
-            '20150908',
-            '0'
-        ) 
-    </insert>
-    
-    <!-- for test -->
-    <insert id="insertFortestJuminShotokuJoho">
-       INSERT INTO "TmpSetaiHaakuNyuryoku"
-        (
-           "hihokenshaNo",
-           "shikibetsuCode",
-           "shotokuNendo",
-           "kijunYMD",
-           "jushochiTokureiFlag"
-        )
-        VALUES(
-            '0000000013',
-            '210000000000077',
-            '2015',
-            '20250908',
-            '0'
-        ) 
-    </insert>
-    
-    <!--世帯員所得情報高額一時テーブルを作成する -->
-    <insert id="creat世帯員所得情報高額一時"> 
-        CREATE TEMP TABLE "TmpSetaiHaakuNyuryoku"
-        ( "hihokenshaNo" character varying(10),
-          "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "kijunYMD" rshare."UDD015YMD",
-          "shotokuNendo" rshare."UDD012YSeireki", 
-          "jushochiTokureiFlag" character varying(1), 
-          "setaiCode"  rshare."UDD051SetaiCode",
-          "honninKubun"  character varying(1),
-          "kazeiKubun"  character varying(1),
-          "kazeiKubunGemmenGo" character varying(1),
-          "gekihenKanwaKubun" character varying(1), 
-          "gokeiShotokuGaku" numeric(12,0),
-          "nenkiniShunyuGaku" numeric(12,0), 
-          "nenkiniShotokuGaku" numeric(12,0),
-          "kazeiShotokuGaku" numeric(12,0),
-          "torokuGyomu" character varying(1),
-          "shichosonCode" rshare."UDD023LasdecCode",
-          "shoboKubun" character varying(1), 
-          "roreiFukushiKubun" character varying(1), 
-          "setaiinHihokenshaNo" character varying(10),
-          "honninKazeiKubun" character varying(1),
-          "setaiKazeiKubun" character varying(1)
-        )
-    </insert>
     
     <resultMap id="resultMap_TmpSetaiHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity" autoMapping="true">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -176,34 +28,6 @@
         <result property="honninKazeiKubun" column="honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
-    <!-- 世帯員所得情報事業高額一時テーブルを作成する -->
-    <insert id="creat世帯員所得情報事業高額一時"> 
-        CREATE TEMP TABLE "TmpSetaiJigyoHaakuNyuryoku"
-        ( "hihokenshaNo" character varying(10),
-          "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "setaiInshikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "kijunYMD" rshare."UDD015YMD",
-          "shotokuNendo" rshare."UDD012YSeireki", 
-          "jushochiTokureiFlag" character varying(1), 
-          "setaiCode"  rshare."UDD051SetaiCode",
-          "honninKubun"  character varying(1),
-          "kazeiKubun"  character varying(1),
-          "kazeiKubunGemmenGo" character varying(1),
-          "gekihenKanwaKubun" character varying(1), 
-          "gokeiShotokuGaku" numeric(12,0),
-          "nenkiniShunyuGaku" numeric(12,0), 
-          "nenkiniShotokuGaku" numeric(12,0),
-          "kazeiShotokuGaku" numeric(12,0),
-          "torokuGyomu" character varying(1),
-          "shichosonCode" rshare."UDD023LasdecCode",
-          "shoboKubun" character varying(1), 
-          "roreiFukushiKubun" character varying(1), 
-          "setaiinHihokenshaNo" character varying(10),
-          "honninKazeiKubun" character varying(1),
-          "setaiKazeiKubun" character varying(1)
-        )
-    </insert>
     
     <resultMap id="resultMap_TmpSetaiJigyoHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -435,11 +259,12 @@
     <select resultOrdered="true" id="select世帯員所得情報高額一時に一括" resultMap="resultMap_TempSetaiinHaakuNyuryoku" fetchSize="500">
         SELECT 
             "TempSetai".*
-        FROM "TempSetaiinHaakuNyuryoku" AS "TempSetai",
-             "TmpSetaiHaakuNyuryoku" AS "TmpSetaiHaaku" 
-        WHERE "TempSetai"."hihokenshaNo"<![CDATA[!=]]> "TmpSetaiHaaku"."hihokenshaNo"
+        FROM "TempSetaiinHaakuNyuryoku" AS "TempSetai"
+        WHERE NOT EXISTS (SELECT 'X'
+        FROM "TmpSetaiHaakuNyuryoku" AS "TmpSetaiHaaku"
+        WHERE "TempSetai"."hihokenshaNo" = "TmpSetaiHaaku"."hihokenshaNo")
     </select>
-    
+
     <resultMap id="resultMap_TempSetaiinHaakuNyuryokuJigyo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinJigyoHaakuNyuryokuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -453,9 +278,10 @@
     <select resultOrdered="true" id="select世帯員所得情報事業高額一時に一括" resultMap="resultMap_TempSetaiinHaakuNyuryokuJigyo" fetchSize="500">
         SELECT 
             "TempSetaiJigyo".*
-        FROM "TempSetaiinHaakuNyuryokuJigyo" AS "TempSetaiJigyo",
-             "TmpSetaiJigyoHaakuNyuryoku" AS "TmpSetaiHaakuJigyo" 
-        WHERE "TempSetaiJigyo"."hihokenshaNo"<![CDATA[!=]]> "TmpSetaiHaakuJigyo"."hihokenshaNo"
+        FROM "TempSetaiinHaakuNyuryokuJigyo" AS "TempSetaiJigyo"
+        WHERE NOT EXISTS (SELECT 'X'
+        FROM "TmpSetaiJigyoHaakuNyuryoku" AS "TmpSetaiHaakuJigyo"
+        WHERE "TempSetaiJigyo"."hihokenshaNo" = "TmpSetaiHaakuJigyo"."hihokenshaNo") 
     </select>
     
     <!-- update世帯員所得情報高額一時合併内住所地特例者番号変換処理-->

@@ -33,7 +33,7 @@ public class DBCMNK4001PanelAll {
     }
 
     /**
-     * 「差額設定による対象外件数を算出する」ボタンのメソッドます。
+     * 抽出期間の大小チェックのメソッドます。
      *
      * @param div DBCMNK4001PanelAllDiv
      * @return ResponseData
@@ -44,7 +44,7 @@ public class DBCMNK4001PanelAll {
         YMDHMS 今回抽出期間開始日時 = new YMDHMS(div.getTxtKonkaiKaishiDate().getValue(),
                 div.getTxtKonkaiKaishiTime().getValue());
         if (今回抽出期間終了日時.isBefore(今回抽出期間開始日時)) {
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).大小関係が不正();
+            ValidationMessageControlPairs validPairs = getValidationHandler().大小関係が不正();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
@@ -53,7 +53,7 @@ public class DBCMNK4001PanelAll {
     }
 
     /**
-     * 抽出期間の大小チェックのメソッドます。
+     * バッチパラメータの設定のメソッドます。
      *
      * @param div DBCMNK4001PanelAllDiv
      * @return ResponseData
@@ -72,7 +72,7 @@ public class DBCMNK4001PanelAll {
         return new DBCMNK4001PanelAllHandler(div);
     }
 
-    private DBCMNK4001PanelAllValidationHandler getValidationHandler(DBCMNK4001PanelAllDiv div) {
-        return new DBCMNK4001PanelAllValidationHandler(div);
+    private DBCMNK4001PanelAllValidationHandler getValidationHandler() {
+        return new DBCMNK4001PanelAllValidationHandler();
     }
 }

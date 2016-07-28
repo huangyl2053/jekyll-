@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0110001;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001.TokutyoKariSanteiFukaDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0110001.TokutyoKariSanteiFukaValidationHandler;
@@ -40,8 +40,8 @@ public class TokutyoKariSanteiFuka {
      * @return レスポンスデータ
      *
      */
-    public ResponseData<TokuchoKariSanteiParameter> onClick_btnSantei(TokutyoKariSanteiFukaDiv div) {
-        TokuchoKariSanteiParameter param = getHandler(div).特徴仮算定通知書一括発行BatchParam(div);
+    public ResponseData<TokuchoKaishiTsuchishoBatchParameter> onClick_btnSantei(TokutyoKariSanteiFukaDiv div) {
+        TokuchoKaishiTsuchishoBatchParameter param = getHandler(div).特徴仮算定通知書一括発行BatchParam(div);
         return ResponseData.of(param).respond();
     }
 

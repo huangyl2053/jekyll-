@@ -66,9 +66,7 @@ public class JigyohokokuCompYoshiki152Report extends Report<JigyohokokuCompYoshi
                 data.get介護給付_地域密着型_要介護5_1(),
                 data.get介護給付_地域密着型_その他_1(),
                 data.get介護給付_地域密着型_要介護合計_1(),
-                data.get地域密着型_サービス受給者数合計_1()
-        ));
-
+                data.get地域密着型_サービス受給者数合計_1()));
         bodyDatalist.add(new JigyohokokuCompYoshiki152Change(data.get予防給付_居宅介護_要支援1_2(),
                 data.get予防給付_居宅介護_要支援2_2(),
                 data.get予防給付_居宅介護_要支援合計_2(),
@@ -92,9 +90,7 @@ public class JigyohokokuCompYoshiki152Report extends Report<JigyohokokuCompYoshi
                 data.get介護給付_地域密着型_要介護5_2(),
                 data.get介護給付_地域密着型_その他_2(),
                 data.get介護給付_地域密着型_要介護合計_2(),
-                data.get地域密着型_サービス受給者数合計_2()
-        ));
-
+                data.get地域密着型_サービス受給者数合計_2()));
         bodyDatalist.add(new JigyohokokuCompYoshiki152Change(data.get予防給付_居宅介護_要支援1_3(),
                 data.get予防給付_居宅介護_要支援2_3(),
                 data.get予防給付_居宅介護_要支援合計_3(),
@@ -118,8 +114,7 @@ public class JigyohokokuCompYoshiki152Report extends Report<JigyohokokuCompYoshi
                 data.get介護給付_地域密着型_要介護5_3(),
                 data.get介護給付_地域密着型_その他_3(),
                 data.get介護給付_地域密着型_要介護合計_3(),
-                data.get地域密着型_サービス受給者数合計_3()
-        ));
+                data.get地域密着型_サービス受給者数合計_3()));
         return bodyDatalist;
     }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko;
 
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.FutanGendogakuNinteishoPrintService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,16 +15,16 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.report.GemmenGengakuNinteishoKetteiTsuchisho;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100017.HomKaigRiysFutgGengNinteishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.RiysFutgGengMenjNinteishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100022.TokubchiiKasHomKaigRiysFutGengKakuninshoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100011.HomKaigRiysFutgGengKettTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100009.RiysFutgGengMenjKettTsuchishoItem;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100011.HomKaigRiysFutgGengKettTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100012.ShakFuksHjRiysFutKgTsKtTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100013.FutanGendogakuKetteiTsuchishoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100015.RiysFutgGengMenjNinteishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100017.HomKaigRiysFutgGengNinteishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100020.FutanGendogakuNinteishoItem;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100022.TokubchiiKasHomKaigRiysFutGengKakuninshoItem;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.AtesakiPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.util.ShikibetsuTaishoPSMMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -37,11 +36,12 @@ import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenManager;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.FutanGendogakuKetteiTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.FutanGendogakuNinteishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutGenmKettTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutgGengKettsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.HomKaigRiysFutgGengNintshoPrintService;
-import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.RiysFutgGengMenjNinteishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.RiysFutgGengMenjKettTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.RiysFutgGengMenjNinteishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.ShakFukusHojRiysFutKeigTaisKetTsuchishoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.ShakfukusRiysFutKeigTaisKakuninshoPrintService;
 import jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.printservice.TokubChiiKasRiysFutGengKakuninshoPrintService;
@@ -334,11 +334,7 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
 
     private List get通知書定型文List(ReportId 帳票分類ID, DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity, List<RString> 帳票タイプリスト) {
         List<RString> 通知書定型文List = new ArrayList<>();
-        if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプリスト.get(0))
-                || GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプリスト.get(0))
-                || GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減決定通知書.get名称().equals(帳票タイプリスト.get(0))
-                || GemmenGengakuNinteishoKetteiTsuchisho.訪問介護等利用者負担額減額決定通知書.get名称().equals(帳票タイプリスト.get(0))
-                || GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプリスト.get(0))) {
+        if (is通知書発行(帳票タイプリスト)) {
             int パターン番号 = 0;
             if (TeikeibunMojiSize.フォント小.getコード().equals(dbT7065Entity.getTeikeibunMojiSize())) {
                 パターン番号 = パターン番号_１;
@@ -355,6 +351,19 @@ public class GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko {
             }
         }
         return 通知書定型文List;
+    }
+
+    private boolean is通知書発行(List<RString> 帳票タイプリスト) {
+        for (RString 帳票タイプ : 帳票タイプリスト) {
+            if (GemmenGengakuNinteishoKetteiTsuchisho.利用者負担額減額_免除決定通知書.get名称().equals(帳票タイプ)
+                    || GemmenGengakuNinteishoKetteiTsuchisho.負担限度額決定通知書.get名称().equals(帳票タイプ)
+                    || GemmenGengakuNinteishoKetteiTsuchisho.社会福祉法人等利用者負担軽減決定通知書.get名称().equals(帳票タイプ)
+                    || GemmenGengakuNinteishoKetteiTsuchisho.訪問介護等利用者負担額減額決定通知書.get名称().equals(帳票タイプ)
+                    || GemmenGengakuNinteishoKetteiTsuchisho.特別地域加算減免_訪問介護利用者負担減額決定通知書.get名称().equals(帳票タイプ)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private ReportId get帳票分類ID(RString 帳票タイプ) {

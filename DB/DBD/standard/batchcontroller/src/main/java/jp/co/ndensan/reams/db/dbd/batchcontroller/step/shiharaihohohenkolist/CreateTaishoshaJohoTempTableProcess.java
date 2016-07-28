@@ -39,7 +39,7 @@ public class CreateTaishoshaJohoTempTableProcess extends BatchProcessBase<Hihoke
 //    private RString 市町村名;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
-    private final RString TABLE_NAME = new RString("TaishoshaJohoTempTable");
+    private static final RString TABLE_NAME = new RString("TaishoshaJohoTempTable");
 
     @Override
     protected void beforeExecute() {

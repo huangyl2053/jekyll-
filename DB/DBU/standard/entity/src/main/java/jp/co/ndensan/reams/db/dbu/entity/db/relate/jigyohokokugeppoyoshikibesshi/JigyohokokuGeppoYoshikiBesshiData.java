@@ -28,7 +28,6 @@ public class JigyohokokuGeppoYoshikiBesshiData {
     private RString 項目標題列2;
     private RString 項目標題列3;
     private RString 項目標題列4;
-
     private RString 前月末現在の集計結果値_1;
     private RString 当月中増の集計結果値_1;
     private RString 当月中減の集計結果値_1;

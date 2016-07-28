@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -45,12 +46,14 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
     private static final RString 番号_4 = new RString("4");
     private static final RString 番号_5 = new RString("5");
     private static final RString 番号_6 = new RString("6");
-    private static final int 桁_5 = 5;
+    private static final int 桁_4 = 4;
+    private static final int 桁_3 = 3;
     private RDate 基準日;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString csvFileName;
     private JigyoHokokuRenkeiProcessParameter processParameter;
+    private JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity = new JigyoHokokuRenkeiEntity();
 
     @Override
     protected void initialize() {
@@ -84,23 +87,22 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
 
     @Override
     protected void process(DbT7021JigyoHokokuTokeiDataEntity entity) {
-        get様式1のCSV出力(entity);
+        jigyoHokokuRenkeiEntity = get様式1の項目編集(entity, new RString("0200"), new RString("0301"), new RString("0302"), jigyoHokokuRenkeiEntity);
     }
 
     @Override
     protected void afterExecute() {
+        get様式1のCSV出力();
         eucCsvWriter.close();
         manager.spool(eucFilePath);
     }
 
-    private void get様式1のCSV出力(DbT7021JigyoHokokuTokeiDataEntity entity) {
-        JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity
-                = get様式1の項目編集(entity, new RString("0200"), new RString("0301"), new RString("0302"));
+    private void get様式1のCSV出力() {
         eucCsvWriter.writeLine(
                 new JigyoHokokuRenkeiEucCsvEntity(
-                        entity.getShukeiTaishoYSeireki().wareki().getYear(),
-                        entity.getShukeiTaishoM(),
-                        entity.getShichosonCode().getColumnValue().substring(0, 桁_5),
+                        dateFormat(processParameter.get過去集計年月()),
+                        processParameter.get過去集計年月().substring(桁_4),
+                        DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBE認定支援),
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -144,8 +146,9 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
-            RString 集計番号_03) {
-        JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity = new JigyoHokokuRenkeiEntity();
+            RString 集計番号_03,
+            JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
+
         if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD005(new RString(entity.getShukeiKekkaAtai().toString()));
@@ -274,5 +277,13 @@ public class JigyoHokokuRenkeiHokenYousikiIchiProcess extends BatchProcessBase<D
             }
         }
         return jigyoHokokuRenkeiEntity;
+    }
+
+    private RString dateFormat(RString date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        FlexibleDate flexibleDate = new FlexibleDate(date);
+        return flexibleDate.wareki().toDateString().substring(0, 桁_3);
     }
 }

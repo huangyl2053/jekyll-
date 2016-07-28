@@ -32,7 +32,7 @@ public interface IYokaigoNinteiJohoMapper {
      * @param 申請書管理番号 申請書管理番号
      * @return 今回認定情報 List<YokaigoNinteiJohoEntity>
      */
-    List<YokaigoNinteiJohoEntity> get今回認定情報WITH結果情報(@Param("申請書管理番号") RString 申請書管理番号);
+    List<YokaigoNinteiJohoEntity> get今回認定情報WITH結果情報(@Param("申請書管理番号WITH結果情報") RString 申請書管理番号);
 
     /**
      * 前回認定情報の取得します。

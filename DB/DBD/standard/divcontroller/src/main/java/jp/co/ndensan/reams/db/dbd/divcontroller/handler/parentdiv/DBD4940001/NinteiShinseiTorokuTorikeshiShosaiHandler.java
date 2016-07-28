@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryo
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -70,12 +69,11 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
     /**
      * 画面初期化処理です。
      *
-     * @param 識別コード ShikibetsuCode
      * @param 被保険者番号 RString
      *
      * @return 認定情報 YokaigoNinteiJoho
      */
-    public YokaigoNinteiJoho onLoad(ShikibetsuCode 識別コード, RString 被保険者番号) {
+    public YokaigoNinteiJoho onLoad(RString 被保険者番号) {
         // TODO. 受給メニューから起動された場合
 //        boolean is受給 = ResponseHolder.getMenuID().equals(new RString("1"));
         // for test
@@ -86,7 +84,7 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
             return null;
         }
 
-        initialize(識別コード, 被保険者番号, 認定情報, is受給);
+        initialize(被保険者番号, 認定情報, is受給);
 
         edit状態(認定情報.get申請状況区分().equals(ShinseiJokyoKubun.申請中.getコード()));
 
@@ -127,14 +125,14 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         return 認定情報;
     }
 
-    private void initialize(ShikibetsuCode 識別コード, RString 被保険者番号, YokaigoNinteiJoho 認定情報, boolean is受給) {
+    private void initialize(RString 被保険者番号, YokaigoNinteiJoho 認定情報, boolean is受給) {
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         if (is受給) {
             div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(
-                    new ShinseishoKanriNo(認定情報.get申請書管理番号受給()), 識別コード);
+                    new ShinseishoKanriNo(認定情報.get申請書管理番号受給()), 認定情報.get識別コード受給());
         } else {
             div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(
-                    new ShinseishoKanriNo(認定情報.get申請書管理番号認定()), 識別コード);
+                    new ShinseishoKanriNo(認定情報.get申請書管理番号認定()), 認定情報.get識別コード認定());
         }
 
         // TODO. 共通部品　DBZ.KaigoNinteiShikakuInfoのinitializeについて、被保険者番号がだけですか。

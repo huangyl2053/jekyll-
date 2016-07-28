@@ -90,6 +90,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     private IHokokuShiryoSakuSeiMapper mapper;
     private ShinsahanteinoHenkojokyo henkojokyo;
     private boolean isデータあり;
+    private boolean is実施済;
 
     @BatchWriter
     private BatchReportWriter<ShinsahanteinoHenkojokyoReportSource> batchWriter;
@@ -98,6 +99,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     @Override
     protected void initialize() {
         isデータあり = false;
+        is実施済 = 実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         henkojokyo = new ShinsahanteinoHenkojokyo();
         mapper = getMapper(IHokokuShiryoSakuSeiMapper.class);
     }
@@ -142,16 +144,18 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
             List<SinsakaiHanteiJyokyoEntity> 区分変更その他結果情報 = get判定結果情報(current, 区分変更申請, 有効期間その他);
             set新規区分変更エリア(新規３ヶ月結果情報, 新規６ヶ月結果情報, 新規１２ヶ月結果情報, 新規２４ヶ月結果情報, 新規その他結果情報,
                     区分変更３ヶ月結果情報, 区分変更６ヶ月結果情報, 区分変更１２ヶ月結果情報, 区分変更２４ヶ月結果情報, 区分変更その他結果情報);
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要支援);
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要支援要介護);
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要支援延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要支援);
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要介護延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, 要介護要介護);
-            List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要支援);
-            List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要介護);
-            List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要支援);
-            List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要介護);
-            set認定有効期間延長件数(新規区分変更要支援要支援延長件数, 新規区分変更要支援要介護延長件数, 新規区分変更要介護要支援延長件数, 新規区分変更要介護要介護延長件数,
-                    更新申請要支援要支援延長件数, 更新申請要支援要介護延長件数, 更新申請要介護要支援延長件数, 更新申請要介護要介護延長件数);
+            List<SinsakaiHanteiJyokyoEntity> 新規区分変更延長件数 = get有効期間延長件数情報(current, 新規区分変更申請, RString.EMPTY);
+            if (is実施済) {
+                List<SinsakaiHanteiJyokyoEntity> 更新申請延長件数 = get有効期間延長件数情報(current, 更新申請, RString.EMPTY);
+                set認定有効期間延長件数(新規区分変更延長件数, 更新申請延長件数);
+            } else {
+                List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要支援);
+                List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要支援要介護);
+                List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要支援);
+                List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数 = get有効期間延長件数情報(current, 更新申請, 要介護要介護);
+                set認定有効期間延長件数(新規区分変更延長件数, 更新申請要支援要支援延長件数,
+                        更新申請要支援要介護延長件数, 更新申請要介護要支援延長件数, 更新申請要介護要介護延長件数);
+            }
         }
     }
 
@@ -181,7 +185,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
         batisParameter.setTaishoGeppiTo(current.getShinsakaiKaisaiYMDMax());
         batisParameter.setNinteiShinseiKubun(認定申請区分);
         batisParameter.setJyotaiHenkoKubun(状態変更区分);
-        batisParameter.setJissiZumi(実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
+        batisParameter.setJissiZumi(is実施済);
         return mapper.getShinsahanteinoHenkojokyoYukoKikanEntyo(batisParameter);
     }
 
@@ -349,42 +353,53 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
                 + Integer.parseInt(henkojokyo.get更新_その他_二次判定要介護5().toString())));
     }
 
-    private void set認定有効期間延長件数(List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要支援延長件数,
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要支援要介護延長件数,
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要支援延長件数,
-            List<SinsakaiHanteiJyokyoEntity> 新規区分変更要介護要介護延長件数,
+    private void set認定有効期間延長件数(List<SinsakaiHanteiJyokyoEntity> 新規区分変更延長件数, List<SinsakaiHanteiJyokyoEntity> 更新申請延長件数) {
+        int 新規区分変更要支援1 = get被保険者数(新規区分変更延長件数, 要支援1);
+        int 新規区分変更要支援2 = get被保険者数(新規区分変更延長件数, 要支援2);
+        int 新規区分変更要介護1 = get被保険者数(新規区分変更延長件数, 要介護1);
+        int 新規区分変更要介護2 = get被保険者数(新規区分変更延長件数, 要介護2);
+        int 新規区分変更要介護3 = get被保険者数(新規区分変更延長件数, 要介護3);
+        int 新規区分変更要介護4 = get被保険者数(新規区分変更延長件数, 要介護4);
+        int 新規区分変更要介護5 = get被保険者数(新規区分変更延長件数, 要介護5);
+        int 更新申請要支援1 = get被保険者数(更新申請延長件数, 要支援1);
+        int 更新申請要支援2 = get被保険者数(更新申請延長件数, 要支援2);
+        int 更新申請要介護1 = get被保険者数(更新申請延長件数, 要介護1);
+        int 更新申請要介護2 = get被保険者数(更新申請延長件数, 要介護2);
+        int 更新申請要介護3 = get被保険者数(更新申請延長件数, 要介護3);
+        int 更新申請要介護4 = get被保険者数(更新申請延長件数, 要介護4);
+        int 更新申請要介護5 = get被保険者数(更新申請延長件数, 要介護5);
+        henkojokyo.set更新_認定有効期間延長件数_二次判定非該当(なし);
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要支援1(new RString(更新申請要支援1));
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要支援2(new RString(更新申請要支援2));
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要介護1(new RString(更新申請要介護1));
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要介護2(new RString(更新申請要介護2));
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要介護3(new RString(更新申請要介護3));
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要介護4(new RString(更新申請要介護4));
+        henkojokyo.set更新_認定有効期間延長件数_二次判定要介護5(new RString(更新申請要介護5));
+        set更新_認定有効期間延長件数_計();
+        henkojokyo.set新規_認定有効期間延長件数_二次判定非該当(なし);
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要支援1(new RString(新規区分変更要支援1));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要支援2(new RString(新規区分変更要支援2));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護1(new RString(新規区分変更要介護1));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護2(new RString(新規区分変更要介護2));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護3(new RString(新規区分変更要介護3));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護4(new RString(新規区分変更要介護4));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護5(new RString(新規区分変更要介護5));
+        set新規_認定有効期間延長件数_計();
+    }
+
+    private void set認定有効期間延長件数(List<SinsakaiHanteiJyokyoEntity> 新規区分変更延長件数,
             List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要支援延長件数,
             List<SinsakaiHanteiJyokyoEntity> 更新申請要支援要介護延長件数,
             List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要支援延長件数,
             List<SinsakaiHanteiJyokyoEntity> 更新申請要介護要介護延長件数) {
-        int 新規区分要支援要支援要支援1 = get被保険者数(新規区分変更要支援要支援延長件数, 要支援1);
-        int 新規区分要支援要支援要支援2 = get被保険者数(新規区分変更要支援要支援延長件数, 要支援2);
-        int 新規区分要支援要支援要介護1 = get被保険者数(新規区分変更要支援要支援延長件数, 要介護1);
-        int 新規区分要支援要支援要介護2 = get被保険者数(新規区分変更要支援要支援延長件数, 要介護2);
-        int 新規区分要支援要支援要介護3 = get被保険者数(新規区分変更要支援要支援延長件数, 要介護3);
-        int 新規区分要支援要支援要介護4 = get被保険者数(新規区分変更要支援要支援延長件数, 要介護4);
-        int 新規区分要支援要支援要介護5 = get被保険者数(新規区分変更要支援要支援延長件数, 要介護5);
-        int 新規区分要支援要介護要支援1 = get被保険者数(新規区分変更要支援要介護延長件数, 要支援1);
-        int 新規区分要支援要介護要支援2 = get被保険者数(新規区分変更要支援要介護延長件数, 要支援2);
-        int 新規区分要支援要介護要介護1 = get被保険者数(新規区分変更要支援要介護延長件数, 要介護1);
-        int 新規区分要支援要介護要介護2 = get被保険者数(新規区分変更要支援要介護延長件数, 要介護2);
-        int 新規区分要支援要介護要介護3 = get被保険者数(新規区分変更要支援要介護延長件数, 要介護3);
-        int 新規区分要支援要介護要介護4 = get被保険者数(新規区分変更要支援要介護延長件数, 要介護4);
-        int 新規区分要支援要介護要介護5 = get被保険者数(新規区分変更要支援要介護延長件数, 要介護5);
-        int 新規区分要介護要支援要支援1 = get被保険者数(新規区分変更要介護要支援延長件数, 要支援1);
-        int 新規区分要介護要支援要支援2 = get被保険者数(新規区分変更要介護要支援延長件数, 要支援2);
-        int 新規区分要介護要支援要介護1 = get被保険者数(新規区分変更要介護要支援延長件数, 要介護1);
-        int 新規区分要介護要支援要介護2 = get被保険者数(新規区分変更要介護要支援延長件数, 要介護2);
-        int 新規区分要介護要支援要介護3 = get被保険者数(新規区分変更要介護要支援延長件数, 要介護3);
-        int 新規区分要介護要支援要介護4 = get被保険者数(新規区分変更要介護要支援延長件数, 要介護4);
-        int 新規区分要介護要支援要介護5 = get被保険者数(新規区分変更要介護要支援延長件数, 要介護5);
-        int 新規区分要介護要介護要支援1 = get被保険者数(新規区分変更要介護要介護延長件数, 要支援1);
-        int 新規区分要介護要介護要支援2 = get被保険者数(新規区分変更要介護要介護延長件数, 要支援2);
-        int 新規区分要介護要介護要介護1 = get被保険者数(新規区分変更要介護要介護延長件数, 要介護1);
-        int 新規区分要介護要介護要介護2 = get被保険者数(新規区分変更要介護要介護延長件数, 要介護2);
-        int 新規区分要介護要介護要介護3 = get被保険者数(新規区分変更要介護要介護延長件数, 要介護3);
-        int 新規区分要介護要介護要介護4 = get被保険者数(新規区分変更要介護要介護延長件数, 要介護4);
-        int 新規区分要介護要介護要介護5 = get被保険者数(新規区分変更要介護要介護延長件数, 要介護5);
+        int 新規区分変更要支援1 = get被保険者数(新規区分変更延長件数, 要支援1);
+        int 新規区分変更要支援2 = get被保険者数(新規区分変更延長件数, 要支援2);
+        int 新規区分変更要介護1 = get被保険者数(新規区分変更延長件数, 要介護1);
+        int 新規区分変更要介護2 = get被保険者数(新規区分変更延長件数, 要介護2);
+        int 新規区分変更要介護3 = get被保険者数(新規区分変更延長件数, 要介護3);
+        int 新規区分変更要介護4 = get被保険者数(新規区分変更延長件数, 要介護4);
+        int 新規区分変更要介護5 = get被保険者数(新規区分変更延長件数, 要介護5);
         int 更新申請要支援要支援要支援1 = get被保険者数(更新申請要支援要支援延長件数, 要支援1);
         int 更新申請要支援要支援要支援2 = get被保険者数(更新申請要支援要支援延長件数, 要支援2);
         int 更新申請要支援要介護要介護1 = get被保険者数(更新申請要支援要介護延長件数, 要介護1);
@@ -409,20 +424,13 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
         henkojokyo.set更新_認定有効期間延長件数_二次判定要介護5(new RString(更新申請要支援要介護要介護5 + 更新申請要介護要介護要介護5));
         set更新_認定有効期間延長件数_計();
         henkojokyo.set新規_認定有効期間延長件数_二次判定非該当(なし);
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要支援1(new RString(
-                新規区分要支援要支援要支援1 + 新規区分要支援要介護要支援1 + 新規区分要介護要支援要支援1 + 新規区分要介護要介護要支援1));
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要支援2(new RString(
-                新規区分要支援要支援要支援2 + 新規区分要支援要介護要支援2 + 新規区分要介護要支援要支援2 + 新規区分要介護要介護要支援2));
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護1(new RString(
-                新規区分要支援要支援要介護1 + 新規区分要支援要介護要介護1 + 新規区分要介護要支援要介護1 + 新規区分要介護要介護要介護1));
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護2(new RString(
-                新規区分要支援要支援要介護2 + 新規区分要支援要介護要介護2 + 新規区分要介護要支援要介護2 + 新規区分要介護要介護要介護2));
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護3(new RString(
-                新規区分要支援要支援要介護3 + 新規区分要支援要介護要介護3 + 新規区分要介護要支援要介護3 + 新規区分要介護要介護要介護3));
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護4(new RString(
-                新規区分要支援要支援要介護4 + 新規区分要支援要介護要介護4 + 新規区分要介護要支援要介護4 + 新規区分要介護要介護要介護4));
-        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護5(new RString(
-                新規区分要支援要支援要介護5 + 新規区分要支援要介護要介護5 + 新規区分要介護要支援要介護5 + 新規区分要介護要介護要介護5));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要支援1(new RString(新規区分変更要支援1));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要支援2(new RString(新規区分変更要支援2));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護1(new RString(新規区分変更要介護1));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護2(new RString(新規区分変更要介護2));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護3(new RString(新規区分変更要介護3));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護4(new RString(新規区分変更要介護4));
+        henkojokyo.set新規_認定有効期間延長件数_二次判定要介護5(new RString(新規区分変更要介護5));
         set新規_認定有効期間延長件数_計();
     }
 

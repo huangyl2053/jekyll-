@@ -4,18 +4,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tblGendogaku のクラスファイル 
- * 
- * @author 自動生成
+ * tblGendogaku のクラスファイル
+ *
+ * @reamsid_L DBC-3364-010 xuxin
  */
 public class tblGendogakuDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -156,12 +159,14 @@ public class tblGendogakuDiv extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celGendogaku1 のクラスファイル 
- * 
+ * celGendogaku1 のクラスファイル
+ *
  * @author 自動生成
  */
 class celGendogaku1AttblGendogaku extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblMidashi5")
     private Label lblMidashi5;
@@ -206,12 +211,14 @@ class celGendogaku1AttblGendogaku extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celGendogaku2 のクラスファイル 
- * 
+ * celGendogaku2 のクラスファイル
+ *
  * @author 自動生成
  */
 class celGendogaku2AttblGendogaku extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblMidashi2")
     private Label lblMidashi2;
@@ -256,12 +263,14 @@ class celGendogaku2AttblGendogaku extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celGendogaku3 のクラスファイル 
- * 
+ * celGendogaku3 のクラスファイル
+ *
  * @author 自動生成
  */
 class celGendogaku3AttblGendogaku extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblMidashi3")
     private Label lblMidashi3;
@@ -306,12 +315,14 @@ class celGendogaku3AttblGendogaku extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celGendogaku4 のクラスファイル 
- * 
+ * celGendogaku4 のクラスファイル
+ *
  * @author 自動生成
  */
 class celGendogaku4AttblGendogaku extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblMidashi4")
     private Label lblMidashi4;

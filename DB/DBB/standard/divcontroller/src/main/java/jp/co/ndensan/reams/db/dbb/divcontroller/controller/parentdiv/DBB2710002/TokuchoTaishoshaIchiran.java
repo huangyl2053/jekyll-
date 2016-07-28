@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidote
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbWarningMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.DBB2710002StateName;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.DBB2710002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.TokuchoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokubetChoshuMidoteiIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokuchoDoteiKohoshaIchiran_Row;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -53,6 +55,7 @@ public class TokuchoTaishoshaIchiran {
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
     private static final RString STATE特別徴収対象者一覧確認 = new RString("1");
+    private static final RString UCID = new RString("DBBUC27102");
 
     /**
      * 画面のonLoadイベント
@@ -147,6 +150,15 @@ public class TokuchoTaishoshaIchiran {
         RString 年金コード = ViewStateHolder.get(ViewStateKeys.年金コード, RString.class);
         RString 特徴開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
         getHandler(div).特別徴収同定候補者一覧initialize(処理年度, 捕捉月, 基礎年金番号, 年金コード, 特徴開始月);
+        RString containerId = ResponseHolder.getUIContainerId();
+        if (!UCID.equals(containerId)) {
+            return;
+        }
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null) {
+            return;
+        }
+        getHandler(div).対象者検索戻る値の処理(taishoshaKey);
     }
 
     /**
@@ -344,19 +356,7 @@ public class TokuchoTaishoshaIchiran {
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);
         }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「OK」ボタンを押下する。<br/>
-     * 特別徴収同定候補者一覧 {被保険者検索」OKボタン押下処理
-     *
-     * @param div {@link TokuchoTaishoshaIchiranDiv }
-     * @return を持つResponseData
-     */
-    public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnOkToHihokensha(TokuchoTaishoshaIchiranDiv div) {
-        //TODO  Redmine#90958
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBB2710002TransitionEventName.被保険者検索).respond();
     }
 
     /**
