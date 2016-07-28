@@ -49,11 +49,16 @@ module DBA
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnInputClear().displayNone = false;
                     this.controls.btnKakutei().displayNone = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
-                    this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
+                    
+                    var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowRowState = false;
+                    
+                    this.controls.datagridTekiyoJogai().gridSetting = gridSetting;
+                    
+                    //this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = false;
                 }
 
@@ -65,11 +70,16 @@ module DBA
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = false;
                     this.controls.btnInputClear().displayNone = false;
                     this.controls.btnKakutei().displayNone = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
-                    this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
+                    
+                    var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowRowState = false;
+                    
+                    this.controls.datagridTekiyoJogai().gridSetting = gridSetting;
+                    
+                    //this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = false;
                 }
 
@@ -81,11 +91,16 @@ module DBA
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnInputClear().displayNone = false;
                     this.controls.btnKakutei().displayNone = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
-                    this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
+                    
+                    var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowRowState = false;
+                    
+                    this.controls.datagridTekiyoJogai().gridSetting = gridSetting;
+                    
+                    //this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = true;
                 }
 
@@ -97,11 +112,16 @@ module DBA
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnInputClear().displayNone = false;
                     this.controls.btnKakutei().displayNone = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = true;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = true;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = true;
-                    this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
+                    
+                    var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowRowState = true;
+                    
+                    this.controls.datagridTekiyoJogai().gridSetting = gridSetting;
+                    
+                    //this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = false;
                 }
 
@@ -113,11 +133,16 @@ module DBA
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnInputClear().displayNone = true;
                     this.controls.btnKakutei().displayNone = true;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = true;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowRowState = false;
-                    this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
+                    
+                    var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowRowState = false;
+                    
+                    this.controls.datagridTekiyoJogai().gridSetting = gridSetting;
+                    
+                    //this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
                     this.controls.panelTekiyoInput().disabled = true;
                 }
             }

@@ -47,12 +47,12 @@ module DBA
                   var columns = gridSetting.columns;
                   
                   gridSetting.isShowRowState = false;
-                  gridSetting.isShowSelectButtonColumn = true
+                  gridSetting.isShowSelectButtonColumn = true;
                   gridSetting.isShowModifyButtonColumn = false;
                   gridSetting.isShowDeleteButtonColumn = false;
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                  this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                  //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                   this.controls.TajushochiTokureiInput().title="他市町村住所地特例情報";
                   this.controls.TajushochiTokureiInput().displayNone=false;
@@ -83,12 +83,12 @@ module DBA
                   var columns = gridSetting.columns;
                     
                   gridSetting.isShowRowState = true;
-                  gridSetting.isShowSelectButtonColumn = false
+                  gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = true;
                   gridSetting.isShowDeleteButtonColumn = true;
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                  this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                  //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
                   
                   this.controls.TajushochiTokureiInput().title="他市町村住所地特例情報入力";
                   this.controls.TajushochiTokureiInput().displayNone=false;
@@ -118,12 +118,12 @@ module DBA
                   var columns = gridSetting.columns;
                     
                   gridSetting.isShowRowState = false;
-                  gridSetting.isShowSelectButtonColumn = false
+                  gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = false;
                   gridSetting.isShowDeleteButtonColumn = false;
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                  this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                  //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
                     
                   this.controls.TajushochiTokureiInput().title="他市町村住所地特例情報入力";
                   this.controls.TajushochiTokureiInput().displayNone=false;
@@ -152,12 +152,12 @@ module DBA
                   var columns = gridSetting.columns;
                   
                   gridSetting.isShowRowState = false;
-                  gridSetting.isShowSelectButtonColumn = false
+                  gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = false;
                   gridSetting.isShowDeleteButtonColumn = false;
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                  this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                  //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
                     
                   this.controls.TajushochiTokureiInput().title="他市町村住所地特例情報入力";
                   this.controls.TajushochiTokureiInput().displayNone=false;
@@ -187,12 +187,12 @@ module DBA
                   var columns = gridSetting.columns;
                   
                   gridSetting.isShowRowState = false;
-                  gridSetting.isShowSelectButtonColumn = false
+                  gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = false;
                   gridSetting.isShowDeleteButtonColumn = false;
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                  this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                  //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
                   
                   this.controls.TajushochiTokureiInput().displayNone=true;
                 }
