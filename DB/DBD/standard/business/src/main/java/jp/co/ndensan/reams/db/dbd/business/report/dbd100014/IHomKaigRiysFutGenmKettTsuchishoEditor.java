@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100014;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-interface IHomKaigRiysFutGenmKettTsuchishoEditor extends IReportEditor<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
+interface IHomKaigRiysFutGenmKettTsuchishoEditor extends IReportEditor<HomKaigRiysFutGenmKettTsuchishoReportSource> {
 
 }

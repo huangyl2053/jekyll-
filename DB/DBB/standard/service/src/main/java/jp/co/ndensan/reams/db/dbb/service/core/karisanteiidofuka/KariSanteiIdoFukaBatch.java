@@ -1115,13 +1115,8 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     }
 
     private Decimal get保険料率(RString 保険料段階) {
-        Decimal 保険料率 = Decimal.ZERO;
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-        if (保険料段階List == null) {
-            return 保険料率;
-        }
         HokenryoDankai dankai = 保険料段階List.getBy段階区分(保険料段階);
-
         return dankai.get保険料率();
     }
 

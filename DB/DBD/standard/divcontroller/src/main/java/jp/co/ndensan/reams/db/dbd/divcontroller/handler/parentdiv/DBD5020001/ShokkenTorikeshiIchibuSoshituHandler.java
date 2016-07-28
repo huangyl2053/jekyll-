@@ -182,9 +182,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
     }
 
     private void setHdnArea(YokaigoNinteiJoho 今回情報, RString 申請書管理番号) {
-        div.setHdnHihokenshaNo(今回情報.get被保険者番号());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         if (null != 今回情報) {
+            div.setHdnHihokenshaNo(今回情報.get被保険者番号());
             div.setHdnShikibetsuCode(null != 今回情報.get識別コード受給者台帳() ? 今回情報.get識別コード受給者台帳().value() : RString.EMPTY);
             div.setHdnRenrakuJiko(今回情報.get市町村連絡事項受給());
         }
@@ -317,10 +317,10 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(今回情報.get二号特定疾病コード受給())));
         介護認定申請基本情報入力Div.setShisho(new ShishoCode(今回情報.get支所コード受給()));
         介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(今回情報.get認定申請理由受給());
-        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(今回情報.get受給申請事由()));
+        介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(convertCodeToRString(今回情報.get受給申請事由())));
         介護認定申請基本情報入力Div.setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(今回情報.get申請状況区分()).get名称());
-        介護認定申請基本情報入力Div.setKyuSochisha(今回情報.get旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
-        介護認定申請基本情報入力Div.setChkShikakuShutokuMae(今回情報.get資格取得前申請フラグ()
+        介護認定申請基本情報入力Div.setKyuSochisha(今回情報.is旧措置者フラグ() ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
+        介護認定申請基本情報入力Div.setChkShikakuShutokuMae(今回情報.is資格取得前申請フラグ()
                 ? Arrays.asList(new RString("key0")) : new ArrayList<RString>());
 
         介護認定申請基本情報入力Div.setInputMode(new RString(InputType.NinteiMode.toString()));
@@ -343,7 +343,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
                     今回情報.get医療機関名称受給(),
                     今回情報.get主治医コード受給(),
                     今回情報.get主治医氏名受給());
-            主治医Div.setShiteii(今回情報.get指定医フラグ受給());
+            主治医Div.setShiteii(今回情報.is指定医フラグ受給());
         } else {
             主治医Div.initialize(association.get地方公共団体コード(), new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBD介護受給);
         }
@@ -659,7 +659,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             if (is審査依頼日更新(認定情報, 導入形態コード)) {
                 builder.set要介護認定結果情報介護認定審査会資料作成年月日(認定情報.get審査会資料作成年月日());
                 builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code());
-                builder.set要介護認定結果情報二次判定認定有効期間(new Integer(0));
+                builder.set要介護認定結果情報二次判定認定有効期間(0);
             }
             if (!div.getTitle().contains("却下")) {
                 builder.set要介護認定結果情報二次判定要介護状態区分コード(new Code(div.getHdnYokaigodoCodeKonkai()));
@@ -710,10 +710,10 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         } else if (YokaigoInterfaceShurui.富士通２.getコード().equals(要介護ＩＦ種類)) {
             return false;
         } else if (YokaigoInterfaceShurui.ＦＮＳ.getコード().equals(要介護ＩＦ種類)) {
-            if (!(null == 認定情報.get審査会依頼年月日()
-                    || 認定情報.get審査会依頼年月日().isEmpty())
-                    && (null == 認定情報.get審査会資料作成年月日()
-                    || 認定情報.get審査会資料作成年月日().isEmpty())) {
+            if (null != 認定情報.get審査会依頼年月日()
+                    && !認定情報.get審査会依頼年月日().isEmpty()
+                    && null != 認定情報.get審査会資料作成年月日()
+                    && !認定情報.get審査会資料作成年月日().isEmpty()) {
                 return true;
             }
         }

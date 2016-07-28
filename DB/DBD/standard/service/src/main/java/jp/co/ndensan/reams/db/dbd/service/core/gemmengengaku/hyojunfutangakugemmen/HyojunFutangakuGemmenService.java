@@ -40,9 +40,9 @@ public class HyojunFutangakuGemmenService {
     public List<HyojunFutangakuGemmen> select標準負担額減免申請情報(HihokenshaNo 被保険者番号) {
         List<HyojunFutangakuGemmen> 標準負担額減免情報List = new ArrayList<>();
         DbT4012HyojunFutangakuGemmenDac dac = InstanceProvider.create(DbT4012HyojunFutangakuGemmenDac.class);
-        List<DbT4012HyojunFutangakuGemmenEntity> hyojunFutangakuGemmenEntityList = dac.select標準負担額減免申請情報(被保険者番号);
-        if (!hyojunFutangakuGemmenEntityList.isEmpty()) {
-            for (DbT4012HyojunFutangakuGemmenEntity entity : hyojunFutangakuGemmenEntityList) {
+        List<DbT4012HyojunFutangakuGemmenEntity> list = dac.select標準負担額減免申請情報(被保険者番号);
+        if (!list.isEmpty()) {
+            for (DbT4012HyojunFutangakuGemmenEntity entity : list) {
                 標準負担額減免情報List.add(new HyojunFutangakuGemmen(entity));
             }
         }

@@ -13,8 +13,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 支払方法変更管理リストのEntityです。
  *
- * @author liangbc
+ * @reamsid_L DBD-3630-050 liangbc
  */
 @Getter
 @Setter

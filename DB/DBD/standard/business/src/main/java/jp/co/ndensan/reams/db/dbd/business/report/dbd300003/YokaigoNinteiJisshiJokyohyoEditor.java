@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd300003;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.YokaigoNinteiJisshiJokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijisshijokyohyo.YokaigoNinteiJisshiJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300003.YokaigoNinteiJisshiJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;

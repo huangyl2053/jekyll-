@@ -57,7 +57,7 @@ public final class ShiharaiHohoKanriListMapperParameter implements IMyBatisParam
      *
      * @param processParameter CreateTaishoshaJohoTempTableProcessParameter
      * @param 出力順 RString
-     * @return
+     * @return パラメータクラス
      */
     public static ShiharaiHohoKanriListMapperParameter createParameter(CreateTaishoshaJohoTempTableProcessParameter processParameter, RString 出力順) {
         int 変更期限 = Integer.parseInt(

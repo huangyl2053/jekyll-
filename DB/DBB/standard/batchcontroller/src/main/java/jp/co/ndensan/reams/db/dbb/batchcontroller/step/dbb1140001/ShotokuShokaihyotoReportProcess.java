@@ -123,10 +123,10 @@ public class ShotokuShokaihyotoReportProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        所得照会票リスト = mapper.selectAll所得照会票();
-        if (所得照会票リスト == null && 所得照会票リスト.isEmpty()) {
-            return;
-        }
+//        所得照会票リスト = mapper.selectAll所得照会票();
+//        if (所得照会票リスト == null && 所得照会票リスト.isEmpty()) {
+//            return;
+//        }
         ChohyoSeigyoHanyo hanyo = new ChohyoSeigyoHanyo(null);
         RString 文書タイトル = hanyo.get項目名();
         RString 送付先担当課名称 = hanyo.get設定値();

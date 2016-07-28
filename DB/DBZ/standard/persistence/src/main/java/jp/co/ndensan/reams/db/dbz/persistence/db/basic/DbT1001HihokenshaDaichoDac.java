@@ -8,7 +8,6 @@ import static java.lang.Boolean.FALSE;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
@@ -770,7 +769,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         FlexibleDate 抽出終了日時の日付 = new FlexibleDate(抽出終了日時.getDate().toString());
         FlexibleDate 普徴仮算定賦課処理日時の日付 = new FlexibleDate(抽出開始日時.getDate().toString());
         return accessor.select().
-                table(DbV1001HihokenshaDaicho.class).
+                table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokennshaKubunCode, 数字１),
                                 not(isNULL(shikakuSoshitsuYMD)),
@@ -804,7 +803,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         FlexibleDate 抽出終了日時の日付 = new FlexibleDate(抽出終了日時.getDate().toString());
         FlexibleDate 普徴仮算定賦課処理日時の日付 = new FlexibleDate(抽出開始日時.getDate().toString());
         return accessor.select().
-                table(DbV1001HihokenshaDaicho.class).
+                table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokennshaKubunCode, 数字１),
                                 or(isNULL(shikakuSoshitsuYMD),

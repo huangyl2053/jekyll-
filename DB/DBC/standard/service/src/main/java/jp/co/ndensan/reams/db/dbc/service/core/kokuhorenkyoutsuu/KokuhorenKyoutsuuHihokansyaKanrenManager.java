@@ -50,6 +50,8 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
     private static final RString MSG_エラー区分20 = new RString("20");
     private static final RString MSG_エラー区分30 = new RString("30");
 
+    private static final RString 広域内住所地特例フラグ_1 = new RString("1");
+
     /**
      * 国保連情報取込共通処理（被保険者関連処理）のコンストラクタ。
      *
@@ -157,7 +159,11 @@ public class KokuhorenKyoutsuuHihokansyaKanrenManager {
         saveEntity.set宛名名称(getColumnValue(識別対象.get名称().getName()));
         saveEntity.set氏名50音カナ(RStringUtil.convertTo清音化(getColumnValue(識別対象.get名称().getKana())));
         saveEntity.set識別コード(getColumnValue(識別対象.get識別コード()));
-        saveEntity.set市町村コード(daicho.getShichosonCode());
+        if (広域内住所地特例フラグ_1.equals(daicho.getKoikinaiJushochiTokureiFlag())) {
+            saveEntity.set市町村コード(daicho.getKoikinaiTokureiSochimotoShichosonCode());
+        } else {
+            saveEntity.set市町村コード(daicho.getShichosonCode());
+        }
         saveEntity.set資格取得日(daicho.getShikakuShutokuYMD());
         saveEntity.set資格取得事由コード(daicho.getShikakuShutokuJiyuCode());
         saveEntity.set資格喪失日(daicho.getShikakuSoshitsuYMD());

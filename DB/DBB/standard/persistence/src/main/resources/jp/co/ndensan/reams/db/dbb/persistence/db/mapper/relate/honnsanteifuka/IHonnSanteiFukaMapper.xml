@@ -5,20 +5,6 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper">
     
-    <select id="select本算定抽出" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonSanJonTyuShutuTempEntity" fetchSize="500">
-        SELECT *
-        FROM "HonSanJonTyuShutuTemp"
-    </select>
-    
-    <select id="select月別ランクTemp" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KuBunnGaTsurakuTempEntity" fetchSize="500">
-        SELECT *
-        FROM "KuBunnGaTsurakuTemp"
-    </select>
-    
-    <select id="select世帯員把握入力テーブル" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.SetaiHaakuShuturyokuEntity" fetchSize="500">
-        SELECT *
-        FROM "TmpSetaiHaaku"
-    </select>
     
     <!--世帯員所得情報一時テーブルを作成します -->
     <insert id="create世帯員所得情報Temp">
@@ -43,7 +29,7 @@
     </insert>
 
     <!--業務概念．賦課の情報を取得します。-->
-    <select id="select賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"
+    <select resultOrdered="true" id="select賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.KeisanTaishoshaParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
@@ -284,13 +270,13 @@
         ON "HonSanJonTyuShutuTemp"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "HonSanJonTyuShutuTemp"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
         AND "HonSanJonTyuShutuTemp"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
-        LEFT JOIN
+        INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS "DbT2003Kibetsu"
         ON  "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_fukaNendo"
         AND "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_choteiNendo"
         AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_tsuchishoNo"
         AND "DbT2002Fuka"."rirekiNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_rirekiNo"
-        LEFT JOIN 
+        INNER JOIN 
             rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON "DbT2003Kibetsu"."dbT2003Kibetsu_choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         LEFT JOIN 

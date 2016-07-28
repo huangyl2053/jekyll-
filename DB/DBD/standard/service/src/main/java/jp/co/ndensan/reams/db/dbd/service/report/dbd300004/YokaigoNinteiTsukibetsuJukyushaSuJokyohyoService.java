@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.report.dbd300004;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReport;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.YokaigoNinteiTsukibetsuJukyushaSuJokyohyo.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteitsukibetsujukyushasujokyohyo.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300004.YokaigoNinteiTsukibetsuJukyushaSuJokyohyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

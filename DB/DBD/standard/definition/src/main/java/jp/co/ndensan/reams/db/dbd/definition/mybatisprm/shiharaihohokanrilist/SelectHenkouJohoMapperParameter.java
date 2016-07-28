@@ -31,7 +31,7 @@ public final class SelectHenkouJohoMapperParameter implements IMyBatisParameter 
      * 支払方法変更管理リスト作成用MyBatisパラメータを作成します。
      *
      * @param processParameter PublishReportProcessParameter
-     * @return
+     * @return パラメータクラス
      */
     public static SelectHenkouJohoMapperParameter createParameter(PublishReportProcessParameter processParameter) {
         return new SelectHenkouJohoMapperParameter(processParameter.get基準日());

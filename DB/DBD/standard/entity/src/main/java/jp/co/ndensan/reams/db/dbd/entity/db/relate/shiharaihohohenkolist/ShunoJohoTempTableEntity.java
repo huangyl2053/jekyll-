@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,9 +26,6 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShunoJohoTempTableEntity extends DbTableEntityBase<ShunoJohoTempTableEntity> implements IDbAccessable {
-
-    @TableName
-    public static final RString TABLE_NAME = new RString("ShunoJohoTempTable");
 
     private FlexibleYear choteiNendo;
     private FlexibleYear fukaNendo;

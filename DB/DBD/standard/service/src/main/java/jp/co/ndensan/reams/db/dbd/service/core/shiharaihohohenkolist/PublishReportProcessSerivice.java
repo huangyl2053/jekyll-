@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.service.core.shiharaihohohenkolist;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.HenkouJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShiharaiHohoHenkoTempTableEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.ShunoJohoTempTableEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -19,8 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class PublishReportProcessSerivice {
 
-    private static final RString RS申請中 = new RString("申請中");
-
+    // private static final RString RS申請中 = new RString("申請中");
     /**
      * コンストラクタです。
      */
@@ -77,17 +73,17 @@ public class PublishReportProcessSerivice {
         return tempTableEntity;
     }
 
-    private void 時効起算日と時効起算事由の設定(ShiharaiHohoHenkoTempTableEntity entity, ShunoJohoTempTableEntity tempTableEntity) {
-        RDate 仮の時効起算日 = RDate.MIN;
-        if (entity.getJikoKisanYMD() != null && !entity.getJikoKisanYMD().isEmpty()) {
-            仮の時効起算日 = new RDate(entity.getJikoKisanYMD().toString());
-        }
-        if (entity.getTokusokujoHakkoYMD() != null && 仮の時効起算日.isBefore(entity.getTokusokujoHakkoYMD())) {
-            仮の時効起算日 = entity.getTokusokujoHakkoYMD();
-        }
-        if (entity.getNokigenYMD() != null && 仮の時効起算日.isBefore(entity.getNokigenYMD().plusDay(1))) {
-            仮の時効起算日 = entity.getNokigenYMD().plusDay(1);
-        }
-
-    }
+//    private void 時効起算日と時効起算事由の設定(ShiharaiHohoHenkoTempTableEntity entity, ShunoJohoTempTableEntity tempTableEntity) {
+//        RDate 仮の時効起算日 = RDate.MIN;
+//        if (entity.getJikoKisanYMD() != null && !entity.getJikoKisanYMD().isEmpty()) {
+//            仮の時効起算日 = new RDate(entity.getJikoKisanYMD().toString());
+//        }
+//        if (entity.getTokusokujoHakkoYMD() != null && 仮の時効起算日.isBefore(entity.getTokusokujoHakkoYMD())) {
+//            仮の時効起算日 = entity.getTokusokujoHakkoYMD();
+//        }
+//        if (entity.getNokigenYMD() != null && 仮の時効起算日.isBefore(entity.getNokigenYMD().plusDay(1))) {
+//            仮の時効起算日 = entity.getNokigenYMD().plusDay(1);
+//        }
+//
+//    }
 }

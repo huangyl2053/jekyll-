@@ -46,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,8 +59,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShiharaiHohoHenkoTempTableEntity extends DbTableEntityBase<ShiharaiHohoHenkoTempTableEntity> implements IDbAccessable {
 
-    @TableName
-    public static final RString TABLE_NAME = new RString("ShiharaiHohoHenkoTempTable");
     private HihokenshaNo hihokenshaNo;
     private FlexibleDate idoYMD;
     private RString edaNo;

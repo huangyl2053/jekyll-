@@ -6,16 +6,16 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100014;
 
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * {@link HomKaigRiysFutGenｍKettTsuchishoReportSource}のプロパティです。
+ * {@link HomKaigRiysFutGenmKettTsuchishoReportSource}のプロパティです。
  *
  * @reamsid_L DBD-3540-130 wangchao
  */
-public class HomKaigRiysFutGenmKettTsuchishoProerty extends ReportPropertyBase<HomKaigRiysFutGenｍKettTsuchishoReportSource> {
+public class HomKaigRiysFutGenmKettTsuchishoProerty extends ReportPropertyBase<HomKaigRiysFutGenmKettTsuchishoReportSource> {
 
     /**
      * コンストラクタです。

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100014;
 
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenｍKettTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100014.HomKaigRiysFutGenmKettTsuchishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -29,10 +29,10 @@ public class HomKaigRiysFutGenmKettTsuchishoBuilderImpl implements IHomKaigRiysF
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link HomKaigRiysFutGenｍKettTsuchishoReportSource}
+     * @return {@link HomKaigRiysFutGenmKettTsuchishoReportSource}
      */
     @Override
-    public HomKaigRiysFutGenｍKettTsuchishoReportSource build() {
-        return ReportEditorJoiner.from(new HomKaigRiysFutGenｍKettTsuchishoReportSource()).join(bodyEditor).buildSource();
+    public HomKaigRiysFutGenmKettTsuchishoReportSource build() {
+        return ReportEditorJoiner.from(new HomKaigRiysFutGenmKettTsuchishoReportSource()).join(bodyEditor).buildSource();
     }
 }

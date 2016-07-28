@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -206,19 +205,6 @@ public class HyojunFutangakuGemmen extends ParentModelBase<
     }
 
     /**
-     * 減額後金額RStringを返します。
-     *
-     * @return 減額後金額
-     */
-    public RString get減額後金額RString() {
-        if (entity.getGengakugoKingaku() != null) {
-            return new RString(entity.getGengakugoKingaku().toString());
-        } else {
-            return RString.EMPTY;
-        }
-    }
-
-    /**
      * 標準負担区分を返します。
      *
      * @return 標準負担区分
@@ -234,18 +220,6 @@ public class HyojunFutangakuGemmen extends ParentModelBase<
      */
     public FlexibleDate get申請年月日() {
         return entity.getShinseiYMD();
-    }
-
-    /**
-     * 申請年月日RStringを返します。
-     *
-     * @return 申請年月日
-     */
-    public RString get申請年月日RString() {
-        if (entity.getShinseiYMD() == null || entity.getShinseiYMD().isEmpty()) {
-            return RString.EMPTY;
-        }
-        return new RString(entity.getShinseiYMD().toString());
     }
 
     /**
@@ -267,20 +241,6 @@ public class HyojunFutangakuGemmen extends ParentModelBase<
     }
 
     /**
-     * 決定年月日TextBoxを返します。
-     *
-     * @return 決定年月日
-     */
-    public TextBoxFlexibleDate get決定年月日TextBox() {
-        TextBoxFlexibleDate textBoxFlexibleDate = new TextBoxFlexibleDate();
-        if (entity.getKetteiYMD().isEmpty()) {
-            return null;
-        }
-        textBoxFlexibleDate.setValue(entity.getKetteiYMD());
-        return textBoxFlexibleDate;
-    }
-
-    /**
      * 適用開始年月日を返します。
      *
      * @return 適用開始年月日
@@ -290,40 +250,12 @@ public class HyojunFutangakuGemmen extends ParentModelBase<
     }
 
     /**
-     * 適用開始年月日TextBoxを返します。
-     *
-     * @return 適用開始年月日
-     */
-    public TextBoxFlexibleDate get適用開始年月日TextBox() {
-        TextBoxFlexibleDate textBoxFlexibleDate = new TextBoxFlexibleDate();
-        if (entity.getTekiyoKaishiYMD().isEmpty()) {
-            return null;
-        }
-        textBoxFlexibleDate.setValue(entity.getTekiyoKaishiYMD());
-        return textBoxFlexibleDate;
-    }
-
-    /**
      * 適用終了年月日を返します。
      *
      * @return 適用終了年月日
      */
     public FlexibleDate get適用終了年月日() {
         return entity.getTekiyoShuryoYMD();
-    }
-
-    /**
-     * 適用終了年月日TextBoxを返します。
-     *
-     * @return 適用終了年月日
-     */
-    public TextBoxFlexibleDate get適用終了年月日TextBox() {
-        TextBoxFlexibleDate textBoxFlexibleDate = new TextBoxFlexibleDate();
-        if (entity.getTekiyoShuryoYMD() == null || entity.getTekiyoShuryoYMD().isEmpty()) {
-            return null;
-        }
-        textBoxFlexibleDate.setValue(entity.getTekiyoShuryoYMD());
-        return textBoxFlexibleDate;
     }
 
     /**

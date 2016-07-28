@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihenkotsuchihakko;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokanKihonJiho.ShokanKihonJihoEntiy;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +14,8 @@ import org.apache.ibatis.annotations.Param;
 /**
  *
  * 支払方法変更管理のMapperクラスです。
+ *
+ * @reamsid_L DBD-3640-010 panxiaobo
  */
 public interface IShiharaiHenkoTsuchiHakkoMapper {
 
