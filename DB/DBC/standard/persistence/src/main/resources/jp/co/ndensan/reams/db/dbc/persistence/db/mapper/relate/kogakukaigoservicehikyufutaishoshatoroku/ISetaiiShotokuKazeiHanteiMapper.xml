@@ -5,33 +5,6 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper">
     
-    <!--世帯員所得情報高額一時テーブルを作成する -->
-    <insert id="creat世帯員所得情報高額一時"> 
-        CREATE TEMP TABLE "TmpSetaiHaakuNyuryoku"
-        ( "hihokenshaNo" character varying(10),
-          "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "kijunYMD" rshare."UDD015YMD",
-          "shotokuNendo" rshare."UDD012YSeireki", 
-          "jushochiTokureiFlag" character varying(1), 
-          "setaiCode"  rshare."UDD051SetaiCode",
-          "honninKubun"  character varying(1),
-          "kazeiKubun"  character varying(1),
-          "kazeiKubunGemmenGo" character varying(1),
-          "gekihenKanwaKubun" character varying(1), 
-          "gokeiShotokuGaku" numeric(12,0),
-          "nenkiniShunyuGaku" numeric(12,0), 
-          "nenkiniShotokuGaku" numeric(12,0),
-          "kazeiShotokuGaku" numeric(12,0),
-          "torokuGyomu" character varying(1),
-          "shichosonCode" rshare."UDD023LasdecCode",
-          "shoboKubun" character varying(1), 
-          "roreiFukushiKubun" character varying(1), 
-          "setaiinHihokenshaNo" character varying(10),
-          "honninKazeiKubun" character varying(1),
-          "setaiKazeiKubun" character varying(1)
-        )
-    </insert>
-    
     <resultMap id="resultMap_TmpSetaiHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity" autoMapping="true">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -55,34 +28,6 @@
         <result property="honninKazeiKubun" column="honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
-    <!-- 世帯員所得情報事業高額一時テーブルを作成する -->
-    <insert id="creat世帯員所得情報事業高額一時"> 
-        CREATE TEMP TABLE "TmpSetaiJigyoHaakuNyuryoku"
-        ( "hihokenshaNo" character varying(10),
-          "shikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "setaiInshikibetsuCode" rshare."UDD001ShikibetsuCode",
-          "kijunYMD" rshare."UDD015YMD",
-          "shotokuNendo" rshare."UDD012YSeireki", 
-          "jushochiTokureiFlag" character varying(1), 
-          "setaiCode"  rshare."UDD051SetaiCode",
-          "honninKubun"  character varying(1),
-          "kazeiKubun"  character varying(1),
-          "kazeiKubunGemmenGo" character varying(1),
-          "gekihenKanwaKubun" character varying(1), 
-          "gokeiShotokuGaku" numeric(12,0),
-          "nenkiniShunyuGaku" numeric(12,0), 
-          "nenkiniShotokuGaku" numeric(12,0),
-          "kazeiShotokuGaku" numeric(12,0),
-          "torokuGyomu" character varying(1),
-          "shichosonCode" rshare."UDD023LasdecCode",
-          "shoboKubun" character varying(1), 
-          "roreiFukushiKubun" character varying(1), 
-          "setaiinHihokenshaNo" character varying(10),
-          "honninKazeiKubun" character varying(1),
-          "setaiKazeiKubun" character varying(1)
-        )
-    </insert>
     
     <resultMap id="resultMap_TmpSetaiJigyoHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>

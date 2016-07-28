@@ -177,7 +177,6 @@ public class SetaiShotokuKazeiHantei {
     @Transaction
     public void getJuminShotokuJoho(RString メニューID) {
         ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
-        mapper.insertFortestJuminShotokuJoho();
         if (is高額介護サービス(メニューID)) {
             mapper.update高額介護サービス場合();
             int 生保区分count = mapper.select取得した内容で世帯員所得情報高額一時に生保区分を更新();
