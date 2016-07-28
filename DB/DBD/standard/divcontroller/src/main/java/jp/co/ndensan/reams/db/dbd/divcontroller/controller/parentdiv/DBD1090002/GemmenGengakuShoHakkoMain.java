@@ -485,7 +485,8 @@ public class GemmenGengakuShoHakkoMain {
         GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko service = GenmenGengakuNinteishoKetteiTsuchishoKobetsuHakko.createInstance();
         try (ReportManager reportManager = new ReportManager()) {
             service.publish(帳票タイプリスト, 被保険者番号, 識別コード, Integer.valueOf(div.getHiddenRirekiNo().toString()),
-                    減免減額種類, 交付日, 発行日, 表示名, reportManager);
+                    減免減額種類, 交付日, 発行日,
+                    div.getTsuchishoSakuseiKobetsu().getHenkoTsuchiKobetsu().getCcdBunshoNo().get文書番号(), reportManager);
 
             SourceDataCollection collection = reportManager.publish();
             for (SourceData data : collection) {
