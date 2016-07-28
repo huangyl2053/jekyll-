@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001.dgSh
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
+ * 所得照会票作成のハンドラクラスです。
  *
+ * @reamsid_L DBB-1710-010 xuhao
  */
 public enum NushiJuminJohoHandlerSpec implements IPredicate<NushiJuminJohoDiv> {
 
