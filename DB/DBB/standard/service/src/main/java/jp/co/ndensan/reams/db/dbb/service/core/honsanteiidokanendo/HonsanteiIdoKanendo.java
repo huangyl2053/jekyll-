@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -228,6 +229,37 @@ public class HonsanteiIdoKanendo {
         result.set納入_先頭出力(parameter.get納入_生活保護対象者());
         result.set納入_ページ山分け(parameter.get納入_ページごとに山分け());
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
+        return result;
+    }
+
+    /**
+     * 本算定異動（過年度）バッチパラメータ作成 batchParameterクラス
+     *
+     * @param parameter parameter
+     * @return BatchParamResult
+     */
+    public HonSanteiIdoFukaBatchParameter createIdoBatchParam(HonsanteiIdoDivParameter parameter) {
+        HonSanteiIdoFukaBatchParameter result = new HonSanteiIdoFukaBatchParameter();
+        result.set調定年度(parameter.get調定年度());
+        RString 決定_変更通知書区分 = RString.EMPTY;
+        if (parameter.get決定_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = oneRS;
+        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = twoRS;
+        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+                && parameter.get変更_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = threeRS;
+        }
+        List<ChohyoResult> 出力帳票 = getChohyoID(parameter.get調定年度(),
+                parameter.get算定期(), parameter.get出力帳票一覧(), 決定_変更通知書区分);
+        result.set出力帳票List(出力帳票);
+        result.set処理対象(parameter.get処理対象());
+        if (parameter.get抽出開始日時() != null) {
+            result.set抽出開始日時(parameter.get抽出開始日時().getRDateTime());
+        }
+        if (parameter.get抽出終了日時() != null) {
+            result.set抽出終了日時(parameter.get抽出終了日時().getRDateTime());
+        }
         return result;
     }
 
