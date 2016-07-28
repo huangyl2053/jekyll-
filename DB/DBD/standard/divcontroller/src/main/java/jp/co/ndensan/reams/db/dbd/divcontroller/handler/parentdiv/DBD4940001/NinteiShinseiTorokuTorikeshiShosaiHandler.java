@@ -18,6 +18,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -168,12 +173,10 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
             介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(認定情報.get認定申請理由認定());
             介護認定申請基本情報入力Div.setServiceSakujoTeikeibun(認定情報.get申請サービス削除の理由認定());
         }
-
         介護認定申請基本情報入力Div.setInputMode(
                 new RString(KaigoNinteiShinseiKihonJohoInputDiv.InputType.ShokaiMode.toString()));
 
         IShujiiIryokikanAndShujiiInputDiv 主治医Div = div.getCcdShujiiIryokikanAndShujiiInput();
-
         主治医Div.setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleShokaiMode);
         if (is受給) {
             主治医Div.initialize(
@@ -200,44 +203,36 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 
         INinteiInputDiv 認定Div = div.getCcdNinteiInput();
         NinteiInputDataPassModel model = new NinteiInputDataPassModel();
-
         model.set要介護度コード(convertCodeToRString(認定情報.get要介護認定状態区分コード()));
         model.set有効開始年月日(認定情報.get認定有効期間開始年月日());
         model.set有効終了年月日(認定情報.get認定有効期間終了年月日());
         model.set認定年月日(認定情報.get認定年月日());
         model.set審査会意見(認定情報.get介護認定審査会意見());
-
-        // TODO. for test
         model.set認定区分(new RString("1"));
         model.set申請書管理番号(new ShinseishoKanriNo(認定情報.get申請書管理番号受給()));
         認定Div.initialize(model);
-
         認定Div.set状態(
                 new RString(NinteiInputDiv.ShoriType.ShokaiMode.toString()));
 
-        // 前回結果情報
         IZenkaiNinteiKekkaJohoDiv 前回結果情報Div = div.getCcdZenkaiNinteiKekkaJoho();
-
         前回結果情報Div.setMode_ShokaiButtonType(ZenkaiNinteiKekkaJohoDiv.ShokaiButtonType.ShokaiButtonNoneMode);
-        // TODO. 項目設定がない。
-//        if (is受給) {
-//            前回結果情報Div.set(convertCodeToRString(認定情報.get前回要介護状態区分コード受給()));
-//            前回結果情報Div.set認定年月日(認定情報.get前回認定年月日受給());
-//            前回結果情報Div.set有効開始年月日(認定情報.get前回認定有効期間開始受給());
-//            前回結果情報Div.set有効終了年月日(認定情報.get前回認定有効期間終了受給());
-//        } else {
-//            前回結果情報Div.set要介護度コード(convertCodeToRString(認定情報.get前回要介護状態区分コード認定()));
-//            前回結果情報Div.set認定年月日(認定情報.get前回認定年月日認定());
-//            前回結果情報Div.set有効開始年月日(認定情報.get前回認定有効期間開始認定());
-//            前回結果情報Div.set有効終了年月日(認定情報.get前回認定有効期間終了認定());
-//        }
-
+        if (is受給) {
+            前回結果情報Div.getTxtYokaigodo().setValue(
+                    get要介護度名(認定情報.get厚労省IF識別コード(), convertCodeToRString(認定情報.get前回要介護状態区分コード受給())));
+            前回結果情報Div.getTxtNinteiDay().setValue(認定情報.get前回認定年月日受給());
+            前回結果情報Div.getTxtYukoKikanFrom().setValue(認定情報.get前回認定有効期間開始受給());
+            前回結果情報Div.getTxtYukoKikanTo().setValue(認定情報.get前回認定有効期間終了受給());
+        } else {
+            前回結果情報Div.getTxtYokaigodo().setValue(
+                    get要介護度名(認定情報.get厚労省IF識別コード(), convertCodeToRString(認定情報.get前回要介護状態区分コード認定())));
+            前回結果情報Div.getTxtNinteiDay().setValue(認定情報.get前回認定年月日認定());
+            前回結果情報Div.getTxtYukoKikanFrom().setValue(認定情報.get前回認定有効期間開始認定());
+            前回結果情報Div.getTxtYukoKikanTo().setValue(認定情報.get前回認定有効期間終了認定());
+        }
         IShinseiSonotaJohoInputDiv 申請その他情報Div = div.getCcdSonotaJoho();
 
         申請その他情報Div.initialize();
-
         申請その他情報Div.setMode_ShoriType(ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode);
-
         申請その他情報Div.set異動事由(convertCodeToRString(認定情報.getデータ区分()));
         申請その他情報Div.set削除事由(convertCodeToRString(認定情報.get削除事由コード()));
         申請その他情報Div.set理由(認定情報.get異動理由());
@@ -300,5 +295,24 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
 
     private RString convertCodeToRString(Code target) {
         return null == target || target.isEmpty() ? RString.EMPTY : target.value();
+    }
+
+    private RString get要介護度名(Code 厚労省IF識別コード, RString 要介護度コード) {
+        RString 厚労省IF識別コードStr = convertCodeToRString(厚労省IF識別コード);
+        try {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun99.toValue(要介護度コード).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun02.toValue(要介護度コード).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun06.toValue(要介護度コード).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コードStr)
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コードStr)) {
+                return YokaigoJotaiKubun09.toValue(要介護度コード).get名称();
+            }
+        } catch (IllegalArgumentException e) {
+            return RString.EMPTY;
+        }
+        return RString.EMPTY;
     }
 }
