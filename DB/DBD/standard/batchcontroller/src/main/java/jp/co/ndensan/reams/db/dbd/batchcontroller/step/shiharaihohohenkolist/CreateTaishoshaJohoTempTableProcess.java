@@ -10,11 +10,8 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.shiharaihohokanrilist.Sh
 import jp.co.ndensan.reams.db.dbd.definition.processprm.shiharaihohohenkolist.CreateTaishoshaJohoTempTableProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.shiharaihohohenkolist.TaishoshaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -22,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,8 +35,8 @@ public class CreateTaishoshaJohoTempTableProcess extends BatchProcessBase<Hihoke
                     + "IShiharaiHohoKanriListMapper.selectTaishoshaJoho");
     private CreateTaishoshaJohoTempTableProcessParameter processParamter;
     private RString 出力順;
-    private LasdecCode 市町村コード;
-    private RString 市町村名;
+//    private LasdecCode 市町村コード;
+//    private RString 市町村名;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tmpTableWriter;
 
@@ -49,10 +45,10 @@ public class CreateTaishoshaJohoTempTableProcess extends BatchProcessBase<Hihoke
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
                 new ReportId(processParamter.get帳票ID()), processParamter.getReamsLoginID(), processParamter.get改頁出力順ID());
         出力順 = MyBatisOrderByClauseCreator.create(ShiharaiHohoHenkoHaakuIchiranOrderKey.class, outputOrder);
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association 地方公共団体 = finder.getAssociation();
-        市町村コード = 地方公共団体.get地方公共団体コード();
-        市町村名 = 地方公共団体.get市町村名();
+//        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+//        Association 地方公共団体 = finder.getAssociation();
+//        市町村コード = 地方公共団体.get地方公共団体コード();
+//        市町村名 = 地方公共団体.get市町村名();
     }
 
     @Override
