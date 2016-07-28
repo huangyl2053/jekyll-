@@ -56,16 +56,16 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
     /**
      * select世帯員所得情報高額一時に一括テーブルメソッドです。
      *
-     * @return TempSetaiinHaakuNyuryokuEntity
+     * @return List<TempSetaiinHaakuNyuryokuEntity>
      */
-    TempSetaiinHaakuNyuryokuEntity select世帯員所得情報高額一時に一括();
+    List<TempSetaiinHaakuNyuryokuEntity> select世帯員所得情報高額一時に一括();
 
     /**
      * select世帯員所得情報高額一時に一括テーブルメソッドです。
      *
-     * @return TempSetaiinJigyoHaakuNyuryokuEntity
+     * @return List<TempSetaiinJigyoHaakuNyuryokuEntity>
      */
-    TempSetaiinJigyoHaakuNyuryokuEntity select世帯員所得情報事業高額一時に一括();
+    List<TempSetaiinJigyoHaakuNyuryokuEntity> select世帯員所得情報事業高額一時に一括();
 
     /**
      * update世帯員所得情報高額一時合併内住所地特例者番号変換処理メソッドです。
@@ -149,39 +149,4 @@ public interface ISetaiiShotokuKazeiHanteiMapper {
      */
     void insert世帯員所得情報事業高額一時に一括(List<TmpSetaiJigyoHaakuNyuryokuEntity> list);
 
-    //for test
-    /**
-     * creat世帯員把握入力高額一時テーブルメソッドです。
-     */
-    void creat世帯員把握入力高額一時();
-
-    /**
-     * creat世帯員把握入力事業高額一時テーブルメソッドです。
-     */
-    void creat世帯員把握入力事業高額一時();
-
-    /**
-     * insert世帯員把握入力高額一時テーブルメソッドです。
-     */
-    void insert世帯員把握入力高額一時();
-
-    /**
-     * insert世帯員把握入力事業高額一時テーブルメソッドです。
-     */
-    void insert世帯員把握入力事業高額一時();
-
-    /**
-     * insert世帯員把握入力事業高額一時テーブルメソッドです。
-     */
-    void insert世帯員把握入力高額一時test1();
-
-    /**
-     * insert世帯員把握入力事業高額一時テーブルメソッドです。
-     */
-    void insert世帯員把握入力事業高額一時test();
-
-    /**
-     * insert世帯員把握入力事業高額一時テーブルメソッドです。
-     */
-    void insertFortestJuminShotokuJoho();
 }
