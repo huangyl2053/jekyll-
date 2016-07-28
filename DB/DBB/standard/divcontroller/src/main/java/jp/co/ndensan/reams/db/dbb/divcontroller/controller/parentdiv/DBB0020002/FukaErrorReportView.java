@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -177,6 +178,7 @@ public class FukaErrorReportView {
                 new EucEntityId(internalReport.get内部帳票Id()), UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath, fileName.toRString());
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (EucCsvWriter writer = new EucCsvWriter.InstanceBuilder(eucFilePath, new EucEntityId(internalReport.get内部帳票Id()))
                 .setDelimiter(CSV_WRITER_DELIMITER)
                 .setEncode(Encode.SJIS)
@@ -185,9 +187,11 @@ public class FukaErrorReportView {
                 .build()) {
             for (FukaErrorListCsvItem item : reportItem) {
                 writer.writeLine(item);
+                personalDataList.add(toPersonalData(new ShikibetsuCode(item.get識別コード())));
             }
         }
-        manager.spool(eucFilePath);
+        AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        manager.spool(eucFilePath, log);
         return EucDownload.directAccessDownload(
                 SubGyomuCode.DBB介護賦課, manager.getSharedFileName(), manager.getSharedFileId(), response);
 
