@@ -1619,31 +1619,31 @@
         ON "TmpHonsantei"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
         AND "TmpHonsantei"."fukaNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         LEFT JOIN rgdb."DbV2002Fuka" AS "DbT2002Fuka"
+            INNER JOIN 
+           (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS "DbT2003Kibetsu"
+            ON  "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_fukaNendo"
+            AND "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_choteiNendo"
+            AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_tsuchishoNo"
+            AND "DbT2002Fuka"."rirekiNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_rirekiNo"
+            INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+            ON "DbT2003Kibetsu"."dbT2003Kibetsu_choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         ON "TmpHonsantei"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "TmpHonsantei"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
         AND "TmpHonsantei"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
-        INNER JOIN 
-       (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.noDeleted_DbT2003Kibetsu" />) AS "DbT2003Kibetsu"
-        ON  "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_fukaNendo"
-        AND "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."dbT2003Kibetsu_choteiNendo"
-        AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_tsuchishoNo"
-        AND "DbT2002Fuka"."rirekiNo" = "DbT2003Kibetsu"."dbT2003Kibetsu_rirekiNo"
-        INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
-        ON "DbT2003Kibetsu"."dbT2003Kibetsu_choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
+            INNER JOIN 
+                rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
+            ON
+                "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
+            LEFT JOIN
+                rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
+            ON
+                "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
+            AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         ON "TmpHonsantei"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-        INNER JOIN 
-            rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
-        ON
-            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
-        LEFT JOIN
-            rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
-        ON
-            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "TmpHonsantei"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
         INNER JOIN 
@@ -1689,6 +1689,159 @@
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
             DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo" 
     </select>
+    
+    <!--賦課情報一時テーブルを作成します。-->
+    <insert id="createDbT2002FukaJohoTemp">
+        CREATE TEMP TABLE "DbT2002FukaJohoTemp"
+        (
+        "choteiNendo" rshare."UDD012YSeireki",
+        "fukaNendo" rshare."UDD012YSeireki",
+        "tsuchishoNo" rgdb."DbUDD008TsuchishoNo",
+        "rirekiNo" smallint,
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        "setaiCode" rshare."UDD051SetaiCode",
+        "setaiInsu" smallint,
+        "shikakuShutokuYMD" rshare."UDD015YMD",
+        "shikakuShutokuJiyu" character varying(2),
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyu" character varying(2),
+        "seihofujoShurui" character varying(2),
+        "seihoKaishiYMD" rshare."UDD015YMD",
+        "seihoHaishiYMD" rshare."UDD015YMD",
+        "ronenKaishiYMD" rshare."UDD015YMD",
+        "ronenHaishiYMD" rshare."UDD015YMD",
+        "fukaYMD" rshare."UDD015YMD",
+        "kazeiKubun" character varying(1),
+        "setaikazeiKubun" character varying(1),
+        "gokeiShotokuGaku" numeric(12,0),
+        "nenkinShunyuGaku" numeric(12,0),
+        "hokenryoDankai" character varying(3),
+        "hokenryoDankai1" character varying(3),
+        "nengakuHokenryo1" numeric(7,0),
+        "tsukiwariStartYM1" rshare."UDD014YM",
+        "tsukiwariEndYM1" rshare."UDD014YM",
+        "hokenryoDankai2" character varying(3),
+        "nengakuHokenryo2" numeric(7,0),
+        "tsukiwariStartYM2" rshare."UDD014YM",
+        "tsukiwariEndYM2" rshare."UDD014YM",
+        "choteiNichiji" rshare."UDD018YMDHMS",
+        "choteiJiyu1" character varying(2),
+        "choteiJiyu2" character varying(2),
+        "choteiJiyu3" character varying(2),
+        "choteiJiyu4" character varying(2),
+        "koseiM" character varying(2),
+        "gemmenMaeHokenryo" numeric(7,0),
+        "gemmenGaku" numeric(7,0),
+        "kakuteiHokenryo" numeric(7,0),
+        "hokenryoDankaiKarisanntei" character varying(3),
+        "choshuHohoRirekiNo" smallint,
+        "idoKijunNichiji" rshare."UDD018YMDHMS",
+        "kozaKubun" character varying(1),
+        "kyokaisoKubun" character varying(1),
+        "shokkenKubun" character varying(1),
+        "fukaShichosonCode" rshare."UDD023LasdecCode",
+        "tkSaishutsuKampuGaku" numeric(7,0),
+        "fuSaishutsuKampuGaku" numeric(7,0),
+        "tkKibetsuGaku01" numeric,
+        "tkKibetsuGaku02" numeric,
+        "tkKibetsuGaku03" numeric,
+        "tkKibetsuGaku04" numeric,
+        "tkKibetsuGaku05" numeric,
+        "tkKibetsuGaku06" numeric,
+        "fuKibetsuGaku01" numeric,
+        "fuKibetsuGaku02" numeric,
+        "fuKibetsuGaku03" numeric,
+        "fuKibetsuGaku04" numeric,
+        "fuKibetsuGaku05" numeric,
+        "fuKibetsuGaku06" numeric,
+        "fuKibetsuGaku07" numeric,
+        "fuKibetsuGaku08" numeric,
+        "fuKibetsuGaku09" numeric,
+        "fuKibetsuGaku10" numeric,
+        "fuKibetsuGaku11" numeric,
+        "fuKibetsuGaku12" numeric,
+        "fuKibetsuGaku13" numeric,
+        "fuKibetsuGaku14" numeric
+        )
+    </insert>
+    
+    <!--賦課の情報一時テーブルを登録します。 -->
+    <insert id="insert賦課の情報一時テーブル" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity">
+        INSERT INTO 
+        "DbT2002FukaJohoTemp"
+        VALUES
+        (#{choteiNendo},
+        #{fukaNendo},
+        #{tsuchishoNo},
+        #{rirekiNo},
+        #{hihokenshaNo},
+        #{shikibetsuCode},
+        #{setaiCode},
+        #{setaiInsu},
+        #{shikakuShutokuYMD},
+        #{shikakuShutokuJiyu},
+        #{shikakuSoshitsuYMD},
+        #{shikakuSoshitsuJiyu},
+        #{seihofujoShurui},
+        #{seihoKaishiYMD},
+        #{seihoHaishiYMD},
+        #{ronenKaishiYMD},
+        #{ronenHaishiYMD},
+        #{fukaYMD},
+        #{kazeiKubun},
+        #{setaikazeiKubun},
+        #{gokeiShotokuGaku},
+        #{nenkinShunyuGaku},
+        #{hokenryoDankai},
+        #{hokenryoDankai1},
+        #{nengakuHokenryo1},
+        #{tsukiwariStartYM1},
+        #{tsukiwariEndYM1},
+        #{hokenryoDankai2},
+        #{nengakuHokenryo2},
+        #{tsukiwariStartYM2},
+        #{tsukiwariEndYM2},
+        #{choteiNichiji},
+        #{choteiJiyu1},
+        #{choteiJiyu2},
+        #{choteiJiyu3},
+        #{choteiJiyu4},
+        #{koseiM},
+        #{gemmenMaeHokenryo},
+        #{gemmenGaku},
+        #{kakuteiHokenryo},
+        #{hokenryoDankaiKarisanntei},
+        #{choshuHohoRirekiNo},
+        #{idoKijunNichiji},
+        #{kozaKubun},
+        #{kyokaisoKubun},
+        #{shokkenKubun},
+        #{fukaShichosonCode},
+        #{tkSaishutsuKampuGaku},
+        #{fuSaishutsuKampuGaku},
+        #{tkKibetsuGaku01},
+        #{tkKibetsuGaku02},
+        #{tkKibetsuGaku03},
+        #{tkKibetsuGaku04},
+        #{tkKibetsuGaku05},
+        #{tkKibetsuGaku06},
+        #{fuKibetsuGaku01},
+        #{fuKibetsuGaku02},
+        #{fuKibetsuGaku03},
+        #{fuKibetsuGaku04},
+        #{fuKibetsuGaku05},
+        #{fuKibetsuGaku06},
+        #{fuKibetsuGaku07},
+        #{fuKibetsuGaku08},
+        #{fuKibetsuGaku09},
+        #{fuKibetsuGaku10},
+        #{fuKibetsuGaku11},
+        #{fuKibetsuGaku12},
+        #{fuKibetsuGaku13},
+        #{fuKibetsuGaku14}
+        )
+    </insert>
     
     <sql id="allColumns_DbT1001HihokenshaDaicho">
          "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -1769,19 +1922,19 @@
         ON "TmpTokuKarisantei"."hihokenshaNo" = "DbT2001ChoshuHoho"."hihokenshaNo"
             AND "TmpTokuKarisantei"."fukaNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS "UrT0508SeikatsuHogoJukyusha"
+                INNER JOIN 
+                    rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
+                ON
+                    "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
+                AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
+                AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
+                LEFT JOIN
+                    rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
+                ON
+                    "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
+                AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
+                AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"
-        INNER JOIN 
-            rgur."UrT0526SeikatsuHogoFujoShurui" AS "UrT0526SeikatsuHogoFujoShurui"
-        ON
-            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0526SeikatsuHogoFujoShurui"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0526SeikatsuHogoFujoShurui"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0526SeikatsuHogoFujoShurui"."jukyuKaishiYMD"
-        LEFT JOIN
-            rgur."UrT0528SeikatsuHogoTeishikikan" AS "UrT0528SeikatsuHogoTeishikikan"
-        ON
-            "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode" = "UrT0528SeikatsuHogoTeishikikan"."shikibetsuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."gyomuCode" = "UrT0528SeikatsuHogoTeishikikan"."gyomuCode"
-        AND "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD" = "UrT0528SeikatsuHogoTeishikikan"."jukyuKaishiYMD"
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
         LEFT JOIN 

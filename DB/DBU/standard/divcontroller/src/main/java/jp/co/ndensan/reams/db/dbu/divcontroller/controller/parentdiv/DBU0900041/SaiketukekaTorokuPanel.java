@@ -156,12 +156,9 @@ public class SaiketukekaTorokuPanel {
             if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 削除処理(識別コード, 被保険者番号, 審査請求届出日);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
-            }
-            if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getKaryoMessage().getCcdKaigoKanryoMessage().setMessage(
-                        new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
+                        new RString(UrInformationMessages.正常終了.getMessage()
+                                .replace(削除.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
             }
         }
@@ -180,12 +177,8 @@ public class SaiketukekaTorokuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             修正処理(div, 識別コード, 被保険者番号, 審査請求届出日);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(修正.toString())).respond();
-        }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getKaryoMessage().getCcdKaigoKanryoMessage().setMessage(
-                    new RString(UrInformationMessages.処理完了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
+                    new RString(UrInformationMessages.正常終了.getMessage().replace(修正.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBU0900041StateName.完了状態);
         }
         return ResponseData.of(div).respond();

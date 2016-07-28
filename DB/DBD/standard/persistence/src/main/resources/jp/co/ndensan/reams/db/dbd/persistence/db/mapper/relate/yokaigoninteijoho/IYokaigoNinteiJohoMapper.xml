@@ -147,7 +147,7 @@
         ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
         
         WHERE
-        "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
+        "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号WITH結果情報}
      </select>
      
      <select id="get前回認定情報" resultMap="ResultMap_OldYokaigoNinteiJohoEntity" fetchSize="500">
