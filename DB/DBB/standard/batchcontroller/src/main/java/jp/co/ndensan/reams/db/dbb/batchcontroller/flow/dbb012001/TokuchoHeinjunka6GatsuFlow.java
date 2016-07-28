@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.SystemTimeTokuc
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.SystemTimeUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.TaisyoushaToTaisyoukaiDataTempProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.TokuchoHeinjunkaResultIchiranProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunka6gatsu.TokuchoHeinjunka6GatsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0810-010 yuanzhenxia
  */
-public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6GatsuParameter> {
+public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 平準化前賦課TEMP作成 = "creatTmpProcess";
@@ -40,27 +39,27 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
 
-    private TokuchoHeinjunka6GatsuParameter parameter;
+    private TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter;
     private TokuchoHeinjunka6GatsuProcessParameter processParameter;
 
     @Override
     protected void defineFlow() {
         parameter = getParameter();
-        if (parameter == null || parameter.get出力帳票一覧() == null || parameter.get出力帳票一覧().isEmpty()) {
+        if (parameter == null || parameter.get出力帳票entity() == null || parameter.get出力帳票entity().isEmpty()) {
             return;
         }
         executeStep(システム日時の取得);
         YMDHMS システム日時 = getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME);
         processParameter = new TokuchoHeinjunka6GatsuProcessParameter();
-        processParameter.set調定年度(new FlexibleYear(parameter.get調定年度()));
-        processParameter.set賦課年度(new FlexibleYear(parameter.get賦課年度()));
+        processParameter.set調定年度(parameter.get調定年度());
+        processParameter.set賦課年度(parameter.get賦課年度());
         processParameter.set増額平準化方法(parameter.get増額平準化方法());
         processParameter.set減額平準化方法(parameter.get減額平準化方法());
         processParameter.set調定日時(システム日時);
         executeStep(平準化前賦課TEMP作成);
         executeStep(平準化対象者と対象外データTEMP作成);
         executeStep(介護情報の登録);
-        for (TyouhyouEntity entity : parameter.get出力帳票一覧()) {
+        for (OutputChohyoIchiran entity : parameter.get出力帳票entity()) {
             processParameter.set出力帳票一覧(entity);
             executeStep(計算後情報作成);
             executeStep(特徴平準化結果一覧表出力);
@@ -131,8 +130,8 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeinjunka6G
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
-                getParameter().get賦課年度(),
+        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+                getParameter().get賦課年度().toDateString(),
                 new RString(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeTokuchoHeinjunkaProcess.SYSTEM_TIME).toString()),
                 ShoriName.特徴平準化計算_6月分.get名称(), 帳票分類ID);
     }
