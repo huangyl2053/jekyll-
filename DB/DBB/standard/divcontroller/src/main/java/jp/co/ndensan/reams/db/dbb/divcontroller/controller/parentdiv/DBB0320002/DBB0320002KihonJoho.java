@@ -42,17 +42,4 @@ public class DBB0320002KihonJoho {
         response.data = div;
         return response;
     }
-
-    public ResponseData<DBB0320001KihonJohoDiv> onClick_btnZenkairesultHyoji(DBB0320001KihonJohoDiv div) {
-        return clearViewStateKeys(div);
-    }
-
-    private ResponseData<DBB0320001KihonJohoDiv> clearViewStateKeys(DBB0320001KihonJohoDiv div) {
-        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<DBB0320001KihonJohoDiv> onClick_btnResearch(DBB0320001KihonJohoDiv div) {
-        return clearViewStateKeys(div);
-    }
 }

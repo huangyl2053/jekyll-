@@ -51,12 +51,12 @@
      "layoutName": "DBB0320002",
      "layoutTitle": "介護保険料賦課照会（世帯員所得）",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "検索条件"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0320001",
+     "toLayoutTitle": "介護保険料賦課照会",
+     "toState": "default"
     },
     {
      "id": "5",
@@ -65,12 +65,12 @@
      "layoutName": "DBB0320002",
      "layoutTitle": "介護保険料賦課照会（世帯員所得）",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "該当者一覧"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0320001",
+     "toLayoutTitle": "介護保険料賦課照会",
+     "toState": "default"
     },
     {
      "id": "6",
@@ -163,12 +163,12 @@
      "layoutName": "DBB0320004",
      "layoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "検索条件"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0320001",
+     "toLayoutTitle": "介護保険料賦課照会",
+     "toState": "default"
     },
     {
      "id": "13",
@@ -177,12 +177,12 @@
      "layoutName": "DBB0320004",
      "layoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "該当者一覧"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0320001",
+     "toLayoutTitle": "介護保険料賦課照会",
+     "toState": "default"
     },
     {
      "id": "14",
@@ -205,12 +205,12 @@
      "layoutName": "DBB0320003",
      "layoutTitle": "介護保険料賦課照会（特別徴収）",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "検索条件"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0320001",
+     "toLayoutTitle": "介護保険料賦課照会",
+     "toState": "default"
     },
     {
      "id": "16",
@@ -219,12 +219,12 @@
      "layoutName": "DBB0320003",
      "layoutTitle": "介護保険料賦課照会（特別徴収）",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0300001",
-     "toLayoutTitle": "賦課対象者検索",
-     "toState": "該当者一覧"
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0320001",
+     "toLayoutTitle": "介護保険料賦課照会",
+     "toState": "default"
     },
     {
      "id": "17",

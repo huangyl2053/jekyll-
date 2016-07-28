@@ -49,6 +49,10 @@ public class KihonJoho {
         return response;
     }
 
+    /**
+     * @param div {@link KihonJohoDiv}
+     * @return {@link ResponseData}
+     */
     public ResponseData<KihonJohoDiv> onClick_btnZenkairesultHyoji(KihonJohoDiv div) {
         return clearViewStateKeys(div);
     }
@@ -58,6 +62,10 @@ public class KihonJoho {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * @param div {@link KihonJohoDiv}
+     * @return {@link ResponseData}
+     */
     public ResponseData<KihonJohoDiv> onClick_btnResearch(KihonJohoDiv div) {
         return clearViewStateKeys(div);
     }
