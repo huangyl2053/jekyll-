@@ -103,8 +103,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
+        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
         getHandler(div).initialize高額詳細内容(追加モード, メニューID,
-                被保険者番号, サービス年月, 証記載保険者番号, 0, 識別コード);
+                被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
         ViewStateHolder.put(ViewStateKeys.画面モード, 追加モード);
         KogakuServicehiDetailParameter 画面データ = getHandler(div).set申請情報登録画面データ();
         ViewStateHolder.put(ViewStateKeys.詳細データ, 画面データ);

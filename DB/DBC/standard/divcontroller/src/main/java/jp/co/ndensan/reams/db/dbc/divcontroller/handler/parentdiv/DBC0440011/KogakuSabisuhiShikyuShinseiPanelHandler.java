@@ -137,14 +137,20 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     public void save申請情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             HokenshaNo 証記載保険者番号, RString メニューID, RString 画面モード,
             int 履歴番号, KougakuSabisuhiShousaiNaiyouResult result) {
+        KogakuShikyuShinsei 支給申請entity = null;
+        KogakuShikyuHanteiKekka 支給判定結果entity = null;
         if (追加モード.equals(画面モード)) {
             履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
                     被保険者番号.value(), サービス年月.getNendo()).nextString().toString());
         }
+        if (result != null) {
+            支給申請entity = result.get高額介護サービス費支給申請Entity();
+            支給判定結果entity = result.get高額介護サービス費支給判定結果Entity();
+        }
         KogakuShikyuShinsei 高額支給申請entity = get高額支給申請entity(被保険者番号, サービス年月, 証記載保険者番号,
-                履歴番号, result.get高額介護サービス費支給申請Entity());
+                支給申請entity);
         KogakuShikyuHanteiKekka 高額支給判定結果entity = get高額支給判定結果entity(
-                被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, result.get高額介護サービス費支給判定結果Entity());
+                被保険者番号, サービス年月, 証記載保険者番号, 支給判定結果entity);
         RString 修正前支給区分 = null;
         if (追加モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.added();
@@ -152,7 +158,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         } else if (修正モード.equals(画面モード)) {
             高額支給申請entity = 高額支給申請entity.modified();
             高額支給判定結果entity = 高額支給判定結果entity.modified();
-            if (result.get高額介護サービス費支給審査決定Entity() != null) {
+            if (result != null && result.get高額介護サービス費支給審査決定Entity() != null) {
                 修正前支給区分 = result.get高額介護サービス費支給審査決定Entity().get支給区分コード();
             }
         } else if (削除モード.equals(画面モード)) {
@@ -191,8 +197,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         for (dgTaishoshaIchiran_Row row : rowList) {
             if (追加.equals(row.getData0())) {
                 if (row.getData10().equals(ONE)) {
-                    int 履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
-                            被保険者番号.value(), サービス提供年月.getNendo()).nextString().toString());
+                    int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
+                            get高額介護給付対象者明細履歴番号(被保険者番号, サービス提供年月);
                     KogakuKyufuTaishoshaMeisai 給付対象者明細entity = new KogakuKyufuTaishoshaMeisai(
                             被保険者番号, サービス提供年月,
                             new JigyoshaNo(row.getData1()), new ServiceShuruiCode(row.getData11()), 履歴番号);
@@ -201,8 +207,8 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     result.set高額介護サービス費給付対象者明細Entity(給付対象者明細entity);
                     entityList.add(result);
                 } else if (row.getData10().equals(TWO)) {
-                    int 履歴番号 = Integer.parseInt(Saiban.get(SubGyomuCode.DBB介護賦課,
-                            被保険者番号.value(), サービス提供年月.getNendo()).nextString().toString());
+                    int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
+                            get高額介護給付対象者合計履歴番号(被保険者番号, サービス提供年月);
                     KogakuKyufuTaishoshaGokei 給付対象者合計entity = new KogakuKyufuTaishoshaGokei(
                             被保険者番号, サービス提供年月, new Decimal(履歴番号));
                     給付対象者合計entity = buid給付対象者合計entity(
@@ -279,8 +285,10 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
 
     private KogakuShikyuShinsei get高額支給申請entity(
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号,
-            int 履歴番号, KogakuShikyuShinsei entity) {
+            KogakuShikyuShinsei entity) {
         if (entity == null) {
+            int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
+                    get高額介護支給申請履歴番号(被保険者番号, サービス年月);
             entity = new KogakuShikyuShinsei(被保険者番号, サービス年月,
                     証記載保険者番号, new Decimal(履歴番号)).createBuilderForEdit().build();
         }
@@ -360,8 +368,10 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     }
 
     private KogakuShikyuHanteiKekka get高額支給判定結果entity(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
-            HokenshaNo 証記載保険者番号, int 履歴番号, KogakuShikyuHanteiKekka entity) {
+            HokenshaNo 証記載保険者番号, KogakuShikyuHanteiKekka entity) {
         if (entity == null) {
+            int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
+                    get高額介護判定結果履歴番号(被保険者番号, サービス年月);
             entity = new KogakuShikyuHanteiKekka(被保険者番号,
                     サービス年月, 証記載保険者番号, 履歴番号).createBuilderForEdit().build();
         }
