@@ -569,6 +569,7 @@ public class KariSanteiIdoFuka {
         } else {
             result.set特徴捕捉対象者の依頼金額計算区分(定値_1);
         }
+        result.setバッチ起動フラグ(parameter.isバッチ起動フラグ());
         return result;
     }
 

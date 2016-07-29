@@ -41,4 +41,5 @@ public class KariSanteiIdoParameter {
     private boolean 一括発行起動フラグ;
     private RString 仮算定異動賦課メニューからの場合;
     private RString 算定期;
+    private boolean バッチ起動フラグ;
 }

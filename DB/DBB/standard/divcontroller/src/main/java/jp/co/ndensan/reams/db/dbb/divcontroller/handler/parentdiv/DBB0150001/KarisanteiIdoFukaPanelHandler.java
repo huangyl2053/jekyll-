@@ -634,6 +634,20 @@ public class KarisanteiIdoFukaPanelHandler {
                     .concat(抽出日時.getTxtChushutsuEdTime().getValue().toString()));
         }
         RString 処理対象 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedValue();
+        List<TyouhyouEntity> 出力帳票一覧 = new ArrayList<>();
+        Map<RString, RString> rowMap = div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran()
+                .getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        parameter.setバッチ起動フラグ(false);
+        for (Map.Entry<RString, RString> entry : set) {
+            出力帳票一覧.add(new TyouhyouEntity(new ReportId(entry.getKey()), null, entry.getValue()));
+            if (特徴開始通知書_仮算定.value().equals(entry.getKey())
+                    || 仮算定額変更通知書.value().equals(entry.getKey())
+                    || 納入通知書.value().equals(entry.getKey())) {
+                parameter.setバッチ起動フラグ(true);
+            }
+        }
+        parameter.set出力帳票一覧List(出力帳票一覧);
         boolean 一括発行起動フラグ;
         if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
             if (月_6.equals(処理対象)) {
@@ -644,6 +658,15 @@ public class KarisanteiIdoFukaPanelHandler {
             一括発行起動フラグ = false;
             parameter.set仮算定異動賦課メニューからの場合(
                     div.getShoriJokyo().getTokuchoHosoku().getRadTokuchoHosokuIraiKingakuKeisan().getSelectedValue());
+            List<dgKarisanteiIdoshoriKakunin_Row> rowList = div.getShoriJokyo().getKarisanteiIdoFukashoriKakunin()
+                    .getDgKarisanteiIdoshoriKakunin().getDataSource();
+            for (dgKarisanteiIdoshoriKakunin_Row row : rowList) {
+                if (ShoriName.特徴仮算定賦課.get名称().equals(row.getTxtShoriMei().getValue())) {
+                    parameter.set特徴仮算定賦課処理日時(row.getTxtShoriNichiji().getValue());
+                } else if (ShoriName.特徴仮算定賦課.get名称().equals(row.getTxtShoriMei().getValue())) {
+                    parameter.set普徴仮算定賦課処理日時(row.getTxtShoriNichiji().getValue());
+                }
+            }
         } else {
             if (月_6.equals(処理対象)) {
                 parameter.set帳票グループ(帳票グループコード_32);
@@ -652,14 +675,6 @@ public class KarisanteiIdoFukaPanelHandler {
             }
             一括発行起動フラグ = true;
         }
-        List<TyouhyouEntity> 出力帳票一覧 = new ArrayList<>();
-        Map<RString, RString> rowMap = div.getKarisanteiIdoFukaChohyoHakko().getCcdChohyoIchiran()
-                .getSelected帳票IdAnd出力順Id();
-        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
-        for (Map.Entry<RString, RString> entry : set) {
-            出力帳票一覧.add(new TyouhyouEntity(new ReportId(entry.getKey()), null, entry.getValue()));
-        }
-        parameter.set出力帳票一覧List(出力帳票一覧);
         RDate 特徴_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getTxtTokuKaishiTsuchiHakkoYMD().getValue();
         if (特徴_発行日 != null) {
