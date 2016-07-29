@@ -12,6 +12,7 @@ import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 要介護認定インターフェース情報テーブルのエンティティクラスです。
@@ -30,6 +31,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private HihokenshaNo hihokenshaNo;
     private RString rirekiNo;
@@ -1084,8 +1086,7 @@ public class DbT4003YokaigoNinteiInterfaceEntity extends DbTableEntityBase<DbT40
      * このエンティティの主キーが他の{@literal DbT4003YokaigoNinteiInterfaceEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4003YokaigoNinteiInterfaceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4003YokaigoNinteiInterfaceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4003YokaigoNinteiInterfaceEntity other) {
