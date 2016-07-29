@@ -469,9 +469,11 @@ public class TokuchoTaishoshaIchiranSakusei {
         RString 開始月数 = DateConverter.formatMonthFull(開始月);
         DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報Entity = 特徴未同定情報Dac.selectByKey(
                 処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
-        特徴未同定情報Entity.setKakuninJokyoKbn(確認状況区分);
-        特徴未同定情報Entity.setState(EntityDataState.Modified);
-        特徴未同定情報Dac.save(特徴未同定情報Entity);
+        if (特徴未同定情報Entity != null) {
+            特徴未同定情報Entity.setKakuninJokyoKbn(確認状況区分);
+            特徴未同定情報Entity.setState(EntityDataState.Modified);
+            特徴未同定情報Dac.save(特徴未同定情報Entity);
+        }
         if (確認状況区分_同定済み.compareTo(確認状況区分) == NUM0) {
             HihokenshaNo 被保険者番号Temp;
             if (!RString.isNullOrEmpty(被保険者番号)) {
@@ -600,16 +602,12 @@ public class TokuchoTaishoshaIchiranSakusei {
                 return;
             }
             for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
-                if (確認状況区分_同定済み.compareTo(entity.getKakuninJokyoKbn()) == NUM0) {
-                    その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
-                }
-            }
-            特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
-                    処理年度, 基礎年金番号, 年金コード, 捕捉月, 識別コード);
-            for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
                 entity.setKakuninJokyoKbn(確認状況区分_対象外);
                 entity.setState(EntityDataState.Modified);
                 特徴未同定情報Dac.save(entity);
+                if (確認状況区分_同定済み.compareTo(entity.getKakuninJokyoKbn()) == NUM0) {
+                    その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
+                }
             }
         }
     }

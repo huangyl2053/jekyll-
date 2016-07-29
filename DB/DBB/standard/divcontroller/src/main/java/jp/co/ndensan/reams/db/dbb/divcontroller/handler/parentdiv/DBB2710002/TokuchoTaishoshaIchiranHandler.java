@@ -24,13 +24,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ue.uex.definition.core.DoteiFuitchiRiyu;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokuchoType;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -68,7 +69,6 @@ public class TokuchoTaishoshaIchiranHandler {
     private static final RString 同定済み_NAME = new RString("同定済み");
     private static final RString 対象外_CODE = new RString("2");
     private static final RString 対象外_NAME = new RString("対象外");
-    private static final RString 特別徴収義務者コード種別 = new RString("0047");
     private static final RString 介護資格取得事由コード種別 = new RString("0007");
     private static final RString 介護資格喪失事由コード種別 = new RString("0010");
     private static final RString TOPINFO = new RString("被保険者番号：");
@@ -307,8 +307,8 @@ public class TokuchoTaishoshaIchiranHandler {
             }
             RString 特別徴収義務者コード = result.get(i).get特徴義務者コード();
             if (特別徴収義務者コード != null) {
-                RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課,
-                        new CodeShubetsu(特別徴収義務者コード種別), new Code(特別徴収義務者コード));
+                RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(特別徴収義務者コード));
                 newRow.setTokuchoGimusha(codeMeisho);
             }
             newRow.setKisoNenkinNo(result.get(i).get基礎年金番号());
@@ -380,8 +380,8 @@ public class TokuchoTaishoshaIchiranHandler {
             newRow.getTxtNenkinCode().setValue(result.get(i).get年金コード());
             RString 特別徴収義務者コード = result.get(i).get特別徴収義務者();
             if (特別徴収義務者コード != null) {
-                RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課,
-                        new CodeShubetsu(特別徴収義務者コード種別), new Code(特別徴収義務者コード));
+                RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(特別徴収義務者コード));
                 newRow.getTxtTokuchoGimusha().setValue(codeMeisho);
             }
             newRow.getTxtShimeiKana().setValue(result.get(i).getカナ氏名());
@@ -478,8 +478,8 @@ public class TokuchoTaishoshaIchiranHandler {
         RString 特別徴収義務者コード = result.get未同定年金情報_特別徴収義務者コード();
         if (特別徴収義務者コード != null) {
             div.setHiddenTokubetsuChoshuGimushaCode(特別徴収義務者コード);
-            RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.DBB介護賦課,
-                    new CodeShubetsu(特別徴収義務者コード種別), new Code(特別徴収義務者コード));
+            RString codeMeisho = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(特別徴収義務者コード));
             div.getTxtTokuchoGimusha().setValue(codeMeisho);
         }
         if (result.get未同定年金情報_生年月日() != null) {
@@ -519,7 +519,7 @@ public class TokuchoTaishoshaIchiranHandler {
         }
         if (result.get被保険者台帳_資格取得事由() != null) {
             div.getTxtShutokuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(介護資格取得事由コード種別),
+                    DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(),
                     new Code(result.get被保険者台帳_資格取得事由())));
         }
         if (!RString.isNullOrEmpty(result.get被保険者台帳_資格喪失年月日())) {
@@ -527,14 +527,14 @@ public class TokuchoTaishoshaIchiranHandler {
         }
         if (result.get被保険者台帳_資格喪失事由() != null) {
             div.getTxtSoshitsuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(介護資格喪失事由コード種別),
+                    DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
                     new Code(result.get被保険者台帳_資格喪失事由())));
         }
         div.getTxtTorokuZumiKisoNenkinNo().setValue(result.get登録済年金情報_基礎年金番号());
         div.getTxtTorokuZumiNenkinCode().setValue(result.get登録済年金情報_年金コード());
         if (result.get登録済年金情報_特別徴収義務者コード() != null) {
             div.getTxtTorokuZumiTokuchoGimusha().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    new CodeShubetsu(特別徴収義務者コード種別),
+                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
                     new Code(result.get登録済年金情報_特別徴収義務者コード())));
         }
     }

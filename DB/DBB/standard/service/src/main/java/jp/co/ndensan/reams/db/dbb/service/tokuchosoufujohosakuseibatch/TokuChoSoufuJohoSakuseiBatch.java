@@ -68,7 +68,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     private static final RString RS00 = new RString("00");
     private static final RString RS0001 = new RString("0001");
     private static final RString RS0002 = new RString("0002");
-    private static final RString RS0004 = new RString("00004");
+    private static final RString RS0004 = new RString("0004");
     private static final RString RS0005 = new RString("0005");
     private static final RString RS0006 = new RString("0006");
     private static final RString 定値_DT媒体コード = new RString("6");

@@ -250,6 +250,7 @@ public final class TokutyoKariSanteiFukaHandler {
             ShuturyokuTyoutuke shuturyokutyoutuke = new ShuturyokuTyoutuke();
             shuturyokutyoutuke.set出力順ID(Long.parseLong(result.get出力順ID().toString()));
             shuturyokutyoutuke.set帳票ID(result.get帳票ID());
+            shuturyokutyoutuke.set帳票分類ID(result.get帳票分類ID());
             出力帳票一覧.add(shuturyokutyoutuke);
         }
         batchParam.set出力帳票一覧(出力帳票一覧);
