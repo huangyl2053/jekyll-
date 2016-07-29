@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.DBDBT13011;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbdbt13011;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDBT13011.GeneralPurposeListOutputExecProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt13011.GeneralPurposeListOutputExecProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT13011.GeneralPurposeListOutputParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt13011.GeneralPurposeListOutputProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
