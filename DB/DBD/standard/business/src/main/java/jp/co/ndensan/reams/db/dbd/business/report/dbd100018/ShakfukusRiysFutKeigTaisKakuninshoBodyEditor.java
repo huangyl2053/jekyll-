@@ -160,7 +160,7 @@ public class ShakfukusRiysFutKeigTaisKakuninshoBodyEditor implements IShakfukusR
             source.keigenRitsu = RString.EMPTY;
             source.genmenNaiyo2 = RString.EMPTY;
         } else if (軽減率_100.equals(new RString(item.get社会福祉法人等利用者負担軽減().get軽減率_分子().toString()))
-                && (軽減率_100.equals(new RString(item.get社会福祉法人等利用者負担軽減().get軽減率_分母().toString())))) {
+                || (軽減率_100.equals(new RString(item.get社会福祉法人等利用者負担軽減().get軽減率_分母().toString())))) {
             source.genmenRitsu = 減額割合;
             for (DbT7067ChohyoSeigyoHanyoEntity entity : item.get帳票制御汎用List()) {
                 if (new RString(ChohyoSeigyoHanyoKeysDBD100018.減免内容の制限事項３_４.name()).equals(entity.getKomokuName())) {
