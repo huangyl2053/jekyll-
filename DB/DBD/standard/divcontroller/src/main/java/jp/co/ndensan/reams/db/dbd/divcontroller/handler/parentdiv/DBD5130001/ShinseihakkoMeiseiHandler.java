@@ -35,10 +35,10 @@ public class ShinseihakkoMeiseiHandler {
 
     private final ShinseihakkoMeiseiDiv div;
     private final NinteishinseihakkoDiv ninteishinseihakkodiv;
-    private static final RString 保険者番号 = new RString("123456");
-    private static final RString 識別コード = new RString("000000000000010");
-    private static final RString 被保番号 = new RString("123");
-    private static final RString 被保険者番号 = new RString("123");
+    private static final RString 保険者番号 = new RString("209007");
+    private static final RString 識別コード = new RString("000000001011002");
+    private static final RString 被保番号 = new RString("2190000003");
+    private static final RString 被保険者番号 = new RString("2190000003");
     private static final RString 画面区分 = new RString("2");
     private static final RString 正 = new RString("○");
     private static final int NO_10 = 10;

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyo
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken.ViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.ValidationHandler;
@@ -205,7 +204,7 @@ public class YoshikiYonnoni {
     /**
      * 介護保険特別会計経理状況登録_様式４を画面初期化処理しました。
      *
-     * @param div {@link KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div 介護保険特別会計経理状況登録_様式４情報Div}
+     * @param div {@link YoshikiYonnoniDiv 介護保険特別会計経理状況登録_様式４情報Div}
      * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnoniDiv> onStateTransition(YoshikiYonnoniDiv div) {
@@ -849,10 +848,7 @@ public class YoshikiYonnoni {
         if (is変更あり(list, i, 座標9_1, div.getYoshikiYonnoniMeisai().getTxttesuryo().getValue())) {
             return true;
         }
-        if (is変更あり(list, i, 座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue())) {
-            return true;
-        }
-        return false;
+        return is変更あり(list, i, 座標9_2, div.getYoshikiYonnoniMeisai().getTxtyobih().getValue());
     }
 
     /**
@@ -912,10 +908,7 @@ public class YoshikiYonnoni {
         if (is変更あり(list, i, 座標20_1, div.getYoshikiYonnoniMeisai().getTxtsainyushutsusa().getValue())) {
             return true;
         }
-        if (is変更あり(list, i, 座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue())) {
-            return true;
-        }
-        return false;
+        return is変更あり(list, i, 座標21_1, div.getYoshikiYonnoniMeisai().getTxtuchikikinkurigaku().getValue());
     }
 
     /**

@@ -55,19 +55,4 @@
         FROM
         rgdb."DbT7202KaigoNinteiHokaiseiKanri"
     </select>
-    
-    <resultMap id="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity" autoMapping="true">
-        <result property="hokaiseiShikoYMD" column="hokaiseiShikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    </resultMap>
-	<select resultOrdered="true" id="get最古法改正施行年月日" resultMap="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity">
-	SELECT
-            "hokaiseiShikoYMD" AS hokaiseiShikoYMD,
-            "koroshoIfShikibetsuCode" AS koroshoIfShikibetsuCode
-        FROM    
-            rgdb."DbT7202KaigoNinteiHokaiseiKanri"
-        ORDER BY
-            "hokaiseiShikoYMD"
-        LIMIT 1
-    </select>
 </mapper>

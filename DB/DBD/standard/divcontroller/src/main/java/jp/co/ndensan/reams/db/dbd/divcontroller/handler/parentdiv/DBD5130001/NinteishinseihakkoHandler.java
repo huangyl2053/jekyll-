@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.NinteishinseihakkoDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,9 +21,9 @@ public class NinteishinseihakkoHandler {
 
     private final NinteishinseihakkoDiv div;
     private static final RString 市町村コード = new RString("123456");
-    private static final RString 識別コード = new RString("000000000000010");
+    private static final RString 識別コード = new RString("000000001011002");
     private static final RString HDN_SETAI_KODO = new RString("1234567");
-    private static final RString 被保険者番号 = new RString("0000000001");
+    private static final RString 被保険者番号 = new RString("2190000003");
     private static final RString コード = new RString("1");
 
     /**
@@ -37,12 +39,12 @@ public class NinteishinseihakkoHandler {
      * 画面初期化
      */
     public void initialize() {
-        // ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         // TODO
         //IKaigoNinteiAtenaInfoDivの共通方法に問題があります、QAを提出しました、KaigoDonyuKeitaiとShoriTypeを固定に設定
-        // RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().getKey();
+        RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().getKey();
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(識別コード);
-        div.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(コード);
+        div.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
         div.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         div.getCcdKaigoNinteiAtenaInfo().initialize();
