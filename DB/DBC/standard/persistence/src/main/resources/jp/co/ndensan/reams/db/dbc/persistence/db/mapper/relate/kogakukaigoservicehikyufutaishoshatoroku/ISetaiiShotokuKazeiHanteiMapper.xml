@@ -456,62 +456,65 @@
     
     <!--update世帯員所得情報高額一時生保区分を付加する-->
     <update id="update世帯員所得情報高額一時生保区分を付加する">
-       UPDATE "TmpSetaiHaakuNyuryoku"
+       UPDATE "TmpSetaiHaakuNyuryoku" AS 世帯員所得情報高額一時
        SET "TmpSetaiHaakuNyuryoku"."shoboKubun" = '1'
-            FROM "TmpSetaiHaakuNyuryoku"
-            INNER JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
-            ON "TmpSetaiHaakuNyuryoku"."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
-            AND 生活保護受給者."gyomuCode" = 'DB'
-            AND (生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
-            AND  "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD" 
-            OR 生活保護受給者."jukyuKaishiYMD"<![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
-            AND 生活保護受給者."jukyuHaishiYMD" IS NULL
-                )
+        WHERE EXISTS (SELECT 'X'
+            FROM rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
             LEFT JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
             ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
             AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
-            AND ("TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
-            AND "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[>]]> 生活保護停止期間."jukyuTeishiShuryoYMD" 
+            AND ("世帯員所得情報高額一時"."kijunYMD" <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
+            AND "世帯員所得情報高額一時"."kijunYMD" <![CDATA[>]]> 生活保護停止期間."jukyuTeishiShuryoYMD" 
             OR 生活保護停止期間."jukyuTeishiShuryoYMD" IS NULL)
+            WHERE "世帯員所得情報高額一時"."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
+            AND 生活保護受給者."gyomuCode" = 'DB'
+            AND (生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報高額一時"."kijunYMD" 
+            AND  "世帯員所得情報高額一時"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD" 
+            OR 生活保護受給者."jukyuKaishiYMD"<![CDATA[<=]]> "世帯員所得情報高額一時"."kijunYMD" 
+            AND 生活保護受給者."jukyuHaishiYMD" IS NULL
+                ))
     </update>
     
     <!--update世帯員所得情報高額一時老齢福祉区分を更新する-->
     <update id="update世帯員所得情報高額一時老齢福祉区分を更新する">
-       UPDATE "TmpSetaiHaakuNyuryoku"
+       UPDATE "TmpSetaiHaakuNyuryoku" AS 世帯員所得情報高額一時
        SET "roreiFukushiKubun" = '1'
-        FROM "TmpSetaiHaakuNyuryoku"
-        INNER JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
-        ON "TmpSetaiHaakuNyuryoku"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
-        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
-        AND "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
+        WHERE EXISTS (SELECT 'X'
+        FROM 
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
+        WHERE "世帯員所得情報高額一時"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報高額一時"."kijunYMD" 
+        AND "世帯員所得情報高額一時"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
     </update>
     
     <!--update世帯員所得情報事業高額一時生保区分を付加する-->
     <update id="update世帯員所得情報事業高額一時生保区分を付加する">
-       UPDATE "TmpSetaiJigyoHaakuNyuryoku"
+              UPDATE "TmpSetaiJigyoHaakuNyuryoku" AS 世帯員所得情報事業高額一時
        SET "shoboKubun" = '1'
-        FROM "TmpSetaiJigyoHaakuNyuryoku"
-        INNER JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
-        ON "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
-        AND 生活保護受給者."gyomuCode" = 'DB'
-        AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" 
-        AND  "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD" 
+       WHERE EXISTS (SELECT 'X'
+        FROM
+        rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
         INNER JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
         ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
         AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
         AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
         AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[>]]>  生活保護停止期間."jukyuTeishiShuryoYMD"
+        WHERE 世帯員所得情報事業高額一時."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 'DB'
+        AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> 世帯員所得情報事業高額一時."kijunYMD" 
+        AND  世帯員所得情報事業高額一時."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD")
     </update>
     
     <!--update世帯員所得情報事業高額一時老齢福祉区分を更新する-->
     <update id="update世帯員所得情報事業高額一時老齢福祉区分を更新する">
-       UPDATE "TmpSetaiJigyoHaakuNyuryoku"
+       UPDATE "TmpSetaiJigyoHaakuNyuryoku"　AS 世帯員所得情報事業高額一時
        SET "roreiFukushiKubun" = '1'
-        FROM "TmpSetaiJigyoHaakuNyuryoku"
-        INNER JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
-        ON "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+        WHERE EXISTS (SELECT 'X'
+        FROM 
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
+        WHERE "世帯員所得情報事業高額一時"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
         AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" 
-        AND "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
+        AND "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"）
     </update>
     
     </mapper>
