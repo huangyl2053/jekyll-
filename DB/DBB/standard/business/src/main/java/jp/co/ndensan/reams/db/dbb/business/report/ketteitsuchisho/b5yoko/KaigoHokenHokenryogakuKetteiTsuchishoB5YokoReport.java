@@ -115,6 +115,9 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReport
 
     private Decimal get普徴期別金額(RString 期, List<UniversalPhase> 普徴期別金額リスト) {
         Decimal 普徴期別金額 = Decimal.ZERO;
+        if (普徴期別金額リスト == null) {
+            return 普徴期別金額;
+        }
         for (UniversalPhase universalPhase : 普徴期別金額リスト) {
 
             if (new RString(universalPhase.get期()).padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
@@ -143,6 +146,9 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReport
 
     private Decimal get特徴期別金額(RString 期, List<CharacteristicsPhase> 特徴期別金額リスト) {
         Decimal 特徴期別金額 = Decimal.ZERO;
+        if (特徴期別金額リスト == null) {
+            return 特徴期別金額;
+        }
         for (CharacteristicsPhase characteristicsPhase : 特徴期別金額リスト) {
 
             if (characteristicsPhase.get期().padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
