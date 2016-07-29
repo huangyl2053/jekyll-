@@ -120,7 +120,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
         }
         executeStep(計算後情報作成);
         for (KarisanteiIdoKekkaResult result : getParameter().get出力帳票List()) {
-            if (result.get帳票分類ID().compareTo(ID) == 0) {
+            if (result.get帳票分類ID().value().equals(ID.value())) {
                 executeStep(仮算定異動一括結果一覧表出力);
             }
         }
