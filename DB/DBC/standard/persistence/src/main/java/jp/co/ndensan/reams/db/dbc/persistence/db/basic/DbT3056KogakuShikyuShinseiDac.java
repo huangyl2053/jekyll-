@@ -70,6 +70,30 @@ public class DbT3056KogakuShikyuShinseiDac implements ISaveable<DbT3056KogakuShi
     }
 
     /**
+     * 主キーで高額介護サービス費支給申請を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @return DbT3056KogakuShikyuShinseiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3056KogakuShikyuShinseiEntity> selectAllByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3056KogakuShikyuShinsei.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月))).
+                toList(DbT3056KogakuShikyuShinseiEntity.class);
+    }
+
+    /**
      * 高額介護サービス費支給申請を全件返します。
      *
      * @return List<DbT3056KogakuShikyuShinseiEntity>

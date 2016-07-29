@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -48,7 +47,7 @@ public class ShutokuJohoChushutsuRenkeiBatchParameter extends BatchParameterBase
     @BatchParameter(key = KEY_SHARE_FILES_NAME, name = "共有ファイル名")
     private RString sharefilesname;
     @BatchParameter(key = KEY_SHARE_FILES_ID, name = "共有ファイルID")
-    private RDateTime sharefilesID;
+    private RString sharefilesID;
     @BatchParameter(key = KEY_SHORI_KUBUN, name = "処理区分")
     private RString shorikubun;
     @BatchParameter(key = KEY_SHORI_NICHIJI, name = "処理日時")
@@ -76,7 +75,7 @@ public class ShutokuJohoChushutsuRenkeiBatchParameter extends BatchParameterBase
     private long 出力順ID;
     private ReportId 帳票ID;
     private RString 共有ファイル名;
-    private RDateTime 共有ファイルID;
+    private RString 共有ファイルID;
     private RString 処理区分;
     private YMDHMS 処理日時;
 }

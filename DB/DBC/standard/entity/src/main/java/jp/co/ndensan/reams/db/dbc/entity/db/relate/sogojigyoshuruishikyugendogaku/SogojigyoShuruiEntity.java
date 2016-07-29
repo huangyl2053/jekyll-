@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshuruishikyugendogaku;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 総合事業種類情報Entityです。
@@ -19,11 +18,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SogojigyoShuruiEntity {
 
-    private FlexibleYearMonth 適用開始年月;
-    private RString サービス種類略称;
-
-    private FlexibleYearMonth 適用終了年月;
-    private Decimal 要支援1;
-    private Decimal 要支援2;
-    private Decimal 二次予防;
+    private DbT7118SogoJigyoShuruiShikyuGendoGakuEntity 総合事業種類情報;
+    private RString サービス種類名称;
 }

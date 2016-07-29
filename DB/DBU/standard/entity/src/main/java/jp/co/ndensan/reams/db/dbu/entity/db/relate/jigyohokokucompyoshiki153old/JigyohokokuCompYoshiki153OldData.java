@@ -25,7 +25,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 保険者番号;
     private RString 保険者名;
     private RString 給付区分;
-
     private RString 予防給付_要支援1_1;
     private RString 予防給付_要支援1_2;
     private RString 予防給付_要支援1_3;
@@ -36,7 +35,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 予防給付_要支援1_8;
     private RString 予防給付_要支援1_9;
     private RString 予防給付_要支援1_10;
-
     private RString 予防給付_要支援2_1;
     private RString 予防給付_要支援2_2;
     private RString 予防給付_要支援2_3;
@@ -47,7 +45,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 予防給付_要支援2_8;
     private RString 予防給付_要支援2_9;
     private RString 予防給付_要支援2_10;
-
     private RString 予防給付の計_1;
     private RString 予防給付の計_2;
     private RString 予防給付の計_3;
@@ -58,7 +55,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 予防給付の計_8;
     private RString 予防給付の計_9;
     private RString 予防給付の計_10;
-
     private RString 介護給付_経過的要介護_1;
     private RString 介護給付_経過的要介護_2;
     private RString 介護給付_経過的要介護_3;
@@ -69,7 +65,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_経過的要介護_8;
     private RString 介護給付_経過的要介護_9;
     private RString 介護給付_経過的要介護_10;
-
     private RString 介護給付_要介護1_1;
     private RString 介護給付_要介護1_2;
     private RString 介護給付_要介護1_3;
@@ -80,7 +75,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_要介護1_8;
     private RString 介護給付_要介護1_9;
     private RString 介護給付_要介護1_10;
-
     private RString 介護給付_要介護2_1;
     private RString 介護給付_要介護2_2;
     private RString 介護給付_要介護2_3;
@@ -91,7 +85,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_要介護2_8;
     private RString 介護給付_要介護2_9;
     private RString 介護給付_要介護2_10;
-
     private RString 介護給付_要介護3_1;
     private RString 介護給付_要介護3_2;
     private RString 介護給付_要介護3_3;
@@ -102,7 +95,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_要介護3_8;
     private RString 介護給付_要介護3_9;
     private RString 介護給付_要介護3_10;
-
     private RString 介護給付_要介護4_1;
     private RString 介護給付_要介護4_2;
     private RString 介護給付_要介護4_3;
@@ -113,7 +105,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_要介護4_8;
     private RString 介護給付_要介護4_9;
     private RString 介護給付_要介護4_10;
-
     private RString 介護給付_要介護5_1;
     private RString 介護給付_要介護5_2;
     private RString 介護給付_要介護5_3;
@@ -124,7 +115,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_要介護5_8;
     private RString 介護給付_要介護5_9;
     private RString 介護給付_要介護5_10;
-
     private RString 介護給付_その他_1;
     private RString 介護給付_その他_2;
     private RString 介護給付_その他_3;
@@ -135,7 +125,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付_その他_8;
     private RString 介護給付_その他_9;
     private RString 介護給付_その他_10;
-
     private RString 介護給付の計_1;
     private RString 介護給付の計_2;
     private RString 介護給付の計_3;
@@ -146,7 +135,6 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString 介護給付の計_8;
     private RString 介護給付の計_9;
     private RString 介護給付の計_10;
-
     private RString サービス受給者数合計_1;
     private RString サービス受給者数合計_2;
     private RString サービス受給者数合計_3;
@@ -157,5 +145,4 @@ public class JigyohokokuCompYoshiki153OldData {
     private RString サービス受給者数合計_8;
     private RString サービス受給者数合計_9;
     private RString サービス受給者数合計_10;
-
 }

@@ -28,6 +28,12 @@ public class ChohyoResult implements Serializable {
 
     /**
      * コンストラクタです。
+     */
+    public ChohyoResult() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 帳票分類ID 帳票分類ID
      * @param 帳票ID 帳票ID

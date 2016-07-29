@@ -3,8 +3,8 @@
 <!-- @reamsid_L DBD-1570-030 x_lilh -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalPurposeListOutput.IGeneralPurposeListOutputMapper">
-    <resultMap id="resultMap_GeneralPurposeListOutputEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.DBDBT13011.GeneralPurposeListOutputEntity" autoMapping="true">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.generalpurposelistoutput.IGeneralPurposeListOutputMapper">
+    <resultMap id="resultMap_GeneralPurposeListOutputEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity" autoMapping="true">
         <result property="被保険者台帳管理_市町村コード" column="被保険者台帳管理_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_被保険者番号" column="被保険者台帳管理_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者台帳管理_資格取得事由コード" column="被保険者台帳管理_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -199,7 +199,7 @@
     </resultMap>
      <select resultOrdered="true" id="getGeneralPurposeListOutputInfo"
             resultMap="resultMap_GeneralPurposeListOutputEntity"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.DBDBT13011.GeneralPurposeListOutputMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbddt13011.GeneralPurposeListOutputMybatisParameter"
             fetchSize="500">
 WITH 
     最新介護事業者 AS 

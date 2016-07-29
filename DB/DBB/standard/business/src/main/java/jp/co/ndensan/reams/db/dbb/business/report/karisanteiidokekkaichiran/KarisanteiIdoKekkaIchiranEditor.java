@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 仮算定異動（一括）結果一覧表Editorです。
@@ -63,6 +62,7 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     private static final RString 作成 = new RString("作成");
     private static final RString ゆうちょ銀行 = new RString("9900");
     private static final RString HYPHEN = new RString("-");
+    private static final RString 年度 = new RString("年度");
 
     /**
      * コンストラクタです。
@@ -113,36 +113,36 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
 
     private void edit更正後情報(KarisanteiIdoKekkaIchiranSource source) {
         source.listLower_1 = 計算後情報_宛名_口座_更正後Entity.get調定日時().getDate().wareki().toDateString();
-        source.listLower_2 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01()
+        source.listLower_2 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01()
                 .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02())
-                .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03()), 0);
-        source.listLower_3 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01()
+                .add(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03()));
+        source.listLower_3 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01()
                 .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02())
-                .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03()), 0);
-        source.listLower_4 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get減免額(), 0);
-        source.listLower_5 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01(), 0);
-        source.listLower_6 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02(), 0);
-        source.listLower_7 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03(), 0);
+                .add(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03()));
+        source.listLower_4 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get減免額());
+        source.listLower_5 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01());
+        source.listLower_6 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02());
+        source.listLower_7 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get特徴期別金額03());
         if (月List.contains(NUM_1)) {
-            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01(), 0);
+            source.listLower_8 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01());
         }
         if (月List.contains(NUM_2)) {
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02(), 0);
+            source.listLower_9 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02());
         }
         if (月List.contains(NUM_3)) {
-            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03(), 0);
+            source.listLower_10 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03());
         }
         if (月List.contains(NUM_4)) {
-            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04(), 0);
+            source.listLower_11 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04());
         }
         if (月List.contains(NUM_5)) {
-            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05(), 0);
+            source.listLower_12 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05());
         }
         if (月List.contains(NUM_6)) {
-            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06(), 0);
+            source.listLower_13 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06());
         }
         if (月List.contains(NUM_7)) {
-            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07(), 0);
+            source.listLower_14 = 金額Formatter(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07());
         }
         source.listLower_15 = 口座異動編集(計算後情報_宛名_口座_更正後Entity);
         source.listLower_16 = 徴収方法編集(計算後情報_宛名_口座_更正後Entity);
@@ -164,36 +164,36 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         口座情報編集(source);
         普徴期編集(source);
         source.listCenter_1 = 計算後情報_宛名_口座_更正前Entity.get調定日時().getDate().wareki().toDateString();
-        source.listCenter_2 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01()
+        source.listCenter_2 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01()
                 .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02())
-                .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03()), 0);
-        source.listCenter_3 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01()
+                .add(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03()));
+        source.listCenter_3 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01()
                 .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02())
-                .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03()), 0);
-        source.listCenter_4 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get減免額(), 0);
-        source.listCenter_5 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01(), 0);
-        source.listCenter_6 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02(), 0);
-        source.listCenter_7 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03(), 0);
+                .add(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03()));
+        source.listCenter_4 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get減免額());
+        source.listCenter_5 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01());
+        source.listCenter_6 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02());
+        source.listCenter_7 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get特徴期別金額03());
         if (月List.contains(NUM_1)) {
-            source.listCenter_8 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01(), 0);
+            source.listCenter_8 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額01());
         }
         if (月List.contains(NUM_2)) {
-            source.listCenter_9 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02(), 0);
+            source.listCenter_9 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額02());
         }
         if (月List.contains(NUM_3)) {
-            source.listCenter_10 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03(), 0);
+            source.listCenter_10 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03());
         }
         if (月List.contains(NUM_4)) {
-            source.listCenter_11 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04(), 0);
+            source.listCenter_11 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04());
         }
         if (月List.contains(NUM_5)) {
-            source.listCenter_12 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05(), 0);
+            source.listCenter_12 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05());
         }
         if (月List.contains(NUM_6)) {
-            source.listCenter_13 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06(), 0);
+            source.listCenter_13 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06());
         }
         if (月List.contains(NUM_7)) {
-            source.listCenter_14 = DecimalFormatter.toコンマ区切りRString(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07(), 0);
+            source.listCenter_14 = 金額Formatter(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07());
         }
         source.listCenter_15 = 口座異動編集(計算後情報_宛名_口座_更正前Entity);
         source.listCenter_16 = 徴収方法編集(計算後情報_宛名_口座_更正前Entity);
@@ -213,7 +213,7 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
     private void edit賦課年度(KarisanteiIdoKekkaIchiranSource source) {
         if (賦課年度 != null) {
             source.nendo = 賦課年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .fillType(FillType.BLANK).getYear();
+                    .fillType(FillType.BLANK).getYear().concat(年度);
         }
     }
 
@@ -435,11 +435,9 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         List<RString> 期の表記 = new ArrayList<>();
         for (Kitsuki 期 : 期月リスト) {
             if (期.get期AsInt() <= 最終法定納期.get期AsInt()) {
-                期の表記.add(期.get表記().asX期());
                 月List.add(期.get月AsInt());
-            } else {
-                期の表記.add(RString.EMPTY);
             }
+            期の表記.add(期.get表記().asX期());
         }
         return 期の表記;
     }
@@ -449,5 +447,12 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
             return Decimal.ZERO;
         }
         return decimal;
+    }
+
+    private RString 金額Formatter(Decimal 金額) {
+        if (金額 != null) {
+            return new RString(金額.toString());
+        }
+        return RString.EMPTY;
     }
 }

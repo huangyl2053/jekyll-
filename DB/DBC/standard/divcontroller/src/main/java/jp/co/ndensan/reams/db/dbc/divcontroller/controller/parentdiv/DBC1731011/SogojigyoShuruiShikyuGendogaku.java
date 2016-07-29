@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1731011;
 
+import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyoshurui.SogojigyoShuruiSearchResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.DBC1731011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1731011.SogojigyoShuruiShikyuGendogakuDiv;
@@ -15,8 +15,12 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1731011.Sog
 import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoShuruiShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbc.service.core.sogojigyoshurui.SogojigyoShuruiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -34,6 +38,7 @@ public class SogojigyoShuruiShikyuGendogaku {
     private static final RString 登録 = new RString("登録モード");
     private static final RString 修正 = new RString("修正モード");
     private static final RString 削除 = new RString("削除モード");
+    private static final RString 前排他キー = new RString("DbT7118SogoJigyoShuruiShikyuGendoGaku");
 
     private SogojigyoShuruiShikyuGendogakuHandler getHandler(SogojigyoShuruiShikyuGendogakuDiv div) {
         return new SogojigyoShuruiShikyuGendogakuHandler(div);
@@ -51,14 +56,29 @@ public class SogojigyoShuruiShikyuGendogaku {
      */
     public ResponseData<SogojigyoShuruiShikyuGendogakuDiv> onLoad(SogojigyoShuruiShikyuGendogakuDiv div) {
 
+        LockingKey key = new LockingKey(前排他キー);
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        }
+        setGrid一覧表示(div);
+        setサービス種類DDLのDataSource(div);
+        return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
+    }
+
+    private void setGrid一覧表示(SogojigyoShuruiShikyuGendogakuDiv div) {
         SogojigyoShuruiFinder finder = SogojigyoShuruiFinder.createInstance();
         List<SogojigyoShuruiSearchResult> resultList = finder.get総合事業種類支給限度額情報().records();
+        ViewStateHolder.put(ViewStateKeys.総合事業種類情報, (Serializable) resultList);
         if (resultList.isEmpty()) {
             div.getDgShikyuGendogaku().init();
         } else {
             getHandler(div).initialize(resultList);
         }
-        return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
+    }
+
+    private void setサービス種類DDLのDataSource(SogojigyoShuruiShikyuGendogakuDiv div) {
+        KaigoServiceShuruiManager manager = InstanceProvider.create(KaigoServiceShuruiManager.class);
+        getHandler(div).setDataSource(manager);
     }
 
     /**
@@ -123,20 +143,24 @@ public class SogojigyoShuruiShikyuGendogaku {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
-        }
-        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            //TODO
-            RString 保存モード = ViewStateHolder.get(ViewStateKeys.保存モード, RString.class);
-            SogoJigyoShuruiShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoShuruiShikyuGendoGakuManager.class);
-            if (登録.equals(保存モード)) {
-                for (SogoJigyoShuruiShikyuGendoGaku result : getHandler(div).get総合事業種類情報()) {
-                    manager.save介護予防_日常生活支援総合事業種類支給限度額(result);
-                }
+
+        RString 保存モード = ViewStateHolder.get(ViewStateKeys.保存モード, RString.class);
+        if (登録.equals(保存モード) || 修正.equals(保存モード)) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+            }
+        } else {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
             }
         }
-        return ResponseData.of(div).setState(DBC1731011StateName.完了状態);
+        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            List<SogojigyoShuruiSearchResult> 総合事業種類情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
+            SogoJigyoShuruiShikyuGendoGakuManager manager = InstanceProvider.create(SogoJigyoShuruiShikyuGendoGakuManager.class);
+            getHandler(div).save(総合事業種類情報, 保存モード, manager);
+            setGrid一覧表示(div);
+        }
+        return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
     }
 
 }

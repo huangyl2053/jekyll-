@@ -31,6 +31,5 @@ public class CaluculateFukaKozaIdoProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void afterExecute() {
-
     }
 }

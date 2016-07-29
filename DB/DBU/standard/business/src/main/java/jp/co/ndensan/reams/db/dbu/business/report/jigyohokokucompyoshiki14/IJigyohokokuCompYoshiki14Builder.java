@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki14.Jigyoho
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5） Builderのインターフェースクラスです。
+ * 介護事業状況報告月報・一般状況（様式1-4） Builderのインターフェースクラスです。
  *
  * @reamsid_L DBU-5530-070 dangjingjing
  */

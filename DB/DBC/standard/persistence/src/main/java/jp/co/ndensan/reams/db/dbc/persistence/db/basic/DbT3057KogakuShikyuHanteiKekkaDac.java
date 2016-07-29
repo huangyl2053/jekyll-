@@ -71,6 +71,30 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
     /**
      * 高額介護サービス費支給判定結果を全件返します。
      *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @return DbT3057KogakuShikyuHanteiKekkaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3057KogakuShikyuHanteiKekkaEntity> selectAllByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3057KogakuShikyuHanteiKekka.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月))).
+                toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
+    }
+
+    /**
+     * 高額介護サービス費支給判定結果を全件返します。
+     *
      * @return List<DbT3057KogakuShikyuHanteiKekkaEntity>
      */
     @Transaction

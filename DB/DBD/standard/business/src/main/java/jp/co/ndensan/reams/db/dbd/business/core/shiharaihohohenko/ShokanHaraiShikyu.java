@@ -1026,7 +1026,7 @@ public class ShokanHaraiShikyu {
      * @return 差止通知書再発行フラグ
      */
     @CheckForNull
-    public boolean get支払方法変更差止_Sashitome_TsuchiSaiHakkoFlag() {
+    public boolean is支払方法変更差止_Sashitome_TsuchiSaiHakkoFlag() {
         return 支払方法変更差止Entity.getSashitome_TsuchiSaiHakkoFlag();
     }
 
@@ -1108,7 +1108,7 @@ public class ShokanHaraiShikyu {
      * @return 控除通知書再発行フラグ
      */
     @CheckForNull
-    public boolean get支払方法変更差止_Kojo_TsuchiSaiHakkoFlag() {
+    public boolean is支払方法変更差止_Kojo_TsuchiSaiHakkoFlag() {
         return 支払方法変更差止Entity.getKojo_TsuchiSaiHakkoFlag();
     }
 
@@ -1128,7 +1128,7 @@ public class ShokanHaraiShikyu {
      * @return 論理削除フラグ
      */
     @CheckForNull
-    public boolean get支払方法変更差止_LogicalDeletedFlag() {
+    public boolean is支払方法変更差止_LogicalDeletedFlag() {
         return 支払方法変更差止Entity.getLogicalDeletedFlag();
     }
 

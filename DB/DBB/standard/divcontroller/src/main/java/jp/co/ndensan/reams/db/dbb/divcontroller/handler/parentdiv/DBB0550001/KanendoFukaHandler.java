@@ -12,7 +12,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KozaFurikaeOutputType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NotsuKozaShutsuryokuTaisho;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.dgCh
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.dgShoriKakunin_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendo.HonsanteiIdoKanendo;
 import jp.co.ndensan.reams.db.dbb.service.core.tsuchisho.notsu.ShutsuryokuKiKohoFactory;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -249,27 +248,28 @@ public class KanendoFukaHandler {
      */
     public void set帳票作成個別情報() {
         try {
-            KanendoKiUtil kanUtil = new KanendoKiUtil();
-            KitsukiList 期月リスト = kanUtil.get期月リスト();
-            Kitsuki 期月 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
+            FuchoKiUtil util = new FuchoKiUtil();
+            KitsukiList 期月リスト = util.get期月リスト();
+            Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
                     getDdlShoritsuki().getSelectedKey())));
             List<HonsanteiIdoParameter> hoList = get各通知書の帳票ID();
             FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                     RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
-            List<HonsanteiIdoKanendoResult> 帳票IDList = HonsanteiIdoKanendo.
-                    createInstance().getChohyoID(調定年度, 期月.get期(), hoList, ZERO_RS);
+            List<ChohyoResult> 帳票IDList = HonsanteiIdoKanendo.
+                    createInstance().getChohyoID(調定年度, new RString(月の期.get期AsInt()), hoList, ZERO_RS);
             List<ShutsuryokuKiKoho> 出力期;
             ShutsuryokuKiKohoFactory kohoFactory = new ShutsuryokuKiKohoFactory(調定年度);
+            RString 算定期 = 月の期.get期();
             if (帳票IDList != null) {
                 boolean flag = false;
-                for (HonsanteiIdoKanendoResult result : 帳票IDList) {
+                for (ChohyoResult result : 帳票IDList) {
                     if (納入通知書.equals(result.get帳票ID())) {
                         flag = true;
                     }
                 }
-                出力期 = kohoFactory.create出力期候補(flag, false);
+                出力期 = kohoFactory.create出力期候補(flag, 算定期);
             } else {
-                出力期 = kohoFactory.create出力期候補(false, false);
+                出力期 = kohoFactory.create出力期候補(false, 算定期);
             }
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             for (ShutsuryokuKiKoho entity : 出力期) {
@@ -278,7 +278,8 @@ public class KanendoFukaHandler {
                     dataSource.add(new KeyValueDataSource(entity.get期月().get月().getコード(), entity.get表示文字列()));
                     div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDataSource(dataSource);
                     div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                            getDdlNotsuShutsuryokuKi().setSelectedKey(entity.get期月().get月().getコード());
+                            getDdlNotsuShutsuryokuKi().setSelectedKey(div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                                    getSelectedKey());
                 }
             }
             div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDisabled(true);
@@ -346,10 +347,8 @@ public class KanendoFukaHandler {
         parameter.set決定_対象賦課年度(決定list);
         parameter.set決定_文書番号(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getCcdBunshoBangoKetteiTsuchi().get文書番号());
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtKetteiTsuchiHakkoYMD().getValue() != null) {
-            parameter.set決定_発行日(new FlexibleDate(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                    getTxtKetteiTsuchiHakkoYMD().getValue().toString()));
-        }
+        parameter.set決定_発行日(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getTxtKetteiTsuchiHakkoYMD().getValue());
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchi().isAllSelected()) {
             parameter.set変更_チェックボックス(ONE_RS);
         } else {
@@ -369,10 +368,8 @@ public class KanendoFukaHandler {
             変更list.add(調定年度.minusYear(2));
         }
         parameter.set変更_対象賦課年度(変更list);
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtHenkoTsuchiHakkoYMD().getValue() != null) {
-            parameter.set変更_発行日(new FlexibleDate(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                    getTxtHenkoTsuchiHakkoYMD().getValue().toString()));
-        }
+        parameter.set変更_発行日(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getTxtHenkoTsuchiHakkoYMD().getValue());
         parameter.set変更_文書番号(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getCcdBunshoBangoHenkoTsuchi().get文書番号());
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkHenkoTsuchiTaishosha().isAllSelected()) {
@@ -404,10 +401,8 @@ public class KanendoFukaHandler {
             納入list.add(調定年度.minusYear(2));
         }
         parameter.set納入_対象賦課年度(納入list);
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getTxtNotsuHakkoYMD().getValue() != null) {
-            parameter.set納入_発行日(new FlexibleDate(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                    getTxtNotsuHakkoYMD().getValue().toString()));
-        }
+        parameter.set納入_発行日(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
+                getTxtNotsuHakkoYMD().getValue());
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedValue() != null) {
             parameter.set納入_出力期(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                     getDdlNotsuShutsuryokuKi().getSelectedValue());

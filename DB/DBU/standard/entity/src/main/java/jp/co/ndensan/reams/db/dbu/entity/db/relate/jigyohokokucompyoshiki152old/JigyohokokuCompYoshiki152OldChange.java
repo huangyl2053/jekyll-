@@ -30,7 +30,6 @@ public class JigyohokokuCompYoshiki152OldChange {
     private final RString list1_9;
     private final RString list1_10;
     private final RString list1_11;
-
     private final RString list2_1;
     private final RString list2_2;
     private final RString list2_3;
@@ -104,7 +103,6 @@ public class JigyohokokuCompYoshiki152OldChange {
         this.list1_9 = list1_9;
         this.list1_10 = list1_10;
         this.list1_11 = list1_11;
-
         this.list2_1 = list2_1;
         this.list2_2 = list2_2;
         this.list2_3 = list2_3;

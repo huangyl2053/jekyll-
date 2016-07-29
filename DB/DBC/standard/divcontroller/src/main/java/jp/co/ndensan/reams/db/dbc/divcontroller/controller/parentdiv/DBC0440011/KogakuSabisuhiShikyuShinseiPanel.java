@@ -103,11 +103,16 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
+        int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
         getHandler(div).initialize高額詳細内容(追加モード, メニューID,
-                被保険者番号, サービス年月, 証記載保険者番号, 0, 識別コード);
+                被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
         ViewStateHolder.put(ViewStateKeys.画面モード, 追加モード);
         KogakuServicehiDetailParameter 画面データ = getHandler(div).set申請情報登録画面データ();
         ViewStateHolder.put(ViewStateKeys.詳細データ, 画面データ);
+        boolean 審査決定フラグ = div.getCcdKogakuShinseiList().is審査決定フラグ();
+        boolean 支給区分フラグ = div.getCcdKogakuShinseiList().is支給区分フラグ();
+        ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
+        ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 
@@ -124,8 +129,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString メニューID = ViewStateHolder.get(ViewStateKeys.メニューID, RString.class);
-        boolean 審査決定フラグ = ViewStateHolder.get(ViewStateKeys.審査決定フラグ, Boolean.class);
-        boolean 支給区分フラグ = ViewStateHolder.get(ViewStateKeys.支給区分フラグ, Boolean.class);
+        boolean 審査決定フラグ = div.getCcdKogakuShinseiList().is審査決定フラグ();
+        boolean 支給区分フラグ = div.getCcdKogakuShinseiList().is支給区分フラグ();
         RString 受託区分 = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_高額,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         int 履歴番号 = ViewStateHolder.get(ViewStateKeys.履歴番号, Integer.class);
@@ -148,6 +153,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         }
         KogakuServicehiDetailParameter 画面データ = getHandler(div).set申請情報登録画面データ();
         ViewStateHolder.put(ViewStateKeys.詳細データ, 画面データ);
+        ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
+        ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
         KougakuSabisuhiShousaiNaiyouResult result
                 = div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get画面初期化データ();
         ViewStateHolder.put(ViewStateKeys.一覧データ, result);
@@ -171,6 +178,10 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         getHandler(div).initialize高額詳細内容(削除モード, メニューID,
                 被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除モード);
+        boolean 審査決定フラグ = div.getCcdKogakuShinseiList().is審査決定フラグ();
+        boolean 支給区分フラグ = div.getCcdKogakuShinseiList().is支給区分フラグ();
+        ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
+        ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 

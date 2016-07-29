@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokubetsuchoshudoteimidote
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbWarningMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.DBB2710002StateName;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.DBB2710002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.TokuchoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokubetChoshuMidoteiIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokuchoDoteiKohoshaIchiran_Row;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -45,6 +47,7 @@ public class TokuchoTaishoshaIchiran {
 
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
+    private static final RString KEY2 = new RString("2");
     private static final RString 同定済み_CODE = new RString("1");
     private static final RString 対象外_CODE = new RString("2");
     private static final RString 月_RS = new RString("月");
@@ -53,6 +56,7 @@ public class TokuchoTaishoshaIchiran {
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
     private static final RString STATE特別徴収対象者一覧確認 = new RString("1");
+//    private static final RString UCID = new RString("DBBUC27102");
 
     /**
      * 画面のonLoadイベント
@@ -147,6 +151,11 @@ public class TokuchoTaishoshaIchiran {
         RString 年金コード = ViewStateHolder.get(ViewStateKeys.年金コード, RString.class);
         RString 特徴開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
         getHandler(div).特別徴収同定候補者一覧initialize(処理年度, 捕捉月, 基礎年金番号, 年金コード, 特徴開始月);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null) {
+            return;
+        }
+        getHandler(div).対象者検索戻る値の処理(taishoshaKey);
     }
 
     /**
@@ -344,19 +353,8 @@ public class TokuchoTaishoshaIchiran {
         } else {
             div.getTorokuZumiNenkinInfo().setDisplayNone(false);
         }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「OK」ボタンを押下する。<br/>
-     * 特別徴収同定候補者一覧 {被保険者検索」OKボタン押下処理
-     *
-     * @param div {@link TokuchoTaishoshaIchiranDiv }
-     * @return を持つResponseData
-     */
-    public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnOkToHihokensha(TokuchoTaishoshaIchiranDiv div) {
-        //TODO  Redmine#90958
-        return ResponseData.of(div).respond();
+        div.setHiddenPageState(KEY2);
+        return ResponseData.of(div).forwardWithEventName(DBB2710002TransitionEventName.被保険者検索).respond();
     }
 
     /**
@@ -460,6 +458,11 @@ public class TokuchoTaishoshaIchiran {
     public ResponseData<TokuchoTaishoshaIchiranDiv> onStateTransition_CommonBtn(TokuchoTaishoshaIchiranDiv div) {
         if (!RString.isNullOrEmpty(div.getHiddenState()) && 状態なし.compareTo(div.getHiddenState()) != NUM0) {
             getHandler(div).stateTransition_CommonBtn();
+        }
+        if (KEY2.equals(div.getHiddenPageState())) {
+            特別徴収同定候補者一覧initialize(div);
+            div.setHiddenPageState(KEY1);
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
         }
         return getHandler(div).stateTransition_RootTitle();
     }

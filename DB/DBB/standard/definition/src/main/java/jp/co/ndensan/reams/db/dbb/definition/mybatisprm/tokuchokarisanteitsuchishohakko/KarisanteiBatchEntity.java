@@ -25,4 +25,23 @@ public class KarisanteiBatchEntity extends TokuchoKaishiTsuchishoBatchParameter 
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private RString 出力順ID;
+
+    /**
+     * コンストラクタです。
+     */
+    public KarisanteiBatchEntity() {
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 帳票分類ID ReportId
+     * @param 帳票ID ReportId
+     * @param 出力順ID RString
+     */
+    public KarisanteiBatchEntity(ReportId 帳票分類ID, ReportId 帳票ID, RString 出力順ID) {
+        this.帳票分類ID = 帳票分類ID;
+        this.帳票ID = 帳票ID;
+        this.出力順ID = 出力順ID;
+    }
 }

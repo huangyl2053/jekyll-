@@ -35,7 +35,7 @@ public class HyojunFutangakuGemmenSinseiHandler {
     /**
      * 申請一覧情報データ処理です。
      *
-     * @param 標準負担額減免情報データ　List<HyojunFutangakuGemmen>
+     * @param 標準負担額減免情報データ 標準負担額減免情報データ
      * @return 最初申請一覧情報
      */
     public ArrayList<dgShinseiIchiran_Row> setDgShinseiIchiran_Row(List<HyojunFutangakuGemmen> 標準負担額減免情報データ) {

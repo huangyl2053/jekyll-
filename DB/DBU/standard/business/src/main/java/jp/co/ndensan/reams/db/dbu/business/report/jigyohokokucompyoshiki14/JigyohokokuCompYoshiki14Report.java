@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護事業状況報告月報・一般状況（様式1-5） のReportです。
+ * 介護事業状況報告月報・一般状況（様式1-4） のReportです。
  *
  * @reamsid_L DBU-5530-070 dangjingjing
  */
@@ -54,7 +54,6 @@ public class JigyohokokuCompYoshiki14Report extends Report<JigyohokokuCompYoshik
                 data.getその他_居住費_1(),
                 data.get合計_食費_1(),
                 data.get合計_居住費_1()));
-
         dataList.add(new JigyohokokuCompYoshiki14Change(data.get介護老人福祉施設_食費_2(),
                 data.get介護老人福祉施設_居住費_2(),
                 data.get介護老人保健施設_食費_2(),
@@ -67,7 +66,6 @@ public class JigyohokokuCompYoshiki14Report extends Report<JigyohokokuCompYoshik
                 data.getその他_居住費_2(),
                 data.get合計_食費_2(),
                 data.get合計_居住費_2()));
-
         dataList.add(new JigyohokokuCompYoshiki14Change(data.get介護老人福祉施設_食費_3(),
                 data.get介護老人福祉施設_居住費_3(),
                 data.get介護老人保健施設_食費_3(),
@@ -80,7 +78,6 @@ public class JigyohokokuCompYoshiki14Report extends Report<JigyohokokuCompYoshik
                 data.getその他_居住費_3(),
                 data.get合計_食費_3(),
                 data.get合計_居住費_3()));
-
         dataList.add(new JigyohokokuCompYoshiki14Change(data.get介護老人福祉施設_食費_4(),
                 data.get介護老人福祉施設_居住費_4(),
                 data.get介護老人保健施設_食費_4(),

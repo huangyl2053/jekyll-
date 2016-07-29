@@ -143,6 +143,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
     private static final RString CSVファイル名_決定一覧表 = new RString("介護保険料額決定通知書発行一覧表");
     private static final RString CSVファイル名_変更一覧表 = new RString("介護保険料額変更知書発行一覧表");
     private static final RString CSVファイル名_特徴一覧表 = new RString("特別徴収開始通知書（仮算定）発行一覧表");
+    private static final RString CSVファイル名_納入一覧表 = new RString("保険料納入通知書（本算定）発行一覧表");
     private static final RString 定数_出力条件 = new RString("出力条件");
     private static final RString 定数_賦課年度 = new RString("賦課年度");
     private static final RString 定数_調定年度 = new RString("調定年度");
@@ -1037,7 +1038,7 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHako extends HonsanteiIdoGennend
         }
         load代行プリント送付票(調定年度, 賦課年度, 代行プリント送付票_帳票ID, 発行日, 出力期, 納入通知書対象者, 生活保護者先頭出力区分, 山分け区分,
                 帳票制御共通 == null ? null : 帳票制御共通.toEntity(), 地方公共団体, outputOrder, new Decimal(出力ページ数.toString()));
-        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_なし, CSVファイル名_なし, 帳票名);
+        loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_納入一覧表, 帳票名);
     }
 
     private RString get計算後情報_口座区分(RString 納入通知書対象者) {

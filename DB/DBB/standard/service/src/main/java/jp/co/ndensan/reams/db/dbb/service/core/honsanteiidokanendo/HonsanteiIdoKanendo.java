@@ -10,8 +10,9 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -138,27 +139,27 @@ public class HonsanteiIdoKanendo {
      * @param 決定_変更通知書区分 RString
      * @return List<HonsanteiIdoKanendoResult>
      */
-    public List<HonsanteiIdoKanendoResult> getChohyoID(FlexibleYear 調定年度,
+    public List<ChohyoResult> getChohyoID(FlexibleYear 調定年度,
             RString 算定期, List<HonsanteiIdoParameter> chohyoPara, RString 決定_変更通知書区分) {
-        List<HonsanteiIdoKanendoResult> resultList = new ArrayList<>();
+        List<ChohyoResult> resultList = new ArrayList<>();
         if (chohyoPara == null || chohyoPara.isEmpty()) {
             return null;
         }
         for (HonsanteiIdoParameter choParameter : chohyoPara) {
             if (決定変更通知書_帳票分類ID.equals(choParameter.get帳票分類ID())) {
                 if (oneRS.equals(決定_変更通知書区分) || threeRS.equals(決定_変更通知書区分)) {
-                    HonsanteiIdoKanendoResult result1 = get決定通知書(choParameter.get帳票分類ID(),
+                    ChohyoResult result1 = get決定通知書(choParameter.get帳票分類ID(),
                             choParameter.get出力順ID(), 調定年度);
                     resultList.add(result1);
                 }
                 if (twoRS.equals(決定_変更通知書区分) || threeRS.equals(決定_変更通知書区分)) {
-                    HonsanteiIdoKanendoResult result2 = get変更通知書(choParameter.get帳票分類ID(),
+                    ChohyoResult result2 = get変更通知書(choParameter.get帳票分類ID(),
                             choParameter.get出力順ID(), 調定年度);
                     resultList.add(result2);
                 }
             }
             if (納入通知書_帳票分類ID.equals(choParameter.get帳票分類ID())) {
-                HonsanteiIdoKanendoResult result = get納入通知書(choParameter.get帳票分類ID(), 調定年度,
+                ChohyoResult result = get納入通知書(choParameter.get帳票分類ID(), 調定年度,
                         算定期, choParameter.get出力順ID());
                 if (result == null) {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().
@@ -196,12 +197,9 @@ public class HonsanteiIdoKanendo {
      * @param parameter parameter
      * @return BatchParamResult
      */
-    public HonsanteiIdoKanendoBatchParameter createBatchParam(HonsanteiIdoDivParameter parameter) {
-        HonsanteiIdoKanendoBatchParameter result = new HonsanteiIdoKanendoBatchParameter();
+    public HonSanteiIdoKanendoFukaBatchParameter createBatchParam(HonsanteiIdoDivParameter parameter) {
+        HonSanteiIdoKanendoFukaBatchParameter result = new HonSanteiIdoKanendoFukaBatchParameter();
         result.set調定年度(parameter.get調定年度());
-        result.set処理対象(parameter.get処理対象());
-        result.set抽出開始日時(parameter.get抽出開始日時());
-        result.set抽出終了日時(parameter.get抽出終了日時());
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = oneRS;
@@ -211,9 +209,9 @@ public class HonsanteiIdoKanendo {
                 && parameter.get変更_チェックボックス().equals(oneRS)) {
             決定_変更通知書区分 = threeRS;
         }
-        List<HonsanteiIdoKanendoResult> 出力帳票 = getChohyoID(parameter.get調定年度(),
+        List<ChohyoResult> 出力帳票 = getChohyoID(parameter.get調定年度(),
                 parameter.get算定期(), parameter.get出力帳票一覧(), 決定_変更通知書区分);
-        result.set出力帳票一覧(出力帳票);
+        result.set出力帳票List(出力帳票);
         result.set決定_チェックボックス(parameter.get決定_チェックボックス());
         result.set決定_対象賦課年度(parameter.get決定_対象賦課年度());
         result.set決定_発行日(parameter.get決定_発行日());
@@ -228,36 +226,67 @@ public class HonsanteiIdoKanendo {
         result.set納入_出力期(parameter.get納入_出力期());
         result.set納入_対象者(parameter.get納入_対象者());
         result.set納入_口座振替様式(parameter.get納入_口座振替様式());
-        result.set納入_生活保護対象者(parameter.get納入_生活保護対象者());
-        result.set納入_ページごとに山分け(parameter.get納入_ページごとに山分け());
+        result.set納入_先頭出力(parameter.get納入_生活保護対象者());
+        result.set納入_ページ山分け(parameter.get納入_ページごとに山分け());
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         return result;
     }
 
-    private HonsanteiIdoKanendoResult get決定通知書(ReportId 帳票分類ID, RString 出力順ID, FlexibleYear 調定年度) {
+    /**
+     * 本算定異動（過年度）バッチパラメータ作成 batchParameterクラス
+     *
+     * @param parameter parameter
+     * @return BatchParamResult
+     */
+    public HonSanteiIdoFukaBatchParameter createIdoBatchParam(HonsanteiIdoDivParameter parameter) {
+        HonSanteiIdoFukaBatchParameter result = new HonSanteiIdoFukaBatchParameter();
+        result.set調定年度(parameter.get調定年度());
+        RString 決定_変更通知書区分 = RString.EMPTY;
+        if (parameter.get決定_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = oneRS;
+        } else if (parameter.get変更_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = twoRS;
+        } else if (parameter.get決定_チェックボックス().equals(oneRS)
+                && parameter.get変更_チェックボックス().equals(oneRS)) {
+            決定_変更通知書区分 = threeRS;
+        }
+        List<ChohyoResult> 出力帳票 = getChohyoID(parameter.get調定年度(),
+                parameter.get算定期(), parameter.get出力帳票一覧(), 決定_変更通知書区分);
+        result.set出力帳票List(出力帳票);
+        result.set処理対象(parameter.get処理対象());
+        if (parameter.get抽出開始日時() != null) {
+            result.set抽出開始日時(parameter.get抽出開始日時().getRDateTime());
+        }
+        if (parameter.get抽出終了日時() != null) {
+            result.set抽出終了日時(parameter.get抽出終了日時().getRDateTime());
+        }
+        return result;
+    }
+
+    private ChohyoResult get決定通知書(ReportId 帳票分類ID, RString 出力順ID, FlexibleYear 調定年度) {
         ChohyoSeigyoHanyo 帳票タイプを = getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                 調定年度, 通知書タイプ);
         switch (帳票タイプを.get設定値().toString()) {
             case "001":
-                return new HonsanteiIdoKanendoResult(帳票分類ID,
+                return new ChohyoResult(帳票分類ID,
                         ReportIdDBB.DBB100039.getReportId().value(), 出力順ID);
             case "002":
-                return new HonsanteiIdoKanendoResult(帳票分類ID,
+                return new ChohyoResult(帳票分類ID,
                         ReportIdDBB.DBB100040.getReportId().value(), 出力順ID);
             default:
                 return null;
         }
     }
 
-    private HonsanteiIdoKanendoResult get変更通知書(ReportId 帳票分類ID, RString 出力順ID, FlexibleYear 調定年度) {
+    private ChohyoResult get変更通知書(ReportId 帳票分類ID, RString 出力順ID, FlexibleYear 調定年度) {
         ChohyoSeigyoHanyo 帳票タイプを = this.getChohyoHanyoKey(SubGyomuCode.DBB介護賦課, 帳票分類ID,
                 調定年度, 通知書タイプ);
         switch (帳票タイプを.get設定値().toString()) {
             case "001":
-                return new HonsanteiIdoKanendoResult(帳票分類ID,
+                return new ChohyoResult(帳票分類ID,
                         ReportIdDBB.DBB100042.getReportId().value(), 出力順ID);
             case "002":
-                return new HonsanteiIdoKanendoResult(帳票分類ID,
+                return new ChohyoResult(帳票分類ID,
                         ReportIdDBB.DBB100043.getReportId().value(), 出力順ID);
             default:
                 return null;
@@ -332,61 +361,61 @@ public class HonsanteiIdoKanendo {
         }
     }
 
-    private HonsanteiIdoKanendoResult get期毎タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID,
+    private ChohyoResult get期毎タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID,
             RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
-            return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100066.getReportId().value(), 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100066.getReportId().value(), 出力順ID);
         }
         return null;
     }
 
-    private HonsanteiIdoKanendoResult get銀振型5期タイプ(ChohyoSeigyoHanyo 帳票タイプを,
+    private ChohyoResult get銀振型5期タイプ(ChohyoSeigyoHanyo 帳票タイプを,
             ReportId 帳票分類ID, RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
-            return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100070.getReportId().value(), 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100070.getReportId().value(), 出力順ID);
         }
         return null;
     }
 
-    private HonsanteiIdoKanendoResult get銀振型４期タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID,
+    private ChohyoResult get銀振型４期タイプ(ChohyoSeigyoHanyo 帳票タイプを, ReportId 帳票分類ID,
             RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
-            return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100069.getReportId().value(), 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100069.getReportId().value(), 出力順ID);
         }
         return null;
     }
 
-    private HonsanteiIdoKanendoResult getブックタイプ(ChohyoSeigyoHanyo 帳票タイプを, ChohyoSeigyoHanyo 帳票_口座振替依頼,
+    private ChohyoResult getブックタイプ(ChohyoSeigyoHanyo 帳票タイプを, ChohyoSeigyoHanyo 帳票_口座振替依頼,
             ReportId 帳票分類ID,
             RString 出力順ID) {
         if (zOneRS.equals(帳票タイプを.get設定値())) {
             if (zeroRS.equals(帳票_口座振替依頼.get設定値())) {
-                return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100072.getReportId().value(), 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100072.getReportId().value(), 出力順ID);
             } else if (oneRS.equals(帳票_口座振替依頼.get設定値())) {
-                return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100071.getReportId().value(), 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100071.getReportId().value(), 出力順ID);
             }
         }
         return null;
     }
 
-    private HonsanteiIdoKanendoResult getコンビニ収納タイプ(
+    private ChohyoResult getコンビニ収納タイプ(
             ChohyoSeigyoHanyo 帳票タイプを,
             ChohyoSeigyoHanyo 帳票_コンビニ期毎出力,
             ReportId 帳票分類ID,
             RString 出力順ID) {
         if (zeroRS.equals(帳票_コンビニ期毎出力.get設定値())) {
             if (twlZRS.equals(帳票タイプを.get設定値())) {
-                return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100075.getReportId().value(), 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100075.getReportId().value(), 出力順ID);
             } else if (twlTRS.equals(帳票タイプを.get設定値())) {
-                return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100073.getReportId().value(), 出力順ID);
+                return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100073.getReportId().value(), 出力順ID);
             }
         } else if (oneRS.equals(帳票_コンビニ期毎出力.get設定値())) {
-            return new HonsanteiIdoKanendoResult(帳票分類ID, ReportIdDBB.DBB100063.getReportId().value(), 出力順ID);
+            return new ChohyoResult(帳票分類ID, ReportIdDBB.DBB100063.getReportId().value(), 出力順ID);
         }
         return null;
     }
 
-    private HonsanteiIdoKanendoResult get納入通知書(
+    private ChohyoResult get納入通知書(
             ReportId 帳票分類ID, FlexibleYear 調定年度, RString 算定期, RString 出力順ID) {
         RString 項目名;
         RString アイテムとして;

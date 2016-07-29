@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0550001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendo.HonsanteiIdoKanendoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.DBB0550001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550001.KanendoFukaDiv;
@@ -88,14 +89,26 @@ public class KanendoFuka {
     }
 
     /**
-     * 「実行する」ボタン
+     * 過年度異動通知書「実行する」ボタン
      *
      * @param div KanendoFukaDiv
      * @return ResponseData
      */
-    public ResponseData<HonsanteiIdoKanendoBatchParameter> onClick_Reserve(KanendoFukaDiv div) {
+    public ResponseData<HonSanteiIdoKanendoFukaBatchParameter> onClick_Reserve(KanendoFukaDiv div) {
         HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
-        HonsanteiIdoKanendoBatchParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
+        HonSanteiIdoKanendoFukaBatchParameter para = HonsanteiIdoKanendo.createInstance().createBatchParam(parameter);
+        return ResponseData.of(para).respond();
+    }
+
+    /**
+     * 過年度異動「実行する」ボタン
+     *
+     * @param div KanendoFukaDiv
+     * @return ResponseData
+     */
+    public ResponseData<HonSanteiIdoFukaBatchParameter> onClick_Element(KanendoFukaDiv div) {
+        HonsanteiIdoDivParameter parameter = getHandler(div).setBatchParam();
+        HonSanteiIdoFukaBatchParameter para = HonsanteiIdoKanendo.createInstance().createIdoBatchParam(parameter);
         return ResponseData.of(para).respond();
     }
 

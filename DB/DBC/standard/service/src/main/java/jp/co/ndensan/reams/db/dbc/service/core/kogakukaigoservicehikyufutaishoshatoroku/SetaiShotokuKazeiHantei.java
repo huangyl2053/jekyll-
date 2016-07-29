@@ -75,22 +75,15 @@ public class SetaiShotokuKazeiHantei {
     public void getSetaiinHaaku(RString 管理識別区分, RString メニューID) {
         requireNonNull(管理識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage(管理区分.toString()));
         ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
-        //TODO
-        mapper.creat世帯員把握入力高額一時();
-        mapper.insert世帯員把握入力高額一時();
-        mapper.creat世帯員把握入力事業高額一時();
-        mapper.insert世帯員把握入力事業高額一時();
-        mapper.insert世帯員把握入力高額一時test1();
-        mapper.insert世帯員把握入力事業高額一時test();
-        mapper.creat世帯員所得情報高額一時();
-        mapper.creat世帯員所得情報事業高額一時();
         if (is高額介護サービス(メニューID)) {
             mapper.insert世帯員所得情報高額一時に一括住所地特例該当が1();
             mapper.insert世帯員所得情報高額一時に一括住所地特例該当が1以外(new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分));
-            TempSetaiinHaakuNyuryokuEntity tempSetaiEntity = mapper.select世帯員所得情報高額一時に一括();
-            if (tempSetaiEntity != null) {
-                List<TmpSetaiHaakuNyuryokuEntity> list = get世帯員所得情報高額一時のデータ(tempSetaiEntity);
-                mapper.insert世帯員所得情報高額一時に一括(list);
+            List<TempSetaiinHaakuNyuryokuEntity> tempSetaiList = mapper.select世帯員所得情報高額一時に一括();
+            if (!tempSetaiList.isEmpty()) {
+                for (TempSetaiinHaakuNyuryokuEntity tempEntity : tempSetaiList) {
+                    List<TmpSetaiHaakuNyuryokuEntity> list = get世帯員所得情報高額一時のデータ(tempEntity);
+                    mapper.insert世帯員所得情報高額一時に一括(list);
+                }
             }
 
         }
@@ -98,10 +91,12 @@ public class SetaiShotokuKazeiHantei {
         if (is事業高額介護サービス(メニューID)) {
             mapper.insert世帯員所得情報事業高額一時に一括住所地特例該当が1();
             mapper.insert世帯員所得情報事業高額一時に一括住所地特例該当が1以外(new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分));
-            TempSetaiinJigyoHaakuNyuryokuEntity tempSetaiEntity = mapper.select世帯員所得情報事業高額一時に一括();
-            if (tempSetaiEntity != null) {
-                List<TmpSetaiJigyoHaakuNyuryokuEntity> list = get世帯員所得情報事業高額一時のデータ(tempSetaiEntity);
-                mapper.insert世帯員所得情報事業高額一時に一括(list);
+            List<TempSetaiinJigyoHaakuNyuryokuEntity> tempSetaiList = mapper.select世帯員所得情報事業高額一時に一括();
+            if (!tempSetaiList.isEmpty()) {
+                for (TempSetaiinJigyoHaakuNyuryokuEntity tempEntity : tempSetaiList) {
+                    List<TmpSetaiJigyoHaakuNyuryokuEntity> list = get世帯員所得情報事業高額一時のデータ(tempEntity);
+                    mapper.insert世帯員所得情報事業高額一時に一括(list);
+                }
             }
         }
     }
@@ -182,7 +177,6 @@ public class SetaiShotokuKazeiHantei {
     @Transaction
     public void getJuminShotokuJoho(RString メニューID) {
         ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
-        mapper.insertFortestJuminShotokuJoho();
         if (is高額介護サービス(メニューID)) {
             mapper.update高額介護サービス場合();
             int 生保区分count = mapper.select取得した内容で世帯員所得情報高額一時に生保区分を更新();
