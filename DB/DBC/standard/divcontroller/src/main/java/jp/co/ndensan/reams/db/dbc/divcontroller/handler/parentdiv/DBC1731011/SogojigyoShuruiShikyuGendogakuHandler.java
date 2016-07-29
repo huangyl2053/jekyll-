@@ -32,6 +32,7 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
     private static final RString 二次予防 = new RString("01");
     private static final RString 登録 = new RString("登録モード");
     private static final RString 修正 = new RString("修正モード");
+    private static final RString 符号 = new RString(":");
 
     private static final int 履歴番号 = 1;
 
@@ -66,7 +67,7 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
             } else {
                 entity = result.get二次予防();
             }
-            row.setDefaultDataName0(result.getサービス種類名称());
+            row.setDefaultDataName0(entity.getサービス種類コード().value().concat(符号).concat(result.getサービス種類名称()));
             row.getDefaultDataName1().setValue(new RDate(entity.get適用開始年月().getYearValue(),
                     entity.get適用開始年月().getMonthValue(), 1));
             if (entity.get適用終了年月() != null) {
@@ -95,9 +96,9 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
      * @param manager KaigoServiceShuruiManager
      */
     public void setDataSource(KaigoServiceShuruiManager manager) {
-        div.getDdlServiceShurui().getDataSource().clear();
         List<KeyValueDataSource> dataSource = manager.getサービス種類DDLのDataSource();
         div.getDdlServiceShurui().setDataSource(dataSource);
+        div.getDdlServiceShurui().setSelectedKey(RString.EMPTY);
     }
 
     /**
@@ -106,19 +107,19 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
     private void clear詳細内容() {
         div.getTxtTekiyoKaishiYM().clearValue();
         div.getTxtTekiyoShuryoYM().clearValue();
+        div.getDdlServiceShurui().setSelectedKey(RString.EMPTY);
         div.getTxtYoShien1().clearValue();
         div.getTxtYoShien2().clearValue();
         div.getTxtNijiYobo().clearValue();
     }
 
-    private void setサービス種類DDL空白表示() {
-        div.getDdlServiceShurui().getDataSource().clear();
-        List<KeyValueDataSource> dataSource空白 = new ArrayList<>();
-        dataSource空白.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        div.getDdlServiceShurui().setDataSource(dataSource空白);
-        div.getDdlServiceShurui().setSelectedKey(RString.EMPTY);
-    }
-
+//    private void setサービス種類DDL空白表示() {
+//        div.getDdlServiceShurui().getDataSource().clear();
+//        List<KeyValueDataSource> dataSource空白 = new ArrayList<>();
+//        dataSource空白.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+//        div.getDdlServiceShurui().setDataSource(dataSource空白);
+//        div.getDdlServiceShurui().setSelectedKey(RString.EMPTY);
+//    }
     /**
      * 画面詳細パネル各項目入力不可の状態です。
      */
@@ -205,7 +206,6 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
      */
     public void set入力前状態() {
         clear詳細内容();
-        setサービス種類DDL空白表示();
         set詳細入力不可();
         div.getBtnTsuika().setDisabled(false);
         for (dgShikyuGendogaku_Row row : div.getDgShikyuGendogaku().getDataSource()) {

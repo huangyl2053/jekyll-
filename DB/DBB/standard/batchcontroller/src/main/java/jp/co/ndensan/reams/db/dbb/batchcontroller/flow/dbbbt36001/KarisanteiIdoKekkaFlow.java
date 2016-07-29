@@ -52,7 +52,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 仮算定異動通知書一括発行BATCHID = new RString("DBB015003_KarisanteiIdoTsuchishoHakko");
-    private static final RString 賦課の情報登録フローBATCHID = new RString("choteiToroku");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("ChoteiTorokuFlow");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
@@ -74,6 +74,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final String 異動賦課計算 = "idoFukaKeisan";
     private static final String 八月特徴開始 = "hatiGatuTokuchoKaishi";
     private static final String 仮算定異動通知書一括発行 = "karisanteiIdoTsuchishoIkkatsuHakko";
+
+    private static final ReportId ID = new ReportId("DBB200013_KarisanteiIdoKekkaIchiran");
 
     private KarisanteiIdoKekkaProcessParameter parameter;
 
@@ -117,7 +119,11 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
             executeStep(依頼金額計算_8月特徴開始);
         }
         executeStep(計算後情報作成);
-        executeStep(仮算定異動一括結果一覧表出力);
+        for (KarisanteiIdoKekkaResult result : getParameter().get出力帳票List()) {
+            if (result.get帳票分類ID().value().equals(ID.value())) {
+                executeStep(仮算定異動一括結果一覧表出力);
+            }
+        }
         executeStep(異動賦課計算);
         if (RSTONE.equals(依頼金計算処理区分)) {
             executeStep(八月特徴開始);
@@ -362,6 +368,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
         param.set普徴仮算定賦課処理日時(new RString(getParameter().get普徴仮算定賦課処理日時().toString()));
         param.set一括発行起動フラグ(getParameter().is一括発行起動フラグ());
         param.set特徴捕捉対象者の依頼金額計算区分(getParameter().get依頼金額計算区分());
+        param.set算定期(getParameter().get算定期());
 
         return param;
     }

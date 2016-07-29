@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT7202KaigoNinteiHokaiseiKanriDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7202KaigoNinteiHokaiseiKanriDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

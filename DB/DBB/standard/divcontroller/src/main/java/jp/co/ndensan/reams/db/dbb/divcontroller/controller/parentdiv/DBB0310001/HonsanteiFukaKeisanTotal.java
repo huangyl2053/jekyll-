@@ -114,6 +114,11 @@ public class HonsanteiFukaKeisanTotal {
                 .setバッチパラメータ(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
                         ViewStateHolder.get(ViewStateKeys.算定期, RString.class),
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
+        if (parameter.get出力帳票一覧() != null && !parameter.get出力帳票一覧().isEmpty() && 1 < parameter.get出力帳票一覧().size()) {
+            parameter.set画面移動フラグ(true);
+        } else {
+            parameter.set画面移動フラグ(false);
+        }
         return ResponseData.of(parameter).respond();
     }
 
@@ -128,6 +133,7 @@ public class HonsanteiFukaKeisanTotal {
                 .setバッチパラメータ(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
                         ViewStateHolder.get(ViewStateKeys.算定期, RString.class),
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
+        parameter.set画面移動フラグ(false);
         return ResponseData.of(parameter).respond();
     }
 

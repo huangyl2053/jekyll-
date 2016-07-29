@@ -61,6 +61,7 @@ public class SogojigyoShuruiShikyuGendogaku {
             throw new PessimisticLockingException();
         }
         setGrid一覧表示(div);
+        setサービス種類DDLのDataSource(div);
         return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
     }
 
@@ -88,7 +89,6 @@ public class SogojigyoShuruiShikyuGendogaku {
      */
     public ResponseData<SogojigyoShuruiShikyuGendogakuDiv> onClick_btnAdd(SogojigyoShuruiShikyuGendogakuDiv div) {
 
-        setサービス種類DDLのDataSource(div);
         getHandler(div).set追加状態();
         ViewStateHolder.put(ViewStateKeys.保存モード, 登録);
         return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
@@ -102,7 +102,6 @@ public class SogojigyoShuruiShikyuGendogaku {
      */
     public ResponseData<SogojigyoShuruiShikyuGendogakuDiv> onClick_btnModify(SogojigyoShuruiShikyuGendogakuDiv div) {
 
-        setサービス種類DDLのDataSource(div);
         getHandler(div).set修正状態();
         ViewStateHolder.put(ViewStateKeys.保存モード, 修正);
         return ResponseData.of(div).setState(DBC1731011StateName.初期状態);
@@ -116,7 +115,6 @@ public class SogojigyoShuruiShikyuGendogaku {
      */
     public ResponseData<SogojigyoShuruiShikyuGendogakuDiv> onClick_btnDelete(SogojigyoShuruiShikyuGendogakuDiv div) {
 
-        setサービス種類DDLのDataSource(div);
         getHandler(div).set削除状態();
         ViewStateHolder.put(ViewStateKeys.保存モード, 削除);
         return ResponseData.of(div).setState(DBC1731011StateName.初期状態);

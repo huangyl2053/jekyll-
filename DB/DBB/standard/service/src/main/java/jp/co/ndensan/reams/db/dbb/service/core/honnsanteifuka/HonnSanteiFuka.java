@@ -651,7 +651,7 @@ public class HonnSanteiFuka {
             fukaKokyoBatchParameter.set月別保険料段階(月別保険料段階);
             fukaKokyoBatchParameter.set年額保険料(年額保険料.getHokenryoNengaku());
             fukaKokyoBatchParameter.set調定日時(調定日時);
-            if (jouHouEntity.get賦課の情報() == null) {
+            if (jouHouEntity.get賦課の情報().get介護賦課Entity().getHihokenshaNo() == null) {
                 create新規の賦課処理(jouHouEntity, fukaKokyoBatchParameter, 調定日時, 年額保険料, 賦課年度);
             } else {
                 create既存の賦課処理(jouHouEntity, fukaKokyoBatchParameter, 調定日時, 年額保険料, 賦課年度);

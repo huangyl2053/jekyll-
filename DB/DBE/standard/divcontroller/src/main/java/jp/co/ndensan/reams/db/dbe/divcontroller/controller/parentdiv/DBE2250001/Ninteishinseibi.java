@@ -218,13 +218,12 @@ public class Ninteishinseibi {
                         getHandler(div).取込むの編集(row, entity);
                         rowList.set(i, row);
                         flg = false;
-                        break;
                     }
-                }
-                if (flg) {
-                    dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
-                    getHandler(div).取込むの編集(row, entity);
-                    rowList.add(row);
+                    if (flg) {
+                        row = new dgNinteiChosaData_Row();
+                        getHandler(div).取込むの編集(row, entity);
+                        rowList.add(row);
+                    }
                 }
             }
             div.getDgNinteiChosaData().setDataSource(rowList);

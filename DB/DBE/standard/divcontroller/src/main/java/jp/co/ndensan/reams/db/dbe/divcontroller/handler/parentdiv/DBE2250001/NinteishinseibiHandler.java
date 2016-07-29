@@ -244,7 +244,7 @@ public class NinteishinseibiHandler {
         row.setRiyoShisetsuJusho(business.get利用施設住所());
         row.setRiyoShisetsuTelNo(business.get利用施設電話番号());
         if (business.get利用施設郵便番号() != null) {
-            row.setRiyoShisetsuYubinNo(business.get利用施設郵便番号().value());
+            row.setRiyoShisetsuYubinNo(business.get利用施設郵便番号().getEditedYubinNo());
         }
         row.setTokki(business.get特記());
         if (business.get認定調査特記事項受付年月日() != null) {

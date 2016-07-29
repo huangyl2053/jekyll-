@@ -55,16 +55,11 @@ public class HonSanteiIdoFukaBatchParameter extends BatchParameterBase {
      * @return 本算定異動（過年度）のMybatisParameter
      */
     public KanendoIdoFukaProcessParameter toKanendoIdoFukaProcessParameter(YMDHMS システム日時) {
-        Long 出力順ID;
+        RString 出力順ID;
         if (出力帳票List != null && !出力帳票List.isEmpty()) {
-            RString 出力順 = 出力帳票List.get(0).get出力順ID();
-            if (出力順 != null && !出力順.isEmpty()) {
-                出力順ID = Long.valueOf(出力順.toString());
-            } else {
-                出力順ID = null;
-            }
+            出力順ID = 出力帳票List.get(0).get出力順ID();
         } else {
-            出力順ID = null;
+            出力順ID = RString.EMPTY;
         }
         RString 日付関連_年度サイクル = DbBusinessConfig.get(ConfigNameDBB.日付関連_年度サイクル, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
         return new KanendoIdoFukaProcessParameter(日付関連_年度サイクル, 調定年度, 処理対象, 抽出開始日時, 抽出終了日時, 出力順ID, システム日時);

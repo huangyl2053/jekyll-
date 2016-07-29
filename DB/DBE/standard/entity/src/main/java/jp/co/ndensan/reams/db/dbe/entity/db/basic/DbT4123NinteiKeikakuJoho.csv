@@ -1,9 +1,0 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
-ninteichosaIraiYoteiYMD,UDD015YMD,FlexibleDate,,,,,認定調査依頼予定年月日,A
-ninteichosaYoteiYMD,UDD015YMD,FlexibleDate,,,,,認定調査予定年月日,A
-ikenshoSakuseiIraiYoteiYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書作成依頼予定年月日,A
-ikenshoTorokuYoteiYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書登録予定年月日,A
-ichijiHanteiYoteiYMD,UDD015YMD,FlexibleDate,,,,,要介護認定一次判定予定年月日,A
-ninteiShinsakaiWariateYoteiYMD,UDD015YMD,FlexibleDate,,,,,認定審査会割当予定年月日,A
-ninteiShinsakaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,認定審査会予定年月日,A
-centerSoshinYoteiYMD,UDD015YMD,FlexibleDate,,,,,センター送信予定年月日,A

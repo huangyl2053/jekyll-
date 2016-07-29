@@ -16,6 +16,14 @@ import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishikyuushinnseito
 import jp.co.ndensan.reams.db.dbc.business.core.kougakusabisuhishousainaiyou.KougakuSabisuhiShousaiNaiyouResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3028KyufujissekiKogakuKaigoServicehiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
@@ -304,6 +312,174 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
             給付実績entity = new KyufujissekiKogakuKaigoServicehi(entity);
         }
         return 給付実績entity;
+    }
+
+    /**
+     * 高額介護支給申請履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get高額介護支給申請履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3056KogakuShikyuShinseiEntity> 支給申請list
+                = 高額サービス費支給申請Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3056KogakuShikyuShinseiEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo().intValue()) {
+                    履歴番号 = entity.getRirekiNo().intValue();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 高額介護判定結果履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get高額介護判定結果履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3057KogakuShikyuHanteiKekkaEntity> 支給申請list
+                = 高額介護サービス費支給判定結果Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3057KogakuShikyuHanteiKekkaEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo()) {
+                    履歴番号 = entity.getRirekiNo();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 高額介護給付対象者明細履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get高額介護給付対象者明細履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> 支給申請list
+                = 高額介護サービス費給付対象者明細Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3054KogakuKyufuTaishoshaMeisaiEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo()) {
+                    履歴番号 = entity.getRirekiNo();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 高額介護給付対象者合計履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get高額介護給付対象者合計履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3055KogakuKyufuTaishoshaGokeiEntity> 支給申請list
+                = 高額介護サービス費給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3055KogakuKyufuTaishoshaGokeiEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo().intValue()) {
+                    履歴番号 = entity.getRirekiNo().intValue();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 事業高額高額介護支給申請履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get事業高額高額介護支給申請履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3110JigyoKogakuShikyuShinseiEntity> 支給申請list
+                = 事業高額サービス費支給申請Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3110JigyoKogakuShikyuShinseiEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo().intValue()) {
+                    履歴番号 = entity.getRirekiNo().intValue();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 事業高額介護判定結果履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get事業高額介護判定結果履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> 支給申請list
+                = 事業高額介護サービス費支給判定結果Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo().intValue()) {
+                    履歴番号 = entity.getRirekiNo().intValue();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 事業高額介護給付対象者明細履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get事業高額介護給付対象者明細履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 支給申請list
+                = 事業高額介護サービス費給付対象者明細Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo()) {
+                    履歴番号 = entity.getRirekiNo();
+                }
+            }
+        }
+        return 履歴番号 + 1;
+    }
+
+    /**
+     * 事業高額介護給付対象者合計履歴番号取得
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return int
+     */
+    public int get事業高額介護給付対象者合計履歴番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+        int 履歴番号 = 0;
+        List<DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity> 支給申請list
+                = 事業高額介護サービス費給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
+        if (支給申請list != null && 支給申請list.isEmpty()) {
+            for (DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity entity : 支給申請list) {
+                if (履歴番号 < entity.getRirekiNo().intValue()) {
+                    履歴番号 = entity.getRirekiNo().intValue();
+                }
+            }
+        }
+        return 履歴番号 + 1;
     }
 
     private void upd高額介護支給申請(KogakuShikyuShinsei entity) {

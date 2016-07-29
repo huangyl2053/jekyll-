@@ -26,8 +26,6 @@ public class KogakuKyufuKetteiIchiranCSVEntity {
     private RString 作成日時;
     @CsvField(order = 30, name = "国保連合会名")
     private RString 国保連合会名;
-    @CsvField(order = 40, name = "明細項目")
-    private RString 明細項目;
     @CsvField(order = 50, name = "証記載保険者番号")
     private RString 証記載保険者番号;
     @CsvField(order = 60, name = "証記載保険者名")

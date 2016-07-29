@@ -13,18 +13,18 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeHonsanteiFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeUpdateHonsanteiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honnsanteifuka.HonsanteiFukaParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0730-010 yuanzhenxia
  */
-public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
+public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 本算定特徴中止者の追加 = "insertHonsanteiTokuchoChushisha";
@@ -43,10 +43,13 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 世帯員把握フロー = "setaiinBatchFlow";
+    private static final String 本算定通知書一括発行フロー = "honsanteiTsuchishoIkkatsuHakkoFlow";
     private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
+    private static final RString 本算定通知書一括発行BATCH_ID = new RString("HonsanteiTsuchishoIkkatsuHakkoFlow");
+    private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
 
-    private HonsanteiFukaParameter parameter;
+    private HonsanteifukaBatchParameter parameter;
     private HonsanteiFukaProcessParameter processParameter;
 
     @Override
@@ -59,19 +62,26 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
         YMDHMS システム日時 = getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeHonsanteiFukaProcess.SYSTEM_TIME);
         processParameter = new HonsanteiFukaProcessParameter();
         processParameter.setバッチ起動時処理日時(システム日時);
-        processParameter.set賦課年度(new FlexibleYear(parameter.get賦課年度()));
+        processParameter.set賦課年度(parameter.get賦課年度());
+        processParameter.set調定年度(parameter.get調定年度());
         executeStep(本算定特徴中止者の追加);
-        processParameter.set資格基準日(new FlexibleDate(parameter.get資格基準日()));
+        processParameter.set資格基準日(parameter.get資格基準日());
         executeStep(計算対象者抽出_通知書番号発番);
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
         executeStep(賦課計算);
-        for (TyouhyouEntity entity : parameter.get出力帳票一覧()) {
-            processParameter.set出力帳票(entity);
-            executeStep(計算後情報作成);
-            executeStep(本算定結果一覧表出力);
+        for (HonsanteifukaBatchTyouhyou entity : parameter.get出力帳票一覧()) {
+            if (帳票分類ID.equals(entity.get帳票分類ID())) {
+                processParameter.set出力帳票(entity);
+                executeStep(計算後情報作成);
+                executeStep(本算定結果一覧表出力);
+                break;
+            }
         }
         executeStep(処理日付管理テーブル更新);
+        if (getParameter().is画面移動フラグ()) {
+            executeStep(本算定通知書一括発行フロー);
+        }
 
     }
 
@@ -123,7 +133,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
     @Step(世帯員把握フロー)
     protected IBatchFlowCommand setaiinBatchFlow() {
         return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
-                new SetaiShotokuKazeiHanteiBatchParameter(RString.EMPTY)).define();
+                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**
@@ -148,8 +158,8 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
-                getParameter().get賦課年度(),
+        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+                getParameter().get賦課年度().toDateString(),
                 new RString(getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeHonsanteiFukaProcess.SYSTEM_TIME).toString()),
                 ShoriName.本算定賦課.get名称(), 帳票分類ID);
     }
@@ -172,6 +182,17 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteiFukaParameter> {
     @Step(処理日付管理テーブル更新)
     protected IBatchFlowCommand updateSystemTimeProcess() {
         return simpleBatch(SystemTimeUpdateHonsanteiProcess.class).arguments(processParameter).define();
+    }
+
+    /**
+     * 本算定通知書一括発行バッチを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(本算定通知書一括発行フロー)
+    protected IBatchFlowCommand honsanteiTsuchishoIkkatsuHakkoFlow() {
+        return otherBatchFlow(本算定通知書一括発行BATCH_ID, SubGyomuCode.DBB介護賦課,
+                getParameter()).define();
     }
 
 }
