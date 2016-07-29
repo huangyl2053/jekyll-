@@ -931,7 +931,7 @@
                    DbT1013KyokaisoSochiShinsei.*,
                    DbT1007KyokaisoHokenryoDankai.*,
                    koza.*
-            FROM rgdb."ShikakuSousituTemp" AS 資格喪失
+            FROM "ShikakuSousituTemp" AS 資格喪失
             INNER JOIN (select 
                         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>
                         from rgdb."DbV2002Fuka" AS "DbT2002Fuka"

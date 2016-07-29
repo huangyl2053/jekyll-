@@ -43,5 +43,6 @@ public class KarisanteiIdoKekkaBatchParameter extends BatchParameterBase {
     private RString 納入_ページごとに山分け;
     private RString 特徴仮算定賦課処理日時;
     private boolean 一括発行起動フラグ;
+    private RString 算定期;
 
 }
