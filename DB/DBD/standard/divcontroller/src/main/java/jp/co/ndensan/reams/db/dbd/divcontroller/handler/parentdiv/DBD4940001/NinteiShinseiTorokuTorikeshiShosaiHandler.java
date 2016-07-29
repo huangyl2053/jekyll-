@@ -84,7 +84,9 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
             return null;
         }
 
-        initialize(被保険者番号, 認定情報, is受給);
+        initialize(
+                //                被保険者番号,
+                認定情報, is受給);
 
         edit状態(認定情報.get申請状況区分().equals(ShinseiJokyoKubun.申請中.getコード()));
 
@@ -125,7 +127,9 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         return 認定情報;
     }
 
-    private void initialize(RString 被保険者番号, YokaigoNinteiJoho 認定情報, boolean is受給) {
+    private void initialize(
+            //            RString 被保険者番号,
+            YokaigoNinteiJoho 認定情報, boolean is受給) {
         div.getCcdKaigoNinteiAtenaInfo().initialize();
         if (is受給) {
             div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(
