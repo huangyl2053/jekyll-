@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ShotokuKanri;
+import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoMessage;
 import jp.co.ndensan.reams.db.dbb.business.core.nushijuminjoho.NushiJuminJohoResult;
 import jp.co.ndensan.reams.db.dbb.business.core.shotokushokaihyo.ShotokushokaihyoTaishoSetaiin;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001.DBB1150001StateName;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -226,6 +227,12 @@ public class NushiJuminJoho {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
+
+//        if (!ResponseHolder.isReRequest()) {
+//            return ResponseData.of(div).addMessage(NushiJuminJohoMessage.確認.createMessage(ButtonSelectPattern.OKCancel,
+//                    "選択された住民の住所情報と異なります。所得照会票を発行しても")).respond();
+//        }
+//        return ResponseData.of(div).respond();
         RString hdnFlag = div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                 .getSofusakiNyuryokuPanel().getTextNO1().getValue();
         RString flag = div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
@@ -237,7 +244,7 @@ public class NushiJuminJoho {
             div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                     .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_ONE);
             return ResponseData.of(div)
-                    .addMessage(DbzWarningMessages.確認.getMessage().replace(引数.toString())).respond();
+                    .addMessage(NushiJuminJohoMessage.確認.createMessage(ButtonSelectPattern.OKCancel, 引数.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<ShotokuKanri> entityList = getHandler(div).get識別コード();
@@ -252,8 +259,8 @@ public class NushiJuminJoho {
             if (!hdnFlag.equals(文字列_TWO)) {
                 div.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel()
                         .getSofusakiNyuryokuPanel().getTextNO1().setValue(文字列_TWO);
-                return ResponseData.of(div).addMessage(DbzWarningMessages.確認.getMessage()
-                        .replace(編集した識別コード.toString())).respond();
+                return ResponseData.of(div).addMessage(NushiJuminJohoMessage.登録確認
+                        .createMessage(ButtonSelectPattern.OKCancel, 編集した識別コード.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 List<ShotokushokaihyoTaishoSetaiin> 所得照会票発行対象世帯員リスト
