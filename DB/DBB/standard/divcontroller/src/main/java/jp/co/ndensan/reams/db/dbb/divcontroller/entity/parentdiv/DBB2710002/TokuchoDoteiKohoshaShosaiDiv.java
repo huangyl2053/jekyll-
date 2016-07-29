@@ -103,6 +103,36 @@ public class TokuchoDoteiKohoshaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtAtenaShimeiKana() {
+        return this.getAtenaInfo().getTxtAtenaShimeiKana();
+    }
+
+    @JsonIgnore
+    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
+        this.getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtAtenaUmareYMD() {
+        return this.getAtenaInfo().getTxtAtenaUmareYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
+        this.getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJuminshu() {
+        return this.getAtenaInfo().getTxtJuminshu();
+    }
+
+    @JsonIgnore
+    public void  setTxtJuminshu(TextBox txtJuminshu) {
+        this.getAtenaInfo().setTxtJuminshu(txtJuminshu);
+    }
+
+    @JsonIgnore
     public TextBox getTxtAtenaShimeiKanji() {
         return this.getAtenaInfo().getTxtAtenaShimeiKanji();
     }
@@ -160,36 +190,6 @@ public class TokuchoDoteiKohoshaShosaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtAtenaJushoKanji(TextBox txtAtenaJushoKanji) {
         this.getAtenaInfo().setTxtAtenaJushoKanji(txtAtenaJushoKanji);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtAtenaShimeiKana() {
-        return this.getAtenaInfo().getTxtAtenaShimeiKana();
-    }
-
-    @JsonIgnore
-    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
-        this.getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtAtenaUmareYMD() {
-        return this.getAtenaInfo().getTxtAtenaUmareYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
-        this.getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJuminshu() {
-        return this.getAtenaInfo().getTxtJuminshu();
-    }
-
-    @JsonIgnore
-    public void  setTxtJuminshu(TextBox txtJuminshu) {
-        this.getAtenaInfo().setTxtJuminshu(txtJuminshu);
     }
 
     @JsonIgnore

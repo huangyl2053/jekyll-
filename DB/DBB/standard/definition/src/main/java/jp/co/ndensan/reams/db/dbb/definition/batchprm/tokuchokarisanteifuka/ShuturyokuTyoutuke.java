@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka;
 
-import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 
 /**
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShuturyokuTyoutuke extends BatchParameterBase {
+public class ShuturyokuTyoutuke implements Serializable {
 
     private ReportId 帳票ID;
     private ReportId 帳票分類ID;

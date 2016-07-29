@@ -23,6 +23,12 @@ public class AtenaInfoDiv extends Panel {
      */
     @JsonProperty("txtShikibetsuCode")
     private TextBox txtShikibetsuCode;
+    @JsonProperty("txtAtenaShimeiKana")
+    private TextBox txtAtenaShimeiKana;
+    @JsonProperty("txtAtenaUmareYMD")
+    private TextBoxDate txtAtenaUmareYMD;
+    @JsonProperty("txtJuminshu")
+    private TextBox txtJuminshu;
     @JsonProperty("txtAtenaShimeiKanji")
     private TextBox txtAtenaShimeiKanji;
     @JsonProperty("txtAtenaSebetsu")
@@ -35,12 +41,6 @@ public class AtenaInfoDiv extends Panel {
     private TextBoxFlexibleDate txtShojoYMD;
     @JsonProperty("txtAtenaJushoKanji")
     private TextBox txtAtenaJushoKanji;
-    @JsonProperty("txtAtenaShimeiKana")
-    private TextBox txtAtenaShimeiKana;
-    @JsonProperty("txtAtenaUmareYMD")
-    private TextBoxDate txtAtenaUmareYMD;
-    @JsonProperty("txtJuminshu")
-    private TextBox txtJuminshu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +64,60 @@ public class AtenaInfoDiv extends Panel {
     @JsonProperty("txtShikibetsuCode")
     public void setTxtShikibetsuCode(TextBox txtShikibetsuCode) {
         this.txtShikibetsuCode = txtShikibetsuCode;
+    }
+
+    /*
+     * gettxtAtenaShimeiKana
+     * @return txtAtenaShimeiKana
+     */
+    @JsonProperty("txtAtenaShimeiKana")
+    public TextBox getTxtAtenaShimeiKana() {
+        return txtAtenaShimeiKana;
+    }
+
+    /*
+     * settxtAtenaShimeiKana
+     * @param txtAtenaShimeiKana txtAtenaShimeiKana
+     */
+    @JsonProperty("txtAtenaShimeiKana")
+    public void setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
+        this.txtAtenaShimeiKana = txtAtenaShimeiKana;
+    }
+
+    /*
+     * gettxtAtenaUmareYMD
+     * @return txtAtenaUmareYMD
+     */
+    @JsonProperty("txtAtenaUmareYMD")
+    public TextBoxDate getTxtAtenaUmareYMD() {
+        return txtAtenaUmareYMD;
+    }
+
+    /*
+     * settxtAtenaUmareYMD
+     * @param txtAtenaUmareYMD txtAtenaUmareYMD
+     */
+    @JsonProperty("txtAtenaUmareYMD")
+    public void setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
+        this.txtAtenaUmareYMD = txtAtenaUmareYMD;
+    }
+
+    /*
+     * gettxtJuminshu
+     * @return txtJuminshu
+     */
+    @JsonProperty("txtJuminshu")
+    public TextBox getTxtJuminshu() {
+        return txtJuminshu;
+    }
+
+    /*
+     * settxtJuminshu
+     * @param txtJuminshu txtJuminshu
+     */
+    @JsonProperty("txtJuminshu")
+    public void setTxtJuminshu(TextBox txtJuminshu) {
+        this.txtJuminshu = txtJuminshu;
     }
 
     /*
@@ -172,60 +226,6 @@ public class AtenaInfoDiv extends Panel {
     @JsonProperty("txtAtenaJushoKanji")
     public void setTxtAtenaJushoKanji(TextBox txtAtenaJushoKanji) {
         this.txtAtenaJushoKanji = txtAtenaJushoKanji;
-    }
-
-    /*
-     * gettxtAtenaShimeiKana
-     * @return txtAtenaShimeiKana
-     */
-    @JsonProperty("txtAtenaShimeiKana")
-    public TextBox getTxtAtenaShimeiKana() {
-        return txtAtenaShimeiKana;
-    }
-
-    /*
-     * settxtAtenaShimeiKana
-     * @param txtAtenaShimeiKana txtAtenaShimeiKana
-     */
-    @JsonProperty("txtAtenaShimeiKana")
-    public void setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
-        this.txtAtenaShimeiKana = txtAtenaShimeiKana;
-    }
-
-    /*
-     * gettxtAtenaUmareYMD
-     * @return txtAtenaUmareYMD
-     */
-    @JsonProperty("txtAtenaUmareYMD")
-    public TextBoxDate getTxtAtenaUmareYMD() {
-        return txtAtenaUmareYMD;
-    }
-
-    /*
-     * settxtAtenaUmareYMD
-     * @param txtAtenaUmareYMD txtAtenaUmareYMD
-     */
-    @JsonProperty("txtAtenaUmareYMD")
-    public void setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
-        this.txtAtenaUmareYMD = txtAtenaUmareYMD;
-    }
-
-    /*
-     * gettxtJuminshu
-     * @return txtJuminshu
-     */
-    @JsonProperty("txtJuminshu")
-    public TextBox getTxtJuminshu() {
-        return txtJuminshu;
-    }
-
-    /*
-     * settxtJuminshu
-     * @param txtJuminshu txtJuminshu
-     */
-    @JsonProperty("txtJuminshu")
-    public void setTxtJuminshu(TextBox txtJuminshu) {
-        this.txtJuminshu = txtJuminshu;
     }
 
     // </editor-fold>

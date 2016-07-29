@@ -540,6 +540,36 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtAtenaShimeiKana() {
+        return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtAtenaShimeiKana();
+    }
+
+    @JsonIgnore
+    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
+        this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtAtenaUmareYMD() {
+        return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtAtenaUmareYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
+        this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJuminshu() {
+        return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtJuminshu();
+    }
+
+    @JsonIgnore
+    public void  setTxtJuminshu(TextBox txtJuminshu) {
+        this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtJuminshu(txtJuminshu);
+    }
+
+    @JsonIgnore
     public TextBox getTxtAtenaShimeiKanji() {
         return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtAtenaShimeiKanji();
     }
@@ -597,36 +627,6 @@ public class TokuchoTaishoshaIchiranDiv extends Panel {
     @JsonIgnore
     public void  setTxtAtenaJushoKanji(TextBox txtAtenaJushoKanji) {
         this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaJushoKanji(txtAtenaJushoKanji);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtAtenaShimeiKana() {
-        return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtAtenaShimeiKana();
-    }
-
-    @JsonIgnore
-    public void  setTxtAtenaShimeiKana(TextBox txtAtenaShimeiKana) {
-        this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaShimeiKana(txtAtenaShimeiKana);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtAtenaUmareYMD() {
-        return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtAtenaUmareYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtAtenaUmareYMD(TextBoxDate txtAtenaUmareYMD) {
-        this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtAtenaUmareYMD(txtAtenaUmareYMD);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJuminshu() {
-        return this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().getTxtJuminshu();
-    }
-
-    @JsonIgnore
-    public void  setTxtJuminshu(TextBox txtJuminshu) {
-        this.getTokuchoDoteiKohoshaShosai().getAtenaInfo().setTxtJuminshu(txtJuminshu);
     }
 
     @JsonIgnore

@@ -346,7 +346,6 @@ public class TokuchoTaishoshaIchiran {
      * @return を持つResponseData
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnHihokensha(TokuchoTaishoshaIchiranDiv div) {
-        //TODO  Redmine#90958
         RString fukaNendo = div.getHiddenFukaNendo();
         if (fukaNendo == null) {
             div.getTorokuZumiNenkinInfo().setDisplayNone(true);

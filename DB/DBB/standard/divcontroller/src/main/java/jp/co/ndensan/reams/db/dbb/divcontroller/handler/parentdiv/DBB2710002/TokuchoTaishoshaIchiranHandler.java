@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchomidoteijoho.TokuchoMidoteiJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiKouhoshaListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiKouhoshaShousaiJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiListJoho;
@@ -622,6 +623,9 @@ public class TokuchoTaishoshaIchiranHandler {
                 getClickedItem().getTxtShikibetsuCode();
         ShikibetsuCode 識別コード = 識別コードTemp == null ? null
                 : new ShikibetsuCode(識別コードTemp);
+        TokuchoMidoteiJoho model
+                = getClickedModel(new FlexibleYear(処理年度), 基礎年金番号, 年金コード, 捕捉月, 識別コード);
+        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者, model);
         RString 開始月 = RString.EMPTY;
         if (!RString.isNullOrEmpty(特別徴収開始月) && !特別徴収開始月.startsWith(RString.FULL_SPACE)
                 && !特別徴収開始月.startsWith(LEFT)) {
@@ -640,6 +644,25 @@ public class TokuchoTaishoshaIchiranHandler {
         } else {
             return new TokuchoDouteiKouhoshaShousaiJoho();
         }
+    }
+
+    private TokuchoMidoteiJoho getClickedModel(FlexibleYear 処理年度, RString 基礎年金番号, RString 年金コード,
+            RString 捕捉月, ShikibetsuCode 識別コード) {
+        List<TokuchoMidoteiJoho> models = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者リスト, ArrayList.class);
+        if (models == null || models.isEmpty()) {
+            return null;
+        }
+        if (models.size() == 1) {
+            return models.get(NUM0);
+        }
+        for (TokuchoMidoteiJoho model : models) {
+            if (model.get処理年度().equals(処理年度) && model.get基礎年金番号().equals(基礎年金番号)
+                    && model.get年金コード().equals(年金コード) && model.get捕捉月().equals(捕捉月)
+                    && model.get識別コード().equals(識別コード)) {
+                return model;
+            }
+        }
+        return null;
     }
 
     /**
