@@ -271,7 +271,6 @@ public class RenrakuhyoDataCreatorHandler {
         }
 
         if (負担限度額 != null) {
-            Code 旧措置者区分 = new Code(負担限度額.get旧措置者区分());
             RString 利用者負担段階 = 負担限度額.get利用者負担段階();
             Decimal 食費負担限度額 = 負担限度額.get食費負担限度額();
 

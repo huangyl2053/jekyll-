@@ -15,7 +15,6 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.rirekiNo
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003Kibetsu.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -30,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護期別のデータアクセスクラスです。
  *
- * @reamsid_L DBB-0680-020 wangkanglei
+ * @reamsid_L DBB-9999-023 wangkanglei
  */
 public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
 

@@ -77,7 +77,7 @@ public class IkenShiharaiuchiwakeProcess extends BatchKeyBreakBase<HoshuShiharai
     private RString 市町村名;
     private RString 消費税率;
     private int index_tmp = 1;
-    private static final int INDEX_50 = 1;
+    private static final int INDEX_50 = 50;
 
     @Override
     protected void beforeExecute() {

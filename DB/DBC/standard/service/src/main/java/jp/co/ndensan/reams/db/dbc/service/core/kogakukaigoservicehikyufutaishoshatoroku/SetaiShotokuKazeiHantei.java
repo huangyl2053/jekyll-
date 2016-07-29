@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshato
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojins;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.setai.ISetai;
@@ -22,6 +24,8 @@ import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaisho
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.setai.ISetaiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -135,6 +139,7 @@ public class SetaiShotokuKazeiHantei {
         IKojins 世帯員リスト = 世帯.get世帯員リスト();
         for (IKojin 世帯員 : 世帯員リスト) {
             entity.setHihokenshaNo(tempSetaiEntity.getHihokenshaNo());
+            entity.setSetaiInshikibetsuCode(tempSetaiEntity.getSetaiInshikibetsuCode());
             entity.setShikibetsuCode(世帯員.get識別コード());
             if (tempSetaiEntity.getShikibetsuCode().equals(世帯員.get識別コード())) {
                 entity.setHonninKubun(ONE);
@@ -161,11 +166,14 @@ public class SetaiShotokuKazeiHantei {
     @Transaction
     public void convertGappeinaiJutokushaShinKyuNo(RString メニューID) {
         ISetaiiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiiShotokuKazeiHanteiMapper.class);
-        if (is高額介護サービス(メニューID)) {
-            mapper.update世帯員所得情報高額一時合併内住所地特例者番号変換処理();
-        }
-        if (is事業高額介護サービス(メニューID)) {
-            mapper.update世帯員所得情報事業高額一時合併内住所地特例者番号変換処理();
+        RString 合併情報管理_合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        if (ONE.equals(合併情報管理_合併情報区分)) {
+            if (is高額介護サービス(メニューID)) {
+                mapper.update世帯員所得情報高額一時合併内住所地特例者番号変換処理();
+            }
+            if (is事業高額介護サービス(メニューID)) {
+                mapper.update世帯員所得情報事業高額一時合併内住所地特例者番号変換処理();
+            }
         }
     }
 

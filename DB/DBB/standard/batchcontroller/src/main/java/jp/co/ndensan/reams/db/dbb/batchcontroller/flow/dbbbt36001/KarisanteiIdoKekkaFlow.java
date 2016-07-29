@@ -1,8 +1,5 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt36001;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaKozaIdoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuSoshitsuProcess;
@@ -20,10 +17,9 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoKaishis
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoTeishishaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TsuchishoBangoHatubanProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidokekka.KarisanteiIdoKekkaBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidokekka.KarisanteiIdoKekkaResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -35,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0850-010 zhaowei
  */
-public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatchParameter> {
+public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParameter> {
 
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
@@ -52,7 +49,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 仮算定異動通知書一括発行BATCHID = new RString("DBB015003_KarisanteiIdoTsuchishoHakko");
-    private static final RString 賦課の情報登録フローBATCHID = new RString("ChoteiTorokuFlow");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
@@ -98,7 +95,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
                 executeStep(世帯員把握バッチ);
             }
         }
-        if (RSTZERO.equals(getParameter().get依頼金額計算区分())) {
+        if (RSTZERO.equals(getParameter().get特徴捕捉対象者の依頼金額計算区分())) {
             executeStep(賦課計算_資格喪失);
             executeStep(賦課の情報登録フロー);
 
@@ -119,7 +116,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
             executeStep(依頼金額計算_8月特徴開始);
         }
         executeStep(計算後情報作成);
-        for (KarisanteiIdoKekkaResult result : getParameter().get出力帳票List()) {
+        for (TyouhyouEntity result : getParameter().get出力帳票一覧List()) {
             if (result.get帳票分類ID().value().equals(ID.value())) {
                 executeStep(仮算定異動一括結果一覧表出力);
             }
@@ -129,7 +126,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
             executeStep(八月特徴開始);
         }
 
-        if (getParameter().is一括発行起動フラグ()) {
+        if (getParameter().isバッチ起動フラグ()) {
             executeStep(仮算定異動通知書一括発行);
         }
     }
@@ -262,11 +259,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
      */
     @Step(賦課の情報登録フロー)
     protected IBatchFlowCommand choteiToroku() {
-        ChoteiTorokuParameter param = new ChoteiTorokuParameter();
-        param.setSchema(new RString("rgdb"));
-        param.setChoteiIdAutoNumbering(true);
-        param.setShunoIdAutoNumbering(true);
-        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課, param).define();
+        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
+                new FukaJohoTorokuBatchParameter(true)).define();
     }
 
     /**
@@ -338,39 +332,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     @Step(仮算定異動通知書一括発行)
     protected IBatchFlowCommand karisanteiIdoTsuchishoIkkatsuHakko() {
         return otherBatchFlow(仮算定異動通知書一括発行BATCHID, SubGyomuCode.DBB介護賦課,
-                getKarisanteiIdoTsuchishoIkkatsuHakkoBatchParamter()).define();
-    }
-
-    private KarisanteiIdoFukaParameter getKarisanteiIdoTsuchishoIkkatsuHakkoBatchParamter() {
-        KarisanteiIdoFukaParameter param = new KarisanteiIdoFukaParameter();
-        param.set調定年度(getParameter().get調定年度().toDateString());
-        param.set賦課年度(getParameter().get賦課年度().toDateString());
-        param.set処理対象月(getParameter().get処理対象月());
-        param.set普徴仮算定異動方法(getParameter().get普徴仮算定異動方法());
-        param.set抽出開始日時(new RString(getParameter().get抽出開始日時().toString()));
-        param.set抽出終了日時(new RString(getParameter().get抽出終了日時().toString()));
-        param.set帳票グループ(getParameter().get帳票グループ());
-        List<TyouhyouEntity> 出力帳票一覧List = new ArrayList<>();
-        for (KarisanteiIdoKekkaResult result : getParameter().get出力帳票List()) {
-            出力帳票一覧List.add(new TyouhyouEntity(result.get帳票分類ID(), new ReportId(result.get帳票ID()), result.get出力順ID()));
-        }
-        param.set出力帳票一覧List(出力帳票一覧List);
-        param.set特徴_発行日(getParameter().get特徴_発行日());
-        param.set仮算定額変更_発行日(getParameter().get仮算定額変更_発行日());
-        param.set文書番号(getParameter().get文書番号());
-        param.set納入_出力期(getParameter().get納入_出力期());
-        param.set納入_出力方式(getParameter().get納入_出力方式());
-        param.set納入_発行日(getParameter().get納入_発行日());
-        param.set納入_対象者(getParameter().get納入_対象者());
-        param.set納入_生活保護対象者(getParameter().get納入_生活保護対象者());
-        param.set納入_ページごとに山分け(getParameter().get納入_ページごとに山分け());
-        param.set特徴仮算定賦課処理日時(getParameter().get特徴仮算定賦課処理日時());
-        param.set普徴仮算定賦課処理日時(new RString(getParameter().get普徴仮算定賦課処理日時().toString()));
-        param.set一括発行起動フラグ(getParameter().is一括発行起動フラグ());
-        param.set特徴捕捉対象者の依頼金額計算区分(getParameter().get依頼金額計算区分());
-        param.set算定期(getParameter().get算定期());
-
-        return param;
+                getParameter()).define();
     }
 
     private SetaiShotokuKazeiHanteiBatchParameter getSetaiShotokuKazeiHanteiBatchParameter() {
@@ -378,8 +340,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     }
 
     private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter() {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
-                getParameter().get賦課年度().toDateString(),
+        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
+                getParameter().get賦課年度(),
                 new RString(getResult(RDateTime.class, new RString(システム日時の取得),
                                 SystemTimeShutokuProcess.SYSTEM_TIME).toString()),
                 ShoriName.仮算定異動賦課.get名称(), RString.EMPTY);
@@ -387,13 +349,14 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
 
     private void createKarisanteiIdoKekkaProcessParameter() {
         parameter = new KarisanteiIdoKekkaProcessParameter();
-        parameter.set調定年度(getParameter().get調定年度());
-        parameter.set賦課年度(getParameter().get賦課年度());
+        parameter.set調定年度(new FlexibleYear(getParameter().get調定年度()));
+        parameter.set賦課年度(new FlexibleYear(getParameter().get賦課年度()));
         parameter.set処理対象月(getParameter().get処理対象月());
-        parameter.set抽出開始日時(getParameter().get抽出開始日時());
-        parameter.set抽出終了日時(getParameter().get抽出終了日時());
-        parameter.set出力帳票List(getParameter().get出力帳票List());
-        parameter.set普徴仮算定賦課処理日時(getParameter().get普徴仮算定賦課処理日時());
-        parameter.set依頼金額計算区分(getParameter().get依頼金額計算区分());
+        parameter.set抽出開始日時(RDateTime.of(Long.parseLong(getParameter().get抽出開始日時().toString())));
+        parameter.set抽出終了日時(RDateTime.of(Long.parseLong(getParameter().get抽出終了日時().toString())));
+        parameter.set出力帳票List(getParameter().get出力帳票一覧List());
+        parameter.set普徴仮算定賦課処理日時(
+                RDateTime.of(Long.parseLong(getParameter().get普徴仮算定賦課処理日時().toString())));
+        parameter.set依頼金額計算区分(getParameter().get特徴捕捉対象者の依頼金額計算区分());
     }
 }

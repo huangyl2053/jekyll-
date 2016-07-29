@@ -43,6 +43,7 @@ public class KarisanteiIdoFukaParameter extends BatchParameterBase {
     private static final String KEY_一括発行起動フラグ = "一括発行起動フラグ";
     private static final String KEY_特徴捕捉対象者の依頼金額計算区分 = "特徴捕捉対象者の依頼金額計算区分";
     private static final String KEY_算定期 = "算定期";
+    private static final String KEY_バッチ起動フラグ = "バッチ起動フラグ";
 
     @BatchParameter(key = KEY_調定年度, name = "調定年度")
     private RString 調定年度;
@@ -88,4 +89,6 @@ public class KarisanteiIdoFukaParameter extends BatchParameterBase {
     private RString 特徴捕捉対象者の依頼金額計算区分;
     @BatchParameter(key = KEY_算定期, name = "算定期")
     private RString 算定期;
+    @BatchParameter(key = KEY_バッチ起動フラグ, name = "バッチ起動フラグ")
+    private boolean バッチ起動フラグ;
 }

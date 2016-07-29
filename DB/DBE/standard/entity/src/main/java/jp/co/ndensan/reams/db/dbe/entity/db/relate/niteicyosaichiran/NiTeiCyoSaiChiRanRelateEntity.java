@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NiTeiCyoSaiChiRanRelateEntity implements Serializable {
 
     private int ninteichosaIraiRirekiNo;
