@@ -8,11 +8,18 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity;
 
 /**
- * 介護認定法改正管理のMapperです。
+ * {@link DbT7202KaigoNinteiHokaiseiKanriEntity}のマッパーIFです。
  *
- * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public interface IDbT7202KaigoNinteiHokaiseiKanriMapper {
+
+    /**
+     * {@link DbT7202KaigoNinteiHokaiseiKanriEntity}を取得します。
+     *
+     * @return {@link DbT7202KaigoNinteiHokaiseiKanriEntity}
+     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
+     */
+    DbT7202KaigoNinteiHokaiseiKanriEntity getEntity();
 
     /**
      * 介護認定法改正管理を検索で１件取得します。
