@@ -306,6 +306,10 @@
         "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
         WHERE
         "DbT2002Fuka"."fukaNendo" = #{ 賦課年度 }
+        ORDER BY "DbT2002Fuka"."choteiNendo" ,
+        "DbT2002Fuka"."fukaNendo",
+        "DbT2002Fuka"."tsuchishoNo",
+        "DbT2002Fuka"."rirekiNo"
     </select>
     
     <resultMap id="resultMap_SetaiHaakuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity" autoMapping="true">
