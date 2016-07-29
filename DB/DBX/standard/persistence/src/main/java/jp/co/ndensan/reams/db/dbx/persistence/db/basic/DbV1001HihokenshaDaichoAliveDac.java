@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbV1001HihokenshaDaichoAliveDac {
 
+    private static final RString 項目名_被保険者番号 = new RString("被保険者番号");
+
     @InjectSession
     private SqlSession session;
 
@@ -49,7 +51,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
             RString 枝番) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -101,7 +103,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
      */
     @Transaction
     public DbV1001HihokenshaDaichoEntity get最新の被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -120,7 +122,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
      */
     @Transaction
     public DbV1001HihokenshaDaichoEntity get被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -140,7 +142,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
      */
     @Transaction
     public DbV1001HihokenshaDaichoEntity get被保険者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

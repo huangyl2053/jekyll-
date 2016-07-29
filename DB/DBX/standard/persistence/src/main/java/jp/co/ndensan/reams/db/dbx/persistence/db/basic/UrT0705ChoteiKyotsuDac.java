@@ -62,18 +62,36 @@ public class UrT0705ChoteiKyotsuDac implements ISaveable<UrT0705ChoteiKyotsuEnti
                 toList(UrT0705ChoteiKyotsuEntity.class);
     }
 
+    /**
+     * 登録処理
+     *
+     * @param entity UrT0705ChoteiKyotsuEntity
+     * @return 登録件数
+     */
     @Transaction
     public int insert(UrT0705ChoteiKyotsuEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
+    /**
+     * 更新処理
+     *
+     * @param entity UrT0705ChoteiKyotsuEntity
+     * @return 更新件数
+     */
     @Transaction
     public int update(UrT0705ChoteiKyotsuEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
+    /**
+     * 削除処理
+     *
+     * @param entity UrT0705ChoteiKyotsuEntity
+     * @return 削除件数
+     */
     @Transaction
     public int delete(UrT0705ChoteiKyotsuEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

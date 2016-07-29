@@ -49,6 +49,7 @@ public class SinsaSeikyusyoJohoHandler {
         }
         if (UrControlDataFactory.createInstance().getMenuID().equals(new RString("DBUMN71002"))) {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通ボタン, true);
         } else {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(共通ボタン, false);
         }
