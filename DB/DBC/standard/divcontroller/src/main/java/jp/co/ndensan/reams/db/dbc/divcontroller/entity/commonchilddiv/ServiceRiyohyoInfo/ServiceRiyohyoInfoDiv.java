@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,7 +51,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
     @JsonProperty("txtSofuYM")
     private TextBoxDate txtSofuYM;
     @JsonProperty("btnShowShuruiGendogaku")
-    private Button btnShowShuruiGendogaku;
+    private ButtonDialog btnShowShuruiGendogaku;
     @JsonProperty("btnZengetsuCopy")
     private Button btnZengetsuCopy;
     @JsonProperty("ServiceRiyohyoBeppyoRiyoNissu")
@@ -240,7 +240,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
      * @return btnShowShuruiGendogaku
      */
     @JsonProperty("btnShowShuruiGendogaku")
-    public Button getBtnShowShuruiGendogaku() {
+    public ButtonDialog getBtnShowShuruiGendogaku() {
         return btnShowShuruiGendogaku;
     }
 
@@ -249,7 +249,7 @@ public class ServiceRiyohyoInfoDiv extends Panel implements IServiceRiyohyoInfoD
      * @param btnShowShuruiGendogaku btnShowShuruiGendogaku
      */
     @JsonProperty("btnShowShuruiGendogaku")
-    public void setBtnShowShuruiGendogaku(Button btnShowShuruiGendogaku) {
+    public void setBtnShowShuruiGendogaku(ButtonDialog btnShowShuruiGendogaku) {
         this.btnShowShuruiGendogaku = btnShowShuruiGendogaku;
     }
 
