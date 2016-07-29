@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka;
 
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBBBT33001_特徴仮算定賦課のparameter
@@ -20,6 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShuturyokuTyoutuke extends BatchParameterBase {
 
     private ReportId 帳票ID;
-    private RString 帳票名;
+    private ReportId 帳票分類ID;
     private Long 出力順ID;
 }
