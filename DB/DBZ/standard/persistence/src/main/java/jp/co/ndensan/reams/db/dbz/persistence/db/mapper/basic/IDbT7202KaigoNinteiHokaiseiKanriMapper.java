@@ -20,11 +20,4 @@ public interface IDbT7202KaigoNinteiHokaiseiKanriMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7202KaigoNinteiHokaiseiKanriEntity getEntity();
-
-    /**
-     * 介護認定法改正管理を検索で１件取得します。
-     *
-     * @return DbT7202KaigoNinteiHokaiseiKanriEntity
-     */
-    DbT7202KaigoNinteiHokaiseiKanriEntity get最古法改正施行年月日();
 }
