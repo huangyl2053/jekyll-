@@ -324,7 +324,10 @@ public class FukaKeisan {
             if (pair.get年度分賦課リスト() == null) {
                 return false;
             }
-            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get現年度();
+            FukaJoho 賦課の情報 = get賦課の情報(pair.get年度分賦課リスト());
+            if (賦課の情報 == null) {
+                return false;
+            }
             if (is受給者として賦課(賦課の情報.get生保開始日())) {
                 if (!is年度内に受給期間あり_生保(param.get生保の情報のリスト(), param.get賦課年度())) {
                     return true;
@@ -342,7 +345,10 @@ public class FukaKeisan {
             if (pair.get年度分賦課リスト() == null) {
                 return false;
             }
-            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get現年度();
+            FukaJoho 賦課の情報 = get賦課の情報(pair.get年度分賦課リスト());
+            if (賦課の情報 == null) {
+                return false;
+            }
             if (is受給者として賦課(賦課の情報.get老年開始日())) {
                 if (!is年度内に受給期間あり_福祉(param.get老福の情報のリスト(), param.get賦課年度())) {
                     return true;
@@ -360,7 +366,10 @@ public class FukaKeisan {
             if (pair.get年度分賦課リスト() == null) {
                 return false;
             }
-            FukaJoho 賦課の情報 = pair.get年度分賦課リスト().get現年度();
+            FukaJoho 賦課の情報 = get賦課の情報(pair.get年度分賦課リスト());
+            if (賦課の情報 == null) {
+                return false;
+            }
             if (is境界層該当として賦課(賦課の情報.get境界層区分())) {
                 if (!is年度内に適用期間あり(param.get境界層の情報のリスト(), param.get賦課年度())) {
                     return true;
@@ -371,6 +380,22 @@ public class FukaKeisan {
 
         }
         return false;
+    }
+
+    private FukaJoho get賦課の情報(NendobunFukaList 年度分賦課リスト) {
+        if (年度分賦課リスト.get過年度5() != null) {
+            return 年度分賦課リスト.get過年度5();
+        } else if (年度分賦課リスト.get過年度4() != null) {
+            return 年度分賦課リスト.get過年度4();
+        } else if (年度分賦課リスト.get過年度3() != null) {
+            return 年度分賦課リスト.get過年度3();
+        } else if (年度分賦課リスト.get過年度2() != null) {
+            return 年度分賦課リスト.get過年度2();
+        } else if (年度分賦課リスト.get過年度1() != null) {
+            return 年度分賦課リスト.get過年度1();
+        } else {
+            return 年度分賦課リスト.get現年度();
+        }
     }
 
     private boolean is受給者として賦課(FlexibleDate 開始日) {
@@ -1056,9 +1081,7 @@ public class FukaKeisan {
                     return 1;
                 }
             });
-            // TODO QAのNo.950(Redmine#91760)
-            RString 生活保護扶助種類 = get生活保護扶助種類(生活保護の情報のリスト.get(0).getSeikatsuHogoFujoShuruiList());
-            builder.set生活保護扶助種類(生活保護扶助種類);
+            builder.set生活保護扶助種類(get生活保護扶助種類(生活保護の情報のリスト.get(0).getSeikatsuHogoFujoShuruiList()));
             builder.set生保開始日(生活保護の情報のリスト.get(0).get受給開始日());
             builder.set生保廃止日(生活保護の情報のリスト.get(0).get受給廃止日());
         } else {
@@ -1072,12 +1095,15 @@ public class FukaKeisan {
         if (扶助種類リスト == null || 扶助種類リスト.isEmpty()) {
             return RString.EMPTY;
         }
-        List<RString> 扶助種類 = new ArrayList<>();
-        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
-            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
-        }
-        Collections.sort(扶助種類);
-        return 扶助種類.get(0);
+        // TODO QAのNo.950(Redmine#91760)
+        // 以下がDummy data
+        return new RString("01");
+//        List<RString> 扶助種類 = new ArrayList<>();
+//        for (SeikatsuHogoFujoShurui shurui : 扶助種類リスト) {
+//            扶助種類.add(shurui.get扶助種類コード().getColumnValue().getColumnValue());
+//        }
+//        Collections.sort(扶助種類);
+//        return 扶助種類.get(0);
     }
 
     private void set老齢福祉年金(FukaJohoBuilder builder, List<RoreiFukushiNenkinJukyusha> 老福の情報リスト,
@@ -1150,21 +1176,21 @@ public class FukaKeisan {
     }
 
     private void set新しい賦課の情報(FukaJohoBuilder builder, FukaKokyoParameter param) {
-        builder.set識別コード(param.get資格の情報().get識別コード());
-        builder.set資格取得日(param.get資格の情報().get第1号資格取得年月日());
-        builder.set資格取得事由(param.get資格の情報().get資格取得事由コード());
-        builder.set資格喪失日(param.get資格の情報().get資格喪失年月日());
-        builder.set資格喪失事由(param.get資格の情報().get資格喪失事由コード());
-
+        builder.set被保険者番号(param.get資格の情報().get被保険者番号())
+                .set識別コード(param.get資格の情報().get識別コード())
+                .set資格取得日(param.get資格の情報().get第1号資格取得年月日())
+                .set資格取得事由(param.get資格の情報().get資格取得事由コード())
+                .set資格喪失日(param.get資格の情報().get資格喪失年月日())
+                .set資格喪失事由(param.get資格の情報().get資格喪失事由コード());
         FlexibleDate 賦課期日 = findOut賦課基準日(param.get賦課の情報_設定前().get賦課年度(), param.get資格の情報());
         builder.set賦課期日(賦課期日);
         if (param.get世帯員所得情報List() != null) {
             for (SetaiinShotoku 世帯員 : param.get世帯員所得情報List()) {
                 if (HonninKubun.本人.getCode().equals(世帯員.get本人区分())) {
-                    builder.set世帯コード(new SetaiCode(世帯員.get世帯コード()));
-                    builder.set課税区分(世帯員.get課税区分_住民税減免前());
-                    builder.set合計所得金額(世帯員.get合計所得金額());
-                    builder.set公的年金収入額(世帯員.get年金収入額());
+                    builder.set世帯コード(new SetaiCode(世帯員.get世帯コード()))
+                            .set課税区分(世帯員.get課税区分_住民税減免前())
+                            .set合計所得金額(世帯員.get合計所得金額())
+                            .set公的年金収入額(世帯員.get年金収入額());
                     break;
                 }
             }
@@ -1199,7 +1225,8 @@ public class FukaKeisan {
     }
 
     private void set新しい賦課の情報_バッチ(FukaJohoBuilder builder, FukaKokyoBatchParameter param) {
-        builder.set識別コード(param.get資格の情報().get識別コード())
+        builder.set被保険者番号(param.get資格の情報().get被保険者番号())
+                .set識別コード(param.get資格の情報().get識別コード())
                 .set資格取得日(param.get資格の情報().get第1号資格取得年月日())
                 .set資格取得事由(param.get資格の情報().get資格取得事由コード())
                 .set資格喪失日(param.get資格の情報().get資格喪失年月日())
@@ -1432,7 +1459,8 @@ public class FukaKeisan {
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
         fukaJohoRelateEntity.set介護賦課Entity(現年度.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        for (Kibetsu kibetsu : 現年度.getKibetsuList()) {
+        List<Kibetsu> kibetsuList = 現年度.getKibetsuList();
+        for (Kibetsu kibetsu : kibetsuList) {
             if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
                 set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
             } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
@@ -1443,42 +1471,8 @@ public class FukaKeisan {
         現年度 = new FukaJoho(fukaJohoRelateEntity);
 
         FukaJoho 更正前 = param.get年度分賦課リスト_更正前().get現年度();
-        ChoshuHoho 出力用徴収方法の情報 = param.get徴収方法の情報_更正前();
-        if (Integer.parseInt(Tsuki._3月.getコード().toString()) != param.get調定日時().getMonthValue()) {
-            Decimal 更正前の特別徴収額 = Decimal.ZERO;
-            if (更正前.get特徴期別金額01() != null) {
-                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額01());
-            }
-            if (更正前.get特徴期別金額02() != null) {
-                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額02());
-            }
-            if (更正前.get特徴期別金額03() != null) {
-                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額03());
-            }
-            if (更正前.get特徴期別金額04() != null) {
-                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額04());
-            }
-            if (更正前.get特徴期別金額05() != null) {
-                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額05());
-            }
-            if (更正前.get特徴期別金額06() != null) {
-                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額06());
-            }
-            Decimal 更正後の特別徴収額 = Decimal.ZERO;
-            for (Decimal decimal : 特徴期別金額) {
-                更正後の特別徴収額.add(decimal);
-            }
-            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) < 0
-                    || (特徴停止事由コード != null && !特徴停止事由コード.isEmpty())) {
-                ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
-                builder.set特別徴収停止事由コード(特徴停止事由コード)
-                        .set特別徴収停止日時(param.get調定日時());
-                出力用徴収方法の情報 = builder.build();
-                ChoshuHohoKoshin choshuHohoKoshin = ChoshuHohoKoshin.createInstance();
-                出力用徴収方法の情報 = choshuHohoKoshin.getChoshuHohoKoshinData(出力用徴収方法の情報,
-                        param.get調定日時(), 現年度.get資格取得日(), 現年度.get資格喪失日());
-            }
-        }
+        ChoshuHoho 出力用徴収方法の情報 = get出力用徴収方法の情報(更正前, 現年度, param, param.get徴収方法の情報_更正前(),
+                特徴期別金額, 特徴停止事由コード);
 
         ChoteiJiyuParameter choteiJiyuParameter = new ChoteiJiyuParameter();
         choteiJiyuParameter.set現年度(更正前);
@@ -1587,6 +1581,45 @@ public class FukaKeisan {
             kibetsuEntity.set調定共通Entity(entityList);
             介護期別RelateEntity.add(kibetsuEntity);
         }
+    }
+
+    private ChoshuHoho get出力用徴収方法の情報(FukaJoho 更正前, FukaJoho 現年度, CalculateChoteiParameter param,
+            ChoshuHoho 出力用徴収方法の情報, List<Decimal> 特徴期別金額, RString 特徴停止事由コード) {
+        if (Integer.parseInt(Tsuki._3月.getコード().toString()) != param.get調定日時().getMonthValue()) {
+            Decimal 更正前の特別徴収額 = Decimal.ZERO;
+            if (更正前.get特徴期別金額01() != null) {
+                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額01());
+            }
+            if (更正前.get特徴期別金額02() != null) {
+                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額02());
+            }
+            if (更正前.get特徴期別金額03() != null) {
+                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額03());
+            }
+            if (更正前.get特徴期別金額04() != null) {
+                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額04());
+            }
+            if (更正前.get特徴期別金額05() != null) {
+                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額05());
+            }
+            if (更正前.get特徴期別金額06() != null) {
+                更正前の特別徴収額 = 更正前の特別徴収額.add(更正前.get特徴期別金額06());
+            }
+            Decimal 更正後の特別徴収額 = Decimal.ZERO;
+            for (Decimal decimal : 特徴期別金額) {
+                更正後の特別徴収額.add(decimal);
+            }
+            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) < 0 || !RString.isNullOrEmpty(特徴停止事由コード)) {
+                ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
+                builder.set特別徴収停止事由コード(特徴停止事由コード)
+                        .set特別徴収停止日時(param.get調定日時());
+                出力用徴収方法の情報 = builder.build();
+                ChoshuHohoKoshin choshuHohoKoshin = ChoshuHohoKoshin.createInstance();
+                出力用徴収方法の情報 = choshuHohoKoshin.getChoshuHohoKoshinData(出力用徴収方法の情報,
+                        param.get調定日時(), 現年度.get資格取得日(), 現年度.get資格喪失日());
+            }
+        }
+        return 出力用徴収方法の情報;
     }
 
     private FukaJoho get過年度(NendobunFukaList 年度分賦課リスト, FlexibleYear 調定年度) {
