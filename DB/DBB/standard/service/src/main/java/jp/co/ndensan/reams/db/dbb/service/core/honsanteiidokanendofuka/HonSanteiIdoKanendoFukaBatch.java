@@ -93,7 +93,7 @@ public class HonSanteiIdoKanendoFukaBatch {
             日付管理entity.setShoriName(ShoriName.過年度賦課確定.get名称());
             日付管理entity.setKijunTimestamp(new YMDHMS(日付管理entity.getKijunTimestamp().getRDateTime().plusSeconds(INT_イチ)));
             ShoriDateKanri 過年度賦課確定 = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課, ShoriName.過年度賦課確定.get名称(), 調定年度);
-            RString 年度内連番 = 過年度賦課確定 == null ? 年度内連番_0001 : 過年度賦課確定.get年度内連番();
+            RString 年度内連番 = 過年度賦課確定 == null ? 年度内連番_0001 : new RString(Integer.valueOf(過年度賦課確定.get年度内連番().toString()) + INT_イチ).padZeroToLeft(INT_ヨ);
             日付管理entity.setNendoNaiRenban(年度内連番);
             日付管理entity.setState(EntityDataState.Added);
             manager.save処理日付管理マスタ(new ShoriDateKanri(日付管理entity));
@@ -121,7 +121,7 @@ public class HonSanteiIdoKanendoFukaBatch {
             日付管理entity.setShichosonCode(過年度賦課_DBB.get市町村コード());
             日付管理entity.setShoriName(ShoriName.過年度賦課.get名称());
             日付管理entity.setShoriEdaban(年度内連番_0001);
-            日付管理entity.setNendo(parameter.get賦課年度());
+            日付管理entity.setNendo(parameter.get調定年度());
             日付管理entity.setNendoNaiRenban(年度内連番_0001);
             日付管理entity.setKijunYMD(基準年月日);
             日付管理entity.setKijunTimestamp(処理日時);
@@ -183,7 +183,7 @@ public class HonSanteiIdoKanendoFukaBatch {
         entity.setShichosonCode(日付管理.get市町村コード());
         entity.setShoriName(ShoriName.過年度賦課.get名称());
         entity.setShoriEdaban(日付管理.get処理枝番());
-        entity.setNendo(parameter.get賦課年度());
+        entity.setNendo(parameter.get調定年度());
         entity.setNendoNaiRenban(年度内連番_0001);
         entity.setKijunYMD(基準年月日);
         entity.setKijunTimestamp(処理日時);

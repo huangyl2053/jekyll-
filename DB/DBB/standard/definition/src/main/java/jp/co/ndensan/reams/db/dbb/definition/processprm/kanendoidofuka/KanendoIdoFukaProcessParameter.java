@@ -27,7 +27,7 @@ public class KanendoIdoFukaProcessParameter implements IBatchProcessParameter {
     private RString 処理対象;
     private RDateTime 抽出開始日時;
     private RDateTime 抽出終了日時;
-    private Long 出力順ID;
+    private RString 出力順ID;
     private YMDHMS システム日時;
 
     /**
@@ -38,11 +38,11 @@ public class KanendoIdoFukaProcessParameter implements IBatchProcessParameter {
      * @param 処理対象 RString
      * @param 抽出開始日時 RDateTime
      * @param 抽出終了日時 RDateTime
-     * @param 出力順ID Long
+     * @param 出力順ID RString
      * @param システム日時 YMDHMS
      */
     public KanendoIdoFukaProcessParameter(RString 日付関連_年度サイクル, FlexibleYear 調定年度, RString 処理対象,
-            RDateTime 抽出開始日時, RDateTime 抽出終了日時, Long 出力順ID, YMDHMS システム日時) {
+            RDateTime 抽出開始日時, RDateTime 抽出終了日時, RString 出力順ID, YMDHMS システム日時) {
         this.日付関連_年度サイクル = 日付関連_年度サイクル;
         this.調定年度 = 調定年度;
         this.処理対象 = 処理対象;
