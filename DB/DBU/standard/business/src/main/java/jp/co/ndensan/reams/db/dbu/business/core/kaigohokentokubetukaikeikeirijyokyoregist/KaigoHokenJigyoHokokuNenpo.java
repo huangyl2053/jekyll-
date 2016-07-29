@@ -264,7 +264,7 @@ public class KaigoHokenJigyoHokokuNenpo {
     /**
      * 横項目コードします。
      *
-     * @param 横項目コード
+     * @param 横項目コード 横項目コード
      */
     public void set横項目コード(Code 横項目コード) {
         事業報告集計一覧データ.set横項目コード(横項目コード);

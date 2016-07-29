@@ -165,15 +165,12 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
     @Transaction
     public List<DbT7021JigyoHokokuTokeiDataEntity> selectKaigoHokenTokeiDataList(
             FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        List<RString> shukeiNoList = new ArrayList<RString>() {
-            {
-                add(new RString("0100"));
-                add(new RString("0200"));
-                add(new RString("0301"));
-                add(new RString("0302"));
-                add(new RString("0303"));
-            }
-        };
+        List<RString> shukeiNoList = new ArrayList<>();
+        shukeiNoList.add(new RString("0100"));
+        shukeiNoList.add(new RString("0200"));
+        shukeiNoList.add(new RString("0301"));
+        shukeiNoList.add(new RString("0302"));
+        shukeiNoList.add(new RString("0303"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         ITrueFalseCriteria iTrueFalseCriteria = getiTrueFalseCriteria(年度, 市町村コード, 保険者区分, shukeiNoList);
 
