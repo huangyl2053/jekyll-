@@ -72,7 +72,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
             executeStep(本算定結果一覧表出力);
         }
         executeStep(処理日付管理テーブル更新);
-        if (getParameter().is一括発行起動フラグ()) {
+        if (getParameter().is画面移動フラグ()) {
             executeStep(本算定通知書一括発行フロー);
         }
 
