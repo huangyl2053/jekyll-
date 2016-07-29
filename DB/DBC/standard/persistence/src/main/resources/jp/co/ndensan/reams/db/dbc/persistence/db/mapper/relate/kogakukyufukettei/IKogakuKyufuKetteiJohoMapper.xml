@@ -91,13 +91,14 @@
                 WHERE SHINSAKETTEITEMP."koshinFlag" = false
         ) AS TEMP 
         LEFT JOIN 
-                "rgdb"."DbT3057KogakuShikyuHanteiKekka" AS "DbT3057KogakuShikyuHanteiKekka"
+                (SELECT * from "rgdb"."DbT3057KogakuShikyuHanteiKekka" 
+                WHERE  "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" IS NOT NULL AND
+               "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" != '' AND
+               "DbT3057KogakuShikyuHanteiKekka"."shinsaKekkaHaneiKubun" != '1')
+                AS "DbT3057KogakuShikyuHanteiKekka"
                 ON TEMP."dbWT0001HihokenshaTemp_hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
                 AND TEMP."dbWT3058KogakuShikyuShinsaKettei_serviceTeikyoYm" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
                 AND TEMP."dbWT3058KogakuShikyuShinsaKettei_shokisaiHokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."shoKisaiHokenshaNo"
-        WHERE  "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" IS NOT NULL AND
-               "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" != '' AND
-               "DbT3057KogakuShikyuHanteiKekka"."shinsaKekkaHaneiKubun" != '1'
         ORDER BY TEMP."dbWT0001HihokenshaTemp_hihokenshaNo" ASC,
                 TEMP."dbWT3058KogakuShikyuShinsaKettei_serviceTeikyoYm" ASC,
                 TEMP."dbWT0001HihokenshaTemp_shoHokenshaNo" ASC,
