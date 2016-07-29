@@ -1333,7 +1333,7 @@ public class GenNendoHonsanteiIdouFath {
      * @param 特徴期別金額 List<Decimal>
      * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
+    protected void set特徴期別金額(Kibetsu kibetsu, List<Decimal> 特徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
         switch (kibetsu.get期()) {
             case INT_1:
                 set期別金額(kibetsu, 特徴期別金額.get(0), 介護期別RelateEntity);
@@ -1364,7 +1364,7 @@ public class GenNendoHonsanteiIdouFath {
      * @param 普徴期別金額 List<Decimal>
      * @param 介護期別RelateEntity List<KibetsuEntity>
      */
-    public void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
+    protected void set普徴期別金額(Kibetsu kibetsu, List<Decimal> 普徴期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
         switch (kibetsu.get期()) {
             case INT_1:
                 set期別金額(kibetsu, 普徴期別金額.get(0), 介護期別RelateEntity);
