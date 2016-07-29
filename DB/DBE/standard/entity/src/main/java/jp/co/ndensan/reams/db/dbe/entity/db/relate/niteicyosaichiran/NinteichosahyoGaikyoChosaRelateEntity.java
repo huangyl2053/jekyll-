@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItem
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteichosahyoGaikyoChosaRelateEntity implements Serializable {
 
     private List<DbT5211NinteichosahyoChosaItemEntity> 基本調査調査項目;
