@@ -894,6 +894,7 @@ public class HonsanteiIdoGennendo {
         }
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         result.set随時フラグ(parameter.is随時フラグ());
+        result.set画面移動フラグ(parameter.is画面移動フラグ());
         return result;
     }
 

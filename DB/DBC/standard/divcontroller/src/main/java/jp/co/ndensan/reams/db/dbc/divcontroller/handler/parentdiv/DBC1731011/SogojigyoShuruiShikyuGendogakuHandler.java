@@ -35,6 +35,7 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
     private static final RString 符号 = new RString(":");
 
     private static final int 履歴番号 = 1;
+    private static final int INT_1 = 1;
 
     private final SogojigyoShuruiShikyuGendogakuDiv div;
 
@@ -69,10 +70,10 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
             }
             row.setDefaultDataName0(entity.getサービス種類コード().value().concat(符号).concat(result.getサービス種類名称()));
             row.getDefaultDataName1().setValue(new RDate(entity.get適用開始年月().getYearValue(),
-                    entity.get適用開始年月().getMonthValue(), 1));
+                    entity.get適用開始年月().getMonthValue(), INT_1));
             if (entity.get適用終了年月() != null) {
                 row.getDefaultDataName2().setValue(new RDate(entity.get適用終了年月().getYearValue(),
-                        entity.get適用終了年月().getMonthValue(), 1));
+                        entity.get適用終了年月().getMonthValue(), INT_1));
             }
             if (result.get要支援1() != null) {
                 row.getDefaultDataName3().setValue(result.get要支援1().get支給限度単位数());
@@ -113,13 +114,6 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
         div.getTxtNijiYobo().clearValue();
     }
 
-//    private void setサービス種類DDL空白表示() {
-//        div.getDdlServiceShurui().getDataSource().clear();
-//        List<KeyValueDataSource> dataSource空白 = new ArrayList<>();
-//        dataSource空白.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-//        div.getDdlServiceShurui().setDataSource(dataSource空白);
-//        div.getDdlServiceShurui().setSelectedKey(RString.EMPTY);
-//    }
     /**
      * 画面詳細パネル各項目入力不可の状態です。
      */
@@ -227,42 +221,7 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
         FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getValue().getYearMonth().toDateString());
         ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(div.getDdlServiceShurui().getSelectedKey());
         if (登録.equals(保存モード)) {
-            SogojigyoShuruiSearchResult entityFirst = 総合事業種類情報.get(0);
-            SogojigyoShuruiSearchResult entityLast = 総合事業種類情報.get(総合事業種類情報.size() - 1);
-            SogoJigyoShuruiShikyuGendoGaku 要支援1Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 要支援1,
-                    適用開始年月, 履歴番号);
-            SogoJigyoShuruiShikyuGendoGaku 要支援2Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 要支援2,
-                    適用開始年月, 履歴番号);
-            SogoJigyoShuruiShikyuGendoGaku 二次予防Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 二次予防,
-                    適用開始年月, 履歴番号);
-            if (!適用開始年月.isBeforeOrEquals(entityFirst.get要支援1().get適用開始年月())) {
-                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue()).build();
-                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue()).build();
-                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue()).build();
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.added());
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.added());
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.added());
-                要支援1Entity = entityFirst.get要支援1();
-                要支援2Entity = entityFirst.get要支援2();
-                二次予防Entity = entityFirst.get二次予防();
-                要支援1Entity = 要支援1Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
-                要支援2Entity = 要支援2Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
-                二次予防Entity = 二次予防Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.modified());
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.modified());
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.modified());
-            }
-            if (適用開始年月.isBefore(entityLast.get要支援1().get適用開始年月())) {
-                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue())
-                        .set適用終了年月(entityLast.get要支援1().get適用開始年月().minusMonth(1)).build();
-                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue())
-                        .set適用終了年月(entityLast.get要支援1().get適用開始年月().minusMonth(1)).build();
-                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue())
-                        .set適用終了年月(entityLast.get要支援1().get適用開始年月().minusMonth(1)).build();
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.added());
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.added());
-                manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.added());
-            }
+            add情報(総合事業種類情報, サービス種類コード, 適用開始年月, manager);
         } else {
             SogojigyoShuruiSearchResult sogojigyoShuruiSearchResult = null;
             SogoJigyoShuruiShikyuGendoGaku entity;
@@ -291,6 +250,68 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
                 modify情報(manager, 要支援1Entity, 要支援2Entity, 二次予防Entity, 適用開始年月, サービス種類コード);
             } else {
                 delete情報(manager, 要支援1Entity, 要支援2Entity, 二次予防Entity);
+            }
+        }
+    }
+
+    private void add情報(List<SogojigyoShuruiSearchResult> 総合事業種類情報, ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth 適用開始年月, SogoJigyoShuruiShikyuGendoGakuManager manager) {
+
+        List<SogojigyoShuruiSearchResult> 総合事業種類情報登録用 = new ArrayList<>();
+        for (SogojigyoShuruiSearchResult result : 総合事業種類情報) {
+            if (サービス種類コード.equals(result.get要支援1().getサービス種類コード())) {
+                総合事業種類情報登録用.add(result);
+            }
+        }
+        if (総合事業種類情報登録用.isEmpty()) {
+            SogoJigyoShuruiShikyuGendoGaku 要支援1Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 要支援1,
+                    適用開始年月, 履歴番号);
+            SogoJigyoShuruiShikyuGendoGaku 要支援2Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 要支援2,
+                    適用開始年月, 履歴番号);
+            SogoJigyoShuruiShikyuGendoGaku 二次予防Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 二次予防,
+                    適用開始年月, 履歴番号);
+            要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue()).build();
+            要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue()).build();
+            二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue()).build();
+            manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.added());
+            manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.added());
+            manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.added());
+        } else {
+            SogojigyoShuruiSearchResult firstResult = 総合事業種類情報登録用.get(0);
+            SogojigyoShuruiSearchResult lastResult = 総合事業種類情報登録用.get(総合事業種類情報登録用.size() - INT_1);
+            SogoJigyoShuruiShikyuGendoGaku 要支援1Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 要支援1,
+                    適用開始年月, 履歴番号);
+            SogoJigyoShuruiShikyuGendoGaku 要支援2Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 要支援2,
+                    適用開始年月, 履歴番号);
+            SogoJigyoShuruiShikyuGendoGaku 二次予防Entity = new SogoJigyoShuruiShikyuGendoGaku(サービス種類コード, 二次予防,
+                    適用開始年月, 履歴番号);
+            if (!適用開始年月.isBeforeOrEquals(firstResult.get要支援1().get適用開始年月())) {
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue()).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue()).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue()).build();
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.added());
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.added());
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.added());
+                要支援1Entity = firstResult.get要支援1();
+                要支援2Entity = firstResult.get要支援2();
+                二次予防Entity = firstResult.get二次予防();
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set適用終了年月(適用開始年月.minusMonth(1)).build();
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.modified());
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.modified());
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.modified());
+            }
+            if (適用開始年月.isBefore(lastResult.get要支援1().get適用開始年月())) {
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue())
+                        .set適用終了年月(lastResult.get要支援1().get適用開始年月().minusMonth(1)).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue())
+                        .set適用終了年月(lastResult.get要支援1().get適用開始年月().minusMonth(1)).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue())
+                        .set適用終了年月(lastResult.get要支援1().get適用開始年月().minusMonth(1)).build();
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.added());
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.added());
+                manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.added());
             }
         }
     }
@@ -368,13 +389,13 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
             SogoJigyoShuruiShikyuGendoGaku 要支援2Entity, SogoJigyoShuruiShikyuGendoGaku 二次予防Entity
     ) {
         if (要支援1Entity != null) {
-            manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.deleted());
+            manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援1Entity.deleted改());
         }
         if (要支援2Entity != null) {
-            manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.deleted());
+            manager.save介護予防_日常生活支援総合事業種類支給限度額(要支援2Entity.deleted改());
         }
         if (二次予防Entity != null) {
-            manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.deleted());
+            manager.save介護予防_日常生活支援総合事業種類支給限度額(二次予防Entity.deleted改());
         }
     }
 

@@ -491,15 +491,7 @@ public class HonsanteiIdoHandler {
         paramter.set調定年度(new FlexibleYear(div.getTxtChoteiNendo().getDomain().toString()));
         paramter.set賦課年度(new FlexibleYear(div.getTxtFukaNendo().getDomain().toString()));
         paramter.set処理対象(div.getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey());
-        if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            dgChushutsuKikan_Row row = div.getDgChushutsuKikan().getDataSource().get(0);
-            YMDHMS 抽出開始日時 = new YMDHMS(row.getTxtChushutsuStYMD().getValue(), row.getTxtChushutsuStTime().getValue());
-            YMDHMS 抽出終了日時 = new YMDHMS(row.getTxtChushutsuEdYMD().getValue(), row.getTxtChushutsuEdTime().getValue());
-            paramter.set抽出開始日時(抽出開始日時);
-            paramter.set抽出終了日時(抽出終了日時);
-            paramter.set特徴捕捉分(div.getXtTaishoTokuchoKaishiTsuki().getValue());
-            paramter.set依頼金額計算(div.getRadTokuchoHosokuIraiKingakuKeisan().getSelectedKey());
-        }
+        set現年度異動賦課パラメータ(paramter);
         List<ChohyoMeter> 出力帳票一覧 = new ArrayList<>();
         Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
         ChohyoMeter chohyoMeter;
@@ -548,11 +540,6 @@ public class HonsanteiIdoHandler {
         paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedKey());
         paramter.set納入_生活保護対象者(div.getRadNotsuSeikatsuHogo().getSelectedValue());
         paramter.set納入_ページごとに山分け(div.getRadNotsuYamawake().getSelectedValue());
-        if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            paramter.set一括発行起動フラグ(false);
-        } else {
-            paramter.set一括発行起動フラグ(true);
-        }
         FuchoKiUtil util = new FuchoKiUtil();
         KitsukiList 期月リスト = util.get期月リスト();
         RString 処理対象月 = div.getShotiJokyo().getHonsanteiIdoShoriNaiyo().getDdlShoritsuki().getSelectedKey();
@@ -567,6 +554,27 @@ public class HonsanteiIdoHandler {
         }
         paramter.set算定期(算定期);
         return paramter;
+    }
+
+    private void set現年度異動賦課パラメータ(SanteiIdoGennen paramter) {
+        if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
+            dgChushutsuKikan_Row row = div.getDgChushutsuKikan().getDataSource().get(0);
+            YMDHMS 抽出開始日時 = new YMDHMS(row.getTxtChushutsuStYMD().getValue(), row.getTxtChushutsuStTime().getValue());
+            YMDHMS 抽出終了日時 = new YMDHMS(row.getTxtChushutsuEdYMD().getValue(), row.getTxtChushutsuEdTime().getValue());
+            paramter.set抽出開始日時(抽出開始日時);
+            paramter.set抽出終了日時(抽出終了日時);
+            paramter.set特徴捕捉分(div.getXtTaishoTokuchoKaishiTsuki().getValue());
+            paramter.set依頼金額計算(div.getRadTokuchoHosokuIraiKingakuKeisan().getSelectedKey());
+            Map<RString, RString> rowMap = div.getHonsanteiIdoChohyoHakko().getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+            if (!rowMap.isEmpty() && rowMap.size() == NUM_1) {
+                paramter.set画面移動フラグ(true);
+            } else if (!rowMap.isEmpty() && NUM_1 < rowMap.size()) {
+                paramter.set画面移動フラグ(false);
+            }
+            paramter.set一括発行起動フラグ(false);
+        } else {
+            paramter.set一括発行起動フラグ(true);
+        }
     }
 
     /**

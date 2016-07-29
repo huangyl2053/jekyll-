@@ -63,9 +63,21 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
         if (processParamter.isSaishinFlag2()
                 || processParamter.isSaishinFlag4()
                 || processParamter.isSaishinFlag5()) {
-            計算後情報Temp.insert(entity);
+            if (processParamter.is更新前フラグ()) {
+                entity.setKoseiZengoKubun(new RString("1"));
+                計算後情報Temp.insert(entity);
+            } else {
+                entity.setKoseiZengoKubun(new RString("2"));
+                計算後情報Temp.insert(entity);
+            }
         } else if (processParamter.isSaishinFlag3()) {
-            dbT2015Writer.insert(new KeisangoJohoResult().getDbT2015Entity(entity));
+            if (processParamter.is更新前フラグ()) {
+                entity.setKoseiZengoKubun(new RString("1"));
+                dbT2015Writer.insert(new KeisangoJohoResult().getDbT2015Entity(entity));
+            } else {
+                entity.setKoseiZengoKubun(new RString("2"));
+                dbT2015Writer.insert(new KeisangoJohoResult().getDbT2015Entity(entity));
+            }
         }
     }
 }

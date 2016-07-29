@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.sogojigyoshurui;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.business.core.sogojigyoshurui.SogojigyoShuruiSearchResult;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshuruishikyugendogak
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyoshuruishikyugendogaku.ISogojigyoShuruiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -71,26 +73,27 @@ public class SogojigyoShuruiFinder {
             return SearchResult.of(Collections.<SogojigyoShuruiSearchResult>emptyList(), 0, false);
         }
         List<SogojigyoShuruiSearchResult> businessList = new ArrayList();
-        List<FlexibleYearMonth> 適用開始日List = new ArrayList<>();
-        for (SogojigyoShuruiEntity entity : resultList) {
-            if (!適用開始日List.contains(entity.get総合事業種類情報().getTekiyoKaishiYM())) {
-                適用開始日List.add(entity.get総合事業種類情報().getTekiyoKaishiYM());
-            }
-        }
         List<RString> サービス種類名称List = new ArrayList<>();
         for (SogojigyoShuruiEntity entity : resultList) {
             if (!サービス種類名称List.contains(entity.getサービス種類名称())) {
                 サービス種類名称List.add(entity.getサービス種類名称());
             }
         }
+        List<FlexibleYearMonth> 適用開始日List = new ArrayList<>();
+        for (SogojigyoShuruiEntity entity : resultList) {
+            if (!適用開始日List.contains(entity.get総合事業種類情報().getTekiyoKaishiYM())) {
+                適用開始日List.add(entity.get総合事業種類情報().getTekiyoKaishiYM());
+            }
+        }
+        適用開始日List = sort適用開始日降順(適用開始日List);
         SogojigyoShuruiEntity result1;
         SogojigyoShuruiEntity result2;
         SogojigyoShuruiEntity result3;
         SogoJigyoShuruiShikyuGendoGaku result要支援1 = null;
         SogoJigyoShuruiShikyuGendoGaku result要支援2 = null;
         SogoJigyoShuruiShikyuGendoGaku result二次予防 = null;
-        for (FlexibleYearMonth 適用開始日 : 適用開始日List) {
-            for (RString サービス種類名称 : サービス種類名称List) {
+        for (RString サービス種類名称 : サービス種類名称List) {
+            for (FlexibleYearMonth 適用開始日 : 適用開始日List) {
                 result1 = get日常生活支援総合事業種類支給限度額(resultList, 要支援1, 適用開始日, サービス種類名称);
                 result2 = get日常生活支援総合事業種類支給限度額(resultList, 要支援2, 適用開始日, サービス種類名称);
                 result3 = get日常生活支援総合事業種類支給限度額(resultList, 二次予防, 適用開始日, サービス種類名称);
@@ -129,6 +132,22 @@ public class SogojigyoShuruiFinder {
             }
         }
         return null;
+    }
+
+    private List<FlexibleYearMonth> sort適用開始日降順(List<FlexibleYearMonth> 適用開始日List) {
+        if (適用開始日List.isEmpty()) {
+            return 適用開始日List;
+        }
+        Collections.sort(適用開始日List,
+                new Comparator<FlexibleYearMonth>() {
+                    @Override
+                    public int compare(FlexibleYearMonth arg0, FlexibleYearMonth arg1) {
+                        return new RDate(arg1.getYearValue(), arg1.getMonthValue(), 1).
+                        compareTo(new RDate(arg0.getYearValue(), arg0.getMonthValue(), 1));
+                    }
+                }
+        );
+        return 適用開始日List;
     }
 
 }

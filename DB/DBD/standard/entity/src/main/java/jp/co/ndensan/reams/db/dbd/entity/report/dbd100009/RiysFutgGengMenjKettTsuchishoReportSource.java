@@ -14,10 +14,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class RiysFutgGengMenjKettTsuchishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportPerson(id = "001")
-    public RString shikibetsuCode;
-    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
-    public RString hihokenshaNo;
     @ReportItem(name = "bunshoNo", length = 36, order = 1)
     public RString bunshoNo;
     @ReportItem(name = "title1", length = 30, order = 2)
@@ -333,5 +329,9 @@ public class RiysFutgGengMenjKettTsuchishoReportSource implements IReportSource 
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "001")
+    public RString shikibetsuCode;
+    @ReportExpandedInfo(id = "001", code = "003", name = "被保険者番号")
+    public RString hihokenshaNo;
 // </editor-fold>
 }

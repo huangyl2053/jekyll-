@@ -8,15 +8,16 @@ package jp.co.ndensan.reams.db.dbd.service.report.gemgengnintskettsucskobthakko.
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoItem;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoProerty;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport;
 import jp.co.ndensan.reams.db.dbd.business.report.hanyo.HokenshaNameOutput;
-import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100019.ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -42,15 +43,17 @@ public class ShakfukusRiysFutKeigTaisKakuninshoPrintService {
      * @param reportManager 帳票発行処理の制御機能
      */
     public void print(ShakfukusRiysFutKeigTaisKakuninshoItem target, ReportManager reportManager) {
-        ReportId reportId = null;
         for (DbT7067ChohyoSeigyoHanyoEntity entity : target.get帳票制御汎用List()) {
             if (HokenshaNameOutput.印字する.getコード().equals(entity.getKomokuValue())) {
-                reportId = ReportIdDBD.DBD100019.getReportId();
+                printDBD100019(target, reportManager);
             } else {
-                reportId = ReportIdDBD.DBD100018.getReportId();
+                printDBD100018(target, reportManager);
             }
         }
-        ShakfukusRiysFutKeigTaisKakuninshoProerty property = new ShakfukusRiysFutKeigTaisKakuninshoProerty(reportId);
+    }
+
+    private void printDBD100018(ShakfukusRiysFutKeigTaisKakuninshoItem target, ReportManager reportManager) {
+        ShakfukusRiysFutKeigTaisKakuninshoProerty property = new ShakfukusRiysFutKeigTaisKakuninshoProerty();
         try (ReportAssembler<ShakfukusRiysFutKeigTaisKakuninshoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShakfukusRiysFutKeigTaisKakuninshoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),
@@ -58,6 +61,19 @@ public class ShakfukusRiysFutKeigTaisKakuninshoPrintService {
                     KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             target.setNinshoshaSource(ninshoshaSource);
             ShakfukusRiysFutKeigTaisKakuninshoReport report = ShakfukusRiysFutKeigTaisKakuninshoReport.createReport(target);
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
+    private void printDBD100019(ShakfukusRiysFutKeigTaisKakuninshoItem target, ReportManager reportManager) {
+        ShafukuRiysFutKeigTaisKakuninshoShoNoAriProerty property = new ShafukuRiysFutKeigTaisKakuninshoShoNoAriProerty();
+        try (ReportAssembler<ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, target.get帳票分類ID(),
+                    new FlexibleDate(target.get発行日().toDateString()), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                    KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            target.setNinshoshaSource(ninshoshaSource);
+            ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport report = ShafukuRiysFutKeigTaisKakuninshoShoNoAriReport.createReport(target);
             report.writeBy(reportSourceWriter);
         }
     }

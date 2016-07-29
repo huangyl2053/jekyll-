@@ -73,7 +73,7 @@ public class DBC120080_KogakuKyufuKetteiInFlow extends BatchFlowBase<KogakuKyufu
             executeStep(CSVファイル取込);
             flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                     KogakuKyufuKetteiReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
-            if (flowEntity.getCodeNum() == 0) {
+            if (flowEntity.get明細データ登録件数() == 0) {
                 executeStep(国保連インタフェース管理更新);
                 executeStep(処理結果リスト作成);
             } else {

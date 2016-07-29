@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900031;
 
 import jp.co.ndensan.reams.db.dbu.business.core.benmeitoroku.BenmeiTorokuMeisaiJoho;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.BenmeiTorokuPanelDiv;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -37,10 +38,11 @@ public class BenmeiTorokuPanelHandler {
      *
      * @param benmeiTorokuMeisaiJoho 弁明登録情報
      * @param viewState 表示状態
+     * @param 弁明書作成日 FlexibleDate
      */
-    public void initialize(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, RString viewState) {
+    public void initialize(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, RString viewState, FlexibleDate 弁明書作成日) {
         if (viewState.equals(修正)) {
-            if (benmeiTorokuMeisaiJoho != null) {
+            if (benmeiTorokuMeisaiJoho != null && 弁明書作成日 != null && !弁明書作成日.isEmpty()) {
                 panelDiv.setProcessState(修正);
                 get画面初期の更新モードの表示制御();
                 get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);

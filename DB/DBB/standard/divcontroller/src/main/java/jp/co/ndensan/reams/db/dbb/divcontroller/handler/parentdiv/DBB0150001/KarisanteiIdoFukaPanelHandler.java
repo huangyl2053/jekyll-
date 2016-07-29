@@ -648,33 +648,7 @@ public class KarisanteiIdoFukaPanelHandler {
             }
         }
         parameter.set出力帳票一覧List(出力帳票一覧);
-        boolean 一括発行起動フラグ;
-        if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
-            if (月_6.equals(処理対象)) {
-                parameter.set帳票グループ(帳票グループコード_12);
-            } else {
-                parameter.set帳票グループ(帳票グループコード_1);
-            }
-            一括発行起動フラグ = false;
-            parameter.set仮算定異動賦課メニューからの場合(
-                    div.getShoriJokyo().getTokuchoHosoku().getRadTokuchoHosokuIraiKingakuKeisan().getSelectedValue());
-            List<dgKarisanteiIdoshoriKakunin_Row> rowList = div.getShoriJokyo().getKarisanteiIdoFukashoriKakunin()
-                    .getDgKarisanteiIdoshoriKakunin().getDataSource();
-            for (dgKarisanteiIdoshoriKakunin_Row row : rowList) {
-                if (ShoriName.特徴仮算定賦課.get名称().equals(row.getTxtShoriMei().getValue())) {
-                    parameter.set特徴仮算定賦課処理日時(row.getTxtShoriNichiji().getValue());
-                } else if (ShoriName.特徴仮算定賦課.get名称().equals(row.getTxtShoriMei().getValue())) {
-                    parameter.set普徴仮算定賦課処理日時(row.getTxtShoriNichiji().getValue());
-                }
-            }
-        } else {
-            if (月_6.equals(処理対象)) {
-                parameter.set帳票グループ(帳票グループコード_32);
-            } else {
-                parameter.set帳票グループ(帳票グループコード_3);
-            }
-            一括発行起動フラグ = true;
-        }
+        setParameter(処理対象, parameter);
         RDate 特徴_発行日 = div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getTxtTokuKaishiTsuchiHakkoYMD().getValue();
         if (特徴_発行日 != null) {
@@ -705,12 +679,43 @@ public class KarisanteiIdoFukaPanelHandler {
                 .getRadNotsuSeikatsuHogo().getSelectedValue());
         parameter.set納入_ページごとに山分け(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getRadNotsuYamawake().getSelectedValue());
-        parameter.set一括発行起動フラグ(一括発行起動フラグ);
+
         FuchoKiUtil util = new FuchoKiUtil();
         KitsukiList 期月リスト = util.get期月リスト();
         RString 算定期 = new RString(期月リスト.get月の期(Tsuki.toValue(処理対象月)).get期AsInt());
         parameter.set算定期(算定期);
         return idoFuka.createKariSanteiIdoParameter(parameter);
+    }
+
+    private void setParameter(RString 処理対象, KariSanteiIdoParameter parameter) {
+        boolean 一括発行起動フラグ;
+        if (仮算定異動賦課_MENU.equals(ResponseHolder.getMenuID())) {
+            if (月_6.equals(処理対象)) {
+                parameter.set帳票グループ(帳票グループコード_12);
+            } else {
+                parameter.set帳票グループ(帳票グループコード_1);
+            }
+            一括発行起動フラグ = false;
+            parameter.set仮算定異動賦課メニューからの場合(
+                    div.getShoriJokyo().getTokuchoHosoku().getRadTokuchoHosokuIraiKingakuKeisan().getSelectedValue());
+            List<dgKarisanteiIdoshoriKakunin_Row> rowList = div.getShoriJokyo().getKarisanteiIdoFukashoriKakunin()
+                    .getDgKarisanteiIdoshoriKakunin().getDataSource();
+            for (dgKarisanteiIdoshoriKakunin_Row row : rowList) {
+                if (ShoriName.特徴仮算定賦課.get名称().equals(row.getTxtShoriMei().getValue())) {
+                    parameter.set特徴仮算定賦課処理日時(row.getTxtShoriNichiji().getValue());
+                } else if (ShoriName.普徴仮算定賦課.get名称().equals(row.getTxtShoriMei().getValue())) {
+                    parameter.set普徴仮算定賦課処理日時(row.getTxtShoriNichiji().getValue());
+                }
+            }
+        } else {
+            if (月_6.equals(処理対象)) {
+                parameter.set帳票グループ(帳票グループコード_32);
+            } else {
+                parameter.set帳票グループ(帳票グループコード_3);
+            }
+            一括発行起動フラグ = true;
+        }
+        parameter.set一括発行起動フラグ(一括発行起動フラグ);
     }
 
     /**

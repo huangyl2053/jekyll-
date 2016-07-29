@@ -78,13 +78,13 @@ public class BenmeiTorokuPanel {
                 get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
             }
             ViewStateHolder.put(ViewStateKeys.弁明登録情報, benmeiTorokuMeisaiJoho);
-            getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
+            getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態, 弁明書作成日);
         } else if (初期_状態.equals(削除)) {
             CommonButtonHolder.setTextByCommonButtonFieldName(new RString("btnSave"), "削除");
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (benmeiTorokuMeisaiJoho != null) {
                 get保存情報の取得(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
-                getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態);
+                getHandler(panelDiv).initialize(benmeiTorokuMeisaiJoho, 初期_状態, 弁明書作成日);
             } else {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("削除データ"));
             }
@@ -149,7 +149,6 @@ public class BenmeiTorokuPanel {
 
     private void get保存情報の取得(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日, FlexibleDate 弁明書作成日) {
         BemmeiNaiyo bemmeiNaiyo = benmeiTorokuManager.getBenmeiNaiyo(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
-
         ViewStateHolder.put(ViewStateKeys.弁明内容, bemmeiNaiyo);
         BemmeishaJoho bemmeishaJoho = benmeiTorokuManager.getBenmeishaJoho(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
         ViewStateHolder.put(ViewStateKeys.弁明者情報, bemmeishaJoho);
@@ -195,7 +194,7 @@ public class BenmeiTorokuPanel {
         審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
         弁明書作成日 = ViewStateHolder.get(ViewStateKeys.弁明書作成日, FlexibleDate.class);
         LasdecCode shichosonCode = benmeiTorokuManager.get地方公共団体コード();
-        FufukuMoshitate fufukuMoshitate = ViewStateHolder.get(ViewStateKeys.不服審査申立情報, FufukuMoshitate.class);
+        FufukuMoshitate fufukuMoshitate = benmeiTorokuManager.getFufukuMoshitate(識別コード, 被保険者番号, 審査請求届出日);
         FufukuMoshitateBuilder fufukuBuilder = fufukuMoshitate.createBuilderForEdit();
         if (panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue() == null) {
             弁明書作成日 = FlexibleDate.EMPTY;

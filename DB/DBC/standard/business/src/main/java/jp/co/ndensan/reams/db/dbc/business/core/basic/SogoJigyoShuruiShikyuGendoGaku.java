@@ -182,6 +182,18 @@ public class SogoJigyoShuruiShikyuGendoGaku extends
     }
 
     /**
+     * 保持する介護予防・日常生活支援総合事業種類支給限度額を削除対象とします。<br/>
+     * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return 削除対象処理実施後の{@link SogoJigyoShuruiShikyuGendoGaku}
+     */
+    public SogoJigyoShuruiShikyuGendoGaku deleted改() {
+        DbT7118SogoJigyoShuruiShikyuGendoGakuEntity deletedEntity = this.toEntity();
+        deletedEntity.setState(EntityDataState.Deleted);
+        return new SogoJigyoShuruiShikyuGendoGaku(deletedEntity, id);
+    }
+
+    /**
      * 保持する介護予防・日常生活支援総合事業種類支給限度額を登録対象とします。<br/>
      * {@link DbT7118SogoJigyoShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
      *
