@@ -62,6 +62,7 @@ public class NinteishinseibiHandler {
     private final NinteishinseibiDiv div;
     private static final RString 取込 = new RString("import");
     private static final RString 保存 = new RString("update");
+    private static final RString 完了 = new RString("complete");
 
     /**
      * コンストラクタです。
@@ -79,7 +80,10 @@ public class NinteishinseibiHandler {
     public void initializtion() {
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 最大上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtMaxKensu().setValue(new Decimal(最大表示件数.toString()));
+        div.getTxtMaxKensu().setMaxValue(new Decimal(最大上限.toString()));
         初期状態();
     }
 
@@ -100,6 +104,7 @@ public class NinteishinseibiHandler {
         div.getCcdKanryoMessage().setDisplayNone(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取込, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了, true);
     }
 
     /**
@@ -117,6 +122,7 @@ public class NinteishinseibiHandler {
         div.getTxtMaxKensu().setDisplayNone(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(取込, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存, true);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(完了, false);
     }
 
     /**
@@ -427,10 +433,10 @@ public class NinteishinseibiHandler {
             builder.set認定調査回数(Integer.valueOf(row.getNinteichosaIraiKaisu().toString()));
         }
         if (!RString.isNullOrEmpty(row.getNinteichosaJisshiYMD())) {
-            builder.set認定調査実施年月日(new FlexibleDate(row.getNinteichosaJisshiYMD().toString()));
+            builder.set認定調査実施年月日(toFlexibleDate(row.getNinteichosaJisshiYMD()));
         }
         if (!RString.isNullOrEmpty(row.getNinteichosaJuryoYMD())) {
-            builder.set認定調査受領年月日(new FlexibleDate(row.getNinteichosaJuryoYMD().toString()));
+            builder.set認定調査受領年月日(toFlexibleDate(row.getNinteichosaJuryoYMD()));
         }
         if (!RString.isNullOrEmpty(row.getNinteiChosaKubunCode())) {
             builder.set認定調査区分コード(new Code(row.getNinteiChosaKubunCode()));
@@ -458,10 +464,10 @@ public class NinteishinseibiHandler {
         }
         builder.set特記(row.getTokki());
         if (!RString.isNullOrEmpty(row.getTokkijikoUketsukeYMD())) {
-            builder.set認定調査特記事項受付年月日(new FlexibleDate(row.getTokkijikoUketsukeYMD()));
+            builder.set認定調査特記事項受付年月日(toFlexibleDate(row.getTokkijikoUketsukeYMD()));
         }
         if (!RString.isNullOrEmpty(row.getNinteichosaJuryoYMD())) {
-            builder.set認定調査特記事項受領年月日(new FlexibleDate(row.getNinteichosaJuryoYMD()));
+            builder.set認定調査特記事項受領年月日(toFlexibleDate(row.getNinteichosaJuryoYMD()));
         }
         return builder;
     }
@@ -625,5 +631,12 @@ public class NinteishinseibiHandler {
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.set施設利用フラグ(Boolean.getBoolean(row.getShisetsuRiyoFlag().toString()));
         return builder;
+    }
+
+    private FlexibleDate toFlexibleDate(RString obj) {
+        if (obj == null) {
+            return FlexibleDate.EMPTY;
+        }
+        return new FlexibleDate(new RDate(obj.toString()).toDateString());
     }
 }

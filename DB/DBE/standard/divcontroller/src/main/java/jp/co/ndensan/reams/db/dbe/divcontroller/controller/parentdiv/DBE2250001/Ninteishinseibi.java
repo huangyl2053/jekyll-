@@ -51,20 +51,16 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -90,7 +86,6 @@ public class Ninteishinseibi {
 
     private final NiTeiCyoSaiChiRanManager manager;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
     /**
      * コンストラクタです。
@@ -107,10 +102,6 @@ public class Ninteishinseibi {
      * @return ResponseData
      */
     public ResponseData<NinteishinseibiDiv> onLoad(NinteishinseibiDiv div) {
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
         getHandler(div).initializtion();
         return ResponseData.of(div).respond();
     }
@@ -206,6 +197,11 @@ public class Ninteishinseibi {
                 return ResponseData.of(div).addValidationMessages(vallidation).respond();
             }
             List<dgNinteiChosaData_Row> rowList = div.getDgNinteiChosaData().getDataSource();
+            List<RString> shinseishoKanriNoList = new ArrayList<>();
+            for (int i = 0; i < rowList.size(); i++) {
+                dgNinteiChosaData_Row row = rowList.get(i);
+                shinseishoKanriNoList.add(row.getShinseishoKanriNo());
+            }
             for (ChosaKekkaNyuryokuCsvEntity entity : csvEntityList) {
 
                 boolean flg = true;
@@ -214,16 +210,16 @@ public class Ninteishinseibi {
                     dgNinteiChosaData_Row row = rowList.get(i);
                     if (entity.getShinseishoKanriNo().equals(row.getShinseishoKanriNo())
                             && getHandler(div).取込むの判定(row, entity)) {
-
                         getHandler(div).取込むの編集(row, entity);
                         rowList.set(i, row);
                         flg = false;
+                        break;
                     }
-                    if (flg) {
-                        row = new dgNinteiChosaData_Row();
-                        getHandler(div).取込むの編集(row, entity);
-                        rowList.add(row);
-                    }
+                }
+                if (flg && !shinseishoKanriNoList.contains(entity.getShinseishoKanriNo())) {
+                    dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
+                    getHandler(div).取込むの編集(row, entity);
+                    rowList.add(row);
                 }
             }
             div.getDgNinteiChosaData().setDataSource(rowList);
@@ -258,8 +254,10 @@ public class Ninteishinseibi {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             getHandler(div).保存状態();
-            Models<NinteichosahyoGaikyoChosaIdentifier, NinteichosahyoGaikyoChosa> 概況調査Models = ViewStateHolder.get(ViewStateKeys.認定調査票_概況調査, Models.class);
-            Models<GaikyoTokkiIdentifier, GaikyoTokki> 概況特記Models = ViewStateHolder.get(ViewStateKeys.認定調査票_概況特記, Models.class);
+            Models<NinteichosahyoGaikyoChosaIdentifier, NinteichosahyoGaikyoChosa> 概況調査Models
+                    = ViewStateHolder.get(ViewStateKeys.認定調査票_概況調査, Models.class);
+            Models<GaikyoTokkiIdentifier, GaikyoTokki> 概況特記Models
+                    = ViewStateHolder.get(ViewStateKeys.認定調査票_概況特記, Models.class);
             Models<NinteichosahyoChosaItemIdentifier, NinteichosahyoChosaItem> 調査項目Models
                     = ViewStateHolder.get(ViewStateKeys.認定調査票基本調査_調査項目, Models.class);
             Models<NinteichosahyoKihonChosaIdentifier, NinteichosahyoKihonChosa> 基本調査Models
@@ -309,8 +307,6 @@ public class Ninteishinseibi {
                             shisetsuRiyo);
                 }
             }
-            RealInitialLocker.release(前排他ロックキー);
-            // TODO QA1413完了遷移
             div.getCcdKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
         }
