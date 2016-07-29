@@ -180,8 +180,13 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除モード);
         boolean 審査決定フラグ = div.getCcdKogakuShinseiList().is審査決定フラグ();
         boolean 支給区分フラグ = div.getCcdKogakuShinseiList().is支給区分フラグ();
+        KogakuServicehiDetailParameter 画面データ = getHandler(div).set申請情報登録画面データ();
+        ViewStateHolder.put(ViewStateKeys.詳細データ, 画面データ);
         ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
         ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
+        KougakuSabisuhiShousaiNaiyouResult result
+                = div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get画面初期化データ();
+        ViewStateHolder.put(ViewStateKeys.一覧データ, result);
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 
@@ -235,6 +240,9 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         ValidationMessageControlPairs validPairs = getCheckHandler(div).get入力チェック(画面モード, 審査決定フラグ);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (削除モード.equals(画面モード)) {
+            return save申請情報登録(div, 画面モード);
         }
         KogakuServicehiDetailParameter para = ViewStateHolder.get(
                 ViewStateKeys.詳細データ, KogakuServicehiDetailParameter.class);

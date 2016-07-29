@@ -163,7 +163,11 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get申請者区分() {
-        return div.getRdbShinseisyaKubun().getSelectedKey();
+        if (KEY0.equals(div.getRdbShinseisyaKubun().getSelectedKey())) {
+            return ONE;
+        } else {
+            return TWO;
+        }
     }
 
     /**
@@ -262,7 +266,11 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get支給区分() {
-        return div.getRdbShikyuKubun().getSelectedKey();
+        if (KEY0.equals(div.getRdbShikyuKubun().getSelectedKey())) {
+            return ONE;
+        } else {
+            return ZERO;
+        }
     }
 
     /**
@@ -271,7 +279,11 @@ public class KogakuServicehiDetailDivHandler {
      * @return RString
      */
     public RString get審査方法区分() {
-        return div.getRdbShinsaHohoKubun().getSelectedKey();
+        if (KEY0.equals(div.getRdbShinsaHohoKubun().getSelectedKey())) {
+            return ONE;
+        } else {
+            return TWO;
+        }
     }
 
     /**

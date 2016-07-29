@@ -166,7 +166,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             高額支給判定結果entity = 高額支給判定結果entity.deleted();
         }
         KyufujissekiKogakuKaigoServicehi 給付実績編集用entity
-                = get給付実績編集用entity(被保険者番号, サービス年月, 証記載保険者番号);
+                = get給付実績編集用entity(被保険者番号, サービス年月, 証記載保険者番号, 履歴番号);
         給付実績編集用entity = 給付実績編集用entity.added();
         KougakuSabisuhiShikyuuShinnseiTourokuEntity entity = new KougakuSabisuhiShikyuuShinnseiTourokuEntity();
         entity.set高額介護サービス費支給申請Entity(高額支給申請entity);
@@ -397,7 +397,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
 
     private KyufujissekiKogakuKaigoServicehi get給付実績編集用entity(
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
-            HokenshaNo 証記載保険者番号) {
+            HokenshaNo 証記載保険者番号, int 履歴番号) {
         KyufujissekiKogakuKaigoServicehi entity = new KyufujissekiKogakuKaigoServicehi(
                 定値_交換情報識別番号, 定値_識別番号, 定値_レコード種別コード, 証記載保険者番号,
                 被保険者番号, サービス年月, 定値_通し番号, ONE, THREE);
@@ -413,11 +413,15 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
                     div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().
                     get決定日().getYearMonth().toString())).build();
         }
-        entity = entity.createBuilderForEdit().set利用者負担額(
-                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計().intValue()).build();
-        entity = entity.createBuilderForEdit().set支給額(
-                div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支給金額().intValue()).build();
-        entity = entity.createBuilderForEdit().set管理番号(追加モード).build();
+        if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計() != null) {
+            entity = entity.createBuilderForEdit().set利用者負担額(
+                    div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支払金額合計().intValue()).build();
+        }
+        if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支給金額() != null) {
+            entity = entity.createBuilderForEdit().set支給額(
+                    div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get支給金額().intValue()).build();
+        }
+        entity = entity.createBuilderForEdit().set管理番号(new RString(履歴番号)).build();
         return entity;
     }
 
@@ -442,9 +446,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
 
     private KogakuShikyuHanteiKekka clearKogakuShikyuHanteiKekka(KogakuShikyuHanteiKekka entity) {
         entity = entity.createBuilderForEdit()
-                .set決定年月日(null)
                 .set本人支払額(NUMBER_0)
-                .set支給区分コード(null)
                 .set支給金額(NUMBER_0)
                 .set不支給理由(null)
                 .set審査方法区分(null)

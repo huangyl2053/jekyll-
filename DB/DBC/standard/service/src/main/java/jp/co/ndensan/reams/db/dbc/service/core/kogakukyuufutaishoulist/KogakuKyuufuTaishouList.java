@@ -90,18 +90,19 @@ public class KogakuKyuufuTaishouList {
                 = 高額給付対象者明細Dac.selectAllByKey(被保険者番号, サービス提供年月);
         List<DbT3055KogakuKyufuTaishoshaGokeiEntity> 給付対象者合計list
                 = 高額給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        KogakuKyuufuTaishouListEntityResult 高額給付対象一覧情報 = new KogakuKyuufuTaishouListEntityResult();
         if ((給付対象者明細list == null || 給付対象者明細list.isEmpty())
                 && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
             return new ArrayList<>();
         } else {
             for (DbT3054KogakuKyufuTaishoshaMeisaiEntity entity : 給付対象者明細list) {
+                KogakuKyuufuTaishouListEntityResult 高額給付対象一覧情報 = new KogakuKyuufuTaishouListEntityResult();
                 高額給付対象一覧情報.set給付対象者明細entity(new KogakuKyufuTaishoshaMeisai(entity));
                 高額給付対象一覧情報.set明細合計区分(ONE_RS);
+                set事業者名称と種類(サービス提供年月, 高額給付対象一覧情報, entity);
                 result.add(高額給付対象一覧情報);
             }
-            set事業者名称と種類(サービス提供年月, result);
             for (DbT3055KogakuKyufuTaishoshaGokeiEntity entity : 給付対象者合計list) {
+                KogakuKyuufuTaishouListEntityResult 高額給付対象一覧情報 = new KogakuKyuufuTaishouListEntityResult();
                 高額給付対象一覧情報.set給付対象者合計entity(new KogakuKyufuTaishoshaGokei(entity));
                 高額給付対象一覧情報.set明細合計区分(TWO_RS);
                 result.add(高額給付対象一覧情報);
@@ -133,9 +134,10 @@ public class KogakuKyuufuTaishouList {
             for (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity : 給付対象者明細list) {
                 高額給付対象一覧情報.set給付対象者明細entity(new JigyoKogakuKyufuTaishoshaMeisai(entity));
                 高額給付対象一覧情報.set明細合計区分(ONE_RS);
+                set事業高額の事業者名称と種類(サービス提供年月, 高額給付対象一覧情報, entity);
                 result.add(高額給付対象一覧情報);
             }
-            set事業高額の事業者名称と種類(サービス提供年月, result);
+
             for (DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity entity : 給付対象者合計list) {
                 高額給付対象一覧情報.set給付対象者合計entity(new JigyoKogakuKyufuTaishoshaGokei(entity));
                 高額給付対象一覧情報.set明細合計区分(TWO_RS);
@@ -146,68 +148,41 @@ public class KogakuKyuufuTaishouList {
     }
 
     private void set事業者名称と種類(FlexibleYearMonth サービス提供年月,
-            List<KogakuKyuufuTaishouListEntityResult> result) {
-        for (KogakuKyuufuTaishouListEntityResult kogaEntity : result) {
-            if (kogaEntity.get給付対象者明細entity().get事業者番号() == null || kogaEntity.get給付対象者明細entity().
-                    getサービス種類コード() == null) {
-                kogaEntity.set事業者名(null);
-            } else {
-                DbT7060KaigoJigyoshaEntity 介護事業者名称 = 介護事業者管理Dac.select事業者の名称(
-                        kogaEntity.get給付対象者明細entity().get事業者番号(),
-                        new FlexibleDate(サービス提供年月.toString()));
-                DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定事業者名称 = 介護事業者指定サービスDac.
-                        select事業者名称(kogaEntity.get給付対象者明細entity().get事業者番号().value(),
-                                kogaEntity.get給付対象者明細entity().
-                                getサービス種類コード().value(), new FlexibleDate(サービス提供年月.toString()));
-                set事業者名称(介護事業者名称, 介護事業者指定事業者名称, kogaEntity);
-            }
-            if (kogaEntity.get給付対象者明細entity().getサービス種類コード() == null
-                    || kogaEntity.get給付対象者明細entity().getサービス種類コード().value() == null) {
-                kogaEntity.setサービス種類(null);
-            } else {
-                DbT7130KaigoServiceShuruiEntity 種類略称 = 介護サービス種類Dac.selectサービス種類名称Andサービス種類略称(
-                        kogaEntity.get給付対象者明細entity().getサービス種類コード().value(), サービス提供年月);
-                setサービス種類(種類略称, kogaEntity);
-            }
-        }
+            KogakuKyuufuTaishouListEntityResult 高額給付対象一覧情報, DbT3054KogakuKyufuTaishoshaMeisaiEntity entity) {
+        DbT7060KaigoJigyoshaEntity 介護事業者名称 = 介護事業者管理Dac.select事業者の名称(
+                entity.getJigyoshaNo(), new FlexibleDate(サービス提供年月.toString()));
+        DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定事業者名称 = 介護事業者指定サービスDac.
+                select事業者名称(entity.getJigyoshaNo().value(),
+                        entity.getServiceShuruiCode().value(), new FlexibleDate(サービス提供年月.toString()));
+        set事業者名称(介護事業者名称, 介護事業者指定事業者名称, 高額給付対象一覧情報);
+        DbT7130KaigoServiceShuruiEntity 種類略称 = 介護サービス種類Dac.selectサービス種類名称Andサービス種類略称(
+                entity.getServiceShuruiCode().value(), サービス提供年月);
+        setサービス種類(種類略称, 高額給付対象一覧情報);
     }
 
     private void set事業高額の事業者名称と種類(FlexibleYearMonth サービス提供年月,
-            List<JigyouKogakuKyuufuTaishouResult> result) {
-        for (JigyouKogakuKyuufuTaishouResult kogaEntity : result) {
-            if (kogaEntity.get給付対象者明細entity().get事業者番号() == null || kogaEntity.get給付対象者明細entity().
-                    getサービス種類コード() == null) {
-                kogaEntity.set事業者名(null);
-            } else {
-                DbT7060KaigoJigyoshaEntity 介護事業者名称 = 介護事業者管理Dac.select事業者の名称(
-                        kogaEntity.get給付対象者明細entity().get事業者番号(),
-                        new FlexibleDate(サービス提供年月.toString()));
-                DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定事業者名称 = 介護事業者指定サービスDac.
-                        select事業者名称(kogaEntity.get給付対象者明細entity().get事業者番号().value(),
-                                kogaEntity.get給付対象者明細entity().
-                                getサービス種類コード().value(), new FlexibleDate(サービス提供年月.toString()));
-                set事業高額の事業者名称(介護事業者名称, 介護事業者指定事業者名称, kogaEntity);
-            }
-            if (kogaEntity.get給付対象者明細entity().getサービス種類コード() == null
-                    || kogaEntity.get給付対象者明細entity().getサービス種類コード().value() == null) {
-                kogaEntity.setサービス種類(null);
-            } else {
-                DbT7130KaigoServiceShuruiEntity 種類略称 = 介護サービス種類Dac.selectサービス種類名称Andサービス種類略称(
-                        kogaEntity.get給付対象者明細entity().getサービス種類コード().value(), サービス提供年月);
-                set事業高額のサービス種類(種類略称, kogaEntity);
-            }
-        }
+            JigyouKogakuKyuufuTaishouResult 高額給付対象一覧情報,
+            DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity) {
+        DbT7060KaigoJigyoshaEntity 介護事業者名称 = 介護事業者管理Dac.select事業者の名称(
+                entity.getJigyoshaNo(), new FlexibleDate(サービス提供年月.toString()));
+        DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定事業者名称 = 介護事業者指定サービスDac.
+                select事業者名称(entity.getJigyoshaNo().value(),
+                        entity.getServiceShuruiCode().value(), new FlexibleDate(サービス提供年月.toString()));
+        set事業高額の事業者名称(介護事業者名称, 介護事業者指定事業者名称, 高額給付対象一覧情報);
+        DbT7130KaigoServiceShuruiEntity 種類略称 = 介護サービス種類Dac.selectサービス種類名称Andサービス種類略称(
+                entity.getServiceShuruiCode().value(), サービス提供年月);
+        set事業高額のサービス種類(種類略称, 高額給付対象一覧情報);
     }
 
     private void set事業者名称(DbT7060KaigoJigyoshaEntity 介護事業者名称,
             DbT7063KaigoJigyoshaShiteiServiceEntity 介護事業者指定事業者名称,
-            KogakuKyuufuTaishouListEntityResult result) {
+            KogakuKyuufuTaishouListEntityResult 高額給付対象一覧情報) {
         if (介護事業者名称 == null || 介護事業者指定事業者名称 == null) {
-            result.set事業者名(null);
+            高額給付対象一覧情報.set事業者名(null);
         } else if (ONE_RS.equals(介護事業者指定事業者名称.getKihonJohoJunkyoKubun())) {
-            result.set事業者名(介護事業者名称.getJigyoshaName().value());
+            高額給付対象一覧情報.set事業者名(介護事業者名称.getJigyoshaName().value());
         } else if (ZERO_RS.equals(介護事業者指定事業者名称.getKihonJohoJunkyoKubun())) {
-            result.set事業者名(介護事業者指定事業者名称.getJigyoshaName().value());
+            高額給付対象一覧情報.set事業者名(介護事業者指定事業者名称.getJigyoshaName().value());
         }
     }
 
@@ -224,11 +199,11 @@ public class KogakuKyuufuTaishouList {
     }
 
     private void setサービス種類(DbT7130KaigoServiceShuruiEntity 種類略称,
-            KogakuKyuufuTaishouListEntityResult result) {
+            KogakuKyuufuTaishouListEntityResult 高額給付対象一覧情報) {
         if (種類略称 == null) {
-            result.setサービス種類(null);
+            高額給付対象一覧情報.setサービス種類(null);
         } else {
-            result.setサービス種類(種類略称.getServiceShuruiRyakusho());
+            高額給付対象一覧情報.setサービス種類(種類略称.getServiceShuruiRyakusho());
         }
     }
 

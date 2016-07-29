@@ -325,7 +325,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3056KogakuShikyuShinseiEntity> 支給申請list
                 = 高額サービス費支給申請Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3056KogakuShikyuShinseiEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo().intValue()) {
                     履歴番号 = entity.getRirekiNo().intValue();
@@ -346,7 +346,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3057KogakuShikyuHanteiKekkaEntity> 支給申請list
                 = 高額介護サービス費支給判定結果Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3057KogakuShikyuHanteiKekkaEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo()) {
                     履歴番号 = entity.getRirekiNo();
@@ -367,7 +367,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3054KogakuKyufuTaishoshaMeisaiEntity> 支給申請list
                 = 高額介護サービス費給付対象者明細Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3054KogakuKyufuTaishoshaMeisaiEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo()) {
                     履歴番号 = entity.getRirekiNo();
@@ -388,7 +388,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3055KogakuKyufuTaishoshaGokeiEntity> 支給申請list
                 = 高額介護サービス費給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3055KogakuKyufuTaishoshaGokeiEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo().intValue()) {
                     履歴番号 = entity.getRirekiNo().intValue();
@@ -409,7 +409,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3110JigyoKogakuShikyuShinseiEntity> 支給申請list
                 = 事業高額サービス費支給申請Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3110JigyoKogakuShikyuShinseiEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo().intValue()) {
                     履歴番号 = entity.getRirekiNo().intValue();
@@ -430,7 +430,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> 支給申請list
                 = 事業高額介護サービス費支給判定結果Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo().intValue()) {
                     履歴番号 = entity.getRirekiNo().intValue();
@@ -451,7 +451,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity> 支給申請list
                 = 事業高額介護サービス費給付対象者明細Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo()) {
                     履歴番号 = entity.getRirekiNo();
@@ -472,7 +472,7 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
         int 履歴番号 = 0;
         List<DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity> 支給申請list
                 = 事業高額介護サービス費給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
-        if (支給申請list != null && 支給申請list.isEmpty()) {
+        if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity entity : 支給申請list) {
                 if (履歴番号 < entity.getRirekiNo().intValue()) {
                     履歴番号 = entity.getRirekiNo().intValue();
