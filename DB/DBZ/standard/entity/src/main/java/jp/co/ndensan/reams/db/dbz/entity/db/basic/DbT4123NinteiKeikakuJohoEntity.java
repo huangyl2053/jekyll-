@@ -1,22 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定計画情報テーブルのエンティティクラスです。
  */
 public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123NinteiKeikakuJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4123NinteiKeikakuJoho");
 
@@ -41,7 +42,7 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -50,7 +51,7 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -59,7 +60,7 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -68,16 +69,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,7 +90,7 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -99,25 +101,26 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 認定調査依頼予定年月日のgetメソッドです。
-     *
+     * 
      * @return 認定調査依頼予定年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteichosaIraiYoteiYMD() {
         return ninteichosaIraiYoteiYMD;
     }
 
     /**
      * 認定調査依頼予定年月日のsetメソッドです。
-     *
+     * 
      * @param ninteichosaIraiYoteiYMD 認定調査依頼予定年月日
      */
     public void setNinteichosaIraiYoteiYMD(FlexibleDate ninteichosaIraiYoteiYMD) {
@@ -126,16 +129,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * 認定調査予定年月日のgetメソッドです。
-     *
+     * 
      * @return 認定調査予定年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteichosaYoteiYMD() {
         return ninteichosaYoteiYMD;
     }
 
     /**
      * 認定調査予定年月日のsetメソッドです。
-     *
+     * 
      * @param ninteichosaYoteiYMD 認定調査予定年月日
      */
     public void setNinteichosaYoteiYMD(FlexibleDate ninteichosaYoteiYMD) {
@@ -144,16 +148,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * 主治医意見書作成依頼予定年月日のgetメソッドです。
-     *
+     * 
      * @return 主治医意見書作成依頼予定年月日
      */
+    @CheckForNull
     public FlexibleDate getIkenshoSakuseiIraiYoteiYMD() {
         return ikenshoSakuseiIraiYoteiYMD;
     }
 
     /**
      * 主治医意見書作成依頼予定年月日のsetメソッドです。
-     *
+     * 
      * @param ikenshoSakuseiIraiYoteiYMD 主治医意見書作成依頼予定年月日
      */
     public void setIkenshoSakuseiIraiYoteiYMD(FlexibleDate ikenshoSakuseiIraiYoteiYMD) {
@@ -162,16 +167,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * 主治医意見書登録予定年月日のgetメソッドです。
-     *
+     * 
      * @return 主治医意見書登録予定年月日
      */
+    @CheckForNull
     public FlexibleDate getIkenshoTorokuYoteiYMD() {
         return ikenshoTorokuYoteiYMD;
     }
 
     /**
      * 主治医意見書登録予定年月日のsetメソッドです。
-     *
+     * 
      * @param ikenshoTorokuYoteiYMD 主治医意見書登録予定年月日
      */
     public void setIkenshoTorokuYoteiYMD(FlexibleDate ikenshoTorokuYoteiYMD) {
@@ -180,16 +186,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * 要介護認定一次判定予定年月日のgetメソッドです。
-     *
+     * 
      * @return 要介護認定一次判定予定年月日
      */
+    @CheckForNull
     public FlexibleDate getIchijiHanteiYoteiYMD() {
         return ichijiHanteiYoteiYMD;
     }
 
     /**
      * 要介護認定一次判定予定年月日のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiYoteiYMD 要介護認定一次判定予定年月日
      */
     public void setIchijiHanteiYoteiYMD(FlexibleDate ichijiHanteiYoteiYMD) {
@@ -198,16 +205,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * 認定審査会割当予定年月日のgetメソッドです。
-     *
+     * 
      * @return 認定審査会割当予定年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinsakaiWariateYoteiYMD() {
         return ninteiShinsakaiWariateYoteiYMD;
     }
 
     /**
      * 認定審査会割当予定年月日のsetメソッドです。
-     *
+     * 
      * @param ninteiShinsakaiWariateYoteiYMD 認定審査会割当予定年月日
      */
     public void setNinteiShinsakaiWariateYoteiYMD(FlexibleDate ninteiShinsakaiWariateYoteiYMD) {
@@ -216,16 +224,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * 認定審査会予定年月日のgetメソッドです。
-     *
+     * 
      * @return 認定審査会予定年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinsakaiYoteiYMD() {
         return ninteiShinsakaiYoteiYMD;
     }
 
     /**
      * 認定審査会予定年月日のsetメソッドです。
-     *
+     * 
      * @param ninteiShinsakaiYoteiYMD 認定審査会予定年月日
      */
     public void setNinteiShinsakaiYoteiYMD(FlexibleDate ninteiShinsakaiYoteiYMD) {
@@ -234,16 +243,17 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * センター送信予定年月日のgetメソッドです。
-     *
+     * 
      * @return センター送信予定年月日
      */
+    @CheckForNull
     public FlexibleDate getCenterSoshinYoteiYMD() {
         return centerSoshinYoteiYMD;
     }
 
     /**
      * センター送信予定年月日のsetメソッドです。
-     *
+     * 
      * @param centerSoshinYoteiYMD センター送信予定年月日
      */
     public void setCenterSoshinYoteiYMD(FlexibleDate centerSoshinYoteiYMD) {
@@ -252,9 +262,10 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * このエンティティの主キーが他の{@literal DbT4123NinteiKeikakuJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4123NinteiKeikakuJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4123NinteiKeikakuJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4123NinteiKeikakuJohoEntity other) {
@@ -285,7 +296,6 @@ public class DbT4123NinteiKeikakuJohoEntity extends DbTableEntityBase<DbT4123Nin
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override

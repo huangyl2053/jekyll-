@@ -2,14 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanri;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanri.hokaiseiShikoYMD;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanri;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanri.hokaiseiShikoYMD;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

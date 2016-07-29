@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
+ * 要介護認定インターフェース情報Entityです。
  *
- * @author LDNS 陳鑫
+ * @reamsid_L DBD-1531-010 chenxin
  */
 @lombok.Getter
 @lombok.Setter
