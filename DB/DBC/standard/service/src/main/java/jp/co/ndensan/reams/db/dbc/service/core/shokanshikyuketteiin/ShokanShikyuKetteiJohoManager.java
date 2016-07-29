@@ -136,6 +136,8 @@ public class ShokanShikyuKetteiJohoManager {
                 = this.mapperProvider.create(IKagoKetteiHokenshaInKouhiFutannMapper.class);
         if ((連番 == INDEX_0)) {
             DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
+            errorTempentity.set証記載保険者番号(null);
+            errorTempentity.set被保険者番号(null);
             errorTempentity.setエラー区分(エラー区分_登録対象なし);
             hokenshaMapper.処理結果リスト一時TBLに登録(errorTempentity);
         }
