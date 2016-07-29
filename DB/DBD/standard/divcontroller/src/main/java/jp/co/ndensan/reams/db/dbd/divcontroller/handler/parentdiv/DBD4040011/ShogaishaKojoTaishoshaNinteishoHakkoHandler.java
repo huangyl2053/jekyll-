@@ -17,47 +17,63 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
+ * 障がい者控除対象者認定ハンドラクラスです
  *
- * @author tianyh
+ * @reamsid_L DBD-3870-010 tianyh
  */
 public class ShogaishaKojoTaishoshaNinteishoHakkoHandler {
 
     private final ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv
+     */
     public ShogaishaKojoTaishoshaNinteishoHakkoHandler(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv div) {
         this.div = div;
     }
 
+    /**
+     * 画面初期化
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     */
     public void initialize(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
 
         div.getTaishoshaAtena().initialize(識別コード);
-//        div.getTaishoshaKaigoShikaku().initialize(被保険者番号);
-//
-//        LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
-//                .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
-//        if (!RealInitialLocker.tryGetLock(排他キー)) {
-//            div.getShogaishaKojoNinteishoHakko().setReadOnly(true);
-//            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-//        } else {
-//            前排他の設定(被保険者番号);
-//        }
-//
-//        PersonalData personalData = toPersonalData(識別コード, 被保険者番号);
-//        AccessLogger.log(AccessLogType.照会, personalData);
     }
 
+    /**
+     * 前排他の設定
+     *
+     * @param 被保険者番号 被保険者番号
+     */
     private void 前排他の設定(HihokenshaNo 被保険者番号) {
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.lock(排他キー);
     }
 
+    /**
+     * 前排他の解除
+     *
+     * @param 被保険者番号 被保険者番号
+     */
     public void 前排他の解除(HihokenshaNo 被保険者番号) {
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.release(new LockingKey(排他キー));
     }
 
+    /**
+     * PersonalDataを取得します
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @return PersonalData
+     */
     public PersonalData toPersonalData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
         return PersonalData.of(識別コード, expandedInfo);

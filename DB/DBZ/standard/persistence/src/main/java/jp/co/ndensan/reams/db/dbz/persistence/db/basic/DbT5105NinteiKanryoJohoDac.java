@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -76,14 +77,14 @@ public class DbT5105NinteiKanryoJohoDac implements ISaveable<DbT5105NinteiKanryo
                 table(DbT5105NinteiKanryoJoho.class).
                 where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
-                                not(eq(ninteiShinseiJohoTorokuKanryoYMD, null)),
-                                not(eq(ninteichosaKanryoYMD, null)),
-                                not(eq(ninteichosaIraiKanryoYMD, null)),
-                                not(eq(ikenshoSakuseiIraiKanryoYMD, null)),
-                                not(eq(ikenshoTorokuKanryoYMD, null)),
-                                not(eq(ichijiHanteiKanryoYMD, null)),
-                                not(eq(maskingKanryoYMD, null)),
-                                not(eq(ninteiShinsakaiKanryoYMD, null))
+                                not(isNULL(ninteiShinseiJohoTorokuKanryoYMD)),
+                                not(isNULL(ninteichosaKanryoYMD)),
+                                not(isNULL(ninteichosaIraiKanryoYMD)),
+                                not(isNULL(ikenshoSakuseiIraiKanryoYMD)),
+                                not(isNULL(ikenshoTorokuKanryoYMD)),
+                                not(isNULL(ichijiHanteiKanryoYMD)),
+                                not(isNULL(maskingKanryoYMD)),
+                                not(isNULL(ninteiShinsakaiKanryoYMD))
                         )).
                 toObject(DbT5105NinteiKanryoJohoEntity.class);
     }
