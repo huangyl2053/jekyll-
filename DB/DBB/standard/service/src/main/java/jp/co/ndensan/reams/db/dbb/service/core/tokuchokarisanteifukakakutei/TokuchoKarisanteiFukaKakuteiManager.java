@@ -9,11 +9,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.IAssociation;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -150,13 +150,12 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @param params TokuchoKarisanteiFukaKakuteiMapperParameter
      */
     @Transaction
-    public int updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
+    public void updateFukaShoriJyokyo(TokuchoKarisanteiFukaKakuteiMapperParameter params) {
         ITokuchokarisanteiMapper itokuchokarisanteiMapper = mapperProvider.create(ITokuchokarisanteiMapper.class);
         List<UrT0705ChoteiKyotsuEntity> 賦課処理状況リスト = itokuchokarisanteiMapper.updShoKofuKaishuJoho(params);
         for (UrT0705ChoteiKyotsuEntity entity : 賦課処理状況リスト) {
             entity.setFukaShoriJokyo(true);
-            return urT0705.update(entity);
+            urT0705.update(entity);
         }
-        return 0;
     }
 }
