@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt36001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaKozaIdoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuShutokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.CaluculateFukaShikakuSoshitsuProcess;
@@ -20,6 +19,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoKaishis
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TokuchoTeishishaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TsuchishoBangoHatubanProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidokekka.KarisanteiIdoKekkaBatchParameter;
@@ -52,7 +52,7 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 仮算定異動通知書一括発行BATCHID = new RString("DBB015003_KarisanteiIdoTsuchishoHakko");
-    private static final RString 賦課の情報登録フローBATCHID = new RString("ChoteiTorokuFlow");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 資格異動者抽出 = "getShikakuIdosha";
@@ -262,11 +262,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoKekkaBatc
      */
     @Step(賦課の情報登録フロー)
     protected IBatchFlowCommand choteiToroku() {
-        ChoteiTorokuParameter param = new ChoteiTorokuParameter();
-        param.setSchema(new RString("rgdb"));
-        param.setChoteiIdAutoNumbering(true);
-        param.setShunoIdAutoNumbering(true);
-        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課, param).define();
+        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
+                new FukaJohoTorokuBatchParameter(true)).define();
     }
 
     /**
