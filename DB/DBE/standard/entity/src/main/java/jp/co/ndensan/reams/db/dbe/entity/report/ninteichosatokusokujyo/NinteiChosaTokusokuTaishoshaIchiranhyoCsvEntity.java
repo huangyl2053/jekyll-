@@ -19,7 +19,6 @@ import lombok.Getter;
  *
  * @reamsid_L DBE-0030-040 xuyue
  */
-@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
 
@@ -125,7 +124,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
      * @param entity 認定調査督促対象者一覧表の取得のEntity
      * @return CSVデータ
      */
-    public static NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
+    public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
         NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity csvEntity = new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity();
         csvEntity.cityCode = entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue();
         csvEntity.cityName = entity.getTemp_市町村名称();
