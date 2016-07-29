@@ -35,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 仮算定異動賦課のバッチフロークラスです。
@@ -46,6 +48,9 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
     private static final RString RSTZERO = new RString("0");
     private static final RString RSTONE = new RString("1");
     private static final RString RSTELEVEN = new RString("11");
+    private static final int INT_EIGHT = 8;
+    private static final int INT_NINE = 9;
+    private static final int INT_TEN = 10;
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCHID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 仮算定異動通知書一括発行BATCHID = new RString("DBB015003_KarisanteiIdoTsuchishoHakko");
@@ -352,11 +357,16 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<KarisanteiIdoFukaParam
         parameter.set調定年度(new FlexibleYear(getParameter().get調定年度()));
         parameter.set賦課年度(new FlexibleYear(getParameter().get賦課年度()));
         parameter.set処理対象月(getParameter().get処理対象月());
-        parameter.set抽出開始日時(RDateTime.of(Long.parseLong(getParameter().get抽出開始日時().toString())));
-        parameter.set抽出終了日時(RDateTime.of(Long.parseLong(getParameter().get抽出終了日時().toString())));
+        RDate 年月日1 = new RDate(getParameter().get抽出開始日時().substring(0, INT_EIGHT).toString());
+        RTime 時刻1 = new RTime(getParameter().get抽出開始日時().substring(INT_EIGHT));
+        parameter.set抽出開始日時(RDateTime.of(年月日1.toDateString(), 時刻1.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+        RDate 年月日2 = new RDate(getParameter().get抽出終了日時().substring(0, INT_EIGHT).toString());
+        RTime 時刻2 = new RTime(getParameter().get抽出終了日時().substring(INT_EIGHT));
+        parameter.set抽出終了日時(RDateTime.of(年月日2.toDateString(), 時刻2.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         parameter.set出力帳票List(getParameter().get出力帳票一覧List());
-        parameter.set普徴仮算定賦課処理日時(
-                RDateTime.of(Long.parseLong(getParameter().get普徴仮算定賦課処理日時().toString())));
+        RDate 年月日3 = new RDate(getParameter().get普徴仮算定賦課処理日時().substring(0, INT_NINE).toString());
+        RTime 時刻3 = new RTime(getParameter().get普徴仮算定賦課処理日時().substring(INT_TEN));
+        parameter.set普徴仮算定賦課処理日時(RDateTime.of(年月日3.toDateString(), 時刻3.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         parameter.set依頼金額計算区分(getParameter().get特徴捕捉対象者の依頼金額計算区分());
     }
 }
