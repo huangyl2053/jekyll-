@@ -70,6 +70,8 @@ public class BenmeiTorokuPanel {
         panelDiv.getAtenaPanel().getCcdKaigoAtenaInfo().initialize(識別コード);
         panelDiv.getShikakukihonPanel().getCcdKaigoShikakuKihon().
                 initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
+        FufukuMoshitate fufukuMoshitate = benmeiTorokuManager.getFufukuMoshitate(識別コード, 被保険者番号, 審査請求届出日);
+        ViewStateHolder.put(ViewStateKeys.不服審査申立情報, fufukuMoshitate);
         if (初期_状態.equals(修正)) {
             benmeiTorokuMeisaiJoho = get弁明登録明細情報の取得(識別コード, 被保険者番号, 審査請求届出日);
             if (弁明書作成日 != null && !弁明書作成日.isEmpty() && benmeiTorokuMeisaiJoho != null) {
@@ -146,8 +148,6 @@ public class BenmeiTorokuPanel {
     }
 
     private void get保存情報の取得(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日, FlexibleDate 弁明書作成日) {
-        FufukuMoshitate fufukuMoshitate = benmeiTorokuManager.getFufukuMoshitate(識別コード, 被保険者番号, 審査請求届出日);
-        ViewStateHolder.put(ViewStateKeys.不服審査申立情報, fufukuMoshitate);
         BemmeiNaiyo bemmeiNaiyo = benmeiTorokuManager.getBenmeiNaiyo(識別コード, 被保険者番号, 審査請求届出日, 弁明書作成日);
 
         ViewStateHolder.put(ViewStateKeys.弁明内容, bemmeiNaiyo);

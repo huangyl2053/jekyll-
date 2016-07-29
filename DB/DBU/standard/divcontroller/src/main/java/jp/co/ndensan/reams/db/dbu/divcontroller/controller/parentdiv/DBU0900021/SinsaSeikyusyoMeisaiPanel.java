@@ -131,7 +131,7 @@ public class SinsaSeikyusyoMeisaiPanel {
      */
     public ResponseData<SinsaSeikyusyoMeisaiPanelDiv> onClick_btnFinish(SinsaSeikyusyoMeisaiPanelDiv div) {
 
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.処理完了).respond();
     }
 
     /**
