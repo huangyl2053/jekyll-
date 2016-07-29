@@ -88,6 +88,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
                 processParameter.set出力帳票一覧(entity);
                 executeStep(計算後情報作成);
                 executeStep(本算定異動_現年度_結果一覧表);
+                break;
             }
         }
         executeStep(処理日付管理テーブル更新);

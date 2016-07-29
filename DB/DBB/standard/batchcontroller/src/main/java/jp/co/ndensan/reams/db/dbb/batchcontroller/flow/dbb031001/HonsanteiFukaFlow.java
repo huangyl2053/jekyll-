@@ -75,6 +75,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
                 processParameter.set出力帳票(entity);
                 executeStep(計算後情報作成);
                 executeStep(本算定結果一覧表出力);
+                break;
             }
         }
         executeStep(処理日付管理テーブル更新);
