@@ -146,7 +146,7 @@ public class KogakuKyufuKetteiJohoManager {
                 if (FlexibleYearMonth.canConvert(controlEntity.get処理対象年月())) {
                     flowEntity.setShoriYM(new FlexibleYearMonth(controlEntity.get処理対象年月()));
                 }
-                int レコード件数 = Integer.parseInt(controlCsvEntity.getレコード件数().toString());
+                int レコード件数 = Integer.parseInt(controlEntity.getレコード件数().toString());
                 レコード件数合算 = レコード件数合算 + レコード件数;
             }
             for (KogakuKyufuKetteiJohoDataEntity johoDataEntity : johoEntity.getListDataEntity()) {
