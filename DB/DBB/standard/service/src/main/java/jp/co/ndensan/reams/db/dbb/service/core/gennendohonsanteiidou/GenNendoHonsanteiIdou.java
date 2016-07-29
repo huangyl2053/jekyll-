@@ -86,6 +86,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -216,7 +217,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             entityList = 徴収方法NewestDac.get特別徴収開始者_4月(賦課年度);
         }
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
-        if (entityList != null && !entityList.isEmpty()) {
+        if (!entityList.isEmpty()) {
             mapper.createTmpTokuChoKaishi();
             for (DbV2001ChoshuHohoEntity entity : entityList) {
                 TokuChoKaishiEntity tokuChoKaishiEntity = new TokuChoKaishiEntity();
@@ -224,7 +225,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 mapper.insertTmpTokuChoKaishi(tokuChoKaishiEntity);
             }
         }
-        if (entityList != null && !entityList.isEmpty() && Tsuki._2月.getコード().equals(算定月)) {
+        if (!entityList.isEmpty() && Tsuki._2月.getコード().equals(算定月)) {
             mapper.createTmpTokuKarisantei();
             Map<String, Object> map = new HashMap<>();
             map.put(KEY_FUKANENDO.toString(), 賦課年度.minusYear(INT_1));
@@ -359,7 +360,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     public void createIdoTriggerTemp(RString 異動賦課で同時に計算する特徴捕捉分, RString 特徴捕捉対象者の依頼金額計算) {
         IGenNendoHonsanteiIdouMapper mapper = mapperProvider.create(IGenNendoHonsanteiIdouMapper.class);
         mapper.createTmpIdoTrigger();
-        if (異動賦課で同時に計算する特徴捕捉分 == null || 異動賦課で同時に計算する特徴捕捉分.isEmpty()) {
+        if (RString.isNullOrEmpty(異動賦課で同時に計算する特徴捕捉分)) {
             mapper.insert異動Tempと口座異動Tempをマージ();
         } else if (HosokushaIraiKingaku.通常の異動賦課に含めて計算する.getコード().equals(特徴捕捉対象者の依頼金額計算)) {
             mapper.insert通常の異動賦課に含めて計算する();
@@ -797,8 +798,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         ChoshuHoho 徴収方法の情報 = new ChoshuHoho(賦課計算の情報.get徴収方法の情報());
         if ((賦課の情報_更正後.get調定年度().equals(賦課の情報_更正後.get賦課年度())
                 && isDecimal変更(賦課の情報_更正後.get減免前介護保険料_年額(), 年額保険料)
-                || (徴収方法の情報.get特別徴収停止事由コード() != null
-                && !徴収方法の情報.get特別徴収停止事由コード().isEmpty()))) {
+                || !RString.isNullOrEmpty(徴収方法の情報.get特別徴収停止事由コード()))) {
             CaluculateChoteiResult 調定計算 = caluculateChotei(param.get算定月(), param.get調定日時(), 賦課の情報_更正後,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), new HihokenshaDaicho(賦課計算の情報.get資格の情報()),
                     年額保険料);
@@ -1190,11 +1190,25 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         FukaJohoRelateEntity fukaJohoRelateEntity = new FukaJohoRelateEntity();
         fukaJohoRelateEntity.set介護賦課Entity(賦課の情報.toEntity());
         List<KibetsuEntity> 介護期別RelateEntity = new ArrayList<>();
-        for (Kibetsu kibetsu : 賦課の情報.getKibetsuList()) {
-            if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
-                set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
-            } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
-                set普徴期別金額(kibetsu, 普徴期別金額, 介護期別RelateEntity);
+        List<Kibetsu> kibetsuList = 賦課の情報.getKibetsuList();
+        if (賦課の情報.get被保険者番号() != null) {
+            for (Kibetsu kibetsu : kibetsuList) {
+                if (ChoshuHohoKibetsu.特別徴収.getコード().equals(kibetsu.get徴収方法())) {
+                    set特徴期別金額(kibetsu, 特徴期別金額, 介護期別RelateEntity);
+                } else if (ChoshuHohoKibetsu.普通徴収.getコード().equals(kibetsu.get徴収方法())) {
+                    set普徴期別金額(kibetsu, 普徴期別金額, 介護期別RelateEntity);
+                }
+            }
+        } else {
+            for (int i = INT_1; i <= INT_6; i++) {
+                Kibetsu 特徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
+                        賦課の情報.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
+                set期別金額(特徴期別, 特徴期別金額.get(i), 介護期別RelateEntity);
+            }
+            for (int i = INT_1; i <= INT_14; i++) {
+                Kibetsu 普徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
+                        賦課の情報.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
+                set期別金額(普徴期別, 普徴期別金額.get(i), 介護期別RelateEntity);
             }
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
@@ -1224,8 +1238,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (Decimal decimal : 特徴期別金額) {
                 更正後の特別徴収額.add(decimal);
             }
-            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0
-                    || (特徴停止事由コード != null && !特徴停止事由コード.isEmpty())) {
+            if (更正前の特別徴収額.compareTo(更正後の特別徴収額) > 0 || !RString.isNullOrEmpty(特徴停止事由コード)) {
                 ChoshuHohoBuilder builder = 出力用徴収方法の情報.createBuilderForEdit();
                 builder.set特別徴収停止事由コード(特徴停止事由コード)
                         .set特別徴収停止日時(調定日時);
@@ -1239,6 +1252,24 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         result.set賦課の情報(賦課の情報);
         result.set徴収方法の情報(出力用徴収方法の情報);
         return result;
+    }
+
+    private void set期別金額(Kibetsu kibetsu, Decimal 期別金額, List<KibetsuEntity> 介護期別RelateEntity) {
+        KibetsuEntity kibetsuEntity = new KibetsuEntity();
+
+        RStringBuilder rst = new RStringBuilder();
+        rst.append(kibetsu.get徴収方法()).append(kibetsu.get期());
+        kibetsu = kibetsu.createBuilderForEdit().set調定ID(new Decimal(rst.toString())).build();
+        kibetsuEntity.set介護期別Entity(kibetsu.toEntity());
+
+        UrT0705ChoteiKyotsuEntity urT0705ChoteiKyotsuEntity = new UrT0705ChoteiKyotsuEntity();
+        urT0705ChoteiKyotsuEntity.setChoteiId(new Long(rst.toString()));
+        urT0705ChoteiKyotsuEntity.setChoteigaku(期別金額);
+        List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
+        entityList.add(urT0705ChoteiKyotsuEntity);
+
+        kibetsuEntity.set調定共通Entity(entityList);
+        介護期別RelateEntity.add(kibetsuEntity);
     }
 
     private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
@@ -1343,13 +1374,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         RString 端数調整対象 = DbBusinessConfig.get(ConfigNameDBB.年額計算_端数調整対象,
                 nowDate, SubGyomuCode.DBB介護賦課);
         Map<RString, RankBetsuKijunKingaku> ランク別制御情報 = new HashMap<>();
-
         // TODO QAのNo.957　「ランク別制御情報」の設定方法がない。
-//        RankBetsuKijunKingaku gaku = new RankBetsuKijunKingaku();
-//        gaku.setランク基準金額1(Decimal.ONE);
-//        gaku.setランク基準金額2(Decimal.ONE);
-//        ランク別制御情報.put(new RString("01"), gaku);
-//        ランク別制御情報.put(new RString("1"), gaku);
+
         NengakuFukaKonkyoFactory nengakuFukaKonkyoFactory = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
         NengakuSeigyoJoho 年額制御情報 = nengakuFukaKonkyoFactory.createNengakuSeigyoJoho(
                 端数単位,
