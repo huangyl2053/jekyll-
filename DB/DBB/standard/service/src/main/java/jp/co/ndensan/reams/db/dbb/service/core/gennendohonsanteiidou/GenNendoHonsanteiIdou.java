@@ -67,7 +67,6 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gennendohonsanteiidou.IGenNendoHonsanteiIdouMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.choshuhoho.ChoshuHohoKoshin;
-import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
@@ -94,7 +93,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
@@ -613,9 +611,6 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         for (SetaiHaakuEntity setaiHaakuEntity : 世帯員把握情報) {
             mapper.insertTmpSetaiHaaku(setaiHaakuEntity);
         }
-        SetaiShotokuKazeiHantei hantei = SetaiShotokuKazeiHantei.createInstance();
-        hantei.getSetaiinHaaku(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード());
-        hantei.getJuminShotokuJoho();
     }
 
     /**
@@ -642,7 +637,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 賦課年度, 調定日時, 算定月, kozaBuilder.build(), list);
 
         List<CalculateFukaEntity> 賦課計算の情報リスト = mapper.get賦課計算の情報(param);
-        if (賦課計算の情報リスト == null || 賦課計算の情報リスト.isEmpty()) {
+        if (賦課計算の情報リスト.isEmpty()) {
             return;
         }
         HokenryoDankaiList 保険料段階List = HokenryoDankaiSettings.createInstance().get保険料段階ListIn(param.get賦課年度());
@@ -1176,6 +1171,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             HihokenshaDaicho 資格の情報,
             Decimal 年額保険料) {
         // TODO QAのNo.933(Redmine#91256)
+        // Dummy Data
         List<Decimal> 特徴期別金額 = new ArrayList<>();
         for (int i = 0; i < INT_6; i++) {
             特徴期別金額.add(Decimal.ONE);
@@ -1203,12 +1199,12 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
             for (int i = INT_1; i <= INT_6; i++) {
                 Kibetsu 特徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
                         賦課の情報.get履歴番号(), ChoshuHohoKibetsu.特別徴収.getコード(), i);
-                set期別金額(特徴期別, 特徴期別金額.get(i), 介護期別RelateEntity);
+                set期別金額(特徴期別, 特徴期別金額.get(i - INT_1), 介護期別RelateEntity);
             }
             for (int i = INT_1; i <= INT_14; i++) {
                 Kibetsu 普徴期別 = new Kibetsu(賦課の情報.get調定年度(), 賦課の情報.get賦課年度(), 賦課の情報.get通知書番号(),
                         賦課の情報.get履歴番号(), ChoshuHohoKibetsu.普通徴収.getコード(), i);
-                set期別金額(普徴期別, 普徴期別金額.get(i), 介護期別RelateEntity);
+                set期別金額(普徴期別, 普徴期別金額.get(i - INT_1), 介護期別RelateEntity);
             }
         }
         fukaJohoRelateEntity.set介護期別RelateEntity(介護期別RelateEntity);
