@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002;
 
 import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoBatchresultTanituParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu.ShotokuJohoChushutsuRenkeitanitu;
@@ -139,10 +138,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      *
      * @return ShotokuJohoTyushutuRenkeiTanituParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
-    public ShotokuJohoBatchresultTanituParameter getBatchParamter() {
-        ShotokuJohoTyushutuRenkeiTanituParameter batchparam = new ShotokuJohoTyushutuRenkeiTanituParameter();
+    public ShutokuJohoChushutsuRenkeiBatchParameter getBatchParamter() {
+        ShutokuJohoChushutsuRenkeiBatchParameter batchparam = new ShutokuJohoChushutsuRenkeiBatchParameter();
         batchparam.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
-        batchparam.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
+        batchparam.set出力順ID(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID());
         return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoParameter(batchparam);
     }
 

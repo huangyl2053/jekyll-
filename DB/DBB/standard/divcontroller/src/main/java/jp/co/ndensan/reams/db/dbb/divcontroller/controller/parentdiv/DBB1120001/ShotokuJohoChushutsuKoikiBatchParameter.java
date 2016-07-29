@@ -46,6 +46,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString DEE01F001 = new RString("DEE01F001");
     private static final RString DEC05F001またはDEE01F001 = new RString("DEC05F001またはDEE01F001");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
+    private static final RString COMMON_BUTTON_FIELD_NAME_当初 = new RString("btnBatchRegisterDousyo");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -63,11 +64,13 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
                     SubGyomuCode.DBB介護賦課);
             div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(new RDate(年度.toString()));
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
         } else if (所得情報抽出_連携異動.equals(メニューID)) {
             遷移区分 = 遷移区分_1;
             年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                     SubGyomuCode.DBB介護賦課);
             div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(new RDate(年度.toString()));
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
         }
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
         handler.initCheck(currentTime);
@@ -128,8 +131,10 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
         DataGrid<dgShichosonIchiran_Row> grid = div.getDgShichosonIchiran();
         if (grid.getSelectedItems().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, false);
         }
         return ResponseData.of(div).respond();
     }

@@ -80,7 +80,6 @@ public class JigyohokokuCompYoshiki151Change {
         this.list2_9 = list2_9;
         this.list2_10 = list2_10;
         this.list2_11 = list2_11;
-
     }
 
 }

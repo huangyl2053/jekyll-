@@ -623,7 +623,8 @@ public class KarisanteiIdoFukaPanelHandler {
         if (賦課年度 != null && !賦課年度.isEmpty()) {
             parameter.set賦課年度(new RString(賦課年度.toString()));
         }
-        parameter.set処理対象(div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey());
+        RString 処理対象月 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getDdlShorigetsu().getSelectedKey();
+        parameter.set処理対象(処理対象月);
         List<dgChushutsuKikan_Row> 抽出日時List = div.getKarisanteiIdoFukaKanriInfo().getDgChushutsuKikan().getDataSource();
         if (!抽出日時List.isEmpty()) {
             dgChushutsuKikan_Row 抽出日時 = 抽出日時List.get(NUM_0);
@@ -690,6 +691,10 @@ public class KarisanteiIdoFukaPanelHandler {
         parameter.set納入_ページごとに山分け(div.getKarisanteiIdoFukaChohyoHakko().getKariSanteiTsuchiKobetsuJoho()
                 .getRadNotsuYamawake().getSelectedValue());
         parameter.set一括発行起動フラグ(一括発行起動フラグ);
+        FuchoKiUtil util = new FuchoKiUtil();
+        KitsukiList 期月リスト = util.get期月リスト();
+        RString 算定期 = new RString(期月リスト.get月の期(Tsuki.toValue(処理対象月)).get期AsInt());
+        parameter.set算定期(算定期);
         return idoFuka.createKariSanteiIdoParameter(parameter);
     }
 

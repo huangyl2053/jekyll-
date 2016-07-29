@@ -144,7 +144,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set不支給理由(RString 不支給理由) {
-        requireNonNull(不支給理由, UrSystemErrorMessages.値がnull.getReplacedMessage("不支給理由"));
         entity.setFushikyuRiyu(不支給理由);
         return this;
     }
@@ -156,7 +155,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set審査方法区分(RString 審査方法区分) {
-        requireNonNull(審査方法区分, UrSystemErrorMessages.値がnull.getReplacedMessage("審査方法区分"));
         entity.setShinsaHohoKubun(審査方法区分);
         return this;
     }
@@ -168,7 +166,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set判定結果送付年月(FlexibleYearMonth 判定結果送付年月) {
-        requireNonNull(判定結果送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("判定結果送付年月"));
         entity.setHanteiKekkaSofuYM(判定結果送付年月);
         return this;
     }
@@ -180,7 +177,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set再送付フラグ(boolean 再送付フラグ) {
-        requireNonNull(再送付フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("再送付フラグ"));
         entity.setSaiSofuFlag(再送付フラグ);
         return this;
     }
@@ -192,7 +188,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set判定結果送付不要フラグ(boolean 判定結果送付不要フラグ) {
-        requireNonNull(判定結果送付不要フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("判定結果送付不要フラグ"));
         entity.setHanteiKekkaSofuFuyoFlag(判定結果送付不要フラグ);
         return this;
     }
@@ -204,7 +199,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set審査結果反映区分(RString 審査結果反映区分) {
-        requireNonNull(審査結果反映区分, UrSystemErrorMessages.値がnull.getReplacedMessage("審査結果反映区分"));
         entity.setShinsaKekkaHaneiKubun(審査結果反映区分);
         return this;
     }
@@ -216,7 +210,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set決定通知書作成年月日(FlexibleDate 決定通知書作成年月日) {
-        requireNonNull(決定通知書作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("決定通知書作成年月日"));
         entity.setKetteiTsuchishoSakuseiYMD(決定通知書作成年月日);
         return this;
     }
@@ -228,7 +221,6 @@ public class KogakuShikyuHanteiKekkaBuilder {
      * @return {@link KogakuShikyuHanteiKekkaBuilder}
      */
     public KogakuShikyuHanteiKekkaBuilder set振込明細書作成年月日(FlexibleDate 振込明細書作成年月日) {
-        requireNonNull(振込明細書作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("振込明細書作成年月日"));
         entity.setFurikomiMeisaishoSakuseiYMD(振込明細書作成年月日);
         return this;
     }

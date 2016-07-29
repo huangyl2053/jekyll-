@@ -89,7 +89,6 @@ public class KariSanteiIdoFukaBatchFath {
     private static final RString 西暦 = new RString("西暦");
     private static final RString LEFTBRACKET = new RString("（");
     private static final RString RIGHTBRACKET = new RString("）");
-    private static final int 負数_1 = -1;
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -218,56 +217,6 @@ public class KariSanteiIdoFukaBatchFath {
             relateEntity.set介護期別Entity(kibetsu.toEntity());
             UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
             entity.setChoteigaku(Decimal.ZERO);
-            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
-            entityList.add(entity);
-            relateEntity.set調定共通Entity(entityList);
-            介護期別RelateEntity.add(relateEntity);
-        }
-    }
-
-    /**
-     * set期別金額
-     *
-     * @param kibetsu Kibetsu
-     * @param 介護期別RelateEntity List<KibetsuEntity>
-     * @param 期 int
-     * @param 金額 Decimal
-     */
-    public void set期別金額_8月特徴開始(Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity,
-            int 期, Decimal 金額) {
-        if (kibetsu.get期() == 期 && kibetsu.getChoteiKyotsuList() != null
-                && !kibetsu.getChoteiKyotsuList().isEmpty()) {
-            KibetsuEntity relateEntity = new KibetsuEntity();
-            relateEntity.set介護期別Entity(kibetsu.toEntity());
-            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
-            entity.setChoteigaku(金額);
-            List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
-            entityList.add(entity);
-            relateEntity.set調定共通Entity(entityList);
-            介護期別RelateEntity.add(relateEntity);
-        }
-    }
-
-    /**
-     * 調定計算 set期別金額
-     *
-     * @param 期 int
-     * @param 徴収方法 RString
-     * @param 普徴期別金額リスト List<Decimal>
-     * @param kibetsu Kibetsu
-     * @param index int
-     * @param 介護期別RelateEntity List<KibetsuEntity>
-     */
-    public void set期別金額_調定計算(int 期, RString 徴収方法,
-            List<Decimal> 普徴期別金額リスト, int index,
-            Kibetsu kibetsu, List<KibetsuEntity> 介護期別RelateEntity) {
-        if (期 == kibetsu.get期() && 徴収方法.equals(kibetsu.get徴収方法())
-                && kibetsu.getChoteiKyotsuList() != null
-                && !kibetsu.getChoteiKyotsuList().isEmpty()) {
-            KibetsuEntity relateEntity = new KibetsuEntity();
-            relateEntity.set介護期別Entity(kibetsu.toEntity());
-            UrT0705ChoteiKyotsuEntity entity = kibetsu.getChoteiKyotsuList().get(0).toEntity();
-            entity.setChoteigaku(普徴期別金額リスト.get(index));
             List<UrT0705ChoteiKyotsuEntity> entityList = new ArrayList<>();
             entityList.add(entity);
             relateEntity.set調定共通Entity(entityList);

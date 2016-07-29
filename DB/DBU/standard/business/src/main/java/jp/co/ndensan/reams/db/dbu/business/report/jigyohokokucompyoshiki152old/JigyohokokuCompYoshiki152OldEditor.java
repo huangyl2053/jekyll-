@@ -61,7 +61,6 @@ public class JigyohokokuCompYoshiki152OldEditor implements IJigyohokokuCompYoshi
         集計範囲_SJ.append(new RString("年度"));
         集計範囲_SJ.append(集計範囲_M.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).getMonth());
         集計範囲_SJ.append(new RString("分)"));
-        集計範囲_SJ.append(new RString("(決定)"));
         return 集計範囲_SJ.toRString();
     }
 

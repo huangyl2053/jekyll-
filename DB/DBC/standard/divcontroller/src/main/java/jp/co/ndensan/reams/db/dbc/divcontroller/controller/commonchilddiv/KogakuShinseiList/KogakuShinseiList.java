@@ -41,6 +41,8 @@ public class KogakuShinseiList {
         }
         ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getTxtShokisai().getValue());
+        int 履歴番号 = 0;
+        ViewStateHolder.put(ViewStateKeys.履歴番号, 履歴番号);
         return ResponseData.of(div).respond();
     }
 

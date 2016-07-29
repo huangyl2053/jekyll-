@@ -20,16 +20,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshato
 public interface ISetaiiShotokuKazeiHanteiMapper {
 
     /**
-     * creat世帯員所得情報高額一時テーブルメソッドです。
-     */
-    void creat世帯員所得情報高額一時();
-
-    /**
-     * creat世帯員所得情報事業高額一時テーブルメソッドです。
-     */
-    void creat世帯員所得情報事業高額一時();
-
-    /**
      * insert世帯員所得情報高額一時に一括住所地特例該当が1です。
      */
     void insert世帯員所得情報高額一時に一括住所地特例該当が1();

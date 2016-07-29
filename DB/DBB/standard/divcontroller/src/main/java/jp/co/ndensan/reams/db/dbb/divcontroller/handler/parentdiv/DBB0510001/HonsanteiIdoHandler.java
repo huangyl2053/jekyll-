@@ -129,7 +129,9 @@ public class HonsanteiIdoHandler {
      */
     public boolean initialize(FlexibleYear 調定年度) {
 
-        RDate date = RDate.getNowDate();
+        // TODO
+//        RDate date = RDate.getNowDate();
+        RDate date = new RDate("20160929");
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();
@@ -543,7 +545,7 @@ public class HonsanteiIdoHandler {
             paramter.set納入_発行日(new FlexibleDate(納入_発行日.toString()));
         }
         paramter.set納入_出力方法(div.getTxtNotsuShutsuryokuKi().getValue());
-        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedValue());
+        paramter.set納入_出力期(div.getDdlNotsuShuturyokuki().getSelectedKey());
         paramter.set納入_生活保護対象者(div.getRadNotsuSeikatsuHogo().getSelectedValue());
         paramter.set納入_ページごとに山分け(div.getRadNotsuYamawake().getSelectedValue());
         if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {

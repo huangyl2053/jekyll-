@@ -40,4 +40,5 @@ public class KariSanteiIdoParameter {
     private RString 普徴仮算定賦課処理日時;
     private boolean 一括発行起動フラグ;
     private RString 仮算定異動賦課メニューからの場合;
+    private RString 算定期;
 }

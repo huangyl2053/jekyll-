@@ -7,9 +7,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoBatchresultTanituParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShichosonJohoShutoku;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -111,10 +110,10 @@ public class ShotokuJohoChushutsuRenkeitanitu {
      * @param parameter ShotokuJohoTyushutuRenkeiKoikiParameter
      * @return ShotokuJohoBatchresultParameter createShotokuJohoParameter
      */
-    public ShotokuJohoBatchresultTanituParameter createShotokuJohoParameter(
-            ShotokuJohoTyushutuRenkeiTanituParameter parameter) {
-        ShotokuJohoBatchresultTanituParameter result = new ShotokuJohoBatchresultTanituParameter();
-        List<ShichosonJoho> 市町村情報List = new ArrayList<>();
+    public ShutokuJohoChushutsuRenkeiBatchParameter createShotokuJohoParameter(
+            ShutokuJohoChushutsuRenkeiBatchParameter parameter) {
+        ShutokuJohoChushutsuRenkeiBatchParameter result = new ShutokuJohoChushutsuRenkeiBatchParameter();
+        List<ShichosonJohoShutoku> 市町村情報List = new ArrayList<>();
         result.set処理年度(parameter.get処理年度());
         result.set市町村情報List(市町村情報List);
         result.set出力順ID(parameter.get出力順ID());

@@ -44,7 +44,6 @@ public class JigyohokokuCompYoshiki152BodyEditor implements IJigyohokokuCompYosh
         source.list1_10 = change.getList1_10();
         source.list1_11 = change.getList1_11();
         source.list1_12 = change.getList1_12();
-
         source.list2_1 = change.getList2_1();
         source.list2_2 = change.getList2_2();
         source.list2_3 = change.getList2_3();

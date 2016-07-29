@@ -31,6 +31,7 @@ public class ShikakuIdoshaChushutsuProcess extends SimpleBatchProcessBase {
         mapper.create賦課情報Temp();
         mapper.create口座異動Temp();
         mapper.create世帯員把握Temp();
+        mapper.create賦課の情報一時テーブル();
     }
 
     @Override

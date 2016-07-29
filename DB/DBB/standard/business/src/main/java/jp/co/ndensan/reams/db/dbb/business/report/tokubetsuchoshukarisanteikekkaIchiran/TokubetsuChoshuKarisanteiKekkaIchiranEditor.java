@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukarisanteikekk
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.TokuchoKariKeisangoFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukarisanteikekkaIchiran.TokubetsuChoshuKarisanteiKekkaIchiranSource;
+import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -49,7 +50,6 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_3 = new RString("3");
@@ -127,10 +127,7 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
             source.listUpper_2 = 郵便番号.value();
         }
         source.listUpper_3 = 住所編集;
-        RString 行政区 = 特徴仮算定計算後賦課情報Entity.get宛名().getGyoseikuName();
-        if (行政区 != null) {
-            source.listUpper_4 = 行政区;
-        }
+        set行政区(source);
         RString 住民種別コード = 特徴仮算定計算後賦課情報Entity.get宛名().getJuminShubetsuCode();
         FlexibleDate 生年月日 = 特徴仮算定計算後賦課情報Entity.get宛名().getSeinengappiYMD();
         set生年月日(住民種別コード, 生年月日, source);
@@ -154,16 +151,25 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
         }
         set特別徴収業務者(source);
         set特別徴収対象年金(source);
-        source.listLower_6 = FOUR月;
-        source.listLower_7 = DecimalFormatter.toコンマ区切りRString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額01(), NUM_0);
-        source.listLower_8 = SIX月;
-        source.listLower_7 = DecimalFormatter.toコンマ区切りRString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額02(), NUM_0);
-        source.listLower_8 = EIGHT月;
-        source.listLower_7 = DecimalFormatter.toコンマ区切りRString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額03(), NUM_0);
-        source.listBiko_1 = 特徴中止;
+        if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() == null || 特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
+            source.listLower_6 = FOUR月;
+            source.listLower_7 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額01().toString());
+            source.listLower_8 = SIX月;
+            source.listLower_9 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額02().toString());
+            source.listLower_10 = EIGHT月;
+            source.listLower_11 = new RString(特徴仮算定計算後賦課情報Entity.get特徴期期別金額03().toString());
+        }
+
         set特別徴収停止事由(source);
         return source;
 
+    }
+
+    private void set行政区(TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
+        RString 行政区 = 特徴仮算定計算後賦課情報Entity.get宛名().getGyoseikuName();
+        if (行政区 != null) {
+            source.listUpper_4 = 行政区;
+        }
     }
 
     private void set性別(RString 性別, TokubetsuChoshuKarisanteiKekkaIchiranSource source) {
@@ -196,21 +202,24 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranEditor implements ITokubetsuCh
     private void set特別徴収対象年金(TokubetsuChoshuKarisanteiKekkaIchiranSource source) throws NullPointerException, IllegalArgumentException {
         if (特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード() != null && 特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード().length() <= NUM_3) {
             Code 仮徴収_年金コード = new Code(特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード());
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), 仮徴収_年金コード);
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.年金コード.getCodeShubetsu(), 仮徴収_年金コード);
             source.listLower_5 = 特別徴収対象年金;
         }
         if (特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード() != null && 特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード().length() > NUM_3) {
             Code 仮徴収_年金コード = new Code(特徴仮算定計算後賦課情報Entity.get仮徴収_年金コード().substring(NUM_0, NUM_3));
-            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), 仮徴収_年金コード);
+            RString 特別徴収対象年金 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                    UEXCodeShubetsu.年金コード.getCodeShubetsu(), 仮徴収_年金コード);
             source.listLower_5 = 特別徴収対象年金;
         }
     }
 
     private void set特別徴収停止事由(TokubetsuChoshuKarisanteiKekkaIchiranSource source) throws IllegalArgumentException, NullPointerException {
-        if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() != null) {
+        if (特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード() != null && !特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().isEmpty()) {
+            source.listBiko_1 = 特徴中止;
             Code 特別徴収停止事由コード = new Code(特徴仮算定計算後賦課情報Entity.get特別徴収停止事由コード().toString());
             RString 備考２ = CodeMaster.getCodeRyakusho(SubGyomuCode.DBB介護賦課, new CodeShubetsu("0008"), 特別徴収停止事由コード);
-            source.listLower_5 = 備考２;
+            source.listBiko_2 = 備考２;
         }
     }
 
