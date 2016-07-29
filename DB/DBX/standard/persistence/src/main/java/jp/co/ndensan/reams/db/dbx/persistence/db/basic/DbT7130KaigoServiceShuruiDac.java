@@ -244,6 +244,7 @@ public class DbT7130KaigoServiceShuruiDac {
                 where(and(
                                 isNULL(teikyoshuryoYM),
                                 in(serviceBunrruicode, list))).
+                order(by(DbT7130KaigoServiceShurui.serviceShuruiCd, Order.ASC)).
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
 
