@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100018;
 
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -19,10 +19,8 @@ public class ShakfukusRiysFutKeigTaisKakuninshoProerty extends ReportPropertyBas
 
     /**
      * コンストラクタです。
-     *
-     * @param reportId ReportId
      */
-    public ShakfukusRiysFutKeigTaisKakuninshoProerty(ReportId reportId) {
-        super(SubGyomuCode.DBD介護受給, reportId);
+    public ShakfukusRiysFutKeigTaisKakuninshoProerty() {
+        super(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100018.getReportId());
     }
 }
