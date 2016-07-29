@@ -53,7 +53,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 本算定異動_現年度_結果一覧表 = "spoolHonsanteiIdoKekkaIchiranData";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
-    private static final ReportId 帳票分類Id = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
+    private static final ReportId 帳票分類ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
 
     private CreateHonsanteiIdoBatchParameter parameter;
     private GennendoIdoFukaProcessParameter processParameter;
@@ -84,7 +84,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
         executeStep(賦課計算);
         executeStep(特徴依頼金計算_４月開始);
         for (ChohyoResult entity : parameter.get出力帳票List()) {
-            if (帳票分類Id.equals(entity.get帳票分類ID())) {
+            if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票一覧(entity);
                 executeStep(計算後情報作成);
                 executeStep(本算定異動_現年度_結果一覧表);
