@@ -121,7 +121,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReport
         for (UniversalPhase universalPhase : 普徴期別金額リスト) {
 
             if (new RString(universalPhase.get期()).padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
-                普徴期別金額 = universalPhase.get金額();
+                普徴期別金額 = universalPhase.get金額() == null
+                        ? Decimal.ZERO : universalPhase.get金額();
                 break;
             }
         }
@@ -152,7 +153,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReport
         for (CharacteristicsPhase characteristicsPhase : 特徴期別金額リスト) {
 
             if (characteristicsPhase.get期().padZeroToLeft(2).equals(期.padZeroToLeft(2))) {
-                特徴期別金額 = characteristicsPhase.get金額();
+                特徴期別金額 = characteristicsPhase.get金額() == null
+                        ? Decimal.ZERO : characteristicsPhase.get金額();
                 break;
             }
         }
