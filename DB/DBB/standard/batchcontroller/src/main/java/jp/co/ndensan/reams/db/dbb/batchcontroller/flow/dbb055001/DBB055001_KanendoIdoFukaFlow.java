@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SelectKanendoId
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb055001.SpoolKanendoIdoKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.kanendoidofuka.KanendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -45,10 +46,12 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     private static final String 計算後情報作成_二 = "kiisagoJyohouSakuseiNi";
     private static final String 結果一覧表出力 = "spoolKanendoIdoKekkaIchiran";
     private static final String 処理日付管理テーブル登録 = "insertShoriDateKanri";
+    private static final String 本算定通知書一括発行_過年度 = "callKanendoIdoTsuchishoHakkoFlow";
 
     private static final int 定値_イチ = 1;
     private static final int 定値_二 = 2;
     private static final RString 二_定値 = new RString("2");
+    private static final RString KANENDOIDOTSUCHISHO_FLOW = new RString("KanendoIdoTsuchishoHakkoFlow");
     private static final RString SETAISHOTOKUKAZEIHANTEI_FLOW = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
 
@@ -185,6 +188,36 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     @Step(処理日付管理テーブル登録)
     protected IBatchFlowCommand insertShoriDateKanri() {
         return simpleBatch(InsShoriDateKanriProcess.class).arguments(processParameter).define();
+    }
+
+    @Step(本算定通知書一括発行_過年度)
+    protected IBatchFlowCommand callKanendoIdoTsuchishoHakkoFlow() {
+        return otherBatchFlow(KANENDOIDOTSUCHISHO_FLOW, SubGyomuCode.DBB介護賦課,
+                getHonSanteiIdoKanendoFukaBatchParameter()).define();
+    }
+
+    private HonSanteiIdoKanendoFukaBatchParameter getHonSanteiIdoKanendoFukaBatchParameter() {
+        HonSanteiIdoKanendoFukaBatchParameter param = new HonSanteiIdoKanendoFukaBatchParameter();
+        param.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
+        param.set出力帳票List(parameter.get出力帳票List());
+        param.set変更_チェックボックス(parameter.get変更_チェックボックス());
+        param.set変更_対象者(parameter.get変更_対象者());
+        param.set変更_対象賦課年度(parameter.get変更_対象賦課年度());
+        param.set変更_文書番号(parameter.get変更_文書番号());
+        param.set変更_発行日(parameter.get変更_発行日());
+        param.set決定_チェックボックス(parameter.get決定_チェックボックス());
+        param.set決定_対象賦課年度(parameter.get決定_対象賦課年度());
+        param.set決定_文書番号(parameter.get決定_文書番号());
+        param.set決定_発行日(parameter.get決定_発行日());
+        param.set納入_ページ山分け(parameter.get納入_ページ山分け());
+        param.set納入_先頭出力(parameter.get納入_先頭出力());
+        param.set納入_出力期(parameter.get納入_出力期());
+        param.set納入_口座振替様式(parameter.get納入_口座振替様式());
+        param.set納入_対象者(parameter.get納入_対象者());
+        param.set納入_対象賦課年度(parameter.get納入_対象賦課年度());
+        param.set納入_発行日(parameter.get納入_発行日());
+        param.set調定年度(parameter.get調定年度());
+        return param;
     }
 
 }
