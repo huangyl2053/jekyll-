@@ -1,7 +1,8 @@
-package jp.co.ndensan.reams.db.dbd.entity.report.dbd100018;
+// TODO: 業務に合わせてパスを変更してください
+package jp.co.ndensan.reams.db.dbd.entity.report.dbd100019;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
@@ -11,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
  *
  * @reamsid_L DBD-3540-100 wangchao
  */
-public class ShakfukusRiysFutKeigTaisKakuninshoReportSource implements IReportSource {
+public class ShafukuRiysFutKeigTaisKakuninshoShoNoAriReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "kofuGengo", length = 2, order = 1)
@@ -34,34 +35,34 @@ public class ShakfukusRiysFutKeigTaisKakuninshoReportSource implements IReportSo
     public RString birthGengoMeiji;
     @ReportItem(name = "birthGengoTaisho", length = 1, order = 10)
     public RString birthGengoTaisho;
-    @ReportItem(name = "birthGengoShowa", length = 1, order = 11)
-    public RString birthGengoShowa;
-    @ReportItem(name = "man", length = 1, order = 12)
+    @ReportItem(name = "man", length = 1, order = 11)
     public RString man;
-    @ReportItem(name = "woman", length = 1, order = 13)
+    @ReportItem(name = "woman", length = 1, order = 12)
     public RString woman;
+    @ReportItem(name = "birthGengoShowa", length = 1, order = 13)
+    public RString birthGengoShowa;
     @ReportItem(name = "birthYYYY", length = 4, order = 14)
     public RString birthYYYY;
     @ReportItem(name = "birthMM", length = 2, order = 15)
     public RString birthMM;
     @ReportItem(name = "birthDD", length = 2, order = 16)
     public RString birthDD;
-    @ReportItem(name = "tekiyoGengo", length = 2, order = 18)
-    public RString tekiyoGengo;
-    @ReportItem(name = "tekiyoYYYY", length = 2, order = 19)
-    public RString tekiyoYYYY;
-    @ReportItem(name = "tekiyoMM", length = 2, order = 20)
+    @ReportItem(name = "tekiyoMM", length = 2, order = 18)
     public RString tekiyoMM;
-    @ReportItem(name = "tekiyoDD", length = 2, order = 21)
+    @ReportItem(name = "tekiyoDD", length = 2, order = 19)
     public RString tekiyoDD;
-    @ReportItem(name = "yukoGengo", length = 2, order = 22)
-    public RString yukoGengo;
-    @ReportItem(name = "yukoYYYY", length = 2, order = 23)
-    public RString yukoYYYY;
-    @ReportItem(name = "yukoMM", length = 2, order = 24)
+    @ReportItem(name = "tekiyoGengo", length = 2, order = 20)
+    public RString tekiyoGengo;
+    @ReportItem(name = "tekiyoYYYY", length = 2, order = 21)
+    public RString tekiyoYYYY;
+    @ReportItem(name = "yukoMM", length = 2, order = 22)
     public RString yukoMM;
-    @ReportItem(name = "yukoDD", length = 2, order = 25)
+    @ReportItem(name = "yukoDD", length = 2, order = 23)
     public RString yukoDD;
+    @ReportItem(name = "yukoGengo", length = 2, order = 24)
+    public RString yukoGengo;
+    @ReportItem(name = "yukoYYYY", length = 2, order = 25)
+    public RString yukoYYYY;
     @ReportItem(name = "keigenRitsu1", length = 10, order = 26)
     public RString keigenRitsu1;
     @ReportItem(name = "genmenNaiyo", length = 20, order = 27)
@@ -76,21 +77,33 @@ public class ShakfukusRiysFutKeigTaisKakuninshoReportSource implements IReportSo
     public RString genmenNaiyo1;
     @ReportItem(name = "genmenNaiyo2", length = 20, order = 32)
     public RString genmenNaiyo2;
-    @ReportItem(name = "hokenshaJusho", order = 33)
+    @ReportItem(name = "hokenshaNo1", length = 1, order = 33)
+    public RString hokenshaNo1;
+    @ReportItem(name = "hokenshaNo2", length = 1, order = 34)
+    public RString hokenshaNo2;
+    @ReportItem(name = "hokenshaNo3", length = 1, order = 35)
+    public RString hokenshaNo3;
+    @ReportItem(name = "hokenshaNo4", length = 1, order = 36)
+    public RString hokenshaNo4;
+    @ReportItem(name = "hokenshaNo5", length = 1, order = 37)
+    public RString hokenshaNo5;
+    @ReportItem(name = "hokenshaNo6", length = 1, order = 38)
+    public RString hokenshaNo6;
+    @ReportItem(name = "hokenshaJusho", order = 39)
     public RString hokenshaJusho;
-    @ReportItem(name = "hokenshaName1", length = 13, order = 34)
+    @ReportItem(name = "hokenshaName1", length = 13, order = 40)
     public RString hokenshaName1;
-    @ReportItem(name = "hokenshaName2", length = 15, order = 35)
+    @ReportItem(name = "hokenshaName2", length = 15, order = 41)
     public RString hokenshaName2;
-    @ReportItem(name = "hokenshaName3", length = 16, order = 36)
+    @ReportItem(name = "hokenshaName3", length = 16, order = 42)
     public RString hokenshaName3;
-    @ReportItem(name = "hokenshaName4", length = 18, order = 37)
+    @ReportItem(name = "hokenshaName4", length = 18, order = 43)
     public RString hokenshaName4;
-    @ReportItem(name = "hokenshaName5", length = 20, order = 38)
+    @ReportItem(name = "hokenshaName5", length = 20, order = 44)
     public RString hokenshaName5;
-    @ReportItem(name = "hokenshaTelNo", length = 20, order = 39)
+    @ReportItem(name = "hokenshaTelNo", length = 20, order = 45)
     public RString hokenshaTelNo;
-    @ReportItem(name = "denshiKoin", order = 40)
+    @ReportItem(name = "denshiKoin", order = 46)
     public RString denshiKoin;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

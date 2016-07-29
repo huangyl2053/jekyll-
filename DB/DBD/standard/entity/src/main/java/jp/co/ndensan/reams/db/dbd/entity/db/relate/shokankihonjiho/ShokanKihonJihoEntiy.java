@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
  * 償還払請求情報クラスです。
  *
  * @reamsid_L DBD-3640-010 panxiaobo
