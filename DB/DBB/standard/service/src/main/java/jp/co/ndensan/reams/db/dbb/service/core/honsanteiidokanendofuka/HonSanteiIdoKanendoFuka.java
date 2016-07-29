@@ -56,7 +56,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.Keisa
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendofuka.IHonSanteiIdoKanendoFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.choteijiyu.ChoteiJiyuHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
@@ -84,7 +83,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
 import static jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.CustomerBarcodeShiyoUmu.使用しない;
 import static jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.CustomerBarcodeShiyoUmu.使用する;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
@@ -628,9 +626,6 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         for (SetaiHaakuEntity setaiHaakuEntity : 世帯員把握情報) {
             mapper.insertTmpSetaiHaaku(setaiHaakuEntity);
         }
-        SetaiShotokuKazeiHantei hantei = SetaiShotokuKazeiHantei.createInstance();
-        hantei.getSetaiinHaaku(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード());
-        hantei.getJuminShotokuJoho();
     }
 
     /**
@@ -1415,6 +1410,10 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 .createSelectByKeyParam(調定年度, 調定日時, 出力順, kozaSearchKey, list, 日付関連_年度サイクル);
         List<KeisangojohoToKozaEntity> 本算定計算後賦課情報リスト = mapper.select計算後情報と宛名と口座(param);
 
+        if (本算定計算後賦課情報リスト == null || 本算定計算後賦課情報リスト.isEmpty()) {
+            load出力条件リスト(調定年度, 抽出開始日時, 抽出終了日時, outputOrder, 帳票名, 定値_ゼロ);
+            return;
+        }
         List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座List = new ArrayList<>();
         List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座_更正前List = new ArrayList<>();
         List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座_更正後List = new ArrayList<>();
