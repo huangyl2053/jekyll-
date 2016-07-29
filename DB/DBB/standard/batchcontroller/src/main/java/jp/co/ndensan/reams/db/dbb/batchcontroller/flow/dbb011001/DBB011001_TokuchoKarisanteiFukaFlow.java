@@ -5,16 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb011001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.CreateFukaJohoJuneProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.CreateFukaJohoKeizokuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.ReflectShikakuToSaishinAprilProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.SelectKarisateiTaishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.SelectShikakuFuseigoDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.SpoolTokuchoKarisanteiKekkaIchiranProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.ShuturyokuTyoutuke;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,6 +43,7 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("FukaJohoTorokuFlow");
     private static final RString TOKUCHOKARISANTEITSUSHISHOHAKKO_FLOWID = new RString("TokuchoKarisanteiTsuchishoHakkoFlow");
+    private static final ReportId 特別徴収仮算定結果一覧表_帳票分類ID = new ReportId("DBB200002_TokubetsuChoshuKarisanteiKekkaIchiran");
 
     private YMDHMS システム日時;
 
@@ -49,13 +53,22 @@ public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKa
         executeStep(特徴仮算定対象抽出);
         executeStep(資格不整合データ抽出);
         executeStep(資格等最新化_４月開始);
-//        executeStep(賦課の情報登録フロー_４月開始);
+        // 呼び出しのbatchに問題がある
+        // executeStep(賦課の情報登録フロー_４月開始);
         executeStep(賦課計算_継続);
-//        executeStep(賦課の情報登録フロー_継続);
+        // 呼び出しのbatchに問題がある
+        // executeStep(賦課の情報登録フロー_継続);
         executeStep(賦課情報の計算登録_6月開始);
-//        executeStep(賦課の情報登録フロー_6月開始);
+        // 呼び出しのbatchに問題がある
+        // executeStep(賦課の情報登録フロー_6月開始);
         executeStep(計算後情報作成);
-        executeStep(特徴仮算定結果一覧表出力);
+        List<ShuturyokuTyoutuke> 出力帳票一覧List = getParameter().get出力帳票一覧();
+        for (ShuturyokuTyoutuke 出力帳票一覧 : 出力帳票一覧List) {
+            if (特別徴収仮算定結果一覧表_帳票分類ID.equals(出力帳票一覧.get帳票分類ID())) {
+                executeStep(特徴仮算定結果一覧表出力);
+                break;
+            }
+        }
         if (getParameter().isFlag()) {
             executeStep(仮算定異動通知書一括発行);
         }
