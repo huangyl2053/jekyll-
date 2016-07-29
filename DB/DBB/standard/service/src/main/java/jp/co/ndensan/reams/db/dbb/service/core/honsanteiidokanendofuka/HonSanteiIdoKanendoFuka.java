@@ -1296,8 +1296,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     public FukaJohoToChoshuHoho caluculateChotei(List<FukaJoho> 賦課情報リスト,
             ChoshuHoho 徴収方法情報, FlexibleYear 調定年度, YMDHMS 調定日時) {
         // TODO ビジネス設計_DBBBZ00002_過年度更正計算 を実装完了しない。使用しないのパラメータ。
-        調定年度 = new FlexibleYear(調定日時.getYear().toString());
-        if (調定年度 == null) {
+        if (調定年度 == null && 調定日時 == null) {
             throw new ApplicationException(UrErrorMessages.入力値が不正.getMessage());
         }
         KoseigoFukaResult 調定計算Result = new KoseigoFukaResult(賦課情報リスト, 徴収方法情報);
@@ -1389,13 +1388,20 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
     public void spoolKanendoIdoKekkaIchiran(KanendoFukaParameter parameter) {
         FlexibleYear 調定年度 = parameter.get調定年度();
         YMDHMS 調定日時 = parameter.getシステム日時();
-        Long 出力順ID = parameter.get出力順ID();
-        YMDHMS 抽出開始日時 = new YMDHMS(parameter.get抽出開始日時().toString());
-        YMDHMS 抽出終了日時 = new YMDHMS(parameter.get抽出終了日時().toString());
-        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, 出力順ID);
+        RString 出力順ID = parameter.get出力順ID();
+        YMDHMS 抽出開始日時 = parameter.get抽出開始日時() == null ? null : new YMDHMS(parameter.get抽出開始日時());
+        YMDHMS 抽出終了日時 = parameter.get抽出終了日時() == null ? null : new YMDHMS(parameter.get抽出終了日時());
+        RString 出力順;
+        IOutputOrder outputOrder;
+        if (出力順ID != null && !出力順ID.isEmpty()) {
+            outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, Long.valueOf(出力順ID.toString()));
+            出力順 = MyBatisOrderByClauseCreator.create(DBB200009ShutsuryokujunEnum.class, outputOrder);
+        } else {
+            出力順 = null;
+            outputOrder = null;
+        }
         IHonSanteiIdoKanendoFukaMapper mapper = mapperProvider.create(IHonSanteiIdoKanendoFukaMapper.class);
-
-        RString 出力順 = MyBatisOrderByClauseCreator.create(DBB200009ShutsuryokujunEnum.class, outputOrder);
         KozaSearchKeyBuilder kozabuilder = new KozaSearchKeyBuilder();
         kozabuilder.set業務コード(GyomuCode.DB介護保険);
         kozabuilder.set用途区分(new KozaYotoKubunCodeValue(CODE_0));
@@ -1443,7 +1449,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             }
         }
         SourceDataCollection sourceDataCollection
-                = new KanendoIdouKekkaIchiranPrintService().printTaitsu(更正前後EntityList, new RString(出力順ID), 調定日時);
+                = new KanendoIdouKekkaIchiranPrintService().printTaitsu(更正前後EntityList, 出力順ID, 調定日時);
         RString 出力ページ数 = sourceDataCollection == null ? 定値_ゼロ : new RString(sourceDataCollection.iterator().next().getPageCount());
         load出力条件リスト(調定年度, 抽出開始日時, 抽出終了日時, outputOrder, 帳票名, 出力ページ数);
     }
@@ -1456,12 +1462,14 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
                 .concat(調定年度.wareki().toDateString()));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(定値_抽出開始日時).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+        builder.append(抽出開始日時 == null ? (FORMAT_LEFT).concat(定値_抽出開始日時).concat(FORMAT_RIGHT)
+                : (FORMAT_LEFT).concat(定値_抽出開始日時).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(抽出開始日時.getDate().wareki().toDateString()).concat(RString.FULL_SPACE)
                 .concat(抽出開始日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append((FORMAT_LEFT).concat(定値_抽出終了日時).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
+        builder.append(抽出終了日時 == null ? (FORMAT_LEFT).concat(定値_抽出終了日時).concat(FORMAT_RIGHT)
+                : (FORMAT_LEFT).concat(定値_抽出終了日時).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
                 .concat(抽出終了日時.getDate().wareki().toDateString()).concat(RString.FULL_SPACE)
                 .concat(抽出終了日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         出力条件リスト.add(builder.toRString());

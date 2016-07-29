@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KanendoFukaParameter implements IMyBatisParameter {
 
     private FlexibleYear 調定年度;
-    private Long 出力順ID;
+    private RString 出力順ID;
     private RDateTime 抽出開始日時;
     private RDateTime 抽出終了日時;
     private YMDHMS システム日時;
