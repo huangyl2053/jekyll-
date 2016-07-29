@@ -173,8 +173,10 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakkoHojo {
             result.set納組情報(entity.get納組());
             IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先());
             result.set宛先情報(宛先);
-            IAtesaki 宛先代納 = AtesakiFactory.createInstance(entity.get宛先代納());
-            result.set宛先代納(宛先代納);
+            if (entity.get宛先代納() != null) {
+                IAtesaki 宛先代納 = AtesakiFactory.createInstance(entity.get宛先代納());
+                result.set宛先代納(宛先代納);
+            }
             if (entity.get口座() != null) {
                 result.set口座情報(new Koza(entity.get口座()));
             }
