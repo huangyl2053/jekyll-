@@ -30,9 +30,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 public class CalculateFukaEntity implements IDbAccessable {
 
     private DbT1001HihokenshaDaichoEntity 資格の情報;
-    private FlexibleYear fukaNendo;
-    private TsuchishoNo tsuchishoNo;
-    private FlexibleDate fukaKijitsu;
+    private FlexibleYear 賦課年度;
+    private TsuchishoNo 通知書番号;
+    private FlexibleDate 賦課期日;
     private List<FukaJohoRelateEntity> 賦課の情報;
     private TsukibetsuRankuTmpEntity 月別ランク;
     private List<SetaiShotokuEntity> 世帯員所得情報;

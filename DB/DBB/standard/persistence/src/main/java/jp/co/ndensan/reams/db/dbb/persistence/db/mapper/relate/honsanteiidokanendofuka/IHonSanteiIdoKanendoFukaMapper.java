@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KanendoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofuka.KeisangojohoToKozaParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiHaakuEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.CalculateFukaTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honsanteiidokanendofuka.HonsanteiShotokuTmpEntity;
@@ -136,6 +136,18 @@ public interface IHonSanteiIdoKanendoFukaMapper {
      * @param entity テーブルデータ
      */
     void insertCalculateFukaTmp(CalculateFukaTmpEntity entity);
+
+    /**
+     * 賦課の情報一時テーブルを作成します。
+     */
+    void createDbT2002FukaJohoTemp();
+
+    /**
+     * 賦課の情報一時テーブルを登録します。
+     *
+     * @param entity テーブルデータ
+     */
+    void insertDbT2002FukaJohoTemp(DbT2002FukaJohoTempTableEntity entity);
 
     /**
      * 被保険者本人異動を取得します。
@@ -279,61 +291,6 @@ public interface IHonSanteiIdoKanendoFukaMapper {
      */
     List<CalculateFukaEntity> select賦課計算(CalculateFukaParameter param);
 
-    //----------------------------------------------------------------------------------------------
-    /**
-     *
-     * @return ShotokuIdoTmpEntity
-     */
-    List<ShotokuIdoTmpEntity> selectJukiChushutsuTmp();
-
-    /**
-     *
-     * @return ShotokuIdoTmpEntity
-     */
-    List<ShotokuIdoTmpEntity> selectJukiIdoTmp();
-
-    /**
-     *
-     * @return ShotokuIdoTmpEntity
-     */
-    List<ShotokuIdoTmpEntity> selectShotokuChushutsuTmp();
-
-    /**
-     *
-     * @return ShotokuIdoTmpEntity
-     */
-    List<ShotokuIdoTmpEntity> selectShotokuIdoTmp();
-
-    /**
-     *
-     * @return IdoTmpEntity
-     */
-    List<IdoTmpEntity> selectIdoTmp();
-
-    /**
-     *
-     * @return TsukibetsuRankuTmpEntity
-     */
-    List<TsukibetsuRankuTmpEntity> selectTsukibetsuRankuTmp();
-
-    /**
-     *
-     * @return HonsanteiShotokuTmpEntity
-     */
-    List<HonsanteiShotokuTmpEntity> selectKanendoHonSanteiChushutsuTmp();
-
-    /**
-     *
-     * @return SetaiHaakuEntity
-     */
-    List<SetaiHaakuEntity> selectTmpSetaiHaaku();
-
-    /**
-     *
-     * @return CalculateFukaTmpEntity
-     */
-    List<CalculateFukaTmpEntity> selectCalculateFukaTmp();
-
     /**
      * 計算後情報と宛名識別対象PSM、口座情報取得PSMを取得する。
      *
@@ -341,10 +298,4 @@ public interface IHonSanteiIdoKanendoFukaMapper {
      * @return 計算後情報と宛名識別対象PSM、口座情報取得PSM
      */
     List<KeisangojohoToKozaEntity> select計算後情報と宛名と口座(KeisangojohoToKozaParameter param);
-
-    /**
-     *
-     * @return sd
-     */
-    List<SetaiShotokuEntity> select世帯員所得情報();
 }
