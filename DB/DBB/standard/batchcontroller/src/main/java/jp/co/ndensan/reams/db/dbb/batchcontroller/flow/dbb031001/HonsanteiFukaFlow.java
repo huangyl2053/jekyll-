@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.Honsanteifuk
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -60,6 +61,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
         processParameter = new HonsanteiFukaProcessParameter();
         processParameter.setバッチ起動時処理日時(システム日時);
         processParameter.set賦課年度(parameter.get賦課年度());
+        processParameter.set調定年度(parameter.get調定年度());
         executeStep(本算定特徴中止者の追加);
         processParameter.set資格基準日(parameter.get資格基準日());
         executeStep(計算対象者抽出_通知書番号発番);
@@ -126,7 +128,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
     @Step(世帯員把握フロー)
     protected IBatchFlowCommand setaiinBatchFlow() {
         return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
-                new SetaiShotokuKazeiHanteiBatchParameter(RString.EMPTY)).define();
+                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**
