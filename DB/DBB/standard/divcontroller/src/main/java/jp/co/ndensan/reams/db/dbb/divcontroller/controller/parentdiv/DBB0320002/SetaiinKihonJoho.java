@@ -63,4 +63,25 @@ public class SetaiinKihonJoho {
     private ResponseData<SetaiinKihonJohoDiv> createResponseData(SetaiinKihonJohoDiv div) {
         return ResponseData.of(div).respond();
     }
+
+    /**
+     * @param div {@link SetaiinKihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<SetaiinKihonJohoDiv> onClick_btnZenkairesultHyoji(SetaiinKihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<SetaiinKihonJohoDiv> clearViewStateKeys(SetaiinKihonJohoDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link SetaiinKihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<SetaiinKihonJohoDiv> onClick_btnResearch(SetaiinKihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
 }
