@@ -72,7 +72,7 @@
         "DbT5101NinteiShinseiJoho"."hihokenshaName",                                                   
         "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD",                                                 
         "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode",                                  
-        "DbT5051KoseiShichosonMaster"."shichosonMeisho"  AS  hokensya,                                    
+        "DbT7051KoseiShichosonMaster"."shichosonMeisho"  AS  hokensya,                                    
         "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD",                                         
         "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD",                                             
         "DbT5206GaikyoTokki"."gaikyoTokkiTextImageKubun",                                        
@@ -119,14 +119,14 @@
              rgdb."DbT5201NinteichosaIraiJoho" AS "DbT5201NinteichosaIraiJoho"
         INNER  JOIN              rgdb."DbT5101NinteiShinseiJoho" AS  "DbT5101NinteiShinseiJoho"
             ON      "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                         
-        INNER  JOIN              rgdb."DbT5051KoseiShichosonMaster"  AS  "DbT5051KoseiShichosonMaster"                      
-            ON      "DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"                       
-        INNER  JOIN              rgdb."DbT4910NinteichosaItakusakiJoho" AS  "DbT4910NinteichosaItakusakiJoho"                   
-            ON      "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"           
-                AND     "DbT4910NinteichosaItakusakiJoho"."shichosonCode" = "DbT5051KoseiShichosonMaster"."shichosonCode"                             
-        INNER  JOIN              rgdb."DbT4913ChosainJoho" AS  "DbT4913ChosainJoho"
-            ON      "DbT4913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"           
-                AND     "DbT4913ChosainJoho"."shichosonCode" = "DbT5051KoseiShichosonMaster"."shichosonCode"                             
+        INNER  JOIN              rgdb."DbT7051KoseiShichosonMaster"  AS  "DbT7051KoseiShichosonMaster"                      
+            ON      "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"                       
+        INNER  JOIN              rgdb."DbT5910NinteichosaItakusakiJoho" AS  "DbT5910NinteichosaItakusakiJoho"                   
+            ON      "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"           
+                AND     "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                             
+        INNER  JOIN              rgdb."DbT5913ChosainJoho" AS  "DbT5913ChosainJoho"
+            ON      "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"           
+                AND     "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                             
         INNER  JOIN              rgdb."DbT5105NinteiKanryoJoho"  AS  "DbT5105NinteiKanryoJoho"                          
             ON      "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                         
         LEFT  JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS  "DbT5202NinteichosahyoGaikyoChosa"                              
@@ -135,7 +135,7 @@
                 AND  "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun" =   #{イメージ区分}                                         
                 AND  "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" = "DbT5202NinteichosahyoGaikyoChosa"."koroshoIfShikibetsuCode"            
         LEFT  JOIN  rgdb."DbT5206GaikyoTokki"  AS  "DbT5206GaikyoTokki"                                            
-            ON  "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+            ON  "DbT5206GaikyoTokki"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
                 AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5206GaikyoTokki"."ninteichosaRirekiNo"                    
                 AND "DbT5206GaikyoTokki"."gaikyoTokkiTextImageKubun" = "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun"   
         LEFT  JOIN  rgdb."DbT5207NinteichosahyoServiceJokyo"  AS  "DbT5207NinteichosahyoServiceJokyo"                             
@@ -183,7 +183,7 @@
         AND    "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE                                                   
         <if test = "認定申請年月日開始From">
            AND                                                                 
-           "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD"  <![CDATA[>=]]>  #{認定申請年月日開始}
+           #{認定申請年月日開始} <![CDATA[<=]]> "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD"
         </if>  
         <if test = "認定申請年月日開始To">
            AND                                                                 
@@ -191,7 +191,7 @@
         </if>  
         <if test = "依頼日開始From">
            AND                                                                 
-           "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"  <![CDATA[>=]]>  #{依頼日開始}
+           #{依頼日開始} <![CDATA[<=]]> "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"
         </if>  
         <if test = "依頼日開始To">
            AND                                                                 
