@@ -80,7 +80,7 @@ public class ShujiiHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJun
     private RString 市町村名;
     private RString 消費税率;
     private int index_tmp = 1;
-    private static final int INDEX_25 = 1;
+    private static final int INDEX_25 = 25;
 
     @Override
     protected void beforeExecute() {
