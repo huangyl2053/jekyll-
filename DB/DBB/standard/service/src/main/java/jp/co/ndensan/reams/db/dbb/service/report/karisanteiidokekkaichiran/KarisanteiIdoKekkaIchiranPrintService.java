@@ -84,7 +84,7 @@ public class KarisanteiIdoKekkaIchiranPrintService {
         }
 
         try (ReportManager reportManager = new ReportManager()) {
-            print(更正前後EntityList, 調定日時, 賦課年度, association, 住所編集リスト, 出力順項目リスト, 改頁項目リスト, reportManager);
+            print(更正前後EntityList, 調定日時, 賦課年度, association, 住所編集リスト, 出力順項目リスト, 改頁項目リスト, reportManager, 並び順);
             collection = reportManager.publish();
         }
         return collection;
@@ -101,11 +101,12 @@ public class KarisanteiIdoKekkaIchiranPrintService {
      * @param 出力順項目リスト List<RString>
      * @param 改頁項目リスト List<RString>
      * @param reportManager ReportManager
+     * @param 並び順 IOutputOrder
      */
     public void print(List<KeisanjohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, List<RString> 住所編集リスト,
-            List<RString> 出力順項目リスト, List<RString> 改頁項目リスト, ReportManager reportManager) {
-        KarisanteiIdoKekkaIchiranProperty property = new KarisanteiIdoKekkaIchiranProperty();
+            List<RString> 出力順項目リスト, List<RString> 改頁項目リスト, ReportManager reportManager, IOutputOrder 並び順) {
+        KarisanteiIdoKekkaIchiranProperty property = new KarisanteiIdoKekkaIchiranProperty(並び順);
         try (ReportAssembler<KarisanteiIdoKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KarisanteiIdoKekkaIchiranSource> reportSourceWriter = new ReportSourceWriter(assembler);
             new KarisanteiIdoKekkaIchiranReport(更正前後EntityList, 調定日時, 賦課年度, association,

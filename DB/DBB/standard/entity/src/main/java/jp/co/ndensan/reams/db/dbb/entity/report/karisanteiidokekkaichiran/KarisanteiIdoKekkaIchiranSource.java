@@ -134,10 +134,63 @@ public class KarisanteiIdoKekkaIchiranSource implements IReportSource {
     public RString listLower_16;
     @ReportItem(name = "listChoteijiyu4_1", length = 10, order = 61)
     public RString listChoteijiyu4_1;
+
+    /**
+     * KarisanteiIdoKekkaIchiranSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        nendo,
+        hokenshaNo,
+        hokenshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listFuchoki_1,
+        listFuchoki_2,
+        listFuchoki_3,
+        listFuchoki_4,
+        listFuchoki_5,
+        listFuchoki_6,
+        listFuchoki_7,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listChoteijiyu1_1,
+        listChoteiJiyu2_1,
+        listCenter_1,
+        listCenter_2,
+        listCenter_3,
+        listCenter_4,
+        listCenter_5,
+        listCenter_6,
+        listCenter_7,
+        listCenter_8,
+        listCenter_9,
+        listCenter_10,
+        listCenter_11,
+        listCenter_12,
+        listCenter_13,
+        listCenter_14,
+        listCenter_15,
+        listCenter_16,
+        listChoteijiyu3_1
+
+    }
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
 // </editor-fold>
 }
