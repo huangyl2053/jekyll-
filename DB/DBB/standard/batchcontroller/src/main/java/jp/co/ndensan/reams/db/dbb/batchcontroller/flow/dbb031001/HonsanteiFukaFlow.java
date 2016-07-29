@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +47,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
     private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 本算定通知書一括発行BATCH_ID = new RString("HonsanteiTsuchishoIkkatsuHakkoFlow");
+    private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
 
     private HonsanteifukaBatchParameter parameter;
     private HonsanteiFukaProcessParameter processParameter;
@@ -69,9 +71,11 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
         executeStep(世帯員把握フロー);
         executeStep(賦課計算);
         for (HonsanteifukaBatchTyouhyou entity : parameter.get出力帳票一覧()) {
-            processParameter.set出力帳票(entity);
-            executeStep(計算後情報作成);
-            executeStep(本算定結果一覧表出力);
+            if (帳票分類ID.equals(entity.get帳票分類ID())) {
+                processParameter.set出力帳票(entity);
+                executeStep(計算後情報作成);
+                executeStep(本算定結果一覧表出力);
+            }
         }
         executeStep(処理日付管理テーブル更新);
         if (getParameter().is画面移動フラグ()) {

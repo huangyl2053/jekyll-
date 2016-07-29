@@ -53,6 +53,7 @@ public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
     private static final String KEY_一括発行起動フラグ = "一括発行起動フラグ";
     private static final String KEY_随時フラグ = "随時フラグ";
     private static final String KEY_算定期 = "算定期";
+    private static final String KEY_画面移動フラグ = "画面移動フラグ";
 
     @BatchParameter(key = KEY_CHOTEINENDO, name = "調定年度")
     private FlexibleYear choteiNendo;
@@ -108,4 +109,6 @@ public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
     private boolean 随時フラグ;
     @BatchParameter(key = KEY_算定期, name = "算定期")
     private RString 算定期;
+    @BatchParameter(key = KEY_画面移動フラグ, name = "画面移動フラグ")
+    private boolean 画面移動フラグ;
 }
