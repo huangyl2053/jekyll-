@@ -403,9 +403,9 @@ public class KanendoFukaHandler {
         parameter.set納入_対象賦課年度(納入list);
         parameter.set納入_発行日(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getTxtNotsuHakkoYMD().getValue());
-        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedValue() != null) {
+        if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().getSelectedKey() != null) {
             parameter.set納入_出力期(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
-                    getDdlNotsuShutsuryokuKi().getSelectedValue());
+                    getDdlNotsuShutsuryokuKi().getSelectedKey());
         }
         if (div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getChkNotsuTaishosha().isAllSelected()) {
             parameter.set納入_対象者(TWO_RS);
@@ -420,9 +420,9 @@ public class KanendoFukaHandler {
                 getRadNotsuKozaShutsuryokuYoshiki().getSelectedKey());
         if (する.equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getRadNotsuSeikatsuHogo().getSelectedValue())) {
-            parameter.set納入_生活保護対象者(ZERO_RS);
-        } else {
             parameter.set納入_生活保護対象者(ONE_RS);
+        } else {
+            parameter.set納入_生活保護対象者(ZERO_RS);
         }
         if (する.equals(div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().
                 getRadNotsuYamawake().getSelectedValue())) {
@@ -444,6 +444,12 @@ public class KanendoFukaHandler {
         } else {
             parameter.set一括発行起動フラグ(false);
         }
+        FuchoKiUtil util = new FuchoKiUtil();
+        KitsukiList 期月リスト = util.get期月リスト();
+        Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue((div.getKanendoShoriNaiyo().
+                getDdlShoritsuki().getSelectedKey())));
+        RString 算定期 = 月の期.get期();
+        parameter.set算定期(算定期);
         return parameter;
     }
 
