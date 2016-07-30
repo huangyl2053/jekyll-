@@ -206,6 +206,10 @@
     </sql>
     
     <resultMap id="ResultMap_KogakuKyufuKetteiTorokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufukettei.KogakuKyufuKetteiTorokuEntity" autoMapping="true">
+        <id column="dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" />
+        <id column="dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM" />
+        <id column="dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" />
+        <id column="dbT3058KogakuShikyuShinsaKettei_rirekiNo" />
         <association property="shinsaKettei" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
         <association property="hanteiKekka" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
         <association property="ketteiTemp" resultMap="ResultMap_DbWT3058KogakuShikyuShinsaKetteiTempEntity"/>

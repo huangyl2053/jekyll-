@@ -195,6 +195,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             mapList.put(shokanMeisaiResult.get明細合計区分(), shokanMeisaiResult);
         }
         for (dgTaishoshaIchiran_Row row : rowList) {
+            if (row.getData0() == null || row.getData0().isEmpty()) {
+                continue;
+            }
             if (追加.equals(row.getData0())) {
                 if (row.getData10().equals(ONE)) {
                     int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
@@ -240,6 +243,9 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
         entity = entity.createBuilderForEdit().setサービス費用合計額(row.getData4().getValue()).build();
         entity = entity.createBuilderForEdit().set利用者負担額(row.getData5().getValue()).build();
         entity = entity.createBuilderForEdit().set高額給付根拠(row.getData9()).build();
+        //TODO
+        entity = entity.createBuilderForEdit().set対象者受取年月(
+                new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toString())).build();
         if (削除.equals(row.getData0())) {
             entity = entity.deleted();
         } else if (追加.equals(row.getData0())) {

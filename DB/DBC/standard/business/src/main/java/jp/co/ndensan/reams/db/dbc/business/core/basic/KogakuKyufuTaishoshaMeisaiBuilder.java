@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -134,6 +134,18 @@ public class KogakuKyufuTaishoshaMeisaiBuilder {
     public KogakuKyufuTaishoshaMeisaiBuilder set高額給付根拠(RString 高額給付根拠) {
         requireNonNull(高額給付根拠, UrSystemErrorMessages.値がnull.getReplacedMessage("高額給付根拠"));
         entity.setKogakuKyufuKonkyo(高額給付根拠);
+        return this;
+    }
+
+    /**
+     * 高額給付根拠を設定します。
+     *
+     * @param 対象者受取年月 FlexibleYearMonth
+     * @return {@link KogakuKyufuTaishoshaMeisaiBuilder}
+     */
+    public KogakuKyufuTaishoshaMeisaiBuilder set対象者受取年月(FlexibleYearMonth 対象者受取年月) {
+        requireNonNull(対象者受取年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象者受取年月"));
+        entity.setTaishoshaUketoriYM(対象者受取年月);
         return this;
     }
 
