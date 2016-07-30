@@ -74,6 +74,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
         }
         executeStep(結果一覧表出力);
         executeStep(処理日付管理テーブル登録);
+        executeStep(本算定通知書一括発行_過年度);
     }
 
     /**
