@@ -16,10 +16,12 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoIraikinP
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoKaishishaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TsuchishoNoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -49,11 +51,13 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     private static final RString 本算定異動_現年度_通知書一括発行BATCH_ID = new RString("HonsanteiIdoGennendoTsuchisyoIkatsuHakoFlow");
     private static final String 賦課計算 = "calculateFukaTsujoIdo";
     private static final String 特徴依頼金計算_４月開始 = "calculateTokuchoIraikin4gatsuKaishi";
+    private static final String 賦課の情報登録フロー = "choteiToroku";
+    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
     private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 本算定異動_現年度_結果一覧表 = "spoolHonsanteiIdoKekkaIchiranData";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
-    private static final ReportId 帳票分類ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
+    private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
 
     private CreateHonsanteiIdoBatchParameter parameter;
     private GennendoIdoFukaProcessParameter processParameter;
@@ -81,8 +85,13 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
         executeStep(通知書番号発番);
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
-        executeStep(賦課計算);
-        executeStep(特徴依頼金計算_４月開始);
+        if (Tsuki._10月.getコード().equals(processParameter.get処理対象())
+                || Tsuki._12月.getコード().equals(parameter.get処理対象())) {
+            executeStep(賦課計算);
+        } else if (Tsuki._2月.getコード().equals(parameter.get処理対象())) {
+            executeStep(特徴依頼金計算_４月開始);
+        }
+        executeStep(賦課の情報登録フロー);
         for (ChohyoResult entity : parameter.get出力帳票List()) {
             if (帳票分類ID.equals(entity.get帳票分類ID())) {
                 processParameter.set出力帳票一覧(entity);
@@ -190,6 +199,17 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     }
 
     /**
+     * 賦課の情報登録フローを呼び出す。
+     *
+     * @return バッチコマンド
+     */
+    @Step(賦課の情報登録フロー)
+    protected IBatchFlowCommand choteiToroku() {
+        return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
+                new FukaJohoTorokuBatchParameter(true)).define();
+    }
+
+    /**
      * 計算後情報作成バッチを呼び出す。
      *
      * @return バッチコマンド
@@ -208,7 +228,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     }
 
     /**
-     * 特徴依頼金計算 (４月開始)を行います。
+     * 本算定異動（現年度）結果一覧表出力を行います。
      *
      * @return バッチコマンド
      */

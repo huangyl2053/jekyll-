@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.gennendohonsanteiidou.GenNendoHonsanteiIdou;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -40,11 +41,12 @@ public class SystemTimeUpdateProcess extends SimpleBatchProcessBase {
         FlexibleYear 年度 = processParameter.get調定年度();
         YMDHMS システム日時 = new YMDHMS(processParameter.get調定日時());
         business.insert処理日付管理(processParameter, システム日時, 処理枝番, 年度内連番);
-        年度内連番 = 枝番0004;
-        business.update処理日付管理(処理名, 処理枝番, 年度, 年度内連番, システム日時);
-        年度内連番 = 枝番0005;
-        business.update処理日付管理(処理名, 処理枝番, 年度, 年度内連番, システム日時);
-        年度内連番 = 枝番0006;
-        business.update処理日付管理(処理名, 処理枝番, 年度, 年度内連番, システム日時);
+        if (Tsuki._10月.getコード().equals(processParameter.get処理対象())) {
+            business.update処理日付管理(処理名, 処理枝番, 年度, 枝番0004, システム日時);
+        } else if (Tsuki._12月.getコード().equals(processParameter.get処理対象())) {
+            business.update処理日付管理(処理名, 処理枝番, 年度, 枝番0005, システム日時);
+        } else if (Tsuki._2月.getコード().equals(processParameter.get処理対象())) {
+            business.update処理日付管理(処理名, 処理枝番, 年度, 枝番0006, システム日時);
+        }
     }
 }
