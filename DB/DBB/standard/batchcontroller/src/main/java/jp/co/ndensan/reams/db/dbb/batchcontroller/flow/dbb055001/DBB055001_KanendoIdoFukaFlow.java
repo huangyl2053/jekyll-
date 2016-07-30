@@ -51,7 +51,7 @@ public class DBB055001_KanendoIdoFukaFlow extends BatchFlowBase<HonSanteiIdoFuka
     private static final int 定値_イチ = 1;
     private static final int 定値_二 = 2;
     private static final RString 二_定値 = new RString("2");
-    private static final RString KANENDOIDOTSUCHISHO_FLOW = new RString("DBB055003_KanendoIdoTsuchishoHakkoFlow");
+    private static final RString KANENDOIDOTSUCHISHO_FLOW = new RString("DBB055003_KanendoIdoTsuchishoHakko");
     private static final RString SETAISHOTOKUKAZEIHANTEI_FLOW = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
 
