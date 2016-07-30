@@ -143,7 +143,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
      * @param association Association
      */
     ShotokuJohoChushutsuRenkeiBatch(MapperProvider mapperProvider, DbT2008ShotokuKanriDac 介護所得管理dac,
-            DbT7022ShoriDateKanriDac 処理日付管理dac, Association association) {
+            DbT7022ShoriDateKanriDac 処理日付管理dac) {
         this.mapperProvider = mapperProvider;
         this.介護所得管理dac = 介護所得管理dac;
         this.処理日付管理dac = 処理日付管理dac;
@@ -261,6 +261,9 @@ public class ShotokuJohoChushutsuRenkeiBatch {
         RString 出力順 = MyBatisOrderByClauseCreator.create(DBB200008ShutsuryokujunEnum.class, 並び順);
         IShutokuJohoChushutsuRenkeiMapper mapper = this.mapperProvider.create(IShutokuJohoChushutsuRenkeiMapper.class);
         List<ShotokuJohoIchilan> ichilanList = mapper.get所得情報一覧(出力順);
+        if (ichilanList == null) {
+            ichilanList = new ArrayList<>();
+        }
         List<KaigoHokenShotokuJohoIchilanEucCsvEntity> csvList = new ArrayList<>();
         for (ShotokuJohoIchilan ichilanEntity : ichilanList) {
             KaigoHokenShotokuJohoIchilanEucCsvEntity csvEntity = new KaigoHokenShotokuJohoIchilanEucCsvEntity();
@@ -311,7 +314,7 @@ public class ShotokuJohoChushutsuRenkeiBatch {
             sourceDataCollection = reportManager.publish();
         }
         RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
-        if (ichilanList != null) {
+        if (!ichilanList.isEmpty()) {
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 定値_ゼロ, CSV出力有無_なし, CSVファイル名, 帳票名);
         } else {
             loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, CSVファイル名_介護保険所得情報一覧表, 帳票名);
