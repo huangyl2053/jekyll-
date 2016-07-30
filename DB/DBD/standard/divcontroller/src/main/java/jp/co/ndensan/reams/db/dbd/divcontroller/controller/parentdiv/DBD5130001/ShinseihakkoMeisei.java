@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.NinteishinseihakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.ShinseihakkoMeiseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001.ShinseihakkoMeiseiHandler;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd501001.YokaigoNinteiShinseishoService;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd501002.YokaigoNinteikbnHenkoShinseishoService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd501001.YokaigoNinteiShinseishoPrintService;
+import jp.co.ndensan.reams.db.dbd.service.report.dbd501002.YokaigoNinteikbnHenkoShinseishoPrintService;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
@@ -79,11 +79,10 @@ public class ShinseihakkoMeisei {
         int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         try (ReportManager reportManager = new ReportManager()) {
             if (radShinseiKubunSelectIndex == 2) {
-                YokaigoNinteikbnHenkoShinseishoService shinseishoPrintService
-                        = new YokaigoNinteikbnHenkoShinseishoService();
+                YokaigoNinteiShinseishoPrintService shinseishoPrintService = new YokaigoNinteiShinseishoPrintService();
                 shinseishoPrintService.print(shinseiShoEntity, reportManager);
             } else {
-                YokaigoNinteiShinseishoService teiShinseishoPrintService = new YokaigoNinteiShinseishoService();
+                YokaigoNinteikbnHenkoShinseishoPrintService teiShinseishoPrintService = new YokaigoNinteikbnHenkoShinseishoPrintService();
                 teiShinseishoPrintService.print(shinseiShoEntity, reportManager);
             }
             HashMap<Code, RString> hashMap = new HashMap();
