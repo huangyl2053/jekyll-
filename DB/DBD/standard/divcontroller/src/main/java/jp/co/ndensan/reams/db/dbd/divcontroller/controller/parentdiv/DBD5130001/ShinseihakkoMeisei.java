@@ -59,10 +59,8 @@ public class ShinseihakkoMeisei {
     public ResponseData<ShinseihakkoMeiseiDiv> check_RadShinseiKubun(ShinseihakkoMeiseiDiv div, NinteishinseihakkoDiv ninteishinseihakkoDiv) {
         int selectIndex = div.getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         RString yokaigodo = div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue();
-        if (selectIndex != 0) {
-            if (yokaigodo == null || yokaigodo.isEmpty()) {
-                throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白のため", "更新申請の選択ができません"));
-            }
+        if (selectIndex != 0 && (yokaigodo == null || yokaigodo.isEmpty())) {
+            throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace("要介護度が空白のため", "更新申請の選択ができません"));
         }
         return ResponseData.of(div).respond();
     }
@@ -81,12 +79,12 @@ public class ShinseihakkoMeisei {
         int radShinseiKubunSelectIndex = shinseihakkoMeiseiDiv.getPrintSelect().getRadShinseiKubun().getSelectedIndex();
         try (ReportManager reportManager = new ReportManager()) {
             if (radShinseiKubunSelectIndex == 2) {
-                YokaigoNinteikbnHenkoShinseishoService yokaigoNinteikbnHenkoShinseishoPrintService
+                YokaigoNinteikbnHenkoShinseishoService shinseishoPrintService
                         = new YokaigoNinteikbnHenkoShinseishoService();
-                yokaigoNinteikbnHenkoShinseishoPrintService.print(shinseiShoEntity, reportManager);
+                shinseishoPrintService.print(shinseiShoEntity, reportManager);
             } else {
-                YokaigoNinteiShinseishoService yokaigoNinteiShinseishoPrintService = new YokaigoNinteiShinseishoService();
-                yokaigoNinteiShinseishoPrintService.print(shinseiShoEntity, reportManager);
+                YokaigoNinteiShinseishoService teiShinseishoPrintService = new YokaigoNinteiShinseishoService();
+                teiShinseishoPrintService.print(shinseiShoEntity, reportManager);
             }
             HashMap<Code, RString> hashMap = new HashMap();
             hashMap.put(new Code(GyomuKoyuJoho.被保番号.getコード()), shinseiShoEntity.get被保険者番号());
