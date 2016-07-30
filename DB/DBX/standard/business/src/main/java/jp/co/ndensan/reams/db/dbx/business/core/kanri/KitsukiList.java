@@ -48,16 +48,16 @@ public class KitsukiList {
             @Override
             public int compare(Kitsuki arg0, Kitsuki arg1) {
                 if (arg0.get期AsInt() < arg1.get期AsInt()) {
-                    return -1;
-                } else if (arg1.get期AsInt() < arg0.get期AsInt()) {
                     return 1;
+                } else if (arg1.get期AsInt() < arg0.get期AsInt()) {
+                    return -1;
                 }
                 int 月1 = 月_MAP.get(arg0.get月());
                 int 月2 = 月_MAP.get(arg1.get月());
                 if (月1 < 月2) {
-                    return -1;
-                } else if (月2 < 月1) {
                     return 1;
+                } else if (月2 < 月1) {
+                    return -1;
                 }
                 return 0;
             }
@@ -134,6 +134,7 @@ public class KitsukiList {
         for (Kitsuki kitsuki : kitsukiのList) {
             if (FuchokiJohoTsukiShoriKubun.本算定異動.equals(kitsuki.get月処理区分())) {
                 最大の期月 = kitsuki;
+                break;
             }
         }
         return 最大の期月;
