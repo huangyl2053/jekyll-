@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5130001;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5130001.NinteishinseihakkoDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -39,12 +37,12 @@ public class NinteishinseihakkoHandler {
      * 画面初期化
      */
     public void initialize() {
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        //ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         // TODO
         //IKaigoNinteiAtenaInfoDivの共通方法に問題があります、QAを提出しました、KaigoDonyuKeitaiとShoriTypeを固定に設定
-        RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().getKey();
+        // RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().getKey();
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(識別コード);
-        div.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
+        div.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(コード);
         div.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         div.getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 識別コード, HDN_SETAI_KODO, 被保険者番号);
