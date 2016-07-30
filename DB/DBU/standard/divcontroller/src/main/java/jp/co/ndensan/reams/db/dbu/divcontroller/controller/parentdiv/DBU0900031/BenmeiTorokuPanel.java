@@ -128,16 +128,6 @@ public class BenmeiTorokuPanel {
         return ResponseData.of(panelDiv).respond();
     }
 
-    /**
-     * 「完了する」ボタンの押下を処理です。
-     *
-     * @param panelDiv ShikakukihonPanelDiv
-     * @return ResponseData<BenmeiTorokuPanelDiv>
-     */
-    public ResponseData<BenmeiTorokuPanelDiv> onClick_btnComplete(BenmeiTorokuPanelDiv panelDiv) {
-        return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.処理完了).respond();
-    }
-
     private BenmeiTorokuMeisaiJoho get弁明登録明細情報の取得(
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,

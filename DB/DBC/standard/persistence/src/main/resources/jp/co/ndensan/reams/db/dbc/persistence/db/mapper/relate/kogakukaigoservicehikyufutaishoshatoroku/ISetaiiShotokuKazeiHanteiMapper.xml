@@ -506,14 +506,14 @@
     
     <!--update世帯員所得情報事業高額一時老齢福祉区分を更新する-->
     <update id="update世帯員所得情報事業高額一時老齢福祉区分を更新する">
-       UPDATE "TmpSetaiJigyoHaakuNyuryoku"　AS "世帯員所得情報事業高額一時"
+       UPDATE "TmpSetaiJigyoHaakuNyuryoku" AS "世帯員所得情報事業高額一時"
        SET "roreiFukushiKubun" = '1'
         WHERE EXISTS (SELECT 'X'
         FROM 
         rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
         WHERE "世帯員所得情報事業高額一時"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
-        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" 
-        AND "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報事業高額一時"."kijunYMD" 
+        AND "世帯員所得情報事業高額一時"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
     </update>
     
     </mapper>

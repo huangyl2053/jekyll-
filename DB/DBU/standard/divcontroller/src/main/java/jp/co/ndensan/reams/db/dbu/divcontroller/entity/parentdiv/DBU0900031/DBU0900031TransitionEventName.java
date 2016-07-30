@@ -9,14 +9,13 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBU0900031のイベント名定義クラスです</br>
  *
- * @reamsid_L DBU-1080-020 lijia
- * 
+ * @author 自動生成
  */
 public enum DBU0900031TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     弁明登録一覧画面に遷移("弁明登録一覧画面に遷移"),
-    処理完了("処理完了");
+    完了("完了");
 
     private final RString name;
 
