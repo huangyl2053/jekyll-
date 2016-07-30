@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.YoshikiYonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.tblYoshikiyonnosanDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -677,18 +676,17 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
      */
     public void onClick_btnConfirm(InsuranceInformation insuranceInfEntity) {
         LasdecCode 市町村コード = get市町村コード(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
-        TokeiTaishoKubun 保険者区分 = get保険者区分(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey());
         TextBoxDate 報告年度Box = div.getYoshikiYonnosanMeisai().getTxtHokokuYM();
         RDate 報告年度 = 報告年度Box.getValue();
         if (null == 報告年度) {
             throw new ApplicationException(UrErrorMessages.必須.getMessage());
         } else {
-            報告年度の確定処理(報告年度, 市町村コード, 保険者区分, 報告年度Box, insuranceInfEntity);
+            報告年度の確定処理(市町村コード, 報告年度Box, insuranceInfEntity);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, false);
         }
     }
 
-    private void 報告年度の確定処理(RDate 報告年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分, TextBoxDate 報告年度Box,
+    private void 報告年度の確定処理(LasdecCode 市町村コード, TextBoxDate 報告年度Box,
             InsuranceInformation insuranceInfEntity) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
@@ -813,14 +811,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler {
             return LasdecCode.EMPTY;
         } else {
             return new LasdecCode(市町村Key.split("_").get(0));
-        }
-    }
-
-    private TokeiTaishoKubun get保険者区分(RString 市町村Key) {
-        if (市町村Key.split("_").size() < INT3) {
-            return TokeiTaishoKubun.空;
-        } else {
-            return TokeiTaishoKubun.toValue(市町村Key.split("_").get(2));
         }
     }
 
