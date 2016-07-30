@@ -456,7 +456,7 @@
     <!--update世帯員所得情報高額一時生保区分を付加する-->
     <update id="update世帯員所得情報高額一時生保区分を付加する">
        UPDATE "TmpSetaiHaakuNyuryoku" AS "世帯員所得情報高額一時"
-       SET "世帯員所得情報高額一時"."shoboKubun" = '1'
+       SET "shoboKubun" = '1'
         WHERE EXISTS (SELECT 'X'
             FROM rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
             LEFT JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
