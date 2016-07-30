@@ -330,6 +330,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
+            csvListWriter.close();
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
     }
@@ -498,6 +499,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
+            csvListWriter.close();
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
     }
@@ -643,6 +645,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 toBodyList(bodyList);
                 csvListWriter.writeLine(bodyList);
             }
+            csvListWriter.close();
             manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
         }
     }
