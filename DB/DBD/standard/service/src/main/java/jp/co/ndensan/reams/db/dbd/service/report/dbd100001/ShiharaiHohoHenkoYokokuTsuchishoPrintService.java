@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.service.report.dbd100005;
+package jp.co.ndensan.reams.db.dbd.service.report.dbd100001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100005.KyufugakuGengakuTsuchishoProerty;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd100005.KyufugakuGengakuTsuchishoReport;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd100005.KyufugakuGengakuTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoProerty;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReport;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd100001.ShiharaiHohoHenkoYokokuTsuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -32,11 +32,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
- * 給付額減額通知書
+ * 支払方法変更予告通知書
  *
- * @reamsid_L DBD-3640-060 b_liuyang2
+ * @reamsid_L DBD-3640-040 b_liuyang2
  */
-public class KyufugakuGengakuTsuchishoService {
+public class ShiharaiHohoHenkoYokokuTsuchishoPrintService {
 
     /**
      * 帳票を出力
@@ -55,13 +55,13 @@ public class KyufugakuGengakuTsuchishoService {
     public void print(IKojin 個人情報, IAtesaki 宛先, ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体,
             FlexibleDate 発行日, RString 文書番号, List<RString> 通知書定型文リスト, ReportId 帳票分類ID,
             ShiharaiHohoHenko 帳票情報, ReportManager reportManager) {
-        KyufugakuGengakuTsuchishoProerty property = new KyufugakuGengakuTsuchishoProerty();
-        try (ReportAssembler<KyufugakuGengakuTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<KyufugakuGengakuTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+        ShiharaiHohoHenkoYokokuTsuchishoProerty property = new ShiharaiHohoHenkoYokokuTsuchishoProerty();
+        try (ReportAssembler<ShiharaiHohoHenkoYokokuTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<ShiharaiHohoHenkoYokokuTsuchishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource 認証者ソースビルダー = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, 帳票分類ID, 発行日,
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            KyufugakuGengakuTsuchishoReport report = KyufugakuGengakuTsuchishoReport.createReport(個人情報, 宛先,
-                    帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報);
+            ShiharaiHohoHenkoYokokuTsuchishoReport report = ShiharaiHohoHenkoYokokuTsuchishoReport.createReport(個人情報,
+                    宛先, 帳票制御共通, 地方公共団体, 文書番号, 通知書定型文リスト, 認証者ソースビルダー, 帳票情報);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -75,5 +75,4 @@ public class KyufugakuGengakuTsuchishoService {
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
     }
-
 }

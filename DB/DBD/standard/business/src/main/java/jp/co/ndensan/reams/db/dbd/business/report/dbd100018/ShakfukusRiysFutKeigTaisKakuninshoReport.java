@@ -5,10 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100018;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100018.ShakfukusRiysFutKeigTaisKakuninshoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 社会福祉法人等利用者負担軽減対象確認証のReportです。
@@ -17,25 +24,49 @@ import lombok.NonNull;
  */
 public final class ShakfukusRiysFutKeigTaisKakuninshoReport extends Report<ShakfukusRiysFutKeigTaisKakuninshoReportSource> {
 
-    private final ShakfukusRiysFutKeigTaisKakuninshoItem bodyItem;
+    private final ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減;
+    private final IKojin iKojin;
+    private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用List;
+    private final Association 地方公共団体;
+    private final RDate 交付日;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * インスタンスを生成します。
      *
-     * @param bodyItem 社会福祉法人等利用者負担軽減対象確認証
+     * @param 社会福祉法人等利用者負担軽減 社会福祉法人等利用者負担軽減
+     * @param iKojin iKojin
+     * @param 帳票制御共通 帳票制御共通
+     * @param 帳票制御汎用List 帳票制御汎用List
+     * @param 地方公共団体 地方公共団体
+     * @param 交付日 交付日
+     * @param ninshoshaSource NinshoshaSource
      * @return 社会福祉法人等利用者負担軽減対象確認証
      */
-    public static ShakfukusRiysFutKeigTaisKakuninshoReport createReport(@NonNull ShakfukusRiysFutKeigTaisKakuninshoItem bodyItem) {
-        return new ShakfukusRiysFutKeigTaisKakuninshoReport(bodyItem);
+    public static ShakfukusRiysFutKeigTaisKakuninshoReport createReport(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減, IKojin iKojin,
+            ChohyoSeigyoKyotsu 帳票制御共通, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用List, Association 地方公共団体,
+            RDate 交付日, NinshoshaSource ninshoshaSource) {
+        return new ShakfukusRiysFutKeigTaisKakuninshoReport(社会福祉法人等利用者負担軽減, iKojin, 帳票制御共通, 帳票制御汎用List, 地方公共団体,
+                交付日, ninshoshaSource);
     }
 
-    private ShakfukusRiysFutKeigTaisKakuninshoReport(ShakfukusRiysFutKeigTaisKakuninshoItem bodyItem) {
-        this.bodyItem = bodyItem;
+    private ShakfukusRiysFutKeigTaisKakuninshoReport(ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減, IKojin iKojin,
+            ChohyoSeigyoKyotsu 帳票制御共通, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用List, Association 地方公共団体, RDate 交付日,
+            NinshoshaSource ninshoshaSource) {
+        this.社会福祉法人等利用者負担軽減 = 社会福祉法人等利用者負担軽減;
+        this.iKojin = iKojin;
+        this.帳票制御共通 = 帳票制御共通;
+        this.帳票制御汎用List = 帳票制御汎用List;
+        this.地方公共団体 = 地方公共団体;
+        this.交付日 = 交付日;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<ShakfukusRiysFutKeigTaisKakuninshoReportSource> writer) {
-        IShakfukusRiysFutKeigTaisKakuninshoEditor bodyEditor = new ShakfukusRiysFutKeigTaisKakuninshoBodyEditor(bodyItem);
+        IShakfukusRiysFutKeigTaisKakuninshoEditor bodyEditor = new ShakfukusRiysFutKeigTaisKakuninshoBodyEditor(社会福祉法人等利用者負担軽減,
+                iKojin, 帳票制御共通, 帳票制御汎用List, 地方公共団体, 交付日, ninshoshaSource);
         IShakfukusRiysFutKeigTaisKakuninshoBuider builder = new ShakfukusRiysFutKeigTaisKakuninshoBuilderImpl(bodyEditor);
         writer.writeLine(builder);
     }

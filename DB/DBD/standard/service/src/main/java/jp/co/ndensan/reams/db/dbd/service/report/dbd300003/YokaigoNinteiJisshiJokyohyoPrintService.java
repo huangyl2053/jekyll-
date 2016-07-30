@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  *
  * @reamsid_L DBD-1771-030 b_liuyang2
  */
-public class YokaigoNinteiJisshiJokyohyoService {
+public class YokaigoNinteiJisshiJokyohyoPrintService {
 
     /**
      * 帳票を出力

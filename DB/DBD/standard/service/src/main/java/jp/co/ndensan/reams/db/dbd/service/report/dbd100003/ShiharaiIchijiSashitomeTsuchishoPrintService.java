@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  *
  * @reamsid_L DBD-3640-100 b_liuyang2
  */
-public class ShiharaiIchijiSashitomeTsuchishoService {
+public class ShiharaiIchijiSashitomeTsuchishoPrintService {
 
     /**
      * 帳票を出力
