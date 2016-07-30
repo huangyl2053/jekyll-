@@ -33,6 +33,11 @@ public final class HokenryoDankaiHosei {
         HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho
                 = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryoDankaiHanteiParameter);
 
+        // 20160730 From LIANDI：ご提供のソースに、「hokenryoDankaiHanteiHoho」のnullチェックが漏れ、一時対応させて頂きます。
+        if (hokenryoDankaiHanteiHoho == null) {
+            return RString.EMPTY;
+        }
+
         //世帯非課税・本人非課税の段階数の最大を取得する(保険料段階判定方法保存クラスから)
         RString setaihikazeiMAX = hokenryoDankaiHanteiHoho.世帯非課税最大段階数取得();
 

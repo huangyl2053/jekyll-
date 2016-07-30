@@ -651,10 +651,10 @@ public class KariSanteiIdoFukaBatchFath {
         }
         entity.set更正後口座異動(口座異動編集(更正前後Entity.get計算後情報_宛名_口座_更正後Entity()));
         entity.set更正後徴収方法(徴収方法編集(更正前後Entity.get計算後情報_宛名_口座_更正後Entity()));
-        entity.set調定事由1(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1());
-        entity.set調定事由2(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由2());
-        entity.set調定事由3(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由3());
-        entity.set調定事由4(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4());
+        entity.set調定事由1(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由1()).get名称());
+        entity.set調定事由2(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由2()).get名称());
+        entity.set調定事由3(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由3()).get名称());
+        entity.set調定事由4(ChoteiJiyuCode.toValue(更正前後Entity.get計算後情報_宛名_口座_更正後Entity().get調定事由4()).get名称());
         return entity;
     }
 

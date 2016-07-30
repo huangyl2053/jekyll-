@@ -89,4 +89,8 @@ public class PanelAllDiv extends Panel {
     }
 
     // </editor-fold>
+
+    public Object setTxtShoriJotai() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

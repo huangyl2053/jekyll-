@@ -128,16 +128,6 @@ public class BenmeiTorokuPanel {
         return ResponseData.of(panelDiv).respond();
     }
 
-    /**
-     * 「完了する」ボタンの押下を処理です。
-     *
-     * @param panelDiv ShikakukihonPanelDiv
-     * @return ResponseData<BenmeiTorokuPanelDiv>
-     */
-    public ResponseData<BenmeiTorokuPanelDiv> onClick_btnComplete(BenmeiTorokuPanelDiv panelDiv) {
-        return ResponseData.of(panelDiv).forwardWithEventName(DBU0900031TransitionEventName.処理完了).respond();
-    }
-
     private BenmeiTorokuMeisaiJoho get弁明登録明細情報の取得(
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
@@ -298,11 +288,14 @@ public class BenmeiTorokuPanel {
     }
 
     private boolean get弁明登録明細の更新有り無し(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, BenmeiTorokuPanelDiv panelDiv) {
-        if (benmeiTorokuMeisaiJoho == null) {
+        RString inputDiv = get弁明登録明細入力の編集結果(panelDiv);
+        if (RString.isNullOrEmpty(inputDiv)) {
             return false;
         }
+        if (benmeiTorokuMeisaiJoho == null) {
+            return true;
+        }
         RString selectResults = get弁明登録明細情報の編集結果(benmeiTorokuMeisaiJoho);
-        RString inputDiv = get弁明登録明細入力の編集結果(panelDiv);
         return !selectResults.equals(inputDiv);
     }
 
@@ -326,7 +319,7 @@ public class BenmeiTorokuPanel {
 
     private RString get弁明登録明細入力の編集結果(BenmeiTorokuPanelDiv panelDiv) {
         RStringBuilder inputDiv = new RStringBuilder();
-        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString() == null
+        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString());
         inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue());

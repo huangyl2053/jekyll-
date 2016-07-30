@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteiidokekkaichiran;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.genendoidoukekkaichiran.KeisanjohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteiidokekkaichiran.KarisanteiIdoKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -146,10 +147,10 @@ public class KarisanteiIdoKekkaIchiranEditor implements IKarisanteiIdoKekkaIchir
         }
         source.listLower_15 = 口座異動編集(計算後情報_宛名_口座_更正後Entity);
         source.listLower_16 = 徴収方法編集(計算後情報_宛名_口座_更正後Entity);
-        source.listChoteijiyu1_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由1();
-        source.listChoteiJiyu2_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由2();
-        source.listChoteijiyu3_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由3();
-        source.listChoteijiyu4_1 = 計算後情報_宛名_口座_更正後Entity.get調定事由4();
+        source.listChoteijiyu1_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由1()).get名称();
+        source.listChoteiJiyu2_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由2()).get名称();
+        source.listChoteijiyu3_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由3()).get名称();
+        source.listChoteijiyu4_1 = ChoteiJiyuCode.toValue(計算後情報_宛名_口座_更正後Entity.get調定事由4()).get名称();
     }
 
     private void edit更正前情報(KarisanteiIdoKekkaIchiranSource source) {

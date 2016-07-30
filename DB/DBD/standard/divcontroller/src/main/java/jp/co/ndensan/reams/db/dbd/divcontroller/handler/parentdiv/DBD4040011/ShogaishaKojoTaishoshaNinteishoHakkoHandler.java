@@ -50,7 +50,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoHandler {
      *
      * @param 被保険者番号 被保険者番号
      */
-    private void 前排他の設定(HihokenshaNo 被保険者番号) {
+    public void 前排他の設定(HihokenshaNo 被保険者番号) {
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.lock(排他キー);

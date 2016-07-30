@@ -70,8 +70,6 @@ public class TokuchoTaishoshaIchiranHandler {
     private static final RString 同定済み_NAME = new RString("同定済み");
     private static final RString 対象外_CODE = new RString("2");
     private static final RString 対象外_NAME = new RString("対象外");
-    private static final RString 介護資格取得事由コード種別 = new RString("0007");
-    private static final RString 介護資格喪失事由コード種別 = new RString("0010");
     private static final RString TOPINFO = new RString("被保険者番号：");
     private static final RString BOTTOMINFO = new RString("氏名：");
     private static final RString BTN同定する = new RString("btnDoutei");
@@ -516,7 +514,7 @@ public class TokuchoTaishoshaIchiranHandler {
         div.getTxtAtenaJushoKanji().setValue(result.get住基情報_漢字住所());
         div.getTxtHihokenshaNo().setValue(result.get被保険者台帳_被保険者番号());
         if (!RString.isNullOrEmpty(result.get被保険者台帳_資格取得年月日())) {
-            div.getTxtShutokuYMD().setValue(new RDate(result.get被保険者台帳_資格取得年月日().toString()));
+            div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(result.get被保険者台帳_資格取得年月日Temp()));
         }
         if (result.get被保険者台帳_資格取得事由() != null) {
             div.getTxtShutokuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,
@@ -524,7 +522,7 @@ public class TokuchoTaishoshaIchiranHandler {
                     new Code(result.get被保険者台帳_資格取得事由())));
         }
         if (!RString.isNullOrEmpty(result.get被保険者台帳_資格喪失年月日())) {
-            div.getTxtSoshitsuYMD().setValue(new RDate(result.get被保険者台帳_資格喪失年月日().toString()));
+            div.getTxtSoshitsuYMD().setValue(DateConverter.flexibleDateToRDate(result.get被保険者台帳_資格喪失年月日Temp()));
         }
         if (result.get被保険者台帳_資格喪失事由() != null) {
             div.getTxtSoshitsuJiyu().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格,

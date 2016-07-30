@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6batch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsuBuilder;
@@ -297,26 +299,25 @@ public class KaigoFukaTokuchoHeijunka6Batch {
      */
     public void editAtoFukaJohoList(FlexibleYear 賦課年度, YMDHMS 調定日時, RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
-//        List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
+        List<TokuchoHeijunkaRokuBatchTaishogaiTempEntity> taishoshaTempEntityList = mapper.get対象者データTemp();
         mapper.create平準化計算結果Temp();
 //        Heijunka heijunka = new Heijunka();
 //        HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
 //        RDate effectiveDate = new RDate(賦課年度.toDateString().toString());
         // QA990
-//        for (TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity : taishoshaTempEntityList) {
+        for (TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity : taishoshaTempEntityList) {
 //            HeijunkaInput heijunkaInput = new HeijunkaInput();
 //            平準化入力設定(保険料段階取得, 賦課年度, entity, heijunkaInput, 平準化計算方法_増額, 平準化計算方法_減額, effectiveDate);
 //            HeijunkaOutput 平準化結果 = heijunka.calculateHeijunka(heijunkaInput);
 //            if (平準化結果.is平準化済フラグ()) {
-//                TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity tmpEntity = new TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity(
-//                        平準化結果.get変更後特徴期別額().get(NUM_0), 平準化結果.get変更後特徴期別額().get(NUM_1),
-//                        平準化結果.get変更後特徴期別額().get(NUM_2), entity.getDbT2002Fuka_tsuchishoNo());
-//                mapper.insert平準化計算結果Temp(tmpEntity);
+            TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity tmpEntity = new TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity(
+                    Decimal.TEN, Decimal.TEN, Decimal.TEN, entity.getDbT2002Fuka_tsuchishoNo());
+            mapper.insert平準化計算結果Temp(tmpEntity);
 //            } else {
 //                entity.set備考コード(get備考コード(平準化結果));
 //                mapper.insert対象外データTemp(entity);
 //            }
-//        }
+        }
     }
 
 //    private void 平準化入力設定(HokenryoDankaiManager 保険料段階取得, FlexibleYear 賦課年度,
@@ -430,11 +431,12 @@ public class KaigoFukaTokuchoHeijunka6Batch {
     public void insertKaigoFukaTbl(FlexibleYear 調定年度, FlexibleYear 賦課年度, YMDHMS 調定日時) {
         IKaigoFukaTokuchoHeijunka6BatchMapper mapper = mapperProvider.create(IKaigoFukaTokuchoHeijunka6BatchMapper.class);
         List<TokuchoHeijunkaRokuBatchFukaJohoResult> 賦課の情報 = mapper.get賦課の情報();
+        Map<Long, Long> 調定IDMap = new HashMap<>();
         for (TokuchoHeijunkaRokuBatchFukaJohoResult 賦課情報 : 賦課の情報) {
             FukaJoho fukaJoho = new FukaJoho(賦課情報.get賦課の情報());
             TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果 = 賦課情報.get平準化計算結果();
             FukaJohoBuilder builder = fukaJoho.createBuilderForEdit();
-            特徴期別金額設定(fukaJoho, 平準化計算結果, builder);
+            特徴期別金額設定(fukaJoho, 平準化計算結果, builder, 調定IDMap);
             fukaJoho = builder.set履歴番号(fukaJoho.get履歴番号() + 1).set調定日時(調定日時).set異動基準日時(調定日時).set調定事由1(調定事由_平準化による変更6月).
                     set調定事由2(RString.EMPTY).set調定事由3(RString.EMPTY).set調定事由4(RString.EMPTY).build();
             dbT2002FukaDac.save(fukaJoho.toEntity());
@@ -1219,21 +1221,26 @@ public class KaigoFukaTokuchoHeijunka6Batch {
         taishoshaEntity.set変更前特徴額_６期(計算後情報.getTkKibetsuGaku06());
     }
 
-    private void 特徴期別金額設定(FukaJoho fukaJoho, TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果, FukaJohoBuilder builder) {
+    private void 特徴期別金額設定(FukaJoho fukaJoho, TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity 平準化計算結果,
+            FukaJohoBuilder builder, Map<Long, Long> 調定IDMap) {
         List<Kibetsu> kibetsuList = fukaJoho.getKibetsuList();
         for (Kibetsu 介護期別 : kibetsuList) {
             for (ChoteiKyotsu 調定共通情報 : 介護期別.getChoteiKyotsuList()) {
-                ChoteiKyotsuBuilder 調定共通builder = 調定共通情報.createBuilderForEdit();
-                調定共通期より調定額の設定(介護期別, 調定共通builder, 平準化計算結果);
-                調定共通情報 = 調定共通builder.build();
-                介護期別 = 介護期別.createBuilderForEdit().setKibetsu(調定共通情報).build();
-                UrT0705ChoteiKyotsuEntity 調定共通Entity = 調定共通情報.toEntity();
-                調定共通Entity.setState(EntityDataState.Modified);
-                urT0705ChoteiKyotsuDac.save(調定共通Entity);
-                DbT2003KibetsuEntity 介護期別Entity = 介護期別.toEntity();
-                介護期別Entity.setRirekiNo(介護期別Entity.getRirekiNo() + 1);
-                dbT2003KibetsuDac.save(介護期別Entity);
-                builder.setKibetsu(介護期別);
+                Long 調定ID = 調定共通情報.get調定ID();
+                if (!調定IDMap.containsKey(調定ID)) {
+                    ChoteiKyotsuBuilder 調定共通builder = 調定共通情報.createBuilderForEdit();
+                    調定IDMap.put(調定ID, 調定ID);
+                    調定共通期より調定額の設定(介護期別, 調定共通builder, 平準化計算結果);
+                    調定共通情報 = 調定共通builder.build();
+                    介護期別 = 介護期別.createBuilderForEdit().setKibetsu(調定共通情報).build();
+                    UrT0705ChoteiKyotsuEntity 調定共通Entity = 調定共通情報.toEntity();
+                    調定共通Entity.setState(EntityDataState.Modified);
+                    urT0705ChoteiKyotsuDac.save(調定共通Entity);
+                    DbT2003KibetsuEntity 介護期別Entity = 介護期別.toEntity();
+                    介護期別Entity.setRirekiNo(介護期別Entity.getRirekiNo() + 1);
+                    dbT2003KibetsuDac.save(介護期別Entity);
+                    builder.setKibetsu(介護期別);
+                }
             }
         }
     }

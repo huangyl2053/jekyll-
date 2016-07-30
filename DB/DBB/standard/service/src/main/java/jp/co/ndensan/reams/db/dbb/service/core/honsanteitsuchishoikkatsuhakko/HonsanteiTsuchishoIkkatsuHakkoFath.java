@@ -846,7 +846,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFath {
                 IAtesaki 宛先代納 = AtesakiFactory.createInstance(entity.get宛先代納());
                 result.set宛先代納(宛先代納);
             }
-            if (entity.get口座() != null) {
+            if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0) {
                 result.set口座情報(new Koza(entity.get口座()));
             }
             result.set徴収方法情報_更正前(get徴収方法情報_更正前後(entity, false));

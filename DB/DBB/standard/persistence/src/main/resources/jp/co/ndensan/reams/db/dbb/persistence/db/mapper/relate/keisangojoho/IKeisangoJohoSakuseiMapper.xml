@@ -185,6 +185,7 @@
             "KeisanTyukanTemp"."choteiNendo",
             "KeisanTyukanTemp"."fukaNendo",
             "KeisanTyukanTemp"."tsuchishoNo",
+            "KeisanTyukanTemp"."fukaRirekiNo",
             "DbT2003Kibetsu"."ki",
             "DbT2003Kibetsu"."choshuHouhou"
     </select>
@@ -219,6 +220,7 @@
             "KeisanTyukanTemp"."choteiNendo",
             "KeisanTyukanTemp"."fukaNendo",
             "KeisanTyukanTemp"."tsuchishoNo",
+            "KeisanTyukanTemp"."fukaRirekiNo",
             "DbT2003Kibetsu"."ki",
             "DbT2003Kibetsu"."choshuHouhou"
     </select>
@@ -249,6 +251,11 @@
             "KeisanTyukanTemp" AS "KeisanTyukanTemp"
         WHERE
             "KeisanTyukanTemp"."koseiZengoKubun" = '2'
+        ORDER BY
+            "KeisanTyukanTemp"."choteiNendo",
+            "KeisanTyukanTemp"."fukaNendo",
+            "KeisanTyukanTemp"."tsuchishoNo",
+            "KeisanTyukanTemp"."fukaRirekiNo"
     </select>
     
     <select resultOrdered="true" id="get計算中間Temp更新前情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
@@ -257,6 +264,11 @@
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
         FROM
             "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        ORDER BY
+            "KeisanTyukanTemp"."choteiNendo",
+            "KeisanTyukanTemp"."fukaNendo",
+            "KeisanTyukanTemp"."tsuchishoNo",
+            "KeisanTyukanTemp"."fukaRirekiNo"
     </select>
     
     <select resultOrdered="true" id="get全賦課最新情報3" resultMap="ResultMap_FukaEntity"
