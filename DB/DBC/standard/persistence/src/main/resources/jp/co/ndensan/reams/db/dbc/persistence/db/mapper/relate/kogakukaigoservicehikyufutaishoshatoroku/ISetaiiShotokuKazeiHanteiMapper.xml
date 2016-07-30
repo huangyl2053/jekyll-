@@ -506,7 +506,7 @@
     
     <!--update世帯員所得情報事業高額一時老齢福祉区分を更新する-->
     <update id="update世帯員所得情報事業高額一時老齢福祉区分を更新する">
-       UPDATE "TmpSetaiJigyoHaakuNyuryoku"　AS "世帯員所得情報事業高額一時"
+       UPDATE "TmpSetaiJigyoHaakuNyuryoku" AS "世帯員所得情報事業高額一時"
        SET "roreiFukushiKubun" = '1'
         WHERE EXISTS (SELECT 'X'
         FROM 
