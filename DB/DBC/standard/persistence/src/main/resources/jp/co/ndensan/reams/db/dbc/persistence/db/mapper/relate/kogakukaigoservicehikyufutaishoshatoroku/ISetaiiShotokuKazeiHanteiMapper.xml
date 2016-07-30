@@ -512,8 +512,8 @@
         FROM 
         rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
         WHERE "世帯員所得情報事業高額一時"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
-        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" 
-        AND "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報事業高額一時"."kijunYMD" 
+        AND "世帯員所得情報事業高額一時"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
     </update>
     
     </mapper>
