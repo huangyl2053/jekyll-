@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokuchotaishoshaichiransakusei;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchomidoteijoho.TokuchoMidoteiJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchomidoteijoho.TokuchoMidoteiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiKouhoshaListJoho;
@@ -29,7 +27,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
@@ -49,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -350,43 +346,31 @@ public class TokuchoTaishoshaIchiranSakusei {
         if (resultEntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        List<TokuchoMidoteiJoho> tokuchoMidoteiJohos = new ArrayList<>();
         List<TokuchoDouteiKouhoshaListJoho> 同定候補者一覧情報リス = new ArrayList();
         for (TokuchoTaishoshaIchiranSakuseiEntity entity : resultEntityList) {
-            tokuchoMidoteiJohos.add(new TokuchoMidoteiJoho(entity.getDbt2019entity()));
             TokuchoDouteiKouhoshaListJoho result = new TokuchoDouteiKouhoshaListJoho(entity);
             同定候補者一覧情報リス.add(result);
         }
-        Map<TokuchoMidoteiJohoIdentifier, List<DbT2019TokuchoMidoteiJohoEntity>> 対象外Map;
-        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者リスト,
-                (ArrayList<TokuchoMidoteiJoho>) tokuchoMidoteiJohos);
-        if (tokuchoMidoteiJohos.size() == 1) {
-            ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者, tokuchoMidoteiJohos.get(NUM0));
-        }
-        対象外Map = get対象外Map(tokuchoMidoteiJohos);
-        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者対象外,
-                (HashMap<TokuchoMidoteiJohoIdentifier, List<DbT2019TokuchoMidoteiJohoEntity>>) 対象外Map);
         return 同定候補者一覧情報リス;
     }
 
-    private Map<TokuchoMidoteiJohoIdentifier, List<DbT2019TokuchoMidoteiJohoEntity>> get対象外Map(
-            List<TokuchoMidoteiJoho> tokuchoMidoteiJohos) {
-        if (tokuchoMidoteiJohos == null || tokuchoMidoteiJohos.isEmpty()) {
+    /**
+     * get特徴未同定情報Listのメソドです。
+     *
+     * @param id TokuchoMidoteiJohoIdentifier
+     * @return List<TokuchoMidoteiJoho>
+     */
+    public List<TokuchoMidoteiJoho> get特徴未同定情報List(TokuchoMidoteiJohoIdentifier id) {
+        List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
+                id.get処理年度(), id.get基礎年金番号(), id.get年金コード(), id.get捕捉月(), id.get識別コード());
+        if (特徴未同定情報List == null || 特徴未同定情報List.isEmpty()) {
             return null;
         }
-        Map<TokuchoMidoteiJohoIdentifier, List<DbT2019TokuchoMidoteiJohoEntity>> 対象外Map = new HashMap<>();
-        for (TokuchoMidoteiJoho model : tokuchoMidoteiJohos) {
-            if (model == null) {
-                continue;
-            }
-            TokuchoMidoteiJohoIdentifier id = model.identifier();
-            List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
-                    id.get処理年度(), id.get基礎年金番号(), id.get年金コード(), id.get捕捉月(), id.get識別コード());
-            if (特徴未同定情報List != null && !特徴未同定情報List.isEmpty()) {
-                対象外Map.put(id, (ArrayList<DbT2019TokuchoMidoteiJohoEntity>) 特徴未同定情報List);
-            }
+        List<TokuchoMidoteiJoho> resultList = new ArrayList<>();
+        for (DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報 : 特徴未同定情報List) {
+            resultList.add(new TokuchoMidoteiJoho(特徴未同定情報));
         }
-        return 対象外Map;
+        return resultList;
     }
 
     /**
@@ -487,19 +471,6 @@ public class TokuchoTaishoshaIchiranSakusei {
         }
     }
 
-    private List<DbT2019TokuchoMidoteiJohoEntity> get対象外(TokuchoMidoteiJoho model) {
-        if (model == null) {
-            return null;
-        }
-        TokuchoMidoteiJohoIdentifier id = model.identifier();
-        Map<TokuchoMidoteiJohoIdentifier, List<DbT2019TokuchoMidoteiJohoEntity>> 対象外Map
-                = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者対象外, HashMap.class);
-        if (対象外Map == null) {
-            return null;
-        }
-        return 対象外Map.get(id);
-    }
-
     /**
      * 確認状態を更新する.
      *
@@ -512,12 +483,14 @@ public class TokuchoTaishoshaIchiranSakusei {
      * @param 捕捉月 RString
      * @param 確認状況区分 RString
      * @param 識別コード RString
+     * @param model TokuchoMidoteiJoho
+     * @param taishogaiModels List<TokuchoMidoteiJoho>
      */
     public void kakuninJotaiUpdate(FlexibleYear 処理年度, RString 基礎年金番号, RString 被保険者番号,
             RString 年金コード, RString 開始月, RString 捕捉月, RString 確認状況区分, ShikibetsuCode 識別コード,
-            RString 特別徴収義務者コード) {
+            RString 特別徴収義務者コード, TokuchoMidoteiJoho model,
+            List<TokuchoMidoteiJoho> taishogaiModels) {
         RString 開始月数 = DateConverter.formatMonthFull(開始月);
-        TokuchoMidoteiJoho model = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者, TokuchoMidoteiJoho.class);
         if (model != null) {
             DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報Entity = model.toEntity().clone();
             特徴未同定情報Entity.setKakuninJokyoKbn(確認状況区分);
@@ -646,11 +619,12 @@ public class TokuchoTaishoshaIchiranSakusei {
             徴収方法entity.setTokuchoTeishiJiyuCode(RString.EMPTY);
             徴収方法entity.setState(EntityDataState.Added);
             徴収方法Dac.save(徴収方法entity);
-            List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = get対象外(model);
-            if (特徴未同定情報List == null || 特徴未同定情報List.isEmpty()) {
+            if (taishogaiModels == null || taishogaiModels.isEmpty()) {
                 return;
             }
-            for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
+            DbT2019TokuchoMidoteiJohoEntity entity;
+            for (TokuchoMidoteiJoho taishogaiModel : taishogaiModels) {
+                entity = taishogaiModel.toEntity();
                 entity = entity.clone();
                 if (確認状況区分_同定済み.compareTo(entity.getKakuninJokyoKbn()) == NUM0) {
                     その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);

@@ -49,14 +49,12 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
     private RString 住基情報_生年月日;
     private RString 住基情報_性別;
     private RString 住基情報_住民種別;
-    private RString 住基情報_住登日;
-    private RString 住基情報_消除日;
+    private FlexibleDate 住基情報_住登日Temp;
+    private FlexibleDate 住基情報_消除日Temp;
     private RString 被保険者台帳_被保険者番号;
-    private RString 被保険者台帳_資格取得年月日;
     private RString 被保険者台帳_資格取得事由;
-    private FlexibleDate 被保険者台帳_資格取得年月日Temp;
-    private RString 被保険者台帳_資格喪失年月日;
-    private FlexibleDate 被保険者台帳_資格喪失年月日Temp;
+    private FlexibleDate 被保険者台帳_資格取得年月日;
+    private FlexibleDate 被保険者台帳_資格喪失年月日;
     private RString 被保険者台帳_資格喪失事由;
     private RString 登録済年金情報_賦課年度;
     private RString 登録済年金情報_仮徴収基礎年金番号;
@@ -135,14 +133,7 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             }
             this.住基情報_性別 = resultEntity.getUaft200entity().getSeibetsuCode();
             this.住基情報_住民種別 = resultEntity.getUaft200entity().getJuminShubetsuCode();
-            FlexibleDate 住基情報_住登日Temp = resultEntity.getUaft200entity().getTorokuTodokedeYMD();
-            if (住基情報_住登日Temp != null) {
-                this.住基情報_住登日 = 住基情報_住登日Temp.wareki().toDateString();
-            }
-            FlexibleDate 住基情報_消除日Temp = resultEntity.getUaft200entity().getTorokuTodokedeYMD();
-            if (住基情報_消除日Temp != null) {
-                this.住基情報_住登日 = 住基情報_消除日Temp.wareki().toDateString();
-            }
+            住基情報_消除日Temp = resultEntity.getUaft200entity().getTorokuTodokedeYMD();
             getEntityValue(resultEntity);
         }
     }
@@ -153,15 +144,9 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             if (被保険者台帳_被保険者番号Temp != null) {
                 this.被保険者台帳_被保険者番号 = 被保険者台帳_被保険者番号Temp.value();
             }
-            this.被保険者台帳_資格取得年月日Temp = resultEntity.getDbt1001entity().getShikakuShutokuYMD();
-            if (被保険者台帳_資格取得年月日Temp != null) {
-                this.被保険者台帳_資格取得年月日 = 被保険者台帳_資格取得年月日Temp.wareki().toDateString();
-            }
+            this.被保険者台帳_資格取得年月日 = resultEntity.getDbt1001entity().getShikakuShutokuYMD();
             this.被保険者台帳_資格取得事由 = resultEntity.getDbt1001entity().getShikakuShutokuJiyuCode();
-            this.被保険者台帳_資格喪失年月日Temp = resultEntity.getDbt1001entity().getShikakuSoshitsuYMD();
-            if (被保険者台帳_資格喪失年月日Temp != null && 被保険者台帳_資格喪失年月日Temp.wareki() != null) {
-                this.被保険者台帳_資格喪失年月日 = 被保険者台帳_資格喪失年月日Temp.wareki().toDateString();
-            }
+            this.被保険者台帳_資格喪失年月日 = resultEntity.getDbt1001entity().getShikakuSoshitsuYMD();
             this.被保険者台帳_資格喪失事由 = resultEntity.getDbt1001entity().getShikakuSoshitsuJiyuCode();
         }
         if (resultEntity != null && resultEntity.getDbt2001entity() != null) {

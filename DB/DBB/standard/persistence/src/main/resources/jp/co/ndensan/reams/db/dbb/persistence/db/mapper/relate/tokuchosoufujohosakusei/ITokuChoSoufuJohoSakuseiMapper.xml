@@ -276,7 +276,7 @@
          "UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550"."yobi" as "ueT0515KaigohokenNenkinTokuchoTaishoshaJoho550_yobi"
     </sql>
 
-    <resultMap id="ResultMap_UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity" autoMapping="true">
+    <resultMap id="ResultMap_UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity" autoMapping="true">
         <id property="renban" column="ueT0515KaigohokenNenkinTokuchoTaishoshaJoho550_renban" />
         <id property="kisoNenkinNo" column="ueT0515KaigohokenNenkinTokuchoTaishoshaJoho550_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="nenkinCode" column="ueT0515KaigohokenNenkinTokuchoTaishoshaJoho550_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

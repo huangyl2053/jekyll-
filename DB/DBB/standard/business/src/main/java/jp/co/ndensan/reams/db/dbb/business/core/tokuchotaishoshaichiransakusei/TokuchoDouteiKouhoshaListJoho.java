@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019TokuchoMidoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -39,6 +40,7 @@ public class TokuchoDouteiKouhoshaListJoho {
     private RString 住基情報_性別;
     private RString 住基情報_住民種別;
     private RString 被保険者台帳_被保険者番号;
+    private DbT2019TokuchoMidoteiJohoEntity dbt2019entity;
 
     /**
      * コンストラクタです。
@@ -50,6 +52,7 @@ public class TokuchoDouteiKouhoshaListJoho {
             this.不一致理由コード = resultEntity.getDbt2019entity().getFuichiRiyuCode();
             this.年金情報_基礎年金番号 = resultEntity.getDbt2019entity().getKisoNenkinNo();
             this.年金情報_年金コード = resultEntity.getDbt2019entity().getNenkinCode();
+            this.dbt2019entity = resultEntity.getDbt2019entity().clone();
         }
         if (resultEntity != null && resultEntity.getUet0511entity() != null) {
             this.年金情報_氏名 = resultEntity.getUet0511entity().getDtKanjiShimei();

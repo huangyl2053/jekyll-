@@ -242,7 +242,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
         List<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> uet0515Entitys = new ArrayList();
         List<TokuChoSoufuJohoSakuseiResult> resultlist = TokuChoSoufuJohoSakuseiResult.getTokuChoSoufuJohoSakuseiResultList(resultentitylist);
         int 連番 = (int) Saiban.get(SubGyomuCode.UEA特別徴収分配集約, GENERICKEY, 年度).next();
-        int シーケンス = NUM1;
+        int シーケンス;
         Map<RString, Integer> シーケンスMap = new HashMap<>();
         for (TokuChoSoufuJohoSakuseiResult entity : resultlist) {
             UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity = new UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity();
