@@ -34,6 +34,11 @@ public interface IKogakuServicehiDetailDiv extends ICommonChildDivBaseProperties
             FlexibleYearMonth サービス年月, HokenshaNo 証記載保険者番号, int 履歴番号, ShikibetsuCode 識別コード);
 
     /**
+     * clear画面内容
+     */
+    public void clear画面内容();
+
+    /**
      * 受付日と決定日のチェックです。
      *
      * @return ValidationMessageControlPairs

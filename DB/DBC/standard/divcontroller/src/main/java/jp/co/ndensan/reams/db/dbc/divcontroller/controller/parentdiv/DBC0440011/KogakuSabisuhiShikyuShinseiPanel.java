@@ -113,6 +113,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         boolean 支給区分フラグ = div.getCcdKogakuShinseiList().is支給区分フラグ();
         ViewStateHolder.put(ViewStateKeys.審査決定フラグ, 審査決定フラグ);
         ViewStateHolder.put(ViewStateKeys.支給区分フラグ, 支給区分フラグ);
+        getHandler(div).clear申請情報();
         return ResponseData.of(div).setState(DBC0440011StateName.申請情報登録);
     }
 
@@ -391,14 +392,16 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).clear申請情報();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
-                ResponseData.of(div).respond();
+                getHandler(div).clear申請情報();
+                return ResponseData.of(div).respond();
             }
         } else {
+            getHandler(div).clear申請情報();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
         }
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -411,6 +414,7 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             KogakuSabisuhiShikyuShinseiPanelDiv div) {
         boolean flag = false;
         if (削除モード.equals(ViewStateHolder.get(ViewStateKeys.画面モード, RString.class))) {
+            getHandler(div).clear対象者情報();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
         } else {
             flag = getHandler(div).is対象者情報登録内容変更状態();
@@ -424,14 +428,16 @@ public class KogakuSabisuhiShikyuShinseiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).clear対象者情報();
                 return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
             } else {
-                ResponseData.of(div).respond();
+                getHandler(div).clear対象者情報();
+                return ResponseData.of(div).respond();
             }
         } else {
+            getHandler(div).clear対象者情報();
             return ResponseData.of(div).setState(DBC0440011StateName.申請情報検索);
         }
-        return ResponseData.of(div).respond();
     }
 
     private ResponseData<KogakuSabisuhiShikyuShinseiPanelDiv> notChanges(KogakuSabisuhiShikyuShinseiPanelDiv div) {

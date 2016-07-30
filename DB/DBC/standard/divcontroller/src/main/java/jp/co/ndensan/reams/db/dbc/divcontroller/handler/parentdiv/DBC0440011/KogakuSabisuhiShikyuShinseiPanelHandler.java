@@ -178,6 +178,20 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
     }
 
     /**
+     * clear申請情報
+     */
+    public void clear申請情報() {
+        div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().clear画面内容();
+    }
+
+    /**
+     * clear申請情報
+     */
+    public void clear対象者情報() {
+        div.getCcdKogakuKyufuTaishoList().clear画面内容();
+    }
+
+    /**
      * 対象者情報保存です。
      *
      * @param 被保険者番号 HihokenshaNo
