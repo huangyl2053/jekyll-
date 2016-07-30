@@ -169,6 +169,15 @@ public class KogakuKyufuTaishoshaMeisai
     }
 
     /**
+     * 対象者受取年月を返します。
+     *
+     * @return 高額給付根拠
+     */
+    public FlexibleYearMonth get対象者受取年月() {
+        return entity.getTaishoshaUketoriYM();
+    }
+
+    /**
      * {@link DbT3054KogakuKyufuTaishoshaMeisaiEntity}のクローンを返します。
      *
      * @return {@link DbT3054KogakuKyufuTaishoshaMeisaiEntity}のクローン
