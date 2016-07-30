@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteikohifut
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,8 +38,7 @@ public class KohifutanshaTempTableInsertProcess extends BatchProcessBase<RString
     private static final RString 区切り文字 = new RString(",");
     private static final int INDEX_RECORDTYPE = 1;
 
-    InputParameter<RString> filePath;
-
+//    InputParameter<RString> filePath;
     private KagoKetteiKohifutanshaInEntityCreater creater;
     private KagoKetteiKohifutanshaInHeaderCSVEntity csvHeader;
     private List<KagoKetteiKohifutanshaInMesaiCSVEntity> csvMeisaiList;
@@ -63,7 +61,7 @@ public class KohifutanshaTempTableInsertProcess extends BatchProcessBase<RString
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(filePath.getValue());
+        return new BatchSimpleReader(RString.EMPTY);
     }
 
     @Override

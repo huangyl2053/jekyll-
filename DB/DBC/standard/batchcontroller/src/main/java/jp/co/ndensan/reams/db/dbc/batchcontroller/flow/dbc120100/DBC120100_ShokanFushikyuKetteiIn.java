@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuD
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuTableUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuWriteReportProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaTempTableInsertProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanfushikyuketteiin.DBC120100_ShokanFushikyuKetteiInBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -36,7 +35,7 @@ public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_Sh
     private static final String WRITE_REPORT = "writeReportProcess";
 
     private final RString sharedFileKey = new RString("222");
-    private RString runFilePath;
+//    private RString runFilePath;
     private List<RString> fileNameList;
 
     @Override
@@ -49,10 +48,10 @@ public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_Sh
         for (RString filename : filePathList.keySet()) {
             fileNameList.add(filename);
         }
-        for (RString filepath : filePathList.values()) {
-            runFilePath = filepath;
-            executeStep(TEMP_TABLE_INSERT);
-        }
+//        for (RString filepath : filePathList.values()) {
+//            runFilePath = filepath;
+//            executeStep(TEMP_TABLE_INSERT);
+//        }
         executeStep(TEMP_TABLE_UPDATE);
         executeStep(DB_UPDATE);
         executeStep(WRITE_REPORT);
@@ -70,7 +69,7 @@ public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_Sh
     @Step(TEMP_TABLE_INSERT)
     IBatchFlowCommand tempTableInsertProcess() {
         Map<RString, Object> parameter = new HashMap<>();
-        parameter.put(KohifutanshaTempTableInsertProcess.PARAMETER_FILEPATH, runFilePath);
+//        parameter.put(KohifutanshaTempTableInsertProcess.PARAMETER_FILEPATH, runFilePath);
         return loopBatch(ShokanFushikyuTableInsertProcess.class).arguments(parameter).define();
     }
 
