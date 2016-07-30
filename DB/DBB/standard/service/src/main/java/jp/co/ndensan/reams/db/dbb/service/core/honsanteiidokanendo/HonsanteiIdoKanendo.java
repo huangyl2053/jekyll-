@@ -260,6 +260,23 @@ public class HonsanteiIdoKanendo {
         if (parameter.get抽出終了日時() != null) {
             result.set抽出終了日時(parameter.get抽出終了日時().getRDateTime());
         }
+        result.set決定_チェックボックス(parameter.get決定_チェックボックス());
+        result.set決定_対象賦課年度(parameter.get決定_対象賦課年度());
+        result.set決定_発行日(parameter.get決定_発行日());
+        result.set決定_文書番号(parameter.get決定_文書番号());
+        result.set変更_チェックボックス(parameter.get変更_チェックボックス());
+        result.set変更_対象賦課年度(parameter.get変更_対象賦課年度());
+        result.set変更_発行日(parameter.get変更_発行日());
+        result.set変更_文書番号(parameter.get変更_文書番号());
+        result.set変更_対象者(parameter.get変更_対象者());
+        result.set納入_対象賦課年度(parameter.get納入_対象賦課年度());
+        result.set納入_発行日(parameter.get納入_発行日());
+        result.set納入_出力期(parameter.get納入_出力期());
+        result.set納入_対象者(parameter.get納入_対象者());
+        result.set納入_口座振替様式(parameter.get納入_口座振替様式());
+        result.set納入_先頭出力(parameter.get納入_生活保護対象者());
+        result.set納入_ページ山分け(parameter.get納入_ページごとに山分け());
+        result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         return result;
     }
 
