@@ -68,7 +68,7 @@ public class SinsaSeikyusyoJohoHandler {
             grdSinsaSeikyusyoJoho_Row dgJigyoshaItiran = new grdSinsaSeikyusyoJoho_Row();
             dgJigyoshaItiran.getTxtShinsaSeikyuTodokeYMD().setValue(new RDate(jigyoshaInput.get審査請求届出日().toString()));
             dgJigyoshaItiran.setTxtShinsaSeikyuJinName(jigyoshaInput.get審査請求人氏名() == null ? RString.EMPTY : jigyoshaInput.get審査請求人氏名().value());
-            dgJigyoshaItiran.setTxtShobunNaiyo(jigyoshaInput.get処分種類コード() == null
+            dgJigyoshaItiran.setTxtShobunNaiyo(RString.isNullOrEmpty(jigyoshaInput.get処分種類コード())
                     ? RString.EMPTY : ShobunShuruiCode.toValue(jigyoshaInput.get処分種類コード()).get名称());
             if (jigyoshaInput.get処分があったことを知った日() != null && !jigyoshaInput.get処分があったことを知った日().isEmpty()) {
                 dgJigyoshaItiran.getTxtShobunShitaYMD().setValue(new RDate(jigyoshaInput.get処分があったことを知った日().toString()));
