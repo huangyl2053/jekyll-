@@ -852,7 +852,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
                 mapper.insert賦課の情報一時テーブル(fukaJohoTempTableEntity);
             }
             DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 徴収方法の情報.toEntity();
-            dbT2001ChoshuHohoEntity.setState(EntityDataState.Modified);
+            dbT2001ChoshuHohoEntity.setRirekiNo(徴収方法の情報.get履歴番号() + INT_1);
+            dbT2001ChoshuHohoEntity.setState(EntityDataState.Added);
             徴収方法Dac.save(dbT2001ChoshuHohoEntity);
         }
 
@@ -1388,7 +1389,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
     public void update処理日付管理(RString 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番, YMDHMS システム日時) {
         List<DbT7022ShoriDateKanriEntity> entityList = 処理日付管理Dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課,
                 処理名, 処理枝番, 年度, 年度内連番);
-        if (entityList != null) {
+        if (entityList != null && !entityList.isEmpty()) {
             update処理日付管理(entityList, システム日時);
         }
     }

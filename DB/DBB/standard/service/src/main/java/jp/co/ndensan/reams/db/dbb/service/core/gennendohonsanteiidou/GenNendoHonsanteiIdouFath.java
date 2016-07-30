@@ -133,7 +133,7 @@ public class GenNendoHonsanteiIdouFath {
     private static final RString 定数_ページ数 = new RString("0");
     private static final RString ゼロ_0000 = new RString("0000");
     private static final ReportId 帳票ID = new ReportId("DBB200015_HonsanteiIdouKekkaIchiran");
-    private final ReportId 帳票分類Id = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
+    private final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
     private static final Code 用途区分コード = new Code("0");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
@@ -453,7 +453,7 @@ public class GenNendoHonsanteiIdouFath {
             RString 前年度保険料段階,
             YMDHMS 調定日時) {
         TsuchishoNo 通知書番号 = create通知書番号(資格の情報.get被保険者番号().getColumnValue(), INT_1);
-        FukaJoho 賦課の情報 = new FukaJoho(調定年度.plusYear(INT_1), 調定年度.plusYear(INT_1), 通知書番号, 0);
+        FukaJoho 賦課の情報 = new FukaJoho(調定年度, 調定年度, 通知書番号, 0);
         FukaJohoBuilder builder = 賦課の情報.createBuilderForEdit();
         builder.set被保険者番号(資格の情報.get被保険者番号())
                 .set識別コード(資格の情報.get識別コード())
@@ -709,7 +709,7 @@ public class GenNendoHonsanteiIdouFath {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(賦課年度);
         KitsukiList 期月リスト = 月期対応取得_普徴.get期月リスト();
         KitsukiList 本算定期間 = 期月リスト.filtered本算定期間();
-        ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
+        ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類ID);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         try (CsvListWriter csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
@@ -1051,9 +1051,9 @@ public class GenNendoHonsanteiIdouFath {
         printer.print();
     }
 
-    private ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類Id) throws NullPointerException {
-        requireNonNull(帳票分類Id, UrSystemErrorMessages.値がnull.getReplacedMessage(帳票分類Id.toString()));
-        DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類Id);
+    private ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類ID) throws NullPointerException {
+        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage(帳票分類ID.toString()));
+        DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID);
         if (entity == null) {
             return null;
         }
