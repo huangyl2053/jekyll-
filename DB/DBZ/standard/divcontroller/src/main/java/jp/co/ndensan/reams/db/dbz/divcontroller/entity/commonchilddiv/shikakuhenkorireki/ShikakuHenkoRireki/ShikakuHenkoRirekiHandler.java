@@ -126,7 +126,6 @@ public class ShikakuHenkoRirekiHandler {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.shokai);
         }
-        div.setInputMode(ViewExecutionStatus.Add.getValue());
     }
 
     /**
