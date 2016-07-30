@@ -85,8 +85,9 @@ public class SinsaSeikyusyoMeisaiPanel {
      * @return ResponseData<SinsaSeikyusyoMeisaiPanelDiv>
      */
     public ResponseData<SinsaSeikyusyoMeisaiPanelDiv> onClick_btnTorikeshi(SinsaSeikyusyoMeisaiPanelDiv div) {
+        RString 修正後の値 = createHandlerOf(div).修正後の値();
         if ((追加.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))
-                && getValidationHandler(div).変更有無チェック(createHandlerOf(div).修正後の値())) {
+                && getValidationHandler(div).変更有無チェック(修正後の値)) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -98,7 +99,7 @@ public class SinsaSeikyusyoMeisaiPanel {
                 createHandlerOf(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
             } else {
-                ResponseData.of(div).respond();
+                return ResponseData.of(div).respond();
             }
         }
         if ((修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))
@@ -114,7 +115,7 @@ public class SinsaSeikyusyoMeisaiPanel {
                 createHandlerOf(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBU0900021TransitionEventName.一覧に戻る).respond();
             } else {
-                ResponseData.of(div).respond();
+                return ResponseData.of(div).respond();
             }
         }
         if ((削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))) {
