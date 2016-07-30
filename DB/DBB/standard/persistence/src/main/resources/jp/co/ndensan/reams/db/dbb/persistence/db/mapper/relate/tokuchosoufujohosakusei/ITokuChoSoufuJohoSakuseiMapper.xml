@@ -101,7 +101,7 @@
     <resultMap id="resultMap_TokuChoSoufuJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity" autoMapping="true">
         <result property="ki" column="DbT2003_ki"/>
         <result property="choteigaku" column="UrT0705_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <association property="uet0511entity" resultMap="jp.co.ndensan.reams.bb.bbx.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.resultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
+        <association property="uet0511entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="dbt2001entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="dbt1001entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="dbt2002entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>

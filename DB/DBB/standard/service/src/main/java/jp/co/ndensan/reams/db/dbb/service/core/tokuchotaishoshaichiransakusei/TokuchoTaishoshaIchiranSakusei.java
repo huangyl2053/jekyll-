@@ -519,7 +519,7 @@ public class TokuchoTaishoshaIchiranSakusei {
         RString 開始月数 = DateConverter.formatMonthFull(開始月);
         TokuchoMidoteiJoho model = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者, TokuchoMidoteiJoho.class);
         if (model != null) {
-            DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報Entity = model.toEntity();
+            DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報Entity = model.toEntity().clone();
             特徴未同定情報Entity.setKakuninJokyoKbn(確認状況区分);
             特徴未同定情報Entity.setState(EntityDataState.Modified);
             特徴未同定情報Dac.save(特徴未同定情報Entity);
@@ -651,6 +651,7 @@ public class TokuchoTaishoshaIchiranSakusei {
                 return;
             }
             for (DbT2019TokuchoMidoteiJohoEntity entity : 特徴未同定情報List) {
+                entity = entity.clone();
                 if (確認状況区分_同定済み.compareTo(entity.getKakuninJokyoKbn()) == NUM0) {
                     その他候補者データを登録する(開始月数, 処理年度, entity, 基礎年金番号, 年金コード, 捕捉月);
                 }

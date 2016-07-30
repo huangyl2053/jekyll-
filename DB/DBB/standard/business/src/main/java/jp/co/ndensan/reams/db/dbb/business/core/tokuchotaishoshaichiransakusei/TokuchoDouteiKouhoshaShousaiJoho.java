@@ -54,7 +54,9 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
     private RString 被保険者台帳_被保険者番号;
     private RString 被保険者台帳_資格取得年月日;
     private RString 被保険者台帳_資格取得事由;
+    private FlexibleDate 被保険者台帳_資格取得年月日Temp;
     private RString 被保険者台帳_資格喪失年月日;
+    private FlexibleDate 被保険者台帳_資格喪失年月日Temp;
     private RString 被保険者台帳_資格喪失事由;
     private RString 登録済年金情報_賦課年度;
     private RString 登録済年金情報_仮徴収基礎年金番号;
@@ -151,13 +153,13 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             if (被保険者台帳_被保険者番号Temp != null) {
                 this.被保険者台帳_被保険者番号 = 被保険者台帳_被保険者番号Temp.value();
             }
-            FlexibleDate 被保険者台帳_資格取得年月日Temp = resultEntity.getDbt1001entity().getShikakuShutokuYMD();
+            this.被保険者台帳_資格取得年月日Temp = resultEntity.getDbt1001entity().getShikakuShutokuYMD();
             if (被保険者台帳_資格取得年月日Temp != null) {
                 this.被保険者台帳_資格取得年月日 = 被保険者台帳_資格取得年月日Temp.wareki().toDateString();
             }
             this.被保険者台帳_資格取得事由 = resultEntity.getDbt1001entity().getShikakuShutokuJiyuCode();
-            FlexibleDate 被保険者台帳_資格喪失年月日Temp = resultEntity.getDbt1001entity().getShikakuSoshitsuYMD();
-            if (被保険者台帳_資格取得年月日Temp != null && 被保険者台帳_資格喪失年月日Temp.wareki() != null) {
+            this.被保険者台帳_資格喪失年月日Temp = resultEntity.getDbt1001entity().getShikakuSoshitsuYMD();
+            if (被保険者台帳_資格喪失年月日Temp != null && 被保険者台帳_資格喪失年月日Temp.wareki() != null) {
                 this.被保険者台帳_資格喪失年月日 = 被保険者台帳_資格喪失年月日Temp.wareki().toDateString();
             }
             this.被保険者台帳_資格喪失事由 = resultEntity.getDbt1001entity().getShikakuSoshitsuJiyuCode();
@@ -178,10 +180,4 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             this.登録済年金情報_翌年度仮徴収捕捉月 = resultEntity.getDbt2001entity().getYokunendoKariHosokuM();
         }
     }
-
-//    public void set登録済年金情報_特別徴収義務者コード(TokubetsuChoshuGimushaCode gimushaCode) {
-//        if (TokubetsuChoshuGimushaCode != null) {
-//            this.登録済年金情報_特別徴収義務者コード = gimushaCode.value().value();
-//        }
-//    }
 }
