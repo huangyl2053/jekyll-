@@ -382,7 +382,7 @@ public class TokuchoTaishoshaIchiranSakusei {
             TokuchoMidoteiJohoIdentifier id = model.identifier();
             List<DbT2019TokuchoMidoteiJohoEntity> 特徴未同定情報List = 特徴未同定情報Dac.selectNot識別コードByKey(
                     id.get処理年度(), id.get基礎年金番号(), id.get年金コード(), id.get捕捉月(), id.get識別コード());
-            if (特徴未同定情報List != null) {
+            if (特徴未同定情報List != null && !特徴未同定情報List.isEmpty()) {
                 対象外Map.put(id, (ArrayList<DbT2019TokuchoMidoteiJohoEntity>) 特徴未同定情報List);
             }
         }

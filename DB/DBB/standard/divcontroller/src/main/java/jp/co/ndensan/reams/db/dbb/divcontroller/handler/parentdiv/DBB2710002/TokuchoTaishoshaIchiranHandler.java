@@ -70,8 +70,6 @@ public class TokuchoTaishoshaIchiranHandler {
     private static final RString 同定済み_NAME = new RString("同定済み");
     private static final RString 対象外_CODE = new RString("2");
     private static final RString 対象外_NAME = new RString("対象外");
-    private static final RString 介護資格取得事由コード種別 = new RString("0007");
-    private static final RString 介護資格喪失事由コード種別 = new RString("0010");
     private static final RString TOPINFO = new RString("被保険者番号：");
     private static final RString BOTTOMINFO = new RString("氏名：");
     private static final RString BTN同定する = new RString("btnDoutei");
