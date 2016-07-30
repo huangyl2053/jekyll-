@@ -27,6 +27,11 @@ public interface IKogakuKyufuTaishoListDiv extends ICommonChildDivBaseProperties
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号);
 
     /**
+     * clear画面内容
+     */
+    public void clear画面内容();
+
+    /**
      * 給付対象一覧を取得します。
      *
      * @return List<dgTaishoshaIchiran_Row>

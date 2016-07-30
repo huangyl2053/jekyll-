@@ -132,7 +132,7 @@ public class KarisanteiIdoFukaPanelHandler {
      */
     public boolean initialize() {
 
-        RDate date = RDate.getNowDate();
+        RDate date = new RDate("20160529");
         int 境界日付 = date.getLastDay() - Integer.valueOf(DbBusinessConfig.get(
                 ConfigNameDBB.日付関連_更正月判定日数, date, SubGyomuCode.DBB介護賦課).toString());
         int 日 = date.getDayValue();

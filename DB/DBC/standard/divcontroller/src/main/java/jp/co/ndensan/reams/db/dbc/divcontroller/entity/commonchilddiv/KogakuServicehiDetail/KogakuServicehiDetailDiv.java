@@ -613,6 +613,11 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
                 画面モード, メニューID, 被保険者番号, サービス年月, 証記載保険者番号, 履歴番号, 識別コード);
     }
 
+    @Override
+    public void clear画面内容() {
+        KogakuServicehiDetailDivHandler.of(this).clear画面内容();
+    }
+
     /**
      * 受付日と決定日のチェックです。
      *

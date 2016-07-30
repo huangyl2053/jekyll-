@@ -149,6 +149,23 @@ public class KogakuServicehiDetailDivHandler {
     }
 
     /**
+     * clear画面内容
+     */
+    public void clear画面内容() {
+        div.getTxtShimeiKanji().clearValue();
+        div.getTxtShimeiKana().clearValue();
+        div.getTxtTelNo().clearDomain();
+        div.getTxtShinseiRiyu().clearValue();
+        div.getTxtShiharaiTotalAmount().clearValue();
+        div.getTxtUketsukeYMD().clearValue();
+        div.getTxtHonninShiharaiGaku().clearValue();
+        div.getTxtKetteiYMD().clearValue();
+        div.getTxtSetaiSyuyakuBango().clearValue();
+        div.getTxtShikyuKingaku().clearValue();
+        div.getTxtShikyusinaiRiyu().clearValue();
+    }
+
+    /**
      * 申請日を取得します。
      *
      * @return RDate

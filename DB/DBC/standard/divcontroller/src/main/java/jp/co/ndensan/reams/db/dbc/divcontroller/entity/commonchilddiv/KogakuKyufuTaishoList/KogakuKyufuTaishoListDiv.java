@@ -483,6 +483,11 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス提供年月);
     }
 
+    @Override
+    public void clear画面内容() {
+        KogakuKyufuTaishoListHandler.of(this).clear高額明細合計データ編集エリア();
+    }
+
     /**
      * 給付対象一覧を取得します。
      *
