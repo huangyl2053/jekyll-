@@ -392,9 +392,9 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                 table(DbT7021JigyoHokokuTokeiData.class).
                 where(and(
                                 eq(hokokuYSeireki, 報告年),
-                                eq(hokokuM, new RString("00")),
+                                eq(hokokuM, MONTH_00),
                                 eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, 集計対象年),
-                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, new RString("00")),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, MONTH_00),
                                 eq(toukeiTaishoKubun, 統計対象区分),
                                 eq(shichosonCode, 市町村コード),
                                 eq(hyoNo, 表番号),
@@ -476,9 +476,9 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                 table(DbT7021JigyoHokokuTokeiData.class).
                 where(and(
                                 eq(hokokuYSeireki, 報告年),
-                                eq(hokokuM, new RString("00")),
+                                eq(hokokuM, MONTH_00),
                                 eq(shukeiTaishoYSeireki, 集計対象年),
-                                eq(shukeiTaishoM, new RString("00")),
+                                eq(shukeiTaishoM, MONTH_00),
                                 eq(toukeiTaishoKubun, 統計対象区分),
                                 eq(shichosonCode, 市町村コード),
                                 eq(hyoNo, 表番号),
