@@ -63,15 +63,21 @@ public enum ShikyuFushikyuKubun {
     /**
      * 支給不支給区分の名称とEmptyを返します
      *
-     * @param code
-     * @param defaultValue
-     * @return
+     * @param code code
+     * @param defaultValue defaultValue
+     * @return 名称
      */
     public static RString to名称OrDefault(RString code, RString defaultValue) {
         ShikyuFushikyuKubun s = toValueOrNull(code);
         return s == null ? defaultValue : s.get名称();
     }
 
+    /**
+     * Nullを判断します。
+     *
+     * @param code code
+     * @return
+     */
     public static ShikyuFushikyuKubun toValueOrNull(RString code) {
         for (ShikyuFushikyuKubun shikyuFushikyuKubun : ShikyuFushikyuKubun.values()) {
             if (shikyuFushikyuKubun.code.equals(code)) {
