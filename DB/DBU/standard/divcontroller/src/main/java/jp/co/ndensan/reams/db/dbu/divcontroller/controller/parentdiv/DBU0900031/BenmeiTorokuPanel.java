@@ -288,11 +288,14 @@ public class BenmeiTorokuPanel {
     }
 
     private boolean get弁明登録明細の更新有り無し(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, BenmeiTorokuPanelDiv panelDiv) {
+        RString inputDiv = get弁明登録明細入力の編集結果(panelDiv);
+        if (RString.isNullOrEmpty(inputDiv)) {
+            return false;
+        }
         if (benmeiTorokuMeisaiJoho == null) {
             return true;
         }
         RString selectResults = get弁明登録明細情報の編集結果(benmeiTorokuMeisaiJoho);
-        RString inputDiv = get弁明登録明細入力の編集結果(panelDiv);
         return !selectResults.equals(inputDiv);
     }
 
@@ -316,7 +319,7 @@ public class BenmeiTorokuPanel {
 
     private RString get弁明登録明細入力の編集結果(BenmeiTorokuPanelDiv panelDiv) {
         RStringBuilder inputDiv = new RStringBuilder();
-        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString() == null
+        inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeiSyoSakuseibi().getValue().toDateString());
         inputDiv.append(panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue() == null
                 ? RString.EMPTY : panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeisya().getValue());
