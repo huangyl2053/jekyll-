@@ -50,11 +50,15 @@ public class ShinsakaiKekkaTorokuValidationHandler {
                 || (設定期間From == null && 設定期間To != null)) {
             return validPairs;
         }
-        if (設定期間From.isBefore(設定期間To)) {
+        if (is設定期間(設定期間From, 設定期間To)) {
             validPairs.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(
                     UrErrorMessages.期間が不正_追加メッセージあり２, "設定期間From", "設定期間To")));
         }
         return validPairs;
+    }
+
+    private boolean is設定期間(RDate 設定期間From, RDate 設定期間To) {
+        return 設定期間From.isBefore(設定期間To);
     }
 
     /**
