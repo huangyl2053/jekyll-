@@ -47,7 +47,7 @@ public class NinteishinseihakkoHandler {
         div.getCcdKaigoNinteiAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
         div.getCcdKaigoNinteiAtenaInfo().setShoriType(コード);
         div.getCcdKaigoNinteiAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
-        div.getCcdKaigoNinteiAtenaInfo().initialize();
         div.getCcdKaigoninteiShikakuInfo().initialize(市町村コード, 識別コード, HDN_SETAI_KODO, 被保険者番号);
+        div.getCcdKaigoNinteiAtenaInfo().initialize();
     }
 }
