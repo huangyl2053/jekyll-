@@ -6,7 +6,12 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB2710002;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchomidoteijoho.TokuchoMidoteiJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchomidoteijoho.TokuchoMidoteiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiKouhoshaShousaiJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoDouteiListJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei.TokuchoMiDouteiListJoho;
@@ -21,14 +26,17 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTo
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710002.dgTokuchoDoteiKohoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710002.TokuchoTaishoshaIchiranHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB2710002.TokuchoTaishoshaIchiranValidationHandler;
+import jp.co.ndensan.reams.db.dbb.service.core.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakusei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -56,7 +64,7 @@ public class TokuchoTaishoshaIchiran {
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
     private static final RString STATE特別徴収対象者一覧確認 = new RString("1");
-//    private static final RString UCID = new RString("DBBUC27102");
+    private TokuchoTaishoshaIchiranSakusei service;
 
     /**
      * 画面のonLoadイベント
@@ -150,12 +158,57 @@ public class TokuchoTaishoshaIchiran {
         RString 基礎年金番号 = ViewStateHolder.get(ViewStateKeys.基礎年金番号, RString.class);
         RString 年金コード = ViewStateHolder.get(ViewStateKeys.年金コード, RString.class);
         RString 特徴開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
-        getHandler(div).特別徴収同定候補者一覧initialize(処理年度, 捕捉月, 基礎年金番号, 年金コード, 特徴開始月);
+        List<TokuchoMidoteiJoho> models
+                = getHandler(div).特別徴収同定候補者一覧initialize(処理年度, 捕捉月, 基礎年金番号, 年金コード, 特徴開始月);
+        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者リスト, (ArrayList<TokuchoMidoteiJoho>) models);
+        if (models.size() == 1) {
+            ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者, models.get(NUM0));
+            ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者対象外リスト,
+                    (ArrayList<TokuchoMidoteiJoho>) get対象外(models.get(NUM0)));
+        }
+        Map<TokuchoMidoteiJohoIdentifier, List<TokuchoMidoteiJoho>> 対象外Map
+                = get対象外Map(models);
+        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者対象外Map,
+                (HashMap<TokuchoMidoteiJohoIdentifier, List<TokuchoMidoteiJoho>>) 対象外Map);
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (taishoshaKey == null || taishoshaKey.get被保険者番号() == null) {
             return;
         }
-        getHandler(div).対象者検索戻る値の処理(taishoshaKey);
+        getHandler(div).対象者検索戻る値の処理(taishoshaKey, ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class));
+        ViewStateHolder.put(ViewStateKeys.資格対象者, null);
+    }
+
+    private Map<TokuchoMidoteiJohoIdentifier, List<TokuchoMidoteiJoho>> get対象外Map(
+            List<TokuchoMidoteiJoho> tokuchoMidoteiJohos) {
+        if (tokuchoMidoteiJohos == null || tokuchoMidoteiJohos.isEmpty()) {
+            return null;
+        }
+        Map<TokuchoMidoteiJohoIdentifier, List<TokuchoMidoteiJoho>> 対象外Map = new HashMap<>();
+        for (TokuchoMidoteiJoho model : tokuchoMidoteiJohos) {
+            if (model == null) {
+                continue;
+            }
+            TokuchoMidoteiJohoIdentifier id = model.identifier();
+            service = TokuchoTaishoshaIchiranSakusei.createInstance();
+            List<TokuchoMidoteiJoho> models = service.get特徴未同定情報List(id);
+            if (models != null && !models.isEmpty()) {
+                対象外Map.put(id, (ArrayList<TokuchoMidoteiJoho>) models);
+            }
+        }
+        return 対象外Map;
+    }
+
+    private List<TokuchoMidoteiJoho> get対象外(TokuchoMidoteiJoho model) {
+        if (model == null) {
+            return null;
+        }
+        TokuchoMidoteiJohoIdentifier id = model.identifier();
+        Map<TokuchoMidoteiJohoIdentifier, List<TokuchoMidoteiJoho>> 対象外Map
+                = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者対象外Map, HashMap.class);
+        if (対象外Map == null) {
+            return null;
+        }
+        return 対象外Map.get(id);
     }
 
     /**
@@ -205,8 +258,11 @@ public class TokuchoTaishoshaIchiran {
      * @return ResponseData
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnBack(TokuchoTaishoshaIchiranDiv div) {
-        getHandler(div).同定非同定表示に戻るinitialize();
-        return ResponseData.of(div).setState(DBB2710002StateName.同定非同定表示);
+        getHandler(div).同定非同定表示に戻るinitialize(ViewStateHolder.get(ViewStateKeys.表示対象, RString.class),
+                ViewStateHolder.get(ViewStateKeys.確認済を含む, boolean.class),
+                ViewStateHolder.get(ViewStateKeys.最大表示件数, RString.class));
+        return ResponseData.of(div)
+                .setState(DBB2710002StateName.同定非同定表示);
     }
 
     /**
@@ -329,13 +385,58 @@ public class TokuchoTaishoshaIchiran {
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnGridSelect(TokuchoTaishoshaIchiranDiv div) {
         getHandler(div).一行同定候補者一覧initialize表示制御();
-        RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
+        RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class
+        );
         RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
+        RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        RString 基礎年金番号 = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().
+                getTxtNenkinKaifukuInfoKisoNenkinNo().getValue();
+        RString 年金コード = div.getDgTokuchoDoteiKohoshaIchiran().getClickedItem().
+                getTxtNenkinKaifukuInfoNenkinCode().getValue();
+        RString 識別コードTemp = div.getDgTokuchoDoteiKohoshaIchiran().
+                getClickedItem().getTxtShikibetsuCode();
+        ShikibetsuCode 識別コード = 識別コードTemp == null ? null
+                : new ShikibetsuCode(識別コードTemp);
+        TokuchoMidoteiJoho model
+                = getClickedModel(new FlexibleYear(処理年度), 基礎年金番号, 年金コード, 捕捉月, 識別コード);
+
+        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者, model);
+
+        ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者対象外リスト,
+                (ArrayList<TokuchoMidoteiJoho>) get対象外(model));
         TokuchoDouteiKouhoshaShousaiJoho result
                 = getHandler(div).show特別徴収同定候補者詳細情報(特別徴収開始月, 捕捉月);
+
         ViewStateHolder.put(ViewStateKeys.被保険者番号, result.get被保険者台帳_被保険者番号());
         ViewStateHolder.put(ViewStateKeys.氏名, result.get住基情報_漢字氏名());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div)
+                .respond();
+    }
+
+    private TokuchoMidoteiJoho
+            getClickedModel(FlexibleYear 処理年度, RString 基礎年金番号, RString 年金コード,
+                    RString 捕捉月, ShikibetsuCode 識別コード) {
+        List<TokuchoMidoteiJoho> models = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者リスト, ArrayList.class
+        );
+        if (models
+                == null || models.isEmpty()) {
+            return null;
+        }
+
+        if (models.size()
+                == 1) {
+            return models.get(NUM0);
+        }
+        for (TokuchoMidoteiJoho model : models) {
+            if (model.get処理年度().equals(処理年度) && model.get基礎年金番号().equals(基礎年金番号)
+                    && model.get年金コード().equals(年金コード) && model.get捕捉月().equals(捕捉月)
+                    && model.get識別コード().equals(識別コード)) {
+                return model;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -407,15 +508,24 @@ public class TokuchoTaishoshaIchiran {
             return ResponseData.of(div).addMessage(
                     new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                             UrQuestionMessages.処理実行の確認.getMessage().evaluate())).respond();
+
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
+            RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class
+            );
             RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
             Message 同定Message = DbbInformationMessages.同定処理完了.getMessage();
-            getHandler(div).execute確認状態更新(特別徴収開始月, 捕捉月, 同定済み_CODE, 同定Message);
-            return ResponseData.of(div).setState(DBB2710002StateName.完了);
+            TokuchoMidoteiJoho model
+                    = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者, TokuchoMidoteiJoho.class);
+            List<TokuchoMidoteiJoho> taishogaiModels
+                    = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者対象外リスト, ArrayList.class);
+
+            getHandler(div)
+                    .execute確認状態更新(特別徴収開始月, 捕捉月, 同定済み_CODE, 同定Message, model, taishogaiModels);
+            return ResponseData.of(div)
+                    .setState(DBB2710002StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
@@ -436,12 +546,19 @@ public class TokuchoTaishoshaIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
+            RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class
+            );
             RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
             Message 同定対象外Message = DbbInformationMessages.同定対象外確認済処理完了.getMessage();
+            TokuchoMidoteiJoho model
+                    = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者, TokuchoMidoteiJoho.class);
+            List<TokuchoMidoteiJoho> taishogaiModels
+                    = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者対象外リスト, ArrayList.class);
 
-            getHandler(div).execute確認状態更新(特別徴収開始月, 捕捉月, 対象外_CODE, 同定対象外Message);
-            return ResponseData.of(div).setState(DBB2710002StateName.完了);
+            getHandler(div)
+                    .execute確認状態更新(特別徴収開始月, 捕捉月, 対象外_CODE, 同定対象外Message, model, taishogaiModels);
+            return ResponseData.of(div)
+                    .setState(DBB2710002StateName.完了);
         } else {
             return ResponseData.of(div).respond();
         }
