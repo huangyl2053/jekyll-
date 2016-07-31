@@ -89,7 +89,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
 
     private static final RString STR5 = new RString("5");
     private static final RString 特徴制度間IF全件作成 = new RString("特徴制度間IF全件作成");
-    private static final RString 特徴制度間IF作成 = new RString("特徴制度間IF作成");
+    private static final RString 特徴制度間IF作成 = new RString("DBBMN84001");
     private static final RString 依頼金額計算 = new RString("依頼金額計算");
     private static final RString 本算定賦課 = new RString("本算定賦課");
     private static final RString 金額あり = new RString("1");
@@ -114,8 +114,7 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TokuChoSoufuJohoSakuseiBatch}のインスタンス
      */
     public static TokuChoSoufuJohoSakuseiBatch createInstance() {
         return InstanceProvider.create(TokuChoSoufuJohoSakuseiBatch.class);
@@ -497,10 +496,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * Entity転換のメソドです。
      *
-     * @param entity
-     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return
-     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity entityCopy(
             UeT0511NenkinTokuchoKaifuJohoEntity entity) {
@@ -579,10 +576,8 @@ public class TokuChoSoufuJohoSakuseiBatch {
     /**
      * Entity転換のメソドです。
      *
-     * @param entity
-     * jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
-     * @return
-     * jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @param entity jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
+     * @return jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity
      */
     public UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entityCopy(
             jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity entity) {
