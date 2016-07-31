@@ -31,7 +31,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
     private TextBox txtShimeiKana;
     private TextBoxDate txtUmareYMD;
     private TextBox txtSeibetsu;
-    private RString txtFuichiRiyuCode;
 
     public dgTokubetChoshuMidoteiIchiran_Row() {
         super();
@@ -45,7 +44,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
         this.txtShimeiKana = new TextBox();
         this.txtUmareYMD = new TextBoxDate();
         this.txtSeibetsu = new TextBox();
-        this.txtFuichiRiyuCode = RString.EMPTY;
         this.setOriginalData("chkKakunin", chkKakunin);
         this.setOriginalData("txtKakuninJokyo", txtKakuninJokyo);
         this.setOriginalData("txtFuichiRiyu", txtFuichiRiyu);
@@ -56,7 +54,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
         this.setOriginalData("txtShimeiKana", txtShimeiKana);
         this.setOriginalData("txtUmareYMD", txtUmareYMD);
         this.setOriginalData("txtSeibetsu", txtSeibetsu);
-        this.setOriginalData("txtFuichiRiyuCode", txtFuichiRiyuCode);
     }
 
     public dgTokubetChoshuMidoteiIchiran_Row(DataGridColumnCheckBox chkKakunin, RString txtKakuninJokyo, RString txtFuichiRiyu, TextBox txtHosokuM, TextBox txtKisoNenkinNo, TextBox txtNenkinCode, TextBox txtTokuchoGimusha, TextBox txtShimeiKana, TextBoxDate txtUmareYMD, TextBox txtSeibetsu, RString txtFuichiRiyuCode) {
@@ -71,7 +68,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
         this.setOriginalData("txtShimeiKana", txtShimeiKana);
         this.setOriginalData("txtUmareYMD", txtUmareYMD);
         this.setOriginalData("txtSeibetsu", txtSeibetsu);
-        this.setOriginalData("txtFuichiRiyuCode", txtFuichiRiyuCode);
         this.chkKakunin = chkKakunin;
         this.txtKakuninJokyo = txtKakuninJokyo;
         this.txtFuichiRiyu = txtFuichiRiyu;
@@ -82,7 +78,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
         this.txtShimeiKana = txtShimeiKana;
         this.txtUmareYMD = txtUmareYMD;
         this.txtSeibetsu = txtSeibetsu;
-        this.txtFuichiRiyuCode = txtFuichiRiyuCode;
     }
 
     public dgTokubetChoshuMidoteiIchiran_Row(DataGridSetting gridSetting) {
@@ -97,7 +92,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
         this.txtShimeiKana = new TextBox();
         this.txtUmareYMD = new TextBoxDate();
         this.txtSeibetsu = new TextBox();
-        this.txtFuichiRiyuCode = RString.EMPTY;
         this.setOriginalData("chkKakunin", chkKakunin);
         this.setOriginalData("txtKakuninJokyo", txtKakuninJokyo);
         this.setOriginalData("txtFuichiRiyu", txtFuichiRiyu);
@@ -108,7 +102,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
         this.setOriginalData("txtShimeiKana", txtShimeiKana);
         this.setOriginalData("txtUmareYMD", txtUmareYMD);
         this.setOriginalData("txtSeibetsu", txtSeibetsu);
-        this.setOriginalData("txtFuichiRiyuCode", txtFuichiRiyuCode);
     }
 
     public DataGridColumnCheckBox getChkKakunin() {
@@ -149,10 +142,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
 
     public TextBox getTxtSeibetsu() {
         return txtSeibetsu;
-    }
-
-    public RString getTxtFuichiRiyuCode() {
-        return txtFuichiRiyuCode;
     }
 
     public void setChkKakunin(DataGridColumnCheckBox chkKakunin) {
@@ -203,11 +192,6 @@ public class dgTokubetChoshuMidoteiIchiran_Row extends DataRow {
     public void setTxtSeibetsu(TextBox txtSeibetsu) {
         this.setOriginalData("txtSeibetsu", txtSeibetsu);
         this.txtSeibetsu = txtSeibetsu;
-    }
-
-    public void setTxtFuichiRiyuCode(RString txtFuichiRiyuCode) {
-        this.setOriginalData("txtFuichiRiyuCode", txtFuichiRiyuCode);
-        this.txtFuichiRiyuCode = txtFuichiRiyuCode;
     }
 
     // </editor-fold>

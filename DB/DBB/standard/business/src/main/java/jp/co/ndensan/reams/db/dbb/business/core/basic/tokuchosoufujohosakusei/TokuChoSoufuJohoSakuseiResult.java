@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
@@ -49,8 +50,11 @@ public final class TokuChoSoufuJohoSakuseiResult {
             }
             DbT2003KibetsuEntity 介護期別entity = new DbT2003KibetsuEntity();
             介護期別entity.setKi(resultentity.getKi());
+            介護期別entity.setChoshuHouhou(resultentity.getChoshuHouhou());
+            介護期別entity.setChoteiId(new Decimal(resultentity.getChoteiId()));
             UrT0705ChoteiKyotsuEntity 調定共通_介護継承entity = new UrT0705ChoteiKyotsuEntity();
             調定共通_介護継承entity.setChoteigaku(resultentity.getChoteigaku());
+            調定共通_介護継承entity.setChoteiId(resultentity.getChoteiId());
             List 調定共通entitylist = new ArrayList();
             調定共通entitylist.add(調定共通_介護継承entity);
             KibetsuEntity kibetsuentity = new KibetsuEntity();

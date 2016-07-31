@@ -7,19 +7,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyufuJissekiShokai のクラスファイル 
- * 
+ * KyufuJissekiShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class KyufuJissekiShokaiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -105,7 +106,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKyufuJissekiChushutsuHani(KyufuJissekiChushutsuHaniDiv KyufuJissekiChushutsuHani) {
+    public void setKyufuJissekiChushutsuHani(KyufuJissekiChushutsuHaniDiv KyufuJissekiChushutsuHani) {
         this.getKyufuJissekiSearchPanel().setKyufuJissekiChushutsuHani(KyufuJissekiChushutsuHani);
     }
 
@@ -115,7 +116,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadNendo(RadioButton radNendo) {
+    public void setRadNendo(RadioButton radNendo) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setRadNendo(radNendo);
     }
 
@@ -125,7 +126,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKyufuJissekiSearchNendo(DropDownList ddlKyufuJissekiSearchNendo) {
+    public void setDdlKyufuJissekiSearchNendo(DropDownList ddlKyufuJissekiSearchNendo) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setDdlKyufuJissekiSearchNendo(ddlKyufuJissekiSearchNendo);
     }
 
@@ -135,7 +136,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKyufuJissekiSearchDateType(RadioButton radKyufuJissekiSearchDateType) {
+    public void setRadKyufuJissekiSearchDateType(RadioButton radKyufuJissekiSearchDateType) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setRadKyufuJissekiSearchDateType(radKyufuJissekiSearchDateType);
     }
 
@@ -145,7 +146,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKyufuJissekiSearchServiceTeikyoYM(TextBoxDateRange txtKyufuJissekiSearchServiceTeikyoYM) {
+    public void setTxtKyufuJissekiSearchServiceTeikyoYM(TextBoxDateRange txtKyufuJissekiSearchServiceTeikyoYM) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiChushutsuHani().setTxtKyufuJissekiSearchServiceTeikyoYM(txtKyufuJissekiSearchServiceTeikyoYM);
     }
 
@@ -155,7 +156,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKyufuJissekiKensakuTaisho(KyufuJissekiKensakuTaishoDiv KyufuJissekiKensakuTaisho) {
+    public void setKyufuJissekiKensakuTaisho(KyufuJissekiKensakuTaishoDiv KyufuJissekiKensakuTaisho) {
         this.getKyufuJissekiSearchPanel().setKyufuJissekiKensakuTaisho(KyufuJissekiKensakuTaisho);
     }
 
@@ -165,7 +166,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadTaisho1(RadioButton radTaisho1) {
+    public void setRadTaisho1(RadioButton radTaisho1) {
         this.getKyufuJissekiSearchPanel().getKyufuJissekiKensakuTaisho().setRadTaisho1(radTaisho1);
     }
 
@@ -175,7 +176,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
+    public void setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
         this.getKyufuJissekiSearchPanel().setBtnKyufuJissekiSearchClear(btnKyufuJissekiSearchClear);
     }
 
@@ -185,7 +186,7 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKyufuJissekiSearch(Button btnKyufuJissekiSearch) {
+    public void setBtnKyufuJissekiSearch(Button btnKyufuJissekiSearch) {
         this.getKyufuJissekiSearchPanel().setBtnKyufuJissekiSearch(btnKyufuJissekiSearch);
     }
 

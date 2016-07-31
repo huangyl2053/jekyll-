@@ -569,18 +569,6 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setHonNenkinCode(年金コード);
                 徴収方法entity.setHonHosokuM(捕捉月);
             } else if (STR04.compareTo(開始月数) == NUM0) {
-                徴収方法entity.setChoshuHoho4gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho5gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho6gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho7gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho8gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho9gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho10gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho11gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho12gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho1gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho2gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho3gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku4gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku5gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku6gatsu(徴収方法);
@@ -591,24 +579,10 @@ public class TokuchoTaishoshaIchiranSakusei {
                 徴収方法entity.setYokunendoKariNenkinCode(年金コード);
                 徴収方法entity.setYokunendoKariHosokuM(捕捉月);
             } else if (STR06.compareTo(開始月数) == NUM0) {
-                徴収方法entity.setChoshuHoho6gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho7gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho8gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho9gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho10gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho11gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho12gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho1gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho2gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho3gatsu(徴収方法);
-                徴収方法entity.setChoshuHohoYoku4gatsu(徴収方法);
-                徴収方法entity.setChoshuHohoYoku5gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku6gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku7gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku8gatsu(徴収方法);
                 徴収方法entity.setChoshuHohoYoku9gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho8gatsu(徴収方法);
-                徴収方法entity.setChoshuHoho9gatsu(徴収方法);
                 徴収方法entity.setYokunendoKariNenkinNo(基礎年金番号);
                 徴収方法entity.setYokunendoKariNenkinCode(年金コード);
                 徴収方法entity.setYokunendoKariHosokuM(捕捉月);
@@ -640,6 +614,7 @@ public class TokuchoTaishoshaIchiranSakusei {
             DbT2019TokuchoMidoteiJohoEntity 特徴未同定情報entity, RString 基礎年金番号,
             RString 年金コード, RString 捕捉月) {
         TokuchoTaishoshaIchiranSakuseiMybatisParameter param = new TokuchoTaishoshaIchiranSakuseiMybatisParameter();
+        param.set開始月(開始月数);
         param.set処理年度(処理年度);
         param.set基礎年金番号(基礎年金番号);
         param.set年金コード(年金コード);
