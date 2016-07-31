@@ -116,12 +116,12 @@ public class ShotokuShokaihyoYokoSource implements IReportSource {
     public RString telNo;
     @ReportItem(name = "denshiKoin", order = 52)
     public RString denshiKoin;
-    @ReportItem(name = "shomeiHakkoYMD", length = 22, order = 53)
-    public RString shomeiHakkoYMD;
-    @ReportItem(name = "shuchoMei", length = 14, order = 54)
-    public RString shuchoMei;
-    @ReportItem(name = "shichosonMei", length = 40, order = 55)
-    public RString shichosonMei;
+    @ReportItem(name = "hakkoYMD", length = 12, order = 53)
+    public RString hakkoYMD;
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 54)
+    public RString ninshoshaYakushokuMei;
+    @ReportItem(name = "ninshoshaShimeiKakenai", length = 14, order = 55)
+    public RString ninshoshaShimeiKakenai;
     @ReportItem(name = "koinShoryaku", length = 15, order = 56)
     public RString koinShoryaku;
 // </editor-fold>

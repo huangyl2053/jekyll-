@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0400011;
 
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukaigokyufuhitaishoshatoroku.KogakuKaigoKyufuhiTaishoshaBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0400011.KogakuKaigoKyufuhiTaishoshaTorokuBatchParameterDiv;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakukaigoservicehikyufutaishoshatoroku.KogakuKaigoServicehiKyufuTaishoshaToroku;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -51,10 +53,10 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
      */
     public void initializeDisplay() {
         RString uiContainerId = ResponseHolder.getUIContainerId();
-        //TODO
-        div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setFromValue(RDate.getNowDate().minusYear(1));
-        div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setToValue(RDate.getNowDate().plusYear(1));
-
+        KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
+        KokuhorenInterfaceKanri result = business.getSinsaYM(uiContainerId);
+        div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setFromValue(result.get抽出開始日時().getDate());
+        div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel().getTxtShinsaYM().setToValue(result.get抽出開始日時().getDate());
         div.getPublishIchiranhyo().setIsPublish(true);
         if (高額介護サービス費給付対象者登録自庁.equals(uiContainerId)) {
             div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200016.getReportId());
@@ -64,6 +66,29 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuHandler {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(実行ボタン_DBCMN41002, true);
         }
         set画面初期化制御();
+    }
+
+    /**
+     * バッチパラメータ取得します。
+     *
+     * @return KogakuKaigoKyufuhiTaishoshaBatchParameter
+     */
+    public KogakuKaigoKyufuhiTaishoshaBatchParameter getBatchParameter() {
+        RString 審査年月From = div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel()
+                .getTxtShinsaYM().getFromValue().getYearMonth().toDateString();
+        RString 審査年月To = div.getKogakuKaigoKyufuhiTaishoshaTorokuPanel()
+                .getTxtShinsaYM().getToValue().getYearMonth().toDateString();
+        boolean flg = div.getPublishIchiranhyo().isIsPublish();
+        Long shuturyokuJunn = div.getCcdChohyoShutsuryokujun().get出力順ID();
+
+        KogakuKaigoServicehiKyufuTaishoshaToroku business = new KogakuKaigoServicehiKyufuTaishoshaToroku();
+        KogakuKaigoKyufuhiTaishoshaBatchParameter parameter
+                = business.getKogakuKaigoServicehiKyufuTaishoshaTorokuBatchParameter(
+                        審査年月From,
+                        審査年月To,
+                        flg,
+                        shuturyokuJunn);
+        return parameter;
     }
 
     private void set画面初期化制御() {

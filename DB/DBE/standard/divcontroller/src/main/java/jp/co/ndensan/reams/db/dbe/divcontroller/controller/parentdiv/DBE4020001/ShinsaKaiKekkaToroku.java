@@ -103,7 +103,10 @@ public class ShinsaKaiKekkaToroku {
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnRyooutputBoffer(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+        }
+        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
@@ -156,7 +159,10 @@ public class ShinsaKaiKekkaToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
+            if (存在チェック結果.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+            }
+            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
@@ -184,7 +190,10 @@ public class ShinsaKaiKekkaToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
+            if (存在チェック結果.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+            }
+            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
@@ -216,7 +225,10 @@ public class ShinsaKaiKekkaToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック(存在チェック結果);
+            if (存在チェック結果.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+            }
+            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {
@@ -243,8 +255,14 @@ public class ShinsaKaiKekkaToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック(存在チェック結果);
-            ValidationMessageControlPairs validation = getValidationHandler(div).完了処理事前チェック(選択チェック);
+            if (存在チェック結果.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+            }
+            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
+            if (選択チェック.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(選択チェック).respond();
+            }
+            ValidationMessageControlPairs validation = getValidationHandler(div).完了処理事前チェック();
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
             } else {

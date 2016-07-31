@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB2710011;
 
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
-import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011StateName.特徴対象者登録;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011StateName.結果確認;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011TransitionEventName.再検索する;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2710011.DBB2710011TransitionEventName.検索結果一覧へ;
@@ -18,9 +17,11 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -32,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KaigoAtenaJoho {
 
+    private final RString 検索結果一覧へ_FileName = new RString("btnToSearchResult");
+
     /**
      * 特別徴収対象者登録情報を画面初期化処理しました。
      *
@@ -40,11 +43,15 @@ public class KaigoAtenaJoho {
      */
     public ResponseData<KaigoAtenaJohoDiv> onload(KaigoAtenaJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(
+            InformationMessage message = new InformationMessage(
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode(),
                     DbbErrorMessages.特徴対象者でないため処理不可.getMessage().evaluate());
             FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
-            return getHandler(div).onload(key) ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).setState(特徴対象者登録);
+            Boolean is経由該当者一覧画面 = ViewStateHolder.get(ViewStateKeys.is経由該当者一覧画面, Boolean.class);
+            if (is経由該当者一覧画面 != null && !is経由該当者一覧画面) {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索結果一覧へ_FileName, true);
+            }
+            return getHandler(div).onload(key) ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).respond();
         }
         if (ResponseHolder.getMessageCode().equals(new RString(DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
@@ -61,7 +68,8 @@ public class KaigoAtenaJoho {
      * @return 特別徴収対象者登録情報Divを持つResponseData
      */
     public ResponseData<KaigoAtenaJohoDiv> onClick_btnNenkinInfoKensaku(KaigoAtenaJohoDiv div) {
-        getHandler(div).onClick_btnNenkinInfoKensaku();
+        FukaTaishoshaKey key = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
+        getHandler(div).onClick_btnNenkinInfoKensaku(key);
         return ResponseData.of(div).respond();
     }
 
@@ -126,13 +134,10 @@ public class KaigoAtenaJoho {
     public ResponseData<KaigoAtenaJohoDiv> onClick_btnUpdate(KaigoAtenaJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
             KaigoAtenaJohoHandler handler = getHandler(div);
-            QuestionMessage message = new QuestionMessage(
-                    DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
-                    DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
-            QuestionMessage message1 = new QuestionMessage(
-                    UrQuestionMessages.保存の確認.getMessage().getCode(), UrQuestionMessages.保存の確認.getMessage().evaluate());
-            return handler.is画面内容の変更有無() ? ResponseData.of(div).addMessage(message1).respond()
-                    : ResponseData.of(div).addMessage(message).respond();
+            if (!handler.is画面内容の変更有無()) {
+                throw new ApplicationException(DbzInformationMessages.内容変更なしで保存不可.getMessage());
+            }
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {

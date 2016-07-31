@@ -45,8 +45,8 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 計算後情報一時テーブル削除 = "dropKeisangoJohoTempProcess";
     private static final String CREAT_PROCESS = "creatTmpProcess";
-    private static final String PRINT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS = "prtTokuchoKaishiTsuchishoHonsanteiProcess";
-    private static final String INSERT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS = "insTsuchishoHakkogoIdoshaTokuchoKaishiProcess";
+    private static final String 特徴開始通知書の発行 = "prtTokuchoKaishiTsuchishoHonsanteiProcess";
+    private static final String 特徴開始通知書発行後異動者登録 = "insTsuchishoHakkogoIdoshaTokuchoKaishiProcess";
     private static final String PRINT_KETTEITSUCHISHO_PROCESS = "prtKetteiTsuchishoProcess";
     private static final String INSERT_KETTEITSUCHISHO_PROCESS = "insTsuchishoHakkogoIdoshaKetteiProcess";
     private static final String PRINT_HENKOTSUCHISHO_PROCESS = "prtHenkoTsuchishoProcess";
@@ -85,8 +85,8 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
                 計算後情報作成区分 = true;
                 バッチフロー_帳票分類ID = 特別徴収開始通知書本算定_帳票分類ID.getColumnValue();
                 executeStep(計算後情報作成);
-                executeStep(PRINT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS);
-                executeStep(INSERT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS);
+                executeStep(特徴開始通知書の発行);
+                executeStep(特徴開始通知書発行後異動者登録);
             } else if (決定変更通知書_帳票分類ID.equals(出力帳票一覧.get帳票分類ID()) && is決定通知書(出力帳票一覧.get帳票ID())) {
                 if (parameter.is一括発行起動フラグ()) {
                     計算後情報作成区分 = true;
@@ -160,7 +160,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
      *
      * @return 帳票出力パラメータ
      */
-    @Step(PRINT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS)
+    @Step(特徴開始通知書の発行)
     protected IBatchFlowCommand prtTokuchoKaishiTsuchishoHonsanteiProcess() {
         return simpleBatch(PrtTokuchoKaishiTsuchishoHonsanteiProcess.class).arguments(processParameter).define();
     }
@@ -170,7 +170,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Honsanteif
      *
      * @return 帳票出力パラメータ
      */
-    @Step(INSERT_TOKUCHOKAISHITSUCHISHOHONSANTEI_PROCESS)
+    @Step(特徴開始通知書発行後異動者登録)
     protected IBatchFlowCommand insTsuchishoHakkogoIdoshaTokuchoKaishiProcess() {
         return simpleBatch(InsTsuchishoHakkogoIdoshaTokuchoKaishiProcess.class).arguments(processParameter).define();
     }

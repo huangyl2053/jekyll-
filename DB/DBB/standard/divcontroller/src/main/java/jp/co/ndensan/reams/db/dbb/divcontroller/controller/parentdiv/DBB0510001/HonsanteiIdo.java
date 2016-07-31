@@ -57,7 +57,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンの必須チェックのメソッドます。
+     * 「実行する」ボタンの必須チェックのメソッドです。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -79,7 +79,7 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンをクリックのメソッドます。
+     * 現年度異動賦課「実行する」ボタンをクリックのメソッドです。
      *
      * @param div コントロールdiv
      * @return ResponseData
@@ -91,21 +91,31 @@ public class HonsanteiIdo {
     }
 
     /**
-     * 「実行する」ボタンを設定する。
+     * 現年度異動賦課通知書作成「実行する」ボタンをクリックのメソッドです。
+     *
+     * @param div コントロールdiv
+     * @return ResponseData
+     */
+    public ResponseData<CreateHonsanteiIdoBatchParameter> onClick_btnTsuchishoRegister(HonsanteiIdoDiv div) {
+        SanteiIdoGennen paramter = getHandler(div).setParamter();
+        CreateHonsanteiIdoBatchParameter batchParamter = HonsanteiIdoGennendo.createInstance().createBatchParam(paramter);
+        return ResponseData.of(batchParamter).respond();
+    }
+
+    /**
+     * 「実行する」ボタン表示制御を設定です。
      *
      * @param div HonsanteiIdoDiv
      * @return ResponseData
      */
     public ResponseData<HonsanteiIdoDiv> onStateTransition(HonsanteiIdoDiv div) {
-        if (現年度異動賦課.equals(ResponseHolder.getMenuID())) {
-            boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
-            getHandler(div).set実行ボタン(falg);
-        }
+        boolean falg = ViewStateHolder.get(ViewStateKeys.実行フラグ, Boolean.class);
+        getHandler(div).set実行ボタン(falg);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 抽出条件のメソッドます。
+     * 抽出条件のメソッドです。
      *
      * @param div HonsanteiIdoDiv
      * @return ResponseData

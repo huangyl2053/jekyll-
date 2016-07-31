@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020071;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
@@ -60,12 +61,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
 
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
-        getHandler(div).initializeKihoneria(引き継ぎデータ);
 
-        getHandler(div).件数OnLoad(引き継ぎデータ);
-        getHandler4(div).単位数OnLoad(引き継ぎデータ);
-        getHandler5(div).費用額OnLoad(引き継ぎデータ);
-        getHandler6(div).給付額OnLoad(引き継ぎデータ);
+        getHandler(div).initializeKihoneria(引き継ぎデータ);
+        List<JigyoHokokuTokeiData> 件数 = getHandler(div).件数OnLoad(引き継ぎデータ);
+        List<JigyoHokokuTokeiData> 単位数 = getHandler4(div).単位数OnLoad(引き継ぎデータ);
+        List<JigyoHokokuTokeiData> 費用額 = getHandler5(div).費用額OnLoad(引き継ぎデータ);
+        List<JigyoHokokuTokeiData> 給付額 = getHandler6(div).給付額OnLoad(引き継ぎデータ);
+        ViewStateHolder.put(ViewStateKeys.件数引き継ぎデータ, (Serializable) 件数);
+        ViewStateHolder.put(ViewStateKeys.単位数引き継ぎデータ, (Serializable) 単位数);
+        ViewStateHolder.put(ViewStateKeys.費用額引き継ぎデータ, (Serializable) 費用額);
+        ViewStateHolder.put(ViewStateKeys.給付額引き継ぎデータ, (Serializable) 給付額);
 
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (更新.equals(状態)) {
@@ -86,10 +91,19 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
     public ResponseData<HoseiHakkoYoshiki2KensuEtcTotalPanelDiv> onClick_btnModUpdate(
             HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
 
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
-                JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 件数引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.件数引き継ぎデータ, List.class);
+        List<JigyoHokokuTokeiData> 単位数引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.単位数引き継ぎデータ, List.class);
+        List<JigyoHokokuTokeiData> 費用額引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.費用額引き継ぎデータ, List.class);
+        List<JigyoHokokuTokeiData> 給付額引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.給付額引き継ぎデータ, List.class);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).delete(引き継ぎデータ);
+            getHandler(div).delete(件数引き継ぎデータ);
+            getHandler(div).delete(単位数引き継ぎデータ);
+            getHandler(div).delete(費用額引き継ぎデータ);
+            getHandler(div).delete(給付額引き継ぎデータ);
             getHandler8(div).削除正常終了();
             return ResponseData.of(div).setState(DBU0020071StateName.完了状態);
 
@@ -221,14 +235,21 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanel {
     }
 
     private List<JigyoHokokuTokeiData> get修正データ(HoseiHakkoYoshiki2KensuEtcTotalPanelDiv div) {
-
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
+        JigyoHokokuGeppoParameter 事業報告基本データ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 件数引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.件数引き継ぎデータ, List.class);
+        List<JigyoHokokuTokeiData> 単位数引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.単位数引き継ぎデータ, List.class);
+        List<JigyoHokokuTokeiData> 費用額引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.費用額引き継ぎデータ, List.class);
+        List<JigyoHokokuTokeiData> 給付額引き継ぎデータ = ViewStateHolder.get(
+                ViewStateKeys.給付額引き継ぎデータ, List.class);
         List<JigyoHokokuTokeiData> 修正データ = new ArrayList<>();
-        List<JigyoHokokuTokeiData> 件数修正データ = getHandler2(div).get件数修正データリスト(引き継ぎデータ);
-        List<JigyoHokokuTokeiData> 単位数修正データ = getHandler3(div).get単位数修正データリスト(引き継ぎデータ);
-        List<JigyoHokokuTokeiData> 費用額修正データ = getHandler7(div).get費用額修正データリスト(引き継ぎデータ);
-        List<JigyoHokokuTokeiData> 給付額修正データ = getHandler8(div).get給付額修正データリスト(引き継ぎデータ);
+        List<JigyoHokokuTokeiData> 件数修正データ = getHandler2(div).get件数修正データリスト(件数引き継ぎデータ, 事業報告基本データ);
+        List<JigyoHokokuTokeiData> 単位数修正データ = getHandler3(div).get単位数修正データリスト(単位数引き継ぎデータ, 事業報告基本データ);
+        List<JigyoHokokuTokeiData> 費用額修正データ = getHandler7(div).get費用額修正データリスト(費用額引き継ぎデータ, 事業報告基本データ);
+        List<JigyoHokokuTokeiData> 給付額修正データ = getHandler8(div).get給付額修正データリスト(給付額引き継ぎデータ, 事業報告基本データ);
         修正データ.addAll(件数修正データ);
         修正データ.addAll(単位数修正データ);
         修正データ.addAll(費用額修正データ);

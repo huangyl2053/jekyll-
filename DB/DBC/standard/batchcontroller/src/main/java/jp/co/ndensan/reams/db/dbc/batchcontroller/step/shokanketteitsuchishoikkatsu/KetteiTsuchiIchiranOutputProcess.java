@@ -58,6 +58,9 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchProcessBase<ShokanKet
 
     @Override
     protected void afterExecute() {
+        if (帳票データリスト.isEmpty()) {
+            return;
+        }
         ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo ichiranhyo = new ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo();
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList
                 = ichiranhyo.getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram);

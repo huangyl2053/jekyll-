@@ -32,6 +32,7 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
     private static final RString TABLE_計算後情報一時_NAME = new RString("DbT2015KeisangoJohoTemp");
     private KeisangoJohoSakuseiProcessParamter processParamter;
+    private RString breakInsert;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 計算中間Temp;
     @BatchWriter
@@ -41,6 +42,7 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
 
     @Override
     protected IBatchReader createReader() {
+        breakInsert = RString.EMPTY;
         if (processParamter.is更新前フラグ()) {
             return new BatchDbReader(計算中間一時更新前情報);
         } else {
@@ -60,6 +62,19 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
     @Override
     protected void process(DbTKeisangoJohoTempTableEntity entity) {
         entity.setSakuseiShoriName(processParamter.getSakuseiShoriName());
+        if (processParamter.is更新前フラグ()) {
+            entity.setKoseiZengoKubun(new RString("1"));
+            計算後情報Temp.insert(entity);
+        } else {
+            entity.setKoseiZengoKubun(new RString("2"));
+            計算後情報Temp.insert(entity);
+        }
+        RString breakInsertTmp = entity.getChoteiNendo().toDateString().concat(entity.getFukaNendo().toDateString())
+                .concat(entity.getTsuchishoNo().getColumnValue()).concat(entity.getKoseiZengoKubun());
+        if (breakInsert.equals(breakInsertTmp)) {
+            return;
+        }
+        breakInsert = breakInsertTmp;
         if (processParamter.isSaishinFlag2()
                 || processParamter.isSaishinFlag4()
                 || processParamter.isSaishinFlag5()) {
@@ -67,6 +82,5 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
         } else if (processParamter.isSaishinFlag3()) {
             dbT2015Writer.insert(new KeisangoJohoResult().getDbT2015Entity(entity));
         }
-        計算中間Temp.delete(entity);
     }
 }

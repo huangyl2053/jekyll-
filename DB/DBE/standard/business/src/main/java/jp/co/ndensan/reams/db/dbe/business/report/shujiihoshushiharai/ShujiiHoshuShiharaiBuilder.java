@@ -32,7 +32,7 @@ public class ShujiiHoshuShiharaiBuilder implements IShujiiHoshuShiharaiBuilder {
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link ShujiiIkensho5komokuReportSource}
+     * @return {@link ShujiiHoshuShiharaiReportSource}
      */
     @Override
     public ShujiiHoshuShiharaiReportSource build() {

@@ -105,9 +105,10 @@ public class TennyuHoryuTokuteiManager {
      */
     @Transaction
     public RString getKanriNo() {
-        DbT7023RendoHoryuTokuteiJushoEntity entity = dac.selectKanriNo();
-        if (entity != null && !RString.isNullOrEmpty(entity.getKanriNo())) {
-            return entity.getKanriNo();
+        ITennyuHoryuTokuteiMapper mapper = mapperProvider.create(ITennyuHoryuTokuteiMapper.class);
+        RString entity = mapper.getKanriNo();
+        if (!RString.isNullOrEmpty(entity)) {
+            return entity;
         }
         return RString.EMPTY;
     }

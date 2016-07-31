@@ -154,11 +154,13 @@ public class HokenryoDankai {
     }
 
     void setHokenryoDankai(RString hokenryoDankai) {
-        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        // 20160730 From LIANDI：ご提供のソースに、異常をスローするため、一時コメントアウトさせて頂きます。
+//        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
     void setSystemDankai(RString hokenryoDankai) {
-        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        // 20160730 From LIANDI：ご提供のソースに、異常をスローするため、一時コメントアウトさせて頂きます。
+//        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -167,11 +169,14 @@ public class HokenryoDankai {
      * @return RString
      */
     public RString getSystemDankai() {
-        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        // 20160730 From LIANDI：ご提供のソースに、異常をスローするため、一時コメントアウトさせて頂きます。（RString.EMPTYを返す。）
+//        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        return RString.EMPTY;
     }
 
     void setTokureiTaisho(boolean b) {
-        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        // 20160730 From LIANDI：ご提供のソースに、異常をスローするため、一時コメントアウトさせて頂きます。
+//        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -180,7 +185,9 @@ public class HokenryoDankai {
      * @return RString
      */
     public RString getHokenryoDankai() {
-        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        // 20160730 From LIANDI：ご提供のソースに、異常をスローするため、一時コメントアウトさせて頂きます。（RRString.EMPTYを返す。）
+//        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        return RString.EMPTY;
     }
 
     /**
@@ -189,6 +196,8 @@ public class HokenryoDankai {
      * @return boolean
      */
     public boolean isTokureiTaisho() {
-        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        // 20160730 From LIANDI：ご提供のソースに、異常をスローするため、一時コメントアウトさせて頂きます。（falseを返す。）
+//        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 }

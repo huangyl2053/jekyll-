@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dba.business.core.sikakuidouteisei.ShikakuRirekiJo
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.ShikakuSoshitsuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashikakusoshitsu.HihokenshashikakusoshitsuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.SikakuKikan;
 import jp.co.ndensan.reams.db.dbz.definition.core.sikakuidocheck.TokusoRireki;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格喪失異動のHandlerクラスです。
@@ -36,7 +34,6 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString 被保履歴ボタン = new RString("NinteirirekiNashiMode");
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_更新 = new RString("更新");
-    private static final RString 状態_照会 = new RString("照会");
 
     private static final RString DBAMN22001_転出により喪失 = new RString("DBAMN22001");
     private static final RString DBAMN22002_死亡により喪失 = new RString("DBAMN22002");
@@ -45,6 +42,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
     private static final RString DBAMN22005_医療保険未加入により喪失 = new RString("DBAMN22005");
     private static final RString DBAMN22006_職権により喪失 = new RString("DBAMN22006");
     private static final RString DBAMN22007_その他事由により喪失 = new RString("DBAMN22007");
+    private static final RString DBAMN61002_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString FIRSTREQUEST以外 = new RString("2");
     private static final Integer FIRSTINDEX = Integer.valueOf("0");
     private static final RString 修正 = new RString("修正");
@@ -203,6 +201,8 @@ public class ShikakuSoshitsuIdoTotalHandler {
                     .getDdlShikakuShutokuJiyu().setSelectedKey(ShikakuSoshitsuJiyu.その他.getコード());
             div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDisabled(false);
             return;
+        } else if (DBAMN61002_転入転出保留対象者管理.equals(menuID)) {
+            keyValueList.add(new KeyValueDataSource(ShikakuSoshitsuJiyu.転出.getコード(), ShikakuSoshitsuJiyu.転出.get名称()));
         }
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setDataSource(keyValueList);
         div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().getShikakuSoshitsuInput().getDdlShikakuShutokuJiyu().setSelectedIndex(1);
@@ -270,11 +270,9 @@ public class ShikakuSoshitsuIdoTotalHandler {
     /**
      * 画面遷移のパラメータの設定します。
      *
+     * @return ShikakuRirekiJoho
      */
-    public void setパラメータ() {
-        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+    public ShikakuRirekiJoho setパラメータ() {
         dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getShikakuTokusoRirekiMain().
                 getCcdShikakuTokusoRireki().getDataGridSelectItem();
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
@@ -298,7 +296,7 @@ public class ShikakuSoshitsuIdoTotalHandler {
         joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
         joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
         joho.setState(row.getState());
-        ViewStateHolder.put(ViewStateKeys.資格得喪情報, joho);
+        return joho;
     }
 
     private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード) {

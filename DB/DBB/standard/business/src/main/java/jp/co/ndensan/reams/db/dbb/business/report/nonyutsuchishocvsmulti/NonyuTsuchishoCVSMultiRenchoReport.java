@@ -73,7 +73,7 @@ public class NonyuTsuchishoCVSMultiRenchoReport extends NonyuTsuchisho<NonyuTsuc
         }
 
         INonyuTsuchishoCVSMultiRenchoCoverEditor renchoCoverEditor
-                = new NonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource, 1);
+                = new NonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSMultiRenchoCoverBuilder builder
                 = new NonyuTsuchishoCVSMultiRenchoCoverBuilder(renchoCoverEditor);
         reportSourceWriter.writeLine(builder);
@@ -148,7 +148,7 @@ public class NonyuTsuchishoCVSMultiRenchoReport extends NonyuTsuchisho<NonyuTsuc
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
             INonyuTsuchishoCVSMultiRenchoCoverEditor renchoCoverEditor
-                    = new NonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource, 1);
+                    = new NonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource);
             INonyuTsuchishoCVSMultiRenchoCoverBuilder builder
                     = new NonyuTsuchishoCVSMultiRenchoCoverBuilder(renchoCoverEditor);
             reportSourceWriter.writeLine(builder);
@@ -219,6 +219,7 @@ public class NonyuTsuchishoCVSMultiRenchoReport extends NonyuTsuchisho<NonyuTsuc
         new本算定納入通知書情報.set編集後本算定通知書共通情報(item.get編集後本算定通知書共通情報());
         new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(item.get連番());
         return new本算定納入通知書情報;
     }
 }

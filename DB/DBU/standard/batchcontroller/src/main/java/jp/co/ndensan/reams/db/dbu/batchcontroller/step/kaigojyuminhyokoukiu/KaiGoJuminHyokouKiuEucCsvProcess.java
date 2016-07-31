@@ -342,19 +342,19 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
 
             }
         }
+        eucCsvWriterJunitoJugo.close();
         for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
             FilesystemName ファイル名称 = new FilesystemName(new RString(processParameter
                     .getKobetsuKoikiunyoParameterList().get(0).getShichosonCode().toString())
                     .concat(SofuRenkeiDataKyoyuFileName.介護個別事項異動情報_一定間隔.get名称()));
-            setSharedFile(ファイル名称, eucFilePath);
+            setSharedFile(ファイル名称);
         }
-        eucCsvWriterJunitoJugo.close();
         manager.spool(eucFilePath);
     }
 
-    private void setSharedFile(FilesystemName 共有ファイル名, RString path) {
-        SharedFile.defineSharedFile(共有ファイル名, maxKeepVersions, null, null, false, null);
-        RDateTime fileId = SharedFile.copyToSharedFile(new FilesystemPath(path.toString()), 共有ファイル名);
+    private void setSharedFile(FilesystemName 共有ファイル名) {
+        SharedFile.defineSharedFile(共有ファイル名, maxKeepVersions, SharedFile.GROUP_ALL, null, false, null);
+        RDateTime fileId = SharedFile.copyToSharedFile(new FilesystemPath(eucFilePath), 共有ファイル名);
         outSharedFileName.setValue(共有ファイル名.toRString());
         outSharedFileID.setValue(fileId);
     }

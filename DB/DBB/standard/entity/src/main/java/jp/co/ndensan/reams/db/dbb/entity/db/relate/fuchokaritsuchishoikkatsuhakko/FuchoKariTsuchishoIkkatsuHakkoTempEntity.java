@@ -37,19 +37,4 @@ public class FuchoKariTsuchishoIkkatsuHakkoTempEntity implements Cloneable, Seri
     private FukaJohoRelateEntity 賦課情報;
     private RString 代納人氏名;
     private RString 生活保護区分;
-
-    public void FuchoKariTsuchishoIkkatsuHakkoTempEntity() {
-        this.計算後情報_更正後 = null;
-        this.計算後情報_更正前 = null;
-        this.年金特徴回付情報_更正後 = null;
-        this.年金特徴回付情報_更正前 = null;
-        this.宛名識別対象 = null;
-        this.宛先 = null;
-        this.宛先代納 = null;
-        this.納組 = null;
-        this.口座 = null;
-        this.賦課情報 = null;
-        this.代納人氏名 = null;
-        this.生活保護区分 = null;
-    }
 }

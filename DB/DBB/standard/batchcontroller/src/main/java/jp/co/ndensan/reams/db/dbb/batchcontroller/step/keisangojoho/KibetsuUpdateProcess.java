@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho;
 
-import java.util.List;
 import jp.co.ndensan.reams.ca.cax.business.search.CaFt702FindTotalShunyuFunction;
 import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSaishutsuKubun;
@@ -15,9 +14,7 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJoh
 import jp.co.ndensan.reams.db.dbb.definition.processprm.keisangojoho.KeisangoJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisangoJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -36,9 +33,8 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
     private static final RString 期別金額取得 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho."
             + "IKeisangoJohoSakuseiMapper.get期別金額");
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
-    private IKeisangoJohoSakuseiMapper iKeisangoJohoSakuseiMapper;
-    private KeisangoJohoResult keisangoJohoResult;
     private KeisangoJohoSakuseiProcessParamter processParamter;
+    private DbTKeisangoJohoTempTableEntity 計算中間TempEnitty;
     private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
 
     @BatchWriter
@@ -47,8 +43,6 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
     @Override
     protected void initialize() {
         setMybatisParamter();
-        iKeisangoJohoSakuseiMapper = getMapper(IKeisangoJohoSakuseiMapper.class);
-        keisangoJohoResult = new KeisangoJohoResult();
     }
 
     @Override
@@ -64,20 +58,23 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
 
     @Override
     protected void process(KeisangoJohoSakuseiRelateEntity entity) {
-        tsuchishoNo = TsuchishoNo.EMPTY;
-        if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
+        if (tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
             tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
-            計算中間Temp.update(keisangoJohoResult.get中間Entity(entity, processParamter.is更新前フラグ(), entity.get計算中間Entity()));
+            計算中間TempEnitty = new KeisangoJohoResult().get中間Entity(entity, processParamter.is更新前フラグ(), 計算中間TempEnitty);
+        } else {
+            if (計算中間TempEnitty != null) {
+                計算中間Temp.update(計算中間TempEnitty);
+            }
+            計算中間TempEnitty = new DbTKeisangoJohoTempTableEntity();
+            tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
+            計算中間TempEnitty = new KeisangoJohoResult().get中間Entity(entity, processParamter.is更新前フラグ(), 計算中間TempEnitty);
         }
     }
 
     @Override
     protected void afterExecute() {
-        if (!processParamter.is更新前フラグ()) {
-            List<DbT2002FukaEntity> 更新前賦課情報EntityList = iKeisangoJohoSakuseiMapper.get更新前賦課情報(setMybatisParamter());
-            for (DbT2002FukaEntity dbT2002FukaEntity : 更新前賦課情報EntityList) {
-                計算中間Temp.insert(keisangoJohoResult.get計算中間Entity(dbT2002FukaEntity));
-            }
+        if (計算中間TempEnitty != null) {
+            計算中間Temp.update(計算中間TempEnitty);
         }
     }
 

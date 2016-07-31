@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo;
 
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

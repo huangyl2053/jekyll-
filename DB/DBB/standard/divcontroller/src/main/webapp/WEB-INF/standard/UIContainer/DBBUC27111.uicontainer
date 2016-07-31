@@ -37,7 +37,7 @@
      "layoutName": "DBB2710011",
      "layoutTitle": "特別徴収対象者登録",
      "eventName": "終了する",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
     },
     {
@@ -47,7 +47,7 @@
      "layoutName": "DBB2710011",
      "layoutTitle": "特別徴収対象者登録",
      "eventName": "再検索する",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0300001",
@@ -61,7 +61,7 @@
      "layoutName": "DBB2710011",
      "layoutTitle": "特別徴収対象者登録",
      "eventName": "検索結果一覧へ",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0300001",

@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
+import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
+import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeikoiki.ShotokuJohoChushutsuRenkeiKoiki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -22,9 +25,11 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -168,17 +173,21 @@ public class ShotokuJohoChushutsuKoikiBatchParameterHandler {
      *
      * @return ShotokuJohoTyushutuRenkeiKoikiParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
-    public ShotokuJohoTyushutuRenkeiKoikiParameter getBatchParamter() {
-        // TODO バッチが実装でいます
+    public ShotokuJohoBatchresultKoikiParameter getBatchParamter() {
         ShotokuJohoTyushutuRenkeiKoikiParameter batchparam = new ShotokuJohoTyushutuRenkeiKoikiParameter();
-        batchparam.set共有ファイルID(null);
-        batchparam.set共有ファイル名(null);
-        batchparam.set処理区分(null);
-        batchparam.set処理年度(null);
-        batchparam.set出力順ID(null);
-        batchparam.set市町村情報List(null);
-        batchparam.set帳票ID(null);
-        return batchparam;
+        batchparam.set処理年度(new FlexibleYear(div.getTxtShoriNendoKoiki().getValue().getYear().toDateString()));
+        batchparam.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunKoiki().get出力順ID()));
+        List<ShichosonJoho> list = new ArrayList<>();
+        ShichosonJoho entity = new ShichosonJoho();
+        for (int i = 0; i < div.getDgShichosonIchiran().getClickedRowId(); i++) {
+            entity.set市町村コード(new LasdecCode(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityCode().getValue()));
+            entity.set市町村名(div.getDgShichosonIchiran().getDataSource().get(i).getTxtCityName().getValue());
+            entity.set処理状態(div.getDgShichosonIchiran().getDataSource().get(i).getTxtShoriState().getValue());
+            entity.set処理日時(new YMDHMS(div.getDgShichosonIchiran().getDataSource().get(i).getTxtSaishinShoriNitiji().getValue()));
+            list.add(entity);
+        }
+        batchparam.set市町村情報List(list);
+        return ShotokuJohoChushutsuRenkeiKoiki.createInstance().createShotokuJohoParameter(batchparam);
     }
 
     private List<KoikiZenShichosonJoho> handler市町村識別ID(List<AuthorityItem> 市町村識別ID,

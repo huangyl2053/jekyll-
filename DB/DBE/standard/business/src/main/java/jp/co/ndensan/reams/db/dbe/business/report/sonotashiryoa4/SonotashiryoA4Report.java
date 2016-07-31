@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 事務局用その他資料のReportです。
+ * その他資料（A4版）のReportです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-270 wangrenze
  */
 public class SonotashiryoA4Report extends Report<SonotashiryoA4ReportSource> {
 

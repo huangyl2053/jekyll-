@@ -102,8 +102,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler {
      * onLoad画面初期化処理
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @return List<JigyoHokokuTokeiData>
      */
-    public void 単位数OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> 単位数OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 単位数 = new ArrayList<>();
 
         if (引き継ぎデータ.get行集計番号().startsWith(単位数総数.toString())) {
@@ -116,6 +117,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuLoadHandler {
             単位数 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0402);
         }
         loopList(単位数);
+        return 単位数;
     }
 
     private void loopList(List<JigyoHokokuTokeiData> list) {

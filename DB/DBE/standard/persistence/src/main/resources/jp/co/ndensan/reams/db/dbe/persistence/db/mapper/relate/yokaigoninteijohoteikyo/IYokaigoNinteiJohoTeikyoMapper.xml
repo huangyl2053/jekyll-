@@ -181,7 +181,9 @@
             ON DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         WHERE DbT5101NinteiShinseiJoho."hihokenshaNo"=#{被保険者番号}
             AND DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"=#{証記載保険者番号}
+        <if test="shishoKengenuser">
             AND DbT5101NinteiShinseiJoho."shishoCode"=#{支所コード}
+        </if>
             AND (DbT5101NinteiShinseiJoho."shoriJotaiKubun"=#{延期} OR
             DbT5101NinteiShinseiJoho."shoriJotaiKubun"=#{通常})
             AND DbT5101NinteiShinseiJoho."logicalDeletedFlag"=FALSE
@@ -206,7 +208,7 @@
             ,DbT5207NinteichosahyoServiceJokyo."serviceJokyo" AS 認定調査票_サービスの状況
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        LEFT JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207NinteichosahyoServiceJokyo
+        INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207NinteichosahyoServiceJokyo
             ON DbT5207NinteichosahyoServiceJokyo."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
             AND DbT5207NinteichosahyoServiceJokyo."ninteichosaRirekiNo"=(SELECT MAX(DbT5207Nintei."ninteichosaRirekiNo") FROM 
         rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207Nintei WHERE DbT5207Nintei."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
@@ -226,9 +228,9 @@
             ,DbT5211NinteichosahyoChosaItem."researchItem" AS 認定調査票調査_調査項目
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho
             ON DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211NinteichosahyoChosaItem
+        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211NinteichosahyoChosaItem
             ON DbT5211NinteichosahyoChosaItem."shinseishoKanriNo"=DbT5102NinteiKekkaJoho."shinseishoKanriNo"
             AND DbT5211NinteichosahyoChosaItem."ninteichosaRirekiNo"=(SELECT MAX(DbT5211Nintei."ninteichosaRirekiNo") FROM 
         rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211Nintei WHERE DbT5211Nintei."shinseishoKanriNo" = DbT5102NinteiKekkaJoho."shinseishoKanriNo")
@@ -248,9 +250,9 @@
             ,Zen_DbT5211NinteichosahyoChosaItem."researchItem" AS 前回認定調査票調査_調査項目
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
+        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
             ON DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS Zen_DbT5211NinteichosahyoChosaItem
+        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS Zen_DbT5211NinteichosahyoChosaItem
             ON Zen_DbT5211NinteichosahyoChosaItem."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
             AND Zen_DbT5211NinteichosahyoChosaItem."ninteichosaRirekiNo"=(SELECT MAX(Zen_DbT5211Nintei."ninteichosaRirekiNo") 
             FROM rgdb."DbT5211NinteichosahyoChosaItem" AS Zen_DbT5211Nintei WHERE Zen_DbT5211Nintei."shinseishoKanriNo" = DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo")
@@ -270,9 +272,9 @@
             ,DbT5304ShujiiIkenshoIkenItem."ikenItem" AS 主治医意見書_意見項目
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho
             ON DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304ShujiiIkenshoIkenItem
+        INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304ShujiiIkenshoIkenItem
             ON DbT5304ShujiiIkenshoIkenItem."shinseishoKanriNo"=DbT5102NinteiKekkaJoho."shinseishoKanriNo" AND DbT5304ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo"= 
             (SELECT MAX(DbT5304Shujii."ikenshoIraiRirekiNo") FROM rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304Shujii 
                 WHERE DbT5304Shujii."shinseishoKanriNo" = DbT5102NinteiKekkaJoho."shinseishoKanriNo")
@@ -292,9 +294,9 @@
             ,Zen_DbT5304ShujiiIkenshoIkenItem."ikenItem" AS 前回主治医意見書_意見項目
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
+        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
             ON DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS Zen_DbT5304ShujiiIkenshoIkenItem
+        INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS Zen_DbT5304ShujiiIkenshoIkenItem
             ON Zen_DbT5304ShujiiIkenshoIkenItem."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo" AND Zen_DbT5304ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo"= 
             (SELECT MAX(Zen_DbT5304Shujii."ikenshoIraiRirekiNo") FROM rgdb."DbT5304ShujiiIkenshoIkenItem" AS Zen_DbT5304Shujii 
             WHERE Zen_DbT5304Shujii."shinseishoKanriNo" = DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo")
@@ -370,7 +372,7 @@
             ,DbT5209NinteichosahyoKinyuItem."serviceJokyoKinyu" AS 認定調査票記入_サービス状況記入
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        LEFT JOIN rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209NinteichosahyoKinyuItem
+        INNER JOIN rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209NinteichosahyoKinyuItem
             ON DbT5209NinteichosahyoKinyuItem."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
             AND DbT5209NinteichosahyoKinyuItem."ninteichosaRirekiNo"=(SELECT MAX(DbT5209Nintei."ninteichosaRirekiNo") 
         FROM rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209Nintei WHERE DbT5209Nintei."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
@@ -400,13 +402,16 @@
         WHERE DbT5115Image."shinseishoKanriNo" = #{申請書管理番号}
     </select>
     
-    <update id="update要介護認定申請" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter">
-        UPDATE rgdb."DbT5101NinteiShinseiJoho"
-        SET
-            "johoteikyoSiryoOutputYMD" = to_char(current_date,'yyyyMMdd') 
+    <select resultOrdered="true" id="get要介護認定申請情報" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter" fetchSize="500">
+        SELECT
+           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho"
         WHERE
             "shinseishoKanriNo" = #{申請書管理番号}
-    </update>
+    </select>
     
     <resultMap id="resultMap_DbT5208Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity" autoMapping="true">
         <result property="remban"  column="認定調査票フラグ_連番" />
@@ -420,7 +425,7 @@
             ,DbT5208NinteichosahyoServiceJokyoFlag."serviceJokyoFlag" AS 認定調査票フラグ_サービスの状況
         FROM 
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS DbT5208NinteichosahyoServiceJokyoFlag
+        INNER JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS DbT5208NinteichosahyoServiceJokyoFlag
             ON DbT5208NinteichosahyoServiceJokyoFlag."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
             AND DbT5208NinteichosahyoServiceJokyoFlag."ninteichosaRirekiNo"=(SELECT MAX(DbT5208Nintei."ninteichosaRirekiNo") 
         FROM rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS DbT5208Nintei WHERE DbT5208Nintei."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
@@ -623,13 +628,13 @@
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
             ON DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS Zen_DbT5101NinteiShinseiJoho
-            ON Zen_DbT5101NinteiShinseiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zen_DbT5101NinteiShinseiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS Zen_DbT5102NinteiKekkaJoho
-            ON Zen_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zen_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS Zen_DbT5121ShinseiRirekiJoho	
-            ON Zen_DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zen_DbT5121ShinseiRirekiJoho."shinseishoKanriNo"=DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS Zenku_DbT5102NinteiKekkaJoho
-            ON Zenku_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=Zen_DbT5121ShinseiRirekiJoho."shinseishoKanriNo"
+            ON Zenku_DbT5102NinteiKekkaJoho."shinseishoKanriNo"=Zen_DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116IchijiHanteiKekkaJoho
             ON DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo"=DbT5102NinteiKekkaJoho."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203NinteichosahyoKihonChosa

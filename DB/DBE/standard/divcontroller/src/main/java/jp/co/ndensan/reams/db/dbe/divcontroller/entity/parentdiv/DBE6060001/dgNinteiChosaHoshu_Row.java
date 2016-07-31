@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jul 01 18:56:26 JST 2016 
+ * Fri Jul 15 16:00:54 JST 2016 
  */
 
 
@@ -11,7 +11,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -38,7 +37,7 @@ public class dgNinteiChosaHoshu_Row extends DataRow {
     private RString zaitakuSai;
     private RString shisetsuSho;
     private RString shisetsuSai;
-    private TextBoxNum itakuryo;
+    private RString itakuryo;
     private RString shinseishoKanriNo;
     private RString ninteichosaIraiRirekiNo;
 
@@ -59,7 +58,7 @@ public class dgNinteiChosaHoshu_Row extends DataRow {
         this.zaitakuSai = RString.EMPTY;
         this.shisetsuSho = RString.EMPTY;
         this.shisetsuSai = RString.EMPTY;
-        this.itakuryo = new TextBoxNum();
+        this.itakuryo = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.ninteichosaIraiRirekiNo = RString.EMPTY;
         this.setOriginalData("chosakikanCode", chosakikanCode);
@@ -82,7 +81,7 @@ public class dgNinteiChosaHoshu_Row extends DataRow {
         this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
     }
 
-    public dgNinteiChosaHoshu_Row(RString chosakikanCode, RString chosakikanMei, RString chosainCode, RString chosainShimei, TextBoxDate iraibi, TextBoxDate chosabi, TextBoxDate nyushubi, RString ninteiChousaIraiKubunCode, RString hokenshaBango, RString hihokenshaBango, RString shinseishaShimei, RString zaitakuSho, RString zaitakuSai, RString shisetsuSho, RString shisetsuSai, TextBoxNum itakuryo, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo) {
+    public dgNinteiChosaHoshu_Row(RString chosakikanCode, RString chosakikanMei, RString chosainCode, RString chosainShimei, TextBoxDate iraibi, TextBoxDate chosabi, TextBoxDate nyushubi, RString ninteiChousaIraiKubunCode, RString hokenshaBango, RString hihokenshaBango, RString shinseishaShimei, RString zaitakuSho, RString zaitakuSai, RString shisetsuSho, RString shisetsuSai, RString itakuryo, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo) {
         super();
         this.setOriginalData("chosakikanCode", chosakikanCode);
         this.setOriginalData("chosakikanMei", chosakikanMei);
@@ -182,7 +181,7 @@ public class dgNinteiChosaHoshu_Row extends DataRow {
         return shisetsuSai;
     }
 
-    public TextBoxNum getItakuryo() {
+    public RString getItakuryo() {
         return itakuryo;
     }
 
@@ -269,7 +268,7 @@ public class dgNinteiChosaHoshu_Row extends DataRow {
         this.shisetsuSai = shisetsuSai;
     }
 
-    public void setItakuryo(TextBoxNum itakuryo) {
+    public void setItakuryo(RString itakuryo) {
         this.setOriginalData("itakuryo", itakuryo);
         this.itakuryo = itakuryo;
     }

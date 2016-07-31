@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.taino;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.definition.core.common.TokuchoFuchoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.JikoGoShunyuKubun;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TainoKiSummary {
+public class TainoKiSummary implements Serializable {
 
     private final FlexibleYear 賦課年度;
     private final FlexibleYear 調定年度;

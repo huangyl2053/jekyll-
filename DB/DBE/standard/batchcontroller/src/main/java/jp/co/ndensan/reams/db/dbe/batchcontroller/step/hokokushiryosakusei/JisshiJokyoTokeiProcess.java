@@ -176,126 +176,106 @@ public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiE
     }
 
     private void set申請受付(JisshiJokyoTokeiEntity entity) {
-        int 新規申請受付数申請時 = 0;
-        int 更新申請受付数申請時 = 0;
-        int 区分変更申請受付数申請時 = 0;
-        if (parameter.isShinseiji()) {
-            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                新規申請受付数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                更新申請受付数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                区分変更申請受付数申請時 = entity.getCountKensu();
-            }
-        }
-        int 新規申請受付数法令 = 0;
-        int 更新申請受付数法令 = 0;
-        int 区分変更申請受付数法令 = 0;
-        if (parameter.isHorei()) {
+        if (parameter.isHorei() && !parameter.isShinseiji()) {
+            int 新規申請受付数法令 = 0;
+            int 更新申請受付数法令 = 0;
+            int 区分変更申請受付数法令 = 0;
             if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 新規申請受付数法令 = entity.getCountKensu();
-            }
-            if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+            } else if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 更新申請受付数法令 = entity.getCountKensu();
-            }
-            if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+            } else if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 区分変更申請受付数法令 = entity.getCountKensu();
             }
+            jisshiJokyoTokei.set新規申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get新規申請_申請受付数()) + 新規申請受付数法令));
+            jisshiJokyoTokei.set更新申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get更新申請_申請受付数()) + 更新申請受付数法令));
+            jisshiJokyoTokei.set区分変更申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_申請受付数()) + 区分変更申請受付数法令));
+        } else {
+            int 新規申請受付数申請時 = 0;
+            int 更新申請受付数申請時 = 0;
+            int 区分変更申請受付数申請時 = 0;
+            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                新規申請受付数申請時 = entity.getCountKensu();
+            } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                更新申請受付数申請時 = entity.getCountKensu();
+            } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                区分変更申請受付数申請時 = entity.getCountKensu();
+            }
+            jisshiJokyoTokei.set新規申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get新規申請_申請受付数()) + 新規申請受付数申請時));
+            jisshiJokyoTokei.set更新申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get更新申請_申請受付数()) + 更新申請受付数申請時));
+            jisshiJokyoTokei.set区分変更申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_申請受付数()) + 区分変更申請受付数申請時));
         }
-        jisshiJokyoTokei.set新規申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get新規申請_申請受付数()) + 新規申請受付数申請時 + 新規申請受付数法令));
-        jisshiJokyoTokei.set更新申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get更新申請_申請受付数()) + 更新申請受付数申請時 + 更新申請受付数法令));
-        jisshiJokyoTokei.set区分変更申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_申請受付数()) + 区分変更申請受付数申請時 + 区分変更申請受付数法令));
     }
 
     private void set調査実施(JisshiJokyoTokeiEntity entity) {
-        int 新規調査実施数申請時 = 0;
-        int 更新調査実施数申請時 = 0;
-        int 区分変更調査実施数申請時 = 0;
-        if (parameter.isShinseiji()) {
-            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                新規調査実施数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                更新調査実施数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                区分変更調査実施数申請時 = entity.getCountKensu();
-            }
-        }
-        int 新規調査実施数法令 = 0;
-        int 更新調査実施数法令 = 0;
-        int 区分変更調査実施数法令 = 0;
-        if (parameter.isHorei()) {
+        if (parameter.isHorei() && !parameter.isShinseiji()) {
+            int 新規調査実施数法令 = 0;
+            int 更新調査実施数法令 = 0;
+            int 区分変更調査実施数法令 = 0;
             if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 新規調査実施数法令 = entity.getCountKensu();
-            }
-            if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+            } else if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 更新調査実施数法令 = entity.getCountKensu();
-            }
-            if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+            } else if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 区分変更調査実施数法令 = entity.getCountKensu();
             }
+            jisshiJokyoTokei.set新規申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_調査実施数()) + 新規調査実施数法令));
+            jisshiJokyoTokei.set更新申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_調査実施数()) + 更新調査実施数法令));
+            jisshiJokyoTokei.set区分変更申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_調査実施数()) + 区分変更調査実施数法令));
+        } else {
+            int 新規調査実施数申請時 = 0;
+            int 更新調査実施数申請時 = 0;
+            int 区分変更調査実施数申請時 = 0;
+            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                新規調査実施数申請時 = entity.getCountKensu();
+            } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                更新調査実施数申請時 = entity.getCountKensu();
+            } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                区分変更調査実施数申請時 = entity.getCountKensu();
+            }
+            jisshiJokyoTokei.set新規申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_調査実施数()) + 新規調査実施数申請時));
+            jisshiJokyoTokei.set更新申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_調査実施数()) + 更新調査実施数申請時));
+            jisshiJokyoTokei.set区分変更申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_調査実施数()) + 区分変更調査実施数申請時));
         }
-        jisshiJokyoTokei.set新規申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_調査実施数()) + 新規調査実施数申請時 + 新規調査実施数法令));
-        jisshiJokyoTokei.set更新申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_調査実施数()) + 更新調査実施数申請時 + 更新調査実施数法令));
-        jisshiJokyoTokei.set区分変更申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_調査実施数()) + 区分変更調査実施数申請時 + 区分変更調査実施数法令));
     }
 
     private void set審査会実施(JisshiJokyoTokeiEntity entity) {
-        int 新規審査会実施数申請時 = 0;
-        int 更新審査会実施数申請時 = 0;
-        int 区分変更審査会実施数申請時 = 0;
-        if (parameter.isShinseiji()) {
-            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                新規審査会実施数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                更新審査会実施数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                区分変更審査会実施数申請時 = entity.getCountKensu();
-            }
-        }
-        int 新規審査会実施数法令 = 0;
-        int 更新審査会実施数法令 = 0;
-        int 区分変更審査会実施数法令 = 0;
-        if (parameter.isHorei()) {
+        if (parameter.isHorei() && !parameter.isShinseiji()) {
+            int 新規審査会実施数法令 = 0;
+            int 更新審査会実施数法令 = 0;
+            int 区分変更審査会実施数法令 = 0;
             if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 新規審査会実施数法令 = entity.getCountKensu();
-            }
-            if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+            } else if (NinteiShinseiHoreiCode.更新申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 更新審査会実施数法令 = entity.getCountKensu();
-            }
-            if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
+            } else if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 区分変更審査会実施数法令 = entity.getCountKensu();
             }
+            jisshiJokyoTokei.set新規申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_審査会実施数()) + 新規審査会実施数法令));
+            jisshiJokyoTokei.set更新申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_審査会実施数()) + 更新審査会実施数法令));
+            jisshiJokyoTokei.set区分変更申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_審査会実施数()) + 区分変更審査会実施数法令));
+        } else {
+            int 新規審査会実施数申請時 = 0;
+            int 更新審査会実施数申請時 = 0;
+            int 区分変更審査会実施数申請時 = 0;
+            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                新規審査会実施数申請時 = entity.getCountKensu();
+            } else if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                更新審査会実施数申請時 = entity.getCountKensu();
+            } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                区分変更審査会実施数申請時 = entity.getCountKensu();
+            }
+            jisshiJokyoTokei.set新規申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_審査会実施数()) + 新規審査会実施数申請時));
+            jisshiJokyoTokei.set更新申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_審査会実施数()) + 更新審査会実施数申請時));
+            jisshiJokyoTokei.set区分変更申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_審査会実施数()) + 区分変更審査会実施数申請時));
         }
-        jisshiJokyoTokei.set新規申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_審査会実施数()) + 新規審査会実施数申請時 + 新規審査会実施数法令));
-        jisshiJokyoTokei.set更新申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_審査会実施数()) + 更新審査会実施数申請時 + 更新審査会実施数法令));
-        jisshiJokyoTokei.set区分変更申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_審査会実施数()) + 区分変更審査会実施数申請時 + 区分変更審査会実施数法令));
     }
 
     private void set認定結果(JisshiJokyoTokeiEntity entity) {
-        int 新規認定結果数申請時 = 0;
-        int 更新認定結果数申請時 = 0;
-        int 区分変更認定結果数申請時 = 0;
-        if (parameter.isShinseiji()) {
-            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                新規認定結果数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                更新認定結果数申請時 = entity.getCountKensu();
-            }
-            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
-                区分変更認定結果数申請時 = entity.getCountKensu();
-            }
-        }
-        int 新規認定結果数法令 = 0;
-        int 更新認定結果数法令 = 0;
-        int 区分変更認定結果数法令 = 0;
-        if (parameter.isHorei()) {
+        if (parameter.isHorei() && !parameter.isShinseiji()) {
+            int 新規認定結果数法令 = 0;
+            int 更新認定結果数法令 = 0;
+            int 区分変更認定結果数法令 = 0;
             if (NinteiShinseiHoreiCode.新規申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 新規認定結果数法令 = entity.getCountKensu();
             }
@@ -305,10 +285,26 @@ public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiE
             if (NinteiShinseiHoreiCode.区分変更申請.getコード().equals(entity.getNinteiShinseiHoreiKubunCode().value())) {
                 区分変更認定結果数法令 = entity.getCountKensu();
             }
+            jisshiJokyoTokei.set新規申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get新規申請_認定結果数()) + 新規認定結果数法令));
+            jisshiJokyoTokei.set更新申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get更新申請_認定結果数()) + 更新認定結果数法令));
+            jisshiJokyoTokei.set区分変更申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_認定結果数()) + 区分変更認定結果数法令));
+        } else {
+            int 新規認定結果数申請時 = 0;
+            int 更新認定結果数申請時 = 0;
+            int 区分変更認定結果数申請時 = 0;
+            if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                新規認定結果数申請時 = entity.getCountKensu();
+            }
+            if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                更新認定結果数申請時 = entity.getCountKensu();
+            }
+            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+                区分変更認定結果数申請時 = entity.getCountKensu();
+            }
+            jisshiJokyoTokei.set新規申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get新規申請_認定結果数()) + 新規認定結果数申請時));
+            jisshiJokyoTokei.set更新申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get更新申請_認定結果数()) + 更新認定結果数申請時));
+            jisshiJokyoTokei.set区分変更申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_認定結果数()) + 区分変更認定結果数申請時));
         }
-        jisshiJokyoTokei.set新規申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get新規申請_認定結果数()) + 新規認定結果数申請時 + 新規認定結果数法令));
-        jisshiJokyoTokei.set更新申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get更新申請_認定結果数()) + 更新認定結果数申請時 + 更新認定結果数法令));
-        jisshiJokyoTokei.set区分変更申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_認定結果数()) + 区分変更認定結果数申請時 + 区分変更認定結果数法令));
     }
 
     private void set合計() {

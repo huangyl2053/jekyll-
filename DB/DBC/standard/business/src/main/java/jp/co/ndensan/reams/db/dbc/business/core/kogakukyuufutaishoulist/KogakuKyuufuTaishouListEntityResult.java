@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntity;
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaGokei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaMeisai;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * ビジネス設計_DBCKD00006_高額給付対象一覧共有子Div（画面）
@@ -15,17 +18,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyuufutaishoulist.Kogak
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuKyuufuTaishouListEntityResult {
+public class KogakuKyuufuTaishouListEntityResult implements Serializable {
 
-    private KogakuKyuufuTaishouListEntity entity;
-
-    /**
-     * コンストラクタです。
-     *
-     * @param entity entity
-     */
-    public KogakuKyuufuTaishouListEntityResult(KogakuKyuufuTaishouListEntity entity) {
-        this.entity = entity;
-    }
-
+    private KogakuKyufuTaishoshaMeisai 給付対象者明細entity;
+    private KogakuKyufuTaishoshaGokei 給付対象者合計entity;
+    private RString 明細合計区分;
+    private RString 事業者名;
+    private RString サービス種類;
 }

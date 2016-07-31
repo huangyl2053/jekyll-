@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -38,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得異動のHandlerクラスです。
@@ -52,7 +50,6 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 合併あり = new RString("1");
     private static final RString 合併なし = new RString("0");
-    private static final RString 状態_照会 = new RString("照会");
 
     private static final RString DBAMN21001_転入により取得 = new RString("DBAMN21001");
     private static final RString DBAMN21002_第2号被保険者取得申請により取得 = new RString("DBAMN21002");
@@ -299,11 +296,9 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
     /**
      * 画面遷移のパラメータの設定します。
      *
+     * @return ShikakuRirekiJoho
      */
-    public void setパラメータ() {
-        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+    public ShikakuRirekiJoho setパラメータ() {
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                 getCcdShikakuTokusoRireki().getDataGridSelectItem();
         ShikakuRirekiJoho joho = new ShikakuRirekiJoho();
@@ -327,7 +322,7 @@ public class ShiKaKuSyuToKuIdouTotalHandler {
         joho.setSoshitsuJiyuKey(row.getSoshitsuJiyuKey());
         joho.setSoshitsuTodokedeDate(row.getSoshitsuTodokedeDate().getValue());
         joho.setState(row.getState());
-        ViewStateHolder.put(ViewStateKeys.資格得喪情報, joho);
+        return joho;
     }
 
     private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード) {

@@ -501,6 +501,8 @@ dbc/db/dbc/ServiceTeikyoShomeishoPanel/onClick_btnShinseiInfo
 dbc/db/dbc/ServiceTeikyoShomeishoPanel/onClick_btnShokanKeteiInfo
 dbc/db/dbc/ServiceTeikyoShomeishoPanel/onLoad
 dbc/db/dbc/SetaiJoho/getOnLoadData
+dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onClick_btnReportPublish
+dbc/db/dbc/ServiceTeikyohyoBeppyoPrintMain/onLoad
 dbc/db/dbc/ShafukuKeigenGaku/onClick_btnClose
 dbc/db/dbc/ShafukuKeigenGaku/onClick_selectButton
 dbc/db/dbc/ShafukuKeigenGaku/onLoad
@@ -810,3 +812,5 @@ dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectByModifyButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectBySelectButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onClick_btnSearchMishinsa
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad
+dbc/db/dbc/PanelAll/onLoad
+dbc/db/dbc/PanelAll/onClick_Batch

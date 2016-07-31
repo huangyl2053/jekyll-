@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020061;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.DBU0020061StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.DBU0020061TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.YoshikiIchiBesshiDiv;
@@ -16,16 +16,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParamete
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -38,11 +33,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YoshikiIchiBesshi {
 
-    private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
     private static final RString MSG_1 = new RString("当月末現在の世帯数");
     private static final RString MSG_2 = new RString("前月末世帯数から増減した世帯数の計算結果");
-    private static final Code DATA = new Code(new RString("0100"));
 
     /**
      * 画面ロードメソッド
@@ -58,7 +51,7 @@ public class YoshikiIchiBesshi {
         handler.setViewState(引き継ぎデータ, 状態);
         List<JigyoHokokuTokeiData> 更新前データリスト = handler.get更新前データリスト(引き継ぎデータ);
         handler.更新前データリスト初期化(更新前データリスト);
-
+        ViewStateHolder.put(ViewStateKeys.業報告統計データ_リスト, (Serializable) 更新前データリスト);
         return ResponseData.of(div).respond();
     }
 
@@ -71,25 +64,13 @@ public class YoshikiIchiBesshi {
     public ResponseData<YoshikiIchiBesshiDiv> onClick_btnSave(YoshikiIchiBesshiDiv div) {
         YoshikiIchiBesshiHandler handler = getHandler(div);
 
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
-                JigyoHokokuGeppoParameter.class);
-        JigyoHokokuGeppoDetalSearchParameter par = JigyoHokokuGeppoDetalSearchParameter
-                .createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        DATA);
+        List<JigyoHokokuTokeiData> 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.業報告統計データ_リスト,
+                List.class);
 
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && !ResponseHolder.isReRequest()) {
-            JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(par);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(引き継ぎデータ);
+            getHandler(div).show削除正常終了();
+            return ResponseData.of(div).setState(DBU0020061StateName.完了状態);
         }
 
         List<JigyoHokokuTokeiData> 修正データ = handler.get修正データ(引き継ぎデータ);
@@ -117,26 +98,10 @@ public class YoshikiIchiBesshi {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データ);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getMessage(div);
+            getHandler(div).show更新正常終了();
             return ResponseData.of(div).setState(DBU0020061StateName.完了状態);
         }
         return ResponseData.of(div).respond();
-    }
-
-    private void getMessage(YoshikiIchiBesshiDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).show削除正常終了();
-        }
-        if (更新.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).show更新正常終了();
-        }
     }
 
     /**
@@ -147,8 +112,7 @@ public class YoshikiIchiBesshi {
      */
     public ResponseData<YoshikiIchiBesshiDiv> onClick_btnBack(YoshikiIchiBesshiDiv div) {
         YoshikiIchiBesshiHandler handler = getHandler(div);
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.事業報告基本,
-                JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.業報告統計データ_リスト, List.class);
         if (!ResponseHolder.isReRequest()) {
             if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
                 return ResponseData.of(div).forwardWithEventName(

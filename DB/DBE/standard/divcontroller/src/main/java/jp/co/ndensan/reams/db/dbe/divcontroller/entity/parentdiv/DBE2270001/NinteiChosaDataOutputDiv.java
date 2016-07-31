@@ -8,9 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteiChosaDataOutput のクラスファイル
@@ -97,8 +100,8 @@ public class NinteiChosaDataOutputDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
-        return this.getNinteiKensakuJyoken().getCcdChosaltakusakiAndChosainInput();
+    public IHokenshaListDiv getCcdHokensha() {
+        return this.getNinteiKensakuJyoken().getCcdHokensha();
     }
 
     @JsonIgnore
@@ -129,6 +132,11 @@ public class NinteiChosaDataOutputDiv extends Panel {
     @JsonIgnore
     public void setBtnKensaku(Button btnKensaku) {
         this.getNinteiKensakuJyoken().setBtnKensaku(btnKensaku);
+    }
+
+    @JsonIgnore
+    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
+        return this.getNinteiKensakuJyoken().getCcdChosaltakusakiAndChosainInput();
     }
 
     @JsonIgnore

@@ -109,7 +109,7 @@ public class FutsuChoshuKarisanteiKekkaIchiranEditor implements IFutsuChoshuKari
         if (普徴仮算定計算後賦課 != null && 普徴仮算定計算後賦課.get宛名の情報() != null) {
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(普徴仮算定計算後賦課.get宛名の情報());
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, 帳票分類ID);
-            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通);
+            EditedKojin 編集後個人 = new EditedKojin(iKojin, 帳票制御共通, null);
             source.listUpper_2 = 編集後個人.get郵便番号();
             source.listUpper_3 = 編集後個人.get町域();
             source.listUpper_5 = 編集後個人.get生年月日For帳票();

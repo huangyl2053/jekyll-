@@ -183,26 +183,16 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
     private void set調定年度() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         RDate 適用基準日 = RDate.getNowDate();
-        RString 調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 遡及年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_遡及年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        RString 所得年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, 適用基準日, SubGyomuCode.DBB介護賦課);
-        KeyValueDataSource 調定年度Key = new KeyValueDataSource();
-        調定年度Key.setKey(new RString("調定年度"));
-        調定年度Key.setValue(調定年度);
-        KeyValueDataSource 当初年度Key = new KeyValueDataSource();
-        当初年度Key.setKey(new RString("当初年度"));
-        当初年度Key.setValue(当初年度);
-        KeyValueDataSource 遡及年度Key = new KeyValueDataSource();
-        遡及年度Key.setKey(new RString("遡及年度"));
-        遡及年度Key.setValue(遡及年度);
-        KeyValueDataSource 所得年度Key = new KeyValueDataSource();
-        所得年度Key.setKey(new RString("所得年度"));
-        所得年度Key.setValue(所得年度);
-        dataSourceList.add(調定年度Key);
-        dataSourceList.add(当初年度Key);
-        dataSourceList.add(遡及年度Key);
-        dataSourceList.add(所得年度Key);
+        RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 適用基準日, SubGyomuCode.DBB介護賦課);
+        int 調定年度 = Integer.parseInt(日付関連_調定年度.toString());
+        int 当初年度 = Integer.parseInt(日付関連_当初年度.toString());
+        for (int i = 当初年度; i <= 調定年度; i++) {
+            KeyValueDataSource 調定年度Key = new KeyValueDataSource();
+            調定年度Key.setKey(new RString(i));
+            調定年度Key.setValue(new RString(i));
+            dataSourceList.add(調定年度Key);
+        }
         Collections.sort(dataSourceList, new DateComparator());
         div.getDdlChoteiNendo().setDataSource(dataSourceList);
     }

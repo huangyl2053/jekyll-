@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput.KihonChosaInputEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,6 +37,8 @@ public class KihonChosaInput implements Serializable {
     /**
      * コンストラクタです。<br/>
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 認知症高齢者自立度 認知症高齢者自立度
      * @param 障害高齢者自立度 障害高齢者自立度
      * @param 調査連番 調査連番
@@ -44,34 +47,26 @@ public class KihonChosaInput implements Serializable {
      * @param 前回障害高齢者自立度 前回障害高齢者自立度
      * @param 前回調査連番 前回調査連番
      * @param 前回調査項目 前回調査項目
-     * @param 認定調査特記事項番号 認定調査特記事項番号
-     * @param 認定調査特記事項連番 認定調査特記事項連番
-     * @param 原本マスク区分 原本マスク区分
-     * @param 特記事項 特記事項
      * @link KihonChosaInputEntity}より{@link KihonChosaInput}を生成します。
      */
-    public KihonChosaInput(Code 認知症高齢者自立度,
+    public KihonChosaInput(ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            Code 認知症高齢者自立度,
             Code 障害高齢者自立度,
             int 調査連番,
             RString 調査項目,
             Code 前回認知症高齢者自立度,
             Code 前回障害高齢者自立度,
             int 前回調査連番,
-            RString 前回調査項目,
-            RString 認定調査特記事項番号,
-            int 認定調査特記事項連番,
-            Code 原本マスク区分,
-            RString 特記事項
+            RString 前回調査項目
     ) {
         this.認定調査基本情報 = new KihonChosaInputEntity();
+        認定調査基本情報.set申請書管理番号(申請書管理番号);
+        認定調査基本情報.set認定調査依頼履歴番号(認定調査依頼履歴番号);
         認定調査基本情報.set前回認知症高齢者自立度(前回認知症高齢者自立度);
         認定調査基本情報.set前回調査連番(前回調査連番);
         認定調査基本情報.set前回調査項目(前回調査項目);
         認定調査基本情報.set前回障害高齢者自立度(前回障害高齢者自立度);
-        認定調査基本情報.set原本マスク区分(原本マスク区分);
-        認定調査基本情報.set特記事項(特記事項);
-        認定調査基本情報.set認定調査特記事項番号(認定調査特記事項番号);
-        認定調査基本情報.set認定調査特記事項連番(認定調査特記事項連番);
         認定調査基本情報.set認知症高齢者自立度(認知症高齢者自立度);
         認定調査基本情報.set調査連番(調査連番);
         認定調査基本情報.set調査項目(調査項目);
@@ -81,6 +76,8 @@ public class KihonChosaInput implements Serializable {
     /**
      * コンストラクタです。<br/>
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 認知症高齢者自立度 認知症高齢者自立度
      * @param 障害高齢者自立度 障害高齢者自立度
      * @param 調査連番 調査連番
@@ -89,14 +86,12 @@ public class KihonChosaInput implements Serializable {
      * @param 前回障害高齢者自立度 前回障害高齢者自立度
      * @param 前回調査連番 前回調査連番
      * @param 前回調査項目 前回調査項目
-     * @param 認定調査特記事項番号 認定調査特記事項番号
-     * @param 認定調査特記事項連番 認定調査特記事項連番
-     * @param 原本マスク区分 原本マスク区分
-     * @param 特記事項 特記事項
      * @param 特記事項有無 特記事項有無
      * @link KihonChosaInputEntity}より{@link KihonChosaInput}を生成します。
      */
-    public KihonChosaInput(Code 認知症高齢者自立度,
+    public KihonChosaInput(ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            Code 認知症高齢者自立度,
             Code 障害高齢者自立度,
             int 調査連番,
             RString 調査項目,
@@ -104,26 +99,38 @@ public class KihonChosaInput implements Serializable {
             Code 前回障害高齢者自立度,
             int 前回調査連番,
             RString 前回調査項目,
-            RString 認定調査特記事項番号,
-            int 認定調査特記事項連番,
-            Code 原本マスク区分,
-            RString 特記事項,
             boolean 特記事項有無
     ) {
         this.認定調査基本情報 = new KihonChosaInputEntity();
+        認定調査基本情報.set申請書管理番号(申請書管理番号);
+        認定調査基本情報.set認定調査依頼履歴番号(認定調査依頼履歴番号);
         認定調査基本情報.set前回認知症高齢者自立度(前回認知症高齢者自立度);
         認定調査基本情報.set前回調査連番(前回調査連番);
         認定調査基本情報.set前回調査項目(前回調査項目);
         認定調査基本情報.set前回障害高齢者自立度(前回障害高齢者自立度);
-        認定調査基本情報.set原本マスク区分(原本マスク区分);
-        認定調査基本情報.set特記事項(特記事項);
-        認定調査基本情報.set認定調査特記事項番号(認定調査特記事項番号);
-        認定調査基本情報.set認定調査特記事項連番(認定調査特記事項連番);
         認定調査基本情報.set認知症高齢者自立度(認知症高齢者自立度);
         認定調査基本情報.set調査連番(調査連番);
         認定調査基本情報.set調査項目(調査項目);
         認定調査基本情報.set障害高齢者自立度(障害高齢者自立度);
         認定調査基本情報.set特記事項有無(特記事項有無);
+    }
+
+    /**
+     * 認定調査依頼履歴番号を返します。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return 認定調査基本情報.get認定調査依頼履歴番号();
+    }
+
+    /**
+     * 申請書管理番号を返します。
+     *
+     * @return 申請書管理番号
+     */
+    public ShinseishoKanriNo get申請書管理番号() {
+        return 認定調査基本情報.get申請書管理番号();
     }
 
     /**
@@ -163,15 +170,6 @@ public class KihonChosaInput implements Serializable {
     }
 
     /**
-     * 原本マスク区分を返します。
-     *
-     * @return 原本マスク区分
-     */
-    public Code get原本マスク区分() {
-        return 認定調査基本情報.get原本マスク区分();
-    }
-
-    /**
      * 調査連番を返します。
      *
      * @return 調査連番
@@ -190,15 +188,6 @@ public class KihonChosaInput implements Serializable {
     }
 
     /**
-     * 認定調査特記事項連番を返します。
-     *
-     * @return 認定調査特記事項連番
-     */
-    public int get認定調査特記事項連番() {
-        return 認定調査基本情報.get認定調査特記事項連番();
-    }
-
-    /**
      * 調査項目を返します。
      *
      * @return 調査項目
@@ -214,24 +203,6 @@ public class KihonChosaInput implements Serializable {
      */
     public RString get前回調査項目() {
         return 認定調査基本情報.get前回調査項目();
-    }
-
-    /**
-     * 認定調査特記事項番号を返します。
-     *
-     * @return 認定調査特記事項番号
-     */
-    public RString get認定調査特記事項番号() {
-        return 認定調査基本情報.get認定調査特記事項番号();
-    }
-
-    /**
-     * 特記事項を返します。
-     *
-     * @return 特記事項
-     */
-    public RString get特記事項() {
-        return 認定調査基本情報.get特記事項();
     }
 
     /**

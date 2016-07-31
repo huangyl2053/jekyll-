@@ -370,10 +370,7 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
 
     @JsonIgnore
     private SetaiShotokuIchiranHandler getHandler() {
-        SetaiShotokuIchiranHandler handler = new SetaiShotokuIchiranHandler(this);
-        List<SetaiinShotoku> setaiinShotokuList = handler.get世帯員所得Data(new ShikibetsuCode(this.getTxtShikibetsuCode()), YMDHMS.now());
-        handler.accessLog(setaiinShotokuList);
-        return handler;
+        return new SetaiShotokuIchiranHandler(this);
     }
 
 }

@@ -4,19 +4,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * KiwarigakuPanel1 のクラスファイル 
- * 
- * @author 自動生成
+ * KiwarigakuPanel1 のクラスファイル
+ *
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class KiwarigakuPanel1Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -346,6 +348,26 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi13() {
+        return this.celKiwarigaku0302.getLblFuchoKi13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae13() {
+        return this.celKiwarigaku0303.getLblFuchoGemmemMae13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo13() {
+        return this.celKiwarigaku0305.getLblFuchoGemmemGo13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen13() {
+        return this.celKiwarigaku0311.getLblFuchoNokigen13();
+    }
+
+    @JsonIgnore
     public Label getLblTokuchoKi1() {
         return this.celKiwarigaku0306.getLblTokuchoKi1();
     }
@@ -363,6 +385,26 @@ public class KiwarigakuPanel1Div extends TablePanel {
     @JsonIgnore
     public Label getLblKiwarigaku5Gatsu() {
         return this.celKiwarigaku0401.getLblKiwarigaku5Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi14() {
+        return this.celKiwarigaku0402.getLblFuchoKi14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae14() {
+        return this.celKiwarigaku0403.getLblFuchoGemmemMae14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo14() {
+        return this.celKiwarigaku0405.getLblFuchoGemmemGo14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen14() {
+        return this.celKiwarigaku0411.getLblFuchoNokigen14();
     }
 
     @JsonIgnore
@@ -696,8 +738,48 @@ public class KiwarigakuPanel1Div extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi11() {
+        return this.celKiwarigaku1502.getLblFuchoKi11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae11() {
+        return this.celKiwarigaku1503.getLblFuchoGemmemMae11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo11() {
+        return this.celKiwarigaku1505.getLblFuchoGemmemGo11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen11() {
+        return this.celKiwarigaku1511.getLblFuchoNokigen11();
+    }
+
+    @JsonIgnore
     public Label getLblKiwarigaku5Gatsu2() {
         return this.celKiwarigaku1601.getLblKiwarigaku5Gatsu2();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi12() {
+        return this.celKiwarigaku1602.getLblFuchoKi12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae12() {
+        return this.celKiwarigaku1603.getLblFuchoGemmemMae12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo12() {
+        return this.celKiwarigaku1605.getLblFuchoGemmemGo12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen12() {
+        return this.celKiwarigaku1611.getLblFuchoNokigen12();
     }
 
     @JsonIgnore
@@ -3091,23 +3173,26 @@ public class KiwarigakuPanel1Div extends TablePanel {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0101 のクラスファイル 
- * 
+ * celKiwarigaku0101 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0101AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0102 のクラスファイル 
- * 
+ * celKiwarigaku0102 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0102AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFucho")
     private Label lblFucho;
 
@@ -3131,13 +3216,15 @@ class celKiwarigaku0102AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0103 のクラスファイル 
- * 
+ * celKiwarigaku0103 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0103AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokucho")
     private Label lblTokucho;
 
@@ -3161,13 +3248,15 @@ class celKiwarigaku0103AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0201 のクラスファイル 
- * 
+ * celKiwarigaku0201 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0201AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigakuTsuki")
     private Label lblKiwarigakuTsuki;
 
@@ -3191,13 +3280,15 @@ class celKiwarigaku0201AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0202 のクラスファイル 
- * 
+ * celKiwarigaku0202 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0202AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi")
     private Label lblFuchoKi;
 
@@ -3221,13 +3312,15 @@ class celKiwarigaku0202AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0203 のクラスファイル 
- * 
+ * celKiwarigaku0203 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0203AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae")
     private Label lblFuchoGemmemMae;
 
@@ -3251,13 +3344,15 @@ class celKiwarigaku0203AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0205 のクラスファイル 
- * 
+ * celKiwarigaku0205 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0205AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo")
     private Label lblFuchoGemmemGo;
 
@@ -3281,13 +3376,15 @@ class celKiwarigaku0205AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0206 のクラスファイル 
- * 
+ * celKiwarigaku0206 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0206AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen")
     private Label lblFuchoNokigen;
 
@@ -3311,13 +3408,15 @@ class celKiwarigaku0206AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0207 のクラスファイル 
- * 
+ * celKiwarigaku0207 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0207AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi")
     private Label lblTokuchoKi;
 
@@ -3341,13 +3440,15 @@ class celKiwarigaku0207AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0208 のクラスファイル 
- * 
+ * celKiwarigaku0208 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0208AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae")
     private Label lblTokuchoGemmemMae;
 
@@ -3371,13 +3472,15 @@ class celKiwarigaku0208AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0210 のクラスファイル 
- * 
+ * celKiwarigaku0210 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0210AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo")
     private Label lblTokuchoGemmemGo;
 
@@ -3401,13 +3504,15 @@ class celKiwarigaku0210AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0301 のクラスファイル 
- * 
+ * celKiwarigaku0301 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0301AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku4Gatsu")
     private Label lblKiwarigaku4Gatsu;
 
@@ -3431,53 +3536,143 @@ class celKiwarigaku0301AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0302 のクラスファイル 
- * 
+ * celKiwarigaku0302 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0302AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoKi13")
+    private Label lblFuchoKi13;
+
+    /*
+     * getlblFuchoKi13
+     * @return lblFuchoKi13
+     */
+    @JsonProperty("lblFuchoKi13")
+    public Label getLblFuchoKi13() {
+        return lblFuchoKi13;
+    }
+
+    /*
+     * setlblFuchoKi13
+     * @param lblFuchoKi13 lblFuchoKi13
+     */
+    @JsonProperty("lblFuchoKi13")
+    public void setLblFuchoKi13(Label lblFuchoKi13) {
+        this.lblFuchoKi13 = lblFuchoKi13;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0303 のクラスファイル 
- * 
+ * celKiwarigaku0303 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0303AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemMae13")
+    private Label lblFuchoGemmemMae13;
+
+    /*
+     * getlblFuchoGemmemMae13
+     * @return lblFuchoGemmemMae13
+     */
+    @JsonProperty("lblFuchoGemmemMae13")
+    public Label getLblFuchoGemmemMae13() {
+        return lblFuchoGemmemMae13;
+    }
+
+    /*
+     * setlblFuchoGemmemMae13
+     * @param lblFuchoGemmemMae13 lblFuchoGemmemMae13
+     */
+    @JsonProperty("lblFuchoGemmemMae13")
+    public void setLblFuchoGemmemMae13(Label lblFuchoGemmemMae13) {
+        this.lblFuchoGemmemMae13 = lblFuchoGemmemMae13;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0305 のクラスファイル 
- * 
+ * celKiwarigaku0305 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0305AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemGo13")
+    private Label lblFuchoGemmemGo13;
+
+    /*
+     * getlblFuchoGemmemGo13
+     * @return lblFuchoGemmemGo13
+     */
+    @JsonProperty("lblFuchoGemmemGo13")
+    public Label getLblFuchoGemmemGo13() {
+        return lblFuchoGemmemGo13;
+    }
+
+    /*
+     * setlblFuchoGemmemGo13
+     * @param lblFuchoGemmemGo13 lblFuchoGemmemGo13
+     */
+    @JsonProperty("lblFuchoGemmemGo13")
+    public void setLblFuchoGemmemGo13(Label lblFuchoGemmemGo13) {
+        this.lblFuchoGemmemGo13 = lblFuchoGemmemGo13;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0311 のクラスファイル 
- * 
+ * celKiwarigaku0311 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0311AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoNokigen13")
+    private Label lblFuchoNokigen13;
+
+    /*
+     * getlblFuchoNokigen13
+     * @return lblFuchoNokigen13
+     */
+    @JsonProperty("lblFuchoNokigen13")
+    public Label getLblFuchoNokigen13() {
+        return lblFuchoNokigen13;
+    }
+
+    /*
+     * setlblFuchoNokigen13
+     * @param lblFuchoNokigen13 lblFuchoNokigen13
+     */
+    @JsonProperty("lblFuchoNokigen13")
+    public void setLblFuchoNokigen13(Label lblFuchoNokigen13) {
+        this.lblFuchoNokigen13 = lblFuchoNokigen13;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0306 のクラスファイル 
- * 
+ * celKiwarigaku0306 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0306AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi1")
     private Label lblTokuchoKi1;
 
@@ -3501,13 +3696,15 @@ class celKiwarigaku0306AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0307 のクラスファイル 
- * 
+ * celKiwarigaku0307 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0307AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae1")
     private Label lblTokuchoGemmemMae1;
 
@@ -3531,13 +3728,15 @@ class celKiwarigaku0307AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0309 のクラスファイル 
- * 
+ * celKiwarigaku0309 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0309AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo1")
     private Label lblTokuchoGemmemGo1;
 
@@ -3561,13 +3760,15 @@ class celKiwarigaku0309AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0401 のクラスファイル 
- * 
+ * celKiwarigaku0401 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0401AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku5Gatsu")
     private Label lblKiwarigaku5Gatsu;
 
@@ -3591,83 +3792,176 @@ class celKiwarigaku0401AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0402 のクラスファイル 
- * 
+ * celKiwarigaku0402 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0402AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoKi14")
+    private Label lblFuchoKi14;
+
+    /*
+     * getlblFuchoKi14
+     * @return lblFuchoKi14
+     */
+    @JsonProperty("lblFuchoKi14")
+    public Label getLblFuchoKi14() {
+        return lblFuchoKi14;
+    }
+
+    /*
+     * setlblFuchoKi14
+     * @param lblFuchoKi14 lblFuchoKi14
+     */
+    @JsonProperty("lblFuchoKi14")
+    public void setLblFuchoKi14(Label lblFuchoKi14) {
+        this.lblFuchoKi14 = lblFuchoKi14;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0403 のクラスファイル 
- * 
+ * celKiwarigaku0403 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0403AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemMae14")
+    private Label lblFuchoGemmemMae14;
+
+    /*
+     * getlblFuchoGemmemMae14
+     * @return lblFuchoGemmemMae14
+     */
+    @JsonProperty("lblFuchoGemmemMae14")
+    public Label getLblFuchoGemmemMae14() {
+        return lblFuchoGemmemMae14;
+    }
+
+    /*
+     * setlblFuchoGemmemMae14
+     * @param lblFuchoGemmemMae14 lblFuchoGemmemMae14
+     */
+    @JsonProperty("lblFuchoGemmemMae14")
+    public void setLblFuchoGemmemMae14(Label lblFuchoGemmemMae14) {
+        this.lblFuchoGemmemMae14 = lblFuchoGemmemMae14;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0405 のクラスファイル 
- * 
+ * celKiwarigaku0405 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0405AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemGo14")
+    private Label lblFuchoGemmemGo14;
+
+    /*
+     * getlblFuchoGemmemGo14
+     * @return lblFuchoGemmemGo14
+     */
+    @JsonProperty("lblFuchoGemmemGo14")
+    public Label getLblFuchoGemmemGo14() {
+        return lblFuchoGemmemGo14;
+    }
+
+    /*
+     * setlblFuchoGemmemGo14
+     * @param lblFuchoGemmemGo14 lblFuchoGemmemGo14
+     */
+    @JsonProperty("lblFuchoGemmemGo14")
+    public void setLblFuchoGemmemGo14(Label lblFuchoGemmemGo14) {
+        this.lblFuchoGemmemGo14 = lblFuchoGemmemGo14;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0411 のクラスファイル 
- * 
+ * celKiwarigaku0411 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0411AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoNokigen14")
+    private Label lblFuchoNokigen14;
+
+    /*
+     * getlblFuchoNokigen14
+     * @return lblFuchoNokigen14
+     */
+    @JsonProperty("lblFuchoNokigen14")
+    public Label getLblFuchoNokigen14() {
+        return lblFuchoNokigen14;
+    }
+
+    /*
+     * setlblFuchoNokigen14
+     * @param lblFuchoNokigen14 lblFuchoNokigen14
+     */
+    @JsonProperty("lblFuchoNokigen14")
+    public void setLblFuchoNokigen14(Label lblFuchoNokigen14) {
+        this.lblFuchoNokigen14 = lblFuchoNokigen14;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0406 のクラスファイル 
- * 
+ * celKiwarigaku0406 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0406AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0407 のクラスファイル 
- * 
+ * celKiwarigaku0407 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0407AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0409 のクラスファイル 
- * 
+ * celKiwarigaku0409 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0409AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0501 のクラスファイル 
- * 
+ * celKiwarigaku0501 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0501AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku6Gatsu")
     private Label lblKiwarigaku6Gatsu;
 
@@ -3691,13 +3985,15 @@ class celKiwarigaku0501AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0502 のクラスファイル 
- * 
+ * celKiwarigaku0502 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0502AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi1")
     private Label lblFuchoKi1;
 
@@ -3721,13 +4017,15 @@ class celKiwarigaku0502AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0503 のクラスファイル 
- * 
+ * celKiwarigaku0503 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0503AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae1")
     private Label lblFuchoGemmemMae1;
 
@@ -3751,13 +4049,15 @@ class celKiwarigaku0503AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0505 のクラスファイル 
- * 
+ * celKiwarigaku0505 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0505AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo1")
     private Label lblFuchoGemmemGo1;
 
@@ -3781,13 +4081,15 @@ class celKiwarigaku0505AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0511 のクラスファイル 
- * 
+ * celKiwarigaku0511 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0511AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen1")
     private Label lblFuchoNokigen1;
 
@@ -3811,13 +4113,15 @@ class celKiwarigaku0511AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0506 のクラスファイル 
- * 
+ * celKiwarigaku0506 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0506AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi2")
     private Label lblTokuchoKi2;
 
@@ -3841,13 +4145,15 @@ class celKiwarigaku0506AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0507 のクラスファイル 
- * 
+ * celKiwarigaku0507 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0507AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae2")
     private Label lblTokuchoGemmemMae2;
 
@@ -3871,13 +4177,15 @@ class celKiwarigaku0507AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0509 のクラスファイル 
- * 
+ * celKiwarigaku0509 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0509AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo2")
     private Label lblTokuchoGemmemGo2;
 
@@ -3901,13 +4209,15 @@ class celKiwarigaku0509AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0601 のクラスファイル 
- * 
+ * celKiwarigaku0601 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0601AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku7Gatsu")
     private Label lblKiwarigaku7Gatsu;
 
@@ -3931,13 +4241,15 @@ class celKiwarigaku0601AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0602 のクラスファイル 
- * 
+ * celKiwarigaku0602 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0602AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi2")
     private Label lblFuchoKi2;
 
@@ -3961,13 +4273,15 @@ class celKiwarigaku0602AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0603 のクラスファイル 
- * 
+ * celKiwarigaku0603 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0603AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae2")
     private Label lblFuchoGemmemMae2;
 
@@ -3991,13 +4305,15 @@ class celKiwarigaku0603AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0605 のクラスファイル 
- * 
+ * celKiwarigaku0605 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0605AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo2")
     private Label lblFuchoGemmemGo2;
 
@@ -4021,13 +4337,15 @@ class celKiwarigaku0605AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0611 のクラスファイル 
- * 
+ * celKiwarigaku0611 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0611AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen2")
     private Label lblFuchoNokigen2;
 
@@ -4051,43 +4369,48 @@ class celKiwarigaku0611AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0606 のクラスファイル 
- * 
+ * celKiwarigaku0606 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0606AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0607 のクラスファイル 
- * 
+ * celKiwarigaku0607 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0607AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0609 のクラスファイル 
- * 
+ * celKiwarigaku0609 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0609AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0701 のクラスファイル 
- * 
+ * celKiwarigaku0701 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0701AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku8Gatsu")
     private Label lblKiwarigaku8Gatsu;
 
@@ -4111,13 +4434,15 @@ class celKiwarigaku0701AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0702 のクラスファイル 
- * 
+ * celKiwarigaku0702 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0702AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi3")
     private Label lblFuchoKi3;
 
@@ -4141,13 +4466,15 @@ class celKiwarigaku0702AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0703 のクラスファイル 
- * 
+ * celKiwarigaku0703 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0703AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae3")
     private Label lblFuchoGemmemMae3;
 
@@ -4171,13 +4498,15 @@ class celKiwarigaku0703AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0705 のクラスファイル 
- * 
+ * celKiwarigaku0705 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0705AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo3")
     private Label lblFuchoGemmemGo3;
 
@@ -4201,13 +4530,15 @@ class celKiwarigaku0705AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0711 のクラスファイル 
- * 
+ * celKiwarigaku0711 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0711AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen3")
     private Label lblFuchoNokigen3;
 
@@ -4231,13 +4562,15 @@ class celKiwarigaku0711AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0706 のクラスファイル 
- * 
+ * celKiwarigaku0706 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0706AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi3")
     private Label lblTokuchoKi3;
 
@@ -4261,13 +4594,15 @@ class celKiwarigaku0706AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0707 のクラスファイル 
- * 
+ * celKiwarigaku0707 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0707AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae3")
     private Label lblTokuchoGemmemMae3;
 
@@ -4291,13 +4626,15 @@ class celKiwarigaku0707AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0709 のクラスファイル 
- * 
+ * celKiwarigaku0709 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0709AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo3")
     private Label lblTokuchoGemmemGo3;
 
@@ -4321,13 +4658,15 @@ class celKiwarigaku0709AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0801 のクラスファイル 
- * 
+ * celKiwarigaku0801 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0801AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku9Gatsu")
     private Label lblKiwarigaku9Gatsu;
 
@@ -4351,13 +4690,15 @@ class celKiwarigaku0801AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0802 のクラスファイル 
- * 
+ * celKiwarigaku0802 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0802AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi4")
     private Label lblFuchoKi4;
 
@@ -4381,13 +4722,15 @@ class celKiwarigaku0802AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0803 のクラスファイル 
- * 
+ * celKiwarigaku0803 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0803AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae4")
     private Label lblFuchoGemmemMae4;
 
@@ -4411,13 +4754,15 @@ class celKiwarigaku0803AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0805 のクラスファイル 
- * 
+ * celKiwarigaku0805 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0805AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo4")
     private Label lblFuchoGemmemGo4;
 
@@ -4441,13 +4786,15 @@ class celKiwarigaku0805AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0811 のクラスファイル 
- * 
+ * celKiwarigaku0811 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0811AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen4")
     private Label lblFuchoNokigen4;
 
@@ -4471,43 +4818,48 @@ class celKiwarigaku0811AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0806 のクラスファイル 
- * 
+ * celKiwarigaku0806 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0806AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0807 のクラスファイル 
- * 
+ * celKiwarigaku0807 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0807AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0809 のクラスファイル 
- * 
+ * celKiwarigaku0809 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0809AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0901 のクラスファイル 
- * 
+ * celKiwarigaku0901 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0901AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku10Gatsu")
     private Label lblKiwarigaku10Gatsu;
 
@@ -4531,13 +4883,15 @@ class celKiwarigaku0901AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0902 のクラスファイル 
- * 
+ * celKiwarigaku0902 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0902AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi5")
     private Label lblFuchoKi5;
 
@@ -4561,13 +4915,15 @@ class celKiwarigaku0902AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0903 のクラスファイル 
- * 
+ * celKiwarigaku0903 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0903AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae5")
     private Label lblFuchoGemmemMae5;
 
@@ -4591,13 +4947,15 @@ class celKiwarigaku0903AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0905 のクラスファイル 
- * 
+ * celKiwarigaku0905 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0905AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo5")
     private Label lblFuchoGemmemGo5;
 
@@ -4621,13 +4979,15 @@ class celKiwarigaku0905AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0911 のクラスファイル 
- * 
+ * celKiwarigaku0911 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0911AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen5")
     private Label lblFuchoNokigen5;
 
@@ -4651,13 +5011,15 @@ class celKiwarigaku0911AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0906 のクラスファイル 
- * 
+ * celKiwarigaku0906 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0906AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi4")
     private Label lblTokuchoKi4;
 
@@ -4681,13 +5043,15 @@ class celKiwarigaku0906AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0907 のクラスファイル 
- * 
+ * celKiwarigaku0907 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0907AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae4")
     private Label lblTokuchoGemmemMae4;
 
@@ -4711,13 +5075,15 @@ class celKiwarigaku0907AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku0909 のクラスファイル 
- * 
+ * celKiwarigaku0909 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku0909AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo4")
     private Label lblTokuchoGemmemGo4;
 
@@ -4741,13 +5107,15 @@ class celKiwarigaku0909AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1001 のクラスファイル 
- * 
+ * celKiwarigaku1001 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1001AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku11Gatsu")
     private Label lblKiwarigaku11Gatsu;
 
@@ -4771,13 +5139,15 @@ class celKiwarigaku1001AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1002 のクラスファイル 
- * 
+ * celKiwarigaku1002 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1002AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi6")
     private Label lblFuchoKi6;
 
@@ -4801,13 +5171,15 @@ class celKiwarigaku1002AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1003 のクラスファイル 
- * 
+ * celKiwarigaku1003 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1003AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae6")
     private Label lblFuchoGemmemMae6;
 
@@ -4831,13 +5203,15 @@ class celKiwarigaku1003AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1005 のクラスファイル 
- * 
+ * celKiwarigaku1005 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1005AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo6")
     private Label lblFuchoGemmemGo6;
 
@@ -4861,13 +5235,15 @@ class celKiwarigaku1005AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1011 のクラスファイル 
- * 
+ * celKiwarigaku1011 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1011AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen6")
     private Label lblFuchoNokigen6;
 
@@ -4891,43 +5267,48 @@ class celKiwarigaku1011AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1006 のクラスファイル 
- * 
+ * celKiwarigaku1006 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1006AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1007 のクラスファイル 
- * 
+ * celKiwarigaku1007 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1007AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1009 のクラスファイル 
- * 
+ * celKiwarigaku1009 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1009AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1101 のクラスファイル 
- * 
+ * celKiwarigaku1101 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1101AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku12Gatsu")
     private Label lblKiwarigaku12Gatsu;
 
@@ -4951,13 +5332,15 @@ class celKiwarigaku1101AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1102 のクラスファイル 
- * 
+ * celKiwarigaku1102 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1102AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi7")
     private Label lblFuchoKi7;
 
@@ -4981,13 +5364,15 @@ class celKiwarigaku1102AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1103 のクラスファイル 
- * 
+ * celKiwarigaku1103 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1103AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae7")
     private Label lblFuchoGemmemMae7;
 
@@ -5011,13 +5396,15 @@ class celKiwarigaku1103AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1105 のクラスファイル 
- * 
+ * celKiwarigaku1105 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1105AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo7")
     private Label lblFuchoGemmemGo7;
 
@@ -5041,13 +5428,15 @@ class celKiwarigaku1105AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1111 のクラスファイル 
- * 
+ * celKiwarigaku1111 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1111AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen7")
     private Label lblFuchoNokigen7;
 
@@ -5071,13 +5460,15 @@ class celKiwarigaku1111AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1106 のクラスファイル 
- * 
+ * celKiwarigaku1106 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1106AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi5")
     private Label lblTokuchoKi5;
 
@@ -5101,13 +5492,15 @@ class celKiwarigaku1106AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1107 のクラスファイル 
- * 
+ * celKiwarigaku1107 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1107AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae5")
     private Label lblTokuchoGemmemMae5;
 
@@ -5131,13 +5524,15 @@ class celKiwarigaku1107AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1109 のクラスファイル 
- * 
+ * celKiwarigaku1109 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1109AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo5")
     private Label lblTokuchoGemmemGo5;
 
@@ -5161,13 +5556,15 @@ class celKiwarigaku1109AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1201 のクラスファイル 
- * 
+ * celKiwarigaku1201 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1201AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku1Gatsu")
     private Label lblKiwarigaku1Gatsu;
 
@@ -5191,13 +5588,15 @@ class celKiwarigaku1201AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1202 のクラスファイル 
- * 
+ * celKiwarigaku1202 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1202AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi8")
     private Label lblFuchoKi8;
 
@@ -5221,13 +5620,15 @@ class celKiwarigaku1202AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1203 のクラスファイル 
- * 
+ * celKiwarigaku1203 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1203AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae8")
     private Label lblFuchoGemmemMae8;
 
@@ -5251,13 +5652,15 @@ class celKiwarigaku1203AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1205 のクラスファイル 
- * 
+ * celKiwarigaku1205 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1205AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo8")
     private Label lblFuchoGemmemGo8;
 
@@ -5281,13 +5684,15 @@ class celKiwarigaku1205AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1211 のクラスファイル 
- * 
+ * celKiwarigaku1211 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1211AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen8")
     private Label lblFuchoNokigen8;
 
@@ -5311,43 +5716,48 @@ class celKiwarigaku1211AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1206 のクラスファイル 
- * 
+ * celKiwarigaku1206 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1206AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1207 のクラスファイル 
- * 
+ * celKiwarigaku1207 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1207AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1209 のクラスファイル 
- * 
+ * celKiwarigaku1209 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1209AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1301 のクラスファイル 
- * 
+ * celKiwarigaku1301 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1301AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku2Gatsu")
     private Label lblKiwarigaku2Gatsu;
 
@@ -5371,13 +5781,15 @@ class celKiwarigaku1301AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1302 のクラスファイル 
- * 
+ * celKiwarigaku1302 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1302AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi9")
     private Label lblFuchoKi9;
 
@@ -5401,13 +5813,15 @@ class celKiwarigaku1302AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1303 のクラスファイル 
- * 
+ * celKiwarigaku1303 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1303AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae9")
     private Label lblFuchoGemmemMae9;
 
@@ -5431,13 +5845,15 @@ class celKiwarigaku1303AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1305 のクラスファイル 
- * 
+ * celKiwarigaku1305 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1305AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo9")
     private Label lblFuchoGemmemGo9;
 
@@ -5461,13 +5877,15 @@ class celKiwarigaku1305AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1311 のクラスファイル 
- * 
+ * celKiwarigaku1311 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1311AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen9")
     private Label lblFuchoNokigen9;
 
@@ -5491,13 +5909,15 @@ class celKiwarigaku1311AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1306 のクラスファイル 
- * 
+ * celKiwarigaku1306 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1306AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi6")
     private Label lblTokuchoKi6;
 
@@ -5521,13 +5941,15 @@ class celKiwarigaku1306AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1307 のクラスファイル 
- * 
+ * celKiwarigaku1307 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1307AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMae6")
     private Label lblTokuchoGemmemMae6;
 
@@ -5551,13 +5973,15 @@ class celKiwarigaku1307AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1309 のクラスファイル 
- * 
+ * celKiwarigaku1309 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1309AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGo6")
     private Label lblTokuchoGemmemGo6;
 
@@ -5581,13 +6005,15 @@ class celKiwarigaku1309AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1401 のクラスファイル 
- * 
+ * celKiwarigaku1401 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1401AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku3Gatsu")
     private Label lblKiwarigaku3Gatsu;
 
@@ -5611,13 +6037,15 @@ class celKiwarigaku1401AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1402 のクラスファイル 
- * 
+ * celKiwarigaku1402 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1402AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi10")
     private Label lblFuchoKi10;
 
@@ -5641,13 +6069,15 @@ class celKiwarigaku1402AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1403 のクラスファイル 
- * 
+ * celKiwarigaku1403 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1403AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMae10")
     private Label lblFuchoGemmemMae10;
 
@@ -5671,13 +6101,15 @@ class celKiwarigaku1403AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1405 のクラスファイル 
- * 
+ * celKiwarigaku1405 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1405AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGo10")
     private Label lblFuchoGemmemGo10;
 
@@ -5701,13 +6133,15 @@ class celKiwarigaku1405AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1411 のクラスファイル 
- * 
+ * celKiwarigaku1411 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1411AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNokigen10")
     private Label lblFuchoNokigen10;
 
@@ -5731,43 +6165,48 @@ class celKiwarigaku1411AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1406 のクラスファイル 
- * 
+ * celKiwarigaku1406 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1406AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1407 のクラスファイル 
- * 
+ * celKiwarigaku1407 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1407AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1409 のクラスファイル 
- * 
+ * celKiwarigaku1409 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1409AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1501 のクラスファイル 
- * 
+ * celKiwarigaku1501 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1501AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku4Gatsu2")
     private Label lblKiwarigaku4Gatsu2;
 
@@ -5791,83 +6230,176 @@ class celKiwarigaku1501AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1502 のクラスファイル 
- * 
+ * celKiwarigaku1502 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1502AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoKi11")
+    private Label lblFuchoKi11;
+
+    /*
+     * getlblFuchoKi11
+     * @return lblFuchoKi11
+     */
+    @JsonProperty("lblFuchoKi11")
+    public Label getLblFuchoKi11() {
+        return lblFuchoKi11;
+    }
+
+    /*
+     * setlblFuchoKi11
+     * @param lblFuchoKi11 lblFuchoKi11
+     */
+    @JsonProperty("lblFuchoKi11")
+    public void setLblFuchoKi11(Label lblFuchoKi11) {
+        this.lblFuchoKi11 = lblFuchoKi11;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1503 のクラスファイル 
- * 
+ * celKiwarigaku1503 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1503AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemMae11")
+    private Label lblFuchoGemmemMae11;
+
+    /*
+     * getlblFuchoGemmemMae11
+     * @return lblFuchoGemmemMae11
+     */
+    @JsonProperty("lblFuchoGemmemMae11")
+    public Label getLblFuchoGemmemMae11() {
+        return lblFuchoGemmemMae11;
+    }
+
+    /*
+     * setlblFuchoGemmemMae11
+     * @param lblFuchoGemmemMae11 lblFuchoGemmemMae11
+     */
+    @JsonProperty("lblFuchoGemmemMae11")
+    public void setLblFuchoGemmemMae11(Label lblFuchoGemmemMae11) {
+        this.lblFuchoGemmemMae11 = lblFuchoGemmemMae11;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1505 のクラスファイル 
- * 
+ * celKiwarigaku1505 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1505AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemGo11")
+    private Label lblFuchoGemmemGo11;
+
+    /*
+     * getlblFuchoGemmemGo11
+     * @return lblFuchoGemmemGo11
+     */
+    @JsonProperty("lblFuchoGemmemGo11")
+    public Label getLblFuchoGemmemGo11() {
+        return lblFuchoGemmemGo11;
+    }
+
+    /*
+     * setlblFuchoGemmemGo11
+     * @param lblFuchoGemmemGo11 lblFuchoGemmemGo11
+     */
+    @JsonProperty("lblFuchoGemmemGo11")
+    public void setLblFuchoGemmemGo11(Label lblFuchoGemmemGo11) {
+        this.lblFuchoGemmemGo11 = lblFuchoGemmemGo11;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1511 のクラスファイル 
- * 
+ * celKiwarigaku1511 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1511AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoNokigen11")
+    private Label lblFuchoNokigen11;
+
+    /*
+     * getlblFuchoNokigen11
+     * @return lblFuchoNokigen11
+     */
+    @JsonProperty("lblFuchoNokigen11")
+    public Label getLblFuchoNokigen11() {
+        return lblFuchoNokigen11;
+    }
+
+    /*
+     * setlblFuchoNokigen11
+     * @param lblFuchoNokigen11 lblFuchoNokigen11
+     */
+    @JsonProperty("lblFuchoNokigen11")
+    public void setLblFuchoNokigen11(Label lblFuchoNokigen11) {
+        this.lblFuchoNokigen11 = lblFuchoNokigen11;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1506 のクラスファイル 
- * 
+ * celKiwarigaku1506 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1506AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1507 のクラスファイル 
- * 
+ * celKiwarigaku1507 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1507AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1509 のクラスファイル 
- * 
+ * celKiwarigaku1509 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1509AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1601 のクラスファイル 
- * 
+ * celKiwarigaku1601 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1601AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigaku5Gatsu2")
     private Label lblKiwarigaku5Gatsu2;
 
@@ -5891,83 +6423,176 @@ class celKiwarigaku1601AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1602 のクラスファイル 
- * 
+ * celKiwarigaku1602 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1602AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoKi12")
+    private Label lblFuchoKi12;
+
+    /*
+     * getlblFuchoKi12
+     * @return lblFuchoKi12
+     */
+    @JsonProperty("lblFuchoKi12")
+    public Label getLblFuchoKi12() {
+        return lblFuchoKi12;
+    }
+
+    /*
+     * setlblFuchoKi12
+     * @param lblFuchoKi12 lblFuchoKi12
+     */
+    @JsonProperty("lblFuchoKi12")
+    public void setLblFuchoKi12(Label lblFuchoKi12) {
+        this.lblFuchoKi12 = lblFuchoKi12;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1603 のクラスファイル 
- * 
+ * celKiwarigaku1603 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1603AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemMae12")
+    private Label lblFuchoGemmemMae12;
+
+    /*
+     * getlblFuchoGemmemMae12
+     * @return lblFuchoGemmemMae12
+     */
+    @JsonProperty("lblFuchoGemmemMae12")
+    public Label getLblFuchoGemmemMae12() {
+        return lblFuchoGemmemMae12;
+    }
+
+    /*
+     * setlblFuchoGemmemMae12
+     * @param lblFuchoGemmemMae12 lblFuchoGemmemMae12
+     */
+    @JsonProperty("lblFuchoGemmemMae12")
+    public void setLblFuchoGemmemMae12(Label lblFuchoGemmemMae12) {
+        this.lblFuchoGemmemMae12 = lblFuchoGemmemMae12;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1605 のクラスファイル 
- * 
+ * celKiwarigaku1605 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1605AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoGemmemGo12")
+    private Label lblFuchoGemmemGo12;
+
+    /*
+     * getlblFuchoGemmemGo12
+     * @return lblFuchoGemmemGo12
+     */
+    @JsonProperty("lblFuchoGemmemGo12")
+    public Label getLblFuchoGemmemGo12() {
+        return lblFuchoGemmemGo12;
+    }
+
+    /*
+     * setlblFuchoGemmemGo12
+     * @param lblFuchoGemmemGo12 lblFuchoGemmemGo12
+     */
+    @JsonProperty("lblFuchoGemmemGo12")
+    public void setLblFuchoGemmemGo12(Label lblFuchoGemmemGo12) {
+        this.lblFuchoGemmemGo12 = lblFuchoGemmemGo12;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1611 のクラスファイル 
- * 
+ * celKiwarigaku1611 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1611AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    @JsonProperty("lblFuchoNokigen12")
+    private Label lblFuchoNokigen12;
+
+    /*
+     * getlblFuchoNokigen12
+     * @return lblFuchoNokigen12
+     */
+    @JsonProperty("lblFuchoNokigen12")
+    public Label getLblFuchoNokigen12() {
+        return lblFuchoNokigen12;
+    }
+
+    /*
+     * setlblFuchoNokigen12
+     * @param lblFuchoNokigen12 lblFuchoNokigen12
+     */
+    @JsonProperty("lblFuchoNokigen12")
+    public void setLblFuchoNokigen12(Label lblFuchoNokigen12) {
+        this.lblFuchoNokigen12 = lblFuchoNokigen12;
+    }
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1606 のクラスファイル 
- * 
+ * celKiwarigaku1606 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1606AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku1607 のクラスファイル 
- * 
+ * celKiwarigaku1607 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku1607AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku16009 のクラスファイル 
- * 
+ * celKiwarigaku16009 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku16009AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2601 のクラスファイル 
- * 
+ * celKiwarigaku2601 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2601AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKiwarigakuTotal")
     private Label lblKiwarigakuTotal;
 
@@ -5991,23 +6616,26 @@ class celKiwarigaku2601AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2602 のクラスファイル 
- * 
+ * celKiwarigaku2602 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2602AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2603 のクラスファイル 
- * 
+ * celKiwarigaku2603 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2603AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemMaeTotal")
     private Label lblFuchoGemmemMaeTotal;
 
@@ -6031,13 +6659,15 @@ class celKiwarigaku2603AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2605 のクラスファイル 
- * 
+ * celKiwarigaku2605 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2605AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoGemmemGoTotal")
     private Label lblFuchoGemmemGoTotal;
 
@@ -6061,33 +6691,37 @@ class celKiwarigaku2605AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2611 のクラスファイル 
- * 
+ * celKiwarigaku2611 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2611AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2606 のクラスファイル 
- * 
+ * celKiwarigaku2606 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2606AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2607 のクラスファイル 
- * 
+ * celKiwarigaku2607 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2607AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemMaeTotal")
     private Label lblTokuchoGemmemMaeTotal;
 
@@ -6111,13 +6745,15 @@ class celKiwarigaku2607AtKiwarigakuPanel1 extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKiwarigaku2609 のクラスファイル 
- * 
+ * celKiwarigaku2609 のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwarigaku2609AtKiwarigakuPanel1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoGemmemGoTotal")
     private Label lblTokuchoGemmemGoTotal;
 

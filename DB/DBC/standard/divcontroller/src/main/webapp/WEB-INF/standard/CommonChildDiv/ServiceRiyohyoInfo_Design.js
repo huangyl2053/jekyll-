@@ -4,13 +4,6 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
-            Events.onOkClosebtnShowShuruiGendogaku = function () {
-                return "onOkClosebtnShowShuruiGendogaku";
-            };
-
-            Events.onBeforeOpenDialogbtnShowShuruiGendogaku = function () {
-                return "onBeforeOpenDialogbtnShowShuruiGendogaku";
-            };
             return Events;
         })();
         ServiceRiyohyoInfo.Events = Events;
@@ -72,7 +65,7 @@ var DBC;
             };
 
             Controls.prototype.btnShowShuruiGendogaku = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnShowShuruiGendogaku"));
+                return new UZA.Button(this.convFiledName("btnShowShuruiGendogaku"));
             };
 
             Controls.prototype.btnZengetsuCopy = function () {

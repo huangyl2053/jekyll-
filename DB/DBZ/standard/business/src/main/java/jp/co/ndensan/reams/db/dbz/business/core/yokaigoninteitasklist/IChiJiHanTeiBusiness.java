@@ -130,6 +130,15 @@ public class IChiJiHanTeiBusiness {
     }
 
     /**
+     * 要介護認定一次判定完了年月日を返します。
+     *
+     * @return 要介護認定一次判定完了年月日
+     */
+    public FlexibleDate get要介護認定一次判定完了年月日() {
+        return entity.getIchijiHanteiKanryoYMD();
+    }
+
+    /**
      * 要介護認定一次判定結果コードを返します。
      *
      * @return 要介護認定一次判定結果コード

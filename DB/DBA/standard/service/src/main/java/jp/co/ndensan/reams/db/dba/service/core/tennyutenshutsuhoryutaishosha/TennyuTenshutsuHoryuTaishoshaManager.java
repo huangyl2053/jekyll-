@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TenshutsuHo
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TennyushutsuHoryuTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TenshutsuHoryuTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper;
-import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
@@ -51,7 +50,6 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * コンストラクタです。
      */
     TennyuTenshutsuHoryuTaishoshaManager(MapperProvider mapperProvider,
-            HihokenshaShikakuShutokuManager hihokenshaShikakuShutokuManager,
             DbT1001HihokenshaDaichoDac hihokenshaDaichoDac,
             DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac,
             DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac) {

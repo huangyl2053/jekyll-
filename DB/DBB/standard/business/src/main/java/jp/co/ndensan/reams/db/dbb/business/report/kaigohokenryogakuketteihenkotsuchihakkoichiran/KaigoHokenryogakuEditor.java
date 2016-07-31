@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -116,13 +115,14 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         }
         if (編集後本算定通知書共通情報.get更正前() != null) {
             source.listUpper_8 = 編集後本算定通知書共通情報.get更正前().get保険料段階();
-            source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正前().get確定保険料_年額(), 0);
+            if (編集後本算定通知書共通情報.get更正前().get確定保険料_年額() != null) {
+                source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正前().get確定保険料_年額(), 0);
+            }
             source.listUpper_10 = 編集後本算定通知書共通情報.get更正前().get徴収方法();
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get生保開始日() != null) {
-            RDate 生保開始日 = new RDate(編集後本算定通知書共通情報.get更正後().get生保開始日().trim().toString());
-            source.listUpper_11 = 生保開始日.wareki().toDateString();
+            source.listUpper_11 = 編集後本算定通知書共通情報.get更正後().get生保開始日();
         }
         RString 生活保護扶助名称 = RString.EMPTY;
         if (編集後本算定通知書共通情報.get更正後() != null
@@ -182,7 +182,9 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         }
         if (編集後本算定通知書共通情報.get更正後() != null) {
             source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
-            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+            if (編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {
+                source.listLower_5 = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+            }
             source.listLower_6 = 編集後本算定通知書共通情報.get更正後().get徴収方法();
         }
         source.listLower_7 = set口座情報(編集後本算定通知書共通情報);

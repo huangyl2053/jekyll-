@@ -66,7 +66,7 @@ public class HomonChosaItakuNyuryoku {
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_searchClear(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).btnKyufuJissekiSearchClear();
-        return ResponseData.of(div).setState(DBE6090001StateName.初期表示);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -76,6 +76,10 @@ public class HomonChosaItakuNyuryoku {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnKensaku(HomonChosaItakuNyuryokuDiv div) {
+        ValidationMessageControlPairs validPairs = getValidatisonHandlerr(div).必須入力チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         List<NinteiChosaHoshuJissekiJohoBusiness> 調査員情報List = manager.get初期化調査員情報検索(getHandler(div).createParam_初期(div)).records();
         getHandler(div).setDgChosain(調査員情報List);
         ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).データ空のチェック();
@@ -102,15 +106,15 @@ public class HomonChosaItakuNyuryoku {
         div.getTxtChousainName().setValue(div.getChosain().getDgChosain().getClickedItem().getChosainShimei());
         List<NinteichosahyoGaikyoChosaBusiness> 報酬情報List = manager.get調査員実績検索(getHandler(div).createParam_実績(div)).records();
         getHandler(div).setDgShinsakaiIin(報酬情報List);
-        ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).調査実績一覧のチェック();
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
         List<NinteiChosaHoshuJissekiJoho> 報酬実績情報 = manager.get報酬実績情報(div.getDgChosain().getClickedItem().getNintechosaItakusakiCode(),
                 div.getDgChosain().getClickedItem().getNinteiChosainCode()).records();
         Models<NinteiChosaHoshuJissekiJohoIdentifier, NinteiChosaHoshuJissekiJoho> joho = Models.create(報酬実績情報);
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成報酬実績情報, joho);
         div.setHdt認定調査委託先コード(div.getDgChosain().getClickedItem().getNintechosaItakusakiCode());
+        if (!div.getDgShinsakaiIin().getDataSource().isEmpty()) {
+
+            return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧状態);
+        }
         return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧);
     }
 
@@ -140,7 +144,7 @@ public class HomonChosaItakuNyuryoku {
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnToroku(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).setbtnToroku();
-        return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧);
+        return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧状態);
     }
 
     /**
@@ -151,7 +155,9 @@ public class HomonChosaItakuNyuryoku {
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onChange_btnUpdate(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).set状態_更新();
-        return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細);
+        List<NinteichosahyoGaikyoChosaBusiness> 単価List = manager.get単価検索(getHandler(div).createParam_単価(div)).records();
+        getHandler(div).単価(単価List);
+        return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細状態);
     }
 
     /**
@@ -162,7 +168,9 @@ public class HomonChosaItakuNyuryoku {
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_DeleteButton(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).set状態_削除();
-        return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細);
+        List<NinteichosahyoGaikyoChosaBusiness> 単価List = manager.get単価検索(getHandler(div).createParam_単価(div)).records();
+        getHandler(div).単価(単価List);
+        return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細状態);
     }
 
     /**
@@ -201,12 +209,24 @@ public class HomonChosaItakuNyuryoku {
                             div.getTxtItakusakiCode().getValue(),
                             div.getTxtChousaInCode().getValue(),
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                            Integer.parseInt(row.getRaiRirekiNo().toString()));
+                            Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString().replace(",", "")));
                     manager.saveOrDelete(models, key);
                 }
             }
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString("認定調査委託料入力の保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE6090001StateName.完了状態);
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「完了する」ボタンを押下する。
+     *
+     * @param div ShisetsutourukuPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<HomonChosaItakuNyuryokuDiv> btnComplete(HomonChosaItakuNyuryokuDiv div) {
         return ResponseData.of(div).respond();
     }
 

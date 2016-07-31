@@ -6,17 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC4560011;
 
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.DBC4560011TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.DBC4560011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4560011.UnyoKanriDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4560011.UnyoKanriHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC4560011.UnyoKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -31,8 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class UnyoKanri {
 
-    private static final RString CODE_処理済 = new RString("0");
-    private static final RString CODE_再処理前 = new RString("1");
+    private static final RString CODE_処理済 = new RString("1");
+    private static final RString CODE_再処理前 = new RString("2");
     private static final RString を使用して更新 = new RString("を使用して更新");
 
     /**
@@ -44,7 +43,7 @@ public class UnyoKanri {
     public ResponseData<UnyoKanriDiv> onLoad(UnyoKanriDiv div) {
         LockingKey 前排他キー = new LockingKey(ResponseHolder.getMenuID());
         if (!RealInitialLocker.tryGetLock(前排他キー)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            throw new PessimisticLockingException();
         }
         UnyoKanriHandler handler = getHandler(div);
         handler.initializeDisplay();
@@ -67,7 +66,7 @@ public class UnyoKanri {
                 && CODE_再処理前.equals(div.getDdlNenjiFutanWariaiShoriJotai().getSelectedKey())) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.年次負担割合再処理.getMessage().
-                        replace(handler.getパターン105(div.getTxtNenjiFutanWariaiShoriZumiNendo().getValue().getYear()).toString())).respond();
+                        replace(handler.getパターン102(div.getTxtNenjiFutanWariaiShoriZumiNendo().getValue().getYear()).toString())).respond();
             }
             if (ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).respond();
@@ -84,7 +83,7 @@ public class UnyoKanri {
                 変更理由, 適用基準日);
         LockingKey 前排他キー = new LockingKey(メニューID);
         RealInitialLocker.release(前排他キー);
-        return ResponseData.of(div).forwardWithEventName(DBC4560011TransitionEventName.完了).respond();
+        return ResponseData.of(div).setState(DBC4560011StateName.完了状態);
     }
 
     private void updateConfigData(ConfigNameDBC キー名称, RString キー値, RString 変更理由, RDate 適用基準日) {

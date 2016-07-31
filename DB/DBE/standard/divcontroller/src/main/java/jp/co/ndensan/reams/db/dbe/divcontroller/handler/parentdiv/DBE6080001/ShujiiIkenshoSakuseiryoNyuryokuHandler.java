@@ -64,11 +64,10 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
      * 初期化の設定します。
      */
     public void onLoad() {
-        // TODO QA内部:1354 Readmain:  (共通部品内部制御がなし、実装できない。)
         div.getShujiiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getShujiiKensakuJoken().getTxtMaxCount().setValue(
                 new Decimal(DbBusinessConfig.get(
-                                ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
+                                ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -227,8 +226,10 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
      * 意見書報酬の計算です。
      */
     public void onChange_Kuben() {
-        div.getShinseiJohoMeisai().getTxtIkenshoHoshu().setValue(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue()
-                .add(div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue()));
+        if (div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue() != null) {
+            div.getShinseiJohoMeisai().getTxtIkenshoHoshu().setValue(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue()
+                    .add(div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue()));
+        }
     }
 
     /**
@@ -257,6 +258,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         if (状態_追加.equals(row.getColumnState())) {
             if (状態_修正.equals(div.getHdnState())) {
                 row.setColumnState(状態_追加);
+                setIchiran(row);
             } else if (状態_削除.equals(div.getHdnState())) {
                 row.setColumnState(RString.EMPTY);
             }
@@ -266,29 +268,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             } else {
                 row.setColumnState(状態_修正);
             }
-            row.setShinseibi(new RString(div.getShinseiJohoMeisai().getTxtShinseibi().getValue().toString()));
-            row.setShujiiIryoKikan(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getIryoKikanName());
-            row.setShujii(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getShujiiName());
-            row.setIraiNengappi(new RString(div.getShinseiJohoMeisai().getXtIkenshoSakuseiIraiNengappi().getValue().toString()));
-            row.setKinyuNengappi(new RString(div.getShinseiJohoMeisai().getTxtIkenshoKinyuNengappi().getValue().toString()));
-            row.setJuryoNengappi(new RString(div.getShinseiJohoMeisai().getTxtIkenshoJuryoNengappi().getValue().toString()));
-            row.setIshiKubun(div.getShinseiJohoMeisai().getTxtIshiKubun().getValue());
-            row.setIkenshoSakuseiryo(new RString(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue().toString()));
-            row.setIkenshoBettoShinryohi(new RString(div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue().toString()));
-            row.setIkenshoHoshu(new RString(div.getShinseiJohoMeisai().getTxtIkenshoHoshu().getValue().toString()));
-            row.setShiharaiMemo(div.getShinseiJohoMeisai().getTxtShiharaiMemo().getValue());
-            if (銀行振込_する.equals(div.getShinseiJohoMeisai().getRadGinkoFurikomi().getSelectedValue())) {
-                row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());
-            } else {
-                row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力未.get名称());
-            }
-            row.setShujiiIryoKikanCode(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
-            row.setShujiiCode(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
-            if (div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().hasShiteii()) {
-                row.setShiteiiFlag(ShiteiiFlg.指定医になれる.get名称());
-            } else {
-                row.setShiteiiFlag(ShiteiiFlg.なれない.get名称());
-            }
+            setIchiran(row);
         } else if (状態_削除.equals(div.getHdnState())) {
             row.setColumnState(状態_削除);
         }
@@ -307,13 +287,13 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                 Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
         ShujiiIkenshoHoshuJissekiJohoBuilder builder = joho.createBuilderForEdit();
-        builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getIraiNengappi()));
-        builder.set主治医意見書記入年月日(new FlexibleDate(row.getKinyuNengappi()));
-        builder.set主治医意見書受領年月日(new FlexibleDate(row.getJuryoNengappi()));
+        builder.set主治医意見書作成依頼年月日(new FlexibleDate(new RDate(row.getIraiNengappi().toString()).toString()));
+        builder.set主治医意見書記入年月日(new FlexibleDate(new RDate(row.getKinyuNengappi().toString()).toString()));
+        builder.set主治医意見書受領年月日(new FlexibleDate(new RDate(row.getJuryoNengappi().toString()).toString()));
         builder.set医師区分コード(new Code(IshiKubunCode.valueOf(row.getIshiKubun().toString()).getコード()));
-        builder.set主治医意見書作成料(Integer.parseInt(row.getIkenshoSakuseiryo().toString()));
-        builder.set主治医意見書別途診療費(Integer.parseInt(row.getIkenshoBettoShinryohi().toString()));
-        builder.set主治医意見書報酬(Integer.parseInt(row.getIkenshoHoshu().toString()));
+        builder.set主治医意見書作成料(toDecimal(row.getIkenshoSakuseiryo()).intValue());
+        builder.set主治医意見書別途診療費(toDecimal(row.getIkenshoBettoShinryohi()).intValue());
+        builder.set主治医意見書報酬(toDecimal(row.getIkenshoHoshu()).intValue());
         builder.set主治医意見書報酬支払年月日(FlexibleDate.EMPTY);
         builder.set主治医意見書報酬支払メモ(row.getShiharaiMemo());
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
@@ -341,9 +321,9 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
                 Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
         ShujiiIkenshoHoshuJissekiJoho joho = models.get(key);
         ShujiiIkenshoHoshuJissekiJohoBuilder builder = joho.createBuilderForEdit();
-        builder.set主治医意見書作成料(Integer.parseInt(row.getIkenshoSakuseiryo().toString()));
-        builder.set主治医意見書別途診療費(Integer.parseInt(row.getIkenshoBettoShinryohi().toString()));
-        builder.set主治医意見書報酬(Integer.parseInt(row.getIkenshoHoshu().toString()));
+        builder.set主治医意見書作成料(toDecimal(row.getIkenshoSakuseiryo()).intValue());
+        builder.set主治医意見書別途診療費(toDecimal(row.getIkenshoBettoShinryohi()).intValue());
+        builder.set主治医意見書報酬(toDecimal(row.getIkenshoHoshu()).intValue());
         builder.set主治医意見書報酬支払メモ(row.getShiharaiMemo());
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);
@@ -352,6 +332,33 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
         }
         joho.toEntity().setState(EntityDataState.Modified);
         return builder;
+    }
+
+    private void setIchiran(dgShinsakaiIin_Row row) {
+        row.setShinseibi(dateFormat(new RString(div.getShinseiJohoMeisai().getTxtShinseibi().getValue().toString())));
+        row.setShujiiIryoKikan(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getIryoKikanName());
+        row.setShujii(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getShujiiName());
+        row.setIraiNengappi(dateFormat(new RString(div.getShinseiJohoMeisai().getXtIkenshoSakuseiIraiNengappi().getValue().toString())));
+        row.setKinyuNengappi(dateFormat(new RString(div.getShinseiJohoMeisai().getTxtIkenshoKinyuNengappi().getValue().toString())));
+        row.setJuryoNengappi(dateFormat(new RString(div.getShinseiJohoMeisai().getTxtIkenshoJuryoNengappi().getValue().toString())));
+        row.setIshiKubun(div.getShinseiJohoMeisai().getTxtIshiKubun().getValue());
+        row.setIkenshoSakuseiryo(DecimalFormatter.toコンマ区切りRString(div.getShinseiJohoMeisai().getTxtIkenshoSakuseiryo().getValue(), 0));
+        row.setIkenshoBettoShinryohi(DecimalFormatter.toコンマ区切りRString(
+                div.getShinseiJohoMeisai().getTxtIkenshoBettoShinsahi().getValue(), 0));
+        row.setIkenshoHoshu(DecimalFormatter.toコンマ区切りRString(div.getShinseiJohoMeisai().getTxtIkenshoHoshu().getValue(), 0));
+        row.setShiharaiMemo(div.getShinseiJohoMeisai().getTxtShiharaiMemo().getValue());
+        if (銀行振込_する.equals(div.getShinseiJohoMeisai().getRadGinkoFurikomi().getSelectedValue())) {
+            row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());
+        } else {
+            row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力未.get名称());
+        }
+        row.setShujiiIryoKikanCode(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode());
+        row.setShujiiCode(div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
+        if (div.getShinseiJohoMeisai().getCcdShujiiIryokikanAndShujiiInput().hasShiteii()) {
+            row.setShiteiiFlag(ShiteiiFlg.指定医になれる.get名称());
+        } else {
+            row.setShiteiiFlag(ShiteiiFlg.なれない.get名称());
+        }
     }
 
     private void setMeisai(dgShinsakaiIin_Row row) {

@@ -485,6 +485,7 @@ public class JiGyoSyaHandler {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
+        List<RString> list = new ArrayList<>();
         SearchResult<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide = jigyosha.getGunshiCodeJigyoshaInputGuide();
 
         mode.setGunshiCodeJigyoshaInputGuide(gunshiCodeJigyoshaInputGuide.records());
@@ -497,11 +498,12 @@ public class JiGyoSyaHandler {
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.get郡市区コード());
                 KeyValue.setValue(entity.get郡市区名称());
-
-                dataSource.add(KeyValue);
+                if (!list.contains(entity.get郡市区コード())) {
+                    dataSource.add(KeyValue);
+                }
+                list.add(entity.get郡市区コード());
             }
         }
-
         return dataSource;
     }
 
@@ -509,6 +511,7 @@ public class JiGyoSyaHandler {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
+        List<RString> list = new ArrayList<>();
         SearchResult<ServiceShuruiJigyoshaInputGuide> jigyoshaInputGuide = jigyosha.getServiceShuruiJigyoshaInputGuide(RDate.getNowDate().getYearMonth());
 
         if (!jigyoshaInputGuide.records().isEmpty()) {
@@ -518,8 +521,10 @@ public class JiGyoSyaHandler {
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.getサービス種類コード().value());
                 KeyValue.setValue(entity.getサービス種類略称());
-
-                dataSource.add(KeyValue);
+                if (!list.contains(entity.getサービス種類コード().value())) {
+                    dataSource.add(KeyValue);
+                }
+                list.add(entity.getサービス種類コード().value());
             }
         }
         return dataSource;

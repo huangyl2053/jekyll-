@@ -44,6 +44,8 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
     private static final String NINTEI_CHOSAHYO_OCR_TOKKI = "ninteiChosahyoOCRTokki";
     private static final String NINTEI_CHOSAHYO_OCR_GAIKYOU = "ninteiChosahyoOCRGaikyou";
     private static final String NINTEI_CHOSA_CHECK_HYO = "ninteiChosaCheckHyo";
+    private static final String GAIKYOCHOSA = "gaikyoChosa";
+    private static final String GAIKYOCHOSAOCR = "gaikyoChosaOCR";
     private static final String ZENKO_NINTEI_CHOSAHYO = "zenkoNinteiChosahyo";
     private static final String NINTEI_CHOSAIRAI_HAKKOU = "ninteiChosairaiHakkou";
     private static final String IKENSHO_SAKUSEIIRAI = "ikenshoSakuseiirai";
@@ -79,6 +81,10 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
     private boolean ninteiChosahyoOCRTokki;
     @BatchParameter(key = NINTEI_CHOSAHYO_OCR_GAIKYOU, name = "認定調査票OCR(概況調査)出力区分")
     private boolean ninteiChosahyoOCRGaikyou;
+    @BatchParameter(key = GAIKYOCHOSA, name = "認定調査票(概況特記)出力区分")
+    private boolean gaikyoChosa;
+    @BatchParameter(key = GAIKYOCHOSAOCR, name = "認定調査票OCR(概況特記)出力区分")
+    private boolean gaikyoChosaOCR;
     @BatchParameter(key = NINTEI_CHOSA_CHECK_HYO, name = "認定調査差異チェック表出力区分")
     private boolean ninteiChosaCheckHyo;
     @BatchParameter(key = ZENKO_NINTEI_CHOSAHYO, name = "前回認定調査結果との比較表出力区分")

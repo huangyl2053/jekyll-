@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.ShotokuJouhouTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJohoIchiranEditor {
 
-    private final ShotokuJouhouTempEntity 所得情報一覧;
+    private final KaigoHokenShotokuTempEntity 所得情報一覧;
     private final RString 導入形態コード;
     private final LasdecCode 市町村コード;
     private final RString 市町村名称;
@@ -66,7 +66,7 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
     /**
      * コンストラクタです。
      *
-     * @param 所得情報一覧 ShotokuJouhouTempEntity
+     * @param 所得情報一覧 KaigoHokenShotokuTempEntity
      * @param 導入形態コード RString
      * @param 市町村コード LasdecCode
      * @param 市町村名称 RString
@@ -75,7 +75,7 @@ public class KaigoHokenShotokuJohoIchiranEditor implements IKaigoHokenShotokuJoh
      * @param association Association
      * @param 連番 int
      */
-    public KaigoHokenShotokuJohoIchiranEditor(ShotokuJouhouTempEntity 所得情報一覧,
+    public KaigoHokenShotokuJohoIchiranEditor(KaigoHokenShotokuTempEntity 所得情報一覧,
             RString 導入形態コード,
             LasdecCode 市町村コード,
             RString 市町村名称,

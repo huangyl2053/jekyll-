@@ -85,10 +85,6 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnNarabeteHyoji"));
             }
 
-            public btnNarabeteHyojiKogaku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNarabeteHyojiKogaku"));
-            }
-
             public dgSetaiShotoku(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgSetaiShotoku"));
             }

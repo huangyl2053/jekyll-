@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv.ShokaiButtonType;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -39,4 +40,6 @@ public interface IZenkaiNinteiKekkaJohoDiv extends ICommonChildDivBaseProperties
     public TextBoxFlexibleDate getTxtYukoKikanTo();
 
     public void setTxtYukoKikanTo(TextBoxFlexibleDate txtYukoKikanTo);
+
+    public void setMode_ShokaiButtonType(ShokaiButtonType value);
 }

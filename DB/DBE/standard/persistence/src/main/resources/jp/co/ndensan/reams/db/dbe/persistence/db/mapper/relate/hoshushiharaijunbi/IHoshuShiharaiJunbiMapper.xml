@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： バッチ設計_DBE621001_報酬支払い通知書請求書・確認書のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1980-020 suguangjun -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper">
+    <resultMap id="resultMap_HoshuShiharaiJunbiRelateEntity"
+                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity" autoMapping="true">
+        <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="t5101jusho" column="t5101jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="ikenshoSakuseiryo" column="ikenshoSakuseiryo"/>
+        <result property="ninteichosaItakusakiCode" column="ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosaKubunCode" column="ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="chosaJisshiBashoCode" column="chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="chosaItakuryo" column="chosaItakuryo"/>
+        <result property="tanka" column="tanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosainCode" column="ninteichosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteichosaJisshiYMD" column="ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosaKubun" column="chosaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="homonShubetsu" column="homonShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ikenshoSakuseiKaisuKubun" column="ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zaitakuShisetsuKubun" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ikenshoBettoShinryohi" column="ikenshoBettoShinryohi"/>
+        <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoJuryoYMD" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoReadYMD" column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="t5911_daihyoshaName" column="T5911_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosainNo" column="ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sonotaKikanCode" column="sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kikanMeisho" column="kikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="x5603_count" column="x5603_count"/>
+        <result property="shinsakaiKotsuhi" column="shinsakaiKotsuhi"/>
+        <result property="shinsakaiKojoZeigaku" column="shinsakaiKojoZeigaku"/>
+        <result property="x5595_shinsakaiIinCode" column="x5595_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYMD" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hoshu" column="Hoshu"/>
+        <result property="shinsakaiHoshuGokei" column="shinsakaiHoshuGokei"/>
+    </resultMap>
+    
+    <select id="get認定調査報酬請求書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT
+                T5601."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
+                T5910."yubinNo" AS "yubinNo",
+                T5910."jusho" AS "jusho",
+                T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
+                T5910."daihyoshaName" AS "daihyoshaName",
+                T5031."chosaKubun" AS "chosaKubun",
+                T5031."homonShubetsu" AS "homonShubetsu",
+                T5031."tanka" AS "tanka"
+        FROM		
+                rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS T5601
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+                AND T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
+                ON T5202."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+                AND T5202."ninteichosaRirekiNo" = T5601."ninteichosaIraiRirekiNo"
+                AND T5202."gaikyoChosaTextImageKubun" = #{概況調査イメージ区分}
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
+                ON T5910."shichosonCode" = T7051."shichosonCode"
+                AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
+                INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
+                ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
+                AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
+                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
+        WHERE 
+                #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
+                AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
+                AND T5601."isGinkoFurikomiShutsuryoku" = #{銀行振込出力フラグ}
+        ORDER BY
+                T5601."ninteichosaItakusakiCode"
+    </select>
+    
+    <select id="get認定調査報酬支払通知書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT		
+                T5601."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
+		T5910."yubinNo" AS "yubinNo",
+		T5910."jusho" AS "jusho",
+		T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
+		T5910."daihyoshaName" AS "daihyoshaName",
+		T5202."ninteiChosaKubunCode" AS "ninteiChosaKubunCode",
+		T5202."chosaJisshiBashoCode" AS "chosaJisshiBashoCode",
+		T5601."chosaItakuryo" AS "chosaItakuryo",
+		T5031."tanka" AS "tanka"
+        FROM		
+                rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS T5601
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+                AND T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
+                ON T5202."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+                AND T5202."ninteichosaRirekiNo" = T5601."ninteichosaIraiRirekiNo"
+                AND T5202."gaikyoChosaTextImageKubun" = #{概況調査イメージ区分}
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
+                ON T5910."shichosonCode" = T7051."shichosonCode"
+                AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
+                LEFT JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
+                ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
+                AND T5031."homonShubetsu" = T5202."chosaJisshiBashoCode"
+                AND T5031."kaishiYM" <![CDATA[<=]]> substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7)
+                AND substring(T5601."chosaItakuryoShiharaiYMD" from 0 for 7) <![CDATA[<=]]> T5031."shuryoYM"
+        WHERE
+                #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
+                AND T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
+                AND T5601."isGinkoFurikomiShutsuryoku" = #{銀行振込出力フラグ}
+        ORDER BY
+                T5601."ninteichosaItakusakiCode" 
+    </select>
+    
+    <select id="get認定調査報酬支払明細書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT  
+                T5601."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
+                T7051."shichosonMeisho" AS "shichosonMeisho",
+                T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
+                T5601."ninteichosainCode" AS "ninteichosainCode",
+                T5913."chosainShimei" AS "chosainShimei",
+                T5101."hihokenshaNo" AS "hihokenshaNo",
+                T5101."hihokenshaName" AS "hihokenshaName",
+                T5101."seinengappiYMD" AS "seinengappiYMD",
+                T5202."ninteichosaJisshiYMD" AS "ninteichosaJisshiYMD",
+                T5202."ninteiChosaKubunCode" AS "ninteiChosaKubunCode",
+                T5202."chosaJisshiBashoCode" AS "chosaJisshiBashoCode",
+                T5601."chosaItakuryo" AS "chosaItakuryo"
+        FROM  
+                rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS T5601
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON  T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+                AND  T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND  T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
+                ON  T5202."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+                AND  T5202."ninteichosaRirekiNo" = T5601."ninteichosaIraiRirekiNo"
+                AND  T5202."gaikyoChosaTextImageKubun" = #{概況調査イメージ区分}
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
+                ON  T5910."shichosonCode" = T7051."shichosonCode"
+                AND  T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
+                INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
+                ON  T5913."shichosonCode" = T5910."shichosonCode"
+                AND  T5913."ninteiChosaItakusakiCode" = T5910."ninteichosaItakusakiCode"
+        WHERE  
+                #{実績期間From} <![CDATA[<=]]> T5601."chosaItakuryoShiharaiYMD"
+                AND  T5601."chosaItakuryoShiharaiYMD" <![CDATA[<=]]> #{実績期間To}
+                AND  T5601."isGinkoFurikomiShutsuryoku" = #{銀行振込出力フラグ}
+        ORDER BY  
+                T5601."ninteichosaItakusakiCode",
+                T5913."ninteiChosainCode",
+                T5101."hihokenshaNo"
+
+        
+    </select>
+    
+    <select id="get主治医意見書作成報酬請求書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT  
+                T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
+                T5911."yubinNo" AS "yubinNo",
+                T5911."jusho" AS "jusho",
+                T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
+                T5911."daihyoshaName" AS "daihyoshaName",
+                T5302."ikenshoSakuseiKaisuKubun" AS "ikenshoSakuseiKaisuKubun",
+                T5302."zaitakuShisetsuKubun" AS "zaitakuShisetsuKubun",
+                T5032."tanka" AS "tanka"
+        FROM  
+                rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS T5602
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON  T5101."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND  T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
+                ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
+                <if test="!基準日フラグ">  
+                 AND #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
+                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
+                INNER JOIN rgdb."DbT5032ShujiiIkenshoHoshuTanka" AS T5032
+                ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
+                AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
+                <if test="基準日フラグ">
+                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                 AND T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                </if>
+                <if test="!基準日フラグ">
+                 AND T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD" 
+                 AND T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM"
+                </if>
+        WHERE  
+                T5602."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
+                <if test="基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+        ORDER BY
+                T5602."shujiiIryoKikanCode"
+    </select>
+    
+    <select id="get主治医意見書作成報酬支払通知書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT  
+                T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
+                T5911."yubinNo" AS "yubinNo",
+                T5911."jusho" AS "jusho",
+                T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
+                T5911."daihyoshaName" AS "daihyoshaName",
+                T5302."ikenshoSakuseiKaisuKubun" AS "ikenshoSakuseiKaisuKubun",
+                T5302."zaitakuShisetsuKubun" AS "zaitakuShisetsuKubun",
+                T5602."ikenshoBettoShinryohi" AS "ikenshoBettoShinryohi",
+                T5032."tanka" AS "tanka"
+        FROM  
+                rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS T5602
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON  T5101."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND  T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
+                ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
+                <if test="!基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
+                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To} 
+                </if>
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
+                INNER JOIN rgdb."DbT5032ShujiiIkenshoHoshuTanka" AS T5032
+                ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
+                AND  T5032."zaitakuShisetsuKubun" = T5302."zaitakuShisetsuKubun"
+                <if test="基準日フラグ">
+                 AND T5032."kaishiYM" <![CDATA[<=]]> T5602."ikenshoJuryoYMD" 
+                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> T5032."shuryoYM" 
+                </if>
+                <if test="!基準日フラグ">
+                 AND  T5032."kaishiYM" <![CDATA[<=]]> T5302."ikenshoReadYMD"
+                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> T5032."shuryoYM" 
+                </if>
+        WHERE  
+                T5602."ginkoFurikomiShutsuryokuFlag"  = #{銀行振込出力フラグ}
+                <if test="基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+        ORDER BY  
+                T5602."shujiiIryoKikanCode"
+    </select>
+    
+    <select id="get主治医意見書作成報酬支払明細書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT  
+                T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
+                T7051."shichosonMeisho" AS "shichosonMeisho",
+                T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
+                T5602."shujiiCode" AS "shujiiCode",
+                T5912."shujiiName" AS "shujiiName",
+                T5101."hihokenshaNo" AS "hihokenshaNo",
+                T5101."hihokenshaName" AS "hihokenshaName",
+                T5101."seinengappiYMD" AS "seinengappiYMD",
+                T5602."ikenshoJuryoYMD" AS "ikenshoJuryoYMD",
+                T5302."ikenshoReadYMD" AS "ikenshoReadYMD",
+                T5302."ikenshoSakuseiKaisuKubun" As "ikenshoSakuseiKaisuKubun",
+                T5302."zaitakuShisetsuKubun" AS "zaitakuShisetsuKubun",
+                T5602."ikenshoSakuseiryo"
+        FROM  
+                rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS T5602
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON  T5101."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND  T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
+                INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
+                ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
+                <if test="!基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
+                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+                INNER JOIN rgdb."DbT5912ShujiiJoho" AS T5912
+                ON  T5912."shichosonCode" = T5911."shichosonCode"
+                AND  T5912."shujiiIryokikanCode" = T5911."shujiiIryokikanCode"
+        WHERE  
+                T5602."ginkoFurikomiShutsuryokuFlag"  = #{銀行振込出力フラグ}
+                <if test="基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+        ORDER BY  
+                T5602."shujiiIryoKikanCode",
+                T5912."shujiiCode",
+                T5101."hihokenshaNo"
+    </select>
+    
+    <select id="get主治医意見書作成報酬支払内訳確認書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT  
+                T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
+                T5911."yubinNo" AS "yubinNo",
+                T5911."jusho" AS "jusho",
+                T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
+                T5911."daihyoshaName" AS "daihyoshaName",
+                T5101."hihokenshaNo" AS "hihokenshaNo",
+                T5101."hihokenshaName" AS "hihokenshaName",
+                T5101."jusho" AS "T5101jusho",
+                T5602."ikenshoSakuseiryo"
+        FROM  
+                rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS T5602
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+                ON  T5101."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
+                AND  T5101."logicalDeletedFlag" = False
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+                INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
+                INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
+                ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+                AND  T5302."ikenshoIraiRirekiNo" = T5602."ikenshoIraiRirekiNo"
+                <if test="!基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
+                 AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+        WHERE  
+                T5602."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
+                <if test="基準日フラグ">
+                 AND  #{実績期間From} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                 AND  T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{実績期間To}
+                </if>
+        ORDER BY  
+                T5602."shujiiIryoKikanCode",
+                T5101."hihokenshaNo"
+    </select>
+    
+    <select id="get介護認定審査会委員報酬支払通知書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT
+            T5603."shinsakaiIinCode" AS "shinsakaiIinCode",
+            T5594."yubinNo" AS "yubinNo",
+            T5594."Jusho" AS "Jusho",
+            X5595."shujiiCode" AS "x5595_shujiiCode",
+            T5911."shujiiIryokikanCode" AS "shujiiIryokikanCode",
+            T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
+            T5911."daihyoshaName" AS "T5911_daihyoshaName",
+            X5595."ninteiChosainNo" AS "ninteiChosainNo",
+            T5910."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
+            T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
+            T5910."daihyoshaName" AS "daihyoshaName",
+            X5595."sonotaKikanCode" AS "sonotaKikanCode",
+            T5914."kikanMeisho" AS "kikanMeisho",
+            T5594."shinsakaiIinShimei" AS "shinsakaiIinShimei",
+            X5603."count" AS "x5603_count",
+            Y5603.Hoshu AS "Hoshu",
+            Y5603.Zeigaku AS "shinsakaiKojoZeigaku",
+            Y5603.Kotsuhi AS "shinsakaiKotsuhi"
+          FROM
+            rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
+            INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS T5594 
+              ON T5594."shinsakaiIinCode" = T5603."shinsakaiIinCode" 
+            INNER JOIN ( 
+              SELECT
+                DbT5595."shinsakaiIinCode"
+                , DbT5595."shoKisaiHokenshaNo"
+                , DbT5595."shujiiIryokikanCode"
+                , DbT5595."shujiiCode"
+                , DbT5595."ninteichosaItakusakiCode"
+                , DbT5595."ninteiChosainNo"
+                , DbT5595."sonotaKikanCode" 
+              FROM
+                ( 
+                  SELECT
+                    T5595."shinsakaiIinCode"
+                    , T5595."shoKisaiHokenshaNo"
+                    , T5595."shujiiIryokikanCode"
+                    , T5595."shujiiCode"
+                    , T5595."ninteichosaItakusakiCode"
+                    , T5595."ninteiChosainNo"
+                    , T5595."sonotaKikanCode"
+                    , row_number() over ( 
+                      partition by
+                        T5595."shinsakaiIinCode" 
+                      order by
+                        T5595.remban desc
+                    ) as rank_number 
+                  FROM
+                    rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595
+                ) AS DbT5595 
+              WHERE
+                rank_number = 1
+            ) X5595 
+              ON X5595."shinsakaiIinCode" = T5594."shinsakaiIinCode" 
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
+              ON T7051."shoKisaiHokenshaNo" = X5595."shoKisaiHokenshaNo" 
+            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
+              ON T7051."shichosonCode" = T5911."shichosonCode" 
+              AND X5595."shujiiIryokikanCode" = T5911."shujiiIryokikanCode" 
+            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910 
+              ON T7051."shichosonCode" = T5910."shichosonCode" 
+              AND X5595."ninteichosaItakusakiCode" = T5910."ninteichosaItakusakiCode" 
+            LEFT JOIN rgdb."DbT5914SonotaKikanJoho" AS T5914 
+              ON X5595."shoKisaiHokenshaNo" = T5914."shoKisaiHokenshaNo" 
+              AND X5595."sonotaKikanCode" = T5914."sonotaKikanCode" 
+            INNER JOIN ( 
+              SELECT
+                T5603."shinsakaiIinCode"
+                , COUNT(T5603."shinsakaiIinCode") AS count 
+              FROM
+                rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
+              WHERE
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
+                AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To} 
+                AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
+              GROUP BY
+                T5603."shinsakaiIinCode"
+            ) X5603 
+              ON X5603."shinsakaiIinCode" = T5603."shinsakaiIinCode" 
+            INNER JOIN ( 
+              SELECT
+                T5603."shinsakaiIinCode"
+                , SUM( 
+                  T5603."shinsakaiHoshu" + T5603."shinsakaiSonotaHoshu"
+                ) AS Hoshu
+                , SUM(T5603."shinsakaiKojoZeigaku") AS Zeigaku
+                , SUM(T5603."shinsakaiKotsuhi") AS Kotsuhi 
+              FROM
+                rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
+              WHERE
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
+                AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To} 
+                AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
+              GROUP BY
+                T5603."shinsakaiIinCode"
+            ) Y5603 
+              ON Y5603."shinsakaiIinCode" = T5603."shinsakaiIinCode" 
+          WHERE
+            #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
+            AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To} 
+            AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
+          ORDER BY
+            T5603."shinsakaiIinCode"
+    </select>
+    
+    <select id="get費用弁償等明細書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT  
+            T5603."shinsakaiIinCode" AS "shinsakaiIinCode", 
+            T5594."shinsakaiIinShimei" AS "shinsakaiIinShimei",  
+            X5603."count" AS "x5603_count",  
+            Y5603.Hoshu AS "Hoshu",  
+            Y5603.Zeigaku AS "shinsakaiKojoZeigaku",  
+            Y5603.Kotsuhi AS "shinsakaiKotsuhi",  
+            T7051."shichosonMeisho" AS "shichosonMeisho",  
+            X5595."shinsakaiIinCode" AS "x5595_shinsakaiIinCode",  
+            X5595."shujiiCode" AS "shujiiCode", 
+            X5595."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",  
+            X5595."ninteiChosainNo" AS "ninteiChosainNo",  
+            X5595."sonotaKikanCode" AS "sonotaKikanCode"           
+        FROM 
+           rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603  
+           INNER JOIN  rgdb."DbT5594ShinsakaiIinJoho" AS T5594  
+           ON  T5594."shinsakaiIinCode" = T5603."shinsakaiIinCode"  
+           INNER JOIN (   
+             SELECT  T5603."shinsakaiIinCode",
+               COUNT(T5603."shinsakaiIinCode") AS count
+             FROM  rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
+             WHERE #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD" 
+             AND  T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}          
+             AND  T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ} 
+             GROUP BY  T5603."shinsakaiIinCode"  
+            ) X5603  
+           ON  X5603."shinsakaiIinCode" = T5603."shinsakaiIinCode"  
+           INNER JOIN (   
+             SELECT  T5603."shinsakaiIinCode",
+               SUM(T5603."shinsakaiHoshu" + T5603."shinsakaiSonotaHoshu") AS Hoshu ,           
+               SUM(T5603."shinsakaiKojoZeigaku") AS Zeigaku,
+               SUM(T5603."shinsakaiKotsuhi") AS Kotsuhi
+             FROM  rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
+             WHERE  T5603."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{実績期間From}
+             AND  T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}
+             AND  T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}
+             GROUP BY  T5603."shinsakaiIinCode"           
+            ) Y5603  
+           ON  Y5603."shinsakaiIinCode" = T5603."shinsakaiIinCode"  
+           INNER JOIN (
+                 SELECT  DbT5595."shinsakaiIinCode",           
+               DbT5595."shoKisaiHokenshaNo" ,           
+               DbT5595."shujiiIryokikanCode",
+               DbT5595."shujiiCode" ,          
+               DbT5595."ninteichosaItakusakiCode",
+               DbT5595."ninteiChosainNo",
+               DbT5595."sonotaKikanCode"
+               FROM(  
+             SELECT  T5595."shinsakaiIinCode",           
+               T5595."shoKisaiHokenshaNo" ,           
+               T5595."shujiiIryokikanCode",
+               T5595."shujiiCode" ,          
+               T5595."ninteichosaItakusakiCode",
+               T5595."ninteiChosainNo",
+               T5595."sonotaKikanCode",
+               row_number() over(partition by T5595."shinsakaiIinCode" order by T5595.remban desc) as rank_number        
+             FROM rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595) AS DbT5595           
+             WHERE  rank_number   =  1
+            ) X5595  
+           ON  X5595."shinsakaiIinCode" = T5594."shinsakaiIinCode"  
+           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051  
+           ON  T7051."shoKisaiHokenshaNo" = X5595."shoKisaiHokenshaNo"  
+           LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911  
+           ON  T7051."shichosonCode" = T5911."shichosonCode"  
+           AND  X5595."shujiiIryokikanCode" = T5911."shujiiIryokikanCode"  
+           LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910  
+           ON  T7051."shichosonCode" = T5910."shichosonCode"  
+           AND  X5595."ninteichosaItakusakiCode" = T5910."ninteichosaItakusakiCode"  
+           LEFT JOIN rgdb."DbT5914SonotaKikanJoho" AS T5914  
+           ON  X5595."shoKisaiHokenshaNo" = T5914."shoKisaiHokenshaNo"  
+           AND  X5595."sonotaKikanCode" = T5914."sonotaKikanCode"  
+        WHERE  
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"
+           AND  T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}
+           AND  T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}       
+        ORDER BY  
+            T5603."shinsakaiIinCode"
+    </select>
+    
+    <select id="get介護認定審査会委員報酬支払明細書" resultMap="resultMap_HoshuShiharaiJunbiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" 
+            resultOrdered="true" fetchSize="500">
+        SELECT 
+            T7051."shichosonMeisho" AS "shichosonMeisho",         
+            T5603."shinsakaiIinCode" AS "shinsakaiIinCode",          
+            T5594."shinsakaiIinShimei" AS "shinsakaiIinShimei",          
+            T5101."hihokenshaNo" AS "hihokenshaNo",          
+            T5101."hihokenshaName" AS "hihokenshaName",          
+            T5101."seinengappiYMD" AS "seinengappiYMD",          
+            T5502."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD",          
+            T5603."shinsakaiHoshu" + T5603."shinsakaiSonotaHoshu" AS "Hoshu",          
+            T5603."shinsakaiKotsuhi" AS "shinsakaiKotsuhi" ,         
+            T5603."shinsakaiKojoZeigaku" AS "shinsakaiKojoZeigaku" ,         
+            T5603."shinsakaiHoshuGokei" AS "shinsakaiHoshuGokei"          
+            FROM 
+                rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603          
+                INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS T5594          
+                ON T5594."shinsakaiIinCode" = T5603."shinsakaiIinCode"          
+                INNER JOIN ( SELECT DbT5595."shinsakaiIinCode",
+                                    DbT5595."shoKisaiHokenshaNo"
+                        FROM(               	
+                           SELECT T5595."shinsakaiIinCode" ,        
+                                  T5595."shoKisaiHokenshaNo",         
+                                  row_number() over(partition by T5595."shinsakaiIinCode" order by T5595.remban desc) as rank_number         
+                          FROM rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595) AS DbT5595 
+                          WHERE rank_number = 1                
+                 ) X5595          
+                ON X5595."shinsakaiIinCode" = T5594."shinsakaiIinCode"
+                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+                ON T7051."shoKisaiHokenshaNo" = X5595."shoKisaiHokenshaNo"          
+                INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502          
+                ON T5502."shinsakaiKaisaiNo" = T5603."shinsakaiKaisaiNo"          
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101          
+                ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo"           
+                AND T5101."shoriJotaiKubun" = '0' 
+                OR T5101."shoriJotaiKubun" = '3'    	
+                AND T5101."logicalDeletedFlag" = False       
+            WHERE 
+                #{実績期間From} <![CDATA[<=]]> T5603."shinsakaiKaisaiYMD"     
+                AND T5603."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{実績期間To}          
+                AND T5603."ginkoFurikomiShutsuryokuFlag" = #{銀行振込出力フラグ}   	
+             ORDER BY 
+                T5603."shinsakaiIinCode",         
+                T5101."hihokenshaNo" 
+    </select>
+    
+    <select resultOrdered="true" id="get消費税率"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hoshushiharaijunbi.HoshuShiharaiJunbiMybatisParameter" fetchSize="500">
+        SELECT
+        UzT0007Code."codeMeisho"
+        FROM
+        rgdb."UzT0007Code" AS UzT0007Code
+        WHERE
+        UzT0007Code."codeShubetsu" = #{コード種別}
+        AND
+        UzT0007Code."yukoKaishiYMD" <![CDATA[<=]]> #{有効期間}
+        AND
+        #{有効期間} <![CDATA[<=]]> UzT0007Code."yukoShuryoYMD"
+    </select>
+    
+</mapper>

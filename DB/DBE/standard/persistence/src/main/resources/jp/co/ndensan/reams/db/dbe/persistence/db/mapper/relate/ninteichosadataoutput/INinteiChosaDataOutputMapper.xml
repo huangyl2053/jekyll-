@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
 <!--  @reamsid_L DBE-1860-010 duanzhanli -->
-<!--SelectMethod : getHihokenshaShutokuJyoho-->
-<!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosadataoutput.INinteiChosaDataOutputMapper">
 
     <resultMap id="resultMap_getNinteiChosaIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputRelateEntity" autoMapping="true">
@@ -73,6 +70,9 @@
         </if>
          <if test= "isNinteiChosainCode">
             AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
+        </if>
+        <if test= "!isShichoson">
+            AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
       ORDER BY
         DbT5101."hihokenshaKana"
@@ -254,7 +254,6 @@
         DbT5206."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     AND DbT5201."ninteichosaIraiRirekiNo" = DbT5206."ninteichosaRirekiNo"
     AND DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun"
-    --AND DbT5206."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
     LEFT JOIN 
         rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
     ON 
@@ -296,7 +295,6 @@
     ON 
         DbT5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     AND DbT5201."ninteichosaIraiRirekiNo" = DbT5205."ninteichosaRirekiNo"
-    --AND DbT5205."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
     WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
@@ -314,6 +312,9 @@
    <if test= "!isShinseishoKanriNo">
        AND DbT5201."shinseishoKanriNo" IN #{shinseishoKanriNo}
    </if>
+   <if test= "!isShichoson">
+       AND DbT7051."shichosonCode" = #{shichosonCode}
+    </if>
     ORDER BY
        状況連番,
        状況フラグ連番,
@@ -330,14 +331,14 @@
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
     FROM 
         rgdb."DbT5201NinteichosaIraiJoho"
-    WHERE
     <if test= "!isShinseishoKanriNo">
+    WHERE
          "ninteichosaIraiRirekiNo" = ( SELECT
                 MAX(Dbt5201."ninteichosaIraiRirekiNo") 
               FROM
                 rgdb."DbT5201NinteichosaIraiJoho" AS Dbt5201
               WHERE
-                "shinseishoKanriNo" = Dbt5201."shinseishoKanriNo"
+                "shinseishoKanriNo" = Dbt5201."shinseishoKanriNo")
      AND  "shinseishoKanriNo" IN #{shinseishoKanriNo}
     </if>
     </select>

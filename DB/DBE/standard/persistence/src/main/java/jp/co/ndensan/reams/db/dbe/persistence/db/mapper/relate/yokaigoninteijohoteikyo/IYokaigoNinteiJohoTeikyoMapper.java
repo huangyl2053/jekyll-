@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.Hihok
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinnteiRiriRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
@@ -111,9 +112,9 @@ public interface IYokaigoNinteiJohoTeikyoMapper {
      * 要介護認定申請情報の更新する。
      *
      * @param param 要介護認定申請情報検索条件
-     * @return int{@code list}
+     * @return DbT5101NinteiShinseiJohoEntity
      */
-    int update要介護認定申請(YokaigoBatchMybitisParamter param);
+    DbT5101NinteiShinseiJohoEntity get要介護認定申請情報(YokaigoBatchMybitisParamter param);
 
     /**
      * イメージ共有ファイルIDを検索する。

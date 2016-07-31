@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.tsuikashiryokagamia3.Tsui
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
- * 追加資料鑑のBuilderのインターフェースクラスです。
+ * 追加資料鑑（A3版）のBuilderのインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-180 wangrenze
+ * @reamsid_L DBE-0150-410 wangrenze
  */
 public interface ITsuikashiryokagamiA3Builder extends IReportBuilder<TsuikashiryokagamiA3ReportSource> {
 }

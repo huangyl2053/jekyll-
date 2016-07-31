@@ -4,10 +4,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInp
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputDiv extends Panel implements INinteiInputDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -59,6 +58,8 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     private RString hdnKoroshoIfShikibetsuCode;
     @JsonProperty("hdnHihokenshaNo")
     private RString hdnHihokenshaNo;
+    @JsonProperty("hdnNinteiYmd")
+    private RString hdnNinteiYmd;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -193,6 +194,24 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     /*
+     * gethdnNinteiYmd
+     * @return hdnNinteiYmd
+     */
+    @JsonProperty("hdnNinteiYmd")
+    public RString getHdnNinteiYmd() {
+        return hdnNinteiYmd;
+    }
+
+    /*
+     * sethdnNinteiYmd
+     * @param hdnNinteiYmd hdnNinteiYmd
+     */
+    @JsonProperty("hdnNinteiYmd")
+    public void setHdnNinteiYmd(RString hdnNinteiYmd) {
+        this.hdnNinteiYmd = hdnNinteiYmd;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -224,7 +243,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -239,11 +258,11 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
     }
 
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     /*
@@ -255,7 +274,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setRadNinteiKubun(RadioButton radNinteiKubun) {
+    public void  setRadNinteiKubun(RadioButton radNinteiKubun) {
         this.getNinteiJoho().setRadNinteiKubun(radNinteiKubun);
     }
 
@@ -265,7 +284,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setChkMinashiKoshinNintei(CheckBoxList chkMinashiKoshinNintei) {
+    public void  setChkMinashiKoshinNintei(CheckBoxList chkMinashiKoshinNintei) {
         this.getNinteiJoho().setChkMinashiKoshinNintei(chkMinashiKoshinNintei);
     }
 
@@ -275,7 +294,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
+    public void  setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
         this.getNinteiJoho().setTxtNinteiYMD(txtNinteiYMD);
     }
 
@@ -285,7 +304,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigodoCode(TextBoxCode txtYokaigodoCode) {
+    public void  setTxtYokaigodoCode(TextBoxCode txtYokaigodoCode) {
         this.getNinteiJoho().setTxtYokaigodoCode(txtYokaigodoCode);
     }
 
@@ -295,7 +314,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setBtnYokaigodoGuide(ButtonDialog btnYokaigodoGuide) {
+    public void  setBtnYokaigodoGuide(ButtonDialog btnYokaigodoGuide) {
         this.getNinteiJoho().setBtnYokaigodoGuide(btnYokaigodoGuide);
     }
 
@@ -305,7 +324,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setTxtYokaigodoName(TextBox txtYokaigodoName) {
+    public void  setTxtYokaigodoName(TextBox txtYokaigodoName) {
         this.getNinteiJoho().setTxtYokaigodoName(txtYokaigodoName);
     }
 
@@ -315,7 +334,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setTxtYukoKaishiYMD(TextBoxFlexibleDate txtYukoKaishiYMD) {
+    public void  setTxtYukoKaishiYMD(TextBoxFlexibleDate txtYukoKaishiYMD) {
         this.getNinteiJoho().setTxtYukoKaishiYMD(txtYukoKaishiYMD);
     }
 
@@ -325,7 +344,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setTxtYukoShuryoYMD(TextBoxFlexibleDate txtYukoShuryoYMD) {
+    public void  setTxtYukoShuryoYMD(TextBoxFlexibleDate txtYukoShuryoYMD) {
         this.getNinteiJoho().setTxtYukoShuryoYMD(txtYukoShuryoYMD);
     }
 
@@ -335,7 +354,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfter6Month(Button btnAfter6Month) {
+    public void  setBtnAfter6Month(Button btnAfter6Month) {
         this.getNinteiJoho().setBtnAfter6Month(btnAfter6Month);
     }
 
@@ -345,7 +364,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfter12Month(Button btnAfter12Month) {
+    public void  setBtnAfter12Month(Button btnAfter12Month) {
         this.getNinteiJoho().setBtnAfter12Month(btnAfter12Month);
     }
 
@@ -355,7 +374,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfter18Month(Button btnAfter18Month) {
+    public void  setBtnAfter18Month(Button btnAfter18Month) {
         this.getNinteiJoho().setBtnAfter18Month(btnAfter18Month);
     }
 
@@ -365,7 +384,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfter24Month(Button btnAfter24Month) {
+    public void  setBtnAfter24Month(Button btnAfter24Month) {
         this.getNinteiJoho().setBtnAfter24Month(btnAfter24Month);
     }
 
@@ -375,7 +394,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setDgServiceIchiran(DataGrid<dgServiceIchiran_Row> dgServiceIchiran) {
+    public void  setDgServiceIchiran(DataGrid<dgServiceIchiran_Row> dgServiceIchiran) {
         this.getServiceShitei().setDgServiceIchiran(dgServiceIchiran);
     }
 
@@ -385,7 +404,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public void setLblServiceIken(Label lblServiceIken) {
+    public void  setLblServiceIken(Label lblServiceIken) {
         this.getServiceShitei().setLblServiceIken(lblServiceIken);
     }
 

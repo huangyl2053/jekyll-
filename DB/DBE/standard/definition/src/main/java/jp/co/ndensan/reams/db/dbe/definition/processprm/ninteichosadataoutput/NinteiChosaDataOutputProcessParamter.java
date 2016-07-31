@@ -23,6 +23,7 @@ public class NinteiChosaDataOutputProcessParamter implements IBatchProcessParame
     private final RString ninteichosaItakusakiCode;
     private final RString ninteiChosainCode;
     private final List<RString> shinseishoKanriNoList;
+    private final RString shichosonCode;
 
     /**
      * コンストラクタです。
@@ -30,15 +31,18 @@ public class NinteiChosaDataOutputProcessParamter implements IBatchProcessParame
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
      * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param 市町村コード 市町村コード
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public NinteiChosaDataOutputProcessParamter(
             RString 認定調査委託先コード,
             RString 認定調査員コード,
-            List<RString> 申請書管理番号リスト) {
+            List<RString> 申請書管理番号リスト,
+            RString 市町村コード) {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
         this.ninteiChosainCode = 認定調査員コード;
         this.shinseishoKanriNoList = 申請書管理番号リスト;
+        this.shichosonCode = 市町村コード;
     }
 
     /**
@@ -49,6 +53,7 @@ public class NinteiChosaDataOutputProcessParamter implements IBatchProcessParame
     public NinteiChosaDataOutputBatchMybitisParameter toNinteiChosaDataOutputBatchMybitisParameter() {
         return NinteiChosaDataOutputBatchMybitisParameter.createSelectByKeyParam(ninteichosaItakusakiCode,
                 ninteiChosainCode,
-                shinseishoKanriNoList);
+                shinseishoKanriNoList,
+                shichosonCode);
     }
 }

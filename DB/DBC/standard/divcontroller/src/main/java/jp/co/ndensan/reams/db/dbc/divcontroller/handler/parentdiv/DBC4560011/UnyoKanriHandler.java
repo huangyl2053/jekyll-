@@ -31,9 +31,9 @@ public class UnyoKanriHandler {
     private static final RString CODE_２割負担 = new RString("2");
     private static final RString NAME_１割負担 = new RString("１割負担");
     private static final RString NAME_２割負担 = new RString("２割負担");
-    private static final RString CODE_処理済 = new RString("0");
-    private static final RString CODE_再処理前 = new RString("1");
-    private static final RString CODE_未処理 = new RString("2");
+    private static final RString CODE_処理済 = new RString("1");
+    private static final RString CODE_再処理前 = new RString("2");
+    private static final RString CODE_未処理 = new RString("0");
     private static final RString NAME_処理済 = new RString("処理済");
     private static final RString NAME_再処理前 = new RString("再処理前");
     private static final RString NAME_未処理 = new RString("未処理");
@@ -51,10 +51,11 @@ public class UnyoKanriHandler {
      * 画面ロード時の動作です。
      */
     public void initializeDisplay() {
-        RString 本人未申告区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分);
-        RString 本人所得調査中区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分);
-        RString 年次負担割合処理済年度 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度);
-        RString 年次負担割合処理状態 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態);
+        RDate 適用基準日 = RDate.getNowDate();
+        RString 本人未申告区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人未申告区分, 適用基準日);
+        RString 本人所得調査中区分 = get業務Config(ConfigNameDBC.利用者負担割合判定基準_本人所得調査中区分, 適用基準日);
+        RString 年次負担割合処理済年度 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, 適用基準日);
+        RString 年次負担割合処理状態 = get業務Config(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理状態, 適用基準日);
         initializeControl(年次負担割合処理済年度);
         if (!本人未申告区分.isNullOrEmpty()) {
             div.getDdlHonninMishinkokuKubun().setSelectedKey(本人未申告区分);
@@ -72,7 +73,12 @@ public class UnyoKanriHandler {
             div.getTxtNenjiFutanWariaiShoriZumiNendo().setValue(new RDate(年次負担割合処理済年度.toString()));
             if (!年次負担割合処理状態.isNullOrEmpty()) {
                 div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(年次負担割合処理状態);
+            } else {
+                div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(CODE_処理済);
             }
+        } else {
+            div.getTxtNenjiFutanWariaiShoriZumiNendo().setPlaceHolder(RString.EMPTY);
+            div.getDdlNenjiFutanWariaiShoriJotai().setSelectedKey(CODE_未処理);
         }
         if (!年次負担割合処理状態.isNullOrEmpty()) {
             div.setHdnNenjiFutanWariaiShoriJotai(年次負担割合処理状態);
@@ -84,12 +90,12 @@ public class UnyoKanriHandler {
     /**
      * 引数で指定された年を和暦年（前半角スペース埋め）に編集し、元年表記で返却します。<br />
      * 変換元：2014<br />
-     * 変換後：平成26年度（年がそれぞれ一桁の場合、前半角スペース埋めする）
+     * 変換後：平成26（年がそれぞれ一桁の場合、前半角スペース埋めする）
      *
      * @param date 年
      * @return RString 年度
      */
-    public RString getパターン105(RYear date) {
+    public RString getパターン102(RYear date) {
         RString wareki = RString.EMPTY;
         if (date != null) {
             wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear();
@@ -112,8 +118,8 @@ public class UnyoKanriHandler {
         }
     }
 
-    private RString get業務Config(Enum キー名称) {
-        return DbBusinessConfig.get(キー名称, RDate.getNowDate(),
+    private RString get業務Config(Enum キー名称, RDate 適用基準日) {
+        return DbBusinessConfig.get(キー名称, 適用基準日,
                 SubGyomuCode.DBC介護給付);
     }
 

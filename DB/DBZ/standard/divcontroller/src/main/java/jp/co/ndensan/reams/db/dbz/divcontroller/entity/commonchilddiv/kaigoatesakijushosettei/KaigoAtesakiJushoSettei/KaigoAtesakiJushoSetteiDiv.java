@@ -315,14 +315,32 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
 
     @Override
     @JsonIgnore
-    public void get町域編集方法() {
-        createHandler().get町域編集方法();
+    public RString get町域編集方法() {
+        return createHandler().get町域編集方法();
     }
 
     @Override
     @JsonIgnore
     public boolean is方書表示() {
         return createHandler().is方書表示();
+    }
+
+    @Override
+    @JsonIgnore
+    public void initialize_systemKanri(boolean 住所設定使用可,
+            boolean 宛先住所編集ボタン使用可,
+            RString 都道府県名称表示有無,
+            RString 郡名称表示有無,
+            RString 市町村名称表示有無,
+            RString 住所編集方法,
+            RString 方書表示有無) {
+        createHandler().initialize_systemKanri(住所設定使用可,
+                宛先住所編集ボタン使用可,
+                都道府県名称表示有無,
+                郡名称表示有無,
+                市町村名称表示有無,
+                住所編集方法,
+                方書表示有無);
     }
 
     @JsonIgnore

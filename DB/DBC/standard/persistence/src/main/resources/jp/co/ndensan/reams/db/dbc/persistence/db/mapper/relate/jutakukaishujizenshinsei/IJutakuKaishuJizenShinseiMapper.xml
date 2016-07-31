@@ -28,7 +28,7 @@
    
     <select id="get開始サービス提供年月ある"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
         SELECT *
         FROM
         rgdb."DbT3034ShokanShinsei" T1
@@ -63,7 +63,7 @@
     
     <select id="get開始サービス提供年月なし"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
         SELECT *
         FROM
         rgdb."DbT3034ShokanShinsei" T1

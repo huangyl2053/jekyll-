@@ -71,11 +71,13 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoReport extends NonyuTsuchisho
             return;
         }
 
-        IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor renchoCoverEditor
-                = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource, 1);
-        IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder builder
-                = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder(renchoCoverEditor);
-        reportSourceWriter.writeLine(builder);
+        if (HenshuHaniKubun.全てのレイアウト.equals(item.get編集範囲区分())) {
+            IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor renchoCoverEditor
+                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource);
+            IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder builder
+                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder(renchoCoverEditor);
+            reportSourceWriter.writeLine(builder);
+        }
 
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
         Map<Integer, NonyuTsuchiShoKiJoho> 納入通知書期情報Map1 = new HashMap<>();
@@ -146,7 +148,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoReport extends NonyuTsuchisho
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
             IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor renchoCoverEditor
-                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource, 1);
+                    = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(item, ninshoshaSource);
             IKarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder builder
                     = new KarisanteiNonyuTsuchishoCVSMultiRenchoCoverBuilder(renchoCoverEditor);
             reportSourceWriter.writeLine(builder);
@@ -217,6 +219,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoReport extends NonyuTsuchisho
         new仮算定納入通知書情報.set編集後仮算定通知書共通情報(item.get編集後仮算定通知書共通情報());
         new仮算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new仮算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new仮算定納入通知書情報.set連番(item.get連番());
         return new仮算定納入通知書情報;
     }
 }

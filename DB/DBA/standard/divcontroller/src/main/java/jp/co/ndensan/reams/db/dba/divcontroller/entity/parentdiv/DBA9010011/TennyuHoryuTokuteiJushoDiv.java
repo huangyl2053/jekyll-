@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TennyuHoryuTokuteiJushoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -121,8 +121,8 @@ public class TennyuHoryuTokuteiJushoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IShichosonInputDiv getCcdShichousonInputGuide() {
-        return this.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide();
+    public IShisetsuJohoCommonChildDiv getCcdSisetuInputGuide() {
+        return this.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide();
     }
 
     @JsonIgnore
@@ -136,8 +136,8 @@ public class TennyuHoryuTokuteiJushoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdSisetuInputGuide() {
-        return this.getTennyuHoryuTokuteiJushoNyuryoku().getCcdSisetuInputGuide();
+    public IShichosonInputDiv getCcdShichousonInputGuide() {
+        return this.getTennyuHoryuTokuteiJushoNyuryoku().getCcdShichousonInputGuide();
     }
 
     // </editor-fold>

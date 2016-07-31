@@ -31,8 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class HonsanteiFukaKeisanTotal {
 
-    private static final RString 本算定賦課メニュー = new RString("DBBWF43001");
-    private static final RString 本算定通知書作成メニュー = new RString("DBBWF43002");
+    private static final RString 本算定賦課メニュー = new RString("DBBMN43001");
+    private static final RString 本算定通知書作成メニュー = new RString("DBBMN43002");
     private static final RString 本算定賦課_帳票グループコード = new RString("DBB0310001");
     private static final RString 本算定通知書作成_帳票グループコード = new RString("DBB0310003");
     private static final RString 遷移元区分_0 = new RString("0");
@@ -63,7 +63,6 @@ public class HonsanteiFukaKeisanTotal {
         RString 算定期 = 更正月.get期();
         ViewStateHolder.put(ViewStateKeys.算定期, 算定期);
         int 期 = 更正月.get期AsInt();
-        RString 調定期 = 更正月.get表記().asX期括弧X月();
         getKanendoFukaKakuteiHandler(div).set調定期(更正月);
         RDate システム日付 = RDate.getNowDate();
         div.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD().setValue(システム日付);
@@ -75,7 +74,7 @@ public class HonsanteiFukaKeisanTotal {
         } else if (遷移元区分_1.equals(遷移元区分)) {
             div.getHonsanteiChohyoHakko2().getCcdChohyoIchiran().load(SubGyomuCode.DBB介護賦課, 本算定通知書作成_帳票グループコード);
         }
-        getKanendoFukaKakuteiHandler(div).set帳票作成個別情報(期, 調定期, 算定期, 遷移元区分, new FlexibleYear(年度));
+        getKanendoFukaKakuteiHandler(div).set帳票作成個別情報(期, 算定期, 遷移元区分, new FlexibleYear(年度));
 
         return ResponseData.of(div).respond();
     }
@@ -115,6 +114,11 @@ public class HonsanteiFukaKeisanTotal {
                 .setバッチパラメータ(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
                         ViewStateHolder.get(ViewStateKeys.算定期, RString.class),
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
+        if (parameter.get出力帳票一覧() != null && !parameter.get出力帳票一覧().isEmpty() && 1 < parameter.get出力帳票一覧().size()) {
+            parameter.set画面移動フラグ(true);
+        } else {
+            parameter.set画面移動フラグ(false);
+        }
         return ResponseData.of(parameter).respond();
     }
 
@@ -129,18 +133,9 @@ public class HonsanteiFukaKeisanTotal {
                 .setバッチパラメータ(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
                         ViewStateHolder.get(ViewStateKeys.算定期, RString.class),
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
+        parameter.set画面移動フラグ(false);
         return ResponseData.of(parameter).respond();
     }
-//    /**
-//     * 「実行する」ボタンを設定する。
-//     *
-//     * @param div KarisanteiIdoFukaPanelDiv
-//     * @return ResponseData
-//     */
-//    public ResponseData<HonsanteiFukaKeisanTotalDiv> onStateTransition(HonsanteiFukaKeisanTotalDiv div) {
-//        getKanendoFukaKakuteiHandler(div).set実行ボタン(遷移元区分flg);
-//        return ResponseData.of(div).respond();
-//    }
 
     /**
      * handlerの取得を実行する

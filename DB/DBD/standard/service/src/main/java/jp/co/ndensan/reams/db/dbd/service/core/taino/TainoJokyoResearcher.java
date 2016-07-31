@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.service.core.taino;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.taino.KyufugakuGengakuInfo;
@@ -56,7 +56,8 @@ public class TainoJokyoResearcher {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TainoJokyoResearcher}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TainoJokyoResearcher}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TainoJokyoResearcher}のインスタンス
      */
     public static TainoJokyoResearcher createInstance() {
         return InstanceProvider.create(TainoJokyoResearcher.class);
@@ -93,7 +94,7 @@ public class TainoJokyoResearcher {
         boolean is警告対象 = false;
         Decimal 給付額減額期間 = Decimal.ZERO;
         List<TainoKiSummary> new滞納情報List = 滞納情報を整理(滞納情報List, 基準日);
-        Map<FlexibleYear, KyufugakuGengakuMeisai> 給付額減額明細Map = new HashMap<>();
+        Map<FlexibleYear, KyufugakuGengakuMeisai> 給付額減額明細Map = new LinkedHashMap<>();
         FlexibleYear 該当調定年度 = FlexibleYear.EMPTY;
         if (!new滞納情報List.isEmpty()) {
             該当調定年度 = new滞納情報List.get(0).get調定年度();
@@ -184,7 +185,7 @@ public class TainoJokyoResearcher {
         Collections.sort(new滞納情報List, new Comparator<TainoKiSummary>() {
             @Override
             public int compare(TainoKiSummary o1, TainoKiSummary o2) {
-                return o1.get調定年度().compareTo(o2.get調定年度());
+                return o2.get調定年度().compareTo(o1.get調定年度());
             }
         });
         return new滞納情報List;

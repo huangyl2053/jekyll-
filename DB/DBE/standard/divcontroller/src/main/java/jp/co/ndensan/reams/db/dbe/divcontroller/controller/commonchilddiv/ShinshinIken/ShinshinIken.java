@@ -36,7 +36,7 @@ public class ShinshinIken {
      * @return ResponseData<ShinshinIkenDiv>
      */
     public ResponseData<ShinshinIkenDiv> onLoad(ShinshinIkenDiv div) {
-        getHandler(div).onLoad();
+        ViewStateHolder.put(ViewStateKeys.要介護認定主治医意見書情報, getHandler(div).onLoad());
         getHandler(div).setSelectKey();
         return ResponseData.of(div).respond();
     }

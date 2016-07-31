@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 
 /**
  * 計算後情報作成のマッパーインタフェースです。
@@ -72,5 +73,12 @@ public interface IKeisangoJohoSakuseiMapper {
      * @return List<DbT2002FukaEntity>
      */
     List<DbT2002FukaEntity> get更新前賦課情報(KeisangoJohoSakuseiMybitisParamter param);
+
+    /**
+     * 計算中間Temp更新後情報を取得します。
+     *
+     * @return List<DbTKeisangoJohoTempTableEntity>
+     */
+    List<DbTKeisangoJohoTempTableEntity> get計算中間Temp更新後情報();
 
 }

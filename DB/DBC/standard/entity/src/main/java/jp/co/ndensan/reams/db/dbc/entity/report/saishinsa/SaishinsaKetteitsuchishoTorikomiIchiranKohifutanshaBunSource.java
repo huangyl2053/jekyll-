@@ -14,142 +14,219 @@ public class SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource implem
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
-    @ReportItem(name = "torikomiYM", length = 8, order = 2)
+    @ReportItem(name = "pageCount1", length = 10, order = 2)
+    public RString pageCount1;
+    @ReportItem(name = "torikomiYM", length = 8, order = 3)
     public RString torikomiYM;
-    @ReportItem(name = "kokuhorenName", length = 15, order = 3)
+    @ReportItem(name = "kokuhorenName", length = 15, order = 4)
     public RString kokuhorenName;
-    @ReportItem(name = "shinsakaiName", length = 15, order = 4)
+    @ReportItem(name = "shinsakaiName", length = 15, order = 5)
     public RString shinsakaiName;
-    @ReportItem(name = "kohiFutanshaNo", length = 8, order = 5)
+    @ReportItem(name = "kohiFutanshaNo", length = 8, order = 6)
     public RString kohiFutanshaNo;
-    @ReportItem(name = "kohiFutanshaName", length = 20, order = 6)
+    @ReportItem(name = "kohiFutanshaName", length = 20, order = 7)
     public RString kohiFutanshaName;
-    @ReportItem(name = "shutsuryokujun1", length = 10, order = 7)
+    @ReportItem(name = "shutsuryokujun1", length = 10, order = 8)
     public RString shutsuryokujun1;
-    @ReportItem(name = "shutsuryokujun2", length = 10, order = 8)
+    @ReportItem(name = "shutsuryokujun2", length = 10, order = 9)
     public RString shutsuryokujun2;
-    @ReportItem(name = "shutsuryokujun3", length = 10, order = 9)
+    @ReportItem(name = "shutsuryokujun3", length = 10, order = 10)
     public RString shutsuryokujun3;
-    @ReportItem(name = "shutsuryokujun4", length = 10, order = 10)
+    @ReportItem(name = "shutsuryokujun4", length = 10, order = 11)
     public RString shutsuryokujun4;
-    @ReportItem(name = "shutsuryokujun5", length = 10, order = 11)
+    @ReportItem(name = "shutsuryokujun5", length = 10, order = 12)
     public RString shutsuryokujun5;
-    @ReportItem(name = "kaipage1", length = 20, order = 12)
+    @ReportItem(name = "kaipage1", length = 20, order = 13)
     public RString kaipage1;
-    @ReportItem(name = "kaipage2", length = 20, order = 13)
+    @ReportItem(name = "kaipage2", length = 20, order = 14)
     public RString kaipage2;
-    @ReportItem(name = "kaipage3", length = 20, order = 14)
+    @ReportItem(name = "kaipage3", length = 20, order = 15)
     public RString kaipage3;
-    @ReportItem(name = "kaipage4", length = 20, order = 15)
+    @ReportItem(name = "kaipage4", length = 20, order = 16)
     public RString kaipage4;
-    @ReportItem(name = "kaipage5", length = 20, order = 16)
+    @ReportItem(name = "kaipage5", length = 20, order = 17)
     public RString kaipage5;
-    @ReportItem(name = "listCenter_1", length = 4, order = 17)
-    public RString listCenter_1;
-    @ReportItem(name = "listCenter_2", length = 6, order = 18)
-    public RString listCenter_2;
-    @ReportItem(name = "listCenter_3", length = 6, order = 19)
-    public RString listCenter_3;
-    @ReportItem(name = "listLower_1", length = 10, order = 20)
+    @ReportItem(name = "listLower_1", length = 10, order = 18)
     public RString listLower_1;
-    @ReportItem(name = "listUpper_1", length = 10, order = 21)
-    public RString listUpper_1;
-    @ReportItem(name = "listLower_2", length = 20, order = 22)
+    @ReportItem(name = "listLower_2", length = 20, order = 19)
     public RString listLower_2;
-    @ReportItem(name = "listUpper_2", length = 20, order = 23)
-    public RString listUpper_2;
-    @ReportItem(name = "listLower_3", length = 4, order = 24)
+    @ReportItem(name = "listLower_3", length = 4, order = 20)
     public RString listLower_3;
-    @ReportItem(name = "listUpper_3", length = 2, order = 25)
-    public RString listUpper_3;
-    @ReportItem(name = "listLower_4", length = 12, order = 26)
+    @ReportItem(name = "listLower_4", length = 12, order = 21)
     public RString listLower_4;
-    @ReportItem(name = "listUpper_4", length = 12, order = 27)
-    public RString listUpper_4;
-    @ReportItem(name = "listLower_5", length = 7, order = 28)
+    @ReportItem(name = "listLower_5", length = 7, order = 22)
     public RString listLower_5;
-    @ReportItem(name = "listUpper_5", length = 2, order = 29)
-    public RString listUpper_5;
-    @ReportItem(name = "listLower_6", length = 15, order = 30)
+    @ReportItem(name = "listLower_6", length = 15, order = 23)
     public RString listLower_6;
-    @ReportItem(name = "listUpper_6", length = 15, order = 31)
-    public RString listUpper_6;
-    @ReportItem(name = "listLower_7", length = 15, order = 32)
+    @ReportItem(name = "listLower_7", length = 15, order = 24)
     public RString listLower_7;
-    @ReportItem(name = "listUpper_7", length = 15, order = 33)
-    public RString listUpper_7;
-    @ReportItem(name = "listLower_8", length = 15, order = 34)
+    @ReportItem(name = "listLower_8", length = 17, order = 25)
     public RString listLower_8;
-    @ReportItem(name = "listUpper_8", length = 15, order = 35)
+    @ReportItem(name = "listUpper_1", length = 4, order = 26)
+    public RString listUpper_1;
+    @ReportItem(name = "listUpper_2", length = 6, order = 27)
+    public RString listUpper_2;
+    @ReportItem(name = "listUpper_3", length = 10, order = 28)
+    public RString listUpper_3;
+    @ReportItem(name = "listUpper_4", length = 20, order = 29)
+    public RString listUpper_4;
+    @ReportItem(name = "listUpper_5", length = 6, order = 30)
+    public RString listUpper_5;
+    @ReportItem(name = "listUpper_6", length = 2, order = 31)
+    public RString listUpper_6;
+    @ReportItem(name = "listUpper_7", length = 12, order = 32)
+    public RString listUpper_7;
+    @ReportItem(name = "listUpper_8", length = 2, order = 33)
     public RString listUpper_8;
-    @ReportItem(name = "midashi1", length = 9, order = 36)
-    public RString midashi1;
-    @ReportItem(name = "midashi2", length = 9, order = 37)
-    public RString midashi2;
-    @ReportItem(name = "midashi3", length = 6, order = 38)
-    public RString midashi3;
-    @ReportItem(name = "midashi4", length = 2, order = 39)
-    public RString midashi4;
-    @ReportItem(name = "midashi5", length = 3, order = 40)
-    public RString midashi5;
-    @ReportItem(name = "midashi6", length = 6, order = 41)
-    public RString midashi6;
-    @ReportItem(name = "midashi7", length = 2, order = 42)
-    public RString midashi7;
-    @ReportItem(name = "midashi8", length = 3, order = 43)
-    public RString midashi8;
-    @ReportItem(name = "midashi9", length = 6, order = 44)
-    public RString midashi9;
-    @ReportItem(name = "midashi10", length = 2, order = 45)
-    public RString midashi10;
-    @ReportItem(name = "midashi11", length = 3, order = 46)
-    public RString midashi11;
-    @ReportItem(name = "midashi12", length = 6, order = 47)
-    public RString midashi12;
-    @ReportItem(name = "midashi13", length = 5, order = 48)
-    public RString midashi13;
-    @ReportItem(name = "kensu1", length = 7, order = 49)
-    public RString kensu1;
-    @ReportItem(name = "tanisu1", length = 15, order = 50)
-    public RString tanisu1;
-    @ReportItem(name = "futangaku1", length = 15, order = 51)
-    public RString futangaku1;
-    @ReportItem(name = "kensu2", length = 7, order = 52)
-    public RString kensu2;
-    @ReportItem(name = "tanisu2", length = 15, order = 53)
-    public RString tanisu2;
-    @ReportItem(name = "futangaku2", length = 15, order = 54)
-    public RString futangaku2;
-    @ReportItem(name = "kensu3", length = 7, order = 55)
-    public RString kensu3;
-    @ReportItem(name = "tanisu3", length = 17, order = 56)
-    public RString tanisu3;
-    @ReportItem(name = "futangaku3", length = 17, order = 57)
-    public RString futangaku3;
-    @ReportItem(name = "midashi14", length = 9, order = 58)
-    public RString midashi14;
-    @ReportItem(name = "kensu4", length = 7, order = 59)
-    public RString kensu4;
-    @ReportItem(name = "tanisu4", length = 15, order = 60)
-    public RString tanisu4;
-    @ReportItem(name = "futangaku4", length = 15, order = 61)
-    public RString futangaku4;
-    @ReportItem(name = "kensu5", length = 7, order = 62)
-    public RString kensu5;
-    @ReportItem(name = "tanisu5", length = 15, order = 63)
-    public RString tanisu5;
-    @ReportItem(name = "futangaku5", length = 15, order = 64)
-    public RString futangaku5;
-    @ReportItem(name = "kensu6", length = 7, order = 65)
-    public RString kensu6;
-    @ReportItem(name = "tanisu6", length = 17, order = 66)
-    public RString tanisu6;
-    @ReportItem(name = "futangaku6", length = 17, order = 67)
-    public RString futangaku6;
+    @ReportItem(name = "listUpper_9", length = 15, order = 34)
+    public RString listUpper_9;
+    @ReportItem(name = "listUpper_10", length = 15, order = 35)
+    public RString listUpper_10;
+    @ReportItem(name = "listUpper_11", length = 17, order = 36)
+    public RString listUpper_11;
+    @ReportItem(name = "seikyuTitle", length = 9, order = 37)
+    public RString seikyuTitle;
+    @ReportItem(name = "ketteiTitle", length = 9, order = 38)
+    public RString ketteiTitle;
+    @ReportItem(name = "choseiTitle", length = 6, order = 39)
+    public RString choseiTitle;
+    @ReportItem(name = "seikyuKensuTitle", length = 2, order = 40)
+    public RString seikyuKensuTitle;
+    @ReportItem(name = "seikyuTanisuTitle", length = 3, order = 41)
+    public RString seikyuTanisuTitle;
+    @ReportItem(name = "seikyuFutangakuTitle", length = 5, order = 42)
+    public RString seikyuFutangakuTitle;
+    @ReportItem(name = "ketteiKensuTitle", length = 2, order = 43)
+    public RString ketteiKensuTitle;
+    @ReportItem(name = "ketteiTanisuTitle", length = 3, order = 44)
+    public RString ketteiTanisuTitle;
+    @ReportItem(name = "ketteiFutangakuTitle", length = 5, order = 45)
+    public RString ketteiFutangakuTitle;
+    @ReportItem(name = "choseiKensuTitle", length = 2, order = 46)
+    public RString choseiKensuTitle;
+    @ReportItem(name = "choseiTanisuTitle", length = 3, order = 47)
+    public RString choseiTanisuTitle;
+    @ReportItem(name = "choseiFutangakuTitle", length = 5, order = 48)
+    public RString choseiFutangakuTitle;
+    @ReportItem(name = "kaigoKyufuhiTitle", length = 5, order = 49)
+    public RString kaigoKyufuhiTitle;
+    @ReportItem(name = "kaigoKyufuhiSeikyuKensu", length = 7, order = 50)
+    public RString kaigoKyufuhiSeikyuKensu;
+    @ReportItem(name = "kaigoKyufuhiSeikyuTanisu", length = 15, order = 51)
+    public RString kaigoKyufuhiSeikyuTanisu;
+    @ReportItem(name = "kaigoKyufuhiSeikyuFutangaku", length = 15, order = 52)
+    public RString kaigoKyufuhiSeikyuFutangaku;
+    @ReportItem(name = "kaigoKyufuhiKetteiKensu", length = 7, order = 53)
+    public RString kaigoKyufuhiKetteiKensu;
+    @ReportItem(name = "kaigoKyufuhiKetteiTanisu", length = 15, order = 54)
+    public RString kaigoKyufuhiKetteiTanisu;
+    @ReportItem(name = "kaigoKyufuhiKetteiFutangaku", length = 15, order = 55)
+    public RString kaigoKyufuhiKetteiFutangaku;
+    @ReportItem(name = "kaigoKyufuhiChoseiKensu", length = 7, order = 56)
+    public RString kaigoKyufuhiChoseiKensu;
+    @ReportItem(name = "kaigoKyufuhiChoseiTanisu", length = 17, order = 57)
+    public RString kaigoKyufuhiChoseiTanisu;
+    @ReportItem(name = "kaigoKyufuhiChoseiFutangaku", length = 17, order = 58)
+    public RString kaigoKyufuhiChoseiFutangaku;
+    @ReportItem(name = "kogakuServicehiTitle", length = 9, order = 59)
+    public RString kogakuServicehiTitle;
+    @ReportItem(name = "kogakuServicehiSeikyuKensu", length = 7, order = 60)
+    public RString kogakuServicehiSeikyuKensu;
+    @ReportItem(name = "kogakuServicehiSeikyuTanisu", length = 15, order = 61)
+    public RString kogakuServicehiSeikyuTanisu;
+    @ReportItem(name = "kogakuServicehiSeikyuFutangaku", length = 15, order = 62)
+    public RString kogakuServicehiSeikyuFutangaku;
+    @ReportItem(name = "kogakuServicehiKetteiKensu", length = 7, order = 63)
+    public RString kogakuServicehiKetteiKensu;
+    @ReportItem(name = "kogakuServicehiKetteiTanisu", length = 15, order = 64)
+    public RString kogakuServicehiKetteiTanisu;
+    @ReportItem(name = "kogakuServicehiKetteiFutangaku", length = 15, order = 65)
+    public RString kogakuServicehiKetteiFutangaku;
+    @ReportItem(name = "kogakuServicehiChoseiKensu", length = 7, order = 66)
+    public RString kogakuServicehiChoseiKensu;
+    @ReportItem(name = "kogakuServicehiChoseiTanisu", length = 17, order = 67)
+    public RString kogakuServicehiChoseiTanisu;
+    @ReportItem(name = "kogakuServicehiChoseiFutangaku", length = 17, order = 68)
+    public RString kogakuServicehiChoseiFutangaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        pageCount1,
+        torikomiYM,
+        kokuhorenName,
+        shinsakaiName,
+        kohiFutanshaNo,
+        kohiFutanshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        listLower_6,
+        listLower_7,
+        listLower_8,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listUpper_10,
+        listUpper_11,
+        seikyuTitle,
+        ketteiTitle,
+        choseiTitle,
+        seikyuKensuTitle,
+        seikyuTanisuTitle,
+        seikyuFutangakuTitle,
+        ketteiKensuTitle,
+        ketteiTanisuTitle,
+        ketteiFutangakuTitle,
+        choseiKensuTitle,
+        choseiTanisuTitle,
+        choseiFutangakuTitle,
+        kaigoKyufuhiTitle,
+        kaigoKyufuhiSeikyuKensu,
+        kaigoKyufuhiSeikyuTanisu,
+        kaigoKyufuhiSeikyuFutangaku,
+        kaigoKyufuhiKetteiKensu,
+        kaigoKyufuhiKetteiTanisu,
+        kaigoKyufuhiKetteiFutangaku,
+        kaigoKyufuhiChoseiKensu,
+        kaigoKyufuhiChoseiTanisu,
+        kaigoKyufuhiChoseiFutangaku,
+        kogakuServicehiTitle,
+        kogakuServicehiSeikyuKensu,
+        kogakuServicehiSeikyuTanisu,
+        kogakuServicehiSeikyuFutangaku,
+        kogakuServicehiKetteiKensu,
+        kogakuServicehiKetteiTanisu,
+        kogakuServicehiKetteiFutangaku,
+        kogakuServicehiChoseiKensu,
+        kogakuServicehiChoseiTanisu,
+        kogakuServicehiChoseiFutangaku
+    }
 }

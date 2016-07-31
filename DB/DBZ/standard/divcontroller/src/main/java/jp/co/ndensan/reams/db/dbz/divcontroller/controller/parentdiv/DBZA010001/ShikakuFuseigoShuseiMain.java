@@ -28,9 +28,14 @@ import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuFuseigoShus
 import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuSeigoseiCheckJohoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -240,6 +245,7 @@ public class ShikakuFuseigoShuseiMain {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && div.getChkToTaishoGai().isAllSelected()) {
             manager.saveAs対象外(shikakuFusei.get整合性チェック情報());
             div.getShikakuFuseigoIchiran().setDisabled(false);
+            setアクセスログ(shikakuFusei.get整合性チェック情報().get識別コード());
             return onLoad(div);
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
@@ -257,6 +263,7 @@ public class ShikakuFuseigoShuseiMain {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             save修正後の情報By被保険者(shikakuFusei, div, 修正後の資格の情報, 取得除外の情報);
+            setアクセスログ(修正後の資格の情報.get識別コード());
         }
         if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
             修正後の除外の情報 = getHandler(div).set除外の情報(不整合理由, 修正後の除外の情報);
@@ -269,6 +276,7 @@ public class ShikakuFuseigoShuseiMain {
                     ViewStateHolder.get(ViewStateKeys.現在の除外の情報, TekiyoJogaisha.class),
                     修正後の除外の情報,
                     shikakuFusei.get整合性チェック情報());
+            setアクセスログ(修正後の除外の情報.get識別コード());
         }
         if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
             修正後の他特の情報 = getHandler(div).set他特の情報(不整合理由, 修正後の他特の情報);
@@ -281,6 +289,7 @@ public class ShikakuFuseigoShuseiMain {
                     ViewStateHolder.get(ViewStateKeys.現在の他特の情報, TashichosonJushochiTokurei.class),
                     修正後の他特の情報,
                     shikakuFusei.get整合性チェック情報());
+            setアクセスログ(修正後の他特の情報.get識別コード());
         }
         div.getShikakuFuseigoIchiran().setDisabled(false);
         return onLoad(div);
@@ -371,5 +380,10 @@ public class ShikakuFuseigoShuseiMain {
             }
         }
         return false;
+    }
+
+    private void setアクセスログ(ShikibetsuCode 識別コード) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("識別コード"), 識別コード.value());
+        AccessLogger.log(AccessLogType.更新, PersonalData.of(識別コード, expandedInfo));
     }
 }

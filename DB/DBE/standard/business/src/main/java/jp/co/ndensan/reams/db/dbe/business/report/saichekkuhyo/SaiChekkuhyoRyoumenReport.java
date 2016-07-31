@@ -47,10 +47,9 @@ public class SaiChekkuhyoRyoumenReport extends Report<SaiChekkuhyoReportSource> 
     @Override
     public void writeBy(ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter) {
         for (SaiChekkuhyoItem item : itemList) {
+            reportSourceWriter.writeLine(new SaiChekkuhyoRyoumenBuilderImpl(new SaiChekkuhyoRyoumenEditorImpl(item)));
             for (int i = 1; i <= 第１群_COUNT; i++) {
-                ISaiChekkuhyoRyoumenEditor editor = new SaiChekkuhyoRyoumenEditorImpl(item, i);
-                ISaiChekkuhyoRyoumenBuilder builder = new SaiChekkuhyoRyoumenBuilderImpl(editor);
-                reportSourceWriter.writeLine(builder);
+                reportSourceWriter.writeLine(new SaiChekkuhyoRyoumenUraBuilderImpl(new SaiChekkuhyoRyoumenUraEditorImpl(item, i)));
             }
         }
     }

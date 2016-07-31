@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査結果情報照会_概況調査のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-3000-260 lizhuoxuan -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosakekkainfogaikyo.IChosaKekkaInfoGaikyoMapper">
+    <resultMap id="resultMap_ChosaKekkaInfoGaikyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoRelateEntity" autoMapping="true">
+        <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="chosaJisshiBashoMeisho" column="DbT5202_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tokki" column="DbT5202_tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceKubunCode" column="DbT5202_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="riyoShisetsuShimei" column="DbT5202_riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuJusho" column="DbT5202_riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuTelNo" column="DbT5202_riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="DbT5202_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="remban" column="DbT5209_remban" />
+        <result property="serviceJokyoKinyu" column="DbT5209_serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jutakuKaishu" column="DbT5206_jutakuKaishu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tokubetsuKyufuService" column="DbT5206_tokubetsuKyufuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="zaitakuService" column="DbT5206_zaitakuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shuso" column="DbT5206_shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kazokuJokyo" column="DbT5206_kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kyojuKankyo" column="DbT5206_kyojuKankyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kikaiKiki" column="DbT5206_kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList1"
+                resultMap="resultMap_ChosaKekkaInfoGaikyoRelateEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter" fetchSize="500">
+        SELECT 
+        DbT5202."ninteichosaJisshiYMD" as "DbT5202_ninteichosaJisshiYMD"
+        ,DbT5202."chosaJisshiBashoMeisho" as "DbT5202_chosaJisshiBashoMeisho"
+        ,DbT5202."tokki" as "DbT5202_tokki"
+        ,DbT5202."serviceKubunCode" as "DbT5202_serviceKubunCode"
+        ,DbT5202."riyoShisetsuShimei" as "DbT5202_riyoShisetsuShimei"
+        ,DbT5202."riyoShisetsuJusho" as "DbT5202_riyoShisetsuJusho"
+        ,DbT5202."riyoShisetsuTelNo" as "DbT5202_riyoShisetsuTelNo"
+        ,DbT5202."koroshoIfShikibetsuCode" as "DbT5202_koroshoIfShikibetsuCode"
+        ,DbT5209."remban" as "DbT5209_remban"
+        ,DbT5209."serviceJokyoKinyu" as "DbT5209_serviceJokyoKinyu"
+        ,DbT5206."jutakuKaishu" as "DbT5206_jutakuKaishu"
+        ,DbT5206."tokubetsuKyufuService" as "DbT5206_tokubetsuKyufuService"
+        ,DbT5206."zaitakuService" as "DbT5206_zaitakuService"
+        ,DbT5206."shuso" as "DbT5206_shuso"
+        ,DbT5206."kazokuJokyo" as "DbT5206_kazokuJokyo"
+        ,DbT5206."kyojuKankyo" as "DbT5206_kyojuKankyo"
+        ,DbT5206."kikaiKiki" as "DbT5206_kikaiKiki"
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        INNER JOIN 
+        rgdb."DbT5209NinteichosahyoKinyuItem" as DbT5209
+        ON DbT5209."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5209."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5209."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        INNER JOIN 
+        rgdb."DbT5206GaikyoTokki" as DbT5206
+        ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5206."gaikyoTokkiTextImageKubun" = #{gaikyoTokkiTextImageKubun} 
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+            AND 
+            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
+    </select>
+    
+    <resultMap id="resultMap_RembanServiceJokyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.RembanServiceJokyoRelateEntity" autoMapping="true">
+        <result property="number" column="Gaikyo_1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="remban" column="Gaikyo_remban"  />
+        <result property="serviceJokyoFlag" column="Gaikyo_serviceJokyoFlag" />
+        <result property="koroshoIfShikibetsuCode" column="Gaikyo_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"  />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList2"
+                resultMap="resultMap_RembanServiceJokyoRelateEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter" fetchSize="500">
+         SELECT 
+        '1' as "Gaikyo_1"
+        ,DbT5207."remban" as "Gaikyo_remban"
+        ,DbT5207."serviceJokyo" as "Gaikyo_serviceJokyoFlag"
+        ,DbT5207."koroshoIfShikibetsuCode" as "Gaikyo_koroshoIfShikibetsuCode"
+        FROM
+        rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207
+        INNER JOIN 
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        ON DbT5207."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5207."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5207."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+            AND 
+            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
+        union
+        SELECT 
+        '2' as "Gaikyo_1"
+        ,DbT5208."remban" as "Gaikyo_remban"
+        ,CASE WHEN DbT5208."serviceJokyoFlag" = TRUE
+        THEN
+        1
+        ELSE               
+        0 END AS "Gaikyo_serviceJokyoFlag"
+        ,DbT5208."koroshoIfShikibetsuCode" as "Gaikyo_koroshoIfShikibetsuCode"
+        FROM
+        rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208
+        INNER JOIN 
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        ON DbT5208."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5208."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5208."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+            AND 
+            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
+    </select>
+    
+    <resultMap id="resultMap_DbT5210NinteichosahyoShisetsuRiyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity" autoMapping="true">
+        <result property="remban" column="DbT5210_remban" />
+        <result property="shisetsuRiyoFlag" column="DbT5210_shisetsuRiyoFlag" />
+        <result property="koroshoIfShikibetsuCode" column="DbT5210_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"  />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList3"
+                resultMap="resultMap_DbT5210NinteichosahyoShisetsuRiyoEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter" fetchSize="500">
+        SELECT 
+        DbT5210."remban" as "DbT5210_remban"
+        ,DbT5210."shisetsuRiyoFlag" as "DbT5210_shisetsuRiyoFlag"
+        ,DbT5210."koroshoIfShikibetsuCode" as "DbT5210_koroshoIfShikibetsuCode"
+        FROM
+        rgdb."DbT5210NinteichosahyoShisetsuRiyo" as DbT5210
+        INNER JOIN 
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+        ON DbT5210."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+        AND 
+        DbT5210."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        AND 
+        DbT5210."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        WHERE
+            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+            AND 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+            AND 
+            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
+    </select>
+    
+    <resultMap id="resultMap_DbT5115ImageEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity" autoMapping="true">
+        <result property="imageSharedFileId" column="DbT5115_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"  />
+    </resultMap>
+    <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList4"
+                resultMap="resultMap_DbT5115ImageEntity" 
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter" fetchSize="500">
+        SELECT 
+        DbT5115."imageSharedFileId" as "DbT5115_imageSharedFileId"
+        FROM
+        rgdb."DbT5115Image" as DbT5115
+        WHERE
+            DbT5115."shinseishoKanriNo" = #{shinseishoKanriNo} 
+    </select>
+    
+</mapper>

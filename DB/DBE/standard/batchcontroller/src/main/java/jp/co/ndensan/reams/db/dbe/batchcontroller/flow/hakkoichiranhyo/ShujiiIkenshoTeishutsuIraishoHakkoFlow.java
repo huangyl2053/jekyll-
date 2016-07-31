@@ -148,13 +148,13 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoFlow extends BatchFlowBase<Iraish
 
     private void getExecuteStep(RString rseValue) {
         if (DBE231012.equals(rseValue)) {
-            executeStep(SHUJIIIKENSHO_DBE231002PROCESS);
-        }
-        if (DBE231014.equals(rseValue)) {
             executeStep(SHUJIIIKENSHO_DBE231012PROCESS);
         }
-        if (DBE231002.equals(rseValue)) {
+        if (DBE231014.equals(rseValue)) {
             executeStep(SHUJIIIKENSHO_DBE231014PROCESS);
+        }
+        if (DBE231002.equals(rseValue)) {
+            executeStep(SHUJIIIKENSHO_DBE231002PROCESS);
         }
     }
 

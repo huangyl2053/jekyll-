@@ -154,6 +154,27 @@ public class ChohyoSeigyoHanyoManager {
     }
 
     /**
+     * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を取得します。
+     *
+     * @param 管理年度 FlexibleYear
+     * @return businessList
+     */
+    @Transaction
+    public List<ChohyoSeigyoHanyo> get帳票制御汎用(
+            FlexibleYear 管理年度) {
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
+        List<DbT7067ChohyoSeigyoHanyoEntity> entityList = dac.get帳票制御汎用(
+                管理年度);
+        List<ChohyoSeigyoHanyo> businessList = new ArrayList<>();
+
+        for (DbT7067ChohyoSeigyoHanyoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ChohyoSeigyoHanyo(entity));
+        }
+        return businessList;
+    }
+
+    /**
      * 帳票制御汎用リスト{@link ChohyoSeigyoHanyo}を更新します。
      *
      * @param 帳票制御汎用リスト 帳票制御汎用リスト

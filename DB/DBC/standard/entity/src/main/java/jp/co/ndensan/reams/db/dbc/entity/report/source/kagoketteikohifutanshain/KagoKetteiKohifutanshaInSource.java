@@ -53,7 +53,7 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
     public RString listUpper_3;
     @ReportItem(name = "listUpper_4", length = 7, order = 18)
     public RString listUpper_4;
-    @ReportItem(name = "listUpper_5", length = 20, order = 19)
+    @ReportItem(name = "listUpper_5", length = 10, order = 19)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 6, order = 20)
     public RString listUpper_6;
@@ -73,40 +73,90 @@ public class KagoKetteiKohifutanshaInSource implements IReportSource {
     public RString listLower_4;
     @ReportItem(name = "listLower_5", length = 17, order = 28)
     public RString listLower_5;
-    @ReportItem(name = "futanGakuTitle", length = 6, order = 29)
-    public RString futanGakuTitle;
-    @ReportItem(name = "kensuTitle", length = 2, order = 30)
+    @ReportItem(name = "kensuTitle", length = 2, order = 29)
     public RString kensuTitle;
-    @ReportItem(name = "tanisuTitle", length = 3, order = 31)
+    @ReportItem(name = "tanisuTitle", length = 3, order = 30)
     public RString tanisuTitle;
-    @ReportItem(name = "kyufuhiTitle", length = 5, order = 32)
-    public RString kyufuhiTitle;
-    @ReportItem(name = "kensuGokei1", length = 7, order = 33)
-    public RString kensuGokei1;
-    @ReportItem(name = "futanGakuGokei1", length = 17, order = 34)
-    public RString futanGakuGokei1;
-    @ReportItem(name = "tanisuGokei1", length = 17, order = 35)
-    public RString tanisuGokei1;
-    @ReportItem(name = "servicehiTitle", length = 9, order = 36)
-    public RString servicehiTitle;
-    @ReportItem(name = "kensuGokei2", length = 7, order = 37)
-    public RString kensuGokei2;
-    @ReportItem(name = "tanisuGokei2", length = 17, order = 38)
-    public RString tanisuGokei2;
-    @ReportItem(name = "futanGakuGokei2", length = 17, order = 39)
-    public RString futanGakuGokei2;
-    @ReportItem(name = "kensuGokei3", length = 7, order = 40)
-    public RString kensuGokei3;
-    @ReportItem(name = "tanisuGokei3", length = 17, order = 41)
-    public RString tanisuGokei3;
-    @ReportItem(name = "futanGakuGokei3", length = 17, order = 42)
-    public RString futanGakuGokei3;
-    @ReportItem(name = "shokujihiTitle", length = 9, order = 43)
-    public RString shokujihiTitle;
+    @ReportItem(name = "kaigoKyufuhiTitle", length = 5, order = 32)
+    public RString kaigoKyufuhiTitle;
+    @ReportItem(name = "kaigoKyufuhiKensu", length = 7, order = 33)
+    public RString kaigoKyufuhiKensu;
+    @ReportItem(name = "futangakuTitle", length = 6, order = 31)
+    public RString futangakuTitle;
+    @ReportItem(name = "kaigoKyufuhiTanisu", length = 17, order = 34)
+    public RString kaigoKyufuhiTanisu;
+    @ReportItem(name = "kaigoKyufuhiFutangaku", length = 17, order = 35)
+    public RString kaigoKyufuhiFutangaku;
+    @ReportItem(name = "kogakuServicehiTitle", length = 9, order = 36)
+    public RString kogakuServicehiTitle;
+    @ReportItem(name = "kogakuServicehiKensu", length = 7, order = 37)
+    public RString kogakuServicehiKensu;
+    @ReportItem(name = "kogakuServicehiTanisu", length = 17, order = 38)
+    public RString kogakuServicehiTanisu;
+    @ReportItem(name = "kogakuServicehiFutangaku", length = 17, order = 39)
+    public RString kogakuServicehiFutangaku;
+    @ReportItem(name = "tokuteiNyushoshaKaigohiTitle", length = 9, order = 40)
+    public RString tokuteiNyushoshaKaigohiTitle;
+    @ReportItem(name = "tokuteiNyushoshaKaigohiKensu", length = 7, order = 41)
+    public RString tokuteiNyushoshaKaigohiKensu;
+    @ReportItem(name = "tokuteiNyushoshaKaigohiTanisu", length = 17, order = 42)
+    public RString tokuteiNyushoshaKaigohiTanisu;
+    @ReportItem(name = "tokuteiNyushoshaKaigohiFutangaku", length = 17, order = 43)
+    public RString tokuteiNyushoshaKaigohiFutangaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
+    /**
+     * TokubetsuChoshuKaishiSourceのenum
+     */
+    public enum ReportSourceFields {
+
+        printTimeStamp,
+        torikomiYM,
+        kohiFutanshaNo,
+        kohiFutanshaName,
+        shutsuryokujun1,
+        shutsuryokujun2,
+        shutsuryokujun3,
+        shutsuryokujun4,
+        shutsuryokujun5,
+        kaipage1,
+        kaipage2,
+        kaipage3,
+        kaipage4,
+        kaipage5,
+        listUpper_1,
+        listUpper_2,
+        listUpper_3,
+        listUpper_4,
+        listUpper_5,
+        listUpper_6,
+        listUpper_7,
+        listUpper_8,
+        listUpper_9,
+        listLower_1,
+        listLower_2,
+        listLower_3,
+        listLower_4,
+        listLower_5,
+        kensuTitle,
+        tanisuTitle,
+        kaigoKyufuhiTitle,
+        kaigoKyufuhiKensu,
+        futangakuTitle,
+        kaigoKyufuhiTanisu,
+        kaigoKyufuhiFutangaku,
+        kogakuServicehiTitle,
+        kogakuServicehiKensu,
+        kogakuServicehiTanisu,
+        kogakuServicehiFutangaku,
+        tokuteiNyushoshaKaigohiTitle,
+        tokuteiNyushoshaKaigohiKensu,
+        tokuteiNyushoshaKaigohiTanisu,
+        tokuteiNyushoshaKaigohiFutangaku
+    }
 // </editor-fold>
 }

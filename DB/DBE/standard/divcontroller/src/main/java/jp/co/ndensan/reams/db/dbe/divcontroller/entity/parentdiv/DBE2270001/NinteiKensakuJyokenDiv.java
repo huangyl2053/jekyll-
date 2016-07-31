@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -26,14 +28,16 @@ public class NinteiKensakuJyokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdChosaltakusakiAndChosainInput")
-    private ChosaItakusakiAndChosainInputDiv ccdChosaltakusakiAndChosainInput;
+    @JsonProperty("ccdHokensha")
+    private HokenshaListDiv ccdHokensha;
     @JsonProperty("txtMaxCount")
     private TextBoxNum txtMaxCount;
     @JsonProperty("btnKyufuJissekiSearchClear")
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
+    @JsonProperty("ccdChosaltakusakiAndChosainInput")
+    private ChosaItakusakiAndChosainInputDiv ccdChosaltakusakiAndChosainInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,12 +46,12 @@ public class NinteiKensakuJyokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdChosaltakusakiAndChosainInput
-     * @return ccdChosaltakusakiAndChosainInput
+     * getccdHokensha
+     * @return ccdHokensha
      */
-    @JsonProperty("ccdChosaltakusakiAndChosainInput")
-    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
-        return ccdChosaltakusakiAndChosainInput;
+    @JsonProperty("ccdHokensha")
+    public IHokenshaListDiv getCcdHokensha() {
+        return ccdHokensha;
     }
 
     /*
@@ -102,6 +106,15 @@ public class NinteiKensakuJyokenDiv extends Panel {
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
         this.btnKensaku = btnKensaku;
+    }
+
+    /*
+     * getccdChosaltakusakiAndChosainInput
+     * @return ccdChosaltakusakiAndChosainInput
+     */
+    @JsonProperty("ccdChosaltakusakiAndChosainInput")
+    public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
+        return ccdChosaltakusakiAndChosainInput;
     }
 
     // </editor-fold>

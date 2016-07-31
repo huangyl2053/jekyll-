@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 所得情報抽出・連携のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-1690-070 sunhui -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shutokujohochushutsurenkei.IShutokuJohoChushutsuRenkeiMapper">
+
+    <!--所得情報一時テーブルを作成します -->
+    <insert id="create所得情報一時テーブル">
+        CREATE TEMP TABLE "ShotokuJohoTemp" 
+        (
+            "shichosonCode" rshare."UDD023LasdecCode", 
+            "shikibetsuID" rshare."UDD001ShikibetsuID",
+            "timeStamp" ,
+            "lastRecordKubun" ,
+            "renban" ,
+            "ＦＩＬＬＥＲ" ,
+            "fukaNendo" ,
+            "juminCode" ,
+            "shotokuHaakuKubun" ,
+            "fukazeiKubun" ,
+            "juminzeiShotokuwari"
+            "juminzeiKintouwari" ,
+            "gokeiShotokuGaku" numeric(12,0),
+            "kyuyoShunyuGaku" ,
+            "nenkiniShunyuGaku" numeric(12,0),
+            "nenkiniShotokuGaku" numeric(12,0),
+            "sonotaShotoku1" ,
+            "sonotaShotoku2" ,
+            "yobi" ,
+            "gekihenKanwaKubun" character varying(1),
+            "dataShurui" ,
+            "shotokuzei" ,
+            "updateTimeStamp"
+        )
+    </insert>
+    
+    <!--    所得情報一覧を取ります -->
+    <select resultOrdered="true" id="get所得情報一覧" resultMap="resultMap_ShotokuJohoIchilan" fetchSize="500">
+        SELECT
+        A.*,
+        宛名.*,
+        被保険者台帳管理Newest."hihokenshaNo"
+        FROM
+         "DbTKaigoShotokuTempTable" AS A
+        LEFT JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS 宛名
+        ON
+        A."shikibetsuCode" = 宛名."shikibetsuCode"
+        LEFT JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理Newest
+        ON 
+        A."shikibetsuCode" = 被保険者台帳管理Newest."shikibetsuCode"
+        AND 
+        A."shichosonCode" = 被保険者台帳管理Newest."shichosonCode"
+        AND
+        被保険者台帳管理Newest."hihokennshaKubunCode" = '1'
+        ${出力順}
+    </select>
+
+    <resultMap id="resultMap_ShotokuJohoIchilan" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichilan.ShotokuJohoIchilan" autoMapping="true">
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村識別ID" column="shichosonShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所得年度" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税区分_住民税減免前" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税区分_住民税減免後" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合計所得金額" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公的年金収入額" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公的年金所得額" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="課税所得額" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="激変緩和措置区分" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="優先区分" column="yusenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理日時" column="shoriTimeStamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <!--    所得情報一時テーブルの全件を取ります -->
+    <select resultOrdered="true" id="get所得情報一時テーブルの全件" resultType="java.util.Map" fetchSize="500">
+        SELECT A.*
+        FROM "DbTShotokuJohoTempTable" AS A
+    </select>
+    
+    <!--    介護所得一時テーブルの市町村以外情報を取ります -->
+    <select resultOrdered="true" id="get介護所得一時テーブルの市町村以外情報" resultType="java.util.Map" fetchSize="500">
+        SELECT 
+        A."shotokuNendo" AS 所得年度,
+        A."shikibetsuCode" AS 識別コード,
+        A."rirekiNo" AS 履歴番号,
+        A."kazeiKubun" AS 課税区分（住民税減免前）,
+        A."kazeiKubunGemmenGo" AS 課税区分（住民税減免後）,
+        A."gokeiShotokuGaku" AS 合計所得金額,
+        A."nenkiniShunyuGaku" AS 公的年金収入額,
+        A."nenkiniShotokuGaku" AS 公的年金所得額,
+        A."kazeiShotokuGaku" AS 課税所得額,
+        A."gekihenKanwaKubun" AS 激変緩和措置区分,
+        A."yusenKubun" AS 優先区分,
+        A."shoriTimeStamp" AS 処理日時
+        FROM "DbTKaigoShotokuTempTable" AS A
+    </select>
+    
+    <!--    介護所得一時テーブルの市町村情報を取ります -->
+    <select resultOrdered="true" id="get介護所得一時テーブルの市町村情報" resultType="java.util.Map" fetchSize="500">
+        SELECT 
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonShikibetsuID" AS 市町村識別ID
+        FROM "DbTKaigoShotokuTempTable" AS A
+    </select>
+    
+    <!--     介護所得管理に登録します。 -->
+    <insert id="insert介護所得管理" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigoshotokutemp.DbtKaigoShotokuTempEntity">
+        INSERT INTO 
+        "DbT2008ShotokuKanri"
+        VALUES
+        (#{shotokuNendo},
+        #{shikibetsuCode},
+        #{rirekiNo},
+        #{kazeiKubun},
+        #{kazeiKubunGemmenGo},
+        #{gokeiShotokuGaku},
+        #{nenkiniShunyuGaku},
+        #{nenkiniShotokuGaku},
+        #{kazeiShotokuGaku},
+        #{gekihenKanwaKubun},
+        #{yusenKubun},
+        #{shoriTimeStamp})
+    </insert>
+    
+    <!--     介護所得一時テーブルへ登録します。 -->
+    <insert id="insert介護所得一時テーブル" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigoshotokutemp.DbtKaigoShotokuTempEntity">
+        INSERT INTO 
+        "DbT2008ShotokuKanri"
+        VALUES
+        (#{shichosonCode},
+        #{shichosonShikibetsuCode},
+        #{shotokuNendo},
+        #{shikibetsuCode},
+        #{rirekiNo},
+        #{kazeiKubun},
+        #{kazeiKubunGemmenGo},
+        #{gokeiShotokuGaku},
+        #{nenkiniShunyuGaku},
+        #{nenkiniShotokuGaku},
+        #{kazeiShotokuGaku},
+        #{gekihenKanwaKubun},
+        #{yusenKubun},
+        #{shoriTimeStamp})
+    </insert>
+    
+    <!--     所得情報一時テーブルへ登録します。 -->
+    <insert id="insert所得情報一時テーブル" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohotemp.DbTShotokuJohoTempTableEntity">
+        INSERT INTO 
+        "DbTKaigoShotokuTempTable"
+        VALUES
+        (#{shichosonCode},
+        #{shikibetsuID},
+        #{timeStamp},
+        #{lastRecordKubun},
+        #{renban},
+        #{ＦＩＬＬＥＲ},
+        #{fukaNendo},
+        #{juminCode},
+        #{shotokuHaakuKubun},
+        #{fukazeiKubun},
+        #{juminzeiShotokuwari},
+        #{juminzeiKintouwari},
+        #{gokeiShotokuGaku},
+        #{kyuyoShunyuGaku},
+        #{nenkiniShunyuGaku},
+        #{nenkiniShotokuGaku},
+        #{sonotaShotoku1},
+        #{sonotaShotoku2},
+        #{yobi},
+        #{gekihenKanwaKubun},
+        #{dataShurui},
+        #{shotokuzei},
+        #{updateTimeStamp})
+    </insert>
+
+</mapper>

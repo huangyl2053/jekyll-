@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatchProcessParameter {
 
     private RString menuId;
-    private RString shuturyokuJunn;
-    private FlexibleYearMonth ShinsaYMFrom;
-    private FlexibleYearMonth ShinsaYMTo;
+    private Long shuturyokuJunn;
+    private FlexibleYearMonth shinsaYMFrom;
+    private FlexibleYearMonth shinsaYMTo;
     private boolean shuturyokuFlg;
 
     /**
@@ -32,20 +32,20 @@ public class KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter implements IBatch
      *
      * @param menuId RString
      * @param shuturyokuJunn RString
-     * @param ShinsaYMFrom FlexibleYearMonth
-     * @param ShinsaYMTo FlexibleYearMonth
+     * @param shinsaYMFrom FlexibleYearMonth
+     * @param shinsaYMTo FlexibleYearMonth
      * @param shuturyokuFlg boolean
      */
     public KogakuKaigoKyufuhiTaishoshaTorokuProcessParameter(
             RString menuId,
-            RString shuturyokuJunn,
-            FlexibleYearMonth ShinsaYMFrom,
-            FlexibleYearMonth ShinsaYMTo,
+            Long shuturyokuJunn,
+            FlexibleYearMonth shinsaYMFrom,
+            FlexibleYearMonth shinsaYMTo,
             boolean shuturyokuFlg) {
         this.menuId = menuId;
         this.shuturyokuJunn = shuturyokuJunn;
-        this.ShinsaYMFrom = ShinsaYMFrom;
-        this.ShinsaYMTo = ShinsaYMTo;
+        this.shinsaYMFrom = shinsaYMFrom;
+        this.shinsaYMTo = shinsaYMTo;
         this.shuturyokuFlg = shuturyokuFlg;
     }
 

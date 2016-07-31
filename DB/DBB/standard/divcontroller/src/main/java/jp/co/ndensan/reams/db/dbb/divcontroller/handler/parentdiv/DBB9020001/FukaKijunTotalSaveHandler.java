@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
- * システム管理（賦課基準）保存のhandler処理です。
+ * システム管理（賦課基準）保存のハンドラクラスです。
  *
  * @reamsid_L DBB-1770-010 wangkanglei
  */
@@ -42,7 +42,6 @@ public class FukaKijunTotalSaveHandler {
     private static final FlexibleYear 平成20年 = new FlexibleYear("2008");
     private static final FlexibleYear 平成18年 = new FlexibleYear("2006");
     private static final FlexibleYear 平成17年 = new FlexibleYear("2005");
-    private static final int NUM_0 = 1;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -137,7 +136,7 @@ public class FukaKijunTotalSaveHandler {
     }
 
     /**
-     * 変更内容を取得のメソッドます。
+     * 変更内容を取得のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -160,7 +159,7 @@ public class FukaKijunTotalSaveHandler {
     }
 
     /**
-     * 変更内容を保存のメソッドます。
+     * 変更内容を保存のメソッドです。
      *
      * @param 保険料段階一覧 List
      * @param now システム日時
@@ -234,13 +233,17 @@ public class FukaKijunTotalSaveHandler {
 
     private void 変更内容を保存_平成17年(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         FukaKijunTotalManager.createInstance().save保険料段階(保険料段階一覧);
-        Decimal 保険料率;
-        for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
-            RString インデックス = 保険料段階.get段階インデックス();
-            if (インデックス_05.equals(インデックス)) {
-                保険料率 = 保険料段階.get保険料率();
+        List<dgHokenryoDankai_Row> rowList = div.getShotokuDankai().getHokenryoDankaiFrom2015().getDgHokenryoDankai()
+                .getDataSource();
+        Decimal 基準所得金額;
+        int 行目Flag = 0;
+        for (dgHokenryoDankai_Row row : rowList) {
+            行目Flag = 行目Flag + NUM_1;
+            if (NUM_2 == 行目Flag) {
+                基準所得金額 = row.getTxtKijunShotokuKingaku().getValue();
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額1,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
+                break;
             }
         }
     }
@@ -312,30 +315,33 @@ public class FukaKijunTotalSaveHandler {
 
     private void 変更内容を保存_平成18年から平成20年まで(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         FukaKijunTotalManager.createInstance().save保険料段階(保険料段階一覧);
-        Decimal 保険料率;
-        for (HokenryoDankai 保険料段階 : 保険料段階一覧) {
-            RString インデックス = 保険料段階.get段階インデックス();
-            保険料率 = 保険料段階.get保険料率();
-            if (インデックス_13.equals(インデックス)) {
+        Decimal 基準所得金額 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxtKijunShotokuKingakuDankai2().getValue();
+        BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入1,
+                new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
+
+        List<dgHokenryoDankai_Row> rowList = div.getShotokuDankai().getHokenryoDankaiFrom2015().getDgHokenryoDankai()
+                .getDataSource();
+        int 行目Flag = 0;
+        for (dgHokenryoDankai_Row row : rowList) {
+            行目Flag = 行目Flag + NUM_1;
+            基準所得金額 = row.getTxtKijunShotokuKingaku().getValue();
+            if (NUM_2 == 行目Flag) {
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額1,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
-            } else if (インデックス_14.equals(インデックス)) {
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
+            } else if (NUM_3 == 行目Flag) {
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額2,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
-            } else if (インデックス_15.equals(インデックス)) {
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
+            } else if (NUM_4 == 行目Flag) {
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額3,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
-            } else if (インデックス_16.equals(インデックス)) {
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
+            } else if (NUM_5 == 行目Flag) {
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額4,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
-            } else if (インデックス_17.equals(インデックス)) {
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
+            } else if (NUM_6 == 行目Flag) {
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額5,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
             }
         }
-        保険料率 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxtKijunShotokuKingakuDankai2().getValue();
-        BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入1,
-                new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
     }
 
     private HokenryoDankai get変更保険料段階_平成18年から平成20年まで(HokenryoDankai 保険料段階, RString 段階インデックス) {
@@ -394,7 +400,7 @@ public class FukaKijunTotalSaveHandler {
 
     private void 変更内容を保存_平成21年から平成23年まで(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         FukaKijunTotalManager.createInstance().save保険料段階(保険料段階一覧);
-        Decimal 保険料率;
+        Decimal 基準所得金額;
         Decimal 基準年金収入3 = null;
         List<dgHokenryoDankai_Row> rowList = div.getShotokuDankai().getHokenryoDankaiFrom2015().getDgHokenryoDankai()
                 .getDataSource();
@@ -406,18 +412,18 @@ public class FukaKijunTotalSaveHandler {
         } else if (HokenryoDankaiPattern._2009_パターン3.getコード().equals(パターン)) {
             基準年金収入3 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxKijunShotokuKingakuDankai4().getValue();
         }
-        保険料率 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxtKijunShotokuKingakuDankai2().getValue();
+        基準所得金額 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxtKijunShotokuKingakuDankai2().getValue();
         BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入1,
-                new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
         if (基準年金収入3 != null) {
             BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入3,
                     new RString(基準年金収入3.toString()), get変更理由(), RString.EMPTY, now);
         }
         int 行目Flag = NUM_1;
         for (dgHokenryoDankai_Row row : rowList) {
-            保険料率 = row.getTxtHokenryoRitsu().getValue();
-            if (保険料率 != null) {
-                業務コンフィグへの保存__平成21年から平成23年まで(行目Flag, now, 保険料率);
+            基準所得金額 = row.getTxtKijunShotokuKingaku().getValue();
+            if (基準所得金額 != null) {
+                業務コンフィグへの保存__平成21年から平成23年まで(行目Flag, now, 基準所得金額);
             }
             行目Flag = 行目Flag + NUM_1;
         }
@@ -511,67 +517,67 @@ public class FukaKijunTotalSaveHandler {
         return null;
     }
 
-    private void 業務コンフィグへの保存__平成21年から平成23年まで(int 行目Flag, RDate now, Decimal 保険料率) {
+    private void 業務コンフィグへの保存__平成21年から平成23年まで(int 行目Flag, RDate now, Decimal 基準所得金額) {
         switch (行目Flag) {
             case NUM_2:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額1,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_3:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額2,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_4:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額3,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_5:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額4,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_6:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額5,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_7:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額6,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_8:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額7,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_9:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額8,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_10:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額9,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_11:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額10,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_12:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額11,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_13:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額12,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_14:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額13,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_15:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額14,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_16:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額15,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             default:
                 break;
@@ -621,12 +627,21 @@ public class FukaKijunTotalSaveHandler {
 
     private void 変更内容を保存_平成24年から平成26年まで(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         FukaKijunTotalManager.createInstance().save保険料段階(保険料段階一覧);
-        Decimal 保険料率;
+        Decimal 基準所得金額 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxtKijunShotokuKingakuDankai2().getValue();
+        BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入1,
+                new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
         RString パターン = div.getHdnPatan();
         業務コンフィグへの保存_平成24年から平成26年まで(パターン, now);
-        保険料率 = div.getShotokuDankai().getShotokuDankaiTo2014().getTxtKijunShotokuKingakuDankai2().getValue();
-        BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入1,
-                new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+        List<dgHokenryoDankai_Row> rowList = div.getShotokuDankai().getHokenryoDankaiFrom2015().getDgHokenryoDankai()
+                .getDataSource();
+        int 行目Flag = NUM_1;
+        for (dgHokenryoDankai_Row row : rowList) {
+            基準所得金額 = row.getTxtKijunShotokuKingaku().getValue();
+            if (基準所得金額 != null) {
+                業務コンフィグへの保存__平成21年から平成23年まで(行目Flag, now, 基準所得金額);
+            }
+            行目Flag = 行目Flag + NUM_1;
+        }
     }
 
     private HokenryoDankai get保険料段階_2012_パターン1(RString インデックス,
@@ -819,6 +834,7 @@ public class FukaKijunTotalSaveHandler {
             RString 段階インデックス,
             List<dgHokenryoDankai_Row> rowList) {
         Decimal 保険料率;
+        HokenryoDankai 保険料段階Entity = null;
         for (dgHokenryoDankai_Row row : rowList) {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             RString 段階 = row.getDdlHokenryoDankai().getSelectedValue();
@@ -826,24 +842,34 @@ public class FukaKijunTotalSaveHandler {
                 continue;
             }
             if (インデックス_07.equals(段階インデックス) && 第5段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_050).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_050).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_08.equals(段階インデックス) && 第6段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_09.equals(段階インデックス) && 第7段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_10.equals(段階インデックス) && 第8段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_11.equals(段階インデックス) && 第9段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_12.equals(段階インデックス) && 第10段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_13.equals(段階インデックス) && 第11段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                break;
             } else {
-                return get保険料段階_第5段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                保険料段階Entity = get保険料段階_第5段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                if (保険料段階Entity != null) {
+                    break;
+                }
             }
         }
-        return null;
+        return 保険料段階Entity;
     }
 
     private HokenryoDankai get保険料段階_第5段階(HokenryoDankai 保険料段階,
@@ -876,6 +902,7 @@ public class FukaKijunTotalSaveHandler {
             RString 段階インデックス,
             List<dgHokenryoDankai_Row> rowList) {
         Decimal 保険料率;
+        HokenryoDankai 保険料段階Entity = null;
         for (dgHokenryoDankai_Row row : rowList) {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             RString 段階 = row.getDdlHokenryoDankai().getSelectedValue();
@@ -883,24 +910,34 @@ public class FukaKijunTotalSaveHandler {
                 continue;
             }
             if (インデックス_07.equals(段階インデックス) && 第6段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_060).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_08.equals(段階インデックス) && 第7段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_09.equals(段階インデックス) && 第8段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_10.equals(段階インデックス) && 第9段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_11.equals(段階インデックス) && 第10段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_12.equals(段階インデックス) && 第11段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_13.equals(段階インデックス) && 第12段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                break;
             } else {
-                return get保険料段階_第6段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                保険料段階Entity = get保険料段階_第6段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                if (保険料段階Entity != null) {
+                    break;
+                }
             }
         }
-        return null;
+        return 保険料段階Entity;
     }
 
     private HokenryoDankai get保険料段階_第6段階(HokenryoDankai 保険料段階,
@@ -931,6 +968,7 @@ public class FukaKijunTotalSaveHandler {
             RString 段階インデックス,
             List<dgHokenryoDankai_Row> rowList) {
         Decimal 保険料率;
+        HokenryoDankai 保険料段階Entity = null;
         for (dgHokenryoDankai_Row row : rowList) {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             RString 段階 = row.getDdlHokenryoDankai().getSelectedValue();
@@ -938,24 +976,34 @@ public class FukaKijunTotalSaveHandler {
                 continue;
             }
             if (インデックス_07.equals(段階インデックス) && 第7段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_070).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_08.equals(段階インデックス) && 第8段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_080).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_09.equals(段階インデックス) && 第9段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_090).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_10.equals(段階インデックス) && 第10段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_100).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_11.equals(段階インデックス) && 第11段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_110).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_12.equals(段階インデックス) && 第12段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_120).set保険料率(保険料率).build();
+                break;
             } else if (インデックス_13.equals(段階インデックス) && 第13段階KEY.equals(段階)) {
-                return 保険料段階.createBuilderForEdit().set段階区分(段階_130).set保険料率(保険料率).build();
+                保険料段階Entity = 保険料段階.createBuilderForEdit().set段階区分(段階_130).set保険料率(保険料率).build();
+                break;
             } else {
-                return get保険料段階_第7段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                保険料段階Entity = get保険料段階_第7段階(保険料段階, 段階インデックス, 保険料率, 段階);
+                if (保険料段階Entity != null) {
+                    break;
+                }
             }
         }
-        return null;
+        return 保険料段階Entity;
     }
 
     private HokenryoDankai get保険料段階_第7段階(HokenryoDankai 保険料段階,
@@ -1032,9 +1080,9 @@ public class FukaKijunTotalSaveHandler {
             保険料率 = row.getTxtHokenryoRitsu().getValue();
             保存を保険料段階 = map.get(順番);
             if (特例表記 != null && !特例表記.isEmpty()) {
-                段階区分 = 段階区分.substring(NUM_0, NUM_2).concat(STR_ONE);
+                段階区分 = 段階区分.substring(NUM_2, NUM_4).concat(STR_ONE);
             } else {
-                段階区分 = 段階区分.substring(NUM_0, NUM_2).concat(STR_ZERO);
+                段階区分 = 段階区分.substring(NUM_2, NUM_4).concat(STR_ZERO);
                 特例表記 = RString.EMPTY;
             }
             保存を保険料段階 = 保存を保険料段階.createBuilderForEdit()
@@ -1048,91 +1096,91 @@ public class FukaKijunTotalSaveHandler {
 
     private void 変更内容を保存_平成27年(List<HokenryoDankai> 保険料段階一覧, RDate now) {
         FukaKijunTotalManager.createInstance().save保険料段階(保険料段階一覧);
-        Decimal 保険料率;
+        Decimal 基準所得金額;
         List<dgHokenryoDankai_Row> rowList = div.getShotokuDankai().getHokenryoDankaiFrom2015().getDgHokenryoDankai()
                 .getDataSource();
         for (dgHokenryoDankai_Row row : rowList) {
             RString 順番 = row.getTxtHokenryoDankaiIndex().getValue();
-            保険料率 = row.getTxtHokenryoRitsu().getValue();
-            if (保険料率 != null) {
-                業務コンフィグへの保存_平成27年(Integer.valueOf(順番.toString()), now, 保険料率);
+            基準所得金額 = row.getTxtKijunShotokuKingaku().getValue();
+            if (基準所得金額 != null) {
+                業務コンフィグへの保存_平成27年(Integer.valueOf(順番.toString()), now, 基準所得金額);
             }
         }
     }
 
-    private void 業務コンフィグへの保存_平成27年(int 行目Flag, RDate now, Decimal 保険料率) {
+    private void 業務コンフィグへの保存_平成27年(int 行目Flag, RDate now, Decimal 基準所得金額) {
         switch (行目Flag) {
             case NUM_2:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入1,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_3:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入3,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_5:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準年金収入2,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_7:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額1,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_8:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額2,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_9:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額3,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_10:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額4,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_11:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額5,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_12:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額6,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_13:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額7,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_14:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額8,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_15:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額9,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_16:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額10,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_17:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額11,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_18:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額12,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_19:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額13,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_20:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額14,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             case NUM_21:
                 BusinessConfig.update(SubGyomuCode.DBB介護賦課, ConfigNameDBB.賦課基準_基準所得金額15,
-                        new RString(保険料率.toString()), get変更理由(), RString.EMPTY, now);
+                        new RString(基準所得金額.toString()), get変更理由(), RString.EMPTY, now);
                 break;
             default:
                 break;

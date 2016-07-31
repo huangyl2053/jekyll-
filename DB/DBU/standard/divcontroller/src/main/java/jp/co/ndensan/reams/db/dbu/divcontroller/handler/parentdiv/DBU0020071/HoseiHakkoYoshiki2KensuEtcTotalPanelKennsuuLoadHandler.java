@@ -117,55 +117,10 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler {
      * 引き継ぎデータより、データ削除する。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @return boolean DB操作結果
      */
-    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        int row = 0;
-        if (引き継ぎデータ.get行集計番号().startsWith(件数総数)) {
-            row = deleteByParameter(引き継ぎデータ, 集計番号_0101);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0102);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0103);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0104);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(件数第２号被保険者分再掲)) {
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0201);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0202);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0203);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0204);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(件数総数特例分)) {
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0301);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0302);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0303);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0304);
-        } else {
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0401);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0402);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0403);
-            row = row + deleteByParameter(引き継ぎデータ, 集計番号_0404);
-        }
-        return 0 < row;
-    }
-
-    /**
-     * 削除のメソッドます。
-     *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 集計番号 Code
-     * @return 削除件数
-     */
-    public int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 集計番号) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.deleteJigyoHokokuGeppoData(parameter);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
@@ -188,8 +143,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler {
      * onLoad画面初期化処理
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @return List<JigyoHokokuTokeiData>
      */
-    public void 件数OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> 件数OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 件数 = new ArrayList<>();
 
         if (引き継ぎデータ.get行集計番号().startsWith(件数総数.toString())) {
@@ -202,6 +158,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKennsuuLoadHandler {
             件数 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0401);
         }
         loopList(件数);
+        return 件数;
     }
 
     private void loopList(List<JigyoHokokuTokeiData> list) {

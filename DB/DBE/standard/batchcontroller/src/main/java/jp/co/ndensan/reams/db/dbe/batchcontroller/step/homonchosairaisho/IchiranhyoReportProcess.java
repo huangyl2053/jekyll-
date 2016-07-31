@@ -13,8 +13,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
@@ -42,14 +42,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -124,6 +120,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     @Override
     protected void keyBreakProcess(HomonChosaIraishoRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
+            連番 = 1;
             ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoBodyItemList);
             report.writeBy(ichiranhyoReportSourceWriter);
             ichiranhyoBodyItemList = new ArrayList<>();
@@ -174,12 +171,12 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
                 new RString(String.valueOf(連番++)),
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
-                get和暦(entity.get認定申請年月日(), false),
+                entity.get認定申請年月日(),
                 NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get名称(),
                 entity.get被保険者氏名(),
                 entity.get被保険者氏名カナ(),
                 Seibetsu.toValue(entity.get性別()).get名称(),
-                get和暦(entity.get生年月日(), true),
+                entity.get生年月日(),
                 entity.get住所(),
                 entity.get電話番号(),
                 set提出期限(entity));
@@ -252,19 +249,6 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
             meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
         }
         return meishoFuyo;
-    }
-
-    private RString get和暦(RString 日付, boolean flag) {
-        RString 和暦 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(日付)) {
-            FlexibleDate flexibleDate = new FlexibleDate(日付);
-            和暦 = flexibleDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        }
-        if (flag && !RString.isNullOrEmpty(和暦)) {
-            和暦 = 和暦.substring(2, 和暦.length());
-        }
-        return 和暦;
     }
 
     private void バッチ出力条件リストの出力() {

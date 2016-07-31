@@ -88,5 +88,45 @@ public class KaigoHokenShotokuJohoIchiranSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
+    /**
+     * KaigoHokenShotokuJohoIchiranSourceFields
+     */
+    public enum KaigoHoken {
+
+        printTimeStamp,
+        cityCode,
+        cityName,
+        sort1,
+        sort2,
+        sort3,
+        sort4,
+        sort5,
+        page1,
+        page2,
+        page4,
+        page5,
+        page3,
+        kazeiKubun,
+        kazeiKubunGemmenMae,
+        kazeiKubunGemmenGo,
+        listIchiranhyoUpper_1,
+        listIchiranhyoUpper_2,
+        listIchiranhyoUpper_3,
+        listIchiranhyoUpper_4,
+        listIchiranhyoUpper_5,
+        listIchiranhyoUpper_6,
+        listIchiranhyoUpper_7,
+        listIchiranhyoUpper_8,
+        listIchiranhyoUpper_9,
+        listIchiranhyoUpper_10,
+        listIchiranhyoUpper_11,
+        listIchiranhyoLower_1,
+        listIchiranhyoLower_2,
+        listIchiranhyoLower_3,
+        listIchiranhyoLower_4,
+        listIchiranhyoLower_5,
+        listIchiranhyoLower_6
+    }
 // </editor-fold>
 }

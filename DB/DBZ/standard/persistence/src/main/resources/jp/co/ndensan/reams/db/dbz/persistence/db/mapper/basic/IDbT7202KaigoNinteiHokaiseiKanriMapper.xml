@@ -1,20 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- @reamsid_L DBZ-1300-080 yaodongsheng -->
+<!-- 概要： DbT7202KaigoNinteiHokaiseiKanriマスタとエンティティのマッピング用XMLです。 -->
 
+<!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7202KaigoNinteiHokaiseiKanri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7202KaigoNinteiHokaiseiKanriMapper.allColumns_DbT7202KaigoNinteiHokaiseiKanri" />
+     FROM
+         rgdb."DbT7202KaigoNinteiHokaiseiKanri"
+     WHERE
+         rgdb."DbT7202KaigoNinteiHokaiseiKanri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7202KaigoNinteiHokaiseiKanri">
+         "DbT7202KaigoNinteiHokaiseiKanri"."hokaiseiShikoYMD" as "dbT7202KaigoNinteiHokaiseiKanri_hokaiseiShikoYMD",
+         "DbT7202KaigoNinteiHokaiseiKanri"."insertDantaiCd" as "dbT7202KaigoNinteiHokaiseiKanri_insertDantaiCd",
+         "DbT7202KaigoNinteiHokaiseiKanri"."insertTimestamp" as "dbT7202KaigoNinteiHokaiseiKanri_insertTimestamp",
+         "DbT7202KaigoNinteiHokaiseiKanri"."insertReamsLoginId" as "dbT7202KaigoNinteiHokaiseiKanri_insertReamsLoginId",
+         "DbT7202KaigoNinteiHokaiseiKanri"."insertContextId" as "dbT7202KaigoNinteiHokaiseiKanri_insertContextId",
+         "DbT7202KaigoNinteiHokaiseiKanri"."isDeleted" as "dbT7202KaigoNinteiHokaiseiKanri_isDeleted",
+         "DbT7202KaigoNinteiHokaiseiKanri"."updateCount" as "dbT7202KaigoNinteiHokaiseiKanri_updateCount",
+         "DbT7202KaigoNinteiHokaiseiKanri"."lastUpdateTimestamp" as "dbT7202KaigoNinteiHokaiseiKanri_lastUpdateTimestamp",
+         "DbT7202KaigoNinteiHokaiseiKanri"."lastUpdateReamsLoginId" as "dbT7202KaigoNinteiHokaiseiKanri_lastUpdateReamsLoginId",
+         "DbT7202KaigoNinteiHokaiseiKanri"."koroshoIfShikibetsuCode" as "dbT7202KaigoNinteiHokaiseiKanri_koroshoIfShikibetsuCode",
+         "DbT7202KaigoNinteiHokaiseiKanri"."chosaGaikyoKomokuChangeFlag" as "dbT7202KaigoNinteiHokaiseiKanri_chosaGaikyoKomokuChangeFlag",
+         "DbT7202KaigoNinteiHokaiseiKanri"."chosaKihonKomokuChangeFlag" as "dbT7202KaigoNinteiHokaiseiKanri_chosaKihonKomokuChangeFlag",
+         "DbT7202KaigoNinteiHokaiseiKanri"."shujiiIkenshoKomokuChangeFlag" as "dbT7202KaigoNinteiHokaiseiKanri_shujiiIkenshoKomokuChangeFlag"
+    </sql>
+
+
+    <!--テーブルDbT7202KaigoNinteiHokaiseiKanriの項目をDbT7202KaigoNinteiHokaiseiKanriEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7202KaigoNinteiHokaiseiKanriEntity" autoMapping="true">
-        <result property="hokaiseiShikoYMD" column="hokaiseiShikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="hokaiseiShikoYMD" column="dbT7202KaigoNinteiHokaiseiKanri_hokaiseiShikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7202KaigoNinteiHokaiseiKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7202KaigoNinteiHokaiseiKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7202KaigoNinteiHokaiseiKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7202KaigoNinteiHokaiseiKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7202KaigoNinteiHokaiseiKanri_isDeleted" />
+        <result property="updateCount" column="dbT7202KaigoNinteiHokaiseiKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7202KaigoNinteiHokaiseiKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7202KaigoNinteiHokaiseiKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT7202KaigoNinteiHokaiseiKanri_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaGaikyoKomokuChangeFlag" column="dbT7202KaigoNinteiHokaiseiKanri_chosaGaikyoKomokuChangeFlag" />
+        <result property="chosaKihonKomokuChangeFlag" column="dbT7202KaigoNinteiHokaiseiKanri_chosaKihonKomokuChangeFlag" />
+        <result property="shujiiIkenshoKomokuChangeFlag" column="dbT7202KaigoNinteiHokaiseiKanri_shujiiIkenshoKomokuChangeFlag" />
     </resultMap>
-	<select resultOrdered="true" id="get最古法改正施行年月日" resultMap="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity">
-	SELECT
-            "hokaiseiShikoYMD" AS hokaiseiShikoYMD,
-            "koroshoIfShikibetsuCode" AS koroshoIfShikibetsuCode
-        FROM    
-            rgdb."DbT7202KaigoNinteiHokaiseiKanri"
-        ORDER BY
-            "hokaiseiShikoYMD"
-        LIMIT 1
+    
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7202KaigoNinteiHokaiseiKanriEntity">
+        SELECT
+        <include refid="allColumns_DbT7202KaigoNinteiHokaiseiKanri"/>
+        FROM
+        rgdb."DbT7202KaigoNinteiHokaiseiKanri"
     </select>
 </mapper>

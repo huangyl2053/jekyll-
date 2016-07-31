@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuJissekiJoh
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.IsGinkoFurikomiShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuJissekiJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteiChosaHoshuTankaMybatisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahoshujissekijoho.NinteichosahyoGaikyoChosaMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.HomonChosaItakuNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgChosain_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6090001.dgShinsakaiIin_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -29,8 +31,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -48,7 +52,10 @@ public class HomonChosaItakuNyuryokuHandler {
     private static final RString 銀行振込_出力済 = new RString("key0");
     private static final RString 銀行振込_出力未 = new RString("key1");
     private static final RString 単純照会状態 = new RString("SimpleShokaiMode");
+    private static final RString 有効 = new RString("有効");
+    private static final RString 無効 = new RString("無効");
     private static final RString コンマ = new RString(",");
+    private static final int 年月 = 6;
 
     /**
      * コンストラクタです。
@@ -66,6 +73,8 @@ public class HomonChosaItakuNyuryokuHandler {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTextBoxNum().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTextBoxNum().setMaxValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -96,17 +105,13 @@ public class HomonChosaItakuNyuryokuHandler {
                 dgchosain_Row.setNinteiChosainCode(nullToEmpty(business.get認定調査員コード()));
                 dgchosain_Row.setChosainShimei(nullToEmpty(business.get調査員氏名()));
                 dgchosain_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
-                if (business.get調査員資格().isNullOrEmpty()) {
-                    dgchosain_Row.setChosainShikaku(RString.EMPTY);
-                } else {
-                    dgchosain_Row.setChosainShikaku(Sikaku.toValue(business.get調査員資格()).get名称());
-                }
-                dgchosain_Row.setShozokuKikanName(business.get所属機関名称());
+                dgchosain_Row.setChosainShikaku(Sikaku.toValue(nullToEmpty(business.get調査員資格())).get名称());
+                dgchosain_Row.setShozokuKikanName(nullToEmpty(business.get所属機関名称()));
                 if (business.is状況フラグ()) {
-                    RString 状況フラグ = new RString("有効");
+                    RString 状況フラグ = 有効;
                     dgchosain_Row.setJokyoFlag(状況フラグ);
                 } else {
-                    RString 状況フラグ = new RString("無効");
+                    RString 状況フラグ = 無効;
                     dgchosain_Row.setJokyoFlag(状況フラグ);
                 }
                 dgchosain_Row.setNintechosaItakusakiCode(business.get認定調査委託先コード());
@@ -135,7 +140,8 @@ public class HomonChosaItakuNyuryokuHandler {
                 row.setJisshiNengappi(nullToEmpty(business.get認定調査実施年月日().wareki().toDateString()));
                 row.setJuryoNengappi(nullToEmpty(business.get認定調査受領年月日().wareki().toDateString()));
                 row.setShurui(nullToEmpty(business.get認定調査実施場所名称()));
-                row.setNinteiChosaItakuryo(nullToEmpty(business.get認定調査委託料()));
+                row.setNinteiChosaItakuryo(DecimalFormatter
+                        .toコンマ区切りRString(new Decimal((business.get認定調査委託料())), 0));
                 row.setShiharaiMemo(nullToEmpty(business.get認定調査委託料支払メモ()));
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.toValue(business.is銀行振込出力フラグ()).get名称());
                 row.setShinseishoKanriNo(nullToEmpty(business.get申請書管理番号()));
@@ -143,22 +149,24 @@ public class HomonChosaItakuNyuryokuHandler {
                 row.setNintechosaItakusakiCode(nullToEmpty(business.get認定調査委託先コード()));
                 row.setNinteichosainCode(nullToEmpty(business.get認定調査委託先コード()));
                 row.setRaiRirekiNo(nullToEmpty(business.get履歴番号()));
+                if (nullToEmpty(business.get履歴番号()).isNullOrEmpty()) {
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                }
                 dgChosainList.add(row);
             }
-            div.getDgShinsakaiIin().setDataSource(dgChosainList);
         }
+        div.getDgShinsakaiIin().setDataSource(dgChosainList);
     }
 
     /**
      * 「入力を取りやめる」ボタンを押下し、編集内容クリアです。
      */
     public void kuria() {
-        div.getTxtShinseibi().clearValue();
-        div.getTxtNinteiChosaIraiNengappi().clearValue();
-        div.getTxtNinteiChosaJisshiNengappi().clearValue();
-        div.getTxtNinteiJuryoNengappi().clearValue();
-        div.getTxtHomonShurui().clearValue();
-        div.getRadGinkoFurikomi().clearSelectedItem();
+        if (div.getHdt状態().equals(状態_更新)) {
+            div.getTxtShiharaiMemo().clearValue();
+            div.getTxtNinteiChosaItakuryo().clearValue();
+            div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力済);
+        }
     }
 
     /**
@@ -167,7 +175,10 @@ public class HomonChosaItakuNyuryokuHandler {
      */
     public void set状態_更新() {
         div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
-        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
+        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, div.getDgShinsakaiIin().getClickedItem().getNintechosaItakusakiCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakusaki(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteichosainCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosain());
         div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
         div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
         div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
@@ -195,12 +206,16 @@ public class HomonChosaItakuNyuryokuHandler {
      */
     public void set状態_削除() {
         div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
-        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態);
+        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, div.getDgShinsakaiIin().getClickedItem().getNintechosaItakusakiCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakusaki(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteichosainCode(),
+                div.getDgShinsakaiIin().getClickedItem().getNinteiChosain());
         div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
         div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
         div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
         div.getTxtHomonShurui().setValue(div.getDgShinsakaiIin().getClickedItem().getShurui());
         div.getTxtNinteiChosaItakuryo().setValue(toDecimal(div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo()));
+        div.getTxtShiharaiMemo().setValue(div.getDgShinsakaiIin().getClickedItem().getShiharaiMemo());
         if (銀行振込.equals(div.getDgShinsakaiIin().getClickedItem().getFurikomi())) {
             div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力済);
         } else {
@@ -220,7 +235,7 @@ public class HomonChosaItakuNyuryokuHandler {
         int rowCount = div.getDgShinsakaiIin().getClickedItem().getId();
         dgShinsakaiIin_Row row = dgChosainList.get(rowCount);
         if (状態_更新.equals(div.getHdt状態())) {
-            row.setNinteiChosaItakuryo(new RString(div.getTxtNinteiChosaItakuryo().getValue().toString()));
+            row.setNinteiChosaItakuryo(DecimalFormatter.toコンマ区切りRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));
             row.setShiharaiMemo(div.getTxtShiharaiMemo().getValue());
             if (銀行振込_出力済.equals(div.getRadGinkoFurikomi().getSelectedKey())) {
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());
@@ -229,7 +244,7 @@ public class HomonChosaItakuNyuryokuHandler {
             }
             row.setColumnState(状態_更新);
         } else if (状態_追加.equals(div.getHdt状態())) {
-            row.setNinteiChosaItakuryo(new RString(div.getTxtNinteiChosaItakuryo().getValue().toString()));
+            row.setNinteiChosaItakuryo(DecimalFormatter.toコンマ区切りRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));
             row.setShiharaiMemo(div.getTxtShiharaiMemo().getValue());
             if (銀行振込_出力済.equals(div.getRadGinkoFurikomi().getSelectedKey())) {
                 row.setFurikomi(IsGinkoFurikomiShutsuryoku.出力済.get名称());
@@ -264,8 +279,9 @@ public class HomonChosaItakuNyuryokuHandler {
         builder.set認定調査依頼履歴番号(Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set認定調査員コード(div.getTxtChousaInCode().getValue());
         builder.set認定調査委託先コード(div.getTxtItakusakiCode().getValue());
-        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString()));
-        builder.set認定調査委託料支払メモ(RString.EMPTY);
+        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString().replace(",", "")));
+        builder.set認定調査委託料支払メモ(row.getShiharaiMemo());
+        builder.set認定調査委託料支払年月日(FlexibleDate.EMPTY);
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);
         } else {
@@ -291,7 +307,7 @@ public class HomonChosaItakuNyuryokuHandler {
                 Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()));
         NinteiChosaHoshuJissekiJoho joho = models.get(key);
         NinteiChosaHoshuJissekiJohoBuilder builder = joho.createBuilderForEdit();
-        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString()));
+        builder.set認定調査委託料(Integer.parseInt(row.getNinteiChosaItakuryo().toString().replace(",", "")));
         builder.set認定調査委託料支払メモ(row.getShiharaiMemo());
         if (IsGinkoFurikomiShutsuryoku.出力済.get名称().equals(row.getFurikomi())) {
             builder.set銀行振込出力フラグ(true);
@@ -332,18 +348,59 @@ public class HomonChosaItakuNyuryokuHandler {
     }
 
     /**
+     * 単価のパラメタ編集です。
+     *
+     * @param div HomonChosaItakuNyuryokuDiv
+     * @return NinteiChosaHoshuJissekiJohoMybatisParameter
+     */
+    public NinteiChosaHoshuTankaMybatisParamter createParam_単価(HomonChosaItakuNyuryokuDiv div) {
+        RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
+        return NinteiChosaHoshuTankaMybatisParamter.createParam(
+                div.getDgShinsakaiIin().getClickedItem().getShinseishoKanriNo(),
+                Integer.parseInt(div.getDgShinsakaiIin().getClickedItem().getNinteichosaIraiRirekiNo().toString()),
+                イメージ区分,
+                new RDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi().toString()).toDateString().substring(0, 年月));
+
+    }
+
+    /**
      * 実績調査員一覧のパラメタ編集です。
      *
      * @param div HomonChosaItakuNyuryokuDiv
      * @return NinteichosahyoGaikyoChosaMybatisParameter
      */
     public NinteichosahyoGaikyoChosaMybatisParameter createParam_実績(HomonChosaItakuNyuryokuDiv div) {
+        RString 検索年度月FROM;
+        RString 検索年度月TO;
+        if (div.getChosaItakuKensaku().getTxtKensakuNendo().getFromValue() == null) {
+            検索年度月FROM = RString.EMPTY;
+        } else {
+            検索年度月FROM = div.getChosaItakuKensaku().getTxtKensakuNendo().getFromValue().getYearMonth().toDateString();
+        }
+        if (div.getChosaItakuKensaku().getTxtKensakuNendo().getToValue() == null) {
+            検索年度月TO = RString.EMPTY;
+        } else {
+            検索年度月TO = div.getChosaItakuKensaku().getTxtKensakuNendo().getToValue().getYearMonth().toDateString();
+        }
         return NinteichosahyoGaikyoChosaMybatisParameter.createParam(
                 div.getChosain().getDgChosain().getClickedItem().getShichosonCode(),
                 div.getChosain().getDgChosain().getClickedItem().getShokisaiHokenshaNo(),
                 div.getChosain().getDgChosain().getClickedItem().getNinteiChosainCode(),
-                div.getTxtKensakuNendo().getFromText(),
-                div.getTxtKensakuNendo().getToText());
+                検索年度月FROM,
+                検索年度月TO);
+    }
+
+    /**
+     * 単価の編集です。
+     *
+     * @param 単価List NinteichosahyoGaikyoChosaRelateEntity
+     */
+    public void 単価(List<NinteichosahyoGaikyoChosaBusiness> 単価List) {
+        if (div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo() == null) {
+            for (NinteichosahyoGaikyoChosaBusiness business : 単価List) {
+                div.getTxtNinteiChosaItakuryo().setValue(new Decimal(nullToEmpty(business.get単価()).toString()));
+            }
+        }
     }
 
     private FlexibleDate toFlexibleDate(RString obj) {

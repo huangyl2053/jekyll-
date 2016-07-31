@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
- *
  * 認定調査データ出力（モバイル）バッチフロークラスです。
  *
  * @reamsid_L DBE-1860-011 duanzhanli

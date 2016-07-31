@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYear;
 
 /**
  * HeijunkaKakuteiShoriNaiyo のクラスファイル
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 public class HeijunkaKakuteiShoriNaiyoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +25,7 @@ public class HeijunkaKakuteiShoriNaiyoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtFukaNendo")
-    private TextBox txtFukaNendo;
+    private TextBoxYear txtFukaNendo;
     @JsonProperty("txtShoriNichiji")
     private TextBox txtShoriNichiji;
 
@@ -39,7 +40,7 @@ public class HeijunkaKakuteiShoriNaiyoDiv extends Panel {
      * @return txtFukaNendo
      */
     @JsonProperty("txtFukaNendo")
-    public TextBox getTxtFukaNendo() {
+    public TextBoxYear getTxtFukaNendo() {
         return txtFukaNendo;
     }
 
@@ -48,7 +49,7 @@ public class HeijunkaKakuteiShoriNaiyoDiv extends Panel {
      * @param txtFukaNendo txtFukaNendo
      */
     @JsonProperty("txtFukaNendo")
-    public void setTxtFukaNendo(TextBox txtFukaNendo) {
+    public void setTxtFukaNendo(TextBoxYear txtFukaNendo) {
         this.txtFukaNendo = txtFukaNendo;
     }
 

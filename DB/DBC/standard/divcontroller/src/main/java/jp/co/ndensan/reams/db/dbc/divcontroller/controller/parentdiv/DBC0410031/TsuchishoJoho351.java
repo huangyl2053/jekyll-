@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -52,8 +53,8 @@ public class TsuchishoJoho351 {
         KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
-        parameter.setShoriYM(処理年月.getYearMonth().toDateString());
-        parameter.setShutsuryokujun(出力順ID);
+        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+        parameter.setShutsuryokujunId(出力順ID);
         return ResponseData.of(parameter).respond();
     }
 }

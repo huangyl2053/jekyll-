@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTable
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchiranHyoReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoDBInsertProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.TaishoShutokuProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -31,7 +30,6 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
         executeStep(CREATEICHIJITABLE_PROCESS);
         executeStep(TAISHOSHUTOKU_PROCESS);
         executeStep(ICHIJITABLEUPDATE_PROCESS);
-        executeStep(IKKATSUHAKKOREPORT_PROCESS);
         executeStep(ICHIRANHYOREPORTPROCESS);
         executeStep(HIHOKENSHASHOB4);
         executeStep(HIHOKENSHASHOA4);
@@ -43,7 +41,6 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     private static final String CREATEICHIJITABLE_PROCESS = "createIchijiTableProcess";
     private static final String TAISHOSHUTOKU_PROCESS = "taishoShutokuProcess";
     private static final String ICHIJITABLEUPDATE_PROCESS = "ichijiTableUpdateProcess";
-    private static final String IKKATSUHAKKOREPORT_PROCESS = "ikkatsuHakkoReportProcess";
     private static final String ICHIRANHYOREPORTPROCESS = "IchiranHyoReportProcess";
     private static final String IKKATSUHAKKODBINSERT_PROCESS = "ikkatsuHakkoDBInsertProcess";
     private static final String HIHOKENSHASHOB4 = "hihokenshashoB4";
@@ -77,16 +74,6 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     @Step(ICHIJITABLEUPDATE_PROCESS)
     protected IBatchFlowCommand ichijiTableUpdateProcess() {
         return simpleBatch(IchijiTableUpdateProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
-    }
-
-    /**
-     * 帳票出力パラメータの取得です。
-     *
-     * @return 帳票出力パラメータ
-     */
-    @Step(IKKATSUHAKKOREPORT_PROCESS)
-    protected IBatchFlowCommand ikkatsuHakkoReportProcess() {
-        return simpleBatch(IkkatsuHakkoReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 
     /**

@@ -9,16 +9,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * GemmenPrintinfo のクラスファイル 
- * 
- * @author 自動生成
+ * GemmenPrintinfo のクラスファイル
+ *
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class GemmenPrintinfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -72,7 +73,7 @@ public class GemmenPrintinfoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblPrintMessage(Label lblPrintMessage) {
+    public void setLblPrintMessage(Label lblPrintMessage) {
         this.getPrintInfo().setLblPrintMessage(lblPrintMessage);
     }
 
@@ -82,7 +83,7 @@ public class GemmenPrintinfoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPritPublish1(pritPublish1Div pritPublish1) {
+    public void setPritPublish1(pritPublish1Div pritPublish1) {
         this.getPrintInfo().setPritPublish1(pritPublish1);
     }
 
@@ -92,7 +93,7 @@ public class GemmenPrintinfoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPritPublish2(pritPublish2Div pritPublish2) {
+    public void setPritPublish2(pritPublish2Div pritPublish2) {
         this.getPrintInfo().setPritPublish2(pritPublish2);
     }
 
@@ -102,7 +103,7 @@ public class GemmenPrintinfoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPritPublish3(pritPublish3Div pritPublish3) {
+    public void setPritPublish3(pritPublish3Div pritPublish3) {
         this.getPrintInfo().setPritPublish3(pritPublish3);
     }
 
@@ -112,7 +113,7 @@ public class GemmenPrintinfoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPritPublish4(pritPublish4Div pritPublish4) {
+    public void setPritPublish4(pritPublish4Div pritPublish4) {
         this.getPrintInfo().setPritPublish4(pritPublish4);
     }
 

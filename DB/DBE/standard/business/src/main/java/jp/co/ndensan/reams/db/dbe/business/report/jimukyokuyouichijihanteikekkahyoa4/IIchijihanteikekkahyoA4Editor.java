@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 事務局用一次判定結果票A4のインターフェースクラスです。
  *
- * @reamsid_L DBE-0150-040 lishengli
+ * @reamsid_L DBE-0150-400 lishengli
  */
 public interface IIchijihanteikekkahyoA4Editor extends IReportEditor<IchijihanteikekkahyoA4ReportSource> {
 }

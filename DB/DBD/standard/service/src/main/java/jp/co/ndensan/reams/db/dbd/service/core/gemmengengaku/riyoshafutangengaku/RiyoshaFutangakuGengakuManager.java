@@ -10,12 +10,14 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuMapperParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4014RiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.riyoshafutangengaku.IRiyoshaFutangakuGengakuMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -146,5 +148,27 @@ public class RiyoshaFutangakuGengakuManager {
                 gemmenGengakuShinseiManager.delete減免減額申請(減免減額申請);
             }
         }
+    }
+
+    /**
+     * 被保険者番号、減免減額種類、履歴番号により、取得された利用者負担額減額の情報を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 減免減額種類 減免減額種類
+     * @param 履歴番号 履歴番号
+     * @return RiyoshaFutangakuGengaku
+     */
+    @Transaction
+    public RiyoshaFutangakuGengaku get利用者負担額減額(HihokenshaNo 被保険者番号, RString 減免減額種類, int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        IRiyoshaFutangakuGengakuMapper mapper = mapperProvider.create(IRiyoshaFutangakuGengakuMapper.class);
+        NinteiJohoParameter 検索条件 = NinteiJohoParameter.createParameter(被保険者番号, 減免減額種類, 履歴番号);
+        RiyoshaFutangakuGengakuEntity relateEntity = mapper.select利用者負担額減額(検索条件);
+
+        relateEntity.initializeMd5ToEntities();
+        return new RiyoshaFutangakuGengaku(relateEntity);
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1580-010 dongyabin -->
+<!-- イメージ取込み（規定・規定外）を検索用です -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput.IImageinputMapper">
+    <select resultOrdered="true" id="get申請データ" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+            SELECT
+              A."shinseishoKanriNo"
+            FROM
+              rgdb."DbT5101NinteiShinseiJoho" AS A 
+              INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
+                ON A."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+                AND T5301."logicalDeletedFlag" = FALSE 
+                AND NOT EXISTS ( 
+                  SELECT
+                    'X' 
+                  FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B2 
+              WHERE
+                T5301."shinseishoKanriNo" = B2."shinseishoKanriNo" 
+                AND B2."logicalDeletedFlag" = False 
+                AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
+            ) 
+          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
+            ON A."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
+            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
+            AND T5105."centerSoshinYMD" IS NULL 
+        WHERE
+          A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+          AND A."hihokenshaNo" = #{被保険者番号} 
+          AND A."ninteiShinseiYMD" = #{認定申請日}
+    </select>
+    
+    <select resultOrdered="true" id="get関連データ" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity" fetchSize="500">
+        SELECT
+          T5101."shoKisaiHokenshaNo" AS t5101_証記載保険者番号
+          , T5101."shisetsuNyushoFlag" AS t5101_施設入所の有無
+          , T5101."hihokenshaNo" AS t5101_被保険者番号
+          , T5101."hihokenshaName" AS t5101_被保険者氏名
+          , T5101."ninteiShinseiYMD" AS t5101_認定申請年月日
+          , T7051."shichosonMeisho" AS t7051_市町村名称
+          , T5101."shinseishoKanriNo" AS t5101_申請書管理番号
+          , T5115."imageSharedFileId" AS t5115_イメージ共有ファイルID
+          , T5912."shujiiCode" AS t5912_主治医コード
+          , T5912."shujiiName" AS t5912_主治医氏名
+          , T5911."shujiiIryokikanCode" AS t5911_主治医医療機関コード
+          , T5911."iryoKikanMeisho" AS t5911_医療機関名称
+          , T5101."koroshoIfShikibetsuCode" AS t5101_厚労省IF識別コード
+          , T5301."ikenshoSakuseiIraiYMD" AS t5301_主治医意見書作成依頼年月日
+          , T5301."ikenshoIraiKubun" AS t5301_主治医意見書依頼区分
+          , T5301."shujiiIryokikanCode" AS t5301_主治医医療機関コード
+          , T5301."shujiiCode" AS t5301_主治医コード
+          , T5301."ikenshoIraiRirekiNo" AS t5301_主治医意見書作成依頼履歴番号
+        FROM
+          rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+          INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
+            ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+            AND T5301."logicalDeletedFlag" = FALSE 
+            AND NOT EXISTS ( 
+              SELECT
+                'X' 
+              FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B2 
+              WHERE
+                T5301."shinseishoKanriNo" = B2."shinseishoKanriNo" 
+                AND B2."logicalDeletedFlag" = False 
+                AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
+            ) 
+          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
+            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
+          LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912 
+            ON T5912."shichosonCode" = T7051."shichosonCode" 
+            AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode" 
+            AND T5912."shujiiCode" = T5301."shujiiCode" 
+            AND T5912."jokyoFlag" = True 
+          LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
+            ON T5911."shichosonCode" = T7051."shichosonCode" 
+            AND T5911."shujiiIryokikanCode" = T5301."shujiiIryokikanCode" 
+            AND T5911."jokyoFlag" = True 
+          LEFT JOIN rgdb."DbT5115Image" AS T5115 
+            ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+        WHERE 
+          T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
+          AND T5101."hihokenshaNo" = #{被保険者番号} 
+          AND T5101."ninteiShinseiYMD" = #{認定申請日}
+    </select>
+</mapper>

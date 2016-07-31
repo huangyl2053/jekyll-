@@ -6,15 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.business.report.nonyutsuchishocvsmulti;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishocvsmulti.NonyuTsuchishoCVSMultiRenchoSource;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigosofubutsuatesakisource.KaigoSofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * 保険料納入通知書（本算定）【コンビニマルチ収納タイプ】（連帳）CoverのEditorです。
@@ -25,21 +29,21 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
 
     private final HonSanteiNonyuTsuchiShoJoho item;
     private final NinshoshaSource ninshoshaSource;
-    private final int renban;
 
     private static final RString EN = new RString("円");
     private static final RString TSUGIKI_IKOU = new RString("次期以降");
-    private static final RString NOKIGEN = new RString("納期限");
+    private static final RString NOKIGEN = new RString("本状の納期限");
     private static final RString BANK_CODE_TITLE = new RString("金融機関コード");
     private static final RString KOZA_SHURUI_TITLE = new RString("種別");
     private static final RString BANK_NAME_TITLE = new RString("金融機関");
-    private static final RString KOZA_MEIGININ_TITLE = new RString("`名義人");
+    private static final RString KOZA_MEIGININ_TITLE = new RString("名義人");
     private static final RString HANKAKU_X = new RString("X");
     private static final RString HOSHI_2 = new RString("**");
     private static final RString HOSHI_4 = new RString("****");
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int リストサイズ１ = 1;
@@ -53,22 +57,17 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
     private static final int リストサイズ９ = 9;
     private static final int リストサイズ１０ = 10;
 
-    private static final int INT_6 = 6;
-
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link KariSanteiNonyuTsuchiShoJoho}
+     * @param item {@link HonSanteiNonyuTsuchiShoJoho}
      * @param ninshoshaSource NinshoshaSource
-     * @param renban int
      */
     public NonyuTsuchishoCVSMultiRenchoCoverEditor(
             HonSanteiNonyuTsuchiShoJoho item,
-            NinshoshaSource ninshoshaSource,
-            int renban) {
+            NinshoshaSource ninshoshaSource) {
         this.item = item;
         this.ninshoshaSource = ninshoshaSource;
-        this.renban = renban;
     }
 
     @Override
@@ -104,15 +103,18 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
         EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報 = item.get編集後本算定通知書共通情報();
 
         if (編集後本算定通知書共通情報 != null) {
-            source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
-            source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
-            source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+            if (編集後本算定通知書共通情報.get表示コード() != null) {
+                source.hyojicodeName1 = 編集後本算定通知書共通情報.get表示コード().get表示コード名１();
+                source.hyojicodeName2 = 編集後本算定通知書共通情報.get表示コード().get表示コード名２();
+                source.hyojicodeName3 = 編集後本算定通知書共通情報.get表示コード().get表示コード名３();
+                source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
+                source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
+                source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+            }
             if (編集後本算定通知書共通情報.get調定年度() != null) {
                 source.titleNendo = 編集後本算定通知書共通情報.get調定年度_年度なし();
             }
-            source.hyojicode1 = 編集後本算定通知書共通情報.get表示コード().get表示コード１();
-            source.hyojicode2 = 編集後本算定通知書共通情報.get表示コード().get表示コード２();
-            source.hyojicode3 = 編集後本算定通知書共通情報.get表示コード().get表示コード３();
+
             if (編集後本算定通知書共通情報.get編集後個人() != null
                     && 編集後本算定通知書共通情報.get編集後個人().get世帯コード() != null) {
                 source.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
@@ -132,9 +134,17 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
                 source.kozaMeigininTitle = 編集後本算定通知書共通情報.get編集後口座().isPresent() ? KOZA_MEIGININ_TITLE : RString.EMPTY;
                 source.kozaMeiginin = 編集後本算定通知書共通情報.get編集後口座().get口座名義人優先();
             }
+            if (編集後本算定通知書共通情報.get更正後() != null
+                    && 編集後本算定通知書共通情報.get更正後().get合計所得金額() != null) {
+                source.gokeiShotokuGaku = new RString(編集後本算定通知書共通情報.get更正後().get合計所得金額().toString());
+            }
         }
 
-        source.notsuRenban = new RString("*" + new RString(renban).padZeroToLeft(INT_6) + "#");
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.notsuRenban = NotsuReportEditorUtil.get納通連番(item.get連番());
+        }
+
+        source.notsuShikibtsuBango = new RString("F-").concat(new RString(item.get連番()).padZeroToLeft(リストサイズ６)).concat(new RString("-1"));
 
         this.納入通知書期情報設定(source);
 
@@ -155,36 +165,33 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
                 source.keisanMeisaishoGenmenGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免額().toString());
             }
             source.keisanMeisaishoNendo = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
-            source.keisanMeisaishoNendo3 = item.get編集後本算定通知書共通情報().get調定年度_年度なし();
+            if (item.get編集後本算定通知書共通情報().get調定年度_年度なし() != null) {
+                source.keisanMeisaishoNendo3 = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get調定年度_年度なし());
+            }
+            if (item.get編集後本算定通知書共通情報().get未到来期の納付済額() != null) {
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get未到来期の納付済額().toString());
+            }
+            if (item.get編集後本算定通知書共通情報().get今後納付すべき額() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額().toString());
+            }
 
             this.更正後情報相関設定(source);
 
-            if (item.get編集後本算定通知書共通情報().get普徴収入情報リスト() != null
-                    && item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(1) != null
-                    && item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(1).get収入額() != null) {
-                source.keisanMeisaishoNofuGaku2
-                        = new RString(item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(1).get収入額().toString());
-            }
-//            if (item.get編集後本算定通知書共通情報().get保険者名() != null) {
-//                source.hokenshaName = new RString(item.get編集後本算定通知書共通情報().get保険者名().toString());
-//            }
-            if (item.get編集後本算定通知書共通情報().get普徴収入情報リスト() != null
-                    && item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(0) != null
-                    && item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(0).get収入額() != null) {
-                source.keisanMeisaishoNofuGaku1 = new RString(item.get編集後本算定通知書共通情報().get普徴収入情報リスト().get(0).get収入額().toString());
-            }
+            this.計算明細書納付額設定(source);
         }
 
         source.keisanMeisaishYen1 = EN;
         if (item.get出力期リスト() != null
                 && item.get出力期リスト().get(0) != null) {
-            source.keisanMeisaishoKomokuTitle1 = new RString("第" + item.get出力期リスト().get(0).get期() + "期");
+            source.keisanMeisaishoKomokuTitle1 = new RString("第").concat(item.get出力期リスト().get(0).get期()).concat(new RString("期"));
         } else {
             source.keisanMeisaishoKomokuTitle1 = new RString("第　期");
         }
 
         source.keisanMeisaishYen2 = EN;
         source.keisanMeisaishoKomokuTitle2 = TSUGIKI_IKOU;
+
+        source.keisanMeisaishoShikibtsuBango = new RString("F-").concat(new RString(item.get連番()).padZeroToLeft(リストサイズ６)).concat(new RString("-2"));
 
         return source;
     }
@@ -206,7 +213,6 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
 
         if (印字位置1の納付書 != null) {
             source.shunoKikanBango1 = 印字位置1の納付書.get収納機関番号表示用();
-            //TODO
             source.nofuBango1 = 印字位置1の納付書.get納付番号();
             source.kakuninBango1 = 印字位置1の納付書.get確認番号();
             source.nofuKubun1 = 印字位置1の納付書.get納付区分();
@@ -218,8 +224,10 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
             source.gokeigaku1 = 印字位置1の納付書.get納付額表記();
             source.nokigenYmd1 = 印字位置1の納付書.get納期限表記();
             source.honzei1 = 印字位置1の納付書.get納付額表記();
-            source.ocr11 = 印字位置1の納付書.getOcr().get(1);
-            source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            if (印字位置1の納付書.getOcr() != null) {
+                source.ocr11 = 印字位置1の納付書.getOcr().get(1);
+                source.ocr21 = 印字位置1の納付書.getOcr().get(2);
+            }
             if (印字位置1の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen1 = 印字位置1の納付書.getコンビニ支払期限().toDateString();
             }
@@ -243,7 +251,7 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
             source.nokigenYmd1 = HOSHI_11;
             source.hakkoYmd1 = HOSHI_11;
             source.honzei1 = HOSHI_13;
-            source.ocr11 = HOSHI_28;
+            source.ocr11 = HOSHI_22;
             source.ocr21 = HOSHI_28;
             source.cvsToriatsukaikigen1 = HOSHI_16;
         }
@@ -254,7 +262,7 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
         source.entaikin1 = RString.EMPTY;
         source.biko11 = RString.EMPTY;
         source.biko21 = RString.EMPTY;
-        source.funyuFukanBango1 = RString.EMPTY;
+        source.funyuFukanBango1 = new RString("F-").concat(new RString(item.get連番()).padZeroToLeft(リストサイズ６)).concat(new RString("-3"));
     }
 
     private void edit納付書2(NonyuTsuchishoCVSMultiRenchoSource source) {
@@ -275,7 +283,6 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
 
         if (印字位置2の納付書 != null) {
             source.shunoKikanBango2 = 印字位置2の納付書.get収納機関番号表示用();
-            //TODO
             source.nofuBango2 = 印字位置2の納付書.get納付番号();
             source.kakuninBango2 = 印字位置2の納付書.get確認番号();
             source.nofuKubun2 = 印字位置2の納付書.get納付区分();
@@ -287,8 +294,10 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
             source.gokeigaku2 = 印字位置2の納付書.get納付額表記();
             source.nokigenYmd2 = 印字位置2の納付書.get納期限表記();
             source.honzei2 = 印字位置2の納付書.get納付額表記();
-            source.ocr12 = 印字位置2の納付書.getOcr().get(1);
-            source.ocr22 = 印字位置2の納付書.getOcr().get(2);
+            if (印字位置2の納付書.getOcr() != null) {
+                source.ocr12 = 印字位置2の納付書.getOcr().get(1);
+                source.ocr22 = 印字位置2の納付書.getOcr().get(2);
+            }
 
             if (印字位置2の納付書.getコンビニ支払期限() != null) {
                 source.cvsToriatsukaikigen2 = 印字位置2の納付書.getコンビニ支払期限().toDateString();
@@ -301,7 +310,7 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.tsuchishoNo2 = item.get納付書共通().get通知書番号().value();
             }
         } else {
             source.ryoshushoNendo2 = HOSHI_4;
@@ -313,7 +322,7 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
             source.nokigenYmd2 = HOSHI_11;
             source.hakkoYmd2 = HOSHI_11;
             source.honzei2 = HOSHI_13;
-            source.ocr12 = HOSHI_28;
+            source.ocr12 = HOSHI_22;
             source.ocr22 = HOSHI_28;
             source.cvsToriatsukaikigen2 = HOSHI_16;
         }
@@ -324,7 +333,7 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
         source.entaikin2 = RString.EMPTY;
         source.biko12 = RString.EMPTY;
         source.biko22 = RString.EMPTY;
-        source.funyuFukanBango2 = RString.EMPTY;
+        source.funyuFukanBango2 = new RString("F-").concat(new RString(item.get連番()).padZeroToLeft(リストサイズ６)).concat(new RString("-4"));
     }
 
     private void edit雛形部品(NonyuTsuchishoCVSMultiRenchoSource source) {
@@ -477,7 +486,9 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
 
         if (item.get編集後本算定通知書共通情報().get更正後() != null) {
 
-            source.keisanMeisaishoShotokuDankai = item.get編集後本算定通知書共通情報().get更正後().get保険料段階();
+            if (item.get編集後本算定通知書共通情報().get更正後().get保険料段階() != null) {
+                source.keisanMeisaishoShotokuDankai = RStringUtil.convert半角to全角(item.get編集後本算定通知書共通情報().get更正後().get保険料段階());
+            }
             if (item.get編集後本算定通知書共通情報().get更正後().get保険料率() != null) {
                 source.keisanMeisaishoHokenryoRitsu = new RString(item.get編集後本算定通知書共通情報().get更正後().get保険料率().toString());
             }
@@ -489,9 +500,35 @@ public class NonyuTsuchishoCVSMultiRenchoCoverEditor implements INonyuTsuchishoC
                 source.kaisanMeisaishoFuchoGokeiGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get普通徴収額合計().toString());
             }
             source.keisanMeisaishoKikanShuryo = item.get編集後本算定通知書共通情報().get更正後().get期間_至();
-            source.keisanMeisaishoTsukisu = new RString(item.get編集後本算定通知書共通情報().get更正後().get月数());
+            source.keisanMeisaishoTsukisu = item.get編集後本算定通知書共通情報().get更正後().get月数_ケ月();
+            if (item.get編集後本算定通知書共通情報().get更正後().get確定保険料_年額() != null) {
+                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get確定保険料_年額().toString());
+            }
             if (item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額() != null) {
-                source.keisanMeisaishoHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額().toString());
+                source.keisanMeisaishoCalHokenryoGaku = new RString(item.get編集後本算定通知書共通情報().get更正後().get減免前保険料_年額().toString());
+            }
+        }
+    }
+
+    private void 計算明細書納付額設定(NonyuTsuchishoCVSMultiRenchoSource source) {
+
+        if (item.get編集後本算定通知書共通情報().get更正後() != null
+                && item.get編集後本算定通知書共通情報().get更正後().get普徴期別金額リスト() != null) {
+            List<UniversalPhase> 普徴期別金額リスト = item.get編集後本算定通知書共通情報().get更正後().get普徴期別金額リスト();
+
+            for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
+                if (item.get出力期リスト() != null
+                        && item.get出力期リスト().get(0) != null
+                        && item.get出力期リスト().get(0).get期AsInt() == 普徴期別金額.get期()) {
+                    source.keisanMeisaishoNofuGaku1
+                            = new RString(普徴期別金額.get金額().toString());
+                }
+                if (item.get出力期リスト() != null
+                        && item.get出力期リスト().get(0) != null
+                        && item.get出力期リスト().get(0).get期AsInt() + 1 == 普徴期別金額.get期()) {
+                    source.keisanMeisaishoNofuGaku2
+                            = new RString(普徴期別金額.get金額().toString());
+                }
             }
         }
     }

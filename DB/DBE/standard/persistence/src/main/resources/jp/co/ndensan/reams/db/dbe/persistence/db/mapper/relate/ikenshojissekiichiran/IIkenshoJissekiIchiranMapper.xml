@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 主治医意見書作成実績集計表のデータ取得のMapperXMLです。 -->
+<!-- @reamsid_L DBE-1690-020 dongyabin -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranMapper">
+
+    
+    <select id="get主治医意見書作成実績集計表"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojissekiichiran.IkenshoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true">
+        SELECT
+          T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
+          , T5602."shujiiIryoKikanCode" AS 医療機関コード
+          , T5911."iryoKikanMeisho" AS 医療機関名称
+          , T5912."shujiiName" AS 主治医氏名
+          , T5101."hihokenshaNo" AS 被保険者番号
+          , T5101."hihokenshaName" AS 申請者氏名
+          , T5602."ikenshoKinyuYMD" AS 記入日
+          , T5602."ikenshoJuryoYMD" AS 入手日
+          , T5302."zaitakuShisetsuKubun" AS 在宅_施設区分
+          , T5302."ikenshoIraiKubun" AS 主治医意見書依頼区分
+          , T5602."ishiKubunCode" AS 医師区分コード
+          , T5602."shinseishoKanriNo" AS 申請書管理番号
+          , T5602."ikenshoIraiRirekiNo" AS 主治医意見書作成依頼履歴番号
+          , T5602."shujiiCode" AS 主治医コード
+        FROM
+          rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS T5602 
+          INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+            ON T5101."shinseishoKanriNo" = T5602."shinseishoKanriNo" 
+          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
+            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
+          INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
+            ON T5911."shichosonCode" = T7051."shichosonCode" 
+            AND T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode" 
+          INNER JOIN rgdb."DbT5912ShujiiJoho" AS T5912 
+            ON T5912."shichosonCode" = T7051."shichosonCode" 
+            AND T5912."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode" 
+            AND T5912."shujiiCode" = T5602."shujiiCode" 
+          INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302 
+            ON T5602."shinseishoKanriNo" = T5302."shinseishoKanriNo" 
+            AND T5602."ikenshoIraiRirekiNo" = T5302."ikenshoIraiRirekiNo" 
+        WHERE
+          1 = 1 
+        <if test="意見書記入日FROMFlag">
+          AND #{意見書記入日FROM} <![CDATA[<=]]> T5602."ikenshoKinyuYMD" 
+        </if>
+        <if test="意見書記入日TOFlag">
+            AND T5602."ikenshoKinyuYMD" <![CDATA[<=]]> #{意見書記入日TO}
+        </if>
+        <if test="保険者Flag">
+            AND T7051."shichosonCode" = #{保険者}
+        </if>
+        <if test="batchFlag">
+            AND
+            <foreach collection="keyJoho" item="item" open="("  
+            separator="OR"  
+            close=")">
+                (
+                T5602."shujiiIryoKikanCode" = #{item.shujiiIryoKikanCode}
+                AND T5602."shujiiCode" = #{item.shujiiCode}
+                AND T5602."shinseishoKanriNo" = #{item.shinseishoKanriNo}
+                AND T5602."ikenshoIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
+                )
+            </foreach>
+        </if>
+        <if test="gamenFlag">
+            ORDER BY T5602."shujiiIryoKikanCode", T5602."shujiiCode", T5602."shinseishoKanriNo", T5602."ikenshoIraiRirekiNo"
+            <if test="件数Flag">
+                LIMIT #{件数}
+            </if>
+        </if>
+    </select>
+    
+</mapper>

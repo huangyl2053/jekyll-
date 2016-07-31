@@ -80,6 +80,6 @@ public class KoikiShikakuJukiValidator {
      */
     public Map<RString, DbzErrorMessages> validate(IKojin 個人情報, HihokenshaDaicho 資格の情報1, HihokenshaDaicho 資格の情報2) {
         ShikakuJukiValidator validator = ShikakuJukiValidator.createInstance();
-        return validator.createValidationMessages(checkFor資格不整合(個人情報, 資格の情報1, 資格の情報2), 個人情報);
+        return validator.createValidationMessages(checkFor資格不整合(個人情報, 資格の情報1, 資格の情報2), 個人情報, 資格の情報1.get資格喪失年月日());
     }
 }

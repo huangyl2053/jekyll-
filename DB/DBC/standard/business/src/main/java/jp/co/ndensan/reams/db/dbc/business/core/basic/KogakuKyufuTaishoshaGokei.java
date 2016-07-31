@@ -10,7 +10,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費給付対象者合計を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-040 quxiaodong
  */
 public class KogakuKyufuTaishoshaGokei
         extends ModelBase<KogakuKyufuTaishoshaGokeiIdentifier, DbT3055KogakuKyufuTaishoshaGokeiEntity, KogakuKyufuTaishoshaGokei>
@@ -245,13 +246,32 @@ public class KogakuKyufuTaishoshaGokei
     @Override
     public KogakuKyufuTaishoshaGokei deleted() {
         DbT3055KogakuKyufuTaishoshaGokeiEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new KogakuKyufuTaishoshaGokei(deletedEntity, id);
+    }
+
+    /**
+     * 修正KogakuKyufuTaishoshaGokei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuKyufuTaishoshaGokei modified() {
+        DbT3055KogakuKyufuTaishoshaGokeiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new KogakuKyufuTaishoshaGokei(modifiedEntity, id);
+    }
+
+    /**
+     * add KogakuKyufuTaishoshaGokei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuKyufuTaishoshaGokei added() {
+        DbT3055KogakuKyufuTaishoshaGokeiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuKyufuTaishoshaGokei(addedEntity, id);
     }
 
     /**

@@ -16,9 +16,6 @@ public enum DBE6070001StateName implements IStateEnumerations {
 
     NoChange(""),
     検索("検索"),
-    審査会委員一覧("審査会委員一覧"),
-    審査会実績一覧("審査会実績一覧"),
-    審査会実績明細("審査会実績明細"),
     完了("完了");
 
     private final RString name;

@@ -635,7 +635,7 @@ public class ShikibetsuNoKanriBuilder {
      */
     public ShikibetsuNoKanriBuilder set特定入所者設定区分(RString 特定入所者設定区分) {
         requireNonNull(特定入所者設定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特定入所者設定区分"));
-        entity.setShoteiShikkanSetteiKubun(特定入所者設定区分);
+        entity.setTokuteinyushoshaSetteiKubun(特定入所者設定区分);
         return this;
     }
 
@@ -671,7 +671,7 @@ public class ShikibetsuNoKanriBuilder {
      */
     public ShikibetsuNoKanriBuilder set特定疾患施設療養設定区分(RString 特定疾患施設療養設定区分) {
         requireNonNull(特定疾患施設療養設定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特定疾患施設療養設定区分"));
-        entity.setShoteiShikkanSetteiKubun(特定疾患施設療養設定区分);
+        entity.setTokuteiShikkanSetteiKubun(特定疾患施設療養設定区分);
         return this;
     }
 

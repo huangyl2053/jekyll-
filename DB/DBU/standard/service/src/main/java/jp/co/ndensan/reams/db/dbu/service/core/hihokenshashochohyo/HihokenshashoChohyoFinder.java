@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.HonninJoh
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashochohyo.SofusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IHihokenshashoChohyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -75,6 +75,7 @@ public class HihokenshashoChohyoFinder {
     private static final RString 居宅支援事業者適用切れ_表示有無 = new RString("居宅支援事業者適用切れ_表示有無");
     private static final RString 居宅支援事業者履歴_表示方法 = new RString("居宅支援事業者履歴_表示方法");
     private static final RString 該当データはありません = new RString("該当データはありません");
+    private static final RString 事業対象者 = new RString("事業対象者");
     private static final ReportId 帳票分類ID = new ReportId("DBA100001_Hihokenshasho");
     private static final RString 全角スペース = new RString("　");
     private static final RString 半角スペース = new RString(" ");
@@ -182,7 +183,7 @@ public class HihokenshashoChohyoFinder {
             List<HonninJohoEntity> honni = get本人情報(hihoken.get(i).get識別コード());
             if (郵便番号表示有.equals(DbBusinessConfig.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無,
                     RDate.getNowDate(), SubGyomuCode.DBA介護資格))) {
-                business.set郵便番号(honni.get(0).getYubinNo().getEditedYubinNo());
+                business.set郵便番号(honni.get(0).getYubinNo() == null ? RString.EMPTY : honni.get(0).getYubinNo().getEditedYubinNo());
             }
             RString gyoseiku = honni.get(0).getGyoseikuName();
             if (!gyoseiku.isNullOrEmpty()) {
@@ -217,25 +218,19 @@ public class HihokenshashoChohyoFinder {
             }
             business.set氏名(honni.get(0).getMeisho());
             set生年月日(business, honni.get(0));
-            business.set交付年月日(new RString(hihoken.get(i).get交付日().toString()));
-            business.set保険者NO1(hihoken.get(i).get保険者().substring(桁数_0, 桁数_1));
-            business.set保険者NO2(hihoken.get(i).get保険者().substring(桁数_1, 桁数_2));
-            business.set保険者NO3(hihoken.get(i).get保険者().substring(桁数_2, 桁数_3));
-            business.set保険者NO4(hihoken.get(i).get保険者().substring(桁数_3, 桁数_4));
-            business.set保険者NO5(hihoken.get(i).get保険者().substring(桁数_4, 桁数_5));
-            business.set保険者NO6(hihoken.get(i).get保険者().substring(桁数_5, 桁数_6));
-            business.set要介護認定区分(hihoken.get(i).get要介護認定状態区分コード());
-            business.set認定年月日(hihoken.get(i).get認定年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.set認定有効期間開始年月日(hihoken.get(i).get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.set認定有効期間終了年月日(hihoken.get(i).get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.set訪問期間開始年月日(hihoken.get(i).get支給限度有効開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.set訪問期間終了年月日(hihoken.get(i).get支給限度有効終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            business.setサービス(new RString(hihoken.get(i).get支給限度単位数().toString()));
+            business.set交付年月日(hihoken.get(i).get交付日() == null ? RString.EMPTY : new RString(hihoken.get(i).get交付日().toString()));
+            if (!RString.isNullOrEmpty(hihoken.get(i).get保険者())) {
+                RString 保険者 = hihoken.get(i).get保険者();
+                if (hihoken.get(i).get保険者().length() < 桁数_6) {
+                    保険者 = hihoken.get(i).get保険者().padRight(RString.HALF_SPACE, 桁数_6);
+                }
+                business.set保険者NO1(保険者.substring(桁数_0, 桁数_1));
+                business.set保険者NO2(保険者.substring(桁数_1, 桁数_2));
+                business.set保険者NO3(保険者.substring(桁数_2, 桁数_3));
+                business.set保険者NO4(保険者.substring(桁数_3, 桁数_4));
+                business.set保険者NO5(保険者.substring(桁数_4, 桁数_5));
+                business.set保険者NO6(保険者.substring(桁数_5, 桁数_6));
+            }
             if (hihoken.get(i).get指定サービス種類() != null && !hihoken.get(i).get指定サービス種類().isEmpty()) {
                 setサービス種類(business, hihoken.get(i));
             }
@@ -243,12 +238,36 @@ public class HihokenshashoChohyoFinder {
             set帳票制御(business, hihoken.get(i));
             business.set連番(new RString(String.valueOf(i + 1)).padLeft(文字_0, 桁数_6));
             set入退所チェック(business, hihoken.get(i));
+            set期間年月日(business, hihoken.get(i));
             businessList.add(business);
         }
         return SearchResult.of(businessList, businessList.size(), true);
     }
 
-    // TODO QA1088
+    private void set期間年月日(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter hihoken) {
+        if (文字_1.equals(hihoken.get対象区分())) {
+            business.set要介護認定区分(hihoken.get要介護認定状態区分コード());
+        } else {
+            business.set要介護認定区分(事業対象者);
+        }
+        business.set認定年月日(hihoken.get認定年月日() == null ? RString.EMPTY : hihoken.get認定年月日()
+                .wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString());
+        business.set認定有効期間開始年月日(hihoken.get認定有効期間開始年月日() == null ? RString.EMPTY : hihoken
+                .get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        business.set認定有効期間終了年月日(hihoken.get認定有効期間終了年月日() == null ? RString.EMPTY : hihoken
+                .get認定有効期間終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        business.set訪問期間開始年月日(hihoken.get支給限度有効開始年月日() == null ? RString.EMPTY : hihoken
+                .get支給限度有効開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        business.set訪問期間終了年月日(hihoken.get支給限度有効終了年月日() == null ? RString.EMPTY : hihoken
+                .get支給限度有効終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        business.setサービス(hihoken.get支給限度単位数() == null ? RString.EMPTY : new RString(hihoken.get支給限度単位数().toString()));
+    }
+
     private void set住所(HihokenshashoChoBusiness business, SofusakiJohoEntity sofusa, HonninJohoEntity honni) {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         association.get都道府県名();
@@ -330,28 +349,55 @@ public class HihokenshashoChohyoFinder {
         }
     }
 
+    private RString get入所施設種類(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get入退所年月日().size()) {
+            return parameter.get入退所年月日().get(連番).get入所施設種類();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get入所年月日(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get入退所年月日().size() && parameter.get入退所年月日().get(連番).get入所年月日() != null
+                && !parameter.get入退所年月日().get(連番).get入所年月日().isEmpty()) {
+            return parameter.get入退所年月日().get(連番).get入所年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get退所年月日(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get入退所年月日().size() && parameter.get入退所年月日().get(連番).get退所年月日() != null
+                && !parameter.get入退所年月日().get(連番).get退所年月日().isEmpty()) {
+            return parameter.get入退所年月日().get(連番).get退所年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
     private void set入退所チェック(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter parameter) {
-        business.set施設種類11(parameter.get入退所年月日().get(桁数_0).get入所施設種類());
-        business.set施設種類2(parameter.get入退所年月日().get(桁数_1).get入所施設種類());
-        business.set入所年月日1(parameter.get入退所年月日().get(桁数_0).get入所年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set退院年月日1(parameter.get入退所年月日().get(桁数_0).get退所年月日() == null ? null : parameter.get入退所年月日()
-                .get(桁数_0).get退所年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set入所年月日2(parameter.get入退所年月日().get(桁数_1).get入所年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set退院年月日2(parameter.get入退所年月日().get(桁数_1).get退所年月日() == null ? null : parameter.get入退所年月日()
-                .get(桁数_1).get退所年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        if (文字_11.equals(parameter.get入退所年月日().get(桁数_0).get入所施設種類())) {
+        business.set施設種類11(get入所施設種類(parameter, 桁数_0));
+        business.set施設種類2(get入所施設種類(parameter, 桁数_1));
+        business.set入所年月日2(get入所年月日(parameter, 桁数_1));
+        business.set退院年月日2(get退所年月日(parameter, 桁数_1));
+        if (文字_11.equals(get入所施設種類(parameter, 桁数_1))) {
+            business.set施設名2(dbt7060Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_1).get入所施設コード()))
+                    .get(桁数_0).getJigyoshaName().getColumnValue());
+        }
+        if (文字_12.equals(get入所施設種類(parameter, 桁数_1))) {
+            business.set施設名2(dbt1005Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_0).get入所施設コード()))
+                    .get(桁数_0).getJigyoshaMeisho().getColumnValue());
+        }
+        business.set入所年月日1(get入所年月日(parameter, 桁数_0));
+        business.set退院年月日1(get退所年月日(parameter, 桁数_0));
+        if (文字_11.equals(get入所施設種類(parameter, 桁数_0))) {
             business.set施設名1(dbt7060Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_0).get入所施設コード()))
                     .get(桁数_0).getJigyoshaName().getColumnValue());
         }
-        if (文字_12.equals(parameter.get入退所年月日().get(桁数_0).get入所施設種類())) {
+        if (文字_12.equals(get入所施設種類(parameter, 桁数_0))) {
             business.set施設名1(dbt1005Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_0).get入所施設コード()))
                     .get(桁数_0).getJigyoshaMeisho().getColumnValue());
         }
-        if (文字_11.equals(parameter.get入退所年月日().get(桁数_0).get入所施設種類())
+        if (文字_11.equals(get入所施設種類(parameter, 桁数_0))
                 && (文字_1.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3))
                 || 文字_3.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3))
                 || 文字_4.equals(parameter.get入退所年月日().get(桁数_0).get入所施設コード().substring(桁数_2, 桁数_3))
@@ -360,17 +406,9 @@ public class HihokenshashoChohyoFinder {
             business.set退所チェック1(星アイコン);
         } else {
             business.set入院チェック1(星アイコン);
-            business.set退所チェック1(星アイコン);
+            business.set退院チェック1(星アイコン);
         }
-        if (文字_11.equals(parameter.get入退所年月日().get(桁数_1).get入所施設種類())) {
-            business.set施設名2(dbt7060Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_1).get入所施設コード()))
-                    .get(桁数_0).getJigyoshaName().getColumnValue());
-        }
-        if (文字_12.equals(parameter.get入退所年月日().get(桁数_1).get入所施設種類())) {
-            business.set施設名2(dbt1005Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_0).get入所施設コード()))
-                    .get(桁数_0).getJigyoshaMeisho().getColumnValue());
-        }
-        if (文字_11.equals(parameter.get入退所年月日().get(桁数_1).get入所施設種類())
+        if (文字_11.equals(get入所施設種類(parameter, 桁数_1))
                 && (文字_1.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3))
                 || 文字_3.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3))
                 || 文字_4.equals(parameter.get入退所年月日().get(桁数_1).get入所施設コード().substring(桁数_2, 桁数_3))
@@ -379,8 +417,15 @@ public class HihokenshashoChohyoFinder {
             business.set退所チェック2(星アイコン);
         } else {
             business.set入院チェック2(星アイコン);
-            business.set退所チェック2(星アイコン);
+            business.set退院チェック2(星アイコン);
         }
+    }
+
+    private FlexibleDate get適用終了日(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get届出年月日().size() && parameter.get届出年月日().get(連番).get適用終了日() != null) {
+            return parameter.get届出年月日().get(連番).get適用終了日();
+        }
+        return FlexibleDate.MIN;
     }
 
     private void set帳票制御(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter parameter) {
@@ -390,8 +435,8 @@ public class HihokenshashoChohyoFinder {
         ChohyoSeigyoHanyo chohyoSeigyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 居宅支援事業者適用切れ_表示有無);
         if (文字_1.equals(chohyoSeigyoHanyo.get設定値()) && 文字_0.equals(chohyoSeigyo.get設定値())) {
-            if (parameter.get届出年月日().get(桁数_0).get適用終了日().isBefore(parameter.get交付日())
-                    || parameter.get届出年月日().get(桁数_0).get適用終了日() == null) {
+            if (parameter.get届出年月日().get(桁数_0).get適用終了日() == null
+                    || get適用終了日(parameter, 桁数_0).isBefore(getNull(parameter.get交付日()))) {
                 business.set居宅介護事業者1(RString.EMPTY);
                 business.set届出年月日1(RString.EMPTY);
                 business.set居宅介護事業者長1(RString.EMPTY);
@@ -422,28 +467,51 @@ public class HihokenshashoChohyoFinder {
         }
     }
 
+    private RString get計画事業者番号(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get届出年月日().size() && !RString.isNullOrEmpty(parameter.get届出年月日().get(連番).get計画事業者番号())) {
+            return parameter.get届出年月日().get(連番).get計画事業者番号();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get届出年月日(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get届出年月日().size() && parameter.get届出年月日().get(連番).get届出年月日() != null) {
+            return parameter.get届出年月日().get(連番).get届出年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private void set計画事業者番号(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter parameter) {
+        if (!RString.isNullOrEmpty(get計画事業者番号(parameter, 桁数_0))) {
+            if (parameter.get届出年月日().get(桁数_0).get計画事業者番号().length() <= 文字数_40) {
+                business.set居宅介護事業者1(parameter.get届出年月日().get(桁数_0).get計画事業者番号());
+            } else {
+                business.set居宅介護事業者長1(parameter.get届出年月日().get(桁数_0).get計画事業者番号());
+            }
+        }
+        if (!RString.isNullOrEmpty(get計画事業者番号(parameter, 桁数_1))) {
+            if (parameter.get届出年月日().get(桁数_1).get計画事業者番号().length() <= 文字数_40) {
+                business.set居宅介護事業者2(parameter.get届出年月日().get(桁数_1).get計画事業者番号());
+            } else {
+                business.set居宅介護事業者長2(parameter.get届出年月日().get(桁数_1).get計画事業者番号());
+            }
+        }
+        if (!RString.isNullOrEmpty(get計画事業者番号(parameter, 桁数_2))) {
+            if (parameter.get届出年月日().get(桁数_2).get計画事業者番号().length() <= 文字数_40) {
+                business.set居宅介護事業者3(parameter.get届出年月日().get(桁数_2).get計画事業者番号());
+            } else {
+                business.set居宅介護事業者長3(parameter.get届出年月日().get(桁数_2).get計画事業者番号());
+            }
+        }
+
+    }
+
     private void set入退所(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter parameter) {
-        if (parameter.get届出年月日().get(桁数_0).get計画事業者番号().length() <= 文字数_40) {
-            business.set居宅介護事業者1(parameter.get届出年月日().get(桁数_0).get計画事業者番号());
-        } else {
-            business.set居宅介護事業者長1(parameter.get届出年月日().get(桁数_0).get計画事業者番号());
-        }
-        if (parameter.get届出年月日().get(桁数_0).get計画事業者番号().length() <= 文字数_40) {
-            business.set居宅介護事業者2(parameter.get届出年月日().get(桁数_1).get計画事業者番号());
-        } else {
-            business.set居宅介護事業者長2(parameter.get届出年月日().get(桁数_1).get計画事業者番号());
-        }
-        if (parameter.get届出年月日().get(桁数_0).get計画事業者番号().length() <= 文字数_40) {
-            business.set居宅介護事業者3(parameter.get届出年月日().get(桁数_2).get計画事業者番号());
-        } else {
-            business.set居宅介護事業者長3(parameter.get届出年月日().get(桁数_2).get計画事業者番号());
-        }
-        business.set届出年月日1(parameter.get届出年月日().get(桁数_0).get届出年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set届出年月日2(parameter.get届出年月日().get(桁数_1).get届出年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set届出年月日3(parameter.get届出年月日().get(桁数_2).get届出年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        set計画事業者番号(business, parameter);
+        business.set届出年月日1(get届出年月日(parameter, 桁数_0));
+        business.set届出年月日2(get届出年月日(parameter, 桁数_1));
+        business.set届出年月日3(get届出年月日(parameter, 桁数_2));
         business.set性障害1(枚目3の);
         business.set性障害2(下段参照);
         business.set構成性別1(戸籍上の);
@@ -454,8 +522,9 @@ public class HihokenshashoChohyoFinder {
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 要介護認定期限切れ_表示有無);
-        if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && (parameter.get認定有効期間終了年月日()
-                .isBefore(new RDate(parameter.get交付日().toString())) || parameter.get認定有効期間終了年月日() == null)) {
+        if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && (parameter.get認定有効期間終了年月日() == null
+                || parameter.get認定有効期間終了年月日().isBefore(parameter.get交付日() == null ? RDate.MIN
+                        : new RDate(parameter.get交付日().toString())))) {
             business.set要介護認定区分(RString.EMPTY);
             business.set認定年月日(RString.EMPTY);
             business.set認定有効期間開始年月日(RString.EMPTY);
@@ -524,10 +593,11 @@ public class HihokenshashoChohyoFinder {
         }
         ChohyoSeigyoHanyo chohyoSeigyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                 FlexibleDate.getNowDate().getYear(), 居宅支援事業者適用切れ_表示有無);
-        if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && parameter.get交付日().isBeforeOrEquals(new FlexibleDate(parameter
-                .get認定有効期間終了年月日().toDateString())) && 文字_0.equals(chohyoSeigyo.get設定値())) {
-            if (parameter.get届出年月日().get(桁数_0).get適用終了日().isBefore(parameter.get交付日())
-                    || parameter.get届出年月日().get(桁数_0).get適用終了日() == null) {
+        if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && getNull(parameter.get交付日()).isBeforeOrEquals(parameter
+                .get認定有効期間終了年月日() == null ? FlexibleDate.MIN : new FlexibleDate(parameter.get認定有効期間終了年月日().toDateString()))
+                && 文字_0.equals(chohyoSeigyo.get設定値())) {
+            if (parameter.get届出年月日().size() < 1 || parameter.get届出年月日().get(桁数_0).get適用終了日() == null
+                    || get適用終了日(parameter, 桁数_0).isBefore(getNull(parameter.get交付日()))) {
                 business.set居宅介護事業者1(RString.EMPTY);
                 business.set届出年月日1(RString.EMPTY);
                 business.set居宅介護事業者長1(RString.EMPTY);
@@ -553,10 +623,18 @@ public class HihokenshashoChohyoFinder {
                 chohyoHensu(business);
             }
         }
-        if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && parameter.get交付日().isBeforeOrEquals(new FlexibleDate(parameter
-                .get認定有効期間終了年月日().toDateString())) && 文字_1.equals(chohyoSeigyo.get設定値())) {
+        if (文字_0.equals(chohyoSeigyoHanyo.get設定値()) && (getNull(parameter.get交付日())
+                .isBeforeOrEquals(parameter.get認定有効期間終了年月日() == null ? FlexibleDate.MIN
+                        : new FlexibleDate(parameter.get認定有効期間終了年月日().toDateString()))) && 文字_1.equals(chohyoSeigyo.get設定値())) {
             chohyoHensu(business);
         }
+    }
+
+    private FlexibleDate getNull(FlexibleDate parameter) {
+        if (parameter != null && !parameter.isEmpty()) {
+            return parameter;
+        }
+        return FlexibleDate.MIN;
     }
 
     private void chohyoHensu(HihokenshashoChoBusiness business) {
@@ -627,72 +705,109 @@ public class HihokenshashoChohyoFinder {
         }
     }
 
+    private RString get指定サービス種類(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get指定サービス種類().size()) {
+            return parameter.get指定サービス種類().get(連番).get指定サービス種類();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getサービス種類限度額(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get指定サービス種類().size()) {
+            return parameter.get指定サービス種類().get(連番).getサービス種類限度額();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get給付制限内容(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get適用年月日().size() && !RString.isNullOrEmpty(parameter.get適用年月日().get(連番).get給付制限内容())) {
+            return parameter.get適用年月日().get(連番).get給付制限内容();
+        }
+        return RString.EMPTY;
+    }
+
     private void setサービス種類(HihokenshashoChoBusiness business, HihokenshashoChohyoParameter parameter) {
-        business.setサービス種類1(parameter.get指定サービス種類().get(桁数_0).get指定サービス種類());
-        business.setサービス種類2(parameter.get指定サービス種類().get(桁数_1).get指定サービス種類());
-        business.setサービス種類3(parameter.get指定サービス種類().get(桁数_2).get指定サービス種類());
-        business.setサービス種類4(parameter.get指定サービス種類().get(桁数_3).get指定サービス種類());
-        business.setサービス種類5(parameter.get指定サービス種類().get(桁数_4).get指定サービス種類());
-        business.setサービス種類6(parameter.get指定サービス種類().get(桁数_5).get指定サービス種類());
-        business.setサービス種類1つ目の限度額(parameter.get指定サービス種類().get(桁数_0).getサービス種類限度額());
-        business.setサービス種類2つ目の限度額(parameter.get指定サービス種類().get(桁数_1).getサービス種類限度額());
-        business.setサービス種類3つ目の限度額(parameter.get指定サービス種類().get(桁数_2).getサービス種類限度額());
-        business.setサービス種類4つ目の限度額(parameter.get指定サービス種類().get(桁数_3).getサービス種類限度額());
-        business.setサービス種類5つ目の限度額(parameter.get指定サービス種類().get(桁数_4).getサービス種類限度額());
-        business.setサービス種類6つ目の限度額(parameter.get指定サービス種類().get(桁数_5).getサービス種類限度額());
-        if (!RString.isNullOrEmpty(parameter.get指定サービス種類().get(桁数_0).getサービス種類限度額())) {
+        business.setサービス種類1(get指定サービス種類(parameter, 桁数_0));
+        business.setサービス種類2(get指定サービス種類(parameter, 桁数_1));
+        business.setサービス種類3(get指定サービス種類(parameter, 桁数_2));
+        business.setサービス種類4(get指定サービス種類(parameter, 桁数_3));
+        business.setサービス種類5(get指定サービス種類(parameter, 桁数_4));
+        business.setサービス種類6(get指定サービス種類(parameter, 桁数_5));
+        business.setサービス種類1つ目の限度額(getサービス種類限度額(parameter, 桁数_0));
+        business.setサービス種類2つ目の限度額(getサービス種類限度額(parameter, 桁数_1));
+        business.setサービス種類3つ目の限度額(getサービス種類限度額(parameter, 桁数_2));
+        business.setサービス種類4つ目の限度額(getサービス種類限度額(parameter, 桁数_3));
+        business.setサービス種類5つ目の限度額(getサービス種類限度額(parameter, 桁数_4));
+        business.setサービス種類6つ目の限度額(getサービス種類限度額(parameter, 桁数_5));
+        if (!RString.isNullOrEmpty(getサービス種類限度額(parameter, 桁数_0))) {
             business.set点数1(単位);
         }
-        if (!RString.isNullOrEmpty(parameter.get指定サービス種類().get(桁数_1).getサービス種類限度額())) {
+        if (!RString.isNullOrEmpty(getサービス種類限度額(parameter, 桁数_1))) {
             business.set点数2(単位);
         }
-        if (!RString.isNullOrEmpty(parameter.get指定サービス種類().get(桁数_2).getサービス種類限度額())) {
+        if (!RString.isNullOrEmpty(getサービス種類限度額(parameter, 桁数_2))) {
             business.set点数3(単位);
         }
-        if (!RString.isNullOrEmpty(parameter.get指定サービス種類().get(桁数_3).getサービス種類限度額())) {
+        if (!RString.isNullOrEmpty(getサービス種類限度額(parameter, 桁数_3))) {
             business.set点数4(単位);
         }
-        if (!RString.isNullOrEmpty(parameter.get指定サービス種類().get(桁数_4).getサービス種類限度額())) {
+        if (!RString.isNullOrEmpty(getサービス種類限度額(parameter, 桁数_4))) {
             business.set点数5(単位);
         }
-        if (!RString.isNullOrEmpty(parameter.get指定サービス種類().get(桁数_5).getサービス種類限度額())) {
+        if (!RString.isNullOrEmpty(getサービス種類限度額(parameter, 桁数_5))) {
             business.set点数6(単位);
         }
         business.set認定審査会意見等(parameter.get介護認定審査会意見());
         business.set再交付2(RString.EMPTY);
-        if (parameter.get適用年月日().get(桁数_0).get給付制限内容().length() <= 文字数_8) {
-            business.set給付制限1(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_0, 桁数_4));
-            business.set給付制限2(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_4));
-        } else {
-            business.set給付制限長1(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_0, 桁数_6));
-            business.set給付制限長2(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_6));
+        if (!RString.isNullOrEmpty(get給付制限内容(parameter, 桁数_0))) {
+            if (parameter.get適用年月日().get(桁数_0).get給付制限内容().length() <= 文字数_8) {
+                business.set給付制限1(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_0, 桁数_4));
+                business.set給付制限2(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_4));
+            } else {
+                business.set給付制限長1(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_0, 桁数_6));
+                business.set給付制限長2(parameter.get適用年月日().get(桁数_0).get給付制限内容().substring(桁数_6));
+            }
         }
-        if (parameter.get適用年月日().get(桁数_1).get給付制限内容().length() <= 文字数_8) {
-            business.set給付制限3(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_0, 桁数_4));
-            business.set給付制限4(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_4));
-        } else {
-            business.set給付制限長3(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_0, 桁数_6));
-            business.set給付制限長4(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_6));
+        if (!RString.isNullOrEmpty(get給付制限内容(parameter, 桁数_1))) {
+            if (parameter.get適用年月日().get(桁数_1).get給付制限内容().length() <= 文字数_8) {
+                business.set給付制限3(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_0, 桁数_4));
+                business.set給付制限4(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_4));
+            } else {
+                business.set給付制限長3(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_0, 桁数_6));
+                business.set給付制限長4(parameter.get適用年月日().get(桁数_1).get給付制限内容().substring(桁数_6));
+            }
         }
-        if (parameter.get適用年月日().get(桁数_2).get給付制限内容().length() <= 文字数_8) {
-            business.set給付制限5(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_0, 桁数_4));
-            business.set給付制限6(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_4));
-        } else {
-            business.set給付制限長5(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_0, 桁数_6));
-            business.set給付制限長6(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_6));
+        if (!RString.isNullOrEmpty(get給付制限内容(parameter, 桁数_2))) {
+            if (parameter.get適用年月日().get(桁数_2).get給付制限内容().length() <= 文字数_8) {
+                business.set給付制限5(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_0, 桁数_4));
+                business.set給付制限6(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_4));
+            } else {
+                business.set給付制限長5(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_0, 桁数_6));
+                business.set給付制限長6(parameter.get適用年月日().get(桁数_2).get給付制限内容().substring(桁数_6));
+            }
         }
-        business.set給付制限開始年月日1(parameter.get適用年月日().get(桁数_0).get適用開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set給付制限開始年月日2(parameter.get適用年月日().get(桁数_1).get適用開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set給付制限開始年月日2(parameter.get適用年月日().get(桁数_2).get適用開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set給付制限終了年月日1(parameter.get適用年月日().get(桁数_0).get適用終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set給付制限終了年月日2(parameter.get適用年月日().get(桁数_1).get適用終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-        business.set給付制限終了年月日3(parameter.get適用年月日().get(桁数_2).get適用終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        business.set給付制限開始年月日1(get適用開始年月日(parameter, 桁数_0));
+        business.set給付制限開始年月日2(get適用開始年月日(parameter, 桁数_1));
+        business.set給付制限開始年月日3(get適用開始年月日(parameter, 桁数_2));
+        business.set給付制限終了年月日1(get適用終了年月日(parameter, 桁数_0));
+        business.set給付制限終了年月日2(get適用終了年月日(parameter, 桁数_1));
+        business.set給付制限終了年月日3(get適用終了年月日(parameter, 桁数_2));
+    }
+
+    private RString get適用終了年月日(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get適用年月日().size() && parameter.get適用年月日().get(連番).get適用終了年月日() != null) {
+            return parameter.get適用年月日().get(連番).get適用終了年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get適用開始年月日(HihokenshashoChohyoParameter parameter, int 連番) {
+        if (連番 < parameter.get適用年月日().size() && parameter.get適用年月日().get(連番).get適用開始年月日() != null) {
+            return parameter.get適用年月日().get(連番).get適用開始年月日().wareki().eraType(EraType.KANJI_RYAKU)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private void set生年月日(HihokenshashoChoBusiness business, HonninJohoEntity entity) {

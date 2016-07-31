@@ -87,28 +87,23 @@ public final class ShujiiIkenshoSakuseiryoNyuryokuParameter {
             RString shichosonCode,
             RString shujiiName,
             RString kensakuJyouken) {
-        boolean shichosonCodeFlg = true;
-        boolean zenPouIttiFlg = true;
-        boolean kanZenIttiFlg = true;
-        boolean buBunIttiFlg = true;
-        boolean kouHouIttiFlg = true;
-        if (RString.isNullOrEmpty(shichosonCode)) {
-            shichosonCodeFlg = false;
+        boolean shichosonCodeFlg = false;
+        boolean zenPouIttiFlg = false;
+        boolean kanZenIttiFlg = false;
+        boolean buBunIttiFlg = false;
+        boolean kouHouIttiFlg = false;
+        if (!RString.isNullOrEmpty(shichosonCode)) {
+            shichosonCodeFlg = true;
         }
-        if (RString.isNullOrEmpty(shujiiName)) {
-            zenPouIttiFlg = false;
-            kanZenIttiFlg = false;
-            buBunIttiFlg = false;
-            kouHouIttiFlg = false;
-        } else {
-            if (!KENSAKUJYOUKEN_ZENPOU.equals(kensakuJyouken)) {
-                zenPouIttiFlg = false;
-            } else if (!KENSAKUJYOUKEN_KANZEN.equals(kensakuJyouken)) {
-                kanZenIttiFlg = false;
-            } else if (!KENSAKUJYOUKEN_BUBUN.equals(kensakuJyouken)) {
-                buBunIttiFlg = false;
-            } else if (!KENSAKUJYOUKEN_KOUHOU.equals(kensakuJyouken)) {
-                kouHouIttiFlg = false;
+        if (!RString.isNullOrEmpty(shujiiName)) {
+            if (KENSAKUJYOUKEN_ZENPOU.equals(kensakuJyouken)) {
+                zenPouIttiFlg = true;
+            } else if (KENSAKUJYOUKEN_KANZEN.equals(kensakuJyouken)) {
+                kanZenIttiFlg = true;
+            } else if (KENSAKUJYOUKEN_BUBUN.equals(kensakuJyouken)) {
+                buBunIttiFlg = true;
+            } else if (KENSAKUJYOUKEN_KOUHOU.equals(kensakuJyouken)) {
+                kouHouIttiFlg = true;
             }
         }
         return new ShujiiIkenshoSakuseiryoNyuryokuParameter(

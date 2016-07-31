@@ -11,23 +11,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 事務局用一次判定結果票A3Builderクラスです。
  *
- * @reamsid_L DBE-0150-040 lishengli
+ * @reamsid_L DBE-0150-320 lishengli
  */
 class IchijihanteikekkahyoA3Builder implements IIchijihanteikekkahyoA3Builder {
 
     private final IIchijihanteikekkahyoA3Editor headerEditor;
-    private final IIchijihanteikekkahyoA3Editor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param headerEditor {@link IIchijihanteikekkahyoA3Editor}
-     * @param bodyEditor {@link IIchijihanteikekkahyoA3Editor}
      */
-    public IchijihanteikekkahyoA3Builder(IIchijihanteikekkahyoA3Editor headerEditor,
-            IIchijihanteikekkahyoA3Editor bodyEditor) {
+    public IchijihanteikekkahyoA3Builder(IIchijihanteikekkahyoA3Editor headerEditor) {
         this.headerEditor = headerEditor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -37,7 +33,7 @@ class IchijihanteikekkahyoA3Builder implements IIchijihanteikekkahyoA3Builder {
      */
     @Override
     public IchijihanteikekkahyoA3ReportSource build() {
-        return ReportEditorJoiner.from(new IchijihanteikekkahyoA3ReportSource()).join(headerEditor).join(bodyEditor).buildSource();
+        return ReportEditorJoiner.from(new IchijihanteikekkahyoA3ReportSource()).join(headerEditor).buildSource();
     }
 
 }

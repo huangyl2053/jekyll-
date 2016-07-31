@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuChecker;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShotokuRirekiIchiranCompar
 import jp.co.ndensan.reams.db.dbz.business.core.view.KaigoShotokuAlive;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInfomations;
@@ -91,9 +91,7 @@ public class SetaiShotokuIchiranHandler {
      */
     public void initialize(ShikibetsuCode 識別コード, FlexibleDate 世帯基準年月日, FlexibleYear 所得年度, YMDHMS 所得基準年月日時分秒) {
         div.setTxtShikibetsuCode(識別コード.value());
-        if (!所得基準年月日時分秒.isEmpty()) {
-            div.setTxtShotokuKijunYMDHMS(所得基準年月日時分秒.wareki().toDateString());
-        }
+        div.setTxtShotokuKijunYMDHMS(所得基準年月日時分秒.wareki().toDateString());
         div.getTxtSetaiIchiranKazeiNendo().setDomain(所得年度);
         div.getTxtSetaiIchiranKijunYMD().setValue(new RDate(世帯基準年月日.toString()));
         日付関連_所得年度コンフィグによる制御(所得年度);
@@ -147,8 +145,7 @@ public class SetaiShotokuIchiranHandler {
     }
 
     /**
-     * {@link SetaiinShotoku}情報を取得し{@link SetaiShotokuIchiranDiv}にセットします。
-     * <br/>
+     * {@link SetaiinShotoku}情報を取得し{@link SetaiShotokuIchiranDiv}にセットします。 <br/>
      * 世帯員所得情報の取得
      *
      * @param 識別コード 識別コード

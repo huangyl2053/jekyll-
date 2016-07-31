@@ -131,6 +131,24 @@ public class JimuShinsakaiWariateJohoBusiness {
     }
 
     /**
+     * 事務局用と委員用を取得します。
+     *
+     * @return is事務局
+     */
+    public boolean is事務局() {
+        return true;
+    }
+
+    /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+        return new RString("123456789");
+    }
+
+    /**
      * 左の主治医意見書イメージを取得します。
      *
      * @return 左の主治医意見書イメージ
@@ -163,7 +181,7 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ２
      */
     public RString get主治医意見書イメージ２() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
+        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
     }
 
     private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
@@ -193,7 +211,11 @@ public class JimuShinsakaiWariateJohoBusiness {
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }

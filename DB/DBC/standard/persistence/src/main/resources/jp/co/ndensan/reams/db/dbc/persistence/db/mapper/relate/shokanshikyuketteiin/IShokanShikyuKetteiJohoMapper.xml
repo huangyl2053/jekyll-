@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-0980-330 gongliang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IShokanShikyuKetteiJohoMapper">
+     <!--償還払支給判定結果一時テーブルを作成します-->
+    <insert id="create償還払支給判定結果一時TBL">
+        CREATE TEMP TABLE "DbWT3036ShokanHanteiKekka"
+        (
+        "renban" smallint,
+        "shokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "shokisaiHokenshaMei" character varying(40),
+        "sakuseiYmd" rshare."UDD015YMD",
+        "kokuhoRengokaiMei" character varying(40),
+        "tsuchishoNo" character varying(40),
+        "seiriNo" character varying(10),
+        "serviceTeikyoYm" rshare."UDD014YM",
+        "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
+        "jigyoshoMei" character varying(40),
+        "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
+        "serviceShuruiMei" character varying(40),
+        "tanisuKingaku" numeric(13,0),
+        "shiharaiKingaku" numeric(9,0),
+        "zougenTanisu" numeric(9,0),
+        "shiharaiHohoKubunCode" character varying(1),
+        "biko1" character varying(40),
+        "biko2" character varying(40),
+        "koshinDBumu" character varying(1),
+        "wrkJigyoshoNo" rgdb."DbUDD004JigyoshaNo"
+        )
+    </insert>
+    
+    <!--償還払支給判定結果一時テーブルに登録します-->
+    <insert id="do償還払支給判定結果一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaTempEntity">
+        INSERT INTO "DbWT3036ShokanHanteiKekka" 
+        VALUES 
+        (
+        #{連番},
+        #{証記載保険者番号},
+        #{証記載保険者名},
+        #{作成年月日},
+        #{国保連合会名},
+        #{no},
+        #{整理番号},
+        #{サービス提供年月},
+        #{事業所番号},
+        #{事業所名},
+        #{サービス種類コード},
+        #{サービス種類名},
+        #{単位数_金額},
+        #{支払金額},
+        #{増減単位数},
+        #{支払方法区分コード},
+        #{備考1},
+        #{備考2},
+        #{更新DB有無},
+        #{ワーク事業所番号})
+    </insert>
+    
+    <select id="get帳票出力対象データ"
+                resultMap="resultMap_ShokanShikyuKetteiChohyoEntity" parameterType="java.util.Map"  fetchSize="500" resultOrdered="true">
+        SELECT 
+        <include refid="allColumns_DbWT0001Hihokensha" />,
+        <include refid="allColumns_DbWT3036ShokanHanteiKekka" />,
+        ROW_NUMBER() OVER() AS row_number
+        FROM "DbWT3036ShokanHanteiKekka" AS DbWT3036 
+        INNER JOIN "DbWT0001Hihokensha" AS DbWT0001 ON DbWT3036."renban" = DbWT0001."meisaiRenban"
+        ${出力順}
+    </select>
+
+    <resultMap id="resultMap_ShokanShikyuKetteiChohyoEntity"
+                   type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.ShokanShikyuKetteiChohyoEntity"
+                   autoMapping="true">
+            <id property="連番" column="row_number" />
+            <association property="被保険者" resultMap="ResultMap_DbWT0001HihokenshaEntity"/>
+            <association property="判定結果" resultMap="ResultMap_DbWT3036ShokanHanteiKekkaEntity"/>
+    </resultMap>
+
+    <!--テーブルDbWT0001Hihokenshaの項目をDbWT0001HihokenshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbWT0001HihokenshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity" autoMapping="true">
+        <result property="連番" column="dbWT0001_連番"/>
+        <result property="証記載保険者番号" column="dbWT0001_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="dbWT0001_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月末日" column="dbWT0001_サービス提供年月末日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者カナ氏名" column="dbWT0001_被保険者カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="dbWT0001_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="dbWT0001_旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="変換被保険者番号" column="dbWT0001_変換被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="登録被保険者番号" column="dbWT0001_登録被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="dbWT0001_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="管内管外区分" column="dbWT0001_管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="dbWT0001_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="町域コード" column="dbWT0001_町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区コード" column="dbWT0001_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区名" column="dbWT0001_行政区名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="dbWT0001_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="番地" column="dbWT0001_番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="方書" column="dbWT0001_方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名カナ名称" column="dbWT0001_宛名カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="dbWT0001_宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名50音カナ" column="dbWT0001_氏名50音カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="dbWT0001_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得日" column="dbWT0001_資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得事由コード" column="dbWT0001_資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失日" column="dbWT0001_資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由コード" column="dbWT0001_資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯集約番号" column="dbWT0001_世帯集約番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+     <!--テーブルDbWT3036ShokanHanteiKekkaの項目をDbWT3036ShokanHanteiKekkaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbWT3036ShokanHanteiKekkaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT3036ShokanHanteiKekkaTempEntity" autoMapping="true">
+        <result property="連番" column="dbWT3036_連番" />
+        <result property="証記載保険者番号" column="dbWT3036_証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="証記載保険者名" column="dbWT3036_証記載保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="作成年月日" column="dbWT3036_作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="国保連合会名" column="dbWT3036_国保連合会名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="no" column="dbWT3036_No" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="整理番号" column="dbWT3036_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス提供年月" column="dbWT3036_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="事業所番号" column="dbWT3036_事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="事業所名" column="dbWT3036_事業所名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類コード" column="dbWT3036_サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス種類名" column="dbWT3036_サービス種類名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="単位数_金額" column="dbWT3036_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支払金額" column="dbWT3036_支払金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="増減単位数" column="dbWT3036_増減単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支払方法区分コード" column="dbWT3036_支払方法区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考1" column="dbWT3036_備考1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考2" column="dbWT3036_備考2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="更新DB有無" column="dbWT3036_更新DB有無" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ワーク事業所番号" column="dbWT3036_ワーク事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+    </resultMap>
+    
+    <sql id="allColumns_DbWT0001Hihokensha">
+        DbWT0001."meisaiRenban" as dbWT0001_連番,
+        DbWT0001."shoHokenshaNo" as dbWT0001_証記載保険者番号,
+        DbWT0001."orgHihokenshaNo" as dbWT0001_被保険者番号,
+        DbWT0001."serviceTeikyoYmd" as dbWT0001_サービス提供年月末日,
+        DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者カナ氏名,
+        DbWT0001."orgHihokenshaKanaShimei" as dbWT0001_被保険者氏名,
+        DbWT0001."oldShichosonCode" as dbWT0001_旧市町村コード,
+        DbWT0001."henkanHihokenshaNo" as dbWT0001_変換被保険者番号,  
+        DbWT0001."hihokenshaNo" as dbWT0001_登録被保険者番号,
+        DbWT0001."shichosonCode" as dbWT0001_市町村コード,
+        DbWT0001."KannaiKangaiKubun" as dbWT0001_管内管外区分,
+        DbWT0001."yubinNo" as dbWT0001_郵便番号,
+        DbWT0001."choikiCode" as dbWT0001_町域コード,
+        DbWT0001."gyoseikuCode" as dbWT0001_行政区コード,
+        DbWT0001."gyoseikuMei" as dbWT0001_行政区名,
+        DbWT0001."jusho" as dbWT0001_住所,
+        DbWT0001."banchi" as dbWT0001_番地,
+        DbWT0001."katagaki" as dbWT0001_方書,
+        DbWT0001."kanaMeisho" as dbWT0001_宛名カナ名称,
+        DbWT0001."meisho" as dbWT0001_宛名名称,
+        DbWT0001."shimei50onKana" as dbWT0001_氏名50音カナ,
+        DbWT0001."shikibetsuCode" as dbWT0001_識別コード,
+        DbWT0001."shikakuShutokuYmd" as dbWT0001_資格取得日,
+        DbWT0001."shikakuShutokuJiyuCode" as dbWT0001_資格取得事由コード,
+        DbWT0001."shikakuSoshitsuYmd" as dbWT0001_資格喪失日,
+        DbWT0001."shikakuSoshitsuJiyuCode" as dbWT0001_資格喪失事由コード,
+        DbWT0001."setaiShuyakuNo" as dbWT0001_世帯集約番号
+    </sql>
+    
+    <sql id="allColumns_DbWT3036ShokanHanteiKekka">
+        DbWT3036."renban" as dbWT3036_連番,
+        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
+        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
+        DbWT3036."kokuhoRengokaiMei" as dbWT3036_国保連合会名,
+        DbWT3036."tsuchishoNo" as dbWT3036_No,
+        DbWT3036."seiriNo" as dbWT3036_整理番号,
+        DbWT3036."serviceTeikyoYm" as dbWT3036_サービス提供年月,
+        DbWT3036."jigyoshoNo" as dbWT3036_事業所番号,
+        DbWT3036."jigyoshoMei" as dbWT3036_事業所名,
+        DbWT3036."serviceShuruiCode" as dbWT3036_サービス種類コード,
+        DbWT3036."serviceShuruiMei" as dbWT3036_サービス種類名,
+        DbWT3036."tanisuKingaku" as dbWT3036_単位数,
+        DbWT3036."shiharaiKingaku" as dbWT3036_支払金額,
+        DbWT3036."zougenTanisu" as dbWT3036_増減単位数,
+        DbWT3036."shiharaiHohoKubunCode" as dbWT3036_支払方法区分コード,
+        DbWT3036."biko1" as dbWT3036_備考1,
+        DbWT3036."biko2" as dbWT3036_備考2,
+        DbWT3036."koshinDBumu" as dbWT3036_更新DB有無,
+        DbWT3036."wrkJigyoshoNo" as dbWT3036_ワーク事業所番号
+    </sql>
+
+</mapper>

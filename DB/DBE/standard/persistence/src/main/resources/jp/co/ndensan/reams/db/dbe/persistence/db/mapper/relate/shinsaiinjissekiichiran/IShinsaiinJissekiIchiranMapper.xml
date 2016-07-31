@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1700-010 wanghuafeng -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsaiinjissekiichiran.IShinsaiinJissekiIchiranMapper">
+    <resultMap id="ShinsaiinJissekiIchiranEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranRelateEntity" autoMapping="true">
+        <result property="コード" column="コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="報酬区分" column="報酬区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所属機関" column="所属機関" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査会地区" column="審査会地区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査会番号" column="審査会番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="実施日" column="実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開始" column="開始" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="出欠" column="出欠"/>
+        <result property="終了" column="終了" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="実施年月日" column="実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連番" column="連番"/>
+        <result property="審査員種別" column="審査員種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="get介護認定審査会委員報酬集計表"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter"
+            resultMap="ShinsaiinJissekiIchiranEntity" 
+            fetchSize="500">
+     SELECT
+          T5603."shinsakaiIinCode" AS コード
+          , T5594."shinsakaiIinShimei" AS 氏名
+          , UzT0007."codeMeisho"  AS 審査会地区
+          ,CASE WHEN T5595."shujiiIryokikanCode" IS NOT NULL  THEN T5911."iryoKikanMeisho"  
+           ELSE 
+               CASE WHEN T5595."ninteichosaItakusakiCode" IS NOT NULL THEN T5910."jigyoshaMeisho"
+               ELSE 
+                       CASE WHEN T5595."sonotaKikanCode" IS NOT NULL THEN T5914."kikanMeisho" 
+                       ELSE ''
+                       END 
+               END
+           END AS 所属機関
+          , T5603."shinsakaiIinHoshuKubun" AS 報酬区分
+          , T5603."shinsakaiKaisaiNo" AS 審査会番号
+          , T5511."shinsakaiKaisaiYMD" AS 実施日
+          , T5511."shinsakaiKaishiTime" AS 開始
+          , T5511."shinsakaiShuryoTime" AS 終了
+          , T5503."shussekiFlag" AS 出欠
+          , T5603."shinsakaiKaisaiYMD" AS 実施年月日
+          , T5603."remban" AS 連番
+          , T5503."kaigoninteiShinsakaiGichoKubunCode" AS 審査員種別
+        FROM
+          rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
+          INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS T5594 
+            ON T5603."shinsakaiIinCode" = T5594."shinsakaiIinCode"
+          INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511 
+            ON T5511."shinsakaiKaisaiNo" = T5603."shinsakaiKaisaiNo"
+          INNER JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" AS T5503 
+            ON T5503."shinsakaiIinCode" = T5603."shinsakaiIinCode" 
+            AND T5503."shinsakaiKaisaiNo" = T5603."shinsakaiKaisaiNo" 
+          INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS T5592 
+            ON T5592."shinsakaiKaisaiBashoCode" = T5511."shinsakaiKaisaiBashoCode"
+          INNER JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595 
+            ON T5594."shinsakaiIinCode" = T5595."shinsakaiIinCode" 
+            AND T5595."remban" = 1 
+          LEFT JOIN rgdb."UzT0007Code" AS UzT0007 
+            ON UzT0007."schemaName" = 'rgdb' 
+            AND UzT0007."subGyomuCode" = 'DBE' 
+            AND UzT0007."codeShubetsu" = '5001' 
+            AND UzT0007."code" = T5592."shinsakaiKaisaiChikuCode" 
+            AND ((UzT0007."yukoKaishiYMD" <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD" AND T5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> UzT0007."yukoShuryoYMD" )
+            OR (UzT0007."yukoKaishiYMD" <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD" AND UzT0007."yukoShuryoYMD" IS NULL))
+          LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
+            ON T7051."shoKisaiHokenshaNo" = T5595."shoKisaiHokenshaNo" 
+          LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
+            ON T5911."shichosonCode" = T7051."shichosonCode" 
+                AND T5911."shujiiIryokikanCode" = T5595."shujiiIryokikanCode"
+          LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910 
+            ON T5910."shichosonCode" = T7051."shichosonCode" 
+            AND T5910."ninteichosaItakusakiCode" = T5595."ninteichosaItakusakiCode" 
+          LEFT JOIN rgdb."DbT5914SonotaKikanJoho" AS T5914 
+            ON T5914."shoKisaiHokenshaNo" = T5595."shoKisaiHokenshaNo" 
+            AND T5914."sonotaKikanCode" = T5595."sonotaKikanCode" 
+        WHERE
+          1 = 1  
+        <if test="審査会開催日FROMFlag">
+          AND #{審査会開催日FROM} <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD" 
+        </if>
+        <if test="審査会開催日TOFlag">
+            AND T5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{審査会開催日TO}
+        </if>
+         <if test="batchFlag">
+            AND
+            <foreach collection="keyJoho" item="item" open="("  
+            separator="OR"  
+            close=")">
+                (
+                T5603."shinsakaiIinCode" = #{item.shinsakaiIinCode}
+                AND T5603."shinsakaiIinHoshuKubun" = #{item.shinsakaiIinHoshuKubun}
+                AND T5603."shinsakaiKaisaiYMD" = #{item.shinsakaiKaisaiYMD}
+                AND T5603."remban" = #{item.remban}
+                )
+            </foreach>
+        </if>
+        <if test="gamenFlag">
+            ORDER BY T5603."shinsakaiIinCode", T5603."shinsakaiIinHoshuKubun", T5603."shinsakaiKaisaiYMD", T5603."remban" 
+            <if test="件数Flag">
+                LIMIT #{件数}
+            </if>
+        </if>
+        
+    </select>
+</mapper>

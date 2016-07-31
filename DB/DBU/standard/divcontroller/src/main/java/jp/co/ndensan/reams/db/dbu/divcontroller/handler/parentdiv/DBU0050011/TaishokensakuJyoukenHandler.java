@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
@@ -43,6 +44,7 @@ public class TaishokensakuJyoukenHandler {
     private static final RString DELETE = new RString("delete");
     private static final RString 入力済 = new RString("入力済");
     private static final RString 入力未 = new RString("入力未");
+    private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT6 = 6;
     private static final Code CODE0100 = new Code("0100");
@@ -143,10 +145,37 @@ public class TaishokensakuJyoukenHandler {
         dataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (Shichoson shichoson : 市町村Lst) {
             KeyValueDataSource keyValueDataSource
-                    = new KeyValueDataSource(shichoson.get市町村コード().getColumnValue(), shichoson.get市町村名称());
+                    = new KeyValueDataSource(create市町村Key(shichoson), shichoson.get市町村名称());
             dataSource.add(keyValueDataSource);
         }
         return dataSource;
+    }
+
+    private RString create市町村Key(Shichoson shichoson) {
+        return new RStringBuilder().append(shichoson.get市町村コード().getColumnValue()).append("_")
+                .append(shichoson.get保険者コード().getColumnValue()).append("_").append(shichoson.get保険者区分().getコード()).toRString();
+    }
+
+    /**
+     * 市町村コード取得処理です。
+     *
+     * @param 市町村Key 市町村Key
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード(RString 市町村Key) {
+        if (市町村Key.split("_").size() < 1) {
+            return LasdecCode.EMPTY;
+        } else {
+            return new LasdecCode(市町村Key.split("_").get(0));
+        }
+    }
+
+    private TokeiTaishoKubun get保険者区分(RString 市町村Key) {
+        if (市町村Key.split("_").size() < INT3) {
+            return TokeiTaishoKubun.空;
+        } else {
+            return TokeiTaishoKubun.toValue(市町村Key.split("_").get(2));
+        }
     }
 
     /**
@@ -204,19 +233,6 @@ public class TaishokensakuJyoukenHandler {
         onClick_btnSearch();
     }
 
-    private Shichoson get市町村() {
-        List<Shichoson> 市町村Lst = get市町村Lst();
-        Shichoson 市町村;
-        if (is単一合併なし()) {
-            市町村 = 市町村Lst.isEmpty()
-                    ? new Shichoson(LasdecCode.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, TokeiTaishoKubun.空) : 市町村Lst.get(0);
-        } else {
-            int choice = div.getDdlShichoson().getSelectedIndex();
-            市町村 = choice > 0 ? 市町村Lst.get(choice - 1) : new Shichoson();
-        }
-        return 市町村;
-    }
-
     /**
      * 「検索する」ボタンを押下すること処理です。
      */
@@ -226,9 +242,8 @@ public class TaishokensakuJyoukenHandler {
         if (報告年度String.length() >= INT4) {
             報告年度Year = 報告年度String.substring(0, INT4);
         }
-        Shichoson 市町村 = get市町村();
-        TokeiTaishoKubun 保険者区分 = 市町村.get保険者区分();
-        LasdecCode 市町村コード = 市町村.get市町村コード();
+        TokeiTaishoKubun 保険者区分 = get保険者区分(div.getDdlShichoson().getSelectedKey());
+        LasdecCode 市町村コード = get市町村コード(div.getDdlShichoson().getSelectedKey());
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<KaigoHokenJigyoHokokuNenpo> 一覧データLst

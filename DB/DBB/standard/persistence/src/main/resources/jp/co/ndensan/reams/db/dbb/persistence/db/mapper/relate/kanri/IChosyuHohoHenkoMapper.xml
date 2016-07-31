@@ -8,7 +8,7 @@
     <resultMap id="ChoshuHohoEntity"  type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuhoho.ChoshuHohoEntity" autoMapping="true">
         <result property="choshuHoho3gat" column="choshuHoho3gat" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
     </resultMap>
 
     <select id="selectChosyuHoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.ChosyuHohoHenkoMapperParameter" 

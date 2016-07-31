@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachiku.ChosaChikuEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachiku.IChosaChikuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosain;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -171,12 +173,18 @@ public class ChosaChikuManager {
     /**
      * 地区認定調査員情報の削除処理する。
      *
-     * @param paramer paramer
-     * @return boolean
+     * @param models 地区認定調査員情報
+     * @param key 地区認定調査員情報の識別子
+     * @return 物理削除件数 物理削除結果の件数を返します。
      */
     @Transaction
-    public int delete(ChosaChikuMapperParameter paramer) {
-        return mapperProvider.create(IChosaChikuMapper.class).delete認定調査員情報(paramer);
+    public boolean delete(Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> models,
+            ChikuNinteiChosainIdentifier key) {
+        ChikuNinteiChosain 地区認定調査員情報 = models.get(key);
+        if (地区認定調査員情報 != null) {
+            return 1 == dbt5223dac.delete(地区認定調査員情報.toEntity());
+        }
+        return false;
     }
 
     /**

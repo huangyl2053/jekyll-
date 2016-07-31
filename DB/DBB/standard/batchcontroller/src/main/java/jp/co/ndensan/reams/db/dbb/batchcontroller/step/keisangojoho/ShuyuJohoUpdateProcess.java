@@ -34,6 +34,7 @@ public class ShuyuJohoUpdateProcess extends BatchProcessBase<KeisangoJohoSakusei
             + "IKeisangoJohoSakuseiMapper.get収入情報");
     private static final RString TABLE_計算中間_NAME = new RString("KeisanTyukanTemp");
     private KeisangoJohoSakuseiProcessParamter processParamter;
+    private DbTKeisangoJohoTempTableEntity 計算中間TempEnitty;
     private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
 
     @BatchWriter
@@ -57,10 +58,27 @@ public class ShuyuJohoUpdateProcess extends BatchProcessBase<KeisangoJohoSakusei
 
     @Override
     protected void process(KeisangoJohoSakuseiRelateEntity entity) {
-        tsuchishoNo = TsuchishoNo.EMPTY;
+        if (tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
+            tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
+            計算中間TempEnitty = new KeisangoJohoResult().get収入情報(entity, 計算中間TempEnitty);
+        } else {
+            if (計算中間TempEnitty != null) {
+                計算中間Temp.update(計算中間TempEnitty);
+            }
+            計算中間TempEnitty = new DbTKeisangoJohoTempTableEntity();
+            tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
+            計算中間TempEnitty = new KeisangoJohoResult().get収入情報(entity, 計算中間TempEnitty);
+        }
         if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
             tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
             計算中間Temp.update(new KeisangoJohoResult().get収入情報(entity, entity.get計算中間Entity()));
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (計算中間TempEnitty != null) {
+            計算中間Temp.update(計算中間TempEnitty);
         }
     }
 

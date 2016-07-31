@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5301ShujiiIkenshoIraiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -49,18 +49,6 @@ public class ShujiiIkenshoIraiJohoBuilderTest extends DbzTestBase {
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の申請書管理番号は_設定した値と同じ申請書管理番号を返す() {
-            business = sut.set申請書管理番号(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_申請書管理番号).build();
-            assertThat(business.get申請書管理番号(), is(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_申請書管理番号));
-        }
-
-        @Test
-        public void 戻り値の主治医意見書作成依頼履歴番号は_設定した値と同じ主治医意見書作成依頼履歴番号を返す() {
-            business = sut.set主治医意見書作成依頼履歴番号(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号).build();
-            assertThat(business.get主治医意見書作成依頼履歴番号(), is(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号));
-        }
 
         @Test
         public void 戻り値の厚労省IF識別コードは_設定した値と同じ厚労省IF識別コードを返す() {

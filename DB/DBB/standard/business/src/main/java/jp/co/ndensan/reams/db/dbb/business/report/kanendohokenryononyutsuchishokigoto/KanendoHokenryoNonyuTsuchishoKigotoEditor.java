@@ -113,18 +113,14 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
     private void editCompNofushoItemAndCompRyoshushoItem(KanendoHokenryoNonyuTsuchishoKigotoSource source) {
         NofuShoKyotsu 納付書共通 = 本算定納入通知書情報.get納付書共通();
         if (納付書共通 != null) {
-            if (納付書共通.get調定年度表記() != null) {
-                source.nofushoKanendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
-                source.nofushoNendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
-                source.ryoshushoKanendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
-                source.ryoshushoNendo = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
-            }
-            if (納付書共通.get賦課年度表記() != null) {
-                source.nofushoKanendo = RStringUtil.convert半角to全角(納付書共通.get賦課年度表記()).concat("分");
-                source.ryoshushoKanendobun = RStringUtil.convert半角to全角(納付書共通.get賦課年度表記()).concat("分");
-            }
+            source.nofushoKanendo = 半角to全角(納付書共通.get調定年度表記());
+            source.nofushoNendo = 半角to全角(納付書共通.get調定年度表記());
+            source.ryoshushoKanendo = 半角to全角(納付書共通.get調定年度表記());
+            source.ryoshushoNendo = 半角to全角(納付書共通.get調定年度表記());
+            source.nofushoKanendobun = 半角to全角(納付書共通.get賦課年度表記()).concat("分");
+            source.ryoshushoKanendobun = 半角to全角(納付書共通.get賦課年度表記()).concat("分");
             source.nofushoSofusakiName = 納付書共通.get納付者氏名();
-            if (納付書共通.get被代納人氏名() != null) {
+            if (納付書共通.get被代納人氏名() != null && !納付書共通.get被代納人氏名().isEmpty()) {
                 source.nofushoKakko1 = new RString("(");
                 source.nofushoKakko3 = 納付書共通.get被代納人敬称().concat(")");
                 source.ryoshushoKakko1 = new RString("(");
@@ -207,8 +203,10 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
         List<AfterEditInformation> 普徴納期情報リスト = new ArrayList<>();
         if (編集後本算定通知書共通情報 != null) {
             普徴納期情報リスト = 編集後本算定通知書共通情報.get普徴納期情報リスト();
-            source.titleNendo = 編集後本算定通知書共通情報.get調定年度_年度なし();
-            source.titleKanendobun = 編集後本算定通知書共通情報.get賦課年度_年度あり();
+            source.titleNendo = 半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし());
+            if (編集後本算定通知書共通情報.get賦課年度_年度あり() != null) {
+                source.titleKanendobun = 編集後本算定通知書共通情報.get賦課年度_年度あり().concat("分");
+            }
             HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
             if (表示コード != null) {
                 source.hyojiKomoku1 = 表示コード.get表示コード名１();
@@ -268,6 +266,13 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
         source.santeiKisoJikiTitle = RString.EMPTY;
         source.santeiKisoJikoHokenryoGaku = RString.EMPTY;
         source.renban = new RString(連番).padLeft("0", INT_6);
+    }
+
+    private RString 半角to全角(RString 半角) {
+        if (null == 半角) {
+            return RString.EMPTY;
+        }
+        return RStringUtil.convert半角to全角(半角);
     }
 
     private void edit納期(KanendoHokenryoNonyuTsuchishoKigotoSource source, List<AfterEditInformation> 普徴納期情報リスト) {
@@ -353,9 +358,7 @@ public class KanendoHokenryoNonyuTsuchishoKigotoEditor implements IKanendoHokenr
         }
         source.kisoKikanKaishi = 更正後.get期間_自();
         source.kisoKikanShuryo = 更正後.get期間_至();
-        if (更正後.get保険料段階() != null) {
-            source.kisoShotokuDankai = RStringUtil.convert半角to全角(更正後.get保険料段階());
-        }
+        source.kisoShotokuDankai = 半角to全角(更正後.get保険料段階());
         if (更正後.get保険料率() != null) {
             source.kisoHokenryoRitsu = new RString(更正後.get保険料率().toString());
         }

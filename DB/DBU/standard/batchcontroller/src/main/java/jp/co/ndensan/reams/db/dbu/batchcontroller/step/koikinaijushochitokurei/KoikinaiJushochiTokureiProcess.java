@@ -64,7 +64,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void beforeExecute() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200013.getReportId().getColumnValue()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200013.getReportId().value()).create();
         retortWrite = new ReportSourceWriter<>(batchWrite);
         mapper = getMapper(IKoikinaiJushochiTokureiMapper.class);
         super.beforeExecute();
@@ -82,6 +82,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     protected void afterExecute() {
         KoikinaiJushochitokureishaIchiranhyoReport report = new KoikinaiJushochitokureishaIchiranhyoReport(getHeadItem(), getBodyItem());
         report.writeBy(retortWrite);
+        batchWrite.close();
     }
 
     private KoikinaiJushochitokureishaIchiranhyoHead getHeadItem() {
@@ -193,15 +194,15 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         List<KoikinaiJushochiTokureiEntity> 広域内住所地特例者List = new ArrayList<>();
         for (KoikinaiJushochiTokureiRelateEntity entity : 広住特適用情報List) {
             KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity = new KoikinaiJushochiTokureiEntity();
-            広域内住所地特例者Entity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
+            広域内住所地特例者Entity.set被保険者番号(entity.getHihokenshaNo().value());
             広域内住所地特例者Entity.set氏名カナ(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get名称().getKana().getColumnValue());
-            広域内住所地特例者Entity.set生年月日(nullToEmtiy(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get生年月日()));
+                    .createKojin(entity.getFt200Entity()).get名称().getKana().value());
+            広域内住所地特例者Entity.set生年月日(new RString(ShikibetsuTaishoFactory
+                    .createKojin(entity.getFt200Entity()).get生年月日().toFlexibleDate().toString()));
             広域内住所地特例者Entity.set住所コード(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get住所().get全国住所コード().getColumnValue());
+                    .createKojin(entity.getFt200Entity()).get住所().get全国住所コード().value());
             広域内住所地特例者Entity.set行政区CD(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get行政区画().getGyoseiku().getコード().getColumnValue());
+                    .createKojin(entity.getFt200Entity()).get行政区画().getGyoseiku().getコード().value());
             広域内住所地特例者Entity.set行政区(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get行政区画().getGyoseiku().get名称());
             広域内住所地特例者Entity.set取得日(nullToEmtiy(entity.getShikakuShutokuYMD()));
@@ -210,13 +211,13 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             広域内住所地特例者Entity.set喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
             広域内住所地特例者Entity.set資格区分(entity.getHihokennshaKubunCode());
             広域内住所地特例者Entity.set住特(entity.getJushochiTokureiFlag());
-            広域内住所地特例者Entity.set識別コード(entity.getShikibetsuCode().getColumnValue());
+            広域内住所地特例者Entity.set識別コード(entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().value());
             広域内住所地特例者Entity.set氏名(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get名称().getName().getColumnValue());
+                    .createKojin(entity.getFt200Entity()).get名称().getName().value());
             広域内住所地特例者Entity.set性別(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get性別().getCode());
             広域内住所地特例者Entity.set世帯コード(ShikibetsuTaishoFactory
-                    .createKojin(entity.getFt200Entity()).get世帯コード().getColumnValue());
+                    .createKojin(entity.getFt200Entity()).get世帯コード().value());
             広域内住所地特例者Entity.set住所(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get住所().get住所());
             広域内住所地特例者Entity.set広住取得日(nullToEmtiy(entity.getShikakuHenkoYMD()));
@@ -226,10 +227,12 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
             } else if (範囲.equals(hanteiFlag)) {
                 set広住喪失日_範囲(entity, 広域内住所地特例者Entity);
             }
-            広域内住所地特例者Entity.set措置市町村コード(entity.getSochimotoShichosonCode().getColumnValue());
-            List<ShichosonCodeYoriShichoson> 市町村情報 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(entity
-                    .getSochimotoShichosonCode()).records();
-            広域内住所地特例者Entity.set措置市町村名称(市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称());
+            if (entity.getSochimotoShichosonCode() != null) {
+                広域内住所地特例者Entity.set措置市町村コード(entity.getSochimotoShichosonCode().value());
+                List<ShichosonCodeYoriShichoson> 市町村情報 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(entity
+                        .getSochimotoShichosonCode()).records();
+                広域内住所地特例者Entity.set措置市町村名称(市町村情報.isEmpty() ? RString.EMPTY : 市町村情報.get(0).get市町村名称());
+            }
             広域内住所地特例者Entity.set住民種別コード(ShikibetsuTaishoFactory
                     .createKojin(entity.getFt200Entity()).get住民種別().getCode());
             広域内住所地特例者List.add(広域内住所地特例者Entity);
@@ -240,7 +243,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     private void set広住喪失日_範囲(KoikinaiJushochiTokureiRelateEntity entity,
             KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity) {
         KoikinaiJushochiTokureiRelateEntity 広域特解除情報 = mapper.get広域特解除情報(KoikinaiKaijoParamter.
-                createParam(entity.getHihokenshaNo().getColumnValue(),
+                createParam(entity.getHihokenshaNo().value(),
                         new RString(entity.getIdoYMD().toString()),
                         new RString(entity.getShikakuShutokuYMD().toString())));
         if (広域特解除情報 != null
@@ -259,7 +262,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     private void set広住喪失日_基準日(KoikinaiJushochiTokureiRelateEntity entity,
             KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity) {
         KoikinaiJushochiTokureiRelateEntity 広域特解除情報 = mapper.get広域特解除情報(KoikinaiKaijoParamter.
-                createParam(entity.getHihokenshaNo().getColumnValue(),
+                createParam(entity.getHihokenshaNo().value(),
                         new RString(entity.getIdoYMD().toString()),
                         new RString(entity.getShikakuShutokuYMD().toString())));
         if (広域特解除情報 != null

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBE621002_主治医意見書作成報酬支払通知書のShujiiHoshuShiharaiEditorです。
@@ -27,7 +29,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ShujiiIkensho5komokuEntity}
+     * @param item {@link ShujiiHoshuShiharaiEntity}
      */
     protected ShujiiHoshuShiharaiEditor(ShujiiHoshuShiharaiEntity item) {
         this.item = item;
@@ -56,7 +58,7 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
                 LASDEC_CODE, ConfigNameDBE.主治医意見書作成報酬支払通知書.get名称());
         source.tsuchibun1 = item.get通知文1();
         source.taishoKikan = item.get対象期間();
-        source.gokei = item.get合計金額();
+        source.gokei = kinngakuFormat(item.get合計金額());
         source.furikomiyoteiYMD = (item.get振込予定日() == null ? RString.EMPTY : new RString(item.get振込予定日().toString()));
         source.shubetsu = item.get種別();
         source.bango = item.get番号();
@@ -64,5 +66,12 @@ public class ShujiiHoshuShiharaiEditor implements IShujiiHoshuShiharaiEditor {
         source.meiginin = item.get名議人();
         source.tsuchibun2 = item.get通知文2();
         return source;
+    }
+
+    private RString kinngakuFormat(RString data) {
+        if (data == null || data.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(data.toString()), 0);
     }
 }

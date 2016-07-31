@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -9,13 +9,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * 不正な動作の原因になります。</br>
  * DBE5140002のイベント名定義クラスです</br>
  *
- * @author 自動生成
+ * @reamsid_L DBE-0130-020 xuyannan
  */
 public enum DBE5140002TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    開催予定登録に戻る("開催予定登録に戻る"),
-    完了("完了");
+    開催予定登録に戻る("開催予定登録に戻る");
 
     private final RString name;
 

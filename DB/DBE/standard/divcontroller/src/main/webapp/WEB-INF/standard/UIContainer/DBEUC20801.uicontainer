@@ -23,12 +23,12 @@
      "layoutName": "DBE2080001",
      "layoutTitle": "完了処理・マスキング",
      "eventName": "マスキング",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE4050001",
      "toLayoutTitle": "イメージ情報マスキング",
-     "toState": "登録"
+     "toState": "検索結果表示"
     },
     {
      "id": "3",
@@ -36,8 +36,8 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE4050001",
      "layoutTitle": "イメージ情報マスキング",
-     "eventName": "戻る",
-     "destroy": false,
+     "eventName": "完了処理に戻る",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2080001",

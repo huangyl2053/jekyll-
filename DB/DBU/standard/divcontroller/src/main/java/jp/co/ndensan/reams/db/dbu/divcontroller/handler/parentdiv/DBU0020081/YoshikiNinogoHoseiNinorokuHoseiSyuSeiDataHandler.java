@@ -8,13 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020081;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020081.YoshikiNinogoHoseiNinorokuHoseiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -73,10 +68,10 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
      *
      * @param 引き継ぎデータ 引き継ぎデータ
      * @param 様式種類 様式種類
-     * @return 修正データリスト 修正データリスト
+     * @return 修正データリスト List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get修正データ(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
-        List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト(引き継ぎデータ, 様式種類);
+    public List<JigyoHokokuTokeiData> get修正データ(List<JigyoHokokuTokeiData> 引き継ぎデータ, RString 様式種類) {
+        List<JigyoHokokuTokeiData> 更新前データリスト = 引き継ぎデータ;
 
         JigyoHokokuTokeiData 更新前データ = 更新前データリスト.get(0);
         List<JigyoHokokuTokeiData> 画面データリスト = new ArrayList<>();
@@ -929,62 +924,4 @@ public final class YoshikiNinogoHoseiNinorokuHoseiSyuSeiDataHandler {
         総計リスト.add(div.getPnl2().getPnl1().getTxt2SokeiGokei().getValue());
     }
 
-    /**
-     * 更新前データリストの取得するメッソドです。
-     *
-     * @param 引き継ぎデータ 引き継ぎデータ
-     * @param 様式種類 様式種類
-     * @return 更新前データリスト
-     */
-    private List<JigyoHokokuTokeiData> get更新前データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
-        JigyoHokokuGeppoDetalSearchParameter param_kensu;
-        JigyoHokokuGeppoDetalSearchParameter param_kyufuGaku;
-        if (Integer.parseInt(様式種類.toString()) % 2 > 0) {
-            param_kensu = JigyoHokokuGeppoDetalSearchParameter.
-                    createParameterForJigyoHokokuGeppoDetal(
-                            new FlexibleYear(引き継ぎデータ.get行報告年()),
-                            引き継ぎデータ.get行報告月(),
-                            new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                            引き継ぎデータ.get行集計対象月(),
-                            引き継ぎデータ.get行統計対象区分(),
-                            new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                            new Code(引き継ぎデータ.get行表番号()),
-                            new Code(集計番号_0105));
-            param_kyufuGaku = JigyoHokokuGeppoDetalSearchParameter.
-                    createParameterForJigyoHokokuGeppoDetal(
-                            new FlexibleYear(引き継ぎデータ.get行報告年()),
-                            引き継ぎデータ.get行報告月(),
-                            new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                            引き継ぎデータ.get行集計対象月(),
-                            引き継ぎデータ.get行統計対象区分(),
-                            new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                            new Code(引き継ぎデータ.get行表番号()),
-                            new Code(集計番号_0106));
-        } else {
-            param_kensu = JigyoHokokuGeppoDetalSearchParameter.
-                    createParameterForJigyoHokokuGeppoDetal(
-                            new FlexibleYear(引き継ぎデータ.get行報告年()),
-                            引き継ぎデータ.get行報告月(),
-                            new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                            引き継ぎデータ.get行集計対象月(),
-                            引き継ぎデータ.get行統計対象区分(),
-                            new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                            new Code(引き継ぎデータ.get行表番号()),
-                            new Code(集計番号_0205));
-            param_kyufuGaku = JigyoHokokuGeppoDetalSearchParameter.
-                    createParameterForJigyoHokokuGeppoDetal(
-                            new FlexibleYear(引き継ぎデータ.get行報告年()),
-                            引き継ぎデータ.get行報告月(),
-                            new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                            引き継ぎデータ.get行集計対象月(),
-                            引き継ぎデータ.get行統計対象区分(),
-                            new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                            new Code(引き継ぎデータ.get行表番号()),
-                            new Code(集計番号_0206));
-        }
-        List<JigyoHokokuTokeiData> 更新前データリスト = JigyoHokokuGeppoHoseiHako.createInstance().
-                getJigyoHokokuGeppoDetal(param_kensu);
-        更新前データリスト.addAll(JigyoHokokuGeppoHoseiHako.createInstance().getJigyoHokokuGeppoDetal(param_kyufuGaku));
-        return 更新前データリスト;
-    }
 }

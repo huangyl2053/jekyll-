@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -123,7 +125,10 @@ public class DbT5032ShujiiIkenshoHoshuTankaDac implements ISaveable<DbT5032Shuji
                                 leq(kaishiYM, 意見書記入年月),
                                 leq(意見書記入年月, shuryoYM),
                                 leq(kaishiYM, 意見書受領年月),
-                                leq(意見書受領年月, shuryoYM))).
+                                leq(意見書受領年月, shuryoYM)))
+                .order(by(zaitakuShisetsuKubun, Order.ASC),
+                        by(ikenshoSakuseiKaisuKubun, Order.ASC),
+                        by(kaishiYM, Order.ASC)).limit(1).
                 toObject(DbT5032ShujiiIkenshoHoshuTankaEntity.class);
     }
 }

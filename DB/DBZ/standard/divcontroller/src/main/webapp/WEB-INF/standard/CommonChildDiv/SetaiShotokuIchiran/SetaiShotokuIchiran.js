@@ -24,8 +24,6 @@ var DBZ;
                     this.controls.btnRirekiClose().displayNone = true;
                     this.controls.dgSetaiShotoku().displayNone = false;
                     this.controls.dgSetaiShotoku().gridSetting.isMultiSelectable = true;
-                    this.controls.btnNarabeteHyoji().displayNone = false;
-                    this.controls.btnNarabeteHyojiKogaku().displayNone = true;
                 };
 
                 DisplayMode.prototype.ShotokuShokai = function () {
@@ -41,7 +39,6 @@ var DBZ;
                     this.controls.dgShotokuRireki().displayNone = true;
                     this.controls.dgSetaiShotoku().displayNone = false;
                     this.controls.btnRirekiClose().displayNone = true;
-                    this.controls.btnNarabeteHyojiKogaku().displayNone = true;
                 };
 
                 DisplayMode.prototype.ShotokuRirekiShokai = function () {
@@ -57,7 +54,6 @@ var DBZ;
                     this.controls.dgShotokuRireki().disabled = false;
                     this.controls.btnRirekiClose().disabled = false;
                     this.controls.btnRirekiClose().displayNone = false;
-                    this.controls.btnNarabeteHyojiKogaku().displayNone = true;
                 };
 
                 DisplayMode.prototype.KogakuKaigoServicehi = function () {
@@ -67,8 +63,6 @@ var DBZ;
                     this.controls.dgSetaiShotoku().displayNone = false;
                     this.controls.dgSetaiShotoku().gridSetting.isMultiSelectable = true;
                     this.controls.btnRirekiClose().displayNone = true;
-                    this.controls.btnNarabeteHyoji().displayNone = true;
-                    this.controls.btnNarabeteHyojiKogaku().displayNone = false;
                 };
                 return DisplayMode;
             })();

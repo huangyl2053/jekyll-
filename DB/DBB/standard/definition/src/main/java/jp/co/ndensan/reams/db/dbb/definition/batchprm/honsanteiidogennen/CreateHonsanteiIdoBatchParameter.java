@@ -25,6 +25,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
 
+    private static final long serialVersionUID = 1L;
     private static final String KEY_CHOTEINENDO = "choteiNendo";
     private static final String KEY_賦課年度 = "賦課年度";
     private static final String KEY_処理対象 = "処理対象";
@@ -52,6 +53,7 @@ public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
     private static final String KEY_一括発行起動フラグ = "一括発行起動フラグ";
     private static final String KEY_随時フラグ = "随時フラグ";
     private static final String KEY_算定期 = "算定期";
+    private static final String KEY_画面移動フラグ = "画面移動フラグ";
 
     @BatchParameter(key = KEY_CHOTEINENDO, name = "調定年度")
     private FlexibleYear choteiNendo;
@@ -96,7 +98,7 @@ public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_納入_出力方法, name = "納入_出力方法")
     private RString 納入_出力方法;
     @BatchParameter(key = KEY_納入_出力期, name = "納入_出力期")
-    private FlexibleDate 納入_出力期;
+    private RString 納入_出力期;
     @BatchParameter(key = KEY_納入_生活保護対象者, name = "納入_生活保護対象者")
     private RString 納入_生活保護対象者;
     @BatchParameter(key = KEY_納入_ページごとに山分け, name = "納入_ページごとに山分け")
@@ -107,4 +109,6 @@ public class CreateHonsanteiIdoBatchParameter extends BatchParameterBase {
     private boolean 随時フラグ;
     @BatchParameter(key = KEY_算定期, name = "算定期")
     private RString 算定期;
+    @BatchParameter(key = KEY_画面移動フラグ, name = "画面移動フラグ")
+    private boolean 画面移動フラグ;
 }

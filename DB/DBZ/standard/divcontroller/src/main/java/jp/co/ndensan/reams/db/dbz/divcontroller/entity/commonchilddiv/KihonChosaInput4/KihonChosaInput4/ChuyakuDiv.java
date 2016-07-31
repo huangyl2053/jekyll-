@@ -4,12 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * Chuyaku のクラスファイル
@@ -17,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class ChuyakuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +25,6 @@ public class ChuyakuDiv extends Panel {
     private ButtonDialog btnChuyaku;
     @JsonProperty("radChuyaku")
     private RadioButton radChuyaku;
-    @JsonProperty("ChuyakuShinseishoKanriNo")
-    private RString ChuyakuShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,24 +66,6 @@ public class ChuyakuDiv extends Panel {
     @JsonProperty("radChuyaku")
     public void setRadChuyaku(RadioButton radChuyaku) {
         this.radChuyaku = radChuyaku;
-    }
-
-    /*
-     * getChuyakuShinseishoKanriNo
-     * @return ChuyakuShinseishoKanriNo
-     */
-    @JsonProperty("ChuyakuShinseishoKanriNo")
-    public RString getChuyakuShinseishoKanriNo() {
-        return ChuyakuShinseishoKanriNo;
-    }
-
-    /*
-     * setChuyakuShinseishoKanriNo
-     * @param ChuyakuShinseishoKanriNo ChuyakuShinseishoKanriNo
-     */
-    @JsonProperty("ChuyakuShinseishoKanriNo")
-    public void setChuyakuShinseishoKanriNo(RString ChuyakuShinseishoKanriNo) {
-        this.ChuyakuShinseishoKanriNo = ChuyakuShinseishoKanriNo;
     }
 
     // </editor-fold>

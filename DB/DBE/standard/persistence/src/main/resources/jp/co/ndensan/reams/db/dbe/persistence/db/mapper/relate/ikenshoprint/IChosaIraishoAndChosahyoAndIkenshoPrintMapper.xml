@@ -490,7 +490,7 @@
                  LEFT JOIN 
                  rgdb."DbT5121ShinseiRirekiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-                 LEFT JOIN 
+                 INNER JOIN 
                   rgdb."DbT5203NinteichosahyoKihonChosa" AS C
                   ON B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
                   AND NOT EXISTS (
@@ -501,7 +501,10 @@
                               AND C."ninteichosaRirekiNo" <![CDATA[<]]>  C1."ninteichosaRirekiNo"
 
                  )
-                 AND C."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
+                 AND C."koroshoIfShikibetsuCode" = 
+                  (SELECT "koroshoIfShikibetsuCode" 
+                           FROM rgdb."DbT5101NinteiShinseiJoho" 
+                         WHERE "shinseishoKanriNo" = B."zenkaiShinseishoKanriNo")
                  INNER JOIN 
                   rgdb."DbT5116IchijiHanteiKekkaJoho" AS D
                   ON C."shinseishoKanriNo" = D."shinseishoKanriNo"
@@ -592,6 +595,7 @@
                    ,A."seinengappiYMD"
                    ,A."seibetsu"
                    ,A."jusho"
+                   ,A."ninteiShinseiYMD"
                    ,B."ikenshoSakuseiIraiYMD"
                    ,B."ikenshoSakuseiKigenYMD"
                    ,B."shujiiIryokikanCode"
@@ -656,7 +660,7 @@
                      ,A."yubinNo"
                      ,A."telNo"
                      ,A."shujiiIryokikanCode"
-                     ,A"shujiiCode"
+                     ,A."shujiiCode"
                      ,B."shichosonCode"
                      ,C."iryoKikanMeisho"
                      ,C."jusho" AS "iryoKikanJusho"
@@ -728,7 +732,7 @@
                    rgdb."DbT5911ShujiiIryoKikanJoho" AS E
                    ON E."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                    AND E."shichosonCode" = C."shichosonCode"
-                   AND E."jokyoFlag" = FALSE
+                   AND E."jokyoFlag" = TRUE
              WHERE
                   A."shinseishoKanriNo" = #{申請書管理番号}
               AND A."logicalDeletedFlag" = FALSE

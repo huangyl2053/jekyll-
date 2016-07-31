@@ -28,7 +28,9 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -139,4 +141,55 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
                 toList(DbT4014RiyoshaFutangakuGengakuEntity.class);
     }
 
+    /**
+     * 被保険者番号より、利用者負担額減免の情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int get利用者負担額減免情報の件数(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4014RiyoshaFutangakuGengaku.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                not(isNULL(ketteiKubun)),
+                                not(eq(ketteiKubun, RString.EMPTY)))).
+                order(by(rirekiNo, DESC)).
+                getCount();
+
+    }
+
+    /**
+     * 被保険者番号より、利用者負担額減免の情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 基準日 基準日
+     * @param 決定区分 決定区分
+     * @return DbT4014RiyoshaFutangakuGengakuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4014RiyoshaFutangakuGengakuEntity get利用者負担額減額(HihokenshaNo 被保険者番号, FlexibleDate 基準日, RString 決定区分) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        requireNonNull(決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("決定区分"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4014RiyoshaFutangakuGengaku.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(tekiyoKaishiYMD, 基準日),
+                                leq(基準日, tekiyoShuryoYMD),
+                                eq(ketteiKubun, 決定区分))).
+                order(by(rirekiNo, DESC)).
+                limit(1).
+                toObject(DbT4014RiyoshaFutangakuGengakuEntity.class);
+
+    }
 }

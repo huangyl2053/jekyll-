@@ -40,6 +40,9 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
     private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
     private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
+    private static final RString MENUID_DBEMN21001 = new RString("DBEMN21001");
+    private static final RString MENUID_DBEMN33001 = new RString("DBEMN33001");
+    private static final RString MENUID_DBEMN62001 = new RString("DBEMN62001");
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
 
     /**
@@ -139,11 +142,19 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
         } else if (MENUID_DBEMN31005.equals(menuID)) {
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
-                    new ShinseishoKanriNo(申請書管理番号));
-            ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号,
                     Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
+        } else if (MENUID_DBEMN21001.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
+        } else if (MENUID_DBEMN33001.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.個人依頼内容更新へ).respond();
+        } else if (MENUID_DBEMN62001.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定イメージ情報管理へ).respond();
         }
         return ResponseData.of(div).respond();
     }

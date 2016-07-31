@@ -559,9 +559,9 @@ public class NinteiChosaIrai {
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292001パラメータ());
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292002パラメータ());
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292003パラメータ());
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面右(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面左(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         }
     }
 

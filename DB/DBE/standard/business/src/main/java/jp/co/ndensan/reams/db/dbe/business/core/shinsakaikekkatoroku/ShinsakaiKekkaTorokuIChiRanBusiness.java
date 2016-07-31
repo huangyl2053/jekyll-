@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.Shinsaka
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NinteiShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -100,12 +102,30 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
     }
 
     /**
+     * 申請区分_申請時コードを取得します。
+     *
+     * @return 申請区分_申請時コード
+     */
+    public RString get申請区分_申請時コード() {
+        return entity.get申請区分_申請時_コード().value();
+    }
+
+    /**
      * 申請区分_法令を取得します。
      *
      * @return 申請区分_法令
      */
     public RString get申請区分_法令() {
         return NinteiShinseiHoreiCode.toValue(entity.get申請区分_法令_コード().value()).get名称();
+    }
+
+    /**
+     * 申請区分_法令コードを取得します。
+     *
+     * @return 申請区分_法令コード
+     */
+    public RString get申請区分_法令コード() {
+        return entity.get申請区分_法令_コード().value();
     }
 
     /**
@@ -136,16 +156,6 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
     }
 
     /**
-     * 前回一次判定を取得します。
-     *
-     * @return 前回一次判定
-     */
-    public RString get前回二次判定() {
-        // 汤雅芳QA已经回来
-        return YokaigoJotaiKubun09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
-    }
-
-    /**
      * 今回一次判定を取得します。
      *
      * @return 今回一次判定
@@ -155,12 +165,42 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
     }
 
     /**
+     * 前回二次判定を取得します。
+     *
+     * @return 前回二次判定
+     */
+    public RString get前回二次判定() {
+        Code コード = entity.get二次判定要介護状態区分コード();
+        if (コード != null && !コード.isEmpty()) {
+            return YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分コード().value()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
      * 今回二次判定を取得します。
      *
      * @return 今回二次判定
      */
     public RString get今回二次判定() {
-        return YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分コード().value()).get名称();
+        Code コード = entity.get二次判定要介護状態区分コード();
+        if (コード != null && !コード.isEmpty()) {
+            return YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分コード().value()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 二次判定コードを取得します。
+     *
+     * @return 二次判定コード
+     */
+    public RString get二次判定コード() {
+        Code コード = entity.get二次判定要介護状態区分コード();
+        if (コード != null && !コード.isEmpty()) {
+            return entity.get二次判定要介護状態区分コード().value();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -169,7 +209,24 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 判定結果
      */
     public RString get判定結果() {
-        return HanteiKekkaCode.toValue(entity.get判定結果コード().value()).get名称();
+        Code コード = entity.get判定結果コード();
+        if (コード != null && !コード.isEmpty()) {
+            return HanteiKekkaCode.toValue(entity.get判定結果コード().value()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 判定結果コードを取得します。
+     *
+     * @return 判定結果コード
+     */
+    public RString get判定結果コード() {
+        Code コード = entity.get判定結果コード();
+        if (コード != null && !コード.isEmpty()) {
+            return entity.get判定結果コード().value();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -187,7 +244,37 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 特定疾病
      */
     public RString get特定疾病() {
-        return TokuteiShippei.toValue(entity.getコード_２号特定疾病コード().value()).get名称();
+        Code コード = entity.getコード_２号特定疾病コード();
+        if (コード != null && !コード.isEmpty()) {
+            return TokuteiShippei.toValue(entity.getコード_２号特定疾病コード().value()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 一次判定を取得します。
+     *
+     * @return 一次判定
+     */
+    public RString get一次判定() {
+        Code コード = entity.get要介護認定一次判定結果コード();
+        if (コード != null && !コード.isEmpty()) {
+            return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 状態像を取得します。
+     *
+     * @return 状態像コ
+     */
+    public RString get状態像() {
+        Code コード = entity.get要介護状態像例コード();
+        if (コード != null && !コード.isEmpty()) {
+            return YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード().value()).get名称();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -196,7 +283,11 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 状態像コード
      */
     public RString get状態像コード() {
-        return YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード().value()).get名称();
+        Code コード = entity.get要介護状態像例コード();
+        if (コード != null && !コード.isEmpty()) {
+            return entity.get要介護状態像例コード().value();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -223,7 +314,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 認定期間月数
      */
     public RString get認定期間月数() {
-        return entity.get被保険者区分コード();
+        return new RString(entity.get二次判定認定有効期間());
     }
 
     /**
@@ -250,7 +341,24 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 審査会意見種類
      */
     public RString get審査会意見種類() {
-        return entity.get審査会意見種類();
+        RString 審査会意見種類 = entity.get審査会意見種類();
+        if (!RString.isNullOrEmpty(審査会意見種類)) {
+            return NinteiShinsakaiIkenShurui.toValue(entity.get審査会意見種類()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * 審査会意見種類コードを取得します。
+     *
+     * @return 審査会意見種類コード
+     */
+    public RString get審査会意見種類コード() {
+        RString 審査会意見種類 = entity.get審査会意見種類();
+        if (RString.isNullOrEmpty(審査会意見種類)) {
+            return entity.get審査会意見種類();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -258,8 +366,12 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      *
      * @return 生年月日
      */
-    public FlexibleDate get生年月日() {
-        return entity.get生年月日();
+    public RString get生年月日() {
+        FlexibleDate 生年月日 = entity.get生年月日();
+        if (生年月日 != null && !生年月日.isEmpty()) {
+            return new RString(生年月日.toString());
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -269,6 +381,15 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public RString get一次判定結果変更理由() {
         return entity.get一次判定結果変更理由();
+    }
+
+    /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public RString get申請書管理番号() {
+        return entity.get申請書管理番号().getColumnValue();
     }
 
 }

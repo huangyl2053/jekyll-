@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
+ * 住所編集Serviceクラスです。
  *
- * @author liangbc
+ * @reamsid_L DBB-9030-010 liangbc
  */
 public class JushoHenshuService {
 

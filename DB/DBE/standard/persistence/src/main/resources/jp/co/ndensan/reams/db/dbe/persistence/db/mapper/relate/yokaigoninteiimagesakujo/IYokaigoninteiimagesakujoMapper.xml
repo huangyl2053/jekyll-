@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 要介護認定イメージ情報削除のマッピング用XMLです。 -->
+<!-- @reamsid_L DBE-1670-012 dingyi -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteiimagesakujo.IYokaigoninteiimagesakujoMapper">
+    <delete id="deleteDbT5202PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+                AND "gaikyoChosaTextImageKubun" = #{imageKubun}
+    </delete>
+    
+    <delete id="deleteDbT5205PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5205NinteichosahyoTokkijiko" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+                AND "tokkijikoTextImageKubun" = #{imageKubun}
+            <if test="hasGenponMaskKubun">
+                AND "genponMaskKubun" = #{genponMaskKubun}
+            </if>
+    </delete>
+    
+    <delete id="deleteDbT5203PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5203NinteichosahyoKihonChosa" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5204PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5204NinteichosahyoKihonChosaScore" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5207PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5207NinteichosahyoServiceJokyo" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5208PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5208NinteichosahyoServiceJokyoFlag" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5209PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5209NinteichosahyoKinyuItem" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5210PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5210NinteichosahyoShisetsuRiyo" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5211PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5211NinteichosahyoChosaItem" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5212PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5212NinteichosahyoKihonChosaScoreItem" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5206PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5206GaikyoTokki" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+                AND "gaikyoTokkiTextImageKubun" = #{imageKubun}
+    </delete>
+    
+    <delete id="deleteDbT5305PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5305IkenshoImageJoho" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "iraiRirekiNo" = #{ikenshoIraiRirekiNo}
+            <if test="hasMaskDataKubun">
+                AND "maskDataKubun" = #{maskDataKubun}
+            </if>
+    </delete>
+    
+    <delete id="deleteDbT5302PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5302ShujiiIkenshoJoho" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5303PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5303ShujiiIkenshoKinyuItem" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
+    </delete>
+    
+    <delete id="deleteDbT5304PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5304ShujiiIkenshoIkenItem" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
+    </delete>
+</mapper>

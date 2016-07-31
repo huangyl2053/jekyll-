@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-1901-030 surun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.hanyolistshotokujoho.IHanyoListShotokuJohoMapper">
+    <select id="getCSVData"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.hanyolistshotokujoho.HanyoListShotokuJohoMybatisParameter"
+            resultMap="resultMapHanyoListShotokuJohoEntity" fetchSize="500" resultOrdered="true">
+        <include refid="selectHanyoListShotokuJohoEntity" />
+    </select>
+    <sql id="selectHanyoListShotokuJohoEntity">
+        select ROW_NUMBER() over(order by D."所得年度")as row ,* from (
+        SELECT
+        DbV2502."shotokuNendo"                                              AS 所得年度,
+	DbV2502."shikibetsuCode"                                            AS 識別コード,
+        DbV2502."rirekino"                                                  AS 履歴番号,
+	DbV2502."kazeiKubun"                                                AS 課税区分減免前,
+	DbV2502."kazeiKubunGemmenGo"                                        AS 課税区分減免後,
+	DbV2502."gokeiShotokuGaku"                                          AS 合計所得金額,
+	DbV2502."nenkiniShunyuGaku"                                         AS 公的年金収入額,
+	DbV2502."nenkiniShotokuGaku"                                        AS 公的年金所得額,
+	DbV2502."kazeiShotokuGaku"                                          AS 課税所得額,
+	DbV2502."gekihenKanwaKubun"                                         AS 激変緩和措置区分,
+	DbV2502."yusenKubun"                                                AS 優先区分,
+	DbV2502."shoriTimeStamp"                                            AS 処理日時,
+	DbV1001."hihokenshaNo"                                              AS dbv1001被保険者番号,
+	DbV1001."idoYMD"                                                    AS 異動日,
+	DbV1001."edaNo"                                                     AS 枝番,
+	DbV1001."idoJiyuCode"                                               AS 異動事由コード,
+	DbV1001."shichosonCode"                                             AS 市町村コード,
+	DbV1001."shikibetsuCode"                                            AS dbv1001識別コード,
+	DbV1001."shikakuShutokuJiyuCode"                                    AS 資格取得事由コード,
+	DbV1001."shikakuShutokuYMD"                                         AS 資格取得年月日,
+	DbV1001."shikakuShutokuTodokedeYMD"                                 AS 資格取得届出年月日,
+	DbV1001."ichigoShikakuShutokuYMD"                                   AS 第1号資格取得年月日,
+	DbV1001."hihokennshaKubunCode"                                      AS 被保険者区分コード,
+	DbV1001."shikakuSoshitsuJiyuCode"                                   AS 資格喪失事由コード,
+	DbV1001."shikakuSoshitsuYMD"                                        AS 資格喪失年月日,
+	DbV1001."shikakuSoshitsuTodokedeYMD"                                AS 資格喪失届出年月日,
+	DbV1001."shikakuHenkoJiyuCode"                                      AS 資格変更事由コード,
+	DbV1001."shikakuHenkoYMD"                                           AS 資格変更年月日,
+	DbV1001."shikakuHenkoTodokedeYMD"                                   AS 資格変更届出年月日,
+	DbV1001."jushochitokureiTekiyoJiyuCode"                             AS 住所地特例適用事由コード,
+	DbV1001."jushochitokureiTekiyoYMD"                                  AS 適用年月日,
+	DbV1001."jushochitokureiTekiyoTodokedeYMD"                          AS 適用届出年月日,
+	DbV1001."jushochitokureiKaijoJiyuCode"                              AS 住所地特例解除事由コード,
+	DbV1001."jushochitokureiKaijoYMD"                                   AS 解除年月日,
+	DbV1001."jushochitokureiKaijoTodokedeYMD"                           AS 解除届出年月日,
+	DbV1001."jushochiTokureiFlag"                                       AS 住所地特例フラグ,
+	DbV1001."koikinaiJushochiTokureiFlag"                               AS 広域内住所地特例フラグ,
+	DbV1001."koikinaiTokureiSochimotoShichosonCode"                     AS 広住特措置元市町村コード,
+	DbV1001."kyuShichosonCode"                                          AS 旧市町村コード,
+	B."fukaNendo"                                                       AS 賦課年度,
+	B."hihokenshaNo"                                                    AS 被保険者番号,
+	B."hokenryoDankai"                                                  AS 保険料段階,
+	B."hokenryoDankaiKarisanntei"                                       AS 保険料段階仮算定時,
+	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
+
+        FROM
+                rgdb."DbV2502KaigoShotoku" AS DbV2502
+                INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS DbV1001
+                ON DbV1001."shikibetsuCode" = DbV2502."shikibetsuCode"
+                INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+                ON "ShikibetsuTaisho"."shikibetsuCode"=DbV2502."shikibetsuCode"
+                INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+                ON "Atesaki"."shikibetsuCode"=DbV2502."shikibetsuCode"
+                INNER JOIN (
+                        SELECT
+                                DbT2002."fukaNendo",
+                                DbT2002."hihokenshaNo",
+                                DbT2002."hokenryoDankai",
+                                DbT2002."hokenryoDankaiKarisanntei"
+                        FROM
+                                rgdb."DbT2002Fuka" AS DbT2002
+                        INNER JOIN (
+                                SELECT
+                                        "DbT2002Inner"."fukaNendo",
+                                        "DbT2002Inner"."hihokenshaNo",
+                                        MAX("DbT2002Inner"."choteiNichiji") AS "choteiNichiji"
+                                FROM
+                                        rgdb."DbT2002Fuka" AS "DbT2002Inner"
+                                GROUP BY "DbT2002Inner"."fukaNendo","DbT2002Inner"."hihokenshaNo"
+                        ) AS A
+                        ON A."fukaNendo" = DbT2002."fukaNendo"
+                        AND A."hihokenshaNo" = DbT2002."hihokenshaNo"
+                        AND A."choteiNichiji" = DbT2002."choteiNichiji"
+                ) AS B
+                ON B."fukaNendo" = DbV2502."shotokuNendo"
+                AND B."hihokenshaNo" = DbV1001."hihokenshaNo"
+        WHERE
+                1=1
+                AND DbV2502."shotokuNendo" = #{賦課年度}
+                AND DbV2502."kazeiKubun" IN 
+                <foreach collection="課税区分減免前s" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+                <if test="住民税減免前後表示区分 == 1">
+                AND DbV2502."kazeiKubunGemmenGo" IN 
+                <foreach collection="課税区分減免後s" index="index" item="code" open="(" separator="," close=")">
+                    #{code}
+                </foreach>
+                </if>
+                <if test="抽出期間From != null and !抽出期間From.isEmpty()">
+                AND DbV2502."shoriTimeStamp" <![CDATA[>=]]> #{抽出期間From}
+                </if>
+                <if test="抽出期間To !=null and !抽出期間To.isEmpty()">
+                AND DbV2502."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間To}
+                </if>
+                ) as D
+    </sql>
+    
+    <resultMap id="resultMapHanyoListShotokuJohoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistshotokujoho.HanyoListShotokuJohoEntity">
+        <id column="row"/>
+        <result property="所得年度" column="所得年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="課税区分減免前" column="課税区分減免前" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="課税区分減免後" column="課税区分減免後" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合計所得金額" column="合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公的年金収入額" column="公的年金収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公的年金所得額" column="公的年金所得額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="課税所得額" column="課税所得額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="激変緩和措置区分" column="激変緩和措置区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="優先区分" column="優先区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="処理日時" column="処理日時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="dbv1001被保険者番号" column="dbv1001被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="異動日" column="異動日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="枝番" column="枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動事由コード" column="異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="dbv1001識別コード" column="dbv1001識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得年月日" column="資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得届出年月日" column="資格取得届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="第1号資格取得年月日" column="第1号資格取得年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失年月日" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失届出年月日" column="資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格変更事由コード" column="資格変更事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更年月日" column="資格変更年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格変更届出年月日" column="資格変更届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例適用事由コード" column="住所地特例適用事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="適用年月日" column="適用年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="適用届出年月日" column="適用届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例解除事由コード" column="住所地特例解除事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="解除年月日" column="解除年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="解除届出年月日" column="解除届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例フラグ" column="住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広域内住所地特例フラグ" column="広域内住所地特例フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広住特措置元市町村コード" column="広住特措置元市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="旧市町村コード" column="旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="保険料段階" column="保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険料段階仮算定時" column="保険料段階仮算定時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="宛名Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="宛先Entity"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+    </resultMap>
+
+</mapper>

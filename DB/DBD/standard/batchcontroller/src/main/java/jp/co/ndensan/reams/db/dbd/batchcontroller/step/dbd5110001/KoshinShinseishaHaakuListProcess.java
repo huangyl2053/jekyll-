@@ -28,18 +28,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
@@ -62,6 +60,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     private final RString 厚労省IF識別コード_09A = new RString("09A");
     private final RString 厚労省IF識別コード_09B = new RString("09B");
     private final RString ファイル名_日本語 = new RString("更新未申請者把握リスト");
+    private final RString ファイル名_英数字 = new RString("KoshinMiShinseishaHaaku.csv");
     private final RString 未申請者全て = new RString("未申請者全て");
     private final RString 対象月まで = new RString("対象月まで");
     private final RString 範囲指定 = new RString("範囲指定");
@@ -76,7 +75,6 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
 
     private RString eucFilename;
     private RString spoolWorkPath;
-    private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
 
     @BatchWriter
@@ -86,9 +84,8 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     protected void initialize() {
         mapper = getMapper(IKoshinShinseishaHaakuListMapper.class);
         personalDataList = new ArrayList<>();
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilename = Path.combinePath(spoolWorkPath, new RString("更新未申請者把握リスト.csv"));
+        spoolWorkPath = Path.getTmpDirectoryPath();
+        eucFilename = Path.combinePath(spoolWorkPath, new RString("KoshinMiShinseishaHaaku.csv"));
         eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilename, EUC_ENTITY_ID).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
@@ -120,11 +117,19 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
 
     @Override
     protected void process(UpdateNotApplicantEntity 更新未申請者把握情報) {
-        連番 = 連番 + 1;
-        PreviousInformationEntity 前回の情報
+        List<PreviousInformationEntity> 前回の情報List
                 = mapper.get前回の情報(new KoshinShinseishaHaakuListMyBatisParameter(更新未申請者把握情報.get申請書管理番号()));
-        KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, 前回の情報);
-        eucCsvWriterJunitoJugo.writeLine(csvEntity);
+        if (前回の情報List.isEmpty()) {
+            KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, null);
+            連番++;
+            eucCsvWriterJunitoJugo.writeLine(csvEntity);
+        } else {
+            for (PreviousInformationEntity 前回の情報 : 前回の情報List) {
+                KoshinShinseishaHaakuListCSVEntity csvEntity = getCSVEntity(連番, 更新未申請者把握情報, 前回の情報);
+                連番++;
+                eucCsvWriterJunitoJugo.writeLine(csvEntity);
+            }
+        }
         ExpandedInformation expandedInformations
                 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 更新未申請者把握情報.get申請書管理番号());
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, expandedInformations);
@@ -142,8 +147,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
         eucFileOutputJokenhyoFactory();
         eucCsvWriterJunitoJugo.close();
         if (!personalDataList.isEmpty()) {
-            AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            manager.spool(eucFilename, id);
+            AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
         }
     }
 
@@ -154,7 +158,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
                 association.getLasdecCode_().getColumnValue(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                RString.EMPTY,
+                ファイル名_英数字,
                 EUC_ENTITY_ID.toRString(),
                 new RString(String.valueOf(eucCsvWriterJunitoJugo.getCount())),
                 contribute());
@@ -185,8 +189,8 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     private KoshinShinseishaHaakuListCSVEntity getCSVEntity(int 連番,
             UpdateNotApplicantEntity 更新未申請者把握情報, PreviousInformationEntity 前回の情報) {
         RString 生年月日RString = RString.EMPTY;
-        if (更新未申請者把握情報.get生年月日() != null) {
-            生年月日RString = new RString(更新未申請者把握情報.get生年月日().toString());
+        if (!isDateNullOrEmpty(更新未申請者把握情報.get生年月日())) {
+            生年月日RString = 更新未申請者把握情報.get生年月日().wareki().toDateString();
         }
         if (null == 前回の情報) {
             return new KoshinShinseishaHaakuListCSVEntity(new RString(連番), 更新未申請者把握情報.get被保険者番号(),
@@ -196,20 +200,20 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
                     RString.EMPTY, RString.EMPTY, RString.EMPTY);
         }
         RString 前回申請日 = RString.EMPTY;
-        if (前回の情報.get認定申請年月日() != null) {
-            前回申請日 = new RString(前回の情報.get認定申請年月日().toString());
+        if (!isDateNullOrEmpty(前回の情報.get認定申請年月日())) {
+            前回申請日 = 前回の情報.get認定申請年月日().wareki().toDateString();
         }
         RString 前回認定日 = RString.EMPTY;
-        if (前回の情報.get二次判定年月日() != null) {
-            前回認定日 = new RString(前回の情報.get二次判定年月日().toString());
+        if (!isDateNullOrEmpty(前回の情報.get二次判定年月日())) {
+            前回認定日 = 前回の情報.get二次判定年月日().wareki().toDateString();
         }
         RString 前回認定有効開始日 = RString.EMPTY;
-        if (前回の情報.get二次判定認定有効開始年月日() != null) {
-            前回認定日 = new RString(前回の情報.get二次判定認定有効開始年月日().toString());
+        if (!isDateNullOrEmpty(前回の情報.get二次判定認定有効開始年月日())) {
+            前回認定有効開始日 = 前回の情報.get二次判定認定有効開始年月日().wareki().toDateString();
         }
         RString 前回認定有効終了日 = RString.EMPTY;
-        if (前回の情報.get二次判定認定有効終了年月日() != null) {
-            前回認定日 = new RString(前回の情報.get二次判定認定有効終了年月日().toString());
+        if (!isDateNullOrEmpty(前回の情報.get二次判定認定有効終了年月日())) {
+            前回認定有効終了日 = 前回の情報.get二次判定認定有効終了年月日().wareki().toDateString();
         }
         RString 前回介護度 = RString.EMPTY;
         if (前回の情報.get二次判定要介護状態区分コード() != null && !前回の情報.get二次判定要介護状態区分コード().isEmpty()) {
@@ -230,6 +234,10 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
                 前回申請日, 前回の情報.get認定申請区分_申請時_コード(), 前回認定日, 前回認定有効開始日, 前回認定有効終了日,
                 前回の情報.get二次判定認定有効期間(), 前回の情報.get認定調査委託先コード(), 前回の情報.get認定調査委託先情報_事業者名称(),
                 前回の情報.get入所施設コード(), 前回の情報.get介護事業者_事業者名称());
+    }
+
+    private boolean isDateNullOrEmpty(FlexibleDate 年月日) {
+        return null == 年月日 || 年月日.isEmpty();
     }
 
 }

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.pnlIryohokenJohoDiv;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 共有子Div「医療保険履歴」のイベントを定義した共有子Divです。
@@ -139,8 +141,9 @@ public class IryohokenRirekiCommonChildDiv {
     }
 
     private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
-        RString 医療保険情報_識別コード = requestDiv.get識別コード();
-
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        RString 医療保険情報_識別コード = taishoshaKey.get識別コード().getColumnValue();
+        RString 医療保険情報_被保険者番号 = taishoshaKey.get被保険者番号().getColumnValue();
         List<dgIryohokenIchiran_Row> 医療保険情報RiReKiNoSortList = requestDiv.getDgIryohokenIchiran().getDataSource();
         Collections.sort(医療保険情報RiReKiNoSortList, new RiReKiNoComparator());
         Decimal riReKiNo = Decimal.ZERO;
@@ -170,9 +173,8 @@ public class IryohokenRirekiCommonChildDiv {
             保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
             ichiran_Row.setDefaultDataName10(保険者名.toRString());
             ichiran_Row.setDefaultDataName11(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey());
-            ichiran_Row.setDefaultDataName12(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+            ichiran_Row.setDefaultDataName12(医療保険情報_被保険者番号);
             ichiran_Row.setDefaultDataName13(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
-
             ichiran_Row.getDefaultDataName9().setValue(riReKiNo);
             ichiran_Row.setDefaultDataName0(医療保険情報_識別コード);
             ichiran_Row.setDefaultDataName2(状態_追加);
@@ -201,7 +203,7 @@ public class IryohokenRirekiCommonChildDiv {
                 ichiran_Row.setDefaultDataName6(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 ichiran_Row.setDefaultDataName7(requestDiv.getPnlIryohokenJoho().getTxtKigoBango().getValue());
                 ichiran_Row.setDefaultDataName11(requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().getSelectedKey());
-                ichiran_Row.setDefaultDataName12(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());
+                ichiran_Row.setDefaultDataName12(医療保険情報_被保険者番号);
                 ichiran_Row.setDefaultDataName13(requestDiv.getPnlIryohokenJoho().getTxtHokensyaMeisho().getValue());
                 RStringBuilder 保険者名 = new RStringBuilder();
                 保険者名.append(requestDiv.getPnlIryohokenJoho().getTxtHokensyaKodo().getValue());

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -52,10 +51,10 @@ public class ShoKaishuKirokuKanri {
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
         if (dgKoufuKaishuRow.getKoufuDate().getValue() != null) {
-            requestDiv.getPanelInput().getTxtKoufuDate().setValue(new RDate(dgKoufuKaishuRow.getKoufuDate().toString()));
+            requestDiv.getPanelInput().getTxtKoufuDate().setValue(dgKoufuKaishuRow.getKoufuDate().getValue());
         }
         if (dgKoufuKaishuRow.getYukoKigen().getValue() != null) {
-            requestDiv.getPanelInput().getTxtYukouKigen().setValue(new RDate(dgKoufuKaishuRow.getYukoKigen().toString()));
+            requestDiv.getPanelInput().getTxtYukouKigen().setValue(dgKoufuKaishuRow.getYukoKigen().getValue());
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
             requestDiv.getPanelInput().getDdlKoufuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0002)));
@@ -65,7 +64,7 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getPanelInput().getDdlKoufuJiyu().setSelectedValue(dgKoufuKaishuRow.getKoufuJiyu());
         requestDiv.getPanelInput().getTxaKoufuRiyu().setValue(dgKoufuKaishuRow.getKofuRiyu());
         if (dgKoufuKaishuRow.getKaishuDate().getValue() != null) {
-            requestDiv.getPanelInput().getTxtKaisyuDate().setValue(new RDate(dgKoufuKaishuRow.getKaishuDate().toString()));
+            requestDiv.getPanelInput().getTxtKaisyuDate().setValue(dgKoufuKaishuRow.getKaishuDate().getValue());
         }
         if (被保険者証.equals(dgKoufuKaishuRow.getKoufuType())) {
             requestDiv.getPanelInput().getDdlKaisyuJiyu().setDataSource(getCode(new CodeShubetsu(CODESHUBETSU_0003)));

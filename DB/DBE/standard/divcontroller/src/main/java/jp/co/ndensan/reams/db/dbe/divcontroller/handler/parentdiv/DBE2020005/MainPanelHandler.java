@@ -438,12 +438,10 @@ public class MainPanelHandler {
                 ChosaChikuManager.createInstance().insertOrUpdate(builder.build());
             }
             if (削除.equals(list.getJotai())) {
-                ChosaChikuMapperParameter paramer = new ChosaChikuMapperParameter();
-                paramer.setChosaChikuCode(div.getNinteiChosainPanel().getChosaChikuCode());
-                paramer.setShichosonCode(div.getNinteiChosainPanel().getShichosonCode());
-                paramer.setNinteiChosaItakusakiCode(list.getNinteiChosaItakusakiCode());
-                paramer.setNinteiChosainCode(list.getNinteiChosainCode());
-                ChosaChikuManager.createInstance().delete(paramer);
+                ChikuNinteiChosainIdentifier key = new ChikuNinteiChosainIdentifier(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),
+                        list.getNinteiChosaItakusakiCode(), list.getNinteiChosainCode(),
+                        new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
+                ChosaChikuManager.createInstance().delete(models, key);
             }
         }
         前排他解除処理();

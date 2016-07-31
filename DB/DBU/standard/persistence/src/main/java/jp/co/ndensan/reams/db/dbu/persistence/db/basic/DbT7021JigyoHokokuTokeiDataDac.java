@@ -165,15 +165,12 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
     @Transaction
     public List<DbT7021JigyoHokokuTokeiDataEntity> selectKaigoHokenTokeiDataList(
             FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        List<RString> shukeiNoList = new ArrayList<RString>() {
-            {
-                add(new RString("0100"));
-                add(new RString("0200"));
-                add(new RString("0301"));
-                add(new RString("0302"));
-                add(new RString("0303"));
-            }
-        };
+        List<RString> shukeiNoList = new ArrayList<>();
+        shukeiNoList.add(new RString("0100"));
+        shukeiNoList.add(new RString("0200"));
+        shukeiNoList.add(new RString("0301"));
+        shukeiNoList.add(new RString("0302"));
+        shukeiNoList.add(new RString("0303"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         ITrueFalseCriteria iTrueFalseCriteria = getiTrueFalseCriteria(年度, 市町村コード, 保険者区分, shukeiNoList);
 
@@ -395,9 +392,9 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                 table(DbT7021JigyoHokokuTokeiData.class).
                 where(and(
                                 eq(hokokuYSeireki, 報告年),
-                                eq(hokokuM, new RString("00")),
+                                eq(hokokuM, MONTH_00),
                                 eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoYSeireki, 集計対象年),
-                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, new RString("00")),
+                                eq(DbT7021JigyoHokokuTokeiData.shukeiTaishoM, MONTH_00),
                                 eq(toukeiTaishoKubun, 統計対象区分),
                                 eq(shichosonCode, 市町村コード),
                                 eq(hyoNo, 表番号),
@@ -457,6 +454,36 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                         by(DbT7021JigyoHokokuTokeiData.shukeiTani, Order.ASC),
                         by(DbT7021JigyoHokokuTokeiData.tateNo, Order.ASC),
                         by(DbT7021JigyoHokokuTokeiData.yokoNo, Order.ASC)).
+                toList(DbT7021JigyoHokokuTokeiDataEntity.class);
+    }
+
+    /**
+     * 事業報告年報集計データの取得
+     *
+     * @param 報告年 報告年
+     * @param 集計対象年 集計対象年
+     * @param 統計対象区分 統計対象区分
+     * @param 市町村コード 市町村コード
+     * @param 表番号 表番号
+     * @param 集計番号list 集計番号list
+     * @return List<DbT7021JigyoHokokuTokeiDataEntity>
+     */
+    @Transaction
+    public List<DbT7021JigyoHokokuTokeiDataEntity> select事業報告年報集計データ(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分,
+            LasdecCode 市町村コード, Code 表番号, List<Code> 集計番号list) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7021JigyoHokokuTokeiData.class).
+                where(and(
+                                eq(hokokuYSeireki, 報告年),
+                                eq(hokokuM, MONTH_00),
+                                eq(shukeiTaishoYSeireki, 集計対象年),
+                                eq(shukeiTaishoM, MONTH_00),
+                                eq(toukeiTaishoKubun, 統計対象区分),
+                                eq(shichosonCode, 市町村コード),
+                                eq(hyoNo, 表番号),
+                                in(shukeiNo, 集計番号list)
+                        )).
                 toList(DbT7021JigyoHokokuTokeiDataEntity.class);
     }
 }

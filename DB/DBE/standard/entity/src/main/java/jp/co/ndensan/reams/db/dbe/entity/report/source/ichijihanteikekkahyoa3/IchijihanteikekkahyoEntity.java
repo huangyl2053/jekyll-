@@ -18,6 +18,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IchijihanteikekkahyoEntity {
 
+    private RString 施設名テキスト;
+    private RString 施設名イメージ;
+    private RString 住所テキスト;
+    private RString 住所イメージ;
+    private RString 電話番号テキスト;
+    private RString 電話番号イメージ;
     private RString 申請書管理番号;
     private RString 帳票名;
     private RString 管理番号;

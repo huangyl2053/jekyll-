@@ -10,13 +10,12 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa4.Shinsak
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 事務局用介護認定審査対象者一覧表A4のEditorクラスです。
+ * 介護認定審査対象者一覧表A4のEditorクラスです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-260 lishengli
  */
 public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
 
@@ -33,9 +32,10 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
     }
 
     /**
+     * 介護認定審査対象者一覧表のEditです。
      *
-     * @param source 事務局用介護認定審査対象者一覧表のReportSourceクラス
-     * @return ShinsakaishiryoA4ReportSource 事務局用介護認定審査対象者一覧表のReportSourceクラス
+     * @param source 介護認定審査対象者一覧表のReportSourceクラス
+     * @return ShinsakaishiryoA4ReportSource 介護認定審査対象者一覧表のReportSourceクラス
      */
     @Override
     public ShinsakaishiryoA4ReportSource edit(ShinsakaishiryoA4ReportSource source) {
@@ -44,27 +44,25 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
 
     private ShinsakaishiryoA4ReportSource editItem(ShinsakaishiryoA4ReportSource source) {
         source.shinsakaiNo = get審査会番号(business.get審査会番号());
-        source.year = business.get審査会開催年月日();
+        source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
         source.listshinsainName_1 = business.get審査員一覧();
-        source.gogitaiNo = RStringUtil.convert半角to全角(business.get合議体番号());
-        source.shinsaTaishoshaCount = RStringUtil.convert半角to全角(business.get審査対象者数());
-        source.list1_1 = business.get審査会審査順();
-        source.list1_2 = business.get保険者();
-        source.list1_3 = business.get被保険者();
-        source.list1_4 = business.get氏名();
-        source.list1_5 = business.get性別();
-        source.list1_6 = business.get年齢();
-        source.list1_7 = business.get前回二次();
-        source.list1_8 = business.get前回期間();
-        source.list1_9 = business.get一次判定();
-        source.list1_10 = business.get警告();
-        source.list1_11 = business.get基準時間();
-        source.list1_12 = RString.EMPTY;
-        source.list1_13 = RString.EMPTY;
+        source.gogitaiNo = business.get合議体番号();
+        source.shinsaTaishoshaCount = business.get審査対象者数();
+        source.listShinsei_1 = business.get審査会審査順();
+        source.listShinsei_2 = business.get保険者();
+        source.listShinsei_3 = business.get被保険者();
+        source.listShinsei_4 = business.get氏名();
+        source.listShinsei_5 = business.get性別();
+        source.listShinsei_6 = business.get年齢();
+        source.listShinsei_7 = business.get前回二次();
+        source.listShinsei_8 = business.get前回期間();
+        source.listShinsei_9 = business.get一次判定();
+        source.listShinsei_10 = business.get警告();
+        source.listShinsei_11 = business.get基準時間();
+        source.listShinsei_12 = RString.EMPTY;
+        source.listShinsei_13 = RString.EMPTY;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (business.get申請書管理番号() == null || RString.isNullOrEmpty(business.get申請書管理番号().getColumnValue())) {
-            source.shinseishoKanriNo = null;
-        } else {
+        if (business.get申請書管理番号() != null || !RString.isNullOrEmpty(business.get申請書管理番号().getColumnValue())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
         }
         return source;

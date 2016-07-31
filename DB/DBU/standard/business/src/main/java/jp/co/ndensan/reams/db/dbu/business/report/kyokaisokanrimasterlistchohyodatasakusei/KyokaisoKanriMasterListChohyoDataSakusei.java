@@ -159,10 +159,10 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         List<RString> 保険料納付減額後保険料段階 = new ArrayList<>();
         for (KyokaisogGaitoshaRelateEntity entity : 境界層管理マスタリスト) {
             被保険者番号.add(entity.getHihokenshaNo().value());
-            識別コード.add(new RString(entity.getShikibetsuCode().toString()));
-            カナ氏名.add(entity.getKanaShimei());
-            氏名.add(entity.getMeisho());
-            if (男.equals(entity.getSeibetsuCode())) {
+            識別コード.add(nullToEmpty(entity.getShikibetsuCode().value()));
+            カナ氏名.add(nullToEmpty(entity.getKanaShimei()));
+            氏名.add(nullToEmpty(entity.getMeisho()));
+            if (男.equals(nullToEmpty(entity.getSeibetsuCode()))) {
                 性別.add(性別_男);
             } else {
                 性別.add(性別_女);
@@ -171,17 +171,17 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                     ? RString.EMPTY : JuminShubetsu.toValue(entity.getJuminShubetsuCode()).toRString());
             状態.add(entity.getJuminJotaiCode() == null
                     ? RString.EMPTY : JuminJotai.toValue(entity.getJuminJotaiCode()).住民状態略称());
-            世帯コード.add(new RString(entity.getSetaiCode().toString()));
+            世帯コード.add(nullToEmpty(entity.getSetaiCode().value()));
             生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
             該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
             該当開始日.add(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
             該当終了日.add(共通ポリシfomart(entity.getTekiyoShuryoYMD()));
-            if (解除する.equals(entity.getKyuufugakuGengakuKisaiKiajoFlag())) {
+            if (解除する.equals(nullToEmpty(entity.getKyuufugakuGengakuKisaiKiajoFlag()))) {
                 給付額減額解除.add(給付額減額記載解除フラグ_解除する);
             } else {
                 給付額減額解除.add(RString.EMPTY);
             }
-            標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
+            標準負担減額後負担額.add(nullToEmpty(new RString(entity.getHyojunFutanKeigengoFutangaku().toString())));
             UzT0007CodeEntity 居室種類 = CodeMaster.getCode(SubGyomuCode.DBZ介護共通,
                     DBZCodeShubetsu.居室種類.getコード(), new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode()), FlexibleDate.getNowDate());
             if (居室種類 != null) {
@@ -189,10 +189,10 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             } else {
                 居住費軽減後居室種類.add(RString.EMPTY);
             }
-            居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
-            食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
-            高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
-            保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
+            居住費軽減後負担額.add(nullToEmpty(new RString(entity.getKyojuhiKeigengoHutangaku().toString())));
+            食費軽減後負担額.add(nullToEmpty(new RString(entity.getShokuhiKeigengoHutangaku().toString())));
+            高額ｻｰﾋﾞｽ費減額後上限額.add(nullToEmpty(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString())));
+            保険料納付減額後保険料段階.add(nullToEmpty(new RString(entity.getGengakuGoHokenryoDankai().toString())));
 
             if ((nocount + 1) % NOCOUNT_20 == 0) {
                 KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
@@ -272,5 +272,12 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         return (date.
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+    }
+
+    private RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
     }
 }

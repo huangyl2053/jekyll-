@@ -156,7 +156,7 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(komokuName, 項目名))).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
-
+   
     /**
      * 帳票制御汎用をキーから取得します。
      *
@@ -179,6 +179,24 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(subGyomuCode, サブ業務コード),
                                 eq(chohyoBunruiID, 帳票分類ID),
                                 eq(kanriNendo, 管理年度))).
+                toList(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+ /**
+     * 帳票制御汎用をキーから取得します。
+     *
+     * @param 管理年度 FlexibleYear
+     * @return List<DbT7067ChohyoSeigyoHanyoEntity>
+     */
+    @Transaction
+    public List<DbT7067ChohyoSeigyoHanyoEntity> get帳票制御汎用(
+            FlexibleYear 管理年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(
+                                   eq(kanriNendo, 管理年度)).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
 
@@ -215,5 +233,27 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(henkoKahi, true))).
                 order(by(komokuName, Order.ASC)).
                 toList(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+
+    /**
+     * 帳票制御汎用を取得します。
+     *
+     * @param 帳票分類ID ChohyoBunruiID
+     * @param 項目名 KomokuName
+     * @return DbT7067ChohyoSeigyoHanyoEntity
+     */
+    @Transaction
+    public DbT7067ChohyoSeigyoHanyoEntity get帳票制御汎用(ReportId 帳票分類ID,
+            RString 項目名) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(chohyoBunruiID, 帳票分類ID),
+                                eq(komokuName, 項目名))).
+                toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
 }

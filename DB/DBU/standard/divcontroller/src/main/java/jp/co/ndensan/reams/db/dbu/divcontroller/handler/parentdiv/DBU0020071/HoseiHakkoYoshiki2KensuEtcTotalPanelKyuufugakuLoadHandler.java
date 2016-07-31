@@ -102,8 +102,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuLoadHandler {
      * onLoad画面初期化処理
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @return List<JigyoHokokuTokeiData>
      */
-    public void 給付額OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> 給付額OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 給付額 = new ArrayList<>();
 
         if (引き継ぎデータ.get行集計番号().startsWith(給付額総数.toString())) {
@@ -116,6 +117,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelKyuufugakuLoadHandler {
             給付額 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0404);
         }
         loopList(給付額);
+        return 給付額;
     }
 
     private void loopList(List<JigyoHokokuTokeiData> list) {

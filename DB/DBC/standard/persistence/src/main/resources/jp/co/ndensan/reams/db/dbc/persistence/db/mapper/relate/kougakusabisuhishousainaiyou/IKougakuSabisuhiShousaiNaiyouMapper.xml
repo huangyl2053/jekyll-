@@ -112,7 +112,7 @@
          SELECT
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3109JigyoKogakuKyufuTaishoshaGokei" />,
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.allColumns_DbT3112KogakuShikyuShinsaKettei" />,
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.allColumns_DbT3111JigyoKogakuShikyuHanteiKekka" />,
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.allColumns_DbT3111JigyoKogakuShikyuHanteiKekka" />
           FROM
           rgdb."DbT3112KogakuShikyuShinsaKettei" AS "DbT3112KogakuShikyuShinsaKettei"
           LEFT JOIN 

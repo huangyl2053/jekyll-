@@ -16,7 +16,6 @@ public enum DBB8120001StateName implements IStateEnumerations {
 
     NoChange(""),
     即時賦課更正("即時賦課更正"),
-    即時賦課更正_対象者検索以外("即時賦課更正_対象者検索以外"),
     完了("完了");
 
     private final RString name;

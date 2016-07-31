@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0220001;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -34,19 +32,18 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -62,7 +59,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class GetsureiShori {
 
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
+    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("CenterSoshinIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -73,21 +70,18 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData<GetsureiShoriDiv> onLoad(GetsureiShoriDiv div) {
-        getHandler(div).initialize();
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-            throw new ApplicationException(errorMessage);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
         }
-        List<PersonalData> personalDataList = new ArrayList<>();
+        getHandler(div).initialize();
         List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getCcdNinteiTaskList().getDataSource();
         for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
-            personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    row.getShinseishoKanriNo())));
-            personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                    row.getHihoNumber())));
+            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                    new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+            personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
+                    row.getHihoNumber()));
+            AccessLogger.log(AccessLogType.照会, personalData);
         }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
 
@@ -99,7 +93,7 @@ public class GetsureiShori {
      */
     public ResponseData<GetsureiShoriDiv> onClick_BtnDataOutput(GetsureiShoriDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
             getValidationHandler().センター送信完了対象者一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -119,17 +113,17 @@ public class GetsureiShori {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(GetsureiShoriDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<CenterSoshinIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
-                personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo())));
-                personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                        row.getHihoNumber())));
+                PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                        new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+                personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
+                        row.getHihoNumber()));
+                AccessLogger.log(AccessLogType.照会, personalData);
             }
             csvWriter.close();
         }
@@ -137,7 +131,6 @@ public class GetsureiShori {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        AccessLogger.log(AccessLogType.照会, personalDataList);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
@@ -155,7 +148,7 @@ public class GetsureiShori {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            前排他キーの解除(SHINSEISHOKANRINO);
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
         }
         return ResponseData.of(div).respond();
@@ -176,7 +169,7 @@ public class GetsureiShori {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdNinteiTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdNinteiTaskList().一覧件数())) {
                 getValidationHandler().センター送信完了対象者一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -184,7 +177,6 @@ public class GetsureiShori {
                 getValidationHandler().センター送信完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            List<PersonalData> personalDataList = new ArrayList<>();
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 if (row.getCenterSoshinDay().getValue() == null) {
@@ -195,19 +187,20 @@ public class GetsureiShori {
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
                 if (!RString.isNullOrEmpty(申請書管理番号)) {
-                    personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                            row.getShinseishoKanriNo())));
-                    personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                            row.getHihoNumber())));
                     NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
                 }
+                PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                        new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+                personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
+                        row.getHihoNumber()));
+                AccessLogger.log(AccessLogType.更新, personalData);
             }
-            AccessLogger.log(AccessLogType.更新, personalDataList);
-            前排他キーの解除(SHINSEISHOKANRINO);
-            div.getCcdKanryoMessege().setMessage(new RString("完了処理・センター送信"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            RealInitialLocker.release(排他キー);
+            div.getCcdKanryoMessege().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE0220001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -230,16 +223,6 @@ public class GetsureiShori {
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 
     private GetsureiShoriHandler getHandler(GetsureiShoriDiv div) {

@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KogakuKyufuTaishoList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.JigyouKogakuKyuufuTaishouResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntityResult;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCKD00006_高額給付対象一覧共有子Div
@@ -44,6 +49,7 @@ public class KogakuKyufuTaishoListHandler {
     private static final RString 生 = new RString("生");
     private static final RString 現 = new RString("現");
     private static final RString 単 = new RString("単");
+    private static final RString 合 = new RString("合");
     private static final RString 老 = new RString("老");
     private static final RString 緩１ = new RString("緩１");
     private static final RString 緩2 = new RString("緩2");
@@ -85,13 +91,14 @@ public class KogakuKyufuTaishoListHandler {
         if ((高額サービス費支給申請書登録.equals(メニューID) || 高額介護サービス費照会.equals(メニューID))) {
             List<KogakuKyuufuTaishouListEntityResult> 高額給付対象一覧
                     = KogakuKyuufuTaishouList.createInstance().getKogakuKyuufuTaishouList(被保険者番号, サービス提供年月);
+            ViewStateHolder.put(ViewStateKeys.高額給付対象一覧, (Serializable) 高額給付対象一覧);
             set高額給付対象一覧(高額給付対象一覧);
         } else if ((総合事業高額サービス費支給申請書登録.equals(メニューID)
                 || 総合事業高額介護サービス費照会.equals(メニューID))) {
-            List<KogakuKyuufuTaishouListEntityResult> 事業高額給付対象一覧
+            List<JigyouKogakuKyuufuTaishouResult> 事業高額給付対象一覧
                     = KogakuKyuufuTaishouList.createInstance().
                     getJigyouKogakuKyuufuTaishouList(被保険者番号, サービス提供年月);
-            set高額給付対象一覧(事業高額給付対象一覧);
+            set事業高額高額給付対象一覧(事業高額給付対象一覧);
         }
         if (照会モード.equals(画面モード)) {
             set照会モード();
@@ -109,49 +116,63 @@ public class KogakuKyufuTaishoListHandler {
         List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
         for (KogakuKyuufuTaishouListEntityResult koEntity : koTaList) {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
-            if (koEntity.getEntity().get事業者番号() != null && ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData1(koEntity.getEntity().get事業者番号().value());
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData2(koEntity.getEntity().get事業者名());
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData3(koEntity.getEntity().getサービス種類());
-            } else {
+            if (ONE_RS.equals(koEntity.get明細合計区分())) {
+                row.setData1(koEntity.get給付対象者明細entity().get事業者番号().value());
+                row.setData2(koEntity.get事業者名());
+                row.setData3(koEntity.getサービス種類());
+                row.getData4().setValue(koEntity.get給付対象者明細entity().getサービス費用合計額());
+                row.getData5().setValue(koEntity.get給付対象者明細entity().get利用者負担額());
+                row.setData9(koEntity.get給付対象者明細entity().get高額給付根拠());
+                row.setData10(ONE_RS);
+                row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
+            } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
                 row.setData3(合計);
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().getサービス費用合計額() != null) {
-                row.getData4().setValue(koEntity.getEntity().getサービス費用合計額());
-            } else if (TWO_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().getサービス費用合計額合計() != null) {
-                row.getData4().setValue(koEntity.getEntity().getサービス費用合計額合計());
-            }
-            if (ONE_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().get利用者負担額() != null) {
-                row.getData5().setValue(koEntity.getEntity().get利用者負担額());
-            } else if (TWO_RS.equals(koEntity.getEntity().get明細合計区分())
-                    && koEntity.getEntity().get利用者負担額合計() != null) {
-                row.getData5().setValue(koEntity.getEntity().get利用者負担額合計());
-            }
-            if (koEntity.getEntity().get算定基準額() != null) {
-                row.getData6().setValue(koEntity.getEntity().get算定基準額());
-            }
-            if (koEntity.getEntity().get支払済金額合計() != null) {
-                row.getData7().setValue(koEntity.getEntity().get支払済金額合計());
-            }
-            if (koEntity.getEntity().get高額支給額() != null) {
-                row.getData8().setValue(koEntity.getEntity().get高額支給額());
-            }
-            row.setData9(koEntity.getEntity().get高額給付根拠());
-            row.setData10(koEntity.getEntity().get明細合計区分());
-            if (koEntity.getEntity().getサービス種類コード() != null
-                    && ONE_RS.equals(koEntity.getEntity().get明細合計区分())) {
-                row.setData11(koEntity.getEntity().getサービス種類コード().value());
+                row.getData4().setValue(koEntity.get給付対象者合計entity().getサービス費用合計額合計());
+                row.getData5().setValue(koEntity.get給付対象者合計entity().get利用者負担額合計());
+                row.getData6().setValue(koEntity.get給付対象者合計entity().get算定基準額());
+                row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
+                row.getData8().setValue(koEntity.get給付対象者合計entity().get高額支給額());
+                row.setData10(TWO_RS);
             }
             rowList.add(row);
         }
         div.getDgTaishoshaIchiran().setDataSource(rowList);
+    }
+
+    /**
+     * 高額給付対象一覧情報を抽出する
+     *
+     * @param koTaList List<KogakuKyuufuTaishouListEntityResult>
+     */
+    public void set事業高額高額給付対象一覧(List<JigyouKogakuKyuufuTaishouResult> koTaList) {
+        List<dgTaishoshaIchiran_Row> rowList = new ArrayList<>();
+        for (JigyouKogakuKyuufuTaishouResult koEntity : koTaList) {
+            dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
+            if (ONE_RS.equals(koEntity.get明細合計区分())) {
+                row.setData1(koEntity.get給付対象者明細entity().get事業者番号().value());
+                row.setData2(koEntity.get事業者名());
+                row.setData3(koEntity.getサービス種類());
+                row.getData4().setValue(koEntity.get給付対象者明細entity().getサービス費用合計額());
+                row.getData5().setValue(koEntity.get給付対象者明細entity().get利用者負担額());
+                row.setData9(koEntity.get給付対象者明細entity().get事業高額給付根拠());
+                row.setData10(ONE_RS);
+                row.setData11(koEntity.get給付対象者明細entity().getサービス種類コード().value());
+            } else if (TWO_RS.equals(koEntity.get明細合計区分())) {
+                row.setData3(合計);
+                row.getData4().setValue(koEntity.get給付対象者合計entity().getサービス費用合計額合計());
+                row.getData5().setValue(koEntity.get給付対象者合計entity().get利用者負担額合計());
+                row.getData6().setValue(koEntity.get給付対象者合計entity().get算定基準額());
+                row.getData7().setValue(koEntity.get給付対象者合計entity().get支払済金額合計());
+                row.getData8().setValue(koEntity.get給付対象者合計entity().get事業高額支給額());
+                row.setData10(TWO_RS);
+            }
+            rowList.add(row);
+        }
+        div.getDgTaishoshaIchiran().setDataSource(rowList);
+    }
+
+    public List<dgTaishoshaIchiran_Row> get給付対象一覧() {
+        return div.getDgTaishoshaIchiran().getDataSource();
     }
 
     /**
@@ -265,6 +286,126 @@ public class KogakuKyufuTaishoListHandler {
         }
     }
 
+    private void get高額明細合計データ編集エリア(dgTaishoshaIchiran_Row row, RString 処理モード,
+            FlexibleYearMonth サービス提供年月) {
+        row.setData1(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue());
+        row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
+        row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
+        row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
+        row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
+        if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
+            row.getData6().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue());
+        }
+        if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
+            row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
+        }
+        //TODO
+        row.getData8().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue().
+                add(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue()));
+        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
+            row.setData10(ONE_RS);
+        } else {
+            row.setData10(TWO_RS);
+        }
+        if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
+                && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
+            row.setData11(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
+        }
+        RStringBuilder builder = new RStringBuilder();
+        if (サービス提供年月 != null && サービス提供年月.compareTo(new FlexibleYearMonth(平成17年10月)) <= 0) {
+            if (div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().getSelectedKey().equals(key0)) {
+                builder.append(月);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(低);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(市);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(生);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key3)) {
+                builder.append(現);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(低);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(市);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(生);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key3)) {
+                builder.append(現);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key0)) {
+                builder.append(単);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key1)) {
+                builder.append(合);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)) {
+                builder.append(老);
+                builder.append(コンマ);
+            }
+            row.setData9(builder.toRString());
+        } else if (サービス提供年月 != null && new FlexibleYearMonth(平成17年11月).compareTo(サービス提供年月) <= 0) {
+            if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(低);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(市);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(生);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey().equals(key3)) {
+                builder.append(現);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key0)) {
+                builder.append(低);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key1)) {
+                builder.append(市);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key2)) {
+                builder.append(生);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey().equals(key3)) {
+                builder.append(現);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key0)) {
+                builder.append(単);
+                builder.append(コンマ);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey().equals(key1)) {
+                builder.append(合);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey().equals(key0)) {
+                builder.append(老);
+                builder.append(コンマ);
+            }
+            if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key1)) {
+                builder.append(緩１);
+            } else if (div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey().equals(key2)) {
+                builder.append(緩１);
+            }
+            row.setData9(builder.toRString());
+        }
+        if (追加.equals(処理モード)) {
+            List<dgTaishoshaIchiran_Row> list = div.getDgTaishoshaIchiran().getDataSource();
+            list.add(row);
+        }
+    }
+
     /**
      * 修正制御
      *
@@ -321,33 +462,6 @@ public class KogakuKyufuTaishoListHandler {
         div.getMeisaiGokeiHenshuPanel().getBtnkakutei().setDisabled(false);
     }
 
-    private void get高額明細合計データ編集エリア(dgTaishoshaIchiran_Row row, RString 処理モード) {
-        row.setData1(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue());
-        row.setData2(div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue());
-        row.setData3(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue());
-        row.getData4().setValue(div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue());
-        row.getData5().setValue(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue());
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null) {
-            row.getData6().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue());
-        }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue() != null) {
-            row.getData7().setValue(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
-        }
-        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().equals(ONE_RS)) {
-            row.setData10(ONE_RS);
-        } else {
-            row.setData10(TWO_RS);
-        }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
-                && !div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().isEmpty()) {
-            row.setData11(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue());
-        }
-        if (追加.equals(処理モード)) {
-            List<dgTaishoshaIchiran_Row> list = div.getDgTaishoshaIchiran().getDataSource();
-            list.add(row);
-        }
-    }
-
     /**
      * selectRow
      *
@@ -364,7 +478,7 @@ public class KogakuKyufuTaishoListHandler {
      * @param row dgTaishoshaIchiran_Row
      * @param state RString
      */
-    public void modifyRow(dgTaishoshaIchiran_Row row, RString state) {
+    public void modifyRow(dgTaishoshaIchiran_Row row, RString state, FlexibleYearMonth サービス提供年月) {
         if (修正.equals(state)) {
             boolean flag = checkState(row);
             if (flag) {
@@ -377,7 +491,7 @@ public class KogakuKyufuTaishoListHandler {
             div.getDgTaishoshaIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
             div.getDgTaishoshaIchiran().getClickedItem().setModifyButtonState(DataGridButtonState.Disabled);
         }
-        get高額明細合計データ編集エリア(row, state);
+        get高額明細合計データ編集エリア(row, state, サービス提供年月);
         画面制御(true);
     }
 
@@ -451,34 +565,183 @@ public class KogakuKyufuTaishoListHandler {
                 equals(ddgRow.getData4().getValue()))) {
             return true;
         }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue() == null && ddgRow.getData5() != null) {
+        if (div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue() == null
+                && ddgRow.getData5() != null) {
             return true;
         } else if (div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue() != null
                 && !(div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue().
                 equals(ddgRow.getData5().getValue()))) {
             return true;
         }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() == null && ddgRow.getData6() != null) {
+        if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() == null
+                && ddgRow.getData6() != null) {
             return true;
         } else if (div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue() != null
                 && !(div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue().
                 equals(ddgRow.getData6().getValue()))) {
             return true;
         }
-        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey() == null && ddgRow.getData10() != null) {
+        if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey() == null
+                && ddgRow.getData10() != null) {
             return true;
         } else if (div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey() != null
                 && !(div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey().
                 equals(ddgRow.getData10()))) {
             return true;
         }
-        if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() == null && ddgRow.getData11() != null) {
+        if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() == null
+                && ddgRow.getData11() != null) {
             return true;
         } else if (div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue() != null
                 && !(div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue().
                 equals(ddgRow.getData11()))) {
             return true;
         }
-        return !ddgRow.getData7().getValue().equals(div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
+        return !ddgRow.getData7().getValue().equals(
+                div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue());
+    }
+
+    /**
+     * 明細合計区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get明細合計区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbMisaiGkeiKbun().getSelectedKey();
+    }
+
+    /**
+     * 事業者コードを取得します。
+     *
+     * @return RString
+     */
+    public RString get事業者コード() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaCode().getValue();
+    }
+
+    /**
+     * 事業者名称を取得します。
+     *
+     * @return RString
+     */
+    public RString get事業者名称() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtJgyoshaName().getValue();
+    }
+
+    /**
+     * サービス種類を取得します。
+     *
+     * @return RString
+     */
+    public RString getサービス種類() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtServiceSyurui().getValue();
+    }
+
+    /**
+     * サービス種類名称を取得します。
+     *
+     * @return RString
+     */
+    public RString getサービス種類名称() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtServiceSyuruiName().getValue();
+    }
+
+    /**
+     * サービス費用合計を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal getサービス費用合計() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtHyoGkei().getValue();
+    }
+
+    /**
+     * 利用者負担合計を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get利用者負担合計() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtRiyoshafutanGokei().getValue();
+    }
+
+    /**
+     * 算定基準額を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get算定基準額() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtSanteiKijunGaku().getValue();
+    }
+
+    /**
+     * 支払済額を取得します。
+     *
+     * @return Decimal
+     */
+    public Decimal get支払済額() {
+        return div.getMeisaiGokeiHenshuPanel().getTxtSiharaiZumiGaku().getValue();
+    }
+
+    /**
+     * 月遅れ区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get月遅れ区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbTsukiOkure().getSelectedKey();
+    }
+
+    /**
+     * 世帯所得区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get世帯所得区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRabSetaiShotokuKubun().getSelectedKey();
+    }
+
+    /**
+     * 本人所得区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get本人所得区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbShotokuKubun().getSelectedKey();
+    }
+
+    /**
+     * 合算区分を取得します。
+     *
+     * @return RString
+     */
+    public RString get合算区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbGassan().getSelectedKey();
+    }
+
+    /**
+     * 老齢福祉年金を取得します。
+     *
+     * @return RString
+     */
+    public RString get老齢福祉年金() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbRoreiFukushiNenkin().getSelectedKey();
+    }
+
+    /**
+     * 利用者負担第２段階を取得します。
+     *
+     * @return RString
+     */
+    public RString get利用者負担第２段階() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbRiyoshafutanDai2dankai().getSelectedKey();
+    }
+
+    /**
+     * 利用者負担第２段階を取得します。
+     *
+     * @return RString
+     */
+    public RString get激変緩和区分() {
+        return div.getMeisaiGokeiHenshuPanel().getRdbGekihenkanwaKubun().getSelectedKey();
     }
 }

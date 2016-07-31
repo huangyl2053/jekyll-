@@ -44,6 +44,25 @@
         </where>
     </sql>
 
+    <select id="select社会福祉法人等利用者負担軽減"
+            resultMap="resultMap_ShafukuRiyoshaFutanKeigenEntity"
+            resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter"
+            fetchSize="500">
+        SELECT
+        A.*,
+        B.*
+        FROM (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4017ShakaiFukushiHojinRiyoshaFutanKeigenMapper.noDeleted_DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" />) AS A
+        LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.noDeleted_DbT4010GemmenGengakuShinsei" />) AS B
+         ON A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
+        AND A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" = B."dbT4010GemmenGengakuShinsei_hihokenshaNo"
+        AND A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
+        WHERE
+            A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_hihokenshaNo" = #{被保険者番号}
+        AND A."dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_rirekiNo" = #{履歴番号}
+    </select>
+    
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_ShafukuRiyoshaFutanKeigenEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity" autoMapping="true">
         <id property="社会福祉法人等利用者負担軽減Entity.shoKisaiHokenshaNo" column="dbT4017ShakaiFukushiHojinRiyoshaFutanKeigen_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>

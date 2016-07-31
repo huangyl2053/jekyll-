@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -73,7 +74,8 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiW
         set項目(entity);
         item.set左の主治医意見書イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001));
         item.set右の主治医意見書イメージ(共有ファイル2を引き出す(entity.getImageSharedFileId(), ファイルID_E0002));
-        ShujiiikenshoA3Report reportA3 = ShujiiikenshoA3Report.createFrom(item);
+        JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
+        ShujiiikenshoA3Report reportA3 = ShujiiikenshoA3Report.createFrom(business);
         reportA3.writeBy(reportSourceWriterA3);
     }
 
@@ -122,7 +124,11 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiW
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
         return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 

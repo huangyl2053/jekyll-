@@ -69,10 +69,20 @@ public class IkenshoSakuseiIraiIchiranhyoReportSource implements IReportSource {
     public RString listIchiranhyo_9;
     @ReportItem(name = "tsuchibun1", order = 25)
     public RString tsuchibun1;
+    @ReportItem(name = "shujiiIryokikanCode", order = 26)
+    public RString shujiiIryokikanCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        shujiiIryokikanCode
+    }
 }

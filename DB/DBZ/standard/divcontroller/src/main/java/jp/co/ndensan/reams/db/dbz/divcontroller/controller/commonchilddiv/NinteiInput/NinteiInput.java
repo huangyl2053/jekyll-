@@ -57,6 +57,12 @@ public class NinteiInput {
      */
     public ResponseData<NinteiInputDiv> onClick_btnYokaigodoGuide(NinteiInputDiv div) {
         div.getTxtYokaigodoCode().setValue(div.getHdnKoroshoIfShikibetsuCode());
+        if (div.getTxtNinteiYMD().getValue() == null) {
+            div.setHdnNinteiYmd(RString.EMPTY);
+        } else {
+            div.setHdnNinteiYmd(new RString(div.getTxtNinteiYMD().getValue().toString()));
+        }
+
         return ResponseData.of(div).respond();
     }
 

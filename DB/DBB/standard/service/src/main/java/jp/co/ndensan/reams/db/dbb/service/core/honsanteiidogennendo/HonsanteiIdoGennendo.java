@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -880,7 +879,7 @@ public class HonsanteiIdoGennendo {
         } else if (全件出力.equals(parameter.get納入_出力方法())) {
             result.set納入_出力方法(oneRS);
         }
-        result.set納入_出力期(new FlexibleDate(parameter.get納入_出力期()));
+        result.set納入_出力期(parameter.get納入_出力期());
 
         if (する.equals(parameter.get納入_生活保護対象者())) {
             result.set納入_生活保護対象者(zeroRS);
@@ -895,6 +894,7 @@ public class HonsanteiIdoGennendo {
         }
         result.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
         result.set随時フラグ(parameter.is随時フラグ());
+        result.set画面移動フラグ(parameter.is画面移動フラグ());
         return result;
     }
 
@@ -908,5 +908,22 @@ public class HonsanteiIdoGennendo {
     public ShoriDateKanri getMax基準日時(FlexibleYear 調定年度, RString 処理名) {
         DbT7022ShoriDateKanriEntity shoriDateKanri = 処理日付管理Dac.selectMax基準日(調定年度, 処理名);
         return new ShoriDateKanri(shoriDateKanri);
+    }
+
+    /**
+     * 帳票制御汎用キー取得
+     *
+     * @param 帳票分類ID 帳票分類ID
+     * @param 項目名 項目名
+     * @return ChohyoSeigyoHanyo
+     */
+    public ChohyoSeigyoHanyo get帳票制御汎用(ReportId 帳票分類ID, RString 項目名) {
+        DbT7067ChohyoSeigyoHanyoEntity entity
+                = 帳票制御汎用Dac.get帳票制御汎用(帳票分類ID, 項目名);
+        if (entity == null) {
+            return null;
+        } else {
+            return new ChohyoSeigyoHanyo(entity);
+        }
     }
 }

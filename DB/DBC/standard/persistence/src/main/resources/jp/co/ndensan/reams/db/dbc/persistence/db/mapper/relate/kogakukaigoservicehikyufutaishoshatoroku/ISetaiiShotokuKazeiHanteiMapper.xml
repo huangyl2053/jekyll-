@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 調定簿作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2010-090 jiangzongyue -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigoservicehikyufutaishoshatoroku.ISetaiiShotokuKazeiHanteiMapper">
+    
+    <resultMap id="resultMap_TmpSetaiHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiHaakuNyuryokuEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninKubun" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoboKubun" column="shoboKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="roreiFukushiKubun" column="roreiFukushiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiinHihokenshaNo" column="setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninKazeiKubun" column="honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_TmpSetaiJigyoHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TmpSetaiJigyoHaakuNyuryokuEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="setaiInshikibetsuCode" column="setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninKubun" column="honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiKubunGemmenGo" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuGyomu" column="torokuGyomu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoboKubun" column="shoboKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="roreiFukushiKubun" column="roreiFukushiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiinHihokenshaNo" column="setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninKazeiKubun" column="honninKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiKazeiKubun" column="setaiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 世帯員所得情報高額一時に一括Insertする。 -->
+    <insert id="insert世帯員所得情報高額一時に一括住所地特例該当が1">
+        INSERT INTO "TmpSetaiHaakuNyuryoku"
+        (
+           "hihokenshaNo",
+           "shikibetsuCode",
+           "kijunYMD",
+           "shotokuNendo",
+           "jushochiTokureiFlag",
+           "setaiCode",
+           "honninKubun"
+        )
+        SELECT 
+        "TempSetai"."hihokenshaNo",
+        "TempSetai"."shikibetsuCode",
+        "TempSetai"."kijunYMD",
+        "TempSetai"."shotokuNendo",
+        "TempSetai"."jushochiTokureiFlag",
+        "ShikibetsuTaisho"."setaiCode",
+        '1'
+        FROM "TempSetaiinHaakuNyuryoku" AS "TempSetai"
+         INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = "TempSetai"."shikibetsuCode"
+              AND "ShikibetsuTaisho"."shoriYMD"  = "TempSetai"."kijunYMD"
+         WHERE "TempSetai"."jushochiTokureiFlag"= '1'
+    </insert>
+    
+    <!--insert世帯員所得情報高額一時に一括-->
+    <insert id="insert世帯員所得情報高額一時に一括" parameterType="java.util.List">
+        INSERT INTO "TmpSetaiHaakuNyuryoku" 
+        VALUES 
+        <foreach collection="list" item="item" index="index" separator="," >  
+            (#{item.hihokenshaNo},
+            #{item.shikibetsuCode},
+            #{item.kijunYMD},
+            #{item.shotokuNendo},
+            #{item.jushochiTokureiFlag},
+            #{item.setaiCode},
+            #{item.honninKubun},
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            #{item.setaiinHihokenshaNo},
+            #{item.honninKazeiKubun},
+            #{item.setaiKazeiKubun})  
+        </foreach> 
+    </insert>
+    
+     <!--insert世帯員所得情報事業高額一時に一括-->
+    <insert id="insert世帯員所得情報事業高額一時に一括" parameterType="java.util.List">
+        INSERT INTO "TmpSetaiJigyoHaakuNyuryoku" 
+        VALUES 
+        <foreach collection="list" item="item" index="index" separator="," >
+             (
+                #{item.hihokenshaNo},
+                #{item.shikibetsuCode},
+                #{item.setaiInshikibetsuCode},
+                #{item.kijunYMD},
+                #{item.shotokuNendo},
+                #{item.jushochiTokureiFlag},
+                #{item.setaiCode},
+                #{item.honninKubun},
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                #{item.setaiinHihokenshaNo},
+                #{item.honninKazeiKubun},
+                #{item.setaiKazeiKubun}
+            )  
+             </foreach>
+    </insert>
+    
+    <!--世帯員所得情報高額一時に一括Insertする。 -->
+    <insert id="insert世帯員所得情報高額一時に一括住所地特例該当が1以外"
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter">
+        INSERT INTO "TmpSetaiHaakuNyuryoku"
+        (
+           "hihokenshaNo",
+           "shikibetsuCode",
+           "kijunYMD",
+           "shotokuNendo",
+           "jushochiTokureiFlag",
+           "setaiCode",
+           "honninKubun"
+        )
+        SELECT 
+        "KaigoSetai"."hihokenshaNo",
+        "KaigoSetai"."setaiInshikibetsuCode",
+        "KaigoSetai"."setaiHaakuKijunYMD",
+        "TempSetai"."shotokuNendo",
+        "TempSetai"."jushochiTokureiFlag",
+        "ShikibetsuTaisho"."setaiCode",
+        "KaigoSetai"."honninKubun"
+        FROM "TempSetaiinHaakuNyuryoku" AS "TempSetai"
+        INNER JOIN rgdb."DbT7014KaigoSetai" AS "KaigoSetai"
+         ON "TempSetai"."hihokenshaNo"= "KaigoSetai"."hihokenshaNo"
+           AND "TempSetai"."kijunYMD"= "KaigoSetai"."setaiHaakuKijunYMD"
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = "TempSetai"."shikibetsuCode"
+              AND "ShikibetsuTaisho"."shoriYMD"  = "TempSetai"."kijunYMD"
+         WHERE "TempSetai"."jushochiTokureiFlag" <![CDATA[!=]]> '1'
+              AND "KaigoSetai"."kanriShikibetsuKubun" = #{管理識別区分}
+    </insert>
+    
+    <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
+    <insert id="insert世帯員所得情報事業高額一時に一括住所地特例該当が1">
+        INSERT INTO "TmpSetaiJigyoHaakuNyuryoku"
+        (
+           "hihokenshaNo",
+           "shikibetsuCode",
+           "setaiInshikibetsuCode",
+           "kijunYMD",
+           "shotokuNendo",
+           "jushochiTokureiFlag",
+           "setaiCode",
+           "honninKubun"
+        )
+        SELECT 
+        "TempSetaiJigyo"."hihokenshaNo",
+        "TempSetaiJigyo"."shikibetsuCode",
+        "TempSetaiJigyo"."setaiInshikibetsuCode",
+        "TempSetaiJigyo"."kijunYMD",
+        "TempSetaiJigyo"."shotokuNendo",
+        "TempSetaiJigyo"."jushochiTokureiFlag",
+        "ShikibetsuTaisho"."setaiCode",
+        '1'
+        FROM "TempSetaiinHaakuNyuryokuJigyo" AS "TempSetaiJigyo"
+         INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = "TempSetaiJigyo"."shikibetsuCode"
+              AND "ShikibetsuTaisho"."shoriYMD"  = "TempSetaiJigyo"."kijunYMD"
+         WHERE "TempSetaiJigyo"."jushochiTokureiFlag"= '1'
+    </insert>
+
+    <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
+    <insert id="insert世帯員所得情報事業高額一時に一括住所地特例該当が1以外"
+        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehikyufutaishoshatoroku.SetaiShotokuKazeiHanteiMybatisParameter">
+        INSERT INTO "TmpSetaiJigyoHaakuNyuryoku"
+        (
+           "hihokenshaNo",
+           "shikibetsuCode",
+           "kijunYMD",
+           "shotokuNendo",
+           "jushochiTokureiFlag",
+           "setaiCode",
+           "honninKubun"
+        )
+        SELECT 
+        "KaigoSetai"."hihokenshaNo",
+        "KaigoSetai"."setaiInshikibetsuCode",
+        "KaigoSetai"."setaiHaakuKijunYMD",
+        "TempSetaiJigyo"."shotokuNendo",
+        "TempSetaiJigyo"."jushochiTokureiFlag",
+        "ShikibetsuTaisho"."setaiCode",
+        "KaigoSetai"."honninKubun"
+        FROM "TempSetaiinHaakuNyuryokuJigyo" AS "TempSetaiJigyo"
+        INNER JOIN rgdb."DbT7014KaigoSetai" AS "KaigoSetai"
+         ON "TempSetaiJigyo"."hihokenshaNo"= "KaigoSetai"."hihokenshaNo"
+           AND "TempSetaiJigyo"."kijunYMD"= "KaigoSetai"."setaiHaakuKijunYMD"
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                   '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+              ON "ShikibetsuTaisho"."shikibetsuCode" = "TempSetaiJigyo"."shikibetsuCode"
+              AND "ShikibetsuTaisho"."shoriYMD"  = "TempSetaiJigyo"."kijunYMD"
+         WHERE "TempSetaiJigyo"."jushochiTokureiFlag" <![CDATA[!=]]> '1'
+              AND "KaigoSetai"."kanriShikibetsuKubun" = #{管理識別区分}
+    </insert>
+                                                           
+     <resultMap id="resultMap_TempSetaiinHaakuNyuryoku" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinHaakuNyuryokuEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 世帯員所得情報高額一時に一括Insertする。 -->
+    <select resultOrdered="true" id="select世帯員所得情報高額一時に一括" resultMap="resultMap_TempSetaiinHaakuNyuryoku" fetchSize="500">
+        SELECT 
+            "TempSetai".*
+        FROM "TempSetaiinHaakuNyuryoku" AS "TempSetai"
+        WHERE NOT EXISTS (SELECT 'X'
+        FROM "TmpSetaiHaakuNyuryoku" AS "TmpSetaiHaaku"
+        WHERE "TempSetai"."hihokenshaNo" = "TmpSetaiHaaku"."hihokenshaNo")
+    </select>
+
+    <resultMap id="resultMap_TempSetaiinHaakuNyuryokuJigyo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigokyufuhitaishoshatoroku.TempSetaiinJigyoHaakuNyuryokuEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="setaiInshikibetsuCode" column="setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <!-- 世帯員所得情報事業高額一時に一括Insertする。 -->
+    <select resultOrdered="true" id="select世帯員所得情報事業高額一時に一括" resultMap="resultMap_TempSetaiinHaakuNyuryokuJigyo" fetchSize="500">
+        SELECT 
+            "TempSetaiJigyo".*
+        FROM "TempSetaiinHaakuNyuryokuJigyo" AS "TempSetaiJigyo"
+        WHERE NOT EXISTS (SELECT 'X'
+        FROM "TmpSetaiJigyoHaakuNyuryoku" AS "TmpSetaiHaakuJigyo"
+        WHERE "TempSetaiJigyo"."hihokenshaNo" = "TmpSetaiHaakuJigyo"."hihokenshaNo") 
+    </select>
+    
+    <!-- update世帯員所得情報高額一時合併内住所地特例者番号変換処理-->
+    <update id="update世帯員所得情報高額一時合併内住所地特例者番号変換処理">
+       UPDATE "TmpSetaiHaakuNyuryoku"
+       SET "shikibetsuCode" = (SELECT "shikibetsuCodeSochiMoto" 
+                                FROM "TempGappeiNaiJutokushaShinKyuNoHenkan"
+       WHERE "TmpSetaiHaakuNyuryoku"."shikibetsuCode"="TempGappeiNaiJutokushaShinKyuNoHenkan"."shikibetsuCode")
+    </update>
+    
+    <!-- update世帯員所得情報事業高額一時合併内住所地特例者番号変換処理-->
+    <update id="update世帯員所得情報事業高額一時合併内住所地特例者番号変換処理">
+       UPDATE "TmpSetaiJigyoHaakuNyuryoku"
+       SET "shikibetsuCode" = (SELECT "shikibetsuCodeSochiMoto" 
+                                FROM "TempGappeiNaiJutokushaShinKyuNoHenkan"
+       WHERE "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"="TempGappeiNaiJutokushaShinKyuNoHenkan"."shikibetsuCode")
+    </update>
+    
+    <!--update高額介護サービス場合-->
+    <update id="update高額介護サービス場合">
+       UPDATE "TmpSetaiHaakuNyuryoku"
+       SET "kazeiKubun" = (SELECT
+            "介護所得"."kazeiKubun"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "kazeiKubunGemmenGo"= (SELECT
+            "介護所得"."kazeiKubunGemmenGo"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "gekihenKanwaKubun"= (SELECT
+            "介護所得"."gekihenKanwaKubun"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "gokeiShotokuGaku"= (SELECT
+             "介護所得"."gokeiShotokuGaku"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "nenkiniShunyuGaku"= (SELECT
+            "介護所得"."nenkiniShunyuGaku"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "nenkiniShotokuGaku"= (SELECT
+            "介護所得"."nenkiniShotokuGaku"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "kazeiShotokuGaku"= (SELECT
+            "介護所得"."kazeiShotokuGaku"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        ),
+            "torokuGyomu"= (SELECT
+           "介護所得"."torokuGyomu"
+        FROM rgdb."DbV2502KaigoShotoku" AS "介護所得"
+        WHERE "介護所得"."shikibetsuCode"= "TmpSetaiHaakuNyuryoku"."shikibetsuCode"
+        AND "介護所得"."shotokuNendo" = "TmpSetaiHaakuNyuryoku"."shotokuNendo"
+        )
+    </update> 
+    
+    <!-- select取得した内容で世帯員所得情報高額一時に生保区分を更新-->
+    <select resultOrdered="true" id="select取得した内容で世帯員所得情報高額一時に生保区分を更新" resultType="int" fetchSize="500">
+        SELECT  COUNT(*)
+        FROM "TmpSetaiHaakuNyuryoku"
+        INNER JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
+        ON "TmpSetaiHaakuNyuryoku"."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 'DB'
+        AND ((生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
+            AND  "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD") 
+        OR (生活保護受給者."jukyuKaishiYMD"<![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
+            AND 生活保護受給者."jukyuHaishiYMD" IS NULL))
+        LEFT JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
+        ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
+        AND "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
+        AND ("TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[>]]> 生活保護停止期間."jukyuTeishiShuryoYMD"
+        OR 生活保護停止期間."jukyuTeishiShuryoYMD" IS NULL)
+    </select> 
+    
+    <!-- select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新-->
+    <select resultOrdered="true" id="select取得した内容で世帯員所得情報高額一時に老齢福祉区分を更新" resultType="int" fetchSize="500">
+        SELECT COUNT(*)
+        FROM "TmpSetaiHaakuNyuryoku"
+        INNER JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
+        ON "TmpSetaiHaakuNyuryoku"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiHaakuNyuryoku"."kijunYMD" 
+        AND "TmpSetaiHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
+    </select> 
+    
+    <!-- update事業高額介護サービス場合-->
+    <update id="update事業高額介護サービス場合">
+       UPDATE "TmpSetaiJigyoHaakuNyuryoku"
+       SET "kazeiKubun"=(SELECT
+            介護所得."kazeiKubun"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "kazeiKubunGemmenGo"=(SELECT
+            介護所得."kazeiKubunGemmenGo"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "gekihenKanwaKubun"=(SELECT
+            介護所得."gekihenKanwaKubun"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "gokeiShotokuGaku"=(SELECT
+            介護所得."gokeiShotokuGaku"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "nenkiniShunyuGaku"=(SELECT
+            介護所得."nenkiniShunyuGaku"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "nenkiniShotokuGaku"=(SELECT
+            介護所得."nenkiniShotokuGaku"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "kazeiShotokuGaku"=(SELECT
+            介護所得."kazeiShotokuGaku"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo"),
+            "torokuGyomu"=(SELECT
+            介護所得."torokuGyomu"
+            FROM rgdb."DbV2502KaigoShotoku" AS 介護所得
+            WHERE 介護所得."shikibetsuCode"= "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode"
+            AND 介護所得."shotokuNendo" = "TmpSetaiJigyoHaakuNyuryoku"."shotokuNendo")
+    </update> 
+    
+    <!--select取得した内容で世帯員所得情報事業高額一時に生保区分を更新-->
+    <select resultOrdered="true" id="select取得した内容で世帯員所得情報事業高額一時に生保区分を更新" resultType="int" fetchSize="500">
+        SELECT  COUNT(*)
+        FROM "TmpSetaiJigyoHaakuNyuryoku"
+        INNER JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
+        ON "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 'DB'
+        AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" 
+        AND  "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD" 
+        INNER JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
+        ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
+        AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
+        AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[>]]>  生活保護停止期間."jukyuTeishiShuryoYMD"
+    </select> 
+    
+    <!-- select取得した内容で世帯員所得情報事業高額一時に生保区分を更新-->
+    <select resultOrdered="true" id="select取得した内容で世帯員所得情報事業高額一時に老齢福祉区分を更新" resultType="int" fetchSize="500">
+        SELECT  COUNT(*)
+        FROM "TmpSetaiJigyoHaakuNyuryoku"
+        INNER JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
+        ON "TmpSetaiJigyoHaakuNyuryoku"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" 
+        AND "TmpSetaiJigyoHaakuNyuryoku"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD"
+    </select> 
+    
+    <!--update世帯員所得情報高額一時生保区分を付加する-->
+    <update id="update世帯員所得情報高額一時生保区分を付加する">
+       UPDATE "TmpSetaiHaakuNyuryoku" AS "世帯員所得情報高額一時"
+       SET "shoboKubun" = '1'
+        WHERE EXISTS (SELECT 'X'
+            FROM rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
+            LEFT JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
+            ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
+            AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
+            AND "世帯員所得情報高額一時"."kijunYMD" <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
+            AND ("世帯員所得情報高額一時"."kijunYMD" <![CDATA[>]]> 生活保護停止期間."jukyuTeishiShuryoYMD" 
+            OR 生活保護停止期間."jukyuTeishiShuryoYMD" IS NULL)
+            WHERE "世帯員所得情報高額一時"."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
+            AND 生活保護受給者."gyomuCode" = 'DB'
+            AND ((生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報高額一時"."kijunYMD" 
+            AND  "世帯員所得情報高額一時"."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD") 
+            OR (生活保護受給者."jukyuKaishiYMD"<![CDATA[<=]]> "世帯員所得情報高額一時"."kijunYMD" 
+            AND 生活保護受給者."jukyuHaishiYMD" IS NULL
+                )))
+    </update>
+    
+    <!--update世帯員所得情報高額一時老齢福祉区分を更新する-->
+    <update id="update世帯員所得情報高額一時老齢福祉区分を更新する">
+       UPDATE "TmpSetaiHaakuNyuryoku" AS "世帯員所得情報高額一時"
+       SET "roreiFukushiKubun" = '1'
+        WHERE EXISTS (SELECT 'X'
+        FROM 
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
+        WHERE "世帯員所得情報高額一時"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報高額一時"."kijunYMD" 
+        AND "世帯員所得情報高額一時"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
+    </update>
+    
+    <!--update世帯員所得情報事業高額一時生保区分を付加する-->
+    <update id="update世帯員所得情報事業高額一時生保区分を付加する">
+              UPDATE "TmpSetaiJigyoHaakuNyuryoku" AS 世帯員所得情報事業高額一時
+       SET "shoboKubun" = '1'
+       WHERE EXISTS (SELECT 'X'
+        FROM
+        rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
+        INNER JOIN rgur."UrT0528SeikatsuHogoTeishikikan" AS 生活保護停止期間
+        ON 生活保護受給者."shikibetsuCode" = 生活保護停止期間."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 生活保護停止期間."gyomuCode"
+        AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[<]]> 生活保護停止期間."jukyuTeishiKaishiYMD"
+        AND  生活保護受給者."jukyuKaishiYMD"  <![CDATA[>]]>  生活保護停止期間."jukyuTeishiShuryoYMD"
+        WHERE 世帯員所得情報事業高額一時."shikibetsuCode" = 生活保護受給者."shikibetsuCode"
+        AND 生活保護受給者."gyomuCode" = 'DB'
+        AND 生活保護受給者."jukyuKaishiYMD" <![CDATA[<=]]> 世帯員所得情報事業高額一時."kijunYMD" 
+        AND  世帯員所得情報事業高額一時."kijunYMD" <![CDATA[<]]> 生活保護受給者."jukyuHaishiYMD")
+    </update>
+    
+    <!--update世帯員所得情報事業高額一時老齢福祉区分を更新する-->
+    <update id="update世帯員所得情報事業高額一時老齢福祉区分を更新する">
+       UPDATE "TmpSetaiJigyoHaakuNyuryoku" AS "世帯員所得情報事業高額一時"
+       SET "roreiFukushiKubun" = '1'
+        WHERE EXISTS (SELECT 'X'
+        FROM 
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS 老齢福祉年金受給者
+        WHERE "世帯員所得情報事業高額一時"."shikibetsuCode" = 老齢福祉年金受給者."shikibetsuCode"
+        AND 老齢福祉年金受給者."jukyuKaishiYMD" <![CDATA[<=]]> "世帯員所得情報事業高額一時"."kijunYMD" 
+        AND "世帯員所得情報事業高額一時"."kijunYMD" <![CDATA[<=]]> 老齢福祉年金受給者."jukyuHaishiYMD")
+    </update>
+    
+    </mapper>

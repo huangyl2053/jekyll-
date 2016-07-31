@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 保険料納入通知書（本算定過年度）【銀振タイプ】帳票項目定義_5期
@@ -36,21 +35,9 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
      * @param 本算定納入通知書情報 本算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      */
-    protected KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
+    public KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
         this.本算定納入通知書情報 = 本算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
-    }
-
-    /**
-     *
-     * @param 本算定納入通知書情報 本算定納入通知書情報
-     * @param ninshoshaSource 認証者情報
-     * @return HokenryoNonyuTsuchishoGinfuriFiveKiReport
-     * @throws NullPointerException 引数が{@code null}の時
-     */
-    public static KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport createFrom(
-            @NonNull HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, NinshoshaSource ninshoshaSource) {
-        return new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
     }
 
     @Override
@@ -60,7 +47,6 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
             return;
         }
         int 銀振印字位置Para = 0;
-        int 連番 = 1;
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit = new ArrayList<>();
         for (NonyuTsuchiShoKiJoho 納入通知書期情報 : 納入通知書期情報リスト) {
             int 銀振印字位置 = 納入通知書期情報.get銀振印字位置();
@@ -68,22 +54,21 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
                 throw new ApplicationException(DbbErrorMessages.ブック開始位置不正.getMessage());
             }
             if (銀振印字位置 <= 銀振印字位置Para) {
-                edit(writer, 納入通知書期情報リストEdit, 連番);
+                edit(writer, 納入通知書期情報リストEdit);
                 納入通知書期情報リストEdit.clear();
                 納入通知書期情報リストEdit.add(納入通知書期情報);
-                連番++;
             } else {
                 納入通知書期情報リストEdit.add(納入通知書期情報);
             }
             銀振印字位置Para = 銀振印字位置;
         }
-        edit(writer, 納入通知書期情報リストEdit, 連番);
+        edit(writer, 納入通知書期情報リストEdit);
     }
 
     private void edit(ReportSourceWriter<KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource> writer,
-            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int 連番) {
+            List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit) {
         IKanendoHokenryoNonyuTsuchishoGinfuriFiveKiEditor editor
-                = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiEditor(本算定納入通知書情報, ninshoshaSource, 納入通知書期情報リストEdit, 連番);
+                = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiEditor(本算定納入通知書情報, ninshoshaSource, 納入通知書期情報リストEdit);
         IKanendoHokenryoNonyuTsuchishoGinfuriFiveKiBuilder builder = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiBuilder(editor);
         writer.writeLine(builder);
     }
@@ -131,8 +116,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
         本算定納入通知書情報Report.set編集範囲区分(HenshuHaniKubun.全てのレイアウト);
         本算定納入通知書情報Report.set納入通知書期情報リスト(納入通知書期情報リストReport);
         KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport report
-                = KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport
-                .createFrom(本算定納入通知書情報Report, ninshoshaSource);
+                = new KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報Report, ninshoshaSource);
         return report;
     }
 
@@ -147,6 +131,7 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiReport extends NonyuTsuch
         本算定納入通知書情報Report.set現年度_過年度区分(本算定納入通知書情報.get現年度_過年度区分());
         本算定納入通知書情報Report.set納付書共通(本算定納入通知書情報.get納付書共通());
         本算定納入通知書情報Report.set編集後本算定通知書共通情報(本算定納入通知書情報.get編集後本算定通知書共通情報());
+        本算定納入通知書情報Report.set連番(本算定納入通知書情報.get連番());
     }
 
 }

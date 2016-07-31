@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120001
 
 import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoTyushutuRenkeiKoikiParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
@@ -46,6 +46,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString DEE01F001 = new RString("DEE01F001");
     private static final RString DEC05F001またはDEE01F001 = new RString("DEC05F001またはDEE01F001");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegisterKoiki");
+    private static final RString COMMON_BUTTON_FIELD_NAME_当初 = new RString("btnBatchRegisterDousyo");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -63,11 +64,13 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
             年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, currentTime,
                     SubGyomuCode.DBB介護賦課);
             div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(new RDate(年度.toString()));
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
         } else if (所得情報抽出_連携異動.equals(メニューID)) {
             遷移区分 = 遷移区分_1;
             年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_所得年度, currentTime,
                     SubGyomuCode.DBB介護賦課);
             div.getShotokuJohoChushutsuKoikiPanel().getTxtShoriNendoKoiki().setValue(new RDate(年度.toString()));
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
         }
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
         handler.initCheck(currentTime);
@@ -108,12 +111,12 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
      * 「実行する」を押下場合、バッチを起動します。
      *
      * @param div 異動チェックリストDIV
-     * @return ResponseData<ShotokuJohoTyushutuRenkeiKoikiParameter>
+     * @return ResponseData<ShotokuJohoBatchresultKoikiParameter>
      */
-    public ResponseData<ShotokuJohoTyushutuRenkeiKoikiParameter> onclick_batchRegister(
+    public ResponseData<ShotokuJohoBatchresultKoikiParameter> onclick_batchRegister(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
         ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
-        ShotokuJohoTyushutuRenkeiKoikiParameter parameter = handler.getBatchParamter();
+        ShotokuJohoBatchresultKoikiParameter parameter = handler.getBatchParamter();
         return ResponseData.of(parameter).respond();
     }
 
@@ -128,8 +131,10 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
         DataGrid<dgShichosonIchiran_Row> grid = div.getDgShichosonIchiran();
         if (grid.getSelectedItems().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, true);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME_当初, false);
         }
         return ResponseData.of(div).respond();
     }

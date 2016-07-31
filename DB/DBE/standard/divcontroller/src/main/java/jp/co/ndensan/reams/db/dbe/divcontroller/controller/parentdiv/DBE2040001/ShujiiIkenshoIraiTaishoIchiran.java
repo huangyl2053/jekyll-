@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -39,19 +38,18 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -68,7 +66,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ShujiiIkenshoIraiTaishoIchiran {
 
-    private static final RString SHINSEISHOKANRINO = new RString("ShinseishoKanriNo");
+    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("ShujiiIkenshoIraiIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -79,12 +77,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onLoad(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).initialize();
-        if (!前排他キーのセット(SHINSEISHOKANRINO)) {
-            ErrorMessage errorMessage = new ErrorMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode(),
-                    UrErrorMessages.排他_他のユーザが使用中.getMessage().evaluate());
-            throw new ApplicationException(errorMessage);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
         }
+        getHandler(div).initialize();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 
@@ -96,7 +92,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_BtnYitiranSyuturyoku(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
             getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -151,7 +147,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -164,7 +160,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
-            前排他キーの解除(SHINSEISHOKANRINO);
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
         }
         return ResponseData.of(div).respond();
@@ -178,7 +174,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onBeforeOpenDialog_btnIraishoToOutput(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
+        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
             getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -208,7 +204,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             model.set申請書管理番号リスト(list);
             model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
             div.setHiddenIuputModel(DataPassingConverter.serialize(model));
-            前排他キーの解除(SHINSEISHOKANRINO);
+            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -240,7 +236,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdTaskList().一览件数())) {
+            if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -279,8 +275,9 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                     getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                 }
             }
-            前排他キーの解除(SHINSEISHOKANRINO);
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書依頼"), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            RealInitialLocker.release(排他キー);
+            div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書依頼の保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2040001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -335,16 +332,6 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private boolean 前排他キーのセット(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除(RString 申請書管理番号) {
-        LockingKey 排他キー = new LockingKey(申請書管理番号);
-        RealInitialLocker.release(排他キー);
     }
 
     private ShujiiIkenshoIraiTaishoIchiranHandler getHandler(ShujiiIkenshoIraiTaishoIchiranDiv div) {

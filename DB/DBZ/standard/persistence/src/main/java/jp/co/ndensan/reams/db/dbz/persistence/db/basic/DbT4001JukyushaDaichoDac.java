@@ -19,6 +19,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.n
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.ninteiYukoKikanShuryoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shikyuGendoTanisu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shinseiJokyoKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.yukoMukoKubun;
@@ -453,7 +454,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(rirekiNo, 0))).
+                                eq(rirekiNo, new RString(0)))).
                 order(by(jukyuShinseiYMD, Order.DESC)).
                 limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
@@ -498,5 +499,30 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(rirekiNo, 履歴番号))).order(by(jukyuShinseiYMD, ASC)).limit(1).
                 toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 区分限度額統計処理。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 開始利用年月 開始利用年月
+     * @param 終了利用年月 終了利用年月
+     * @return List<DbT4001JukyushaDaichoEntity>
+     * @throws NullPointerException 引数被保険者番号がnullの場合
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity select居宅総合事業区分(HihokenshaNo 被保険者番号, FlexibleDate 開始利用年月, FlexibleDate 終了利用年月)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 開始利用年月),
+                                leq(終了利用年月, ninteiYukoKikanShuryoYMD))).
+                order(by(shikyuGendoTanisu, Order.DESC)).
+                limit(1).
+                toObject(DbT4001JukyushaDaichoEntity.class);
     }
 }

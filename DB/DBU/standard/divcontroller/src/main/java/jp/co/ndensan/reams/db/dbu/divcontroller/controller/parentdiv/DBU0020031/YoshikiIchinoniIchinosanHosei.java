@@ -150,14 +150,25 @@ public class YoshikiIchinoniIchinosanHosei {
         List<RString> 様式種類List31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
         List<RString> 様式種類List32 = ViewStateHolder.get(ViewStateKeys.様式種類_32, List.class);
 
+        List<JigyoHokokuTokeiData> 食費_居住費データリスト = ViewStateHolder.get(
+                ViewStateKeys.食費_居住費データリスト, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担滅額データリスト = ViewStateHolder.get(
+                ViewStateKeys.利用者負担滅額データリスト, List.class);
+        List<JigyoHokokuTokeiData> 特定負担限度額データリスト = ViewStateHolder.get(
+                ViewStateKeys.特定負担限度額データリスト, List.class);
+        List<JigyoHokokuTokeiData> 利用者負担データリスト = ViewStateHolder.get(
+                ViewStateKeys.利用者負担データリスト, List.class);
+
         if (削除状態.equals(状態)) {
-            getHandler(div).delete(引き継ぎデータ,
-                    様式種類List11,
-                    様式種類List12,
-                    様式種類List21,
-                    様式種類List22,
-                    様式種類List31,
-                    様式種類List32);
+
+            if (様式種類List11.contains(様式種類) || 様式種類List21.contains(様式種類)) {
+                getHandler(div).delete(食費_居住費データリスト);
+            } else if (様式種類List31.contains(様式種類) || 様式種類List12.contains(様式種類)) {
+                getHandler(div).delete(利用者負担滅額データリスト);
+            } else if (様式種類List22.contains(様式種類) || 様式種類List32.contains(様式種類)) {
+                getHandler(div).delete(特定負担限度額データリスト);
+                getHandler(div).delete(利用者負担データリスト);
+            }
             div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(削除状態.toString()).evaluate()));
             return ResponseData.of(div).setState(DBU0020031StateName.完了状態);

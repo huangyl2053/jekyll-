@@ -95,6 +95,9 @@ public class ShikakuHenkouIdou {
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
         }
+        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+            return ResponseData.of(div).respond();
+        }
         RealInitialLocker.release(前排他ロックキー);
         div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
         return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
@@ -108,6 +111,9 @@ public class ShikakuHenkouIdou {
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnReSearch(ShikakuHenkouIdouDiv div) {
         RealInitialLocker.release(前排他ロックキー);
+        if (new RString("DBAMN61002").equals(ResponseHolder.getMenuID())) {
+            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).parameter(new RString("広域内転居"));
+        }
         return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
     }
 

@@ -31,6 +31,7 @@ public class KaigoNinteiShinsakai {
     private static final RString 遷移モード_介護認定審査会対象者割付 = new RString("kaisaiYoteiToroku");
     private static final RString 遷移モード_介護認定審査会資料作成 = new RString("shinsakaiShiryoSakusei");
     private static final RString 遷移モード_介護認定審査会委員事前審査結果登録 = new RString("jizenKekkaToroku");
+    private static final RString 遷移モード_介護認定審査会委員事前審査 = new RString("jizenKekkaToroku");
     private static final RString 遷移モード_審査会結果登録 = new RString("shinsaKekkaToroku");
     private static final RString 遷移モード_介護認定審査会審査結果データ取込み = new RString("dataShutsuryoku");
     private static final RString 遷移モード_介護認定審査会審査結果登録 = new RString("shinsaKekkaToroku");
@@ -38,7 +39,8 @@ public class KaigoNinteiShinsakai {
     private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN51004");
     private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN51005");
     private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN51007");
-    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN51008");
+    private static final RString メニューID_介護認定審査会委員事前審査 = new RString("DBEMN51008");
+    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN51009");
     private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN52001");
     private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN52003");
     private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN52002");
@@ -184,8 +186,9 @@ public class KaigoNinteiShinsakai {
         mode.put(メニューID_介護認定審査会対象者割付, 遷移モード_介護認定審査会対象者割付);
         mode.put(メニューID_介護認定審査会資料作成, 遷移モード_介護認定審査会資料作成);
         mode.put(メニューID_介護認定審査会委員事前審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
+        mode.put(メニューID_介護認定審査会委員事前審査, 遷移モード_介護認定審査会委員事前審査);
         mode.put(メニューID_審査会開催結果登録, 遷移モード_審査会結果登録);
-        mode.put(メニューID_審査会審査結果登録, 遷移モード_審査会結果登録);
+        mode.put(メニューID_審査会審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
         mode.put(メニューID_介護認定審査会審査結果データ取込み, 遷移モード_介護認定審査会審査結果データ取込み);
         mode.put(メニューID_介護認定審査会審査結果登録, 遷移モード_介護認定審査会審査結果登録);
         return mode;
@@ -198,7 +201,8 @@ public class KaigoNinteiShinsakai {
         state.put(メニューID_介護認定審査会対象者割付, DBE5100001StateName.対象者割付);
         state.put(メニューID_介護認定審査会資料作成, DBE5100001StateName.審査会資料);
         state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前審査結果登録);
-        state.put(メニューID_審査会開催結果登録, DBE5100001StateName.審査結果登録);
+        state.put(メニューID_介護認定審査会委員事前審査, DBE5100001StateName.事前審査);
+        state.put(メニューID_審査会開催結果登録, DBE5100001StateName.開催結果登録);
         state.put(メニューID_審査会審査結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);
         state.put(メニューID_介護認定審査会審査結果登録, DBE5100001StateName.結果登録_OCR);

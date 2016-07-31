@@ -464,7 +464,7 @@
         <id column="dbT3053ShokanShukei_renban"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity">
         </association>
     </resultMap>
     <select id="get償還払請求集計データ"
@@ -474,7 +474,7 @@
         SSHOKANSHUKEI.*,
         KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) AS SSHOKANSHUKEI
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) AS SSHOKANSHUKEI
         LEFT JOIN
         (SELECT
         KAIGOSERVICESHURUI."serviceShuruiCd",

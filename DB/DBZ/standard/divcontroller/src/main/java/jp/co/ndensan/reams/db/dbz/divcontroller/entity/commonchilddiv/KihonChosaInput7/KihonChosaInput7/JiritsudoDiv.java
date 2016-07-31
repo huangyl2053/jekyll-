@@ -4,13 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * Jiritsudo のクラスファイル
@@ -18,8 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class JiritsudoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,6 +31,8 @@ public class JiritsudoDiv extends Panel {
     private RString shinseishoKanriNo;
     @JsonProperty("recordNumber")
     private RString recordNumber;
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    private RString ninteichosaTokkijikoNoList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -114,6 +113,24 @@ public class JiritsudoDiv extends Panel {
     }
 
     /*
+     * getninteichosaTokkijikoNoList
+     * @return ninteichosaTokkijikoNoList
+     */
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public RString getNinteichosaTokkijikoNoList() {
+        return ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * setninteichosaTokkijikoNoList
+     * @param ninteichosaTokkijikoNoList ninteichosaTokkijikoNoList
+     */
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
+        this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -122,7 +139,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
+    public void  setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
         this.getShogaiKoreisha().setBtnShogaiKoreisha(btnShogaiKoreisha);
     }
 
@@ -132,7 +149,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
+    public void  setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
         this.getShogaiKoreisha().setRadShogaiKoreisha(radShogaiKoreisha);
     }
 
@@ -142,7 +159,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
+    public void  setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setBtnNinchishaJiritsudo(btnNinchishaJiritsudo);
     }
 
@@ -152,7 +169,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
+    public void  setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setRadNinchishaJiritsudo(radNinchishaJiritsudo);
     }
 

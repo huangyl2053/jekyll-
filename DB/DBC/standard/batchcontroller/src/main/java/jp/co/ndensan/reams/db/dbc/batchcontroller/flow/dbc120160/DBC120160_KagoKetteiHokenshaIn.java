@@ -9,16 +9,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInSharedFileCopy;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInTempSaveProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInUpdataDBProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInUpdataTempTableProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaInWriteReportProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaWriteReportProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kagoketteihokenshain.KagoKetteiHokenshaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,6 +42,7 @@ public class DBC120160_KagoKetteiHokenshaIn
     private final RString sharedFileKey = new RString("171");
     private RString runFilePath;
     private List<RString> csvFileName;
+    private static final RString 帳票ID = new RString("DBC200050_KagoKetteitsuchishoTorikomiIchiranHokenshaBun");
 
     @Override
     protected void defineFlow() {
@@ -90,10 +94,14 @@ public class DBC120160_KagoKetteiHokenshaIn
 
     @Step(WRITE_REPORT)
     IBatchFlowCommand writeReportProcess() {
-        Map<RString, Object> parameter = new HashMap<>();
-        parameter.put(KagoKetteiHokenshaInWriteReportProcess.PARAMETER_IN_SHORIYM, getParameter().getShoriYM());
-        parameter.put(KagoKetteiHokenshaInWriteReportProcess.PARAMETER_IN_SHUTSURYOKUJUNID,
-                getParameter().getShuturyokuJunn());
-        return loopBatch(KohifutanshaWriteReportProcess.class).arguments(parameter).define();
+        KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
+                = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
+        parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set出力順ID(getParameter().getShuturyokuJunn());
+        parameter.set処理年月(getParameter().getShoriYM());
+        parameter.setシステム日付(RDateTime.now());
+        return simpleBatch(KohifutanshaDoIchiranhyoSakuseiProcess.class).arguments(parameter).
+                define();
     }
 }

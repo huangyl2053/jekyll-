@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002;
 
 import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeitanitu.ShotokuJohoTyushutuRenkeiTanituParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu.ShotokuJohoChushutsuRenkeitanitu;
@@ -109,6 +109,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         } else {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);
         }
+        div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);
         RString ログインユーザID = ControlDataHolder.getUserId();
         RString 遷移区分 = null;
         RString 年度 = null;
@@ -137,17 +138,11 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
      *
      * @return ShotokuJohoTyushutuRenkeiTanituParameter 所得情報抽出・連携_バッチパラメータクラスです
      */
-    public ShotokuJohoTyushutuRenkeiTanituParameter getBatchParamter() {
-        // TODO バッチが実装でいます
-        ShotokuJohoTyushutuRenkeiTanituParameter batchparam = new ShotokuJohoTyushutuRenkeiTanituParameter();
-        batchparam.set共有ファイルID(null);
-        batchparam.set共有ファイル名(null);
-        batchparam.set処理区分(null);
-        batchparam.set処理年度(null);
-        batchparam.set出力順ID(null);
-        batchparam.set市町村情報List(null);
-        batchparam.set帳票ID(null);
-        return batchparam;
+    public ShutokuJohoChushutsuRenkeiBatchParameter getBatchParamter() {
+        ShutokuJohoChushutsuRenkeiBatchParameter batchparam = new ShutokuJohoChushutsuRenkeiBatchParameter();
+        batchparam.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
+        batchparam.set出力順ID(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID());
+        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoParameter(batchparam);
     }
 
     private void 処理区分Handler(RString メニューID, RString 処理区分) {

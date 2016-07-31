@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.MojigireBunriSei
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.NaibuChohyoMojigireSeigyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.SetainushiHyojiUmu;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.TeikeibunMojiSize;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.IKaigoAtesakiJushoSetteiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.KaigoAtesakiJushoSetteiDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuControlManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
@@ -207,13 +208,14 @@ public class KaigoChohyoSeigyoKyotsuHandler {
     public void save(SubGyomuCode subGyomuCode, ReportId reportId, ChohyoSeigyoKyotsu 帳票制御共通) {
         ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsuBuilder builder = 帳票制御共通.createBuilderForEdit();
-        // TODO QA78669
         if (!div.getAtesakiJusho().isDisplayNone()) {
-            KaigoAtesakiJushoSetteiDiv ccdDiv = (KaigoAtesakiJushoSetteiDiv) div.getAtesakiJusho()
-                    .getCcdKaigoAtesakiJushoSettei();
+            KaigoAtesakiJushoSetteiDiv ccdDiv = (KaigoAtesakiJushoSetteiDiv) div.getAtesakiJusho().getCcdKaigoAtesakiJushoSettei();
             RString 住所設定 = ccdDiv.getRadJushoSettei().getSelectedKey();
             if (ラジオ_する.equals(住所設定)) {
-                builder.set住所編集区分(ラジオ_する).set住所編集町域編集方法(ccdDiv.getTxtAtesakiJushoSettei().getText());
+                final IKaigoAtesakiJushoSetteiDiv ccdKaigoAtesakiJushoSettei = div.getAtesakiJusho().getCcdKaigoAtesakiJushoSettei();
+                builder.set住所編集区分(ラジオ_する).set住所編集都道府県名表示有無(ccdKaigoAtesakiJushoSettei.is都道府県名表示()).
+                        set住所編集郡名表示有無(ccdKaigoAtesakiJushoSettei.is郡名表示()).set住所編集市町村名表示有無(ccdKaigoAtesakiJushoSettei.is市町村名表示()).
+                        set住所編集町域編集方法(ccdKaigoAtesakiJushoSettei.get町域編集方法()).set住所編集方書表示有無(ccdKaigoAtesakiJushoSettei.is方書表示());
             } else {
                 builder.set住所編集区分(ラジオ_しない);
             }
@@ -391,10 +393,9 @@ public class KaigoChohyoSeigyoKyotsuHandler {
 
     private void set初期表示(SubGyomuCode subGyomuCode, ReportId reportId, RString 帳票出力順表示方法,
             ChohyoSeigyoKyotsu 帳票制御共通) {
-        // TODO QA78202宛先住所設定
-        ChohyoShutsuryokujunDiv ccdDiv = (ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun();
-        ccdDiv.load(subGyomuCode, reportId);
-        set出力順モード(帳票出力順表示方法, ccdDiv);
+        div.getCcdKaigoAtesakiJushoSettei().initialize(subGyomuCode.getColumnValue(), reportId.getColumnValue());
+        div.getCcdChohyoShutsuryokujun().load(subGyomuCode, reportId);
+        set出力順モード(帳票出力順表示方法, (ChohyoShutsuryokujunDiv) div.getCcdChohyoShutsuryokujun());
         div.getConfigInfo1().getDdlHyojiCodeName1().setSelectedKey(帳票制御共通.get地区表示1());
         div.getConfigInfo1().getDdlHyojiCodeName2().setSelectedKey(帳票制御共通.get地区表示2());
         div.getConfigInfo1().getDdlHyojiCodeName3().setSelectedKey(帳票制御共通.get地区表示3());

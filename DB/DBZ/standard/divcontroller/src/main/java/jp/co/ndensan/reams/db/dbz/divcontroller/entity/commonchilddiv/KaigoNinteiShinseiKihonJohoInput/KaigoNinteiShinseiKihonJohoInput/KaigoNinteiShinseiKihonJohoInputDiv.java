@@ -571,7 +571,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @Override
-    public void setHihokenshaKubun(List<RString> selectedKeys) {
+    public void setChkShikakuShutokuMae(List<RString> selectedKeys) {
         this.getChkShikakuShutokuMae().setSelectedItemsByKey(selectedKeys);
     }
 

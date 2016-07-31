@@ -4,6 +4,8 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kihonchosainput.IKihonChosaInputMapper">
     <resultMap id="認定調査基本情報ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput.KihonChosaInputEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="認定調査依頼履歴番号" column="認定調査依頼履歴番号" />
         <result property="認知症高齢者自立度" column="認知症高齢者自立度"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="障害高齢者自立度" column="障害高齢者自立度"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="調査連番" column="調査連番"  typeHandler="org.apache.ibatis.type.IntegerTypeHandler" />
@@ -12,6 +14,11 @@
         <result property="前回障害高齢者自立度" column="前回障害高齢者自立度"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="前回調査連番" column="前回調査連番"  typeHandler="org.apache.ibatis.type.IntegerTypeHandler" />
         <result property="前回調査項目" column="前回調査項目"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <resultMap id="認定調査特記情報ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput.KihonChosaSpecialEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="認定調査依頼履歴番号" column="認定調査依頼履歴番号" />
         <result property="認定調査特記事項番号" column="認定調査特記事項番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定調査特記事項連番" column="認定調査特記事項連番"  typeHandler="org.apache.ibatis.type.IntegerTypeHandler" />
         <result property="原本マスク区分" column="原本マスク区分"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -21,6 +28,8 @@
     <select id="get認定調査基本情報" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo"
             resultMap="認定調査基本情報ResultMap" fetchSize="500" resultOrdered="true">
         SELECT
+        A."shinseishoKanriNo" AS 申請書管理番号,
+        D."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号,
         E."ninchishoNichijoSeikatsuJiritsudoCode"  AS 認知症高齢者自立度,
         E."shogaiNichijoSeikatsuJiritsudoCode" AS 障害高齢者自立度,
         F."remban" AS 調査連番,
@@ -28,11 +37,7 @@
         前回認定調査票（基本調査）."ninchishoNichijoSeikatsuJiritsudoCode"  AS 前回認知症高齢者自立度,
         前回認定調査票（基本調査）."shogaiNichijoSeikatsuJiritsudoCode" AS 前回障害高齢者自立度,
         前回認定調査票（基本調査）調査項目."remban" AS 前回調査連番,
-        前回認定調査票（基本調査）調査項目."researchItem" AS 前回調査項目,
-        G."ninteichosaTokkijikoNo" AS 認定調査特記事項番号,
-        G."ninteichosaTokkijikoRemban" AS 認定調査特記事項連番,
-        G."genponMaskKubun" AS 原本マスク区分,
-        G."tokkiJiko" AS 特記事項
+        前回認定調査票（基本調査）調査項目."researchItem" AS 前回調査項目
         FROM
         rgdb."DbT5101NinteiShinseiJoho" A
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" B
@@ -63,9 +68,6 @@
         AND 前回認定調査依頼情報."ninteichosaIraiRirekiNo" = 前回認定調査票（基本調査）調査項目."ninteichosaRirekiNo"
         AND F."remban" = 前回認定調査票（基本調査）調査項目."remban"
         AND F."koroshoIfShikibetsuCode" = 前回認定調査票（基本調査）調査項目."koroshoIfShikibetsuCode"
-        LEFT JOIN rgdb."DbT5205NinteichosahyoTokkijiko" G
-        ON G."shinseishoKanriNo" = A."shinseishoKanriNo"
-        AND D."ninteichosaIraiRirekiNo" = G."ninteichosaRirekiNo"
         WHERE
         C."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND C."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -76,4 +78,40 @@
         AND (A."shoriJotaiKubun" = '3' OR A."shoriJotaiKubun" = '0')
         AND A."logicalDeletedFlag" = FALSE
     </select>
+    
+    <select id="get認定調査特記情報" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo"
+            resultMap="認定調査特記情報ResultMap" fetchSize="500" resultOrdered="true">
+        SELECT
+            A."shinseishoKanriNo" AS 申請書管理番号,
+            D."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号,
+            G."ninteichosaTokkijikoNo" AS 認定調査特記事項番号,
+            G."ninteichosaTokkijikoRemban" AS 認定調査特記事項連番,
+            G."genponMaskKubun" AS 原本マスク区分,
+            G."tokkiJiko" AS 特記事項
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" A
+        INNER JOIN
+            rgdb."DbT5105NinteiKanryoJoho" C
+            ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" D
+            ON D."shinseishoKanriNo" = A."shinseishoKanriNo"
+               AND D."logicalDeletedFlag" = FALSE
+               AND D."ninteichosaIraiRirekiNo" =(SELECT MAX("ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
+                   WHERE "shinseishoKanriNo" = A."shinseishoKanriNo" AND "logicalDeletedFlag" = FALSE)
+        LEFT JOIN
+            rgdb."DbT5205NinteichosahyoTokkijiko" G
+            ON G."shinseishoKanriNo" = A."shinseishoKanriNo"
+               AND D."ninteichosaIraiRirekiNo" = G."ninteichosaRirekiNo"
+        WHERE
+            C."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND C."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND C."ninteiShinsakaiWariateKanryoYMD" IS NULL
+            AND C."ninteiShinsakaiKanryoYMD" IS NULL
+            AND C."centerSoshinYMD" IS NULL
+            AND A."shinseishoKanriNo" = #{申請書管理番号}
+            AND (A."shoriJotaiKubun" = '3' OR A."shoriJotaiKubun" = '0')
+            AND A."logicalDeletedFlag" = FALSE
+    </select>
+    
 </mapper>

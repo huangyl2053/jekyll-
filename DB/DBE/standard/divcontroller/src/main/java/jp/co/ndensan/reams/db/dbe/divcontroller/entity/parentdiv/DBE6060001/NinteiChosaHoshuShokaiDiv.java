@@ -83,12 +83,12 @@ public class NinteiChosaHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMaxKensu() {
+    public TextBoxNum getTxtMaxKensu() {
         return this.getChosaIraibi().getTxtMaxKensu();
     }
 
     @JsonIgnore
-    public void  setTxtMaxKensu(TextBox txtMaxKensu) {
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.getChosaIraibi().setTxtMaxKensu(txtMaxKensu);
     }
 

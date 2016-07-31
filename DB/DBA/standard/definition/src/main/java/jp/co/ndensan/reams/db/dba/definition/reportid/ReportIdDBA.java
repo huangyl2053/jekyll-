@@ -236,7 +236,23 @@ public enum ReportIdDBA {
     /**
      * 年齢到達者登録リストの帳票ＩＤです。
      */
-    DBA200008(new ReportId("DBA200008_NenreitotatsuKakuninList"), new RString("年齢到達者登録リスト"));
+    DBA200008(new ReportId("DBA200008_NenreitotatsuKakuninList"), new RString("年齢到達者登録リスト")),
+    /**
+     * 適用除外者の帳票ＩＤです。
+     */
+    DBA701003(new ReportId("DBA701003_HanyoListTekiyoJogaisha"), new RString("適用除外者")),
+    /**
+     * 他市町村住所地特例者の帳票ＩＤです。
+     */
+    DBA701002(new ReportId("DBA701002_HanyoListTaShichosonJushochiTokureisha"), new RString("他市町村住所地特例者")),
+    /**
+     * 老齢福祉年金受給者の帳票ＩＤです。
+     */
+    DBA701004(new ReportId("DBA701004_HanyoListRoreiFukushiNenkinJukyusha"), new RString("老齢福祉年金受給者")),
+    /**
+     * 生活保護受給者；の帳票ＩＤです。
+     */
+    DBA701006(new ReportId("DBA701006_HanyoListSeikatsuHogoJukyusha"), new RString("生活保護受給者"));
 
     private final ReportId reportId;
     private final RString reportName;

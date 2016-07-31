@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.iryohokenrirek
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.core.IryohokenKanyuJokyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

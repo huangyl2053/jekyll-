@@ -4,20 +4,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Taishosha
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyodojukyushataishosha.KyodoJukyushaTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * TaishoshaIchiran のクラスファイル
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBC-4471-010 xupeng
  */
 public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -43,6 +43,8 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
     private RString HihoNo;
     @JsonProperty("MenuID")
     private RString MenuID;
+    @JsonProperty("DeleteDateFlag")
+    private RString DeleteDateFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -141,6 +143,24 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
     }
 
     /*
+     * getDeleteDateFlag
+     * @return DeleteDateFlag
+     */
+    @JsonProperty("DeleteDateFlag")
+    public RString getDeleteDateFlag() {
+        return DeleteDateFlag;
+    }
+
+    /*
+     * setDeleteDateFlag
+     * @param DeleteDateFlag DeleteDateFlag
+     */
+    @JsonProperty("DeleteDateFlag")
+    public void setDeleteDateFlag(RString DeleteDateFlag) {
+        this.DeleteDateFlag = DeleteDateFlag;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -161,7 +181,7 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -176,11 +196,11 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
     }
 
-    public void setMode_State(State value) {
-        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>
@@ -193,13 +213,15 @@ public class TaishoshaIchiranDiv extends Panel implements ITaishoshaIchiranDiv {
      * @param 異動日From FlexibleDate
      * @param 異動日To FlexibleDate
      * @param 表示モード RString
+     * @param 削除データ検索 RString
      * @param 対象者一覧情報 List<KyodoJukyushaTaishoshaEntity>
      */
     @JsonIgnore
     @Override
     public void initialize(RString メニューID, HihokenshaNo 被保険者番号, FlexibleDate 異動日From,
-            FlexibleDate 異動日To, RString 表示モード, List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報) {
+            FlexibleDate 異動日To, RString 表示モード, RString 削除データ検索,
+            List<KyodoJukyushaTaishoshaEntity> 対象者一覧情報) {
         TaishoshaIchiranDivHandler.of(this).initialize(メニューID, 被保険者番号, 異動日From,
-                異動日To, 表示モード, 対象者一覧情報);
+                異動日To, 表示モード, 削除データ検索, 対象者一覧情報);
     }
 }

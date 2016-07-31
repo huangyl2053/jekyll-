@@ -21,6 +21,21 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT0002KokuhorenTorikomiErrorTempEntity {
 
+    /**
+     * コンストラクタです。
+     */
+    public DbWT0002KokuhorenTorikomiErrorTempEntity() {
+        this.エラー区分 = RString.EMPTY;
+        this.キー1 = RString.EMPTY;
+        this.キー2 = RString.EMPTY;
+        this.キー3 = RString.EMPTY;
+        this.キー4 = RString.EMPTY;
+        this.キー5 = RString.EMPTY;
+        this.被保険者カナ氏名 = RString.EMPTY;
+        this.被保険者氏名 = RString.EMPTY;
+        this.備考 = RString.EMPTY;
+    }
+
     private RString エラー区分;
     private ShoKisaiHokenshaNo 証記載保険者番号;
     private HihokenshaNo 被保険者番号;

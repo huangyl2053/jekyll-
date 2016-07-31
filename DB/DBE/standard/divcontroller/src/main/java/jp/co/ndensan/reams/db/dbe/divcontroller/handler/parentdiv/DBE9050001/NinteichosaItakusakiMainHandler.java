@@ -95,27 +95,11 @@ public class NinteichosaItakusakiMainHandler {
      */
     public List<KeyValueDataSource> setItakukubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource kukubunDataSource1 = new KeyValueDataSource(ChosaItakuKubunCode.保険者_市町村等.getコード(),
-                ChosaItakuKubunCode.保険者_市町村等.get名称());
-        KeyValueDataSource kukubunDataSource2 = new KeyValueDataSource(ChosaItakuKubunCode.指定市町村事務受託法人.getコード(),
-                ChosaItakuKubunCode.指定市町村事務受託法人.get名称());
-        KeyValueDataSource kukubunDataSource3 = new KeyValueDataSource(ChosaItakuKubunCode.指定居宅介護支援事業者.getコード(),
-                ChosaItakuKubunCode.指定居宅介護支援事業者.get名称());
-        KeyValueDataSource kukubunDataSource4 = new KeyValueDataSource(ChosaItakuKubunCode.介護保険施設.getコード(),
-                ChosaItakuKubunCode.介護保険施設.get名称());
-        KeyValueDataSource kukubunDataSource5 = new KeyValueDataSource(ChosaItakuKubunCode.介護支援専門員.getコード(),
-                ChosaItakuKubunCode.介護支援専門員.get名称());
-        KeyValueDataSource kukubunDataSource6 = new KeyValueDataSource(ChosaItakuKubunCode.他市町村.getコード(),
-                ChosaItakuKubunCode.他市町村.get名称());
-        KeyValueDataSource kukubunDataSource9 = new KeyValueDataSource(ChosaItakuKubunCode.その他.getコード(),
-                ChosaItakuKubunCode.その他.get名称());
-        dataSource.add(kukubunDataSource1);
-        dataSource.add(kukubunDataSource2);
-        dataSource.add(kukubunDataSource3);
-        dataSource.add(kukubunDataSource4);
-        dataSource.add(kukubunDataSource5);
-        dataSource.add(kukubunDataSource6);
-        dataSource.add(kukubunDataSource9);
+        for (ChosaItakuKubunCode kubunCode : ChosaItakuKubunCode.values()) {
+            KeyValueDataSource kukubunDataSource = new KeyValueDataSource(kubunCode.getコード(),
+                    kubunCode.get名称());
+            dataSource.add(kukubunDataSource);
+        }
         return dataSource;
     }
 
@@ -126,12 +110,11 @@ public class NinteichosaItakusakiMainHandler {
      */
     public List<KeyValueDataSource> setKikankubun() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource kukubunDataSource1 = new KeyValueDataSource(ChosaKikanKubun.非調査機関.getコード(),
-                ChosaKikanKubun.非調査機関.get名称());
-        KeyValueDataSource kukubunDataSource2 = new KeyValueDataSource(ChosaKikanKubun.調査機関.getコード(),
-                ChosaKikanKubun.調査機関.get名称());
-        dataSource.add(kukubunDataSource1);
-        dataSource.add(kukubunDataSource2);
+        for (ChosaKikanKubun kubun : ChosaKikanKubun.values()) {
+            KeyValueDataSource kukubunDataSource = new KeyValueDataSource(kubun.getコード(),
+                    kubun.get名称());
+            dataSource.add(kukubunDataSource);
+        }
         return dataSource;
     }
 
@@ -202,22 +185,26 @@ public class NinteichosaItakusakiMainHandler {
         row.setSonotaKikanCode(sonotaKikanCode);
         row.setKikanMeisho(nullToEmpty(kikanMeisho));
         row.setKikanKana(nullToEmpty(kikanKana));
-        row.setYubinNo(yubinNo.value());
+        if (yubinNo != null) {
+            row.setYubinNo(editYubinNoToIchiran(yubinNo.value()));
+        }
         row.setJusho(nullToEmpty(jusho));
         row.setJushoKana(nullToEmpty(jushoKana));
         row.setTelNo(telNo.value());
-        if (chosaItakuKubun != null) {
+        if (!RString.isNullOrEmpty(chosaItakuKubun.trim())) {
             row.setChosaItakuKubun(nullToEmpty(ChosaItakuKubunCode.toValue(chosaItakuKubun).get名称()));
         }
         TextBoxNum num = new TextBoxNum();
         num.setValue(new Decimal(waritsukeTeiin));
         row.setWaritsukeTeiin(num);
         row.setChiku(chiku.value());
-        row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
+        if (!RString.isNullOrEmpty(kikanKubun.trim())) {
+            row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
+        }
         if (jokyoFlag) {
-            row.setJokyoFlag(表示値_有効);
-        } else {
             row.setJokyoFlag(表示値_無効);
+        } else {
+            row.setJokyoFlag(表示値_有効);
         }
         return row;
     }
@@ -334,7 +321,6 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             row.setJokyoFlag(表示値_無効);
         }
-        row.setJokyoFlag(nullToEmpty(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey()));
         int index = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
@@ -384,7 +370,7 @@ public class NinteichosaItakusakiMainHandler {
                 .set割付定員(割付定員)
                 .set割付地区(new ChikuCode(div.getChosaitakusakiJohoInput().getCcdChiku().getCode().value()))
                 .set機関の区分(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedKey())
-                .set廃止フラグ(CODE_有効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey())).build();
+                .set廃止フラグ(CODE_無効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey())).build();
     }
 
     /**

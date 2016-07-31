@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3560-120 wangjie2 -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihenkotsuchihakko.IShiharaiHenkoTsuchiHakkoMapper">
+     <select id="selectShokanKihon" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.shokankihonjiho.ShokanKihonJihoEntiy">
+        SELECT
+         ShokanKihonJiho."hiHokenshaNo",
+         ShokanKihonJiho."serviceTeikyoYM",
+         ShokanKihonJiho."seiriNo",
+         ShokanKihonJiho."jigyoshaNo",
+         ShokanKihonJiho."yoshikiNo",
+         ShokanKihonJiho."meisaiNo",
+         ShokanKihonJiho."serviceCode",
+         sum(ShokanKihonJiho."shikyuKingaku")
+         FROM
+         (
+         SELECT
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo",
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM",
+         rgdb."DbT3038ShokanKihon"."seiriNo",
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo",
+         rgdb."DbT3038ShokanKihon"."yoshikiNo",
+         rgdb."DbT3038ShokanKihon"."meisaiNo",
+         rgdb."DbT3053ShokanShukei"."serviceShuruiCode",
+         rgdb."DbT3053ShokanShukei"."shikyuKingaku"
+         FROM
+         rgdb."DbT3038ShokanKihon"
+         INNER JOIN
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."hihokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ServiceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ShokanSeiriNo"
+         INNER JOIN
+         rgdb."DbT3053ShokanShukei"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT3053ShokanShukei"."hiHokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT3053ShokanShukei"."serviceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT3053ShokanShukei"."seiriNo" AND
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo"=rgdb."DbT3053ShokanShukei"."jigyoshaNo" AND
+         rgdb."DbT3038ShokanKihon"."yoshikiNo"=rgdb."DbT3053ShokanShukei"."yoshikiNo" AND
+         rgdb."DbT3038ShokanKihon"."meisaiNo"=rgdb."DbT3053ShokanShukei"."meisaiNo"
+         WHERE
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=#{hiHokenshaNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun"=#{kanriKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"=#{rirekiNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."johoBunruiKubun"=#{johoBunruiKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag"=FALSE
+         UNION
+         SELECT
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo",
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM",
+         rgdb."DbT3038ShokanKihon"."seiriNo",
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo",
+         rgdb."DbT3038ShokanKihon"."yoshikiNo",
+         rgdb."DbT3038ShokanKihon"."meisaiNo",
+         LEFT(rgdb."DbT3045ShokanServicePlan200004"."serviceCode",2) AS "serviceCode",
+         rgdb."DbT3045ShokanServicePlan200004"."shikyuKingaku" AS "shikyuKingaku"
+         FROM
+         rgdb."DbT3038ShokanKihon"
+         INNER JOIN
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."hihokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ServiceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ShokanSeiriNo"
+         INNER JOIN
+         rgdb."DbT3045ShokanServicePlan200004"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT3045ShokanServicePlan200004"."hiHokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT3045ShokanServicePlan200004"."serviceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT3045ShokanServicePlan200004"."seiriNo" AND
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo"=rgdb."DbT3045ShokanServicePlan200004"."jigyoshaNo" AND
+         gdb."DbT3038ShokanKihon"."yoshikiNo"=rgdb."DbT3045ShokanServicePlan200004"."yoshikiNo" AND
+         rgdb."DbT3038ShokanKihon"."meisaiNo"=rgdb."DbT3045ShokanServicePlan200004"."meisaiNo"
+         WHERE
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=#{hiHokenshaNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun"=#{kanriKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"=#{rirekiNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."johoBunruiKubun"=#{johoBunruiKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag"=FALSE
+         UNION
+         SELECT
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo",
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM",
+         rgdb."DbT3038ShokanKihon"."seiriNo",
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo",
+         rgdb."DbT3038ShokanKihon"."yoshikiNo",
+         rgdb."DbT3038ShokanKihon"."meisaiNo",
+         LEFT(rgdb."DbT3046ShokanServicePlan200604"."serviceCode",2) AS "serviceCode",
+         rgdb."DbT3046ShokanServicePlan200604"."shikyuKingaku" AS "shikyuKingaku"
+         FROM
+         rgdb."DbT3038ShokanKihon"
+         INNER JOIN
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."hihokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ServiceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ShokanSeiriNo"
+         INNER JOIN
+         rgdb."DbT3046ShokanServicePlan200604"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT3046ShokanServicePlan200604"."hiHokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT3046ShokanServicePlan200604"."serviceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT3046ShokanServicePlan200604"."seiriNo" AND
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo"=rgdb."DbT3046ShokanServicePlan200604"."jigyoshaNo" AND
+         rgdb."DbT3038ShokanKihon"."yoshikiNo"=rgdb."DbT3046ShokanServicePlan200604"."yoshikiNo" AND
+         rgdb."DbT3038ShokanKihon"."meisaiNo"=rgdb."DbT3046ShokanServicePlan200604"."meisaiNo"
+         WHERE
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=#{hiHokenshaNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun"=#{kanriKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"=#{rirekiNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."johoBunruiKubun"=#{johoBunruiKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag"=FALSE
+         UNION
+         SELECT
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo",
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM",
+         rgdb."DbT3038ShokanKihon"."seiriNo",
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo",
+         rgdb."DbT3038ShokanKihon"."yoshikiNo",	
+         rgdb."DbT3038ShokanKihon"."meisaiNo",
+         LEFT(rgdb."DbT3047ShokanServicePlan200904"."serviceCode",2) AS "serviceCode",
+         rgdb."DbT3047ShokanServicePlan200904"."shikyuKingaku" AS "shikyuKingaku"
+         FROM
+         rgdb."DbT3038ShokanKihon"
+         INNER JOIN
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."hihokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ServiceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT4024ShiharaiHohoHenkoSashitome"."sashitome_ShokanSeiriNo"
+         INNER JOIN
+         rgdb."DbT3047ShokanServicePlan200904"
+         ON
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=rgdb."DbT3047ShokanServicePlan200904"."hiHokenshaNo" AND
+         rgdb."DbT3038ShokanKihon"."serviceTeikyoYM"=rgdb."DbT3047ShokanServicePlan200904"."serviceTeikyoYM" AND
+         rgdb."DbT3038ShokanKihon"."seiriNo"=rgdb."DbT3047ShokanServicePlan200904"."seiriNo" AND
+         rgdb."DbT3038ShokanKihon"."jigyoshaNo"=rgdb."DbT3047ShokanServicePlan200904"."jigyoshaNo" AND
+         rgdb."DbT3038ShokanKihon"."yoshikiNo"=rgdb."DbT3047ShokanServicePlan200904"."yoshikiNo" AND
+         rgdb."DbT3038ShokanKihon"."meisaiNo"=rgdb."DbT3047ShokanServicePlan200904"."meisaiNo"
+         WHERE
+         rgdb."DbT3038ShokanKihon"."hiHokenshaNo"=#{hiHokenshaNo} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."kanriKubun"=#{kanriKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."rirekiNo"=#{rirekiNo}　AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."johoBunruiKubun"=#{johoBunruiKubun} AND
+         rgdb."DbT4024ShiharaiHohoHenkoSashitome"."logicalDeletedFlag"=FALSE
+         ) AS ShokanKihonJiho
+         GROUP BY
+         ShokanKihonJiho."hiHokenshaNo",
+         ShokanKihonJiho."serviceTeikyoYM",
+         ShokanKihonJiho."seiriNo",
+         ShokanKihonJiho."jigyoshaNo",
+         ShokanKihonJiho."yoshikiNo",
+         ShokanKihonJiho."meisaiNo",
+         ShokanKihonJiho."serviceCode"
+         ORDER BY
+         ShokanKihonJiho."hiHokenshaNo",
+         ShokanKihonJiho."serviceTeikyoYM",
+         ShokanKihonJiho."seiriNo",
+         ShokanKihonJiho."jigyoshaNo",
+         ShokanKihonJiho."yoshikiNo",
+         ShokanKihonJiho."meisaiNo",
+         ShokanKihonJiho."serviceCode"
+    </select>
+</mapper>

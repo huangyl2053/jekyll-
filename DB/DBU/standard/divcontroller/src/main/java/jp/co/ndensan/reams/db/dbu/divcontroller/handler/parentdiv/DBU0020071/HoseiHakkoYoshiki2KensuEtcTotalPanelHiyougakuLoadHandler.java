@@ -103,8 +103,9 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler {
      * onLoad画面初期化処理
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @return List<JigyoHokokuTokeiData>
      */
-    public void 費用額OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> 費用額OnLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 費用額 = new ArrayList<>();
 
         if (引き継ぎデータ.get行集計番号().startsWith(費用額総数.toString())) {
@@ -117,6 +118,7 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelHiyougakuLoadHandler {
             費用額 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0403);
         }
         loopList(費用額);
+        return 費用額;
     }
 
     private void loopList(List<JigyoHokokuTokeiData> list) {

@@ -30,7 +30,9 @@
         , DbT7023Rendo."banchi" AS "DbT7023RendoHoryu_banchi"
         , DbT7023Rendo."shisetsuShurui" AS "DbT7023RendoHoryu_shisetsuShurui"
         , DbT7023Rendo."shisetsuCode" AS "DbT7023RendoHoryu_shisetsuCode"
-        , DbT7060Kai."jigyoshaName" AS "DbT7023RendoHoryu_jigyoshaName"
+        , CASE DbT7023Rendo."shisetsuShurui" WHEN '11' THEN DbT7060Kai."jigyoshaName"
+        WHEN '12' THEN DbT1005Kai."jigyoshaMeisho"
+        WHEN '21' THEN DbT1005Kai."jigyoshaMeisho" END  AS "DbT7023RendoHoryu_jigyoshaName"
         FROM
         rgdb."DbT7023RendoHoryuTokuteiJusho" AS DbT7023Rendo
         LEFT JOIN
@@ -41,7 +43,7 @@
         order by
         A."jigyoshaNo" desc
         , A."yukoKaishiYMD" desc
-        ) AS rank_number2 from rgdb."DbT7060KaigoJigyosha" as A where "isDeleted" <![CDATA[<>]]> TRUE) AS DbT7060Kai
+        ) AS rank_number2 from rgdb."DbT7060KaigoJigyosha" as A where "isDeleted" <![CDATA[<>]]>  TRUE) AS DbT7060Kai
         ON DbT7060Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode"
         AND rank_number2 = '1'
         LEFT JOIN
@@ -54,9 +56,26 @@
         ) AS rank_number1 from rgdb."DbT7051KoseiShichosonMaster" as B) as DbT7051Kosei
         ON DbT7023Rendo."shichosonCode" = DbT7051Kosei."shichosonCode"
         AND rank_number1 = '1'
+		LEFT JOIN
+    	( select
+	      *
+	      , ROW_NUMBER() over ( 
+	        partition by
+	          (C."jigyoshaNo") 
+	        order by
+	          C."jigyoshaNo" desc
+	          , C."yukoKaishiYMD" desc
+	      ) AS rank_number3 
+	    from
+	      rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" as C
+	  ) as DbT1005Kai 
+	    ON DbT1005Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode" 
+		AND DbT1005Kai."jigyoshaShubetsu" = DbT7023Rendo."shisetsuShurui" 
+		AND DbT1005Kai."isDeleted" <![CDATA[<>]]> TRUE
+	    AND rank_number3 = '1' 
         WHERE
         DbT7051Kosei."isDeleted" <![CDATA[<>]]> TRUE
-        AND DbT7023Rendo."isDeleted" <![CDATA[<>]]> TRUE
+        AND DbT7023Rendo."isDeleted" <![CDATA[<>]]>  TRUE
         order by
         DbT7023Rendo."kanriNo"
     </select>
@@ -98,7 +117,7 @@
         order by
         A."jigyoshaNo" desc
         , A."yukoKaishiYMD" desc
-        ) AS rank_number2 from rgdb."DbT7060KaigoJigyosha" as A where "isDeleted" <![CDATA[<>]]> TRUE) AS DbT7060Kai
+        ) AS rank_number2 from rgdb."DbT7060KaigoJigyosha" as A where "isDeleted" <![CDATA[<>]]>  TRUE) AS DbT7060Kai
         ON DbT7060Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode"
         AND rank_number2 = '1'
         LEFT JOIN
@@ -111,10 +130,35 @@
         ) AS rank_number1 from rgdb."DbT7051KoseiShichosonMaster" as B) as DbT7051Kosei
         ON DbT7023Rendo."shichosonCode" = DbT7051Kosei."shichosonCode"
         AND rank_number1 = '1'
+		LEFT JOIN
+    	( select
+	      *
+	      , ROW_NUMBER() over ( 
+	        partition by
+	          (C."jigyoshaNo") 
+	        order by
+	          C."jigyoshaNo" desc
+	          , C."yukoKaishiYMD" desc
+	      ) AS rank_number3 
+	    from
+	      rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" as C
+	  ) as DbT1005Kai 
+	    ON DbT1005Kai."jigyoshaNo" = DbT7023Rendo."shisetsuCode" 
+		AND DbT1005Kai."jigyoshaShubetsu" = DbT7023Rendo."shisetsuShurui" 
+		AND DbT1005Kai."isDeleted" <![CDATA[<>]]> TRUE
+	    AND rank_number3 = '1' 
         WHERE
         DbT7051Kosei."isDeleted" <![CDATA[<>]]> TRUE
-        AND DbT7023Rendo."isDeleted" <![CDATA[<>]]> TRUE
+        AND DbT7023Rendo."isDeleted" <![CDATA[<>]]>  TRUE
         order by
         DbT7023Rendo."kanriNo"
+    </select>
+    <select resultOrdered="true" id="getKanriNo" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+         dbt7023."kanriNo"
+        FROM
+         rgdb."DbT7023RendoHoryuTokuteiJusho" AS dbt7023
+         ORDER BY dbt7023."kanriNo" DESC
+	 LIMIT(1)
     </select>
 </mapper>

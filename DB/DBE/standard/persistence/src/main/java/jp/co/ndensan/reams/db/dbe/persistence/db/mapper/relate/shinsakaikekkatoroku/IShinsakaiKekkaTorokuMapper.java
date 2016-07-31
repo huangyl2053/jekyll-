@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikekkato
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -37,20 +39,36 @@ public interface IShinsakaiKekkaTorokuMapper {
     List<ShinsakaiKekkaTorokuIChiRanRelateEntity> get審査会委員一覧検索(ShinsakaiKekkaTorokuParameter param);
 
     /**
-     * 介護認定審査会開催予定情報情報をキー検索で１件取得します。
+     * 介護認定審査会割当情報を取得します。
      *
      * @param param 審査会内容検索パラメータ
      * @return List<ShinsakaiKaisaiYoteiJohoRelateEntity>
      */
-    List<DbT5502ShinsakaiWariateJohoEntity> get審査会委員一覧更新_1(ShinsakaiKekkaTorokuParameter param);
+    List<DbT5502ShinsakaiWariateJohoEntity> get介護認定審査会割当情報(ShinsakaiKekkaTorokuParameter param);
 
     /**
-     * 介護認定審査会開催予定情報情報をキー検索で１件取得します。
+     * 要介護認定申請情報を取得します。
      *
      * @param param 審査会内容検索パラメータ
      * @return List<NinteiShinseiJohoRelateEntity>
      */
-    List<NinteiShinseiJohoRelateEntity> get審査会委員一覧情報更新_2(ShinsakaiKekkaTorokuParameter param);
+    List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報(ShinsakaiKekkaTorokuParameter param);
+
+    /**
+     * 要介護認定結果情報を取得します。
+     *
+     * @param param 審査会内容検索パラメータ
+     * @return List<NinteiShinseiJohoRelateEntity>
+     */
+    List<DbT5102NinteiKekkaJohoEntity> get要介護認定結果情報(ShinsakaiKekkaTorokuParameter param);
+
+    /**
+     * 要介護認定完了情報を取得します。
+     *
+     * @param param 審査会内容検索パラメータ
+     * @return List<NinteiShinseiJohoRelateEntity>
+     */
+    List<DbT5105NinteiKanryoJohoEntity> get要介護認定完了情報(ShinsakaiKekkaTorokuParameter param);
 
     /**
      * MAX履歴番号を取得します。

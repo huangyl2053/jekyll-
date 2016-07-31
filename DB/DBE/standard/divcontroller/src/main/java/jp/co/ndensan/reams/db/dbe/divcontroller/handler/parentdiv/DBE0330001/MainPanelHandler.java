@@ -67,10 +67,10 @@ public class MainPanelHandler {
      */
     public void edit結果通知出力対象申請者一覧情報(List<YouKaiGoNinTeiKekTesuChi> businessList) {
         List<dgResultList_Row> rowList = new ArrayList();
-        TextBoxDate 認定状況提供日 = new TextBoxDate();
-        boolean 認定状況提供日フラグ = false;
         RStringBuilder rsb = new RStringBuilder();
         for (YouKaiGoNinTeiKekTesuChi youKaiGoNinTeiKekTesuChi : businessList) {
+            TextBoxDate 認定状況提供日 = new TextBoxDate();
+            boolean 認定状況提供日フラグ = false;
             if (youKaiGoNinTeiKekTesuChi.get認定状況提供日() == null || youKaiGoNinTeiKekTesuChi.get認定状況提供日().isEmpty()) {
                 認定状況提供日フラグ = true;
             } else {

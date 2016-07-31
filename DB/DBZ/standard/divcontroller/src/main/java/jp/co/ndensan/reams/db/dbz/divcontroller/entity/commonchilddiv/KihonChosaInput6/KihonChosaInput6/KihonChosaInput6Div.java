@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
@@ -15,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * KihonChosaInput6 のクラスファイル
@@ -23,8 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-095 wangjie2
  */
 public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -127,7 +127,7 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     }
 
     @JsonIgnore
-    public void setShochiNaiyo(ShochiNaiyoDiv ShochiNaiyo) {
+    public void  setShochiNaiyo(ShochiNaiyoDiv ShochiNaiyo) {
         this.getTokubetsuIryo().setShochiNaiyo(ShochiNaiyo);
     }
 
@@ -137,7 +137,7 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     }
 
     @JsonIgnore
-    public void setBtnShochiNaiyo(ButtonDialog btnShochiNaiyo) {
+    public void  setBtnShochiNaiyo(ButtonDialog btnShochiNaiyo) {
         this.getTokubetsuIryo().getShochiNaiyo().setBtnShochiNaiyo(btnShochiNaiyo);
     }
 
@@ -147,7 +147,7 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     }
 
     @JsonIgnore
-    public void setChkShochiNaiyo(CheckBoxList chkShochiNaiyo) {
+    public void  setChkShochiNaiyo(CheckBoxList chkShochiNaiyo) {
         this.getTokubetsuIryo().getShochiNaiyo().setChkShochiNaiyo(chkShochiNaiyo);
     }
 
@@ -157,7 +157,7 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     }
 
     @JsonIgnore
-    public void setTokiTaiou(TokiTaiouDiv TokiTaiou) {
+    public void  setTokiTaiou(TokiTaiouDiv TokiTaiou) {
         this.getTokubetsuIryo().setTokiTaiou(TokiTaiou);
     }
 
@@ -167,7 +167,7 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     }
 
     @JsonIgnore
-    public void setBtnTokiTaiou(ButtonDialog btnTokiTaiou) {
+    public void  setBtnTokiTaiou(ButtonDialog btnTokiTaiou) {
         this.getTokubetsuIryo().getTokiTaiou().setBtnTokiTaiou(btnTokiTaiou);
     }
 
@@ -177,7 +177,7 @@ public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
     }
 
     @JsonIgnore
-    public void setChkTokiTaiou(CheckBoxList chkTokiTaiou) {
+    public void  setChkTokiTaiou(CheckBoxList chkTokiTaiou) {
         this.getTokubetsuIryo().getTokiTaiou().setChkTokiTaiou(chkTokiTaiou);
     }
 

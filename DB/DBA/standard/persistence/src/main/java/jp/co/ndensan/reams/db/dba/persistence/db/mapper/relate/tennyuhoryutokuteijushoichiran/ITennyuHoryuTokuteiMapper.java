@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyuhoryutokut
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 転入保留特定住所登録のMapperクラスです。
@@ -29,4 +30,11 @@ public interface ITennyuHoryuTokuteiMapper {
      * @return List<DbT7023RendoHoryuTokuteiJushoEntity>
      */
     List<DbT7023RendoHoryuTokuteiJushoEntity> get連動保留特定住所();
+
+    /**
+     * 管理番号を取得します。
+     *
+     * @return 管理番号
+     */
+    RString getKanriNo();
 }

@@ -26,6 +26,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KihonChosaInput1 {
 
+    private static final int 整数1 = 1;
+    private static final int 整数2 = 2;
+    private static final int 整数3 = 3;
+    private static final int 整数4 = 4;
+    private static final int 整数5 = 5;
+    private static final int 整数6 = 6;
+    private static final int 整数7 = 7;
+    private static final int 整数8 = 8;
+    private static final int 整数9 = 9;
+    private static final int 整数11 = 11;
+
     /**
      * 画面初期化
      *
@@ -102,12 +113,12 @@ public class KihonChosaInput1 {
         int 連番;
         for (KihonChosaInput joho : new認定調査基本情報リスト) {
             連番 = joho.get調査連番();
-            if (連番 != 1 && 連番 != 2 && 連番 != 3 && 連番 != 4 && 連番 != 5
-                    && 連番 != 6 && 連番 != 7 && 連番 != 8 && 連番 != 9) {
+            if (連番 != 整数1 && 連番 != 整数2 && 連番 != 整数3 && 連番 != 整数4 && 連番 != 整数5
+                    && 連番 != 整数6 && 連番 != 整数7 && 連番 != 整数8 && 連番 != 整数9) {
                 size++;
             }
         }
-        if (size == 11) {
+        if (size == 整数11) {
             ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("1"));
         } else {
             ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("0"));

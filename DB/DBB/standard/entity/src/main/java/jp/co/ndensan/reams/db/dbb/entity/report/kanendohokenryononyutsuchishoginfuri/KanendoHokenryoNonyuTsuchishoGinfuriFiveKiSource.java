@@ -14,19 +14,19 @@ public class KanendoHokenryoNonyuTsuchishoGinfuriFiveKiSource implements IReport
 
     @ReportItem(name = "titleNendo", length = 4, order = 1)
     public RString titleNendo;
-    @ReportItem(name = "hyojicodeName1", order = 2)
+    @ReportItem(name = "HyojicodeName1", order = 2)
     public RString hyojicodeName1;
-    @ReportItem(name = "hyojicodeName2", order = 3)
+    @ReportItem(name = "HyojicodeName2", order = 3)
     public RString hyojicodeName2;
-    @ReportItem(name = "hyojicodeName3", order = 4)
+    @ReportItem(name = "HyojicodeName3", order = 4)
     public RString hyojicodeName3;
     @ReportItem(name = "santeiKisoKikanKaishi", length = 12, order = 5)
     public RString santeiKisoKikanKaishi;
-    @ReportItem(name = "hyojicode1", length = 12, order = 6)
+    @ReportItem(name = "Hyojicode1", length = 12, order = 6)
     public RString hyojicode1;
-    @ReportItem(name = "hyojicode2", length = 12, order = 7)
+    @ReportItem(name = "Hyojicode2", length = 12, order = 7)
     public RString hyojicode2;
-    @ReportItem(name = "hyojicode3", length = 12, order = 8)
+    @ReportItem(name = "Hyojicode3", length = 12, order = 8)
     public RString hyojicode3;
     @ReportItem(name = "santeiKisoKikanshoryo", length = 12, order = 9)
     public RString santeiKisoKikanshoryo;

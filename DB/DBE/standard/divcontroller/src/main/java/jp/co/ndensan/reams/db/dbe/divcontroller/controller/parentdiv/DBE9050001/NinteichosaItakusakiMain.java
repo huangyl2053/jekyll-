@@ -92,7 +92,7 @@ public class NinteichosaItakusakiMain {
     }
 
     /**
-     * クリアボタン押下で検索条件入力項目をクリアします。
+     * 検索ボタン押下で検索条件に従い、その他機関情報を検索します。
      *
      * @param div NinteichosaItakusakiMainDiv
      * @return ResponseData<NinteichosaItakusakiMainDiv>
@@ -340,7 +340,7 @@ public class NinteichosaItakusakiMain {
         ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, models);
         div.getSonotaKikanichiran().setDisplayNone(false);
         getHandler(div).setSonotaKikanichiran(イベント状態);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9050001StateName.一覧);
     }
 
     /**

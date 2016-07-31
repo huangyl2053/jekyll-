@@ -283,11 +283,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     }
 
     /**
-     * 要介護認定調査票差異チェック票を出力します。
+     * 要介護認定調査票差異チェック票_片面を出力します。
      *
      * @param チェック票List 要介護認定調査票差異チェック票List
      */
-    public void print要介護認定調査票差異チェック票(List<SaiChekkuhyoItem> チェック票List) {
+    public void print要介護認定調査票差異チェック票_片面(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoReport> saiChekkuhyoReportList = new ArrayList<>();
         if (!チェック票List.isEmpty()) {
             saiChekkuhyoReportList.add(SaiChekkuhyoReport.createFrom(チェック票List));
@@ -299,10 +299,34 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                 report.writeBy(reportSourceWriter);
             }
         }
+    }
 
+    /**
+     * 要介護認定調査票差異チェック票_両面右を出力します。
+     *
+     * @param チェック票List 要介護認定調査票差異チェック票List
+     */
+    public void print要介護認定調査票差異チェック票_両面右(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
-        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty();
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002.getReportId());
+        try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
+            for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
+                ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 要介護認定調査票差異チェック票_両面左を出力します。
+     *
+     * @param チェック票List 要介護認定調査票差異チェック票List
+     */
+    public void print要介護認定調査票差異チェック票_両面左(List<SaiChekkuhyoItem> チェック票List) {
+        List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
+        ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003.getReportId());
         try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
             for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
                 ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);

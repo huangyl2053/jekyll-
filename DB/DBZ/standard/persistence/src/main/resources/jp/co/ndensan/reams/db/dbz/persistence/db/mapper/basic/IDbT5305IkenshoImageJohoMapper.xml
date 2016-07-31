@@ -59,4 +59,20 @@
     FROM
     rgdb."DbT5305IkenshoImageJoho"
 </select>
+
+    <select resultOrdered="true" id="getイメージ情報数" resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.masking.MaskingParameter" fetchSize="500">
+        SELECT
+            COUNT(*)
+        FROM
+            rgdb."DbT5305IkenshoImageJoho" AS dbT5305
+        WHERE dbT5305."shinseishoKanriNo" = #{shinseishoKanriNo}
+            AND dbT5305."maskDataKubun" = #{maskDataKubun}
+            AND dbT5305."iraiRirekiNo" = (  SELECT
+                                                MAX(dbT5305."iraiRirekiNo")
+                                            FROM
+                                                rgdb."DbT5305IkenshoImageJoho" AS dbT5305
+                                            WHERE dbT5305."shinseishoKanriNo" = #{shinseishoKanriNo}
+                                                AND dbT5305."maskDataKubun" = #{maskDataKubun})
+    </select>
 </mapper>

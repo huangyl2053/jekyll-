@@ -50,8 +50,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public final class NonyuTsuchishoTotalHandler {
 
     private final NonyuTsuchishoTotalDiv div;
-    private static final RString 帳票分類ID = new RString("保険料納入通知書（本算定）");
-    private static final RString 仮算定_帳票分類ID = new RString("保険料納入通知書（仮算定）");
+    private static final RString 帳票分類ID = new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo");
+    private static final RString 仮算定_帳票分類ID = new RString("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString キー_出力部数 = new RString("出力部数");
     private static final RString キー_速報取込区分 = new RString("速報取込区分");

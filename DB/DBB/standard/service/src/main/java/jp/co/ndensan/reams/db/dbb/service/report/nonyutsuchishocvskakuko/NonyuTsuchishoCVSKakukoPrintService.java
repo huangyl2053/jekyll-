@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class NonyuTsuchishoCVSKakukoPrintService {
 
-    private final ReportId 帳票分類ID = new ReportId("DBB100014_KarisanteiHokenryoNonyuTsuchishoDaihyo");
+    private final ReportId 帳票分類ID = new ReportId("DBB100045_HokenryoNonyuTsuchishoDaihyo");
     private final RString 帳票IDの先頭_DBB100059 = new RString("DBB100059");
     private final RString 帳票IDの先頭_DBB100060 = new RString("DBB100060");
 

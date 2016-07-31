@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.IShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
@@ -26,9 +28,11 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.ILoginInfo;
 import jp.co.ndensan.reams.uz.uza.auth.AuthItem;
+import jp.co.ndensan.reams.uz.uza.auth.AuthType;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,6 +45,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.same;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -79,40 +86,41 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
         }
 
         private void setUpMocks() {
-//            IUrControlData urControlData = PowerMockito.mock(IUrControlData.class);
-//            ILoginInfo loginInfo = PowerMockito.mock(ILoginInfo.class);
-//            PowerMockito.mockStatic(UrControlDataFactory.class);
-//            PowerMockito.when(UrControlDataFactory.createInstance()).thenReturn(urControlData);
-//            PowerMockito.when(urControlData.getLoginInfo()).thenReturn(loginInfo);
-//            PowerMockito.when(loginInfo.getUserId()).thenReturn(new RString("userTest"));
+            IUrControlData urControlData = PowerMockito.mock(IUrControlData.class);
+            ILoginInfo loginInfo = PowerMockito.mock(ILoginInfo.class);
+            PowerMockito.mockStatic(UrControlDataFactory.class);
+            PowerMockito.when(UrControlDataFactory.createInstance()).thenReturn(urControlData);
+            PowerMockito.when(urControlData.getLoginInfo()).thenReturn(loginInfo);
+            PowerMockito.when(loginInfo.getUserId()).thenReturn(new RString("userTest"));
 
-//            IAssociationFinder associationFinder = PowerMockito.mock(IAssociationFinder.class);
-//            association = TestSupport.mockAssociation();
-//            PowerMockito.mockStatic(AssociationFinderFactory.class);
-//            PowerMockito.when(AssociationFinderFactory.createInstance()).thenReturn(associationFinder);
-//            PowerMockito.mockStatic(IAssociationFinder.class);
-//            PowerMockito.when(associationFinder.getAssociation()).thenReturn(association);
+            IAssociationFinder associationFinder = PowerMockito.mock(IAssociationFinder.class);
+            association = TestSupport.mockAssociation();
+            PowerMockito.mockStatic(AssociationFinderFactory.class);
+            PowerMockito.when(AssociationFinderFactory.createInstance()).thenReturn(associationFinder);
+            PowerMockito.mockStatic(IAssociationFinder.class);
+            PowerMockito.when(associationFinder.getAssociation()).thenReturn(association);
+
             RDate rDate = new RDate("20140401");
-//            PowerMockito.mockStatic(RDate.class);
-//            PowerMockito.when(RDate.getNowDate()).thenReturn(rDate);
+            PowerMockito.mockStatic(RDate.class);
+            PowerMockito.when(RDate.getNowDate()).thenReturn(rDate);
 
             defaultValueOfConfig = new RString("1");
-//            PowerMockito.mockStatic(BusinessConfig.class);
-//            PowerMockito.when(BusinessConfig.get((Enum) anyObject(), same(rDate), (SubGyomuCode) anyObject()))
-//                    .thenReturn(defaultValueOfConfig);
+            PowerMockito.mockStatic(BusinessConfig.class);
+            PowerMockito.when(BusinessConfig.get((Enum) anyObject(), same(rDate), (SubGyomuCode) anyObject()))
+                    .thenReturn(defaultValueOfConfig);
             RString yubinNo = new RString("1234567");
-//            PowerMockito.when(BusinessConfig.get(same(ConfigKeysHokenshaJoho.保険者情報_郵便番号), same(rDate), (SubGyomuCode) anyObject()))
-//                    .thenReturn(yubinNo);
+            PowerMockito.when(BusinessConfig.get(same(ConfigKeysHokenshaJoho.保険者情報_郵便番号), same(rDate), (SubGyomuCode) anyObject()))
+                    .thenReturn(yubinNo);
         }
 
         private void setAutorityItem(ShichosonShikibetsuID shichosonShikibetsuID) {
-//            AuthorityItem authorityItem = PowerMockito.mock(AuthorityItem.class);
-//            PowerMockito.when(authorityItem.getItemId()).thenReturn(shichosonShikibetsuID.value());
+            AuthorityItem authorityItem = PowerMockito.mock(AuthorityItem.class);
+            PowerMockito.when(authorityItem.getItemId()).thenReturn(shichosonShikibetsuID.value());
             List<AuthorityItem> authorityItems = new ArrayList<>();
-//            authorityItems.add(authorityItem);
-//            PowerMockito.mockStatic(AuthItem.class);
-//            PowerMockito.when(AuthItem.getAuthorities((RString) anyObject(), (AuthType) anyObject(), (RDate) anyObject()))
-//                    .thenReturn(authorityItems);
+            authorityItems.add(authorityItem);
+            PowerMockito.mockStatic(AuthItem.class);
+            PowerMockito.when(AuthItem.getAuthorities((RString) anyObject(), (AuthType) anyObject(), (RDate) anyObject()))
+                    .thenReturn(authorityItems);
         }
 
         @Test
@@ -193,23 +201,23 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
         @Test
         public void getShichosonSecurityJohoは_業務分類が介護事務_導入形態が事務単一120_のとき_業務コンフィグからShichosonSecurityJohoを生成する()
                 throws Exception {
-//            Association association = TestSupport.mockAssociation();
-//            IAssociationFinder associationFinder = PowerMockito.mock(IAssociationFinder.class);
-//            PowerMockito.when(associationFinder.getAssociation()).thenReturn(association);
-//            PowerMockito.mockStatic(AssociationFinderFactory.class);
-//            PowerMockito.when(AssociationFinderFactory.createInstance()).thenReturn(associationFinder);
+            Association association = TestSupport.mockAssociation();
+            IAssociationFinder associationFinder = PowerMockito.mock(IAssociationFinder.class);
+            PowerMockito.when(associationFinder.getAssociation()).thenReturn(association);
+            PowerMockito.mockStatic(AssociationFinderFactory.class);
+            PowerMockito.when(AssociationFinderFactory.createInstance()).thenReturn(associationFinder);
 
             RDate rDate = new RDate("20140401");
-//            PowerMockito.mockStatic(RDate.class);
-//            PowerMockito.when(RDate.getNowDate()).thenReturn(rDate);
+            PowerMockito.mockStatic(RDate.class);
+            PowerMockito.when(RDate.getNowDate()).thenReturn(rDate);
 
             RString defaultValueOfConfig = new RString("1");
-//            PowerMockito.mockStatic(BusinessConfig.class);
-//            PowerMockito.when(BusinessConfig.get((Enum) anyObject(), same(rDate), (SubGyomuCode) anyObject()))
-//                    .thenReturn(defaultValueOfConfig);
+            PowerMockito.mockStatic(BusinessConfig.class);
+            PowerMockito.when(BusinessConfig.get((Enum) anyObject(), same(rDate), (SubGyomuCode) anyObject()))
+                    .thenReturn(defaultValueOfConfig);
             RString yubinNo = new RString("1234567");
-//            PowerMockito.when(BusinessConfig.get(same(ConfigKeysHokenshaJoho.保険者情報_郵便番号), same(rDate), (SubGyomuCode) anyObject()))
-//                    .thenReturn(yubinNo);
+            PowerMockito.when(BusinessConfig.get(same(ConfigKeysHokenshaJoho.保険者情報_郵便番号), same(rDate), (SubGyomuCode) anyObject()))
+                    .thenReturn(yubinNo);
 
             ShichosonSecurityJohoFinder sut = new ShichosonSecurityJohoFinder();
             ShichosonSecurityJoho shichosonJohoEntity = sut.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -228,13 +236,14 @@ public class ShichosonSecurityJohoFinderTest extends DbxTestDacBase {
             koseiShichosonMasterDac.save(entity);
         }
 
-//        public static Association mockAssociation() {
-//            Association finder = PowerMockito.mock(Association.class);
-//            PowerMockito.when(finder.get都道府県名()).thenReturn(new RString("都道府県名"));
-//            PowerMockito.when(finder.get郡名()).thenReturn(new RString("郡名"));
-//            PowerMockito.when(finder.get地方公共団体コード()).thenReturn(new LasdecCode("010102"));
-//            return finder;
-//        }
+        public static Association mockAssociation() {
+            Association finder = PowerMockito.mock(Association.class);
+            PowerMockito.when(finder.get都道府県名()).thenReturn(new RString("都道府県名"));
+            PowerMockito.when(finder.get郡名()).thenReturn(new RString("郡名"));
+            PowerMockito.when(finder.get地方公共団体コード()).thenReturn(new LasdecCode("010102"));
+            return finder;
+        }
+
         public static DbT7908KaigoDonyuKeitaiEntity createDbT7908KaigoDonyuKeitaiEntity(GyomuBunrui GyomuBunrui, DonyuKeitaiCode DonyuKeitaiCode) {
             DbT7908KaigoDonyuKeitaiEntity entity = new DbT7908KaigoDonyuKeitaiEntity();
             entity.setDonyuKeitaiCode(new Code(DonyuKeitaiCode.getCode()));

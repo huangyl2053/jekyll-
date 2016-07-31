@@ -114,4 +114,21 @@ public class DbT4012HyojunFutangakuGemmenDac {
                 order(by(rirekiNo, Order.DESC)).limit(1).
                 toObject(DbT4012HyojunFutangakuGemmenEntity.class);
     }
+
+    /**
+     * 標準負担額減免情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4012HyojunFutangakuGemmenEntity
+     */
+    @Transaction
+    public List<DbT4012HyojunFutangakuGemmenEntity> select標準負担額減免申請情報(HihokenshaNo 被保険者番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4012HyojunFutangakuGemmen.class).
+                where(eq(DbT4012HyojunFutangakuGemmen.hihokenshaNo, 被保険者番号)).
+                order(by(DbT4012HyojunFutangakuGemmen.shinseiYMD, Order.DESC)).
+                toList(DbT4012HyojunFutangakuGemmenEntity.class);
+    }
 }

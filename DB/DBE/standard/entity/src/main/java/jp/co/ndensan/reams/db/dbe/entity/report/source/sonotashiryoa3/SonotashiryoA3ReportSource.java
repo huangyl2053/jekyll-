@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
- * 事務局用その他資料のReportSourceクラスです。
+ * その他資料（A3版）のReportSourceクラスです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-250 wangrenze
  */
 public class SonotashiryoA3ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -65,9 +65,9 @@ public class SonotashiryoA3ReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
 
-    @ReportPerson(id = "A")
+    @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "A")
+    @ReportExpandedInfo(id = "X")
     public ExpandedInformation hishokenshaNo;
 
     /**

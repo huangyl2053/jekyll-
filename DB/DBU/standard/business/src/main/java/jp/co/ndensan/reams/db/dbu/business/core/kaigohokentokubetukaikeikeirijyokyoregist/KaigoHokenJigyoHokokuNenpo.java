@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist;
 
+import java.util.HashMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpoEntity;
@@ -43,7 +44,8 @@ public class KaigoHokenJigyoHokokuNenpo {
      */
     public KaigoHokenJigyoHokokuNenpo() {
         this.事業報告集計一覧データ = new KaigoHokenJigyoHokokuNenpoEntity(FlexibleYear.EMPTY, RString.EMPTY, FlexibleYear.EMPTY, RString.EMPTY,
-                RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Code.EMPTY, RString.EMPTY, Code.EMPTY, Code.EMPTY, null);
+                RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Code.EMPTY, RString.EMPTY, Code.EMPTY, Code.EMPTY,
+                new HashMap<RString, Decimal>());
     }
 
     /**
@@ -89,12 +91,30 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
+     * 報告年を返します。
+     *
+     * @param 報告年 報告年
+     */
+    public void set報告年(FlexibleYear 報告年) {
+        事業報告集計一覧データ.set報告年(報告年);
+    }
+
+    /**
      * 集計対象年します。
      *
      * @return 集計対象年
      */
     public FlexibleYear get集計対象年() {
         return 事業報告集計一覧データ.get集計対象年();
+    }
+
+    /**
+     * 集計対象年します。
+     *
+     * @param 集計対象年 集計対象年
+     */
+    public void set集計対象年(FlexibleYear 集計対象年) {
+        事業報告集計一覧データ.set集計対象年(集計対象年);
     }
 
     /**
@@ -107,6 +127,15 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
+     * 報告月します。
+     *
+     * @param 報告月 報告月
+     */
+    public void set報告月(RString 報告月) {
+        事業報告集計一覧データ.set報告月(報告月);
+    }
+
+    /**
      * 統計対象区分します。
      *
      * @return 統計対象区分
@@ -116,12 +145,30 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
+     * 統計対象区分します。
+     *
+     * @param 統計対象区分 統計対象区分
+     */
+    public void set統計対象区分(RString 統計対象区分) {
+        事業報告集計一覧データ.set統計対象区分(統計対象区分);
+    }
+
+    /**
      * 集計対象月します。
      *
      * @return 集計対象月
      */
     public RString get集計対象月() {
         return 事業報告集計一覧データ.get集計対象月();
+    }
+
+    /**
+     * 集計対象月します。
+     *
+     * @param 集計対象月 集計対象月
+     */
+    public void set集計対象月(RString 集計対象月) {
+        事業報告集計一覧データ.set集計対象月(集計対象月);
     }
 
     /**
@@ -143,12 +190,30 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
+     * 市町村コードします。
+     *
+     * @param 市町村コード 市町村コード
+     */
+    public void set市町村コード(LasdecCode 市町村コード) {
+        事業報告集計一覧データ.set市町村コード(市町村コード);
+    }
+
+    /**
      * 表番号します。
      *
      * @return 表番号
      */
     public Code get表番号() {
         return 事業報告集計一覧データ.get表番号();
+    }
+
+    /**
+     * 表番号します。
+     *
+     * @param 表番号 表番号
+     */
+    public void set表番号(Code 表番号) {
+        事業報告集計一覧データ.set表番号(表番号);
     }
 
     /**
@@ -161,12 +226,30 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
+     * 集計単位します。
+     *
+     * @param 集計単位 集計単位
+     */
+    public void set集計単位(Code 集計単位) {
+        事業報告集計一覧データ.set集計単位(集計単位);
+    }
+
+    /**
      * 集計番号します。
      *
      * @return 集計番号
      */
     public Code get集計番号() {
         return 事業報告集計一覧データ.get集計番号();
+    }
+
+    /**
+     * 集計番号します。
+     *
+     * @param 集計番号 集計番号
+     */
+    public void set集計番号(Code 集計番号) {
+        事業報告集計一覧データ.set集計番号(集計番号);
     }
 
     /**
@@ -179,12 +262,30 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
+     * 横項目コードします。
+     *
+     * @param 横項目コード 横項目コード
+     */
+    public void set横項目コード(Code 横項目コード) {
+        事業報告集計一覧データ.set横項目コード(横項目コード);
+    }
+
+    /**
      * 縦項目コードします。
      *
      * @return 縦項目コード
      */
     public Code get縦項目コード() {
         return 事業報告集計一覧データ.get縦項目コード();
+    }
+
+    /**
+     * 縦項目コードします。
+     *
+     * @param 縦項目コード 縦項目コード
+     */
+    public void set縦項目コード(Code 縦項目コード) {
+        事業報告集計一覧データ.set縦項目コード(縦項目コード);
     }
 
 }

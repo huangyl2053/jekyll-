@@ -20,13 +20,17 @@ import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri.Ho
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri.HokenryoNonyuTsuchishoGinfuriFiveKiSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri.HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.hokenryononyutsuchishoginfuri.HokenryoNonyuTsuchishoGinfuriFourKiSource;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -37,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 保険料納入通知書（本算定）【銀振タイプ】のPrintService
@@ -50,6 +55,10 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
     private final RString 帳票IDの先頭_DBB100052 = new RString("DBB100052");
     private final RString 帳票IDの先頭_DBB100053 = new RString("DBB100053");
     private final RString 帳票IDの先頭_DBB100054 = new RString("DBB100054");
+    private final RString 項目名１ = new RString("当初出力_中期開始期");
+    private final RString 項目名２ = new RString("当初出力_後期開始期");
+    private int 当初出力_中期開始期 = 0;
+    private int 当初出力_後期開始期 = 0;
 
     /**
      * 帳票を出力します。
@@ -58,6 +67,7 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
      * @return SourceDataCollection SourceDataCollection
      */
     public SourceDataCollection print(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
+        set開始期(本算定納入通知書情報);
         RString 帳票IDRString = RString.EMPTY;
         if (本算定納入通知書情報 != null && 本算定納入通知書情報.get帳票ID() != null) {
             帳票IDRString = 本算定納入通知書情報.get帳票ID().getColumnValue();
@@ -74,6 +84,19 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
         return null;
     }
 
+    private void set開始期(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
+        if (本算定納入通知書情報 != null && 本算定納入通知書情報.get納付書共通() != null) {
+            ChohyoSeigyoHanyo 帳票制御汎用１ = load帳票制御汎用ByKey(帳票分類ID, 本算定納入通知書情報.get納付書共通().get調定年度(), 項目名１);
+            if (帳票制御汎用１ != null && 帳票制御汎用１.get設定値() != null && !帳票制御汎用１.get設定値().isEmpty()) {
+                当初出力_中期開始期 = Integer.parseInt(帳票制御汎用１.get設定値().toString());
+            }
+            ChohyoSeigyoHanyo 帳票制御汎用２ = load帳票制御汎用ByKey(帳票分類ID, 本算定納入通知書情報.get納付書共通().get調定年度(), 項目名２);
+            if (帳票制御汎用２ != null && 帳票制御汎用２.get設定値() != null && !帳票制御汎用２.get設定値().isEmpty()) {
+                当初出力_後期開始期 = Integer.parseInt(帳票制御汎用２.get設定値().toString());
+            }
+        }
+    }
+
     /**
      * 帳票を出力します。
      *
@@ -81,6 +104,7 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
      * @param reportManager ReportManager
      */
     public void print(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報, ReportManager reportManager) {
+        set開始期(本算定納入通知書情報);
         RString 帳票IDRString = RString.EMPTY;
         if (本算定納入通知書情報 != null && 本算定納入通知書情報.get帳票ID() != null) {
             帳票IDRString = 本算定納入通知書情報.get帳票ID().getColumnValue();
@@ -103,6 +127,7 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
      * @return SourceDataCollection SourceDataCollection
      */
     public SourceDataCollection printDevidedByPage(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
+        set開始期(本算定納入通知書情報);
         RString 帳票IDRString = RString.EMPTY;
         if (本算定納入通知書情報 != null && 本算定納入通知書情報.get帳票ID() != null) {
             帳票IDRString = 本算定納入通知書情報.get帳票ID().getColumnValue();
@@ -119,6 +144,25 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
         return null;
     }
 
+    /**
+     * 帳票制御汎用取得メソッドです。
+     *
+     * @param 帳票分類ID 帳票分類ID
+     * @param 管理年度 管理年度
+     * @param 項目名 項目名
+     * @return ChohyoSeigyoHanyo
+     */
+    private ChohyoSeigyoHanyo load帳票制御汎用ByKey(ReportId 帳票分類ID,
+            FlexibleYear 管理年度, RString 項目名) {
+        DbT7067ChohyoSeigyoHanyoDac 帳票制御汎用Dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
+        DbT7067ChohyoSeigyoHanyoEntity entity
+                = 帳票制御汎用Dac.select帳票制御汎用キー(SubGyomuCode.DBB介護賦課, 帳票分類ID, 管理年度, 項目名);
+        if (entity == null) {
+            return null;
+        }
+        return new ChohyoSeigyoHanyo(entity);
+    }
+
     private SourceDataCollection print全てページDBB100051(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
         HokenryoNonyuTsuchishoGinfuriFourKiProperty property = new HokenryoNonyuTsuchishoGinfuriFourKiProperty();
         try (ReportManager reportManager = new ReportManager()) {
@@ -130,7 +174,7 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 HokenryoNonyuTsuchishoGinfuriFourKiReport report
-                        = new HokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource);
+                        = new HokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -147,7 +191,7 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                     new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             HokenryoNonyuTsuchishoGinfuriFourKiReport report
-                    = new HokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource);
+                    = new HokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -163,7 +207,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport report
-                        = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(本算定納入通知書情報, ninshoshaSource);
+                        = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(
+                                本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -180,7 +225,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                     new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport report
-                    = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(本算定納入通知書情報, ninshoshaSource);
+                    = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(
+                            本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -196,7 +242,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 HokenryoNonyuTsuchishoGinfuriFiveKiReport report
-                        = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
+                        = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(
+                                本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -213,7 +260,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                     new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             HokenryoNonyuTsuchishoGinfuriFiveKiReport report
-                    = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource);
+                    = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(
+                            本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -229,7 +277,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport report
-                        = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(本算定納入通知書情報, ninshoshaSource);
+                        = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(
+                                本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -246,7 +295,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                     new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport report
-                    = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(本算定納入通知書情報, ninshoshaSource);
+                    = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(
+                            本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -262,7 +312,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource>> reportList
-                        = new HokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new HokenryoNonyuTsuchishoGinfuriFourKiReport(本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期)
+                        .devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -282,7 +333,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource>> reportList
-                        = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(
+                                本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -302,7 +354,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFiveKiSource>> reportList
-                        = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(
+                                本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -322,7 +375,8 @@ public class HokenryoNonyuTsuchishoGinfuriPrintService {
                         new FlexibleDate(本算定納入通知書情報.get発行日().toDateString()),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFiveKiRenchoSource>> reportList
-                        = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(本算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(
+                                本算定納入通知書情報, ninshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }

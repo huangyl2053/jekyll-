@@ -30,6 +30,9 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManage
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,6 +68,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR.rse");
     private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR.rse");
     private static final RString DBE231002 = new RString("DBE231002_ikenshokinyuyoshi.rse");
+    private static final RString 排他キー = new RString("ShinseishoKanriNo");
 
     /**
      * 共通子DIVを初期化します。
@@ -73,6 +77,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onLoad(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        if (!RealInitialLocker.tryGetLock(new LockingKey(排他キー))) {
+            throw new PessimisticLockingException();
+        }
+
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (model != null) {
             getHandler(div).initialize(model.get申請書管理番号リスト(), model.get遷移元画面区分());
@@ -102,7 +110,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onChange_radJyushinKikan(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         getHandler(div).setRadJyushinKikan();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).clearValidateMessage().respond();
     }
 
     /**
@@ -113,7 +121,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onChange_radTeishutsuKigen(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         getHandler(div).setRadTeishutsuKigen();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).clearValidateMessage().respond();
     }
 
     /**
@@ -129,9 +137,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             }
             if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                RealInitialLocker.release(new LockingKey(排他キー));
                 return ResponseData.of(div).dialogOKClose();
             }
         } else {
+            RealInitialLocker.release(new LockingKey(排他キー));
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -171,6 +181,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             response.data = reportManager.publish();
         }
         updateData(div);
+        RealInitialLocker.release(new LockingKey(排他キー));
         return response;
     }
 
@@ -217,7 +228,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                         = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
             }
         } else if (CONFIGVALUE2.equals(期限設定方法)) {
-            作成期限年月日 = new FlexibleDate(row.getNinteiShinseibi()).plusDay(作成期限日数);
+            作成期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).toDateString()).plusDay(作成期限日数);
         }
         shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set主治医意見書作成期限年月日(作成期限年月日);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
@@ -403,9 +414,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void call認定調査差異チェック表(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            printService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            printService.print要介護認定調査票差異チェック票_片面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            printService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            printService.print要介護認定調査票差異チェック票_両面右(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            printService.print要介護認定調査票差異チェック票_両面左(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         }
     }
 

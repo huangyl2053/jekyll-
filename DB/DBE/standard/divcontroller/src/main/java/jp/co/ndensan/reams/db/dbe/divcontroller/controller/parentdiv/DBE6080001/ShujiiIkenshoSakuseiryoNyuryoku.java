@@ -18,10 +18,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6080001.Val
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiryonyuryoku.ShujiiIkenshoSakuseiryoNyuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -40,6 +38,7 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString ROOTTITLE = new RString("主治医意見書作成料入力の保存処理が完了しました。");
 
     /**
      * 初期化の設定します。
@@ -76,10 +75,11 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
         }
         List<ShujiiJohoBusiness> businessList = ShujiiIkenshoSakuseiryoNyuryokuFinder.createInstance()
                 .getShujiiJohoList(getHandler(div).setShujiiParameter()).records();
-        if (businessList == null || businessList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         getHandler(div).onClik_SearchBtn(businessList);
+        ValidationMessageControlPairs pairs = getValidationHandler(div).validateData(businessList);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         return ResponseData.of(div).setState(DBE6080001StateName.主治医状態);
     }
 
@@ -97,11 +97,12 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成報酬実績情報, joho);
         List<ShujiiJissekiIchiranBusiness> businessList = ShujiiIkenshoSakuseiryoNyuryokuFinder.createInstance()
                 .getShujiiJissekiIchiranList(getHandler(div).setShujiiJissekiIchiranParameter()).records();
-        if (businessList == null || businessList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         getHandler(div).onClik_SelectBtn(businessList);
-        return ResponseData.of(div).setState(DBE6080001StateName.実績一覧状態);
+        if (businessList == null || businessList.isEmpty()) {
+            return ResponseData.of(div).setState(DBE6080001StateName.実績一覧ボタンなし状態);
+        } else {
+            return ResponseData.of(div).setState(DBE6080001StateName.実績一覧状態);
+        }
     }
 
     /**
@@ -231,6 +232,7 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
                     ShujiiIkenshoSakuseiryoNyuryokuFinder.createInstance().delete(models, key);
                 }
             }
+            div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE6080001StateName.完了状態);
         }
         return ResponseData.of(div).respond();

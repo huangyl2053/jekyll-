@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidoukekkaichiran.ShotokuJouhouTempEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokujohoichiranhyosakusei.KaigoHokenShotokuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.KaigoHokenShotokuJohoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KaigoHokenShotokuJohoIchiranReport extends Report<KaigoHokenShotokuJohoIchiranSource> {
 
-    private final List<ShotokuJouhouTempEntity> 所得情報一覧リスト;
+    private final List<KaigoHokenShotokuTempEntity> 所得情報一覧リスト;
     private final RString 導入形態コード;
     private final LasdecCode 市町村コード;
     private final RString 市町村名称;
@@ -32,7 +32,7 @@ public class KaigoHokenShotokuJohoIchiranReport extends Report<KaigoHokenShotoku
     /**
      * コンストラクタです。
      *
-     * @param 所得情報一覧リスト List<ShotokuJouhouTempEntity>
+     * @param 所得情報一覧リスト List<KaigoHokenShotokuTempEntity>
      * @param 導入形態コード RString
      * @param 市町村コード LasdecCode
      * @param 市町村名称 RString
@@ -40,7 +40,7 @@ public class KaigoHokenShotokuJohoIchiranReport extends Report<KaigoHokenShotoku
      * @param 改頁リスト List<RString>
      * @param association Association
      */
-    public KaigoHokenShotokuJohoIchiranReport(List<ShotokuJouhouTempEntity> 所得情報一覧リスト,
+    public KaigoHokenShotokuJohoIchiranReport(List<KaigoHokenShotokuTempEntity> 所得情報一覧リスト,
             RString 導入形態コード,
             LasdecCode 市町村コード,
             RString 市町村名称,
@@ -59,7 +59,7 @@ public class KaigoHokenShotokuJohoIchiranReport extends Report<KaigoHokenShotoku
     @Override
     public void writeBy(ReportSourceWriter<KaigoHokenShotokuJohoIchiranSource> writer) {
         int 連番 = 1;
-        for (ShotokuJouhouTempEntity 所得情報一覧 : 所得情報一覧リスト) {
+        for (KaigoHokenShotokuTempEntity 所得情報一覧 : 所得情報一覧リスト) {
             IKaigoHokenShotokuJohoIchiranEditor editor = new KaigoHokenShotokuJohoIchiranEditor(
                     所得情報一覧, 導入形態コード, 市町村コード, 市町村名称, 出力順リスト, 改頁リスト, association, 連番);
             IKaigoHokenShotokuJohoIchiranBuilder builder = new KaigoHokenShotokuJohoIchiranBuilder(editor);

@@ -127,12 +127,12 @@ public final class YoshikiIchinoyonHoseiHandler {
     /**
      * 修正データの取得するメッソドです。
      *
-     * @param 引き継ぎデータ 引き継ぎデータ
+     * @param 引き継ぎデータ List<JigyoHokokuTokeiData>
      * @param 様式種類 様式種類
      * @return 修正データリスト 修正データリスト
      */
-    public List<JigyoHokokuTokeiData> get修正データ(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
-        List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト(引き継ぎデータ, 様式種類);
+    public List<JigyoHokokuTokeiData> get修正データ(List<JigyoHokokuTokeiData> 引き継ぎデータ, RString 様式種類) {
+        List<JigyoHokokuTokeiData> 更新前データリスト = 引き継ぎデータ;
 
         JigyoHokokuTokeiData 更新前データ = 更新前データリスト.get(0);
         List<JigyoHokokuTokeiData> 画面データリスト = new ArrayList<>();
@@ -977,32 +977,11 @@ public final class YoshikiIchinoyonHoseiHandler {
     /**
      * 引き継ぎデータより、データ削除する。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 様式種類 様式種類
-     * @return boolean DB操作結果
+     * @param 引き継ぎデータ List<JigyoHokokuTokeiData>
      */
-    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 様式種類) {
-        int row = 0;
-        if (様式種類_008.equals(様式種類) || 様式種類_108.equals(様式種類)) {
-            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1040));
-        } else if (様式種類_009.equals(様式種類) || 様式種類_109.equals(様式種類)) {
-            row = deleteByParameter(引き継ぎデータ, new Code(集計番号_1030));
-        }
-        return 0 <= row;
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
+        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
-    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
-        JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.deleteJigyoHokokuGeppoData(parameter);
-    }
 }

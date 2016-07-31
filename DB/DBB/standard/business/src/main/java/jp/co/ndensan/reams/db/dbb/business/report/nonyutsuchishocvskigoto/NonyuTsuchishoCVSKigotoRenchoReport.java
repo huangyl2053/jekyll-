@@ -40,7 +40,7 @@ public class NonyuTsuchishoCVSKigotoRenchoReport extends NonyuTsuchisho<NonyuTsu
     @Override
     public void writeBy(ReportSourceWriter<NonyuTsuchishoCVSKigotoRenchoSource> reportSourceWriter) {
 
-        INonyuTsuchishoCVSKigotoRenchoEditor coverEditor = new NonyuTsuchishoCVSKigotoRenchoEditor(item, ninshoshaSource, 1);
+        INonyuTsuchishoCVSKigotoRenchoEditor coverEditor = new NonyuTsuchishoCVSKigotoRenchoEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSKigotoRenchoBuilder builder = new NonyuTsuchishoCVSKigotoRenchoBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
     }

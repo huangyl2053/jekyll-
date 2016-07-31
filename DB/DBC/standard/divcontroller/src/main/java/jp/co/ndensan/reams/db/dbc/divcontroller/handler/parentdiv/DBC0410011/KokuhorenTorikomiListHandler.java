@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiJohoInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
+import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysFuSikyuKetteishaIchiran;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysHenreiIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysJukyushaDaichoJohoIchiran;
@@ -40,7 +41,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyo
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoSeikyugakuTuchi;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoShikakuShogohyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo;
-import jp.co.ndensan.reams.db.dbc.definition.core.config.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
@@ -499,10 +499,10 @@ public class KokuhorenTorikomiListHandler {
 
     private RString getParamterForOthers(RString 交換情報識別番号) {
         switch (交換情報識別番号.toString()) {
-            case "534": // TODO 受給者台帳情報一覧("534"), 現時点画面がない
-                return RString.EMPTY;
-            case "537": // TODO 受給者台帳突合結果情報随時("537"), 現時点画面がない
-                return new RString("");
+            case "534":
+                return new RString("45");
+            case "537":
+                return new RString("46");
             case "631":
                 return new RString("14");
             case "641":

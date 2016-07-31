@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0310012.PnlTotalPanelHandler;
@@ -50,6 +51,10 @@ public class PnlTotalPanel {
     private static final RString 事業者検索 = new RString("事業者検索");
     private static final Decimal 番号_0 = new Decimal(0);
     private static final Decimal 番号_1 = new Decimal(1);
+    private static final RString 照会タイトル = new RString("受領委任契約申請照会");
+    private static final RString 修正タイトル = new RString("受領委任契約申請登録・修正");
+    private static final RString 追加タイトル = new RString("受領委任契約申請登録・追加");
+    private static final RString 削除タイトル = new RString("受領委任契約事業者登録・削除");
 
     /**
      * コンストラクタです。
@@ -115,26 +120,33 @@ public class PnlTotalPanel {
                         .setValue(data.get契約事業者名称() == null || data.get契約事業者名称().isEmpty() ? null
                                 : data.get契約事業者名称().getColumnValue());
             }
-        } else {
-            PnlTotalSearchParameter parameter = ViewStateHolder.
-                    get(ViewStateKeys.契約者一覧情報, PnlTotalSearchParameter.class);
-            ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
-            ShokanJuryoininKeiyakusha shokanData = finder.getShokanJuryoininKeiyakusha(
-                    new HihokenshaNo(parameter.get被保番号()),
-                    parameter.get契約申請日(),
-                    parameter.get契約事業者番号(),
-                    parameter.get契約サービス種類());
-            if (shokanData == null) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
-            ViewStateHolder.put(ViewStateKeys.契約者一覧情報, shokanData);
-            HihokenshaNo 被保険者番号 = new HihokenshaNo(parameter.get被保番号());
-            div.getPnlCommon().getCcdKaigoShikakuKihon().initialize(被保険者番号);
-
-            getHandler(div).set初期データ状態(画面モード, shokanData);
-            getHandler(div).set初期データ(shokanData, parameter);
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310012StateName.Default).data).rootTitle(追加タイトル).respond();
         }
-        return ResponseData.of(div).respond();
+        PnlTotalSearchParameter parameter = ViewStateHolder.
+                get(ViewStateKeys.契約者一覧情報, PnlTotalSearchParameter.class);
+        ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
+        ShokanJuryoininKeiyakusha shokanData = finder.getShokanJuryoininKeiyakusha(
+                new HihokenshaNo(parameter.get被保番号()),
+                parameter.get契約申請日(),
+                parameter.get契約事業者番号(),
+                parameter.get契約サービス種類());
+        if (shokanData == null) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        ViewStateHolder.put(ViewStateKeys.契約者一覧情報, shokanData);
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(parameter.get被保番号());
+        div.getPnlCommon().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+
+        getHandler(div).set初期データ状態(画面モード, shokanData);
+        getHandler(div).set初期データ(shokanData, parameter);
+
+        if (修正.equals(画面モード)) {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310012StateName.Default).data).rootTitle(修正タイトル).respond();
+        } else if (削除.equals(画面モード)) {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310012StateName.Default).data).rootTitle(削除タイトル).respond();
+        } else {
+            return ResponseData.of(ResponseData.of(div).setState(DBC0310012StateName.Default).data).rootTitle(照会タイトル).respond();
+        }
     }
 
     /**

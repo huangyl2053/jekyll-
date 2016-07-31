@@ -64,7 +64,8 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     適用期間対象外(50, "次の情報は適用期間の対象外です。：?"),
     最低限の入力なし(51, "いずれかの項目を入力してください：?"),
     ダウンロード失敗(52, "ファイルのダウンロードに失敗しました。"),
-    アップロードファイルが不正(53, "アップロードファイルが不正です。：?");
+    アップロードファイルが不正(53, "アップロードファイルが不正です。：?"),
+    最大取得件数範囲外(54, "表示件数上限999以下に指定してください。");
 
     private final transient Message message;
 

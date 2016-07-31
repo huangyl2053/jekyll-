@@ -67,14 +67,14 @@ public class NonyuTsuchishoCVSMultiReport extends NonyuTsuchisho<NonyuTsuchishoC
     private void writeLine(ReportSourceWriter<NonyuTsuchishoCVSMultiSource> reportSourceWriter) {
 
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = item.get納入通知書期情報リスト();
-        
+
         this.set準備データ(reportSourceWriter);
         if (!HenshuHaniKubun.Detailのみ.equals(item.get編集範囲区分()) && !HenshuHaniKubun.全てのレイアウト.equals(item.get編集範囲区分())) {
             return;
         }
 
         INonyuTsuchishoCVSMultiCoverEditor coverEditor
-                = new NonyuTsuchishoCVSMultiCoverEditor(item, ninshoshaSource, 1);
+                = new NonyuTsuchishoCVSMultiCoverEditor(item, ninshoshaSource);
         INonyuTsuchishoCVSMultiCoverBuilder builder
                 = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
         reportSourceWriter.writeLine(builder);
@@ -160,7 +160,7 @@ public class NonyuTsuchishoCVSMultiReport extends NonyuTsuchisho<NonyuTsuchishoC
 
         if (HenshuHaniKubun.Coverのみ.equals(item.get編集範囲区分())) {
             INonyuTsuchishoCVSMultiCoverEditor coverEditor
-                    = new NonyuTsuchishoCVSMultiCoverEditor(item, ninshoshaSource, 1);
+                    = new NonyuTsuchishoCVSMultiCoverEditor(item, ninshoshaSource);
             INonyuTsuchishoCVSMultiCoverBuilder builder
                     = new NonyuTsuchishoCVSMultiCoverBuilder(coverEditor);
             reportSourceWriter.writeLine(builder);
@@ -239,6 +239,7 @@ public class NonyuTsuchishoCVSMultiReport extends NonyuTsuchisho<NonyuTsuchishoC
         new本算定納入通知書情報.set編集後本算定通知書共通情報(item.get編集後本算定通知書共通情報());
         new本算定納入通知書情報.set納入通知書期情報リスト(納入通知書期情報リスト);
         new本算定納入通知書情報.set編集範囲区分(編集範囲区分);
+        new本算定納入通知書情報.set連番(item.get連番());
         return new本算定納入通知書情報;
     }
 }

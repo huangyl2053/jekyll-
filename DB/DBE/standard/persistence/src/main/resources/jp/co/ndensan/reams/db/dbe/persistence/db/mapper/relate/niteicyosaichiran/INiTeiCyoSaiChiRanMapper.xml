@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査データ取込（モバイル）用XMLです。 -->
+<!-- @reamsid_L DBE-1870-010 houtianpeng -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.niteicyosaichiran.INiTeiCyoSaiChiRanMapper">
+    <resultMap id="resultMap_NiTeiCyoSaiChiRanRelateEntity" 
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.niteicyosaichiran.NiTeiCyoSaiChiRanRelateEntity" autoMapping="true">
+        
+        <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
+        <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler" />
+        <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="hokensya" column="hokensya" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaIraiKanryoYMD" column="ninteichosaIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteichosaKanryoYMD" column="ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="gaikyoTokkiTextImageKubun" column="gaikyoTokkiTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichousaIraiKubunCode" column="ninteichousaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="ninteichosaIraiKaisu" column="ninteichosaIraiKaisu" />
+        <result property="ninteichosaJisshiYMD" column="ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteichosaJuryoYMD" column="ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiChosaKubunCode" column="ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="chosaJisshiBashoCode" column="chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="chosaJisshiBashoMeisho" column="chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceKubunCode" column="serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="riyoShisetsuShimei" column="riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuYubinNo" column="riyoShisetsuYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="tokki" column="tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tokkijikoUketsukeYMD" column="tokkijikoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="tokkijikoJuryoYMD" column="tokkijikoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="jutakuKaishu" column="jutakuKaishu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tokubetsuKyufuService" column="tokubetsuKyufuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="zaitakuService" column="zaitakuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shuso" column="shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kazokuJokyo" column="kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kyojuKankyo" column="kyojuKankyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kikaiKiki" column="kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gaikyoTokkiTextImageKubun" column="gaikyoTokkiTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaTokkijikoNo" column="ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaTokkijikoRemban" column="ninteichosaTokkijikoRemban" />
+        <result property="genponMaskKubun" column="genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="tokkiJiko" column="tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="sabisuremban" column="sabisuremban" />
+        <result property="serviceJokyo" column="serviceJokyo" />
+        <result property="serviceJokyoKinyu" column="serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shisetsuRiyoFlag" column="shisetsuRiyoFlag" />
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="cyusakomokuremban" column="cyusakomokuremban" />
+        <result property="researchItem" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceJokyoFlag" column="serviceJokyoFlag" />
+    </resultMap>
+
+    <select id="get認定調査一覧" resultMap="resultMap_NiTeiCyoSaiChiRanRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.processprm.niteicyosaichiran.NiTeiCyoSaiChiRanParameter" 
+            resultOrdered="true" fetchSize="500">
+    SELECT                                                                         
+        "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo", 
+        "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode",                                             
+        "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode",                                         
+        "DbT5101NinteiShinseiJoho"."ninteiChosainCode",                                                
+        "DbT5101NinteiShinseiJoho"."shinseishoKanriNo",                                                
+        "DbT5101NinteiShinseiJoho"."hihokenshaNo",                                                     
+        "DbT5101NinteiShinseiJoho"."hihokenshaName",                                                   
+        "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD",                                                 
+        "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode",                                  
+        "DbT7051KoseiShichosonMaster"."shichosonMeisho"  AS  hokensya,                                    
+        "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD",                                         
+        "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD",                                             
+        "DbT5206GaikyoTokki"."gaikyoTokkiTextImageKubun",                                        
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichousaIraiKubunCode",                                        
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaIraiKaisu",                                             
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJisshiYMD",                                             
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJuryoYMD",                                              
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteiChosaKubunCode",                                             
+        "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoCode",                                             
+        "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoMeisho",                                           
+        "DbT5202NinteichosahyoGaikyoChosa"."serviceKubunCode",                                                 
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuShimei",                                               
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJusho",                                                
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNo",                                                
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuYubinNo",                                              
+        "DbT5202NinteichosahyoGaikyoChosa"."tokki",                                                            
+        "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoUketsukeYMD",                                             
+        "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoJuryoYMD",                                                
+        "DbT5206GaikyoTokki"."jutakuKaishu",                                                     
+        "DbT5206GaikyoTokki"."tokubetsuKyufuService",                                            
+        "DbT5206GaikyoTokki"."zaitakuService",                                                   
+        "DbT5206GaikyoTokki"."shuso",                                                            
+        "DbT5206GaikyoTokki"."kazokuJokyo",                                                      
+        "DbT5206GaikyoTokki"."kyojuKankyo",                                                      
+        "DbT5206GaikyoTokki"."kikaiKiki",
+        "DbT5206GaikyoTokki"."gaikyoTokkiTextImageKubun",                                                        
+        "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo",                                           
+        "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban",                                       
+        "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun",                                                  
+        "DbT5205NinteichosahyoTokkijiko"."tokkiJiko",                                                        
+        "DbT5207NinteichosahyoServiceJokyo".remban  AS  sabisuremban,                                           
+        "DbT5207NinteichosahyoServiceJokyo"."serviceJokyo",                                                     
+        "DbT5209NinteichosahyoKinyuItem"."serviceJokyoKinyu",                                                
+        "DbT5210NinteichosahyoShisetsuRiyo"."shisetsuRiyoFlag",                                                 
+        "DbT5203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode",                          
+        "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode",                              
+        "DbT5211NinteichosahyoChosaItem".remban  AS  "cyusakomokuremban",                                    
+        "DbT5211NinteichosahyoChosaItem"."researchItem",
+        "DbT5208NinteichosahyoServiceJokyoFlag"."serviceJokyoFlag" 
+    FROM                                                                           
+     <include refid="検索条件" />
+  </select>
+   <sql id="検索条件">
+             rgdb."DbT5201NinteichosaIraiJoho" AS "DbT5201NinteichosaIraiJoho"
+        INNER  JOIN              rgdb."DbT5101NinteiShinseiJoho" AS  "DbT5101NinteiShinseiJoho"
+            ON      "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                         
+        INNER  JOIN              rgdb."DbT7051KoseiShichosonMaster"  AS  "DbT7051KoseiShichosonMaster"                      
+            ON      "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"                       
+        INNER  JOIN              rgdb."DbT5910NinteichosaItakusakiJoho" AS  "DbT5910NinteichosaItakusakiJoho"                   
+            ON      "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"           
+                AND     "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                             
+        INNER  JOIN              rgdb."DbT5913ChosainJoho" AS  "DbT5913ChosainJoho"
+            ON      "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"           
+                AND     "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                             
+        INNER  JOIN              rgdb."DbT5105NinteiKanryoJoho"  AS  "DbT5105NinteiKanryoJoho"                          
+            ON      "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                         
+        LEFT  JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS  "DbT5202NinteichosahyoGaikyoChosa"                              
+              ON    "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                         
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"                    
+                AND  "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun" =   #{イメージ区分}                                         
+                AND  "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" = "DbT5202NinteichosahyoGaikyoChosa"."koroshoIfShikibetsuCode"            
+        LEFT  JOIN  rgdb."DbT5206GaikyoTokki"  AS  "DbT5206GaikyoTokki"                                            
+            ON  "DbT5206GaikyoTokki"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5206GaikyoTokki"."ninteichosaRirekiNo"                    
+                AND "DbT5206GaikyoTokki"."gaikyoTokkiTextImageKubun" = "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun"   
+        LEFT  JOIN  rgdb."DbT5207NinteichosahyoServiceJokyo"  AS  "DbT5207NinteichosahyoServiceJokyo"                             
+            ON  "DbT5207NinteichosahyoServiceJokyo"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5207NinteichosahyoServiceJokyo"."ninteichosaRirekiNo"                    
+                AND  "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" = "DbT5207NinteichosahyoServiceJokyo"."koroshoIfShikibetsuCode"            
+        LEFT  JOIN  rgdb."DbT5208NinteichosahyoServiceJokyoFlag"  AS  "DbT5208NinteichosahyoServiceJokyoFlag"                         
+            ON  "DbT5208NinteichosahyoServiceJokyoFlag"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5208NinteichosahyoServiceJokyoFlag"."ninteichosaRirekiNo"                    
+                AND  "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" = "DbT5208NinteichosahyoServiceJokyoFlag"."koroshoIfShikibetsuCode"            
+        LEFT  JOIN  rgdb."DbT5209NinteichosahyoKinyuItem"  AS  "DbT5209NinteichosahyoKinyuItem"                                
+            ON  "DbT5209NinteichosahyoKinyuItem"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5209NinteichosahyoKinyuItem"."ninteichosaRirekiNo"                    
+                AND  "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" = "DbT5209NinteichosahyoKinyuItem"."koroshoIfShikibetsuCode"            
+        LEFT  JOIN  rgdb."DbT5210NinteichosahyoShisetsuRiyo"  AS  "DbT5210NinteichosahyoShisetsuRiyo"                             
+            ON  "DbT5210NinteichosahyoShisetsuRiyo"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5210NinteichosahyoShisetsuRiyo"."ninteichosaRirekiNo"                    
+                AND  "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" = "DbT5210NinteichosahyoShisetsuRiyo"."koroshoIfShikibetsuCode"            
+        LEFT  JOIN  rgdb."DbT5203NinteichosahyoKihonChosa"  AS  "DbT5203NinteichosahyoKihonChosa"                               
+            ON  "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo"                    
+        LEFT  JOIN  rgdb."DbT5211NinteichosahyoChosaItem" AS  "DbT5211NinteichosahyoChosaItem"                                 
+            ON  "DbT5211NinteichosahyoChosaItem"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"                    
+        LEFT  JOIN  rgdb."DbT5205NinteichosahyoTokkijiko"  AS  "DbT5205NinteichosahyoTokkijiko"                                
+            ON  "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                             
+                AND  "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"                    
+                AND "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" = "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun"           
+    WHERE                                                                                             
+               "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" =
+                                               (SELECT 
+                                                   MAX(DbT5201N."ninteichosaIraiRirekiNo")
+                                                FROM  rgdb."DbT5201NinteichosaIraiJoho" as DbT5201N
+                                                WHERE 
+                                                      DbT5201N."ninteichosaIraiRirekiNo" = "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo"
+                                                      AND "logicalDeletedFlag" = false)               
+        AND    "DbT5201NinteichosaIraiJoho"."mobileDataShutsuryokuZumiFlag" = TRUE                                         
+        AND    "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = FALSE                                                   
+        AND    "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                                 
+        AND    "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL                                         
+        AND    "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                                      
+        AND    "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL                                            
+        AND    "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL                                            
+        AND    "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})                                                     
+        AND    "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE                                                   
+        <if test = "認定申請年月日開始From">
+           AND                                                                 
+           #{認定申請年月日開始} <![CDATA[<=]]> "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD"
+        </if>  
+        <if test = "認定申請年月日開始To">
+           AND                                                                 
+           "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD"  <![CDATA[<=]]>  #{認定申請年月日終了}
+        </if>  
+        <if test = "依頼日開始From">
+           AND                                                                 
+           #{依頼日開始} <![CDATA[<=]]> "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"
+        </if>  
+        <if test = "依頼日開始To">
+           AND                                                                 
+           "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"  <![CDATA[<=]]>  #{依頼日終了}
+        </if> 
+       ORDER BY                                                                                          
+        "DbT5101NinteiShinseiJoho"."hihokenshaKana",
+        "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD",
+        "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" 
+    LIMIT #{最大表示件数}  
+   </sql>
+   <resultMap id="resultMap_NinteichosahyoGaikyoChosaRelateEntity" 
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.niteicyosaichiran.NinteichosahyoGaikyoChosaRelateEntity" autoMapping="true">
+      <collection property="基本調査調査項目" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper.ResultMap_DbT5211NinteichosahyoChosaItemEntity"/>
+      <collection property="概況調査" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity"/>
+      <collection property="概況特記" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper.ResultMap_DbT5206GaikyoTokkiEntity"/>
+      <collection property="基本調査" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.ResultMap_DbT5203NinteichosahyoKihonChosaEntity"/>
+      <collection property="記入項目" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper.ResultMap_DbT5209NinteichosahyoKinyuItemEntity"/>
+      <collection property="概況調査サービスの状況" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5207NinteichosahyoServiceJokyoMapper.ResultMap_DbT5207NinteichosahyoServiceJokyoEntity"/>
+      <collection property="概況調査サービスの状況フラグ" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5208NinteichosahyoServiceJokyoFlagMapper.ResultMap_DbT5208NinteichosahyoServiceJokyoFlagEntity"/>
+      <collection property="概況調査施設利用" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5210NinteichosahyoShisetsuRiyoMapper.ResultMap_DbT5210NinteichosahyoShisetsuRiyoEntity"/>
+      <collection property="特記情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.ResultMap_DbT5205NinteichosahyoTokkijikoEntity"/>
+  </resultMap>
+  <select id="getNinteichosahyoGaikyoChosa" resultMap="resultMap_NinteichosahyoGaikyoChosaRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.processprm.niteicyosaichiran.NiTeiCyoSaiChiRanParameter" 
+            resultOrdered="true" fetchSize="500">
+    SELECT  
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.allColumns_DbT5202NinteichosahyoGaikyoChosa" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper.allColumns_DbT5206GaikyoTokki" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.allColumns_DbT5203NinteichosahyoKihonChosa" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper.allColumns_DbT5211NinteichosahyoChosaItem" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5207NinteichosahyoServiceJokyoMapper.allColumns_DbT5207NinteichosahyoServiceJokyo" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5208NinteichosahyoServiceJokyoFlagMapper.allColumns_DbT5208NinteichosahyoServiceJokyoFlag" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper.allColumns_DbT5209NinteichosahyoKinyuItem" />,
+      <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5210NinteichosahyoShisetsuRiyoMapper.allColumns_DbT5210NinteichosahyoShisetsuRiyo" />
+    FROM                                                                           
+      <include refid="検索条件" />
+  </select>
+  
+</mapper>

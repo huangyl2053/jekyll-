@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護認定審査会委員報酬一覧表のデータ取得のMapperXMLです。 -->
+<!-- @reamsid_L DBE-1920-030 zhaoyao -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsahoshuichiran.IShinsaHoshuIchiranMapper">
+
+    <resultMap id="shusekikankyo" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranRelateEntity" autoMapping="true">
+        <result property="合議体番号" column="合議体番号" />
+        <result  property="審査会開催年月" column="審査会開催年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会委員コード" column="介護認定審査会委員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会委員氏名" column="介護認定審査会委員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_1日" column="1日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_2日" column="2日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_3日" column="3日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_4日" column="4日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_5日" column="5日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_6日" column="6日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_7日" column="7日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_8日" column="8日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_9日" column="9日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_10日" column="10日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_11日" column="11日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_12日" column="12日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_13日" column="13日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_14日" column="14日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_15日" column="15日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_16日" column="16日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_17日" column="17日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_18日" column="18日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_19日" column="19日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_20日" column="20日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_21日" column="21日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_22日" column="22日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_23日" column="23日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_24日" column="24日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_25日" column="25日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_26日" column="26日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_27日" column="27日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_28日" column="28日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_29日" column="29日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_30日" column="30日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="出席状況_31日" column="31日の出席状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="get合計額"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsahoshuichiran.ShinsaHoshuIchiranMybitisParamter" fetchSize="500" resultOrdered="true">
+        WITH G AS 
+        (
+        SELECT
+                X.合議体番号,
+                X.介護認定審査会委員コード,
+                SUM(X.報酬総額)+SUM(X.報酬) AS 報酬総額,
+                SUM(X.その他費用) AS その他費用,
+                SUM(X.税額控除)+SUM(X.税額) AS 税額控除,
+                SUM(X.報酬合計)+SUM(X.合計) AS 報酬合計
+        FROM(
+		SELECT
+			Z.合議体番号,
+			Z.介護認定審査会委員コード,
+			Z.報酬総額,
+                        Z.その他費用,
+			Z.税額控除,
+			Z.報酬合計,
+			Z.報酬,
+			Z.税額,
+			報酬+税額 AS 合計
+		FROM
+		(SELECT A.合議体番号,
+                       A.介護認定審査会委員コード,
+                       B.報酬総額,
+                       B.その他費用,
+                       B.税額控除,
+                       B.報酬合計,
+                       CASE 
+                       WHEN
+                       (CASE
+                       WHEN B.報酬合計 = 0 AND A.合議体長区分コード = '2' THEN T5033_iintyo.tanka
+                       WHEN B.報酬合計 = 0 AND A.合議体長区分コード = '1' THEN T5033_iin.tanka
+                       WHEN B.報酬合計 = 0 AND A.合議体長区分コード = '0' THEN T5033_iin.tanka
+                       END) is null then 0 end AS 報酬,
+                       CASE
+                       WHEN
+                       (CASE
+                       WHEN B.報酬合計 = 0 AND A.合議体長区分コード = '2' THEN T5033_iintyo.tanka * (CAST(cast(C."codeMeisho" AS CHAR(4)) AS numeric)-1)
+                       WHEN B.報酬合計 = 0 AND A.合議体長区分コード = '1' THEN T5033_iin.tanka * (CAST(cast(C."codeMeisho" AS CHAR(4)) AS numeric)-1)
+                       WHEN B.報酬合計 = 0 AND A.合議体長区分コード = '0' THEN T5033_iin.tanka * (CAST(cast(C."codeMeisho" AS CHAR(4)) AS numeric)-1)
+                       END) is null then 0 end AS 税額
+                       FROM
+                            (
+                                SELECT
+                                T5511."gogitaiNo" AS 合議体番号,
+                                T5603."shinsakaiIinCode" AS 介護認定審査会委員コード,
+                                T5511."shinsakaiKaisaiYMD" AS 介護認定審査会開催年月日,
+                                T5593."gogitaichoKubunCode" AS 合議体長区分コード
+                                FROM rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
+                                INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511
+                                ON T5511."shinsakaiKaisaiNo" = T5603."shinsakaiKaisaiNo"
+                                INNER JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" AS T5503
+                                ON T5503."shinsakaiIinCode" = T5603."shinsakaiIinCode"
+                                AND T5503."shinsakaiKaisaiNo" = T5603."shinsakaiKaisaiNo"
+                                INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS T5593
+                                ON T5603."shinsakaiIinCode" = T5593."shinsakaiIinCode"
+                                AND T5511."gogitaiNo" = T5593."gogitaiNo"
+                                AND T5593."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD"
+                                AND T5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> T5593."gogitaiYukoKikanShuryoYMD"
+                                WHERE SUBSTR(T5511."shinsakaiKaisaiYMD",1,6) = #{審査会開催年月}
+                                AND T5503."shussekiFlag" = TRUE
+                            )A
+                LEFT JOIN   (
+                                SELECT 
+                                T5511."gogitaiNo" AS 合議体番号,
+                                T5603."shinsakaiIinCode" AS 介護認定審査会委員コード,
+                                T5511."shinsakaiKaisaiYMD" AS 介護認定審査会開催年月日,
+                                (SUM(T5603."shinsakaiHoshu") + 
+                                  SUM(T5603."shinsakaiSonotaHoshu")) AS 報酬総額,
+                                  SUM(T5603."shinsakaiKotsuhi") AS その他費用,
+                                 SUM(T5603."shinsakaiKojoZeigaku") AS 税額控除,
+                                 SUM(T5603."shinsakaiHoshuGokei") AS 報酬合計
+                                 FROM rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603
+                                 INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511
+                                 ON T5511."shinsakaiKaisaiNo" = T5603."shinsakaiKaisaiNo"
+                                 WHERE SUBSTR(T5511."shinsakaiKaisaiYMD",1,6) = #{審査会開催年月}
+                                 GROUP BY T5511."gogitaiNo",T5603."shinsakaiIinCode",T5511."shinsakaiKaisaiYMD"
+                            )B
+                ON          A.合議体番号 = B.合議体番号
+                AND         A.介護認定審査会委員コード = B.介護認定審査会委員コード
+                AND         A.介護認定審査会開催年月日 = B.介護認定審査会開催年月日
+
+                LEFT JOIN   rgdb."DbT5033ShinsakaiIinHoshuTanka" AS T5033_iintyo
+                ON          T5033_iintyo."kaigoNinteiShinsaIinShubetsu" = '1'
+                AND         T5033_iintyo."kaishiYM" <![CDATA[<=]]> #{審査会開催年月}
+                AND          #{審査会開催年月} <![CDATA[<=]]> T5033_iintyo."shuryoYM"
+                LEFT JOIN   rgdb."DbT5033ShinsakaiIinHoshuTanka" AS T5033_iin
+                ON          T5033_iin."kaigoNinteiShinsaIinShubetsu" = '0'
+                AND         T5033_iin."kaishiYM" <![CDATA[<=]]> #{審査会開催年月}
+                AND         #{審査会開催年月} <![CDATA[<=]]> T5033_iin."shuryoYM"
+                LEFT JOIN   rgdb."UzT0007Code" AS C
+                ON          C."schemaName" = 'rgdb'
+                AND         C."subGyomuCode" = 'DBE'
+                AND         C."codeShubetsu" = '5004'
+                AND         C."yukoKaishiYMD" <![CDATA[<=]]> A.介護認定審査会開催年月日
+                AND         A.介護認定審査会開催年月日 <![CDATA[<=]]> C."yukoShuryoYMD"
+                )AS Z)AS X
+        GROUP BY   合議体番号,介護認定審査会委員コード
+        )
+        SELECT G.* , 
+        (SELECT SUM(G.報酬総額) FROM G) AS 総合計_報酬総額,
+        (SELECT SUM(G.その他費用) FROM G) AS 総合計_その他費用,
+        (SELECT SUM(G.税額控除) FROM G) AS 総合計_税控除額,
+        (SELECT SUM(G.報酬合計) FROM G) AS 総合計_報酬合計 
+        FROM G
+    </select>
+    
+    <select id="get出席状況"
+             resultMap="shusekikankyo" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500" resultOrdered="true">
+        SELECT
+                A.合議体番号,
+                #{審査会開催年月} AS 審査会開催年月,
+                A.介護認定審査会委員コード,
+                A.介護認定審査会委員氏名,
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '01' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "1日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '02' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "2日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '03' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "3日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '04' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "4日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '05' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "5日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '06' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "6日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '07' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "7日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '08' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "8日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '09' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "9日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '10' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "10日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '11' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "11日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '12' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "12日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '13' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "13日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '14' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "14日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '15' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "15日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '16' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "16日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '17' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "17日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '18' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "18日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '19' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "19日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '20' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "20日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '21' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "21日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '22' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "22日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '23' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "23日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '24' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "24日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '25' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "25日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '26' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "26日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '27' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "27日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '28' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "28日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '29' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "29日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '30' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "30日の出席状況",
+                MIN(CASE SUBSTRING(A.介護認定審査会開催年月日,7,2) WHEN '31' THEN 
+                CASE 
+                WHEN A.合議体長区分コード='2' AND A.委員出席=TRUE THEN '長' 
+                WHEN A.合議体長区分コード='1' AND A.委員出席=TRUE THEN '副' 
+                WHEN A.合議体長区分コード='0' AND A.委員出席=TRUE THEN '出' 
+                WHEN A.委員出席=FALSE THEN '欠' END
+                END) AS "31日の出席状況"
+        FROM
+            (
+                SELECT
+                T5511."gogitaiNo" AS 合議体番号,
+                T5593."shinsakaiIinCode" AS 介護認定審査会委員コード,
+                T5594."shinsakaiIinShimei" AS 介護認定審査会委員氏名,
+                T5511."shinsakaiKaisaiYMD" AS 介護認定審査会開催年月日,
+                T5593."gogitaichoKubunCode" AS 合議体長区分コード,
+                T5503."shussekiFlag" AS 委員出席
+                FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511
+                INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS T5593
+                ON T5511."gogitaiNo" = T5593."gogitaiNo"
+                AND T5593."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD"
+                AND T5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> T5593."gogitaiYukoKikanShuryoYMD"
+                INNER JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" AS T5503
+                ON T5503."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
+                AND T5503."shinsakaiIinCode" = T5593."shinsakaiIinCode"
+                INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS T5594
+                ON T5593."shinsakaiIinCode" = T5594."shinsakaiIinCode"
+                WHERE SUBSTRING(T5511."shinsakaiKaisaiYMD",1,6) = #{審査会開催年月}
+                ORDER BY T5511."gogitaiNo",T5593."shinsakaiIinCode",T5511."shinsakaiKaisaiYMD"
+            )AS A
+        GROUP BY A.合議体番号,A.介護認定審査会委員コード,A.介護認定審査会委員氏名
+        ORDER BY A.合議体番号,A.介護認定審査会委員コード
+    </select>
+</mapper>

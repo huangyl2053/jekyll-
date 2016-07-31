@@ -13,8 +13,8 @@ import lombok.Setter;
 
 /**
  * 支払方法変更管理リストのパラメータクラスです。
- * 
- * @reamsid_L DBD-3630-010  zhulx
+ *
+ * @reamsid_L DBD-3630-010 zhulx
  */
 @Getter
 @Setter
@@ -29,6 +29,6 @@ public class ShiharaiHohoKanriListData implements Serializable {
     private RString 償還決定登録者の選択;
     private RString 償還決定登録者1の選択;
     private RString 償還決定登録者2の選択;
-    private RString 改頁出力順ID;
+    private Long 改頁出力順ID;
     private RString 帳票ID;
 }

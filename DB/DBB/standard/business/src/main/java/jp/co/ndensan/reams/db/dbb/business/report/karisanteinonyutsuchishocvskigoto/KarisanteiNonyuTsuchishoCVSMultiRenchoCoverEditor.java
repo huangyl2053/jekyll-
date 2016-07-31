@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
@@ -44,16 +45,15 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param 納入通知書期情報 納入通知書期情報
      * @param ninshoshaSource 認証者情報
-     * @param 連番 連番
      */
     public KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
-            NinshoshaSource ninshoshaSource, int 連番) {
+            NinshoshaSource ninshoshaSource) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.ninshoshaSource = ninshoshaSource;
         this.納入通知書期情報 = 納入通知書期情報;
-        this.連番 = 連番;
+        this.連番 = 仮算定納入通知書情報.get連番();
     }
 
     @Override
@@ -105,7 +105,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
             source.cvsToriatsukaikigen1 = 納入通知書期情報.getコンビニ支払期限().toDateString();
         }
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            source.funyuFukanBango1 = new RString("F").concat(new RString(連番).padLeft("0", INT_6)).concat("-3");
+            source.funyuFukanBango1 = new RString("F-").concat(new RString(連番).padLeft("0", INT_6)).concat("-3");
         }
     }
 
@@ -173,9 +173,9 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
             source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         }
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            source.noutsuRenban = new RString("*").concat(new RString(連番).padLeft("0", INT_6)).concat("#");
-            source.notsuShikibtsuBango = new RString("F").concat(new RString(連番).padLeft("0", INT_6)).concat("-1");
-            source.keisanMeisaishoShikibtsuBango = new RString("F").concat(new RString(連番).padLeft("0", INT_6)).concat("-2");
+            source.noutsuRenban = NotsuReportEditorUtil.get納通連番(連番);
+            source.notsuShikibtsuBango = new RString("F-").concat(new RString(連番).padLeft("0", INT_6)).concat("-1");
+            source.keisanMeisaishoShikibtsuBango = new RString("F-").concat(new RString(連番).padLeft("0", INT_6)).concat("-2");
         } else {
             source.noutsuRenban = RString.EMPTY;
         }
@@ -209,8 +209,8 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
         }
         source.ki1 = 納入通知書期情報.get期表記();
         source.tsuki1 = 納入通知書期情報.get月表記();
-        source.nofuGaku1 = 納入通知書期情報.get納付額表記();
-        source.nokigen1 = 納入通知書期情報.get納期限表記();
+        source.nofuGaku1 = 仮算定納入通知書情報.get納入通知書期情報リスト().get(0).get納付額表記();
+        source.nokigen1 = 仮算定納入通知書情報.get納入通知書期情報リスト().get(0).get納期限表記();
         source.ki2 = RString.EMPTY;
         source.tsuki2 = RString.EMPTY;
         source.nofuGaku2 = RString.EMPTY;
@@ -262,7 +262,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoCoverEditor implements IKaris
             source.keisanMeisaishoNendo3 = 前年度情報.get前年度賦課年度();
             source.keisanMeisaishoNendo4 = 前年度情報.get前年度賦課年度();
             if (前年度情報.get前年度確定介護保険料_年額() != null) {
-                source.keisanMeisaishoNendo2 = new RString(前年度情報.get前年度確定介護保険料_年額().toString());
+                source.keisanMeisaishoKingaku2 = new RString(前年度情報.get前年度確定介護保険料_年額().toString());
             }
             if (前年度情報.get前年度最終期普徴期別介護保険料() != null) {
                 source.keisanMeisaishoKingaku3 = new RString(前年度情報.get前年度最終期普徴期別介護保険料().toString());

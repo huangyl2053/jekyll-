@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -100,5 +101,42 @@ public class DbT2019TokuchoMidoteiJohoDac implements ISaveable<DbT2019TokuchoMid
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 主キーで特徴未同定情報を取得します。
+     *
+     * @param 処理年度 処理年度
+     * @param 基礎年金番号 基礎年金番号
+     * @param 年金コード 年金コード
+     * @param 捕捉月 捕捉月
+     * @param 識別コード 識別コード
+     * @return List<DbT2019TokuchoMidoteiJohoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT2019TokuchoMidoteiJohoEntity> selectNot識別コードByKey(
+            FlexibleYear 処理年度,
+            RString 基礎年金番号,
+            RString 年金コード,
+            RString 捕捉月,
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(処理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年度"));
+        requireNonNull(基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("基礎年金番号"));
+        requireNonNull(年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("年金コード"));
+        requireNonNull(捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("捕捉月"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2019TokuchoMidoteiJoho.class).
+                where(and(
+                                eq(shoriNendo, 処理年度),
+                                eq(kisoNenkinNo, 基礎年金番号),
+                                eq(nenkinCode, 年金コード),
+                                eq(hosokuM, 捕捉月),
+                                not(eq(shikibetsuCode, 識別コード)))).
+                toList(DbT2019TokuchoMidoteiJohoEntity.class);
     }
 }

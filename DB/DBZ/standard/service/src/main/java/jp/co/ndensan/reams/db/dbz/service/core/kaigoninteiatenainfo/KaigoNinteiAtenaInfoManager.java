@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.Kai
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoninteiatenainfo.KaigoNinteiAtenaInfoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoninteiatenainfo.IKaigoNinteiAtenaInfoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -61,7 +62,7 @@ public class KaigoNinteiAtenaInfoManager {
     public SearchResult<KaigoNinteiAtenaInfoBusiness> getKaigoNinteiAtenaInfo(KaigoNinteiAtenaInfoParameter parametere) {
         List<KaigoNinteiAtenaInfoBusiness> kojinJokyoShokaiList = new ArrayList();
         IKaigoNinteiAtenaInfoMapper mapper = mapperProvider.create(IKaigoNinteiAtenaInfoMapper.class);
-        if (parametere.get識別コード().isNullOrEmpty() && parametere.get申請書管理番号().isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(parametere.get識別コード()) && !RString.isNullOrEmpty(parametere.get申請書管理番号())) {
             List<KaigoNinteiAtenaInfoRelateEntity> 介護認定宛名情報リスト = mapper.getKaigoNinteiAtenaInfoList(parametere);
             if (介護認定宛名情報リスト == null || 介護認定宛名情報リスト.isEmpty()) {
                 return SearchResult.of(Collections.<KaigoNinteiAtenaInfoBusiness>emptyList(), 0, false);

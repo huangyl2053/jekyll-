@@ -44,8 +44,14 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.Yo
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -79,6 +85,21 @@ public class YokaigoNinteiTaskListHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
+    private static final RString 調査票イメージ = new RString("C0007_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4101 = new RString("C4101_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4102 = new RString("C4102_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4103 = new RString("C4103_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4104 = new RString("C4104_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4105 = new RString("C4105_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4106 = new RString("C4106_BAK.PNG");
+    private static final RString 主治医意見書イメージ_E0001 = new RString("E0001_BAK.PNG");
+    private static final RString 主治医意見書イメージ_E0002 = new RString("E0002_BAK.PNG");
+    private static final RString その他資料イメージ_F1401A01 = new RString("F1401A01_BAK.PNG");
+    private static final RString その他資料イメージ_F1401B02 = new RString("F1401B02_BAK.PNG");
+    private static final RString その他資料イメージ_F1401C03 = new RString("F1401C03_BAK.PNG");
+    private static final RString その他資料イメージ_F1401D04 = new RString("F1401D04_BAK.PNG");
+    private static final RString その他資料イメージ_F1401E05 = new RString("F1401E05_BAK.PNG");
+    private static final RString その他資料イメージ_F1401F06 = new RString("F1401F06_BAK.PNG");
     private static final int インデックス_0 = 0;
     private static final int インデックス_1 = 1;
     private static final int インデックス_2 = 2;
@@ -252,6 +273,14 @@ public class YokaigoNinteiTaskListHandler {
             List<IChiJiHanTeiBusiness> 一次判定List = YokaigoNinteiTaskListFinder.createInstance().
                     get一次判定モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!一次判定List.isEmpty()) {
+                ShinSaKaiBusiness 前一次判定Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前一次判定(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前一次判定Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             一次判定モード(一次判定List);
         }
         if (マスキングモード.equals(モード)) {
@@ -475,10 +504,6 @@ public class YokaigoNinteiTaskListHandler {
 
     private void 調査依頼モードの日付設定(dgNinteiTaskList_Row row, CyoSaiRaiBusiness business) {
 
-        if (business.get認定調査期限年月日() != null) {
-            row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
-        }
-
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
@@ -538,7 +563,7 @@ public class YokaigoNinteiTaskListHandler {
                 row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
             }
             row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
-            row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null
+            row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
             row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());
             row.setKonkaiShujii(business.get今回主治医() == null ? RString.EMPTY : business.get今回主治医());
@@ -547,7 +572,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
-            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
+            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null || business.get主治医意見書作成督促方法().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
@@ -766,8 +791,8 @@ public class YokaigoNinteiTaskListHandler {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
-        if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
-            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+        if (business.get要介護認定一次判定完了年月日() != null && !business.get要介護認定一次判定完了年月日().isEmpty()) {
+            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定完了年月日().toString()));
         }
         if (business.is仮一次判定区分()) {
             if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
@@ -810,12 +835,81 @@ public class YokaigoNinteiTaskListHandler {
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            if (get調査票(business.getイメージ共有ファイルID())) {
+
+                row.setCyoSaHyo(new RString("○"));
+            }
+            if (get調査票特記(business.getイメージ共有ファイルID())) {
+
+                row.setCyoSaHyoToKi(new RString("○"));
+            }
+            if (get主治医意見書(business.getイメージ共有ファイルID())) {
+
+                row.setJyuJiIiKenJyo(new RString("○"));
+            }
+            if (getその他資料(business.getイメージ共有ファイルID())) {
+
+                row.setSoNoTaShiRyo(new RString("○"));
+            }
+
             マスキングモードの日付設定(row, business);
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(マスキングList.size())));
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
+    }
+
+    private boolean get調査票(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票イメージ));
+    }
+
+    private boolean get調査票特記(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4101))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4102))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4103))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4104))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4105))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4106));
+    }
+
+    private boolean get主治医意見書(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 主治医意見書イメージ_E0001))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 主治医意見書イメージ_E0002));
+    }
+
+    private boolean getその他資料(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401A01))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401B02))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401C03))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401D04))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401E05))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401F06));
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージ名) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, イメージ名);
+        }
+        return imagePath;
     }
 
     private void マスキングモードの日付設定(dgNinteiTaskList_Row row, MaSuKinGuBusiness business) {
@@ -1020,9 +1114,9 @@ public class YokaigoNinteiTaskListHandler {
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時コード().getKey()).get名称());
             if (business.get認定申請情報登録完了年月日() != null && !business.get認定申請情報登録完了年月日().isEmpty()) {
                 completeCount++;
-                row.getKoshinTsuchiYMD().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
+                row.getShinseiUketsukeKanryoDay().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
             }
-
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
         }
         div.getTxtTotalCount().setValue(new RString(String.valueOf(審査受付List.size())));
@@ -1144,11 +1238,11 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     /**
-     * 一览件数を取得します。
+     * 一覧件数を取得します。
      *
-     * @return 一览件数
+     * @return 一覧件数
      */
-    public RString 一览件数() {
+    public RString 一覧件数() {
 
         return div.getTxtTotalCount().getValue();
     }

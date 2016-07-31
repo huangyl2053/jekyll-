@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- * 事務局用その他資料のEditorです。
+ * その他資料（A3版）のEditorです。
  *
- * @reamsid_L DBE-0150-080 wangrenze
+ * @reamsid_L DBE-0150-250 wangrenze
  */
 public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
 
@@ -37,7 +37,7 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
     }
 
     /**
-     * 事務局用その他資料を編集します。
+     * その他資料（A3版）を編集します。
      *
      * @param source 帳票ソース
      * @return 帳票ソース
@@ -69,11 +69,10 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
 
         source.shikibetuCode = ShikibetsuCode.EMPTY;
 
-        if (!RString.isNullOrEmpty(business.get被保険者番号())) {
-            source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                    business.get被保険者番号());
+        if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
+            source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    business.get申請書管理番号());
         }
-
         return source;
     }
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 総合事業種類情報取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-3364-010 xuxin -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.sogojigyoshuruishikyugendogaku.ISogojigyoShuruiMapper">
+    
+    <select id="get総合事業種類情報"
+           resultMap="resultMap_SogojigyoShurui"
+           fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7118SogoJigyoShuruiShikyuGendoGakuMapper.allColumns_DbT7118SogoJigyoShuruiShikyuGendoGaku" />,
+            B."serviceShuruiMeisho" AS "サービス種類名称"
+        FROM
+            rgdb."DbT7118SogoJigyoShuruiShikyuGendoGaku" AS "DbT7118SogoJigyoShuruiShikyuGendoGaku"
+        LEFT JOIN 
+            rgdb."DbT7130KaigoServiceShurui" AS B
+        ON   
+            "DbT7118SogoJigyoShuruiShikyuGendoGaku"."serviceShuruiCode" = B."serviceShuruiCd"
+        ORDER BY
+            B."serviceShuruiCd" ASC,
+            "DbT7118SogoJigyoShuruiShikyuGendoGaku"."tekiyoKaishiYM" DESC
+    </select>
+    
+    <resultMap id="resultMap_SogojigyoShurui"
+           type="jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyoshuruishikyugendogaku.SogojigyoShuruiEntity"
+           autoMapping="true">
+        <id column="dbT7118SogoJigyoShuruiShikyuGendoGaku_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id column="dbT7118SogoJigyoShuruiShikyuGendoGaku_yoKaigoJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT7118SogoJigyoShuruiShikyuGendoGaku_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id column="dbT7118SogoJigyoShuruiShikyuGendoGaku_rirekiNo" />
+        <result property="サービス種類名称" column="サービス種類名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="総合事業種類情報" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7118SogoJigyoShuruiShikyuGendoGakuMapper.ResultMap_DbT7118SogoJigyoShuruiShikyuGendoGakuEntity"/>
+    </resultMap>
+</mapper>

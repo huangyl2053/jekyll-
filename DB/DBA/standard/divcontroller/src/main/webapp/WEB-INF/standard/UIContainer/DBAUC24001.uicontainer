@@ -137,7 +137,7 @@
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1070011",
      "toLayoutTitle": "転入転出保留対象者管理",
-     "toState": ""
+     "toState": "初期状態"
     },
     {
      "id": "4",

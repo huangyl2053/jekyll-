@@ -33,7 +33,7 @@ public class FukaKijunTotal {
 
     private static final RString MESSAGE = new RString("システム管理登録_賦課基準保存処理は正常に行われました。");
     private static final RString MESSAGE_KEY = new RString("賦課年度：平XX年度");
-    private static final RString 引数_XX = new RString("XX");
+    private static final RString 引数_XX = new RString("平XX");
 
     /**
      * 画面初期化です。
@@ -54,7 +54,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 賦課年度選択イベント処理。
+     * 賦課年度選択イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -67,7 +67,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * ランク選択イベント処理。
+     * ランク選択イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -87,11 +87,12 @@ public class FukaKijunTotal {
         ViewStateHolder.put(ViewStateKeys.保険料段階を全件, (Serializable) 保険料段階List);
         Map<RString, RString> dateSource = getHandler(div).本人保険料段階強制設定の設定段階の設定(now);
         ViewStateHolder.put(ViewStateKeys.保険料段階DATESOURCE, (Serializable) dateSource);
+        getHandler(div).setランクの変更_項目表示を制御(dateSource);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 所得段階パネル（画面項目２～５を載せているパネル）イベント処理。
+     * 所得段階パネル（画面項目２～５を載せているパネル）イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -112,13 +113,13 @@ public class FukaKijunTotal {
         ViewStateHolder.put(ViewStateKeys.保険料段階を全件, (Serializable) 保険料段階List);
         Map<RString, RString> dateSource = getHandler(div).本人保険料段階強制設定の設定段階の設定(now);
         ViewStateHolder.put(ViewStateKeys.保険料段階DATESOURCE, (Serializable) dateSource);
-        getHandler(div).set項目表示を制御(now);
+        getHandler(div).set項目表示を制御(now, dateSource);
         getHandler(div).set状態定義(賦課年度);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 世帯非課税段階（２段階以外）の軽減措置イベント処理。
+     * 世帯非課税段階（２段階以外）の軽減措置イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -133,7 +134,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 世帯非課税段階（２段階以外）の段階表記イベント処理。
+     * 世帯非課税段階（２段階以外）の段階表記イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -148,7 +149,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 本人非課税・世帯課税段階の軽減措置イベント処理。
+     * 本人非課税・世帯課税段階の軽減措置イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -163,7 +164,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 本人非課税・世帯課税段階の段階表記イベント処理。
+     * 本人非課税・世帯課税段階の段階表記イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -178,7 +179,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 保険料段階2015年以降の段階表記の任意設定イベント処理。
+     * 保険料段階2015年以降の段階表記の任意設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -191,7 +192,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「未申告」の場合本人保険料段階の強制設定イベント処理。
+     * 「未申告」の場合本人保険料段階の強制設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -203,7 +204,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「所得調査中」の場合本人保険料段階の強制設定イベント処理。
+     * 「所得調査中」の場合本人保険料段階の強制設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -215,7 +216,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 課税取消の場合本人保険料段階の強制設定イベント処理。
+     * 課税取消の場合本人保険料段階の強制設定イベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -227,7 +228,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「完了する」ボタンのイベント処理。
+     * 「完了する」ボタンのイベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -238,7 +239,7 @@ public class FukaKijunTotal {
     }
 
     /**
-     * 「保存する」ボタンのイベント処理。
+     * 「保存する」ボタンのイベント処理です。
      *
      * @param div システム管理（賦課基準）の画面Div
      * @return ResponseData<FukaKijunTotalDiv>
@@ -260,7 +261,7 @@ public class FukaKijunTotal {
         getSaveHandler(div).変更内容を保存(変更内容List, now);
         FlexibleYear 賦課年度 = new FlexibleYear(div.getKonkaiShoriNaiyo().getDdlFukaNendo().getSelectedKey());
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(MESSAGE,
-                new RString(MESSAGE_KEY.toString().replace(引数_XX, 賦課年度.toDateString())),
+                new RString(MESSAGE_KEY.toString().replace(引数_XX, 賦課年度.wareki().toDateString())),
                 RString.EMPTY,
                 true);
         return ResponseData.of(div).setState(DBB9020001StateName.完了);

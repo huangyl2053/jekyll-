@@ -142,7 +142,7 @@ public class NinteichosahyoGaikyoChosaBusiness {
      *
      * @return 認定調査委託料
      */
-    public RString get認定調査委託料() {
+    public int get認定調査委託料() {
         return entity.getChosaItakuryo();
     }
 
@@ -171,5 +171,14 @@ public class NinteichosahyoGaikyoChosaBusiness {
      */
     public RString get事業者名称() {
         return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 単価を返します。
+     *
+     * @return 単価
+     */
+    public RString get単価() {
+        return entity.getTanka();
     }
 }

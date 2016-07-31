@@ -122,15 +122,11 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
                 更新件数++;
             }
         }
-        FlexibleDate 検索用適用年月日;
+
         if (現在の他特の情報.get適用届出年月日() == null || 現在の他特の情報.get他市町村住所地特例適用事由コード() == null) {
             return 更新件数;
         }
-        if (現在の他特の情報.get適用年月日().equals(修正後の他特の情報.get適用年月日())) {
-            検索用適用年月日 = 修正後の他特の情報.get適用年月日();
-        } else {
-            検索用適用年月日 = 現在の他特の情報.get適用年月日();
-        }
+        FlexibleDate 検索用適用年月日 = 現在の他特の情報.get適用年月日();
         List<DbT1003TashichosonJushochiTokureiEntity> クローンList = new ArrayList<>();
         if (!現在の他特の情報.get適用年月日().equals(修正後の他特の情報.get適用年月日())
                 || !現在の他特の情報.get適用届出年月日().equals(修正後の他特の情報.get適用届出年月日())

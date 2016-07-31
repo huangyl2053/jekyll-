@@ -87,7 +87,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport report
-                    = KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                    = new KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport(仮算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -100,7 +100,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                     NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             KarisanteiHokenryoNonyuTsuchishoKigotoReport report
-                    = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                    = new KarisanteiHokenryoNonyuTsuchishoKigotoReport(仮算定納入通知書情報, ninshoshaSource);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -133,7 +133,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport report
-                        = KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                        = new KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -149,7 +149,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource>> reportList
-                        = KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }
@@ -167,7 +167,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 KarisanteiHokenryoNonyuTsuchishoKigotoReport report
-                        = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource);
+                        = new KarisanteiHokenryoNonyuTsuchishoKigotoReport(仮算定納入通知書情報, ninshoshaSource);
                 report.writeBy(reportSourceWriter);
             }
             return reportManager.publish();
@@ -183,7 +183,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課, 帳票分類ID, 仮算定納入通知書情報.get発行日(),
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
                 List<NonyuTsuchisho<KarisanteiHokenryoNonyuTsuchishoKigotoSource>> reportList
-                        = KarisanteiHokenryoNonyuTsuchishoKigotoReport.createFrom(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
+                        = new KarisanteiHokenryoNonyuTsuchishoKigotoReport(仮算定納入通知書情報, ninshoshaSource).devidedByPage();
                 for (NonyuTsuchisho report : reportList) {
                     report.writeBy(reportSourceWriter);
                 }

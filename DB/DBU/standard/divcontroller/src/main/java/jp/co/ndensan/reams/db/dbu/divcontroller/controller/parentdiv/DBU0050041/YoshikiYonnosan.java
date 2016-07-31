@@ -16,10 +16,13 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.Yosh
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -34,11 +37,10 @@ public class YoshikiYonnosan {
     private static final RString 内部処理モード_修正 = new RString("修正");
     private static final RString 内部処理モード_追加 = new RString("追加");
     private static final RString 内部処理モード_削除 = new RString("削除");
-    private static final RString 画面表示_修正 = new RString("修正");
-    private static final RString 画面表示_追加 = new RString("追加");
     private static final RString 前年度以前データ = new RString("前年度以前データ");
     private static final RString 今年度データ = new RString("今年度データ");
     private static final RString 実質的な収支についてデータ = new RString("実質的な収支についてデータ");
+    private static final RString BUTTON_追加 = new RString("btnAddUpdate");
     private static final RString ADD = new RString("add");
 
     /**
@@ -49,14 +51,21 @@ public class YoshikiYonnosan {
      */
     public ResponseData<YoshikiYonnosanDiv> onload(YoshikiYonnosanDiv div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-        handler.onload(get引き継ぎデータ());
-        if (画面表示_追加.equals(div.getGamenMode())) {
-            return ResponseData.of(div).setState(DBU0050041StateName.追加状態);
-        } else if (画面表示_修正.equals(div.getGamenMode())) {
-            return ResponseData.of(div).setState(DBU0050041StateName.修正状態);
-        } else {
-            return ResponseData.of(div).setState(DBU0050041StateName.削除状態);
+        handler.onload(get引き継ぎデータ(div));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 介護保険特別会計経理状況登録_様式４を画面初期化処理しました。
+     *
+     * @param div {@link YoshikiYonnosanDiv 介護保険特別会計経理状況登録_様式４情報Div}
+     * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
+     */
+    public ResponseData<YoshikiYonnosanDiv> onStateTransition(YoshikiYonnosanDiv div) {
+        if (DBU0050041StateName.追加状態.getName().equals(ResponseHolder.getState()) && ADD.equals(get引き継ぎデータ(div).get処理フラグ())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_追加, true);
         }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -73,15 +82,19 @@ public class YoshikiYonnosan {
         if (responseData != null) {
             return responseData;
         }
-        RString state = ResponseHolder.getState();
-        if (DBU0050031StateName.追加状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_追加);
-        }
-        if (DBU0050031StateName.修正状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_修正);
-        }
-        if (DBU0050031StateName.削除状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_削除);
+        if (!ResponseHolder.isReRequest() || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            RString state = ResponseHolder.getState();
+            if (DBU0050031StateName.追加状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_追加);
+            }
+            if (DBU0050031StateName.修正状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_修正);
+            }
+            if (DBU0050031StateName.削除状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４).parameter(内部処理モード_削除);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -95,12 +108,12 @@ public class YoshikiYonnosan {
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {
             return handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ()))
+            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
@@ -121,15 +134,19 @@ public class YoshikiYonnosan {
         if (responseData != null) {
             return responseData;
         }
-        RString state = ResponseHolder.getState();
-        if (DBU0050031StateName.追加状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_追加);
-        }
-        if (DBU0050031StateName.修正状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_修正);
-        }
-        if (DBU0050031StateName.削除状態.getName().equals(state)) {
-            return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_削除);
+        if (!ResponseHolder.isReRequest() || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            RString state = ResponseHolder.getState();
+            if (DBU0050031StateName.追加状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_追加);
+            }
+            if (DBU0050031StateName.修正状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_修正);
+            }
+            if (DBU0050031StateName.削除状態.getName().equals(state)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0050041TransitionEventName.様式４の２).parameter(内部処理モード_削除);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -143,12 +160,12 @@ public class YoshikiYonnosan {
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {
             return handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return 内部処理モード_修正.equals(内部処理モード)
+            return getHandler(div).is修正データ有(handler.get修正データ(get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
@@ -172,7 +189,7 @@ public class YoshikiYonnosan {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnosanDiv> onClick_btnConfirm(YoshikiYonnosanDiv div) {
-        getHandler(div).onClick_btnConfirm();
+        getHandler(div).onClick_btnConfirm(get引き継ぎデータ(div));
         return ResponseData.of(div).respond();
     }
 
@@ -183,21 +200,21 @@ public class YoshikiYonnosan {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnosanDiv> onClick_btnAddUpdate(YoshikiYonnosanDiv div) {
-        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            responseData = handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
-                    ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is画面詳細エリア入力有(
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
+                    ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
+        } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
-        if (responseData != null) {
-            return responseData;
-        }
-        return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -225,12 +242,12 @@ public class YoshikiYonnosan {
                 UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
         if (内部処理モード_修正新規.equals(内部処理モード)) {
             return handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? ResponseData.of(div).addMessage(message).respond() : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ())) ? ResponseData.of(div).addMessage(message).respond() : null;
+            return handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div))) ? ResponseData.of(div).addMessage(message).respond() : null;
         }
         return null;
     }
@@ -252,15 +269,15 @@ public class YoshikiYonnosan {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<YoshikiYonnosanDiv> onClick_btnSave(YoshikiYonnosanDiv div) {
-        ResponseData<YoshikiYonnosanDiv> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            responseData = throwException_btnSave(div);
+            return throwException_btnSave(div);
+        } else if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            getHandler(div).onClick_btnSave(get引き継ぎデータ(div));
+            return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
         }
-        if (responseData != null) {
-            return responseData;
-        }
-        getHandler(div).onClick_btnSave(get引き継ぎデータ());
-        return ResponseData.of(div).setState(DBU0050041StateName.完了状態);
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<YoshikiYonnosanDiv> throwException_btnSave(YoshikiYonnosanDiv div) {
@@ -270,12 +287,12 @@ public class YoshikiYonnosan {
         if (内部処理モード_修正新規.equals(内部処理モード)
                 || 内部処理モード_追加.equals(内部処理モード)) {
             exception = !handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ()),
-                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ()))
+                    handler.get各部分画面入力データ(前年度以前データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(今年度データ, get引き継ぎデータ(div)),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ, get引き継ぎデータ(div)))
                     ? new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage()) : null;
         } else if (内部処理モード_修正.equals(内部処理モード)) {
-            exception = !handler.is修正データ有(handler.get修正データ(get引き継ぎデータ()))
+            exception = !handler.is修正データ有(handler.get修正データ(get引き継ぎデータ(div)))
                     ? new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage()) : null;
         }
         if (exception != null) {
@@ -296,11 +313,21 @@ public class YoshikiYonnosan {
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.処理完了).respond();
     }
 
-    private InsuranceInformation get引き継ぎデータ() {
+    private InsuranceInformation get引き継ぎデータ(YoshikiYonnosanDiv div) {
         InsuranceInformation 引き継ぎデータ
                 = ViewStateHolder.get(TaishokensakuJyouken.ViewStateKey.様式４, InsuranceInformation.class);
         if (null == 引き継ぎデータ) {
-            引き継ぎデータ = new InsuranceInformation(ADD);
+            if (div.getYoshikiYonnosanMeisai().getDdlShicyoson().isDisplayNone()) {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        LasdecCode.EMPTY,
+                        RString.EMPTY);
+            } else {
+                引き継ぎデータ = new InsuranceInformation(
+                        ADD,
+                        new LasdecCode(div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedKey()),
+                        div.getYoshikiYonnosanMeisai().getDdlShicyoson().getSelectedValue());
+            }
         }
         return 引き継ぎデータ;
     }

@@ -55,9 +55,9 @@ public class ShikakuHenkoRireki {
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         handler.set資格変更入力Panel();
         if (!ViewExecutionStatus.Add.getValue().equals(henkoRirekiDiv.getInputMode())) {
-            henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
             henkoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
         }
+        henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
         ViewStateHolder.put(ViewStateKeys.資格変更入力, handler.get資格変更入力Panel());
         return ResponseData.of(henkoRirekiDiv).respond();
     }
@@ -74,9 +74,9 @@ public class ShikakuHenkoRireki {
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         handler.set資格変更入力Panel();
         if (!ViewExecutionStatus.Add.getValue().equals(henkoRirekiDiv.getInputMode())) {
-            henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.sakujo);
             henkoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
         }
+        henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.sakujo);
         return ResponseData.of(henkoRirekiDiv).respond();
     }
 

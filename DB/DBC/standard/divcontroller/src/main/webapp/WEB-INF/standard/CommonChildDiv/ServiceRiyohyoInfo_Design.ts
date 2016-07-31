@@ -2,21 +2,13 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 // <reference path="../d.ts/DBZCommonChildDiv.d.ts" />
-// <reference path="./ServiceCodeInputCommonChildDiv/ServiceCodeInputCommonChildDiv.ts" />
+// <reference path="./ServiceCodeInputCommonChildDiv.ts" />
 
 module DBC {
 
      export module ServiceRiyohyoInfo {
 
         export class Events {
-
-            public static onOkClosebtnShowShuruiGendogaku(): string {
-                return "onOkClosebtnShowShuruiGendogaku";
-            }
-
-            public static onBeforeOpenDialogbtnShowShuruiGendogaku(): string {
-                return "onBeforeOpenDialogbtnShowShuruiGendogaku";
-            }
 
         }
 
@@ -79,8 +71,8 @@ module DBC {
                 return new UZA.TextBoxDate(this.convFiledName("txtSofuYM"));
             }
 
-            public btnShowShuruiGendogaku(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnShowShuruiGendogaku"));
+            public btnShowShuruiGendogaku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShowShuruiGendogaku"));
             }
 
             public btnZengetsuCopy(): UZA.Button {

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkei
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShichosonJohoEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShotokuJohoTyushutuRenkeiKoikiParameter implements Serializable {
 
     private FlexibleYear 処理年度;
-    private List<ShichosonJohoEntity> 市町村情報List;
+    private List<ShichosonJoho> 市町村情報List;
     private RString 出力順ID;
     private ReportId 帳票ID;
     private RString 共有ファイル名;

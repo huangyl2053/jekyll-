@@ -10,14 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020051.YoshikiIchinogoHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -32,12 +28,6 @@ public class YoshikiIchinogoHoseiHandler {
 
     private final YoshikiIchinogoHoseiDiv div;
     private static final RString 削除状態 = new RString("削除");
-    private static final Code 集計番号_1100 = new Code("1100");
-    private static final Code 集計番号_1200 = new Code("1200");
-    private static final Code 集計番号_1400 = new Code("1400");
-    private static final Code 集計番号_1391 = new Code("1391");
-    private static final Code 集計番号_1392 = new Code("1392");
-    private static final Code 集計番号_1393 = new Code("1393");
     private static final RString 様式種類_11 = new RString("11");
     private static final RString 様式種類_21 = new RString("21");
     private static final RString 様式種類_31 = new RString("31");
@@ -167,45 +157,10 @@ public class YoshikiIchinogoHoseiHandler {
      * 引き継ぎデータより、データ削除する
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param list11 List<RString>
-     * @param list21 List<RString>
-     * @param list31 List<RString>
-     * @param list41 List<RString>
      */
-    public void delete(JigyoHokokuGeppoParameter 引き継ぎデータ, List<RString> list11,
-            List<RString> list21, List<RString> list31, List<RString> list41) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        if (list11.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1100);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list21.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1200);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list31.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1400);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list41.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1391);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_1392);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_1393);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        }
-    }
-
-    private JigyoHokokuGeppoDetalSearchParameter getParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 集計番号) {
-        return JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                new FlexibleYear(引き継ぎデータ.get行報告年()),
-                引き継ぎデータ.get行報告月(),
-                new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                引き継ぎデータ.get行集計対象月(),
-                引き継ぎデータ.get行統計対象区分(),
-                new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                new Code(引き継ぎデータ.get行表番号()),
-                集計番号);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     /**

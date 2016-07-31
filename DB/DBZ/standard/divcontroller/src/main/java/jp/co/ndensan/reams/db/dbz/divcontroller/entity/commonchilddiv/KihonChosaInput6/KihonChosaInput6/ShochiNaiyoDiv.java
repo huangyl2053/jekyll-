@@ -4,11 +4,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -17,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShochiNaiyoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +25,6 @@ public class ShochiNaiyoDiv extends Panel {
     private ButtonDialog btnShochiNaiyo;
     @JsonProperty("chkShochiNaiyo")
     private CheckBoxList chkShochiNaiyo;
-    @JsonProperty("ShochiNaiyoShinseishoKanriNo")
-    private RString ShochiNaiyoShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,24 +66,6 @@ public class ShochiNaiyoDiv extends Panel {
     @JsonProperty("chkShochiNaiyo")
     public void setChkShochiNaiyo(CheckBoxList chkShochiNaiyo) {
         this.chkShochiNaiyo = chkShochiNaiyo;
-    }
-
-    /*
-     * getShochiNaiyoShinseishoKanriNo
-     * @return ShochiNaiyoShinseishoKanriNo
-     */
-    @JsonProperty("ShochiNaiyoShinseishoKanriNo")
-    public RString getShochiNaiyoShinseishoKanriNo() {
-        return ShochiNaiyoShinseishoKanriNo;
-    }
-
-    /*
-     * setShochiNaiyoShinseishoKanriNo
-     * @param ShochiNaiyoShinseishoKanriNo ShochiNaiyoShinseishoKanriNo
-     */
-    @JsonProperty("ShochiNaiyoShinseishoKanriNo")
-    public void setShochiNaiyoShinseishoKanriNo(RString ShochiNaiyoShinseishoKanriNo) {
-        this.ShochiNaiyoShinseishoKanriNo = ShochiNaiyoShinseishoKanriNo;
     }
 
     // </editor-fold>

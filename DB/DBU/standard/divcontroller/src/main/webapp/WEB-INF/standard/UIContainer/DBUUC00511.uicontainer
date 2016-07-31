@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "追加状態"
+     "toState": "add"
     },
     {
      "id": "3",
@@ -42,7 +42,7 @@
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "修正状態"
+     "toState": "mod"
     },
     {
      "id": "4",
@@ -56,7 +56,7 @@
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "削除状態"
+     "toState": "del"
     },
     {
      "id": "5",
@@ -65,7 +65,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "様式４の２",
-     "destroy": false,
+     "destroy": true,
      "condition": "追加",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -79,7 +79,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "様式４の３",
-     "destroy": false,
+     "destroy": true,
      "condition": "追加",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",
@@ -93,7 +93,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050011",
@@ -107,7 +107,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "処理完了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
     },
     {
@@ -117,12 +117,12 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "様式４",
-     "destroy": false,
+     "destroy": true,
      "condition": "追加",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "追加状態"
+     "toState": "add"
     },
     {
      "id": "10",
@@ -131,7 +131,7 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "様式４の３",
-     "destroy": false,
+     "destroy": true,
      "condition": "追加",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",
@@ -145,12 +145,12 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "様式４",
-     "destroy": false,
+     "destroy": true,
      "condition": "追加",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "追加状態"
+     "toState": "add"
     },
     {
      "id": "12",
@@ -159,7 +159,7 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "様式４の２",
-     "destroy": false,
+     "destroy": true,
      "condition": "削除",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -173,7 +173,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "様式４の３",
-     "destroy": false,
+     "destroy": true,
      "condition": "修正",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",
@@ -187,7 +187,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "様式４の２",
-     "destroy": false,
+     "destroy": true,
      "condition": "修正",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -201,7 +201,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "様式４の３",
-     "destroy": false,
+     "destroy": true,
      "condition": "削除",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",
@@ -215,7 +215,7 @@
      "layoutName": "DBU0050021",
      "layoutTitle": "様式４",
      "eventName": "様式４の２",
-     "destroy": false,
+     "destroy": true,
      "condition": "削除",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -229,7 +229,7 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "様式４の３",
-     "destroy": false,
+     "destroy": true,
      "condition": "削除",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",
@@ -243,12 +243,12 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "様式４",
-     "destroy": false,
+     "destroy": true,
      "condition": "修正",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "修正状態"
+     "toState": "mod"
     },
     {
      "id": "19",
@@ -257,12 +257,12 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "様式４",
-     "destroy": false,
+     "destroy": true,
      "condition": "修正",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "修正状態"
+     "toState": "mod"
     },
     {
      "id": "20",
@@ -271,7 +271,7 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "様式４の２",
-     "destroy": false,
+     "destroy": true,
      "condition": "修正",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -285,12 +285,12 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "様式４",
-     "destroy": false,
+     "destroy": true,
      "condition": "削除",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "削除状態"
+     "toState": "del"
     },
     {
      "id": "22",
@@ -299,7 +299,7 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "様式４の３",
-     "destroy": false,
+     "destroy": true,
      "condition": "修正",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",
@@ -313,7 +313,7 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "様式４の２",
-     "destroy": false,
+     "destroy": true,
      "condition": "追加",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -327,12 +327,12 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "様式４",
-     "destroy": false,
+     "destroy": true,
      "condition": "削除",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050021",
      "toLayoutTitle": "様式４",
-     "toState": "削除状態"
+     "toState": "del"
     },
     {
      "id": "25",
@@ -341,7 +341,7 @@
      "layoutName": "DBU0050031",
      "layoutTitle": "様式４の２",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050011",
@@ -365,7 +365,7 @@
      "layoutName": "DBU0050041",
      "layoutTitle": "様式４の３",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050011",
@@ -389,7 +389,7 @@
      "layoutName": "DBU0050011",
      "layoutTitle": "介護保険特別会計経理状況登録",
      "eventName": "削除",
-     "destroy": false,
+     "destroy": true,
      "condition": "様式４の２",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050031",
@@ -403,7 +403,7 @@
      "layoutName": "DBU0050011",
      "layoutTitle": "介護保険特別会計経理状況登録",
      "eventName": "削除",
-     "destroy": false,
+     "destroy": true,
      "condition": "様式４の３",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0050041",

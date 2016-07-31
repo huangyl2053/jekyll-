@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,31 +36,6 @@ public class ShujiiIkenshoIraiJohoBuilder {
 
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 申請書管理番号を設定します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return {@link ShujiiIkenshoIraiJohoBuilder}
-     */
-    public ShujiiIkenshoIraiJohoBuilder set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        entity.setShinseishoKanriNo(申請書管理番号);
-        return this;
-    }
-
-    /**
-     * 主治医意見書作成依頼履歴番号を設定します。
-     *
-     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
-     * @return {@link ShujiiIkenshoIraiJohoBuilder}
-     */
-    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成依頼履歴番号(int 主治医意見書作成依頼履歴番号) {
-        requireNonNull(主治医意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼履歴番号"));
-        entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
-        return this;
-    }
 
     /**
      * 厚労省IF識別コードを設定します。

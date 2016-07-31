@@ -75,13 +75,16 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                 bodyEditor1 = new ShinsakaiGijirokuBodyEditor1(新規と更新と区変の件数リスト.get(i));
                 bodyEditor2 = new ShinsakaiGijirokuBodyEditor2(新規と更新と区変の件数上リスト.get(i));
                 bodyEditor3 = new ShinsakaiGijirokuBodyEditor3(新規と更新と区変の件数下リスト.get(i));
-                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(委員情報リスト.get(i));
+                if (i < 委員情報リスト.size()) {
+                    bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(委員情報リスト.get(i));
+                    bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
+                }
+            } else if (i == INDEX_2 && INDEX_1 < 調査員情報リスト.size()) {
+                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(調査員情報リスト.get(INDEX_1));
                 bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
-            } else if (i == INDEX_3) {
-                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(調査員情報リスト.get(i));
+            } else if (i == INDEX_3 && INDEX_1 < その他情報リスト.size()) {
+                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(その他情報リスト.get(INDEX_1));
                 bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
-            } else if (i == INDEX_4) {
-                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(その他情報リスト.get(i));
             }
             ShinsakaiGijirokuBuilder builder = new ShinsakaiGijirokuBuilder(editor, bodyEditor1, bodyEditor2, bodyEditor3, bodyEditor4, bodyEditor5);
             reportSourceWriter.writeLine(builder);
@@ -93,11 +96,12 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
         List<IinJohoRelateEntity> 調査員情報リストtemp = new ArrayList<>();
         List<IinJohoRelateEntity> その他情報リストtemp = new ArrayList<>();
         for (IinJohoRelateEntity entity : item.get委員情報()) {
-            if (!(Sikaku.ホームヘルパー.getコード().equals(entity.getShinsakaiIinShikakuCode())
-                    && Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode()))) {
+            if (!Sikaku.ホームヘルパー.getコード().equals(entity.getShinsakaiIinShikakuCode())
+                    && !Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode())
+                    && !Sikaku.その他.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
                 委員情報リストtemp.add(entity);
             } else if (Sikaku.ホームヘルパー.getコード().equals(entity.getShinsakaiIinShikakuCode())
-                    && Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
+                    || Sikaku.介護職員.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
                 調査員情報リストtemp.add(entity);
             } else if (Sikaku.その他.getコード().equals(entity.getShinsakaiIinShikakuCode())) {
                 その他情報リストtemp.add(entity);

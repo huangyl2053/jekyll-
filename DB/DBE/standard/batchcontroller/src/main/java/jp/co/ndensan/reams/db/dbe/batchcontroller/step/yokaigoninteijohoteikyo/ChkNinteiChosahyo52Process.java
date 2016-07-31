@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser33;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser34;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -102,7 +104,6 @@ public class ChkNinteiChosahyo52Process extends BatchProcessBase<YokaigoninteiEn
     private static final RString 判定結果コード99 = new RString("99");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
     private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
     private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
@@ -400,7 +401,7 @@ public class ChkNinteiChosahyo52Process extends BatchProcessBase<YokaigoninteiEn
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番10)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番11)));
         サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番12)));
-        if (dbt5208Entity.get(0).getServiceJokyoFlag()) {
+        if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
             サービス区分リスト.add(new RString("1"));
         } else {
             サービス区分リスト.add(new RString("0"));
@@ -502,8 +503,8 @@ public class ChkNinteiChosahyo52Process extends BatchProcessBase<YokaigoninteiEn
         List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity = mapper.get認定調査票記入項目(processPrm.toYokaigoBatchMybitisParamter());
         if (テキスト.equals(entity.getテキスト_イメージ区分())) {
             ninteiEntity.set実施場所名称(entity.get実施場所名称());
-            ninteiEntity.set市町村特別給付(dbt5209Entity.get(0).getServiceJokyoKinyu());
-            ninteiEntity.set介護保険給付外の在宅(dbt5209Entity.get(1).getServiceJokyoKinyu());
+            ninteiEntity.set市町村特別給付(get市町村特別給付(dbt5209Entity, 0));
+            ninteiEntity.set介護保険給付外の在宅(get市町村特別給付(dbt5209Entity, 連番1));
             ninteiEntity.set施設名(entity.get施設名());
             ninteiEntity.set施設住所(entity.get施設住所());
             ninteiEntity.set施設電話(entity.get施設電話番号());
@@ -528,9 +529,18 @@ public class ChkNinteiChosahyo52Process extends BatchProcessBase<YokaigoninteiEn
                 : GenzainoJokyoCode.toValue(entity.get施設利用()).get名称());
         ninteiEntity.set所属機関(entity.get事業者名称());
         List<RString> 日常生活自立度リスト = new ArrayList<>();
-        日常生活自立度リスト.add(entity.get障害高齢者自立度());
-        日常生活自立度リスト.add(entity.get認知症高齢者自立度());
+        日常生活自立度リスト.add(RString.isNullOrEmpty(entity.get障害高齢者自立度()) ? RString.EMPTY
+                : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get障害高齢者自立度()).get名称());
+        日常生活自立度リスト.add(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症高齢者自立度()).get名称());
         ninteiEntity.set日常生活自立度リスト(日常生活自立度リスト);
+    }
+
+    private RString get市町村特別給付(List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity, int 連番) {
+        if (連番 < dbt5209Entity.size()) {
+            return dbt5209Entity.get(連番).getServiceJokyoKinyu();
+        }
+        return RString.EMPTY;
     }
 
     private void setBodyItem02(NinteiChosaJohohyoEntity ninteiEntity, YokaigoninteiEntity entity) {
@@ -801,7 +811,7 @@ public class ChkNinteiChosahyo52Process extends BatchProcessBase<YokaigoninteiEn
                         ReportIdDBE.DBE091052.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
-                        ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                        new RString(JobContextHolder.getJobId()),
                         ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE091052.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter52.pageCount().value())),
                         CSV出力有無,

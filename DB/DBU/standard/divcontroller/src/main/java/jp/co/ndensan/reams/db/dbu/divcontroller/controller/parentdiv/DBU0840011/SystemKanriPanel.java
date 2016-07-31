@@ -8,12 +8,16 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0840011
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.DBU0840011StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0840011.SystemKanriPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0840011.SystemKanriPanelHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -41,7 +45,17 @@ public class SystemKanriPanel {
         }
         getHandler(div).set_DDL();
         getHandler(div).onload();
-        //TODO 介護宛先住所編集（共有子Div）が未実装
+        div.getSystemKanri().getChohyoJushoDefault().getCcdKaigoAtesakiJushoSettei().initialize_systemKanri(false, true,
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
+                        RDate.getNowDate(), SubGyomuCode.DBU介護統計報告),
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
+                        RDate.getNowDate(), SubGyomuCode.DBU介護統計報告),
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
+                        RDate.getNowDate(), SubGyomuCode.DBU介護統計報告),
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
+                        RDate.getNowDate(), SubGyomuCode.DBU介護統計報告),
+                DbBusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
+                        RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         return ResponseData.of(div).setState(DBU0840011StateName.初期状態);
     }
 

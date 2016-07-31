@@ -82,7 +82,7 @@
                     FROM rgdb."DbT5201NinteichosaIraiJoho"
                     WHERE "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo")
         AND
-            substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 0, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
+            substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 1, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
         AND
             DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
         AND
@@ -210,7 +210,95 @@
             DbT5203NinteichosahyoKihonChosa."ninchishoNichijoSeikatsuJiritsudoCode",
             DbT5203NinteichosahyoKihonChosa."shogaiNichijoSeikatsuJiritsudoCode",
             DbT5211NinteichosahyoChosaItem."remban" AS researchItemRemban,
-            DbT5211NinteichosahyoChosaItem."researchItem"
+            DbT5211NinteichosahyoChosaItem."researchItem",
+            zenkaiDbT5211NinteichosahyoChosaItem.remban1,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban2,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban3,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban4,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban5,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban6,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban7,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban8,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban9,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban10,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban11,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban12,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban13,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban14,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban15,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban16,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban17,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban18,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban19,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban20,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban21,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban22,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban23,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban24,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban25,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban26,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban27,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban28,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban29,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban30,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban31,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban32,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban33,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban34,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban35,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban36,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban37,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban38,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban39,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban40,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban41,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban42,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban43,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban44,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban45,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban46,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban47,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban48,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban49,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban50,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban51,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban52,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban53,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban54,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban55,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban56,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban57,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban58,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban59,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban60,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban61,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban62,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban63,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban64,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban65,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban66,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban67,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban68,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban69,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban70,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban71,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban72,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban73,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban74,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban75,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban76,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban77,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban78,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban79,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban80,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban81,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban82,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban83,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban84,
+            zenkaiDbT5211NinteichosahyoChosaItem.remban85,
+            zenkaiDbT5211NinteichosahyoChosaItem."koroshoIfShikibetsuCode" AS zenkaiKoroshoIfShikibetsuCode,
+            zenkaiDbT5203NinteichosahyoKihonChosa."ninchishoNichijoSeikatsuJiritsudoCode" AS zenkaiNinchishoNichijoSeikatsuJiritsudoCode,
+            zenkaiDbT5203NinteichosahyoKihonChosa."shogaiNichijoSeikatsuJiritsudoCode" AS zenkaiShogaiNichijoSeikatsuJiritsudoCode
         FROM
            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
         INNER JOIN
@@ -283,21 +371,192 @@
         ON  DbT5205NinteichosahyoTokkijiko."shinseishoKanriNo" = DbT5205NinteichosahyoTokkijiko."shinseishoKanriNo"
         AND DbT5205NinteichosahyoTokkijiko."ninteichosaRirekiNo" = DbT5211NinteichosahyoChosaItem."ninteichosaRirekiNo"
         AND DbT5205NinteichosahyoTokkijiko."tokkijikoTextImageKubun" = DbT5202NinteichosahyoGaikyoChosa."gaikyoChosaTextImageKubun"
+        LEFT JOIN 
+            ( SELECT DbT5101."shinseishoKanriNo",
+                     DbT5121."zenkaiShinseishoKanriNo",
+                     DbT5211."koroshoIfShikibetsuCode",
+                     CASE WHEN DbT5211."remban" = 1 THEN DbT5211."remban" END AS  remban1,
+                     CASE WHEN DbT5211."remban" = 2 THEN DbT5211."remban" END AS  remban2,
+                     CASE WHEN DbT5211."remban" = 3 THEN DbT5211."remban" END AS  remban3,
+                     CASE WHEN DbT5211."remban" = 4 THEN DbT5211."remban" END AS  remban4,
+                     CASE WHEN DbT5211."remban" = 5 THEN DbT5211."remban" END AS  remban5,
+                     CASE WHEN DbT5211."remban" = 6 THEN DbT5211."remban" END AS  remban6,
+                     CASE WHEN DbT5211."remban" = 7 THEN DbT5211."remban" END AS  remban7,
+                     CASE WHEN DbT5211."remban" = 8 THEN DbT5211."remban" END AS  remban8,
+                     CASE WHEN DbT5211."remban" = 9 THEN DbT5211."remban" END AS  remban9,
+                     CASE WHEN DbT5211."remban" = 10 THEN DbT5211."remban" END AS  remban10,
+                     CASE WHEN DbT5211."remban" = 11 THEN DbT5211."remban" END AS  remban11,
+                     CASE WHEN DbT5211."remban" = 12 THEN DbT5211."remban" END AS  remban12,
+                     CASE WHEN DbT5211."remban" = 13 THEN DbT5211."remban" END AS  remban13,
+                     CASE WHEN DbT5211."remban" = 14 THEN DbT5211."remban" END AS  remban14,
+                     CASE WHEN DbT5211."remban" = 15 THEN DbT5211."remban" END AS  remban15,
+                     CASE WHEN DbT5211."remban" = 16 THEN DbT5211."remban" END AS  remban16,
+                     CASE WHEN DbT5211."remban" = 17 THEN DbT5211."remban" END AS  remban17,
+                     CASE WHEN DbT5211."remban" = 18 THEN DbT5211."remban" END AS  remban18,
+                     CASE WHEN DbT5211."remban" = 19 THEN DbT5211."remban" END AS  remban19,
+                     CASE WHEN DbT5211."remban" = 20 THEN DbT5211."remban" END AS  remban20,
+                     CASE WHEN DbT5211."remban" = 21 THEN DbT5211."remban" END AS  remban21,
+                     CASE WHEN DbT5211."remban" = 22 THEN DbT5211."remban" END AS  remban22,
+                     CASE WHEN DbT5211."remban" = 23 THEN DbT5211."remban" END AS  remban23,
+                     CASE WHEN DbT5211."remban" = 24 THEN DbT5211."remban" END AS  remban24,
+                     CASE WHEN DbT5211."remban" = 25 THEN DbT5211."remban" END AS  remban25,
+                     CASE WHEN DbT5211."remban" = 26 THEN DbT5211."remban" END AS  remban26,
+                     CASE WHEN DbT5211."remban" = 27 THEN DbT5211."remban" END AS  remban27,
+                     CASE WHEN DbT5211."remban" = 28 THEN DbT5211."remban" END AS  remban28,
+                     CASE WHEN DbT5211."remban" = 29 THEN DbT5211."remban" END AS  remban29,
+                     CASE WHEN DbT5211."remban" = 30 THEN DbT5211."remban" END AS  remban30,
+                     CASE WHEN DbT5211."remban" = 31 THEN DbT5211."remban" END AS  remban31,
+                     CASE WHEN DbT5211."remban" = 32 THEN DbT5211."remban" END AS  remban32,
+                     CASE WHEN DbT5211."remban" = 33 THEN DbT5211."remban" END AS  remban33,
+                     CASE WHEN DbT5211."remban" = 34 THEN DbT5211."remban" END AS  remban34,
+                     CASE WHEN DbT5211."remban" = 35 THEN DbT5211."remban" END AS  remban35,
+                     CASE WHEN DbT5211."remban" = 36 THEN DbT5211."remban" END AS  remban36,
+                     CASE WHEN DbT5211."remban" = 37 THEN DbT5211."remban" END AS  remban37,
+                     CASE WHEN DbT5211."remban" = 38 THEN DbT5211."remban" END AS  remban38,
+                     CASE WHEN DbT5211."remban" = 39 THEN DbT5211."remban" END AS  remban39,
+                     CASE WHEN DbT5211."remban" = 40 THEN DbT5211."remban" END AS  remban40,
+                     CASE WHEN DbT5211."remban" = 41 THEN DbT5211."remban" END AS  remban41,
+                     CASE WHEN DbT5211."remban" = 42 THEN DbT5211."remban" END AS  remban42,
+                     CASE WHEN DbT5211."remban" = 43 THEN DbT5211."remban" END AS  remban43,
+                     CASE WHEN DbT5211."remban" = 44 THEN DbT5211."remban" END AS  remban44,
+                     CASE WHEN DbT5211."remban" = 45 THEN DbT5211."remban" END AS  remban45,
+                     CASE WHEN DbT5211."remban" = 46 THEN DbT5211."remban" END AS  remban46,
+                     CASE WHEN DbT5211."remban" = 47 THEN DbT5211."remban" END AS  remban47,
+                     CASE WHEN DbT5211."remban" = 48 THEN DbT5211."remban" END AS  remban48,
+                     CASE WHEN DbT5211."remban" = 49 THEN DbT5211."remban" END AS  remban49,
+                     CASE WHEN DbT5211."remban" = 50 THEN DbT5211."remban" END AS  remban50,
+                     CASE WHEN DbT5211."remban" = 51 THEN DbT5211."remban" END AS  remban51,
+                     CASE WHEN DbT5211."remban" = 52 THEN DbT5211."remban" END AS  remban52,
+                     CASE WHEN DbT5211."remban" = 53 THEN DbT5211."remban" END AS  remban53,
+                     CASE WHEN DbT5211."remban" = 54 THEN DbT5211."remban" END AS  remban54,
+                     CASE WHEN DbT5211."remban" = 55 THEN DbT5211."remban" END AS  remban55,
+                     CASE WHEN DbT5211."remban" = 56 THEN DbT5211."remban" END AS  remban56,
+                     CASE WHEN DbT5211."remban" = 57 THEN DbT5211."remban" END AS  remban57,
+                     CASE WHEN DbT5211."remban" = 58 THEN DbT5211."remban" END AS  remban58,
+                     CASE WHEN DbT5211."remban" = 59 THEN DbT5211."remban" END AS  remban59,
+                     CASE WHEN DbT5211."remban" = 60 THEN DbT5211."remban" END AS  remban60,
+                     CASE WHEN DbT5211."remban" = 61 THEN DbT5211."remban" END AS  remban61,
+                     CASE WHEN DbT5211."remban" = 62 THEN DbT5211."remban" END AS  remban62,
+                     CASE WHEN DbT5211."remban" = 63 THEN DbT5211."remban" END AS  remban63,
+                     CASE WHEN DbT5211."remban" = 64 THEN DbT5211."remban" END AS  remban64,
+                     CASE WHEN DbT5211."remban" = 65 THEN DbT5211."remban" END AS  remban65,
+                     CASE WHEN DbT5211."remban" = 66 THEN DbT5211."remban" END AS  remban66,
+                     CASE WHEN DbT5211."remban" = 67 THEN DbT5211."remban" END AS  remban67,
+                     CASE WHEN DbT5211."remban" = 68 THEN DbT5211."remban" END AS  remban68,
+                     CASE WHEN DbT5211."remban" = 69 THEN DbT5211."remban" END AS  remban69,
+                     CASE WHEN DbT5211."remban" = 70 THEN DbT5211."remban" END AS  remban70,
+                     CASE WHEN DbT5211."remban" = 71 THEN DbT5211."remban" END AS  remban71,
+                     CASE WHEN DbT5211."remban" = 72 THEN DbT5211."remban" END AS  remban72,
+                     CASE WHEN DbT5211."remban" = 73 THEN DbT5211."remban" END AS  remban73,
+                     CASE WHEN DbT5211."remban" = 74 THEN DbT5211."remban" END AS  remban74,
+                     CASE WHEN DbT5211."remban" = 75 THEN DbT5211."remban" END AS  remban75,
+                     CASE WHEN DbT5211."remban" = 76 THEN DbT5211."remban" END AS  remban76,
+                     CASE WHEN DbT5211."remban" = 77 THEN DbT5211."remban" END AS  remban77,
+                     CASE WHEN DbT5211."remban" = 78 THEN DbT5211."remban" END AS  remban78,
+                     CASE WHEN DbT5211."remban" = 79 THEN DbT5211."remban" END AS  remban79,
+                     CASE WHEN DbT5211."remban" = 80 THEN DbT5211."remban" END AS  remban80,
+                     CASE WHEN DbT5211."remban" = 81 THEN DbT5211."remban" END AS  remban81,
+                     CASE WHEN DbT5211."remban" = 82 THEN DbT5211."remban" END AS  remban82,
+                     CASE WHEN DbT5211."remban" = 83 THEN DbT5211."remban" END AS  remban83,
+                     CASE WHEN DbT5211."remban" = 84 THEN DbT5211."remban" END AS  remban84,
+                     CASE WHEN DbT5211."remban" = 85 THEN DbT5211."remban" END AS  remban85,
+                     DbT5211."researchItem" 
+               FROM  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+               LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+                      ON DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo" 
+               LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
+                      ON DbT5121."zenkaiShinseishoKanriNo" = DbT5211."shinseishoKanriNo"
+                     AND NOT EXISTS ( SELECT 'X' 
+                                        FROM rgdb."DbT5211NinteichosahyoChosaItem" 
+                                       WHERE "DbT5211NinteichosahyoChosaItem"."shinseishoKanriNo" = DbT5211."shinseishoKanriNo" 
+                                         AND "DbT5211NinteichosahyoChosaItem"."ninteichosaRirekiNo" <![CDATA[<]]> DbT5211."ninteichosaRirekiNo" )
+                     AND DbT5211."remban" IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
+                                                                       31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,
+                                                                       58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85) 
+                     AND DbT5211."koroshoIfShikibetsuCode" = ( 
+                               SELECT "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode"
+                                 FROM rgdb."DbT5101NinteiShinseiJoho" 
+                                WHERE "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+                                  AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE )
+               LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" 
+                      ON DbT5121."zenkaiShinseishoKanriNo" = "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo"                
+                   WHERE DbT5101."shinseishoKanriNo" =  #{申請書管理番号}
+                     AND DbT5101."logicalDeletedFlag" = FALSE 
+                ORDER BY DbT5211."remban" ) AS zenkaiDbT5211NinteichosahyoChosaItem
+               ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = zenkaiDbT5211NinteichosahyoChosaItem."shinseishoKanriNo" 
+        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS zenkaiDbT5203NinteichosahyoKihonChosa 
+               ON DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo" = zenkaiDbT5203NinteichosahyoKihonChosa."shinseishoKanriNo"
+              AND NOT EXISTS ( SELECT 'X' 
+                                 FROM rgdb."DbT5203NinteichosahyoKihonChosa" 
+                                WHERE "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo" = zenkaiDbT5203NinteichosahyoKihonChosa."shinseishoKanriNo" 
+                                  AND "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" <![CDATA[<]]> zenkaiDbT5203NinteichosahyoKihonChosa."ninteichosaRirekiNo" ) 
+              AND zenkaiDbT5203NinteichosahyoKihonChosa."koroshoIfShikibetsuCode" =( SELECT 
+                                   "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode"
+                              FROM rgdb."DbT5101NinteiShinseiJoho" 
+                             WHERE "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = DbT5121ShinseiRirekiJoho."zenkaiShinseishoKanriNo" 
+                               AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE ) 
         WHERE
             DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL
         AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL
-        AND DbT5101NinteiShinseiJoho."shinseishoKanriNo" IN 
-            <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                #{code} 
-            </foreach>
+        AND DbT5101NinteiShinseiJoho."shinseishoKanriNo" = #{申請書管理番号}
         AND DbT5101NinteiShinseiJoho."shoriJotaiKubun" IN (#{処理状態区分通常}, #{処理状態区分延期})
         AND DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE
         ORDER BY
             DbT5101NinteiShinseiJoho."hihokenshaKana", DbT5101NinteiShinseiJoho."ninteiShinseiYMD", DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
             serviceJokyoRemban, serviceJokyoFlagRemban, kinyuRemban, shisetsuRiyoRemban, researchItemRemban, 
             DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoNo", DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoRemban"
+    </select>
+    
+    <select resultOrdered="true" id="select調査結果入力用調査員データ" 
+            resultMap="resultMap_調査結果入力用調査員データ" fetchSize="500">
+        SELECT
+            DbT5910NinteichosaItakusakiJoho."shichosonCode",
+            DbT7051KoseiShichosonMaster."shichosonMeisho",
+            DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode",
+            DbT5910NinteichosaItakusakiJoho."jigyoshaNo",
+            DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho",
+            DbT5910NinteichosaItakusakiJoho."jigyoshaMeishoKana",
+            DbT5910NinteichosaItakusakiJoho."yubinNo",
+            DbT5910NinteichosaItakusakiJoho."jusho",
+            DbT5910NinteichosaItakusakiJoho."telNo",
+            DbT5910NinteichosaItakusakiJoho."faxNo",
+            DbT5910NinteichosaItakusakiJoho."daihyoshaName",
+            DbT5910NinteichosaItakusakiJoho."daihyoshaNameKana",
+            DbT5910NinteichosaItakusakiJoho."waritsukeTeiin",
+            DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag",
+            DbT5910NinteichosaItakusakiJoho."tokuteiChosainDisplayFlag",
+            DbT5910NinteichosaItakusakiJoho."waritsukeChiku",
+            DbT5910NinteichosaItakusakiJoho."chosaItakuKubun",
+            DbT5910NinteichosaItakusakiJoho."kikanKubun",
+            DbT5910NinteichosaItakusakiJoho."jokyoFlag",
+            DbT5913ChosainJoho."ninteiChosainCode",
+            DbT5913ChosainJoho."chosainShimei",
+            DbT5913ChosainJoho."chosainKanaShimei",
+            DbT5913ChosainJoho."seibetsu",
+            DbT5913ChosainJoho."chikuCode",
+            DbT5913ChosainJoho."chosainShikaku",
+            DbT5913ChosainJoho."chosaKanoNinzuPerMonth",
+            DbT5913ChosainJoho."jokyoFlag" AS chosainJokyoFlag,
+            DbT5913ChosainJoho."yubinNo" AS chosainYubinNo,
+            DbT5913ChosainJoho."jusho" AS chosainJusho,
+            DbT5913ChosainJoho."telNo" AS chosainTelNo,
+            DbT5913ChosainJoho."faxNo" AS chosainFaxNo,
+            DbT5913ChosainJoho."shozokuKikanName"
+        FROM
+           rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+        ON  DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
+        INNER JOIN
+            rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5913ChosainJoho."shichosonCode"
+        AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = DbT5913ChosainJoho."ninteiChosaItakusakiCode"
+        ORDER BY
+            DbT5913ChosainJoho."ninteiChosainCode", 
+            DbT5910NinteichosaItakusakiJoho."shichosonCode", 
+            DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
     </select>
     <resultMap id="resultMap_委託先調査員情報" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
         <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -369,6 +628,128 @@
         <result property="shogaiNichijoSeikatsuJiritsudoCode" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="researchItemRemban" column="researchItemRemban"/>
         <result property="researchItem" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="remban1" column="remban1"/>
+        <result property="remban2" column="remban2"/>
+        <result property="remban3" column="remban3"/>
+        <result property="remban4" column="remban4"/>
+        <result property="remban5" column="remban5"/>
+        <result property="remban6" column="remban6"/>
+        <result property="remban7" column="remban7"/>
+        <result property="remban8" column="remban8"/>
+        <result property="remban9" column="remban9"/>
+        <result property="remban10" column="remban10"/>
+        <result property="remban11" column="remban11"/>
+        <result property="remban12" column="remban12"/>
+        <result property="remban13" column="remban13"/>
+        <result property="remban14" column="remban14"/>
+        <result property="remban15" column="remban15"/>
+        <result property="remban16" column="remban16"/>
+        <result property="remban17" column="remban17"/>
+        <result property="remban18" column="remban18"/>
+        <result property="remban19" column="remban19"/>
+        <result property="remban20" column="remban20"/>
+        <result property="remban21" column="remban21"/>
+        <result property="remban22" column="remban22"/>
+        <result property="remban23" column="remban23"/>
+        <result property="remban24" column="remban24"/>
+        <result property="remban25" column="remban25"/>
+        <result property="remban26" column="remban26"/>
+        <result property="remban27" column="remban27"/>
+        <result property="remban28" column="remban28"/>
+        <result property="remban29" column="remban29"/>
+        <result property="remban30" column="remban30"/>
+        <result property="remban31" column="remban31"/>
+        <result property="remban32" column="remban32"/>
+        <result property="remban33" column="remban33"/>
+        <result property="remban34" column="remban34"/>
+        <result property="remban35" column="remban35"/>
+        <result property="remban36" column="remban36"/>
+        <result property="remban37" column="remban37"/>
+        <result property="remban38" column="remban38"/>
+        <result property="remban39" column="remban39"/>
+        <result property="remban40" column="remban40"/>
+        <result property="remban41" column="remban41"/>
+        <result property="remban42" column="remban42"/>
+        <result property="remban43" column="remban43"/>
+        <result property="remban44" column="remban44"/>
+        <result property="remban45" column="remban45"/>
+        <result property="remban46" column="remban46"/>
+        <result property="remban47" column="remban47"/>
+        <result property="remban48" column="remban48"/>
+        <result property="remban49" column="remban49"/>
+        <result property="remban50" column="remban50"/>
+        <result property="remban51" column="remban51"/>
+        <result property="remban52" column="remban52"/>
+        <result property="remban53" column="remban53"/>
+        <result property="remban54" column="remban54"/>
+        <result property="remban55" column="remban55"/>
+        <result property="remban56" column="remban56"/>
+        <result property="remban57" column="remban57"/>
+        <result property="remban58" column="remban58"/>
+        <result property="remban59" column="remban59"/>
+        <result property="remban60" column="remban60"/>
+        <result property="remban61" column="remban61"/>
+        <result property="remban62" column="remban62"/>
+        <result property="remban63" column="remban63"/>
+        <result property="remban64" column="remban64"/>
+        <result property="remban65" column="remban65"/>
+        <result property="remban66" column="remban66"/>
+        <result property="remban67" column="remban67"/>
+        <result property="remban68" column="remban68"/>
+        <result property="remban69" column="remban69"/>
+        <result property="remban70" column="remban70"/>
+        <result property="remban71" column="remban71"/>
+        <result property="remban72" column="remban72"/>
+        <result property="remban73" column="remban73"/>
+        <result property="remban74" column="remban74"/>
+        <result property="remban75" column="remban75"/>
+        <result property="remban76" column="remban76"/>
+        <result property="remban77" column="remban77"/>
+        <result property="remban78" column="remban78"/>
+        <result property="remban79" column="remban79"/>
+        <result property="remban80" column="remban80"/>
+        <result property="remban81" column="remban81"/>
+        <result property="remban82" column="remban82"/>
+        <result property="remban83" column="remban83"/>
+        <result property="remban84" column="remban84"/>
+        <result property="remban85" column="remban85"/>
+        <result property="zenkaiKoroshoIfShikibetsuCode" column="zenkaiKoroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zenkaiNinchishoNichijoSeikatsuJiritsudoCode" column="zenkaiNinchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zenkaiShogaiNichijoSeikatsuJiritsudoCode" column="zenkaiShogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+    <resultMap id="resultMap_調査結果入力用調査員データ" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileChosainRelateEntity" autoMapping="true">
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaItakusakiCode" column="ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeishoKana" column="jigyoshaMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="faxNo" column="faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daihyoshaNameKana" column="daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="waritsukeTeiin" column="waritsukeTeiin"/>
+        <result property="autoWaritsukeFlag" column="autoWaritsukeFlag"/>
+        <result property="tokuteiChosainDisplayFlag" column="tokuteiChosainDisplayFlag"/>
+        <result property="waritsukeChiku" column="waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+        <result property="chosaItakuKubun" column="chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kikanKubun" column="kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jokyoFlag" column="jokyoFlag"/>
+        <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainKanaShimei" column="chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuCode" column="chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShikaku" column="chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaKanoNinzuPerMonth" column="chosaKanoNinzuPerMonth"/>
+        <result property="chosainJokyoFlag" column="chosainJokyoFlag"/>
+        <result property="chosainYubinNo" column="chosainYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="chosainJusho" column="chosainJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="chosainTelNo" column="chosainTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="chosainFaxNo" column="chosainFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shozokuKikanName" column="shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
 </mapper>

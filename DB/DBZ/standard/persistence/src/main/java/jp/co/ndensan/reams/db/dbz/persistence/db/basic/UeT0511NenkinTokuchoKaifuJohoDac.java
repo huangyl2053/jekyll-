@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJoho;
@@ -36,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 年金特徴回付情報（介護継承）のデータアクセスクラスです。
+ *
+ * @reamsid_L DBZ-9999-022 yangchenbing
  */
 public class UeT0511NenkinTokuchoKaifuJohoDac implements ISaveable<UeT0511NenkinTokuchoKaifuJohoEntity> {
 
@@ -187,11 +188,10 @@ public class UeT0511NenkinTokuchoKaifuJohoDac implements ISaveable<UeT0511Nenkin
                 toList(UeT0511NenkinTokuchoKaifuJohoEntity.class);
     }
 
-    private void entityAddList(List<UeT0511NenkinTokuchoKaifuJohoEntity> list,
-            List<UeT0511NenkinTokuchoKaifuJohoEntity> addList) {
-        if (!(list.equals(Collections.EMPTY_LIST))) {
-            addList.addAll(list);
-        }
-    }
-
+//    private void entityAddList(List<UeT0511NenkinTokuchoKaifuJohoEntity> list,
+//            List<UeT0511NenkinTokuchoKaifuJohoEntity> addList) {
+//        if (!(list.equals(Collections.EMPTY_LIST))) {
+//            addList.addAll(list);
+//        }
+//    }
 }

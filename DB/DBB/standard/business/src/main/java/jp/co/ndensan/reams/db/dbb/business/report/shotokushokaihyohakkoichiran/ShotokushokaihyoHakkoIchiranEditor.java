@@ -131,12 +131,12 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         source.komokuNameTitle1 = 照会日;
         source.komokuNameTitle2 = 転入日;
         source.komokuNameTitle4 = 転出日;
-        source.listUpper_1 = new RString(所得照会票発行一覧.get世帯コード().toString());
-        source.listUpper_2 = new RString(所得照会票発行一覧.getカナ氏名().toString());
-        RString 候補者区分 = 所得照会票発行一覧.get候補者区分();
+        source.listUpper_1 = new RString(所得照会票発行一覧.getSetaiCode().toString());
+        source.listUpper_2 = new RString(所得照会票発行一覧.getAtenaKanaShimei().toString());
+        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
         if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)
-                && 所得照会票発行一覧.get前住所() != null) {
-            source.listUpper_3 = 所得照会票発行一覧.get前住所();
+                && 所得照会票発行一覧.getZenjusho() != null) {
+            source.listUpper_3 = 所得照会票発行一覧.getZenjusho();
         } else if (候補者区分 != null
                 && 候補者区分.equals(候補者区分_住特者)) {
             source.listUpper_3 = RString.EMPTY;
@@ -150,38 +150,38 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
         if (照会年月日 != null) {
             source.listUpper_5 = 照会年月日.wareki().toDateString();
         }
-        RString 候補者区分 = 所得照会票発行一覧.get候補者区分();
+        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
         if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)
-                && 所得照会票発行一覧.get異動年月日() != null) {
-            source.listUpper_6 = 所得照会票発行一覧.get異動年月日().wareki().toDateString();
+                && 所得照会票発行一覧.getIdoYMD() != null) {
+            source.listUpper_6 = 所得照会票発行一覧.getIdoYMD().wareki().toDateString();
         } else if (候補者区分 != null
                 && 候補者区分.equals(候補者区分_住特者)) {
             source.listUpper_6 = RString.EMPTY;
         }
         set種別(source);
-        if (所得照会票発行一覧.get識別コード() != null) {
-            source.listLower_1 = 所得照会票発行一覧.get識別コード().getColumnValue();
+        if (所得照会票発行一覧.getShikibetsuCode() != null) {
+            source.listLower_1 = 所得照会票発行一覧.getShikibetsuCode().getColumnValue();
         }
-        if (所得照会票発行一覧.get名称() != null) {
-            source.listLower_2 = 所得照会票発行一覧.get名称().getColumnValue();
+        if (所得照会票発行一覧.getAtenaShimei() != null) {
+            source.listLower_2 = 所得照会票発行一覧.getAtenaShimei().getColumnValue();
         }
-        source.listLower_3 = 所得照会票発行一覧.get現住所();
+        source.listLower_3 = 所得照会票発行一覧.getGenjusho();
         set性別コード(source);
         if (候補者区分 != null && 候補者区分.equals(候補者区分_転入者)) {
             source.listLower_5 = RString.EMPTY;
         } else if (候補者区分 != null
                 && 候補者区分.equals(候補者区分_住特者)) {
-            source.listLower_5 = 所得照会票発行一覧.get異動年月日().wareki().toDateString();
+            source.listLower_5 = 所得照会票発行一覧.getIdoYMD().wareki().toDateString();
         }
-        if (所得照会票発行一覧.get被保険者番号() != null) {
-            source.listLower_6 = 所得照会票発行一覧.get被保険者番号().getColumnValue();
+        if (所得照会票発行一覧.getHihokenshaNo() != null) {
+            source.listLower_6 = 所得照会票発行一覧.getHihokenshaNo().getColumnValue();
         }
     }
 
     private void set性別コード(ShotokushokaihyoHakkoIchiranSource source) {
-        if (Seibetsu.男.getコード().equals(所得照会票発行一覧.get性別コード())) {
+        if (Seibetsu.男.getコード().equals(所得照会票発行一覧.getSeibetsuCode())) {
             source.listLower_4 = Seibetsu.男.get名称();
-        } else if (Seibetsu.女.getコード().equals(所得照会票発行一覧.get性別コード())) {
+        } else if (Seibetsu.女.getコード().equals(所得照会票発行一覧.getSeibetsuCode())) {
             source.listLower_4 = Seibetsu.女.get名称();
         } else {
             source.listLower_4 = RString.EMPTY;
@@ -189,14 +189,14 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     }
 
     private void set生年月日(ShotokushokaihyoHakkoIchiranSource source) {
-        RString 住民種別コード = 所得照会票発行一覧.get住民種別コード();
+        RString 住民種別コード = 所得照会票発行一覧.getJuminShubetsuCode();
         if (住民種別コード.equals(外国人)
                 || 住民種別コード.equals(住登外外国人)) {
-            source.listUpper_4 = 所得照会票発行一覧.get生年月日().seireki().toDateString();
+            source.listUpper_4 = 所得照会票発行一覧.getSeinengappiYMD().seireki().toDateString();
         }
         if (住民種別コード.equals(日本人)
                 || 住民種別コード.equals(住登外日本人)) {
-            source.listUpper_4 = 所得照会票発行一覧.get生年月日().wareki().toDateString();
+            source.listUpper_4 = 所得照会票発行一覧.getSeinengappiYMD().wareki().toDateString();
         }
     }
 
@@ -241,9 +241,9 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     }
 
     private void set種別(ShotokushokaihyoHakkoIchiranSource source) {
-        RString 候補者区分 = 所得照会票発行一覧.get候補者区分();
-        RString 被保険者区分コード = 所得照会票発行一覧.get被保険者区分コード();
-        RString 本人区分 = 所得照会票発行一覧.get本人区分();
+        RString 候補者区分 = 所得照会票発行一覧.getKouhoshakubun();
+        RString 被保険者区分コード = 所得照会票発行一覧.getHihokennshaKubunCode();
+        RString 本人区分 = 所得照会票発行一覧.getHonninKubun();
         if (is１号(候補者区分, 本人区分, 被保険者区分コード)) {
             source.listUpper_7 = 印字_１号;
         } else if (is１号予(候補者区分, 本人区分, 被保険者区分コード)) {
@@ -266,8 +266,8 @@ public class ShotokushokaihyoHakkoIchiranEditor implements IShotokushokaihyoHakk
     private boolean is広域() {
         RString 市町村コード = RString.EMPTY;
         RString 構成市町村情報_市町村コード = RString.EMPTY;
-        if (所得照会票発行一覧.get送付先全国住所コード() != null) {
-            市町村コード = new RString(所得照会票発行一覧.get送付先全国住所コード().toString().substring(NUM_0, NUM_5));
+        if (所得照会票発行一覧.getShokaisakiLasdecCode() != null) {
+            市町村コード = new RString(所得照会票発行一覧.getShokaisakiLasdecCode().toString().substring(NUM_0, NUM_5));
         }
         List<RString> 市町村コードリスト = new ArrayList<>();
         for (KoikiZenShichosonJoho 構成市町村情報 : 構成市町村情報リスト) {

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 算定通知書一時テーブルに登録する用パラメータクラスです。
+ * 本算定通知書一時テーブルに登録する用パラメータクラスです。
  *
  * @reamsid_L DBB-0780-060 xicongwang
  */
@@ -67,6 +67,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoParameter extends KozaSearchParameter
      * @param searchkey IKozaSearchKey
      * @param list List<KamokuCode>
      * @param 科目コード RString
+     * @param 最新調定日時 YMDHMS
      * @return パラメータ
      */
     public static HonsanteiTsuchishoIkkatsuHakkoParameter createSelectByKeyParam(

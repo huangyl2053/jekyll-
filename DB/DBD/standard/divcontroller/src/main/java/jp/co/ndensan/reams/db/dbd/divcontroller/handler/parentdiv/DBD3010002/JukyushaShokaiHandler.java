@@ -82,6 +82,7 @@ public class JukyushaShokaiHandler {
     private static final RString KEY3 = new RString("3");
 
     private final JukyushaShokaiDiv div;
+    private final JukyuShokaiService service;
 
     /**
      * コンストラクタです。
@@ -90,6 +91,7 @@ public class JukyushaShokaiHandler {
      */
     public JukyushaShokaiHandler(JukyushaShokaiDiv div) {
         this.div = div;
+        service = JukyuShokaiService.createInstance();
     }
 
     /**
@@ -107,8 +109,6 @@ public class JukyushaShokaiHandler {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
         PersonalData personalData = PersonalData.of(識別コード, expandedInfo);
         AccessLogger.log(AccessLogType.照会, personalData);
-
-        JukyuShokaiService service = JukyuShokaiService.createInstance();
 
         RiyoshaFutanWariaiMeisai 利用者負担割合明細 = service.get利用者負担割合(被保険者番号);
         if (利用者負担割合明細.get年度() != null && !利用者負担割合明細.get年度().isEmpty()) {
@@ -198,7 +198,7 @@ public class JukyushaShokaiHandler {
         dgNinteiRireki_Row row;
         RString 履歴番号;
         RString 受給申請事由;
-        RString 認定column;
+        RString 認定編集値;
         Code 削除事由コード;
 
         boolean 要支援者認定申請区分;
@@ -219,45 +219,43 @@ public class JukyushaShokaiHandler {
             row.setEdaban(joho.get受給者台帳_枝番());
             row.setJukyuShinseiJiyu(joho.get受給者台帳_受給申請事由().getColumnValue());
 
-            認定column = RString.EMPTY;
             履歴番号 = joho.get受給者台帳_履歴番号();
             受給申請事由 = joho.get受給者台帳_受給申請事由().getColumnValue();
             要支援者認定申請区分 = joho.is受給者台帳_要支援者認定申請区分();
             if (履歴番号_0000.equals(履歴番号)) {
                 if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由)) {
-                    認定column = 更新申請_内;
+                    認定編集値 = 更新申請_内;
                 } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由)) {
-                    認定column = 新規申請_外;
+                    認定編集値 = 新規申請_外;
                 } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由) && 要支援者認定申請区分) {
-                    認定column = 新規申請_支援;
+                    認定編集値 = 新規申請_支援;
                 } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由) && !要支援者認定申請区分) {
-                    認定column = 区分変更申請;
+                    認定編集値 = 区分変更申請;
                 } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(受給申請事由)) {
-                    認定column = サービス変更申請;
+                    認定編集値 = サービス変更申請;
                 } else {
-                    認定column = 新規申請;
+                    認定編集値 = 新規申請;
                 }
             } else {
                 if (joho.is受給者台帳_論理削除フラグ()) {
                     削除事由コード = joho.get受給者台帳_削除事由コード();
                     if (削除事由コード == null || 削除事由コード.isEmpty() || SakujoJiyuCode.過誤による削除.getコード().
                             equals(SakujoJiyuCode.toValue(削除事由コード.getColumnValue()).getコード())) {
-                        認定column = RString.EMPTY;
+                        認定編集値 = RString.EMPTY;
                     } else {
-                        認定column = SakujoJiyuCode.toValue(削除事由コード.getColumnValue()).get名称();
+                        認定編集値 = SakujoJiyuCode.toValue(削除事由コード.getColumnValue()).get名称();
                     }
                 } else {
-                    認定column = get認定when論理削除isFalse(joho, 受給申請事由, 要支援者認定申請区分);
+                    認定編集値 = get認定when論理削除isFalse(joho, 受給申請事由, 要支援者認定申請区分);
                 }
             }
-            row.setNintei(認定column);
+            row.setNintei(認定編集値);
             dataSource.add(row);
         }
         div.getNinteiRireki().getDgNinteiRireki().setDataSource(dataSource);
     }
 
     private void ボタン詳細指示パネルの設定(HihokenshaNo 被保険者番号) {
-        JukyuShokaiService service = JukyuShokaiService.createInstance();
         ServiceJukyuJokyo サービス受給状況 = service.findサービス受給状況(被保険者番号);
 
         div.getButtonsShosaiShiji().getBtnRiyogenmen().setDisabled(!サービス受給状況.had利用者負担減免());
@@ -320,7 +318,6 @@ public class JukyushaShokaiHandler {
     private void set認定詳細パネル() {
         dgNinteiRireki_Row row = div.getNinteiRireki().getDgNinteiRireki().getActiveRow();
 
-        JukyuShokaiService service = JukyuShokaiService.createInstance();
         List<JukyuShokaiShinseiNinteiJoho> 申請認定情報List = service.
                 find申請認定情報(row.getShichosonCode(), row.getRirekiNo(), row.getEdaban(), row.getJukyuShinseiJiyu());
         if (申請認定情報List == null || 申請認定情報List.isEmpty()) {
@@ -338,7 +335,8 @@ public class JukyushaShokaiHandler {
                     申請認定情報.get受給者台帳_直近異動事由コード().getColumnValue()).get名称());
         }
         if (申請認定情報.get受給者台帳_削除事由コード() != null && !申請認定情報.get受給者台帳_削除事由コード().isEmpty()) {
-            div.getNinteiDetail().getTxtSakujoJiyu().setValue(SakujoJiyuCode.toValue(申請認定情報.get受給者台帳_削除事由コード().getColumnValue()).get名称());
+            div.getNinteiDetail().getTxtSakujoJiyu().setValue(SakujoJiyuCode.
+                    toValue(申請認定情報.get受給者台帳_削除事由コード().getColumnValue()).get名称());
         }
 
         div.getNinteiDetail().getTxtRiyu().setValue(申請認定情報.受給者台帳_異動理由());
@@ -353,12 +351,14 @@ public class JukyushaShokaiHandler {
             div.getNinteiDetail().getTxtTorikeshiYMD().setValue(get取消日(申請認定情報));
         }
         set当初認定パネル(申請認定情報);
-        if (申請認定情報.get要介護認定申請情報_認定申請区分申請時コード() != null && !申請認定情報.get要介護認定申請情報_認定申請区分申請時コード().isEmpty()) {
+        if (申請認定情報.get要介護認定申請情報_認定申請区分申請時コード() != null
+                && !申請認定情報.get要介護認定申請情報_認定申請区分申請時コード().isEmpty()) {
             div.getNinteiDetail().getTxtNinteiShinseiKubunShinseiji().setValue(NinteiShinseiShinseijiKubunCode.
                     toValue(申請認定情報.get要介護認定申請情報_認定申請区分申請時コード().getColumnValue()).get名称());
         }
         if (申請認定情報.get要介護認定申請情報_認定申請区分法令コード() != null && !申請認定情報.get要介護認定申請情報_認定申請区分法令コード().isEmpty()) {
-            div.getNinteiDetail().getTxtNinteiShinseiKubunHorei().setValue(NinteiShinseiHoreiCode.toValue(申請認定情報.get要介護認定申請情報_認定申請区分法令コード().getColumnValue()).get名称());
+            div.getNinteiDetail().getTxtNinteiShinseiKubunHorei().setValue(NinteiShinseiHoreiCode.
+                    toValue(申請認定情報.get要介護認定申請情報_認定申請区分法令コード().getColumnValue()).get名称());
         }
         div.getNinteiDetail().getTxtYukokigen().setValue(申請認定情報.get資格者証交付情報_有効期限());
         div.getNinteiDetail().getTxtKofuDate().setValue(申請認定情報.get資格者証交付情報_交付年月日());
@@ -540,10 +540,12 @@ public class JukyushaShokaiHandler {
 
     private void set当初認定パネル(JukyuShokaiShinseiNinteiJoho 申請認定情報) {
         if (申請認定情報.get受給者台帳_当初認定有効期間開始年月日() != null && !申請認定情報.get受給者台帳_当初認定有効期間開始年月日().isEmpty()) {
-            div.getNinteiDetail().getNinteiResult().getTxtToshoYukokikan().setFromValue(new RDate(申請認定情報.get受給者台帳_当初認定有効期間開始年月日().toString()));
+            div.getNinteiDetail().getNinteiResult().getTxtToshoYukokikan().
+                    setFromValue(new RDate(申請認定情報.get受給者台帳_当初認定有効期間開始年月日().toString()));
         }
         if (申請認定情報.get受給者台帳_当初認定有効期間終了年月日() != null && !申請認定情報.get受給者台帳_当初認定有効期間終了年月日().isEmpty()) {
-            div.getNinteiDetail().getNinteiResult().getTxtToshoYukokikan().setToValue(new RDate(申請認定情報.get受給者台帳_当初認定有効期間終了年月日().toString()));
+            div.getNinteiDetail().getNinteiResult().getTxtToshoYukokikan().
+                    setToValue(new RDate(申請認定情報.get受給者台帳_当初認定有効期間終了年月日().toString()));
         }
         div.getNinteiDetail().getNinteiResult().getTxtHakkoDate1().setValue(申請認定情報.get受給者台帳_受給資格証明書発行年月日１());
         div.getNinteiDetail().getNinteiResult().getTxtHakkoDate2().setValue(申請認定情報.get受給者台帳_受給資格証明書発行年月日２());

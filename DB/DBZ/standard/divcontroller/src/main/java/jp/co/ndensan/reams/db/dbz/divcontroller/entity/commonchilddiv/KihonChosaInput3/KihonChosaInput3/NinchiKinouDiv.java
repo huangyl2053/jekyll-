@@ -4,13 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * NinchiKinou のクラスファイル
@@ -18,8 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @author 自動生成
  */
 public class NinchiKinouDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,6 +45,8 @@ public class NinchiKinouDiv extends Panel {
     private RString shinseishoKanriNo;
     @JsonProperty("recordNumber")
     private RString recordNumber;
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    private RString ninteichosaTokkijikoNoList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -254,6 +253,24 @@ public class NinchiKinouDiv extends Panel {
     }
 
     /*
+     * getninteichosaTokkijikoNoList
+     * @return ninteichosaTokkijikoNoList
+     */
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public RString getNinteichosaTokkijikoNoList() {
+        return ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * setninteichosaTokkijikoNoList
+     * @param ninteichosaTokkijikoNoList ninteichosaTokkijikoNoList
+     */
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
+        this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -262,7 +279,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnIshiDentatsu(ButtonDialog btnIshiDentatsu) {
+    public void  setBtnIshiDentatsu(ButtonDialog btnIshiDentatsu) {
         this.getIshiDentatsu().setBtnIshiDentatsu(btnIshiDentatsu);
     }
 
@@ -272,7 +289,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadIshiDentatsu(RadioButton radIshiDentatsu) {
+    public void  setRadIshiDentatsu(RadioButton radIshiDentatsu) {
         this.getIshiDentatsu().setRadIshiDentatsu(radIshiDentatsu);
     }
 
@@ -282,7 +299,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNikka(ButtonDialog btnNikka) {
+    public void  setBtnNikka(ButtonDialog btnNikka) {
         this.getNikka().setBtnNikka(btnNikka);
     }
 
@@ -292,7 +309,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNikka(RadioButton radNikka) {
+    public void  setRadNikka(RadioButton radNikka) {
         this.getNikka().setRadNikka(radNikka);
     }
 
@@ -302,7 +319,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnInfo(ButtonDialog btnInfo) {
+    public void  setBtnInfo(ButtonDialog btnInfo) {
         this.getInfo().setBtnInfo(btnInfo);
     }
 
@@ -312,7 +329,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadInfo(RadioButton radInfo) {
+    public void  setRadInfo(RadioButton radInfo) {
         this.getInfo().setRadInfo(radInfo);
     }
 
@@ -322,7 +339,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnDankiKioku(ButtonDialog btnDankiKioku) {
+    public void  setBtnDankiKioku(ButtonDialog btnDankiKioku) {
         this.getDankiKioku().setBtnDankiKioku(btnDankiKioku);
     }
 
@@ -332,7 +349,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadDankiKioku(RadioButton radDankiKioku) {
+    public void  setRadDankiKioku(RadioButton radDankiKioku) {
         this.getDankiKioku().setRadDankiKioku(radDankiKioku);
     }
 
@@ -342,7 +359,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNameInfo(ButtonDialog btnNameInfo) {
+    public void  setBtnNameInfo(ButtonDialog btnNameInfo) {
         this.getNameInfo().setBtnNameInfo(btnNameInfo);
     }
 
@@ -352,7 +369,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNameInfo(RadioButton radNameInfo) {
+    public void  setRadNameInfo(RadioButton radNameInfo) {
         this.getNameInfo().setRadNameInfo(radNameInfo);
     }
 
@@ -362,7 +379,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKisetsu(ButtonDialog btnKisetsu) {
+    public void  setBtnKisetsu(ButtonDialog btnKisetsu) {
         this.getKisetsu().setBtnKisetsu(btnKisetsu);
     }
 
@@ -372,7 +389,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKisetsu(RadioButton radKisetsu) {
+    public void  setRadKisetsu(RadioButton radKisetsu) {
         this.getKisetsu().setRadKisetsu(radKisetsu);
     }
 
@@ -382,7 +399,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnBasho(ButtonDialog btnBasho) {
+    public void  setBtnBasho(ButtonDialog btnBasho) {
         this.getBasho().setBtnBasho(btnBasho);
     }
 
@@ -392,7 +409,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadBasho(RadioButton radBasho) {
+    public void  setRadBasho(RadioButton radBasho) {
         this.getBasho().setRadBasho(radBasho);
     }
 
@@ -402,7 +419,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnHaikai(ButtonDialog btnHaikai) {
+    public void  setBtnHaikai(ButtonDialog btnHaikai) {
         this.getHaikai().setBtnHaikai(btnHaikai);
     }
 
@@ -412,7 +429,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadHaikai(RadioButton radHaikai) {
+    public void  setRadHaikai(RadioButton radHaikai) {
         this.getHaikai().setRadHaikai(radHaikai);
     }
 
@@ -422,7 +439,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnModoru(ButtonDialog btnModoru) {
+    public void  setBtnModoru(ButtonDialog btnModoru) {
         this.getModoru().setBtnModoru(btnModoru);
     }
 
@@ -432,7 +449,7 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadModoru(RadioButton radModoru) {
+    public void  setRadModoru(RadioButton radModoru) {
         this.getModoru().setRadModoru(radModoru);
     }
 

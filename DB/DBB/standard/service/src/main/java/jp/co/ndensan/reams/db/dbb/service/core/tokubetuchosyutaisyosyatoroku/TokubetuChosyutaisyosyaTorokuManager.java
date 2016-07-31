@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbb.service.core.tokubetuchosyutaisyosyatoroku;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHohoBuilder;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.NenkinHokenshaHantei;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
@@ -25,6 +27,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
+import jp.co.ndensan.reams.ue.uex.service.core.INenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -86,10 +92,32 @@ public class TokubetuChosyutaisyosyaTorokuManager {
 
     /**
      * 特徴対象者（追加含む）取得
+     *
+     * @param 年度 年度
+     * @param 捕捉月 捕捉月
+     * @param 基礎年金番号 基礎年金番号
+     * @param 年金コード 年金コード
+     * @return 特徴の情報
      */
-    //TODO
-    public void getTokuchoTaishosha() {
-
+    public NenkinTokuchoKaifuJoho getTokuchoTaishosha(FlexibleYear 年度, RString 捕捉月, RString 基礎年金番号, RString 年金コード) {
+        FlexibleYear 処理年度;
+        if (null == 年度) {
+            処理年度 = FlexibleYear.EMPTY;
+        } else {
+            if (TokuchoHosokuMonth.特徴2月捕捉.getコード().equals(捕捉月)) {
+                処理年度 = 年度.minusYear(1);
+            } else {
+                処理年度 = 年度;
+            }
+        }
+        if (null == 基礎年金番号) {
+            基礎年金番号 = RString.EMPTY;
+        }
+        if (null == 年金コード) {
+            年金コード = RString.EMPTY;
+        }
+        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+        return manager.get年金特徴対象者情報(GyomuCode.DB介護保険, 処理年度, 基礎年金番号, 年金コード, 捕捉月);
     }
 
     /**
@@ -168,144 +196,143 @@ public class TokubetuChosyutaisyosyaTorokuManager {
      * @param 被保険者番号 被保険者番号
      * @param 基礎年金番号 基礎年金番号
      * @param 年金コード 年金コード
-     * @return 登録件数
+     * @param 特徴義務者コード 特徴義務者コード
      */
-    public int insChoshuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号, RString 基礎年金番号, RString 年金コード) {
-        SearchResult<ChoshuHoho> choshuHohoSearchResult = getChoshuHoho(賦課年度, 被保険者番号);
-        if (null == choshuHohoSearchResult) {
-            return 0;
+    public void insChoshuHoho(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号, RString 基礎年金番号, RString 年金コード, RString 特徴義務者コード) {
+        ChoshuHohoManager 介護徴収方法Manager = new ChoshuHohoManager();
+        ChoshuHoho 介護徴収方法 = 介護徴収方法Manager.get介護徴収方法(賦課年度, 被保険者番号);
+        if (null == 介護徴収方法) {
+            return;
         }
-        ChoshuHoho 最新介護徴収方法情報データ = choshuHohoSearchResult.records().get(0);
-        DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 最新介護徴収方法情報データ.toEntity();
-        dbT2001ChoshuHohoEntity.setRirekiNo(dbT2001ChoshuHohoEntity.getRirekiNo() + 1);
+        ChoshuHohoBuilder builder = 介護徴収方法.createBuilderForEdit();
+        builder.set履歴番号(介護徴収方法.get履歴番号() + 1);
         RString 年度内処理済み連番 = getShorizumiRenban(賦課年度);
         if (null == 基礎年金番号 || 空白.equals(基礎年金番号)) {
             if (連番_0001.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho8gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho9gatsu(普通徴収);
+                builder.set徴収方法8月(普通徴収);
+                builder.set徴収方法9月(普通徴収);
             }
             if (連番_0002.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho12gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho10gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho11gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho1gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho2gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho3gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(普通徴収);
+                builder.set徴収方法10月(普通徴収);
+                builder.set徴収方法11月(普通徴収);
+                builder.set徴収方法12月(普通徴収);
+                builder.set徴収方法1月(普通徴収);
+                builder.set徴収方法2月(普通徴収);
+                builder.set徴収方法3月(普通徴収);
+                builder.set徴収方法翌4月(普通徴収);
+                builder.set徴収方法翌5月(普通徴収);
+                builder.set徴収方法翌6月(普通徴収);
+                builder.set徴収方法翌7月(普通徴収);
+                builder.set徴収方法翌8月(普通徴収);
+                builder.set徴収方法翌9月(普通徴収);
             }
             if (連番_0003.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho12gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho1gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho2gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho3gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(普通徴収);
+                builder.set徴収方法12月(普通徴収);
+                builder.set徴収方法1月(普通徴収);
+                builder.set徴収方法2月(普通徴収);
+                builder.set徴収方法3月(普通徴収);
+                builder.set徴収方法翌4月(普通徴収);
+                builder.set徴収方法翌5月(普通徴収);
+                builder.set徴収方法翌6月(普通徴収);
+                builder.set徴収方法翌7月(普通徴収);
+                builder.set徴収方法翌8月(普通徴収);
+                builder.set徴収方法翌9月(普通徴収);
             }
             if (連番_0004.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho2gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHoho3gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(普通徴収);
+                builder.set徴収方法2月(普通徴収);
+                builder.set徴収方法3月(普通徴収);
+                builder.set徴収方法翌4月(普通徴収);
+                builder.set徴収方法翌5月(普通徴収);
+                builder.set徴収方法翌6月(普通徴収);
+                builder.set徴収方法翌7月(普通徴収);
+                builder.set徴収方法翌8月(普通徴収);
+                builder.set徴収方法翌9月(普通徴収);
             }
             if (連番_0005.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(普通徴収);
+                builder.set徴収方法翌4月(普通徴収);
+                builder.set徴収方法翌5月(普通徴収);
+                builder.set徴収方法翌6月(普通徴収);
+                builder.set徴収方法翌7月(普通徴収);
+                builder.set徴収方法翌8月(普通徴収);
+                builder.set徴収方法翌9月(普通徴収);
             }
             if (連番_0006.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(普通徴収);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(普通徴収);
+                builder.set徴収方法翌6月(普通徴収);
+                builder.set徴収方法翌7月(普通徴収);
+                builder.set徴収方法翌8月(普通徴収);
+                builder.set徴収方法翌9月(普通徴収);
             }
         } else {
-            //TODO 介護賦課共通クラスの年金保険者判定．is厚労省（特徴義務者コード）来月
-            RString 特徴方法 = true ? 特別徴収_厚生労働省 : 特別徴収_地共済;
+            NenkinHokenshaHantei 年金保険者判定 = NenkinHokenshaHantei.createInstance();
+            RString 特徴方法 = 年金保険者判定.is厚労省(特徴義務者コード) ? 特別徴収_厚生労働省 : 特別徴収_地共済;
             if (連番_0001.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho8gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho9gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setKariNenkinNo(基礎年金番号);
-                dbT2001ChoshuHohoEntity.setKariNenkinCode(年金コード);
+                builder.set徴収方法8月(特徴方法);
+                builder.set徴収方法9月(特徴方法);
+                builder.set仮徴収_基礎年金番号(基礎年金番号);
+                builder.set仮徴収_年金コード(年金コード);
             }
             if (連番_0002.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho12gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho10gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho11gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho1gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho2gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho3gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setHonNenkinNo(基礎年金番号);
-                dbT2001ChoshuHohoEntity.setHonNenkinCode(年金コード);
+                builder.set徴収方法10月(特徴方法);
+                builder.set徴収方法11月(特徴方法);
+                builder.set徴収方法12月(特徴方法);
+                builder.set徴収方法1月(特徴方法);
+                builder.set徴収方法2月(特徴方法);
+                builder.set徴収方法3月(特徴方法);
+                builder.set徴収方法翌4月(特徴方法);
+                builder.set徴収方法翌5月(特徴方法);
+                builder.set徴収方法翌6月(特徴方法);
+                builder.set徴収方法翌7月(特徴方法);
+                builder.set徴収方法翌8月(特徴方法);
+                builder.set徴収方法翌9月(特徴方法);
+                builder.set本徴収_基礎年金番号(基礎年金番号);
+                builder.set本徴収_年金コード(年金コード);
             }
             if (連番_0003.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho12gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho1gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho2gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho3gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setHonNenkinNo(基礎年金番号);
-                dbT2001ChoshuHohoEntity.setHonNenkinCode(年金コード);
+                builder.set徴収方法12月(特徴方法);
+                builder.set徴収方法1月(特徴方法);
+                builder.set徴収方法2月(特徴方法);
+                builder.set徴収方法3月(特徴方法);
+                builder.set徴収方法翌4月(特徴方法);
+                builder.set徴収方法翌5月(特徴方法);
+                builder.set徴収方法翌6月(特徴方法);
+                builder.set徴収方法翌7月(特徴方法);
+                builder.set徴収方法翌8月(特徴方法);
+                builder.set徴収方法翌9月(特徴方法);
+                builder.set本徴収_基礎年金番号(基礎年金番号);
+                builder.set本徴収_年金コード(年金コード);
             }
             if (連番_0004.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHoho2gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHoho3gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setHonNenkinNo(基礎年金番号);
-                dbT2001ChoshuHohoEntity.setHonNenkinCode(年金コード);
+                builder.set徴収方法2月(特徴方法);
+                builder.set徴収方法3月(特徴方法);
+                builder.set徴収方法翌4月(特徴方法);
+                builder.set徴収方法翌5月(特徴方法);
+                builder.set徴収方法翌6月(特徴方法);
+                builder.set徴収方法翌7月(特徴方法);
+                builder.set徴収方法翌8月(特徴方法);
+                builder.set徴収方法翌9月(特徴方法);
+                builder.set本徴収_基礎年金番号(基礎年金番号);
+                builder.set本徴収_年金コード(年金コード);
             }
             if (連番_0005.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku4gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku5gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setYokunendoKariNenkinNo(基礎年金番号);
-                dbT2001ChoshuHohoEntity.setYokunendoKariNenkinCode(年金コード);
+                builder.set徴収方法翌4月(特徴方法);
+                builder.set徴収方法翌5月(特徴方法);
+                builder.set徴収方法翌6月(特徴方法);
+                builder.set徴収方法翌7月(特徴方法);
+                builder.set徴収方法翌8月(特徴方法);
+                builder.set徴収方法翌9月(特徴方法);
+                builder.set翌年度仮徴収_基礎年金番号(基礎年金番号);
+                builder.set翌年度仮徴収_年金コード(年金コード);
             }
             if (連番_0006.equals(年度内処理済み連番)) {
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku6gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku7gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku8gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setChoshuHohoYoku9gatsu(特徴方法);
-                dbT2001ChoshuHohoEntity.setYokunendoKariNenkinNo(基礎年金番号);
-                dbT2001ChoshuHohoEntity.setYokunendoKariNenkinCode(年金コード);
+                builder.set徴収方法翌6月(特徴方法);
+                builder.set徴収方法翌7月(特徴方法);
+                builder.set徴収方法翌8月(特徴方法);
+                builder.set徴収方法翌9月(特徴方法);
+                builder.set翌年度仮徴収_基礎年金番号(基礎年金番号);
+                builder.set翌年度仮徴収_年金コード(年金コード);
             }
         }
-        DbT2001ChoshuHohoDac dbT2001ChoshuHohoDac = InstanceProvider.create(DbT2001ChoshuHohoDac.class);
-        return dbT2001ChoshuHohoDac.save(dbT2001ChoshuHohoEntity);
+        介護徴収方法Manager.save介護徴収方法(new ChoshuHoho(builder.build().toEntity()).added());
     }
 
     /**

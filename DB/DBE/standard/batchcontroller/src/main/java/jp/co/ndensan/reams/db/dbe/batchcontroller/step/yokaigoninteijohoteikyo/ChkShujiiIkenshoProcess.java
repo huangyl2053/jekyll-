@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1.ShujiiikenshoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1.ShujiiikenshoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -63,7 +63,6 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
     private static final RString フラグ = new RString("1");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString ジョブ番号 = new RString("【ジョブ番号】");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
     private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
     private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
@@ -234,7 +233,7 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
                         ReportIdDBE.DBE517151.getReportId().value(),
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
-                        ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
+                        new RString(JobContextHolder.getJobId()),
                         ReportInfo.getReportName(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517151.getReportId().value()),
                         new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                         CSV出力有無,

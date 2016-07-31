@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskigoto;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.NotsuReportEditorUtil;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsuAfterCorrection;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
@@ -47,18 +48,16 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
      * @param 仮算定納入通知書情報 仮算定納入通知書情報
      * @param ninshoshaSource 認証者情報
      * @param 納入通知書期情報 納入通知書期情報
-     * @param 連番 連番
      */
     protected KarisanteiNonyuTsuchishoCVSKigotoEditor(
             KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報,
             NinshoshaSource ninshoshaSource,
-            NonyuTsuchiShoKiJoho 納入通知書期情報,
-            int 連番) {
+            NonyuTsuchiShoKiJoho 納入通知書期情報) {
         this.仮算定納入通知書情報 = 仮算定納入通知書情報;
         this.編集後仮算定通知書共通情報 = null == 仮算定納入通知書情報.get編集後仮算定通知書共通情報()
                 ? new EditedKariSanteiTsuchiShoKyotsu() : 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
         this.納入通知書期情報 = 納入通知書期情報;
-        this.連番 = 連番;
+        this.連番 = 仮算定納入通知書情報.get連番();
         this.ninshoshaSource = ninshoshaSource;
         this.編集後宛先 = 編集後仮算定通知書共通情報.get編集後宛先();
     }
@@ -110,7 +109,6 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         source.barcodeCvsBarcode = 納入通知書期情報.getバーコード情報();
         source.cvsBarcodeNaiyo1 = 納入通知書期情報.getバーコード情報上段();
         source.cvsBarcodeNaiyo2 = 納入通知書期情報.getバーコード情報下段();
-        //TODO 納入通知書期情報.コンビニ時支払期限表記
         if (納入通知書期情報.getコンビニ支払期限() != null) {
             source.cvsToriatsukaikigen = 納入通知書期情報.getコンビニ支払期限().toDateString();
         }
@@ -175,7 +173,7 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
         if (編集後仮算定通知書共通情報.get調定年度_年度なし() != null) {
             source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         }
-        source.noutsu_renban = isバッチ ? new RString("*").concat(new RString(String.valueOf(連番)).padLeft("0", INT6)).concat("#") : RString.EMPTY;
+        source.noutsu_renban = isバッチ ? NotsuReportEditorUtil.get納通連番(連番) : RString.EMPTY;
         source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
         source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
         source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
@@ -202,30 +200,34 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
             source.kozaMeiginin = 編集後口座.get口座名義人優先();
         }
         if (編集後仮算定通知書共通情報.get通知書番号() != null) {
-            source.tsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-            source.keisanMeisaishoTsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
+            source.tsuchishoNoLay1 = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
         }
         source.ki1 = 納入通知書期情報.get期表記();
         source.tsuki1 = 納入通知書期情報.get月表記();
-        source.nofuGaku1 = 納入通知書期情報.get納付額表記();
-        source.nokigen1 = 納入通知書期情報.get納期限表記();
-        source.hyojicode1 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
-        source.pageCount1 = new RString(String.valueOf(連番)).concat("-1");
+        source.nofuGaku1 = 仮算定納入通知書情報.get納入通知書期情報リスト().get(0).get納付額表記();
+        source.nokigen1 = 仮算定納入通知書情報.get納入通知書期情報リスト().get(0).get納期限表記();
+        source.notsuRenban1 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
+        if (isバッチ) {
+            source.pageCount1 = new RString(String.valueOf(連番)).concat("-1");
+            source.pageCount2 = new RString(String.valueOf(連番)).concat("-2");
+            source.pageCount3 = new RString(String.valueOf(連番)).concat("-3");
+        }
         if (仮算定納入通知書情報.get仮算定納入通知書制御情報() != null
                 && 仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報() != null
                 && HyojiUmu.表示する.equals(仮算定納入通知書情報.get仮算定納入通知書制御情報().get納入通知書制御情報().getコンビニ明細書表示())) {
             edit明細(source);
         }
         source.notsuRenban2 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
-        source.pageCount2 = new RString(String.valueOf(連番)).concat("-2");
         source.renban = isバッチ ? new RString(String.valueOf(連番)) : RString.EMPTY;
         source.hokenshaName = 編集後仮算定通知書共通情報.get保険者名();
         source.notsuRenban3 = isバッチ ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
-        source.pageCount3 = new RString(String.valueOf(連番)).concat("-3");
     }
 
     private void edit明細(KarisanteiNonyuTsuchishoCVSKigotoSource source) {
         PrecedingFiscalYearInformation 前年度情報 = 編集後仮算定通知書共通情報.get前年度情報();
+        if (編集後仮算定通知書共通情報.get通知書番号() != null) {
+            source.keisanMeisaishoTsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
+        }
         if (null == 前年度情報) {
             前年度情報 = new PrecedingFiscalYearInformation();
         }

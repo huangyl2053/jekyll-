@@ -48,4 +48,5 @@ public class SanteiIdoGennen {
     private boolean 一括発行起動フラグ;
     private boolean 随時フラグ;
     private RString 算定期;
+    private boolean 画面移動フラグ;
 }

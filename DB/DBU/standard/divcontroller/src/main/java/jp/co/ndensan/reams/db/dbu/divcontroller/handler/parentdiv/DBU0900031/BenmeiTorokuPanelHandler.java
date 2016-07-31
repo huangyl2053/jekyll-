@@ -7,21 +7,22 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0900031;
 
 import jp.co.ndensan.reams.db.dbu.business.core.benmeitoroku.BenmeiTorokuMeisaiJoho;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900031.BenmeiTorokuPanelDiv;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 弁明登録マスタ画面のハンドラクラスです。
  *
- * @reamsid_L DBU-1080-020  lijia
- * 
+ * @reamsid_L DBU-1080-020 lijia
+ *
  */
 public class BenmeiTorokuPanelHandler {
 
     private final BenmeiTorokuPanelDiv panelDiv;
     private static final RString 状態_登録 = new RString("登録");
-    private static final RString 状態_更新 = new RString("更新");
-    private static final RString 状態_削除 = new RString("削除");
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -37,11 +38,12 @@ public class BenmeiTorokuPanelHandler {
      *
      * @param benmeiTorokuMeisaiJoho 弁明登録情報
      * @param viewState 表示状態
+     * @param 弁明書作成日 FlexibleDate
      */
-    public void initialize(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, RString viewState) {
-        if (viewState.equals(状態_更新)) {
-            if (benmeiTorokuMeisaiJoho != null) {
-                panelDiv.setProcessState(状態_更新);
+    public void initialize(BenmeiTorokuMeisaiJoho benmeiTorokuMeisaiJoho, RString viewState, FlexibleDate 弁明書作成日) {
+        if (viewState.equals(修正)) {
+            if (benmeiTorokuMeisaiJoho != null && 弁明書作成日 != null && !弁明書作成日.isEmpty()) {
+                panelDiv.setProcessState(修正);
                 get画面初期の更新モードの表示制御();
                 get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
             } else {
@@ -53,8 +55,8 @@ public class BenmeiTorokuPanelHandler {
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtMultiLineBenmeiNaiyo().setValue(RString.EMPTY);
                 panelDiv.getBenmeiTorokuMeisaiPanel().getTxtBenmeisyoTeishutubi().clearValue();
             }
-        } else if (viewState.equals(状態_削除)) {
-            panelDiv.setProcessState(状態_削除);
+        } else if (viewState.equals(削除)) {
+            panelDiv.setProcessState(削除);
             get画面初期の削除モードの表示制御();
             get弁明登録明細情報のnull処理(benmeiTorokuMeisaiJoho);
         }
