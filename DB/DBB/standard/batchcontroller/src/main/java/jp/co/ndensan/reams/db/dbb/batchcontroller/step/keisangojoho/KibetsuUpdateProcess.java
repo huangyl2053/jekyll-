@@ -65,7 +65,7 @@ public class KibetsuUpdateProcess extends BatchProcessBase<KeisangoJohoSakuseiRe
             if (計算中間TempEnitty != null) {
                 計算中間Temp.update(計算中間TempEnitty);
             }
-            計算中間TempEnitty = new DbTKeisangoJohoTempTableEntity();
+            計算中間TempEnitty = entity.get計算中間Entity();
             tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
             計算中間TempEnitty = new KeisangoJohoResult().get中間Entity(entity, processParamter.is更新前フラグ(), 計算中間TempEnitty);
         }
