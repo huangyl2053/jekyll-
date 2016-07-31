@@ -125,7 +125,7 @@ public class HeijunkaKeisanHandler {
             減額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
         } else if (平準化するを判定し.toString().equals(減額コンフィグ.toString())) {
             減額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
-                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分減額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
+                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
         }
         RString 増額 = RString.EMPTY;
         RString 増額コンフィグ = DbBusinessConfig.
@@ -134,7 +134,7 @@ public class HeijunkaKeisanHandler {
             増額 = TokuchoHeijunkaKeisanHoho6Gatsu.平準化しない.get名称();
         } else if (平準化するを判定し.toString().equals(増額コンフィグ.toString())) {
             増額 = TokuchoHeijunkaKeisanHoho6Gatsu.toValue(DbBusinessConfig.
-                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分増額, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
+                    get(ConfigNameDBB.特別徴収_平準化計算方法_6月分, RDate.getNowDate(), SubGyomuCode.DBB介護賦課, 調定年度.toDateString())).get名称();
         }
         div.getHeijunkaKeisanHoho().getTxtKeisanHohoZougaku().setValue(増額);
         div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().setValue(減額);

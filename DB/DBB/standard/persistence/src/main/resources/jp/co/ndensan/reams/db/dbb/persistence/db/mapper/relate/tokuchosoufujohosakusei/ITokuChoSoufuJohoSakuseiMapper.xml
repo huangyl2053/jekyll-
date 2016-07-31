@@ -9,8 +9,10 @@
         <include refid="allColumns_DbV2001ChoshuHoho" />,
         <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
         <include refid="allColumns_DbV2002Fuka" />,
-        "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
-        "UrT0705"."choteigaku"  AS UrT0705_choteigaku
+        "DbT2003Kibetsu"."ki"  AS "DbT2003_ki",
+        "UrT0705"."choteigaku"  AS "UrT0705_choteigaku",
+        "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+        "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
         "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
         LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
@@ -39,7 +41,9 @@
         <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
         <include refid="allColumns_DbV2002Fuka" />,
         "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
-        "UrT0705"."choteigaku"  AS UrT0705_choteigaku
+        "UrT0705"."choteigaku"  AS UrT0705_choteigaku,
+        "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+        "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
         "NenkinTokuchoKaifuJohoTemp" as "UeT0511NenkinTokuchoKaifuJoho"
         LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
@@ -68,7 +72,9 @@
         <include refid="allColumns_DbV1001HihokenshaDaicho"/> ,
         <include refid="allColumns_DbV2002Fuka" />,
         "DbT2003Kibetsu"."ki"  AS DbT2003_ki,
-        "UrT0705"."choteigaku"  AS UrT0705_choteigaku
+        "UrT0705"."choteigaku"  AS UrT0705_choteigaku,
+        "DbT2003Kibetsu"."choshuHouhou" AS "DbT2003_choshuHouhou",
+        "DbT2003Kibetsu"."choteiId" AS "DbT2003_choteiId"
         FROM
         "NenkinTokuchoKaifuJohoTemp" AS "UeT0511NenkinTokuchoKaifuJoho"
         LEFT JOIN rgdb."DbV2001ChoshuHoho" AS "DbT2001ChoshuHoho"
@@ -101,6 +107,8 @@
     <resultMap id="resultMap_TokuChoSoufuJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity" autoMapping="true">
         <result property="ki" column="DbT2003_ki"/>
         <result property="choteigaku" column="UrT0705_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="choteiId" column="DbT2003_choteiId" typeHandler="org.apache.ibatis.type.LongTypeHandler" />
+        <result property="choshuHouhou" column="DbT2003_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="uet0511entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
         <association property="dbt2001entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="dbt1001entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>

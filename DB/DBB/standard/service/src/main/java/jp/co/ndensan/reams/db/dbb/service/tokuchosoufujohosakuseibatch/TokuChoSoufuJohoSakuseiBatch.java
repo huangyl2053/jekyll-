@@ -358,12 +358,13 @@ public class TokuChoSoufuJohoSakuseiBatch {
 
     private void setEntityValueContinue(UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity tokuchotempentity,
             TokuChoSoufuJohoSakuseiResult entity, FlexibleYear 処理年度, RDate 特徴開始月, RString 徴収方法n月) {
-        if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
+        if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && !RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
             tokuchotempentity.setDtKakushuKubun(RS01);
         } else if ((RS1.equals(徴収方法n月) || RS2.equals(徴収方法n月)) && entity.get資格の情報().get資格喪失事由コード() == null
-                && !RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
+                && RS1.equals(entity.get資格の情報().get住所地特例フラグ())) {
             tokuchotempentity.setDtKakushuKubun(RS02);
-        } else if (!RS1.equals(徴収方法n月) && !RS2.equals(徴収方法n月)) {
+        }
+        if (!RS1.equals(entity.get徴収方法の情報().get徴収方法10月()) && !RS2.equals(entity.get徴収方法の情報().get徴収方法10月())) {
             tokuchotempentity.setDtKakushuKubun(RS03);
         }
         tokuchotempentity.setDtShoriKekka(RString.FULL_SPACE);

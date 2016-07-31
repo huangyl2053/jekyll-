@@ -141,14 +141,21 @@
         SELECT A.* FROM (
         SELECT <include refid="allColumns_DbWT0001Hihokensha" />,
         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.allColumns_DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" />,
-        row_number() OVER (PARTITION BY DbWT0001."meisaiRenban" ORDER BY "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD" DESC) AS rrkno
+        row_number() OVER (PARTITION BY DbWT0001."meisaiRenban" ORDER BY "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD" DESC,"DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."rirekiNo" DESC) AS rrkno
         FROM "DbWT0001Hihokensha" AS DbWT0001
-        LEFT JOIN "rgdb"."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
+        LEFT JOIN (
+        SELECT * FROM "rgdb"."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" AS B
+        WHERE B."logicalDeletedFlag"= false
+              AND B."idoYMD"<![CDATA[<=]]>
+              (
+                SELECT MAX("DbWT0001Hihokensha"."serviceTeikyoYmd") FROM 
+                "DbWT0001Hihokensha"
+                WHERE "DbWT0001Hihokensha"."henkanHihokenshaNo" = B."hiHokenshaNo"
+                )
+        ) AS "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
         ON DbWT0001."henkanHihokenshaNo" = "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."hiHokenshaNo"
         WHERE DbWT0001."henkanHihokenshaNo" IS NOT NULL
           AND DbWT0001."henkanHihokenshaNo" != ''
-          AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD"<![CDATA[<=]]> DbWT0001."serviceTeikyoYmd"
-          AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."logicalDeletedFlag"= false
                    ) AS A
                    WHERE A.rrkno = 1
     </select>
@@ -208,6 +215,9 @@
         as "ShikibetsuTaisho"
         ON HIHOKENSHA."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         WHERE "DbT3055KogakuKyufuTaishoshaGokei"."tashoshaUketoriYM" = #{処理年月}
+        ORDER BY "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo" ASC,
+                 "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM" ASC,
+                 "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo" ASC
     </select>
     
     <select id="select履歴番号確認データ" resultMap="resultMap_RirikiNoKanrenEntity" resultOrdered="true">

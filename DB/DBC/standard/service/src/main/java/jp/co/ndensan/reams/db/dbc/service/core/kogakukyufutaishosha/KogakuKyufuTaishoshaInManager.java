@@ -371,6 +371,7 @@ public class KogakuKyufuTaishoshaInManager {
                             meisaiList.add(csvMeisaiEntity);
                         } else if (帳票レコード種別_T1.equals(data.get(INDEX_3))) {
                             csvGokeiEntity = ListToObjectMappingHelper.toObject(KogakuKyufuTaishoshaGokeiCsvEntity.class, data);
+                            csvGroupEntity = new KogakuKyufuTaishoshaGroupCsvEntity();
                             csvGroupEntity.setGokeiCsvEntity(csvGokeiEntity);
                             csvGroupEntity.setListMeisaiCsvEntity(meisaiList);
                             meisaiList = new ArrayList<>();
@@ -500,7 +501,7 @@ public class KogakuKyufuTaishoshaInManager {
             for (RirikiNoKanrenEntity 履歴番号確認データ : 履歴番号確認データリスト) {
                 RString キー = 履歴番号確認データ.get被保険者番号().getColumnValue()
                         .concat(履歴番号確認データ.getサービス提供年月().toDateString());
-                履歴番号Map.put(キー, 連番);
+                履歴番号Map.put(キー, 履歴番号確認データ.get履歴番号());
             }
         }
         Map<String, Object> parameter = new HashMap<>();

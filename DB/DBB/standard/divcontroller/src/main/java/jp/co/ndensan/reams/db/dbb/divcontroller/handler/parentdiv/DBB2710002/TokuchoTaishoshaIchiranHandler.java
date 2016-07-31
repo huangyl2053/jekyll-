@@ -367,7 +367,6 @@ public class TokuchoTaishoshaIchiranHandler {
                 newRow.setTxtKakuninJokyo(対象外_NAME);
             }
             if (result.get(i).get不一致理由() != null) {
-                newRow.setTxtFuichiRiyuCode(result.get(i).get不一致理由());
                 newRow.setTxtFuichiRiyu(DoteiFuitchiRiyu.toValue(result.get(i).get不一致理由()).get不一致理由名());
             }
             if (!RString.isNullOrEmpty(result.get(i).get捕捉月())) {
@@ -395,7 +394,7 @@ public class TokuchoTaishoshaIchiranHandler {
         div.getDgTokubetChoshuMidoteiIchiran().setDataSource(dataGridList);
     }
 
-    private TokuchoMidoteiJoho getModels(TokuchoDouteiKouhoshaListJoho result) {
+    private TokuchoMidoteiJoho getModel(TokuchoDouteiKouhoshaListJoho result) {
         if (result.getDbt2019entity() == null) {
             return null;
         }
@@ -416,7 +415,8 @@ public class TokuchoTaishoshaIchiranHandler {
             RString 基礎年金番号, RString 年金コード, RString 特徴開始月) {
         if (!RString.isNullOrEmpty(特徴開始月) && !特徴開始月
                 .startsWith(RString.FULL_SPACE) && !特徴開始月.startsWith(LEFT)) {
-            特徴開始月 = DateConverter.formatMonthFull(特徴開始月.split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6));
+            特徴開始月 = DateConverter.formatMonthFull(特徴開始月.
+                    split(RString.FULL_SPACE.toString()).get(NUM0).substring(NUM4, NUM6));
         }
         FlexibleYear 処理年度 = new FlexibleYear(年度);
         List<TokuchoDouteiKouhoshaListJoho> result_一覧 = tokudoutei.getTokuchoTaishoKouhosyaListJoho(
@@ -431,7 +431,7 @@ public class TokuchoTaishoshaIchiranHandler {
             if (result.get不一致理由コード() != null) {
                 newRow.setTxtFuitchiRiyu(DoteiFuitchiRiyu.toValue(result.get不一致理由コード()).get不一致理由名());
             }
-            models.add(getModels(result));
+            models.add(getModel(result));
             newRow.getTxtNenkinKaifukuInfoKisoNenkinNo().setValue(result.get年金情報_基礎年金番号());
             newRow.getTxtNenkinKaifukuInfoNenkinCode().setValue(result.get年金情報_年金コード());
             newRow.getTxtNenkinKaifukuInfoShimei().setValue(result.get年金情報_氏名());
@@ -504,9 +504,7 @@ public class TokuchoTaishoshaIchiranHandler {
         div.getTxtJushoKanji().setValue(result.get未同定年金情報_住所漢字());
         div.getTxtShikibetsuCode().setValue(result.get住基情報_識別コード());
         div.getTxtAtenaShimeiKana().setValue(result.get住基情報_カナ氏名());
-        if (!RString.isNullOrEmpty(result.get住基情報_生年月日())) {
-            div.getTxtAtenaUmareYMD().setValue(new RDate(result.get住基情報_生年月日().toString()));
-        }
+        div.getTxtAtenaUmareYMD().setValue(result.get住基情報_生年月日());
         div.getTxtAtenaShimeiKanji().setValue(result.get住基情報_漢字氏名());
         if (result.get住基情報_性別() != null) {
             div.getTxtAtenaSebetsu().setValue(SeibetsuCodeNenkinTokuchoType
@@ -515,8 +513,8 @@ public class TokuchoTaishoshaIchiranHandler {
         if (result.get住基情報_住民種別() != null) {
             div.getTxtJuminshu().setValue(JuminShubetsu.toValue(result.get住基情報_住民種別()).toRString());
         }
-        div.getTxtJutoYMD().setValue(result.get住基情報_住登日Temp());
-        div.getTxtShojoYMD().setValue(result.get住基情報_消除日Temp());
+        div.getTxtJutoYMD().setValue(result.get住基情報_住登日());
+        div.getTxtShojoYMD().setValue(result.get住基情報_消除日());
         div.getTxtAtenaJushoKanji().setValue(result.get住基情報_漢字住所());
         div.getTxtHihokenshaNo().setValue(result.get被保険者台帳_被保険者番号());
         div.getTxtShutokuYMD().setValue(DateConverter.flexibleDateToRDate(result.get被保険者台帳_資格取得年月日()));

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -26,5 +27,6 @@ public class TokuChoSoufuJohoSakuseiEntity {
     private DbT2002FukaEntity dbt2002entity;
     private int ki;
     private Decimal choteigaku;
-
+    private long choteiId;
+    private RString choshuHouhou;
 }

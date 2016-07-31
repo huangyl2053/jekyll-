@@ -64,10 +64,8 @@ public class KeisangoJohoInsertProcess extends BatchProcessBase<DbTKeisangoJohoT
         entity.setSakuseiShoriName(processParamter.getSakuseiShoriName());
         if (processParamter.is更新前フラグ()) {
             entity.setKoseiZengoKubun(new RString("1"));
-            計算後情報Temp.insert(entity);
         } else {
             entity.setKoseiZengoKubun(new RString("2"));
-            計算後情報Temp.insert(entity);
         }
         RString breakInsertTmp = entity.getChoteiNendo().toDateString().concat(entity.getFukaNendo().toDateString())
                 .concat(entity.getTsuchishoNo().getColumnValue()).concat(entity.getKoseiZengoKubun());

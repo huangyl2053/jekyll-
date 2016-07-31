@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ue.uex.definition.core.DoteiFuitchiRiyu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -354,7 +355,8 @@ public class TokuchoTaishoshaIchiran {
         RString 基礎年金番号 = selectedRow.getTxtKisoNenkinNo().getValue();
         RString 年金コード = selectedRow.getTxtNenkinCode().getValue();
         RString 確認状況 = selectedRow.getTxtKakuninJokyo();
-        div.setHiddenReasonCode(selectedRow.getTxtFuichiRiyuCode());
+        RString fuichiRiyu = selectedRow.getTxtFuichiRiyu();
+        div.setHiddenReasonCode(getDoteiFuitchiRiyuCode(fuichiRiyu));
         div.setHiddenConfirmState(確認状況);
         ViewStateHolder.put(ViewStateKeys.処理年度, 処理年度);
         ViewStateHolder.put(ViewStateKeys.捕捉月, 捕捉月);
@@ -363,6 +365,15 @@ public class TokuchoTaishoshaIchiran {
         ViewStateHolder.put(ViewStateKeys.確認状況, 確認状況);
         特別徴収同定候補者一覧initialize(div);
         return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
+    }
+
+    private RString getDoteiFuitchiRiyuCode(RString doteiFuitchiRiyu) {
+        for (DoteiFuitchiRiyu dfr : DoteiFuitchiRiyu.values()) {
+            if (dfr.get不一致理由名().equals(doteiFuitchiRiyu)) {
+                return dfr.getコード();
+            }
+        }
+        return null;
     }
 
     /**
@@ -384,9 +395,11 @@ public class TokuchoTaishoshaIchiran {
      * @return を持つResponseData
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onClick_btnGridSelect(TokuchoTaishoshaIchiranDiv div) {
+        dgTokubetChoshuMidoteiIchiran_Row selectedRow = div.getDgTokubetChoshuMidoteiIchiran().getClickedItem();
+        RString fuichiRiyu = selectedRow.getTxtFuichiRiyu();
+        div.setHiddenReasonCode(getDoteiFuitchiRiyuCode(fuichiRiyu));
         getHandler(div).一行同定候補者一覧initialize表示制御();
-        RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class
-        );
+        RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
         RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
         RString 処理年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
@@ -400,9 +413,7 @@ public class TokuchoTaishoshaIchiran {
                 : new ShikibetsuCode(識別コードTemp);
         TokuchoMidoteiJoho model
                 = getClickedModel(new FlexibleYear(処理年度), 基礎年金番号, 年金コード, 捕捉月, 識別コード);
-
         ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者, model);
-
         ViewStateHolder.put(ViewStateKeys.特別徴収同定候補者対象外リスト,
                 (ArrayList<TokuchoMidoteiJoho>) get対象外(model));
         TokuchoDouteiKouhoshaShousaiJoho result
@@ -410,22 +421,16 @@ public class TokuchoTaishoshaIchiran {
 
         ViewStateHolder.put(ViewStateKeys.被保険者番号, result.get被保険者台帳_被保険者番号());
         ViewStateHolder.put(ViewStateKeys.氏名, result.get住基情報_漢字氏名());
-        return ResponseData.of(div)
-                .respond();
+        return ResponseData.of(div).respond();
     }
 
-    private TokuchoMidoteiJoho
-            getClickedModel(FlexibleYear 処理年度, RString 基礎年金番号, RString 年金コード,
-                    RString 捕捉月, ShikibetsuCode 識別コード) {
-        List<TokuchoMidoteiJoho> models = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者リスト, ArrayList.class
-        );
-        if (models
-                == null || models.isEmpty()) {
+    private TokuchoMidoteiJoho getClickedModel(FlexibleYear 処理年度, RString 基礎年金番号, RString 年金コード,
+            RString 捕捉月, ShikibetsuCode 識別コード) {
+        List<TokuchoMidoteiJoho> models = ViewStateHolder.get(ViewStateKeys.特別徴収同定候補者リスト, ArrayList.class);
+        if (models == null || models.isEmpty()) {
             return null;
         }
-
-        if (models.size()
-                == 1) {
+        if (models.size() == 1) {
             return models.get(NUM0);
         }
         for (TokuchoMidoteiJoho model : models) {
@@ -435,7 +440,6 @@ public class TokuchoTaishoshaIchiran {
                 return model;
             }
         }
-
         return null;
     }
 
@@ -513,8 +517,7 @@ public class TokuchoTaishoshaIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class
-            );
+            RString 特別徴収開始月 = ViewStateHolder.get(ViewStateKeys.特別徴収開始月, RString.class);
             RString 捕捉月 = ViewStateHolder.get(ViewStateKeys.捕捉月, RString.class);
             Message 同定Message = DbbInformationMessages.同定処理完了.getMessage();
             TokuchoMidoteiJoho model

@@ -65,13 +65,9 @@ public class ShuyuJohoUpdateProcess extends BatchProcessBase<KeisangoJohoSakusei
             if (計算中間TempEnitty != null) {
                 計算中間Temp.update(計算中間TempEnitty);
             }
-            計算中間TempEnitty = new DbTKeisangoJohoTempTableEntity();
+            計算中間TempEnitty = entity.get計算中間Entity();
             tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
             計算中間TempEnitty = new KeisangoJohoResult().get収入情報(entity, 計算中間TempEnitty);
-        }
-        if (!tsuchishoNo.equals(entity.get介護期別Entity().getTsuchishoNo())) {
-            tsuchishoNo = entity.get介護期別Entity().getTsuchishoNo();
-            計算中間Temp.update(new KeisangoJohoResult().get収入情報(entity, entity.get計算中間Entity()));
         }
     }
 
