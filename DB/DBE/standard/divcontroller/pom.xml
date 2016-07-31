@@ -51,12 +51,12 @@
             <artifactId>DbzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
-        <!-- 公開系 -->
+        <!-- 公開系 
         <dependency>
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>UziDivController</artifactId>
             <classifier>classes</classifier>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>

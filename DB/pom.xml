@@ -39,7 +39,7 @@
     </repositories>
     <properties>
         <!-- 自業務公開系 DBXのバージョンと一致させること-->
-        <jp.co.ndensan.reams.dbx.version>1.10.0</jp.co.ndensan.reams.dbx.version>
+        <jp.co.ndensan.reams.dbx.version>1.10.0-SNAPSHOT</jp.co.ndensan.reams.dbx.version>
         <!-- UZ -->
         <jp.co.ndensan.reams.uz.version>1.10.0</jp.co.ndensan.reams.uz.version>
         <!-- 公開系 -->
