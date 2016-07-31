@@ -76,7 +76,7 @@ public enum ShikyuFushikyuKubun {
      * Nullを判断します。
      *
      * @param code code
-     * @return
+     * @return 支給不支給区分の列挙型
      */
     public static ShikyuFushikyuKubun toValueOrNull(RString code) {
         for (ShikyuFushikyuKubun shikyuFushikyuKubun : ShikyuFushikyuKubun.values()) {
