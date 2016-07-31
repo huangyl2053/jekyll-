@@ -299,7 +299,7 @@ public class PntTokuchouKaishiTutishoKarisanteiProcess extends SimpleBatchProces
             NinshoshaSource sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                     認証者,
                     地方公共団体,
-                    dbb100003ReportSourceWriter5.getImageFolderPath(),
+                    dbb100003ReportSourceWriter6.getImageFolderPath(),
                     new RDate(発行日.toString()),
                     is公印に掛ける,
                     is公印を省略,
