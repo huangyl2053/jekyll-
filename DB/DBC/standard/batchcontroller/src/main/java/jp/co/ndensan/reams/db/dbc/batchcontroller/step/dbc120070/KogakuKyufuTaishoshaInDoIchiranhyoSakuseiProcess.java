@@ -107,7 +107,9 @@ public class KogakuKyufuTaishoshaInDoIchiranhyoSakuseiProcess extends SimpleBatc
         mybatisParameter.put(キー_出力順.toString(), 出力順);
         KogakuKyufuTaishoshaInManager chohyoManager = KogakuKyufuTaishoshaInManager.createInstance();
         List<KyuufuTaishoshaHihokenshaEntity> list = chohyoManager.get帳票出力対象データ(mybatisParameter);
-
+        if (null == list || list.isEmpty()) {
+            return;
+        }
         KogakuKyufuTaishoshaIchiranPrintService printService
                 = new KogakuKyufuTaishoshaIchiranPrintService();
         printService.printTaitsu(list, order, parameter.get処理年月(), parameter.getシステム日付());
