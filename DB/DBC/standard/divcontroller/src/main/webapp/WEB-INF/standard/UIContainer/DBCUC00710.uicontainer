@@ -5,7 +5,7 @@
  "steps": [
   {
    "id": 1,
-   "name": "過誤申立書送付情報照会",
+   "name": "過誤申立決定情報照会",
    "transitionList": [
     {
      "id": "1",
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0071011",
      "toLayoutTitle": "過誤決定取込情報照会",
-     "toState": ""
+     "toState": "過誤決定取込情報照会"
     },
     {
      "id": "2",

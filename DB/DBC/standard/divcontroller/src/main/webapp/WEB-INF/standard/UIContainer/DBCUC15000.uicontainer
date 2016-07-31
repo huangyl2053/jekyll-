@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC15000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "総合事業費過誤申立書情報作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1500011",
+     "toLayoutTitle": "総合事業費過誤申立書",
+     "toState": "search"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1500011",
+     "layoutTitle": "総合事業費過誤申立書",
+     "eventName": "kanryou",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
