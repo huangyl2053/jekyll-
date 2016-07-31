@@ -49,8 +49,10 @@ public final class TokuChoSoufuJohoSakuseiResult {
             }
             DbT2003KibetsuEntity 介護期別entity = new DbT2003KibetsuEntity();
             介護期別entity.setKi(resultentity.getKi());
+            介護期別entity.setChoshuHouhou(resultentity.getChoshuHouhou());
             UrT0705ChoteiKyotsuEntity 調定共通_介護継承entity = new UrT0705ChoteiKyotsuEntity();
             調定共通_介護継承entity.setChoteigaku(resultentity.getChoteigaku());
+            調定共通_介護継承entity.setChoteiId(resultentity.getChoteiId());
             List 調定共通entitylist = new ArrayList();
             調定共通entitylist.add(調定共通_介護継承entity);
             KibetsuEntity kibetsuentity = new KibetsuEntity();

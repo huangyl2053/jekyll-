@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.tokuchotaishoshaichiransakusei;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.tokuchotaishoshaichiransakusei.TokuchoTaishoshaIchiranSakuseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.ue.uex.definition.core.SeibetsuCodeNenkinTokucho;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -46,11 +48,11 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
     private RString 住基情報_漢字氏名;
     private RString 住基情報_カナ氏名;
     private RString 住基情報_漢字住所;
-    private RString 住基情報_生年月日;
+    private RDate 住基情報_生年月日;
     private RString 住基情報_性別;
     private RString 住基情報_住民種別;
-    private FlexibleDate 住基情報_住登日Temp;
-    private FlexibleDate 住基情報_消除日Temp;
+    private FlexibleDate 住基情報_住登日;
+    private FlexibleDate 住基情報_消除日;
     private RString 被保険者台帳_被保険者番号;
     private RString 被保険者台帳_資格取得事由;
     private FlexibleDate 被保険者台帳_資格取得年月日;
@@ -129,11 +131,12 @@ public class TokuchoDouteiKouhoshaShousaiJoho {
             }
             FlexibleDate 生年月日Temp = resultEntity.getUaft200entity().getSeinengappiYMD();
             if (生年月日Temp != null) {
-                this.住基情報_生年月日 = 生年月日Temp.wareki().toDateString();
+                this.住基情報_生年月日 = DateConverter.flexibleDateToRDate(生年月日Temp);
             }
             this.住基情報_性別 = resultEntity.getUaft200entity().getSeibetsuCode();
             this.住基情報_住民種別 = resultEntity.getUaft200entity().getJuminShubetsuCode();
-            住基情報_消除日Temp = resultEntity.getUaft200entity().getTorokuTodokedeYMD();
+            this.住基情報_住登日 = resultEntity.getUaft200entity().getTorokuTodokedeYMD();
+            this.住基情報_消除日 = resultEntity.getUaft200entity().getShojoTodokedeYMD();
             getEntityValue(resultEntity);
         }
     }
