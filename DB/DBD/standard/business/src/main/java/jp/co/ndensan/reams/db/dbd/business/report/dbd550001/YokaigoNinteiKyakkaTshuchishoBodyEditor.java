@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -25,6 +26,7 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
     private final NinteikyakkaTsuchishoEntity entity;
     private final List<RString> 通知書定型文リスト;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * インスタンスを生成します。
@@ -32,13 +34,16 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
      * @param entity 要介護認定却下通知書の一覧Entity
      * @param 通知書定型文リスト List
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param ninshoshaSource NinshoshaSource
      */
     public YokaigoNinteiKyakkaTshuchishoBodyEditor(NinteikyakkaTsuchishoEntity entity,
             List<RString> 通知書定型文リスト,
-            ChohyoSeigyoKyotsu 帳票制御共通) {
+            ChohyoSeigyoKyotsu 帳票制御共通,
+            NinshoshaSource ninshoshaSource) {
         this.entity = entity;
         this.通知書定型文リスト = 通知書定型文リスト;
         this.帳票制御共通 = 帳票制御共通;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     /**
@@ -101,15 +106,15 @@ public class YokaigoNinteiKyakkaTshuchishoBodyEditor implements IYokaigoNinteiKy
             source.tsuchibun7 = RString.EMPTY;
         }
 
-        source.denshiKoin = entity.getDenshiKoin();
-        source.hakkoYMD1 = entity.getHakkoYMD();
-        source.ninshoshaYakushokuMei = entity.getNinshoshaYakushokuMei();
-        source.ninshoshaYakushokuMei1 = entity.getNinshoshaYakushokuMei1();
-        source.ninshoshaYakushokuMei2 = entity.getNinshoshaYakushokuMei2();
-        source.ninshoshaShimeiKakenai = entity.getNinshoshaShimeiKakenai();
-        source.ninshoshaShimeiKakeru = entity.getNinshoshaShimeiKakeru();
-        source.koinShoryaku = entity.getKoinShoryaku();
-        source.koinMojiretsu = entity.getKoinMojiretsu();
+        source.denshiKoin = ninshoshaSource.denshiKoin;
+        source.hakkoYMD1 = ninshoshaSource.hakkoYMD;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+        source.koinShoryaku = ninshoshaSource.koinShoryaku;
+        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
         source.yubinNo = entity.getYubinNo();
         source.gyoseiku = entity.getGyoseiku();
         source.jushoText = entity.getJushoText();

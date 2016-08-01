@@ -9,10 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.ninteikekkatshuchishohakko.NinteikyakkaTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd550001.YokaigoNinteiKyakkaTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 要介護認定却下通知書のReportです。
@@ -24,6 +24,7 @@ public final class YokaigoNinteiKyakkaTshuchishoReport extends Report<YokaigoNin
     private final NinteikyakkaTsuchishoEntity entity;
     private final List<RString> 通知書定型文リスト;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * インスタンスを生成します。
@@ -31,29 +32,24 @@ public final class YokaigoNinteiKyakkaTshuchishoReport extends Report<YokaigoNin
      * @param entity 要介護認定却下通知書
      * @param 通知書定型文リスト List
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
-     * @return 要介護認定却下通知書
+     * @param ninshoshaSource NinshoshaSource
      */
-    public static YokaigoNinteiKyakkaTshuchishoReport createReport(@NonNull NinteikyakkaTsuchishoEntity entity,
+    public YokaigoNinteiKyakkaTshuchishoReport(NinteikyakkaTsuchishoEntity entity,
             List<RString> 通知書定型文リスト,
-            ChohyoSeigyoKyotsu 帳票制御共通) {
-        return new YokaigoNinteiKyakkaTshuchishoReport(entity,
-                通知書定型文リスト,
-                帳票制御共通);
-    }
-
-    private YokaigoNinteiKyakkaTshuchishoReport(NinteikyakkaTsuchishoEntity entity,
-            List<RString> 通知書定型文リスト,
-            ChohyoSeigyoKyotsu 帳票制御共通) {
+            ChohyoSeigyoKyotsu 帳票制御共通,
+            NinshoshaSource ninshoshaSource) {
         this.entity = entity;
         this.通知書定型文リスト = 通知書定型文リスト;
         this.帳票制御共通 = 帳票制御共通;
+        this.ninshoshaSource = ninshoshaSource;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<YokaigoNinteiKyakkaTshuchishoReportSource> writer) {
         IYokaigoNinteiKyakkaTshuchishoEditor bodyEditor = new YokaigoNinteiKyakkaTshuchishoBodyEditor(entity,
                 通知書定型文リスト,
-                帳票制御共通);
+                帳票制御共通,
+                ninshoshaSource);
         IYokaigoNinteiKyakkaTshuchishoBuilder builder = new YokaigoNinteiKyakkaTshuchishoBuilderImpl(bodyEditor);
         writer.writeLine(builder);
     }
